@@ -117,4 +117,38 @@ describe("test formatter functions", () => {
       expect(validateFraction("0.00000001", "USD")).toBe(false);
     });
   });
+  describe("test formatCurrencyValue", () => {
+    it("should be ", () => {
+      expect(formatCurrencyValue(1.00000000001, "ETH")).toBe("1.00000001");
+      expect(formatCurrencyValue(1.00000000001, "BTC")).toBe("1.00000001");
+      expect(formatCurrencyValue(1.00000000001, "GVT")).toBe("1.0001");
+      expect(formatCurrencyValue(1.00000000001, "USD")).toBe("1.01");
+    });
+  });
+  describe("test roundPercents", () => {
+    it("should be ", () => {
+      expect(roundPercents(0)).toBe("0%");
+      expect(roundPercents(0.001)).toBe("<0.01%");
+      expect(roundPercents(0.009)).toBe("<0.01%");
+      expect(roundPercents(0.1)).toBe("0.1%");
+      expect(roundPercents(1)).toBe("1%");
+      expect(roundPercents(-1)).toBe("1%"); // TODO Why?..
+    });
+  });
+  describe("test formatValueDifferentDecimalScale", () => {
+    it("should be ", () => {
+      expect(formatValueDifferentDecimalScale(0.0000000000001, 6, 2)).toBe(
+        "0.000001"
+      );
+      expect(formatValueDifferentDecimalScale(1.0000000000001, 6, 2)).toBe(
+        "1.01"
+      );
+      expect(formatValueDifferentDecimalScale(0.0000000000001, 8, 1)).toBe(
+        "0.00000001"
+      );
+      expect(formatValueDifferentDecimalScale(1.0000000000001, 8, 1)).toBe(
+        "1.1"
+      );
+    });
+  });
 });
