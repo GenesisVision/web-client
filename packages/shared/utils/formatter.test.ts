@@ -74,9 +74,13 @@ describe("test formatter functions", () => {
     });
     it("should be round number by external conditions", () => {
       expect(formatValue(1.123456789, 3)).toEqual("1.123");
+      expect(formatValue(-1.123456789, 3, true)).toEqual("1.123");
       expect(formatValue(11.123456789, 3)).toEqual("11.123");
+      expect(formatValue(-11.123456789, 3, true)).toEqual("11.123");
       expect(formatValue(101.999999999, 3)).toEqual("101.999");
+      expect(formatValue(-101.999999999, 3, true)).toEqual("101.999");
       expect(formatValue(1001.999999999, 3)).toEqual("1001.999");
+      expect(formatValue(-1001.999999999, 3, true)).toEqual("1001.999");
 
       expect(formatValue(1.0000000001, 3)).toEqual("1.001");
       expect(formatValue(11.0000000001, 3)).toEqual("11.001");
