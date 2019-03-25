@@ -53,7 +53,7 @@ const formatPercent = (value: number): string => {
 const roundPercents = (value: number): string => {
   const abs = Math.abs(value);
   const newValue = value === 0 ? 0 : formatValue(Math.max(abs, 0.01), 2);
-  return `${value < 0.01 && value > 0 ? "<" : ""}${newValue}%`;
+  return `${value < 0.01 && value > 0 ? "<" : ""}${newValue}%`; // TODO put a percent sign
 };
 
 const validateFraction = (value: string, currency: string): boolean => {
