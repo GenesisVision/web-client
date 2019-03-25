@@ -1,9 +1,9 @@
 import {
-  convertFromCurrency,
-  convertToCurrency,
-  calculatePercentage,
   CURRENCY_FRACTIONS,
-  checkCurrencyValue
+  calculatePercentage,
+  checkCurrencyValue,
+  convertFromCurrency,
+  convertToCurrency
 } from "./currency-converter";
 
 require("jasmine-check").install();

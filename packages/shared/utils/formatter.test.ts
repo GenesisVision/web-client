@@ -1,15 +1,15 @@
 import {
-  reverseString,
   addOne,
-  cleanNulls,
-  sliceFraction,
   checkEmptyFraction,
-  formatValue,
-  formatPercent,
-  validateFraction,
+  cleanNulls,
   formatCurrencyValue,
+  formatPercent,
+  formatValue,
+  formatValueDifferentDecimalScale,
+  reverseString,
   roundPercents,
-  formatValueDifferentDecimalScale
+  sliceFraction,
+  validateFraction
 } from "./formatter";
 
 describe("test formatter functions", () => {
