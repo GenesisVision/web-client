@@ -11,7 +11,8 @@ describe("test helpers functions", () => {
       gen.alphaNumString,
       gen.alphaNumString,
       (x: string, y: string, z: string) => {
-        if (x === "" || y === "" || x === " " || y === " " || x === y) return;
+        if (x === "" || y === "" || x === " " || y === " " || x.includes(y))
+          return;
         expect(replaceParams(`${x}/${y}`, { [y]: z })).toEqual(`${x}/${z}`);
       }
     );
