@@ -16,7 +16,8 @@ const cleanNulls = (item: string[]): string[] =>
 
 const sliceFraction = (decimalScale?: number) => (item: string[]): string[] => {
   if (decimalScale === 0) return [item[0]];
-  if (decimalScale && decimalScale > 0) return [item[0], item[1].slice(0, decimalScale)];
+  if (decimalScale && decimalScale > 0)
+    return [item[0], item[1].slice(0, decimalScale)];
   if (+item[0] < 10) return [item[0], item[1].slice(0, 8)];
   if (+item[0] < 100) return [item[0], item[1].slice(0, 6)];
   if (+item[0] < 1000) return [item[0], item[1].slice(0, 4)];
