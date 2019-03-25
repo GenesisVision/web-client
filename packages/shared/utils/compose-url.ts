@@ -19,22 +19,22 @@ export const composeUrl = (route: string, slugParamName: string) => (
   slugUrl: string
 ) =>
   replaceParams(route, {
-    [`${slugParamName}`]: slugUrl
+    [slugParamName]: slugUrl
   });
 
 export const composeProgramDetailsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {
-    [`${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+    [PROGRAM_SLUG_URL_PARAM_NAME]: slugUrl
   });
 
 export const composeManagerDetailsUrl = (slugUrl: string): string =>
   replaceParams(MANAGER_DETAILS_ROUTE, {
-    [`${MANAGER_SLUG_URL_PARAM_NAME}`]: slugUrl
+    [MANAGER_SLUG_URL_PARAM_NAME]: slugUrl
   });
 
 export const composeFundsDetailsUrl = (slugUrl: string): string =>
   replaceParams(FUND_DETAILS_ROUTE, {
-    [`${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
+    [FUNDS_SLUG_URL_PARAM_NAME]: slugUrl
   });
 
 export const composeProgramNotificationsUrl = (url: string): string =>
@@ -49,10 +49,10 @@ export const composeFundNotificationsUrl = (url: string): string =>
 
 export const composeProgramFacetUrl = (url: string): string =>
   replaceParams(PROGRAMS_FACET_ROUTE, {
-    [`${PROGRAM_SLUG_URL_PARAM_NAME}`]: url
+    [PROGRAM_SLUG_URL_PARAM_NAME]: url
   });
 
 export const composeFundFacetUrl = (url: string): string =>
   replaceParams(FUNDS_FACET_ROUTE, {
-    [`${FUNDS_SLUG_URL_PARAM_NAME}`]: url
+    [FUNDS_SLUG_URL_PARAM_NAME]: url
   });
