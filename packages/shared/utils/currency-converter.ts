@@ -1,10 +1,10 @@
 export const convertFromCurrency = (
-  gvt: string | number,
+  value: string | number,
   rate: string | number
 ): number => {
-  if (typeof gvt === "string") gvt = parseFloat(gvt);
+  if (typeof value === "string") value = parseFloat(value);
   if (typeof rate === "string") rate = parseFloat(rate);
-  return gvt * rate;
+  return value * rate;
 };
 
 export const convertToCurrency = (value: number = 0, rate: number): number =>
