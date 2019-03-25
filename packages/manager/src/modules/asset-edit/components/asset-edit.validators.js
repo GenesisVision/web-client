@@ -7,8 +7,16 @@ import { number, object } from "yup";
 const editAssetSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
     stopOutLevel: number()
-      .moreThan(0)
-      .max(props.info.stopOutLevel || 100),
+      .min(
+        10,
+        t("manager.create-program-page.settings.validation.stop-out-less-ten")
+      )
+      .max(
+        props.info.stopOutLevel,
+        t(
+          "manager.create-program-page.settings.validation.stop-out-more-current"
+        )
+      ),
     logo: object().shape({
       width: number().min(
         300,
