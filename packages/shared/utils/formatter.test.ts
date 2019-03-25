@@ -129,6 +129,7 @@ describe("test formatter functions", () => {
     it("should be ", () => {
       expect(roundPercents(0)).toBe("0%");
       expect(roundPercents(0.001)).toBe("<0.01%");
+      expect(roundPercents(-0.001)).toBe("0.01%"); // TODO Why?..
       expect(roundPercents(0.009)).toBe("<0.01%");
       expect(roundPercents(0.1)).toBe("0.1%");
       expect(roundPercents(1)).toBe("1%");
@@ -149,6 +150,7 @@ describe("test formatter functions", () => {
       expect(formatValueDifferentDecimalScale(1.0000000000001, 8, 1)).toBe(
         "1.1"
       );
+      expect(formatValueDifferentDecimalScale(1, 8, 1)).toBe("1");
     });
   });
 });
