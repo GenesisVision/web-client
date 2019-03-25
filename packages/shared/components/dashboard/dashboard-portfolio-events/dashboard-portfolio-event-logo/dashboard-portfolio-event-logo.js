@@ -18,7 +18,10 @@ import EventProfitIconGreen from "shared/media/event-profit-green.svg";
 import EventReinvestIcon from "shared/media/event-reinvest.svg";
 import EventStartedIcon from "shared/media/event-started.svg";
 import EventWithdrawIcon from "shared/media/event-withdraw.svg";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import {
+  composeFundsDetailsUrl,
+  composeProgramDetailsUrl
+} from "shared/utils/compose-url";
 
 import { EventLogoType } from "./dashboard-portfolio-event-logo.helper";
 
@@ -63,12 +66,21 @@ export const EvenLogoIcon = ({ type }) => {
   }
 };
 
-const PortfolioEventLogo = ({ type, logo, color, url = undefined }) => {
+const PortfolioEventLogo = ({
+  type,
+  logo,
+  color,
+  url = undefined,
+  assetType = undefined
+}) => {
   const className = classnames("portfolio-event-logo");
   const Tag = url ? Link : "div";
   const to = url
     ? {
-        pathname: composeProgramDetailsUrl(url),
+        pathname:
+          assetType === "Program"
+            ? composeProgramDetailsUrl(url)
+            : composeFundsDetailsUrl(url),
         state: `/ ${type}`
       }
     : null;
