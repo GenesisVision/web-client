@@ -1,17 +1,5 @@
 import { Nullable } from "./types";
 
-const merge = function(): object {
-  const args: object[] = [...arguments];
-
-  let result = {};
-
-  args.forEach((obj: object) => {
-    result = { ...result, ...obj };
-  });
-
-  return result;
-};
-
 const allowValuesNumberFormat = ({
   from,
   to
@@ -38,12 +26,7 @@ const getNumberWithoutSuffix = (str: string): Nullable<number> => {
   return result;
 };
 
-const convertToArray = (value: any[] | any): any[] =>
+const convertToArray = (value: any): any[] =>
   Array.isArray(value) ? value : [value];
 
-export {
-  merge,
-  allowValuesNumberFormat,
-  getNumberWithoutSuffix,
-  convertToArray
-};
+export { allowValuesNumberFormat, getNumberWithoutSuffix, convertToArray };
