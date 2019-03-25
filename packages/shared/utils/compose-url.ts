@@ -37,22 +37,22 @@ export const composeFundsDetailsUrl = (slugUrl: string): string =>
     [FUNDS_SLUG_URL_PARAM_NAME]: slugUrl
   });
 
-export const composeProgramNotificationsUrl = (url: string): string =>
+export const composeProgramNotificationsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
-    ":id": url
+    ":id": slugUrl
   });
 
-export const composeFundNotificationsUrl = (url: string): string =>
+export const composeFundNotificationsUrl = (slugUrl: string): string =>
   replaceParams(FUND_NOTIFICATIONS_ROUTE, {
-    ":id": url
+    ":id": slugUrl
   });
 
-export const composeProgramFacetUrl = (url: string): string =>
+export const composeProgramFacetUrl = (slugUrl: string): string =>
   replaceParams(PROGRAMS_FACET_ROUTE, {
-    [PROGRAM_SLUG_URL_PARAM_NAME]: url
+    [PROGRAM_SLUG_URL_PARAM_NAME]: slugUrl
   });
 
-export const composeFundFacetUrl = (url: string): string =>
+export const composeFundFacetUrl = (slugUrl: string): string =>
   replaceParams(FUNDS_FACET_ROUTE, {
-    [FUNDS_SLUG_URL_PARAM_NAME]: url
+    [FUNDS_SLUG_URL_PARAM_NAME]: slugUrl
   });
