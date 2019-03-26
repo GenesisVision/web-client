@@ -20,9 +20,8 @@ const ProfileAvatar: React.FC<IProfileAvatarProps> = ({
   imageClassName = ""
 }) => {
   className = classNames("profile-avatar", className);
-  imageClassName = classNames("profile-avatar__image", imageClassName, {
-    "profile-avatar__image--default": !url
-  });
+  imageClassName = classNames("profile-avatar__image", imageClassName);
+
   return (
     <ImageBase
       url={url}
@@ -30,6 +29,7 @@ const ProfileAvatar: React.FC<IProfileAvatarProps> = ({
       defaultImage={UserIcon}
       className={className}
       imageClassName={imageClassName}
+      defaultImageClassName="profile-avatar__image--default"
     />
   );
 };
