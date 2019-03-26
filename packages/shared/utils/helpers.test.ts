@@ -6,7 +6,7 @@ declare const gen: any;
 
 describe("test helpers functions", () => {
   describe("test allowValuesNumberFormat", () => {
-    it("should be ", () => {
+    it("should be return true if number inside diapason and not equal '' and '0.'", () => {
       const allows = {
         from: 1,
         to: 5
@@ -29,15 +29,22 @@ describe("test helpers functions", () => {
     });
   });
   describe("test convertToArray", () => {
-    check.it("should be ", gen.number, (x: number) => {
-      expect(convertToArray(x)).toEqual([x]);
+    check.it(
+      "should be convert to array numbers",
+      gen.number,
+      (value: number) => {
+        expect(convertToArray(value)).toEqual([value]);
+      }
+    );
+    check.it("should be convert to strings ", gen.string, (value: string) => {
+      expect(convertToArray(value)).toEqual([value]);
     });
-    check.it("should be ", gen.string, (x: string) => {
-      expect(convertToArray(x)).toEqual([x]);
-    });
-    it("should be ", () => {
-      const array = [1, 2, 3, 4];
-      expect(convertToArray(array)).toBe(array);
-    });
+    check.it(
+      "should be return array",
+      gen.array(gen.string),
+      (value: string[]) => {
+        expect(convertToArray(value)).toEqual(value);
+      }
+    );
   });
 });
