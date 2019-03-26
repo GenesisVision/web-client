@@ -4,13 +4,16 @@ import {
   MultiWalletExternalTransaction
 } from "gv-api-web";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  TableItems,
+  mapToTableItems
+} from "shared/components/table/helpers/mapper";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { RootThunk } from "shared/utils/types";
 
-import { TableItems, mapToTableItems } from "../../table/helpers/mapper";
 import * as actions from "../actions/wallet.actions";
 
 export const fetchWallets = (): RootThunk<void> => (dispatch, getState) => {

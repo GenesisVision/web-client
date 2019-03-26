@@ -1,7 +1,7 @@
 import fundsApi from "shared/services/api-client/funds-api";
 import authService from "shared/services/auth-service";
+import { RootThunk } from "shared/utils/types";
 
-import { RootThunk } from "../../../utils/types";
 import {
   addFavoriteFund,
   removeFavoriteFund
