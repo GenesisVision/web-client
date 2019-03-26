@@ -7,7 +7,6 @@ import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/api-reducer/api-reducer";
-import { DeepReadonly } from "utility-types";
 
 const programWithdrawReducer = apiReducerFactory<ProgramWithdrawInfo>({
   apiType: FETCH_WITHDRAW_PROGRAM_INFO
@@ -17,7 +16,7 @@ const withdrawSubmitReducer = apiReducerFactory<any>({
   apiType: WITHDRAW_SUBMIT_BY_ID
 });
 
-export type IProgramWithdrawState = DeepReadonly<{
+export type IProgramWithdrawState = Readonly<{
   info: IApiState<ProgramWithdrawInfo>;
   submit: IApiState<any>;
 }>;

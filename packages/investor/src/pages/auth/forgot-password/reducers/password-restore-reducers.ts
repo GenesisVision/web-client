@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import { DeepReadonly } from "utility-types";
 
 import forgotPasswordReducer, {
   ForgotPasswordState
@@ -8,7 +7,7 @@ import passwordRestoreReducer, {
   PasswordRestoreState
 } from "./password-restore-reducer";
 
-export type PasswordState = DeepReadonly<{
+export type PasswordState = Readonly<{
   forgot: ForgotPasswordState;
   restore: PasswordRestoreState;
 }>;
