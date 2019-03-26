@@ -8,7 +8,6 @@ import * as WalletServices from "shared/components/wallet/services/wallet.servic
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
 
-import { checkIsModelFilled } from "../helpers/create-program.helpers";
 import * as createProgramService from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettings from "./create-program-settings/create-program-settings";
@@ -59,14 +58,11 @@ class CreateProgramContainer extends Component {
   };
 
   handleSubmit = (values, setSubmitting) => {
-    const brokerAccountTypeId = this.state.choosedBroker.accountTypes.find(
-      type => type.type === values.accountType
-    ).id;
-
-    this.props.service.createProgram(
-      { ...values, brokerAccountTypeId },
-      setSubmitting
-    );
+    // const brokerAccountTypeId = this.state.choosedBroker.accountTypes.find(
+    //   type => type.type === values.accountType
+    // ).id;
+    return;
+    this.props.service.createProgram(values, setSubmitting);
   };
 
   handleValidateError = () => {
@@ -74,12 +70,7 @@ class CreateProgramContainer extends Component {
   };
 
   fetchRate = (fromCurrency, toCurrency) => {
-    return rateApi
-      .v10RateByFromByToGet(fromCurrency, toCurrency)
-      .then((rate: any) => {
-        if (rate !== this.props.values.rate)
-          this.props.setFieldValue("rate", rate);
-      });
+    return rateApi.v10RateByFromByToGet(fromCurrency, toCurrency);
   };
 
   render() {

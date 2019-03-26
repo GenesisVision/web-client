@@ -25,7 +25,7 @@ interface ChildOwnProps {
 interface SelectChild extends React.ReactElement<ChildOwnProps> {}
 
 interface ISelectProps {
-  value: string;
+  value?: string | number;
   onChange(event: OnChangeEvent, child: JSX.Element): void;
   name: string;
   className?: string;
@@ -33,13 +33,14 @@ interface ISelectProps {
   onFocus?(event: React.FocusEvent<HTMLButtonElement>): void;
   onBlur?(event: React.FocusEvent<HTMLButtonElement>): void;
   disabled?: boolean;
+  disableIfSingle?: boolean;
   children: SelectChild[];
 }
 interface ISelectState {
   anchor: Nullable<EventTarget>;
 }
 
-class Select extends React.Component<ISelectProps, ISelectState> {
+class Select extends React.PureComponent<ISelectProps, ISelectState> {
   state = {
     anchor: null
   };
@@ -50,14 +51,22 @@ class Select extends React.Component<ISelectProps, ISelectState> {
     this.setDefaultValue();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: ISelectProps) {
+    const t = prevProps;
+    const t1 = this.props;
     this.setDefaultValue();
   }
+
+  isDisabled = () => {
+    const { disabled, disableIfSingle, children } = this.props;
+    return (disableIfSingle && children.length === 1) || disabled;
+  };
+
   handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
     event.preventDefault();
-    if (this.props.disabled) return;
+    if (this.isDisabled()) return;
     this.input.current && this.input.current.focus();
     this.setState({ anchor: event.currentTarget });
   };
@@ -85,16 +94,16 @@ class Select extends React.Component<ISelectProps, ISelectState> {
   };
 
   handleBlur = (event: React.FocusEvent<HTMLButtonElement>): void => {
-    const { disabled, onBlur } = this.props;
-    if (disabled) return;
+    const { onBlur } = this.props;
+    if (this.isDisabled()) return;
     if (onBlur) {
       onBlur(event);
     }
   };
 
   handleFocus = (event: React.FocusEvent<HTMLButtonElement>): void => {
-    const { disabled, onFocus } = this.props;
-    if (disabled) return;
+    const { onFocus } = this.props;
+    if (this.isDisabled()) return;
     if (onFocus) {
       onFocus(event);
     }
@@ -106,7 +115,7 @@ class Select extends React.Component<ISelectProps, ISelectState> {
 
   setDefaultValue(): void {
     const { name, onChange, value } = this.props;
-    if (value && value.length) return;
+    if (value !== undefined) return;
     const children = this.props.children;
     const child = children[0];
     if (child && children.length === 1) {
@@ -122,8 +131,9 @@ class Select extends React.Component<ISelectProps, ISelectState> {
 
     const items = this.props.children.map(child => {
       const isSelected =
+        this.props.value !== undefined &&
         child.props.value.toString().toLowerCase() ===
-        this.props.value.toString().toLowerCase();
+          this.props.value.toString().toLowerCase();
       if (isSelected) displayValue = child.props.children;
       const { name } = this.props;
       return (
@@ -141,7 +151,7 @@ class Select extends React.Component<ISelectProps, ISelectState> {
     return (
       <div
         className={classNames("select", this.props.className, {
-          "select--disabled": this.props.disabled
+          "select--disabled": this.isDisabled()
         })}
       >
         <button

@@ -1,10 +1,14 @@
+import { TranslationFunction } from "react-i18next";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { boolean, lazy, mixed, number, object, string } from "yup";
 
-const createProgramSettingsValidationSchema = ({ t, ...props }) =>
-  lazy(values =>
-    object().shape({
+import { FormValues, Props } from "./create-program-settings";
+
+const createProgramSettingsValidationSchema = (props: Props) =>
+  lazy((values: Partial<FormValues>) => {
+    const { t } = props;
+    return object().shape({
       stopOutLevel: number()
         .required(
           t("manager.create-program-page.settings.validation.stop-out-required")
@@ -17,34 +21,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           100,
           t("manager.create-program-page.settings.validation.stop-out-is-large")
         ),
-      depositAmount: number()
-        .required(
-          t("manager.create-program-page.settings.validation.amount-required")
-        )
-        .min(
-          formatCurrencyValue(
-            convertToCurrency(
-              props.minimumDepositsAmount[values.currency],
-              values.rate
-            ),
-            values.currency
-          ),
-          t("manager.create-program-page.settings.validation.amount-is-zero", {
-            min: formatCurrencyValue(
-              convertToCurrency(
-                props.minimumDepositsAmount[values.currency],
-                values.rate
-              ),
-              values.currency
-            )
-          })
-        )
-        .max(
-          props.wallets.find(
-            item => item.currency === values.depositWalletCurrency
-          ).available,
-          t("manager.create-program-page.settings.validation.amount-is-large")
-        ),
+
       logo: object().shape({
         width: number().min(
           300,
@@ -117,15 +94,44 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
         is: true,
         then: signalSuccessFeeShape(t, props.programsInfo.managerMaxSuccessFee)
       }),
-      accountType: string().required(
+      brokerAccountTypeId: string().required(
         t(
           "manager.create-program-page.settings.validation.account-type-required"
         )
-      )
-    })
-  );
+      ),
+      depositAmount: number()
+        .required(
+          t("manager.create-program-page.settings.validation.amount-required")
+        )
+        .min(
+          parseFloat(
+            formatCurrencyValue(
+              convertToCurrency(
+                props.minimumDepositsAmount[values.currency!],
+                1 // values.rate
+              ),
+              values.currency!
+            )
+          ),
+          t("manager.create-program-page.settings.validation.amount-is-zero", {
+            min: formatCurrencyValue(
+              convertToCurrency(
+                props.minimumDepositsAmount[values.currency!],
+                1 //values.rate
+              ),
+              values.currency!
+            )
+          })
+        )
+        .max(
+          props.wallets.find(item => item.currency === values.depositWalletId)!
+            .available,
+          t("manager.create-program-page.settings.validation.amount-is-large")
+        )
+    });
+  });
 
-export const assetTitleShape = t => {
+export const assetTitleShape = (t: TranslationFunction) => {
   return string()
     .trim()
     .required(
@@ -141,7 +147,7 @@ export const assetTitleShape = t => {
     );
 };
 
-export const assetDescriptionShape = t => {
+export const assetDescriptionShape = (t: TranslationFunction) => {
   return string()
     .trim()
     .required(
@@ -157,7 +163,10 @@ export const assetDescriptionShape = t => {
     );
 };
 
-export const signalSuccessFeeShape = (t, managerMaxSuccessFee) => {
+export const signalSuccessFeeShape = (
+  t: TranslationFunction,
+  managerMaxSuccessFee: number
+) => {
   return number()
     .min(0.01, "Success fee must be greater than 0.01 % ")
     .required(
@@ -169,7 +178,10 @@ export const signalSuccessFeeShape = (t, managerMaxSuccessFee) => {
     );
 };
 
-export const signalEntryFeeShape = (t, managerMaxEntryFee) => {
+export const signalEntryFeeShape = (
+  t: TranslationFunction,
+  managerMaxEntryFee: number
+) => {
   return number()
     .required(
       t(

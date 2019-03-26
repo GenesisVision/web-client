@@ -1,37 +1,27 @@
 import { Broker, BrokerAccountType } from "gv-api-web";
 import managerAvatar from "shared/media/manager-avatar.png";
 
-export const getAccountTypes = (broker: Broker) =>
+/*export const getAccountTypes = (broker: Broker) =>
   broker.accountTypes.map(accountType => accountType.type);
-
+*/
 export const getAccountType = (
   broker: Broker,
   type: string
 ): BrokerAccountType | undefined =>
   broker.accountTypes.find(accountType => accountType.type === type);
 
-export const getLeverages = (broker: Broker, type: string): number[] => {
-  let result: number[];
-  let accountType = getAccountType(broker, type);
-
-  if (accountType) {
-    result = accountType.leverages;
-  } else {
-    result = [];
+export const getLeverages = (accountType?: BrokerAccountType): number[] => {
+  if (!accountType) {
+    return [];
   }
-  return result;
+  return accountType.leverages;
 };
 
-export const getCurrencies = (broker: Broker, type: string): string[] => {
-  let result: string[];
-  let accountType = getAccountType(broker, type);
-
-  if (accountType) {
-    result = accountType.currencies;
-  } else {
-    result = [];
+export const getCurrencies = (accountType?: BrokerAccountType): string[] => {
+  if (!accountType) {
+    return [];
   }
-  return result;
+  return accountType.currencies;
 };
 
 export const checkIsModelFilled = (values: any) => {

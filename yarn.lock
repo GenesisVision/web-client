@@ -3430,7 +3430,7 @@ cross-spawn@^3.0.0:
     lru-cache "^4.0.1"
     which "^1.2.9"
 
-cross-spawn@^5.0.1, cross-spawn@^5.1.0:
+cross-spawn@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
   integrity sha1-6L0O/uWPz/b4+UUQoKVUu/ojVEk=
@@ -4030,7 +4030,7 @@ dom-converter@~0.2:
   dependencies:
     utila "~0.4"
 
-dom-css@^2.0.0, dom-css@^2.1.0:
+dom-css@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/dom-css/-/dom-css-2.1.0.tgz#fdbc2d5a015d0a3e1872e11472bbd0e7b9e6a202"
   integrity sha1-/bwtWgFdCj4YcuEUcrvQ57nmogI=
@@ -4135,10 +4135,10 @@ dotenv@6.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.0.0.tgz#24e37c041741c5f4b25324958ebbc34bca965935"
   integrity sha512-FlWbnhgjtwD+uNLUGHbMykMOYQaTivdHEmYwAKFjn6GKe/CqY0fNae93ZHTd20snh9ZLr8mTzIL9m0APQ1pjQg==
 
-dotenv@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
-  integrity sha1-hk7xN5rO1Vzm+V3r7NzhefegzR0=
+dotenv@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
+  integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
 
 duplexer@^0.1.1:
   version "0.1.1"
@@ -5469,10 +5469,10 @@ gud@^1.0.0:
   dependencies:
     superagent "^3.8.3"
 
-gv-react-components@^0.0.35:
-  version "0.0.35"
-  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.35.tgz#b0a65e3efe8b7cdaaeb3901bbc5c386e2b51e64e"
-  integrity sha512-0w4qSVAazElvXJIwfNWG+oggQZlB9BF9SiMgHaTLvWi+7sPZNxSskt6Smebt+nBi2Hjk7okKNSRXQR736ujufw==
+gv-react-components@^0.0.36:
+  version "0.0.36"
+  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.36.tgz#b2e738b7c9e3629cb4f4130e99eddbe5cf779876"
+  integrity sha512-SMeipXXaNlfSAhBKJzNLu4gKQtNdqcASD7FN3CTCsECRe+siLpzQzj2K2D/xvvh7/EQ2KUO8MlWC3411YJuULw==
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.6.1"
@@ -9756,7 +9756,7 @@ raf@3.4.0:
   dependencies:
     performance-now "^2.1.0"
 
-raf@^3.1.0, raf@^3.2.0, raf@^3.4.0, raf@^3.4.1:
+raf@^3.2.0, raf@^3.4.0, raf@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"
   integrity sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
@@ -9909,13 +9909,14 @@ react-app-rewire-yarn-workspaces@^1.0.3:
   dependencies:
     get-yarn-workspaces "^1.0.0"
 
-react-app-rewired@^1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/react-app-rewired/-/react-app-rewired-1.6.2.tgz#32ce90abc2c4e2b86c71e4e270bd36663b3b1c9a"
-  integrity sha512-TxbP1W9jPPTmj0YJeFNgcJc6IMg7sv845aHUIUvVQtXdA8IWzOZairk3Bth6GHbxoF2QitbvUlM7/NAH4VmmJg==
+react-app-rewired@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-app-rewired/-/react-app-rewired-2.1.1.tgz#cf8bf22e027f4272dae95d2f7da07f2639701422"
+  integrity sha512-Ukj2vbKN61bPF3f1EJLe2LtaKJio++iqUoyTQ5VAzyj7XRthkDrk4sGFaTjJrmWt7yJ/Ry9JbFGGSmfzlbt5Cg==
   dependencies:
-    cross-spawn "^5.1.0"
-    dotenv "^4.0.0"
+    cross-spawn "^6.0.5"
+    dotenv "^6.2.0"
+    semver "^5.6.0"
 
 react-calendar@^2.17.4:
   version "2.17.5"
@@ -9935,15 +9936,6 @@ react-cropper@^1.2.0:
     babel-core "7.0.0-bridge.0"
     cropperjs v1.0.0-rc.3
     prop-types "^15.5.8"
-
-react-custom-scrollbars@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/react-custom-scrollbars/-/react-custom-scrollbars-4.2.1.tgz#830fd9502927e97e8a78c2086813899b2a8b66db"
-  integrity sha1-gw/ZUCkn6X6KeMIIaBOJmyqLZts=
-  dependencies:
-    dom-css "^2.0.0"
-    prop-types "^15.5.10"
-    raf "^3.1.0"
 
 react-datepicker@^1.4.1:
   version "1.8.0"

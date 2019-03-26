@@ -7,8 +7,6 @@ import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
-import { getDataWithoutSuffixes } from "../helpers/create-program.helpers";
-
 export const fetchBrokers = () =>
   brokersApi.v10BrokersGet().then(data => {
     const sortedBrokers = [];
@@ -33,11 +31,7 @@ export const fetchBalance = () => dispatch =>
 export const createProgram = (createProgramData, setSubmitting) => dispatch => {
   const authorization = authService.getAuthArg();
 
-  let data = getDataWithoutSuffixes(createProgramData, [
-    "periodLength",
-    "leverage"
-  ]);
-
+  let data = createProgramData;
   let promise = Promise.resolve(null);
   if (data.logo.cropped) {
     promise = filesService.uploadFile(data.logo.cropped, authorization);
