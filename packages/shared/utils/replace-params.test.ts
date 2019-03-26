@@ -6,7 +6,7 @@ declare const gen: any;
 describe("test helpers functions", () => {
   describe("test allowValuesNumberFormat", () => {
     check.it(
-      "should be ",
+      "should be replace params in query string",
       gen.alphaNumString,
       gen.alphaNumString,
       gen.alphaNumString,
