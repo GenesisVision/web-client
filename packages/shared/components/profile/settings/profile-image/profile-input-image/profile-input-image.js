@@ -53,16 +53,17 @@ class ProfileInputImage extends Component {
     if (!croppedCanvas) return;
 
     croppedCanvas.toBlob(blob => {
-      if (blob !== null) {
-        blob.name = value.filename;
-      }
+      if (!blob) return;
       const img = {
         ...value,
         isImageChanged: true,
-        cropped: blob,
+        cropped: new File([blob], value.filename || "", {
+          type: blob.type
+        }),
         width: croppedCanvas.width,
         height: croppedCanvas.height,
-        size: blob.size
+        size: blob.size,
+        type: blob.type
       };
       onChange(name, img);
     }, value.filetype);
