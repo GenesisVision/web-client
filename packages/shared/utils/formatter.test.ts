@@ -30,7 +30,7 @@ describe("test formatter functions", () => {
     });
   });
   describe("test cleanNulls", () => {
-    it("should be ", () => {
+    it("should be deleted nulls in end of fraction", () => {
       expect(cleanNulls(["0", "0001"])).toEqual(["0", "0001"]);
       expect(cleanNulls(["0", "000100"])).toEqual(["0", "0001"]);
       expect(cleanNulls(["0", "12300"])).toEqual(["0", "123"]);
@@ -38,7 +38,7 @@ describe("test formatter functions", () => {
     });
   });
   describe("test sliceFraction", () => {
-    it("should be ", () => {
+    it("should be slice fraction to the amount specified in the param", () => {
       expect(sliceFraction(0)(["0", "0001"])).toEqual(["0"]);
       expect(sliceFraction(0)(["10", "0001"])).toEqual(["10"]);
       expect(sliceFraction(0)(["10"])).toEqual(["10"]);
@@ -49,49 +49,51 @@ describe("test formatter functions", () => {
     });
   });
   describe("test checkEmptyFraction", () => {
-    it("should be ", () => {
-      expect(checkEmptyFraction(["0", "0001"])).toEqual("0.0001");
-      expect(checkEmptyFraction(["100"])).toEqual("100");
-      expect(checkEmptyFraction(["100", "100"])).toEqual("100.100");
+    it("should be remove fraction if it is empty", () => {
+      expect(checkEmptyFraction(["0", "0001"])).toBe("0.0001");
+      expect(checkEmptyFraction(["100", "100"])).toBe("100.100");
+      expect(checkEmptyFraction(["100"])).toBe("100");
+      expect(checkEmptyFraction(["0"])).toBe("0");
+      expect(checkEmptyFraction(["-100"])).toBe("-100");
     });
   });
   describe("test formatValue", () => {
     it("should be round number by internal conditions", () => {
-      expect(formatValue(1.000000001)).toEqual("1.00000001");
+      expect(formatValue(1.000000001)).toBe("1.00000001");
 
-      expect(formatValue(1.123456789)).toEqual("1.12345678");
-      expect(formatValue(11.123456789)).toEqual("11.123456");
-      expect(formatValue(101.999999999)).toEqual("101.9999");
-      expect(formatValue(1001.999999999)).toEqual("1001.99");
+      expect(formatValue(1.123456789)).toBe("1.12345678");
+      expect(formatValue(11.123456789)).toBe("11.123456");
+      expect(formatValue(101.999999999)).toBe("101.9999");
+      expect(formatValue(1001.999999999)).toBe("1001.99");
 
-      expect(formatValue(1.0000000001)).toEqual("1.00000001");
-      expect(formatValue(11.0000000001)).toEqual("11.000001");
-      expect(formatValue(101.00001)).toEqual("101.0001");
-      expect(formatValue(1001.00001)).toEqual("1001.01");
+      expect(formatValue(1.0000000001)).toBe("1.00000001");
+      expect(formatValue(11.0000000001)).toBe("11.000001");
+      expect(formatValue(101.00001)).toBe("101.0001");
+      expect(formatValue(1001.00001)).toBe("1001.01");
 
-      expect(formatValue(1001.0)).toEqual("1001");
-      expect(formatValue(1001.0)).toEqual("1001");
+      expect(formatValue(1001.0)).toBe("1001");
+      expect(formatValue(1001.0)).toBe("1001");
     });
     it("should be round number by external conditions", () => {
-      expect(formatValue(1.123456789, 3)).toEqual("1.123");
-      expect(formatValue(-1.123456789, 3, true)).toEqual("1.123");
-      expect(formatValue(11.123456789, 3)).toEqual("11.123");
-      expect(formatValue(-11.123456789, 3, true)).toEqual("11.123");
-      expect(formatValue(101.999999999, 3)).toEqual("101.999");
-      expect(formatValue(-101.999999999, 3, true)).toEqual("101.999");
-      expect(formatValue(1001.999999999, 3)).toEqual("1001.999");
-      expect(formatValue(-1001.999999999, 3, true)).toEqual("1001.999");
+      expect(formatValue(1.123456789, 3)).toBe("1.123");
+      expect(formatValue(-1.123456789, 3, true)).toBe("1.123");
+      expect(formatValue(11.123456789, 3)).toBe("11.123");
+      expect(formatValue(-11.123456789, 3, true)).toBe("11.123");
+      expect(formatValue(101.999999999, 3)).toBe("101.999");
+      expect(formatValue(-101.999999999, 3, true)).toBe("101.999");
+      expect(formatValue(1001.999999999, 3)).toBe("1001.999");
+      expect(formatValue(-1001.999999999, 3, true)).toBe("1001.999");
 
-      expect(formatValue(1.0000000001, 3)).toEqual("1.001");
-      expect(formatValue(11.0000000001, 3)).toEqual("11.001");
-      expect(formatValue(101.00001, 3)).toEqual("101.001");
-      expect(formatValue(1001.00001, 3)).toEqual("1001.001");
+      expect(formatValue(1.0000000001, 3)).toBe("1.001");
+      expect(formatValue(11.0000000001, 3)).toBe("11.001");
+      expect(formatValue(101.00001, 3)).toBe("101.001");
+      expect(formatValue(1001.00001, 3)).toBe("1001.001");
 
-      expect(formatValue(0.119, 2)).toEqual("0.11");
+      expect(formatValue(0.119, 2)).toBe("0.11");
     });
   });
   describe("test formatPercent", () => {
-    it("should be ", () => {
+    it("should be return '0' if value <0.01 and >-0.01, and delete fraction of value >1", () => {
       expect(formatPercent(0.01)).toBe("0");
       expect(formatPercent(-0.01)).toBe("0");
 
@@ -100,7 +102,7 @@ describe("test formatter functions", () => {
     });
   });
   describe("test validateFraction", () => {
-    it("should be ", () => {
+    it("should be return true if fraction less currency length", () => {
       expect(validateFraction("0.01", "BTC")).toBe(true);
       expect(validateFraction("0.00000001", "BTC")).toBe(true);
       expect(validateFraction("0.000000001", "BTC")).toBe(false);
@@ -118,7 +120,7 @@ describe("test formatter functions", () => {
     });
   });
   describe("test formatCurrencyValue", () => {
-    it("should be ", () => {
+    it("should be formatting value fraction to currency length", () => {
       expect(formatCurrencyValue(1.00000000001, "ETH")).toBe("1.00000001");
       expect(formatCurrencyValue(1.00000000001, "BTC")).toBe("1.00000001");
       expect(formatCurrencyValue(1.00000000001, "GVT")).toBe("1.0001");
@@ -126,7 +128,7 @@ describe("test formatter functions", () => {
     });
   });
   describe("test roundPercents", () => {
-    it("should be ", () => {
+    it("should be rounding percent to 0.01 values", () => {
       expect(roundPercents(0)).toBe("0%");
       expect(roundPercents(0.001)).toBe("<0.01%");
       expect(roundPercents(-0.001)).toBe("0.01%"); // TODO Why?..
@@ -137,7 +139,7 @@ describe("test formatter functions", () => {
     });
   });
   describe("test formatValueDifferentDecimalScale", () => {
-    it("should be ", () => {
+    it("should be round number to decimalScaleSmallValue if value >1 or <-1, and round number to decimalScaleBigValue in other cases", () => {
       expect(formatValueDifferentDecimalScale(0.0000000000001, 6, 2)).toBe(
         "0.000001"
       );
