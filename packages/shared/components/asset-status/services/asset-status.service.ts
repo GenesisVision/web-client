@@ -70,9 +70,7 @@ export const cancelRequestDispatch = ({
   role,
   asset,
   onFinally
-}: CancelRequestType) => (
-  dispatch: MiddlewareDispatch<AnyAction>
-): Promise<void> => {
+}: CancelRequestType) => (dispatch: MiddlewareDispatch): Promise<void> => {
   const authorization = authService.getAuthArg();
   let actionCreator: ICancelRequest;
 

@@ -1,7 +1,10 @@
 import { Action, AnyAction, Dispatch } from "redux";
-import { ThunkAction } from "redux-thunk";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 
 import RootState from "../reducers/root-reducer";
+import { CancelablePromise } from "gv-api-web";
+import { InvestorRootState } from "investor-web-portal/src/reducers";
+import { ManagerRootState } from "manager-web-portal/src/reducers";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
@@ -12,7 +15,7 @@ export interface ActionType<T = any> extends Action {
   payload?: T;
 }
 
-export type ApiAction<T> = ActionType<Promise<T>>;
+export type ApiAction<T = any> = ActionType<CancelablePromise<T>>;
 
 export type RootThunkAction<R = any> = ThunkAction<R, RootState, any, any>;
 
@@ -20,9 +23,19 @@ export interface DispatchType<R> {
   (asyncAction: ActionType): R;
 }
 
-export interface MiddlewareDispatch<A extends Action = AnyAction> {
-  <T extends A>(action: T): Promise<T>;
+export interface MiddlewareDispatch {
+  <A extends ApiAction = ApiAction>(apiAction: A): CancelablePromise<A>;
+  <A extends ActionType = ActionType>(action: A): A;
+  <R, S>(asyncAction: RootThunk<R, S>): R;
 }
+
+export type RootThunk<R, S = RootState> = (
+  dispatch: MiddlewareDispatch,
+  getState: () => S
+) => R;
+
+export type IntestorThunk<R> = RootThunk<R, InvestorRootState>;
+export type ManagerThunk<R> = RootThunk<R, ManagerRootState>;
 
 export type Nullable<T> = T | null;
 

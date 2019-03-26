@@ -1,12 +1,11 @@
 import { ProgramNotificationSettingList } from "gv-api-web";
-import { DeepReadonly } from "utility-types";
 
 import {
   ADD_ERROR_MESSAGE,
   ADD_PROGRAM_NOTIFICATIONS
 } from "../actions/program-notifications.actions";
 
-export type ProgramNotificationsState = DeepReadonly<{
+export type ProgramNotificationsState = Readonly<{
   data: { [name: string]: ProgramNotificationSettingList };
   errorMessage?: string;
 }>;

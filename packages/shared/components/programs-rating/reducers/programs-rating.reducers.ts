@@ -3,7 +3,6 @@ import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/api-reducer/api-reducer";
-import { DeepReadonly } from "utility-types";
 
 import {
   LEVELUP_SUMMARY,
@@ -21,10 +20,10 @@ const levelupSummaryReducer = apiReducerFactory<LevelUpSummary>({
   apiType: LEVELUP_SUMMARY
 });
 
-export type ProgramsRatingState = DeepReadonly<{
-  readonly programs: IApiState<ProgramsList>;
-  readonly selfPrograms: IApiState<ProgramsList>;
-  readonly levelupSummary: IApiState<LevelUpSummary>;
+export type ProgramsRatingState = Readonly<{
+  programs: IApiState<ProgramsList>;
+  selfPrograms: IApiState<ProgramsList>;
+  levelupSummary: IApiState<LevelUpSummary>;
 }>;
 
 const programsRatingReducer = combineReducers<ProgramsRatingState>({
