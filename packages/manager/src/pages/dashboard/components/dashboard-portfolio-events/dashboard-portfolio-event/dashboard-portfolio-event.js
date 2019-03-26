@@ -56,6 +56,7 @@ const DashboardPortfolioEvent = ({ t, event }) => {
         logo={event.logo}
         color={event.color}
         url={event.url}
+        assetType={event.programType}
       />
       <div className="portfolio-event__info">
         <StatisticItem label={formatDate(event.date)} small>
