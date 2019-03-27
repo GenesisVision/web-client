@@ -171,7 +171,7 @@ export enum HORIZONTAL_POPOVER_POS {
   RIGHT = "right",
   CENTER = "center"
 }
-export type anchorElType = Function | HTMLElement;
+export type anchorElType = EventTarget | Function | HTMLElement;
 
 const Popover = connect(mapStateToProps)(_Popover);
 export default Popover;
