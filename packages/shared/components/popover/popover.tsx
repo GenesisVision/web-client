@@ -173,4 +173,5 @@ export enum HORIZONTAL_POPOVER_POS {
 }
 export type anchorElType = Function | HTMLElement;
 
-export const Popover = connect(mapStateToProps)(_Popover);
+const Popover = connect(mapStateToProps)(_Popover);
+export default Popover;
