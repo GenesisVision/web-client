@@ -8,49 +8,23 @@ import Modal from "shared/components/modal/modal";
 import RootState from "shared/reducers/root-reducer";
 import { Nullable } from "shared/utils/types";
 
-export enum VERTICAL_POPOVER_POS {
-  TOP = "top",
-  BOTTOM = "bottom",
-  CENTER = "center"
-}
-
-export enum HORIZONTAL_POPOVER_POS {
-  LEFT = "left",
-  RIGHT = "right",
-  CENTER = "center"
-}
-
-export type anchorElType = { [keys: string]: any } | Function;
-
-interface IPopoverProps {
-  onClose?(event: React.MouseEvent<HTMLElement>): void;
-  horizontal?: HORIZONTAL_POPOVER_POS;
-  vertical?: VERTICAL_POPOVER_POS;
-  anchorEl: Nullable<anchorElType>;
-  noPadding?: boolean;
-  disableBackdropClick?: boolean;
-  className?: string;
-  scrollTop: number;
-}
-interface IPopoverState {
-  windowWidth: number;
-  windowHeight: number;
-}
-
 const MARGIN_OFFSET = 10;
 
 const getAnchorEl = (el: Nullable<anchorElType>) => {
   return typeof el === "function" ? el() : el;
 };
 
-class Popover extends React.PureComponent<IPopoverProps, IPopoverState> {
+export class _Popover extends React.PureComponent<
+  OwnProps & StateProps,
+  State
+> {
+  state = {
+    windowWidth: 0,
+    windowHeight: 0
+  };
   popover: RefObject<HTMLDivElement>;
-  constructor(props: IPopoverProps) {
+  constructor(props: OwnProps & StateProps) {
     super(props);
-    this.state = {
-      windowWidth: 0,
-      windowHeight: 0
-    };
     this.popover = React.createRef();
   }
 
@@ -167,8 +141,36 @@ class Popover extends React.PureComponent<IPopoverProps, IPopoverState> {
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   scrollTop: state.ui.scrollTop
 });
 
-export default connect(mapStateToProps)(Popover);
+interface OwnProps {
+  onClose?(event: React.MouseEvent<HTMLElement>): void;
+  horizontal?: HORIZONTAL_POPOVER_POS;
+  vertical?: VERTICAL_POPOVER_POS;
+  anchorEl: Nullable<anchorElType>;
+  noPadding?: boolean;
+  disableBackdropClick?: boolean;
+  className?: string;
+}
+interface StateProps {
+  scrollTop: number;
+}
+interface State {
+  windowWidth: number;
+  windowHeight: number;
+}
+export enum VERTICAL_POPOVER_POS {
+  TOP = "top",
+  BOTTOM = "bottom",
+  CENTER = "center"
+}
+export enum HORIZONTAL_POPOVER_POS {
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center"
+}
+export type anchorElType = Function | HTMLElement;
+
+export const Popover = connect(mapStateToProps)(_Popover);
