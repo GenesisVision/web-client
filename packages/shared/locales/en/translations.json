@@ -405,7 +405,7 @@
       "entryFee": "Entry fee",
       "exitFee": "Exit fee",
       "invest": "Invest",
-      "reinvest": "Reinvest",
+      "reinvest": "Reinvest profit",
       "yourInvestment": {
         "PROGRAM": "Current period investment",
         "FUND": "Current investment"
@@ -480,7 +480,7 @@
       "successFee": "Success fee",
       "subscriptionFee": "Subscription fee",
       "invest": "Invest",
-      "reinvest": "Reinvest",
+      "reinvest": "Reinvest profit",
       "yourInvestment": "Current investment",
       "pending-input": "Pending input",
       "pending-output": "Pending output",
