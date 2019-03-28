@@ -11,8 +11,7 @@ const CloseProgramForm = ({
   onCancel,
   twoFactorEnabled,
   handleSubmit,
-  isSubmitting,
-  errorMessage
+  isSubmitting
 }) => {
   return (
     <form id="closeProgramForm" onSubmit={handleSubmit} noValidate>
@@ -32,7 +31,6 @@ const CloseProgramForm = ({
             component={GVTextField}
           />
         )}
-        {errorMessage && <div className="form-error">{errorMessage}</div>}
         <div className="dialog__buttons">
           <GVButton type="submit" disabled={isSubmitting}>
             {t("buttons.confirm")}
@@ -52,7 +50,6 @@ const CloseProgramForm = ({
 };
 
 CloseProgramForm.propTypes = {
-  errorMessage: PropTypes.string,
   onSubmit: PropTypes.func,
   onCancel: PropTypes.func
 };
@@ -79,8 +76,8 @@ export default compose(
       object().shape({
         twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
       }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
+    handleSubmit: (values, { props }) => {
+      props.onSubmit(values);
     }
   })
 )(CloseProgramForm);
