@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "test": "react-app-rewired test --env=jsdom --no-cache"
+  },
+  "majestic": {
+    "jestScriptPath": "../../node_modules/react-app-rewired/bin/jest.js"
   }
 }
