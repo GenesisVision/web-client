@@ -5,15 +5,7 @@ import * as React from "react";
 import EventListener from "react-event-listener";
 import Portal from "shared/components/portal/portal";
 
-interface IModal {
-  onClose?(event: React.MouseEvent<HTMLElement>): void;
-  open: boolean;
-  disableBackdropClick?: boolean;
-  transparentBackdrop?: boolean;
-  fixed?: boolean;
-}
-
-class Modal extends React.Component<IModal> {
+class Modal extends React.Component<Props> {
   handleKeyPress = (
     event: KeyboardEvent & React.MouseEvent<HTMLElement>
   ): void => {
@@ -62,6 +54,14 @@ class Modal extends React.Component<IModal> {
       </Portal>
     );
   }
+}
+
+interface Props {
+  onClose?(event: React.MouseEvent<HTMLElement>): void;
+  open: boolean;
+  disableBackdropClick?: boolean;
+  transparentBackdrop?: boolean;
+  fixed?: boolean;
 }
 
 export default Modal;
