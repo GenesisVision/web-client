@@ -99,7 +99,8 @@
     "react-test-renderer": "^16.2.0",
     "redux-devtools": "^3.5.0",
     "redux-mock-store": "^1.5.3",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.2",
+    "majestic": "^1.2.24"
   },
   "husky": {
     "hooks": {
