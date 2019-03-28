@@ -18,7 +18,9 @@ export const fetchBrokers = (): CancelablePromise<Broker[]> =>
     return [gvBroker, ...data.brokers];
   });
 
-export const fetchMinDepositsAmount = (): CancelablePromise<number> =>
+export const fetchMinDepositsAmount = (): CancelablePromise<{
+  [key: string]: number;
+}> =>
   managerApi
     .v10ManagerProgramsInvestmentAmountGet(authService.getAuthArg())
     .then(investmentAmount => investmentAmount.minimumDepositsAmount);

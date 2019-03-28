@@ -1,5 +1,6 @@
 import {
   Broker,
+  CancelablePromise,
   ProfileHeaderViewModel,
   ProgramsInfo,
   WalletData
@@ -28,7 +29,7 @@ enum TAB {
 }
 
 class _CreateProgramContainer extends React.Component<Props, State> {
-  state = {
+  state: State = {
     minimumDepositsAmount: undefined,
     tab: TAB.BROKER,
     selectedBroker: undefined,
@@ -53,7 +54,8 @@ class _CreateProgramContainer extends React.Component<Props, State> {
     );
   }
 
-  selectBroker = (broker: Broker) => () => {
+  selectBroker = (brokerName: string) => () => {
+    const broker = this.state.brokers!.find(x => x.name === brokerName);
     this.setState({ selectedBroker: broker });
   };
 
@@ -69,7 +71,10 @@ class _CreateProgramContainer extends React.Component<Props, State> {
     this.setState({ isNavigationDialogVisible: true });
   };
 
-  fetchRate = (fromCurrency: string, toCurrency: string) => {
+  fetchRate = (
+    fromCurrency: string,
+    toCurrency: string
+  ): CancelablePromise<number> => {
     return rateApi.v10RateByFromByToGet(fromCurrency, toCurrency);
   };
 
@@ -84,7 +89,14 @@ class _CreateProgramContainer extends React.Component<Props, State> {
     } = this.state;
 
     const { t, headerData, service, programsInfo, wallets } = this.props;
-    if (!programsInfo || !headerData || !wallets || !minimumDepositsAmount)
+    if (
+      !brokers ||
+      !selectedBroker ||
+      !programsInfo ||
+      !headerData ||
+      !wallets ||
+      !minimumDepositsAmount
+    )
       return null;
     return (
       <div className="create-program-page__container">
@@ -111,7 +123,7 @@ class _CreateProgramContainer extends React.Component<Props, State> {
                 isForexAllowed={headerData.allowForex}
               />
             )}
-            {tab === TAB.SETTINGS && selectedBroker && (
+            {tab === TAB.SETTINGS && (
               <CreateProgramSettingsSection
                 minimumDepositsAmount={minimumDepositsAmount}
                 fetchWallets={service.fetchWallets}
@@ -176,7 +188,7 @@ export default CreateProgramContainer;
 interface OwnProps {}
 
 interface State {
-  minimumDepositsAmount?: number;
+  minimumDepositsAmount?: { [key: string]: number };
   selectedBroker?: Broker;
   brokers?: Broker[];
   isPending: boolean;
