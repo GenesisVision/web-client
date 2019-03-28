@@ -1,18 +1,27 @@
-import { withFormik } from "formik";
+import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import PropTypes from "prop-types";
-import React from "react";
-import { translate } from "react-i18next";
+import React, { ComponentType, PureComponent } from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import { object, string } from "yup";
+import { TranslationFunction } from "i18next";
 
-const CloseProgramForm = ({
-  t,
-  onCancel,
-  twoFactorEnabled,
-  handleSubmit,
-  isSubmitting
-}) => {
+interface OwnProps {
+  onCancel(): void;
+  twoFactorEnabled: boolean;
+  onSubmit(values: FormValues): void;
+  handleSubmit(): void;
+}
+
+interface FormValues {
+  twoFactorCode?: string;
+}
+
+type FormProps = InjectedTranslateProps & OwnProps;
+
+const CloseProgramForm: React.FC<
+  InjectedFormikProps<FormProps, FormValues>
+> = ({ t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => {
   return (
     <form id="closeProgramForm" onSubmit={handleSubmit} noValidate>
       <div className="dialog__top">
@@ -49,12 +58,10 @@ const CloseProgramForm = ({
   );
 };
 
-CloseProgramForm.propTypes = {
-  onSubmit: PropTypes.func,
-  onCancel: PropTypes.func
-};
-
-const twoFactorvalidator = (t, twoFactorEnabled) => {
+const twoFactorvalidator = (
+  t: TranslationFunction,
+  twoFactorEnabled: boolean
+) => {
   return twoFactorEnabled
     ? string()
         .trim()
@@ -65,14 +72,14 @@ const twoFactorvalidator = (t, twoFactorEnabled) => {
         .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 };
 
-export default compose(
+export default compose<ComponentType<OwnProps>>(
   translate(),
-  withFormik({
+  withFormik<OwnProps, FormValues>({
     displayName: "close-program",
-    mapPropsToValues: props => {
+    mapPropsToValues: () => {
       return { twoFactorCode: "" };
     },
-    validationSchema: ({ t, twoFactorEnabled }) =>
+    validationSchema: ({ t, twoFactorEnabled }: FormProps) =>
       object().shape({
         twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
       }),
