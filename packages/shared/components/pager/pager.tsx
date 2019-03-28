@@ -6,7 +6,7 @@ import * as React from "react";
 const Pager: React.FC<Props> = ({
   total,
   current,
-  countVisiblePages,
+  countVisiblePages = 3,
   onPageChanged
 }) => {
   const handleChange = (page: number) => (): void => onPageChanged(page);
@@ -80,8 +80,8 @@ const generateVisiblePages = (first: number, count: number): number[] => {
 interface Props {
   total: number;
   current: number;
-  countVisiblePages: number;
   onPageChanged(page: number): void;
+  countVisiblePages?: number;
 }
 
 interface IPagerButtonProps {
