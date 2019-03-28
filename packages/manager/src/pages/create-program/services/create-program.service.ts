@@ -1,38 +1,36 @@
 import { push } from "connected-react-router";
+import { Broker, CancelablePromise } from "gv-api-web";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import brokersApi from "shared/services/api-client/brokers-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
-export const fetchBrokers = () =>
+const GM_BROKER_NAME = "Genesis Markets";
+
+export const fetchBrokers = (): CancelablePromise<Broker[]> =>
   brokersApi.v10BrokersGet().then(data => {
-    const sortedBrokers = [];
-    data.brokers.forEach(broker => {
-      if (broker.name === "Genesis Markets") {
-        sortedBrokers.unshift(broker);
-      } else {
-        sortedBrokers.push(broker);
-      }
-    });
-    return { brokers: sortedBrokers };
+    const gvBroker = data.brokers.find(x => x.name === GM_BROKER_NAME)!;
+    data.brokers.splice(data.brokers.indexOf(gvBroker), 1);
+
+    return [gvBroker, ...data.brokers];
   });
 
-export const fetchMinDepositsAmount = () =>
+export const fetchMinDepositsAmount = (): CancelablePromise<number> =>
   managerApi
     .v10ManagerProgramsInvestmentAmountGet(authService.getAuthArg())
     .then(investmentAmount => investmentAmount.minimumDepositsAmount);
 
-export const fetchBalance = () => dispatch =>
-  dispatch(fetchProfileHeaderInfo());
-
-export const createProgram = (createProgramData, setSubmitting) => dispatch => {
+export const createProgram = (
+  createProgramData: any,
+  setSubmitting: (isSubmitting: boolean) => void
+) => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
 
   let data = createProgramData;
-  let promise = Promise.resolve(null);
+  let promise = Promise.resolve("");
   if (data.logo.cropped) {
     promise = filesService.uploadFile(data.logo.cropped, authorization);
   }
@@ -40,7 +38,7 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
     .then(response => {
       data = {
         ...data,
-        logo: response || ""
+        logo: response
       };
 
       return managerApi.v10ManagerProgramsCreatePost(authorization, {
@@ -63,7 +61,7 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
     });
 };
 
-export const showValidationError = () => dispatch => {
+export const showValidationError = () => (dispatch: Dispatch) => {
   dispatch(
     alertMessageActions.error(
       "manager.create-program-page.notifications.validate-error",

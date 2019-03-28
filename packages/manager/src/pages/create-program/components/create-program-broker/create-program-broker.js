@@ -30,8 +30,8 @@ const CreateProgramBroker = ({
   t,
   brokers,
   navigateToSettings,
-  choosedBroker,
-  chooseBroker,
+  selectedBroker,
+  selectBroker,
   isForexAllowed
 }) => (
   <div className="create-program-broker-container">
@@ -41,8 +41,8 @@ const CreateProgramBroker = ({
           <BrokerCard
             key={broker.name + broker.description}
             broker={broker}
-            isSelected={broker === choosedBroker}
-            onSelect={chooseBroker}
+            isSelected={broker === selectedBroker}
+            onSelect={selectBroker}
             cardState={
               !isForexAllowed && broker.isForex
                 ? BrokerCardState.KYCRequired
@@ -70,14 +70,14 @@ const CreateProgramBroker = ({
       </div>
       <Surface className="surface--horizontal-paddings create-program-broker__description">
         <h3 className="create-program-broker__description-heading">
-          {choosedBroker.name}
+          {selectedBroker.name}
         </h3>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
             {t("manager.create-program-page.broker-info.about")}
           </div>
           <div className="create-program-broker__info-text">
-            {choosedBroker.description}
+            {selectedBroker.description}
           </div>
         </div>
         <div className="create-program-broker__row">
@@ -85,7 +85,7 @@ const CreateProgramBroker = ({
             {t("manager.create-program-page.broker-info.account-type")}
           </div>
           <div className="create-program-broker__info-text">
-            {getAcountTypes(choosedBroker.accountTypes)}
+            {getAcountTypes(selectedBroker.accountTypes)}
           </div>
         </div>
         <div className="create-program-broker__row">
@@ -93,7 +93,7 @@ const CreateProgramBroker = ({
             {t("manager.create-program-page.broker-info.trading-platform")}
           </div>
           <div className="create-program-broker__info-text">
-            {choosedBroker.accountTypes[0].type}
+            {selectedBroker.accountTypes[0].type}
           </div>
         </div>
         <div className="create-program-broker__row">
@@ -102,7 +102,7 @@ const CreateProgramBroker = ({
           </div>
           <div className="create-program-broker__info-text">
             <a
-              href={choosedBroker.terms}
+              href={selectedBroker.terms}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -115,7 +115,7 @@ const CreateProgramBroker = ({
             {t("manager.create-program-page.broker-info.leverage")}
           </div>
           <div className="create-program-broker__info-text">
-            {getLeverageDescription(choosedBroker)}
+            {getLeverageDescription(selectedBroker)}
           </div>
         </div>
         <div className="create-program-broker__row">
@@ -123,7 +123,7 @@ const CreateProgramBroker = ({
             {t("manager.create-program-page.broker-info.assets")}
           </div>
           <div className="create-program-broker__info-text">
-            {choosedBroker.assets}
+            {selectedBroker.assets}
           </div>
         </div>
       </Surface>

@@ -123,7 +123,6 @@ interface OwnProps {
   fetchWallets(): void;
   fetchRate(from: string, to: string): Promise<number>;
   onSubmit(data: any, setSubmitting: any): void;
-  onValidateError(): void;
   minimumDepositsAmount: { [key: string]: number };
   navigateBack(): void;
   author: string;
