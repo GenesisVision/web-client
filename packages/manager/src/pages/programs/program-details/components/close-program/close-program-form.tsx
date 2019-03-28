@@ -1,8 +1,11 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import { TranslationFunction } from "i18next";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import {
+  InjectedTranslateProps,
+  translate,
+  TranslationFunction
+} from "react-i18next";
 import { compose } from "redux";
 import { object, string } from "yup";
 
