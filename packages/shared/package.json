@@ -2,9 +2,13 @@
   "name": "shared",
   "version": "1.0.0",
   "scripts": {
-    "test": "react-app-rewired test --env=jsdom --no-cache"
+    "test": "react-app-rewired test --env=jsdom",
+    "test:ui": "majestic"
   },
   "majestic": {
-    "jestScriptPath": "../../node_modules/react-app-rewired/bin/jest.js"
+    "jestScriptPath": "../../node_modules/react-app-rewired/bin/jest.js",
+    "env": {
+      "CI": true
+    }
   }
 }
