@@ -5,6 +5,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import ConvertingDetails from "shared/modules/transaction-details/converting-details";
 import ExternalDeposit from "shared/modules/transaction-details/external-deposit-details";
@@ -110,8 +111,7 @@ class TransactionDetailsDialog extends React.Component<Props, State> {
   };
 
   render() {
-    if (this.state.isPending) return null;
-    if (!this.state.data) return null;
+    if (this.state.isPending || !this.state.data) return <DialogLoader />;
     const Component =
       Types[this.state.data.type] ||
       function() {
