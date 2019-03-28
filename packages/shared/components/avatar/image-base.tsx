@@ -44,7 +44,10 @@ class ImageBase extends React.Component<
       <div className={className}>
         <img
           alt={alt}
-          className={classNames(imageClassName, defaultImageClassName)}
+          className={classNames(
+            imageClassName,
+            this.state.error || !url ? defaultImageClassName : ""
+          )}
           src={currentSrc}
           onError={this.handleError}
         />
