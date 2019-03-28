@@ -10,7 +10,7 @@ import { rateApi } from "shared/services/api-client/rate-api";
 
 import * as createProgramService from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
-import CreateProgramSettings from "./create-program-settings/create-program-settings";
+import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
 
 class CreateProgramContainer extends Component {
   state = {
@@ -58,10 +58,6 @@ class CreateProgramContainer extends Component {
   };
 
   handleSubmit = (values, setSubmitting) => {
-    // const brokerAccountTypeId = this.state.choosedBroker.accountTypes.find(
-    //   type => type.type === values.accountType
-    // ).id;
-    return;
     this.props.service.createProgram(values, setSubmitting);
   };
 
@@ -119,7 +115,7 @@ class CreateProgramContainer extends Component {
               />
             )}
             {tab === "settings" && (
-              <CreateProgramSettings
+              <CreateProgramSettingsSection
                 minimumDepositsAmount={minimumDepositsAmount}
                 fetchWallets={service.fetchWallets}
                 fetchRate={this.fetchRate}
@@ -154,7 +150,7 @@ class CreateProgramContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  wallets: state.wallet.info.data ? state.wallet.info.data.wallets : {},
+  wallets: state.wallet.info.data ? state.wallet.info.data.wallets : undefined,
   headerData: state.profileHeader.info.data,
   platformSettings: state.platformData.data
 });

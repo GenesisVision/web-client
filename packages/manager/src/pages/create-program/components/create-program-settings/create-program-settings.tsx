@@ -3,7 +3,12 @@ import "shared/components/deposit-details/deposit-details.scss";
 import "./create-program-settings.scss";
 
 import { Field, FieldProps, InjectedFormikProps, withFormik } from "formik";
-import { Broker, ProgramsInfo, WalletData } from "gv-api-web";
+import {
+  Broker,
+  BrokerAccountType,
+  ProgramsInfo,
+  WalletData
+} from "gv-api-web";
 import {
   GVButton,
   GVFormikField,
@@ -24,6 +29,7 @@ import Select from "shared/components/select/select";
 import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import ProgramDefaultImage from "./program-default-image";
@@ -32,44 +38,40 @@ import SignalsFeeFormPartial from "./signals-fee-form.partial";
 class CreateProgramSettings extends React.Component<
   InjectedFormikProps<Props, FormValues>
 > {
-  state = {
-    rate: 1
+  componentDidUpdate(prevProps: Props) {
+    const { validateForm, setFieldValue } = this.props;
+    if (prevProps.accountType !== this.props.accountType) {
+      setFieldValue("brokerAccountTypeId", this.props.accountType!.id);
+    }
+    if (prevProps.programCurrency !== this.props.programCurrency) {
+      setFieldValue("currency", this.props.programCurrency || "");
+    }
+    if (prevProps.leverage !== this.props.leverage) {
+      setFieldValue("leverage", this.props.leverage || "");
+    }
+    if (prevProps.wallet !== this.props.wallet) {
+      setFieldValue("depositWalletId", this.props.wallet.id);
+      setFieldValue("depositAmount", "");
+    }
+    if (prevProps.leverage !== this.props.leverage) {
+      setFieldValue("leverage", this.props.leverage || "");
+    }
+    if (prevProps.rate !== this.props.rate) {
+      validateForm();
+    }
+  }
+
+  onSelectChange = (onChangeFn: (value: string & number) => void) => (
+    _: string,
+    target: any
+  ) => {
+    onChangeFn(target.props.value);
   };
 
-  componentDidMount() {
-    /*this.updateRate(
-      this.props.values.depositWalletCurrency,
-      this.props.values.currency
-    );*/
-  }
-  onChangeDepositWallet = (name: string, target: any) => {
-    const { setFieldValue, values, wallets, fetchWallets } = this.props;
-    const depositWalletCurrency = target.props.value;
-    setFieldValue("depositWalletCurrency", depositWalletCurrency);
-    setFieldValue(
-      "depositWalletId",
-      wallets.find(
-        (item: any) => item.currency === (values && depositWalletCurrency)
-      )!.id
-    );
-    setFieldValue("depositAmount", undefined);
-    fetchWallets();
-    this.updateRate(depositWalletCurrency, values.currency);
-  };
-  onChangeCurrency = (wallet: WalletData) => (name: string, target: any) => {
-    const { setFieldValue } = this.props;
-    const currency = target.props.value;
-    setFieldValue("currency", currency);
-    this.updateRate(wallet.currency, currency);
-  };
-  setMaxAmount = (available: number, currency: string) => () => {
+  setMaxAmount = (available?: number, currency?: string) => () => {
+    if (!available || !currency) return;
     const { setFieldValue } = this.props;
     setFieldValue("depositAmount", formatCurrencyValue(available, currency));
-  };
-  updateRate = (fromCurrency: string, toCurrency: string) => {
-    this.props.fetchRate(fromCurrency, toCurrency).then(rate => {
-      if (rate !== this.state.rate) this.setState({ rate });
-    });
   };
 
   render() {
@@ -81,34 +83,25 @@ class CreateProgramSettings extends React.Component<
       broker,
       author,
       isSubmitting,
+      submitCount,
+      isValid,
       handleSubmit,
       values,
       setFieldValue,
       programsInfo,
       errors,
-      touched
+      accountType,
+      rate,
+      programCurrency,
+      wallet
     } = this.props;
-    if (!wallets) return;
-    const {
-      depositWalletId,
-      brokerAccountTypeId,
-      depositAmount,
-      isSignalProgram,
-      description,
-      title,
-      currency
-    } = values;
+    const { depositAmount, isSignalProgram, description, title } = values;
     const descriptionTrimmedLength = description.trim().length;
     const imageInputError =
       errors &&
       errors.logo &&
       (errors.logo.width || errors.logo.height || errors.logo.size);
-    const { rate } = this.state;
 
-    const accountType = broker.accountTypes.find(
-      x => x.id === brokerAccountTypeId
-    );
-    const depositWallet = wallets.find(item => item.id === depositWalletId);
     const accountCurrencies = accountType ? accountType.currencies : [];
     const accountLeverages = accountType ? accountType.leverages : [];
 
@@ -144,6 +137,7 @@ class CreateProgramSettings extends React.Component<
                   )}
                   InputComponent={Select}
                   disableIfSingle
+                  onChange={this.onSelectChange(this.props.changeAccountType)}
                 >
                   {broker.accountTypes.map(accountType => {
                     return (
@@ -162,9 +156,9 @@ class CreateProgramSettings extends React.Component<
                     "manager.create-program-page.settings.fields.currency"
                   )}
                   InputComponent={Select}
-                  disabled={!accountType}
+                  disabled={accountType === undefined}
                   disableIfSingle
-                  onChange={this.onChangeCurrency(depositWallet!)}
+                  onChange={this.onSelectChange(this.props.changeCurrency)}
                 >
                   {accountCurrencies.map(currency => {
                     return (
@@ -214,6 +208,7 @@ class CreateProgramSettings extends React.Component<
                   disabled={!accountType}
                   disableIfSingle
                   className="create-program-settings__leverage"
+                  onChange={this.onSelectChange(this.props.changeLeverage)}
                 >
                   {accountLeverages.map(leverage => {
                     return (
@@ -344,6 +339,7 @@ class CreateProgramSettings extends React.Component<
                   InputComponent={NumberFormat}
                   autoComplete="off"
                   decimalScale={4}
+                  isAllowed={allowValuesNumberFormat()}
                 />
                 <Hint
                   content={t(
@@ -367,6 +363,7 @@ class CreateProgramSettings extends React.Component<
                   InputComponent={NumberFormat}
                   autoComplete="off"
                   decimalScale={4}
+                  isAllowed={allowValuesNumberFormat()}
                 />
                 <Hint
                   content={t(
@@ -398,15 +395,15 @@ class CreateProgramSettings extends React.Component<
           >
             <div className="create-program-settings__item deposit-details">
               <GVFormikField
-                name="depositWalletCurrency" // value={"GVT"}
+                name="depositWalletId"
                 component={GVTextField}
                 label={t("wallet-transfer.from")}
                 InputComponent={Select}
-                onChange={this.onChangeDepositWallet}
+                onChange={this.onSelectChange(this.props.changeWallet)}
               >
                 {wallets.map(wallet => {
                   return (
-                    <option value={wallet.currency} key={wallet.currency}>
+                    <option value={wallet.id} key={wallet.id}>
                       <img
                         src={filesService.getFileUrl(wallet.logo)}
                         className="wallet-transfer-popup__icon"
@@ -421,21 +418,22 @@ class CreateProgramSettings extends React.Component<
                 autoFocus={false}
                 name="depositAmount"
                 label={t("wallet-transfer.amount")}
-                currency={depositWallet!.currency}
-                setMax={this.setMaxAmount(
-                  depositWallet!.available,
-                  depositWallet!.currency
-                )}
+                currency={wallet.currency}
+                setMax={this.setMaxAmount(wallet.available, wallet.currency)}
               />
-              {currency !== depositWallet!.currency && depositAmount && (
+              {programCurrency !== wallet.currency && depositAmount && rate && (
                 <div className="invest-popup__currency">
                   <NumberFormat
-                    value={formatCurrencyValue(
-                      convertFromCurrency(depositAmount, rate),
-                      currency
-                    )}
+                    value={
+                      programCurrency
+                        ? formatCurrencyValue(
+                            convertFromCurrency(depositAmount, rate),
+                            programCurrency
+                          )
+                        : undefined
+                    }
                     prefix="≈ "
-                    suffix={` ${currency}`}
+                    suffix={` ${programCurrency}`}
                     displayType="text"
                   />
                 </div>
@@ -445,10 +443,14 @@ class CreateProgramSettings extends React.Component<
                   {t("manager.create-program-page.settings.fields.min-deposit")}
                   <span className={"deposit-details__available-amount-value"}>
                     <NumberFormat
-                      value={minimumDepositsAmount[currency]}
+                      value={
+                        programCurrency
+                          ? minimumDepositsAmount[programCurrency]
+                          : undefined
+                      }
                       thousandSeparator=" "
                       displayType="text"
-                      suffix={` ${currency}`}
+                      suffix={` ${programCurrency}`}
                     />
                   </span>
                 </div>
@@ -458,18 +460,20 @@ class CreateProgramSettings extends React.Component<
                   )}
                   <span className={"deposit-details__available-amount-value"}>
                     <NumberFormat
-                      value={depositWallet!.available}
+                      value={wallet.available}
                       thousandSeparator=" "
                       displayType="text"
-                      suffix={values ? ` ${depositWallet!.currency}` : " GVT"}
+                      suffix={` ${wallet.currency}`}
                     />
                   </span>
                 </div>
               </div>
             </div>
           </div>
-          {Object.keys(touched).length > 0 && (
-            <FormError error={JSON.stringify(errors)} />
+          {submitCount > 0 && !isValid && (
+            <div className="deposit-details create-program-settings__fill-block">
+              <FormError error="Fix form errors" />
+            </div>
           )}
           <div className="create-program-settings__navigation">
             <GVButton
@@ -498,27 +502,19 @@ export default compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<Props, FormValues>({
     displayName: "CreateProgramSettingsForm",
-    mapPropsToValues: ({ wallets, broker }) => {
-      const brokerAccountType =
-        broker.accountTypes.length === 1 ? broker.accountTypes[0] : undefined;
-      const leverage =
-        brokerAccountType !== undefined &&
-        brokerAccountType.leverages.length === 1
-          ? brokerAccountType.leverages[0]
-          : undefined;
-      const currency =
-        brokerAccountType !== undefined ? brokerAccountType.currencies[0] : "";
+    mapPropsToValues: ({
+      wallet,
+      broker,
+      programCurrency,
+      leverage,
+      programsInfo,
+      accountType
+    }) => {
+      const periodLength =
+        programsInfo.periods.length === 1 ? programsInfo.periods[0] : undefined;
       return {
-        rate: 1,
         stopOutLevel: 100,
-        brokerAccountTypeId: brokerAccountType ? brokerAccountType.id : "",
-        depositWalletId: wallets.find(item => item.currency === "GVT")!.id,
-        depositAmount: undefined,
-        isSignalProgram: broker.isSignalsAvailable,
-        periodLength: undefined,
-        successFee: undefined,
-        signalSuccessFee: broker.isSignalsAvailable ? undefined : 0,
-        leverage: leverage,
+        brokerAccountTypeId: accountType ? accountType.id : "",
         title: "",
         description: "",
         logo: {
@@ -531,8 +527,15 @@ export default compose<React.ComponentType<OwnProps>>(
           size: undefined
         },
         entryFee: undefined,
+        successFee: undefined,
+        isSignalProgram: broker.isSignalsAvailable,
+        signalSuccessFee: broker.isSignalsAvailable ? undefined : 0,
         signalSubscriptionFee: broker.isSignalsAvailable ? undefined : 0,
-        currency: currency
+        currency: programCurrency,
+        leverage: leverage,
+        periodLength: periodLength,
+        depositWalletId: wallet.id,
+        depositAmount: undefined
       };
     },
     validationSchema: createProgramSettingsValidationSchema,
@@ -546,18 +549,25 @@ interface OwnProps {
   broker: Broker;
   wallets: WalletData[];
   programsInfo: ProgramsInfo;
-  fetchWallets(): void;
-  fetchRate(from: string, to: string): Promise<number>;
   onSubmit(data: any, setSubmitting: any): void;
-  onValidateError(): void;
   minimumDepositsAmount: { [key: string]: number };
   navigateBack(): void;
   author: string;
+
+  programCurrency?: string;
+  changeCurrency(currency: string): void;
+  leverage?: number;
+  changeLeverage(leverage: number): void;
+  accountType?: BrokerAccountType;
+  changeAccountType(id: string): void;
+  rate?: number;
+  wallet: WalletData;
+  changeWallet(id: string): void;
 }
 
 export interface Props extends OwnProps, InjectedTranslateProps {}
 export interface FormValues {
-  currency: string;
+  currency?: string;
   periodLength?: number;
   successFee?: number;
   stopOutLevel: number;

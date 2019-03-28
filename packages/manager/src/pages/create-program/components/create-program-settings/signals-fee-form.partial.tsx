@@ -4,6 +4,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
+import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 interface ISignalsFeeFormPartialProps {
   subscriptionFeeFieldName: string;
@@ -41,6 +42,7 @@ const SignalsFeeFormPartial: FunctionComponent<
           autoComplete="off"
           decimalScale={4}
           autoFocus={hasSubscriptionFeeAutofocus}
+          isAllowed={allowValuesNumberFormat()}
         />
         <Hint
           content={t(
@@ -64,6 +66,7 @@ const SignalsFeeFormPartial: FunctionComponent<
           InputComponent={NumberFormat}
           autoComplete="off"
           decimalScale={4}
+          isAllowed={allowValuesNumberFormat()}
         />
         <Hint
           content={t(
