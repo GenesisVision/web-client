@@ -42,8 +42,8 @@ class CloseProgramContainer extends React.Component<
   };
   handleSubmit = (data: ICloseProgramFormValues) => {
     const { service, onApply, id, onClose } = this.props;
-    service.closeProgram(onApply, id, { twoFactorCode: data.twoFactorCode });
     onClose();
+    service.closeProgram(onApply, id, { twoFactorCode: data.twoFactorCode });
   };
 
   render() {
