@@ -54,18 +54,22 @@ export const _Pager: React.FC<Props> = ({
   );
 };
 
-export const PagerButton: React.FC<IPagerButtonProps> = React.memo(
-  ({ page, label, current, clickHandle }) => (
-    <div
-      className={classNames("pager__button", {
-        "pager__button--current": page === current
-      })}
-      onClick={clickHandle(page)}
-    >
-      {label || page}
-    </div>
-  )
+export const _PagerButton: React.FC<IPagerButtonProps> = ({
+  page,
+  label,
+  current,
+  clickHandle
+}) => (
+  <div
+    className={classNames("pager__button", {
+      "pager__button--current": page === current
+    })}
+    onClick={clickHandle(page)}
+  >
+    {label || page}
+  </div>
 );
+const PagerButton = React.memo(_PagerButton);
 
 const PagerSeparator = (): JSX.Element => (
   <div className="pager__separator">...</div>
