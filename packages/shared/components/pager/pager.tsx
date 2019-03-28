@@ -3,7 +3,7 @@ import "./pager.scss";
 import classNames from "classnames";
 import * as React from "react";
 
-const Pager: React.FC<Props> = ({
+export const _Pager: React.FC<Props> = ({
   total,
   current,
   countVisiblePages = 3,
@@ -92,4 +92,5 @@ interface IPagerButtonProps {
   clickHandle(page: number): () => void;
 }
 
-export default React.memo(Pager);
+const Pager = React.memo(_Pager);
+export default Pager;
