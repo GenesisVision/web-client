@@ -26,13 +26,13 @@ import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import Select from "shared/components/select/select";
+import ProgramDefaultImage from "shared/media/program-default-image.svg";
 import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
-import ProgramDefaultImage from "./program-default-image";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class CreateProgramSettings extends React.Component<
