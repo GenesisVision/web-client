@@ -1,13 +1,11 @@
 import * as React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import {
   _Pager as Pager,
   _PagerButton as TestedPagerButton,
   PagerButton,
   PagerSeparator
 } from "./pager";
-import Modal from "../modal/modal";
-import EventListener from "react-event-listener";
 
 describe("Paging tests", () => {
   describe("Pager tests", () => {
