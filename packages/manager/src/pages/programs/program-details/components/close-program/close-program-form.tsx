@@ -1,26 +1,25 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React, { ComponentType, PureComponent } from "react";
+import { TranslationFunction } from "i18next";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import { object, string } from "yup";
-import { TranslationFunction } from "i18next";
 
 interface OwnProps {
   onCancel(): void;
   twoFactorEnabled: boolean;
-  onSubmit(values: FormValues): void;
-  handleSubmit(): void;
+  onSubmit(values: ICloseProgramFormValues): void;
 }
 
-interface FormValues {
-  twoFactorCode?: string;
+export interface ICloseProgramFormValues {
+  twoFactorCode: string;
 }
 
 type FormProps = InjectedTranslateProps & OwnProps;
 
 const CloseProgramForm: React.FC<
-  InjectedFormikProps<FormProps, FormValues>
+  InjectedFormikProps<FormProps, ICloseProgramFormValues>
 > = ({ t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => {
   return (
     <form id="closeProgramForm" onSubmit={handleSubmit} noValidate>
@@ -72,9 +71,9 @@ const twoFactorvalidator = (
         .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 };
 
-export default compose<ComponentType<OwnProps>>(
+export default compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik<OwnProps, FormValues>({
+  withFormik<OwnProps, ICloseProgramFormValues>({
     displayName: "close-program",
     mapPropsToValues: () => {
       return { twoFactorCode: "" };

@@ -81,7 +81,7 @@ export const closeProgram = (
   opts?: {
     twoFactorCode?: string | undefined;
   }
-) => (dispatch: Dispatch): Promise<void> => {
+): any => (dispatch: Dispatch): Promise<void> => {
   const authorization = authService.getAuthArg();
   return managerApi
     .v10ManagerProgramsByIdClosePost(programId, authorization, opts)
