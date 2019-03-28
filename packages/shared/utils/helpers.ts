@@ -15,7 +15,13 @@ const merge = function(): object {
 };
 
 const allowValuesNumberFormat = (
-  { from, to } = { from: Number.MIN_SAFE_INTEGER, to: Number.MAX_SAFE_INTEGER }
+  {
+    from,
+    to
+  }: {
+    from: number;
+    to: number;
+  } = { from: Number.MIN_SAFE_INTEGER, to: Number.MAX_SAFE_INTEGER }
 ) => (values: NumberFormatValues): boolean => {
   const { formattedValue, floatValue } = values;
   return (
@@ -36,12 +42,7 @@ const getNumberWithoutSuffix = (str: string): Nullable<number> => {
   return result;
 };
 
-const convertToArray = (value: any[] | any): any[] =>
+const convertToArray = (value: any): any[] =>
   Array.isArray(value) ? value : [value];
 
-export {
-  merge,
-  allowValuesNumberFormat,
-  getNumberWithoutSuffix,
-  convertToArray
-};
+export { allowValuesNumberFormat, getNumberWithoutSuffix, convertToArray };

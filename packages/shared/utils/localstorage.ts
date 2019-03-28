@@ -1,7 +1,8 @@
 export const loadData = <T>(key: string): T | undefined => {
   try {
-    const serializedSettings = localStorage.getItem(key);
-    return JSON.parse(serializedSettings || "");
+    const item = localStorage.getItem(key);
+    const data = item ? JSON.parse(item) : null;
+    return key in data ? data[key] : data;
   } catch (e) {
     return undefined;
   }
@@ -12,7 +13,9 @@ export const saveData = (
   value: object | string | number
 ): void => {
   try {
-    const serializedSettings = JSON.stringify(value);
-    localStorage.setItem(key, serializedSettings);
+    const serializedValue = JSON.stringify(
+      typeof value === "object" ? value : { [key]: value }
+    );
+    localStorage.setItem(key, serializedValue);
   } catch (e) {}
 };

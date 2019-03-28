@@ -3,12 +3,11 @@ import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/api-reducer/api-reducer";
-import { DeepReadonly } from "utility-types";
 
 import { PROGRAMS } from "../actions/programs-table.actions";
 import programsFavoritesReducer from "./programs-favorites.reducer";
 
-export type ProgramsListState = DeepReadonly<{
+export type ProgramsListState = Readonly<{
   items: IApiState<ProgramsList>;
 }>;
 

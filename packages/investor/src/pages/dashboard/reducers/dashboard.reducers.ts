@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import { DeepReadonly } from "utility-types";
 
 import dashboardCopytradingReducer from "./dashboard-copytrading.reducer";
 import dashboardEventsReducer, {
@@ -14,7 +13,7 @@ import dashboardPortfolioChartReducer, {
 } from "./dashboard-portfolio-chart.reducer";
 import dashboardProgramsReducer from "./dashboard-programs.reducer";
 
-export type DashboardState = DeepReadonly<{
+export type DashboardState = Readonly<{
   programs: any;
   funds: any;
   copytrading: any;

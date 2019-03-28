@@ -1,17 +1,16 @@
-import { DeepReadonly } from "utility-types";
 import * as uuid from "uuid";
 
 import { IAlertAction } from "../actions/alert-message-actions";
 import { ALERT_MESSAGE } from "../actions/alert-message-actions.constants";
 
-export type IMessage = DeepReadonly<{
+export type IMessage = Readonly<{
   id: string;
   text: string;
   className?: string;
   isUseLocalization: boolean;
 }>;
 
-export type AlertMessagesState = DeepReadonly<IMessage[]>;
+export type AlertMessagesState = Readonly<IMessage[]>;
 
 const initialState: AlertMessagesState = [];
 

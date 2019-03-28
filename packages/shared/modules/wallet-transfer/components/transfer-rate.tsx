@@ -29,7 +29,7 @@ class TransferRate extends React.Component<
         this.props.sourceCurrency,
         this.props.destinationCurrency
       )
-      .then(rate => this.setState({ rate: parseFloat(rate) }))
+      .then(rate => this.setState({ rate }))
       .catch(() => this.setState({ rate: 0 }));
   };
 

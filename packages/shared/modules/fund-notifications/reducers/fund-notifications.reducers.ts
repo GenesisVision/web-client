@@ -1,12 +1,11 @@
 import { FundNotificationSettingList } from "gv-api-web";
-import { DeepReadonly } from "utility-types";
 
 import {
   ADD_ERROR_MESSAGE,
   ADD_FUND_NOTIFICATIONS
 } from "../actions/fund-notifications.actions";
 
-export type FundNotificationsState = DeepReadonly<{
+export type FundNotificationsState = Readonly<{
   data: { [name: string]: FundNotificationSettingList };
   errorMessage?: string;
 }>;

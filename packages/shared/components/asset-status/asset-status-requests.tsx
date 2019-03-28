@@ -81,7 +81,7 @@ class AssetStatusRequests extends React.Component<
 }
 
 const mapDispatchToProps = (
-  dispatch: MiddlewareDispatch<any>
+  dispatch: MiddlewareDispatch
 ): IAssetStatusRequestsDispatchProps => {
   return {
     service: {

@@ -1,9 +1,8 @@
 import { NotificationSettingList } from "gv-api-web";
-import { DeepReadonly } from "utility-types";
 
 import { ADD_NOTIFICATION_SETTINGS } from "../actions/notification-settings.actions";
 
-export type NotificationSettingsState = DeepReadonly<NotificationSettingList>;
+export type NotificationSettingsState = Readonly<NotificationSettingList>;
 
 const initialState: NotificationSettingsState = {
   settingsGeneral: [],

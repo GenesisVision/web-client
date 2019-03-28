@@ -4,13 +4,12 @@ import { TWO_FACTOR_SET_REQUIREMENT } from "shared/actions/2fa-actions";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/api-reducer/api-reducer";
-import { DeepReadonly } from "utility-types";
 
 const data = {
   twoFactorEnabled: false
 };
 
-export type ITwoFactorReducer = DeepReadonly<IApiState<TwoFactorStatus>>;
+export type ITwoFactorReducer = Readonly<IApiState<TwoFactorStatus>>;
 
 const twoFactorReducer = apiReducerFactory<TwoFactorStatus>(
   {

@@ -71,9 +71,12 @@ class InputImage extends React.Component<InputImageProps> {
     const croppedCanvas = cropper.current && cropper.current.getCroppedCanvas();
     if (!croppedCanvas) return;
     croppedCanvas.toBlob(blob => {
+      if (!blob) return;
       const img = {
         ...value,
-        cropped: { ...blob, name: value.filename },
+        cropped: new File([blob], value.filename || "", {
+          type: blob.type
+        }),
         width: croppedCanvas.width,
         height: croppedCanvas.height,
         size: blob ? blob.size : 0

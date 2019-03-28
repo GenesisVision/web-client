@@ -1,7 +1,6 @@
 import { WINDOW_RESIZE, WINDOW_SCROLL } from "shared/actions/ui-actions";
-import { DeepReadonly } from "utility-types";
 
-export type IUiState = DeepReadonly<{
+export type IUiState = Readonly<{
   innerWidth: number;
   innerHeight: number;
   scrollTop: number;
