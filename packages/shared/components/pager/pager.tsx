@@ -69,9 +69,9 @@ export const _PagerButton: React.FC<IPagerButtonProps> = ({
     {label || page}
   </div>
 );
-const PagerButton = React.memo(_PagerButton);
+export const PagerButton = React.memo(_PagerButton);
 
-const PagerSeparator = (): JSX.Element => (
+export const PagerSeparator = (): JSX.Element => (
   <div className="pager__separator">...</div>
 );
 
