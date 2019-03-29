@@ -9,30 +9,6 @@ import CloseProgramForm, {
   ICloseProgramFormValues
 } from "./close-program-form";
 
-interface OwnProps {
-  open: boolean;
-  onClose(): void;
-  onCancel(): void;
-  onApply(): void;
-  id: string;
-}
-
-interface StateProps {
-  twoFactorEnabled: boolean;
-}
-
-interface DispatchProps {
-  service: {
-    closeProgram(
-      onSuccess: () => void,
-      programId: string,
-      opts?: {
-        twoFactorCode?: string | undefined;
-      }
-    ): Promise<void>;
-  };
-}
-
 class CloseProgramContainer extends React.Component<
   OwnProps & DispatchProps & StateProps
 > {
@@ -80,3 +56,27 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CloseProgramContainer);
+
+interface OwnProps {
+  open: boolean;
+  onClose(): void;
+  onCancel(): void;
+  onApply(): void;
+  id: string;
+}
+
+interface StateProps {
+  twoFactorEnabled: boolean;
+}
+
+interface DispatchProps {
+  service: {
+    closeProgram(
+      onSuccess: () => void,
+      programId: string,
+      opts?: {
+        twoFactorCode?: string | undefined;
+      }
+    ): Promise<void>;
+  };
+}

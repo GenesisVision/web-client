@@ -3,23 +3,11 @@ import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import {
   InjectedTranslateProps,
-  translate,
-  TranslationFunction
+  TranslationFunction,
+  translate
 } from "react-i18next";
 import { compose } from "redux";
 import { object, string } from "yup";
-
-interface OwnProps {
-  onCancel(): void;
-  twoFactorEnabled: boolean;
-  onSubmit(values: ICloseProgramFormValues): void;
-}
-
-export interface ICloseProgramFormValues {
-  twoFactorCode: string;
-}
-
-type FormProps = InjectedTranslateProps & OwnProps;
 
 const CloseProgramForm: React.FC<
   InjectedFormikProps<FormProps, ICloseProgramFormValues>
@@ -90,3 +78,15 @@ export default compose<React.ComponentType<OwnProps>>(
     }
   })
 )(CloseProgramForm);
+
+interface OwnProps {
+  onCancel(): void;
+  twoFactorEnabled: boolean;
+  onSubmit(values: ICloseProgramFormValues): void;
+}
+
+export interface ICloseProgramFormValues {
+  twoFactorCode: string;
+}
+
+type FormProps = InjectedTranslateProps & OwnProps;
