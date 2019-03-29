@@ -2,9 +2,8 @@ import "./deposit.scss";
 
 import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import React, { Fragment } from "react";
-import translate from "react-i18next/src/translate";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import * as WalletServices from "shared/components/wallet/services/wallet.services";
 import { ASSET, ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
@@ -14,30 +13,8 @@ import { DialogLoader } from "../dialog/dialog-loader/dialog-loader";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 
-export type SubmitInfo = {
-  code: any;
-  isPending: boolean;
-  errorMessage: string;
-};
-
-export interface IDepositPopupProps {
-  wallets: WalletData[];
-  id: string;
-  fetchInfo: (id: string, currency: string) => {};
-  info: ProgramInvestInfo;
-  submitInfo: SubmitInfo;
-  currency: string;
-  invest: (amount: string) => {};
-  entryFee: boolean;
-  asset: ASSET;
-  role: ROLE;
-}
-
-export interface IDepositPopupDispatchProps {
-  service: any;
-}
-class DepositPopup extends React.Component<
-  IDepositPopupProps & IDepositPopupDispatchProps
+class _DepositPopup extends React.Component<
+  OwnProps & DispatchProps & StateProps
 > {
   componentDidMount() {
     const { id, fetchInfo, currency, service } = this.props;
@@ -76,27 +53,45 @@ class DepositPopup extends React.Component<
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionType>) => {
-  return {
-    service: bindActionCreators(
-      {
-        ...WalletServices
-      },
-      dispatch
-    )
-  };
-};
-const mapStateToProps = (state: RootState) => ({
-  wallets: state.wallet.info.data ? state.wallet.info.data.wallets : null,
+const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
+  service: bindActionCreators(WalletServices, dispatch)
+});
+const mapStateToProps = (state: RootState): StateProps => ({
+  wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],
   role: state.profileHeader.info.data
-    ? state.profileHeader.info.data.userType
-    : null
+    ? (state.profileHeader.info.data.userType as ROLE)
+    : (process.env.REACT_APP_PLATFORM as ROLE)
 });
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  translate()
-)(DepositPopup);
+const DepositPopup = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_DepositPopup);
+
+export default DepositPopup;
+
+interface SubmitInfo {
+  code: any;
+  isPending: boolean;
+  errorMessage: string;
+}
+
+interface OwnProps {
+  id: string;
+  fetchInfo: (id: string, currency: string) => {};
+  info: ProgramInvestInfo;
+  submitInfo: SubmitInfo;
+  currency: string;
+  invest: (amount: string) => {};
+  entryFee: boolean;
+  asset: ASSET;
+}
+
+interface DispatchProps {
+  service: any;
+}
+
+interface StateProps {
+  wallets: WalletData[];
+  role: ROLE;
+}
