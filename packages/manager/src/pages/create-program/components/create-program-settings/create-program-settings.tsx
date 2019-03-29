@@ -475,12 +475,15 @@ class CreateProgramSettings extends React.Component<
                 </div>
               </div>
             </div>
+            {submitCount > 0 && !isValid && (
+              <FormError
+                error={t(
+                  "manager.create-program-page.notifications.validate-error"
+                )}
+              />
+            )}
           </div>
-          {submitCount > 0 && !isValid && (
-            <div className="deposit-details create-program-settings__fill-block">
-              <FormError error="Fix form errors" />
-            </div>
-          )}
+
           <div className="create-program-settings__navigation">
             <GVButton
               title={t("buttons.create-program")}
