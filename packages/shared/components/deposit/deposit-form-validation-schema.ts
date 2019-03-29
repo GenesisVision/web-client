@@ -1,8 +1,8 @@
 import { InjectedTranslateProps } from "react-i18next";
+import { convertToCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import { lazy, number, object } from "yup";
 
-import { convertToCurrency } from "../../utils/currency-converter";
-import { formatCurrencyValue } from "../../utils/formatter";
 import { FormValues, OwnProps } from "./deposit-form";
 
 export const managerSchema = (params: InjectedTranslateProps & OwnProps) => {
