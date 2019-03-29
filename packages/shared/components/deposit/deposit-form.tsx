@@ -18,7 +18,11 @@ import {
   convertToCurrency
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { lazy, number, object } from "yup";
+
+import {
+  investorSchema,
+  managerSchema
+} from "./deposit-form-validation-schema";
 
 class _DepositForm extends React.Component<
   InjectedFormikProps<OwnProps & InjectedTranslateProps, FormValues>
@@ -269,39 +273,10 @@ const DepositForm = compose<React.FC<OwnProps>>(
       amount: "",
       walletCurrency: "GVT"
     }),
-    validationSchema: (params: InjectedTranslateProps & OwnProps) => {
-      const { info, t, currency, role } = params;
-      return lazy<FormValues>(values => {
-        const maxError = role === ROLE.INVESTOR;
-        return object<FormValues>().shape({
-          rate: number(),
-          maxAmount: number(),
-          amount: number()
-            .required()
-            .min(
-              +formatCurrencyValue(
-                convertToCurrency(info.minInvestmentAmount, values.rate),
-                values.walletCurrency
-              ),
-              t("deposit-asset.validation.amount-min-value", {
-                min: formatCurrencyValue(info.minInvestmentAmount, currency),
-                currency,
-                walletMin: formatCurrencyValue(
-                  convertToCurrency(info.minInvestmentAmount, values.rate),
-                  values.walletCurrency
-                ),
-                walletCurrency: values.walletCurrency
-              })
-            )
-            .max(
-              Math.min(values.availableInWallet, values.availableToInvest),
-              values.availableInWallet < values.availableToInvest
-                ? t("deposit-asset.validation.amount-more-than-available")
-                : t("deposit-asset.validation.amount-exceeds-limit")
-            )
-        });
-      });
-    },
+    validationSchema: (params: OwnProps & InjectedTranslateProps) =>
+      params.role === ROLE.MANAGER
+        ? managerSchema(params)
+        : investorSchema(params),
     handleSubmit: (values, { props }: { props: OwnProps }) => {
       const { walletCurrency, amount } = values;
       props.onSubmit(amount, { currency: walletCurrency });
@@ -311,7 +286,7 @@ const DepositForm = compose<React.FC<OwnProps>>(
 
 export default DepositForm;
 
-interface OwnProps {
+export interface OwnProps {
   wallets: WalletData[];
   role: ROLE;
   asset: ASSET;
