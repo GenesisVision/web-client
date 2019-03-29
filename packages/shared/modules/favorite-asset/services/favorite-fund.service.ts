@@ -1,12 +1,16 @@
 import fundsApi from "shared/services/api-client/funds-api";
 import authService from "shared/services/auth-service";
+import { RootThunk } from "shared/utils/types";
 
 import {
   addFavoriteFund,
   removeFavoriteFund
 } from "../actions/favorite-fund.actions";
 
-export const toggleFavoriteFundDispatchable = (id, isFavorite) => dispatch => {
+export const toggleFavoriteFundDispatchable = (
+  id: string,
+  isFavorite: boolean
+): RootThunk<void> => dispatch => {
   if (!authService.getAuthArg()) return;
 
   const requestData = {
@@ -19,21 +23,21 @@ export const toggleFavoriteFundDispatchable = (id, isFavorite) => dispatch => {
   );
 };
 
-const addFavorite = ({ id, authorization }) => {
+const addFavorite = (id: string, authorization: string) => {
   return fundsApi.v10FundsByIdFavoriteAddPost(id, authorization);
 };
 
-const removeFavorite = ({ id, authorization }) => {
+const removeFavorite = (id: string, authorization: string) => {
   return fundsApi.v10FundsByIdFavoriteRemovePost(id, authorization);
 };
 
-export const toggleFavoriteFund = (id, isFavorite) => {
+export const toggleFavoriteFund = (
+  id: string,
+  isFavorite: boolean
+): Promise<any> => {
   if (!authService.getAuthArg()) return Promise.reject();
 
-  const requestData = {
-    id,
-    authorization: authService.getAuthArg()
-  };
+  const auth = authService.getAuthArg();
 
-  return isFavorite ? removeFavorite(requestData) : addFavorite(requestData);
+  return isFavorite ? removeFavorite(id, auth) : addFavorite(id, auth);
 };

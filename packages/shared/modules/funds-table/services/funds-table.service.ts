@@ -60,7 +60,7 @@ const composeRequestFilters = () => (
 ): ComposeFiltersAllType => {
   let itemsOnPage = DEFAULT_ITEMS_ON_PAGE;
   const existingFilters = dispatch(getFundsFilters());
-  let { page } = existingFilters;
+  let { currentPage } = existingFilters.paging;
 
   const { router } = getState();
   const { currency } = getState().accountSettings;
@@ -76,12 +76,12 @@ const composeRequestFilters = () => (
   if (facetId) {
     filters.facet = facetId;
     itemsOnPage = 100;
-    page = 1;
+    currentPage = 1;
   }
 
   const { skip, take } = calculateSkipAndTake({
-    itemsOnPage: itemsOnPage,
-    currentPage: page
+    itemsOnPage,
+    currentPage
   });
 
   const filtering = composeFilters(
@@ -139,11 +139,9 @@ export const getFundsFilters: GetFundsFiltersType = () => (
   }, {});
 
   return {
-    currentPage,
-    totalPages,
+    paging: { currentPage, totalPages, itemsOnPage: DEFAULT_ITEMS_ON_PAGE },
     sorting,
-    filtering,
-    itemsOnPage: DEFAULT_ITEMS_ON_PAGE
+    filtering
   };
 };
 

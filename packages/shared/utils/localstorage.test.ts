@@ -4,7 +4,7 @@ require("jasmine-check").install();
 declare const check: any;
 declare const gen: any;
 
-describe("test localstorage functions", () => {
+xdescribe("test localstorage functions", () => {
   describe("test saveData and loadData", () => {
     check.it(
       "should be save and load string data",

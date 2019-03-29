@@ -77,7 +77,9 @@ class DashboardRequest extends React.Component<
           />
         </div>
         <StatisticItem
-          className={"dashboard-request-popover__statistic-item"}
+          className={
+            "dashboard-request-popover__statistic-item dashboard-request-popover__statistic-item--title"
+          }
           label={request.title}
           invert
           accent

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import * as React from "react";
 import withUrl from "shared/decorators/with-url";
 
@@ -6,6 +7,7 @@ export interface IImageProps {
   alt: string;
   className?: string;
   imageClassName?: string;
+  defaultImageClassName?: string;
 }
 
 interface IImageBaseProps {
@@ -28,14 +30,24 @@ class ImageBase extends React.Component<
     this.setState({ error: true });
   };
   render() {
-    const { url, alt, defaultImage, className, imageClassName } = this.props;
+    const {
+      url,
+      alt,
+      defaultImage,
+      className,
+      imageClassName,
+      defaultImageClassName
+    } = this.props;
     const currentSrc = this.state.error || !url ? defaultImage : url;
 
     return (
       <div className={className}>
         <img
           alt={alt}
-          className={imageClassName}
+          className={classNames(
+            imageClassName,
+            this.state.error || !url ? defaultImageClassName : ""
+          )}
           src={currentSrc}
           onError={this.handleError}
         />
