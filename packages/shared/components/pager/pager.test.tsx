@@ -25,19 +25,6 @@ describe("Paging tests", () => {
       expect(pager.find(PagerButton)).toHaveLength(5);
       pager.unmount();
     });
-    /*test("should set --current modificator to current PagerButton", () => {
-      const handleClick = jest.fn();
-      const pager = shallow(
-        <Pager total={7} current={0} onPageChanged={handleClick} />
-      );
-      expect(
-        pager
-          .find(PagerButton)
-          .first()
-          .find(".pager__button--current")
-      ).toHaveLength(1);
-      pager.unmount();
-    });*/
     test("should render 1+3 PagerButtons if count >6 and current in start or end", () => {
       const handleClick = jest.fn();
       const pager = shallow(
