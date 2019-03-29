@@ -20,7 +20,9 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
-import InputImage from "shared/components/form/input-image/input-image";
+import InputImage, {
+  InputFileData
+} from "shared/components/form/input-image/input-image";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -31,14 +33,18 @@ import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
+import { Nullable } from "shared/utils/types";
 
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class CreateProgramSettings extends React.Component<
-  InjectedFormikProps<Props, FormValues>
+  InjectedFormikProps<
+    ICreateProgramSettingsProps,
+    ICreateProgramSettingsFormValues
+  >
 > {
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: ICreateProgramSettingsProps) {
     const { validateForm, setFieldValue } = this.props;
     if (prevProps.accountType !== this.props.accountType) {
       setFieldValue("brokerAccountTypeId", this.props.accountType!.id);
@@ -500,7 +506,7 @@ class CreateProgramSettings extends React.Component<
 
 export default compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik<Props, FormValues>({
+  withFormik<ICreateProgramSettingsProps, ICreateProgramSettingsFormValues>({
     displayName: "CreateProgramSettingsForm",
     mapPropsToValues: ({
       wallet,
@@ -549,7 +555,7 @@ interface OwnProps {
   broker: Broker;
   wallets: WalletData[];
   programsInfo: ProgramsInfo;
-  onSubmit(data: any, setSubmitting: any): void;
+  onSubmit(data: ICreateProgramSettingsFormValues, setSubmitting: any): void;
   minimumDepositsAmount: { [key: string]: number };
   navigateBack(): void;
   author: string;
@@ -565,8 +571,10 @@ interface OwnProps {
   changeWallet(id: string): void;
 }
 
-export interface Props extends OwnProps, InjectedTranslateProps {}
-export interface FormValues {
+export interface ICreateProgramSettingsProps
+  extends OwnProps,
+    InjectedTranslateProps {}
+export interface ICreateProgramSettingsFormValues {
   currency?: string;
   periodLength?: number;
   successFee?: number;
@@ -578,15 +586,7 @@ export interface FormValues {
   isSignalProgram: boolean;
   title: string;
   description: string;
-  logo: {
-    cropped?: boolean;
-    src: string;
-    isNew: boolean;
-    isDefault: boolean;
-    width?: number;
-    height?: number;
-    size?: number;
-  };
+  logo: InputFileData;
   entryFee?: number;
   depositAmount?: number;
   depositWalletId: string;

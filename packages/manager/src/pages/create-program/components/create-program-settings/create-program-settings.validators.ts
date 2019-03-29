@@ -3,9 +3,11 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { boolean, mixed, number, object, string } from "yup";
 
-import { Props } from "./create-program-settings";
+import { ICreateProgramSettingsProps } from "./create-program-settings";
 
-const createProgramSettingsValidationSchema = (props: Props) => {
+const createProgramSettingsValidationSchema = (
+  props: ICreateProgramSettingsProps
+) => {
   const { t } = props;
   return object().shape({
     stopOutLevel: number()

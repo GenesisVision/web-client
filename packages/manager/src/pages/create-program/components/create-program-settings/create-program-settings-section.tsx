@@ -6,7 +6,9 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 
-import CreateProgramSettings from "./create-program-settings";
+import CreateProgramSettings, {
+  ICreateProgramSettingsFormValues
+} from "./create-program-settings";
 
 class CreateProgramSettingsSection extends React.Component<
   OwnProps,
@@ -122,7 +124,7 @@ interface OwnProps {
   programsInfo: ProgramsInfo;
   fetchWallets(): void;
   fetchRate(from: string, to: string): Promise<number>;
-  onSubmit(data: any, setSubmitting: any): void;
+  onSubmit(data: ICreateProgramSettingsFormValues, setSubmitting: any): void;
   minimumDepositsAmount: { [key: string]: number };
   navigateBack(): void;
   author: string;

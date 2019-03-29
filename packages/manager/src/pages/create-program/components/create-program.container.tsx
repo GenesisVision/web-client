@@ -176,7 +176,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   };
 };
 
-const CreateProgramContainer = compose<OwnProps>(
+const CreateProgramContainer = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect<StateProps, DispatchProps, OwnProps, ManagerRootState>(
     mapStateToProps,

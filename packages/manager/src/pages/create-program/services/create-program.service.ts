@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { Broker, CancelablePromise } from "gv-api-web";
+import { Broker, CancelablePromise, NewProgramRequest } from "gv-api-web";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -7,6 +7,8 @@ import brokersApi from "shared/services/api-client/brokers-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
+
+import { ICreateProgramSettingsFormValues } from "../components/create-program-settings/create-program-settings";
 
 const GM_BROKER_NAME = "Genesis Markets";
 
@@ -26,25 +28,30 @@ export const fetchMinDepositsAmount = (): CancelablePromise<{
     .then(investmentAmount => investmentAmount.minimumDepositsAmount);
 
 export const createProgram = (
-  createProgramData: any,
+  createProgramData: Pick<
+    ICreateProgramSettingsFormValues,
+    keyof NewProgramRequest
+  >,
   setSubmitting: (isSubmitting: boolean) => void
 ) => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
 
-  let data = createProgramData;
   let promise = Promise.resolve("");
-  if (data.logo.cropped) {
-    promise = filesService.uploadFile(data.logo.cropped, authorization);
+  if (createProgramData.logo.cropped) {
+    promise = filesService.uploadFile(
+      createProgramData.logo.cropped,
+      authorization
+    );
   }
   promise
     .then(response => {
-      data = {
-        ...data,
+      const requestData = <NewProgramRequest>{
+        ...createProgramData,
         logo: response
       };
 
       return managerApi.v10ManagerProgramsCreatePost(authorization, {
-        request: data
+        request: requestData
       });
     })
     .then(() => {

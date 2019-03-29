@@ -34,7 +34,6 @@ const _BrokerCard: React.FC<OwnProps & InjectedTranslateProps> = ({
   };
 
   let isClickable = cardState === BROKER_CARD_STATE.ACTIVE;
-
   return (
     <div
       className={className}
