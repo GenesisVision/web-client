@@ -1,11 +1,7 @@
 import * as React from "react";
 import { shallow } from "enzyme";
-import {
-  _Pager as Pager,
-  _PagerButton as TestedPagerButton,
-  PagerButton,
-  PagerSeparator
-} from "./pager";
+import { _Pager as Pager, PagerSeparator } from "./pager";
+import PagerButton, { _PagerButton as TestedPagerButton } from "./pager-button";
 
 describe("Paging tests", () => {
   describe("Pager tests", () => {

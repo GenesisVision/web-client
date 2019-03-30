@@ -1,7 +1,7 @@
 import "./pager.scss";
 
-import classNames from "classnames";
 import * as React from "react";
+import PagerButton from "./pager-button";
 
 export const _Pager: React.FC<Props> = ({
   total,
@@ -54,23 +54,6 @@ export const _Pager: React.FC<Props> = ({
   );
 };
 
-export const _PagerButton: React.FC<IPagerButtonProps> = ({
-  page,
-  label,
-  current,
-  clickHandle
-}) => (
-  <div
-    className={classNames("pager__button", {
-      "pager__button--current": page === current
-    })}
-    onClick={clickHandle(page)}
-  >
-    {label || page}
-  </div>
-);
-export const PagerButton = React.memo(_PagerButton);
-
 export const PagerSeparator = (): JSX.Element => (
   <div className="pager__separator">...</div>
 );
@@ -86,14 +69,6 @@ interface Props {
   current: number;
   onPageChanged(page: number): void;
   countVisiblePages?: number;
-}
-
-interface IPagerButtonProps {
-  current: number;
-  page: number;
-  label?: string;
-  key?: string | number;
-  clickHandle(page: number): () => void;
 }
 
 const Pager = React.memo(_Pager);
