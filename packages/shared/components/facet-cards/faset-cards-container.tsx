@@ -38,7 +38,12 @@ interface StateProps {
 interface Props {
   title: string;
   composeFacetUrl: composeFacetUrlFunc;
-  assetsFacets: "fundsFacets" | "programsFacets";
+  assetsFacets: ASSETS_FACETS;
+}
+
+export enum ASSETS_FACETS {
+  FUNDS = "fundsFacets",
+  PROGRAMS = "programsFacets"
 }
 
 const FacetCardsContainer = connect(mapStateToProps)(_FacetCardsContainer);
