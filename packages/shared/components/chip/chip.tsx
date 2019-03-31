@@ -8,15 +8,14 @@ export enum CHIP_TYPE {
   NEGATIVE = "negative",
   WARNING = "warning"
 }
-interface IChipProps {
+interface Props {
   disabled?: boolean;
-  // children: () => void | { [keys: string]: any } | JSX.Element;
   className?: string;
   rounded?: boolean;
   type?: CHIP_TYPE;
   onClick?(event: React.MouseEvent<HTMLElement>): void | undefined;
 }
-class Chip extends React.PureComponent<IChipProps> {
+class Chip extends React.PureComponent<Props> {
   handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (typeof this.props.onClick === "function") {
       this.props.onClick(event);
