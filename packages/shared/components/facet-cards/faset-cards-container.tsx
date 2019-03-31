@@ -7,7 +7,9 @@ import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
 import { composeFacetUrlFunc } from "./facet-card";
 
-class FacetCardsContainer extends React.PureComponent<Props & StateProps> {
+export class _FacetCardsContainer extends React.PureComponent<
+  Props & StateProps
+> {
   render() {
     const { isPending, facets, title, composeFacetUrl } = this.props;
     if (!facets.length || isPending) return <FacetCardsStub />;
@@ -39,4 +41,5 @@ interface Props {
   assetsFacets: "fundsFacets" | "programsFacets";
 }
 
-export default connect(mapStateToProps)(FacetCardsContainer);
+const FacetCardsContainer = connect(mapStateToProps)(_FacetCardsContainer);
+export default FacetCardsContainer;
