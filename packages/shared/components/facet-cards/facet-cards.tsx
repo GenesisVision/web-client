@@ -6,13 +6,7 @@ import { RefObject } from "react";
 
 import FacetCard, { composeFacetUrlFunc } from "./facet-card";
 
-interface IFacetCardsProps {
-  facets: Facet[];
-  composeFacetUrl: composeFacetUrlFunc;
-  title: string;
-}
-
-class FacetCards extends React.Component<IFacetCardsProps> {
+class FacetCards extends React.PureComponent<Props> {
   scroll: RefObject<HTMLDivElement> = React.createRef();
   facetList: RefObject<HTMLDivElement> = React.createRef();
 
@@ -64,6 +58,12 @@ class FacetCards extends React.Component<IFacetCardsProps> {
       </div>
     );
   }
+}
+
+interface Props {
+  facets: Facet[];
+  composeFacetUrl: composeFacetUrlFunc;
+  title: string;
 }
 
 export default FacetCards;
