@@ -13,21 +13,21 @@ describe("Chip tests", () => {
     expect(component.find(`.${className}`)).toHaveLength(1);
   });
   test("should set --rounded modificator", () => {
-    const popover = shallow(<Chip rounded>Any</Chip>);
-    expect(popover.find(".chip--rounded")).toHaveLength(1);
+    const component = shallow(<Chip rounded>Any</Chip>);
+    expect(component.find(".chip--rounded")).toHaveLength(1);
   });
   test("should set --disabled modificator", () => {
-    const popover = shallow(<Chip disabled>Any</Chip>);
-    expect(popover.find(".chip--disabled")).toHaveLength(1);
+    const component = shallow(<Chip disabled>Any</Chip>);
+    expect(component.find(".chip--disabled")).toHaveLength(1);
   });
   test("should set --disabled modificator", () => {
     const handleClick = jest.fn();
-    const popover = shallow(<Chip onClick={handleClick}>Any</Chip>);
-    expect(popover.find(".chip--pointer")).toHaveLength(1);
+    const component = shallow(<Chip onClick={handleClick}>Any</Chip>);
+    expect(component.find(".chip--pointer")).toHaveLength(1);
   });
   test("should set type modificator", () => {
     const type = CHIP_TYPE.POSITIVE;
-    const popover = shallow(<Chip type={type}>Any</Chip>);
-    expect(popover.find(`.chip--${type}`)).toHaveLength(1);
+    const component = shallow(<Chip type={type}>Any</Chip>);
+    expect(component.find(`.chip--${type}`)).toHaveLength(1);
   });
 });
