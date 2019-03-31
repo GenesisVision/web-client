@@ -5,6 +5,7 @@ import RootState from "shared/reducers/root-reducer";
 
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
+import { composeFacetUrlFunc } from "./facet-card";
 
 interface IFacetCardsContainerStateProps {
   isPending: boolean;
@@ -13,7 +14,7 @@ interface IFacetCardsContainerStateProps {
 
 interface IFacetCardsContainerProps {
   title: string;
-  composeFacetUrl(url: string): string;
+  composeFacetUrl: composeFacetUrlFunc;
   assetsFacets: "fundsFacets" | "programsFacets";
 }
 

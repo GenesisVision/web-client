@@ -65,4 +65,6 @@ interface State {
   isHovered: boolean;
 }
 
+export type composeFacetUrlFunc = (url: string) => string;
+
 export default FacetCard;

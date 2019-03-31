@@ -8,7 +8,7 @@ import FacetCard from "./facet-card";
 
 interface IFacetCardsProps {
   facets: Facet[];
-  composeFacetUrl(url: string): string;
+  composeFacetUrl: composeFacetUrlFunc;
   title: string;
 }
 
