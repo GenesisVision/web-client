@@ -341,7 +341,8 @@
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart",
-      "strategy": "Strategy"
+      "strategy": "Strategy",
+      "favourite": ""
     }
   },
   "funds-page": {
@@ -358,7 +359,8 @@
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart",
-      "value": "Value"
+      "value": "Value",
+      "favourite": ""
     }
   },
   "about-levels-page": {

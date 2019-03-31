@@ -1,13 +1,12 @@
 import {
+  DEFAULT_DATE_RANGE_FILTER_VALUE,
+  DateRangeFilterTypes
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
   composeDefaultDateRangeFilter,
   composeRequestValueFunc,
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-
-import {
-  DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes
-} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 
 export const DATE_RANGE_FILTER_NAME = "dateRange";
@@ -58,6 +57,9 @@ export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
   },
   {
     name: "chart"
+  },
+  {
+    name: "favourite"
   }
 ];
 
