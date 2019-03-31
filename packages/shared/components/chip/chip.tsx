@@ -16,7 +16,7 @@ interface IChipProps {
   type?: CHIP_TYPE;
   onClick?(event: React.MouseEvent<HTMLElement>): void | undefined;
 }
-class Chip extends React.Component<IChipProps> {
+class Chip extends React.PureComponent<IChipProps> {
   handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (typeof this.props.onClick === "function") {
       this.props.onClick(event);
