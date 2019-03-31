@@ -4,7 +4,7 @@ import { Facet } from "gv-api-web";
 import * as React from "react";
 import { RefObject } from "react";
 
-import FacetCard from "./facet-card";
+import FacetCard, { composeFacetUrlFunc } from "./facet-card";
 
 interface IFacetCardsProps {
   facets: Facet[];
