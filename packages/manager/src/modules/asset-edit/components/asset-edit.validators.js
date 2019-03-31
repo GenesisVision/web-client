@@ -12,7 +12,7 @@ const editAssetSettingsValidationSchema = ({ t, ...props }) =>
         t("manager.create-program-page.settings.validation.stop-out-less-ten")
       )
       .max(
-        props.info.stopOutLevel,
+        props.info.stopOutLevel || 100,
         t(
           "manager.create-program-page.settings.validation.stop-out-more-current"
         )
