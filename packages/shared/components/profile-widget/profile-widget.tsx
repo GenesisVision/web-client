@@ -17,7 +17,6 @@ import {
   SETTINGS_ROUTE
 } from "shared/components/profile/profile.constants";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
-import { Nullable } from "shared/utils/types";
 
 interface IProfileWidgetProps {
   avatar?: string;
@@ -26,7 +25,7 @@ interface IProfileWidgetProps {
   className?: string;
 }
 interface IProfileWidgetState {
-  anchor: Nullable<EventTarget>;
+  anchor?: EventTarget;
 }
 
 class ProfileWidget extends React.Component<
@@ -34,13 +33,13 @@ class ProfileWidget extends React.Component<
   IProfileWidgetState
 > {
   state = {
-    anchor: null
+    anchor: undefined
   };
 
   handleOpen = (event: React.MouseEvent<HTMLDivElement>): void =>
     this.setState({ anchor: event.currentTarget });
 
-  handleClose = (): void => this.setState({ anchor: null });
+  handleClose = (): void => this.setState({ anchor: undefined });
 
   render() {
     const { t, avatar, email = "", logout, className } = this.props;

@@ -11,7 +11,6 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import { Nullable } from "shared/utils/types";
 
 interface IWalletWidgetProps {
   available: number;
@@ -23,7 +22,7 @@ interface IWalletWidgetProps {
 }
 
 interface IWalletWidgetState {
-  anchorEl: Nullable<EventTarget>;
+  anchorEl?: EventTarget;
   isOpenAddFundsPopup: boolean;
 }
 
@@ -32,14 +31,14 @@ class WalletWidget extends React.Component<
   IWalletWidgetState
 > {
   state = {
-    anchorEl: null,
+    anchorEl: undefined,
     isOpenAddFundsPopup: false
   };
   handleOpenDetails = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     this.setState({ anchorEl: event.currentTarget });
   };
   handleCloseDetails = () => {
-    this.setState({ anchorEl: null });
+    this.setState({ anchorEl: undefined });
   };
   handleOpenAddFundsPopup = () => {
     this.setState({ isOpenAddFundsPopup: true });

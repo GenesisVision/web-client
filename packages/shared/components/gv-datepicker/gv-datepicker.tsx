@@ -9,7 +9,6 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import { Nullable } from "shared/utils/types";
 
 export const DATE_FORMAT = "ll";
 
@@ -41,7 +40,7 @@ interface IGVDatePickerProps {
 }
 
 interface IGVDatePickerState {
-  anchorEl: Nullable<EventTarget>;
+  anchorEl?: EventTarget;
 }
 
 class GVDatePicker extends React.Component<
@@ -49,7 +48,7 @@ class GVDatePicker extends React.Component<
   IGVDatePickerState
 > {
   state = {
-    anchorEl: null
+    anchorEl: undefined
   };
 
   input: RefObject<HTMLButtonElement> = React.createRef();
@@ -85,7 +84,7 @@ class GVDatePicker extends React.Component<
   };
 
   handleClose = (): void => {
-    this.setState({ anchorEl: null }, this.handleBlur);
+    this.setState({ anchorEl: undefined }, this.handleBlur);
   };
 
   handleFocus = (

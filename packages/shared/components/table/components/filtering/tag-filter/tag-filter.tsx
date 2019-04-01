@@ -6,7 +6,6 @@ import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
-import { Nullable } from "shared/utils/types";
 
 import { TFilter } from "../filter.type";
 import TagFilterButton from "./tag-filter-button";
@@ -14,7 +13,7 @@ import TagFilterPopover from "./tag-filter-popover";
 import { TAG_NAME_TYPE } from "./tag-filter.constants";
 
 interface ITagFilterState {
-  anchor: Nullable<EventTarget>;
+  anchor?: EventTarget;
 }
 
 export interface ITagFilterProps {
@@ -26,7 +25,7 @@ export interface ITagFilterProps {
 
 class TagFilter extends React.PureComponent<ITagFilterProps, ITagFilterState> {
   state = {
-    anchor: null
+    anchor: undefined
   };
   constructor(props: ITagFilterProps) {
     super(props);
@@ -41,7 +40,7 @@ class TagFilter extends React.PureComponent<ITagFilterProps, ITagFilterState> {
   handleOpenPopover = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => this.setState({ anchor: event.currentTarget });
-  handleClosePopover = (): void => this.setState({ anchor: null });
+  handleClosePopover = (): void => this.setState({ anchor: undefined });
   handleChangeFilter = (value: ProgramTag[]): void => {
     this.handleClosePopover();
     this.props.onChange({

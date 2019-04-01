@@ -6,7 +6,6 @@ import { RefObject } from "react";
 import { connect } from "react-redux";
 import Modal from "shared/components/modal/modal";
 import RootState from "shared/reducers/root-reducer";
-import { Nullable } from "shared/utils/types";
 
 const MARGIN_OFFSET = 10;
 
