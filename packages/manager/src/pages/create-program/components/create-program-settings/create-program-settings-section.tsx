@@ -95,6 +95,7 @@ class CreateProgramSettingsSection extends React.Component<
 
     return (
       <CreateProgramSettings
+        notifyError={this.props.notifyError}
         navigateBack={this.props.navigateBack}
         onSubmit={this.props.onSubmit}
         minimumDepositsAmount={this.props.minimumDepositsAmount}
@@ -128,6 +129,7 @@ interface OwnProps {
   minimumDepositsAmount: { [key: string]: number };
   navigateBack(): void;
   author: string;
+  notifyError(message: string): void;
 }
 
 interface StateProps {

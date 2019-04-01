@@ -33,7 +33,6 @@ import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
-import { Nullable } from "shared/utils/types";
 
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
@@ -80,6 +79,19 @@ class CreateProgramSettings extends React.Component<
     setFieldValue("depositAmount", formatCurrencyValue(available, currency));
   };
 
+  validateAndSubmit = (
+    e?: React.FormEvent<HTMLFormElement> | undefined
+  ): void => {
+    const { t, isValid, handleSubmit, notifyError } = this.props;
+    handleSubmit(e);
+    if (!isValid) {
+      notifyError(
+        t("manager.create-program-page.notifications.validate-error")
+      );
+      if (e) e.preventDefault();
+    }
+  };
+
   render() {
     const {
       minimumDepositsAmount,
@@ -89,9 +101,6 @@ class CreateProgramSettings extends React.Component<
       broker,
       author,
       isSubmitting,
-      submitCount,
-      isValid,
-      handleSubmit,
       values,
       setFieldValue,
       programsInfo,
@@ -113,7 +122,10 @@ class CreateProgramSettings extends React.Component<
 
     return (
       <div className="create-program-settings">
-        <form className="create-program-settings__form" onSubmit={handleSubmit}>
+        <form
+          className="create-program-settings__form"
+          onSubmit={this.validateAndSubmit}
+        >
           <div className="create-program-settings__subheading">
             <span className="create-program-settings__block-number">01</span>
             {t("manager.create-program-page.settings.main-settings")}
@@ -475,13 +487,6 @@ class CreateProgramSettings extends React.Component<
                 </div>
               </div>
             </div>
-            {submitCount > 0 && !isValid && (
-              <FormError
-                error={t(
-                  "manager.create-program-page.notifications.validate-error"
-                )}
-              />
-            )}
           </div>
 
           <div className="create-program-settings__navigation">
@@ -562,7 +567,7 @@ interface OwnProps {
   minimumDepositsAmount: { [key: string]: number };
   navigateBack(): void;
   author: string;
-
+  notifyError(message: string): void;
   programCurrency?: string;
   changeCurrency(currency: string): void;
   leverage?: number;

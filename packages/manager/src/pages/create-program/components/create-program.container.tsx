@@ -13,6 +13,7 @@ import { ManagerRootState } from "reducers";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
 
 import {
@@ -132,6 +133,7 @@ class _CreateProgramContainer extends React.Component<Props, State> {
                 navigateBack={this.navigateToBroker}
                 broker={selectedBroker}
                 onSubmit={service.createProgram}
+                notifyError={service.notifyError}
                 author={headerData.name}
                 programsInfo={programsInfo}
               />
@@ -169,7 +171,8 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
     service: bindActionCreators(
       {
         createProgram,
-        fetchWallets
+        fetchWallets,
+        notifyError: alertMessageActions.error
       },
       dispatch
     )
@@ -206,6 +209,7 @@ interface DispatchProps {
   service: {
     fetchWallets(): void;
     createProgram(data: any, setSubmitting: any): void;
+    notifyError(message: string): void;
   };
 }
 
