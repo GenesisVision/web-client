@@ -24,7 +24,7 @@ import {
   managerSchema
 } from "./deposit-form-validation-schema";
 
-class _DepositForm extends React.Component<
+class _DepositForm extends React.PureComponent<
   InjectedFormikProps<OwnProps & InjectedTranslateProps, FormValues>
 > {
   componentDidMount(): void {

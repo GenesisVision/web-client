@@ -13,7 +13,7 @@ import { DialogLoader } from "../dialog/dialog-loader/dialog-loader";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 
-class _DepositPopup extends React.Component<
+class _DepositPopup extends React.PureComponent<
   OwnProps & DispatchProps & StateProps
 > {
   componentDidMount() {
