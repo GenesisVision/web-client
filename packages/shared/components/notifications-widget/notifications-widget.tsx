@@ -5,7 +5,7 @@ import * as React from "react";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { RingIcon } from "shared/components/icon/ring-icon";
 
-const NotificationsWidget: React.FC<OwnProps> = ({
+const NotificationsWidget: React.FC<Props> = ({
   openNotifications,
   notificationsCount = 0
 }) => {
@@ -28,7 +28,7 @@ const NotificationsWidget: React.FC<OwnProps> = ({
   );
 };
 
-interface OwnProps {
+interface Props {
   openNotifications(): void;
   notificationsCount: number;
 }
