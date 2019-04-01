@@ -3,8 +3,9 @@ import * as React from "react";
 import { Provider } from "react-redux";
 import configureStore, { MockStoreEnhanced } from "redux-mock-store";
 
-import Select, { SelectChangeEvent } from "./select";
+import Select from "./select";
 import SelectItem from "./select-item";
+import SelectTestParent from "./select.test-helpers";
 
 const initialState = {
   ui: { scrollTop: 0 }
@@ -25,7 +26,7 @@ describe("Select tests", () => {
   afterEach(() => {
     component.unmount();
   });
-  it("should render select", () => {
+  test("should render select", () => {
     component = mount(
       <Provider store={store}>
         <Select value={children[1]} name="test" onChange={jest.fn()}>
@@ -42,7 +43,7 @@ describe("Select tests", () => {
     expect(document.querySelector("#modal-root")!.hasChildNodes()).toBeFalsy();
   });
 
-  it("should open popover", () => {
+  test("should open popover", () => {
     component = mount(
       <Provider store={store}>
         <Select value={children[1]} name="test" onChange={jest.fn()}>
@@ -61,10 +62,10 @@ describe("Select tests", () => {
     expect(document.querySelector("#modal-root")!.hasChildNodes()).toBeTruthy();
   });
 
-  it("should select new value", () => {
+  test("should select new value", () => {
     component = mount(
       <Provider store={store}>
-        <Parent value={children[1]}>
+        <SelectTestParent value={children[1]}>
           {({ test, handleChange }) => (
             <Select value={test} name="test" onChange={handleChange}>
               {children.map(child => (
@@ -74,7 +75,7 @@ describe("Select tests", () => {
               ))}
             </Select>
           )}
-        </Parent>
+        </SelectTestParent>
       </Provider>
     );
     expect(component.find(".select__text").text()).toBe(children[1]);
@@ -86,10 +87,10 @@ describe("Select tests", () => {
     expect(component.find(".select__text").text()).toBe(children[0]);
   });
 
-  it("should be disabled", () => {
+  test("should be disabled", () => {
     component = mount(
       <Provider store={store}>
-        <Parent value={children[1]}>
+        <SelectTestParent value={children[1]}>
           {({ test, handleChange }) => (
             <Select value={test} name="test" onChange={handleChange} disabled>
               {children.map(child => (
@@ -99,7 +100,7 @@ describe("Select tests", () => {
               ))}
             </Select>
           )}
-        </Parent>
+        </SelectTestParent>
       </Provider>
     );
     expect(component.find(".select__text").text()).toBe(children[1]);
@@ -108,28 +109,3 @@ describe("Select tests", () => {
     expect(document.querySelector("#modal-root")!.hasChildNodes()).toBeFalsy();
   });
 });
-
-interface InjectedProps {
-  test: string;
-  handleChange(props: SelectChangeEvent): void;
-}
-
-interface Props {
-  value: string;
-  children(props: InjectedProps): JSX.Element;
-}
-
-class Parent extends React.Component<Props, any> {
-  state = {
-    test: this.props.value
-  };
-  handleChange = (event: SelectChangeEvent) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-  render() {
-    return this.props!.children({
-      test: this.state.test,
-      handleChange: this.handleChange
-    });
-  }
-}
