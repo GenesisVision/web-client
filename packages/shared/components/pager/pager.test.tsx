@@ -1,37 +1,33 @@
 import * as React from "react";
 import { shallow } from "enzyme";
-import {
-  _Pager as Pager,
-  _PagerButton as TestedPagerButton,
-  PagerButton,
-  PagerSeparator
-} from "./pager";
+import { _Pager as Pager, PagerSeparator } from "./pager";
+import PagerButton, { _PagerButton as TestedPagerButton } from "./pager-button";
 
 describe("Paging tests", () => {
   describe("Pager tests", () => {
     test("should render pager", () => {
       const handleClick = jest.fn();
-      const pager = shallow(
+      const component = shallow(
         <Pager total={6} current={1} onPageChanged={handleClick} />
       );
-      expect(pager.find(".pager")).toHaveLength(1);
-      pager.unmount();
+      expect(component.find(".pager")).toHaveLength(1);
+      component.unmount();
     });
     test("should render 1+3+1 PagerButtons if count >6 and current in middle", () => {
       const handleClick = jest.fn();
-      const pager = shallow(
+      const component = shallow(
         <Pager total={7} current={4} onPageChanged={handleClick} />
       );
-      expect(pager.find(PagerButton)).toHaveLength(5);
-      pager.unmount();
+      expect(component.find(PagerButton)).toHaveLength(5);
+      component.unmount();
     });
     test("should render 1+3 PagerButtons if count >6 and current in start or end", () => {
       const handleClick = jest.fn();
-      const pager = shallow(
+      const component = shallow(
         <Pager total={7} current={1} onPageChanged={handleClick} />
       );
-      expect(pager.find(PagerButton)).toHaveLength(4);
-      pager.unmount();
+      expect(component.find(PagerButton)).toHaveLength(4);
+      component.unmount();
       const pager2 = shallow(
         <Pager total={7} current={7} onPageChanged={handleClick} />
       );
@@ -42,29 +38,29 @@ describe("Paging tests", () => {
       let total = 1;
       const handleClick = jest.fn();
       for (; total < 5; total++) {
-        const pager = shallow(
+        const component = shallow(
           <Pager total={total} current={1} onPageChanged={handleClick} />
         );
-        expect(pager.find(PagerButton)).toHaveLength(total);
-        pager.unmount();
+        expect(component.find(PagerButton)).toHaveLength(total);
+        component.unmount();
       }
     });
     test("should for total count >= 5 render PagerSeparator", () => {
       let total = 5;
       const handleClick = jest.fn();
       for (; total < 10; total++) {
-        const pager = shallow(
+        const component = shallow(
           <Pager total={total} current={1} onPageChanged={handleClick} />
         );
-        expect(pager.find(PagerSeparator)).toHaveLength(1);
-        pager.unmount();
+        expect(component.find(PagerSeparator)).toHaveLength(1);
+        component.unmount();
       }
     });
   });
   describe("PagerButton tests", () => {
     test("should render PagerButton", () => {
       const handleClick = jest.fn();
-      const pagerButton = shallow(
+      const component = shallow(
         <TestedPagerButton
           page={1}
           label={"1"}
@@ -72,12 +68,12 @@ describe("Paging tests", () => {
           clickHandle={handleClick}
         />
       );
-      expect(pagerButton.find(".pager__button")).toHaveLength(1);
-      pagerButton.unmount();
+      expect(component.find(".pager__button")).toHaveLength(1);
+      component.unmount();
     });
     test("should set --current modificator", () => {
       const handleClick = jest.fn();
-      const pagerButton = shallow(
+      const component = shallow(
         <TestedPagerButton
           page={1}
           label={"1"}
@@ -85,12 +81,12 @@ describe("Paging tests", () => {
           clickHandle={handleClick}
         />
       );
-      expect(pagerButton.find(".pager__button--current")).toHaveLength(1);
-      pagerButton.unmount();
+      expect(component.find(".pager__button--current")).toHaveLength(1);
+      component.unmount();
     });
     test("should call click event", () => {
       const handleClick = jest.fn();
-      const pagerButton = shallow(
+      const component = shallow(
         <TestedPagerButton
           page={1}
           label={"1"}
@@ -98,9 +94,9 @@ describe("Paging tests", () => {
           clickHandle={handleClick}
         />
       );
-      pagerButton.simulate("click");
+      component.simulate("click");
       expect(handleClick).toBeCalled();
-      pagerButton.unmount();
+      component.unmount();
     });
   });
 });

@@ -5,20 +5,10 @@ import RootState from "shared/reducers/root-reducer";
 
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
+import { composeFacetUrlFunc } from "./facet-card";
 
-interface IFacetCardsContainerStateProps {
-  isPending: boolean;
-  facets: Facet[];
-}
-
-interface IFacetCardsContainerProps {
-  title: string;
-  composeFacetUrl(url: string): string;
-  assetsFacets: "fundsFacets" | "programsFacets";
-}
-
-class FacetCardsContainer extends React.Component<
-  IFacetCardsContainerProps & IFacetCardsContainerStateProps
+export class _FacetCardsContainer extends React.PureComponent<
+  Props & StateProps
 > {
   render() {
     const { isPending, facets, title, composeFacetUrl } = this.props;
@@ -33,14 +23,28 @@ class FacetCardsContainer extends React.Component<
   }
 }
 
-const mapStateToProps = (
-  state: RootState,
-  props: IFacetCardsContainerProps
-): IFacetCardsContainerStateProps => {
+const mapStateToProps = (state: RootState, props: Props): StateProps => {
   const { isPending, data } = state.platformData;
   let facets: Facet[] = [];
   if (data) facets = data[props.assetsFacets];
   return { isPending, facets };
 };
 
-export default connect(mapStateToProps)(FacetCardsContainer);
+interface StateProps {
+  isPending: boolean;
+  facets: Facet[];
+}
+
+interface Props {
+  title: string;
+  composeFacetUrl: composeFacetUrlFunc;
+  assetsFacets: ASSETS_FACETS;
+}
+
+export enum ASSETS_FACETS {
+  FUNDS = "fundsFacets",
+  PROGRAMS = "programsFacets"
+}
+
+const FacetCardsContainer = connect(mapStateToProps)(_FacetCardsContainer);
+export default FacetCardsContainer;
