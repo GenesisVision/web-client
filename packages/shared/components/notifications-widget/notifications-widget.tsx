@@ -5,12 +5,7 @@ import * as React from "react";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { RingIcon } from "shared/components/icon/ring-icon";
 
-interface INorificationsWidgetProps {
-  openNotifications(): void;
-  notificationsCount: number;
-}
-
-const NorificationsWidget: React.FC<INorificationsWidgetProps> = ({
+const NotificationsWidget: React.FC<Props> = ({
   openNotifications,
   notificationsCount = 0
 }) => {
@@ -33,4 +28,9 @@ const NorificationsWidget: React.FC<INorificationsWidgetProps> = ({
   );
 };
 
-export default NorificationsWidget;
+interface Props {
+  openNotifications(): void;
+  notificationsCount: number;
+}
+
+export default NotificationsWidget;
