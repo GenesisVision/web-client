@@ -6,7 +6,6 @@ import {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import { Nullable } from "shared/utils/types";
 
 interface ITooltipProps {
   component?: JSX.Element;
@@ -16,20 +15,20 @@ interface ITooltipProps {
   vertical?: VERTICAL_POPOVER_POS;
 }
 interface ITooltipState {
-  anchor: Nullable<EventTarget>;
+  anchor?: EventTarget;
 }
 
 class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
-  constructor(props: ITooltipProps) {
-    super(props);
-    this.state = { anchor: null };
-  }
-  handleMouseEnter = (event: MouseEvent): void => {
+  state = { anchor: undefined };
+
+  handleMouseEnter = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>
+  ): void => {
     this.setState({ anchor: event.currentTarget });
   };
 
   handleMouseLeave = (): void => {
-    this.setState({ anchor: null });
+    this.setState({ anchor: undefined });
   };
 
   render() {

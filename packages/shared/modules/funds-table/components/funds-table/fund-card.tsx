@@ -27,7 +27,6 @@ import {
   formatValue,
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
-import { Nullable } from "shared/utils/types";
 
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
@@ -39,7 +38,7 @@ interface IFundCardProps {
 }
 
 interface IFundCardState {
-  anchor: Nullable<EventTarget>;
+  anchor?: EventTarget;
 }
 
 class FundCard extends React.PureComponent<
@@ -47,12 +46,12 @@ class FundCard extends React.PureComponent<
   IFundCardState
 > {
   state = {
-    anchor: null
+    anchor: undefined
   };
   handleOpenDropdown = (
     event: React.MouseEvent<HTMLSpanElement, MouseEvent>
   ): void => this.setState({ anchor: event.currentTarget });
-  handleCloseDropdown = () => this.setState({ anchor: null });
+  handleCloseDropdown = () => this.setState({ anchor: undefined });
   render() {
     const { t, fund, toggleFavorite, title } = this.props;
     const handleToggleFavorite = () => {
