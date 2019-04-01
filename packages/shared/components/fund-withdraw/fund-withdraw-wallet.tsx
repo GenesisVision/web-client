@@ -2,7 +2,7 @@ import { WalletData } from "gv-api-web";
 import React, { Component } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
-import Select, { SelectChangeEvent } from "shared/components/select/select";
+import Select, { ISelectChangeEvent } from "shared/components/select/select";
 
 interface IFundWithdrawWalletProps {
   wallets: WalletData[];
@@ -13,7 +13,7 @@ interface IFundWithdrawWalletProps {
 class FundWithdrawWallet extends Component<
   IFundWithdrawWalletProps & InjectedTranslateProps
 > {
-  handleChange = (event: SelectChangeEvent) => {
+  handleChange = (event: ISelectChangeEvent) => {
     this.props.onChange(event.target.value);
   };
   render() {

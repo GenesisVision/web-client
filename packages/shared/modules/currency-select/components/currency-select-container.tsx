@@ -4,7 +4,7 @@ import classNames from "classnames";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
-import { SelectChangeEvent } from "shared/components/select/select";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import RootState from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 
@@ -35,7 +35,7 @@ class CurrencySelectContainer extends React.Component<
     ICurrencySelectContainerStateProps &
     ICurrencySelectContainerDispatchProps
 > {
-  handleChange = (event: SelectChangeEvent) => {
+  handleChange = (event: ISelectChangeEvent) => {
     this.props.service.updateCurrency(event.target.value);
   };
   render() {

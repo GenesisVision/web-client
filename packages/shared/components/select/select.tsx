@@ -45,7 +45,7 @@ class Select extends React.PureComponent<Props, State> {
     const { value } = child.props;
     if (!isSelected) {
       event.persist();
-      const ChangeEvent: SelectChangeEvent = {
+      const ChangeEvent: ISelectChangeEvent = {
         target: { value, name }
       };
       if (onChange) {
@@ -82,7 +82,7 @@ class Select extends React.PureComponent<Props, State> {
     const children = this.props.children;
     const child = children[0];
     if (child && children.length === 1) {
-      const event: SelectChangeEvent = {
+      const event: ISelectChangeEvent = {
         target: { value: child.props.value, name }
       };
       onChange(event, child);
@@ -147,7 +147,7 @@ class Select extends React.PureComponent<Props, State> {
 
 export default Select;
 
-export interface SelectChangeEvent {
+export interface ISelectChangeEvent {
   target: { value: string; name: string };
 }
 
@@ -166,7 +166,7 @@ interface Props {
   fullWidthPopover?: boolean;
   disabled?: boolean;
   children: SelectChild[];
-  onChange(event: SelectChangeEvent, child: JSX.Element): void;
+  onChange(event: ISelectChangeEvent, child: JSX.Element): void;
   onFocus?(event: React.FocusEvent<HTMLButtonElement>): void;
   onBlur?(event: React.FocusEvent<HTMLButtonElement>): void;
 }

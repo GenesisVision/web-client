@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { SelectChangeEvent } from "./select";
+import { ISelectChangeEvent } from "./select";
 
 interface InjectedProps {
   test: string;
-  handleChange(props: SelectChangeEvent): void;
+  handleChange(props: ISelectChangeEvent): void;
 }
 
 interface Props {
@@ -16,7 +16,7 @@ export default class SelectTestParent extends React.Component<Props, any> {
   state = {
     test: this.props.value
   };
-  handleChange = (event: SelectChangeEvent) => {
+  handleChange = (event: ISelectChangeEvent) => {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {
