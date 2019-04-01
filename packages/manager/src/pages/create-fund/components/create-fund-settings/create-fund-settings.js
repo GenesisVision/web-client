@@ -126,11 +126,15 @@ class CreateFundSettings extends React.Component {
     this.setState({ anchor: event.currentTarget });
   };
   handleCloseDropdown = () => this.setState({ anchor: null });
+  setMaxAmount = (available, currency) => () => {
+    const { setFieldValue } = this.props;
+    setFieldValue("depositAmount", formatCurrencyValue(available, currency));
+  };
   render() {
     const { anchor, assets, remainder, rate } = this.state;
     const {
       currency,
-      wallets = [],
+      wallets,
       t,
       navigateBack,
       author,
@@ -145,6 +149,7 @@ class CreateFundSettings extends React.Component {
       setSubmitting,
       isValid
     } = this.props;
+    if (!wallets) return;
     const { depositWalletCurrency, depositAmount, description, title } = values;
 
     const imageInputError =
@@ -385,6 +390,10 @@ class CreateFundSettings extends React.Component {
                 name="depositAmount"
                 label={t("wallet-transfer.amount")}
                 currency={depositWalletCurrency}
+                setMax={this.setMaxAmount(
+                  selectedWallet.available,
+                  selectedWallet.currency
+                )}
               />
               {currency !== depositWalletCurrency && (
                 <div className="invest-popup__currency">

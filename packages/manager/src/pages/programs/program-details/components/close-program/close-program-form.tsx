@@ -1,19 +1,17 @@
-import { withFormik } from "formik";
+import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import PropTypes from "prop-types";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import {
+  InjectedTranslateProps,
+  TranslationFunction,
+  translate
+} from "react-i18next";
 import { compose } from "redux";
 import { object, string } from "yup";
 
-const CloseProgramForm = ({
-  t,
-  onCancel,
-  twoFactorEnabled,
-  handleSubmit,
-  isSubmitting,
-  errorMessage
-}) => {
+const CloseProgramForm: React.FC<
+  InjectedFormikProps<FormProps, ICloseProgramFormValues>
+> = ({ t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => {
   return (
     <form id="closeProgramForm" onSubmit={handleSubmit} noValidate>
       <div className="dialog__top">
@@ -32,7 +30,6 @@ const CloseProgramForm = ({
             component={GVTextField}
           />
         )}
-        {errorMessage && <div className="form-error">{errorMessage}</div>}
         <div className="dialog__buttons">
           <GVButton type="submit" disabled={isSubmitting}>
             {t("buttons.confirm")}
@@ -51,13 +48,10 @@ const CloseProgramForm = ({
   );
 };
 
-CloseProgramForm.propTypes = {
-  errorMessage: PropTypes.string,
-  onSubmit: PropTypes.func,
-  onCancel: PropTypes.func
-};
-
-const twoFactorvalidator = (t, twoFactorEnabled) => {
+const twoFactorvalidator = (
+  t: TranslationFunction,
+  twoFactorEnabled: boolean
+) => {
   return twoFactorEnabled
     ? string()
         .trim()
@@ -68,19 +62,31 @@ const twoFactorvalidator = (t, twoFactorEnabled) => {
         .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 };
 
-export default compose(
+export default compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik({
+  withFormik<OwnProps, ICloseProgramFormValues>({
     displayName: "close-program",
-    mapPropsToValues: props => {
+    mapPropsToValues: () => {
       return { twoFactorCode: "" };
     },
-    validationSchema: ({ t, twoFactorEnabled }) =>
+    validationSchema: ({ t, twoFactorEnabled }: FormProps) =>
       object().shape({
         twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
       }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
+    handleSubmit: (values, { props }) => {
+      props.onSubmit(values);
     }
   })
 )(CloseProgramForm);
+
+interface OwnProps {
+  onCancel(): void;
+  twoFactorEnabled: boolean;
+  onSubmit(values: ICloseProgramFormValues): void;
+}
+
+export interface ICloseProgramFormValues {
+  twoFactorCode: string;
+}
+
+type FormProps = InjectedTranslateProps & OwnProps;

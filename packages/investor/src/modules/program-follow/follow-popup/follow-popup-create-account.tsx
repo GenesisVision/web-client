@@ -71,8 +71,9 @@ class FollowCreateAccount extends React.Component<
         currency,
         initialDepositCurrency || values.initialDepositCurrency
       )
-      .then((rate: string) => {
-        if (rate !== this.state.rate) this.setState({ rate });
+      .then((rate: number) => {
+        if (rate.toString() !== this.state.rate)
+          this.setState({ rate: rate.toString() });
       });
   };
   handleNext = () => {

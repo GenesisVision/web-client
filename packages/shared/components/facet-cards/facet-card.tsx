@@ -7,17 +7,7 @@ import Surface from "shared/components/surface/surface";
 
 import facetImg from "./facet.png";
 
-interface IFacetCardProps {
-  title: string;
-  facet: Facet;
-  composeFacetUrl(url: string): string;
-}
-
-interface IFacetCardState {
-  isHovered: boolean;
-}
-
-class FacetCard extends React.Component<IFacetCardProps, IFacetCardState> {
+class FacetCard extends React.PureComponent<Props, State> {
   state = {
     isHovered: false
   };
@@ -64,5 +54,17 @@ class FacetCard extends React.Component<IFacetCardProps, IFacetCardState> {
     );
   }
 }
+
+interface Props {
+  title: string;
+  facet: Facet;
+  composeFacetUrl: composeFacetUrlFunc;
+}
+
+interface State {
+  isHovered: boolean;
+}
+
+export type composeFacetUrlFunc = (url: string) => string;
 
 export default FacetCard;

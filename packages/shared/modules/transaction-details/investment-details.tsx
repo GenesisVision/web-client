@@ -4,7 +4,9 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import TransactionAsset from "shared/modules/transaction-details/details-asset";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+
+const DECIMAL_SCALE = 8;
 
 const InvestingTransaction = (props: TransactionDetailsProps) => {
   const { data, t } = props;
@@ -33,24 +35,26 @@ const InvestingTransaction = (props: TransactionDetailsProps) => {
       </div>
       <div className="dialog__bottom">
         <StatisticItem label={t(`transactions-details.entry-fee`)}>
-          {data.programDetails.entryFeePercent} %
           <NumberFormat
-            value={formatCurrencyValue(
-              data.programDetails.entryFee,
-              data.currency
-            )}
+            value={data.programDetails.entryFeePercent}
+            suffix="%"
+            displayType="text"
+          />
+          <NumberFormat
+            value={formatValue(data.programDetails.entryFee, DECIMAL_SCALE)}
             prefix={" ("}
             suffix={` ${data.currency})`}
             displayType="text"
           />
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.gv-fee`)}>
-          {data.gvCommissionPercent} %
           <NumberFormat
-            value={formatCurrencyValue(
-              data.gvCommission,
-              data.gvCommissionCurrency
-            )}
+            value={data.gvCommissionPercent}
+            suffix="%"
+            displayType="text"
+          />
+          <NumberFormat
+            value={formatValue(data.gvCommission, DECIMAL_SCALE)}
             prefix={" ("}
             suffix={
               data.gvCommissionCurrency ? ` ${data.gvCommissionCurrency})` : ")"
@@ -64,7 +68,11 @@ const InvestingTransaction = (props: TransactionDetailsProps) => {
           </div>
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.investment.amount`)} big>
-          {formatCurrencyValue(data.amount, data.currency)} {data.currency}
+          <NumberFormat
+            value={formatCurrencyValue(data.amount, data.currency)}
+            suffix={data.currency}
+            displayType="text"
+          />
         </StatisticItem>
       </div>
     </React.Fragment>
