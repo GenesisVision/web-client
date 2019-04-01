@@ -413,7 +413,7 @@ class CreateFundSettings extends React.Component {
                   {t("manager.create-program-page.settings.fields.min-deposit")}
                   <span className={"deposit-details__available-amount-value"}>
                     <NumberFormat
-                      value={50}
+                      value={deposit}
                       thousandSeparator=" "
                       displayType="text"
                       suffix={` ${currency}`}

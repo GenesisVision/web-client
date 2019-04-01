@@ -8,9 +8,9 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
           t("manager.create-program-page.settings.validation.amount-required")
         )
         .min(
-          50,
+          props.deposit,
           t("manager.create-program-page.settings.validation.amount-is-zero", {
-            min: 50
+            min: props.deposit
           })
         )
         .max(
