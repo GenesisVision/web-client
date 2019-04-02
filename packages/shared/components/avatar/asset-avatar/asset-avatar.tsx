@@ -5,7 +5,6 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import withUrl from "shared/decorators/with-url";
-import { Nullable } from "shared/utils/types";
 
 interface IAssetAvatarProps {
   tooltip: boolean;
@@ -17,7 +16,7 @@ interface IAssetAvatarProps {
 }
 
 interface IAssetAvatarState {
-  anchor: Nullable<EventTarget>;
+  anchor?: EventTarget;
 }
 
 class AssetAvatar extends React.Component<
@@ -25,7 +24,7 @@ class AssetAvatar extends React.Component<
   IAssetAvatarState
 > {
   state = {
-    anchor: null
+    anchor: undefined
   };
 
   handleClick = (event: React.SyntheticEvent) => {
@@ -39,7 +38,7 @@ class AssetAvatar extends React.Component<
 
   handleMouseLeave = (event: React.MouseEvent) => {
     if (this.props.click) return;
-    this.setState({ anchor: null });
+    this.setState({ anchor: undefined });
   };
 
   render() {

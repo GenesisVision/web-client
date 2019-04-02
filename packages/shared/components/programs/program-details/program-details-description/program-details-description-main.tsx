@@ -19,7 +19,6 @@ import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
-import { Nullable } from "shared/utils/types";
 
 import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
@@ -37,7 +36,7 @@ interface IProgramDetailsDescriptionMainProps
     InjectedTranslateProps {}
 
 interface IProgramDetailsDescriptionMainState {
-  anchor: Nullable<anchorElType>;
+  anchor?: anchorElType;
 }
 
 class ProgramDetailsDescriptionMain extends Component<
@@ -48,13 +47,13 @@ class ProgramDetailsDescriptionMain extends Component<
     super(props);
 
     this.state = {
-      anchor: null
+      anchor: undefined
     };
   }
 
   handleOpenDropdown = (event: React.MouseEvent<HTMLElement>) =>
     this.setState({ anchor: event.currentTarget });
-  handleCloseDropdown = () => this.setState({ anchor: null });
+  handleCloseDropdown = () => this.setState({ anchor: undefined });
 
   render() {
     const { anchor } = this.state;

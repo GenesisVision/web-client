@@ -30,7 +30,6 @@ import {
   formatValue,
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
-import { Nullable } from "shared/utils/types";
 
 interface IProgramCardProps {
   program: ProgramDetails;
@@ -42,7 +41,7 @@ const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
 interface IProgramCardState {
-  anchor: Nullable<EventTarget>;
+  anchor?: EventTarget;
 }
 
 class ProgramCard extends React.Component<
@@ -50,12 +49,12 @@ class ProgramCard extends React.Component<
   IProgramCardState
 > {
   state = {
-    anchor: null
+    anchor: undefined
   };
   handleOpenDropdown = (
     event: React.MouseEvent<HTMLInputElement, MouseEvent>
   ) => this.setState({ anchor: event.currentTarget });
-  handleCloseDropdown = () => this.setState({ anchor: null });
+  handleCloseDropdown = () => this.setState({ anchor: undefined });
   render() {
     const { t, program, toggleFavorite, title } = this.props;
     const handleToggleFavorite = () => {

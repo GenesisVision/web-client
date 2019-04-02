@@ -12,7 +12,6 @@ import Popover, {
 import GVScroll from "shared/components/scroll/gvscroll";
 import { ROLE, STATUS } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
-import { Nullable } from "shared/utils/types";
 
 import AssetStatusRequests from "./asset-status-requests";
 
@@ -39,7 +38,7 @@ interface IAssetStatusProps extends IAssetStatusOwnProps {
 }
 
 interface IAssetStatusState {
-  anchor: Nullable<EventTarget>;
+  anchor?: EventTarget;
 }
 
 class AssetStatus extends React.Component<
@@ -47,7 +46,7 @@ class AssetStatus extends React.Component<
   IAssetStatusState
 > {
   state = {
-    anchor: null
+    anchor: undefined
   };
 
   handleOpenDropdown = (
@@ -59,7 +58,7 @@ class AssetStatus extends React.Component<
     )
       this.setState({ anchor: event.currentTarget });
   };
-  handleCloseDropdown = () => this.setState({ anchor: null });
+  handleCloseDropdown = () => this.setState({ anchor: undefined });
 
   render() {
     const { t, className, status, id, role, asset, onCancel } = this.props;

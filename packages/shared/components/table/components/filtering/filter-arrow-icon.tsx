@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import * as React from "react";
 
-const FilterArrowIcon: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
+const _FilterArrowIcon: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
   return (
     <svg
       className={classNames("filter__arrow", {
@@ -23,4 +23,6 @@ const FilterArrowIcon: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
   );
 };
 
-export default React.memo(FilterArrowIcon);
+const FilterArrowIcon = React.memo(_FilterArrowIcon);
+
+export default FilterArrowIcon;
