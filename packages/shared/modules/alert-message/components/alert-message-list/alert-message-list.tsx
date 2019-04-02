@@ -1,8 +1,8 @@
 import "./alert-message-list.scss";
 
 import { GVButton } from "gv-react-components";
-import { useEffect } from "react";
 import * as React from "react";
+import { useEffect } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import posed, { PoseGroup } from "react-pose";
 import { connect } from "react-redux";
@@ -56,14 +56,12 @@ const _AlertMessageList: React.FC<Props> = props => {
   );
 };
 
-export const mapStateToProps = (state: RootState): StateProps => {
+const mapStateToProps = (state: RootState): StateProps => {
   const messages = state.alertMessages;
   return { messages };
 };
 
-export const mapDispatchToProps = (
-  dispatch: Dispatch<ActionType>
-): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
   removeMessage: id => {
     dispatch(alertMessageActions.remove(id));
   },
@@ -72,7 +70,7 @@ export const mapDispatchToProps = (
   }
 });
 
-const AlertMessageList = compose(
+const AlertMessageList = compose<React.FC>(
   translate(),
   connect(
     mapStateToProps,
