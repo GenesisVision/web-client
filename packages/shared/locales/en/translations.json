@@ -232,7 +232,8 @@
     "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. The transfer of {{currency}} over to the account manager will only occur at the end of the current reporting period.",
     "confirm": "Confirm",
     "validation": {
-      "amount-more-than-available": "Amount is more than available in your Wallet",
+      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-exceeds-limit": "Amount exceeds the possible investment limit",
       "amount-min-value": "Min amount is {{min}} {{currency}} ( ≈ {{walletMin}} {{walletCurrency}})"
     },
     "program": {
@@ -341,7 +342,8 @@
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart",
-      "strategy": "Strategy"
+      "strategy": "Strategy",
+      "favourite": ""
     }
   },
   "funds-page": {
@@ -358,7 +360,8 @@
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart",
-      "value": "Value"
+      "value": "Value",
+      "favourite": ""
     }
   },
   "about-levels-page": {
@@ -405,7 +408,7 @@
       "entryFee": "Entry fee",
       "exitFee": "Exit fee",
       "invest": "Invest",
-      "reinvest": "Reinvest",
+      "reinvest": "Reinvest profit",
       "yourInvestment": {
         "PROGRAM": "Current period investment",
         "FUND": "Current investment"
@@ -480,7 +483,7 @@
       "successFee": "Success fee",
       "subscriptionFee": "Subscription fee",
       "invest": "Invest",
-      "reinvest": "Reinvest",
+      "reinvest": "Reinvest profit",
       "yourInvestment": "Current investment",
       "pending-input": "Pending input",
       "pending-output": "Pending output",

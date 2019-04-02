@@ -110,5 +110,8 @@ export const PROGRAMS_COLUMNS: SortingColumn[] = [
   },
   {
     name: "chart"
+  },
+  {
+    name: "favourite"
   }
 ];

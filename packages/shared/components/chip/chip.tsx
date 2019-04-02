@@ -3,20 +3,7 @@ import "./chip.scss";
 import classNames from "classnames";
 import * as React from "react";
 
-export enum CHIP_TYPE {
-  POSITIVE = "positive",
-  NEGATIVE = "negative",
-  WARNING = "warning"
-}
-interface IChipProps {
-  disabled?: boolean;
-  // children: () => void | { [keys: string]: any } | JSX.Element;
-  className?: string;
-  rounded?: boolean;
-  type?: CHIP_TYPE;
-  onClick?(event: React.MouseEvent<HTMLElement>): void | undefined;
-}
-class Chip extends React.Component<IChipProps> {
+class Chip extends React.PureComponent<Props> {
   handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (typeof this.props.onClick === "function") {
       this.props.onClick(event);
@@ -47,6 +34,20 @@ class Chip extends React.Component<IChipProps> {
       </div>
     );
   }
+}
+
+export enum CHIP_TYPE {
+  POSITIVE = "positive",
+  NEGATIVE = "negative",
+  WARNING = "warning"
+}
+
+interface Props {
+  disabled?: boolean;
+  className?: string;
+  rounded?: boolean;
+  type?: CHIP_TYPE;
+  onClick?(event: React.MouseEvent<HTMLElement>): void | undefined;
 }
 
 export default Chip;

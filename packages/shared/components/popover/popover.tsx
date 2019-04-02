@@ -6,11 +6,10 @@ import { RefObject } from "react";
 import { connect } from "react-redux";
 import Modal from "shared/components/modal/modal";
 import RootState from "shared/reducers/root-reducer";
-import { Nullable } from "shared/utils/types";
 
 const MARGIN_OFFSET = 10;
 
-const getAnchorEl = (el: Nullable<anchorElType>) => {
+const getAnchorEl = (el?: anchorElType) => {
   return typeof el === "function" ? el() : el;
 };
 
@@ -149,7 +148,7 @@ interface OwnProps {
   onClose?(event: React.MouseEvent<HTMLElement>): void;
   horizontal?: HORIZONTAL_POPOVER_POS;
   vertical?: VERTICAL_POPOVER_POS;
-  anchorEl: Nullable<anchorElType>;
+  anchorEl?: anchorElType;
   noPadding?: boolean;
   disableBackdropClick?: boolean;
   className?: string;

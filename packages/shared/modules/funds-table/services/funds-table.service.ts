@@ -1,10 +1,15 @@
 import { push } from "connected-react-router";
+import { FundsList } from "gv-api-web";
 import {
   FUNDS_FACET_ROUTE,
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
 } from "pages/funds/funds.routes";
 import * as qs from "qs";
+import {
+  ComposeFiltersAllType,
+  TFilter
+} from "shared/components/table/components/filtering/filter.type";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -18,14 +23,9 @@ import * as fundsTableActions from "../actions/funds-table.actions";
 import {
   DEFAULT_ITEMS_ON_PAGE,
   FUNDS_TABLE_FILTERS,
-  sortableColumns,
-  SORTING_FILTER_VALUE
+  SORTING_FILTER_VALUE,
+  sortableColumns
 } from "../components/funds-table/funds-table.constants";
-import { FundsList } from "gv-api-web";
-import {
-  ComposeFiltersAllType,
-  TFilter
-} from "shared/components/table/components/filtering/filter.type";
 
 export type GetFundsType = (
   filters: ComposeFiltersAllType
@@ -60,7 +60,7 @@ const composeRequestFilters = () => (
 ): ComposeFiltersAllType => {
   let itemsOnPage = DEFAULT_ITEMS_ON_PAGE;
   const existingFilters = dispatch(getFundsFilters());
-  let { page } = existingFilters;
+  let { currentPage } = existingFilters.paging;
 
   const { router } = getState();
   const { currency } = getState().accountSettings;
@@ -76,12 +76,12 @@ const composeRequestFilters = () => (
   if (facetId) {
     filters.facet = facetId;
     itemsOnPage = 100;
-    page = 1;
+    currentPage = 1;
   }
 
   const { skip, take } = calculateSkipAndTake({
-    itemsOnPage: itemsOnPage,
-    currentPage: page
+    itemsOnPage,
+    currentPage
   });
 
   const filtering = composeFilters(
@@ -139,11 +139,9 @@ export const getFundsFilters: GetFundsFiltersType = () => (
   }, {});
 
   return {
-    currentPage,
-    totalPages,
+    paging: { currentPage, totalPages, itemsOnPage: DEFAULT_ITEMS_ON_PAGE },
     sorting,
-    filtering,
-    itemsOnPage: DEFAULT_ITEMS_ON_PAGE
+    filtering
   };
 };
 

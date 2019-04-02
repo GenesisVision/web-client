@@ -76,18 +76,27 @@ export const getProgramStatistic = (
 };
 
 export const closeProgram = (
+  onSuccess: () => void,
   programId: string,
   opts?: {
     twoFactorCode?: string | undefined;
   }
-): Promise<void> => {
+): any => (dispatch: Dispatch): Promise<void> => {
   const authorization = authService.getAuthArg();
-
-  return managerApi.v10ManagerProgramsByIdClosePost(
-    programId,
-    authorization,
-    opts
-  );
+  return managerApi
+    .v10ManagerProgramsByIdClosePost(programId, authorization, opts)
+    .then(() => {
+      onSuccess();
+      dispatch(
+        alertMessageActions.success(
+          "program-details-page.description.close-program-notification-success",
+          true
+        )
+      );
+    })
+    .catch(error => {
+      dispatch(alertMessageActions.error(error.errorMessage));
+    });
 };
 
 export const closePeriod = (programId: string, onSuccess: () => void) => (

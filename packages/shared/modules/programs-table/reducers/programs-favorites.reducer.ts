@@ -1,10 +1,10 @@
+import { ProgramsList } from "gv-api-web";
 import { SET_FAVORITE_PROGRAM } from "shared/modules/favorite-asset/actions/favorite-program.actions";
 import {
   FAILURE_SUFFIX,
   IApiState,
   REQUEST_SUFFIX
 } from "shared/reducers/api-reducer/api-reducer";
-import { ProgramsList } from "gv-api-web";
 
 const updateFavoriteLocal = (
   state: IApiState<ProgramsList>,
@@ -15,7 +15,7 @@ const updateFavoriteLocal = (
     ...state,
     data: {
       ...state.data,
-      total: (state.data && state.data.programs.length) || 0,
+      total: (state.data && state.data.total) || 0,
       programs:
         (state.data &&
           state.data.programs.map(program => {

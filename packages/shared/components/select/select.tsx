@@ -8,41 +8,12 @@ import Popover, {
 } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
-import { Nullable } from "shared/utils/types";
 
 import SelectItem from "./select-item";
 
-export interface OnChangeEvent {
-  target: { value: string; name: string };
-}
-
-interface ChildOwnProps {
-  value: string;
-  key: string;
-  children: string;
-}
-
-interface SelectChild extends React.ReactElement<ChildOwnProps> {}
-
-interface ISelectProps {
-  value?: string | number;
-  onChange(event: OnChangeEvent, child: JSX.Element): void;
-  name: string;
-  className?: string;
-  fullWidthPopover?: boolean;
-  onFocus?(event: React.FocusEvent<HTMLButtonElement>): void;
-  onBlur?(event: React.FocusEvent<HTMLButtonElement>): void;
-  disabled?: boolean;
-  disableIfSingle?: boolean;
-  children: SelectChild[];
-}
-interface ISelectState {
-  anchor: Nullable<EventTarget>;
-}
-
-class Select extends React.PureComponent<ISelectProps, ISelectState> {
+class Select extends React.PureComponent<Props, State> {
   state = {
-    anchor: null
+    anchor: undefined
   };
 
   input: RefObject<HTMLButtonElement> = React.createRef();
@@ -51,9 +22,7 @@ class Select extends React.PureComponent<ISelectProps, ISelectState> {
     this.setDefaultValue();
   }
 
-  componentDidUpdate(prevProps: ISelectProps) {
-    const t = prevProps;
-    const t1 = this.props;
+  componentDidUpdate() {
     this.setDefaultValue();
   }
 
@@ -82,7 +51,7 @@ class Select extends React.PureComponent<ISelectProps, ISelectState> {
     const { value } = child.props;
     if (!isSelected) {
       event.persist();
-      const ChangeEvent: OnChangeEvent = {
+      const ChangeEvent: ISelectChangeEvent = {
         target: { value, name }
       };
       if (onChange) {
@@ -110,7 +79,7 @@ class Select extends React.PureComponent<ISelectProps, ISelectState> {
   };
 
   handleClose = (): void => {
-    this.setState({ anchor: null });
+    this.setState({ anchor: undefined });
   };
 
   setDefaultValue(): void {
@@ -119,7 +88,7 @@ class Select extends React.PureComponent<ISelectProps, ISelectState> {
     const children = this.props.children;
     const child = children[0];
     if (child && children.length === 1) {
-      const event: OnChangeEvent = {
+      const event: ISelectChangeEvent = {
         target: { value: child.props.value, name }
       };
       onChange(event, child);
@@ -184,3 +153,32 @@ class Select extends React.PureComponent<ISelectProps, ISelectState> {
 }
 
 export default Select;
+
+export interface ISelectChangeEvent {
+  target: { value: string; name: string };
+}
+
+interface ChildOwnProps {
+  value: string;
+  key: string;
+  children: string;
+}
+
+interface SelectChild extends React.ReactElement<ChildOwnProps> {}
+
+interface Props {
+  value: string;
+  name: string;
+  className?: string;
+  fullWidthPopover?: boolean;
+  disabled?: boolean;
+  disableIfSingle?: boolean;
+  children: SelectChild[];
+  onChange(event: ISelectChangeEvent, child: JSX.Element): void;
+  onFocus?(event: React.FocusEvent<HTMLButtonElement>): void;
+  onBlur?(event: React.FocusEvent<HTMLButtonElement>): void;
+}
+
+interface State {
+  anchor?: EventTarget;
+}

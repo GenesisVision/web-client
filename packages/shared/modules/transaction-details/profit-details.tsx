@@ -4,7 +4,9 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import TransactionAsset from "shared/modules/transaction-details/details-asset";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+
+const DECIMAL_SCALE = 8;
 
 const ProfitDetails = (props: TransactionDetailsProps) => {
   const { data, t } = props;
@@ -21,12 +23,32 @@ const ProfitDetails = (props: TransactionDetailsProps) => {
       </div>
       <div className="dialog__bottom">
         <StatisticItem label={t(`transactions-details.success-fee`)}>
-          {data.programDetails.successFeePercent}% (
-          {data.programDetails.successFee} {data.currency})
+          <NumberFormat
+            value={data.programDetails.successFeePercent}
+            suffix="%"
+            displayType="text"
+          />
+          <NumberFormat
+            value={formatValue(data.programDetails.successFee, DECIMAL_SCALE)}
+            prefix={" ("}
+            suffix={` ${data.currency})`}
+            displayType="text"
+          />
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.gv-fee`)}>
-          {data.gvCommissionPercent}% ({data.gvCommission}{" "}
-          {data.gvCommissionCurrency ? data.gvCommissionCurrency : ""})
+          <NumberFormat
+            value={data.gvCommissionPercent}
+            suffix="%"
+            displayType="text"
+          />
+          <NumberFormat
+            value={formatValue(data.gvCommission, DECIMAL_SCALE)}
+            prefix={" ("}
+            suffix={
+              data.gvCommissionCurrency ? ` ${data.gvCommissionCurrency})` : ")"
+            }
+            displayType="text"
+          />
         </StatisticItem>
         <StatisticItem label={t("transactions-details.status.title")}>
           <div className="external-transaction__status">
