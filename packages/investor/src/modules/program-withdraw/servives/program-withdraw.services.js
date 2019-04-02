@@ -1,3 +1,4 @@
+import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
@@ -11,7 +12,7 @@ export const getProgramWithdrawInfo = id => (dispatch, getState) => {
   );
 };
 
-export const withdrawProgramById = (id, amount) => {
+export const withdrawProgramById = (id, amount) => dispatch => {
   return investorApi
     .v10InvestorProgramsByIdWithdrawMultiByAmountPost(
       id,
@@ -19,6 +20,7 @@ export const withdrawProgramById = (id, amount) => {
       authService.getAuthArg()
     )
     .then(response => {
+      dispatch(fetchWallets());
       alertMessageActions.success(
         "program-withdraw.success-alert-message",
         true
@@ -26,5 +28,6 @@ export const withdrawProgramById = (id, amount) => {
       return response;
     });
 };
+
 export const alert = (type, text, translate = false) => dispatch =>
   dispatch(alertMessageActions[type](text, translate));
