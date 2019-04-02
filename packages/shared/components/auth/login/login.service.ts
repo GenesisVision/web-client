@@ -11,7 +11,7 @@ import { Dispatch } from "redux";
 import { LOGIN, LOGIN_TWO_FACTOR, storeTwoFactor } from "./login.actions";
 import clearDataActionFactory from "../../../actions/clear-data.factory";
 import { HOME_ROUTE } from "pages/app/app.routes";
-import SHA256 from "crypto-js/sha256";
+import SHA256 from "sha256";
 
 export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
@@ -28,13 +28,13 @@ export const calculateHash = ({
 }): number => {
   let prefix = 0;
   while (
-    String(SHA256(`${prefix}${nonce}${login}`)) >=
+    SHA256(`${prefix}${nonce}${login}`) >=
     "0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
   ) {
-    console.log(String(SHA256(`${prefix}${nonce}${login}`)));
+    console.log(SHA256(`${prefix}${nonce}${login}`));
     prefix++;
   }
-  console.log("it - ", String(SHA256(`${prefix}${nonce}${login}`)));
+  console.log("it - ", SHA256(`${prefix}${nonce}${login}`));
   return prefix;
 };
 
