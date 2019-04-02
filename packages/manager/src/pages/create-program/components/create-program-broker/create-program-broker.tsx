@@ -1,15 +1,19 @@
 import "./create-program-broker.scss";
 
+import { Broker, BrokerAccountType } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";
-import { BrokerCardState } from "./broker-card/broker-card.constants";
+import { BROKER_CARD_STATE } from "./broker-card/broker-card.constants";
 import { comingSoonBrokers } from "./create-program-broker.constants";
 
-const getLeverageDescription = ({ leverageMax, leverageMin }) => {
+const getLeverageDescription = (
+  leverageMin: number,
+  leverageMax: number
+): string => {
   let result;
 
   if (leverageMin === leverageMax) {
@@ -21,17 +25,17 @@ const getLeverageDescription = ({ leverageMax, leverageMin }) => {
   return result;
 };
 
-const getAcountTypes = accountTypes => {
+const getAccountTypes = (accountTypes: BrokerAccountType[]) => {
   if (!accountTypes[0].currencies) return null;
   return accountTypes[0].currencies.join(", ");
 };
 
-const CreateProgramBroker = ({
+const _CreateProgramBroker: React.FC<OwnProps & InjectedTranslateProps> = ({
   t,
   brokers,
   navigateToSettings,
-  choosedBroker,
-  chooseBroker,
+  selectedBroker,
+  selectBroker,
   isForexAllowed
 }) => (
   <div className="create-program-broker-container">
@@ -39,45 +43,43 @@ const CreateProgramBroker = ({
       <div className="create-program-broker__list">
         {brokers.map(broker => (
           <BrokerCard
-            key={broker.name + broker.description}
-            broker={broker}
-            isSelected={broker === choosedBroker}
-            onSelect={chooseBroker}
+            key={broker.name}
+            brokerName={broker.name}
+            isSelected={broker === selectedBroker}
+            onSelect={selectBroker}
             cardState={
-              !isForexAllowed && broker.isForex
-                ? BrokerCardState.KYCRequired
-                : BrokerCardState.active
+              broker.isForex && !isForexAllowed
+                ? BROKER_CARD_STATE.KYC_REQUIRED
+                : BROKER_CARD_STATE.ACTIVE
             }
           />
         ))}
-        {comingSoonBrokers.map(broker => (
+        {comingSoonBrokers.map(brokerName => (
           <BrokerCard
-            key={broker}
-            broker={{ name: broker }}
-            cardState={BrokerCardState.comingSoon}
+            key={brokerName}
+            brokerName={brokerName}
+            cardState={BROKER_CARD_STATE.COMING_SOON}
+            isSelected={false}
+            onSelect={undefined}
           />
         ))}
 
         <div className="create-program-broker__navigation">
-          <GVButton
-            color="primary"
-            type="contained"
-            onClick={navigateToSettings}
-          >
+          <GVButton color="primary" onClick={navigateToSettings}>
             {t("buttons.continue")}
           </GVButton>
         </div>
       </div>
       <Surface className="surface--horizontal-paddings create-program-broker__description">
         <h3 className="create-program-broker__description-heading">
-          {choosedBroker.name}
+          {selectedBroker.name}
         </h3>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
             {t("manager.create-program-page.broker-info.about")}
           </div>
           <div className="create-program-broker__info-text">
-            {choosedBroker.description}
+            {selectedBroker.description}
           </div>
         </div>
         <div className="create-program-broker__row">
@@ -85,7 +87,7 @@ const CreateProgramBroker = ({
             {t("manager.create-program-page.broker-info.account-type")}
           </div>
           <div className="create-program-broker__info-text">
-            {getAcountTypes(choosedBroker.accountTypes)}
+            {getAccountTypes(selectedBroker.accountTypes)}
           </div>
         </div>
         <div className="create-program-broker__row">
@@ -93,7 +95,7 @@ const CreateProgramBroker = ({
             {t("manager.create-program-page.broker-info.trading-platform")}
           </div>
           <div className="create-program-broker__info-text">
-            {choosedBroker.accountTypes[0].type}
+            {selectedBroker.accountTypes[0].type}
           </div>
         </div>
         <div className="create-program-broker__row">
@@ -102,7 +104,7 @@ const CreateProgramBroker = ({
           </div>
           <div className="create-program-broker__info-text">
             <a
-              href={choosedBroker.terms}
+              href={selectedBroker.terms}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -115,7 +117,10 @@ const CreateProgramBroker = ({
             {t("manager.create-program-page.broker-info.leverage")}
           </div>
           <div className="create-program-broker__info-text">
-            {getLeverageDescription(choosedBroker)}
+            {getLeverageDescription(
+              selectedBroker.leverageMin,
+              selectedBroker.leverageMax
+            )}
           </div>
         </div>
         <div className="create-program-broker__row">
@@ -123,7 +128,7 @@ const CreateProgramBroker = ({
             {t("manager.create-program-page.broker-info.assets")}
           </div>
           <div className="create-program-broker__info-text">
-            {choosedBroker.assets}
+            {selectedBroker.assets}
           </div>
         </div>
       </Surface>
@@ -131,4 +136,13 @@ const CreateProgramBroker = ({
   </div>
 );
 
+const CreateProgramBroker = React.memo(translate()(_CreateProgramBroker));
 export default translate()(CreateProgramBroker);
+
+interface OwnProps {
+  brokers: Broker[];
+  navigateToSettings(): void;
+  selectedBroker: Broker;
+  selectBroker(brokerName: string): () => void;
+  isForexAllowed: boolean;
+}

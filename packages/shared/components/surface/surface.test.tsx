@@ -1,5 +1,6 @@
-import * as React from "react";
 import { shallow } from "enzyme";
+import * as React from "react";
+
 import { _Surface as Surface } from "./surface";
 
 describe("Surface tests", () => {

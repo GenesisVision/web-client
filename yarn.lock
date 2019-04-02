@@ -5526,10 +5526,10 @@ gud@^1.0.0:
     querystring "0.2.0"
     superagent "^4.1.0"
 
-gv-react-components@^0.0.35:
-  version "0.0.35"
-  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.35.tgz#b0a65e3efe8b7cdaaeb3901bbc5c386e2b51e64e"
-  integrity sha512-0w4qSVAazElvXJIwfNWG+oggQZlB9BF9SiMgHaTLvWi+7sPZNxSskt6Smebt+nBi2Hjk7okKNSRXQR736ujufw==
+gv-react-components@^0.0.36:
+  version "0.0.36"
+  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.36.tgz#b2e738b7c9e3629cb4f4130e99eddbe5cf779876"
+  integrity sha512-SMeipXXaNlfSAhBKJzNLu4gKQtNdqcASD7FN3CTCsECRe+siLpzQzj2K2D/xvvh7/EQ2KUO8MlWC3411YJuULw==
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.6.1"

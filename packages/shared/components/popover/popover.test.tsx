@@ -1,6 +1,7 @@
-import * as React from "react";
-import { _Popover as Popover } from "./popover";
 import { shallow } from "enzyme";
+import * as React from "react";
+
+import { _Popover as Popover } from "./popover";
 
 const modalRoot = document.createElement("div");
 modalRoot.setAttribute("id", "modal-root");

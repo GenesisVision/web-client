@@ -2,88 +2,96 @@ import "shared/components/deposit-details/deposit-details.scss";
 
 import "./create-program-settings.scss";
 
-import { Field, withFormik } from "formik";
+import { Field, FieldProps, InjectedFormikProps, withFormik } from "formik";
+import {
+  Broker,
+  BrokerAccountType,
+  ProgramsInfo,
+  WalletData
+} from "gv-api-web";
 import {
   GVButton,
   GVFormikField,
   GVProgramPeriod,
   GVTextField
 } from "gv-react-components";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
-import InputImage from "shared/components/form/input-image/input-image";
+import { compose } from "redux";
+import FormError from "shared/components/form/form-error/form-error";
+import InputImage, {
+  InputFileData
+} from "shared/components/form/input-image/input-image";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import Select from "shared/components/select/select";
-import rateApi from "shared/services/api-client/rate-api";
+import ProgramDefaultImage from "shared/media/program-default-image.svg";
 import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
-import {
-  getAccountTypes,
-  getCurrencies,
-  getLeverages
-} from "../../helpers/create-program.helpers";
-import AccountTypeField from "../account-type-field/account-type-field";
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
-import ProgramDefaultImage from "./program-default-image";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
-class CreateProgramSettings extends React.Component {
-  componentDidMount() {
-    this.fetchRate(
-      this.props.values.depositWalletCurrency,
-      this.props.values.currency
-    );
+class CreateProgramSettings extends React.Component<
+  InjectedFormikProps<
+    ICreateProgramSettingsProps,
+    ICreateProgramSettingsFormValues
+  >
+> {
+  componentDidUpdate(prevProps: ICreateProgramSettingsProps) {
+    const { validateForm, setFieldValue } = this.props;
+    if (prevProps.accountType !== this.props.accountType) {
+      setFieldValue("brokerAccountTypeId", this.props.accountType!.id);
+    }
+    if (prevProps.programCurrency !== this.props.programCurrency) {
+      setFieldValue("currency", this.props.programCurrency || "");
+    }
+    if (prevProps.leverage !== this.props.leverage) {
+      setFieldValue("leverage", this.props.leverage || "");
+    }
+    if (prevProps.wallet !== this.props.wallet) {
+      setFieldValue("depositWalletId", this.props.wallet.id);
+      setFieldValue("depositAmount", "");
+    }
+    if (prevProps.leverage !== this.props.leverage) {
+      setFieldValue("leverage", this.props.leverage || "");
+    }
+    if (prevProps.rate !== this.props.rate) {
+      validateForm();
+    }
   }
 
-  allowEntryFee = values => {
-    const { managerMaxEntryFee } = this.props.programsInfo;
-
-    return allowValuesNumberFormat({ from: 0, to: managerMaxEntryFee })(values);
+  onSelectChange = (onChangeFn: (value: string & number) => void) => (
+    _: string,
+    target: any
+  ) => {
+    onChangeFn(target.props.value);
   };
 
-  allowSuccessFee = values => {
-    const { managerMaxSuccessFee } = this.props.programsInfo;
-
-    return allowValuesNumberFormat({ from: 0, to: managerMaxSuccessFee })(
-      values
-    );
-  };
-  fetchRate = (fromCurrency, toCurrency) => {
-    rateApi.v10RateByFromByToGet(fromCurrency, toCurrency).then(rate => {
-      if (rate !== this.props.values.rate)
-        this.props.setFieldValue("rate", rate);
-    });
-  };
-  onChangeDepositWallet = (name, target) => {
-    const { setFieldValue, values, wallets, fetchWallets } = this.props;
-    const depositWalletCurrency = target.props.value;
-    setFieldValue("depositWalletCurrency", depositWalletCurrency);
-    setFieldValue(
-      "depositWalletId",
-      wallets.find(item => item.currency === (values && depositWalletCurrency))
-        .id
-    );
-    setFieldValue("depositAmount", "");
-    fetchWallets();
-    this.fetchRate(depositWalletCurrency, values.currency);
-  };
-  onChangeCurrency = (name, target) => {
-    const { setFieldValue, values } = this.props;
-    const currency = target.props.value;
-    setFieldValue("currency", currency);
-    this.fetchRate(values.depositWalletCurrency, currency);
-  };
-  setMaxAmount = (available, currency) => () => {
+  setMaxAmount = (available?: number, currency?: string) => () => {
+    if (!available || !currency) return;
     const { setFieldValue } = this.props;
     setFieldValue("depositAmount", formatCurrencyValue(available, currency));
   };
+
+  validateAndSubmit = (
+    e?: React.FormEvent<HTMLFormElement> | undefined
+  ): void => {
+    const { t, isValid, handleSubmit, notifyError } = this.props;
+    handleSubmit(e);
+    if (!isValid) {
+      notifyError(
+        t("manager.create-program-page.notifications.validate-error")
+      );
+      if (e) e.preventDefault();
+    }
+  };
+
   render() {
     const {
       minimumDepositsAmount,
@@ -93,55 +101,31 @@ class CreateProgramSettings extends React.Component {
       broker,
       author,
       isSubmitting,
-      handleSubmit,
       values,
       setFieldValue,
-      setLeverageChooseAvailable,
-      isLeverageChooseAvailable,
       programsInfo,
-      notifyError,
       errors,
-      onValidateError,
-      setSubmitting,
-      isValid
-    } = this.props;
-    if (!wallets) return;
-    const {
-      rate,
-      depositWalletCurrency,
-      depositAmount,
-      isSignalProgram,
       accountType,
-      description,
-      title,
-      currency
-    } = values;
+      rate,
+      programCurrency,
+      wallet
+    } = this.props;
+    const { depositAmount, isSignalProgram, description, title } = values;
     const descriptionTrimmedLength = description.trim().length;
     const imageInputError =
       errors &&
       errors.logo &&
       (errors.logo.width || errors.logo.height || errors.logo.size);
 
-    const onSubmit = () => {
-      createProgramSettingsValidationSchema({
-        minimumDepositsAmount,
-        t,
-        wallets,
-        programsInfo
-      })
-        .validate(values)
-        .then(res => {}, () => onValidateError());
+    const accountCurrencies = accountType ? accountType.currencies : [];
+    const accountLeverages = accountType ? accountType.leverages : [];
 
-      handleSubmit(values, {
-        setSubmitting
-      });
-    };
-    const selectedWallet = wallets.find(
-      item => item.currency === (values && values.depositWalletCurrency)
-    );
     return (
       <div className="create-program-settings">
-        <form className="create-program-settings__form">
+        <form
+          className="create-program-settings__form"
+          onSubmit={this.validateAndSubmit}
+        >
           <div className="create-program-settings__subheading">
             <span className="create-program-settings__block-number">01</span>
             {t("manager.create-program-page.settings.main-settings")}
@@ -163,15 +147,24 @@ class CreateProgramSettings extends React.Component {
                 </div>
               </div>
               <div className="create-program-settings__item">
-                <AccountTypeField
-                  accountTypes={getAccountTypes(broker)}
+                <GVFormikField
+                  name="brokerAccountTypeId"
+                  component={GVTextField}
                   label={t(
                     "manager.create-program-page.settings.fields.account-type"
                   )}
-                  setLeverageChooseAvailable={setLeverageChooseAvailable}
-                  setFieldValue={setFieldValue}
-                  broker={broker}
-                />
+                  InputComponent={Select}
+                  disableIfSingle
+                  onChange={this.onSelectChange(this.props.changeAccountType)}
+                >
+                  {broker.accountTypes.map(accountType => {
+                    return (
+                      <option value={accountType.id} key={accountType.id}>
+                        {accountType.type}
+                      </option>
+                    );
+                  })}
+                </GVFormikField>
               </div>
               <div className="create-program-settings__item">
                 <GVFormikField
@@ -181,10 +174,11 @@ class CreateProgramSettings extends React.Component {
                     "manager.create-program-page.settings.fields.currency"
                   )}
                   InputComponent={Select}
-                  disabled={!accountType}
-                  onChange={this.onChangeCurrency}
+                  disabled={accountType === undefined}
+                  disableIfSingle
+                  onChange={this.onSelectChange(this.props.changeCurrency)}
                 >
-                  {getCurrencies(broker, accountType).map(currency => {
+                  {accountCurrencies.map(currency => {
                     return (
                       <option value={currency} key={currency}>
                         {currency}
@@ -215,6 +209,7 @@ class CreateProgramSettings extends React.Component {
                         start={0}
                         end={500}
                         value={descriptionTrimmedLength}
+                        variant="pie"
                       />
                     </span>
                   )}
@@ -228,12 +223,14 @@ class CreateProgramSettings extends React.Component {
                     "manager.create-program-page.settings.fields.brokers-leverage"
                   )}
                   InputComponent={Select}
-                  disabled={!accountType || !isLeverageChooseAvailable}
+                  disabled={!accountType}
+                  disableIfSingle
                   className="create-program-settings__leverage"
+                  onChange={this.onSelectChange(this.props.changeLeverage)}
                 >
-                  {getLeverages(broker, accountType).map(leverage => {
+                  {accountLeverages.map(leverage => {
                     return (
-                      <option value={leverage.toString()} key={leverage}>
+                      <option value={leverage} key={leverage}>
                         {leverage}
                       </option>
                     );
@@ -251,7 +248,7 @@ class CreateProgramSettings extends React.Component {
                 >
                   {programsInfo.periods.map(period => {
                     return (
-                      <option value={period.toString()} key={period}>
+                      <option value={period} key={period}>
                         {period +
                           " " +
                           t(
@@ -280,7 +277,7 @@ class CreateProgramSettings extends React.Component {
                     "manager.create-program-page.settings.hints.stop-out-level"
                   )}
                   className="create-program-settings__item-caption"
-                  vertical={"bottom"}
+                  vertical={VERTICAL_POPOVER_POS.BOTTOM}
                   tooltipContent={t(
                     "manager.create-program-page.settings.hints.stop-out-level-description"
                   )}
@@ -300,13 +297,11 @@ class CreateProgramSettings extends React.Component {
                 <div className="create-program-settings__file-field-container">
                   <Field
                     name="logo"
-                    render={({ field, form }) => (
+                    render={({ field }: FieldProps<any>) => (
                       <InputImage
                         {...field}
                         defaultImage={ProgramDefaultImage}
                         onChange={setFieldValue}
-                        notifyError={notifyError}
-                        alt="Program logo"
                         error={imageInputError}
                       />
                     )}
@@ -357,18 +352,19 @@ class CreateProgramSettings extends React.Component {
                   label={t(
                     "manager.create-program-page.settings.fields.entry-fee"
                   )}
-                  adornment="%" //isAllowed={this.allowEntryFee}
+                  adornment="%"
                   component={GVTextField}
                   InputComponent={NumberFormat}
                   autoComplete="off"
                   decimalScale={4}
+                  isAllowed={allowValuesNumberFormat()}
                 />
                 <Hint
                   content={t(
                     "manager.create-program-page.settings.hints.entry-fee"
                   )}
                   className="create-program-settings__item-caption"
-                  vertical={"bottom"}
+                  vertical={VERTICAL_POPOVER_POS.BOTTOM}
                   tooltipContent={t(
                     "manager.create-program-page.settings.hints.entry-fee-description"
                   )}
@@ -380,18 +376,19 @@ class CreateProgramSettings extends React.Component {
                   label={t(
                     "manager.create-program-page.settings.fields.success-fee"
                   )}
-                  adornment="%" //isAllowed={this.allowSuccessFee}
+                  adornment="%"
                   component={GVTextField}
                   InputComponent={NumberFormat}
                   autoComplete="off"
                   decimalScale={4}
+                  isAllowed={allowValuesNumberFormat()}
                 />
                 <Hint
                   content={t(
                     "manager.create-program-page.settings.hints.success-fee"
                   )}
                   className="create-program-settings__item-caption"
-                  vertical={"bottom"}
+                  vertical={VERTICAL_POPOVER_POS.BOTTOM}
                   tooltipContent={t(
                     "manager.create-program-page.settings.hints.success-fee-description"
                   )}
@@ -416,15 +413,15 @@ class CreateProgramSettings extends React.Component {
           >
             <div className="create-program-settings__item deposit-details">
               <GVFormikField
-                name="depositWalletCurrency" // value={"GVT"}
+                name="depositWalletId"
                 component={GVTextField}
                 label={t("wallet-transfer.from")}
                 InputComponent={Select}
-                onChange={this.onChangeDepositWallet}
+                onChange={this.onSelectChange(this.props.changeWallet)}
               >
                 {wallets.map(wallet => {
                   return (
-                    <option value={wallet.currency} key={wallet.currency}>
+                    <option value={wallet.id} key={wallet.id}>
                       <img
                         src={filesService.getFileUrl(wallet.logo)}
                         className="wallet-transfer-popup__icon"
@@ -439,21 +436,22 @@ class CreateProgramSettings extends React.Component {
                 autoFocus={false}
                 name="depositAmount"
                 label={t("wallet-transfer.amount")}
-                currency={depositWalletCurrency}
-                setMax={this.setMaxAmount(
-                  selectedWallet.available,
-                  selectedWallet.currency
-                )}
+                currency={wallet.currency}
+                setMax={this.setMaxAmount(wallet.available, wallet.currency)}
               />
-              {currency !== depositWalletCurrency && (
+              {programCurrency !== wallet.currency && depositAmount && rate && (
                 <div className="invest-popup__currency">
                   <NumberFormat
-                    value={formatCurrencyValue(
-                      convertFromCurrency(depositAmount, rate),
-                      currency
-                    )}
+                    value={
+                      programCurrency
+                        ? formatCurrencyValue(
+                            convertFromCurrency(depositAmount, rate),
+                            programCurrency
+                          )
+                        : undefined
+                    }
                     prefix="≈ "
-                    suffix={` ${currency}`}
+                    suffix={` ${programCurrency}`}
                     displayType="text"
                   />
                 </div>
@@ -463,10 +461,14 @@ class CreateProgramSettings extends React.Component {
                   {t("manager.create-program-page.settings.fields.min-deposit")}
                   <span className={"deposit-details__available-amount-value"}>
                     <NumberFormat
-                      value={minimumDepositsAmount[currency]}
+                      value={
+                        programCurrency
+                          ? minimumDepositsAmount[programCurrency]
+                          : undefined
+                      }
                       thousandSeparator=" "
                       displayType="text"
-                      suffix={` ${currency}`}
+                      suffix={` ${programCurrency}`}
                     />
                   </span>
                 </div>
@@ -476,72 +478,124 @@ class CreateProgramSettings extends React.Component {
                   )}
                   <span className={"deposit-details__available-amount-value"}>
                     <NumberFormat
-                      value={selectedWallet.available}
+                      value={wallet.available}
                       thousandSeparator=" "
                       displayType="text"
-                      suffix={values ? ` ${depositWalletCurrency}` : " GVT"}
+                      suffix={` ${wallet.currency}`}
                     />
                   </span>
                 </div>
               </div>
             </div>
           </div>
+
+          <div className="create-program-settings__navigation">
+            <GVButton
+              title={t("buttons.create-program")}
+              color="primary"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {t("buttons.create-program")}
+            </GVButton>
+            <GVButton
+              variant="text"
+              onClick={navigateBack}
+              className="create-program-settings__navigation-back"
+            >
+              <>&larr; {t("buttons.back")}</>
+            </GVButton>
+          </div>
         </form>
-        <div className="create-program-settings__navigation">
-          <DepositButtonContainer
-            title={t("buttons.create-program")}
-            deposit={programsInfo.managerProgramInvestment}
-            onSubmit={onSubmit}
-            disabled={isSubmitting || !isValid}
-          >
-            {t("buttons.create-program")}
-          </DepositButtonContainer>
-          <GVButton
-            variant="text"
-            onClick={() => navigateBack(values)}
-            className="create-program-settings__navigation-back"
-          >
-            &larr; {t("buttons.back")}
-          </GVButton>
-        </div>
       </div>
     );
   }
 }
 
-export default translate()(
-  withFormik({
+export default compose<React.ComponentType<OwnProps>>(
+  translate(),
+  withFormik<ICreateProgramSettingsProps, ICreateProgramSettingsFormValues>({
     displayName: "CreateProgramSettingsForm",
-    mapPropsToValues: props => ({
-      rate: 1,
-      stopOutLevel: "100",
-      depositWalletCurrency: "GVT",
-      depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
-      isSignalProgram: props.broker.isSignalsAvailable,
-      periodLength: "",
-      successFee: "",
-      signalSuccessFee: props.broker.isSignalsAvailable ? "" : 0,
-      leverage: "",
-      title: "",
-      description: "",
-      logo: {
-        cropped: null,
-        src: "",
-        isNew: false,
-        isDefault: true,
-        width: undefined,
-        height: undefined,
-        size: undefined
-      },
-      brokerAccountTypeId: "",
-      entryFee: "",
-      signalSubscriptionFee: props.broker.isSignalsAvailable ? "" : 0,
-      currency: props.broker.name === "Genesis Markets" ? "BTC" : "",
-      accountType: ""
-    }),
+    mapPropsToValues: ({
+      wallet,
+      broker,
+      programCurrency,
+      leverage,
+      programsInfo,
+      accountType
+    }) => {
+      const periodLength =
+        programsInfo.periods.length === 1 ? programsInfo.periods[0] : undefined;
+      return {
+        stopOutLevel: 100,
+        brokerAccountTypeId: accountType ? accountType.id : "",
+        title: "",
+        description: "",
+        logo: {
+          cropped: undefined,
+          src: "",
+          isNew: false,
+          isDefault: true,
+          width: undefined,
+          height: undefined,
+          size: undefined
+        },
+        entryFee: undefined,
+        successFee: undefined,
+        isSignalProgram: broker.isSignalsAvailable,
+        signalSuccessFee: broker.isSignalsAvailable ? undefined : 0,
+        signalSubscriptionFee: broker.isSignalsAvailable ? undefined : 0,
+        currency: programCurrency,
+        leverage: leverage,
+        periodLength: periodLength,
+        depositWalletId: wallet.id,
+        depositAmount: undefined
+      };
+    },
     validationSchema: createProgramSettingsValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })(CreateProgramSettings)
-);
+  })
+)(CreateProgramSettings);
+
+interface OwnProps {
+  broker: Broker;
+  wallets: WalletData[];
+  programsInfo: ProgramsInfo;
+  onSubmit(data: ICreateProgramSettingsFormValues, setSubmitting: any): void;
+  minimumDepositsAmount: { [key: string]: number };
+  navigateBack(): void;
+  author: string;
+  notifyError(message: string): void;
+  programCurrency?: string;
+  changeCurrency(currency: string): void;
+  leverage?: number;
+  changeLeverage(leverage: number): void;
+  accountType?: BrokerAccountType;
+  changeAccountType(id: string): void;
+  rate?: number;
+  wallet: WalletData;
+  changeWallet(id: string): void;
+}
+
+export interface ICreateProgramSettingsProps
+  extends OwnProps,
+    InjectedTranslateProps {}
+export interface ICreateProgramSettingsFormValues {
+  currency?: string;
+  periodLength?: number;
+  successFee?: number;
+  stopOutLevel: number;
+  leverage?: number;
+  brokerAccountTypeId: string;
+  signalSuccessFee?: number;
+  signalSubscriptionFee?: number;
+  isSignalProgram: boolean;
+  title: string;
+  description: string;
+  logo: InputFileData;
+  entryFee?: number;
+  depositAmount?: number;
+  depositWalletId: string;
+}

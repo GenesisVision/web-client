@@ -1,6 +1,7 @@
 import "./pager.scss";
 
 import * as React from "react";
+
 import PagerButton from "./pager-button";
 
 export const _Pager: React.FC<Props> = ({

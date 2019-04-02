@@ -5,13 +5,13 @@ import {
   GVProgramPeriod,
   GVTextField
 } from "gv-react-components";
-import ProgramDefaultImage from "pages/create-program/components/create-program-settings/program-default-image";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputImage from "shared/components/form/input-image/input-image";
 import { FUND, PROGRAM } from "shared/constants/constants";
+import ProgramDefaultImage from "shared/media/program-default-image.svg";
 import filesService from "shared/services/file-service";
 
 import editAssetSettingsValidationSchema from "./asset-edit.validators";

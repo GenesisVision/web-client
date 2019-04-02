@@ -10,8 +10,8 @@ import Dropzone, { FileWithPreview } from "react-dropzone";
 
 import InputImageDefault from "./input-image-default";
 
-interface InputFileData {
-  cropped?: any;
+export interface InputFileData {
+  cropped?: File;
   src: string | ArrayBuffer | null;
   filename?: string;
   filetype?: any;
@@ -23,10 +23,10 @@ interface InputFileData {
 }
 
 interface InputImageProps {
-  className: string;
+  className?: string;
   value: InputFileData;
   defaultImage: any;
-  error: string;
+  error?: string;
   onChange(name: string, data: InputFileData): void;
   name: string;
 }
@@ -92,7 +92,7 @@ class InputImage extends React.Component<InputImageProps> {
   clear = (event: React.SyntheticEvent) => {
     const { onChange, name } = this.props;
     onChange(name, {
-      cropped: null,
+      cropped: undefined,
       src: "",
       isDefault: true,
       isNew: false,
