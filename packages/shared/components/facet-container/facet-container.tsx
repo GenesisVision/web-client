@@ -33,7 +33,7 @@ class _FacetContainer extends React.PureComponent<Props, State> {
     }
   }
 
-  getFacetItems: GetItemsFuncType = (filtering?) => {
+  getFacetItems: GetItemsFuncType = filtering => {
     const { getItems } = this.props;
     const { id } = this.state.facet!;
     return getItems({ ...filtering, facetId: id });
