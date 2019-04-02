@@ -75,7 +75,7 @@ const mapDispatchToProps = (
 
 interface OwnProps {
   getCurrentFacet: () => FacetDataType;
-  asset?: FACET_ASSET;
+  asset: FACET_ASSET;
   TableContainer: React.ComponentType<
     IProgramsFacetTableProps | IFundsFacetTableProps
   >;

@@ -21,6 +21,7 @@ class ProgramsFacetPage extends Component {
       <Page title={t("programs-page.title")}>
         <Surface className="programs-table-container">
           <FacetContainer
+            asset={"programsFacets"}
             TableContainer={ProgramsFacetTable}
             getCurrentFacet={getCurrentFacet}
             getItems={this.fetchPrograms}
