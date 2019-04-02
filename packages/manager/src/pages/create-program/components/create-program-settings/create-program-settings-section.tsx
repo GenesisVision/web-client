@@ -10,7 +10,7 @@ import CreateProgramSettings, {
   ICreateProgramSettingsFormValues
 } from "./create-program-settings";
 
-class CreateProgramSettingsSection extends React.Component<
+class CreateProgramSettingsSection extends React.PureComponent<
   OwnProps,
   StateProps
 > {

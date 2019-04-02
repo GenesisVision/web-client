@@ -29,7 +29,7 @@ enum TAB {
   SETTINGS = "SETTINGS"
 }
 
-class _CreateProgramContainer extends React.Component<Props, State> {
+class _CreateProgramContainer extends React.PureComponent<Props, State> {
   state: State = {
     minimumDepositsAmount: undefined,
     tab: TAB.BROKER,
