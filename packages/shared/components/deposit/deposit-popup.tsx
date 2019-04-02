@@ -1,6 +1,10 @@
 import "./deposit.scss";
 
-import { ProgramInvestInfo, WalletData } from "gv-api-web";
+import {
+  ProgramInvestInfo,
+  WalletBaseData,
+  WalletMultiAvailable
+} from "gv-api-web";
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
@@ -14,17 +18,23 @@ import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 
 class _DepositPopup extends React.PureComponent<
-  OwnProps & DispatchProps & StateProps
+  OwnProps & DispatchProps & StateProps,
+  State
 > {
+  state = {
+    wallets: undefined
+  };
+
   componentDidMount() {
     const { id, fetchInfo, currency, service } = this.props;
-    service.fetchWallets();
+    service.fetchBaseWallets().then((data: WalletMultiAvailable) => {
+      this.setState({ wallets: data.wallets });
+    });
     fetchInfo(id, currency);
   }
 
   render() {
     const {
-      wallets,
       info,
       submitInfo,
       currency,
@@ -33,7 +43,8 @@ class _DepositPopup extends React.PureComponent<
       asset,
       role
     } = this.props;
-    if (!info) return <DialogLoader />;
+    const { wallets } = this.state;
+    if (!info || !wallets) return <DialogLoader />;
     return (
       <Fragment>
         <DepositTop info={info} asset={asset} role={role} currency={currency} />
@@ -57,7 +68,6 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
   service: bindActionCreators(WalletServices, dispatch)
 });
 const mapStateToProps = (state: RootState): StateProps => ({
-  wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],
   role: state.profileHeader.info.data
     ? (state.profileHeader.info.data.userType as ROLE)
     : (process.env.REACT_APP_PLATFORM as ROLE)
@@ -87,11 +97,14 @@ interface OwnProps {
   asset: ASSET;
 }
 
+interface State {
+  wallets?: WalletBaseData[];
+}
+
 interface DispatchProps {
   service: any;
 }
 
 interface StateProps {
-  wallets: WalletData[];
   role: ROLE;
 }

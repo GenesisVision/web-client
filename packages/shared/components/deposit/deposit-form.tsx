@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { ProgramInvestInfo, WalletData } from "gv-api-web";
+import { ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -138,7 +138,7 @@ class _DepositForm extends React.PureComponent<
           InputComponent={Select}
           onChange={this.onChangeCurrencyFrom}
         >
-          {wallets.map((wallet: WalletData) => {
+          {wallets.map(wallet => {
             return (
               <option value={wallet.currency} key={wallet.currency}>
                 <WalletImage
@@ -282,7 +282,7 @@ const DepositForm = compose<React.FC<OwnProps>>(
 export default DepositForm;
 
 export interface OwnProps {
-  wallets: WalletData[];
+  wallets: WalletBaseData[];
   role: ROLE;
   asset: ASSET;
   entryFee: boolean;
