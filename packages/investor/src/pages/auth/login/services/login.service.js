@@ -1,19 +1,19 @@
 import { push } from "connected-react-router";
-import { HOME_ROUTE } from "pages/app/app.routes";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/login/login.routes";
 import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
 import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import authService from "shared/services/auth-service";
 
+import { loginUser } from "../actions/login.actions";
 import {
   LOGIN,
   LOGIN_TWO_FACTOR,
   RECOVERY_CODE,
-  TWO_FACTOR_CODE,
-  loginUser,
-  storeTwoFactor
-} from "../actions/login.actions";
+  storeTwoFactor,
+  TWO_FACTOR_CODE
+} from "shared/components/auth/login/login.actions";
+import { clearTwoFactorData } from "shared/components/auth/login/login.service";
 
 export const CLIENT_WEB = "Web";
 
@@ -69,20 +69,4 @@ export const twoFactorLogin = (code, type, setSubmitting) => (
     .catch(() => setSubmitting(false));
 
   return request;
-};
-
-export const logout = () => dispatch => {
-  authService.removeToken();
-  dispatch(authActions.updateToken());
-  dispatch(push(HOME_ROUTE));
-};
-
-export const clearLoginData = () => dispatch => {
-  const clearLoginDataAction = clearDataActionFactory(LOGIN);
-  dispatch(clearLoginDataAction.clearData());
-};
-
-const clearTwoFactorData = () => dispatch => {
-  const clearTwoFactorAction = clearDataActionFactory(LOGIN_TWO_FACTOR);
-  dispatch(clearTwoFactorAction.clearData());
 };

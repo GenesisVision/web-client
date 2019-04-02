@@ -1,43 +1,24 @@
 import { push } from "connected-react-router";
-import { HOME_ROUTE } from "pages/app/app.routes";
-import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/login/login.routes";
-import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
 import authActions from "shared/actions/auth-actions";
-import clearDataActionFactory from "shared/actions/clear-data.factory";
 import authService from "shared/services/auth-service";
 
+import { loginUser } from "../actions/login.actions";
+import {
+  clearTwoFactorData,
+  sharedLogin
+} from "shared/components/auth/login/login.service";
 import {
   LOGIN,
-  LOGIN_TWO_FACTOR,
   RECOVERY_CODE,
-  TWO_FACTOR_CODE,
-  loginUser,
-  storeTwoFactor
-} from "../actions/login.actions";
+  TWO_FACTOR_CODE
+} from "shared/components/auth/login/login.actions";
+import { Dispatch } from "redux";
+import clearDataActionFactory from "shared/actions/clear-data.factory";
 
 export const CLIENT_WEB = "Web";
 
 export const login = (loginData, from, setSubmitting) => dispatch => {
-  return dispatch(loginUser({ ...loginData, client: CLIENT_WEB }))
-    .then(response => {
-      authService.storeToken(response.value);
-      dispatch(authActions.updateToken());
-      dispatch(push(from));
-    })
-    .catch(e => {
-      if (e.code === "RequiresTwoFactor") {
-        dispatch(
-          storeTwoFactor({
-            ...loginData,
-            from
-          })
-        );
-        dispatch(setTwoFactorRequirement(true));
-        dispatch(push(LOGIN_ROUTE_TWO_FACTOR_ROUTE));
-      } else {
-        setSubmitting(false);
-      }
-    });
+  return sharedLogin(loginData, from, setSubmitting, dispatch, loginUser);
 };
 
 export const twoFactorLogin = (code, type, setSubmitting) => (
@@ -71,18 +52,7 @@ export const twoFactorLogin = (code, type, setSubmitting) => (
   return request;
 };
 
-export const logout = () => dispatch => {
-  authService.removeToken();
-  dispatch(authActions.updateToken());
-  dispatch(push(HOME_ROUTE));
-};
-
 export const clearLoginData = () => dispatch => {
   const clearLoginDataAction = clearDataActionFactory(LOGIN);
   dispatch(clearLoginDataAction.clearData());
-};
-
-const clearTwoFactorData = () => dispatch => {
-  const clearTwoFactorAction = clearDataActionFactory(LOGIN_TWO_FACTOR);
-  dispatch(clearTwoFactorAction.clearData());
 };

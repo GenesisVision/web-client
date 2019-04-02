@@ -1,8 +1,9 @@
 import React from "react";
 import TwoFactorCodeContainer from "shared/components/auth/login/two-factor/two-factor-code-container";
 
-import { TWO_FACTOR_CODE } from "../actions/login.actions";
-import { clearLoginData, twoFactorLogin } from "../services/login.service";
+import { twoFactorLogin } from "../services/login.service";
+import { TWO_FACTOR_CODE } from "shared/components/auth/login/login.actions";
+import { clearLoginData } from "shared/components/auth/login/login.service";
 
 const TwoFactorPage = () => {
   return (

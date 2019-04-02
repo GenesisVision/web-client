@@ -3,8 +3,9 @@ import "shared/components/auth/login/recovery/recovery.scss";
 import React from "react";
 import RecoveryCodeContainer from "shared/components/auth/login/recovery/recovery-code-container";
 
-import { RECOVERY_CODE } from "../actions/login.actions";
-import { clearLoginData, twoFactorLogin } from "../services/login.service";
+import { twoFactorLogin } from "../services/login.service";
+import { RECOVERY_CODE } from "shared/components/auth/login/login.actions";
+import { clearLoginData } from "shared/components/auth/login/login.service";
 
 const RecoveryPage = () => {
   return (
