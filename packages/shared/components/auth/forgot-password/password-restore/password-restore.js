@@ -25,7 +25,11 @@ const RestorePassword = ({ t, isSubmitting, handleSubmit, error }) => {
       />
       <FormError error={error} />
       <div className="password-restore__navigation">
-        <GVButton type="submit" id="passwordRestoreSubmit">
+        <GVButton
+          type="submit"
+          id="passwordRestoreSubmit"
+          disabled={isSubmitting}
+        >
           {t("auth.password-restore.new-password.confirm-button-text")}
         </GVButton>
       </div>

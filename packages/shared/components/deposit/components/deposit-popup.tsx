@@ -13,7 +13,7 @@ import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-load
 import { fetchBaseWallets } from "shared/components/wallet/services/wallet.services";
 import { ASSET, ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
-import { RootThunk } from "shared/utils/types";
+import { RootThunk, SetSubmittingType } from "shared/utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
@@ -111,7 +111,7 @@ interface OwnProps {
   invest: (
     amount: number,
     currency: string,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ) => void;
   hasEntryFee: boolean;
   asset: ASSET;

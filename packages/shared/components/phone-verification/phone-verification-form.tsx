@@ -6,6 +6,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import { SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
 
 interface FormValues {
@@ -19,7 +20,7 @@ interface OwnProps {
   errorMessage?: string;
   onResendClick(): void;
   disabledResend?: boolean;
-  onSubmit(code: string): void;
+  onSubmit(code: string, setSubmitting: SetSubmittingType): void;
 }
 
 interface Props extends InjectedTranslateProps, OwnProps, FormProps {}
@@ -30,7 +31,7 @@ class PhoneVerificationForm extends React.Component<Props> {
   }
 
   render() {
-    const { phoneNumber, t, handleSubmit } = this.props;
+    const { phoneNumber, t, handleSubmit, isSubmitting } = this.props;
     return (
       <form
         id="phone-verification"
@@ -74,7 +75,9 @@ class PhoneVerificationForm extends React.Component<Props> {
           />
           <div className="form-error">{this.props.errorMessage}</div>
           <div className="dialog__buttons">
-            <GVButton type="submit">{t("buttons.confirm")}</GVButton>
+            <GVButton type="submit" disabled={isSubmitting}>
+              {t("buttons.confirm")}
+            </GVButton>
           </div>
         </div>
       </form>
@@ -96,7 +99,7 @@ export default compose<React.ComponentType<OwnProps>>(
         )
       }),
     handleSubmit: (values, bag) => {
-      bag.props.onSubmit(values.code);
+      bag.props.onSubmit(values.code, bag.setSubmitting);
     }
   })
 )(PhoneVerificationForm);

@@ -17,7 +17,7 @@ class ProfileContainer extends Component {
     isPending: false
   };
 
-  handleEdit = values => {
+  handleEdit = (values, setSubmitting) => {
     const model = pickBy(values, str => Boolean(str));
     this.setState({ isPending: true });
     profileApi
@@ -27,6 +27,9 @@ class ProfileContainer extends Component {
       .then(() => {
         this.setState({ isPending: false });
         this.success(this.props.t("profile-page.success-edit"));
+      })
+      .catch(() => {
+        setSubmitting(false);
       });
   };
 

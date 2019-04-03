@@ -7,6 +7,7 @@ import {
   translate
 } from "react-i18next";
 import { compose } from "redux";
+import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
 const CloseProgramForm: React.FC<
@@ -48,7 +49,7 @@ const CloseProgramForm: React.FC<
   );
 };
 
-const twoFactorvalidator = (
+const twoFactorValidator = (
   t: TranslationFunction,
   twoFactorEnabled: boolean
 ) => {
@@ -71,10 +72,10 @@ export default compose<React.ComponentType<OwnProps>>(
     },
     validationSchema: ({ t, twoFactorEnabled }: FormProps) =>
       object().shape({
-        twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
+        twoFactorCode: twoFactorValidator(t, twoFactorEnabled)
       }),
-    handleSubmit: (values, { props }) => {
-      props.onSubmit(values);
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
     }
   })
 )(CloseProgramForm);
@@ -82,7 +83,10 @@ export default compose<React.ComponentType<OwnProps>>(
 interface OwnProps {
   onCancel(): void;
   twoFactorEnabled: boolean;
-  onSubmit(values: ICloseProgramFormValues): void;
+  onSubmit(
+    values: ICloseProgramFormValues,
+    setSubmitting: SetSubmittingType
+  ): void;
 }
 
 export interface ICloseProgramFormValues {

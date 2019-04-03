@@ -29,7 +29,8 @@ const AssetEditForm = ({
   errors,
   notifyError,
   serverError,
-  type
+  type,
+  isSubmitting
 }) => {
   const imageInputError =
     errors &&
@@ -118,7 +119,7 @@ const AssetEditForm = ({
             type="submit"
             id="signUpFormSubmit"
             className="invest-form__submit-button"
-            disabled={!dirty || !isValid}
+            disabled={!dirty || !isValid || isSubmitting}
           >
             {t("manager.edit-program.confirm")}
           </GVButton>

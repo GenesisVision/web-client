@@ -140,8 +140,8 @@ const ProfileForm = withFormik({
     address: info.address || undefined,
     index: info.index || undefined
   }),
-  handleSubmit: (values, { props }) => {
-    props.onSubmit(values);
+  handleSubmit: (values, { props, setSubmitting }) => {
+    props.onSubmit(values, setSubmitting);
   }
 })(Profile);
 
