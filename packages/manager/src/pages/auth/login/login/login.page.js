@@ -5,7 +5,6 @@ import LoginFormContainer from "shared/components/auth/login/login/login-form-co
 
 import AuthTabs from "../../components/auth-tabs/auth-tabs";
 import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
-import * as loginService from "shared/components/auth/login/login.service";
 import { MANAGER } from "shared/constants/constants";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
@@ -17,7 +16,6 @@ const LoginPage = ({ location }) => {
       <AuthTabs authPartUrl={LOGIN_ROUTE} />
       <LoginFormContainer
         from={from}
-        loginService={loginService}
         FORGOT_PASSWORD_ROUTE={FORGOT_PASSWORD_ROUTE}
         role={MANAGER}
       />
