@@ -35,7 +35,14 @@ const mapDispatchToProps = (
     dispatch
   );
   return {
-    fetchInfo: () => dispatch(fetchFundWithdrawInfo(id, accountCurrency)),
+    fetchInfo: () => {
+      return dispatch(fetchFundWithdrawInfo(id, accountCurrency))
+        .then(data => data)
+        .catch(error => {
+          onClose();
+          return error;
+        });
+    },
     withdraw: service.withdrawFund
   };
 };
