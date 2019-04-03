@@ -38,7 +38,7 @@ const calculatePrefix = ({
     ...Array(64 - difficulty).fill("F")
   ].join("");
   while (SHA256(`${prefix}${nonce}${login}`) >= diffString) {
-    setCount(prefix);
+    if (prefix % 100 === 0) setCount(prefix);
     prefix++;
   }
   return prefix;
