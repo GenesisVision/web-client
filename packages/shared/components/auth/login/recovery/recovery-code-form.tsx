@@ -1,12 +1,14 @@
-import { withFormik } from "formik";
+import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import { object, string } from "yup";
 
-const RecoveryCodeForm = ({ t, handleSubmit, isSubmitting, error }) => {
+const _RecoveryCodeForm: React.FC<
+  InjectedFormikProps<Props, IRecoveryCodeFormValues>
+> = ({ t, handleSubmit, isSubmitting, error }) => {
   return (
     <form
       id="recoveryForm"
@@ -35,14 +37,25 @@ const RecoveryCodeForm = ({ t, handleSubmit, isSubmitting, error }) => {
   );
 };
 
-export default compose(
+interface Props extends OwnProps, InjectedTranslateProps {}
+
+interface OwnProps {
+  onSubmit(data: string, setSubmitting: (isSubmitting: boolean) => void): void;
+  error: string;
+}
+
+export interface IRecoveryCodeFormValues {
+  recoveryCode: string;
+}
+
+const RecoveryCodeForm = compose<React.FC<OwnProps>>(
   translate(),
-  withFormik({
+  withFormik<Props, IRecoveryCodeFormValues>({
     displayName: "recoveryForm",
     mapPropsToValues: () => ({
       recoveryCode: ""
     }),
-    validationSchema: ({ t }) =>
+    validationSchema: ({ t }: Props) =>
       object().shape({
         recoveryCode: string()
           .trim()
@@ -52,4 +65,5 @@ export default compose(
       props.onSubmit(values.recoveryCode, setSubmitting);
     }
   })
-)(RecoveryCodeForm);
+)(_RecoveryCodeForm);
+export default RecoveryCodeForm;
