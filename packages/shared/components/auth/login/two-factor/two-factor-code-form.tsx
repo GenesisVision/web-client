@@ -112,6 +112,7 @@ interface State {
 }
 
 const TwoFactorCodeForm = compose<React.FunctionComponent<OwnProps>>(
+  React.memo,
   translate(),
   withFormik<Props, FormValues>({
     displayName: "twoFactorForm",
