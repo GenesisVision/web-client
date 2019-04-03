@@ -95,7 +95,9 @@ export const twoFactorLogin: TwoFactorLoginFuncType = (
     password,
     client: CLIENT_WEB,
     twoFactorCode: "",
-    recoveryCode: ""
+    recoveryCode: "",
+    captchaId: "",
+    prefix: 0
   };
   if (type === CODE_TYPE.TWO_FACTOR) {
     model.twoFactorCode = code;
@@ -103,19 +105,25 @@ export const twoFactorLogin: TwoFactorLoginFuncType = (
   if (type === CODE_TYPE.RECOVERY) {
     model.recoveryCode = code;
   }
-
-  const request = dispatch(loginUserMethod(model));
-
-  request
-    .then((response: { value: string }) => {
-      authService.storeToken(response.value);
-      dispatch(authActions.updateToken());
-      dispatch(clearTwoFactorData());
-      dispatch(push(from));
-    })
-    .catch(() => setSubmitting(false));
-
-  return request;
+  return platformApi
+    .v10PlatformRiskcontrolGet(email, { device: CLIENT_WEB })
+    .then(response => {
+      const { loginCheckDetails, id } = response;
+      const prefix = calculateHash({
+        ...loginCheckDetails.details,
+        login: email
+      });
+      model.captchaId = id;
+      model.prefix = prefix;
+      return dispatch(loginUserMethod(model))
+        .then((response: { value: string }) => {
+          authService.storeToken(response.value);
+          dispatch(authActions.updateToken());
+          dispatch(clearTwoFactorData());
+          dispatch(push(from));
+        })
+        .catch(() => setSubmitting(false));
+    });
 };
 
 export const clearLoginData: clearLoginDataFuncType = () => dispatch => {
