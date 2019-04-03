@@ -5,12 +5,16 @@ import { bindActionCreators, Dispatch } from "redux";
 import LoginForm, { ILoginFormFormValues } from "./login-form";
 import { loginUserInvestor, loginUserManager } from "../login.actions";
 import { ROLE } from "shared/constants/constants";
-import { LoginService } from "../login.service";
+import { CounterType, LoginService } from "../login.service";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import * as loginService from "../login.service";
 
-class LoginFormContainer extends React.PureComponent<Props> {
+class LoginFormContainer extends React.PureComponent<Props, State> {
+  state = {
+    total: 0,
+    count: 0
+  };
   componentWillUnmount() {
     this.props.service.clearLoginData();
   }
@@ -20,15 +24,29 @@ class LoginFormContainer extends React.PureComponent<Props> {
   ) => {
     const { service, from, role } = this.props;
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-    service.login(loginFormData, from, setSubmitting, method);
+    const setCount = (count: number) => {
+      if (count % 100 === 0) this.setState({ count });
+    };
+    const setTotal = (total: number) => this.setState({ total });
+    service.login(
+      loginFormData,
+      from,
+      setSubmitting,
+      method,
+      setCount,
+      setTotal
+    );
   };
   render() {
     const { errorMessage, FORGOT_PASSWORD_ROUTE } = this.props;
+    const { count, total } = this.state;
     return (
       <LoginForm
         onSubmit={this.handleSubmit}
         error={errorMessage}
         FORGOT_PASSWORD_ROUTE={FORGOT_PASSWORD_ROUTE}
+        count={count}
+        total={total}
       />
     );
   }
@@ -45,6 +63,8 @@ const mapStateToProps = (
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators({ ...(loginService as LoginService) }, dispatch)
 });
+
+interface State extends CounterType {}
 
 interface StateProps {
   isAuthenticated: boolean;

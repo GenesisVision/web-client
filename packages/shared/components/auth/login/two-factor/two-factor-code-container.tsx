@@ -15,8 +15,13 @@ import { LoginService } from "../login.service";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { bindActionCreators, Dispatch } from "redux";
+import { CounterType } from "../login.service";
 
-class TwoFactorCodeContainer extends React.PureComponent<Props> {
+class TwoFactorCodeContainer extends React.PureComponent<Props, State> {
+  state = {
+    total: 0,
+    count: 0
+  };
   componentDidMount() {
     const { email, password, service } = this.props;
     if (email === "" || password === "") {
@@ -34,19 +39,25 @@ class TwoFactorCodeContainer extends React.PureComponent<Props> {
   ): Promise<any> | ((dispatch: any, getState: any) => Promise<void>) => {
     const { service, role } = this.props;
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
+    const setCount = (count: number) => this.setState({ count });
+    const setTotal = (total: number) => this.setState({ total });
     return service.twoFactorLogin(
       code,
       CODE_TYPE.TWO_FACTOR,
       setSubmitting,
-      method
+      method,
+      setCount,
+      setTotal
     );
   };
 
   render() {
+    const counter: CounterType = { ...this.state };
     return (
       <TwoFactorCodeForm
         onSubmit={this.handleSubmit}
         error={this.props.errorMessage}
+        counter={counter}
       />
     );
   }
@@ -69,6 +80,8 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     dispatch
   )
 });
+
+interface State extends CounterType {}
 
 interface StateProps {
   errorMessage: string;

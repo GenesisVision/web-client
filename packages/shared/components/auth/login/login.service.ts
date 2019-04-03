@@ -20,22 +20,29 @@ export const CLIENT_WEB = "Web";
 export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
+const maxTarget = 26959535291011309493156476344723991336010898738574164086137773096960;
 
 const calculateHash = ({
   difficulty,
   nonce,
-  login
+  login,
+  setCount
 }: {
   difficulty: number;
   nonce: string;
   login: string;
+  setCount: (val: number) => void;
 }): number => {
   let prefix = 0;
+  difficulty = 2;
   const diffString = [
     ...Array(difficulty).fill(0),
     ...Array(64 - difficulty).fill("F")
   ].join("");
-  while (SHA256(`${prefix}${nonce}${login}`) >= diffString) prefix++;
+  while (SHA256(`${prefix}${nonce}${login}`) >= diffString) {
+    setCount(prefix);
+    prefix++;
+  }
   return prefix;
 };
 
@@ -43,16 +50,29 @@ export const login: LoginFuncType = (
   loginData,
   from,
   setSubmitting,
-  loginUserMethod
+  loginUserMethod,
+  setCount,
+  setTotal
 ) => dispatch => {
   return platformApi
     .v10PlatformRiskcontrolGet(loginData.email, { device: CLIENT_WEB })
     .then(response => {
       const { loginCheckDetails, id } = response;
-      const prefix = calculateHash({
-        ...loginCheckDetails.details,
-        login: loginData.email
-      });
+      setTotal(Math.pow(16, loginCheckDetails.details.difficulty));
+      let prefix;
+      switch (loginCheckDetails.type) {
+        case "PoW":
+          prefix = calculateHash({
+            ...loginCheckDetails.details,
+            login: loginData.email,
+            setCount
+          });
+          break;
+        case "None":
+        case "CaptchaGeeTest":
+        default:
+          prefix = 0;
+      }
       return dispatch(
         loginUserMethod({
           ...loginData,
@@ -87,7 +107,9 @@ export const twoFactorLogin: TwoFactorLoginFuncType = (
   code,
   type,
   setSubmitting,
-  loginUserMethod
+  loginUserMethod,
+  setCount,
+  setTotal
 ) => (dispatch, getState) => {
   const { email, password, from } = getState().loginData.twoFactor;
   const model = {
@@ -109,10 +131,21 @@ export const twoFactorLogin: TwoFactorLoginFuncType = (
     .v10PlatformRiskcontrolGet(email, { device: CLIENT_WEB })
     .then(response => {
       const { loginCheckDetails, id } = response;
-      const prefix = calculateHash({
-        ...loginCheckDetails.details,
-        login: email
-      });
+      setTotal(maxTarget / loginCheckDetails.details.difficulty);
+      let prefix;
+      switch (loginCheckDetails.type) {
+        case "PoW":
+          prefix = calculateHash({
+            ...loginCheckDetails.details,
+            login: email,
+            setCount
+          });
+          break;
+        case "None":
+        case "CaptchaGeeTest":
+        default:
+          prefix = 0;
+      }
       model.captchaId = id;
       model.prefix = prefix;
       return dispatch(loginUserMethod(model))
@@ -146,17 +179,22 @@ type LoginFuncType = (
   loginData: { email: string; password: string },
   from: string,
   setSubmitting: any,
-  loginUserMethod: any
+  loginUserMethod: any,
+  setCount: (val: number) => void,
+  setTotal: (val: number) => void
 ) => (dispatch: Dispatch) => Promise<void>;
 type TwoFactorLoginFuncType = (
   code: string,
   type: CODE_TYPE,
   setSubmitting: any,
-  loginUserMethod: any
+  loginUserMethod: any,
+  setCount: (val: number) => void,
+  setTotal: (val: number) => void
 ) => (dispatch: any, getState: any) => Promise<void>;
 type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = () => (dispatch: Dispatch) => void;
+export type CounterType = { count: number; total: number };
 
 export interface LoginService {
   login: LoginFuncType;

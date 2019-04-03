@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import validationSchema from "./login-form.validators";
+import { CounterType } from "../login.service";
+import Pie from "../../../pie-container/pie";
+import { GVColors } from "gv-react-components";
 
 const _LoginForm: React.FC<
   InjectedFormikProps<Props, ILoginFormFormValues>
@@ -16,8 +19,11 @@ const _LoginForm: React.FC<
   error,
   isValid,
   dirty,
-  FORGOT_PASSWORD_ROUTE
+  FORGOT_PASSWORD_ROUTE,
+  count,
+  total
 }) => {
+  console.log(count, total);
   return (
     <form
       id="loginForm"
@@ -47,20 +53,31 @@ const _LoginForm: React.FC<
       </div>
       <FormError error={error} />
 
-      <GVButton
-        className="login__submit-button"
-        id="loginSubmit"
-        disabled={isSubmitting || !isValid}
-        type="submit"
-      >
-        {t("auth.login.confirm-button-text")}
-      </GVButton>
+      <div className="login__submit-block">
+        <GVButton
+          className="login__submit-button"
+          id="loginSubmit"
+          disabled={isSubmitting || !isValid}
+          type="submit"
+        >
+          {t("auth.login.confirm-button-text")}
+        </GVButton>
+        <div className="login__pie-container">
+          {count}
+          <Pie
+            color={GVColors.$primaryColor}
+            start={0}
+            end={total}
+            value={count}
+          />
+        </div>
+      </div>
     </form>
   );
 };
 
 const withTranslationAndFormik = compose<React.FC<OwnProps>>(
-  React.memo,
+  // React.memo,
   translate(),
   withFormik<Props, ILoginFormFormValues>({
     displayName: "loginForm",
@@ -85,6 +102,8 @@ interface OwnProps {
   ): void;
   error: string;
   FORGOT_PASSWORD_ROUTE: string;
+  count: number;
+  total: number;
 }
 
 export interface ILoginFormFormValues {

@@ -11,12 +11,16 @@ import {
   loginUserManager
 } from "../login.actions";
 import * as loginService from "../login.service";
-import { LoginService } from "../login.service";
+import { CounterType, LoginService } from "../login.service";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { bindActionCreators, Dispatch } from "redux";
 
-class RecoveryCodeContainer extends React.PureComponent<Props> {
+class RecoveryCodeContainer extends React.PureComponent<Props, State> {
+  state = {
+    total: 0,
+    count: 0
+  };
   componentDidMount() {
     const { email, password, service } = this.props;
     if (email === "" || password === "") {
@@ -34,14 +38,25 @@ class RecoveryCodeContainer extends React.PureComponent<Props> {
   ) => {
     const { service, role } = this.props;
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-    service.twoFactorLogin(code, CODE_TYPE.RECOVERY, setSubmitting, method);
+    const setCount = (count: number) => this.setState({ count });
+    const setTotal = (total: number) => this.setState({ total });
+    service.twoFactorLogin(
+      code,
+      CODE_TYPE.RECOVERY,
+      setSubmitting,
+      method,
+      setCount,
+      setTotal
+    );
   };
 
   render() {
+    const counter: CounterType = { ...this.state };
     return (
       <RecoveryCodeForm
         onSubmit={this.handleSubmit}
         error={this.props.errorMessage}
+        counter={counter}
       />
     );
   }
@@ -64,6 +79,8 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     dispatch
   )
 });
+
+interface State extends CounterType {}
 
 interface StateProps {
   errorMessage: string;
