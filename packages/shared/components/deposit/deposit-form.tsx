@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { ProgramInvestInfo, WalletData } from "gv-api-web";
+import { ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -47,11 +47,7 @@ class _DepositForm extends React.PureComponent<
   };
 
   investAmount = (amount: number): number => {
-    return (
-      (amount || 0) -
-      (this.props.asset === ASSET.PROGRAM ? this.gvFee(amount) : 0) -
-      this.entryFee(amount)
-    );
+    return (amount || 0) - this.gvFee(amount) - this.entryFee(amount);
   };
 
   isAllow = (currency: string) => (values: NumberFormatValues): boolean => {
@@ -142,7 +138,7 @@ class _DepositForm extends React.PureComponent<
           InputComponent={Select}
           onChange={this.onChangeCurrencyFrom}
         >
-          {wallets.map((wallet: WalletData) => {
+          {wallets.map(wallet => {
             return (
               <option value={wallet.currency} key={wallet.currency}>
                 <WalletImage
@@ -205,25 +201,23 @@ class _DepositForm extends React.PureComponent<
                 </span>
               </li>
             )}
-            {asset === ASSET.PROGRAM && (
-              <li className="dialog-list__item">
-                <span className="dialog-list__title">
-                  {t("deposit-asset.gv-commission")}
-                </span>
-                <span className="dialog-list__value">
-                  {info.gvCommission} %
-                  <NumberFormat
-                    value={formatCurrencyValue(
-                      this.gvFee(convertFromCurrency(values.amount, rate)),
-                      currency
-                    )}
-                    prefix={" ("}
-                    suffix={` ${currency})`}
-                    displayType="text"
-                  />
-                </span>
-              </li>
-            )}
+            <li className="dialog-list__item">
+              <span className="dialog-list__title">
+                {t("deposit-asset.gv-commission")}
+              </span>
+              <span className="dialog-list__value">
+                {info.gvCommission} %
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    this.gvFee(values.amount),
+                    walletCurrency
+                  )}
+                  prefix={" ("}
+                  suffix={` ${walletCurrency})`}
+                  displayType="text"
+                />
+              </span>
+            </li>
             <li className="dialog-list__item">
               <span className="dialog-list__title">
                 {t("deposit-asset.investment-amount")}
@@ -234,6 +228,7 @@ class _DepositForm extends React.PureComponent<
                     this.investAmount(convertFromCurrency(values.amount, rate)),
                     currency
                   )}
+                  prefix="≈ "
                   suffix={` ${currency}`}
                   displayType="text"
                 />
@@ -287,7 +282,7 @@ const DepositForm = compose<React.FC<OwnProps>>(
 export default DepositForm;
 
 export interface OwnProps {
-  wallets: WalletData[];
+  wallets: WalletBaseData[];
   role: ROLE;
   asset: ASSET;
   entryFee: boolean;

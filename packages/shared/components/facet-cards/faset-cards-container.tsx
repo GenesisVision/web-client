@@ -3,9 +3,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import RootState from "shared/reducers/root-reducer";
 
+import { composeFacetUrlFunc } from "./facet-card";
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
-import { composeFacetUrlFunc } from "./facet-card";
 
 export class _FacetCardsContainer extends React.PureComponent<
   Props & StateProps

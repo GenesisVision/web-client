@@ -1,10 +1,10 @@
+import { CancelablePromise } from "gv-api-web";
+import { InvestorRootState } from "investor-web-portal/src/reducers";
+import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { Action, AnyAction, Dispatch } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 
 import RootState from "../reducers/root-reducer";
-import { CancelablePromise } from "gv-api-web";
-import { InvestorRootState } from "investor-web-portal/src/reducers";
-import { ManagerRootState } from "manager-web-portal/src/reducers";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;

@@ -1,7 +1,8 @@
-import * as React from "react";
 import { shallow } from "enzyme";
-import Modal from "./modal";
+import * as React from "react";
 import EventListener from "react-event-listener";
+
+import Modal from "./modal";
 
 const modalRoot = document.createElement("div");
 modalRoot.setAttribute("id", "modal-root");

@@ -1,16 +1,22 @@
+import { convertToCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import { array, lazy, number, object, string } from "yup";
 
 const createFundSettingsValidationSchema = ({ t, ...props }) =>
-  lazy(values =>
-    object().shape({
+  lazy(values => {
+    const minDepositAmount = convertToCurrency(props.deposit, values.rate);
+    return object().shape({
       depositAmount: number()
         .required(
           t("manager.create-program-page.settings.validation.amount-required")
         )
         .min(
-          50,
+          minDepositAmount,
           t("manager.create-program-page.settings.validation.amount-is-zero", {
-            min: 50
+            min: formatCurrencyValue(
+              minDepositAmount,
+              values.depositWalletCurrency
+            )
           })
         )
         .max(
@@ -99,7 +105,7 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
           t("manager.create-fund-page.settings.validation.assets-count")
         )
         .min(2, t("manager.create-fund-page.settings.validation.assets-count"))
-    })
-  );
+    });
+  });
 
 export default createFundSettingsValidationSchema;
