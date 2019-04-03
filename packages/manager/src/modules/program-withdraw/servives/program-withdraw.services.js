@@ -11,5 +11,20 @@ export const getProgramWithdrawInfo = id => (dispatch, getState) => {
   );
 };
 
+export const withdrawProgramById = (id, amount) => () => {
+  return managerApi
+    .v10ManagerProgramsByIdWithdrawMultiByAmountPost(
+      id,
+      amount,
+      authService.getAuthArg()
+    )
+    .then(() => {
+      alertMessageActions.success(
+        "withdraw-program.success-alert-message",
+        true
+      );
+    });
+};
+
 export const alert = (type, text, translate = false) => dispatch =>
   dispatch(alertMessageActions[type](text, translate));

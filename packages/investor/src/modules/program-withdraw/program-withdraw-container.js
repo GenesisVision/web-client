@@ -15,28 +15,27 @@ class ProgramWithdrawContainer extends PureComponent {
   state = { errorMessage: null };
 
   handleWithdraw = (id, percent) => {
-    return this.props.services
+    const { services, onSubmit } = this.props;
+    return services
       .withdrawProgramById(id, percent)
       .then(() => {
-        this.props.onClose();
-        this.props.onSubmit();
+        this.handleClose();
+        onSubmit();
       })
       .catch(error => {
-        this.setState(error);
+        this.setState({ errorMessage: error.errorMessage });
       });
   };
 
+  handleClose = () => {
+    this.props.onClose();
+    this.setState({ errorMessage: null });
+  };
+
   render() {
-    const {
-      open,
-      onClose,
-      services,
-      id,
-      assetCurrency,
-      accountCurrency
-    } = this.props;
+    const { open, services, id, assetCurrency, accountCurrency } = this.props;
     return (
-      <Dialog open={open} onClose={onClose}>
+      <Dialog open={open} onClose={this.handleClose}>
         <ProgramWithdrawPopup
           assetCurrency={assetCurrency}
           accountCurrency={accountCurrency}
