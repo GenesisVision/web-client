@@ -21,7 +21,7 @@ export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
 
-export const calculateHash = ({
+const calculateHash = ({
   difficulty,
   nonce,
   login
@@ -42,12 +42,12 @@ export const calculateHash = ({
   return prefix;
 };
 
-export const login = (
-  loginData: { email: string; password: string },
-  from: string,
-  setSubmitting: any,
-  loginUserMethod: any
-) => (dispatch: Dispatch) => {
+export const login: LoginFuncType = (
+  loginData,
+  from,
+  setSubmitting,
+  loginUserMethod
+) => dispatch => {
   return platformApi
     .v10PlatformRiskcontrolGet(loginData.email, { device: CLIENT_WEB })
     .then(response => {
@@ -86,12 +86,12 @@ export const login = (
     });
 };
 
-export const twoFactorLogin = (
-  code: string,
-  type: CODE_TYPE,
-  setSubmitting: any,
-  loginUserMethod: any
-) => (dispatch: any, getState: any) => {
+export const twoFactorLogin: TwoFactorLoginFuncType = (
+  code,
+  type,
+  setSubmitting,
+  loginUserMethod
+) => (dispatch, getState) => {
   const { email, password, from } = getState().loginData.twoFactor;
   const model = {
     email,
@@ -121,18 +121,42 @@ export const twoFactorLogin = (
   return request;
 };
 
-export const clearLoginData = () => (dispatch: Dispatch) => {
+export const clearLoginData: clearLoginDataFuncType = () => dispatch => {
   const clearLoginDataAction = clearDataActionFactory(LOGIN);
   dispatch(clearLoginDataAction.clearData());
 };
 
-export const clearTwoFactorData = () => (dispatch: Dispatch) => {
+export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => {
   const clearTwoFactorAction = clearDataActionFactory(LOGIN_TWO_FACTOR);
   dispatch(clearTwoFactorAction.clearData());
 };
 
-export const logout = () => (dispatch: Dispatch) => {
+export const logout: logoutFuncType = () => dispatch => {
   authService.removeToken();
   dispatch(authActions.updateToken());
   dispatch(push(HOME_ROUTE));
 };
+
+type LoginFuncType = (
+  loginData: { email: string; password: string },
+  from: string,
+  setSubmitting: any,
+  loginUserMethod: any
+) => (dispatch: Dispatch) => Promise<void>;
+type TwoFactorLoginFuncType = (
+  code: string,
+  type: CODE_TYPE,
+  setSubmitting: any,
+  loginUserMethod: any
+) => (dispatch: any, getState: any) => Promise<void>;
+type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
+type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
+type logoutFuncType = () => (dispatch: Dispatch) => void;
+
+export interface LoginService {
+  login: LoginFuncType;
+  twoFactorLogin: TwoFactorLoginFuncType;
+  clearLoginData: clearLoginDataFuncType;
+  clearTwoFactorData: clearTwoFactorDataFuncType;
+  logout: logoutFuncType;
+}
