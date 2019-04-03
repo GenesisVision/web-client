@@ -1,14 +1,15 @@
-import { withFormik } from "formik";
+import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
-
 import validationSchema from "./login-form.validators";
 
-const LoginForm = ({
+const _LoginForm: React.FC<
+  InjectedFormikProps<Props, ILoginFormFormValues>
+> = ({
   t,
   isSubmitting,
   handleSubmit,
@@ -58,9 +59,9 @@ const LoginForm = ({
   );
 };
 
-const withTranslationAndFormik = compose(
+const withTranslationAndFormik = compose<React.FC<OwnProps>>(
   translate(),
-  withFormik({
+  withFormik<Props, ILoginFormFormValues>({
     displayName: "loginForm",
     isInitialValid: true,
     mapPropsToValues: () => ({
@@ -72,6 +73,22 @@ const withTranslationAndFormik = compose(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(LoginForm);
+)(_LoginForm);
+
+interface Props extends OwnProps, InjectedTranslateProps {}
+
+interface OwnProps {
+  onSubmit(
+    data: ILoginFormFormValues,
+    setSubmitting: (isSubmitting: boolean) => void
+  ): void;
+  error: string;
+  FORGOT_PASSWORD_ROUTE: string;
+}
+
+export interface ILoginFormFormValues {
+  email: string;
+  password: string;
+}
 
 export default withTranslationAndFormik;
