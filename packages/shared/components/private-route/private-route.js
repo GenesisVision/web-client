@@ -1,7 +1,7 @@
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 
 class Private extends Component {
   renderComponent = props => {

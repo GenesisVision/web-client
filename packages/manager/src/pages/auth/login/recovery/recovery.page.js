@@ -3,9 +3,12 @@ import "shared/components/auth/login/recovery/recovery.scss";
 import React from "react";
 import RecoveryCodeContainer from "shared/components/auth/login/recovery/recovery-code-container";
 
-import { twoFactorLogin } from "../services/login.service";
+import {
+  clearLoginData,
+  twoFactorLogin
+} from "shared/components/auth/login/login.service";
 import { RECOVERY_CODE } from "shared/components/auth/login/login.actions";
-import { clearLoginData } from "shared/components/auth/login/login.service";
+import { MANAGER } from "shared/constants/constants";
 
 const RecoveryPage = () => {
   return (
@@ -14,6 +17,7 @@ const RecoveryPage = () => {
         RECOVERY_CODE={RECOVERY_CODE}
         clearLoginData={clearLoginData}
         twoFactorLogin={twoFactorLogin}
+        role={MANAGER}
       />
     </div>
   );

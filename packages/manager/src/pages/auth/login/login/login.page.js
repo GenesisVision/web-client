@@ -1,13 +1,14 @@
 import "shared/components/auth/login/login/login.scss";
 
-import { HOME_ROUTE } from "pages/app/app.routes";
 import React from "react";
 import LoginFormContainer from "shared/components/auth/login/login/login-form-container";
 
 import AuthTabs from "../../components/auth-tabs/auth-tabs";
 import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
-import { LOGIN_ROUTE } from "../login.routes";
-import * as loginService from "../services/login.service";
+import * as loginService from "shared/components/auth/login/login.service";
+import { MANAGER } from "shared/constants/constants";
+import { HOME_ROUTE } from "shared/routes/app.routes";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 
 const LoginPage = ({ location }) => {
   const from = location.state || HOME_ROUTE;
@@ -18,6 +19,7 @@ const LoginPage = ({ location }) => {
         from={from}
         loginService={loginService}
         FORGOT_PASSWORD_ROUTE={FORGOT_PASSWORD_ROUTE}
+        role={MANAGER}
       />
     </div>
   );

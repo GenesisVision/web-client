@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 
 import RecoveryCodeForm from "./recovery-code-form";
+import { MANAGER } from "../../../../constants/constants";
+import { loginUserInvestor, loginUserManager } from "../login.actions";
 
 class RecoveryCodeContainer extends Component {
   componentDidMount() {
@@ -17,8 +19,10 @@ class RecoveryCodeContainer extends Component {
     this.props.clearLoginData();
   }
 
-  handleSubmit = (recoveryCode, setSubmitting) => {
-    this.props.twoFactorLogin(recoveryCode, setSubmitting);
+  handleSubmit = (code, setSubmitting) => {
+    const { twoFactorLogin, role } = this.props;
+    const method = role === MANAGER ? loginUserManager : loginUserInvestor;
+    twoFactorLogin(code, setSubmitting, method);
   };
 
   render() {
@@ -39,7 +43,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => ({
   twoFactorLogin: (code, setSubmitting) => {
-    dispatch(props.twoFactorLogin(code, props.RECOVERY_CODE, setSubmitting));
+    dispatch(props.twoFactorLogin(code, props.RECOVERY, setSubmitting));
   },
   showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
   clearLoginData: () => {

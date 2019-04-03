@@ -7,10 +7,10 @@ import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-
 import Header from "shared/components/header/header";
 import { notificationsToggle } from "shared/components/notifications/actions/notifications.actions";
 
-import { LOGIN_ROUTE } from "../../../pages/auth/login/login.routes";
 import { SIGNUP_ROUTE } from "../../../pages/auth/signup/signup.routes";
 import { ManagerRootState } from "../../../reducers";
 import { logout } from "shared/components/auth/login/login.service";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 
 export interface IHeaderContainerStateProps {
   isAuthenticated: boolean;

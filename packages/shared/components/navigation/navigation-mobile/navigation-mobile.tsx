@@ -1,4 +1,4 @@
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";

@@ -1,9 +1,12 @@
 import React from "react";
 import TwoFactorCodeContainer from "shared/components/auth/login/two-factor/two-factor-code-container";
 
-import { twoFactorLogin } from "../services/login.service";
 import { TWO_FACTOR_CODE } from "shared/components/auth/login/login.actions";
-import { clearLoginData } from "shared/components/auth/login/login.service";
+import {
+  clearLoginData,
+  twoFactorLogin
+} from "shared/components/auth/login/login.service";
+import { MANAGER } from "shared/constants/constants";
 
 const TwoFactorPage = () => {
   return (
@@ -12,6 +15,7 @@ const TwoFactorPage = () => {
         TWO_FACTOR_CODE={TWO_FACTOR_CODE}
         clearLoginData={clearLoginData}
         twoFactorLogin={twoFactorLogin}
+        role={MANAGER}
       />
     </div>
   );

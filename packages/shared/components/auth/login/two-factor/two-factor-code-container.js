@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 
 import TwoFactorCodeForm from "./two-factor-code-form";
+import { MANAGER } from "../../../../constants/constants";
+import { loginUserInvestor, loginUserManager } from "../login.actions";
 
 class TwoFactorCodeContainer extends Component {
   componentDidMount() {
@@ -17,8 +19,10 @@ class TwoFactorCodeContainer extends Component {
     this.props.clearLoginData();
   }
 
-  handleSubmit = (twoFactor, setSubmitting) => {
-    return this.props.twoFactorLogin(twoFactor, setSubmitting);
+  handleSubmit = (code, setSubmitting) => {
+    const { twoFactorLogin, role } = this.props;
+    const method = role === MANAGER ? loginUserManager : loginUserInvestor;
+    return twoFactorLogin(code, setSubmitting, method);
   };
 
   render() {
@@ -42,7 +46,7 @@ const mapDispatchToProps = (dispatch, props) => ({
     const onCatch = () => {
       setSubmitting(false);
     };
-    return dispatch(props.twoFactorLogin(code, props.TWO_FACTOR_CODE, onCatch));
+    return dispatch(props.twoFactorLogin(code, props.TWO_FACTOR, onCatch));
   },
   showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
   clearLoginData: () => {

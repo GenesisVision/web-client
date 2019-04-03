@@ -1,18 +1,25 @@
 import { push } from "connected-react-router";
 
-import { LOGIN_ROUTE } from "./constants";
-import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/login/login.routes";
+import { LOGIN_ROUTE } from "./login.routes";
+import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
 import platformApi from "../../../services/api-client/platform-api";
 import authService from "../../../services/auth-service";
 import authActions from "../../../actions/auth-actions";
 import { setTwoFactorRequirement } from "../../../actions/2fa-actions";
-import { CLIENT_WEB } from "manager-web-portal/src/pages/auth/login/services/login.service";
 import { Dispatch } from "redux";
-import { LOGIN, LOGIN_TWO_FACTOR, storeTwoFactor } from "./login.actions";
+import {
+  CODE_TYPE,
+  LOGIN,
+  LOGIN_TWO_FACTOR,
+  RECOVERY_CODE,
+  storeTwoFactor,
+  TWO_FACTOR_CODE
+} from "./login.actions";
 import clearDataActionFactory from "../../../actions/clear-data.factory";
-import { HOME_ROUTE } from "pages/app/app.routes";
+import { HOME_ROUTE } from "shared/routes/app.routes";
 import SHA256 from "sha256";
 
+export const CLIENT_WEB = "Web";
 export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
@@ -27,35 +34,47 @@ export const calculateHash = ({
   login: string;
 }): number => {
   let prefix = 0;
-  while (
-    SHA256(`${prefix}${nonce}${login}`) >=
-    "0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
-  ) {
-    console.log(SHA256(`${prefix}${nonce}${login}`));
-    prefix++;
-  }
-  console.log("it - ", SHA256(`${prefix}${nonce}${login}`));
+  const diffString =
+    Array(difficulty)
+      .fill(0)
+      .join("") +
+    Array(64 - difficulty)
+      .fill("F")
+      .join("");
+  while (SHA256(`${prefix}${nonce}${login}`) >= diffString) prefix++;
   return prefix;
 };
 
-export const sharedLogin = (
+/*export const sharedLogin = (
   loginData: { email: string; password: string },
   from: string,
   setSubmitting: any,
   dispatch: Dispatch,
   loginUserMethod: any
-) => {
+) => {*/
+
+export const login = (
+  loginData: { email: string; password: string },
+  from: string,
+  setSubmitting: any,
+  loginUserMethod: any
+) => (dispatch: Dispatch) => {
   return platformApi
     .v10PlatformRiskcontrolGet(loginData.email, { device: CLIENT_WEB })
     .then(response => {
+      const { loginCheckDetails, id } = response;
       const prefix = calculateHash({
-        ...response.loginCheckDetails.details,
+        ...loginCheckDetails.details,
         login: loginData.email
       });
-      return;
-      /*return dispatch(
-        loginUserMethod({ ...loginData, client: CLIENT_WEB, prefix })
-      );*/
+      return dispatch(
+        loginUserMethod({
+          ...loginData,
+          client: CLIENT_WEB,
+          prefix,
+          captchaId: id
+        })
+      );
     })
     .then((response: any) => {
       authService.storeToken(response.value);
@@ -76,6 +95,41 @@ export const sharedLogin = (
         setSubmitting(false);
       }
     });
+};
+
+export const twoFactorLogin = (
+  code: string,
+  type: CODE_TYPE,
+  setSubmitting: any,
+  loginUserMethod: any
+) => (dispatch: any, getState: any) => {
+  const { email, password, from } = getState().loginData.twoFactor;
+  const model = {
+    email,
+    password,
+    client: CLIENT_WEB,
+    twoFactorCode: "",
+    recoveryCode: ""
+  };
+  if (type === CODE_TYPE.TWO_FACTOR) {
+    model.twoFactorCode = code;
+  }
+  if (type === CODE_TYPE.RECOVERY) {
+    model.recoveryCode = code;
+  }
+
+  const request = dispatch(loginUserMethod(model));
+
+  request
+    .then((response: { value: string }) => {
+      authService.storeToken(response.value);
+      dispatch(authActions.updateToken());
+      dispatch(clearTwoFactorData());
+      dispatch(push(from));
+    })
+    .catch(() => setSubmitting(false));
+
+  return request;
 };
 
 export const clearLoginData = () => (dispatch: Dispatch) => {

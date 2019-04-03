@@ -12,7 +12,9 @@ export type LoginState = Readonly<{
   twoFactor: ITwoFactorReducer;
 }>;
 
-export default combineReducers<LoginState>({
+const loginReducer = combineReducers<LoginState>({
   login: apiReducerFactory({ apiType: LOGIN }),
   twoFactor: twoFactorReducer
 });
+
+export default loginReducer;

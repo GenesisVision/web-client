@@ -1,5 +1,4 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -10,6 +9,7 @@ import Header from "shared/components/header/header";
 import { notificationsToggle } from "shared/components/notifications/actions/notifications.actions";
 import RootState from "shared/reducers/root-reducer";
 import { logout } from "shared/components/auth/login/login.service";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 
 export interface IHeaderContainerStateProps {
   isAuthenticated: boolean;

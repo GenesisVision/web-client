@@ -10,7 +10,7 @@ import passwordRestoreReducer, {
 } from "pages/auth/forgot-password/reducers/password-restore-reducers";
 import loginReducer, {
   LoginState
-} from "pages/auth/login/reducers/login.reducers";
+} from "shared/components/auth/login/reducers/login.reducers";
 import signUpReducer, {
   SignUpState
 } from "pages/auth/signup/reducers/signup.reducers";

@@ -6,7 +6,7 @@ import LoginFormContainer from "shared/components/auth/login/login/login-form-co
 
 import AuthTabs from "../../components/auth-tabs/auth-tabs";
 import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
-import { LOGIN_ROUTE } from "../login.routes";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import * as loginService from "../services/login.service";
 
 const LoginPage = ({ location }) => {

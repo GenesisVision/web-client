@@ -9,10 +9,11 @@ import LoginFooter from "shared/components/auth/components/login-footer/login-fo
 import LoginPage from "./login/login.page";
 import Recovery from "./recovery/recovery.page";
 import TwoFactor from "./two-factor/two-factor.page";
-
-export const LOGIN_ROUTE = "/login";
-export const LOGIN_ROUTE_TWO_FACTOR_ROUTE = `${LOGIN_ROUTE}/two-factor`;
-export const LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE = `${LOGIN_ROUTE_TWO_FACTOR_ROUTE}/recovery`;
+import {
+  LOGIN_ROUTE,
+  LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE,
+  LOGIN_ROUTE_TWO_FACTOR_ROUTE
+} from "shared/components/auth/login/login.routes";
 
 const LoginRoutes = ({ t }) => (
   <AuthLayout

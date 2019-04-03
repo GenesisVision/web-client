@@ -3,13 +3,17 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import LoginForm from "./login-form";
+import { MANAGER } from "../../../../constants/constants";
+import { loginUserInvestor, loginUserManager } from "../login.actions";
 
 class LoginFormContainer extends Component {
   componentWillUnmount() {
     this.props.service.clearLoginData();
   }
   handleSubmit = (loginFormData, setSubmitting) => {
-    this.props.service.login(loginFormData, this.props.from, setSubmitting);
+    const { service, from, role } = this.props;
+    const method = role === MANAGER ? loginUserManager : loginUserInvestor;
+    service.login(loginFormData, from, setSubmitting, method);
   };
   render() {
     const { errorMessage, FORGOT_PASSWORD_ROUTE } = this.props;

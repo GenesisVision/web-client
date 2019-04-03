@@ -11,8 +11,8 @@ import emailPendingActions from "shared/actions/email-pending-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
-import { LOGIN_ROUTE } from "../../login/login.routes";
 import passwordRestoreActions from "../actions/forgot-password.actions";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 
 const forgotPassword = data => dispatch => {
   return dispatch(passwordRestoreActions.forgotPassword(data)).then(() => {
