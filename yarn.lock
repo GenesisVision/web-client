@@ -848,17 +848,17 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@emotion/is-prop-valid@^0.6.5":
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.6.8.tgz#68ad02831da41213a2089d2cab4e8ac8b30cbd85"
-  integrity sha512-IMSL7ekYhmFlILXcouA6ket3vV7u9BqStlXzbKOF9HBtpUPMMlHU+bBxrLOa2NvleVwNIxeq/zL8LafLbeUXcA==
+"@emotion/is-prop-valid@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.7.3.tgz#a6bf4fa5387cbba59d44e698a4680f481a8da6cc"
+  integrity sha512-uxJqm/sqwXw3YPA5GXX365OBcJGFtxUVkB6WyezqFHlNe9jqUWH5ur2O2M8dGBz61kn1g3ZBlzUunFQXQIClhA==
   dependencies:
-    "@emotion/memoize" "^0.6.6"
+    "@emotion/memoize" "0.7.1"
 
-"@emotion/memoize@^0.6.6":
-  version "0.6.6"
-  resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.6.6.tgz#004b98298d04c7ca3b4f50ca2035d4f60d2eed1b"
-  integrity sha512-h4t4jFjtm1YV7UirAFuSuFGyLa+NNxjdkq6DpFLANNQY5rHueFZHVY+8Cu1HYVP6DrheB0kv4m5xPjo7eKT7yQ==
+"@emotion/memoize@0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.1.tgz#e93c13942592cf5ef01aa8297444dc192beee52f"
+  integrity sha512-Qv4LTqO11jepd5Qmlp3M1YEjBumoTHcHFdgPTQ+sFlIL5myi/7xu/POwP7IRu6odBdmLXdtIs1D6TuW6kbwbbg==
 
 "@juggle/resize-observer@^1.1.1":
   version "1.1.1"
@@ -10249,12 +10249,12 @@ react-popper@^1.0.2:
     typed-styles "^0.0.5"
     warning "^3.0.0"
 
-react-pose@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/react-pose/-/react-pose-4.0.2.tgz#0b4ad5e5d58534e426f7287c27916d7114c2ab7c"
-  integrity sha512-FhPHbVIhXHSXtxIiA7dZo8doHoukFIgkdDy9QTh9gU5sqXaA4vG9SyZjHIZ5N6szIjujN9nhhkQhPty/a0PJDA==
+react-pose@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/react-pose/-/react-pose-4.0.8.tgz#91bdfafde60e4096e7878a35dcc77715bed68f24"
+  integrity sha512-WN/583nKJZkKmKg5ha+eErOGWF9GV6A5EngC7WHQX5b910X9rTlOlxzdKlUy/dDcsTRMZEtHV0Sy2gLPYsVQCQ==
   dependencies:
-    "@emotion/is-prop-valid" "^0.6.5"
+    "@emotion/is-prop-valid" "^0.7.3"
     hey-listen "^1.0.5"
     popmotion-pose "^3.4.0"
     tslib "^1.9.1"
