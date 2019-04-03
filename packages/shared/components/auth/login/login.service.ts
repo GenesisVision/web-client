@@ -31,13 +31,10 @@ const calculateHash = ({
   login: string;
 }): number => {
   let prefix = 0;
-  const diffString =
-    Array(difficulty)
-      .fill(0)
-      .join("") +
-    Array(64 - difficulty)
-      .fill("F")
-      .join("");
+  const diffString = [
+    ...Array(difficulty).fill(0),
+    ...Array(64 - difficulty).fill("F")
+  ].join("");
   while (SHA256(`${prefix}${nonce}${login}`) >= diffString) prefix++;
   return prefix;
 };
