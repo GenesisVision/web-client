@@ -10,7 +10,7 @@ import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import * as loginService from "../login.service";
 
-class LoginFormContainer extends React.PureComponent<Props, State> {
+class LoginFormContainer extends React.Component<Props, State> {
   state = {
     total: 0,
     count: 0
@@ -24,10 +24,10 @@ class LoginFormContainer extends React.PureComponent<Props, State> {
   ) => {
     const { service, from, role } = this.props;
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-    const setCount = (count: number) => {
-      if (count % 100 === 0) this.setState({ count });
-    };
-    const setTotal = (total: number) => this.setState({ total });
+    const setCount = (count: number) =>
+      setTimeout(() => this.setState(() => ({ count })));
+    const setTotal = (total: number) =>
+      setTimeout(() => this.setState(() => ({ total })));
     service.login(
       loginFormData,
       from,

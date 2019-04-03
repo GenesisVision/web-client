@@ -20,9 +20,8 @@ export const CLIENT_WEB = "Web";
 export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
-const maxTarget = 26959535291011309493156476344723991336010898738574164086137773096960;
 
-const calculateHash = ({
+const calculatePrefix = ({
   difficulty,
   nonce,
   login,
@@ -34,7 +33,6 @@ const calculateHash = ({
   setCount: (val: number) => void;
 }): number => {
   let prefix = 0;
-  difficulty = 2;
   const diffString = [
     ...Array(difficulty).fill(0),
     ...Array(64 - difficulty).fill("F")
@@ -46,6 +44,31 @@ const calculateHash = ({
   return prefix;
 };
 
+const getPoW = (
+  email: string,
+  setCount: SetFuncType,
+  setTotal: SetFuncType
+): Promise<{ prefix: number; id: string }> => {
+  return platformApi
+    .v10PlatformRiskcontrolGet(email, { device: CLIENT_WEB })
+    .then(response => {
+      const { poW, id } = response;
+      let prefix;
+      if (poW.difficulty > 0) {
+        setTotal(
+          Math.log(0.1) /
+            Math.log((16 ** poW.difficulty - 1) / 16 ** poW.difficulty)
+        );
+        prefix = calculatePrefix({
+          ...poW,
+          login: email,
+          setCount
+        });
+      } else prefix = 0;
+      return { prefix, id };
+    });
+};
+
 export const login: LoginFuncType = (
   loginData,
   from,
@@ -54,25 +77,9 @@ export const login: LoginFuncType = (
   setCount,
   setTotal
 ) => dispatch => {
-  return platformApi
-    .v10PlatformRiskcontrolGet(loginData.email, { device: CLIENT_WEB })
+  return getPoW(loginData.email, setCount, setTotal)
     .then(response => {
-      const { loginCheckDetails, id } = response;
-      setTotal(Math.pow(16, loginCheckDetails.details.difficulty));
-      let prefix;
-      switch (loginCheckDetails.type) {
-        case "PoW":
-          prefix = calculateHash({
-            ...loginCheckDetails.details,
-            login: loginData.email,
-            setCount
-          });
-          break;
-        case "None":
-        case "CaptchaGeeTest":
-        default:
-          prefix = 0;
-      }
+      const { prefix, id } = response;
       return dispatch(
         loginUserMethod({
           ...loginData,
@@ -127,36 +134,19 @@ export const twoFactorLogin: TwoFactorLoginFuncType = (
   if (type === CODE_TYPE.RECOVERY) {
     model.recoveryCode = code;
   }
-  return platformApi
-    .v10PlatformRiskcontrolGet(email, { device: CLIENT_WEB })
-    .then(response => {
-      const { loginCheckDetails, id } = response;
-      setTotal(maxTarget / loginCheckDetails.details.difficulty);
-      let prefix;
-      switch (loginCheckDetails.type) {
-        case "PoW":
-          prefix = calculateHash({
-            ...loginCheckDetails.details,
-            login: email,
-            setCount
-          });
-          break;
-        case "None":
-        case "CaptchaGeeTest":
-        default:
-          prefix = 0;
-      }
-      model.captchaId = id;
-      model.prefix = prefix;
-      return dispatch(loginUserMethod(model))
-        .then((response: { value: string }) => {
-          authService.storeToken(response.value);
-          dispatch(authActions.updateToken());
-          dispatch(clearTwoFactorData());
-          dispatch(push(from));
-        })
-        .catch(() => setSubmitting(false));
-    });
+  return getPoW(email, setCount, setTotal).then(response => {
+    const { prefix, id } = response;
+    model.captchaId = id;
+    model.prefix = prefix;
+    return dispatch(loginUserMethod(model))
+      .then((response: { value: string }) => {
+        authService.storeToken(response.value);
+        dispatch(authActions.updateToken());
+        dispatch(clearTwoFactorData());
+        dispatch(push(from));
+      })
+      .catch(() => setSubmitting(false));
+  });
 };
 
 export const clearLoginData: clearLoginDataFuncType = () => dispatch => {
@@ -180,21 +170,22 @@ type LoginFuncType = (
   from: string,
   setSubmitting: any,
   loginUserMethod: any,
-  setCount: (val: number) => void,
-  setTotal: (val: number) => void
+  setCount: SetFuncType,
+  setTotal: SetFuncType
 ) => (dispatch: Dispatch) => Promise<void>;
 type TwoFactorLoginFuncType = (
   code: string,
   type: CODE_TYPE,
   setSubmitting: any,
   loginUserMethod: any,
-  setCount: (val: number) => void,
-  setTotal: (val: number) => void
+  setCount: SetFuncType,
+  setTotal: SetFuncType
 ) => (dispatch: any, getState: any) => Promise<void>;
 type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = () => (dispatch: Dispatch) => void;
 export type CounterType = { count: number; total: number };
+type SetFuncType = (val: number) => void;
 
 export interface LoginService {
   login: LoginFuncType;

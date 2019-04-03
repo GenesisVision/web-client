@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import validationSchema from "./login-form.validators";
-import { CounterType } from "../login.service";
-import Pie from "../../../pie-container/pie";
+import Pie from "shared/components/pie-container/pie";
 import { GVColors } from "gv-react-components";
 
 const _LoginForm: React.FC<
@@ -23,7 +22,6 @@ const _LoginForm: React.FC<
   count,
   total
 }) => {
-  console.log(count, total);
   return (
     <form
       id="loginForm"
@@ -63,7 +61,6 @@ const _LoginForm: React.FC<
           {t("auth.login.confirm-button-text")}
         </GVButton>
         <div className="login__pie-container">
-          {count}
           <Pie
             color={GVColors.$primaryColor}
             start={0}
