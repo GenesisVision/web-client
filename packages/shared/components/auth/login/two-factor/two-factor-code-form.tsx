@@ -8,6 +8,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
+import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
 class _TwoFactorCodeForm extends React.Component<
@@ -92,7 +93,7 @@ interface Props extends InjectedTranslateProps, OwnProps {}
 interface OwnProps {
   onSubmit(
     code: ITwoFactorCodeFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ): void;
   error: string;
   isChecking?: boolean;

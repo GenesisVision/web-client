@@ -52,3 +52,5 @@ export type ResponseError = {
   errorMessage: string;
   code: string;
 };
+
+export type SetSubmittingType = (isSubmitting: boolean) => void;

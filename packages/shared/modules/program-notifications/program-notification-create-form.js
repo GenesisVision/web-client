@@ -9,7 +9,15 @@ import { number, object } from "yup";
 
 class ProgramNotificationCreateForm extends Component {
   render() {
-    const { t, program, handleSubmit, values, isValid, dirty } = this.props;
+    const {
+      t,
+      program,
+      handleSubmit,
+      values,
+      isValid,
+      dirty,
+      isSubmitting
+    } = this.props;
     const { conditionType } = values;
     const isProfit = conditionType === "Profit";
     return (
@@ -59,7 +67,7 @@ class ProgramNotificationCreateForm extends Component {
             <GVButton
               color="primary"
               type="submit"
-              disabled={!isValid || !dirty}
+              disabled={isSubmitting || !isValid || !dirty}
             >
               {t("buttons.create")}
             </GVButton>
@@ -87,6 +95,8 @@ export default compose(
           t("notifications-page.create.amount-required")
         )
       }),
-    handleSubmit: (values, { props }) => props.onSubmit(values)
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
+    }
   })
 )(ProgramNotificationCreateForm);

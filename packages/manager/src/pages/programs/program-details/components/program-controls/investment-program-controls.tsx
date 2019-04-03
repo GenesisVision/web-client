@@ -145,14 +145,13 @@ class InvestmentProgramControls extends Component<
               />
               <ClosePeriodContainer
                 open={popups[INVESTMENT_POPUP.CLOSE_PERIOD]}
-                onCancel={this.closePopup(INVESTMENT_POPUP.CLOSE_PERIOD)}
+                onClose={this.closePopup(INVESTMENT_POPUP.CLOSE_PERIOD)}
                 onApply={this.applyChanges(updateDetails)}
                 id={programDescription.id}
               />
               <CloseProgramContainer
                 open={popups[INVESTMENT_POPUP.CLOSE_PROGRAM]}
                 onClose={this.closePopup(INVESTMENT_POPUP.CLOSE_PROGRAM)}
-                onCancel={this.closePopup(INVESTMENT_POPUP.CLOSE_PROGRAM)}
                 onApply={this.applyChanges(updateDetails)}
                 id={programDescription.id}
               />

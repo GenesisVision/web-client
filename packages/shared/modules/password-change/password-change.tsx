@@ -16,7 +16,6 @@ interface IPasswordChangeOwnProps {
 }
 
 interface IPasswordChangeState {
-  isPending: boolean;
   errorMessage: string | null;
 }
 
@@ -25,14 +24,12 @@ class PasswordChange extends React.Component<
   IPasswordChangeState
 > {
   state = {
-    isPending: false,
     errorMessage: null
   };
 
   handleSubmit = (model: ChangePasswordViewModel) => {
-    this.setState({ isPending: true });
     this.props.service.changePassword(model).catch((errors: any) => {
-      this.setState({ isPending: false, errorMessage: errors.errorMessage });
+      this.setState({ errorMessage: errors.errorMessage });
     });
   };
 
@@ -40,7 +37,6 @@ class PasswordChange extends React.Component<
     return (
       <PasswordChangeForm
         onSubmit={this.handleSubmit}
-        isPending={this.state.isPending}
         errorMessage={this.state.errorMessage}
       />
     );

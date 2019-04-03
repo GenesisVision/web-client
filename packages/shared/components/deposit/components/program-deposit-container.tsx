@@ -5,7 +5,7 @@ import { Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
-import { ResponseError } from "shared/utils/types";
+import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import {
   getProgramInfoCreator,
@@ -21,7 +21,7 @@ class _ProgramDepositContainer extends React.PureComponent<Props, State> {
   handleInvest = (
     amount: number,
     currency: string,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ) => {
     const { id, service } = this.props;
     service

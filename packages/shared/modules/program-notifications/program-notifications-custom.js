@@ -23,16 +23,19 @@ class ProgramNotificationsCustom extends Component {
     dispatch(alertMessageActions.success(text));
   };
 
-  handleSubmit = values => {
+  handleSubmit = (values, setSubmitting) => {
     const { t } = this.props;
     this.props.services
       .addProgramNotificationService({
         assetId: this.props.program.assetId,
         ...values
       })
-      .then(() => this.handleClosePopup())
       .then(() => {
+        this.handleClosePopup();
         this.success(t(`notifications-page.custom.create-alert`));
+      })
+      .catch(() => {
+        setSubmitting(false);
       });
   };
 

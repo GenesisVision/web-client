@@ -33,11 +33,11 @@ class WalletWithdrawForm extends Component {
       handleSubmit,
       wallets,
       values,
-      disabled,
       isValid,
       dirty,
       errorMessage,
-      setFieldValue
+      setFieldValue,
+      isSubmitting
     } = this.props;
 
     const { currency, amount } = values;
@@ -155,7 +155,7 @@ class WalletWithdrawForm extends Component {
               type="submit"
               variant="contained"
               color="primary"
-              disabled={disabled || !isValid || !dirty}
+              disabled={isSubmitting || !isValid || !dirty}
             >
               {t("buttons.confirm")}
             </GVButton>
@@ -176,7 +176,6 @@ WalletWithdrawForm.propTypes = {
       rateToGvt: PropTypes.number
     })
   ),
-  disabled: PropTypes.bool,
   errorMessage: PropTypes.string,
   onSubmit: PropTypes.func
 };
@@ -225,6 +224,8 @@ export default compose(
         }
       });
     },
-    handleSubmit: (values, { props }) => props.onSubmit(values)
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
+    }
   })
 )(WalletWithdrawForm);

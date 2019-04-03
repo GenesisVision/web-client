@@ -95,7 +95,6 @@ export type LoginFuncType = (
 export type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = () => (dispatch: Dispatch) => void;
-export type SetSubmittingFuncType = (isSubmitting: boolean) => void;
 
 export interface LoginService {
   login: LoginFuncType;
