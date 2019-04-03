@@ -1,6 +1,7 @@
 import { push } from "connected-react-router";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import brokersApi from "shared/services/api-client/brokers-api";
 import managerApi from "shared/services/api-client/manager-api";
@@ -61,6 +62,7 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
           true
         )
       );
+      dispatch(fetchWallets());
       dispatch(push(DASHBOARD_ROUTE));
     })
     .catch(error => {
