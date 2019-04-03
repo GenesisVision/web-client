@@ -1,21 +1,18 @@
 import { push } from "connected-react-router";
 
-import { LOGIN_ROUTE } from "./login.routes";
-import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
-import platformApi from "../../../services/api-client/platform-api";
-import authService from "../../../services/auth-service";
-import authActions from "../../../actions/auth-actions";
-import { setTwoFactorRequirement } from "../../../actions/2fa-actions";
+import { LOGIN_ROUTE, LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
+import platformApi from "shared/services/api-client/platform-api";
+import authService from "shared/services/auth-service";
+import authActions from "shared/actions/auth-actions";
+import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
 import { Dispatch } from "redux";
 import {
   CODE_TYPE,
   LOGIN,
   LOGIN_TWO_FACTOR,
-  RECOVERY_CODE,
-  storeTwoFactor,
-  TWO_FACTOR_CODE
+  storeTwoFactor
 } from "./login.actions";
-import clearDataActionFactory from "../../../actions/clear-data.factory";
+import clearDataActionFactory from "shared/actions/clear-data.factory";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import SHA256 from "sha256";
 
@@ -44,14 +41,6 @@ export const calculateHash = ({
   while (SHA256(`${prefix}${nonce}${login}`) >= diffString) prefix++;
   return prefix;
 };
-
-/*export const sharedLogin = (
-  loginData: { email: string; password: string },
-  from: string,
-  setSubmitting: any,
-  dispatch: Dispatch,
-  loginUserMethod: any
-) => {*/
 
 export const login = (
   loginData: { email: string; password: string },
