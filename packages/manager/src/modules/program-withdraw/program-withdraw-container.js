@@ -1,7 +1,7 @@
 import {
   getProgramWithdrawInfo,
   withdrawProgramById
-} from "modules/program-withdraw/servives/program-withdraw.services";
+} from "modules/program-withdraw/services/program-withdraw.services";
 import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
