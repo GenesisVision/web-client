@@ -1,5 +1,4 @@
 import {
-  alert,
   getProgramWithdrawInfo,
   withdrawProgramById
 } from "modules/program-withdraw/servives/program-withdraw.services";
@@ -11,44 +10,32 @@ import { compose } from "redux";
 import { bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import ProgramWithdrawPopup from "shared/components/program-withdraw/program-withdraw-popup";
-import investorApi from "shared/services/api-client/investor-api";
-import authService from "shared/services/auth-service";
 
 class ProgramWithdrawContainer extends PureComponent {
   state = { errorMessage: null };
 
   handleWithdraw = (id, percent) => {
-    return investorApi
-      .v10InvestorProgramsByIdWithdrawMultiByAmountPost(
-        id,
-        percent,
-        authService.getAuthArg()
-      )
+    const { services, onSubmit } = this.props;
+    return services
+      .withdrawProgramById(id, percent)
       .then(() => {
-        this.props.onClose();
-        this.props.onSubmit();
-        this.props.services.alert(
-          "success",
-          "withdraw-program.success-alert-message",
-          true
-        );
+        this.handleClose();
+        onSubmit();
       })
       .catch(error => {
-        this.setState(error);
+        this.setState({ errorMessage: error.errorMessage });
       });
   };
 
+  handleClose = () => {
+    this.props.onClose();
+    this.setState({ errorMessage: null });
+  };
+
   render() {
-    const {
-      open,
-      onClose,
-      services,
-      id,
-      assetCurrency,
-      accountCurrency
-    } = this.props;
+    const { open, services, id, assetCurrency, accountCurrency } = this.props;
     return (
-      <Dialog open={open} onClose={onClose}>
+      <Dialog open={open} onClose={this.handleClose}>
         <ProgramWithdrawPopup
           assetCurrency={assetCurrency}
           accountCurrency={accountCurrency}
@@ -75,8 +62,7 @@ const mapDispathToProps = dispatch => ({
   services: bindActionCreators(
     {
       getProgramWithdrawInfo,
-      withdrawProgramById,
-      alert
+      withdrawProgramById
     },
     dispatch
   )

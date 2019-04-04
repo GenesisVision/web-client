@@ -1,8 +1,8 @@
 import "./alert-message-list.scss";
 
 import { GVButton } from "gv-react-components";
-import * as React from "react";
 import { useEffect } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import posed, { PoseGroup } from "react-pose";
 import { connect } from "react-redux";

@@ -3,6 +3,7 @@ import {
   investToProgramById
 } from "modules/program-deposit/actions/program-deposit.actions";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 export const getDepositProgramInfoById = (id, currency) => dispatch => {
@@ -17,6 +18,7 @@ export const investServiceInvestById = ({ id, amount, opts }) => dispatch => {
         true
       )
     );
+    dispatch(fetchWallets());
     dispatch(fetchProfileHeaderInfo());
   });
 };

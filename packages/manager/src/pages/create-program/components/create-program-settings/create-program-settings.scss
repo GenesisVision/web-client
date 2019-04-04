@@ -8,6 +8,10 @@
 
   @include media-breakpoint-landscape-phone() {
     padding-left: 0;
+
+    .create-program-settings__item-caption {
+      padding-top: $padding-small;
+    }
   }
 
   @include media-breakpoint-tablet() {
@@ -23,7 +27,9 @@
     justify-content: space-between;
 
     & .gv-text-field__error {
-      white-space: nowrap;
+      bottom: auto;
+      top: 100%;
+      width: 100%;
     }
 
     .gv-text-field__wrapper,
