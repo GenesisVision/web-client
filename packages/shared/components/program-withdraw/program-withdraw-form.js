@@ -5,8 +5,8 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
 
+import WithdrawEnterAmountStep from "./program-withdraw-amount-form";
 import WithdrawConfirmStep from "./program-withdraw-confirm-step";
-import WithdrawEnterAmountStep from "./program-withdraw-enter-amount-step";
 
 const CONFIRM_STEP = "CONFIRM_STEP";
 const ENTER_AMOUNT_STEP = "ENTER_AMOUNT_STEP";

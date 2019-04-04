@@ -6,6 +6,7 @@ import { convertFromCurrency } from "../../utils/currency-converter";
 import { ResponseError } from "../../utils/types";
 import ProgramWithdrawForm from "./program-withdraw-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
+import ProgramWithdrawAmountForm from "./program-withdraw-amount-form";
 
 // class ProgramWithdrawPopup extends Component {
 //   state = {
@@ -152,7 +153,9 @@ class ProgramWithdrawPopup extends React.Component<
       periodEnds,
       rate,
       errorMessage,
-      isPending
+      isPending,
+      step,
+      amount
     } = this.state;
     const { assetCurrency, accountCurrency } = this.props;
 
@@ -208,16 +211,40 @@ class ProgramWithdrawPopup extends React.Component<
           availableToWithdraw={availableToWithdraw}
           programCurrency={assetCurrency}
         />
-        <ProgramWithdrawForm
-          programCurrency={assetCurrency}
-          accountCurrency={accountCurrency}
-          availableToWithdraw={availableToWithdraw}
-          periodEnds={periodEnds}
-          rate={rate}
-          onSubmit={this.handleSubmit}
-          errorMessage={errorMessage}
-          disabled={isPending}
-        />
+        {/*<ProgramWithdrawForm*/}
+        {/*programCurrency={assetCurrency}*/}
+        {/*accountCurrency={accountCurrency}*/}
+        {/*availableToWithdraw={availableToWithdraw}*/}
+        {/*periodEnds={periodEnds}*/}
+        {/*rate={rate}*/}
+        {/*onSubmit={this.handleSubmit}*/}
+        {/*errorMessage={errorMessage}*/}
+        {/*disabled={isPending}*/}
+        {/*/>*/}
+        <div className="dialog__bottom">
+          {step === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
+            <ProgramWithdrawAmountForm
+              amount={amount}
+              rate={rate}
+              programCurrency={assetCurrency}
+              accountCurrency={accountCurrency}
+              availableToWithdraw={availableToWithdraw}
+              onSubmit={this.handleEnterAmountSubmit}
+            />
+          )}
+          {/*{step === PROGRAM_WITHDRAW_FORM.CONFIRM && amount && (*/}
+          {/*<FundWithdrawConfirmForm*/}
+          {/*errorMessage={errorMessage}*/}
+          {/*isPending={isPending}*/}
+          {/*availableToWithdraw={availableToWithdraw}*/}
+          {/*percent={percent}*/}
+          {/*currency={wallet.currency}*/}
+          {/*exitFee={withdrawalInfo.exitFee}*/}
+          {/*onSubmit={this.handleSubmit}*/}
+          {/*onBackClick={this.goToEnterAmountStep}*/}
+          {/*/>*/}
+          {/*)}*/}
+        </div>
       </>
     );
   }
