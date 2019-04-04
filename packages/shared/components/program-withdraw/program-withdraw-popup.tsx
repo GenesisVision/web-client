@@ -86,7 +86,8 @@ class _ProgramWithdrawPopup extends React.Component<
       amount
     } = this.state;
     const { t, assetCurrency, accountCurrency } = this.props;
-    if (!availableToWithdraw || !title || !periodEnds) return <DialogLoader />;
+    if (availableToWithdraw === undefined || !title || !periodEnds)
+      return <DialogLoader />;
 
     return (
       <>
