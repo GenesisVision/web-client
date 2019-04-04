@@ -1,13 +1,64 @@
+import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton } from "gv-react-components";
 import React from "react";
-import { TranslationFunction, translate } from "react-i18next";
-import Dialog from "shared/components/dialog/dialog";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { compose } from "redux";
+import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import { SetSubmittingType } from "shared/utils/types";
 
-export interface IConfirmPopupProps {
-  t: TranslationFunction;
-  open: boolean;
-  onClose(): void;
-  onApply(): void;
+const _ConfirmPopup: React.ComponentType<
+  InjectedFormikProps<IConfirmPopupProps & InjectedTranslateProps, {}>
+> = ({
+  t,
+  open,
+  onClose,
+  onCancel,
+  header,
+  body,
+  applyButtonText = t("buttons.apply"),
+  cancelButtonText = t("buttons.cancel"),
+  className,
+  disabled,
+  handleSubmit
+}) => {
+  return (
+    <Dialog open={open} onClose={onClose} className={className}>
+      <form onSubmit={handleSubmit} noValidate>
+        <div className="dialog__top">
+          {header && <h2>{header}</h2>}
+          <div className="dialog__text">
+            <p>{body}</p>
+          </div>
+          <div className="dialog__buttons">
+            <GVButton type="submit" disabled={disabled}>
+              {applyButtonText}
+            </GVButton>
+            {onCancel && (
+              <GVButton color="secondary" variant="outlined" onClick={onCancel}>
+                {cancelButtonText}
+              </GVButton>
+            )}
+          </div>
+        </div>
+      </form>
+    </Dialog>
+  );
+};
+
+const ConfirmPopup = compose<React.ComponentType<IConfirmPopupProps>>(
+  translate(),
+  withFormik<IConfirmPopupProps, {}>({
+    displayName: "confirm-form",
+    mapPropsToValues: () => ({}),
+    handleSubmit: (_, { props, setSubmitting }) => {
+      props.onApply(setSubmitting);
+    }
+  })
+)(_ConfirmPopup);
+export default ConfirmPopup;
+
+export interface IConfirmPopupProps extends IDialogProps {
+  onApply(setSubmitting: SetSubmittingType): void;
   onCancel?(): void;
   header?: React.ReactNode;
   body?: React.ReactNode;
@@ -16,40 +67,3 @@ export interface IConfirmPopupProps {
   className?: string;
   disabled?: boolean;
 }
-
-const ConfirmPopup: React.FunctionComponent<IConfirmPopupProps> = ({
-  t,
-  open,
-  onClose,
-  onApply,
-  onCancel,
-  header,
-  body,
-  applyButtonText = t("buttons.apply"),
-  cancelButtonText = t("buttons.cancel"),
-  className,
-  disabled
-}) => {
-  return (
-    <Dialog open={open} onClose={onClose} className={className}>
-      <div className="dialog__top">
-        {header && <h2>{header}</h2>}
-        <div className="dialog__text">
-          <p>{body}</p>
-        </div>
-        <div className="dialog__buttons">
-          <GVButton onClick={onApply} disabled={disabled}>
-            {applyButtonText}
-          </GVButton>
-          {onCancel && (
-            <GVButton color="secondary" variant="outlined" onClick={onCancel}>
-              {cancelButtonText}
-            </GVButton>
-          )}
-        </div>
-      </div>
-    </Dialog>
-  );
-};
-
-export default translate()(ConfirmPopup);
