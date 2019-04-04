@@ -1,47 +1,46 @@
 import { push } from "connected-react-router";
-
-import { LOGIN_ROUTE, LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
+import { Dispatch } from "redux";
+import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
+import authActions from "shared/actions/auth-actions";
+import clearDataActionFactory from "shared/actions/clear-data.factory";
+import { HOME_ROUTE } from "shared/routes/app.routes";
 import platformApi from "shared/services/api-client/platform-api";
 import authService from "shared/services/auth-service";
-import authActions from "shared/actions/auth-actions";
-import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
-import { Dispatch } from "redux";
+
 import {
   CODE_TYPE,
   LOGIN,
   LOGIN_TWO_FACTOR,
   storeTwoFactor
 } from "./login.actions";
-import clearDataActionFactory from "shared/actions/clear-data.factory";
-import { HOME_ROUTE } from "shared/routes/app.routes";
-import SHA256 from "sha256";
+import { LOGIN_ROUTE, LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
+//@ts-ignore
+import SHAWorker from "./sha.worker.js";
 
 export const CLIENT_WEB = "Web";
 export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
 
-const calculatePrefix = ({
-  difficulty,
-  nonce,
-  login,
-  setCount
-}: {
+const worker = new SHAWorker();
+
+const calculatePrefix = (props: {
   difficulty: number;
   nonce: string;
   login: string;
   setCount: (val: number) => void;
-}): number => {
-  let prefix = 0;
-  const diffString = [
-    ...Array(difficulty).fill(0),
-    ...Array(64 - difficulty).fill("F")
-  ].join("");
-  while (SHA256(`${prefix}${nonce}${login}`) >= diffString) {
-    if (prefix % 100 === 0) setCount(prefix);
-    prefix++;
-  }
-  return prefix;
+}): Promise<number> => {
+  worker.postMessage([props.difficulty, props.nonce, props.login]);
+  const { setCount } = props;
+  return new Promise(resolve => {
+    worker.onmessage = ({ data }: any) => {
+      if (data.found) {
+        resolve(data.prefix);
+      } else {
+        setCount(data.prefix);
+      }
+    };
+  });
 };
 
 const getPoW = (
@@ -51,16 +50,16 @@ const getPoW = (
 ): Promise<{ prefix: number; id: string }> => {
   return platformApi
     .v10PlatformRiskcontrolGet(email, { device: CLIENT_WEB })
-    .then(response => {
-      const { poW, id } = response;
+    .then(async response => {
+      const { pow, id } = response;
       let prefix;
-      if (poW.difficulty > 0) {
+      if (pow.difficulty > 0) {
         setTotal(
           Math.log(0.1) /
-            Math.log((16 ** poW.difficulty - 1) / 16 ** poW.difficulty)
+            Math.log((16 ** pow.difficulty - 1) / 16 ** pow.difficulty)
         );
-        prefix = calculatePrefix({
-          ...poW,
+        prefix = await calculatePrefix({
+          ...pow,
           login: email,
           setCount
         });

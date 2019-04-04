@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Facet } from "gv-api-web";
+import { FundFacet, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import ImageBase from "shared/components/avatar/image-base";
@@ -57,7 +57,7 @@ class FacetCard extends React.PureComponent<Props, State> {
 
 interface Props {
   title: string;
-  facet: Facet;
+  facet: FundFacet | ProgramFacet;
   composeFacetUrl: composeFacetUrlFunc;
 }
 
