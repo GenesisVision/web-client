@@ -84,8 +84,12 @@ export const login: LoginFuncType = (
         loginUserMethod({
           ...loginData,
           client: CLIENT_WEB,
-          prefix,
-          captchaId: id
+          loginCheckInfo: {
+            id,
+            poW: {
+              prefix
+            }
+          }
         })
       );
     })
@@ -125,8 +129,7 @@ export const twoFactorLogin: TwoFactorLoginFuncType = (
     client: CLIENT_WEB,
     twoFactorCode: "",
     recoveryCode: "",
-    captchaId: "",
-    prefix: 0
+    loginCheckInfo: {}
   };
   if (type === CODE_TYPE.TWO_FACTOR) {
     model.twoFactorCode = code;
@@ -136,8 +139,12 @@ export const twoFactorLogin: TwoFactorLoginFuncType = (
   }
   return getPoW(email, setCount, setTotal).then(response => {
     const { prefix, id } = response;
-    model.captchaId = id;
-    model.prefix = prefix;
+    model.loginCheckInfo = {
+      id,
+      poW: {
+        prefix
+      }
+    };
     return dispatch(loginUserMethod(model))
       .then((response: { value: string }) => {
         authService.storeToken(response.value);
