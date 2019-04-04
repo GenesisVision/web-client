@@ -18,7 +18,7 @@ const LoginPage: React.FC<Props> = ({ location }) => {
       <LoginFormContainer
         from={from}
         FORGOT_PASSWORD_ROUTE={FORGOT_PASSWORD_ROUTE}
-        role={ROLE.MANAGER}
+        role={ROLE.INVESTOR}
       />
     </div>
   );

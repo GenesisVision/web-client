@@ -6,7 +6,7 @@ import { ROLE } from "shared/constants/constants";
 
 const RecoveryPage: React.FC = () => (
   <div className="recovery-page">
-    <RecoveryCodeContainer role={ROLE.MANAGER} />
+    <RecoveryCodeContainer role={ROLE.INVESTOR} />
   </div>
 );
 

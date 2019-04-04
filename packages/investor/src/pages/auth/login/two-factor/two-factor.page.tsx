@@ -4,7 +4,7 @@ import { ROLE } from "shared/constants/constants";
 
 const TwoFactorPage: React.FC = () => (
   <div className="login-two-factor-page">
-    <TwoFactorCodeContainer role={ROLE.MANAGER} />
+    <TwoFactorCodeContainer role={ROLE.INVESTOR} />
   </div>
 );
 
