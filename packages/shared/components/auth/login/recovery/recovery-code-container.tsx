@@ -16,7 +16,7 @@ import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { bindActionCreators, Dispatch } from "redux";
 
-class RecoveryCodeContainer extends React.PureComponent<Props, State> {
+class _RecoveryCodeContainer extends React.PureComponent<Props, State> {
   state = {
     total: 0,
     count: 0
@@ -93,16 +93,13 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  loginService: LoginService;
-  from: string;
   role: ROLE;
-  errorMessage: string;
-  FORGOT_PASSWORD_ROUTE: string;
 }
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
 
-export default connect(
+const RecoveryCodeContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(RecoveryCodeContainer);
+)(_RecoveryCodeContainer);
+export default RecoveryCodeContainer;

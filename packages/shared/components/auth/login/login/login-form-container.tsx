@@ -5,12 +5,12 @@ import { bindActionCreators, Dispatch } from "redux";
 import LoginForm, { ILoginFormFormValues } from "./login-form";
 import { loginUserInvestor, loginUserManager } from "../login.actions";
 import { ROLE } from "shared/constants/constants";
+import * as loginService from "../login.service";
 import { CounterType, LoginService } from "../login.service";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
-import * as loginService from "../login.service";
 
-class LoginFormContainer extends React.Component<Props, State> {
+class _LoginFormContainer extends React.Component<Props, State> {
   state = {
     total: 0,
     count: 0
@@ -76,7 +76,6 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  loginService: LoginService;
   from: string;
   role: ROLE;
   errorMessage: string;
@@ -85,7 +84,8 @@ interface OwnProps {
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
 
-export default connect(
+const LoginFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginFormContainer);
+)(_LoginFormContainer);
+export default LoginFormContainer;

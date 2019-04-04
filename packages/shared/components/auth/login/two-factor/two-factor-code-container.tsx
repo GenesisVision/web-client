@@ -11,13 +11,12 @@ import {
   loginUserManager
 } from "../login.actions";
 import * as loginService from "../login.service";
-import { LoginService } from "../login.service";
+import { CounterType, LoginService } from "../login.service";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { bindActionCreators, Dispatch } from "redux";
-import { CounterType } from "../login.service";
 
-class TwoFactorCodeContainer extends React.PureComponent<Props, State> {
+class _TwoFactorCodeContainer extends React.PureComponent<Props, State> {
   state = {
     total: 0,
     count: 0
@@ -94,15 +93,12 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  loginService: LoginService;
-  from: string;
   role: ROLE;
-  errorMessage: string;
-  FORGOT_PASSWORD_ROUTE: string;
 }
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
-export default connect(
+const TwoFactorCodeContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TwoFactorCodeContainer);
+)(_TwoFactorCodeContainer);
+export default TwoFactorCodeContainer;
