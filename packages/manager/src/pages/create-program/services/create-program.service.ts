@@ -9,6 +9,8 @@ import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
 import { ICreateProgramSettingsFormValues } from "../components/create-program-settings/create-program-settings";
+import { fetchWallets } from "shared/components/wallet/services/wallet.services";
+import { ManagerThunk } from "shared/utils/types";
 
 const GM_BROKER_NAME = "Genesis Markets";
 
@@ -33,7 +35,7 @@ export const createProgram = (
     keyof NewProgramRequest
   >,
   setSubmitting: (isSubmitting: boolean) => void
-) => (dispatch: Dispatch) => {
+): ManagerThunk<void> => dispatch => {
   const authorization = authService.getAuthArg();
 
   let promise = Promise.resolve("");
@@ -63,6 +65,7 @@ export const createProgram = (
         )
       );
       dispatch(push(DASHBOARD_ROUTE));
+      dispatch(fetchWallets());
     })
     .catch(error => {
       setSubmitting(false);

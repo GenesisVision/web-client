@@ -11,20 +11,20 @@ export const getProgramWithdrawInfo = id => (dispatch, getState) => {
   );
 };
 
-export const withdrawProgramById = (id, amount) => {
+export const withdrawProgramById = (id, amount) => () => {
   return investorApi
     .v10InvestorProgramsByIdWithdrawMultiByAmountPost(
       id,
       amount,
       authService.getAuthArg()
     )
-    .then(response => {
+    .then(() => {
       alertMessageActions.success(
-        "program-withdraw.success-alert-message",
+        "withdraw-program.success-alert-message",
         true
       );
-      return response;
     });
 };
+
 export const alert = (type, text, translate = false) => dispatch =>
   dispatch(alertMessageActions[type](text, translate));
