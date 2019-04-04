@@ -1,15 +1,16 @@
 import "shared/components/auth/login/login/login.scss";
 
-import React from "react";
+import * as React from "react";
 import LoginFormContainer from "shared/components/auth/login/login/login-form-container";
 
 import AuthTabs from "../../components/auth-tabs/auth-tabs";
 import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
-import { MANAGER } from "shared/constants/constants";
+import { ROLE } from "shared/constants/constants";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
+import { LocationState } from "history";
 
-const LoginPage = ({ location }) => {
+const LoginPage: React.FC<Props> = ({ location }) => {
   const from = location.state || HOME_ROUTE;
   return (
     <div className="login">
@@ -17,10 +18,14 @@ const LoginPage = ({ location }) => {
       <LoginFormContainer
         from={from}
         FORGOT_PASSWORD_ROUTE={FORGOT_PASSWORD_ROUTE}
-        role={MANAGER}
+        role={ROLE.MANAGER}
       />
     </div>
   );
 };
 
-export default LoginPage;
+interface Props {
+  location: LocationState;
+}
+
+export default React.memo(LoginPage);
