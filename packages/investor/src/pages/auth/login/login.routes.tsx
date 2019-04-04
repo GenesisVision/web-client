@@ -1,7 +1,7 @@
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import LoginFooter from "shared/components/auth/components/login-footer/login-footer";
@@ -9,12 +9,13 @@ import LoginFooter from "shared/components/auth/components/login-footer/login-fo
 import LoginPage from "./login/login.page";
 import Recovery from "./recovery/recovery.page";
 import TwoFactor from "./two-factor/two-factor.page";
+import {
+  LOGIN_ROUTE,
+  LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE,
+  LOGIN_ROUTE_TWO_FACTOR_ROUTE
+} from "shared/components/auth/login/login.routes";
 
-export const LOGIN_ROUTE = "/login";
-export const LOGIN_ROUTE_TWO_FACTOR_ROUTE = `${LOGIN_ROUTE}/two-factor`;
-export const LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE = `${LOGIN_ROUTE_TWO_FACTOR_ROUTE}/recovery`;
-
-const LoginRoutes = ({ t }) => (
+const LoginRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
   <AuthLayout
     Footer={LoginFooter}
     title={t("auth.login.title")}
@@ -32,4 +33,4 @@ const LoginRoutes = ({ t }) => (
   </AuthLayout>
 );
 
-export default translate()(LoginRoutes);
+export default React.memo(translate()(LoginRoutes));
