@@ -1,92 +1,20 @@
 import { ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 
-import { convertFromCurrency } from "../../utils/currency-converter";
 import { ResponseError } from "../../utils/types";
-import ProgramWithdrawForm from "./program-withdraw-form";
-import ProgramWithdrawTop from "./program-withdraw-top";
 import ProgramWithdrawAmountForm from "./program-withdraw-amount-form";
-
-// class ProgramWithdrawPopup extends Component {
-//   state = {
-//     data: undefined,
-//     isPending: false
-//   };
-//
-//   componentDidMount() {
-//     this.setState({ isPending: true });
-//     this.props
-//       .fetchInfo()
-//       .then(data => this.setState({ data, isPending: false }))
-//       .catch(() => this.setState({ isPending: false }));
-//   }
-//
-//   handleSubmit = amount => {
-//     this.setState({ isPending: true });
-//     return this.props
-//       .withdraw(amount)
-//       .catch(() => this.setState({ isPending: false }));
-//   };
-//
-//   render() {
-//     if (!this.state.data) return <DialogLoader />;
-//     const { assetCurrency, accountCurrency, errorMessage } = this.props;
-//     const { title, availableToWithdraw, periodEnds, rate } = this.state.data;
-//     return (
-//       <Fragment>
-//         <ProgramWithdrawTop
-//           title={title}
-//           availableToWithdraw={availableToWithdraw}
-//           programCurrency={assetCurrency}
-//         />
-//         <ProgramWithdrawForm
-//           programCurrency={assetCurrency}
-//           accountCurrency={accountCurrency}
-//           availableToWithdraw={availableToWithdraw}
-//           periodEnds={periodEnds}
-//           rate={rate}
-//           onSubmit={this.handleSubmit}
-//           errorMessage={errorMessage}
-//           disabled={this.state.isPending}
-//         />
-//       </Fragment>
-//     );
-//   }
-// }
-//
-// ProgramWithdrawPopup.propTypes = {
-//   fetchInfo: PropTypes.func,
-//   withdraw: PropTypes.func,
-//   accountCurrency: PropTypes.string.isRequired,
-//   assetCurrency: PropTypes.string.isRequired
-// };
-//
-// export default ProgramWithdrawPopup;
-
-// import { FundWithdrawInfo, WalletBaseData } from "gv-api-web";
-// import React, { Component, Fragment } from "react";
-// import { rateApi } from "shared/services/api-client/rate-api";
-// import { convertFromCurrency } from "shared/utils/currency-converter";
-// import { ResponseError } from "shared/utils/types";
-//
-// import { DialogLoader } from "../dialog/dialog-loader/dialog-loader";
-// import FundWithdrawAmountForm from "./fund-withdraw-amount-form";
-// import FundWithdrawConfirmForm from "./fund-withdraw-confirm-form";
-// import FundWithdrawTop from "./fund-withdraw-top";
-// import FundWithdrawWallet from "./fund-withdraw-wallet";
-// import {
-//   FundWithdraw,
-//   FundWithdrawalInfoResponse
-// } from "./fund-withdraw.types";
+import ProgramWithdrawConfirmForm from "./program-withdraw-confirm-form";
+import ProgramWithdrawTop from "./program-withdraw-top";
 
 enum PROGRAM_WITHDRAW_FORM {
   ENTER_AMOUNT = "ENTER_AMOUNT",
   CONFIRM = "CONFIRM"
 }
 
-class ProgramWithdrawPopup extends React.Component<
-  IProgramWithdrawPopupProps,
+class _ProgramWithdrawPopup extends React.Component<
+  IProgramWithdrawPopupProps & InjectedTranslateProps,
   State
 > {
   state: State = {
@@ -157,53 +85,9 @@ class ProgramWithdrawPopup extends React.Component<
       step,
       amount
     } = this.state;
-    const { assetCurrency, accountCurrency } = this.props;
-
+    const { t, assetCurrency, accountCurrency } = this.props;
     if (!availableToWithdraw || !title || !periodEnds) return <DialogLoader />;
-    // const availableToWithdraw = convertFromCurrency(
-    //   availableToWithdraw,
-    //   rate
-    // );
-    // return (
-    //   <>
-    //     <FundWithdrawTop
-    //       title={withdrawalInfo.title}
-    //       availableToWithdraw={availableToWithdraw}
-    //       currency={wallet.currency}
-    //     />
-    //     <div className="dialog__bottom">
-    //       {step === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
-    //         <>
-    //           <FundWithdrawWallet
-    //             wallets={wallets}
-    //             value={wallet.currency}
-    //             onChange={this.handleWalletChange}
-    //           />
-    //           <FundWithdrawAmountForm
-    //             wallets={wallets}
-    //             wallet={wallet}
-    //             availableToWithdraw={availableToWithdraw}
-    //             exitFee={withdrawalInfo.exitFee}
-    //             percent={percent}
-    //             onSubmit={this.handleEnterAmountSubmit}
-    //           />
-    //         </>
-    //       )}
-    //       {step === PROGRAM_WITHDRAW_FORM.CONFIRM && percent && (
-    //         <FundWithdrawConfirmForm
-    //           errorMessage={errorMessage}
-    //           isPending={isPending}
-    //           availableToWithdraw={availableToWithdraw}
-    //           percent={percent}
-    //           currency={wallet.currency}
-    //           exitFee={withdrawalInfo.exitFee}
-    //           onSubmit={this.handleSubmit}
-    //           onBackClick={this.goToEnterAmountStep}
-    //         />
-    //       )}
-    //     </div>
-    //   </>
-    // );
+
     return (
       <>
         <ProgramWithdrawTop
@@ -211,16 +95,6 @@ class ProgramWithdrawPopup extends React.Component<
           availableToWithdraw={availableToWithdraw}
           programCurrency={assetCurrency}
         />
-        {/*<ProgramWithdrawForm*/}
-        {/*programCurrency={assetCurrency}*/}
-        {/*accountCurrency={accountCurrency}*/}
-        {/*availableToWithdraw={availableToWithdraw}*/}
-        {/*periodEnds={periodEnds}*/}
-        {/*rate={rate}*/}
-        {/*onSubmit={this.handleSubmit}*/}
-        {/*errorMessage={errorMessage}*/}
-        {/*disabled={isPending}*/}
-        {/*/>*/}
         <div className="dialog__bottom">
           {step === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
             <ProgramWithdrawAmountForm
@@ -232,23 +106,25 @@ class ProgramWithdrawPopup extends React.Component<
               onSubmit={this.handleEnterAmountSubmit}
             />
           )}
-          {/*{step === PROGRAM_WITHDRAW_FORM.CONFIRM && amount && (*/}
-          {/*<FundWithdrawConfirmForm*/}
-          {/*errorMessage={errorMessage}*/}
-          {/*isPending={isPending}*/}
-          {/*availableToWithdraw={availableToWithdraw}*/}
-          {/*percent={percent}*/}
-          {/*currency={wallet.currency}*/}
-          {/*exitFee={withdrawalInfo.exitFee}*/}
-          {/*onSubmit={this.handleSubmit}*/}
-          {/*onBackClick={this.goToEnterAmountStep}*/}
-          {/*/>*/}
-          {/*)}*/}
+          {step === PROGRAM_WITHDRAW_FORM.CONFIRM && amount && (
+            <ProgramWithdrawConfirmForm
+              errorMessage={errorMessage}
+              isPending={isPending}
+              amount={amount}
+              onSubmit={this.handleSubmit}
+              onBackClick={this.goToEnterAmountStep}
+              programCurrency={assetCurrency}
+              periodEnds={periodEnds}
+            />
+          )}
+          <div className="dialog__info">{t("withdraw-program.info")}</div>
         </div>
       </>
     );
   }
 }
+
+const ProgramWithdrawPopup = translate()(_ProgramWithdrawPopup);
 
 export default ProgramWithdrawPopup;
 

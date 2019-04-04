@@ -67,6 +67,7 @@ class _ProgramWithdrawAmountForm extends React.PureComponent<
         )}
         <div className="dialog__buttons">
           <GVButton
+            type="submit"
             id="programWithdrawAmountFormSubmit"
             className="invest-form__submit-button"
             disabled={!values.amount || !isValid || !dirty}
