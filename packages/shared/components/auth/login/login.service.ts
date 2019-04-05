@@ -61,17 +61,17 @@ const getPoW = (
       let prefix;
       if (pow.difficulty > 0) {
         setTotal(total);
-        for (let i = 0; i < 50; i++) {
-          console.time("");
-          prefix = await calculatePrefix({
-            ...pow,
-            login: email,
-            total,
-            setCount
-          });
-          console.timeEnd("");
-        }
-        prefix = 1;
+        // for (let i = 0; i < 50; i++) {
+        console.time("");
+        prefix = await calculatePrefix({
+          ...pow,
+          login: email,
+          total,
+          setCount
+        });
+        console.timeEnd("");
+        // }
+        // prefix = 1;
       } else prefix = 0;
       return { prefix, id };
     });
