@@ -7,11 +7,11 @@ import React from "react";
 import styles from "./pie.scss";
 
 export interface GVProgramPeriodProps {
-  pieDirection?: PIE_DIRECTION;
   color: string;
-  start: Date | number;
   end: Date | number;
   value: Date | number;
+  start?: Date | number;
+  pieDirection?: PIE_DIRECTION;
 }
 
 export enum PIE_DIRECTION {
@@ -51,7 +51,7 @@ const calcDash = (percent: number) => `${percent} ${100 - percent}`;
 const Pie: React.SFC<GVProgramPeriodProps> = ({
   pieDirection = PIE_DIRECTION.CLOCKWISE,
   color,
-  start,
+  start = 0,
   end,
   value
 }) => {
