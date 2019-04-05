@@ -60,14 +60,11 @@ const _LoginForm: React.FC<
         >
           {t("auth.login.confirm-button-text")}
         </GVButton>
-        <div className="login__pie-container">
-          <Pie
-            color={GVColors.$primaryColor}
-            start={0}
-            end={total}
-            value={count}
-          />
-        </div>
+        {count < total && (
+          <div className="login__pie-container">
+            <Pie color={GVColors.$primaryColor} end={total} value={count} />
+          </div>
+        )}
       </div>
     </form>
   );
