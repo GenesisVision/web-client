@@ -13,7 +13,8 @@ onmessage = event => {
     ...Array(64 - difficulty).fill("F")
   ].join("");
   while (sha256(`${prefix}${nonce}${login}`) >= diffString) {
-    if (prefix % 500 === 0) postMessage({ prefix, found: false });
+    if (prefix % (difficulty * 100) === 0)
+      postMessage({ prefix, found: false });
     prefix++;
   }
   postMessage({ prefix, found: true });
