@@ -49,7 +49,7 @@ const _LoginForm: React.FC<
           <GVButton variant="text">{t("auth.login.forgot")}</GVButton>
         </Link>
       </div>
-      {/*<FormError error={error} />*/}
+      <FormError error={error} />
 
       <div className="login__submit-block">
         <GVButton
