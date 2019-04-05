@@ -12,7 +12,7 @@ import { InvestorThunk } from "shared/utils/types";
 import {
   getFundWithdrawInfo,
   getRate
-} from "../actions/fund-withdrowal.actions";
+} from "../actions/fund-withdrawal.actions";
 
 export const fetchFundWithdrawInfo = (
   id: string,
