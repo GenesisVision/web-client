@@ -19,7 +19,7 @@
 
   &--negative {
     color: $negative-color;
-    background-color: rgba($negative-color, 0.1);
+    background-color: $background-chip-negative;
   }
 
   &--positive {
@@ -28,6 +28,10 @@
 
     &.chip--pointer:hover(.chip--disabled) {
       background-color: lighten($background-chip-positive, 5%);
+    }
+
+    &.chip--negative:hover(.chip--disabled) {
+      background-color: lighten($background-chip-negative, 5%);
     }
   }
 
