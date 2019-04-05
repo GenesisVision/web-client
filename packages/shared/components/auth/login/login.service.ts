@@ -54,7 +54,7 @@ const getPoW = (
     .v10PlatformRiskcontrolGet(email, { device: CLIENT_WEB })
     .then(async response => {
       const { pow, id } = response;
-      pow.difficulty = 4;
+      // pow.difficulty = 4;
       const total =
         Math.log(0.1) /
         Math.log((16 ** pow.difficulty - 1) / 16 ** pow.difficulty);
