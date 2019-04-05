@@ -3,7 +3,7 @@ import { ProgramWithdrawType } from "shared/components/program-withdraw/program-
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
-import { IntestorThunk } from "shared/utils/types";
+import { InvestorThunk } from "shared/utils/types";
 
 export const getProgramWithdrawInfo = (
   id: string,
@@ -18,7 +18,7 @@ export const getProgramWithdrawInfo = (
 
 export const withdrawProgramById = (id: string, onClose: () => void) => (
   value: ProgramWithdrawType
-): IntestorThunk<Promise<void>> => (dispatch): Promise<void> => {
+): InvestorThunk<Promise<void>> => (dispatch): Promise<void> => {
   return investorApi
     .v10InvestorProgramsByIdWithdrawMultiByAmountPost(
       id,
