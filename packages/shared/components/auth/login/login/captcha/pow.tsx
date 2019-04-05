@@ -28,9 +28,6 @@ class Pow extends React.PureComponent<Props, State> {
   componentDidMount() {
     this.calculatePow();
   }
-  componentDidUpdate() {
-    this.calculatePow();
-  }
   render() {
     const { total, count } = this.state;
     return (
