@@ -29,6 +29,7 @@ const calculatePrefix = (props: {
   nonce: string;
   login: string;
   setCount: (val: number) => void;
+  total: number;
 }): Promise<number> => {
   worker.postMessage([props.difficulty, props.nonce, props.login]);
   const { setCount } = props;
@@ -36,6 +37,7 @@ const calculatePrefix = (props: {
     worker.onmessage = ({ data }: any) => {
       if (data.found) {
         resolve(data.prefix);
+        setCount(props.total);
       } else {
         setCount(data.prefix);
       }
