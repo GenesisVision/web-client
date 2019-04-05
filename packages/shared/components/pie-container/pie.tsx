@@ -92,4 +92,4 @@ export interface GVProgramPeriodProps {
   pieDirection?: PIE_DIRECTION;
 }
 
-export default Pie;
+export default React.memo(Pie);
