@@ -25,10 +25,7 @@ import {
 } from "./deposit-form-validation-schema";
 
 class _DepositForm extends React.PureComponent<
-  InjectedFormikProps<
-    IDepositProps & InjectedTranslateProps,
-    IDepositFormValues
-  >
+  InjectedFormikProps<OwnProps & InjectedTranslateProps, FormValues>
 > {
   componentDidMount(): void {
     this.fetchRate({ currencyFrom: this.props.values.walletCurrency });
@@ -108,8 +105,8 @@ class _DepositForm extends React.PureComponent<
     const { availableInWallet, availableToInvest, walletCurrency } = values;
     const max = formatCurrencyValue(
       role === ROLE.INVESTOR
-        ? Math.min(availableInWallet, availableToInvest)
-        : availableInWallet,
+        ? Math.min(availableInWallet || 0, availableToInvest || 0)
+        : availableInWallet || 0,
       walletCurrency
     );
     setFieldValue("amount", max);
@@ -263,19 +260,17 @@ class _DepositForm extends React.PureComponent<
   }
 }
 
-const DepositForm = compose<React.FC<IDepositProps>>(
+const DepositForm = compose<React.FC<OwnProps>>(
   translate(),
-  withFormik<IDepositProps, IDepositFormValues>({
+  withFormik<OwnProps, FormValues>({
     displayName: "invest-form",
     mapPropsToValues: () => ({
       rate: 1,
-      maxAmount: 0,
+      maxAmount: undefined,
       amount: undefined,
-      walletCurrency: "GVT",
-      availableToInvest: 0,
-      availableInWallet: 0
+      walletCurrency: "GVT"
     }),
-    validationSchema: (params: IDepositProps & InjectedTranslateProps) =>
+    validationSchema: (params: OwnProps & InjectedTranslateProps) =>
       params.role === ROLE.MANAGER
         ? managerSchema(params)
         : investorSchema(params),
@@ -288,7 +283,7 @@ const DepositForm = compose<React.FC<IDepositProps>>(
 
 export default DepositForm;
 
-export interface IDepositProps {
+interface OwnProps {
   wallets: WalletBaseData[];
   role: ROLE;
   asset: ASSET;
@@ -303,10 +298,10 @@ export interface IDepositProps {
   ) => void;
 }
 
-export interface IDepositFormValues {
+interface FormValues {
   rate: number;
-  availableToInvest: number;
-  availableInWallet: number;
+  availableToInvest?: number;
+  availableInWallet?: number;
   amount?: number;
   walletCurrency: string;
 }
