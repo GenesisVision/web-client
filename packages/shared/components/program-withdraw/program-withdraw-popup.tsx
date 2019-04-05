@@ -2,8 +2,8 @@ import { ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
+import { ResponseError } from "shared/utils/types";
 
-import { ResponseError } from "../../utils/types";
 import ProgramWithdrawAmountForm from "./program-withdraw-amount-form";
 import ProgramWithdrawConfirmForm from "./program-withdraw-confirm-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
