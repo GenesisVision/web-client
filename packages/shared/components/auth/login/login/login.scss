@@ -35,4 +35,11 @@
     align-self: flex-start;
     margin-top: auto;
   }
+  &__top-counter {
+    height: 3px;
+    background: $primary-color;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
 }

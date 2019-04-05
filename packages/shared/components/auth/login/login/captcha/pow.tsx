@@ -32,8 +32,11 @@ class Pow extends React.PureComponent<Props, State> {
     const { total, count } = this.state;
     return (
       <div className="login__pie-container">
-        {count < total && (
-          <Pie color={GVColors.$primaryColor} end={total} value={count} />
+        {total && (
+          <div
+            className="login__top-counter"
+            style={{ width: `${count / (total / 100)}%` }}
+          />
         )}
       </div>
     );
