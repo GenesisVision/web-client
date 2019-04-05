@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_constants.scss";
 @import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .login {
   display: flex;
@@ -14,6 +15,9 @@
 
     &__forgot {
       margin-bottom: 30px;
+    }
+    & .form-error {
+      padding-bottom: $padding-small;
     }
   }
   &__submit-block {
@@ -30,5 +34,12 @@
   &__submit-button {
     align-self: flex-start;
     margin-top: auto;
+  }
+  &__top-counter {
+    height: 3px;
+    background: $primary-color;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 }

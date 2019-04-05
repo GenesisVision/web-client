@@ -14,35 +14,12 @@ import {
   storeTwoFactor
 } from "./login.actions";
 import { LOGIN_ROUTE, LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
-//@ts-ignore
-import SHAWorker from "./sha.worker.js";
+import { PowDetails } from "gv-api-web";
+import { calculatePrefix } from "../auth.service";
 
 export const CLIENT_WEB = "Web";
 export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
-};
-
-const worker = new SHAWorker();
-
-const calculatePrefix = (props: {
-  difficulty: number;
-  nonce: string;
-  login: string;
-  setCount: (val: number) => void;
-  total: number;
-}): Promise<number> => {
-  worker.postMessage([props.difficulty, props.nonce, props.login]);
-  const { setCount } = props;
-  return new Promise(resolve => {
-    worker.onmessage = ({ data }: any) => {
-      if (data.found) {
-        resolve(data.prefix);
-        setCount(props.total);
-      } else {
-        setCount(data.prefix);
-      }
-    };
-  });
 };
 
 const getPoW = (
@@ -77,36 +54,47 @@ const getPoW = (
     });
 };
 
+export const runCalculatingPow: RunCalculatingPowFuncType = async props => {
+  const { difficulty, setTotal, email } = props;
+  const total =
+    Math.log(0.1) / Math.log((16 ** difficulty - 1) / 16 ** difficulty);
+  if (difficulty > 0) {
+    setTotal(total);
+    return await calculatePrefix({
+      ...props,
+      login: email,
+      total
+    });
+  }
+  return 0;
+};
+
 export const login: LoginFuncType = (
+  id,
+  prefix,
   loginData,
   from,
   setSubmitting,
-  loginUserMethod,
-  setCount,
-  setTotal
+  loginUserMethod
 ) => dispatch => {
-  return getPoW(loginData.email, setCount, setTotal)
-    .then(response => {
-      const { prefix, id } = response;
-      return dispatch(
-        loginUserMethod({
-          ...loginData,
-          client: CLIENT_WEB,
-          loginCheckInfo: {
-            id,
-            poW: {
-              prefix
-            }
-          }
-        })
-      );
+  return dispatch(
+    loginUserMethod({
+      ...loginData,
+      client: CLIENT_WEB,
+      loginCheckInfo: {
+        id,
+        poW: {
+          prefix
+        }
+      }
     })
+  )
     .then((response: any) => {
       authService.storeToken(response.value);
       dispatch(authActions.updateToken());
       dispatch(push(from));
     })
-    .catch(e => {
+    .catch((e: any) => {
       if (e.code === "RequiresTwoFactor") {
         dispatch(
           storeTwoFactor({
@@ -181,12 +169,12 @@ export const logout: logoutFuncType = () => dispatch => {
 };
 
 type LoginFuncType = (
+  id: string,
+  prefix: number,
   loginData: { email: string; password: string },
   from: string,
   setSubmitting: any,
-  loginUserMethod: any,
-  setCount: SetFuncType,
-  setTotal: SetFuncType
+  loginUserMethod: any
 ) => (dispatch: Dispatch) => Promise<void>;
 type TwoFactorLoginFuncType = (
   code: string,
@@ -199,8 +187,17 @@ type TwoFactorLoginFuncType = (
 type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = () => (dispatch: Dispatch) => void;
-export type CounterType = { count: number; total: number };
-type SetFuncType = (val: number) => void;
+export type CounterType = { count?: number; total?: number };
+export type SetFuncType = (val: number) => void;
+type RunCalculatingPowFuncType = (
+  props: PowDetails & {
+    setTotal: SetFuncType;
+    setCount: SetFuncType;
+    email: string;
+    id: string;
+  }
+) => Promise<number>;
+export type SetSubmittingFuncType = (isSubmitting: boolean) => void;
 
 export interface LoginService {
   login: LoginFuncType;
@@ -208,4 +205,5 @@ export interface LoginService {
   clearLoginData: clearLoginDataFuncType;
   clearTwoFactorData: clearTwoFactorDataFuncType;
   logout: logoutFuncType;
+  runCalculatingPow: RunCalculatingPowFuncType;
 }
