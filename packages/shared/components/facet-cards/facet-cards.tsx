@@ -1,6 +1,6 @@
 import "./facet-cards.scss";
 
-import { Facet } from "gv-api-web";
+import { FundFacet, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { RefObject } from "react";
 
@@ -45,7 +45,7 @@ class FacetCards extends React.PureComponent<Props> {
       <div className="facets__wrapper facets__shadow" ref={this.facetList}>
         <div className="facets" ref={this.scroll} onScroll={this.handleScroll}>
           <div className="facets__carousel">
-            {facets.map((x: Facet) => (
+            {facets.map(x => (
               <FacetCard
                 title={title}
                 key={x.id}
@@ -61,7 +61,7 @@ class FacetCards extends React.PureComponent<Props> {
 }
 
 interface Props {
-  facets: Facet[];
+  facets: Array<FundFacet & ProgramFacet>;
   composeFacetUrl: composeFacetUrlFunc;
   title: string;
 }

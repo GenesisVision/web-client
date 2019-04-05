@@ -16,7 +16,17 @@
       margin-bottom: 30px;
     }
   }
-
+  &__submit-block {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 36px;
+  }
+  &__pie-container {
+    width: 36px;
+    height: 36px;
+    margin: 0 18px;
+  }
   &__submit-button {
     align-self: flex-start;
     margin-top: auto;

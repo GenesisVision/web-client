@@ -1,21 +1,26 @@
-import { withFormik } from "formik";
+import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
-
 import validationSchema from "./login-form.validators";
+import Pie from "shared/components/pie-container/pie";
+import { GVColors } from "gv-react-components";
 
-const LoginForm = ({
+const _LoginForm: React.FC<
+  InjectedFormikProps<Props, ILoginFormFormValues>
+> = ({
   t,
   isSubmitting,
   handleSubmit,
   error,
   isValid,
   dirty,
-  FORGOT_PASSWORD_ROUTE
+  FORGOT_PASSWORD_ROUTE,
+  count,
+  total
 }) => {
   return (
     <form
@@ -44,23 +49,31 @@ const LoginForm = ({
           <GVButton variant="text">{t("auth.login.forgot")}</GVButton>
         </Link>
       </div>
-      <FormError error={error} />
+      {/*<FormError error={error} />*/}
 
-      <GVButton
-        className="login__submit-button"
-        id="loginSubmit"
-        disabled={isSubmitting || !isValid}
-        type="submit"
-      >
-        {t("auth.login.confirm-button-text")}
-      </GVButton>
+      <div className="login__submit-block">
+        <GVButton
+          className="login__submit-button"
+          id="loginSubmit"
+          disabled={isSubmitting || !isValid}
+          type="submit"
+        >
+          {t("auth.login.confirm-button-text")}
+        </GVButton>
+        {count < total && (
+          <div className="login__pie-container">
+            <Pie color={GVColors.$primaryColor} end={total} value={count} />
+          </div>
+        )}
+      </div>
     </form>
   );
 };
 
-const withTranslationAndFormik = compose(
+const withTranslationAndFormik = compose<React.FC<OwnProps>>(
+  // React.memo,
   translate(),
-  withFormik({
+  withFormik<Props, ILoginFormFormValues>({
     displayName: "loginForm",
     isInitialValid: true,
     mapPropsToValues: () => ({
@@ -72,6 +85,24 @@ const withTranslationAndFormik = compose(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(LoginForm);
+)(_LoginForm);
+
+interface Props extends OwnProps, InjectedTranslateProps {}
+
+interface OwnProps {
+  onSubmit(
+    data: ILoginFormFormValues,
+    setSubmitting: (isSubmitting: boolean) => void
+  ): void;
+  error: string;
+  FORGOT_PASSWORD_ROUTE: string;
+  count: number;
+  total: number;
+}
+
+export interface ILoginFormFormValues {
+  email: string;
+  password: string;
+}
 
 export default withTranslationAndFormik;

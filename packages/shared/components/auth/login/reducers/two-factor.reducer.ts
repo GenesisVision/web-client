@@ -1,12 +1,11 @@
-import { HOME_ROUTE } from "pages/app/app.routes";
 import { composeClearDataActionType } from "shared/actions/clear-data.factory";
-
-import { LOGIN_TWO_FACTOR } from "../actions/login.actions";
+import { LOGIN_TWO_FACTOR } from "shared/components/auth/login/login.actions";
+import { HOME_ROUTE } from "shared/routes/app.routes";
 
 export const initialState = {
   email: "",
   password: "",
-  from: HOME_ROUTE
+  from: { HOME_ROUTE }
 };
 
 const clearDataActionType = composeClearDataActionType(LOGIN_TWO_FACTOR);

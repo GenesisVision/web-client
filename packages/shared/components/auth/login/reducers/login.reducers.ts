@@ -4,15 +4,17 @@ import apiReducerFactory, {
   IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 
-import { LOGIN } from "../actions/login.actions";
 import twoFactorReducer, { ITwoFactorReducer } from "./two-factor.reducer";
+import { LOGIN } from "shared/components/auth/login/login.actions";
 
 export type LoginState = Readonly<{
   login: IApiState<LoginViewModel>;
   twoFactor: ITwoFactorReducer;
 }>;
 
-export default combineReducers<LoginState>({
+const loginReducer = combineReducers<LoginState>({
   login: apiReducerFactory({ apiType: LOGIN }),
   twoFactor: twoFactorReducer
 });
+
+export default loginReducer;

@@ -1,26 +1,18 @@
 import "./auth-layout.scss";
 
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
+import { ILoginFooterProps } from "../login-footer/login-footer";
 
 const QUOTES_COUNT = 5;
 
-class AuthLayout extends Component {
+class AuthLayout extends React.PureComponent<Props, State> {
   state = {
-    quoteNo: 0
+    quoteNo: Math.floor(Math.random() * QUOTES_COUNT + 1)
   };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      quoteNo: Math.floor(Math.random() * QUOTES_COUNT + 1)
-    };
-  }
 
   render() {
     const {
@@ -68,7 +60,7 @@ class AuthLayout extends Component {
           </div>
           {Footer && (
             <div className="auth__footer">
-              <Footer ROUTE={SIGNUP_ROUTE || LOGIN_ROUTE} />
+              <Footer ROUTE={SIGNUP_ROUTE || LOGIN_ROUTE!} />
             </div>
           )}
         </div>
@@ -77,9 +69,16 @@ class AuthLayout extends Component {
   }
 }
 
-AuthLayout.propTypes = {
-  Footer: PropTypes.func,
-  title: PropTypes.string
-};
+interface Props extends InjectedTranslateProps {
+  Footer: React.ComponentType<ILoginFooterProps>;
+  title: string;
+  HOME_ROUTE: string;
+  SIGNUP_ROUTE?: string;
+  LOGIN_ROUTE?: string;
+}
+
+interface State {
+  quoteNo: number;
+}
 
 export default translate()(AuthLayout);

@@ -1,57 +1,15 @@
 import "./pie.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import moment from "moment";
-import React from "react";
+import * as React from "react";
 
 import styles from "./pie.scss";
 
-export interface GVProgramPeriodProps {
-  pieDirection?: PIE_DIRECTION;
-  color: string;
-  start: Date | number;
-  end: Date | number;
-  value: Date | number;
-}
-
-export enum PIE_DIRECTION {
-  CLOCKWISE = "CLOCKWISE",
-  COUNTERCLOCKWISE = "COUNTERCLOCKWISE"
-}
-
-export const calcPercent = (
-  value: Date | number,
-  start: Date | number,
-  end: Date | number
-) => {
-  let progress = 0,
-    duration = 0;
-  if (
-    typeof value === "number" &&
-    typeof start === "number" &&
-    typeof end === "number"
-  ) {
-    duration = end - start;
-    progress = value - start;
-  } else {
-    const dateNow = moment(value);
-    const dateStart = moment(start);
-    const dateEnd = moment(end);
-    duration = dateEnd.diff(moment(dateStart), "seconds");
-    progress = dateNow.diff(dateStart, "seconds");
-  }
-
-  if (duration === 0 || progress < 0) return 0;
-  if (progress > duration) return 100;
-  return (progress * 100) / duration;
-};
-
-const calcDash = (percent: number) => `${percent} ${100 - percent}`;
-
-const Pie: React.SFC<GVProgramPeriodProps> = ({
+const Pie: React.FC<Props> = ({
   pieDirection = PIE_DIRECTION.CLOCKWISE,
   color,
-  start,
+  start = 0,
   end,
   value
 }) => {
@@ -61,7 +19,7 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({
       width="100%"
       height="100%"
       viewBox="0 0 34 34"
-      className={classnames(styles.gvProgramPeriod, styles.gvProgramPeriodPie)}
+      className={classNames(styles.gvProgramPeriod, styles.gvProgramPeriodPie)}
     >
       <circle
         cx="17"
@@ -92,4 +50,46 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({
   );
 };
 
-export default Pie;
+export const calcPercent = (
+  value: Date | number,
+  start: Date | number,
+  end: Date | number
+) => {
+  let progress = 0,
+    duration = 0;
+  if (
+    typeof value === "number" &&
+    typeof start === "number" &&
+    typeof end === "number"
+  ) {
+    duration = end - start;
+    progress = value - start;
+  } else {
+    const dateNow = moment(value);
+    const dateStart = moment(start);
+    const dateEnd = moment(end);
+    duration = dateEnd.diff(moment(dateStart), "seconds");
+    progress = dateNow.diff(dateStart, "seconds");
+  }
+
+  if (duration === 0 || progress < 0) return 0;
+  if (progress > duration) return 100;
+  return (progress * 100) / duration;
+};
+
+const calcDash = (percent: number) => `${percent} ${100 - percent}`;
+
+export enum PIE_DIRECTION {
+  CLOCKWISE = "CLOCKWISE",
+  COUNTERCLOCKWISE = "COUNTERCLOCKWISE"
+}
+
+export interface Props {
+  color: string;
+  end: Date | number;
+  value: Date | number;
+  start?: Date | number;
+  pieDirection?: PIE_DIRECTION;
+}
+
+export default React.memo(Pie);
