@@ -23,8 +23,17 @@ export interface DispatchType<R> {
   (asyncAction: ActionType): R;
 }
 
+type UnpackApiAction<T> = T extends ApiAction<infer U> ? U : T;
+
+interface ApiActionResponse<T> {
+  action: T;
+  value: UnpackApiAction<T>;
+}
+
 export interface MiddlewareDispatch {
-  <A extends ApiAction = ApiAction>(apiAction: A): CancelablePromise<A>;
+  <A extends ApiAction = ApiAction>(apiAction: A): CancelablePromise<
+    ApiActionResponse<A>
+  >;
   <A extends ActionType = ActionType>(action: A): A;
   <R, S>(asyncAction: RootThunk<R, S>): R;
 }
@@ -34,7 +43,7 @@ export type RootThunk<R, S = RootState> = (
   getState: () => S
 ) => R;
 
-export type IntestorThunk<R> = RootThunk<R, InvestorRootState>;
+export type InvestorThunk<R> = RootThunk<R, InvestorRootState>;
 export type ManagerThunk<R> = RootThunk<R, ManagerRootState>;
 
 export type Nullable<T> = T | null;
