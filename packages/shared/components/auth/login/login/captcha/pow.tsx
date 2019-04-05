@@ -10,7 +10,7 @@ class Pow extends React.PureComponent<Props, State> {
     total: 0,
     count: 0
   };
-  componentDidMount() {
+  calculatePow = () => {
     const setCount = (count: number) =>
       setTimeout(() => this.setState(() => ({ count })));
     const setTotal = (total: number) =>
@@ -24,12 +24,20 @@ class Pow extends React.PureComponent<Props, State> {
       .then(res => {
         this.props.handleSuccess(res);
       });
+  };
+  componentDidMount() {
+    this.calculatePow();
+  }
+  componentDidUpdate() {
+    this.calculatePow();
   }
   render() {
     const { total, count } = this.state;
     return (
       <div className="login__pie-container">
-        <Pie color={GVColors.$primaryColor} end={total} value={count} />
+        {count < total && (
+          <Pie color={GVColors.$primaryColor} end={total} value={count} />
+        )}
       </div>
     );
   }
