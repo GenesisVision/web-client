@@ -1,10 +1,9 @@
-import PropTypes from "prop-types";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const ProgramWithdrawTop = ({
+const ProgramWithdrawTop: React.FC<OwnProps & InjectedTranslateProps> = ({
   t,
   availableToWithdraw,
   title,
@@ -26,9 +25,10 @@ const ProgramWithdrawTop = ({
   );
 };
 
-ProgramWithdrawTop.propTypes = {
-  availableToWithdraw: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired
-};
-
 export default translate()(ProgramWithdrawTop);
+
+interface OwnProps {
+  availableToWithdraw: number;
+  programCurrency: string;
+  title: string;
+}
