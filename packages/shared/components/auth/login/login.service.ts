@@ -16,6 +16,7 @@ import {
 import { LOGIN_ROUTE, LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
 //@ts-ignore
 import SHAWorker from "./sha.worker.js";
+import { CancelablePromise, LoginCheckDetails, PowDetails } from "gv-api-web";
 
 export const CLIENT_WEB = "Web";
 export const redirectToLogin = () => {
@@ -77,6 +78,28 @@ const getPoW = (
     });
 };
 
+export const runCalculatingPow: RunCalculatingPowFuncType = async props => {
+  const { difficulty, setTotal, email } = props;
+  console.log(props);
+  return 0;
+  /*const total =
+    Math.log(0.1) / Math.log((16 ** difficulty - 1) / 16 ** difficulty);
+  let prefix;
+  if (difficulty > 0) {
+    setTotal(total);
+    prefix = await calculatePrefix({
+      ...props,
+      login: email,
+      total
+    });
+  } else prefix = 0;
+  return { prefix, id };*/
+};
+
+export const getCapthca: GetCaptchaFuncType = login => {
+  return platformApi.v10PlatformRiskcontrolGet(login, { device: CLIENT_WEB });
+};
+
 export const login: LoginFuncType = (
   loginData,
   from,
@@ -107,6 +130,47 @@ export const login: LoginFuncType = (
       dispatch(push(from));
     })
     .catch(e => {
+      if (e.code === "RequiresTwoFactor") {
+        dispatch(
+          storeTwoFactor({
+            ...loginData,
+            from
+          })
+        );
+        dispatch(setTwoFactorRequirement(true));
+        dispatch(push(LOGIN_ROUTE_TWO_FACTOR_ROUTE));
+      } else {
+        setSubmitting(false);
+      }
+    });
+};
+
+export const login_: LoginFuncType_ = (
+  id,
+  prefix,
+  loginData,
+  from,
+  setSubmitting,
+  loginUserMethod
+) => dispatch => {
+  return dispatch(
+    loginUserMethod({
+      ...loginData,
+      client: CLIENT_WEB,
+      loginCheckInfo: {
+        id,
+        poW: {
+          prefix
+        }
+      }
+    })
+  )
+    .then((response: any) => {
+      authService.storeToken(response.value);
+      dispatch(authActions.updateToken());
+      dispatch(push(from));
+    })
+    .catch((e: any) => {
       if (e.code === "RequiresTwoFactor") {
         dispatch(
           storeTwoFactor({
@@ -188,6 +252,15 @@ type LoginFuncType = (
   setCount: SetFuncType,
   setTotal: SetFuncType
 ) => (dispatch: Dispatch) => Promise<void>;
+
+type LoginFuncType_ = (
+  id: string,
+  prefix: number,
+  loginData: { email: string; password: string },
+  from: string,
+  setSubmitting: any,
+  loginUserMethod: any
+) => (dispatch: Dispatch) => Promise<void>;
 type TwoFactorLoginFuncType = (
   code: string,
   type: CODE_TYPE,
@@ -199,13 +272,27 @@ type TwoFactorLoginFuncType = (
 type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = () => (dispatch: Dispatch) => void;
-export type CounterType = { count: number; total: number };
+export type CounterType = { count?: number; total?: number };
 type SetFuncType = (val: number) => void;
+type GetCaptchaFuncType = (
+  login: string
+) => CancelablePromise<LoginCheckDetails>;
+type RunCalculatingPowFuncType = (
+  props: PowDetails & {
+    setTotal: SetFuncType;
+    setCount: SetFuncType;
+    email: string;
+    id: string;
+  }
+) => Promise<number>;
 
 export interface LoginService {
   login: LoginFuncType;
+  login_: LoginFuncType_;
   twoFactorLogin: TwoFactorLoginFuncType;
   clearLoginData: clearLoginDataFuncType;
   clearTwoFactorData: clearTwoFactorDataFuncType;
   logout: logoutFuncType;
+  getCapthca: GetCaptchaFuncType;
+  runCalculatingPow: RunCalculatingPowFuncType;
 }
