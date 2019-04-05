@@ -1,12 +1,12 @@
 import "./pie.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import moment from "moment";
-import React from "react";
+import * as React from "react";
 
 import styles from "./pie.scss";
 
-const Pie: React.SFC<GVProgramPeriodProps> = ({
+const Pie: React.FC<Props> = ({
   pieDirection = PIE_DIRECTION.CLOCKWISE,
   color,
   start = 0,
@@ -19,7 +19,7 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({
       width="100%"
       height="100%"
       viewBox="0 0 34 34"
-      className={classnames(styles.gvProgramPeriod, styles.gvProgramPeriodPie)}
+      className={classNames(styles.gvProgramPeriod, styles.gvProgramPeriodPie)}
     >
       <circle
         cx="17"
@@ -84,7 +84,7 @@ export enum PIE_DIRECTION {
   COUNTERCLOCKWISE = "COUNTERCLOCKWISE"
 }
 
-export interface GVProgramPeriodProps {
+export interface Props {
   color: string;
   end: Date | number;
   value: Date | number;
