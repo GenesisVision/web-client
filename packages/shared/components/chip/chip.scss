@@ -3,6 +3,7 @@
 @import "~shared/styles/_sizes.scss";
 
 .chip {
+  @include transition(background-color);
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +24,11 @@
 
   &--positive {
     color: $primary-color;
-    background-color: rgba($primary-color, 0.1);
+    background-color: $background-chip-positive;
+
+    &.chip--pointer:hover(.chip--disabled) {
+      background-color: lighten($background-chip-positive, 5%);
+    }
   }
 
   &--warning {
@@ -33,6 +38,10 @@
 
   &--pointer {
     cursor: pointer;
+
+    &:hover:not(.chip--disabled) {
+      background-color: lighten($secondary-background-color, 5%);
+    }
   }
 
   &--rounded {

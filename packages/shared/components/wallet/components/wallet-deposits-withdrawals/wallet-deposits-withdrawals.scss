@@ -10,6 +10,7 @@
   &__cell {
     @include adaptive-padding(right, $padding-xsmall, 2);
     color: $text-light-color;
+    cursor: pointer;
 
     &--wallet {
       vertical-align: middle;

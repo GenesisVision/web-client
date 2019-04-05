@@ -39,7 +39,7 @@ $line-height: 1.69;
 
   &__link {
     &:hover {
-      box-shadow: $box-shadow-4;
+      background-color: lighten($secondary-color, 5%);
     }
   }
 

@@ -1,5 +1,6 @@
 @import "~shared/styles/_sizes.scss";
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_constants.scss";
 
 .wallet-settings {
   @include adaptive-padding(bottom, $padding-medium);
@@ -16,6 +17,7 @@
   }
 
   &__question {
+    @include transition(border-color, color);
     background: none;
     padding: 0;
     box-sizing: border-box;
@@ -31,5 +33,10 @@
     font-weight: 700;
     outline: none;
     cursor: pointer;
+
+    &.gv-btn--text:hover:not(:disabled).gv-btn--secondary {
+      border-color: $main-color;
+      color: $main-color;
+    }
   }
 }

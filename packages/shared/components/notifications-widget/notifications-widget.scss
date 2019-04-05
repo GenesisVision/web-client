@@ -1,12 +1,22 @@
+@import "~shared/styles/_colors.scss";
+
 .notifications-widget {
   display: flex;
   align-items: center;
   cursor: pointer;
   &__count {
     height: 32px;
-    cursor: pointer !important;
+    cursor: pointer;
   }
   &__ring {
     margin-right: 10px;
+  }
+  &:hover {
+    svg [stroke] {
+      stroke: $primary-color;
+    }
+    .notifications-widget__count {
+      background-color: lighten($secondary-background-color, 5%);
+    }
   }
 }
