@@ -6,48 +6,6 @@ import React from "react";
 
 import styles from "./pie.scss";
 
-export interface GVProgramPeriodProps {
-  color: string;
-  end: Date | number;
-  value: Date | number;
-  start?: Date | number;
-  pieDirection?: PIE_DIRECTION;
-}
-
-export enum PIE_DIRECTION {
-  CLOCKWISE = "CLOCKWISE",
-  COUNTERCLOCKWISE = "COUNTERCLOCKWISE"
-}
-
-export const calcPercent = (
-  value: Date | number,
-  start: Date | number,
-  end: Date | number
-) => {
-  let progress = 0,
-    duration = 0;
-  if (
-    typeof value === "number" &&
-    typeof start === "number" &&
-    typeof end === "number"
-  ) {
-    duration = end - start;
-    progress = value - start;
-  } else {
-    const dateNow = moment(value);
-    const dateStart = moment(start);
-    const dateEnd = moment(end);
-    duration = dateEnd.diff(moment(dateStart), "seconds");
-    progress = dateNow.diff(dateStart, "seconds");
-  }
-
-  if (duration === 0 || progress < 0) return 0;
-  if (progress > duration) return 100;
-  return (progress * 100) / duration;
-};
-
-const calcDash = (percent: number) => `${percent} ${100 - percent}`;
-
 const Pie: React.SFC<GVProgramPeriodProps> = ({
   pieDirection = PIE_DIRECTION.CLOCKWISE,
   color,
@@ -91,5 +49,47 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({
     </svg>
   );
 };
+
+export const calcPercent = (
+  value: Date | number,
+  start: Date | number,
+  end: Date | number
+) => {
+  let progress = 0,
+    duration = 0;
+  if (
+    typeof value === "number" &&
+    typeof start === "number" &&
+    typeof end === "number"
+  ) {
+    duration = end - start;
+    progress = value - start;
+  } else {
+    const dateNow = moment(value);
+    const dateStart = moment(start);
+    const dateEnd = moment(end);
+    duration = dateEnd.diff(moment(dateStart), "seconds");
+    progress = dateNow.diff(dateStart, "seconds");
+  }
+
+  if (duration === 0 || progress < 0) return 0;
+  if (progress > duration) return 100;
+  return (progress * 100) / duration;
+};
+
+const calcDash = (percent: number) => `${percent} ${100 - percent}`;
+
+export enum PIE_DIRECTION {
+  CLOCKWISE = "CLOCKWISE",
+  COUNTERCLOCKWISE = "COUNTERCLOCKWISE"
+}
+
+export interface GVProgramPeriodProps {
+  color: string;
+  end: Date | number;
+  value: Date | number;
+  start?: Date | number;
+  pieDirection?: PIE_DIRECTION;
+}
 
 export default Pie;
