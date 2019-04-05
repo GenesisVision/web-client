@@ -5,7 +5,12 @@ import { bindActionCreators, Dispatch } from "redux";
 import LoginForm, { ILoginFormFormValues } from "./login-form";
 import { ROLE } from "shared/constants/constants";
 import * as loginService from "../login.service";
-import { CounterType, LoginService } from "../login.service";
+import * as autnService from "../../auth.service";
+import {
+  CounterType,
+  LoginService,
+  SetSubmittingFuncType
+} from "../login.service";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { GeeTestDetails, PowDetails } from "gv-api-web";
@@ -18,42 +23,28 @@ class _LoginFormContainer extends React.Component<Props, State> {
     count: 0,
     pow: undefined,
     geeTest: undefined,
-    id: undefined,
-    email: undefined,
-    password: undefined
+    id: "",
+    email: "",
+    password: "",
+    setSubmitting: (val: boolean) => {}
   };
   componentWillUnmount() {
     this.props.service.clearLoginData();
   }
   handlePow = (prefix: number) => {
     const { service, from, role } = this.props;
-    const { id, password = "", email = "" } = this.state;
+    const { id, password, email, setSubmitting } = this.state;
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-    service.login_(id!, prefix, { email, password }, from, () => {}, method);
+    service.login(id, prefix, { email, password }, from, setSubmitting, method);
+    this.setState({ pow: undefined });
   };
   handleSubmit = (
     loginFormData: ILoginFormFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingFuncType
   ) => {
-    const { service, from, role } = this.props;
-    loginService.getCapthca(loginFormData.email).then(res => {
-      this.setState({ ...res, ...loginFormData });
+    autnService.getCapthca(loginFormData.email).then(res => {
+      this.setState({ ...res, ...loginFormData, setSubmitting });
     });
-    // setSubmitting(true);
-    /*const { service, from, role } = this.props;
-    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-    const setCount = (count: number) =>
-      setTimeout(() => this.setState(() => ({ count })));
-    const setTotal = (total: number) =>
-      setTimeout(() => this.setState(() => ({ total })));
-    service.login(
-      loginFormData,
-      from,
-      setSubmitting,
-      method,
-      setCount,
-      setTotal
-    );*/
   };
   render() {
     const { errorMessage, FORGOT_PASSWORD_ROUTE } = this.props;
@@ -88,11 +79,12 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 interface State extends CounterType {
+  email: string;
+  password: string;
+  setSubmitting: SetSubmittingFuncType;
   pow?: PowDetails;
   geeTest?: GeeTestDetails;
   id?: string;
-  email?: string;
-  password?: string;
 }
 
 interface StateProps {
