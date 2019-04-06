@@ -1,6 +1,4 @@
 import * as React from "react";
-import Pie from "shared/components/pie-container/pie";
-import { GVColors } from "gv-react-components";
 import { PowDetails } from "gv-api-web";
 import * as loginService from "../login/login.service";
 import { CounterType } from "../login/login.service";
@@ -31,14 +29,12 @@ class Pow extends React.PureComponent<Props, State> {
   render() {
     const { total, count } = this.state;
     return (
-      <div className="login__pie-container">
-        {total && (
-          <div
-            className="login__top-counter"
-            style={{ width: `${count / (total / 100)}%` }}
-          />
-        )}
-      </div>
+      total && (
+        <div
+          className="login__top-counter"
+          style={{ width: `${count / (total / 100)}%` }}
+        />
+      )
     );
   }
 }
