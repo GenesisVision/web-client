@@ -47,51 +47,45 @@ class _TwoFactorCodeForm extends React.Component<
   }
 
   render() {
-    {
-      const { t, handleSubmit, error, isSubmitting } = this.props;
-      return (
-        <form
-          id="twoFactorForm"
-          className="login-two-factor"
-          onSubmit={handleSubmit}
-          noValidate
-        >
-          <h3>{t("auth.login.two-factor.title")}</h3>
-          <div className="login-two-factor__text">
-            {t("auth.login.two-factor.text")}
-          </div>
-          <GVFormikField
-            disabled={isSubmitting}
-            type="text"
-            name="twoFactorCode"
-            label={t("auth.login.two-factor.input-label")}
-            autoComplete="off"
-            autoFocus
-            component={GVTextField}
-          />
+    const { t, handleSubmit, error, isSubmitting } = this.props;
+    return (
+      <form
+        id="twoFactorForm"
+        className="login-two-factor"
+        onSubmit={handleSubmit}
+        noValidate
+      >
+        <h3>{t("auth.login.two-factor.title")}</h3>
+        <div className="login-two-factor__text">
+          {t("auth.login.two-factor.text")}
+        </div>
+        <GVFormikField
+          disabled={isSubmitting}
+          type="text"
+          name="twoFactorCode"
+          label={t("auth.login.two-factor.input-label")}
+          autoComplete="off"
+          autoFocus
+          component={GVTextField}
+        />
 
-          <div className="login-two-factor__recovery-info">
-            {t("auth.login.two-factor.recovery-info")}
-          </div>
-          <GVButton className="login-two-factor__recovery-link" variant="text">
-            <Link to={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}>
-              {t("auth.login.two-factor.link-to-recovery")}
-            </Link>
+        <div className="login-two-factor__recovery-info">
+          {t("auth.login.two-factor.recovery-info")}
+        </div>
+        <GVButton className="login-two-factor__recovery-link" variant="text">
+          <Link to={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}>
+            {t("auth.login.two-factor.link-to-recovery")}
+          </Link>
+        </GVButton>
+
+        <FormError error={error} />
+        <div className="login-two-factor__submit">
+          <GVButton type="submit" id="signUpFormSubmit" disabled={isSubmitting}>
+            {t("auth.login.two-factor.verify")}
           </GVButton>
-
-          <FormError error={error} />
-          <div className="login-two-factor__submit">
-            <GVButton
-              type="submit"
-              id="signUpFormSubmit"
-              disabled={isSubmitting}
-            >
-              {t("auth.login.two-factor.verify")}
-            </GVButton>
-          </div>
-        </form>
-      );
-    }
+        </div>
+      </form>
+    );
   }
 }
 
