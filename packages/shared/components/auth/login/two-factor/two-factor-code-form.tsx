@@ -3,7 +3,7 @@ import "./two-factor-code.scss";
 import { FormikProps, InjectedFormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "shared/components/auth/login/login.routes";
-import React from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
@@ -22,12 +22,9 @@ class _TwoFactorCodeForm extends React.Component<
     if (this.props.isSubmitting) return;
     this.setState({ isChecking: true });
     this.props.setSubmitting(true);
-    const req = this.props.onSubmit(
+    this.props.onSubmit(
       this.props.values.twoFactorCode,
       this.props.setSubmitting
-    );
-    ((req as unknown) as Promise<any>).catch(() =>
-      this.setState({ isChecking: false })
     );
   };
 
@@ -98,6 +95,7 @@ interface Props extends InjectedTranslateProps, OwnProps {}
 interface OwnProps {
   onSubmit(code: string, setSubmitting: (isSubmitting: boolean) => void): void;
   error: string;
+  isChecking?: boolean;
 }
 
 interface State {

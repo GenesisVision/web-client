@@ -11,17 +11,14 @@ import {
   loginUserManager
 } from "../login.actions";
 import * as loginService from "../login.service";
-import { LoginService } from "../login.service";
+import { LoginService, SetSubmittingFuncType } from "../login.service";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { bindActionCreators, Dispatch } from "redux";
 import * as authService from "../../auth.service";
-import { SetSubmittingFuncType } from "../login.service";
-import { GeeTestDetails, PowDetails } from "gv-api-web";
-import Pow from "../../captcha/pow";
-import { CounterType } from "../../auth.service";
-import { ILoginFormFormValues } from "../login/login-form";
 import { CaptchasType } from "../../auth.service";
+import Pow from "../../captcha/pow";
+import { ILoginFormFormValues } from "../login/login-form";
 
 class _TwoFactorCodeContainer extends React.PureComponent<Props, State> {
   state = {
