@@ -5,7 +5,6 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import { object, string } from "yup";
-import { CounterType } from "../login.service";
 
 const _RecoveryCodeForm: React.FC<
   InjectedFormikProps<Props, IRecoveryCodeFormValues>
@@ -43,7 +42,6 @@ interface Props extends OwnProps, InjectedTranslateProps {}
 interface OwnProps {
   onSubmit(data: string, setSubmitting: (isSubmitting: boolean) => void): void;
   error: string;
-  counter: CounterType;
 }
 
 export interface IRecoveryCodeFormValues {

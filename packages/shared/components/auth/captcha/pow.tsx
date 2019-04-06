@@ -1,20 +1,21 @@
 import * as React from "react";
 import { PowDetails } from "gv-api-web";
-import * as loginService from "../login/login.service";
-import { CounterType } from "../login/login.service";
+import * as authService from "../auth.service";
+import { CounterType } from "../auth.service";
 
 class Pow extends React.PureComponent<Props, State> {
   state = {
     total: 0,
     count: 0
   };
-  calculatePow = () => {
+
+  componentDidMount() {
     const setCount = (count: number) =>
-      setTimeout(() => this.setState(() => ({ count })));
+      setTimeout(() => this.setState({ count }));
     const setTotal = (total: number) =>
-      setTimeout(() => this.setState(() => ({ total })));
-    loginService
-      .runCalculatingPow({
+      setTimeout(() => this.setState({ total }));
+    authService
+      .checkPow({
         ...this.props,
         setCount,
         setTotal
@@ -22,10 +23,8 @@ class Pow extends React.PureComponent<Props, State> {
       .then(res => {
         this.props.handleSuccess(res);
       });
-  };
-  componentDidMount() {
-    this.calculatePow();
   }
+
   render() {
     const { total, count } = this.state;
     return (
@@ -42,7 +41,7 @@ class Pow extends React.PureComponent<Props, State> {
 interface State extends CounterType {}
 
 interface Props extends PowDetails {
-  handleSuccess: (prefix: number) => any;
+  handleSuccess: (prefix: number) => void;
   email: string;
   id: string;
 }

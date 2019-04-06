@@ -5,22 +5,16 @@ import { bindActionCreators, Dispatch } from "redux";
 import LoginForm, { ILoginFormFormValues } from "./login-form";
 import { ROLE } from "shared/constants/constants";
 import * as loginService from "../login.service";
-import * as autnService from "../../auth.service";
-import {
-  CounterType,
-  LoginService,
-  SetSubmittingFuncType
-} from "../login.service";
+import { LoginService, SetSubmittingFuncType } from "../login.service";
+import * as authService from "../../auth.service";
+import { CaptchasType } from "../../auth.service";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
-import { GeeTestDetails, PowDetails } from "gv-api-web";
 import Pow from "../../captcha/pow";
 import { loginUserInvestor, loginUserManager } from "../login.actions";
 
-class _LoginFormContainer extends React.Component<Props, State> {
+class _LoginFormContainer extends React.PureComponent<Props, State> {
   state = {
-    total: 0,
-    count: 0,
     pow: undefined,
     geeTest: undefined,
     id: "",
@@ -33,30 +27,27 @@ class _LoginFormContainer extends React.Component<Props, State> {
   }
   handlePow = (prefix: number) => {
     const { service, from, role } = this.props;
-    const { id, password, email, setSubmitting } = this.state;
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-    service.login(id, prefix, { email, password }, from, setSubmitting, method);
+    service.login({ ...this.state, prefix, from, method });
     this.setState({ pow: undefined });
   };
   handleSubmit = (
     loginFormData: ILoginFormFormValues,
     setSubmitting: SetSubmittingFuncType
   ) => {
-    autnService.getCapthca(loginFormData.email).then(res => {
+    authService.getCaptcha(loginFormData.email).then(res => {
       this.setState({ ...res, ...loginFormData, setSubmitting });
     });
   };
   render() {
     const { errorMessage, FORGOT_PASSWORD_ROUTE } = this.props;
-    const { count, total, pow, id, email } = this.state;
+    const { pow, id, email } = this.state;
     return (
       <>
         <LoginForm
           onSubmit={this.handleSubmit}
           error={errorMessage}
           FORGOT_PASSWORD_ROUTE={FORGOT_PASSWORD_ROUTE}
-          count={count}
-          total={total}
         />
         {pow && (
           <Pow {...pow} id={id} email={email} handleSuccess={this.handlePow} />
@@ -78,12 +69,8 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators({ ...(loginService as LoginService) }, dispatch)
 });
 
-interface State extends CounterType {
-  email: string;
-  password: string;
+interface State extends ILoginFormFormValues, CaptchasType {
   setSubmitting: SetSubmittingFuncType;
-  pow?: PowDetails;
-  geeTest?: GeeTestDetails;
   id?: string;
 }
 
@@ -99,7 +86,6 @@ interface DispatchProps {
 interface OwnProps {
   from: string;
   role: ROLE;
-  errorMessage: string;
   FORGOT_PASSWORD_ROUTE: string;
 }
 

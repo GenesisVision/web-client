@@ -11,15 +11,24 @@ import {
   loginUserManager
 } from "../login.actions";
 import * as loginService from "../login.service";
-import { CounterType, LoginService } from "../login.service";
+import { LoginService, SetSubmittingFuncType } from "../login.service";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { bindActionCreators, Dispatch } from "redux";
+import * as authService from "../../auth.service";
+import { CaptchasType, CounterType } from "../../auth.service";
+import Pow from "../../captcha/pow";
+import { ILoginFormFormValues } from "../login/login-form";
 
 class _RecoveryCodeContainer extends React.PureComponent<Props, State> {
   state = {
-    total: 0,
-    count: 0
+    pow: undefined,
+    geeTest: undefined,
+    id: "",
+    email: "",
+    password: "",
+    setSubmitting: (val: boolean) => {},
+    code: ""
   };
   componentDidMount() {
     const { email, password, service } = this.props;
@@ -32,32 +41,40 @@ class _RecoveryCodeContainer extends React.PureComponent<Props, State> {
     this.props.service.clearLoginData();
   }
 
+  handlePow = (prefix: number) => {
+    const { service, role } = this.props;
+    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
+    service.twoFactorLogin({
+      ...this.state,
+      type: CODE_TYPE.RECOVERY,
+      method,
+      prefix
+    });
+    this.setState({ pow: undefined });
+  };
+
   handleSubmit = (
     code: string,
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
-    const { service, role } = this.props;
-    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-    const setCount = (count: number) => this.setState({ count });
-    const setTotal = (total: number) => this.setState({ total });
-    service.twoFactorLogin(
-      code,
-      CODE_TYPE.RECOVERY,
-      setSubmitting,
-      method,
-      setCount,
-      setTotal
-    );
+    const { email, password } = this.props;
+    authService.getCaptcha(email).then(res => {
+      this.setState({ ...res, email, password, setSubmitting, code });
+    });
   };
 
   render() {
-    const counter: CounterType = { ...this.state };
+    const { pow, id, email } = this.state;
     return (
-      <RecoveryCodeForm
-        onSubmit={this.handleSubmit}
-        error={this.props.errorMessage}
-        counter={counter}
-      />
+      <>
+        <RecoveryCodeForm
+          onSubmit={this.handleSubmit}
+          error={this.props.errorMessage}
+        />
+        {pow && (
+          <Pow {...pow} id={id} email={email} handleSuccess={this.handlePow} />
+        )}
+      </>
     );
   }
 }
@@ -80,12 +97,14 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-interface State extends CounterType {}
+interface State extends ILoginFormFormValues, CaptchasType {
+  setSubmitting: SetSubmittingFuncType;
+  code: string;
+  id?: string;
+}
 
-interface StateProps {
+interface StateProps extends ILoginFormFormValues {
   errorMessage: string;
-  email: string;
-  password: string;
 }
 
 interface DispatchProps {

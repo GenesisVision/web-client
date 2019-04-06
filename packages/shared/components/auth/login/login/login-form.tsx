@@ -18,9 +18,7 @@ const _LoginForm: React.FC<
   error,
   isValid,
   dirty,
-  FORGOT_PASSWORD_ROUTE,
-  count,
-  total
+  FORGOT_PASSWORD_ROUTE
 }) => {
   return (
     <form
@@ -60,18 +58,13 @@ const _LoginForm: React.FC<
         >
           {t("auth.login.confirm-button-text")}
         </GVButton>
-        {count < total && (
-          <div className="login__pie-container">
-            <Pie color={GVColors.$primaryColor} end={total} value={count} />
-          </div>
-        )}
       </div>
     </form>
   );
 };
 
 const withTranslationAndFormik = compose<React.FC<OwnProps>>(
-  // React.memo,
+  React.memo,
   translate(),
   withFormik<Props, ILoginFormFormValues>({
     displayName: "loginForm",
@@ -96,8 +89,6 @@ interface OwnProps {
   ): void;
   error: string;
   FORGOT_PASSWORD_ROUTE: string;
-  count: number;
-  total: number;
 }
 
 export interface ILoginFormFormValues {

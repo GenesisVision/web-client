@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import { object, string } from "yup";
-import { CounterType } from "../login.service";
 
 class _TwoFactorCodeForm extends React.Component<
   InjectedFormikProps<Props, FormValues>,
@@ -27,7 +26,9 @@ class _TwoFactorCodeForm extends React.Component<
       this.props.values.twoFactorCode,
       this.props.setSubmitting
     );
-    (req as Promise<any>).catch(() => this.setState({ isChecking: false }));
+    ((req as unknown) as Promise<any>).catch(() =>
+      this.setState({ isChecking: false })
+    );
   };
 
   componentDidUpdate(
@@ -101,12 +102,8 @@ interface FormValues {
 interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface OwnProps {
-  onSubmit(
-    code: string,
-    setSubmitting: (isSubmitting: boolean) => void
-  ): Promise<any> | ((dispatch: any, getState: any) => Promise<void>);
+  onSubmit(code: string, setSubmitting: (isSubmitting: boolean) => void): void;
   error: string;
-  counter: CounterType;
 }
 
 interface State {
