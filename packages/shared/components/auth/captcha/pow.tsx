@@ -2,8 +2,8 @@ import * as React from "react";
 import Pie from "shared/components/pie-container/pie";
 import { GVColors } from "gv-react-components";
 import { PowDetails } from "gv-api-web";
-import * as loginService from "../../login.service";
-import { CounterType } from "../../login.service";
+import * as loginService from "../login/login.service";
+import { CounterType } from "../login/login.service";
 
 class Pow extends React.PureComponent<Props, State> {
   state = {

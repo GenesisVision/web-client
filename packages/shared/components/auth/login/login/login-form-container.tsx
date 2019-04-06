@@ -14,7 +14,7 @@ import {
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { GeeTestDetails, PowDetails } from "gv-api-web";
-import Pow from "./captcha/pow";
+import Pow from "../../captcha/pow";
 import { loginUserInvestor, loginUserManager } from "../login.actions";
 
 class _LoginFormContainer extends React.Component<Props, State> {
