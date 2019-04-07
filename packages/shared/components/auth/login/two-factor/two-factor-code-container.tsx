@@ -24,12 +24,31 @@ class _TwoFactorCodeContainer extends React.PureComponent<Props, State> {
   state = {
     pow: undefined,
     geeTest: undefined,
+    isSubmit: undefined,
+    prefix: undefined,
     id: "",
     email: "",
     password: "",
     setSubmitting: (val: boolean) => {},
     code: ""
   };
+  componentDidUpdate(): void {
+    const { isSubmit, pow, prefix } = this.state;
+    const { service, role } = this.props;
+    if (isSubmit) {
+      if (pow && prefix) {
+        const method =
+          role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
+        service.twoFactorLogin({
+          ...this.state,
+          type: CODE_TYPE.TWO_FACTOR,
+          method,
+          prefix
+        });
+        this.setState({ pow: undefined });
+      }
+    }
+  }
   componentDidMount() {
     const { email, password, service } = this.props;
     if (email === "" || password === "") {
@@ -42,15 +61,7 @@ class _TwoFactorCodeContainer extends React.PureComponent<Props, State> {
   }
 
   handlePow = (prefix: number) => {
-    const { service, role } = this.props;
-    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-    service.twoFactorLogin({
-      ...this.state,
-      type: CODE_TYPE.TWO_FACTOR,
-      method,
-      prefix
-    });
-    this.setState({ pow: undefined });
+    this.setState({ prefix });
   };
 
   handleSubmit = (
@@ -59,7 +70,14 @@ class _TwoFactorCodeContainer extends React.PureComponent<Props, State> {
   ) => {
     const { email, password } = this.props;
     authService.getCaptcha(email).then(res => {
-      this.setState({ ...res, email, password, setSubmitting, code });
+      this.setState({
+        ...res,
+        email,
+        password,
+        setSubmitting,
+        code,
+        isSubmit: true
+      });
     });
   };
 
@@ -101,6 +119,8 @@ interface State extends ILoginFormFormValues, CaptchasType {
   setSubmitting: SetSubmittingFuncType;
   code: string;
   id?: string;
+  prefix?: number;
+  isSubmit?: boolean;
 }
 
 interface StateProps extends ILoginFormFormValues {

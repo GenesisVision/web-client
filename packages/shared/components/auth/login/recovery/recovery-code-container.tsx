@@ -2,7 +2,6 @@ import { replace } from "connected-react-router";
 import * as React from "react";
 import { connect } from "react-redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
-
 import RecoveryCodeForm from "./recovery-code-form";
 import { ROLE } from "shared/constants/constants";
 import {
@@ -16,7 +15,7 @@ import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { bindActionCreators, Dispatch } from "redux";
 import * as authService from "../../auth.service";
-import { CaptchasType, CounterType } from "../../auth.service";
+import { CaptchasType } from "../../auth.service";
 import Pow from "../../captcha/pow";
 import { ILoginFormFormValues } from "../login/login-form";
 
@@ -24,12 +23,31 @@ class _RecoveryCodeContainer extends React.PureComponent<Props, State> {
   state = {
     pow: undefined,
     geeTest: undefined,
+    isSubmit: undefined,
+    prefix: undefined,
     id: "",
     email: "",
     password: "",
     setSubmitting: (val: boolean) => {},
     code: ""
   };
+  componentDidUpdate(): void {
+    const { isSubmit, pow, prefix } = this.state;
+    const { service, role } = this.props;
+    if (isSubmit) {
+      if (pow && prefix) {
+        const method =
+          role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
+        service.twoFactorLogin({
+          ...this.state,
+          type: CODE_TYPE.RECOVERY,
+          method,
+          prefix
+        });
+        this.setState({ pow: undefined });
+      }
+    }
+  }
   componentDidMount() {
     const { email, password, service } = this.props;
     if (email === "" || password === "") {
@@ -42,15 +60,7 @@ class _RecoveryCodeContainer extends React.PureComponent<Props, State> {
   }
 
   handlePow = (prefix: number) => {
-    const { service, role } = this.props;
-    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-    service.twoFactorLogin({
-      ...this.state,
-      type: CODE_TYPE.RECOVERY,
-      method,
-      prefix
-    });
-    this.setState({ pow: undefined });
+    this.setState({ prefix });
   };
 
   handleSubmit = (
@@ -59,7 +69,14 @@ class _RecoveryCodeContainer extends React.PureComponent<Props, State> {
   ) => {
     const { email, password } = this.props;
     authService.getCaptcha(email).then(res => {
-      this.setState({ ...res, email, password, setSubmitting, code });
+      this.setState({
+        ...res,
+        email,
+        password,
+        setSubmitting,
+        code,
+        isSubmit: true
+      });
     });
   };
 
@@ -101,6 +118,8 @@ interface State extends ILoginFormFormValues, CaptchasType {
   setSubmitting: SetSubmittingFuncType;
   code: string;
   id?: string;
+  prefix?: number;
+  isSubmit?: boolean;
 }
 
 interface StateProps extends ILoginFormFormValues {
