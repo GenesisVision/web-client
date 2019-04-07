@@ -17,6 +17,8 @@ class _LoginFormContainer extends React.PureComponent<Props, State> {
   state = {
     pow: undefined,
     geeTest: undefined,
+    isSubmit: undefined,
+    prefix: undefined,
     id: "",
     email: "",
     password: "",
@@ -25,18 +27,32 @@ class _LoginFormContainer extends React.PureComponent<Props, State> {
   componentWillUnmount() {
     this.props.service.clearLoginData();
   }
-  handlePow = (prefix: number) => {
+  componentDidUpdate(): void {
+    const { isSubmit, pow, prefix } = this.state;
     const { service, from, role } = this.props;
-    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-    service.login({ ...this.state, prefix, from, method });
-    this.setState({ pow: undefined });
+    if (isSubmit) {
+      if (pow && prefix) {
+        const method =
+          role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
+        service.login({ ...this.state, prefix, from, method });
+        this.setState({ pow: undefined });
+      }
+    }
+  }
+  handlePow = (prefix: number) => {
+    this.setState({ prefix });
   };
   handleSubmit = (
     loginFormData: ILoginFormFormValues,
     setSubmitting: SetSubmittingFuncType
   ) => {
     authService.getCaptcha(loginFormData.email).then(res => {
-      this.setState({ ...res, ...loginFormData, setSubmitting });
+      this.setState({
+        ...res,
+        ...loginFormData,
+        setSubmitting,
+        isSubmit: true
+      });
     });
   };
   render() {
@@ -72,6 +88,8 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 interface State extends ILoginFormFormValues, CaptchasType {
   setSubmitting: SetSubmittingFuncType;
   id?: string;
+  prefix?: number;
+  isSubmit?: boolean;
 }
 
 interface StateProps {
