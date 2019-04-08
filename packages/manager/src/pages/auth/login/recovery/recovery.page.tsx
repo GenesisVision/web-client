@@ -8,17 +8,13 @@ import CaptchaContainer from "shared/components/auth/login/captcha-container";
 
 const RecoveryPage: React.FC = () => (
   <div className="recovery-page">
-    const RecoveryPage: React.FC = () => (
-    <div className="recovery-page">
-      <CaptchaContainer
-        role={ROLE.INVESTOR}
-        type={CODE_TYPE.RECOVERY}
-        renderForm={(handle, errorMessage) => (
-          <RecoveryCodeForm onSubmit={handle} error={errorMessage} />
-        )}
-      />
-    </div>
-    );
+    <CaptchaContainer
+      role={ROLE.INVESTOR}
+      type={CODE_TYPE.RECOVERY}
+      renderForm={(handle, errorMessage) => (
+        <RecoveryCodeForm onSubmit={handle} error={errorMessage} />
+      )}
+    />
   </div>
 );
 
