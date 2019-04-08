@@ -7,6 +7,7 @@ import * as loginService from "./login.service";
 import {
   clearLoginDataFuncType,
   LoginFuncType,
+  LoginService,
   SetSubmittingFuncType
 } from "./login.service";
 import * as authService from "../auth.service";
@@ -22,7 +23,6 @@ import {
   loginUserInvestor,
   loginUserManager
 } from "./login.actions";
-import { TwoFactorLoginFuncType } from "./login.service";
 
 class _LoginContainer extends React.PureComponent<Props, State> {
   state = {
@@ -36,17 +36,23 @@ class _LoginContainer extends React.PureComponent<Props, State> {
     setSubmitting: (val: boolean) => {},
     code: ""
   };
+  componentDidMount() {
+    const { email, password, service, type } = this.props;
+    if (type !== undefined && (email === "" || password === "")) {
+      service.showNotFoundPage();
+    }
+  }
   componentWillUnmount() {
     this.props.service.clearLoginData();
   }
   componentDidUpdate(): void {
     const { isSubmit, pow, prefix } = this.state;
-    const { from, role, service, type = CODE_TYPE.TWO_FACTOR } = this.props;
+    const { from, role, service, type } = this.props;
     if (isSubmit) {
       if (pow && prefix) {
         const method =
           role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-        (service.request as Function)({
+        service.login({
           ...this.state,
           from,
           method,
@@ -64,10 +70,12 @@ class _LoginContainer extends React.PureComponent<Props, State> {
     loginFormData: { [keys: string]: any },
     setSubmitting: SetSubmittingFuncType
   ) => {
-    authService.getCaptcha(loginFormData.email).then(res => {
+    const email = loginFormData.email || this.props.email;
+    authService.getCaptcha(email).then(res => {
       this.setState({
         ...res,
         ...loginFormData,
+        email,
         setSubmitting,
         isSubmit: true
       });
@@ -75,7 +83,8 @@ class _LoginContainer extends React.PureComponent<Props, State> {
   };
   render() {
     const { errorMessage, FORGOT_PASSWORD_ROUTE, renderForm } = this.props;
-    const { pow, id, email } = this.state;
+    const { pow, id } = this.state;
+    const email = this.state.email || this.props.email;
     return (
       <>
         {renderForm(this.handleSubmit, errorMessage, FORGOT_PASSWORD_ROUTE)}
@@ -96,14 +105,10 @@ const mapStateToProps = (
   return { isAuthenticated, errorMessage, email, password };
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  props: Props
-): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
-      clearLoginData: loginService.clearLoginData,
-      request: props.requestFunc,
+      ...(loginService as LoginService),
       showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
     },
     dispatch
@@ -116,6 +121,8 @@ interface State extends CaptchasType {
   prefix?: number;
   isSubmit?: boolean;
   code?: string;
+  email?: string;
+  password?: string;
 }
 
 interface StateProps extends ILoginFormFormValues {
@@ -126,29 +133,29 @@ interface StateProps extends ILoginFormFormValues {
 interface DispatchProps {
   service: {
     clearLoginData: clearLoginDataFuncType;
-    request: TwoFactorLoginFuncType | LoginFuncType;
+    login: LoginFuncType;
+    showNotFoundPage: () => void;
   };
 }
 
 interface OwnProps {
-  from: string;
+  from?: string;
   role: ROLE;
-  FORGOT_PASSWORD_ROUTE: string;
-  requestFunc: TwoFactorLoginFuncType | LoginFuncType;
+  FORGOT_PASSWORD_ROUTE?: string;
   renderForm: (
     handle: (
       loginFormData: Object,
       setSubmitting: SetSubmittingFuncType
     ) => void,
     errorMessage: string,
-    FORGOT_PASSWORD_ROUTE: string
+    FORGOT_PASSWORD_ROUTE?: string
   ) => JSX.Element;
   type?: CODE_TYPE;
 }
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
 
-const LoginContainer = connect<
+const CaptchaContainer = connect<
   StateProps,
   DispatchProps,
   OwnProps,
@@ -157,4 +164,4 @@ const LoginContainer = connect<
   mapStateToProps,
   mapDispatchToProps
 )(_LoginContainer);
-export default LoginContainer;
+export default CaptchaContainer;
