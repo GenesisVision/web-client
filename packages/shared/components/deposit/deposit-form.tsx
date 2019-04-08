@@ -86,7 +86,9 @@ class _DepositForm extends React.PureComponent<
   getMaxAmount = () => {
     const { setFieldValue, info, wallets, values } = this.props;
     const { walletCurrency, rate } = values;
-    const { availableToInvestBase } = info as ProgramInvestInfo;
+    const availableToInvestBase = (info as ProgramInvestInfo)
+      ? (info as ProgramInvestInfo).availableToInvestBase
+      : undefined;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
     const availableInWallet = wallet ? wallet.available : 0;
 
@@ -170,7 +172,7 @@ class _DepositForm extends React.PureComponent<
           {currency !== walletCurrency && (
             <NumberFormat
               value={formatCurrencyValue(
-                convertFromCurrency(values.amount, rate),
+                convertFromCurrency(values.amount || 0, rate),
                 currency
               )}
               prefix="≈ "
@@ -190,7 +192,9 @@ class _DepositForm extends React.PureComponent<
                   {info.entryFee} %{" "}
                   <NumberFormat
                     value={formatCurrencyValue(
-                      this.entryFee(convertFromCurrency(values.amount, rate)),
+                      this.entryFee(
+                        convertFromCurrency(values.amount || 0, rate)
+                      ),
                       currency
                     )}
                     prefix=" ("
@@ -208,7 +212,7 @@ class _DepositForm extends React.PureComponent<
                 {info.gvCommission} %
                 <NumberFormat
                   value={formatCurrencyValue(
-                    this.gvFee(values.amount),
+                    this.gvFee(values.amount || 0),
                     walletCurrency
                   )}
                   prefix={" ("}
@@ -224,7 +228,9 @@ class _DepositForm extends React.PureComponent<
               <span className="dialog-list__value">
                 <NumberFormat
                   value={formatCurrencyValue(
-                    this.investAmount(convertFromCurrency(values.amount, rate)),
+                    this.investAmount(
+                      convertFromCurrency(values.amount || 0, rate)
+                    ),
                     currency
                   )}
                   prefix="≈ "
@@ -264,7 +270,7 @@ const DepositForm = compose<React.FC<IDepositProps>>(
     mapPropsToValues: () => ({
       rate: 1,
       maxAmount: 0,
-      amount: 0,
+      amount: undefined,
       walletCurrency: "GVT",
       availableToInvest: 0,
       availableInWallet: 0
@@ -275,7 +281,7 @@ const DepositForm = compose<React.FC<IDepositProps>>(
         : investorSchema(params),
     handleSubmit: (values, { props, setSubmitting }) => {
       const { walletCurrency, amount } = values;
-      props.onSubmit(amount, walletCurrency, setSubmitting);
+      props.onSubmit(amount!, walletCurrency, setSubmitting);
     }
   })
 )(_DepositForm);
@@ -301,6 +307,6 @@ export interface IDepositFormValues {
   rate: number;
   availableToInvest: number;
   availableInWallet: number;
-  amount: number;
+  amount?: number;
   walletCurrency: string;
 }

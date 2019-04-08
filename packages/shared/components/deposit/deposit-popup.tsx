@@ -23,8 +23,9 @@ class _DepositPopup extends React.PureComponent<Props, State> {
     hasEntryFee: false
   };
 
-  state = {
-    wallets: undefined
+  state: State = {
+    wallets: undefined,
+    investInfo: undefined
   };
 
   componentDidMount() {
@@ -32,12 +33,13 @@ class _DepositPopup extends React.PureComponent<Props, State> {
     service.fetchBaseWallets().then(data => {
       this.setState({ wallets: data.wallets });
     });
-    fetchInfo(id, currency);
+    fetchInfo(id, currency).then(data => {
+      this.setState({ investInfo: data });
+    });
   }
 
   render() {
     const {
-      investInfo,
       currency,
       invest,
       hasEntryFee,
@@ -45,9 +47,13 @@ class _DepositPopup extends React.PureComponent<Props, State> {
       role,
       errorMessage
     } = this.props;
-    const { wallets } = this.state;
-    if (!wallets) return <DialogLoader />;
-    const { availableToInvestBase } = investInfo as ProgramInvestInfo;
+    const { wallets, investInfo } = this.state;
+    if (!wallets || !investInfo) return <DialogLoader />;
+
+    const availableToInvestBase = (investInfo as ProgramInvestInfo)
+      ? (investInfo as ProgramInvestInfo).availableToInvestBase
+      : undefined;
+
     return (
       <Fragment>
         <DepositTop
@@ -97,8 +103,10 @@ export default DepositPopup;
 
 interface OwnProps {
   id: string;
-  fetchInfo: (id: string, currency: string) => void;
-  investInfo: ProgramInvestInfo | FundInvestInfo;
+  fetchInfo: (
+    id: string,
+    currency: string
+  ) => Promise<ProgramInvestInfo | FundInvestInfo>;
   currency: string;
   invest: (
     amount: number,
@@ -124,4 +132,5 @@ interface Props extends OwnProps, DispatchProps, StateProps {}
 
 interface State {
   wallets?: WalletBaseData[];
+  investInfo?: ProgramInvestInfo | FundInvestInfo;
 }

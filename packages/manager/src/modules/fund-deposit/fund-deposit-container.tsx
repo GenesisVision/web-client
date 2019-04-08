@@ -27,6 +27,7 @@ class _FundDepositContainer extends React.Component<Props, State> {
       .fundInvest(id, amount, currency)
       .then(() => {
         this.props.onApply();
+        this.props.onClose();
       })
       .catch((error: ResponseError) => {
         this.setState({ errorMessage: error.errorMessage });
