@@ -1,5 +1,6 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_constants.scss";
 
 .icon {
   height: 22px;
@@ -11,6 +12,10 @@
   svg {
     height: 100%;
     width: 100%;
+  }
+
+  svg path {
+    @include transition(fill, stroke);
   }
 
   svg [fill] {
@@ -65,6 +70,12 @@
   }
   &--search {
     height: 18px;
+
+    &:hover {
+      svg [stroke] {
+        stroke: $primary-color;
+      }
+    }
   }
   &--arrow {
     width: 7px;
@@ -92,7 +103,6 @@
     }
 
     svg [stroke] {
-      transition: stroke 300ms ease;
       stroke: $label-color;
     }
     svg [fill] {

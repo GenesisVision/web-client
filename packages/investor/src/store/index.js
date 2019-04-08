@@ -1,7 +1,7 @@
 import { routerMiddleware } from "connected-react-router";
 import { applyMiddleware, compose, createStore } from "redux";
 import debounceMiddleware from "redux-debounced";
-import promiseMiddleware from "redux-promise-middleware";
+import { createPromise } from "redux-promise-middleware";
 import thunk from "redux-thunk";
 import apiErrorHandlerMiddleware from "shared/middlewares/api-error-handler-middleware/api-error-handler-middleware";
 import clearOnceMetaMiddleware from "shared/middlewares/clear-once-meta-middleware/clear-once-meta-middleware";
@@ -40,7 +40,7 @@ const middleware = [
     authService,
     authApi.v10AuthTokenUpdatePost.bind(authApi)
   ),
-  promiseMiddleware({ promiseTypeSuffixes: suffixes }),
+  createPromise({ promiseTypeSuffixes: suffixes }),
   apiErrorHandlerMiddleware({ failureSuffix: FAILURE_SUFFIX }),
   routerMiddleware(history),
   updateAccountCurrencyMiddleware

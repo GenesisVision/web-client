@@ -1,5 +1,5 @@
 import { GVButton } from "gv-react-components";
-import { LOGIN_ROUTE } from "manager-web-portal/src/pages/auth/login/login.routes";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import * as React from "react";
 import { NavLink } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import { Facet } from "gv-api-web";
+import { FundFacet, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import RootState from "shared/reducers/root-reducer";
@@ -25,14 +25,15 @@ export class _FacetCardsContainer extends React.PureComponent<
 
 const mapStateToProps = (state: RootState, props: Props): StateProps => {
   const { isPending, data } = state.platformData;
-  let facets: Facet[] = [];
-  if (data) facets = data[props.assetsFacets];
+  let facets: Array<ProgramFacet & FundFacet> = [];
+  if (data)
+    facets = data[props.assetsFacets] as Array<ProgramFacet & FundFacet>;
   return { isPending, facets };
 };
 
 interface StateProps {
   isPending: boolean;
-  facets: Facet[];
+  facets: Array<ProgramFacet & FundFacet>;
 }
 
 interface Props {
