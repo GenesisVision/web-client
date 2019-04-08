@@ -30,10 +30,10 @@ class _LoginContainer extends React.PureComponent<Props, State> {
     geeTest: undefined,
     isSubmit: undefined,
     prefix: undefined,
+    setSubmitting: undefined,
     id: "",
     email: "",
     password: "",
-    setSubmitting: (val: boolean) => {},
     code: ""
   };
   componentDidMount() {
@@ -48,19 +48,18 @@ class _LoginContainer extends React.PureComponent<Props, State> {
   componentDidUpdate(): void {
     const { isSubmit, pow, prefix } = this.state;
     const { from, role, service, type } = this.props;
+    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
     if (isSubmit) {
       if (pow && prefix) {
-        const method =
-          role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-        service.login({
-          ...this.state,
-          from,
-          method,
-          type,
-          prefix
-        });
         this.setState({ pow: undefined });
       }
+      service.login({
+        ...this.state,
+        from,
+        method,
+        type
+      });
+      this.setState({ isSubmit: false });
     }
   }
   handlePow = (prefix: number) => {
@@ -116,7 +115,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 interface State extends CaptchasType {
-  setSubmitting: SetSubmittingFuncType;
+  setSubmitting?: SetSubmittingFuncType;
   id?: string;
   prefix?: number;
   isSubmit?: boolean;
@@ -139,7 +138,6 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  from?: string;
   role: ROLE;
   FORGOT_PASSWORD_ROUTE?: string;
   renderForm: (
@@ -150,6 +148,7 @@ interface OwnProps {
     errorMessage: string,
     FORGOT_PASSWORD_ROUTE?: string
   ) => JSX.Element;
+  from?: string;
   type?: CODE_TYPE;
 }
 
