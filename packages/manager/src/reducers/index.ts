@@ -1,13 +1,7 @@
 import { connectRouter } from "connected-react-router";
-import programDepositReducer, {
-  ProgramsDepositState
-} from "modules/program-deposit/reducer/program-deposit.reducer";
 import passwordRestoreReducer, {
   PasswordState
 } from "pages/auth/forgot-password/reducers/password-restore-reducers";
-import loginReducer, {
-  LoginState
-} from "shared/components/auth/login/reducers/login.reducers";
 import signUpReducer, {
   SignUpState
 } from "pages/auth/signup/reducers/signup.reducers";
@@ -18,6 +12,9 @@ import managerReducer, {
   ManagerState
 } from "pages/manager/reducers/manager.reducers";
 import { combineReducers } from "redux";
+import loginReducer, {
+  LoginState
+} from "shared/components/auth/login/reducers/login.reducers";
 import notificationsReducer, {
   NotificationsState
 } from "shared/components/notifications/reducers/notifications.reducers";
@@ -39,7 +36,6 @@ import uiReducer from "shared/reducers/ui-reducer";
 import history from "shared/utils/history";
 
 type State = {
-  programDeposit: ProgramsDepositState;
   notifications: NotificationsState;
   manager: ManagerState;
   signUpData: SignUpState;
@@ -54,7 +50,6 @@ export default combineReducers<ManagerRootState>({
   dashboard: dashboardReducer,
   programNotifications: programNotificationsReducer,
   fundNotifications: fundNotificationsReducer,
-  programDeposit: programDepositReducer,
   manager: managerReducer,
   programsData: programsReducer,
   programsRating: programsRatingReducer,
