@@ -64,7 +64,7 @@ class WalletWidget extends React.Component<
             className="wallet-widget__wallet"
             onClick={this.handleOpenDetails}
           >
-            <WalletIcon primary={this.state.anchorEl !== null} />
+            <WalletIcon primary={this.state.anchorEl !== undefined} />
             <span className="wallet-widget__value">{`${formatCurrencyValue(
               available,
               currency

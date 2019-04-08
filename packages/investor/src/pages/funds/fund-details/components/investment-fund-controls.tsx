@@ -1,6 +1,6 @@
 import { FundDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
@@ -83,9 +83,8 @@ class InvestmentFundControls extends Component<
               <FundDepositContainer
                 open={popups[INVESTMENT_POPUP.INVEST]}
                 id={fundDescription.id}
-                type={FUND}
                 onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-                onInvest={updateDetails}
+                onApply={this.applyChanges(updateDetails)}
               />
             </Fragment>
           )}

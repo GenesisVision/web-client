@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_constants.scss";
 
 $pager-button-size: 40px;
 $pager-button-size-mobile: $pager-button-size/$divider-text;
@@ -10,8 +11,6 @@ $pager-button-size-mobile: $pager-button-size/$divider-text;
   &__pager-block {
     display: flex;
     align-items: baseline;
-    @include media-breakpoint-landscape-phone() {
-    }
   }
 
   &__separator,
@@ -32,9 +31,14 @@ $pager-button-size-mobile: $pager-button-size/$divider-text;
   }
 
   &__button {
+    @include transition(opacity, background-color);
     align-items: center;
     border-radius: 8px;
     cursor: pointer;
+    &:hover {
+      opacity: 1;
+      background-color: #1b2a35;
+    }
     &--current {
       background-color: #1b2a35;
       opacity: 1;

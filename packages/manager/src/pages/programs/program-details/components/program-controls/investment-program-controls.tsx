@@ -1,7 +1,7 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
+import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import {
@@ -136,13 +136,12 @@ class InvestmentProgramControls extends Component<
         <ProgramDetailContext.Consumer>
           {({ updateDetails }: IProgramDetailContext) => (
             <Fragment>
-              <ProgramDepositContainer
+              <ProgramDeposit
                 currency={programDescription.currency}
                 open={popups[INVESTMENT_POPUP.INVEST]}
-                type={PROGRAM}
                 id={programDescription.id}
                 onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-                onInvest={updateDetails}
+                onApply={this.applyChanges(updateDetails)}
               />
               <ClosePeriodContainer
                 open={popups[INVESTMENT_POPUP.CLOSE_PERIOD]}
