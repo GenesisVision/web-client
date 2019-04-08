@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { ProgramInvestInfo, WalletBaseData } from "gv-api-web";
+import { FundInvestInfo, ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -25,15 +25,18 @@ import {
 } from "./deposit-form-validation-schema";
 
 class _DepositForm extends React.PureComponent<
-  InjectedFormikProps<OwnProps & InjectedTranslateProps, FormValues>
+  InjectedFormikProps<
+    IDepositProps & InjectedTranslateProps,
+    IDepositFormValues
+  >
 > {
   componentDidMount(): void {
     this.fetchRate({ currencyFrom: this.props.values.walletCurrency });
   }
 
   composeEntryFee = (fee: any): number => {
-    const { entryFee } = this.props;
-    return entryFee ? fee : 0;
+    const { hasEntryFee } = this.props;
+    return hasEntryFee ? fee : 0;
   };
 
   entryFee = (amount: number): number => {
@@ -83,7 +86,7 @@ class _DepositForm extends React.PureComponent<
   getMaxAmount = () => {
     const { setFieldValue, info, wallets, values } = this.props;
     const { walletCurrency, rate } = values;
-    const { availableToInvestBase } = info;
+    const { availableToInvestBase } = info as ProgramInvestInfo;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
     const availableInWallet = wallet ? wallet.available : 0;
 
@@ -117,14 +120,14 @@ class _DepositForm extends React.PureComponent<
       wallets,
       t,
       asset,
-      entryFee,
+      hasEntryFee,
       values,
       info,
       currency,
-      disabled,
       isValid,
       dirty,
       handleSubmit,
+      isSubmitting,
       errorMessage
     } = this.props;
     const { walletCurrency, rate } = values;
@@ -157,11 +160,7 @@ class _DepositForm extends React.PureComponent<
         </StatisticItem>
         <InputAmountField
           name="amount"
-          label={
-            asset === ASSET.PROGRAM
-              ? t("deposit-asset.amount")
-              : t("deposit-asset.amount")
-          }
+          label={t("deposit-asset.amount")}
           currency={walletCurrency}
           isAllow={this.isAllow(walletCurrency)}
           setMax={this.setMaxAmount}
@@ -182,7 +181,7 @@ class _DepositForm extends React.PureComponent<
         </div>
         {role === ROLE.INVESTOR && (
           <ul className="dialog-list">
-            {entryFee && (
+            {hasEntryFee && (
               <li className="dialog-list__item">
                 <span className="dialog-list__title">
                   {t("deposit-asset.entry-fee")}
@@ -243,7 +242,7 @@ class _DepositForm extends React.PureComponent<
           <GVButton
             type="submit"
             className="invest-form__submit-button"
-            disabled={disabled || !isValid || !dirty}
+            disabled={isSubmitting || !isValid || !dirty}
           >
             {t("deposit-asset.confirm")}
           </GVButton>
@@ -258,42 +257,47 @@ class _DepositForm extends React.PureComponent<
   }
 }
 
-const DepositForm = compose<React.FC<OwnProps>>(
+const DepositForm = compose<React.FC<IDepositProps>>(
   translate(),
-  withFormik({
+  withFormik<IDepositProps, IDepositFormValues>({
     displayName: "invest-form",
     mapPropsToValues: () => ({
       rate: 1,
-      maxAmount: "",
-      amount: "",
-      walletCurrency: "GVT"
+      maxAmount: 0,
+      amount: 0,
+      walletCurrency: "GVT",
+      availableToInvest: 0,
+      availableInWallet: 0
     }),
-    validationSchema: (params: OwnProps & InjectedTranslateProps) =>
+    validationSchema: (params: IDepositProps & InjectedTranslateProps) =>
       params.role === ROLE.MANAGER
         ? managerSchema(params)
         : investorSchema(params),
-    handleSubmit: (values, { props }: { props: OwnProps }) => {
+    handleSubmit: (values, { props, setSubmitting }) => {
       const { walletCurrency, amount } = values;
-      props.onSubmit(amount, { currency: walletCurrency });
+      props.onSubmit(amount, walletCurrency, setSubmitting);
     }
   })
 )(_DepositForm);
 
 export default DepositForm;
 
-export interface OwnProps {
+export interface IDepositProps {
   wallets: WalletBaseData[];
   role: ROLE;
   asset: ASSET;
-  entryFee: boolean;
-  info: ProgramInvestInfo;
+  hasEntryFee: boolean;
+  info: ProgramInvestInfo | FundInvestInfo;
   currency: string;
-  disabled: boolean;
   errorMessage: string;
-  onSubmit: (amount: any, currency: object) => {};
+  onSubmit: (
+    amount: number,
+    currency: string,
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => void;
 }
 
-export interface FormValues {
+export interface IDepositFormValues {
   rate: number;
   availableToInvest: number;
   availableInWallet: number;

@@ -1,6 +1,7 @@
 import "./deposit.scss";
 
 import {
+  FundInvestInfo,
   ProgramInvestInfo,
   WalletBaseData,
   WalletMultiAvailable
@@ -8,26 +9,27 @@ import {
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
-import * as WalletServices from "shared/components/wallet/services/wallet.services";
+import { fetchBaseWallets } from "shared/components/wallet/services/wallet.services";
 import { ASSET, ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
-import { ActionType } from "shared/utils/types";
+import { RootThunk } from "shared/utils/types";
 
 import { DialogLoader } from "../dialog/dialog-loader/dialog-loader";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 
-class _DepositPopup extends React.PureComponent<
-  OwnProps & DispatchProps & StateProps,
-  State
-> {
+class _DepositPopup extends React.PureComponent<Props, State> {
+  static defaultProps: Partial<Props> = {
+    hasEntryFee: false
+  };
+
   state = {
     wallets: undefined
   };
 
   componentDidMount() {
     const { id, fetchInfo, currency, service } = this.props;
-    service.fetchBaseWallets().then((data: WalletMultiAvailable) => {
+    service.fetchBaseWallets().then(data => {
       this.setState({ wallets: data.wallets });
     });
     fetchInfo(id, currency);
@@ -35,28 +37,34 @@ class _DepositPopup extends React.PureComponent<
 
   render() {
     const {
-      info,
-      submitInfo,
+      investInfo,
       currency,
       invest,
-      entryFee,
+      hasEntryFee,
       asset,
-      role
+      role,
+      errorMessage
     } = this.props;
     const { wallets } = this.state;
-    if (!info || !wallets) return <DialogLoader />;
+    if (!wallets) return <DialogLoader />;
+    const { availableToInvestBase } = investInfo as ProgramInvestInfo;
     return (
       <Fragment>
-        <DepositTop info={info} asset={asset} role={role} currency={currency} />
-        <DepositForm
-          wallets={wallets}
-          entryFee={entryFee}
+        <DepositTop
+          title={investInfo.title}
+          availableToInvestBase={availableToInvestBase}
           asset={asset}
           role={role}
-          errorMessage={submitInfo.errorMessage}
           currency={currency}
-          info={info}
-          disabled={submitInfo.isPending}
+        />
+        <DepositForm
+          wallets={wallets}
+          hasEntryFee={hasEntryFee}
+          asset={asset}
+          role={role}
+          errorMessage={errorMessage}
+          currency={currency}
+          info={investInfo}
           onSubmit={invest}
         />
       </Fragment>
@@ -64,8 +72,15 @@ class _DepositPopup extends React.PureComponent<
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
-  service: bindActionCreators(WalletServices, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<
+    {
+      fetchBaseWallets: () => RootThunk<Promise<WalletMultiAvailable>>;
+    },
+    {
+      fetchBaseWallets: () => Promise<WalletMultiAvailable>;
+    }
+  >({ fetchBaseWallets }, dispatch)
 });
 const mapStateToProps = (state: RootState): StateProps => ({
   role: state.profileHeader.info.data
@@ -73,38 +88,40 @@ const mapStateToProps = (state: RootState): StateProps => ({
     : (process.env.REACT_APP_PLATFORM as ROLE)
 });
 
-const DepositPopup = connect(
+const DepositPopup = connect<StateProps, DispatchProps, OwnProps, RootState>(
   mapStateToProps,
   mapDispatchToProps
 )(_DepositPopup);
 
 export default DepositPopup;
 
-interface SubmitInfo {
-  code: any;
-  isPending: boolean;
+interface OwnProps {
+  id: string;
+  fetchInfo: (id: string, currency: string) => void;
+  investInfo: ProgramInvestInfo | FundInvestInfo;
+  currency: string;
+  invest: (
+    amount: number,
+    currency: string,
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => void;
+  hasEntryFee: boolean;
+  asset: ASSET;
   errorMessage: string;
 }
 
-interface OwnProps {
-  id: string;
-  fetchInfo: (id: string, currency: string) => {};
-  info: ProgramInvestInfo;
-  submitInfo: SubmitInfo;
-  currency: string;
-  invest: (amount: string) => {};
-  entryFee: boolean;
-  asset: ASSET;
-}
-
-interface State {
-  wallets?: WalletBaseData[];
-}
-
 interface DispatchProps {
-  service: any;
+  service: {
+    fetchBaseWallets(): Promise<WalletMultiAvailable>;
+  };
 }
 
 interface StateProps {
   role: ROLE;
+}
+
+interface Props extends OwnProps, DispatchProps, StateProps {}
+
+interface State {
+  wallets?: WalletBaseData[];
 }

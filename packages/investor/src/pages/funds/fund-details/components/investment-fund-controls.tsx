@@ -83,9 +83,8 @@ class InvestmentFundControls extends Component<
               <FundDepositContainer
                 open={popups[INVESTMENT_POPUP.INVEST]}
                 id={fundDescription.id}
-                type={FUND}
                 onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-                onInvest={updateDetails}
+                onApply={this.applyChanges(updateDetails)}
               />
             </Fragment>
           )}

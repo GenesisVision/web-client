@@ -1,7 +1,4 @@
 import { connectRouter } from "connected-react-router";
-import fundDepositReducer, {
-  FundDepositState
-} from "modules/fund-deposit/reducer/fund-deposit.reducer";
 import programDepositReducer, {
   ProgramsDepositState
 } from "modules/program-deposit/reducer/program-deposit.reducer";
@@ -43,7 +40,6 @@ import history from "shared/utils/history";
 
 type State = {
   programDeposit: ProgramsDepositState;
-  fundDeposit: FundDepositState;
   notifications: NotificationsState;
   manager: ManagerState;
   signUpData: SignUpState;
@@ -59,7 +55,6 @@ export default combineReducers<ManagerRootState>({
   programNotifications: programNotificationsReducer,
   fundNotifications: fundNotificationsReducer,
   programDeposit: programDepositReducer,
-  fundDeposit: fundDepositReducer,
   manager: managerReducer,
   programsData: programsReducer,
   programsRating: programsRatingReducer,
