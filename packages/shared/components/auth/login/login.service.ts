@@ -5,7 +5,6 @@ import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
-
 import {
   CODE_TYPE,
   LOGIN,
@@ -19,20 +18,19 @@ export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
 
-export const login: LoginFuncType = ({
-  id,
-  prefix = 0,
-  email,
-  password,
-  from,
-  setSubmitting,
-  method
-}) => dispatch => {
+export const login: LoginFuncType = props => (dispatch, getState) => {
+  const { code, type, setSubmitting, method, prefix, id } = props;
+  const stateLoginData = getState().loginData.twoFactor;
+  const email = props.email || stateLoginData.email;
+  const password = props.password || stateLoginData.password;
+  const from = props.from || stateLoginData.from;
   return dispatch(
     method({
       email,
       password,
       client: CLIENT_WEB,
+      twoFactorCode: type && type === CODE_TYPE.TWO_FACTOR && code,
+      recoveryCode: type && type === CODE_TYPE.RECOVERY && code,
       loginCheckInfo: {
         id,
         poW: {
@@ -41,10 +39,11 @@ export const login: LoginFuncType = ({
       }
     })
   )
-    .then((response: any) => {
+    .then((response: { value: string }) => {
       authService.storeToken(response.value);
       dispatch(authActions.updateToken());
-      dispatch(push(from));
+      if (type) dispatch(clearTwoFactorData());
+      dispatch(push(from || stateLoginData.from));
     })
     .catch((e: any) => {
       if (e.code === "RequiresTwoFactor") {
@@ -52,7 +51,7 @@ export const login: LoginFuncType = ({
           storeTwoFactor({
             email,
             password,
-            from
+            from: from || stateLoginData.from
           })
         );
         dispatch(setTwoFactorRequirement(true));
@@ -61,45 +60,6 @@ export const login: LoginFuncType = ({
         setSubmitting(false);
       }
     });
-};
-
-export const twoFactorLogin: TwoFactorLoginFuncType = ({
-  code,
-  type,
-  setSubmitting,
-  method,
-  prefix,
-  id
-}) => (dispatch, getState) => {
-  const { email, password, from } = getState().loginData.twoFactor;
-  const model = {
-    email,
-    password,
-    client: CLIENT_WEB,
-    twoFactorCode: "",
-    recoveryCode: "",
-    loginCheckInfo: {}
-  };
-  if (type === CODE_TYPE.TWO_FACTOR) {
-    model.twoFactorCode = code;
-  }
-  if (type === CODE_TYPE.RECOVERY) {
-    model.recoveryCode = code;
-  }
-  model.loginCheckInfo = {
-    id,
-    poW: {
-      prefix
-    }
-  };
-  return dispatch(method(model))
-    .then((response: { value: string }) => {
-      authService.storeToken(response.value);
-      dispatch(authActions.updateToken());
-      dispatch(clearTwoFactorData());
-      dispatch(push(from));
-    })
-    .catch(() => setSubmitting(false));
 };
 
 export const clearLoginData: clearLoginDataFuncType = () => dispatch => {
@@ -124,19 +84,10 @@ export type LoginFuncType = (
     prefix?: number;
     email: string;
     password: string;
-    from: string;
     setSubmitting: any;
     method: any;
-  }
-) => (dispatch: Dispatch) => Promise<void>;
-export type TwoFactorLoginFuncType = (
-  props: {
     code: string;
-    type: CODE_TYPE;
-    setSubmitting: any;
-    method: any;
-    prefix: number;
-    id: string;
+    type?: CODE_TYPE;
     from?: string;
   }
 ) => (dispatch: any, getState: any) => Promise<void>;
@@ -147,7 +98,6 @@ export type SetSubmittingFuncType = (isSubmitting: boolean) => void;
 
 export interface LoginService {
   login: LoginFuncType;
-  twoFactorLogin: TwoFactorLoginFuncType;
   clearLoginData: clearLoginDataFuncType;
   clearTwoFactorData: clearTwoFactorDataFuncType;
   logout: logoutFuncType;
