@@ -34,7 +34,7 @@ class _LoginFormContainer extends React.PureComponent<Props, State> {
       if (pow && prefix) {
         const method =
           role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-        service.login({ ...this.state, prefix, from, method });
+        // service.login({ ...this.state, prefix, from, method });
         this.setState({ pow: undefined });
       }
     }

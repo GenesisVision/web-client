@@ -40,12 +40,12 @@ class _RecoveryCodeContainer extends React.PureComponent<Props, State> {
       if (pow && prefix) {
         const method =
           role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-        service.twoFactorLogin({
+        /*service.twoFactorLogin({
           ...this.state,
           type: CODE_TYPE.RECOVERY,
           method,
           prefix
-        });
+        });*/
         this.setState({ pow: undefined });
       }
     }
