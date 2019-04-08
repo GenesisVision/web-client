@@ -1,6 +1,6 @@
 import { FundDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";

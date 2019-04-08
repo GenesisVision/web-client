@@ -1,16 +1,17 @@
+import { FundInvestInfo } from "gv-api-web";
 import React from "react";
 import { connect } from "react-redux";
-import { InvestorRootState } from "reducers";
 import { Dispatch, bindActionCreators } from "redux";
 import DepositPopup from "shared/components/deposit/deposit-popup";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
-import { ResponseError, RootThunk } from "shared/utils/types";
+import RootState from "shared/reducers/root-reducer";
+import { ResponseError } from "shared/utils/types";
 
 import {
-  fundInvest,
-  getDepositFundInfo
-} from "./services/fund-deposit.services";
+  fundInvestCreator,
+  getFundInfoCreator
+} from "./services/deposit.service";
 
 class _FundDepositContainer extends React.Component<Props, State> {
   state = {
@@ -36,7 +37,7 @@ class _FundDepositContainer extends React.Component<Props, State> {
   };
 
   render() {
-    const { id, open, onClose, currency } = this.props;
+    const { id, open, onClose, currency, fetchInfo } = this.props;
     const { errorMessage } = this.state;
     return (
       <Dialog open={open} onClose={onClose}>
@@ -45,7 +46,7 @@ class _FundDepositContainer extends React.Component<Props, State> {
           asset={ASSET.FUND}
           currency={currency}
           id={id}
-          fetchInfo={getDepositFundInfo}
+          fetchInfo={getFundInfoCreator(fetchInfo)}
           invest={this.handleInvest}
           errorMessage={errorMessage}
         />
@@ -54,29 +55,17 @@ class _FundDepositContainer extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: InvestorRootState): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   currency: state.accountSettings.currency
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  props: OwnProps
+): DispatchProps => ({
+  service: bindActionCreators<any, any>(
     {
-      fundInvest: (
-        id: string,
-        amount: number,
-        currency: string
-      ) => RootThunk<Promise<void>>;
-    },
-    {
-      fundInvest: (
-        id: string,
-        amount: number,
-        currency: string
-      ) => Promise<void>;
-    }
-  >(
-    {
-      fundInvest
+      fundInvest: fundInvestCreator(props.fundInvest)
     },
     dispatch
   )
@@ -86,7 +75,7 @@ const FundDepositContainer = connect<
   StateProps,
   DispatchProps,
   OwnProps,
-  InvestorRootState
+  RootState
 >(
   mapStateToProps,
   mapDispatchToProps
@@ -96,6 +85,19 @@ export default FundDepositContainer;
 interface OwnProps {
   id: string;
   onApply(): void;
+  fetchInfo(
+    id: string,
+    currency: string,
+    authorization: string
+  ): Promise<FundInvestInfo>;
+  fundInvest(
+    id: string,
+    amount: number,
+    authorization: string,
+    opts: {
+      currency: string;
+    }
+  ): Promise<void>;
 }
 
 interface StateProps {

@@ -1,34 +1,38 @@
 import { FundInvestInfo } from "gv-api-web";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
 import { RootThunk } from "shared/utils/types";
 
-export const getDepositFundInfo = (
-  id: string,
-  currency: string
-): Promise<FundInvestInfo> => {
-  return investorApi.v10InvestorFundsByIdInvestInfoByCurrencyGet(
-    id,
-    currency,
-    authService.getAuthArg()
-  );
+export const getFundInfoCreator = (
+  getFundInfoFn: (
+    id: string,
+    currency: string,
+    authorization: string
+  ) => Promise<FundInvestInfo>
+) => (id: string, currency: string): Promise<FundInvestInfo> => {
+  return getFundInfoFn(id, currency, authService.getAuthArg()).then(t => {
+    let tt = t;
+    return t;
+  });
 };
 
-export const fundInvest = (
+export const fundInvestCreator = (
+  fundInvestFn: (
+    id: string,
+    amount: number,
+    authorization: string,
+    opts: {
+      currency: string;
+    }
+  ) => Promise<void>
+) => (
   id: string,
   amount: number,
   currency: string
 ): RootThunk<Promise<void>> => dispatch => {
-  return investorApi
-    .v10InvestorFundsByIdInvestByAmountPost(
-      id,
-      amount,
-      authService.getAuthArg(),
-      { currency }
-    )
-    .then(() => {
+  return fundInvestFn(id, amount, authService.getAuthArg(), { currency }).then(
+    () => {
       dispatch(
         alertMessageActions.success(
           "deposit-asset.fund.success-alert-message",
@@ -36,5 +40,6 @@ export const fundInvest = (
         )
       );
       dispatch(fetchProfileHeaderInfo());
-    });
+    }
+  );
 };

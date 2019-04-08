@@ -1,7 +1,7 @@
 import { FundDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
 import moment from "moment";
 import React, { Component, Fragment } from "react";
