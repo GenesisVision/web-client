@@ -3,7 +3,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 
-import TwoFactorCodeForm from "./two-factor-code-form";
+import TwoFactorCodeForm, {
+  ITwoFactorCodeFormValues
+} from "./two-factor-code-form";
 import { ROLE } from "shared/constants/constants";
 import {
   CODE_TYPE,
@@ -65,7 +67,7 @@ class _TwoFactorCodeContainer extends React.PureComponent<Props, State> {
   };
 
   handleSubmit = (
-    code: string,
+    code: ITwoFactorCodeFormValues,
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     const { email, password } = this.props;
@@ -75,7 +77,7 @@ class _TwoFactorCodeContainer extends React.PureComponent<Props, State> {
         email,
         password,
         setSubmitting,
-        code,
+        ...code,
         isSubmit: true
       });
     });

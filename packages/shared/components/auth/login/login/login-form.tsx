@@ -63,23 +63,6 @@ const _LoginForm: React.FC<
   );
 };
 
-const withTranslationAndFormik = compose<React.FC<OwnProps>>(
-  React.memo,
-  translate(),
-  withFormik<Props, ILoginFormFormValues>({
-    displayName: "loginForm",
-    isInitialValid: true,
-    mapPropsToValues: () => ({
-      email: "",
-      password: ""
-    }),
-    validationSchema: validationSchema,
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  })
-)(_LoginForm);
-
 interface Props extends OwnProps, InjectedTranslateProps {}
 
 interface OwnProps {
@@ -96,4 +79,20 @@ export interface ILoginFormFormValues {
   password: string;
 }
 
+const withTranslationAndFormik = compose<React.FC<OwnProps>>(
+  React.memo,
+  translate(),
+  withFormik<Props, ILoginFormFormValues>({
+    displayName: "loginForm",
+    isInitialValid: true,
+    mapPropsToValues: () => ({
+      email: "",
+      password: ""
+    }),
+    validationSchema: validationSchema,
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
+    }
+  })
+)(_LoginForm);
 export default withTranslationAndFormik;

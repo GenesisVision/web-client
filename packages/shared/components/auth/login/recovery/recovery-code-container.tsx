@@ -2,7 +2,9 @@ import { replace } from "connected-react-router";
 import * as React from "react";
 import { connect } from "react-redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
-import RecoveryCodeForm from "./recovery-code-form";
+import RecoveryCodeForm, {
+  IRecoveryCodeFormValues
+} from "./recovery-code-form";
 import { ROLE } from "shared/constants/constants";
 import {
   CODE_TYPE,
@@ -64,7 +66,7 @@ class _RecoveryCodeContainer extends React.PureComponent<Props, State> {
   };
 
   handleSubmit = (
-    code: string,
+    code: IRecoveryCodeFormValues,
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     const { email, password } = this.props;
@@ -74,7 +76,7 @@ class _RecoveryCodeContainer extends React.PureComponent<Props, State> {
         email,
         password,
         setSubmitting,
-        code,
+        ...code,
         isSubmit: true
       });
     });

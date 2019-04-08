@@ -11,7 +11,7 @@ import FormError from "shared/components/form/form-error/form-error";
 import { object, string } from "yup";
 
 class _TwoFactorCodeForm extends React.Component<
-  InjectedFormikProps<Props, FormValues>,
+  InjectedFormikProps<Props, ITwoFactorCodeFormValues>,
   State
 > {
   state: State = {
@@ -22,23 +22,20 @@ class _TwoFactorCodeForm extends React.Component<
     if (this.props.isSubmitting) return;
     this.setState({ isChecking: true });
     this.props.setSubmitting(true);
-    this.props.onSubmit(
-      this.props.values.twoFactorCode,
-      this.props.setSubmitting
-    );
+    this.props.onSubmit(this.props.values, this.props.setSubmitting);
   };
 
   componentDidUpdate(
-    prevProps: Readonly<Props & FormikProps<FormValues>>,
+    prevProps: Readonly<Props & FormikProps<ITwoFactorCodeFormValues>>,
     prevState: Readonly<State>,
     snapshot?: any
   ): void {
     if (
       this.state.isChecking ||
-      this.props.values.twoFactorCode === prevProps.values.twoFactorCode
+      this.props.values.code === prevProps.values.code
     )
       return;
-    if (this.props.values.twoFactorCode.length === 6) {
+    if (this.props.values.code.length === 6) {
       this.checkTwoFactor();
     }
   }
@@ -59,7 +56,7 @@ class _TwoFactorCodeForm extends React.Component<
         <GVFormikField
           disabled={isSubmitting}
           type="text"
-          name="twoFactorCode"
+          name="code"
           label={t("auth.login.two-factor.input-label")}
           autoComplete="off"
           autoFocus
@@ -86,14 +83,17 @@ class _TwoFactorCodeForm extends React.Component<
   }
 }
 
-interface FormValues {
-  twoFactorCode: string;
+export interface ITwoFactorCodeFormValues {
+  code: string;
 }
 
 interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface OwnProps {
-  onSubmit(code: string, setSubmitting: (isSubmitting: boolean) => void): void;
+  onSubmit(
+    code: ITwoFactorCodeFormValues,
+    setSubmitting: (isSubmitting: boolean) => void
+  ): void;
   error: string;
   isChecking?: boolean;
 }
@@ -105,14 +105,14 @@ interface State {
 const TwoFactorCodeForm = compose<React.FunctionComponent<OwnProps>>(
   React.memo,
   translate(),
-  withFormik<Props, FormValues>({
+  withFormik<Props, ITwoFactorCodeFormValues>({
     displayName: "twoFactorForm",
     mapPropsToValues: () => ({
-      twoFactorCode: ""
+      code: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        twoFactorCode: string()
+        code: string()
           .trim()
           .matches(
             /^\d{6}$/,
@@ -123,7 +123,7 @@ const TwoFactorCodeForm = compose<React.FunctionComponent<OwnProps>>(
           )
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
-      return props.onSubmit(values.twoFactorCode, setSubmitting);
+      return props.onSubmit(values, setSubmitting);
     }
   })
 )(_TwoFactorCodeForm);
