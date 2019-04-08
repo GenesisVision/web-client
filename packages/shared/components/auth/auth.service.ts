@@ -4,10 +4,11 @@ import platformApi from "shared/services/api-client/platform-api";
 import { CLIENT_WEB } from "./login/login.service";
 import {
   CancelablePromise,
+  CaptchaDetails,
   GeeTestDetails,
-  LoginCheckDetails,
   PowDetails
 } from "gv-api-web";
+
 const worker = new SHAWorker();
 
 export const calculatePrefix: CalculatePrefixFuncType = props => {
@@ -44,9 +45,7 @@ export const checkPow: CheckPowFuncType = async props => {
   return 0;
 };
 
-type GetCaptchaFuncType = (
-  login: string
-) => CancelablePromise<LoginCheckDetails>;
+type GetCaptchaFuncType = (login: string) => CancelablePromise<CaptchaDetails>;
 type CalculatePrefixFuncType = (
   props: {
     difficulty: number;
