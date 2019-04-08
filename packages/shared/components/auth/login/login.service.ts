@@ -21,7 +21,7 @@ export const redirectToLogin = () => {
 
 export const login: LoginFuncType = ({
   id,
-  prefix,
+  prefix = 0,
   email,
   password,
   from,
@@ -118,10 +118,10 @@ export const logout: logoutFuncType = () => dispatch => {
   dispatch(push(HOME_ROUTE));
 };
 
-type LoginFuncType = (
+export type LoginFuncType = (
   props: {
     id: string;
-    prefix: number;
+    prefix?: number;
     email: string;
     password: string;
     from: string;
@@ -129,7 +129,7 @@ type LoginFuncType = (
     method: any;
   }
 ) => (dispatch: Dispatch) => Promise<void>;
-type TwoFactorLoginFuncType = (
+export type TwoFactorLoginFuncType = (
   props: {
     code: string;
     type: CODE_TYPE;
@@ -137,9 +137,10 @@ type TwoFactorLoginFuncType = (
     method: any;
     prefix: number;
     id: string;
+    from?: string;
   }
 ) => (dispatch: any, getState: any) => Promise<void>;
-type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
+export type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = () => (dispatch: Dispatch) => void;
 export type SetSubmittingFuncType = (isSubmitting: boolean) => void;
