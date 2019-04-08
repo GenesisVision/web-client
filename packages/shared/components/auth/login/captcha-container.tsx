@@ -22,6 +22,8 @@ import {
   loginUserInvestor,
   loginUserManager
 } from "./login.actions";
+import { IRecoveryCodeFormValues } from "./recovery/recovery-code-form";
+import { ITwoFactorCodeFormValues } from "./two-factor/two-factor-code-form";
 
 class _LoginContainer extends React.PureComponent<Props, State> {
   state = {
@@ -50,15 +52,15 @@ class _LoginContainer extends React.PureComponent<Props, State> {
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
     if (isSubmit) {
       if (pow && prefix) {
+        service.login({
+          ...this.state,
+          from,
+          method,
+          type
+        });
         this.setState({ pow: undefined });
+        this.setState({ isSubmit: false });
       }
-      service.login({
-        ...this.state,
-        from,
-        method,
-        type
-      });
-      this.setState({ isSubmit: false });
     }
   }
   handlePow = (prefix: number) => {
@@ -140,7 +142,10 @@ interface OwnProps {
   role: ROLE;
   renderForm: (
     handle: (
-      loginFormData: Object,
+      loginFormData:
+        | ILoginFormFormValues
+        | IRecoveryCodeFormValues
+        | ITwoFactorCodeFormValues,
       setSubmitting: SetSubmittingFuncType
     ) => void,
     errorMessage: string
