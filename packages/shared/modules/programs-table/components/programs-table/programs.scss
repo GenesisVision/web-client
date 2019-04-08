@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_constants.scss";
 @import "~shared/components/table/components/table-cards.scss";
 
 $padding: $padding-small;
@@ -81,6 +82,7 @@ $border-radius: 5px;
   }
 
   &__collapse {
+    @include transition(background-color);
     background-color: $secondary-color;
     border-radius: 0 $border-radius $border-radius 0;
     width: 45px;
@@ -89,6 +91,10 @@ $border-radius: 5px;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    &:hover {
+      background-color: lighten($secondary-color, 2%);
+    }
   }
   &__collapse-icon {
     width: 15px;
