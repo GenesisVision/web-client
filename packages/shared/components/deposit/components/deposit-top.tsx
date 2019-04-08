@@ -1,19 +1,13 @@
-import { ProgramInvestInfo } from "gv-api-web";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-export interface IDepositTop {
-  currency: string;
-  info: ProgramInvestInfo;
-  asset: ASSET;
-  role: ROLE;
-}
-const DepositTop: React.FC<IDepositTop & InjectedTranslateProps> = ({
+const _DepositTop: React.FC<OwnProps & InjectedTranslateProps> = ({
   currency,
-  info,
+  title,
+  availableToInvestBase,
   t,
   asset,
   role
@@ -22,23 +16,32 @@ const DepositTop: React.FC<IDepositTop & InjectedTranslateProps> = ({
     <div className="dialog__top">
       <div className="dialog__header">
         <h2>{t("deposit-asset.title")}</h2>
-        <p>{info.title}</p>
+        <p>{title}</p>
       </div>
-      <div className="dialog-field">
-        {asset === ASSET.PROGRAM && role === ROLE.INVESTOR && (
+      {asset === ASSET.PROGRAM && role === ROLE.INVESTOR && (
+        <div className="dialog-field">
           <StatisticItem
             label={t("deposit-asset.program.available-to-invest")}
             big
           >
             {`${formatCurrencyValue(
-              info.availableToInvestBase,
+              availableToInvestBase!,
               currency
             )} ${currency}`}
           </StatisticItem>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default translate()(DepositTop);
+const DepositTop = React.memo(translate()(_DepositTop));
+export default DepositTop;
+
+interface OwnProps {
+  currency: string;
+  title: string;
+  availableToInvestBase?: number;
+  asset: ASSET;
+  role: ROLE;
+}
