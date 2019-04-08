@@ -6,20 +6,11 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import validationSchema from "./login-form.validators";
-import Pie from "shared/components/pie-container/pie";
-import { GVColors } from "gv-react-components";
+import { FORGOT_PASSWORD_ROUTE } from "../login.routes";
 
 const _LoginForm: React.FC<
   InjectedFormikProps<Props, ILoginFormFormValues>
-> = ({
-  t,
-  isSubmitting,
-  handleSubmit,
-  error,
-  isValid,
-  dirty,
-  FORGOT_PASSWORD_ROUTE
-}) => {
+> = ({ t, isSubmitting, handleSubmit, error, isValid }) => {
   return (
     <form
       id="loginForm"
@@ -71,7 +62,6 @@ interface OwnProps {
     setSubmitting: (isSubmitting: boolean) => void
   ): void;
   error: string;
-  FORGOT_PASSWORD_ROUTE: string;
 }
 
 export interface ILoginFormFormValues {

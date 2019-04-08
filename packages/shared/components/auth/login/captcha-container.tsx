@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-
 import { ROLE } from "shared/constants/constants";
 import * as loginService from "./login.service";
 import {
@@ -81,12 +80,12 @@ class _LoginContainer extends React.PureComponent<Props, State> {
     });
   };
   render() {
-    const { errorMessage, FORGOT_PASSWORD_ROUTE, renderForm } = this.props;
+    const { errorMessage, renderForm } = this.props;
     const { pow, id } = this.state;
     const email = this.state.email || this.props.email;
     return (
       <>
-        {renderForm(this.handleSubmit, errorMessage, FORGOT_PASSWORD_ROUTE)}
+        {renderForm(this.handleSubmit, errorMessage)}
         {pow && (
           <Pow {...pow} id={id} email={email} handleSuccess={this.handlePow} />
         )}
@@ -139,14 +138,12 @@ interface DispatchProps {
 
 interface OwnProps {
   role: ROLE;
-  FORGOT_PASSWORD_ROUTE?: string;
   renderForm: (
     handle: (
       loginFormData: Object,
       setSubmitting: SetSubmittingFuncType
     ) => void,
-    errorMessage: string,
-    FORGOT_PASSWORD_ROUTE?: string
+    errorMessage: string
   ) => JSX.Element;
   from?: string;
   type?: CODE_TYPE;
