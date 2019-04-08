@@ -43,7 +43,7 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
       authService.storeToken(response.value);
       dispatch(authActions.updateToken());
       if (type) dispatch(clearTwoFactorData());
-      dispatch(push(from || stateLoginData.from));
+      dispatch(push(from));
     })
     .catch((e: any) => {
       if (e.code === "RequiresTwoFactor") {
@@ -51,7 +51,7 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
           storeTwoFactor({
             email,
             password,
-            from: from || stateLoginData.from
+            from
           })
         );
         dispatch(setTwoFactorRequirement(true));

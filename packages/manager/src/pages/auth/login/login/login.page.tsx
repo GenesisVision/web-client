@@ -11,7 +11,7 @@ import LoginForm from "shared/components/auth/login/login/login-form";
 import CaptchaContainer from "shared/components/auth/login/captcha-container";
 
 const LoginPage: React.FC<Props> = ({ location }) => {
-  const from = location.state || HOME_ROUTE;
+  const from = (location.state && location.state.pathname) || HOME_ROUTE;
   return (
     <div className="login">
       <AuthTabs authPartUrl={LOGIN_ROUTE} role={ROLE.MANAGER} />

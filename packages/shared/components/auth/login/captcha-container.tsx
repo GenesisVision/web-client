@@ -16,7 +16,7 @@ import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import Pow from "../captcha/pow";
 import { replace } from "connected-react-router";
-import { NOT_FOUND_PAGE_ROUTE } from "../../not-found/not-found.routes";
+import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ILoginFormFormValues } from "./login/login-form";
 import {
   CODE_TYPE,
@@ -28,9 +28,9 @@ class _LoginContainer extends React.PureComponent<Props, State> {
   state = {
     pow: undefined,
     geeTest: undefined,
-    isSubmit: undefined,
     prefix: undefined,
     setSubmitting: undefined,
+    isSubmit: false,
     id: "",
     email: "",
     password: "",
@@ -115,10 +115,10 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 interface State extends CaptchasType {
+  isSubmit: boolean;
   setSubmitting?: SetSubmittingFuncType;
   id?: string;
   prefix?: number;
-  isSubmit?: boolean;
   code?: string;
   email?: string;
   password?: string;
