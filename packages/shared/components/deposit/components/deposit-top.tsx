@@ -35,7 +35,7 @@ const _DepositTop: React.FC<OwnProps & InjectedTranslateProps> = ({
   );
 };
 
-const DepositTop = translate()(_DepositTop);
+const DepositTop = React.memo(translate()(_DepositTop));
 export default DepositTop;
 
 interface OwnProps {

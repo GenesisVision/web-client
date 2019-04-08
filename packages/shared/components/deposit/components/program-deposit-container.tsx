@@ -13,7 +13,7 @@ import {
 } from "../services/program-deposit.service";
 import DepositPopup from "./deposit-popup";
 
-class _ProgramDepositContainer extends React.Component<Props, State> {
+class _ProgramDepositContainer extends React.PureComponent<Props, State> {
   state = {
     errorMessage: ""
   };

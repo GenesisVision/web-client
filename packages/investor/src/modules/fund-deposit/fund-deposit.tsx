@@ -22,7 +22,7 @@ const FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   );
 };
 
-export default FundDeposit;
+export default React.memo(FundDeposit);
 
 interface OwnProps {
   id: string;

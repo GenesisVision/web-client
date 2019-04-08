@@ -24,7 +24,7 @@ const ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   );
 };
 
-export default ProgramDeposit;
+export default React.memo(ProgramDeposit);
 
 interface OwnProps {
   id: string;

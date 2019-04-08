@@ -9,12 +9,12 @@ import {
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { fetchBaseWallets } from "shared/components/wallet/services/wallet.services";
 import { ASSET, ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 import { RootThunk } from "shared/utils/types";
 
-import { DialogLoader } from "../../dialog/dialog-loader/dialog-loader";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 
