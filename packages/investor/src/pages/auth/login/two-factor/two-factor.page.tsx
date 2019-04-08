@@ -1,10 +1,23 @@
 import * as React from "react";
-import TwoFactorCodeContainer from "shared/components/auth/login/two-factor/two-factor-code-container";
 import { ROLE } from "shared/constants/constants";
+import { SetSubmittingFuncType } from "shared/components/auth/login/login.service";
+import CaptchaContainer from "shared/components/auth/login/captcha-container";
+import TwoFactorCodeForm from "shared/components/auth/login/two-factor/two-factor-code-form";
+import { CODE_TYPE } from "shared/components/auth/login/login.actions";
 
 const TwoFactorPage: React.FC = () => (
   <div className="login-two-factor-page">
-    <TwoFactorCodeContainer role={ROLE.INVESTOR} />
+    <CaptchaContainer
+      role={ROLE.INVESTOR}
+      type={CODE_TYPE.TWO_FACTOR}
+      renderForm={(
+        handle: (
+          loginFormData: Object,
+          setSubmitting: SetSubmittingFuncType
+        ) => void,
+        errorMessage: string
+      ) => <TwoFactorCodeForm onSubmit={handle} error={errorMessage} />}
+    />
   </div>
 );
 
