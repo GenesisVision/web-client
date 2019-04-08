@@ -8,12 +8,12 @@ import RootState from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
 
 import {
-  fundInvestCreator,
-  getFundInfoCreator
-} from "../services/fund-deposit.service";
+  getProgramInfoCreator,
+  programInvestCreator
+} from "../services/program-deposit.service";
 import DepositPopup from "./deposit-popup";
 
-class _FundDepositContainer extends React.Component<Props, State> {
+class _ProgramDepositContainer extends React.Component<Props, State> {
   state = {
     errorMessage: ""
   };
@@ -25,7 +25,7 @@ class _FundDepositContainer extends React.Component<Props, State> {
   ) => {
     const { id, service } = this.props;
     service
-      .fundInvest(id, amount, currency)
+      .programInvest(id, amount, currency)
       .then(() => {
         this.props.onApply();
         this.props.onClose();
@@ -42,11 +42,11 @@ class _FundDepositContainer extends React.Component<Props, State> {
     return (
       <Dialog open={open} onClose={onClose}>
         <DepositPopup
+          asset={ASSET.PROGRAM}
           hasEntryFee={hasEntryFee}
-          asset={ASSET.FUND}
           currency={currency}
           id={id}
-          fetchInfo={getFundInfoCreator(fetchInfo)}
+          fetchInfo={getProgramInfoCreator(fetchInfo)}
           invest={this.handleInvest}
           errorMessage={errorMessage}
         />
@@ -55,43 +55,40 @@ class _FundDepositContainer extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  currency: state.accountSettings.currency
-});
-
 const mapDispatchToProps = (
   dispatch: Dispatch,
   props: OwnProps
 ): DispatchProps => ({
   service: bindActionCreators<any, any>(
     {
-      fundInvest: fundInvestCreator(props.fundInvest)
+      programInvest: programInvestCreator(props.programInvest)
     },
     dispatch
   )
 });
 
-const FundDepositContainer = connect<
-  StateProps,
+const ProgramDepositContainer = connect<
+  null,
   DispatchProps,
   OwnProps,
   RootState
 >(
-  mapStateToProps,
+  null,
   mapDispatchToProps
-)(_FundDepositContainer);
-export default FundDepositContainer;
+)(_ProgramDepositContainer);
+export default ProgramDepositContainer;
 
 interface OwnProps {
   id: string;
   hasEntryFee?: boolean;
+  currency: string;
   onApply(): void;
   fetchInfo(
     id: string,
     currency: string,
     authorization: string
   ): Promise<FundInvestInfo>;
-  fundInvest(
+  programInvest(
     id: string,
     amount: number,
     authorization: string,
@@ -101,17 +98,13 @@ interface OwnProps {
   ): Promise<void>;
 }
 
-interface StateProps {
-  currency: string;
-}
-
 interface DispatchProps {
   service: {
-    fundInvest(id: string, amount: number, currency: string): Promise<void>;
+    programInvest(id: string, amount: number, currency: string): Promise<void>;
   };
 }
 
-interface Props extends OwnProps, IDialogProps, StateProps, DispatchProps {}
+interface Props extends OwnProps, IDialogProps, DispatchProps {}
 
 interface State {
   errorMessage: string;

@@ -12,6 +12,7 @@ const FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   return (
     <FundDepositContainer
       id={id}
+      hasEntryFee
       onApply={onApply}
       open={open}
       onClose={onClose}

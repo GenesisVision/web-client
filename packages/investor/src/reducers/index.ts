@@ -2,9 +2,6 @@ import { connectRouter } from "connected-react-router";
 import copytradingTablesReducer, {
   CopytradingTablesState
 } from "modules/copytrading-tables/reducers/copytrading-tables.reducer";
-import programDepositReducer, {
-  ProgramsDepositState
-} from "modules/program-deposit/reducer/program-deposit.reducer";
 import passwordRestoreReducer, {
   PasswordState
 } from "pages/auth/forgot-password/reducers/password-restore-reducers";
@@ -40,7 +37,6 @@ import uiReducer from "shared/reducers/ui-reducer";
 import history from "shared/utils/history";
 
 type State = {
-  programDeposit: ProgramsDepositState;
   manager: ManagerState;
   signUpData: SignUpState;
   loginData: LoginState;
@@ -64,7 +60,6 @@ const rootReducer = combineReducers<InvestorRootState>({
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
   dashboard: dashboardReducer,
-  programDeposit: programDepositReducer,
   emailPending: emailPendingReducer,
   notifications: notificationsReducer,
   notificationSettings: notificationSettingsReducer,
