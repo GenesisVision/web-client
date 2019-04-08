@@ -2,18 +2,12 @@ import { connectRouter } from "connected-react-router";
 import copytradingTablesReducer, {
   CopytradingTablesState
 } from "modules/copytrading-tables/reducers/copytrading-tables.reducer";
-import fundDepositReducer, {
-  FundDepositState
-} from "modules/fund-deposit/reducer/fund-deposit.reducer";
 import programDepositReducer, {
   ProgramsDepositState
 } from "modules/program-deposit/reducer/program-deposit.reducer";
 import passwordRestoreReducer, {
   PasswordState
 } from "pages/auth/forgot-password/reducers/password-restore-reducers";
-import loginReducer, {
-  LoginState
-} from "shared/components/auth/login/reducers/login.reducers";
 import signUpReducer, {
   SignUpState
 } from "pages/auth/signup/reducers/signup.reducers";
@@ -24,6 +18,9 @@ import managerReducer, {
   ManagerState
 } from "pages/manager/reducers/manager.reducers";
 import { combineReducers } from "redux";
+import loginReducer, {
+  LoginState
+} from "shared/components/auth/login/reducers/login.reducers";
 import notificationsReducer from "shared/components/notifications/reducers/notifications.reducers";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
@@ -44,7 +41,6 @@ import history from "shared/utils/history";
 
 type State = {
   programDeposit: ProgramsDepositState;
-  fundDeposit: FundDepositState;
   manager: ManagerState;
   signUpData: SignUpState;
   loginData: LoginState;
@@ -69,7 +65,6 @@ const rootReducer = combineReducers<InvestorRootState>({
   profileHeader: headerReducer,
   dashboard: dashboardReducer,
   programDeposit: programDepositReducer,
-  fundDeposit: fundDepositReducer,
   emailPending: emailPendingReducer,
   notifications: notificationsReducer,
   notificationSettings: notificationSettingsReducer,
