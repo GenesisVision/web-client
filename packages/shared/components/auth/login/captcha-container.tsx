@@ -25,7 +25,7 @@ import {
 import { IRecoveryCodeFormValues } from "./recovery/recovery-code-form";
 import { ITwoFactorCodeFormValues } from "./two-factor/two-factor-code-form";
 
-class _LoginContainer extends React.PureComponent<Props, State> {
+class _CaptchaContainer extends React.PureComponent<Props, State> {
   state = {
     pow: undefined,
     geeTest: undefined,
@@ -164,5 +164,5 @@ const CaptchaContainer = connect<
 >(
   mapStateToProps,
   mapDispatchToProps
-)(_LoginContainer);
+)(_CaptchaContainer);
 export default CaptchaContainer;
