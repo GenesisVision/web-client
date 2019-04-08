@@ -11,10 +11,7 @@ export const getFundInfoCreator = (
     authorization: string
   ) => Promise<FundInvestInfo>
 ) => (id: string, currency: string): Promise<FundInvestInfo> => {
-  return getFundInfoFn(id, currency, authService.getAuthArg()).then(t => {
-    let tt = t;
-    return t;
-  });
+  return getFundInfoFn(id, currency, authService.getAuthArg());
 };
 
 export const fundInvestCreator = (

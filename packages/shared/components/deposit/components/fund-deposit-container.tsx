@@ -11,7 +11,7 @@ import { ResponseError } from "shared/utils/types";
 import {
   fundInvestCreator,
   getFundInfoCreator
-} from "./services/deposit.service";
+} from "../services/fund-deposit.service";
 
 class _FundDepositContainer extends React.Component<Props, State> {
   state = {

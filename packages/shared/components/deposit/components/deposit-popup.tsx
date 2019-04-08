@@ -14,7 +14,7 @@ import { ASSET, ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 import { RootThunk } from "shared/utils/types";
 
-import { DialogLoader } from "../dialog/dialog-loader/dialog-loader";
+import { DialogLoader } from "../../dialog/dialog-loader/dialog-loader";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 
