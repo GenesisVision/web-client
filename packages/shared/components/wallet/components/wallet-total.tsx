@@ -19,12 +19,12 @@ interface IWalletProps {
   filters?: MultiWalletFilters;
   isPayFeesWithGvt?: boolean;
   wallets?: WalletsInfo;
-  role?: ROLE;
 }
 
-class WalletTotal extends React.Component<IWalletProps & WalletRouteProps> {
+class WalletTotal extends React.PureComponent<IWalletProps & WalletRouteProps> {
   render() {
-    const { t, info, wallets, filters, role, isPayFeesWithGvt } = this.props;
+    const { t, info, wallets, filters, isPayFeesWithGvt } = this.props;
+    const role = process.env.REACT_APP_PLATFORM as ROLE;
     if (!info || !filters) return <WalletBalanceLoader />;
     return (
       <Page title={t("wallet-page.title")}>
@@ -54,9 +54,6 @@ class WalletTotal extends React.Component<IWalletProps & WalletRouteProps> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  role: state.profileHeader.info.data
-    ? state.profileHeader.info.data.userType
-    : null,
   info: state.wallet.info.data ? state.wallet.info.data.grandTotal : null,
   wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],
   isPayFeesWithGvt: state.wallet.info.data
