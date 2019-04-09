@@ -3,13 +3,10 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ROLE } from "shared/constants/constants";
 
-const Tabs: React.FC<Props & InjectedTranslateProps> = ({
-  t,
-  authPartUrl,
-  role
-}) => {
+const Tabs: React.FC<Props & InjectedTranslateProps> = ({ t, authPartUrl }) => {
+  const role = process.env.REACT_APP_PLATFORM;
   return (
-    <GVTabs value={role}>
+    <GVTabs value={role!}>
       <GVTab
         value={ROLE.INVESTOR}
         label={
@@ -38,7 +35,6 @@ const Tabs: React.FC<Props & InjectedTranslateProps> = ({
 
 interface Props {
   authPartUrl: string;
-  role: ROLE;
 }
 
 const AuthTabs = translate()(Tabs);

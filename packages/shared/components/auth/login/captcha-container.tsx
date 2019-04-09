@@ -49,7 +49,8 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   }
   componentDidUpdate(): void {
     const { isSubmit, prefix, captchaType } = this.state;
-    const { from, role, service, type } = this.props;
+    const { from, service, type } = this.props;
+    const role = process.env.REACT_APP_PLATFORM;
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
     if (isSubmit) {
       switch (captchaType) {
@@ -151,7 +152,6 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  role: ROLE;
   renderForm: (
     handle: (
       loginFormData:
