@@ -32,6 +32,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     prefix: undefined,
     setSubmitting: undefined,
     isSubmit: false,
+    captchaType: "None",
     id: "",
     email: "",
     password: "",
@@ -47,19 +48,32 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     this.props.service.clearLoginData();
   }
   componentDidUpdate(): void {
-    const { isSubmit, pow, prefix } = this.state;
-    const { from, role, service, type } = this.props;
+    const { isSubmit, prefix, captchaType } = this.state;
+    const { from, service, type } = this.props;
+    const role = process.env.REACT_APP_PLATFORM;
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
     if (isSubmit) {
-      if (pow && prefix) {
-        service.login({
-          ...this.state,
-          from,
-          method,
-          type
-        });
-        this.setState({ pow: undefined });
-        this.setState({ isSubmit: false });
+      switch (captchaType) {
+        case "Pow":
+          if (prefix) {
+            service.login({
+              ...this.state,
+              from,
+              method,
+              type
+            });
+            this.setState({ pow: undefined, isSubmit: false });
+          }
+          break;
+        default:
+          service.login({
+            ...this.state,
+            from,
+            method,
+            type
+          });
+          this.setState({ isSubmit: false });
+          break;
       }
     }
   }
@@ -115,6 +129,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 interface State extends CaptchasType {
   isSubmit: boolean;
+  captchaType: string;
   setSubmitting?: SetSubmittingFuncType;
   id?: string;
   prefix?: number;
@@ -137,7 +152,6 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  role: ROLE;
   renderForm: (
     handle: (
       loginFormData:

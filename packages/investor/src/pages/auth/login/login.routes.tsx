@@ -6,9 +6,9 @@ import { Route, Switch } from "react-router-dom";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import LoginFooter from "shared/components/auth/components/login-footer/login-footer";
 
-import LoginPage from "./login/login.page";
-import Recovery from "./recovery/recovery.page";
-import TwoFactor from "./two-factor/two-factor.page";
+import LoginPage from "shared/components/auth/login/login/login.page";
+import Recovery from "shared/components/auth/login/recovery/recovery.page";
+import TwoFactor from "shared/components/auth/login/two-factor/two-factor.page";
 import {
   LOGIN_ROUTE,
   LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE,
