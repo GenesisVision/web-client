@@ -39,14 +39,8 @@ class _DepositPopup extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const {
-      currency,
-      invest,
-      hasEntryFee,
-      asset,
-      role,
-      errorMessage
-    } = this.props;
+    const { currency, invest, hasEntryFee, asset, errorMessage } = this.props;
+    const role = process.env.REACT_APP_PLATFORM as ROLE;
     const { wallets, investInfo } = this.state;
     if (!wallets || !investInfo) return <DialogLoader />;
 
@@ -88,14 +82,9 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     }
   >({ fetchBaseWallets }, dispatch)
 });
-const mapStateToProps = (state: RootState): StateProps => ({
-  role: state.profileHeader.info.data
-    ? (state.profileHeader.info.data.userType as ROLE)
-    : (process.env.REACT_APP_PLATFORM as ROLE)
-});
 
-const DepositPopup = connect<StateProps, DispatchProps, OwnProps, RootState>(
-  mapStateToProps,
+const DepositPopup = connect<null, DispatchProps, OwnProps, RootState>(
+  null,
   mapDispatchToProps
 )(_DepositPopup);
 
@@ -124,11 +113,7 @@ interface DispatchProps {
   };
 }
 
-interface StateProps {
-  role: ROLE;
-}
-
-interface Props extends OwnProps, DispatchProps, StateProps {}
+interface Props extends OwnProps, DispatchProps {}
 
 interface State {
   wallets?: WalletBaseData[];

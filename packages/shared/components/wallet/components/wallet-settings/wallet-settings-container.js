@@ -52,8 +52,9 @@ class WalletSettingsContainer extends Component {
   };
 
   render() {
-    const { t, role } = this.props;
+    const { t } = this.props;
     const { isPayFeesWithGvt, isPending } = this.state;
+    const role = process.env.REACT_APP_PLATFORM;
 
     return (
       <WalletSettings
@@ -77,12 +78,6 @@ WalletSettingsContainer.propTypes = {
   })
 };
 
-const mapStateToProps = state => ({
-  role: state.profileHeader.info.data
-    ? state.profileHeader.info.data.userType
-    : null
-});
-
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     { onPayFeesWithGvt, offPayFeesWithGvt },
@@ -94,7 +89,7 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
   translate(),
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   )
 )(WalletSettingsContainer);
