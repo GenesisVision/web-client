@@ -60,7 +60,6 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
             type
           });
           this.setState({ pow: undefined });
-          this.setState({ isSubmit: false });
         }
       } else {
         service.login({
@@ -69,9 +68,8 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
           method,
           type
         });
-        this.setState({ pow: undefined });
-        this.setState({ isSubmit: false });
       }
+      this.setState({ isSubmit: false });
     }
   }
   handlePow = (prefix: number) => {
