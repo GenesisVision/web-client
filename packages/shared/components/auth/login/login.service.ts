@@ -30,8 +30,8 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
       email,
       password,
       client,
-      twoFactorCode: type === CODE_TYPE.TWO_FACTOR && code,
-      recoveryCode: type === CODE_TYPE.RECOVERY && code,
+      twoFactorCode: (type === CODE_TYPE.TWO_FACTOR && code) || null,
+      recoveryCode: (type === CODE_TYPE.RECOVERY && code) || null,
       loginCheckInfo: {
         id,
         poW: {
