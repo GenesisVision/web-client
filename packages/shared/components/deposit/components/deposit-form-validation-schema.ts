@@ -31,7 +31,7 @@ export const managerSchema = (
           })
         )
         .max(
-          values.availableInWallet,
+          values.availableInWallet || 0,
           t("deposit-asset.validation.amount-more-than-available")
         )
     });
@@ -64,8 +64,11 @@ export const investorSchema = (
           })
         )
         .max(
-          Math.min(values.availableInWallet, values.availableToInvest),
-          values.availableInWallet < values.availableToInvest
+          Math.min(
+            values.availableInWallet || 0,
+            values.availableToInvest || 0
+          ),
+          (values.availableInWallet || 0) < (values.availableToInvest || 0)
             ? t("deposit-asset.validation.amount-more-than-available")
             : t("deposit-asset.validation.amount-exceeds-limit")
         )

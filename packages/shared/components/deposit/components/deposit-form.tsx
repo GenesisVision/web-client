@@ -26,7 +26,10 @@ import {
 } from "./deposit-form-validation-schema";
 
 class _DepositForm extends React.PureComponent<
-  InjectedFormikProps<OwnProps & InjectedTranslateProps, FormValues>
+  InjectedFormikProps<
+    IDepositProps & InjectedTranslateProps,
+    IDepositFormValues
+  >
 > {
   componentDidMount(): void {
     this.fetchRate({ currencyFrom: this.props.values.walletCurrency });
@@ -261,9 +264,9 @@ class _DepositForm extends React.PureComponent<
   }
 }
 
-const DepositForm = compose<React.FC<OwnProps>>(
+const DepositForm = compose<React.FC<IDepositProps>>(
   translate(),
-  withFormik<OwnProps, FormValues>({
+  withFormik<IDepositProps, IDepositFormValues>({
     displayName: "invest-form",
     mapPropsToValues: () => ({
       rate: 1,
@@ -271,7 +274,7 @@ const DepositForm = compose<React.FC<OwnProps>>(
       amount: undefined,
       walletCurrency: "GVT"
     }),
-    validationSchema: (params: OwnProps & InjectedTranslateProps) =>
+    validationSchema: (params: IDepositProps & InjectedTranslateProps) =>
       params.role === ROLE.MANAGER
         ? managerSchema(params)
         : investorSchema(params),
@@ -284,7 +287,7 @@ const DepositForm = compose<React.FC<OwnProps>>(
 
 export default DepositForm;
 
-interface OwnProps {
+export interface IDepositProps {
   wallets: WalletBaseData[];
   role: ROLE;
   asset: ASSET;
@@ -299,7 +302,7 @@ interface OwnProps {
   ) => void;
 }
 
-interface FormValues {
+export interface IDepositFormValues {
   rate: number;
   availableToInvest?: number;
   availableInWallet?: number;
