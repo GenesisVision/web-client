@@ -51,7 +51,18 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     const { from, role, service, type } = this.props;
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
     if (isSubmit) {
-      if (pow && prefix) {
+      if (pow) {
+        if (prefix) {
+          service.login({
+            ...this.state,
+            from,
+            method,
+            type
+          });
+          this.setState({ pow: undefined });
+          this.setState({ isSubmit: false });
+        }
+      } else {
         service.login({
           ...this.state,
           from,
