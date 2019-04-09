@@ -32,6 +32,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     prefix: undefined,
     setSubmitting: undefined,
     isSubmit: false,
+    captchaType: "None",
     id: "",
     email: "",
     password: "",
@@ -47,27 +48,30 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     this.props.service.clearLoginData();
   }
   componentDidUpdate(): void {
-    const { isSubmit, pow, prefix } = this.state;
+    const { isSubmit, prefix, captchaType } = this.state;
     const { from, role, service, type } = this.props;
     const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
     if (isSubmit) {
-      if (pow) {
-        if (prefix) {
+      switch (captchaType) {
+        case "Pow":
+          if (prefix) {
+            service.login({
+              ...this.state,
+              from,
+              method,
+              type
+            });
+            this.setState({ pow: undefined });
+          }
+          break;
+        default:
           service.login({
             ...this.state,
             from,
             method,
             type
           });
-          this.setState({ pow: undefined });
-        }
-      } else {
-        service.login({
-          ...this.state,
-          from,
-          method,
-          type
-        });
+          break;
       }
       this.setState({ isSubmit: false });
     }
@@ -124,6 +128,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 interface State extends CaptchasType {
   isSubmit: boolean;
+  captchaType: string;
   setSubmitting?: SetSubmittingFuncType;
   id?: string;
   prefix?: number;
