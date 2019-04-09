@@ -62,7 +62,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
               method,
               type
             });
-            this.setState({ pow: undefined });
+            this.setState({ pow: undefined, isSubmit: false });
           }
           break;
         default:
@@ -72,9 +72,9 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
             method,
             type
           });
+          this.setState({ isSubmit: false });
           break;
       }
-      this.setState({ isSubmit: false });
     }
   }
   handlePow = (prefix: number) => {
