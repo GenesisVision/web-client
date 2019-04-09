@@ -83,14 +83,12 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   };
   render() {
     const { errorMessage, renderForm } = this.props;
-    const { pow, id } = this.state;
+    const { pow } = this.state;
     const email = this.state.email || this.props.email;
     return (
       <>
         {renderForm(this.handleSubmit, errorMessage)}
-        {pow && (
-          <Pow {...pow} id={id} email={email} handleSuccess={this.handlePow} />
-        )}
+        {pow && <Pow {...pow} login={email} handleSuccess={this.handlePow} />}
       </>
     );
   }

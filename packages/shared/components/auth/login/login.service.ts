@@ -12,8 +12,9 @@ import {
   storeTwoFactor
 } from "./login.actions";
 import { LOGIN_ROUTE, LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
+import { ResponseError } from "shared/utils/types";
 
-export const CLIENT_WEB = "Web";
+export const client = "Web";
 export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
@@ -28,9 +29,9 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
     method({
       email,
       password,
-      client: CLIENT_WEB,
-      twoFactorCode: type && type === CODE_TYPE.TWO_FACTOR && code,
-      recoveryCode: type && type === CODE_TYPE.RECOVERY && code,
+      client,
+      twoFactorCode: type === CODE_TYPE.TWO_FACTOR && code,
+      recoveryCode: type === CODE_TYPE.RECOVERY && code,
       loginCheckInfo: {
         id,
         poW: {
@@ -45,7 +46,7 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
       if (type) dispatch(clearTwoFactorData());
       dispatch(push(from));
     })
-    .catch((e: any) => {
+    .catch((e: ResponseError) => {
       if (e.code === "RequiresTwoFactor") {
         dispatch(
           storeTwoFactor({
