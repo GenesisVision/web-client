@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import { SetSubmittingType } from "shared/utils/types";
 
 import { ManagerRootState } from "../../reducers";
 import ChangePasswordTradingAccountForm, {
@@ -46,7 +47,7 @@ class ChangePasswordTradingAccountPopup extends Component<
 
   handleApply = (
     values: IChangePasswordTradingAccountFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ) => {
     const { id, service, onClose } = this.props;
     const model = {

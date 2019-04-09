@@ -18,6 +18,7 @@ import {
   convertToCurrency
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
+import { SetSubmittingType } from "shared/utils/types";
 
 import {
   investorSchema,
@@ -294,7 +295,7 @@ interface OwnProps {
   onSubmit: (
     amount: number,
     currency: string,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ) => void;
 }
 

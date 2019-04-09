@@ -3,6 +3,7 @@ import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React, { ComponentType, FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import { SetSubmittingType } from "shared/utils/types";
 
 import { ChangePasswordTradingAccountValidationSchema } from "./change-password-trading-account.validators";
 
@@ -12,7 +13,7 @@ interface IChangePasswordTradingAccountFormOwnProps {
   programName: string;
   onSubmit(
     values: IChangePasswordTradingAccountFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ): void;
 }
 

@@ -5,6 +5,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
+import { SetSubmittingType } from "shared/utils/types";
 import validationSchema from "./login-form.validators";
 import { FORGOT_PASSWORD_ROUTE } from "../login.routes";
 
@@ -57,10 +58,7 @@ const _LoginForm: React.FC<
 interface Props extends OwnProps, InjectedTranslateProps {}
 
 interface OwnProps {
-  onSubmit(
-    data: ILoginFormFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
-  ): void;
+  onSubmit(data: ILoginFormFormValues, setSubmitting: SetSubmittingType): void;
   error: string;
 }
 
