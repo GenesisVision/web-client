@@ -41,8 +41,7 @@ interface State extends CounterType {}
 
 interface Props extends PowDetails {
   handleSuccess: (prefix: number) => void;
-  email: string;
-  id: string;
+  login: string;
 }
 
 export default Pow;

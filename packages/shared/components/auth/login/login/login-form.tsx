@@ -6,20 +6,11 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import validationSchema from "./login-form.validators";
-import Pie from "shared/components/pie-container/pie";
-import { GVColors } from "gv-react-components";
+import { FORGOT_PASSWORD_ROUTE } from "../login.routes";
 
 const _LoginForm: React.FC<
   InjectedFormikProps<Props, ILoginFormFormValues>
-> = ({
-  t,
-  isSubmitting,
-  handleSubmit,
-  error,
-  isValid,
-  dirty,
-  FORGOT_PASSWORD_ROUTE
-}) => {
+> = ({ t, isSubmitting, handleSubmit, error, isValid }) => {
   return (
     <form
       id="loginForm"
@@ -63,6 +54,21 @@ const _LoginForm: React.FC<
   );
 };
 
+interface Props extends OwnProps, InjectedTranslateProps {}
+
+interface OwnProps {
+  onSubmit(
+    data: ILoginFormFormValues,
+    setSubmitting: (isSubmitting: boolean) => void
+  ): void;
+  error: string;
+}
+
+export interface ILoginFormFormValues {
+  email: string;
+  password: string;
+}
+
 const withTranslationAndFormik = compose<React.FC<OwnProps>>(
   React.memo,
   translate(),
@@ -79,21 +85,4 @@ const withTranslationAndFormik = compose<React.FC<OwnProps>>(
     }
   })
 )(_LoginForm);
-
-interface Props extends OwnProps, InjectedTranslateProps {}
-
-interface OwnProps {
-  onSubmit(
-    data: ILoginFormFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
-  ): void;
-  error: string;
-  FORGOT_PASSWORD_ROUTE: string;
-}
-
-export interface ILoginFormFormValues {
-  email: string;
-  password: string;
-}
-
 export default withTranslationAndFormik;

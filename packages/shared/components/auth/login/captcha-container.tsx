@@ -1,43 +1,65 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-
 import { ROLE } from "shared/constants/constants";
 import * as loginService from "./login.service";
-import { LoginService, SetSubmittingFuncType } from "./login.service";
+import {
+  clearLoginDataFuncType,
+  LoginFuncType,
+  LoginService,
+  SetSubmittingFuncType
+} from "./login.service";
 import * as authService from "../auth.service";
 import { CaptchasType } from "../auth.service";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import Pow from "../captcha/pow";
 import { replace } from "connected-react-router";
-import { NOT_FOUND_PAGE_ROUTE } from "../../not-found/not-found.routes";
+import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ILoginFormFormValues } from "./login/login-form";
-import { loginUserInvestor, loginUserManager } from "./login.actions";
+import {
+  CODE_TYPE,
+  loginUserInvestor,
+  loginUserManager
+} from "./login.actions";
+import { IRecoveryCodeFormValues } from "./recovery/recovery-code-form";
+import { ITwoFactorCodeFormValues } from "./two-factor/two-factor-code-form";
 
-class _LoginContainer extends React.PureComponent<Props, State> {
+class _CaptchaContainer extends React.PureComponent<Props, State> {
   state = {
     pow: undefined,
     geeTest: undefined,
-    isSubmit: undefined,
     prefix: undefined,
+    setSubmitting: undefined,
+    isSubmit: false,
     id: "",
     email: "",
     password: "",
-    setSubmitting: (val: boolean) => {}
+    code: ""
   };
+  componentDidMount() {
+    const { email, password, service, type } = this.props;
+    if (type !== undefined && (email === "" || password === "")) {
+      service.showNotFoundPage();
+    }
+  }
   componentWillUnmount() {
     this.props.service.clearLoginData();
   }
   componentDidUpdate(): void {
     const { isSubmit, pow, prefix } = this.state;
-    const { from, role, request } = this.props;
+    const { from, role, service, type } = this.props;
+    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
     if (isSubmit) {
       if (pow && prefix) {
-        const method =
-          role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
-        request({ ...this.state, from, method });
+        service.login({
+          ...this.state,
+          from,
+          method,
+          type
+        });
         this.setState({ pow: undefined });
+        this.setState({ isSubmit: false });
       }
     }
   }
@@ -48,24 +70,25 @@ class _LoginContainer extends React.PureComponent<Props, State> {
     loginFormData: { [keys: string]: any },
     setSubmitting: SetSubmittingFuncType
   ) => {
-    authService.getCaptcha(loginFormData.email).then(res => {
+    const email = loginFormData.email || this.props.email;
+    authService.getCaptcha(email).then(res => {
       this.setState({
         ...res,
         ...loginFormData,
+        email,
         setSubmitting,
         isSubmit: true
       });
     });
   };
   render() {
-    const { errorMessage, FORGOT_PASSWORD_ROUTE, renderForm } = this.props;
-    const { pow, id, email } = this.state;
+    const { errorMessage, renderForm } = this.props;
+    const { pow } = this.state;
+    const email = this.state.email || this.props.email;
     return (
       <>
-        {renderForm(this.handleSubmit, errorMessage, FORGOT_PASSWORD_ROUTE)}
-        {pow && (
-          <Pow {...pow} id={id} email={email} handleSuccess={this.handlePow} />
-        )}
+        {renderForm(this.handleSubmit, errorMessage)}
+        {pow && <Pow {...pow} login={email} handleSuccess={this.handlePow} />}
       </>
     );
   }
@@ -91,10 +114,13 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 interface State extends CaptchasType {
-  setSubmitting: SetSubmittingFuncType;
+  isSubmit: boolean;
+  setSubmitting?: SetSubmittingFuncType;
   id?: string;
   prefix?: number;
-  isSubmit?: boolean;
+  code?: string;
+  email?: string;
+  password?: string;
 }
 
 interface StateProps extends ILoginFormFormValues {
@@ -103,28 +129,38 @@ interface StateProps extends ILoginFormFormValues {
 }
 
 interface DispatchProps {
-  service: LoginService;
+  service: {
+    clearLoginData: clearLoginDataFuncType;
+    login: LoginFuncType;
+    showNotFoundPage: () => void;
+  };
 }
 
 interface OwnProps {
-  from: string;
   role: ROLE;
-  FORGOT_PASSWORD_ROUTE: string;
-  request: any;
   renderForm: (
     handle: (
-      loginFormData: Object,
+      loginFormData:
+        | ILoginFormFormValues
+        | IRecoveryCodeFormValues
+        | ITwoFactorCodeFormValues,
       setSubmitting: SetSubmittingFuncType
     ) => void,
-    errorMessage: string,
-    FORGOT_PASSWORD_ROUTE: string
+    errorMessage: string
   ) => JSX.Element;
+  from?: string;
+  type?: CODE_TYPE;
 }
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
 
-const LoginContainer = connect(
+const CaptchaContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  ManagerRootState | InvestorRootState
+>(
   mapStateToProps,
   mapDispatchToProps
-)(_LoginContainer);
-export default LoginContainer;
+)(_CaptchaContainer);
+export default CaptchaContainer;

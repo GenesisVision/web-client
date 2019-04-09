@@ -19,7 +19,7 @@ const _RecoveryCodeForm: React.FC<
       <h3>{t("auth.login.recovery.title")}</h3>
       <p className="recovery-form__text">{t("auth.login.recovery.text")}</p>
       <GVFormikField
-        name="recoveryCode"
+        name="code"
         placeholder="Recovery code"
         autoFocus
         component={GVTextField}
@@ -40,12 +40,15 @@ const _RecoveryCodeForm: React.FC<
 interface Props extends OwnProps, InjectedTranslateProps {}
 
 interface OwnProps {
-  onSubmit(data: string, setSubmitting: (isSubmitting: boolean) => void): void;
+  onSubmit(
+    data: IRecoveryCodeFormValues,
+    setSubmitting: (isSubmitting: boolean) => void
+  ): void;
   error: string;
 }
 
 export interface IRecoveryCodeFormValues {
-  recoveryCode: string;
+  code: string;
 }
 
 const RecoveryCodeForm = compose<React.FC<OwnProps>>(
@@ -54,16 +57,16 @@ const RecoveryCodeForm = compose<React.FC<OwnProps>>(
   withFormik<Props, IRecoveryCodeFormValues>({
     displayName: "recoveryForm",
     mapPropsToValues: () => ({
-      recoveryCode: ""
+      code: ""
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
-        recoveryCode: string()
+        code: string()
           .trim()
           .required(t("auth.login.recovery.validation.recovery-is-required"))
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values.recoveryCode, setSubmitting);
+      props.onSubmit(values, setSubmitting);
     }
   })
 )(_RecoveryCodeForm);
