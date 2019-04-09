@@ -18,8 +18,8 @@ const _ConfirmPopup: React.ComponentType<
   applyButtonText = t("buttons.apply"),
   cancelButtonText = t("buttons.cancel"),
   className,
-  disabled,
-  handleSubmit
+  handleSubmit,
+  isSubmitting
 }) => {
   return (
     <Dialog open={open} onClose={onClose} className={className}>
@@ -30,7 +30,7 @@ const _ConfirmPopup: React.ComponentType<
             <p>{body}</p>
           </div>
           <div className="dialog__buttons">
-            <GVButton type="submit" disabled={disabled}>
+            <GVButton type="submit" disabled={isSubmitting}>
               {applyButtonText}
             </GVButton>
             {onCancel && (

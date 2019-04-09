@@ -35,7 +35,8 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
   dirty,
   handleSubmit,
   programName,
-  errorMessage
+  errorMessage,
+  isSubmitting
 }) => {
   return (
     <form id="makeSignalForm" onSubmit={handleSubmit}>
@@ -58,7 +59,7 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
           <GVButton
             type="submit"
             id="programMakeSignalSubmit"
-            disabled={!dirty}
+            disabled={!dirty || isSubmitting}
           >
             {t("buttons.confirm")}
           </GVButton>

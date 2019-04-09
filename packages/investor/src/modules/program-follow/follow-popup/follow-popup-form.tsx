@@ -4,6 +4,7 @@ import { CopyTradingAccountInfo, WalletData, WalletInfo } from "gv-api-web";
 import * as React from "react";
 import { Fragment } from "react";
 import { TranslationFunction, translate } from "react-i18next";
+import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams from "./follow-popup-params";
@@ -64,23 +65,22 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
       signalAccounts.find((account: any) => account.currency === currency);
     if (signalAccount) this.setState({ step: TABS.PARAMS });
   }
-  submit = (values: IRequestParams) => {
+  submit = (values: IRequestParams, setSubmitting: SetSubmittingType) => {
     const { t, handleSubmit, id, alertError, alertSuccess } = this.props;
-    this.setState(
-      {
-        requestParams: { ...this.state.requestParams, ...values }
-      },
-      () =>
-        this.props.submitMethod(id, this.state.requestParams).then(
-          (res: any) => {
-            alertSuccess(t("follow-program.success-alert-message"));
-            handleSubmit();
-          },
-          (errors: any) => {
-            alertError(errors.errorMessage);
-          }
-        )
-    );
+    let requestParams = { ...this.state.requestParams, ...values };
+    this.setState({
+      requestParams
+    });
+    this.props
+      .submitMethod(id, this.state.requestParams)
+      .then(() => {
+        alertSuccess(t("follow-program.success-alert-message"));
+        handleSubmit();
+      })
+      .catch((errors: ResponseError) => {
+        alertError(errors.errorMessage);
+        setSubmitting(false);
+      });
   };
   render() {
     const { signalAccounts, wallets, currency, programName } = this.props;
@@ -99,7 +99,7 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
         )}
         {step === TABS.PARAMS && (
           <FollowParams
-            onClick={this.submit}
+            onSubmit={this.submit}
             onPrevStep={this.returnToCreateCopytradingAccount}
           />
         )}

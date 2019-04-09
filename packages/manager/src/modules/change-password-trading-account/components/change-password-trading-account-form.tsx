@@ -42,7 +42,8 @@ const ChangePasswordTradingAccountForm: FunctionComponent<
   programName,
   handleSubmit,
   errorMessage,
-  twoFactorEnabled
+  twoFactorEnabled,
+  isSubmitting
 }) => {
   return (
     <form id="change-password-trading-account" onSubmit={handleSubmit}>
@@ -78,7 +79,7 @@ const ChangePasswordTradingAccountForm: FunctionComponent<
         )}
         <div className="form-error">{errorMessage}</div>
         <div className="dialog__buttons">
-          <GVButton type="submit" disabled={!isValid || !dirty}>
+          <GVButton type="submit" disabled={!isValid || !dirty || isSubmitting}>
             {t("buttons.confirm")}
           </GVButton>
         </div>

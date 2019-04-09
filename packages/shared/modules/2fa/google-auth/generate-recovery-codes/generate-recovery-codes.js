@@ -12,7 +12,6 @@ import GenerateRecoveryWithFormik from "./generate-recovery-form";
 class GenerateRecoveryCode extends Component {
   state = {
     isOpenPopup: false,
-    isPending: false,
     data: null,
     errorMessage: null
   };
@@ -22,14 +21,18 @@ class GenerateRecoveryCode extends Component {
   handleClose = () => {
     this.setState({ isOpenPopup: false, data: null });
   };
-  handleSubmit = values => {
-    this.setState({ isPending: true });
+  handleSubmit = (values, setSubmitting) => {
     authApi
       .v10Auth2faRecoverycodesNewPost(authService.getAuthArg(), {
         model: values
       })
-      .then(data => this.setState({ data }))
-      .catch(data => this.setState({ data }));
+      .then(data => {
+        this.setState({ data });
+      })
+      .catch(err => {
+        this.setState({ errorMessage: err.errorMessage });
+        setSubmitting(false);
+      });
   };
 
   render() {
@@ -45,7 +48,6 @@ class GenerateRecoveryCode extends Component {
           ) : (
             <GenerateRecoveryWithFormik
               onSubmit={this.handleSubmit}
-              disabled={this.state.isPending}
               errorMessage={this.state.errorMessage}
             />
           )}

@@ -17,23 +17,18 @@ class WalletTransferContainer extends React.Component<
   State
 > {
   state = {
-    isPending: false,
     errorMessage: undefined
   };
 
   handleSubmit = (values: TransferFormValuesType) => {
-    this.setState({ isPending: true });
     walletTransferRequest({ ...values })
       .then(() => {
-        this.setState({ isPending: false }, () => {
-          this.props.onClose();
-          this.props.service.fetchWallets();
-          this.props.service.updateWalletTimestamp();
-        });
+        this.props.onClose();
+        this.props.service.fetchWallets();
+        this.props.service.updateWalletTimestamp();
       })
       .catch((error: any) => {
         this.setState({
-          isPending: false,
           errorMessage: error.errorMessage
         });
       });
@@ -47,7 +42,6 @@ class WalletTransferContainer extends React.Component<
       <WalletTransferForm
         wallets={wallets}
         currentWallet={currentWallet}
-        disabled={this.state.isPending}
         errorMessage={this.state.errorMessage}
         onSubmit={this.handleSubmit}
       />
@@ -91,6 +85,5 @@ interface OwnProps {
 }
 
 interface State {
-  isPending: boolean;
   errorMessage?: string;
 }
