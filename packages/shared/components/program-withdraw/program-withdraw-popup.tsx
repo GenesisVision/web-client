@@ -2,7 +2,7 @@ import { ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import { ResponseError } from "shared/utils/types";
+import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import ProgramWithdrawAmountForm from "./program-withdraw-amount-form";
 import ProgramWithdrawConfirmForm from "./program-withdraw-confirm-form";
@@ -19,7 +19,6 @@ class _ProgramWithdrawPopup extends React.Component<
 > {
   state: State = {
     step: PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT,
-    isPending: false,
     rate: 1,
     errorMessage: undefined,
     periodEnds: undefined,
@@ -30,7 +29,6 @@ class _ProgramWithdrawPopup extends React.Component<
 
   componentDidMount() {
     const { fetchInfo } = this.props;
-    this.setState({ isPending: true });
     fetchInfo()
       .then(data => {
         const { periodEnds, title, availableToWithdraw, rate } = data;
@@ -38,25 +36,24 @@ class _ProgramWithdrawPopup extends React.Component<
           periodEnds,
           title,
           availableToWithdraw,
-          rate,
-          isPending: false
+          rate
         });
       })
       .catch((error: ResponseError) =>
-        this.setState({ errorMessage: error.errorMessage, isPending: false })
+        this.setState({ errorMessage: error.errorMessage })
       );
   }
 
-  handleSubmit = () => {
+  handleSubmit = (setSubmitting: SetSubmittingType) => {
     const { withdraw } = this.props;
     const { amount } = this.state;
-    this.setState({ isPending: true });
 
     if (!amount) return;
     return withdraw({
       amount
     }).catch((error: ResponseError) => {
-      this.setState({ isPending: false, errorMessage: error.errorMessage });
+      this.setState({ errorMessage: error.errorMessage });
+      setSubmitting(false);
     });
   };
 
@@ -81,7 +78,6 @@ class _ProgramWithdrawPopup extends React.Component<
       periodEnds,
       rate,
       errorMessage,
-      isPending,
       step,
       amount
     } = this.state;
@@ -110,7 +106,6 @@ class _ProgramWithdrawPopup extends React.Component<
           {step === PROGRAM_WITHDRAW_FORM.CONFIRM && amount && (
             <ProgramWithdrawConfirmForm
               errorMessage={errorMessage}
-              isPending={isPending}
               amount={amount}
               onSubmit={this.handleSubmit}
               onBackClick={this.goToEnterAmountStep}
@@ -141,7 +136,6 @@ export type ProgramWithdrawType = {
 };
 
 interface State {
-  isPending: boolean;
   errorMessage?: string;
   step: PROGRAM_WITHDRAW_FORM;
   rate: number;

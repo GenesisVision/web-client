@@ -10,33 +10,30 @@ import WalletWithdrawRequest from "./wallet-withdraw-request/wallet-withdraw-req
 
 class WalletWithdrawContainer extends Component {
   state = {
-    isPending: false,
     errorMessage: null,
     success: false
   };
 
-  handleSubmit = values => {
-    this.setState({ isPending: true });
+  handleSubmit = (values, setSubmitting) => {
     this.props.service
       .newWithdrawRequest({ ...values, amount: Number(values.amount) })
       .then(() => {
         this.setState({
-          isPending: false,
           success: true
         });
         this.props.service.updateWalletTimestamp();
       })
       .catch(error => {
         this.setState({
-          isPending: false,
           success: false,
           errorMessage: error.errorMessage
         });
+        setSubmitting(false);
       });
   };
 
   render() {
-    const { isPending, errorMessage, success } = this.state;
+    const { errorMessage, success } = this.state;
     const { twoFactorEnabled, wallets, currentWallet } = this.props;
 
     if (!wallets.length) return <DialogLoader />;
@@ -49,7 +46,6 @@ class WalletWithdrawContainer extends Component {
       <WalletWithdrawForm
         wallets={enabledWallets}
         currentWallet={currentWallet}
-        disabled={isPending}
         errorMessage={errorMessage}
         onSubmit={this.handleSubmit}
         twoFactorEnabled={twoFactorEnabled}

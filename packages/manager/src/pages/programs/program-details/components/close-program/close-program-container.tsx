@@ -1,9 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Action, Dispatch, bindActionCreators } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { closeProgram } from "shared/components/programs/program-details/services/program-details.service";
 import RootState from "shared/reducers/root-reducer";
+import { SetSubmittingType } from "shared/utils/types";
 
 import CloseProgramForm, {
   ICloseProgramFormValues
@@ -16,10 +17,21 @@ class CloseProgramContainer extends React.Component<
     const { onClose } = this.props;
     onClose();
   };
-  handleSubmit = (data: ICloseProgramFormValues) => {
+  handleSubmit = (
+    data: ICloseProgramFormValues,
+    setSubmitting: SetSubmittingType
+  ) => {
     const { service, onApply, id, onClose } = this.props;
-    onClose();
-    service.closeProgram(onApply, id, { twoFactorCode: data.twoFactorCode });
+    const applyFn = () => {
+      onApply();
+      onClose();
+    };
+    const errorFn = () => {
+      setSubmitting(false);
+    };
+    service.closeProgram(applyFn, errorFn, id, {
+      twoFactorCode: data.twoFactorCode
+    });
   };
 
   render() {
@@ -60,7 +72,6 @@ export default connect(
 interface OwnProps {
   open: boolean;
   onClose(): void;
-  onCancel(): void;
   onApply(): void;
   id: string;
 }
@@ -73,10 +84,11 @@ interface DispatchProps {
   service: {
     closeProgram(
       onSuccess: () => void,
+      onError: () => void,
       programId: string,
       opts?: {
         twoFactorCode?: string | undefined;
       }
-    ): Promise<void>;
+    ): void;
   };
 }

@@ -7,7 +7,7 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object, string } from "yup";
 
-const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
+const DisableAuth = ({ t, handleSubmit, errorMessage, isSubmitting }) => {
   return (
     <form
       id="disable-auth"
@@ -40,7 +40,7 @@ const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
           variant="contained"
           color="primary"
           type="submit"
-          disabled={disabled}
+          disabled={isSubmitting}
         >
           {t("buttons.disable")}
         </GVButton>
@@ -62,8 +62,8 @@ const DisableAuthForm = compose(
         twoFactorCode: number().required(t("2fa-page.code-required")),
         password: string().required(t("2fa-page.password-required"))
       }),
-    handleSubmit: (values, { props }) => {
-      props.onSubmit(values);
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
     }
   })
 )(DisableAuth);

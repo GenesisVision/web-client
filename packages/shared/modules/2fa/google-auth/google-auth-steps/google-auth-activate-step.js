@@ -7,7 +7,12 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object, string } from "yup";
 
-export const GoogleStep3 = ({ t, handleSubmit, errorMessage, disabled }) => {
+export const GoogleStep3 = ({
+  t,
+  handleSubmit,
+  errorMessage,
+  isSubmitting
+}) => {
   return (
     <div className="google-auth__step">
       <div className="google-auth__count">03</div>
@@ -37,7 +42,7 @@ export const GoogleStep3 = ({ t, handleSubmit, errorMessage, disabled }) => {
           variant="contained"
           color="primary"
           type="submit"
-          disabled={disabled}
+          disabled={isSubmitting}
         >
           {t("buttons.activate")}
         </GVButton>
@@ -59,15 +64,14 @@ const GoogleActivateStep = compose(
         code: number().required(t("2fa-page.code-required")),
         password: string().required(t("2fa-page.password-required"))
       }),
-    handleSubmit: (values, { props }) => {
-      props.onSubmit(values);
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
     }
   })
 )(GoogleStep3);
 
 GoogleActivateStep.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  disabled: PropTypes.bool,
   errorMessage: PropTypes.string
 };
 

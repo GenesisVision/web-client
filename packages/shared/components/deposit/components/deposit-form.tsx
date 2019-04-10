@@ -18,6 +18,7 @@ import {
   convertToCurrency
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
+import { SetSubmittingType } from "shared/utils/types";
 
 import {
   investorSchema,
@@ -108,8 +109,8 @@ class _DepositForm extends React.PureComponent<
     const { availableInWallet, availableToInvest, walletCurrency } = values;
     const max = formatCurrencyValue(
       role === ROLE.INVESTOR
-        ? Math.min(availableInWallet, availableToInvest)
-        : availableInWallet,
+        ? Math.min(availableInWallet || 0, availableToInvest || 0)
+        : availableInWallet || 0,
       walletCurrency
     );
     setFieldValue("amount", max);
@@ -269,11 +270,9 @@ const DepositForm = compose<React.FC<IDepositProps>>(
     displayName: "invest-form",
     mapPropsToValues: () => ({
       rate: 1,
-      maxAmount: 0,
+      maxAmount: undefined,
       amount: undefined,
-      walletCurrency: "GVT",
-      availableToInvest: 0,
-      availableInWallet: 0
+      walletCurrency: "GVT"
     }),
     validationSchema: (params: IDepositProps & InjectedTranslateProps) =>
       params.role === ROLE.MANAGER
@@ -299,14 +298,14 @@ export interface IDepositProps {
   onSubmit: (
     amount: number,
     currency: string,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ) => void;
 }
 
 export interface IDepositFormValues {
   rate: number;
-  availableToInvest: number;
-  availableInWallet: number;
+  availableToInvest?: number;
+  availableInWallet?: number;
   amount?: number;
   walletCurrency: string;
 }

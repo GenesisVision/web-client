@@ -4,6 +4,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
+import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
 const _RecoveryCodeForm: React.FC<
@@ -42,7 +43,7 @@ interface Props extends OwnProps, InjectedTranslateProps {}
 interface OwnProps {
   onSubmit(
     data: IRecoveryCodeFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ): void;
   error: string;
 }

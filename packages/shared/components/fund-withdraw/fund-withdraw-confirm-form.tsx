@@ -5,6 +5,7 @@ import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import { formatValue } from "shared/utils/formatter";
+import { SetSubmittingType } from "shared/utils/types";
 
 import FormError from "../form/form-error/form-error";
 import FundWithdrawResult from "./fund-withdraw-result";
@@ -14,9 +15,8 @@ interface IFundWithdrawConfirmFormOwnProps {
   percent: number;
   currency: string;
   exitFee: number;
-  isPending: boolean;
   errorMessage?: string;
-  onSubmit(): void;
+  onSubmit(setSubmitting: SetSubmittingType): void;
   onBackClick(): void;
 }
 
@@ -34,7 +34,7 @@ class FundWithdrawConfirmForm extends PureComponent<
       percent,
       currency,
       exitFee,
-      isPending,
+      isSubmitting,
       errorMessage,
       handleSubmit,
       onBackClick
@@ -69,7 +69,7 @@ class FundWithdrawConfirmForm extends PureComponent<
           <GVButton
             type="submit"
             id="fundWithdrawFormSubmit"
-            disabled={isPending}
+            disabled={isSubmitting}
           >
             {t("buttons.confirm")}
           </GVButton>
@@ -83,8 +83,8 @@ export default compose<ComponentType<IFundWithdrawConfirmFormOwnProps>>(
   translate(),
   withFormik<IFundWithdrawConfirmFormProps, {}>({
     displayName: "withdraw-form",
-    handleSubmit: (_, { props }) => {
-      props.onSubmit();
+    handleSubmit: (_, { props, setSubmitting }) => {
+      props.onSubmit(setSubmitting);
     }
   })
 )(FundWithdrawConfirmForm);

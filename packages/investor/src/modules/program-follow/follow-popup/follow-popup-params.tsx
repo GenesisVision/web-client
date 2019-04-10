@@ -1,10 +1,11 @@
-import { FormikProps, withFormik } from "formik";
+import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
+import { SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
 
 import { IRequestParams } from "./follow-popup-form";
@@ -20,12 +21,6 @@ const modes: { [key: string]: mode } = {
   fixed: { label: "Fixed", value: "Fixed" }
 };
 
-interface IFollowParamsProps {
-  errors?: any;
-  values?: FormValues;
-  t: TranslationFunction;
-}
-
 interface FormValues {
   mode: string;
   openTolerancePercent: number;
@@ -34,30 +29,25 @@ interface FormValues {
 }
 
 interface IFollowParamsOwnProps {
-  onClick: (values: IRequestParams) => void;
+  onSubmit: (values: IRequestParams, setSubmitting: SetSubmittingType) => void;
   onPrevStep(): void;
 }
 
-type OwnProps = IFollowParamsOwnProps &
-  IFollowParamsProps &
-  FormikProps<FormValues>;
-class FollowParams extends React.Component<OwnProps> {
-  constructor(props: OwnProps) {
-    super(props);
-  }
-  handleSubmit = () => {
-    const { onClick, values } = this.props;
-    onClick(values);
-  };
+interface Props extends IFollowParamsOwnProps, InjectedTranslateProps {}
+
+class FollowParams extends React.PureComponent<
+  InjectedFormikProps<Props, FormValues>
+> {
   render() {
     const {
       t,
       setFieldValue,
-      errors,
+      isSubmitting,
       onPrevStep,
       isValid,
       dirty,
-      values
+      values,
+      handleSubmit
     } = this.props;
     const { openTolerancePercent, mode } = values;
     const setMaxOpenTolerancePercent = () => {
@@ -73,14 +63,14 @@ class FollowParams extends React.Component<OwnProps> {
       // return true;
     };
     const disableButton = () => {
-      return (
-        errors.amount !== undefined ||
-        (dirty && !isValid) ||
-        +openTolerancePercent <= 0
-      );
+      return isSubmitting || dirty || !isValid;
     };
     return (
-      <form className="dialog__bottom" id="follow-params">
+      <form
+        className="dialog__bottom"
+        id="follow-params"
+        onSubmit={handleSubmit}
+      >
         <div className="dialog-field">
           <GVFormikField
             name="mode"
@@ -130,7 +120,6 @@ class FollowParams extends React.Component<OwnProps> {
             {t("follow-program.params.back")}
           </GVButton>
           <GVButton
-            onClick={this.handleSubmit}
             className="invest-form__submit-button"
             disabled={disableButton()}
           >
@@ -144,17 +133,17 @@ class FollowParams extends React.Component<OwnProps> {
 
 export default compose<React.ComponentType<IFollowParamsOwnProps>>(
   translate(),
-  withFormik({
+  withFormik<Props, FormValues>({
     displayName: "follow-params",
     mapPropsToValues: () => {
       return {
         mode: modes.byBalance.value,
-        openTolerancePercent: "0.5",
-        fixedVolume: "100",
-        percent: "10"
+        openTolerancePercent: 0.5,
+        fixedVolume: 100,
+        percent: 10
       };
     },
-    validationSchema: ({ t }: { t: TranslationFunction }) =>
+    validationSchema: ({ t }: Props) =>
       object().shape({
         fixedVolume: number()
           .min(0, t("follow-program.params.validation.fixedVolume-min"))
@@ -170,8 +159,8 @@ export default compose<React.ComponentType<IFollowParamsOwnProps>>(
             t("follow-program.params.validation.tolerance-percent-min")
           )
       }),
-    handleSubmit: (values, { props }) => {
-      // props.onSubmit(values);
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
     }
   })
 )(FollowParams);

@@ -6,8 +6,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import { formatCurrencyValue } from "shared/utils/formatter";
-
-import ProgramWithdrawAmountForm from "./program-withdraw-amount-form";
+import { SetSubmittingType } from "shared/utils/types";
 
 class _ProgramWithdrawConfirmForm extends React.PureComponent<
   InjectedFormikProps<Props, {}>
@@ -18,7 +17,7 @@ class _ProgramWithdrawConfirmForm extends React.PureComponent<
       programCurrency,
       amount,
       periodEnds,
-      isPending,
+      isSubmitting,
       errorMessage,
       handleSubmit,
       onBackClick
@@ -55,7 +54,7 @@ class _ProgramWithdrawConfirmForm extends React.PureComponent<
             title={"submit"}
             type={"submit"}
             id="programWithdrawFormSubmit"
-            disabled={isPending}
+            disabled={isSubmitting}
           >
             {t("withdraw-program.submit")}
           </GVButton>
@@ -69,8 +68,8 @@ const ProgramWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<Props, {}>({
     displayName: "withdraw-submit-form",
-    handleSubmit: (_, { props }) => {
-      props.onSubmit();
+    handleSubmit: (_, { props, setSubmitting }) => {
+      props.onSubmit(setSubmitting);
     }
   })
 )(_ProgramWithdrawConfirmForm);
@@ -78,9 +77,8 @@ const ProgramWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
 export default ProgramWithdrawConfirmForm;
 
 interface OwnProps {
-  isPending: boolean;
   errorMessage?: string;
-  onSubmit(): void;
+  onSubmit(setSubmitting: SetSubmittingType): void;
   onBackClick(): void;
   amount: number;
   periodEnds: Date;

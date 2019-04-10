@@ -9,23 +9,22 @@ import AboutForm from "./about-form";
 
 class About extends Component {
   state = {
-    isPending: false,
     errorMessage: null
   };
-  handleSubmit = model => {
-    this.setState({ isPending: true });
+  handleSubmit = (model, setSubmitting) => {
     profileApi
       .v10ProfileUpdatePost(authService.getAuthArg(), {
         model
       })
       .then(data => {
-        this.setState({ data, isPending: false }, () => {
+        this.setState({ data }, () => {
           history.push(PROFILE_ROUTE);
         });
       })
-      .catch(error =>
-        this.setState({ errorMessage: error.errorMessage, isPending: false })
-      );
+      .catch(error => {
+        this.setState({ errorMessage: error.errorMessage });
+        setSubmitting(false);
+      });
   };
   render() {
     return (
@@ -33,7 +32,6 @@ class About extends Component {
         onSubmit={this.handleSubmit}
         {...this.props}
         errorMessage={this.state.errorMessage}
-        disabled={this.state.isPending}
       />
     );
   }

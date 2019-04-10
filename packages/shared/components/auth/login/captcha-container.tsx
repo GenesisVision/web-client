@@ -6,8 +6,7 @@ import * as loginService from "./login.service";
 import {
   clearLoginDataFuncType,
   LoginFuncType,
-  LoginService,
-  SetSubmittingFuncType
+  LoginService
 } from "./login.service";
 import * as authService from "../auth.service";
 import { CaptchasType } from "../auth.service";
@@ -24,6 +23,7 @@ import {
 } from "./login.actions";
 import { IRecoveryCodeFormValues } from "./recovery/recovery-code-form";
 import { ITwoFactorCodeFormValues } from "./two-factor/two-factor-code-form";
+import { SetSubmittingType } from "shared/utils/types";
 
 class _CaptchaContainer extends React.PureComponent<Props, State> {
   state = {
@@ -82,7 +82,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   };
   handleSubmit = (
     loginFormData: { [keys: string]: any },
-    setSubmitting: SetSubmittingFuncType
+    setSubmitting: SetSubmittingType
   ) => {
     const email = loginFormData.email || this.props.email;
     authService.getCaptcha(email).then(res => {
@@ -130,7 +130,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 interface State extends CaptchasType {
   isSubmit: boolean;
   captchaType: string;
-  setSubmitting?: SetSubmittingFuncType;
+  setSubmitting?: SetSubmittingType;
   id?: string;
   prefix?: number;
   code?: string;
@@ -158,7 +158,7 @@ interface OwnProps {
         | ILoginFormFormValues
         | IRecoveryCodeFormValues
         | ITwoFactorCodeFormValues,
-      setSubmitting: SetSubmittingFuncType
+      setSubmitting: SetSubmittingType
     ) => void,
     errorMessage: string
   ) => JSX.Element;

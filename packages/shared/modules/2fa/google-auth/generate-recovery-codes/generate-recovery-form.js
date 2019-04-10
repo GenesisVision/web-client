@@ -6,7 +6,12 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { object, string } from "yup";
 
-const GenerateRecoveryForm = ({ t, handleSubmit, errorMessage, disabled }) => {
+const GenerateRecoveryForm = ({
+  t,
+  handleSubmit,
+  errorMessage,
+  isSubmitting
+}) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -31,7 +36,7 @@ const GenerateRecoveryForm = ({ t, handleSubmit, errorMessage, disabled }) => {
             variant="contained"
             color="primary"
             type="submit"
-            disabled={disabled}
+            disabled={isSubmitting}
           >
             {t("buttons.generate")}
           </GVButton>
@@ -52,8 +57,8 @@ const GenerateRecoveryWithFormik = compose(
       object().shape({
         password: string().required(t("2fa-page.password-required"))
       }),
-    handleSubmit: (values, { props }) => {
-      props.onSubmit(values);
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
     }
   })
 )(GenerateRecoveryForm);
