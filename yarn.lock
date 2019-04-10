@@ -5550,8 +5550,8 @@ gud@^1.0.0:
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.455"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#36d339c467c6a56ab20a9f293bddf533b7df75fa"
+  version "1.0.458"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#b07c8162bc58af214326991470e248ee07fd94f4"
   dependencies:
     querystring "0.2.0"
     superagent "^4.1.0"
@@ -10249,7 +10249,7 @@ react-onclickoutside@^6.7.1:
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.7.1.tgz#6a5b5b8b4eae6b776259712c89c8a2b36b17be93"
   integrity sha512-p84kBqGaMoa7VYT0vZ/aOYRfJB+gw34yjpda1Z5KeLflg70HipZOT+MXQenEhdkPAABuE2Astq4zEPdMqUQxcg==
 
-react-popper@^0.10.4:
+react-popper@^0.10.1:
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.10.4.tgz#af2a415ea22291edd504678d7afda8a6ee3295aa"
   integrity sha1-rypBXqIike3VBGeNev2opu4ylao=
