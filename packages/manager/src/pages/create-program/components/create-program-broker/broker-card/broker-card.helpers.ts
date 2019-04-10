@@ -6,7 +6,7 @@ import Just2tradeLogo from "../../../media/j2t.png";
 import OKExLogo from "../../../media/okex.png";
 import RoboforexLogo from "../../../media/roboforex.png";
 
-export const getBrokerCardImage = (name: string): string | null => {
+export const getBrokerCardImage = (name: string): string | undefined => {
   const brokerName = slugBrokerName(name);
   switch (brokerName) {
     case "genesis-markets":
@@ -24,7 +24,7 @@ export const getBrokerCardImage = (name: string): string | null => {
     case "exante":
       return ExanteLogo;
     default:
-      return null;
+      return undefined;
   }
 };
 

@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_constants.scss";
+
 .navigation {
   display: flex;
   flex-direction: row;
@@ -40,12 +41,17 @@
   }
 
   &__item {
+    @include transition(opacity);
     display: flex;
     align-items: center;
     padding: 15px 32px;
     text-decoration: none;
     position: relative;
     opacity: 0.4;
+
+    &:hover {
+      opacity: 1;
+    }
 
     &--active {
       opacity: 1;

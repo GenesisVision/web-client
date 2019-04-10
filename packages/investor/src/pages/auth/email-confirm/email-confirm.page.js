@@ -1,5 +1,5 @@
 import { HOME_ROUTE } from "pages/app/app.routes";
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import qs from "qs";
 import React from "react";
 import { translate } from "react-i18next";

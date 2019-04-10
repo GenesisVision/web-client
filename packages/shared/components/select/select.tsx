@@ -8,40 +8,12 @@ import Popover, {
 } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
-import { Nullable } from "shared/utils/types";
 
 import SelectItem from "./select-item";
 
-export interface OnChangeEvent {
-  target: { value: string; name: string };
-}
-
-interface ChildOwnProps {
-  value: string;
-  key: string;
-  children: string;
-}
-
-interface SelectChild extends React.ReactElement<ChildOwnProps> {}
-
-interface ISelectProps {
-  value: string;
-  onChange(event: OnChangeEvent, child: JSX.Element): void;
-  name: string;
-  className?: string;
-  fullWidthPopover?: boolean;
-  onFocus?(event: React.FocusEvent<HTMLButtonElement>): void;
-  onBlur?(event: React.FocusEvent<HTMLButtonElement>): void;
-  disabled?: boolean;
-  children: SelectChild[];
-}
-interface ISelectState {
-  anchor: Nullable<EventTarget>;
-}
-
-class Select extends React.Component<ISelectProps, ISelectState> {
+class Select extends React.PureComponent<Props, State> {
   state = {
-    anchor: null
+    anchor: undefined
   };
 
   input: RefObject<HTMLButtonElement> = React.createRef();
@@ -53,11 +25,17 @@ class Select extends React.Component<ISelectProps, ISelectState> {
   componentDidUpdate() {
     this.setDefaultValue();
   }
+
+  isDisabled = () => {
+    const { disabled, disableIfSingle, children } = this.props;
+    return (disableIfSingle && children.length === 1) || disabled;
+  };
+
   handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
     event.preventDefault();
-    if (this.props.disabled) return;
+    if (this.isDisabled()) return;
     this.input.current && this.input.current.focus();
     this.setState({ anchor: event.currentTarget });
   };
@@ -73,7 +51,7 @@ class Select extends React.Component<ISelectProps, ISelectState> {
     const { value } = child.props;
     if (!isSelected) {
       event.persist();
-      const ChangeEvent: OnChangeEvent = {
+      const ChangeEvent: ISelectChangeEvent = {
         target: { value, name }
       };
       if (onChange) {
@@ -85,32 +63,32 @@ class Select extends React.Component<ISelectProps, ISelectState> {
   };
 
   handleBlur = (event: React.FocusEvent<HTMLButtonElement>): void => {
-    const { disabled, onBlur } = this.props;
-    if (disabled) return;
+    const { onBlur } = this.props;
+    if (this.isDisabled()) return;
     if (onBlur) {
       onBlur(event);
     }
   };
 
   handleFocus = (event: React.FocusEvent<HTMLButtonElement>): void => {
-    const { disabled, onFocus } = this.props;
-    if (disabled) return;
+    const { onFocus } = this.props;
+    if (this.isDisabled()) return;
     if (onFocus) {
       onFocus(event);
     }
   };
 
   handleClose = (): void => {
-    this.setState({ anchor: null });
+    this.setState({ anchor: undefined });
   };
 
   setDefaultValue(): void {
     const { name, onChange, value } = this.props;
-    if (value && value.length) return;
+    if (value !== undefined) return;
     const children = this.props.children;
     const child = children[0];
     if (child && children.length === 1) {
-      const event: OnChangeEvent = {
+      const event: ISelectChangeEvent = {
         target: { value: child.props.value, name }
       };
       onChange(event, child);
@@ -122,8 +100,9 @@ class Select extends React.Component<ISelectProps, ISelectState> {
 
     const items = this.props.children.map(child => {
       const isSelected =
+        this.props.value !== undefined &&
         child.props.value.toString().toLowerCase() ===
-        this.props.value.toString().toLowerCase();
+          this.props.value.toString().toLowerCase();
       if (isSelected) displayValue = child.props.children;
       const { name } = this.props;
       return (
@@ -141,7 +120,7 @@ class Select extends React.Component<ISelectProps, ISelectState> {
     return (
       <div
         className={classNames("select", this.props.className, {
-          "select--disabled": this.props.disabled
+          "select--disabled": this.isDisabled()
         })}
       >
         <button
@@ -174,3 +153,32 @@ class Select extends React.Component<ISelectProps, ISelectState> {
 }
 
 export default Select;
+
+export interface ISelectChangeEvent {
+  target: { value: string; name: string };
+}
+
+interface ChildOwnProps {
+  value: string;
+  key: string;
+  children: string;
+}
+
+interface SelectChild extends React.ReactElement<ChildOwnProps> {}
+
+interface Props {
+  value: string;
+  name: string;
+  className?: string;
+  fullWidthPopover?: boolean;
+  disabled?: boolean;
+  disableIfSingle?: boolean;
+  children: SelectChild[];
+  onChange(event: ISelectChangeEvent, child: JSX.Element): void;
+  onFocus?(event: React.FocusEvent<HTMLButtonElement>): void;
+  onBlur?(event: React.FocusEvent<HTMLButtonElement>): void;
+}
+
+interface State {
+  anchor?: EventTarget;
+}

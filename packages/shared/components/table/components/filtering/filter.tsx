@@ -6,10 +6,9 @@ import * as React from "react";
 import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import { Nullable } from "shared/utils/types";
 
-import FilterArrowIcon from "./filter-arrow-icon";
 import { IUpdateFilterFunc } from "../table.types";
+import FilterArrowIcon from "./filter-arrow-icon";
 
 interface IFilterProps {
   label: string;
@@ -20,17 +19,17 @@ interface IFilterProps {
 }
 
 interface IFilterState {
-  anchor: Nullable<EventTarget>;
+  anchor?: EventTarget;
 }
 
 class Filter extends React.PureComponent<IFilterProps, IFilterState> {
   state = {
-    anchor: null
+    anchor: undefined
   };
 
   handleOpenPopover = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
     this.setState({ anchor: event.currentTarget });
-  handleClosePopover = () => this.setState({ anchor: null });
+  handleClosePopover = () => this.setState({ anchor: undefined });
   handleChangeFilter = (value: any) => {
     this.handleClosePopover();
     this.props.updateFilter &&

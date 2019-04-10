@@ -1,10 +1,10 @@
+import { FundsList } from "gv-api-web";
+import { SET_FAVORITE_FUND } from "shared/modules/favorite-asset/actions/favorite-fund.actions";
 import {
   FAILURE_SUFFIX,
   IApiState,
   REQUEST_SUFFIX
 } from "shared/reducers/api-reducer/api-reducer";
-import { FundsList } from "gv-api-web";
-import { SET_FAVORITE_FUND } from "shared/modules/favorite-asset/actions/favorite-fund.actions";
 
 const updateFavoriteLocal = (
   state: IApiState<FundsList>,
@@ -15,7 +15,7 @@ const updateFavoriteLocal = (
     ...state,
     data: {
       ...state.data,
-      total: (state.data && state.data.funds.length) || 0,
+      total: (state.data && state.data.total) || 0,
       funds:
         (state.data &&
           state.data.funds.map(fund => {

@@ -78,7 +78,8 @@ class ReallocateForm extends Component {
       isValid,
       dirty,
       errors,
-      errorMessage
+      errorMessage,
+      isSubmitting
     } = this.props;
     return (
       <form
@@ -113,7 +114,10 @@ class ReallocateForm extends Component {
           <FormError error={errorMessage} />
         </div>
         <div className="dialog__buttons">
-          <GVButton type={"submit"} disabled={!isValid || !dirty}>
+          <GVButton
+            type={"submit"}
+            disabled={!isValid || !dirty || isSubmitting}
+          >
             {t("manager.reallocate.apply")}
           </GVButton>
         </div>

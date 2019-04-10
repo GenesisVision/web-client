@@ -9,31 +9,35 @@ import { editAsset } from "./services/asset-edit.services";
 
 class AssetEditContainer extends Component {
   state = { serverError: "" };
+  handleClose = () => {
+    const { onClose } = this.props;
+    this.setState({ serverError: "" });
+    onClose();
+  };
+
+  handleEdit = (values, setSubmitting) => {
+    const { service, info, onApply, type } = this.props;
+    service
+      .editAsset(info.id, values, type)
+      .then(() => {
+        this.handleClose();
+        if (onApply) {
+          onApply();
+        }
+      })
+      .catch(error => {
+        this.setState({ serverError: error.errorMessage });
+        setSubmitting(false);
+      });
+  };
   render() {
-    const { service, info, onApply, open, onClose, type } = this.props;
-    const handleClose = () => {
-      this.setState({ serverError: "" });
-      onClose();
-    };
-    const handleEdit = values => {
-      service
-        .editAsset(info.id, values, type)
-        .then(() => {
-          handleClose();
-          if (onApply) {
-            onApply();
-          }
-        })
-        .catch(error => {
-          this.setState({ serverError: error.errorMessage });
-        });
-    };
+    const { info, open, type } = this.props;
     return (
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={this.handleClose}>
         <AssetEditPopup
           type={type}
           info={info}
-          edit={handleEdit}
+          edit={this.handleEdit}
           serverError={this.state.serverError}
         />
       </Dialog>

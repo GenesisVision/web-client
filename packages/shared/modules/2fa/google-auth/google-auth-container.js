@@ -14,7 +14,6 @@ import DialogLoaderGoogleAuthSteps from "./google-auth-steps/dialog-loader-googl
 
 class GoogleAuthContainer extends Component {
   state = {
-    isPending: false,
     data: null,
     errorMessage: null
   };
@@ -26,21 +25,22 @@ class GoogleAuthContainer extends Component {
     });
   }
 
-  handleSubmit = values => {
+  handleSubmit = (values, setSubmitting) => {
     if (!this.state.data) return;
     const { sharedKey } = this.state.data;
 
-    this.setState({ isPending: true });
     this.props.service
       .confirm2fa({
         ...values,
         sharedKey
       })
       .then(data => {
-        this.setState({ data, isPending: false }, this.props.onSubmit);
+        this.setState({ data });
+        this.props.onSubmit();
       })
       .catch(data => {
-        this.setState({ errorMessage: data.errorMessage, isPending: false });
+        this.setState({ errorMessage: data.errorMessage });
+        setSubmitting(false);
       });
   };
 
@@ -52,7 +52,6 @@ class GoogleAuthContainer extends Component {
         authenticatorUri={authenticatorUri}
         sharedKey={sharedKey}
         onSubmit={this.handleSubmit}
-        disabled={this.state.isPending}
         errorMessage={this.state.errorMessage}
       />
     ) : (

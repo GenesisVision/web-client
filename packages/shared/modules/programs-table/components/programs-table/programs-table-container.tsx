@@ -1,7 +1,7 @@
 import { push } from "connected-react-router";
 import { ProgramTag, ProgramsList } from "gv-api-web";
 import { Location } from "history";
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";

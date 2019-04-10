@@ -1,13 +1,14 @@
-import * as React from "react";
 import { shallow } from "enzyme";
-import FacetCard from "./facet-card";
 import { Facet } from "gv-api-web";
+import * as React from "react";
+
+import FacetCard from "./facet-card";
 import FacetCards from "./facet-cards";
-import {
-  _FacetCardsContainer as FacetCardsContainer,
-  ASSETS_FACETS
-} from "./faset-cards-container";
 import FacetCardsStub from "./facet-cards-stub";
+import {
+  ASSETS_FACETS,
+  _FacetCardsContainer as FacetCardsContainer
+} from "./faset-cards-container";
 
 describe("Facet Cards tests", () => {
   const facet: Facet = {

@@ -1,5 +1,6 @@
-import * as React from "react";
 import { shallow } from "enzyme";
+import * as React from "react";
+
 import { _Pager as Pager, PagerSeparator } from "./pager";
 import PagerButton, { _PagerButton as TestedPagerButton } from "./pager-button";
 

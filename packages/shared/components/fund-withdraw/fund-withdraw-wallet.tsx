@@ -1,19 +1,11 @@
-import { WalletData } from "gv-api-web";
+import { WalletBaseData } from "gv-api-web";
 import React, { Component } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
-import Select, { OnChangeEvent } from "shared/components/select/select";
+import Select, { ISelectChangeEvent } from "shared/components/select/select";
 
-interface IFundWithdrawWalletProps {
-  wallets: WalletData[];
-  value: string;
-  onChange(value: string): void;
-}
-
-class FundWithdrawWallet extends Component<
-  IFundWithdrawWalletProps & InjectedTranslateProps
-> {
-  handleChange = (event: OnChangeEvent) => {
+class _FundWithdrawWallet extends Component<OwnProps & InjectedTranslateProps> {
+  handleChange = (event: ISelectChangeEvent) => {
     this.props.onChange(event.target.value);
   };
   render() {
@@ -49,4 +41,11 @@ class FundWithdrawWallet extends Component<
   }
 }
 
-export default translate()(FundWithdrawWallet);
+const FundWithdrawWallet = translate()(_FundWithdrawWallet);
+export default FundWithdrawWallet;
+
+interface OwnProps {
+  wallets: WalletBaseData[];
+  value: string;
+  onChange(value: string): void;
+}

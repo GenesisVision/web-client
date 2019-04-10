@@ -1,12 +1,11 @@
 import { ProgramRequest, ProgramRequests } from "gv-api-web";
-import { AnyAction } from "redux";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import { MiddlewareDispatch } from "shared/utils/types";
+import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
 
 import {
   ICancelRequest,
@@ -98,7 +97,7 @@ export const cancelRequestDispatch = ({
       );
       onFinally();
     })
-    .catch(error => {
+    .catch((error: ResponseError) => {
       dispatch(alertMessageActions.error(error.errorMessage));
       onFinally();
     });

@@ -7,24 +7,20 @@ import DisableAuthSuccess from "./disable-auth-success";
 
 class DisableAuthContainer extends Component {
   state = {
-    isPending: false,
     success: false,
     errorMessage: ""
   };
-  handleSubmit = model => {
-    this.setState({ isPending: true });
+  handleSubmit = (model, setSubmitting) => {
     authApi
       .v10Auth2faDisablePost(authService.getAuthArg(), {
         model
       })
       .then(data => {
-        this.setState(
-          { ...data, success: true, isPending: false },
-          this.props.onSubmit
-        );
+        this.setState({ ...data, success: true }, this.props.onSubmit);
       })
       .catch(error => {
-        this.setState({ ...error, success: false, isPending: false });
+        this.setState({ ...error, success: false });
+        setSubmitting(false);
       });
   };
   render() {
@@ -34,7 +30,6 @@ class DisableAuthContainer extends Component {
     ) : (
       <DisableAuthForm
         onSubmit={this.handleSubmit}
-        disabled={isPending}
         errorMessage={errorMessage}
       />
     );

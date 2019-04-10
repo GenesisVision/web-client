@@ -1,11 +1,12 @@
 import "./alert-message-list.scss";
 
 import { GVButton } from "gv-react-components";
+import { useEffect } from "react";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import posed, { PoseGroup } from "react-pose";
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
+import { Dispatch, compose } from "redux";
 import AlertMessage from "shared/modules/alert-message/components/alert-message-list/alert-message";
 import RootState from "shared/reducers/root-reducer";
 import history from "shared/utils/history";
@@ -13,15 +14,6 @@ import { ActionType } from "shared/utils/types";
 
 import { alertMessageActions } from "../../actions/alert-message-actions";
 import { AlertMessagesState } from "../../reducers/alert-message-reducers";
-
-interface IAlertMessageListProps {}
-interface IAlertMessageListStateProps {
-  messages: AlertMessagesState;
-}
-interface IAlertMessageListDispatchProps {
-  removeMessage(id: string): void;
-  clearAllMessages(): void;
-}
 
 const AlertBox = posed.div({
   enter: {
@@ -32,56 +24,44 @@ const AlertBox = posed.div({
   }
 });
 
-export class AlertMessageList extends React.Component<
-  IAlertMessageListProps &
-    InjectedTranslateProps &
-    IAlertMessageListStateProps &
-    IAlertMessageListDispatchProps
-> {
-  componentDidMount() {
-    history.listen(() => {
-      this.props.clearAllMessages();
+const _AlertMessageList: React.FC<Props> = props => {
+  const { messages, removeMessage, t, clearAllMessages } = props;
+
+  useEffect(() => {
+    return history.listen(() => {
+      clearAllMessages();
     });
-  }
+  }, []);
 
-  render() {
-    const { t, messages, removeMessage, clearAllMessages } = this.props;
+  const children = messages.map(message => (
+    <AlertBox key={message.id}>
+      <AlertMessage message={message} onClick={removeMessage} />
+    </AlertBox>
+  ));
 
-    const renderClearAllButton = messages.length > 1 && (
+  if (messages.length > 1) {
+    children.push(
       <AlertBox key={"delete-button"}>
         <GVButton color="primary" onClick={clearAllMessages}>
           {t("alerts.clear-all")}
         </GVButton>
       </AlertBox>
     );
-
-    return (
-      <div className="alert-message-list">
-        {/*
-        //@ts-ignore */}
-        <PoseGroup animateOnMount>
-          {messages.map(message => (
-            <AlertBox key={message.id}>
-              <AlertMessage message={message} onClick={removeMessage} />
-            </AlertBox>
-          ))}
-          {renderClearAllButton}
-        </PoseGroup>
-      </div>
-    );
   }
-}
 
-export const mapStateToProps = (
-  state: RootState
-): IAlertMessageListStateProps => {
+  return (
+    <div className="alert-message-list">
+      <PoseGroup animateOnMount>{children}</PoseGroup>
+    </div>
+  );
+};
+
+const mapStateToProps = (state: RootState): StateProps => {
   const messages = state.alertMessages;
   return { messages };
 };
 
-export const mapDispatchToProps = (
-  dispatch: Dispatch<ActionType>
-): IAlertMessageListDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
   removeMessage: id => {
     dispatch(alertMessageActions.remove(id));
   },
@@ -90,9 +70,23 @@ export const mapDispatchToProps = (
   }
 });
 
-export default translate()(
+const AlertMessageList = compose<React.FC>(
+  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(AlertMessageList)
-);
+  )
+)(_AlertMessageList);
+
+export default AlertMessageList;
+
+interface StateProps {
+  messages: AlertMessagesState;
+}
+
+interface DispatchProps {
+  removeMessage(id: string): void;
+  clearAllMessages(): void;
+}
+
+interface Props extends InjectedTranslateProps, StateProps, DispatchProps {}

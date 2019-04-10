@@ -2,20 +2,8 @@ import classNames from "classnames";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 
-export interface ISelectItemProps {
-  value: string;
-  name?: string;
-  isSelected?: boolean;
-  className?: string;
-  onClick(props: {
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
-    isSelected: boolean;
-  }): void;
-  children: string;
-}
-
-class SelectItem extends React.Component<ISelectItemProps> {
-  handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+class SelectItem extends React.Component<Props> {
+  handleClick = (event: SelectItemClick) => {
     this.props.onClick({ event, isSelected: Boolean(this.props.isSelected) });
   };
   render() {
@@ -38,3 +26,15 @@ class SelectItem extends React.Component<ISelectItemProps> {
 }
 
 export default SelectItem;
+
+interface Props {
+  value: string;
+  name?: string;
+  isSelected?: boolean;
+  className?: string;
+  onClick(props: { event: SelectItemClick; isSelected: boolean }): void;
+  children: string;
+}
+
+interface SelectItemClick
+  extends React.MouseEvent<HTMLButtonElement, MouseEvent> {}

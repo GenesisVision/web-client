@@ -12,7 +12,6 @@ import Popover, {
 import GVScroll from "shared/components/scroll/gvscroll";
 import { ROLE, STATUS } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
-import { Nullable } from "shared/utils/types";
 
 import AssetStatusRequests from "./asset-status-requests";
 
@@ -34,20 +33,18 @@ interface IAssetStatusOwnProps {
   onCancel: any;
 }
 
-interface IAssetStatusProps extends IAssetStatusOwnProps {
-  role: ROLE;
-}
+interface IAssetStatusProps extends IAssetStatusOwnProps {}
 
 interface IAssetStatusState {
-  anchor: Nullable<EventTarget>;
+  anchor?: EventTarget;
 }
 
-class AssetStatus extends React.Component<
+class AssetStatus extends React.PureComponent<
   IAssetStatusProps & InjectedTranslateProps,
   IAssetStatusState
 > {
   state = {
-    anchor: null
+    anchor: undefined
   };
 
   handleOpenDropdown = (
@@ -59,10 +56,11 @@ class AssetStatus extends React.Component<
     )
       this.setState({ anchor: event.currentTarget });
   };
-  handleCloseDropdown = () => this.setState({ anchor: null });
+  handleCloseDropdown = () => this.setState({ anchor: undefined });
 
   render() {
-    const { t, className, status, id, role, asset, onCancel } = this.props;
+    const { t, className, status, id, asset, onCancel } = this.props;
+    const role = process.env.REACT_APP_PLATFORM as ROLE;
     return (
       <React.Fragment>
         <span
@@ -95,12 +93,4 @@ class AssetStatus extends React.Component<
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
-  role: state.profileHeader.info.data
-    ? state.profileHeader.info.data.userType
-    : null
-});
-export default compose<React.ComponentType<IAssetStatusOwnProps>>(
-  translate(),
-  connect(mapStateToProps)
-)(AssetStatus);
+export default translate()(AssetStatus);
