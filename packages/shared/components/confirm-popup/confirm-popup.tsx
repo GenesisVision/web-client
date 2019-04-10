@@ -45,16 +45,18 @@ const _ConfirmPopup: React.ComponentType<
   );
 };
 
-const ConfirmPopup = compose<React.ComponentType<IConfirmPopupProps>>(
-  translate(),
-  withFormik<IConfirmPopupProps, {}>({
-    displayName: "confirm-form",
-    mapPropsToValues: () => ({}),
-    handleSubmit: (_, { props, setSubmitting }) => {
-      props.onApply(setSubmitting);
-    }
-  })
-)(_ConfirmPopup);
+const ConfirmPopup = React.memo(
+  compose<React.ComponentType<IConfirmPopupProps>>(
+    translate(),
+    withFormik<IConfirmPopupProps, {}>({
+      displayName: "confirm-form",
+      mapPropsToValues: () => ({}),
+      handleSubmit: (_, { props, setSubmitting }) => {
+        props.onApply(setSubmitting);
+      }
+    })
+  )(_ConfirmPopup)
+);
 export default ConfirmPopup;
 
 export interface IConfirmPopupProps extends IDialogProps {

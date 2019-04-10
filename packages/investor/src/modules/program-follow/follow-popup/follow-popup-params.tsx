@@ -35,7 +35,7 @@ interface IFollowParamsOwnProps {
 
 interface Props extends IFollowParamsOwnProps, InjectedTranslateProps {}
 
-class FollowParams extends React.Component<
+class FollowParams extends React.PureComponent<
   InjectedFormikProps<Props, FormValues>
 > {
   render() {
