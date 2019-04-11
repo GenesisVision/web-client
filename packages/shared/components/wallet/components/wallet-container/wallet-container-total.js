@@ -55,9 +55,18 @@ class WalletContainerTotal extends PureComponent {
                   }
                 />
                 <GVTab
+                  className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
                   visible={copytrading}
                   value={COPYTRADING_TAB}
-                  label={t("wallet-page.tabs.copytrading")}
+                  label={
+                    <Link
+                      to={{
+                        hash: COPYTRADING_TAB
+                      }}
+                    >
+                      {t("wallet-page.tabs.copytrading")}
+                    </Link>
+                  }
                 />
                 <GVTab
                   className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
