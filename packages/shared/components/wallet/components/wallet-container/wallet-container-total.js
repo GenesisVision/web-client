@@ -55,6 +55,11 @@ class WalletContainerTotal extends PureComponent {
                   }
                 />
                 <GVTab
+                  visible={copytrading}
+                  value={COPYTRADING_TAB}
+                  label={t("wallet-page.tabs.copytrading")}
+                />
+                <GVTab
                   className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
                   value={TRANSACTIONS_TAB} //TODO add disable prop
                   label={
@@ -85,7 +90,7 @@ class WalletContainerTotal extends PureComponent {
           </div>
         </div>
         {tab === WALLETS_TAB && <WalletList wallets={wallets} />}
-        {/* {tab === COPYTRADING_TAB && <WalletCopytrading />} */}
+        {tab === COPYTRADING_TAB && <WalletCopytrading />}
         {tab === TRANSACTIONS_TAB && (
           <WalletTransactions
             columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
