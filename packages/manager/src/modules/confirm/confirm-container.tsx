@@ -4,13 +4,20 @@ import { bindActionCreators, Dispatch } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 
 import ConfirmPopup from "./components/confirm-popup";
-import { confirm } from "./services/confirm.services";
+import * as service from "./services/confirm.services";
 import { TwoFactorAuthenticator } from "gv-api-web";
 import { IConfirmFormValues } from "./components/confirm-form";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
+import { IConfitmService } from "./services/confirm.services";
 
 class _ConfirmContainer extends React.PureComponent<Props, State> {
   state = { serverError: "", info: undefined };
+  componentDidMount() {
+    const { service, programId } = this.props;
+    service.get2faInfo({ programId }).then((info: TwoFactorAuthenticator) => {
+      this.setState({ info });
+    });
+  }
 
   handleClose = () => {
     const { onClose } = this.props;
@@ -67,16 +74,11 @@ export interface IConfirmProgramProps {
   programId: string;
 }
 interface DispatchProps {
-  service: { confirm: Function };
+  service: IConfitmService;
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators(
-    {
-      confirm
-    },
-    dispatch
-  )
+  service: bindActionCreators(service as IConfitmService, dispatch)
 });
 
 const ConfirmContainer = React.memo(
