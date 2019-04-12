@@ -133,17 +133,18 @@ class InvestmentProgramControls extends Component<
             >
               {t("program-details-page.description.edit-program")}
             </GVButton>
-            {programDescription.personalProgramDetails.showTwoFactorButton && (
-              <GVButton
-                className="program-details-description__invest-btn"
-                color="secondary"
-                variant="outlined"
-                onClick={this.openPopup(INVESTMENT_POPUP.TFA)}
-                disabled={!canCloseProgram}
-              >
-                {t("Confirm 2FA")}
-              </GVButton>
-            )}
+            {programDescription.personalProgramDetails &&
+              programDescription.personalProgramDetails.showTwoFactorButton && (
+                <GVButton
+                  className="program-details-description__invest-btn"
+                  color="secondary"
+                  variant="outlined"
+                  onClick={this.openPopup(INVESTMENT_POPUP.TFA)}
+                  disabled={!canCloseProgram}
+                >
+                  {t("Confirm 2FA")}
+                </GVButton>
+              )}
           </div>
         )}
         <ProgramDetailContext.Consumer>
@@ -175,12 +176,16 @@ class InvestmentProgramControls extends Component<
                 onApply={this.applyChanges(updateDetails)}
                 type={PROGRAM}
               />
-              <ConfirmContainer
-                open={popups[INVESTMENT_POPUP.TFA]}
-                onClose={this.closePopup(INVESTMENT_POPUP.TFA)}
-                onApply={this.applyChanges(updateDetails)}
-                programId={composeEditInfo.id}
-              />
+              {programDescription.personalProgramDetails &&
+                programDescription.personalProgramDetails
+                  .showTwoFactorButton && (
+                  <ConfirmContainer
+                    open={popups[INVESTMENT_POPUP.TFA]}
+                    onClose={this.closePopup(INVESTMENT_POPUP.TFA)}
+                    onApply={this.applyChanges(updateDetails)}
+                    programId={composeEditInfo.id}
+                  />
+                )}
             </Fragment>
           )}
         </ProgramDetailContext.Consumer>
