@@ -20,7 +20,7 @@ const _ConfirmForm: React.FC<
       <GVFormikField
         disabled={isSubmitting}
         type="text"
-        name="twoFactorCode"
+        name="code"
         label={t("auth.login.two-factor.input-label")}
         autoComplete="off"
         autoFocus
@@ -40,13 +40,10 @@ const _ConfirmForm: React.FC<
 
 interface Props extends OwnProps, IConfirmFormValues, InjectedTranslateProps {}
 export interface IConfirmFormValues {
-  twoFactorCode: string;
+  code: string;
 }
 interface OwnProps {
-  onSubmit(
-    twoFactorCode: IConfirmFormValues,
-    setSubmitting: SetSubmittingType
-  ): void;
+  onSubmit(code: IConfirmFormValues, setSubmitting: SetSubmittingType): void;
   serverError: string;
 }
 
@@ -56,11 +53,11 @@ const ConfirmForm = compose<React.FunctionComponent<OwnProps>>(
   withFormik<Props, IConfirmFormValues>({
     displayName: "confirm-form",
     mapPropsToValues: () => ({
-      twoFactorCode: ""
+      code: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        twoFactorCode: string()
+        code: string()
           .trim()
           .matches(
             /^\d{6}$/,

@@ -1,21 +1,16 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
-import Dialog from "shared/components/dialog/dialog";
-
-import ConfirmPopup from "./components/confirm-popup";
 import * as service from "./services/confirm.services";
 import { TwoFactorAuthenticator } from "gv-api-web";
 import { IConfirmFormValues } from "./components/confirm-form";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
-import { IConfitmService } from "./services/confirm.services";
+import GoogleAuthStepsContainer from "shared/modules/2fa/google-auth/google-auth-steps/google-auth-steps";
 
 class _ConfirmContainer extends React.PureComponent<Props, State> {
-  state = { serverError: "", info: undefined };
+  state = { serverError: "", data: undefined, twoFactorCode: undefined };
   componentDidMount() {
-    const { service, programId } = this.props;
-    service.get2faInfo({ programId }).then((info: TwoFactorAuthenticator) => {
-      this.setState({ info });
+    const { programId } = this.props;
+    service.get2faInfo({ programId }).then((data: TwoFactorAuthenticator) => {
+      this.setState({ data });
     });
   }
 
@@ -29,7 +24,7 @@ class _ConfirmContainer extends React.PureComponent<Props, State> {
     values: IConfirmFormValues,
     setSubmitting: SetSubmittingType
   ) => {
-    const { service, programId, onApply } = this.props;
+    const { programId, onApply } = this.props;
     service
       .confirm({ ...values, programId })
       .then(() => {
@@ -44,17 +39,17 @@ class _ConfirmContainer extends React.PureComponent<Props, State> {
       });
   };
   render() {
-    const { open } = this.props;
-    const { info } = this.state;
+    const { data, serverError } = this.state;
+    if (!data) return null;
+    const { authenticatorUri, sharedKey } = data;
     return (
-      info && (
-        <Dialog open={open} onClose={this.handleClose}>
-          <ConfirmPopup
-            info={info}
-            edit={this.handleConfirm}
-            serverError={this.state.serverError}
-          />
-        </Dialog>
+      data && (
+        <GoogleAuthStepsContainer
+          authenticatorUri={authenticatorUri}
+          sharedKey={sharedKey}
+          onSubmit={this.handleConfirm}
+          errorMessage={serverError}
+        />
       )
     );
   }
@@ -62,9 +57,10 @@ class _ConfirmContainer extends React.PureComponent<Props, State> {
 
 interface State {
   serverError: string;
-  info?: TwoFactorAuthenticator;
+  data?: TwoFactorAuthenticator;
+  twoFactorCode?: string;
 }
-interface Props extends IConfirmProgramProps, OwnProps, DispatchProps {}
+interface Props extends IConfirmProgramProps, OwnProps {}
 interface OwnProps {
   onApply: () => void;
   open: boolean;
@@ -73,18 +69,6 @@ interface OwnProps {
 export interface IConfirmProgramProps {
   programId: string;
 }
-interface DispatchProps {
-  service: IConfitmService;
-}
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators(service as IConfitmService, dispatch)
-});
-
-const ConfirmContainer = React.memo(
-  connect(
-    undefined,
-    mapDispatchToProps
-  )(_ConfirmContainer)
-);
+const ConfirmContainer = React.memo(_ConfirmContainer);
 export default ConfirmContainer;
