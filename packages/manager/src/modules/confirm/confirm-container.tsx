@@ -4,6 +4,7 @@ import { TwoFactorAuthenticator } from "gv-api-web";
 import { IConfirmFormValues } from "./components/confirm-form";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 import GoogleAuthStepsContainer from "shared/modules/2fa/google-auth/google-auth-steps/google-auth-steps";
+import Dialog from "shared/components/dialog/dialog";
 
 class _ConfirmContainer extends React.PureComponent<Props, State> {
   state = { serverError: "", data: undefined, twoFactorCode: undefined };
@@ -44,12 +45,19 @@ class _ConfirmContainer extends React.PureComponent<Props, State> {
     const { authenticatorUri, sharedKey } = data;
     return (
       data && (
-        <GoogleAuthStepsContainer
-          authenticatorUri={authenticatorUri}
-          sharedKey={sharedKey}
-          onSubmit={this.handleConfirm}
-          errorMessage={serverError}
-        />
+        <Dialog
+          className={"dialog--width-auto"}
+          open={this.props.open}
+          onClose={this.handleClose}
+        >
+          <GoogleAuthStepsContainer
+            authenticatorUri={authenticatorUri}
+            sharedKey={sharedKey}
+            onSubmit={this.handleConfirm}
+            errorMessage={serverError}
+            enablePassword={false}
+          />
+        </Dialog>
       )
     );
   }
