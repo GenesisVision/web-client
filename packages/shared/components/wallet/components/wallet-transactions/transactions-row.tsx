@@ -9,7 +9,8 @@ import Status from "shared/components/status/status";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { CURRENCY_FRACTIONS } from "shared/utils/currency-converter";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
@@ -144,9 +145,9 @@ class TransactionsRow extends React.Component<
             ) : (
               <Profitability value={transaction.amount}>
                 <NumberFormat
-                  value={formatCurrencyValue(
+                  value={formatValue(
                     transaction.amount,
-                    transaction.currencyFrom
+                    CURRENCY_FRACTIONS(transaction.currencyFrom)
                   )}
                   thousandSeparator=" "
                   displayType="text"
