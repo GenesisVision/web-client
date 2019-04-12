@@ -32,9 +32,9 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
       client,
       twoFactorCode: (type === CODE_TYPE.TWO_FACTOR && code) || null,
       recoveryCode: (type === CODE_TYPE.RECOVERY && code) || null,
-      loginCheckInfo: {
+      captchaCheckResult: {
         id,
-        poW: {
+        pow: {
           prefix
         }
       }
