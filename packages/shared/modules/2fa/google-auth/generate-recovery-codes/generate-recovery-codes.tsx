@@ -1,27 +1,28 @@
 import { GVButton } from "gv-react-components";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 import GoogleAuthCodes from "../google-auth-codes";
 import GenerateRecoveryWithFormik from "./generate-recovery-form";
+import { PasswordModel, RecoveryCodesViewModel } from "gv-api-web";
+import { SetSubmittingType } from "shared/utils/types";
 
-class GenerateRecoveryCode extends Component {
+class GenerateRecoveryCode extends React.PureComponent<Props, State> {
   state = {
     isOpenPopup: false,
-    data: null,
-    errorMessage: null
+    data: undefined,
+    errorMessage: undefined
   };
   handleClick = () => {
     this.setState({ isOpenPopup: true });
   };
   handleClose = () => {
-    this.setState({ isOpenPopup: false, data: null });
+    this.setState({ isOpenPopup: false, data: undefined });
   };
-  handleSubmit = (values, setSubmitting) => {
+  handleSubmit = (values: PasswordModel, setSubmitting: SetSubmittingType) => {
     authApi
       .v10Auth2faRecoverycodesNewPost(authService.getAuthArg(), {
         model: values
@@ -36,19 +37,21 @@ class GenerateRecoveryCode extends Component {
   };
 
   render() {
-    if (!this.props.disabled) return null;
+    const { disabled, t } = this.props;
+    const { isOpenPopup, data, errorMessage } = this.state;
+    if (!disabled) return null;
     return (
       <div className="generate-recovery-codes">
         <GVButton variant="text" type="button" onClick={this.handleClick}>
-          {this.props.t("2fa-page.codes.generate-recovery-codes")}
+          {t("2fa-page.codes.generate-recovery-codes")}
         </GVButton>
-        <Dialog open={this.state.isOpenPopup} onClose={this.handleClose}>
-          {this.state.data ? (
-            <GoogleAuthCodes codes={this.state.data.codes} />
+        <Dialog open={isOpenPopup} onClose={this.handleClose}>
+          {data ? (
+            <GoogleAuthCodes codes={(data as RecoveryCodesViewModel).codes} />
           ) : (
             <GenerateRecoveryWithFormik
               onSubmit={this.handleSubmit}
-              errorMessage={this.state.errorMessage}
+              errorMessage={errorMessage}
             />
           )}
         </Dialog>
@@ -57,8 +60,13 @@ class GenerateRecoveryCode extends Component {
   }
 }
 
-GenerateRecoveryCode.propTypes = {
-  disabled: PropTypes.bool
-};
+interface Props extends InjectedTranslateProps {
+  disabled: boolean;
+}
+interface State {
+  isOpenPopup: boolean;
+  data?: RecoveryCodesViewModel;
+  errorMessage?: string;
+}
 
 export default translate()(GenerateRecoveryCode);

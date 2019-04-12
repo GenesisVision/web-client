@@ -1,11 +1,13 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { isTablet } from "shared/utils/breakpoints";
-
-import GoogleAuthDesktop from "./google-auth-steps-desktop";
+import GoogleAuthDesktop, {
+  IGoogleAuthProps
+} from "./google-auth-steps-desktop";
 import GoogleAuthMobile from "./google-auth-steps-mobile";
+import RootState from "shared/reducers/root-reducer";
 
-class GoogleAuthSteps extends Component {
+class GoogleAuthSteps extends React.PureComponent<Props> {
   render() {
     return isTablet(this.props.innerWidth) ? (
       <GoogleAuthMobile {...this.props} />
@@ -15,9 +17,15 @@ class GoogleAuthSteps extends Component {
   }
 }
 
-const mapStateToProps = ({ ui }) => ({
+const mapStateToProps = ({ ui }: RootState) => ({
   innerWidth: ui.innerWidth
 });
+
+interface Props extends IGoogleAuthProps, StateProps {}
+
+interface StateProps {
+  innerWidth: number;
+}
 
 const GoogleAuthStepsContainer = connect(mapStateToProps)(GoogleAuthSteps);
 

@@ -1,17 +1,15 @@
-import { withFormik } from "formik";
+import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import PropTypes from "prop-types";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import { object, string } from "yup";
+import { PasswordModel } from "gv-api-web";
+import { SetSubmittingType } from "shared/utils/types";
 
-const GenerateRecoveryForm = ({
-  t,
-  handleSubmit,
-  errorMessage,
-  isSubmitting
-}) => {
+const GenerateRecoveryForm: React.FC<
+  InjectedFormikProps<Props, IFormValues>
+> = ({ t, handleSubmit, errorMessage, isSubmitting }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -46,27 +44,29 @@ const GenerateRecoveryForm = ({
   );
 };
 
-const GenerateRecoveryWithFormik = compose(
+interface Props extends InjectedTranslateProps, OwnProps {}
+interface OwnProps {
+  errorMessage?: string;
+  onSubmit(twoFactorCode: IFormValues, setSubmitting: SetSubmittingType): void;
+}
+interface IFormValues extends PasswordModel {}
+
+const GenerateRecoveryWithFormik = compose<React.FunctionComponent<OwnProps>>(
+  React.memo,
   translate(),
-  withFormik({
+  withFormik<Props, IFormValues>({
     displayName: "generate-recovery-form",
     mapPropsToValues: () => ({
       password: ""
     }),
-    validationSchema: ({ t }) =>
+    validationSchema: (props: Props) =>
       object().shape({
-        password: string().required(t("2fa-page.password-required"))
+        password: string().required(props.t("2fa-page.password-required"))
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
   })
 )(GenerateRecoveryForm);
-
-GenerateRecoveryWithFormik.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  disabled: PropTypes.bool,
-  errorMessage: PropTypes.string
-};
 
 export default GenerateRecoveryWithFormik;

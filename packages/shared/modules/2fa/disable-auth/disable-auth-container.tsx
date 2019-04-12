@@ -1,16 +1,21 @@
-import React, { Component } from "react";
+import * as React from "react";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
-
-import DisableAuthForm from "./disable-auth-form";
+import DisableAuthForm, {
+  IDisableAuthFormFormValues
+} from "./disable-auth-form";
 import DisableAuthSuccess from "./disable-auth-success";
+import { SetSubmittingType } from "shared/utils/types";
 
-class DisableAuthContainer extends Component {
+class DisableAuthContainer extends React.PureComponent<Props, State> {
   state = {
     success: false,
     errorMessage: ""
   };
-  handleSubmit = (model, setSubmitting) => {
+  handleSubmit = (
+    model: IDisableAuthFormFormValues,
+    setSubmitting: SetSubmittingType
+  ) => {
     authApi
       .v10Auth2faDisablePost(authService.getAuthArg(), {
         model
@@ -24,7 +29,7 @@ class DisableAuthContainer extends Component {
       });
   };
   render() {
-    const { success, isPending, errorMessage } = this.state;
+    const { success, errorMessage } = this.state;
     return success ? (
       <DisableAuthSuccess />
     ) : (
@@ -36,6 +41,13 @@ class DisableAuthContainer extends Component {
   }
 }
 
-DisableAuthContainer.propTypes = {};
+interface Props {
+  onSubmit: () => void;
+}
+
+interface State {
+  success: boolean;
+  errorMessage: string;
+}
 
 export default DisableAuthContainer;

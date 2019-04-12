@@ -1,13 +1,12 @@
 import { GVButton } from "gv-react-components";
-import { Component } from "react";
-import React from "react";
-import { translate } from "react-i18next";
-
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import GoogleActivateStep from "./google-auth-activate-step";
 import GoogleCodeStep from "./google-auth-code-step";
 import GoogleDownloadStep from "./google-auth-download-step";
+import { IGoogleAuthProps } from "./google-auth-steps-desktop";
 
-class GoogleAuth extends Component {
+class GoogleAuth extends React.PureComponent<Props, State> {
   state = {
     step: 0
   };
@@ -28,7 +27,7 @@ class GoogleAuth extends Component {
     const { t } = this.props;
     return (
       <div className="google-auth google-auth--mobile">
-        {step === 0 && <GoogleDownloadStep {...this.props} />}
+        {step === 0 && <GoogleDownloadStep />}
         {step === 1 && <GoogleCodeStep {...this.props} />}
         {step === 2 && <GoogleActivateStep {...this.props} />}
         <div className="dialog__buttons google-auth__buttons">
@@ -37,21 +36,31 @@ class GoogleAuth extends Component {
             onClick={this.handlePrev}
             variant="text"
           >
-            &larr;&nbsp;
-            {t("Prev")}
+            <>
+              &larr;&nbsp;
+              {t("Prev")}
+            </>
           </GVButton>
           <GVButton
             disabled={this.isNextDisabled()}
             onClick={this.handleNext}
             variant="text"
           >
-            {t("Next")}
-            &nbsp;&rarr;
+            <>
+              {t("Next")}
+              &nbsp;&rarr;
+            </>
           </GVButton>
         </div>
       </div>
     );
   }
+}
+
+interface Props extends IGoogleAuthProps, InjectedTranslateProps {}
+
+interface State {
+  step: number;
 }
 
 const GoogleAuthMobile = translate()(GoogleAuth);
