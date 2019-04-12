@@ -133,15 +133,17 @@ class InvestmentProgramControls extends Component<
             >
               {t("program-details-page.description.edit-program")}
             </GVButton>
-            <GVButton
-              className="program-details-description__invest-btn"
-              color="secondary"
-              variant="outlined"
-              onClick={this.openPopup(INVESTMENT_POPUP.TFA)}
-              disabled={!canCloseProgram}
-            >
-              {t("Confirm 2FA")}
-            </GVButton>
+            {programDescription.personalProgramDetails.showTwoFactorButton && (
+              <GVButton
+                className="program-details-description__invest-btn"
+                color="secondary"
+                variant="outlined"
+                onClick={this.openPopup(INVESTMENT_POPUP.TFA)}
+                disabled={!canCloseProgram}
+              >
+                {t("Confirm 2FA")}
+              </GVButton>
+            )}
           </div>
         )}
         <ProgramDetailContext.Consumer>

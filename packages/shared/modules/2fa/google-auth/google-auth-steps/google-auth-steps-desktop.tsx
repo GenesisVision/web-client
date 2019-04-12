@@ -9,6 +9,7 @@ import GoogleDownloadStep from "./google-auth-download-step";
 import { SetSubmittingType } from "shared/utils/types";
 
 const GoogleAuth: React.FC<IGoogleAuthProps & InjectedTranslateProps> = ({
+  enablePassword,
   authenticatorUri,
   sharedKey,
   t,
@@ -28,12 +29,17 @@ const GoogleAuth: React.FC<IGoogleAuthProps & InjectedTranslateProps> = ({
         authenticatorUri={authenticatorUri}
         sharedKey={sharedKey}
       />
-      <GoogleActivateStep onSubmit={onSubmit} errorMessage={errorMessage} />
+      <GoogleActivateStep
+        onSubmit={onSubmit}
+        errorMessage={errorMessage}
+        enablePassword={enablePassword}
+      />
     </div>
   </div>
 );
 
 export interface IGoogleAuthProps {
+  enablePassword?: boolean;
   authenticatorUri: string;
   sharedKey: string;
   onSubmit: (
