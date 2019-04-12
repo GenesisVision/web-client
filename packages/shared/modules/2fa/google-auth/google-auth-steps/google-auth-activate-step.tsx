@@ -9,7 +9,14 @@ import { SetSubmittingType } from "shared/utils/types";
 
 export const GoogleStep3: React.FC<
   InjectedFormikProps<Props, IGoogleActivateStepFormValues>
-> = ({ t, handleSubmit, errorMessage, isSubmitting }) => {
+> = ({
+  t,
+  handleSubmit,
+  errorMessage,
+  isSubmitting,
+  enablePassword = true
+}) => {
+  console.log(enablePassword);
   return (
     <div className="google-auth__step">
       <div className="google-auth__count">03</div>
@@ -26,13 +33,15 @@ export const GoogleStep3: React.FC<
           allowNegative={false}
           format="######"
         />
-        <GVFormikField
-          name="password"
-          type="password"
-          label={t("2fa-page.password")}
-          component={GVTextField}
-          autoComplete="new-password"
-        />
+        {enablePassword && (
+          <GVFormikField
+            name="password"
+            type="password"
+            label={t("2fa-page.password")}
+            component={GVTextField}
+            autoComplete="new-password"
+          />
+        )}
         <div className="form-error">{errorMessage}</div>
         <GVButton
           className="google-auth__button"
@@ -50,6 +59,7 @@ export const GoogleStep3: React.FC<
 
 interface Props extends OwnProps, InjectedTranslateProps {}
 interface OwnProps {
+  enablePassword?: boolean;
   onSubmit(
     twoFactorCode: IGoogleActivateStepFormValues,
     setSubmitting: SetSubmittingType
@@ -59,6 +69,7 @@ interface OwnProps {
 export interface IGoogleActivateStepFormValues {
   code: string;
   password: string;
+  enablePassword: boolean;
 }
 
 const GoogleActivateStep = compose<React.FunctionComponent<OwnProps>>(
@@ -66,14 +77,18 @@ const GoogleActivateStep = compose<React.FunctionComponent<OwnProps>>(
   translate(),
   withFormik<Props, IGoogleActivateStepFormValues>({
     displayName: "google-auth",
-    mapPropsToValues: () => ({
+    mapPropsToValues: (props: Props) => ({
+      enablePassword: props.enablePassword || true,
       code: "",
       password: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
         code: number().required(props.t("2fa-page.code-required")),
-        password: string().required(props.t("2fa-page.password-required"))
+        password: string().when("enablePassword", {
+          is: true,
+          than: string().required(props.t("2fa-page.password-required"))
+        })
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
