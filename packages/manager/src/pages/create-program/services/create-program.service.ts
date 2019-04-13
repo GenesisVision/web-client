@@ -1,5 +1,10 @@
 import { push } from "connected-react-router";
-import { Broker, CancelablePromise, NewProgramRequest } from "gv-api-web";
+import {
+  Broker,
+  CancelablePromise,
+  ManagerProgramCreateResult,
+  NewProgramRequest
+} from "gv-api-web";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { Dispatch } from "redux";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
@@ -35,17 +40,17 @@ export const createProgram = (
     keyof NewProgramRequest
   >,
   setSubmitting: SetSubmittingType
-): ManagerThunk<void> => dispatch => {
+): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => dispatch => {
   const authorization = authService.getAuthArg();
 
-  let promise = Promise.resolve("");
+  let promise = Promise.resolve("") as CancelablePromise<any>;
   if (createProgramData.logo.cropped) {
     promise = filesService.uploadFile(
       createProgramData.logo.cropped,
       authorization
-    );
+    ) as CancelablePromise<any>;
   }
-  promise
+  return promise
     .then(response => {
       const requestData = <NewProgramRequest>{
         ...createProgramData,
@@ -56,7 +61,7 @@ export const createProgram = (
         request: requestData
       });
     })
-    .then(() => {
+    .then(res => {
       setSubmitting(false);
       dispatch(
         alertMessageActions.success(
@@ -64,12 +69,14 @@ export const createProgram = (
           true
         )
       );
-      dispatch(push(DASHBOARD_ROUTE));
+      // dispatch(push(DASHBOARD_ROUTE));
       dispatch(fetchWallets());
+      return res;
     })
     .catch(error => {
       setSubmitting(false);
       dispatch(alertMessageActions.error(error.errorMessage));
+      return error;
     });
 };
 
