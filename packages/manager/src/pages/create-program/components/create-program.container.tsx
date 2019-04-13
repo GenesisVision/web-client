@@ -1,6 +1,7 @@
 import {
   Broker,
   CancelablePromise,
+  ManagerProgramCreateResult,
   ProfileHeaderViewModel,
   ProgramsInfo,
   WalletData
@@ -23,6 +24,8 @@ import {
 } from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
+import ConfirmContainer from "../../../modules/confirm/confirm-container";
+import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
 
 enum TAB {
   BROKER = "BROKER",
@@ -36,6 +39,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
     selectedBroker: undefined,
     brokers: undefined,
     isPending: true,
+    isConfirmDialogVisible: false,
     isNavigationDialogVisible: false
   };
 
@@ -79,6 +83,18 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
     return rateApi.v10RateByFromByToGet(fromCurrency, toCurrency);
   };
 
+  createProgram = (data: any, setSubmitting: SetSubmittingType) => {
+    this.props.service
+      .createProgram(data, setSubmitting)
+      .then(({ programId, twoFactorRequired }) => {
+        this.setState({ programId, twoFactorRequired });
+      });
+  };
+
+  closeConfirm = () => {
+    this.setState({ isConfirmDialogVisible: false });
+  };
+
   render() {
     const {
       minimumDepositsAmount,
@@ -86,6 +102,9 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
       selectedBroker,
       isPending,
       brokers,
+      twoFactorRequired,
+      programId,
+      isConfirmDialogVisible,
       isNavigationDialogVisible
     } = this.state;
 
@@ -132,10 +151,18 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
                 wallets={wallets}
                 navigateBack={this.navigateToBroker}
                 broker={selectedBroker}
-                onSubmit={service.createProgram}
+                onSubmit={this.createProgram}
                 notifyError={service.notifyError}
                 author={headerData.name}
                 programsInfo={programsInfo}
+              />
+            )}
+            {twoFactorRequired && (
+              <ConfirmContainer
+                open={isConfirmDialogVisible}
+                onClose={this.closeConfirm}
+                onApply={this.closeConfirm}
+                programId={programId!}
               />
             )}
             <ConfirmPopup
@@ -166,18 +193,15 @@ const mapStateToProps = (state: ManagerRootState): StateProps => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
-  return {
-    service: bindActionCreators(
-      {
-        createProgram,
-        fetchWallets,
-        notifyError: alertMessageActions.error
-      },
-      dispatch
-    )
-  };
-};
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
+  service: {
+    createProgram: (data: any, setSubmitting: SetSubmittingType) =>
+      dispatch(createProgram(data, setSubmitting)),
+    fetchWallets: () => dispatch(fetchWallets()),
+    notifyError: (message: string) =>
+      dispatch(alertMessageActions.error(message))
+  }
+});
 
 const CreateProgramContainer = compose<React.ComponentType<OwnProps>>(
   translate(),
@@ -197,6 +221,9 @@ interface State {
   isPending: boolean;
   tab: TAB.BROKER | TAB.SETTINGS;
   isNavigationDialogVisible: boolean;
+  isConfirmDialogVisible: boolean;
+  twoFactorRequired?: boolean;
+  programId?: string;
 }
 
 interface StateProps {
@@ -208,7 +235,10 @@ interface StateProps {
 interface DispatchProps {
   service: {
     fetchWallets(): void;
-    createProgram(data: any, setSubmitting: any): void;
+    createProgram(
+      data: any,
+      setSubmitting: SetSubmittingType
+    ): CancelablePromise<ManagerProgramCreateResult>;
     notifyError(message: string): void;
   };
 }
