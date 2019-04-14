@@ -11,12 +11,11 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
-
 import {
   createProgram,
   fetchBrokers,
@@ -24,8 +23,14 @@ import {
 } from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
-import ConfirmContainer from "../../../modules/confirm/confirm-container";
-import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
+import ConfirmContainer from "modules/confirm/confirm-container";
+import {
+  MiddlewareDispatch,
+  ResponseError,
+  SetSubmittingType
+} from "shared/utils/types";
+import { push } from "connected-react-router";
+import { DASHBOARD_ROUTE } from "../../dashboard/dashboard.routes";
 
 enum TAB {
   BROKER = "BROKER",
@@ -84,15 +89,35 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
   };
 
   createProgram = (data: any, setSubmitting: SetSubmittingType) => {
-    this.props.service
-      .createProgram(data, setSubmitting)
-      .then(({ programId, twoFactorRequired }) => {
-        this.setState({ programId, twoFactorRequired });
+    const {
+      createProgram,
+      redirectToDashboard,
+      notifyError,
+      notifySuccess,
+      fetchWallets
+    } = this.props.service;
+    createProgram(data)
+      .then(res => {
+        const { programId, twoFactorRequired } = res;
+        if (twoFactorRequired) this.setState({ programId, twoFactorRequired });
+        else {
+          redirectToDashboard();
+          notifySuccess(
+            "manager.create-program-page.notifications.create-success"
+          );
+          fetchWallets();
+          setSubmitting(false);
+        }
+      })
+      .catch((error: ResponseError) => {
+        setSubmitting(false);
+        notifyError(error.errorMessage);
       });
   };
 
   closeConfirm = () => {
     this.setState({ isConfirmDialogVisible: false });
+    this.props.service.redirectToDashboard();
   };
 
   render() {
@@ -195,11 +220,13 @@ const mapStateToProps = (state: ManagerRootState): StateProps => {
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
-    createProgram: (data: any, setSubmitting: SetSubmittingType) =>
-      dispatch(createProgram(data, setSubmitting)),
+    redirectToDashboard: () => dispatch(push(DASHBOARD_ROUTE)),
+    createProgram: (data: any) => dispatch(createProgram(data)),
     fetchWallets: () => dispatch(fetchWallets()),
     notifyError: (message: string) =>
-      dispatch(alertMessageActions.error(message))
+      dispatch(alertMessageActions.error(message)),
+    notifySuccess: (message: string) =>
+      dispatch(alertMessageActions.success(message, true))
   }
 });
 
@@ -234,12 +261,11 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    fetchWallets(): void;
-    createProgram(
-      data: any,
-      setSubmitting: SetSubmittingType
-    ): CancelablePromise<ManagerProgramCreateResult>;
-    notifyError(message: string): void;
+    fetchWallets: () => void;
+    createProgram: (data: any) => CancelablePromise<ManagerProgramCreateResult>;
+    notifyError: (message: string) => void;
+    notifySuccess: (message: string) => void;
+    redirectToDashboard: () => void;
   };
 }
 

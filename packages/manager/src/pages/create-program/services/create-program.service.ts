@@ -1,19 +1,16 @@
-import { push } from "connected-react-router";
 import {
   Broker,
   CancelablePromise,
   ManagerProgramCreateResult,
   NewProgramRequest
 } from "gv-api-web";
-import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { Dispatch } from "redux";
-import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import brokersApi from "shared/services/api-client/brokers-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
-import { ManagerThunk, SetSubmittingType } from "shared/utils/types";
+import { ManagerThunk } from "shared/utils/types";
 
 import { ICreateProgramSettingsFormValues } from "../components/create-program-settings/create-program-settings";
 
@@ -38,8 +35,7 @@ export const createProgram = (
   createProgramData: Pick<
     ICreateProgramSettingsFormValues,
     keyof NewProgramRequest
-  >,
-  setSubmitting: SetSubmittingType
+  >
 ): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => dispatch => {
   const authorization = authService.getAuthArg();
 
@@ -50,34 +46,16 @@ export const createProgram = (
       authorization
     ) as CancelablePromise<any>;
   }
-  return promise
-    .then(response => {
-      const requestData = <NewProgramRequest>{
-        ...createProgramData,
-        logo: response
-      };
+  return promise.then(response => {
+    const requestData = <NewProgramRequest>{
+      ...createProgramData,
+      logo: response
+    };
 
-      return managerApi.v10ManagerProgramsCreatePost(authorization, {
-        request: requestData
-      });
-    })
-    .then(res => {
-      setSubmitting(false);
-      dispatch(
-        alertMessageActions.success(
-          "manager.create-program-page.notifications.create-success",
-          true
-        )
-      );
-      // dispatch(push(DASHBOARD_ROUTE));
-      dispatch(fetchWallets());
-      return res;
-    })
-    .catch(error => {
-      setSubmitting(false);
-      dispatch(alertMessageActions.error(error.errorMessage));
-      return error;
+    return managerApi.v10ManagerProgramsCreatePost(authorization, {
+      request: requestData
     });
+  });
 };
 
 export const showValidationError = () => (dispatch: Dispatch) => {
