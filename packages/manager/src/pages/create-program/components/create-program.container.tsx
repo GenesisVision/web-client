@@ -99,7 +99,12 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
     createProgram(data)
       .then(res => {
         const { programId, twoFactorRequired } = res;
-        if (twoFactorRequired) this.setState({ programId, twoFactorRequired });
+        if (twoFactorRequired)
+          this.setState({
+            programId,
+            twoFactorRequired,
+            isConfirmDialogVisible: true
+          });
         else {
           redirectToDashboard();
           notifySuccess(
