@@ -8,7 +8,7 @@ import {
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
-import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup";
+import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 
 interface IInvestmentProgramControlsOwnProps {
   isAuthenticated: boolean;
@@ -83,6 +83,7 @@ class InvestmentProgramControls extends Component<
           )}
         </ProgramDetailContext.Consumer>
         <InvestmentUnauthPopup
+          isAuthenticated={false}
           description={programDescription}
           open={this.state.isOpenPopup}
           onClose={this.handleClosePopup}
