@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import { SetSubmittingType } from "shared/utils/types";
 
 import MakeSignalForm, {
   IMakeSignalFormValues
@@ -39,7 +40,7 @@ class ProgramMakeSignalContainer extends Component<
 
   handleApply = (
     values: IMakeSignalFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ) => {
     const { id, service, onClose, onApply } = this.props;
 

@@ -77,13 +77,14 @@ export const getProgramStatistic = (
 
 export const closeProgram = (
   onSuccess: () => void,
+  onError: () => void,
   programId: string,
   opts?: {
     twoFactorCode?: string | undefined;
   }
-): any => (dispatch: Dispatch): Promise<void> => {
+): any => (dispatch: Dispatch): void => {
   const authorization = authService.getAuthArg();
-  return managerApi
+  managerApi
     .v10ManagerProgramsByIdClosePost(programId, authorization, opts)
     .then(() => {
       onSuccess();
@@ -95,15 +96,18 @@ export const closeProgram = (
       );
     })
     .catch(error => {
+      onError();
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 };
 
-export const closePeriod = (programId: string, onSuccess: () => void) => (
-  dispatch: Dispatch
-): Promise<void> => {
+export const closePeriod = (
+  programId: string,
+  onSuccess: () => void,
+  onError: () => void
+) => (dispatch: Dispatch): void => {
   const authorization = authService.getAuthArg();
-  return managerApi
+  managerApi
     .v10ManagerProgramsByIdPeriodClosePost(programId, authorization)
     .then(() => {
       onSuccess();
@@ -115,6 +119,7 @@ export const closePeriod = (programId: string, onSuccess: () => void) => (
       );
     })
     .catch(error => {
+      onError();
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 };

@@ -20,8 +20,7 @@ class CloseFundContainer extends Component {
     if (data.twoFactorCode) {
       opts.twoFactorCode = data.twoFactorCode;
     }
-    service
-      .closeFund(id, opts)
+    closeFund(id, opts)
       .then(() => {
         this.handleClose();
         service.alertSuccess();
@@ -58,7 +57,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     {
-      closeFund,
       alertSuccess: () =>
         alertMessageActions.success(
           "fund-details-page.description.close-fund-notification-success",

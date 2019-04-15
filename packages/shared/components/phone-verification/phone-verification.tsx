@@ -1,7 +1,7 @@
 import * as React from "react";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
-import { Nullable, ResponseError } from "shared/utils/types";
+import { Nullable, ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import PhoneVerificationForm from "./phone-verification-form";
 
@@ -36,7 +36,7 @@ class PhoneVerification extends React.Component<
       );
   };
 
-  verifyCode = (code: string) => {
+  verifyCode = (code: string, setSubmitting: SetSubmittingType) => {
     authApi
       .v10AuthPhoneVerifyPost(authService.getAuthArg(), {
         code
@@ -46,9 +46,10 @@ class PhoneVerification extends React.Component<
           this.props.onVerify();
         }
       })
-      .catch((data: ResponseError) =>
-        this.setState({ errorMessage: data.errorMessage })
-      );
+      .catch((data: ResponseError) => {
+        this.setState({ errorMessage: data.errorMessage });
+        setSubmitting(false);
+      });
   };
 
   startTimer() {

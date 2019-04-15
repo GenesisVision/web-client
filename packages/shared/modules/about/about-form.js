@@ -11,10 +11,10 @@ import styles from "./About.module.scss";
 const AboutForm = ({
   t,
   handleSubmit,
-  disabled,
   errorMessage,
   isValid,
-  dirty
+  dirty,
+  isSubmitting
 }) => {
   return (
     <form id="about-manager" onSubmit={handleSubmit} className={styles.about}>
@@ -51,7 +51,7 @@ const AboutForm = ({
                 <div className="profile__row">
                   <GVButton
                     type="submit"
-                    disabled={disabled || !isValid || !dirty}
+                    disabled={isSubmitting || !isValid || !dirty}
                   >
                     {t("buttons.save")}
                   </GVButton>
@@ -81,8 +81,8 @@ export default compose(
       userName: props.userName || "",
       about: props.about || ""
     }),
-    handleSubmit: (values, { props }) => {
-      props.onSubmit(values);
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
     }
   })
 )(AboutForm);

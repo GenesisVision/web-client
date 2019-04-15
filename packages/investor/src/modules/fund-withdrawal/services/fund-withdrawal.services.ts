@@ -3,24 +3,31 @@ import {
   FundWithdraw,
   FundWithdrawalInfoResponse
 } from "shared/components/fund-withdraw/fund-withdraw.types";
+import { fetchWalletsByCurrencyAvailable } from "shared/components/wallet/actions/wallet.actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
-import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
+import { InvestorThunk } from "shared/utils/types";
 
-export const getFundWithdrawInfo = (
+import {
+  getFundWithdrawInfo,
+  getRate
+} from "../actions/fund-withdrawal.actions";
+
+export const fetchFundWithdrawInfo = (
   id: string,
   currency: string
-) => (): Promise<FundWithdrawalInfoResponse> => {
+): InvestorThunk<Promise<FundWithdrawalInfoResponse>> => dispatch => {
   return Promise.all([
-    investorApi.v10InvestorFundsByIdWithdrawInfoByCurrencyGet(
-      id,
-      currency,
-      authService.getAuthArg()
-    ),
-    walletApi.v10WalletMultiByCurrencyGet(currency, authService.getAuthArg())
-  ]).then(([withdrawalInfo, walletMulti]) => {
-    return { withdrawalInfo, wallets: walletMulti.wallets };
+    dispatch(getFundWithdrawInfo(id, currency)),
+    dispatch(getRate(currency)),
+    dispatch(fetchWalletsByCurrencyAvailable(currency))
+  ]).then(([withdrawalInfo, rate, wallets]) => {
+    return {
+      withdrawalInfo: withdrawalInfo.value,
+      rate: rate.value,
+      wallets: wallets.value.wallets
+    };
   });
 };
 

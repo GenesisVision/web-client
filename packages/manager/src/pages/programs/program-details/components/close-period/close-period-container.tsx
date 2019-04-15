@@ -8,7 +8,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   service: bindActionCreators({ closePeriod }, dispatch)
 });
 
-const ClosePeriodContainer: any = connect(
+const ClosePeriodContainer = connect(
   null,
   mapDispatchToProps
 )(ClosePeriod);

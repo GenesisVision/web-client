@@ -33,15 +33,13 @@ interface IAssetStatusOwnProps {
   onCancel: any;
 }
 
-interface IAssetStatusProps extends IAssetStatusOwnProps {
-  role: ROLE;
-}
+interface IAssetStatusProps extends IAssetStatusOwnProps {}
 
 interface IAssetStatusState {
   anchor?: EventTarget;
 }
 
-class AssetStatus extends React.Component<
+class AssetStatus extends React.PureComponent<
   IAssetStatusProps & InjectedTranslateProps,
   IAssetStatusState
 > {
@@ -61,7 +59,8 @@ class AssetStatus extends React.Component<
   handleCloseDropdown = () => this.setState({ anchor: undefined });
 
   render() {
-    const { t, className, status, id, role, asset, onCancel } = this.props;
+    const { t, className, status, id, asset, onCancel } = this.props;
+    const role = process.env.REACT_APP_PLATFORM as ROLE;
     return (
       <React.Fragment>
         <span
@@ -94,12 +93,4 @@ class AssetStatus extends React.Component<
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
-  role: state.profileHeader.info.data
-    ? state.profileHeader.info.data.userType
-    : null
-});
-export default compose<React.ComponentType<IAssetStatusOwnProps>>(
-  translate(),
-  connect(mapStateToProps)
-)(AssetStatus);
+export default translate()(AssetStatus);

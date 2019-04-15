@@ -31,7 +31,6 @@ import FundDefaultImage from "./fund-default-image";
 
 class CreateFundSettings extends React.Component {
   state = {
-    rate: "1",
     anchor: null,
     assets: this.props.assets.map(asset => {
       return {
@@ -55,7 +54,9 @@ class CreateFundSettings extends React.Component {
 
   fetchRate = (fromCurrency, toCurrency) => {
     rateApi.v10RateByFromByToGet(fromCurrency, toCurrency).then(rate => {
-      if (rate !== this.state.rate) this.setState({ rate });
+      if (rate !== this.props.values.rate) {
+        this.props.setFieldValue("rate", rate);
+      }
     });
   };
   onChangeDepositWallet = (name, target) => {
@@ -131,7 +132,7 @@ class CreateFundSettings extends React.Component {
     setFieldValue("depositAmount", formatCurrencyValue(available, currency));
   };
   render() {
-    const { anchor, assets, remainder, rate } = this.state;
+    const { anchor, assets, remainder } = this.state;
     const {
       currency,
       wallets,
@@ -150,7 +151,13 @@ class CreateFundSettings extends React.Component {
       isValid
     } = this.props;
     if (!wallets) return;
-    const { depositWalletCurrency, depositAmount, description, title } = values;
+    const {
+      depositWalletCurrency,
+      depositAmount,
+      description,
+      title,
+      rate
+    } = values;
 
     const imageInputError =
       errors &&
@@ -413,7 +420,7 @@ class CreateFundSettings extends React.Component {
                   {t("manager.create-program-page.settings.fields.min-deposit")}
                   <span className={"deposit-details__available-amount-value"}>
                     <NumberFormat
-                      value={50}
+                      value={deposit}
                       thousandSeparator=" "
                       displayType="text"
                       suffix={` ${currency}`}
@@ -473,6 +480,7 @@ export default translate()(
     enableReinitialize: true,
     mapPropsToValues: props => {
       return {
+        rate: "1",
         depositWalletCurrency: "GVT",
         depositWalletId: Array.isArray(props.wallets)
           ? props.wallets.find(item => item.currency === "GVT").id

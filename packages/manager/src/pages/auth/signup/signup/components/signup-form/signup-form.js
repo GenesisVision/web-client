@@ -103,7 +103,7 @@ const SignUpForm = ({
         type="submit"
         id="signUpFormSubmit"
         className="signup-form__submit-button"
-        disabled={!isValid || !dirty}
+        disabled={!isValid || !dirty || isSubmitting}
       >
         {t("auth.signup.title")}
       </GVButton>

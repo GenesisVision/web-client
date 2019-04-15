@@ -4,6 +4,7 @@ import SignalsFeeFormPartial from "pages/create-program/components/create-progra
 import React, { ComponentType, FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import { SetSubmittingType } from "shared/utils/types";
 
 import { makeSignalValidationSchema } from "./program-make-signal.validators";
 
@@ -12,7 +13,7 @@ interface IMakeSignalFormOwnProps {
   errorMessage: string;
   onSubmit(
     values: IMakeSignalFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ): void;
 }
 
@@ -34,7 +35,8 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
   dirty,
   handleSubmit,
   programName,
-  errorMessage
+  errorMessage,
+  isSubmitting
 }) => {
   return (
     <form id="makeSignalForm" onSubmit={handleSubmit}>
@@ -57,7 +59,7 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
           <GVButton
             type="submit"
             id="programMakeSignalSubmit"
-            disabled={!dirty}
+            disabled={!dirty || isSubmitting}
           >
             {t("buttons.confirm")}
           </GVButton>

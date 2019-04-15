@@ -1,7 +1,7 @@
 import { FundDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
 import moment from "moment";
 import React, { Component, Fragment } from "react";
@@ -61,7 +61,7 @@ class InvestmentFundControls extends Component<
     this.setState({ popups });
   };
 
-  applyChanges = (updateDetails: any) => () => {
+  applyChanges = (updateDetails: () => void) => () => {
     updateDetails();
   };
 
@@ -147,9 +147,8 @@ class InvestmentFundControls extends Component<
               <FundDepositContainer
                 open={popups[INVESTMENT_POPUP.INVEST]}
                 id={fundDescription.id}
-                type={FUND}
                 onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-                onInvest={updateDetails}
+                onApply={this.applyChanges(updateDetails)}
               />
               <CloseFundContainer
                 open={popups[INVESTMENT_POPUP.CLOSE]}

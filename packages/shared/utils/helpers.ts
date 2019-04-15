@@ -1,12 +1,28 @@
+import { NumberFormatValues } from "react-number-format";
+
 import { Nullable } from "./types";
 
-const allowValuesNumberFormat = ({
-  from,
-  to
-}: {
-  from: number;
-  to: number;
-}) => (values: { floatValue: number; formattedValue: string }): boolean => {
+const merge = function(): object {
+  const args: object[] = [...arguments];
+
+  let result = {};
+
+  args.forEach((obj: object) => {
+    result = { ...result, ...obj };
+  });
+
+  return result;
+};
+
+const allowValuesNumberFormat = (
+  {
+    from,
+    to
+  }: {
+    from: number;
+    to: number;
+  } = { from: Number.MIN_SAFE_INTEGER, to: Number.MAX_SAFE_INTEGER }
+) => (values: NumberFormatValues): boolean => {
   const { formattedValue, floatValue } = values;
   return (
     formattedValue === "" ||

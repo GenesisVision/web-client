@@ -3,6 +3,7 @@ import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React, { ComponentType, FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import { SetSubmittingType } from "shared/utils/types";
 
 import { ChangePasswordTradingAccountValidationSchema } from "./change-password-trading-account.validators";
 
@@ -12,7 +13,7 @@ interface IChangePasswordTradingAccountFormOwnProps {
   programName: string;
   onSubmit(
     values: IChangePasswordTradingAccountFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: SetSubmittingType
   ): void;
 }
 
@@ -41,7 +42,8 @@ const ChangePasswordTradingAccountForm: FunctionComponent<
   programName,
   handleSubmit,
   errorMessage,
-  twoFactorEnabled
+  twoFactorEnabled,
+  isSubmitting
 }) => {
   return (
     <form id="change-password-trading-account" onSubmit={handleSubmit}>
@@ -77,7 +79,7 @@ const ChangePasswordTradingAccountForm: FunctionComponent<
         )}
         <div className="form-error">{errorMessage}</div>
         <div className="dialog__buttons">
-          <GVButton type="submit" disabled={!isValid || !dirty}>
+          <GVButton type="submit" disabled={!isValid || !dirty || isSubmitting}>
             {t("buttons.confirm")}
           </GVButton>
         </div>

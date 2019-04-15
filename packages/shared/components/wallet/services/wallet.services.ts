@@ -1,7 +1,8 @@
 import {
   CancelablePromise,
   CopyTradingAccountInfo,
-  MultiWalletExternalTransaction
+  MultiWalletExternalTransaction,
+  WalletMultiAvailable
 } from "gv-api-web";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
@@ -23,6 +24,17 @@ export const fetchWallets = (): RootThunk<void> => (dispatch, getState) => {
   const { currency } = getState().accountSettings;
   dispatch(actions.updateWalletTimestamp());
   dispatch(actions.fetchWallets(currency, authorization));
+};
+
+export const fetchBaseWallets = (): RootThunk<
+  Promise<WalletMultiAvailable>
+> => (dispatch, getState) => {
+  const authorization = authService.getAuthArg();
+  const { currency } = getState().accountSettings;
+  return walletApi.v10WalletMultiByCurrencyAvailableGet(
+    currency,
+    authorization
+  );
 };
 
 export const fetchWalletTransactions = (requestFilters?: FilteringType) => {

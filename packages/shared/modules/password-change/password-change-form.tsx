@@ -5,13 +5,16 @@ import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React, { ComponentType } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import { SetSubmittingType } from "shared/utils/types";
 
 import { passwordChangeValidationSchema } from "./password-change.validators";
 
 interface IPasswordChangeFormOwnProps {
   errorMessage?: string | null;
-  isPending: boolean;
-  onSubmit(values: ChangePasswordViewModel): void;
+  onSubmit(
+    values: ChangePasswordViewModel,
+    setSubmitting: SetSubmittingType
+  ): void;
 }
 
 type PasswordChangeFormProps = InjectedTranslateProps &
@@ -23,10 +26,10 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
   values,
   errorMessage,
   errors,
-  isPending,
   handleSubmit,
   isValid,
-  dirty
+  dirty,
+  isSubmitting
 }) => {
   const className = classnames({
     "change-password__equal":
@@ -69,7 +72,7 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
         />
         <div className="form-error">{errorMessage}</div>
       </div>
-      <GVButton type="submit" disabled={isPending || !isValid || !dirty}>
+      <GVButton type="submit" disabled={isSubmitting || !isValid || !dirty}>
         {t("buttons.confirm")}
       </GVButton>
     </form>
@@ -86,6 +89,7 @@ export default compose<ComponentType<IPasswordChangeFormOwnProps>>(
       confirmPassword: ""
     }),
     validationSchema: passwordChangeValidationSchema,
-    handleSubmit: (values, { props }) => props.onSubmit(values)
+    handleSubmit: (values, { props, setSubmitting }) =>
+      props.onSubmit(values, setSubmitting)
   })
 )(PasswordChangeForm);

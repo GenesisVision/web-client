@@ -13,6 +13,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TransferRate from "shared/modules/wallet-transfer/components/transfer-rate";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { SetSubmittingType } from "shared/utils/types";
 import { Schema, lazy, number, object } from "yup";
 
 const getDestinationWallets = (
@@ -61,11 +62,11 @@ class WalletTransferForm extends React.Component<Props> {
       handleSubmit,
       wallets,
       values,
-      disabled,
       isValid,
       dirty,
       errorMessage,
-      setFieldValue
+      setFieldValue,
+      isSubmitting
     } = this.props;
 
     const { sourceId, destinationId } = values;
@@ -90,7 +91,7 @@ class WalletTransferForm extends React.Component<Props> {
       setFieldValue("amount", formattedAvailableSourceWallet);
     };
 
-    const disableButton = disabled || !values.amount || !isValid || !dirty;
+    const disableButton = isSubmitting || !values.amount || !isValid || !dirty;
 
     return (
       <form
@@ -238,16 +239,18 @@ export default compose<React.FunctionComponent<OwnProps>>(
         }
       );
     },
-    handleSubmit: (values, { props }) => {
+    handleSubmit: (values, { props, setSubmitting }) => {
       const transferAll = getTransferAll(values, props);
-      props.onSubmit({ ...values, transferAll });
+      props.onSubmit({ ...values, transferAll }, setSubmitting);
     }
   })
 )(WalletTransferForm);
 
 interface OwnProps {
-  onSubmit(values: TransferFormValuesType): void;
-  disabled: boolean;
+  onSubmit(
+    values: TransferFormValuesType,
+    setSubmitting: SetSubmittingType
+  ): void;
   errorMessage?: string;
   wallets: Array<WalletData>;
   currentWallet: WalletData;

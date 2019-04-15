@@ -18,7 +18,11 @@ interface IGeneralNotificationProps {
   label: string;
   assetId: string;
   addNotification(opts?: Setting): Promise<any>;
-  removeNotification(opts?: { id?: string; assetId: string }): Promise<any>;
+  removeNotification(opts?: {
+    id?: string;
+    assetId: string;
+    type: string;
+  }): Promise<any>;
 }
 
 interface IGeneralNotificationState {
@@ -58,8 +62,8 @@ class GeneralNotification extends React.Component<
     this.props
       .removeNotification({
         id: this.props.setting.id,
-        assetId: this.props.assetId
-        // type: this.props.name
+        assetId: this.props.assetId,
+        type: this.props.name
       })
       .then(() => this.setState({ isPending: false }))
       .catch(() => this.setState({ isPending: false }));

@@ -1,3 +1,4 @@
+import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import ProgramFollowContainer from "modules/program-follow/program-follow-container";
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
@@ -18,7 +19,7 @@ enum SIGNAL_POPUP {
 interface ISignalProviderControlOwnProps {
   isAuthenticated: boolean;
   redirectToLogin(): void;
-  programDescription: any;
+  programDescription: ProgramDetailsFull;
 }
 
 interface ISignalProviderControlState {

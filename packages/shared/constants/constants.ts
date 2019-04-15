@@ -1,5 +1,5 @@
-export const MANAGER = "Manager";
-export const INVESTOR = "Investor";
+export const MANAGER = "manager";
+export const INVESTOR = "investor";
 export const PROGRAM = "PROGRAM";
 export const FUND = "FUND";
 
@@ -39,8 +39,8 @@ export enum FOLLOW_TYPE {
 }
 
 export enum ROLE {
-  INVESTOR = "Investor",
-  MANAGER = "Manager"
+  INVESTOR = "investor",
+  MANAGER = "manager"
 }
 export enum ASSET {
   PROGRAM = "PROGRAM",

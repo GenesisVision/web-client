@@ -19,6 +19,7 @@ export interface IProgramWithdrawalContainerProps extends IDialogProps {
   id: string;
   assetCurrency: string;
   accountCurrency: string;
+  onSubmit(): void;
 }
 
 export interface IDescriptionSection {

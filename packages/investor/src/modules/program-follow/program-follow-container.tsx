@@ -8,7 +8,7 @@ import { FOLLOW_TYPE } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
-import FollowForm from "./follow-popup/follow-popup-form";
+import FollowPopupForm from "./follow-popup/follow-popup-form";
 import {
   attachToSignal,
   getSignalAccounts,
@@ -74,7 +74,7 @@ class ProgramFollowContainer extends React.Component<
       type === FOLLOW_TYPE.CREATE ? attachToSignal : updateAttachToSignal;
     return (
       <Dialog open={open} onClose={handleClose}>
-        <FollowForm
+        <FollowPopupForm
           alertError={service.alertError}
           alertSuccess={service.alertSuccess}
           id={id}
@@ -91,11 +91,9 @@ class ProgramFollowContainer extends React.Component<
 }
 
 const mapStateToProps = (state: any) => {
-  const { programDeposit, wallet } = state;
+  const { wallet } = state;
   return {
-    wallets: wallet.info.data ? wallet.info.data.wallets : null,
-    info: programDeposit.info,
-    submitInfo: programDeposit.submit
+    wallets: wallet.info.data ? wallet.info.data.wallets : null
   };
 };
 const mapDispatchToProps = (dispatch: any) => ({

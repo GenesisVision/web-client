@@ -2,6 +2,7 @@
 @import "~shared/styles/_constants.scss";
 
 .profile-avatar {
+  @include transition(background-color);
   display: flex;
   justify-content: center;
   align-items: center;

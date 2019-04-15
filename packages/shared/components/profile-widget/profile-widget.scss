@@ -8,14 +8,16 @@
     flex-direction: row;
     align-items: center;
     cursor: pointer;
+
+    &:hover {
+      .profile-widget__avatar {
+        background-color: lighten($secondary-color, 5%);
+      }
+    }
   }
 
   &__avatar {
     margin-right: 10px;
-
-    &:hover {
-      box-shadow: $box-shadow-4;
-    }
   }
 
   &__image {
