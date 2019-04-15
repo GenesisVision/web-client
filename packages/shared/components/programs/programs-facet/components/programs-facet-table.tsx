@@ -5,7 +5,6 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
-
 import {
   PROGRAMS_FACET_PAGING,
   PROGRAMS_FACET_TABLE_FILTERING,
@@ -17,14 +16,7 @@ import {
   TableToggleFavoriteType
 } from "shared/components/table/components/table.types";
 
-interface IProgramsFacetTableProps {
-  title: string;
-  getItems: GetItemsFuncType;
-  isAuthenticated: boolean;
-  showRating: boolean;
-}
-
-class ProgramsFacetTable extends React.Component<
+class _ProgramsFacetTable extends React.PureComponent<
   IProgramsFacetTableProps & InjectedTranslateProps
 > {
   toggleFavorite: TableToggleFavoriteType = (program, updateRow) => () => {
@@ -47,14 +39,14 @@ class ProgramsFacetTable extends React.Component<
           updateFilter,
           filtering: FilteringType //TODO fix filtering types
         ) => (
-          <React.Fragment>
+          <>
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}
               value={filtering[DATE_RANGE_FILTER_NAME]}
               onChange={updateFilter}
               startLabel={t("filters.date-range.program-start")}
             />
-          </React.Fragment>
+          </>
         )}
         title={title}
         paging={PROGRAMS_FACET_PAGING}
@@ -68,4 +60,12 @@ class ProgramsFacetTable extends React.Component<
   }
 }
 
-export default translate()(ProgramsFacetTable);
+export interface IProgramsFacetTableProps {
+  title: string;
+  getItems: GetItemsFuncType;
+  isAuthenticated: boolean;
+  showRating?: boolean;
+}
+
+const ProgramsFacetTable = translate()(_ProgramsFacetTable);
+export default ProgramsFacetTable;

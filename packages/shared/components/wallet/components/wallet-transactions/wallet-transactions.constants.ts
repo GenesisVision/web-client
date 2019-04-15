@@ -70,3 +70,14 @@ export const WALLET_TRANSACTION_ACTIONS_VALUES = [
   { value: "ProgramRequestWithdrawal", label: "Program request withdrawal" },
   { value: "ProgramRequestCancel", label: "Program request cancel" }
 ];
+
+export enum TRANSACTIONS_TYPE {
+  ALL = "All",
+  INVESTMENT = "Investment",
+  CONVERTING = "Converting",
+  WITHDRAWAL = "Withdrawal",
+  CLOSE = "Close",
+  OPEN = "Open",
+  FEE = "Fee",
+  PROFITS = "Profits"
+}

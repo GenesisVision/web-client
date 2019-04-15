@@ -14,8 +14,8 @@ import { GetItemsFuncType } from "./table.types";
 const defaultData: IDataModel = { items: null, total: 0 };
 
 export interface ITableModuleProps extends ITableProps {
-  defaultFilters: any[];
   getItems: GetItemsFuncType;
+  defaultFilters?: any[];
   loader?: boolean;
   data?: IDataModel;
 }

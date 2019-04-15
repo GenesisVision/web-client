@@ -15,7 +15,7 @@ interface IComposeRequestFiltersProps {
   paging: IPaging;
   sorting: string;
   filtering: FilteringType;
-  defaultFilters: IComposeDefaultFilter[];
+  defaultFilters?: IComposeDefaultFilter[];
 }
 export const composeRequestFilters = ({
   paging,

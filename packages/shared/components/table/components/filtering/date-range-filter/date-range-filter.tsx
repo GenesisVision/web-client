@@ -1,7 +1,7 @@
 import "./date-range-filter.scss";
 
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 
 import { IUpdateFilterFunc } from "../../table.types";
 import Filter from "../filter";
@@ -12,14 +12,15 @@ import {
 } from "./date-range-filter.constants";
 
 interface IDateRangeFilterProps {
-  t: TranslationFunction;
   name: string;
   value: any;
   onChange?: IUpdateFilterFunc;
   startLabel: string;
 }
 
-class DateRangeFilter extends React.PureComponent<IDateRangeFilterProps> {
+class DateRangeFilter extends React.PureComponent<
+  IDateRangeFilterProps & InjectedTranslateProps
+> {
   renderValueText = (value: IDataRangeFilterValue): string => {
     const { t } = this.props;
     switch (value.type) {

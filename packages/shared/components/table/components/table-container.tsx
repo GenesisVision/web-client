@@ -13,7 +13,7 @@ import { GetItemsFuncActionType } from "./table.types";
 
 interface ITableContainerProps extends ITableProps {
   getItems: GetItemsFuncActionType;
-  dataSelector: any;
+  dataSelector: (opts?: any) => { [keys: string]: any };
   isFetchOnMount: boolean;
 }
 

@@ -4,9 +4,11 @@ import React from "react";
 import ProgramDetailsPageCommon from "shared/components/programs/program-details/program-details.page";
 import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 
-import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
+import {
+  fetchHistoryCounts,
+  fetchPortfolioEvents
+} from "shared/components/programs/program-details/services/program-details.service";
 import ProgramControls from "./components/program-controls";
-import { fetchHistoryCounts } from "./services/program-details.service";
 
 const ProgramDetailsPage: React.FC = () => {
   const descriptionSection = {

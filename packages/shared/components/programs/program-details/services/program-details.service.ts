@@ -1,13 +1,17 @@
-import { OrderModel, ProgramsLevelsInfo, TradesViewModel } from "gv-api-web";
 import {
-  PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
-} from "pages/programs/programs.routes";
+  CancelablePromise,
+  DashboardPortfolioEvent,
+  DashboardPortfolioEvents,
+  ManagerPortfolioEvent,
+  ManagerPortfolioEvents,
+  OrderModel,
+  ProgramsLevelsInfo
+} from "gv-api-web";
 import { Dispatch } from "redux";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import {
-  TableItems,
-  mapToTableItems
+  mapToTableItems,
+  TableItems
 } from "shared/components/table/helpers/mapper";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import RootState from "shared/reducers/root-reducer";
@@ -16,8 +20,15 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-
 import { ProgramStatisticResult } from "./program-details.types";
+import { HistoryCountsType } from "../program-details.types";
+import {
+  PROGRAM_DETAILS_ROUTE,
+  PROGRAM_SLUG_URL_PARAM_NAME
+} from "shared/utils/compose-url";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import investorApi from "shared/services/api-client/investor-api";
+import { ROLE } from "shared/constants/constants";
 
 export const getProgramDescription = () => (
   dispatch: Dispatch,
@@ -126,13 +137,11 @@ export const closePeriod = (
 
 export const fetchProgramTrades = (
   id: string,
-  filters: any,
-  currency: string
+  filters?: FilteringType
 ): Promise<TableItems<OrderModel>> => {
   return programsApi
     .v10ProgramsByIdTradesGet(id, {
-      ...filters,
-      currency
+      ...filters
     })
     .then(mapToTableItems<OrderModel>("trades"));
 };
@@ -150,4 +159,53 @@ export const fetchInvestmentsLevels = (
   currency: string
 ): Promise<ProgramsLevelsInfo> => {
   return platformApi.v10PlatformLevelsGet({ currency });
+};
+
+export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
+  const isAuthenticated = authService.isAuthenticated();
+  const filtering = { take: 0 };
+  const tradesCountPromise = programsApi.v10ProgramsByIdTradesGet(
+    id,
+    filtering
+  );
+  const eventsCountPromise = isAuthenticated
+    ? fetchPortfolioEvents({ ...filtering, assetId: id })
+    : Promise.resolve({ total: 0 });
+  const openPositionsCountPromise = programsApi.v10ProgramsByIdTradesOpenGet(
+    id
+  );
+  return Promise.all([
+    tradesCountPromise,
+    eventsCountPromise,
+    openPositionsCountPromise
+  ]).then(([tradesData, eventsData, openPositionsData]) => ({
+    tradesCount: tradesData.total,
+    eventsCount: eventsData.total,
+    openPositionsCount: openPositionsData.total
+  }));
+};
+
+export const fetchPortfolioEvents = (
+  filters: FilteringType
+): CancelablePromise<
+  TableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>
+> => {
+  const authorization = authService.getAuthArg();
+  const role = process.env.REACT_APP_PLATFORM as ROLE;
+  let request: (
+    authorization: string,
+    opts: Object
+  ) => CancelablePromise<DashboardPortfolioEvents | ManagerPortfolioEvents>;
+  switch (role) {
+    case ROLE.INVESTOR:
+      request = investorApi.v10InvestorPortfolioEventsGet;
+      break;
+    case ROLE.MANAGER:
+    default:
+      request = managerApi.v10ManagerEventsGet;
+      break;
+  }
+  return request(authorization, filters).then(
+    mapToTableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>("events")
+  );
 };

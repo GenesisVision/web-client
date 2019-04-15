@@ -1,11 +1,12 @@
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { composeRequestValueFunc } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { SortingColumn } from "../../table/components/filtering/filter.type";
 
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 export const PROGRAM_TRADES_SORTING = "ByDateDesc";
-export const PROGRAM_TRADES_COLUMNS = [
+export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
     name: "direction"
   },
@@ -31,7 +32,7 @@ export const PROGRAM_TRADES_COLUMNS = [
     name: "entry"
   }
 ];
-export const PROGRAM_OPEN_POSITIONS_COLUMNS = [
+export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
   {
     name: "date",
     sortingName: "ByDate"
