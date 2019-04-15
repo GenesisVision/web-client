@@ -55,7 +55,7 @@ interface State {
 
 interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
 
-class TransactionDetailsDialog extends React.Component<Props, State> {
+class _TransactionDetailsDialog extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -132,10 +132,11 @@ const mapDispatchToProps = {
   error: alertMessageActions.error
 };
 
-export default compose<React.FunctionComponent<OwnProps>>(
+const TransactionDetailsDialog = compose<React.FunctionComponent<OwnProps>>(
   translate(),
   connect<null, DispatchProps>(
     null,
     mapDispatchToProps
   )
-)(TransactionDetailsDialog);
+)(_TransactionDetailsDialog);
+export default TransactionDetailsDialog;
