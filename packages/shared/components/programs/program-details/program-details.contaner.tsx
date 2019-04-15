@@ -31,7 +31,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   profitChart,
   balanceChart
 }) => {
-  if (!description) return null;
   const fetchHistoryPortfolioEvents = (filters: any) =>
     historySection.fetchPortfolioEvents({
       ...filters,
@@ -97,7 +96,7 @@ interface OwnProps {
   redirectToLogin: () => void;
   historySection: IHistorySection;
   descriptionSection: IDescriptionSection;
-  description?: ProgramDetailsFull;
+  description: ProgramDetailsFull;
   profitChart?: ProgramDetailsProfitChart;
   balanceChart?: ProgramBalanceChart;
   statistic?: ProgramDetailsStatistic;
