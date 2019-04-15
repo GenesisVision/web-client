@@ -4,33 +4,19 @@ import classNames from "classnames";
 import * as React from "react";
 import UserIcon from "shared/media/user-avatar.svg";
 
-import ImageBase from "../image-base";
+import ImageBase, { IImageProps } from "../image-base";
 
-interface IProfileAvatarProps {
-  url?: string;
-  alt?: string;
-  className?: string;
-  imageClassName?: string;
-}
-
-const ProfileAvatar: React.FC<IProfileAvatarProps> = ({
-  url,
-  alt,
-  className = "",
-  imageClassName = ""
-}) => {
-  className = classNames("profile-avatar", className);
-  imageClassName = classNames("profile-avatar__image", imageClassName);
-
+const ProfileAvatar: React.FC<IImageProps> = ({ url, alt, className }) => {
   return (
-    <ImageBase
-      url={url}
-      alt={alt}
-      defaultImage={UserIcon}
-      className={className}
-      imageClassName={imageClassName}
-      defaultImageClassName="profile-avatar__image--default"
-    />
+    <div className={classNames("profile-avatar", className)}>
+      <ImageBase
+        url={url}
+        alt={alt}
+        defaultImage={UserIcon}
+        imageClassName="profile-avatar__image"
+        defaultImageClassName="profile-avatar__image--default"
+      />
+    </div>
   );
 };
 

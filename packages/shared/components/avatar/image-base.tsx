@@ -2,26 +2,7 @@ import classNames from "classnames";
 import * as React from "react";
 import withUrl from "shared/decorators/with-url";
 
-export interface IImageProps {
-  url: string;
-  alt: string;
-  className?: string;
-  imageClassName?: string;
-  defaultImageClassName?: string;
-}
-
-interface IImageBaseProps {
-  defaultImage: string;
-}
-
-interface IImageBaseState {
-  error: boolean;
-}
-
-class ImageBase extends React.Component<
-  IImageBaseProps & IImageProps,
-  IImageBaseState
-> {
+class _ImageBase extends React.Component<IImageBaseProps, State> {
   state = {
     error: false
   };
@@ -34,26 +15,42 @@ class ImageBase extends React.Component<
       url,
       alt,
       defaultImage,
-      className,
       imageClassName,
       defaultImageClassName
     } = this.props;
     const currentSrc = this.state.error || !url ? defaultImage : url;
 
     return (
-      <div className={className}>
-        <img
-          alt={alt}
-          className={classNames(
-            imageClassName,
-            this.state.error || !url ? defaultImageClassName : ""
-          )}
-          src={currentSrc}
-          onError={this.handleError}
-        />
-      </div>
+      <img
+        alt={alt}
+        className={classNames(
+          imageClassName,
+          this.state.error || !url ? defaultImageClassName : ""
+        )}
+        src={currentSrc}
+        onError={this.handleError}
+      />
     );
   }
 }
 
-export default withUrl("url")(ImageBase);
+const ImageBase = withUrl("url")(_ImageBase);
+export default ImageBase;
+
+export interface IImageProps {
+  url: string;
+  alt: string;
+  className?: string;
+}
+
+export interface IImageBaseProps {
+  url: string;
+  alt: string;
+  defaultImage: string;
+  imageClassName?: string;
+  defaultImageClassName?: string;
+}
+
+interface State {
+  error: boolean;
+}

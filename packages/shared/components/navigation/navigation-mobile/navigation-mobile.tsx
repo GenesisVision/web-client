@@ -1,9 +1,9 @@
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
 import { DetailsIcon } from "shared/components/icon/details-icon";
@@ -53,7 +53,6 @@ const NavigationMobile: React.FC<
               url={avatar}
               alt={email}
               className="mobile__avatar"
-              imageClassName="profile-widget__image"
             />
             <div className="mobile__email">{email}</div>
           </div>
