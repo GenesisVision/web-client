@@ -7,10 +7,11 @@ import classNames from "classnames";
 import * as React from "react";
 import Cropper from "react-cropper";
 import Dropzone, { FileWithPreview } from "react-dropzone";
+import { InjectedTranslateProps, translate } from "react-i18next";
 
 import InputImageDefault from "./input-image-default";
 
-class InputImage extends React.PureComponent<Props> {
+class _InputImage extends React.PureComponent<Props & InjectedTranslateProps> {
   dropzone: React.RefObject<Dropzone> = React.createRef();
   cropper: React.RefObject<Cropper> = React.createRef();
 
@@ -65,20 +66,27 @@ class InputImage extends React.PureComponent<Props> {
       imageSmoothingQuality: "high"
     });
 
-    if (!croppedCanvas) return;
-
     croppedCanvas.toBlob(
       blob => {
-        if (!blob) return;
-        const croppedImg = {
-          ...image,
-          cropped: new File([blob], image.name, {
-            type: blob.type
-          }),
-          width: croppedCanvas.width,
-          height: croppedCanvas.height,
-          size: blob.size
-        };
+        let croppedImg;
+        if (!blob) {
+          croppedImg = {
+            ...image,
+            width: 0,
+            height: 0,
+            size: 0
+          };
+        } else {
+          croppedImg = {
+            ...image,
+            cropped: new File([blob], image.name, {
+              type: blob.type
+            }),
+            width: croppedCanvas.width,
+            height: croppedCanvas.height,
+            size: blob.size
+          };
+        }
         onChange({
           target: { value: { image: croppedImg }, name }
         });
@@ -94,17 +102,21 @@ class InputImage extends React.PureComponent<Props> {
   };
 
   clear = (event: React.SyntheticEvent) => {
+    this.setDefaultImage();
+    event.stopPropagation();
+  };
+
+  setDefaultImage = () => {
     const { onChange, name } = this.props;
     this.setState({ newImage: undefined, isDefault: true });
     const e: IImageChangeEvent = {
       target: { value: {}, name }
     };
     onChange(e);
-    event.stopPropagation();
   };
 
   render() {
-    const { value, className, defaultImage, error } = this.props;
+    const { t, value, className, defaultImage, error } = this.props;
     const { src, image } = value;
     const hasSizeError = error && error.image.size;
     return (
@@ -121,7 +133,9 @@ class InputImage extends React.PureComponent<Props> {
           ref={this.dropzone}
           onDrop={this.onDrop}
         >
-          <div className="input-image__dropzone-helper">Drop files...</div>
+          <div className="input-image__dropzone-helper">
+            {t("input-image.drop-files")}
+          </div>
           <div className="input-image__dropzone-content">
             <div className="input-image__image-container">
               {image && !hasSizeError && (
@@ -139,27 +153,25 @@ class InputImage extends React.PureComponent<Props> {
                 <InputImageDefault defaultImage={image.src} />
               )}
 
-              {!image && src && <InputImageDefault defaultImage={src} />}
-
-              {!image && !src && (
-                <InputImageDefault defaultImage={defaultImage} />
+              {!image && (
+                <InputImageDefault src={src} defaultImage={defaultImage} />
               )}
             </div>
             <p className="input-image__text input-image__text--big">
-              Drag the image here or click{" "}
+              {t("input-image.drag-or-click")}
               <span
                 className="input-image__text-upload"
                 onClick={this.openFileDialog}
               >
-                upload
-              </span>{" "}
-              to browse your files
+                {t("input-image.upload")}
+              </span>
+              {t("input-image.to-browse")}
             </p>
             <p
               className="input-image__text input-image__text--small"
               onClick={this.openFileDialog}
             >
-              Tap to upload the image
+              {t("input-image.tap-to-upload")}
             </p>
           </div>
         </Dropzone>
@@ -178,6 +190,7 @@ class InputImage extends React.PureComponent<Props> {
   }
 }
 
+const InputImage = translate()(_InputImage);
 export default InputImage;
 
 export interface INewImage {

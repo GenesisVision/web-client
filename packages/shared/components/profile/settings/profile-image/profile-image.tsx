@@ -8,15 +8,16 @@ import { compose } from "redux";
 import InputImage, {
   IImageValue
 } from "shared/components/form/input-image/input-image";
+import imageValidationSchema from "shared/components/form/input-image/input-image.validation";
 import UserIcon from "shared/media/user-avatar.svg";
 import { SetSubmittingType } from "shared/utils/types";
-import { number, object } from "yup";
+import { object } from "yup";
 
 class _ProfileImage extends React.PureComponent<
   InjectedFormikProps<Props, FormValues>
 > {
   render() {
-    const { t, avatar, handleSubmit, dirty } = this.props;
+    const { t, avatar, handleSubmit, isValid, isSubmitting } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -42,7 +43,7 @@ class _ProfileImage extends React.PureComponent<
             color="primary"
             variant="outlined"
             className="profile-image__submit-btn"
-            disabled={!dirty}
+            disabled={isSubmitting || !isValid}
           >
             {t("profile-page.settings.save-photo")}
           </GVButton>
@@ -63,33 +64,10 @@ const ProfileImage = compose<React.ComponentType<OwnProps>>(
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
-        logo: object().shape({
-          image: object().shape({
-            width: number().min(
-              300,
-              t(
-                "manager.create-program-page.settings.validation.image-resolution-incorrect"
-              )
-            ),
-            height: number().min(
-              300,
-              t(
-                "manager.create-program-page.settings.validation.image-resolution-incorrect"
-              )
-            ),
-            size: number().max(
-              2097152,
-              t(
-                "manager.create-program-page.settings.validation.image-file-is-large"
-              )
-            )
-          })
-        })
+        logo: imageValidationSchema(t)
       }),
-    handleSubmit: (values, { props, ...bag }) => {
-      var t = bag;
-      alert(values);
-      //props.onSubmit(values, setSubmitting);
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values.logo, setSubmitting);
     }
   })
 )(_ProfileImage);
@@ -98,12 +76,10 @@ export default ProfileImage;
 
 interface OwnProps {
   avatar: string;
-  onSubmit(values: FormValues, setSubmitting: SetSubmittingType): void;
+  onSubmit(image: IImageValue, setSubmitting: SetSubmittingType): void;
 }
 
 interface Props extends OwnProps, InjectedTranslateProps {}
-
-interface State {}
 
 interface FormValues {
   logo: IImageValue;
