@@ -6,7 +6,6 @@ import PortfolioEventsTable, {
 } from "./portfolio-events-table";
 
 const PortfolioEventsTableContainer: React.FC<Props> = ({
-  pageTitle,
   tableTitle,
   className,
   fetchPortfolioEvents,
@@ -17,7 +16,7 @@ const PortfolioEventsTableContainer: React.FC<Props> = ({
     <Surface className="dashboard-portfolio-events-all">
       <PortfolioEventsTable
         fetchPortfolioEvents={fetchPortfolioEvents}
-        tableTitle={tableTitle}
+        title={tableTitle}
         className={className}
         dateRangeStartLabel={dateRangeStartLabel}
         eventTypeFilterValues={eventTypeFilterValues}
@@ -27,7 +26,7 @@ const PortfolioEventsTableContainer: React.FC<Props> = ({
 };
 
 interface Props extends IPortfolioEventsTableProps {
-  pageTitle: string;
+  tableTitle: string;
 }
 
 export default React.memo(PortfolioEventsTableContainer);
