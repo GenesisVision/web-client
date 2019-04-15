@@ -27,6 +27,7 @@ const _DashboardPortfolioEvents: React.FC<Props & InjectedTranslateProps> = ({
   const role = process.env.REACT_APP_PLATFORM;
   const renderEvents = () => {
     if (isPending && !data) return <DashboardPortfolioEventsListLoader />;
+    if (data === undefined) return null;
     return (
       (data.total &&
         data.events.map((event, idx) => (
