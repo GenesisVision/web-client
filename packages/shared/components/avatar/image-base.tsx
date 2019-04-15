@@ -34,7 +34,7 @@ class _ImageBase extends React.Component<IImageBaseProps, State> {
   }
 }
 
-const ImageBase = withUrl("url")(_ImageBase);
+const ImageBase = withUrl<IImageBaseProps>("url")(_ImageBase);
 export default ImageBase;
 
 export interface IImageProps {

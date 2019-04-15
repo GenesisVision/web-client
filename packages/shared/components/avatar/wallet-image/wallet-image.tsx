@@ -15,7 +15,6 @@ const WalletImage: FunctionComponent<Props & IImageProps> = ({
         url={url}
         alt={alt}
         defaultImage={WalletCurrency}
-        className={className}
         imageClassName={imageClassName}
       />
     </div>
