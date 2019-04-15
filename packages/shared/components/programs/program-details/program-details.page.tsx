@@ -61,17 +61,14 @@ class ProgramDetailsPage extends PureComponent<
   IProgramDetailsPageProps,
   IProgramDetailsPageState
 > {
-  constructor(props: IProgramDetailsPageProps) {
-    super(props);
-    this.state = {
-      hasError: false,
-      isPending: false,
-      description: undefined,
-      profitChart: undefined,
-      balanceChart: undefined,
-      statistic: undefined
-    };
-  }
+  state = {
+    hasError: false,
+    isPending: false,
+    description: undefined,
+    profitChart: undefined,
+    balanceChart: undefined,
+    statistic: undefined
+  } as IProgramDetailsPageState;
 
   componentDidMount() {
     this.getDetails();

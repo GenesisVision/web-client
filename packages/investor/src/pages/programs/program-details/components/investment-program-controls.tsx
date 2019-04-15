@@ -8,9 +8,11 @@ import {
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
+import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup";
 
 interface IInvestmentProgramControlsOwnProps {
   isAuthenticated: boolean;
+
   redirectToLogin(): void;
 
   programDescription: ProgramDetailsFull;
@@ -18,6 +20,7 @@ interface IInvestmentProgramControlsOwnProps {
 
 interface IInvestmentProgramControlsState {
   isOpenInvestmentPopup: boolean;
+  isOpenPopup: boolean;
 }
 
 type InvestmentProgramControlsProps = InjectedTranslateProps &
@@ -28,14 +31,20 @@ class InvestmentProgramControls extends Component<
   IInvestmentProgramControlsState
 > {
   state = {
-    isOpenInvestmentPopup: false
+    isOpenInvestmentPopup: false,
+    isOpenPopup: false
   };
+
+  handleClosePopup = () => {
+    this.setState({ isOpenPopup: false });
+  };
+
   openInvestmentPopup = () => {
-    const { isAuthenticated, redirectToLogin } = this.props;
+    const { isAuthenticated } = this.props;
     if (isAuthenticated) {
       this.setState({ isOpenInvestmentPopup: true });
     } else {
-      redirectToLogin();
+      this.setState({ isOpenPopup: true });
     }
   };
 
@@ -46,6 +55,7 @@ class InvestmentProgramControls extends Component<
   applyInvestmentChanges = (updateDetails: () => void) => () => {
     updateDetails();
   };
+
   render() {
     const { t, programDescription } = this.props;
 
@@ -57,27 +67,26 @@ class InvestmentProgramControls extends Component<
           <GVButton
             className="program-details-description__invest-btn"
             onClick={this.openInvestmentPopup}
-            disabled={
-              !programDescription.personalProgramDetails ||
-              !programDescription.personalProgramDetails.canInvest
-            }
           >
             {t("program-details-page.description.invest")}
           </GVButton>
         </div>
         <ProgramDetailContext.Consumer>
           {({ updateDetails }: IProgramDetailContext) => (
-            <Fragment>
-              <ProgramDepositContainer
-                currency={programDescription.currency}
-                open={isOpenInvestmentPopup}
-                id={programDescription.id}
-                onClose={this.closeInvestmentPopup}
-                onApply={this.applyInvestmentChanges(updateDetails)}
-              />
-            </Fragment>
+            <ProgramDepositContainer
+              currency={programDescription.currency}
+              open={isOpenInvestmentPopup}
+              id={programDescription.id}
+              onClose={this.closeInvestmentPopup}
+              onApply={this.applyInvestmentChanges(updateDetails)}
+            />
           )}
         </ProgramDetailContext.Consumer>
+        <InvestmentUnauthPopup
+          description={programDescription}
+          open={this.state.isOpenPopup}
+          onClose={this.handleClosePopup}
+        />
       </Fragment>
     );
   }
