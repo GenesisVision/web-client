@@ -32,7 +32,7 @@ const PortfolioEventsTable: React.FC<
 > = ({
   t,
   filtering = PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  tableTitle,
+  title,
   className,
   fetchPortfolioEvents,
   dateRangeStartLabel,
@@ -41,7 +41,7 @@ const PortfolioEventsTable: React.FC<
   return (
     <div className={className}>
       <TableModule
-        title={tableTitle}
+        title={title}
         defaultFilters={PORTFOLIO_EVENTS_FILTERS}
         getItems={fetchPortfolioEvents}
         filtering={filtering}
@@ -129,11 +129,11 @@ const PortfolioEventsTable: React.FC<
 };
 
 export interface IPortfolioEventsTableProps {
-  tableTitle: string;
-  className: string;
   fetchPortfolioEvents: GetItemsFuncType;
   dateRangeStartLabel: string;
   eventTypeFilterValues: PORTFOLIO_EVENTS_TYPES[];
+  className?: string;
+  title?: string;
   filtering?: FilteringType;
 }
 
