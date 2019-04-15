@@ -54,7 +54,6 @@ const DashboardPrograms: FunctionComponent<
   title
 }) => {
   return (
-    //@ts-ignore
     <TableContainer
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createProgram}
