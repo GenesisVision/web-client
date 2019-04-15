@@ -1,7 +1,7 @@
 import { TranslationFunction } from "i18next";
 import { number, object } from "yup";
 
-const imageValidationSchema = (t: TranslationFunction) =>
+const inputImageShape = (t: TranslationFunction) =>
   object().shape({
     image: object().shape({
       width: number().min(300, t("input-image.validation.resolution")),
@@ -10,4 +10,4 @@ const imageValidationSchema = (t: TranslationFunction) =>
     })
   });
 
-export default imageValidationSchema;
+export default inputImageShape;

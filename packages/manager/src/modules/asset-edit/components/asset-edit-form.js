@@ -1,4 +1,4 @@
-import { Field, withFormik } from "formik";
+import { withFormik } from "formik";
 import {
   GVButton,
   GVFormikField,
@@ -12,7 +12,6 @@ import { compose } from "redux";
 import InputImage from "shared/components/form/input-image/input-image";
 import { FUND, PROGRAM } from "shared/constants/constants";
 import ProgramDefaultImage from "shared/media/program-default-image.svg";
-import filesService from "shared/services/file-service";
 
 import editAssetSettingsValidationSchema from "./asset-edit.validators";
 
@@ -32,10 +31,6 @@ const AssetEditForm = ({
   type,
   isSubmitting
 }) => {
-  const imageInputError =
-    errors &&
-    errors.logo &&
-    (errors.logo.width || errors.logo.height || errors.logo.size);
   const descriptionTrimmedLength = values.description.trim().length;
   return (
     <form id="edit-form" onSubmit={handleSubmit}>
@@ -98,18 +93,10 @@ const AssetEditForm = ({
         </div>
         <div className="create-program-settings__logo-section edit-program__logo-section">
           <div className="create-program-settings__file-field-container">
-            <Field
+            <GVFormikField
               name="logo"
-              render={({ field }) => (
-                <InputImage
-                  {...field}
-                  defaultImage={ProgramDefaultImage}
-                  onChange={setFieldValue}
-                  notifyError={notifyError}
-                  alt="Program logo"
-                  error={imageInputError}
-                />
-              )}
+              component={InputImage}
+              defaultImage={ProgramDefaultImage}
             />
           </div>
         </div>
@@ -139,14 +126,7 @@ export default compose(
         title: props.info.title,
         description: props.info.description,
         logo: {
-          cropped: null,
-          src: filesService.getFileUrl(props.info.logo.src),
-          id: props.info.logo.src,
-          isNew: false,
-          isDefault: !!!props.info.logo.src,
-          width: undefined,
-          height: undefined,
-          size: undefined
+          src: props.info.logo.src
         }
       };
     },

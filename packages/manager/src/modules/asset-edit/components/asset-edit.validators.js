@@ -2,6 +2,7 @@ import {
   assetDescriptionShape,
   assetTitleShape
 } from "pages/create-program/components/create-program-settings/create-program-settings.validators";
+import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { number, object } from "yup";
 
 const editAssetSettingsValidationSchema = ({ t, ...props }) =>
@@ -17,24 +18,7 @@ const editAssetSettingsValidationSchema = ({ t, ...props }) =>
           "manager.create-program-page.settings.validation.stop-out-more-current"
         )
       ),
-    logo: object().shape({
-      width: number().min(
-        300,
-        t(
-          "manager.create-program-page.settings.validation.image-resolution-incorrect"
-        )
-      ),
-      height: number().min(
-        300,
-        t(
-          "manager.create-program-page.settings.validation.image-resolution-incorrect"
-        )
-      ),
-      size: number().max(
-        2097152,
-        t("manager.create-program-page.settings.validation.image-file-is-large")
-      )
-    }),
+    logo: inputImageShape(t),
     title: assetTitleShape(t),
     description: assetDescriptionShape(t)
   });
