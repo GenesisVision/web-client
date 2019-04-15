@@ -20,9 +20,9 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
-import InputImage, {
-  InputFileData
-} from "shared/components/form/input-image/input-image";
+// import InputImage, {
+//   InputFileData
+// } from "shared/components/form/input-image/input-image";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -112,10 +112,10 @@ class CreateProgramSettings extends React.Component<
     } = this.props;
     const { depositAmount, isSignalProgram, description, title } = values;
     const descriptionTrimmedLength = description.trim().length;
-    const imageInputError =
-      errors &&
-      errors.logo &&
-      (errors.logo.width || errors.logo.height || errors.logo.size);
+    // const imageInputError =
+    //   errors &&
+    //   errors.logo &&
+    //   (errors.logo.width || errors.logo.height || errors.logo.size);
 
     const accountCurrencies = accountType ? accountType.currencies : [];
     const accountLeverages = accountType ? accountType.leverages : [];
@@ -295,7 +295,7 @@ class CreateProgramSettings extends React.Component<
               </div>
               <div className="create-program-settings__item create-program-settings__item--wider create-program-settings__logo-section">
                 <div className="create-program-settings__file-field-container">
-                  <Field
+                  {/* <Field
                     name="logo"
                     render={({ field }: FieldProps<any>) => (
                       <InputImage
@@ -305,7 +305,7 @@ class CreateProgramSettings extends React.Component<
                         error={imageInputError}
                       />
                     )}
-                  />
+                  /> */}
                 </div>
                 <div className="create-program-settings__image-info">
                   <div className="create-program-settings__image-title">
@@ -531,15 +531,7 @@ export default compose<React.ComponentType<OwnProps>>(
         brokerAccountTypeId: accountType ? accountType.id : "",
         title: "",
         description: "",
-        logo: {
-          cropped: undefined,
-          src: "",
-          isNew: false,
-          isDefault: true,
-          width: undefined,
-          height: undefined,
-          size: undefined
-        },
+        logo: undefined,
         entryFee: undefined,
         successFee: undefined,
         isSignalProgram: broker.isSignalsAvailable,
@@ -594,7 +586,7 @@ export interface ICreateProgramSettingsFormValues {
   isSignalProgram: boolean;
   title: string;
   description: string;
-  logo: InputFileData;
+  logo?: any /*InputFileData;*/;
   entryFee?: number;
   depositAmount?: number;
   depositWalletId: string;

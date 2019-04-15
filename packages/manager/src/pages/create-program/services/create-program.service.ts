@@ -39,12 +39,12 @@ export const createProgram = (
   const authorization = authService.getAuthArg();
 
   let promise = Promise.resolve("");
-  if (createProgramData.logo.cropped) {
+  /*if (createProgramData.logo!.cropped) {
     promise = filesService.uploadFile(
-      createProgramData.logo.cropped,
+      createProgramData.logo!.cropped,
       authorization
     );
-  }
+  }*/
   promise
     .then(response => {
       const requestData = <NewProgramRequest>{

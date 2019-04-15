@@ -24,6 +24,10 @@ const createProgramSettingsValidationSchema = (
       ),
 
     logo: object().shape({
+      // required: object().when("logo.cropped", {
+      //   is: true,
+      //   then: signalEntryFeeShape(t, 100)
+      // }),
       width: number().min(
         300,
         t(
