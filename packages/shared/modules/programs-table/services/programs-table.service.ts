@@ -7,7 +7,10 @@ import {
   PROGRAM_SLUG_URL_PARAM_NAME
 } from "pages/programs/programs.routes";
 import * as qs from "qs";
-import { TFilter } from "shared/components/table/components/filtering/filter.type";
+import {
+  ComposeFiltersAllType,
+  TFilter
+} from "shared/components/table/components/filtering/filter.type";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   IPaging,
@@ -32,7 +35,7 @@ const sortableColums = PROGRAMS_COLUMNS.filter(
   x => x.sortingName !== undefined
 ).map(x => x.sortingName);
 
-export const getPrograms = (filters: Object) => (
+export const getPrograms = (filters: ComposeFiltersAllType) => (
   dispatch: any // temp to declare Dispatch type
 ) => {
   let requestFilters = dispatch(composeRequestFilters());
@@ -46,9 +49,9 @@ export const getPrograms = (filters: Object) => (
   dispatch(programTableActions.fetchPrograms(requestFilters));
 };
 
-export const fetchPrograms = (filters: {
-  [keys: string]: any;
-}): Promise<ProgramsList> => {
+export const fetchPrograms = (
+  filters: ComposeFiltersAllType
+): Promise<ProgramsList> => {
   const requestFilters = { ...filters };
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
@@ -61,7 +64,10 @@ export const fetchPrograms = (filters: {
     });
 };
 
-const composeRequestFilters = () => (dispatch: any, getState: any): Object => {
+const composeRequestFilters = () => (
+  dispatch: any,
+  getState: any
+): ComposeFiltersAllType => {
   let itemsOnPage = DEFAULT_ITEMS_ON_PAGE;
   const existingFilters = dispatch(getProgramsFilters());
   let { page } = existingFilters;
@@ -107,7 +113,7 @@ const composeRequestFilters = () => (dispatch: any, getState: any): Object => {
 export const getProgramsFilters = () => (
   dispatch: any,
   getState: () => RootState
-): Object => {
+): ComposeFiltersAllType => {
   const { router, programsData } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
 

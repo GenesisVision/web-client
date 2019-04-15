@@ -5,14 +5,8 @@ import React, { ComponentType, PureComponent } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/login/login.service";
-import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
-import Page from "shared/components/page/page";
-import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
-import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
-  fetchOpenPositions,
-  fetchProgramTrades,
   getProgramDescription,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
@@ -20,61 +14,35 @@ import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic
 } from "shared/components/programs/program-details/services/program-details.types";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import RootState from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
 
+import ProgramDetailsContainer from "./program-details.contaner";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
-import ProgramDetailsHistorySection from "./program-trades/program-details-history-section";
 
-interface IProgramDetailsPageOwnProps {
-  historySection: IHistorySection;
-  descriptionSection: IDescriptionSection;
-}
-
-interface IProgramDetailsPageStateProps {
-  isAuthenticated: boolean;
-  currency: string;
-}
-
-interface IProgramDetailsPageDispatchProps {
-  service: {
-    getProgramDescription(): Promise<ProgramDetailsFull>;
-    redirectToLogin(): void;
+class _ProgramDetailsPage extends PureComponent<Props, State> {
+  state = {
+    hasError: false,
+    isPending: false,
+    description: undefined,
+    profitChart: undefined,
+    balanceChart: undefined,
+    statistic: undefined
   };
-}
-
-interface IProgramDetailsPageProps
-  extends IProgramDetailsPageOwnProps,
-    IProgramDetailsPageStateProps,
-    IProgramDetailsPageDispatchProps {}
-
-interface IProgramDetailsPageState {
-  isPending: boolean;
-  hasError: boolean;
-  description?: ProgramDetailsFull;
-  profitChart?: ProgramDetailsProfitChart;
-  balanceChart?: ProgramBalanceChart;
-  statistic?: ProgramDetailsStatistic;
-}
-
-class ProgramDetailsPage extends PureComponent<
-  IProgramDetailsPageProps,
-  IProgramDetailsPageState
-> {
-  constructor(props: IProgramDetailsPageProps) {
-    super(props);
-    this.state = {
-      hasError: false,
-      isPending: false,
-      description: undefined,
-      profitChart: undefined,
-      balanceChart: undefined,
-      statistic: undefined
-    };
-  }
 
   componentDidMount() {
-    this.getDetails();
+    this.updateDetails()
+      .then(data => {
+        this.setState({ isPending: true });
+        return getProgramStatistic(data.id);
+      })
+      .then(data => {
+        this.setState({ isPending: false, ...data });
+      })
+      .catch(() => {
+        this.setState({ isPending: false });
+      });
   }
 
   updateDetails = () => {
@@ -84,6 +52,7 @@ class ProgramDetailsPage extends PureComponent<
       .getProgramDescription()
       .then(data => {
         this.setState({ isPending: false, description: data });
+        return data;
       })
       .catch((e: ResponseError) => {
         this.setState({ hasError: true });
@@ -91,36 +60,13 @@ class ProgramDetailsPage extends PureComponent<
       });
   };
 
-  getDetails = () => {
-    this.updateDetails()
-      .then(() => {
-        this.setState({ isPending: true });
-        return getProgramStatistic(this.state.description!.id);
-      })
-      .then(data => {
-        this.setState({ isPending: false, ...data });
-      })
-      .catch(() => {
-        this.setState({ isPending: false });
-      });
-  };
-
-  fetchHistoryPortfolioEvents = (filters: any) => {
-    const { description } = this.state;
-    const { historySection } = this.props;
-    return historySection.fetchPortfolioEvents({
-      ...filters,
-      assetId: description!.id
-    });
-  };
-
   render() {
     const {
-      currency,
-      isAuthenticated,
       service,
       descriptionSection,
-      historySection
+      historySection,
+      currency,
+      isAuthenticated
     } = this.props;
     const {
       hasError,
@@ -129,90 +75,71 @@ class ProgramDetailsPage extends PureComponent<
       profitChart,
       balanceChart
     } = this.state;
-
-    if (hasError) {
-      return <NotFoundPage />;
-    }
-
-    if (!description) return null;
-    const isInvested =
-      description.personalProgramDetails &&
-      description.personalProgramDetails.isInvested;
+    if (hasError) return <NotFoundPage />;
     return (
-      <Page title={description.title}>
-        <ProgramDetailContext.Provider
-          value={{ updateDetails: this.updateDetails }}
-        >
-          <div className="details">
-            <div className="details__section">
-              <ProgramDetailsDescriptionSection
-                accountCurrency={currency}
-                programDescription={description}
-                isAuthenticated={isAuthenticated}
-                redirectToLogin={service.redirectToLogin}
-                ProgramControls={descriptionSection.ProgramControls}
-                ChangePasswordTradingAccount={
-                  descriptionSection.ChangePasswordTradingAccount
-                }
-                ProgramWithdrawContainer={
-                  descriptionSection.ProgramWithdrawContainer
-                }
-                ProgramReinvestingWidget={
-                  descriptionSection.ProgramReinvestingWidget
-                }
-              />
-            </div>
-            <div className="details__section">
-              <ProgramDetailsStatisticSection
-                status={description.status}
-                getProgramStatistic={getProgramStatistic}
-                programId={description.id}
-                currency={currency}
-                statistic={statistic}
-                profitChart={profitChart}
-                balanceChart={balanceChart}
-              />
-            </div>
-            <div className="details__history">
-              <ProgramDetailsHistorySection
-                fetchOpenPositions={fetchOpenPositions}
-                fetchTrades={fetchProgramTrades}
-                fetchPortfolioEvents={this.fetchHistoryPortfolioEvents}
-                fetchHistoryCounts={historySection.fetchHistoryCounts}
-                programId={description.id}
-                programCurrency={description.currency}
-                currency={currency}
-                isInvested={isInvested}
-                eventTypeFilterValues={historySection.eventTypeFilterValues}
-              />
-            </div>
-          </div>
-        </ProgramDetailContext.Provider>
-      </Page>
+      <ProgramDetailsContainer
+        updateDetails={this.updateDetails}
+        redirectToLogin={service.redirectToLogin}
+        historySection={historySection}
+        descriptionSection={descriptionSection}
+        description={description}
+        profitChart={profitChart}
+        balanceChart={balanceChart}
+        statistic={statistic}
+        currency={currency}
+        isAuthenticated={isAuthenticated}
+      />
     );
   }
 }
 
-const mapStateToProps = (state: RootState): IProgramDetailsPageStateProps => {
+const mapStateToProps = (state: RootState): StateProps => {
   const { accountSettings, authData } = state;
   return {
-    currency: accountSettings.currency,
+    currency: accountSettings.currency as CURRENCIES,
     isAuthenticated: authData.isAuthenticated
   };
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch
-): IProgramDetailsPageDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     { getProgramDescription, redirectToLogin },
     dispatch
   )
 });
 
-export default compose<ComponentType<IProgramDetailsPageOwnProps>>(
+interface OwnProps {
+  historySection: IHistorySection;
+  descriptionSection: IDescriptionSection;
+}
+
+interface StateProps {
+  isAuthenticated: boolean;
+  currency: CURRENCIES;
+}
+
+interface DispatchProps {
+  service: {
+    getProgramDescription(): Promise<ProgramDetailsFull>;
+    redirectToLogin(): void;
+  };
+}
+
+interface Props extends OwnProps, StateProps, DispatchProps {}
+
+interface State {
+  isPending: boolean;
+  hasError: boolean;
+  description?: ProgramDetailsFull;
+  profitChart?: ProgramDetailsProfitChart;
+  balanceChart?: ProgramBalanceChart;
+  statistic?: ProgramDetailsStatistic;
+}
+
+const ProgramDetailsPage = compose<ComponentType<OwnProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(ProgramDetailsPage);
+)(_ProgramDetailsPage);
+export default ProgramDetailsPage;

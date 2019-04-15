@@ -5,6 +5,8 @@ import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
+import { ResponseError } from "shared/utils/types";
+
 import {
   CODE_TYPE,
   LOGIN,
@@ -12,7 +14,6 @@ import {
   storeTwoFactor
 } from "./login.actions";
 import { LOGIN_ROUTE, LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
-import { ResponseError } from "shared/utils/types";
 
 export const client = "Web";
 export const redirectToLogin = () => {
@@ -32,9 +33,9 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
       client,
       twoFactorCode: (type === CODE_TYPE.TWO_FACTOR && code) || null,
       recoveryCode: (type === CODE_TYPE.RECOVERY && code) || null,
-      loginCheckInfo: {
+      captchaCheckResult: {
         id,
-        poW: {
+        pow: {
           prefix
         }
       }

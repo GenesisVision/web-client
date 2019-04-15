@@ -1,6 +1,7 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
+import ConfirmContainer from "modules/confirm/confirm-container";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -18,7 +19,8 @@ enum INVESTMENT_POPUP {
   INVEST = "INVEST",
   CLOSE_PROGRAM = "CLOSE_PROGRAM",
   CLOSE_PERIOD = "CLOSE_PERIOD",
-  EDIT = "EDIT"
+  EDIT = "EDIT",
+  TFA = "TFA"
 }
 
 interface IInvestmentProgramControlsOwnProps {
@@ -131,6 +133,18 @@ class InvestmentProgramControls extends Component<
             >
               {t("program-details-page.description.edit-program")}
             </GVButton>
+            {programDescription.personalProgramDetails &&
+              programDescription.personalProgramDetails.showTwoFactorButton && (
+                <GVButton
+                  className="program-details-description__invest-btn"
+                  color="secondary"
+                  variant="outlined"
+                  onClick={this.openPopup(INVESTMENT_POPUP.TFA)}
+                  disabled={!canCloseProgram}
+                >
+                  {t("Confirm 2FA")}
+                </GVButton>
+              )}
           </div>
         )}
         <ProgramDetailContext.Consumer>
@@ -162,6 +176,16 @@ class InvestmentProgramControls extends Component<
                 onApply={this.applyChanges(updateDetails)}
                 type={PROGRAM}
               />
+              {programDescription.personalProgramDetails &&
+                programDescription.personalProgramDetails
+                  .showTwoFactorButton && (
+                  <ConfirmContainer
+                    open={popups[INVESTMENT_POPUP.TFA]}
+                    onClose={this.closePopup(INVESTMENT_POPUP.TFA)}
+                    onApply={this.applyChanges(updateDetails)}
+                    programId={composeEditInfo.id}
+                  />
+                )}
             </Fragment>
           )}
         </ProgramDetailContext.Consumer>

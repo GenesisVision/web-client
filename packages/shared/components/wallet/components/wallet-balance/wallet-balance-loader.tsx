@@ -28,8 +28,6 @@ const WalletBalanceLoader = () => (
           </SvgLoader>
         </div>
       </div>
-      {/*
-      //@ts-ignore TODO */}
       <Table
         columns={WALLET_TRANSACTIONS_COLUMNS}
         isPending

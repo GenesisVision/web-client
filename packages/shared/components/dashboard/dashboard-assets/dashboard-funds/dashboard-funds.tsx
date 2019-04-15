@@ -51,7 +51,6 @@ const DashboardFunds: FunctionComponent<
   title
 }) => {
   return (
-    //@ts-ignore
     <TableContainer
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createFund}
