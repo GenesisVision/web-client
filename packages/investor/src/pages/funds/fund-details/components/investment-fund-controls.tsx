@@ -5,10 +5,12 @@ import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
-import { FUND } from "shared/constants/constants";
+import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
+import { ASSET } from "shared/constants/constants";
 
 enum INVESTMENT_POPUP {
-  INVEST = "INVEST"
+  INVEST = "INVEST",
+  INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
 interface IInvestmentFundControlsOwnProps {
@@ -28,24 +30,16 @@ class InvestmentFundControls extends Component<
   InvestmentFundControlsProps,
   IInvestmentFundControlsState
 > {
-  constructor(props: InvestmentFundControlsProps) {
-    super(props);
-    this.state = {
-      popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
-        curr[INVESTMENT_POPUP[next]] = false;
-        return curr;
-      }, {})
-    };
-  }
-  openPopup = (popupName: INVESTMENT_POPUP) => () => {
-    const { isAuthenticated, redirectToLogin } = this.props;
-    if (isAuthenticated) {
-      let popups = { ...this.state.popups, [popupName]: true };
+  state = {
+    popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
+      curr[INVESTMENT_POPUP[next]] = false;
+      return curr;
+    }, {})
+  };
 
-      this.setState({ popups });
-    } else {
-      redirectToLogin();
-    }
+  openPopup = (popupName: INVESTMENT_POPUP) => () => {
+    let popups = { ...this.state.popups, [popupName]: true };
+    this.setState({ popups });
   };
 
   closePopup = (popupName: INVESTMENT_POPUP) => () => {
@@ -59,9 +53,16 @@ class InvestmentFundControls extends Component<
 
   render() {
     const { popups } = this.state;
-    const { t, fundDescription } = this.props;
+    const { t, fundDescription, isAuthenticated } = this.props;
     const { personalFundDetails } = fundDescription;
-    const canInvest = personalFundDetails && personalFundDetails.canInvest;
+    const isOwn = personalFundDetails
+      ? personalFundDetails.isOwnProgram
+      : false;
+
+    const openPopup = isAuthenticated
+      ? this.openPopup(INVESTMENT_POPUP.INVEST)
+      : this.openPopup(INVESTMENT_POPUP.INVEST_UNAUTH);
+
     return (
       <Fragment>
         <InvestmentFundInfo fundDescription={fundDescription} />
@@ -70,8 +71,7 @@ class InvestmentFundControls extends Component<
           <div className="details-description__invest-button-container">
             <GVButton
               className="details-description__invest-btn"
-              onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
-              disabled={!canInvest}
+              onClick={openPopup}
             >
               {t("fund-details-page.description.invest")}
             </GVButton>
@@ -89,6 +89,14 @@ class InvestmentFundControls extends Component<
             </Fragment>
           )}
         </ProgramDetailContext.Consumer>
+        <InvestmentUnauthPopup
+          asset={ASSET.FUND}
+          title={fundDescription.title}
+          isOwn={isOwn}
+          isAuthenticated={false}
+          open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
+          onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
+        />
       </Fragment>
     );
   }

@@ -9,6 +9,7 @@ import {
 } from "shared/components/details/helpers/details-context";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
+import { ASSET } from "shared/constants/constants";
 
 interface IInvestmentProgramControlsOwnProps {
   isAuthenticated: boolean;
@@ -60,6 +61,11 @@ class InvestmentProgramControls extends Component<
     const { t, programDescription } = this.props;
 
     const { isOpenInvestmentPopup } = this.state;
+
+    const isOwnProgram = programDescription.personalProgramDetails
+      ? programDescription.personalProgramDetails.isOwnProgram
+      : false;
+
     return (
       <Fragment>
         <InvestmentProgramInfo programDescription={programDescription} />
@@ -83,8 +89,12 @@ class InvestmentProgramControls extends Component<
           )}
         </ProgramDetailContext.Consumer>
         <InvestmentUnauthPopup
+          asset={ASSET.PROGRAM}
+          availableToInvestBase={programDescription.availableInvestmentBase}
+          title={programDescription.title}
+          currency={programDescription.currency}
+          isOwn={isOwnProgram}
           isAuthenticated={false}
-          description={programDescription}
           open={this.state.isOpenPopup}
           onClose={this.handleClosePopup}
         />

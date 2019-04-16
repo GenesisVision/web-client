@@ -4,13 +4,13 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const _DepositTop: React.FC<OwnProps & InjectedTranslateProps> = ({
+const _DepositTop: React.FC<DepositTopProps & InjectedTranslateProps> = ({
   currency,
   title,
   availableToInvestBase,
   t,
   asset,
-  role
+  role = process.env.REACT_APP_PLATFORM as ROLE
 }) => {
   return (
     <div className="dialog__top">
@@ -26,7 +26,7 @@ const _DepositTop: React.FC<OwnProps & InjectedTranslateProps> = ({
           >
             {`${formatCurrencyValue(
               availableToInvestBase!,
-              currency
+              currency!
             )} ${currency}`}
           </StatisticItem>
         </div>
@@ -38,10 +38,10 @@ const _DepositTop: React.FC<OwnProps & InjectedTranslateProps> = ({
 const DepositTop = React.memo(translate()(_DepositTop));
 export default DepositTop;
 
-interface OwnProps {
-  currency: string;
+export interface DepositTopProps {
+  currency?: string;
   title: string;
   availableToInvestBase?: number;
   asset: ASSET;
-  role: ROLE;
+  role?: ROLE;
 }
