@@ -1,13 +1,13 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 
 import DashboardPortfolioEventLoader from "./dashboard-portfolio-event-loader";
 
-const DashboardPortfolioEventsListLoader = () => (
-  <Fragment>
+const DashboardPortfolioEventsListLoader: React.FC = () => (
+  <>
     <DashboardPortfolioEventLoader />
     <DashboardPortfolioEventLoader />
     <DashboardPortfolioEventLoader />
-  </Fragment>
+  </>
 );
 
-export default DashboardPortfolioEventsListLoader;
+export default React.memo(DashboardPortfolioEventsListLoader);

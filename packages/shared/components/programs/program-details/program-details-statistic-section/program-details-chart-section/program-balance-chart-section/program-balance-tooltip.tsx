@@ -1,10 +1,10 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const TooltipBody = ({ managersFunds, investorsFunds, profit }) => {
-  return (
-    <Fragment>
+const TooltipBody: React.FC<ITooltipBodyProps> = React.memo(
+  ({ managersFunds, investorsFunds, profit }) => (
+    <>
       <div className="details-tooltip__statistic">
         <div className="details-tooltip__title">Profit</div>
         <div className="details-tooltip__value">{profit}</div>
@@ -17,16 +17,14 @@ const TooltipBody = ({ managersFunds, investorsFunds, profit }) => {
         <div className="details-tooltip__title">Managers Funds</div>
         <div className="details-tooltip__value">{managersFunds}</div>
       </div>
-    </Fragment>
-  );
-};
-const ProgramBalanceTooltip = ({
+    </>
+  )
+);
+
+const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
   active,
   label,
-  payload,
-  heading,
-  body,
-  date
+  payload
 }) => {
   if (!active || !payload[0]) return null;
   const dot = payload[0];
@@ -59,4 +57,16 @@ const ProgramBalanceTooltip = ({
     />
   );
 };
-export default ProgramBalanceTooltip;
+
+interface ITooltipBodyProps {
+  managersFunds: string;
+  investorsFunds: string;
+  profit: string;
+}
+interface IProgramBalanceTooltipProps {
+  active: boolean;
+  label: string;
+  payload: any[];
+}
+
+export default React.memo(ProgramBalanceTooltip);

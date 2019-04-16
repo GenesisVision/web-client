@@ -76,6 +76,7 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
       balanceChart
     } = this.state;
     if (hasError) return <NotFoundPage />;
+    if (!description) return null;
     return (
       <ProgramDetailsContainer
         updateDetails={this.updateDetails}
