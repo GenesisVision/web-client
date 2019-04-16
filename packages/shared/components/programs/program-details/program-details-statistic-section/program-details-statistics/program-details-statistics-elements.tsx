@@ -1,21 +1,25 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import React, { Fragment } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  ChartDefaultPeriod,
+  ChartPeriodType
+} from "shared/components/chart/chart-period/chart-period.helpers";
 import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { STATUS } from "shared/constants/constants";
+import {
+  ProgramDetailsProfitChart,
+  ProgramDetailsStatistic
+} from "../../services/program-details.types";
 
-const ProgramDetailsStatisticsElements = ({
-  status,
-  t,
-  statistic,
-  profitChart,
-  period
-}) => (
-  <Fragment>
+const ProgramDetailsStatisticsElements: React.FC<
+  IProgramDetailsStatisticsElementsProps & InjectedTranslateProps
+> = ({ status, t, statistic, profitChart, period }) => (
+  <>
     <div className="details-statistics__subheading">
       {t("program-details-page.statistics.current")}
     </div>
@@ -136,7 +140,14 @@ const ProgramDetailsStatisticsElements = ({
         </StatisticItem>
       </div>
     </div>
-  </Fragment>
+  </>
 );
 
-export default translate()(ProgramDetailsStatisticsElements);
+export interface IProgramDetailsStatisticsElementsProps {
+  status: STATUS;
+  statistic: ProgramDetailsStatistic;
+  profitChart: ProgramDetailsProfitChart;
+  period: ChartDefaultPeriod;
+}
+
+export default React.memo(translate()(ProgramDetailsStatisticsElements));
