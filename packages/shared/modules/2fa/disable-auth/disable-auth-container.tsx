@@ -1,11 +1,12 @@
 import * as React from "react";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
+import { SetSubmittingType } from "shared/utils/types";
+
 import DisableAuthForm, {
   IDisableAuthFormFormValues
 } from "./disable-auth-form";
 import DisableAuthSuccess from "./disable-auth-success";
-import { SetSubmittingType } from "shared/utils/types";
 
 class DisableAuthContainer extends React.PureComponent<Props, State> {
   state = {

@@ -4,8 +4,8 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import { number, object, string } from "yup";
 import { SetSubmittingType } from "shared/utils/types";
+import { number, object, string } from "yup";
 
 export const GoogleStep3: React.FC<
   InjectedFormikProps<Props, IGoogleActivateStepFormValues>

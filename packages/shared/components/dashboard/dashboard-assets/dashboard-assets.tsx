@@ -1,12 +1,12 @@
 import "./dashboard-assets.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
+import { IDashboardAssetsCounts } from "investor-web-portal/src/pages/dashboard/services/dashboard.service";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import Surface from "shared/components/surface/surface";
-import { IDashboardAssetsCounts } from "investor-web-portal/src/pages/dashboard/services/dashboard.service";
 
 class DashboardAssets extends React.PureComponent<
   Props & InjectedTranslateProps,

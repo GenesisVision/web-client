@@ -17,15 +17,16 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatCurrencyValue } from "shared/utils/formatter";
+
+import { PROFITABILITY_PREFIX } from "../profitability/profitability.helper";
+import { FilteringType } from "../table/components/filtering/filter.type";
+import { GetItemsFuncType } from "../table/components/table.types";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
   PORTFOLIO_EVENTS_FILTERS,
   PORTFOLIO_EVENTS_TYPES
 } from "./portfolio-events-table.constants";
-import { FilteringType } from "../table/components/filtering/filter.type";
-import { GetItemsFuncType } from "../table/components/table.types";
-import { PROFITABILITY_PREFIX } from "../profitability/profitability.helper";
 
 const PortfolioEventsTable: React.FC<
   IPortfolioEventsTableProps & InjectedTranslateProps

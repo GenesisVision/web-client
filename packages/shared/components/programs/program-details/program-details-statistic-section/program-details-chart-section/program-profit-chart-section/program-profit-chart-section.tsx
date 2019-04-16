@@ -1,14 +1,14 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import ProgramProfitChart from "./program-profit-chart";
 import { ProgramDetailsProfitChart } from "../../../services/program-details.types";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { HandlePeriodChangeType } from "../../program-details-statistic-section";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import ProgramProfitChart from "./program-profit-chart";
 
 const ProgramProfitChartSection: React.FC<Props> = ({
   profitChart,

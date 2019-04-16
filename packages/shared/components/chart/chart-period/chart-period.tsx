@@ -5,12 +5,13 @@ import { GVButton } from "gv-react-components";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { HandlePeriodChangeType } from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
+
 import {
   ChartDefaultPeriod,
   ChartPeriodType,
   getPeriodStartDate
 } from "./chart-period.helpers";
-import { HandlePeriodChangeType } from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 
 const ChartPeriod: React.FC<Props & InjectedTranslateProps> = ({
   t,

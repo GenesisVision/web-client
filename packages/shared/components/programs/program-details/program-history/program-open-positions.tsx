@@ -6,16 +6,16 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
-import { formatValue } from "shared/utils/formatter";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import { formatValue } from "shared/utils/formatter";
 
 const PAGING = {
   currentPage: 1,

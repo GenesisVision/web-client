@@ -1,6 +1,6 @@
 import {
-  DateRangeFilterTypes,
-  DEFAULT_DATE_RANGE_FILTER_VALUE
+  DEFAULT_DATE_RANGE_FILTER_VALUE,
+  DateRangeFilterTypes
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";

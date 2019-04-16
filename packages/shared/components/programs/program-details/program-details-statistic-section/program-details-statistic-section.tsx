@@ -1,19 +1,20 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
+import { ProgramBalanceChart } from "gv-api-web";
 import * as React from "react";
 import {
   ChartDefaultPeriod,
   DEFAULT_PERIOD
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import ProgramDetailsChartSection from "./program-details-chart-section/program-details-chart-section";
+import { STATUS } from "shared/constants/constants";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+
 import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic,
   ProgramStatisticResult
 } from "../services/program-details.types";
-import { ProgramBalanceChart } from "gv-api-web";
-import { STATUS } from "shared/constants/constants";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import ProgramDetailsChartSection from "./program-details-chart-section/program-details-chart-section";
 import ProgramDetailsStatistics from "./program-details-statistics/program-details-statistics";
 
 class ProgramDetailsStatisticSection extends React.PureComponent<Props, State> {

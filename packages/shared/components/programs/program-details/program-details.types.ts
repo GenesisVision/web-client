@@ -4,9 +4,9 @@ import {
   ProgramDetailsFull
 } from "gv-api-web";
 import React from "react";
-import { TableItems } from "shared/components/table/helpers/mapper";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { PORTFOLIO_EVENTS_TYPES } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
+import { TableItems } from "shared/components/table/helpers/mapper";
 
 export interface IProgramControlsProps {
   isAuthenticated: boolean;

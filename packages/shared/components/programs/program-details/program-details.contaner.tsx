@@ -15,10 +15,11 @@ import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic
 } from "shared/components/programs/program-details/services/program-details.types";
+import { STATUS } from "shared/constants/constants";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { STATUS } from "shared/constants/constants";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   updateDetails,

@@ -1,5 +1,9 @@
 import "./dashboard-portfolio-events.scss";
 
+import {
+  DashboardPortfolioEvent,
+  DashboardPortfolioEvents as DashboardPortfolioEventsType
+} from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -7,11 +11,8 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
+
 import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
-import {
-  DashboardPortfolioEvent,
-  DashboardPortfolioEvents as DashboardPortfolioEventsType
-} from "gv-api-web";
 
 const DASHBOARD_EVENTS_STYLE = { height: "100%", minHeight: "450px" };
 

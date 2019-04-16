@@ -1,11 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import RootState from "shared/reducers/root-reducer";
 import { isTablet } from "shared/utils/breakpoints";
+
 import GoogleAuthDesktop, {
   IGoogleAuthProps
 } from "./google-auth-steps-desktop";
 import GoogleAuthMobile from "./google-auth-steps-mobile";
-import RootState from "shared/reducers/root-reducer";
 
 class GoogleAuthSteps extends React.PureComponent<Props> {
   render() {

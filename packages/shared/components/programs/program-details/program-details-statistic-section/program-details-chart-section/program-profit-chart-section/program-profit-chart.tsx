@@ -1,3 +1,4 @@
+import { ChartSimple } from "gv-api-web";
 import { GVColors } from "gv-react-components";
 import * as React from "react";
 import {
@@ -15,10 +16,10 @@ import ProgramChartGradient, {
   getStrokeColor,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
-import { formatValue } from "shared/utils/formatter";
-import ProgramProfitTooltip from "./program-profit-tooltip";
-import { ChartSimple } from "gv-api-web";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import { formatValue } from "shared/utils/formatter";
+
+import ProgramProfitTooltip from "./program-profit-tooltip";
 
 const ProgramProfitChart: React.FC<Props> = ({
   equityChart,

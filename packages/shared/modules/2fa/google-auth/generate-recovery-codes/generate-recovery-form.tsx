@@ -1,11 +1,11 @@
 import { InjectedFormikProps, withFormik } from "formik";
+import { PasswordModel } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
-import { object, string } from "yup";
-import { PasswordModel } from "gv-api-web";
 import { SetSubmittingType } from "shared/utils/types";
+import { object, string } from "yup";
 
 const GenerateRecoveryForm: React.FC<
   InjectedFormikProps<Props, IFormValues>

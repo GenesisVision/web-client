@@ -1,61 +1,48 @@
+import { Dispatch } from "redux";
 import authActions from "shared/actions/auth-actions";
+import { IImageValue } from "shared/components/form/input-image/input-image";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authApi from "shared/services/api-client/auth-api";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
+import { ResponseError } from "shared/utils/types";
 
-export const updateProfileAvatar = ({
-  croppedImage,
-  submitCallback
-}) => dispatch => {
+export const updateProfileAvatar = (newImage: IImageValue) => (
+  dispatch: Dispatch
+) => {
   const authorization = authService.getAuthArg();
-  let photoSrc = null;
+  let promise;
+  if (!newImage.src && !newImage.image) {
+    promise = profileApi.v10ProfileAvatarRemovePost(authorization);
+  } else {
+    promise = filesService
+      .uploadFile(newImage.image!.cropped, authorization)
+      .then(logoId => {
+        return profileApi.v10ProfileAvatarUpdateByFileIdPost(
+          logoId,
+          authorization
+        );
+      });
+  }
 
-  filesService
-    .uploadFile(croppedImage, authorization)
-    .then(logoId => {
-      photoSrc = filesService.getFileUrl(logoId);
-      return profileApi.v10ProfileAvatarUpdateByFileIdPost(
-        logoId,
-        authorization
-      );
-    })
-    .then(() => dispatch(fetchProfileHeaderInfo()))
+  return promise
     .then(() => {
+      dispatch(fetchProfileHeaderInfo());
       dispatch(
         alertMessageActions.success(
           "profile-page.settings.image-success-save-message",
           true
         )
       );
-      submitCallback(photoSrc);
     })
-    .catch(error =>
-      dispatch(alertMessageActions.error(error.errorMessage || error.message))
-    );
+    .catch((error: ResponseError) => {
+      dispatch(alertMessageActions.error(error.errorMessage));
+    });
 };
 
-export const removeProfileAvatar = ({ submitCallback }) => dispatch => {
-  const authorization = authService.getAuthArg();
-
-  profileApi
-    .v10ProfileAvatarRemovePost(authorization)
-    .then(() => dispatch(fetchProfileHeaderInfo()))
-    .then(() => {
-      dispatch(
-        alertMessageActions.success(
-          "profile-page.settings.image-success-save-message",
-          true
-        )
-      );
-      submitCallback();
-    })
-    .catch(error => alertMessageActions.error(error.errorMessage));
-};
-
-export const logoutFromDevices = () => dispatch => {
+export const logoutFromDevices = () => (dispatch: Dispatch) => {
   return authApi
     .v10AuthTokenDevicesLogoutPost(authService.getAuthArg())
     .then(response => {
@@ -71,6 +58,6 @@ export const logoutFromDevices = () => dispatch => {
     })
     .catch(error => {
       dispatch(alertMessageActions.error(error.errorMessage));
-      return error;
+      throw error;
     });
 };

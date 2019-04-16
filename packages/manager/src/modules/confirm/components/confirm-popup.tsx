@@ -1,10 +1,11 @@
 import "./asset-edit.scss";
 
+import { TwoFactorAuthenticator } from "gv-api-web";
 import * as React from "react";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import ConfirmForm, { IConfirmFormValues } from "./confirm-form";
-import { TwoFactorAuthenticator } from "gv-api-web";
 import { SetSubmittingType } from "shared/utils/types";
+
+import ConfirmForm, { IConfirmFormValues } from "./confirm-form";
 
 class ConfirmPopup extends React.PureComponent<Props> {
   render() {

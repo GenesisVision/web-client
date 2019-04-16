@@ -20,9 +20,9 @@ export const fetchInvestmentAmount = () =>
 export const createFund = (createFundData, setSubmitting) => dispatch => {
   const authorization = authService.getAuthArg();
   let promise = Promise.resolve(null);
-  if (createFundData.logo.cropped) {
+  if (createFundData.logo.image) {
     promise = filesService.uploadFile(
-      createFundData.logo.cropped,
+      createFundData.logo.image.cropped,
       authorization
     );
   }

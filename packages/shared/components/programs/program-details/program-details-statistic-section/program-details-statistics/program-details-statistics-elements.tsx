@@ -9,8 +9,9 @@ import {
 } from "shared/components/chart/chart-period/chart-period.helpers";
 import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 import { STATUS } from "shared/constants/constants";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+
 import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic

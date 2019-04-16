@@ -1,16 +1,17 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
+import { ProgramBalanceChart } from "gv-api-web";
 import { GVTab, GVTabs } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import Surface from "shared/components/surface/surface";
+
+import { ProgramDetailsProfitChart } from "../../services/program-details.types";
+import { HandlePeriodChangeType } from "../program-details-statistic-section";
 import ProgramBalanceChartSection from "./program-balance-chart-section/program-balance-chart-section";
 import ProgramProfitChartSection from "./program-profit-chart-section/program-profit-chart-section";
-import { ProgramDetailsProfitChart } from "../../services/program-details.types";
-import { ProgramBalanceChart } from "gv-api-web";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import { HandlePeriodChangeType } from "../program-details-statistic-section";
 
 class ProgramDetailsChartSection extends React.PureComponent<Props, State> {
   state = {

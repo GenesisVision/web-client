@@ -1,5 +1,7 @@
 import { GVProgramAvatar } from "gv-react-components";
+import { GVProgramAvatarProps } from "gv-react-components/dist/gv-program-avatar";
 import * as React from "react";
+import { ILevelTooltip } from "shared/components/level-tooltip/level-tooltip";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -7,7 +9,7 @@ import Popover, {
 import withUrl from "shared/decorators/with-url";
 
 interface IAssetAvatarProps {
-  tooltip: boolean;
+  tooltip?: React.ReactElement<ILevelTooltip>;
   click?: boolean;
   vertical?: VERTICAL_POPOVER_POS;
   horizontal?: HORIZONTAL_POPOVER_POS;
@@ -68,4 +70,6 @@ class AssetAvatar extends React.Component<
   }
 }
 
-export default withUrl("url")(AssetAvatar);
+export default withUrl<GVProgramAvatarProps & IAssetAvatarProps>("url")(
+  AssetAvatar
+);

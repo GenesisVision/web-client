@@ -3,18 +3,19 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  GetItemsFuncType,
+  TableToggleFavoriteType
+} from "shared/components/table/components/table.types";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
+
 import {
   PROGRAMS_FACET_PAGING,
   PROGRAMS_FACET_TABLE_FILTERING,
   PROGRAMS_FACET_TABLE_FILTERS,
   PROGRAMS_FACET_TABLE_SORTING
 } from "./programs-facet.constants";
-import {
-  GetItemsFuncType,
-  TableToggleFavoriteType
-} from "shared/components/table/components/table.types";
 
 class _ProgramsFacetTable extends React.PureComponent<
   IProgramsFacetTableProps & InjectedTranslateProps
