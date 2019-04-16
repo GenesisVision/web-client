@@ -6,7 +6,7 @@ import FundAsset from "shared/media/fund-asset.svg";
 
 import ImageBase, { IImageProps } from "../image-base";
 
-const FundAssetImage: React.FC<IImageProps> = ({ url, alt, className }) => (
+const _FundAssetImage: React.FC<IImageProps> = ({ url, alt, className }) => (
   <div className={classNames("fund-asset-icon", className)}>
     <ImageBase
       url={url}
@@ -17,4 +17,5 @@ const FundAssetImage: React.FC<IImageProps> = ({ url, alt, className }) => (
   </div>
 );
 
+const FundAssetImage = React.memo(_FundAssetImage);
 export default FundAssetImage;

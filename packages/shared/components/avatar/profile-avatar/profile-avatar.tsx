@@ -6,7 +6,7 @@ import UserIcon from "shared/media/user-avatar.svg";
 
 import ImageBase, { IImageProps } from "../image-base";
 
-const ProfileAvatar: React.FC<IImageProps> = ({ url, alt, className }) => {
+const _ProfileAvatar: React.FC<IImageProps> = ({ url, alt, className }) => {
   return (
     <div className={classNames("profile-avatar", className)}>
       <ImageBase
@@ -20,4 +20,5 @@ const ProfileAvatar: React.FC<IImageProps> = ({ url, alt, className }) => {
   );
 };
 
+const ProfileAvatar = React.memo(_ProfileAvatar);
 export default ProfileAvatar;

@@ -2,7 +2,7 @@ import classNames from "classnames";
 import * as React from "react";
 import withUrl from "shared/decorators/with-url";
 
-class _ImageBase extends React.Component<IImageBaseProps, State> {
+class _ImageBase extends React.PureComponent<IImageBaseProps, State> {
   state = {
     error: false
   };
