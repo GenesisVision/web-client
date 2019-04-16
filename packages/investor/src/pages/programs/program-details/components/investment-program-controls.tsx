@@ -11,26 +11,7 @@ import InvestmentProgramInfo from "shared/components/programs/program-details/pr
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
 
-interface IInvestmentProgramControlsOwnProps {
-  isAuthenticated: boolean;
-
-  redirectToLogin(): void;
-
-  programDescription: ProgramDetailsFull;
-}
-
-interface IInvestmentProgramControlsState {
-  isOpenInvestmentPopup: boolean;
-  isOpenPopup: boolean;
-}
-
-type InvestmentProgramControlsProps = InjectedTranslateProps &
-  IInvestmentProgramControlsOwnProps;
-
-class InvestmentProgramControls extends Component<
-  InvestmentProgramControlsProps,
-  IInvestmentProgramControlsState
-> {
+class InvestmentProgramControls extends Component<Props, State> {
   state = {
     isOpenInvestmentPopup: false,
     isOpenPopup: false
@@ -59,7 +40,6 @@ class InvestmentProgramControls extends Component<
 
   render() {
     const { t, programDescription } = this.props;
-
     const { isOpenInvestmentPopup } = this.state;
 
     const isOwnProgram = programDescription.personalProgramDetails
@@ -104,3 +84,16 @@ class InvestmentProgramControls extends Component<
 }
 
 export default translate()(InvestmentProgramControls);
+
+interface OwnProps {
+  isAuthenticated: boolean;
+  redirectToLogin(): void;
+  programDescription: ProgramDetailsFull;
+}
+
+interface State {
+  isOpenInvestmentPopup: boolean;
+  isOpenPopup: boolean;
+}
+
+interface Props extends InjectedTranslateProps, OwnProps {}

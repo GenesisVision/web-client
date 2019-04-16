@@ -13,23 +13,7 @@ enum INVESTMENT_POPUP {
   INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
-interface IInvestmentFundControlsOwnProps {
-  isAuthenticated: boolean;
-  redirectToLogin(): void;
-  fundDescription: FundDetailsFull;
-}
-
-interface IInvestmentFundControlsState {
-  popups: { [k: string]: boolean };
-}
-
-type InvestmentFundControlsProps = InjectedTranslateProps &
-  IInvestmentFundControlsOwnProps;
-
-class InvestmentFundControls extends Component<
-  InvestmentFundControlsProps,
-  IInvestmentFundControlsState
-> {
+class InvestmentFundControls extends Component<Props, State> {
   state = {
     popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
       curr[INVESTMENT_POPUP[next]] = false;
@@ -103,3 +87,15 @@ class InvestmentFundControls extends Component<
 }
 
 export default translate()(InvestmentFundControls);
+
+interface OwnProps {
+  isAuthenticated: boolean;
+  redirectToLogin(): void;
+  fundDescription: FundDetailsFull;
+}
+
+interface State {
+  popups: { [k: string]: boolean };
+}
+
+interface Props extends InjectedTranslateProps, OwnProps {}

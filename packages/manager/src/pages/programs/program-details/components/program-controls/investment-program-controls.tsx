@@ -11,7 +11,7 @@ import {
 } from "shared/components/details/helpers/details-context";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
-import { PROGRAM } from "shared/constants/constants";
+import { ASSET, PROGRAM } from "shared/constants/constants";
 
 import ClosePeriodContainer from "../close-period/close-period-container";
 import CloseProgramContainer from "../close-program/close-program-container";
@@ -25,35 +25,14 @@ enum INVESTMENT_POPUP {
   INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
-interface IInvestmentProgramControlsOwnProps {
-  isAuthenticated: boolean;
-  redirectToLogin(): void;
+class InvestmentProgramControls extends Component<Props, State> {
+  state = {
+    popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
+      curr[INVESTMENT_POPUP[next]] = false;
+      return curr;
+    }, {})
+  };
 
-  canCloseProgram: boolean;
-  isOwnProgram: boolean;
-  programDescription: ProgramDetailsFull;
-}
-
-interface IInvestmentProgramControlsState {
-  popups: { [k: string]: boolean };
-}
-
-type InvestmentProgramControlsProps = InjectedTranslateProps &
-  IInvestmentProgramControlsOwnProps;
-
-class InvestmentProgramControls extends Component<
-  InvestmentProgramControlsProps,
-  IInvestmentProgramControlsState
-> {
-  constructor(props: InvestmentProgramControlsProps) {
-    super(props);
-    this.state = {
-      popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
-        curr[INVESTMENT_POPUP[next]] = false;
-        return curr;
-      }, {})
-    };
-  }
   openPopup = (popupName: INVESTMENT_POPUP) => () => {
     let popups = { ...this.state.popups, [popupName]: true };
     this.setState({ popups });
@@ -154,8 +133,12 @@ class InvestmentProgramControls extends Component<
           )}
         </div>
         <InvestmentUnauthPopup
+          title={programDescription.title}
+          currency={programDescription.currency}
+          availableToInvestBase={programDescription.availableInvestment}
+          asset={ASSET.PROGRAM}
+          isOwn={isOwnProgram}
           isAuthenticated={this.props.isAuthenticated}
-          description={programDescription}
           open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
           onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
         />
@@ -207,3 +190,17 @@ class InvestmentProgramControls extends Component<
 }
 
 export default translate()(InvestmentProgramControls);
+
+interface OwnProps {
+  isAuthenticated: boolean;
+  redirectToLogin(): void;
+  canCloseProgram: boolean;
+  isOwnProgram: boolean;
+  programDescription: ProgramDetailsFull;
+}
+
+interface State {
+  popups: { [k: string]: boolean };
+}
+
+interface Props extends InjectedTranslateProps, OwnProps {}

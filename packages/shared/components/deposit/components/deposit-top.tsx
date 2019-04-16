@@ -5,11 +5,11 @@ import { ASSET, ROLE } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const _DepositTop: React.FC<DepositTopProps & InjectedTranslateProps> = ({
-  currency,
-  title,
-  availableToInvestBase,
   t,
   asset,
+  title,
+  currency,
+  availableToInvestBase,
   role = process.env.REACT_APP_PLATFORM as ROLE
 }) => {
   return (
