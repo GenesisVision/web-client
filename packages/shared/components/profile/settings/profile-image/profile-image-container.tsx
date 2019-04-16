@@ -9,7 +9,7 @@ import { SetSubmittingType } from "shared/utils/types";
 import { updateProfileAvatar } from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";
 
-const ProfileImageContainer: React.FC<StateProps & DispatchProps> = ({
+const _ProfileImageContainer: React.FC<StateProps & DispatchProps> = ({
   headerData,
   services
 }) => {
@@ -41,10 +41,12 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   services: bindActionCreators<any, any>({ updateProfileAvatar }, dispatch)
 });
 
-export default connect(
+const ProfileImageContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProfileImageContainer);
+)(_ProfileImageContainer);
+
+export default ProfileImageContainer;
 
 interface StateProps {
   headerData?: ProfileHeaderViewModel;
