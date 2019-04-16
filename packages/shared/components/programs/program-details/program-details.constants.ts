@@ -1,7 +1,9 @@
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import { composeRequestValueFunc } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import { SortingColumn } from "../../table/components/filtering/filter.type";
+import {
+  composeDefaultDateRangeFilter,
+  composeRequestValueFunc
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";

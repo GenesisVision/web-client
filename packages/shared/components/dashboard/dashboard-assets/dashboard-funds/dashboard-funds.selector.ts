@@ -1,6 +1,6 @@
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
 
-const dashboardFundsSelector = state => state.dashboard.funds;
+const dashboardFundsSelector = (state: any) => state.dashboard.funds; // TODO realize common auth state
 const dashboardFundsTableSelector = tableSelectorCreator(
   dashboardFundsSelector,
   "funds"

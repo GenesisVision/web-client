@@ -1230,6 +1230,12 @@
     },
     "dashboard-page": {
       "title": "Dashboard",
+      "assets": {
+        "title": "Assets",
+        "programs": "Programs",
+        "funds": "Funds",
+        "copytrading": "Copytrading"
+      },
       "programs": "Programs",
       "pending-tooltip": "The program is being created.",
       "portfolio": "Portfolio",

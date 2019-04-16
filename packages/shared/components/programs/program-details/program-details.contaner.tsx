@@ -18,6 +18,7 @@ import {
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import { STATUS } from "shared/constants/constants";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   updateDetails,
@@ -31,7 +32,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   profitChart,
   balanceChart
 }) => {
-  if (!description) return null;
   const fetchHistoryPortfolioEvents = (filters: any) =>
     historySection.fetchPortfolioEvents({
       ...filters,
@@ -64,7 +64,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           </div>
           <div className="details__section">
             <ProgramDetailsStatisticSection
-              status={description.status}
+              status={description.status as STATUS}
               getProgramStatistic={getProgramStatistic}
               programId={description.id}
               currency={currency}
@@ -97,7 +97,7 @@ interface OwnProps {
   redirectToLogin: () => void;
   historySection: IHistorySection;
   descriptionSection: IDescriptionSection;
-  description?: ProgramDetailsFull;
+  description: ProgramDetailsFull;
   profitChart?: ProgramDetailsProfitChart;
   balanceChart?: ProgramBalanceChart;
   statistic?: ProgramDetailsStatistic;

@@ -1,9 +1,11 @@
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  DateRangeFilterTypes,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 
-import { DateRangeFilterTypes } from "../table/components/filtering/date-range-filter/date-range-filter.constants";
-
-export const DASHBOARD_PROGRAMS_COLUMNS = [
+export const DASHBOARD_PROGRAMS_COLUMNS: SortingColumn[] = [
   {
     name: "title"
   },
@@ -50,7 +52,7 @@ export const DASHBOARD_PROGRAMS_DEFAULT_FILTERING = {
   }
 };
 
-export const DASHBOARD_FUNDS_COLUMNS = [
+export const DASHBOARD_FUNDS_COLUMNS: SortingColumn[] = [
   {
     name: "title"
   },

@@ -1,24 +1,30 @@
 import "./program-period-line.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import { GVProgramPeriod } from "gv-react-components";
 import moment from "moment";
-import React from "react";
-import { translate } from "react-i18next";
-import { STATUS_OLD } from "shared/constants/constants";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { STATUS } from "shared/constants/constants";
 
-const calcDuration = (start, end) => {
+const calcDuration = (start: number | Date, end: number | Date): string => {
   const dateStart = moment(start);
   const dateEnd = moment(end);
-  if (dateEnd < dateStart) return null;
+  if (dateEnd < dateStart) return "";
   return moment.duration(dateEnd.diff(dateStart)).humanize();
 };
 
-const ProgramPeriodLine = ({ t, start, end, className, status }) => {
+const ProgramPeriodLine: React.FC<Props & InjectedTranslateProps> = ({
+  t,
+  start,
+  end,
+  className,
+  status
+}) => {
   const duration = calcDuration(start, end);
   const timeLeft = calcDuration(new Date(), end);
   return (
-    <div className={classnames("program-period-line", className)}>
+    <div className={classNames("program-period-line", className)}>
       <GVProgramPeriod
         start={start}
         end={end}
@@ -28,7 +34,7 @@ const ProgramPeriodLine = ({ t, start, end, className, status }) => {
       <div className="program-period-line__description">
         <div>{duration}</div>
         <div>
-          {status === STATUS_OLD.CLOSED
+          {status === STATUS.CLOSED
             ? t("program-period.program-closed")
             : timeLeft && `${timeLeft} ${t("program-period.left")}`}{" "}
         </div>
@@ -37,4 +43,11 @@ const ProgramPeriodLine = ({ t, start, end, className, status }) => {
   );
 };
 
-export default translate()(ProgramPeriodLine);
+interface Props {
+  start: number | Date;
+  end: number | Date;
+  className?: string;
+  status: STATUS;
+}
+
+export default React.memo(translate()(ProgramPeriodLine));

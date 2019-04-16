@@ -1,16 +1,19 @@
-import { Component } from "react";
-import React from "react";
+import * as React from "react";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "shared/components/popover/popover";
 
-class DashboardProgramsStatusBlock extends Component {
+class DashboardProgramsStatusBlock extends React.PureComponent<Props, State> {
   state = {
-    anchor: null
+    anchor: undefined
   };
 
-  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
+  handleOpenDropdown = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) =>
+    this.setState({ anchor: event.currentTarget });
 
-  handleCloseDropdown = () => this.setState({ anchor: null });
+  handleCloseDropdown = () => this.setState({ anchor: undefined });
 
   render() {
     const { status } = this.props;
@@ -23,8 +26,8 @@ class DashboardProgramsStatusBlock extends Component {
           onClick={this.handleOpenDropdown}
         />
         <Popover
-          horizontal="right"
-          vertical="bottom"
+          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
           anchorEl={this.state.anchor}
           noPadding
           onClose={this.handleCloseDropdown}
@@ -35,4 +38,13 @@ class DashboardProgramsStatusBlock extends Component {
     );
   }
 }
+
+interface Props {
+  status: string;
+}
+
+interface State {
+  anchor?: EventTarget;
+}
+
 export default DashboardProgramsStatusBlock;
