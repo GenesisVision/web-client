@@ -69,12 +69,11 @@ class InvestmentProgramControls extends Component<Props, State> {
           )}
         </ProgramDetailContext.Consumer>
         <InvestmentUnauthPopup
+          message={t("program-details-page.description.unauth-popup")}
           asset={ASSET.PROGRAM}
           availableToInvestBase={programDescription.availableInvestmentBase}
           title={programDescription.title}
           currency={programDescription.currency}
-          isOwn={isOwnProgram}
-          isAuthenticated={false}
           open={this.state.isOpenPopup}
           onClose={this.handleClosePopup}
         />

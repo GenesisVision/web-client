@@ -74,10 +74,9 @@ class InvestmentFundControls extends Component<Props, State> {
           )}
         </ProgramDetailContext.Consumer>
         <InvestmentUnauthPopup
+          message={t("fund-details-page.description.unauth-popup")}
           asset={ASSET.FUND}
           title={fundDescription.title}
-          isOwn={isOwn}
-          isAuthenticated={false}
           open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
           onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
         />

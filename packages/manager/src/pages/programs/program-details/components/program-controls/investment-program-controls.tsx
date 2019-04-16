@@ -49,7 +49,14 @@ class InvestmentProgramControls extends Component<Props, State> {
 
   render() {
     const { popups } = this.state;
-    const { t, canCloseProgram, isOwnProgram, programDescription } = this.props;
+    const {
+      t,
+      canCloseProgram,
+      isOwnProgram,
+      programDescription,
+      isAuthenticated
+    } = this.props;
+
     const composeEditInfo = {
       stopOutLevel: programDescription.stopOutLevel,
       id: programDescription.id,
@@ -59,6 +66,12 @@ class InvestmentProgramControls extends Component<Props, State> {
         src: programDescription.logo
       }
     };
+
+    let message = t("program-details-page.description.unauth-popup");
+    if (isAuthenticated && !isOwnProgram) {
+      message = t("program-details-page.description.auth-manager-popup");
+    }
+
     return (
       <Fragment>
         <InvestmentProgramInfo
@@ -133,12 +146,11 @@ class InvestmentProgramControls extends Component<Props, State> {
           )}
         </div>
         <InvestmentUnauthPopup
+          message={message}
           title={programDescription.title}
           currency={programDescription.currency}
           availableToInvestBase={programDescription.availableInvestment}
           asset={ASSET.PROGRAM}
-          isOwn={isOwnProgram}
-          isAuthenticated={this.props.isAuthenticated}
           open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
           onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
         />

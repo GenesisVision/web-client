@@ -3,37 +3,22 @@ import "./investment-unauth-popup.scss";
 import classnames from "classnames";
 import { GVButton } from "gv-react-components";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
-import { compose } from "redux";
+import { InjectedTranslateProps } from "react-i18next";
 import DepositTop, {
   DepositTopProps
 } from "shared/components/deposit/components/deposit-top";
-import Dialog from "shared/components/dialog/dialog";
-import { ASSET, ROLE } from "shared/constants/constants";
+import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/pages/login.routes";
 
-const _InvestmentUnauthPopup: React.FC<Props> = ({
+const InvestmentUnauthPopup: React.FC<Props> = ({
   open,
   onClose,
-  isAuthenticated,
-  t,
   title,
   currency,
-  isOwn,
   asset,
-  availableToInvestBase
+  availableToInvestBase,
+  message
 }) => {
-  const role = process.env.REACT_APP_PLATFORM as ROLE;
-
-  let message = t(
-    "To invest in the selected program/fund selected please login as an investor or create a new investor account."
-  );
-
-  if (isAuthenticated && role === ROLE.MANAGER && !isOwn) {
-    message = t(
-      "In order to invest in investment programs and funds of other managers please login as an investor or create a new investor account."
-    );
-  }
   const loginUrl = process.env.REACT_APP_INVESTOR_PORTAL_URL
     ? `${process.env.REACT_APP_INVESTOR_PORTAL_URL}${LOGIN_ROUTE}`
     : LOGIN_ROUTE;
@@ -46,7 +31,6 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
     <Dialog open={open} onClose={onClose}>
       <DepositTop
         asset={asset}
-        role={role}
         currency={currency}
         title={title}
         availableToInvestBase={availableToInvestBase}
@@ -66,17 +50,8 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
   );
 };
 
-const InvestmentUnauthPopup = compose<React.FC<OwnProps>>(translate())(
-  _InvestmentUnauthPopup
-);
-
 export default InvestmentUnauthPopup;
 
-interface OwnProps extends DepositTopProps {
-  open: boolean;
-  onClose: () => void;
-  isOwn: boolean;
-  isAuthenticated: boolean;
+interface Props extends DepositTopProps, IDialogProps {
+  message: string;
 }
-
-interface Props extends InjectedTranslateProps, OwnProps {}

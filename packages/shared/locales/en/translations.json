@@ -423,7 +423,9 @@
       "close-fund": "Close Fund",
       "close-fund-notification": "You are about to close the fund. After you confirm this, all your funds will be withdrawn, no one will be able to invest in the fund anymore, but investors will still be able to withdraw their funds with a zero commission.",
       "close-fund-notification-success": "Request to close the fund was sent successfully.",
-      "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
+      "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically",
+      "unauth-popup": "To invest in the selected fund please login as an investor or create a new investor account.",
+      "auth-manager-popup": "In order to invest in investment funds of other managers please login as an investor or create a new investor account."
     },
     "statistics": {
       "heading": "Statistics",
@@ -504,7 +506,9 @@
       "change-password": "Change password",
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
-      "requests-completed": "All requests completed successfully"
+      "requests-completed": "All requests completed successfully",
+      "unauth-popup": "To invest in the selected program please login as an investor or create a new investor account.",
+      "auth-manager-popup": "In order to invest in investment programs of other managers please login as an investor or create a new investor account."
     },
     "statistics": {
       "heading": "Statistics",

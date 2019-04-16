@@ -45,7 +45,7 @@ class InvestmentFundControls extends Component<Props, State> {
 
   render() {
     const { popups } = this.state;
-    const { t, fundDescription } = this.props;
+    const { t, fundDescription, isAuthenticated } = this.props;
     const { personalFundDetails } = fundDescription;
     const canCloseProgram =
       personalFundDetails && personalFundDetails.canCloseProgram;
@@ -64,6 +64,12 @@ class InvestmentFundControls extends Component<Props, State> {
         src: fundDescription.logo
       }
     };
+
+    let message = t("fund-details-page.description.unauth-popup");
+    if (isAuthenticated && !isOwnProgram) {
+      message = t("fund-details-page.description.auth-manager-popup");
+    }
+
     return (
       <Fragment>
         <InvestmentFundInfo fundDescription={fundDescription} />
@@ -157,10 +163,9 @@ class InvestmentFundControls extends Component<Props, State> {
           )}
         </ProgramDetailContext.Consumer>
         <InvestmentUnauthPopup
+          message={message}
           title={fundDescription.title}
           asset={ASSET.FUND}
-          isOwn={isOwnProgram}
-          isAuthenticated={this.props.isAuthenticated}
           open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
           onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
         />
