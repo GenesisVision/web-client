@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
-  calculateTotalPages,
-  IPaging
+  IPaging,
+  calculateTotalPages
 } from "shared/components/table//helpers/paging.helpers";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
@@ -14,8 +14,8 @@ import { GetItemsFuncType } from "./table.types";
 const defaultData: IDataModel = { items: null, total: 0 };
 
 export interface ITableModuleProps extends ITableProps {
-  defaultFilters: any[];
   getItems: GetItemsFuncType;
+  defaultFilters?: any[];
   loader?: boolean;
   data?: IDataModel;
 }

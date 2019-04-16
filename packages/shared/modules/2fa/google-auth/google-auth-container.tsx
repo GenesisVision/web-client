@@ -1,26 +1,27 @@
 import "./google-auth.scss";
 
-import * as React from "react";
-import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import authApi from "shared/services/api-client/auth-api";
-import authService from "shared/services/auth-service";
-import GoogleAuthCodes from "../google-auth/google-auth-codes";
-import GoogleAuthStepsContainer from "../google-auth/google-auth-steps/google-auth-steps";
-import * as twoFactorServices from "../services/2fa.service";
-import DialogLoaderGoogleAuthSteps from "./google-auth-steps/dialog-loader-google-auth-steps";
 import {
   CancelablePromise,
   RecoveryCodesViewModel,
   TwoFactorAuthenticator,
   TwoFactorAuthenticatorConfirm
 } from "gv-api-web";
+import * as React from "react";
+import { translate } from "react-i18next";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import authApi from "shared/services/api-client/auth-api";
+import authService from "shared/services/auth-service";
 import {
   MiddlewareDispatch,
   ResponseError,
   SetSubmittingType
 } from "shared/utils/types";
+
+import GoogleAuthCodes from "../google-auth/google-auth-codes";
+import GoogleAuthStepsContainer from "../google-auth/google-auth-steps/google-auth-steps";
+import * as twoFactorServices from "../services/2fa.service";
+import DialogLoaderGoogleAuthSteps from "./google-auth-steps/dialog-loader-google-auth-steps";
 import { IGoogleActivateStepFormValues } from "./google-auth-steps/google-auth-activate-step";
 
 class GoogleAuthContainer extends React.PureComponent<Props, State> {

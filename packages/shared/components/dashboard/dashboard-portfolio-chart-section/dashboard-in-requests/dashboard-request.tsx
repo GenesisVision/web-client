@@ -11,6 +11,8 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import { EVENT_LOGO_TYPE } from "../../dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
+
 export interface IDashboardRequestProps {
   role: ROLE;
   asset: ASSET;
@@ -25,7 +27,7 @@ export interface IDashboardRequestState {
   disabled: boolean;
 }
 
-class DashboardRequest extends React.Component<
+class DashboardRequest extends React.PureComponent<
   IDashboardRequestProps,
   IDashboardRequestState
 > {
@@ -71,7 +73,7 @@ class DashboardRequest extends React.Component<
       <div className="dashboard-request-popover__request">
         <div className="dashboard-request-popover__logo">
           <PortfolioEventLogo
-            type={request.type}
+            type={request.type as EVENT_LOGO_TYPE}
             logo={request.logo}
             color={request.color}
           />

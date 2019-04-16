@@ -89,4 +89,4 @@ const StatisticItem: React.FC<IFollowStatisticItemProps> = ({
   );
 };
 
-export default StatisticItem;
+export default React.memo(StatisticItem);

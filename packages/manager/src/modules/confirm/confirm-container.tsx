@@ -1,10 +1,11 @@
-import * as React from "react";
-import * as service from "./services/confirm.services";
 import { TwoFactorAuthenticator } from "gv-api-web";
-import { IConfirmFormValues } from "./components/confirm-form";
-import { ResponseError, SetSubmittingType } from "shared/utils/types";
-import GoogleAuthStepsContainer from "shared/modules/2fa/google-auth/google-auth-steps/google-auth-steps";
+import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
+import GoogleAuthStepsContainer from "shared/modules/2fa/google-auth/google-auth-steps/google-auth-steps";
+import { ResponseError, SetSubmittingType } from "shared/utils/types";
+
+import { IConfirmFormValues } from "./components/confirm-form";
+import * as service from "./services/confirm.services";
 
 class _ConfirmContainer extends React.PureComponent<Props, State> {
   state = { serverError: "", data: undefined, twoFactorCode: undefined };

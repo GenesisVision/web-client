@@ -13,15 +13,6 @@ export enum STATUS {
   PENDING = "Pending"
 }
 
-export const STATUS_OLD = {
-  ACTIVE: "Active",
-  INVESTING: "Investing",
-  WITHDRAWING: "Withdrawing",
-  ENDED: "Ended",
-  CLOSED: "Closed",
-  ARCHIVED: "Archived",
-  PENDING: "Pending"
-};
 export const PROFIT_EVENT = "Profit";
 
 export enum SORTING {

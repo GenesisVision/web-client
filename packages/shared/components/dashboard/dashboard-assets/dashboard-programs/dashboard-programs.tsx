@@ -1,8 +1,8 @@
 import "./dashboard-programs.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import { GVButton } from "gv-react-components";
-import React, { Fragment, FunctionComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -25,7 +25,7 @@ import {
   Column,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
-import { PROGRAM, ROLE } from "shared/constants/constants";
+import { PROGRAM } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import {
   formatCurrencyValue,
@@ -36,25 +36,22 @@ import {
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
 interface IDashboardProgramsProps {
-  role: ROLE;
   title: string;
   getDashboardPrograms(filters: any): Action;
   createButtonToolbar: JSX.Element;
   createProgram: JSX.Element;
 }
 
-const DashboardPrograms: FunctionComponent<
+const DashboardPrograms: React.FC<
   InjectedTranslateProps & IDashboardProgramsProps
 > = ({
   t,
-  role,
   getDashboardPrograms,
   createButtonToolbar,
   createProgram,
   title
 }) => {
   return (
-    //@ts-ignore
     <TableContainer
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createProgram}
@@ -66,14 +63,12 @@ const DashboardPrograms: FunctionComponent<
         updateFilter: IUpdateFilterFunc,
         filtering: FilteringType
       ) => (
-        <Fragment>
-          <DateRangeFilter
-            name={DATE_RANGE_FILTER_NAME}
-            value={filtering[DATE_RANGE_FILTER_NAME]}
-            onChange={updateFilter}
-            startLabel={t("filters.date-range.program-start")}
-          />
-        </Fragment>
+        <DateRangeFilter
+          name={DATE_RANGE_FILTER_NAME}
+          value={filtering[DATE_RANGE_FILTER_NAME]}
+          onChange={updateFilter}
+          startLabel={t("filters.date-range.program-start")}
+        />
       )}
       renderHeader={(column: Column) => (
         <span
@@ -90,7 +85,7 @@ const DashboardPrograms: FunctionComponent<
       )}
       renderBodyRow={(program: any, updateRow: any) => (
         <TableRow
-          className={classnames({
+          className={classNames({
             "table__row--pretender": program.rating.canLevelUp
           })}
         >
@@ -169,4 +164,4 @@ const DashboardPrograms: FunctionComponent<
   );
 };
 
-export default translate()(DashboardPrograms);
+export default React.memo(translate()(DashboardPrograms));

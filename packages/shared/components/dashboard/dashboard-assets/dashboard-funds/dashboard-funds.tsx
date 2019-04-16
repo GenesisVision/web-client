@@ -14,7 +14,10 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  SortingColumn
+} from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -32,7 +35,6 @@ import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
 interface IDashboardFundsProps {
   title: string;
-  role: ROLE;
   getDashboardFunds: GetItemsFuncActionType;
   onChangeStatus?(): void;
   createButtonToolbar: JSX.Element;
@@ -43,7 +45,6 @@ const DashboardFunds: FunctionComponent<
   InjectedTranslateProps & IDashboardFundsProps
 > = ({
   t,
-  role,
   onChangeStatus,
   getDashboardFunds,
   createButtonToolbar,
@@ -51,7 +52,6 @@ const DashboardFunds: FunctionComponent<
   title
 }) => {
   return (
-    //@ts-ignore
     <TableContainer
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createFund}
@@ -170,4 +170,4 @@ const DashboardFunds: FunctionComponent<
   );
 };
 
-export default translate()(DashboardFunds);
+export default React.memo(translate()(DashboardFunds));

@@ -73,15 +73,10 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
     const { t, createButtonToolbar, wallets } = this.props;
     return (
       <div className="wallet-list">
-        {/*
-        //@ts-ignore */}
         <Table
-          //@ts-ignore
           paging={DEFAULT_PAGING}
-          //@ts-ignore
-          createButtonToolbar={createButtonToolbar}
           items={wallets}
-          dataSelector={walletTableTransactionsSelector}
+          // dataSelector={walletTableTransactionsSelector} TableContainer have this prop
           columns={WALLET_LIST_COLUMNS}
           renderHeader={column => (
             <span

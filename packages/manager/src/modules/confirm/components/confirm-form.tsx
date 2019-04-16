@@ -1,10 +1,10 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { object, string } from "yup";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import { SetSubmittingType } from "shared/utils/types";
+import { object, string } from "yup";
 
 const _ConfirmForm: React.FC<
   InjectedFormikProps<Props, IConfirmFormValues>

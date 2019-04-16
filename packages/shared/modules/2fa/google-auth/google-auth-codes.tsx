@@ -1,12 +1,12 @@
 import copy from "copy-to-clipboard";
+import { RecoveryCode } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
-import { compose, Dispatch } from "redux";
+import { Dispatch, compose } from "redux";
 import CopyIcon from "shared/components/icon/copy-icon";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { RecoveryCode } from "gv-api-web";
 
 const CodeItem: React.FC<{ code: string }> = React.memo(({ code }) => (
   <div className="codes__item" key={code}>

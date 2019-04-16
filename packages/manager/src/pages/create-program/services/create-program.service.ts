@@ -40,9 +40,9 @@ export const createProgram = (
   const authorization = authService.getAuthArg();
 
   let promise = Promise.resolve("") as CancelablePromise<any>;
-  if (createProgramData.logo.cropped) {
+  if (createProgramData.logo.image) {
     promise = filesService.uploadFile(
-      createProgramData.logo.cropped,
+      createProgramData.logo.image.cropped,
       authorization
     ) as CancelablePromise<any>;
   }

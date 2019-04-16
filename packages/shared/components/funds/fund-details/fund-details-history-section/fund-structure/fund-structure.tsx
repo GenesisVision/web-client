@@ -10,9 +10,9 @@ import { SortingColumn } from "shared/components/table/components/filtering/filt
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
+import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
 
 interface Props {
   id: string;
@@ -56,10 +56,8 @@ class FundStructure extends React.Component<
     };
 
     return (
-      //@ts-ignore TODO fix tables
       <TableModule
         data={data}
-        //@ts-ignore TODO
         paging={{
           ...DEFAULT_PAGING,
           itemsOnPage: data.total

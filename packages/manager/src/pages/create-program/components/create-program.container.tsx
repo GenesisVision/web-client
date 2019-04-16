@@ -1,3 +1,4 @@
+import { push } from "connected-react-router";
 import {
   Broker,
   CancelablePromise,
@@ -7,6 +8,7 @@ import {
   WalletData
 } from "gv-api-web";
 import { GVTab, GVTabs } from "gv-react-components";
+import ConfirmContainer from "modules/confirm/confirm-container";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -17,20 +19,19 @@ import { fetchWallets } from "shared/components/wallet/services/wallet.services"
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
 import {
+  MiddlewareDispatch,
+  ResponseError,
+  SetSubmittingType
+} from "shared/utils/types";
+
+import { DASHBOARD_ROUTE } from "../../dashboard/dashboard.routes";
+import {
   createProgram,
   fetchBrokers,
   fetchMinDepositsAmount
 } from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
-import ConfirmContainer from "modules/confirm/confirm-container";
-import {
-  MiddlewareDispatch,
-  ResponseError,
-  SetSubmittingType
-} from "shared/utils/types";
-import { push } from "connected-react-router";
-import { DASHBOARD_ROUTE } from "../../dashboard/dashboard.routes";
 
 enum TAB {
   BROKER = "BROKER",

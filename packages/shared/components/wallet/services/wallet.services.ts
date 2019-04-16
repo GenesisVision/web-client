@@ -10,6 +10,7 @@ import {
   mapToTableItems
 } from "shared/components/table/helpers/mapper";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
@@ -113,8 +114,8 @@ export const fetchMultiTransactionsExternal = (
 };
 
 export const fetchMultiTransactions = (
-  currency: string,
-  filters: FilteringType
+  currency: CURRENCIES,
+  filters?: FilteringType
 ) => {
   const authorization = authService.getAuthArg();
   const filtering = {

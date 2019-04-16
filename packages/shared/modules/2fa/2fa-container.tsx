@@ -5,16 +5,17 @@ import { GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import Dialog from "shared/components/dialog/dialog";
 import Select from "shared/components/select/select";
+import { ITwoFactorReducer } from "shared/reducers/2fa-reducer";
+import RootState from "shared/reducers/root-reducer";
+import { ActionType } from "shared/utils/types";
+
 import DisableAuthContainer from "./disable-auth/disable-auth-container";
 import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
 import GoogleAuthContainer from "./google-auth/google-auth-container";
-import RootState from "shared/reducers/root-reducer";
-import { ITwoFactorReducer } from "shared/reducers/2fa-reducer";
-import { ActionType } from "shared/utils/types";
 
 class TwoFactorAuthContainer extends React.PureComponent<Props, State> {
   state = {
