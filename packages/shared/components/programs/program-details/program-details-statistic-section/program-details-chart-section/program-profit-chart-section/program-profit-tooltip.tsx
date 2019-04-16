@@ -4,13 +4,11 @@ import { formatValue } from "shared/utils/formatter";
 
 const TooltipBody: React.FC<{ equity: string; pnl: string }> = React.memo(
   ({ equity, pnl }) => (
-    <>
-      <div className="details-tooltip__statistic">
-        <div className="details-tooltip__value">
-          {pnl} ({equity})
-        </div>
+    <div className="details-tooltip__statistic">
+      <div className="details-tooltip__value">
+        {pnl} ({equity})
       </div>
-    </>
+    </div>
   )
 );
 
