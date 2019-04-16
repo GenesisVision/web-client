@@ -1,26 +1,20 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 import { formatValue } from "shared/utils/formatter";
 
-const TooltipBody = ({ equity, pnl }) => {
-  return (
-    <Fragment>
+const TooltipBody: React.FC<{ equity: string; pnl: string }> = React.memo(
+  ({ equity, pnl }) => (
+    <>
       <div className="details-tooltip__statistic">
         <div className="details-tooltip__value">
           {pnl} ({equity})
         </div>
       </div>
-    </Fragment>
-  );
-};
-const ProgramProfitTooltip = ({
-  active,
-  label,
-  payload,
-  heading,
-  body,
-  date
-}) => {
+    </>
+  )
+);
+
+const ProgramProfitTooltip: React.FC<Props> = ({ active, label, payload }) => {
   if (!active) return null;
   let equity = "";
   if (payload[1]) {
@@ -38,4 +32,11 @@ const ProgramProfitTooltip = ({
     />
   );
 };
-export default ProgramProfitTooltip;
+
+interface Props {
+  active: boolean;
+  label: string;
+  payload: any[];
+}
+
+export default React.memo(ProgramProfitTooltip);
