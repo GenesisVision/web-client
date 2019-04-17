@@ -142,7 +142,22 @@ export default compose<React.ComponentType<IFollowParamsOwnProps>>(
         percent: 10
       };
     },
-
+    validationSchema: ({ t }: Props) =>
+      object().shape({
+        fixedVolume: number()
+          .min(0, t("follow-program.params.validation.fixedVolume-min"))
+          .max(99999, t("follow-program.params.validation.fixedVolume-max")),
+        percent: number()
+          .min(1, t("follow-program.params.validation.percent-min"))
+          .max(999, t("follow-program.params.validation.percent-max")),
+        openTolerancePercent: number()
+          .required(t("follow-program.params.validation.tolerance-required"))
+          .min(
+            0.01,
+            t("follow-program.params.validation.tolerance-percent-min")
+          )
+          .max(20, t("follow-program.params.validation.tolerance-percent-max"))
+      }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
