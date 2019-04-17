@@ -1092,27 +1092,26 @@
         "error-message": "An error occurred while closing the trade"
       },
       "open-trades-header": {
-        "program": "Program",
-        "manager": "Manager",
+        "providers": "Providers",
+        "direction": "Dir",
+        "ticket": "Ticket",
         "symbol": "Symbol",
-        "open-date": "Open Date",
         "volume": "Volume",
-        "open-price": "Open Price",
+        "profit": "Profit",
         "price": "Price",
-        "profit": "Current Profit",
-        "close": "Close"
+        "entry": "Entry",
+        "date": "Date"
       },
       "trades-history-header": {
-        "program": "Program",
-        "manager": "Manager",
+        "providers": "Providers",
         "direction": "Dir",
-        "open-date": "Open Date",
-        "close-date": "Close Date",
+        "ticket": "Ticket",
         "symbol": "Symbol",
         "volume": "Volume",
-        "open-price": "Open Price",
-        "close-price": "Close Price",
-        "profit": "Profit"
+        "profit": "Profit",
+        "price": "Price",
+        "entry": "Entry",
+        "date": "Date"
       }
     },
     "dashboard-page": {

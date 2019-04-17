@@ -1,6 +1,10 @@
 import "./open-trades-table.scss";
 
-import { OrderOpenSignalSlaveModel, TradesSignalViewModel } from "gv-api-web";
+import {
+  OrderSignalModel,
+  OrderSignalProgramInfo,
+  TradesSignalViewModel
+} from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component, ComponentType } from "react";
@@ -13,8 +17,10 @@ import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { CloseIcon } from "shared/components/icon/close-icon";
+import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
+import { PROGRAM_TRADES_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
 import { TableCell } from "shared/components/table/components";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -32,6 +38,7 @@ import {
 } from "../services/copytrading-tables.service";
 import { COPYTRADING_OPEN_TRADES_COLUMNS } from "./copytrading-tables.constants";
 import { dashboardOpenTradesTableSelector } from "./copytrading-tables.selectors";
+import TradeRow from "./trade-row";
 
 interface IOpenTradesTableOwnProps {
   title: string;
@@ -83,31 +90,19 @@ class OpenTradesTable extends Component<
         getItems={getCopytradingOpenTrades(currency)}
         dataSelector={dashboardOpenTradesTableSelector}
         isFetchOnMount={true}
-        // columns={COPYTRADING_OPEN_TRADES_COLUMNS}
-        columns={[{ name: "Total" }, { name: "Trades" }]}
-        renderHeader={(column: Column) =>
-          t(`investor.copytrading-tables.open-trades-header.${column.name}`)
-        }
-        renderBodyRow={(signalTrade: TradesSignalViewModel, updateRow: any) => (
+        columns={COPYTRADING_OPEN_TRADES_COLUMNS}
+        renderHeader={column => (
+          <span
+            className={`details-trades__head-cell program-details-trades__cell--${
+              column.name
+            }`}
+          >
+            {t(`investor.copytrading-tables.open-trades-header.${column.name}`)}
+          </span>
+        )}
+        renderBodyRow={(trade: OrderSignalModel, updateRow: any) => (
           <>
-            <TableRow>
-              <TableCell className="programs-table__cell dashboard-programs__cell">
-                {signalTrade.total}
-              </TableCell>
-              <TableCell className="programs-table__cell dashboard-programs__cell">
-                <table>
-                  {signalTrade.trades.map(trade => (
-                    <tr>
-                      <td>{trade.id}</td>
-                      <td>{trade.masterLogin}</td>
-                      <td>{trade.entry}</td>
-                      <td>{trade.profit}</td>
-                      <td>{trade.price}</td>
-                    </tr>
-                  ))}
-                </table>
-              </TableCell>
-            </TableRow>
+            <TradeRow trade={trade} />
             {/*<TableRow>
             <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
