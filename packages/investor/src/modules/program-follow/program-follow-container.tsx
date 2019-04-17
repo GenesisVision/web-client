@@ -1,4 +1,4 @@
-import { CopyTradingAccountsList, WalletData } from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -12,6 +12,7 @@ import FollowPopupForm from "./follow-popup/follow-popup-form";
 import {
   attachToSignal,
   getSignalAccounts,
+  getSignalInfo,
   updateAttachToSignal
 } from "./services/program-follow-service";
 
@@ -28,26 +29,32 @@ export interface IProgramFollowContainerProps {
 }
 interface IProgramFollowContainerState {
   isPending: boolean;
-  signalAccounts: any | null;
+  accounts: any | null;
+  hasSignalAccount?: boolean;
 }
 class ProgramFollowContainer extends React.Component<
   IProgramFollowContainerProps,
   IProgramFollowContainerState
 > {
   state = {
+    hasSignalAccount: undefined,
     isPending: false,
-    signalAccounts: []
+    accounts: []
   };
 
   componentDidMount() {
     if (!authService.getAuthArg()) return;
     this.setState({ isPending: true });
-    getSignalAccounts().then(
-      (CopyTradingAccountsList: CopyTradingAccountsList) => {
+    getSignalAccounts()
+      .then(CopyTradingAccountsList => {
         const { accounts } = CopyTradingAccountsList;
-        this.setState({ signalAccounts: accounts, isPending: false });
-      }
-    );
+        this.setState({ accounts });
+        return getSignalInfo(this.props.id);
+      })
+      .then(info => {
+        const { hasSignalAccount } = info;
+        this.setState({ hasSignalAccount, isPending: false });
+      });
   }
 
   render() {
@@ -56,13 +63,12 @@ class ProgramFollowContainer extends React.Component<
       wallets,
       open,
       onClose,
-      onApply,
       currency,
       id,
       type,
       programName
     } = this.props;
-    const { isPending, signalAccounts } = this.state;
+    const { isPending, accounts, hasSignalAccount } = this.state;
     if (isPending) return <DialogLoader />;
     const handleClose = () => {
       onClose();
@@ -75,10 +81,11 @@ class ProgramFollowContainer extends React.Component<
     return (
       <Dialog open={open} onClose={handleClose}>
         <FollowPopupForm
+          hasSignalAccount={hasSignalAccount!}
           alertError={service.alertError}
           alertSuccess={service.alertSuccess}
           id={id}
-          signalAccounts={signalAccounts}
+          accounts={accounts}
           currency={currency}
           wallets={wallets}
           submitMethod={submitMethod}

@@ -10,31 +10,6 @@ import { number, object } from "yup";
 
 import { IRequestParams } from "./follow-popup-form";
 
-type mode = {
-  label: string;
-  value: string;
-};
-
-const modes: { [key: string]: mode } = {
-  byBalance: { label: "By balance", value: "ByBalance" },
-  percentage: { label: "Percentage", value: "Percentage" },
-  fixed: { label: "Fixed", value: "Fixed" }
-};
-
-interface FormValues {
-  mode: string;
-  openTolerancePercent: number;
-  percent: number;
-  fixedVolume: number;
-}
-
-interface IFollowParamsOwnProps {
-  onSubmit: (values: IRequestParams, setSubmitting: SetSubmittingType) => void;
-  onPrevStep(): void;
-}
-
-interface Props extends IFollowParamsOwnProps, InjectedTranslateProps {}
-
 class FollowParams extends React.PureComponent<
   InjectedFormikProps<Props, FormValues>
 > {
@@ -130,6 +105,31 @@ class FollowParams extends React.PureComponent<
     );
   }
 }
+
+type mode = {
+  label: string;
+  value: string;
+};
+
+const modes: { [key: string]: mode } = {
+  byBalance: { label: "By balance", value: "ByBalance" },
+  percentage: { label: "Percentage", value: "Percentage" },
+  fixed: { label: "Fixed", value: "Fixed" }
+};
+
+interface FormValues {
+  mode: string;
+  openTolerancePercent: number;
+  percent: number;
+  fixedVolume: number;
+}
+
+interface IFollowParamsOwnProps {
+  onSubmit: (values: IRequestParams, setSubmitting: SetSubmittingType) => void;
+  onPrevStep(): void;
+}
+
+interface Props extends IFollowParamsOwnProps, InjectedTranslateProps {}
 
 export default compose<React.ComponentType<IFollowParamsOwnProps>>(
   translate(),

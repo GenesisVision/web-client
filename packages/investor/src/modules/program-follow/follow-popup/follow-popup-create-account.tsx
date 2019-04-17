@@ -1,9 +1,8 @@
-import { withFormik } from "formik";
-import { FormikProps } from "formik";
+import { FormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -17,31 +16,7 @@ import { Schema, lazy, number, object } from "yup";
 
 import { IRequestParams } from "./follow-popup-form";
 
-interface IFollowCreateAccountOwnProps {
-  wallets: WalletData[];
-  currency: string;
-  onClick: (values: IRequestParams) => void;
-}
-
-interface IFollowCreateAccountProps {
-  t: TranslationFunction;
-}
-
-interface IFollowCreateAccountState {
-  rate: string;
-  isPending: boolean;
-}
-
-export interface FormValues {
-  initialDepositCurrency: string;
-  initialDepositAmount: number;
-}
-
-type OwnProps = IFollowCreateAccountOwnProps &
-  IFollowCreateAccountProps &
-  FormikProps<FormValues>;
-
-class FollowCreateAccount extends React.Component<
+class FollowCreateAccount extends React.PureComponent<
   OwnProps,
   IFollowCreateAccountState
 > {
@@ -185,6 +160,26 @@ class FollowCreateAccount extends React.Component<
   }
 }
 
+interface IFollowCreateAccountOwnProps {
+  wallets: WalletData[];
+  currency: string;
+  onClick: (values: IRequestParams) => void;
+}
+
+interface IFollowCreateAccountState {
+  rate: string;
+  isPending: boolean;
+}
+
+export interface FormValues {
+  initialDepositCurrency: string;
+  initialDepositAmount: number;
+}
+
+type OwnProps = IFollowCreateAccountOwnProps &
+  InjectedTranslateProps &
+  FormikProps<FormValues>;
+
 export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
   translate(),
   withFormik({
@@ -202,7 +197,7 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
       }
       return { initialDepositCurrency, initialDepositAmount: "" };
     },
-    validationSchema: (params: TranslationFunction & OwnProps) => {
+    validationSchema: (params: OwnProps) => {
       const getAvailable = (currency: string): number => {
         const wallet = params.wallets.find(
           (wallet: WalletData) => wallet.currency == currency
