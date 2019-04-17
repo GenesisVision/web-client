@@ -1,8 +1,10 @@
 import "./wallet-copytrading.scss";
+
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+
 import { fetchCopytradingAccounts } from "../../services/wallet.services";
 import WalletCopytradingRow from "./wallet-copytrading-row";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";

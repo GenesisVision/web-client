@@ -3,7 +3,7 @@ import "shared/components/details/details.scss";
 import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
 import React, { ComponentType, PureComponent } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/login/login.service";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import {
@@ -14,11 +14,12 @@ import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic
 } from "shared/components/programs/program-details/services/program-details.types";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import RootState from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
-import { IDescriptionSection, IHistorySection } from "./program-details.types";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+
 import ProgramDetailsContainer from "./program-details.contaner";
+import { IDescriptionSection, IHistorySection } from "./program-details.types";
 
 class _ProgramDetailsPage extends PureComponent<Props, State> {
   state = {

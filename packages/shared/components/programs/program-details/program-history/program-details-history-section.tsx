@@ -1,25 +1,26 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
-import * as React from "react";
 import { SyntheticEvent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
+import { PORTFOLIO_EVENTS_TYPES } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import ProgramTrades from "shared/components/programs/program-details/program-history/program-trades";
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import ProgramOpenPositions from "./program-open-positions";
-import RootState from "shared/reducers/root-reducer";
-import { AuthState } from "shared/reducers/auth-reducer";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { IDataModel } from "shared/constants/constants";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
+import { IDataModel } from "shared/constants/constants";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import { AuthState } from "shared/reducers/auth-reducer";
+import RootState from "shared/reducers/root-reducer";
+
 import { HistoryCountsType } from "../program-details.types";
-import { PORTFOLIO_EVENTS_TYPES } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
+import ProgramOpenPositions from "./program-open-positions";
 
 const EVENTS_FILTERING = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,

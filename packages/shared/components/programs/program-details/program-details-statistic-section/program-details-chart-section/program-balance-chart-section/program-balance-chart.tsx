@@ -1,3 +1,4 @@
+import { ProgramBalanceChartElement } from "gv-api-web";
 import { GVColors } from "gv-react-components";
 import * as React from "react";
 import {
@@ -9,9 +10,9 @@ import {
   YAxis
 } from "recharts";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
-import ProgramBalanceTooltip from "./program-balance-tooltip";
-import { ProgramBalanceChartElement } from "gv-api-web";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+
+import ProgramBalanceTooltip from "./program-balance-tooltip";
 
 const ProgramBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
   if (balanceChart.length === 0) return null;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
-  calculateTotalPages,
-  IPaging
+  IPaging,
+  calculateTotalPages
 } from "shared/components/table//helpers/paging.helpers";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";

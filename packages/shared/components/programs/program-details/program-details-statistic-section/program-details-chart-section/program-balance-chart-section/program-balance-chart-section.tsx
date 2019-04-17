@@ -1,14 +1,14 @@
+import { ProgramBalanceChart as ProgramBalanceChartType } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
 
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { HandlePeriodChangeType } from "../../program-details-statistic-section";
-import { ProgramBalanceChart as ProgramBalanceChartType } from "gv-api-web";
 import ProgramBalanceChart from "./program-balance-chart";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
 const ProgramBalanceChartSection: React.FC<Props> = ({
   balanceChart,

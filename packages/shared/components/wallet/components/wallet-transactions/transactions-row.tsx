@@ -9,8 +9,8 @@ import Status from "shared/components/status/status";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 import { CURRENCY_FRACTIONS } from "shared/utils/currency-converter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;

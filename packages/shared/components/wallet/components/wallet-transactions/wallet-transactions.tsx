@@ -11,20 +11,21 @@ import {
   DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import TableModule from "shared/components/table/components/table-module";
-import { FilterType } from "shared/components/table/helpers/filtering.helpers";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
-import { fetchMultiTransactions } from "../../services/wallet.services";
-import RootState from "shared/reducers/root-reducer";
-import { WalletLastUpdateState } from "../../reducers/wallet-last-update";
-import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import {
   GetItemsFuncType,
   RenderBodyItemFuncType
 } from "shared/components/table/components/table.types";
+import { FilterType } from "shared/components/table/helpers/filtering.helpers";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import RootState from "shared/reducers/root-reducer";
+
+import { WalletLastUpdateState } from "../../reducers/wallet-last-update";
+import { fetchMultiTransactions } from "../../services/wallet.services";
 import { TRANSACTIONS_TYPE } from "./wallet-transactions.constants";
 
 const TRANSACTIONS_FILTERS = {

@@ -1,7 +1,9 @@
 import "./dashboard-portfolio-event-logo.scss";
+
 import * as React from "react";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import { ASSET } from "shared/constants/constants";
 import EventCancelledIconRed from "shared/media/event-cancelled-red.svg";
 import EventCancelledIcon from "shared/media/event-cancelled.svg";
 import EventEndedRedIcon from "shared/media/event-ended-red.svg";
@@ -20,8 +22,8 @@ import {
   composeFundsDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
+
 import { EVENT_LOGO_TYPE } from "./dashboard-portfolio-event-logo.helper";
-import { ASSET } from "shared/constants/constants";
 
 export const EvenLogoIcon: React.FC<{ type: EVENT_LOGO_TYPE }> = ({ type }) => {
   switch (type) {

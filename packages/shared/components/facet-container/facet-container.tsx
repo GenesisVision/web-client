@@ -1,16 +1,16 @@
+import { FundFacet, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
+import { IFundsFacetTableProps } from "shared/components/funds/funds-facet/components/funds-facet-table";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
-import { withAuthenticated } from "shared/decorators/is-authenticated";
-import RootState from "shared/reducers/root-reducer";
-import { FundFacet, ProgramFacet } from "gv-api-web";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { IProgramsFacetTableProps } from "shared/components/programs/programs-facet/components/programs-facet-table";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
-import { IFundsFacetTableProps } from "shared/components/funds/funds-facet/components/funds-facet-table";
+import { withAuthenticated } from "shared/decorators/is-authenticated";
+import RootState from "shared/reducers/root-reducer";
 
 class _FacetContainer extends React.PureComponent<Props, State> {
   state = {
