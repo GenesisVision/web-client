@@ -1,15 +1,15 @@
-import { ProgramBalanceChart as ProgramBalanceChartType } from "gv-api-web";
+import { FundBalanceChart as FundBalanceChartType } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
-import ProgramBalanceChart from "./program-balance-chart";
+import FundBalanceChart from "./fund-balance-chart";
 
-const ProgramBalanceChartSection: React.FC<Props> = ({
+const FundBalanceChartSection: React.FC<Props> = ({
   balanceChart,
   period,
   onPeriodChange
@@ -18,13 +18,13 @@ const ProgramBalanceChartSection: React.FC<Props> = ({
     <div className="details-chart__value">
       <StatisticItem
         label={"Value"}
-        equivalent={balanceChart.programCurrencyBalance}
-        equivalentCurrency={balanceChart.programCurrency}
+        equivalent={balanceChart.usdBalance}
+        equivalentCurrency={"USD"}
         big
         accent
       >
         <NumberFormat
-          value={formatValue(balanceChart.gvtBalance)}
+          value={formatCurrencyValue(balanceChart.gvtBalance, "GVT")}
           thousandSeparator={" "}
           displayType="text"
           suffix={" GVT"}
@@ -33,18 +33,18 @@ const ProgramBalanceChartSection: React.FC<Props> = ({
     </div>
     <ChartPeriod onChange={onPeriodChange} period={period} />
     <div className="details-chart__profit">
-      <ProgramBalanceChart
+      <FundBalanceChart
         balanceChart={balanceChart.balanceChart}
-        currency={balanceChart.programCurrency}
+        currency={"GVT"}
       />
     </div>
   </>
 );
 
 interface Props {
-  balanceChart: ProgramBalanceChartType;
+  balanceChart: FundBalanceChartType;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
 }
 
-export default React.memo(ProgramBalanceChartSection);
+export default React.memo(FundBalanceChartSection);

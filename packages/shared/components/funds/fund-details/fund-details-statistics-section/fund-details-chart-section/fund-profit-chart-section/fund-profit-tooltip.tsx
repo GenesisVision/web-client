@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 import NumberFormat from "react-number-format";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 
-const FundProfitTooltip = ({ active, label, payload, value }) => {
+const FundProfitTooltip: React.FC<Props> = ({ active, label, payload }) => {
   if (!active) return null;
   return (
     <ChartTooltip
@@ -19,4 +19,11 @@ const FundProfitTooltip = ({ active, label, payload, value }) => {
     />
   );
 };
+
+interface Props {
+  active: boolean;
+  label: string;
+  payload: any[];
+}
+
 export default FundProfitTooltip;

@@ -84,7 +84,7 @@ class ProgramDetailsDescriptionMain extends Component<
             onClose={this.handleCloseDropdown}
           >
             <InvestmentLimitsPopover
-              currency={programDescription.currency as CURRENCIES}
+              currency={programDescription.currency}
               level={programDescription.level}
               canLevelUp={programDescription.rating.canLevelUp}
               closePopover={this.handleCloseDropdown}

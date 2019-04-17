@@ -3,11 +3,10 @@ import NumberFormat from "react-number-format";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { HandlePeriodChangeType } from "shared/utils/types";
 
 import { ProgramDetailsProfitChart } from "../../../services/program-details.types";
-import { HandlePeriodChangeType } from "../../program-details-statistic-section";
 import ProgramProfitChart from "./program-profit-chart";
 
 const ProgramProfitChartSection: React.FC<Props> = ({
@@ -38,7 +37,7 @@ const ProgramProfitChartSection: React.FC<Props> = ({
         equityChart={profitChart.equityChart}
         //@ts-ignore
         pnlChart={profitChart.pnLChart}
-        currency={profitChart.programCurrency as CURRENCIES}
+        currency={profitChart.programCurrency}
       />
     </div>
   </>

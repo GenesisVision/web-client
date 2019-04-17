@@ -8,16 +8,9 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 const _TooltipBody: React.FC<ITooltipBodyProps & InjectedTranslateProps> = ({
   t,
   managersFunds,
-  investorsFunds,
-  profit
+  investorsFunds
 }) => (
   <>
-    <StatisticItem
-      label={t("program-details-page.statistics.tooltip.profit")}
-      accent
-    >
-      {profit}
-    </StatisticItem>
     <StatisticItem
       label={t("program-details-page.statistics.tooltip.investors-funds")}
       accent
@@ -34,30 +27,26 @@ const _TooltipBody: React.FC<ITooltipBodyProps & InjectedTranslateProps> = ({
 );
 const TooltipBody = React.memo(translate()(_TooltipBody));
 
-const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
+const FundBalanceTooltip: React.FC<IFundBalanceTooltipProps> = ({
   active,
   label,
   payload
 }) => {
   if (!active || !payload[0]) return null;
-  const dot = payload[0];
-  const managersFunds = `${formatCurrencyValue(
-    dot.payload.managerFunds,
-    dot.unit
-  )} ${dot.unit}`;
-  const investorsFunds = `${formatCurrencyValue(
-    dot.payload.investorsFunds,
-    dot.unit
-  )} ${dot.unit}`;
 
-  const profit = `${formatCurrencyValue(
-    dot.payload.profit || dot.payload.profitNegative,
-    dot.unit
-  )} ${dot.unit}`;
+  const managersFunds = `${formatCurrencyValue(
+    payload[0].payload.managerFunds,
+    "GVT"
+  )} GVT`;
+  const investorsFunds = `${formatCurrencyValue(
+    payload[0].payload.investorsFunds,
+    "GVT"
+  )} GVT`;
+  const profit = `${payload[0].payload.profit} ${payload[0].unit}`;
 
   return (
     <ChartTooltip
-      heading="Equity"
+      heading="Balance"
       body={
         <TooltipBody
           managersFunds={managersFunds}
@@ -76,10 +65,10 @@ interface ITooltipBodyProps {
   investorsFunds: string;
   profit: string;
 }
-interface IProgramBalanceTooltipProps {
+interface IFundBalanceTooltipProps {
   active: boolean;
   label: string;
   payload: any[];
 }
 
-export default ProgramBalanceTooltip;
+export default FundBalanceTooltip;
