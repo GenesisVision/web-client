@@ -94,6 +94,7 @@ class FollowParams extends React.PureComponent<
             {t("follow-program.params.back")}
           </GVButton>
           <GVButton
+            type="submit"
             className="invest-form__submit-button"
             disabled={disableButton}
           >
