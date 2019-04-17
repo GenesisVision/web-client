@@ -5,7 +5,6 @@ import { FundAssetPercent } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
 import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltip from "./fund-asset-tooltip/fund-asset-tooltip";
@@ -62,15 +61,12 @@ class FundAssetContainer extends React.Component<
               <Tooltip
                 key={idx}
                 render={() => (
-                  <FundAssetTooltip
-                    name={asset.name}
-                    currency={asset.asset as CURRENCIES}
-                  />
+                  <FundAssetTooltip name={asset.name} currency={asset.asset} />
                 )}
               >
                 <FundAsset
                   {...asset}
-                  currency={asset.asset as CURRENCIES}
+                  currency={asset.asset}
                   type={type}
                   last={idx === assets.length - 1}
                   removable={removable}

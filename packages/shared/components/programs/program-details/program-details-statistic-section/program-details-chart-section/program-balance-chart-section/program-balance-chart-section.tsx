@@ -36,7 +36,7 @@ const ProgramBalanceChartSection: React.FC<Props> = ({
     <div className="details-chart__profit">
       <ProgramBalanceChart
         balanceChart={balanceChart.balanceChart}
-        currency={balanceChart.programCurrency as CURRENCIES}
+        currency={balanceChart.programCurrency}
       />
     </div>
   </>

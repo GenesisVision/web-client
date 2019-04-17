@@ -38,7 +38,7 @@ const ProgramProfitChartSection: React.FC<Props> = ({
         equityChart={profitChart.equityChart}
         //@ts-ignore
         pnlChart={profitChart.pnLChart}
-        currency={profitChart.programCurrency as CURRENCIES}
+        currency={profitChart.programCurrency}
       />
     </div>
   </>
