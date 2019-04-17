@@ -4,6 +4,7 @@ import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { Action, AnyAction, Dispatch } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 
+import { ChartDefaultPeriod } from "../components/chart/chart-period/chart-period.helpers";
 import RootState from "../reducers/root-reducer";
 
 export interface IDispatchable<T> {
@@ -54,3 +55,4 @@ export type ResponseError = {
 };
 
 export type SetSubmittingType = (isSubmitting: boolean) => void;
+export type HandlePeriodChangeType = (period: ChartDefaultPeriod) => void;
