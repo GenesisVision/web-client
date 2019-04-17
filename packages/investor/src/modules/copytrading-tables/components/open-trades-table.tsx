@@ -1,6 +1,6 @@
 import "./open-trades-table.scss";
 
-import { OrderOpenSignalSlaveModel } from "gv-api-web";
+import { OrderOpenSignalSlaveModel, TradesSignalViewModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component, ComponentType } from "react";
@@ -83,15 +83,32 @@ class OpenTradesTable extends Component<
         getItems={getCopytradingOpenTrades(currency)}
         dataSelector={dashboardOpenTradesTableSelector}
         isFetchOnMount={true}
-        columns={COPYTRADING_OPEN_TRADES_COLUMNS}
+        // columns={COPYTRADING_OPEN_TRADES_COLUMNS}
+        columns={[{ name: "Total" }, { name: "Trades" }]}
         renderHeader={(column: Column) =>
           t(`investor.copytrading-tables.open-trades-header.${column.name}`)
         }
-        renderBodyRow={(
-          signalTrade: OrderOpenSignalSlaveModel,
-          updateRow: any
-        ) => (
-          <TableRow>
+        renderBodyRow={(signalTrade: TradesSignalViewModel, updateRow: any) => (
+          <>
+            <TableRow>
+              <TableCell className="programs-table__cell dashboard-programs__cell">
+                {signalTrade.total}
+              </TableCell>
+              <TableCell className="programs-table__cell dashboard-programs__cell">
+                <table>
+                  {signalTrade.trades.map(trade => (
+                    <tr>
+                      <td>{trade.id}</td>
+                      <td>{trade.masterLogin}</td>
+                      <td>{trade.entry}</td>
+                      <td>{trade.profit}</td>
+                      <td>{trade.price}</td>
+                    </tr>
+                  ))}
+                </table>
+              </TableCell>
+            </TableRow>
+            {/*<TableRow>
             <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
                 <Link
@@ -189,7 +206,8 @@ class OpenTradesTable extends Component<
                 applyButtonText={t("buttons.confirm")}
               />
             </TableCell>
-          </TableRow>
+          </TableRow>*/}
+          </>
         )}
       />
     );
