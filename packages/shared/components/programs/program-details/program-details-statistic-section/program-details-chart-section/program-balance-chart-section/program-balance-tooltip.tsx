@@ -1,25 +1,37 @@
 import * as React from "react";
+import { InjectedTranslateProps } from "react-i18next";
+import translate from "react-i18next/src/translate";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const TooltipBody: React.FC<ITooltipBodyProps> = React.memo(
-  ({ managersFunds, investorsFunds, profit }) => (
-    <>
-      <div className="details-tooltip__statistic">
-        <div className="details-tooltip__title">Profit</div>
-        <div className="details-tooltip__value">{profit}</div>
+const _TooltipBody: React.FC<ITooltipBodyProps & InjectedTranslateProps> = ({
+  t,
+  managersFunds,
+  investorsFunds,
+  profit
+}) => (
+  <>
+    <div className="details-tooltip__statistic">
+      <div className="details-tooltip__title">
+        {t("program-details-page.statistics.tooltip.profit")}
       </div>
-      <div className="details-tooltip__statistic">
-        <div className="details-tooltip__title">Investors Funds</div>
-        <div className="details-tooltip__value">{investorsFunds}</div>
+      <div className="details-tooltip__value">{profit}</div>
+    </div>
+    <div className="details-tooltip__statistic">
+      <div className="details-tooltip__title">
+        {t("program-details-page.statistics.tooltip.investors-funds")}
       </div>
-      <div className="details-tooltip__statistic">
-        <div className="details-tooltip__title">Managers Funds</div>
-        <div className="details-tooltip__value">{managersFunds}</div>
+      <div className="details-tooltip__value">{investorsFunds}</div>
+    </div>
+    <div className="details-tooltip__statistic">
+      <div className="details-tooltip__title">
+        {t("program-details-page.statistics.tooltip.managers-funds")}
       </div>
-    </>
-  )
+      <div className="details-tooltip__value">{managersFunds}</div>
+    </div>
+  </>
 );
+const TooltipBody = React.memo(translate()(_TooltipBody));
 
 const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
   active,

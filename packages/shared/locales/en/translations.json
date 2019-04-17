@@ -531,7 +531,12 @@
       "max-drawdown": "Max Drawdown",
       "start-day": "Start day",
       "period-end": "Period end",
-      "period": "Period"
+      "period": "Period",
+      "tooltip": {
+        "profit": "Profit",
+        "investors-funds": "Investors Funds",
+        "managers-funds": "Managers Funds"
+      }
     },
     "popover": {
       "genesis-level": "Genesis Level",
