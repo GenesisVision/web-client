@@ -62,7 +62,7 @@ const TradeRow: React.FC<{ trade: OrderSignalModel }> = ({ trade }) => (
       {trade.entry}
     </TableCell>
     <TableCell className="details-trades__cell program-details-trades__cell--entry">
-      {trade.providers.map(provider => `${provider.manager.username}, `)}
+      {trade.providers.map(provider => `${provider.program.title}, `)}
     </TableCell>
   </TableRow>
 );
