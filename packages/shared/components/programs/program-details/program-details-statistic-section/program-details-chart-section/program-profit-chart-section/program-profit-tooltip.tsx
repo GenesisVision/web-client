@@ -37,4 +37,4 @@ interface Props {
   payload: any[];
 }
 
-export default React.memo(ProgramProfitTooltip);
+export default ProgramProfitTooltip;

@@ -69,4 +69,4 @@ interface IProgramBalanceTooltipProps {
   payload: any[];
 }
 
-export default React.memo(ProgramBalanceTooltip);
+export default ProgramBalanceTooltip;
