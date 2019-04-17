@@ -2,6 +2,7 @@ import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import translate from "react-i18next/src/translate";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const _TooltipBody: React.FC<ITooltipBodyProps & InjectedTranslateProps> = ({
@@ -11,24 +12,24 @@ const _TooltipBody: React.FC<ITooltipBodyProps & InjectedTranslateProps> = ({
   profit
 }) => (
   <>
-    <div className="details-tooltip__statistic">
-      <div className="details-tooltip__title">
-        {t("program-details-page.statistics.tooltip.profit")}
-      </div>
-      <div className="details-tooltip__value">{profit}</div>
-    </div>
-    <div className="details-tooltip__statistic">
-      <div className="details-tooltip__title">
-        {t("program-details-page.statistics.tooltip.investors-funds")}
-      </div>
-      <div className="details-tooltip__value">{investorsFunds}</div>
-    </div>
-    <div className="details-tooltip__statistic">
-      <div className="details-tooltip__title">
-        {t("program-details-page.statistics.tooltip.managers-funds")}
-      </div>
-      <div className="details-tooltip__value">{managersFunds}</div>
-    </div>
+    <StatisticItem
+      label={t("program-details-page.statistics.tooltip.profit")}
+      accent
+    >
+      {profit}
+    </StatisticItem>
+    <StatisticItem
+      label={t("program-details-page.statistics.tooltip.investors-funds")}
+      accent
+    >
+      {investorsFunds}
+    </StatisticItem>
+    <StatisticItem
+      label={t("program-details-page.statistics.tooltip.managers-funds")}
+      accent
+    >
+      {managersFunds}
+    </StatisticItem>
   </>
 );
 const TooltipBody = React.memo(translate()(_TooltipBody));
