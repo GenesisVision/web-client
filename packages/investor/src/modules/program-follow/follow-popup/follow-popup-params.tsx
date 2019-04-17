@@ -133,6 +133,7 @@ interface Props extends IFollowParamsOwnProps, InjectedTranslateProps {}
 export default compose<React.ComponentType<IFollowParamsOwnProps>>(
   translate(),
   withFormik<Props, FormValues>({
+    isInitialValid: true,
     displayName: "follow-params",
     mapPropsToValues: () => {
       return {
