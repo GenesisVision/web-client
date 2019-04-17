@@ -22,7 +22,8 @@ class FollowParams extends React.PureComponent<
       isValid,
       dirty,
       values,
-      handleSubmit
+      handleSubmit,
+      errors
     } = this.props;
     const { openTolerancePercent, mode } = values;
     const setMaxOpenTolerancePercent = () => {
@@ -37,9 +38,7 @@ class FollowParams extends React.PureComponent<
     const isAllow = (values: any) => {
       // return true;
     };
-    const disableButton = () => {
-      return isSubmitting || dirty || !isValid;
-    };
+    const disableButton = isSubmitting || !isValid;
     return (
       <form
         className="dialog__bottom"
@@ -96,7 +95,7 @@ class FollowParams extends React.PureComponent<
           </GVButton>
           <GVButton
             className="invest-form__submit-button"
-            disabled={disableButton()}
+            disabled={disableButton}
           >
             {t("follow-program.params.submit")}
           </GVButton>
@@ -143,22 +142,7 @@ export default compose<React.ComponentType<IFollowParamsOwnProps>>(
         percent: 10
       };
     },
-    validationSchema: ({ t }: Props) =>
-      object().shape({
-        fixedVolume: number()
-          .min(0, t("follow-program.params.validation.fixedVolume-min"))
-          .max(99999, t("follow-program.params.validation.fixedVolume-max")),
-        percent: number()
-          .max(999, t("follow-program.params.validation.percent-max"))
-          .min(1, t("follow-program.params.validation.percent-min")),
-        openTolerancePercent: number()
-          .required(t("follow-program.params.validation.tolerance-required"))
-          .max(20, t("follow-program.params.validation.tolerance-percent-max"))
-          .min(
-            0.01,
-            t("follow-program.params.validation.tolerance-percent-min")
-          )
-      }),
+
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }

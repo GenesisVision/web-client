@@ -200,7 +200,7 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
     validationSchema: (params: OwnProps) => {
       const getAvailable = (currency: string): number => {
         const wallet = params.wallets.find(
-          (wallet: WalletData) => wallet.currency == currency
+          (wallet: WalletData) => wallet.currency === currency
         );
         return wallet ? wallet.available : 0;
       };
@@ -219,12 +219,12 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
                   "follow-program.create-account.validation.amount-is-zero"
                 )
               )
-              .max(
+            /*.max(
                 getAvailable(values.initialDepositCurrency),
                 params.t(
                   "follow-program.create-account.validation.amount-more-than-available"
                 )
-              )
+              )*/
           })
       );
     },
