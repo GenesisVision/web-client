@@ -4,10 +4,9 @@ import NumberFormat from "react-number-format";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
+import { HandlePeriodChangeType } from "shared/utils/types";
 
-import { HandlePeriodChangeType } from "../../program-details-statistic-section";
 import ProgramBalanceChart from "./program-balance-chart";
 
 const ProgramBalanceChartSection: React.FC<Props> = ({
