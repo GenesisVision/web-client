@@ -10,31 +10,6 @@ import { number, object } from "yup";
 
 import { IRequestParams } from "./follow-popup-form";
 
-type mode = {
-  label: string;
-  value: string;
-};
-
-const modes: { [key: string]: mode } = {
-  byBalance: { label: "By balance", value: "ByBalance" },
-  percentage: { label: "Percentage", value: "Percentage" },
-  fixed: { label: "Fixed", value: "Fixed" }
-};
-
-interface FormValues {
-  mode: string;
-  openTolerancePercent: number;
-  percent: number;
-  fixedVolume: number;
-}
-
-interface IFollowParamsOwnProps {
-  onSubmit: (values: IRequestParams, setSubmitting: SetSubmittingType) => void;
-  onPrevStep(): void;
-}
-
-interface Props extends IFollowParamsOwnProps, InjectedTranslateProps {}
-
 class FollowParams extends React.PureComponent<
   InjectedFormikProps<Props, FormValues>
 > {
@@ -47,7 +22,8 @@ class FollowParams extends React.PureComponent<
       isValid,
       dirty,
       values,
-      handleSubmit
+      handleSubmit,
+      errors
     } = this.props;
     const { openTolerancePercent, mode } = values;
     const setMaxOpenTolerancePercent = () => {
@@ -62,9 +38,7 @@ class FollowParams extends React.PureComponent<
     const isAllow = (values: any) => {
       // return true;
     };
-    const disableButton = () => {
-      return isSubmitting || dirty || !isValid;
-    };
+    const disableButton = isSubmitting || !isValid;
     return (
       <form
         className="dialog__bottom"
@@ -120,8 +94,9 @@ class FollowParams extends React.PureComponent<
             {t("follow-program.params.back")}
           </GVButton>
           <GVButton
+            type="submit"
             className="invest-form__submit-button"
-            disabled={disableButton()}
+            disabled={disableButton}
           >
             {t("follow-program.params.submit")}
           </GVButton>
@@ -131,9 +106,35 @@ class FollowParams extends React.PureComponent<
   }
 }
 
+type mode = {
+  label: string;
+  value: string;
+};
+
+const modes: { [key: string]: mode } = {
+  byBalance: { label: "By balance", value: "ByBalance" },
+  percentage: { label: "Percentage", value: "Percentage" },
+  fixed: { label: "Fixed", value: "Fixed" }
+};
+
+interface FormValues {
+  mode: string;
+  openTolerancePercent: number;
+  percent: number;
+  fixedVolume: number;
+}
+
+interface IFollowParamsOwnProps {
+  onSubmit: (values: IRequestParams, setSubmitting: SetSubmittingType) => void;
+  onPrevStep(): void;
+}
+
+interface Props extends IFollowParamsOwnProps, InjectedTranslateProps {}
+
 export default compose<React.ComponentType<IFollowParamsOwnProps>>(
   translate(),
   withFormik<Props, FormValues>({
+    isInitialValid: true,
     displayName: "follow-params",
     mapPropsToValues: () => {
       return {
@@ -149,15 +150,15 @@ export default compose<React.ComponentType<IFollowParamsOwnProps>>(
           .min(0, t("follow-program.params.validation.fixedVolume-min"))
           .max(99999, t("follow-program.params.validation.fixedVolume-max")),
         percent: number()
-          .max(999, t("follow-program.params.validation.percent-max"))
-          .min(1, t("follow-program.params.validation.percent-min")),
+          .min(1, t("follow-program.params.validation.percent-min"))
+          .max(999, t("follow-program.params.validation.percent-max")),
         openTolerancePercent: number()
           .required(t("follow-program.params.validation.tolerance-required"))
-          .max(20, t("follow-program.params.validation.tolerance-percent-max"))
           .min(
             0.01,
             t("follow-program.params.validation.tolerance-percent-min")
           )
+          .max(20, t("follow-program.params.validation.tolerance-percent-max"))
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);

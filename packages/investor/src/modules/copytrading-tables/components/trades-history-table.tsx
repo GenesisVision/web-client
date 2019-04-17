@@ -1,4 +1,4 @@
-import { OrderClosedSignalSlaveModel } from "gv-api-web";
+import { OrderSignalModel, TradesSignalViewModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component, ComponentType, Fragment } from "react";
@@ -12,6 +12,7 @@ import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avata
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
+import { PROGRAM_TRADES_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -30,8 +31,12 @@ import { formatPercent, formatValue } from "shared/utils/formatter";
 
 import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
 import { getCopytradingTradesHistory } from "../services/copytrading-tables.service";
-import { COPYTRADING_TRADES_HISTORY_COLUMNS } from "./copytrading-tables.constants";
+import {
+  COPYTRADING_OPEN_TRADES_COLUMNS,
+  COPYTRADING_TRADES_HISTORY_COLUMNS
+} from "./copytrading-tables.constants";
 import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.selectors";
+import TradeRow from "./trade-row";
 
 interface ITradesHistoryTableOwnProps {
   title: string;
@@ -59,7 +64,7 @@ class TradesHistoryTable extends Component<
         getItems={getCopytradingTradesHistory(currency)}
         dataSelector={dashboardTradesHistoryTableSelector}
         isFetchOnMount={true}
-        columns={COPYTRADING_TRADES_HISTORY_COLUMNS}
+        columns={COPYTRADING_OPEN_TRADES_COLUMNS}
         renderFilters={(
           updateFilter: IUpdateFilterFunc,
           filtering: FilteringType
@@ -73,100 +78,109 @@ class TradesHistoryTable extends Component<
             />
           </Fragment>
         )}
-        renderHeader={(column: Column) =>
-          t(`investor.copytrading-tables.trades-history-header.${column.name}`)
-        }
-        renderBodyRow={(signalTrade: OrderClosedSignalSlaveModel) => (
-          <TableRow>
-            <TableCell className="programs-table__cell dashboard-programs__cell--title">
-              <div className="dashboard-programs__cell--avatar-title">
+        renderHeader={column => (
+          <span
+            className={`details-trades__head-cell program-details-trades__cell--${
+              column.name
+            }`}
+          >
+            {t(`investor.copytrading-tables.open-trades-header.${column.name}`)}
+          </span>
+        )}
+        renderBodyRow={(trade: OrderSignalModel, updateRow: any) => (
+          <>
+            <TradeRow trade={trade} />
+            {/*<TableRow>
+              <TableCell className="programs-table__cell dashboard-programs__cell--title">
+                <div className="dashboard-programs__cell--avatar-title">
+                  <Link
+                    to={{
+                      pathname: composeProgramDetailsUrl(signalTrade.program.url),
+                      state: `/ ${title}`
+                    }}
+                  >
+                    <AssetAvatar
+                      url={signalTrade.program.logo}
+                      alt={signalTrade.program.title}
+                      color={signalTrade.program.color}
+                    />
+                  </Link>
+                  <Link
+                    to={{
+                      pathname: composeProgramDetailsUrl(signalTrade.program.url),
+                      state: `/ ${title}`
+                    }}
+                  >
+                    <GVButton variant="text" color="secondary">
+                      {signalTrade.program.title}
+                    </GVButton>
+                  </Link>
+                </div>
+              </TableCell>
+              <TableCell className="managers-table__cell--username">
+                <ProfileAvatar
+                  url={signalTrade.manager.avatar}
+                  alt={signalTrade.manager.username}
+                />
                 <Link
                   to={{
-                    pathname: composeProgramDetailsUrl(signalTrade.program.url),
-                    state: `/ ${title}`
-                  }}
-                >
-                  <AssetAvatar
-                    url={signalTrade.program.logo}
-                    alt={signalTrade.program.title}
-                    color={signalTrade.program.color}
-                  />
-                </Link>
-                <Link
-                  to={{
-                    pathname: composeProgramDetailsUrl(signalTrade.program.url),
+                    pathname: composeManagerDetailsUrl(signalTrade.manager.url),
                     state: `/ ${title}`
                   }}
                 >
                   <GVButton variant="text" color="secondary">
-                    {signalTrade.program.title}
+                    {signalTrade.manager.username}
                   </GVButton>
                 </Link>
-              </div>
-            </TableCell>
-            <TableCell className="managers-table__cell--username">
-              <ProfileAvatar
-                url={signalTrade.manager.avatar}
-                alt={signalTrade.manager.username}
-              />
-              <Link
-                to={{
-                  pathname: composeManagerDetailsUrl(signalTrade.manager.url),
-                  state: `/ ${title}`
-                }}
-              >
-                <GVButton variant="text" color="secondary">
-                  {signalTrade.manager.username}
-                </GVButton>
-              </Link>
-            </TableCell>
-            <TableCell>
-              <BaseProfitability
-                isPositive={signalTrade.direction === "Buy"}
-                isNegative={signalTrade.direction === "Sell"}
-              >
-                {signalTrade.direction}
-              </BaseProfitability>
-            </TableCell>
-            <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
-            <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
-            <TableCell>{signalTrade.symbol}</TableCell>
-            <TableCell>
-              <NumberFormat
-                value={formatValue(signalTrade.volume)}
-                displayType="text"
-                thousandSeparator=" "
-              />
-            </TableCell>
-            <TableCell>
-              <NumberFormat
-                value={formatValue(signalTrade.price)}
-                displayType="text"
-                thousandSeparator=" "
-              />
-            </TableCell>
-            <TableCell>
-              <NumberFormat
-                value={formatValue(signalTrade.priceClose)}
-                displayType="text"
-                thousandSeparator=" "
-              />
-            </TableCell>
-            <TableCell>
-              <Profitability
-                value={+formatPercent(signalTrade.profit)}
-                prefix={PROFITABILITY_PREFIX.SIGN}
-              >
+              </TableCell>
+              <TableCell>
+                <BaseProfitability
+                  isPositive={signalTrade.direction === "Buy"}
+                  isNegative={signalTrade.direction === "Sell"}
+                >
+                  {signalTrade.direction}
+                </BaseProfitability>
+              </TableCell>
+              <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
+              <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
+              <TableCell>{signalTrade.symbol}</TableCell>
+              <TableCell>
                 <NumberFormat
-                  value={formatPercent(signalTrade.profit)}
-                  thousandSeparator=" "
+                  value={formatValue(signalTrade.volume)}
                   displayType="text"
-                  allowNegative={false}
-                  suffix=" %"
+                  thousandSeparator=" "
                 />
-              </Profitability>
-            </TableCell>
-          </TableRow>
+              </TableCell>
+              <TableCell>
+                <NumberFormat
+                  value={formatValue(signalTrade.price)}
+                  displayType="text"
+                  thousandSeparator=" "
+                />
+              </TableCell>
+              <TableCell>
+                <NumberFormat
+                  value={formatValue(signalTrade.priceClose)}
+                  displayType="text"
+                  thousandSeparator=" "
+                />
+              </TableCell>
+              <TableCell>
+                <Profitability
+                  value={+formatPercent(signalTrade.profit)}
+                  prefix={PROFITABILITY_PREFIX.SIGN}
+                >
+                  <NumberFormat
+                    value={formatPercent(signalTrade.profit)}
+                    thousandSeparator=" "
+                    displayType="text"
+                    allowNegative={false}
+                    suffix=" %"
+                  />
+                </Profitability>
+              </TableCell>
+            </TableRow>*/}
+          </>
         )}
       />
     );

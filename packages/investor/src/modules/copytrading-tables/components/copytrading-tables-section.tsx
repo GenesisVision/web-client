@@ -1,5 +1,5 @@
 import { GVTab, GVTabs } from "gv-react-components";
-import React, { Component } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
@@ -10,26 +10,12 @@ import {
 import OpenTradesTable from "./open-trades-table";
 import TradesHistoryTable from "./trades-history-table";
 
-enum TRADES_TABS {
-  OPEN_TRADES = "OPEN_TRADES",
-  HISTORY = "HISTORY"
-}
-
-interface ICopytradingTablesSectionProps {
-  title: string;
-  currency?: string;
-}
-
-interface ICopytradingTablesSectionState extends ICopytradingTradesCounts {
-  tab: TRADES_TABS;
-}
-
-class ICopytradingTablesSection extends Component<
+class ICopytradingTablesSection extends React.PureComponent<
   ICopytradingTablesSectionProps & InjectedTranslateProps,
   ICopytradingTablesSectionState
 > {
   state = {
-    tab: TRADES_TABS.OPEN_TRADES,
+    tab: TABS.OPEN_TRADES,
     openTradesCount: undefined,
     historyCount: undefined
   };
@@ -41,7 +27,7 @@ class ICopytradingTablesSection extends Component<
   }
 
   handleTabChange = (e: any, tab: string) => {
-    this.setState({ tab: tab as TRADES_TABS });
+    this.setState({ tab: tab as TABS });
   };
 
   render() {
@@ -53,28 +39,42 @@ class ICopytradingTablesSection extends Component<
           <h3>{t("investor.copytrading-tables.title")}</h3>
           <GVTabs value={tab} onChange={this.handleTabChange}>
             <GVTab
-              value={TRADES_TABS.OPEN_TRADES}
+              value={TABS.OPEN_TRADES}
               label={t("investor.copytrading-tables.open-trades")}
               count={openTradesCount}
             />
             <GVTab
-              value={TRADES_TABS.HISTORY}
+              value={TABS.HISTORY}
               label={t("investor.copytrading-tables.history")}
               count={historyCount}
             />
           </GVTabs>
         </div>
         <div className="">
-          {tab === TRADES_TABS.OPEN_TRADES && (
+          {tab === TABS.OPEN_TRADES && (
             <OpenTradesTable title={title} currency={currency} />
           )}
-          {tab === TRADES_TABS.HISTORY && (
+          {tab === TABS.HISTORY && (
             <TradesHistoryTable title={title} currency={currency} />
           )}
         </div>
       </Surface>
     );
   }
+}
+
+enum TABS {
+  OPEN_TRADES = "OPEN_TRADES",
+  HISTORY = "HISTORY"
+}
+
+interface ICopytradingTablesSectionProps {
+  title: string;
+  currency?: string;
+}
+
+interface ICopytradingTablesSectionState extends ICopytradingTradesCounts {
+  tab: TABS;
 }
 
 export default translate()(ICopytradingTablesSection);

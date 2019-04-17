@@ -1,4 +1,4 @@
-import { TradesHistorySignalSlaveViewModel } from "gv-api-web";
+import { TradesSignalViewModel } from "gv-api-web";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import tableReducerFactory from "shared/components/table/reducers/table.reducer";
 
@@ -12,7 +12,7 @@ import {
 } from "../components/copytrading-tables.constants";
 
 const copytradingTradesHistoryReducer = tableReducerFactory<
-  TradesHistorySignalSlaveViewModel
+  TradesSignalViewModel
 >({
   type: COPYTRADING_TRADES_HISTORY,
   paging: DEFAULT_PAGING,

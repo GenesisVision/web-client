@@ -1,49 +1,18 @@
 import "./follow-popup.scss";
 
-import { CopyTradingAccountInfo, WalletData, WalletInfo } from "gv-api-web";
+import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import * as React from "react";
-import { Fragment } from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams from "./follow-popup-params";
 import FollowTop from "./follow-popup-top";
 
-enum TABS {
-  CREATE_ACCOUNT = "CREATE_ACCOUNT",
-  PARAMS = "PARAMS"
-}
-export interface IFollowFormProps {
-  alertSuccess: (msg: string) => void;
-  alertError: (msg: string) => void;
-  handleSubmit: () => void;
-  submitMethod: (
-    programId: string,
-    requestParams: IRequestParams
-  ) => Promise<any>;
-  id: string;
-  signalAccounts: CopyTradingAccountInfo[];
-  wallets: WalletData[];
-  currency: string;
-  programName: string;
-  t: TranslationFunction;
-}
-interface IFollowFormState {
-  step: TABS;
-  requestParams: IRequestParams;
-  errors: { code: string; errorMessage: string };
-}
-export interface IRequestParams {
-  mode?: string;
-  percent?: number;
-  openTolerancePercent?: number;
-  fixedVolume?: number;
-  fixedCurrency?: string;
-  initialDepositCurrency?: string;
-  initialDepositAmount?: number;
-}
-class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
+class FollowForm extends React.PureComponent<
+  IFollowFormProps & InjectedTranslateProps,
+  IFollowFormState
+> {
   state = {
     requestParams: {},
     step: TABS.CREATE_ACCOUNT,
@@ -59,11 +28,7 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
     this.setState({ step: TABS.CREATE_ACCOUNT });
   };
   componentDidMount() {
-    const { signalAccounts, currency } = this.props;
-    const signalAccount =
-      signalAccounts &&
-      signalAccounts.find((account: any) => account.currency === currency);
-    if (signalAccount) this.setState({ step: TABS.PARAMS });
+    if (this.props.hasSignalAccount) this.setState({ step: TABS.PARAMS });
   }
   submit = (values: IRequestParams, setSubmitting: SetSubmittingType) => {
     const { t, handleSubmit, id, alertError, alertSuccess } = this.props;
@@ -83,14 +48,14 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
       });
   };
   render() {
-    const { signalAccounts, wallets, currency, programName } = this.props;
+    const { wallets, currency, programName, hasSignalAccount } = this.props;
     const { errors, step } = this.state;
     const adaptStep =
       step === TABS.CREATE_ACCOUNT ? "create-account" : "params";
     return (
-      <Fragment>
+      <>
         <FollowTop programName={programName} step={adaptStep} />
-        {!signalAccounts && step === TABS.CREATE_ACCOUNT && (
+        {!hasSignalAccount && step === TABS.CREATE_ACCOUNT && (
           <FollowCreateAccount
             wallets={wallets}
             currency={currency}
@@ -106,9 +71,44 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
         {errors.errorMessage && (
           <div className="follow-popup__errors">{errors.errorMessage}</div>
         )}
-      </Fragment>
+      </>
     );
   }
+}
+
+enum TABS {
+  CREATE_ACCOUNT = "CREATE_ACCOUNT",
+  PARAMS = "PARAMS"
+}
+export interface IFollowFormProps {
+  hasSignalAccount: boolean;
+  alertSuccess: (msg: string) => void;
+  alertError: (msg: string) => void;
+  handleSubmit: () => void;
+  submitMethod: (
+    programId: string,
+    requestParams: IRequestParams
+  ) => Promise<any>;
+  id: string;
+  accounts: CopyTradingAccountInfo[];
+  wallets: WalletData[];
+  currency: string;
+  programName: string;
+}
+
+interface IFollowFormState {
+  step: TABS;
+  requestParams: IRequestParams;
+  errors: { code: string; errorMessage: string };
+}
+export interface IRequestParams {
+  mode?: string;
+  percent?: number;
+  openTolerancePercent?: number;
+  fixedVolume?: number;
+  fixedCurrency?: string;
+  initialDepositCurrency?: string;
+  initialDepositAmount?: number;
 }
 
 export default translate()(FollowForm);

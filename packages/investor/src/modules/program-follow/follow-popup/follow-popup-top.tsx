@@ -1,13 +1,16 @@
 import React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 
 export interface IFollowTop {
-  t: TranslationFunction;
   programName: string;
   step: string;
 }
 
-const FollowTop: React.FC<IFollowTop> = ({ t, programName, step }) => {
+const FollowTop: React.FC<IFollowTop & InjectedTranslateProps> = ({
+  t,
+  programName,
+  step
+}) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -18,4 +21,4 @@ const FollowTop: React.FC<IFollowTop> = ({ t, programName, step }) => {
   );
 };
 
-export default translate()(FollowTop);
+export default React.memo(translate()(FollowTop));
