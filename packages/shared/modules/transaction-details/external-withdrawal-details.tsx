@@ -11,7 +11,7 @@ import { TransactionDetailsProps } from "shared/modules/transaction-details/tran
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const ExternalWithdrawal = (props: TransactionDetailsProps) => {
+const ExternalWithdrawal: React.FC<TransactionDetailsProps> = props => {
   const { data, t, handleCancel, handleResend } = props;
   return (
     <React.Fragment>

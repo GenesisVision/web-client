@@ -1,3 +1,4 @@
+import { InternalTransferRequest } from "gv-api-web";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
@@ -15,6 +16,6 @@ export const walletTransferRequest = (
       transferAll,
       sourceType: "Wallet",
       destinationType: "Wallet"
-    }
+    } as InternalTransferRequest
   });
 };

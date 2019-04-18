@@ -6,7 +6,7 @@ import filesService from "shared/services/file-service";
 import { CURRENCY_FRACTIONS } from "shared/utils/currency-converter";
 import { formatValue } from "shared/utils/formatter";
 
-const InvestingTransaction = (props: TransactionDetailsProps) => {
+const InvestingTransaction: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
   return (
     <React.Fragment>
