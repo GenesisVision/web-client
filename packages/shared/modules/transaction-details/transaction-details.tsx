@@ -14,14 +14,13 @@ import FeeDetails from "shared/modules/transaction-details/fee-details";
 import InvestingTransaction from "shared/modules/transaction-details/investment-details";
 import OpenCloseTransaction from "shared/modules/transaction-details/open-close-details";
 import ProfitDetails from "shared/modules/transaction-details/profit-details";
+import SignalTransaction from "shared/modules/transaction-details/signal-details";
 import WithdrawalTransaction from "shared/modules/transaction-details/withdrawal-details";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { ResponseError } from "shared/utils/types";
 
-const Types: {
-  [name in TransactionDetailsTypeEnum]: React.FC<TransactionDetailsProps>
-} = {
+const Types: TransactionTypes = {
   Investing: InvestingTransaction,
   Withdrawal: WithdrawalTransaction,
   Open: OpenCloseTransaction,
@@ -31,42 +30,15 @@ const Types: {
   Converting: ConvertingDetails,
   Profit: ProfitDetails,
   PlatformFee: FeeDetails,
-  SubscribeSignal: InvestingTransaction
-} as {
-  [name in TransactionDetailsTypeEnum]: React.FC<TransactionDetailsProps>
-};
-
-export interface TransactionDetailsProps extends InjectedTranslateProps {
-  data: TransactionDetails;
-  handleCancel?(): void;
-  handleResend?(): void;
-}
-
-interface OwnProps {
-  transactionId: string;
-  close(): void;
-  onAction(): void;
-}
-
-interface DispatchProps {
-  error(message: string): void;
-}
-
-interface State {
-  isPending: boolean;
-  data?: TransactionDetails;
-  errorMessage?: string;
-}
-
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+  SubscribeSignal: SignalTransaction,
+  ReceiveSignal: SignalTransaction,
+  DepositSignal: SignalTransaction
+} as TransactionTypes;
 
 class _TransactionDetailsDialog extends React.PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isPending: false
-    };
-  }
+  state: State = {
+    isPending: false
+  };
 
   componentDidMount() {
     this.fetch();
@@ -101,6 +73,7 @@ class _TransactionDetailsDialog extends React.PureComponent<Props, State> {
         this.props.error(errorMessage.errorMessage);
       });
   };
+
   resendEmail = () => {
     walletApi
       .v10WalletWithdrawRequestResendByTxIdPost(
@@ -144,4 +117,35 @@ const TransactionDetailsDialog = compose<React.FunctionComponent<OwnProps>>(
     mapDispatchToProps
   )
 )(_TransactionDetailsDialog);
+
 export default TransactionDetailsDialog;
+
+type TransactionTypes = {
+  [name in TransactionDetailsTypeEnum]:
+    | React.FC<TransactionDetailsProps>
+    | React.ExoticComponent<TransactionDetailsProps>
+};
+
+export interface TransactionDetailsProps extends InjectedTranslateProps {
+  data: TransactionDetails;
+  handleCancel?(): void;
+  handleResend?(): void;
+}
+
+interface OwnProps {
+  transactionId: string;
+  close(): void;
+  onAction(): void;
+}
+
+interface DispatchProps {
+  error(message: string): void;
+}
+
+interface State {
+  isPending: boolean;
+  data?: TransactionDetails;
+  errorMessage?: string;
+}
+
+interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
