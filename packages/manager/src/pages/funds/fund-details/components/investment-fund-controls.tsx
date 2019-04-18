@@ -8,7 +8,8 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
-import { FUND } from "shared/constants/constants";
+import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
+import { ASSET, FUND } from "shared/constants/constants";
 
 import CloseFundContainer from "../close-fund/close-fund-container";
 
@@ -16,7 +17,8 @@ enum INVESTMENT_POPUP {
   INVEST = "INVEST",
   CLOSE = "CLOSE",
   REALLOCATE = "REALLOCATE",
-  ASSET_EDIT = "ASSET_EDIT"
+  ASSET_EDIT = "ASSET_EDIT",
+  INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
 class InvestmentFundControls extends React.PureComponent<Props, State> {
@@ -28,14 +30,8 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
   };
 
   openPopup = (popupName: INVESTMENT_POPUP) => () => {
-    const { isAuthenticated, redirectToLogin } = this.props;
-    if (isAuthenticated) {
-      let popups = { ...this.state.popups, [popupName]: true };
-
-      this.setState({ popups });
-    } else {
-      redirectToLogin();
-    }
+    let popups = { ...this.state.popups, [popupName]: true };
+    this.setState({ popups });
   };
 
   closePopup = (popupName: INVESTMENT_POPUP) => () => {
@@ -49,11 +45,10 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
 
   render() {
     const { popups } = this.state;
-    const { t, fundDescription } = this.props;
+    const { t, fundDescription, isAuthenticated } = this.props;
     const { personalFundDetails } = fundDescription;
     const canCloseProgram =
       personalFundDetails && personalFundDetails.canCloseProgram;
-    const canInvest = personalFundDetails && personalFundDetails.canInvest;
     const isOwnProgram =
       personalFundDetails && personalFundDetails.isOwnProgram;
     const canReallocate =
@@ -69,17 +64,21 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
         src: fundDescription.logo
       }
     };
-    console.info(fundDescription, canReallocate);
+
+    let message = t("fund-details-page.description.unauth-popup");
+    if (isAuthenticated && !isOwnProgram) {
+      message = t("fund-details-page.description.auth-manager-popup");
+    }
+
     return (
       <>
         <InvestmentFundInfo fundDescription={fundDescription} />
-        {isOwnProgram && (
-          <>
-            <div className="details-description__invest-button-container">
+        <div className="details-description__invest-button-container">
+          {isOwnProgram ? (
+            <>
               <GVButton
                 className="details-description__invest-btn"
                 onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
-                disabled={!canInvest}
               >
                 {t("fund-details-page.description.invest")}
               </GVButton>
@@ -120,9 +119,16 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
                   </div>
                 )}
               </div>
-            </div>
-          </>
-        )}
+            </>
+          ) : (
+            <GVButton
+              className="details-description__invest-btn"
+              onClick={this.openPopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
+            >
+              {t("fund-details-page.description.invest")}
+            </GVButton>
+          )}
+        </div>
         <ProgramDetailContext.Consumer>
           {({ updateDetails }) => (
             <>
@@ -156,6 +162,13 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
             </>
           )}
         </ProgramDetailContext.Consumer>
+        <InvestmentUnauthPopup
+          message={message}
+          title={fundDescription.title}
+          asset={ASSET.FUND}
+          open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
+          onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
+        />
       </>
     );
   }

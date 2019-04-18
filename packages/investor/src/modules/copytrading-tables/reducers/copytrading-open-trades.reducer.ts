@@ -7,13 +7,13 @@ import {
   COPYTRADING_OPEN_TRADES
 } from "../actions/copytrading-tables.actions";
 
-const copytradingOpenTradesReducer = tableReducerFactory<
-  TradesSignalViewModel
->({
-  type: COPYTRADING_OPEN_TRADES,
-  paging: DEFAULT_PAGING,
-  clearable: true,
-  clearableActionType: CLEAR_COPYTRADING_TABLE
-});
+const copytradingOpenTradesReducer = tableReducerFactory<TradesSignalViewModel>(
+  {
+    type: COPYTRADING_OPEN_TRADES,
+    paging: DEFAULT_PAGING,
+    clearable: true,
+    clearableActionType: CLEAR_COPYTRADING_TABLE
+  }
+);
 
 export default copytradingOpenTradesReducer;
