@@ -8,6 +8,7 @@ import {
 } from "shared/components/chart/chart-period/chart-period.helpers";
 import { STATUS } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import { HandlePeriodChangeType } from "shared/utils/types";
 
 import {
   ProgramDetailsProfitChart,
@@ -92,7 +93,5 @@ interface State {
   balanceChart?: ProgramBalanceChart;
   prevProps?: Props;
 }
-
-export type HandlePeriodChangeType = (period: ChartDefaultPeriod) => void;
 
 export default ProgramDetailsStatisticSection;

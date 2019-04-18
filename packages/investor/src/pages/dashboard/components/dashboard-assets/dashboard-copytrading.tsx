@@ -86,12 +86,12 @@ class DashboardCopytrading extends Component<
               </div>
             </TableCell>
             <TableCell>
-              {moment(signal.personalDetails.subscribeDate).format("lll")}
+              {moment(signal.personalDetails.subscriptionDate).format("lll")}
             </TableCell>
             <TableCell>{signal.subscribers}</TableCell>
-            <TableCell>{signal.personalDetails.investorTrades}</TableCell>
+            <TableCell>{signal.personalDetails.tradesCount}</TableCell>
             <TableCell>
-              <Profitability
+              {/*<Profitability
                 value={+formatPercent(signal.personalDetails.investorProfit)}
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
@@ -102,7 +102,7 @@ class DashboardCopytrading extends Component<
                   displayType="text"
                   suffix=" %"
                 />
-              </Profitability>
+              </Profitability>*/}
             </TableCell>
             <TableCell>
               <ProgramSimpleChart data={signal.chart} programId={signal.id} />

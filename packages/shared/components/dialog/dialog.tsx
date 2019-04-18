@@ -17,8 +17,9 @@ export interface IDialogProps {
   children?: any;
   wider?: boolean;
 }
-
-class Dialog extends React.Component<IDialogProps & InjectedTranslateProps> {
+class Dialog extends React.PureComponent<
+  IDialogProps & InjectedTranslateProps
+> {
   handleKeyPress = (event: KeyboardEvent) => {
     const { onClose } = this.props;
 

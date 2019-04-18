@@ -1,15 +1,22 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
 import moment from "moment";
-import React, { Fragment } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  ChartDefaultPeriod,
+  ChartPeriodType
+} from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const FundDetailsStatisticsElements = ({ t, statistic, period }) => (
-  <Fragment>
+import { FundDetailsStatistic } from "../../services/fund-details.types";
+
+const FundDetailsStatisticsElements: React.FC<
+  IFundDetailsStatisticsElementsProps & InjectedTranslateProps
+> = ({ t, statistic, period }) => (
+  <>
     <div className="details-statistics__subheading">
       {t("fund-details-page.statistics.current")}
     </div>
@@ -106,7 +113,12 @@ const FundDetailsStatisticsElements = ({ t, statistic, period }) => (
         </StatisticItem>
       </div>
     </div>
-  </Fragment>
+  </>
 );
 
-export default translate()(FundDetailsStatisticsElements);
+export interface IFundDetailsStatisticsElementsProps {
+  statistic: FundDetailsStatistic;
+  period: ChartDefaultPeriod;
+}
+
+export default React.memo(translate()(FundDetailsStatisticsElements));

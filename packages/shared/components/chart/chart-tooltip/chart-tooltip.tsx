@@ -15,7 +15,7 @@ const ChartTooltip: React.FC<Props> = ({ heading, body, date, className }) => (
 interface Props {
   body: JSX.Element;
   date: string | Date;
-  className: string;
+  className?: string;
   heading?: string;
 }
 

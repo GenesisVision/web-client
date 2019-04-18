@@ -8,7 +8,7 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const DECIMAL_SCALE = 8;
 
-const InvestingTransaction = (props: TransactionDetailsProps) => {
+const InvestingTransaction: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
   return (
     <React.Fragment>

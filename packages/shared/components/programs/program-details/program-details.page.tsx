@@ -97,7 +97,7 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
 const mapStateToProps = (state: RootState): StateProps => {
   const { accountSettings, authData } = state;
   return {
-    currency: accountSettings.currency as CURRENCIES,
+    currency: accountSettings.currency,
     isAuthenticated: authData.isAuthenticated
   };
 };

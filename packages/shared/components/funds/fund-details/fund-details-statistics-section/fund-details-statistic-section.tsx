@@ -1,21 +1,33 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
-import React, { PureComponent } from "react";
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import { FundBalanceChart } from "gv-api-web";
+import * as React from "react";
+import {
+  ChartDefaultPeriod,
+  DEFAULT_PERIOD
+} from "shared/components/chart/chart-period/chart-period.helpers";
 import FundDetailsChartSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-details-chart-section";
 import FundDetailsStatistic from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistics/fund-details-statistics";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import { HandlePeriodChangeType } from "shared/utils/types";
 
-class FundDetailsStatisticSection extends PureComponent {
+import {
+  FundDetailsProfitChart,
+  FundDetailsStatistic as FundDetailsStatisticType,
+  FundStatisticResult
+} from "../services/fund-details.types";
+
+class FundDetailsStatisticSection extends React.PureComponent<Props, State> {
   state = {
-    statistic: null,
-    profitChart: null,
-    balanceChart: null,
     period: DEFAULT_PERIOD,
-    prevProps: null
+    statistic: undefined,
+    profitChart: undefined,
+    balanceChart: undefined,
+    prevProps: undefined
   };
 
-  static getDerivedStateFromProps(props, state) {
-    let newState = {};
+  static getDerivedStateFromProps = (props: Props, state: State): State => {
+    let newState: State = {};
     if (state.prevProps !== props) {
       newState.prevProps = props;
       newState.statistic = props.statistic;
@@ -23,11 +35,10 @@ class FundDetailsStatisticSection extends PureComponent {
       newState.balanceChart = props.balanceChart;
       return newState;
     }
-
     return state;
-  }
+  };
 
-  handlePeriodChange = period => {
+  handlePeriodChange: HandlePeriodChangeType = period => {
     const { programId, currency, getFundStatistic } = this.props;
 
     getFundStatistic(programId, currency, period).then(data => {
@@ -53,6 +64,27 @@ class FundDetailsStatisticSection extends PureComponent {
       </div>
     );
   }
+}
+
+interface Props {
+  currency: CURRENCIES;
+  programId: string;
+  getFundStatistic: (
+    programId: string,
+    currency: CURRENCIES,
+    period: ChartDefaultPeriod
+  ) => Promise<FundStatisticResult>;
+  statistic?: FundDetailsStatisticType;
+  profitChart?: FundDetailsProfitChart;
+  balanceChart?: FundBalanceChart;
+}
+
+interface State {
+  period?: ChartDefaultPeriod;
+  statistic?: FundDetailsStatisticType;
+  profitChart?: FundDetailsProfitChart;
+  balanceChart?: FundBalanceChart;
+  prevProps?: Props;
 }
 
 export default FundDetailsStatisticSection;

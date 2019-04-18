@@ -7,9 +7,9 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import Surface from "shared/components/surface/surface";
+import { HandlePeriodChangeType } from "shared/utils/types";
 
 import { ProgramDetailsProfitChart } from "../../services/program-details.types";
-import { HandlePeriodChangeType } from "../program-details-statistic-section";
 import ProgramBalanceChartSection from "./program-balance-chart-section/program-balance-chart-section";
 import ProgramProfitChartSection from "./program-profit-chart-section/program-profit-chart-section";
 
@@ -18,9 +18,9 @@ class ProgramDetailsChartSection extends React.PureComponent<Props, State> {
     tab: TABS.PROFIT
   };
 
-  handleTabChange = (e: React.SyntheticEvent<EventTarget>, tab: string) => {
+  handleTabChange = (e: React.SyntheticEvent<EventTarget>, tab: string) =>
     this.setState({ tab: tab as TABS });
-  };
+
   render() {
     const { t, period, onPeriodChange, profitChart, balanceChart } = this.props;
     const { tab } = this.state;
@@ -36,16 +36,16 @@ class ProgramDetailsChartSection extends React.PureComponent<Props, State> {
             label={t("program-details-page.chart.tabs.equity")}
           />
         </GVTabs>
-        {tab === TABS.PROFIT && profitChart && (
+        {tab === TABS.PROFIT && (
           <ProgramProfitChartSection
-            profitChart={profitChart}
+            profitChart={profitChart!}
             period={period}
             onPeriodChange={onPeriodChange}
           />
         )}
-        {tab === TABS.EQUITY && balanceChart && (
+        {tab === TABS.EQUITY && (
           <ProgramBalanceChartSection
-            balanceChart={balanceChart}
+            balanceChart={balanceChart!}
             period={period}
             onPeriodChange={onPeriodChange}
           />
