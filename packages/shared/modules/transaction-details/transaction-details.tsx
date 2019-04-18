@@ -30,7 +30,8 @@ const Types: {
   ExternalWithdrawal: ExternalWithdrawal,
   Converting: ConvertingDetails,
   Profit: ProfitDetails,
-  PlatformFee: FeeDetails
+  PlatformFee: FeeDetails,
+  SubscribeSignal: InvestingTransaction
 } as {
   [name in TransactionDetailsTypeEnum]: React.FC<TransactionDetailsProps>
 };
