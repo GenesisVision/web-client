@@ -4,11 +4,12 @@ import AssetEditContainer from "modules/asset-edit/asset-edit-container";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
 import moment from "moment";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
-import { FUND } from "shared/constants/constants";
+import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
+import { ASSET, FUND } from "shared/constants/constants";
 
 import CloseFundContainer from "../close-fund/close-fund-container";
 
@@ -16,44 +17,21 @@ enum INVESTMENT_POPUP {
   INVEST = "INVEST",
   CLOSE = "CLOSE",
   REALLOCATE = "REALLOCATE",
-  ASSET_EDIT = "ASSET_EDIT"
+  ASSET_EDIT = "ASSET_EDIT",
+  INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
-interface IInvestmentFundControlsOwnProps {
-  isAuthenticated: boolean;
-  redirectToLogin(): void;
-  fundDescription: FundDetailsFull;
-}
+class InvestmentFundControls extends React.PureComponent<Props, State> {
+  state = {
+    popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
+      curr[INVESTMENT_POPUP[next]] = false;
+      return curr;
+    }, {})
+  };
 
-interface IInvestmentFundControlsState {
-  popups: { [k: string]: boolean };
-}
-
-type InvestmentFundControlsProps = InjectedTranslateProps &
-  IInvestmentFundControlsOwnProps;
-
-class InvestmentFundControls extends Component<
-  InvestmentFundControlsProps,
-  IInvestmentFundControlsState
-> {
-  constructor(props: InvestmentFundControlsProps) {
-    super(props);
-    this.state = {
-      popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
-        curr[INVESTMENT_POPUP[next]] = false;
-        return curr;
-      }, {})
-    };
-  }
   openPopup = (popupName: INVESTMENT_POPUP) => () => {
-    const { isAuthenticated, redirectToLogin } = this.props;
-    if (isAuthenticated) {
-      let popups = { ...this.state.popups, [popupName]: true };
-
-      this.setState({ popups });
-    } else {
-      redirectToLogin();
-    }
+    let popups = { ...this.state.popups, [popupName]: true };
+    this.setState({ popups });
   };
 
   closePopup = (popupName: INVESTMENT_POPUP) => () => {
@@ -67,11 +45,10 @@ class InvestmentFundControls extends Component<
 
   render() {
     const { popups } = this.state;
-    const { t, fundDescription } = this.props;
+    const { t, fundDescription, isAuthenticated } = this.props;
     const { personalFundDetails } = fundDescription;
     const canCloseProgram =
       personalFundDetails && personalFundDetails.canCloseProgram;
-    const canInvest = personalFundDetails && personalFundDetails.canInvest;
     const isOwnProgram =
       personalFundDetails && personalFundDetails.isOwnProgram;
     const canReallocate =
@@ -87,17 +64,21 @@ class InvestmentFundControls extends Component<
         src: fundDescription.logo
       }
     };
-    return (
-      <Fragment>
-        <InvestmentFundInfo fundDescription={fundDescription} />
 
-        {isOwnProgram && (
-          <Fragment>
-            <div className="details-description__invest-button-container">
+    let message = t("fund-details-page.description.unauth-popup");
+    if (isAuthenticated && !isOwnProgram) {
+      message = t("fund-details-page.description.auth-manager-popup");
+    }
+
+    return (
+      <>
+        <InvestmentFundInfo fundDescription={fundDescription} />
+        <div className="details-description__invest-button-container">
+          {isOwnProgram ? (
+            <>
               <GVButton
                 className="details-description__invest-btn"
                 onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
-                disabled={!canInvest}
               >
                 {t("fund-details-page.description.invest")}
               </GVButton>
@@ -138,12 +119,19 @@ class InvestmentFundControls extends Component<
                   </div>
                 )}
               </div>
-            </div>
-          </Fragment>
-        )}
+            </>
+          ) : (
+            <GVButton
+              className="details-description__invest-btn"
+              onClick={this.openPopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
+            >
+              {t("fund-details-page.description.invest")}
+            </GVButton>
+          )}
+        </div>
         <ProgramDetailContext.Consumer>
           {({ updateDetails }) => (
-            <Fragment>
+            <>
               <FundDepositContainer
                 open={popups[INVESTMENT_POPUP.INVEST]}
                 id={fundDescription.id}
@@ -171,12 +159,31 @@ class InvestmentFundControls extends Component<
                 onApply={this.applyChanges(updateDetails)}
                 assets={fundDescription.currentAssets}
               />
-            </Fragment>
+            </>
           )}
         </ProgramDetailContext.Consumer>
-      </Fragment>
+        <InvestmentUnauthPopup
+          message={message}
+          title={fundDescription.title}
+          asset={ASSET.FUND}
+          open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
+          onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
+        />
+      </>
     );
   }
 }
 
 export default translate()(InvestmentFundControls);
+
+interface OwnProps {
+  isAuthenticated: boolean;
+  redirectToLogin(): void;
+  fundDescription: FundDetailsFull;
+}
+
+interface State {
+  popups: { [k: string]: boolean };
+}
+
+interface Props extends InjectedTranslateProps, OwnProps {}
