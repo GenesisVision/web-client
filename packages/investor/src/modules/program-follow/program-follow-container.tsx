@@ -1,6 +1,7 @@
 import { AttachToSignalProviderInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
+import { InvestorRootState } from "reducers";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
@@ -11,7 +12,6 @@ import {
 } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
-import { InvestorRootState } from "reducers";
 import FollowPopupForm from "./follow-popup/follow-popup-form";
 import {
   attachToSignal,
