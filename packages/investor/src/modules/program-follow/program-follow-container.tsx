@@ -1,11 +1,15 @@
-import { WalletData } from "gv-api-web";
+import { AttachToSignalProviderInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { InvestorRootState } from "reducers";
+import { Dispatch, bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { FOLLOW_TYPE } from "shared/constants/constants";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import {
+  AlertActionCreator,
+  alertMessageActions
+} from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
 import FollowPopupForm from "./follow-popup/follow-popup-form";
@@ -16,30 +20,15 @@ import {
   updateAttachToSignal
 } from "./services/program-follow-service";
 
-export interface IProgramFollowContainerProps {
-  service: any;
-  programName: string;
-  type: FOLLOW_TYPE;
-  wallets: WalletData[];
-  open: boolean;
-  onClose(): void;
-  onApply(): void;
-  currency: string;
-  id: string;
-}
-interface IProgramFollowContainerState {
-  isPending: boolean;
-  accounts: any | null;
-  hasSignalAccount?: boolean;
-}
-class ProgramFollowContainer extends React.Component<
-  IProgramFollowContainerProps,
-  IProgramFollowContainerState
-> {
+class _ProgramFollowContainer extends React.PureComponent<Props, State> {
   state = {
-    hasSignalAccount: undefined,
     isPending: false,
-    accounts: []
+    accounts: [],
+    type: undefined,
+    subscriptionFee: undefined,
+    minDeposit: undefined,
+    hasActiveSubscription: undefined,
+    hasSignalAccount: undefined
   };
 
   componentDidMount() {
@@ -51,9 +40,21 @@ class ProgramFollowContainer extends React.Component<
         this.setState({ accounts });
         return getSignalInfo(this.props.id);
       })
-      .then(info => {
-        const { hasSignalAccount } = info;
-        this.setState({ hasSignalAccount, isPending: false });
+      .then((info: AttachToSignalProviderInfo) => {
+        const {
+          hasSignalAccount,
+          subscriptionFee,
+          minDeposit,
+          hasActiveSubscription
+        } = info;
+        this.setState({
+          type: hasActiveSubscription ? FOLLOW_TYPE.EDIT : FOLLOW_TYPE.CREATE,
+          hasSignalAccount,
+          subscriptionFee,
+          minDeposit,
+          hasActiveSubscription,
+          isPending: false
+        });
       });
   }
 
@@ -65,10 +66,15 @@ class ProgramFollowContainer extends React.Component<
       onClose,
       currency,
       id,
-      type,
       programName
     } = this.props;
-    const { isPending, accounts, hasSignalAccount } = this.state;
+    const {
+      isPending,
+      type,
+      accounts,
+      hasSignalAccount,
+      minDeposit
+    } = this.state;
     if (isPending) return <DialogLoader />;
     const handleClose = () => {
       onClose();
@@ -81,13 +87,14 @@ class ProgramFollowContainer extends React.Component<
     return (
       <Dialog open={open} onClose={handleClose}>
         <FollowPopupForm
+          minDeposit={minDeposit!}
           hasSignalAccount={hasSignalAccount!}
           alertError={service.alertError}
           alertSuccess={service.alertSuccess}
           id={id}
           accounts={accounts}
           currency={currency}
-          wallets={wallets}
+          wallets={wallets!}
           submitMethod={submitMethod}
           handleSubmit={handleSubmit}
           programName={programName}
@@ -97,13 +104,14 @@ class ProgramFollowContainer extends React.Component<
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: InvestorRootState): StateProps => {
   const { wallet } = state;
   return {
-    wallets: wallet.info.data ? wallet.info.data.wallets : null
+    wallets: wallet.info.data ? wallet.info.data.wallets : undefined
   };
 };
-const mapDispatchToProps = (dispatch: any) => ({
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
       alertError: alertMessageActions.error,
@@ -112,7 +120,36 @@ const mapDispatchToProps = (dispatch: any) => ({
     dispatch
   )
 });
-export default connect(
+
+interface DispatchProps {
+  service: { alertError: AlertActionCreator; alertSuccess: AlertActionCreator };
+}
+
+interface StateProps {
+  wallets?: WalletData[];
+}
+
+interface Props extends DispatchProps, StateProps {
+  programName: string;
+  open: boolean;
+  onClose(): void;
+  onApply(): void;
+  currency: string;
+  id: string;
+}
+
+interface State {
+  isPending: boolean;
+  accounts: any | null;
+  hasSignalAccount?: boolean;
+  hasActiveSubscription?: boolean;
+  subscriptionFee?: number;
+  minDeposit?: number;
+  type?: FOLLOW_TYPE;
+}
+
+const ProgramFollowContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProgramFollowContainer);
+)(_ProgramFollowContainer);
+export default ProgramFollowContainer;

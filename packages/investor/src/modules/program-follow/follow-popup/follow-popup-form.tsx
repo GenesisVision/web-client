@@ -10,8 +10,8 @@ import FollowParams from "./follow-popup-params";
 import FollowTop from "./follow-popup-top";
 
 class FollowForm extends React.PureComponent<
-  IFollowFormProps & InjectedTranslateProps,
-  IFollowFormState
+  Props & InjectedTranslateProps,
+  State
 > {
   state = {
     requestParams: {},
@@ -48,7 +48,13 @@ class FollowForm extends React.PureComponent<
       });
   };
   render() {
-    const { wallets, currency, programName, hasSignalAccount } = this.props;
+    const {
+      wallets,
+      currency,
+      programName,
+      hasSignalAccount,
+      minDeposit
+    } = this.props;
     const { errors, step } = this.state;
     const adaptStep =
       step === TABS.CREATE_ACCOUNT ? "create-account" : "params";
@@ -57,6 +63,7 @@ class FollowForm extends React.PureComponent<
         <FollowTop programName={programName} step={adaptStep} />
         {!hasSignalAccount && step === TABS.CREATE_ACCOUNT && (
           <FollowCreateAccount
+            minDeposit={minDeposit}
             wallets={wallets}
             currency={currency}
             onClick={this.createdCopytradingAccount}
@@ -80,7 +87,8 @@ enum TABS {
   CREATE_ACCOUNT = "CREATE_ACCOUNT",
   PARAMS = "PARAMS"
 }
-export interface IFollowFormProps {
+export interface Props {
+  minDeposit: number;
   hasSignalAccount: boolean;
   alertSuccess: (msg: string) => void;
   alertError: (msg: string) => void;
@@ -96,7 +104,7 @@ export interface IFollowFormProps {
   programName: string;
 }
 
-interface IFollowFormState {
+interface State {
   step: TABS;
   requestParams: IRequestParams;
   errors: { code: string; errorMessage: string };

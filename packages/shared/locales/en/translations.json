@@ -292,7 +292,7 @@
       "next": "Next",
       "validation": {
         "amount-required": "Amount is a required field",
-        "amount-is-zero": "Amount must be greater than zero",
+        "amount-more-than-min-deposit": "Amount must be greater than {{value}}",
         "amount-more-than-available": "Amount is greater than the account balance"
       }
     },

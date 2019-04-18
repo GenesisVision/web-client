@@ -40,7 +40,7 @@ const alertMessageActions = {
 
 export { alertMessageActions };
 
-type AlertActionCreator = (
+export type AlertActionCreator = (
   text: string,
   isUseLocalization?: boolean
 ) => IAlertAction;

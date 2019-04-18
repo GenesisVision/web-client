@@ -20,10 +20,8 @@ class FollowParams extends React.PureComponent<
       isSubmitting,
       onPrevStep,
       isValid,
-      dirty,
       values,
-      handleSubmit,
-      errors
+      handleSubmit
     } = this.props;
     const { openTolerancePercent, mode } = values;
     const setMaxOpenTolerancePercent = () => {
@@ -52,13 +50,11 @@ class FollowParams extends React.PureComponent<
             label={t("follow-program.params.type")}
             InputComponent={Select}
           >
-            {Object.keys(modes).map((mode: string) => {
-              return (
-                <option value={modes[mode].value} key={modes[mode].value}>
-                  {modes[mode].label}
-                </option>
-              );
-            })}
+            {Object.keys(modes).map((mode: string) => (
+              <option value={modes[mode].value} key={modes[mode].value}>
+                {modes[mode].label}
+              </option>
+            ))}
           </GVFormikField>
         </div>
         <div className="dialog-field">
@@ -124,14 +120,14 @@ interface FormValues {
   fixedVolume: number;
 }
 
-interface IFollowParamsOwnProps {
+interface OwnProps {
   onSubmit: (values: IRequestParams, setSubmitting: SetSubmittingType) => void;
   onPrevStep(): void;
 }
 
-interface Props extends IFollowParamsOwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, InjectedTranslateProps {}
 
-export default compose<React.ComponentType<IFollowParamsOwnProps>>(
+export default compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<Props, FormValues>({
     isInitialValid: true,
