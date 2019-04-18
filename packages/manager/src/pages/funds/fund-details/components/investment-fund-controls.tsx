@@ -65,10 +65,10 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
       }
     };
 
-    let message = t("fund-details-page.description.unauth-popup");
-    if (isAuthenticated && !isOwnProgram) {
-      message = t("fund-details-page.description.auth-manager-popup");
-    }
+    const message =
+      isAuthenticated && !isOwnProgram
+        ? t("fund-details-page.description.auth-manager-popup")
+        : t("fund-details-page.description.unauth-popup");
 
     return (
       <>
