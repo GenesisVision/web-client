@@ -65,10 +65,10 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
       }
     };
 
-    let message = t("fund-details-page.description.unauth-popup");
-    if (isAuthenticated && !isOwnProgram) {
-      message = t("fund-details-page.description.auth-manager-popup");
-    }
+    const message =
+      isAuthenticated && !isOwnProgram
+        ? t("fund-details-page.description.auth-manager-popup")
+        : t("fund-details-page.description.unauth-popup");
 
     return (
       <>
@@ -110,7 +110,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
                 >
                   {t("fund-details-page.description.reallocate")}
                 </GVButton>
-                {!canReallocate && (
+                {!canReallocate && personalFundDetails.status !== "Ended" && (
                   <div className="details-description__reallocate-message">
                     {t(
                       "fund-details-page.description.disable-reallocation-message"

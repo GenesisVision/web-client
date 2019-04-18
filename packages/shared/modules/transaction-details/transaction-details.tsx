@@ -100,6 +100,7 @@ class _TransactionDetailsDialog extends React.PureComponent<Props, State> {
         this.props.error(errorMessage.errorMessage);
       });
   };
+
   resendEmail = () => {
     walletApi
       .v10WalletWithdrawRequestResendByTxIdPost(
