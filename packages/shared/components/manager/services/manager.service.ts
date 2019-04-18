@@ -40,8 +40,16 @@ export const fetchManagerAssetsCount = (
   const authorization = authService.getAuthArg();
   const filtering = { managerId, take: 0 };
   return Promise.all([
-    programsApi.v10ProgramsGet({ ...filtering, authorization }),
-    fundsApi.v10FundsGet({ ...filtering, authorization })
+    programsApi.v10ProgramsGet({
+      ...filtering,
+      authorization,
+      hasInvestorsForClosed: true
+    }),
+    fundsApi.v10FundsGet({
+      ...filtering,
+      authorization,
+      hasInvestorsForClosed: true
+    })
   ]).then(([programsData, fundsData]) => ({
     programsCount: programsData.total,
     fundsCount: fundsData.total
