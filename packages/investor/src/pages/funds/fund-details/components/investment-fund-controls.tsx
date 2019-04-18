@@ -1,7 +1,7 @@
 import { FundDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
@@ -13,7 +13,7 @@ enum INVESTMENT_POPUP {
   INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
-class InvestmentFundControls extends Component<Props, State> {
+class InvestmentFundControls extends React.PureComponent<Props, State> {
   state = {
     popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
       curr[INVESTMENT_POPUP[next]] = false;
@@ -48,10 +48,10 @@ class InvestmentFundControls extends Component<Props, State> {
       : this.openPopup(INVESTMENT_POPUP.INVEST_UNAUTH);
 
     return (
-      <Fragment>
+      <>
         <InvestmentFundInfo fundDescription={fundDescription} />
 
-        <Fragment>
+        <>
           <div className="details-description__invest-button-container">
             <GVButton
               className="details-description__invest-btn"
@@ -60,17 +60,17 @@ class InvestmentFundControls extends Component<Props, State> {
               {t("fund-details-page.description.invest")}
             </GVButton>
           </div>
-        </Fragment>
+        </>
         <ProgramDetailContext.Consumer>
           {({ updateDetails }) => (
-            <Fragment>
+            <>
               <FundDepositContainer
                 open={popups[INVESTMENT_POPUP.INVEST]}
                 id={fundDescription.id}
                 onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
                 onApply={this.applyChanges(updateDetails)}
               />
-            </Fragment>
+            </>
           )}
         </ProgramDetailContext.Consumer>
         <InvestmentUnauthPopup
@@ -80,7 +80,7 @@ class InvestmentFundControls extends Component<Props, State> {
           open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
           onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
         />
-      </Fragment>
+      </>
     );
   }
 }

@@ -1,7 +1,7 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import {
   IProgramDetailContext,
@@ -11,7 +11,7 @@ import InvestmentProgramInfo from "shared/components/programs/program-details/pr
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
 
-class InvestmentProgramControls extends Component<Props, State> {
+class InvestmentProgramControls extends React.PureComponent<Props, State> {
   state = {
     isOpenInvestmentPopup: false,
     isOpenPopup: false
@@ -42,12 +42,8 @@ class InvestmentProgramControls extends Component<Props, State> {
     const { t, programDescription } = this.props;
     const { isOpenInvestmentPopup } = this.state;
 
-    const isOwnProgram = programDescription.personalProgramDetails
-      ? programDescription.personalProgramDetails.isOwnProgram
-      : false;
-
     return (
-      <Fragment>
+      <>
         <InvestmentProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
           <GVButton
@@ -77,7 +73,7 @@ class InvestmentProgramControls extends Component<Props, State> {
           open={this.state.isOpenPopup}
           onClose={this.handleClosePopup}
         />
-      </Fragment>
+      </>
     );
   }
 }

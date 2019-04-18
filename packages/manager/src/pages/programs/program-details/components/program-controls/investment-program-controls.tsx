@@ -3,7 +3,7 @@ import { GVButton } from "gv-react-components";
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import {
   IProgramDetailContext,
@@ -25,7 +25,7 @@ enum INVESTMENT_POPUP {
   INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
-class InvestmentProgramControls extends Component<Props, State> {
+class InvestmentProgramControls extends React.PureComponent<Props, State> {
   state = {
     popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
       curr[INVESTMENT_POPUP[next]] = false;
@@ -62,25 +62,23 @@ class InvestmentProgramControls extends Component<Props, State> {
       id: programDescription.id,
       title: programDescription.title,
       description: programDescription.description,
-      logo: {
-        src: programDescription.logo
-      }
+      logo: { src: programDescription.logo }
     };
 
-    let message = t("program-details-page.description.unauth-popup");
-    if (isAuthenticated && !isOwnProgram) {
-      message = t("program-details-page.description.auth-manager-popup");
-    }
+    const message =
+      isAuthenticated && !isOwnProgram
+        ? t("program-details-page.description.auth-manager-popup")
+        : t("program-details-page.description.unauth-popup");
 
     return (
-      <Fragment>
+      <>
         <InvestmentProgramInfo
           isOwnProgram={isOwnProgram}
           programDescription={programDescription}
         />
         <div className="program-details-description__button-container">
           {isOwnProgram ? (
-            <Fragment>
+            <>
               <GVButton
                 className="program-details-description__invest-btn"
                 onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
@@ -135,7 +133,7 @@ class InvestmentProgramControls extends Component<Props, State> {
                     {t("Confirm 2FA")}
                   </GVButton>
                 )}
-            </Fragment>
+            </>
           ) : (
             <GVButton
               className="program-details-description__invest-btn"
@@ -156,7 +154,7 @@ class InvestmentProgramControls extends Component<Props, State> {
         />
         <ProgramDetailContext.Consumer>
           {({ updateDetails }: IProgramDetailContext) => (
-            <Fragment>
+            <>
               <ProgramDeposit
                 currency={programDescription.currency}
                 open={popups[INVESTMENT_POPUP.INVEST]}
@@ -193,10 +191,10 @@ class InvestmentProgramControls extends Component<Props, State> {
                     programId={composeEditInfo.id}
                   />
                 )}
-            </Fragment>
+            </>
           )}
         </ProgramDetailContext.Consumer>
-      </Fragment>
+      </>
     );
   }
 }
