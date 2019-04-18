@@ -16,16 +16,13 @@ import { Schema, lazy, number, object } from "yup";
 
 import { IRequestParams } from "./follow-popup-form";
 
-class FollowCreateAccount extends React.PureComponent<
-  OwnProps,
-  IFollowCreateAccountState
-> {
+class FollowCreateAccount extends React.PureComponent<Props, State> {
   state = {
     rate: "1",
     isPending: false
   };
 
-  constructor(props: OwnProps) {
+  constructor(props: Props) {
     super(props);
   }
 
@@ -160,13 +157,13 @@ class FollowCreateAccount extends React.PureComponent<
   }
 }
 
-interface IFollowCreateAccountOwnProps {
+interface OwnProps {
   wallets: WalletData[];
   currency: string;
   onClick: (values: IRequestParams) => void;
 }
 
-interface IFollowCreateAccountState {
+interface State {
   rate: string;
   isPending: boolean;
 }
@@ -176,11 +173,9 @@ export interface FormValues {
   initialDepositAmount: number;
 }
 
-type OwnProps = IFollowCreateAccountOwnProps &
-  InjectedTranslateProps &
-  FormikProps<FormValues>;
+type Props = OwnProps & InjectedTranslateProps & FormikProps<FormValues>;
 
-export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
+export default compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik({
     displayName: "follow-create-account",
@@ -197,7 +192,7 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
       }
       return { initialDepositCurrency, initialDepositAmount: "" };
     },
-    validationSchema: (params: OwnProps) => {
+    validationSchema: (params: Props) => {
       const getAvailable = (currency: string): number => {
         const wallet = params.wallets.find(
           (wallet: WalletData) => wallet.currency === currency
