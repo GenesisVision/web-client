@@ -1,4 +1,4 @@
-import { CancelablePromise } from "gv-api-web";
+import { AmountWithCurrencyCurrencyEnum, CancelablePromise } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { Action, AnyAction, Dispatch } from "redux";
@@ -56,3 +56,5 @@ export type ResponseError = {
 
 export type SetSubmittingType = (isSubmitting: boolean) => void;
 export type HandlePeriodChangeType = (period: ChartDefaultPeriod) => void;
+
+export type CurrencyEnum = AmountWithCurrencyCurrencyEnum;

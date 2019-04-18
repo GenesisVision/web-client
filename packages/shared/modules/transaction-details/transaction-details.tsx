@@ -1,6 +1,6 @@
 import "./transaction-details.scss";
 
-import { TransactionDetails } from "gv-api-web";
+import { TransactionDetails, TransactionDetailsTypeEnum } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -19,7 +19,9 @@ import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { ResponseError } from "shared/utils/types";
 
-const Types = {
+const Types: {
+  [name in TransactionDetailsTypeEnum]: React.FC<TransactionDetailsProps>
+} = {
   Investing: InvestingTransaction,
   Withdrawal: WithdrawalTransaction,
   Open: OpenCloseTransaction,
@@ -29,6 +31,8 @@ const Types = {
   Converting: ConvertingDetails,
   Profit: ProfitDetails,
   PlatformFee: FeeDetails
+} as {
+  [name in TransactionDetailsTypeEnum]: React.FC<TransactionDetailsProps>
 };
 
 export interface TransactionDetailsProps extends InjectedTranslateProps {

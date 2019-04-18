@@ -7,7 +7,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { TransactionDetailsProps } from "./transaction-details";
 
-const ConvertingDetails = (props: TransactionDetailsProps) => {
+const ConvertingDetails: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
   return (
     <React.Fragment>
