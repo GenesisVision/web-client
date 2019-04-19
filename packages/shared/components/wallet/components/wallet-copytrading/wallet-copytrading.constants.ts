@@ -1,4 +1,6 @@
-export const WALLET_COPYTRADING_COLUMNS = [
+import { Column } from "shared/components/table/components/table.types";
+
+export const WALLET_COPYTRADING_COLUMNS: Column[] = [
   {
     name: "currency"
   },
