@@ -700,6 +700,11 @@
       "Fund": "Fund withdrawal",
       "from-Program": "From the program",
       "from-Fund": "From the fund"
+    },
+    "signal": {
+      "SubscribeSignal": "Subscribe signal program",
+      "ReceiveSignal": "Receive signal program",
+      "DepositSignal": "Deposit signal program"
     }
   },
   "wallet-page": {
