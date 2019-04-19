@@ -41,7 +41,7 @@ const DEFAULT_FILTERS: any = [
 ];
 
 class _WalletDepositsWithdrawals extends React.PureComponent<Props> {
-  ref: RefObject<TableModule<any>> = React.createRef();
+  ref: RefObject<TableModule<any, any>> = React.createRef();
 
   componentDidUpdate(prevProps: Props) {
     if (this.props.timestamp !== prevProps.timestamp) {
@@ -49,7 +49,7 @@ class _WalletDepositsWithdrawals extends React.PureComponent<Props> {
     }
   }
 
-  fetchMultiTransactionsExternal: GetItemsFuncType = filters => {
+  fetchMultiTransactionsExternal: GetItemsFuncType<any> = filters => {
     return fetchMultiTransactionsExternal(this.props.currency, filters);
   };
 

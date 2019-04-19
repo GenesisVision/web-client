@@ -1,5 +1,6 @@
 import {
   DEFAULT_DATE_RANGE_FILTER_VALUE,
+  DateRangeRequestFilterType,
   IDataRangeFilterValue
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -7,11 +8,13 @@ import {
   composeRequestValueFunc
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import {
-  IDefaultFilter,
   IDefaultFilters,
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
 import { DATE_RANGE_FILTER_NAME } from "shared/modules/programs-table/components/programs-table/programs.constants";
+
+import { PagingRequestType } from "../../table/helpers/paging.helpers";
+import { SortingRequestType } from "../../table/helpers/sorting.helpers";
 
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
@@ -77,6 +80,16 @@ export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
   }*/
 ];
 
+export type PROGRAM_TRADES_REQUEST_FILTERS = SortingRequestType &
+  PagingRequestType & {
+    [SERVER_DATE_RANGE_MIN_FILTER_NAME]: Date;
+    [SERVER_DATE_RANGE_MAX_FILTER_NAME]: Date;
+  };
+
+export type PROGRAM_TRADES_FILTERS_TYPE = {
+  [DATE_RANGE_FILTER_NAME]: IDataRangeFilterValue;
+};
+
 export const PROGRAM_TRADES_DEFAULT_FILTERS: IDefaultFilters<
   PROGRAM_TRADES_FILTERS_TYPE
 > = [
@@ -89,10 +102,6 @@ export const PROGRAM_TRADES_DEFAULT_FILTERS: IDefaultFilters<
     })
   }
 ];
-
-export type PROGRAM_TRADES_FILTERS_TYPE = {
-  [DATE_RANGE_FILTER_NAME]: IDataRangeFilterValue;
-};
 
 export const PROGRAM_TRADES_FILTERS: PROGRAM_TRADES_FILTERS_TYPE = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE

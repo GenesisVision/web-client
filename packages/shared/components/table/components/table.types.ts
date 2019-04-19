@@ -4,7 +4,7 @@ import { IDataModel } from "shared/constants/constants";
 
 import { FILTER_TYPE } from "../helpers/filtering.helpers";
 import { IPaging } from "../helpers/paging.helpers";
-import { IFilter } from "./filtering/filter.type";
+import { IFilter, RequestFiltersType } from "./filtering/filter.type";
 
 export type Column = {
   name: string;
@@ -17,10 +17,7 @@ export type UpdateItemsFuncType = () => void;
 
 export type UpdateRowFuncType = (row: any) => void;
 
-export type GetItemsFuncType = (filters?: any) => Promise<IDataModel>;
-export type GetItemsFuncType2<T> = (
-  filters?: IFilter<T>
-) => Promise<IDataModel>;
+export type GetItemsFuncType<T> = (filters?: T) => Promise<IDataModel>;
 
 export type GetItemsFuncActionType = (filters: any) => Action;
 

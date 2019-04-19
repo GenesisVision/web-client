@@ -11,8 +11,8 @@ import FundsTableModule from "shared/modules/funds-table/components/funds-table/
 
 import {
   FUNDS_FACET_PAGING,
-  FUNDS_FACET_TABLE_FILTERING,
   FUNDS_FACET_TABLE_FILTERS,
+  FUNDS_FACET_TABLE_REQUEST_FILTERS,
   FUNDS_FACET_TABLE_SORTING
 } from "./funds-facet.constants";
 
@@ -49,7 +49,7 @@ class _FundsFacetTable extends React.PureComponent<
         title={title}
         paging={FUNDS_FACET_PAGING}
         sorting={FUNDS_FACET_TABLE_SORTING}
-        filtering={FUNDS_FACET_TABLE_FILTERING}
+        filtering={FUNDS_FACET_TABLE_FILTERS}
         defaultFilters={FUNDS_FACET_TABLE_FILTERS}
         toggleFavorite={this.toggleFavorite}
         {...other}
@@ -60,7 +60,7 @@ class _FundsFacetTable extends React.PureComponent<
 
 export interface IFundsFacetTableProps {
   title: string;
-  getItems: any;
+  getItems: GetItemsFuncType<FUNDS_FACET_TABLE_REQUEST_FILTERS>;
   isAuthenticated: boolean;
   showRating?: boolean;
 }

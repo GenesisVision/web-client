@@ -1,7 +1,8 @@
 import {
   IDefaultFilter,
   IFilter,
-  IFiltering
+  IFiltering,
+  RequestFiltersType
 } from "../components/filtering/filter.type";
 
 export const RANGE_FILTER_TYPE = "RANGE_FILTER_TYPE";
@@ -22,15 +23,14 @@ export enum FILTER_TYPE {
 export const composeFilteringActionType = (actionType: string): string =>
   `${actionType}_FILTERING`;
 
-export const composeFilters = <TFiltering>(
+export const composeFilters = <TFiltering, TRequestFiltering>(
   allFilters: IDefaultFilter<TFiltering>[],
   filtering: IFiltering<TFiltering>
-) => {
-  if (!allFilters) return {};
+): TRequestFiltering => {
+  //@ts-ignore
   return allFilters.reduce((accum, cur) => {
     const { name = "", type, composeRequestValue } = cur;
     const processedFilterValue = processFilterValue({
-      //@ts-ignore
       name,
       type,
       composeRequestValue,

@@ -1,5 +1,9 @@
 import { FILTER_TYPE } from "../../helpers/filtering.helpers";
 
+export type RequestFiltersType<T> = {
+  [key in keyof T]: string | number | Date
+};
+
 interface IFilterBase {
   name: string;
 }

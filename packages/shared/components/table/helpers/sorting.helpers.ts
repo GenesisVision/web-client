@@ -7,6 +7,10 @@ export enum SORTING_DIRECTION {
   DESC = "Desc"
 }
 
+export type SortingRequestType = {
+  sorting: string;
+};
+
 export const getSortingColumnName = (value?: string): string => {
   //@ts-ignore TODO
   if (value === undefined) return undefined;

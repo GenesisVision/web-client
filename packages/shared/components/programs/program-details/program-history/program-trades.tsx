@@ -11,17 +11,14 @@ import {
   PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS,
-  PROGRAM_TRADES_FILTERS_TYPE
+  PROGRAM_TRADES_REQUEST_FILTERS
 } from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
-import {
-  GetItemsFuncType,
-  GetItemsFuncType2
-} from "shared/components/table/components/table.types";
+import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
@@ -34,8 +31,8 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
   fetchTrades,
   t
 }) => {
-  const fetchProgramTrades: GetItemsFuncType2<
-    PROGRAM_TRADES_FILTERS_TYPE
+  const fetchProgramTrades: GetItemsFuncType<
+    PROGRAM_TRADES_REQUEST_FILTERS
   > = filters => fetchTrades(programId, filters);
   return (
     <TableModule
@@ -122,7 +119,10 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
 interface Props {
   currency: CURRENCIES;
   programId: string;
-  fetchTrades: (programId: string, filters?: any) => Promise<IDataModel>;
+  fetchTrades: (
+    programId: string,
+    filters?: PROGRAM_TRADES_REQUEST_FILTERS
+  ) => Promise<IDataModel>;
 }
 
 const ProgramTrades = React.memo(translate()(_ProgramTrades));

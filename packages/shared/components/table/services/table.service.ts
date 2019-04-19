@@ -8,7 +8,10 @@ import {
 import RootState from "shared/reducers/root-reducer";
 
 import { updateFilters as updateFiltersActionCreator } from "../actions/table.actions";
-import { IDefaultFilters } from "../components/filtering/filter.type";
+import {
+  IDefaultFilters,
+  RequestFiltersType
+} from "../components/filtering/filter.type";
 
 interface IComposeRequestFiltersProps<TFiltering> {
   paging: IPaging;
@@ -16,12 +19,12 @@ interface IComposeRequestFiltersProps<TFiltering> {
   filtering?: TFiltering;
   defaultFilters?: IDefaultFilters<TFiltering>;
 }
-export const composeRequestFilters = <TFiltering>({
+export const composeRequestFilters = <TFiltering, TFilteringRequest>({
   paging,
   sorting,
   filtering,
   defaultFilters
-}: IComposeRequestFiltersProps<TFiltering>): { [keys: string]: string } => {
+}: IComposeRequestFiltersProps<TFiltering>): TFilteringRequest => {
   const { skip, take } = calculateSkipAndTake(paging);
   //@ts-ignore
   const composedFiltering = composeFilters(defaultFilters, filtering);

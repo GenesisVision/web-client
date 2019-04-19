@@ -59,7 +59,7 @@ class _ProgramsFacetTable extends React.PureComponent<
 
 export interface IProgramsFacetTableProps {
   title: string;
-  getItems: GetItemsFuncType;
+  getItems: GetItemsFuncType<any>;
   isAuthenticated: boolean;
   showRating?: boolean;
 }

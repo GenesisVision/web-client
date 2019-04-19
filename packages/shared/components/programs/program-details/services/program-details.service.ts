@@ -27,6 +27,7 @@ import {
 } from "shared/utils/compose-url";
 import getParams from "shared/utils/get-params";
 
+import { PROGRAM_TRADES_REQUEST_FILTERS } from "../program-details.constants";
 import { HistoryCountsType } from "../program-details.types";
 import { ProgramStatisticResult } from "./program-details.types";
 
@@ -137,7 +138,7 @@ export const closePeriod = (
 
 export const fetchProgramTrades = (
   id: string,
-  filters?: any
+  filters: PROGRAM_TRADES_REQUEST_FILTERS
 ): Promise<TableItems<OrderModel>> => {
   return programsApi
     .v10ProgramsByIdTradesGet(id, {

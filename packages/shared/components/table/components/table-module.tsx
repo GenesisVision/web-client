@@ -9,11 +9,13 @@ import { IDataModel } from "shared/constants/constants";
 import { composeRequestFilters } from "../services/table.service";
 import { IDefaultFilters, IFilter, IFiltering } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
+import { GetItemsFuncType } from "./table.types";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 
-export interface ITableModuleProps<TFiltering> extends ITableProps<TFiltering> {
-  getItems: Function /*GetItemsFuncType2<TFiltering>;*/;
+export interface ITableModuleProps<TFiltering, TRequestFiltering>
+  extends ITableProps<TFiltering> {
+  getItems: GetItemsFuncType<TRequestFiltering>;
   defaultFilters?: IDefaultFilters<TFiltering>;
   loader?: boolean;
   data?: IDataModel;
@@ -27,14 +29,14 @@ interface ITableModuleState<TFiltering> {
   isPending: boolean;
 }
 
-class TableModule<TFiltering> extends React.PureComponent<
-  ITableModuleProps<TFiltering>,
+class TableModule<TFiltering, TFilteringRequest> extends React.PureComponent<
+  ITableModuleProps<TFiltering, TFilteringRequest>,
   ITableModuleState<TFiltering>
 > {
   static defaultProps = {
     loader: true
   };
-  constructor(props: ITableModuleProps<TFiltering>) {
+  constructor(props: ITableModuleProps<TFiltering, TFilteringRequest>) {
     super(props);
 
     const { paging, sorting, filtering } = this.props;
@@ -67,7 +69,7 @@ class TableModule<TFiltering> extends React.PureComponent<
 
     if (loader) this.setState({ isPending: true });
 
-    const filters = composeRequestFilters({
+    const filters = composeRequestFilters<TFiltering, TFilteringRequest>({
       paging,
       sorting,
       filtering,

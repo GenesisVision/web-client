@@ -1,8 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
-import * as React from "react";
 import { SyntheticEvent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -127,7 +127,7 @@ interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
 
 interface OwnProps {
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
-  fetchPortfolioEvents: GetItemsFuncType;
+  fetchPortfolioEvents: GetItemsFuncType<any>;
   fetchOpenPositions: (programId: string, filters?: any) => Promise<IDataModel>;
   fetchTrades: (programId: string, filters?: any) => Promise<IDataModel>;
   programId: string;

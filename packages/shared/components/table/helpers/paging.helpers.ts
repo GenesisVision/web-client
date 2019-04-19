@@ -11,6 +11,11 @@ export interface ISkipAndTake {
   take: number;
 }
 
+export type PagingRequestType = {
+  skip: number;
+  take: number;
+};
+
 export const composePagingActionType = (actionType: string): string =>
   `${actionType}_PAGING`;
 

@@ -11,7 +11,7 @@ import ProgramTableRow from "./program-table-row";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
 
 interface IProgramTableModuleProps {
-  getItems: GetItemsFuncType;
+  getItems: GetItemsFuncType<any>;
   renderFilters?(
     updateFilter: (filter: any) => void,
     filtering: any

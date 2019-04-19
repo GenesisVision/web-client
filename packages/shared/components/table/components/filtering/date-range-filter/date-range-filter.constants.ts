@@ -33,3 +33,4 @@ export type ComposedRequestDataRangeValues = string | Date;
 export type ComposedRequestDataRangeValue = {
   [key in SERVER_DATE_NAME]?: ComposedRequestDataRangeValues
 };
+export type DateRangeRequestFilterType<T> = { [key in keyof T]: string };
