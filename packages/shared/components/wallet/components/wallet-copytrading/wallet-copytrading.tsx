@@ -57,7 +57,6 @@ class WalletCopytrading extends React.PureComponent<Props, State> {
       isOpenWithdrawPopup,
       currentAccount
     } = this.state;
-    console.log(currentAccount, isOpenWithdrawPopup);
     return (
       <div className="wallet-list">
         <TableModule
