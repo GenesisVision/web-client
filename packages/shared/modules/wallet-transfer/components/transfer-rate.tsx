@@ -14,7 +14,7 @@ type ITransferRateState = {
   rate?: number;
 };
 
-class TransferRate extends React.Component<
+class TransferRate extends React.PureComponent<
   ITransferRateProps,
   ITransferRateState
 > {
