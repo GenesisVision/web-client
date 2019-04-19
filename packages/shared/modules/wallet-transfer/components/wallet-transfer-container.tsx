@@ -24,16 +24,18 @@ class WalletTransferContainer extends React.Component<
     copytradingAccounts: undefined
   };
 
+  componentDidMount() {
+    fetchCopytradingAccounts().then(res => {
+      this.setState({ copytradingAccounts: res.items });
+    });
+  }
+
   handleSubmit = (values: TransferFormValuesType) => {
     walletTransferRequest({ ...values })
       .then(() => {
         this.props.onClose();
         this.props.service.fetchWallets();
         this.props.service.updateWalletTimestamp();
-        return fetchCopytradingAccounts();
-      })
-      .then(res => {
-        this.setState({ copytradingAccounts: res.items });
       })
       .catch((error: any) => {
         this.setState({
