@@ -7,6 +7,7 @@ import { TransactionDetailsProps } from "shared/modules/transaction-details/tran
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
+  const details = data.programDetails;
   return (
     <>
       <div className="dialog__top">
@@ -14,15 +15,15 @@ const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
           <h2>{t(`transactions-details.title`)}</h2>
           <p>{t(`transactions-details.signal.${data.type}`)}</p>
         </div>
-        <StatisticItem
-          label={t(
-            `transactions-details.investment.to-${
-              data.programDetails.programType
-            }`
-          )}
-        >
-          <TransactionAsset data={data.programDetails} />
-        </StatisticItem>
+        {details && (
+          <StatisticItem
+            label={t(
+              `transactions-details.investment.to-${details.programType}`
+            )}
+          >
+            <TransactionAsset data={details} />
+          </StatisticItem>
+        )}
       </div>
       <div className="dialog__bottom">
         <StatisticItem label={t(`transactions-details.status.title`)}>
