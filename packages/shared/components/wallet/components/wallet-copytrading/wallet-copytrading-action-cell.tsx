@@ -1,22 +1,25 @@
 import "./wallet-copytrading.scss";
 
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { CancelablePromise } from "gv-api-web";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import Chip from "shared/components/chip/chip";
 
+import { MiddlewareDispatch } from "../../../../utils/types";
 import * as walletService from "../../services/wallet.services";
 
-class WalletCopytradingActions extends Component {
+class WalletCopytradingActions extends React.PureComponent<Props, State> {
   state = {
-    anchor: null,
+    anchor: undefined,
     isResendPending: false,
     isCancelPending: false
   };
 
-  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
-  handleCloseDropdown = () => this.setState({ anchor: null });
+  handleOpenDropdown = (event: React.MouseEvent<HTMLElement>) =>
+    this.setState({ anchor: event.currentTarget });
+  handleCloseDropdown = () => this.setState({ anchor: undefined });
 
   cancelWithdrawRequest = () => {
     const { transaction, service } = this.props;
@@ -68,11 +71,36 @@ class WalletCopytradingActions extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(walletService, dispatch)
+interface Props extends DispatchProps, InjectedTranslateProps, OwnProps {}
+
+interface OwnProps {
+  transaction?: any;
+  disabled?: boolean;
+}
+
+interface DispatchProps {
+  service: {
+    cancelWithdrawRequest: (id: string) => CancelablePromise<any>;
+    resendWithdrawRequest: (id: string) => CancelablePromise<any>;
+  };
+}
+
+interface State {
+  isResendPending: boolean;
+  isCancelPending: boolean;
+  anchor?: HTMLElement;
+}
+
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
+  service: {
+    cancelWithdrawRequest: (id: string) =>
+      dispatch(walletService.cancelWithdrawRequest(id)),
+    resendWithdrawRequest: (id: string) =>
+      dispatch(walletService.resendWithdrawRequest(id))
+  }
 });
 
-export default compose(
+export default compose<React.ComponentType<OwnProps>>(
   translate(),
   connect(
     null,

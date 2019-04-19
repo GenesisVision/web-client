@@ -37,11 +37,15 @@ export const fetchManagerFunds = (
 export const fetchManagerAssetsCount = (
   managerId: string
 ): Promise<IAssetsCountModel> => {
-  const authorization = authService.getAuthArg();
-  const filtering = { managerId, take: 0 };
+  const options = {
+    managerId,
+    take: 0,
+    hasInvestorsForClosed: true,
+    authorization: authService.getAuthArg()
+  };
   return Promise.all([
-    programsApi.v10ProgramsGet({ ...filtering, authorization }),
-    fundsApi.v10FundsGet({ ...filtering, authorization })
+    programsApi.v10ProgramsGet(options),
+    fundsApi.v10FundsGet(options)
   ]).then(([programsData, fundsData]) => ({
     programsCount: programsData.total,
     fundsCount: fundsData.total

@@ -38,10 +38,6 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
   render() {
     const { popups } = this.state;
     const { t, fundDescription, isAuthenticated } = this.props;
-    const { personalFundDetails } = fundDescription;
-    const isOwn = personalFundDetails
-      ? personalFundDetails.isOwnProgram
-      : false;
 
     const openPopup = isAuthenticated
       ? this.openPopup(INVESTMENT_POPUP.INVEST)
