@@ -2,13 +2,13 @@ import * as React from "react";
 import TableModule, {
   ITableModuleProps
 } from "shared/components/table/components/table-module";
+import { TableToggleFavoriteType } from "shared/components/table/components/table.types";
 
 import FundsTableRow from "./fund-table-row";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
-import { TableToggleFavoriteType } from "shared/components/table/components/table.types";
 
-interface Props extends ITableModuleProps {
+interface Props extends ITableModuleProps<any> {
   isAuthenticated: boolean;
   toggleFavorite: TableToggleFavoriteType;
 }

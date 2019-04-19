@@ -1,6 +1,6 @@
 import {
-  DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes
+  DATE_RANGE_FILTER_TYPE,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
@@ -39,7 +39,7 @@ export const DASHBOARD_PROGRAMS_FILTERS = [
     ...composeDefaultDateRangeFilter({
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastMonth
+        type: DATE_RANGE_FILTER_TYPE.LAST_MONTH
       }
     })
   }
@@ -48,7 +48,7 @@ export const DASHBOARD_PROGRAMS_FILTERS = [
 export const DASHBOARD_PROGRAMS_DEFAULT_FILTERING = {
   dateRange: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DateRangeFilterTypes.lastMonth
+    type: DATE_RANGE_FILTER_TYPE.LAST_MONTH
   }
 };
 
@@ -84,7 +84,7 @@ export const DASHBOARD_FUNDS_FILTERS = [
     ...composeDefaultDateRangeFilter({
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastMonth
+        type: DATE_RANGE_FILTER_TYPE.LAST_MONTH
       }
     })
   }
@@ -93,6 +93,6 @@ export const DASHBOARD_FUNDS_FILTERS = [
 export const DASHBOARD_FUNDS_DEFAULT_FILTERING = {
   dateRange: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DateRangeFilterTypes.lastMonth
+    type: DATE_RANGE_FILTER_TYPE.LAST_MONTH
   }
 };

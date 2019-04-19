@@ -31,16 +31,17 @@ const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
 };
 
-const DEFAULT_FILTERS = [
+const DEFAULT_FILTERS: any = [
   { ...composeDefaultDateRangeFilter() },
   {
     name: "type",
+    defaultValue: "All",
     type: FilterType.general
   }
 ];
 
 class _WalletDepositsWithdrawals extends React.PureComponent<Props> {
-  ref: RefObject<TableModule> = React.createRef();
+  ref: RefObject<TableModule<any>> = React.createRef();
 
   componentDidUpdate(prevProps: Props) {
     if (this.props.timestamp !== prevProps.timestamp) {

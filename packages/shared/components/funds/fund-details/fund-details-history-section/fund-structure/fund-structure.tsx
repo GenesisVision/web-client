@@ -33,7 +33,7 @@ class FundStructure extends React.Component<
     data: undefined
   };
 
-  fetchFundStructure: GetItemsFuncType = () => {
+  fetchFundStructure: any = () => {
     this.setState({ isPending: true });
     const { id, fetchStructure } = this.props;
     return fetchStructure(id).then(data => {

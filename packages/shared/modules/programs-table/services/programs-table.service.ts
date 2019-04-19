@@ -9,7 +9,7 @@ import {
 import * as qs from "qs";
 import {
   ComposeFiltersAllType,
-  TFilter
+  IFilter
 } from "shared/components/table/components/filtering/filter.type";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
@@ -177,7 +177,7 @@ export const programsChangeSorting = (sorting: string) => (
   dispatch(push(newUrl));
 };
 
-export const programsChangeFilter = (filter: TFilter<any>) => (
+export const programsChangeFilter = (filter: IFilter<any>) => (
   dispatch: any,
   getState: any
 ) => {

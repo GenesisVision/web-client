@@ -5,13 +5,13 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
 
 import {
-  DATA_RANGE_FILTER_TYPES,
+  DATE_RANGE_FILTER_TYPE,
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 
 interface IDateRangeFilterValuesProps {
   onChange(type: keyof IDataRangeFilterValue, date: string): void;
-  type: DATA_RANGE_FILTER_TYPES;
+  type: DATE_RANGE_FILTER_TYPE;
   dateStart: MomentInput;
   dateEnd: MomentInput;
   startLabel: string;
@@ -53,14 +53,14 @@ class DateRangeFilterValues extends React.PureComponent<
   render() {
     const { t, type, dateStart, dateEnd, startLabel } = this.props;
     switch (type) {
-      case DATA_RANGE_FILTER_TYPES.ALL:
+      case DATE_RANGE_FILTER_TYPE.ALL:
         return (
           <>
             {this.renderFirstInput(startLabel)}
             {this.renderSecondInput()}
           </>
         );
-      case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:
+      case DATE_RANGE_FILTER_TYPE.LAST_MONTH:
         return (
           <>
             {this.renderFirstInput(
@@ -71,7 +71,7 @@ class DateRangeFilterValues extends React.PureComponent<
             {this.renderSecondInput()}
           </>
         );
-      case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
+      case DATE_RANGE_FILTER_TYPE.LAST_WEEK:
         return (
           <>
             {this.renderFirstInput(
@@ -82,7 +82,7 @@ class DateRangeFilterValues extends React.PureComponent<
             {this.renderSecondInput()}
           </>
         );
-      case DATA_RANGE_FILTER_TYPES.CUSTOM:
+      case DATE_RANGE_FILTER_TYPE.CUSTOM:
       default:
         return (
           <>

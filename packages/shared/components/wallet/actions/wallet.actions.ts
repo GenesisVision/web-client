@@ -3,7 +3,6 @@ import {
   WalletMultiSummary,
   WalletTransactionsViewModel
 } from "gv-api-web";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { ActionType, ApiAction } from "shared/utils/types";
@@ -51,7 +50,7 @@ export const fetchWalletsByCurrencyAvailable = (
 
 export const fetchWalletTransactionsDispatch = (
   authorization: string,
-  filters?: FilteringType
+  filters?: any
 ): FetchTransactionsAction => ({
   type: WALLET_TRANSACTIONS,
   payload: walletApi.v10WalletTransactionsGet(authorization, filters)

@@ -7,13 +7,13 @@ import { IUpdateFilterFunc } from "../../table.types";
 import Filter from "../filter";
 import DateRangeFilterPopover from "./date-range-filter-popover";
 import {
-  DATA_RANGE_FILTER_TYPES,
+  DATE_RANGE_FILTER_TYPE,
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 
 interface IDateRangeFilterProps {
   name: string;
-  value: any;
+  value: IDataRangeFilterValue;
   onChange?: IUpdateFilterFunc;
   startLabel: string;
 }
@@ -24,13 +24,13 @@ class DateRangeFilter extends React.PureComponent<
   renderValueText = (value: IDataRangeFilterValue): string => {
     const { t } = this.props;
     switch (value.type) {
-      case DATA_RANGE_FILTER_TYPES.ALL:
+      case DATE_RANGE_FILTER_TYPE.ALL:
         return t("filters.date-range.all-time");
-      case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:
+      case DATE_RANGE_FILTER_TYPE.LAST_MONTH:
         return t("filters.date-range.last-month");
-      case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
+      case DATE_RANGE_FILTER_TYPE.LAST_WEEK:
         return t("filters.date-range.last-week");
-      case DATA_RANGE_FILTER_TYPES.CUSTOM:
+      case DATE_RANGE_FILTER_TYPE.CUSTOM:
       default:
         return t("filters.date-range.custom");
     }

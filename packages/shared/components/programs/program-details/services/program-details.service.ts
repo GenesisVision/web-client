@@ -9,7 +9,6 @@ import {
 } from "gv-api-web";
 import { Dispatch } from "redux";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
   TableItems,
   mapToTableItems
@@ -138,7 +137,7 @@ export const closePeriod = (
 
 export const fetchProgramTrades = (
   id: string,
-  filters?: FilteringType
+  filters?: any
 ): Promise<TableItems<OrderModel>> => {
   return programsApi
     .v10ProgramsByIdTradesGet(id, {
@@ -187,7 +186,7 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
 };
 
 export const fetchPortfolioEvents = (
-  filters: FilteringType
+  filters: any
 ): CancelablePromise<
   TableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>
 > => {

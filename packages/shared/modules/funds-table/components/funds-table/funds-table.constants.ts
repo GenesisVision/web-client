@@ -1,6 +1,6 @@
 import {
-  DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes
+  DATE_RANGE_FILTER_TYPE,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
@@ -16,7 +16,7 @@ export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "statisticDateTo";
 
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 
-export const FUNDS_TABLE_FILTERS = [
+export const FUNDS_TABLE_FILTERS: any = [
   {
     ...composeDefaultDateRangeFilter({
       composeApiRequestValue: composeRequestValueFunc(
@@ -25,7 +25,7 @@ export const FUNDS_TABLE_FILTERS = [
       ),
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastMonth
+        type: DATE_RANGE_FILTER_TYPE.LAST_MONTH
       }
     }),
     validate: validateDateRange

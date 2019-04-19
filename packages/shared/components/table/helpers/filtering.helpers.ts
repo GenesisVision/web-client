@@ -1,10 +1,8 @@
 import {
-  ComposeFiltersType,
-  ComposeFiltersTypeFlat,
-  FilteringType,
-  TFilter
+  IDefaultFilter,
+  IFilter,
+  IFiltering
 } from "../components/filtering/filter.type";
-import { IComposeDefaultFilter } from "../components/table.types";
 
 export const RANGE_FILTER_TYPE = "RANGE_FILTER_TYPE";
 export const GENERAL_FILTER_TYPE = "GENERAL_FILTER_TYPE";
@@ -24,12 +22,12 @@ export enum FILTER_TYPE {
 export const composeFilteringActionType = (actionType: string): string =>
   `${actionType}_FILTERING`;
 
-export const composeFilters = (
-  allFilters: IComposeDefaultFilter[],
-  filtering: FilteringType
-): ComposeFiltersTypeFlat => {
+export const composeFilters = <TFiltering>(
+  allFilters: IDefaultFilter<TFiltering>[],
+  filtering: IFiltering<TFiltering>
+) => {
   if (!allFilters) return {};
-  return allFilters.reduce((accum: ComposeFiltersType, cur) => {
+  return allFilters.reduce((accum, cur) => {
     const { name = "", type, composeRequestValue } = cur;
     const processedFilterValue = processFilterValue({
       //@ts-ignore
@@ -46,7 +44,16 @@ export const composeFilters = (
   }, {});
 };
 
-const processFilterValue = (filter: TFilter<any>): ComposeFiltersType => {
+export interface IProcessedFilter<T> {
+  name: string;
+  type: FILTER_TYPE;
+  value: T;
+  composeRequestValue: any;
+}
+
+const processFilterValue = <TFiltering extends {} & { [key: string]: any }>(
+  filter: IProcessedFilter<TFiltering>
+) => {
   let requestValue = undefined;
   switch (filter.type) {
     case FILTER_TYPE.RANGE:
@@ -58,7 +65,6 @@ const processFilterValue = (filter: TFilter<any>): ComposeFiltersType => {
       }
       break;
     case FILTER_TYPE.CUSTOM:
-      //@ts-ignore
       const requestValues =
         filter.composeRequestValue && filter.composeRequestValue(filter.value);
       if (requestValues !== undefined) {
@@ -77,11 +83,14 @@ const processFilterValue = (filter: TFilter<any>): ComposeFiltersType => {
   }
   return requestValue;
 };
-//@ts-ignore
-export const updateFilter = (
-  oldFilters: FilteringType,
-  newFilter: TFilter<any>
-): FilteringType => {
+
+export const updateFilter = <
+  TOldFilters extends { [key: string]: any },
+  TFilter
+>(
+  oldFilters: IFiltering<TOldFilters>,
+  newFilter: IFilter<TFilter>
+): IFiltering<TOldFilters> => {
   const { name, value } = newFilter;
   const existingFilterValue = oldFilters[name];
   if (JSON.stringify(existingFilterValue !== JSON.stringify(value))) {

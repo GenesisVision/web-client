@@ -1,6 +1,6 @@
 import {
-  DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes
+  DATE_RANGE_FILTER_TYPE,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
@@ -61,13 +61,13 @@ export const programsDateRangeFilter = {
     ),
     defaultValue: {
       ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-      type: DateRangeFilterTypes.lastMonth
+      type: DATE_RANGE_FILTER_TYPE.LAST_MONTH
     }
   }),
   validate: validateDateRange
 };
 
-export const PROGRAMS_TABLE_FILTERS: IComposeDefaultFilter[] = [
+export const PROGRAMS_TABLE_FILTERS: any[] = [
   programsTagFilter,
   programsLevelFilter,
   programsCurrencyFilter,

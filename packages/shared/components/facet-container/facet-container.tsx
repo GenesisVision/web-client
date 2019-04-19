@@ -6,8 +6,6 @@ import { Dispatch, bindActionCreators, compose } from "redux";
 import { IFundsFacetTableProps } from "shared/components/funds/funds-facet/components/funds-facet-table";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import { IProgramsFacetTableProps } from "shared/components/programs/programs-facet/components/programs-facet-table";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
 import RootState from "shared/reducers/root-reducer";
@@ -33,7 +31,7 @@ class _FacetContainer extends React.PureComponent<Props, State> {
     }
   }
 
-  getFacetItems: GetItemsFuncType = filtering => {
+  getFacetItems = (filtering: any) => {
     const { getItems } = this.props;
     const { id } = this.state.facet!;
     return getItems({ ...filtering, facetId: id });
@@ -79,7 +77,7 @@ interface OwnProps {
   TableContainer: React.ComponentType<
     IProgramsFacetTableProps | IFundsFacetTableProps
   >;
-  getItems: (args: FilteringType) => Promise<IDataModel>;
+  getItems: (args: any) => Promise<IDataModel>;
   isAuthenticated: boolean;
 }
 interface StateProps {

@@ -3,10 +3,7 @@ import "./programs.scss";
 import { ProgramDetails, ProgramsList } from "gv-api-web";
 import * as React from "react";
 import { Table } from "shared/components/table/components";
-import {
-  FilteringType,
-  SortingColumn
-} from "shared/components/table/components/filtering/filter.type";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { IPaging } from "shared/components/table/helpers/paging.helpers";
 
 import ProgramCard from "./program-card";
@@ -25,11 +22,11 @@ interface IProgramsTableProps {
   isPending?: boolean;
   sorting: string;
   updateSorting(opt: string): (dispatch: any, getState: any) => void;
-  filtering: FilteringType;
+  filtering: any;
   updateFilter(filter: any): void;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: FilteringType
+    filtering: any
   ): JSX.Element;
   paging: IPaging;
   updatePaging(page: number): void;

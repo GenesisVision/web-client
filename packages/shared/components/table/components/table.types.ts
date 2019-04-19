@@ -1,24 +1,28 @@
-import { FILTER_TYPE } from "../helpers/filtering.helpers";
-import { IPaging } from "../helpers/paging.helpers";
-import { FilteringType, TFilter } from "./filtering/filter.type";
-import { IDataModel } from "shared/constants/constants";
 import { FundDetails, ProgramDetails } from "gv-api-web";
 import { Action } from "redux";
+import { IDataModel } from "shared/constants/constants";
+
+import { FILTER_TYPE } from "../helpers/filtering.helpers";
+import { IPaging } from "../helpers/paging.helpers";
+import { IFilter } from "./filtering/filter.type";
 
 export type Column = {
   name: string;
 };
 
 export interface IUpdateFilterFunc {
-  (filter: TFilter<any>): void;
+  (filter: IFilter<any>): void;
 }
 export type UpdateItemsFuncType = () => void;
 
 export type UpdateRowFuncType = (row: any) => void;
 
-export type GetItemsFuncType = (filters?: FilteringType) => Promise<IDataModel>;
+export type GetItemsFuncType = (filters?: any) => Promise<IDataModel>;
+export type GetItemsFuncType2<T> = (
+  filters?: IFilter<T>
+) => Promise<IDataModel>;
 
-export type GetItemsFuncActionType = (filters: FilteringType) => Action;
+export type GetItemsFuncActionType = (filters: any) => Action;
 
 export type TableToggleFavoriteType = (
   asset: ProgramDetails | FundDetails,
@@ -36,7 +40,7 @@ export interface IComposeDefaultFilter {
 
 export type FiltersType = {
   paging?: IPaging;
-  filtering?: FilteringType;
+  filtering?: any;
   sorting?: string;
 };
 
@@ -46,7 +50,7 @@ export type RenderBodyItemFuncType = (
   updateItems?: UpdateItemsFuncType
 ) => JSX.Element;
 
-export type RenderFiltersFuncType = (
+export type RenderFiltersFuncType<T> = (
   updateFilter: IUpdateFilterFunc,
-  filtering: FilteringType
+  filtering: T
 ) => JSX.Element;

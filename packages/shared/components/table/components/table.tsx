@@ -21,11 +21,12 @@ import {
   PROGRAMS_VIEW
 } from "shared/components/table/table.constants";
 import { loadData, saveData } from "shared/utils/localstorage";
+
 import { RenderBodyItemFuncType } from "./table.types";
 
-export interface ITableProps
+export interface ITableProps<TFiltering>
   extends ITableFooterProps,
-    ITableToolbarExternalProps,
+    ITableToolbarExternalProps<TFiltering>,
     ITableBodyExternalProps,
     ITableHeaderProps {
   renderBodyCard?: RenderBodyItemFuncType;
@@ -38,7 +39,10 @@ interface ITableState {
   view: LIST_VIEW;
 }
 
-class Table extends React.PureComponent<ITableProps, ITableState> {
+class Table<TFiltering> extends React.PureComponent<
+  ITableProps<TFiltering>,
+  ITableState
+> {
   state = {
     view: LIST_VIEW.TABLE
   };

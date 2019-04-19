@@ -1,12 +1,9 @@
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { IDataModel } from "shared/constants/constants";
 import fundsApi from "shared/services/api-client/funds-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
-export const fetchManagerPrograms = (
-  filter: FilteringType
-): Promise<IDataModel> => {
+export const fetchManagerPrograms = (filter: any): Promise<IDataModel> => {
   return programsApi
     .v10ProgramsGet({
       ...filter,
@@ -19,9 +16,7 @@ export const fetchManagerPrograms = (
     }));
 };
 
-export const fetchManagerFunds = (
-  filter: FilteringType
-): Promise<IDataModel> => {
+export const fetchManagerFunds = (filter: any): Promise<IDataModel> => {
   return fundsApi
     .v10FundsGet({
       ...filter,

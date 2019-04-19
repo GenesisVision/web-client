@@ -2,7 +2,6 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
   GetItemsFuncType,
   TableToggleFavoriteType
@@ -36,10 +35,7 @@ class _ProgramsFacetTable extends React.PureComponent<
     const { t, title, ...others } = this.props;
     return (
       <ProgramTableModule
-        renderFilters={(
-          updateFilter,
-          filtering: FilteringType //TODO fix filtering types
-        ) => (
+        renderFilters={(updateFilter, filtering) => (
           <>
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}

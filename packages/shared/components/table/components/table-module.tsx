@@ -7,35 +7,34 @@ import { updateFilter } from "shared/components/table/helpers/filtering.helpers"
 import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
-import { FilteringType, TFilter } from "./filtering/filter.type";
+import { IDefaultFilters, IFilter, IFiltering } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
-import { GetItemsFuncType } from "./table.types";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 
-export interface ITableModuleProps extends ITableProps {
-  getItems: GetItemsFuncType;
-  defaultFilters?: any[];
+export interface ITableModuleProps<TFiltering> extends ITableProps<TFiltering> {
+  getItems: Function /*GetItemsFuncType2<TFiltering>;*/;
+  defaultFilters?: IDefaultFilters<TFiltering>;
   loader?: boolean;
   data?: IDataModel;
 }
 
-interface ITableModuleState {
+interface ITableModuleState<TFiltering> {
   paging?: IPaging;
   sorting?: string;
-  filtering?: FilteringType;
+  filtering?: IFiltering<TFiltering>;
   data: IDataModel;
   isPending: boolean;
 }
 
-class TableModule extends React.PureComponent<
-  ITableModuleProps,
-  ITableModuleState
+class TableModule<TFiltering> extends React.PureComponent<
+  ITableModuleProps<TFiltering>,
+  ITableModuleState<TFiltering>
 > {
   static defaultProps = {
     loader: true
   };
-  constructor(props: ITableModuleProps) {
+  constructor(props: ITableModuleProps<TFiltering>) {
     super(props);
 
     const { paging, sorting, filtering } = this.props;
@@ -63,7 +62,7 @@ class TableModule extends React.PureComponent<
   }
 
   updateItems = () => {
-    const { paging = {}, sorting = "", filtering = {} } = this.state;
+    const { paging = {}, sorting = "", filtering } = this.state;
     const { defaultFilters, getItems, loader } = this.props;
 
     if (loader) this.setState({ isPending: true });
@@ -104,7 +103,7 @@ class TableModule extends React.PureComponent<
     );
   };
 
-  handleUpdateFilter = (filter: TFilter<any>) => {
+  handleUpdateFilter = <T extends any>(filter: IFilter<T>) => {
     this.setState(prevState => {
       if (!prevState.filtering || !prevState.paging) return {};
       return {

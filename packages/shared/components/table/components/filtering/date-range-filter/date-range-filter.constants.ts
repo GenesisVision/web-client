@@ -7,27 +7,21 @@ export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "to";
 
 export type SERVER_DATE_NAME = "from" | "to" | "dateFrom" | "dateTo";
 
-export const DateRangeFilterTypes = {
-  all: "all",
-  lastMonth: "lastMonth",
-  lastWeek: "lastWeek",
-  custom: "custom"
-};
-export enum DATA_RANGE_FILTER_TYPES {
+export enum DATE_RANGE_FILTER_TYPE {
   ALL = "all",
-  LAST_MOUTH = "lastMonth",
+  LAST_MONTH = "lastMonth",
   LAST_WEEK = "lastWeek",
   CUSTOM = "custom"
 }
 
 export interface IDataRangeFilterValue {
-  type: DATA_RANGE_FILTER_TYPES;
+  type: DATE_RANGE_FILTER_TYPE;
   dateStart: MomentInput;
   dateEnd: MomentInput;
 }
 
 export const DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {
-  type: DATA_RANGE_FILTER_TYPES.ALL,
+  type: DATE_RANGE_FILTER_TYPE.ALL,
   dateStart: undefined,
   dateEnd: undefined
 };

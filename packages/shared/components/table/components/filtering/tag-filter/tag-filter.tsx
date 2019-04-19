@@ -7,7 +7,7 @@ import Popover, {
 } from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 
-import { TFilter } from "../filter.type";
+import { IFilter } from "../filter.type";
 import TagFilterButton from "./tag-filter-button";
 import TagFilterPopover from "./tag-filter-popover";
 import { TAG_NAME_TYPE } from "./tag-filter.constants";
@@ -20,7 +20,7 @@ export interface ITagFilterProps {
   name: string;
   value: ProgramTag[];
   values: ProgramTag[];
-  onChange(value: TFilter<string[]>): void;
+  onChange(value: IFilter<string[]>): void;
 }
 
 class TagFilter extends React.PureComponent<ITagFilterProps, ITagFilterState> {

@@ -4,7 +4,7 @@ import { TableIcon } from "shared/components/icon/table-icon";
 import SortingFilter from "shared/components/table/components/sorting/sorting-filter/sorting-filter";
 
 import { LIST_VIEW } from "../table.constants";
-import { FilteringType, SortingColumn } from "./filtering/filter.type";
+import { IFiltering, SortingColumn } from "./filtering/filter.type";
 import { IUpdateFilterFunc, RenderFiltersFuncType } from "./table.types";
 
 interface ITableToolbarInnerProps {
@@ -13,21 +13,21 @@ interface ITableToolbarInnerProps {
   onChange(view: LIST_VIEW): any;
 }
 
-export interface ITableToolbarExternalProps {
+export interface ITableToolbarExternalProps<TFiltering> {
   disableTitle?: boolean;
   createButtonToolbar?: JSX.Element;
   title?: JSX.Element | string;
-  renderFilters?: RenderFiltersFuncType;
+  renderFilters?: RenderFiltersFuncType<TFiltering>;
   updateFilter?: IUpdateFilterFunc;
-  filtering?: FilteringType;
+  filtering?: IFiltering<TFiltering>;
   columns?: SortingColumn[];
   sorting?: string;
   updateSorting?(opt: string): ((dispatch: any, getState: any) => void) | void;
   renderSorting?(value: SortingColumn): JSX.Element | string;
 }
 
-class TableToolbar extends React.PureComponent<
-  ITableToolbarExternalProps & ITableToolbarInnerProps
+class TableToolbar<TFiltering> extends React.PureComponent<
+  ITableToolbarExternalProps<TFiltering> & ITableToolbarInnerProps
 > {
   handleIconClick = (view: LIST_VIEW) => () => {
     this.props.onChange(view);

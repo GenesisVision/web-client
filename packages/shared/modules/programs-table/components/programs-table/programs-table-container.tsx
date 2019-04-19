@@ -1,19 +1,16 @@
 import { push } from "connected-react-router";
 import { ProgramTag, ProgramsList } from "gv-api-web";
 import { Location } from "history";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import {
-  FilteringType,
-  TFilter
-} from "shared/components/table/components/filtering/filter.type";
+import { IFilter } from "shared/components/table/components/filtering/filter.type";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
@@ -57,7 +54,7 @@ interface DispatchProps {
       sorting: string
     ): (dispatch: any, getState: any) => void;
     programsChangeFilter(
-      filter: TFilter<any>
+      filter: IFilter<any>
     ): (dispatch: any, getState: any) => void;
   };
 }
@@ -118,7 +115,7 @@ class ProgramsTableContainer extends React.Component<Props> {
           ...filters.filtering
         }}
         updateFilter={service.programsChangeFilter}
-        renderFilters={(updateFilter, filtering: FilteringType) => {
+        renderFilters={(updateFilter, filtering) => {
           return (
             <React.Fragment>
               <TagFilter

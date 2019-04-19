@@ -1,6 +1,6 @@
 import {
-  DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
+  DATE_RANGE_FILTER_TYPE,
   DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -23,11 +23,11 @@ export const MANAGER_TABLE_DATE_RANGE_FILTER = {
   validate: validateDateRange
 };
 
-export const MANAGER_DEFAULT_FILTERS = [MANAGER_TABLE_DATE_RANGE_FILTER];
-export const MANAGER_FILTERING = {
+export const MANAGER_DEFAULT_FILTERS: any = [MANAGER_TABLE_DATE_RANGE_FILTER];
+export const MANAGER_FILTERING: any = {
   [DATE_RANGE_FILTER_NAME]: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DATA_RANGE_FILTER_TYPES.ALL
+    type: DATE_RANGE_FILTER_TYPE.ALL
   }
 };
 

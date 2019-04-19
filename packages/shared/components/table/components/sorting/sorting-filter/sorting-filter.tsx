@@ -9,9 +9,9 @@ import {
   getSortingDirection
 } from "../../../helpers/sorting.helpers";
 import {
+  IFilter,
   SelectFilterValue,
-  SortingColumn,
-  TFilter
+  SortingColumn
 } from "../../filtering/filter.type";
 import SelectFilter from "../../filtering/select-filter/select-filter";
 
@@ -38,7 +38,7 @@ class SortingFilter extends React.PureComponent<ISortingFilterProps> {
   isAsc = (): boolean =>
     getSortingDirection(this.props.sorting) === SORTING_DIRECTION.ASC;
 
-  handleOnSelectChange = ({ value }: TFilter<any>): void =>
+  handleOnSelectChange = ({ value }: IFilter<any>): void =>
     this.props.updateSorting &&
     this.props.updateSorting(
       value + (this.isAsc() ? SORTING_DIRECTION.ASC : SORTING_DIRECTION.DESC)

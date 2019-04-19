@@ -4,8 +4,6 @@ import apiReducerFactory, {
 } from "shared/reducers/api-reducer/api-reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
 
-import { FilteringType } from "../components/filtering/filter.type";
-import { FiltersType } from "../components/table.types";
 import { IPaging } from "../helpers/paging.helpers";
 import tableFiltersReducer from "./table-filters.reducer";
 
@@ -19,7 +17,7 @@ interface ITableReducerFactoryParams {
   type: string;
   paging: IPaging;
   sorting?: string;
-  filtering?: FilteringType;
+  filtering?: any;
   defaultFilters?: Object;
   clearable: boolean;
   clearableActionType: string;

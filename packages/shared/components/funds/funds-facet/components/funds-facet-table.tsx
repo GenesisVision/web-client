@@ -60,7 +60,7 @@ class _FundsFacetTable extends React.PureComponent<
 
 export interface IFundsFacetTableProps {
   title: string;
-  getItems: GetItemsFuncType;
+  getItems: any;
   isAuthenticated: boolean;
   showRating?: boolean;
 }

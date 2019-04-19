@@ -7,11 +7,11 @@ import RootState from "shared/reducers/root-reducer";
 
 import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
-import { FilteringType, TFilter } from "./filtering/filter.type";
+import { IFilter, IFiltering } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
 import { GetItemsFuncActionType } from "./table.types";
 
-interface ITableContainerProps extends ITableProps {
+interface ITableContainerProps extends ITableProps<any> {
   getItems: GetItemsFuncActionType;
   dataSelector: (opts?: any) => { [keys: string]: any };
   isFetchOnMount: boolean;
@@ -22,7 +22,7 @@ interface ITableContainerStateProps {
   isPending: boolean;
   sorting: string;
   paging: IPaging;
-  filtering: FilteringType;
+  filtering: IFiltering<any>;
   fetchItems: GetItemsFuncActionType;
   defaults: any;
 }
@@ -66,7 +66,7 @@ class TableContainer extends React.PureComponent<
     });
   };
 
-  handleUpdateFilter = (filter: TFilter<string>) => {
+  handleUpdateFilter = (filter: IFilter<string>) => {
     let changedFilters = {
       filtering: updateFilter(this.props.filtering, filter),
       paging: {

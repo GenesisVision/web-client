@@ -4,7 +4,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
 import Filter from "../filter";
-import { TFilter } from "../filter.type";
+import { IFilter } from "../filter.type";
 import SelectFilterPopover from "./select-filter-popover";
 
 interface ISelectFilterProps {
@@ -12,7 +12,7 @@ interface ISelectFilterProps {
   label: string;
   value: any;
   values: any[];
-  onChange(value: TFilter<any>): void;
+  onChange(value: IFilter<any>): void;
 }
 
 class SelectFilter extends React.PureComponent<

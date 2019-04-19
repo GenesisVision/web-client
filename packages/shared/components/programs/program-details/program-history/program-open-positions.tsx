@@ -8,11 +8,9 @@ import BaseProfitability from "shared/components/profitability/base-profitabilit
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
@@ -31,7 +29,7 @@ const _ProgramOpenPositions: React.FC<Props & InjectedTranslateProps> = ({
   programId,
   fetchOpenPositions
 }) => {
-  const getOpenPositions: GetItemsFuncType = (filters?: FilteringType) =>
+  const getOpenPositions: any = (filters?: any) =>
     fetchOpenPositions(programId, filters);
 
   return (
@@ -111,10 +109,7 @@ const _ProgramOpenPositions: React.FC<Props & InjectedTranslateProps> = ({
 interface Props {
   currency: CURRENCIES;
   programId: string;
-  fetchOpenPositions: (
-    programId: string,
-    filters?: FilteringType
-  ) => Promise<IDataModel>;
+  fetchOpenPositions: (programId: string, filters?: any) => Promise<IDataModel>;
 }
 
 const ProgramOpenPositions = React.memo(translate()(_ProgramOpenPositions));

@@ -8,7 +8,7 @@ import {
 import * as qs from "qs";
 import {
   ComposeFiltersAllType,
-  TFilter
+  IFilter
 } from "shared/components/table/components/filtering/filter.type";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
@@ -175,7 +175,7 @@ export const fundsChangeSorting: FundsChangeSortingType = sorting => (
 };
 
 export type FundsChangeFilterType = (
-  filter: TFilter<any>
+  filter: IFilter<any>
 ) => (dispatch: any, getState: any) => void;
 export const fundsChangeFilter: FundsChangeFilterType = filter => (
   dispatch,

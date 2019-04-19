@@ -4,13 +4,13 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
 import Filter from "../filter";
-import { TFilter } from "../filter.type";
+import { IFilter } from "../filter.type";
 import LevelFilterPopover from "./level-filter-popover";
 
 interface ILevelFilterProps {
   name: string;
   value: number[];
-  onChange(value: TFilter<any>): void;
+  onChange(value: IFilter<any>): void;
 }
 
 class LevelFilter extends React.PureComponent<

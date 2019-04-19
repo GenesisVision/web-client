@@ -14,19 +14,11 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import {
-  FilteringType,
-  SortingColumn
-} from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-import {
-  Column,
-  GetItemsFuncActionType,
-  IUpdateFilterFunc
-} from "shared/components/table/components/table.types";
-import { FUND, ROLE } from "shared/constants/constants";
+import { Column } from "shared/components/table/components/table.types";
+import { FUND } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -35,7 +27,7 @@ import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
 interface IDashboardFundsProps {
   title: string;
-  getDashboardFunds: GetItemsFuncActionType;
+  getDashboardFunds: any;
   onChangeStatus?(): void;
   createButtonToolbar: JSX.Element;
   createFund: JSX.Element;
@@ -59,10 +51,7 @@ const DashboardFunds: FunctionComponent<
       dataSelector={dashboardFundsTableSelector}
       isFetchOnMount={true}
       columns={DASHBOARD_FUNDS_COLUMNS}
-      renderFilters={(
-        updateFilter: IUpdateFilterFunc,
-        filtering: FilteringType
-      ) => (
+      renderFilters={(updateFilter, filtering) => (
         <Fragment>
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}

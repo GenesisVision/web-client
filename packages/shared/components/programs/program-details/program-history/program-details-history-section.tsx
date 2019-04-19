@@ -1,8 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
-import { SyntheticEvent } from "react";
 import * as React from "react";
+import { SyntheticEvent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -12,7 +12,6 @@ import ProgramTrades from "shared/components/programs/program-details/program-hi
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
@@ -129,14 +128,8 @@ interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
 interface OwnProps {
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
   fetchPortfolioEvents: GetItemsFuncType;
-  fetchOpenPositions: (
-    programId: string,
-    filters?: FilteringType
-  ) => Promise<IDataModel>;
-  fetchTrades: (
-    programId: string,
-    filters?: FilteringType
-  ) => Promise<IDataModel>;
+  fetchOpenPositions: (programId: string, filters?: any) => Promise<IDataModel>;
+  fetchTrades: (programId: string, filters?: any) => Promise<IDataModel>;
   programId: string;
   currency: CURRENCIES;
   programCurrency: CURRENCIES;

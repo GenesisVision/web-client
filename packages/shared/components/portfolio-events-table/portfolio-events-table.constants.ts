@@ -5,10 +5,10 @@ import { composeDefaultDateRangeFilter } from "shared/components/table/component
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { composeDefaultEventTypeFilter } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.helpers";
 import {
-  FilteringType,
+  IDefaultFilters,
+  IFiltering,
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
-import { IComposeDefaultFilter } from "shared/components/table/components/table.types";
 
 export const PORTFOLIO_EVENTS_COLUMNS: SortingColumn[] = [
   {
@@ -25,7 +25,7 @@ export const PORTFOLIO_EVENTS_COLUMNS: SortingColumn[] = [
   }
 ];
 
-export const PORTFOLIO_EVENTS_FILTERS: IComposeDefaultFilter[] = [
+export const PORTFOLIO_EVENTS_FILTERS: any[] = [
   {
     ...composeDefaultDateRangeFilter()
   },
@@ -33,7 +33,7 @@ export const PORTFOLIO_EVENTS_FILTERS: IComposeDefaultFilter[] = [
   { ...composeDefaultEventTypeFilter() }
 ];
 
-export const PORTFOLIO_EVENTS_DEFAULT_FILTERING: FilteringType = {
+export const PORTFOLIO_EVENTS_DEFAULT_FILTERING: IFiltering<any> = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
   assetType: ASSET_TYPE_FILTER_DEFAULT_VALUE,
   type: EVENT_TYPE_FILTER_DEFAULT_VALUE

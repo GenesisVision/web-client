@@ -4,7 +4,6 @@ import {
   MultiWalletExternalTransaction,
   WalletMultiAvailable
 } from "gv-api-web";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
   TableItems,
   mapToTableItems
@@ -38,7 +37,7 @@ export const fetchBaseWallets = (): RootThunk<
   );
 };
 
-export const fetchWalletTransactions = (requestFilters?: FilteringType) => {
+export const fetchWalletTransactions = (requestFilters?: any) => {
   const authorization = authService.getAuthArg();
 
   return actions.fetchWalletTransactionsDispatch(authorization, requestFilters);
@@ -101,7 +100,7 @@ export const resendWithdrawRequest = (txId: string): RootThunk<any> => (
 
 export const fetchMultiTransactionsExternal = (
   currency: string,
-  filters?: FilteringType
+  filters?: any
 ): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
   const authorization = authService.getAuthArg();
   const filtering = {
@@ -113,10 +112,7 @@ export const fetchMultiTransactionsExternal = (
     .then(mapToTableItems<MultiWalletExternalTransaction>("transactions"));
 };
 
-export const fetchMultiTransactions = (
-  currency: CURRENCIES,
-  filters?: FilteringType
-) => {
+export const fetchMultiTransactions = (currency: CURRENCIES, filters?: any) => {
   const authorization = authService.getAuthArg();
   const filtering = {
     ...filters,

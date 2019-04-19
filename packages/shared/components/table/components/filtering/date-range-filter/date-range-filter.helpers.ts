@@ -3,10 +3,11 @@ import { DurationInputArg2 } from "moment";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import { IComposeDefaultFilter } from "../../table.types";
+import { IDefaultFilter } from "../filter.type";
 import {
   ComposedRequestDataRangeValue,
-  DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
+  DATE_RANGE_FILTER_TYPE,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
   IDataRangeFilterValue,
   SERVER_DATE_RANGE_MAX_FILTER_NAME,
@@ -16,10 +17,10 @@ import {
 export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
   if (
     !value.type ||
-    !Object.values(DATA_RANGE_FILTER_TYPES).includes(value.type)
+    !Object.values(DATE_RANGE_FILTER_TYPE).includes(value.type)
   )
     return false;
-  if (value.type === DATA_RANGE_FILTER_TYPES.CUSTOM) {
+  if (value.type === DATE_RANGE_FILTER_TYPE.CUSTOM) {
     const start = moment(value.dateStart);
     const end = moment(value.dateEnd);
     if (!start.isValid() || !end.isValid() || start.isAfter(end)) return false;
@@ -47,22 +48,22 @@ export const composeRequestValueFunc = (
   toFilterName: string = SERVER_DATE_RANGE_MAX_FILTER_NAME
 ) => (value: IDataRangeFilterValue): ComposedRequestDataRangeValue => {
   switch (value.type) {
-    case DATA_RANGE_FILTER_TYPES.ALL:
+    case DATE_RANGE_FILTER_TYPE.ALL:
       return {
         [fromFilterName]: dateFrom(undefined, 20181001),
         [toFilterName]: dateTo()
       };
-    case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:
+    case DATE_RANGE_FILTER_TYPE.LAST_MONTH:
       return {
         [fromFilterName]: dateFrom("month"),
         [toFilterName]: dateTo()
       };
-    case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
+    case DATE_RANGE_FILTER_TYPE.LAST_WEEK:
       return {
         [fromFilterName]: dateFrom("week"),
         [toFilterName]: dateTo()
       };
-    case DATA_RANGE_FILTER_TYPES.CUSTOM:
+    case DATE_RANGE_FILTER_TYPE.CUSTOM:
     default:
       return {
         [fromFilterName]: moment(value.dateStart)
@@ -80,10 +81,10 @@ export const composeDefaultDateRangeFilter = ({
   name = DATE_RANGE_FILTER_NAME,
   type = FILTER_TYPE.CUSTOM,
   defaultValue = DEFAULT_DATE_RANGE_FILTER_VALUE,
-  composeApiRequestValue
-}: IComposeDefaultFilter = {}): IComposeDefaultFilter => ({
+  composeApiRequestValue = composeRequestValueFunc()
+} = {}): IDefaultFilter<IDataRangeFilterValue> => ({
   name,
   type,
-  composeRequestValue: composeApiRequestValue || composeRequestValueFunc(),
+  composeRequestValue: composeApiRequestValue,
   defaultValue
 });
