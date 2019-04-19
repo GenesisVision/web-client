@@ -6,9 +6,7 @@ import TransactionAsset from "shared/modules/transaction-details/details-asset";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const _SignalTransaction: React.FC<TransactionDetailsProps> = props => {
-  const { data, t } = props;
-  console.info(data);
+const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
   return (
     <>
       <div className="dialog__top">
