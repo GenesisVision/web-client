@@ -21,24 +21,12 @@ import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-t
 import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
-interface IWalletListProps extends InjectedTranslateProps {
-  wallets: WalletData[];
-  createButtonToolbar(): void;
-}
-
-interface IWalletListState {
-  isOpenAddFundsPopup: boolean;
-  isOpenWithdrawPopup: boolean;
-  isOpenTransferPopup: boolean;
-  currentWallet: any;
-}
-
-class WalletList extends React.Component<IWalletListProps, IWalletListState> {
+class WalletList extends React.Component<Props, State> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
     isOpenTransferPopup: false,
-    currentWallet: {}
+    currentWallet: undefined
   };
 
   handleOpenAddFundsPopup = (wallet: CurrentWallet) => () => {
@@ -71,6 +59,12 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
 
   render() {
     const { t, createButtonToolbar, wallets } = this.props;
+    const {
+      isOpenAddFundsPopup,
+      currentWallet,
+      isOpenWithdrawPopup,
+      isOpenTransferPopup
+    } = this.state;
     return (
       <div className="wallet-list">
         <Table
@@ -152,25 +146,41 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
             );
           }}
         />
-        <WalletAddFundsPopup
-          //@ts-ignore
-          currentWallet={this.state.currentWallet}
-          open={this.state.isOpenAddFundsPopup}
-          onClose={this.handleCloseAddFundsPopup}
-        />
-        <WalletWithdrawPopup
-          currentWallet={this.state.currentWallet}
-          open={this.state.isOpenWithdrawPopup}
-          onClose={this.handleCloseWithdrawPopup}
-        />
-        <WalletTransferPopup
-          currentWallet={this.state.currentWallet}
-          open={this.state.isOpenTransferPopup}
-          onClose={this.handleCloseTransferPopup}
-        />
+        {currentWallet && (
+          <>
+            <WalletAddFundsPopup
+              //@ts-ignore
+              currentWallet={currentWallet}
+              open={isOpenAddFundsPopup}
+              onClose={this.handleCloseAddFundsPopup}
+            />
+            <WalletWithdrawPopup
+              currentWallet={currentWallet}
+              open={isOpenWithdrawPopup}
+              onClose={this.handleCloseWithdrawPopup}
+            />
+            <WalletTransferPopup
+              currentWallet={currentWallet}
+              open={isOpenTransferPopup}
+              onClose={this.handleCloseTransferPopup}
+            />
+          </>
+        )}
       </div>
     );
   }
+}
+
+interface Props extends InjectedTranslateProps {
+  wallets: WalletData[];
+  createButtonToolbar(): void;
+}
+
+interface State {
+  isOpenAddFundsPopup: boolean;
+  isOpenWithdrawPopup: boolean;
+  isOpenTransferPopup: boolean;
+  currentWallet?: any;
 }
 
 export default translate()(WalletList);
