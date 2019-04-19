@@ -1,7 +1,7 @@
 import "./wallet-transfer-form.scss";
 
 import { FormikProps, withFormik } from "formik";
-import { WalletData } from "gv-api-web";
+import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -16,30 +16,9 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 import { Schema, lazy, number, object } from "yup";
 
-const getDestinationWallets = (
-  wallets: WalletData[],
-  sourceId: string
-): WalletData[] => {
-  return wallets.filter(wallet => wallet.id !== sourceId);
-};
+import * as walletService from "./wallet-transfer.service";
 
-const getSelectedWallet = (
-  wallets: WalletData[],
-  currentWalletId: string
-): WalletData =>
-  wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData);
-
-const getTransferAll = (values: FormValues, props: OwnProps) => {
-  const { amount, sourceId } = values;
-  const selectedSourceWallet = getSelectedWallet(props.wallets, sourceId);
-  const formattedAvailableSourceWallet = formatCurrencyValue(
-    selectedSourceWallet.available,
-    selectedSourceWallet.currency
-  );
-  return amount === formattedAvailableSourceWallet;
-};
-
-class WalletTransferForm extends React.Component<Props> {
+class WalletTransferForm extends React.PureComponent<Props> {
   onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue, values } = this.props;
     const currencyFromNew = event.target.value;
@@ -71,14 +50,20 @@ class WalletTransferForm extends React.Component<Props> {
 
     const { sourceId, destinationId } = values;
 
-    const destinationWallets = getDestinationWallets(wallets, sourceId);
-    const selectedSourceWallet = getSelectedWallet(wallets, sourceId);
+    const destinationWallets = walletService.getDestinationWallets(
+      wallets,
+      sourceId
+    );
+    const selectedSourceWallet = walletService.getSelectedWallet(
+      wallets,
+      sourceId
+    );
     const formattedAvailableSourceWallet = formatCurrencyValue(
       selectedSourceWallet.available,
       selectedSourceWallet.currency
     );
 
-    const selectedDestinationWallet = getSelectedWallet(
+    const selectedDestinationWallet = walletService.getSelectedWallet(
       destinationWallets,
       destinationId
     );
@@ -111,18 +96,16 @@ class WalletTransferForm extends React.Component<Props> {
             InputComponent={Select}
             onChange={this.onChangeSourceId}
           >
-            {wallets.map(wallet => {
-              return (
-                <option value={wallet.id} key={`from-${wallet.id}`}>
-                  <img
-                    src={filesService.getFileUrl(wallet.logo)}
-                    className="wallet-transfer-popup__icon"
-                    alt={wallet.currency}
-                  />
-                  {`${wallet.title} | ${wallet.currency}`}
-                </option>
-              );
-            })}
+            {wallets.map(wallet => (
+              <option value={wallet.id} key={`from-${wallet.id}`}>
+                <img
+                  src={filesService.getFileUrl(wallet.logo)}
+                  className="wallet-transfer-popup__icon"
+                  alt={wallet.currency}
+                />
+                {`${wallet.title} | ${wallet.currency}`}
+              </option>
+            ))}
           </GVFormikField>
           <StatisticItem label={t("wallet-transfer.availableFrom")}>
             {`${formattedAvailableSourceWallet} ${
@@ -138,18 +121,18 @@ class WalletTransferForm extends React.Component<Props> {
             InputComponent={Select}
             onChange={this.onChangeDestinationId}
           >
-            {destinationWallets.map(wallet => {
-              return (
-                <option value={wallet.id} key={`to-${wallet.id}`}>
-                  <img
-                    src={filesService.getFileUrl(wallet.logo)}
-                    className="wallet-transfer-popup__icon"
-                    alt={wallet.currency}
-                  />
-                  {`${wallet.title} | ${wallet.currency}`}
-                </option>
-              );
-            })}
+            {destinationWallets.map(wallet => (
+              <option value={wallet.id} key={`to-${wallet.id}`}>
+                <img
+                  src={filesService.getFileUrl(wallet.logo)}
+                  className="wallet-transfer-popup__icon"
+                  alt={wallet.currency}
+                />
+                {/*
+                  //@ts-ignore*/}
+                {`${wallet.title} | ${wallet.currency}`}
+              </option>
+            ))}
           </GVFormikField>
           <StatisticItem label={t("wallet-transfer.availableTo")}>
             {`${formattedAvailableToWallet} ${
@@ -209,14 +192,17 @@ export default compose<React.FunctionComponent<OwnProps>>(
     mapPropsToValues: props => {
       const { currentWallet, wallets } = props;
       let sourceId = currentWallet ? currentWallet.id : wallets[0].id;
-      const destinationWallets = getDestinationWallets(wallets, sourceId);
+      const destinationWallets = walletService.getDestinationWallets(
+        wallets,
+        sourceId
+      );
       const destinationId = destinationWallets[0].id;
       return { sourceId, amount: "", destinationId };
     },
     validationSchema: (params: Props) => {
       return lazy(
         (values: FormValues): Schema<any> => {
-          const selectedSourceWallet = getSelectedWallet(
+          const selectedSourceWallet = walletService.getSelectedWallet(
             params.wallets,
             values.sourceId
           );
@@ -246,13 +232,27 @@ export default compose<React.FunctionComponent<OwnProps>>(
   })
 )(WalletTransferForm);
 
+const getTransferAll = (values: FormValues, props: OwnProps) => {
+  const { amount, sourceId } = values;
+  const selectedSourceWallet = walletService.getSelectedWallet(
+    props.wallets,
+    sourceId
+  );
+  const formattedAvailableSourceWallet = formatCurrencyValue(
+    selectedSourceWallet.available,
+    selectedSourceWallet.currency
+  );
+  return amount === formattedAvailableSourceWallet;
+};
+
 interface OwnProps {
   onSubmit(
     values: TransferFormValuesType,
     setSubmitting: SetSubmittingType
   ): void;
   errorMessage?: string;
-  wallets: Array<WalletData>;
+  wallets: WalletData[];
+  copytradingAccounts: CopyTradingAccountInfo[];
   currentWallet: WalletData;
 }
 

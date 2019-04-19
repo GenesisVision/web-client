@@ -1,10 +1,13 @@
-import { WalletData } from "gv-api-web";
+import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
-import { fetchWallets } from "shared/components/wallet/services/wallet.services";
+import {
+  fetchCopytradingAccounts,
+  fetchWallets
+} from "shared/components/wallet/services/wallet.services";
 import RootState from "shared/reducers/root-reducer";
 
 import { walletTransferRequest } from "../services/wallet-transfer.services";
@@ -17,7 +20,8 @@ class WalletTransferContainer extends React.Component<
   State
 > {
   state = {
-    errorMessage: undefined
+    errorMessage: undefined,
+    copytradingAccounts: undefined
   };
 
   handleSubmit = (values: TransferFormValuesType) => {
@@ -26,6 +30,10 @@ class WalletTransferContainer extends React.Component<
         this.props.onClose();
         this.props.service.fetchWallets();
         this.props.service.updateWalletTimestamp();
+        return fetchCopytradingAccounts();
+      })
+      .then(res => {
+        this.setState({ copytradingAccounts: res.items });
       })
       .catch((error: any) => {
         this.setState({
@@ -36,13 +44,15 @@ class WalletTransferContainer extends React.Component<
 
   render() {
     const { currentWallet, wallets } = this.props;
-    if (!wallets.length) return <DialogLoader />;
+    const { copytradingAccounts, errorMessage } = this.state;
+    if (!wallets.length || !copytradingAccounts) return <DialogLoader />;
 
     return (
       <WalletTransferForm
+        copytradingAccounts={copytradingAccounts}
         wallets={wallets}
         currentWallet={currentWallet}
-        errorMessage={this.state.errorMessage}
+        errorMessage={errorMessage}
         onSubmit={this.handleSubmit}
       />
     );
@@ -55,9 +65,13 @@ const mapStateToProps = (state: RootState): StateProps => {
   return { wallets };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
-    { walletTransferRequest, fetchWallets, updateWalletTimestamp },
+    {
+      walletTransferRequest,
+      fetchWallets,
+      updateWalletTimestamp
+    },
     dispatch
   )
 });
@@ -85,5 +99,6 @@ interface OwnProps {
 }
 
 interface State {
+  copytradingAccounts?: CopyTradingAccountInfo[];
   errorMessage?: string;
 }
