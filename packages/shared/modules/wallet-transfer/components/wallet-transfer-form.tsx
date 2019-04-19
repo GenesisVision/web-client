@@ -1,7 +1,12 @@
 import "./wallet-transfer-form.scss";
 
 import { FormikProps, withFormik } from "formik";
-import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
+import {
+  CopyTradingAccountInfo,
+  InternalTransferRequestDestinationTypeEnum,
+  InternalTransferRequestSourceTypeEnum,
+  WalletData
+} from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -16,6 +21,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 import { Schema, lazy, number, object } from "yup";
 
+import { TRANSFER_DIRECTION } from "../wallet-transfer-popup";
 import * as walletService from "./wallet-transfer.service";
 
 class WalletTransferForm extends React.PureComponent<Props> {
@@ -37,6 +43,9 @@ class WalletTransferForm extends React.PureComponent<Props> {
 
   render() {
     const {
+      copytradingAccounts,
+      sourceType = TRANSFER_DIRECTION.WALLET,
+      destinationType = TRANSFER_DIRECTION.WALLET,
       t,
       handleSubmit,
       wallets,
@@ -47,22 +56,25 @@ class WalletTransferForm extends React.PureComponent<Props> {
       setFieldValue,
       isSubmitting
     } = this.props;
-
     const { sourceId, destinationId } = values;
-
+    const fromDirection: Array<CopyTradingAccountInfo | WalletData> =
+      sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copytradingAccounts;
+    const toDirection =
+      destinationType === TRANSFER_DIRECTION.WALLET
+        ? wallets
+        : copytradingAccounts;
     const destinationWallets = walletService.getDestinationWallets(
-      wallets,
+      toDirection,
       sourceId
     );
     const selectedSourceWallet = walletService.getSelectedWallet(
-      wallets,
+      fromDirection,
       sourceId
     );
     const formattedAvailableSourceWallet = formatCurrencyValue(
       selectedSourceWallet.available,
       selectedSourceWallet.currency
     );
-
     const selectedDestinationWallet = walletService.getSelectedWallet(
       destinationWallets,
       destinationId
@@ -96,13 +108,15 @@ class WalletTransferForm extends React.PureComponent<Props> {
             InputComponent={Select}
             onChange={this.onChangeSourceId}
           >
-            {wallets.map(wallet => (
+            {fromDirection.map(wallet => (
               <option value={wallet.id} key={`from-${wallet.id}`}>
                 <img
                   src={filesService.getFileUrl(wallet.logo)}
                   className="wallet-transfer-popup__icon"
                   alt={wallet.currency}
                 />
+                {/*
+                  //@ts-ignore*/}
                 {`${wallet.title} | ${wallet.currency}`}
               </option>
             ))}
@@ -190,36 +204,61 @@ export default compose<React.FunctionComponent<OwnProps>>(
   withFormik<OwnProps, FormValues>({
     displayName: "wallet-transfer",
     mapPropsToValues: props => {
-      const { currentWallet, wallets } = props;
-      let sourceId = currentWallet ? currentWallet.id : wallets[0].id;
-      const destinationWallets = walletService.getDestinationWallets(
+      const {
+        currentWallet,
         wallets,
-        sourceId
-      );
-      const destinationId = destinationWallets[0].id;
+        copytradingAccounts,
+        sourceType = TRANSFER_DIRECTION.WALLET,
+        destinationType = TRANSFER_DIRECTION.WALLET
+      } = props;
+      let sourceId, destinationId;
+      const toDirection =
+        destinationType === TRANSFER_DIRECTION.WALLET
+          ? wallets
+          : copytradingAccounts;
+      const fromDirection =
+        sourceType === TRANSFER_DIRECTION.WALLET
+          ? wallets
+          : copytradingAccounts;
+      if (destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT) {
+        sourceId = fromDirection[0].id;
+        destinationId = currentWallet.id;
+      } else {
+        sourceId = currentWallet.id;
+        const destinationWallets = walletService.getDestinationWallets(
+          toDirection,
+          sourceId
+        );
+        destinationId = destinationWallets[0].id;
+      }
       return { sourceId, amount: "", destinationId };
     },
-    validationSchema: (params: Props) => {
+    validationSchema: (props: Props) => {
+      const {
+        sourceType = TRANSFER_DIRECTION.WALLET,
+        wallets,
+        copytradingAccounts,
+        t
+      } = props;
       return lazy(
         (values: FormValues): Schema<any> => {
+          const fromDirection =
+            sourceType === TRANSFER_DIRECTION.WALLET
+              ? wallets
+              : copytradingAccounts;
           const selectedSourceWallet = walletService.getSelectedWallet(
-            params.wallets,
+            fromDirection,
             values.sourceId
           );
           return object().shape({
             amount: number()
-              .moreThan(
-                0,
-                params.t("wallet-transfer.validation.amount-is-zero")
-              )
+              .moreThan(0, t("wallet-transfer.validation.amount-is-zero"))
               .max(
                 +formatCurrencyValue(
                   selectedSourceWallet.available,
                   selectedSourceWallet.currency
                 ),
-                params.t(
-                  "wallet-transfer.validation.amount-more-than-available"
-                )
+                t("wallet-transfer.validation.amount-more-than-available")
               )
           });
         }
@@ -234,8 +273,15 @@ export default compose<React.FunctionComponent<OwnProps>>(
 
 const getTransferAll = (values: FormValues, props: OwnProps) => {
   const { amount, sourceId } = values;
+  const {
+    sourceType = TRANSFER_DIRECTION.WALLET,
+    wallets,
+    copytradingAccounts
+  } = props;
+  const fromDirection =
+    sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copytradingAccounts;
   const selectedSourceWallet = walletService.getSelectedWallet(
-    props.wallets,
+    fromDirection,
     sourceId
   );
   const formattedAvailableSourceWallet = formatCurrencyValue(
@@ -254,6 +300,8 @@ interface OwnProps {
   wallets: WalletData[];
   copytradingAccounts: CopyTradingAccountInfo[];
   currentWallet: WalletData;
+  sourceType?: TRANSFER_DIRECTION;
+  destinationType?: TRANSFER_DIRECTION;
 }
 
 interface FormValues {
@@ -264,4 +312,8 @@ interface FormValues {
 
 type Props = InjectedTranslateProps & FormikProps<FormValues> & OwnProps;
 
-export type TransferFormValuesType = FormValues & { transferAll: boolean };
+export type TransferFormValuesType = FormValues & {
+  transferAll: boolean;
+  sourceType?: InternalTransferRequestSourceTypeEnum;
+  destinationType?: InternalTransferRequestDestinationTypeEnum;
+};

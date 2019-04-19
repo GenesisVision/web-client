@@ -10,9 +10,7 @@ import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 
-import { CurrentWallet } from "../../../../modules/wallet-add-funds/components/wallet-add-funds-container";
-import WalletAddFundsPopup from "../../../../modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletWithdrawPopup from "../../../../modules/wallet-withdraw/wallet-withdraw-popup";
+import { TRANSFER_DIRECTION } from "../../../../modules/wallet-transfer/wallet-transfer-popup";
 import { formatCurrencyValue } from "../../../../utils/formatter";
 import WalletImage from "../../../avatar/wallet-image/wallet-image";
 import Profitability from "../../../profitability/profitability";
@@ -139,14 +137,16 @@ class WalletCopytrading extends React.PureComponent<Props, State> {
         {currentAccount && (
           <>
             <WalletTransferPopup
-              currentWallet={currentAccount}
-              open={isOpenAddFundsPopup}
-              onClose={this.handleCloseAddFundsPopup}
-            />
-            <WalletTransferPopup
+              sourceType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
               currentWallet={currentAccount}
               open={isOpenWithdrawPopup}
               onClose={this.handleCloseWithdrawPopup}
+            />
+            <WalletTransferPopup
+              destinationType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
+              currentWallet={currentAccount}
+              open={isOpenAddFundsPopup}
+              onClose={this.handleCloseAddFundsPopup}
             />
           </>
         )}

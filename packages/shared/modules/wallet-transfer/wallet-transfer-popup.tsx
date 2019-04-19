@@ -1,23 +1,35 @@
-import { WalletData } from "gv-api-web";
 import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
 
-import WalletTransferContainer from "./components/wallet-transfer-container";
+import WalletTransferContainer, {
+  IWalletTransferContainerOwnProps
+} from "./components/wallet-transfer-container";
 
-const WalletTransferPopup: React.FC<Props> = ({
+const _WalletTransferPopup: React.FC<Props> = ({
+  sourceType,
+  destinationType,
   currentWallet,
   onClose,
   open
 }) => (
   <Dialog open={open} onClose={onClose}>
-    <WalletTransferContainer currentWallet={currentWallet} onClose={onClose} />
+    <WalletTransferContainer
+      currentWallet={currentWallet}
+      onClose={onClose}
+      sourceType={sourceType}
+      destinationType={destinationType}
+    />
   </Dialog>
 );
 
-interface Props {
-  currentWallet: WalletData;
+interface Props extends IWalletTransferContainerOwnProps {
   open: boolean;
-  onClose: () => void;
 }
 
-export default React.memo(WalletTransferPopup);
+export enum TRANSFER_DIRECTION {
+  WALLET = "Wallet",
+  COPYTRADING_ACCOUNT = "CopyTradingAccount"
+}
+
+const WalletTransferPopup = React.memo(_WalletTransferPopup);
+export default WalletTransferPopup;
