@@ -1,6 +1,6 @@
 import "./wallet-add-funds-form.scss";
 
-import { WalletData } from "gv-api-web";
+import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
@@ -8,26 +8,6 @@ import { alertMessageActions } from "shared/modules/alert-message/actions/alert-
 import RootState from "shared/reducers/root-reducer";
 
 import WalletAddFundsForm from "./wallet-add-funds-form.js";
-
-export interface CurrentWallet {
-  currency: string;
-  available: number;
-}
-
-interface OwnProps {
-  currentWallet: CurrentWallet;
-}
-
-interface StateProps {
-  wallets: WalletData[];
-}
-
-interface DispatchProps {
-  notifySuccess(x: string): void;
-  notifyError(x: string): void;
-}
-
-interface Props extends OwnProps, StateProps, DispatchProps {}
 
 class WalletAddFundsContainer extends React.Component<Props> {
   render() {
@@ -55,6 +35,26 @@ const mapDispatchToProps: DispatchProps = {
   notifySuccess: alertMessageActions.success,
   notifyError: alertMessageActions.error
 };
+
+export interface CurrentWallet {
+  currency: string;
+  available: number;
+}
+
+interface OwnProps {
+  currentWallet: CurrentWallet;
+}
+
+interface StateProps {
+  wallets: WalletData[];
+}
+
+interface DispatchProps {
+  notifySuccess(x: string): void;
+  notifyError(x: string): void;
+}
+
+interface Props extends OwnProps, StateProps, DispatchProps {}
 
 export default connect<StateProps, DispatchProps, OwnProps, RootState>(
   mapStateToProps,

@@ -1,31 +1,45 @@
-import { WalletData } from "gv-api-web";
+import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
-import { fetchWallets } from "shared/components/wallet/services/wallet.services";
+import {
+  fetchCopytradingAccounts,
+  fetchWallets
+} from "shared/components/wallet/services/wallet.services";
 import RootState from "shared/reducers/root-reducer";
 
 import { walletTransferRequest } from "../services/wallet-transfer.services";
+import { TRANSFER_DIRECTION } from "../wallet-transfer-popup";
 import WalletTransferForm, {
   TransferFormValuesType
 } from "./wallet-transfer-form";
 
-class WalletTransferContainer extends React.Component<
-  StateProps & DispatchProps & OwnProps,
-  State
-> {
+class WalletTransferContainer extends React.Component<Props, State> {
   state = {
-    errorMessage: undefined
+    errorMessage: undefined,
+    copytradingAccounts: undefined
   };
 
+  componentDidMount() {
+    fetchCopytradingAccounts().then(res => {
+      this.setState({ copytradingAccounts: res.items });
+    });
+  }
+
   handleSubmit = (values: TransferFormValuesType) => {
-    walletTransferRequest({ ...values })
+    const {
+      sourceType = TRANSFER_DIRECTION.WALLET,
+      destinationType = TRANSFER_DIRECTION.WALLET,
+      service,
+      onClose
+    } = this.props;
+    walletTransferRequest({ ...values, sourceType, destinationType })
       .then(() => {
-        this.props.onClose();
-        this.props.service.fetchWallets();
-        this.props.service.updateWalletTimestamp();
+        onClose();
+        service.fetchWallets();
+        service.updateWalletTimestamp();
       })
       .catch((error: any) => {
         this.setState({
@@ -35,14 +49,18 @@ class WalletTransferContainer extends React.Component<
   };
 
   render() {
-    const { currentWallet, wallets } = this.props;
-    if (!wallets.length) return <DialogLoader />;
+    const { currentWallet, wallets, sourceType, destinationType } = this.props;
+    const { copytradingAccounts, errorMessage } = this.state;
+    if (!wallets.length || !copytradingAccounts) return <DialogLoader />;
 
     return (
       <WalletTransferForm
+        sourceType={sourceType}
+        destinationType={destinationType}
+        copytradingAccounts={copytradingAccounts}
         wallets={wallets}
         currentWallet={currentWallet}
-        errorMessage={this.state.errorMessage}
+        errorMessage={errorMessage}
         onSubmit={this.handleSubmit}
       />
     );
@@ -55,17 +73,31 @@ const mapStateToProps = (state: RootState): StateProps => {
   return { wallets };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
-    { walletTransferRequest, fetchWallets, updateWalletTimestamp },
+    {
+      walletTransferRequest,
+      fetchWallets,
+      updateWalletTimestamp
+    },
     dispatch
   )
 });
 
-export default connect<StateProps, DispatchProps, OwnProps, RootState>(
+export default connect<
+  StateProps,
+  DispatchProps,
+  IWalletTransferContainerOwnProps,
+  RootState
+>(
   mapStateToProps,
   mapDispatchToProps
 )(WalletTransferContainer);
+
+interface Props
+  extends StateProps,
+    DispatchProps,
+    IWalletTransferContainerOwnProps {}
 
 interface StateProps {
   wallets: WalletData[];
@@ -79,11 +111,14 @@ interface DispatchProps {
   };
 }
 
-interface OwnProps {
+export interface IWalletTransferContainerOwnProps {
   currentWallet: WalletData;
   onClose(): void;
+  sourceType?: TRANSFER_DIRECTION;
+  destinationType?: TRANSFER_DIRECTION;
 }
 
 interface State {
+  copytradingAccounts?: CopyTradingAccountInfo[];
   errorMessage?: string;
 }

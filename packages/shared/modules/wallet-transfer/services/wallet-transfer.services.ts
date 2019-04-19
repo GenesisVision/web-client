@@ -7,15 +7,16 @@ import { TransferFormValuesType } from "../components/wallet-transfer-form";
 export const walletTransferRequest = (
   data: TransferFormValuesType
 ): Promise<any> => {
-  const { sourceId, destinationId, transferAll } = data;
+  const { sourceId, destinationId, transferAll,sourceType,
+    destinationType } = data;
   return walletApi.v10WalletTransferPost(authService.getAuthArg(), {
     request: {
       amount: Number(data.amount),
       sourceId,
       destinationId,
       transferAll,
-      sourceType: "Wallet",
-      destinationType: "Wallet"
+      sourceType,
+      destinationType
     } as InternalTransferRequest
   });
 };

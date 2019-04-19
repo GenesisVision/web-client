@@ -1,20 +1,37 @@
-import React, { Component } from "react";
+import {
+  CancelablePromise,
+  CopyTradingAccountInfo,
+  CreateWithdrawalRequestModel,
+  WalletData
+} from "gv-api-web";
+import { InvestorRootState } from "investor-web-portal/src/reducers";
+import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 
+import {
+  MiddlewareDispatch,
+  ResponseError,
+  SetSubmittingType
+} from "../../../utils/types";
+import { CurrentWallet } from "../../wallet-add-funds/components/wallet-add-funds-container";
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
-import WalletWithdrawForm from "./wallet-withdraw-form";
+import WalletWithdrawForm, {
+  IWalletWithdrawFormValues
+} from "./wallet-withdraw-form";
 import WalletWithdrawRequest from "./wallet-withdraw-request/wallet-withdraw-request";
 
-class WalletWithdrawContainer extends Component {
+class WalletWithdrawContainer extends React.PureComponent<Props, State> {
   state = {
-    errorMessage: null,
+    errorMessage: undefined,
     success: false
   };
 
-  handleSubmit = (values, setSubmitting) => {
+  handleSubmit = (
+    values: IWalletWithdrawFormValues,
+    setSubmitting: SetSubmittingType
+  ) => {
     this.props.service
       .newWithdrawRequest({ ...values, amount: Number(values.amount) })
       .then(() => {
@@ -23,7 +40,7 @@ class WalletWithdrawContainer extends Component {
         });
         this.props.service.updateWalletTimestamp();
       })
-      .catch(error => {
+      .catch((error: ResponseError) => {
         this.setState({
           success: false,
           errorMessage: error.errorMessage
@@ -54,7 +71,32 @@ class WalletWithdrawContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
+interface Props extends DispatchProps, StateProps, OwnProps {}
+
+interface OwnProps {
+  currentWallet: CurrentWallet;
+}
+
+interface DispatchProps {
+  service: {
+    newWithdrawRequest: (
+      data: CreateWithdrawalRequestModel
+    ) => CancelablePromise<any>;
+    updateWalletTimestamp: () => void;
+  };
+}
+
+interface StateProps {
+  wallets: WalletData[];
+  twoFactorEnabled: boolean;
+}
+
+interface State {
+  success: boolean;
+  errorMessage?: string;
+}
+
+const mapStateToProps = (state: InvestorRootState): StateProps => {
   if (!state.accountSettings) return { twoFactorEnabled: false, wallets: [] };
   const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
   const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
@@ -63,14 +105,15 @@ const mapStateToProps = state => {
   return { twoFactorEnabled, wallets };
 };
 
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(
-    { ...walletWithdrawService, updateWalletTimestamp },
-    dispatch
-  )
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
+  service: {
+    updateWalletTimestamp: () => dispatch(updateWalletTimestamp()),
+    newWithdrawRequest: data =>
+      dispatch(walletWithdrawService.newWithdrawRequest(data))
+  }
 });
 
-export default connect(
+export default connect<StateProps, DispatchProps, OwnProps, InvestorRootState>(
   mapStateToProps,
   mapDispatchToProps
 )(WalletWithdrawContainer);

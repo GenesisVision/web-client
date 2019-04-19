@@ -14,7 +14,7 @@ import { CURRENCIES } from "shared/modules/currency-select/currency-select.const
 import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
-import { RootThunk } from "shared/utils/types";
+import { MiddlewareDispatch, RootThunk } from "shared/utils/types";
 
 import * as actions from "../actions/wallet.actions";
 
@@ -52,9 +52,9 @@ export const onPayFeesWithGvt = () => () => {
   return walletApi.v10WalletPaygvtfeeOnPost(authService.getAuthArg());
 };
 
-export const cancelWithdrawRequest = (
-  txId: string
-): RootThunk<any> => dispatch => {
+export const cancelWithdrawRequest = (txId: string) => (
+  dispatch: MiddlewareDispatch
+): CancelablePromise<any> => {
   const authorization = authService.getAuthArg();
 
   return walletApi
@@ -75,10 +75,10 @@ export const cancelWithdrawRequest = (
     });
 };
 
-export const resendWithdrawRequest = (txId: string): RootThunk<any> => (
-  dispatch,
-  getState
-) => {
+export const resendWithdrawRequest = (txId: string) => (
+  dispatch: MiddlewareDispatch,
+  getState: any
+): CancelablePromise<any> => {
   const authorization = authService.getAuthArg();
 
   return walletApi
@@ -131,7 +131,6 @@ export const fetchCopytradingAccounts = () => {
   const authorization = authService.getAuthArg();
   return signalApi
     .v10SignalAccountsGet(authorization)
-    .then(data => ({ ...mockCopytrading, total: 0 }))
     .then(mapToTableItems<CopyTradingAccountInfo>("accounts"));
 };
 
