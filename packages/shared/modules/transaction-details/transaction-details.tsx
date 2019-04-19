@@ -32,7 +32,8 @@ const Types: TransactionTypes = {
   PlatformFee: FeeDetails,
   SubscribeSignal: SignalTransaction,
   ReceiveSignal: SignalTransaction,
-  DepositSignal: SignalTransaction
+  DepositSignal: SignalTransaction,
+  WithdrawalSignal: SignalTransaction
 } as TransactionTypes;
 
 class _TransactionDetailsDialog extends React.PureComponent<Props, State> {

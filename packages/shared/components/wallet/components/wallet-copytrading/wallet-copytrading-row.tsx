@@ -35,7 +35,7 @@ class WalletCopytradingRow extends React.Component<
               }}
             >
               <WalletImage
-                url={wallet.currencyLogo}
+                url={wallet.logo}
                 alt={wallet.currency}
                 imageClassName="wallet-list__icon"
               />
