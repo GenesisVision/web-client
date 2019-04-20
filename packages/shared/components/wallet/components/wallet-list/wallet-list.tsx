@@ -160,7 +160,7 @@ class WalletList extends React.Component<Props, State> {
               onClose={this.handleCloseWithdrawPopup}
             />
             <WalletTransferPopup
-              currentWallet={currentWallet}
+              currentItem={currentWallet}
               open={isOpenTransferPopup}
               onClose={this.handleCloseTransferPopup}
             />

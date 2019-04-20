@@ -6,16 +6,17 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
+import Profitability from "shared/components/profitability/profitability";
+import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
+import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
+import WalletTransferPopup, {
+  TRANSFER_DIRECTION
+} from "shared/modules/wallet-transfer/wallet-transfer-popup";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { TRANSFER_DIRECTION } from "../../../../modules/wallet-transfer/wallet-transfer-popup";
-import { formatCurrencyValue } from "../../../../utils/formatter";
-import WalletImage from "../../../avatar/wallet-image/wallet-image";
-import Profitability from "../../../profitability/profitability";
-import TableCell from "../../../table/components/table-cell";
-import TableRow from "../../../table/components/table-row";
 import { fetchCopytradingAccounts } from "../../services/wallet.services";
 import { composeWalletCopytradingCurrencyUrl } from "../../wallet.routes";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
@@ -138,13 +139,13 @@ class WalletCopytrading extends React.PureComponent<Props, State> {
           <>
             <WalletTransferPopup
               sourceType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
-              currentWallet={currentAccount}
+              currentItem={currentAccount}
               open={isOpenWithdrawPopup}
               onClose={this.handleCloseWithdrawPopup}
             />
             <WalletTransferPopup
               destinationType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
-              currentWallet={currentAccount}
+              currentItem={currentAccount}
               open={isOpenAddFundsPopup}
               onClose={this.handleCloseAddFundsPopup}
             />
