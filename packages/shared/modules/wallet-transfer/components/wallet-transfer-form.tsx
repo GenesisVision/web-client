@@ -196,11 +196,11 @@ export default compose<React.FunctionComponent<OwnProps>>(
         destinationId = currentItem.id;
       } else {
         sourceId = currentItem.id;
-        const destinationItem = walletService.getDestinationItems(
+        const destinationItemWithoutCurrent = walletService.getDestinationItems(
           destinationItems,
           sourceId
         );
-        destinationId = destinationItem[0].id;
+        destinationId = destinationItemWithoutCurrent[0].id;
       }
       return { sourceId, amount: "", destinationId };
     },
