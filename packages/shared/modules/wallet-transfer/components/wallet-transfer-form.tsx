@@ -71,7 +71,7 @@ class WalletTransferForm extends React.PureComponent<Props> {
       destinationItemWithoutCurrent,
       destinationId
     );
-    const formattedAvailableToItem = formatCurrencyValue(
+    const formattedAvailableDestinationItem = formatCurrencyValue(
       selectedDestinationItem.available,
       selectedDestinationItem.currency
     );
@@ -135,7 +135,9 @@ class WalletTransferForm extends React.PureComponent<Props> {
             ))}
           </GVFormikField>
           <StatisticItem label={t("wallet-transfer.availableTo")}>
-            {`${formattedAvailableToItem} ${selectedDestinationItem.currency}`}
+            {`${formattedAvailableDestinationItem} ${
+              selectedDestinationItem.currency
+            }`}
           </StatisticItem>
           <div className="dialog-field">
             <InputAmountField
