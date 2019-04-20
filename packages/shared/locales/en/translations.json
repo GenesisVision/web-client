@@ -702,9 +702,10 @@
       "from-Fund": "From the fund"
     },
     "signal": {
-      "SubscribeSignal": "Subscribe signal program",
-      "ReceiveSignal": "Receive signal program",
-      "DepositSignal": "Deposit signal program"
+      "SubscribeSignal": "Subscribe to signal provider",
+      "ReceiveSignal": "Subscription to signal provider",
+      "DepositSignal": "Deposit to signal account",
+      "WithdrawalSignal": "Withdrawal from signal account"
     }
   },
   "wallet-page": {

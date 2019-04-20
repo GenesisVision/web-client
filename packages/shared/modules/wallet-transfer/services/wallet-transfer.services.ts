@@ -7,8 +7,13 @@ import { TransferFormValuesType } from "../components/wallet-transfer-form";
 export const walletTransferRequest = (
   data: TransferFormValuesType
 ): Promise<any> => {
-  const { sourceId, destinationId, transferAll,sourceType,
-    destinationType } = data;
+  const {
+    sourceId,
+    destinationId,
+    transferAll,
+    sourceType,
+    destinationType
+  } = data;
   return walletApi.v10WalletTransferPost(authService.getAuthArg(), {
     request: {
       amount: Number(data.amount),
