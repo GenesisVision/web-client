@@ -107,8 +107,6 @@ class WalletTransferForm extends React.PureComponent<Props> {
                   className="wallet-transfer-popup__icon"
                   alt={item.currency}
                 />
-                {/*
-                  //@ts-ignore*/}
                 {`${item.title} | ${item.currency}`}
               </option>
             ))}
@@ -132,8 +130,6 @@ class WalletTransferForm extends React.PureComponent<Props> {
                   className="wallet-transfer-popup__icon"
                   alt={item.currency}
                 />
-                {/*
-                  //@ts-ignore*/}
                 {`${item.title} | ${item.currency}`}
               </option>
             ))}
