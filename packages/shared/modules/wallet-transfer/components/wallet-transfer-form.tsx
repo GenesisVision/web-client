@@ -21,11 +21,11 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 import { Schema, lazy, number, object } from "yup";
 
+import * as walletService from "../services/wallet-transfer.services";
 import {
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
 } from "../wallet-transfer-popup";
-import * as walletService from "./wallet-transfer.service";
 
 class WalletTransferForm extends React.PureComponent<Props> {
   onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -230,25 +230,16 @@ export default compose<React.FunctionComponent<OwnProps>>(
       );
     },
     handleSubmit: (values, { props, setSubmitting }) => {
-      const transferAll = getTransferAll(values, props);
+      const { amount, sourceId } = values;
+
+      const transferAll = walletService.getTransferAll(
+        { amount, sourceId },
+        props.sourceItems
+      );
       props.onSubmit({ ...values, transferAll }, setSubmitting);
     }
   })
 )(WalletTransferForm);
-
-const getTransferAll = (values: FormValues, props: OwnProps) => {
-  const { amount, sourceId } = values;
-  const { sourceItems } = props;
-  const selectedSourceItem = walletService.getSelectedItem(
-    sourceItems,
-    sourceId
-  );
-  const formattedAvailableSourceItem = formatCurrencyValue(
-    selectedSourceItem.available,
-    selectedSourceItem.currency
-  );
-  return amount === formattedAvailableSourceItem;
-};
 
 interface OwnProps {
   onSubmit(
@@ -259,8 +250,8 @@ interface OwnProps {
   currentItem: WalletData;
   currentItemContainer?: TRANSFER_CONTAINER;
   destinationType?: TRANSFER_DIRECTION;
-  sourceItems: Array<CopyTradingAccountInfo | WalletData>;
-  destinationItems: Array<CopyTradingAccountInfo | WalletData>;
+  sourceItems: ItemsType;
+  destinationItems: ItemsType;
 }
 
 interface FormValues {
@@ -270,6 +261,8 @@ interface FormValues {
 }
 
 type Props = InjectedTranslateProps & FormikProps<FormValues> & OwnProps;
+
+export type ItemsType = Array<CopyTradingAccountInfo | WalletData>;
 
 export type TransferFormValuesType = FormValues & {
   transferAll: boolean;

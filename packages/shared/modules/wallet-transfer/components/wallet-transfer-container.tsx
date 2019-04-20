@@ -56,9 +56,9 @@ class WalletTransferContainer extends React.Component<Props, State> {
     } = this.props;
     const { copytradingAccounts, errorMessage } = this.state;
     if (!wallets.length || !copytradingAccounts) return <DialogLoader />;
-    const sourceItems: Array<CopyTradingAccountInfo | WalletData> =
+    const sourceItems =
       sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copytradingAccounts;
-    const destinationItems: Array<CopyTradingAccountInfo | WalletData> =
+    const destinationItems =
       destinationType === TRANSFER_DIRECTION.WALLET
         ? wallets
         : copytradingAccounts;
