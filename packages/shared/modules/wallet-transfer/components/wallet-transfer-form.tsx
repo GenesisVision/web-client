@@ -21,7 +21,10 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 import { Schema, lazy, number, object } from "yup";
 
-import { TRANSFER_DIRECTION } from "../wallet-transfer-popup";
+import {
+  TRANSFER_CONTAINER,
+  TRANSFER_DIRECTION
+} from "../wallet-transfer-popup";
 import * as walletService from "./wallet-transfer.service";
 
 class WalletTransferForm extends React.PureComponent<Props> {
@@ -188,10 +191,10 @@ export default compose<React.FunctionComponent<OwnProps>>(
         sourceItems,
         destinationItems,
         currentItem,
-        destinationType
+        currentItemContainer
       } = props;
       let sourceId, destinationId;
-      if (destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT) {
+      if (currentItemContainer === TRANSFER_CONTAINER.DESTINATION) {
         sourceId = sourceItems[0].id;
         destinationId = currentItem.id;
       } else {
@@ -254,6 +257,7 @@ interface OwnProps {
   ): void;
   errorMessage?: string;
   currentItem: WalletData;
+  currentItemContainer?: TRANSFER_CONTAINER;
   destinationType?: TRANSFER_DIRECTION;
   sourceItems: Array<CopyTradingAccountInfo | WalletData>;
   destinationItems: Array<CopyTradingAccountInfo | WalletData>;

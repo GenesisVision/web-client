@@ -6,14 +6,16 @@ import WalletTransferContainer, {
 } from "./components/wallet-transfer-container";
 
 const _WalletTransferPopup: React.FC<Props> = ({
-  sourceType,
-  destinationType,
+  currentItemContainer = TRANSFER_CONTAINER.SOURCE,
+  sourceType = TRANSFER_DIRECTION.WALLET,
+  destinationType = TRANSFER_DIRECTION.WALLET,
   currentItem,
   onClose,
   open
 }) => (
   <Dialog open={open} onClose={onClose}>
     <WalletTransferContainer
+      currentItemContainer={currentItemContainer}
       currentItem={currentItem}
       onClose={onClose}
       sourceType={sourceType}
@@ -29,6 +31,11 @@ interface Props extends IWalletTransferContainerOwnProps {
 export enum TRANSFER_DIRECTION {
   WALLET = "Wallet",
   COPYTRADING_ACCOUNT = "CopyTradingAccount"
+}
+
+export enum TRANSFER_CONTAINER {
+  SOURCE = "SOURCE",
+  DESTINATION = "DESTINATION"
 }
 
 const WalletTransferPopup = React.memo(_WalletTransferPopup);

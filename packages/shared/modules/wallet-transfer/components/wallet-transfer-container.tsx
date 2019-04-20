@@ -11,7 +11,10 @@ import {
 import RootState from "shared/reducers/root-reducer";
 
 import { walletTransferRequest } from "../services/wallet-transfer.services";
-import { TRANSFER_DIRECTION } from "../wallet-transfer-popup";
+import {
+  TRANSFER_CONTAINER,
+  TRANSFER_DIRECTION
+} from "../wallet-transfer-popup";
 import WalletTransferForm, {
   TransferFormValuesType
 } from "./wallet-transfer-form";
@@ -29,12 +32,7 @@ class WalletTransferContainer extends React.Component<Props, State> {
   }
 
   handleSubmit = (values: TransferFormValuesType) => {
-    const {
-      sourceType = TRANSFER_DIRECTION.WALLET,
-      destinationType = TRANSFER_DIRECTION.WALLET,
-      service,
-      onClose
-    } = this.props;
+    const { sourceType, destinationType, service, onClose } = this.props;
     walletTransferRequest({ ...values, sourceType, destinationType })
       .then(() => {
         onClose();
@@ -52,8 +50,9 @@ class WalletTransferContainer extends React.Component<Props, State> {
     const {
       currentItem,
       wallets,
-      sourceType = TRANSFER_DIRECTION.WALLET,
-      destinationType = TRANSFER_DIRECTION.WALLET
+      sourceType,
+      destinationType,
+      currentItemContainer
     } = this.props;
     const { copytradingAccounts, errorMessage } = this.state;
     if (!wallets.length || !copytradingAccounts) return <DialogLoader />;
@@ -65,9 +64,9 @@ class WalletTransferContainer extends React.Component<Props, State> {
         : copytradingAccounts;
     return (
       <WalletTransferForm
+        currentItemContainer={currentItemContainer}
         sourceItems={sourceItems}
         destinationItems={destinationItems}
-        destinationType={destinationType}
         currentItem={currentItem}
         errorMessage={errorMessage}
         onSubmit={this.handleSubmit}
@@ -123,6 +122,7 @@ interface DispatchProps {
 export interface IWalletTransferContainerOwnProps {
   currentItem: WalletData;
   onClose(): void;
+  currentItemContainer?: TRANSFER_CONTAINER;
   sourceType?: TRANSFER_DIRECTION;
   destinationType?: TRANSFER_DIRECTION;
 }
