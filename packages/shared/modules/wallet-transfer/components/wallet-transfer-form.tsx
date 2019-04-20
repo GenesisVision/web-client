@@ -150,25 +150,19 @@ class WalletTransferForm extends React.PureComponent<Props> {
               isAllow={this.isAllow}
             />
           </div>
-          <TransferRate
-            destinationCurrency={selectedDestinationItem.currency}
-            sourceCurrency={selectedSourceItem.currency}
-          >
-            {props => {
-              if (values.amount) {
-                const value = formatCurrencyValue(
+          {values.amount && (
+            <TransferRate
+              destinationCurrency={selectedDestinationItem.currency}
+              sourceCurrency={selectedSourceItem.currency}
+            >
+              {props => (
+                <span>{`≈ ${formatCurrencyValue(
                   props.rate * Number(values.amount),
                   selectedDestinationItem.currency
-                );
-                return (
-                  <span>{`≈ ${value} ${
-                    selectedDestinationItem.currency
-                  }`}</span>
-                );
-              }
-              return null;
-            }}
-          </TransferRate>
+                )} ${selectedDestinationItem.currency}`}</span>
+              )}
+            </TransferRate>
+          )}
           <div className="form-error">{errorMessage}</div>
           <div className="dialog__buttons">
             <GVButton
