@@ -8,13 +8,13 @@ import WalletTransferContainer, {
 const _WalletTransferPopup: React.FC<Props> = ({
   sourceType,
   destinationType,
-  currentWallet,
+  currentItem,
   onClose,
   open
 }) => (
   <Dialog open={open} onClose={onClose}>
     <WalletTransferContainer
-      currentWallet={currentWallet}
+      currentItem={currentItem}
       onClose={onClose}
       sourceType={sourceType}
       destinationType={destinationType}

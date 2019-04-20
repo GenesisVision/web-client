@@ -49,17 +49,26 @@ class WalletTransferContainer extends React.Component<Props, State> {
   };
 
   render() {
-    const { currentWallet, wallets, sourceType, destinationType } = this.props;
+    const {
+      currentItem,
+      wallets,
+      sourceType = TRANSFER_DIRECTION.WALLET,
+      destinationType = TRANSFER_DIRECTION.WALLET
+    } = this.props;
     const { copytradingAccounts, errorMessage } = this.state;
     if (!wallets.length || !copytradingAccounts) return <DialogLoader />;
-
+    const sourceItems: Array<CopyTradingAccountInfo | WalletData> =
+      sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copytradingAccounts;
+    const destinationItems: Array<CopyTradingAccountInfo | WalletData> =
+      destinationType === TRANSFER_DIRECTION.WALLET
+        ? wallets
+        : copytradingAccounts;
     return (
       <WalletTransferForm
-        sourceType={sourceType}
+        sourceItems={sourceItems}
+        destinationItems={destinationItems}
         destinationType={destinationType}
-        copytradingAccounts={copytradingAccounts}
-        wallets={wallets}
-        currentWallet={currentWallet}
+        currentItem={currentItem}
         errorMessage={errorMessage}
         onSubmit={this.handleSubmit}
       />
@@ -112,7 +121,7 @@ interface DispatchProps {
 }
 
 export interface IWalletTransferContainerOwnProps {
-  currentWallet: WalletData;
+  currentItem: WalletData;
   onClose(): void;
   sourceType?: TRANSFER_DIRECTION;
   destinationType?: TRANSFER_DIRECTION;
