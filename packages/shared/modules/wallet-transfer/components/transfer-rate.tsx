@@ -48,7 +48,8 @@ class TransferRate extends React.PureComponent<
   }
 
   render() {
-    return this.state.rate
+    return this.state.rate &&
+      this.props.sourceCurrency !== this.props.destinationCurrency
       ? this.props.children({ rate: this.state.rate })
       : null;
   }
