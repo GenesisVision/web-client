@@ -3,13 +3,10 @@ import Dialog from "shared/components/dialog/dialog";
 
 import WalletTransferContainer, {
   IWalletTransferContainerOwnProps
-} from "./components/wallet-transfer-container";
-import {
-  TRANSFER_CONTAINER,
-  TRANSFER_DIRECTION
-} from "./wallet-transfer.types";
+} from "./components/transfer-container";
+import { TRANSFER_CONTAINER, TRANSFER_DIRECTION } from "./transfer.types";
 
-const _WalletTransferPopup: React.FC<Props> = ({
+const _TransferPopup: React.FC<Props> = ({
   currentItemContainer = TRANSFER_CONTAINER.SOURCE,
   sourceType = TRANSFER_DIRECTION.WALLET,
   destinationType = TRANSFER_DIRECTION.WALLET,
@@ -32,5 +29,5 @@ interface Props extends IWalletTransferContainerOwnProps {
   open: boolean;
 }
 
-const WalletTransferPopup = React.memo(_WalletTransferPopup);
-export default WalletTransferPopup;
+const TransferPopup = React.memo(_TransferPopup);
+export default TransferPopup;

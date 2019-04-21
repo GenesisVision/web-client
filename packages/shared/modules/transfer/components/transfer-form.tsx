@@ -1,4 +1,4 @@
-import "./wallet-transfer-form.scss";
+import "./transfer-form.scss";
 
 import { FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
@@ -9,21 +9,21 @@ import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import TransferRate from "shared/modules/wallet-transfer/components/transfer-rate";
+import TransferRate from "shared/modules/transfer/components/transfer-rate";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 import { Schema, lazy, number, object } from "yup";
 
-import * as walletService from "../services/wallet-transfer.services";
+import * as service from "../services/transfer.services";
 import {
   ItemType,
   ItemsType,
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
-} from "../wallet-transfer.types";
+} from "../transfer.types";
 
-class WalletTransferForm extends React.PureComponent<Props> {
+class _TransferForm extends React.PureComponent<Props> {
   onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue, values } = this.props;
     const currencyFromNew = event.target.value;
@@ -54,19 +54,16 @@ class WalletTransferForm extends React.PureComponent<Props> {
       isSubmitting
     } = this.props;
     const { sourceId, destinationId } = values;
-    const destinationItemWithoutCurrent = walletService.getDestinationItems(
+    const destinationItemWithoutCurrent = service.getDestinationItems(
       destinationItems,
       sourceId
     );
-    const selectedSourceItem = walletService.getSelectedItem(
-      sourceItems,
-      sourceId
-    );
+    const selectedSourceItem = service.getSelectedItem(sourceItems, sourceId);
     const formattedAvailableSourceItem = formatCurrencyValue(
       selectedSourceItem.available,
       selectedSourceItem.currency
     );
-    const selectedDestinationItem = walletService.getSelectedItem(
+    const selectedDestinationItem = service.getSelectedItem(
       destinationItemWithoutCurrent,
       destinationId
     );
@@ -178,7 +175,7 @@ class WalletTransferForm extends React.PureComponent<Props> {
   }
 }
 
-export default compose<React.FunctionComponent<OwnProps>>(
+const TransferForm = compose<React.FunctionComponent<OwnProps>>(
   translate(),
   withFormik<OwnProps, FormValues>({
     displayName: "wallet-transfer",
@@ -195,7 +192,7 @@ export default compose<React.FunctionComponent<OwnProps>>(
         destinationId = currentItem.id;
       } else {
         sourceId = currentItem.id;
-        const destinationItemWithoutCurrent = walletService.getDestinationItems(
+        const destinationItemWithoutCurrent = service.getDestinationItems(
           destinationItems,
           sourceId
         );
@@ -207,7 +204,7 @@ export default compose<React.FunctionComponent<OwnProps>>(
       const { sourceItems, t } = props;
       return lazy(
         (values: FormValues): Schema<any> => {
-          const selectedSourceItem = walletService.getSelectedItem(
+          const selectedSourceItem = service.getSelectedItem(
             sourceItems,
             values.sourceId
           );
@@ -228,14 +225,15 @@ export default compose<React.FunctionComponent<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       const { amount, sourceId } = values;
 
-      const transferAll = walletService.getTransferAll(
+      const transferAll = service.getTransferAll(
         { amount, sourceId },
         props.sourceItems
       );
       props.onSubmit({ ...values, transferAll }, setSubmitting);
     }
   })
-)(WalletTransferForm);
+)(_TransferForm);
+export default TransferForm;
 
 interface OwnProps {
   onSubmit(

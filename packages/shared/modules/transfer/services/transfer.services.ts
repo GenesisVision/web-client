@@ -3,8 +3,8 @@ import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { TransferFormValuesType } from "../components/wallet-transfer-form";
-import { ItemType, ItemsType } from "../wallet-transfer.types";
+import { TransferFormValuesType } from "../components/transfer-form";
+import { ItemType, ItemsType } from "../transfer.types";
 
 export const walletTransferRequest = (
   data: TransferFormValuesType

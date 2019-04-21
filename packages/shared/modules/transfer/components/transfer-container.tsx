@@ -10,17 +10,15 @@ import {
 } from "shared/components/wallet/services/wallet.services";
 import RootState from "shared/reducers/root-reducer";
 
-import { walletTransferRequest } from "../services/wallet-transfer.services";
+import { walletTransferRequest } from "../services/transfer.services";
 import {
   ItemType,
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
-} from "../wallet-transfer.types";
-import WalletTransferForm, {
-  TransferFormValuesType
-} from "./wallet-transfer-form";
+} from "../transfer.types";
+import WalletTransferForm, { TransferFormValuesType } from "./transfer-form";
 
-class WalletTransferContainer extends React.Component<Props, State> {
+class _TransferContainer extends React.Component<Props, State> {
   state = {
     errorMessage: undefined,
     copytradingAccounts: undefined
@@ -93,7 +91,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-export default connect<
+const TransferContainer = connect<
   StateProps,
   DispatchProps,
   IWalletTransferContainerOwnProps,
@@ -101,7 +99,8 @@ export default connect<
 >(
   mapStateToProps,
   mapDispatchToProps
-)(WalletTransferContainer);
+)(_TransferContainer);
+export default TransferContainer;
 
 interface Props
   extends StateProps,
