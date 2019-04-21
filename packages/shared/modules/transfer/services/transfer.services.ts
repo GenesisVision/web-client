@@ -43,18 +43,18 @@ export const getTransferAll = (
 };
 
 export const getDestinationItems: getDestinationWalletsType<ItemType> = (
-  wallets,
+  items,
   sourceId
-) => wallets.filter(wallet => wallet.id !== sourceId);
+) => items.filter(item => item.id !== sourceId);
 
 export type getDestinationWalletsType<T> = (
-  wallets: T[],
+  items: T[],
   sourceId: string
 ) => T[];
 
 export const getSelectedItem: getSelectedWalletType<ItemType> = (
-  wallets,
+  items,
   currentItemId
-) => wallets.find(wallet => wallet.id === currentItemId)!;
+) => items.find(item => item.id === currentItemId)!;
 
-export type getSelectedWalletType<T> = (wallets: T[], sourceId: string) => T;
+export type getSelectedWalletType<T> = (items: T[], sourceId: string) => T;

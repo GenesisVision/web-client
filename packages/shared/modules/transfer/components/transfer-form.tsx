@@ -80,8 +80,8 @@ class _TransferForm extends React.PureComponent<Props> {
 
     return (
       <form
-        id="wallet-transfer"
-        className="wallet-transfer-popup"
+        id="transfer"
+        className="transfer-popup"
         onSubmit={handleSubmit}
         noValidate
       >
@@ -100,7 +100,7 @@ class _TransferForm extends React.PureComponent<Props> {
               <option value={item.id} key={`from-${item.id}`}>
                 <img
                   src={filesService.getFileUrl(item.logo)}
-                  className="wallet-transfer-popup__icon"
+                  className="transfer-popup__icon"
                   alt={item.currency}
                 />
                 {`${item.title} | ${item.currency}`}
@@ -123,7 +123,7 @@ class _TransferForm extends React.PureComponent<Props> {
               <option value={item.id} key={`to-${item.id}`}>
                 <img
                   src={filesService.getFileUrl(item.logo)}
-                  className="wallet-transfer-popup__icon"
+                  className="transfer-popup__icon"
                   alt={item.currency}
                 />
                 {`${item.title} | ${item.currency}`}
@@ -178,7 +178,7 @@ class _TransferForm extends React.PureComponent<Props> {
 const TransferForm = compose<React.FunctionComponent<OwnProps>>(
   translate(),
   withFormik<OwnProps, FormValues>({
-    displayName: "wallet-transfer",
+    displayName: "transfer",
     mapPropsToValues: props => {
       const {
         sourceItems,

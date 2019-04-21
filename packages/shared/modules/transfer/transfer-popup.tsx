@@ -1,8 +1,8 @@
 import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
 
-import WalletTransferContainer, {
-  IWalletTransferContainerOwnProps
+import TransferContainer, {
+  ITransferContainerOwnProps
 } from "./components/transfer-container";
 import { TRANSFER_CONTAINER, TRANSFER_DIRECTION } from "./transfer.types";
 
@@ -15,7 +15,7 @@ const _TransferPopup: React.FC<Props> = ({
   open
 }) => (
   <Dialog open={open} onClose={onClose}>
-    <WalletTransferContainer
+    <TransferContainer
       currentItemContainer={currentItemContainer}
       currentItem={currentItem}
       onClose={onClose}
@@ -25,7 +25,7 @@ const _TransferPopup: React.FC<Props> = ({
   </Dialog>
 );
 
-interface Props extends IWalletTransferContainerOwnProps {
+interface Props extends ITransferContainerOwnProps {
   open: boolean;
 }
 

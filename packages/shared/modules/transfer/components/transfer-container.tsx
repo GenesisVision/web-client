@@ -16,7 +16,7 @@ import {
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
 } from "../transfer.types";
-import WalletTransferForm, { TransferFormValuesType } from "./transfer-form";
+import TransferForm, { TransferFormValuesType } from "./transfer-form";
 
 class _TransferContainer extends React.Component<Props, State> {
   state = {
@@ -62,7 +62,7 @@ class _TransferContainer extends React.Component<Props, State> {
         ? wallets
         : copytradingAccounts;
     return (
-      <WalletTransferForm
+      <TransferForm
         currentItemContainer={currentItemContainer}
         sourceItems={sourceItems}
         destinationItems={destinationItems}
@@ -94,7 +94,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 const TransferContainer = connect<
   StateProps,
   DispatchProps,
-  IWalletTransferContainerOwnProps,
+  ITransferContainerOwnProps,
   RootState
 >(
   mapStateToProps,
@@ -102,10 +102,7 @@ const TransferContainer = connect<
 )(_TransferContainer);
 export default TransferContainer;
 
-interface Props
-  extends StateProps,
-    DispatchProps,
-    IWalletTransferContainerOwnProps {}
+interface Props extends StateProps, DispatchProps, ITransferContainerOwnProps {}
 
 interface StateProps {
   wallets: WalletData[];
@@ -119,7 +116,7 @@ interface DispatchProps {
   };
 }
 
-export interface IWalletTransferContainerOwnProps {
+export interface ITransferContainerOwnProps {
   currentItem: ItemType;
   onClose(): void;
   currentItemContainer?: TRANSFER_CONTAINER;
