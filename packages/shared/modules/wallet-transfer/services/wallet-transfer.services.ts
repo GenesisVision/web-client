@@ -1,4 +1,8 @@
-import { CopyTradingAccountInfo, InternalTransferRequest, WalletData } from "gv-api-web";
+import {
+  CopyTradingAccountInfo,
+  InternalTransferRequest,
+  WalletData
+} from "gv-api-web";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -46,7 +50,7 @@ export const getTransferAll = (
 
 export const getDestinationItems: getDestinationWalletsType<
   CopyTradingAccountInfo | WalletData
-  > = (wallets, sourceId) => wallets.filter(wallet => wallet.id !== sourceId);
+> = (wallets, sourceId) => wallets.filter(wallet => wallet.id !== sourceId);
 
 export type getDestinationWalletsType<T> = (
   wallets: T[],
@@ -55,7 +59,7 @@ export type getDestinationWalletsType<T> = (
 
 export const getSelectedItem: getSelectedWalletType<
   CopyTradingAccountInfo | WalletData
-  > = (wallets, currentItemId) =>
+> = (wallets, currentItemId) =>
   wallets.find(wallet => wallet.id === currentItemId)!;
 
 export type getSelectedWalletType<T> = (wallets: T[], sourceId: string) => T;
