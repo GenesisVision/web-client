@@ -12,11 +12,11 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
+import TransferPopup from "shared/modules/transfer/transfer-popup";
 import {
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
-} from "shared/modules/wallet-transfer/wallet-transfer.types";
+} from "shared/modules/transfer/transfer.types";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { fetchCopytradingAccounts } from "../../services/wallet.services";
@@ -139,13 +139,13 @@ class WalletCopytrading extends React.PureComponent<Props, State> {
         />
         {currentAccount && (
           <>
-            <WalletTransferPopup
+            <TransferPopup
               sourceType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
               currentItem={currentAccount}
               open={isOpenWithdrawPopup}
               onClose={this.handleCloseWithdrawPopup}
             />
-            <WalletTransferPopup
+            <TransferPopup
               currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
               destinationType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
               currentItem={currentAccount}
