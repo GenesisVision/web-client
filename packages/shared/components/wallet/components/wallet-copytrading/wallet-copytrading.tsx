@@ -13,12 +13,12 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
-import { formatCurrencyValue } from "shared/utils/formatter";
-
 import {
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
-} from "../../../../modules/wallet-transfer/wallet-transfer.types";
+} from "shared/modules/wallet-transfer/wallet-transfer.types";
+import { formatCurrencyValue } from "shared/utils/formatter";
+
 import { fetchCopytradingAccounts } from "../../services/wallet.services";
 import { composeWalletCopytradingCurrencyUrl } from "../../wallet.routes";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
