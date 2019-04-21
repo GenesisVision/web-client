@@ -1,12 +1,6 @@
 import "./wallet-transfer-form.scss";
 
 import { FormikProps, withFormik } from "formik";
-import {
-  CopyTradingAccountInfo,
-  InternalTransferRequestDestinationTypeEnum,
-  InternalTransferRequestSourceTypeEnum,
-  WalletData
-} from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -23,9 +17,11 @@ import { Schema, lazy, number, object } from "yup";
 
 import * as walletService from "../services/wallet-transfer.services";
 import {
+  ItemType,
+  ItemsType,
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
-} from "../wallet-transfer-popup";
+} from "../wallet-transfer.types";
 
 class WalletTransferForm extends React.PureComponent<Props> {
   onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -247,7 +243,7 @@ interface OwnProps {
     setSubmitting: SetSubmittingType
   ): void;
   errorMessage?: string;
-  currentItem: WalletData;
+  currentItem: ItemType;
   currentItemContainer?: TRANSFER_CONTAINER;
   destinationType?: TRANSFER_DIRECTION;
   sourceItems: ItemsType;
@@ -262,10 +258,8 @@ interface FormValues {
 
 type Props = InjectedTranslateProps & FormikProps<FormValues> & OwnProps;
 
-export type ItemsType = Array<CopyTradingAccountInfo | WalletData>;
-
 export type TransferFormValuesType = FormValues & {
   transferAll: boolean;
-  sourceType?: InternalTransferRequestSourceTypeEnum;
-  destinationType?: InternalTransferRequestDestinationTypeEnum;
+  sourceType?: TRANSFER_DIRECTION;
+  destinationType?: TRANSFER_DIRECTION;
 };

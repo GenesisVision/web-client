@@ -12,9 +12,10 @@ import RootState from "shared/reducers/root-reducer";
 
 import { walletTransferRequest } from "../services/wallet-transfer.services";
 import {
+  ItemType,
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
-} from "../wallet-transfer-popup";
+} from "../wallet-transfer.types";
 import WalletTransferForm, {
   TransferFormValuesType
 } from "./wallet-transfer-form";
@@ -120,7 +121,7 @@ interface DispatchProps {
 }
 
 export interface IWalletTransferContainerOwnProps {
-  currentItem: WalletData;
+  currentItem: ItemType;
   onClose(): void;
   currentItemContainer?: TRANSFER_CONTAINER;
   sourceType?: TRANSFER_DIRECTION;

@@ -4,6 +4,10 @@ import Dialog from "shared/components/dialog/dialog";
 import WalletTransferContainer, {
   IWalletTransferContainerOwnProps
 } from "./components/wallet-transfer-container";
+import {
+  TRANSFER_CONTAINER,
+  TRANSFER_DIRECTION
+} from "./wallet-transfer.types";
 
 const _WalletTransferPopup: React.FC<Props> = ({
   currentItemContainer = TRANSFER_CONTAINER.SOURCE,
@@ -26,16 +30,6 @@ const _WalletTransferPopup: React.FC<Props> = ({
 
 interface Props extends IWalletTransferContainerOwnProps {
   open: boolean;
-}
-
-export enum TRANSFER_DIRECTION {
-  WALLET = "Wallet",
-  COPYTRADING_ACCOUNT = "CopyTradingAccount"
-}
-
-export enum TRANSFER_CONTAINER {
-  SOURCE = "SOURCE",
-  DESTINATION = "DESTINATION"
 }
 
 const WalletTransferPopup = React.memo(_WalletTransferPopup);
