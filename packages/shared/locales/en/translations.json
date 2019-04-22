@@ -190,7 +190,7 @@
       "two-factor-required": "Authentication code is required."
     }
   },
-  "wallet-transfer": {
+  "transfer": {
     "title": "Transfer",
     "availableWalletTo": "Available in Wallet",
     "availableWalletFrom": "Available in Wallet",

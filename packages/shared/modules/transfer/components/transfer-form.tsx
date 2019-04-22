@@ -55,7 +55,7 @@ class _TransferForm extends React.PureComponent<Props> {
       setFieldValue,
       isSubmitting
     } = this.props;
-    const { title = t("wallet-transfer.title") } = this.props;
+    const { title = t("transfer.title") } = this.props;
     const { sourceId, destinationId } = values;
     const destinationItemWithoutCurrent = service.getDestinationItems(
       destinationItems,
@@ -95,7 +95,7 @@ class _TransferForm extends React.PureComponent<Props> {
           <GVFormikField
             name="sourceId"
             component={GVTextField}
-            label={t("wallet-transfer.from")}
+            label={t("transfer.from")}
             InputComponent={Select}
             onChange={this.onChangeSourceId}
           >
@@ -110,9 +110,7 @@ class _TransferForm extends React.PureComponent<Props> {
               </option>
             ))}
           </GVFormikField>
-          <StatisticItem
-            label={t(`wallet-transfer.available${sourceType}From`)}
-          >
+          <StatisticItem label={t(`transfer.available${sourceType}From`)}>
             {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
           </StatisticItem>
         </div>
@@ -120,7 +118,7 @@ class _TransferForm extends React.PureComponent<Props> {
           <GVFormikField
             name="destinationId"
             component={GVTextField}
-            label={t("wallet-transfer.to")}
+            label={t("transfer.to")}
             InputComponent={Select}
             onChange={this.onChangeDestinationId}
           >
@@ -135,9 +133,7 @@ class _TransferForm extends React.PureComponent<Props> {
               </option>
             ))}
           </GVFormikField>
-          <StatisticItem
-            label={t(`wallet-transfer.available${destinationType}To`)}
-          >
+          <StatisticItem label={t(`transfer.available${destinationType}To`)}>
             {`${formattedAvailableDestinationItem} ${
               selectedDestinationItem.currency
             }`}
@@ -145,7 +141,7 @@ class _TransferForm extends React.PureComponent<Props> {
           <div className="dialog-field">
             <InputAmountField
               name="amount"
-              label={t("wallet-transfer.amount")}
+              label={t("transfer.amount")}
               currency={selectedSourceItem.currency}
               setMax={setMaxAmount}
               isAllow={this.isAllow}
@@ -175,7 +171,7 @@ class _TransferForm extends React.PureComponent<Props> {
               {t("buttons.confirm")}
             </GVButton>
           </div>
-          <div className="dialog__info">{t("wallet-transfer.info")}</div>
+          <div className="dialog__info">{t("transfer.info")}</div>
         </div>
       </form>
     );
@@ -221,13 +217,13 @@ const TransferForm = compose<React.FunctionComponent<OwnProps>>(
           );
           return object().shape({
             amount: number()
-              .moreThan(0, t("wallet-transfer.validation.amount-is-zero"))
+              .moreThan(0, t("transfer.validation.amount-is-zero"))
               .max(
                 +formatCurrencyValue(
                   selectedSourceItem.available,
                   selectedSourceItem.currency
                 ),
-                t("wallet-transfer.validation.amount-more-than-available")
+                t("transfer.validation.amount-more-than-available")
               )
           });
         }
