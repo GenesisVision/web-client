@@ -12,7 +12,10 @@ import ProgramTrades from "shared/components/programs/program-details/program-hi
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  SelectFilterValue
+} from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
@@ -97,7 +100,9 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
               filtering={EVENTS_FILTERING}
               fetchPortfolioEvents={fetchPortfolioEvents}
               dateRangeStartLabel={t("filters.date-range.program-start")}
-              eventTypeFilterValues={eventTypeFilterValues}
+              eventTypeFilterValues={
+                (eventTypeFilterValues as unknown) as SelectFilterValue[]
+              }
             />
           )}
           {tab === TABS.OPEN_POSITIONS && (
