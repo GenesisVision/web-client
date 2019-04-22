@@ -21,7 +21,7 @@ import TransferForm, { TransferFormValuesType } from "./transfer-form";
 class _TransferContainer extends React.Component<Props, State> {
   state = {
     errorMessage: undefined,
-    copytradingAccounts: undefined
+    copytradingAccounts: []
   };
 
   componentDidMount() {
@@ -59,13 +59,14 @@ class _TransferContainer extends React.Component<Props, State> {
       currentItemContainer
     } = this.props;
     const { copytradingAccounts, errorMessage } = this.state;
-    if (!wallets.length || !copytradingAccounts) return <DialogLoader />;
     const sourceItems =
       sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copytradingAccounts;
     const destinationItems =
       destinationType === TRANSFER_DIRECTION.WALLET
         ? wallets
         : copytradingAccounts;
+    if (!sourceItems.length || !destinationItems.length)
+      return <DialogLoader />;
     return (
       <TransferForm
         sourceType={sourceType}
