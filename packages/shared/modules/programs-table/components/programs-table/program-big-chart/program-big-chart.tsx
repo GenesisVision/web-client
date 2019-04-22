@@ -1,7 +1,8 @@
 import "./program-big-chart.scss";
 
+import { ChartSimple } from "gv-api-web";
 import { GVColors } from "gv-react-components";
-import React from "react";
+import * as React from "react";
 import {
   Area,
   AreaChart,
@@ -14,19 +15,17 @@ import { formartChartMinValue } from "shared/components/chart/chart-components/c
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
 import {
   ChartGradient,
+  getStrokeColor,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
-import { getStrokeColor } from "shared/components/chart/chart-gradient/chart-gradient";
 
 import ProgramBigChartTooltip from "./program-big-chart-tooltip";
 
-const ProgramBigChart = ({ programId, data }) => {
-  if (data.length === 0) return null;
+const _ProgramBigChart: React.FC<Props> = ({ programId, data }) => {
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
     equity: formartChartMinValue(x.value)
   }));
-
   const programChartDataValues = programChartData.map(x => x.equity);
   const off = gradientOffset(programChartDataValues);
   const areaStrokeColor = getStrokeColor(programChartDataValues);
@@ -36,9 +35,11 @@ const ProgramBigChart = ({ programId, data }) => {
       <AreaChart data={programChartData} margin={{ top: 20 }}>
         <ReferenceLine y={0} strokeDasharray="1 10" />
         {chartXAxis(data[0].date, data[data.length - 1].date)}
+        {/*
+        //@ts-ignore*/}
         <YAxis
           dataKey="equity"
-          labelFormatter={value => `${value}%`}
+          labelFormatter={(value: any) => `${value}%`}
           axisLine={false}
           width={30}
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
@@ -66,4 +67,10 @@ const ProgramBigChart = ({ programId, data }) => {
   );
 };
 
+interface Props {
+  data: ChartSimple[];
+  programId: string;
+}
+
+const ProgramBigChart = React.memo(_ProgramBigChart);
 export default ProgramBigChart;
