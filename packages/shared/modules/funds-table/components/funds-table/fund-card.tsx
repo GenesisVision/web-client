@@ -148,7 +148,9 @@ class FundCard extends React.PureComponent<
         </div>
         <div className="table-cards__row">
           <div className="table-cards__chart">
-            <ProgramSimpleChart data={fund.chart} programId={fund.id} />
+            {fund.chart && (
+              <ProgramSimpleChart data={fund.chart} programId={fund.id} />
+            )}
           </div>
           <div className="table-cards__chart-info">
             <div className="table-cards__profit">

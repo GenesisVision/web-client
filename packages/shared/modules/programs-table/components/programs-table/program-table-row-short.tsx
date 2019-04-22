@@ -159,7 +159,7 @@ const ProgramTableRowShort: React.FC<
         </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--chart">
-        <ProgramSimpleChart data={chart} programId={id} />
+        {chart && <ProgramSimpleChart data={chart} programId={id} />}
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">
