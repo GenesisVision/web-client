@@ -19,7 +19,10 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { PROFITABILITY_PREFIX } from "../profitability/profitability.helper";
-import { FilteringType } from "../table/components/filtering/filter.type";
+import {
+  FilteringType,
+  SelectFilterValue
+} from "../table/components/filtering/filter.type";
 import { GetItemsFuncType } from "../table/components/table.types";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
@@ -132,7 +135,7 @@ const PortfolioEventsTable: React.FC<
 export interface IPortfolioEventsTableProps {
   fetchPortfolioEvents: GetItemsFuncType;
   dateRangeStartLabel: string;
-  eventTypeFilterValues: PORTFOLIO_EVENTS_TYPES[];
+  eventTypeFilterValues: SelectFilterValue[];
   className?: string;
   title?: string;
   filtering?: FilteringType;
