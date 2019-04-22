@@ -27,11 +27,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { PROGRAM } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import {
-  formatCurrencyValue,
-  formatPercent,
-  formatValue
-} from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
@@ -123,7 +119,7 @@ const DashboardPrograms: React.FC<
             </div>
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--share">
-            {formatPercent(program.dashboardAssetsDetails.share)}%
+            {formatValue(program.dashboardAssetsDetails.share, 2)}%
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--currency">
             {program.currency}
