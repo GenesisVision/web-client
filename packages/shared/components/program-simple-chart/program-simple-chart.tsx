@@ -1,17 +1,18 @@
 import "./program-simple-chart.scss";
 
-import React from "react";
+import { ChartSimple } from "gv-api-web";
+import * as React from "react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
-import ProgramChartGradient, {
+import {
+  ChartGradient,
+  getStrokeColor,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
-import { getStrokeColor } from "shared/components/chart/chart-gradient/chart-gradient";
 
 const AREA_MARGIN = { left: 0, right: 0 };
 
-const ProgramSimpleChart = ({ data, programId }) => {
-  if (data.length === 0) return null;
+const _ProgramSimpleChart: React.FC<Props> = ({ data, programId }) => {
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
     equity: formartChartMinValue(x.value)
@@ -26,7 +27,7 @@ const ProgramSimpleChart = ({ data, programId }) => {
       <ResponsiveContainer>
         <AreaChart data={programChartData} margin={AREA_MARGIN}>
           <defs>
-            <ProgramChartGradient
+            <ChartGradient
               offset={off}
               name={`equitySimpleChartFill__${programId}`}
               color={areaColor}
@@ -55,4 +56,10 @@ const ProgramSimpleChart = ({ data, programId }) => {
   );
 };
 
+interface Props {
+  data: ChartSimple[];
+  programId: string;
+}
+
+const ProgramSimpleChart = React.memo(_ProgramSimpleChart);
 export default ProgramSimpleChart;
