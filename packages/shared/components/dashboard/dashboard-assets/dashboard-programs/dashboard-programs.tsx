@@ -123,7 +123,7 @@ const DashboardPrograms: React.FC<
             </div>
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--share">
-            {formatPercent(program.dashboardAssetsDetails.share)}%
+            {formatValue(program.dashboardAssetsDetails.share, 2)}%
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--currency">
             {program.currency}
