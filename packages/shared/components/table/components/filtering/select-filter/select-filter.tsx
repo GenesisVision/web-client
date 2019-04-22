@@ -4,14 +4,14 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
 import Filter from "../filter";
-import { TFilter } from "../filter.type";
+import { SelectFilterValue, TFilter } from "../filter.type";
 import SelectFilterPopover from "./select-filter-popover";
 
 interface ISelectFilterProps {
   name: string;
   label: string;
   value: any;
-  values: any[];
+  values: SelectFilterValue[];
   onChange(value: TFilter<any>): void;
 }
 
