@@ -2,7 +2,7 @@ import { ProgramRequest } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { CancelRequestType } from "shared/components/asset-status/services/asset-status.service";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
@@ -13,13 +13,12 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { EVENT_LOGO_TYPE } from "../../dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
-export interface IDashboardRequestProps {
-  role: ROLE;
-  asset: ASSET;
+export interface IDashboardRequestProps extends InjectedTranslateProps {
   request: ProgramRequest;
   cancelRequest(x: CancelRequestType): void;
   onApplyCancelRequest(): void;
-  t: TranslationFunction;
+  role?: ROLE;
+  asset?: ASSET;
 }
 
 export interface IDashboardRequestState {
@@ -47,8 +46,8 @@ class DashboardRequest extends React.PureComponent<
       request,
       cancelRequest,
       onApplyCancelRequest,
-      role,
-      asset
+      role = ROLE.INVESTOR,
+      asset = ASSET.PROGRAM
     } = this.props;
     this.setState({ disabled: true });
     const onFinally = () => {
