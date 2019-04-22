@@ -92,7 +92,6 @@ const mapStateToProps = (state: RootState): StateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
-      walletTransferRequest: transferRequest,
       fetchWallets,
       updateWalletTimestamp
     },
@@ -119,7 +118,6 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    walletTransferRequest(props: TransferFormValuesType): Promise<any>;
     fetchWallets(): void;
     updateWalletTimestamp(): void;
   };
