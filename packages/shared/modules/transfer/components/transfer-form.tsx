@@ -42,6 +42,8 @@ class _TransferForm extends React.PureComponent<Props> {
 
   render() {
     const {
+      sourceType,
+      destinationType,
       sourceItems,
       destinationItems,
       t,
@@ -53,6 +55,7 @@ class _TransferForm extends React.PureComponent<Props> {
       setFieldValue,
       isSubmitting
     } = this.props;
+    const { title = t("wallet-transfer.title") } = this.props;
     const { sourceId, destinationId } = values;
     const destinationItemWithoutCurrent = service.getDestinationItems(
       destinationItems,
@@ -87,7 +90,7 @@ class _TransferForm extends React.PureComponent<Props> {
       >
         <div className="dialog__top">
           <div className="dialog__header">
-            <h2>{t("wallet-transfer.title")}</h2>
+            <h2>{title}</h2>
           </div>
           <GVFormikField
             name="sourceId"
@@ -107,7 +110,9 @@ class _TransferForm extends React.PureComponent<Props> {
               </option>
             ))}
           </GVFormikField>
-          <StatisticItem label={t("wallet-transfer.availableFrom")}>
+          <StatisticItem
+            label={t(`wallet-transfer.available${sourceType}From`)}
+          >
             {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
           </StatisticItem>
         </div>
@@ -130,7 +135,9 @@ class _TransferForm extends React.PureComponent<Props> {
               </option>
             ))}
           </GVFormikField>
-          <StatisticItem label={t("wallet-transfer.availableTo")}>
+          <StatisticItem
+            label={t(`wallet-transfer.available${destinationType}To`)}
+          >
             {`${formattedAvailableDestinationItem} ${
               selectedDestinationItem.currency
             }`}
@@ -244,9 +251,11 @@ interface OwnProps {
     values: TransferFormValuesType,
     setSubmitting: SetSubmittingType
   ): void;
-  errorMessage?: string;
   currentItem: ItemType;
+  errorMessage?: string;
+  title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
+  sourceType?: TRANSFER_DIRECTION;
   destinationType?: TRANSFER_DIRECTION;
   sourceItems: ItemsType;
   destinationItems: ItemsType;

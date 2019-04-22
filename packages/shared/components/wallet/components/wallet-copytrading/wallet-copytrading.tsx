@@ -140,12 +140,14 @@ class WalletCopytrading extends React.PureComponent<Props, State> {
         {currentAccount && (
           <>
             <TransferPopup
+              title={t("wallet-withdraw.title")}
               sourceType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
               currentItem={currentAccount}
               open={isOpenWithdrawPopup}
               onClose={this.handleCloseWithdrawPopup}
             />
             <TransferPopup
+              title={t("wallet-deposit.title")}
               currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
               destinationType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
               currentItem={currentAccount}

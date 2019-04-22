@@ -47,6 +47,7 @@ class _TransferContainer extends React.Component<Props, State> {
 
   render() {
     const {
+      title,
       currentItem,
       wallets,
       sourceType,
@@ -63,6 +64,9 @@ class _TransferContainer extends React.Component<Props, State> {
         : copytradingAccounts;
     return (
       <TransferForm
+        sourceType={sourceType}
+        destinationType={destinationType}
+        title={title}
         currentItemContainer={currentItemContainer}
         sourceItems={sourceItems}
         destinationItems={destinationItems}
@@ -119,6 +123,7 @@ interface DispatchProps {
 export interface ITransferContainerOwnProps {
   currentItem: ItemType;
   onClose(): void;
+  title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
   sourceType?: TRANSFER_DIRECTION;
   destinationType?: TRANSFER_DIRECTION;
