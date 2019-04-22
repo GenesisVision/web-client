@@ -1,22 +1,29 @@
 import "./dashboard-in-requests.scss";
 
-import React, { Fragment, PureComponent } from "react";
-import { translate } from "react-i18next";
+import { ProgramRequests } from "gv-api-web";
+import { InvestorRootState } from "investor-web-portal/src/reducers";
+import { ManagerRootState } from "manager-web-portal/src/reducers";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
+import { CancelRequestType } from "shared/components/asset-status/services/asset-status.service";
 import { DashboardChartRequestLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import DashboardRequest from "./dashboard-request";
 
-class DashboardInRequestsContainer extends PureComponent {
+class DashboardInRequestsContainer extends React.PureComponent<Props, State> {
   state = {
-    anchor: null
+    anchor: undefined
   };
 
   componentDidMount() {
@@ -24,8 +31,9 @@ class DashboardInRequestsContainer extends PureComponent {
     service.getInRequests();
   }
 
-  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
-  handleCloseDropdown = () => this.setState({ anchor: null });
+  handleOpenDropdown = (event: React.MouseEvent<HTMLElement, MouseEvent>) =>
+    this.setState({ anchor: event.currentTarget });
+  handleCloseDropdown = () => this.setState({ anchor: undefined });
 
   renderActionsIcon = () => {
     if (this.props.inRequests.requests.length === 0) return null;
@@ -43,7 +51,7 @@ class DashboardInRequestsContainer extends PureComponent {
     const { t, inRequests, isPending, service } = this.props;
     if (!inRequests || isPending) return <DashboardChartRequestLoader />;
     return (
-      <Fragment>
+      <>
         <StatisticItem
           label={t(
             `${
@@ -62,8 +70,8 @@ class DashboardInRequestsContainer extends PureComponent {
         </StatisticItem>
 
         <Popover
-          horizontal="right"
-          vertical="bottom"
+          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
           anchorEl={this.state.anchor}
           noPadding
           onClose={this.handleCloseDropdown}
@@ -81,7 +89,7 @@ class DashboardInRequestsContainer extends PureComponent {
             </div>
           </GVScroll>
         </Popover>
-      </Fragment>
+      </>
     );
   };
 
@@ -90,16 +98,48 @@ class DashboardInRequestsContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (
+  state: InvestorRootState | ManagerRootState
+): StateProps => {
   const { data, isPending } = state.dashboard.inRequestsData;
   return { inRequests: data, isPending };
 };
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  props: Props
+): DispatchProps => {
   const { getInRequests, cancelRequest } = props;
   return {
     service: bindActionCreators({ getInRequests, cancelRequest }, dispatch)
   };
+};
+
+interface Props
+  extends OwnProps,
+    StateProps,
+    DispatchProps,
+    InjectedTranslateProps {}
+
+interface OwnProps {
+  getInRequests: () => void;
+  cancelRequest: (x: CancelRequestType) => void;
+}
+
+interface StateProps {
+  inRequests: ProgramRequests;
+  isPending: boolean;
+}
+
+interface DispatchProps {
+  service: {
+    getInRequests: () => void;
+    cancelRequest: (x: CancelRequestType) => void;
+  };
+}
+
+type State = {
+  anchor?: HTMLElement;
 };
 
 export default compose(
