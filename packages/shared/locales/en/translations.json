@@ -192,8 +192,10 @@
   },
   "wallet-transfer": {
     "title": "Transfer",
-    "availableTo": "Available in Wallet",
-    "availableFrom": "Available in Wallet",
+    "availableWalletTo": "Available in Wallet",
+    "availableWalletFrom": "Available in Wallet",
+    "availableCopyTradingAccountTo": "Available in Account",
+    "availableCopyTradingAccountFrom": "Available in Account",
     "to": "To",
     "from": "From",
     "amount": "Enter correct amount",
