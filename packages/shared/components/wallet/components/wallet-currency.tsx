@@ -6,9 +6,9 @@ import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
+import TransferPopup from "shared/modules/transfer/transfer-popup";
 import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import RootState from "shared/reducers/root-reducer";
 
@@ -108,7 +108,7 @@ class WalletCurrency extends React.Component<
           open={this.state.isOpenWithdrawPopup}
           onClose={this.handleCloseWithdrawPopup}
         />
-        <WalletTransferPopup
+        <TransferPopup
           currentItem={info}
           open={this.state.isOpenTransferPopup}
           onClose={this.handleCloseTransferPopup}

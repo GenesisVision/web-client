@@ -10,32 +10,33 @@ import {
 } from "shared/components/wallet/services/wallet.services";
 import RootState from "shared/reducers/root-reducer";
 
-import { walletTransferRequest } from "../services/wallet-transfer.services";
-import { TRANSFER_DIRECTION } from "../wallet-transfer-popup";
-import WalletTransferForm, {
-  TransferFormValuesType
-} from "./wallet-transfer-form";
+import { transferRequest } from "../services/transfer.services";
+import {
+  ItemType,
+  TRANSFER_CONTAINER,
+  TRANSFER_DIRECTION
+} from "../transfer.types";
+import TransferForm, { TransferFormValuesType } from "./transfer-form";
 
-class WalletTransferContainer extends React.Component<Props, State> {
+class _TransferContainer extends React.Component<Props, State> {
   state = {
     errorMessage: undefined,
-    copytradingAccounts: undefined
+    copytradingAccounts: []
   };
 
   componentDidMount() {
-    fetchCopytradingAccounts().then(res => {
-      this.setState({ copytradingAccounts: res.items });
-    });
+    if (
+      this.props.destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
+      this.props.sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+    )
+      fetchCopytradingAccounts().then(res => {
+        this.setState({ copytradingAccounts: res.items });
+      });
   }
 
   handleSubmit = (values: TransferFormValuesType) => {
-    const {
-      sourceType = TRANSFER_DIRECTION.WALLET,
-      destinationType = TRANSFER_DIRECTION.WALLET,
-      service,
-      onClose
-    } = this.props;
-    walletTransferRequest({ ...values, sourceType, destinationType })
+    const { sourceType, destinationType, service, onClose } = this.props;
+    transferRequest({ ...values, sourceType, destinationType })
       .then(() => {
         onClose();
         service.fetchWallets();
@@ -50,24 +51,30 @@ class WalletTransferContainer extends React.Component<Props, State> {
 
   render() {
     const {
+      title,
       currentItem,
       wallets,
-      sourceType = TRANSFER_DIRECTION.WALLET,
-      destinationType = TRANSFER_DIRECTION.WALLET
+      sourceType,
+      destinationType,
+      currentItemContainer
     } = this.props;
     const { copytradingAccounts, errorMessage } = this.state;
-    if (!wallets.length || !copytradingAccounts) return <DialogLoader />;
-    const sourceItems: Array<CopyTradingAccountInfo | WalletData> =
+    const sourceItems =
       sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copytradingAccounts;
-    const destinationItems: Array<CopyTradingAccountInfo | WalletData> =
+    const destinationItems =
       destinationType === TRANSFER_DIRECTION.WALLET
         ? wallets
         : copytradingAccounts;
+    if (!sourceItems.length || !destinationItems.length)
+      return <DialogLoader />;
     return (
-      <WalletTransferForm
+      <TransferForm
+        sourceType={sourceType}
+        destinationType={destinationType}
+        title={title}
+        currentItemContainer={currentItemContainer}
         sourceItems={sourceItems}
         destinationItems={destinationItems}
-        destinationType={destinationType}
         currentItem={currentItem}
         errorMessage={errorMessage}
         onSubmit={this.handleSubmit}
@@ -85,7 +92,6 @@ const mapStateToProps = (state: RootState): StateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
-      walletTransferRequest,
       fetchWallets,
       updateWalletTimestamp
     },
@@ -93,20 +99,18 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-export default connect<
+const TransferContainer = connect<
   StateProps,
   DispatchProps,
-  IWalletTransferContainerOwnProps,
+  ITransferContainerOwnProps,
   RootState
 >(
   mapStateToProps,
   mapDispatchToProps
-)(WalletTransferContainer);
+)(_TransferContainer);
+export default TransferContainer;
 
-interface Props
-  extends StateProps,
-    DispatchProps,
-    IWalletTransferContainerOwnProps {}
+interface Props extends StateProps, DispatchProps, ITransferContainerOwnProps {}
 
 interface StateProps {
   wallets: WalletData[];
@@ -114,15 +118,16 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    walletTransferRequest(props: TransferFormValuesType): Promise<any>;
     fetchWallets(): void;
     updateWalletTimestamp(): void;
   };
 }
 
-export interface IWalletTransferContainerOwnProps {
-  currentItem: WalletData;
+export interface ITransferContainerOwnProps {
+  currentItem: ItemType;
   onClose(): void;
+  title?: string;
+  currentItemContainer?: TRANSFER_CONTAINER;
   sourceType?: TRANSFER_DIRECTION;
   destinationType?: TRANSFER_DIRECTION;
 }

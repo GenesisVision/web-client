@@ -11,9 +11,9 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
+import TransferPopup from "shared/modules/transfer/transfer-popup";
 import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -159,7 +159,7 @@ class WalletList extends React.Component<Props, State> {
               open={isOpenWithdrawPopup}
               onClose={this.handleCloseWithdrawPopup}
             />
-            <WalletTransferPopup
+            <TransferPopup
               currentItem={currentWallet}
               open={isOpenTransferPopup}
               onClose={this.handleCloseTransferPopup}
