@@ -12,7 +12,8 @@ import {
 } from "recharts";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
-import ProgramChartGradient, {
+import {
+  ChartGradient,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
 import { getStrokeColor } from "shared/components/chart/chart-gradient/chart-gradient";
@@ -44,7 +45,7 @@ const ProgramBigChart = ({ programId, data }) => {
         />
         <Tooltip content={ProgramBigChartTooltip} />
         <defs>
-          <ProgramChartGradient
+          <ChartGradient
             offset={off}
             name={`equityChartFill__${programId}`}
             color={areaStrokeColor}
