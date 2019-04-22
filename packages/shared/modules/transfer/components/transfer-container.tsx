@@ -10,7 +10,7 @@ import {
 } from "shared/components/wallet/services/wallet.services";
 import RootState from "shared/reducers/root-reducer";
 
-import { walletTransferRequest } from "../services/transfer.services";
+import { transferRequest } from "../services/transfer.services";
 import {
   ItemType,
   TRANSFER_CONTAINER,
@@ -36,7 +36,7 @@ class _TransferContainer extends React.Component<Props, State> {
 
   handleSubmit = (values: TransferFormValuesType) => {
     const { sourceType, destinationType, service, onClose } = this.props;
-    walletTransferRequest({ ...values, sourceType, destinationType })
+    transferRequest({ ...values, sourceType, destinationType })
       .then(() => {
         onClose();
         service.fetchWallets();
@@ -92,7 +92,7 @@ const mapStateToProps = (state: RootState): StateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
-      walletTransferRequest,
+      walletTransferRequest: transferRequest,
       fetchWallets,
       updateWalletTimestamp
     },

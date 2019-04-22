@@ -6,9 +6,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { TransferFormValuesType } from "../components/transfer-form";
 import { ItemType, ItemsType } from "../transfer.types";
 
-export const walletTransferRequest = (
-  data: TransferFormValuesType
-): Promise<any> => {
+export const transferRequest = (data: TransferFormValuesType): Promise<any> => {
   const {
     amount,
     sourceId,
