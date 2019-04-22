@@ -19,25 +19,23 @@ const FundWithdrawResult: FunctionComponent<
   const withdrawResult = amountToWithdraw - feeInCurrency;
   return (
     <ul className="dialog-list">
-      {exitFee !== 0 && (
-        <li className="dialog-list__item">
-          <span className="dialog-list__title">
-            {t("withdraw-fund.exit-fee")}
-          </span>
-          <span className="dialog-list__value">
-            {exitFee} %
-            <NumberFormat
-              value={formatCurrencyValue(
-                calculatePercentage(amountToWithdraw, exitFee),
-                currency
-              )}
-              prefix=" &asymp; "
-              suffix={` ${currency}`}
-              displayType="text"
-            />
-          </span>
-        </li>
-      )}
+      <li className="dialog-list__item">
+        <span className="dialog-list__title">
+          {t("withdraw-fund.exit-fee")}
+        </span>
+        <span className="dialog-list__value">
+          {exitFee} %
+          <NumberFormat
+            value={formatCurrencyValue(
+              calculatePercentage(amountToWithdraw, exitFee),
+              currency
+            )}
+            prefix=" &asymp; "
+            suffix={` ${currency}`}
+            displayType="text"
+          />
+        </span>
+      </li>
       <li className="dialog-list__item">
         <span className="dialog-list__title">
           {t("withdraw-fund.withdraw-amount")}
