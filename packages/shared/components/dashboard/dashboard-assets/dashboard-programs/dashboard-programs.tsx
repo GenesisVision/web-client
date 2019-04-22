@@ -27,11 +27,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { PROGRAM } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import {
-  formatCurrencyValue,
-  formatPercent,
-  formatValue
-} from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
