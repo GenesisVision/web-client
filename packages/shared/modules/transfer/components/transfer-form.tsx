@@ -188,8 +188,12 @@ const TransferForm = compose<React.FunctionComponent<OwnProps>>(
       } = props;
       let sourceId, destinationId;
       if (currentItemContainer === TRANSFER_CONTAINER.DESTINATION) {
-        sourceId = sourceItems[0].id;
         destinationId = currentItem.id;
+        const sourceItemWithoutCurrent = service.getDestinationItems(
+          sourceItems,
+          destinationId
+        );
+        sourceId = sourceItemWithoutCurrent[0].id;
       } else {
         sourceId = currentItem.id;
         const destinationItemWithoutCurrent = service.getDestinationItems(
