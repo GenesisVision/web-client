@@ -25,9 +25,13 @@ class _TransferContainer extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    fetchCopytradingAccounts().then(res => {
-      this.setState({ copytradingAccounts: res.items });
-    });
+    if (
+      this.props.destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
+      this.props.sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+    )
+      fetchCopytradingAccounts().then(res => {
+        this.setState({ copytradingAccounts: res.items });
+      });
   }
 
   handleSubmit = (values: TransferFormValuesType) => {
