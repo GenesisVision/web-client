@@ -187,7 +187,7 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
 };
 
 export const fetchPortfolioEvents = (
-  filters: FilteringType
+  filters?: FilteringType
 ): CancelablePromise<
   TableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>
 > => {
@@ -195,7 +195,7 @@ export const fetchPortfolioEvents = (
   const role = process.env.REACT_APP_PLATFORM as ROLE;
   let request: (
     authorization: string,
-    opts: Object
+    opts?: Object
   ) => CancelablePromise<DashboardPortfolioEvents | ManagerPortfolioEvents>;
   switch (role) {
     case ROLE.INVESTOR:
