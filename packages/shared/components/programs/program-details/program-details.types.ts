@@ -35,9 +35,9 @@ export interface IDescriptionSection {
 }
 
 export type HistoryCountsType = {
-  tradesCount: number;
   eventsCount: number;
-  openPositionsCount: number;
+  tradesCount?: number;
+  openPositionsCount?: number;
 };
 
 export interface IHistorySection {
