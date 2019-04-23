@@ -1,4 +1,5 @@
 import { EventLogoType } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
+import { ROLE_ENV } from "shared/constants/constants";
 
 export const profitabilityTypes = [EventLogoType.programPeriodEnds];
 
@@ -11,12 +12,8 @@ export const valueDescriptionLocalizationConstant = event => {
     type === EventLogoType.assetStarted ||
     type === EventLogoType.programPeriodStars
   )
-    return `${
-      process.env.REACT_APP_PLATFORM
-    }.dashboard-page.portfolio-events.balance`;
+    return `${ROLE_ENV}.dashboard-page.portfolio-events.balance`;
   if (type === EventLogoType.programPeriodEnds)
-    return `${
-      process.env.REACT_APP_PLATFORM
-    }.dashboard-page.portfolio-events.profit`;
+    return `${ROLE_ENV}.dashboard-page.portfolio-events.profit`;
   return null;
 };

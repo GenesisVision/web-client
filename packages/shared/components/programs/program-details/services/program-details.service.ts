@@ -10,11 +10,12 @@ import {
 import { Dispatch } from "redux";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
-  TableItems,
-  mapToTableItems
+  mapToTableItems,
+  TableItems
 } from "shared/components/table/helpers/mapper";
-import { ROLE } from "shared/constants/constants";
+import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import RootState from "shared/reducers/root-reducer";
 import investorApi from "shared/services/api-client/investor-api";
@@ -186,18 +187,17 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
   }));
 };
 
-export const fetchPortfolioEvents = (
-  filters: FilteringType
+export const fetchPortfolioEvents: GetItemsFuncType = (
+  filters?
 ): CancelablePromise<
   TableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>
 > => {
   const authorization = authService.getAuthArg();
-  const role = process.env.REACT_APP_PLATFORM as ROLE;
   let request: (
     authorization: string,
-    opts: Object
+    opts?: Object
   ) => CancelablePromise<DashboardPortfolioEvents | ManagerPortfolioEvents>;
-  switch (role) {
+  switch (ROLE_ENV) {
     case ROLE.INVESTOR:
       request = investorApi.v10InvestorPortfolioEventsGet;
       break;

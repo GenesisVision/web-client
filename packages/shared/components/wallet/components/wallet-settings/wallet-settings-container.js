@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import {
@@ -54,7 +55,6 @@ class WalletSettingsContainer extends Component {
   render() {
     const { t } = this.props;
     const { isPayFeesWithGvt, isPending } = this.state;
-    const role = process.env.REACT_APP_PLATFORM;
 
     return (
       <WalletSettings
@@ -62,7 +62,7 @@ class WalletSettingsContainer extends Component {
         label={t("wallet-page.settings.label")}
         isPayFeesWithGvt={isPayFeesWithGvt}
         isPending={isPending}
-        role={role}
+        role={ROLE_ENV}
         onPayGVTFee={this.handleOn}
         offPayGVTFee={this.handleOff}
       />

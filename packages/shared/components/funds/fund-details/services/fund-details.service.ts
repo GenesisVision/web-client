@@ -8,6 +8,7 @@ import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
+import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import RootState from "shared/reducers/root-reducer";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
@@ -80,4 +81,17 @@ export const closeFund = (id: string, opts: any): Promise<void> => {
   const authorization = authService.getAuthArg();
 
   return managerApi.v10ManagerFundsByIdClosePost(id, authorization, opts);
+};
+
+export const fetchEventsCounts = (
+  id: string
+): Promise<{ eventsCount: number }> => {
+  const isAuthenticated = authService.isAuthenticated();
+  const filtering = { take: 0 };
+  const eventsCountPromise = isAuthenticated
+    ? fetchPortfolioEvents({ ...filtering, assetId: id })
+    : Promise.resolve({ total: 0 });
+  return eventsCountPromise.then(eventsData => ({
+    eventsCount: eventsData.total
+  }));
 };
