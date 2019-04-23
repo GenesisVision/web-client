@@ -1276,6 +1276,7 @@
         "success-cancel-request": "Request canceled successfully"
       },
       "programs-header": {
+        "login": "Login",
         "title": "Name",
         "share": "Share",
         "currency": "Curr.",

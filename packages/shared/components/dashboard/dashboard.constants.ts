@@ -5,33 +5,6 @@ import {
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 
-export const DASHBOARD_PROGRAMS_COLUMNS: SortingColumn[] = [
-  {
-    name: "title"
-  },
-  {
-    name: "share"
-  },
-  {
-    name: "currency"
-  },
-  {
-    name: "time-left"
-  },
-  {
-    name: "value"
-  },
-  {
-    name: "profit"
-  },
-  {
-    name: "chart"
-  },
-  {
-    name: "status"
-  }
-];
-
 export const DASHBOARD_PROGRAMS_SORTING = "ByProfitDesc";
 
 export const DASHBOARD_PROGRAMS_FILTERS = [
