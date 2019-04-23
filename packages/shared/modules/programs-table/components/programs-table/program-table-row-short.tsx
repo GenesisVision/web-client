@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
+import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -19,18 +20,7 @@ import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-interface IProgramTableRowShortProps {
-  title: string;
-  showRating?: boolean;
-  program: ProgramDetails;
-  isAuthenticated?: boolean;
-  toggleFavorite?(programId: string, isFavorite: boolean): void;
-  onExpandClick(): void;
-}
-
-const ProgramTableRowShort: React.FC<
-  IProgramTableRowShortProps & InjectedTranslateProps
-> = ({
+const ProgramTableRowShort: React.FC<Props & InjectedTranslateProps> = ({
   t,
   title,
   showRating,
@@ -135,8 +125,8 @@ const ProgramTableRowShort: React.FC<
           )) ||
             t("program-period.program-closed"))}
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--trades">
-        {statistic.tradesCount}
+      <TableCell className="programs-table__cell programs-table__cell--age">
+        {moment(program.creationDate).format("ll")}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat
@@ -175,3 +165,12 @@ const ProgramTableRowShort: React.FC<
 };
 
 export default translate()(ProgramTableRowShort);
+
+interface Props {
+  title: string;
+  showRating?: boolean;
+  program: ProgramDetails;
+  isAuthenticated?: boolean;
+  toggleFavorite?(programId: string, isFavorite: boolean): void;
+  onExpandClick(): void;
+}
