@@ -5,7 +5,7 @@ import {
 } from "gv-api-web";
 import React from "react";
 import { IDialogProps } from "shared/components/dialog/dialog";
-import { PORTFOLIO_EVENTS_TYPES } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
+import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { TableItems } from "shared/components/table/helpers/mapper";
 
 export interface IProgramControlsProps {
@@ -45,7 +45,7 @@ export interface IHistorySection {
     filters: any
   ): Promise<TableItems<DashboardPortfolioEvent | ManagerPortfolioEvent>>;
   fetchHistoryCounts(id: string): Promise<HistoryCountsType>;
-  eventTypeFilterValues: PORTFOLIO_EVENTS_TYPES[];
+  eventTypeFilterValues: SelectFilterValue[];
 }
 
 export interface IProgramReinvestingContainerOwnProps {
