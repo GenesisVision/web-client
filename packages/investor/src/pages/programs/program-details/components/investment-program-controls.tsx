@@ -41,17 +41,36 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
   render() {
     const { t, programDescription } = this.props;
     const { isOpenInvestmentPopup } = this.state;
-
+    console.info(programDescription);
     return (
       <>
         <InvestmentProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
-          <GVButton
-            className="program-details-description__invest-btn"
-            onClick={this.openInvestmentPopup}
-          >
-            {t("program-details-page.description.invest")}
-          </GVButton>
+          {programDescription.availableInvestmentBase === 0 ? (
+            <>
+              <GVButton
+                variant="text"
+                type="button"
+                color="secondary"
+                className="wallet-settings__question"
+              >
+                ?
+              </GVButton>
+              <GVButton
+                className="program-details-description__invest-btn"
+                onClick={this.openInvestmentPopup}
+              >
+                {t("buttons.notify")}
+              </GVButton>
+            </>
+          ) : (
+            <GVButton
+              className="program-details-description__invest-btn"
+              onClick={this.openInvestmentPopup}
+            >
+              {t("program-details-page.description.invest")}
+            </GVButton>
+          )}
         </div>
         <ProgramDetailContext.Consumer>
           {({ updateDetails }: IProgramDetailContext) => (

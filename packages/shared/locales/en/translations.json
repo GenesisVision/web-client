@@ -15,6 +15,7 @@
     "rejected": "Rejected"
   },
   "buttons": {
+    "notify": "Notify",
     "generate": "Generate",
     "apply": "Apply",
     "cancel": "Cancel",
