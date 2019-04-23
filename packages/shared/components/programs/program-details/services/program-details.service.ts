@@ -10,6 +10,7 @@ import {
 import { Dispatch } from "redux";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
   TableItems,
   mapToTableItems
@@ -186,8 +187,8 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
   }));
 };
 
-export const fetchPortfolioEvents = (
-  filters?: FilteringType
+export const fetchPortfolioEvents: GetItemsFuncType = (
+  filters?
 ): CancelablePromise<
   TableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>
 > => {
