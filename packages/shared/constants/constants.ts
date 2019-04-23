@@ -38,4 +38,4 @@ export enum ASSET {
   FUND = "FUND"
 }
 
-export const ROLE_ENV = process.env.REACT_APP_PLATFORM;
+export const ROLE_ENV = process.env.REACT_APP_PLATFORM as ROLE;
