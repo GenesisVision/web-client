@@ -1,10 +1,10 @@
 import { FundDetails, ProgramDetails } from "gv-api-web";
 import { Action } from "redux";
-import { IDataModel } from "shared/constants/constants";
 
 import { FILTER_TYPE } from "../helpers/filtering.helpers";
+import { IDataModel } from "../helpers/mapper";
 import { IPaging } from "../helpers/paging.helpers";
-import { IFilter, RequestFiltersType } from "./filtering/filter.type";
+import { IFilter } from "./filtering/filter.type";
 
 export type Column = {
   name: string;
@@ -15,15 +15,17 @@ export interface IUpdateFilterFunc {
 }
 export type UpdateItemsFuncType = () => void;
 
-export type UpdateRowFuncType = (row: any) => void;
+export type UpdateRowFuncType<T> = (row: T) => void;
 
-export type GetItemsFuncType<T> = (filters?: T) => Promise<IDataModel>;
+export type GetItemsFuncType<TFilters, TItem> = (
+  filters?: TFilters
+) => Promise<IDataModel<TItem>>;
 
 export type GetItemsFuncActionType = (filters: any) => Action;
 
-export type TableToggleFavoriteType = (
+export type TableToggleFavoriteType<T> = (
   asset: ProgramDetails | FundDetails,
-  updateRow: UpdateRowFuncType
+  updateRow: UpdateRowFuncType<T>
 ) => (assetId: string, isFavorite: boolean) => void;
 
 export interface IComposeDefaultFilter {
@@ -41,9 +43,9 @@ export type FiltersType = {
   sorting?: string;
 };
 
-export type RenderBodyItemFuncType = (
-  item: any,
-  updateRow?: UpdateRowFuncType,
+export type RenderBodyItemFuncType<T> = (
+  item: T,
+  updateRow?: UpdateRowFuncType<T>,
   updateItems?: UpdateItemsFuncType
 ) => JSX.Element;
 

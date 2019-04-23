@@ -1,9 +1,13 @@
-import { IDataModel } from "shared/constants/constants";
+import { FundDetails, ProgramDetails } from "gv-api-web";
 import fundsApi from "shared/services/api-client/funds-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
-export const fetchManagerPrograms = (filter: any): Promise<IDataModel> => {
+import { IDataModel } from "../../table/helpers/mapper";
+
+export const fetchManagerPrograms = (
+  filter: any
+): Promise<IDataModel<ProgramDetails>> => {
   return programsApi
     .v10ProgramsGet({
       ...filter,
@@ -16,7 +20,9 @@ export const fetchManagerPrograms = (filter: any): Promise<IDataModel> => {
     }));
 };
 
-export const fetchManagerFunds = (filter: any): Promise<IDataModel> => {
+export const fetchManagerFunds = (
+  filter: any
+): Promise<IDataModel<FundDetails>> => {
   return fundsApi
     .v10FundsGet({
       ...filter,

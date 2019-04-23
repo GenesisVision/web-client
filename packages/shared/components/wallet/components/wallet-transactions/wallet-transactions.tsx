@@ -41,14 +41,14 @@ const DEFAULT_FILTERS: any = [
 ];
 
 class _WalletTransactions extends React.PureComponent<Props> {
-  ref: RefObject<TableModule<any, any>> = React.createRef();
+  ref: RefObject<TableModule<any, any, any>> = React.createRef();
 
   componentDidUpdate(prevProps: Props) {
     if (this.props.timestamp !== prevProps.timestamp)
       this.ref.current!.updateItems();
   }
 
-  fetchMultiTransactions: GetItemsFuncType<any> = filters =>
+  fetchMultiTransactions: GetItemsFuncType<any, any> = filters =>
     fetchMultiTransactions(this.props.currency, filters);
 
   render() {

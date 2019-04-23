@@ -2,23 +2,23 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
-import { IDataModel } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 
+import { IDataModel } from "../helpers/mapper";
 import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
 import { IFilter, IFiltering } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
 import { GetItemsFuncActionType } from "./table.types";
 
-interface ITableContainerProps extends ITableProps<any> {
+interface ITableContainerProps extends ITableProps<any, any> {
   getItems: GetItemsFuncActionType;
   dataSelector: (opts?: any) => { [keys: string]: any };
   isFetchOnMount: boolean;
 }
 
 interface ITableContainerStateProps {
-  data: IDataModel;
+  data: IDataModel<any>;
   isPending: boolean;
   sorting: string;
   paging: IPaging;
@@ -45,6 +45,9 @@ class TableContainer extends React.PureComponent<
     ITableContainerDispatchProps &
     ITableContainerStateProps
 > {
+  static defaultProps = {
+    isPending: false
+  };
   componentDidMount() {
     const { isFetchOnMount } = this.props;
     if (isFetchOnMount) this.updateItems();

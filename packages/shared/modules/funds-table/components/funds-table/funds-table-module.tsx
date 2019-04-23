@@ -8,9 +8,9 @@ import FundsTableRow from "./fund-table-row";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
-interface Props extends ITableModuleProps<any, any> {
+interface Props extends ITableModuleProps<any, any, any> {
   isAuthenticated: boolean;
-  toggleFavorite: TableToggleFavoriteType;
+  toggleFavorite: TableToggleFavoriteType<any>;
 }
 
 class FundsTableModule extends React.PureComponent<Props> {

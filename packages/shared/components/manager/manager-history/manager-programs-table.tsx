@@ -26,12 +26,12 @@ interface Props {
 }
 
 class ManagerPrograms extends React.Component<Props & InjectedTranslateProps> {
-  fetchManagerPrograms: GetItemsFuncType<any> = filters => {
+  fetchManagerPrograms: GetItemsFuncType<any, any> = filters => {
     const { managerId } = this.props;
     return fetchManagerPrograms({ ...filters, managerId });
   };
 
-  toggleFavorite: TableToggleFavoriteType = (program, updateRow) => () => {
+  toggleFavorite: TableToggleFavoriteType<any> = (program, updateRow) => () => {
     const isFavorite = program.personalDetails.isFavorite;
     const newProgram = {
       ...program,

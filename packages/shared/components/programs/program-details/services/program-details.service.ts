@@ -5,12 +5,13 @@ import {
   ManagerPortfolioEvent,
   ManagerPortfolioEvents,
   OrderModel,
-  ProgramsLevelsInfo
+  ProgramsLevelsInfo,
+  TradesViewModel
 } from "gv-api-web";
 import { Dispatch } from "redux";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import {
-  TableItems,
+  IDataModel,
   mapToTableItems
 } from "shared/components/table/helpers/mapper";
 import { ROLE } from "shared/constants/constants";
@@ -139,21 +140,21 @@ export const closePeriod = (
 export const fetchProgramTrades = (
   id: string,
   filters: PROGRAM_TRADES_REQUEST_FILTERS
-): Promise<TableItems<OrderModel>> => {
+): Promise<IDataModel<OrderModel>> => {
   return programsApi
     .v10ProgramsByIdTradesGet(id, {
       ...filters
     })
-    .then(mapToTableItems<OrderModel>("trades"));
+    .then(mapToTableItems<TradesViewModel, OrderModel>("trades"));
 };
 
 export const fetchOpenPositions = (
   id: string,
   filters: any
-): Promise<TableItems<OrderModel>> => {
+): Promise<IDataModel<OrderModel>> => {
   return programsApi
     .v10ProgramsByIdTradesOpenGet(id, { sorting: filters.sorting })
-    .then(mapToTableItems<OrderModel>("trades"));
+    .then(mapToTableItems<TradesViewModel, OrderModel>("trades"));
 };
 
 export const fetchInvestmentsLevels = (
@@ -189,7 +190,7 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
 export const fetchPortfolioEvents = (
   filters: any
 ): CancelablePromise<
-  TableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>
+  IDataModel<ManagerPortfolioEvent | DashboardPortfolioEvent>
 > => {
   const authorization = authService.getAuthArg();
   const role = process.env.REACT_APP_PLATFORM as ROLE;
@@ -207,6 +208,9 @@ export const fetchPortfolioEvents = (
       break;
   }
   return request(authorization, filters).then(
-    mapToTableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>("events")
+    mapToTableItems<
+      ManagerPortfolioEvents | DashboardPortfolioEvents,
+      ManagerPortfolioEvent | DashboardPortfolioEvent
+    >("events")
   );
 };

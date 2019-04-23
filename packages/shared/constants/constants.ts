@@ -19,10 +19,6 @@ export enum SORTING {
   DESC = "Desc",
   ASC = "Asc"
 }
-export interface IDataModel {
-  items: any;
-  total: number;
-}
 
 export enum FOLLOW_TYPE {
   CREATE = "CREATE",

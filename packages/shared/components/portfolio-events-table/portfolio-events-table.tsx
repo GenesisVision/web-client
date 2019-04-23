@@ -1,6 +1,7 @@
 import "./portfolio-events-table.scss";
 import "./portfolio-events.scss";
 
+import { DashboardPortfolioEvent, ManagerPortfolioEvent } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -20,6 +21,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { PROFITABILITY_PREFIX } from "../profitability/profitability.helper";
 import { IFiltering } from "../table/components/filtering/filter.type";
+import { IDataModel } from "../table/helpers/mapper";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
@@ -99,7 +101,7 @@ const PortfolioEventsTable: React.FC<
               {event.description}
             </TableCell>
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
-              {isUseProfitability(event) ? (
+              {isUseProfitability(event as any) ? (
                 <Profitability
                   value={event.value}
                   prefix={PROFITABILITY_PREFIX.SIGN}
@@ -129,7 +131,9 @@ const PortfolioEventsTable: React.FC<
 };
 
 export interface IPortfolioEventsTableProps {
-  fetchPortfolioEvents: any;
+  fetchPortfolioEvents(
+    t: any
+  ): Promise<IDataModel<ManagerPortfolioEvent | DashboardPortfolioEvent>>;
   dateRangeStartLabel: string;
   eventTypeFilterValues: PORTFOLIO_EVENTS_TYPES[];
   className?: string;

@@ -19,7 +19,7 @@ import {
 class _ProgramsFacetTable extends React.PureComponent<
   IProgramsFacetTableProps & InjectedTranslateProps
 > {
-  toggleFavorite: TableToggleFavoriteType = (program, updateRow) => () => {
+  toggleFavorite: TableToggleFavoriteType<any> = (program, updateRow) => () => {
     const isFavorite = program.personalDetails.isFavorite;
     const newProgram = {
       ...program,
@@ -59,7 +59,7 @@ class _ProgramsFacetTable extends React.PureComponent<
 
 export interface IProgramsFacetTableProps {
   title: string;
-  getItems: GetItemsFuncType<any>;
+  getItems: GetItemsFuncType<any, any>;
   isAuthenticated: boolean;
   showRating?: boolean;
 }

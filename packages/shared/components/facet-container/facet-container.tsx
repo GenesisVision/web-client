@@ -6,7 +6,7 @@ import { Dispatch, bindActionCreators, compose } from "redux";
 import { IFundsFacetTableProps } from "shared/components/funds/funds-facet/components/funds-facet-table";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import { IProgramsFacetTableProps } from "shared/components/programs/programs-facet/components/programs-facet-table";
-import { IDataModel } from "shared/constants/constants";
+import { IDataModel } from "shared/components/table/helpers/mapper";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
 import RootState from "shared/reducers/root-reducer";
 
@@ -77,7 +77,7 @@ interface OwnProps {
   TableContainer: React.ComponentType<
     IProgramsFacetTableProps | IFundsFacetTableProps
   >;
-  getItems: (args: any) => Promise<IDataModel>;
+  getItems: (args: any) => Promise<IDataModel<any>>;
   isAuthenticated: boolean;
 }
 interface StateProps {

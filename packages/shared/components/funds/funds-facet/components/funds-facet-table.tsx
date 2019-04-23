@@ -19,7 +19,7 @@ import {
 class _FundsFacetTable extends React.PureComponent<
   IFundsFacetTableProps & InjectedTranslateProps
 > {
-  toggleFavorite: TableToggleFavoriteType = (fund, updateRow) => () => {
+  toggleFavorite: TableToggleFavoriteType<any> = (fund, updateRow) => () => {
     const isFavorite = fund.personalDetails.isFavorite;
     const newProgram = {
       ...fund,
@@ -60,7 +60,7 @@ class _FundsFacetTable extends React.PureComponent<
 
 export interface IFundsFacetTableProps {
   title: string;
-  getItems: GetItemsFuncType<FUNDS_FACET_TABLE_REQUEST_FILTERS>;
+  getItems: GetItemsFuncType<FUNDS_FACET_TABLE_REQUEST_FILTERS, any>;
   isAuthenticated: boolean;
   showRating?: boolean;
 }

@@ -24,13 +24,13 @@ import { loadData, saveData } from "shared/utils/localstorage";
 
 import { RenderBodyItemFuncType } from "./table.types";
 
-export interface ITableProps<TFiltering>
+export interface ITableProps<TItem, TFiltering>
   extends ITableFooterProps,
     ITableToolbarExternalProps<TFiltering>,
-    ITableBodyExternalProps,
+    ITableBodyExternalProps<TItem>,
     ITableHeaderProps {
-  renderBodyCard?: RenderBodyItemFuncType;
-  renderBodyRow?: RenderBodyItemFuncType;
+  renderBodyCard?: RenderBodyItemFuncType<TItem>;
+  renderBodyRow?: RenderBodyItemFuncType<TItem>;
   emptyMessage?: JSX.Element | string;
   showSwitchView?: boolean;
 }
@@ -39,10 +39,14 @@ interface ITableState {
   view: LIST_VIEW;
 }
 
-class Table<TFiltering> extends React.PureComponent<
-  ITableProps<TFiltering>,
+class Table<TItem, TFiltering> extends React.PureComponent<
+  ITableProps<TItem, TFiltering>,
   ITableState
 > {
+  static defaultProps = {
+    isPending: false
+  };
+
   state = {
     view: LIST_VIEW.TABLE
   };
@@ -161,3 +165,16 @@ class Table<TFiltering> extends React.PureComponent<
 }
 
 export default Table;
+
+/*type Type<T> = {
+  name: T;
+};
+
+type P = {
+  name: string;
+};
+interface P1 {
+  name: string;
+}
+let t: Type<{}> = { name: {} };
+let t2: Type<Partial<P1>> = t;*/

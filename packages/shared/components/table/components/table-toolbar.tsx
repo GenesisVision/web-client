@@ -10,7 +10,7 @@ import { IUpdateFilterFunc, RenderFiltersFuncType } from "./table.types";
 interface ITableToolbarInnerProps {
   view: LIST_VIEW;
   isViewSwitchEnabled: boolean;
-  onChange(view: LIST_VIEW): any;
+  onChange(view: LIST_VIEW): void;
 }
 
 export interface ITableToolbarExternalProps<TFiltering> {

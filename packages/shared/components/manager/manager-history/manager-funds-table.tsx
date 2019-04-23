@@ -28,7 +28,7 @@ class ManagerFunds extends React.Component<Props & InjectedTranslateProps> {
     return fetchManagerFunds({ ...filters, managerId });
   };
 
-  toggleFavorite: TableToggleFavoriteType = (asset, updateRow) => () => {
+  toggleFavorite: TableToggleFavoriteType<any> = (asset, updateRow) => () => {
     const isFavorite = asset.personalDetails.isFavorite;
     const newProgram = {
       ...asset,

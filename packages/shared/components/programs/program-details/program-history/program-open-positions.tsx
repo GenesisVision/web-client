@@ -1,5 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
+import { OrderModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -11,9 +12,10 @@ import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "shared/components/programs/progr
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
-import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
+
+import { IDataModel } from "../../../table/helpers/mapper";
 
 const PAGING = {
   currentPage: 1,
@@ -29,7 +31,7 @@ const _ProgramOpenPositions: React.FC<Props & InjectedTranslateProps> = ({
   programId,
   fetchOpenPositions
 }) => {
-  const getOpenPositions: any = (filters?: any) =>
+  const getOpenPositions = (filters?: any) =>
     fetchOpenPositions(programId, filters);
 
   return (
@@ -109,7 +111,10 @@ const _ProgramOpenPositions: React.FC<Props & InjectedTranslateProps> = ({
 interface Props {
   currency: CURRENCIES;
   programId: string;
-  fetchOpenPositions: (programId: string, filters?: any) => Promise<IDataModel>;
+  fetchOpenPositions: (
+    programId: string,
+    filters?: any
+  ) => Promise<IDataModel<OrderModel>>;
 }
 
 const ProgramOpenPositions = React.memo(translate()(_ProgramOpenPositions));

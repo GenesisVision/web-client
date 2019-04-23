@@ -4,39 +4,44 @@ import {
   calculateTotalPages
 } from "shared/components/table//helpers/paging.helpers";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
-import { IDataModel } from "shared/constants/constants";
 
+import { IDataModel } from "../helpers/mapper";
 import { composeRequestFilters } from "../services/table.service";
 import { IDefaultFilters, IFilter, IFiltering } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
 import { GetItemsFuncType } from "./table.types";
 
-const defaultData: IDataModel = { items: null, total: 0 };
+const defaultData: IDataModel<any> = { items: [], total: 0 };
 
-export interface ITableModuleProps<TFiltering, TRequestFiltering>
-  extends ITableProps<TFiltering> {
-  getItems: GetItemsFuncType<TRequestFiltering>;
+export interface ITableModuleProps<TItem, TFiltering, TRequestFiltering>
+  extends ITableProps<TItem, TFiltering> {
+  getItems: GetItemsFuncType<TRequestFiltering, TItem>;
   defaultFilters?: IDefaultFilters<TFiltering>;
   loader?: boolean;
-  data?: IDataModel;
+  data?: IDataModel<TItem>;
 }
 
-interface ITableModuleState<TFiltering> {
+interface ITableModuleState<TItem, TFiltering> {
   paging?: IPaging;
   sorting?: string;
   filtering?: IFiltering<TFiltering>;
-  data: IDataModel;
+  data: IDataModel<TItem>;
   isPending: boolean;
 }
 
-class TableModule<TFiltering, TFilteringRequest> extends React.PureComponent<
-  ITableModuleProps<TFiltering, TFilteringRequest>,
-  ITableModuleState<TFiltering>
+class TableModule<
+  TItem,
+  TFiltering,
+  TFilteringRequest
+> extends React.PureComponent<
+  ITableModuleProps<TItem, TFiltering, TFilteringRequest>,
+  ITableModuleState<TItem, TFiltering>
 > {
   static defaultProps = {
-    loader: true
+    loader: true,
+    isPending: false
   };
-  constructor(props: ITableModuleProps<TFiltering, TFilteringRequest>) {
+  constructor(props: ITableModuleProps<TItem, TFiltering, TFilteringRequest>) {
     super(props);
 
     const { paging, sorting, filtering } = this.props;
@@ -76,7 +81,7 @@ class TableModule<TFiltering, TFilteringRequest> extends React.PureComponent<
       defaultFilters
     });
     getItems(filters)
-      .then((data: IDataModel) => {
+      .then(data => {
         const totalPages = calculateTotalPages(
           data.total,
           paging && paging.itemsOnPage

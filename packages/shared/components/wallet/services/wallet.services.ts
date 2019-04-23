@@ -1,11 +1,13 @@
 import {
   CancelablePromise,
   CopyTradingAccountInfo,
+  CopyTradingAccountsList,
   MultiWalletExternalTransaction,
+  MultiWalletExternalTransactionsViewModel,
   WalletMultiAvailable
 } from "gv-api-web";
 import {
-  TableItems,
+  IDataModel,
   mapToTableItems
 } from "shared/components/table/helpers/mapper";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -101,7 +103,7 @@ export const resendWithdrawRequest = (txId: string): RootThunk<any> => (
 export const fetchMultiTransactionsExternal = (
   currency: string,
   filters?: any
-): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
+): CancelablePromise<IDataModel<MultiWalletExternalTransaction>> => {
   const authorization = authService.getAuthArg();
   const filtering = {
     ...filters,
@@ -109,7 +111,12 @@ export const fetchMultiTransactionsExternal = (
   };
   return walletApi
     .v10WalletMultiTransactionsExternalGet(authorization, filtering)
-    .then(mapToTableItems<MultiWalletExternalTransaction>("transactions"));
+    .then(
+      mapToTableItems<
+        MultiWalletExternalTransactionsViewModel,
+        MultiWalletExternalTransaction
+      >("transactions")
+    );
 };
 
 export const fetchMultiTransactions = (currency: CURRENCIES, filters?: any) => {
@@ -128,7 +135,7 @@ export const fetchCopytradingAccounts = () => {
   return signalApi
     .v10SignalAccountsGet(authorization)
     .then(data => ({ ...mockCopytrading, total: 0 }))
-    .then(mapToTableItems<CopyTradingAccountInfo>("accounts"));
+    .then(mapToTableItems<any, CopyTradingAccountInfo>("accounts"));
 };
 
 let mockCopytrading = {
