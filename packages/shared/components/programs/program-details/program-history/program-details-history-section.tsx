@@ -7,7 +7,6 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
-import { PORTFOLIO_EVENTS_TYPES } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import ProgramTrades from "shared/components/programs/program-details/program-history/program-trades";
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -100,9 +99,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
               filtering={EVENTS_FILTERING}
               fetchPortfolioEvents={fetchPortfolioEvents}
               dateRangeStartLabel={t("filters.date-range.program-start")}
-              eventTypeFilterValues={
-                (eventTypeFilterValues as unknown) as SelectFilterValue[]
-              }
+              eventTypeFilterValues={eventTypeFilterValues}
             />
           )}
           {tab === TABS.OPEN_POSITIONS && (
@@ -146,7 +143,7 @@ interface OwnProps {
   currency: CURRENCIES;
   programCurrency: CURRENCIES;
   isInvested: boolean;
-  eventTypeFilterValues: PORTFOLIO_EVENTS_TYPES[];
+  eventTypeFilterValues: SelectFilterValue[];
 }
 
 interface StateProps extends AuthState {}
