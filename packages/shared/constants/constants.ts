@@ -37,3 +37,5 @@ export enum ASSET {
   PROGRAM = "PROGRAM",
   FUND = "FUND"
 }
+
+export const ROLE_ENV = process.env.REACT_APP_PLATFORM;
