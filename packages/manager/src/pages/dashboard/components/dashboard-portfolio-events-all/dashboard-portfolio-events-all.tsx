@@ -6,16 +6,15 @@ import { compose } from "redux";
 import Page from "shared/components/page/page";
 import PortfolioEventsTableContainerComponent from "shared/components/portfolio-events-table/portfolio-events-table-container";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
+import { ROLE_ENV } from "shared/constants/constants";
 import { getUnique } from "shared/utils/array";
-
-const role = process.env.REACT_APP_PLATFORM;
 
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 const _PortfolioEventsAllComponent: React.FC<Props> = ({ t, events }) => (
-  <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
+  <Page title={t(`${ROLE_ENV}.dashboard-page.portfolio-events.title`)}>
     <PortfolioEventsTableContainerComponent
       fetchPortfolioEvents={fetchPortfolioEvents}
-      tableTitle={t(`${role}.dashboard-page.portfolio-events.table-title`)}
+      tableTitle={t(`${ROLE_ENV}.dashboard-page.portfolio-events.table-title`)}
       className="portfolio-events-all-table"
       dateRangeStartLabel={t("filters.date-range.account-creation")}
       eventTypeFilterValues={events}
