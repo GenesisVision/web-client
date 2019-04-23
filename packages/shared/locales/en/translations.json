@@ -1323,6 +1323,9 @@
           "amount": "Amount"
         },
         "types": {
+          "ProgramSignalSubscribe": "Program signal subscribe",
+          "ProgramStopOut": "Program stop out",
+          "ProgramManagerTradingFeeAccrual": "Program manager trading fee accrual",
           "all": "All",
           "invest": "Invest",
           "withdraw": "Withdraw",
