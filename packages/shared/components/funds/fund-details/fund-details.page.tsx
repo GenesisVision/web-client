@@ -16,6 +16,7 @@ import {
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
+import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
 import RootState from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
 
@@ -27,6 +28,7 @@ import {
 
 interface IFundDetailsPageOwnProps {
   descriptionSection: IDescriptionSection;
+  historySection: IHistorySection;
 }
 
 interface IFundDetailsStateProps {
