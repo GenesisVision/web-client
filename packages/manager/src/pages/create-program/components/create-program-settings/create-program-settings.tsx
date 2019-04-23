@@ -413,7 +413,7 @@ class CreateProgramSettings extends React.Component<
                     <option value={wallet.id} key={wallet.id}>
                       <img
                         src={filesService.getFileUrl(wallet.logo)}
-                        className="wallet-transfer-popup__icon"
+                        className="transfer-popup__icon"
                         alt={wallet.currency}
                       />
                       {`${wallet.title} | ${wallet.currency}`}

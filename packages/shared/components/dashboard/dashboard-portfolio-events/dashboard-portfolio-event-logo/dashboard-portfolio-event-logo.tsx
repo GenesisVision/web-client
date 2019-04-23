@@ -1,5 +1,6 @@
 import "./dashboard-portfolio-event-logo.scss";
 
+import { DashboardPortfolioEventAssetTypeEnum } from "gv-api-web";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -75,7 +76,7 @@ const PortfolioEventLogo: React.FC<Props> = ({
 }) => {
   const to = {
     pathname:
-      assetType === ASSET.PROGRAM
+      assetType === "Program"
         ? composeProgramDetailsUrl(url || "")
         : composeFundsDetailsUrl(url || ""),
     state: `/ ${type}`
@@ -113,7 +114,7 @@ interface Props {
   logo: string;
   color: string;
   url?: string;
-  assetType?: ASSET;
+  assetType?: DashboardPortfolioEventAssetTypeEnum;
 }
 
 export default React.memo(PortfolioEventLogo);

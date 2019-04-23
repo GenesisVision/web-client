@@ -370,7 +370,7 @@ class CreateFundSettings extends React.Component {
                     <option value={wallet.currency} key={wallet.currency}>
                       <img
                         src={filesService.getFileUrl(wallet.logo)}
-                        className="wallet-transfer-popup__icon"
+                        className="transfer-popup__icon"
                         alt={wallet.currency}
                       />
                       {`${wallet.title} | ${wallet.currency}`}

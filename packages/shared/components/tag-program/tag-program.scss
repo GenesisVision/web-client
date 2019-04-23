@@ -52,10 +52,11 @@ $tag-vertical-padding: 12px;
   text-transform: uppercase;
   height: 18px;
   line-height: 18px;
-  padding: 0 12px;
+  padding: 0 $padding-xxsmall;
+  white-space: nowrap;
 
   @include media-breakpoint-landscape-phone() {
-    padding: 0 12px;
+    padding: 0 $padding-xxsmall;
     max-height: 18px;
     line-height: 18px;
   }
