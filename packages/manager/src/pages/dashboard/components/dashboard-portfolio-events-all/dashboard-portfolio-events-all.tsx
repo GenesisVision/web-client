@@ -6,26 +6,34 @@ import { compose } from "redux";
 import Page from "shared/components/page/page";
 import PortfolioEventsTableContainerComponent from "shared/components/portfolio-events-table/portfolio-events-table-container";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
-import { MANAGER_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import { getUnique } from "shared/utils/array";
 
 const role = process.env.REACT_APP_PLATFORM;
 
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
-const _PortfolioEventsAllComponent: React.FC<Props> = ({ t }) => (
+const _PortfolioEventsAllComponent: React.FC<Props> = ({ t, events }) => (
   <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
     <PortfolioEventsTableContainerComponent
       fetchPortfolioEvents={fetchPortfolioEvents}
       tableTitle={t(`${role}.dashboard-page.portfolio-events.table-title`)}
       className="portfolio-events-all-table"
       dateRangeStartLabel={t("filters.date-range.account-creation")}
-      eventTypeFilterValues={MANAGER_EVENT_TYPE_FILTER_VALUES}
+      eventTypeFilterValues={events}
     />
   </Page>
 );
 
 const mapStateToProps = (state: ManagerRootState): StateProps => {
-  const {} = state;
-  return { events: [] };
+  if (!state.platformData.data) return { events: [] };
+  const {
+    funds,
+    programs
+  } = state.platformData.data.enums.program.managerNotificationType;
+  const events = getUnique([...funds, ...programs]).map(event => ({
+    value: event,
+    labelKey: `manager.dashboard-page.portfolio-events.types.${event}`
+  }));
+  return { events };
 };
 
 interface Props extends InjectedTranslateProps, StateProps {}
