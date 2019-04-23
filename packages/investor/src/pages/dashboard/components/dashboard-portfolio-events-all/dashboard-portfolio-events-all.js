@@ -4,25 +4,18 @@ import Page from "shared/components/page/page";
 import PortfolioEventsTableContainer from "shared/components/portfolio-events-table/portfolio-events-table-container";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import { ROLE_ENV } from "shared/constants/constants";
 
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 const PortfolioEventsAllComponent = ({ t }) => {
-  const title = t(
-    `${process.env.REACT_APP_PLATFORM}.dashboard-page.portfolio-events.title`
-  );
+  const title = t(`${ROLE_ENV}.dashboard-page.portfolio-events.title`);
   return (
     <Page title={title}>
       <PortfolioEventsTableContainer
         fetchPortfolioEvents={fetchPortfolioEvents}
-        pageTitle={t(
-          `${
-            process.env.REACT_APP_PLATFORM
-          }.dashboard-page.portfolio-events.title`
-        )}
+        pageTitle={t(`${ROLE_ENV}.dashboard-page.portfolio-events.title`)}
         tableTitle={t(
-          `${
-            process.env.REACT_APP_PLATFORM
-          }.dashboard-page.portfolio-events.table-title`
+          `${ROLE_ENV}.dashboard-page.portfolio-events.table-title`
         )}
         className="portfolio-events-all-table"
         dateRangeStartLabel={t("filters.date-range.account-creation")}

@@ -14,10 +14,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import {
-  FilteringType,
-  SortingColumn
-} from "shared/components/table/components/filtering/filter.type";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -26,7 +23,7 @@ import {
   GetItemsFuncActionType,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
-import { FUND, ROLE } from "shared/constants/constants";
+import { FUND, ROLE_ENV } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -78,11 +75,7 @@ const DashboardFunds: FunctionComponent<
             column.name
           }`}
         >
-          {t(
-            `${process.env.REACT_APP_PLATFORM}.dashboard-page.funds-header.${
-              column.name
-            }`
-          )}
+          {t(`${ROLE_ENV}.dashboard-page.funds-header.${column.name}`)}
         </span>
       )}
       renderBodyRow={(fund: any) => (

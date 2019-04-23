@@ -7,28 +7,28 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { ASSET_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import {
+  FilteringType,
+  SelectFilterValue
+} from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
+import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { ROLE_ENV } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { PROFITABILITY_PREFIX } from "../profitability/profitability.helper";
-import {
-  FilteringType,
-  SelectFilterValue
-} from "../table/components/filtering/filter.type";
-import { GetItemsFuncType } from "../table/components/table.types";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  PORTFOLIO_EVENTS_FILTERS,
-  PORTFOLIO_EVENTS_TYPES
+  PORTFOLIO_EVENTS_FILTERS
 } from "./portfolio-events-table.constants";
 
 const PortfolioEventsTable: React.FC<
@@ -88,9 +88,9 @@ const PortfolioEventsTable: React.FC<
             }`}
           >
             {t(
-              `${
-                process.env.REACT_APP_PLATFORM
-              }.dashboard-page.portfolio-events.table-header.${column.name}`
+              `${ROLE_ENV}.dashboard-page.portfolio-events.table-header.${
+                column.name
+              }`
             )}
           </span>
         )}
