@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
 import { ChartIcon } from "shared/components/icon/chart-icon";
-import { MANAGER } from "shared/constants/constants";
+import { MANAGER, ROLE_ENV } from "shared/constants/constants";
 
 import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
@@ -32,11 +32,7 @@ class DashboardAssetsContainer extends Component {
             <ChartIcon />
           </div>
           <div className="create-asset__text">
-            {t(
-              `${
-                process.env.REACT_APP_PLATFORM
-              }.dashboard-page.create-fund-text`
-            )}
+            {t(`${ROLE_ENV}.dashboard-page.create-fund-text`)}
           </div>
           <div className="create-asset__button">
             <Link
@@ -56,11 +52,7 @@ class DashboardAssetsContainer extends Component {
             <ChartIcon />
           </div>
           <div className="create-asset__text">
-            {t(
-              `${
-                process.env.REACT_APP_PLATFORM
-              }.dashboard-page.create-program-text`
-            )}
+            {t(`${ROLE_ENV}.dashboard-page.create-program-text`)}
           </div>
           <div className="create-asset__button">
             <Link

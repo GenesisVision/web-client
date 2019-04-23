@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { fetchBaseWallets } from "shared/components/wallet/services/wallet.services";
-import { ASSET, ROLE } from "shared/constants/constants";
+import { ASSET, ROLE_ENV } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 import { RootThunk, SetSubmittingType } from "shared/utils/types";
 
@@ -40,7 +40,6 @@ class _DepositPopup extends React.PureComponent<Props, State> {
 
   render() {
     const { currency, invest, hasEntryFee, asset, errorMessage } = this.props;
-    const role = process.env.REACT_APP_PLATFORM as ROLE;
     const { wallets, investInfo } = this.state;
     if (!wallets || !investInfo) return <DialogLoader />;
 
@@ -54,14 +53,13 @@ class _DepositPopup extends React.PureComponent<Props, State> {
           title={investInfo.title}
           availableToInvestBase={availableToInvestBase}
           asset={asset}
-          role={role}
           currency={currency}
         />
         <DepositForm
           wallets={wallets}
           hasEntryFee={hasEntryFee}
           asset={asset}
-          role={role}
+          role={ROLE_ENV}
           errorMessage={errorMessage}
           currency={currency}
           info={investInfo}

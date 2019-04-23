@@ -1,7 +1,7 @@
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { ASSET, ROLE } from "shared/constants/constants";
+import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const _DepositTop: React.FC<DepositTopProps & InjectedTranslateProps> = ({
@@ -9,8 +9,7 @@ const _DepositTop: React.FC<DepositTopProps & InjectedTranslateProps> = ({
   asset,
   title,
   currency,
-  availableToInvestBase,
-  role = process.env.REACT_APP_PLATFORM as ROLE
+  availableToInvestBase
 }) => {
   return (
     <div className="dialog__top">
@@ -18,7 +17,7 @@ const _DepositTop: React.FC<DepositTopProps & InjectedTranslateProps> = ({
         <h2>{t("deposit-asset.title")}</h2>
         <p>{title}</p>
       </div>
-      {asset === ASSET.PROGRAM && role === ROLE.INVESTOR && (
+      {asset === ASSET.PROGRAM && ROLE_ENV === ROLE.INVESTOR && (
         <div className="dialog-field">
           <StatisticItem
             label={t("deposit-asset.program.available-to-invest")}
@@ -43,5 +42,4 @@ export interface DepositTopProps {
   title: string;
   availableToInvestBase?: number;
   asset: ASSET;
-  role?: ROLE;
 }

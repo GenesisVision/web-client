@@ -59,14 +59,12 @@ class FundWithdrawAmountForm extends PureComponent<
             displayType="text"
           />
         </div>
-        {exitFee !== 0 && (
-          <FundWithdrawResult
-            availableToWithdraw={availableToWithdraw}
-            currency={wallet.currency}
-            percent={values.percent || 0}
-            exitFee={exitFee}
-          />
-        )}
+        <FundWithdrawResult
+          availableToWithdraw={availableToWithdraw}
+          currency={wallet.currency}
+          percent={values.percent || 0}
+          exitFee={exitFee}
+        />
         <div className="dialog__buttons">
           <GVButton type="submit" id="fundWithdrawAmountFormSubmit">
             {t("buttons.next")}

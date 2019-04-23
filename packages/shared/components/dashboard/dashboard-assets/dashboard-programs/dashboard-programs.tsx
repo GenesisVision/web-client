@@ -25,7 +25,7 @@ import {
   Column,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
-import { PROGRAM } from "shared/constants/constants";
+import { PROGRAM, ROLE_ENV } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -72,11 +72,7 @@ const DashboardPrograms: React.FC<
             column.name
           }`}
         >
-          {t(
-            `${process.env.REACT_APP_PLATFORM}.dashboard-page.programs-header.${
-              column.name
-            }`
-          )}
+          {t(`${ROLE_ENV}.dashboard-page.programs-header.${column.name}`)}
         </span>
       )}
       renderBodyRow={(program: any, updateRow: any) => (

@@ -4,7 +4,7 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
-import { ROLE } from "shared/constants/constants";
+import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 
 import { WalletRouteProps } from "../wallet.routes";
@@ -24,7 +24,6 @@ interface IWalletProps {
 class WalletTotal extends React.PureComponent<IWalletProps & WalletRouteProps> {
   render() {
     const { t, info, wallets, filters, isPayFeesWithGvt } = this.props;
-    const role = process.env.REACT_APP_PLATFORM as ROLE;
     if (!info || !filters) return <WalletBalanceLoader />;
     return (
       <Page title={t("wallet-page.title")}>
@@ -46,7 +45,7 @@ class WalletTotal extends React.PureComponent<IWalletProps & WalletRouteProps> {
         <WalletContainerTotal
           wallets={wallets}
           filters={filters}
-          copytrading={role === ROLE.INVESTOR}
+          copytrading={ROLE_ENV === ROLE.INVESTOR}
         />
       </Page>
     );

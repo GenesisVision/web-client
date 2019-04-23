@@ -1,16 +1,15 @@
 import { GVTab, GVTabs } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { ROLE } from "shared/constants/constants";
+import { ROLE, ROLE_ENV } from "shared/constants/constants";
 
 const Tabs: React.FC<Props & InjectedTranslateProps> = ({ t, authPartUrl }) => {
-  const role = process.env.REACT_APP_PLATFORM;
   return (
-    <GVTabs value={role!}>
+    <GVTabs value={ROLE_ENV}>
       <GVTab
         value={ROLE.INVESTOR}
         label={
-          (role === ROLE.MANAGER && (
+          (ROLE_ENV === ROLE.MANAGER && (
             <a href={process.env.REACT_APP_INVESTOR_PORTAL_URL + authPartUrl}>
               {t("auth.tabs.investor")}
             </a>
@@ -21,7 +20,7 @@ const Tabs: React.FC<Props & InjectedTranslateProps> = ({ t, authPartUrl }) => {
       <GVTab
         value={ROLE.MANAGER}
         label={
-          (role === ROLE.INVESTOR && (
+          (ROLE_ENV === ROLE.INVESTOR && (
             <a href={process.env.REACT_APP_MANAGER_PORTAL_URL + authPartUrl}>
               {t("auth.tabs.manager")}
             </a>

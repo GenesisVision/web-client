@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
+import { ROLE_ENV } from "shared/constants/constants";
 
 import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
 
@@ -25,7 +26,6 @@ const _DashboardPortfolioEvents: React.FC<Props & InjectedTranslateProps> = ({
   eventView: DashboardPortfolioEvent,
   emptyView: DashboardPortfolioEmptyView
 }) => {
-  const role = process.env.REACT_APP_PLATFORM;
   const renderEvents = () => {
     if (isPending && !data) return <DashboardPortfolioEventsListLoader />;
     if (data === undefined) return null;
@@ -39,7 +39,7 @@ const _DashboardPortfolioEvents: React.FC<Props & InjectedTranslateProps> = ({
   };
   return (
     <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
-      <h3>{t(`${role}.dashboard-page.portfolio-events.title`)}</h3>
+      <h3>{t(`${ROLE_ENV}.dashboard-page.portfolio-events.title`)}</h3>
       <div className="dashboard-portfolio-events__scroll-container">
         <GVScroll
           autoHide
@@ -61,7 +61,7 @@ const _DashboardPortfolioEvents: React.FC<Props & InjectedTranslateProps> = ({
       >
         <GVButton variant="text" color="secondary">
           <>
-            {t(`${role}.dashboard-page.portfolio-events.see-all-button`)}{" "}
+            {t(`${ROLE_ENV}.dashboard-page.portfolio-events.see-all-button`)}{" "}
             &#8250;
           </>
         </GVButton>

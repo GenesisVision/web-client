@@ -1,6 +1,6 @@
 import { ProgramRequest, ProgramRequests } from "gv-api-web";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
-import { ASSET, ROLE } from "shared/constants/constants";
+import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
@@ -89,9 +89,7 @@ export const cancelRequestDispatch = ({
       dispatch(fetchProfileHeaderInfo());
       dispatch(
         alertMessageActions.success(
-          `${
-            process.env.REACT_APP_PLATFORM
-          }.dashboard-page.requests.success-cancel-request`,
+          `${ROLE_ENV}.dashboard-page.requests.success-cancel-request`,
           true
         )
       );

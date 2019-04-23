@@ -38,7 +38,11 @@ $border-radius: 5px;
   }
 
   &--name {
-    padding-right: 0;
+    padding-right: $padding-xsmall;
+  }
+
+  &--balance {
+    padding-left: 0;
   }
 
   &--chart {
@@ -106,7 +110,7 @@ $border-radius: 5px;
     align-items: center;
     margin-bottom: $padding/1.5;
     &--name {
-      margin-left: $padding/2;
+      margin-left: $padding-xxsmall;
     }
     & .program-avatar__level {
       border-color: $secondary-color;
