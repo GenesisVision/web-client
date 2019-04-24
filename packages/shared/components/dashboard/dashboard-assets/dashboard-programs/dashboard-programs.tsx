@@ -1,6 +1,7 @@
 import "./dashboard-programs.scss";
 
 import classNames from "classnames";
+import { ProgramDetails } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -9,7 +10,6 @@ import { Link } from "react-router-dom";
 import { Action } from "redux";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import { DASHBOARD_PROGRAMS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -17,7 +17,10 @@ import ProgramPeriodEnd from "shared/components/program-period/program-period-en
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  SortingColumn
+} from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -25,27 +28,19 @@ import {
   Column,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
-import { PROGRAM, ROLE_ENV } from "shared/constants/constants";
+import { PROGRAM, ROLE, ROLE_ENV, STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
-interface IDashboardProgramsProps {
-  title: string;
-  getDashboardPrograms(filters: any): Action;
-  createButtonToolbar: JSX.Element;
-  createProgram: JSX.Element;
-}
-
-const DashboardPrograms: React.FC<
-  InjectedTranslateProps & IDashboardProgramsProps
-> = ({
+const DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
   t,
   getDashboardPrograms,
   createButtonToolbar,
   createProgram,
-  title
+  title,
+  columns
 }) => {
   return (
     <TableContainer
@@ -54,7 +49,7 @@ const DashboardPrograms: React.FC<
       getItems={getDashboardPrograms}
       dataSelector={dashboardProgramsTableSelector}
       isFetchOnMount={true}
-      columns={DASHBOARD_PROGRAMS_COLUMNS}
+      columns={columns}
       renderFilters={(
         updateFilter: IUpdateFilterFunc,
         filtering: FilteringType
@@ -75,7 +70,7 @@ const DashboardPrograms: React.FC<
           {t(`${ROLE_ENV}.dashboard-page.programs-header.${column.name}`)}
         </span>
       )}
-      renderBodyRow={(program: any, updateRow: any) => (
+      renderBodyRow={(program: ProgramDetails, updateRow: any) => (
         <TableRow
           className={classNames({
             "table__row--pretender": program.rating.canLevelUp
@@ -114,6 +109,11 @@ const DashboardPrograms: React.FC<
               </Link>
             </div>
           </TableCell>
+          {ROLE_ENV === ROLE.MANAGER ? (
+            <TableCell className="programs-table__cell dashboard-programs__cell--login">
+              {program.personalDetails.login}
+            </TableCell>
+          ) : null}
           <TableCell className="programs-table__cell dashboard-programs__cell--share">
             {formatValue(program.dashboardAssetsDetails.share, 2)}%
           </TableCell>
@@ -144,7 +144,7 @@ const DashboardPrograms: React.FC<
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--status">
             <AssetStatus
-              status={program.personalDetails.status}
+              status={program.personalDetails.status as STATUS}
               id={program.id}
               asset={PROGRAM}
               onCancel={updateRow}
@@ -157,3 +157,11 @@ const DashboardPrograms: React.FC<
 };
 
 export default React.memo(translate()(DashboardPrograms));
+
+interface Props {
+  title: string;
+  columns: SortingColumn[];
+  getDashboardPrograms(filters: any): Action;
+  createButtonToolbar: JSX.Element;
+  createProgram: JSX.Element;
+}
