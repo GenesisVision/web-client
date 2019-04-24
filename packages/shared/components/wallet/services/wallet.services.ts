@@ -27,6 +27,14 @@ export const fetchWallets = (): RootThunk<void> => (dispatch, getState) => {
   dispatch(actions.fetchWallets(currency, authorization));
 };
 
+export const fetchAccounts = (): RootThunk<void> => (dispatch, getState) => {
+  const authorization = authService.getAuthArg();
+  const { info } = getState().copyTradingAccounts;
+  if (info.isPending) return;
+  dispatch(actions.updateAccountTimestamp());
+  dispatch(actions.fetchAccounts(authorization));
+};
+
 export const fetchBaseWallets = (): RootThunk<
   Promise<WalletMultiAvailable>
 > => (dispatch, getState) => {
