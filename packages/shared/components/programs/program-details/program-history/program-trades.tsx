@@ -128,6 +128,9 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
           <TableCell className="details-trades__cell program-details-trades__cell--ticket">
             {trade.ticket}
           </TableCell>
+          <TableCell className="details-trades__cell program-details-trades__cell--swap">
+            {trade.swap}
+          </TableCell>
           {/*<TableCell className="details-trades__cell program-details-trades__cell--entry">
             {trade.entry}
           </TableCell>*/}

@@ -32,6 +32,9 @@ export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   },
   {
     name: "ticket"
+  },
+  {
+    name: "swap"
   }
   /*{
     name: "entry"

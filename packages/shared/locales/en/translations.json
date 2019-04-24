@@ -1105,7 +1105,8 @@
         "error-message": "An error occurred while closing the trade"
       },
       "open-trades-header": {
-        "commissions": "Commissions",
+        "swap": "Swap",
+        "commission": "Commission",
         "providers": "Providers",
         "direction-entry": "Dir/Entry",
         "direction": "Dir",
