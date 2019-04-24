@@ -7,9 +7,8 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import Surface from "shared/components/surface/surface";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { ROLE_ENV } from "shared/constants/constants";
-
-import { SortingColumn } from "../../table/components/filtering/filter.type";
 
 class DashboardAssets extends React.PureComponent<
   Props & InjectedTranslateProps,
