@@ -32,7 +32,9 @@ describe("Favorite Icon tests", () => {
     const component = shallow(
       <FavoriteIcon id={id} selected onClick={handleClick} />
     );
-    component.find(Icon).simulate("click");
+    component.simulate("click", {
+      stopPropagation: () => {}
+    });
     expect(handleClick).toBeCalled();
   });
 });
