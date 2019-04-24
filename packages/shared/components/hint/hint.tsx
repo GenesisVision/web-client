@@ -6,8 +6,8 @@ import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import Tooltip from "shared/components/tooltip/tooltip";
 
 interface IHintProps {
-  content: JSX.Element;
-  tooltipContent: JSX.Element;
+  content: React.ReactNode;
+  tooltipContent: React.ReactNode;
   className: string;
   vertical: VERTICAL_POPOVER_POS;
 }
