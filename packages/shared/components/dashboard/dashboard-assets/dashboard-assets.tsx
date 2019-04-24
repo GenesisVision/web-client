@@ -7,6 +7,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import Surface from "shared/components/surface/surface";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { ROLE_ENV } from "shared/constants/constants";
 
 class DashboardAssets extends React.PureComponent<
@@ -50,7 +51,8 @@ class DashboardAssets extends React.PureComponent<
       createProgramButtonToolbar,
       createFundButtonToolbar,
       createFund,
-      createProgram
+      createProgram,
+      programColumns
     } = this.props;
     return (
       <Surface className="dashboard-assets">
@@ -74,6 +76,7 @@ class DashboardAssets extends React.PureComponent<
         <div className="dashboard-assets__table">
           {tab === TABS.PROGRAMS && (
             <DashboardPrograms
+              columns={programColumns}
               getDashboardPrograms={getDashboardPrograms}
               createButtonToolbar={createProgramButtonToolbar}
               createProgram={createProgram}
@@ -104,6 +107,7 @@ interface Props {
   createFundButtonToolbar: any;
   createFund: any;
   createProgram: any;
+  programColumns: SortingColumn[];
 }
 
 interface State {
