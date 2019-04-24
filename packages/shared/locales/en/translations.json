@@ -558,6 +558,9 @@
         "open-positions": "Open positions"
       },
       "trades": {
+        "swap": "Swap",
+        "providers": "Providers",
+        "direction-entry": "Dir/Entry",
         "commission": "Commission",
         "direction": "Dir",
         "ticket": "Ticket",
