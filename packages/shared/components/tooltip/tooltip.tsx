@@ -30,7 +30,6 @@ class Tooltip extends React.PureComponent<Props, State> {
       horizontal = HORIZONTAL_POPOVER_POS.CENTER
     } = this.props;
     const { anchor } = this.state;
-    console.log(1);
     return (
       <>
         <child.type
