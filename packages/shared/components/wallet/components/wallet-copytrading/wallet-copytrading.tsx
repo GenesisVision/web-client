@@ -161,7 +161,9 @@ class WalletCopytrading extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props extends InjectedTranslateProps {}
+interface Props extends InjectedTranslateProps {
+  copyTradingAccounts: CopyTradingAccountInfo[];
+}
 
 interface State {
   isOpenAddFundsPopup: boolean;

@@ -39,7 +39,14 @@ class WalletContainerTotal extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, wallets, filters, copytrading, location } = this.props;
+    const {
+      t,
+      wallets,
+      filters,
+      copytrading,
+      location,
+      copyTradingAccounts
+    } = this.props;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
@@ -99,7 +106,9 @@ class WalletContainerTotal extends PureComponent {
           </div>
         </div>
         {tab === WALLETS_TAB && <WalletList wallets={wallets} />}
-        {tab === COPYTRADING_TAB && <WalletCopytrading />}
+        {tab === COPYTRADING_TAB && (
+          <WalletCopytrading copyTradingAccounts={copyTradingAccounts} />
+        )}
         {tab === TRANSACTIONS_TAB && (
           <WalletTransactions
             columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}

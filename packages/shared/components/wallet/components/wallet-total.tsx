@@ -1,6 +1,11 @@
-import { MultiWalletFilters, WalletsGrandTotal, WalletsInfo } from "gv-api-web";
+import {
+  CopyTradingAccountInfo,
+  MultiWalletFilters,
+  WalletsGrandTotal,
+  WalletsInfo
+} from "gv-api-web";
 import * as React from "react";
-import { translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
@@ -13,17 +18,16 @@ import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainerTotal from "./wallet-container/wallet-container-total";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 
-interface IWalletProps {
-  t(str: string): string;
-  info?: WalletsGrandTotal;
-  filters?: MultiWalletFilters;
-  isPayFeesWithGvt?: boolean;
-  wallets?: WalletsInfo;
-}
-
-class WalletTotal extends React.PureComponent<IWalletProps & WalletRouteProps> {
+class WalletTotal extends React.PureComponent<Props & WalletRouteProps> {
   render() {
-    const { t, info, wallets, filters, isPayFeesWithGvt } = this.props;
+    const {
+      t,
+      info,
+      wallets,
+      filters,
+      isPayFeesWithGvt,
+      copyTradingAccounts
+    } = this.props;
     if (!info || !filters) return <WalletBalanceLoader />;
     return (
       <Page title={t("wallet-page.title")}>
@@ -43,6 +47,7 @@ class WalletTotal extends React.PureComponent<IWalletProps & WalletRouteProps> {
         {/*
         //@ts-ignore*/}
         <WalletContainerTotal
+          copyTradingAccounts={copyTradingAccounts}
           wallets={wallets}
           filters={filters}
           copytrading={ROLE_ENV === ROLE.INVESTOR}
@@ -55,6 +60,9 @@ class WalletTotal extends React.PureComponent<IWalletProps & WalletRouteProps> {
 const mapStateToProps = (state: RootState) => ({
   info: state.wallet.info.data ? state.wallet.info.data.grandTotal : null,
   wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],
+  copyTradingAccounts: state.copyTradingAccounts.info.data
+    ? state.copyTradingAccounts.info.data.accounts
+    : [],
   isPayFeesWithGvt: state.wallet.info.data
     ? state.wallet.info.data.payFeesWithGvt
     : null,
@@ -62,6 +70,16 @@ const mapStateToProps = (state: RootState) => ({
     ? state.platformData.data.enums.multiWallet
     : undefined
 });
+
+interface Props extends StateProps, InjectedTranslateProps {}
+
+interface StateProps {
+  wallets?: WalletsInfo;
+  copyTradingAccounts: CopyTradingAccountInfo[];
+  info?: WalletsGrandTotal;
+  filters?: MultiWalletFilters;
+  isPayFeesWithGvt?: boolean;
+}
 
 export default compose<React.FunctionComponent<WalletRouteProps>>(
   connect(mapStateToProps),
