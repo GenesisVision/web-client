@@ -1,5 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
+import { OrderModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -20,9 +21,10 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const DECIMAL_SCALE = 8;
 
@@ -60,7 +62,7 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
           {t(`program-details-page.history.trades.${column.name}`)}
         </span>
       )}
-      renderBodyRow={trade => (
+      renderBodyRow={(trade: OrderModel) => (
         <TableRow className="details-trades__row">
           <TableCell className="details-trades__cell program-details-trades__cell--direction">
             <BaseProfitability
@@ -99,6 +101,25 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
                 displayType="text"
               />
             </Profitability>
+          </TableCell>
+          <TableCell className="details-trades__cell program-details-trades__cell--commission">
+            <Tooltip
+              disable={!trade.showOriginalCommission}
+              render={() => (
+                <div>
+                  {`${formatCurrencyValue(
+                    trade.originalCommission,
+                    trade.originalCommissionCurrency
+                  )} ${trade.originalCommissionCurrency}`}
+                </div>
+              )}
+            >
+              <NumberFormat
+                value={formatValue(trade.commission, DECIMAL_SCALE)}
+                displayType="text"
+                thousandSeparator=" "
+              />
+            </Tooltip>
           </TableCell>
           <TableCell className="details-trades__cell program-details-trades__cell--date">
             {moment(trade.date).format("lll")}

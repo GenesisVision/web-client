@@ -25,6 +25,9 @@ export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
     name: "profit"
   },
   {
+    name: "commission"
+  },
+  {
     name: "date"
   },
   {

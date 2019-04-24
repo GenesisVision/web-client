@@ -558,6 +558,7 @@
         "open-positions": "Open positions"
       },
       "trades": {
+        "commission": "Commission",
         "direction": "Dir",
         "ticket": "Ticket",
         "symbol": "Symbol",
