@@ -1,6 +1,9 @@
 import { NotificationsState } from "shared/components/notifications/reducers/notifications.reducers";
 import { ProgramsRatingState } from "shared/components/programs-rating/reducers/programs-rating.reducers";
-import { WalletState } from "shared/components/wallet/reducers/wallet.reducers";
+import {
+  CopyTradingAccountsState,
+  WalletState
+} from "shared/components/wallet/reducers/wallet.reducers";
 import { AlertMessagesState } from "shared/modules/alert-message/reducers/alert-message-reducers";
 import { FundNotificationsState } from "shared/modules/fund-notifications/reducers/fund-notifications.reducers";
 import { FundsTableState } from "shared/modules/funds-table/reducers/funds-table.reducers";
@@ -32,6 +35,7 @@ type RootState = Readonly<{
   alertMessages: AlertMessagesState;
   accountSettings: AccountSettingsState;
   wallet: WalletState;
+  copyTradingAccounts: CopyTradingAccountsState;
   ui: IUiState;
 }>;
 
