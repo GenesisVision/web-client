@@ -10,7 +10,7 @@ const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 export const PROGRAM_TRADES_SORTING = "ByDateDesc";
 export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
-    name: "direction"
+    name: "direction-entry"
   },
   {
     name: "symbol"
@@ -32,10 +32,10 @@ export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   },
   {
     name: "ticket"
-  },
-  {
-    name: "entry"
   }
+  /*{
+    name: "entry"
+  }*/
 ];
 export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
   {

@@ -1107,6 +1107,7 @@
       "open-trades-header": {
         "commissions": "Commissions",
         "providers": "Providers",
+        "direction-entry": "Dir/Entry",
         "direction": "Dir",
         "ticket": "Ticket",
         "symbol": "Symbol",

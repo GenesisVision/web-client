@@ -64,13 +64,14 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
       )}
       renderBodyRow={(trade: OrderModel) => (
         <TableRow className="details-trades__row">
-          <TableCell className="details-trades__cell program-details-trades__cell--direction">
+          <TableCell className="details-trades__cell program-details-trades__cell--direction/entry">
             <BaseProfitability
               isPositive={trade.direction === "Buy"}
               isNegative={trade.direction === "Sell"}
             >
               {trade.direction}
             </BaseProfitability>
+            {` / ${trade.entry}`}
           </TableCell>
           <TableCell className="details-trades__cell program-details-trades__cell--symbol">
             {trade.symbol}
@@ -127,10 +128,9 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
           <TableCell className="details-trades__cell program-details-trades__cell--ticket">
             {trade.ticket}
           </TableCell>
-
-          <TableCell className="details-trades__cell program-details-trades__cell--entry">
+          {/*<TableCell className="details-trades__cell program-details-trades__cell--entry">
             {trade.entry}
-          </TableCell>
+          </TableCell>*/}
         </TableRow>
       )}
     />
