@@ -13,7 +13,7 @@ class Tooltip extends React.PureComponent<Props, State> {
   handleMouseEnter = (
     event: React.MouseEvent<HTMLElement, MouseEvent>
   ): void => {
-    this.setState({ anchor: event.currentTarget });
+    if (!this.props.disable) this.setState({ anchor: event.currentTarget });
   };
 
   handleMouseLeave = (): void => {
@@ -57,6 +57,7 @@ class Tooltip extends React.PureComponent<Props, State> {
 
 interface Props {
   render: Function;
+  disable?: boolean;
   horizontal?: HORIZONTAL_POPOVER_POS;
   vertical?: VERTICAL_POPOVER_POS;
   component?: JSX.Element;
