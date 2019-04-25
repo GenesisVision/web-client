@@ -23,8 +23,6 @@ class Tooltip extends React.PureComponent<Props, State> {
   render() {
     const child = React.Children.only(this.props.children);
     const {
-      component,
-      title,
       render,
       vertical = VERTICAL_POPOVER_POS.TOP,
       horizontal = HORIZONTAL_POPOVER_POS.CENTER
@@ -47,7 +45,7 @@ class Tooltip extends React.PureComponent<Props, State> {
           vertical={vertical}
           horizontal={horizontal}
         >
-          {title || component || render()}
+          {render()}
         </Popover>
       </>
     );
@@ -59,8 +57,6 @@ interface Props {
   disable?: boolean;
   horizontal?: HORIZONTAL_POPOVER_POS;
   vertical?: VERTICAL_POPOVER_POS;
-  component?: JSX.Element;
-  title?: string;
 }
 interface State {
   anchor?: EventTarget;
