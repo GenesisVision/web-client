@@ -1,8 +1,14 @@
 import "./wallet-container.scss";
 
+import {
+  CopyTradingAccountInfo,
+  MultiWalletFilters,
+  WalletData
+} from "gv-api-web";
 import { GVTab, GVTabs } from "gv-react-components";
-import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { Location } from "history";
+import React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "redux";
 import GVScroll from "shared/components/scroll/gvscroll";
@@ -17,21 +23,16 @@ import TransactionsRow from "../wallet-transactions/transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
 
-const WALLETS_TAB = "";
-const COPYTRADING_TAB = "#copytrading";
-const TRANSACTIONS_TAB = "#transactions";
-const EXTERNAL_TAB = "#external";
-
-class WalletContainerTotal extends PureComponent {
+class _WalletContainerTotal extends React.PureComponent<Props, State> {
   state = {
-    tab: WALLETS_TAB
+    tab: TABS.WALLETS_TAB
   };
 
-  handleTabChange = (e, tab) => {
-    this.setState({ tab });
+  handleTabChange = (e: React.SyntheticEvent<EventTarget>, tab: string) => {
+    this.setState({ tab: tab as TABS });
   };
 
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps: Props) {
     return {
       tab: nextProps.location.hash
     };
@@ -39,7 +40,15 @@ class WalletContainerTotal extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, wallets, filters, copytrading, location } = this.props;
+    const {
+      isPending,
+      t,
+      wallets,
+      filters,
+      copytrading,
+      location,
+      copyTradingAccounts
+    } = this.props;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
@@ -47,7 +56,7 @@ class WalletContainerTotal extends PureComponent {
             <GVScroll autoHide autoHeight autoHeightMax={60}>
               <GVTabs value={tab} onChange={this.handleTabChange}>
                 <GVTab
-                  value={WALLETS_TAB}
+                  value={TABS.WALLETS_TAB}
                   label={
                     <Link to={location.pathname}>
                       {t("wallet-page.tabs.wallets")}
@@ -57,11 +66,11 @@ class WalletContainerTotal extends PureComponent {
                 <GVTab
                   className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
                   visible={copytrading}
-                  value={COPYTRADING_TAB}
+                  value={TABS.COPYTRADING_TAB}
                   label={
                     <Link
                       to={{
-                        hash: COPYTRADING_TAB
+                        hash: TABS.COPYTRADING_TAB
                       }}
                     >
                       {t("wallet-page.tabs.copytrading")}
@@ -70,11 +79,11 @@ class WalletContainerTotal extends PureComponent {
                 />
                 <GVTab
                   className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
-                  value={TRANSACTIONS_TAB} //TODO add disable prop
+                  value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
                   label={
                     <Link
                       to={{
-                        hash: TRANSACTIONS_TAB
+                        hash: TABS.TRANSACTIONS_TAB
                       }}
                     >
                       {t("wallet-page.tabs.transactions")}
@@ -83,11 +92,11 @@ class WalletContainerTotal extends PureComponent {
                 />
                 <GVTab
                   className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
-                  value={EXTERNAL_TAB}
+                  value={TABS.EXTERNAL_TAB}
                   label={
                     <Link
                       to={{
-                        hash: EXTERNAL_TAB
+                        hash: TABS.EXTERNAL_TAB
                       }}
                     >
                       {t("wallet-page.tabs.external")}
@@ -98,9 +107,14 @@ class WalletContainerTotal extends PureComponent {
             </GVScroll>
           </div>
         </div>
-        {tab === WALLETS_TAB && <WalletList wallets={wallets} />}
-        {tab === COPYTRADING_TAB && <WalletCopytrading />}
-        {tab === TRANSACTIONS_TAB && (
+        {tab === TABS.WALLETS_TAB && <WalletList wallets={wallets} />}
+        {tab === TABS.COPYTRADING_TAB && (
+          <WalletCopytrading
+            copyTradingAccounts={copyTradingAccounts}
+            isPending={isPending}
+          />
+        )}
+        {tab === TABS.TRANSACTIONS_TAB && (
           <WalletTransactions
             columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
             typeFilterValues={filters.transactionType}
@@ -109,7 +123,7 @@ class WalletContainerTotal extends PureComponent {
             )}
           />
         )}
-        {tab === EXTERNAL_TAB && (
+        {tab === TABS.EXTERNAL_TAB && (
           <WalletDepositsWithdrawals
             columns={WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS}
             typeFilterValues={filters.externalTransactionType}
@@ -126,7 +140,31 @@ class WalletContainerTotal extends PureComponent {
   }
 }
 
-export default compose(
+enum TABS {
+  WALLETS_TAB = "",
+  COPYTRADING_TAB = "#copytrading",
+  TRANSACTIONS_TAB = "#transactions",
+  EXTERNAL_TAB = "#external"
+}
+
+interface Props extends InjectedTranslateProps, OwnProps {
+  location: Location;
+}
+
+interface OwnProps {
+  isPending: boolean;
+  wallets: WalletData[];
+  filters: MultiWalletFilters;
+  copytrading: boolean;
+  copyTradingAccounts: CopyTradingAccountInfo[];
+}
+
+interface State {
+  tab: TABS;
+}
+
+const WalletContainerTotal = compose<React.ComponentType<OwnProps>>(
   translate(),
   withRouter
-)(WalletContainerTotal);
+)(_WalletContainerTotal);
+export default WalletContainerTotal;

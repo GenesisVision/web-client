@@ -5,32 +5,38 @@ import { CopyTradingAccountInfo } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Profitability from "shared/components/profitability/profitability";
+import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
-import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
 import {
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
 } from "shared/modules/transfer/transfer.types";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { MiddlewareDispatch } from "shared/utils/types";
 
-import { fetchCopytradingAccounts } from "../../services/wallet.services";
+import { fetchAccounts } from "../../services/wallet.services";
 import { composeWalletCopytradingCurrencyUrl } from "../../wallet.routes";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
 
-class WalletCopytrading extends React.PureComponent<Props, State> {
+class _WalletCopytrading extends React.PureComponent<Props, State> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
     isOpenTransferPopup: false,
     currentAccount: undefined
   };
+
+  componentDidMount() {
+    this.props.service.fetchAccounts();
+  }
 
   handleOpenAddFundsPopup = (currentAccount?: CopyTradingAccountInfo) => () => {
     this.setState({
@@ -52,7 +58,7 @@ class WalletCopytrading extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, copyTradingAccounts, isPending } = this.props;
     const {
       isOpenAddFundsPopup,
       isOpenWithdrawPopup,
@@ -60,9 +66,9 @@ class WalletCopytrading extends React.PureComponent<Props, State> {
     } = this.state;
     return (
       <div className="wallet-list">
-        <TableModule
-          paging={DEFAULT_PAGING}
-          getItems={fetchCopytradingAccounts}
+        <Table
+          isPending={isPending && !copyTradingAccounts.length}
+          items={copyTradingAccounts}
           columns={WALLET_COPYTRADING_COLUMNS}
           renderHeader={column => (
             <span
@@ -161,7 +167,22 @@ class WalletCopytrading extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props extends InjectedTranslateProps {}
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
+  service: {
+    fetchAccounts: () => dispatch(fetchAccounts())
+  }
+});
+
+interface Props extends InjectedTranslateProps, DispatchProps, OwnProps {}
+
+interface OwnProps {
+  copyTradingAccounts: CopyTradingAccountInfo[];
+  isPending: boolean;
+}
+
+interface DispatchProps {
+  service: { fetchAccounts: () => void };
+}
 
 interface State {
   isOpenAddFundsPopup: boolean;
@@ -170,4 +191,11 @@ interface State {
   currentAccount?: CopyTradingAccountInfo;
 }
 
-export default React.memo(translate()(WalletCopytrading));
+const WalletCopytrading = compose<React.ComponentType<OwnProps>>(
+  translate(),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(_WalletCopytrading);
+export default WalletCopytrading;

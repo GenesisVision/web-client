@@ -49,7 +49,7 @@ class LevelFilterPopover extends React.PureComponent<
           marks={this.marks}
           value={this.mapValueToNumber(this.state.value)}
           onChange={this.handleChange}
-          pushable
+          pushable={false}
         />
         <div className="level-filter__btns">
           <GVButton

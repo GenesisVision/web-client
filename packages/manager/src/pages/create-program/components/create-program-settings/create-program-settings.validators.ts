@@ -15,8 +15,8 @@ const createProgramSettingsValidationSchema = (
       .required(
         t("manager.create-program-page.settings.validation.stop-out-required")
       )
-      .moreThan(
-        0,
+      .min(
+        10,
         t("manager.create-program-page.settings.validation.stop-out-is-zero")
       )
       .max(
@@ -40,19 +40,19 @@ const createProgramSettingsValidationSchema = (
       .required(
         t("manager.create-program-page.settings.validation.entry-fee-required")
       )
-      .moreThan(
-        0.01,
+      .min(
+        0,
         t("manager.create-program-page.settings.validation.entry-fee-min")
       )
-      .lessThan(
+      .max(
         props.programsInfo.managerMaxEntryFee,
         t("manager.create-program-page.settings.validation.entry-fee-max", {
           max: props.programsInfo.managerMaxEntryFee
         })
       ),
     successFee: number()
-      .moreThan(
-        0.01,
+      .min(
+        0,
         t("manager.create-program-page.settings.validation.success-fee-min")
       )
       .required(
@@ -60,7 +60,7 @@ const createProgramSettingsValidationSchema = (
           "manager.create-program-page.settings.validation.success-fee-required"
         )
       )
-      .lessThan(
+      .max(
         props.programsInfo.managerMaxSuccessFee,
         t("manager.create-program-page.settings.validation.success-fee-max", {
           max: props.programsInfo.managerMaxSuccessFee
