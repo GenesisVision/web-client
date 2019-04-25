@@ -40,7 +40,7 @@ const programsLevelFilter = {
     const levelRegex = /[0-7]/;
     if (Array.isArray(value) && value.length === 2) {
       const [a, b] = value;
-      return levelRegex.test(a) && levelRegex.test(b) && a < b;
+      return levelRegex.test(a) && levelRegex.test(b);
     }
     return false;
   }
