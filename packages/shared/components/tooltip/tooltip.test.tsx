@@ -1,14 +1,14 @@
-import { mount, ReactWrapper } from "enzyme";
+import { ReactWrapper, mount } from "enzyme";
 import * as React from "react";
-import configureStore, { MockStoreEnhanced } from "redux-mock-store";
 import { Provider } from "react-redux";
-
+import configureStore, { MockStoreEnhanced } from "redux-mock-store";
 import Popover from "shared/components/popover/popover";
-import Tooltip from "./tooltip";
 import {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
+
+import Tooltip from "./tooltip";
 
 const initialState = {
   ui: { scrollTop: 0 }
@@ -41,7 +41,6 @@ describe("Tooltip tests", () => {
     expect(document.querySelector("#modal-root")!.hasChildNodes()).toBeFalsy();
     expect(component.find(Popover)).toHaveLength(1);
     expect(component.find(".test-children")).toHaveLength(1);
-    expect(component.find(".render-func")).toHaveLength(0);
   });
 
   describe("passed props Tooltip", () => {
@@ -109,8 +108,14 @@ describe("Tooltip tests", () => {
           <Tooltip render={Render}>{children}</Tooltip>
         </Provider>
       );
+      expect(
+        document.querySelector("#modal-root")!.hasChildNodes()
+      ).toBeFalsy();
       component.find(".test-children").simulate("touchStart");
       expect(component.find(".render-func")).toHaveLength(1);
+      expect(
+        document.querySelector("#modal-root")!.hasChildNodes()
+      ).toBeTruthy();
     });
     test("should hide Tooltip on mouseLeave", () => {
       component = mount(
@@ -118,8 +123,12 @@ describe("Tooltip tests", () => {
           <Tooltip render={Render}>{children}</Tooltip>
         </Provider>
       );
+      component.find(".test-children").simulate("mouseEnter");
       component.find(".test-children").simulate("mouseLeave");
       expect(component.find(".render-func")).toHaveLength(0);
+      expect(
+        document.querySelector("#modal-root")!.hasChildNodes()
+      ).toBeFalsy();
     });
     test("should hide Tooltip on touchEnd", () => {
       component = mount(
@@ -127,8 +136,12 @@ describe("Tooltip tests", () => {
           <Tooltip render={Render}>{children}</Tooltip>
         </Provider>
       );
+      component.find(".test-children").simulate("touchStart");
       component.find(".test-children").simulate("touchEnd");
       expect(component.find(".render-func")).toHaveLength(0);
+      expect(
+        document.querySelector("#modal-root")!.hasChildNodes()
+      ).toBeFalsy();
     });
   });
 });
