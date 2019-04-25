@@ -74,7 +74,7 @@ const mapStateToProps = (state: RootState) => ({
 interface Props extends StateProps, InjectedTranslateProps {}
 
 interface StateProps {
-  wallets?: WalletsInfo;
+  wallets: WalletData[];
   copyTradingAccounts: CopyTradingAccountInfo[];
   info?: WalletsGrandTotal;
   filters?: MultiWalletFilters;
