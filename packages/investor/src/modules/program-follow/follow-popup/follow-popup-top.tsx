@@ -14,7 +14,6 @@ const FollowTop: React.FC<IFollowTop & InjectedTranslateProps> = ({
   <div className="dialog__top">
     <div className="dialog__header">
       <h2>{t(`follow-program.${step}.title`)}</h2>
-      <p>{programName}</p>
     </div>
   </div>
 );
