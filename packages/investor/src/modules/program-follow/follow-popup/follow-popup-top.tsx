@@ -2,13 +2,11 @@ import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
 export interface IFollowTop {
-  programName: string;
   step: string;
 }
 
 const FollowTop: React.FC<IFollowTop & InjectedTranslateProps> = ({
   t,
-  programName,
   step
 }) => (
   <div className="dialog__top">
