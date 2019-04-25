@@ -58,7 +58,7 @@ class _WalletCopytrading extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { t, copyTradingAccounts } = this.props;
+    const { t, copyTradingAccounts, isPending } = this.props;
     const {
       isOpenAddFundsPopup,
       isOpenWithdrawPopup,
@@ -67,6 +67,7 @@ class _WalletCopytrading extends React.PureComponent<Props, State> {
     return (
       <div className="wallet-list">
         <Table
+          isPending={isPending}
           items={copyTradingAccounts}
           columns={WALLET_COPYTRADING_COLUMNS}
           renderHeader={column => (
@@ -176,6 +177,7 @@ interface Props extends InjectedTranslateProps, DispatchProps, OwnProps {}
 
 interface OwnProps {
   copyTradingAccounts: CopyTradingAccountInfo[];
+  isPending: boolean;
 }
 
 interface DispatchProps {
