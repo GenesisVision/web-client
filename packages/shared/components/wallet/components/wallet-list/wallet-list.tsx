@@ -17,7 +17,6 @@ import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-fund
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
@@ -164,7 +163,7 @@ class _WalletList extends React.PureComponent<Props, State> {
 
 interface Props extends InjectedTranslateProps {
   wallets: WalletData[];
-  createButtonToolbar(): void;
+  createButtonToolbar?: () => void;
 }
 
 interface State {
