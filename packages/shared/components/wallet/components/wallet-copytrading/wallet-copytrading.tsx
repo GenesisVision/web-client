@@ -67,7 +67,7 @@ class _WalletCopytrading extends React.PureComponent<Props, State> {
     return (
       <div className="wallet-list">
         <Table
-          isPending={isPending}
+          isPending={isPending && !copyTradingAccounts.length}
           items={copyTradingAccounts}
           columns={WALLET_COPYTRADING_COLUMNS}
           renderHeader={column => (
