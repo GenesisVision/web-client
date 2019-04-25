@@ -1,5 +1,5 @@
 import {
-  CopyTradingAccountInfo,
+  CopyTradingAccountsList,
   MultiWalletFilters,
   WalletData,
   WalletsGrandTotal
@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { IApiState } from "shared/reducers/api-reducer/api-reducer";
 import RootState from "shared/reducers/root-reducer";
 
 import { WalletRouteProps } from "../wallet.routes";
@@ -45,7 +46,10 @@ class WalletTotal extends React.PureComponent<Props & WalletRouteProps> {
           />
         </div>
         <WalletContainerTotal
-          copyTradingAccounts={copyTradingAccounts}
+          isPending={copyTradingAccounts.isPending}
+          copyTradingAccounts={
+            copyTradingAccounts.data ? copyTradingAccounts.data.accounts : []
+          }
           wallets={wallets}
           filters={filters}
           copytrading={ROLE_ENV === ROLE.INVESTOR}
@@ -58,9 +62,7 @@ class WalletTotal extends React.PureComponent<Props & WalletRouteProps> {
 const mapStateToProps = (state: RootState) => ({
   info: state.wallet.info.data ? state.wallet.info.data.grandTotal : null,
   wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],
-  copyTradingAccounts: state.copyTradingAccounts.info.data
-    ? state.copyTradingAccounts.info.data.accounts
-    : [],
+  copyTradingAccounts: state.copyTradingAccounts.info,
   isPayFeesWithGvt: state.wallet.info.data
     ? state.wallet.info.data.payFeesWithGvt
     : null,
@@ -73,7 +75,7 @@ interface Props extends StateProps, InjectedTranslateProps {}
 
 interface StateProps {
   wallets: WalletData[];
-  copyTradingAccounts: CopyTradingAccountInfo[];
+  copyTradingAccounts: IApiState<CopyTradingAccountsList>;
   info?: WalletsGrandTotal;
   filters?: MultiWalletFilters;
   isPayFeesWithGvt?: boolean;
