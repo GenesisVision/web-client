@@ -404,7 +404,7 @@ class CreateProgramSettings extends React.Component<
               <GVFormikField
                 name="depositWalletId"
                 component={GVTextField}
-                label={t("wallet-transfer.from")}
+                label={t("transfer.from")}
                 InputComponent={Select}
                 onChange={this.onSelectChange(this.props.changeWallet)}
               >
@@ -424,7 +424,7 @@ class CreateProgramSettings extends React.Component<
               <InputAmountField
                 autoFocus={false}
                 name="depositAmount"
-                label={t("wallet-transfer.amount")}
+                label={t("transfer.amount")}
                 currency={wallet.currency}
                 setMax={this.setMaxAmount(wallet.available, wallet.currency)}
               />
