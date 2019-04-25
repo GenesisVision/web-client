@@ -23,7 +23,7 @@ interface Props<T>
   extends ITableBodyExternalProps<T>,
     ITableBodyInnerProps<T>,
     InjectedTranslateProps {}
-class TableBody<T> extends React.PureComponent<Props<T>> {
+class TableBody<T extends any> extends React.PureComponent<Props<T>> {
   render() {
     const {
       updateItems,

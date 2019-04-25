@@ -24,7 +24,7 @@ interface IProgramTableModuleProps {
   showRating?: boolean;
   title: string;
   disableTitle?: boolean;
-  toggleFavorite: TableToggleFavoriteType;
+  toggleFavorite: TableToggleFavoriteType<any>;
 }
 
 class ProgramTableModule extends React.Component<IProgramTableModuleProps> {

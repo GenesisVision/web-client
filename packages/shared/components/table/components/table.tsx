@@ -165,16 +165,3 @@ class Table<TItem, TFiltering> extends React.PureComponent<
 }
 
 export default Table;
-
-/*type Type<T> = {
-  name: T;
-};
-
-type P = {
-  name: string;
-};
-interface P1 {
-  name: string;
-}
-let t: Type<{}> = { name: {} };
-let t2: Type<Partial<P1>> = t;*/

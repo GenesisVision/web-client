@@ -106,7 +106,7 @@ interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
 
 interface OwnProps {
   currency: CURRENCIES;
-  renderBodyRow: RenderBodyItemFuncType;
+  renderBodyRow: RenderBodyItemFuncType<any>;
   columns: SortingColumn[];
   typeFilterValues: TRANSACTIONS_TYPE;
 }

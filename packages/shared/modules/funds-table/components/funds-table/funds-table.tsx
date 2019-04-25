@@ -14,7 +14,7 @@ import FundTableSortingValue from "./fund-table-sorting";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
-interface Props extends ITableProps<any> {
+interface Props extends ITableProps<any, any> {
   data: FundsList;
   toggleFavorite(id: string, selected: boolean): void;
   isAuthenticated: boolean;
