@@ -19,7 +19,10 @@ import notificationsReducer, {
   NotificationsState
 } from "shared/components/notifications/reducers/notifications.reducers";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
-import { walletReducer } from "shared/components/wallet/reducers/wallet.reducers";
+import {
+  CopyTradingAccountsReducer,
+  walletReducer
+} from "shared/components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer from "shared/modules/alert-message/reducers/alert-message-reducers";
 import fundNotificationsReducer from "shared/modules/fund-notifications/reducers/fund-notifications.reducers";
 import fundsReducer from "shared/modules/funds-table/reducers/funds-table.reducers";
@@ -66,6 +69,7 @@ export default combineReducers<ManagerRootState>({
   accountSettings: accountSettingsReducer,
   ui: uiReducer,
   wallet: walletReducer,
+  copyTradingAccounts: CopyTradingAccountsReducer,
   emailPending: emailPendingReducer,
   notificationSettings: notificationSettingsReducer
 });
