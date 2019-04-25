@@ -41,6 +41,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
   render() {
     const { tab } = this.state;
     const {
+      isPending,
       t,
       wallets,
       filters,
@@ -108,7 +109,10 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
         </div>
         {tab === TABS.WALLETS_TAB && <WalletList wallets={wallets} />}
         {tab === TABS.COPYTRADING_TAB && (
-          <WalletCopytrading copyTradingAccounts={copyTradingAccounts} />
+          <WalletCopytrading
+            copyTradingAccounts={copyTradingAccounts}
+            isPending={isPending}
+          />
         )}
         {tab === TABS.TRANSACTIONS_TAB && (
           <WalletTransactions
@@ -148,6 +152,7 @@ interface Props extends InjectedTranslateProps, OwnProps {
 }
 
 interface OwnProps {
+  isPending: boolean;
   wallets: WalletData[];
   filters: MultiWalletFilters;
   copytrading: boolean;
