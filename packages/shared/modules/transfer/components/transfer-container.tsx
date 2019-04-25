@@ -38,6 +38,7 @@ class _TransferContainer extends React.Component<Props, State> {
       .then(() => {
         onClose();
         service.fetchWallets();
+        service.fetchAccounts();
         service.updateWalletTimestamp();
       })
       .catch((error: any) => {
