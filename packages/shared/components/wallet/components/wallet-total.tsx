@@ -1,8 +1,8 @@
 import {
   CopyTradingAccountInfo,
   MultiWalletFilters,
-  WalletsGrandTotal,
-  WalletsInfo
+  WalletData,
+  WalletsGrandTotal
 } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -44,8 +44,6 @@ class WalletTotal extends React.PureComponent<Props & WalletRouteProps> {
             currency={info.currencyCcy}
           />
         </div>
-        {/*
-        //@ts-ignore*/}
         <WalletContainerTotal
           copyTradingAccounts={copyTradingAccounts}
           wallets={wallets}
