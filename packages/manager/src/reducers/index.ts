@@ -49,7 +49,7 @@ type State = {
 
 export type ManagerRootState = RootState & State;
 
-export default combineReducers<ManagerRootState>({
+const rootReducer = combineReducers<ManagerRootState>({
   dashboard: dashboardReducer,
   programNotifications: programNotificationsReducer,
   fundNotifications: fundNotificationsReducer,
@@ -73,3 +73,5 @@ export default combineReducers<ManagerRootState>({
   emailPending: emailPendingReducer,
   notificationSettings: notificationSettingsReducer
 });
+
+export default rootReducer;
