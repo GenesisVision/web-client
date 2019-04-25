@@ -23,7 +23,7 @@ import TransactionsRow from "../wallet-transactions/transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
 
-class WalletContainerTotal extends React.PureComponent<Props, State> {
+class _WalletContainerTotal extends React.PureComponent<Props, State> {
   state = {
     tab: TABS.WALLETS_TAB
   };
@@ -158,7 +158,8 @@ interface State {
   tab: TABS;
 }
 
-export default compose<React.ComponentType<OwnProps>>(
+const WalletContainerTotal = compose<React.ComponentType<OwnProps>>(
   translate(),
   withRouter
-)(WalletContainerTotal);
+)(_WalletContainerTotal);
+export default WalletContainerTotal;
