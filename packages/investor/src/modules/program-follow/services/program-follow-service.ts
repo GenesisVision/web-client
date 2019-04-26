@@ -1,4 +1,5 @@
 import {
+  AttachToSignalProvider,
   AttachToSignalProviderInfo,
   CancelablePromise,
   CopyTradingAccountsList,
@@ -7,8 +8,6 @@ import {
 import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
-
-import { IRequestParams } from "../follow-popup/follow-popup-form";
 
 export const getWalletsAddresses = (): CancelablePromise<WalletsInfo> =>
   walletApi.v10WalletAddressesGet(authService.getAuthArg());
@@ -24,24 +23,20 @@ export const getSignalInfo = (
 
 export const attachToSignal = (
   programId: string,
-  requestParams: IRequestParams
+  requestParams: AttachToSignalProvider
 ) =>
-  signalApi.v10SignalAttachByIdPost(
-    programId,
-    authService.getAuthArg(),
-    requestParams
-  );
+  signalApi.v10SignalAttachByIdPost(programId, authService.getAuthArg(), {
+    model: requestParams
+  });
 
 export const updateAttachToSignal = (
   id: string,
-  requestParams: IRequestParams
+  requestParams: AttachToSignalProvider
 ) => {
   const params = {
     ...requestParams
   };
-  return signalApi.v10SignalByIdUpdatePost(
-    id,
-    authService.getAuthArg(),
-    params
-  );
+  return signalApi.v10SignalByIdUpdatePost(id, authService.getAuthArg(), {
+    model: params
+  });
 };
