@@ -2,15 +2,15 @@ import { ProfileHeaderViewModel } from "gv-api-web";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchTwoFactor } from "shared/actions/2fa-actions";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
+import { logout } from "shared/components/auth/login/login.service";
+import { SIGNUP_ROUTE } from "shared/components/auth/signup/signup.routes";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import Header from "shared/components/header/header";
 import { notificationsToggle } from "shared/components/notifications/actions/notifications.actions";
 
-import { SIGNUP_ROUTE } from "../../../pages/auth/signup/signup.routes";
 import { ManagerRootState } from "../../../reducers";
-import { logout } from "shared/components/auth/login/login.service";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 
 export interface IHeaderContainerStateProps {
   isAuthenticated: boolean;

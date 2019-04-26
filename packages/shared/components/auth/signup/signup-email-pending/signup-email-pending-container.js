@@ -1,15 +1,31 @@
+import { GVButton } from "gv-react-components";
+import React from "react";
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { compose } from "redux";
 
-import SignupEmailPending from "./signup-email-pending";
+const SignupEmailPending = ({ t, service }) => (
+  <GVButton
+    className="signup-email-pending__resend-btn"
+    variant="text"
+    onClick={service.sendConfirmationLink}
+  >
+    {t("auth.signup-email-pending.resend-button-text")}
+  </GVButton>
+);
 
 const mapDispatchToProps = (dispatch, props) => ({
-  service: bindActionCreators(props.sendConfirmationLink, dispatch)
+  service: {
+    sendConfirmationLink: () => dispatch(props.sendConfirmationLink())
+  }
 });
 
-const SignupEmailPendingContainer = connect(
-  null,
-  mapDispatchToProps
+const SignupEmailPendingContainer = compose(
+  translate(),
+  connect(
+    null,
+    mapDispatchToProps
+  )
 )(SignupEmailPending);
 
 export default SignupEmailPendingContainer;

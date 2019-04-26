@@ -4,7 +4,7 @@ import React from "react";
 import { translate } from "react-i18next";
 
 import AuthTabs from "shared/components/auth/components/auth-tabs/auth-tabs";
-import { SIGNUP_ROUTE } from "../signup.routes";
+import { SIGNUP_ROUTE } from "shared/components/auth/signup/signup.routes";
 import SignUpFormContainer from "./components/signup-form/signup-form-container";
 import { MANAGER } from "shared/constants/constants";
 

@@ -2,9 +2,6 @@ import { connectRouter } from "connected-react-router";
 import passwordRestoreReducer, {
   PasswordState
 } from "pages/auth/forgot-password/reducers/password-restore-reducers";
-import signUpReducer, {
-  SignUpState
-} from "pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer, {
   ManagerDashboardState
 } from "pages/dashboard/reducers/dashboard.reducers";
@@ -15,6 +12,9 @@ import { combineReducers } from "redux";
 import loginReducer, {
   LoginState
 } from "shared/components/auth/login/reducers/login.reducers";
+import signUpReducer, {
+  SignUpState
+} from "shared/components/auth/signup/reducers/signup.reducers";
 import notificationsReducer, {
   NotificationsState
 } from "shared/components/notifications/reducers/notifications.reducers";
