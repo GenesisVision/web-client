@@ -1,4 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
+import { AttachToSignalProviderModeEnum } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -8,10 +9,8 @@ import Select from "shared/components/select/select";
 import { SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
 
-import { IRequestParams } from "./follow-popup-form";
-
 class FollowParams extends React.PureComponent<
-  InjectedFormikProps<Props, FormValues>
+  InjectedFormikProps<Props, FollowParamsFormValues>
 > {
   render() {
     const {
@@ -113,15 +112,18 @@ const modes: { [key: string]: mode } = {
   fixed: { label: "Fixed", value: "Fixed" }
 };
 
-interface FormValues {
-  mode: string;
+export interface FollowParamsFormValues {
+  mode: AttachToSignalProviderModeEnum;
   openTolerancePercent: number;
   percent: number;
   fixedVolume: number;
 }
 
 interface OwnProps {
-  onSubmit: (values: IRequestParams, setSubmitting: SetSubmittingType) => void;
+  onSubmit: (
+    values: FollowParamsFormValues,
+    setSubmitting: SetSubmittingType
+  ) => void;
   onPrevStep(): void;
 }
 
@@ -129,12 +131,12 @@ interface Props extends OwnProps, InjectedTranslateProps {}
 
 export default compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik<Props, FormValues>({
+  withFormik<Props, FollowParamsFormValues>({
     isInitialValid: true,
     displayName: "follow-params",
     mapPropsToValues: () => {
       return {
-        mode: modes.byBalance.value,
+        mode: modes.byBalance.value as AttachToSignalProviderModeEnum,
         openTolerancePercent: 0.5,
         fixedVolume: 100,
         percent: 10

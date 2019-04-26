@@ -1,5 +1,8 @@
 import { FormikProps, withFormik } from "formik";
-import { WalletData } from "gv-api-web";
+import {
+  AttachToSignalProviderInitialDepositCurrencyEnum,
+  WalletData
+} from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -15,9 +18,7 @@ import {
   convertToCurrency
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { Schema, lazy, number, object } from "yup";
-
-import { IRequestParams } from "./follow-popup-form";
+import { lazy, number, object, Schema } from "yup";
 
 class FollowCreateAccount extends React.PureComponent<Props, State> {
   state = {
@@ -153,20 +154,22 @@ interface OwnProps {
   minDeposit: number;
   wallets: WalletData[];
   currency: string;
-  onClick: (values: IRequestParams) => void;
+  onClick: (values: CreateAccountFormValues) => void;
 }
 
 interface State {
   isPending: boolean;
 }
 
-export interface FormValues {
-  initialDepositCurrency: string;
+export interface CreateAccountFormValues {
+  initialDepositCurrency: AttachToSignalProviderInitialDepositCurrencyEnum;
   initialDepositAmount: number;
   rate: number;
 }
 
-type Props = OwnProps & InjectedTranslateProps & FormikProps<FormValues>;
+type Props = OwnProps &
+  InjectedTranslateProps &
+  FormikProps<CreateAccountFormValues>;
 
 export default compose<React.ComponentType<OwnProps>>(
   translate(),
@@ -193,7 +196,7 @@ export default compose<React.ComponentType<OwnProps>>(
         return convertToCurrency(wallet ? wallet.available : 0, rate);
       };
       return lazy(
-        (values: FormValues): Schema<any> =>
+        (values: CreateAccountFormValues): Schema<any> =>
           object().shape({
             initialDepositAmount: number()
               .required(
