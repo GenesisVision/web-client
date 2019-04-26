@@ -44,6 +44,7 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
       .v10NotificationsSettingsAddPost(authService.getAuthArg(), {
         assetId: this.props.programDescription.id,
         conditionType: "AvailableToInvest",
+        type: "ProgramCondition",
         conditionAmount: 5
       })
       .then(id => {
