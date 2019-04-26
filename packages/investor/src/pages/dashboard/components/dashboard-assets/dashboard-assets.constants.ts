@@ -8,13 +8,13 @@ export const DASHBOARD_PROGRAMS_COLUMNS: SortingColumn[] = [
     name: "share"
   },
   {
-    name: "currency"
-  },
-  {
     name: "time-left"
   },
   {
     name: "value"
+  },
+  {
+    name: "currency"
   },
   {
     name: "profit"

@@ -117,14 +117,20 @@ const DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
           <TableCell className="programs-table__cell dashboard-programs__cell--share">
             {formatValue(program.dashboardAssetsDetails.share, 2)}%
           </TableCell>
-          <TableCell className="programs-table__cell dashboard-programs__cell--currency">
-            {program.currency}
-          </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--period">
             <ProgramPeriodEnd periodEnds={program.periodEnds} />
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--value">
-            {formatCurrencyValue(program.personalDetails.gvtValue, "GVT")} GVT
+            <NumberFormat
+              value={formatCurrencyValue(
+                program.personalDetails.value,
+                program.currency
+              )}
+              displayType="text"
+            />
+          </TableCell>
+          <TableCell className="programs-table__cell dashboard-programs__cell--currency">
+            {program.currency}
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--profit">
             <Profitability
