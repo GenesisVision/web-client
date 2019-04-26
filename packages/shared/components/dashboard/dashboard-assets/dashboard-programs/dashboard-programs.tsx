@@ -117,9 +117,6 @@ const DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
           <TableCell className="programs-table__cell dashboard-programs__cell--share">
             {formatValue(program.dashboardAssetsDetails.share, 2)}%
           </TableCell>
-          <TableCell className="programs-table__cell dashboard-programs__cell--currency">
-            {program.currency}
-          </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--period">
             <ProgramPeriodEnd periodEnds={program.periodEnds} />
           </TableCell>
@@ -129,9 +126,11 @@ const DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
                 program.personalDetails.value,
                 program.currency
               )}
-              suffix={` ${program.currency}`}
               displayType="text"
             />
+          </TableCell>
+          <TableCell className="programs-table__cell dashboard-programs__cell--currency">
+            {program.currency}
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--profit">
             <Profitability
