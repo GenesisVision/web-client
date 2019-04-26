@@ -124,7 +124,14 @@ const DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
             <ProgramPeriodEnd periodEnds={program.periodEnds} />
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--value">
-            {formatCurrencyValue(program.personalDetails.gvtValue, "GVT")} GVT
+            <NumberFormat
+              value={formatCurrencyValue(
+                program.personalDetails.value,
+                program.currency
+              )}
+              suffix={` ${program.currency}`}
+              displayType="text"
+            />
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--profit">
             <Profitability
