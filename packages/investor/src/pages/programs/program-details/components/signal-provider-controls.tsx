@@ -91,7 +91,6 @@ class SignalProviderControls extends Component<
           {({ updateDetails }: IProgramDetailContext) => (
             <Fragment>
               <ProgramFollowContainer
-                programName={programDescription.title}
                 id={programDescription.id}
                 open={popups[SIGNAL_POPUP.FOLLOW]}
                 currency={programDescription.currency}
