@@ -1,14 +1,16 @@
 import "./wallet-container.scss";
 
+import { MultiWalletFilters } from "gv-api-web";
 import { GVTab, GVTabs } from "gv-react-components";
-import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "redux";
+import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
-import GVScroll from "../../../scroll/gvscroll";
 import DepositsWithdrawalsRow from "../wallet-deposits-withdrawals/deposits-withdrawals-row";
 import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
 import { WALLET_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
@@ -16,19 +18,16 @@ import TransactionsRow from "../wallet-transactions/transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
 
-const TRANSACTIONS_TAB = "";
-const EXTERNAL_TAB = "#external";
-
-class WalletContainer extends PureComponent {
+class _WalletContainer extends React.PureComponent<Props, State> {
   state = {
-    tab: TRANSACTIONS_TAB
+    tab: TABS.TRANSACTIONS_TAB
   };
 
-  handleTabChange = (e, tab) => {
-    this.setState({ tab });
+  handleTabChange = (e: React.SyntheticEvent<EventTarget>, tab: string) => {
+    this.setState({ tab: tab as TABS });
   };
 
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps: Props) {
     return {
       tab: nextProps.location.hash
     };
@@ -36,6 +35,7 @@ class WalletContainer extends PureComponent {
 
   render() {
     const { t, currency, filters, location } = this.props;
+    console.log(filters);
     const { tab } = this.state;
     return (
       <Surface className="wallet-container">
@@ -45,7 +45,7 @@ class WalletContainer extends PureComponent {
               <GVTabs value={tab} onChange={this.handleTabChange}>
                 <GVTab
                   className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
-                  value={TRANSACTIONS_TAB} //TODO add disable prop
+                  value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
                   label={
                     <Link
                       to={{
@@ -59,12 +59,12 @@ class WalletContainer extends PureComponent {
                   }
                 />
                 <GVTab
-                  value={EXTERNAL_TAB}
+                  value={TABS.EXTERNAL_TAB}
                   label={
                     <Link
                       to={{
                         prevPath: WALLET_TOTAL_PAGE_ROUTE,
-                        hash: EXTERNAL_TAB,
+                        hash: TABS.EXTERNAL_TAB,
                         state: t("wallet-page.title")
                       }}
                     >
@@ -77,7 +77,7 @@ class WalletContainer extends PureComponent {
           </div>
         </div>
         <div>
-          {tab === TRANSACTIONS_TAB && (
+          {tab === TABS.TRANSACTIONS_TAB && (
             <WalletTransactions
               typeFilterValues={filters.transactionType}
               columns={WALLET_TRANSACTIONS_COLUMNS}
@@ -91,7 +91,7 @@ class WalletContainer extends PureComponent {
               currency={currency}
             />
           )}
-          {tab === EXTERNAL_TAB && (
+          {tab === TABS.EXTERNAL_TAB && (
             <WalletDepositsWithdrawals
               columns={WALLET_DEPOSITS_WITHDRAWALS_COLUMNS}
               typeFilterValues={filters.externalTransactionType}
@@ -110,7 +110,25 @@ class WalletContainer extends PureComponent {
   }
 }
 
-export default compose(
+enum TABS {
+  TRANSACTIONS_TAB = "",
+  EXTERNAL_TAB = "#external"
+}
+
+interface Props extends InjectedTranslateProps, OwnProps {}
+
+interface OwnProps {
+  currency: CURRENCIES;
+  filters: MultiWalletFilters;
+  location: Location;
+}
+
+interface State {
+  tab: TABS;
+}
+
+const WalletContainer = compose(
   translate(),
   withRouter
-)(WalletContainer);
+)(_WalletContainer);
+export default WalletContainer;

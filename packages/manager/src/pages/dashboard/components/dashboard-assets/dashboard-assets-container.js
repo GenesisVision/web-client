@@ -14,6 +14,7 @@ import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import { fetchAssetsCount } from "../../services/dashboard.service";
+import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 
 class DashboardAssetsContainer extends Component {
   getAssets = () => {
@@ -68,6 +69,7 @@ class DashboardAssetsContainer extends Component {
 
     return (
       <DashboardAssets
+        programColumns={DASHBOARD_PROGRAMS_COLUMNS}
         clearAssets={this.props.service.clearDashboardAssetsTable}
         getDashboardPrograms={getDashboardPrograms}
         getDashboardFunds={getDashboardFunds}

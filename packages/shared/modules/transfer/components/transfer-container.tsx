@@ -5,7 +5,7 @@ import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 import {
-  fetchCopytradingAccounts,
+  fetchAccounts,
   fetchWallets
 } from "shared/components/wallet/services/wallet.services";
 import RootState from "shared/reducers/root-reducer";
@@ -20,18 +20,16 @@ import TransferForm, { TransferFormValuesType } from "./transfer-form";
 
 class _TransferContainer extends React.Component<Props, State> {
   state = {
-    errorMessage: undefined,
-    copytradingAccounts: []
+    errorMessage: undefined
   };
 
   componentDidMount() {
+    const { destinationType, sourceType, service } = this.props;
     if (
-      this.props.destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
-      this.props.sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+      destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
+      sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
     )
-      fetchCopytradingAccounts().then(res => {
-        this.setState({ copytradingAccounts: res.items });
-      });
+      service.fetchAccounts();
   }
 
   handleSubmit = (values: TransferFormValuesType) => {
@@ -40,6 +38,7 @@ class _TransferContainer extends React.Component<Props, State> {
       .then(() => {
         onClose();
         service.fetchWallets();
+        service.fetchAccounts();
         service.updateWalletTimestamp();
       })
       .catch((error: any) => {
@@ -51,6 +50,7 @@ class _TransferContainer extends React.Component<Props, State> {
 
   render() {
     const {
+      copyTradingAccounts,
       title,
       currentItem,
       wallets,
@@ -58,13 +58,13 @@ class _TransferContainer extends React.Component<Props, State> {
       destinationType,
       currentItemContainer
     } = this.props;
-    const { copytradingAccounts, errorMessage } = this.state;
+    const { errorMessage } = this.state;
     const sourceItems =
-      sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copytradingAccounts;
+      sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copyTradingAccounts;
     const destinationItems =
       destinationType === TRANSFER_DIRECTION.WALLET
         ? wallets
-        : copytradingAccounts;
+        : copyTradingAccounts;
     if (!sourceItems.length || !destinationItems.length)
       return <DialogLoader />;
     return (
@@ -84,14 +84,18 @@ class _TransferContainer extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => {
-  if (!state.accountSettings) return { wallets: [] };
+  if (!state.accountSettings) return { wallets: [], copyTradingAccounts: [] };
   const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
-  return { wallets };
+  const copyTradingAccounts = state.copyTradingAccounts.info.data
+    ? state.copyTradingAccounts.info.data.accounts
+    : [];
+  return { wallets, copyTradingAccounts };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
+      fetchAccounts,
       fetchWallets,
       updateWalletTimestamp
     },
@@ -114,10 +118,12 @@ interface Props extends StateProps, DispatchProps, ITransferContainerOwnProps {}
 
 interface StateProps {
   wallets: WalletData[];
+  copyTradingAccounts: CopyTradingAccountInfo[];
 }
 
 interface DispatchProps {
   service: {
+    fetchAccounts(): void;
     fetchWallets(): void;
     updateWalletTimestamp(): void;
   };
@@ -133,6 +139,5 @@ export interface ITransferContainerOwnProps {
 }
 
 interface State {
-  copytradingAccounts?: CopyTradingAccountInfo[];
   errorMessage?: string;
 }

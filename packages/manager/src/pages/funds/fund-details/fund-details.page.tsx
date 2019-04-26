@@ -37,7 +37,7 @@ const mapStateToProps = (state: ManagerRootState): StateProps => {
   const {
     funds
   } = state.platformData.data.enums.program.managerNotificationType;
-  const events = funds.map(event => ({
+  const events = funds.map((event: string) => ({
     value: event,
     labelKey: `manager.dashboard-page.portfolio-events.types.${event}`
   }));

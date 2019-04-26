@@ -5,14 +5,7 @@ import { Icon } from "shared/components/icon/icon";
 
 import { ReactComponent as Favorite } from "./favorite.svg";
 
-interface IFavoriteIconProps {
-  id: string;
-  onClick?(id: string, selected: boolean): void;
-  selected: boolean;
-  className?: string;
-}
-
-class FavoriteIcon extends React.Component<IFavoriteIconProps> {
+class FavoriteIcon extends React.PureComponent<Props> {
   handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     if (this.props.onClick) {
@@ -32,6 +25,13 @@ class FavoriteIcon extends React.Component<IFavoriteIconProps> {
       </Icon>
     );
   }
+}
+
+interface Props {
+  id: string;
+  onClick?(id: string, selected: boolean): void;
+  selected: boolean;
+  className?: string;
 }
 
 export default FavoriteIcon;

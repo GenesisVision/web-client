@@ -9,7 +9,6 @@ import {
   fetchPortfolioEvents
 } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import { getUnique } from "shared/utils/array";
 
 import ChangePasswordTradingAccount from "./components/program-controls/change-password-trading-account";
 import ProgramControls from "./components/program-controls/program-controls";
@@ -40,7 +39,7 @@ const mapStateToProps = (state: ManagerRootState): StateProps => {
   const {
     programs
   } = state.platformData.data.enums.program.managerNotificationType;
-  const events = programs.map(event => ({
+  const events = programs.map((event: string) => ({
     value: event,
     labelKey: `manager.dashboard-page.portfolio-events.types.${event}`
   }));
