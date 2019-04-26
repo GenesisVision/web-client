@@ -7,6 +7,7 @@ import RootState from "shared/reducers/root-reducer";
 
 import { IDataModel } from "../helpers/mapper";
 import { IPaging } from "../helpers/paging.helpers";
+import { DEFAULT_PAGING } from "../reducers/table-paging.reducer";
 import { ITableState } from "../reducers/table.reducer";
 import { getItems, updateFilters } from "../services/table.service";
 import { IFilter, IFiltering } from "./filtering/filter.type";
@@ -83,7 +84,7 @@ class _TableContainer<TFiltering, TItem> extends React.PureComponent<
   }
 }
 
-const mapStateToProps = <TFiltering, TItem>(
+/*const mapStateToProps = <TFiltering, TItem>(
   state: RootState,
   props: OwnProps<TFiltering, TItem>
 ): StateProps<TItem> => {
@@ -93,31 +94,57 @@ const mapStateToProps = <TFiltering, TItem>(
   return {
     data: itemsData.data,
     isPending: itemsData.isPending,
-    sorting,
-    paging,
+    sorting: sorting || "",
+    paging: paging || DEFAULT_PAGING,
     filtering,
     fetchItems: props.getItems,
     defaults
   };
-};
+};*/
 
-const mapDispatchToProps = <TItem extends any>(
-  dispatch: Dispatch
-): DispatchProps<TItem> => ({
-  service: bindActionCreators({ getItems, updateFilters }, dispatch)
-});
+function mapStateToProps<TFiltering, TItem>(
+  state: RootState,
+  props: OwnProps<TFiltering, TItem>
+) {
+  const selector = props.dataSelector(state);
+  const { itemsData, filters, defaults } = selector;
+  const { sorting, paging, filtering } = filters;
+  return {
+    data: itemsData.data,
+    isPending: itemsData.isPending,
+    sorting: sorting || "",
+    paging: paging || DEFAULT_PAGING,
+    filtering,
+    fetchItems: props.getItems,
+    defaults
+  };
+}
 
-const TableContainer = /*connect<
-  StateProps<any>,
-  DispatchProps<any>,
-  OwnProps<any, any>,
-  RootState
->(
-  mapStateToProps,
-  mapDispatchToProps
-)*/ _TableContainer;
+// const mapDispatchToProps = <TItem extends any>(
+//   dispatch: Dispatch
+// ): DispatchProps<TItem> => ({
+//   service: bindActionCreators({ getItems, updateFilters }, dispatch)
+// });
 
-export default TableContainer;
+function mapDispatchToProps<TItem>(dispatch: Dispatch): DispatchProps<TItem> {
+  return {
+    service: bindActionCreators({ getItems, updateFilters }, dispatch)
+  };
+}
+
+function TableContainer<TItem>() {
+  return connect<
+    StateProps<TItem>,
+    DispatchProps<TItem>,
+    OwnProps<any, TItem>,
+    RootState
+  >(
+    mapStateToProps,
+    mapDispatchToProps
+  )(_TableContainer);
+}
+
+export default TableContainer();
 
 interface OwnProps<TFiltering, TItem>
   extends ITableHeaderBaseProps,
@@ -132,9 +159,7 @@ interface OwnProps<TFiltering, TItem>
 interface Props<TFiltering, TItem>
   extends StateProps<TItem>,
     DispatchProps<TItem>,
-    OwnProps<TFiltering, TItem> {
-  //getItems2: GetItemsFuncType<TFiltering, TItem>;
-}
+    OwnProps<TFiltering, TItem> {}
 
 interface StateProps<TItem> {
   data: IDataModel<TItem>;

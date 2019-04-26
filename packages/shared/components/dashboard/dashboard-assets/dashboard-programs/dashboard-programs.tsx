@@ -60,7 +60,6 @@ const DashboardPrograms: React.FC<
       getItems={getDashboardPrograms}
       dataSelector={dashboardProgramsTableSelector}
       isFetchOnMount={true}
-      getItems2={getItems2}
       columns={DASHBOARD_PROGRAMS_COLUMNS}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
