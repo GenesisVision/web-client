@@ -487,6 +487,7 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "notify-hint": "Notify me when the program is available for investment",
       "stop-out-level": "Stop out",
       "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
       "strategy": "Strategy",
@@ -917,6 +918,10 @@
       "Profit": {
         "title": "Profit notification",
         "label": "Profit"
+      },
+      "AvailableToInvest": {
+        "title": "Investment availability notification",
+        "label": "Amount"
       }
     },
     "programs": "PROGRAMS",

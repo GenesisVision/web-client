@@ -1,7 +1,4 @@
-import {
-  NotificationSettingViewModelConditionTypeEnum,
-  ProgramDetailsFull
-} from "gv-api-web";
+import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit";
 import * as React from "react";
@@ -10,13 +7,11 @@ import {
   IProgramDetailContext,
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
-import Hint from "shared/components/hint/hint";
-import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
-import notificationsApi from "shared/services/api-client/notifications-api";
-import authService from "shared/services/auth-service";
+
+import NotifyButton from "./notify-button";
 
 class InvestmentProgramControls extends React.PureComponent<Props, State> {
   state = {
@@ -38,24 +33,6 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
     }
   };
 
-  subscribe = () => {
-    this.setState({ subscription: true });
-    notificationsApi
-      .v10NotificationsSettingsAddPost(authService.getAuthArg(), {
-        assetId: this.props.programDescription.id,
-        conditionType: "AvailableToInvest",
-        type: "ProgramCondition",
-        conditionAmount: 5
-      })
-      .then(id => {
-        console.info(id);
-        this.setState({ subscription: false });
-      })
-      .catch(() => {
-        this.setState({ subscription: false });
-      });
-  };
-
   closeInvestmentPopup = () => {
     this.setState({ isOpenInvestmentPopup: false });
   };
@@ -67,32 +44,20 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
   render() {
     const { t, programDescription } = this.props;
     const { isOpenInvestmentPopup } = this.state;
-    console.info(programDescription);
+    const notificationId = programDescription.personalProgramDetails
+      ? programDescription.personalProgramDetails
+          .notificationAvailableToInvestId
+      : undefined;
     return (
       <>
         <InvestmentProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
           {programDescription.availableInvestmentBase === 0 ? (
-            <>
-              <Hint
-                content={"?"}
-                className="create-fund-settings__item-caption"
-                vertical={VERTICAL_POPOVER_POS.TOP}
-                tooltipContent={
-                  "Notify me when the program is available for investment"
-                }
-              />
-              <GVButton
-                className="program-details-description__invest-btn"
-                onClick={this.subscribe}
-                disabled={Boolean(
-                  programDescription.personalProgramDetails
-                    .notificationAvailableToInvestId
-                )}
-              >
-                {t("buttons.notify")}
-              </GVButton>
-            </>
+            <NotifyButton
+              currency={programDescription.currency}
+              assetId={programDescription.id}
+              notificationId={notificationId}
+            />
           ) : (
             <GVButton
               className="program-details-description__invest-btn"
@@ -138,7 +103,6 @@ interface OwnProps {
 interface State {
   isOpenInvestmentPopup: boolean;
   isOpenPopup: boolean;
-  subscription: boolean;
 }
 
 interface Props extends InjectedTranslateProps, OwnProps {}

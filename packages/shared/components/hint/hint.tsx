@@ -34,8 +34,8 @@ const Hint: React.FC<Props> = ({
 export default Hint;
 
 interface Props {
-  content: JSX.Element;
-  tooltipContent: JSX.Element;
+  content: React.ReactNode;
+  tooltipContent: React.ReactNode;
   className: string;
   vertical: VERTICAL_POPOVER_POS;
 }
