@@ -9,8 +9,11 @@ import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
 
 import {
   ICancelRequest,
+  IFetchInRequests,
   cancelInvestorProgramRequest,
-  cancelManagerProgramRequest
+  cancelManagerProgramRequest,
+  fetchInRequestsManager,
+  fetchInRequestsInvestor
 } from "../actions/asset-status-actions";
 
 export const getAssetRequests = (
@@ -72,13 +75,16 @@ export const cancelRequestDispatch = ({
 }: CancelRequestType) => (dispatch: MiddlewareDispatch): Promise<void> => {
   const authorization = authService.getAuthArg();
   let actionCreator: ICancelRequest;
+  let fetchInRequests: IFetchInRequests;
 
   switch (role + asset) {
     case ROLE.MANAGER + ASSET.PROGRAM:
       actionCreator = cancelManagerProgramRequest;
+      fetchInRequests = fetchInRequestsManager;
       break;
     case ROLE.INVESTOR + ASSET.PROGRAM:
       actionCreator = cancelInvestorProgramRequest;
+      fetchInRequests = fetchInRequestsInvestor;
       break;
     default:
       throw `Error role or type [${role}|${asset}]`;
@@ -86,6 +92,7 @@ export const cancelRequestDispatch = ({
 
   return dispatch(actionCreator(id, authorization))
     .then(() => {
+      dispatch(fetchInRequests(authorization, 0, 100));
       dispatch(fetchProfileHeaderInfo());
       dispatch(
         alertMessageActions.success(
