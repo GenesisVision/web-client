@@ -6,6 +6,7 @@ import {
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 
 import { IDataModel } from "../helpers/mapper";
+import { DEFAULT_PAGING } from "../reducers/table-paging.reducer";
 import { composeRequestFilters } from "../services/table.service";
 import { IDefaultFilters, IFilter, IFiltering } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
@@ -22,7 +23,7 @@ export interface ITableModuleProps<TItem, TFiltering, TRequestFiltering>
 }
 
 interface ITableModuleState<TItem, TFiltering> {
-  paging?: IPaging;
+  paging: IPaging;
   sorting?: string;
   filtering?: IFiltering<TFiltering>;
   data: IDataModel<TItem>;
@@ -39,7 +40,8 @@ class TableModule<
 > {
   static defaultProps = {
     loader: true,
-    isPending: false
+    isPending: false,
+    paging: DEFAULT_PAGING
   };
   constructor(props: ITableModuleProps<TItem, TFiltering, TFilteringRequest>) {
     super(props);
@@ -69,7 +71,7 @@ class TableModule<
   }
 
   updateItems = () => {
-    const { paging = {}, sorting = "", filtering } = this.state;
+    const { paging, sorting = "", filtering } = this.state;
     const { defaultFilters, getItems, loader } = this.props;
 
     if (loader) this.setState({ isPending: true });
@@ -111,10 +113,10 @@ class TableModule<
   };
 
   handleUpdateFilter = <T extends any>(filter: IFilter<T>) => {
+    if (!this.state.filtering) return;
     this.setState(prevState => {
-      if (!prevState.filtering || !prevState.paging) return {};
       return {
-        filtering: updateFilter(prevState.filtering, filter),
+        filtering: updateFilter(prevState.filtering!, filter),
         paging: {
           ...prevState.paging,
           currentPage: 1
