@@ -24,10 +24,6 @@ class FollowCreateAccount extends React.PureComponent<Props, State> {
     isPending: false
   };
 
-  constructor(props: Props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.fetchRate();
   }
@@ -142,7 +138,6 @@ class FollowCreateAccount extends React.PureComponent<Props, State> {
         <div className="dialog__buttons">
           <GVButton
             onClick={this.handleNext}
-            // id="signUpFormSubmit"
             className="invest-form__submit-button"
             disabled={disableButton()}
           >
