@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getRef } from "shared/utils/ref";
 
-import * as signUpService from "../../../services/signup.service";
+import * as signUpService from "shared/components/auth/signup/services/signup.service";
 import SignUpForm from "./signup-form";
 
 const SignUpFormContainer = ({

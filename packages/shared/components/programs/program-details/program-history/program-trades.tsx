@@ -9,6 +9,7 @@ import BaseProfitability from "shared/components/profitability/base-profitabilit
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import {
+  PROGRAM_FOREX_TRADES_COLUMNS,
   PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
@@ -29,6 +30,7 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 const DECIMAL_SCALE = 8;
 
 const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
+  isForex,
   currency,
   programId,
   fetchTrades,
@@ -36,6 +38,9 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
 }) => {
   const fetchProgramTrades: GetItemsFuncType = (filters?: FilteringType) =>
     fetchTrades(programId, filters);
+  const columns = isForex
+    ? PROGRAM_FOREX_TRADES_COLUMNS
+    : PROGRAM_TRADES_COLUMNS;
   return (
     <TableModule
       getItems={fetchProgramTrades}
@@ -52,7 +57,7 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
         </>
       )}
       paging={DEFAULT_PAGING}
-      columns={PROGRAM_TRADES_COLUMNS}
+      columns={columns}
       renderHeader={column => (
         <span
           className={`details-trades__head-cell program-details-trades__cell--${
@@ -122,18 +127,19 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
               />
             </Tooltip>
           </TableCell>
+          {isForex && (
+            <TableCell className="details-trades__cell program-details-trades__cell--swap">
+              {trade.swap}
+            </TableCell>
+          )}
           <TableCell className="details-trades__cell program-details-trades__cell--date">
             {moment(trade.date).format("lll")}
           </TableCell>
-          <TableCell className="details-trades__cell program-details-trades__cell--ticket">
-            {trade.ticket}
-          </TableCell>
-          <TableCell className="details-trades__cell program-details-trades__cell--swap">
-            {trade.swap}
-          </TableCell>
-          {/*<TableCell className="details-trades__cell program-details-trades__cell--entry">
-            {trade.entry}
-          </TableCell>*/}
+          {isForex && (
+            <TableCell className="details-trades__cell program-details-trades__cell--ticket">
+              {trade.ticket}
+            </TableCell>
+          )}
         </TableRow>
       )}
     />
@@ -141,6 +147,7 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
 };
 
 interface Props {
+  isForex: boolean;
   currency: CURRENCIES;
   programId: string;
   fetchTrades: (

@@ -8,6 +8,35 @@ import { SortingColumn } from "shared/components/table/components/filtering/filt
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 export const PROGRAM_TRADES_SORTING = "ByDateDesc";
+export const PROGRAM_FOREX_TRADES_COLUMNS: SortingColumn[] = [
+  {
+    name: "direction-entry"
+  },
+  {
+    name: "symbol"
+  },
+  {
+    name: "volume"
+  },
+  {
+    name: "price"
+  },
+  {
+    name: "profit"
+  },
+  {
+    name: "commission"
+  },
+  {
+    name: "swap"
+  },
+  {
+    name: "date"
+  },
+  {
+    name: "ticket"
+  }
+];
 export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
     name: "direction-entry"
@@ -29,16 +58,7 @@ export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   },
   {
     name: "date"
-  },
-  {
-    name: "ticket"
-  },
-  {
-    name: "swap"
   }
-  /*{
-    name: "entry"
-  }*/
 ];
 export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
   {

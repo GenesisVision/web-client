@@ -59,15 +59,7 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const {
-      service,
-      wallets,
-      open,
-      onClose,
-      currency,
-      id,
-      programName
-    } = this.props;
+    const { service, wallets, open, onClose, currency, id } = this.props;
     const {
       isPending,
       type,
@@ -99,7 +91,6 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
             wallets={wallets!}
             submitMethod={submitMethod}
             handleSubmit={handleSubmit}
-            programName={programName}
           />
         )}
       </Dialog>
@@ -133,7 +124,6 @@ interface StateProps {
 }
 
 interface Props extends DispatchProps, StateProps {
-  programName: string;
   open: boolean;
   onClose(): void;
   onApply(): void;

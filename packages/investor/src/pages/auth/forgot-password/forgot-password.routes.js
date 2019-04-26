@@ -1,5 +1,5 @@
 import { HOME_ROUTE } from "pages/app/app.routes";
-import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
+import { SIGNUP_ROUTE } from "shared/components/auth/signup/signup.routes";
 import React from "react";
 import { translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";

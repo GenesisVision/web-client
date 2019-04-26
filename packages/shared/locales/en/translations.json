@@ -289,8 +289,8 @@
   "follow-program": {
     "create-account": {
       "title": "Account creation",
-      "available": "Available for creation",
-      "amount": "Amount for creation",
+      "available": "Available in wallet",
+      "amount": "Deposit amount",
       "from": "From",
       "next": "Next",
       "validation": {
