@@ -48,19 +48,13 @@ class FollowForm extends React.PureComponent<
       });
   };
   render() {
-    const {
-      wallets,
-      currency,
-      programName,
-      hasSignalAccount,
-      minDeposit
-    } = this.props;
+    const { wallets, currency, hasSignalAccount, minDeposit } = this.props;
     const { errors, step } = this.state;
     const adaptStep =
       step === TABS.CREATE_ACCOUNT ? "create-account" : "params";
     return (
       <>
-        <FollowTop programName={programName} step={adaptStep} />
+        <FollowTop step={adaptStep} />
         {!hasSignalAccount && step === TABS.CREATE_ACCOUNT && (
           <FollowCreateAccount
             minDeposit={minDeposit}
@@ -101,7 +95,6 @@ export interface Props {
   accounts: CopyTradingAccountInfo[];
   wallets: WalletData[];
   currency: string;
-  programName: string;
 }
 
 interface State {
