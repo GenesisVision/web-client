@@ -28,7 +28,7 @@ class FollowForm extends React.PureComponent<
       percent: 10,
       openTolerancePercent: 0.5,
       fixedVolume: 100,
-      fixedCurrency: "GVT" as AttachToSignalProviderFixedCurrencyEnum,
+      fixedCurrency: "USD" as AttachToSignalProviderFixedCurrencyEnum,
       initialDepositCurrency: "GVT" as AttachToSignalProviderInitialDepositCurrencyEnum,
       initialDepositAmount: 0
     },
