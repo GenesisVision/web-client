@@ -15,7 +15,7 @@ export interface ITableBodyExternalProps<T> {
   updateRow?: UpdateRowFuncType<T>;
   updateItems?(): void;
   items?: T[];
-  isPending?: boolean;
+  isPending: boolean;
   className?: string;
 }
 

@@ -9,11 +9,13 @@ import { SortingColumn } from "./filtering/filter.type";
 import TableHeadCell from "./table-head-cell";
 import TableRow from "./table-row";
 
-export interface ITableHeaderProps {
+export interface ITableHeaderBaseProps {
+  columns: SortingColumn[];
+  renderHeader(column: SortingColumn): JSX.Element;
+}
+export interface ITableHeaderProps extends ITableHeaderBaseProps {
   sorting?: string;
   updateSorting?(opt: string): ((dispatch: any, getState: any) => void) | void;
-  columns?: SortingColumn[];
-  renderHeader?(column: SortingColumn): JSX.Element;
 }
 
 class TableHeader extends React.PureComponent<ITableHeaderProps> {

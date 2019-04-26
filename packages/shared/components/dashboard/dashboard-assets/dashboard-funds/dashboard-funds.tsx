@@ -17,7 +17,6 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-import { Column } from "shared/components/table/components/table.types";
 import { FUND } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
@@ -27,7 +26,7 @@ import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
 interface IDashboardFundsProps {
   title: string;
-  getDashboardFunds: any;
+  getDashboardFunds(filters: any): any;
   onChangeStatus?(): void;
   createButtonToolbar: JSX.Element;
   createFund: JSX.Element;
@@ -61,7 +60,7 @@ const DashboardFunds: FunctionComponent<
           />
         </Fragment>
       )}
-      renderHeader={(column: Column) => (
+      renderHeader={column => (
         <span
           className={`funds-table__cell dashboard-funds__cell dashboard-funds__cell--${
             column.name
@@ -74,7 +73,7 @@ const DashboardFunds: FunctionComponent<
           )}
         </span>
       )}
-      renderBodyRow={(fund: any) => (
+      renderBodyRow={fund => (
         <TableRow>
           <TableCell className="funds-table__cell funds-table__cell--name">
             <div className="funds-table__cell--avatar-title">

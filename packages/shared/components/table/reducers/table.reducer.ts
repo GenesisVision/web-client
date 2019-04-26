@@ -4,12 +4,13 @@ import apiReducerFactory, {
 } from "shared/reducers/api-reducer/api-reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
 
+import { FiltersType } from "../components/table.types";
 import { IPaging } from "../helpers/paging.helpers";
 import tableFiltersReducer from "./table-filters.reducer";
 
 export interface ITableState<ItemsType> {
   itemsData: IApiState<ItemsType>;
-  filters: any;
+  filters: FiltersType;
   defaults: { defaultFilters: any; type: string };
 }
 

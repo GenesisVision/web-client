@@ -1,11 +1,9 @@
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+
 import { IPaging } from "../helpers/paging.helpers";
 
-interface IItemsCounterProps extends IPaging {}
-
-const ItemsCounter: React.FC<IItemsCounterProps & InjectedTranslateProps> = ({
-  totalPages = 0,
+const ItemsCounter: React.FC<IPaging & InjectedTranslateProps> = ({
   currentPage = 1,
   itemsOnPage = 0,
   totalItems = 0,

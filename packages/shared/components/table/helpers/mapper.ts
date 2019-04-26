@@ -1,4 +1,4 @@
-type SpecificTypePropsNames<TSource, TResult> = {
+export type SpecificTypePropsNames<TSource, TResult> = {
   [K in keyof TSource]: TSource[K] extends TResult ? K : never
 }[keyof TSource];
 

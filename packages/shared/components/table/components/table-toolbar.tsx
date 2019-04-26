@@ -7,27 +7,30 @@ import { LIST_VIEW } from "../table.constants";
 import { IFiltering, SortingColumn } from "./filtering/filter.type";
 import { IUpdateFilterFunc, RenderFiltersFuncType } from "./table.types";
 
-interface ITableToolbarInnerProps {
+interface OwnProps {
   view: LIST_VIEW;
   isViewSwitchEnabled: boolean;
   onChange(view: LIST_VIEW): void;
 }
 
-export interface ITableToolbarExternalProps<TFiltering> {
+export interface ITableToolbarBaseProps<TFiltering> {
   disableTitle?: boolean;
   createButtonToolbar?: JSX.Element;
-  title?: JSX.Element | string;
   renderFilters?: RenderFiltersFuncType<TFiltering>;
+  columns: SortingColumn[];
+}
+export interface ITableToolbarProps<TFiltering>
+  extends ITableToolbarBaseProps<TFiltering> {
+  title?: JSX.Element | string;
   updateFilter?: IUpdateFilterFunc;
   filtering?: IFiltering<TFiltering>;
-  columns?: SortingColumn[];
   sorting?: string;
   updateSorting?(opt: string): ((dispatch: any, getState: any) => void) | void;
   renderSorting?(value: SortingColumn): JSX.Element | string;
 }
 
 class TableToolbar<TFiltering> extends React.PureComponent<
-  ITableToolbarExternalProps<TFiltering> & ITableToolbarInnerProps
+  ITableToolbarProps<TFiltering> & OwnProps
 > {
   handleIconClick = (view: LIST_VIEW) => () => {
     this.props.onChange(view);

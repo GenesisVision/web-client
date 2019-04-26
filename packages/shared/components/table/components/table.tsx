@@ -14,7 +14,7 @@ import TableHeader, {
   ITableHeaderProps
 } from "shared/components/table/components/table-header";
 import TableToolbar, {
-  ITableToolbarExternalProps
+  ITableToolbarProps
 } from "shared/components/table/components/table-toolbar";
 import {
   LIST_VIEW,
@@ -24,16 +24,19 @@ import { loadData, saveData } from "shared/utils/localstorage";
 
 import { RenderBodyItemFuncType } from "./table.types";
 
-export interface ITableProps<TItem, TFiltering>
-  extends ITableFooterProps,
-    ITableToolbarExternalProps<TFiltering>,
-    ITableBodyExternalProps<TItem>,
-    ITableHeaderProps {
+export interface ITableRenderProps<TItem> {
   renderBodyCard?: RenderBodyItemFuncType<TItem>;
   renderBodyRow?: RenderBodyItemFuncType<TItem>;
   emptyMessage?: JSX.Element | string;
   showSwitchView?: boolean;
 }
+
+export interface ITableProps<TItem, TFiltering>
+  extends ITableFooterProps,
+    ITableToolbarProps<TFiltering>,
+    ITableBodyExternalProps<TItem>,
+    ITableRenderProps<TItem>,
+    ITableHeaderProps {}
 
 interface ITableState {
   view: LIST_VIEW;
@@ -123,6 +126,7 @@ class Table<TItem, TFiltering> extends React.PureComponent<
           {view === LIST_VIEW.CARDS && (
             <div className={classNames("table", className)}>
               <TableBody
+                isPending={isPending}
                 items={items}
                 className="table-cards"
                 tag="div"

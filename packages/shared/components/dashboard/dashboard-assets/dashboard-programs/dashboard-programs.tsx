@@ -1,6 +1,7 @@
 import "./dashboard-programs.scss";
 
 import classNames from "classnames";
+import { ProgramDetails } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -29,6 +30,7 @@ import {
   formatValue
 } from "shared/utils/formatter";
 
+import { IDataModel } from "../../../table/helpers/mapper";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
 interface IDashboardProgramsProps {
@@ -47,6 +49,10 @@ const DashboardPrograms: React.FC<
   createProgram,
   title
 }) => {
+  let getItems2: (
+    filters?: any
+  ) => Promise<IDataModel<ProgramDetails>> = filters =>
+    Promise.resolve({ total: 0, items: [] });
   return (
     <TableContainer
       createButtonToolbar={createButtonToolbar}
@@ -54,6 +60,7 @@ const DashboardPrograms: React.FC<
       getItems={getDashboardPrograms}
       dataSelector={dashboardProgramsTableSelector}
       isFetchOnMount={true}
+      getItems2={getItems2}
       columns={DASHBOARD_PROGRAMS_COLUMNS}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
@@ -63,7 +70,7 @@ const DashboardPrograms: React.FC<
           startLabel={t("filters.date-range.program-start")}
         />
       )}
-      renderHeader={(column: Column) => (
+      renderHeader={column => (
         <span
           className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
             column.name
@@ -76,7 +83,7 @@ const DashboardPrograms: React.FC<
           )}
         </span>
       )}
-      renderBodyRow={(program: any, updateRow: any) => (
+      renderBodyRow={(program, updateRow) => (
         <TableRow
           className={classNames({
             "table__row--pretender": program.rating.canLevelUp

@@ -1,3 +1,5 @@
+import { AnyAction } from "redux";
+
 import { FiltersType } from "../components/table.types";
 
 const FILTER_ACTION_SUFFIX = "FILTER";
@@ -6,17 +8,15 @@ export const composeFiltersActionType = (
   suffix: string = FILTER_ACTION_SUFFIX
 ) => `${actionType}_${suffix}`;
 
-const tableFiltersReducer = ({
-  type,
-  filters = {}
-}: {
+type TableFiltersParamsType = {
   type: string;
   filters: FiltersType;
-}) => {
-  const initialState = { ...filters };
-  const filterActionType = composeFiltersActionType(type);
-  //@ts-ignore
-  return (state = initialState, action) => {
+};
+
+const tableFiltersReducer = (props: TableFiltersParamsType) => {
+  const initialState = { ...props.filters };
+  const filterActionType = composeFiltersActionType(props.type);
+  return (state = initialState, action: AnyAction) => {
     switch (action.type) {
       case filterActionType: {
         return { ...state, ...action.filters };

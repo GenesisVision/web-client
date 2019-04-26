@@ -10,13 +10,14 @@ export interface IApiState<T>
       isPending: boolean;
       errorMessage: string;
       code: null;
-      data?: T;
+      data: T;
     }> {}
 
 const initialState: IApiState<any> = {
   isPending: false,
   errorMessage: "",
-  code: null
+  code: null,
+  data: []
 };
 
 interface IReducerFactoryConfig {
