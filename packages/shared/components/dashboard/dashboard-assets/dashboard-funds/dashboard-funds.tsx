@@ -38,7 +38,7 @@ interface IDashboardFundsProps {
   createFund: JSX.Element;
 }
 
-const DashboardFunds: FunctionComponent<
+const _DashboardFunds: FunctionComponent<
   InjectedTranslateProps & IDashboardFundsProps
 > = ({
   t,
