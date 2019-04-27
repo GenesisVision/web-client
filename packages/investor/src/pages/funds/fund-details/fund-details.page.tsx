@@ -36,10 +36,10 @@ const mapStateToProps = (state: InvestorRootState): StateProps => {
   if (!state.platformData.data) return { events: [] };
   const {
     funds
-  } = state.platformData.data.enums.program.managerNotificationType;
+  } = state.platformData.data.enums.program.investorNotificationType;
   const events = funds.map((event: any) => ({
     value: event,
-    labelKey: `manager.dashboard-page.portfolio-events.types.${event}`
+    labelKey: `investor.dashboard-page.portfolio-events.types.${event}`
   }));
   return { events };
 };
