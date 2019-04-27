@@ -10,7 +10,9 @@ import Surface from "shared/components/surface/surface";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { ROLE_ENV } from "shared/constants/constants";
 
-class DashboardAssets extends React.PureComponent<
+import { GetItemsFuncActionType } from "../../table/components/table.types";
+
+class _DashboardAssets extends React.PureComponent<
   Props & InjectedTranslateProps,
   State
 > {
@@ -100,9 +102,9 @@ class DashboardAssets extends React.PureComponent<
 interface Props {
   clearAssets: any;
   fetchAssetsCount: () => Promise<IDashboardAssetsCounts>;
-  title: any;
-  getDashboardPrograms: any;
-  getDashboardFunds: any;
+  title: string;
+  getDashboardPrograms: GetItemsFuncActionType;
+  getDashboardFunds: GetItemsFuncActionType;
   createProgramButtonToolbar: any;
   createFundButtonToolbar: any;
   createFund: any;
@@ -121,4 +123,5 @@ enum TABS {
   FUNDS = "funds"
 }
 
-export default translate()(DashboardAssets);
+const DashboardAssets = translate()(_DashboardAssets);
+export default DashboardAssets;
