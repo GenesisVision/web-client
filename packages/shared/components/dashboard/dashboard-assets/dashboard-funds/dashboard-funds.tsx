@@ -163,4 +163,5 @@ const DashboardFunds: FunctionComponent<
   );
 };
 
-export default React.memo(translate()(DashboardFunds));
+const DashboardFunds = React.memo(translate()(_DashboardFunds));
+export default DashboardFunds;
