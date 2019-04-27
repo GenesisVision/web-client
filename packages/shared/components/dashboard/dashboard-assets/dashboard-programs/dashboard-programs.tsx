@@ -34,7 +34,7 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
-const DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
+const _DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
   t,
   getDashboardPrograms,
   createButtonToolbar,
@@ -162,7 +162,8 @@ const DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
   );
 };
 
-export default React.memo(translate()(DashboardPrograms));
+const DashboardPrograms = React.memo(translate()(_DashboardPrograms));
+export default DashboardPrograms;
 
 interface Props {
   title: string;
