@@ -56,14 +56,6 @@ class FollowParams extends React.PureComponent<
             ))}
           </GVFormikField>
         </div>
-        <div className="dialog-field">
-          <InputAmountField
-            name="openTolerancePercent"
-            label={t("follow-program.params.tolerance-percent")}
-            currency={"%"}
-            setMax={setMaxOpenTolerancePercent}
-          />
-        </div>
         {mode === modes.percentage.value && (
           <div className="dialog-field">
             <InputAmountField
@@ -84,6 +76,14 @@ class FollowParams extends React.PureComponent<
             />
           </div>
         )}
+        <div className="dialog-field">
+          <InputAmountField
+            name="openTolerancePercent"
+            label={t("follow-program.params.tolerance-percent")}
+            currency={"%"}
+            setMax={setMaxOpenTolerancePercent}
+          />
+        </div>
         <div className="dialog__buttons">
           <GVButton onClick={onPrevStep} color="secondary" variant="outlined">
             {t("follow-program.params.back")}
