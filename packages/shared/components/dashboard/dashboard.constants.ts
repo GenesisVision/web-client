@@ -5,8 +5,8 @@ import {
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
-import { FILTER_TYPE } from "../table/helpers/filtering.helpers";
 import {
   ACTION_STATUS_FILTER_DEFAULT_VALUE,
   ACTION_STATUS_FILTER_NAME
