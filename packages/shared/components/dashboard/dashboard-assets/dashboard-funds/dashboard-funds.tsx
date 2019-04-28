@@ -38,7 +38,7 @@ interface IDashboardFundsProps {
   createFund: JSX.Element;
 }
 
-const DashboardFunds: FunctionComponent<
+const _DashboardFunds: FunctionComponent<
   InjectedTranslateProps & IDashboardFundsProps
 > = ({
   t,
@@ -163,4 +163,5 @@ const DashboardFunds: FunctionComponent<
   );
 };
 
-export default React.memo(translate()(DashboardFunds));
+const DashboardFunds = React.memo(translate()(_DashboardFunds));
+export default DashboardFunds;

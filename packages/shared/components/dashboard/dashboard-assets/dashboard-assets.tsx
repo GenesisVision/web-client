@@ -8,9 +8,10 @@ import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboa
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import Surface from "shared/components/surface/surface";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import { GetItemsFuncActionType } from "shared/components/table/components/table.types";
 import { ROLE_ENV } from "shared/constants/constants";
 
-class DashboardAssets extends React.PureComponent<
+class _DashboardAssets extends React.PureComponent<
   Props & InjectedTranslateProps,
   State
 > {
@@ -100,9 +101,9 @@ class DashboardAssets extends React.PureComponent<
 interface Props {
   clearAssets: any;
   fetchAssetsCount: () => Promise<IDashboardAssetsCounts>;
-  title: any;
-  getDashboardPrograms: any;
-  getDashboardFunds: any;
+  title: string;
+  getDashboardPrograms: GetItemsFuncActionType;
+  getDashboardFunds: GetItemsFuncActionType;
   createProgramButtonToolbar: any;
   createFundButtonToolbar: any;
   createFund: any;
@@ -121,4 +122,5 @@ enum TABS {
   FUNDS = "funds"
 }
 
-export default translate()(DashboardAssets);
+const DashboardAssets = translate()(_DashboardAssets);
+export default DashboardAssets;

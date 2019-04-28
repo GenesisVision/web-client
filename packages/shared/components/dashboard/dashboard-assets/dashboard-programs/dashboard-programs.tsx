@@ -7,7 +7,6 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { Action } from "redux";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
@@ -21,20 +20,26 @@ import {
   FilteringType,
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
+  GetItemsFuncActionType,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { PROGRAM, ROLE, ROLE_ENV, STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
+import {
+  ACTION_STATUS_FILTER_NAME,
+  ACTION_STATUS_FILTER_VALUES
+} from "./dashboard-programs.helpers";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
-const DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
+const _DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
   t,
   getDashboardPrograms,
   createButtonToolbar,
@@ -54,12 +59,21 @@ const DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
         updateFilter: IUpdateFilterFunc,
         filtering: FilteringType
       ) => (
-        <DateRangeFilter
-          name={DATE_RANGE_FILTER_NAME}
-          value={filtering[DATE_RANGE_FILTER_NAME]}
-          onChange={updateFilter}
-          startLabel={t("filters.date-range.program-start")}
-        />
+        <>
+          <SelectFilter
+            name={ACTION_STATUS_FILTER_NAME}
+            label={t(`${ROLE_ENV}.dashboard-page.actions-status-filter.label`)}
+            value={filtering[ACTION_STATUS_FILTER_NAME]}
+            values={ACTION_STATUS_FILTER_VALUES}
+            onChange={updateFilter}
+          />
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.program-start")}
+          />
+        </>
       )}
       renderHeader={(column: Column) => (
         <span
@@ -162,12 +176,13 @@ const DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
   );
 };
 
-export default React.memo(translate()(DashboardPrograms));
+const DashboardPrograms = React.memo(translate()(_DashboardPrograms));
+export default DashboardPrograms;
 
 interface Props {
   title: string;
   columns: SortingColumn[];
-  getDashboardPrograms(filters: any): Action;
+  getDashboardPrograms: GetItemsFuncActionType;
   createButtonToolbar: JSX.Element;
   createProgram: JSX.Element;
 }
