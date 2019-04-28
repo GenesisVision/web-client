@@ -8,9 +8,8 @@ import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboa
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import Surface from "shared/components/surface/surface";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import { GetItemsFuncActionType } from "shared/components/table/components/table.types";
 import { ROLE_ENV } from "shared/constants/constants";
-
-import { GetItemsFuncActionType } from "../../table/components/table.types";
 
 class _DashboardAssets extends React.PureComponent<
   Props & InjectedTranslateProps,
