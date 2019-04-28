@@ -52,22 +52,25 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
   componentDidMount() {
     const { service } = this.props;
     service.fetchWallets();
-    fetchBrokers().then(brokers => {
-      this.setState({
-        brokers: brokers,
-        isPending: false,
-        selectedBroker: brokers[0]
-      });
-    });
-
-    fetchMinDepositsAmount().then(minimumDepositsAmount =>
-      this.setState({ minimumDepositsAmount })
-    );
+    fetchBrokers()
+      .then(brokers => {
+        this.setState({
+          brokers: brokers,
+          selectedBroker: brokers[0]
+        });
+        return fetchMinDepositsAmount(brokers[0].accountTypes[0].id);
+      })
+      .then(minimumDepositsAmount =>
+        this.setState({ minimumDepositsAmount, isPending: false })
+      );
   }
 
   selectBroker = (brokerName: string) => () => {
-    const broker = this.state.brokers!.find(x => x.name === brokerName);
-    this.setState({ selectedBroker: broker });
+    const selectedBroker = this.state.brokers!.find(x => x.name === brokerName);
+    fetchMinDepositsAmount(selectedBroker!.accountTypes[0].id).then(
+      minimumDepositsAmount =>
+        this.setState({ minimumDepositsAmount, selectedBroker })
+    );
   };
 
   confirmNavigateToBroker = () => {
