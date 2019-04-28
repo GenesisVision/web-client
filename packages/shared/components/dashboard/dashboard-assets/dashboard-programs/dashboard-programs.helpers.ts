@@ -1,6 +1,4 @@
-import { ROLE_ENV } from "../../../../constants/constants";
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "../../../table/components/filtering/date-range-filter/date-range-filter.constants";
-import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "../../../table/components/filtering/event-type-filter/event-type-filter.constants";
+import { ROLE_ENV } from "shared/constants/constants";
 
 export enum ACTION_STATUS_FILTER_TYPES {
   ALL = "all",
