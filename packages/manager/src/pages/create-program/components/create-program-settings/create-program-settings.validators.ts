@@ -10,6 +10,15 @@ const createProgramSettingsValidationSchema = (
   props: ICreateProgramSettingsProps
 ) => {
   const { t } = props;
+  const minDeposit = parseFloat(
+    formatCurrencyValue(
+      convertToCurrency(
+        props.minimumDepositsAmount[props.programCurrency!],
+        props.rate || 1
+      ),
+      props.programCurrency!
+    )
+  );
   return object().shape({
     stopOutLevel: number()
       .required(
@@ -87,25 +96,11 @@ const createProgramSettingsValidationSchema = (
               )
             )
             .min(
-              parseFloat(
-                formatCurrencyValue(
-                  convertToCurrency(
-                    props.minimumDepositsAmount[props.programCurrency],
-                    props.rate
-                  ),
-                  props.programCurrency
-                )
-              ),
+              minDeposit,
               t(
                 "manager.create-program-page.settings.validation.amount-is-zero",
                 {
-                  min: formatCurrencyValue(
-                    convertToCurrency(
-                      props.minimumDepositsAmount[props.programCurrency],
-                      props.rate
-                    ),
-                    props.programCurrency
-                  )
+                  min: minDeposit
                 }
               )
             )

@@ -9,6 +9,7 @@ import {
 } from "gv-api-web";
 import { GVTab, GVTabs } from "gv-react-components";
 import ConfirmContainer from "modules/confirm/confirm-container";
+import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -24,7 +25,6 @@ import {
   SetSubmittingType
 } from "shared/utils/types";
 
-import { DASHBOARD_ROUTE } from "../../dashboard/dashboard.routes";
 import {
   createProgram,
   fetchBrokers,
@@ -52,22 +52,25 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
   componentDidMount() {
     const { service } = this.props;
     service.fetchWallets();
-    fetchBrokers().then(brokers => {
-      this.setState({
-        brokers: brokers,
-        isPending: false,
-        selectedBroker: brokers[0]
-      });
-    });
-
-    fetchMinDepositsAmount().then(minimumDepositsAmount =>
-      this.setState({ minimumDepositsAmount })
-    );
+    fetchBrokers()
+      .then(brokers => {
+        this.setState({
+          brokers: brokers,
+          selectedBroker: brokers[0]
+        });
+        return fetchMinDepositsAmount(brokers[0].accountTypes[0].id);
+      })
+      .then(minimumDepositsAmount =>
+        this.setState({ minimumDepositsAmount, isPending: false })
+      );
   }
 
   selectBroker = (brokerName: string) => () => {
-    const broker = this.state.brokers!.find(x => x.name === brokerName);
-    this.setState({ selectedBroker: broker });
+    const selectedBroker = this.state.brokers!.find(x => x.name === brokerName);
+    fetchMinDepositsAmount(selectedBroker!.accountTypes[0].id).then(
+      minimumDepositsAmount =>
+        this.setState({ minimumDepositsAmount, selectedBroker })
+    );
   };
 
   confirmNavigateToBroker = () => {
