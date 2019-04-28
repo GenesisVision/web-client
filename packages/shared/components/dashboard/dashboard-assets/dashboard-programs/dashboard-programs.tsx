@@ -26,6 +26,7 @@ import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
+  GetItemsFuncActionType,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { PROGRAM, ROLE, ROLE_ENV, STATUS } from "shared/constants/constants";
@@ -181,7 +182,7 @@ export default DashboardPrograms;
 interface Props {
   title: string;
   columns: SortingColumn[];
-  getDashboardPrograms(filters: any): Action;
+  getDashboardPrograms: GetItemsFuncActionType;
   createButtonToolbar: JSX.Element;
   createProgram: JSX.Element;
 }
