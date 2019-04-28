@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
+import { DASHBOARD_ROUTE } from "shared/components/dashboard/dashboard.routes";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
@@ -24,7 +25,6 @@ import {
   SetSubmittingType
 } from "shared/utils/types";
 
-import { DASHBOARD_ROUTE } from "../../dashboard/dashboard.routes";
 import {
   createProgram,
   fetchBrokers,
