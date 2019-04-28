@@ -36,7 +36,7 @@ import { allowValuesNumberFormat } from "shared/utils/helpers";
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
-class CreateProgramSettings extends React.Component<
+class CreateProgramSettings extends React.PureComponent<
   InjectedFormikProps<
     ICreateProgramSettingsProps,
     ICreateProgramSettingsFormValues
