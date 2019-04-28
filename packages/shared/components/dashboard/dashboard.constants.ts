@@ -31,7 +31,7 @@ export const DASHBOARD_PROGRAMS_FILTERS = [
 ];
 
 export const DASHBOARD_PROGRAMS_DEFAULT_FILTERING = {
-  dateRange: {
+  [DATE_RANGE_FILTER_NAME]: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
     type: DateRangeFilterTypes.lastMonth
   },
