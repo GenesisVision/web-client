@@ -9,13 +9,13 @@ import {
 } from "gv-api-web";
 import { GVTab, GVTabs } from "gv-react-components";
 import ConfirmContainer from "modules/confirm/confirm-container";
+import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
-import { DASHBOARD_ROUTE } from "shared/components/dashboard/dashboard.routes";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
