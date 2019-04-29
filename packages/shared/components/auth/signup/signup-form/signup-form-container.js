@@ -1,4 +1,4 @@
-import SignUpForm from "pages/auth/signup/signup/components/signup-form/signup-form";
+import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
