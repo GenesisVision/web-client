@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import Dialog from "shared/components/dialog/dialog";
+import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import Select from "shared/components/select/select";
 import { ITwoFactorReducer } from "shared/reducers/2fa-reducer";
 import RootState from "shared/reducers/root-reducer";
@@ -22,6 +23,10 @@ class TwoFactorAuthContainer extends React.PureComponent<Props, State> {
     isPending: false,
     type: undefined
   };
+
+  componentDidMount(): void {
+    this.props.services.fetchProfileHeaderInfo();
+  }
 
   handleChange = (event: React.ChangeEvent<any>) => {
     this.setState({ type: event.target.value });
@@ -83,7 +88,10 @@ const mapStateToProps = (state: RootState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  services: bindActionCreators({ fetchTwoFactor }, dispatch)
+  services: bindActionCreators(
+    { fetchTwoFactor, fetchProfileHeaderInfo },
+    dispatch
+  )
 });
 
 interface Props
@@ -97,7 +105,10 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  services: { fetchTwoFactor: () => ActionType };
+  services: {
+    fetchTwoFactor: () => ActionType;
+    fetchProfileHeaderInfo: () => ActionType;
+  };
 }
 
 interface OwnProps {}

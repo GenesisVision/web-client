@@ -5,9 +5,6 @@ import copytradingTablesReducer, {
 import passwordRestoreReducer, {
   PasswordState
 } from "pages/auth/forgot-password/reducers/password-restore-reducers";
-import signUpReducer, {
-  SignUpState
-} from "pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer, {
   DashboardState
 } from "pages/dashboard/reducers/dashboard.reducers";
@@ -18,9 +15,15 @@ import { combineReducers } from "redux";
 import loginReducer, {
   LoginState
 } from "shared/components/auth/login/reducers/login.reducers";
+import signUpReducer, {
+  SignUpState
+} from "shared/components/auth/signup/reducers/signup.reducers";
 import notificationsReducer from "shared/components/notifications/reducers/notifications.reducers";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
-import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
+import {
+  CopyTradingAccountsReducer,
+  walletReducer
+} from "shared/components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer from "shared/modules/alert-message/reducers/alert-message-reducers";
 import fundNotificationsReducer from "shared/modules/fund-notifications/reducers/fund-notifications.reducers";
 import fundsReducer from "shared/modules/funds-table/reducers/funds-table.reducers";
@@ -67,6 +70,7 @@ const rootReducer = combineReducers<InvestorRootState>({
   fundNotifications: fundNotificationsReducer,
   manager: managerReducer,
   wallet: walletReducer,
+  copyTradingAccounts: CopyTradingAccountsReducer,
   accountSettings: accountSettingsReducer,
   ui: uiReducer,
   copytradingTables: copytradingTablesReducer

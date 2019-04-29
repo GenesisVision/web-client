@@ -10,13 +10,22 @@ const createProgramSettingsValidationSchema = (
   props: ICreateProgramSettingsProps
 ) => {
   const { t } = props;
+  const minDeposit = parseFloat(
+    formatCurrencyValue(
+      convertToCurrency(
+        props.minimumDepositsAmount[props.programCurrency!],
+        props.rate || 1
+      ),
+      props.programCurrency!
+    )
+  );
   return object().shape({
     stopOutLevel: number()
       .required(
         t("manager.create-program-page.settings.validation.stop-out-required")
       )
-      .moreThan(
-        0,
+      .min(
+        10,
         t("manager.create-program-page.settings.validation.stop-out-is-zero")
       )
       .max(
@@ -40,19 +49,19 @@ const createProgramSettingsValidationSchema = (
       .required(
         t("manager.create-program-page.settings.validation.entry-fee-required")
       )
-      .moreThan(
-        0.01,
+      .min(
+        0,
         t("manager.create-program-page.settings.validation.entry-fee-min")
       )
-      .lessThan(
+      .max(
         props.programsInfo.managerMaxEntryFee,
         t("manager.create-program-page.settings.validation.entry-fee-max", {
           max: props.programsInfo.managerMaxEntryFee
         })
       ),
     successFee: number()
-      .moreThan(
-        0.01,
+      .min(
+        0,
         t("manager.create-program-page.settings.validation.success-fee-min")
       )
       .required(
@@ -60,7 +69,7 @@ const createProgramSettingsValidationSchema = (
           "manager.create-program-page.settings.validation.success-fee-required"
         )
       )
-      .lessThan(
+      .max(
         props.programsInfo.managerMaxSuccessFee,
         t("manager.create-program-page.settings.validation.success-fee-max", {
           max: props.programsInfo.managerMaxSuccessFee
@@ -87,25 +96,11 @@ const createProgramSettingsValidationSchema = (
               )
             )
             .min(
-              parseFloat(
-                formatCurrencyValue(
-                  convertToCurrency(
-                    props.minimumDepositsAmount[props.programCurrency],
-                    props.rate
-                  ),
-                  props.programCurrency
-                )
-              ),
+              minDeposit,
               t(
                 "manager.create-program-page.settings.validation.amount-is-zero",
                 {
-                  min: formatCurrencyValue(
-                    convertToCurrency(
-                      props.minimumDepositsAmount[props.programCurrency],
-                      props.rate
-                    ),
-                    props.programCurrency
-                  )
+                  min: minDeposit
                 }
               )
             )

@@ -106,10 +106,10 @@ const mapStateToProps = (state: RootState): StateProps => ({
 interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
 
 interface OwnProps {
-  currency: CURRENCIES;
   renderBodyRow: RenderBodyItemFuncType;
   columns: SortingColumn[];
-  typeFilterValues: TRANSACTIONS_TYPE;
+  typeFilterValues: Array<TRANSACTIONS_TYPE | string>;
+  currency?: CURRENCIES;
 }
 
 interface StateProps extends WalletLastUpdateState {}

@@ -8,12 +8,13 @@ import { Link } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
 import { ChartIcon } from "shared/components/icon/chart-icon";
-import { MANAGER } from "shared/constants/constants";
+import { MANAGER, ROLE_ENV } from "shared/constants/constants";
 
 import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import { fetchAssetsCount } from "../../services/dashboard.service";
+import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 
 class DashboardAssetsContainer extends Component {
   getAssets = () => {
@@ -32,11 +33,7 @@ class DashboardAssetsContainer extends Component {
             <ChartIcon />
           </div>
           <div className="create-asset__text">
-            {t(
-              `${
-                process.env.REACT_APP_PLATFORM
-              }.dashboard-page.create-fund-text`
-            )}
+            {t(`${ROLE_ENV}.dashboard-page.create-fund-text`)}
           </div>
           <div className="create-asset__button">
             <Link
@@ -56,11 +53,7 @@ class DashboardAssetsContainer extends Component {
             <ChartIcon />
           </div>
           <div className="create-asset__text">
-            {t(
-              `${
-                process.env.REACT_APP_PLATFORM
-              }.dashboard-page.create-program-text`
-            )}
+            {t(`${ROLE_ENV}.dashboard-page.create-program-text`)}
           </div>
           <div className="create-asset__button">
             <Link
@@ -76,6 +69,7 @@ class DashboardAssetsContainer extends Component {
 
     return (
       <DashboardAssets
+        programColumns={DASHBOARD_PROGRAMS_COLUMNS}
         clearAssets={this.props.service.clearDashboardAssetsTable}
         getDashboardPrograms={getDashboardPrograms}
         getDashboardFunds={getDashboardFunds}

@@ -7,6 +7,7 @@ import {
   fetchInRequests
 } from "../actions/dashboard.actions";
 import { getTopPortfolioEvents } from "./dashboard-events.services";
+import { ROLE_ENV } from "shared/constants/constants";
 
 export const getInRequests = () => dispatch => {
   const authorization = authService.getAuthArg();
@@ -29,9 +30,7 @@ export const cancelRequest = ({
       dispatch(getTopPortfolioEvents());
       dispatch(
         alertMessageActions.success(
-          `${
-            process.env.REACT_APP_PLATFORM
-          }.dashboard-page.requests.success-cancel-request`,
+          `${ROLE_ENV}.dashboard-page.requests.success-cancel-request`,
           true
         )
       );

@@ -6,11 +6,12 @@ import { Route, Switch } from "react-router-dom";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import SignUpFooter from "shared/components/auth/components/signup-footer/signup-footer";
 
-import EmailPending from "./signup-email-pending/signup-email-pending.page";
+import EmailPending from "shared/components/auth/signup/signup-email-pending/signup-email-pending.page";
 import SignUpPage from "./signup/signup.page";
-
-export const SIGNUP_ROUTE = "/signup";
-export const SIGNUP_ROUTE_PENDING = `${SIGNUP_ROUTE}/pending`;
+import {
+  SIGNUP_ROUTE,
+  SIGNUP_ROUTE_PENDING
+} from "shared/components/auth/signup/signup.routes";
 
 const SignUpRoutes = ({ t }) => (
   <AuthLayout

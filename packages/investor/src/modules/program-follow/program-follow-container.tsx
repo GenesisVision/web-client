@@ -59,15 +59,7 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const {
-      service,
-      wallets,
-      open,
-      onClose,
-      currency,
-      id,
-      programName
-    } = this.props;
+    const { service, wallets, open, onClose, currency, id } = this.props;
     const {
       isPending,
       type,
@@ -75,7 +67,6 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
       hasSignalAccount,
       minDeposit
     } = this.state;
-    if (isPending) return <DialogLoader />;
     const handleClose = () => {
       onClose();
     };
@@ -86,19 +77,22 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
       type === FOLLOW_TYPE.CREATE ? attachToSignal : updateAttachToSignal;
     return (
       <Dialog open={open} onClose={handleClose}>
-        <FollowPopupForm
-          minDeposit={minDeposit!}
-          hasSignalAccount={hasSignalAccount!}
-          alertError={service.alertError}
-          alertSuccess={service.alertSuccess}
-          id={id}
-          accounts={accounts}
-          currency={currency}
-          wallets={wallets!}
-          submitMethod={submitMethod}
-          handleSubmit={handleSubmit}
-          programName={programName}
-        />
+        {isPending ? (
+          <DialogLoader />
+        ) : (
+          <FollowPopupForm
+            minDeposit={minDeposit!}
+            hasSignalAccount={hasSignalAccount!}
+            alertError={service.alertError}
+            alertSuccess={service.alertSuccess}
+            id={id}
+            accounts={accounts}
+            currency={currency}
+            wallets={wallets!}
+            submitMethod={submitMethod}
+            handleSubmit={handleSubmit}
+          />
+        )}
       </Dialog>
     );
   }
@@ -130,7 +124,6 @@ interface StateProps {
 }
 
 interface Props extends DispatchProps, StateProps {
-  programName: string;
   open: boolean;
   onClose(): void;
   onApply(): void;

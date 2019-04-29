@@ -288,8 +288,8 @@
   "follow-program": {
     "create-account": {
       "title": "Account creation",
-      "available": "Available for creation",
-      "amount": "Amount for creation",
+      "available": "Available in wallet",
+      "amount": "Deposit amount",
       "from": "From",
       "next": "Next",
       "validation": {
@@ -305,7 +305,7 @@
       "volume-percent": "Volume percentage",
       "usd-equivalent": "USD equivalent",
       "back": "Back",
-      "submit": "Submit",
+      "submit": "Subscribe",
       "validation": {
         "fixedVolume-min": "USD equivalent must be greater than or equal to 0",
         "fixedVolume-max": "USD equivalent must be less than or equal to 99999",
@@ -355,8 +355,7 @@
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart",
-      "strategy": "Strategy",
-      "favourite": ""
+      "strategy": "Strategy"
     }
   },
   "funds-page": {
@@ -373,8 +372,7 @@
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart",
-      "value": "Value",
-      "favourite": ""
+      "value": "Value"
     }
   },
   "about-levels-page": {
@@ -558,6 +556,10 @@
         "open-positions": "Open positions"
       },
       "trades": {
+        "swap": "Swap",
+        "providers": "Providers",
+        "direction-entry": "Dir/Entry",
+        "commission": "Commission",
         "direction": "Dir",
         "ticket": "Ticket",
         "symbol": "Symbol",
@@ -1104,7 +1106,10 @@
         "error-message": "An error occurred while closing the trade"
       },
       "open-trades-header": {
+        "swap": "Swap",
+        "commission": "Commission",
         "providers": "Providers",
+        "direction-entry": "Dir/Entry",
         "direction": "Dir",
         "ticket": "Ticket",
         "symbol": "Symbol",
@@ -1140,7 +1145,13 @@
         "funds": "Funds",
         "copytrading": "Copytrading"
       },
-
+      "actions-status-filter": {
+        "label": "Status",
+        "values": {
+          "all": "All",
+          "active": "Active"
+        }
+      },
       "programs-header": {
         "title": "Name",
         "share": "Share",
@@ -1199,14 +1210,15 @@
           "amount": "Amount"
         },
         "types": {
-          "all": "All",
-          "invest": "Invest",
-          "withdraw": "Withdraw",
-          "profit": "Profit",
-          "loss": "Loss",
-          "reinvest": "Reinvest",
-          "canceled": "Canceled",
-          "ended": "Ended",
+          "WithdrawByStopOut": "Withdraw by stop out",
+          "All": "All",
+          "Invest": "Invest",
+          "Withdraw": "Withdraw",
+          "Profit": "Profit",
+          "Loss": "Loss",
+          "Reinvest": "Reinvest",
+          "Canceled": "Canceled",
+          "Ended": "Ended",
           "ManagerInvest": "Manager invest",
           "EntranceFee": "Entrance fee",
           "AssetStarted": "Asset started",
@@ -1275,7 +1287,15 @@
       "requests": {
         "success-cancel-request": "Request canceled successfully"
       },
+      "actions-status-filter": {
+        "label": "Status",
+        "values": {
+          "all": "All",
+          "active": "Active"
+        }
+      },
       "programs-header": {
+        "login": "Login",
         "title": "Name",
         "share": "Share",
         "currency": "Curr.",
@@ -1323,6 +1343,9 @@
           "amount": "Amount"
         },
         "types": {
+          "ProgramSignalSubscribe": "Program signal subscribe",
+          "ProgramStopOut": "Program stop out",
+          "ProgramManagerTradingFeeAccrual": "Program manager trading fee accrual",
           "all": "All",
           "invest": "Invest",
           "withdraw": "Withdraw",
@@ -1413,7 +1436,7 @@
         "validation": {
           "stop-out-required": "Stop Out is required",
           "stop-out-is-large": "Must be less than 100",
-          "stop-out-is-zero": "Must be more than 0",
+          "stop-out-is-zero": "Must be more than 10",
           "stop-out-less-ten": "Level cannot be less than 10",
           "stop-out-more-current": "Level cannot be more than a current value",
           "amount-required": "Amount is required",
@@ -1430,10 +1453,10 @@
           "period-required": "Period is required",
           "leverage-required": "Leverage is required",
           "entry-fee-required": "Entry fee is required",
-          "entry-fee-min": "Entry fee must be greater than 0.01 % ",
+          "entry-fee-min": "Entry fee must be greater than 0 % ",
           "entry-fee-max": "Entry fee must be less than {{max}} %",
           "success-fee-required": "Success fee is required",
-          "success-fee-min": "Success fee must be greater than 0.01 % ",
+          "success-fee-min": "Success fee must be greater than 0 % ",
           "success-fee-max": "Success fee must be less than {{max}} % ",
           "signal-subscription-fee-required": "Subscription fee is required",
           "signal-subscription-fee-min": "Subscription fee must be greater than 0.01 GVT",

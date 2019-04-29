@@ -7,12 +7,14 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
-import { PORTFOLIO_EVENTS_TYPES } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import ProgramTrades from "shared/components/programs/program-details/program-history/program-trades";
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  SelectFilterValue
+} from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
@@ -48,6 +50,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
   render() {
     const { tab, tradesCount, eventsCount, openPositionsCount } = this.state;
     const {
+      isForex,
       t,
       programId,
       programCurrency,
@@ -87,6 +90,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
         <div>
           {tab === TABS.TRADES && (
             <ProgramTrades
+              isForex={isForex}
               fetchTrades={fetchTrades}
               programId={programId}
               currency={currency}
@@ -127,6 +131,7 @@ enum TABS {
 interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
 
 interface OwnProps {
+  isForex: boolean;
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
   fetchPortfolioEvents: GetItemsFuncType;
   fetchOpenPositions: (
@@ -141,7 +146,7 @@ interface OwnProps {
   currency: CURRENCIES;
   programCurrency: CURRENCIES;
   isInvested: boolean;
-  eventTypeFilterValues: PORTFOLIO_EVENTS_TYPES[];
+  eventTypeFilterValues: SelectFilterValue[];
 }
 
 interface StateProps extends AuthState {}

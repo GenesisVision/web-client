@@ -27,6 +27,14 @@ export const fetchWallets = (): RootThunk<void> => (dispatch, getState) => {
   dispatch(actions.fetchWallets(currency, authorization));
 };
 
+export const fetchAccounts = (): RootThunk<void> => (dispatch, getState) => {
+  const authorization = authService.getAuthArg();
+  const { info } = getState().copyTradingAccounts;
+  if (info.isPending) return;
+  dispatch(actions.updateAccountTimestamp());
+  dispatch(actions.fetchAccounts(authorization));
+};
+
 export const fetchBaseWallets = (): RootThunk<
   Promise<WalletMultiAvailable>
 > => (dispatch, getState) => {
@@ -100,7 +108,7 @@ export const resendWithdrawRequest = (txId: string) => (
 };
 
 export const fetchMultiTransactionsExternal = (
-  currency: string,
+  currency?: string,
   filters?: FilteringType
 ): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
   const authorization = authService.getAuthArg();
@@ -114,7 +122,7 @@ export const fetchMultiTransactionsExternal = (
 };
 
 export const fetchMultiTransactions = (
-  currency: CURRENCIES,
+  currency?: CURRENCIES,
   filters?: FilteringType
 ) => {
   const authorization = authService.getAuthArg();

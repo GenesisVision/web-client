@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
 import { ILoginFooterProps } from "../login-footer/login-footer";
+import { ROLE_ENV } from "shared/constants/constants";
 
 const QUOTES_COUNT = 5;
 
@@ -38,17 +39,11 @@ class AuthLayout extends React.PureComponent<Props, State> {
             <GvBrand />
           </NavLink>
           <blockquote className="auth__quote">
-            {t(
-              `${process.env.REACT_APP_PLATFORM}.auth-quotes.${quoteNo}.quote`
-            )}
+            {t(`${ROLE_ENV}.auth-quotes.${quoteNo}.quote`)}
             <footer className="auth__quote-footer">
               —{" "}
               <cite className="auth__quote-author">
-                {t(
-                  `${
-                    process.env.REACT_APP_PLATFORM
-                  }.auth-quotes.${quoteNo}.author`
-                )}
+                {t(`${ROLE_ENV}.auth-quotes.${quoteNo}.author`)}
               </cite>
             </footer>
           </blockquote>

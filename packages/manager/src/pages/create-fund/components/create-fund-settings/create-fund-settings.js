@@ -361,7 +361,7 @@ class CreateFundSettings extends React.Component {
               <GVFormikField
                 name="depositWalletCurrency" // value={"GVT"}
                 component={GVTextField}
-                label={t("wallet-transfer.from")}
+                label={t("transfer.from")}
                 InputComponent={Select}
                 onChange={this.onChangeDepositWallet}
               >
@@ -370,7 +370,7 @@ class CreateFundSettings extends React.Component {
                     <option value={wallet.currency} key={wallet.currency}>
                       <img
                         src={filesService.getFileUrl(wallet.logo)}
-                        className="wallet-transfer-popup__icon"
+                        className="transfer-popup__icon"
                         alt={wallet.currency}
                       />
                       {`${wallet.title} | ${wallet.currency}`}
@@ -381,7 +381,7 @@ class CreateFundSettings extends React.Component {
               <InputAmountField
                 autoFocus={false}
                 name="depositAmount"
-                label={t("wallet-transfer.amount")}
+                label={t("transfer.amount")}
                 currency={depositWalletCurrency}
                 setMax={this.setMaxAmount(
                   selectedWallet.available,

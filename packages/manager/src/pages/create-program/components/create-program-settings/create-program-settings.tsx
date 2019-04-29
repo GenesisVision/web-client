@@ -36,7 +36,7 @@ import { allowValuesNumberFormat } from "shared/utils/helpers";
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
-class CreateProgramSettings extends React.Component<
+class CreateProgramSettings extends React.PureComponent<
   InjectedFormikProps<
     ICreateProgramSettingsProps,
     ICreateProgramSettingsFormValues
@@ -404,7 +404,7 @@ class CreateProgramSettings extends React.Component<
               <GVFormikField
                 name="depositWalletId"
                 component={GVTextField}
-                label={t("wallet-transfer.from")}
+                label={t("transfer.from")}
                 InputComponent={Select}
                 onChange={this.onSelectChange(this.props.changeWallet)}
               >
@@ -413,7 +413,7 @@ class CreateProgramSettings extends React.Component<
                     <option value={wallet.id} key={wallet.id}>
                       <img
                         src={filesService.getFileUrl(wallet.logo)}
-                        className="wallet-transfer-popup__icon"
+                        className="transfer-popup__icon"
                         alt={wallet.currency}
                       />
                       {`${wallet.title} | ${wallet.currency}`}
@@ -424,7 +424,7 @@ class CreateProgramSettings extends React.Component<
               <InputAmountField
                 autoFocus={false}
                 name="depositAmount"
-                label={t("wallet-transfer.amount")}
+                label={t("transfer.amount")}
                 currency={wallet.currency}
                 setMax={this.setMaxAmount(wallet.available, wallet.currency)}
               />

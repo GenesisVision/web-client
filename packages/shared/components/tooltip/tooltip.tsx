@@ -7,24 +7,13 @@ import {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 
-interface ITooltipProps {
-  component?: JSX.Element;
-  title?: string;
-  render: Function;
-  horizontal?: HORIZONTAL_POPOVER_POS;
-  vertical?: VERTICAL_POPOVER_POS;
-}
-interface ITooltipState {
-  anchor?: EventTarget;
-}
-
-class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
+class Tooltip extends React.PureComponent<Props, State> {
   state = { anchor: undefined };
 
   handleMouseEnter = (
     event: React.MouseEvent<HTMLElement, MouseEvent>
   ): void => {
-    this.setState({ anchor: event.currentTarget });
+    if (!this.props.disable) this.setState({ anchor: event.currentTarget });
   };
 
   handleMouseLeave = (): void => {
@@ -33,10 +22,14 @@ class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
 
   render() {
     const child = React.Children.only(this.props.children);
-    const { component, title, render } = this.props;
+    const {
+      render,
+      vertical = VERTICAL_POPOVER_POS.TOP,
+      horizontal = HORIZONTAL_POPOVER_POS.CENTER
+    } = this.props;
     const { anchor } = this.state;
     return (
-      <React.Fragment>
+      <>
         <child.type
           {...child.props}
           onMouseEnter={this.handleMouseEnter}
@@ -49,14 +42,24 @@ class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
           noPadding
           anchorEl={anchor}
           className="tooltip__popover"
-          vertical={this.props.vertical || VERTICAL_POPOVER_POS.TOP}
-          horizontal={this.props.horizontal || HORIZONTAL_POPOVER_POS.CENTER}
+          vertical={vertical}
+          horizontal={horizontal}
         >
-          {title || component || render()}
+          {render()}
         </Popover>
-      </React.Fragment>
+      </>
     );
   }
+}
+
+interface Props {
+  render: Function;
+  disable?: boolean;
+  horizontal?: HORIZONTAL_POPOVER_POS;
+  vertical?: VERTICAL_POPOVER_POS;
+}
+interface State {
+  anchor?: EventTarget;
 }
 
 export default Tooltip;

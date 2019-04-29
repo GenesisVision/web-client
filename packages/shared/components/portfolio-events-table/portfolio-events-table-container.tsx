@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Surface from "shared/components/surface/surface";
 
 import PortfolioEventsTable, {

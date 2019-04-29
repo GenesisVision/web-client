@@ -7,8 +7,11 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import Surface from "shared/components/surface/surface";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import { GetItemsFuncActionType } from "shared/components/table/components/table.types";
+import { ROLE_ENV } from "shared/constants/constants";
 
-class DashboardAssets extends React.PureComponent<
+class _DashboardAssets extends React.PureComponent<
   Props & InjectedTranslateProps,
   State
 > {
@@ -49,23 +52,23 @@ class DashboardAssets extends React.PureComponent<
       createProgramButtonToolbar,
       createFundButtonToolbar,
       createFund,
-      createProgram
+      createProgram,
+      programColumns
     } = this.props;
-    const role = process.env.REACT_APP_PLATFORM;
     return (
       <Surface className="dashboard-assets">
         <div className="dashboard-assets__head">
-          <h3>{t(`${role}.dashboard-page.assets.title`)}</h3>
+          <h3>{t(`${ROLE_ENV}.dashboard-page.assets.title`)}</h3>
           <div className="dashboard-assets__tabs">
             <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 value={TABS.PROGRAMS}
-                label={t(`${role}.dashboard-page.assets.programs`)}
+                label={t(`${ROLE_ENV}.dashboard-page.assets.programs`)}
                 count={programsCount}
               />
               <GVTab
                 value={TABS.FUNDS}
-                label={t(`${role}.dashboard-page.assets.funds`)}
+                label={t(`${ROLE_ENV}.dashboard-page.assets.funds`)}
                 count={fundsCount}
               />
             </GVTabs>
@@ -74,6 +77,7 @@ class DashboardAssets extends React.PureComponent<
         <div className="dashboard-assets__table">
           {tab === TABS.PROGRAMS && (
             <DashboardPrograms
+              columns={programColumns}
               getDashboardPrograms={getDashboardPrograms}
               createButtonToolbar={createProgramButtonToolbar}
               createProgram={createProgram}
@@ -97,13 +101,14 @@ class DashboardAssets extends React.PureComponent<
 interface Props {
   clearAssets: any;
   fetchAssetsCount: () => Promise<IDashboardAssetsCounts>;
-  title: any;
-  getDashboardPrograms: any;
-  getDashboardFunds: any;
+  title: string;
+  getDashboardPrograms: GetItemsFuncActionType;
+  getDashboardFunds: GetItemsFuncActionType;
   createProgramButtonToolbar: any;
   createFundButtonToolbar: any;
   createFund: any;
   createProgram: any;
+  programColumns: SortingColumn[];
 }
 
 interface State {
@@ -117,4 +122,5 @@ enum TABS {
   FUNDS = "funds"
 }
 
-export default translate()(DashboardAssets);
+const DashboardAssets = translate()(_DashboardAssets);
+export default DashboardAssets;

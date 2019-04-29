@@ -17,6 +17,7 @@ import Popover, {
 } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { ROLE_ENV } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import DashboardRequest from "./dashboard-request";
@@ -53,11 +54,7 @@ class DashboardInRequestsContainer extends React.PureComponent<Props, State> {
     return (
       <>
         <StatisticItem
-          label={t(
-            `${
-              process.env.REACT_APP_PLATFORM
-            }.dashboard-page.chart-section.in-requests`
-          )}
+          label={t(`${ROLE_ENV}.dashboard-page.chart-section.in-requests`)}
           big
         >
           <NumberFormat

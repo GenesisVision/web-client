@@ -1,4 +1,5 @@
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
@@ -27,9 +28,7 @@ export const cancelRequest = ({ id, type, onFinally, removeDisableBtn }) => (
       dispatch(getPortfolioEvents());
       dispatch(
         alertMessageActions.success(
-          `${
-            process.env.REACT_APP_PLATFORM
-          }.dashboard-page.requests.success-cancel-request`,
+          `${ROLE_ENV}.dashboard-page.requests.success-cancel-request`,
           true
         )
       );

@@ -1,18 +1,18 @@
 import "./funds-table.scss";
 
+import { FundsList } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Table } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { ITableProps } from "shared/components/table/components/table";
 
 import FundCard from "./fund-card";
 import FundsTableRow from "./fund-table-row";
 import FundTableSortingValue from "./fund-table-sorting";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
-import { ITableProps } from "shared/components/table/components/table";
-import { FundsList } from "gv-api-web";
 
 interface Props extends ITableProps {
   data: FundsList;
@@ -37,6 +37,8 @@ const FundsTable: React.FC<Props & InjectedTranslateProps> = ({
 }) => {
   return (
     <Table
+      filtering={filtering}
+      updateFilter={updateFilter}
       title={title}
       sorting={sorting}
       updateSorting={updateSorting}
