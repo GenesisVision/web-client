@@ -58,3 +58,5 @@ export type SetSubmittingType = (isSubmitting: boolean) => void;
 export type HandlePeriodChangeType = (period: ChartDefaultPeriod) => void;
 
 export type CurrencyEnum = AmountWithCurrencyCurrencyEnum;
+
+export type AuthRootState = ManagerRootState | InvestorRootState;
