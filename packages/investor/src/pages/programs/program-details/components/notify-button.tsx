@@ -10,27 +10,32 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { CurrencyEnum } from "shared/utils/types";
 
 class _NotifyButton extends React.PureComponent<Props, State> {
-  state = {
-    subscription: false,
-    notificationId: this.props.notificationId
-  };
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      subscription: false,
+      notificationId: props.notificationId
+    };
+  }
 
-  handleClick = async () => {
-    try {
-      this.setState({ subscription: true });
-      const notificationId = await this.props.subscribeAvailableToInvest({
+  handleClick = () => {
+    this.setState({ subscription: true });
+    this.props
+      .subscribeAvailableToInvest({
         assetId: this.props.assetId,
         currency: this.props.currency
+      })
+      .then(notificationId => {
+        this.setState({
+          notificationId,
+          subscription: false
+        });
+      })
+      .catch(() => {
+        this.setState({
+          subscription: false
+        });
       });
-      this.setState({
-        notificationId,
-        subscription: false
-      });
-    } catch (e) {
-      this.setState({
-        subscription: false
-      });
-    }
   };
 
   render() {

@@ -38,23 +38,25 @@ export const subscribeAvailableToInvest = ({
 }: {
   assetId: string;
   currency: CurrencyEnum;
-}): InvestorThunk<Promise<string>> => async dispatch => {
+}): InvestorThunk<Promise<string>> => dispatch => {
   const authorisation = authService.getAuthArg();
-  const info = await dispatch(
+  return dispatch(
     fetchInvestmentInfo({
       authorisation,
       assetId,
       currency
     })
-  );
-
-  const notificationId = await dispatch(
-    subscribeAvailable({
-      assetId,
-      authorisation,
-      amount: info.value.minInvestmentAmount
+  )
+    .then(info => {
+      return dispatch(
+        subscribeAvailable({
+          assetId,
+          authorisation,
+          amount: info.value.minInvestmentAmount
+        })
+      );
     })
-  );
-
-  return notificationId.value;
+    .then(data => {
+      return data.value;
+    });
 };
