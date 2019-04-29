@@ -1,0 +1,27 @@
+@import "~shared/styles/_colors.scss";
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 70%;
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 70%;
+
+    &__submit-button {
+      margin-top: 20px;
+      align-self: flex-start;
+    }
+
+    & .form-error {
+      margin-top: -4px;
+      margin-bottom: 6px;
+    }
+
+    .signup-form__username {
+      margin-bottom: 29px;
+    }
+  }
+}
