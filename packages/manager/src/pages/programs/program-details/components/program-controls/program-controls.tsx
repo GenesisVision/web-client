@@ -30,7 +30,7 @@ class ProgramControls extends Component<
             redirectToLogin={redirectToLogin}
           />
         </div>
-        {isOwnProgram &&
+        {/*{isOwnProgram &&
         (canMakeSignalProvider || programDescription.isSignalProgram) ? (
           <div className="program-details-description__col program-details-description__col--small-size">
             <SignalProviderControls
@@ -39,7 +39,7 @@ class ProgramControls extends Component<
               redirectToLogin={redirectToLogin}
             />
           </div>
-        ) : null}
+        ) : null}*/}
       </div>
     );
   }

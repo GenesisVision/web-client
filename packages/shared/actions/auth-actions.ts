@@ -3,6 +3,7 @@ import authService from "shared/services/auth-service";
 import history from "shared/utils/history";
 
 export const UPDATE_TOKEN = "UPDATE_TOKEN";
+export const LOGOUT = "LOGOUT";
 
 const alreadyAuthenticated = () => {
   history.push(HOME_ROUTE);
@@ -14,5 +15,9 @@ const updateToken = () => ({
   userName: authService.getUserName()
 });
 
-const authActions = { updateToken, alreadyAuthenticated };
+const logout = () => ({
+  type: LOGOUT
+});
+
+const authActions = { updateToken, alreadyAuthenticated, logout };
 export default authActions;
