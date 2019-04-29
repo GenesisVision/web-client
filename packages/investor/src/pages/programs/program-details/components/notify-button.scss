@@ -1,0 +1,16 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+.notify-button {
+  &__hint {
+    border: 1px solid $main-color;
+    border-radius: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    height: 15px;
+    font-size: 8px;
+    color: $main-color;
+    cursor: help;
+  }
+}

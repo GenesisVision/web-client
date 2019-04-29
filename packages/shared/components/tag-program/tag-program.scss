@@ -3,7 +3,6 @@
 @import "~shared/styles/_sizes.scss";
 
 $tag-font-size: 11px;
-$tag-vertical-padding: 12px;
 
 .tag-program {
   display: inline-block;
@@ -34,9 +33,13 @@ $tag-vertical-padding: 12px;
 
   &-tooltip {
     max-width: 205px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 
     .tag-program {
-      margin-bottom: 10px;
+      margin-top: $padding-xxsmall/2;
+      margin-bottom: $padding-xxsmall/2;
     }
   }
 

@@ -147,7 +147,9 @@ const _DashboardFunds: FunctionComponent<
             </Profitability>
           </TableCell>
           <TableCell className="funds-table__cell funds-table__cell--chart">
-            <ProgramSimpleChart data={fund.chart} programId={fund.id} />
+            {fund.chart.length && (
+              <ProgramSimpleChart data={fund.chart} programId={fund.id} />
+            )}
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--status">
             <AssetStatus

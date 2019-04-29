@@ -161,7 +161,9 @@ class ProgramCard extends React.Component<
         </div>
         <div className="table-cards__row">
           <div className="table-cards__chart">
-            <ProgramSimpleChart data={program.chart} programId={program.id} />
+            {program.chart && (
+              <ProgramSimpleChart data={program.chart} programId={program.id} />
+            )}
           </div>
           <div className="table-cards__chart-info">
             <div className="table-cards__profit">

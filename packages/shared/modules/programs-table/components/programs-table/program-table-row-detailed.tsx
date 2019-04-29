@@ -130,10 +130,12 @@ class ProgramTableRowDetailed extends React.Component<
               </div>
               <div className="program-detailed__statistic">
                 <div className="program-detailed__chart">
-                  <ProgramBigChart
-                    data={program.chart}
-                    programId={program.id}
-                  />
+                  {program.chart.length && (
+                    <ProgramBigChart
+                      data={program.chart}
+                      programId={program.id}
+                    />
+                  )}
                 </div>
                 <div className="program-detailed__statistic-data">
                   <div>

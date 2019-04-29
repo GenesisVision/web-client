@@ -105,7 +105,9 @@ class DashboardCopytrading extends Component<
               </Profitability>*/}
             </TableCell>
             <TableCell>
-              <ProgramSimpleChart data={signal.chart} programId={signal.id} />
+              {signal.chart.length && (
+                <ProgramSimpleChart data={signal.chart} programId={signal.id} />
+              )}
             </TableCell>
           </TableRow>
         )}

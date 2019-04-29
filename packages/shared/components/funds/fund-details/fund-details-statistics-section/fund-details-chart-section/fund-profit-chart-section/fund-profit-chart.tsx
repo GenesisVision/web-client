@@ -11,7 +11,8 @@ import {
 } from "recharts";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
-import ProgramChartGradient, {
+import {
+  ChartGradient,
   getStrokeColor,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
@@ -32,7 +33,7 @@ const FundProfitChart: React.FC<Props> = ({ equityChart }) => {
     <ResponsiveContainer>
       <ComposedChart data={equity} margin={{ top: 20 }}>
         <defs>
-          <ProgramChartGradient
+          <ChartGradient
             offset={off}
             name="equityProgramChartFill"
             color={areaStrokeColor}

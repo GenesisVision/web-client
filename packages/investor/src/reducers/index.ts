@@ -12,6 +12,7 @@ import managerReducer, {
   ManagerState
 } from "pages/manager/reducers/manager.reducers";
 import { combineReducers } from "redux";
+import { LOGOUT } from "shared/actions/auth-actions";
 import loginReducer, {
   LoginState
 } from "shared/components/auth/login/reducers/login.reducers";
@@ -32,6 +33,7 @@ import programNotificationsReducer from "shared/modules/program-notifications/re
 import programsReducer from "shared/modules/programs-table/reducers/programs-table.reducers";
 import accountSettingsReducer from "shared/reducers/account-settings";
 import authReducer from "shared/reducers/auth-reducer";
+import clearableReducer from "shared/reducers/clearable.reducer";
 import emailPendingReducer from "shared/reducers/email-pending-reducer";
 import headerReducer from "shared/reducers/header-reducer";
 import platformReducer from "shared/reducers/platform-reducer";
@@ -50,30 +52,33 @@ type State = {
 
 export type InvestorRootState = State & RootState;
 
-const rootReducer = combineReducers<InvestorRootState>({
-  router: connectRouter(history),
-  platformData: platformReducer,
-  programsData: programsReducer,
-  programsRating: programsRatingReducer,
-  fundsData: fundsReducer,
-  loginData: loginReducer,
-  signUpData: signUpReducer,
-  authData: authReducer,
-  passwordRestoreData: passwordRestoreReducer,
-  alertMessages: alertMessagesReducer,
-  profileHeader: headerReducer,
-  dashboard: dashboardReducer,
-  emailPending: emailPendingReducer,
-  notifications: notificationsReducer,
-  notificationSettings: notificationSettingsReducer,
-  programNotifications: programNotificationsReducer,
-  fundNotifications: fundNotificationsReducer,
-  manager: managerReducer,
-  wallet: walletReducer,
-  copyTradingAccounts: CopyTradingAccountsReducer,
-  accountSettings: accountSettingsReducer,
-  ui: uiReducer,
-  copytradingTables: copytradingTablesReducer
-});
+const rootReducer = clearableReducer(
+  combineReducers<InvestorRootState>({
+    router: connectRouter(history),
+    platformData: platformReducer,
+    programsData: programsReducer,
+    programsRating: programsRatingReducer,
+    fundsData: fundsReducer,
+    loginData: loginReducer,
+    signUpData: signUpReducer,
+    authData: authReducer,
+    passwordRestoreData: passwordRestoreReducer,
+    alertMessages: alertMessagesReducer,
+    profileHeader: headerReducer,
+    dashboard: dashboardReducer,
+    emailPending: emailPendingReducer,
+    notifications: notificationsReducer,
+    notificationSettings: notificationSettingsReducer,
+    programNotifications: programNotificationsReducer,
+    fundNotifications: fundNotificationsReducer,
+    manager: managerReducer,
+    wallet: walletReducer,
+    copyTradingAccounts: CopyTradingAccountsReducer,
+    accountSettings: accountSettingsReducer,
+    ui: uiReducer,
+    copytradingTables: copytradingTablesReducer
+  }),
+  LOGOUT
+);
 
 export default rootReducer;

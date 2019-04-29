@@ -67,10 +67,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     @include adaptive-padding(top, $padding-xsmall, 2);
     display: flex;
     flex-wrap: wrap;
-
-    .tag-program {
-      margin-bottom: 10px;
-    }
   }
 
   &__additionally {
