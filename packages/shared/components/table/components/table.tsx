@@ -21,6 +21,7 @@ import {
   PROGRAMS_VIEW
 } from "shared/components/table/table.constants";
 import { loadData, saveData } from "shared/utils/localstorage";
+
 import { RenderBodyItemFuncType } from "./table.types";
 
 export interface ITableProps
