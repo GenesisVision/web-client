@@ -10,13 +10,10 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { CurrencyEnum } from "shared/utils/types";
 
 class _NotifyButton extends React.PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      subscription: false,
-      notificationId: props.notificationId
-    };
-  }
+  state = {
+    subscription: false,
+    notificationId: this.props.notificationId
+  };
 
   handleClick = () => {
     this.setState({ subscription: true });
