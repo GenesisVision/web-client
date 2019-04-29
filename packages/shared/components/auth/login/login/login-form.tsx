@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import { SetSubmittingType } from "shared/utils/types";
-import validationSchema from "./login-form.validators";
+
 import { FORGOT_PASSWORD_ROUTE } from "../login.routes";
+import validationSchema from "./login-form.validators";
 
 const _LoginForm: React.FC<
   InjectedFormikProps<Props, ILoginFormFormValues>
@@ -67,7 +68,7 @@ export interface ILoginFormFormValues {
   password: string;
 }
 
-const withTranslationAndFormik = compose<React.FC<OwnProps>>(
+const LoginForm = compose<React.FC<OwnProps>>(
   React.memo,
   translate(),
   withFormik<Props, ILoginFormFormValues>({
@@ -83,4 +84,4 @@ const withTranslationAndFormik = compose<React.FC<OwnProps>>(
     }
   })
 )(_LoginForm);
-export default withTranslationAndFormik;
+export default LoginForm;
