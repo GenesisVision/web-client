@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
-import { SetSubmittingType } from "shared/utils/types";
+import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
 import * as authService from "../auth.service";
 import { CaptchasType } from "../auth.service";
@@ -51,7 +51,8 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   componentDidUpdate(): void {
     const { isSubmit, prefix, captchaType } = this.state;
     const { from, service, type } = this.props;
-    const method = ROLE_ENV === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
+    const method =
+      ROLE_ENV === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":
@@ -108,9 +109,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (
-  state: ManagerRootState | InvestorRootState
-): StateProps => {
+const mapStateToProps = (state: AuthRootState): StateProps => {
   const { errorMessage } = state.loginData.login;
   const { isAuthenticated } = state.authData;
   const { email, password } = state.loginData.twoFactor;
@@ -172,7 +171,7 @@ const CaptchaContainer = connect<
   StateProps,
   DispatchProps,
   OwnProps,
-  ManagerRootState | InvestorRootState
+  AuthRootState
 >(
   mapStateToProps,
   mapDispatchToProps
