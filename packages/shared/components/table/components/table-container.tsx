@@ -1,5 +1,5 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import { ConnectedComponentClass, connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { Selector } from "reselect";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
@@ -15,7 +15,7 @@ import Table, { ITableRenderProps } from "./table";
 import { ITableBodyExternalProps } from "./table-body";
 import { ITableHeaderBaseProps } from "./table-header";
 import { ITableToolbarBaseProps } from "./table-toolbar";
-import { GetItemsFuncActionType, GetItemsFuncType } from "./table.types";
+import { GetItemsFuncActionType } from "./table.types";
 
 class _TableContainer<TFiltering, TItem> extends React.PureComponent<
   Props<TFiltering, TItem>,
@@ -84,28 +84,10 @@ class _TableContainer<TFiltering, TItem> extends React.PureComponent<
   }
 }
 
-/*const mapStateToProps = <TFiltering, TItem>(
-  state: RootState,
-  props: OwnProps<TFiltering, TItem>
-): StateProps<TItem> => {
-  const selector = props.dataSelector(state);
-  const { itemsData, filters, defaults } = selector;
-  const { sorting, paging, filtering } = filters;
-  return {
-    data: itemsData.data,
-    isPending: itemsData.isPending,
-    sorting: sorting || "",
-    paging: paging || DEFAULT_PAGING,
-    filtering,
-    fetchItems: props.getItems,
-    defaults
-  };
-};*/
-
 function mapStateToProps<TFiltering, TItem>(
   state: RootState,
   props: OwnProps<TFiltering, TItem>
-) {
+): StateProps<TItem> {
   const selector = props.dataSelector(state);
   const { itemsData, filters, defaults } = selector;
   const { sorting, paging, filtering } = filters;
@@ -120,15 +102,9 @@ function mapStateToProps<TFiltering, TItem>(
   };
 }
 
-// const mapDispatchToProps = <TItem extends any>(
-//   dispatch: Dispatch
-// ): DispatchProps<TItem> => ({
-//   service: bindActionCreators({ getItems, updateFilters }, dispatch)
-// });
-
 function mapDispatchToProps<TItem>(dispatch: Dispatch): DispatchProps<TItem> {
   return {
-    service: bindActionCreators({ getItems, updateFilters }, dispatch)
+    service: bindActionCreators<any, any>({ getItems, updateFilters }, dispatch)
   };
 }
 
@@ -141,7 +117,10 @@ function TableContainer<TItem>() {
   >(
     mapStateToProps,
     mapDispatchToProps
-  )(_TableContainer);
+  )(_TableContainer) as ConnectedComponentClass<
+    typeof _TableContainer,
+    Pick<Props<any, TItem>, keyof OwnProps<any, TItem>> & OwnProps<any, TItem>
+  >;
 }
 
 export default TableContainer();

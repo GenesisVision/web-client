@@ -57,7 +57,7 @@ class TableBody<T extends any> extends React.PureComponent<Props<T>> {
         return <TableLoader view={view} />;
       if (items.length === 0) return setMessage(t("table.no-items"));
       return items.map((item, idx: number) => (
-        <React.Fragment key={/*item.id ||*/ idx}>
+        <React.Fragment key={item.id || idx}>
           {renderBodyItem && renderBodyItem(item, updateRow, updateItems)}
         </React.Fragment>
       ));

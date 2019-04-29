@@ -49,10 +49,6 @@ const DashboardPrograms: React.FC<
   createProgram,
   title
 }) => {
-  let getItems2: (
-    filters?: any
-  ) => Promise<IDataModel<ProgramDetails>> = filters =>
-    Promise.resolve({ total: 0, items: [] });
   return (
     <TableContainer
       createButtonToolbar={createButtonToolbar}

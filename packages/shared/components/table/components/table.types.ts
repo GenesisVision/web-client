@@ -38,7 +38,7 @@ export interface IComposeDefaultFilter {
 }
 
 export type FiltersType = {
-  paging?: IPaging;
+  paging: IPaging;
   filtering?: any;
   sorting?: string;
 };

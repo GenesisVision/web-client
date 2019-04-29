@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import { Selector } from "reselect";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   IPaging,
@@ -12,6 +13,8 @@ import {
   IDefaultFilters,
   RequestFiltersType
 } from "../components/filtering/filter.type";
+import { IDataModel } from "../helpers/mapper";
+import { ITableState } from "../reducers/table.reducer";
 
 interface IComposeRequestFiltersProps<TFiltering> {
   paging: IPaging;
@@ -51,30 +54,32 @@ export const updateFiltersDispatch = (
   updateFilters(filters, type)(dispatch);
 };
 
-export const getItems = (
+export function getItems<TItem>(
   fetchItems: any,
-  dataSelector: (opts?: RootState) => { [keys: string]: any }
-) => (dispatch: Dispatch, getState: () => RootState) => {
-  const { filters, defaults } = dataSelector(getState());
-  const requestFilters = composeRequestFilters({
-    ...filters,
-    defaultFilters: defaults.defaultFilters
-  });
-  dispatch(fetchItems(requestFilters)).then((response: any) => {
-    //TODO any response
-    const totalPages = calculateTotalPages(
-      response.value.total,
-      filters.paging.itemsOnPage
-    );
-    updateFiltersDispatch(
-      {
-        paging: {
-          ...filters.paging,
-          totalPages
-        }
-      },
-      defaults.type,
-      dispatch
-    );
-  });
-};
+  dataSelector: Selector<any, ITableState<IDataModel<TItem>>>
+) {
+  return (dispatch: Dispatch, getState: () => RootState) => {
+    const { filters, defaults } = dataSelector(getState());
+    const requestFilters = composeRequestFilters({
+      ...filters,
+      defaultFilters: defaults.defaultFilters
+    });
+    dispatch(fetchItems(requestFilters)).then((response: any) => {
+      //TODO any response
+      const totalPages = calculateTotalPages(
+        response.value.total,
+        filters.paging.itemsOnPage
+      );
+      updateFiltersDispatch(
+        {
+          paging: {
+            ...filters.paging,
+            totalPages
+          }
+        },
+        defaults.type,
+        dispatch
+      );
+    });
+  };
+}
