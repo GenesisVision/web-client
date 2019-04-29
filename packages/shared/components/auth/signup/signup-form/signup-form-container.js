@@ -1,10 +1,9 @@
+import SignUpForm from "pages/auth/signup/signup/components/signup-form/signup-form";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getRef } from "shared/utils/ref";
-
 import * as signUpService from "shared/components/auth/signup/services/signup.service";
-import SignUpForm from "./signup-form";
+import { getRef } from "shared/utils/ref";
 
 const SignUpFormContainer = ({
   isAuthenticated,
