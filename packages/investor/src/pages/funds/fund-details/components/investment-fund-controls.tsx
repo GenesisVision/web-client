@@ -52,6 +52,10 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
             <GVButton
               className="details-description__invest-btn"
               onClick={openPopup}
+              disabled={
+                !fundDescription.personalFundDetails ||
+                !fundDescription.personalFundDetails.canInvest
+              }
             >
               {t("fund-details-page.description.invest")}
             </GVButton>
