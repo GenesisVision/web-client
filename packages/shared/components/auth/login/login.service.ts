@@ -3,6 +3,8 @@ import { Dispatch } from "redux";
 import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
 import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
+import platformActions from "shared/actions/platform-actions";
+import { windowResize } from "shared/actions/ui-actions";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
 import { ResponseError } from "shared/utils/types";
@@ -77,6 +79,9 @@ export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => 
 export const logout: logoutFuncType = () => dispatch => {
   authService.removeToken();
   dispatch(authActions.updateToken());
+  dispatch(authActions.logout());
+  dispatch(platformActions.fetchPlatformSettings);
+  dispatch(windowResize());
   dispatch(push(HOME_ROUTE));
 };
 
