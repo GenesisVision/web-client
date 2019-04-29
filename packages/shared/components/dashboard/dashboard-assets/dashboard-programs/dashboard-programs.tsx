@@ -160,7 +160,9 @@ const _DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
             </Profitability>
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--chart">
-            <ProgramSimpleChart data={program.chart} programId={program.id} />
+            {program.chart.length && (
+              <ProgramSimpleChart data={program.chart} programId={program.id} />
+            )}
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--status">
             <AssetStatus

@@ -10,7 +10,7 @@ import {
   YAxis
 } from "recharts";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
-import ProgramChartGradient, {
+import {ChartGradient,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
 
@@ -44,7 +44,7 @@ class DashboardPortfolioChart extends PureComponent {
       <ResponsiveContainer>
         <ComposedChart stackOffset="sign" data={assets} margin={{ top: 20 }}>
           <defs>
-            <ProgramChartGradient
+            <ChartGradient
               offset={this.grOffset()}
               name="dashboardPortfolioChartFill"
               color={GVColors.$primaryColor}

@@ -1,10 +1,14 @@
 import { push } from "connected-react-router";
 import emailPendingActions from "shared/actions/email-pending-actions";
+import { RootThunk, SetSubmittingType } from "shared/utils/types";
 
-import { signUpUser } from "../actions/signup.actions";
+import { RegisterViewModel, signUpUser } from "../actions/signup.actions";
 import { SIGNUP_ROUTE_PENDING } from "../signup.routes";
 
-export const signUp = (signUpData, setSubmitting) => dispatch => {
+export const signUp = (
+  signUpData: RegisterViewModel,
+  setSubmitting: SetSubmittingType
+): RootThunk<any> => (dispatch: any) => {
   return dispatch(signUpUser(signUpData))
     .then(() => {
       dispatch(emailPendingActions.saveEmail(signUpData));
@@ -14,8 +18,3 @@ export const signUp = (signUpData, setSubmitting) => dispatch => {
       setSubmitting(false);
     });
 };
-
-// const confirmEmail = () => (dispatch, getState) => {
-//   dispatch(clearDataActionFactory(EMAIL_PENDING).clearData());
-//   dispatch(push(DASHBOARD_ROUTE));
-// };

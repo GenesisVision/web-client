@@ -1,6 +1,8 @@
 import moment from "moment";
 
-export const dateTickFormatter = (start, end) => date => {
+export const dateTickFormatter = (start: Date, end: Date) => (
+  date: Date
+): string => {
   let dateFormat;
   const duration = end.getTime() - start.getTime();
   const msInDay = 1000 * 60 * 60 * 24;
@@ -12,7 +14,7 @@ export const dateTickFormatter = (start, end) => date => {
   return moment(date).format(dateFormat);
 };
 
-const getTicksCountByPeriod = duration => {
+const getTicksCountByPeriod = (duration: number): number => {
   const msInDay = 1000 * 60 * 60 * 24;
   if (duration <= msInDay * 7) return 7;
   if (duration <= msInDay * 30) return 10;
@@ -20,7 +22,7 @@ const getTicksCountByPeriod = duration => {
   return 12;
 };
 
-export const composeTicks = (start, end) => {
+export const composeTicks = (start: Date, end: Date): number[] => {
   const periodStart = moment(start)
     .add(1, "days")
     .startOf("day")
@@ -47,6 +49,6 @@ export const composeTicks = (start, end) => {
 };
 
 const MIN_CHART_VALUE = 1e-6;
-export const formartChartMinValue = value => {
+export const formartChartMinValue = (value: number): number => {
   return Math.abs(value) < MIN_CHART_VALUE ? 0 : value;
 };

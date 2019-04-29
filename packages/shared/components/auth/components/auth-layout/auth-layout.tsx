@@ -5,12 +5,13 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
-import { ILoginFooterProps } from "../login-footer/login-footer";
 import { ROLE_ENV } from "shared/constants/constants";
+
+import { ILoginFooterProps } from "../login-footer/login-footer";
 
 const QUOTES_COUNT = 5;
 
-class AuthLayout extends React.PureComponent<Props, State> {
+class _AuthLayout extends React.PureComponent<Props, State> {
   state = {
     quoteNo: Math.floor(Math.random() * QUOTES_COUNT + 1)
   };
@@ -76,4 +77,5 @@ interface State {
   quoteNo: number;
 }
 
-export default translate()(AuthLayout);
+const AuthLayout = translate()(_AuthLayout);
+export default AuthLayout;

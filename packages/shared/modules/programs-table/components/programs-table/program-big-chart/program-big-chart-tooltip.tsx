@@ -2,9 +2,8 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 
-const ProgramBigChartTooltip = ({ active, label, payload, value }) => {
-  if (!active) return null;
-  return (
+const ProgramBigChartTooltip: React.FC<Props> = ({ active, label, payload }) =>
+  (active && (
     <ChartTooltip
       heading="Equity"
       date={new Date(label)}
@@ -17,7 +16,13 @@ const ProgramBigChartTooltip = ({ active, label, payload, value }) => {
         />
       }
     />
-  );
-};
+  )) ||
+  null;
+
+interface Props {
+  active: boolean;
+  label: string;
+  payload: any[];
+}
 
 export default ProgramBigChartTooltip;
