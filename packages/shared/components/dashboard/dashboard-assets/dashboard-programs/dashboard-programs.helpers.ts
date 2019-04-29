@@ -6,7 +6,7 @@ export enum ACTION_STATUS_FILTER_TYPES {
 }
 export const ACTION_STATUS_FILTER_DEFAULT_VALUE =
   ACTION_STATUS_FILTER_TYPES.ALL;
-export const ACTION_STATUS_FILTER_NAME = "actionStatus";
+export const ACTION_STATUS_FILTER_NAME = "dashboardActionStatus";
 export const ACTION_STATUS_FILTER_VALUES = [
   {
     value: ACTION_STATUS_FILTER_TYPES.ALL,
