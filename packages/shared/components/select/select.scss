@@ -40,6 +40,8 @@
     display: inline-flex;
     align-items: center;
     margin-right: 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__icon {
