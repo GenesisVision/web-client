@@ -10,19 +10,24 @@ const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 export const PROGRAM_TRADES_SORTING = "ByDateDesc";
 export const PROGRAM_FOREX_TRADES_COLUMNS: SortingColumn[] = [
   {
-    name: "direction-entry"
+    name: "direction-entry",
+    sortingName: "ByDirection"
   },
   {
-    name: "symbol"
+    name: "symbol",
+    sortingName: "BySymbol"
   },
   {
-    name: "volume"
+    name: "volume",
+    sortingName: "ByVolume"
   },
   {
-    name: "price"
+    name: "price",
+    sortingName: "ByPrice"
   },
   {
-    name: "profit"
+    name: "profit",
+    sortingName: "ByProfit"
   },
   {
     name: "commission"
@@ -31,33 +36,41 @@ export const PROGRAM_FOREX_TRADES_COLUMNS: SortingColumn[] = [
     name: "swap"
   },
   {
-    name: "date"
+    name: "date",
+    sortingName: "ByDate"
   },
   {
-    name: "ticket"
+    name: "ticket",
+    sortingName: "ByTicket"
   }
 ];
 export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
-    name: "direction-entry"
+    name: "direction-entry",
+    sortingName: "ByDirection"
   },
   {
-    name: "symbol"
+    name: "symbol",
+    sortingName: "BySymbol"
   },
   {
-    name: "volume"
+    name: "volume",
+    sortingName: "ByVolume"
   },
   {
-    name: "price"
+    name: "price",
+    sortingName: "ByPrice"
   },
   {
-    name: "profit"
+    name: "profit",
+    sortingName: "ByProfit"
   },
   {
     name: "commission"
   },
   {
-    name: "date"
+    name: "date",
+    sortingName: "ByDate"
   }
 ];
 export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
