@@ -1,8 +1,16 @@
+import { FundsList } from "gv-api-web";
+import { Location } from "history";
 import * as React from "react";
 import { connect } from "react-redux";
+import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
-import { bindActionCreators, compose, Dispatch } from "redux";
-import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
+import { Dispatch, bindActionCreators, compose } from "redux";
+import { FiltersType } from "shared/components/table/components/table.types";
+import {
+  ToggleFavoriteFundDispatchableType,
+  toggleFavoriteFundDispatchable
+} from "shared/modules/favorite-asset/services/favorite-fund.service";
+import RootState from "shared/reducers/root-reducer";
 
 import * as fundsService from "../../services/funds-table.service";
 import {
@@ -13,11 +21,6 @@ import {
   GetFundsType
 } from "../../services/funds-table.service";
 import FundsTable from "./funds-table";
-import RootState from "shared/reducers/root-reducer";
-import { FundsList } from "gv-api-web";
-import { Location } from "history";
-import { RouteComponentProps } from "react-router";
-import { FiltersType } from "shared/components/table/components/table.types";
 
 interface OwnProps {
   isLocationChanged?(location: Location): boolean;
@@ -39,7 +42,7 @@ interface DispatchProps {
     fundsChangeFilter: FundsChangeFilterType;
     fundsChangePage: FundsChangePageType;
     getFundsFilters: GetFundsFiltersType;
-    toggleFavoriteFund: (id: string, selected: boolean) => void; // Declare type after convert "shared/modules/favorite-asset/services/favorite-fund.service.js"
+    toggleFavoriteFund: ToggleFavoriteFundDispatchableType;
   };
 }
 
