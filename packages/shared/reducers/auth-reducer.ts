@@ -1,13 +1,12 @@
 import { AnyAction } from "redux";
 import { UPDATE_TOKEN } from "shared/actions/auth-actions";
-import authService from "shared/services/auth-service";
 
 export type AuthState = Readonly<{
   isAuthenticated: boolean;
 }>;
 
 const initialState = {
-  isAuthenticated: authService.isAuthenticated()
+  isAuthenticated: false
 };
 
 const authReducer = (state = initialState, action: AnyAction) => {
