@@ -49,6 +49,10 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
           <GVButton
             className="program-details-description__invest-btn"
             onClick={this.openInvestmentPopup}
+            disabled={
+              !programDescription.personalProgramDetails ||
+              !programDescription.personalProgramDetails.canInvest
+            }
           >
             {t("program-details-page.description.invest")}
           </GVButton>
