@@ -30,6 +30,7 @@ class _TransferForm extends React.PureComponent<Props> {
     if (currencyFromNew === values.destinationId) {
       setFieldValue("destinationId", values.sourceId);
     }
+    setFieldValue("amount", "");
     setFieldValue("sourceId", currencyFromNew);
   };
 
