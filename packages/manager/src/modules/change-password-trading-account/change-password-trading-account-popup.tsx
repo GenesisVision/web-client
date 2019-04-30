@@ -37,7 +37,7 @@ interface IChangePasswordTradingAccountPopupState {
   errorMessage: string;
 }
 
-class ChangePasswordTradingAccountPopup extends Component<
+class _ChangePasswordTradingAccountPopup extends Component<
   IChangePasswordTradingAccountPopupProps,
   IChangePasswordTradingAccountPopupState
 > {
@@ -111,7 +111,8 @@ const mapDispatchToProps = (
   )
 });
 
-export default connect(
+const ChangePasswordTradingAccountPopup = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ChangePasswordTradingAccountPopup);
+)(_ChangePasswordTradingAccountPopup);
+export default ChangePasswordTradingAccountPopup;
