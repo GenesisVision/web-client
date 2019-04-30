@@ -1,5 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
+import SignupRoutes, {
+  SIGNUP_ROUTE
+} from "shared/components/auth/signup/signup.routes";
+
 import EmailConfirmPage, {
   EMAIL_CONFIRM_ROUTE
 } from "./email-confirm/email-confirm.page";
@@ -7,10 +12,6 @@ import ForgotPasswordRoutes, {
   FORGOT_PASSWORD_ROUTE
 } from "./forgot-password/forgot-password.routes";
 import LoginRoutes from "./login/login.routes";
-import SignupRoutes, {
-  SIGNUP_ROUTE
-} from "shared/components/auth/signup/signup.routes";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 
 export const AUTH_ROUTES_REGEX = `(${LOGIN_ROUTE}|${SIGNUP_ROUTE}|${FORGOT_PASSWORD_ROUTE}|${EMAIL_CONFIRM_ROUTE})`;
 
