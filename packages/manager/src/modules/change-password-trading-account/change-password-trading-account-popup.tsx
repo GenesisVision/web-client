@@ -45,10 +45,6 @@ class _ChangePasswordTradingAccountPopup extends Component<
     errorMessage: ""
   };
 
-  componentWillUnmount() {
-    this.setState({ errorMessage: "" });
-  }
-
   handleApply = (
     values: IChangePasswordTradingAccountFormValues,
     setSubmitting: SetSubmittingType
@@ -62,6 +58,7 @@ class _ChangePasswordTradingAccountPopup extends Component<
     service
       .changePasswordTradingAccount(id, model)
       .then(() => {
+        this.setState({ errorMessage: "" });
         onClose();
       })
       .catch((error: any) => {
