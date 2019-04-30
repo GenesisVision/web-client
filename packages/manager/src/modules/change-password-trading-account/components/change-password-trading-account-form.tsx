@@ -58,20 +58,20 @@ const _ChangePasswordTradingAccountForm: React.FC<
           component={GVTextField}
           label={t("password-change-trading-account.new-password")}
           type="password"
-          name="password"
+          name={FORM_FIELDS.password}
           autoComplete="off"
         />
         <GVFormikField
           component={GVTextField}
           label={t("password-change-trading-account.confirm-password")}
           type="password"
-          name="confirmPassword"
+          name={FORM_FIELDS.confirmPassword}
           autoComplete="off"
         />
         {twoFactorEnabled && (
           <GVFormikField
             type="text"
-            name="twoFactorCode"
+            name={FORM_FIELDS.twoFactorCode}
             label={t("wallet-withdraw.two-factor-code-label")}
             autoComplete="off"
             component={GVTextField}
