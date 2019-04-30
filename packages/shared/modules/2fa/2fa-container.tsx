@@ -25,7 +25,7 @@ class TwoFactorAuthContainer extends React.PureComponent<Props, State> {
   };
 
   componentDidMount(): void {
-    this.props.services.fetchProfileHeaderInfo();
+    this.props.services.fetchTwoFactor();
   }
 
   handleChange = (event: React.ChangeEvent<any>) => {

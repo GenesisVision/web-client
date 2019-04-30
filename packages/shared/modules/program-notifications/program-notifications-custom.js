@@ -9,9 +9,8 @@ import Dialog from "shared/components/dialog/dialog";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { addErrorMessage } from "shared/modules/program-notifications/actions/program-notifications.actions";
 import CustomNotification from "shared/modules/program-notifications/custom-notification";
+import ProgramNotificationCreateForm from "shared/modules/program-notifications/program-notification-create-form";
 import { addProgramNotificationService } from "shared/modules/program-notifications/services/program-notifications.services";
-
-import ProgramNotificationCreateForm from "./program-notification-create-form";
 
 class ProgramNotificationsCustom extends Component {
   state = {

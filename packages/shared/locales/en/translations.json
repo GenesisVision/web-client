@@ -497,6 +497,7 @@
       "entryFee": "Entry fee",
       "successFee": "Success fee",
       "subscriptionFee": "Subscription fee",
+      "volume-fee": "Volume fee",
       "invest": "Invest",
       "reinvest": "Reinvest profit",
       "yourInvestment": "Current investment",
@@ -1213,6 +1214,7 @@
           "date": "Date",
           "type": "Type",
           "description": "Description",
+          "fee": "Fee",
           "amount": "Amount"
         },
         "types": {
@@ -1423,6 +1425,7 @@
           "entry-fee": "Entry fee",
           "success-fee": "Success fee",
           "signal-success-fee": "Signal success fee",
+          "signal-volume-fee": "Volume fee",
           "deposit-amount": "Deposit amount",
           "available-in-wallet": "Available in wallet"
         },
@@ -1434,6 +1437,8 @@
           "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
           "subscription-fee": "Description about subscription fee is here",
           "subscription-fee-description": "A fee for the subscription to the signal provider services.",
+          "signal-volume-fee": "Description about volume fee is here",
+          "signal-volume-fee-description": "A fee charged for the copied volume.",
           "signal-success-fee": "Description about signal success fee is here",
           "signal-success-fee-description": "A fee charged for the profit made from copied successful trades.",
           "stop-out-level": "Description about Stop Out is here",
@@ -1464,9 +1469,9 @@
           "success-fee-required": "Success fee is required",
           "success-fee-min": "Success fee must be greater than 0 % ",
           "success-fee-max": "Success fee must be less than {{max}} % ",
-          "signal-subscription-fee-required": "Subscription fee is required",
-          "signal-subscription-fee-min": "Subscription fee must be greater than 0.01 GVT",
-          "signal-subscription-fee-max": "Subscription fee must be less than {{max}} GVT",
+          "signal-volume-fee-required": "Volume fee is required",
+          "signal-volume-fee-min": "Volume fee must be greater than {{min} %",
+          "signal-volume-fee-max": "Volume fee must be less than {{max}} %",
           "account-type-required": "Account type is required"
         }
       },

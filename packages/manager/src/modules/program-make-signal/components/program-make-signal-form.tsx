@@ -19,12 +19,12 @@ interface IMakeSignalFormOwnProps {
 
 enum FORM_FIELDS {
   successFee = "successFee",
-  subscriptionFee = "subscriptionFee"
+  volumeFee = "volumeFee"
 }
 
 export interface IMakeSignalFormValues {
   [FORM_FIELDS.successFee]?: number;
-  [FORM_FIELDS.subscriptionFee]?: number;
+  [FORM_FIELDS.volumeFee]?: number;
 }
 
 type MakeSignalFormProps = InjectedTranslateProps &
@@ -48,10 +48,8 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
       </div>
       <div className="dialog__bottom">
         <SignalsFeeFormPartial
-          subscriptionFeeFieldName={FORM_FIELDS.subscriptionFee}
+          volumeFeeFieldName={FORM_FIELDS.volumeFee}
           successFeeFieldName={FORM_FIELDS.successFee}
-          maxEntryFee={100}
-          maxSuccessFee={50}
           hasSubscriptionFeeAutofocus={true}
         />
         <div className="form-error">{errorMessage}</div>
@@ -75,7 +73,7 @@ export default compose<ComponentType<IMakeSignalFormOwnProps>>(
     displayName: "make-signal-form",
     mapPropsToValues: () => ({
       [FORM_FIELDS.successFee]: undefined,
-      [FORM_FIELDS.subscriptionFee]: undefined
+      [FORM_FIELDS.volumeFee]: undefined
     }),
     validationSchema: makeSignalValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {

@@ -22,13 +22,14 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { ROLE_ENV } from "shared/constants/constants";
+import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  PORTFOLIO_EVENTS_FILTERS
+  PORTFOLIO_EVENTS_FILTERS,
+  PORTFOLIO_EVENTS_INVESTOR_COLUMNS
 } from "./portfolio-events-table.constants";
 
 const PortfolioEventsTable: React.FC<
@@ -80,7 +81,11 @@ const PortfolioEventsTable: React.FC<
           </>
         )}
         paging={DEFAULT_PAGING}
-        columns={PORTFOLIO_EVENTS_COLUMNS}
+        columns={
+          ROLE_ENV === ROLE.INVESTOR
+            ? PORTFOLIO_EVENTS_INVESTOR_COLUMNS
+            : PORTFOLIO_EVENTS_COLUMNS
+        }
         renderHeader={column => (
           <span
             className={`portfolio-events-all__cell portfolio-events-all__cell--${
@@ -102,6 +107,19 @@ const PortfolioEventsTable: React.FC<
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
               {event.description}
             </TableCell>
+            {ROLE_ENV === ROLE.INVESTOR && (
+              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    event.valueTotal - event.value,
+                    event.currency
+                  )}
+                  thousandSeparator=" "
+                  displayType="text"
+                  suffix={" " + event.currency}
+                />
+              </TableCell>
+            )}
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
               {isUseProfitability(event) ? (
                 <Profitability

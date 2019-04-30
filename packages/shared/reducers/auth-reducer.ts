@@ -6,11 +6,11 @@ export type AuthState = Readonly<{
   isAuthenticated: boolean;
 }>;
 
-const initialState = {
+const getInitialState = () => ({
   isAuthenticated: authService.isAuthenticated()
-};
+});
 
-const authReducer = (state = initialState, action: AnyAction) => {
+const authReducer = (state = getInitialState(), action: AnyAction) => {
   switch (action.type) {
     case UPDATE_TOKEN:
       return {

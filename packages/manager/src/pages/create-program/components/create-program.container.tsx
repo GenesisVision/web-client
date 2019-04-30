@@ -73,8 +73,12 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
     );
   };
 
-  confirmNavigateToBroker = () => {
-    this.setState({ tab: TAB.BROKER, isNavigationDialogVisible: false });
+  confirmNavigateToBroker = (
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => {
+    this.setState({ tab: TAB.BROKER, isNavigationDialogVisible: false }, () => {
+      setSubmitting(false);
+    });
   };
 
   navigateToSettings = () => {

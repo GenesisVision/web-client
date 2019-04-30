@@ -27,9 +27,23 @@ class HeaderContainer extends Component<
   IHeaderContainerStateProps & IHeaderContainerDispatchProps
 > {
   componentDidMount() {
-    this.props.isAuthenticated && this.props.fetchProfileHeaderInfo();
-    this.props.isAuthenticated && this.props.fetchTwoFactor();
+    this.fetchHeaderInfo();
   }
+
+  componentDidUpdate(
+    prevProps: IHeaderContainerStateProps & IHeaderContainerDispatchProps
+  ) {
+    if (prevProps.isAuthenticated !== this.props.isAuthenticated) {
+      this.fetchHeaderInfo();
+    }
+  }
+
+  fetchHeaderInfo = () => {
+    if (this.props.isAuthenticated) {
+      this.props.fetchProfileHeaderInfo();
+      this.props.fetchTwoFactor();
+    }
+  };
 
   render() {
     const {
