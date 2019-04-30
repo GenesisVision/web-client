@@ -116,7 +116,7 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
                 disable={!trade.showOriginalCommission}
                 render={() => (
                   <div>
-                    {`${trade.originalCommission} ${
+                    {`${formatValue(trade.originalCommission, DECIMAL_SCALE)} ${
                       trade.originalCommissionCurrency
                     }`}
                   </div>
