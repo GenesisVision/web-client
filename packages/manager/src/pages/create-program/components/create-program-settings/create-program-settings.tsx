@@ -17,7 +17,7 @@ import {
 } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import NumberFormat from "react-number-format";
+import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import InputImage, {
   IImageValue
@@ -30,8 +30,9 @@ import Select from "shared/components/select/select";
 import ProgramDefaultImage from "shared/media/program-default-image.svg";
 import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
+import { CurrencyEnum } from "shared/utils/types";
 
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
@@ -90,6 +91,8 @@ class CreateProgramSettings extends React.PureComponent<
       if (e) e.preventDefault();
     }
   };
+  isAmountAllow = (currency: CurrencyEnum) => ({ value }: NumberFormatValues) =>
+    validateFraction(value, currency);
 
   render() {
     const {
@@ -426,6 +429,7 @@ class CreateProgramSettings extends React.PureComponent<
                 name="depositAmount"
                 label={t("transfer.amount")}
                 currency={wallet.currency}
+                isAllow={this.isAmountAllow(wallet.currency)}
                 setMax={this.setMaxAmount(wallet.available, wallet.currency)}
               />
               {programCurrency !== wallet.currency && depositAmount && rate && (
