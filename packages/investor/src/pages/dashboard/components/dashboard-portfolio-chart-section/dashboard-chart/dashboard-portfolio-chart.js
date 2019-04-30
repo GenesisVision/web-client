@@ -10,7 +10,8 @@ import {
   YAxis
 } from "recharts";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
-import {ChartGradient,
+import {
+  ChartGradient,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
 
