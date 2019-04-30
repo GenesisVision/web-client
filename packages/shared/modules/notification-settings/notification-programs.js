@@ -18,6 +18,7 @@ class NotificationPrograms extends Component {
           key={setting.assetId}
           title={setting.title}
           logo={setting.logo}
+          color={setting.color}
           count={setting.settingsCustom.length + setting.settingsGeneral.length}
         />
       );

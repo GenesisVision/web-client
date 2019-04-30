@@ -20,6 +20,7 @@ class NotificationManagers extends Component {
           id={setting.managerId}
           title={setting.username}
           logo={setting.avatar}
+          color={setting.color}
           count={setting.settingsGeneral.length}
         />
       );
