@@ -32,9 +32,11 @@ export class _Popover extends React.PureComponent<
       const left = this.getLeft();
       const top = this.getTop();
       const width = this.getAnchorBounds().width;
+      const transform = this.getTransformPosition();
       this.popover.current.style.left = left;
       this.popover.current.style.top = top;
       this.popover.current.style.minWidth = `${width}px`;
+      this.popover.current.style.transform = transform;
     }
   }
 
@@ -63,19 +65,41 @@ export class _Popover extends React.PureComponent<
       : { bottom: 0, height: 0, left: 0, right: 0, top: 0, width: 0 };
   };
 
-  getTop = () => {
-    const anchorBounds = this.getAnchorBounds();
-    const popoverBounds = this.getPopoverBounds();
+  getTransformPosition = () => {
+    const horizontal = this.getHorizontalPosition();
     const vertical = this.getVerticalPosition();
+    let translateX = `0`;
+    let translateY = `0`;
+
+    if (horizontal === HORIZONTAL_POPOVER_POS.CENTER) {
+      translateX = `-50%`;
+    }
+
+    if (horizontal === HORIZONTAL_POPOVER_POS.RIGHT) {
+      translateX = `-100%`;
+    }
 
     if (vertical === VERTICAL_POPOVER_POS.CENTER) {
-      const aCenter = anchorBounds.top + anchorBounds.height / 2;
-      const popoverOffset = popoverBounds.height / 2;
-      return `${aCenter - popoverOffset}px`;
+      translateY = `-50%`;
     }
 
     if (vertical === VERTICAL_POPOVER_POS.TOP) {
-      return `${anchorBounds.top - popoverBounds.height - MARGIN_OFFSET}px`;
+      translateY = `-100%`;
+    }
+
+    return `translate(${translateX}, ${translateY})`;
+  };
+
+  getTop = () => {
+    const anchorBounds = this.getAnchorBounds();
+    const vertical = this.getVerticalPosition();
+
+    if (vertical === VERTICAL_POPOVER_POS.CENTER) {
+      return `${anchorBounds.top + anchorBounds.height / 2}px`;
+    }
+
+    if (vertical === VERTICAL_POPOVER_POS.TOP) {
+      return `${anchorBounds.top - MARGIN_OFFSET}px`;
     }
 
     return `${anchorBounds.top + anchorBounds.height + MARGIN_OFFSET}px`;
@@ -83,20 +107,14 @@ export class _Popover extends React.PureComponent<
 
   getLeft = () => {
     const anchorBounds = this.getAnchorBounds();
-    const popoverBounds = this.getPopoverBounds();
     const horizontal = this.getHorizontalPosition();
 
     if (horizontal === HORIZONTAL_POPOVER_POS.CENTER) {
-      const aCenter = anchorBounds.left + anchorBounds.width / 2;
-      const popoverOffset = popoverBounds.width / 2;
-      return `${aCenter - popoverOffset}px`;
+      return `${anchorBounds.left + anchorBounds.width / 2}px`;
     }
+
     if (horizontal === HORIZONTAL_POPOVER_POS.RIGHT) {
-      const left = Math.max(
-        MARGIN_OFFSET,
-        anchorBounds.left + anchorBounds.width - popoverBounds.width
-      );
-      return `${left}px`;
+      return `${anchorBounds.right}px`;
     }
 
     return `${anchorBounds.left}px`;

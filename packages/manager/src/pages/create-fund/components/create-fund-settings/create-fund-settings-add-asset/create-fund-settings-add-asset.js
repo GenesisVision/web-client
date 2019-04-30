@@ -38,7 +38,7 @@ class CreateFundSettingsAddAsset extends React.Component {
     const { filteredAssets } = this.state;
     return (
       <Popover
-        horizontal="right"
+        horizontal="left"
         vertical="center"
         anchorEl={anchor}
         noPadding
