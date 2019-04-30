@@ -15,7 +15,7 @@ const NotificationsWidget: React.FC<Props> = ({
       className={classNames("notifications-widget", {
         "notifications-widget--has": hasNotifications
       })}
-      onClick={openNotifications}
+      onClick={() => openNotifications()}
     >
       <RingIcon className="notifications-widget__ring" />
       <Chip

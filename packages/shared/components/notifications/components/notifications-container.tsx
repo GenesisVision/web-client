@@ -11,23 +11,6 @@ import {
 import Sidebar, { SIDEBAR_POSITION } from "shared/components/sidebar/sidebar";
 import RootState from "shared/reducers/root-reducer";
 
-interface StateProps {
-  count: number;
-  open: boolean;
-  total: number;
-  notifications: NotificationViewModel[];
-}
-
-interface DispatchProps {
-  service: {
-    getNotifications(): Promise<NotificationList>;
-    clearNotifications(): void;
-    toggleNotifications(): void;
-  };
-}
-
-interface Props extends StateProps, DispatchProps {}
-
 const NotificationsContainer: React.FunctionComponent<Props> = ({
   service,
   open,
@@ -71,7 +54,7 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<RootState, any, any>
 ): DispatchProps => ({
   service: {
-    toggleNotifications: () => dispatch(notificationsToggle()),
+    toggleNotifications: () => dispatch(notificationsToggle(false)),
     getNotifications: () =>
       dispatch<Promise<NotificationList>>(serviceGetNotifications()),
     clearNotifications: () => dispatch(serviceClearNotifications())
@@ -82,3 +65,20 @@ export default connect<StateProps, DispatchProps, null, RootState>(
   mapStateToProps,
   mapDispatchToProps
 )(NotificationsContainer);
+
+interface StateProps {
+  count: number;
+  open: boolean;
+  total: number;
+  notifications: NotificationViewModel[];
+}
+
+interface DispatchProps {
+  service: {
+    getNotifications(): Promise<NotificationList>;
+    clearNotifications(): void;
+    toggleNotifications(): void;
+  };
+}
+
+interface Props extends StateProps, DispatchProps {}
