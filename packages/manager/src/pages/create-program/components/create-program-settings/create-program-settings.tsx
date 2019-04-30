@@ -389,10 +389,8 @@ class CreateProgramSettings extends React.PureComponent<
             </div>
             {isSignalProgram && (
               <SignalsFeeFormPartial
-                subscriptionFeeFieldName="signalSubscriptionFee"
+                volumeFeeFieldName="signalSubscriptionFee"
                 successFeeFieldName="signalSuccessFee"
-                maxEntryFee={100}
-                maxSuccessFee={50}
               />
             )}
           </div>
