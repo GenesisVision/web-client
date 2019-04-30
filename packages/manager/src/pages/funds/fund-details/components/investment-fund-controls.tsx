@@ -70,6 +70,11 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
         ? t("fund-details-page.description.auth-manager-popup")
         : t("fund-details-page.description.unauth-popup");
 
+    const isDisabledInvestButton = isAuthenticated
+      ? !fundDescription.personalFundDetails ||
+        !fundDescription.personalFundDetails.canInvest
+      : false;
+
     return (
       <>
         <InvestmentFundInfo fundDescription={fundDescription} />
@@ -79,10 +84,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
               <GVButton
                 className="details-description__invest-btn"
                 onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
-                disabled={
-                  !fundDescription.personalFundDetails ||
-                  !fundDescription.personalFundDetails.canInvest
-                }
+                disabled={isDisabledInvestButton}
               >
                 {t("fund-details-page.description.invest")}
               </GVButton>

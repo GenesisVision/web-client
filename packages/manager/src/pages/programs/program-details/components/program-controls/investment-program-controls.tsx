@@ -69,6 +69,10 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
       isAuthenticated && !isOwnProgram
         ? t("program-details-page.description.auth-manager-popup")
         : t("program-details-page.description.unauth-popup");
+    const isDisabledInvestButton = isAuthenticated
+      ? !programDescription.personalProgramDetails ||
+        !programDescription.personalProgramDetails.canInvest
+      : false;
 
     return (
       <>
@@ -82,10 +86,7 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
               <GVButton
                 className="program-details-description__invest-btn"
                 onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
-                disabled={
-                  !programDescription.personalProgramDetails ||
-                  !programDescription.personalProgramDetails.canInvest
-                }
+                disabled={isDisabledInvestButton}
               >
                 {t("program-details-page.description.invest")}
               </GVButton>
