@@ -9,6 +9,7 @@ import DepositTop, {
   DepositTopProps
 } from "shared/components/deposit/components/deposit-top";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import { ROLE } from "shared/constants/constants";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/pages/login.routes";
 
 const InvestmentUnauthPopup: React.FC<Props> = ({
@@ -21,10 +22,8 @@ const InvestmentUnauthPopup: React.FC<Props> = ({
   message,
   t
 }) => {
-  const role = process.env.REACT_APP_INVESTOR_PORTAL_URL;
-
-  const loginUrl = role ? `${role}${LOGIN_ROUTE}` : LOGIN_ROUTE;
-  const signUpUrl = role ? `${role}${SIGNUP_ROUTE}` : SIGNUP_ROUTE;
+  const loginUrl = `/${ROLE.INVESTOR}${LOGIN_ROUTE}`;
+  const signUpUrl = `/${ROLE.INVESTOR}${SIGNUP_ROUTE}`;
 
   return (
     <Dialog open={open} onClose={onClose}>

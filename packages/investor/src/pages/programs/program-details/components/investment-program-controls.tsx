@@ -56,7 +56,8 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
       <>
         <InvestmentProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
-          {programDescription.availableInvestmentBase === 0 ? (
+          {programDescription.availableInvestmentBase === 0 &&
+          isAuthenticated ? (
             <NotifyButton
               currency={programDescription.currency}
               assetId={programDescription.id}

@@ -11,7 +11,7 @@ import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TransferRate from "shared/modules/transfer/components/transfer-rate";
 import filesService from "shared/services/file-service";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 import { Schema, lazy, number, object } from "yup";
 
@@ -30,6 +30,7 @@ class _TransferForm extends React.PureComponent<Props> {
     if (currencyFromNew === values.destinationId) {
       setFieldValue("destinationId", values.sourceId);
     }
+    setFieldValue("amount", "");
     setFieldValue("sourceId", currencyFromNew);
   };
 
@@ -38,7 +39,19 @@ class _TransferForm extends React.PureComponent<Props> {
     setFieldValue("destinationId", event.target.value);
   };
 
-  isAllow = (values: NumberFormatValues) => values.value !== ".";
+  isAllow = (values: NumberFormatValues) => {
+    const selectedSourceItem = service.getSelectedItem(
+      this.props.sourceItems,
+      this.props.values.sourceId
+    );
+
+    const { floatValue, formattedValue, value } = values;
+    const { currency, available } = selectedSourceItem;
+    return (
+      formattedValue === "" ||
+      (validateFraction(value, currency) && floatValue <= available)
+    );
+  };
 
   render() {
     const {

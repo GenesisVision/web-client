@@ -44,10 +44,12 @@ class _FacetContainer extends React.PureComponent<Props, State> {
     const { isPending, notFound, facet } = this.state;
     if (!facet || isPending) return null;
     if (notFound) return <NotFoundPage />;
-    const { title } = facet!;
+    const { title, sorting, timeframe } = facet!;
     return (
       <TableContainer
         title={title}
+        sorting={sorting}
+        timeframe={timeframe}
         getItems={this.getFacetItems}
         isAuthenticated={isAuthenticated}
       />
