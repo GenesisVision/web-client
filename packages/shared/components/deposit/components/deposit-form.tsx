@@ -63,9 +63,11 @@ class _DepositForm extends React.PureComponent<
   };
 
   onChangeCurrencyFrom = (name: any, target: any): void => {
-    const { setFieldValue } = this.props;
+    const { setFieldValue, setFieldTouched } = this.props;
     const walletCurrency = target.props.value;
     setFieldValue("walletCurrency", walletCurrency);
+    setFieldValue("amount", "");
+    setFieldTouched("amount", false);
     this.fetchRate({ currencyFrom: walletCurrency });
   };
 
