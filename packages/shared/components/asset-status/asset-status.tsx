@@ -22,23 +22,9 @@ const getStatusClassName = (status: STATUS, className?: string) => {
   });
 };
 
-interface IAssetStatusOwnProps {
-  className?: string;
-  status: STATUS;
-  id: string;
-  asset: any;
-  onCancel: any;
-}
-
-interface IAssetStatusProps extends IAssetStatusOwnProps {}
-
-interface IAssetStatusState {
-  anchor?: EventTarget;
-}
-
 class AssetStatus extends React.PureComponent<
-  IAssetStatusProps & InjectedTranslateProps,
-  IAssetStatusState
+  Props & InjectedTranslateProps,
+  State
 > {
   state = {
     anchor: undefined
@@ -87,6 +73,18 @@ class AssetStatus extends React.PureComponent<
       </React.Fragment>
     );
   }
+}
+
+interface Props {
+  className?: string;
+  status: STATUS;
+  id: string;
+  asset: any;
+  onCancel: any;
+}
+
+interface State {
+  anchor?: EventTarget;
 }
 
 export default translate()(AssetStatus);
