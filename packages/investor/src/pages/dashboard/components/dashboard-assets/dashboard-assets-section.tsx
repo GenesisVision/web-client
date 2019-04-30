@@ -19,6 +19,7 @@ import {
   IDashboardAssetsCounts,
   fetchAssetsCount
 } from "../../services/dashboard.service";
+import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 import DashboardCopytrading from "./dashboard-copytrading";
 
 enum ASSET_TAB {
@@ -102,6 +103,7 @@ class DashboardAssetsSection extends Component<
               {/*
             //@ts-ignore */}
               <DashboardPrograms
+                columns={DASHBOARD_PROGRAMS_COLUMNS}
                 getDashboardPrograms={getDashboardPrograms}
                 title={title}
                 role={ROLE.INVESTOR}

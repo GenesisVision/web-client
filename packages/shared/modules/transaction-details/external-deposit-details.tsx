@@ -9,7 +9,7 @@ import ArrowIcon from "shared/media/arrow-up-thin.svg";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const ExternalDeposit = (props: TransactionDetailsProps) => {
+const ExternalDeposit: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
   return (
     <React.Fragment>

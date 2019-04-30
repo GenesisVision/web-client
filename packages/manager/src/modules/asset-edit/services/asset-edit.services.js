@@ -12,8 +12,8 @@ export const editAsset = (id, editAssetData, type) => dispatch => {
       : managerApi.v10ManagerFundsByIdUpdatePost;
   let data = editAssetData;
   let promise = Promise.resolve(null);
-  if (data.logo.cropped) {
-    promise = filesService.uploadFile(data.logo.cropped, authorization);
+  if (data.logo.image) {
+    promise = filesService.uploadFile(data.logo.image.cropped, authorization);
   }
   return promise
     .then(response => {

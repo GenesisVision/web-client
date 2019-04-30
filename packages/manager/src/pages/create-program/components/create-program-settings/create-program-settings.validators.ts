@@ -1,4 +1,5 @@
 import { TranslationFunction } from "react-i18next";
+import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { boolean, mixed, number, object, string } from "yup";
@@ -9,13 +10,22 @@ const createProgramSettingsValidationSchema = (
   props: ICreateProgramSettingsProps
 ) => {
   const { t } = props;
+  const minDeposit = parseFloat(
+    formatCurrencyValue(
+      convertToCurrency(
+        props.minimumDepositsAmount[props.programCurrency!],
+        props.rate || 1
+      ),
+      props.programCurrency!
+    )
+  );
   return object().shape({
     stopOutLevel: number()
       .required(
         t("manager.create-program-page.settings.validation.stop-out-required")
       )
-      .moreThan(
-        0,
+      .min(
+        10,
         t("manager.create-program-page.settings.validation.stop-out-is-zero")
       )
       .max(
@@ -23,24 +33,7 @@ const createProgramSettingsValidationSchema = (
         t("manager.create-program-page.settings.validation.stop-out-is-large")
       ),
 
-    logo: object().shape({
-      width: number().min(
-        300,
-        t(
-          "manager.create-program-page.settings.validation.image-resolution-incorrect"
-        )
-      ),
-      height: number().min(
-        300,
-        t(
-          "manager.create-program-page.settings.validation.image-resolution-incorrect"
-        )
-      ),
-      size: number().max(
-        2097152,
-        t("manager.create-program-page.settings.validation.image-file-is-large")
-      )
-    }),
+    logo: inputImageShape(t),
     title: assetTitleShape(t),
     description: assetDescriptionShape(t),
     currency: string().required(
@@ -56,19 +49,19 @@ const createProgramSettingsValidationSchema = (
       .required(
         t("manager.create-program-page.settings.validation.entry-fee-required")
       )
-      .moreThan(
-        0.01,
+      .min(
+        0,
         t("manager.create-program-page.settings.validation.entry-fee-min")
       )
-      .lessThan(
+      .max(
         props.programsInfo.managerMaxEntryFee,
         t("manager.create-program-page.settings.validation.entry-fee-max", {
           max: props.programsInfo.managerMaxEntryFee
         })
       ),
     successFee: number()
-      .moreThan(
-        0.01,
+      .min(
+        0,
         t("manager.create-program-page.settings.validation.success-fee-min")
       )
       .required(
@@ -76,7 +69,7 @@ const createProgramSettingsValidationSchema = (
           "manager.create-program-page.settings.validation.success-fee-required"
         )
       )
-      .lessThan(
+      .max(
         props.programsInfo.managerMaxSuccessFee,
         t("manager.create-program-page.settings.validation.success-fee-max", {
           max: props.programsInfo.managerMaxSuccessFee
@@ -85,7 +78,7 @@ const createProgramSettingsValidationSchema = (
     isSignalProgram: boolean(),
     signalSubscriptionFee: mixed().when("isSignalProgram", {
       is: true,
-      then: signalEntryFeeShape(t, 100)
+      then: signalVolumeFeeShape(t)
     }),
     signalSuccessFee: mixed().when("isSignalProgram", {
       is: true,
@@ -103,25 +96,11 @@ const createProgramSettingsValidationSchema = (
               )
             )
             .min(
-              parseFloat(
-                formatCurrencyValue(
-                  convertToCurrency(
-                    props.minimumDepositsAmount[props.programCurrency],
-                    props.rate
-                  ),
-                  props.programCurrency
-                )
-              ),
+              minDeposit,
               t(
                 "manager.create-program-page.settings.validation.amount-is-zero",
                 {
-                  min: formatCurrencyValue(
-                    convertToCurrency(
-                      props.minimumDepositsAmount[props.programCurrency],
-                      props.rate
-                    ),
-                    props.programCurrency
-                  )
+                  min: minDeposit
                 }
               )
             )
@@ -189,27 +168,29 @@ export const signalSuccessFeeShape = (
     );
 };
 
-export const signalEntryFeeShape = (
+export const signalVolumeFeeShape = (
   t: TranslationFunction,
-  managerMaxEntryFee: number
+  minVolumeFee: number = 0,
+  maxVolumeFee: number = 0.1
 ) => {
   return number()
     .required(
       t(
-        "manager.create-program-page.settings.validation.signal-subscription-fee-required"
+        "manager.create-program-page.settings.validation.signal-volume-fee-required"
       )
     )
     .min(
-      0.01,
+      minVolumeFee,
       t(
-        "manager.create-program-page.settings.validation.signal-subscription-fee-min"
+        "manager.create-program-page.settings.validation.signal-volume-fee-min",
+        { min: minVolumeFee.toFixed(2) }
       )
     )
     .max(
-      managerMaxEntryFee,
+      maxVolumeFee,
       t(
-        "manager.create-program-page.settings.validation.signal-subscription-fee-max",
-        { max: managerMaxEntryFee }
+        "manager.create-program-page.settings.validation.signal-volume-fee-max",
+        { max: maxVolumeFee.toFixed(2) }
       )
     );
 };

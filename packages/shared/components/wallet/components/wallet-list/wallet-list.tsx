@@ -11,34 +11,21 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
+import TransferPopup from "shared/modules/transfer/transfer-popup";
 import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
-interface IWalletListProps extends InjectedTranslateProps {
-  wallets: WalletData[];
-  createButtonToolbar(): void;
-}
-
-interface IWalletListState {
-  isOpenAddFundsPopup: boolean;
-  isOpenWithdrawPopup: boolean;
-  isOpenTransferPopup: boolean;
-  currentWallet: any;
-}
-
-class WalletList extends React.Component<IWalletListProps, IWalletListState> {
+class _WalletList extends React.PureComponent<Props, State> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
     isOpenTransferPopup: false,
-    currentWallet: {}
+    currentWallet: undefined
   };
 
   handleOpenAddFundsPopup = (wallet: CurrentWallet) => () => {
@@ -71,17 +58,18 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
 
   render() {
     const { t, createButtonToolbar, wallets } = this.props;
+    const {
+      isOpenAddFundsPopup,
+      currentWallet,
+      isOpenWithdrawPopup,
+      isOpenTransferPopup
+    } = this.state;
     return (
       <div className="wallet-list">
-        {/*
-        //@ts-ignore */}
         <Table
-          //@ts-ignore
           paging={DEFAULT_PAGING}
-          //@ts-ignore
-          createButtonToolbar={createButtonToolbar}
           items={wallets}
-          dataSelector={walletTableTransactionsSelector}
+          // dataSelector={walletTableTransactionsSelector} TableContainer have this prop
           columns={WALLET_LIST_COLUMNS}
           renderHeader={column => (
             <span
@@ -90,92 +78,100 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
               {t(`wallet-page.list.${column.name}`)}
             </span>
           )}
-          renderBodyRow={(wallet: WalletData) => {
-            return (
-              <TableRow className="wallet-list__row" key={wallet.id}>
-                <TableCell className="wallet-list__cell wallet-list__cell--wallet">
-                  <Link
-                    className="wallet-list__link"
-                    to={{
-                      pathname: composeWalletCurrencyUrl(
-                        wallet.currency.toLowerCase()
-                      ),
-                      state: "Wallet"
-                    }}
-                  >
-                    <WalletImage
-                      url={wallet.logo}
-                      imageClassName="wallet-list__icon"
-                      alt={wallet.currency}
-                    />
-                    {wallet.currency}
-                  </Link>
-                </TableCell>
-                <TableCell className="wallet-list__cell">
-                  <NumberFormat
-                    value={formatCurrencyValue(wallet.total, wallet.currency)}
-                    thousandSeparator=" "
-                    displayType="text"
+          renderBodyRow={(wallet: WalletData) => (
+            <TableRow className="wallet-list__row" key={wallet.id}>
+              <TableCell className="wallet-list__cell wallet-list__cell--wallet">
+                <Link
+                  className="wallet-list__link"
+                  to={{
+                    pathname: composeWalletCurrencyUrl(
+                      wallet.currency.toLowerCase()
+                    ),
+                    state: "Wallet"
+                  }}
+                >
+                  <WalletImage
+                    url={wallet.logo}
+                    imageClassName="wallet-list__icon"
+                    alt={wallet.currency}
                   />
-                </TableCell>
-                <TableCell className="wallet-list__cell">
-                  <NumberFormat
-                    value={formatCurrencyValue(
-                      wallet.available,
-                      wallet.currency
-                    )}
-                    thousandSeparator=" "
-                    displayType="text"
-                  />
-                </TableCell>
-                <TableCell className="wallet-list__cell">
-                  <NumberFormat
-                    value={formatCurrencyValue(
-                      wallet.invested,
-                      wallet.currency
-                    )}
-                    thousandSeparator=" "
-                    displayType="text"
-                  />
-                </TableCell>
-                <TableCell className="wallet-list__cell">
-                  <NumberFormat
-                    value={formatCurrencyValue(wallet.pending, wallet.currency)}
-                    thousandSeparator=" "
-                    displayType="text"
-                  />
-                </TableCell>
-                <TableCell className="wallet-list__cell wallet-list__cell--buttons">
-                  <WalletListButton
-                    wallet={wallet}
-                    handleOpenTransferPopup={this.handleOpenTransferPopup}
-                    handleOpenWithdrawPopup={this.handleOpenWithdrawPopup}
-                    handleOpenAddFundsPopup={this.handleOpenAddFundsPopup}
-                  />
-                </TableCell>
-              </TableRow>
-            );
-          }}
+                  {wallet.currency}
+                </Link>
+              </TableCell>
+              <TableCell className="wallet-list__cell">
+                <NumberFormat
+                  value={formatCurrencyValue(wallet.total, wallet.currency)}
+                  thousandSeparator=" "
+                  displayType="text"
+                />
+              </TableCell>
+              <TableCell className="wallet-list__cell">
+                <NumberFormat
+                  value={formatCurrencyValue(wallet.available, wallet.currency)}
+                  thousandSeparator=" "
+                  displayType="text"
+                />
+              </TableCell>
+              <TableCell className="wallet-list__cell">
+                <NumberFormat
+                  value={formatCurrencyValue(wallet.invested, wallet.currency)}
+                  thousandSeparator=" "
+                  displayType="text"
+                />
+              </TableCell>
+              <TableCell className="wallet-list__cell">
+                <NumberFormat
+                  value={formatCurrencyValue(wallet.pending, wallet.currency)}
+                  thousandSeparator=" "
+                  displayType="text"
+                />
+              </TableCell>
+              <TableCell className="wallet-list__cell wallet-list__cell--buttons">
+                <WalletListButton
+                  wallet={wallet}
+                  handleOpenTransferPopup={this.handleOpenTransferPopup}
+                  handleOpenWithdrawPopup={this.handleOpenWithdrawPopup}
+                  handleOpenAddFundsPopup={this.handleOpenAddFundsPopup}
+                />
+              </TableCell>
+            </TableRow>
+          )}
         />
-        <WalletAddFundsPopup
-          //@ts-ignore
-          currentWallet={this.state.currentWallet}
-          open={this.state.isOpenAddFundsPopup}
-          onClose={this.handleCloseAddFundsPopup}
-        />
-        <WalletWithdrawPopup
-          currentWallet={this.state.currentWallet}
-          open={this.state.isOpenWithdrawPopup}
-          onClose={this.handleCloseWithdrawPopup}
-        />
-        <WalletTransferPopup
-          currentWallet={this.state.currentWallet}
-          open={this.state.isOpenTransferPopup}
-          onClose={this.handleCloseTransferPopup}
-        />
+        {currentWallet && (
+          <>
+            <WalletAddFundsPopup
+              currentWallet={currentWallet}
+              open={isOpenAddFundsPopup}
+              onClose={this.handleCloseAddFundsPopup}
+            />
+            <WalletWithdrawPopup
+              currentWallet={currentWallet}
+              open={isOpenWithdrawPopup}
+              onClose={this.handleCloseWithdrawPopup}
+            />
+            <TransferPopup
+              currentItem={currentWallet}
+              open={isOpenTransferPopup}
+              onClose={this.handleCloseTransferPopup}
+            />
+          </>
+        )}
       </div>
     );
   }
 }
 
-export default translate()(WalletList);
+interface Props extends InjectedTranslateProps {
+  wallets: WalletData[];
+  createButtonToolbar?: () => void;
+}
+
+interface State {
+  isOpenAddFundsPopup: boolean;
+  isOpenWithdrawPopup: boolean;
+  isOpenTransferPopup: boolean;
+  currentWallet?: any;
+}
+
+const WalletList = translate()(_WalletList);
+export default WalletList;

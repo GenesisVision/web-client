@@ -148,7 +148,7 @@ class _DepositForm extends React.PureComponent<
             return (
               <option value={wallet.currency} key={wallet.currency}>
                 <WalletImage
-                  imageClassName="wallet-transfer-popup__icon"
+                  imageClassName="transfer-popup__icon"
                   alt={wallet.currency}
                   url={wallet.logo}
                 />

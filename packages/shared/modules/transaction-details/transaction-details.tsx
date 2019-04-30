@@ -1,6 +1,6 @@
 import "./transaction-details.scss";
 
-import { TransactionDetails } from "gv-api-web";
+import { TransactionDetails, TransactionDetailsTypeEnum } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -14,12 +14,13 @@ import FeeDetails from "shared/modules/transaction-details/fee-details";
 import InvestingTransaction from "shared/modules/transaction-details/investment-details";
 import OpenCloseTransaction from "shared/modules/transaction-details/open-close-details";
 import ProfitDetails from "shared/modules/transaction-details/profit-details";
+import SignalTransaction from "shared/modules/transaction-details/signal-details";
 import WithdrawalTransaction from "shared/modules/transaction-details/withdrawal-details";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { ResponseError } from "shared/utils/types";
 
-const Types = {
+const Types: TransactionTypes = {
   Investing: InvestingTransaction,
   Withdrawal: WithdrawalTransaction,
   Open: OpenCloseTransaction,
@@ -28,40 +29,17 @@ const Types = {
   ExternalWithdrawal: ExternalWithdrawal,
   Converting: ConvertingDetails,
   Profit: ProfitDetails,
-  PlatformFee: FeeDetails
-};
+  PlatformFee: FeeDetails,
+  SubscribeSignal: SignalTransaction,
+  ReceiveSignal: SignalTransaction,
+  DepositSignal: SignalTransaction,
+  WithdrawalSignal: SignalTransaction
+} as TransactionTypes;
 
-export interface TransactionDetailsProps extends InjectedTranslateProps {
-  data: TransactionDetails;
-  handleCancel?(): void;
-  handleResend?(): void;
-}
-
-interface OwnProps {
-  transactionId: string;
-  close(): void;
-  onAction(): void;
-}
-
-interface DispatchProps {
-  error(message: string): void;
-}
-
-interface State {
-  isPending: boolean;
-  data?: TransactionDetails;
-  errorMessage?: string;
-}
-
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
-
-class TransactionDetailsDialog extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isPending: false
-    };
-  }
+class _TransactionDetailsDialog extends React.PureComponent<Props, State> {
+  state: State = {
+    isPending: false
+  };
 
   componentDidMount() {
     this.fetch();
@@ -96,6 +74,7 @@ class TransactionDetailsDialog extends React.Component<Props, State> {
         this.props.error(errorMessage.errorMessage);
       });
   };
+
   resendEmail = () => {
     walletApi
       .v10WalletWithdrawRequestResendByTxIdPost(
@@ -132,10 +111,42 @@ const mapDispatchToProps = {
   error: alertMessageActions.error
 };
 
-export default compose<React.FunctionComponent<OwnProps>>(
+const TransactionDetailsDialog = compose<React.FunctionComponent<OwnProps>>(
   translate(),
   connect<null, DispatchProps>(
     null,
     mapDispatchToProps
   )
-)(TransactionDetailsDialog);
+)(_TransactionDetailsDialog);
+
+export default TransactionDetailsDialog;
+
+type TransactionTypes = {
+  [name in TransactionDetailsTypeEnum]:
+    | React.FC<TransactionDetailsProps>
+    | React.ExoticComponent<TransactionDetailsProps>
+};
+
+export interface TransactionDetailsProps extends InjectedTranslateProps {
+  data: TransactionDetails;
+  handleCancel?(): void;
+  handleResend?(): void;
+}
+
+interface OwnProps {
+  transactionId: string;
+  close(): void;
+  onAction(): void;
+}
+
+interface DispatchProps {
+  error(message: string): void;
+}
+
+interface State {
+  isPending: boolean;
+  data?: TransactionDetails;
+  errorMessage?: string;
+}
+
+interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}

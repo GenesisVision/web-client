@@ -1,7 +1,4 @@
-import {
-  OrderClosedSignalSlaveModel,
-  TradesHistorySignalSlaveViewModel
-} from "gv-api-web";
+import { TradesSignalViewModel } from "gv-api-web";
 import { InvestorRootState } from "reducers";
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
 
@@ -10,14 +7,14 @@ const copytradingOpenTradesSelector = (state: InvestorRootState) =>
 
 export const dashboardOpenTradesTableSelector = tableSelectorCreator<
   InvestorRootState,
-  TradesHistorySignalSlaveViewModel,
-  OrderClosedSignalSlaveModel
+  TradesSignalViewModel,
+  TradesSignalViewModel
 >(copytradingOpenTradesSelector, "trades");
 
 const copytradingTradesHistorySelector = (state: InvestorRootState) =>
   state.copytradingTables.tradesHistory;
 export const dashboardTradesHistoryTableSelector = tableSelectorCreator<
   InvestorRootState,
-  TradesHistorySignalSlaveViewModel,
-  OrderClosedSignalSlaveModel
+  TradesSignalViewModel,
+  TradesSignalViewModel
 >(copytradingTradesHistorySelector, "trades");

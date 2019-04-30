@@ -2,7 +2,7 @@ import { ProgramRequest } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { CancelRequestType } from "shared/components/asset-status/services/asset-status.service";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
@@ -11,13 +11,14 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-export interface IDashboardRequestProps {
-  role: ROLE;
-  asset: ASSET;
+import { EVENT_LOGO_TYPE } from "../../dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
+
+export interface IDashboardRequestProps extends InjectedTranslateProps {
   request: ProgramRequest;
   cancelRequest(x: CancelRequestType): void;
   onApplyCancelRequest(): void;
-  t: TranslationFunction;
+  role?: ROLE;
+  asset?: ASSET;
 }
 
 export interface IDashboardRequestState {
@@ -25,7 +26,7 @@ export interface IDashboardRequestState {
   disabled: boolean;
 }
 
-class DashboardRequest extends React.Component<
+class DashboardRequest extends React.PureComponent<
   IDashboardRequestProps,
   IDashboardRequestState
 > {
@@ -45,8 +46,8 @@ class DashboardRequest extends React.Component<
       request,
       cancelRequest,
       onApplyCancelRequest,
-      role,
-      asset
+      role = ROLE.INVESTOR,
+      asset = ASSET.PROGRAM
     } = this.props;
     this.setState({ disabled: true });
     const onFinally = () => {
@@ -71,7 +72,7 @@ class DashboardRequest extends React.Component<
       <div className="dashboard-request-popover__request">
         <div className="dashboard-request-popover__logo">
           <PortfolioEventLogo
-            type={request.type}
+            type={request.type as EVENT_LOGO_TYPE}
             logo={request.logo}
             color={request.color}
           />

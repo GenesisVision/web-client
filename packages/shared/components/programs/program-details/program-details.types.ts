@@ -4,10 +4,9 @@ import {
   ProgramDetailsFull
 } from "gv-api-web";
 import React from "react";
-import { TFilter } from "shared/components/table/components/filtering/filter.type";
+import { IDialogProps } from "shared/components/dialog/dialog";
+import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { TableItems } from "shared/components/table/helpers/mapper";
-
-import { IDialogProps } from "../../dialog/dialog";
 
 export interface IProgramControlsProps {
   isAuthenticated: boolean;
@@ -36,9 +35,9 @@ export interface IDescriptionSection {
 }
 
 export type HistoryCountsType = {
-  tradesCount: number;
   eventsCount: number;
-  openPositionsCount: number;
+  tradesCount?: number;
+  openPositionsCount?: number;
 };
 
 export interface IHistorySection {
@@ -46,7 +45,7 @@ export interface IHistorySection {
     filters: any
   ): Promise<TableItems<DashboardPortfolioEvent | ManagerPortfolioEvent>>;
   fetchHistoryCounts(id: string): Promise<HistoryCountsType>;
-  eventTypeFilterValues: TFilter<any>;
+  eventTypeFilterValues: SelectFilterValue[];
 }
 
 export interface IProgramReinvestingContainerOwnProps {

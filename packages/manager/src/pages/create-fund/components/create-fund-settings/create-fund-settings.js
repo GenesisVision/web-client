@@ -17,6 +17,7 @@ import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
+import FundDefaultImage from "shared/media/program-default-image.svg";
 import rateApi from "shared/services/api-client/rate-api";
 import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
@@ -27,7 +28,6 @@ import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-
 import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-block/create-fund-settings-assets-block";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 import ErrorNotifier from "./error-notifier/error-notifier";
-import FundDefaultImage from "./fund-default-image";
 
 class CreateFundSettings extends React.Component {
   state = {
@@ -142,9 +142,7 @@ class CreateFundSettings extends React.Component {
       isSubmitting,
       handleSubmit,
       values,
-      setFieldValue,
       deposit,
-      errors,
       programsInfo,
       onValidateError,
       setSubmitting,
@@ -158,11 +156,6 @@ class CreateFundSettings extends React.Component {
       title,
       rate
     } = values;
-
-    const imageInputError =
-      errors &&
-      errors.logo &&
-      (errors.logo.width || errors.logo.height || errors.logo.size);
 
     const onSubmit = () => {
       createFundSettingsValidationSchema({
@@ -249,17 +242,10 @@ class CreateFundSettings extends React.Component {
               <div className="create-fund-settings__item create-fund-settings__item--wider">
                 <div className="create-fund-settings__logo-section">
                   <div className="create-fund-settings__file-field-container">
-                    <Field
+                    <GVFormikField
                       name="logo"
-                      render={({ field, form }) => (
-                        <InputImage
-                          {...field}
-                          defaultImage={FundDefaultImage}
-                          onChange={setFieldValue}
-                          alt="Fund logo"
-                          error={imageInputError}
-                        />
-                      )}
+                      component={InputImage}
+                      defaultImage={FundDefaultImage}
                     />
                   </div>
                   <div className="create-fund-settings__image-info">
@@ -375,7 +361,7 @@ class CreateFundSettings extends React.Component {
               <GVFormikField
                 name="depositWalletCurrency" // value={"GVT"}
                 component={GVTextField}
-                label={t("wallet-transfer.from")}
+                label={t("transfer.from")}
                 InputComponent={Select}
                 onChange={this.onChangeDepositWallet}
               >
@@ -384,7 +370,7 @@ class CreateFundSettings extends React.Component {
                     <option value={wallet.currency} key={wallet.currency}>
                       <img
                         src={filesService.getFileUrl(wallet.logo)}
-                        className="wallet-transfer-popup__icon"
+                        className="transfer-popup__icon"
                         alt={wallet.currency}
                       />
                       {`${wallet.title} | ${wallet.currency}`}
@@ -395,7 +381,7 @@ class CreateFundSettings extends React.Component {
               <InputAmountField
                 autoFocus={false}
                 name="depositAmount"
-                label={t("wallet-transfer.amount")}
+                label={t("transfer.amount")}
                 currency={depositWalletCurrency}
                 setMax={this.setMaxAmount(
                   selectedWallet.available,
@@ -490,15 +476,7 @@ export default translate()(
         exitFee: "",
         title: "",
         description: "",
-        logo: {
-          cropped: null,
-          src: "",
-          isNew: false,
-          isDefault: true,
-          size: undefined,
-          width: undefined,
-          height: undefined
-        },
+        logo: {},
         entryFee: ""
       };
     },

@@ -1,6 +1,6 @@
 import { ProgramRequest, ProgramRequests } from "gv-api-web";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
-import { ASSET, ROLE } from "shared/constants/constants";
+import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
@@ -9,8 +9,11 @@ import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
 
 import {
   ICancelRequest,
+  IFetchInRequests,
   cancelInvestorProgramRequest,
-  cancelManagerProgramRequest
+  cancelManagerProgramRequest,
+  fetchInRequestsManager,
+  fetchInRequestsInvestor
 } from "../actions/asset-status-actions";
 
 export const getAssetRequests = (
@@ -72,13 +75,16 @@ export const cancelRequestDispatch = ({
 }: CancelRequestType) => (dispatch: MiddlewareDispatch): Promise<void> => {
   const authorization = authService.getAuthArg();
   let actionCreator: ICancelRequest;
+  let fetchInRequests: IFetchInRequests;
 
   switch (role + asset) {
     case ROLE.MANAGER + ASSET.PROGRAM:
       actionCreator = cancelManagerProgramRequest;
+      fetchInRequests = fetchInRequestsManager;
       break;
     case ROLE.INVESTOR + ASSET.PROGRAM:
       actionCreator = cancelInvestorProgramRequest;
+      fetchInRequests = fetchInRequestsInvestor;
       break;
     default:
       throw `Error role or type [${role}|${asset}]`;
@@ -86,12 +92,11 @@ export const cancelRequestDispatch = ({
 
   return dispatch(actionCreator(id, authorization))
     .then(() => {
+      dispatch(fetchInRequests(authorization, 0, 100));
       dispatch(fetchProfileHeaderInfo());
       dispatch(
         alertMessageActions.success(
-          `${
-            process.env.REACT_APP_PLATFORM
-          }.dashboard-page.requests.success-cancel-request`,
+          `${ROLE_ENV}.dashboard-page.requests.success-cancel-request`,
           true
         )
       );

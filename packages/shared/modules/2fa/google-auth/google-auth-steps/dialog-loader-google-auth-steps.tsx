@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import {
   DialogLoaderGoogleAuthDesktop,
@@ -11,7 +11,7 @@ interface IDialogLoaderGoogleAuthStepsStateProps {
   innerWidth: number;
 }
 
-class DialogLoaderGoogleAuthSteps extends Component<
+class DialogLoaderGoogleAuthSteps extends React.PureComponent<
   IDialogLoaderGoogleAuthStepsStateProps
 > {
   render() {

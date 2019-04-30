@@ -3,9 +3,10 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import filesService from "shared/services/file-service";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { CURRENCY_FRACTIONS } from "shared/utils/currency-converter";
+import { formatValue } from "shared/utils/formatter";
 
-const InvestingTransaction = (props: TransactionDetailsProps) => {
+const InvestingTransaction: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
   return (
     <React.Fragment>
@@ -38,7 +39,8 @@ const InvestingTransaction = (props: TransactionDetailsProps) => {
           </div>
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.investment.amount`)} big>
-          {formatCurrencyValue(data.amount, data.currency)} {data.currency}
+          {formatValue(data.amount, CURRENCY_FRACTIONS(data.currency))}{" "}
+          {data.currency}
         </StatisticItem>
       </div>
     </React.Fragment>

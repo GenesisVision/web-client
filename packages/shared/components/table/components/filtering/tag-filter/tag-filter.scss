@@ -1,6 +1,8 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_sizes.scss";
 
+$tag-vertical-margin: $padding-xxsmall/2;
+
 .tag-filter {
   width: 236px;
   padding: $padding-xsmall;
@@ -12,7 +14,10 @@
   }
 
   &__tags-list {
-    padding-top: $padding-xsmall;
+    padding-top: $padding-xsmall - $tag-vertical-margin;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   &__search {
@@ -50,13 +55,9 @@
     }
   }
 
-  &__tags-list {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
   .tag-program {
-    margin-bottom: 10px;
     cursor: pointer;
+    margin-top: $tag-vertical-margin;
+    margin-bottom: $tag-vertical-margin;
   }
 }

@@ -2,7 +2,7 @@ import "shared/components/deposit-details/deposit-details.scss";
 
 import "./create-program-settings.scss";
 
-import { Field, FieldProps, InjectedFormikProps, withFormik } from "formik";
+import { InjectedFormikProps, withFormik } from "formik";
 import {
   Broker,
   BrokerAccountType,
@@ -17,11 +17,10 @@ import {
 } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import NumberFormat from "react-number-format";
+import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import FormError from "shared/components/form/form-error/form-error";
 import InputImage, {
-  InputFileData
+  IImageValue
 } from "shared/components/form/input-image/input-image";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import Hint from "shared/components/hint/hint";
@@ -31,13 +30,14 @@ import Select from "shared/components/select/select";
 import ProgramDefaultImage from "shared/media/program-default-image.svg";
 import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
+import { CurrencyEnum } from "shared/utils/types";
 
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
-class CreateProgramSettings extends React.Component<
+class CreateProgramSettings extends React.PureComponent<
   InjectedFormikProps<
     ICreateProgramSettingsProps,
     ICreateProgramSettingsFormValues
@@ -91,6 +91,8 @@ class CreateProgramSettings extends React.Component<
       if (e) e.preventDefault();
     }
   };
+  isAmountAllow = (currency: CurrencyEnum) => ({ value }: NumberFormatValues) =>
+    validateFraction(value, currency);
 
   render() {
     const {
@@ -112,10 +114,6 @@ class CreateProgramSettings extends React.Component<
     } = this.props;
     const { depositAmount, isSignalProgram, description, title } = values;
     const descriptionTrimmedLength = description.trim().length;
-    const imageInputError =
-      errors &&
-      errors.logo &&
-      (errors.logo.width || errors.logo.height || errors.logo.size);
 
     const accountCurrencies = accountType ? accountType.currencies : [];
     const accountLeverages = accountType ? accountType.leverages : [];
@@ -295,16 +293,10 @@ class CreateProgramSettings extends React.Component<
               </div>
               <div className="create-program-settings__item create-program-settings__item--wider create-program-settings__logo-section">
                 <div className="create-program-settings__file-field-container">
-                  <Field
+                  <GVFormikField
                     name="logo"
-                    render={({ field }: FieldProps<any>) => (
-                      <InputImage
-                        {...field}
-                        defaultImage={ProgramDefaultImage}
-                        onChange={setFieldValue}
-                        error={imageInputError}
-                      />
-                    )}
+                    component={InputImage}
+                    defaultImage={ProgramDefaultImage}
                   />
                 </div>
                 <div className="create-program-settings__image-info">
@@ -397,10 +389,8 @@ class CreateProgramSettings extends React.Component<
             </div>
             {isSignalProgram && (
               <SignalsFeeFormPartial
-                subscriptionFeeFieldName="signalSubscriptionFee"
+                volumeFeeFieldName="signalSubscriptionFee"
                 successFeeFieldName="signalSuccessFee"
-                maxEntryFee={100}
-                maxSuccessFee={50}
               />
             )}
           </div>
@@ -415,7 +405,7 @@ class CreateProgramSettings extends React.Component<
               <GVFormikField
                 name="depositWalletId"
                 component={GVTextField}
-                label={t("wallet-transfer.from")}
+                label={t("transfer.from")}
                 InputComponent={Select}
                 onChange={this.onSelectChange(this.props.changeWallet)}
               >
@@ -424,7 +414,7 @@ class CreateProgramSettings extends React.Component<
                     <option value={wallet.id} key={wallet.id}>
                       <img
                         src={filesService.getFileUrl(wallet.logo)}
-                        className="wallet-transfer-popup__icon"
+                        className="transfer-popup__icon"
                         alt={wallet.currency}
                       />
                       {`${wallet.title} | ${wallet.currency}`}
@@ -435,8 +425,9 @@ class CreateProgramSettings extends React.Component<
               <InputAmountField
                 autoFocus={false}
                 name="depositAmount"
-                label={t("wallet-transfer.amount")}
+                label={t("transfer.amount")}
                 currency={wallet.currency}
+                isAllow={this.isAmountAllow(wallet.currency)}
                 setMax={this.setMaxAmount(wallet.available, wallet.currency)}
               />
               {programCurrency !== wallet.currency && depositAmount && rate && (
@@ -531,15 +522,7 @@ export default compose<React.ComponentType<OwnProps>>(
         brokerAccountTypeId: accountType ? accountType.id : "",
         title: "",
         description: "",
-        logo: {
-          cropped: undefined,
-          src: "",
-          isNew: false,
-          isDefault: true,
-          width: undefined,
-          height: undefined,
-          size: undefined
-        },
+        logo: {},
         entryFee: undefined,
         successFee: undefined,
         isSignalProgram: broker.isSignalsAvailable,
@@ -594,7 +577,7 @@ export interface ICreateProgramSettingsFormValues {
   isSignalProgram: boolean;
   title: string;
   description: string;
-  logo: InputFileData;
+  logo: IImageValue;
   entryFee?: number;
   depositAmount?: number;
   depositWalletId: string;

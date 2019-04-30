@@ -7,10 +7,14 @@ import {
   removeFavoriteFund
 } from "../actions/favorite-fund.actions";
 
-export const toggleFavoriteFundDispatchable = (
+export type ToggleFavoriteFundDispatchableType = (
   id: string,
   isFavorite: boolean
-): RootThunk<void> => dispatch => {
+) => RootThunk<void>;
+export const toggleFavoriteFundDispatchable: ToggleFavoriteFundDispatchableType = (
+  id,
+  isFavorite
+) => dispatch => {
   if (!authService.getAuthArg()) return;
 
   const requestData = {

@@ -7,12 +7,13 @@ import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { UpdateItemsFuncType } from "shared/components/table/components/table.types";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletExternalTransaction;
-  update(): void;
+  update?: UpdateItemsFuncType;
 }
 
 export interface ITransactionRowState {

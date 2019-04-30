@@ -57,9 +57,6 @@ export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
   },
   {
     name: "chart"
-  },
-  {
-    name: "favourite"
   }
 ];
 

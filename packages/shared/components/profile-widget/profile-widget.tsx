@@ -42,7 +42,7 @@ class ProfileWidget extends React.Component<
   handleClose = (): void => this.setState({ anchor: undefined });
 
   render() {
-    const { t, avatar, email = "", logout, className } = this.props;
+    const { t, avatar = "", email = "", logout, className } = this.props;
     return (
       <div className={classNames("profile-widget", className)}>
         <div className="profile-widget__content" onClick={this.handleOpen}>
@@ -50,7 +50,6 @@ class ProfileWidget extends React.Component<
             url={avatar}
             alt={email}
             className="profile-widget__avatar"
-            imageClassName="profile-widget__image"
           />
           <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
         </div>

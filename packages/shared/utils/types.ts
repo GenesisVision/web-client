@@ -1,10 +1,10 @@
-import { CancelablePromise } from "gv-api-web";
+import { AmountWithCurrencyCurrencyEnum, CancelablePromise } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
-import { Action, AnyAction, Dispatch } from "redux";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-
-import RootState from "../reducers/root-reducer";
+import { Action, Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import RootState from "shared/reducers/root-reducer";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
@@ -54,3 +54,8 @@ export type ResponseError = {
 };
 
 export type SetSubmittingType = (isSubmitting: boolean) => void;
+export type HandlePeriodChangeType = (period: ChartDefaultPeriod) => void;
+
+export type CurrencyEnum = AmountWithCurrencyCurrencyEnum;
+
+export type AuthRootState = ManagerRootState | InvestorRootState;

@@ -1,9 +1,11 @@
-import { withFormik } from "formik";
-import { FormikProps } from "formik";
-import { WalletData } from "gv-api-web";
+import { FormikProps, withFormik } from "formik";
+import {
+  AttachToSignalProviderInitialDepositCurrencyEnum,
+  WalletData
+} from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -11,48 +13,17 @@ import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import rateApi from "shared/services/api-client/rate-api";
 import filesService from "shared/services/file-service";
-import { convertFromCurrency } from "shared/utils/currency-converter";
+import {
+  convertFromCurrency,
+  convertToCurrency
+} from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { Schema, lazy, number, object } from "yup";
+import { lazy, number, object, Schema } from "yup";
 
-import { IRequestParams } from "./follow-popup-form";
-
-interface IFollowCreateAccountOwnProps {
-  wallets: WalletData[];
-  currency: string;
-  onClick: (values: IRequestParams) => void;
-}
-
-interface IFollowCreateAccountProps {
-  t: TranslationFunction;
-}
-
-interface IFollowCreateAccountState {
-  rate: string;
-  isPending: boolean;
-}
-
-export interface FormValues {
-  initialDepositCurrency: string;
-  initialDepositAmount: number;
-}
-
-type OwnProps = IFollowCreateAccountOwnProps &
-  IFollowCreateAccountProps &
-  FormikProps<FormValues>;
-
-class FollowCreateAccount extends React.Component<
-  OwnProps,
-  IFollowCreateAccountState
-> {
+class FollowCreateAccount extends React.PureComponent<Props, State> {
   state = {
-    rate: "1",
     isPending: false
   };
-
-  constructor(props: OwnProps) {
-    super(props);
-  }
 
   componentDidMount() {
     this.fetchRate();
@@ -65,15 +36,14 @@ class FollowCreateAccount extends React.Component<
     this.fetchRate(initialDepositCurrencyNew);
   };
   fetchRate = (initialDepositCurrency?: any) => {
-    const { values, currency } = this.props;
+    const { values, currency, setFieldValue } = this.props;
     rateApi
       .v10RateByFromByToGet(
         currency,
         initialDepositCurrency || values.initialDepositCurrency
       )
       .then((rate: number) => {
-        if (rate.toString() !== this.state.rate)
-          this.setState({ rate: rate.toString() });
+        if (rate !== values.rate) setFieldValue("rate", rate);
       });
   };
   handleNext = () => {
@@ -91,13 +61,11 @@ class FollowCreateAccount extends React.Component<
       values,
       setFieldValue
     } = this.props;
-    const { initialDepositCurrency, initialDepositAmount } = values;
-    const { rate } = this.state;
-    if (!rate) return null;
+    const { initialDepositCurrency, initialDepositAmount, rate } = values;
     const wallet = wallets.find(
       (wallet: WalletData) => wallet.currency === initialDepositCurrency
     );
-    const availableToWithdraw = (wallet ? wallet.available : 0) / +rate;
+    const availableToWithdraw = wallet ? wallet.available : 0;
     const isAllow = (values: any) => {
       const { formattedValue, value } = values;
       return formattedValue === "" || validateFraction(value, currency);
@@ -126,25 +94,23 @@ class FollowCreateAccount extends React.Component<
             InputComponent={Select}
             onChange={this.onChangeCurrencyFrom}
           >
-            {wallets.map((wallet: WalletData) => {
-              return (
-                <option value={wallet.currency} key={wallet.currency}>
-                  <img
-                    src={filesService.getFileUrl(wallet.logo)}
-                    className="wallet-transfer-popup__icon"
-                    alt={wallet.currency}
-                  />
-                  {`${wallet.title} | ${wallet.currency}`}
-                </option>
-              );
-            })}
+            {wallets.map((wallet: WalletData) => (
+              <option value={wallet.currency} key={wallet.currency}>
+                <img
+                  src={filesService.getFileUrl(wallet.logo)}
+                  className="transfer-popup__icon"
+                  alt={wallet.currency}
+                />
+                {`${wallet.title} | ${wallet.currency}`}
+              </option>
+            ))}
           </GVFormikField>
         </div>
         <div className="dialog-field">
           <StatisticItem label={t("follow-program.create-account.available")}>
             <NumberFormat
-              value={formatCurrencyValue(availableToWithdraw, currency)}
-              suffix={` ${currency}`}
+              value={availableToWithdraw}
+              suffix={` ${initialDepositCurrency}`}
               displayType="text"
             />
           </StatisticItem>
@@ -153,18 +119,18 @@ class FollowCreateAccount extends React.Component<
           <InputAmountField
             name="initialDepositAmount"
             label={t("follow-program.create-account.amount")}
-            currency={currency}
+            currency={initialDepositCurrency}
             setMax={setMaxAmount}
           />
           {currency !== initialDepositCurrency && (
             <div className="invest-popup__currency">
               <NumberFormat
                 value={formatCurrencyValue(
-                  convertFromCurrency(initialDepositAmount, rate),
-                  initialDepositCurrency
+                  convertToCurrency(initialDepositAmount, rate),
+                  currency
                 )}
                 prefix="≈ "
-                suffix={` ${initialDepositCurrency}`}
+                suffix={` ${currency}`}
                 displayType="text"
               />
             </div>
@@ -173,7 +139,6 @@ class FollowCreateAccount extends React.Component<
         <div className="dialog__buttons">
           <GVButton
             onClick={this.handleNext}
-            // id="signUpFormSubmit"
             className="invest-form__submit-button"
             disabled={disableButton()}
           >
@@ -185,7 +150,28 @@ class FollowCreateAccount extends React.Component<
   }
 }
 
-export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
+interface OwnProps {
+  minDeposit: number;
+  wallets: WalletData[];
+  currency: string;
+  onClick: (values: CreateAccountFormValues) => void;
+}
+
+interface State {
+  isPending: boolean;
+}
+
+export interface CreateAccountFormValues {
+  initialDepositCurrency: AttachToSignalProviderInitialDepositCurrencyEnum;
+  initialDepositAmount: number;
+  rate: number;
+}
+
+type Props = OwnProps &
+  InjectedTranslateProps &
+  FormikProps<CreateAccountFormValues>;
+
+export default compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik({
     displayName: "follow-create-account",
@@ -200,33 +186,34 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
       ) {
         initialDepositCurrency = wallets[0].currency;
       }
-      return { initialDepositCurrency, initialDepositAmount: "" };
+      return { initialDepositCurrency, initialDepositAmount: "", rate: 1 };
     },
-    validationSchema: (params: TranslationFunction & OwnProps) => {
-      const getAvailable = (currency: string): number => {
-        const wallet = params.wallets.find(
-          (wallet: WalletData) => wallet.currency == currency
+    validationSchema: (props: Props) => {
+      const getAvailable = (currency: string, rate: number): number => {
+        const wallet = props.wallets.find(
+          (wallet: WalletData) => wallet.currency === currency
         );
-        return wallet ? wallet.available : 0;
+        return convertToCurrency(wallet ? wallet.available : 0, rate);
       };
       return lazy(
-        (values: FormValues): Schema<any> =>
+        (values: CreateAccountFormValues): Schema<any> =>
           object().shape({
             initialDepositAmount: number()
               .required(
-                params.t(
+                props.t(
                   "follow-program.create-account.validation.amount-required"
                 )
               )
               .moreThan(
-                0,
-                params.t(
-                  "follow-program.create-account.validation.amount-is-zero"
+                convertFromCurrency(props.minDeposit, values.rate),
+                props.t(
+                  "follow-program.create-account.validation.amount-more-than-min-deposit",
+                  { value: convertFromCurrency(props.minDeposit, values.rate) }
                 )
               )
               .max(
-                getAvailable(values.initialDepositCurrency),
-                params.t(
+                getAvailable(values.initialDepositCurrency, 1),
+                props.t(
                   "follow-program.create-account.validation.amount-more-than-available"
                 )
               )
@@ -234,7 +221,9 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
       );
     },
     handleSubmit: (values, { props }) => {
-      props.onSubmit(values.initialDepositAmount);
+      props.onSubmit(
+        convertFromCurrency(values.initialDepositAmount!, values.rate || 1)
+      );
     }
   })
 )(FollowCreateAccount);

@@ -1,29 +1,30 @@
+import { replace } from "connected-react-router";
+import { InvestorRootState } from "investor-web-portal/src/reducers";
+import { ManagerRootState } from "manager-web-portal/src/reducers";
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
-import { ROLE } from "shared/constants/constants";
-import * as loginService from "./login.service";
-import {
-  clearLoginDataFuncType,
-  LoginFuncType,
-  LoginService
-} from "./login.service";
+import { Dispatch, bindActionCreators } from "redux";
+import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
+import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { AuthRootState, SetSubmittingType } from "shared/utils/types";
+
 import * as authService from "../auth.service";
 import { CaptchasType } from "../auth.service";
-import { ManagerRootState } from "manager-web-portal/src/reducers";
-import { InvestorRootState } from "investor-web-portal/src/reducers";
 import Pow from "../captcha/pow";
-import { replace } from "connected-react-router";
-import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
-import { ILoginFormFormValues } from "./login/login-form";
 import {
   CODE_TYPE,
   loginUserInvestor,
   loginUserManager
 } from "./login.actions";
+import * as loginService from "./login.service";
+import {
+  LoginFuncType,
+  LoginService,
+  clearLoginDataFuncType
+} from "./login.service";
+import { ILoginFormFormValues } from "./login/login-form";
 import { IRecoveryCodeFormValues } from "./recovery/recovery-code-form";
 import { ITwoFactorCodeFormValues } from "./two-factor/two-factor-code-form";
-import { SetSubmittingType } from "shared/utils/types";
 
 class _CaptchaContainer extends React.PureComponent<Props, State> {
   state = {
@@ -50,8 +51,8 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   componentDidUpdate(): void {
     const { isSubmit, prefix, captchaType } = this.state;
     const { from, service, type } = this.props;
-    const role = process.env.REACT_APP_PLATFORM;
-    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
+    const method =
+      ROLE_ENV === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":
@@ -108,9 +109,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (
-  state: ManagerRootState | InvestorRootState
-): StateProps => {
+const mapStateToProps = (state: AuthRootState): StateProps => {
   const { errorMessage } = state.loginData.login;
   const { isAuthenticated } = state.authData;
   const { email, password } = state.loginData.twoFactor;
@@ -172,7 +171,7 @@ const CaptchaContainer = connect<
   StateProps,
   DispatchProps,
   OwnProps,
-  ManagerRootState | InvestorRootState
+  AuthRootState
 >(
   mapStateToProps,
   mapDispatchToProps

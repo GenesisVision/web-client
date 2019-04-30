@@ -6,7 +6,7 @@ import TransactionAsset from "shared/modules/transaction-details/details-asset";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const OpenCloseTransaction = (props: TransactionDetailsProps) => {
+const OpenCloseTransaction: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
   return (
     <React.Fragment>

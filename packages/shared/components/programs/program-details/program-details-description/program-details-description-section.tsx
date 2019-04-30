@@ -2,28 +2,15 @@ import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { ComponentType, PureComponent } from "react";
+import { ComponentType } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
-import { STATUS } from "shared/constants/constants";
-import { PROGRAM } from "shared/constants/constants";
+import { PROGRAM, STATUS } from "shared/constants/constants";
 
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
-interface IProgramDetailsDescriptionSectionProps
-  extends InjectedTranslateProps {
-  accountCurrency: string;
-  programDescription: ProgramDetailsFull;
-  isAuthenticated: boolean;
-  redirectToLogin(): void;
-  ProgramControls: ComponentType<any>;
-  ProgramWithdrawContainer: ComponentType<any>;
-  ProgramReinvestingWidget?: ComponentType<any>;
-  ChangePasswordTradingAccount?: ComponentType<any>;
-}
-
-class ProgramDetailsDescriptionSection extends PureComponent<
+class ProgramDetailsDescriptionSection extends React.PureComponent<
   IProgramDetailsDescriptionSectionProps
 > {
   render() {
@@ -81,6 +68,18 @@ class ProgramDetailsDescriptionSection extends PureComponent<
       </div>
     );
   }
+}
+
+interface IProgramDetailsDescriptionSectionProps
+  extends InjectedTranslateProps {
+  accountCurrency: string;
+  programDescription: ProgramDetailsFull;
+  isAuthenticated: boolean;
+  redirectToLogin(): void;
+  ProgramControls: ComponentType<any>;
+  ProgramWithdrawContainer: ComponentType<any>;
+  ProgramReinvestingWidget?: ComponentType<any>;
+  ChangePasswordTradingAccount?: ComponentType<any>;
 }
 
 export default translate()(ProgramDetailsDescriptionSection);

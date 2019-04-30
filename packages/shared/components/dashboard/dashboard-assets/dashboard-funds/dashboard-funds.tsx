@@ -23,7 +23,7 @@ import {
   GetItemsFuncActionType,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
-import { FUND, ROLE } from "shared/constants/constants";
+import { FUND, ROLE_ENV } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -32,18 +32,16 @@ import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
 interface IDashboardFundsProps {
   title: string;
-  role: ROLE;
   getDashboardFunds: GetItemsFuncActionType;
   onChangeStatus?(): void;
   createButtonToolbar: JSX.Element;
   createFund: JSX.Element;
 }
 
-const DashboardFunds: FunctionComponent<
+const _DashboardFunds: FunctionComponent<
   InjectedTranslateProps & IDashboardFundsProps
 > = ({
   t,
-  role,
   onChangeStatus,
   getDashboardFunds,
   createButtonToolbar,
@@ -51,7 +49,6 @@ const DashboardFunds: FunctionComponent<
   title
 }) => {
   return (
-    //@ts-ignore
     <TableContainer
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createFund}
@@ -78,11 +75,7 @@ const DashboardFunds: FunctionComponent<
             column.name
           }`}
         >
-          {t(
-            `${process.env.REACT_APP_PLATFORM}.dashboard-page.funds-header.${
-              column.name
-            }`
-          )}
+          {t(`${ROLE_ENV}.dashboard-page.funds-header.${column.name}`)}
         </span>
       )}
       renderBodyRow={(fund: any) => (
@@ -154,7 +147,9 @@ const DashboardFunds: FunctionComponent<
             </Profitability>
           </TableCell>
           <TableCell className="funds-table__cell funds-table__cell--chart">
-            <ProgramSimpleChart data={fund.chart} programId={fund.id} />
+            {fund.chart.length && (
+              <ProgramSimpleChart data={fund.chart} programId={fund.id} />
+            )}
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--status">
             <AssetStatus
@@ -170,4 +165,5 @@ const DashboardFunds: FunctionComponent<
   );
 };
 
-export default translate()(DashboardFunds);
+const DashboardFunds = React.memo(translate()(_DashboardFunds));
+export default DashboardFunds;

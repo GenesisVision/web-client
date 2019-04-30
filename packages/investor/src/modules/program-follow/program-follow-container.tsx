@@ -1,69 +1,72 @@
-import { CopyTradingAccountsList, WalletData } from "gv-api-web";
+import { AttachToSignalProviderInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { InvestorRootState } from "reducers";
+import { Dispatch, bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { FOLLOW_TYPE } from "shared/constants/constants";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import {
+  AlertActionCreator,
+  alertMessageActions
+} from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
 import FollowPopupForm from "./follow-popup/follow-popup-form";
 import {
   attachToSignal,
   getSignalAccounts,
+  getSignalInfo,
   updateAttachToSignal
 } from "./services/program-follow-service";
 
-export interface IProgramFollowContainerProps {
-  service: any;
-  programName: string;
-  type: FOLLOW_TYPE;
-  wallets: WalletData[];
-  open: boolean;
-  onClose(): void;
-  onApply(): void;
-  currency: string;
-  id: string;
-}
-interface IProgramFollowContainerState {
-  isPending: boolean;
-  signalAccounts: any | null;
-}
-class ProgramFollowContainer extends React.Component<
-  IProgramFollowContainerProps,
-  IProgramFollowContainerState
-> {
+class _ProgramFollowContainer extends React.PureComponent<Props, State> {
   state = {
     isPending: false,
-    signalAccounts: []
+    accounts: [],
+    type: undefined,
+    subscriptionFee: undefined,
+    minDeposit: undefined,
+    hasActiveSubscription: undefined,
+    hasSignalAccount: undefined
   };
 
   componentDidMount() {
     if (!authService.getAuthArg()) return;
     this.setState({ isPending: true });
-    getSignalAccounts().then(
-      (CopyTradingAccountsList: CopyTradingAccountsList) => {
+    getSignalAccounts()
+      .then(CopyTradingAccountsList => {
         const { accounts } = CopyTradingAccountsList;
-        this.setState({ signalAccounts: accounts, isPending: false });
-      }
-    );
+        this.setState({ accounts });
+        return getSignalInfo(this.props.id);
+      })
+      .then((info: AttachToSignalProviderInfo) => {
+        const {
+          hasSignalAccount,
+          subscriptionFee,
+          minDeposit,
+          hasActiveSubscription
+        } = info;
+        this.setState({
+          type: hasActiveSubscription ? FOLLOW_TYPE.EDIT : FOLLOW_TYPE.CREATE,
+          hasSignalAccount,
+          subscriptionFee,
+          minDeposit,
+          hasActiveSubscription,
+          isPending: false
+        });
+      });
   }
 
   render() {
+    const { service, wallets, open, onClose, currency, id } = this.props;
     const {
-      service,
-      wallets,
-      open,
-      onClose,
-      onApply,
-      currency,
-      id,
+      isPending,
       type,
-      programName
-    } = this.props;
-    const { isPending, signalAccounts } = this.state;
-    if (isPending) return <DialogLoader />;
+      accounts,
+      hasSignalAccount,
+      minDeposit
+    } = this.state;
     const handleClose = () => {
       onClose();
     };
@@ -74,29 +77,35 @@ class ProgramFollowContainer extends React.Component<
       type === FOLLOW_TYPE.CREATE ? attachToSignal : updateAttachToSignal;
     return (
       <Dialog open={open} onClose={handleClose}>
-        <FollowPopupForm
-          alertError={service.alertError}
-          alertSuccess={service.alertSuccess}
-          id={id}
-          signalAccounts={signalAccounts}
-          currency={currency}
-          wallets={wallets}
-          submitMethod={submitMethod}
-          handleSubmit={handleSubmit}
-          programName={programName}
-        />
+        {isPending ? (
+          <DialogLoader />
+        ) : (
+          <FollowPopupForm
+            minDeposit={minDeposit!}
+            hasSignalAccount={hasSignalAccount!}
+            alertError={service.alertError}
+            alertSuccess={service.alertSuccess}
+            id={id}
+            accounts={accounts}
+            currency={currency}
+            wallets={wallets!}
+            submitMethod={submitMethod}
+            handleSubmit={handleSubmit}
+          />
+        )}
       </Dialog>
     );
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: InvestorRootState): StateProps => {
   const { wallet } = state;
   return {
-    wallets: wallet.info.data ? wallet.info.data.wallets : null
+    wallets: wallet.info.data ? wallet.info.data.wallets : undefined
   };
 };
-const mapDispatchToProps = (dispatch: any) => ({
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
       alertError: alertMessageActions.error,
@@ -105,7 +114,35 @@ const mapDispatchToProps = (dispatch: any) => ({
     dispatch
   )
 });
-export default connect(
+
+interface DispatchProps {
+  service: { alertError: AlertActionCreator; alertSuccess: AlertActionCreator };
+}
+
+interface StateProps {
+  wallets?: WalletData[];
+}
+
+interface Props extends DispatchProps, StateProps {
+  open: boolean;
+  onClose(): void;
+  onApply(): void;
+  currency: string;
+  id: string;
+}
+
+interface State {
+  isPending: boolean;
+  accounts: any | null;
+  hasSignalAccount?: boolean;
+  hasActiveSubscription?: boolean;
+  subscriptionFee?: number;
+  minDeposit?: number;
+  type?: FOLLOW_TYPE;
+}
+
+const ProgramFollowContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProgramFollowContainer);
+)(_ProgramFollowContainer);
+export default ProgramFollowContainer;

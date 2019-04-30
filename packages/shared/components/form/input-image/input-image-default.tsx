@@ -1,22 +1,19 @@
 import * as React from "react";
+import ImageBase from "shared/components/avatar/image-base";
 
-interface IInputImageDefaultProps {
-  defaultImage: any;
-}
-
-const InputImageDefault: React.FC<IInputImageDefaultProps> = ({
-  defaultImage
-}) => {
-  if (defaultImage.type === "svg") return defaultImage;
-  else
-    return (
-      <span
-        className="input-image__preview-img"
-        style={{
-          backgroundImage: `url(${defaultImage})`
-        }}
-      />
-    );
+const InputImageDefault: React.FC<Props> = ({ src = "", defaultImage }) => {
+  return (
+    <ImageBase
+      alt="Default Profile Avatar"
+      defaultImage={defaultImage}
+      url={src}
+    />
+  );
 };
 
-export default InputImageDefault;
+export default React.memo(InputImageDefault);
+
+interface Props {
+  src?: string;
+  defaultImage: string;
+}

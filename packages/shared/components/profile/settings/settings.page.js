@@ -17,9 +17,7 @@ const SettingsPage = ({ t }) => {
     <ProfileLayout route="settings">
       <div className="profile-settings__content">
         <TwoFactorAuthContainer />
-        <ProfileImageContainer
-          profileSettingsService={profileSettingsService}
-        />
+        <ProfileImageContainer />
         <div className="profile-settings__aside-actions">
           <Link
             to={{

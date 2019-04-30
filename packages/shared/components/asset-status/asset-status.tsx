@@ -3,15 +3,12 @@ import "./asset-status.scss";
 import classNames from "classnames";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
-import { ROLE, STATUS } from "shared/constants/constants";
-import RootState from "shared/reducers/root-reducer";
+import { ROLE_ENV, STATUS } from "shared/constants/constants";
 
 import AssetStatusRequests from "./asset-status-requests";
 
@@ -60,7 +57,6 @@ class AssetStatus extends React.PureComponent<
 
   render() {
     const { t, className, status, id, asset, onCancel } = this.props;
-    const role = process.env.REACT_APP_PLATFORM as ROLE;
     return (
       <React.Fragment>
         <span
@@ -80,7 +76,7 @@ class AssetStatus extends React.PureComponent<
             <div className="dashboard-request-popover">
               <AssetStatusRequests
                 id={id}
-                role={role}
+                role={ROLE_ENV}
                 asset={asset}
                 handleCloseDropdown={this.handleCloseDropdown}
                 onCancel={onCancel}

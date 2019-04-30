@@ -16,6 +16,7 @@ import {
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
+import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
 import RootState from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
 
@@ -25,40 +26,8 @@ import {
   FundDetailsStatistic
 } from "./services/fund-details.types";
 
-interface IFundDetailsPageOwnProps {
-  descriptionSection: IDescriptionSection;
-}
-
-interface IFundDetailsStateProps {
-  isAuthenticated: boolean;
-  currency: string;
-}
-
-interface IFundDetailsDispatchProps {
-  service: {
-    getFundDescription(): Promise<FundDetailsFull>;
-    redirectToLogin(): void;
-  };
-}
-
-interface IFundDetailsPageProps
-  extends IFundDetailsPageOwnProps,
-    IFundDetailsStateProps,
-    IFundDetailsDispatchProps {}
-interface IFundDetailsPageState {
-  isPending: boolean;
-  hasError: boolean;
-  description?: FundDetailsFull;
-  profitChart?: FundDetailsProfitChart;
-  balanceChart?: FundBalanceChart;
-  statistic?: FundDetailsStatistic;
-}
-
-class FundDetailsPage extends PureComponent<
-  IFundDetailsPageProps,
-  IFundDetailsPageState
-> {
-  constructor(props: IFundDetailsPageProps) {
+class FundDetailsPage extends PureComponent<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       hasError: false,
@@ -107,6 +76,7 @@ class FundDetailsPage extends PureComponent<
 
   render() {
     const {
+      historySection,
       currency,
       service,
       isAuthenticated,
@@ -125,6 +95,16 @@ class FundDetailsPage extends PureComponent<
     }
 
     if (!description) return null;
+
+    const fetchHistoryPortfolioEvents = (filters: any) =>
+      historySection.fetchPortfolioEvents({
+        ...filters,
+        assetId: description.id
+      });
+
+    const isInvested =
+      description.personalFundDetails &&
+      description.personalFundDetails.isInvested;
     return (
       <Page title={description.title}>
         <ProgramDetailContext.Provider
@@ -159,6 +139,10 @@ class FundDetailsPage extends PureComponent<
               <FundDetailsHistorySection
                 id={description.id}
                 fetchFundStructure={fetchFundStructure}
+                fetchPortfolioEvents={fetchHistoryPortfolioEvents}
+                fetchHistoryCounts={historySection.fetchHistoryCounts}
+                eventTypeFilterValues={historySection.eventTypeFilterValues}
+                isInvested={isInvested}
               />
             </div>
           </div>
@@ -168,7 +152,7 @@ class FundDetailsPage extends PureComponent<
   }
 }
 
-const mapStateToProps = (state: RootState): IFundDetailsStateProps => {
+const mapStateToProps = (state: RootState): StateProps => {
   const { accountSettings, authData } = state;
 
   return {
@@ -177,11 +161,39 @@ const mapStateToProps = (state: RootState): IFundDetailsStateProps => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): IFundDetailsDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators({ getFundDescription, redirectToLogin }, dispatch)
 });
 
-export default compose<ComponentType<IFundDetailsPageOwnProps>>(
+interface OwnProps {
+  descriptionSection: IDescriptionSection;
+  historySection: IHistorySection;
+}
+
+interface StateProps {
+  isAuthenticated: boolean;
+  currency: string;
+}
+
+interface DispatchProps {
+  service: {
+    getFundDescription(): Promise<FundDetailsFull>;
+    redirectToLogin(): void;
+  };
+}
+
+interface Props extends OwnProps, StateProps, DispatchProps {}
+
+interface State {
+  isPending: boolean;
+  hasError: boolean;
+  description?: FundDetailsFull;
+  profitChart?: FundDetailsProfitChart;
+  balanceChart?: FundBalanceChart;
+  statistic?: FundDetailsStatistic;
+}
+
+export default compose<ComponentType<OwnProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps
