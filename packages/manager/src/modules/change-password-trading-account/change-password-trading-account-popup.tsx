@@ -45,6 +45,10 @@ class ChangePasswordTradingAccountPopup extends Component<
     errorMessage: ""
   };
 
+  componentWillUnmount() {
+    this.setState({ errorMessage: "" });
+  }
+
   handleApply = (
     values: IChangePasswordTradingAccountFormValues,
     setSubmitting: SetSubmittingType
