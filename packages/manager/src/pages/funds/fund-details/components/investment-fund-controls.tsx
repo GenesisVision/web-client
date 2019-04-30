@@ -110,7 +110,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
                 >
                   {t("fund-details-page.description.reallocate")}
                 </GVButton>
-                {!canReallocate && personalFundDetails.status !== "Ended" && (
+                {!canReallocate && fundDescription.status !== "Archived" && (
                   <div className="details-description__reallocate-message">
                     {t(
                       "fund-details-page.description.disable-reallocation-message"
