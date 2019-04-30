@@ -7,11 +7,8 @@ import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 interface ISignalsFeeFormPartialProps {
-  subscriptionFeeFieldName: string;
+  volumeFeeFieldName: string;
   successFeeFieldName: string;
-  maxEntryFee: number;
-  maxSuccessFee: number;
-
   hasSubscriptionFeeAutofocus?: boolean;
 }
 
@@ -20,9 +17,7 @@ const SignalsFeeFormPartial: FunctionComponent<
 > = ({
   t,
   successFeeFieldName,
-  subscriptionFeeFieldName,
-  maxEntryFee,
-  maxSuccessFee,
+  volumeFeeFieldName,
   hasSubscriptionFeeAutofocus = false
 }) => {
   return (
@@ -32,26 +27,26 @@ const SignalsFeeFormPartial: FunctionComponent<
       </div>
       <div className="create-program-settings__item">
         <GVFormikField
-          name={subscriptionFeeFieldName}
+          name={volumeFeeFieldName}
           label={t(
-            "manager.create-program-page.settings.fields.subscription-fee"
+            "manager.create-program-page.settings.fields.signal-volume-fee"
           )}
-          adornment="GVT"
+          adornment="%"
           component={GVTextField}
           InputComponent={NumberFormat}
           autoComplete="off"
-          decimalScale={4}
+          decimalScale={2}
           autoFocus={hasSubscriptionFeeAutofocus}
           isAllowed={allowValuesNumberFormat()}
         />
         <Hint
           content={t(
-            "manager.create-program-page.settings.hints.subscription-fee"
+            "manager.create-program-page.settings.hints.signal-volume-fee"
           )}
           className="create-program-settings__item-caption"
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
           tooltipContent={t(
-            "manager.create-program-page.settings.hints.subscription-fee-description"
+            "manager.create-program-page.settings.hints.signal-volume-fee-description"
           )}
         />
       </div>

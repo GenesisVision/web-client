@@ -25,14 +25,14 @@ const SignalProgramInfo: FunctionComponent<
         />
       </StatisticItem>
       <StatisticItem
-        label={t("program-details-page.description.subscriptionFee")}
+        label={t("program-details-page.description.volume-fee")}
         className="program-details-description__short-statistic-item"
         accent
       >
         <NumberFormat
           value={programDescription.signalSubscriptionFee}
           displayType="text"
-          suffix=" GVT"
+          suffix=" %"
         />
       </StatisticItem>
     </div>

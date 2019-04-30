@@ -78,7 +78,7 @@ const createProgramSettingsValidationSchema = (
     isSignalProgram: boolean(),
     signalSubscriptionFee: mixed().when("isSignalProgram", {
       is: true,
-      then: signalEntryFeeShape(t, 100)
+      then: signalVolumeFeeShape(t)
     }),
     signalSuccessFee: mixed().when("isSignalProgram", {
       is: true,
@@ -168,27 +168,29 @@ export const signalSuccessFeeShape = (
     );
 };
 
-export const signalEntryFeeShape = (
+export const signalVolumeFeeShape = (
   t: TranslationFunction,
-  managerMaxEntryFee: number
+  minVolumeFee: number = 0,
+  maxVolumeFee: number = 0.1
 ) => {
   return number()
     .required(
       t(
-        "manager.create-program-page.settings.validation.signal-subscription-fee-required"
+        "manager.create-program-page.settings.validation.signal-volume-fee-required"
       )
     )
     .min(
-      0.01,
+      minVolumeFee,
       t(
-        "manager.create-program-page.settings.validation.signal-subscription-fee-min"
+        "manager.create-program-page.settings.validation.signal-volume-fee-min",
+        { min: minVolumeFee.toFixed(2) }
       )
     )
     .max(
-      managerMaxEntryFee,
+      maxVolumeFee,
       t(
-        "manager.create-program-page.settings.validation.signal-subscription-fee-max",
-        { max: managerMaxEntryFee }
+        "manager.create-program-page.settings.validation.signal-volume-fee-max",
+        { max: maxVolumeFee.toFixed(2) }
       )
     );
 };

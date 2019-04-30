@@ -68,7 +68,10 @@ class SignalProviderControls extends Component<
                   )}
                 </div>
                 <div className="program-details-description__button-container">
-                  <GVButton onClick={this.openPopup}>
+                  <GVButton
+                    onClick={this.openPopup}
+                    className="program-details-description__invest-btn signal-provider__btn"
+                  >
                     {t(
                       "program-details-page.description.signal-provider.title"
                     )}
