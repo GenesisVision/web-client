@@ -1,6 +1,6 @@
 import { FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React, { ComponentType, FunctionComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import { SetSubmittingType } from "shared/utils/types";
@@ -33,7 +33,7 @@ type ChangePasswordTradingAccountFormProps = InjectedTranslateProps &
   IChangePasswordTradingAccountFormOwnProps &
   FormikProps<IChangePasswordTradingAccountFormValues>;
 
-const ChangePasswordTradingAccountForm: FunctionComponent<
+const _ChangePasswordTradingAccountForm: React.FC<
   ChangePasswordTradingAccountFormProps
 > = ({
   t,
@@ -88,9 +88,10 @@ const ChangePasswordTradingAccountForm: FunctionComponent<
   );
 };
 
-export default compose<
-  ComponentType<IChangePasswordTradingAccountFormOwnProps>
+const ChangePasswordTradingAccountForm = compose<
+  React.ComponentType<IChangePasswordTradingAccountFormOwnProps>
 >(
+  React.memo,
   translate(),
   withFormik<
     IChangePasswordTradingAccountFormOwnProps,
@@ -107,4 +108,5 @@ export default compose<
       props.onSubmit(values, setSubmitting);
     }
   })
-)(ChangePasswordTradingAccountForm);
+)(_ChangePasswordTradingAccountForm);
+export default ChangePasswordTradingAccountForm;
