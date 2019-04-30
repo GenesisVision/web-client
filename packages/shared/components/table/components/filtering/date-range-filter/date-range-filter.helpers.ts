@@ -1,3 +1,4 @@
+import { ProgramFacetTimeframeEnum } from "gv-api-web";
 import moment from "moment";
 import { DurationInputArg2 } from "moment";
 
@@ -12,6 +13,20 @@ import {
   SERVER_DATE_RANGE_MAX_FILTER_NAME,
   SERVER_DATE_RANGE_MIN_FILTER_NAME
 } from "./date-range-filter.constants";
+
+export const mapServerTimeFrameToFilterType = (
+  timeFrame: ProgramFacetTimeframeEnum
+): DATA_RANGE_FILTER_TYPES => {
+  switch (timeFrame) {
+    case "Week":
+      return DATA_RANGE_FILTER_TYPES.LAST_WEEK;
+    case "Month":
+      return DATA_RANGE_FILTER_TYPES.LAST_MOUTH;
+    case "AllTime":
+    default:
+      return DATA_RANGE_FILTER_TYPES.ALL;
+  }
+};
 
 export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
   if (
