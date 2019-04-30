@@ -42,12 +42,16 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { t, programDescription } = this.props;
+    const { t, programDescription, isAuthenticated } = this.props;
     const { isOpenInvestmentPopup } = this.state;
     const notificationId = programDescription.personalProgramDetails
       ? programDescription.personalProgramDetails
           .notificationAvailableToInvestId
       : undefined;
+    const isDisabledInvestButton = isAuthenticated
+      ? !programDescription.personalProgramDetails ||
+        !programDescription.personalProgramDetails.canInvest
+      : false;
     return (
       <>
         <InvestmentProgramInfo programDescription={programDescription} />
@@ -62,10 +66,7 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
             <GVButton
               className="program-details-description__invest-btn"
               onClick={this.openInvestmentPopup}
-              disabled={
-                !programDescription.personalProgramDetails ||
-                !programDescription.personalProgramDetails.canInvest
-              }
+              disabled={isDisabledInvestButton}
             >
               {t("program-details-page.description.invest")}
             </GVButton>
