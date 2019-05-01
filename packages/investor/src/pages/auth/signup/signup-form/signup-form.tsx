@@ -10,6 +10,17 @@ import { SetSubmittingType } from "shared/utils/types";
 
 import validationSchema from "./signup-form.validators";
 
+type TFIELDS = {
+  [key in keyof RegisterInvestorViewModel]: keyof RegisterInvestorViewModel
+};
+enum FIELDS {
+  password = "password",
+  email = "email",
+  confirmPassword = "confirmPassword",
+  refCode = "refCode",
+  isAuto = "isAuto"
+}
+
 const _SignUpForm: React.FC<
   InjectedFormikProps<Props, ISignUpFormFormValues>
 > = ({ isSubmitting, handleSubmit, error, t, isValid, dirty }) => (
@@ -21,7 +32,7 @@ const _SignUpForm: React.FC<
   >
     <GVFormikField
       type="email"
-      name="email"
+      name={FIELDS.email}
       label={t("auth.signup.email-field-text")}
       autoComplete="email"
       autoFocus
@@ -29,14 +40,14 @@ const _SignUpForm: React.FC<
     />
     <GVFormikField
       type="password"
-      name="password"
+      name={FIELDS.password}
       label={t("auth.signup.password-field-text")}
       component={GVTextField}
       autoComplete="new-password"
     />
     <GVFormikField
       type="password"
-      name="confirmPassword"
+      name={FIELDS.confirmPassword}
       label={t("auth.signup.password-confirm-field-text")}
       component={GVTextField}
       autoComplete="new-password"
@@ -117,14 +128,14 @@ const SignUpForm = compose<React.FC<OwnProps>>(
   withFormik<Props, ISignUpFormFormValues>({
     displayName: "signup-form",
     mapPropsToValues: props => ({
-      refCode: props.refCode || "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      [FIELDS.email]: "",
+      [FIELDS.password]: "",
+      [FIELDS.confirmPassword]: "",
+      [FIELDS.isAuto]: false, //TODO remove when upgrade api
+      [FIELDS.refCode]: props.refCode || "",
       privacyPolicy: false,
       acceptTerms: false,
-      residentUSA: false,
-      isAuto: false //TODO remove when upgrade api
+      residentUSA: false
     }),
     validationSchema: validationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
