@@ -11,6 +11,9 @@ import { SetSubmittingType } from "shared/utils/types";
 import validationSchema from "./signup-form.validators";
 
 enum FIELDS {
+  privacyPolicy = "privacyPolicy",
+  acceptTerms = "acceptTerms",
+  residentUSA = "residentUSA",
   password = "password",
   email = "email",
   confirmPassword = "confirmPassword",
@@ -52,7 +55,7 @@ const _SignUpForm: React.FC<
     <GVFormikField
       type="checkbox"
       color="primary"
-      name="privacyPolicy"
+      name={FIELDS.privacyPolicy}
       label={
         <span>
           {t("auth.signup.i-accept-text")}{" "}
@@ -71,7 +74,7 @@ const _SignUpForm: React.FC<
     <GVFormikField
       type="checkbox"
       color="primary"
-      name="acceptTerms"
+      name={FIELDS.acceptTerms}
       label={
         <span>
           {t("auth.signup.i-accept-text")}{" "}
@@ -90,7 +93,7 @@ const _SignUpForm: React.FC<
     <GVFormikField
       type="checkbox"
       color="primary"
-      name="residentUSA"
+      name={FIELDS.residentUSA}
       label={t("auth.signup.resident-USA-text")}
       component={GVCheckbox}
     />
@@ -115,9 +118,9 @@ interface OwnProps {
 }
 
 interface ISignUpFormFormValues extends RegisterInvestorViewModel {
-  privacyPolicy: boolean;
-  acceptTerms: boolean;
-  residentUSA: boolean;
+  [FIELDS.privacyPolicy]: boolean;
+  [FIELDS.acceptTerms]: boolean;
+  [FIELDS.residentUSA]: boolean;
 }
 
 const SignUpForm = compose<React.FC<OwnProps>>(
@@ -130,9 +133,9 @@ const SignUpForm = compose<React.FC<OwnProps>>(
       [FIELDS.confirmPassword]: "",
       [FIELDS.isAuto]: false, //TODO remove when upgrade api
       [FIELDS.refCode]: props.refCode || "",
-      privacyPolicy: false,
-      acceptTerms: false,
-      residentUSA: false
+      [FIELDS.privacyPolicy]: false,
+      [FIELDS.acceptTerms]: false,
+      [FIELDS.residentUSA]: false
     }),
     validationSchema: validationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
