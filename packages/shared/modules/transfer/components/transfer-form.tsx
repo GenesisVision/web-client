@@ -193,7 +193,7 @@ class _TransferForm extends React.PureComponent<Props> {
   }
 }
 
-const TransferForm = compose<React.FunctionComponent<OwnProps>>(
+const TransferForm = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<OwnProps, TransferFormValues>({
     displayName: "transfer",
