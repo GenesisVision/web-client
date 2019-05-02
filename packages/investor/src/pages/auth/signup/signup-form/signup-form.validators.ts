@@ -4,20 +4,28 @@ import {
 } from "shared/utils/validators/validators";
 import { boolean, object, ref, string } from "yup";
 
+import { SIGNUP_FORM_FIELDS } from "./signup-form";
+
 const confirmPasswordValidator = string()
   .oneOf([ref("password")], "Passwords don't match.")
   .required("Confirm Password is required");
 
 const validationSchema = object().shape({
-  email: emailValidator,
-  password: passwordValidator,
-  acceptTerms: boolean().oneOf([true], "Must Accept the Terms of Service"),
-  privacyPolicy: boolean().oneOf([true], "Must Accept the Privacy Policy"),
-  residentUSA: boolean().oneOf(
+  [SIGNUP_FORM_FIELDS.email]: emailValidator,
+  [SIGNUP_FORM_FIELDS.password]: passwordValidator,
+  [SIGNUP_FORM_FIELDS.acceptTerms]: boolean().oneOf(
+    [true],
+    "Must Accept the Terms of Service"
+  ),
+  [SIGNUP_FORM_FIELDS.privacyPolicy]: boolean().oneOf(
+    [true],
+    "Must Accept the Privacy Policy"
+  ),
+  [SIGNUP_FORM_FIELDS.residentUSA]: boolean().oneOf(
     [true],
     "Must confirm that you are not a resident of the USA"
   ),
-  confirmPassword: confirmPasswordValidator
+  [SIGNUP_FORM_FIELDS.confirmPassword]: confirmPasswordValidator
 });
 
 export default validationSchema;
