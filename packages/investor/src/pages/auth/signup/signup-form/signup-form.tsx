@@ -10,9 +10,6 @@ import { SetSubmittingType } from "shared/utils/types";
 
 import validationSchema from "./signup-form.validators";
 
-type TFIELDS = {
-  [key in keyof RegisterInvestorViewModel]: keyof RegisterInvestorViewModel
-};
 enum FIELDS {
   password = "password",
   email = "email",
