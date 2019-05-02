@@ -4,7 +4,7 @@ import {
 } from "shared/utils/validators/validators";
 import { boolean, object, ref, string } from "yup";
 
-import { SIGNUP_FORM_FIELDS } from "./signup-form";
+import { SIGNUP_FORM_FIELDS } from "./signup-form.types";
 
 const confirmPasswordValidator = string()
   .oneOf([ref("password")], "Passwords don't match.")

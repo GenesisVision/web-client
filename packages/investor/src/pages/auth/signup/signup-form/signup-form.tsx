@@ -8,6 +8,7 @@ import FormError from "shared/components/form/form-error/form-error";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import { SetSubmittingType } from "shared/utils/types";
 
+import { SIGNUP_FORM_FIELDS } from "./signup-form.types";
 import validationSchema from "./signup-form.validators";
 
 const _SignUpForm: React.FC<
@@ -97,17 +98,6 @@ const _SignUpForm: React.FC<
     </GVButton>
   </form>
 );
-
-export enum SIGNUP_FORM_FIELDS {
-  privacyPolicy = "privacyPolicy",
-  acceptTerms = "acceptTerms",
-  residentUSA = "residentUSA",
-  password = "password",
-  email = "email",
-  confirmPassword = "confirmPassword",
-  refCode = "refCode",
-  isAuto = "isAuto"
-}
 
 interface Props extends InjectedTranslateProps, OwnProps {}
 
