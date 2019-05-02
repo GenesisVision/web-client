@@ -4,7 +4,7 @@ import { GVTextFieldProps } from "gv-react-components/dist/gv-text-field";
 import * as React from "react";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 
-class GVNumberFiled extends React.Component<
+class GVNumberFiled extends React.PureComponent<
   GVTextFieldProps & {
     form: FormikActions<void>;
     onChange(value: string): void;
