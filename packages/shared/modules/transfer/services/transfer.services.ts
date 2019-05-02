@@ -3,19 +3,18 @@ import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { TransferFormValuesType } from "../components/transfer-form";
+import { TransferFormValues } from "../components/transfer-form";
 import { ItemType, ItemsType } from "../transfer.types";
 
-export const transferRequest = (data: TransferFormValuesType): Promise<any> => {
-  const {
-    amount,
-    sourceId,
-    destinationId,
-    transferAll,
-    sourceType,
-    destinationType
-  } = data;
-  return walletApi.v10WalletTransferPost(authService.getAuthArg(), {
+export const transferRequest = ({
+  amount,
+  sourceId,
+  destinationId,
+  transferAll,
+  sourceType,
+  destinationType
+}: TransferFormValues): Promise<any> =>
+  walletApi.v10WalletTransferPost(authService.getAuthArg(), {
     request: {
       amount: Number(amount),
       sourceId,
@@ -25,10 +24,9 @@ export const transferRequest = (data: TransferFormValuesType): Promise<any> => {
       destinationType
     } as InternalTransferRequest
   });
-};
 
 export const getTransferAll = (
-  values: { amount: string; sourceId: string },
+  values: { amount: number; sourceId: string },
   sourceItems: ItemsType
 ): boolean => {
   const { amount, sourceId } = values;
@@ -37,7 +35,7 @@ export const getTransferAll = (
     selectedSourceItem.available,
     selectedSourceItem.currency
   );
-  return amount === formattedAvailableSourceItem;
+  return String(amount) === formattedAvailableSourceItem;
 };
 
 export const getDestinationItems: getDestinationItemsType<ItemType> = (
