@@ -10,17 +10,6 @@ import { SetSubmittingType } from "shared/utils/types";
 
 import validationSchema from "./signup-form.validators";
 
-export enum SIGNUP_FORM_FIELDS {
-  privacyPolicy = "privacyPolicy",
-  acceptTerms = "acceptTerms",
-  residentUSA = "residentUSA",
-  password = "password",
-  email = "email",
-  confirmPassword = "confirmPassword",
-  refCode = "refCode",
-  isAuto = "isAuto"
-}
-
 const _SignUpForm: React.FC<
   InjectedFormikProps<Props, ISignUpFormFormValues>
 > = ({ isSubmitting, handleSubmit, error, t, isValid, dirty }) => (
@@ -108,6 +97,17 @@ const _SignUpForm: React.FC<
     </GVButton>
   </form>
 );
+
+export enum SIGNUP_FORM_FIELDS {
+  privacyPolicy = "privacyPolicy",
+  acceptTerms = "acceptTerms",
+  residentUSA = "residentUSA",
+  password = "password",
+  email = "email",
+  confirmPassword = "confirmPassword",
+  refCode = "refCode",
+  isAuto = "isAuto"
+}
 
 interface Props extends InjectedTranslateProps, OwnProps {}
 
