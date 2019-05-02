@@ -161,7 +161,7 @@ class _TransferForm extends React.PureComponent<Props> {
               isAllow={this.isAllow}
             />
           </div>
-          {values.amount && (
+          {!!values.amount && (
             <TransferRate
               destinationCurrency={selectedDestinationItem.currency}
               sourceCurrency={selectedSourceItem.currency}
