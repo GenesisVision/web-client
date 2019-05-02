@@ -4,6 +4,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import GVNumberFiled from "shared/components/gv-number-field/gv-number-field";
 
 const _InputAmountField: React.FC<Props> = ({
+  emptyInit,
   onChange,
   t,
   name,
@@ -15,6 +16,7 @@ const _InputAmountField: React.FC<Props> = ({
   autoFocus = true
 }) => (
   <GVFormikField
+    emptyInit={emptyInit}
     onChange={onChange}
     name={name}
     label={label}
@@ -47,6 +49,7 @@ interface Props extends InjectedTranslateProps {
   setMax(): void;
   autoFocus?: boolean;
   onChange?(event: string | number): void;
+  emptyInit?: boolean;
 }
 
 const InputAmountField = React.memo(translate()(_InputAmountField));

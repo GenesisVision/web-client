@@ -159,6 +159,7 @@ class _TransferForm extends React.PureComponent<Props> {
               currency={selectedSourceItem.currency}
               setMax={setMaxAmount}
               isAllow={this.isAllow}
+              emptyInit
             />
           </div>
           {!!values.amount && (
