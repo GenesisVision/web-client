@@ -116,7 +116,7 @@ const _DashboardFunds: FunctionComponent<
               assets={fund.topFundAssets}
               type={FUND_ASSET_TYPE.SHORT}
               size={3}
-              length={fund.totalAssetsCount}
+              length={fund.totalAssetsCount} //TODO why we have totalAssetsCount prop?..
             />
           </TableCell>
           <TableCell className="funds-table__cell funds-table__cell--value">

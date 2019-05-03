@@ -1,38 +1,46 @@
 import "../create-fund-settings.scss";
 
-import React, { Fragment } from "react";
-import { translate } from "react-i18next";
+import { FundAssetPartWithIcon } from "gv-api-web";
+import * as React from "react";
+import { MouseEventHandler } from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import AddButton from "shared/components/add-button/add-button";
 import FundAssetRatio from "shared/components/fund-asset-ratio/fund-asset-ratio";
-import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
+import FundAssetContainer, {
+  TFundAssetRemoveHandle
+} from "shared/components/fund-asset/fund-asset-container";
 
-class CreateFundSettingsAssetsComponent extends React.Component {
+class _CreateFundSettingsAssetsComponent extends React.PureComponent<
+  Props,
+  State
+> {
   state = {
-    hoveringAsset: null
+    hoveringAssetName: undefined
   };
 
-  handleHover = asset => () => {
-    this.setState({ hoveringAsset: asset });
+  handleHover = (asset: string) => () => {
+    this.setState({ hoveringAssetName: asset });
   };
 
   handleLeave = () => {
-    this.setState({ hoveringAsset: null });
+    this.setState({ hoveringAssetName: undefined });
   };
 
   render() {
     const { t, assets, remainder, removeHandle, addHandle } = this.props;
-    const { hoveringAsset } = this.state;
+    const { hoveringAssetName } = this.state;
     return (
-      <Fragment>
+      <>
         <div className="create-fund-settings__assets-and-line">
           <div className="create-fund-settings__row create-fund-settings__assets">
             <FundAssetContainer
               assets={assets}
-              type={"middle"}
+              type={FUND_ASSET_TYPE.MIDDLE}
               removable={true}
               removeHandle={removeHandle}
               remainder={remainder}
-              hoveringAsset={hoveringAsset}
+              hoveringAsset={hoveringAssetName}
             />
           </div>
           <div className="create-fund-settings__line">
@@ -56,8 +64,23 @@ class CreateFundSettingsAssetsComponent extends React.Component {
             <div>{t("buttons.add-assets")}</div>
           </div>
         </div>
-      </Fragment>
+      </>
     );
   }
 }
-export default translate()(CreateFundSettingsAssetsComponent);
+
+interface Props extends InjectedTranslateProps {
+  assets: FundAssetPartWithIcon[];
+  remainder: number;
+  removeHandle: TFundAssetRemoveHandle;
+  addHandle: MouseEventHandler;
+}
+
+interface State {
+  hoveringAssetName?: string;
+}
+
+const CreateFundSettingsAssetsComponent = translate()(
+  _CreateFundSettingsAssetsComponent
+);
+export default CreateFundSettingsAssetsComponent;
