@@ -4,22 +4,8 @@ import classNames from "classnames";
 import { FundAssetPartWithIcon } from "gv-api-web";
 import * as React from "react";
 
-export const calcPercent = (
-  value: number,
-  start: number = 0,
-  end: number = 100
-): number => {
-  let duration = end - start;
-  let progress = value - start;
-  if (duration === 0 || progress < 0) return 0;
-  if (progress > duration) return 100;
-  return (progress * 100) / duration;
-};
-
 const _FundAssetRatio: React.FC<Props> = ({
   values,
-  className,
-  valueClassName,
   handleHover,
   handleLeave
 }) => {
@@ -27,26 +13,18 @@ const _FundAssetRatio: React.FC<Props> = ({
   let newLevel = 0;
   return (
     <div className="fund-asset-ratio-container">
-      <div
-        className={classNames(
-          "fund-asset-ratio fund-asset-ratio--line",
-          className
-        )}
-      >
-        {values.map((item: FundAssetPartWithIcon, idx: number) => {
+      <div className="fund-asset-ratio fund-asset-ratio--line">
+        {values.map((item: FundAssetPartWithIcon) => {
           newLevel += item.percent;
           ZIndex--;
           return (
-            <div
-              key={idx}
-              className={classNames("fund-asset-ratio--item-line")}
-              onMouseOver={handleHover(item.asset)}
-              onMouseLeave={handleLeave}
-              style={{
-                width: `${calcPercent(newLevel)}%`,
-                background: item.color,
-                zIndex: ZIndex
-              }}
+            <RatioField
+              key={item.name}
+              handleHover={handleHover}
+              handleLeave={handleLeave}
+              item={item}
+              newLevel={newLevel}
+              ZIndex={ZIndex}
             />
           );
         })}
@@ -70,14 +48,37 @@ const _FundAssetRatio: React.FC<Props> = ({
   );
 };
 
-export interface Props {
-  className?: string;
-  valueClassName?: string;
-  values: FundAssetPartWithIcon[];
-  handleHover(
+const RatioField: React.FC<IRatioFieldProps> = React.memo(
+  ({ handleHover, item, handleLeave, newLevel, ZIndex }) => (
+    <div
+      className="fund-asset-ratio--item-line"
+      onMouseOver={handleHover(item.asset)}
+      onMouseLeave={handleLeave}
+      style={{
+        width: `${newLevel}%`,
+        background: item.color,
+        zIndex: ZIndex
+      }}
+    />
+  )
+);
+
+interface IRatioFieldProps {
+  handleHover: (
     asset: string
-  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  handleLeave(): void;
+  ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  item: FundAssetPartWithIcon;
+  handleLeave: () => void;
+  newLevel: number;
+  ZIndex: number;
+}
+
+interface Props {
+  values: FundAssetPartWithIcon[];
+  handleHover: (
+    asset: string
+  ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  handleLeave: () => void;
 }
 
 const FundAssetRatio = React.memo(_FundAssetRatio);
