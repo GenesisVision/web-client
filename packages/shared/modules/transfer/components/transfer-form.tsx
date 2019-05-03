@@ -33,10 +33,8 @@ class _TransferForm extends React.PureComponent<Props> {
     setFieldValue(FIELDS.sourceId, currencyFromNew);
   };
 
-  onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { setFieldValue } = this.props;
-    setFieldValue(FIELDS.destinationId, event.target.value);
-  };
+  onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) =>
+    this.props.setFieldValue(FIELDS.destinationId, event.target.value);
 
   isAllow = (values: NumberFormatValues) => {
     const { floatValue, formattedValue, value } = values;
