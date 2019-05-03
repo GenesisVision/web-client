@@ -148,7 +148,7 @@ class CreateFundSettings extends React.Component {
       setSubmitting,
       isValid
     } = this.props;
-    if (!wallets || !wallets.length) return;
+    if (!wallets || !wallets.length) return null;
     const {
       depositWalletCurrency,
       depositAmount,
