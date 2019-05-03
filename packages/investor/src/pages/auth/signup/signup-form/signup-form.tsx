@@ -8,6 +8,7 @@ import FormError from "shared/components/form/form-error/form-error";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import { SetSubmittingType } from "shared/utils/types";
 
+import { SIGNUP_FORM_FIELDS } from "./signup-form.types";
 import validationSchema from "./signup-form.validators";
 
 const _SignUpForm: React.FC<
@@ -21,7 +22,7 @@ const _SignUpForm: React.FC<
   >
     <GVFormikField
       type="email"
-      name="email"
+      name={SIGNUP_FORM_FIELDS.email}
       label={t("auth.signup.email-field-text")}
       autoComplete="email"
       autoFocus
@@ -29,14 +30,14 @@ const _SignUpForm: React.FC<
     />
     <GVFormikField
       type="password"
-      name="password"
+      name={SIGNUP_FORM_FIELDS.password}
       label={t("auth.signup.password-field-text")}
       component={GVTextField}
       autoComplete="new-password"
     />
     <GVFormikField
       type="password"
-      name="confirmPassword"
+      name={SIGNUP_FORM_FIELDS.confirmPassword}
       label={t("auth.signup.password-confirm-field-text")}
       component={GVTextField}
       autoComplete="new-password"
@@ -44,7 +45,7 @@ const _SignUpForm: React.FC<
     <GVFormikField
       type="checkbox"
       color="primary"
-      name="privacyPolicy"
+      name={SIGNUP_FORM_FIELDS.privacyPolicy}
       label={
         <span>
           {t("auth.signup.i-accept-text")}{" "}
@@ -63,7 +64,7 @@ const _SignUpForm: React.FC<
     <GVFormikField
       type="checkbox"
       color="primary"
-      name="acceptTerms"
+      name={SIGNUP_FORM_FIELDS.acceptTerms}
       label={
         <span>
           {t("auth.signup.i-accept-text")}{" "}
@@ -82,7 +83,7 @@ const _SignUpForm: React.FC<
     <GVFormikField
       type="checkbox"
       color="primary"
-      name="residentUSA"
+      name={SIGNUP_FORM_FIELDS.residentUSA}
       label={t("auth.signup.resident-USA-text")}
       component={GVCheckbox}
     />
@@ -107,9 +108,9 @@ interface OwnProps {
 }
 
 interface ISignUpFormFormValues extends RegisterInvestorViewModel {
-  privacyPolicy: boolean;
-  acceptTerms: boolean;
-  residentUSA: boolean;
+  [SIGNUP_FORM_FIELDS.privacyPolicy]: boolean;
+  [SIGNUP_FORM_FIELDS.acceptTerms]: boolean;
+  [SIGNUP_FORM_FIELDS.residentUSA]: boolean;
 }
 
 const SignUpForm = compose<React.FC<OwnProps>>(
@@ -117,14 +118,14 @@ const SignUpForm = compose<React.FC<OwnProps>>(
   withFormik<Props, ISignUpFormFormValues>({
     displayName: "signup-form",
     mapPropsToValues: props => ({
-      refCode: props.refCode || "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      privacyPolicy: false,
-      acceptTerms: false,
-      residentUSA: false,
-      isAuto: false //TODO remove when upgrade api
+      [SIGNUP_FORM_FIELDS.email]: "",
+      [SIGNUP_FORM_FIELDS.password]: "",
+      [SIGNUP_FORM_FIELDS.confirmPassword]: "",
+      [SIGNUP_FORM_FIELDS.isAuto]: false, //TODO remove when upgrade api
+      [SIGNUP_FORM_FIELDS.refCode]: props.refCode || "",
+      [SIGNUP_FORM_FIELDS.privacyPolicy]: false,
+      [SIGNUP_FORM_FIELDS.acceptTerms]: false,
+      [SIGNUP_FORM_FIELDS.residentUSA]: false
     }),
     validationSchema: validationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
