@@ -287,6 +287,7 @@ interface OwnProps {
 
 export interface TransferFormValues extends InternalTransferRequest {}
 
-type Props = InjectedTranslateProps &
-  FormikProps<TransferFormValues> &
-  OwnProps;
+interface Props
+  extends InjectedTranslateProps,
+    FormikProps<TransferFormValues>,
+    OwnProps {}
