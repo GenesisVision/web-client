@@ -39,12 +39,11 @@ class _TransferForm extends React.PureComponent<Props> {
   };
 
   isAllow = (values: NumberFormatValues) => {
+    const { floatValue, formattedValue, value } = values;
     const selectedSourceItem = service.getSelectedItem(
       this.props.sourceItems,
       this.props.values[FIELDS.sourceId]
     );
-
-    const { floatValue, formattedValue, value } = values;
     const { currency, available } = selectedSourceItem;
     return (
       formattedValue === "" ||
