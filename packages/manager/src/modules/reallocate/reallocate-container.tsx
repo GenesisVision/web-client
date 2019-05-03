@@ -21,23 +21,23 @@ import { updateAssets } from "./services/reallocate.services";
 class _ReallocateContainer extends React.PureComponent<Props, State> {
   state = { errorMessage: "", assets: [] };
 
-  fillAssets = (
+  getFillAssets = (
     target: PlatformAsset[],
     data: FundAssetPartWithIcon[]
   ): FundAssetPartWithIcon[] => {
-    const newTarget = target.map(item => ({ ...item, percent: 0 }));
+    const fillAssets = target.map(item => ({ ...item, percent: 0 }));
     data.forEach(dataItem => {
-      newTarget.forEach(targetItem => {
+      fillAssets.forEach(targetItem => {
         targetItem.percent =
           targetItem.name === dataItem.name ? dataItem.percent : 0;
       });
     });
-    return newTarget;
+    return fillAssets;
   };
 
   componentDidMount() {
     createFundService.fetchAssets().then((response: PlatformAssets) => {
-      const assets = this.fillAssets(response.assets, this.props.assets);
+      const assets = this.getFillAssets(response.assets, this.props.assets);
       this.setState({
         assets: assets
       });
