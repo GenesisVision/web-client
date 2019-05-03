@@ -27,7 +27,7 @@ const DetailsStatisticsLoader: React.FC = () => (
 
 const DetailsStat: React.FC = () => (
   <div className="details-statistics-loader__stat">
-    <SvgLoader height="44" width="110">
+    <SvgLoader height={44} width={110}>
       <rect x="0" y="0" width="110" height="16" rx="8" ry="8" />
       <rect x="0" y="26" width="50" height="18" rx="8" ry="8" />
     </SvgLoader>
@@ -36,7 +36,7 @@ const DetailsStat: React.FC = () => (
 
 const DetailsSubheading: React.FC = () => (
   <div className="details-statistics-loader__subheading">
-    <SvgLoader height="18" width="230">
+    <SvgLoader height={18} width={230}>
       <rect x="0" y="0" width="130" height="18" rx="8" ry="8" />
     </SvgLoader>
   </div>

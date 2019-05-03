@@ -9,7 +9,7 @@ import SvgLoader from "shared/components/svg-loader/svg-loader";
 
 const DetailsChartTabsLoader: React.FC = () => (
   <div className="details-chart-loader__tabs">
-    <SvgLoader height="20" width="160">
+    <SvgLoader height={20} width={160}>
       <rect x="0" y="0" width="70" height="18" rx="8" ry="8" />
       <rect x="90" y="0" width="70" height="18" rx="8" ry="8" />
     </SvgLoader>
@@ -18,7 +18,7 @@ const DetailsChartTabsLoader: React.FC = () => (
 
 const DetailsChartValueLoader: React.FC = () => (
   <div className="details-chart-loader__value">
-    <SvgLoader height="51" width="70">
+    <SvgLoader height={51} width={70}>
       <rect x="0" y="0" width="40" height="16" rx="8" ry="8" />
       <rect x="0" y="31" width="60" height="20" rx="8" ry="8" />
     </SvgLoader>
