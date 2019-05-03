@@ -45,8 +45,6 @@ class _CreateFundSettingsAssetsComponent extends React.PureComponent<
           </div>
           <div className="create-fund-settings__line">
             <FundAssetRatio
-              end={100}
-              start={0}
               values={assets}
               handleHover={this.handleHover}
               handleLeave={this.handleLeave}

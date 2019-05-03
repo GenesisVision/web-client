@@ -1,25 +1,13 @@
 import "./fund-assets-ratio.scss";
 
 import classNames from "classnames";
-import * as React from "react";
 import { FundAssetPartWithIcon } from "gv-api-web";
-
-export interface GVProgramPeriodProps {
-  start: Date | number;
-  end: Date | number;
-  className?: string;
-  valueClassName?: string;
-  values: FundAssetPartWithIcon[];
-  handleHover(
-    asset: string
-  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  handleLeave(): void;
-}
+import * as React from "react";
 
 export const calcPercent = (
   value: number,
-  start: number,
-  end: number
+  start: number = 0,
+  end: number = 100
 ): number => {
   let duration = end - start;
   let progress = value - start;
@@ -28,9 +16,7 @@ export const calcPercent = (
   return (progress * 100) / duration;
 };
 
-const FundAssetRatio: React.FC<GVProgramPeriodProps> = ({
-  start,
-  end,
+const _FundAssetRatio: React.FC<Props> = ({
   values,
   className,
   valueClassName,
@@ -53,14 +39,11 @@ const FundAssetRatio: React.FC<GVProgramPeriodProps> = ({
           return (
             <div
               key={idx}
-              className={classNames(
-                "fund-asset-ratio--item-line",
-                valueClassName
-              )}
+              className={classNames("fund-asset-ratio--item-line")}
               onMouseOver={handleHover(item.asset)}
               onMouseLeave={handleLeave}
               style={{
-                width: `${calcPercent(newLevel, +start, +end)}%`,
+                width: `${calcPercent(newLevel)}%`,
                 background: item.color,
                 zIndex: ZIndex
               }}
@@ -87,4 +70,15 @@ const FundAssetRatio: React.FC<GVProgramPeriodProps> = ({
   );
 };
 
+export interface Props {
+  className?: string;
+  valueClassName?: string;
+  values: FundAssetPartWithIcon[];
+  handleHover(
+    asset: string
+  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  handleLeave(): void;
+}
+
+const FundAssetRatio = React.memo(_FundAssetRatio);
 export default FundAssetRatio;
