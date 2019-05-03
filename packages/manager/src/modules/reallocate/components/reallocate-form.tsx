@@ -63,11 +63,8 @@ class _ReallocateForm extends React.PureComponent<Props, State> {
       assets: [...assets],
       remainder: newRemainder
     });
-    setFieldValue(REALLOCATE_FORM_FIELDS.remainder, newRemainder);
-    setFieldValue(
-      REALLOCATE_FORM_FIELDS.assets,
-      assets.filter(item => item.percent > 0)
-    );
+    setFieldValue(FIELDS.remainder, newRemainder);
+    setFieldValue(FIELDS.assets, assets.filter(item => item.percent > 0));
   };
   removeHandle: TFundAssetRemoveHandle = currency => () => {
     const asset = this.state.assets.find(item => item.asset === currency);
@@ -134,14 +131,14 @@ class _ReallocateForm extends React.PureComponent<Props, State> {
   }
 }
 
-enum REALLOCATE_FORM_FIELDS {
+enum FIELDS {
   assets = "assets",
   remainder = "remainder"
 }
 
 export interface IReallocateFormValues {
-  [REALLOCATE_FORM_FIELDS.assets]: FundAssetPartWithIcon[];
-  [REALLOCATE_FORM_FIELDS.remainder]: number;
+  [FIELDS.assets]: FundAssetPartWithIcon[];
+  [FIELDS.remainder]: number;
 }
 
 export interface IReallocateFormOwnProps {
@@ -173,7 +170,7 @@ const ReallocateForm = compose<
     enableReinitialize: true,
     validationSchema: (props: Props) =>
       object().shape({
-        [REALLOCATE_FORM_FIELDS.remainder]: number()
+        [FIELDS.remainder]: number()
           .required(
             props.t("manager.create-fund-page.settings.validation.assets-share")
           )
@@ -181,7 +178,7 @@ const ReallocateForm = compose<
             0,
             props.t("manager.create-fund-page.settings.validation.assets-share")
           ),
-        [REALLOCATE_FORM_FIELDS.assets]: array()
+        [FIELDS.assets]: array()
           .required(
             props.t("manager.create-fund-page.settings.validation.assets-count")
           )
