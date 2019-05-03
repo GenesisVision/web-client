@@ -15,16 +15,14 @@ interface IErrorMessage {
   className: string;
   type: MESSAGE_TYPES;
 }
-const ErrorMessage: React.FC<IErrorMessage> = ({ error, className, type }) => {
-  return (
-    <div
-      className={classNames("error-message", className, {
-        "error-message--over": type === OVER
-      })}
-    >
-      {error}
-    </div>
-  );
-};
+const ErrorMessage: React.FC<IErrorMessage> = ({ error, className, type }) => (
+  <div
+    className={classNames("error-message", className, {
+      "error-message--over": type === MESSAGE_TYPES.OVER
+    })}
+  >
+    {error}
+  </div>
+);
 
 export default ErrorMessage;
