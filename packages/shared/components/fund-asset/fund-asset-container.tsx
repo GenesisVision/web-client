@@ -9,27 +9,7 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltip from "./fund-asset-tooltip/fund-asset-tooltip";
 
-interface IFundAssetContainerProps {
-  size: number;
-  assets: FundAssetPercent[];
-  type: FUND_ASSET_TYPE;
-  length?: number;
-  removable?: boolean;
-  removeHandle?(
-    currency: string
-  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  remainder?: number;
-  hoveringAsset?: string;
-}
-
-interface IFundAssetContainerState {
-  size: number;
-}
-
-class FundAssetContainer extends React.Component<
-  IFundAssetContainerProps,
-  IFundAssetContainerState
-> {
+class FundAssetContainer extends React.PureComponent<Props, State> {
   state = {
     size: this.props.size
   };
@@ -80,19 +60,13 @@ class FundAssetContainer extends React.Component<
               </Tooltip>
             )
         )}
-        {size < (length || assets.length) &&
-          ((type === FUND_ASSET_TYPE.TEXT && (
-            <div>... +{assets.length - size}</div>
-          )) || (
-            <div
-              className="fund-asset__container fund-asset__container--others-count"
-              onClick={this.expandList}
-            >
-              <div className="fund-asset fund-asset--others-count">
-                +{(length || assets.length) - size}
-              </div>
-            </div>
-          ))}
+        {size && size < (length || assets.length) && (
+          <HidedAssets
+            count={assets.length - size}
+            type={type}
+            expandList={this.expandList}
+          />
+        )}
         {remainder > 0 && (
           <div className="fund-asset fund-asset--remainder">
             <NumberFormat value={remainder} suffix="%" displayType="text" />
@@ -101,6 +75,52 @@ class FundAssetContainer extends React.Component<
       </div>
     );
   }
+}
+
+const _HidedAssets: React.FC<IHidedAssetsProps> = ({
+  type,
+  count,
+  expandList
+}) => {
+  switch (type) {
+    case FUND_ASSET_TYPE.TEXT:
+      return <div>... +{count}</div>;
+    default:
+      return (
+        <div
+          className="fund-asset__container fund-asset__container--others-count"
+          onClick={expandList}
+        >
+          <div className="fund-asset fund-asset--others-count">+{count}</div>
+        </div>
+      );
+  }
+};
+const HidedAssets = React.memo(_HidedAssets);
+
+interface IHidedAssetsProps {
+  count: number;
+  type: FUND_ASSET_TYPE;
+  expandList: () => void;
+}
+
+export type TFundAssetRemoveHandle = (
+  currency: string
+) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+
+interface Props {
+  assets: FundAssetPercent[];
+  type: FUND_ASSET_TYPE;
+  size?: number;
+  length?: number;
+  removable?: boolean;
+  removeHandle?: TFundAssetRemoveHandle;
+  remainder?: number;
+  hoveringAsset?: string;
+}
+
+interface State {
+  size?: number;
 }
 
 export default FundAssetContainer;
