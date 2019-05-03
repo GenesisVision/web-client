@@ -27,15 +27,15 @@ class _TransferForm extends React.PureComponent<Props> {
     const { setFieldValue, values } = this.props;
     const currencyFromNew = event.target.value;
     if (currencyFromNew === values[FIELDS.destinationId]) {
-      setFieldValue("destinationId", values[FIELDS.sourceId]);
+      setFieldValue(FIELDS.destinationId, values[FIELDS.sourceId]);
     }
-    setFieldValue("amount", "");
-    setFieldValue("sourceId", currencyFromNew);
+    setFieldValue(FIELDS.amount, "");
+    setFieldValue(FIELDS.sourceId, currencyFromNew);
   };
 
   onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue } = this.props;
-    setFieldValue("destinationId", event.target.value);
+    setFieldValue(FIELDS.destinationId, event.target.value);
   };
 
   isAllow = (values: NumberFormatValues) => {
@@ -90,10 +90,11 @@ class _TransferForm extends React.PureComponent<Props> {
     );
 
     const setMaxAmount = () => {
-      setFieldValue("amount", formattedAvailableSourceItem);
+      setFieldValue(FIELDS.amount, formattedAvailableSourceItem);
     };
 
-    const disableButton = isSubmitting || !values.amount || !isValid || !dirty;
+    const disableButton =
+      isSubmitting || !values[FIELDS.amount] || !isValid || !dirty;
 
     return (
       <form
@@ -162,14 +163,14 @@ class _TransferForm extends React.PureComponent<Props> {
               emptyInit
             />
           </div>
-          {!!values.amount && (
+          {!!values[FIELDS.amount] && (
             <TransferRate
               destinationCurrency={selectedDestinationItem.currency}
               sourceCurrency={selectedSourceItem.currency}
             >
               {props => (
                 <span>{`≈ ${formatCurrencyValue(
-                  props.rate * Number(values.amount),
+                  props.rate * Number(values[FIELDS.amount]),
                   selectedDestinationItem.currency
                 )} ${selectedDestinationItem.currency}`}</span>
               )}
@@ -237,7 +238,7 @@ const TransferForm = compose<React.ComponentType<OwnProps>>(
         (values: TransferFormValues): Schema<any> => {
           const selectedSourceItem = service.getSelectedItem(
             sourceItems,
-            values.sourceId
+            values[FIELDS.sourceId]
           );
           return object().shape({
             [FIELDS.amount]: number()
