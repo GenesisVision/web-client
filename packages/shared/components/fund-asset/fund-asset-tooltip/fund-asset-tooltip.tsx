@@ -12,17 +12,16 @@ interface IFundAssetTooltipProps {
   currency: CURRENCIES;
 }
 
-const FundAssetTooltip: React.FC<
+const _FundAssetTooltip: React.FC<
   IFundAssetTooltipProps & InjectedTranslateProps
-> = ({ t, name, currency }) => {
-  return (
-    <div className="fund-asset-tooltip">
-      <div className="fund-asset-tooltip__content">
-        {name || CURRENCY_VALUES[currency]}
-        <span className="fund-asset__currency-short">{currency}</span>
-      </div>
+> = ({ t, name, currency }) => (
+  <div className="fund-asset-tooltip">
+    <div className="fund-asset-tooltip__content">
+      {name || CURRENCY_VALUES[currency]}
+      <span className="fund-asset__currency-short">{currency}</span>
     </div>
-  );
-};
+  </div>
+);
 
-export default translate()(FundAssetTooltip);
+const FundAssetTooltip = React.memo(translate()(_FundAssetTooltip));
+export default FundAssetTooltip;
