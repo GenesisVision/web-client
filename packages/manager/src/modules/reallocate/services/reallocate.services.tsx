@@ -4,7 +4,7 @@ import {
   FundAssetPartWithIcon
 } from "gv-api-web";
 import {
-  ALLERT_ACTIONS_FIELDS,
+  ALERT_ACTIONS_FIELDS,
   alertMessageActions
 } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
@@ -29,7 +29,7 @@ export const updateAssets = (id: string, assets: FundAssetPartWithIcon[]) => (
     });
 };
 export const alert = (
-  type: ALLERT_ACTIONS_FIELDS,
+  type: ALERT_ACTIONS_FIELDS,
   text: string,
   translate = false
 ) => (dispatch: MiddlewareDispatch) =>
