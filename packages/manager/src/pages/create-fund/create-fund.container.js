@@ -90,7 +90,7 @@ class CreateFundContainer extends Component {
 const mapStateToProps = state => {
   const headerData = state.profileHeader.info.data;
   return {
-    wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],
+    wallets: state.wallet.info.data ? state.wallet.info.data.wallets : {},
     author: headerData ? headerData.name : "",
     platformSettings: state.platformData.data
   };
