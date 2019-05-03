@@ -46,7 +46,7 @@ interface Props extends InjectedTranslateProps {
   label: string;
   currency: string;
   placeholder?: string;
-  isAllow?: (values?: NumberFormatValues) => boolean;
+  isAllow?: (values: NumberFormatValues) => boolean;
   setMax(): void;
   autoFocus?: boolean;
   onChange?(event: string | number): void;
