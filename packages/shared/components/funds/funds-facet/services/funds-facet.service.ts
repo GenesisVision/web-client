@@ -5,11 +5,11 @@ import {
 } from "pages/funds/funds.routes";
 import { FacetDataType } from "shared/components/facet-container/facet-container";
 import getParams from "shared/utils/get-params";
-import { MiddlewareDispatch } from "shared/utils/types";
+import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
 export const getCurrentFacet = () => (
   dispatch: MiddlewareDispatch,
-  getState: any
+  getState: TGetState
 ): FacetDataType => {
   const { router, platformData } = getState();
 
