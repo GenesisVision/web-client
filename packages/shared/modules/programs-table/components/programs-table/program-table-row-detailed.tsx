@@ -26,7 +26,7 @@ import ProgramBigChart from "./program-big-chart/program-big-chart";
 interface IProgramTableRowDetailedProps {
   title: string;
   program: ProgramDetails;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
   toggleFavorite(programId: string, isFavorite: boolean): void;
   onCollapseClick(): void;
 }

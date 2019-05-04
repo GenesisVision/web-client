@@ -21,7 +21,7 @@ interface IProgramTableModuleProps {
   filtering: FilteringType;
   defaultFilters: any[];
   paging: IPaging;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
   showRating?: boolean;
   title: string;
   disableTitle?: boolean;

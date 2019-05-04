@@ -9,7 +9,7 @@ import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 import { TableToggleFavoriteType } from "shared/components/table/components/table.types";
 
 interface Props extends ITableModuleProps {
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
   toggleFavorite: TableToggleFavoriteType;
 }
 

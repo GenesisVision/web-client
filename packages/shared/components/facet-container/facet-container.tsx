@@ -88,7 +88,7 @@ interface OwnProps {
     IProgramsFacetTableProps | IFundsFacetTableProps
   >;
   getItems: (args: FilteringType) => Promise<IDataModel>;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
 }
 interface StateProps {
   facets: FacetType[];

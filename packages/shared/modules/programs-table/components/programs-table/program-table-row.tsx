@@ -8,7 +8,7 @@ interface IProgramTableRowProps {
   title: string;
   showRating?: boolean;
   program: ProgramDetails;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
   toggleFavorite(programId: string, isFavorite: boolean): void;
 }
 
