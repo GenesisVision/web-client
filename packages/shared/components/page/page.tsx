@@ -4,22 +4,18 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import BackButton from "shared/components/back-button/back-button";
 import { ROLE_ENV } from "shared/constants/constants";
 
-interface IPage {
+const _Page: React.FC<Props> = ({ t, title, children }) => (
+  <DocumentTitle title={t(`${ROLE_ENV}.app.title`) + title}>
+    <>
+      <BackButton />
+      {children}
+    </>
+  </DocumentTitle>
+);
+
+interface Props extends InjectedTranslateProps {
   title: string;
 }
-const Page: React.FC<IPage & InjectedTranslateProps> = ({
-  t,
-  title,
-  children
-}) => {
-  return (
-    <DocumentTitle title={t(`${ROLE_ENV}.app.title`) + title}>
-      <React.Fragment>
-        <BackButton />
-        {children}
-      </React.Fragment>
-    </DocumentTitle>
-  );
-};
 
-export default translate()(Page);
+const Page = React.memo(translate()(_Page));
+export default Page;
