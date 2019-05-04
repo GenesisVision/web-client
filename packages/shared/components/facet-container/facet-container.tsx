@@ -2,7 +2,7 @@ import { FundFacet, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { compose } from "redux";
 import { IFundsFacetTableProps } from "shared/components/funds/funds-facet/components/funds-facet-table";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import { IProgramsFacetTableProps } from "shared/components/programs/programs-facet/components/programs-facet-table";
@@ -11,6 +11,7 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { IDataModel } from "shared/constants/constants";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
 import RootState from "shared/reducers/root-reducer";
+import { MiddlewareDispatch } from "shared/utils/types";
 
 class _FacetContainer extends React.PureComponent<Props, State> {
   state = {
@@ -66,17 +67,22 @@ const mapStateToProps = (state: RootState, props: Props): StateProps => {
 };
 
 const mapDispatchToProps = (
-  dispatch: Dispatch,
+  dispatch: MiddlewareDispatch,
   props: Props
 ): DispatchProps => {
   const { getCurrentFacet } = props;
   return {
-    service: bindActionCreators({ getCurrentFacet }, dispatch)
+    service: {
+      getCurrentFacet: () => dispatch(getCurrentFacet())
+    }
   };
 };
 
 interface OwnProps {
-  getCurrentFacet: () => FacetDataType;
+  getCurrentFacet: () => (
+    dispatch: MiddlewareDispatch,
+    getState: any
+  ) => FacetDataType;
   asset: FACET_ASSET;
   TableContainer: React.ComponentType<
     IProgramsFacetTableProps | IFundsFacetTableProps
@@ -105,7 +111,7 @@ export enum FACET_ASSET {
   FUNDS = "fundsFacets"
 }
 
-const FacetContainer = compose(
+const FacetContainer = compose<React.ComponentType<OwnProps>>(
   withRouter,
   withAuthenticated,
   connect(
