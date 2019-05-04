@@ -4,31 +4,19 @@ import { ChangePasswordViewModel } from "gv-api-web";
 import * as React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { compose } from "redux";
+import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
 
 import PasswordChangeForm from "./password-change-form";
 import { changePassword } from "./service/password-change.service";
 
-interface IPasswordChangeOwnProps {
-  service: {
-    changePassword(model: ChangePasswordViewModel): Promise<void>;
-  };
-}
-
-interface IPasswordChangeState {
-  errorMessage: string | null;
-}
-
-class PasswordChange extends React.Component<
-  IPasswordChangeOwnProps,
-  IPasswordChangeState
-> {
+class PasswordChange extends React.Component<Props, State> {
   state = {
-    errorMessage: null
+    errorMessage: undefined
   };
 
   handleSubmit = (model: ChangePasswordViewModel) => {
-    this.props.service.changePassword(model).catch((errors: any) => {
+    this.props.service.changePassword(model).catch((errors: ResponseError) => {
       this.setState({ errorMessage: errors.errorMessage });
     });
   };
@@ -43,21 +31,30 @@ class PasswordChange extends React.Component<
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  service: bindActionCreators(
-    {
-      changePassword
-    },
-    dispatch
-  )
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
+  service: {
+    changePassword: (model: ChangePasswordViewModel) =>
+      dispatch(changePassword(model))
+  }
 });
 
-const PasswordChangeContainer = compose(
+interface Props extends DispatchProps {}
+
+interface DispatchProps {
+  service: {
+    changePassword(model: ChangePasswordViewModel): Promise<void>;
+  };
+}
+
+interface State {
+  errorMessage?: string;
+}
+
+const PasswordChangeContainer = compose<React.ComponentType>(
   connect(
     null,
     mapDispatchToProps
   ),
   translate()
 )(PasswordChange);
-
 export default PasswordChangeContainer;
