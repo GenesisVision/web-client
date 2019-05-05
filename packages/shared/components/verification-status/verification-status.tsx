@@ -20,7 +20,7 @@ interface IStatusProps {
 const VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
   t,
   checked,
-  verificationStatus = VERIFICATION_STATUS.NOT_VERIFED
+  verificationStatus = VERIFICATION_STATUS.NOT_VERIFIED
 }) => {
   let type, value;
   if (checked) {
@@ -28,15 +28,15 @@ const VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
     value = t("verification-status.verified");
   } else {
     switch (verificationStatus) {
-      case "Verified":
+      case VERIFICATION_STATUS.VERIFIED:
         value = t("verification-status.verified");
         type = CHIP_TYPE.POSITIVE;
         break;
-      case "UnderReview":
+      case VERIFICATION_STATUS.UNDER_REVIEW:
         value = t("verification-status.under-review");
         type = CHIP_TYPE.WARNING;
         break;
-      case "Rejected":
+      case VERIFICATION_STATUS.REJECTERD:
         value = t("verification-status.rejected");
         type = CHIP_TYPE.NEGATIVE;
         break;
