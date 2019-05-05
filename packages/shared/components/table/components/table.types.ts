@@ -23,7 +23,12 @@ export type GetItemsFuncActionType = (filters: FilteringType) => Action;
 export type TableToggleFavoriteType = (
   asset: ProgramDetails | FundDetails,
   updateRow: UpdateRowFuncType
-) => (assetId: string, isFavorite: boolean) => void;
+) => TableToggleFavoriteHandlerType;
+
+export type TableToggleFavoriteHandlerType = (
+  assetId: string,
+  isFavorite: boolean
+) => void;
 
 export interface IComposeDefaultFilter {
   name?: string;
