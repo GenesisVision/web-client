@@ -20,7 +20,7 @@ interface ITabsContainerProps {
   ): void;
 }
 
-class TabsContainer extends React.Component<
+class TabsContainer extends React.PureComponent<
   ITabsContainerProps & InjectedTranslateProps
 > {
   render() {
@@ -42,7 +42,7 @@ class TabsContainer extends React.Component<
   }
 }
 
-export default compose(
+export default compose<React.ComponentType<ITabsContainerProps>>(
   translate(),
   withRouter
 )(TabsContainer);
