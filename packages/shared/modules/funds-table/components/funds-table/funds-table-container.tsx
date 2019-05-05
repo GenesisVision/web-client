@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { FiltersType } from "shared/components/table/components/table.types";
 import {
-  ToggleFavoriteFundDispatchableType,
+  ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import RootState from "shared/reducers/root-reducer";
@@ -42,7 +42,7 @@ interface DispatchProps {
     fundsChangeFilter: FundsChangeFilterType;
     fundsChangePage: FundsChangePageType;
     getFundsFilters: GetFundsFiltersType;
-    toggleFavoriteFund: ToggleFavoriteFundDispatchableType;
+    toggleFavoriteFund: ToggleFavoriteDispatchableType;
   };
 }
 
