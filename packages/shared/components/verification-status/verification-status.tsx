@@ -17,7 +17,7 @@ interface IStatusProps {
   verificationStatus?: ProfileFullViewModelVerificationStatusEnum;
 }
 
-const VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
+const _VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
   t,
   checked,
   verificationStatus = VERIFICATION_STATUS.NOT_VERIFIED
@@ -52,4 +52,5 @@ const VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
   );
 };
 
-export default translate()(VerificationStatus);
+const VerificationStatus = React.memo(translate()(_VerificationStatus));
+export default VerificationStatus;
