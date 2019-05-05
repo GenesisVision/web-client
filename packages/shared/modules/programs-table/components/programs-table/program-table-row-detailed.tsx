@@ -21,13 +21,14 @@ import {
 } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import ProgramBigChart from "./program-big-chart/program-big-chart";
 
 interface IProgramTableRowDetailedProps {
   title: string;
   program: ProgramDetails;
   isAuthenticated?: boolean;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
+  toggleFavorite: TableToggleFavoriteHandlerType;
   onCollapseClick(): void;
 }
 
