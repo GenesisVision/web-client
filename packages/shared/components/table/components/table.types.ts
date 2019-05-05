@@ -1,9 +1,10 @@
+import { FundDetails, ProgramDetails } from "gv-api-web";
+import { Action } from "redux";
+import { IDataModel } from "shared/constants/constants";
+
 import { FILTER_TYPE } from "../helpers/filtering.helpers";
 import { IPaging } from "../helpers/paging.helpers";
 import { FilteringType, TFilter } from "./filtering/filter.type";
-import { IDataModel } from "shared/constants/constants";
-import { FundDetails, ProgramDetails } from "gv-api-web";
-import { Action } from "redux";
 
 export type Column = {
   name: string;
