@@ -1,5 +1,6 @@
 import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 
 import ProgramTableRowDetailed from "./program-table-row-detailed";
 import ProgramTableRowShort from "./program-table-row-short";
@@ -9,7 +10,7 @@ interface IProgramTableRowProps {
   showRating?: boolean;
   program: ProgramDetails;
   isAuthenticated?: boolean;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
+  toggleFavorite: TableToggleFavoriteHandlerType;
 }
 
 interface IProgramTableRowState {
