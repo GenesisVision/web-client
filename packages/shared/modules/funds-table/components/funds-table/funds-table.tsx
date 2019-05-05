@@ -7,6 +7,7 @@ import { Table } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { ITableProps } from "shared/components/table/components/table";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 
 import FundCard from "./fund-card";
 import FundsTableRow from "./fund-table-row";
@@ -16,7 +17,7 @@ import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
 interface Props extends ITableProps {
   data: FundsList;
-  toggleFavorite(id: string, selected: boolean): void;
+  toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated: boolean;
   isPending: boolean;
 }
