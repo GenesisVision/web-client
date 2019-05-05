@@ -1,5 +1,6 @@
 import "./verification-status.scss";
 
+import { ProfileFullViewModelVerificationStatusEnum } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
@@ -12,8 +13,8 @@ export enum VERIFICATION_STATUS {
 }
 
 interface IStatusProps {
-  checked: boolean;
-  verificationStatus: VERIFICATION_STATUS;
+  checked?: boolean;
+  verificationStatus?: ProfileFullViewModelVerificationStatusEnum;
 }
 
 const VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
