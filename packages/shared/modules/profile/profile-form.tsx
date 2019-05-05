@@ -45,7 +45,7 @@ const _ProfileForm: React.FC<Props> = ({ t, info, handleSubmit }) => (
               <td className="profile__right">
                 <div className="profile__row">
                   <GVFormikField
-                    disabled
+                    disabled // TODO change whe api will upgrade
                     label={t("profile-page.email")}
                     value={info.email}
                     component={GVTextField}
