@@ -1,27 +1,26 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import * as React from "react";
 import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import history from "shared/utils/history";
+import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
-import AboutForm from "./about-form";
+import AboutForm, { IAboutFormValues } from "./about-form";
 
-class About extends Component {
+class About extends React.PureComponent<Props, State> {
   state = {
-    errorMessage: null
+    errorMessage: undefined
   };
-  handleSubmit = (model, setSubmitting) => {
+  handleSubmit = (
+    model: IAboutFormValues,
+    setSubmitting: SetSubmittingType
+  ) => {
     profileApi
       .v10ProfileUpdatePost(authService.getAuthArg(), {
         model
       })
-      .then(data => {
-        this.setState({ data }, () => {
-          history.push(PROFILE_ROUTE);
-        });
-      })
-      .catch(error => {
+      .then(() => history.push(PROFILE_ROUTE))
+      .catch((error: ResponseError) => {
         this.setState({ errorMessage: error.errorMessage });
         setSubmitting(false);
       });
@@ -37,9 +36,12 @@ class About extends Component {
   }
 }
 
-About.propTypes = {
-  userName: PropTypes.string,
-  about: PropTypes.string
-};
+interface Props {
+  userName: string;
+  about: string;
+}
 
+interface State {
+  errorMessage?: string;
+}
 export default About;
