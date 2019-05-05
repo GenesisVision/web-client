@@ -12,13 +12,14 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 interface Props {
   fund: FundDetails;
   isAuthenticated?: boolean;
-  toggleFavorite?(id: string, selected: boolean): void;
+  toggleFavorite?: TableToggleFavoriteHandlerType;
   title?: JSX.Element | string;
 }
 
