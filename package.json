@@ -61,6 +61,7 @@
     "@types/enzyme": "^3.9.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^23.3.12",
+    "@types/lodash.pickby": "^4.6.6",
     "@types/node": "^10.12.18",
     "@types/qrcode.react": "^0.8.2",
     "@types/qs": "^6.5.2",
