@@ -1,11 +1,11 @@
-import React, { Fragment } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 
 import ProgramsRatingStats from "./programs-rating-stats";
 import ProgramsRatingTable from "./programs-rating-table";
 
-const ProgramsRatingTables = ({ t, id, tab, title }) => (
-  <Fragment>
+const _ProgramsRatingTables: React.FC<Props> = ({ t, id, tab, title }) => (
+  <>
     {id && (
       <ProgramsRatingTable
         tab={tab.level}
@@ -15,7 +15,14 @@ const ProgramsRatingTables = ({ t, id, tab, title }) => (
     )}
     <ProgramsRatingStats levelData={tab} />
     <ProgramsRatingTable tab={tab.level} title={title} disableTitle />
-  </Fragment>
+  </>
 );
 
-export default translate()(ProgramsRatingTables);
+interface Props extends InjectedTranslateProps {
+  id: string;
+  tab: any;
+  title: string;
+}
+
+const ProgramsRatingTables = React.memo(translate()(_ProgramsRatingTables));
+export default ProgramsRatingTables;
