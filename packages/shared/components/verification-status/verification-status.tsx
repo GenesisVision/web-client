@@ -5,8 +5,8 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 
 export enum VERIFICATION_STATUS {
-  NOT_VERIFED = "NotVerified",
-  VERIFED = "Verified",
+  NOT_VERIFIED = "NotVerified",
+  VERIFIED = "Verified",
   UNDER_REVIEW = "UnderReview",
   REJECTERD = "Rejected"
 }
