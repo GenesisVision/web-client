@@ -19,6 +19,7 @@ import {
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import {
@@ -33,7 +34,7 @@ import {
 
 interface IProgramCardProps {
   program: ProgramDetails;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
+  toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
 
@@ -44,7 +45,7 @@ interface IProgramCardState {
   anchor?: EventTarget;
 }
 
-class ProgramCard extends React.Component<
+class ProgramCard extends React.PureComponent<
   IProgramCardProps & InjectedTranslateProps,
   IProgramCardState
 > {
