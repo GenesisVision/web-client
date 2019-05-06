@@ -15,7 +15,7 @@ const _ProgramsRatingTables: React.FC<Props> = ({ t, id, tab, title }) => (
       />
     )}
     <ProgramsRatingStats levelData={tab} />
-    <ProgramsRatingTable tab={tab.level} title={title} disableTitle />
+    <ProgramsRatingTable tab={String(tab.level)} title={title} disableTitle />
   </>
 );
 
