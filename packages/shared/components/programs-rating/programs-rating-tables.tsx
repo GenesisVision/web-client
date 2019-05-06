@@ -9,7 +9,7 @@ const _ProgramsRatingTables: React.FC<Props> = ({ t, id, tab, title }) => (
   <>
     {id && (
       <ProgramsRatingTable
-        tab={tab.level}
+        tab={String(tab.level)}
         title={t("rating-page.self-pretendents-title")}
         managerId={id}
       />
