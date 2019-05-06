@@ -59,6 +59,7 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
           {programDescription.availableInvestmentBase === 0 &&
           isAuthenticated ? (
             <NotifyButton
+              canInvest={programDescription.personalProgramDetails.canInvest}
               currency={programDescription.currency}
               assetId={programDescription.id}
               notificationId={notificationId}
