@@ -24,14 +24,16 @@ const _InputAmountField: React.FC<Props> = ({
     placeholder={placeholder}
     component={GVNumberFiled}
     adornment={
-      <GVButton
-        onClick={setMax}
-        variant="text"
-        color="secondary"
-        className="gv-btn--no-padding"
-      >
-        {t("Max")}
-      </GVButton>
+      setMax && (
+        <GVButton
+          onClick={setMax}
+          variant="text"
+          color="secondary"
+          className="gv-btn--no-padding"
+        >
+          {t("Max")}
+        </GVButton>
+      )
     }
     autoComplete="off"
     autoFocus={autoFocus}
@@ -47,7 +49,7 @@ interface Props extends InjectedTranslateProps {
   currency: string;
   placeholder?: string;
   isAllow?: (values: NumberFormatValues) => boolean;
-  setMax(): void;
+  setMax?(): void;
   autoFocus?: boolean;
   onChange?(event: string | number): void;
   emptyInit?: boolean;
