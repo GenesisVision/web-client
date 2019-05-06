@@ -2,10 +2,9 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
+import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
-
-import { TransactionDetailsProps } from "./transaction-details";
 
 const ConvertingDetails: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
