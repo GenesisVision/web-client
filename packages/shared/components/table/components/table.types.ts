@@ -31,13 +31,13 @@ export type TableToggleFavoriteHandlerType = (
   isFavorite: boolean
 ) => void;
 
-export interface IComposeDefaultFilter {
+export interface IComposeDefaultFilter<T = any> {
   name?: string;
-  composeRequestValue?(value: any): Object;
-  composeApiRequestValue?(value: any): Object; // temp
-  defaultValue?: any;
+  composeRequestValue?(value: T): Object;
+  composeApiRequestValue?(value: T): Object; // temp
+  defaultValue?: T;
   type?: FILTER_TYPE;
-  validate?(value: any): boolean;
+  validate?(value: T): boolean;
 }
 
 export type FiltersType = {
@@ -53,7 +53,7 @@ export type RenderBodyItemFuncType = (
 ) => JSX.Element;
 
 export type RenderFiltersFuncType = (
-  updateFilter: IUpdateFilterFunc,
+  updateFilter: UpdateFilterFunc,
   filtering: FilteringType
 ) => JSX.Element;
 
