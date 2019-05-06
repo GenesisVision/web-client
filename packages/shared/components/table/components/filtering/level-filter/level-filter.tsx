@@ -6,6 +6,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import Filter from "../filter";
 import { TFilter } from "../filter.type";
 import LevelFilterPopover from "./level-filter-popover";
+import { LevelFilterType } from "./level-filter.constants";
 
 interface ILevelFilterProps {
   name: string;
