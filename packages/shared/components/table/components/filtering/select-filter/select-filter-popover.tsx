@@ -3,23 +3,24 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
 import { SelectFilterValue } from "../filter.type";
+import { ComposedRequestSelectValue } from "./select-filter.constants";
 
 interface ISelectFilterPopoverProps {
-  changeFilter?(value: SelectFilterValue<any>): void;
-  values: SelectFilterValue<any>[];
+  changeFilter?(value: ComposedRequestSelectValue): void;
+  values: SelectFilterValue<ComposedRequestSelectValue>[];
   value?: any;
 }
 
 class SelectFilterPopover extends React.PureComponent<
   ISelectFilterPopoverProps & InjectedTranslateProps
 > {
-  handleClick = (value: SelectFilterValue<any>) => () => {
+  handleClick = (value: ComposedRequestSelectValue) => () => {
     if (this.props.changeFilter) {
       this.props.changeFilter(value);
     }
   };
 
-  renderLabel = (item: SelectFilterValue<any>): string =>
+  renderLabel = (item: SelectFilterValue<ComposedRequestSelectValue>): string =>
     item.labelKey ? this.props.t(item.labelKey) : item.label;
 
   render() {
