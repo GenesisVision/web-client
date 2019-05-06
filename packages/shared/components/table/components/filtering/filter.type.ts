@@ -29,12 +29,19 @@ import {
   TagFilterType
 } from "./tag-filter/tag-filter.constants";
 
-export type TFilter<T> = {
+type TFilterMain = {
   name: string;
-  value: T;
   composeRequestValue?(value: any): any;
   type?: FILTER_TYPE;
 };
+
+export interface TFilter<T = any> extends TFilterMain {
+  value: T;
+}
+
+export interface TDefaultFilter<T = any> extends TFilterMain {
+  defaultValue: T;
+}
 
 export interface SelectFilterValue<T = any> {
   value: T | undefined;
@@ -58,9 +65,9 @@ export type FilteringType = {
     | undefined;
 };
 
-export type ComposeFiltersAllType ={
+export type ComposeFiltersAllType = {
   [keys: string]: any;
-}
+};
 
 export type ComposeFiltersType = {
   [keys in
