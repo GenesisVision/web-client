@@ -15,8 +15,8 @@ const ProgramsPage = ({ t }) => {
     <Page title={title}>
       <NavigationTabsContainer
         exploreTabName={routes.PROGRAMS_EXPLORE_TAB_NAME}
-        fundsTabRoute={routes.PROGRAMS_TAB_ROUTE}
-        fundsFavoritesTabName={routes.PROGRAMS_FAVORITES_TAB_NAME}
+        tabRoute={routes.PROGRAMS_TAB_ROUTE}
+        favoritesTabName={routes.PROGRAMS_FAVORITES_TAB_NAME}
       />
       <FacetCardsContainer
         title={title}

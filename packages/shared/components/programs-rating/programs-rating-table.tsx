@@ -1,13 +1,19 @@
-import React, { Component } from "react";
+import { CancelablePromise, ProgramsList } from "gv-api-web";
+import * as React from "react";
 import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
-import { bindActionCreators, compose } from "redux";
+import { connect } from "react-redux";
+import { compose } from "redux";
 import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
+import RootState from "shared/reducers/root-reducer";
+import { MiddlewareDispatch } from "shared/utils/types";
 
 import { COLUMNS, PROGRAMS, SELF_PROGRAMS } from "./program-rating.constants";
-import { getProgramsRating } from "./services/program-rating-service";
+import {
+  TGetProgramsRatingFilters,
+  getProgramsRating
+} from "./services/program-rating-service";
 
-class ProgramsRatingTable extends Component {
+class _ProgramsRatingTable extends React.PureComponent<Props, State> {
   state = {
     currentPage: 1,
     itemsOnPage: 10,
@@ -18,7 +24,7 @@ class ProgramsRatingTable extends Component {
     this.updateProgramsDispatch();
   }
 
-  updatePaging = e => {
+  updatePaging = (e: number) => {
     this.setState({ currentPage: e + 1 }, () => this.updateProgramsDispatch());
   };
 
@@ -32,8 +38,8 @@ class ProgramsRatingTable extends Component {
         itemsOnPage,
         currentPage
       })
-      .then(programs => {
-        const totalPages = Math.ceil(programs.value.total / itemsOnPage);
+      .then(total => {
+        const totalPages = Math.ceil(total / itemsOnPage);
         this.setState({
           currentPage,
           totalPages
@@ -55,12 +61,13 @@ class ProgramsRatingTable extends Component {
         data={programs}
         paging={{ totalPages, currentPage, itemsOnPage }}
         updatePaging={this.updatePaging}
+        toggleFavorite={(asset: any, updateRow: any) => {}}
       />
     );
   }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state: RootState, props: Props): StateProps => {
   const table = props.managerId ? SELF_PROGRAMS : PROGRAMS;
   const programs = state.programsRating[table];
   const { isPending } = state.programsRating[table];
@@ -68,13 +75,46 @@ const mapStateToProps = (state, props) => {
   return { programs: programs.data, isPending };
 };
 
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators({ getProgramsRating }, dispatch)
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
+  service: {
+    getProgramsRating: (filters: TGetProgramsRatingFilters) =>
+      dispatch(getProgramsRating(filters))
+  }
 });
-export default compose(
+
+interface OwnProps {
+  title: string;
+  tab: string;
+  disableTitle?: boolean;
+  managerId?: string;
+}
+
+interface StateProps {
+  programs?: ProgramsList;
+  isPending?: boolean;
+}
+
+interface DispatchProps {
+  service: {
+    getProgramsRating: (
+      filters: TGetProgramsRatingFilters
+    ) => CancelablePromise<number>;
+  };
+}
+
+interface Props extends OwnProps, StateProps, DispatchProps {}
+
+interface State {
+  currentPage: number;
+  itemsOnPage: number;
+  totalPages: number;
+}
+
+const ProgramsRatingTable = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(ProgramsRatingTable);
+)(_ProgramsRatingTable);
+export default ProgramsRatingTable;

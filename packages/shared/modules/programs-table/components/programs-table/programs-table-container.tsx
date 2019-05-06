@@ -1,13 +1,13 @@
 import { push } from "connected-react-router";
 import { ProgramTag, ProgramsList } from "gv-api-web";
 import { Location } from "history";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -18,6 +18,7 @@ import LevelFilter from "shared/components/table/components/filtering/level-filt
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
+import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 import RootState from "shared/reducers/root-reducer";
 import { convertToArray } from "shared/utils/helpers";
@@ -45,7 +46,7 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    toggleFavoriteProgram(programId: string, isFavorite: boolean): void;
+    toggleFavoriteProgram: ToggleFavoriteDispatchableType;
     redirectToLogin(): void;
     getPrograms(filters: Object): void;
     fetchPrograms(filters: { [keys: string]: any }): Promise<ProgramsList>;
@@ -69,7 +70,7 @@ interface Props
     InjectedTranslateProps,
     RouteComponentProps {}
 
-class ProgramsTableContainer extends React.Component<Props> {
+class ProgramsTableContainer extends React.PureComponent<Props> {
   componentDidMount() {
     const { service, defaultFilters } = this.props;
     service.getPrograms(defaultFilters);

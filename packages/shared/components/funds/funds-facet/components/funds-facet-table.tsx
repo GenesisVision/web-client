@@ -78,7 +78,7 @@ export interface IFundsFacetTableProps {
   sorting: string;
   timeframe: ProgramFacetTimeframeEnum;
   getItems: GetItemsFuncType;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
 }
 
 const FundsFacetTable = translate()(_FundsFacetTable);

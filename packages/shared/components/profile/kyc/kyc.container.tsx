@@ -1,10 +1,10 @@
 import "./kyc.scss";
 
-import React, { Component } from "react";
+import * as React from "react";
 
 import { loadKycIFrame } from "../settings/services/kyc.service";
 
-class KYCContainer extends Component {
+class KYCContainer extends React.PureComponent {
   componentDidMount() {
     loadKycIFrame();
   }
