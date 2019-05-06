@@ -59,11 +59,9 @@ class _ProgramsRatingContainer extends React.PureComponent<Props, State> {
         <h3 className="programs-rating__head">{t("rating-page.title")}</h3>
         <div className="programs-rating__tabs">
           <TabsContainer
-            // programFacetRoute={routes.PROGRAMS_RATING_TAB_ROUTE}
             tabs={navigateTabs}
             handleTabChange={this.handleTabChange}
             tab={tab}
-            // levelData={levelData}
           />
         </div>
         <ProgramsRatingTables key={level} tab={tab} id={id} title={title} />
@@ -84,7 +82,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-interface INavigateTab extends LevelUpData {
+export interface INavigateTab extends LevelUpData {
   name: string;
   label: JSX.Element;
   count?: number;
