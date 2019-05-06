@@ -7,20 +7,25 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import {
+  ACTION_STATUS_FILTER_NAME,
+  ACTION_STATUS_FILTER_VALUES
+} from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
-import Status from "shared/components/status/status";
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
+import { ROLE_ENV } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatPercent } from "shared/utils/formatter";
 
@@ -42,12 +47,23 @@ class _DashboardCopytrading extends React.Component<
           updateFilter: IUpdateFilterFunc,
           filtering: FilteringType
         ) => (
-          <DateRangeFilter
-            name={DATE_RANGE_FILTER_NAME}
-            value={filtering[DATE_RANGE_FILTER_NAME]}
-            onChange={updateFilter}
-            startLabel={t("filters.date-range.program-start")}
-          />
+          <>
+            <SelectFilter
+              name={ACTION_STATUS_FILTER_NAME}
+              label={t(
+                `${ROLE_ENV}.dashboard-page.actions-status-filter.label`
+              )}
+              value={filtering[ACTION_STATUS_FILTER_NAME]}
+              values={ACTION_STATUS_FILTER_VALUES}
+              onChange={updateFilter}
+            />
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering[DATE_RANGE_FILTER_NAME]}
+              onChange={updateFilter}
+              startLabel={t("filters.date-range.program-start")}
+            />
+          </>
         )}
         renderHeader={(column: Column) =>
           t(`investor.dashboard-page.copytrading-header.${column.name}`)
@@ -83,7 +99,7 @@ class _DashboardCopytrading extends React.Component<
             <TableCell>{signal.currency}</TableCell>
             <TableCell>{signal.personalDetails.tradesCount}</TableCell>
             <TableCell>
-              {moment(signal.personalDetails.subscriptionDate).format("lll")}
+              {moment(signal.personalDetails.subscriptionDate).format()}
             </TableCell>
             <TableCell>
               {/*<Profitability
