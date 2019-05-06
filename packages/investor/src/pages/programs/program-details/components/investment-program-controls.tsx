@@ -48,10 +48,10 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
       ? programDescription.personalProgramDetails
           .notificationAvailableToInvestId
       : undefined;
-    const isDisabledInvestButton = isAuthenticated
-      ? !programDescription.personalProgramDetails ||
-        !programDescription.personalProgramDetails.canInvest
-      : false;
+    const isDisabledInvest =
+      !programDescription.personalProgramDetails ||
+      !programDescription.personalProgramDetails.canInvest;
+    const isDisabledInvestButton = isAuthenticated ? isDisabledInvest : false;
     return (
       <>
         <InvestmentProgramInfo programDescription={programDescription} />
@@ -62,6 +62,7 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
               currency={programDescription.currency}
               assetId={programDescription.id}
               notificationId={notificationId}
+              disabled={isDisabledInvest}
             />
           ) : (
             <GVButton

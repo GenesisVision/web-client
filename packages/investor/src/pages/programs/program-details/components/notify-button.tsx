@@ -36,14 +36,14 @@ class _NotifyButton extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, disabled } = this.props;
     return (
       <div className="notify-button">
         <GVButton
           className="program-details-description__invest-btn"
           onClick={this.handleClick}
           disabled={Boolean(
-            this.state.notificationId || this.state.subscription
+            this.state.notificationId || this.state.subscription || disabled
           )}
         >
           {t("buttons.notify")}
@@ -74,6 +74,7 @@ interface OwnProps {
   assetId: string;
   notificationId?: string;
   currency: CurrencyEnum;
+  disabled: boolean;
 }
 
 interface DispatchProps {
