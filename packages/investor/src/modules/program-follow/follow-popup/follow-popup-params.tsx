@@ -29,9 +29,6 @@ class FollowParams extends React.PureComponent<
     const setMaxVolumePercent = () => {
       setFieldValue("percent", "999");
     };
-    const setMaxAmountFixedVolume = () => {
-      setFieldValue("fixedVolume", "99999");
-    };
     const isAllow = (values: any) => {
       // return true;
     };
@@ -72,7 +69,6 @@ class FollowParams extends React.PureComponent<
               name="fixedVolume"
               label={t("follow-program.params.usd-equivalent")}
               currency={"USD"}
-              setMax={setMaxAmountFixedVolume}
             />
           </div>
         )}
