@@ -1,4 +1,11 @@
 import { FILTER_TYPE } from "../../helpers/filtering.helpers";
+import {
+  ComposedPagingName,
+  ComposedPagingValue,
+  ComposedSkipTakeName,
+  PagingType
+} from "../../helpers/paging.helpers";
+import { ComposedRequestSortingName } from "../../helpers/sorting.helpers";
 import { IComposeDefaultFilter } from "../table.types";
 import {
   AssetFilterType,
@@ -56,6 +63,7 @@ export interface SortingColumn {
 
 export type FilteringType = {
   [keys: string]:
+    | PagingType
     | AssetFilterType
     | DateRangeFilterType
     | EventTypeFilterType
@@ -71,11 +79,13 @@ export type ComposeFiltersAllType = {
 
 export type ComposeFiltersType = {
   [keys in
+    | ComposedPagingName
     | ComposedRequestAssetName
     | ComposedRequestDataRangeNames
     | ComposedRequestEventTypeName
     | ComposedRequestLevelFilterNames
     | ComposedRequestTagName]?:
+    | ComposedPagingValue
     | ComposedRequestAssetValue
     | ComposedRequestEventTypeValue
     | ComposedRequestTagValue
@@ -86,6 +96,8 @@ export type ComposeFiltersType = {
 
 export type ComposeFiltersTypeFlat = {
   [keys in
+    | ComposedSkipTakeName
+    | ComposedRequestSortingName
     | ComposedRequestAssetName
     | ComposedRequestDataRangeNames
     | ComposedRequestEventTypeName

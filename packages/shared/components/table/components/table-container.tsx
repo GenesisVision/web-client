@@ -34,7 +34,7 @@ interface ITableContainerDispatchProps {
       dataSelector: (opts?: any) => { [keys: string]: any }
     ): (dispatch: Dispatch, getState: any) => void;
     updateFilters(
-      filters?: Object,
+      filters?: FilteringType,
       type?: string
     ): (dispatch: Dispatch) => void;
   };
@@ -50,7 +50,7 @@ class TableContainer extends React.PureComponent<
     if (isFetchOnMount) this.updateItems();
   }
 
-  updateItems = (changedFilters?: Object) => {
+  updateItems = (changedFilters?: FilteringType) => {
     const { service, dataSelector, fetchItems, defaults } = this.props;
     service.updateFilters(changedFilters, defaults.type);
     service.getItems(fetchItems, dataSelector);
