@@ -1,4 +1,5 @@
 import { FILTER_TYPE } from "../../helpers/filtering.helpers";
+import { IComposeDefaultFilter } from "../table.types";
 import {
   AssetFilterType,
   ComposedRequestAssetName,
@@ -88,4 +89,11 @@ export type ComposeFiltersTypeFlat = {
     | ComposedRequestTagValue
     | ComposedRequestDataRangeValues
     | ComposedRequestLevelFilterValues
+};
+
+export type TDefaultFilters = IComposeDefaultFilter[];
+
+export type TDefaults = {
+  defaultFilters: TDefaultFilters;
+  type: string;
 };
