@@ -53,6 +53,7 @@ class _ProgramsRatingContainer extends React.PureComponent<Props, State> {
     const { tab, navigateTabs } = this.state;
 
     if (!tab || !levelData || !navigateTabs) return null;
+    const { level } = tab;
     return (
       <Surface className="programs-rating">
         <h3 className="programs-rating__head">{t("rating-page.title")}</h3>
@@ -65,9 +66,7 @@ class _ProgramsRatingContainer extends React.PureComponent<Props, State> {
             // levelData={levelData}
           />
         </div>
-        {/*
-    // @ts-ignore*/}
-        <ProgramsRatingTables key={tab.level} tab={tab} id={id} title={title} />
+        <ProgramsRatingTables key={level} tab={tab} id={id} title={title} />
       </Surface>
     );
   }
