@@ -89,11 +89,11 @@ class DashboardAssetsSection extends Component<
                 label={t("investor.dashboard-page.assets.funds")}
                 count={fundsCount}
               />
-              {/*<GVTab
+              <GVTab
                 value={ASSET_TAB.COPYTRADING}
                 label={t("investor.dashboard-page.assets.copytrading")}
                 count={tradesCount}
-              />*/}
+              />
             </GVTabs>
           </div>
         </div>
@@ -121,9 +121,9 @@ class DashboardAssetsSection extends Component<
               />
             </>
           )}
-          {/*{tab === ASSET_TAB.COPYTRADING && (
+          {tab === ASSET_TAB.COPYTRADING && (
             <DashboardCopytrading title={title} />
-          )}*/}
+          )}
         </div>
       </Surface>
     );

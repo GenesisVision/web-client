@@ -9,19 +9,22 @@ export const DASHBOARD_COPYTRADING_COLUMNS = [
     name: "program"
   },
   {
-    name: "start-date"
-  },
-  {
-    name: "subscribers"
+    name: "currency"
   },
   {
     name: "trades"
+  },
+  {
+    name: "subscription"
   },
   {
     name: "profit"
   },
   {
     name: "chart"
+  },
+  {
+    name: "status"
   }
 ];
 

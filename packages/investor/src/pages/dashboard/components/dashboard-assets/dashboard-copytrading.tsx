@@ -2,7 +2,7 @@ import { SignalDetails } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
+import Status from "shared/components/status/status";
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -26,12 +27,8 @@ import { formatPercent } from "shared/utils/formatter";
 import { DASHBOARD_COPYTRADING_COLUMNS } from "./dashboard-copytrading.constants";
 import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
 
-interface IDashboardCopytradingProps {
-  title: string;
-}
-
-class DashboardCopytrading extends Component<
-  IDashboardCopytradingProps & InjectedTranslateProps
+class _DashboardCopytrading extends React.Component<
+  Props & InjectedTranslateProps
 > {
   render() {
     const { t, title } = this.props;
@@ -45,14 +42,12 @@ class DashboardCopytrading extends Component<
           updateFilter: IUpdateFilterFunc,
           filtering: FilteringType
         ) => (
-          <Fragment>
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.program-start")}
-            />
-          </Fragment>
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.program-start")}
+          />
         )}
         renderHeader={(column: Column) =>
           t(`investor.dashboard-page.copytrading-header.${column.name}`)
@@ -85,11 +80,11 @@ class DashboardCopytrading extends Component<
                 </Link>
               </div>
             </TableCell>
+            <TableCell>{signal.currency}</TableCell>
+            <TableCell>{signal.personalDetails.tradesCount}</TableCell>
             <TableCell>
               {moment(signal.personalDetails.subscriptionDate).format("lll")}
             </TableCell>
-            <TableCell>{signal.subscribers}</TableCell>
-            <TableCell>{signal.personalDetails.tradesCount}</TableCell>
             <TableCell>
               {/*<Profitability
                 value={+formatPercent(signal.personalDetails.investorProfit)}
@@ -109,6 +104,7 @@ class DashboardCopytrading extends Component<
                 <ProgramSimpleChart data={signal.chart} programId={signal.id} />
               )}
             </TableCell>
+            <TableCell>{signal.status}</TableCell>
           </TableRow>
         )}
       />
@@ -116,4 +112,9 @@ class DashboardCopytrading extends Component<
   }
 }
 
-export default translate()(DashboardCopytrading);
+const DashboardCopytrading = translate()(_DashboardCopytrading);
+export default DashboardCopytrading;
+
+interface Props {
+  title: string;
+}

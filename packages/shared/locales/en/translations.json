@@ -1182,11 +1182,12 @@
       },
       "copytrading-header": {
         "program": "Program",
-        "start-date": "Start Date",
-        "subscribers": "Subscribers",
+        "currency": "Currency",
         "trades": "Trades",
+        "subscription": "Subscription date",
         "profit": "Profit",
-        "chart": "Chart"
+        "chart": "Chart",
+        "status": "Status"
       },
 
       "get-started": {
