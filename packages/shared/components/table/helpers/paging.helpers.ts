@@ -29,3 +29,8 @@ export const calculateSkipAndTake = (paging: IPaging): ISkipAndTake => {
   //@ts-ignore TODO fix types
   return { skip, take };
 };
+
+export type ComposedSkipTakeName = "skip" | "take";
+export type ComposedPagingName = "paging";
+export type PagingType = IPaging;
+export type ComposedPagingValue = PagingType;
