@@ -12,6 +12,7 @@ import {
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableModule from "shared/components/table/components/table-module";
 import {
   GetItemsFuncType,
@@ -70,7 +71,7 @@ class _WalletDepositsWithdrawals extends React.PureComponent<Props> {
               <SelectFilter
                 name={"type"}
                 label="Type"
-                value={filtering["type"]}
+                value={filtering["type"] as SelectFilterType} //TODO fix filtering types
                 values={reduceFilters(typeFilterValues)}
                 onChange={updateFilter}
               />

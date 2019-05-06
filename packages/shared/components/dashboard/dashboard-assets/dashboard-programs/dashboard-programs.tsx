@@ -21,6 +21,7 @@ import {
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -63,7 +64,7 @@ const _DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
           <SelectFilter
             name={ACTION_STATUS_FILTER_NAME}
             label={t(`${ROLE_ENV}.dashboard-page.actions-status-filter.label`)}
-            value={filtering[ACTION_STATUS_FILTER_NAME]}
+            value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
             values={ACTION_STATUS_FILTER_VALUES}
             onChange={updateFilter}
           />

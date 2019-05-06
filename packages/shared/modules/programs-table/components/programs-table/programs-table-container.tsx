@@ -17,6 +17,7 @@ import {
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
 import { LevelFilterType } from "shared/components/table/components/filtering/level-filter/level-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
@@ -137,7 +138,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
               <SelectFilter
                 name={CURRENCY_FILTER_NAME}
                 label="Currency"
-                value={filtering[CURRENCY_FILTER_NAME]}
+                value={filtering[CURRENCY_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
                 values={composeCurrencyFilter(currencies)}
                 onChange={updateFilter}
               />
