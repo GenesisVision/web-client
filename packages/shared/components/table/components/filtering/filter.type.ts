@@ -51,7 +51,7 @@ export interface TDefaultFilter<T = any> extends TFilterMain {
 }
 
 export interface SelectFilterValue<T = any> {
-  value: T | undefined;
+  value: T;
   label?: T;
   labelKey?: string;
 }
