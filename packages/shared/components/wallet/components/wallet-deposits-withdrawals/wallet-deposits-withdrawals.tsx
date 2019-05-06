@@ -17,7 +17,7 @@ import {
   GetItemsFuncType,
   RenderBodyItemFuncType
 } from "shared/components/table/components/table.types";
-import { FilterType } from "shared/components/table/helpers/filtering.helpers";
+import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
@@ -35,7 +35,7 @@ const DEFAULT_FILTERS = [
   { ...composeDefaultDateRangeFilter() },
   {
     name: "type",
-    type: FilterType.general
+    type: FILTER_TYPE.GENERAL
   }
 ];
 
