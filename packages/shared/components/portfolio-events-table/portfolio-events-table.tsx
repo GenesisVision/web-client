@@ -102,7 +102,7 @@ const PortfolioEventsTable: React.FC<
         renderBodyRow={event => (
           <TableRow className="portfolio-events-all-table__row">
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
-              {moment(event.date).format("lll")}
+              {moment(event.date).format()}
             </TableCell>
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
               {event.description}

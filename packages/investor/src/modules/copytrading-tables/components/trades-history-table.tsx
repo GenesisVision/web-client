@@ -141,8 +141,8 @@ class TradesHistoryTable extends Component<
                   {signalTrade.direction}
                 </BaseProfitability>
               </TableCell>
-              <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
-              <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
+              <TableCell>{moment(signalTrade.date).format()}</TableCell>
+              <TableCell>{moment(signalTrade.date).format()}</TableCell>
               <TableCell>{signalTrade.symbol}</TableCell>
               <TableCell>
                 <NumberFormat

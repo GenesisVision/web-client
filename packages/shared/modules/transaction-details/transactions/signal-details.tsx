@@ -2,8 +2,8 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
-import TransactionAsset from "shared/modules/transaction-details/details-asset";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
+import TransactionAsset from "shared/modules/transaction-details/transactions/details-asset";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {

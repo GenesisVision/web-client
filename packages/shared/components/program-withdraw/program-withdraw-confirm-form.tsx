@@ -34,7 +34,7 @@ class _ProgramWithdrawConfirmForm extends React.PureComponent<
           <li className="dialog-list__item">
             {t("withdraw-program.payout-date")}
             <span className="dialog-list__value">
-              {moment(periodEnds).format("lll")}
+              {moment(periodEnds).format()}
             </span>
           </li>
         </ul>

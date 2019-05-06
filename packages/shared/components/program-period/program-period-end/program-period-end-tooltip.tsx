@@ -9,7 +9,7 @@ const _PropgramPeriodEndTooltip: React.FC<Props> = ({ t, periodEnds }) => (
     </div>
     <div className="program-period-tooltip__content">
       {periodEnds
-        ? moment(periodEnds).format("lll")
+        ? moment(periodEnds).format()
         : t("program-period.waiting-period-start")}
     </div>
   </div>
