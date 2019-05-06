@@ -5,15 +5,11 @@ import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import GVScroll from "shared/components/scroll/gvscroll";
 
-export interface ITab {
-  name: string;
-  label: JSX.Element;
-  count: number;
-}
+import { INavigateTab } from "../programs-rating/programs-rating-container";
 
 interface ITabsContainerProps {
-  tabs: ITab[];
-  tab: ITab;
+  tabs: INavigateTab[];
+  tab: INavigateTab;
   handleTabChange(
     event: React.SyntheticEvent<EventTarget>,
     value: string

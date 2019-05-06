@@ -12,6 +12,8 @@ import {
 import StatisticRatingItem from "shared/components/statistic-rating-item/statistic-rating-item";
 import { formatValue } from "shared/utils/formatter";
 
+import { INavigateTab } from "./programs-rating-container";
+
 const _ProgramsRatingStats: React.FC<Props> = ({ t, levelData }) => (
   <div className="programs-rating-stats">
     <StatisticRatingItem ellipse label={t("rating-page.programCounts")}>
@@ -40,7 +42,7 @@ const _ProgramsRatingStats: React.FC<Props> = ({ t, levelData }) => (
 interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface OwnProps {
-  levelData: any;
+  levelData: INavigateTab;
 }
 
 const ProgramsRatingStats = compose<React.ComponentType<OwnProps>>(

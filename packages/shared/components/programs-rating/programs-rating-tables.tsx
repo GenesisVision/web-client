@@ -1,6 +1,7 @@
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
+import { INavigateTab } from "./programs-rating-container";
 import ProgramsRatingStats from "./programs-rating-stats";
 import ProgramsRatingTable from "./programs-rating-table";
 
@@ -20,7 +21,7 @@ const _ProgramsRatingTables: React.FC<Props> = ({ t, id, tab, title }) => (
 
 interface Props extends InjectedTranslateProps {
   id: string;
-  tab: any;
+  tab: INavigateTab;
   title: string;
 }
 
