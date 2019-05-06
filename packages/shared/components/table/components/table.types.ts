@@ -10,9 +10,8 @@ export type Column = {
   name: string;
 };
 
-export interface IUpdateFilterFunc {
-  (filter: TFilter<any>): void;
-}
+export type UpdateFilterFunc = (filter: TFilter<any>) => void;
+
 export type UpdateItemsFuncType = () => void;
 
 export type UpdateRowFuncType = (row: any) => void;

@@ -27,7 +27,7 @@ import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
   GetItemsFuncActionType,
-  IUpdateFilterFunc
+  UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { PROGRAM, ROLE, ROLE_ENV, STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
@@ -56,7 +56,7 @@ const _DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
       isFetchOnMount={true}
       columns={columns}
       renderFilters={(
-        updateFilter: IUpdateFilterFunc,
+        updateFilter: UpdateFilterFunc,
         filtering: FilteringType
       ) => (
         <>

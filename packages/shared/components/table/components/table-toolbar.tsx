@@ -18,7 +18,7 @@ export interface ITableToolbarExternalProps {
   createButtonToolbar?: JSX.Element;
   title?: JSX.Element | string;
   renderFilters?: RenderFiltersFuncType;
-  updateFilter?: IUpdateFilterFunc;
+  updateFilter?: UpdateFilterFunc;
   filtering?: FilteringType;
   columns?: SortingColumn[];
   sorting?: string;

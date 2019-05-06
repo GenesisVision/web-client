@@ -21,7 +21,7 @@ import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
   GetItemsFuncActionType,
-  IUpdateFilterFunc
+  UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { FUND, ROLE_ENV } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
@@ -57,7 +57,7 @@ const _DashboardFunds: FunctionComponent<
       isFetchOnMount={true}
       columns={DASHBOARD_FUNDS_COLUMNS}
       renderFilters={(
-        updateFilter: IUpdateFilterFunc,
+        updateFilter: UpdateFilterFunc,
         filtering: FilteringType
       ) => (
         <Fragment>
