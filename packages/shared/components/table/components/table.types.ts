@@ -1,10 +1,11 @@
 import { FundDetails, ProgramDetails } from "gv-api-web";
 import { Action } from "redux";
 import { IDataModel } from "shared/constants/constants";
+import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
 import { FILTER_TYPE } from "../helpers/filtering.helpers";
 import { IPaging } from "../helpers/paging.helpers";
-import { FilteringType, TFilter } from "./filtering/filter.type";
+import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
 
 export type Column = {
   name: string;
@@ -55,3 +56,13 @@ export type RenderFiltersFuncType = (
   updateFilter: IUpdateFilterFunc,
   filtering: FilteringType
 ) => JSX.Element;
+
+export type UpdateSortingFuncType = (
+  opt: string
+) => ((dispatch: MiddlewareDispatch, getState: TGetState) => void) | void;
+
+export type RenderSortingFuncType = (
+  value: SortingColumn
+) => JSX.Element | string;
+
+export type UpdatePagingFuncType = (page: number) => void;
