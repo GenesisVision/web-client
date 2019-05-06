@@ -110,6 +110,17 @@ export type ComposeFiltersTypeFlat = {
     | ComposedRequestLevelFilterValues
 };
 
+export type ComposedFiltersType = {
+  [keys in
+    | ComposedSkipTakeName
+    | ComposedRequestSortingName
+    | ComposedRequestAssetName
+    | ComposedRequestDataRangeNames
+    | ComposedRequestEventTypeName
+    | ComposedRequestLevelFilterNames
+    | ComposedRequestTagName]?: number | string
+};
+
 export type TDefaultFilters = IComposeDefaultFilter[];
 
 export type TDefaults = {
