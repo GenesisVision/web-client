@@ -3,11 +3,12 @@ import * as React from "react";
 import { IPaging } from "../helpers/paging.helpers";
 import Paging from "./paging/paging";
 import ItemsCounter from "./table-items-counter";
+import { UpdatePagingFuncType } from "./table.types";
 
 export interface ITableFooterProps {
   isPending?: boolean;
   paging?: IPaging;
-  updatePaging?(page: number): void;
+  updatePaging?: UpdatePagingFuncType;
 }
 
 const TableFooter: React.FC<ITableFooterProps> = ({
@@ -20,11 +21,13 @@ const TableFooter: React.FC<ITableFooterProps> = ({
   return (
     <div className="table__footer">
       <ItemsCounter {...paging} />
-      <Paging
-        paging={paging}
-        hidden={isPending}
-        updatePaging={next => updatePaging && updatePaging(next.currentPage)}
-      />
+      {!isPending && paging.totalPages !== 0 && (
+        <Paging
+          paging={paging}
+          hidden={isPending}
+          updatePaging={next => updatePaging && updatePaging(next.currentPage)}
+        />
+      )}
     </div>
   );
 };

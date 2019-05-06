@@ -7,7 +7,7 @@ import RootState from "shared/reducers/root-reducer";
 
 import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
-import { FilteringType, TFilter } from "./filtering/filter.type";
+import { FilteringType, TDefaults, TFilter } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
 import { GetItemsFuncActionType } from "./table.types";
 
@@ -24,7 +24,7 @@ interface ITableContainerStateProps {
   paging: IPaging;
   filtering: FilteringType;
   fetchItems: GetItemsFuncActionType;
-  defaults: any;
+  defaults: TDefaults;
 }
 
 interface ITableContainerDispatchProps {
