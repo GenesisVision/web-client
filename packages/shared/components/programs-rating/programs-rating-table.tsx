@@ -61,7 +61,7 @@ class _ProgramsRatingTable extends React.PureComponent<Props, State> {
         data={programs}
         paging={{ totalPages, currentPage, itemsOnPage }}
         updatePaging={this.updatePaging}
-        toggleFavorite={(asset, updateRow) => {}}
+        toggleFavorite={(asset: any, updateRow: any) => {}}
       />
     );
   }
