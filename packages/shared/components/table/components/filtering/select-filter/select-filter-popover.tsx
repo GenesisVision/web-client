@@ -8,7 +8,7 @@ import { ComposedRequestSelectValue } from "./select-filter.constants";
 interface ISelectFilterPopoverProps {
   changeFilter?(value: ComposedRequestSelectValue): void;
   values: SelectFilterValue<ComposedRequestSelectValue>[];
-  value?: any;
+  value?: ComposedRequestSelectValue;
 }
 
 class SelectFilterPopover extends React.PureComponent<
