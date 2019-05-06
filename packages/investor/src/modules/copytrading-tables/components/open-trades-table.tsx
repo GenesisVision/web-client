@@ -146,7 +146,7 @@ class OpenTradesTable extends Component<
                 </GVButton>
               </Link>
             </TableCell>
-            <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
+            <TableCell>{moment(signalTrade.date).format()}</TableCell>
             <TableCell>{signalTrade.symbol}</TableCell>
             <TableCell>
               <NumberFormat

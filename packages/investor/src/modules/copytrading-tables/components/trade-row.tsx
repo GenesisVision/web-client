@@ -52,7 +52,7 @@ const TradeRow: React.FC<{ trade: OrderSignalModel }> = ({ trade }) => (
       </Profitability>
     </TableCell>
     <TableCell className="details-trades__cell program-details-trades__cell--date">
-      {moment(trade.date).format("lll")}
+      {moment(trade.date).format()}
     </TableCell>
     <TableCell className="details-trades__cell program-details-trades__cell--ticket">
       {trade.ticket}

@@ -23,7 +23,7 @@ const formatDate = date => {
   const isShowFullDate = dayDifference > 1;
 
   return isShowFullDate
-    ? eventCreationDate.format("lll")
+    ? eventCreationDate.format()
     : eventCreationDate.fromNow();
 };
 

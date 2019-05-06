@@ -121,7 +121,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
                     {t(
                       "fund-details-page.description.disable-reallocation-message"
                     )}{" "}
-                    {moment(possibleReallocationTime).format("lll")}
+                    {moment(possibleReallocationTime).format()}
                   </div>
                 )}
               </div>

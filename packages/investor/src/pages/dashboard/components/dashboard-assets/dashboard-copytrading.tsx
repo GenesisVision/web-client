@@ -86,7 +86,7 @@ class DashboardCopytrading extends Component<
               </div>
             </TableCell>
             <TableCell>
-              {moment(signal.personalDetails.subscriptionDate).format("lll")}
+              {moment(signal.personalDetails.subscriptionDate).format()}
             </TableCell>
             <TableCell>{signal.subscribers}</TableCell>
             <TableCell>{signal.personalDetails.tradesCount}</TableCell>

@@ -61,7 +61,7 @@ class AllDepositsWithdrawalsRow extends React.Component<
             {transaction.currency}
           </TableCell>
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
-            {moment(transaction.date).format("lll")}
+            {moment(transaction.date).format()}
           </TableCell>
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
             {(transaction.statusUrl && (

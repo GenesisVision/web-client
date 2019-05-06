@@ -135,7 +135,7 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
               </TableCell>
             )}
             <TableCell className="details-trades__cell program-details-trades__cell--date">
-              {moment(trade.date).format("lll")}
+              {moment(trade.date).format()}
             </TableCell>
             {isForex && (
               <TableCell className="details-trades__cell program-details-trades__cell--ticket">
