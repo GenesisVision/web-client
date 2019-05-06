@@ -70,7 +70,7 @@ interface Props
     InjectedTranslateProps,
     RouteComponentProps {}
 
-class ProgramsTableContainer extends React.PureComponent<Props> {
+class _ProgramsTableContainer extends React.PureComponent<Props> {
   componentDidMount() {
     const { service, defaultFilters } = this.props;
     service.getPrograms(defaultFilters);
@@ -213,7 +213,7 @@ const mergeProps = (
   };
 };
 
-export default compose<React.FunctionComponent<OwnProps>>(
+const ProgramsTableContainer = compose<React.FunctionComponent<OwnProps>>(
   withRouter,
   translate(),
   connect(
@@ -221,4 +221,5 @@ export default compose<React.FunctionComponent<OwnProps>>(
     mapDispatchToProps,
     mergeProps
   )
-)(ProgramsTableContainer);
+)(_ProgramsTableContainer);
+export default ProgramsTableContainer;
