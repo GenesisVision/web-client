@@ -7,15 +7,15 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import ConvertingDetails from "shared/modules/transaction-details/converting-details";
-import ExternalDeposit from "shared/modules/transaction-details/external-deposit-details";
-import ExternalWithdrawal from "shared/modules/transaction-details/external-withdrawal-details";
-import FeeDetails from "shared/modules/transaction-details/fee-details";
-import InvestingTransaction from "shared/modules/transaction-details/investment-details";
-import OpenCloseTransaction from "shared/modules/transaction-details/open-close-details";
-import ProfitDetails from "shared/modules/transaction-details/profit-details";
-import SignalTransaction from "shared/modules/transaction-details/signal-details";
-import WithdrawalTransaction from "shared/modules/transaction-details/withdrawal-details";
+import ConvertingDetails from "shared/modules/transaction-details/transactions/converting-details";
+import ExternalDeposit from "shared/modules/transaction-details/transactions/external-deposit-details";
+import ExternalWithdrawal from "shared/modules/transaction-details/transactions/external-withdrawal-details";
+import FeeDetails from "shared/modules/transaction-details/transactions/fee-details";
+import InvestingTransaction from "shared/modules/transaction-details/transactions/investment-details";
+import OpenCloseTransaction from "shared/modules/transaction-details/transactions/open-close-details";
+import ProfitDetails from "shared/modules/transaction-details/transactions/profit-details";
+import SignalTransaction from "shared/modules/transaction-details/transactions/signal-details";
+import WithdrawalTransaction from "shared/modules/transaction-details/transactions/withdrawal-details";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { ResponseError } from "shared/utils/types";
@@ -33,7 +33,8 @@ const Types: TransactionTypes = {
   SubscribeSignal: SignalTransaction,
   ReceiveSignal: SignalTransaction,
   DepositSignal: SignalTransaction,
-  WithdrawalSignal: SignalTransaction
+  WithdrawalSignal: SignalTransaction,
+  Platform: SignalTransaction
 } as TransactionTypes;
 
 class _TransactionDetailsDialog extends React.PureComponent<Props, State> {
