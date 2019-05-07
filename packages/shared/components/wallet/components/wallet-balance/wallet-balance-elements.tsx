@@ -4,10 +4,12 @@ import { GVColors } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import * as InnerColors from "shared/components/gv-styles/color";
 import PieContainer from "shared/components/pie-container/pie-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
+
+export const $piePendingColor = "#f7931a";
+export const $pieAvailableColor = "#5758a5";
 
 const getPercentageValue = (value: number, totalValue: number): number => {
   const percentage = Math.round((value / totalValue) * 100);
@@ -40,7 +42,7 @@ const WalletBalanceElements = (props: IWalletBalanceElement) => {
       <div className="wallet-balance__statistic-item">
         <PieContainer
           value={getPercentageValue(props.available, props.total)}
-          color={InnerColors.$pieAvailableColor}
+          color={$pieAvailableColor}
         />
         <StatisticItem
           label={t("wallet-page.available")}
@@ -78,7 +80,7 @@ const WalletBalanceElements = (props: IWalletBalanceElement) => {
       <div className="wallet-balance__statistic-item">
         <PieContainer
           value={getPercentageValue(props.pending, props.total)}
-          color={InnerColors.$piePendingColor}
+          color={$piePendingColor}
         />
         <StatisticItem
           label={t("wallet-page.pending")}

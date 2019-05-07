@@ -1,0 +1,131 @@
+@import "../gv-styles/_colors.scss";
+
+.gv-text-field {
+  margin-top: 16px;
+  display: inline-flex;
+  position: relative;
+  font-size: 1rem;
+
+  &::before {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    transition: 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition-property: border-bottom-color, opacity;
+    border-bottom: 1px solid $text-color;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  &::after {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    transform: scaleX(0);
+    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    border-bottom: 1px solid $text-color;
+    pointer-events: none;
+  }
+
+  &:not(.gv-text-field--disabled):hover {
+    &::before {
+      opacity: 0.3;
+    }
+  }
+
+  &--focused {
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &--invalid {
+    &::after {
+      border-bottom-color: $negative-color;
+      transform: scaleX(1);
+    }
+  }
+
+  &__error {
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    font-size: 0.7em;
+    color: $negative-color;
+    backface-visibility: hidden;
+  }
+
+  &__input {
+    order: 1;
+    color: $text-light-color;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.38;
+    letter-spacing: 0.2px;
+    border: 0;
+    margin: 0;
+    padding: 6px 0 7px;
+    display: block;
+    min-width: 0;
+    flex-grow: 1;
+    box-sizing: content-box;
+    background: none;
+    -webkit-tap-highlight-color: transparent;
+    &:focus {
+      outline: none;
+    }
+    &:disabled {
+      color: $text-dark-color;
+    }
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: $text-light-color;
+      -webkit-box-shadow: 0 0 0 30px $secondary-background-color inset;
+    }
+  }
+
+  &__label {
+    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    top: 0;
+    left: 0;
+    position: absolute;
+    transform: translate(0, 24px) scale(1);
+    transform-origin: top left;
+    color: $label-color;
+    font-size: 16px;
+    font-weight: normal;
+    letter-spacing: 0.4px;
+    padding: 0;
+    &--shrink {
+      transform: scale(0.75) translate(0px, 1.5px);
+    }
+  }
+
+  &__adornment {
+    display: flex;
+    max-height: 2em;
+    align-items: center;
+    &--start {
+      order: 0;
+      margin-right: 8px;
+    }
+    &--end {
+      order: 2;
+      margin-left: 8px;
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 16px 8px;
+  }
+}

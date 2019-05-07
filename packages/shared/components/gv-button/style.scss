@@ -1,0 +1,107 @@
+@import "../gv-styles/_colors.scss";
+
+@mixin box-shadow($color) {
+  box-shadow: 0 0.2em 0.5em 0 $color;
+}
+
+.gv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border: 0;
+  outline: none;
+  padding: 1em 3em;
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition-property: background-color, box-shadow, color;
+  color: $text-accent-color;
+  background-color: transparent;
+
+  &--no-padding {
+    padding: 0;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:not(:disabled):active {
+    background-image: none;
+  }
+
+  &:hover:not(:disabled) {
+    &.gv-btn--primary {
+      background-color: rgba(darken($primary-color, 10%), 0.3);
+    }
+    &.gv-btn--secondary {
+      background-color: rgba(darken($secondary-color, 10%), 0.3);
+    }
+  }
+
+  &--text {
+    &.gv-btn--primary {
+      color: $primary-color;
+    }
+    &:hover:not(:disabled) {
+      &.gv-btn--primary {
+        background-color: transparent;
+        color: rgba(darken($primary-color, 10%), 0.9);
+      }
+      &.gv-btn--secondary {
+        background-color: transparent;
+        color: rgba(darken($text-color, 10%), 0.9);
+      }
+    }
+  }
+
+  &--contained {
+    border-radius: 2em;
+    &.gv-btn--primary {
+      background-color: $primary-color;
+      @include box-shadow(rgba(darken($primary-color, 50%), 0.2));
+    }
+    &.gv-btn--secondary {
+      background-color: $secondary-color;
+      @include box-shadow(rgba(darken($secondary-color, 50%), 0.2));
+    }
+
+    &:not(:disabled):active {
+      &.gv-btn--primary {
+        background-color: darken($primary-color, 10%);
+      }
+      &.gv-btn--secondary {
+        background-color: darken($secondary-color, 10%);
+      }
+    }
+
+    &:hover:not(:disabled) {
+      &.gv-btn--primary {
+        background-color: darken($primary-color, 10%);
+      }
+      &.gv-btn--secondary {
+        background-color: darken($secondary-color, 10%);
+      }
+    }
+  }
+
+  &--outlined {
+    border-radius: 2em;
+    border-width: 0.1em;
+    border-style: solid;
+    &.gv-btn--primary {
+      border-color: $primary-color;
+    }
+    &.gv-btn--secondary {
+      border-color: $secondary-color;
+    }
+  }
+}
