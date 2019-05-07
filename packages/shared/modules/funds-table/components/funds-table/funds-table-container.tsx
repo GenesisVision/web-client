@@ -52,7 +52,7 @@ interface Props
     DispatchProps,
     RouteComponentProps {}
 
-class FundsTableContainer extends React.PureComponent<Props> {
+class _FundsTableContainer extends React.PureComponent<Props> {
   componentDidMount() {
     const { service, defaultFilters } = this.props;
     service.getFunds(defaultFilters);
@@ -134,11 +134,12 @@ const mergeProps = (
   };
 };
 
-export default compose(
+const FundsTableContainer = compose<React.ComponentType<OwnProps>>(
   withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps,
     mergeProps
   )
-)(FundsTableContainer);
+)(_FundsTableContainer);
+export default FundsTableContainer;

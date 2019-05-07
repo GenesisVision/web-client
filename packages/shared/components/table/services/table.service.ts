@@ -6,9 +6,13 @@ import {
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
 import RootState from "shared/reducers/root-reducer";
+import { TGetState } from "shared/utils/types";
 
 import { updateFilters as updateFiltersActionCreator } from "../actions/table.actions";
-import { FilteringType } from "../components/filtering/filter.type";
+import {
+  ComposeFiltersAllType,
+  FilteringType
+} from "../components/filtering/filter.type";
 import { IComposeDefaultFilter } from "../components/table.types";
 
 interface IComposeRequestFiltersProps {
@@ -21,12 +25,10 @@ export const composeRequestFilters = ({
   paging,
   sorting,
   filtering,
-  defaultFilters
-}: IComposeRequestFiltersProps): { [keys: string]: any } => {
+  defaultFilters = []
+}: IComposeRequestFiltersProps): ComposeFiltersAllType => {
   const { skip, take } = calculateSkipAndTake(paging);
-  //@ts-ignore
   const composedFiltering = composeFilters(defaultFilters, filtering);
-
   return {
     skip,
     take,
@@ -35,14 +37,14 @@ export const composeRequestFilters = ({
   };
 };
 
-export const updateFilters = (filters: Object, type: string) => (
+export const updateFilters = (filters: FilteringType, type: string) => (
   dispatch: Dispatch
 ) => {
   dispatch(updateFiltersActionCreator(filters, type));
 };
 
 export const updateFiltersDispatch = (
-  filters: Object,
+  filters: FilteringType,
   type: string,
   dispatch: Dispatch
 ) => {
@@ -50,9 +52,9 @@ export const updateFiltersDispatch = (
 };
 
 export const getItems = (
-  fetchItems: any,
+  fetchItems: (filters: ComposeFiltersAllType) => any,
   dataSelector: (opts?: RootState) => { [keys: string]: any }
-) => (dispatch: Dispatch, getState: () => RootState) => {
+) => (dispatch: Dispatch, getState: TGetState) => {
   const { filters, defaults } = dataSelector(getState());
   const requestFilters = composeRequestFilters({
     ...filters,

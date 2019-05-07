@@ -5,7 +5,12 @@ import SortingFilter from "shared/components/table/components/sorting/sorting-fi
 
 import { LIST_VIEW } from "../table.constants";
 import { FilteringType, SortingColumn } from "./filtering/filter.type";
-import { IUpdateFilterFunc, RenderFiltersFuncType } from "./table.types";
+import {
+  RenderFiltersFuncType,
+  RenderSortingFuncType,
+  UpdateFilterFunc,
+  UpdateSortingFuncType
+} from "./table.types";
 
 interface ITableToolbarInnerProps {
   view: LIST_VIEW;
@@ -18,12 +23,12 @@ export interface ITableToolbarExternalProps {
   createButtonToolbar?: JSX.Element;
   title?: JSX.Element | string;
   renderFilters?: RenderFiltersFuncType;
-  updateFilter?: IUpdateFilterFunc;
+  updateFilter?: UpdateFilterFunc;
   filtering?: FilteringType;
   columns?: SortingColumn[];
   sorting?: string;
-  updateSorting?(opt: string): ((dispatch: any, getState: any) => void) | void;
-  renderSorting?(value: SortingColumn): JSX.Element | string;
+  updateSorting?: UpdateSortingFuncType;
+  renderSorting?: RenderSortingFuncType;
 }
 
 class TableToolbar extends React.PureComponent<

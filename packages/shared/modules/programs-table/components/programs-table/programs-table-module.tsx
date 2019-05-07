@@ -1,8 +1,12 @@
 import * as React from "react";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  TDefaultFilters
+} from "shared/components/table/components/filtering/filter.type";
 import TableModule from "shared/components/table/components/table-module";
 import {
   GetItemsFuncType,
+  RenderFiltersFuncType,
   TableToggleFavoriteType
 } from "shared/components/table/components/table.types";
 import { IPaging } from "shared/components/table/helpers/paging.helpers";
@@ -13,13 +17,10 @@ import { PROGRAMS_COLUMNS } from "./programs.constants";
 
 interface IProgramTableModuleProps {
   getItems: GetItemsFuncType;
-  renderFilters?(
-    updateFilter: (filter: any) => void,
-    filtering: FilteringType
-  ): JSX.Element;
+  renderFilters?: RenderFiltersFuncType;
   sorting: string;
   filtering: FilteringType;
-  defaultFilters: any[];
+  defaultFilters: TDefaultFilters;
   paging: IPaging;
   isAuthenticated?: boolean;
   showRating?: boolean;
@@ -28,7 +29,7 @@ interface IProgramTableModuleProps {
   toggleFavorite: TableToggleFavoriteType;
 }
 
-class ProgramTableModule extends React.Component<IProgramTableModuleProps> {
+class ProgramTableModule extends React.PureComponent<IProgramTableModuleProps> {
   render() {
     const {
       getItems,
@@ -43,7 +44,6 @@ class ProgramTableModule extends React.Component<IProgramTableModuleProps> {
       disableTitle,
       toggleFavorite
     } = this.props;
-
     return (
       <TableModule
         disableTitle={disableTitle}

@@ -7,9 +7,13 @@ import {
   FilteringType,
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
-import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
+import {
+  RenderFiltersFuncType,
+  TableToggleFavoriteHandlerType,
+  UpdatePagingFuncType,
+  UpdateSortingFuncType
+} from "shared/components/table/components/table.types";
 import { IPaging } from "shared/components/table/helpers/paging.helpers";
-import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
 import ProgramCard from "./program-card";
 import ProgramTableHeaderCell from "./program-table-header-cell";
@@ -26,17 +30,12 @@ interface IProgramsTableProps {
   data: ProgramsList;
   isPending?: boolean;
   sorting?: string;
-  updateSorting?(
-    opt: string
-  ): (dispatch: MiddlewareDispatch, getState: TGetState) => void;
+  updateSorting?: UpdateSortingFuncType;
   filtering?: FilteringType;
   updateFilter?(filter: any): void;
-  renderFilters?(
-    updateFilter: (filter: any) => void,
-    filtering: FilteringType
-  ): JSX.Element;
+  renderFilters?: RenderFiltersFuncType;
   paging: IPaging;
-  updatePaging(page: number): void;
+  updatePaging: UpdatePagingFuncType;
   toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated?: boolean;
   title: string;
