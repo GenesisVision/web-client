@@ -34,11 +34,4 @@
       padding: 6px 0;
     }
   }
-
-  @include media-breakpoint-landscape-phone() {
-    &__header {
-      padding-left: $padding-small;
-      padding-right: $padding-small;
-    }
-  }
 }
