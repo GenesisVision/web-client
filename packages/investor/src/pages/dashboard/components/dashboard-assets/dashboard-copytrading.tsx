@@ -115,7 +115,7 @@ class _DashboardCopytrading extends React.Component<
                 />
               </Profitability>*/}
             </TableCell>
-            <TableCell>
+            <TableCell className="programs-table__cell dashboard-programs__cell--chart">
               {signal.chart.length && (
                 <ProgramSimpleChart data={signal.chart} programId={signal.id} />
               )}
