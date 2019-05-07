@@ -19,6 +19,7 @@ import DateRangeFilter from "shared/components/table/components/filtering/date-r
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import {
@@ -53,7 +54,7 @@ class _DashboardCopytrading extends React.Component<
               label={t(
                 `${ROLE_ENV}.dashboard-page.actions-status-filter.label`
               )}
-              value={filtering[ACTION_STATUS_FILTER_NAME]}
+              value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType}
               values={ACTION_STATUS_FILTER_VALUES}
               onChange={updateFilter}
             />
