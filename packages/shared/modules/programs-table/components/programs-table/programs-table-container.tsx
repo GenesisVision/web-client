@@ -15,7 +15,9 @@ import {
   TFilter
 } from "shared/components/table/components/filtering/filter.type";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
+import { LevelFilterType } from "shared/components/table/components/filtering/level-filter/level-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
@@ -70,7 +72,7 @@ interface Props
     InjectedTranslateProps,
     RouteComponentProps {}
 
-class ProgramsTableContainer extends React.PureComponent<Props> {
+class _ProgramsTableContainer extends React.PureComponent<Props> {
   componentDidMount() {
     const { service, defaultFilters } = this.props;
     service.getPrograms(defaultFilters);
@@ -130,13 +132,13 @@ class ProgramsTableContainer extends React.PureComponent<Props> {
               />
               <LevelFilter
                 name={LEVEL_FILTER_NAME}
-                value={filtering[LEVEL_FILTER_NAME] as number[]} //TODO fix filtering types
+                value={filtering[LEVEL_FILTER_NAME] as LevelFilterType} //TODO fix filtering types
                 onChange={updateFilter}
               />
               <SelectFilter
                 name={CURRENCY_FILTER_NAME}
                 label="Currency"
-                value={filtering[CURRENCY_FILTER_NAME]}
+                value={filtering[CURRENCY_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
                 values={composeCurrencyFilter(currencies)}
                 onChange={updateFilter}
               />
@@ -213,7 +215,7 @@ const mergeProps = (
   };
 };
 
-export default compose<React.FunctionComponent<OwnProps>>(
+const ProgramsTableContainer = compose<React.FunctionComponent<OwnProps>>(
   withRouter,
   translate(),
   connect(
@@ -221,4 +223,5 @@ export default compose<React.FunctionComponent<OwnProps>>(
     mapDispatchToProps,
     mergeProps
   )
-)(ProgramsTableContainer);
+)(_ProgramsTableContainer);
+export default ProgramsTableContainer;

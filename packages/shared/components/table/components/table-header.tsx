@@ -8,10 +8,11 @@ import {
 import { SortingColumn } from "./filtering/filter.type";
 import TableHeadCell from "./table-head-cell";
 import TableRow from "./table-row";
+import { UpdateSortingFuncType } from "./table.types";
 
 export interface ITableHeaderProps {
   sorting?: string;
-  updateSorting?(opt: string): ((dispatch: any, getState: any) => void) | void;
+  updateSorting?: UpdateSortingFuncType;
   columns?: SortingColumn[];
   renderHeader?(column: SortingColumn): JSX.Element;
 }

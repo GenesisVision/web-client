@@ -712,7 +712,8 @@
       "SubscribeSignal": "Subscribe to signal provider",
       "ReceiveSignal": "Subscription to signal provider",
       "DepositSignal": "Deposit to signal account",
-      "WithdrawalSignal": "Withdrawal from signal account"
+      "WithdrawalSignal": "Withdrawal from signal account",
+      "Platform": "Platform transaction"
     }
   },
   "wallet-page": {

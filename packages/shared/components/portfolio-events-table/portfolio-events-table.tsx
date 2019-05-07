@@ -17,6 +17,7 @@ import {
   SelectFilterValue
 } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
@@ -56,7 +57,7 @@ const PortfolioEventsTable: React.FC<
               <SelectFilter
                 name={EVENT_TYPE_FILTER_NAME}
                 label="Type"
-                value={filtering["type"]}
+                value={filtering["type"] as SelectFilterType} //TODO fix filtering types
                 values={eventTypeFilterValues}
                 onChange={updateFilter}
               />
@@ -65,7 +66,7 @@ const PortfolioEventsTable: React.FC<
               <SelectFilter
                 name="assetType"
                 label="Assets type"
-                value={filtering["assetType"]}
+                value={filtering["assetType"] as SelectFilterType} //TODO fix filtering types
                 values={ASSET_TYPE_FILTER_VALUES}
                 onChange={updateFilter}
               />
@@ -102,7 +103,7 @@ const PortfolioEventsTable: React.FC<
         renderBodyRow={event => (
           <TableRow className="portfolio-events-all-table__row">
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
-              {moment(event.date).format("lll")}
+              {moment(event.date).format()}
             </TableCell>
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
               {event.description}
