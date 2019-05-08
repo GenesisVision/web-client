@@ -1,6 +1,11 @@
+@import "~shared/styles/_sizes.scss";
+
+$tooltip-padding: 16px;
+
 .tooltip {
   &__popover {
-    padding: 1rem;
+    @include horizontal-paddings($tooltip-padding, $divider-text);
+    @include vertical-paddings($tooltip-padding, $divider-text);
     color: white;
   }
 }

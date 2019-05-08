@@ -18,7 +18,7 @@ import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
-  IUpdateFilterFunc
+  UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatPercent } from "shared/utils/formatter";
@@ -42,7 +42,7 @@ class DashboardCopytrading extends Component<
         isFetchOnMount={true}
         columns={DASHBOARD_COPYTRADING_COLUMNS}
         renderFilters={(
-          updateFilter: IUpdateFilterFunc,
+          updateFilter: UpdateFilterFunc,
           filtering: FilteringType
         ) => (
           <Fragment>

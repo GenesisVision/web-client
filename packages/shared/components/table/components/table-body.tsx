@@ -3,7 +3,11 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 
 import { LIST_VIEW } from "../table.constants";
 import TableLoader from "./table-loader";
-import { RenderBodyItemFuncType, UpdateRowFuncType } from "./table.types";
+import {
+  RenderBodyItemFuncType,
+  UpdateItemsFuncType,
+  UpdateRowFuncType
+} from "./table.types";
 
 interface ITableBodyInnerProps {
   renderBodyItem?: RenderBodyItemFuncType;
@@ -13,7 +17,7 @@ interface ITableBodyInnerProps {
 
 export interface ITableBodyExternalProps {
   updateRow?: UpdateRowFuncType;
-  updateItems?(): void;
+  updateItems?: UpdateItemsFuncType;
   items?: any[];
   isPending?: boolean;
   className?: string;

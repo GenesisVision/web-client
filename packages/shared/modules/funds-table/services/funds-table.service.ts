@@ -18,6 +18,7 @@ import {
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
+import { MiddlewareDispatch } from "shared/utils/types";
 
 import * as fundsTableActions from "../actions/funds-table.actions";
 import {
@@ -30,7 +31,7 @@ import {
 export type GetFundsType = (
   filters: ComposeFiltersAllType
 ) => (
-  dispatch: any // temp to declare Dispatch type
+  dispatch: MiddlewareDispatch
 ) => void;
 export const getFunds: GetFundsType = filters => dispatch => {
   let requestFilters = dispatch(composeRequestFilters());

@@ -3,7 +3,7 @@ import "./date-range-filter.scss";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
-import { IUpdateFilterFunc } from "../../table.types";
+import { UpdateFilterFunc } from "../../table.types";
 import Filter from "../filter";
 import DateRangeFilterPopover from "./date-range-filter-popover";
 import {
@@ -14,7 +14,7 @@ import {
 interface IDateRangeFilterProps {
   name: string;
   value: any;
-  onChange?: IUpdateFilterFunc;
+  onChange?: UpdateFilterFunc;
   startLabel: string;
 }
 

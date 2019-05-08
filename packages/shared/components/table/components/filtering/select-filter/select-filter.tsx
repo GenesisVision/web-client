@@ -6,19 +6,20 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import Filter from "../filter";
 import { SelectFilterValue, TFilter } from "../filter.type";
 import SelectFilterPopover from "./select-filter-popover";
+import { SelectFilterType } from "./select-filter.constants";
 
 interface ISelectFilterProps {
   name: string;
   label: string;
-  value: any;
+  value: SelectFilterType;
   values: SelectFilterValue[];
-  onChange(value: TFilter<any>): void;
+  onChange(value: TFilter<SelectFilterType>): void;
 }
 
 class SelectFilter extends React.PureComponent<
   ISelectFilterProps & InjectedTranslateProps
 > {
-  renderValueText = (value: any) => {
+  renderValueText = (value: SelectFilterType) => {
     const { t, values } = this.props;
     const selectedValue = values.find(x => x.value === value);
     if (!selectedValue) return null;

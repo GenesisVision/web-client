@@ -20,7 +20,7 @@ import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
-  IUpdateFilterFunc
+  UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import {
   composeManagerDetailsUrl,
@@ -65,7 +65,7 @@ class TradesHistoryTable extends Component<
         isFetchOnMount={true}
         columns={COPYTRADING_OPEN_TRADES_COLUMNS}
         renderFilters={(
-          updateFilter: IUpdateFilterFunc,
+          updateFilter: UpdateFilterFunc,
           filtering: FilteringType
         ) => (
           <Fragment>

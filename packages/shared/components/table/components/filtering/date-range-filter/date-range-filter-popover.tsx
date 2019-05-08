@@ -9,26 +9,14 @@ import {
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 
-interface OwnProps {
-  value?: IDataRangeFilterValue;
-  changeFilter?(value: IDataRangeFilterValue): void;
-  startLabel: string;
-  cancel?(): void;
-}
-
-interface Props extends OwnProps, InjectedTranslateProps {}
-interface State extends IDataRangeFilterValue {
-  [key: string]: any;
-}
-
-class DateRangeFilterPopover extends React.PureComponent<Props, State> {
-  state: State = {
+class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
+  state = {
     type: this.props.value
       ? this.props.value.type
       : DATA_RANGE_FILTER_TYPES.ALL,
     dateStart: this.props.value ? this.props.value.dateStart : undefined,
     dateEnd: this.props.value ? this.props.value.dateEnd : undefined
-  } as State;
+  };
 
   handleChangeType = (type: DATA_RANGE_FILTER_TYPES) => () => {
     this.setState({
@@ -40,7 +28,7 @@ class DateRangeFilterPopover extends React.PureComponent<Props, State> {
     });
   };
   handleChangeDate = (type: keyof IDataRangeFilterValue, date: string) => {
-    this.setState({ [type]: date });
+    this.setState({ [type]: date } as Pick<State, keyof State>);
   };
   handleSubmit = () => {
     if (this.props.changeFilter) {
@@ -125,4 +113,16 @@ class DateRangeFilterPopover extends React.PureComponent<Props, State> {
   }
 }
 
-export default translate()(DateRangeFilterPopover);
+interface OwnProps {
+  value?: IDataRangeFilterValue;
+  changeFilter?(value: IDataRangeFilterValue): void;
+  startLabel: string;
+  cancel?(): void;
+}
+
+interface Props extends OwnProps, InjectedTranslateProps {}
+
+interface State extends IDataRangeFilterValue {}
+
+const DateRangeFilterPopover = translate()(_DateRangeFilterPopover);
+export default DateRangeFilterPopover;

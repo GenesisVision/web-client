@@ -4,22 +4,22 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  GetItemsFuncType,
+  TableToggleFavoriteType,
+  UpdateFilterFunc
+} from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
+import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-module";
 import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 
-import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-module";
 import {
   MANAGER_DEFAULT_FILTERS,
   MANAGER_FILTERING
 } from "../manager.constants";
 import { fetchManagerFunds } from "../services/manager.service";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import {
-  GetItemsFuncType,
-  IUpdateFilterFunc,
-  TableToggleFavoriteType
-} from "shared/components/table/components/table.types";
 
 interface Props {
   managerId: string;
@@ -57,7 +57,7 @@ class ManagerFunds extends React.Component<Props & InjectedTranslateProps> {
         paging={DEFAULT_PAGING}
         columns={FUNDS_TABLE_COLUMNS}
         renderFilters={(
-          updateFilter: IUpdateFilterFunc,
+          updateFilter: UpdateFilterFunc,
           filtering: FilteringType
         ) => (
           <DateRangeFilter
