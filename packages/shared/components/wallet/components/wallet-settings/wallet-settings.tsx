@@ -1,7 +1,8 @@
 import "./wallet-settings.scss";
 
-import { GVButton, GVSwitch } from "gv-react-components";
 import * as React from "react";
+import GVButton from "shared/components/gv-button";
+import GVSwitch from "shared/components/gv-selection/gv-switch";
 import GVTFees from "shared/components/gvt-fees/gvt-fees";
 
 const _WalletSettings: React.FC<Props> = ({
