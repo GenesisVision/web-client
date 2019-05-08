@@ -1,14 +1,14 @@
 import { LevelInfo } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import AboutLevelsComponent from "./about-levels/about-levels";
+import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { fetchInvestmentsLevels } from "../services/program-details.service";
+import AboutLevelsComponent from "./about-levels/about-levels";
 
 interface IInvestmentLimitsPopoverOwnProps {
   currency: CURRENCIES;

@@ -1,10 +1,10 @@
 import "./program-period-line.scss";
 
 import classNames from "classnames";
-import { GVProgramPeriod } from "gv-react-components";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVProgramPeriod from "shared/components/gv-program-period";
 import { STATUS } from "shared/constants/constants";
 
 const calcDuration = (start: number | Date, end: number | Date): string => {

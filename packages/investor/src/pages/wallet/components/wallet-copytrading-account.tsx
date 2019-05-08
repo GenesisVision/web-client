@@ -1,5 +1,4 @@
 import { CopyTradingAccountInfo } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
 import React, { Component, ComponentType, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -7,6 +6,7 @@ import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
+import GVButton from "shared/components/gv-button";
 import NotFoundPage from "shared/components/not-found/not-found";
 import Page from "shared/components/page/page";
 import WalletBalanceLoader from "shared/components/wallet/components/wallet-balance/wallet-balance-loader";

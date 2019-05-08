@@ -1,5 +1,4 @@
 import { ProgramBalanceChartElement } from "gv-api-web";
-import { GVColors } from "gv-react-components";
 import * as React from "react";
 import {
   Area,
@@ -10,6 +9,7 @@ import {
   YAxis
 } from "recharts";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
+import GVColors from "shared/components/gv-styles/gv-colors";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
 import ProgramBalanceTooltip from "./program-balance-tooltip";

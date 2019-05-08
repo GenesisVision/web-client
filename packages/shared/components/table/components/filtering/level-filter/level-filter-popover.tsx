@@ -1,7 +1,7 @@
-import { GVButton } from "gv-react-components";
 import { Range } from "rc-slider";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 
 interface ILevelFilterPopoverProps {
   value: number[];

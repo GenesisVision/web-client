@@ -1,6 +1,6 @@
-import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 
 const EmailPending = ({ onResendEmail, onContinue, t }) => {
   return (

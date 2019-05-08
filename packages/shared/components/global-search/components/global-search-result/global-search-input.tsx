@@ -1,7 +1,7 @@
 import "./global-search-input.scss";
 
-import { GVTextField } from "gv-react-components";
 import * as React from "react";
+import GVTextField from "shared/components/gv-text-field";
 import SearchIcon from "shared/components/icon/search-icon/search-icon";
 
 interface Props {
