@@ -1,5 +1,5 @@
 import { WalletData } from "gv-api-web";
-import React from "react";
+import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import translate from "react-i18next/src/translate";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
@@ -20,7 +20,7 @@ interface IWalletListButton {
   ): (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const WalletListButton: React.FC<
+const _WalletListButton: React.FC<
   IWalletListButton & InjectedTranslateProps
 > = ({
   t,
@@ -29,7 +29,7 @@ const WalletListButton: React.FC<
   handleOpenWithdrawPopup,
   handleOpenAddFundsPopup
 }) => (
-  <React.Fragment>
+  <>
     <Tooltip
       render={() => (
         <div className="wallet-list__tooltip-button">
@@ -81,7 +81,8 @@ const WalletListButton: React.FC<
         </Chip>
       </div>
     </Tooltip>
-  </React.Fragment>
+  </>
 );
 
-export default translate()(WalletListButton);
+const WalletListButton = React.memo(translate()(_WalletListButton));
+export default WalletListButton;
