@@ -1,4 +1,4 @@
-@import "../gv-styles/_colors.scss";
+@import "~shared/styles/_colors.scss";
 
 @mixin box-shadow($color) {
   box-shadow: 0 0.2em 0.5em 0 $color;
