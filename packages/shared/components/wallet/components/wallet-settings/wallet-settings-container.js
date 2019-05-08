@@ -1,9 +1,7 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-import { ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import {
@@ -13,16 +11,11 @@ import {
 import WalletSettings from "./wallet-settings";
 
 class WalletSettingsContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    const { isPayFeesWithGvt } = this.props;
-
-    this.state = {
-      isPayFeesWithGvt: isPayFeesWithGvt,
-      isPending: false
-    };
-  }
+  state = {
+    isPayFeesWithGvt: this.props.isPayFeesWithGvt,
+    isOpenGVTFees: false,
+    isPending: false
+  };
 
   catchError = err => {
     const { dispatch } = this.props;
@@ -52,9 +45,20 @@ class WalletSettingsContainer extends Component {
       .catch(this.catchError);
   };
 
+  handleOpenGVTFees = () => {
+    this.setState({ isOpenGVTFees: true });
+  };
+
+  handleCloseGVTFees = () => this.setState({ isOpenGVTFees: false });
+
+  handleSwitch = () => {
+    if (this.props.isPayFeesWithGvt) this.handleOff();
+    else this.handleOn();
+  };
+
   render() {
     const { t } = this.props;
-    const { isPayFeesWithGvt, isPending } = this.state;
+    const { isPayFeesWithGvt, isPending, isOpenGVTFees } = this.state;
 
     return (
       <WalletSettings
@@ -62,21 +66,14 @@ class WalletSettingsContainer extends Component {
         label={t("wallet-page.settings.label")}
         isPayFeesWithGvt={isPayFeesWithGvt}
         isPending={isPending}
-        role={ROLE_ENV}
-        onPayGVTFee={this.handleOn}
-        offPayGVTFee={this.handleOff}
+        handleOpenGVTFees={this.handleOpenGVTFees}
+        handleCloseGVTFees={this.handleCloseGVTFees}
+        handleSwitch={this.handleSwitch}
+        isOpenGVTFees={isOpenGVTFees}
       />
     );
   }
 }
-
-WalletSettingsContainer.propTypes = {
-  isPayFeesWithGvt: PropTypes.bool,
-  services: PropTypes.shape({
-    walletPayGVTFeeOff: PropTypes.func,
-    walletPayGVTFeeOn: PropTypes.func
-  })
-};
 
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
