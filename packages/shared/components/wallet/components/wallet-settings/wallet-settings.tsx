@@ -1,10 +1,10 @@
 import "./wallet-settings.scss";
 
 import { GVButton, GVSwitch } from "gv-react-components";
-import React from "react";
+import * as React from "react";
 import GVTFees from "shared/components/gvt-fees/gvt-fees";
 
-const WalletSettings = ({
+const _WalletSettings: React.FC<Props> = ({
   isOpenGVTFees,
   isPayFeesWithGvt,
   name,
@@ -26,6 +26,7 @@ const WalletSettings = ({
     </GVButton>
     <div className="wallet-settings__label">{label}</div>
     <GVSwitch
+      touched={false}
       className="wallet-settings__switch"
       name={name}
       value={isPayFeesWithGvt}
@@ -37,4 +38,16 @@ const WalletSettings = ({
   </div>
 );
 
+interface Props {
+  isOpenGVTFees: boolean;
+  isPayFeesWithGvt: boolean;
+  name: string;
+  label: string;
+  isPending: boolean;
+  handleOpenGVTFees: () => void;
+  handleCloseGVTFees: () => void;
+  handleSwitch: () => void;
+}
+
+const WalletSettings = React.memo(_WalletSettings);
 export default WalletSettings;
