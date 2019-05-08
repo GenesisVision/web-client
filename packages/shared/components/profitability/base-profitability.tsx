@@ -21,10 +21,9 @@ const BaseProfitability: React.FC<Props> = ({
       {children}
     </div>
   );
-  // }
 };
 
-export default BaseProfitability;
+export default React.memo(BaseProfitability);
 
 interface Props {
   className?: string;

@@ -38,7 +38,7 @@ const Profitability: React.FC<Props> = props => {
   );
 };
 
-export default Profitability;
+export default React.memo(Profitability);
 
 interface Props {
   className?: string;
