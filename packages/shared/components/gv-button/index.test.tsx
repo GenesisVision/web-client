@@ -10,25 +10,25 @@ describe("GVButton tests", () => {
   });
 
   test("should add primary class", () => {
-    const primaryClass = "gv-btn-primary";
+    const primaryClass = "gv-btn--primary";
     const gvButton = shallow(<GVButton color="primary">button</GVButton>);
     expect(gvButton.find(`.${primaryClass}`)).toHaveLength(1);
   });
 
   test("should add secondary class", () => {
-    const secondaryClass = "gv-btn-secondary";
+    const secondaryClass = "gv-btn--secondary";
     const gvButton = shallow(<GVButton color="secondary">button</GVButton>);
     expect(gvButton.find(`.${secondaryClass}`)).toHaveLength(1);
   });
 
   test("should add contained class", () => {
-    const containedClass = "gv-btn-contained";
+    const containedClass = "gv-btn--contained";
     const gvButton = shallow(<GVButton variant="contained">button</GVButton>);
     expect(gvButton.find(`.${containedClass}`)).toHaveLength(1);
   });
 
   test("should add outlined class", () => {
-    const outlinedClass = "gv-btn-outlined";
+    const outlinedClass = "gv-btn--outlined";
     const gvButton = shallow(<GVButton variant="outlined">button</GVButton>);
     expect(gvButton.find(`.${outlinedClass}`)).toHaveLength(1);
   });

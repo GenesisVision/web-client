@@ -11,12 +11,12 @@ describe("GVSwitch tests", () => {
 
   test("should have label", () => {
     const switchComponent = shallow(<GVSwitch name="switch" label="label" />);
-    const labelClass = "gv-switch-label";
+    const labelClass = "gv-switch__label";
     expect(switchComponent.find(`.${labelClass}`)).toHaveLength(1);
   });
 
   test("should render error", () => {
-    const errorClass = "gv-switch-error";
+    const errorClass = "gv-switch__error";
     const switchComponent = shallow(
       <GVSwitch name="switch" touched={true} error="error" />
     );

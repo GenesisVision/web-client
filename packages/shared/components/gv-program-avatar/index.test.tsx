@@ -26,7 +26,7 @@ describe("GVProgramAvatar tests", () => {
   });
 
   test("should add level prop", () => {
-    const levelClassName = "program-avatar-level";
+    const levelClassName = "program-avatar__level";
     const programAvatar = shallow(
       <GVProgramAvatar url="example.com/image.jpg" alt="avatar" level={1} />
     );
@@ -43,7 +43,7 @@ describe("GVProgramAvatar tests", () => {
         onClickLevel={handleClick}
       />
     );
-    programAvatar.find(`.program-avatar-level`).simulate("click");
+    programAvatar.find(`.program-avatar__level`).simulate("click");
     expect(handleClick).toBeCalled();
   });
 
@@ -57,7 +57,7 @@ describe("GVProgramAvatar tests", () => {
         onMouseEnterLevel={handleEnter}
       />
     );
-    programAvatar.find(`.program-avatar-level`).simulate("mouseEnter");
+    programAvatar.find(`.program-avatar__level`).simulate("mouseEnter");
     expect(handleEnter).toBeCalled();
   });
 
@@ -71,7 +71,7 @@ describe("GVProgramAvatar tests", () => {
         onMouseOverLevel={handleOver}
       />
     );
-    programAvatar.find(`.program-avatar-level`).simulate("mouseOver");
+    programAvatar.find(`.program-avatar__level`).simulate("mouseOver");
     expect(handleOver).toBeCalled();
   });
 
@@ -85,7 +85,7 @@ describe("GVProgramAvatar tests", () => {
         onMouseLeaveLevel={handleLeave}
       />
     );
-    programAvatar.find(`.program-avatar-level`).simulate("mouseLeave");
+    programAvatar.find(`.program-avatar__level`).simulate("mouseLeave");
     expect(handleLeave).toBeCalled();
   });
 });

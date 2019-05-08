@@ -11,7 +11,7 @@ describe("Period render tests", () => {
     const periodComponent = shallow(
       <GVProgramPeriod start={start} end={end} value={value} />
     );
-    const periodPieClass = "gv-program-period-pie";
+    const periodPieClass = "gv-program-period--pie";
     expect(periodComponent.find(`.${periodPieClass}`)).toHaveLength(1);
   });
 
@@ -22,7 +22,7 @@ describe("Period render tests", () => {
     const periodComponent = shallow(
       <GVProgramPeriod start={start} end={end} value={value} variant="line" />
     );
-    const periodLineClass = "gv-program-period-line";
+    const periodLineClass = "gv-program-period--line";
     expect(periodComponent.find(`.${periodLineClass}`)).toHaveLength(1);
   });
 });

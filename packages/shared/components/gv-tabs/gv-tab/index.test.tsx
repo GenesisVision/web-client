@@ -18,7 +18,7 @@ describe("GVTab tests", () => {
   });
 
   test("should have active class", () => {
-    const tabActiveClass = "gv-tab-active";
+    const tabActiveClass = "gv-tab--active";
     const gvTab = shallow(<GVTab label="tab" value="tab" selected />);
     expect(gvTab.find(`.${tabActiveClass}`)).toHaveLength(1);
   });
@@ -31,14 +31,14 @@ describe("GVTab tests", () => {
 
   test("should have count", () => {
     const count = 1;
-    const countClass = "gv-tab-count";
+    const countClass = "gv-tab__count";
     const gvTab = shallow(<GVTab count={count} value="tab" label="tab" />);
     expect(gvTab.find(`.${countClass}`).text()).toBe(`${count}`);
   });
 
   test("should have zero count", () => {
     const count = 0;
-    const countClass = "gv-tab-count";
+    const countClass = "gv-tab__count";
     const gvTab = shallow(<GVTab count={count} value="tab" label="tab" />);
     expect(gvTab.find(`.${countClass}`).text()).toBe(`${count}`);
   });

@@ -22,7 +22,7 @@ describe("GVTextField tests", () => {
   });
 
   test("should render error", () => {
-    const errorClass = "gv-text-field-error";
+    const errorClass = "gv-text-field__error";
     const textField = shallow(
       <GVTextField name="textInput" touched={true} error="error" />
     );
@@ -30,7 +30,7 @@ describe("GVTextField tests", () => {
   });
 
   test("should render adornment", () => {
-    const adornmentClass = "gv-text-field-adornment";
+    const adornmentClass = "gv-text-field__adornment";
     const textField = shallow(
       <GVTextField name="textInput" adornment="adornment" />
     );
@@ -38,7 +38,7 @@ describe("GVTextField tests", () => {
   });
 
   test("should render adornment at start", () => {
-    const adornmentClass = "gv-text-field-adornment-start";
+    const adornmentClass = "gv-text-field__adornment--start";
     const textField = shallow(
       <GVTextField
         name="textInput"
