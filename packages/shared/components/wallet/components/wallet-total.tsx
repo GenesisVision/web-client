@@ -35,7 +35,7 @@ class WalletTotal extends React.PureComponent<Props & WalletRouteProps> {
         <div className="wallet-balance">
           <div className="wallet-balance__wrapper">
             <h1 className="wallet-balance__title">{t("wallet-page.title")}</h1>
-            {isPayFeesWithGvt && (
+            {isPayFeesWithGvt !== undefined && (
               <WalletSettingsContainer isPayFeesWithGvt={isPayFeesWithGvt} />
             )}
           </div>
