@@ -1,10 +1,11 @@
 import {
   CancelablePromise,
   CopyTradingAccountInfo,
+  MultiWalletExternalTransaction,
   WalletMultiAvailable
 } from "gv-api-web";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import { mapToTableItems } from "shared/components/table/helpers/mapper";
+import { TableItems, mapToTableItems } from "shared/components/table/helpers/mapper";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import signalApi from "shared/services/api-client/signal-api";
@@ -112,3 +113,17 @@ export const fetchCopytradingAccounts = () =>
   signalApi
     .v10SignalAccountsGet(authService.getAuthArg())
     .then(mapToTableItems<CopyTradingAccountInfo>("accounts"));
+
+export const fetchMultiTransactionsExternal = (
+  currency?: string,
+  filters?: FilteringType
+): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
+  const authorization = authService.getAuthArg();
+  const filtering = {
+    ...filters,
+    currency
+  };
+  return walletApi
+    .v10WalletMultiTransactionsExternalGet(authorization, filtering)
+    .then(mapToTableItems<MultiWalletExternalTransaction>("transactions"));
+};
