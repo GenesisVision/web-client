@@ -35,7 +35,6 @@ class _WalletContainer extends React.PureComponent<Props, State> {
 
   render() {
     const { t, currency, filters, location } = this.props;
-    console.log(filters);
     const { tab } = this.state;
     return (
       <Surface className="wallet-container">
