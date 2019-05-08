@@ -1,12 +1,13 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { FundAssetsListInfo } from "gv-api-web";
-import { GVTab, GVTabs } from "gv-react-components";
 import * as React from "react";
 import { SyntheticEvent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import Surface from "shared/components/surface/surface";

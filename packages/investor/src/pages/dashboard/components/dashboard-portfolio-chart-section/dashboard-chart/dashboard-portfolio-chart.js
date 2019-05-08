@@ -1,4 +1,3 @@
-import { GVColors } from "gv-react-components";
 import React, { PureComponent } from "react";
 import {
   Area,
@@ -14,6 +13,7 @@ import {
   ChartGradient,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
+import GVColors from "shared/components/gv-styles/gv-colors";
 
 import { BAR_COLORS } from "./dashboard-chart.constants";
 import DasboardPortfolioTooltip from "./dashboard-portfoio-tooltip";

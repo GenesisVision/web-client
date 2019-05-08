@@ -1,6 +1,6 @@
 import { ProgramTransactionDetails } from "gv-api-web";
-import { GVProgramAvatar } from "gv-react-components";
 import * as React from "react";
+import GVProgramAvatar from "shared/components/gv-program-avatar";
 
 const TransactionAsset = (props: { data: ProgramTransactionDetails }) => {
   return (

@@ -1,11 +1,13 @@
 import copy from "copy-to-clipboard";
 import { withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
 import GVqr from "shared/components/gv-qr/gv-qr";
+import GVTextField from "shared/components/gv-text-field";
 import CopyIcon from "shared/components/icon/copy-icon";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";

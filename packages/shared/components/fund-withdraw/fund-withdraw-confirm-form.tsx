@@ -1,9 +1,9 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { GVButton } from "gv-react-components";
 import { ComponentType, PureComponent } from "react";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
 import { formatValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 

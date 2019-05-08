@@ -1,9 +1,9 @@
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
+import GVButton from "shared/components/gv-button";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 
 type AssetDescription = {

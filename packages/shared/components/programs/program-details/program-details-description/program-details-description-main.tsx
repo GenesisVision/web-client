@@ -1,13 +1,13 @@
 import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import React, { Component, ComponentType } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
+import GVButton from "shared/components/gv-button";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS,

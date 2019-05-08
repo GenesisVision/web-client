@@ -4,11 +4,11 @@ import {
   DashboardPortfolioEvent,
   DashboardPortfolioEvents as DashboardPortfolioEventsType
 } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 import { ROLE_ENV } from "shared/constants/constants";

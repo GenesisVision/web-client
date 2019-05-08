@@ -1,8 +1,8 @@
-import { GVButton } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import GVButton from "shared/components/gv-button";
 
 class LogoutButtonContainer extends PureComponent {
   state = {

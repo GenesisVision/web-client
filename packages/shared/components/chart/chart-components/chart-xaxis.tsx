@@ -1,6 +1,6 @@
-import { GVColors } from "gv-react-components";
 import * as React from "react";
 import { XAxis } from "recharts";
+import GVColors from "shared/components/gv-styles/gv-colors";
 
 import { composeTicks, dateTickFormatter } from "./chart-components.helpers";
 

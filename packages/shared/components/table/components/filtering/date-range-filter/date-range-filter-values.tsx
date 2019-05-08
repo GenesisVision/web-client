@@ -1,8 +1,8 @@
-import { GVTextField } from "gv-react-components";
 import moment, { MomentInput } from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
+import GVTextField from "shared/components/gv-text-field";
 
 import {
   DATA_RANGE_FILTER_TYPES,
@@ -86,29 +86,35 @@ class DateRangeFilterValues extends React.PureComponent<
       default:
         return (
           <>
-            <GVTextField
-              wrapperClassName="date-range-filter__date-input"
-              type="text"
-              name="dateStart"
-              label={t("filters.date-range.start")}
-              value={String(dateStart)}
-              InputComponent={GVDatePicker}
-              horizontal="right"
-              maxDate={new Date()}
-              onChange={this.handleOnChange("dateStart")}
-            />
-            <GVTextField
-              wrapperClassName="date-range-filter__date-input"
-              type="text"
-              name="dateEnd"
-              label={t("filters.date-range.end")}
-              value={String(dateEnd)}
-              horizontal="right"
-              InputComponent={GVDatePicker}
-              minDate={dateStart}
-              maxDate={new Date()}
-              onChange={this.handleOnChange("dateEnd")}
-            />
+            {
+              //@ts-ignore
+              <GVTextField
+                wrapperClassName="date-range-filter__date-input"
+                type="text"
+                name="dateStart"
+                label={t("filters.date-range.start")}
+                value={String(dateStart)}
+                InputComponent={GVDatePicker}
+                horizontal="right"
+                maxDate={new Date()}
+                onChange={this.handleOnChange("dateStart")}
+              />
+            }
+            {
+              //@ts-ignore
+              <GVTextField
+                wrapperClassName="date-range-filter__date-input"
+                type="text"
+                name="dateEnd"
+                label={t("filters.date-range.end")}
+                value={String(dateEnd)}
+                horizontal="right"
+                InputComponent={GVDatePicker}
+                minDate={dateStart}
+                maxDate={new Date()}
+                onChange={this.handleOnChange("dateEnd")}
+              />
+            }
           </>
         );
     }

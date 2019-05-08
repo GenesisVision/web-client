@@ -1,10 +1,10 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { GVButton } from "gv-react-components";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
+import GVButton from "shared/components/gv-button";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 

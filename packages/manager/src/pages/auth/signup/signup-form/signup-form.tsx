@@ -1,11 +1,13 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { RegisterManagerViewModel } from "gv-api-web";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
+import GVButton from "shared/components/gv-button";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 
 import validationSchema from "./signup-form.validators";

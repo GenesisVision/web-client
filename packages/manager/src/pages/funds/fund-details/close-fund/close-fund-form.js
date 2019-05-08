@@ -1,9 +1,11 @@
 import { withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import { object, string } from "yup";
 
 const CloseFundForm = ({

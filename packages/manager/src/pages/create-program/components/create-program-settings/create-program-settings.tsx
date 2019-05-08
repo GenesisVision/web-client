@@ -9,12 +9,6 @@ import {
   ProgramsInfo,
   WalletData
 } from "gv-api-web";
-import {
-  GVButton,
-  GVFormikField,
-  GVProgramPeriod,
-  GVTextField
-} from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
@@ -22,7 +16,11 @@ import { compose } from "redux";
 import InputImage, {
   IImageValue
 } from "shared/components/form/input-image/input-image";
+import GVButton from "shared/components/gv-button";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVProgramPeriod from "shared/components/gv-program-period";
+import GVTextField from "shared/components/gv-text-field";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";

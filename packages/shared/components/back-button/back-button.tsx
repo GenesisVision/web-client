@@ -1,11 +1,11 @@
 import "./back-button.scss";
 
 import { CallHistoryMethodAction, goBack, push } from "connected-react-router";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
+import GVButton from "shared/components/gv-button";
 import RootState from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 

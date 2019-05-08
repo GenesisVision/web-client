@@ -1,13 +1,14 @@
-import { GVTab, GVTabs } from "gv-react-components";
+import { SearchViewModel } from "gv-api-web";
 import * as React from "react";
+import { SyntheticEvent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 
 import FundsTable from "./funds-table";
 import ManagersTable from "./managers-table";
 import ProgramsTable from "./programs-table";
-import { SyntheticEvent } from "react";
-import { SearchViewModel } from "gv-api-web";
 import SearchResultTable from "./search-result-table";
 
 export enum SEARCH_TABS {
