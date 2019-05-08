@@ -28,7 +28,7 @@ class _WalletSettingsContainer extends React.PureComponent<Props, State> {
   handleCloseGVTFees = () => this.setState({ isOpenGVTFees: false });
 
   handleSwitch = () => {
-    const { isPayFeesWithGvt } = this.props;
+    const { isPayFeesWithGvt } = this.state;
     const method = isPayFeesWithGvt ? offPayFeesWithGvt : onPayFeesWithGvt;
     this.setState({ isPending: true });
     return method()
