@@ -1,7 +1,6 @@
 import "./investment-unauth-popup.scss";
 
 import classnames from "classnames";
-import { GVButton } from "gv-react-components";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
@@ -9,6 +8,7 @@ import DepositTop, {
   DepositTopProps
 } from "shared/components/deposit/components/deposit-top";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import GVButton from "shared/components/gv-button";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/pages/login.routes";
 

@@ -1,11 +1,12 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import { GVTab, GVTabs } from "gv-react-components";
 import * as React from "react";
 import { SyntheticEvent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import ProgramTrades from "shared/components/programs/program-details/program-history/program-trades";
 import Surface from "shared/components/surface/surface";

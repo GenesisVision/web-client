@@ -1,15 +1,13 @@
 import { withFormik } from "formik";
-import {
-  GVButton,
-  GVFormikField,
-  GVProgramPeriod,
-  GVTextField
-} from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputImage from "shared/components/form/input-image/input-image";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVProgramPeriod from "shared/components/gv-program-period";
+import GVTextField from "shared/components/gv-text-field";
 import { FUND, PROGRAM } from "shared/constants/constants";
 import ProgramDefaultImage from "shared/media/program-default-image.svg";
 

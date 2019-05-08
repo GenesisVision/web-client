@@ -1,11 +1,11 @@
 import "./profile-widget.scss";
 
 import classNames from "classnames";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
+import GVButton from "shared/components/gv-button";
 import { DetailsIcon } from "shared/components/icon/details-icon";
 import { LogoutIcon } from "shared/components/icon/logout-icon";
 import { SettingsIcon } from "shared/components/icon/settings-icon";

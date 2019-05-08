@@ -1,8 +1,8 @@
 import { PasswordModel, RecoveryCodesViewModel } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
+import GVButton from "shared/components/gv-button";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 import { SetSubmittingType } from "shared/utils/types";

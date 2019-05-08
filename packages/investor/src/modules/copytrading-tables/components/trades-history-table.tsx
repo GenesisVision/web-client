@@ -1,5 +1,4 @@
 import { OrderSignalModel, TradesSignalViewModel } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component, ComponentType, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";

@@ -1,9 +1,9 @@
 import "./wallet-balance.scss";
 
-import { GVColors } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import GVColors from "shared/components/gv-styles/gv-colors";
 import PieContainer from "shared/components/pie-container/pie-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";

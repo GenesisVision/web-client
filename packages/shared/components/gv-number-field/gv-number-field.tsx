@@ -1,8 +1,8 @@
 import { FormikActions } from "formik";
-import { GVTextField } from "gv-react-components";
 import { GVTextFieldProps } from "gv-react-components/dist/gv-text-field";
 import * as React from "react";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
+import GVTextField from "shared/components/gv-text-field";
 
 class GVNumberFiled extends React.PureComponent<Props, State> {
   state = {
@@ -18,6 +18,7 @@ class GVNumberFiled extends React.PureComponent<Props, State> {
     const { emptyInit, name, value, ...props } = this.props;
     const setEmpty = emptyInit && this.state.init;
     return (
+      //@ts-ignore
       <GVTextField
         {...props}
         value={setEmpty ? "" : value}

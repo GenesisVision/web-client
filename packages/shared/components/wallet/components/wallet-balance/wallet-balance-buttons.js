@@ -1,8 +1,8 @@
 import "./wallet-balance.scss";
 
-import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
 

@@ -1,7 +1,8 @@
-import { GVTab, GVTabs } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import replaceParams from "shared/utils/replace-params";
 
 const _NavigationTabs: React.FC<Props> = ({

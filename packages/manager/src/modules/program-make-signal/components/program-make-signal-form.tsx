@@ -1,9 +1,9 @@
 import { FormikProps, withFormik } from "formik";
-import { GVButton } from "gv-react-components";
 import SignalsFeeFormPartial from "pages/create-program/components/create-program-settings/signals-fee-form.partial";
 import React, { ComponentType, FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { makeSignalValidationSchema } from "./program-make-signal.validators";

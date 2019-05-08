@@ -1,5 +1,4 @@
 import { ChartSimple } from "gv-api-web";
-import { GVColors } from "gv-react-components";
 import * as React from "react";
 import {
   Area,
@@ -16,6 +15,7 @@ import {
   getStrokeColor,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
+import GVColors from "shared/components/gv-styles/gv-colors";
 
 import FundProfitTooltip from "./fund-profit-tooltip";
 
