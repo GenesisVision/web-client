@@ -184,7 +184,8 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__subheading {
-    @include vertical-paddings($padding-big, $padding-small);
+    @include adaptive-padding(top, $padding-big);
+    @include adaptive-padding(bottom, $padding-small);
     @include font-size($font-size-h4);
     font-weight: bold;
     letter-spacing: 0.21px;

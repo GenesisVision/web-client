@@ -8,10 +8,6 @@ $create-icon-width: 140px;
 .dashboard-assets {
   &__head {
     padding: 0 $padding-xsmall;
-
-    @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-small;
-    }
   }
 
   &__table {

@@ -7,10 +7,6 @@
 
   &__heading {
     padding: 0 $padding-xsmall;
-
-    @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-small;
-    }
   }
 
   &__title {
@@ -19,10 +15,6 @@
   }
   &__tabs {
     padding: 0 $padding-xsmall;
-
-    @include media-breakpoint-landscape-phone {
-      padding: 0 $padding-small;
-    }
     .gv-tab {
       @include font-size($font-size-paragraph);
     }
