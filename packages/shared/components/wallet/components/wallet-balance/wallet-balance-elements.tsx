@@ -57,16 +57,16 @@ const _WalletBalanceElements: React.FC<IWalletBalanceElementsProps> = ({
 const _WalletBalanceElement: React.FC<IWalletBalanceElementProps> = ({
   pieContainer = true,
   value,
-  totalValue,
+  totalValue = value,
   currency,
   title,
-  color
+  color = GVColors.$primaryColor
 }) => (
   <div className="wallet-balance__statistic-item">
     {pieContainer && (
       <PieContainer
-        value={getPercentageValue(value, totalValue!)}
-        color={color!}
+        value={getPercentageValue(value, totalValue)}
+        color={color}
       />
     )}
     <StatisticItem
