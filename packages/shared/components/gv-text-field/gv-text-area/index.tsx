@@ -1,3 +1,5 @@
+import "./style.scss";
+
 import classnames from "classnames";
 import React from "react";
 
@@ -73,7 +75,7 @@ class GVTextArea extends React.Component<GVTextAreaProps, GVTextAreaState> {
     return (
       <div className={classnames("gv-text-area", textAreaClassName)}>
         <textarea
-          className={classnames("gv-text-area-hidden", props.className)}
+          className={classnames("gv-text-area__hidden", props.className)}
           readOnly
           ref={this.shadowRef}
           rows={props.rows}

@@ -17,7 +17,7 @@ const GVProgramDefaultAvatar: React.SFC<GVProgramDefaultAvatarProps> = ({
       height="80"
       fill="none"
       viewBox="0 0 80 80"
-      className={classnames(imageClassName, "program-avatar-default-image")}
+      className={classnames(imageClassName, "program-avatar__default-image")}
     >
       <rect width="80" height="80" fill={color} rx="8" />
       <g fill="#1B232B" opacity=".3">

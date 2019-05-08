@@ -1,3 +1,5 @@
+import "./style.scss";
+
 import classnames from "classnames";
 import React from "react";
 
@@ -60,7 +62,10 @@ class GVTextField extends React.Component<GVTextFieldProps, GVTextFieldState> {
     this.props.touched &&
     this.props.error && (
       <div
-        className={classnames("gv-text-field-error", this.props.errorClassName)}
+        className={classnames(
+          "gv-text-field__error",
+          this.props.errorClassName
+        )}
       >
         {this.props.error}
       </div>
@@ -71,10 +76,10 @@ class GVTextField extends React.Component<GVTextFieldProps, GVTextFieldState> {
     return (
       <label
         className={classnames(
-          "gv-text-field-label",
+          "gv-text-field__label",
           this.props.labelClassName,
           {
-            "gv-text-field-label-shrink":
+            "gv-text-field__label--shrink":
               this.state.focused ||
               this.props.adornment ||
               (this.props.value !== undefined && this.props.value !== "")
@@ -91,9 +96,9 @@ class GVTextField extends React.Component<GVTextFieldProps, GVTextFieldState> {
     if (!adornment) return null;
     return (
       <div
-        className={classnames("gv-text-field-adornment", adornmentClassName, {
-          "gv-text-field-adornment-start": adornmentPosition === "start",
-          "gv-text-field-adornment-end": adornmentPosition === "end"
+        className={classnames("gv-text-field__adornment", adornmentClassName, {
+          "gv-text-field__adornment--start": adornmentPosition === "start",
+          "gv-text-field__adornment--end": adornmentPosition === "end"
         })}
       >
         {adornment}
@@ -130,7 +135,7 @@ class GVTextField extends React.Component<GVTextFieldProps, GVTextFieldState> {
     return (
       <Input
         type={type}
-        className={classnames("gv-text-field-input", inputClassName)}
+        className={classnames("gv-text-field__input", inputClassName)}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         {...otherProps}
@@ -146,13 +151,13 @@ class GVTextField extends React.Component<GVTextFieldProps, GVTextFieldState> {
       error
     } = this.props;
     return (
-      <div className={classnames("gv-text-field-wrapper", wrapperClassName)}>
+      <div className={classnames("gv-text-field__wrapper", wrapperClassName)}>
         {this.renderLabel()}
         <div
           className={classnames("gv-text-field", className, {
-            "gv-text-field-disabled": disabled,
-            "gv-text-field-invalid": touched && error,
-            "gv-text-field-focused": this.state.focused
+            "gv-text-field--disabled": disabled,
+            "gv-text-field--invalid": touched && error,
+            "gv-text-field--focused": this.state.focused
           })}
         >
           {this.renderInput()}

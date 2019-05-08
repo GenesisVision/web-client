@@ -1,3 +1,5 @@
+import "./style.scss";
+
 import classnames from "classnames";
 import moment from "moment";
 import React from "react";
@@ -57,7 +59,7 @@ const GVProgramPeriod: React.SFC<GVProgramPeriodProps> = ({
         viewBox="0 0 42 42"
         className={classnames(
           "gv-program-period",
-          "gv-program-period-pie",
+          "gv-program-period--pie",
           className
         )}
       >
@@ -87,12 +89,12 @@ const GVProgramPeriod: React.SFC<GVProgramPeriodProps> = ({
       <div
         className={classnames(
           "gv-program-period",
-          "gv-program-period-line",
+          "gv-program-period--line",
           className
         )}
       >
         <div
-          className={classnames("gv-program-period-value", valueClassName)}
+          className={classnames("gv-program-period__value", valueClassName)}
           style={{ width: `${valuePercent}%` }}
         />
       </div>

@@ -1,3 +1,5 @@
+import "./style.scss";
+
 import classnames from "classnames";
 import React from "react";
 
@@ -36,7 +38,7 @@ const GVTab: React.SFC<GVTabProps> = ({
   const renderCount = () => {
     if (count === undefined) return null;
     return (
-      <span className={classnames(countClassName, "gv-tab-count")}>
+      <span className={classnames(countClassName, "gv-tab__count")}>
         {count}
       </span>
     );
@@ -49,7 +51,7 @@ const GVTab: React.SFC<GVTabProps> = ({
   return (
     <div
       className={classnames(className, "gv-tab", {
-        "gv-tab-active": selected
+        "gv-tab--active": selected
       })}
       onClick={handleChange}
     >

@@ -1,3 +1,5 @@
+import "./style.scss";
+
 import classnames from "classnames";
 import React from "react";
 
@@ -50,7 +52,7 @@ class GVProgramAvatar extends React.Component<
       );
     return (
       <img
-        className={classnames(imageClassName, "program-avatar-image")}
+        className={classnames(imageClassName, "program-avatar__image")}
         src={url}
         alt={alt}
         onError={this.handleError}
@@ -74,14 +76,14 @@ class GVProgramAvatar extends React.Component<
         onMouseEnter={onMouseEnterLevel}
         onMouseLeave={onMouseLeaveLevel}
         onClick={onClickLevel}
-        className={classnames("program-avatar-level", levelClassName, {
-          "program-avatar-level1]": level === 1,
-          "program-avatar-level2]": level === 2,
-          "program-avatar-level3]": level === 3,
-          "program-avatar-level4]": level === 4,
-          "program-avatar-level5]": level === 5,
-          "program-avatar-level6]": level === 6,
-          "program-avatar-level7]": level === 7
+        className={classnames("program-avatar__level", levelClassName, {
+          "program-avatar__level--1": level === 1,
+          "program-avatar__level--2": level === 2,
+          "program-avatar__level--3": level === 3,
+          "program-avatar__level--4": level === 4,
+          "program-avatar__level--5": level === 5,
+          "program-avatar__level--6": level === 6,
+          "program-avatar__level--7": level === 7
         })}
       >
         {level}
@@ -95,9 +97,9 @@ class GVProgramAvatar extends React.Component<
     return (
       <div
         className={classnames("program-avatar", className, {
-          "program-avatar-small": size === "small",
-          "program-avatar-medium": size === "medium",
-          "program-avatar-big": size === "big"
+          "program-avatar--small": size === "small",
+          "program-avatar--medium": size === "medium",
+          "program-avatar--big": size === "big"
         })}
       >
         {this.renderImage()}

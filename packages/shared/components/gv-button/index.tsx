@@ -1,3 +1,5 @@
+import "./style.scss";
+
 import classnames from "classnames";
 import React from "react";
 
@@ -25,11 +27,11 @@ const GVButton: React.SFC<GVButtonProps> = ({
   children
 }) => {
   const classname = classnames("gv-btn", className, {
-    "gv-btn-primary": color === "primary",
-    "gv-btn-secondary": color === "secondary",
-    "gv-btn-text": variant === "text",
-    "gv-btn-outlined": variant === "outlined",
-    "gv-btn-contained": variant === "contained"
+    "gv-btn--primary": color === "primary",
+    "gv-btn--secondary": color === "secondary",
+    "gv-btn--text": variant === "text",
+    "gv-btn--outlined": variant === "outlined",
+    "gv-btn--contained": variant === "contained"
   });
   return (
     <button

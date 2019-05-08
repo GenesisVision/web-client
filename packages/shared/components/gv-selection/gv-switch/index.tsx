@@ -1,3 +1,5 @@
+import "./style.scss";
+
 import classnames from "classnames";
 import React from "react";
 
@@ -39,7 +41,7 @@ class GVSwitch extends React.Component<GVSwitchProps> {
     if (!label) return null;
 
     return (
-      <span className="gv-switch-label" onClick={this.handleClick}>
+      <span className="gv-switch__label" onClick={this.handleClick}>
         {label}
       </span>
     );
@@ -49,7 +51,7 @@ class GVSwitch extends React.Component<GVSwitchProps> {
     const { touched, error } = this.props;
     if (!touched || !error) return null;
 
-    return <span className="gv-switch-error">{error}</span>;
+    return <span className="gv-switch__error">{error}</span>;
   };
 
   render() {
@@ -67,27 +69,27 @@ class GVSwitch extends React.Component<GVSwitchProps> {
         {this.renderLabel()}
         <span
           className={classnames("gv-switch", className, {
-            "gv-switch-checked": value,
-            "gv-switch-primary": color === "primary",
-            "gv-switch-secondary": color === "secondary",
-            "gv-switch-disabled": disabled
+            "gv-switch--checked": value,
+            "gv-switch--primary": color === "primary",
+            "gv-switch--secondary": color === "secondary",
+            "gv-switch--disabled": disabled
           })}
           onClick={this.handleClick}
         >
-          <span className="gv-switch-input-wrapper">
-            <span className="gv-switch-handler" />
+          <span className="gv-switch__input-wrapper">
+            <span className="gv-switch__handler" />
             <input
               ref={this.checkbox}
               type="checkbox"
               name={name}
-              className="gv-switch-input"
+              className="gv-switch__input"
               checked={value}
               onClick={this.handleInputClick}
               disabled={disabled}
               {...other}
             />
           </span>
-          <span className="gv-switch-track" />
+          <span className="gv-switch__track" />
         </span>
         {this.renderError()}
       </span>
