@@ -114,19 +114,20 @@ enum TABS {
   EXTERNAL_TAB = "#external"
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends InjectedTranslateProps, OwnProps {
+  location: Location;
+}
 
 interface OwnProps {
   currency: CURRENCIES;
   filters: MultiWalletFilters;
-  location: Location;
 }
 
 interface State {
   tab: TABS;
 }
 
-const WalletContainer = compose(
+const WalletContainer = compose<React.ComponentType<OwnProps>>(
   translate(),
   withRouter
 )(_WalletContainer);
