@@ -37,7 +37,7 @@ const _WalletBalanceElements: React.FC<IWalletBalanceElementsProps> = ({
       totalValue={total}
       title={t("wallet-page.available")}
       currency={currency}
-      color={InnerColors.$pieAvailableColor}
+      color={$pieAvailableColor}
     />
     <WalletBalanceElement
       value={invested}
@@ -51,7 +51,7 @@ const _WalletBalanceElements: React.FC<IWalletBalanceElementsProps> = ({
       totalValue={total}
       title={t("wallet-page.pending")}
       currency={currency}
-      color={InnerColors.$piePendingColor}
+      color={$piePendingColor}
     />
   </div>
 );
