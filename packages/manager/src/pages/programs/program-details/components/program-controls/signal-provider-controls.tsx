@@ -1,10 +1,10 @@
 import "./signal-provider-controls.scss";
 
-import { GVButton } from "gv-react-components";
 import ProgramMakeSignalContainer from "modules/program-make-signal/program-make-signal.container";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
+import GVButton from "shared/components/gv-button";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 
 interface ISignalProviderControlOwnProps {

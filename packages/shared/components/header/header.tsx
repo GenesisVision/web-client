@@ -1,10 +1,10 @@
 import "./header.scss";
 
 import { ProfileHeaderViewModel } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { TranslationFunction, translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import GVButton from "shared/components/gv-button";
 import { Icon } from "shared/components/icon/icon";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Navigation from "shared/components/navigation/navigation";

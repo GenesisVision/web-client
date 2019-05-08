@@ -1,6 +1,6 @@
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 
 import { SelectFilterValue } from "../filter.type";
 import { ComposedRequestSelectValue } from "./select-filter.constants";

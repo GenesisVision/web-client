@@ -1,7 +1,8 @@
-import { GVButton, GVFormikField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
 import GVNumberFiled from "shared/components/gv-number-field/gv-number-field";
 
 const _InputAmountField: React.FC<Props> = ({

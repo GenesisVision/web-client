@@ -3,17 +3,15 @@ import "shared/components/deposit-details/deposit-details.scss";
 import "./create-fund-settings.scss";
 
 import { Field, withFormik } from "formik";
-import {
-  GVButton,
-  GVFormikField,
-  GVProgramPeriod,
-  GVTextField
-} from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
 import InputImage from "shared/components/form/input-image/input-image";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVProgramPeriod from "shared/components/gv-program-period";
+import GVTextField from "shared/components/gv-text-field";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
@@ -165,7 +163,7 @@ class CreateFundSettings extends React.Component {
         deposit
       })
         .validate(values)
-        .then(res => {}, () => onValidateError());
+        .then(() => {}, () => onValidateError());
 
       handleSubmit(values, {
         setSubmitting

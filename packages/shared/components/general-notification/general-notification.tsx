@@ -1,7 +1,7 @@
 import "./general-notification.scss";
 
-import { GVSwitch } from "gv-react-components";
 import * as React from "react";
+import GVSwitch from "shared/components/gv-selection/gv-switch";
 
 export type Setting = {
   id?: string;

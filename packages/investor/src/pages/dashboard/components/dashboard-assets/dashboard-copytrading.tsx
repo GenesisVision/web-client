@@ -1,5 +1,4 @@
 import { SignalDetails } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import moment from "moment";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
 import React, { Component, Fragment } from "react";
@@ -7,6 +6,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";

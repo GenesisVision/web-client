@@ -1,5 +1,4 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -7,6 +6,7 @@ import {
   IProgramDetailContext,
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
+import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";

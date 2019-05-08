@@ -2,13 +2,13 @@ import "./dashboard-programs.scss";
 
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import GVButton from "shared/components/gv-button";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";

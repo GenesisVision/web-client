@@ -1,6 +1,7 @@
-import { GVTab, GVTabs } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 
 const Tabs: React.FC<Props & InjectedTranslateProps> = ({ t, authPartUrl }) => {

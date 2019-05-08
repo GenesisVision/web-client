@@ -2,10 +2,12 @@ import "./about.scss";
 
 import { FormikProps, withFormik } from "formik";
 import { UpdateProfileViewModel } from "gv-api-web";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import GVScroll from "shared/components/scroll/gvscroll";
 import { SetSubmittingType } from "shared/utils/types";
 

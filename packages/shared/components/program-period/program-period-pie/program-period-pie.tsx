@@ -1,7 +1,6 @@
 import "./program-period-pie.scss";
 
 import classNames from "classnames";
-import { GVProgramPeriod } from "gv-react-components";
 import moment, { unitOfTime } from "moment";
 import * as React from "react";
 import {
@@ -9,6 +8,7 @@ import {
   TranslationFunction,
   translate
 } from "react-i18next";
+import GVProgramPeriod from "shared/components/gv-program-period";
 import Tooltip from "shared/components/tooltip/tooltip";
 
 import ProgramPeriodTooltip from "../program-period-tooltip/program-period-tooltip";

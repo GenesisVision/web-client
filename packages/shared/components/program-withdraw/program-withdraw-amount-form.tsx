@@ -1,9 +1,9 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { number, object } from "yup";

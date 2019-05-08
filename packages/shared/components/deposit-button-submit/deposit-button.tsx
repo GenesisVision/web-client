@@ -1,6 +1,6 @@
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { connect } from "react-redux";
+import GVButton from "shared/components/gv-button";
 import RootState from "shared/reducers/root-reducer";
 
 interface IDepositButtonStateProps {

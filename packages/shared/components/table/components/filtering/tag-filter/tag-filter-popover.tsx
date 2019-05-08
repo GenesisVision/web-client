@@ -1,6 +1,6 @@
 import { ProgramTag } from "gv-api-web";
-import { GVTextField } from "gv-react-components";
 import * as React from "react";
+import GVTextField from "shared/components/gv-text-field";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 
 interface ITagFilterPopoverState {

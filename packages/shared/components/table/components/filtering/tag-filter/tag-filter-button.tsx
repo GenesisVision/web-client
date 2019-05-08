@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
+import GVButton from "shared/components/gv-button";
 
 export interface ITagFilterButton {
   isActive: boolean;

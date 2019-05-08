@@ -1,6 +1,6 @@
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";

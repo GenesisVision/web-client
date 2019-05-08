@@ -1,9 +1,9 @@
 import "./create-program-broker.scss";
 
 import { Broker, BrokerAccountType } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";

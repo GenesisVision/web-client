@@ -1,4 +1,30 @@
-@import "../../../node_modules/gv-react-components/dist/gv-styles/_colors.scss";
+$primary-color: #03bdaf;
+$secondary-color: #2a353f;
+$negative-color: #eb3b5a;
+$positive-color: #2ebd85;
+
+$text-color: #8d9397;
+$text-light-color: #e8eff3;
+$text-dark-color: #5c636a;
+$text-accent-color: #fff;
+
+$label-color: #6b747b;
+$switch-handler-color: #fff;
+$separator-color: #28323b;
+
+$background-color: #131e26;
+$secondary-background-color: #1f2b36;
+$panel-background-color: #1c2730;
+$positive-background-color: #1d383a;
+$negative-background-color: #312934;
+
+$level-color-1: #373867;
+$level-color-2: #4a5090;
+$level-color-3: #5e6abe;
+$level-color-4: #6e81e2;
+$level-color-5: #5094d1;
+$level-color-6: #34a6c1;
+$level-color-7: $primary-color;
 
 $inactive-icon-color: #ccd5d4;
 $main-color: #fff;

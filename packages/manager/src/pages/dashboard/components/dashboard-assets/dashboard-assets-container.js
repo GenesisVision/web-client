@@ -1,4 +1,3 @@
-import { GVButton } from "gv-react-components";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
 import React, { Component } from "react";
@@ -7,6 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
+import GVButton from "shared/components/gv-button";
 import { ChartIcon } from "shared/components/icon/chart-icon";
 import { MANAGER, ROLE_ENV } from "shared/constants/constants";
 

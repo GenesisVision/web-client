@@ -1,11 +1,11 @@
 import "./dialog.scss";
 
 import classNames from "classnames";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import EventListener from "react-event-listener";
 import { InjectedTranslateProps } from "react-i18next";
 import { translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import Modal from "shared/components/modal/modal";
 import GVScroll from "shared/components/scroll/gvscroll";

@@ -1,10 +1,10 @@
 import { FundDetailsFull } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
+import GVButton from "shared/components/gv-button";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
 

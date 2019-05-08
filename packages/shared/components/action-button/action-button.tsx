@@ -1,7 +1,7 @@
 import "./action-button.scss";
 
-import { GVButton } from "gv-react-components";
 import React from "react";
+import GVButton from "shared/components/gv-button";
 
 interface IActionButtonProps {
   onClick?(): void;

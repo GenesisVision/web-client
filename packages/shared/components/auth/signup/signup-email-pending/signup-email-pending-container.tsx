@@ -1,8 +1,8 @@
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
 import { MiddlewareDispatch, RootThunk } from "shared/utils/types";
 
 const SignupEmailPending: React.FC<Props> = ({ t, service }) => (

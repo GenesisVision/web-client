@@ -1,14 +1,15 @@
 import "./manager-history.scss";
 
-import { GVTab, GVTabs } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 
+import { MANAGER_HISTORY_TAB } from "../manager.constants";
 import { fetchManagerAssetsCount } from "../services/manager.service";
 import ManagerFunds from "./manager-funds-table";
 import ManagerPrograms from "./manager-programs-table";
-import { MANAGER_HISTORY_TAB } from "../manager.constants";
 
 interface Props {
   managerId: string;

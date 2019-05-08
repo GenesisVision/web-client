@@ -2,8 +2,8 @@ import "./tag-program.scss";
 
 import classnames from "classnames";
 import { ProgramTag } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
+import GVButton from "shared/components/gv-button";
 
 import { CloseIcon } from "../icon/close-icon";
 

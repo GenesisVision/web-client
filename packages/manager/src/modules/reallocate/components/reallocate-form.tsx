@@ -1,6 +1,5 @@
 import { FormikProps, withFormik } from "formik";
 import { FundAssetPartWithIcon } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import CreateFundSettingsAddAsset from "pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
 import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import * as React from "react";
@@ -12,6 +11,7 @@ import ErrorMessage, {
 } from "shared/components/error-message/error-message";
 import FormError from "shared/components/form/form-error/form-error";
 import { TFundAssetRemoveHandle } from "shared/components/fund-asset/fund-asset-container";
+import GVButton from "shared/components/gv-button";
 import { anchorElType } from "shared/components/popover/popover";
 import { SetSubmittingType } from "shared/utils/types";
 import { array, number, object } from "yup";

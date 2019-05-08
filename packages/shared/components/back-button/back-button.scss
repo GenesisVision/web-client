@@ -13,7 +13,7 @@
     padding: 0;
   }
 
-  &__container {
+  &__container.gv-btn {
     display: flex;
     align-items: stretch;
     font-size: $font-size-common;
