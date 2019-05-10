@@ -1,5 +1,7 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import AssetEditContainer from "modules/asset-edit/asset-edit-container";
+import AssetEditContainer, {
+  IAssetEditInfo
+} from "modules/asset-edit/asset-edit-container";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
@@ -11,7 +13,7 @@ import {
 import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
-import { ASSET, PROGRAM } from "shared/constants/constants";
+import { ASSET } from "shared/constants/constants";
 
 import ClosePeriodContainer from "../close-period/close-period-container";
 import CloseProgramContainer from "../close-program/close-program-container";
@@ -57,7 +59,7 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
       isAuthenticated
     } = this.props;
 
-    const composeEditInfo = {
+    const composeEditInfo: IAssetEditInfo = {
       stopOutLevel: programDescription.stopOutLevel,
       id: programDescription.id,
       title: programDescription.title,
@@ -180,7 +182,7 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
                 info={composeEditInfo}
                 onClose={this.closePopup(INVESTMENT_POPUP.EDIT)}
                 onApply={this.applyChanges(updateDetails)}
-                type={PROGRAM}
+                type={ASSET.PROGRAM}
               />
               {programDescription.personalProgramDetails &&
                 programDescription.personalProgramDetails
