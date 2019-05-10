@@ -6,11 +6,11 @@ import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 import { ManagerThunk } from "shared/utils/types";
 
-import { IAssetEditValues } from "../components/asset-edit-form";
+import { IAssetEditFormValues } from "../components/asset-edit-form";
 
 export const editAsset = (
   id: string,
-  editAssetData: Pick<IAssetEditValues, keyof ProgramUpdate>,
+  editAssetData: IAssetEditFormValues,
   type: ASSET
 ): ManagerThunk<CancelablePromise<void>> => dispatch => {
   const authorization = authService.getAuthArg();
