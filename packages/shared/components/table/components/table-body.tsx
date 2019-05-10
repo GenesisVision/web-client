@@ -9,11 +9,8 @@ import {
   UpdateRowFuncType
 } from "./table.types";
 
-const TableBody: React.FC<
-  ITableBodyExternalProps & ITableBodyInnerProps & InjectedTranslateProps
-> = ({
+const TableBody: React.FC<ITableBodyExternalProps & ITableBodyInnerProps> = ({
   updateItems,
-  t,
   items,
   renderBodyItem,
   tag: Tag,
