@@ -1,11 +1,10 @@
 import "./wallet-balance.scss";
 
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
-import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
 
 const _WalletBalanceButtons: React.FC<Props> = ({
   t,
