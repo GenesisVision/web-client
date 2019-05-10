@@ -29,7 +29,7 @@ export const editAsset = (
         ...data,
         logo: response || data.logo.id
       };
-      return editMethod(id, authorization, { model: data as ProgramUpdate });
+      return editMethod(id, authorization, { model: data as ProgramUpdate }); //TODO ask backend to change ProgramUpdate logo type
     })
     .then(() => {
       dispatch(
