@@ -44,7 +44,7 @@ const _TableItems: React.FC<ITableItemsProps> = ({
     <>
       {items.map((item, idx: number) => (
         <React.Fragment key={item.id || idx}>
-          {renderBodyItem && renderBodyItem(item, updateRow, updateItems)}
+          {renderBodyItem(item, updateRow, updateItems)}
         </React.Fragment>
       ))}
     </>
@@ -74,13 +74,13 @@ const EmptyMessage = React.memo(translate()(_EmptyMessage));
 interface ITableItemsProps {
   items: any[];
   view: LIST_VIEW;
-  renderBodyItem?: RenderBodyItemFuncType;
+  renderBodyItem: RenderBodyItemFuncType;
   updateRow?: UpdateRowFuncType;
   updateItems?: UpdateItemsFuncType;
 }
 
 interface ITableBodyInnerProps {
-  renderBodyItem?: RenderBodyItemFuncType;
+  renderBodyItem: RenderBodyItemFuncType;
   tag: React.ComponentType<{ className?: string }> | string;
   view: LIST_VIEW;
 }
