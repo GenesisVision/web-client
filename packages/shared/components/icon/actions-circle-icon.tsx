@@ -1,7 +1,8 @@
 import * as React from "react";
 import { IIconProps, Icon } from "shared/components/icon/icon";
+import withLoader from "shared/decorators/with-loader";
 
-export const ActionsCircleIcon: React.FC<IIconProps> = props => (
+export const _ActionsCircleIcon: React.FC<IIconProps> = props => (
   <Icon type={"actions-circle"} {...props}>
     <svg
       width="31"
@@ -44,3 +45,5 @@ export const ActionsCircleIcon: React.FC<IIconProps> = props => (
     </svg>
   </Icon>
 );
+
+export const ActionsCircleIcon = withLoader(React.memo(_ActionsCircleIcon));
