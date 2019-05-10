@@ -41,7 +41,7 @@ class _AssetEditContainer extends React.PureComponent<Props, State> {
       <Dialog open={open} onClose={this.handleClose}>
         <AssetEditForm
           condition={!!info}
-          Loader={DialogLoader}
+          Loader={<DialogLoader />}
           info={info}
           onSubmit={this.handleEdit}
           serverError={this.state.serverError}

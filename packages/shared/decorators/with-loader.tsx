@@ -5,12 +5,12 @@ const withLoader = <T extends { [k: string]: any }>(
 ): React.ComponentType<WithLoaderProps & T> => props => {
   const { Loader, condition = true } = props;
   if (condition) return <Component {...props} />;
-  else if (Loader) return <Loader />;
+  else if (Loader) return Loader;
   return null;
 };
 
 export interface WithLoaderProps {
-  Loader?: React.ComponentType;
+  Loader?: JSX.Element;
   condition?: boolean;
 }
 export default withLoader;
