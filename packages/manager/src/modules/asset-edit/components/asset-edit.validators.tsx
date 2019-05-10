@@ -5,22 +5,26 @@ import {
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { number, object } from "yup";
 
-const editAssetSettingsValidationSchema = ({ t, ...props }) =>
+import { ASSET_EDIT_FIELDS, IAssetEditProps } from "./asset-edit-form";
+
+const editAssetSettingsValidationSchema = (props: IAssetEditProps) =>
   object().shape({
-    stopOutLevel: number()
+    [ASSET_EDIT_FIELDS.stopOutLevel]: number()
       .min(
         10,
-        t("manager.create-program-page.settings.validation.stop-out-less-ten")
+        props.t(
+          "manager.create-program-page.settings.validation.stop-out-less-ten"
+        )
       )
       .max(
         props.info.stopOutLevel || 100,
-        t(
+        props.t(
           "manager.create-program-page.settings.validation.stop-out-more-current"
         )
       ),
-    logo: inputImageShape(t),
-    title: assetTitleShape(t),
-    description: assetDescriptionShape(t)
+    [ASSET_EDIT_FIELDS.logo]: inputImageShape(props.t),
+    [ASSET_EDIT_FIELDS.title]: assetTitleShape(props.t),
+    [ASSET_EDIT_FIELDS.description]: assetDescriptionShape(props.t)
   });
 
 export default editAssetSettingsValidationSchema;
