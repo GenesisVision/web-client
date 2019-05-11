@@ -15,15 +15,12 @@ const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
           <h2>{t(`transactions-details.title`)}</h2>
           <p>{t(`transactions-details.signal.${data.type}`)}</p>
         </div>
-        {details && (
-          <StatisticItem
-            label={t(
-              `transactions-details.investment.to-${details.programType}`
-            )}
-          >
-            <TransactionAsset data={details} />
-          </StatisticItem>
-        )}
+        <StatisticItem
+          condition={!!details}
+          label={t(`transactions-details.investment.to-${details.programType}`)}
+        >
+          <TransactionAsset data={details} />
+        </StatisticItem>
       </div>
       <div className="dialog__bottom">
         <StatisticItem label={t(`transactions-details.status.title`)}>
