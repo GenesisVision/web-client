@@ -18,7 +18,7 @@ const _TableFooter: React.FC<ITableFooterProps> = ({
   updatePaging
 }) => (
   <div className="table__footer">
-    <ItemsCounter {...paging} condition={!paging.totalItems} />
+    <ItemsCounter {...paging} condition={!!paging.totalItems} />
     <Paging
       condition={!isPending && paging.totalPages !== 0}
       paging={paging}

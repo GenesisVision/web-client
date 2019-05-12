@@ -148,7 +148,7 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
           )}
         </GVScroll>
         <TableFooter
-          condition={paging && !!(paging.totalPages && paging.totalPages > 2)}
+          condition={paging && !!(paging.totalPages && paging.totalPages >= 2)}
           paging={paging}
           updatePaging={updatePaging}
           isPending={isPending}
