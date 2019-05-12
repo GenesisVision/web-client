@@ -3,14 +3,14 @@ import * as React from "react";
 const withLoader = <T extends { [k: string]: any }>(
   Component: React.ComponentType<T>
 ): React.ComponentType<WithLoaderProps & T> => props => {
-  const { Loader, condition = true } = props;
+  const { loader, condition = true } = props;
   if (condition) return <Component {...props} />;
-  else if (Loader) return Loader;
+  else if (loader) return loader;
   return null;
 };
 
 export interface WithLoaderProps {
-  Loader?: JSX.Element;
+  loader?: JSX.Element;
   condition?: boolean;
 }
 export default withLoader;

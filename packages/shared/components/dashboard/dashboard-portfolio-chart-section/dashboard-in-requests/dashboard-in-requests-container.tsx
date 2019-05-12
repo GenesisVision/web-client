@@ -44,7 +44,7 @@ class DashboardInRequestsContainer extends React.PureComponent<Props, State> {
       <div className="dashboard-request">
         <Request
           condition={!!inRequests && !isPending}
-          Loader={<DashboardChartRequestLoader />}
+          loader={<DashboardChartRequestLoader />}
           inRequests={inRequests}
           isPending={isPending}
           service={service}

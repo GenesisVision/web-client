@@ -23,7 +23,7 @@ const TableBody: React.FC<ITableBodyExternalProps & ITableBodyInnerProps> = ({
   <Tag className={className}>
     <TableItems
       condition={!isPending && items !== null && items !== undefined}
-      Loader={<TableLoader view={view} />}
+      loader={<TableLoader view={view} />}
       items={items!}
       view={view}
       renderBodyItem={renderBodyItem}
