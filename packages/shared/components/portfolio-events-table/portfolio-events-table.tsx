@@ -17,18 +17,20 @@ import {
   SelectFilterValue
 } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { ROLE_ENV } from "shared/constants/constants";
+import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  PORTFOLIO_EVENTS_FILTERS
+  PORTFOLIO_EVENTS_FILTERS,
+  PORTFOLIO_EVENTS_INVESTOR_COLUMNS
 } from "./portfolio-events-table.constants";
 
 const PortfolioEventsTable: React.FC<
@@ -55,7 +57,7 @@ const PortfolioEventsTable: React.FC<
               <SelectFilter
                 name={EVENT_TYPE_FILTER_NAME}
                 label="Type"
-                value={filtering["type"]}
+                value={filtering["type"] as SelectFilterType} //TODO fix filtering types
                 values={eventTypeFilterValues}
                 onChange={updateFilter}
               />
@@ -64,7 +66,7 @@ const PortfolioEventsTable: React.FC<
               <SelectFilter
                 name="assetType"
                 label="Assets type"
-                value={filtering["assetType"]}
+                value={filtering["assetType"] as SelectFilterType} //TODO fix filtering types
                 values={ASSET_TYPE_FILTER_VALUES}
                 onChange={updateFilter}
               />
@@ -80,7 +82,11 @@ const PortfolioEventsTable: React.FC<
           </>
         )}
         paging={DEFAULT_PAGING}
-        columns={PORTFOLIO_EVENTS_COLUMNS}
+        columns={
+          ROLE_ENV === ROLE.INVESTOR
+            ? PORTFOLIO_EVENTS_INVESTOR_COLUMNS
+            : PORTFOLIO_EVENTS_COLUMNS
+        }
         renderHeader={column => (
           <span
             className={`portfolio-events-all__cell portfolio-events-all__cell--${
@@ -97,11 +103,24 @@ const PortfolioEventsTable: React.FC<
         renderBodyRow={event => (
           <TableRow className="portfolio-events-all-table__row">
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
-              {moment(event.date).format("lll")}
+              {moment(event.date).format()}
             </TableCell>
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
               {event.description}
             </TableCell>
+            {ROLE_ENV === ROLE.INVESTOR && (
+              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    event.valueTotal - event.value,
+                    event.currency
+                  )}
+                  thousandSeparator=" "
+                  displayType="text"
+                  suffix={" " + event.currency}
+                />
+              </TableCell>
+            )}
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
               {isUseProfitability(event) ? (
                 <Profitability

@@ -1,7 +1,12 @@
+import { ProgramFacetTimeframeEnum } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { mapServerTimeFrameToFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
   GetItemsFuncType,
@@ -12,9 +17,7 @@ import ProgramTableModule from "shared/modules/programs-table/components/program
 
 import {
   PROGRAMS_FACET_PAGING,
-  PROGRAMS_FACET_TABLE_FILTERING,
-  PROGRAMS_FACET_TABLE_FILTERS,
-  PROGRAMS_FACET_TABLE_SORTING
+  PROGRAMS_FACET_TABLE_FILTERS
 } from "./programs-facet.constants";
 
 class _ProgramsFacetTable extends React.PureComponent<
@@ -32,8 +35,25 @@ class _ProgramsFacetTable extends React.PureComponent<
     });
   };
 
+  composeFiltering = () => {
+    const type = mapServerTimeFrameToFilterType(this.props.timeframe);
+    return {
+      dateRange: {
+        ...DEFAULT_DATE_RANGE_FILTER_VALUE,
+        type
+      }
+    } as FilteringType;
+  };
+
   render() {
-    const { t, title, ...others } = this.props;
+    const {
+      t,
+      title,
+      sorting,
+      getItems,
+      isAuthenticated,
+      showRating
+    } = this.props;
     return (
       <ProgramTableModule
         renderFilters={(
@@ -51,11 +71,13 @@ class _ProgramsFacetTable extends React.PureComponent<
         )}
         title={title}
         paging={PROGRAMS_FACET_PAGING}
-        sorting={PROGRAMS_FACET_TABLE_SORTING}
-        filtering={PROGRAMS_FACET_TABLE_FILTERING}
+        sorting={sorting}
+        filtering={this.composeFiltering()}
         defaultFilters={PROGRAMS_FACET_TABLE_FILTERS}
         toggleFavorite={this.toggleFavorite}
-        {...others}
+        getItems={getItems}
+        isAuthenticated={isAuthenticated}
+        showRating={showRating}
       />
     );
   }
@@ -63,8 +85,10 @@ class _ProgramsFacetTable extends React.PureComponent<
 
 export interface IProgramsFacetTableProps {
   title: string;
+  sorting: string;
+  timeframe: ProgramFacetTimeframeEnum;
   getItems: GetItemsFuncType;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
   showRating?: boolean;
 }
 

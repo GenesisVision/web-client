@@ -1,7 +1,7 @@
 import "./sorting-filter.scss";
 
-import { GVButton } from "gv-react-components";
 import * as React from "react";
+import GVButton from "shared/components/gv-button";
 
 import {
   SORTING_DIRECTION,

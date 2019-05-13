@@ -1,6 +1,5 @@
 import "shared/components/dashboard/dashboard-assets/dashboard-assets.scss";
 
-import { GVTab, GVTabs } from "gv-react-components";
 import {
   getDashboardFunds,
   getDashboardPrograms
@@ -11,6 +10,8 @@ import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
 

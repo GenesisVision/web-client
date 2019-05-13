@@ -9,9 +9,7 @@ const ProfileEditPage = () => {
   return (
     <ProfileLayout route="details">
       <NavigationBackButton />
-      <ProfileContainer>
-        <ProfileForm />
-      </ProfileContainer>
+      <ProfileContainer Child={ProfileForm} />
     </ProfileLayout>
   );
 };

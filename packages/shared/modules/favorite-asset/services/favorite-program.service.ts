@@ -1,4 +1,3 @@
-import { Dispatch } from "redux";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
@@ -6,11 +5,12 @@ import {
   addFavoriteProgram,
   removeFavoriteProgram
 } from "../actions/favorite-program.actions";
+import { ToggleFavoriteDispatchableType } from "./favorite-fund.service";
 
-export const toggleFavoriteProgramDispatchable = (
-  programId: string,
-  isFavorite: boolean
-) => (dispatch: Dispatch) => {
+export const toggleFavoriteProgramDispatchable: ToggleFavoriteDispatchableType = (
+  programId,
+  isFavorite
+) => dispatch => {
   if (!authService.getAuthArg()) return;
 
   const requestData = {

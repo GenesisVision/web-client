@@ -3,11 +3,13 @@ import {
   AttachToSignalProviderInitialDepositCurrencyEnum,
   WalletData
 } from "gv-api-web";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -18,7 +20,7 @@ import {
   convertToCurrency
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { lazy, number, object, Schema } from "yup";
+import { Schema, lazy, number, object } from "yup";
 
 class FollowCreateAccount extends React.PureComponent<Props, State> {
   state = {
@@ -30,9 +32,11 @@ class FollowCreateAccount extends React.PureComponent<Props, State> {
   }
 
   onChangeCurrencyFrom = (name: any, target: any) => {
-    const { setFieldValue } = this.props;
+    const { setFieldValue, setFieldTouched } = this.props;
     const initialDepositCurrencyNew = target.props.value;
     setFieldValue("initialDepositCurrency", initialDepositCurrencyNew);
+    setFieldValue("initialDepositAmount", "");
+    setFieldTouched("initialDepositAmount", false);
     this.fetchRate(initialDepositCurrencyNew);
   };
   fetchRate = (initialDepositCurrency?: any) => {

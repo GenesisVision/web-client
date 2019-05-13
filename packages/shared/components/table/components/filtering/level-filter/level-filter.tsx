@@ -6,14 +6,15 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import Filter from "../filter";
 import { TFilter } from "../filter.type";
 import LevelFilterPopover from "./level-filter-popover";
+import { LevelFilterType } from "./level-filter.constants";
 
 interface ILevelFilterProps {
   name: string;
-  value: number[];
-  onChange(value: TFilter<any>): void;
+  value: LevelFilterType;
+  onChange(value: TFilter<LevelFilterType>): void;
 }
 
-class LevelFilter extends React.PureComponent<
+class _LevelFilter extends React.PureComponent<
   ILevelFilterProps & InjectedTranslateProps
 > {
   renderValueText = (value: number[]): string => {
@@ -37,4 +38,5 @@ class LevelFilter extends React.PureComponent<
   }
 }
 
-export default translate()(LevelFilter);
+const LevelFilter = translate()(_LevelFilter);
+export default LevelFilter;

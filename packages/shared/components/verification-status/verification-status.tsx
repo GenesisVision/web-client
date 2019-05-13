@@ -1,25 +1,26 @@
 import "./verification-status.scss";
 
+import { ProfileFullViewModelVerificationStatusEnum } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 
 export enum VERIFICATION_STATUS {
-  NOT_VERIFED = "NotVerified",
-  VERIFED = "Verified",
+  NOT_VERIFIED = "NotVerified",
+  VERIFIED = "Verified",
   UNDER_REVIEW = "UnderReview",
   REJECTERD = "Rejected"
 }
 
 interface IStatusProps {
-  checked: boolean;
-  verificationStatus: VERIFICATION_STATUS;
+  checked?: boolean;
+  verificationStatus?: ProfileFullViewModelVerificationStatusEnum;
 }
 
-const VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
+const _VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
   t,
   checked,
-  verificationStatus = VERIFICATION_STATUS.NOT_VERIFED
+  verificationStatus = VERIFICATION_STATUS.NOT_VERIFIED
 }) => {
   let type, value;
   if (checked) {
@@ -27,15 +28,15 @@ const VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
     value = t("verification-status.verified");
   } else {
     switch (verificationStatus) {
-      case "Verified":
+      case VERIFICATION_STATUS.VERIFIED:
         value = t("verification-status.verified");
         type = CHIP_TYPE.POSITIVE;
         break;
-      case "UnderReview":
+      case VERIFICATION_STATUS.UNDER_REVIEW:
         value = t("verification-status.under-review");
         type = CHIP_TYPE.WARNING;
         break;
-      case "Rejected":
+      case VERIFICATION_STATUS.REJECTERD:
         value = t("verification-status.rejected");
         type = CHIP_TYPE.NEGATIVE;
         break;
@@ -51,4 +52,5 @@ const VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
   );
 };
 
-export default translate()(VerificationStatus);
+const VerificationStatus = React.memo(translate()(_VerificationStatus));
+export default VerificationStatus;

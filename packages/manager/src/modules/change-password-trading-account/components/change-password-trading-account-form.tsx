@@ -1,8 +1,10 @@
 import { FormikProps, withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React, { ComponentType, FunctionComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { ChangePasswordTradingAccountValidationSchema } from "./change-password-trading-account.validators";
@@ -33,7 +35,7 @@ type ChangePasswordTradingAccountFormProps = InjectedTranslateProps &
   IChangePasswordTradingAccountFormOwnProps &
   FormikProps<IChangePasswordTradingAccountFormValues>;
 
-const ChangePasswordTradingAccountForm: FunctionComponent<
+const _ChangePasswordTradingAccountForm: React.FC<
   ChangePasswordTradingAccountFormProps
 > = ({
   t,
@@ -58,20 +60,20 @@ const ChangePasswordTradingAccountForm: FunctionComponent<
           component={GVTextField}
           label={t("password-change-trading-account.new-password")}
           type="password"
-          name="password"
+          name={FORM_FIELDS.password}
           autoComplete="off"
         />
         <GVFormikField
           component={GVTextField}
           label={t("password-change-trading-account.confirm-password")}
           type="password"
-          name="confirmPassword"
+          name={FORM_FIELDS.confirmPassword}
           autoComplete="off"
         />
         {twoFactorEnabled && (
           <GVFormikField
             type="text"
-            name="twoFactorCode"
+            name={FORM_FIELDS.twoFactorCode}
             label={t("wallet-withdraw.two-factor-code-label")}
             autoComplete="off"
             component={GVTextField}
@@ -88,9 +90,10 @@ const ChangePasswordTradingAccountForm: FunctionComponent<
   );
 };
 
-export default compose<
-  ComponentType<IChangePasswordTradingAccountFormOwnProps>
+const ChangePasswordTradingAccountForm = compose<
+  React.ComponentType<IChangePasswordTradingAccountFormOwnProps>
 >(
+  React.memo,
   translate(),
   withFormik<
     IChangePasswordTradingAccountFormOwnProps,
@@ -107,4 +110,5 @@ export default compose<
       props.onSubmit(values, setSubmitting);
     }
   })
-)(ChangePasswordTradingAccountForm);
+)(_ChangePasswordTradingAccountForm);
+export default ChangePasswordTradingAccountForm;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
-import { SetSubmittingType } from "shared/utils/types";
+import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import MakeSignalForm, {
   IMakeSignalFormValues
@@ -21,7 +21,7 @@ interface IProgramMakeSignalContainerProps
     programMakeSignal(
       id: string,
       successFee: number,
-      subscriptionFee: number
+      volumeFee: number
     ): Promise<void>;
   };
 }
@@ -45,12 +45,12 @@ class ProgramMakeSignalContainer extends Component<
     const { id, service, onClose, onApply } = this.props;
 
     service
-      .programMakeSignal(id, values.successFee!, values.subscriptionFee!)
+      .programMakeSignal(id, values.successFee!, values.volumeFee!)
       .then(() => {
         onClose();
         onApply();
       })
-      .catch((error: any) => {
+      .catch((error: ResponseError) => {
         setSubmitting(false);
         this.setState({ errorMessage: error.errorMessage });
       });

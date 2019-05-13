@@ -1,11 +1,11 @@
 import "./notify-button.scss";
 
-import { GVButton } from "gv-react-components";
 import { subscribeAvailableToInvest } from "pages/programs/program-details/services/program-details.service";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -43,7 +43,9 @@ class _NotifyButton extends React.PureComponent<Props, State> {
           className="program-details-description__invest-btn"
           onClick={this.handleClick}
           disabled={Boolean(
-            this.state.notificationId || this.state.subscription
+            this.state.notificationId ||
+              this.state.subscription ||
+              !this.props.canInvest
           )}
         >
           {t("buttons.notify")}
@@ -74,6 +76,7 @@ interface OwnProps {
   assetId: string;
   notificationId?: string;
   currency: CurrencyEnum;
+  canInvest: boolean;
 }
 
 interface DispatchProps {

@@ -1,6 +1,6 @@
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 
 import GoogleActivateStep from "./google-auth-activate-step";
 import GoogleCodeStep from "./google-auth-code-step";

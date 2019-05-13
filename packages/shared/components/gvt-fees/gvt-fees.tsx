@@ -3,29 +3,27 @@ import "./gvt-fees.scss";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
-import { ROLE } from "shared/constants/constants";
+import { ROLE, ROLE_ENV } from "shared/constants/constants";
 
 interface IGVTFees {
   open: boolean;
   onClose(): void;
-  role: string;
 }
 
 const GVTFees: React.FC<IGVTFees & InjectedTranslateProps> = ({
   t,
   open,
-  onClose,
-  role
+  onClose
 }) => {
   return (
     <Dialog wider open={open} onClose={onClose} className="gvt-fees">
       <div className="gvt-fees__container">
         <h1>{t("gvt-fees.titles.main")}</h1>
         <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-1")}</p>
-        {role === ROLE.INVESTOR ? (
+        {ROLE_ENV === ROLE.INVESTOR ? (
           <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-2")}</p>
         ) : null}
-        {role === ROLE.MANAGER ? (
+        {ROLE_ENV === ROLE.MANAGER ? (
           <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-3")}</p>
         ) : null}
         <div className="gvt-fees__table-wrapper">

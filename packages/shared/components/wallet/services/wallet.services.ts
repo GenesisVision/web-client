@@ -5,10 +5,7 @@ import {
   WalletMultiAvailable
 } from "gv-api-web";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import {
-  TableItems,
-  mapToTableItems
-} from "shared/components/table/helpers/mapper";
+import { TableItems, mapToTableItems } from "shared/components/table/helpers/mapper";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import signalApi from "shared/services/api-client/signal-api";
@@ -46,27 +43,23 @@ export const fetchBaseWallets = (): RootThunk<
   );
 };
 
-export const fetchWalletTransactions = (requestFilters?: FilteringType) => {
-  const authorization = authService.getAuthArg();
+export const fetchWalletTransactions = (requestFilters?: FilteringType) =>
+  actions.fetchWalletTransactionsDispatch(
+    authService.getAuthArg(),
+    requestFilters
+  );
 
-  return actions.fetchWalletTransactionsDispatch(authorization, requestFilters);
-};
+export const offPayFeesWithGvt = () =>
+  walletApi.v10WalletPaygvtfeeOffPost(authService.getAuthArg());
 
-export const offPayFeesWithGvt = () => () => {
-  return walletApi.v10WalletPaygvtfeeOffPost(authService.getAuthArg());
-};
-
-export const onPayFeesWithGvt = () => () => {
-  return walletApi.v10WalletPaygvtfeeOnPost(authService.getAuthArg());
-};
+export const onPayFeesWithGvt = () =>
+  walletApi.v10WalletPaygvtfeeOnPost(authService.getAuthArg());
 
 export const cancelWithdrawRequest = (txId: string) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<any> => {
-  const authorization = authService.getAuthArg();
-
-  return walletApi
-    .v10WalletWithdrawRequestCancelByTxIdPost(txId, authorization)
+): CancelablePromise<any> =>
+  walletApi
+    .v10WalletWithdrawRequestCancelByTxIdPost(txId, authService.getAuthArg())
     .then(response => {
       dispatch(
         alertMessageActions.success(
@@ -81,16 +74,12 @@ export const cancelWithdrawRequest = (txId: string) => (
     .catch(err => {
       dispatch(alertMessageActions.error(err.errorMessage));
     });
-};
 
 export const resendWithdrawRequest = (txId: string) => (
-  dispatch: MiddlewareDispatch,
-  getState: any
-): CancelablePromise<any> => {
-  const authorization = authService.getAuthArg();
-
-  return walletApi
-    .v10WalletWithdrawRequestResendByTxIdPost(txId, authorization)
+  dispatch: MiddlewareDispatch
+): CancelablePromise<any> =>
+  walletApi
+    .v10WalletWithdrawRequestResendByTxIdPost(txId, authService.getAuthArg())
     .then(response => {
       dispatch(
         alertMessageActions.success(
@@ -105,21 +94,6 @@ export const resendWithdrawRequest = (txId: string) => (
     .catch(err => {
       dispatch(alertMessageActions.error(err.errorMessage));
     });
-};
-
-export const fetchMultiTransactionsExternal = (
-  currency?: string,
-  filters?: FilteringType
-): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
-  const authorization = authService.getAuthArg();
-  const filtering = {
-    ...filters,
-    currency
-  };
-  return walletApi
-    .v10WalletMultiTransactionsExternalGet(authorization, filtering)
-    .then(mapToTableItems<MultiWalletExternalTransaction>("transactions"));
-};
 
 export const fetchMultiTransactions = (
   currency?: CURRENCIES,
@@ -135,21 +109,21 @@ export const fetchMultiTransactions = (
     .then(mapToTableItems("transactions"));
 };
 
-export const fetchCopytradingAccounts = () => {
-  const authorization = authService.getAuthArg();
-  return signalApi
-    .v10SignalAccountsGet(authorization)
+export const fetchCopytradingAccounts = () =>
+  signalApi
+    .v10SignalAccountsGet(authService.getAuthArg())
     .then(mapToTableItems<CopyTradingAccountInfo>("accounts"));
-};
 
-let mockCopytrading = {
-  accounts: [
-    {
-      currency: "GVT",
-      logo: "d3d2bc3e-eb20-4941-91e7-c8af00d0efe7",
-      balance: 100,
-      equity: 10,
-      freeMargin: 90
-    }
-  ]
+export const fetchMultiTransactionsExternal = (
+  currency?: string,
+  filters?: FilteringType
+): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
+  const authorization = authService.getAuthArg();
+  const filtering = {
+    ...filters,
+    currency
+  };
+  return walletApi
+    .v10WalletMultiTransactionsExternalGet(authorization, filtering)
+    .then(mapToTableItems<MultiWalletExternalTransaction>("transactions"));
 };

@@ -128,7 +128,7 @@ class TransactionsRow extends React.Component<
             </TableCell>
           )}
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
-            {moment(transaction.date).format("lll")}
+            {moment(transaction.date).format()}
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
             <Status

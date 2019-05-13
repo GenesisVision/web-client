@@ -1,7 +1,14 @@
-import { Action } from "redux";
+import {
+  NOTIFICATIONS_TOGGLE,
+  NotificationToggleAction
+} from "../actions/notifications.actions";
 
-const isOpenReducer = (isOpen: boolean = false, action: Action): boolean => {
-  if (action.type === "NOTIFICATIONS_TOGGLE") {
+const isOpenReducer = (
+  isOpen: boolean = false,
+  action: NotificationToggleAction
+): boolean => {
+  if (action.type === NOTIFICATIONS_TOGGLE) {
+    if (action.isOpen !== undefined) return action.isOpen;
     return !isOpen;
   }
   return isOpen;

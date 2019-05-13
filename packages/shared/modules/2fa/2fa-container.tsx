@@ -1,13 +1,13 @@
 import "./2fa.scss";
 
 import classNames from "classnames";
-import { GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import Dialog from "shared/components/dialog/dialog";
+import GVTextField from "shared/components/gv-text-field";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import Select from "shared/components/select/select";
 import { ITwoFactorReducer } from "shared/reducers/2fa-reducer";
@@ -25,7 +25,7 @@ class TwoFactorAuthContainer extends React.PureComponent<Props, State> {
   };
 
   componentDidMount(): void {
-    this.props.services.fetchProfileHeaderInfo();
+    this.props.services.fetchTwoFactor();
   }
 
   handleChange = (event: React.ChangeEvent<any>) => {

@@ -2,13 +2,13 @@ import "./dashboard-programs.scss";
 
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import GVButton from "shared/components/gv-button";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -21,13 +21,14 @@ import {
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
   GetItemsFuncActionType,
-  IUpdateFilterFunc
+  UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { PROGRAM, ROLE, ROLE_ENV, STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
@@ -56,14 +57,14 @@ const _DashboardPrograms: React.FC<InjectedTranslateProps & Props> = ({
       isFetchOnMount={true}
       columns={columns}
       renderFilters={(
-        updateFilter: IUpdateFilterFunc,
+        updateFilter: UpdateFilterFunc,
         filtering: FilteringType
       ) => (
         <>
           <SelectFilter
             name={ACTION_STATUS_FILTER_NAME}
             label={t(`${ROLE_ENV}.dashboard-page.actions-status-filter.label`)}
-            value={filtering[ACTION_STATUS_FILTER_NAME]}
+            value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
             values={ACTION_STATUS_FILTER_VALUES}
             onChange={updateFilter}
           />

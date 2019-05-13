@@ -1,8 +1,8 @@
-import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import GVButton from "shared/components/gv-button";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
 

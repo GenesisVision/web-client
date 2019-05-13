@@ -1,7 +1,13 @@
+import { ProgramFacetTimeframeEnum } from "gv-api-web";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { mapServerTimeFrameToFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
   GetItemsFuncType,
   TableToggleFavoriteType
@@ -11,9 +17,7 @@ import FundsTableModule from "shared/modules/funds-table/components/funds-table/
 
 import {
   FUNDS_FACET_PAGING,
-  FUNDS_FACET_TABLE_FILTERING,
-  FUNDS_FACET_TABLE_FILTERS,
-  FUNDS_FACET_TABLE_SORTING
+  FUNDS_FACET_TABLE_FILTERS
 } from "./funds-facet.constants";
 
 class _FundsFacetTable extends React.PureComponent<
@@ -31,8 +35,18 @@ class _FundsFacetTable extends React.PureComponent<
     });
   };
 
+  composeFiltering = () => {
+    const type = mapServerTimeFrameToFilterType(this.props.timeframe);
+    return {
+      dateRange: {
+        ...DEFAULT_DATE_RANGE_FILTER_VALUE,
+        type
+      }
+    } as FilteringType;
+  };
+
   render() {
-    const { t, title, ...other } = this.props;
+    const { t, title, sorting, getItems, isAuthenticated } = this.props;
 
     return (
       <FundsTableModule
@@ -48,11 +62,12 @@ class _FundsFacetTable extends React.PureComponent<
         )}
         title={title}
         paging={FUNDS_FACET_PAGING}
-        sorting={FUNDS_FACET_TABLE_SORTING}
-        filtering={FUNDS_FACET_TABLE_FILTERING}
+        sorting={sorting}
+        filtering={this.composeFiltering()}
         defaultFilters={FUNDS_FACET_TABLE_FILTERS}
         toggleFavorite={this.toggleFavorite}
-        {...other}
+        getItems={getItems}
+        isAuthenticated={isAuthenticated}
       />
     );
   }
@@ -60,9 +75,10 @@ class _FundsFacetTable extends React.PureComponent<
 
 export interface IFundsFacetTableProps {
   title: string;
+  sorting: string;
+  timeframe: ProgramFacetTimeframeEnum;
   getItems: GetItemsFuncType;
-  isAuthenticated: boolean;
-  showRating?: boolean;
+  isAuthenticated?: boolean;
 }
 
 const FundsFacetTable = translate()(_FundsFacetTable);

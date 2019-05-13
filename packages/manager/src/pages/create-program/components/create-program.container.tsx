@@ -7,7 +7,6 @@ import {
   ProgramsInfo,
   WalletData
 } from "gv-api-web";
-import { GVTab, GVTabs } from "gv-react-components";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import * as React from "react";
@@ -16,6 +15,8 @@ import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
@@ -73,8 +74,12 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
     );
   };
 
-  confirmNavigateToBroker = () => {
-    this.setState({ tab: TAB.BROKER, isNavigationDialogVisible: false });
+  confirmNavigateToBroker = (
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => {
+    this.setState({ tab: TAB.BROKER, isNavigationDialogVisible: false }, () => {
+      setSubmitting(false);
+    });
   };
 
   navigateToSettings = () => {

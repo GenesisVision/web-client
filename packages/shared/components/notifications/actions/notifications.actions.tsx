@@ -9,6 +9,7 @@ export const TAKE_COUNT = 10;
 
 export type NotificationToggleAction = Readonly<{
   type: typeof NOTIFICATIONS_TOGGLE;
+  isOpen?: boolean;
 }>;
 
 export type AddNotificationsAction = Readonly<{
@@ -35,8 +36,11 @@ export type SkipTake = Readonly<{
   take: number;
 }>;
 
-export const notificationsToggle = (): NotificationToggleAction => ({
-  type: NOTIFICATIONS_TOGGLE
+export const notificationsToggle = (
+  isOpen?: boolean
+): NotificationToggleAction => ({
+  type: NOTIFICATIONS_TOGGLE,
+  isOpen
 });
 
 export const addNotifications = (

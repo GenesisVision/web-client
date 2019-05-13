@@ -5,7 +5,6 @@ import {
   OrderSignalProgramInfo,
   TradesSignalViewModel
 } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component, ComponentType } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -146,7 +145,7 @@ class OpenTradesTable extends Component<
                 </GVButton>
               </Link>
             </TableCell>
-            <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
+            <TableCell>{moment(signalTrade.date).format()}</TableCell>
             <TableCell>{signalTrade.symbol}</TableCell>
             <TableCell>
               <NumberFormat

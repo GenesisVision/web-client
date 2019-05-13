@@ -1,10 +1,10 @@
 import "./chart-period.scss";
 
 import classNames from "classnames";
-import { GVButton } from "gv-react-components";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
 import {

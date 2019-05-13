@@ -1,0 +1,16 @@
+.gv-text-area {
+  width: 100%;
+  &__hidden {
+    overflow: hidden;
+    visibility: hidden;
+    position: absolute;
+    height: auto;
+    white-space: pre-wrap;
+  }
+
+  .gv-text-field__input {
+    resize: none;
+    padding: 3px 0;
+    width: 100%;
+  }
+}
