@@ -14,7 +14,7 @@ const renderPrefix = (value: number | string, prefix: PROFITABILITY_PREFIX) => {
   if (value < 0) return composeProfitabilityPrefix(prefix).negative;
 };
 
-const Profitability: React.FC<Props> = props => {
+const _Profitability: React.FC<Props> = props => {
   const {
     className,
     value,
@@ -38,7 +38,9 @@ const Profitability: React.FC<Props> = props => {
   );
 };
 
-export default React.memo(Profitability);
+const Profitability = React.memo(_Profitability);
+
+export default Profitability;
 
 interface Props {
   className?: string;
