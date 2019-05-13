@@ -1,30 +1,29 @@
-import { withFormik } from "formik";
-import React from "react";
-import { translate } from "react-i18next";
+import { FormikProps, withFormik } from "formik";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import InputImage from "shared/components/form/input-image/input-image";
+import InputImage, {
+  IImageValue
+} from "shared/components/form/input-image/input-image";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import GVTextField from "shared/components/gv-text-field";
-import { FUND, PROGRAM } from "shared/constants/constants";
+import { ASSET } from "shared/constants/constants";
 import ProgramDefaultImage from "shared/media/program-default-image.svg";
+import { SetSubmittingType } from "shared/utils/types";
 
+import { IAssetEditInfo } from "../asset-edit-container";
 import editAssetSettingsValidationSchema from "./asset-edit.validators";
 
-const AssetEditForm = ({
+const _AssetEditForm: React.FC<IAssetEditProps> = ({
   isValid,
   t,
   dirty,
   values,
-  info,
-  currency,
   handleSubmit,
-  title,
-  setFieldValue,
-  errors,
-  notifyError,
+  info,
   serverError,
   type,
   isSubmitting
@@ -35,14 +34,14 @@ const AssetEditForm = ({
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>
-            {type === PROGRAM && t("manager.edit-program.title")}
-            {type === FUND && t("manager.edit-fund.title")}
+            {type === ASSET.PROGRAM && t("manager.edit-program.title")}
+            {type === ASSET.FUND && t("manager.edit-fund.title")}
           </h2>
-          <p>{title}</p>
+          <p>{info.title}</p>
         </div>
         <GVFormikField
           type="text"
-          name="title"
+          name={ASSET_EDIT_FIELDS.title}
           label={t("manager.create-program-page.settings.fields.name")}
           autoComplete="off"
           component={GVTextField}
@@ -50,7 +49,7 @@ const AssetEditForm = ({
         <div className="edit-program__description">
           <GVFormikField
             type="textarea"
-            name="description"
+            name={ASSET_EDIT_FIELDS.description}
             label={t("manager.create-program-page.settings.fields.description")}
             component={GVTextField}
           />
@@ -65,9 +64,9 @@ const AssetEditForm = ({
             </span>
           )}
         </div>
-        {type === PROGRAM && (
+        {type === ASSET.PROGRAM && (
           <GVFormikField
-            name="stopOutLevel"
+            name={ASSET_EDIT_FIELDS.stopOutLevel}
             label={t(
               "manager.create-program-page.settings.fields.stop-out-level"
             )}
@@ -81,9 +80,9 @@ const AssetEditForm = ({
       </div>
       <div className="dialog__bottom">
         <div className="create-program-settings__logo-title">
-          {type === PROGRAM &&
+          {type === ASSET.PROGRAM &&
             t("manager.create-program-page.settings.fields.upload-logo")}
-          {type === FUND &&
+          {type === ASSET.FUND &&
             t("manager.create-fund-page.settings.fields.upload-logo")}
         </div>
         <div className="create-program-settings__logo-notice">
@@ -92,7 +91,7 @@ const AssetEditForm = ({
         <div className="create-program-settings__logo-section edit-program__logo-section">
           <div className="create-program-settings__file-field-container">
             <GVFormikField
-              name="logo"
+              name={ASSET_EDIT_FIELDS.logo}
               component={InputImage}
               defaultImage={ProgramDefaultImage}
             />
@@ -114,16 +113,48 @@ const AssetEditForm = ({
   );
 };
 
-export default compose(
+export enum ASSET_EDIT_FIELDS {
+  stopOutLevel = "stopOutLevel",
+  title = "title",
+  description = "description",
+  logo = "logo"
+}
+
+export interface IAssetEditFormOwnProps {
+  info: IAssetEditInfo;
+  serverError: string;
+  type: ASSET;
+  onSubmit: TAssetEditFormSubmit;
+}
+
+export type TAssetEditFormSubmit = (
+  data: IAssetEditFormValues,
+  setSubmitting: SetSubmittingType
+) => void;
+
+export interface IAssetEditFormValues {
+  [ASSET_EDIT_FIELDS.title]: string;
+  [ASSET_EDIT_FIELDS.description]: string;
+  [ASSET_EDIT_FIELDS.logo]: IImageValue;
+  [ASSET_EDIT_FIELDS.stopOutLevel]: number;
+}
+
+export interface IAssetEditProps
+  extends FormikProps<IAssetEditFormValues>,
+    IAssetEditFormOwnProps,
+    InjectedTranslateProps {}
+
+const AssetEditForm = compose<React.FunctionComponent<IAssetEditFormOwnProps>>(
+  React.memo,
   translate(),
-  withFormik({
+  withFormik<IAssetEditFormOwnProps, IAssetEditFormValues>({
     displayName: "edit-form",
     mapPropsToValues: props => {
       return {
-        stopOutLevel: String(props.info.stopOutLevel || 100),
-        title: props.info.title,
-        description: props.info.description,
-        logo: {
+        [ASSET_EDIT_FIELDS.stopOutLevel]: props.info.stopOutLevel || 100,
+        [ASSET_EDIT_FIELDS.title]: props.info.title,
+        [ASSET_EDIT_FIELDS.description]: props.info.description,
+        [ASSET_EDIT_FIELDS.logo]: {
           src: props.info.logo.src
         }
       };
@@ -133,4 +164,5 @@ export default compose(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(AssetEditForm);
+)(_AssetEditForm);
+export default AssetEditForm;
