@@ -11,20 +11,18 @@ export enum MESSAGE_TYPES {
   OVER = "OVER"
 }
 interface IErrorMessage {
-  error: string;
-  className: string;
+  error: string | string[];
   type: MESSAGE_TYPES;
+  className?: string;
 }
-const ErrorMessage: React.FC<IErrorMessage> = ({ error, className, type }) => {
-  return (
-    <div
-      className={classNames("error-message", className, {
-        "error-message--over": type === OVER
-      })}
-    >
-      {error}
-    </div>
-  );
-};
+const ErrorMessage: React.FC<IErrorMessage> = ({ error, className, type }) => (
+  <div
+    className={classNames("error-message", className, {
+      "error-message--over": type === MESSAGE_TYPES.OVER
+    })}
+  >
+    {error}
+  </div>
+);
 
 export default ErrorMessage;

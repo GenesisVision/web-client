@@ -1,7 +1,11 @@
-import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
+import {
+  CopyTradingAccountInfo,
+  InternalTransferRequestSourceTypeEnum,
+  WalletData
+} from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 import {
@@ -16,7 +20,7 @@ import {
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
 } from "../transfer.types";
-import TransferForm, { TransferFormValuesType } from "./transfer-form";
+import TransferForm, { TransferFormValues } from "./transfer-form";
 
 class _TransferContainer extends React.Component<Props, State> {
   state = {
@@ -32,9 +36,9 @@ class _TransferContainer extends React.Component<Props, State> {
       service.fetchAccounts();
   }
 
-  handleSubmit = (values: TransferFormValuesType) => {
-    const { sourceType, destinationType, service, onClose } = this.props;
-    transferRequest({ ...values, sourceType, destinationType })
+  handleSubmit = (values: TransferFormValues) => {
+    const { service, onClose } = this.props;
+    transferRequest(values)
       .then(() => {
         onClose();
         service.fetchWallets();
@@ -132,10 +136,10 @@ interface DispatchProps {
 export interface ITransferContainerOwnProps {
   currentItem: ItemType;
   onClose(): void;
+  sourceType: InternalTransferRequestSourceTypeEnum;
+  destinationType: InternalTransferRequestSourceTypeEnum;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
-  sourceType?: TRANSFER_DIRECTION;
-  destinationType?: TRANSFER_DIRECTION;
 }
 
 interface State {

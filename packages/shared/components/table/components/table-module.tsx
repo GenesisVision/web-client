@@ -7,7 +7,11 @@ import { updateFilter } from "shared/components/table/helpers/filtering.helpers"
 import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
-import { FilteringType, TFilter } from "./filtering/filter.type";
+import {
+  FilteringType,
+  TDefaultFilters,
+  TFilter
+} from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
 import { GetItemsFuncType } from "./table.types";
 
@@ -15,7 +19,7 @@ const defaultData: IDataModel = { items: null, total: 0 };
 
 export interface ITableModuleProps extends ITableProps {
   getItems: GetItemsFuncType;
-  defaultFilters?: any[];
+  defaultFilters?: TDefaultFilters;
   loader?: boolean;
   data?: IDataModel;
 }

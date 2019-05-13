@@ -1,6 +1,5 @@
 import "./dashboard-funds.scss";
 
-import { GVButton } from "gv-react-components";
 import React, { Fragment, FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -9,6 +8,7 @@ import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
@@ -21,7 +21,7 @@ import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
   GetItemsFuncActionType,
-  IUpdateFilterFunc
+  UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { FUND, ROLE_ENV } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
@@ -57,7 +57,7 @@ const _DashboardFunds: FunctionComponent<
       isFetchOnMount={true}
       columns={DASHBOARD_FUNDS_COLUMNS}
       renderFilters={(
-        updateFilter: IUpdateFilterFunc,
+        updateFilter: UpdateFilterFunc,
         filtering: FilteringType
       ) => (
         <Fragment>
@@ -116,7 +116,7 @@ const _DashboardFunds: FunctionComponent<
               assets={fund.topFundAssets}
               type={FUND_ASSET_TYPE.SHORT}
               size={3}
-              length={fund.totalAssetsCount}
+              length={fund.totalAssetsCount} //TODO why we have totalAssetsCount prop?..
             />
           </TableCell>
           <TableCell className="funds-table__cell funds-table__cell--value">

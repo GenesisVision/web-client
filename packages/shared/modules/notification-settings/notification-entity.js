@@ -1,8 +1,8 @@
-import { GVProgramAvatar } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import GVProgramAvatar from "shared/components/gv-program-avatar";
 import filesService from "shared/services/file-service";
 
 const NotificationEntity = props => {

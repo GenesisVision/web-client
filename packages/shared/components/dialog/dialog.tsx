@@ -1,28 +1,20 @@
 import "./dialog.scss";
 
 import classNames from "classnames";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import EventListener from "react-event-listener";
 import { InjectedTranslateProps } from "react-i18next";
 import { translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import Modal from "shared/components/modal/modal";
 import GVScroll from "shared/components/scroll/gvscroll";
 
-export interface IDialogProps {
-  open: boolean;
-  onClose: (param?: any) => void;
-  className?: string;
-  children?: any;
-  wider?: boolean;
-}
-class Dialog extends React.PureComponent<
+export class Dialog extends React.PureComponent<
   IDialogProps & InjectedTranslateProps
 > {
   handleKeyPress = (event: KeyboardEvent) => {
     const { onClose } = this.props;
-
     //Esc
     if (event.keyCode === 27) {
       onClose(event);
@@ -68,3 +60,10 @@ class Dialog extends React.PureComponent<
 }
 
 export default translate()(Dialog);
+
+export interface IDialogProps {
+  open: boolean;
+  onClose: (param?: any) => void;
+  className?: string;
+  wider?: boolean;
+}

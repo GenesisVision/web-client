@@ -59,3 +59,5 @@ export type HandlePeriodChangeType = (period: ChartDefaultPeriod) => void;
 export type CurrencyEnum = AmountWithCurrencyCurrencyEnum;
 
 export type AuthRootState = ManagerRootState | InvestorRootState;
+
+export type TGetState = () => RootState;

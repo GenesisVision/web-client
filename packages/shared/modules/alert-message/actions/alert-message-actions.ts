@@ -30,12 +30,19 @@ const clearAll = (): IAlertAction => ({
   type: ALERT_MESSAGE.CLEAR_ALL
 });
 
+export enum ALERT_ACTIONS_FIELDS {
+  success = "success",
+  warning = "warning",
+  error = "error",
+  remove = "remove",
+  clearAll = "clearAll"
+}
 const alertMessageActions = {
-  success,
-  warning,
-  error,
-  remove,
-  clearAll
+  [ALERT_ACTIONS_FIELDS.success]: success,
+  [ALERT_ACTIONS_FIELDS.warning]: warning,
+  [ALERT_ACTIONS_FIELDS.error]: error,
+  [ALERT_ACTIONS_FIELDS.remove]: remove,
+  [ALERT_ACTIONS_FIELDS.clearAll]: clearAll
 };
 
 export { alertMessageActions };

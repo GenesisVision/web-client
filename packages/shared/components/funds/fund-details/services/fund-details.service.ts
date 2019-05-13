@@ -9,17 +9,17 @@ import {
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
-import RootState from "shared/reducers/root-reducer";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
+import { TGetState } from "shared/utils/types";
 
 import { FundStatisticResult } from "./fund-details.types";
 
 export const getFundDescription = () => (
   dispatch: Dispatch,
-  getState: () => RootState
+  getState: TGetState
 ): Promise<FundDetailsFull> => {
   const authorization = authService.getAuthArg();
   const { router } = getState();

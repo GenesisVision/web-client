@@ -88,7 +88,7 @@ export interface IProgramsFacetTableProps {
   sorting: string;
   timeframe: ProgramFacetTimeframeEnum;
   getItems: GetItemsFuncType;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
   showRating?: boolean;
 }
 

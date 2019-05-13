@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { FiltersType } from "shared/components/table/components/table.types";
 import {
-  ToggleFavoriteFundDispatchableType,
+  ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import RootState from "shared/reducers/root-reducer";
@@ -42,7 +42,7 @@ interface DispatchProps {
     fundsChangeFilter: FundsChangeFilterType;
     fundsChangePage: FundsChangePageType;
     getFundsFilters: GetFundsFiltersType;
-    toggleFavoriteFund: ToggleFavoriteFundDispatchableType;
+    toggleFavoriteFund: ToggleFavoriteDispatchableType;
   };
 }
 
@@ -52,7 +52,7 @@ interface Props
     DispatchProps,
     RouteComponentProps {}
 
-class FundsTableContainer extends React.PureComponent<Props> {
+class _FundsTableContainer extends React.PureComponent<Props> {
   componentDidMount() {
     const { service, defaultFilters } = this.props;
     service.getFunds(defaultFilters);
@@ -134,11 +134,12 @@ const mergeProps = (
   };
 };
 
-export default compose(
+const FundsTableContainer = compose<React.ComponentType<OwnProps>>(
   withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps,
     mergeProps
   )
-)(FundsTableContainer);
+)(_FundsTableContainer);
+export default FundsTableContainer;

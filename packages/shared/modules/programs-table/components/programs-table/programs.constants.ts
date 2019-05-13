@@ -1,6 +1,8 @@
 import {
   DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes
+  DateRangeFilterTypes,
+  SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME,
+  SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
@@ -23,8 +25,6 @@ export const SORTING_FILTER_NAME = "sorting";
 
 export const SERVER_LEVEL_MIN_FILTER_NAME = "levelMin";
 export const SERVER_LEVEL_MAX_FILTER_NAME = "levelMax";
-export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "statisticDateFrom";
-export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "statisticDateTo";
 
 export const LEVEL_MIN_FILTER_VALUE = 1;
 export const LEVEL_MAX_FILTER_VALUE = 7;
@@ -56,8 +56,8 @@ const programsCurrencyFilter = {
 export const programsDateRangeFilter = {
   ...composeDefaultDateRangeFilter({
     composeApiRequestValue: composeRequestValueFunc(
-      SERVER_DATE_RANGE_MIN_FILTER_NAME,
-      SERVER_DATE_RANGE_MAX_FILTER_NAME
+      SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME,
+      SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME
     ),
     defaultValue: {
       ...DEFAULT_DATE_RANGE_FILTER_VALUE,

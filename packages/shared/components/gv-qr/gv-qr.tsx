@@ -1,9 +1,9 @@
 import "./gv-qr.scss";
 
 import classnames from "classnames";
-import { GVColors } from "gv-react-components";
 import QRCode from "qrcode.react";
 import * as React from "react";
+import GVColors from "shared/components/gv-styles/gv-colors";
 
 interface IGVqr {
   value: number | string;

@@ -1,9 +1,11 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { AttachToSignalProviderModeEnum } from "gv-api-web";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import { SetSubmittingType } from "shared/utils/types";
@@ -28,9 +30,6 @@ class FollowParams extends React.PureComponent<
     };
     const setMaxVolumePercent = () => {
       setFieldValue("percent", "999");
-    };
-    const setMaxAmountFixedVolume = () => {
-      setFieldValue("fixedVolume", "99999");
     };
     const isAllow = (values: any) => {
       // return true;
@@ -72,7 +71,6 @@ class FollowParams extends React.PureComponent<
               name="fixedVolume"
               label={t("follow-program.params.usd-equivalent")}
               currency={"USD"}
-              setMax={setMaxAmountFixedVolume}
             />
           </div>
         )}

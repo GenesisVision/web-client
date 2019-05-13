@@ -82,9 +82,9 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   }
 }
 
-@mixin vertical-paddings($padding-top, $padding-bottom: $padding-top) {
-  @include adaptive-padding(top, $padding-top);
-  @include adaptive-padding(bottom, $padding-bottom);
+@mixin vertical-paddings($vertical-padding, $divider: $divider-padding) {
+  @include adaptive-padding(top, $vertical-padding, $divider);
+  @include adaptive-padding(bottom, $vertical-padding, $divider);
 }
 
 @mixin horizontal-paddings($horizontal-padding, $divider: $divider-padding) {

@@ -7,11 +7,11 @@ import {
   removeFavoriteFund
 } from "../actions/favorite-fund.actions";
 
-export type ToggleFavoriteFundDispatchableType = (
+export type ToggleFavoriteDispatchableType = (
   id: string,
   isFavorite: boolean
 ) => RootThunk<void>;
-export const toggleFavoriteFundDispatchable: ToggleFavoriteFundDispatchableType = (
+export const toggleFavoriteFundDispatchable: ToggleFavoriteDispatchableType = (
   id,
   isFavorite
 ) => dispatch => {

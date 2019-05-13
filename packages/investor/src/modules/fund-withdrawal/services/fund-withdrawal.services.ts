@@ -20,12 +20,10 @@ export const fetchFundWithdrawInfo = (
 ): InvestorThunk<Promise<FundWithdrawalInfoResponse>> => dispatch => {
   return Promise.all([
     dispatch(getFundWithdrawInfo(id, currency)),
-    dispatch(getRate(currency)),
     dispatch(fetchWalletsByCurrencyAvailable(currency))
-  ]).then(([withdrawalInfo, rate, wallets]) => {
+  ]).then(([withdrawalInfo, wallets]) => {
     return {
       withdrawalInfo: withdrawalInfo.value,
-      rate: rate.value,
       wallets: wallets.value.wallets
     };
   });

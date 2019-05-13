@@ -1,12 +1,14 @@
 import "./custom-notification.scss";
 
-import { GVButton, GVSwitch, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVSwitch from "shared/components/gv-selection/gv-switch";
+import GVTextField from "shared/components/gv-text-field";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import {

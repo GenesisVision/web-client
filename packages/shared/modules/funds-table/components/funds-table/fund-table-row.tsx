@@ -1,5 +1,4 @@
 import { FundDetails } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -7,18 +6,20 @@ import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 interface Props {
   fund: FundDetails;
   isAuthenticated?: boolean;
-  toggleFavorite?(id: string, selected: boolean): void;
+  toggleFavorite?: TableToggleFavoriteHandlerType;
   title?: JSX.Element | string;
 }
 

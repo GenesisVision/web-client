@@ -1,11 +1,11 @@
 import "./details-investment.scss";
 
-import { GVButton } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
+import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,

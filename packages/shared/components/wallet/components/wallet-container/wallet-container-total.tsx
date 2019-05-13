@@ -5,12 +5,13 @@ import {
   MultiWalletFilters,
   WalletData
 } from "gv-api-web";
-import { GVTab, GVTabs } from "gv-react-components";
 import { Location } from "history";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "redux";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 

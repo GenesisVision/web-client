@@ -1,11 +1,11 @@
 import { WalletData } from "gv-api-web";
-import React from "react";
+import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import translate from "react-i18next/src/translate";
-import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
-import Tooltip from "shared/components/tooltip/tooltip";
-import ArrowIcon from "shared/media/arrow-up.svg";
-import ConvertIcon from "shared/media/convert.svg";
+
+import DepositButton from "../buttons/deposit-button";
+import TransferButton from "../buttons/transfer-button";
+import WithdrawButton from "../buttons/withdraw-button";
 
 interface IWalletListButton {
   wallet: WalletData;
@@ -20,7 +20,7 @@ interface IWalletListButton {
   ): (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const WalletListButton: React.FC<
+const _WalletListButton: React.FC<
   IWalletListButton & InjectedTranslateProps
 > = ({
   t,
@@ -29,59 +29,18 @@ const WalletListButton: React.FC<
   handleOpenWithdrawPopup,
   handleOpenAddFundsPopup
 }) => (
-  <React.Fragment>
-    <Tooltip
-      render={() => (
-        <div className="wallet-list__tooltip-button">
-          {t("wallet-page.buttons.internal-transfer")}
-        </div>
-      )}
-    >
-      <div className="wallet-list__button">
-        <Chip
-          className="wallet-list__button-transfer"
-          onClick={handleOpenTransferPopup(wallet)}
-        >
-          <img src={ConvertIcon} alt="Convert Icon" />
-        </Chip>
-      </div>
-    </Tooltip>
-    <Tooltip
-      render={() => (
-        <div className="wallet-list__tooltip-button">
-          {t("wallet-page.buttons.withdraw")}
-        </div>
-      )}
-    >
-      <div className="wallet-list__button">
-        <Chip
-          className="wallet-list__withdraw"
-          onClick={handleOpenWithdrawPopup(wallet)}
-          disabled={wallet.isWithdrawalEnabled === false}
-        >
-          <img src={ArrowIcon} alt="Arrow Icon" />
-        </Chip>
-      </div>
-    </Tooltip>
-    <Tooltip
-      render={() => (
-        <div className="wallet-list__tooltip-button">
-          {t("wallet-page.buttons.deposit")}
-        </div>
-      )}
-    >
-      <div className="wallet-list__button">
-        <Chip
-          className="wallet-list__button-add-funds"
-          type={CHIP_TYPE.POSITIVE}
-          onClick={handleOpenAddFundsPopup(wallet)}
-          disabled={wallet.isDepositEnabled === false}
-        >
-          +
-        </Chip>
-      </div>
-    </Tooltip>
-  </React.Fragment>
+  <>
+    <TransferButton handleOpen={handleOpenTransferPopup(wallet)} />
+    <WithdrawButton
+      handleOpen={handleOpenWithdrawPopup(wallet)}
+      disabled={wallet.isWithdrawalEnabled === false}
+    />
+    <DepositButton
+      handleOpen={handleOpenAddFundsPopup(wallet)}
+      disabled={wallet.isDepositEnabled === false}
+    />
+  </>
 );
 
-export default translate()(WalletListButton);
+const WalletListButton = React.memo(translate()(_WalletListButton));
+export default WalletListButton;

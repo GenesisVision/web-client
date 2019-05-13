@@ -1,11 +1,17 @@
 import "./transfer-form.scss";
 
 import { FormikProps, withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
+import {
+  InternalTransferRequest,
+  InternalTransferRequestSourceTypeEnum
+} from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -16,36 +22,28 @@ import { SetSubmittingType } from "shared/utils/types";
 import { Schema, lazy, number, object } from "yup";
 
 import * as service from "../services/transfer.services";
-import {
-  ItemType,
-  ItemsType,
-  TRANSFER_CONTAINER,
-  TRANSFER_DIRECTION
-} from "../transfer.types";
+import { ItemType, ItemsType, TRANSFER_CONTAINER } from "../transfer.types";
 
 class _TransferForm extends React.PureComponent<Props> {
   onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue, values } = this.props;
     const currencyFromNew = event.target.value;
-    if (currencyFromNew === values.destinationId) {
-      setFieldValue("destinationId", values.sourceId);
+    if (currencyFromNew === values[FIELDS.destinationId]) {
+      setFieldValue(FIELDS.destinationId, values[FIELDS.sourceId]);
     }
-    setFieldValue("amount", "");
-    setFieldValue("sourceId", currencyFromNew);
+    setFieldValue(FIELDS.amount, "");
+    setFieldValue(FIELDS.sourceId, currencyFromNew);
   };
 
-  onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { setFieldValue } = this.props;
-    setFieldValue("destinationId", event.target.value);
-  };
+  onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) =>
+    this.props.setFieldValue(FIELDS.destinationId, event.target.value);
 
   isAllow = (values: NumberFormatValues) => {
+    const { floatValue, formattedValue, value } = values;
     const selectedSourceItem = service.getSelectedItem(
       this.props.sourceItems,
-      this.props.values.sourceId
+      this.props.values[FIELDS.sourceId]
     );
-
-    const { floatValue, formattedValue, value } = values;
     const { currency, available } = selectedSourceItem;
     return (
       formattedValue === "" ||
@@ -69,19 +67,21 @@ class _TransferForm extends React.PureComponent<Props> {
       isSubmitting
     } = this.props;
     const { title = t("transfer.title") } = this.props;
-    const { sourceId, destinationId } = values;
     const destinationItemWithoutCurrent = service.getDestinationItems(
       destinationItems,
-      sourceId
+      values[FIELDS.sourceId]
     );
-    const selectedSourceItem = service.getSelectedItem(sourceItems, sourceId);
+    const selectedSourceItem = service.getSelectedItem(
+      sourceItems,
+      values[FIELDS.sourceId]
+    );
     const formattedAvailableSourceItem = formatCurrencyValue(
       selectedSourceItem.available,
       selectedSourceItem.currency
     );
     const selectedDestinationItem = service.getSelectedItem(
       destinationItemWithoutCurrent,
-      destinationId
+      values[FIELDS.destinationId]
     );
     const formattedAvailableDestinationItem = formatCurrencyValue(
       selectedDestinationItem.available,
@@ -89,10 +89,11 @@ class _TransferForm extends React.PureComponent<Props> {
     );
 
     const setMaxAmount = () => {
-      setFieldValue("amount", formattedAvailableSourceItem);
+      setFieldValue(FIELDS.amount, formattedAvailableSourceItem);
     };
 
-    const disableButton = isSubmitting || !values.amount || !isValid || !dirty;
+    const disableButton =
+      isSubmitting || !values[FIELDS.amount] || !isValid || !dirty;
 
     return (
       <form
@@ -106,7 +107,7 @@ class _TransferForm extends React.PureComponent<Props> {
             <h2>{title}</h2>
           </div>
           <GVFormikField
-            name="sourceId"
+            name={FIELDS.sourceId}
             component={GVTextField}
             label={t("transfer.from")}
             InputComponent={Select}
@@ -129,7 +130,7 @@ class _TransferForm extends React.PureComponent<Props> {
         </div>
         <div className="dialog__bottom">
           <GVFormikField
-            name="destinationId"
+            name={FIELDS.destinationId}
             component={GVTextField}
             label={t("transfer.to")}
             InputComponent={Select}
@@ -153,21 +154,22 @@ class _TransferForm extends React.PureComponent<Props> {
           </StatisticItem>
           <div className="dialog-field">
             <InputAmountField
-              name="amount"
+              name={FIELDS.amount}
               label={t("transfer.amount")}
               currency={selectedSourceItem.currency}
               setMax={setMaxAmount}
               isAllow={this.isAllow}
+              emptyInit
             />
           </div>
-          {values.amount && (
+          {!!values[FIELDS.amount] && (
             <TransferRate
               destinationCurrency={selectedDestinationItem.currency}
               sourceCurrency={selectedSourceItem.currency}
             >
               {props => (
                 <span>{`≈ ${formatCurrencyValue(
-                  props.rate * Number(values.amount),
+                  props.rate * Number(values[FIELDS.amount]),
                   selectedDestinationItem.currency
                 )} ${selectedDestinationItem.currency}`}</span>
               )}
@@ -191,12 +193,14 @@ class _TransferForm extends React.PureComponent<Props> {
   }
 }
 
-const TransferForm = compose<React.FunctionComponent<OwnProps>>(
+const TransferForm = compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik<OwnProps, FormValues>({
+  withFormik<OwnProps, TransferFormValues>({
     displayName: "transfer",
     mapPropsToValues: props => {
       const {
+        destinationType,
+        sourceType,
         sourceItems,
         destinationItems,
         currentItem,
@@ -218,18 +222,25 @@ const TransferForm = compose<React.FunctionComponent<OwnProps>>(
         );
         destinationId = destinationItemWithoutCurrent[0].id;
       }
-      return { sourceId, amount: "", destinationId };
+      return {
+        [FIELDS.sourceId]: sourceId,
+        [FIELDS.amount]: 0,
+        [FIELDS.destinationId]: destinationId,
+        [FIELDS.sourceType]: sourceType,
+        [FIELDS.destinationType]: destinationType,
+        [FIELDS.transferAll]: false
+      };
     },
     validationSchema: (props: Props) => {
       const { sourceItems, t } = props;
       return lazy(
-        (values: FormValues): Schema<any> => {
+        (values: TransferFormValues): Schema<any> => {
           const selectedSourceItem = service.getSelectedItem(
             sourceItems,
-            values.sourceId
+            values[FIELDS.sourceId]
           );
           return object().shape({
-            amount: number()
+            [FIELDS.amount]: number()
               .moreThan(0, t("transfer.validation.amount-is-zero"))
               .max(
                 +formatCurrencyValue(
@@ -255,31 +266,30 @@ const TransferForm = compose<React.FunctionComponent<OwnProps>>(
 )(_TransferForm);
 export default TransferForm;
 
+enum FIELDS {
+  sourceId = "sourceId",
+  sourceType = "sourceType",
+  destinationId = "destinationId",
+  destinationType = "destinationType",
+  amount = "amount",
+  transferAll = "transferAll"
+}
+
 interface OwnProps {
-  onSubmit(
-    values: TransferFormValuesType,
-    setSubmitting: SetSubmittingType
-  ): void;
+  onSubmit(values: TransferFormValues, setSubmitting: SetSubmittingType): void;
   currentItem: ItemType;
+  sourceType: InternalTransferRequestSourceTypeEnum;
+  destinationType: InternalTransferRequestSourceTypeEnum;
+  sourceItems: ItemsType;
+  destinationItems: ItemsType;
   errorMessage?: string;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
-  sourceType?: TRANSFER_DIRECTION;
-  destinationType?: TRANSFER_DIRECTION;
-  sourceItems: ItemsType;
-  destinationItems: ItemsType;
 }
 
-interface FormValues {
-  sourceId: string;
-  destinationId: string;
-  amount: string;
-}
+export interface TransferFormValues extends InternalTransferRequest {}
 
-type Props = InjectedTranslateProps & FormikProps<FormValues> & OwnProps;
-
-export type TransferFormValuesType = FormValues & {
-  transferAll: boolean;
-  sourceType?: TRANSFER_DIRECTION;
-  destinationType?: TRANSFER_DIRECTION;
-};
+interface Props
+  extends InjectedTranslateProps,
+    FormikProps<TransferFormValues>,
+    OwnProps {}

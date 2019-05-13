@@ -1,10 +1,10 @@
 import { ProgramDetails } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import GVButton from "shared/components/gv-button";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Popover, {
@@ -19,6 +19,7 @@ import {
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import {
@@ -33,7 +34,7 @@ import {
 
 interface IProgramCardProps {
   program: ProgramDetails;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
+  toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
 
@@ -44,7 +45,7 @@ interface IProgramCardState {
   anchor?: EventTarget;
 }
 
-class ProgramCard extends React.Component<
+class ProgramCard extends React.PureComponent<
   IProgramCardProps & InjectedTranslateProps,
   IProgramCardState
 > {

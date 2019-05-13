@@ -1,10 +1,13 @@
 import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
 
-import TransferContainer, {
-  ITransferContainerOwnProps
-} from "./components/transfer-container";
-import { TRANSFER_CONTAINER, TRANSFER_DIRECTION } from "./transfer.types";
+import TransferContainer from "./components/transfer-container";
+import {
+  ItemType,
+  TRANSFER_CONTAINER,
+  TRANSFER_DIRECTION
+} from "./transfer.types";
+import { InternalTransferRequestSourceTypeEnum } from "gv-api-web";
 
 const _TransferPopup: React.FC<Props> = ({
   title,
@@ -27,8 +30,14 @@ const _TransferPopup: React.FC<Props> = ({
   </Dialog>
 );
 
-interface Props extends ITransferContainerOwnProps {
+interface Props {
+  currentItem: ItemType;
+  onClose(): void;
   open: boolean;
+  sourceType?: InternalTransferRequestSourceTypeEnum;
+  destinationType?: InternalTransferRequestSourceTypeEnum;
+  title?: string;
+  currentItemContainer?: TRANSFER_CONTAINER;
 }
 
 const TransferPopup = React.memo(_TransferPopup);

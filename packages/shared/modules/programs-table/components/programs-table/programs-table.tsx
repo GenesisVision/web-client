@@ -7,6 +7,12 @@ import {
   FilteringType,
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
+import {
+  RenderFiltersFuncType,
+  TableToggleFavoriteHandlerType,
+  UpdatePagingFuncType,
+  UpdateSortingFuncType
+} from "shared/components/table/components/table.types";
 import { IPaging } from "shared/components/table/helpers/paging.helpers";
 
 import ProgramCard from "./program-card";
@@ -20,20 +26,17 @@ interface IProgramsTableProps {
   columns?: SortingColumn[];
   showRating?: boolean;
   showSwitchView?: boolean;
-  currencies: string[];
+  currencies?: string[];
   data: ProgramsList;
   isPending?: boolean;
-  sorting: string;
-  updateSorting(opt: string): (dispatch: any, getState: any) => void;
-  filtering: FilteringType;
-  updateFilter(filter: any): void;
-  renderFilters?(
-    updateFilter: (filter: any) => void,
-    filtering: FilteringType
-  ): JSX.Element;
+  sorting?: string;
+  updateSorting?: UpdateSortingFuncType;
+  filtering?: FilteringType;
+  updateFilter?(filter: any): void;
+  renderFilters?: RenderFiltersFuncType;
   paging: IPaging;
-  updatePaging(page: number): void;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
+  updatePaging: UpdatePagingFuncType;
+  toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated?: boolean;
   title: string;
   redirectToLogin?(): void;

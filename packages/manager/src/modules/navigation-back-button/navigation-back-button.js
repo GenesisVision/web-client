@@ -1,11 +1,11 @@
 import "./navigation-back-button.scss";
 
 import { goBack } from "connected-react-router";
-import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators, compose } from "redux";
+import GVButton from "shared/components/gv-button";
 
 const BackButton = ({ t, service }) => {
   return (

@@ -7,14 +7,14 @@ import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";
 
-import { IUpdateFilterFunc } from "../table.types";
+import { UpdateFilterFunc } from "../table.types";
 import FilterArrowIcon from "./filter-arrow-icon";
 
 interface IFilterProps {
   label: string;
   value: any;
   renderValueText(value: any): string;
-  updateFilter?: IUpdateFilterFunc;
+  updateFilter?: UpdateFilterFunc;
   name: string;
 }
 
