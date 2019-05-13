@@ -169,7 +169,7 @@ class ProgramCard extends React.PureComponent<
           <div className="table-cards__chart-info">
             <div className="table-cards__profit">
               <Profitability
-                value={program.statistic.profitPercent}
+                value={formatValue(program.statistic.profitPercent, 2)}
                 variant={PROFITABILITY_VARIANT.CHIPS}
                 prefix={PROFITABILITY_PREFIX.ARROW}
               >
