@@ -3,27 +3,27 @@ import * as React from "react";
 
 import { PROFITABILITY_VARIANT } from "./profitability.helper";
 
-const BaseProfitability: React.FC<Props> = ({
+const _BaseProfitability: React.FC<Props> = ({
   className,
   variant,
   isPositive,
   isNegative,
   children
-}) => {
-  return (
-    <div
-      className={classNames("profitability", className, {
-        "profitability--positive": isPositive,
-        "profitability--negative": isNegative,
-        "profitability--chips": variant === PROFITABILITY_VARIANT.CHIPS
-      })}
-    >
-      {children}
-    </div>
-  );
-};
+}) => (
+  <div
+    className={classNames("profitability", className, {
+      "profitability--positive": isPositive,
+      "profitability--negative": isNegative,
+      "profitability--chips": variant === PROFITABILITY_VARIANT.CHIPS
+    })}
+  >
+    {children}
+  </div>
+);
 
-export default React.memo(BaseProfitability);
+const BaseProfitability = React.memo(_BaseProfitability);
+
+export default BaseProfitability;
 
 interface Props {
   className?: string;
