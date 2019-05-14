@@ -2,10 +2,10 @@ import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import { TableCell, TableRow } from "shared/components/table/components";
 import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 
-import { TableCell, TableRow } from "../../../table/components";
 import { PROGRAM_SUBSCRIBERS_COLUMNS } from "../program-details.constants";
 
 class _ProgramSubscriptions extends React.Component<Props> {
