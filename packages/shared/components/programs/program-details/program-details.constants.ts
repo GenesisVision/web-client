@@ -30,10 +30,12 @@ export const PROGRAM_FOREX_TRADES_COLUMNS: SortingColumn[] = [
     sortingName: "ByProfit"
   },
   {
-    name: "commission"
+    name: "commission",
+    sortingName: "ByCommission"
   },
   {
-    name: "swap"
+    name: "swap",
+    sortingName: "BySwap"
   },
   {
     name: "date",
@@ -66,7 +68,8 @@ export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
     sortingName: "ByProfit"
   },
   {
-    name: "commission"
+    name: "commission",
+    sortingName: "ByCommission"
   },
   {
     name: "date",
