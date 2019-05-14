@@ -8,7 +8,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 
 import { PROGRAM_SUBSCRIBERS_COLUMNS } from "../program-details.constants";
 
-class _ProgramSubscriptions extends React.Component<Props> {
+class _ProgramSubscriptions extends React.PureComponent<Props> {
   render() {
     const { t } = this.props;
     return (
