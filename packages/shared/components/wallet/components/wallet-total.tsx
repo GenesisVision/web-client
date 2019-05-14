@@ -16,6 +16,7 @@ import RootState from "shared/reducers/root-reducer";
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
+import WalletSettingsLoader from "./wallet-balance/wallet-settings-loader";
 import WalletContainerTotal from "./wallet-container/wallet-container-total";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 
@@ -29,33 +30,42 @@ class WalletTotal extends React.PureComponent<Props & WalletRouteProps> {
       isPayFeesWithGvt,
       copyTradingAccounts
     } = this.props;
-    if (!info || !filters) return <WalletBalanceLoader />;
     return (
       <Page title={t("wallet-page.title")}>
         <div className="wallet-balance">
           <div className="wallet-balance__wrapper">
             <h1 className="wallet-balance__title">{t("wallet-page.title")}</h1>
-            {isPayFeesWithGvt !== undefined && (
+            {isPayFeesWithGvt === undefined ? (
+              <WalletSettingsLoader />
+            ) : (
               <WalletSettingsContainer isPayFeesWithGvt={isPayFeesWithGvt} />
             )}
           </div>
-          <WalletBalanceElements
-            available={info.availableCcy}
-            pending={info.pendingCcy}
-            total={info.totalCcy}
-            invested={info.investedCcy}
-            currency={info.currencyCcy}
-          />
+          {!info || !filters ? (
+            <WalletBalanceLoader />
+          ) : (
+            <>
+              <WalletBalanceElements
+                available={info.availableCcy}
+                pending={info.pendingCcy}
+                total={info.totalCcy}
+                invested={info.investedCcy}
+                currency={info.currencyCcy}
+              />
+              <WalletContainerTotal
+                isPending={copyTradingAccounts.isPending}
+                copyTradingAccounts={
+                  copyTradingAccounts.data
+                    ? copyTradingAccounts.data.accounts
+                    : []
+                }
+                wallets={wallets}
+                filters={filters}
+                copytrading={ROLE_ENV === ROLE.INVESTOR}
+              />
+            </>
+          )}
         </div>
-        <WalletContainerTotal
-          isPending={copyTradingAccounts.isPending}
-          copyTradingAccounts={
-            copyTradingAccounts.data ? copyTradingAccounts.data.accounts : []
-          }
-          wallets={wallets}
-          filters={filters}
-          copytrading={ROLE_ENV === ROLE.INVESTOR}
-        />
       </Page>
     );
   }
@@ -67,7 +77,7 @@ const mapStateToProps = (state: RootState) => ({
   copyTradingAccounts: state.copyTradingAccounts.info,
   isPayFeesWithGvt: state.wallet.info.data
     ? state.wallet.info.data.payFeesWithGvt
-    : null,
+    : undefined,
   filters: state.platformData.data
     ? state.platformData.data.enums.multiWallet
     : undefined
