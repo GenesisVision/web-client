@@ -556,7 +556,8 @@
       "tabs": {
         "trades": "Trades",
         "events": "Events",
-        "open-positions": "Open positions"
+        "open-positions": "Open positions",
+        "subscriptions": "Subscriptions"
       },
       "trades": {
         "swap": "Swap",
@@ -581,6 +582,15 @@
         "priceCurrent": "Price",
         "profit": "Profit",
         "profitPercent": "Profit %"
+      },
+      "subscriptions": {
+        "number": "Number",
+        "trades": "Trades",
+        "profit": "Profit",
+        "volume": "Volume",
+        "subscriptionDate": "Subscription date",
+        "unsubscriptionDate": "Unsubscription date",
+        "status": "Status"
       }
     },
     "chart": {

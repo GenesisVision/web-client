@@ -95,6 +95,30 @@ export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
   }*/
 ];
 
+export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
+  {
+    name: "number"
+  },
+  {
+    name: "trades"
+  },
+  {
+    name: "profit"
+  },
+  {
+    name: "volume"
+  },
+  {
+    name: "subscriptionDate"
+  },
+  {
+    name: "unsubscriptionDate"
+  },
+  {
+    name: "status"
+  }
+];
+
 export const PROGRAM_TRADES_DEFAULT_FILTERS = [
   {
     ...composeDefaultDateRangeFilter({
