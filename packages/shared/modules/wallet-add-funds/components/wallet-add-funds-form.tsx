@@ -1,8 +1,8 @@
 import copy from "copy-to-clipboard";
-import { withFormik } from "formik";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { FormikProps, withFormik } from "formik";
+import { WalletData } from "gv-api-web";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -13,15 +13,15 @@ import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import filesService from "shared/services/file-service";
 
-class WalletAddFundsForm extends Component {
-  onChangeCurrency = (name, target) => {
+class _WalletAddFundsForm extends React.PureComponent<Props> {
+  onChangeCurrency = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue } = this.props;
-    setFieldValue("currency", target.props.value);
+    setFieldValue("currency", event.target.value);
   };
 
   render() {
     const { t, values, wallets, notifySuccess, notifyError } = this.props;
-    const selected = wallets.find(w => w.currency === values.currency) || {};
+    const selected = wallets.find(w => w.currency === values.currency)!;
     const { depositAddress } = selected;
     const onCopy = () => {
       try {
@@ -75,9 +75,11 @@ class WalletAddFundsForm extends Component {
             onClick={onCopy}
             disabled={!depositAddress}
           >
-            <CopyIcon />
-            &nbsp;
-            {t("buttons.copy")}
+            <>
+              <CopyIcon />
+              &nbsp;
+              {t("buttons.copy")}
+            </>
           </GVButton>
         </div>
       </form>
@@ -85,22 +87,9 @@ class WalletAddFundsForm extends Component {
   }
 }
 
-WalletAddFundsForm.propTypes = {
-  wallets: PropTypes.arrayOf(
-    PropTypes.shape({
-      depositAddress: PropTypes.string,
-      currency: PropTypes.string,
-      rateToGVT: PropTypes.number,
-      title: PropTypes.string,
-      logo: PropTypes.string
-    })
-  ),
-  t: PropTypes.func
-};
-
-export default compose(
+const WalletAddFundsForm = compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik({
+  withFormik<OwnProps, FormValues>({
     displayName: "add-funds",
     mapPropsToValues: props => {
       let currency = props.currentWallet ? props.currentWallet.currency : "GVT";
@@ -108,9 +97,31 @@ export default compose(
         currency = props.wallets[0] ? props.wallets[0].currency : "";
       }
       return {
-        currency,
-        amount: ""
+        currency
       };
-    }
+    },
+    handleSubmit: () => {}
   })
-)(WalletAddFundsForm);
+)(_WalletAddFundsForm);
+export default WalletAddFundsForm;
+
+export interface CurrentWallet {
+  currency: string;
+  available: number;
+}
+
+interface OwnProps {
+  wallets: WalletData[];
+  currentWallet: CurrentWallet;
+  notifySuccess(x: string): void;
+  notifyError(x: string): void;
+}
+
+interface FormValues {
+  currency: string;
+}
+
+interface Props
+  extends InjectedTranslateProps,
+    FormikProps<FormValues>,
+    OwnProps {}
