@@ -24,7 +24,7 @@ const _ProgramsRatingStats: React.FC<Props> = ({ t, levelData }) => (
     </StatisticRatingItem>
     <StatisticRatingItem label={t("rating-page.currentProfit")}>
       <Profitability
-        value={levelData.targetProfit}
+        value={formatValue(levelData.targetProfit, 2)}
         variant={PROFITABILITY_VARIANT.CHIPS}
         prefix={PROFITABILITY_PREFIX.ARROW}
       >

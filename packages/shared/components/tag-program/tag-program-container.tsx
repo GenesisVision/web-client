@@ -19,7 +19,7 @@ class TagProgramContainer extends React.Component<ITagProgramContainerProps> {
   render() {
     const { tags } = this.props;
     const length = tags.length;
-    const reminder = length > MAX_VISIBLE_TAGS ? length - 1 : null;
+    const reminder = length > MAX_VISIBLE_TAGS ? `${length - 1}` : null;
     return (
       <div className="tag-program-container">
         {tags.map(
