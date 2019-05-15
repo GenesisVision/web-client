@@ -15,7 +15,7 @@ import RootState from "shared/reducers/root-reducer";
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
+import WalletContainerLoader from "./wallet-balance/wallet-container-loader";
 import WalletContainer from "./wallet-container/wallet-container";
 
 class WalletCurrency extends React.PureComponent<Props, State> {
@@ -42,7 +42,7 @@ class WalletCurrency extends React.PureComponent<Props, State> {
 
   render() {
     const { t, info, isPending, filters } = this.props;
-    if ((!info && isPending) || !filters) return <WalletBalanceLoader />;
+    if ((!info && isPending) || !filters) return <WalletContainerLoader />;
     if (!info) return <NotFoundPage />;
     const currentWallet: CurrentWallet = {
       currency: info.currency,
