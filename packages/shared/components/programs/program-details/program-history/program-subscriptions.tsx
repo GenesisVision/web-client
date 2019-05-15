@@ -8,49 +8,46 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 
 import { PROGRAM_SUBSCRIBERS_COLUMNS } from "../program-details.constants";
 
-class _ProgramSubscriptions extends React.PureComponent<Props> {
-  render() {
-    const { t } = this.props;
-    return (
-      <TableModule
-        getItems={() =>
-          new Promise(resolve => {
-            resolve({
-              items: [{}, {}, {}],
-              total: 3
-            });
-          })
+const _ProgramSubscriptions: React.FC<Props> = ({ t }) => {
+  return (
+    <TableModule
+      getItems={() =>
+        new Promise(resolve => {
+          resolve({
+            items: [{}, {}, {}],
+            total: 3
+          });
+        })
+      }
+      paging={DEFAULT_PAGING}
+      columns={PROGRAM_SUBSCRIBERS_COLUMNS}
+      renderHeader={column => (
+        <span
+          className={`details-trades__head-cell program-details-trades__cell--${
+            column.name
+          }`}
+        >
+          {t(`program-details-page.history.subscriptions.${column.name}`)}
+        </span>
+      )}
+      renderBodyRow={
+        (/*subscription: any*/) => {
+          return (
+            <TableRow>
+              <TableCell>1</TableCell>
+              <TableCell>100</TableCell>
+              <TableCell>100%</TableCell>
+              <TableCell>1035</TableCell>
+              <TableCell>{moment().format()}</TableCell>
+              <TableCell>{moment().format()}</TableCell>
+              <TableCell>Done</TableCell>
+            </TableRow>
+          );
         }
-        paging={DEFAULT_PAGING}
-        columns={PROGRAM_SUBSCRIBERS_COLUMNS}
-        renderHeader={column => (
-          <span
-            className={`details-trades__head-cell program-details-trades__cell--${
-              column.name
-            }`}
-          >
-            {t(`program-details-page.history.subscriptions.${column.name}`)}
-          </span>
-        )}
-        renderBodyRow={
-          (/*subscription: any*/) => {
-            return (
-              <TableRow>
-                <TableCell>1</TableCell>
-                <TableCell>100</TableCell>
-                <TableCell>100%</TableCell>
-                <TableCell>1035</TableCell>
-                <TableCell>{moment().format()}</TableCell>
-                <TableCell>{moment().format()}</TableCell>
-                <TableCell>Done</TableCell>
-              </TableRow>
-            );
-          }
-        }
-      />
-    );
-  }
-}
+      }
+    />
+  );
+};
 
 const ProgramSubscriptions = compose<React.FC<OwnProps>>(translate())(
   _ProgramSubscriptions
@@ -59,5 +56,4 @@ const ProgramSubscriptions = compose<React.FC<OwnProps>>(translate())(
 export default ProgramSubscriptions;
 
 interface Props extends OwnProps, InjectedTranslateProps {}
-
 interface OwnProps {}
