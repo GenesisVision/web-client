@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const withLoader = <T extends { [k: string]: any }>(
+const withLoader = <T extends {}>(
   Component: React.ComponentType<T>
 ): React.ComponentType<WithLoaderProps & T> => props => {
   const { loader, condition = true } = props;
