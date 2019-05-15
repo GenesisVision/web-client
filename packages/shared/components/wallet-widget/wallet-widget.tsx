@@ -1,6 +1,7 @@
 import "./wallet-widget.scss";
 
 import classNames from "classnames";
+import { WalletsGrandTotalCurrencyCcyEnum } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -12,13 +13,15 @@ import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes"
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import { CurrentWallet } from "../../modules/wallet-add-funds/components/wallet-add-funds-form";
+
 interface IWalletWidgetProps {
   available: number;
   invested: number;
   pending: number;
   totalBalance: number;
   className?: string;
-  currency: string;
+  currency: WalletsGrandTotalCurrencyCcyEnum;
 }
 
 interface IWalletWidgetState {
@@ -56,7 +59,7 @@ class WalletWidget extends React.Component<
       pending = 0,
       className
     } = this.props;
-    const currentWallet = { available, currency };
+    const currentWallet: CurrentWallet = { available, currency };
     return (
       <React.Fragment>
         <div className={classNames("wallet-widget", className)}>
