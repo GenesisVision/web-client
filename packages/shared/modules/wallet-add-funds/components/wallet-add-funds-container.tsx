@@ -45,8 +45,8 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  notifySuccess(x: string): void;
-  notifyError(x: string): void;
+  notifySuccess(text: string): void;
+  notifyError(text: string): void;
 }
 
 interface Props extends OwnProps, StateProps, DispatchProps {}

@@ -1,5 +1,5 @@
 import copy from "copy-to-clipboard";
-import { WalletData } from "gv-api-web";
+import { WalletData, WalletsGrandTotalCurrencyCcyEnum } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
@@ -9,8 +9,9 @@ import CopyIcon from "shared/components/icon/copy-icon";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import filesService from "shared/services/file-service";
+import { CurrencyEnum } from "shared/utils/types";
 
-class WalletAddFundsForm extends React.PureComponent<Props, State> {
+class _WalletAddFundsForm extends React.PureComponent<Props, State> {
   state = {
     currency: this.props.wallets[0].currency
   };
@@ -24,7 +25,7 @@ class WalletAddFundsForm extends React.PureComponent<Props, State> {
   }
 
   onChangeCurrency = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ currency: event.target.value });
+    this.setState({ currency: event.target.value as CurrencyEnum });
   };
 
   render() {
@@ -97,22 +98,23 @@ class WalletAddFundsForm extends React.PureComponent<Props, State> {
   }
 }
 
-export default translate()(WalletAddFundsForm);
+const WalletAddFundsForm = translate()(_WalletAddFundsForm);
+export default WalletAddFundsForm;
 
 export interface CurrentWallet {
-  currency: string;
+  currency: CurrencyEnum | WalletsGrandTotalCurrencyCcyEnum;
   available: number;
 }
 
 interface OwnProps {
   wallets: WalletData[];
   currentWallet: CurrentWallet;
-  notifySuccess(x: string): void;
-  notifyError(x: string): void;
+  notifySuccess(text: string): void;
+  notifyError(text: string): void;
 }
 
 interface State {
-  currency: string;
+  currency: CurrencyEnum;
 }
 
 interface Props extends InjectedTranslateProps, OwnProps {}
