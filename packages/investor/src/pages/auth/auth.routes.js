@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import EmailConfirmPage, {
+  EMAIL_CONFIRM_ROUTE
+} from "shared/components/auth/email-confirm/email-confirm.page";
 import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import SignupRoutes, {
   SIGNUP_ROUTE
 } from "shared/components/auth/signup/signup.routes";
 
-import EmailConfirmPage, {
-  EMAIL_CONFIRM_ROUTE
-} from "./email-confirm/email-confirm.page";
 import ForgotPasswordRoutes, {
   FORGOT_PASSWORD_ROUTE
 } from "./forgot-password/forgot-password.routes";
