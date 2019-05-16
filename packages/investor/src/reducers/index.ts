@@ -2,9 +2,6 @@ import { connectRouter } from "connected-react-router";
 import copytradingTablesReducer, {
   CopytradingTablesState
 } from "modules/copytrading-tables/reducers/copytrading-tables.reducer";
-import passwordRestoreReducer, {
-  PasswordState
-} from "pages/auth/forgot-password/reducers/password-restore-reducers";
 import dashboardReducer, {
   DashboardState
 } from "pages/dashboard/reducers/dashboard.reducers";
@@ -13,6 +10,8 @@ import managerReducer, {
 } from "pages/manager/reducers/manager.reducers";
 import { combineReducers } from "redux";
 import { LOGOUT } from "shared/actions/auth-actions";
+import passwordRestoreReducer from "shared/components/auth/forgot-password/reducers/password-restore-reducer";
+import { PasswordState } from "shared/components/auth/forgot-password/reducers/password-restore-reducers";
 import loginReducer, {
   LoginState
 } from "shared/components/auth/login/reducers/login.reducers";
