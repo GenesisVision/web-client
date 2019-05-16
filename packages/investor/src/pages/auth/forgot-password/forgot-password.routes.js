@@ -1,10 +1,9 @@
-import { HOME_ROUTE } from "pages/app/app.routes";
-import { SIGNUP_ROUTE } from "shared/components/auth/signup/signup.routes";
 import React from "react";
 import { translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import LoginFooter from "shared/components/auth/components/login-footer/login-footer";
+import { SIGNUP_ROUTE } from "shared/components/auth/signup/signup.routes";
 
 import EmailPendingPage from "./email-pending/email-pending.page";
 import ForgotPasswordPage from "./forgot-password/forgot-password.page";
@@ -19,7 +18,6 @@ const ForgotPasswordRoutes = ({ t }) => {
     <AuthLayout
       Footer={LoginFooter}
       title={t("auth.password-restore.title")}
-      HOME_ROUTE={HOME_ROUTE}
       SIGNUP_ROUTE={SIGNUP_ROUTE}
     >
       <Switch>
