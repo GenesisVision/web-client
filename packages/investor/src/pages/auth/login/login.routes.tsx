@@ -1,4 +1,3 @@
-import { HOME_ROUTE } from "pages/app/app.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
@@ -18,7 +17,6 @@ const LoginRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
   <AuthLayout
     Footer={LoginFooter}
     title={t("auth.login.title")}
-    HOME_ROUTE={HOME_ROUTE}
     SIGNUP_ROUTE={SIGNUP_ROUTE}
   >
     <Switch>
