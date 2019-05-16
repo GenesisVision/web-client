@@ -1,9 +1,8 @@
 import { ForgotPasswordViewModel } from "gv-api-web";
+import { FORGOT_PASSWORD } from "shared/components/auth/forgot-password/actions/forgot-password.actions";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/api-reducer/api-reducer";
-
-import { FORGOT_PASSWORD } from "../actions/forgot-password.actions";
 
 export type ForgotPasswordState = IApiState<ForgotPasswordViewModel>;
 
