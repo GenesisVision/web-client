@@ -3,13 +3,15 @@ import AppRoutes from "pages/app/app.routes";
 import React from "react";
 import { Provider } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import AuthRoutes, {
+  AUTH_ROUTES_REGEX
+} from "shared/components/auth/auth.routes";
 import GVScrollContainer from "shared/components/scroll/gvscroll-container";
 import AlertMessageList from "shared/modules/alert-message/components/alert-message-list/alert-message-list";
+import { HOME_ROUTE } from "shared/routes/app.routes";
 import history from "shared/utils/history";
 
 import store from "./store";
-import AuthRoutes, { AUTH_ROUTES_REGEX } from "shared/components/auth/auth.routes";
-import { HOME_ROUTE } from "shared/routes/app.routes";
 
 const Root = () => {
   return (

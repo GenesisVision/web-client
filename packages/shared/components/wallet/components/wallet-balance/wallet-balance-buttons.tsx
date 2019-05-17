@@ -15,38 +15,38 @@ const _WalletBalanceButtons: React.FC<Props> = ({
   isWithdrawalEnabled
 }) => (
   <div className="wallet-balance__buttons">
-    {/*
-      // @ts-ignore*/}
     <GVButton onClick={handleAddFunds} disabled={isDepositEnabled === false}>
-      <span className="wallet-balance__button-icon wallet-balance__button-icon--sign">
-        +
-      </span>
-      {t("wallet-page.deposit")}
+      <>
+        <span className="wallet-balance__button-icon wallet-balance__button-icon--sign">
+          +
+        </span>
+        {t("wallet-page.deposit")}
+      </>
     </GVButton>
-    {/*
-      // @ts-ignore*/}
     <GVButton
       color="secondary"
       variant="outlined"
       onClick={handleWithdraw}
       disabled={isWithdrawalEnabled === false}
     >
-      <img
-        className="wallet-balance__button-icon"
-        src={ArrowIcon}
-        alt="Arrow icon"
-      />
-      {t("wallet-page.withdraw")}
+      <>
+        <img
+          className="wallet-balance__button-icon"
+          src={ArrowIcon}
+          alt="Arrow icon"
+        />
+        {t("wallet-page.withdraw")}
+      </>
     </GVButton>
-    {/*
-      // @ts-ignore*/}
     <GVButton color="secondary" variant="outlined" onClick={handleTransfer}>
-      <img
-        className="wallet-balance__button-icon"
-        src={ConvertIcon}
-        alt="Convert icon"
-      />
-      {t("wallet-page.transfer")}
+      <>
+        <img
+          className="wallet-balance__button-icon"
+          src={ConvertIcon}
+          alt="Convert icon"
+        />
+        {t("wallet-page.transfer")}
+      </>
     </GVButton>
   </div>
 );

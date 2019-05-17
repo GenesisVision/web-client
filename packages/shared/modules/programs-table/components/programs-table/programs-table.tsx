@@ -21,6 +21,8 @@ import ProgramTableRow from "./program-table-row";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
 
+export const FAVORITE_COLUMN_NAME = "favorite";
+
 interface IProgramsTableProps {
   disableTitle?: boolean;
   columns?: SortingColumn[];
@@ -78,14 +80,20 @@ const ProgramsTable: React.FC<IProgramsTableProps> = ({
       renderFilters={renderFilters}
       renderHeader={column => (
         <ProgramTableHeaderCell
+          condition={
+            !isAuthenticated ||
+            (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
+          }
           column={column}
-          isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderSorting={column => (
         <ProgramTableSortingValue
+          condition={
+            !isAuthenticated ||
+            (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
+          }
           column={column}
-          isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderBodyRow={(program: ProgramDetails) => (

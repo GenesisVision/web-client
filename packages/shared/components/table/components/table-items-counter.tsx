@@ -1,5 +1,7 @@
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import withLoader from "shared/decorators/with-loader";
+
 import { IPaging } from "../helpers/paging.helpers";
 
 interface IItemsCounterProps extends IPaging {}
@@ -11,7 +13,6 @@ const ItemsCounter: React.FC<IItemsCounterProps & InjectedTranslateProps> = ({
   totalItems = 0,
   t
 }) => {
-  if (!totalItems) return null;
   const from = (currentPage - 1) * itemsOnPage + 1;
   const to = Math.min(currentPage * itemsOnPage, totalItems);
   return (
@@ -21,4 +22,4 @@ const ItemsCounter: React.FC<IItemsCounterProps & InjectedTranslateProps> = ({
   );
 };
 
-export default React.memo(translate()(ItemsCounter));
+export default withLoader(React.memo(translate()(ItemsCounter)));
