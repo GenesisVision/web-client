@@ -9,7 +9,7 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 
-import { FORGOT_PASSWORD_ROUTE } from "../login.routes";
+import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
 import validationSchema from "./login-form.validators";
 
 const _LoginForm: React.FC<
