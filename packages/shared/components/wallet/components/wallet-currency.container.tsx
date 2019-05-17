@@ -6,7 +6,7 @@ import NotFoundPage from "shared/components/not-found/not-found";
 import RootState from "shared/reducers/root-reducer";
 
 import { WalletRouteProps } from "../wallet.routes";
-import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
+import WalletContainerLoader from "./wallet-balance/wallet-container-loader";
 import WalletCurrency from "./wallet-currency";
 
 const _WalletCurrencyContainer: React.FC<Props> = ({
@@ -16,7 +16,7 @@ const _WalletCurrencyContainer: React.FC<Props> = ({
 }) => (
   <WalletCurrency
     condition={!isPending && !!info && !!filters}
-    loader={!info && !isPending ? <NotFoundPage /> : <WalletBalanceLoader />}
+    loader={!info && !isPending ? <NotFoundPage /> : <WalletContainerLoader />}
     info={info!}
     filters={filters!}
   />
