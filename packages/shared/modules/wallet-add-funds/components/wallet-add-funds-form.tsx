@@ -1,5 +1,5 @@
 import copy from "copy-to-clipboard";
-import { WalletData, WalletsGrandTotalCurrencyCcyEnum } from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
@@ -102,7 +102,7 @@ const WalletAddFundsForm = translate()(_WalletAddFundsForm);
 export default WalletAddFundsForm;
 
 export interface CurrentWallet {
-  currency: CurrencyEnum | WalletsGrandTotalCurrencyCcyEnum;
+  currency: CurrencyEnum;
   available: number;
 }
 
