@@ -1,7 +1,7 @@
 import { FundInvestInfo } from "gv-api-web";
 import React from "react";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
@@ -59,7 +59,7 @@ const mapDispatchToProps = (
   dispatch: Dispatch,
   props: OwnProps
 ): DispatchProps => ({
-  service: bindActionCreators<any, any>(
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       programInvest: programInvestCreator(props.programInvest)
     },
@@ -98,10 +98,12 @@ interface OwnProps {
   ): Promise<void>;
 }
 
+interface ServiceThunks extends ActionCreatorsMapObject {
+  programInvest: ReturnType<typeof programInvestCreator>;
+}
+
 interface DispatchProps {
-  service: {
-    programInvest(id: string, amount: number, currency: string): Promise<void>;
-  };
+  service: ResolveThunks<ServiceThunks>;
 }
 
 interface Props extends OwnProps, IDialogProps, DispatchProps {}
