@@ -21,11 +21,11 @@ import {
 } from "./services/program-follow-service";
 
 class _ProgramFollowContainer extends React.PureComponent<Props, State> {
-  state = {
+  state: State = {
     isPending: false,
     accounts: [],
     type: undefined,
-    subscriptionFee: undefined,
+    volumeFee: undefined,
     minDeposit: undefined,
     hasActiveSubscription: undefined,
     hasSignalAccount: undefined
@@ -43,14 +43,14 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
       .then((info: AttachToSignalProviderInfo) => {
         const {
           hasSignalAccount,
-          subscriptionFee,
+          volumeFee,
           minDeposit,
           hasActiveSubscription
         } = info;
         this.setState({
           type: hasActiveSubscription ? FOLLOW_TYPE.EDIT : FOLLOW_TYPE.CREATE,
           hasSignalAccount,
-          subscriptionFee,
+          volumeFee,
           minDeposit,
           hasActiveSubscription,
           isPending: false
@@ -136,7 +136,7 @@ interface State {
   accounts: any | null;
   hasSignalAccount?: boolean;
   hasActiveSubscription?: boolean;
-  subscriptionFee?: number;
+  volumeFee?: number;
   minDeposit?: number;
   type?: FOLLOW_TYPE;
 }

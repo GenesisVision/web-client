@@ -6,6 +6,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import {
   Broker,
   BrokerAccountType,
+  NewProgramRequestCurrencyEnum,
   ProgramsInfo,
   WalletData
 } from "gv-api-web";
@@ -571,7 +572,7 @@ export interface ICreateProgramSettingsFormValues {
   leverage?: number;
   brokerAccountTypeId: string;
   signalSuccessFee?: number;
-  signalSubscriptionFee?: number;
+  signalVolumeFee?: number;
   isSignalProgram: boolean;
   title: string;
   description: string;
