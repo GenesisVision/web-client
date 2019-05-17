@@ -1,22 +1,34 @@
-import React, { Component } from "react";
-import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
+import React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import GVButton from "shared/components/gv-button";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "shared/components/popover/popover";
 
-import * as walletService from "../../services/wallet.services";
+import {
+  cancelWithdrawRequest,
+  resendWithdrawRequest
+} from "../../services/wallet.services";
 
-class WalletTransactionActions extends Component {
+class _WalletTransactionActions extends React.Component<Props, State> {
   state = {
-    anchor: null,
+    anchor: undefined,
     isResendPending: false,
     isCancelPending: false
   };
 
-  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
-  handleCloseDropdown = () => this.setState({ anchor: null });
+  handleOpenDropdown = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) =>
+    this.setState({ anchor: event.currentTarget });
+  handleCloseDropdown = () => this.setState({ anchor: undefined });
 
   cancelWithdrawRequest = () => {
     const { transaction, service } = this.props;
@@ -25,7 +37,7 @@ class WalletTransactionActions extends Component {
       service
         .cancelWithdrawRequest(transaction.id)
         .then(({ isPending }) => this.setState({ isCancelPending: isPending }))
-        .catch(err => this.setState({ isCancelPending: false }));
+        .catch(() => this.setState({ isCancelPending: false }));
     });
   };
 
@@ -36,7 +48,7 @@ class WalletTransactionActions extends Component {
       service
         .resendWithdrawRequest(transaction.id)
         .then(({ isPending }) => this.setState({ isResendPending: isPending }))
-        .catch(err => this.setState({ isResendPending: false }));
+        .catch(() => this.setState({ isResendPending: false }));
     });
   };
 
@@ -56,8 +68,8 @@ class WalletTransactionActions extends Component {
           onClick={this.handleOpenDropdown}
         />
         <Popover
-          horizontal="right"
-          vertical="bottom"
+          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
           anchorEl={this.state.anchor}
           noPadding
           onClose={this.handleCloseDropdown}
@@ -86,14 +98,39 @@ class WalletTransactionActions extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(walletService, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { cancelWithdrawRequest, resendWithdrawRequest },
+    dispatch
+  )
 });
 
-export default compose(
+interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+
+interface OwnProps {
+  transaction: any;
+  disabled?: boolean;
+}
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  cancelWithdrawRequest: typeof cancelWithdrawRequest;
+  resendWithdrawRequest: typeof resendWithdrawRequest;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface State {
+  isResendPending: boolean;
+  isCancelPending: boolean;
+  anchor?: HTMLSpanElement;
+}
+
+const WalletTransactionActions = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect(
     null,
     mapDispatchToProps
   )
-)(WalletTransactionActions);
+)(_WalletTransactionActions);
+export default WalletTransactionActions;
