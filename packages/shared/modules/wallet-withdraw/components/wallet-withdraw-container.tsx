@@ -15,7 +15,7 @@ import {
   ResponseError,
   SetSubmittingType
 } from "../../../utils/types";
-import { CurrentWallet } from "../../wallet-add-funds/components/wallet-add-funds-container";
+import { CurrentWallet } from "../../wallet-add-funds/components/wallet-add-funds-form";
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
 import WalletWithdrawForm, {
   IWalletWithdrawFormValues

@@ -1,13 +1,13 @@
 import "./wallet-add-funds-form.scss";
 
-import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import RootState from "shared/reducers/root-reducer";
 
-import WalletAddFundsForm from "./wallet-add-funds-form.js";
+import WalletAddFundsForm, { CurrentWallet } from "./wallet-add-funds-form";
 
 class WalletAddFundsContainer extends React.Component<Props> {
   render() {
@@ -36,11 +36,6 @@ const mapDispatchToProps: DispatchProps = {
   notifyError: alertMessageActions.error
 };
 
-export interface CurrentWallet {
-  currency: string;
-  available: number;
-}
-
 interface OwnProps {
   currentWallet: CurrentWallet;
 }
@@ -50,8 +45,8 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  notifySuccess(x: string): void;
-  notifyError(x: string): void;
+  notifySuccess(text: string): void;
+  notifyError(text: string): void;
 }
 
 interface Props extends OwnProps, StateProps, DispatchProps {}

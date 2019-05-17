@@ -7,7 +7,7 @@ import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
-import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
+import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-form";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import RootState from "shared/reducers/root-reducer";
