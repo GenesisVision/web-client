@@ -1,10 +1,13 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import * as React from "react";
 import GVScroll from "shared/components/scroll/gvscroll";
 
-class InfinityScroll extends Component {
+import Scrollbars from "../scroll/Scrollbars";
+
+class InfinityScroll extends React.PureComponent<Props> {
+  scroll = React.createRef() as React.RefObject<Scrollbars>;
+
   handleScroll = () => {
-    const scroll = this.scroll.current;
+    const scroll = this.scroll.current!;
     const scrollTop = scroll.getScrollTop();
     const clientHeight = scroll.getClientHeight();
     const scrollHeight = scroll.getScrollHeight();
@@ -13,8 +16,6 @@ class InfinityScroll extends Component {
       this.props.loadMore();
     }
   };
-
-  scroll = React.createRef();
 
   render() {
     return (
@@ -25,9 +26,9 @@ class InfinityScroll extends Component {
   }
 }
 
-InfinityScroll.propTypes = {
-  loadMore: PropTypes.func.isRequired,
-  hasMore: PropTypes.bool
-};
+interface Props {
+  loadMore: () => void;
+  hasMore?: boolean;
+}
 
 export default InfinityScroll;
