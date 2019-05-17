@@ -5,7 +5,7 @@ import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Page from "shared/components/page/page";
 import withLoader from "shared/decorators/with-loader";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
-import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
+import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-form";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 

@@ -6,7 +6,6 @@ import SignUpFooter from "shared/components/auth/components/signup-footer/signup
 import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import EmailPending from "shared/components/auth/signup/signup-email-pending/signup-email-pending.page";
 import SignUpPage from "shared/components/auth/signup/signup.page";
-import { HOME_ROUTE } from "shared/routes/app.routes";
 
 export const SIGNUP_ROUTE = "/signup";
 export const SIGNUP_ROUTE_PENDING = `${SIGNUP_ROUTE}/pending`;
@@ -15,7 +14,6 @@ const _SignUpRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
   <AuthLayout
     title={t("auth.signup.title")}
     Footer={SignUpFooter}
-    HOME_ROUTE={HOME_ROUTE}
     LOGIN_ROUTE={LOGIN_ROUTE}
   >
     <Switch>

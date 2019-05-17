@@ -66,7 +66,7 @@ class FundAssetContainer extends React.PureComponent<Props, State> {
         )}
         {size && size < (length || assets.length) && (
           <HidedAssets
-            count={assets.length - size}
+            count={(length || assets.length) - size}
             type={type}
             expandList={this.expandList}
           />

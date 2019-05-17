@@ -9,25 +9,34 @@ export enum PROFITABILITY_VARIANT {
   CHIPS = "chips"
 }
 
+export const signs: composeProfitabilityPrefixType = {
+  negative: "-",
+  positive: "+"
+};
+export const arrows: composeProfitabilityPrefixType = {
+  negative: `${String.fromCharCode(8595)} `,
+  positive: `${String.fromCharCode(8593)} `
+};
+export const noPrefix: composeProfitabilityPrefixType = {
+  negative: "",
+  positive: ""
+};
+
 export const composeProfitabilityPrefix = (
   prefix: PROFITABILITY_PREFIX
-): { negative: string; positive: string } => {
+): composeProfitabilityPrefixType => {
   switch (prefix) {
     case PROFITABILITY_PREFIX.ARROW:
-      return {
-        negative: `${String.fromCharCode(8595)} `,
-        positive: `${String.fromCharCode(8593)} `
-      };
+      return arrows;
     case PROFITABILITY_PREFIX.SIGN:
-      return {
-        negative: "-",
-        positive: "+"
-      };
+      return signs;
     case PROFITABILITY_PREFIX.NO_PREFIX:
     default:
-      return {
-        negative: "",
-        positive: ""
-      };
+      return noPrefix;
   }
+};
+
+type composeProfitabilityPrefixType = {
+  negative: string;
+  positive: string;
 };

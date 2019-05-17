@@ -1,7 +1,4 @@
 import { connectRouter } from "connected-react-router";
-import passwordRestoreReducer, {
-  PasswordState
-} from "pages/auth/forgot-password/reducers/password-restore-reducers";
 import dashboardReducer, {
   ManagerDashboardState
 } from "pages/dashboard/reducers/dashboard.reducers";
@@ -10,6 +7,8 @@ import managerReducer, {
 } from "pages/manager/reducers/manager.reducers";
 import { combineReducers } from "redux";
 import { LOGOUT } from "shared/actions/auth-actions";
+import passwordRestoreReducer from "shared/components/auth/forgot-password/reducers/password-restore-reducers";
+import { PasswordState } from "shared/components/auth/forgot-password/reducers/password-restore-reducers";
 import loginReducer, {
   LoginState
 } from "shared/components/auth/login/reducers/login.reducers";
@@ -53,6 +52,7 @@ export type ManagerRootState = RootState & State;
 
 const rootReducer = clearableReducer(
   combineReducers<ManagerRootState>({
+    passwordRestoreData: passwordRestoreReducer,
     dashboard: dashboardReducer,
     programNotifications: programNotificationsReducer,
     fundNotifications: fundNotificationsReducer,
@@ -67,7 +67,6 @@ const rootReducer = clearableReducer(
     signUpData: signUpReducer,
     authData: authReducer,
     profileHeader: headerReducer,
-    passwordRestoreData: passwordRestoreReducer,
     notifications: notificationsReducer,
     accountSettings: accountSettingsReducer,
     ui: uiReducer,

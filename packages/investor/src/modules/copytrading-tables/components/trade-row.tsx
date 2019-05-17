@@ -40,7 +40,7 @@ const TradeRow: React.FC<{ trade: OrderSignalModel }> = ({ trade }) => (
     </TableCell>
     <TableCell className="details-trades__cell program-details-trades__cell--profit">
       <Profitability
-        value={+formatValue(trade.profit, DECIMAL_SCALE)}
+        value={formatValue(trade.profit, DECIMAL_SCALE)}
         prefix={PROFITABILITY_PREFIX.SIGN}
       >
         <NumberFormat

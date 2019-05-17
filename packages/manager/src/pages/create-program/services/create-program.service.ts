@@ -40,7 +40,7 @@ export const createProgram = (
     ICreateProgramSettingsFormValues,
     keyof NewProgramRequest
   >
-): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => dispatch => {
+): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => () => {
   const authorization = authService.getAuthArg();
 
   let promise = Promise.resolve("") as CancelablePromise<any>;

@@ -104,7 +104,7 @@ class DetailsInvestment extends PureComponent<
                 label={t("fund-details-page.description.profit")}
               >
                 <Profitability
-                  value={profitValue}
+                  value={formatCurrencyValue(profitValue, assetCurrency)}
                   prefix={PROFITABILITY_PREFIX.SIGN}
                 >
                   <NumberFormat
@@ -115,7 +115,7 @@ class DetailsInvestment extends PureComponent<
                   />
                 </Profitability>
                 <Profitability
-                  value={personalDetails.profit}
+                  value={`${personalDetails.profit}`}
                   variant={PROFITABILITY_VARIANT.CHIPS}
                 >
                   {roundPercents(personalDetails.profit)}

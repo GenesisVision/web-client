@@ -143,7 +143,12 @@ class TransactionsRow extends React.Component<
             {isConvertAction ? (
               <AmountConvertTransaction transaction={transaction} />
             ) : (
-              <Profitability value={transaction.amount}>
+              <Profitability
+                value={formatValue(
+                  transaction.amount,
+                  CURRENCY_FRACTIONS(transaction.currencyFrom)
+                )}
+              >
                 <NumberFormat
                   value={formatValue(
                     transaction.amount,
