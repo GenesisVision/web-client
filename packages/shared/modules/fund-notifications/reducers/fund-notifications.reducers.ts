@@ -1,9 +1,9 @@
 import { FundNotificationSettingList } from "gv-api-web";
+import { NotificationsActionType } from "shared/utils/types";
 
 import {
   ADD_ERROR_MESSAGE,
   ADD_FUND_NOTIFICATIONS,
-  FundNotificationsActionType
 } from "../actions/fund-notifications.actions";
 
 export type FundNotificationsState = Readonly<{
@@ -11,13 +11,13 @@ export type FundNotificationsState = Readonly<{
   errorMessage?: string;
 }>;
 
-const initialState = {
+const initialState: FundNotificationsState = {
   data: {}
 };
 
 const fundNotificationsReducer = (
   state: FundNotificationsState = initialState,
-  action: FundNotificationsActionType
+  action: NotificationsActionType<FundNotificationSettingList>
 ): FundNotificationsState => {
   switch (action.type) {
     case ADD_FUND_NOTIFICATIONS:
