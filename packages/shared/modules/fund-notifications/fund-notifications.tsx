@@ -3,7 +3,7 @@ import * as React from "react";
 import { translate } from "react-i18next";
 import withLoader from "shared/decorators/with-loader";
 
-import FundNotificationsGeneral from "./fund-notificatations-general";
+import FundNotificationsGeneral from "./fund-notifications-general";
 
 const _FundNotifications: React.FC<{ fund: FundNotificationSettingList }> = ({
   fund
