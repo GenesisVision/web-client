@@ -1,46 +1,42 @@
-import { CancelablePromise } from "gv-api-web";
 import {
   IAddNotificationSettingProps,
+  IRemoveNotificationSettingProps,
   addNotificationSetting,
   removeNotificationSetting
 } from "shared/modules/notification-settings/actions/notification-settings.actions";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import {
-  FundNotificationsActionType,
-  addErrorMessage,
-  addFundNotifications,
-  fetchFundNotifications,
-  toggleFundNotifications
+  addErrorMessageAction,
+  addFundNotificationsAction,
+  fetchFundNotificationsAction,
+  toggleFundNotificationsAction
 } from "../actions/fund-notifications.actions";
 
-export const fetchFundNotificationsService = (id: string) => (
+export const fetchFundNotifications = (id: string) => (
   dispatch: MiddlewareDispatch
 ) =>
-  dispatch(fetchFundNotifications(id)).then(data =>
-    dispatch(addFundNotifications(data.value))
+  dispatch(fetchFundNotificationsAction(id)).then(data =>
+    dispatch(addFundNotificationsAction(data.value))
   );
 
 export const addFundNotification = (
   opts: IAddNotificationSettingProps
 ) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<FundNotificationsActionType<string>> =>
+) =>
   dispatch(addNotificationSetting(opts))
-    .then(() => dispatch(fetchFundNotificationsService(opts.assetId!)))
-    .catch(data => dispatch(addErrorMessage(data.errorMessage)));
+    .then(() => dispatch(fetchFundNotifications(opts.assetId!)))
+    .catch(data => dispatch(addErrorMessageAction(data.errorMessage)));
 
 export const removeFundNotification = ({
   id,
   assetId
-}: {
-  id: string;
-  assetId: string;
-}) => (
+}: IRemoveNotificationSettingProps) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<FundNotificationsActionType<string>> =>
+) =>
   dispatch(removeNotificationSetting(id)).then(() =>
-    dispatch(fetchFundNotificationsService(assetId))
+    dispatch(fetchFundNotifications(assetId))
   );
 
 export const toggleFundNotificationsService = ({
@@ -53,7 +49,7 @@ export const toggleFundNotificationsService = ({
   assetId: string;
 }) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<FundNotificationsActionType<string>> =>
-  dispatch(toggleFundNotifications(id, enabled)).then(() =>
-    dispatch(fetchFundNotificationsService(assetId))
+) =>
+  dispatch(toggleFundNotificationsAction(id, enabled)).then(() =>
+    dispatch(fetchFundNotifications(assetId))
   );
