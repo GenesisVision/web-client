@@ -31,14 +31,14 @@ class _ProgramNotificationsCustom extends React.PureComponent<Props, State> {
   ) => {
     const { t, service } = this.props;
     service
-      .addProgramNotification({
-        assetId: this.props.program.assetId,
-        ...values
-      })
-      .then(() => {
-        this.handleClosePopup();
-        service.success(t(`notifications-page.custom.create-alert`));
-      })
+      .addProgramNotification(
+        {
+          assetId: this.props.program.assetId,
+          ...values
+        },
+        t(`notifications-page.custom.create-alert`)
+      )
+      .then(() => this.handleClosePopup())
       .catch(() => {
         setSubmitting(false);
       });

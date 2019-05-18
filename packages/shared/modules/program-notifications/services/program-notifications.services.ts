@@ -1,6 +1,9 @@
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import {
-  IAddNotificationSettingProps,
-  IRemoveNotificationSettingProps,
+  TAddNotification,
+  TRemoveNotification
+} from "shared/modules/asset-notifications/asset-notifications.types";
+import {
   addNotificationSetting,
   removeNotificationSetting
 } from "shared/modules/notification-settings/actions/notification-settings.actions";
@@ -20,20 +23,25 @@ export const fetchProgramNotifications = (id: string) => (
     dispatch(addProgramNotificationsAction(data.value))
   );
 
-export const addProgramNotification = (
-  opts: IAddNotificationSettingProps
-) => (dispatch: MiddlewareDispatch) =>
+export const addProgramNotification: TAddNotification = (
+  opts,
+  message
+) => dispatch =>
   dispatch(addNotificationSetting(opts))
-    .then(() => dispatch(fetchProgramNotifications(opts.assetId!)))
+    .then(() => {
+      dispatch(fetchProgramNotifications(opts.assetId!));
+      dispatch(alertMessageActions.success(message));
+    })
     .catch(data => dispatch(addErrorMessageAction(data.errorMessage)));
 
-export const removeProgramNotification = ({
-  id,
-  assetId
-}: IRemoveNotificationSettingProps) => (dispatch: MiddlewareDispatch) =>
-  dispatch(removeNotificationSetting(id)).then(() =>
-    dispatch(fetchProgramNotifications(assetId))
-  );
+export const removeProgramNotification: TRemoveNotification = (
+  { id, assetId },
+  message
+) => dispatch =>
+  dispatch(removeNotificationSetting(id)).then(() => {
+    dispatch(fetchProgramNotifications(assetId));
+    dispatch(alertMessageActions.success(message));
+  });
 
 export const toggleProgramNotifications = ({
   id,

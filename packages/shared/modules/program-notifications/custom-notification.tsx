@@ -50,11 +50,11 @@ class CustomNotification extends React.PureComponent<Props, State> {
     this.setState({ isPending: true });
     const { t, settings, service } = this.props;
     service
-      .removeProgramNotification(settings)
-      .then(() => {
-        service.success(t(`notifications-page.custom.delete-alert`));
-        this.setState({ isPending: false });
-      })
+      .removeProgramNotification(
+        settings,
+        t(`notifications-page.custom.delete-alert`)
+      )
+      .then(() => this.setState({ isPending: false }))
       .catch(() => this.setState({ isPending: false }));
   };
 
