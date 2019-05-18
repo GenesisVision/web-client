@@ -1,4 +1,8 @@
-import { AmountWithCurrencyCurrencyEnum, CancelablePromise } from "gv-api-web";
+import {
+  AmountWithCurrencyCurrencyEnum,
+  CancelablePromise,
+  ProgramNotificationSettingList
+} from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { Action, Dispatch } from "redux";
@@ -8,6 +12,13 @@ import RootState from "shared/reducers/root-reducer";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
+}
+
+export interface NotificationsActionType<T = ProgramNotificationSettingList>
+  extends Action {
+  type: string;
+  settings?: T;
+  errorMessage?: string;
 }
 
 export interface ActionType<T = any> extends Action {
