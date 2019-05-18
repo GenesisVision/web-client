@@ -1,29 +1,22 @@
 import { FundNotificationSettingList } from "gv-api-web";
-import { Action } from "redux";
 import notificationsApi from "shared/services/api-client/notifications-api";
 import authService from "shared/services/auth-service";
-import { ApiAction } from "shared/utils/types";
+import { ApiAction, NotificationsActionType } from "shared/utils/types";
 
 export const ADD_FUND_NOTIFICATIONS = "ADD_FUND_NOTIFICATIONS";
 export const FETCH_FUND_NOTIFICATIONS = "FETCH_FUND_NOTIFICATIONS";
 export const TOGGLE_FUND_NOTIFICATION = "TOGGLE_FUND_NOTIFICATION";
 export const ADD_ERROR_MESSAGE = "ADD_ERROR_MESSAGE";
 
-export interface FundNotificationsActionType<T = any> extends Action {
-  type: string;
-  settings?: FundNotificationSettingList;
-  payload?: T;
-  errorMessage?: string;
-}
 
-export const addFundNotifications = (
-  settings: any
-): FundNotificationsActionType<string> => ({
+export const addFundNotificationsAction = (
+  settings: FundNotificationSettingList
+): NotificationsActionType<FundNotificationSettingList> => ({
   type: ADD_FUND_NOTIFICATIONS,
   settings
 });
 
-export const fetchFundNotifications = (
+export const fetchFundNotificationsAction = (
   id: string
 ): ApiAction<FundNotificationSettingList> => ({
   type: FETCH_FUND_NOTIFICATIONS,
@@ -33,14 +26,14 @@ export const fetchFundNotifications = (
   )
 });
 
-export const addErrorMessage = (
+export const addErrorMessageAction = (
   errorMessage: string
-): FundNotificationsActionType<string> => ({
+): NotificationsActionType<FundNotificationSettingList> => ({
   type: ADD_ERROR_MESSAGE,
   errorMessage
 });
 
-export const toggleFundNotifications = (
+export const toggleFundNotificationsAction = (
   id: string,
   enabled: boolean
 ): ApiAction<string> => ({
