@@ -1,43 +1,42 @@
 import "./custom-notification.scss";
 
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import GVButton from "shared/components/gv-button";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
 import GVTextField from "shared/components/gv-text-field";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import {
-  removeProgramNotificationService,
-  toggleProgramNotificationsService
+  removeProgramNotification,
+  toggleProgramNotifications
 } from "./services/program-notifications.services";
 
-class CustomNotification extends Component {
+class CustomNotification extends React.PureComponent<Props, State> {
   state = {
     isPending: false
   };
 
-  success = text => {
-    const { dispatch } = this.props;
-    dispatch(alertMessageActions.success(text));
-  };
-
   handleSwitch = () => {
     this.setState({ isPending: true });
-    const { services, settings, t } = this.props;
+    const { service, settings, t } = this.props;
     const status = !Boolean(settings.isEnabled);
-    services
-      .toggleProgramNotificationsService({
+    service
+      .toggleProgramNotifications({
         id: settings.id,
         assetId: settings.assetId,
         enabled: status
       })
       .then(() => {
-        this.success(
+        service.success(
           t(
             `notifications-page.custom.${status ? "enabled" : "disabled"}-alert`
           )
@@ -49,11 +48,11 @@ class CustomNotification extends Component {
 
   handleDelete = () => {
     this.setState({ isPending: true });
-    const { t, settings } = this.props;
-    this.props.services
-      .removeProgramNotificationService(settings)
+    const { t, settings, service } = this.props;
+    service
+      .removeProgramNotification(settings)
       .then(() => {
-        this.success(t(`notifications-page.custom.delete-alert`));
+        service.success(t(`notifications-page.custom.delete-alert`));
         this.setState({ isPending: false });
       })
       .catch(() => this.setState({ isPending: false }));
@@ -71,6 +70,7 @@ class CustomNotification extends Component {
             disabled={this.state.isPending}
             color="primary"
             onChange={this.handleSwitch}
+            touched={false}
           />
           <span className="notification-setting__label">
             {t(`notifications-page.create.${settings.conditionType}.title`)}
@@ -85,7 +85,6 @@ class CustomNotification extends Component {
               `notifications-page.create.${settings.conditionType}.label`
             )}
             adornment={settings.conditionType === "Profit" ? "%" : undefined}
-            autoComplete="off"
             InputComponent={NumberFormat}
           />
           <GVButton
@@ -102,25 +101,40 @@ class CustomNotification extends Component {
   }
 }
 
-CustomNotification.propTypes = {
-  services: PropTypes.shape({
-    removeProgramNotificationService: PropTypes.func,
-    toggleProgramNotificationsService: PropTypes.func
-  })
-};
-
-const mapStateToProps = dispatch => ({
-  services: bindActionCreators(
-    { removeProgramNotificationService, toggleProgramNotificationsService },
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      success: alertMessageActions.success,
+      removeProgramNotification: removeProgramNotification,
+      toggleProgramNotifications: toggleProgramNotifications
+    },
     dispatch
-  ),
-  dispatch
+  )
 });
 
-export default compose(
+interface Props extends DispatchProps, OwnProps, InjectedTranslateProps {}
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  success: typeof alertMessageActions.success;
+  removeProgramNotification: typeof removeProgramNotification;
+  toggleProgramNotifications: typeof toggleProgramNotifications;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface OwnProps {
+  settings: any;
+}
+
+interface State {
+  isPending: boolean;
+}
+
+export default compose<React.ComponentType<OwnProps>>(
   translate(),
   connect(
     undefined,
-    mapStateToProps
+    mapDispatchToProps
   )
 )(CustomNotification);
