@@ -11,6 +11,7 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import GVTextField from "shared/components/gv-text-field";
 import { ASSET } from "shared/constants/constants";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import ProgramDefaultImage from "shared/media/program-default-image.svg";
 import { SetSubmittingType } from "shared/utils/types";
 
@@ -144,7 +145,8 @@ export interface IAssetEditProps
     IAssetEditFormOwnProps,
     InjectedTranslateProps {}
 
-const AssetEditForm = compose<React.FunctionComponent<IAssetEditFormOwnProps>>(
+const AssetEditForm = compose<React.FunctionComponent<IAssetEditFormOwnProps & WithLoaderProps>>(
+  withLoader,
   React.memo,
   translate(),
   withFormik<IAssetEditFormOwnProps, IAssetEditFormValues>({

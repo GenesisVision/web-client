@@ -2,7 +2,7 @@ import { CopyTradingAccountInfo } from "gv-api-web";
 import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
 
-import { CurrentWallet } from "../wallet-add-funds/components/wallet-add-funds-container";
+import { CurrentWallet } from "../wallet-add-funds/components/wallet-add-funds-form";
 import WalletWithdrawContainer from "./components/wallet-withdraw-container";
 
 const WalletWithdrawPopup: React.FC<Props> = ({

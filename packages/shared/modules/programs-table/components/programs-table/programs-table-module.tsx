@@ -13,6 +13,7 @@ import { IPaging } from "shared/components/table/helpers/paging.helpers";
 
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
+import { FAVORITE_COLUMN_NAME } from "./programs-table";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
 
 interface IProgramTableModuleProps {
@@ -57,8 +58,11 @@ class ProgramTableModule extends React.PureComponent<IProgramTableModuleProps> {
         columns={PROGRAMS_COLUMNS}
         renderHeader={column => (
           <ProgramTableHeaderCell
+            condition={
+              !isAuthenticated ||
+              (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
+            }
             column={column}
-            isAuthenticated={isAuthenticated}
           />
         )}
         renderBodyRow={(

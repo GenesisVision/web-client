@@ -2,14 +2,14 @@ import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import Dialog from "shared/components/dialog/dialog";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { ASSET } from "shared/constants/constants";
 import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
 
-import {
+import AssetEditForm, {
   IAssetEditFormValues,
   TAssetEditFormSubmit
 } from "./components/asset-edit-form";
-import AssetEditPopup from "./components/asset-edit-popup";
 import { editAsset } from "./services/asset-edit.services";
 
 class _AssetEditContainer extends React.PureComponent<Props, State> {
@@ -39,8 +39,10 @@ class _AssetEditContainer extends React.PureComponent<Props, State> {
     const { info, open, type } = this.props;
     return (
       <Dialog open={open} onClose={this.handleClose}>
-        <AssetEditPopup
+        <AssetEditForm
           type={type}
+          condition={!!info}
+          loader={<DialogLoader />}
           info={info}
           onSubmit={this.handleEdit}
           serverError={this.state.serverError}

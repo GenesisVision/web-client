@@ -9,8 +9,10 @@ import { WalletIcon } from "shared/components/icon/wallet-icon";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
+import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-form";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 interface IWalletWidgetProps {
   available: number;
@@ -18,7 +20,7 @@ interface IWalletWidgetProps {
   pending: number;
   totalBalance: number;
   className?: string;
-  currency: string;
+  currency: CurrencyEnum;
 }
 
 interface IWalletWidgetState {
@@ -56,7 +58,7 @@ class WalletWidget extends React.Component<
       pending = 0,
       className
     } = this.props;
-    const currentWallet = { available, currency };
+    const currentWallet: CurrentWallet = { available, currency };
     return (
       <React.Fragment>
         <div className={classNames("wallet-widget", className)}>

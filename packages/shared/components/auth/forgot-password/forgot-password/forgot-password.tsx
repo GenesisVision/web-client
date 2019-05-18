@@ -1,4 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
+import { ForgotPasswordViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -10,7 +11,6 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
-import { ForgotPasswordViewModel } from "gv-api-web";
 
 const _ForgotPasswordForm: React.FC<
   InjectedFormikProps<Props, IForgotPasswordFormValues>
