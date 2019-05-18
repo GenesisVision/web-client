@@ -20,7 +20,17 @@ export const fetchNotificationSettings = () => ({
   )
 });
 
-export const addNotificationSetting = (opts: object): ActionType => ({
+export interface IRemoveNotificationSettingProps { id: string; assetId: string; type?: string }
+
+export interface IAddNotificationSettingProps {
+  assetId?: string;
+  managerId?: string;
+  type?: string;
+  conditionType?: string;
+  conditionAmount?: number;
+}
+
+export const addNotificationSetting = (opts: IAddNotificationSettingProps): ActionType => ({
   type: ADD_NOTIFICATION_SETTING,
   payload: notificationsApi.v10NotificationsSettingsAddPost(
     authService.getAuthArg(),
