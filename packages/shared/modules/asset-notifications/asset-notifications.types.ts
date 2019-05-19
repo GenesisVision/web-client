@@ -1,9 +1,9 @@
-import { MiddlewareDispatch } from "shared/utils/types";
-
 import {
   IAddNotificationSettingProps,
   IRemoveNotificationSettingProps
-} from "../notification-settings/actions/notification-settings.actions";
+} from "shared/modules/notification-settings/actions/notification-settings.actions";
+import { MiddlewareDispatch } from "shared/utils/types";
+
 import { INotification } from "./asset-notifications-general";
 
 export type TAddNotification = (
@@ -24,6 +24,7 @@ export type TToggleNotification = (
   }
 ) => (dispatch: MiddlewareDispatch) => any;
 
-export type NotificationsList={
-  general: INotification[], custom: boolean
-}
+export type NotificationsList = {
+  general: INotification[];
+  custom: boolean;
+};
