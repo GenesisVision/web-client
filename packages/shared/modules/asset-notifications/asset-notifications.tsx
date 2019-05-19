@@ -13,38 +13,33 @@ import {
   TAddNotification,
   TRemoveNotification,
   TToggleNotification
-} from "../asset-notifications/asset-notifications.types";
+} from "./asset-notifications.types";
 
-class _AssetNotifications extends React.PureComponent<Props> {
-  render() {
-    const {
-      asset,
-      notifications,
-      addNotification,
-      removeNotification,
-      toggleNotification
-    } = this.props;
-    return (
-      <div>
-        <h3 className="notification-settings__title">{asset.title}</h3>
-        <AssetNotificationsGeneral
-          notifications={notifications.general}
-          settings={asset.settingsGeneral}
-          assetId={asset.assetId}
-          addNotification={addNotification}
-          removeNotification={removeNotification}
-        />
-        <AssetNotificationsCustom
-          condition={notifications.custom}
-          addNotification={addNotification}
-          removeNotification={removeNotification}
-          toggleNotification={toggleNotification!}
-          asset={asset as ProgramNotificationSettingList}
-        />
-      </div>
-    );
-  }
-}
+const _AssetNotifications: React.FC<Props> = ({
+  asset,
+  notifications,
+  addNotification,
+  removeNotification,
+  toggleNotification
+}) => (
+  <div>
+    <h3 className="notification-settings__title">{asset.title}</h3>
+    <AssetNotificationsGeneral
+      notifications={notifications.general}
+      settings={asset.settingsGeneral}
+      assetId={asset.assetId}
+      addNotification={addNotification}
+      removeNotification={removeNotification}
+    />
+    <AssetNotificationsCustom
+      condition={notifications.custom}
+      addNotification={addNotification}
+      removeNotification={removeNotification}
+      toggleNotification={toggleNotification!}
+      asset={asset as ProgramNotificationSettingList}
+    />
+  </div>
+);
 
 interface Props extends InjectedTranslateProps {
   asset: ProgramNotificationSettingList | FundNotificationSettingList;
@@ -54,5 +49,7 @@ interface Props extends InjectedTranslateProps {
   toggleNotification?: TToggleNotification;
 }
 
-const AssetNotifications = withLoader(translate()(_AssetNotifications));
+const AssetNotifications = React.memo(
+  withLoader(translate()(_AssetNotifications))
+);
 export default AssetNotifications;
