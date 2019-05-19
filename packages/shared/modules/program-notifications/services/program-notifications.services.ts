@@ -1,7 +1,8 @@
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import {
   TAddNotification,
-  TRemoveNotification
+  TRemoveNotification,
+  TToggleNotification
 } from "shared/modules/asset-notifications/asset-notifications.types";
 import {
   addNotificationSetting,
@@ -42,16 +43,11 @@ export const removeProgramNotification: TRemoveNotification = (
     dispatch(fetchProgramNotifications(assetId));
     dispatch(alertMessageActions.success(message));
   });
-
-export const toggleProgramNotifications = ({
+export const toggleProgramNotification: TToggleNotification = ({
   id,
   enabled,
   assetId
-}: {
-  id: string;
-  enabled: boolean;
-  assetId: string;
-}) => (dispatch: MiddlewareDispatch) =>
+}) => dispatch =>
   dispatch(toggleProgramNotificationsAction(id, enabled)).then(() =>
     dispatch(fetchProgramNotifications(assetId))
   );

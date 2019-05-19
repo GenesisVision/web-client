@@ -1,5 +1,6 @@
 import "./custom-notification.scss";
 
+import { NotificationSettingViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -16,9 +17,9 @@ import GVTextField from "shared/components/gv-text-field";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import {
-  removeProgramNotification,
-  toggleProgramNotifications
-} from "./services/program-notifications.services";
+  TRemoveNotification,
+  TToggleNotification
+} from "./asset-notifications.types";
 
 class CustomNotification extends React.PureComponent<Props, State> {
   state = {
@@ -30,7 +31,7 @@ class CustomNotification extends React.PureComponent<Props, State> {
     const { service, settings, t } = this.props;
     const status = !Boolean(settings.isEnabled);
     service
-      .toggleProgramNotifications({
+      .toggleNotifications({
         id: settings.id,
         assetId: settings.assetId,
         enabled: status
@@ -50,10 +51,7 @@ class CustomNotification extends React.PureComponent<Props, State> {
     this.setState({ isPending: true });
     const { t, settings, service } = this.props;
     service
-      .removeProgramNotification(
-        settings,
-        t(`notifications-page.custom.delete-alert`)
-      )
+      .removeNotification(settings, t(`notifications-page.custom.delete-alert`))
       .then(() => this.setState({ isPending: false }))
       .catch(() => this.setState({ isPending: false }));
   };
@@ -101,12 +99,15 @@ class CustomNotification extends React.PureComponent<Props, State> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  { removeNotification, toggleNotifications }: OwnProps
+): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       success: alertMessageActions.success,
-      removeProgramNotification: removeProgramNotification,
-      toggleProgramNotifications: toggleProgramNotifications
+      removeNotification,
+      toggleNotifications
     },
     dispatch
   )
@@ -116,15 +117,17 @@ interface Props extends DispatchProps, OwnProps, InjectedTranslateProps {}
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   success: typeof alertMessageActions.success;
-  removeProgramNotification: typeof removeProgramNotification;
-  toggleProgramNotifications: typeof toggleProgramNotifications;
+  removeNotification: TRemoveNotification;
+  toggleNotifications: TToggleNotification;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
 interface OwnProps {
-  settings: any;
+  settings: NotificationSettingViewModel;
+  removeNotification: TRemoveNotification;
+  toggleNotifications: TToggleNotification;
 }
 
 interface State {

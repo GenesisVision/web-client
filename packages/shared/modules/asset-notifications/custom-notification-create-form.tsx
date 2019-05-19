@@ -14,10 +14,10 @@ import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
 import { number, object } from "yup";
 
-const _ProgramNotificationCreateForm: React.FC<Props> = ({
+const _CustomNotificationCreateForm: React.FC<Props> = ({
   errorMessage,
   t,
-  program,
+  asset,
   handleSubmit,
   values,
   isValid,
@@ -32,7 +32,7 @@ const _ProgramNotificationCreateForm: React.FC<Props> = ({
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>{t("notifications-page.create.title")}</h2>
-          <p>{program.title}</p>
+          <p>{asset.title}</p>
         </div>
         <GVFormikField
           name={FIELDS.conditionType}
@@ -89,10 +89,10 @@ const _ProgramNotificationCreateForm: React.FC<Props> = ({
   );
 };
 
-const ProgramNotificationCreateForm = compose<React.FC<OwnProps>>(
+const CustomNotificationCreateForm = compose<React.FC<OwnProps>>(
   React.memo,
   translate(),
-  withFormik<Props, IProgramNotificationCreateFormValues>({
+  withFormik<Props, ICustomNotificationCreateFormValues>({
     displayName: "create-notification",
     mapPropsToValues: () => ({
       [FIELDS.type]: "ProgramCondition",
@@ -109,18 +109,18 @@ const ProgramNotificationCreateForm = compose<React.FC<OwnProps>>(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(_ProgramNotificationCreateForm);
-export default ProgramNotificationCreateForm;
+)(_CustomNotificationCreateForm);
+export default CustomNotificationCreateForm;
 
 interface Props
   extends OwnProps,
     InjectedTranslateProps,
-    FormikProps<IProgramNotificationCreateFormValues> {}
+    FormikProps<ICustomNotificationCreateFormValues> {}
 
 interface OwnProps {
-  program: ProgramInfo;
+  asset: ProgramInfo;
   onSubmit: (
-    values: IProgramNotificationCreateFormValues,
+    values: ICustomNotificationCreateFormValues,
     setSubmitting: (isSubmitting: boolean) => void
   ) => void;
   errorMessage?: string;
@@ -138,7 +138,7 @@ enum CONDITION_TYPE_VALUES {
   AvailableToInvest = "AvailableToInvest"
 }
 
-export interface IProgramNotificationCreateFormValues {
+export interface ICustomNotificationCreateFormValues {
   [FIELDS.type]: NotificationViewModelTypeEnum;
   [FIELDS.conditionType]: NotificationSettingViewModelConditionTypeEnum;
   [FIELDS.conditionAmount]?: number;

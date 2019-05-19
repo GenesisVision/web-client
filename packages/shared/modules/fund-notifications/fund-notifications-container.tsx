@@ -1,22 +1,49 @@
 import { FundNotificationSettingList } from "gv-api-web";
 import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
+import AssetNotifications from "shared/modules/asset-notifications/asset-notifications";
+import { NotificationsList } from "shared/modules/asset-notifications/asset-notifications.types";
 import { AuthRootState } from "shared/utils/types";
 
-import FundNotifications from "./fund-notifications";
-import { fetchFundNotifications } from "./services/fund-notifications.services";
+import {
+  addFundNotification,
+  fetchFundNotifications,
+  removeFundNotification
+} from "./services/fund-notifications.services";
 
 class _FundNotificationsContainer extends React.PureComponent<Props> {
+  notifications: NotificationsList = {
+    general: [
+      {
+        name: NOTIFICATIONS.FundNewsAndUpdates,
+        label: this.props.t("notifications-page.fund.general.news-updates")
+      },
+      {
+        name: NOTIFICATIONS.FundRebalancing,
+        label: this.props.t("notifications-page.fund.general.fund-rebalancing")
+      }
+    ],
+    custom: false
+  };
   componentDidMount() {
     this.props.service.fetchFundNotifications(this.props.id);
   }
 
   render() {
     return (
-      <FundNotifications
+      <AssetNotifications
         condition={!!this.props.fund}
-        fund={this.props.fund!}
+        asset={this.props.fund!}
+        notifications={this.notifications}
+        addNotification={addFundNotification}
+        removeNotification={removeFundNotification}
       />
     );
   }
@@ -36,7 +63,11 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-interface Props extends OwnProps, DispatchProps, StateProps {}
+interface Props
+  extends OwnProps,
+    DispatchProps,
+    StateProps,
+    InjectedTranslateProps {}
 
 interface StateProps {
   fund?: FundNotificationSettingList;
@@ -53,13 +84,16 @@ interface OwnProps {
   id: string;
 }
 
-const FundNotificationsContainer = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps,
-  AuthRootState
->(
-  mapStateToProps,
-  mapDispatchToProps
+enum NOTIFICATIONS {
+  FundNewsAndUpdates = "FundNewsAndUpdates",
+  FundRebalancing = "FundRebalancing"
+}
+
+const FundNotificationsContainer = compose<React.ComponentType<OwnProps>>(
+  translate(),
+  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(_FundNotificationsContainer);
 export default FundNotificationsContainer;

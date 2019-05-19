@@ -12,7 +12,6 @@ import {
   compose
 } from "redux";
 import GeneralNotification from "shared/components/general-notification/general-notification";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import {
   IAddNotificationSettingProps,
@@ -70,13 +69,12 @@ class _AssetNotificationsGeneral extends React.PureComponent<Props> {
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
-  props: OwnProps
+  { addNotification, removeNotification }: OwnProps
 ): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      success: alertMessageActions.success,
-      addNotification: props.addNotification,
-      removeNotification: props.removeNotification
+      addNotification,
+      removeNotification
     },
     dispatch
   )
@@ -93,7 +91,6 @@ interface OwnProps {
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {
-  success: typeof alertMessageActions.success;
   addNotification: TAddNotification;
   removeNotification: TRemoveNotification;
 }

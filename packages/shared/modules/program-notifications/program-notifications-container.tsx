@@ -1,22 +1,51 @@
 import { ProgramNotificationSettingList } from "gv-api-web";
-import React from "react";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
+import AssetNotifications from "shared/modules/asset-notifications/asset-notifications";
+import { NotificationsList } from "shared/modules/asset-notifications/asset-notifications.types";
 import { AuthRootState } from "shared/utils/types";
 
-import ProgramNotifications from "./program-notifications";
-import { fetchProgramNotifications } from "./services/program-notifications.services";
+import {
+  addProgramNotification,
+  fetchProgramNotifications,
+  removeProgramNotification,
+  toggleProgramNotification
+} from "./services/program-notifications.services";
 
 class ProgramNotificationsContainer extends React.PureComponent<Props> {
+  notifications: NotificationsList = {
+    general: [
+      {
+        name: NOTIFICATIONS.ProgramNewsAndUpdates,
+        label: this.props.t("notifications-page.program.general.news-updates")
+      },
+      {
+        name: NOTIFICATIONS.ProgramEndOfPeriod,
+        label: this.props.t("notifications-page.program.general.end-of-period")
+      }
+    ],
+    custom: true
+  };
   componentDidMount() {
     this.props.service.fetchProgramNotifications(this.props.id);
   }
 
   render() {
     return (
-      <ProgramNotifications
+      <AssetNotifications
         condition={!!this.props.program}
-        program={this.props.program!}
+        asset={this.props.program!}
+        notifications={this.notifications}
+        addNotification={addProgramNotification}
+        removeNotification={removeProgramNotification}
+        toggleNotification={toggleProgramNotification}
       />
     );
   }
@@ -36,7 +65,11 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-interface Props extends OwnProps, StateProps, DispatchProps {}
+interface Props
+  extends OwnProps,
+    StateProps,
+    DispatchProps,
+    InjectedTranslateProps {}
 
 interface OwnProps {
   id: string;
@@ -53,7 +86,15 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-export default connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
-  mapStateToProps,
-  mapDispatchToProps
+enum NOTIFICATIONS {
+  ProgramNewsAndUpdates = "ProgramNewsAndUpdates",
+  ProgramEndOfPeriod = "ProgramEndOfPeriod"
+}
+
+export default compose<React.ComponentType<OwnProps>>(
+  translate(),
+  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(ProgramNotificationsContainer);

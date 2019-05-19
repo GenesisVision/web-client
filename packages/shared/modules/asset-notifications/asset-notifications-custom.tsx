@@ -1,5 +1,5 @@
 import { ProgramNotificationSettingList } from "gv-api-web";
-import React from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
@@ -12,28 +12,33 @@ import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import Dialog from "shared/components/dialog/dialog";
 import GVButton from "shared/components/gv-button";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import CustomNotification from "shared/modules/program-notifications/custom-notification";
-import ProgramNotificationCreateForm, {
-  IProgramNotificationCreateFormValues
-} from "shared/modules/program-notifications/program-notification-create-form";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
-import { addProgramNotification } from "./services/program-notifications.services";
+import {
+  TAddNotification,
+  TRemoveNotification,
+  TToggleNotification
+} from "./asset-notifications.types";
+import CustomNotification from "./custom-notification";
+import CustomNotificationCreateForm, {
+  ICustomNotificationCreateFormValues
+} from "./custom-notification-create-form";
+import withLoader, { WithLoaderProps } from "../../decorators/with-loader";
 
-class _ProgramNotificationsCustom extends React.PureComponent<Props, State> {
+class _AssetNotificationsCustom extends React.PureComponent<Props, State> {
   state = {
     isOpenCreatePopup: false
   };
 
   handleSubmit = (
-    values: IProgramNotificationCreateFormValues,
+    values: ICustomNotificationCreateFormValues,
     setSubmitting: SetSubmittingType
   ) => {
     const { t, service } = this.props;
     service
-      .addProgramNotification(
+      .addNotification(
         {
-          assetId: this.props.program.assetId,
+          assetId: this.props.asset.assetId,
           ...values
         },
         t(`notifications-page.custom.create-alert`)
@@ -49,14 +54,25 @@ class _ProgramNotificationsCustom extends React.PureComponent<Props, State> {
   handleOpenPopup = () => this.setState({ isOpenCreatePopup: true });
 
   render() {
-    const { t, program, errorMessage } = this.props;
+    const {
+      t,
+      asset,
+      errorMessage,
+      removeNotification,
+      toggleNotification
+    } = this.props;
     return (
       <div className="notification-settings custom-notifications">
         <h3 className="notification-settings__subtitle">
           {t("notifications-page.custom.title")}
         </h3>
-        {program.settingsCustom.map(settings => (
-          <CustomNotification settings={settings} key={settings.id} />
+        {asset.settingsCustom.map(settings => (
+          <CustomNotification
+            settings={settings}
+            key={settings.id}
+            removeNotification={removeNotification}
+            toggleNotifications={toggleNotification}
+          />
         ))}
         <div className="custom-notification__create">
           <GVButton variant="text" onClick={this.handleOpenPopup}>
@@ -70,8 +86,8 @@ class _ProgramNotificationsCustom extends React.PureComponent<Props, State> {
           open={this.state.isOpenCreatePopup}
           onClose={this.handleClosePopup}
         >
-          <ProgramNotificationCreateForm
-            program={program}
+          <CustomNotificationCreateForm
+            asset={asset}
             errorMessage={errorMessage}
             onSubmit={this.handleSubmit}
           />
@@ -85,9 +101,12 @@ const mapStateToProps = (state: AuthRootState): StateProps => ({
   errorMessage: state.programNotifications.errorMessage
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  { addNotification }: OwnProps
+): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { success: alertMessageActions.success, addProgramNotification },
+    { addNotification },
     dispatch
   )
 });
@@ -99,7 +118,10 @@ interface Props
     InjectedTranslateProps {}
 
 interface OwnProps {
-  program: ProgramNotificationSettingList;
+  asset: ProgramNotificationSettingList;
+  addNotification: TAddNotification;
+  removeNotification: TRemoveNotification;
+  toggleNotification: TToggleNotification;
 }
 
 interface StateProps {
@@ -107,8 +129,7 @@ interface StateProps {
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {
-  success: typeof alertMessageActions.success;
-  addProgramNotification: typeof addProgramNotification;
+  addNotification: TAddNotification;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
@@ -118,11 +139,14 @@ interface State {
   isOpenCreatePopup: boolean;
 }
 
-const ProgramNotificationsCustom = compose<React.ComponentType<OwnProps>>(
+const AssetNotificationsCustom = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
   translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(_ProgramNotificationsCustom);
-export default ProgramNotificationsCustom;
+)(_AssetNotificationsCustom);
+export default AssetNotificationsCustom;
