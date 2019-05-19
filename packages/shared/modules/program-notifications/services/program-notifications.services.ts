@@ -33,7 +33,9 @@ export const addProgramNotification: TAddNotification = (
       dispatch(fetchProgramNotifications(opts.assetId!));
       dispatch(alertMessageActions.success(message));
     })
-    .catch(data => dispatch(addErrorMessageAction(data.errorMessage)));
+    .catch(data => {
+      dispatch(addErrorMessageAction(data.errorMessage));
+    });
 
 export const removeProgramNotification: TRemoveNotification = (
   { id, assetId },
@@ -43,11 +45,12 @@ export const removeProgramNotification: TRemoveNotification = (
     dispatch(fetchProgramNotifications(assetId));
     dispatch(alertMessageActions.success(message));
   });
+
 export const toggleProgramNotification: TToggleNotification = ({
   id,
   enabled,
   assetId
 }) => dispatch =>
-  dispatch(toggleProgramNotificationsAction(id, enabled)).then(() =>
-    dispatch(fetchProgramNotifications(assetId))
-  );
+  dispatch(toggleProgramNotificationsAction(id, enabled)).then(() => {
+    dispatch(fetchProgramNotifications(assetId));
+  });

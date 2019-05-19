@@ -1,3 +1,4 @@
+import { CancelablePromise } from "gv-api-web";
 import {
   IAddNotificationSettingProps,
   IRemoveNotificationSettingProps
@@ -9,12 +10,12 @@ import { INotification } from "./asset-notifications-general";
 export type TAddNotification = (
   opts: IAddNotificationSettingProps,
   message: string
-) => (dispatch: MiddlewareDispatch) => any;
+) => (dispatch: MiddlewareDispatch) => CancelablePromise<void>;
 
 export type TRemoveNotification = (
   opts: IRemoveNotificationSettingProps,
   message: string
-) => (dispatch: MiddlewareDispatch) => any;
+) => (dispatch: MiddlewareDispatch) => CancelablePromise<void>;
 
 export type TToggleNotification = (
   opts: {
@@ -22,7 +23,7 @@ export type TToggleNotification = (
     enabled: boolean;
     assetId: string;
   }
-) => (dispatch: MiddlewareDispatch) => any;
+) => (dispatch: MiddlewareDispatch) => CancelablePromise<void>;
 
 export type NotificationsList = {
   general: INotification[];

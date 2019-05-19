@@ -1,5 +1,8 @@
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { TAddNotification, TRemoveNotification } from "shared/modules/asset-notifications/asset-notifications.types";
+import {
+  TAddNotification,
+  TRemoveNotification
+} from "shared/modules/asset-notifications/asset-notifications.types";
 import {
   addNotificationSetting,
   removeNotificationSetting
@@ -29,7 +32,9 @@ export const addFundNotification: TAddNotification = (
       dispatch(fetchFundNotifications(opts.assetId!));
       dispatch(alertMessageActions.success(message));
     })
-    .catch(data => dispatch(addErrorMessageAction(data.errorMessage)));
+    .catch(data => {
+      dispatch(addErrorMessageAction(data.errorMessage));
+    });
 
 export const removeFundNotification: TRemoveNotification = (
   { id, assetId },
@@ -49,6 +54,6 @@ export const toggleFundNotificationsService = ({
   enabled: boolean;
   assetId: string;
 }) => (dispatch: MiddlewareDispatch) =>
-  dispatch(toggleFundNotificationsAction(id, enabled)).then(() =>
-    dispatch(fetchFundNotifications(assetId))
-  );
+  dispatch(toggleFundNotificationsAction(id, enabled)).then(() => {
+    dispatch(fetchFundNotifications(assetId));
+  });
