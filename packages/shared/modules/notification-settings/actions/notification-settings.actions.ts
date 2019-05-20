@@ -20,7 +20,7 @@ export const fetchNotificationSettingsAction = () => ({
   )
 });
 
-export interface IRemoveNotificationSettingProps { id: string; assetId: string; type?: string }
+export interface IRemoveNotificationSettingProps { id: string; assetId?: string; type?: string }
 
 export interface IAddNotificationSettingProps {
   assetId?: string;
