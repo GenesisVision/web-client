@@ -47,6 +47,9 @@
     position: absolute;
     bottom: 12%;
     left: 12%;
+    display: flex;
+    width: calc(100% - 30px);
+    justify-content: space-between;
   }
 
   &__logo {

@@ -7,7 +7,7 @@ import GVButton from "shared/components/gv-button";
 import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";
-import { BROKER_CARD_STATE } from "./broker-card/broker-card.constants";
+import { BROKER_CARD_EXTRA_STATE } from "./broker-card/broker-card.constants";
 import { comingSoonBrokers } from "./create-program-broker.constants";
 
 const getLeverageDescription = (
@@ -30,13 +30,28 @@ const getAccountTypes = (accountTypes: BrokerAccountType[]) => {
   return accountTypes[0].currencies.join(", ");
 };
 
+const getBrokerState = (
+  isForex: boolean,
+  isForexAllowed: boolean,
+  isKycConfirmed: boolean
+): BROKER_CARD_EXTRA_STATE => {
+  if (isForex && !isForexAllowed) {
+    return BROKER_CARD_EXTRA_STATE.FOREX_DISABLED;
+  } else if (isForex && !isKycConfirmed) {
+    return BROKER_CARD_EXTRA_STATE.KYC_REQUIRED;
+  } else {
+    return BROKER_CARD_EXTRA_STATE.NONE;
+  }
+};
+
 const _CreateProgramBroker: React.FC<OwnProps & InjectedTranslateProps> = ({
   t,
   brokers,
   navigateToSettings,
   selectedBroker,
   selectBroker,
-  isForexAllowed
+  isForexAllowed,
+  isKycConfirmed
 }) => (
   <div className="create-program-broker-container">
     <div className="create-program-broker">
@@ -47,20 +62,19 @@ const _CreateProgramBroker: React.FC<OwnProps & InjectedTranslateProps> = ({
             brokerName={broker.name}
             isSelected={broker === selectedBroker}
             onSelect={selectBroker}
-            cardState={
-              broker.isForex && !isForexAllowed
-                ? BROKER_CARD_STATE.KYC_REQUIRED
-                : BROKER_CARD_STATE.ACTIVE
-            }
+            cardState={getBrokerState(
+              broker.isForex,
+              isForexAllowed,
+              isKycConfirmed
+            )}
           />
         ))}
         {comingSoonBrokers.map(brokerName => (
           <BrokerCard
             key={brokerName}
             brokerName={brokerName}
-            cardState={BROKER_CARD_STATE.COMING_SOON}
+            cardState={BROKER_CARD_EXTRA_STATE.COMING_SOON}
             isSelected={false}
-            onSelect={undefined}
           />
         ))}
 
@@ -145,4 +159,5 @@ interface OwnProps {
   selectedBroker: Broker;
   selectBroker(brokerName: string): () => void;
   isForexAllowed: boolean;
+  isKycConfirmed: boolean;
 }
