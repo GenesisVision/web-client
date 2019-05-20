@@ -5,8 +5,8 @@ import {
   TToggleNotification
 } from "shared/modules/asset-notifications/asset-notifications.types";
 import {
-  addNotificationSetting,
-  removeNotificationSetting
+  addNotificationSettingAction,
+  removeNotificationSettingAction
 } from "shared/modules/notification-settings/actions/notification-settings.actions";
 import { MiddlewareDispatch } from "shared/utils/types";
 
@@ -28,7 +28,7 @@ export const addProgramNotification: TAddNotification = (
   opts,
   message
 ) => dispatch =>
-  dispatch(addNotificationSetting(opts))
+  dispatch(addNotificationSettingAction(opts))
     .then(() => {
       dispatch(fetchProgramNotifications(opts.assetId!));
       dispatch(alertMessageActions.success(message));
@@ -41,8 +41,8 @@ export const removeProgramNotification: TRemoveNotification = (
   { id, assetId },
   message
 ) => dispatch =>
-  dispatch(removeNotificationSetting(id)).then(() => {
-    dispatch(fetchProgramNotifications(assetId));
+  dispatch(removeNotificationSettingAction(id)).then(() => {
+    dispatch(fetchProgramNotifications(assetId!));
     dispatch(alertMessageActions.success(message));
   });
 

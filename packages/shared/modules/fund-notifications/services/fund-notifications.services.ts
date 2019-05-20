@@ -4,8 +4,8 @@ import {
   TRemoveNotification
 } from "shared/modules/asset-notifications/asset-notifications.types";
 import {
-  addNotificationSetting,
-  removeNotificationSetting
+  addNotificationSettingAction,
+  removeNotificationSettingAction
 } from "shared/modules/notification-settings/actions/notification-settings.actions";
 import { MiddlewareDispatch } from "shared/utils/types";
 
@@ -27,7 +27,7 @@ export const addFundNotification: TAddNotification = (
   opts,
   message
 ) => dispatch =>
-  dispatch(addNotificationSetting(opts))
+  dispatch(addNotificationSettingAction(opts))
     .then(() => {
       dispatch(fetchFundNotifications(opts.assetId!));
       dispatch(alertMessageActions.success(message));
@@ -40,8 +40,8 @@ export const removeFundNotification: TRemoveNotification = (
   { id, assetId },
   message
 ) => dispatch =>
-  dispatch(removeNotificationSetting(id)).then(() => {
-    dispatch(fetchFundNotifications(assetId));
+  dispatch(removeNotificationSettingAction(id)).then(() => {
+    dispatch(fetchFundNotifications(assetId!));
     dispatch(alertMessageActions.success(message));
   });
 
