@@ -18,7 +18,7 @@ import DisableAuthContainer from "./disable-auth/disable-auth-container";
 import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
 import GoogleAuthContainer from "./google-auth/google-auth-container";
 
-class TwoFactorAuthContainer extends React.PureComponent<Props, State> {
+class _TwoFactorAuthContainer extends React.PureComponent<Props, State> {
   state = {
     isPending: false,
     type: undefined
@@ -123,10 +123,11 @@ enum TYPE_2FA {
   DISABLE = "disable"
 }
 
-export default compose(
+const TwoFactorAuthContainer = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(TwoFactorAuthContainer);
+)(_TwoFactorAuthContainer);
+export default TwoFactorAuthContainer;
