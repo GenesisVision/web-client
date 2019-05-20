@@ -1,5 +1,6 @@
 import "./general-notification.scss";
 
+import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
 import { IRemoveNotificationSettingProps } from "shared/modules/notification-settings/actions/notification-settings.actions";
@@ -18,8 +19,8 @@ interface IGeneralNotificationProps {
   name: string;
   label: string;
   assetId?: string;
-  addNotification(opts?: Setting): Promise<any>;
-  removeNotification(opts?: IRemoveNotificationSettingProps): Promise<any>;
+  addNotification(opts?: Setting): CancelablePromise<void>;
+  removeNotification(opts?: IRemoveNotificationSettingProps): CancelablePromise<void>;
 }
 
 interface IGeneralNotificationState {
