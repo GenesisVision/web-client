@@ -11,7 +11,7 @@ import {
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import Dialog from "shared/components/dialog/dialog";
 import GVButton from "shared/components/gv-button";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
 import {
@@ -23,7 +23,6 @@ import CustomNotification from "./custom-notification";
 import CustomNotificationCreateForm, {
   ICustomNotificationCreateFormValues
 } from "./custom-notification-create-form";
-import withLoader, { WithLoaderProps } from "../../decorators/with-loader";
 
 class _AssetNotificationsCustom extends React.PureComponent<Props, State> {
   state = {
