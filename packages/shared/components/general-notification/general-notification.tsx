@@ -17,7 +17,7 @@ interface IGeneralNotificationProps {
   setting: Setting;
   name: string;
   label: string;
-  assetId: string;
+  assetId?: string;
   addNotification(opts?: Setting): Promise<any>;
   removeNotification(opts?: IRemoveNotificationSettingProps): Promise<any>;
 }
