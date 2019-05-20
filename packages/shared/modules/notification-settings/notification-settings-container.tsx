@@ -1,7 +1,12 @@
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import AssetNotificationsGeneral from "shared/modules/asset-notifications/asset-notifications-general";
 import { NOTIFICATIONS } from "shared/modules/asset-notifications/asset-notifications.types";
 import { AuthRootState } from "shared/utils/types";
@@ -28,7 +33,7 @@ class _NotificationSettingsContainer extends React.PureComponent<Props> {
   ];
 
   componentDidMount() {
-    this.props.service.fetchNotificationSettingsService();
+    this.props.service.fetchNotificationSettings();
   }
 
   render() {
@@ -83,13 +88,11 @@ interface DispatchProps {
 
 interface OwnProps {}
 
-const NotificationSettingsContainer = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps,
-  AuthRootState
->(
-  mapStateToProps,
-  mapDispatchToProps
+const NotificationSettingsContainer = compose<React.ComponentType<OwnProps>>(
+  translate(),
+  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(_NotificationSettingsContainer);
 export default NotificationSettingsContainer;
