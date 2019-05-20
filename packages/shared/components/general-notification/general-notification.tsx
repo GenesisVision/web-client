@@ -20,7 +20,9 @@ interface IGeneralNotificationProps {
   label: string;
   assetId?: string;
   addNotification(opts?: Setting): CancelablePromise<void>;
-  removeNotification(opts?: IRemoveNotificationSettingProps): CancelablePromise<void>;
+  removeNotification(
+    opts?: IRemoveNotificationSettingProps
+  ): CancelablePromise<void>;
 }
 
 interface IGeneralNotificationState {
