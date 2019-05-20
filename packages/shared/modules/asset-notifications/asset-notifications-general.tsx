@@ -84,10 +84,10 @@ interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
 
 interface OwnProps {
   settings: NotificationSettingViewModel[];
-  assetId: string;
   notifications: INotification[];
   addNotification: TAddNotification;
   removeNotification: TRemoveNotification;
+  assetId?: string;
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {
