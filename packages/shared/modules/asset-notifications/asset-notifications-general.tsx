@@ -12,11 +12,11 @@ import {
   compose
 } from "redux";
 import GeneralNotification from "shared/components/general-notification/general-notification";
-
 import {
   IAddNotificationSettingProps,
   IRemoveNotificationSettingProps
-} from "../notification-settings/actions/notification-settings.actions";
+} from "shared/modules/notification-settings/actions/notification-settings.actions";
+
 import {
   TAddNotification,
   TRemoveNotification
