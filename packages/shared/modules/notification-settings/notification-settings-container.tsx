@@ -3,6 +3,7 @@ import { InjectedTranslateProps } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import AssetNotificationsGeneral from "shared/modules/asset-notifications/asset-notifications-general";
+import { NOTIFICATIONS } from "shared/modules/asset-notifications/asset-notifications.types";
 import { AuthRootState } from "shared/utils/types";
 
 import NotificationManagers from "./notification-managers";
@@ -81,11 +82,6 @@ interface DispatchProps {
 }
 
 interface OwnProps {}
-
-enum NOTIFICATIONS {
-  PlatformNewsAndUpdates = "PlatformNewsAndUpdates",
-  PlatformEmergency = "PlatformEmergency"
-}
 
 const NotificationSettingsContainer = connect<
   StateProps,

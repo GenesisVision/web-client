@@ -9,7 +9,10 @@ import {
   compose
 } from "redux";
 import AssetNotifications from "shared/modules/asset-notifications/asset-notifications";
-import { NotificationsList } from "shared/modules/asset-notifications/asset-notifications.types";
+import {
+  NOTIFICATIONS,
+  NotificationsList
+} from "shared/modules/asset-notifications/asset-notifications.types";
 import { AuthRootState } from "shared/utils/types";
 
 import {
@@ -82,11 +85,6 @@ interface DispatchProps {
 
 interface OwnProps {
   id: string;
-}
-
-enum NOTIFICATIONS {
-  FundNewsAndUpdates = "FundNewsAndUpdates",
-  FundRebalancing = "FundRebalancing"
 }
 
 const FundNotificationsContainer = compose<React.ComponentType<OwnProps>>(

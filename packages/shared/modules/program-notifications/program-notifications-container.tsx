@@ -9,7 +9,10 @@ import {
   compose
 } from "redux";
 import AssetNotifications from "shared/modules/asset-notifications/asset-notifications";
-import { NotificationsList } from "shared/modules/asset-notifications/asset-notifications.types";
+import {
+  NOTIFICATIONS,
+  NotificationsList
+} from "shared/modules/asset-notifications/asset-notifications.types";
 import { AuthRootState } from "shared/utils/types";
 
 import {
@@ -84,11 +87,6 @@ interface ServiceThunks extends ActionCreatorsMapObject {
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
-}
-
-enum NOTIFICATIONS {
-  ProgramNewsAndUpdates = "ProgramNewsAndUpdates",
-  ProgramEndOfPeriod = "ProgramEndOfPeriod"
 }
 
 export default compose<React.ComponentType<OwnProps>>(
