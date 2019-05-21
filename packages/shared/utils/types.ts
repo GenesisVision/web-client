@@ -16,7 +16,6 @@ export interface IDispatchable<T> {
 
 export interface NotificationsActionType<T = ProgramNotificationSettingList>
   extends Action {
-  type: string;
   settings?: T;
   errorMessage?: string;
 }
