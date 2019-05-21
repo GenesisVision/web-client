@@ -8,7 +8,6 @@ export const FETCH_FUND_NOTIFICATIONS = "FETCH_FUND_NOTIFICATIONS";
 export const TOGGLE_FUND_NOTIFICATION = "TOGGLE_FUND_NOTIFICATION";
 export const ADD_ERROR_MESSAGE = "ADD_ERROR_MESSAGE";
 
-
 export const addFundNotificationsAction = (
   settings: FundNotificationSettingList
 ): NotificationsActionType<FundNotificationSettingList> => ({

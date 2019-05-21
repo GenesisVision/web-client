@@ -3,7 +3,7 @@ import { NotificationsActionType } from "shared/utils/types";
 
 import {
   ADD_ERROR_MESSAGE,
-  ADD_FUND_NOTIFICATIONS,
+  ADD_FUND_NOTIFICATIONS
 } from "../actions/fund-notifications.actions";
 
 export type FundNotificationsState = Readonly<{

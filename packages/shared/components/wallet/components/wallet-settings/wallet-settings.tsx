@@ -1,9 +1,9 @@
 import "./wallet-settings.scss";
 
 import * as React from "react";
-import GVButton from "shared/components/gv-button";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
 import GVTFees from "shared/components/gvt-fees/gvt-fees";
+import HelpButton from "shared/components/help-button/help-button";
 
 const _WalletSettings: React.FC<Props> = ({
   isOpenGVTFees,
@@ -16,15 +16,10 @@ const _WalletSettings: React.FC<Props> = ({
   handleSwitch
 }) => (
   <div className="wallet-settings">
-    <GVButton
-      variant="text"
-      type="button"
-      color="secondary"
+    <HelpButton
       className="wallet-settings__question"
       onClick={handleOpenGVTFees}
-    >
-      ?
-    </GVButton>
+    />
     <div className="wallet-settings__label">{label}</div>
     <GVSwitch
       touched={false}

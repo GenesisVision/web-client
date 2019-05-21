@@ -1,5 +1,6 @@
-export enum BROKER_CARD_STATE {
-  ACTIVE = "active",
-  COMING_SOON = "coming-soon",
-  KYC_REQUIRED = "KYC-required"
+export enum BROKER_CARD_EXTRA_STATE {
+  NONE = "NONE",
+  COMING_SOON = "COMING_SOON",
+  KYC_REQUIRED = "KYC_REQUIRED",
+  FOREX_DISABLED = "FOREX_DISABLED"
 }

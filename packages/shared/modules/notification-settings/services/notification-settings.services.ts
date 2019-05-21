@@ -11,9 +11,7 @@ import {
 } from "shared/modules/notification-settings/actions/notification-settings.actions";
 import { MiddlewareDispatch } from "shared/utils/types";
 
-export const fetchNotificationSettings = () => (
-  dispatch: MiddlewareDispatch
-) =>
+export const fetchNotificationSettings = () => (dispatch: MiddlewareDispatch) =>
   dispatch(fetchNotificationSettingsAction()).then(data =>
     dispatch(addNotificationSettingsAction(data.value))
   );
@@ -27,10 +25,7 @@ export const removeNotification: TRemoveNotification = (
     dispatch(alertMessageActions.success(message));
   });
 
-export const addNotification: TAddNotification = (
-  opts,
-  message
-) => dispatch =>
+export const addNotification: TAddNotification = (opts, message) => dispatch =>
   dispatch(addNotificationSettingAction(opts)).then(() => {
     dispatch(fetchNotificationSettings());
     dispatch(alertMessageActions.success(message));
