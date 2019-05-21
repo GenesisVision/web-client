@@ -14,6 +14,16 @@ export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
 }
 
+export type FavoriteActionProps = { id: string; authorization: string };
+
+export interface FavoriteActionType<T = any> extends Action {
+  payload: T;
+  meta: {
+    id: string;
+    isFavorite: boolean;
+  };
+}
+
 export interface NotificationsActionType<T = ProgramNotificationSettingList>
   extends Action {
   settings?: T;
