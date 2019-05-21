@@ -9,7 +9,7 @@ import { FavoriteActionType } from "shared/utils/types";
 
 const updateFavoriteLocal = (
   state: IApiState<ProgramsList>,
-  programId: string,
+  id: string,
   isFavorite: boolean
 ): IApiState<ProgramsList> => {
   return {
@@ -20,7 +20,7 @@ const updateFavoriteLocal = (
       programs:
         (state.data &&
           state.data.programs.map(program => {
-            if (program.id === programId) {
+            if (program.id === id) {
               return {
                 ...program,
                 personalDetails: {
@@ -44,13 +44,13 @@ const favoritesReducer = (
     case `${SET_FAVORITE_PROGRAM}_${REQUEST_SUFFIX}`:
       return updateFavoriteLocal(
         state,
-        action.meta.programId,
+        action.meta.id,
         action.meta.isFavorite
       );
     case `${SET_FAVORITE_PROGRAM}_${FAILURE_SUFFIX}`: {
       return updateFavoriteLocal(
         state,
-        action.meta.programId,
+        action.meta.id,
         !action.meta.isFavorite
       );
     }
