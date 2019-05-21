@@ -23,7 +23,6 @@
   &--inactive {
     overflow: hidden;
     cursor: not-allowed;
-    display: none;
     &:after {
       content: "";
       display: block;
