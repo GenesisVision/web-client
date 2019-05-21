@@ -18,7 +18,7 @@ const variant = PROFITABILITY_VARIANT.CHIPS;
 
 describe("Profitability tests", () => {
   describe("Profitability component tests", () => {
-    const value = 12;
+    const value = "12";
 
     test("should render Profitability", () => {
       const component = shallow(
