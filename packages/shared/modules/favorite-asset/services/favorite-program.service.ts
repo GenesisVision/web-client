@@ -8,13 +8,13 @@ import {
 import { ToggleFavoriteDispatchableType } from "./favorite-fund.service";
 
 export const toggleFavoriteProgramDispatchable: ToggleFavoriteDispatchableType = (
-  programId,
+  id,
   isFavorite
 ) => dispatch => {
   if (!authService.getAuthArg()) return;
 
   const requestData = {
-    programId,
+    id,
     authorization: authService.getAuthArg()
   };
 
@@ -43,13 +43,13 @@ const removeFavorite = (
 };
 
 export const toggleFavoriteProgram = (
-  programId: string,
+  id: string,
   isFavorite: boolean
 ): Promise<any> => {
   if (!authService.getAuthArg()) return Promise.reject();
   const authorization = authService.getAuthArg();
 
   return isFavorite
-    ? removeFavorite(programId, authorization)
-    : addFavorite(programId, authorization);
+    ? removeFavorite(id, authorization)
+    : addFavorite(id, authorization);
 };
