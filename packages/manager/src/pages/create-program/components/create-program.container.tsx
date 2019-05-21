@@ -180,6 +180,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
                 selectedBroker={selectedBroker}
                 selectBroker={this.selectBroker}
                 isForexAllowed={headerData.allowForex}
+                isKycConfirmed={headerData.kycConfirmed}
               />
             )}
             {tab === TAB.SETTINGS && (

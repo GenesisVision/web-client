@@ -3,12 +3,12 @@ import "./create-program-broker.scss";
 import { Broker, BrokerAccountType } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import GVButton from "shared/components/gv-button";
 import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "./broker-card/broker-card.constants";
 import { comingSoonBrokers } from "./create-program-broker.constants";
+import NavigateToSettings from "./navigate-to-settings";
 
 const getLeverageDescription = (
   leverageMin: number,
@@ -47,11 +47,11 @@ const getBrokerState = (
 const _CreateProgramBroker: React.FC<OwnProps & InjectedTranslateProps> = ({
   t,
   brokers,
-  navigateToSettings,
   selectedBroker,
   selectBroker,
   isForexAllowed,
-  isKycConfirmed
+  isKycConfirmed,
+  navigateToSettings
 }) => (
   <div className="create-program-broker-container">
     <div className="create-program-broker">
@@ -77,11 +77,12 @@ const _CreateProgramBroker: React.FC<OwnProps & InjectedTranslateProps> = ({
             isSelected={false}
           />
         ))}
-
         <div className="create-program-broker__navigation">
-          <GVButton color="primary" onClick={navigateToSettings}>
-            {t("buttons.continue")}
-          </GVButton>
+          <NavigateToSettings
+            selectedBroker={selectedBroker}
+            isKycConfirmed={isKycConfirmed}
+            navigateToSettings={navigateToSettings}
+          />
         </div>
       </div>
       <Surface className="surface--horizontal-paddings create-program-broker__description">
