@@ -3,10 +3,11 @@ import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/api-reducer/api-reducer";
+
 import {
   FETCH_WITHDRAW_PROGRAM_INFO,
   WITHDRAW_SUBMIT_BY_ID
-} from "src/modules/program-withdraw/program-withdraw.constants.ts";
+} from "../program-withdraw.constants";
 
 const programWithdrawReducer = apiReducerFactory<ProgramWithdrawInfo>({
   apiType: FETCH_WITHDRAW_PROGRAM_INFO
