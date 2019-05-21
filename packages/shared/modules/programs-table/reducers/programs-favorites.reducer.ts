@@ -5,6 +5,7 @@ import {
   IApiState,
   REQUEST_SUFFIX
 } from "shared/reducers/api-reducer/api-reducer";
+import { FavoriteActionType } from "shared/utils/types";
 
 const updateFavoriteLocal = (
   state: IApiState<ProgramsList>,
@@ -37,7 +38,7 @@ const updateFavoriteLocal = (
 
 const favoritesReducer = (
   state: IApiState<ProgramsList>,
-  action: any
+  action: FavoriteActionType
 ): IApiState<ProgramsList> => {
   switch (action.type) {
     case `${SET_FAVORITE_PROGRAM}_${REQUEST_SUFFIX}`:
