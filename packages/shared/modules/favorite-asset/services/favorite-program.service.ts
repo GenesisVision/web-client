@@ -25,22 +25,11 @@ export const toggleFavoriteProgramDispatchable: ToggleFavoriteDispatchableType =
   );
 };
 
-const addFavorite = (
-  programId: string,
-  authorization: string
-): Promise<any> => {
-  return programsApi.v10ProgramsByIdFavoriteAddPost(programId, authorization);
-};
+const addFavorite = (id: string, authorization: string): Promise<any> =>
+  programsApi.v10ProgramsByIdFavoriteAddPost(id, authorization);
 
-const removeFavorite = (
-  programId: string,
-  authorization: string
-): Promise<any> => {
-  return programsApi.v10ProgramsByIdFavoriteRemovePost(
-    programId,
-    authorization
-  );
-};
+const removeFavorite = (id: string, authorization: string): Promise<any> =>
+  programsApi.v10ProgramsByIdFavoriteRemovePost(id, authorization);
 
 export const toggleFavoriteProgram = (
   id: string,
