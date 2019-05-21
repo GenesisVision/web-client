@@ -1,4 +1,5 @@
 import { ProgramNotificationSettingList } from "gv-api-web";
+import { NotificationsActionType } from "shared/utils/types";
 
 import {
   ADD_ERROR_MESSAGE,
@@ -6,7 +7,7 @@ import {
 } from "../actions/program-notifications.actions";
 
 export type ProgramNotificationsState = Readonly<{
-  data: { [name: string]: ProgramNotificationSettingList };
+  data: { [name: string]: ProgramNotificationSettingList | undefined };
   errorMessage?: string;
 }>;
 
@@ -16,12 +17,12 @@ const initialState: ProgramNotificationsState = {
 
 const programNotificationsReducer = (
   state: ProgramNotificationsState = initialState,
-  action: any
+  action: NotificationsActionType
 ): ProgramNotificationsState => {
   switch (action.type) {
     case ADD_PROGRAM_NOTIFICATIONS:
       return {
-        data: { ...state.data, [action.settings.url]: action.settings },
+        data: { ...state.data, [action.settings!.url]: action.settings },
         errorMessage: undefined
       };
     case ADD_ERROR_MESSAGE:

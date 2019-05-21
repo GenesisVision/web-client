@@ -14,46 +14,46 @@ import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
 import { number, object } from "yup";
 
-const ProgramNotificationCreateForm: React.FC<Props> = props => {
-  const {
-    t,
-    program,
-    handleSubmit,
-    values,
-    isValid,
-    dirty,
-    isSubmitting
-  } = props;
+const _CustomNotificationCreateForm: React.FC<Props> = ({
+  errorMessage,
+  t,
+  asset,
+  handleSubmit,
+  values,
+  isValid,
+  dirty,
+  isSubmitting
+}) => {
   const { conditionType } = values;
-  const isProfit = conditionType === "Profit";
-  const isLevel = conditionType === "Level";
+  const isProfit = conditionType === CONDITION_TYPE_VALUES.Profit;
+  const isLevel = conditionType === CONDITION_TYPE_VALUES.Level;
   return (
     <form id="create-notification" onSubmit={handleSubmit}>
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>{t("notifications-page.create.title")}</h2>
-          <p>{program.title}</p>
+          <p>{asset.title}</p>
         </div>
         <GVFormikField
-          name="conditionType"
+          name={FIELDS.conditionType}
           component={GVTextField}
           label={t("notifications-page.create.type-label")}
           InputComponent={Select}
         >
-          <option value="Profit">
+          <option value={CONDITION_TYPE_VALUES.Profit}>
             {t("notifications-page.create.Profit.title")}
           </option>
-          <option value="Level">
+          <option value={CONDITION_TYPE_VALUES.Level}>
             {t("notifications-page.create.Level.title")}
           </option>
-          <option value="AvailableToInvest">
+          <option value={CONDITION_TYPE_VALUES.AvailableToInvest}>
             {t("notifications-page.create.AvailableToInvest.title")}
           </option>
         </GVFormikField>
       </div>
       <div className="dialog__bottom">
         <GVFormikField
-          name="conditionAmount"
+          name={FIELDS.conditionAmount}
           label={t("notifications-page.create.amount-label")}
           component={GVTextField}
           adornment={isProfit ? "%" : null}
@@ -74,7 +74,7 @@ const ProgramNotificationCreateForm: React.FC<Props> = props => {
             return true;
           }}
         />
-        <div className="form-error">{props.errorMessage}</div>
+        <div className="form-error">{errorMessage}</div>
         <div className="dialog__buttons">
           <GVButton
             color="primary"
@@ -89,18 +89,19 @@ const ProgramNotificationCreateForm: React.FC<Props> = props => {
   );
 };
 
-export default compose<React.FC<OwnProps>>(
+const CustomNotificationCreateForm = compose<React.FC<OwnProps>>(
+  React.memo,
   translate(),
-  withFormik<Props, Values>({
+  withFormik<Props, ICustomNotificationCreateFormValues>({
     displayName: "create-notification",
     mapPropsToValues: () => ({
-      type: "ProgramCondition",
-      conditionType: "Profit",
-      conditionAmount: undefined
+      [FIELDS.type]: "ProgramCondition",
+      [FIELDS.conditionType]: CONDITION_TYPE_VALUES.Profit,
+      [FIELDS.conditionAmount]: undefined
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
-        conditionAmount: number().required(
+        [FIELDS.conditionAmount]: number().required(
           t("notifications-page.create.amount-required")
         )
       }),
@@ -108,21 +109,37 @@ export default compose<React.FC<OwnProps>>(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(ProgramNotificationCreateForm);
+)(_CustomNotificationCreateForm);
+export default CustomNotificationCreateForm;
 
-interface Props extends OwnProps, InjectedTranslateProps, FormikProps<Values> {}
+interface Props
+  extends OwnProps,
+    InjectedTranslateProps,
+    FormikProps<ICustomNotificationCreateFormValues> {}
 
 interface OwnProps {
-  program: ProgramInfo;
-  errorMessage: string;
+  asset: ProgramInfo;
   onSubmit: (
-    values: Values,
+    values: ICustomNotificationCreateFormValues,
     setSubmitting: (isSubmitting: boolean) => void
   ) => void;
+  errorMessage?: string;
 }
 
-interface Values {
-  type: NotificationViewModelTypeEnum;
-  conditionType: NotificationSettingViewModelConditionTypeEnum;
-  conditionAmount?: number;
+enum FIELDS {
+  type = "type",
+  conditionType = "conditionType",
+  conditionAmount = "conditionAmount"
+}
+
+enum CONDITION_TYPE_VALUES {
+  Profit = "Profit",
+  Level = "Level",
+  AvailableToInvest = "AvailableToInvest"
+}
+
+export interface ICustomNotificationCreateFormValues {
+  [FIELDS.type]: NotificationViewModelTypeEnum;
+  [FIELDS.conditionType]: NotificationSettingViewModelConditionTypeEnum;
+  [FIELDS.conditionAmount]?: number;
 }

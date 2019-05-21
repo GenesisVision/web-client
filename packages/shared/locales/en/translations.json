@@ -900,6 +900,26 @@
       "title": "GENERAL",
       "news-updates": "News and updates",
       "emergency": "Emergency notifications",
+      "FundRebalancing": {
+        "disabled-alert": "Disabled rebalancing notifications",
+        "enabled-alert": "Enabled rebalancing notifications"
+      },
+      "FundNewsAndUpdates": {
+        "disabled-alert": "Disabled news and updates notifications",
+        "enabled-alert": "Enabled news and updates notifications"
+      },
+      "FundEndOfPeriod": {
+        "disabled-alert": "Disabled the end of period notifications",
+        "enabled-alert": "Enabled the end of period notifications"
+      },
+      "ProgramEndOfPeriod": {
+        "enabled-alert": "Enabled the end of period notifications",
+        "disabled-alert": "Disabled the end of period notifications"
+      },
+      "ProgramNewsAndUpdates": {
+        "enabled-alert": "Enabled news and updates notifications",
+        "disabled-alert": "Disabled news and updates notifications"
+      },
       "PlatformEmergency": {
         "enabled-alert": "Enabled emergency notifications",
         "disabled-alert": "Disabled emergency notifications"
