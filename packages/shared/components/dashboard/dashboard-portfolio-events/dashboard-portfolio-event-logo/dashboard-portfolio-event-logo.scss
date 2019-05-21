@@ -42,8 +42,10 @@
   }
 
   &__logo {
-    height: 28px;
-    width: 28px;
+    &.program-avatar {
+      height: 28px;
+      width: 28px;
+    }
   }
 
   &--positive {
