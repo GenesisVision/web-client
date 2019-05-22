@@ -517,6 +517,9 @@
         "title": "Make a signal provider",
         "disclaimer": "Parameters cannot be changed in the future."
       },
+      "edit-signal-provider": {
+        "title": "Edit a signal provider"
+      },
       "change-password": "Change password",
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",

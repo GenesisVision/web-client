@@ -55,9 +55,28 @@ class SignalProviderControls extends Component<
       <ProgramDetailContext.Consumer>
         {({ updateDetails }: any) =>
           programDescription.isSignalProgram ? (
-            <SignalProgramInfo programDescription={programDescription} />
+            <>
+              <SignalProgramInfo programDescription={programDescription} />
+              <div className="program-details-description__button-container">
+                <GVButton
+                  onClick={this.openPopup}
+                  className="program-details-description__invest-btn signal-provider__btn"
+                >
+                  {t(
+                    "program-details-page.description.edit-signal-provider.title"
+                  )}
+                </GVButton>
+                <ProgramMakeSignalContainer
+                  programName={programDescription.title}
+                  open={isOpenCreateSignalPopup}
+                  id={programDescription.id}
+                  onClose={this.closePopup}
+                  onApply={this.applyChanges(updateDetails)}
+                />
+              </div>
+            </>
           ) : (
-            <Fragment>
+            <>
               <div className="signal-provider">
                 <div>
                   {t("program-details-page.description.signal-provider.title")}
@@ -86,7 +105,7 @@ class SignalProviderControls extends Component<
                 onClose={this.closePopup}
                 onApply={this.applyChanges(updateDetails)}
               />
-            </Fragment>
+            </>
           )
         }
       </ProgramDetailContext.Consumer>
