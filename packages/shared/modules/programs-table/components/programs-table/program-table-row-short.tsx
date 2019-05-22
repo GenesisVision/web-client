@@ -133,7 +133,7 @@ const ProgramTableRowShort: React.FC<
         {periodStarts && (
           <ProgramPeriodPie
             condition={status !== STATUS.CLOSED}
-            loader={<>{t("program-period.program-closed")}</>}
+            loader={t("program-period.program-closed")}
             start={periodStarts}
             end={periodEnds}
           />
