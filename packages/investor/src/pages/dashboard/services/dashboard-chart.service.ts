@@ -4,7 +4,7 @@ import { TGetState } from "shared/utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 
-export const getPortfolioChart = (from: Date, to: Date) => (
+export const getPortfolioChart = (from?: Date, to?: Date) => (
   dispatch: Dispatch,
   getState: TGetState
 ) => {
