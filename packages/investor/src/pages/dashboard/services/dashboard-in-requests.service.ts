@@ -1,4 +1,9 @@
+import {
+  CancelRequestType,
+  GetInRequestsType
+} from "shared/components/dashboard/dashboard.constants";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
@@ -7,14 +12,13 @@ import {
   fetchInRequests
 } from "../actions/dashboard.actions";
 import { getTopPortfolioEvents } from "./dashboard-events.services";
-import { ROLE_ENV } from "shared/constants/constants";
 
-export const getInRequests = () => dispatch => {
+export const getInRequests: GetInRequestsType = () => dispatch => {
   const authorization = authService.getAuthArg();
   dispatch(fetchInRequests(authorization, 0, 100));
 };
 
-export const cancelRequest = ({
+export const cancelRequest: CancelRequestType = ({
   id,
   onFinally,
   removeDisableBtn
