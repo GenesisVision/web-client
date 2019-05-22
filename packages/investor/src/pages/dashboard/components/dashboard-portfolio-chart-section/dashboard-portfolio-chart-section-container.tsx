@@ -5,7 +5,6 @@ import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
 import { InvestorRootState } from "reducers";
 import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
-import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
 import {
   ChartDefaultPeriod,
   DEFAULT_PERIOD
@@ -14,8 +13,8 @@ import { DashboardChartLoader } from "shared/components/dashboard/dashboard-char
 import DashboardChartStatsLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-stats-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { getPortfolioChart } from "../../../services/dashboard-chart.service";
-import DashboardGetStarted from "../dashboard-get-started";
+import { getPortfolioChart } from "../../services/dashboard-chart.service";
+import DashboardGetStarted from "./dashboard-get-started";
 import DashboardPortfolioChartSection from "./dashboard-portfolio-chart-section";
 
 class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
