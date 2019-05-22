@@ -1,6 +1,7 @@
 import "./profitability.scss";
 
 import * as React from "react";
+import withLoader from "shared/decorators/with-loader";
 
 import BaseProfitability from "./base-profitability";
 import {
@@ -38,7 +39,7 @@ const _Profitability: React.FC<Props> = props => {
   );
 };
 
-const Profitability = React.memo(_Profitability);
+const Profitability = React.memo(withLoader(_Profitability));
 
 export default Profitability;
 
