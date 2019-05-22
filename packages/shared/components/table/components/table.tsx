@@ -118,6 +118,7 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
           {view === LIST_VIEW.CARDS && (
             <div className={classNames("table", className)}>
               <TableBody
+                isPending={isPending}
                 items={items}
                 className="table-cards"
                 tag="div"
