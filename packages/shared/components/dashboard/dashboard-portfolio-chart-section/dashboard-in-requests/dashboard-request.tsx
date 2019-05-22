@@ -3,7 +3,6 @@ import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { CancelRequestType } from "shared/components/asset-status/services/asset-status.service";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import GVButton from "shared/components/gv-button";
@@ -12,10 +11,11 @@ import { ASSET, ROLE } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { EVENT_LOGO_TYPE } from "../../dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
+import { CancelRequestPropsType } from "../../dashboard.constants";
 
 export interface IDashboardRequestProps extends InjectedTranslateProps {
   request: ProgramRequest;
-  cancelRequest(x: CancelRequestType): void;
+  cancelRequest(x: CancelRequestPropsType): void;
   onApplyCancelRequest(): void;
   role?: ROLE;
   asset?: ASSET;
