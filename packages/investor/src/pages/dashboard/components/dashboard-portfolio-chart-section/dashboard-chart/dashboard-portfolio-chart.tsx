@@ -1,9 +1,11 @@
-import React, { PureComponent } from "react";
+import * as React from "react";
 import {
   Area,
+  AreaChart,
   Bar,
   Cell,
   ComposedChart,
+  RechartsFunction,
   ResponsiveContainer,
   Tooltip,
   YAxis
@@ -16,9 +18,9 @@ import {
 import GVColors from "shared/components/gv-styles/gv-colors";
 
 import { BAR_COLORS } from "./dashboard-chart.constants";
-import DasboardPortfolioTooltip from "./dashboard-portfoio-tooltip";
+import DashboardPortfolioTooltip from "./dashboard-portfoio-tooltip";
 
-class DashboardPortfolioChart extends PureComponent {
+class DashboardPortfolioChart extends React.PureComponent<Props, State> {
   state = {
     activeIndex: undefined
   };
@@ -28,7 +30,7 @@ class DashboardPortfolioChart extends PureComponent {
       this.props.balance.filter(x => x.value !== undefined).map(x => x.value)
     );
 
-  handleBarMouseOver = (data, index) => {
+  handleBarMouseOver: RechartsFunction = (data, index) => {
     this.setState({
       activeIndex: index
     });
@@ -57,6 +59,8 @@ class DashboardPortfolioChart extends PureComponent {
             new Date(balance[0].date),
             new Date(balance[balance.length - 1].date)
           )}
+          {/*
+        //@ts-ignore*/}
           <YAxis
             dataKey="balance"
             data={assets}
@@ -66,6 +70,8 @@ class DashboardPortfolioChart extends PureComponent {
             unit="GVT"
             width={50}
           />
+          {/*
+        //@ts-ignore*/}
           <Area
             type="monotone"
             dataKey="balance"
@@ -76,7 +82,7 @@ class DashboardPortfolioChart extends PureComponent {
             strokeWidth={2}
             isAnimationActive={false}
           />
-          <Tooltip cursor={false} content={DasboardPortfolioTooltip} />
+          <Tooltip cursor={false} content={DashboardPortfolioTooltip} />
           {[...Array(assetsCount).keys()].map(idx => (
             <Bar
               dataKey={`asset${assetsCount - idx - 1}.value`}
@@ -87,7 +93,7 @@ class DashboardPortfolioChart extends PureComponent {
               key={idx}
               isAnimationActive={false}
             >
-              {assets.map((entry, index) => (
+              {assets.map((entry: any, index: number) => (
                 <Cell
                   fill={
                     activeIndex === index
@@ -103,6 +109,15 @@ class DashboardPortfolioChart extends PureComponent {
       </ResponsiveContainer>
     );
   }
+}
+
+interface Props {
+  balance: any[];
+  assets: any;
+}
+
+interface State {
+  activeIndex?: number;
 }
 
 export default DashboardPortfolioChart;
