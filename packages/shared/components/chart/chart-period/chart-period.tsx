@@ -62,5 +62,5 @@ interface Props {
   onChange: HandlePeriodChangeType;
 }
 
-const _ChartPeriod = React.memo(withLoader(translate()(_ChartPeriod)));
-export default _ChartPeriod;
+const ChartPeriod = React.memo(withLoader(translate()(_ChartPeriod)));
+export default ChartPeriod;
