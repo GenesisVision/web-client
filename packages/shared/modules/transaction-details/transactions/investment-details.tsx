@@ -3,7 +3,7 @@ import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
-import TransactionAsset from "shared/modules/transaction-details/transactions/details-asset";
+import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const DECIMAL_SCALE = 8;
@@ -30,7 +30,10 @@ const InvestingTransaction: React.FC<TransactionDetailsProps> = props => {
             }`
           )}
         >
-          <TransactionAsset data={data.programDetails} />
+          <TransactionAsset
+            url={data.programDetails.logo}
+            data={data.programDetails}
+          />
         </StatisticItem>
       </div>
       <div className="dialog__bottom">

@@ -93,7 +93,6 @@ class GVProgramAvatar extends React.Component<
 
   render() {
     const { size, className } = this.props;
-
     return (
       <div
         className={classnames("program-avatar", className, {
