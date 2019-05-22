@@ -159,7 +159,6 @@ class _TransferForm extends React.PureComponent<Props> {
               currency={selectedSourceItem.currency}
               setMax={setMaxAmount}
               isAllow={this.isAllow}
-              emptyInit
             />
           </div>
           {!!values[FIELDS.amount] && (
@@ -224,7 +223,7 @@ const TransferForm = compose<React.ComponentType<OwnProps>>(
       }
       return {
         [FIELDS.sourceId]: sourceId,
-        [FIELDS.amount]: 0,
+        [FIELDS.amount]: undefined,
         [FIELDS.destinationId]: destinationId,
         [FIELDS.sourceType]: sourceType,
         [FIELDS.destinationType]: destinationType,
@@ -257,7 +256,7 @@ const TransferForm = compose<React.ComponentType<OwnProps>>(
       const { amount, sourceId } = values;
 
       const transferAll = service.getTransferAll(
-        { amount, sourceId },
+        { amount: amount!, sourceId },
         props.sourceItems
       );
       props.onSubmit({ ...values, transferAll }, setSubmitting);
@@ -287,7 +286,14 @@ interface OwnProps {
   currentItemContainer?: TRANSFER_CONTAINER;
 }
 
-export interface TransferFormValues extends InternalTransferRequest {}
+export interface TransferFormValues {
+  sourceId: string;
+  sourceType: InternalTransferRequestSourceTypeEnum;
+  destinationId: string;
+  destinationType: InternalTransferRequestSourceTypeEnum;
+  amount?: number;
+  transferAll: boolean;
+}
 
 interface Props
   extends InjectedTranslateProps,
