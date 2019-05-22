@@ -46,7 +46,6 @@ class GVProgramAvatar extends React.Component<
 
   renderImage = () => {
     const { url, alt, color, imageClassName } = this.props;
-    console.log(url);
     if (this.state.errored || url === undefined || url === null)
       return (
         <GVProgramDefaultAvatar color={color} imageClassName={imageClassName} />
@@ -94,7 +93,6 @@ class GVProgramAvatar extends React.Component<
 
   render() {
     const { size, className } = this.props;
-
     return (
       <div
         className={classnames("program-avatar", className, {

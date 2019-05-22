@@ -46,7 +46,6 @@ class AssetAvatar extends React.Component<
 
   render() {
     const { tooltip, onClickLevel } = this.props;
-    console.log(this.props);
     return (
       <React.Fragment>
         <GVProgramAvatar

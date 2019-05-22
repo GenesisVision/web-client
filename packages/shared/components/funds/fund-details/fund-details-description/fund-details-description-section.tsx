@@ -59,9 +59,6 @@ class FundDetailsDescription extends React.PureComponent<
       managerName: fundDescription.manager.username
     };
 
-    console.log(fundDescription.logo);
-    console.log("fundDescription");
-
     return (
       <div className="program-details-description">
         <DetailsDescription

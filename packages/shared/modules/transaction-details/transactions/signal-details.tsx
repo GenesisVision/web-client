@@ -3,7 +3,7 @@ import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
-import TransactionAsset from "shared/modules/transaction-details/transactions/details-asset";
+import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
@@ -19,7 +19,7 @@ const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
           condition={!!details}
           label={t(`transactions-details.investment.to-${details.programType}`)}
         >
-          <TransactionAsset data={details} />
+          <TransactionAsset url={details.logo} data={details} />
         </StatisticItem>
       </div>
       <div className="dialog__bottom">

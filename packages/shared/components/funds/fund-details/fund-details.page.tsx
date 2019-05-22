@@ -105,7 +105,6 @@ class FundDetailsPage extends PureComponent<Props, State> {
     const isInvested =
       description.personalFundDetails &&
       description.personalFundDetails.isInvested;
-    console.log(description);
     return (
       <Page title={description.title}>
         <ProgramDetailContext.Provider
