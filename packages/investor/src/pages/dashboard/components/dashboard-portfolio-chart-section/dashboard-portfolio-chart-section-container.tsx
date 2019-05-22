@@ -1,4 +1,4 @@
-import "../dashboard-portfolio-chart-section.scss";
+import "./dashboard-portfolio-chart-section.scss";
 
 import { DashboardChartValue } from "gv-api-web";
 import * as React from "react";

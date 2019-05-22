@@ -12,7 +12,7 @@ import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 import {
   cancelRequest,
   getInRequests
-} from "../../../services/dashboard-in-requests.service";
+} from "../../services/dashboard-in-requests.service";
 import DashboardPortfolioChart from "./dashboard-portfolio-chart";
 import DashboardPortfolioChartStat from "./dashboard-portfolio-chart-stat";
 
@@ -81,13 +81,15 @@ const _DashboardPortfolioChartSection: React.FC<Props> = ({
       onChange={handleChangePeriod}
     />
     <div className="dashboard-portfolio-chart-section__chart">
-      <DashboardPortfolioChart assets={composeAssetsChartData(data.investedProgramsInfo)} balance={composeBalanceChartData(data.balanceChart)} />
+      <DashboardPortfolioChart
+        assets={composeAssetsChartData(data.investedProgramsInfo)}
+        balance={composeBalanceChartData(data.balanceChart)}
+      />
     </div>
   </>
 );
 
-interface Props extends InjectedTranslateProps, OwnProps {
-}
+interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface OwnProps {
   currency: CurrencyEnum;
