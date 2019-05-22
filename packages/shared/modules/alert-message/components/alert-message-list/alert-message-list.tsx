@@ -71,6 +71,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
 });
 
 const AlertMessageList = compose<React.FC>(
+  React.memo,
   translate(),
   connect(
     mapStateToProps,

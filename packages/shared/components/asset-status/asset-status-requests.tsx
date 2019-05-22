@@ -4,11 +4,11 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import DashboardRequest from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
+import { CancelRequestPropsType } from "shared/components/dashboard/dashboard.constants";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import {
-  CancelRequestType,
   cancelRequestDispatch,
   getAssetRequests
 } from "./services/asset-status.service";
@@ -23,7 +23,7 @@ export interface IAssetStatusRequestsOwnProps {
 
 export interface IAssetStatusRequestsDispatchProps {
   service: {
-    cancelRequestDispatch(x: CancelRequestType): Promise<any>;
+    cancelRequestDispatch(x: CancelRequestPropsType): Promise<any>;
   };
 }
 
@@ -85,7 +85,7 @@ const mapDispatchToProps = (
 ): IAssetStatusRequestsDispatchProps => {
   return {
     service: {
-      cancelRequestDispatch: (x: CancelRequestType) =>
+      cancelRequestDispatch: (x: CancelRequestPropsType) =>
         dispatch(cancelRequestDispatch(x))
     }
   };

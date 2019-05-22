@@ -8,13 +8,13 @@ import {
 import { ToggleFavoriteDispatchableType } from "./favorite-fund.service";
 
 export const toggleFavoriteProgramDispatchable: ToggleFavoriteDispatchableType = (
-  programId,
+  id,
   isFavorite
 ) => dispatch => {
   if (!authService.getAuthArg()) return;
 
   const requestData = {
-    programId,
+    id,
     authorization: authService.getAuthArg()
   };
 
@@ -25,31 +25,20 @@ export const toggleFavoriteProgramDispatchable: ToggleFavoriteDispatchableType =
   );
 };
 
-const addFavorite = (
-  programId: string,
-  authorization: string
-): Promise<any> => {
-  return programsApi.v10ProgramsByIdFavoriteAddPost(programId, authorization);
-};
+const addFavorite = (id: string, authorization: string): Promise<any> =>
+  programsApi.v10ProgramsByIdFavoriteAddPost(id, authorization);
 
-const removeFavorite = (
-  programId: string,
-  authorization: string
-): Promise<any> => {
-  return programsApi.v10ProgramsByIdFavoriteRemovePost(
-    programId,
-    authorization
-  );
-};
+const removeFavorite = (id: string, authorization: string): Promise<any> =>
+  programsApi.v10ProgramsByIdFavoriteRemovePost(id, authorization);
 
 export const toggleFavoriteProgram = (
-  programId: string,
+  id: string,
   isFavorite: boolean
 ): Promise<any> => {
   if (!authService.getAuthArg()) return Promise.reject();
   const authorization = authService.getAuthArg();
 
   return isFavorite
-    ? removeFavorite(programId, authorization)
-    : addFavorite(programId, authorization);
+    ? removeFavorite(id, authorization)
+    : addFavorite(id, authorization);
 };
