@@ -16,7 +16,6 @@ export const getInRequests = () => dispatch => {
 
 export const cancelRequest = ({
   id,
-  type,
   onFinally,
   removeDisableBtn
 }) => dispatch => {
