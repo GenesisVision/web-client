@@ -1,14 +1,16 @@
 import "./dashboard-in-requests.scss";
 
 import { ProgramRequests } from "gv-api-web";
-import { InvestorRootState } from "investor-web-portal/src/reducers";
-import { ManagerRootState } from "manager-web-portal/src/reducers";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
-import { CancelRequestType } from "shared/components/asset-status/services/asset-status.service";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import { DashboardChartRequestLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover, {
@@ -20,10 +22,15 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ROLE_ENV } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { AuthRootState } from "shared/utils/types";
 
 import DashboardRequest from "./dashboard-request";
+import {
+  CancelRequestType,
+  GetInRequestsType
+} from "../../dashboard.constants";
 
-class DashboardInRequestsContainer extends React.PureComponent<Props, State> {
+class _DashboardInRequestsContainer extends React.PureComponent<Props, State> {
   state = {
     anchor: undefined
   };
@@ -120,22 +127,20 @@ interface IRequestProps
   handleCloseDropdown: () => void;
 }
 
-const mapStateToProps = (
-  state: InvestorRootState | ManagerRootState
-): StateProps => {
+const mapStateToProps = (state: AuthRootState): StateProps => {
   const { data, isPending } = state.dashboard.inRequestsData;
   return { inRequests: data, isPending };
 };
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
-  props: Props
-): DispatchProps => {
-  const { getInRequests, cancelRequest } = props;
-  return {
-    service: bindActionCreators({ getInRequests, cancelRequest }, dispatch)
-  };
-};
+  { getInRequests, cancelRequest }: OwnProps
+): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { getInRequests, cancelRequest },
+    dispatch
+  )
+});
 
 interface Props
   extends OwnProps,
@@ -144,8 +149,8 @@ interface Props
     InjectedTranslateProps {}
 
 interface OwnProps {
-  getInRequests: () => void;
-  cancelRequest: (x: CancelRequestType) => void;
+  getInRequests: GetInRequestsType;
+  cancelRequest: CancelRequestType;
 }
 
 interface StateProps {
@@ -153,18 +158,23 @@ interface StateProps {
   isPending: boolean;
 }
 
+interface ServiceThunks extends ActionCreatorsMapObject {
+  getInRequests: GetInRequestsType;
+  cancelRequest: CancelRequestType;
+}
 interface DispatchProps {
-  service: {
-    getInRequests: () => void;
-    cancelRequest: (x: CancelRequestType) => void;
-  };
+  service: ResolveThunks<ServiceThunks>;
 }
 
 interface State {
   anchor?: HTMLElement;
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DashboardInRequestsContainer);
+const DashboardInRequestsContainer = compose<React.ComponentType<OwnProps>>(
+  translate(),
+  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(_DashboardInRequestsContainer);
+export default DashboardInRequestsContainer;
