@@ -1172,7 +1172,12 @@
     "dashboard-page": {
       "title": "Dashboard",
       "chart-section": {
-        "in-requests": "In Requests"
+        "header": "Chart",
+        "in-requests": "In Requests",
+        "stats": {
+          "value": "Value",
+          "change": "Change"
+        }
       },
       "requests": {
         "success-cancel-request": "Request canceled successfully"
