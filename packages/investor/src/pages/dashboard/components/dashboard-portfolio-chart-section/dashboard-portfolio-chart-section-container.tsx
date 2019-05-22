@@ -92,7 +92,9 @@ interface StateProps {
   isNewUser: boolean;
 }
 
-interface ServiceThunks extends ActionCreatorsMapObject {}
+interface ServiceThunks extends ActionCreatorsMapObject {
+  getPortfolioChart: typeof getPortfolioChart;
+}
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
