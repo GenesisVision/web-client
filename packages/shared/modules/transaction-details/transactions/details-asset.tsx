@@ -1,8 +1,24 @@
 import { ProgramTransactionDetails } from "gv-api-web";
 import * as React from "react";
-import GVProgramAvatar from "shared/components/gv-program-avatar";
+import GVProgramAvatar, {
+  GVProgramAvatarProps
+} from "shared/components/gv-program-avatar";
+import withUrl from "shared/decorators/with-url";
+import { InjectedTranslateProps } from "react-i18next";
+import { FormikProps } from "formik";
+import { ICustomNotificationCreateFormValues } from "../../asset-notifications/custom-notification-create-form";
 
-const TransactionAsset = (props: { data: ProgramTransactionDetails }) => {
+interface OwnProps {
+  data: ProgramTransactionDetails;
+}
+
+interface AddProps {
+  alt: string;
+}
+
+interface Props extends OwnProps, AddProps, GVProgramAvatarProps {}
+
+const TransactionAsset = (props: OwnProps) => {
   return (
     <div
       className={`transaction-asset transaction-asset--${props.data.programType.toLowerCase()}`}
@@ -21,4 +37,6 @@ const TransactionAsset = (props: { data: ProgramTransactionDetails }) => {
   );
 };
 
-export default TransactionAsset;
+// export default TransactionAsset;
+
+export default withUrl<Props>("url")(TransactionAsset);
