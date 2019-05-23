@@ -12,7 +12,7 @@ export const programMakeSignal = (
   const requestData = {
     programId: id,
     successFee,
-    subscriptionFee: volumeFee
+    volumeFee
   };
   return managerApi
     .v10ManagerSignalCreatePost(authorization, requestData)
