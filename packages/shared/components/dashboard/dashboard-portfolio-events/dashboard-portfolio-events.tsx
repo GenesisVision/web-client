@@ -77,7 +77,7 @@ interface Props {
   isPending: boolean;
   data: DashboardPortfolioEventsType;
   eventView: React.ComponentType<{ event: DashboardPortfolioEvent }>;
-  emptyView: React.ComponentType;
+  emptyView?: React.ComponentType;
 }
 
 const DashboardPortfolioEvents = compose<
