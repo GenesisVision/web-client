@@ -19,7 +19,7 @@ export const programEditSignal = (
     .then(() => {
       dispatch(
         alertMessageActions.success(
-          "manager.program-make-signal.success-alert-message",
+          "manager.program-edit-signal.success-alert-message",
           true
         )
       );

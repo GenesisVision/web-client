@@ -1281,6 +1281,9 @@
     "program-make-signal": {
       "success-alert-message": "Your program is a signal provider now"
     },
+    "program-edit-signal": {
+      "success-alert-message": "Program has been edited"
+    },
     "app": {
       "title": "Manager Portal: "
     },
@@ -1612,7 +1615,7 @@
         }
       },
       "notifications": {
-        "edit-success": "Successful program editing."
+        "edit-success": "Program has been edited"
       }
     },
     "edit-fund": {
