@@ -69,23 +69,29 @@ class SignalProviderControls extends Component<
       <Fragment>
         <SignalProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
-          {programDescription.personalProgramDetails &&
-          programDescription.personalProgramDetails.isFollowSignals ? (
-            <GVButton
-              className="program-details-description__invest-btn"
-              onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
-            >
-              {t("program-details-page.description.unfollow")}
-            </GVButton>
-          ) : (
-            <GVButton
-              className="program-details-description__invest-btn"
-              onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
-              disabled={!isAuthenticated}
-            >
-              {t("program-details-page.description.follow-trade")}
-            </GVButton>
-          )}
+          <GVButton
+            className="program-details-description__invest-btn"
+            onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
+          >
+            {t("program-details-page.description.unfollow")}
+          </GVButton>
+          {/*{programDescription.personalProgramDetails &&*/}
+          {/*programDescription.personalProgramDetails.isFollowSignals ? (*/}
+          {/*<GVButton*/}
+          {/*className="program-details-description__invest-btn"*/}
+          {/*onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}*/}
+          {/*>*/}
+          {/*{t("program-details-page.description.unfollow")}*/}
+          {/*</GVButton>*/}
+          {/*) : (*/}
+          {/*<GVButton*/}
+          {/*className="program-details-description__invest-btn"*/}
+          {/*onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}*/}
+          {/*disabled={!isAuthenticated}*/}
+          {/*>*/}
+          {/*{t("program-details-page.description.follow-trade")}*/}
+          {/*</GVButton>*/}
+          {/*)}*/}
         </div>
         <ProgramDetailContext.Consumer>
           {({ updateDetails }: IProgramDetailContext) => (

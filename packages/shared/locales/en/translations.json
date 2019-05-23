@@ -283,6 +283,8 @@
   },
   "unfollow-program": {
     "title": "Unfollow Trades",
+    "submit": "Submit",
+    "type": "type",
     "text": "Do you really want to unsubscribe?",
     "success-alert-message": "You have been unsubscribed."
   },
