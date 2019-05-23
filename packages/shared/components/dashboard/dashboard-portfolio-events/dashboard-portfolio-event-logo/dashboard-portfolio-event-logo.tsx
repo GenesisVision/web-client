@@ -4,7 +4,6 @@ import { DashboardPortfolioEventAssetTypeEnum } from "gv-api-web";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import { ASSET } from "shared/constants/constants";
 import EventCancelledIconRed from "shared/media/event-cancelled-red.svg";
 import EventCancelledIcon from "shared/media/event-cancelled.svg";
 import EventEndedRedIcon from "shared/media/event-ended-red.svg";

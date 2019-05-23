@@ -1,39 +1,44 @@
 import "./dashboard-portfolio-event.scss";
 
-import * as moment from "moment";
-import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import { DashboardPortfolioEvent as DashboardPortfolioEventType } from "gv-api-web";
+import moment from "moment";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { EVENT_LOGO_TYPE } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { PROFIT_EVENT } from "shared/constants/constants";
+import { PROFIT_EVENT, ROLE_ENV } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
 
-const formatDate = date => {
+const formatDate = (date: Date) => {
   const now = moment(new Date());
   const eventCreationDate = moment(date);
-
   const dayDifference = moment(now).diff(eventCreationDate, "days");
   const isShowFullDate = dayDifference > 1;
-
   if (isShowFullDate) return eventCreationDate.format();
-
   return eventCreationDate.fromNow();
 };
 
-const DashboardPortfolioEvent = ({ event }) => {
+const _EventDescription: React.FC<
+  { event: DashboardPortfolioEventType } & InjectedTranslateProps
+> = ({ t, event }) => {
   const valueTotal =
     event.type === PROFIT_EVENT ? event.valueTotal : event.value;
-  const eventDescription = () => (
-    <Fragment>
+  return (
+    <>
       <div className="portfolio-event__values-container">
         <div className="portfolio-event__description">{event.description}</div>
         <span className="portfolio-event__value">
-          {isUseProfitability(event) ? (
-            <Profitability value={valueTotal} prefix="sign">
+          {isUseProfitability(event.type) ? (
+            <Profitability
+              value={String(valueTotal)}
+              prefix={PROFITABILITY_PREFIX.SIGN}
+            >
               <NumberFormat
                 value={formatCurrencyValue(valueTotal, event.currency)}
                 displayType="text"
@@ -50,10 +55,12 @@ const DashboardPortfolioEvent = ({ event }) => {
           )}
         </span>
       </div>
-
       {event.type === PROFIT_EVENT && (
         <div className="portfolio-event__profit-info">
-          <StatisticItem label={"Success fee"} accent>
+          <StatisticItem
+            label={t(`investor.dashboard-page.portfolio-events.success-fee`)}
+            accent
+          >
             <NumberFormat
               value={formatCurrencyValue(
                 event.feeSuccessManager,
@@ -63,7 +70,10 @@ const DashboardPortfolioEvent = ({ event }) => {
               suffix={` ${event.feeSuccessManagerCurrency || ""}`}
             />
           </StatisticItem>
-          <StatisticItem label={"GV commission"} accent>
+          <StatisticItem
+            label={t(`investor.dashboard-page.portfolio-events.gv-commission`)}
+            accent
+          >
             <NumberFormat
               value={formatCurrencyValue(
                 event.feeSuccessPlatform,
@@ -73,8 +83,11 @@ const DashboardPortfolioEvent = ({ event }) => {
               suffix={` ${event.feeSuccessPlatformCurrency || ""}`}
             />
           </StatisticItem>
-          <StatisticItem label={"You've earned"} accent>
-            <Profitability value={event.value}>
+          <StatisticItem
+            label={t(`investor.dashboard-page.portfolio-events.you-ve-earned`)}
+            accent
+          >
+            <Profitability value={String(event.value)}>
               <NumberFormat
                 value={formatCurrencyValue(event.value, event.currency)}
                 displayType="text"
@@ -85,37 +98,29 @@ const DashboardPortfolioEvent = ({ event }) => {
           </StatisticItem>
         </div>
       )}
-    </Fragment>
+    </>
   );
+};
+const EventDescription = React.memo(translate()(_EventDescription));
 
-  return (
-    <div className="portfolio-event">
-      <PortfolioEventLogo
-        type={event.type}
-        logo={event.logo}
-        color={event.color}
-        url={event.url}
-        assetType={event.assetType}
-      />
-      <div className="portfolio-event__info">
-        <StatisticItem label={formatDate(event.date)}>
-          {eventDescription()}
-        </StatisticItem>
-      </div>
+const _DashboardPortfolioEvent: React.FC<{
+  event: DashboardPortfolioEventType;
+}> = ({ event }) => (
+  <div className="portfolio-event">
+    <PortfolioEventLogo
+      type={event.type as EVENT_LOGO_TYPE}
+      logo={event.logo}
+      color={event.color}
+      url={event.url}
+      assetType={event.assetType}
+    />
+    <div className="portfolio-event__info">
+      <StatisticItem label={formatDate(event.date)}>
+        <EventDescription event={event} />
+      </StatisticItem>
     </div>
-  );
-};
+  </div>
+);
 
-export const DashboardPortfolioEventShape = PropTypes.shape({
-  date: PropTypes.instanceOf(Date).isRequired,
-  description: PropTypes.string,
-  value: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  logo: PropTypes.string
-});
-
-DashboardPortfolioEvent.propTypes = {
-  event: DashboardPortfolioEventShape
-};
-
+const DashboardPortfolioEvent = React.memo(_DashboardPortfolioEvent);
 export default DashboardPortfolioEvent;
