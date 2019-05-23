@@ -1,47 +1,43 @@
 import "./signal-provider-controls.scss";
 
+import { ProgramDetailsFull } from "gv-api-web";
+import ProgramEditSignalContainer from "modules/program-edit-signal/program-edit-signal-container";
 import ProgramMakeSignalContainer from "modules/program-make-signal/program-make-signal.container";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import GVButton from "shared/components/gv-button";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 
-interface ISignalProviderControlOwnProps {
-  isAuthenticated: boolean;
-  redirectToLogin(): void;
-  programDescription: any;
+enum SIGNAL_POPUP {
+  EDIT = "EDIT",
+  MAKE = "MAKE"
 }
 
-interface ISignalProviderControlState {
-  isOpenCreateSignalPopup: boolean;
-}
-
-type SignalProviderControlsProps = ISignalProviderControlOwnProps &
-  InjectedTranslateProps;
-
-class SignalProviderControls extends Component<
-  SignalProviderControlsProps,
-  ISignalProviderControlState
+class SignalProviderControls extends React.PureComponent<
+  OwnProps & InjectedTranslateProps,
+  State
 > {
-  constructor(props: SignalProviderControlsProps) {
-    super(props);
-    this.state = {
-      isOpenCreateSignalPopup: false
-    };
-  }
+  state = {
+    popups: Object.keys(SIGNAL_POPUP).reduce((curr: any, next: any) => {
+      curr[SIGNAL_POPUP[next]] = false;
+      return curr;
+    }, {})
+  };
 
-  openPopup = () => {
+  openPopup = (popupName: SIGNAL_POPUP) => () => {
     const { isAuthenticated, redirectToLogin } = this.props;
     if (isAuthenticated) {
-      this.setState({ isOpenCreateSignalPopup: true });
+      let popups = { ...this.state.popups, [popupName]: true };
+      this.setState({ popups });
     } else {
       redirectToLogin();
     }
   };
 
-  closePopup = () => {
-    this.setState({ isOpenCreateSignalPopup: false });
+  closePopup = (popupName: SIGNAL_POPUP) => () => {
+    let popups = { ...this.state.popups, [popupName]: false };
+    this.setState({ popups });
   };
 
   applyChanges = (updateDetails: any) => () => {
@@ -50,33 +46,26 @@ class SignalProviderControls extends Component<
 
   render() {
     const { t, programDescription } = this.props;
-    const { isOpenCreateSignalPopup } = this.state;
+    const { popups } = this.state;
     return (
       <ProgramDetailContext.Consumer>
-        {({ updateDetails }: any) =>
-          programDescription.isSignalProgram ? (
-            <>
-              <SignalProgramInfo programDescription={programDescription} />
-              <div className="program-details-description__button-container">
-                <GVButton
-                  onClick={this.openPopup}
-                  className="program-details-description__invest-btn signal-provider__btn"
-                >
-                  {t(
-                    "program-details-page.description.edit-signal-provider.title"
-                  )}
-                </GVButton>
-                <ProgramMakeSignalContainer
-                  programName={programDescription.title}
-                  open={isOpenCreateSignalPopup}
-                  id={programDescription.id}
-                  onClose={this.closePopup}
-                  onApply={this.applyChanges(updateDetails)}
-                />
-              </div>
-            </>
-          ) : (
-            <>
+        {({ updateDetails }: any) => (
+          <>
+            {programDescription.isSignalProgram ? (
+              <>
+                <SignalProgramInfo programDescription={programDescription} />
+                <div className="program-details-description__button-container">
+                  <GVButton
+                    onClick={this.openPopup(SIGNAL_POPUP.EDIT)}
+                    className="program-details-description__invest-btn signal-provider__btn"
+                  >
+                    {t(
+                      "program-details-page.description.edit-signal-provider.title"
+                    )}
+                  </GVButton>
+                </div>
+              </>
+            ) : (
               <div className="signal-provider">
                 <div>
                   {t("program-details-page.description.signal-provider.title")}
@@ -88,7 +77,7 @@ class SignalProviderControls extends Component<
                 </div>
                 <div className="program-details-description__button-container">
                   <GVButton
-                    onClick={this.openPopup}
+                    onClick={this.openPopup(SIGNAL_POPUP.MAKE)}
                     className="program-details-description__invest-btn signal-provider__btn"
                   >
                     {t(
@@ -97,20 +86,35 @@ class SignalProviderControls extends Component<
                   </GVButton>
                 </div>
               </div>
-
-              <ProgramMakeSignalContainer
-                programName={programDescription.title}
-                open={isOpenCreateSignalPopup}
-                id={programDescription.id}
-                onClose={this.closePopup}
-                onApply={this.applyChanges(updateDetails)}
-              />
-            </>
-          )
-        }
+            )}
+            <ProgramMakeSignalContainer
+              programName={programDescription.title}
+              open={popups[SIGNAL_POPUP.MAKE]}
+              id={programDescription.id}
+              onClose={this.closePopup(SIGNAL_POPUP.MAKE)}
+              onApply={this.applyChanges(updateDetails)}
+            />
+            <ProgramEditSignalContainer
+              programDescription={programDescription}
+              open={popups[SIGNAL_POPUP.EDIT]}
+              onClose={this.closePopup(SIGNAL_POPUP.EDIT)}
+              onApply={this.applyChanges(updateDetails)}
+            />
+          </>
+        )}
       </ProgramDetailContext.Consumer>
     );
   }
 }
 
 export default translate()(SignalProviderControls);
+
+interface OwnProps {
+  isAuthenticated: boolean;
+  redirectToLogin(): void;
+  programDescription: ProgramDetailsFull;
+}
+
+interface State {
+  popups: { [k: string]: boolean };
+}

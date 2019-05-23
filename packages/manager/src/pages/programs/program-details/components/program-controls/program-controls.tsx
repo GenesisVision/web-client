@@ -19,9 +19,6 @@ class ProgramControls extends Component<
     const isOwnProgram =
       personalProgramDetails && personalProgramDetails.isOwnProgram;
 
-    console.log(canMakeSignalProvider);
-    console.log(programDescription.isSignalProgram);
-
     return (
       <div className="program-details-description__controls">
         <div className="program-details-description__col">
