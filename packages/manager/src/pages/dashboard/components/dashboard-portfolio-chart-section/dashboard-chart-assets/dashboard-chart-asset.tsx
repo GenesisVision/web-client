@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { translate } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 
-class DashboardChartAsset extends Component {
+class _DashboardChartAsset extends React.PureComponent<Props> {
   handleClick = () => {
     const { chartAsset, type, selectAsset } = this.props;
     selectAsset(chartAsset.id, chartAsset.title, type);
@@ -32,4 +32,11 @@ class DashboardChartAsset extends Component {
   }
 }
 
-export default translate()(DashboardChartAsset);
+interface Props {
+  chartAsset: any;
+  type: any;
+  selectAsset: any;
+}
+
+const DashboardChartAsset = translate()(_DashboardChartAsset);
+export default DashboardChartAsset;
