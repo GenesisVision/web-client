@@ -1,37 +1,38 @@
 import "./dashboard-chart-assets.scss";
 
-import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
-import { DashboardChartAssetsLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { connect, ResolveThunks } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  bindActionCreators,
+  compose,
+  Dispatch
+} from "redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
-import withLoader from "shared/decorators/with-loader";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 import { getAssetChart } from "../../../services/dashboard.service";
 import DashboardChartAsset from "./dashboard-chart-asset";
+import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { ManagerAssets } from "gv-api-web";
 
-class _DashboardChartAssetsContainer extends PureComponent {
+class _DashboardChartAssetsContainer extends React.PureComponent<Props, State> {
   state = {
-    anchor: null
+    anchor: undefined
   };
 
-  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
-  handleCloseDropdown = () => this.setState({ anchor: null });
-  handleSelectAsset = (id, title, type) => {
+  handleOpenDropdown = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+    this.setState({ anchor: event.currentTarget });
+  handleCloseDropdown = () => this.setState({ anchor: undefined });
+  handleSelectAsset = (id: string, title: string, type: ASSETS_TYPES) => {
     this.props.service.getAssetChart(id, title, type);
     this.handleCloseDropdown();
-  };
-  renderActionsIcon = () => {
-    return (
-      <ActionsCircleIcon
-        className="dashboard-chart-assets__icon"
-        primary={this.state.anchor !== null}
-        onClick={this.handleOpenDropdown}
-      />
-    );
   };
 
   render() {
@@ -44,11 +45,15 @@ class _DashboardChartAssetsContainer extends PureComponent {
       <div className="dashboard-chart-assets">
         <div className="dashboard-chart-assets__title">
           {t("manager.dashboard-page.chart-section.my-assets")}{" "}
-          {this.renderActionsIcon()}
+          <ActionsCircleIcon
+            className="dashboard-chart-assets__icon"
+            primary={this.state.anchor !== null}
+            onClick={this.handleOpenDropdown}
+          />
         </div>
         <Popover
-          horizontal="right"
-          vertical="bottom"
+          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
           anchorEl={this.state.anchor}
           noPadding
           onClose={this.handleCloseDropdown}
@@ -89,13 +94,35 @@ class _DashboardChartAssetsContainer extends PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
-    service: bindActionCreators({ getAssetChart }, dispatch)
+    service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+      { getAssetChart },
+      dispatch
+    )
   };
 };
 
-const DashboardChartAssetsContainer = compose(
+interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+
+interface OwnProps {
+  assets: ManagerAssets;
+}
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  getAssetChart: typeof getAssetChart;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface State {
+  anchor?: EventTarget;
+}
+
+const DashboardChartAssetsContainer = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
   withLoader,
   translate(),
   connect(
