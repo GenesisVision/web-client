@@ -8,11 +8,12 @@ import { DashboardChartAssetsLoader } from "shared/components/dashboard/dashboar
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
+import withLoader from "shared/decorators/with-loader";
 
 import { getAssetChart } from "../../../services/dashboard.service";
 import DashboardChartAsset from "./dashboard-chart-asset";
 
-class DashboardChartAssetsContainer extends PureComponent {
+class _DashboardChartAssetsContainer extends PureComponent {
   state = {
     anchor: null
   };
@@ -35,9 +36,7 @@ class DashboardChartAssetsContainer extends PureComponent {
 
   render() {
     const { t, assets } = this.props;
-    if (!assets) return <DashboardChartAssetsLoader />;
-    const programs = assets.programs;
-    const funds = assets.funds;
+    const { programs, funds } = assets;
     const hasPrograms = programs.length > 0;
     const hasFunds = funds.length > 0;
 
@@ -90,23 +89,18 @@ class DashboardChartAssetsContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
-  const { assets } = state.dashboard;
-  return {
-    assets
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     service: bindActionCreators({ getAssetChart }, dispatch)
   };
 };
 
-export default compose(
+const DashboardChartAssetsContainer = compose(
+  withLoader,
   translate(),
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   )
-)(DashboardChartAssetsContainer);
+)(_DashboardChartAssetsContainer);
+export default DashboardChartAssetsContainer;

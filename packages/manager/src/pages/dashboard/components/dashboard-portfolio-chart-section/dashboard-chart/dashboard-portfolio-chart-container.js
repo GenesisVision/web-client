@@ -1,6 +1,7 @@
 import React, { Fragment, PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import {
   DashboardChartDescriptionLoader,
@@ -8,21 +9,11 @@ import {
 } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import FundProfitChart from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-profit-chart-section/fund-profit-chart";
 import ProgramProfitChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
+import withLoader from "shared/decorators/with-loader";
 
-import {
-  composeAssetChart,
-  getAssetChart,
-  setPeriod
-} from "../../../services/dashboard.service";
+import { getAssetChart, setPeriod } from "../../../services/dashboard.service";
 
-class DashboardPortfolioChartContainer extends PureComponent {
-  componentDidMount() {
-    const { assets, service } = this.props;
-    if (assets) {
-      service.composeAssetChart();
-    }
-  }
-
+class _DashboardPortfolioChartContainer extends PureComponent {
   handleChangePeriod = period => {
     const { service, assetChart } = this.props;
     service.setPeriod(period);
@@ -67,29 +58,17 @@ class DashboardPortfolioChartContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
-  const { assetChart, period } = state.dashboard;
-  const { currency } = state.accountSettings;
-  const { programs, funds } = state.dashboard;
-  return {
-    assetChart,
-    period,
-    currency,
-    programsData: programs.itemsData.data,
-    fundsData: funds.itemsData.data
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators(
-      { getAssetChart, composeAssetChart, setPeriod },
-      dispatch
-    )
+    service: bindActionCreators({ getAssetChart, setPeriod }, dispatch)
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DashboardPortfolioChartContainer);
+const DashboardPortfolioChartContainer = compose(
+  withLoader,
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(_DashboardPortfolioChartContainer);
+export default DashboardPortfolioChartContainer;
