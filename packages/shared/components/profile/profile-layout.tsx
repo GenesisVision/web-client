@@ -6,9 +6,25 @@ import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Page from "shared/components/page/page";
+import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 
-import { KYC_ROUTE, PROFILE_ROUTE, SETTINGS_ROUTE } from "./profile.constants";
+import {
+  KYC_ROUTE,
+  PROFILE_ROUTE,
+  SETTINGS_ROUTE,
+  SOCIAL_LINKS_ROUTE
+} from "./profile.constants";
+
+const tabs = [
+  { pathname: PROFILE_ROUTE, value: "details" },
+  { pathname: KYC_ROUTE, value: "verify" },
+  { pathname: SETTINGS_ROUTE, value: "settings" }
+];
+
+if (ROLE_ENV === ROLE.MANAGER) {
+  tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: "social-links" });
+}
 
 const _ProfileLayout: React.FC<Props> = ({
   t,
@@ -22,48 +38,23 @@ const _ProfileLayout: React.FC<Props> = ({
       <div className="app__main-wrapper">
         <h1>{t("profile-page.title")}</h1>
         <GVTabs value={route}>
-          <GVTab
-            label={
-              <Link
-                to={{
-                  pathname: PROFILE_ROUTE,
-                  state: backPath,
-                  prevPath
-                }}
-              >
-                {t("profile-page.tabs.personal-details")}
-              </Link>
-            }
-            value="details"
-          />
-          <GVTab
-            label={
-              <Link
-                to={{
-                  pathname: KYC_ROUTE,
-                  state: backPath,
-                  prevPath
-                }}
-              >
-                {t("profile-page.tabs.verify")}
-              </Link>
-            }
-            value="verify"
-          />
-          <GVTab
-            label={
-              <Link
-                to={{
-                  pathname: SETTINGS_ROUTE,
-                  state: backPath,
-                  prevPath
-                }}
-              >
-                {t("profile-page.tabs.settings")}
-              </Link>
-            }
-            value="settings"
-          />
+          {tabs.map(x => (
+            <GVTab
+              key={x.value}
+              label={
+                <Link
+                  to={{
+                    pathname: x.pathname,
+                    state: backPath,
+                    prevPath
+                  }}
+                >
+                  {t(`profile-page.tabs.${x.value}`)}
+                </Link>
+              }
+              value={x.value}
+            />
+          ))}
         </GVTabs>
         {children}
       </div>

@@ -642,9 +642,10 @@
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {
-      "personal-details": "Personal details",
+      "details": "Personal details",
       "settings": "Settings",
-      "verify": "Verify"
+      "verify": "Verify",
+      "social-links": "Social links"
     },
     "verification": {
       "phone": {
