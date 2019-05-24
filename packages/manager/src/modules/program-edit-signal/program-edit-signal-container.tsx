@@ -47,11 +47,6 @@ class _ProgramEditSignalContainer extends Component<Props, State> {
     const { errorMessage } = this.state;
     return (
       <Dialog open={open} onClose={this.handleClose}>
-        {/*<ProgramEditSignalForm*/}
-        {/*programDescription={programDescription}*/}
-        {/*errorMessage={errorMessage}*/}
-        {/*onSubmit={this.handleApply}*/}
-        {/*/>*/}
         <ProgramSignalForm
           programName={programDescription.title}
           signalSuccessFee={programDescription.signalSuccessFee}
