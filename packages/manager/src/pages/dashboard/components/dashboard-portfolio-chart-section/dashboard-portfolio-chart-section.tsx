@@ -1,9 +1,17 @@
 import "./dashboard-portfolio-chart-section.scss";
 
-import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
+import { ManagerAssets, ProgramRequests } from "gv-api-web";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { ResolveThunks, connect } from "react-redux";
+import { ManagerRootState } from "reducers";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import {
   DashboardChartAssetsLoader,
   DashboardChartDescriptionLoader,
@@ -11,7 +19,9 @@ import {
   DashboardChartRequestLoader
 } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
+import { CurrencyEnum, Nullable } from "shared/utils/types";
 
+import { IDashboardAssetChart } from "../../reducers/dashboard.reducers";
 import {
   cancelRequest,
   getInRequests
@@ -21,14 +31,14 @@ import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-ch
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
 import DashboardGetStarted from "./dashboard-get-started";
 
-class DashboardPortfolioChartSection extends Component {
+class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
   componentDidMount() {
     const { service } = this.props;
     service.getAssets();
     service.getInRequests();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     const { assets, service, assetChart } = this.props;
     if (
       assets &&
@@ -52,7 +62,7 @@ class DashboardPortfolioChartSection extends Component {
     } = this.props;
     if (isNewUser) return <DashboardGetStarted />;
     return (
-      <Fragment>
+      <>
         <h3 className="dashboard-portfolio-chart-section__heading">
           {t("manager.dashboard-page.chart-section.header")}
         </h3>
@@ -60,34 +70,33 @@ class DashboardPortfolioChartSection extends Component {
           <DashboardChartAssetsContainer
             condition={!!assets && !assetsIsPending}
             loader={<DashboardChartAssetsLoader />}
-            assets={assets}
+            assets={assets!}
           />
           <DashboardInRequestsContainer
             condition={!!inRequests && !inRequestsIsPending}
             loader={<DashboardChartRequestLoader />}
-            inRequests={inRequests}
+            inRequests={inRequests!}
             cancelRequest={cancelRequest}
           />
         </div>
         <DashboardPortfolioChartContainer
           condition={!!assetChart && !!period && !!currency}
           loader={
-            <Fragment>
+            <>
               <DashboardChartDescriptionLoader />
               <DashboardChartLoader />
-            </Fragment>
+            </>
           }
           currency={currency}
           period={period}
-          assetChart={assetChart}
-          key={!assets}
+          assetChart={assetChart!}
         />
-      </Fragment>
+      </>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: ManagerRootState): StateProps => {
   const { info } = state.profileHeader;
   const { currency } = state.accountSettings;
   const { assets, assetChart, period, inRequestsData } = state.dashboard;
@@ -103,19 +112,46 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    service: bindActionCreators(
-      { getAssets, composeAssetChart, getInRequests },
-      dispatch
-    )
-  };
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { getAssets, composeAssetChart, getInRequests },
+    dispatch
+  )
+});
 
-export default compose(
+interface Props
+  extends DispatchProps,
+    StateProps,
+    OwnProps,
+    InjectedTranslateProps {}
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  getAssets: typeof getAssets;
+  composeAssetChart: typeof composeAssetChart;
+  getInRequests: typeof getInRequests;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface StateProps {
+  assetsIsPending: boolean;
+  inRequestsIsPending: boolean;
+  period: ChartDefaultPeriod;
+  currency: CurrencyEnum;
+  assetChart: Nullable<IDashboardAssetChart>;
+  isNewUser?: boolean;
+  assets?: ManagerAssets;
+  inRequests?: ProgramRequests;
+}
+
+interface OwnProps {}
+
+const DashboardPortfolioChartSection = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(DashboardPortfolioChartSection);
+)(_DashboardPortfolioChartSection);
+export default DashboardPortfolioChartSection;
