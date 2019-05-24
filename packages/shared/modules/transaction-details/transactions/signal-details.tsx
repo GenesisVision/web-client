@@ -17,9 +17,13 @@ const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
         </div>
         <StatisticItem
           condition={!!details}
-          label={t(`transactions-details.investment.to-${details.programType}`)}
+          label={t(
+            `transactions-details.investment.to-${
+              details ? details.programType : null
+            }`
+          )}
         >
-          <TransactionAsset url={details.logo} data={details} />
+          <TransactionAsset url={details ? details.logo : ""} data={details} />
         </StatisticItem>
       </div>
       <div className="dialog__bottom">
