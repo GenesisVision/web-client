@@ -18,7 +18,7 @@ import { IDashboardAssetChart } from "../../../reducers/dashboard.reducers";
 import { getAssetChart, setPeriod } from "../../../services/dashboard.service";
 
 class _DashboardPortfolioChartContainer extends React.PureComponent<Props> {
-  handleChangePeriod = (period: any) => {
+  handleChangePeriod = (period: ChartDefaultPeriod) => {
     const { service, assetChart } = this.props;
     service.setPeriod(period);
     service.getAssetChart(assetChart.id, assetChart.title, assetChart.type);
