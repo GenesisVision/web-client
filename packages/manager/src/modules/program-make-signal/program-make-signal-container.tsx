@@ -4,9 +4,9 @@ import { Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
-import MakeSignalForm, {
-  IMakeSignalFormValues
-} from "./components/program-make-signal-form";
+import ProgramSignalForm, {
+  IProgramSignalFormValues
+} from "./components/program-signal-form";
 import { programMakeSignal } from "./services/program-make-signal.service";
 
 interface IProgramMakeSignalContainerOwnProps extends IDialogProps {
@@ -39,7 +39,7 @@ class ProgramMakeSignalContainer extends Component<
   };
 
   handleApply = (
-    values: IMakeSignalFormValues,
+    values: IProgramSignalFormValues,
     setSubmitting: SetSubmittingType
   ) => {
     const { id, service, onClose, onApply } = this.props;
@@ -66,7 +66,7 @@ class ProgramMakeSignalContainer extends Component<
     const { errorMessage } = this.state;
     return (
       <Dialog open={open} onClose={this.handleClose}>
-        <MakeSignalForm
+        <ProgramSignalForm
           programName={programName}
           errorMessage={errorMessage}
           onSubmit={this.handleApply}

@@ -5,7 +5,7 @@ import {
 import { InjectedTranslateProps } from "react-i18next";
 import { object } from "yup";
 
-export const makeSignalValidationSchema = ({ t }: InjectedTranslateProps) =>
+export const SignalValidationSchema = ({ t }: InjectedTranslateProps) =>
   object().shape({
     successFee: signalSuccessFeeShape(t, 50),
     volumeFee: signalVolumeFeeShape(t)

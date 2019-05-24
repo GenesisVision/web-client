@@ -1,6 +1,4 @@
 import { FormikProps, withFormik } from "formik";
-import { ProgramDetailsFull } from "gv-api-web";
-import { makeSignalValidationSchema } from "modules/program-make-signal/components/program-make-signal.validators";
 import SignalsFeeFormPartial from "pages/create-program/components/create-program-settings/signals-fee-form.partial";
 import React, { ComponentType, FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -8,28 +6,24 @@ import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
-enum FORM_FIELDS {
-  successFee = "successFee",
-  volumeFee = "volumeFee"
-}
+import { SignalValidationSchema } from "./program-signal.validators";
 
-const _ProgramEditSignalForm: FunctionComponent<Props> = ({
+const _ProgramSignalForm: FunctionComponent<Props> = ({
   t,
   dirty,
-  isValid,
   handleSubmit,
-  programDescription,
+  programName,
+  signalSuccessFee,
+  signalVolumeFee,
   errorMessage,
   isSubmitting
 }) => {
   return (
-    <form id="editSignalForm" onSubmit={handleSubmit}>
+    <form id="makeSignalForm" onSubmit={handleSubmit}>
       <div className="dialog__top">
         <div className="dialog__header">
-          <h2>
-            {t("program-details-page.description.edit-signal-provider.title")}
-          </h2>
-          <p>{programDescription.title}</p>
+          <h2>{t("program-details-page.description.signal-provider.title")}</h2>
+          <p>{programName}</p>
         </div>
       </div>
       <div className="dialog__bottom">
@@ -42,8 +36,8 @@ const _ProgramEditSignalForm: FunctionComponent<Props> = ({
         <div className="dialog__buttons">
           <GVButton
             type="submit"
-            id="editSignalForm"
-            disabled={!dirty || !isValid || isSubmitting}
+            id="programMakeSignalSubmit"
+            disabled={!dirty || isSubmitting}
           >
             {t("buttons.confirm")}
           </GVButton>
@@ -53,38 +47,45 @@ const _ProgramEditSignalForm: FunctionComponent<Props> = ({
   );
 };
 
-const ProgramEditSignalForm = compose<ComponentType<OwnProps>>(
+const ProgramSignalForm = compose<ComponentType<OwnProps>>(
   translate(),
-  withFormik<OwnProps, IProgramEditSignalFormValues>({
-    displayName: "edit-signal-form",
+  withFormik<OwnProps, IProgramSignalFormValues>({
+    displayName: "make-signal-form",
     mapPropsToValues: props => ({
-      [FORM_FIELDS.successFee]: props.programDescription.signalSuccessFee,
-      [FORM_FIELDS.volumeFee]: props.programDescription.signalVolumeFee
+      [FORM_FIELDS.successFee]: props.signalSuccessFee,
+      [FORM_FIELDS.volumeFee]: props.signalVolumeFee
     }),
-    validationSchema: makeSignalValidationSchema,
+    validationSchema: SignalValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
   })
-)(_ProgramEditSignalForm);
+)(_ProgramSignalForm);
 
-export default ProgramEditSignalForm;
-
-export interface IProgramEditSignalFormValues {
-  [FORM_FIELDS.successFee]: number;
-  [FORM_FIELDS.volumeFee]: number;
-}
+export default ProgramSignalForm;
 
 interface OwnProps {
-  programDescription: ProgramDetailsFull;
+  programName: string;
+  signalSuccessFee?: number;
+  signalVolumeFee?: number;
   errorMessage: string;
   onSubmit(
-    values: IProgramEditSignalFormValues,
+    values: IProgramSignalFormValues,
     setSubmitting: SetSubmittingType
   ): void;
 }
 
+enum FORM_FIELDS {
+  successFee = "successFee",
+  volumeFee = "volumeFee"
+}
+
+export interface IProgramSignalFormValues {
+  [FORM_FIELDS.successFee]?: number;
+  [FORM_FIELDS.volumeFee]?: number;
+}
+
 interface Props
-  extends InjectedTranslateProps,
-    OwnProps,
-    FormikProps<IProgramEditSignalFormValues> {}
+  extends OwnProps,
+    InjectedTranslateProps,
+    FormikProps<IProgramSignalFormValues> {}

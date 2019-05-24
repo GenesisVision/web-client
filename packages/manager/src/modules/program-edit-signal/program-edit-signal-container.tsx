@@ -5,9 +5,9 @@ import { Dispatch, bindActionCreators, compose } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
-import ProgramEditSignalForm, {
-  IProgramEditSignalFormValues
-} from "./components/program-edit-signal-form";
+import ProgramSignalForm, {
+  IProgramSignalFormValues
+} from "../program-make-signal/components/program-signal-form";
 import { programEditSignal } from "./services/program-edit-signal.service";
 
 class _ProgramEditSignalContainer extends Component<Props, State> {
@@ -16,7 +16,7 @@ class _ProgramEditSignalContainer extends Component<Props, State> {
   };
 
   handleApply = (
-    values: IProgramEditSignalFormValues,
+    values: IProgramSignalFormValues,
     setSubmitting: SetSubmittingType
   ) => {
     const { programDescription, service, onClose, onApply } = this.props;
@@ -47,8 +47,15 @@ class _ProgramEditSignalContainer extends Component<Props, State> {
     const { errorMessage } = this.state;
     return (
       <Dialog open={open} onClose={this.handleClose}>
-        <ProgramEditSignalForm
-          programDescription={programDescription}
+        {/*<ProgramEditSignalForm*/}
+        {/*programDescription={programDescription}*/}
+        {/*errorMessage={errorMessage}*/}
+        {/*onSubmit={this.handleApply}*/}
+        {/*/>*/}
+        <ProgramSignalForm
+          programName={programDescription.title}
+          signalSuccessFee={programDescription.signalSuccessFee}
+          signalVolumeFee={programDescription.signalVolumeFee}
           errorMessage={errorMessage}
           onSubmit={this.handleApply}
         />
