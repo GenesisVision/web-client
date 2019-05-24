@@ -24,7 +24,7 @@ export const DashboardChartAssetsLoader: React.FC = () => (
 );
 
 export const DashboardChartRequestLoader: React.FC = () => (
-  <div className="dashboard-chart-loader__request">
+  <div className="dashboard-chart-loader__request dashboard-request ">
     <SvgLoader height={51} width={70}>
       <rect x="0" y="0" width="40" height="16" rx="8" ry="8" />
       <rect x="0" y="31" width="60" height="20" rx="8" ry="8" />
