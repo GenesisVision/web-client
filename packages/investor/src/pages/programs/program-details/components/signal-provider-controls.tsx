@@ -9,7 +9,6 @@ import {
 } from "shared/components/details/helpers/details-context";
 import GVButton from "shared/components/gv-button";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
-import { FOLLOW_TYPE } from "shared/constants/constants";
 
 enum SIGNAL_POPUP {
   FOLLOW = "FOLLOW",
@@ -69,29 +68,32 @@ class SignalProviderControls extends Component<
       <Fragment>
         <SignalProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
-          <GVButton
-            className="program-details-description__invest-btn"
-            onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
-          >
-            {t("program-details-page.description.unfollow")}
-          </GVButton>
-          {/*{programDescription.personalProgramDetails &&*/}
-          {/*programDescription.personalProgramDetails.isFollowSignals ? (*/}
-          {/*<GVButton*/}
-          {/*className="program-details-description__invest-btn"*/}
-          {/*onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}*/}
-          {/*>*/}
-          {/*{t("program-details-page.description.unfollow")}*/}
-          {/*</GVButton>*/}
-          {/*) : (*/}
-          {/*<GVButton*/}
-          {/*className="program-details-description__invest-btn"*/}
-          {/*onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}*/}
-          {/*disabled={!isAuthenticated}*/}
-          {/*>*/}
-          {/*{t("program-details-page.description.follow-trade")}*/}
-          {/*</GVButton>*/}
-          {/*)}*/}
+          {programDescription.personalProgramDetails &&
+          programDescription.personalProgramDetails.signalSubscription
+            .hasActiveSubscription ? (
+            <>
+              <GVButton
+                className="program-details-description__invest-btn"
+                onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
+              >
+                {t("program-details-page.description.unfollow")}
+              </GVButton>
+              <GVButton
+                className="program-details-description__invest-btn signal-provider__btn"
+                onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
+              >
+                {t("program-details-page.description.edit-subscription")}
+              </GVButton>
+            </>
+          ) : (
+            <GVButton
+              className="program-details-description__invest-btn"
+              onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
+              disabled={!isAuthenticated}
+            >
+              {t("program-details-page.description.follow-trade")}
+            </GVButton>
+          )}
         </div>
         <ProgramDetailContext.Consumer>
           {({ updateDetails }: IProgramDetailContext) => (
@@ -100,6 +102,9 @@ class SignalProviderControls extends Component<
                 id={programDescription.id}
                 open={popups[SIGNAL_POPUP.FOLLOW]}
                 currency={programDescription.currency}
+                signalSubscription={
+                  programDescription.personalProgramDetails.signalSubscription
+                }
                 onClose={this.closePopup(SIGNAL_POPUP.FOLLOW)}
                 onApply={this.applyChanges(updateDetails)}
               />
