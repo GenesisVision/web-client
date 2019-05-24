@@ -1,6 +1,8 @@
+import { ManagerSimpleFund, ManagerSimpleProgram } from "gv-api-web";
 import * as React from "react";
 import { translate } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 
 class _DashboardChartAsset extends React.PureComponent<Props> {
   handleClick = () => {
@@ -19,7 +21,7 @@ class _DashboardChartAsset extends React.PureComponent<Props> {
             url={chartAsset.logo}
             alt={chartAsset.title}
             color={chartAsset.color}
-            level={chartAsset.level}
+            level={"level" in chartAsset ? chartAsset.level : undefined}
           />
         </div>
         <div className="dashboard-chart-assets-popover__info">
@@ -33,9 +35,9 @@ class _DashboardChartAsset extends React.PureComponent<Props> {
 }
 
 interface Props {
-  chartAsset: any;
-  type: any;
-  selectAsset: any;
+  chartAsset: ManagerSimpleProgram | ManagerSimpleFund;
+  type: ASSETS_TYPES;
+  selectAsset: (id: string, title: string, type: ASSETS_TYPES) => void;
 }
 
 const DashboardChartAsset = translate()(_DashboardChartAsset);
