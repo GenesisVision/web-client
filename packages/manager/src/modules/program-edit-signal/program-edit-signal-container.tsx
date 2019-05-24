@@ -1,5 +1,6 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import React, { Component, ComponentType } from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
@@ -43,11 +44,14 @@ class _ProgramEditSignalContainer extends Component<Props, State> {
   };
 
   render() {
-    const { open, programDescription } = this.props;
+    const { t, open, programDescription } = this.props;
     const { errorMessage } = this.state;
     return (
       <Dialog open={open} onClose={this.handleClose}>
         <ProgramSignalForm
+          header={t(
+            "program-details-page.description.edit-signal-provider.title"
+          )}
           programName={programDescription.title}
           signalSuccessFee={programDescription.signalSuccessFee}
           signalVolumeFee={programDescription.signalVolumeFee}
@@ -69,6 +73,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 const ProgramEditSignalContainer = compose<ComponentType<OwnProps>>(
+  translate(),
   connect(
     null,
     mapDispatchToProps
@@ -82,7 +87,7 @@ interface OwnProps extends IDialogProps {
   onApply(): void;
 }
 
-interface Props extends OwnProps {
+interface Props extends OwnProps, InjectedTranslateProps {
   service: {
     programEditSignal(
       id: string,

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, ComponentType } from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
@@ -8,32 +8,9 @@ import ProgramSignalForm, {
   IProgramSignalFormValues
 } from "./components/program-signal-form";
 import { programMakeSignal } from "./services/program-make-signal.service";
+import { InjectedTranslateProps, translate } from "react-i18next";
 
-interface IProgramMakeSignalContainerOwnProps extends IDialogProps {
-  id: string;
-  programName: string;
-  onApply(): void;
-}
-
-interface IProgramMakeSignalContainerProps
-  extends IProgramMakeSignalContainerOwnProps {
-  service: {
-    programMakeSignal(
-      id: string,
-      successFee: number,
-      volumeFee: number
-    ): Promise<void>;
-  };
-}
-
-interface IProgramMakeSignalContainerState {
-  errorMessage: string;
-}
-
-class ProgramMakeSignalContainer extends Component<
-  IProgramMakeSignalContainerProps,
-  IProgramMakeSignalContainerState
-> {
+class _ProgramMakeSignalContainer extends Component<Props, State> {
   state = {
     errorMessage: ""
   };
@@ -62,11 +39,12 @@ class ProgramMakeSignalContainer extends Component<
   };
 
   render() {
-    const { open, programName } = this.props;
+    const { t, open, programName } = this.props;
     const { errorMessage } = this.state;
     return (
       <Dialog open={open} onClose={this.handleClose}>
         <ProgramSignalForm
+          header={t("program-details-page.description.signal-provider.title")}
           programName={programName}
           errorMessage={errorMessage}
           onSubmit={this.handleApply}
@@ -85,7 +63,32 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   )
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(ProgramMakeSignalContainer);
+const ProgramMakeSignalContainer = compose<ComponentType<OwnProps>>(
+  translate(),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(_ProgramMakeSignalContainer);
+
+export default ProgramMakeSignalContainer;
+
+interface OwnProps extends IDialogProps {
+  id: string;
+  programName: string;
+  onApply(): void;
+}
+
+interface Props extends OwnProps, InjectedTranslateProps {
+  service: {
+    programMakeSignal(
+      id: string,
+      successFee: number,
+      volumeFee: number
+    ): Promise<void>;
+  };
+}
+
+interface State {
+  errorMessage: string;
+}
