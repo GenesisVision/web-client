@@ -1,13 +1,14 @@
 import "./dashboard-chart-assets.scss";
 
+import { ManagerAssets } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover, {
@@ -15,12 +16,11 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
+import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 import { getAssetChart } from "../../../services/dashboard.service";
 import DashboardChartAsset from "./dashboard-chart-asset";
-import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import { ManagerAssets } from "gv-api-web";
 
 class _DashboardChartAssetsContainer extends React.PureComponent<Props, State> {
   state = {
@@ -69,7 +69,7 @@ class _DashboardChartAssetsContainer extends React.PureComponent<Props, State> {
                 <DashboardChartAsset
                   key={x.id}
                   chartAsset={x}
-                  type="Program"
+                  type={ASSETS_TYPES.Program}
                   selectAsset={this.handleSelectAsset}
                 />
               ))}
@@ -82,7 +82,7 @@ class _DashboardChartAssetsContainer extends React.PureComponent<Props, State> {
                 <DashboardChartAsset
                   key={x.id}
                   chartAsset={x}
-                  type="Fund"
+                  type={ASSETS_TYPES.Fund}
                   selectAsset={this.handleSelectAsset}
                 />
               ))}
