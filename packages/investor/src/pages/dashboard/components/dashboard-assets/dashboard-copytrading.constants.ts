@@ -1,6 +1,6 @@
 import {
-  DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes
+  DATA_RANGE_FILTER_TYPES,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
@@ -30,7 +30,7 @@ export const DASHBOARD_COPYTRADING_FILTERS = [
     ...composeDefaultDateRangeFilter({
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastMonth
+        type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
       }
     })
   }
@@ -39,6 +39,6 @@ export const DASHBOARD_COPYTRADING_FILTERS = [
 export const DASHBOARD_COPYTRADING_DEFAULT_FILTERING = {
   dateRange: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DateRangeFilterTypes.lastMonth
+    type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
   }
 };

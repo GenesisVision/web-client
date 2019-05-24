@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import { ManagerSimpleFund, ManagerSimpleProgram } from "gv-api-web";
+import * as React from "react";
 import { translate } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 
-class DashboardChartAsset extends Component {
+class _DashboardChartAsset extends React.PureComponent<Props> {
   handleClick = () => {
     const { chartAsset, type, selectAsset } = this.props;
     selectAsset(chartAsset.id, chartAsset.title, type);
@@ -19,7 +21,7 @@ class DashboardChartAsset extends Component {
             url={chartAsset.logo}
             alt={chartAsset.title}
             color={chartAsset.color}
-            level={chartAsset.level}
+            level={"level" in chartAsset ? chartAsset.level : undefined}
           />
         </div>
         <div className="dashboard-chart-assets-popover__info">
@@ -32,4 +34,11 @@ class DashboardChartAsset extends Component {
   }
 }
 
-export default translate()(DashboardChartAsset);
+interface Props {
+  chartAsset: ManagerSimpleProgram | ManagerSimpleFund;
+  type: ASSETS_TYPES;
+  selectAsset: (id: string, title: string, type: ASSETS_TYPES) => void;
+}
+
+const DashboardChartAsset = translate()(_DashboardChartAsset);
+export default DashboardChartAsset;

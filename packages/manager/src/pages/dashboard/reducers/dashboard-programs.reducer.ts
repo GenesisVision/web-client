@@ -1,22 +1,23 @@
+import { ProgramsList } from "gv-api-web";
 import {
-  DASHBOARD_FUNDS_DEFAULT_FILTERING,
-  DASHBOARD_FUNDS_FILTERS
+  DASHBOARD_PROGRAMS_DEFAULT_FILTERING,
+  DASHBOARD_PROGRAMS_FILTERS
 } from "shared/components/dashboard/dashboard.constants";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import tableReducerFactory from "shared/components/table/reducers/table.reducer";
 
 import {
   CLEAR_DASHBOARD_ASSETS_TABLE,
-  DASHBOARD_FUNDS
+  DASHBOARD_PROGRAMS
 } from "../actions/dashboard.actions";
 
-const dashboardFundsReducer = tableReducerFactory({
-  type: DASHBOARD_FUNDS,
+const dashboardProgramsReducer = tableReducerFactory<ProgramsList>({
+  type: DASHBOARD_PROGRAMS,
   paging: DEFAULT_PAGING,
-  filtering: DASHBOARD_FUNDS_DEFAULT_FILTERING,
-  defaultFilters: DASHBOARD_FUNDS_FILTERS,
+  filtering: DASHBOARD_PROGRAMS_DEFAULT_FILTERING,
+  defaultFilters: DASHBOARD_PROGRAMS_FILTERS,
   clearable: true,
   clearableActionType: CLEAR_DASHBOARD_ASSETS_TABLE
 });
 
-export default dashboardFundsReducer;
+export default dashboardProgramsReducer;

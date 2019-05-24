@@ -15,12 +15,6 @@ export type SERVER_DATE_NAME =
   | "statisticDateFrom"
   | "statisticDateTo";
 
-export const DateRangeFilterTypes = {
-  all: "all",
-  lastMonth: "lastMonth",
-  lastWeek: "lastWeek",
-  custom: "custom"
-};
 export enum DATA_RANGE_FILTER_TYPES {
   ALL = "all",
   LAST_MOUTH = "lastMonth",
