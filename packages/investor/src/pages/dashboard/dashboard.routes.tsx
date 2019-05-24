@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import PortfolioEventsAllComponent, {
@@ -9,16 +9,14 @@ import DashboardPage from "./dashboard.page";
 export const DASHBOARD_ROUTE = "/dashboard";
 export const DASHBOARD_EVENTS_ROUTE = `${DASHBOARD_ROUTE}/${PORTFOLIO_EVENTS_ALL_PAGE_ROUTE}`;
 
-const DashboardRoutes = () => {
-  return (
-    <Switch>
-      <Route exact path={DASHBOARD_ROUTE} component={DashboardPage} />
-      <Route
-        path={DASHBOARD_EVENTS_ROUTE}
-        component={PortfolioEventsAllComponent}
-      />
-    </Switch>
-  );
-};
+const DashboardRoutes: React.FC = () => (
+  <Switch>
+    <Route exact path={DASHBOARD_ROUTE} component={DashboardPage} />
+    <Route
+      path={DASHBOARD_EVENTS_ROUTE}
+      component={PortfolioEventsAllComponent}
+    />
+  </Switch>
+);
 
 export default DashboardRoutes;

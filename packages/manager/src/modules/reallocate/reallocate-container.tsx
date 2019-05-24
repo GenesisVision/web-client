@@ -27,10 +27,10 @@ class _ReallocateContainer extends React.PureComponent<Props, State> {
   ): FundAssetPartWithIcon[] => {
     const fillAssets = target.map(item => ({ ...item, percent: 0 }));
     data.forEach(dataItem => {
-      fillAssets.forEach(targetItem => {
-        targetItem.percent =
-          targetItem.name === dataItem.name ? dataItem.percent : 0;
-      });
+      const targetAsset = fillAssets.find(x => x.name === dataItem.name);
+      if (targetAsset) {
+        targetAsset.percent = dataItem.percent;
+      }
     });
     return fillAssets;
   };

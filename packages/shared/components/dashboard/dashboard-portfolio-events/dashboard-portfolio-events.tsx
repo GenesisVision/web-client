@@ -12,6 +12,7 @@ import GVButton from "shared/components/gv-button";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 import { ROLE_ENV } from "shared/constants/constants";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
 
@@ -76,10 +77,14 @@ interface Props {
   isPending: boolean;
   data: DashboardPortfolioEventsType;
   eventView: React.ComponentType<{ event: DashboardPortfolioEvent }>;
-  emptyView: React.ComponentType;
+  emptyView?: React.ComponentType;
 }
 
-const DashboardPortfolioEvents = compose(translate())(
-  _DashboardPortfolioEvents
-);
+const DashboardPortfolioEvents = compose<
+  React.ComponentType<Props & WithLoaderProps>
+>(
+  React.memo,
+  withLoader,
+  translate()
+)(_DashboardPortfolioEvents);
 export default DashboardPortfolioEvents;
