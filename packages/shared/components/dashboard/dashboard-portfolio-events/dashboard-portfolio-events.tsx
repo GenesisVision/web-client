@@ -16,7 +16,15 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
 
-const DASHBOARD_EVENTS_STYLE = { height: "100%", minHeight: "450px" };
+const DASHBOARD_EVENTS_STYLE = {
+  height: "100%",
+  minHeight: "450px",
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0,
+  position: "absolute"
+};
 
 const _DashboardPortfolioEvents: React.FC<Props & InjectedTranslateProps> = ({
   t,
@@ -84,7 +92,6 @@ const DashboardPortfolioEvents = compose<
   React.ComponentType<Props & WithLoaderProps>
 >(
   React.memo,
-  withLoader,
   translate()
 )(_DashboardPortfolioEvents);
 export default DashboardPortfolioEvents;
