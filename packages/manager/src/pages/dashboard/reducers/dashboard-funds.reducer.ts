@@ -1,3 +1,4 @@
+import { FundsList } from "gv-api-web";
 import {
   DASHBOARD_FUNDS_DEFAULT_FILTERING,
   DASHBOARD_FUNDS_FILTERS
@@ -10,7 +11,7 @@ import {
   DASHBOARD_FUNDS
 } from "../actions/dashboard.actions";
 
-const dashboardFundsReducer = tableReducerFactory({
+const dashboardFundsReducer = tableReducerFactory<FundsList>({
   type: DASHBOARD_FUNDS,
   paging: DEFAULT_PAGING,
   filtering: DASHBOARD_FUNDS_DEFAULT_FILTERING,
