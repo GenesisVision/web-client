@@ -15,6 +15,7 @@ const _ProgramSignalForm: FunctionComponent<Props> = ({
   programName,
   signalSuccessFee,
   signalVolumeFee,
+  header,
   errorMessage,
   isSubmitting
 }) => {
@@ -22,7 +23,7 @@ const _ProgramSignalForm: FunctionComponent<Props> = ({
     <form id="makeSignalForm" onSubmit={handleSubmit}>
       <div className="dialog__top">
         <div className="dialog__header">
-          <h2>{t("program-details-page.description.signal-provider.title")}</h2>
+          <h2>{header}</h2>
           <p>{programName}</p>
         </div>
       </div>
@@ -66,6 +67,7 @@ export default ProgramSignalForm;
 
 interface OwnProps {
   programName: string;
+  header: string;
   signalSuccessFee?: number;
   signalVolumeFee?: number;
   errorMessage: string;

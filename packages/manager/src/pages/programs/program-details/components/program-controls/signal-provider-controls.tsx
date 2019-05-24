@@ -1,8 +1,8 @@
 import "./signal-provider-controls.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
-import ProgramEditSignalContainer from "modules/program-edit-signal/program-edit-signal-container";
-import ProgramMakeSignalContainer from "modules/program-make-signal/program-make-signal-container";
+import ProgramEditSignalContainer from "modules/program-signal/program-edit-signal/program-edit-signal-container";
+import ProgramMakeSignalContainer from "modules/program-signal/program-make-signal/program-make-signal-container";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
@@ -88,9 +88,8 @@ class SignalProviderControls extends React.PureComponent<
               </div>
             )}
             <ProgramMakeSignalContainer
-              programName={programDescription.title}
+              programDescription={programDescription}
               open={popups[SIGNAL_POPUP.MAKE]}
-              id={programDescription.id}
               onClose={this.closePopup(SIGNAL_POPUP.MAKE)}
               onApply={this.applyChanges(updateDetails)}
             />
