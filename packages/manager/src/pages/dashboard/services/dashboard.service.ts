@@ -1,20 +1,21 @@
+import { Dispatch } from "redux";
+import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
+import { MiddlewareDispatch, TGetAuthState } from "shared/utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 
-export const getPortfolioEvents = () => (dispatch, getState) => {
-  const authorization = authService.getAuthArg();
+export const getPortfolioEvents = () => (dispatch: Dispatch) =>
+  dispatch(actions.fetchPortfolioEvents(authService.getAuthArg(), { take: 5 }));
 
-  dispatch(actions.fetchPortfolioEvents(authorization, { take: 5 }));
-};
-
-export const getAssetChart = (assetId, assetTitle, assetType) => (
-  dispatch,
-  getState
-) => {
+export const getAssetChart = (
+  assetId: string,
+  assetTitle: string,
+  assetType: ASSETS_TYPES
+) => (dispatch: Dispatch, getState: TGetAuthState) => {
   const { currency } = getState().accountSettings;
   const { period } = getState().dashboard;
   const chartFilter = {
@@ -24,7 +25,7 @@ export const getAssetChart = (assetId, assetTitle, assetType) => (
     maxPointCount: 100
   };
 
-  if (assetType === "Program") {
+  if (assetType === ASSETS_TYPES.Program) {
     //TODO удалить if, отрефакторить
     programsApi
       .v10ProgramsByIdChartsProfitGet(assetId, chartFilter)
@@ -53,34 +54,33 @@ export const getAssetChart = (assetId, assetTitle, assetType) => (
   }
 };
 
-export const getAssets = () => (dispatch, getState) => {
-  const authorization = authService.getAuthArg();
-  managerApi.v10ManagerAssetsGet(authorization).then(data => {
-    return dispatch(actions.fetchAssets(data));
-  });
-};
+export const getAssets = () => (dispatch: Dispatch) =>
+  dispatch(actions.fetchAssets(authService.getAuthArg()));
 
-export const composeAssetChart = () => (dispatch, getState) => {
-  const { assets } = getState().dashboard;
+export const composeAssetChart = () => (
+  dispatch: MiddlewareDispatch,
+  getState: TGetAuthState
+) => {
+  const { programs, funds } = getState().dashboard.assets.data;
   let asset, assetType;
-  if (assets.programs.length > 0) {
-    asset = assets.programs[0];
-    assetType = "Program";
-  } else if (assets.funds.length > 0) {
-    asset = assets.funds[0];
-    assetType = "Fund";
-  }
+  if (programs.length > 0) {
+    asset = programs[0];
+    assetType = ASSETS_TYPES.Program;
+  } else if (funds.length > 0) {
+    asset = funds[0];
+    assetType = ASSETS_TYPES.Fund;
+  } else return;
 
-  if (asset !== undefined) {
-    dispatch(getAssetChart(asset.id, asset.title, assetType));
-  }
+  dispatch(getAssetChart(asset.id, asset.title, assetType));
 };
 
-export const setPeriod = period => (dispatch, getState) => {
+export const setPeriod = (period: any) => (dispatch: Dispatch) =>
   dispatch(actions.setPeriod(period));
-};
 
-export const fetchAssetsCount = () => {
+export const fetchAssetsCount = (): Promise<{
+  programsCount: number;
+  fundsCount: number;
+}> => {
   const authorization = authService.getAuthArg();
   const filtering = { take: 0 };
   return Promise.all([
