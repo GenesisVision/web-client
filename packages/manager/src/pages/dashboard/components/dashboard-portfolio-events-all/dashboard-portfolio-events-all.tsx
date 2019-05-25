@@ -6,6 +6,7 @@ import { compose } from "redux";
 import Page from "shared/components/page/page";
 import PortfolioEventsTableContainerComponent from "shared/components/portfolio-events-table/portfolio-events-table-container";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
+import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { ROLE_ENV } from "shared/constants/constants";
 import { getUnique } from "shared/utils/array";
 
@@ -35,13 +36,15 @@ const mapStateToProps = (state: ManagerRootState): StateProps => {
   return { events };
 };
 
-interface Props extends InjectedTranslateProps, StateProps {}
+interface Props extends InjectedTranslateProps, StateProps, OwnProps {}
+
+interface OwnProps {}
 
 interface StateProps {
-  events: any[];
+  events: SelectFilterValue<string>[];
 }
 
-const PortfolioEventsAllComponent = compose(
+const PortfolioEventsAllComponent = compose<React.ComponentType<OwnProps>>(
   React.memo,
   translate(),
   connect(mapStateToProps)
