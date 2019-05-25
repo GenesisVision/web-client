@@ -24,8 +24,8 @@ export const EventLogoType = {
 export enum EVENT_LOGO_TYPE {
   ASSET_STARTED = "AssetStarted",
   ASSET_FINISHED = "AssetFinished",
-  PROGRAM_PREIOD_STARTS = "ProgramPeriodStarts",
-  PROGRAM_PREIOD_ENDS = "ProgramPeriodEnds",
+  PROGRAM_PERIOD_STARTS = "ProgramPeriodStarts",
+  PROGRAM_PERIOD_ENDS = "ProgramPeriodEnds",
   INVESTOR_INVEST = "InvestorInvest",
   INVESTOR_WITHDRAW = "InvestorWithdraw",
   MANAGER_INVEST = "ManagerInvest",
