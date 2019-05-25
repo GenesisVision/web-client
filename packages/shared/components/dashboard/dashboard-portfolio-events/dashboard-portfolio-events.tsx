@@ -94,11 +94,8 @@ interface Props {
   emptyView?: React.ComponentType;
 }
 
-const DashboardPortfolioEvents = compose<
-  React.ComponentType<Props & WithLoaderProps>
->(
+const DashboardPortfolioEvents = compose<React.ComponentType<Props>>(
   React.memo,
-  withLoader,
   translate()
 )(_DashboardPortfolioEvents);
 export default DashboardPortfolioEvents;
