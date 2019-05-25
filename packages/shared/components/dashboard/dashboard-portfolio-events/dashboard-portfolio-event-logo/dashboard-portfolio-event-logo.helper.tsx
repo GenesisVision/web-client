@@ -22,6 +22,7 @@ export const EventLogoType = {
 };
 
 export enum EVENT_LOGO_TYPE {
+  All = "All",
   ASSET_STARTED = "AssetStarted",
   ASSET_FINISHED = "AssetFinished",
   PROGRAM_PERIOD_STARTS = "ProgramPeriodStarts",
