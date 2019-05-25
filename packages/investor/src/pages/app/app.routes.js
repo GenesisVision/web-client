@@ -1,8 +1,6 @@
-import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
-import DashboardRoutes from "pages/dashboard/dashboard.routes";
-import ManagerPage, {
-  MANAGER_DETAILS_ROUTE_REGEXP
-} from "pages/manager/manager.page";
+import DashboardRoutes, {
+  DASHBOARD_ROUTE
+} from "pages/dashboard/dashboard.routes";
 import NotificationRoutes, {
   NOTIFICATIONS_ROUTE
 } from "pages/notifications/notifications.routes";
@@ -13,6 +11,9 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import GlobalSearchPage from "shared/components/global-search/global-search.page";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
+import ManagerContainer, {
+  MANAGER_DETAILS_ROUTE_REGEXP
+} from "shared/components/manager/manager.container";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import PrivateRoute from "shared/components/private-route/private-route";
 import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
@@ -34,7 +35,10 @@ const AppRoutes = () => {
         <Route path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
         <Route path={FUNDS_ROUTE} component={FundsRoutes} />
         <Route path={GLOBAL_SEARCH_ROUTE} component={GlobalSearchPage} />
-        <Route path={MANAGER_DETAILS_ROUTE_REGEXP} component={ManagerPage} />
+        <Route
+          path={MANAGER_DETAILS_ROUTE_REGEXP}
+          component={ManagerContainer}
+        />
         <Route
           path={WALLET_WITHDRAW_CONFIRM_ROUTE}
           component={WalletWithdrawConfirmPage}

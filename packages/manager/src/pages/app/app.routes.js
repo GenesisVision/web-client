@@ -2,11 +2,9 @@ import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants"
 import createFundPage from "pages/create-fund/create-fund.page";
 import createProgramPage from "pages/create-program/create-program.page";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
-import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
-import DashboardRoutes from "pages/dashboard/dashboard.routes";
-import ManagerPage, {
-  MANAGER_DETAILS_ROUTE_REGEXP
-} from "pages/manager/manager.page";
+import DashboardRoutes, {
+  DASHBOARD_ROUTE
+} from "pages/dashboard/dashboard.routes";
 import ProfileRoutes from "pages/profile/profile.routes";
 import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import React from "react";
@@ -24,9 +22,13 @@ import WalletTotalPage, {
 } from "shared/components/wallet/wallet.routes";
 
 import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
-import { NOTIFICATIONS_ROUTE } from "../notifications/notifications.routes";
-import NotificationRoutes from "../notifications/notifications.routes";
+import NotificationRoutes, {
+  NOTIFICATIONS_ROUTE
+} from "../notifications/notifications.routes";
 import AppLayout from "./components/app-layout/app-layout";
+import ManagerContainer, {
+  MANAGER_DETAILS_ROUTE_REGEXP
+} from "shared/components/manager/manager.container";
 
 export const HOME_ROUTE = "/";
 
@@ -38,7 +40,10 @@ const AppRoutes = () => {
         <Route path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
         <Route path={GLOBAL_SEARCH_ROUTE} component={GlobalSearchPage} />
         <Route path={FUNDS_ROUTE} component={FundsRoutes} />
-        <Route path={MANAGER_DETAILS_ROUTE_REGEXP} component={ManagerPage} />
+        <Route
+          path={MANAGER_DETAILS_ROUTE_REGEXP}
+          component={ManagerContainer}
+        />
         <PrivateRoute path={PROFILE_ROUTE} component={ProfileRoutes} />
         <Route
           path={WALLET_WITHDRAW_CONFIRM_ROUTE}
