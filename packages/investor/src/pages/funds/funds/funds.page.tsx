@@ -1,6 +1,8 @@
-import React from "react";
-import { translate } from "react-i18next";
-import FacetCardsContainer from "shared/components/facet-cards/faset-cards-container";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import FacetCardsContainer, {
+  ASSETS_FACETS
+} from "shared/components/facet-cards/faset-cards-container";
 import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
@@ -9,7 +11,7 @@ import { composeFundFacetUrl } from "shared/utils/compose-url";
 
 import * as routes from "../funds.routes";
 
-const FundsPage = ({ t }) => {
+const _FundsPage: React.FC<InjectedTranslateProps> = ({ t }) => {
   const title = t("funds-page.title");
   return (
     <Page title={title}>
@@ -20,14 +22,15 @@ const FundsPage = ({ t }) => {
       />
       <FacetCardsContainer
         title={title}
-        assetsFacets={"fundsFacets"}
+        assetsFacets={ASSETS_FACETS.FUNDS}
         composeFacetUrl={composeFundFacetUrl}
       />
       <Surface className="funds-table-container">
-        <FundsTableContainer title={"All funds"} />
+        <FundsTableContainer title={t("funds-page.all-funds")} />
       </Surface>
     </Page>
   );
 };
 
-export default translate()(FundsPage);
+const FundsPage = React.memo(translate()(_FundsPage));
+export default FundsPage;
