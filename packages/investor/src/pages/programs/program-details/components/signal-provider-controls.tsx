@@ -73,16 +73,16 @@ class SignalProviderControls extends Component<
             .hasActiveSubscription ? (
             <>
               <GVButton
-                className="program-details-description__invest-btn"
-                onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
-              >
-                {t("program-details-page.description.unfollow")}
-              </GVButton>
-              <GVButton
                 className="program-details-description__invest-btn signal-provider__btn"
                 onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
               >
                 {t("program-details-page.description.edit-subscription")}
+              </GVButton>
+              <GVButton
+                className="program-details-description__invest-btn"
+                onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
+              >
+                {t("program-details-page.description.unfollow")}
               </GVButton>
             </>
           ) : (
