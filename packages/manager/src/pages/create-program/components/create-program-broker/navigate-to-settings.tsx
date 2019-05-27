@@ -1,4 +1,3 @@
-import { Broker } from "gv-api-web";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -8,11 +7,11 @@ import { KYC_ROUTE } from "shared/components/profile/profile.constants";
 
 const _NavigateToSettings: React.FC<OwnProps & InjectedTranslateProps> = ({
   t,
-  selectedBroker,
+  isForex,
   isKycConfirmed,
   navigateToSettings
 }) => {
-  if (selectedBroker!.isForex && !isKycConfirmed)
+  if (isForex && !isKycConfirmed)
     return (
       <Link
         to={{
@@ -38,6 +37,6 @@ export default NavigateToSettings;
 
 interface OwnProps {
   navigateToSettings(): void;
-  selectedBroker: Broker;
+  isForex: boolean;
   isKycConfirmed: boolean;
 }
