@@ -6,35 +6,14 @@ import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
-import { makeSignalValidationSchema } from "./program-make-signal.validators";
+import { SignalValidationSchema } from "./program-signal.validators";
 
-interface IMakeSignalFormOwnProps {
-  programName: string;
-  errorMessage: string;
-  onSubmit(
-    values: IMakeSignalFormValues,
-    setSubmitting: SetSubmittingType
-  ): void;
-}
-
-enum FORM_FIELDS {
-  successFee = "successFee",
-  volumeFee = "volumeFee"
-}
-
-export interface IMakeSignalFormValues {
-  [FORM_FIELDS.successFee]?: number;
-  [FORM_FIELDS.volumeFee]?: number;
-}
-
-type MakeSignalFormProps = InjectedTranslateProps &
-  IMakeSignalFormOwnProps &
-  FormikProps<IMakeSignalFormValues>;
-const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
+const _ProgramSignalForm: FunctionComponent<Props> = ({
   t,
   dirty,
   handleSubmit,
   programName,
+  header,
   errorMessage,
   isSubmitting
 }) => {
@@ -42,7 +21,7 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
     <form id="makeSignalForm" onSubmit={handleSubmit}>
       <div className="dialog__top">
         <div className="dialog__header">
-          <h2>{t("program-details-page.description.signal-provider.title")}</h2>
+          <h2>{header}</h2>
           <p>{programName}</p>
         </div>
       </div>
@@ -67,17 +46,46 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
   );
 };
 
-export default compose<ComponentType<IMakeSignalFormOwnProps>>(
+const ProgramSignalForm = compose<ComponentType<OwnProps>>(
   translate(),
-  withFormik<IMakeSignalFormOwnProps, IMakeSignalFormValues>({
+  withFormik<OwnProps, IProgramSignalFormValues>({
     displayName: "make-signal-form",
-    mapPropsToValues: () => ({
-      [FORM_FIELDS.successFee]: undefined,
-      [FORM_FIELDS.volumeFee]: undefined
+    mapPropsToValues: props => ({
+      [FORM_FIELDS.successFee]: props.signalSuccessFee,
+      [FORM_FIELDS.volumeFee]: props.signalVolumeFee
     }),
-    validationSchema: makeSignalValidationSchema,
+    validationSchema: SignalValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
   })
-)(MakeSignalForm);
+)(_ProgramSignalForm);
+
+export default ProgramSignalForm;
+
+interface OwnProps {
+  programName: string;
+  header: string;
+  signalSuccessFee?: number;
+  signalVolumeFee?: number;
+  errorMessage: string;
+  onSubmit(
+    values: IProgramSignalFormValues,
+    setSubmitting: SetSubmittingType
+  ): void;
+}
+
+enum FORM_FIELDS {
+  successFee = "successFee",
+  volumeFee = "volumeFee"
+}
+
+export interface IProgramSignalFormValues {
+  [FORM_FIELDS.successFee]?: number;
+  [FORM_FIELDS.volumeFee]?: number;
+}
+
+interface Props
+  extends OwnProps,
+    InjectedTranslateProps,
+    FormikProps<IProgramSignalFormValues> {}

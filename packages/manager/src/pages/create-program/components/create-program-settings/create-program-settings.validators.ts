@@ -76,7 +76,7 @@ const createProgramSettingsValidationSchema = (
         })
       ),
     isSignalProgram: boolean(),
-    signalSubscriptionFee: mixed().when("isSignalProgram", {
+    signalVolumeFee: mixed().when("isSignalProgram", {
       is: true,
       then: signalVolumeFeeShape(t)
     }),

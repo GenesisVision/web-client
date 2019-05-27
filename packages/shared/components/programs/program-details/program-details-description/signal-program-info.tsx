@@ -1,11 +1,11 @@
+import { ProgramDetailsFull } from "gv-api-web";
 import React, { FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
 
 interface ISignalProgramInfoProps {
-  programDescription: any;
+  programDescription: ProgramDetailsFull;
 }
 
 const SignalProgramInfo: FunctionComponent<
@@ -30,7 +30,7 @@ const SignalProgramInfo: FunctionComponent<
         accent
       >
         <NumberFormat
-          value={programDescription.signalSubscriptionFee}
+          value={programDescription.signalVolumeFee}
           displayType="text"
           suffix=" %"
         />
