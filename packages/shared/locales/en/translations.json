@@ -361,6 +361,7 @@
   },
   "funds-page": {
     "title": "Funds",
+    "all-funds": "All funds",
     "tabs": {
       "explore": "Explore",
       "favorites": "Favourites"

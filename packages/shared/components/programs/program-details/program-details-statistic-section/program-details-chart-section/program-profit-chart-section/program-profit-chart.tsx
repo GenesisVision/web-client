@@ -17,8 +17,8 @@ import {
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
 import GVColors from "shared/components/gv-styles/gv-colors";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 import ProgramProfitTooltip from "./program-profit-tooltip";
 
@@ -89,6 +89,7 @@ const ProgramProfitChart: React.FC<Props> = ({
         <CartesianGrid vertical={false} strokeWidth={0.1} />
         <Bar
           dataKey="value"
+          //@ts-ignore
           data={pnl}
           unit={` ${currency}`}
           barSize={6}
@@ -119,8 +120,8 @@ const ProgramProfitChart: React.FC<Props> = ({
 
 interface Props {
   equityChart: ChartSimple[];
-  pnlChart: any;
-  currency: CURRENCIES;
+  pnlChart: ChartSimple[];
+  currency: CurrencyEnum;
 }
 
 export default React.memo(ProgramProfitChart);

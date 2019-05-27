@@ -35,13 +35,13 @@ const getBrokerState = (
   isForexAllowed: boolean,
   isKycConfirmed: boolean
 ): BROKER_CARD_EXTRA_STATE => {
+  if (isForex && !isKycConfirmed) {
+    return BROKER_CARD_EXTRA_STATE.KYC_REQUIRED;
+  }
   if (isForex && !isForexAllowed) {
     return BROKER_CARD_EXTRA_STATE.FOREX_DISABLED;
-  } else if (isForex && !isKycConfirmed) {
-    return BROKER_CARD_EXTRA_STATE.KYC_REQUIRED;
-  } else {
-    return BROKER_CARD_EXTRA_STATE.NONE;
   }
+  return BROKER_CARD_EXTRA_STATE.NONE;
 };
 
 const _CreateProgramBroker: React.FC<OwnProps & InjectedTranslateProps> = ({
@@ -79,7 +79,7 @@ const _CreateProgramBroker: React.FC<OwnProps & InjectedTranslateProps> = ({
         ))}
         <div className="create-program-broker__navigation">
           <NavigateToSettings
-            selectedBroker={selectedBroker}
+            isForex={selectedBroker.isForex}
             isKycConfirmed={isKycConfirmed}
             navigateToSettings={navigateToSettings}
           />

@@ -4,7 +4,9 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatValue } from "shared/utils/formatter";
+
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constans";
 
 const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
   const details = data.programDetails;
@@ -17,9 +19,13 @@ const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
         </div>
         <StatisticItem
           condition={!!details}
-          label={t(`transactions-details.investment.to-${details.programType}`)}
+          label={t(
+            `transactions-details.investment.to-${
+              details ? details.programType : null
+            }`
+          )}
         >
-          <TransactionAsset url={details.logo} data={details} />
+          <TransactionAsset url={details ? details.logo : ""} data={details} />
         </StatisticItem>
       </div>
       <div className="dialog__bottom">
@@ -30,7 +36,7 @@ const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.investment.amount`)} big>
           <NumberFormat
-            value={formatCurrencyValue(data.amount, data.currency)}
+            value={formatValue(data.amount, TRANSACTIONS_DECIMAL_SCALE)}
             suffix={data.currency}
             displayType="text"
           />

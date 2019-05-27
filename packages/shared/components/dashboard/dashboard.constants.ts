@@ -1,8 +1,8 @@
 import { CancelablePromise } from "gv-api-web";
 import {
+  DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
-  DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes
+  DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
@@ -27,7 +27,7 @@ export const DASHBOARD_PROGRAMS_FILTERS = [
     ...composeDefaultDateRangeFilter({
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastMonth
+        type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
       }
     })
   }
@@ -36,7 +36,7 @@ export const DASHBOARD_PROGRAMS_FILTERS = [
 export const DASHBOARD_PROGRAMS_DEFAULT_FILTERING = {
   [DATE_RANGE_FILTER_NAME]: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DateRangeFilterTypes.lastMonth
+    type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
   },
   [ACTION_STATUS_FILTER_NAME]: ACTION_STATUS_FILTER_DEFAULT_VALUE
 };
@@ -73,7 +73,7 @@ export const DASHBOARD_FUNDS_FILTERS = [
     ...composeDefaultDateRangeFilter({
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastMonth
+        type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
       }
     })
   }
@@ -82,7 +82,7 @@ export const DASHBOARD_FUNDS_FILTERS = [
 export const DASHBOARD_FUNDS_DEFAULT_FILTERING = {
   dateRange: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DateRangeFilterTypes.lastMonth
+    type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
   }
 };
 

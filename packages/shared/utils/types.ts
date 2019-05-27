@@ -81,3 +81,4 @@ export type CurrencyEnum = AmountWithCurrencyCurrencyEnum;
 export type AuthRootState = ManagerRootState | InvestorRootState;
 
 export type TGetState = () => RootState;
+export type TGetAuthState = () => AuthRootState;

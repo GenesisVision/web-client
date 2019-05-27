@@ -43,6 +43,7 @@ class CreateFundSettingsAddAsset extends React.Component {
         anchorEl={anchor}
         noPadding
         onClose={handleCloseDropdown}
+        fixed
       >
         <div className="popover-add">
           <div className="popover-add__search">

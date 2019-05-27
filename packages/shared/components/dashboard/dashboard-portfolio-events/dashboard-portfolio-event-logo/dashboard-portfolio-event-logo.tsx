@@ -51,9 +51,9 @@ export const EvenLogoIcon: React.FC<{ type: EVENT_LOGO_TYPE }> = ({ type }) => {
       return <img src={EventAssetStarted} alt="Asset Started" />;
     case EVENT_LOGO_TYPE.ASSET_FINISHED:
       return <img src={EventAssetFinished} alt="Asset Finished" />;
-    case EVENT_LOGO_TYPE.PROGRAM_PREIOD_STARTS:
+    case EVENT_LOGO_TYPE.PROGRAM_PERIOD_STARTS:
       return <img src={EventPeriodStarts} alt="Period Starts" />;
-    case EVENT_LOGO_TYPE.PROGRAM_PREIOD_ENDS:
+    case EVENT_LOGO_TYPE.PROGRAM_PERIOD_ENDS:
       return <img src={EventPeriodEnds} alt="Period ends" />;
     case EVENT_LOGO_TYPE.INVESTOR_INVEST:
     case EVENT_LOGO_TYPE.MANAGER_INVEST:
