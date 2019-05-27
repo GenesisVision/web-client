@@ -130,11 +130,14 @@ const ProgramTableRowShort: React.FC<
         {formatCurrencyValue(availableInvestmentBase, currency)} {currency}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
-        {periodStarts &&
-          ((status !== STATUS.CLOSED && (
-            <ProgramPeriodPie start={periodStarts} end={periodEnds} />
-          )) ||
-            t("program-period.program-closed"))}
+        {periodStarts && (
+          <ProgramPeriodPie
+            condition={status !== STATUS.CLOSED}
+            loader={t("program-period.program-closed")}
+            start={periodStarts}
+            end={periodEnds}
+          />
+        )}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
         {statistic.tradesCount}

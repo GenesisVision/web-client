@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
 import { ROLE_ENV } from "shared/constants/constants";
+import { HOME_ROUTE } from "shared/routes/app.routes";
 
 import { ILoginFooterProps } from "../login-footer/login-footer";
 
@@ -22,7 +23,6 @@ class _AuthLayout extends React.PureComponent<Props, State> {
       children,
       title,
       Footer,
-      HOME_ROUTE,
       SIGNUP_ROUTE,
       LOGIN_ROUTE
     } = this.props;
@@ -68,7 +68,6 @@ class _AuthLayout extends React.PureComponent<Props, State> {
 interface Props extends InjectedTranslateProps {
   Footer: React.ComponentType<ILoginFooterProps>;
   title: string;
-  HOME_ROUTE: string;
   SIGNUP_ROUTE?: string;
   LOGIN_ROUTE?: string;
 }

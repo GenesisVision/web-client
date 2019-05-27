@@ -150,7 +150,6 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
               <CloseFundContainer
                 open={popups[INVESTMENT_POPUP.CLOSE]}
                 onClose={this.closePopup(INVESTMENT_POPUP.CLOSE)}
-                onCancel={this.closePopup(INVESTMENT_POPUP.CLOSE)}
                 onApply={this.applyChanges(updateDetails)}
                 id={fundDescription.id}
               />

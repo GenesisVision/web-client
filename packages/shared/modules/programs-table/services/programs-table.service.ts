@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { ProgramsList } from "gv-api-web";
+import { CancelablePromise, ProgramsList } from "gv-api-web";
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
@@ -19,10 +19,12 @@ import {
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
 import RootState from "shared/reducers/root-reducer";
+import programApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
 import * as programTableActions from "../actions/programs-table.actions";
+import { FetchProgramsFiltersType } from "../actions/programs-table.actions";
 import {
   PROGRAMS_COLUMNS,
   PROGRAMS_TABLE_FILTERS,
@@ -50,19 +52,12 @@ export const getPrograms = (filters: ComposeFiltersAllType) => (
 };
 
 export const fetchPrograms = (
-  filters: ComposeFiltersAllType
-): Promise<ProgramsList> => {
-  const requestFilters = { ...filters };
-  if (authService.getAuthArg()) {
-    requestFilters.authorization = authService.getAuthArg();
-  }
-  return programTableActions
-    .fetchPrograms(requestFilters)
-    .payload.then((data: any) => {
-      // TODO fix any
-      return { programs: data.programs, total: data.total };
-    });
-};
+  filters: FetchProgramsFiltersType
+): CancelablePromise<ProgramsList> =>
+  programApi.v10ProgramsGet({
+    ...filters,
+    authorization: authService.getAuthArg()
+  });
 
 const composeRequestFilters = () => (
   dispatch: any,

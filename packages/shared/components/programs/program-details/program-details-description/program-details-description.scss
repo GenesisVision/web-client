@@ -129,7 +129,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       width: auto;
 
       &--small-size {
-        min-width: 30%;
+        min-width: 220px;
       }
     }
 
@@ -145,7 +145,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 
   &__statistic-container {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
   }
 

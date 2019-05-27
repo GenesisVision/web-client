@@ -1,6 +1,6 @@
 import {
+  DATA_RANGE_FILTER_TYPES,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes,
   SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME,
   SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -24,7 +24,7 @@ export const FUNDS_TABLE_FILTERS = [
       ),
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastMonth
+        type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
       }
     }),
     validate: validateDateRange

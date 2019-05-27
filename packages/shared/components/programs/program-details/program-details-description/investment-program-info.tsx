@@ -3,9 +3,9 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
+import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
 interface IInvestmentProgramInfoProps {
   isOwnProgram?: boolean;
@@ -76,19 +76,18 @@ const InvestmentProgramInfo: React.FunctionComponent<
           suffix=" %"
         />
       </StatisticItem>
-      {stopOutLevel && (
-        <StatisticItem
-          label={t("program-details-page.description.stop-out-level")}
-          className="program-details-description__short-statistic-item"
-          accent
-        >
-          <NumberFormat
-            value={formatValue(stopOutLevel, 2)}
-            displayType="text"
-            suffix=" %"
-          />
-        </StatisticItem>
-      )}
+      <StatisticItem
+        condition={!!stopOutLevel}
+        label={t("program-details-page.description.stop-out-level")}
+        className="program-details-description__short-statistic-item"
+        accent
+      >
+        <NumberFormat
+          value={formatValue(stopOutLevel, 2)}
+          displayType="text"
+          suffix=" %"
+        />
+      </StatisticItem>
     </div>
   );
 };

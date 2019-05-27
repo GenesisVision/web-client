@@ -77,7 +77,12 @@ export const fetchFundStructure = (
   return fundsApi.v10FundsByIdAssetsGet(fundId);
 };
 
-export const closeFund = (id: string, opts: any): Promise<void> => {
+export const closeFund = (
+  id: string,
+  opts: {
+    twoFactorCode: string;
+  }
+): Promise<void> => {
   const authorization = authService.getAuthArg();
 
   return managerApi.v10ManagerFundsByIdClosePost(id, authorization, opts);

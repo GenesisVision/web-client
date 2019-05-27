@@ -118,6 +118,7 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
           {view === LIST_VIEW.CARDS && (
             <div className={classNames("table", className)}>
               <TableBody
+                isPending={isPending}
                 items={items}
                 className="table-cards"
                 tag="div"
@@ -147,13 +148,12 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
             </table>
           )}
         </GVScroll>
-        {paging && (
-          <TableFooter
-            paging={paging}
-            updatePaging={updatePaging}
-            isPending={isPending}
-          />
-        )}
+        <TableFooter
+          condition={paging && !!(paging.totalPages && paging.totalPages >= 2)}
+          paging={paging}
+          updatePaging={updatePaging}
+          isPending={isPending}
+        />
       </div>
     );
   }

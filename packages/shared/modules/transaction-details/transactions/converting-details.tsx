@@ -4,7 +4,9 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import filesService from "shared/services/file-service";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
 
 const ConvertingDetails: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
@@ -33,7 +35,7 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = props => {
         </StatisticItem>
         <StatisticItem label={t("transactions-details.converting.from")}>
           <NumberFormat
-            value={formatCurrencyValue(data.amount, data.currency)}
+            value={formatValue(data.amount, TRANSACTIONS_DECIMAL_SCALE)}
             suffix={` ${data.currency}`}
             allowNegative={true}
             displayType="text"
@@ -61,9 +63,9 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = props => {
         </StatisticItem>
         <StatisticItem label={t("transactions-details.converting.to")}>
           <NumberFormat
-            value={formatCurrencyValue(
+            value={formatValue(
               data.convertingDetails.amountTo,
-              data.convertingDetails.currencyTo
+              TRANSACTIONS_DECIMAL_SCALE
             )}
             suffix={` ${data.convertingDetails.currencyTo}`}
             allowNegative={true}

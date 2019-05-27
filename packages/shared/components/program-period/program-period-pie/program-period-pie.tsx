@@ -10,6 +10,7 @@ import {
 } from "react-i18next";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import Tooltip from "shared/components/tooltip/tooltip";
+import withLoader from "shared/decorators/with-loader";
 
 import ProgramPeriodTooltip from "../program-period-tooltip/program-period-tooltip";
 
@@ -48,5 +49,5 @@ interface Props extends InjectedTranslateProps {
   className?: string;
 }
 
-const ProgramPeriodPie = React.memo(translate()(_ProgramPeriodPie));
+const ProgramPeriodPie = withLoader(React.memo(translate()(_ProgramPeriodPie)));
 export default ProgramPeriodPie;

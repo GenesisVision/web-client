@@ -1,24 +1,19 @@
 import { MultiWalletFilters, WalletData } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
+import withLoader from "shared/decorators/with-loader";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
-import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
+import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-form";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
-import RootState from "shared/reducers/root-reducer";
 
-import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainer from "./wallet-container/wallet-container";
 
-class WalletCurrency extends React.PureComponent<Props, State> {
+class _WalletCurrency extends React.PureComponent<Props, State> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
@@ -41,9 +36,7 @@ class WalletCurrency extends React.PureComponent<Props, State> {
     this.setState({ isOpenTransferPopup: false });
 
   render() {
-    const { t, info, isPending, filters } = this.props;
-    if ((!info && isPending) || !filters) return <WalletBalanceLoader />;
-    if (!info) return <NotFoundPage />;
+    const { t, info, filters } = this.props;
     const currentWallet: CurrentWallet = {
       currency: info.currency,
       available: info.available
@@ -97,33 +90,11 @@ class WalletCurrency extends React.PureComponent<Props, State> {
     );
   }
 }
+interface Props extends InjectedTranslateProps, OwnProps {}
 
-const mapStateToProps = (state: RootState, props: OwnProps): StateProps => {
-  const isPending = state.wallet.info.isPending;
-  const { currency } = props.match.params;
-  const info = state.wallet.info.data
-    ? state.wallet.info.data.wallets.find(
-        wallet => wallet.currency === currency.toUpperCase()
-      )
-    : undefined;
-  const filters = state.platformData.data
-    ? state.platformData.data.enums.multiWallet
-    : undefined;
-  return {
-    info,
-    isPending,
-    filters
-  };
-};
-
-interface Props extends InjectedTranslateProps, OwnProps, StateProps {}
-
-interface OwnProps extends WalletRouteProps {}
-
-interface StateProps {
-  info?: WalletData;
-  isPending: boolean;
-  filters?: MultiWalletFilters;
+interface OwnProps {
+  info: WalletData;
+  filters: MultiWalletFilters;
 }
 
 interface State {
@@ -132,7 +103,5 @@ interface State {
   isOpenTransferPopup: boolean;
 }
 
-export default compose<React.FunctionComponent<OwnProps>>(
-  connect(mapStateToProps),
-  translate()
-)(WalletCurrency);
+const WalletCurrency = withLoader(translate()(_WalletCurrency));
+export default WalletCurrency;

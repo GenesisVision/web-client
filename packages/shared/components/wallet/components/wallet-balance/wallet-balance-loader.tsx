@@ -8,12 +8,8 @@ import Surface from "../../../surface/surface";
 import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
 
 const WalletBalanceLoader = () => (
-  <div className="wallet-balance">
-    <SvgLoader height={72} width={250}>
-      <rect x="0" y="0" width="120" height="32" rx="8" ry="8" />
-      <rect x="130" y="0" width="100" height="32" rx="8" ry="8" />
-    </SvgLoader>
-    <div className="wallet-balance__loader-row">
+  <>
+    <div className="wallet-balance__wrapper">
       <WalletLoaderStat />
       <WalletLoaderStatIndicator />
       <WalletLoaderStatIndicator />
@@ -40,7 +36,7 @@ const WalletBalanceLoader = () => (
         )}
       />
     </Surface>
-  </div>
+  </>
 );
 
 const WalletLoaderStat = () => (

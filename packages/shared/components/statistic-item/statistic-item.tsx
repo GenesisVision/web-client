@@ -3,6 +3,7 @@ import "./statistic-item.scss";
 import classNames from "classnames";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 enum ITEM {
@@ -22,7 +23,7 @@ export interface IFollowStatisticItemProps {
   invert?: boolean;
   className?: string;
 }
-const StatisticItem: React.FC<IFollowStatisticItemProps> = ({
+const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
   invert = false,
   large,
   big,
@@ -89,4 +90,5 @@ const StatisticItem: React.FC<IFollowStatisticItemProps> = ({
   );
 };
 
-export default React.memo(StatisticItem);
+const StatisticItem = withLoader(React.memo(_StatisticItem));
+export default StatisticItem;

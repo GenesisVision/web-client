@@ -1,4 +1,8 @@
-import { AmountWithCurrencyCurrencyEnum, CancelablePromise } from "gv-api-web";
+import {
+  AmountWithCurrencyCurrencyEnum,
+  CancelablePromise,
+  ProgramNotificationSettingList
+} from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { Action, Dispatch } from "redux";
@@ -8,6 +12,22 @@ import RootState from "shared/reducers/root-reducer";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
+}
+
+export type FavoriteActionProps = { id: string; authorization: string };
+
+export interface FavoriteActionType<T = any> extends Action {
+  payload: T;
+  meta: {
+    id: string;
+    isFavorite: boolean;
+  };
+}
+
+export interface NotificationsActionType<T = ProgramNotificationSettingList>
+  extends Action {
+  settings?: T;
+  errorMessage?: string;
 }
 
 export interface ActionType<T = any> extends Action {
@@ -61,3 +81,4 @@ export type CurrencyEnum = AmountWithCurrencyCurrencyEnum;
 export type AuthRootState = ManagerRootState | InvestorRootState;
 
 export type TGetState = () => RootState;
+export type TGetAuthState = () => AuthRootState;

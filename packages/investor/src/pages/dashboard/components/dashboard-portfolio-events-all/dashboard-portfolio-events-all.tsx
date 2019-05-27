@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { InvestorRootState } from "reducers";
@@ -35,13 +35,15 @@ const mapStateToProps = (state: InvestorRootState): StateProps => {
   return { events };
 };
 
-interface Props extends InjectedTranslateProps, StateProps {}
+interface Props extends InjectedTranslateProps, StateProps, OwnProps {}
+
+interface OwnProps {}
 
 interface StateProps {
   events: any[];
 }
 
-const PortfolioEventsAllComponent = compose(
+const PortfolioEventsAllComponent = compose<React.ComponentType<OwnProps>>(
   React.memo,
   translate(),
   connect(mapStateToProps)

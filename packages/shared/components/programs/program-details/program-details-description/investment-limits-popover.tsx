@@ -71,11 +71,13 @@ class InvestmentLimitsPopover extends React.PureComponent<
             <h4 className="popover-levels__title">
               {t("program-details-page.popover.genesis-level")} {level}
             </h4>
-            {canLevelUp && (
-              <StatisticItem accent label={t("level-tooltip.level-up")}>
-                {t("level-tooltip.top10")}
-              </StatisticItem>
-            )}
+            <StatisticItem
+              condition={!!canLevelUp}
+              accent
+              label={t("level-tooltip.level-up")}
+            >
+              {t("level-tooltip.top10")}
+            </StatisticItem>
 
             <StatisticItem
               accent

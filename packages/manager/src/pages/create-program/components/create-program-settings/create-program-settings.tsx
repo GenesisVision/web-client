@@ -6,6 +6,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import {
   Broker,
   BrokerAccountType,
+  NewProgramRequestCurrencyEnum,
   ProgramsInfo,
   WalletData
 } from "gv-api-web";
@@ -387,7 +388,7 @@ class CreateProgramSettings extends React.PureComponent<
             </div>
             {isSignalProgram && (
               <SignalsFeeFormPartial
-                volumeFeeFieldName="signalSubscriptionFee"
+                volumeFeeFieldName="signalVolumeFee"
                 successFeeFieldName="signalSuccessFee"
               />
             )}
@@ -525,7 +526,7 @@ export default compose<React.ComponentType<OwnProps>>(
         successFee: undefined,
         isSignalProgram: broker.isSignalsAvailable,
         signalSuccessFee: broker.isSignalsAvailable ? undefined : 0,
-        signalSubscriptionFee: broker.isSignalsAvailable ? undefined : 0,
+        signalVolumeFee: broker.isSignalsAvailable ? undefined : 0,
         currency: programCurrency,
         leverage: leverage,
         periodLength: periodLength,
@@ -571,7 +572,7 @@ export interface ICreateProgramSettingsFormValues {
   leverage?: number;
   brokerAccountTypeId: string;
   signalSuccessFee?: number;
-  signalSubscriptionFee?: number;
+  signalVolumeFee?: number;
   isSignalProgram: boolean;
   title: string;
   description: string;

@@ -3,10 +3,10 @@ import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
-import TransactionAsset from "shared/modules/transaction-details/transactions/details-asset";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
+import { formatValue } from "shared/utils/formatter";
 
-const DECIMAL_SCALE = 8;
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
 
 const ProfitDetails: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
@@ -18,7 +18,10 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = props => {
           <p>{t(`transactions-details.profit`)}</p>
         </div>
         <StatisticItem label={`${data.programDetails.programType}`}>
-          <TransactionAsset data={data.programDetails} />
+          <TransactionAsset
+            url={data.programDetails.logo}
+            data={data.programDetails}
+          />
         </StatisticItem>
       </div>
       <div className="dialog__bottom">
@@ -29,9 +32,12 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = props => {
             displayType="text"
           />
           <NumberFormat
-            value={formatValue(data.programDetails.successFee, DECIMAL_SCALE)}
+            value={formatValue(
+              data.programDetails.successFee,
+              TRANSACTIONS_DECIMAL_SCALE
+            )}
             prefix={" ("}
-            suffix={` ${data.currency})`}
+            suffix={` ${data.programDetails.successFeeCurrency})`}
             displayType="text"
           />
         </StatisticItem>
@@ -42,7 +48,7 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = props => {
             displayType="text"
           />
           <NumberFormat
-            value={formatValue(data.gvCommission, DECIMAL_SCALE)}
+            value={formatValue(data.gvCommission, TRANSACTIONS_DECIMAL_SCALE)}
             prefix={" ("}
             suffix={
               data.gvCommissionCurrency ? ` ${data.gvCommissionCurrency})` : ")"
@@ -57,7 +63,7 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = props => {
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.external.amount`)} big>
           <NumberFormat
-            value={formatCurrencyValue(data.amount, data.currency)}
+            value={formatValue(data.amount, TRANSACTIONS_DECIMAL_SCALE)}
             suffix={` ${data.currency}`}
             allowNegative={true}
             displayType="text"

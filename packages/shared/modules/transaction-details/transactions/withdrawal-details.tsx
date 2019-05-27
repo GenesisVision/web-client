@@ -3,8 +3,10 @@ import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
-import TransactionAsset from "shared/modules/transaction-details/transactions/details-asset";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
+import { formatValue } from "shared/utils/formatter";
+
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
 
 const WithdrawalTransaction: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
@@ -28,7 +30,10 @@ const WithdrawalTransaction: React.FC<TransactionDetailsProps> = props => {
             }`
           )}
         >
-          <TransactionAsset data={data.programDetails} />
+          <TransactionAsset
+            url={data.programDetails.logo}
+            data={data.programDetails}
+          />
         </StatisticItem>
       </div>
       <div className="dialog__bottom">
@@ -39,7 +44,7 @@ const WithdrawalTransaction: React.FC<TransactionDetailsProps> = props => {
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.withdrawal.amount`)} big>
           <NumberFormat
-            value={formatCurrencyValue(data.amount, data.currency)}
+            value={formatValue(data.amount, TRANSACTIONS_DECIMAL_SCALE)}
             suffix={` ${data.currency}`}
             allowNegative={true}
             displayType="text"

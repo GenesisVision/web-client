@@ -9,7 +9,7 @@ import Surface from "shared/components/surface/surface";
 import { ROLE_ENV } from "shared/constants/constants";
 
 import DashboardAssetsSection from "./components/dashboard-assets/dashboard-assets-section";
-import DashboardChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
+import DashboardPortfolioChartSectionContainer from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section-container";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 import DashboardTrades from "./components/dashboard-trades/dashboard-trades";
 
@@ -25,7 +25,7 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = ({ t }) => {
         <div className="dashboard__row">
           <div className="dashboard__chart">
             <Surface className="dashboard-portfolio-chart-section">
-              <DashboardChartSection />
+              <DashboardPortfolioChartSectionContainer />
             </Surface>
           </div>
           <div className="dashboard__portfolio-events-aside">

@@ -98,30 +98,29 @@ class DetailsInvestment extends PureComponent<
                   displayType="text"
                 />
               </StatisticItem>
-              {asset === PROGRAM ? (
-                <StatisticItem
-                  accent
-                  label={t("fund-details-page.description.profit")}
+              <StatisticItem
+                condition={asset === PROGRAM}
+                accent
+                label={t("fund-details-page.description.profit")}
+              >
+                <Profitability
+                  value={formatCurrencyValue(profitValue, assetCurrency)}
+                  prefix={PROFITABILITY_PREFIX.SIGN}
                 >
-                  <Profitability
-                    value={profitValue}
-                    prefix={PROFITABILITY_PREFIX.SIGN}
-                  >
-                    <NumberFormat
-                      value={formatCurrencyValue(profitValue, assetCurrency)}
-                      suffix={` ${assetCurrency}`}
-                      allowNegative={false}
-                      displayType="text"
-                    />
-                  </Profitability>
-                  <Profitability
-                    value={personalDetails.profit}
-                    variant={PROFITABILITY_VARIANT.CHIPS}
-                  >
-                    {roundPercents(personalDetails.profit)}
-                  </Profitability>
-                </StatisticItem>
-              ) : null}
+                  <NumberFormat
+                    value={formatCurrencyValue(profitValue, assetCurrency)}
+                    suffix={` ${assetCurrency}`}
+                    allowNegative={false}
+                    displayType="text"
+                  />
+                </Profitability>
+                <Profitability
+                  value={`${personalDetails.profit}`}
+                  variant={PROFITABILITY_VARIANT.CHIPS}
+                >
+                  {roundPercents(personalDetails.profit)}
+                </Profitability>
+              </StatisticItem>
               <StatisticItem
                 accent
                 label={t("fund-details-page.description.status")}
@@ -133,22 +132,23 @@ class DetailsInvestment extends PureComponent<
                   onCancel={updateDetails}
                 />
               </StatisticItem>
-              {personalDetails.pendingInput !== undefined &&
-                personalDetails.pendingInput !== 0 && (
-                  <StatisticItem
-                    accent
-                    label={t("fund-details-page.description.pending-input")}
-                  >
-                    <NumberFormat
-                      value={formatCurrencyValue(
-                        personalDetails.pendingInput,
-                        assetCurrency
-                      )}
-                      suffix={` ${assetCurrency}`}
-                      displayType="text"
-                    />
-                  </StatisticItem>
-                )}
+              <StatisticItem
+                condition={
+                  personalDetails.pendingInput !== undefined &&
+                  personalDetails.pendingInput !== 0
+                }
+                accent
+                label={t("fund-details-page.description.pending-input")}
+              >
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    personalDetails.pendingInput,
+                    assetCurrency
+                  )}
+                  suffix={` ${assetCurrency}`}
+                  displayType="text"
+                />
+              </StatisticItem>
               {ProgramReinvestingWidget &&
                 personalDetails.isInvested &&
                 personalDetails.canInvest && (
@@ -157,22 +157,23 @@ class DetailsInvestment extends PureComponent<
                     isReinvesting={personalDetails.isReinvest}
                   />
                 )}
-              {personalDetails.pendingOutput !== undefined &&
-                personalDetails.pendingOutput !== 0 && (
-                  <StatisticItem
-                    accent
-                    label={t("fund-details-page.description.pending-output")}
-                  >
-                    <NumberFormat
-                      value={formatCurrencyValue(
-                        personalDetails.pendingOutput,
-                        assetCurrency
-                      )}
-                      suffix={` ${assetCurrency}`}
-                      displayType="text"
-                    />
-                  </StatisticItem>
-                )}
+              <StatisticItem
+                condition={
+                  personalDetails.pendingOutput !== undefined &&
+                  personalDetails.pendingOutput !== 0
+                }
+                accent
+                label={t("fund-details-page.description.pending-output")}
+              >
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    personalDetails.pendingOutput,
+                    assetCurrency
+                  )}
+                  suffix={` ${assetCurrency}`}
+                  displayType="text"
+                />
+              </StatisticItem>
             </div>
             <div className="details-investment__footer">
               <GVButton

@@ -8,7 +8,9 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateItemsFuncType } from "shared/components/table/components/table.types";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatValue } from "shared/utils/formatter";
+
+import { TRANSACTIONS_DECIMAL_SCALE } from "./wallet-deposits-withdrawals.constants";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletExternalTransaction;
@@ -62,15 +64,15 @@ class DepositsWithdrawalsRow extends React.Component<
           </TableCell>
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
             <Profitability
-              value={formatCurrencyValue(
+              value={formatValue(
                 transaction.amount,
-                transaction.currency
+                TRANSACTIONS_DECIMAL_SCALE
               )}
             >
               <NumberFormat
-                value={formatCurrencyValue(
+                value={formatValue(
                   transaction.amount,
-                  transaction.currency
+                  TRANSACTIONS_DECIMAL_SCALE
                 )}
                 thousandSeparator=" "
                 displayType="text"

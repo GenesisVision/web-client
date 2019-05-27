@@ -9,11 +9,13 @@ const _LevelTooltip: React.FC<ILevelTooltip> = ({ t, level, canLevelUp }) => (
     <div className="level-tooltip__level">
       {t("level-tooltip.genesis-level")} {level}
     </div>
-    {canLevelUp && (
-      <StatisticItem accent label={t("level-tooltip.level-up")}>
-        {t("level-tooltip.top10")}
-      </StatisticItem>
-    )}
+    <StatisticItem
+      condition={!!canLevelUp}
+      accent
+      label={t("level-tooltip.level-up")}
+    >
+      {t("level-tooltip.top10")}
+    </StatisticItem>
   </div>
 );
 

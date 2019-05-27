@@ -9,7 +9,7 @@ import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import GVButton from "shared/components/gv-button";
 import NotFoundPage from "shared/components/not-found/not-found";
 import Page from "shared/components/page/page";
-import WalletBalanceLoader from "shared/components/wallet/components/wallet-balance/wallet-balance-loader";
+import WalletContainerLoader from "shared/components/wallet/components/wallet-balance/wallet-balance-loader";
 import ConvertIcon from "shared/media/convert.svg";
 import RootState from "shared/reducers/root-reducer";
 
@@ -65,7 +65,7 @@ class WalletCopytradingAccount extends Component<
       return <NotFoundPage />;
     }
 
-    if (!wallet) return <WalletBalanceLoader />;
+    if (!wallet) return <WalletContainerLoader />;
 
     return (
       <Page title={t("wallet-copytrading-page.title")}>

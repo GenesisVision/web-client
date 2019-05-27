@@ -3,8 +3,10 @@ import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
-import TransactionAsset from "shared/modules/transaction-details/transactions/details-asset";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
+import { formatValue } from "shared/utils/formatter";
+
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
 
 const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
   const details = data.programDetails;
@@ -15,15 +17,16 @@ const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
           <h2>{t(`transactions-details.title`)}</h2>
           <p>{t(`transactions-details.signal.${data.type}`)}</p>
         </div>
-        {details && (
-          <StatisticItem
-            label={t(
-              `transactions-details.investment.to-${details.programType}`
-            )}
-          >
-            <TransactionAsset data={details} />
-          </StatisticItem>
-        )}
+        <StatisticItem
+          condition={!!details}
+          label={t(
+            `transactions-details.investment.to-${
+              details ? details.programType : null
+            }`
+          )}
+        >
+          <TransactionAsset url={details ? details.logo : ""} data={details} />
+        </StatisticItem>
       </div>
       <div className="dialog__bottom">
         <StatisticItem label={t(`transactions-details.status.title`)}>
@@ -33,7 +36,7 @@ const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.investment.amount`)} big>
           <NumberFormat
-            value={formatCurrencyValue(data.amount, data.currency)}
+            value={formatValue(data.amount, TRANSACTIONS_DECIMAL_SCALE)}
             suffix={data.currency}
             displayType="text"
           />

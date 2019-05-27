@@ -4,20 +4,20 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  GetItemsFuncType,
+  TableToggleFavoriteType
+} from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
-
 import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
+
 import {
   MANAGER_DEFAULT_FILTERS,
   MANAGER_FILTERING,
   MANAGER_SORTING
 } from "../manager.constants";
 import { fetchManagerPrograms } from "../services/manager.service";
-import {
-  GetItemsFuncType,
-  TableToggleFavoriteType
-} from "shared/components/table/components/table.types";
 
 interface Props {
   managerId: string;
@@ -25,11 +25,11 @@ interface Props {
   isAuthenticated: boolean;
 }
 
-class ManagerPrograms extends React.Component<Props & InjectedTranslateProps> {
-  fetchManagerPrograms: GetItemsFuncType = filters => {
-    const { managerId } = this.props;
-    return fetchManagerPrograms({ ...filters, managerId });
-  };
+class _ManagerPrograms extends React.PureComponent<
+  Props & InjectedTranslateProps
+> {
+  fetchManagerPrograms: GetItemsFuncType = filters =>
+    fetchManagerPrograms({ ...filters, managerId: this.props.managerId });
 
   toggleFavorite: TableToggleFavoriteType = (program, updateRow) => () => {
     const isFavorite = program.personalDetails.isFavorite;
@@ -69,4 +69,5 @@ class ManagerPrograms extends React.Component<Props & InjectedTranslateProps> {
   }
 }
 
-export default translate()(ManagerPrograms);
+const ManagerPrograms = translate()(_ManagerPrograms);
+export default ManagerPrograms;
