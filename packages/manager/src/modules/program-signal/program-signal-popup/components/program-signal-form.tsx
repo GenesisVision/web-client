@@ -13,8 +13,6 @@ const _ProgramSignalForm: FunctionComponent<Props> = ({
   dirty,
   handleSubmit,
   programName,
-  signalSuccessFee,
-  signalVolumeFee,
   header,
   errorMessage,
   isSubmitting

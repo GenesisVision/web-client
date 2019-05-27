@@ -9,20 +9,18 @@ import { ProgramDetailContext } from "shared/components/details/helpers/details-
 import GVButton from "shared/components/gv-button";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 
-enum SIGNAL_POPUP {
-  EDIT = "EDIT",
-  MAKE = "MAKE"
-}
-
 class SignalProviderControls extends React.PureComponent<
   OwnProps & InjectedTranslateProps,
   State
 > {
   state = {
-    popups: Object.keys(SIGNAL_POPUP).reduce((curr: any, next: any) => {
-      curr[SIGNAL_POPUP[next]] = false;
-      return curr;
-    }, {})
+    popups: Object.keys(SIGNAL_POPUP).reduce<PopupStateType>(
+      (curr, next) => {
+        curr[SIGNAL_POPUP[next as SIGNAL_POPUP]] = false;
+        return curr;
+      },
+      {} as PopupStateType
+    )
   };
 
   openPopup = (popupName: SIGNAL_POPUP) => () => {
@@ -108,6 +106,13 @@ class SignalProviderControls extends React.PureComponent<
 
 export default translate()(SignalProviderControls);
 
+enum SIGNAL_POPUP {
+  EDIT = "EDIT",
+  MAKE = "MAKE"
+}
+
+type PopupStateType = { [k in SIGNAL_POPUP]: boolean };
+
 interface OwnProps {
   isAuthenticated: boolean;
   redirectToLogin(): void;
@@ -115,5 +120,5 @@ interface OwnProps {
 }
 
 interface State {
-  popups: { [k: string]: boolean };
+  popups: PopupStateType;
 }
