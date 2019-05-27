@@ -4,7 +4,6 @@ import { DashboardPortfolioEventAssetTypeEnum } from "gv-api-web";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import { ASSET } from "shared/constants/constants";
 import EventCancelledIconRed from "shared/media/event-cancelled-red.svg";
 import EventCancelledIcon from "shared/media/event-cancelled.svg";
 import EventEndedRedIcon from "shared/media/event-ended-red.svg";
@@ -52,9 +51,9 @@ export const EvenLogoIcon: React.FC<{ type: EVENT_LOGO_TYPE }> = ({ type }) => {
       return <img src={EventAssetStarted} alt="Asset Started" />;
     case EVENT_LOGO_TYPE.ASSET_FINISHED:
       return <img src={EventAssetFinished} alt="Asset Finished" />;
-    case EVENT_LOGO_TYPE.PROGRAM_PREIOD_STARTS:
+    case EVENT_LOGO_TYPE.PROGRAM_PERIOD_STARTS:
       return <img src={EventPeriodStarts} alt="Period Starts" />;
-    case EVENT_LOGO_TYPE.PROGRAM_PREIOD_ENDS:
+    case EVENT_LOGO_TYPE.PROGRAM_PERIOD_ENDS:
       return <img src={EventPeriodEnds} alt="Period ends" />;
     case EVENT_LOGO_TYPE.INVESTOR_INVEST:
     case EVENT_LOGO_TYPE.MANAGER_INVEST:

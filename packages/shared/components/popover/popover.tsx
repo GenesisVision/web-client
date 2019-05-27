@@ -170,6 +170,7 @@ interface OwnProps {
   noPadding?: boolean;
   disableBackdropClick?: boolean;
   className?: string;
+  fixed?: boolean;
 }
 interface StateProps {
   scrollTop: number;

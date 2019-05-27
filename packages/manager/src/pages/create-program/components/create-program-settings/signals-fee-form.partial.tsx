@@ -61,7 +61,7 @@ const SignalsFeeFormPartial: FunctionComponent<
           component={GVTextField}
           InputComponent={NumberFormat}
           autoComplete="off"
-          decimalScale={4}
+          decimalScale={2}
           isAllowed={allowValuesNumberFormat()}
         />
         <Hint

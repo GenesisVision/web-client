@@ -27,11 +27,11 @@ interface Props {
   isAuthenticated: boolean;
 }
 
-class ManagerFunds extends React.Component<Props & InjectedTranslateProps> {
-  fetchManagerFunds: GetItemsFuncType = filters => {
-    const { managerId } = this.props;
-    return fetchManagerFunds({ ...filters, managerId });
-  };
+class _ManagerFunds extends React.PureComponent<
+  Props & InjectedTranslateProps
+> {
+  fetchManagerFunds: GetItemsFuncType = filters =>
+    fetchManagerFunds({ ...filters, managerId: this.props.managerId });
 
   toggleFavorite: TableToggleFavoriteType = (asset, updateRow) => () => {
     const isFavorite = asset.personalDetails.isFavorite;
@@ -74,4 +74,5 @@ class ManagerFunds extends React.Component<Props & InjectedTranslateProps> {
   }
 }
 
-export default translate()(ManagerFunds);
+const ManagerFunds = translate()(_ManagerFunds);
+export default ManagerFunds;

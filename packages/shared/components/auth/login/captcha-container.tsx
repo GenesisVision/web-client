@@ -63,7 +63,11 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
               method,
               type
             });
-            this.setState({ pow: undefined, isSubmit: false });
+            this.setState({
+              pow: undefined,
+              prefix: undefined,
+              isSubmit: false
+            });
           }
           break;
         default:

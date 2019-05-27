@@ -1,3 +1,4 @@
+import { DashboardChartValue } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -7,6 +8,7 @@ import {
   PROFITABILITY_VARIANT
 } from "shared/components/profitability/profitability.helper";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -45,25 +47,20 @@ interface IChangeProps {
 
 const _DashboardPortfolioChartStat: React.FC<
   IDashboardPortfolioChartStatProps
-> = ({
-  t,
-  currency,
-  value,
-  valueCurrency,
-  changePercent,
-  changeValue,
-  changeValueCurrency
-}) => (
+> = ({ t, portfolioChartData, currency }) => (
   <div className="dashboard-portfolio-chart-stat">
     <StatisticItem
       big
       accent
       label={t("investor.dashboard-page.chart-section.stats.value")}
-      equivalent={formatCurrencyValue(valueCurrency, currency)}
+      equivalent={formatCurrencyValue(
+        portfolioChartData.valueCurrency,
+        currency
+      )}
       equivalentCurrency={currency}
     >
       <NumberFormat
-        value={formatCurrencyValue(value, "GVT")}
+        value={formatCurrencyValue(portfolioChartData.value, "GVT")}
         thousandSeparator={" "}
         displayType="text"
         suffix={" GVT"}
@@ -71,25 +68,27 @@ const _DashboardPortfolioChartStat: React.FC<
     </StatisticItem>
     <StatisticItem
       label={t("investor.dashboard-page.chart-section.stats.change")}
-      equivalent={formatCurrencyValue(changeValueCurrency, currency)}
+      equivalent={formatCurrencyValue(
+        portfolioChartData.changeValueCurrency,
+        currency
+      )}
       equivalentCurrency={currency}
       big
     >
-      <Change changeValue={changeValue} changePercent={changePercent} />
+      <Change
+        changeValue={portfolioChartData.changeValue}
+        changePercent={portfolioChartData.changePercent}
+      />
     </StatisticItem>
   </div>
 );
 
 interface IDashboardPortfolioChartStatProps extends InjectedTranslateProps {
   currency: CurrencyEnum;
-  value: number;
-  valueCurrency: number;
-  changePercent: number;
-  changeValue: number;
-  changeValueCurrency: number;
+  portfolioChartData: DashboardChartValue;
 }
 
 const DashboardPortfolioChartStat = React.memo(
-  translate()(_DashboardPortfolioChartStat)
+  withLoader(translate()(_DashboardPortfolioChartStat))
 );
 export default DashboardPortfolioChartStat;

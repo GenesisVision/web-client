@@ -12,9 +12,10 @@ export class _FacetCardsContainer extends React.PureComponent<
 > {
   render() {
     const { isPending, facets, title, composeFacetUrl } = this.props;
-    if (!facets.length || isPending) return <FacetCardsStub />;
     return (
       <FacetCards
+        condition={!!facets.length && !isPending}
+        loader={<FacetCardsStub />}
         title={title}
         facets={facets}
         composeFacetUrl={composeFacetUrl}

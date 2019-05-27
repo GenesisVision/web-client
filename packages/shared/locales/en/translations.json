@@ -363,6 +363,7 @@
   },
   "funds-page": {
     "title": "Funds",
+    "all-funds": "All funds",
     "tabs": {
       "explore": "Explore",
       "favorites": "Favourites"
@@ -519,6 +520,9 @@
       "signal-provider": {
         "title": "Make a signal provider",
         "disclaimer": "Parameters cannot be changed in the future."
+      },
+      "edit-signal-provider": {
+        "title": "Edit a signal provider"
       },
       "change-password": "Change password",
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
@@ -1241,6 +1245,9 @@
         "title": "Portfolio Events",
         "see-all-button": "See All",
         "table-title": "Operations",
+        "success-fee": "Success fee",
+        "gv-commission": "GV commission",
+        "you-ve-earned": "You've earned",
         "empty-events": {
           "text": "The following events will be displayed here",
           "finished": "Fund/Program finished",
@@ -1280,6 +1287,9 @@
   "manager": {
     "program-make-signal": {
       "success-alert-message": "Your program is a signal provider now"
+    },
+    "program-edit-signal": {
+      "success-alert-message": "Program has been edited"
     },
     "app": {
       "title": "Manager Portal: "
@@ -1612,7 +1622,7 @@
         }
       },
       "notifications": {
-        "edit-success": "Successful program editing."
+        "edit-success": "Program has been edited"
       }
     },
     "edit-fund": {

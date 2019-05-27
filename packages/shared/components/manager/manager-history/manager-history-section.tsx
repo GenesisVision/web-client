@@ -23,7 +23,7 @@ interface State {
   fundsCount: number;
 }
 
-class ManagerHistorySection extends React.Component<
+class _ManagerHistorySection extends React.PureComponent<
   Props & InjectedTranslateProps,
   State
 > {
@@ -50,17 +50,17 @@ class ManagerHistorySection extends React.Component<
     return (
       <Surface className="manager-history">
         <div className="manager-history__heading">
-          <h3>Assets</h3>
+          <h3>{t("manager-page.assets")}</h3>
         </div>
         <div className="manager-history__tabs">
           <GVTabs value={tab} onChange={this.handleTabChange}>
             <GVTab
-              value={"programs"}
+              value={MANAGER_HISTORY_TAB.PROGRAMS}
               label={t("manager-page.history.tabs.programs")}
               count={programsCount}
             />
             <GVTab
-              value={"funds"}
+              value={MANAGER_HISTORY_TAB.FUNDS}
               label={t("manager-page.history.tabs.funds")}
               count={fundsCount}
             />
@@ -88,4 +88,5 @@ class ManagerHistorySection extends React.Component<
   }
 }
 
-export default translate()(ManagerHistorySection);
+const ManagerHistorySection = translate()(_ManagerHistorySection);
+export default ManagerHistorySection;
