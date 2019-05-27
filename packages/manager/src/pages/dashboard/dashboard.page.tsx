@@ -1,7 +1,7 @@
 import "shared/components/dashboard/dashboard.scss";
 
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 import { ROLE_ENV } from "shared/constants/constants";
@@ -10,7 +10,7 @@ import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-as
 import DashboardChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 
-const DashboardPage = ({ t }) => {
+const _DashboardPage: React.FC<InjectedTranslateProps> = ({ t }) => {
   const title = t(`${ROLE_ENV}.dashboard-page.title`);
   return (
     <Page title={title}>
@@ -33,4 +33,5 @@ const DashboardPage = ({ t }) => {
   );
 };
 
-export default translate()(DashboardPage);
+const DashboardPage = React.memo(translate()(_DashboardPage));
+export default DashboardPage;

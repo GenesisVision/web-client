@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
-import { FiltersType } from "shared/components/table/components/table.types";
 import {
   ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
@@ -23,10 +22,13 @@ import {
 import FundsTable from "./funds-table";
 
 interface OwnProps {
-  isLocationChanged?(location: Location): boolean;
   defaultFilters?: any;
-  filters: FiltersType;
   title?: string;
+}
+
+interface MergeProps {
+  isLocationChanged: (location: Location) => boolean;
+  filters: { [keys: string]: any };
 }
 
 interface StateProps {
@@ -48,6 +50,7 @@ interface DispatchProps {
 
 interface Props
   extends OwnProps,
+    MergeProps,
     StateProps,
     DispatchProps,
     RouteComponentProps {}
@@ -119,7 +122,7 @@ const mergeProps = (
   stateProps: StateProps,
   dispatchProps: DispatchProps,
   ownProps: RouteComponentProps
-) => {
+): StateProps & DispatchProps & RouteComponentProps & MergeProps => {
   const { location } = ownProps;
   const isLocationChanged = (prevLocation: Location) => {
     return location.key !== prevLocation.key;

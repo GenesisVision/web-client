@@ -3,7 +3,7 @@ import apiReducerFactory, {
   IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 
-import { MANAGER_PROFILE } from "../actions/manager.actions";
+const MANAGER_PROFILE = "MANAGER_PROFILE";
 
 export type ManagerState = IApiState<ManagerProfile>;
 

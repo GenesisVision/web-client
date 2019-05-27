@@ -1,10 +1,9 @@
-import React from "react";
+import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import FundsFacetPage from "shared/components/funds/funds-facet/funds-facet.page";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import PrivateRoute from "shared/components/private-route/private-route";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
-import replaceParams from "shared/utils/replace-params";
 
 import FundDetailsPage from "./fund-details/fund-details.page";
 import FundsPage from "./funds/funds.page";
@@ -23,12 +22,7 @@ export const FUNDS_TAB_ROUTE = `${FUNDS_ROUTE}/:tab`;
 export const FUNDS_EXPLORE_TAB_ROUTE = `${FUNDS_ROUTE}/:tab(${FUNDS_EXPLORE_TAB_NAME})`;
 export const FUNDS_FAVORITES_TAB_ROUTE = `${FUNDS_ROUTE}/:tab(${FUNDS_FAVORITES_TAB_NAME})`;
 
-export const composeFundsDetailsUrl = slugUrl =>
-  replaceParams(FUND_DETAILS_ROUTE, {
-    [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
-  });
-
-const FundsRoutes = () => (
+const FundsRoutes: React.FC = () => (
   <Switch>
     <Route exact path={FUNDS_ROUTE} component={FundsPage} />
     <PrivateRoute path={FUNDS_FAVORITES_TAB_ROUTE} component={FundsPage} />

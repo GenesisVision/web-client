@@ -1,10 +1,9 @@
-import React from "react";
+import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import PrivateRoute from "shared/components/private-route/private-route";
 import ProgramsFacetPage from "shared/components/programs/programs-facet/programs-facet.page";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
-import replaceParams from "shared/utils/replace-params";
 
 import ProgramDetailsPage from "./program-details/program-details.page";
 import ProgramsRatingPage from "./programs-rating/programs-rating.page";
@@ -28,12 +27,7 @@ export const PROGRAMS_FAVORITES_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab(${PROGRAMS_F
 
 export const PROGRAMS_RATING_ROUTE = `${PROGRAMS_ROUTE}/${FACETS}/new_levels`; // temp
 
-export const composeProgramDetailsUrl = slugUrl =>
-  replaceParams(PROGRAM_DETAILS_ROUTE, {
-    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
-  });
-
-const ProgramsRoutes = () => (
+const ProgramsRoutes: React.FC = () => (
   <Switch>
     <Route exact path={PROGRAMS_ROUTE} component={ProgramsPage} />
     <PrivateRoute

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import PrivateRoute from "shared/components/private-route/private-route";
@@ -27,7 +27,7 @@ export const PROGRAMS_FAVORITES_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab(${PROGRAMS_F
 
 export const PROGRAMS_RATING_ROUTE = `${PROGRAMS_ROUTE}/${FACETS}/new_levels`; // temp
 
-const ProgramsRoutes = () => (
+const ProgramsRoutes: React.FC = () => (
   <Switch>
     <Route exact path={PROGRAMS_ROUTE} component={ProgramsPage} />
     <PrivateRoute
