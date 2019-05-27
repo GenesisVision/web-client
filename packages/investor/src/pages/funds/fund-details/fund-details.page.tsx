@@ -15,7 +15,7 @@ import { IApiState } from "shared/reducers/api-reducer/api-reducer";
 
 import FundControls from "./components/fund-controls";
 
-const _FundDetailsPage: React.FC<StateProps> = ({ events }) => {
+const _FundDetailsPage: React.FC<Props> = ({ events }) => {
   const descriptionSection = {
     FundWithdrawalContainer: FundWithdrawalContainer,
     FundControls: FundControls
@@ -56,11 +56,15 @@ const mapStateToProps = (state: InvestorRootState): StateProps => {
   return { events: eventsSelector(state) };
 };
 
+interface Props extends OwnProps, StateProps {}
+
+interface OwnProps {}
+
 interface StateProps {
   events: SelectFilterValue<string>[];
 }
 
-const FundDetailsPage = compose(
+const FundDetailsPage = compose<React.ComponentType<OwnProps>>(
   React.memo,
   connect(mapStateToProps)
 )(_FundDetailsPage);
