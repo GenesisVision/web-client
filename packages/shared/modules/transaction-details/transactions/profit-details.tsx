@@ -6,7 +6,7 @@ import { TransactionDetailsProps } from "shared/modules/transaction-details/tran
 import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
 import { formatValue } from "shared/utils/formatter";
 
-import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constans";
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
 
 const ProfitDetails: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
@@ -37,7 +37,7 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = props => {
               TRANSACTIONS_DECIMAL_SCALE
             )}
             prefix={" ("}
-            suffix={` ${data.currency})`}
+            suffix={` ${data.programDetails.successFeeCurrency})`}
             displayType="text"
           />
         </StatisticItem>
