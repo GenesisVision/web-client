@@ -72,10 +72,10 @@ export interface ICloseFundFormValues {
   [FIELDS.twoFactorCode]: string;
 }
 
-const tfaValidator = (msg: string) =>
+const tfaValidator = (t: (msg: string) => string) =>
   string()
     .trim()
-    .matches(/^\d{6}$/, msg);
+    .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 
 const CloseFundForm = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
   React.memo,
@@ -87,10 +87,10 @@ const CloseFundForm = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
     validationSchema: ({ t, twoFactorEnabled }: Props) =>
       object().shape({
         [FIELDS.twoFactorCode]: twoFactorEnabled
-          ? tfaValidator(
-              t("wallet-withdraw.validation.two-factor-6digits")
-            ).required(t("wallet-withdraw.validation.two-factor-required"))
-          : tfaValidator(t("wallet-withdraw.validation.two-factor-6digits"))
+          ? tfaValidator(t).required(
+              t("wallet-withdraw.validation.two-factor-required")
+            )
+          : tfaValidator(t)
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
