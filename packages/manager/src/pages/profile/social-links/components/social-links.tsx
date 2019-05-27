@@ -2,13 +2,12 @@ import "./social-links.scss";
 
 import * as React from "react";
 
-import { ReactComponent as Default } from "../media/default.svg";
-import { ReactComponent as Facebook } from "../media/facebook.svg";
-import { ReactComponent as LinkedIn } from "../media/linkedin.svg";
-import { ReactComponent as Twitter } from "../media/twitter.svg";
-import { ReactComponent as YouTube } from "../media/youtube.svg";
-import { SocialLink, fetchSocialLinks } from "../services/social-links.service";
-import SocialLinkLayout from "./social-link/social-link-layout";
+import {
+  SocialLink,
+  fetchSocialLinks,
+  updateSocialLink
+} from "../services/social-links.service";
+import SocialLinkForm from "./social-link/social-link-form";
 
 class SocialLinks extends React.PureComponent<{}, State> {
   state: State = {
@@ -16,16 +15,31 @@ class SocialLinks extends React.PureComponent<{}, State> {
   };
 
   componentDidMount() {
+    this.updateSocialLinks();
+  }
+
+  handleSubmitSocialLink = (id: string, value: string) => {
+    return updateSocialLink(id, value).then(() => {
+      this.updateSocialLinks();
+    });
+  };
+
+  updateSocialLinks = () => {
     fetchSocialLinks().then(data => {
       this.setState({ socialLinks: data });
     });
-  }
+  };
 
   render() {
+    const { socialLinks } = this.state;
     return (
       <div className="social-links">
-        {this.state.socialLinks.map(x => (
-          <SocialLinkLayout key={x.id} socialLink={x} />
+        {socialLinks.map(x => (
+          <SocialLinkForm
+            key={x.id}
+            socialLink={x}
+            onSubmit={this.handleSubmitSocialLink}
+          />
         ))}
       </div>
     );

@@ -4,6 +4,9 @@
   align-items: center;
 
   .social-input {
+    &__wrapper {
+      min-width: 250px;
+    }
     &__adornment,
     &__label {
       color: #8d9397;
