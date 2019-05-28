@@ -9,12 +9,13 @@ import {
   bindActionCreators,
   compose
 } from "redux";
+import { ASSET } from "shared/constants/constants";
 import AssetNotificationsGeneral from "shared/modules/asset-notifications/asset-notifications-general";
 import { NOTIFICATIONS } from "shared/modules/asset-notifications/asset-notifications.types";
 import { AuthRootState } from "shared/utils/types";
 
+import NotificationAssets from "./notification-assets";
 import NotificationManagers from "./notification-managers";
-import NotificationPrograms from "./notification-programs";
 import { NotificationSettingsState } from "./reducers/notification-settings.reducers";
 import {
   addNotification,
@@ -47,9 +48,15 @@ class _NotificationSettingsContainer extends React.PureComponent<Props> {
           addNotification={addNotification}
           removeNotification={removeNotification}
         />
-        <NotificationPrograms
+        <NotificationAssets
           condition={this.props.settingsProgram.length > 0}
           settings={this.props.settingsProgram}
+          asset={ASSET.PROGRAM}
+        />
+        <NotificationAssets
+          condition={this.props.settingsFund.length > 0}
+          settings={this.props.settingsFund}
+          asset={ASSET.FUND}
         />
         <NotificationManagers
           condition={this.props.settingsManager.length > 0}
