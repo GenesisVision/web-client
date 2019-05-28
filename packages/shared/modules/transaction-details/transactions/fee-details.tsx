@@ -3,8 +3,9 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import filesService from "shared/services/file-service";
-import { CURRENCY_FRACTIONS } from "shared/utils/currency-converter";
 import { formatValue } from "shared/utils/formatter";
+
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
 
 const InvestingTransaction: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
@@ -39,8 +40,7 @@ const InvestingTransaction: React.FC<TransactionDetailsProps> = props => {
           </div>
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.investment.amount`)} big>
-          {formatValue(data.amount, CURRENCY_FRACTIONS(data.currency))}{" "}
-          {data.currency}
+          {formatValue(data.amount, TRANSACTIONS_DECIMAL_SCALE)} {data.currency}
         </StatisticItem>
       </div>
     </React.Fragment>

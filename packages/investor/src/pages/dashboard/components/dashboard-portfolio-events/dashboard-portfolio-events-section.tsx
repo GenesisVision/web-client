@@ -23,12 +23,11 @@ class DashboardPortfolioEventsSection extends React.PureComponent<Props> {
     const { title, isPending, data } = this.props;
     return (
       <DashboardPortfolioEvents
-        condition={!!data}
         fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
         title={title}
         isPending={isPending}
-        data={data!}
-        eventView={({ event }) => <DashboardPortfolioEvent event={event} />}
+        data={data}
+        eventView={DashboardPortfolioEvent}
       />
     );
   }

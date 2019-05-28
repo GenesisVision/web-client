@@ -121,11 +121,14 @@ class ProgramDetailsDescriptionMain extends Component<
           </div>
         </div>
         <div className="program-details-description__settings">
-          {ChangePasswordTradingAccount && isOwnProgram && (
-            <ChangePasswordTradingAccount
-              programDescription={programDescription}
-            />
-          )}
+          {ChangePasswordTradingAccount &&
+            isOwnProgram &&
+            personalDetails &&
+            personalDetails.canChangePassword && (
+              <ChangePasswordTradingAccount
+                programDescription={programDescription}
+              />
+            )}
           <DetailsFavorite
             id={programDescription.id}
             isFavorite={personalDetails && personalDetails.isFavorite}

@@ -1,8 +1,30 @@
+import { CancelablePromise, ManagerProfile } from "gv-api-web";
+import { Dispatch } from "redux";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { IDataModel } from "shared/constants/constants";
 import fundsApi from "shared/services/api-client/funds-api";
+import ManagerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
+import getParams from "shared/utils/get-params";
+import { TGetState } from "shared/utils/types";
+
+import {
+  MANAGER_DETAILS_ROUTE,
+  MANAGER_SLUG_URL_PARAM_NAME
+} from "../manager.container";
+
+export const fetchManagerProfile = () => (
+  dispatch: Dispatch,
+  getState: TGetState
+): CancelablePromise<ManagerProfile> => {
+  const { router } = getState();
+  const managerSlugUrl = getParams(
+    router.location.pathname,
+    MANAGER_DETAILS_ROUTE
+  )[MANAGER_SLUG_URL_PARAM_NAME];
+  return ManagerApi.v10ManagerByIdGet(managerSlugUrl);
+};
 
 export const fetchManagerPrograms = (
   filter: FilteringType

@@ -24,17 +24,6 @@ export const fetchBrokers = (): CancelablePromise<Broker[]> =>
     return [gvBroker, ...data.brokers];
   });
 
-export const fetchMinDepositsAmount = (
-  brokerTradingAccount: string
-): CancelablePromise<{
-  [key: string]: number;
-}> =>
-  managerApi
-    .v10ManagerProgramsInvestmentAmountGet(authService.getAuthArg(), {
-      brokerTradingAccount
-    })
-    .then(investmentAmount => investmentAmount.minimumDepositsAmount);
-
 export const createProgram = (
   createProgramData: Pick<
     ICreateProgramSettingsFormValues,

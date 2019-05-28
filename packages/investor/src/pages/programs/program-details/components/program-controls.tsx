@@ -20,7 +20,7 @@ const ProgramControls: React.FC<IProgramControlsProps> = ({
           redirectToLogin={redirectToLogin}
         />
       </div>
-      {isAvailableFollowingTrades && isAuthenticated ? (
+      {/* {isAvailableFollowingTrades && isAuthenticated ? (
         <div className="program-details-description__col program-details-description__col--small-size">
           <SignalProviderControls
             programDescription={programDescription}
@@ -28,7 +28,7 @@ const ProgramControls: React.FC<IProgramControlsProps> = ({
             redirectToLogin={redirectToLogin}
           />
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };
