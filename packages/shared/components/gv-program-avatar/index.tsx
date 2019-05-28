@@ -40,11 +40,8 @@ class GVProgramAvatar extends React.Component<
     };
   }
 
-  componentDidUpdate(
-    prevProps: GVProgramAvatarProps,
-    prevState: GVProgramAvatarState
-  ) {
-    if (prevState.errored) {
+  componentDidUpdate(prevProps: GVProgramAvatarProps) {
+    if (prevProps.url !== this.props.url) {
       this.setState({ errored: false });
     }
   }
