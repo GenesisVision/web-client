@@ -97,12 +97,12 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
                 count={eventsCount}
                 visible={isAuthenticated && isInvested}
               />
-              {/* <GVTab
+              <GVTab
                 value={TABS.SUBSCRIBERS}
                 label={t("program-details-page.history.tabs.subscriptions")}
                 count={3}
                 visible={isAuthenticated && isSignalProgram && isManager}
-              /> */}
+              />
             </GVTabs>
           </div>
         </div>
