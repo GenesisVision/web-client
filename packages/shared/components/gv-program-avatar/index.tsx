@@ -39,6 +39,13 @@ class GVProgramAvatar extends React.Component<
       errored: false
     };
   }
+
+  componentDidUpdate(prevProps: GVProgramAvatarProps) {
+    if (prevProps.url !== this.props.url) {
+      this.setState({ errored: false });
+    }
+  }
+
   handleError = (e: any) => {
     e.target.onerror = null;
     this.setState({ errored: true });
