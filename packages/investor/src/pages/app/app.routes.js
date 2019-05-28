@@ -1,9 +1,6 @@
 import DashboardRoutes, {
   DASHBOARD_ROUTE
 } from "pages/dashboard/dashboard.routes";
-import NotificationRoutes, {
-  NOTIFICATIONS_ROUTE
-} from "pages/notifications/notifications.routes";
 import ProfileRoutes from "pages/profile/profile.routes";
 import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import WalletRoutes from "pages/wallet/wallet.routes";
@@ -24,6 +21,9 @@ import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes"
 
 import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
 import AppLayout from "./components/app-layout/app-layout";
+import NotificationRoutes, {
+  NOTIFICATIONS_ROUTE
+} from "shared/components/notifications/notifications.routes";
 
 export const HOME_ROUTE = "/";
 
