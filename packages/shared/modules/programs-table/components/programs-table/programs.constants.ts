@@ -1,6 +1,6 @@
 import {
+  DATA_RANGE_FILTER_TYPES,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes,
   SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME,
   SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -11,12 +11,8 @@ import {
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { programsTagFilter } from "shared/components/table/components/filtering/tag-filter/tag-filter.helpers";
-import {
-  FILTER_TYPE,
-  FilterType
-} from "shared/components/table/helpers/filtering.helpers";
-
-import { IComposeDefaultFilter } from "../../../../components/table/components/table.types";
+import { IComposeDefaultFilter } from "shared/components/table/components/table.types";
+import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
 export const LEVEL_FILTER_NAME = "level";
 export const CURRENCY_FILTER_NAME = "programCurrency";
@@ -61,7 +57,7 @@ export const programsDateRangeFilter = {
     ),
     defaultValue: {
       ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-      type: DateRangeFilterTypes.lastMonth
+      type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
     }
   }),
   validate: validateDateRange

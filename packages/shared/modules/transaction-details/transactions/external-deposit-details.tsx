@@ -7,7 +7,9 @@ import Status from "shared/components/status/status";
 import Copy from "shared/decorators/with-copy";
 import ArrowIcon from "shared/media/arrow-up-thin.svg";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatValue } from "shared/utils/formatter";
+
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
 
 const ExternalDeposit: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;
@@ -57,7 +59,7 @@ const ExternalDeposit: React.FC<TransactionDetailsProps> = props => {
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.external.amount`)} big>
           <NumberFormat
-            value={formatCurrencyValue(data.amount, data.currency)}
+            value={formatValue(data.amount, TRANSACTIONS_DECIMAL_SCALE)}
             suffix={` ${data.currency}`}
             allowNegative={true}
             displayType="text"

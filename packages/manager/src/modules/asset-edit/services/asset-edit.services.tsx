@@ -27,7 +27,7 @@ export const editAsset = (
     .then(response => {
       data = {
         ...data,
-        logo: response || data.logo.id
+        logo: response || data.logo.src
       };
       return editMethod(id, authorization, { model: data as ProgramUpdate }); //TODO ask backend to change ProgramUpdate logo type
     })

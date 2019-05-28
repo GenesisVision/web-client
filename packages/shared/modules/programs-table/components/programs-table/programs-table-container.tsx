@@ -31,11 +31,14 @@ import ProgramsTable from "./programs-table";
 import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
 
 interface OwnProps {
-  isLocationChanged(location: Location): boolean;
-  defaultFilters: any;
   showSwitchView: boolean;
-  filters: { [keys: string]: any };
   title: string;
+  defaultFilters?: any;
+}
+
+interface MergeProps {
+  isLocationChanged: (location: Location) => boolean;
+  filters: { [keys: string]: any };
 }
 
 interface StateProps {
@@ -67,6 +70,7 @@ interface DispatchProps {
 
 interface Props
   extends OwnProps,
+    MergeProps,
     StateProps,
     DispatchProps,
     InjectedTranslateProps,
@@ -121,36 +125,34 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
           ...filters.filtering
         }}
         updateFilter={service.programsChangeFilter}
-        renderFilters={(updateFilter, filtering: FilteringType) => {
-          return (
-            <React.Fragment>
-              <TagFilter
-                name={TAG_FILTER_NAME}
-                value={tagsFilterValue(filtering[TAG_FILTER_NAME])}
-                values={programTags}
-                onChange={updateFilter}
-              />
-              <LevelFilter
-                name={LEVEL_FILTER_NAME}
-                value={filtering[LEVEL_FILTER_NAME] as LevelFilterType} //TODO fix filtering types
-                onChange={updateFilter}
-              />
-              <SelectFilter
-                name={CURRENCY_FILTER_NAME}
-                label="Currency"
-                value={filtering[CURRENCY_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
-                values={composeCurrencyFilter(currencies)}
-                onChange={updateFilter}
-              />
-              <DateRangeFilter
-                name={DATE_RANGE_FILTER_NAME}
-                value={filtering[DATE_RANGE_FILTER_NAME]}
-                onChange={updateFilter}
-                startLabel={t("filters.date-range.program-start")}
-              />
-            </React.Fragment>
-          );
-        }}
+        renderFilters={(updateFilter, filtering: FilteringType) => (
+          <>
+            <TagFilter
+              name={TAG_FILTER_NAME}
+              value={tagsFilterValue(filtering[TAG_FILTER_NAME])}
+              values={programTags}
+              onChange={updateFilter}
+            />
+            <LevelFilter
+              name={LEVEL_FILTER_NAME}
+              value={filtering[LEVEL_FILTER_NAME] as LevelFilterType} //TODO fix filtering types
+              onChange={updateFilter}
+            />
+            <SelectFilter
+              name={CURRENCY_FILTER_NAME}
+              label="Currency"
+              value={filtering[CURRENCY_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
+              values={composeCurrencyFilter(currencies)}
+              onChange={updateFilter}
+            />
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering[DATE_RANGE_FILTER_NAME]}
+              onChange={updateFilter}
+              startLabel={t("filters.date-range.program-start")}
+            />
+          </>
+        )}
         paging={{
           totalPages: filters.pages,
           currentPage: filters.page,
@@ -200,7 +202,7 @@ const mergeProps = (
   stateProps: StateProps,
   dispatchProps: DispatchProps,
   ownProps: RouteComponentProps
-) => {
+): StateProps & DispatchProps & RouteComponentProps & MergeProps => {
   const { location } = ownProps;
   const isLocationChanged = (prevLocation: Location) => {
     return location.key !== prevLocation.key;

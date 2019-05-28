@@ -70,7 +70,8 @@ class SignalProviderControls extends Component<
         <SignalProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
           {programDescription.personalProgramDetails &&
-          programDescription.personalProgramDetails.isFollowSignals ? (
+          programDescription.personalProgramDetails.signalSubscription
+            .hasSignalAccount ? (
             <GVButton
               className="program-details-description__invest-btn"
               onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
