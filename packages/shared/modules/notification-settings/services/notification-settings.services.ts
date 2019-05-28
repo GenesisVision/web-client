@@ -1,20 +1,14 @@
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import {
-  TAddNotification,
-  TRemoveNotification
-} from "shared/modules/asset-notifications/asset-notifications.types";
+import { TAddNotification, TRemoveNotification } from "shared/modules/asset-notifications/asset-notifications.types";
 import {
   addNotificationSettingAction,
-  addNotificationSettingsAction,
   fetchNotificationSettingsAction,
   removeNotificationSettingAction
 } from "shared/modules/notification-settings/actions/notification-settings.actions";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 export const fetchNotificationSettings = () => (dispatch: MiddlewareDispatch) =>
-  dispatch(fetchNotificationSettingsAction()).then(data =>
-    dispatch(addNotificationSettingsAction(data.value))
-  );
+  dispatch(fetchNotificationSettingsAction());
 
 export const removeNotification: TRemoveNotification = (
   { id },

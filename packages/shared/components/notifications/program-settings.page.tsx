@@ -1,9 +1,10 @@
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { RouteComponentProps } from "react-router";
 import Page from "shared/components/page/page";
 import ProgramNotificationsContainer from "shared/modules/program-notifications/program-notifications-container";
 
-const ProgramNotificationPage = ({ t, match }) => {
+const _ProgramNotificationPage: React.FC<Props> = ({ t, match }) => {
   const { id } = match.params;
   return (
     <Page title={t("notifications-page.program.title")}>
@@ -17,4 +18,13 @@ const ProgramNotificationPage = ({ t, match }) => {
   );
 };
 
-export default translate()(ProgramNotificationPage);
+interface Props extends RouteComponentProps<Params>, InjectedTranslateProps {}
+
+interface Params {
+  id: string;
+}
+
+const ProgramNotificationPage = React.memo(
+  translate()(_ProgramNotificationPage)
+);
+export default ProgramNotificationPage;

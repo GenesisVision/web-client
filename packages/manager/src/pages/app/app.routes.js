@@ -22,13 +22,11 @@ import WalletTotalPage, {
 } from "shared/components/wallet/wallet.routes";
 
 import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
-import NotificationRoutes, {
-  NOTIFICATIONS_ROUTE
-} from "../notifications/notifications.routes";
 import AppLayout from "./components/app-layout/app-layout";
 import ManagerContainer, {
   MANAGER_DETAILS_ROUTE_REGEXP
 } from "shared/components/manager/manager.container";
+import NotificationRoutes, { NOTIFICATIONS_ROUTE } from "shared/components/notifications/notifications.routes";
 
 export const HOME_ROUTE = "/";
 
