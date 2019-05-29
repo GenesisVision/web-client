@@ -1,10 +1,8 @@
 import { Dispatch } from "redux";
 import { updateAccountSettings } from "shared/actions/account-settings-actions";
-import { ActionType } from "shared/utils/types";
+import { ActionType, CurrencyEnum } from "shared/utils/types";
 
-import { CURRENCY_VALUES_ENUM } from "../currency-select.constants";
-
-export const updateCurrency = (currency: CURRENCY_VALUES_ENUM) => (
+export const updateCurrency = (currency: CurrencyEnum) => (
   dispatch: Dispatch<ActionType>
 ) => {
   dispatch(updateAccountSettings(currency));
