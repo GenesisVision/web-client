@@ -103,7 +103,7 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
 }
 
 const mapStateToProps = (state: InvestorRootState): StateProps => {
-  const { info } = state.profileHeader;
+  const { profileHeader } = state;
   const { portfolioChartData, inRequestsData } = state.dashboard;
   const { currency } = state.accountSettings;
   return {
@@ -112,7 +112,7 @@ const mapStateToProps = (state: InvestorRootState): StateProps => {
     inRequests: inRequestsData.data,
     inRequestsIsPending: inRequestsData.isPending,
     currency,
-    isNewUser: info.data ? info.data.isNewUser : false
+    isNewUser: profileHeader.data ? profileHeader.data.isNewUser : false
   };
 };
 
