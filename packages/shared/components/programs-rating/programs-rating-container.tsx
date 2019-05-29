@@ -89,9 +89,8 @@ export interface INavigateTab extends LevelUpData {
 }
 
 interface OwnProps {
-  id: string;
-  routes: { [keys: string]: any };
   title: string;
+  id?: string;
 }
 
 interface StateProps {
