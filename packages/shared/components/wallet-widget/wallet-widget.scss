@@ -7,6 +7,10 @@
   align-items: center;
   color: white;
 
+  &__loader {
+    display: flex;
+  }
+
   &__wallet {
     font-size: $font-size-common;
     display: flex;
