@@ -1,4 +1,7 @@
-import { ProfileFullViewModel } from "gv-api-web";
+import {
+  ProfileFullViewModel,
+  UpdatePersonalDetailViewModel
+} from "gv-api-web";
 import pickBy from "lodash.pickby";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -25,7 +28,9 @@ class _ProfileContainer extends React.PureComponent<Props, State> {
   };
 
   handleEdit = (values: any, setSubmitting: SetSubmittingType) => {
-    const model = pickBy(values, str => Boolean(str));
+    const model = pickBy(values, str =>
+      Boolean(str)
+    ) as UpdatePersonalDetailViewModel;
     this.setState({ isPending: true });
     profileApi
       .v10ProfilePersonalUpdatePost(authService.getAuthArg(), {

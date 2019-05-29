@@ -1,9 +1,9 @@
 import "./social-links.scss";
 
+import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 
 import {
-  SocialLink,
   fetchSocialLinks,
   updateSocialLink
 } from "../services/social-links.service";
@@ -26,7 +26,7 @@ class SocialLinks extends React.PureComponent<{}, State> {
 
   updateSocialLinks = () => {
     fetchSocialLinks().then(data => {
-      this.setState({ socialLinks: data });
+      this.setState({ socialLinks: data.socialLinks });
     });
   };
 
@@ -49,5 +49,5 @@ class SocialLinks extends React.PureComponent<{}, State> {
 export default SocialLinks;
 
 interface State {
-  socialLinks: SocialLink[];
+  socialLinks: SocialLinkViewModel[];
 }
