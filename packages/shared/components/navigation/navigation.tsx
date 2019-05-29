@@ -21,7 +21,7 @@ interface INavigationState {
   isOpen: boolean;
 }
 
-class Navigation extends React.Component<
+class Navigation extends React.PureComponent<
   INavigationProps & InjectedTranslateProps,
   INavigationState
 > {
