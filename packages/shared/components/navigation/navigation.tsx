@@ -17,40 +17,25 @@ interface INavigationProps {
   className?: string;
 }
 
-interface INavigationState {
-  isOpen: boolean;
-}
+const _Navigation: React.FC<INavigationProps & InjectedTranslateProps> = ({
+  t,
+  className
+}) => (
+  <>
+    <div className={classNames("navigation", className)}>
+      <NavigationItem icon={<GVLogo />} href={HOME_ROUTE} />
+      <NavigationItem icon={<DashboardIcon primary />} href={DASHBOARD_ROUTE}>
+        {t("navigation.dashboard")}
+      </NavigationItem>
+      <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
+        {t("navigation.programs")}
+      </NavigationItem>
+      <NavigationItem icon={<FundsIcon primary />} href={FUNDS_ROUTE}>
+        {t("navigation.funds")}
+      </NavigationItem>
+    </div>
+  </>
+);
 
-class Navigation extends React.PureComponent<
-  INavigationProps & InjectedTranslateProps,
-  INavigationState
-> {
-  state = {
-    isOpen: false
-  };
-
-  render() {
-    const { t, className } = this.props;
-    return (
-      <React.Fragment>
-        <div className={classNames("navigation", className)}>
-          <NavigationItem icon={<GVLogo />} href={HOME_ROUTE} />
-          <NavigationItem
-            icon={<DashboardIcon primary />}
-            href={DASHBOARD_ROUTE}
-          >
-            {t("navigation.dashboard")}
-          </NavigationItem>
-          <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
-            {t("navigation.programs")}
-          </NavigationItem>
-          <NavigationItem icon={<FundsIcon primary />} href={FUNDS_ROUTE}>
-            {t("navigation.funds")}
-          </NavigationItem>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
-
-export default translate()(Navigation);
+const Navigation = translate()(_Navigation);
+export default Navigation;
