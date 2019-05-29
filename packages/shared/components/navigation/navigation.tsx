@@ -37,5 +37,5 @@ const _Navigation: React.FC<INavigationProps & InjectedTranslateProps> = ({
   </>
 );
 
-const Navigation = React.memo(translate()(_Navigation));
+const Navigation = translate()(_Navigation);
 export default Navigation;

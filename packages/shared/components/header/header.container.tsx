@@ -87,6 +87,8 @@ interface OwnProps {}
 
 const HeaderContainer = connect<StateProps, DispatchProps, OwnProps, RootState>(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  null,
+  { pure: false }
 )(_HeaderContainer);
 export default HeaderContainer;

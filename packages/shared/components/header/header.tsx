@@ -19,7 +19,7 @@ import { ProfileWidgetLoader } from "shared/components/profile-widget/profile-wi
 import WalletWidgetContainer from "shared/components/wallet-widget/wallet-widget-container";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
 
-class _Header extends React.PureComponent<Props, State> {
+class _Header extends React.Component<Props, State> {
   state = {
     isOpenNavigation: false
   };
