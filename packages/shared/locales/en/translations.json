@@ -740,11 +740,22 @@
     "deposit": "Deposit",
     "withdraw": "Withdraw",
     "transfer": "Transfer",
+    "tooltip": {
+      "total-balance": "The total value your funds on the platform.",
+      "available": "Your funds that are currently available for investment.",
+      "invested": "The funds that are currently invested in programs and / or funds. Invested GVT shows investment in funds. Invested USDT includes Forex.",
+      "pending": "Funds that are still being processed.",
+      "transactions": "Operation of funds transferring to/from or between wallets.",
+      "deposit": "A transaction involving a transfer of funds to another party.",
+      "withdrawals": "A transaction of taking funds out of the account.",
+      "transfer": "A transaction between accounts."
+    },
     "tabs": {
       "wallets": "My wallets",
       "copytrading": "Copytrading accounts",
       "transactions": "Transactions",
-      "external": "Deposit/withdrawals"
+      "deposit": "Deposit/",
+      "withdrawals": "withdrawals"
     },
     "transactions": {
       "title": "Transactions",
