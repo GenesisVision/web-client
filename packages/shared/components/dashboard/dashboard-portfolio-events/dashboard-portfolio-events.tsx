@@ -19,13 +19,7 @@ import withLoader from "shared/decorators/with-loader";
 import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
 
 const DASHBOARD_EVENTS_STYLE = {
-  height: "100%",
-  minHeight: "450px",
-  top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
-  position: "absolute"
+  height: "100%"
 };
 
 const _Events: React.FC<IEventsProps> = ({
