@@ -5,3 +5,8 @@
 .social-links {
   @include adaptive-padding(top, $padding-medium);
 }
+
+.social-links-loader {
+  display: flex;
+  flex-direction: column;
+}

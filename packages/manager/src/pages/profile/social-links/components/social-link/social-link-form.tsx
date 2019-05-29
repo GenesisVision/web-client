@@ -11,7 +11,7 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { object, string } from "yup";
 
-import SocialLink from "../../media/default/social-link.svg";
+import SocialLink from "../../media/social-link.svg";
 
 const _SocialLinkForm: React.FC<Props> = ({
   t,
