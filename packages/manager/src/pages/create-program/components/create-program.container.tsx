@@ -222,7 +222,7 @@ const mapStateToProps = (state: ManagerRootState): StateProps => {
     wallets: state.wallet.info.data
       ? state.wallet.info.data.wallets
       : undefined,
-    headerData: state.profileHeader.info.data,
+    headerData: state.profileHeader.data,
     programsInfo: state.platformData.data
       ? state.platformData.data.programsInfo
       : undefined

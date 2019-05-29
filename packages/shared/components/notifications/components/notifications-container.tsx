@@ -39,8 +39,8 @@ const NotificationsContainer: React.FunctionComponent<Props> = ({
 const mapStateToProps = (props: RootState): StateProps => {
   const { notifications, profileHeader } = props;
   let count = 0;
-  if (profileHeader.info.data) {
-    count = profileHeader.info.data.notificationsCount;
+  if (profileHeader.data) {
+    count = profileHeader.data.notificationsCount;
   }
   return {
     open: notifications.isOpen,

@@ -34,7 +34,7 @@ const _ProfileImageContainer: React.FC<StateProps & DispatchProps> = ({
 };
 
 const mapStateToProps = ({ profileHeader }: RootState): StateProps => {
-  return { headerData: profileHeader.info.data };
+  return { headerData: profileHeader.data };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

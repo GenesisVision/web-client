@@ -22,7 +22,7 @@ class ProgramsRatingPage extends Component {
 }
 
 const mapStateToProps = state => {
-  const { data } = state.profileHeader.info;
+  const { data } = state.profileHeader;
   if (!data) return {};
   return { id: data.id };
 };
