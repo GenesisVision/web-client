@@ -32,6 +32,10 @@
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-common;
     }
+
+    &--tooltip {
+      cursor: help;
+    }
   }
 
   &__value {
@@ -91,5 +95,10 @@
       letter-spacing: 0.3px;
       color: $label-color;
     }
+  }
+
+  &__tooltip {
+    font-size: 13px;
+    max-width: 400px;
   }
 }

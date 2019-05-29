@@ -5,24 +5,9 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import Tooltip from "../tooltip/tooltip";
+import { HORIZONTAL_POPOVER_POS } from "../popover/popover";
 
-enum ITEM {
-  LABEL = "LABEL",
-  VALUE = "VALUE"
-}
-
-export interface IFollowStatisticItemProps {
-  label: string | React.ReactNode;
-  equivalent?: string | number;
-  equivalentCurrency?: string;
-  small?: boolean;
-  big?: boolean;
-  large?: boolean;
-  accent?: boolean;
-  half?: boolean;
-  invert?: boolean;
-  className?: string;
-}
 const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
   invert = false,
   large,
@@ -34,7 +19,8 @@ const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
   half,
   className,
   equivalent,
-  equivalentCurrency
+  equivalentCurrency,
+  tooltipContent
 }) => {
   const generateClasses = (item: ITEM, invert: boolean) => {
     switch (
@@ -49,9 +35,19 @@ const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
         });
       case false:
       default:
-        return "statistics-item__label";
+        return classNames("statistics-item__label", {
+          "statistics-item__label--tooltip": tooltipContent
+        });
     }
   };
+
+  const renderLabel = () => (
+    <div
+      className={"statistics-item__top " + generateClasses(ITEM.LABEL, invert)}
+    >
+      {label}
+    </div>
+  );
 
   return (
     <div
@@ -64,15 +60,20 @@ const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
         className
       )}
     >
-      {label && (
-        <div
-          className={
-            "statistics-item__top " + generateClasses(ITEM.LABEL, invert)
-          }
-        >
-          {label}
-        </div>
-      )}
+      {label ? (
+        tooltipContent && label ? (
+          <Tooltip
+            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+            render={() => (
+              <div className="statistics-item__tooltip">{tooltipContent}</div>
+            )}
+          >
+            {renderLabel()}
+          </Tooltip>
+        ) : (
+          renderLabel()
+        )
+      ) : null}
       <div className={generateClasses(ITEM.VALUE, invert)}>{children}</div>
       {equivalent !== undefined && equivalentCurrency !== undefined ? (
         <div className="statistics-item__equivalent">
@@ -92,3 +93,22 @@ const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
 
 const StatisticItem = withLoader(React.memo(_StatisticItem));
 export default StatisticItem;
+
+enum ITEM {
+  LABEL = "LABEL",
+  VALUE = "VALUE"
+}
+
+export interface IFollowStatisticItemProps {
+  label: string | React.ReactNode;
+  equivalent?: string | number;
+  equivalentCurrency?: string;
+  small?: boolean;
+  big?: boolean;
+  large?: boolean;
+  accent?: boolean;
+  half?: boolean;
+  invert?: boolean;
+  className?: string;
+  tooltipContent?: string;
+}
