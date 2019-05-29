@@ -25,6 +25,7 @@ const _WalletBalanceElements: React.FC<Props> = ({
       currency={currency}
       pieContainer={false}
       className="wallet-balance__statistic-item--total"
+      tooltipContent={t("wallet-page.tooltip.total-balance")}
     />
     <div className="wallet-balance__elements">
       <WalletBalanceElement
@@ -33,13 +34,15 @@ const _WalletBalanceElements: React.FC<Props> = ({
         title={t("wallet-page.available")}
         currency={currency}
         color={$pieAvailableColor}
+        tooltipContent={t("wallet-page.tooltip.available")}
       />
       <WalletBalanceElement
         value={invested}
         totalValue={total}
-        title={t("wallet-page.invested-value")}
+        title={t("wallet-page.invested")}
         currency={currency}
         color={GVColors.$primaryColor}
+        tooltipContent={t("wallet-page.tooltip.invested")}
       />
       <WalletBalanceElement
         value={pending}
@@ -47,6 +50,7 @@ const _WalletBalanceElements: React.FC<Props> = ({
         title={t("wallet-page.pending")}
         currency={currency}
         color={$piePendingColor}
+        tooltipContent={t("wallet-page.tooltip.pending")}
       />
     </div>
   </div>

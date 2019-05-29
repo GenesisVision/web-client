@@ -734,7 +734,7 @@
     "title": "Wallet",
     "wallet": "wallet",
     "total-balance": "Total balance",
-    "invested-value": "Invested",
+    "invested": "Invested",
     "available": "Available",
     "pending": "Pending",
     "deposit": "Deposit",
