@@ -5,14 +5,7 @@ import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import RootState from "shared/reducers/root-reducer";
 
-interface IWalletWidgetContainerProps {
-  className?: string;
-  fetchWallets(): void;
-}
-interface IWalletWidgetContainerStateProps {
-  currency: string;
-  info?: WalletsGrandTotal;
-}
+import { WalletWidgetLoader } from "./wallet-widget.loader";
 
 class WalletWidgetContainer extends React.Component<
   IWalletWidgetContainerProps & IWalletWidgetContainerStateProps
@@ -45,12 +38,10 @@ class WalletWidgetContainer extends React.Component<
     } = info;
     return (
       <WalletWidget
+        condition={!!info}
+        loader={<WalletWidgetLoader className={className} />}
         className={className}
-        currency={currencyCcy}
-        available={availableCcy}
-        invested={investedCcy}
-        pending={pendingCcy}
-        totalBalance={totalCcy}
+        info={info!}
       />
     );
   }
