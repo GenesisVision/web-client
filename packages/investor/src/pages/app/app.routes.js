@@ -12,6 +12,9 @@ import ManagerContainer, {
   MANAGER_DETAILS_ROUTE_REGEXP
 } from "shared/components/manager/manager.container";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
+import NotificationRoutes, {
+  NOTIFICATIONS_ROUTE
+} from "shared/components/notifications/notifications.routes";
 import PrivateRoute from "shared/components/private-route/private-route";
 import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
 import WalletWithdrawConfirmPage, {
@@ -21,9 +24,6 @@ import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes"
 
 import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
 import AppLayout from "./components/app-layout/app-layout";
-import NotificationRoutes, {
-  NOTIFICATIONS_ROUTE
-} from "shared/components/notifications/notifications.routes";
 
 export const HOME_ROUTE = "/";
 
