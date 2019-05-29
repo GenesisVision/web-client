@@ -5,15 +5,10 @@ import apiReducerFactory, {
   IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 
-export interface HeaderState
-  extends Readonly<{
-      info: IApiState<ProfileHeaderViewModel>;
-    }> {}
+export type HeaderState = IApiState<ProfileHeaderViewModel>;
 
-const headerReducer = combineReducers<HeaderState>({
-  info: apiReducerFactory({
-    apiType: PROFILE_HEADER
-  })
+const headerReducer = apiReducerFactory<ProfileHeaderViewModel>({
+  apiType: PROFILE_HEADER
 });
 
 export default headerReducer;
