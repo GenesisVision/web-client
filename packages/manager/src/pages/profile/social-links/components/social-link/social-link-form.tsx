@@ -5,10 +5,13 @@ import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import ImageBase from "shared/components/avatar/image-base";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { object, string } from "yup";
+
+import SocialLink from "../../media/default/social-link.svg";
 
 const _SocialLinkForm: React.FC<Props> = ({
   t,
@@ -24,10 +27,11 @@ const _SocialLinkForm: React.FC<Props> = ({
 
   return (
     <div className="social-link">
-      <img
-        src={socialLink.logo}
+      <ImageBase
+        url={socialLink.logo}
         alt={socialLink.name}
-        className="social-logo"
+        defaultImage={SocialLink}
+        imageClassName="social-logo"
       />
       <form onSubmit={handleSubmit}>
         <GVFormikField
