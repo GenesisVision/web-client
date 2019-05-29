@@ -6,6 +6,7 @@ import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import WalletRoutes from "pages/wallet/wallet.routes";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { FUNDS_ROUTE } from "shared/components/funds/funds.routes";
 import GlobalSearchPage from "shared/components/global-search/global-search.page";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import ManagerContainer, {
@@ -22,7 +23,7 @@ import WalletWithdrawConfirmPage, {
 } from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 
-import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
+import FundsRoutes from "../funds/funds.routes";
 import AppLayout from "./components/app-layout/app-layout";
 
 export const HOME_ROUTE = "/";
