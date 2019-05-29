@@ -1,6 +1,6 @@
 import { push } from "connected-react-router";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import FundsApi from "shared/services/api-client/funds-api";
@@ -9,7 +9,7 @@ import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
 export const fetchBalance = () => dispatch =>
-  dispatch(fetchProfileHeaderInfo());
+  dispatch(fetchProfileHeaderInfoAction());
 
 export const fetchAssets = () =>
   FundsApi.v10FundsAssetsGet(authService.getAuthArg());

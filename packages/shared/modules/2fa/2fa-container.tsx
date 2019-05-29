@@ -5,10 +5,10 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
-import { fetchTwoFactor } from "shared/actions/2fa-actions";
+import { fetchTwoFactorAction } from "shared/actions/2fa-actions";
 import Dialog from "shared/components/dialog/dialog";
 import GVTextField from "shared/components/gv-text-field";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import Select from "shared/components/select/select";
 import { ITwoFactorReducer } from "shared/reducers/2fa-reducer";
 import RootState from "shared/reducers/root-reducer";
@@ -89,7 +89,10 @@ const mapStateToProps = (state: RootState): StateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   services: bindActionCreators(
-    { fetchTwoFactor, fetchProfileHeaderInfo },
+    {
+      fetchTwoFactor: fetchTwoFactorAction,
+      fetchProfileHeaderInfo: fetchProfileHeaderInfoAction
+    },
     dispatch
   )
 });
