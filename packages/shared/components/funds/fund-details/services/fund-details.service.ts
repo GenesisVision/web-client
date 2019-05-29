@@ -1,13 +1,13 @@
 import { FundAssetsListInfo, FundDetailsFull } from "gv-api-web";
-import {
-  FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE
-} from "pages/funds/funds.routes";
 import { Dispatch } from "redux";
 import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  FUNDS_SLUG_URL_PARAM_NAME,
+  FUND_DETAILS_ROUTE
+} from "shared/components/funds/funds.routes";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";

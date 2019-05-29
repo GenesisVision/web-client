@@ -21,12 +21,15 @@ import WalletTotalPage, {
   WALLET_TOTAL_PAGE_ROUTE
 } from "shared/components/wallet/wallet.routes";
 
-import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
+import FundsRoutes from "../funds/funds.routes";
 import AppLayout from "./components/app-layout/app-layout";
 import ManagerContainer, {
   MANAGER_DETAILS_ROUTE_REGEXP
 } from "shared/components/manager/manager.container";
-import NotificationRoutes, { NOTIFICATIONS_ROUTE } from "shared/components/notifications/notifications.routes";
+import NotificationRoutes, {
+  NOTIFICATIONS_ROUTE
+} from "shared/components/notifications/notifications.routes";
+import { FUNDS_ROUTE } from "shared/components/funds/funds.routes";
 
 export const HOME_ROUTE = "/";
 
