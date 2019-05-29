@@ -62,7 +62,9 @@ class _Header extends React.PureComponent<Props, State> {
               <NotificationsWidget
                 condition={!!profileHeader}
                 loader={<NotificationsWidgetLoader />}
-                profileHeader={profileHeader!}
+                notificationsCount={
+                  profileHeader ? profileHeader.notificationsCount : 0
+                }
                 openNotifications={openNotifications}
               />
               <ProfileWidget
