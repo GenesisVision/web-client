@@ -3,7 +3,6 @@ import moment from "moment";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import {
@@ -11,8 +10,6 @@ import {
   ACTION_STATUS_FILTER_VALUES
 } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import GVButton from "shared/components/gv-button";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
