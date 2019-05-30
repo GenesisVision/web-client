@@ -13,6 +13,8 @@ import { STATUS } from "shared/constants/constants";
 import { FUND } from "shared/constants/constants";
 import { composeFundNotificationsUrl } from "shared/utils/compose-url";
 
+import { HORIZONTAL_POPOVER_POS } from "../../../popover/popover";
+import Tooltip from "../../../tooltip/tooltip";
 import {
   IFundControlsProps,
   IFundWithdrawalContainerProps
@@ -75,9 +77,18 @@ class FundDetailsDescription extends React.PureComponent<
           )}
           AssetDetailsExtraBlock={() => (
             <div className="details-description__info-block">
-              <h4 className="details-description__subheading">
-                {t("fund-details-page.description.assets")}
-              </h4>
+              <Tooltip
+                horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                render={() => (
+                  <div className="tooltip__content">
+                    {t("fund-details-page.tooltip.assets")}
+                  </div>
+                )}
+              >
+                <h4 className="details-description__subheading">
+                  {t("fund-details-page.description.assets")}
+                </h4>
+              </Tooltip>
               <div>
                 <FundAssetContainer
                   type={FUND_ASSET_TYPE.LARGE}
