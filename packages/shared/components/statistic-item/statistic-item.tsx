@@ -5,10 +5,11 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import Tooltip from "../tooltip/tooltip";
-import { HORIZONTAL_POPOVER_POS } from "../popover/popover";
 
-const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
+import { HORIZONTAL_POPOVER_POS } from "../popover/popover";
+import Tooltip from "../tooltip/tooltip";
+
+const _StatisticItem: React.FC<Props> = ({
   invert = false,
   large,
   big,
@@ -20,14 +21,15 @@ const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
   className,
   equivalent,
   equivalentCurrency,
-  tooltipContent
+  labelTooltip
 }) => {
-  const generateClasses = (item: ITEM, invert: boolean) => {
+  const generateClasses = (item: ITEM, invert: boolean, tooltip?: boolean) => {
     switch (
       (item === ITEM.VALUE && !invert) || (item === ITEM.LABEL && invert)
     ) {
       case true:
         return classNames("statistics-item__value", {
+          "statistics-item__label--tooltip": tooltip,
           "statistics-item__value--accent": accent,
           "statistics-item__value--small": small,
           "statistics-item__value--big": big,
@@ -36,14 +38,17 @@ const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
       case false:
       default:
         return classNames("statistics-item__label", {
-          "statistics-item__label--tooltip": tooltipContent
+          "statistics-item__label--tooltip": tooltip
         });
     }
   };
 
   const renderLabel = () => (
     <div
-      className={"statistics-item__top " + generateClasses(ITEM.LABEL, invert)}
+      className={
+        "statistics-item__top " +
+        generateClasses(ITEM.LABEL, invert, Boolean(labelTooltip))
+      }
     >
       {label}
     </div>
@@ -61,11 +66,11 @@ const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
       )}
     >
       {label ? (
-        tooltipContent && label ? (
+        labelTooltip && label ? (
           <Tooltip
             horizontal={HORIZONTAL_POPOVER_POS.LEFT}
             render={() => (
-              <div className="statistics-item__tooltip">{tooltipContent}</div>
+              <div className="statistics-item__tooltip">{labelTooltip}</div>
             )}
           >
             {renderLabel()}
@@ -99,7 +104,7 @@ enum ITEM {
   VALUE = "VALUE"
 }
 
-export interface IFollowStatisticItemProps {
+interface Props {
   label: string | React.ReactNode;
   equivalent?: string | number;
   equivalentCurrency?: string;
@@ -110,5 +115,5 @@ export interface IFollowStatisticItemProps {
   half?: boolean;
   invert?: boolean;
   className?: string;
-  tooltipContent?: string;
+  labelTooltip?: string;
 }

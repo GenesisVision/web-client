@@ -68,6 +68,10 @@
         letter-spacing: 0.4px;
       }
     }
+
+    &--tooltip {
+      cursor: help;
+    }
   }
 
   &--small {

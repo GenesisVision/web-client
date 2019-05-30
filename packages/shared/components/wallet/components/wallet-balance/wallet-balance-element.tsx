@@ -22,7 +22,7 @@ const _WalletBalanceElement: React.FC<Props> = ({
   title,
   color = GVColors.$primaryColor,
   className,
-  tooltipContent
+  labelTooltip
 }) => (
   <div className={classNames("wallet-balance__statistic-item", className)}>
     {pieContainer && (
@@ -36,7 +36,7 @@ const _WalletBalanceElement: React.FC<Props> = ({
       className="wallet-balance__statistic-big"
       big
       accent
-      tooltipContent={tooltipContent}
+      labelTooltip={labelTooltip}
     >
       <NumberFormat
         value={formatCurrencyValue(value, currency)}
@@ -59,5 +59,5 @@ interface Props {
   color?: string;
   pieContainer?: boolean;
   className?: string;
-  tooltipContent?: string;
+  labelTooltip?: string;
 }
