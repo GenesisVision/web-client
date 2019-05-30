@@ -92,7 +92,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
                       <Tooltip
                         horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                         render={() => (
-                          <div className="wallet-container__tooltip">
+                          <div className="tooltip__content">
                             {t("wallet-page.tooltip.transactions")}
                           </div>
                         )}
@@ -114,7 +114,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
                       <Tooltip
                         horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                         render={() => (
-                          <div className="wallet-container__tooltip">
+                          <div className="tooltip__content">
                             {t("wallet-page.tooltip.deposit")}
                           </div>
                         )}
@@ -124,7 +124,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
                       <Tooltip
                         horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                         render={() => (
-                          <div className="wallet-container__tooltip">
+                          <div className="tooltip__content">
                             {t("wallet-page.tooltip.withdrawals")}
                           </div>
                         )}

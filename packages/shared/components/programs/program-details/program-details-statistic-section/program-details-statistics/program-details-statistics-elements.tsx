@@ -7,8 +7,10 @@ import {
   ChartDefaultPeriod,
   ChartPeriodType
 } from "shared/components/chart/chart-period/chart-period.helpers";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -16,8 +18,6 @@ import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic
 } from "../../services/program-details.types";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
-import Tooltip from "shared/components/tooltip/tooltip";
 
 const ProgramDetailsStatisticsElements: React.FC<
   IProgramDetailsStatisticsElementsProps & InjectedTranslateProps
@@ -56,7 +56,7 @@ const ProgramDetailsStatisticsElements: React.FC<
         <Tooltip
           horizontal={HORIZONTAL_POPOVER_POS.LEFT}
           render={() => (
-            <div className="details-statistics__tooltip">
+            <div className="tooltip__content">
               {t("program-details-page.tooltip.period")}
             </div>
           )}

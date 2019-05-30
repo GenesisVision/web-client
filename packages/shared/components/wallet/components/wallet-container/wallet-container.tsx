@@ -7,8 +7,10 @@ import { Link, withRouter } from "react-router-dom";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
@@ -18,8 +20,15 @@ import { WALLET_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdraw
 import TransactionsRow from "../wallet-transactions/transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
-import Tooltip from "shared/components/tooltip/tooltip";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
+
+const renderTooltipTab = (tooltipContent: string, tabLabel: string) => (
+  <Tooltip
+    horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+    render={() => <div className="tooltip__content">{tooltipContent}</div>}
+  >
+    <span>{tabLabel}</span>
+  </Tooltip>
+);
 
 class _WalletContainer extends React.PureComponent<Props, State> {
   state = {
@@ -56,16 +65,10 @@ class _WalletContainer extends React.PureComponent<Props, State> {
                         state: t("wallet-page.title")
                       }}
                     >
-                      <Tooltip
-                        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                        render={() => (
-                          <div className="wallet-container__tooltip">
-                            {t("wallet-page.tooltip.transactions")}
-                          </div>
-                        )}
-                      >
-                        <span>{t("wallet-page.tabs.transactions")}</span>
-                      </Tooltip>
+                      {renderTooltipTab(
+                        t("wallet-page.tooltip.transactions"),
+                        t("wallet-page.tabs.transactions")
+                      )}
                     </Link>
                   }
                 />
@@ -79,26 +82,14 @@ class _WalletContainer extends React.PureComponent<Props, State> {
                         state: t("wallet-page.title")
                       }}
                     >
-                      <Tooltip
-                        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                        render={() => (
-                          <div className="wallet-container__tooltip">
-                            {t("wallet-page.tooltip.deposit")}
-                          </div>
-                        )}
-                      >
-                        <span>{t("wallet-page.tabs.deposit")}</span>
-                      </Tooltip>
-                      <Tooltip
-                        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                        render={() => (
-                          <div className="wallet-container__tooltip">
-                            {t("wallet-page.tooltip.withdrawals")}
-                          </div>
-                        )}
-                      >
-                        <span>{t("wallet-page.tabs.withdrawals")}</span>
-                      </Tooltip>
+                      {renderTooltipTab(
+                        t("wallet-page.tooltip.deposit"),
+                        t("wallet-page.tabs.deposit")
+                      )}
+                      {renderTooltipTab(
+                        t("wallet-page.tooltip.withdrawals"),
+                        t("wallet-page.tabs.withdrawals")
+                      )}
                     </Link>
                   }
                 />

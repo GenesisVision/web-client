@@ -70,7 +70,7 @@ const _StatisticItem: React.FC<Props> = ({
           <Tooltip
             horizontal={HORIZONTAL_POPOVER_POS.LEFT}
             render={() => (
-              <div className="statistics-item__tooltip">{labelTooltip}</div>
+              <div className="tooltip__content">{labelTooltip}</div>
             )}
           >
             {renderLabel()}
