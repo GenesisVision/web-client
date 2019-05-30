@@ -3,10 +3,11 @@ import "./facet-cards.scss";
 import { FundFacet, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { RefObject } from "react";
+import withLoader from "shared/decorators/with-loader";
 
 import FacetCard, { composeFacetUrlFunc } from "./facet-card";
 
-class FacetCards extends React.PureComponent<Props> {
+class _FacetCards extends React.PureComponent<Props> {
   scroll: RefObject<HTMLDivElement> = React.createRef();
   facetList: RefObject<HTMLDivElement> = React.createRef();
 
@@ -66,4 +67,5 @@ interface Props {
   title: string;
 }
 
+const FacetCards = withLoader(_FacetCards);
 export default FacetCards;

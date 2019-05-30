@@ -9,7 +9,7 @@ interface IAlertMessageProps {
   message: IMessage;
 }
 
-class AlertMessage extends React.Component<
+class AlertMessage extends React.PureComponent<
   IAlertMessageProps & InjectedTranslateProps
 > {
   handleClick = () => {

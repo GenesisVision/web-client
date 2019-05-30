@@ -1,7 +1,9 @@
 import "./general-notification.scss";
 
-import { GVSwitch } from "gv-react-components";
+import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
+import GVSwitch from "shared/components/gv-selection/gv-switch";
+import { IRemoveNotificationSettingProps } from "shared/modules/notification-settings/actions/notification-settings.actions";
 
 export type Setting = {
   id?: string;
@@ -16,20 +18,18 @@ interface IGeneralNotificationProps {
   setting: Setting;
   name: string;
   label: string;
-  assetId: string;
-  addNotification(opts?: Setting): Promise<any>;
-  removeNotification(opts?: {
-    id?: string;
-    assetId: string;
-    type: string;
-  }): Promise<any>;
+  assetId?: string;
+  addNotification(opts?: Setting): CancelablePromise<void>;
+  removeNotification(
+    opts?: IRemoveNotificationSettingProps
+  ): CancelablePromise<void>;
 }
 
 interface IGeneralNotificationState {
   isPending: boolean;
 }
 
-class GeneralNotification extends React.Component<
+class GeneralNotification extends React.PureComponent<
   IGeneralNotificationProps,
   IGeneralNotificationState
 > {
@@ -61,7 +61,7 @@ class GeneralNotification extends React.Component<
     this.setState({ isPending: true });
     this.props
       .removeNotification({
-        id: this.props.setting.id,
+        id: this.props.setting.id!, // TODO ask backend remove optional from id
         assetId: this.props.assetId,
         type: this.props.name
       })

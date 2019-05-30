@@ -1,11 +1,12 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
 import { FundBalanceChart as FundBalanceChartType } from "gv-api-web";
-import { GVTab, GVTabs } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { HandlePeriodChangeType } from "shared/utils/types";
 

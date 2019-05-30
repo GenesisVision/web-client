@@ -17,26 +17,8 @@
   }
 
   &__question {
-    @include transition(border-color, color);
-    background: none;
-    padding: 0;
-    box-sizing: border-box;
-    width: 15px;
-    height: 15px;
     border: 1px solid rgba($icon-color, 0.2);
-    border-radius: 50%;
     color: rgba($icon-color, 0.2);
     margin-right: 12px;
-    line-height: 15px;
-    text-align: center;
-    font-size: 8px;
-    font-weight: 700;
-    outline: none;
-    cursor: pointer;
-
-    &.gv-btn--text:hover:not(:disabled).gv-btn--secondary {
-      border-color: $main-color;
-      color: $main-color;
-    }
   }
 }

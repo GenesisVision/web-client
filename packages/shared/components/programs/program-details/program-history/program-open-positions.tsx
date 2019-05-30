@@ -89,7 +89,7 @@ const _ProgramOpenPositions: React.FC<Props & InjectedTranslateProps> = ({
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--profit">
               <Profitability
-                value={+formatValue(position.profit, DECIMAL_SCALE)}
+                value={formatValue(position.profit, DECIMAL_SCALE)}
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat

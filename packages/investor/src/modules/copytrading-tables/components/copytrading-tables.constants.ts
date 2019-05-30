@@ -1,7 +1,7 @@
 import { PROGRAM_TRADES_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
 import {
-  DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes
+  DATA_RANGE_FILTER_TYPES,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
@@ -76,7 +76,7 @@ export const COPYTRADING_TRADES_HISTORY_FILTERS = [
       // add name prop to fix crush
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastMonth
+        type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
       }
     })
   }
@@ -85,6 +85,6 @@ export const COPYTRADING_TRADES_HISTORY_FILTERS = [
 export const COPYTRADING_TRADES_HISTORY_DEFAULT_FILTERING = {
   dateRange: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DateRangeFilterTypes.lastMonth
+    type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
   }
 };

@@ -361,6 +361,7 @@
   },
   "funds-page": {
     "title": "Funds",
+    "all-funds": "All funds",
     "tabs": {
       "explore": "Explore",
       "favorites": "Favourites"
@@ -517,6 +518,9 @@
         "title": "Make a signal provider",
         "disclaimer": "Parameters cannot be changed in the future."
       },
+      "edit-signal-provider": {
+        "title": "Edit a signal provider"
+      },
       "change-password": "Change password",
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
@@ -556,7 +560,8 @@
       "tabs": {
         "trades": "Trades",
         "events": "Events",
-        "open-positions": "Open positions"
+        "open-positions": "Open positions",
+        "subscriptions": "Subscriptions"
       },
       "trades": {
         "swap": "Swap",
@@ -581,6 +586,15 @@
         "priceCurrent": "Price",
         "profit": "Profit",
         "profitPercent": "Profit %"
+      },
+      "subscriptions": {
+        "number": "Number",
+        "trades": "Trades",
+        "profit": "Profit",
+        "volume": "Volume",
+        "subscriptionDate": "Subscription date",
+        "unsubscriptionDate": "Unsubscription date",
+        "status": "Status"
       }
     },
     "chart": {
@@ -890,6 +904,26 @@
       "title": "GENERAL",
       "news-updates": "News and updates",
       "emergency": "Emergency notifications",
+      "FundRebalancing": {
+        "disabled-alert": "Disabled rebalancing notifications",
+        "enabled-alert": "Enabled rebalancing notifications"
+      },
+      "FundNewsAndUpdates": {
+        "disabled-alert": "Disabled news and updates notifications",
+        "enabled-alert": "Enabled news and updates notifications"
+      },
+      "FundEndOfPeriod": {
+        "disabled-alert": "Disabled the end of period notifications",
+        "enabled-alert": "Enabled the end of period notifications"
+      },
+      "ProgramEndOfPeriod": {
+        "enabled-alert": "Enabled the end of period notifications",
+        "disabled-alert": "Disabled the end of period notifications"
+      },
+      "ProgramNewsAndUpdates": {
+        "enabled-alert": "Enabled news and updates notifications",
+        "disabled-alert": "Disabled news and updates notifications"
+      },
       "PlatformEmergency": {
         "enabled-alert": "Enabled emergency notifications",
         "disabled-alert": "Disabled emergency notifications"
@@ -927,6 +961,7 @@
       }
     },
     "programs": "PROGRAMS",
+    "funds": "FUNDS",
     "program": {
       "title": "Program notifications",
       "general": {
@@ -1142,7 +1177,12 @@
     "dashboard-page": {
       "title": "Dashboard",
       "chart-section": {
-        "in-requests": "In Requests"
+        "header": "Chart",
+        "in-requests": "In Requests",
+        "stats": {
+          "value": "Value",
+          "change": "Change"
+        }
       },
       "requests": {
         "success-cancel-request": "Request canceled successfully"
@@ -1204,6 +1244,9 @@
         "title": "Portfolio Events",
         "see-all-button": "See All",
         "table-title": "Operations",
+        "success-fee": "Success fee",
+        "gv-commission": "GV commission",
+        "you-ve-earned": "You've earned",
         "empty-events": {
           "text": "The following events will be displayed here",
           "finished": "Fund/Program finished",
@@ -1243,6 +1286,9 @@
   "manager": {
     "program-make-signal": {
       "success-alert-message": "Your program is a signal provider now"
+    },
+    "program-edit-signal": {
+      "success-alert-message": "Program has been edited"
     },
     "app": {
       "title": "Manager Portal: "
@@ -1386,9 +1432,11 @@
         "settings": "Settings"
       },
       "broker-card": {
-        "coming-soon": "Coming soon",
-        "KYC-required": "KYC required"
+        "COMING_SOON": "Coming soon",
+        "KYC_REQUIRED": "KYC required",
+        "FOREX_DISABLED": "Forex disabled"
       },
+      "kyc-requirement": "In order to create a program with the selected broker, you need to verify your account first. To do that, you need complete the KYC procedure. KYC (Know Your Customer) refers to the process of a business verifying the identity of its customers.",
       "broker-info": {
         "about": "About",
         "terms": "Terms",
@@ -1573,7 +1621,7 @@
         }
       },
       "notifications": {
-        "edit-success": "Successful program editing."
+        "edit-success": "Program has been edited"
       }
     },
     "edit-fund": {

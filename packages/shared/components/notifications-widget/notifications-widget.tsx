@@ -4,10 +4,11 @@ import classNames from "classnames";
 import * as React from "react";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { RingIcon } from "shared/components/icon/ring-icon";
+import withLoader from "shared/decorators/with-loader";
 
-const NotificationsWidget: React.FC<Props> = ({
+const _NotificationsWidget: React.FC<Props> = ({
   openNotifications,
-  notificationsCount = 0
+  notificationsCount
 }) => {
   const hasNotifications: boolean = notificationsCount > 0;
   return (
@@ -29,8 +30,9 @@ const NotificationsWidget: React.FC<Props> = ({
 };
 
 interface Props {
-  openNotifications(): void;
   notificationsCount: number;
+  openNotifications: () => void;
 }
 
+const NotificationsWidget = React.memo(withLoader(_NotificationsWidget));
 export default NotificationsWidget;

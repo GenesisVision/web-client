@@ -2,7 +2,7 @@ import { NotificationList, NotificationViewModel } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { notificationsToggle } from "shared/components/notifications/actions/notifications.actions";
+import { notificationsToggleAction } from "shared/components/notifications/actions/notifications.actions";
 import Notifications from "shared/components/notifications/components/notifications";
 import {
   serviceClearNotifications,
@@ -39,8 +39,8 @@ const NotificationsContainer: React.FunctionComponent<Props> = ({
 const mapStateToProps = (props: RootState): StateProps => {
   const { notifications, profileHeader } = props;
   let count = 0;
-  if (profileHeader.info.data) {
-    count = profileHeader.info.data.notificationsCount;
+  if (profileHeader.data) {
+    count = profileHeader.data.notificationsCount;
   }
   return {
     open: notifications.isOpen,
@@ -54,7 +54,7 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<RootState, any, any>
 ): DispatchProps => ({
   service: {
-    toggleNotifications: () => dispatch(notificationsToggle(false)),
+    toggleNotifications: () => dispatch(notificationsToggleAction(false)),
     getNotifications: () =>
       dispatch<Promise<NotificationList>>(serviceGetNotifications()),
     clearNotifications: () => dispatch(serviceClearNotifications())

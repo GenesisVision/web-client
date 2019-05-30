@@ -1,5 +1,4 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import ProgramFollowContainer from "modules/program-follow/program-follow-container";
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import React, { Component, Fragment } from "react";
@@ -8,6 +7,7 @@ import {
   IProgramDetailContext,
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
+import GVButton from "shared/components/gv-button";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { FOLLOW_TYPE } from "shared/constants/constants";
 
@@ -70,7 +70,8 @@ class SignalProviderControls extends Component<
         <SignalProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
           {programDescription.personalProgramDetails &&
-          programDescription.personalProgramDetails.isFollowSignals ? (
+          programDescription.personalProgramDetails.signalSubscription
+            .hasSignalAccount ? (
             <GVButton
               className="program-details-description__invest-btn"
               onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}

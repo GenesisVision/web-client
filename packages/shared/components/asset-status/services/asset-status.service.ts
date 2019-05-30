@@ -1,19 +1,20 @@
 import { ProgramRequest, ProgramRequests } from "gv-api-web";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { CancelRequestType } from "shared/components/dashboard/dashboard.constants";
+import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
+import { ResponseError } from "shared/utils/types";
 
 import {
   ICancelRequest,
   IFetchInRequests,
   cancelInvestorProgramRequest,
   cancelManagerProgramRequest,
-  fetchInRequestsManager,
-  fetchInRequestsInvestor
+  fetchInRequestsInvestor,
+  fetchInRequestsManager
 } from "../actions/asset-status-actions";
 
 export const getAssetRequests = (
@@ -59,20 +60,12 @@ export const cancelRequest = (
   return method(id, authorization);
 };
 
-export type CancelRequestType = {
-  id: string;
-  role: ROLE;
-  asset: ASSET;
-  onFinally: Function;
-  removeDisableBtn: Function;
-};
-
-export const cancelRequestDispatch = ({
+export const cancelRequestDispatch: CancelRequestType = ({
   id,
-  role,
-  asset,
+  role = ROLE.INVESTOR,
+  asset = ASSET.PROGRAM,
   onFinally
-}: CancelRequestType) => (dispatch: MiddlewareDispatch): Promise<void> => {
+}) => dispatch => {
   const authorization = authService.getAuthArg();
   let actionCreator: ICancelRequest;
   let fetchInRequests: IFetchInRequests;
@@ -93,7 +86,7 @@ export const cancelRequestDispatch = ({
   return dispatch(actionCreator(id, authorization))
     .then(() => {
       dispatch(fetchInRequests(authorization, 0, 100));
-      dispatch(fetchProfileHeaderInfo());
+      dispatch(fetchProfileHeaderInfoAction());
       dispatch(
         alertMessageActions.success(
           `${ROLE_ENV}.dashboard-page.requests.success-cancel-request`,

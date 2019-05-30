@@ -7,7 +7,7 @@ import platformActions from "shared/actions/platform-actions";
 import { windowResize } from "shared/actions/ui-actions";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
-import { ResponseError } from "shared/utils/types";
+import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import {
   CODE_TYPE,
@@ -61,7 +61,7 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
         dispatch(setTwoFactorRequirement(true));
         dispatch(push(LOGIN_ROUTE_TWO_FACTOR_ROUTE));
       } else {
-        setSubmitting(false);
+        setSubmitting!(false);
       }
     });
 };
@@ -90,9 +90,9 @@ export type LoginFuncType = (
     prefix?: number;
     email: string;
     password: string;
-    setSubmitting: any;
     method: any;
     code: string;
+    setSubmitting?: SetSubmittingType;
     type?: CODE_TYPE;
     from?: string;
   }

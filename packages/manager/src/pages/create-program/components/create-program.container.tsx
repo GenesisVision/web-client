@@ -7,7 +7,6 @@ import {
   ProgramsInfo,
   WalletData
 } from "gv-api-web";
-import { GVTab, GVTabs } from "gv-react-components";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import * as React from "react";
@@ -16,6 +15,8 @@ import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
@@ -27,8 +28,7 @@ import {
 
 import {
   createProgram,
-  fetchBrokers,
-  fetchMinDepositsAmount
+  fetchBrokers
 } from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
@@ -52,25 +52,22 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
   componentDidMount() {
     const { service } = this.props;
     service.fetchWallets();
-    fetchBrokers()
-      .then(brokers => {
-        this.setState({
-          brokers: brokers,
-          selectedBroker: brokers[0]
-        });
-        return fetchMinDepositsAmount(brokers[0].accountTypes[0].id);
-      })
-      .then(minimumDepositsAmount =>
-        this.setState({ minimumDepositsAmount, isPending: false })
-      );
+    fetchBrokers().then(brokers => {
+      this.setState({
+        brokers: brokers,
+        selectedBroker: brokers[0],
+        minimumDepositsAmount: brokers[0].accountTypes[0].minimumDepositsAmount,
+        isPending: false
+      });
+    });
   }
 
   selectBroker = (brokerName: string) => () => {
     const selectedBroker = this.state.brokers!.find(x => x.name === brokerName);
-    fetchMinDepositsAmount(selectedBroker!.accountTypes[0].id).then(
-      minimumDepositsAmount =>
-        this.setState({ minimumDepositsAmount, selectedBroker })
-    );
+    const minimumDepositsAmount = selectedBroker
+      ? selectedBroker.accountTypes[0].minimumDepositsAmount
+      : undefined;
+    this.setState({ minimumDepositsAmount, selectedBroker });
   };
 
   confirmNavigateToBroker = (
@@ -179,6 +176,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
                 selectedBroker={selectedBroker}
                 selectBroker={this.selectBroker}
                 isForexAllowed={headerData.allowForex}
+                isKycConfirmed={headerData.kycConfirmed}
               />
             )}
             {tab === TAB.SETTINGS && (
@@ -224,7 +222,7 @@ const mapStateToProps = (state: ManagerRootState): StateProps => {
     wallets: state.wallet.info.data
       ? state.wallet.info.data.wallets
       : undefined,
-    headerData: state.profileHeader.info.data,
+    headerData: state.profileHeader.data,
     programsInfo: state.platformData.data
       ? state.platformData.data.programsInfo
       : undefined

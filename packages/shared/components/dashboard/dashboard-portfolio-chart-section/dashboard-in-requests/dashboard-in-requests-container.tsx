@@ -1,15 +1,16 @@
 import "./dashboard-in-requests.scss";
 
 import { ProgramRequests } from "gv-api-web";
-import { InvestorRootState } from "investor-web-portal/src/reducers";
-import { ManagerRootState } from "manager-web-portal/src/reducers";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
-import { CancelRequestType } from "shared/components/asset-status/services/asset-status.service";
-import { DashboardChartRequestLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -18,41 +19,27 @@ import Popover, {
 import GVScroll from "shared/components/scroll/gvscroll";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ROLE_ENV } from "shared/constants/constants";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { AuthRootState } from "shared/utils/types";
 
+import { CancelRequestType } from "../../dashboard.constants";
 import DashboardRequest from "./dashboard-request";
 
-class DashboardInRequestsContainer extends React.PureComponent<Props, State> {
+class _DashboardInRequestsContainer extends React.PureComponent<Props, State> {
   state = {
     anchor: undefined
   };
 
-  componentDidMount() {
-    const { service } = this.props;
-    service.getInRequests();
-  }
-
   handleOpenDropdown = (event: React.MouseEvent<HTMLElement, MouseEvent>) =>
     this.setState({ anchor: event.currentTarget });
+
   handleCloseDropdown = () => this.setState({ anchor: undefined });
 
-  renderActionsIcon = () => {
-    if (this.props.inRequests.requests.length === 0) return null;
+  render() {
+    const { inRequests, service, t } = this.props;
     return (
-      <ActionsCircleIcon
-        className="dashboard-request__icon"
-        primary={this.state.anchor !== null}
-        onClick={this.handleOpenDropdown}
-        dashboard__portfolio-events-aside
-      />
-    );
-  };
-
-  renderRequest = () => {
-    const { t, inRequests, isPending, service } = this.props;
-    if (!inRequests || isPending) return <DashboardChartRequestLoader />;
-    return (
-      <>
+      <div className="dashboard-request">
         <StatisticItem
           label={t(`${ROLE_ENV}.dashboard-page.chart-section.in-requests`)}
           big
@@ -63,9 +50,14 @@ class DashboardInRequestsContainer extends React.PureComponent<Props, State> {
             displayType="text"
             suffix={" GVT"}
           />
-          {this.renderActionsIcon()}
+          <ActionsCircleIcon
+            condition={inRequests.requests.length !== 0}
+            className="dashboard-request__icon"
+            primary={this.state.anchor !== undefined}
+            onClick={this.handleOpenDropdown}
+            dashboard__portfolio-events-aside
+          />
         </StatisticItem>
-
         <Popover
           horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
@@ -86,63 +78,47 @@ class DashboardInRequestsContainer extends React.PureComponent<Props, State> {
             </div>
           </GVScroll>
         </Popover>
-      </>
+      </div>
     );
-  };
-
-  render() {
-    return <div className="dashboard-request">{this.renderRequest()}</div>;
   }
 }
 
-const mapStateToProps = (
-  state: InvestorRootState | ManagerRootState
-): StateProps => {
-  const { data, isPending } = state.dashboard.inRequestsData;
-  return { inRequests: data, isPending };
-};
-
 const mapDispatchToProps = (
   dispatch: Dispatch,
-  props: Props
-): DispatchProps => {
-  const { getInRequests, cancelRequest } = props;
-  return {
-    service: bindActionCreators({ getInRequests, cancelRequest }, dispatch)
-  };
-};
+  { cancelRequest }: OwnProps
+): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { cancelRequest },
+    dispatch
+  )
+});
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    DispatchProps,
-    InjectedTranslateProps {}
+interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
 
 interface OwnProps {
-  getInRequests: () => void;
-  cancelRequest: (x: CancelRequestType) => void;
-}
-
-interface StateProps {
+  cancelRequest: CancelRequestType;
   inRequests: ProgramRequests;
-  isPending: boolean;
 }
 
+interface ServiceThunks extends ActionCreatorsMapObject {
+  cancelRequest: CancelRequestType;
+}
 interface DispatchProps {
-  service: {
-    getInRequests: () => void;
-    cancelRequest: (x: CancelRequestType) => void;
-  };
+  service: ResolveThunks<ServiceThunks>;
 }
 
-type State = {
+interface State {
   anchor?: HTMLElement;
-};
+}
 
-export default compose(
+const DashboardInRequestsContainer = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
   translate(),
-  connect(
-    mapStateToProps,
+  connect<null, DispatchProps, OwnProps, AuthRootState>(
+    null,
     mapDispatchToProps
   )
-)(DashboardInRequestsContainer);
+)(_DashboardInRequestsContainer);
+export default DashboardInRequestsContainer;

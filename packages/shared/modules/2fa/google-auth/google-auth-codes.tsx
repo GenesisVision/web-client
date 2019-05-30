@@ -1,10 +1,10 @@
 import copy from "copy-to-clipboard";
 import { RecoveryCode } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Dispatch, compose } from "redux";
+import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 

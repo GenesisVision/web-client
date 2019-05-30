@@ -5,12 +5,13 @@ import {
   MultiWalletFilters,
   WalletData
 } from "gv-api-web";
-import { GVTab, GVTabs } from "gv-react-components";
 import { Location } from "history";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "redux";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 
@@ -63,7 +64,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
                     </Link>
                   }
                 />
-                {/*<GVTab
+                <GVTab
                   className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
                   visible={copytrading}
                   value={TABS.COPYTRADING_TAB}
@@ -76,7 +77,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
                       {t("wallet-page.tabs.copytrading")}
                     </Link>
                   }
-                />*/}
+                />
                 <GVTab
                   className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
                   value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
@@ -108,12 +109,12 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
           </div>
         </div>
         {tab === TABS.WALLETS_TAB && <WalletList wallets={wallets} />}
-        {/*{tab === TABS.COPYTRADING_TAB && (
+        {tab === TABS.COPYTRADING_TAB && (
           <WalletCopytrading
             copyTradingAccounts={copyTradingAccounts}
             isPending={isPending}
           />
-        )}*/}
+        )}
         {tab === TABS.TRANSACTIONS_TAB && (
           <WalletTransactions
             columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}

@@ -1,5 +1,5 @@
 import { NotificationList } from "gv-api-web";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import {
   addNotifications,
   addTotalNotifications,
@@ -30,5 +30,5 @@ export const serviceClearNotifications = (): RootThunkAction => dispatch => {
   dispatch(clearNotifications());
   dispatch(addTotalNotifications(0));
   dispatch(setNotificationsOptions(calculateOptions()));
-  dispatch(fetchProfileHeaderInfo());
+  dispatch(fetchProfileHeaderInfoAction());
 };

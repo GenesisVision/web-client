@@ -5,11 +5,13 @@ import {
   InternalTransferRequest,
   InternalTransferRequestSourceTypeEnum
 } from "gv-api-web";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -157,7 +159,6 @@ class _TransferForm extends React.PureComponent<Props> {
               currency={selectedSourceItem.currency}
               setMax={setMaxAmount}
               isAllow={this.isAllow}
-              emptyInit
             />
           </div>
           {!!values[FIELDS.amount] && (
@@ -222,7 +223,7 @@ const TransferForm = compose<React.ComponentType<OwnProps>>(
       }
       return {
         [FIELDS.sourceId]: sourceId,
-        [FIELDS.amount]: 0,
+        [FIELDS.amount]: undefined,
         [FIELDS.destinationId]: destinationId,
         [FIELDS.sourceType]: sourceType,
         [FIELDS.destinationType]: destinationType,
@@ -255,7 +256,7 @@ const TransferForm = compose<React.ComponentType<OwnProps>>(
       const { amount, sourceId } = values;
 
       const transferAll = service.getTransferAll(
-        { amount, sourceId },
+        { amount: amount!, sourceId },
         props.sourceItems
       );
       props.onSubmit({ ...values, transferAll }, setSubmitting);
@@ -285,7 +286,14 @@ interface OwnProps {
   currentItemContainer?: TRANSFER_CONTAINER;
 }
 
-export interface TransferFormValues extends InternalTransferRequest {}
+export interface TransferFormValues {
+  sourceId: string;
+  sourceType: InternalTransferRequestSourceTypeEnum;
+  destinationId: string;
+  destinationType: InternalTransferRequestSourceTypeEnum;
+  amount?: number;
+  transferAll: boolean;
+}
 
 interface Props
   extends InjectedTranslateProps,

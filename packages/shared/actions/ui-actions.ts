@@ -1,5 +1,6 @@
 import debounce from "debounce";
 import { Dispatch } from "redux";
+
 export const WINDOW_RESIZE = "WINDOW_RESIZE";
 export const WINDOW_SCROLL = "WINDOW_SCROLL";
 
@@ -18,9 +19,7 @@ export const initOnResizeEvent = () => (dispatch: Dispatch) => {
   window.onresize = debounce(dispatchResize, 166);
 };
 
-export const windowScroll = (scrollTop: number) => {
-  return {
-    type: WINDOW_SCROLL,
-    scrollTop
-  };
-};
+export const windowScroll = (scrollTop: number) => ({
+  type: WINDOW_SCROLL,
+  scrollTop
+});

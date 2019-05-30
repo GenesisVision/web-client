@@ -1,11 +1,12 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import { GVTab, GVTabs } from "gv-react-components";
 import * as React from "react";
 import { SyntheticEvent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import ProgramTrades from "shared/components/programs/program-details/program-history/program-trades";
 import Surface from "shared/components/surface/surface";
@@ -16,18 +17,27 @@ import {
   SelectFilterValue
 } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import { IDataModel } from "shared/constants/constants";
+import { IDataModel, ROLE, ROLE_ENV } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { AuthState } from "shared/reducers/auth-reducer";
 import RootState from "shared/reducers/root-reducer";
 
 import { HistoryCountsType } from "../program-details.types";
 import ProgramOpenPositions from "./program-open-positions";
+import ProgramSubscriptions from "./program-subscriptions";
 
 const EVENTS_FILTERING = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
   type: EVENT_TYPE_FILTER_DEFAULT_VALUE
 };
+
+enum TABS {
+  TRADES = "trades",
+  EVENTS = "events",
+  OPEN_POSITIONS = "openPositions",
+  SUBSCRIBERS = "subscribers"
+}
+
 class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
   state = {
     tab: TABS.OPEN_POSITIONS,
@@ -60,8 +70,11 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       eventTypeFilterValues,
       fetchPortfolioEvents,
       fetchTrades,
-      fetchOpenPositions
+      fetchOpenPositions,
+      isSignalProgram
     } = this.props;
+
+    const isManager = ROLE_ENV === ROLE.MANAGER;
 
     return (
       <Surface className="details-history">
@@ -83,6 +96,12 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
                 label={t("program-details-page.history.tabs.events")}
                 count={eventsCount}
                 visible={isAuthenticated && isInvested}
+              />
+              <GVTab
+                value={TABS.SUBSCRIBERS}
+                label={t("program-details-page.history.tabs.subscriptions")}
+                count={3}
+                visible={isAuthenticated && isSignalProgram && isManager}
               />
             </GVTabs>
           </div>
@@ -111,6 +130,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
               currency={programCurrency}
             />
           )}
+          {tab === TABS.SUBSCRIBERS && <ProgramSubscriptions />}
         </div>
       </Surface>
     );
@@ -122,15 +142,10 @@ const mapStateToProps = (state: RootState): StateProps => {
   return { isAuthenticated };
 };
 
-enum TABS {
-  TRADES = "trades",
-  EVENTS = "events",
-  OPEN_POSITIONS = "openPositions"
-}
-
 interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
 
 interface OwnProps {
+  isSignalProgram: boolean;
   isForex: boolean;
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
   fetchPortfolioEvents: GetItemsFuncType;

@@ -1,0 +1,1 @@
+export const TRANSACTIONS_DECIMAL_SCALE = 8;

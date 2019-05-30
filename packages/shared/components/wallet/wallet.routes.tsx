@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import { composeUrl } from "shared/utils/compose-url";
 
-import WalletCurrency from "./components/wallet-currency";
+import WalletCurrencyContainer from "./components/wallet-currency.container";
 import WalletTotal from "./components/wallet-total";
 import { fetchWallets } from "./services/wallet.services";
 
@@ -44,7 +44,10 @@ class WalletRoutes extends React.Component<DispatchProps, any> {
     return (
       <Switch>
         <Route exact path={WALLET_TOTAL_PAGE_ROUTE} component={WalletTotal} />
-        <Route path={WALLET_CURRENCY_PAGE_ROUTE} component={WalletCurrency} />
+        <Route
+          path={WALLET_CURRENCY_PAGE_ROUTE}
+          component={WalletCurrencyContainer}
+        />
         <Route component={NotFoundPage} />
       </Switch>
     );

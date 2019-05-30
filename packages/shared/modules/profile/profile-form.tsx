@@ -5,10 +5,11 @@ import {
   ProfileFullViewModel,
   UpdatePersonalDetailViewModel
 } from "gv-api-web";
-import { GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import GVScroll from "shared/components/scroll/gvscroll";
 import VerificationStatus from "shared/components/verification-status/verification-status";
 import About from "shared/modules/about/about";

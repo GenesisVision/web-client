@@ -1,6 +1,6 @@
-import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { connect } from "react-redux";
+import GVButton from "shared/components/gv-button";
 import RootState from "shared/reducers/root-reducer";
 
 interface IDepositButtonStateProps {
@@ -33,8 +33,8 @@ const DepositButton: React.FC<
 };
 
 const mapStateToProps = (state: RootState): IDepositButtonStateProps => {
-  const available = state.profileHeader.info.data
-    ? state.profileHeader.info.data.available
+  const available = state.profileHeader.data
+    ? state.profileHeader.data.available
     : 0;
   return {
     available

@@ -1,5 +1,5 @@
-import { GVColors } from "gv-react-components";
 import * as React from "react";
+import GVColors from "shared/components/gv-styles/gv-colors";
 
 export const getStrokeColor = (data: number[]): string => {
   const dataMax = data[data.length - 1];

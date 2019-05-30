@@ -6,5 +6,5 @@
   "javascript.format.enable": false,
   "prettier.eslintIntegration": true,
   "javascript.validate.enable": false,
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

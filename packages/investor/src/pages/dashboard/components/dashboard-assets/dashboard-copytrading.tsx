@@ -1,5 +1,4 @@
 import { SignalDetails } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import moment from "moment";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
 import * as React from "react";
@@ -11,6 +10,7 @@ import {
   ACTION_STATUS_FILTER_NAME,
   ACTION_STATUS_FILTER_VALUES
 } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
+import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";

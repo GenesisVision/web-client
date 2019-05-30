@@ -81,7 +81,7 @@ const Notification: React.FunctionComponent<INotificationProps> = props => {
 
       <div className="notification__content">
         <div className="notification__description">{text}</div>
-        <div className="notification__date">{moment(date).format("LT")}</div>
+        <div className="notification__date">{moment(date).format("HH:mm")}</div>
       </div>
     </div>
   );

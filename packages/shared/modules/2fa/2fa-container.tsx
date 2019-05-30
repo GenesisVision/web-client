@@ -1,14 +1,14 @@
 import "./2fa.scss";
 
 import classNames from "classnames";
-import { GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
-import { fetchTwoFactor } from "shared/actions/2fa-actions";
+import { fetchTwoFactorAction } from "shared/actions/2fa-actions";
 import Dialog from "shared/components/dialog/dialog";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import GVTextField from "shared/components/gv-text-field";
+import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import Select from "shared/components/select/select";
 import { ITwoFactorReducer } from "shared/reducers/2fa-reducer";
 import RootState from "shared/reducers/root-reducer";
@@ -18,7 +18,7 @@ import DisableAuthContainer from "./disable-auth/disable-auth-container";
 import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
 import GoogleAuthContainer from "./google-auth/google-auth-container";
 
-class TwoFactorAuthContainer extends React.PureComponent<Props, State> {
+class _TwoFactorAuthContainer extends React.PureComponent<Props, State> {
   state = {
     isPending: false,
     type: undefined
@@ -89,7 +89,10 @@ const mapStateToProps = (state: RootState): StateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   services: bindActionCreators(
-    { fetchTwoFactor, fetchProfileHeaderInfo },
+    {
+      fetchTwoFactor: fetchTwoFactorAction,
+      fetchProfileHeaderInfo: fetchProfileHeaderInfoAction
+    },
     dispatch
   )
 });
@@ -123,10 +126,11 @@ enum TYPE_2FA {
   DISABLE = "disable"
 }
 
-export default compose(
+const TwoFactorAuthContainer = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(TwoFactorAuthContainer);
+)(_TwoFactorAuthContainer);
+export default TwoFactorAuthContainer;

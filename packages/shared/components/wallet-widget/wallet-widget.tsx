@@ -1,6 +1,7 @@
 import "./wallet-widget.scss";
 
 import classNames from "classnames";
+import { WalletsGrandTotal } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -9,24 +10,12 @@ import { WalletIcon } from "shared/components/icon/wallet-icon";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
+import withLoader from "shared/decorators/with-loader";
+import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-form";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-interface IWalletWidgetProps {
-  available: number;
-  invested: number;
-  pending: number;
-  totalBalance: number;
-  className?: string;
-  currency: string;
-}
-
-interface IWalletWidgetState {
-  anchorEl?: EventTarget;
-  isOpenAddFundsPopup: boolean;
-}
-
-class WalletWidget extends React.Component<
+class _WalletWidget extends React.PureComponent<
   IWalletWidgetProps & InjectedTranslateProps,
   IWalletWidgetState
 > {
@@ -34,31 +23,28 @@ class WalletWidget extends React.Component<
     anchorEl: undefined,
     isOpenAddFundsPopup: false
   };
-  handleOpenDetails = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  handleOpenDetails = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
     this.setState({ anchorEl: event.currentTarget });
-  };
-  handleCloseDetails = () => {
-    this.setState({ anchorEl: undefined });
-  };
-  handleOpenAddFundsPopup = () => {
-    this.setState({ isOpenAddFundsPopup: true });
-  };
-  handleClodsAddFundsPopup = () => {
+
+  handleCloseDetails = () => this.setState({ anchorEl: undefined });
+
+  handleOpenAddFundsPopup = () => this.setState({ isOpenAddFundsPopup: true });
+
+  handleClodsAddFundsPopup = () =>
     this.setState({ isOpenAddFundsPopup: false });
-  };
+
   render() {
+    const { t, info, className } = this.props;
     const {
-      t,
-      currency,
-      available = 0,
-      invested = 0,
-      totalBalance = 0,
-      pending = 0,
-      className
-    } = this.props;
-    const currentWallet = { available, currency };
+      currencyCcy: currency,
+      availableCcy: available,
+      investedCcy: invested,
+      pendingCcy: pending,
+      totalCcy: totalBalance
+    } = info;
+    const currentWallet: CurrentWallet = { available, currency };
     return (
-      <React.Fragment>
+      <>
         <div className={classNames("wallet-widget", className)}>
           <div
             className="wallet-widget__wallet"
@@ -121,9 +107,20 @@ class WalletWidget extends React.Component<
             </div>
           </div>
         </Popover>
-      </React.Fragment>
+      </>
     );
   }
 }
 
-export default translate()(WalletWidget);
+interface IWalletWidgetProps {
+  info: WalletsGrandTotal;
+  className?: string;
+}
+
+interface IWalletWidgetState {
+  anchorEl?: EventTarget;
+  isOpenAddFundsPopup: boolean;
+}
+
+const WalletWidget = withLoader(translate()(_WalletWidget));
+export default WalletWidget;

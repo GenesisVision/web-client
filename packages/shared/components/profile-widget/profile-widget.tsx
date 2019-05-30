@@ -1,11 +1,12 @@
 import "./profile-widget.scss";
 
 import classNames from "classnames";
-import { GVButton } from "gv-react-components";
+import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
+import GVButton from "shared/components/gv-button";
 import { DetailsIcon } from "shared/components/icon/details-icon";
 import { LogoutIcon } from "shared/components/icon/logout-icon";
 import { SettingsIcon } from "shared/components/icon/settings-icon";
@@ -17,21 +18,9 @@ import {
   SETTINGS_ROUTE
 } from "shared/components/profile/profile.constants";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
+import withLoader from "shared/decorators/with-loader";
 
-interface IProfileWidgetProps {
-  avatar?: string;
-  logout(): void;
-  email: string;
-  className?: string;
-}
-interface IProfileWidgetState {
-  anchor?: EventTarget;
-}
-
-class ProfileWidget extends React.Component<
-  IProfileWidgetProps & InjectedTranslateProps,
-  IProfileWidgetState
-> {
+class _ProfileWidget extends React.PureComponent<Props, State> {
   state = {
     anchor: undefined
   };
@@ -42,13 +31,13 @@ class ProfileWidget extends React.Component<
   handleClose = (): void => this.setState({ anchor: undefined });
 
   render() {
-    const { t, avatar = "", email = "", logout, className } = this.props;
+    const { t, profileHeader, logout, className } = this.props;
     return (
       <div className={classNames("profile-widget", className)}>
         <div className="profile-widget__content" onClick={this.handleOpen}>
           <ProfileAvatar
-            url={avatar}
-            alt={email}
+            url={profileHeader.avatar}
+            alt={profileHeader.email}
             className="profile-widget__avatar"
           />
           <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
@@ -59,7 +48,7 @@ class ProfileWidget extends React.Component<
           horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
         >
           <div className="profile-menu">
-            <div className="profile-menu__header">{email}</div>
+            <div className="profile-menu__header">{profileHeader.email}</div>
             <div className="profile-menu__container">
               <div className="profile-menu__item profile-menu__item--details">
                 <Link to={PROFILE_ROUTE} onClick={this.handleClose}>
@@ -89,4 +78,14 @@ class ProfileWidget extends React.Component<
   }
 }
 
-export default translate()(ProfileWidget);
+interface Props extends InjectedTranslateProps {
+  profileHeader: ProfileHeaderViewModel;
+  logout(): void;
+  className?: string;
+}
+interface State {
+  anchor?: EventTarget;
+}
+
+const ProfileWidget = withLoader(translate()(_ProfileWidget));
+export default ProfileWidget;

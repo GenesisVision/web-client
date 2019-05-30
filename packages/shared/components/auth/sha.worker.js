@@ -8,10 +8,7 @@ importScripts(
 onmessage = event => {
   const [difficulty, nonce, login] = event.data;
   let prefix = 0;
-  const diffString = [
-    ...Array(difficulty).fill(0),
-    ...Array(64 - difficulty).fill("F")
-  ].join("");
+  const diffString = "0".repeat(difficulty) + "F".repeat(64 - difficulty);
   while (sha256(`${prefix}${nonce}${login}`) >= diffString) {
     if (prefix % (difficulty * 100) === 0)
       postMessage({ prefix, found: false });

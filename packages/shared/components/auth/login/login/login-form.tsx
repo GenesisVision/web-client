@@ -1,13 +1,15 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 
-import { FORGOT_PASSWORD_ROUTE } from "../login.routes";
+import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
 import validationSchema from "./login-form.validators";
 
 const _LoginForm: React.FC<

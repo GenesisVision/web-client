@@ -9,8 +9,9 @@ import Status from "shared/components/status/status";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import { CURRENCY_FRACTIONS } from "shared/utils/currency-converter";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+
+import { TRANSACTIONS_DECIMAL_SCALE } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
@@ -56,9 +57,9 @@ const AmountConvertTransaction: React.FunctionComponent<{
   <Fragment>
     <span className="wallet-transactions__col">
       <NumberFormat
-        value={formatCurrencyValue(
+        value={formatValue(
           props.transaction.amount,
-          props.transaction.currencyFrom
+          TRANSACTIONS_DECIMAL_SCALE
         )}
         thousandSeparator=" "
         displayType="text"
@@ -68,9 +69,9 @@ const AmountConvertTransaction: React.FunctionComponent<{
     <span className="wallet-transactions__back-arrow">&rarr;</span>
     <span className="wallet-transactions__col">
       <NumberFormat
-        value={formatCurrencyValue(
+        value={formatValue(
           props.transaction.amountTo,
-          props.transaction.currencyTo
+          TRANSACTIONS_DECIMAL_SCALE
         )}
         thousandSeparator=" "
         displayType="text"
@@ -143,11 +144,16 @@ class TransactionsRow extends React.Component<
             {isConvertAction ? (
               <AmountConvertTransaction transaction={transaction} />
             ) : (
-              <Profitability value={transaction.amount}>
+              <Profitability
+                value={formatValue(
+                  transaction.amount,
+                  TRANSACTIONS_DECIMAL_SCALE
+                )}
+              >
                 <NumberFormat
                   value={formatValue(
                     transaction.amount,
-                    CURRENCY_FRACTIONS(transaction.currencyFrom)
+                    TRANSACTIONS_DECIMAL_SCALE
                   )}
                   thousandSeparator=" "
                   displayType="text"
