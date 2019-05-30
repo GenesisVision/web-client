@@ -558,7 +558,16 @@
       "stop-out-level": "A compulsory closing of positions at current market prices when a loss reaches the Stop out level. The period is automatically closed and all money is distributed to investors minus a loss. If the current reporting period of an investment program was ended due to the Stop out trigger, then in the next period the investors who had investments in the program when Stop Out have triggered, the Entry fee = 0",
       "profit": "Profit or loss resulting from the manager trading. Calculated according to your share of investment in the program.",
       "status": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
-      "reinvest": "If the reinvestment trigger is on, then at the end of the period all profits after deducting the commission will be reinvested back into the program. If the button is not pressed, then at the end of the period all the profits will be transferred to your GVT wallet."
+      "reinvest": "If the reinvestment trigger is on, then at the end of the period all profits after deducting the commission will be reinvested back into the program. If the button is not pressed, then at the end of the period all the profits will be transferred to your GVT wallet.",
+      "equity": "The current amount of funds in the program, taking into account the profit / loss of open transactions",
+      "investors": "The current number of investors in the program.",
+      "period": "The time interval in the program, which is set by the manager when creating the program. At the end of the period, profit/loss is distributed between the investors and the manager, according to the share in the program, and all received queries for investment and withdrawals are processed.",
+      "trades": "The number of trades the manager has performed during the selected date range.",
+      "success-trades": "The percentage of successful trades among the number of total trades during the selected date range.",
+      "profit-factor": "An indicator which is defined as the gross profit divided by the gross loss for the selected date range.",
+      "sharpe-ratio": "A measure of the effectiveness of a program, which is calculated as the mathematical ratio of the average yield to the average deviation of this yield. The higher the ratio, the lower the risk of investments, and higher the hypothetical profit.",
+      "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The larger this indicator, the better and more effective the program in terms of combining risk and profitability.",
+      "max-drawdown": "The biggest drawdown of a program during the selected date range."
     },
     "popover": {
       "genesis-level": "Genesis Level",

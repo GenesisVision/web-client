@@ -16,6 +16,8 @@ import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic
 } from "../../services/program-details.types";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
+import Tooltip from "shared/components/tooltip/tooltip";
 
 const ProgramDetailsStatisticsElements: React.FC<
   IProgramDetailsStatisticsElementsProps & InjectedTranslateProps
@@ -25,7 +27,11 @@ const ProgramDetailsStatisticsElements: React.FC<
       {t("program-details-page.statistics.current")}
     </div>
     <div className="details-statistics__particular-information">
-      <StatisticItem label={t("program-details-page.statistics.equity")} accent>
+      <StatisticItem
+        label={t("program-details-page.statistics.equity")}
+        labelTooltip={t("program-details-page.tooltip.equity")}
+        accent
+      >
         <NumberFormat
           value={formatCurrencyValue(
             profitChart.balance,
@@ -36,7 +42,10 @@ const ProgramDetailsStatisticsElements: React.FC<
           suffix={` ${profitChart.programCurrency}`}
         />
       </StatisticItem>
-      <StatisticItem label={t("program-details-page.statistics.investors")}>
+      <StatisticItem
+        label={t("program-details-page.statistics.investors")}
+        labelTooltip={t("program-details-page.tooltip.investors")}
+      >
         <NumberFormat
           value={statistic.investors}
           thousandSeparator={" "}
@@ -44,9 +53,18 @@ const ProgramDetailsStatisticsElements: React.FC<
         />
       </StatisticItem>
       <div className="details-statistics__period">
-        <span className="details-statistics__label">
-          {t("program-details-page.statistics.period")}
-        </span>
+        <Tooltip
+          horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+          render={() => (
+            <div className="details-statistics__tooltip">
+              {t("program-details-page.tooltip.period")}
+            </div>
+          )}
+        >
+          <span className="details-statistics__label">
+            {t("program-details-page.statistics.period")}
+          </span>
+        </Tooltip>
         <ProgramPeriodLine
           start={statistic.periodStarts}
           end={statistic.periodEnds}
@@ -62,7 +80,11 @@ const ProgramDetailsStatisticsElements: React.FC<
 
     <div className="details-statistics__particular-information">
       <div className="details-statistics__column">
-        <StatisticItem label={t("program-details-page.statistics.trades")} half>
+        <StatisticItem
+          label={t("program-details-page.statistics.trades")}
+          labelTooltip={t("program-details-page.tooltip.trades")}
+          half
+        >
           <NumberFormat
             value={statistic.trades !== undefined ? statistic.trades : "-"}
             thousandSeparator={" "}
@@ -71,6 +93,7 @@ const ProgramDetailsStatisticsElements: React.FC<
         </StatisticItem>
         <StatisticItem
           label={t("program-details-page.statistics.profit-factor")}
+          labelTooltip={t("program-details-page.tooltip.profit-factor")}
           half
         >
           <NumberFormat
@@ -84,6 +107,7 @@ const ProgramDetailsStatisticsElements: React.FC<
         </StatisticItem>
         <StatisticItem
           label={t("program-details-page.statistics.max-drawdown")}
+          labelTooltip={t("program-details-page.tooltip.max-drawdown")}
           half
         >
           <NumberFormat
@@ -101,6 +125,7 @@ const ProgramDetailsStatisticsElements: React.FC<
       <div className="details-statistics__column">
         <StatisticItem
           label={t("program-details-page.statistics.success-trades")}
+          labelTooltip={t("program-details-page.tooltip.success-trades")}
           half
         >
           <NumberFormat
@@ -115,6 +140,7 @@ const ProgramDetailsStatisticsElements: React.FC<
         </StatisticItem>
         <StatisticItem
           label={t("program-details-page.statistics.sharpe-ratio")}
+          labelTooltip={t("program-details-page.tooltip.sharpe-ratio")}
           half
         >
           <NumberFormat
@@ -128,6 +154,7 @@ const ProgramDetailsStatisticsElements: React.FC<
         </StatisticItem>
         <StatisticItem
           label={t("program-details-page.statistics.sortino-ratio")}
+          labelTooltip={t("program-details-page.tooltip.sortino-ratio")}
           half
         >
           <NumberFormat
