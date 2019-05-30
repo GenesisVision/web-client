@@ -3,6 +3,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
+import { FUNDS_ROUTE } from "shared/components/funds/funds.routes";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
 import { DetailsIcon } from "shared/components/icon/details-icon";
 import { FundsIcon } from "shared/components/icon/funds-icon";
@@ -20,7 +21,7 @@ import {
 import Sidebar from "shared/components/sidebar/sidebar";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
-import { FUNDS_ROUTE, PROGRAMS_ROUTE } from "shared/utils/compose-url";
+import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
 const _NavigationMobile: React.FC<Props> = ({
   t,

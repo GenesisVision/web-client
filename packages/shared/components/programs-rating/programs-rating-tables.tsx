@@ -20,9 +20,9 @@ const _ProgramsRatingTables: React.FC<Props> = ({ t, id, tab, title }) => (
 );
 
 interface Props extends InjectedTranslateProps {
-  id: string;
   tab: INavigateTab;
   title: string;
+  id?: string;
 }
 
 const ProgramsRatingTables = React.memo(translate()(_ProgramsRatingTables));
