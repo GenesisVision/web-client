@@ -102,6 +102,7 @@ class DetailsInvestment extends PureComponent<
                 condition={asset === PROGRAM}
                 accent
                 label={t("fund-details-page.description.profit")}
+                labelTooltip={t("program-details-page.tooltip.profit")}
               >
                 <Profitability
                   value={formatCurrencyValue(profitValue, assetCurrency)}
@@ -124,6 +125,7 @@ class DetailsInvestment extends PureComponent<
               <StatisticItem
                 accent
                 label={t("fund-details-page.description.status")}
+                labelTooltip={t("program-details-page.tooltip.status")}
               >
                 <AssetStatus
                   status={personalDetails.status as STATUS}

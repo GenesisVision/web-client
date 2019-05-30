@@ -549,6 +549,17 @@
         "managers-funds": "Managers Funds"
       }
     },
+    "tooltip": {
+      "av-to-invest": "The amount available for investment up to the next period.",
+      "entry-fee": "The commission that is paid to the manager by an investor for investing in the program. The commission is set by the manager and calculated as a percentage of the amount invested. The commission is charged when investing in programs that have reached the third level.",
+      "success-fee": "The commission charged from the profit. It is set by the manager and calculated as a percentage of the profits earned over a certain period of time. If there is no profit, then there is no success fee charged.",
+      "success-fee-signal": "Commission charged from copy trading profits. The fee is calculated according to the method of the High-water mark. With this method, the percentage is not taken from the profit for the period, but from the difference between the investors' investments and the previous maximum profit.",
+      "volume-fee": "A volume commission, charged only for opening a transaction.",
+      "stop-out-level": "A compulsory closing of positions at current market prices when a loss reaches the Stop out level. The period is automatically closed and all money is distributed to investors minus a loss. If the current reporting period of an investment program was ended due to the Stop out trigger, then in the next period the investors who had investments in the program when Stop Out have triggered, the Entry fee = 0",
+      "profit": "Profit or loss resulting from the manager trading. Calculated according to your share of investment in the program.",
+      "status": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
+      "reinvest": "If the reinvestment trigger is on, then at the end of the period all profits after deducting the commission will be reinvested back into the program. If the button is not pressed, then at the end of the period all the profits will be transferred to your GVT wallet."
+    },
     "popover": {
       "genesis-level": "Genesis Level",
       "invest-limit": "Invest limit",

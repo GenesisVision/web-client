@@ -10,20 +10,8 @@ import { IProgramReinvestingContainerOwnProps } from "shared/components/programs
 
 import { toggleReinvesting } from "../services/program-reinvesting.service";
 
-interface IProgramReinvestingContainerProps
-  extends IProgramReinvestingContainerOwnProps,
-    InjectedTranslateProps {}
-
-interface IProgramReinvestingContainerState {
-  isReinvesting: boolean;
-  isPending: boolean;
-}
-
-class ProgramReinvestingContainer extends React.PureComponent<
-  IProgramReinvestingContainerProps,
-  IProgramReinvestingContainerState
-> {
-  constructor(props: IProgramReinvestingContainerProps) {
+class _ProgramReinvestingContainer extends React.PureComponent<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       isReinvesting: props.isReinvesting,
@@ -65,6 +53,7 @@ class ProgramReinvestingContainer extends React.PureComponent<
               color="primary"
               onChange={this.onReinvestingLabelClick(updateDetails)}
               label={t("program-details-page.description.reinvest")}
+              labelTooltip={t("program-details-page.tooltip.reinvest")}
               disabled={isPending}
             />
           </span>
@@ -74,4 +63,16 @@ class ProgramReinvestingContainer extends React.PureComponent<
   }
 }
 
-export default translate()(ProgramReinvestingContainer);
+const ProgramReinvestingContainer = React.memo(
+  translate()(_ProgramReinvestingContainer)
+);
+export default ProgramReinvestingContainer;
+
+interface Props
+  extends IProgramReinvestingContainerOwnProps,
+    InjectedTranslateProps {}
+
+interface State {
+  isReinvesting: boolean;
+  isPending: boolean;
+}

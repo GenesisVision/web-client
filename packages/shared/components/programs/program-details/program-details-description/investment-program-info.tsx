@@ -28,6 +28,7 @@ const InvestmentProgramInfo: React.FunctionComponent<
       <StatisticItem
         label={t("program-details-page.description.avToInvest")}
         className="program-details-description__short-statistic-item"
+        labelTooltip={t("program-details-page.tooltip.av-to-invest")}
         accent
       >
         <NumberFormat
@@ -39,6 +40,7 @@ const InvestmentProgramInfo: React.FunctionComponent<
       <StatisticItem
         label={t("program-details-page.description.entryFee")}
         className="program-details-description__short-statistic-item"
+        labelTooltip={t("program-details-page.tooltip.entry-fee")}
         accent
       >
         {entryFeeSelected !== entryFeeCurrent ? (
@@ -68,6 +70,7 @@ const InvestmentProgramInfo: React.FunctionComponent<
       <StatisticItem
         label={t("program-details-page.description.successFee")}
         className="program-details-description__short-statistic-item"
+        labelTooltip={t("program-details-page.tooltip.success-fee")}
         accent
       >
         <NumberFormat
@@ -80,6 +83,7 @@ const InvestmentProgramInfo: React.FunctionComponent<
         condition={!!stopOutLevel}
         label={t("program-details-page.description.stop-out-level")}
         className="program-details-description__short-statistic-item"
+        labelTooltip={t("program-details-page.tooltip.stop-out-level")}
         accent
       >
         <NumberFormat

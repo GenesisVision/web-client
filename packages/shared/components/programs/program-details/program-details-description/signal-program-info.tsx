@@ -16,6 +16,7 @@ const SignalProgramInfo: FunctionComponent<
       <StatisticItem
         label={t("program-details-page.description.successFee")}
         className="program-details-description__short-statistic-item"
+        labelTooltip={t("program-details-page.tooltip.success-fee-signal")}
         accent
       >
         <NumberFormat
@@ -27,6 +28,7 @@ const SignalProgramInfo: FunctionComponent<
       <StatisticItem
         label={t("program-details-page.description.volume-fee")}
         className="program-details-description__short-statistic-item"
+        labelTooltip={t("program-details-page.tooltip.volume-fee")}
         accent
       >
         <NumberFormat
