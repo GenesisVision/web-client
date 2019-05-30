@@ -1,11 +1,11 @@
 import * as React from "react";
 import ProfileLayout from "shared/components/profile/profile-layout";
 
-import SocialLinks from "./components/social-links";
+import SocialLinksContainer from "./components/social-links.container";
 
 const SocialLinksPage: React.FC = () => (
   <ProfileLayout route="social-links">
-    <SocialLinks />
+    <SocialLinksContainer />
   </ProfileLayout>
 );
 

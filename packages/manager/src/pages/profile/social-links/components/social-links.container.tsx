@@ -2,6 +2,8 @@ import "./social-links.scss";
 
 import { CancelablePromise, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
+import { ResolveThunks, connect } from "react-redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import withLoader from "shared/decorators/with-loader";
 
 import {
@@ -25,7 +27,7 @@ interface ILinksProps {
   onSubmit(id: string, value: string): CancelablePromise<void>;
 }
 
-class SocialLinks extends React.PureComponent<{}, State> {
+class _SocialLinksContainer extends React.PureComponent<Props, State> {
   state: State = {
     socialLinks: undefined
   };
@@ -35,7 +37,7 @@ class SocialLinks extends React.PureComponent<{}, State> {
   }
 
   handleSubmitSocialLink = (id: string, value: string) => {
-    return updateSocialLink(id, value).then(() => {
+    return this.props.service.updateSocialLink(id, value).then(() => {
       this.updateSocialLinks();
     });
   };
@@ -61,8 +63,29 @@ class SocialLinks extends React.PureComponent<{}, State> {
   }
 }
 
-export default SocialLinks;
+const mapDispatchToProps = (dispatch: Dispatch): Props => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      updateSocialLink
+    },
+    dispatch
+  )
+});
+
+const SocialLinksContainer = connect(
+  null,
+  mapDispatchToProps
+)(_SocialLinksContainer);
+export default SocialLinksContainer;
 
 interface State {
   socialLinks?: SocialLinkViewModel[];
+}
+
+interface Props {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  updateSocialLink: typeof updateSocialLink;
 }
