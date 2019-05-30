@@ -9,12 +9,12 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { FUND } from "shared/constants/constants";
 import { composeFundNotificationsUrl } from "shared/utils/compose-url";
 
-import { HORIZONTAL_POPOVER_POS } from "../../../popover/popover";
-import Tooltip from "../../../tooltip/tooltip";
 import {
   IFundControlsProps,
   IFundWithdrawalContainerProps

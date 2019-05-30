@@ -1,13 +1,14 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { FundAssetsListInfo } from "gv-api-web";
-import { SyntheticEvent } from "react";
 import * as React from "react";
+import { SyntheticEvent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import Surface from "shared/components/surface/surface";
@@ -15,11 +16,10 @@ import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/compone
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { AuthState } from "shared/reducers/auth-reducer";
 import RootState from "shared/reducers/root-reducer";
 
-import { HORIZONTAL_POPOVER_POS } from "../../../popover/popover";
-import Tooltip from "../../../tooltip/tooltip";
 import FundStructure from "./fund-structure/fund-structure";
 
 const EVENTS_FILTERING = {

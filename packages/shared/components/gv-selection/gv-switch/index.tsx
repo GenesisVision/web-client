@@ -2,9 +2,8 @@ import "./style.scss";
 
 import classnames from "classnames";
 import React from "react";
-
-import { HORIZONTAL_POPOVER_POS } from "../../popover/popover";
-import Tooltip from "../../tooltip/tooltip";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
+import Tooltip from "shared/components/tooltip/tooltip";
 
 class GVSwitch extends React.Component<GVSwitchProps> {
   static propTypes: any;
