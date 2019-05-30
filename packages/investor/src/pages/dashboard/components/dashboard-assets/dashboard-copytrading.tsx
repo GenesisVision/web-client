@@ -3,6 +3,7 @@ import moment from "moment";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import {
@@ -10,6 +11,8 @@ import {
   ACTION_STATUS_FILTER_VALUES
 } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import GVButton from "shared/components/gv-button";
+import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -25,7 +28,11 @@ import {
 } from "shared/components/table/components/table.types";
 import { ROLE_ENV } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { formatPercent } from "shared/utils/formatter";
+import {
+  formatCurrencyValue,
+  formatPercent,
+  formatValue
+} from "shared/utils/formatter";
 
 import { DASHBOARD_COPYTRADING_COLUMNS } from "./dashboard-copytrading.constants";
 import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
@@ -100,18 +107,24 @@ class _DashboardCopytrading extends React.Component<
               {moment(signal.personalDetails.subscriptionDate).format()}
             </TableCell>
             <TableCell>
-              {/*<Profitability
-                value={+formatPercent(signal.personalDetails.investorProfit)}
+              <Profitability
+                value={formatCurrencyValue(
+                  signal.statistic.profitValue,
+                  signal.currency
+                )}
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
-                  value={formatPercent(signal.personalDetails.investorProfit)}
+                  value={formatCurrencyValue(
+                    signal.statistic.profitValue,
+                    signal.currency
+                  )}
                   thousandSeparator=" "
-                  allowNegative={false}
                   displayType="text"
-                  suffix=" %"
+                  allowNegative={false}
+                  suffix={` ${signal.currency}`}
                 />
-              </Profitability>*/}
+              </Profitability>
             </TableCell>
             <TableCell className="programs-table__cell dashboard-programs__cell--chart">
               {signal.chart.length && (
