@@ -50,6 +50,7 @@ class GVSwitch extends React.Component<GVSwitchProps> {
       color,
       value,
       label,
+      touched,
       labelTooltip,
       disabled,
       ...other
