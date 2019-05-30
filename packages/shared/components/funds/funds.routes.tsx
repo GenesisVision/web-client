@@ -1,4 +1,3 @@
-import React from "react";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
 
 export const FUNDS_FAVORITES_TAB_NAME = "favorites";
