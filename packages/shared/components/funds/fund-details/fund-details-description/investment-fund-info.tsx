@@ -17,6 +17,7 @@ const InvestmentFundInfo: React.FunctionComponent<
       <StatisticItem
         label={t("fund-details-page.description.entryFee")}
         className={"details-description__short-statistic-item"}
+        labelTooltip={t("fund-details-page.tooltip.entry-fee")}
         accent
       >
         <NumberFormat
@@ -27,6 +28,7 @@ const InvestmentFundInfo: React.FunctionComponent<
       </StatisticItem>
       <StatisticItem
         label={t("fund-details-page.description.exitFee")}
+        labelTooltip={t("fund-details-page.tooltip.exit-fee")}
         className={"details-description__short-statistic-item"}
         accent
       >

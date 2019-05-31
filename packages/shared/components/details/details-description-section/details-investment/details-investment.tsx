@@ -77,6 +77,8 @@ class DetailsInvestment extends PureComponent<
 
     const profitValue = personalDetails.value - personalDetails.invested;
 
+    console.log(asset);
+
     return (
       <ProgramDetailContext.Consumer>
         {({ updateDetails }: IProgramDetailContext) => (
@@ -125,7 +127,7 @@ class DetailsInvestment extends PureComponent<
               <StatisticItem
                 accent
                 label={t("fund-details-page.description.status")}
-                labelTooltip={t("program-details-page.tooltip.status")}
+                labelTooltip={t(`fund-details-page.tooltip.status.${asset}`)}
               >
                 <AssetStatus
                   status={personalDetails.status as STATUS}

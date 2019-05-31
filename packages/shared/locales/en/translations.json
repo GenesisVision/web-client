@@ -462,7 +462,10 @@
       "entry-fee": "The commission that the investor pays the manager for investing in the fund. Set by the manager and calculated as a percentage of the amount invested.",
       "exit-fee": "The commission that the investor pays the manager for withdrawing funds from the fund. Set by the manager and calculated as a percentage of the amount invested.",
       "balance": "The current amount of funds in the fund.",
-      "status": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended).",
+      "status": {
+        "PROGRAM": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
+        "FUND": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended)."
+      },
       "start-day": "Creation day of the fund.",
       "investors": "The current number of investors in the fund.",
       "calmar-ratio": "A comparison of the average annual compounded rate of return and the maximum drawdown risk of asset managers and hedge funds.The higher the score, the better the portfolio is formed.",
@@ -574,7 +577,6 @@
       "volume-fee": "A volume commission, charged only for opening a transaction.",
       "stop-out-level": "A compulsory closing of positions at current market prices when a loss reaches the Stop out level. The period is automatically closed and all money is distributed to investors minus a loss. If the current reporting period of an investment program was ended due to the Stop out trigger, then in the next period the investors who had investments in the program when Stop Out have triggered, the Entry fee = 0",
       "profit": "Profit or loss resulting from the manager trading. Calculated according to your share of investment in the program.",
-      "status": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
       "reinvest": "If the reinvestment trigger is on, then at the end of the period all profits after deducting the commission will be reinvested back into the program. If the button is not pressed, then at the end of the period all the profits will be transferred to your GVT wallet.",
       "equity": "The current amount of funds in the program, taking into account the profit / loss of open transactions",
       "investors": "The current number of investors in the program.",
