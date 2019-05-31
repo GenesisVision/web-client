@@ -1,4 +1,4 @@
-import { HOME_ROUTE } from "pages/app/app.routes";
+import { HOME_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
 import history from "shared/utils/history";
 

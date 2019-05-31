@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
-import FundsFacetPage from "shared/components/funds/funds-facet/funds-facet.page";
+import fundsFacetPage from "shared/components/funds/funds-facet/funds-facet.page";
 import FundsPage from "shared/components/funds/funds.page";
 import {
   FUNDS_FACET_ROUTE_REGEX,
@@ -17,7 +17,7 @@ const FundsRoutes: React.FC = () => (
   <Switch>
     <Route exact path={FUNDS_ROUTE} component={FundsPage} />
     <PrivateRoute path={FUNDS_FAVORITES_TAB_ROUTE} component={FundsPage} />
-    <Route path={FUNDS_FACET_ROUTE_REGEX} component={FundsFacetPage} />
+    <Route path={FUNDS_FACET_ROUTE_REGEX} component={fundsFacetPage} />
     <Route path={FUND_DETAILS_ROUTE_REGEX} component={FundDetailsPage} />
     <Route component={NotFoundPage} />
   </Switch>

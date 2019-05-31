@@ -1,13 +1,14 @@
 import "./app-layout.scss";
 
-import React, { Component } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import platformActions from "shared/actions/platform-actions";
 import { initOnResizeEvent } from "shared/actions/ui-actions";
 import HeaderContainer from "shared/components/header/header.container";
 import NotificationsContainer from "shared/components/notifications/components/notifications-container";
+import { MiddlewareDispatch } from "shared/utils/types";
 
-class AppLayout extends Component {
+class _AppLayout extends React.Component<Props> {
   componentDidMount() {
     this.props.fetchPlatformSettings();
     this.props.initOnResizeEvent();
@@ -29,13 +30,24 @@ class AppLayout extends Component {
   }
 }
 
-export default connect(
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
+  fetchPlatformSettings: () => dispatch(platformActions.fetchPlatformSettings),
+  initOnResizeEvent: () => dispatch(initOnResizeEvent())
+});
+
+interface Props extends DispatchProps, OwnProps {}
+
+interface OwnProps {}
+
+interface DispatchProps {
+  fetchPlatformSettings: () => void;
+  initOnResizeEvent: () => void;
+}
+
+const AppLayout = connect<null, DispatchProps, OwnProps>(
   null,
-  dispatch => ({
-    fetchPlatformSettings: () =>
-      dispatch(platformActions.fetchPlatformSettings),
-    initOnResizeEvent: () => dispatch(initOnResizeEvent())
-  }),
+  mapDispatchToProps,
   null,
   { pure: false }
-)(AppLayout);
+)(_AppLayout);
+export default AppLayout;
