@@ -14,9 +14,8 @@ import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic
 } from "shared/components/programs/program-details/services/program-details.types";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import RootState from "shared/reducers/root-reducer";
-import { ResponseError } from "shared/utils/types";
+import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
 import ProgramDetailsContainer from "./program-details.contaner";
 import ProgramDetailsContainerLoader from "./program-details.contaner.loader";
@@ -115,7 +114,7 @@ interface OwnProps {
 
 interface StateProps {
   isAuthenticated: boolean;
-  currency: CURRENCIES;
+  currency: CurrencyEnum;
 }
 
 interface DispatchProps {
