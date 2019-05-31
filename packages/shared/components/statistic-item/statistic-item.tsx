@@ -29,7 +29,7 @@ const _StatisticItem: React.FC<Props> = ({
     ) {
       case true:
         return classNames("statistics-item__value", {
-          "statistics-item__label--tooltip": tooltip,
+          "statistics-item__value--tooltip-child": tooltip,
           "statistics-item__value--accent": accent,
           "statistics-item__value--small": small,
           "statistics-item__value--big": big,
@@ -38,7 +38,7 @@ const _StatisticItem: React.FC<Props> = ({
       case false:
       default:
         return classNames("statistics-item__label", {
-          "statistics-item__label--tooltip": tooltip
+          "statistics-item__label--tooltip-child": tooltip
         });
     }
   };

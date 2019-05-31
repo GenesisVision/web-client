@@ -13,4 +13,8 @@ $tooltip-padding: 16px;
     font-size: 13px;
     max-width: 400px;
   }
+
+  &__child {
+    cursor: help;
+  }
 }
