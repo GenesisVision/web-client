@@ -33,10 +33,7 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
 
   componentDidMount() {
     this.updateDetails()
-      .then(data => {
-        this.setState({ isPending: true });
-        return getProgramStatistic(data.id);
-      })
+      .then(data => getProgramStatistic(data.id))
       .then(data => {
         this.setState({ isPending: false, ...data });
       })
