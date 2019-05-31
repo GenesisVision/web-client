@@ -61,7 +61,7 @@ const ProgramDetailsStatisticsElements: React.FC<
             </div>
           )}
         >
-          <span className="details-statistics__label">
+          <span className="details-statistics__label tooltip__child">
             {t("program-details-page.statistics.period")}
           </span>
         </Tooltip>
