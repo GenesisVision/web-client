@@ -12,9 +12,7 @@ import StatisticItemLoader from "shared/components/statistic-item/statistic-item
 import Surface from "shared/components/surface/surface";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 
-const _ProgramDetailsContainerLoader: React.FC<InjectedTranslateProps> = ({
-  t
-}) => (
+const _DetailsContainerLoader: React.FC<InjectedTranslateProps> = ({ t }) => (
   <Page title={""}>
     <div className="details">
       <div className="details__section">
@@ -116,7 +114,5 @@ const _ProgramDetailsContainerLoader: React.FC<InjectedTranslateProps> = ({
     </div>
   </Page>
 );
-const ProgramDetailsContainerLoader = React.memo(
-  translate()(_ProgramDetailsContainerLoader)
-);
-export default ProgramDetailsContainerLoader;
+const DetailsContainerLoader = React.memo(translate()(_DetailsContainerLoader));
+export default DetailsContainerLoader;

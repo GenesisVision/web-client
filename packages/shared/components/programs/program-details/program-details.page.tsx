@@ -5,6 +5,7 @@ import React, { ComponentType, PureComponent } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/login/login.service";
+import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import {
   getProgramDescription,
@@ -18,7 +19,6 @@ import RootState from "shared/reducers/root-reducer";
 import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
 import ProgramDetailsContainer from "./program-details.contaner";
-import ProgramDetailsContainerLoader from "./program-details.contaner.loader";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 
 class _ProgramDetailsPage extends PureComponent<Props, State> {
@@ -76,7 +76,7 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
     return (
       <ProgramDetailsContainer
         condition={!!description}
-        loader={<ProgramDetailsContainerLoader />}
+        loader={<DetailsContainerLoader />}
         updateDetails={this.updateDetails}
         redirectToLogin={service.redirectToLogin}
         historySection={historySection}
