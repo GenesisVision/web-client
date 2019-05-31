@@ -19,6 +19,7 @@ import RootState from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
 
 import ProgramDetailsContainer from "./program-details.contaner";
+import ProgramDetailsContainerLoader from "./program-details.contaner.loader";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 
 class _ProgramDetailsPage extends PureComponent<Props, State> {
@@ -47,9 +48,9 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
     this.setState({ isPending: true });
     return service
       .getProgramDescription()
-      .then(data => {
-        this.setState({ isPending: false, description: data });
-        return data;
+      .then(description => {
+        this.setState({ isPending: false, description });
+        return description;
       })
       .catch((e: ResponseError) => {
         this.setState({ hasError: true });
@@ -73,14 +74,15 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
       balanceChart
     } = this.state;
     if (hasError) return <NotFoundPage />;
-    if (!description) return null;
     return (
       <ProgramDetailsContainer
+        condition={!!description}
+        loader={<ProgramDetailsContainerLoader />}
         updateDetails={this.updateDetails}
         redirectToLogin={service.redirectToLogin}
         historySection={historySection}
         descriptionSection={descriptionSection}
-        description={description}
+        description={description!}
         profitChart={profitChart}
         balanceChart={balanceChart}
         statistic={statistic}
