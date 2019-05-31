@@ -61,7 +61,7 @@ class GVSwitch extends React.Component<GVSwitchProps> {
             <Tooltip
               horizontal={HORIZONTAL_POPOVER_POS.LEFT}
               render={() => (
-                <div className="statistics-item__tooltip">{labelTooltip}</div>
+                <div className="tooltip__content">{labelTooltip}</div>
               )}
             >
               {this.renderLabel()}

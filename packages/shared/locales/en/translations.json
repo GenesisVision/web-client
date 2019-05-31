@@ -457,7 +457,7 @@
       "period": "Period"
     },
     "tooltip": {
-      "assets": "Are objects that have an identifiable value and are traded on crypto markets.",
+      "assets": "Objects that have an identifiable value and are traded on crypto markets.",
       "structure": "The current allocation of funds selected by the Manager.",
       "entry-fee": "The commission that the investor pays the manager for investing in the fund. Set by the manager and calculated as a percentage of the amount invested.",
       "exit-fee": "The commission that the investor pays the manager for withdrawing funds from the fund. Set by the manager and calculated as a percentage of the amount invested.",
