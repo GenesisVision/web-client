@@ -11,7 +11,6 @@ import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-ev
 
 const _DashboardPage: React.FC<InjectedTranslateProps> = ({ t }) => {
   const title = t(`${ROLE_ENV}.dashboard-page.title`);
-  console.log("render");
   return (
     <Page title={title}>
       <div className="dashboard">
