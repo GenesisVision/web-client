@@ -1,17 +1,20 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
+import classNames from "classnames";
 import { FundAssetInfo, FundAssetsListInfo } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import { FUND_STRUCTURE_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { formatValue } from "shared/utils/formatter";
 
 interface Props {
@@ -46,6 +49,23 @@ class FundStructure extends React.Component<
     this.fetchFundStructure();
   }
 
+  renderHeaderContent = (column: SortingColumn): JSX.Element => {
+    return (
+      <span
+        className={classNames(
+          `details-structure__head-cell fund-details-structure__cell--${
+            column.name
+          }`,
+          {
+            tooltip__child: column.tooltip
+          }
+        )}
+      >
+        {this.props.t(`fund-details-page.history.structure.${column.name}`)}
+      </span>
+    );
+  };
+
   render() {
     const { t } = this.props;
 
@@ -64,15 +84,22 @@ class FundStructure extends React.Component<
         }}
         getItems={this.fetchFundStructure}
         columns={FUND_STRUCTURE_COLUMNS}
-        renderHeader={(column: SortingColumn) => (
-          <span
-            className={`details-structure__head-cell fund-details-structure__cell--${
-              column.name
-            }`}
-          >
-            {t(`fund-details-page.history.structure.${column.name}`)}
-          </span>
-        )}
+        renderHeader={(column: SortingColumn) => {
+          return column.tooltip ? (
+            <Tooltip
+              horizontal={HORIZONTAL_POPOVER_POS.CENTER}
+              render={() => (
+                <div className="tooltip__content">
+                  {t(`fund-details-page.tooltip.${column.name}`)}
+                </div>
+              )}
+            >
+              {this.renderHeaderContent(column)}
+            </Tooltip>
+          ) : (
+            this.renderHeaderContent(column)
+          );
+        }}
         renderBodyRow={(item: FundAssetInfo) => (
           <TableRow className="details-structure__row">
             <TableCell className="details-structure__cell fund-details-structure__cell">

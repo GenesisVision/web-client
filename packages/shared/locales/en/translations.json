@@ -474,7 +474,7 @@
       "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The greater the value of Sortino Ratio, the higher the efficiency of the portfolio and the lower the investment risks of investing in a fund.",
       "max-drawdown": "The biggest drawdown of a fund during the selected date range.",
       "target": "The fixed percentage of the coin (asset) allocation in the total fund portfolio.",
-      "currency": "The current percentage of the coin (asset) allocation in the total fund portfolio."
+      "current": "The current percentage of the coin (asset) allocation in the total fund portfolio."
     },
     "history": {
       "heading": "History",
