@@ -97,11 +97,11 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = (state: ManagerRootState): StateProps => {
-  const { info } = state.profileHeader;
+  const { profileHeader } = state;
   const { currency } = state.accountSettings;
   const { assets, assetChart, period, inRequestsData } = state.dashboard;
   return {
-    isNewUser: info.data && info.data.isNewUser,
+    isNewUser: profileHeader.data && profileHeader.data.isNewUser,
     assets: assets.data,
     assetsIsPending: assets.isPending,
     inRequests: inRequestsData.data,

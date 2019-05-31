@@ -5,7 +5,7 @@ import { TransactionDetailsProps } from "shared/modules/transaction-details/tran
 import filesService from "shared/services/file-service";
 import { formatValue } from "shared/utils/formatter";
 
-import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constans";
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
 
 const InvestingTransaction: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;

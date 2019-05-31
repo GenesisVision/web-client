@@ -28,8 +28,7 @@ import {
 
 import {
   createProgram,
-  fetchBrokers,
-  fetchMinDepositsAmount
+  fetchBrokers
 } from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
@@ -53,25 +52,22 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
   componentDidMount() {
     const { service } = this.props;
     service.fetchWallets();
-    fetchBrokers()
-      .then(brokers => {
-        this.setState({
-          brokers: brokers,
-          selectedBroker: brokers[0]
-        });
-        return fetchMinDepositsAmount(brokers[0].accountTypes[0].id);
-      })
-      .then(minimumDepositsAmount =>
-        this.setState({ minimumDepositsAmount, isPending: false })
-      );
+    fetchBrokers().then(brokers => {
+      this.setState({
+        brokers: brokers,
+        selectedBroker: brokers[0],
+        minimumDepositsAmount: brokers[0].accountTypes[0].minimumDepositsAmount,
+        isPending: false
+      });
+    });
   }
 
   selectBroker = (brokerName: string) => () => {
     const selectedBroker = this.state.brokers!.find(x => x.name === brokerName);
-    fetchMinDepositsAmount(selectedBroker!.accountTypes[0].id).then(
-      minimumDepositsAmount =>
-        this.setState({ minimumDepositsAmount, selectedBroker })
-    );
+    const minimumDepositsAmount = selectedBroker
+      ? selectedBroker.accountTypes[0].minimumDepositsAmount
+      : undefined;
+    this.setState({ minimumDepositsAmount, selectedBroker });
   };
 
   confirmNavigateToBroker = (
@@ -226,7 +222,7 @@ const mapStateToProps = (state: ManagerRootState): StateProps => {
     wallets: state.wallet.info.data
       ? state.wallet.info.data.wallets
       : undefined,
-    headerData: state.profileHeader.info.data,
+    headerData: state.profileHeader.data,
     programsInfo: state.platformData.data
       ? state.platformData.data.programsInfo
       : undefined

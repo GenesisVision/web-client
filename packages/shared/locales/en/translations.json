@@ -964,6 +964,7 @@
       }
     },
     "programs": "PROGRAMS",
+    "funds": "FUNDS",
     "program": {
       "title": "Program notifications",
       "general": {

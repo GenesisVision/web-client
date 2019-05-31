@@ -2,7 +2,7 @@ import {
   CancelRequestType,
   GetInRequestsType
 } from "shared/components/dashboard/dashboard.constants";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
@@ -29,7 +29,7 @@ export const cancelRequest: CancelRequestType = ({
   return dispatch(action)
     .then(() => {
       dispatch(getInRequests());
-      dispatch(fetchProfileHeaderInfo());
+      dispatch(fetchProfileHeaderInfoAction());
       dispatch(getTopPortfolioEvents());
       dispatch(
         alertMessageActions.success(

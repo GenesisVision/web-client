@@ -6,7 +6,7 @@ import { TransactionDetailsProps } from "shared/modules/transaction-details/tran
 import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
 import { formatValue } from "shared/utils/formatter";
 
-import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constans";
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
 
 const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data, t }) => {
   const details = data.programDetails;

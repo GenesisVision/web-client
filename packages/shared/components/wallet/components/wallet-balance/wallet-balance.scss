@@ -28,6 +28,11 @@
     align-items: center;
     padding-bottom: $padding-xsmall;
   }
+  &__elements {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 
   &__statistic {
     @include adaptive-padding(top, $padding-xxsmall);
@@ -41,7 +46,6 @@
     @include adaptive-margin(bottom, $padding-medium);
     margin-right: $padding-small;
     display: flex;
-    align-items: flex-end;
     box-sizing: border-box;
     min-width: 140px;
 
@@ -53,7 +57,7 @@
       padding: 0;
     }
 
-    &:first-child {
+    &--total {
       @include adaptive-padding(right, $padding-small);
       border-right: 1px solid rgba($text-dark-color, 0.3);
       align-items: flex-start;
@@ -143,6 +147,7 @@
 
     &__statistic-item {
       margin-right: $padding-medium;
+      align-items: flex-end;
     }
 
     &__total-balance-value {

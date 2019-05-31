@@ -9,7 +9,7 @@ import ArrowIcon from "shared/media/arrow-up-thin.svg";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import { formatValue } from "shared/utils/formatter";
 
-import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constans";
+import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
 
 const ExternalDeposit: React.FC<TransactionDetailsProps> = props => {
   const { data, t } = props;

@@ -33,8 +33,8 @@ const DepositButton: React.FC<
 };
 
 const mapStateToProps = (state: RootState): IDepositButtonStateProps => {
-  const available = state.profileHeader.info.data
-    ? state.profileHeader.info.data.available
+  const available = state.profileHeader.data
+    ? state.profileHeader.data.available
     : 0;
   return {
     available
