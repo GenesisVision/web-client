@@ -7,9 +7,6 @@ import {
   ChartDefaultPeriod,
   DEFAULT_PERIOD
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
-import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
-import Surface from "shared/components/surface/surface";
 import { STATUS } from "shared/constants/constants";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
@@ -18,8 +15,8 @@ import {
   ProgramDetailsStatistic,
   ProgramStatisticResult
 } from "../services/program-details.types";
-import { DetailsChart } from "./program-details-chart-section/program-details-chart";
-import ProgramDetailsStatisticsElements from "./program-details-statistics/program-details-statistics-elements";
+import ProgramDetailsChart from "./program-details-chart-section/program-details-chart";
+import ProgramDetailsStatistics from "./program-details-statistics/program-details-statistics";
 
 class _ProgramDetailsStatisticSection extends React.PureComponent<
   Props,
@@ -59,30 +56,20 @@ class _ProgramDetailsStatisticSection extends React.PureComponent<
     return (
       <div className="details-statistic-section">
         <div className="details-statistic-section__statistic">
-          <Surface className="surface--horizontal-paddings details-statistics">
-            <h3>{t("program-details-page.statistics.heading")}</h3>
-            <ProgramDetailsStatisticsElements
-              condition={!!statistic && !!profitChart}
-              loader={<DetailsStatisticsLoader />}
-              statistic={statistic!}
-              profitChart={profitChart!}
-              period={period}
-              status={status}
-            />
-          </Surface>
+          <ProgramDetailsStatistics
+            statistic={statistic!}
+            profitChart={profitChart!}
+            period={period}
+            status={status}
+          />
         </div>
         <div className="details-statistic-section__chart">
-          <Surface className="surface--horizontal-paddings details-chart">
-            <h3>{t("program-details-page.chart.heading")}</h3>
-            <DetailsChart
-              condition={!!profitChart && !!balanceChart}
-              loader={<DetailsChartLoader />}
-              period={period}
-              onPeriodChange={this.handlePeriodChange}
-              profitChart={profitChart!}
-              balanceChart={balanceChart!}
-            />
-          </Surface>
+          <ProgramDetailsChart
+            period={period}
+            onPeriodChange={this.handlePeriodChange}
+            profitChart={profitChart!}
+            balanceChart={balanceChart!}
+          />
         </div>
       </div>
     );
