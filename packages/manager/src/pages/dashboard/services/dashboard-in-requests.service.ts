@@ -13,11 +13,16 @@ import {
 } from "../actions/dashboard.actions";
 import { getPortfolioEvents } from "./dashboard.service";
 
-export const getInRequests = () => (dispatch: Dispatch ):ActionType<CancelablePromise<any>>  => dispatch(fetchInRequests(authService.getAuthArg(), 0, 100))
+export const getInRequests = () => (
+  dispatch: Dispatch
+): ActionType<CancelablePromise<any>> =>
+  dispatch(fetchInRequests(authService.getAuthArg(), 0, 100));
 
-export const cancelRequest: CancelRequestType = ({ id, onFinally, removeDisableBtn }) => (
-  dispatch
-) => {
+export const cancelRequest: CancelRequestType = ({
+  id,
+  onFinally,
+  removeDisableBtn
+}) => dispatch => {
   const authorization = authService.getAuthArg();
   const action = cancelProgramRequest(authorization, id);
 

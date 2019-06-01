@@ -1,5 +1,6 @@
 import "./wallet-balance.scss";
 
+import classNames from "classnames";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import GVColors from "shared/components/gv-styles/gv-colors";
@@ -7,7 +8,6 @@ import PieContainer from "shared/components/pie-container/pie-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
-import classNames from "classnames";
 
 const getPercentageValue = (value: number, totalValue: number): number => {
   const percentage = Math.round((value / totalValue) * 100);
