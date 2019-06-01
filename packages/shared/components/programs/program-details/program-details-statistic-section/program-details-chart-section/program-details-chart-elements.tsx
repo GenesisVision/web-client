@@ -4,17 +4,16 @@ import { ProgramBalanceChart } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import Surface from "shared/components/surface/surface";
+import withLoader from "shared/decorators/with-loader";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
 import { ProgramDetailsProfitChart } from "../../services/program-details.types";
 import ProgramBalanceChartSection from "./program-balance-chart-section/program-balance-chart-section";
 import ProgramProfitChartSection from "./program-profit-chart-section/program-profit-chart-section";
 
-class ProgramDetailsChartSection extends React.PureComponent<Props, State> {
+class _DetailsChartElements extends React.PureComponent<Props, State> {
   state = {
     tab: TABS.PROFIT
   };
@@ -23,9 +22,9 @@ class ProgramDetailsChartSection extends React.PureComponent<Props, State> {
     this.setState({ tab: tab as TABS });
 
   render() {
-    const { t, period, onPeriodChange, profitChart, balanceChart } = this.props;
+    const { t, profitChart, balanceChart, period, onPeriodChange } = this.props;
     const { tab } = this.state;
-    const renderDetailsChart = () => (
+    return (
       <>
         <GVTabs value={tab} onChange={this.handleTabChange}>
           <GVTab
@@ -39,32 +38,28 @@ class ProgramDetailsChartSection extends React.PureComponent<Props, State> {
         </GVTabs>
         {tab === TABS.PROFIT && (
           <ProgramProfitChartSection
-            profitChart={profitChart!}
+            profitChart={profitChart}
             period={period}
             onPeriodChange={onPeriodChange}
           />
         )}
         {tab === TABS.EQUITY && (
           <ProgramBalanceChartSection
-            balanceChart={balanceChart!}
+            balanceChart={balanceChart}
             period={period}
             onPeriodChange={onPeriodChange}
           />
         )}
       </>
     );
-
-    return (
-      <Surface className="surface--horizontal-paddings details-chart">
-        <h3>{t("program-details-page.chart.heading")}</h3>
-        {!profitChart && !balanceChart ? (
-          <DetailsChartLoader />
-        ) : (
-          renderDetailsChart()
-        )}
-      </Surface>
-    );
   }
+}
+
+interface Props extends InjectedTranslateProps {
+  profitChart: ProgramDetailsProfitChart;
+  balanceChart: ProgramBalanceChart;
+  period: ChartDefaultPeriod;
+  onPeriodChange: HandlePeriodChangeType;
 }
 
 enum TABS {
@@ -72,14 +67,11 @@ enum TABS {
   EQUITY = "equity"
 }
 
-interface Props extends InjectedTranslateProps {
-  period: ChartDefaultPeriod;
-  onPeriodChange: HandlePeriodChangeType;
-  profitChart?: ProgramDetailsProfitChart;
-  balanceChart?: ProgramBalanceChart;
-}
 interface State {
   tab: TABS;
 }
 
-export default translate()(ProgramDetailsChartSection);
+const ProgramDetailsChartElements = withLoader(
+  translate()(_DetailsChartElements)
+);
+export default ProgramDetailsChartElements;

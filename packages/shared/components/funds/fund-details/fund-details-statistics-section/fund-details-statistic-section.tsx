@@ -6,16 +6,15 @@ import {
   ChartDefaultPeriod,
   DEFAULT_PERIOD
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import FundDetailsChartSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-details-chart-section";
-import FundDetailsStatistic from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistics/fund-details-statistics";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { HandlePeriodChangeType } from "shared/utils/types";
+import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import {
   FundDetailsProfitChart,
   FundDetailsStatistic as FundDetailsStatisticType,
   FundStatisticResult
 } from "../services/fund-details.types";
+import FundDetailsChart from "./fund-details-chart-section/fund-details-chart";
+import FundDetailsStatistics from "./fund-details-statistics/fund-details-statistics";
 
 class FundDetailsStatisticSection extends React.PureComponent<Props, State> {
   state = {
@@ -51,10 +50,10 @@ class FundDetailsStatisticSection extends React.PureComponent<Props, State> {
     return (
       <div className="details-statistic-section">
         <div className="details-statistic-section__statistic">
-          <FundDetailsStatistic statistic={statistic} period={period} />
+          <FundDetailsStatistics statistic={statistic} period={period} />
         </div>
         <div className="details-statistic-section__chart">
-          <FundDetailsChartSection
+          <FundDetailsChart
             profitChart={profitChart}
             balanceChart={balanceChart}
             period={period}
@@ -67,11 +66,11 @@ class FundDetailsStatisticSection extends React.PureComponent<Props, State> {
 }
 
 interface Props {
-  currency: CURRENCIES;
+  currency: CurrencyEnum;
   programId: string;
   getFundStatistic: (
     programId: string,
-    currency: CURRENCIES,
+    currency: CurrencyEnum,
     period: ChartDefaultPeriod
   ) => Promise<FundStatisticResult>;
   statistic?: FundDetailsStatisticType;

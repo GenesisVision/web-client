@@ -13,31 +13,34 @@ import {
 } from "../../services/program-details.types";
 import ProgramDetailsStatisticsElements from "./program-details-statistics-elements";
 
-const ProgramDetailsStatistics: React.FC<Props> = ({
+const _ProgramDetailsStatistics: React.FC<Props> = ({
+  status,
   t,
   statistic,
   profitChart,
-  period,
-  status
+  period
 }) => (
   <Surface className="surface--horizontal-paddings details-statistics">
     <h3>{t("program-details-page.statistics.heading")}</h3>
-    {(statistic && profitChart && (
-      <ProgramDetailsStatisticsElements
-        statistic={statistic}
-        profitChart={profitChart}
-        period={period}
-        status={status}
-      />
-    )) || <DetailsStatisticsLoader />}
+    <ProgramDetailsStatisticsElements
+      condition={!!statistic && !!profitChart}
+      loader={<DetailsStatisticsLoader />}
+      statistic={statistic!}
+      profitChart={profitChart!}
+      period={period}
+      status={status}
+    />
   </Surface>
 );
 
 interface Props extends InjectedTranslateProps {
   status: STATUS;
+  statistic: ProgramDetailsStatistic;
+  profitChart: ProgramDetailsProfitChart;
   period: ChartDefaultPeriod;
-  statistic?: ProgramDetailsStatistic;
-  profitChart?: ProgramDetailsProfitChart;
 }
 
-export default React.memo(translate()(ProgramDetailsStatistics));
+const ProgramDetailsStatistics = React.memo(
+  translate()(_ProgramDetailsStatistics)
+);
+export default ProgramDetailsStatistics;
