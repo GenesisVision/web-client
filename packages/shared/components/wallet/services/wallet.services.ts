@@ -5,7 +5,10 @@ import {
   WalletMultiAvailable
 } from "gv-api-web";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import { TableItems, mapToTableItems } from "shared/components/table/helpers/mapper";
+import {
+  TableItems,
+  mapToTableItems
+} from "shared/components/table/helpers/mapper";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import signalApi from "shared/services/api-client/signal-api";

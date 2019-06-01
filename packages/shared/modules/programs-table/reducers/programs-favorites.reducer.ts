@@ -42,11 +42,7 @@ const favoritesReducer = (
 ): IApiState<ProgramsList> => {
   switch (action.type) {
     case `${SET_FAVORITE_PROGRAM}_${REQUEST_SUFFIX}`:
-      return updateFavoriteLocal(
-        state,
-        action.meta.id,
-        action.meta.isFavorite
-      );
+      return updateFavoriteLocal(state, action.meta.id, action.meta.isFavorite);
     case `${SET_FAVORITE_PROGRAM}_${FAILURE_SUFFIX}`: {
       return updateFavoriteLocal(
         state,

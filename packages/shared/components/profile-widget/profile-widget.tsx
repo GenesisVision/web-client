@@ -18,7 +18,6 @@ import {
   SETTINGS_ROUTE
 } from "shared/components/profile/profile.constants";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
-
 import withLoader from "shared/decorators/with-loader";
 
 class _ProfileWidget extends React.PureComponent<Props, State> {
