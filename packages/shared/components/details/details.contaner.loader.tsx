@@ -45,8 +45,36 @@ const _DetailsContainerLoader: React.FC<
                   </SvgLoader>
                 </div>
               </GVButton>
+              {assets && (
+                <div className="details-description__info-block">
+                  <h4 className="details-description__subheading">
+                    {t("fund-details-page.description.assets")}
+                  </h4>
+                  <div style={{ width: 470 }}>
+                    <SvgLoader height={40} width={470}>
+                      <rect x="0" y="0" rx="8" ry="8" width="150" height="40" />
+                      <rect
+                        x="160"
+                        y="0"
+                        rx="8"
+                        ry="8"
+                        width="150"
+                        height="40"
+                      />
+                      <rect
+                        x="320"
+                        y="0"
+                        rx="8"
+                        ry="8"
+                        width="150"
+                        height="40"
+                      />
+                    </SvgLoader>
+                  </div>
+                </div>
+              )}
               <h4 className="program-details-description__subheading">
-                Strategy
+                {t("fund-details-page.description.strategy")}
               </h4>
               <div
                 className="program-details-description__text"
@@ -68,10 +96,7 @@ const _DetailsContainerLoader: React.FC<
               </div>
             </div>
             <div className="program-details-description__settings">
-              <DetailsFavorite
-                id={"programDescription.id"}
-                isFavorite={false}
-              />
+              <DetailsFavorite id={""} isFavorite={false} />
               <DetailsNotification
                 title={""}
                 url={""}
