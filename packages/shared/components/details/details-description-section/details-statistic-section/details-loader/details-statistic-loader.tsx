@@ -1,44 +1,37 @@
-import "./details-statistic-loader.scss";
-
 import * as React from "react";
-import SvgLoader from "shared/components/svg-loader/svg-loader";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import StatisticItemLoader from "shared/components/statistic-item/statistic-item.loader";
 
-const DetailsStatisticsLoader: React.FC = () => (
-  <div className="details-statistics-loader">
-    <div className="details-statistics-loader__row">
-      <DetailsSubheading />
-      <DetailsStat />
-      <DetailsStat />
-      <DetailsSubheading />
-      <DetailsStat />
-      <DetailsStat />
+const _DetailsStatisticsLoader: React.FC<InjectedTranslateProps> = ({ t }) => (
+  <>
+    <div className="details-statistics__subheading">
+      {t("fund-details-page.statistics.current")}
     </div>
-    <div className="details-statistics-loader__row">
-      <DetailsSubheading />
-      <DetailsStat />
-      <DetailsStat />
-      <DetailsStat />
-      <DetailsStat />
-      <DetailsStat />
-      <DetailsStat />
+    <div className="details-statistics__particular-information">
+      <div className="details-statistics__vertical-info-block">
+        <StatisticItemLoader />
+        <StatisticItemLoader />
+      </div>
+      <div className="details-statistics__vertical-info-block">
+        <StatisticItemLoader />
+      </div>
     </div>
-  </div>
+    <div className="details-statistics__subheading">
+      {t("fund-details-page.statistics.for")} {t(`chart-period.month`)}
+    </div>
+    <div className="details-statistics__particular-information">
+      <div className="details-statistics__column">
+        <StatisticItemLoader />
+        <StatisticItemLoader />
+        <StatisticItemLoader />
+      </div>
+      <div className="details-statistics__column">
+        <StatisticItemLoader />
+        <StatisticItemLoader />
+      </div>
+    </div>
+  </>
 );
 
-const DetailsStat: React.FC = () => (
-  <div className="details-statistics-loader__stat">
-    <SvgLoader height={44} width={110}>
-      <rect x="0" y="0" width="110" height="16" rx="8" ry="8" />
-      <rect x="0" y="26" width="50" height="18" rx="8" ry="8" />
-    </SvgLoader>
-  </div>
-);
-
-const DetailsSubheading: React.FC = () => (
-  <div className="details-statistics-loader__subheading">
-    <SvgLoader height={18} width={230}>
-      <rect x="0" y="0" width="130" height="18" rx="8" ry="8" />
-    </SvgLoader>
-  </div>
-);
+const DetailsStatisticsLoader = translate()(_DetailsStatisticsLoader);
 export default DetailsStatisticsLoader;
