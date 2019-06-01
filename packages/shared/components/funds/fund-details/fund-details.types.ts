@@ -1,4 +1,5 @@
 import { FundDetailsFull } from "gv-api-web";
+import * as React from "react";
 import { IDialogProps } from "shared/components/dialog/dialog";
 
 export interface IDescriptionSection {
