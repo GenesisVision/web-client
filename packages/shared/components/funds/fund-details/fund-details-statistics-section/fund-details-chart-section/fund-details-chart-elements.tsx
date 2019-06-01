@@ -4,17 +4,16 @@ import { FundBalanceChart as FundBalanceChartType } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import Surface from "shared/components/surface/surface";
+import withLoader from "shared/decorators/with-loader";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
 import { FundDetailsProfitChart } from "../../services/fund-details.types";
 import FundBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
 import FundProfitChartSection from "./fund-profit-chart-section/fund-profit-chart-section";
 
-class FundDetailsChartSection extends React.PureComponent<Props, State> {
+class _FundDetailsChartSection extends React.PureComponent<Props, State> {
   state = {
     tab: TABS.PROFIT
   };
@@ -25,7 +24,8 @@ class FundDetailsChartSection extends React.PureComponent<Props, State> {
   render() {
     const { t, period, onPeriodChange, profitChart, balanceChart } = this.props;
     const { tab } = this.state;
-    const renderDetailsChart = () => (
+
+    return (
       <>
         <GVTabs value={tab} onChange={this.handleTabChange}>
           <GVTab
@@ -53,17 +53,6 @@ class FundDetailsChartSection extends React.PureComponent<Props, State> {
         )}
       </>
     );
-
-    return (
-      <Surface className="surface--horizontal-paddings details-chart">
-        <h3>{t("fund-details-page.chart.heading")}</h3>
-        {!profitChart && !balanceChart ? (
-          <DetailsChartLoader />
-        ) : (
-          renderDetailsChart()
-        )}
-      </Surface>
-    );
   }
 }
 
@@ -75,11 +64,14 @@ enum TABS {
 interface Props extends InjectedTranslateProps {
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
-  profitChart?: FundDetailsProfitChart;
-  balanceChart?: FundBalanceChartType;
+  profitChart: FundDetailsProfitChart;
+  balanceChart: FundBalanceChartType;
 }
 interface State {
   tab: TABS;
 }
 
-export default translate()(FundDetailsChartSection);
+const FundDetailsChartElements = withLoader(
+  translate()(_FundDetailsChartSection)
+);
+export default FundDetailsChartElements;
