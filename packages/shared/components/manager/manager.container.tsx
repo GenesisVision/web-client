@@ -4,12 +4,7 @@ import { goBack } from "connected-react-router";
 import { ManagerProfile } from "gv-api-web";
 import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import { AuthRootState } from "shared/utils/types";
 
@@ -83,10 +78,13 @@ interface State {
   isPending: boolean;
 }
 
-const ManagerContainer = compose<React.ComponentType<OwnProps>>(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(_ManagerContainer)
-);
+const ManagerContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  AuthRootState
+>(
+  mapStateToProps,
+  mapDispatchToProps
+)(_ManagerContainer);
 export default ManagerContainer;
