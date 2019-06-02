@@ -14,6 +14,7 @@ import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import { AuthRootState } from "shared/utils/types";
 
 import ManagerPage from "./manager.page";
+import ManagerPageLoader from "./manager.page.loader";
 import { fetchManagerProfile } from "./services/manager.service";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
@@ -41,6 +42,7 @@ class _ManagerContainer extends React.PureComponent<Props, State> {
 
     return (
       <ManagerPage
+        loader={<ManagerPageLoader />}
         condition={!isPending && !!managerProfile}
         managerProfile={managerProfile!}
         isAuthenticated={isAuthenticated}
