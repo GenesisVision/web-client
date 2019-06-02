@@ -13,8 +13,6 @@ import Surface from "shared/components/surface/surface";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 import TableLoader from "shared/components/table/components/table-loader";
 
-import { MANAGER_HISTORY_TAB } from "./manager.constants";
-
 const _ManagerPageLoader: React.FC<Props> = ({ t }) => (
   <Page title={t("manager-page.title")}>
     <div className="manager">
@@ -105,14 +103,14 @@ const _ManagerPageLoader: React.FC<Props> = ({ t }) => (
             <h3>{t("manager-page.assets")}</h3>
           </div>
           <div className="manager-history__tabs">
-            <GVTabs value={MANAGER_HISTORY_TAB.PROGRAMS}>
+            <GVTabs value={""}>
               <GVTab
-                value={MANAGER_HISTORY_TAB.PROGRAMS}
+                value={""}
                 label={t("manager-page.history.tabs.programs")}
                 count={0}
               />
               <GVTab
-                value={MANAGER_HISTORY_TAB.FUNDS}
+                value={""}
                 label={t("manager-page.history.tabs.funds")}
                 count={0}
               />
