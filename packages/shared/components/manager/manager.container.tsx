@@ -4,16 +4,12 @@ import { goBack } from "connected-react-router";
 import { ManagerProfile } from "gv-api-web";
 import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import { AuthRootState } from "shared/utils/types";
 
 import ManagerPage from "./manager.page";
+import ManagerPageLoader from "./manager.page.loader";
 import { fetchManagerProfile } from "./services/manager.service";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
@@ -41,6 +37,7 @@ class _ManagerContainer extends React.PureComponent<Props, State> {
 
     return (
       <ManagerPage
+        loader={<ManagerPageLoader />}
         condition={!isPending && !!managerProfile}
         managerProfile={managerProfile!}
         isAuthenticated={isAuthenticated}
@@ -81,10 +78,13 @@ interface State {
   isPending: boolean;
 }
 
-const ManagerContainer = compose<React.ComponentType<OwnProps>>(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(_ManagerContainer)
-);
+const ManagerContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  AuthRootState
+>(
+  mapStateToProps,
+  mapDispatchToProps
+)(_ManagerContainer);
 export default ManagerContainer;
