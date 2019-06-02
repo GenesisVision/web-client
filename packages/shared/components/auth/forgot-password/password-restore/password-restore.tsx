@@ -64,7 +64,7 @@ const RestorePassword = compose<React.FC<OwnProps>>(
   React.memo,
   translate(),
   withFormik<Props, IRestorePasswordFormValues>({
-    displayName: "passwordRestore",
+    displayName: "passwordRestoreForm",
     mapPropsToValues: () => ({
       [FIELDS.password]: "",
       [FIELDS.confirmPassword]: ""
@@ -76,7 +76,7 @@ const RestorePassword = compose<React.FC<OwnProps>>(
           .required(t("auth.password-restore.validators.password-required")),
         [FIELDS.confirmPassword]: string()
           .oneOf(
-            [ref("password")],
+            [ref(FIELDS.password)],
             t("auth.password-restore.validators.password-dont-match")
           )
           .required(
