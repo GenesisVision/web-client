@@ -15,6 +15,7 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { formatValue } from "shared/utils/formatter";
+
 import FundStructureHeaderCell from "./fund-structure-header-content";
 
 interface Props {
@@ -77,7 +78,9 @@ class FundStructure extends React.Component<
                 </div>
               )}
             >
-              <FundStructureHeaderCell column={column} />
+              <span>
+                <FundStructureHeaderCell column={column} />
+              </span>
             </Tooltip>
           ) : (
             <FundStructureHeaderCell column={column} />
