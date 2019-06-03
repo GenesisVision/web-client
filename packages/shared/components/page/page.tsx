@@ -1,11 +1,12 @@
 import * as React from "react";
 import DocumentTitle from "react-document-title";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { compose } from "redux";
 import BackButton from "shared/components/back-button/back-button";
-import { ROLE_ENV } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/withRole";
 
-const _Page: React.FC<Props> = ({ t, title, children }) => (
-  <DocumentTitle title={t(`${ROLE_ENV}.app.title`) + title}>
+const _Page: React.FC<Props> = ({ t, title, children, role }) => (
+  <DocumentTitle title={t(`${role}.app.title`) + title}>
     <>
       <BackButton />
       {children}
@@ -13,9 +14,15 @@ const _Page: React.FC<Props> = ({ t, title, children }) => (
   </DocumentTitle>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends InjectedTranslateProps, OwnProps, WithRoleProps {}
+
+interface OwnProps {
   title: string;
 }
 
-const Page = React.memo(translate()(_Page));
+const Page = compose<React.ComponentType<OwnProps>>(
+  React.memo,
+  withRole,
+  translate()
+)(_Page);
 export default Page;
