@@ -14,6 +14,7 @@ import {
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { PROGRAM, STATUS } from "shared/constants/constants";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 
@@ -101,8 +102,12 @@ class DetailsInvestment extends PureComponent<
               <StatisticItem
                 condition={asset === PROGRAM}
                 accent
-                label={t("fund-details-page.description.profit")}
-                labelTooltip={t("program-details-page.tooltip.profit")}
+                label={
+                  <TooltipLabel
+                    tooltipContent={t("program-details-page.tooltip.profit")}
+                    labelText={t("fund-details-page.description.profit")}
+                  />
+                }
               >
                 <Profitability
                   value={formatCurrencyValue(profitValue, assetCurrency)}
@@ -124,8 +129,14 @@ class DetailsInvestment extends PureComponent<
               </StatisticItem>
               <StatisticItem
                 accent
-                label={t("fund-details-page.description.status")}
-                labelTooltip={t(`fund-details-page.tooltip.status.${asset}`)}
+                label={
+                  <TooltipLabel
+                    tooltipContent={t(
+                      `fund-details-page.tooltip.status.${asset}`
+                    )}
+                    labelText={t("fund-details-page.description.status")}
+                  />
+                }
               >
                 <AssetStatus
                   status={personalDetails.status as STATUS}
