@@ -6,10 +6,10 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
-import { GVTooltipTab } from "shared/components/gv-tabs/components/gv-tooltip-tab";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
@@ -55,9 +55,10 @@ class _WalletContainer extends React.PureComponent<Props, State> {
                         state: t("wallet-page.title")
                       }}
                     >
-                      <GVTooltipTab
+                      <TooltipLabel
                         tooltipContent={t("wallet-page.tooltip.transactions")}
-                        tabLabel={t("wallet-page.tabs.transactions")}
+                        labelText={t("wallet-page.tabs.transactions")}
+                        className="tooltip__label--cursor-pointer"
                       />
                     </Link>
                   }
@@ -72,13 +73,15 @@ class _WalletContainer extends React.PureComponent<Props, State> {
                         state: t("wallet-page.title")
                       }}
                     >
-                      <GVTooltipTab
+                      <TooltipLabel
                         tooltipContent={t("wallet-page.tooltip.deposit")}
-                        tabLabel={t("wallet-page.tabs.deposit")}
+                        labelText={t("wallet-page.tabs.deposit")}
+                        className="tooltip__label--cursor-pointer"
                       />
-                      <GVTooltipTab
+                      <TooltipLabel
                         tooltipContent={t("wallet-page.tooltip.withdrawals")}
-                        tabLabel={t("wallet-page.tabs.withdrawals")}
+                        labelText={t("wallet-page.tabs.withdrawals")}
+                        className="tooltip__label--cursor-pointer"
                       />
                     </Link>
                   }
