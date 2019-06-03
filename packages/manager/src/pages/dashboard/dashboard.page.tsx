@@ -34,7 +34,7 @@ const _DashboardPage: React.FC<InjectedTranslateProps & WithRoleProps> = ({
   );
 };
 
-const DashboardPage = compose(
+const DashboardPage = compose<React.ComponentType>(
   React.memo,
   withRole,
   translate()

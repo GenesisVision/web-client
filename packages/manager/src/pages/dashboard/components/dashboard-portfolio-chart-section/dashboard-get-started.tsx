@@ -31,7 +31,7 @@ const _DashboardGetStarted: React.FC<
   </Surface>
 );
 
-const DashboardGetStarted = compose(
+const DashboardGetStarted = compose<React.ComponentType>(
   React.memo,
   withRole,
   translate()
