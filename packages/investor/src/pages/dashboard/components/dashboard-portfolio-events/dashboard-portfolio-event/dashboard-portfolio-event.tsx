@@ -10,7 +10,7 @@ import { EVENT_LOGO_TYPE } from "shared/components/dashboard/dashboard-portfolio
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { PROFIT_EVENT, ROLE_ENV } from "shared/constants/constants";
+import { PROFIT_EVENT } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
