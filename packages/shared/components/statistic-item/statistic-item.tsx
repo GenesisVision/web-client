@@ -3,12 +3,27 @@ import "./statistic-item.scss";
 import classNames from "classnames";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
-import Tooltip from "shared/components/tooltip/tooltip";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const _StatisticItem: React.FC<Props> = ({
+enum ITEM {
+  LABEL = "LABEL",
+  VALUE = "VALUE"
+}
+
+export interface IFollowStatisticItemProps {
+  label: string | React.ReactNode;
+  equivalent?: string | number;
+  equivalentCurrency?: string;
+  small?: boolean;
+  big?: boolean;
+  large?: boolean;
+  accent?: boolean;
+  half?: boolean;
+  invert?: boolean;
+  className?: string;
+}
+const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
   invert = false,
   large,
   big,
@@ -19,16 +34,14 @@ const _StatisticItem: React.FC<Props> = ({
   half,
   className,
   equivalent,
-  equivalentCurrency,
-  labelTooltip
+  equivalentCurrency
 }) => {
-  const generateClasses = (item: ITEM, invert: boolean, tooltip?: boolean) => {
+  const generateClasses = (item: ITEM, invert: boolean) => {
     switch (
       (item === ITEM.VALUE && !invert) || (item === ITEM.LABEL && invert)
     ) {
       case true:
         return classNames("statistics-item__value", {
-          "statistics-item__value--tooltip-child": tooltip,
           "statistics-item__value--accent": accent,
           "statistics-item__value--small": small,
           "statistics-item__value--big": big,
@@ -36,22 +49,9 @@ const _StatisticItem: React.FC<Props> = ({
         });
       case false:
       default:
-        return classNames("statistics-item__label", {
-          "statistics-item__label--tooltip-child": tooltip
-        });
+        return "statistics-item__label";
     }
   };
-
-  const renderLabel = () => (
-    <div
-      className={
-        "statistics-item__top " +
-        generateClasses(ITEM.LABEL, invert, Boolean(labelTooltip))
-      }
-    >
-      {label}
-    </div>
-  );
 
   return (
     <div
@@ -64,20 +64,15 @@ const _StatisticItem: React.FC<Props> = ({
         className
       )}
     >
-      {label ? (
-        labelTooltip && label ? (
-          <Tooltip
-            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-            render={() => (
-              <div className="tooltip__content">{labelTooltip}</div>
-            )}
-          >
-            {renderLabel()}
-          </Tooltip>
-        ) : (
-          renderLabel()
-        )
-      ) : null}
+      {label && (
+        <div
+          className={
+            "statistics-item__top " + generateClasses(ITEM.LABEL, invert)
+          }
+        >
+          {label}
+        </div>
+      )}
       <div className={generateClasses(ITEM.VALUE, invert)}>{children}</div>
       {equivalent !== undefined && equivalentCurrency !== undefined ? (
         <div className="statistics-item__equivalent">
@@ -97,22 +92,3 @@ const _StatisticItem: React.FC<Props> = ({
 
 const StatisticItem = withLoader(React.memo(_StatisticItem));
 export default StatisticItem;
-
-enum ITEM {
-  LABEL = "LABEL",
-  VALUE = "VALUE"
-}
-
-interface Props {
-  label: string | React.ReactNode;
-  equivalent?: string | number;
-  equivalentCurrency?: string;
-  small?: boolean;
-  big?: boolean;
-  large?: boolean;
-  accent?: boolean;
-  half?: boolean;
-  invert?: boolean;
-  className?: string;
-  labelTooltip?: string;
-}
