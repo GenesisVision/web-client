@@ -7,7 +7,8 @@ import { CurrencyEnum } from "shared/utils/types";
 
 import { ITwoFactorReducer } from "./2fa-reducer";
 
-const initialCurrency = (loadData(ACCOUNT_CURRENCY_KEY) as CurrencyEnum) || "BTC";
+const initialCurrency =
+  (loadData(ACCOUNT_CURRENCY_KEY) as CurrencyEnum) || "BTC";
 
 const accountCurrencyReducer = (
   currency: CurrencyEnum = initialCurrency,

@@ -10,11 +10,12 @@ import {
 } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
+import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { FundDetailsStatistic } from "../../services/fund-details.types";
 
-const FundDetailsStatisticsElements: React.FC<
+const _FundDetailsStatisticsElements: React.FC<
   IFundDetailsStatisticsElementsProps & InjectedTranslateProps
 > = ({ t, statistic, period }) => (
   <>
@@ -169,4 +170,7 @@ export interface IFundDetailsStatisticsElementsProps {
   period: ChartDefaultPeriod;
 }
 
-export default React.memo(translate()(FundDetailsStatisticsElements));
+const FundDetailsStatisticsElements = React.memo(
+  withLoader(translate()(_FundDetailsStatisticsElements))
+);
+export default FundDetailsStatisticsElements;

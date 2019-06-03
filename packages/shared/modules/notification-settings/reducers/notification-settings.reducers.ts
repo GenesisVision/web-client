@@ -1,5 +1,7 @@
 import { NotificationSettingList } from "gv-api-web";
-import apiReducerFactory, { IApiState } from "shared/reducers/api-reducer/api-reducer";
+import apiReducerFactory, {
+  IApiState
+} from "shared/reducers/api-reducer/api-reducer";
 
 import { NOTIFICATION_SETTINGS } from "../actions/notification-settings.actions";
 

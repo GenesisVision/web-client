@@ -3,7 +3,10 @@ import { FacetDataType } from "shared/components/facet-container/facet-container
 import getParams from "shared/utils/get-params";
 import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
-import { FUNDS_FACET_ROUTE, FUNDS_SLUG_URL_PARAM_NAME } from "../../funds.routes";
+import {
+  FUNDS_FACET_ROUTE,
+  FUNDS_SLUG_URL_PARAM_NAME
+} from "../../funds.routes";
 
 export const getCurrentFacet = () => (
   dispatch: MiddlewareDispatch,

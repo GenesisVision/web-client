@@ -7,7 +7,7 @@ import { SIGNUP_ROUTE } from "shared/components/auth/signup/signup.routes";
 
 import EmailPendingPage from "./email-pending/email-pending.page";
 import ForgotPasswordPage from "./forgot-password/forgot-password.page";
-import PasswordRestore from "./password-restore/password-restore";
+import PasswordRestorePage from "./password-restore/password-restore.page";
 
 export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
 export const EMAIL_PENDING_ROUTE = `${FORGOT_PASSWORD_ROUTE}/email-pending`;
@@ -21,7 +21,7 @@ const _ForgotPasswordRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
   >
     <Switch>
       <Route path={EMAIL_PENDING_ROUTE} component={EmailPendingPage} />
-      <Route path={PASSWORD_RESTORE_ROUTE} component={PasswordRestore} />
+      <Route path={PASSWORD_RESTORE_ROUTE} component={PasswordRestorePage} />
       <Route path={FORGOT_PASSWORD_ROUTE} component={ForgotPasswordPage} />
     </Switch>
   </AuthLayout>

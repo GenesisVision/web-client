@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { AttachToSignalProviderModeEnum } from "gv-api-web";
+import { AttachToSignalProviderModeEnum, SignalSubscription } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
@@ -20,6 +20,7 @@ class FollowParams extends React.PureComponent<
       setFieldValue,
       isSubmitting,
       onPrevStep,
+      isShowBack,
       isValid,
       values,
       handleSubmit
@@ -83,9 +84,11 @@ class FollowParams extends React.PureComponent<
           />
         </div>
         <div className="dialog__buttons">
-          <GVButton onClick={onPrevStep} color="secondary" variant="outlined">
-            {t("follow-program.params.back")}
-          </GVButton>
+          {isShowBack && (
+            <GVButton onClick={onPrevStep} color="secondary" variant="outlined">
+              {t("follow-program.params.back")}
+            </GVButton>
+          )}
           <GVButton
             type="submit"
             className="invest-form__submit-button"
@@ -106,7 +109,7 @@ type mode = {
 
 const modes: { [key: string]: mode } = {
   byBalance: { label: "By balance", value: "ByBalance" },
-  percentage: { label: "Percentage", value: "Percentage" },
+  percentage: { label: "Percentage", value: "Percent" },
   fixed: { label: "Fixed", value: "Fixed" }
 };
 
@@ -118,6 +121,8 @@ export interface FollowParamsFormValues {
 }
 
 interface OwnProps {
+  isShowBack: boolean;
+  paramsSubscription?: SignalSubscription;
   onSubmit: (
     values: FollowParamsFormValues,
     setSubmitting: SetSubmittingType
@@ -132,12 +137,15 @@ export default compose<React.ComponentType<OwnProps>>(
   withFormik<Props, FollowParamsFormValues>({
     isInitialValid: true,
     displayName: "follow-params",
-    mapPropsToValues: () => {
+    mapPropsToValues: props => {
+      const params = props.paramsSubscription;
       return {
-        mode: modes.byBalance.value as AttachToSignalProviderModeEnum,
-        openTolerancePercent: 0.5,
-        fixedVolume: 100,
-        percent: 10
+        mode: params
+          ? params.mode
+          : (modes.byBalance.value as AttachToSignalProviderModeEnum),
+        openTolerancePercent: params ? params.openTolerancePercent : 0.5,
+        fixedVolume: params ? params.fixedVolume : 100,
+        percent: params ? params.percent : 10
       };
     },
     validationSchema: ({ t }: Props) =>

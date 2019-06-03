@@ -2,23 +2,26 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { ProgramBalanceChart } from "gv-api-web";
 import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import {
   ChartDefaultPeriod,
   DEFAULT_PERIOD
 } from "shared/components/chart/chart-period/chart-period.helpers";
 import { STATUS } from "shared/constants/constants";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { HandlePeriodChangeType } from "shared/utils/types";
+import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic,
   ProgramStatisticResult
 } from "../services/program-details.types";
-import ProgramDetailsChartSection from "./program-details-chart-section/program-details-chart-section";
+import ProgramDetailsChart from "./program-details-chart-section/program-details-chart";
 import ProgramDetailsStatistics from "./program-details-statistics/program-details-statistics";
 
-class ProgramDetailsStatisticSection extends React.PureComponent<Props, State> {
+class _ProgramDetailsStatisticSection extends React.PureComponent<
+  Props,
+  State
+> {
   state = {
     period: DEFAULT_PERIOD,
     statistic: undefined,
@@ -48,23 +51,24 @@ class ProgramDetailsStatisticSection extends React.PureComponent<Props, State> {
   };
 
   render() {
+    const { t, status } = this.props;
     const { statistic, profitChart, balanceChart, period } = this.state;
     return (
       <div className="details-statistic-section">
         <div className="details-statistic-section__statistic">
           <ProgramDetailsStatistics
-            status={this.props.status}
-            statistic={statistic}
-            profitChart={profitChart}
+            statistic={statistic!}
+            profitChart={profitChart!}
             period={period}
+            status={status}
           />
         </div>
         <div className="details-statistic-section__chart">
-          <ProgramDetailsChartSection
-            profitChart={profitChart}
-            balanceChart={balanceChart}
+          <ProgramDetailsChart
             period={period}
             onPeriodChange={this.handlePeriodChange}
+            profitChart={profitChart!}
+            balanceChart={balanceChart!}
           />
         </div>
       </div>
@@ -72,12 +76,12 @@ class ProgramDetailsStatisticSection extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props {
-  currency: CURRENCIES;
+interface Props extends InjectedTranslateProps {
+  currency: CurrencyEnum;
   programId: string;
   getProgramStatistic: (
     programId: string,
-    currency: CURRENCIES,
+    currency: CurrencyEnum,
     period: ChartDefaultPeriod
   ) => Promise<ProgramStatisticResult>;
   status: STATUS;
@@ -94,4 +98,7 @@ interface State {
   prevProps?: Props;
 }
 
+const ProgramDetailsStatisticSection = translate()(
+  _ProgramDetailsStatisticSection
+);
 export default ProgramDetailsStatisticSection;

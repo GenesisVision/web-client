@@ -2,9 +2,13 @@ import { ManagerPortfolioEvents } from "gv-api-web";
 import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
 import { ManagerRootState } from "reducers";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
-import DashboardPortfolioEvents
-  from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
+import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
 
 import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
 import { getPortfolioEvents } from "../../services/dashboard.service";

@@ -32,9 +32,8 @@
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-common;
     }
-
-    &--tooltip-child {
-      cursor: help;
+    &--loader {
+      opacity: 0.5;
     }
   }
 
@@ -67,10 +66,6 @@
         font-size: $font-size-h1;
         letter-spacing: 0.4px;
       }
-    }
-
-    &--tooltip-child {
-      cursor: help;
     }
   }
 

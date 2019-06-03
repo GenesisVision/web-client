@@ -13,6 +13,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
+import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import {
@@ -20,7 +21,7 @@ import {
   ProgramDetailsStatistic
 } from "../../services/program-details.types";
 
-const ProgramDetailsStatisticsElements: React.FC<
+const _ProgramDetailsStatisticsElements: React.FC<
   IProgramDetailsStatisticsElementsProps & InjectedTranslateProps
 > = ({ status, t, statistic, profitChart, period }) => (
   <>
@@ -211,4 +212,7 @@ export interface IProgramDetailsStatisticsElementsProps {
   period: ChartDefaultPeriod;
 }
 
-export default React.memo(translate()(ProgramDetailsStatisticsElements));
+const ProgramDetailsStatisticsElements = React.memo(
+  withLoader(translate()(_ProgramDetailsStatisticsElements))
+);
+export default ProgramDetailsStatisticsElements;
