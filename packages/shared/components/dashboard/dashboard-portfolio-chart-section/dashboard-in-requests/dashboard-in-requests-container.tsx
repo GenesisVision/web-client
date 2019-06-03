@@ -18,8 +18,8 @@ import Popover, {
 } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { ROLE_ENV } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import withRole, { WithRoleProps } from "shared/decorators/withRole";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { AuthRootState } from "shared/utils/types";
 
@@ -37,11 +37,11 @@ class _DashboardInRequestsContainer extends React.PureComponent<Props, State> {
   handleCloseDropdown = () => this.setState({ anchor: undefined });
 
   render() {
-    const { inRequests, service, t } = this.props;
+    const { role, inRequests, service, t } = this.props;
     return (
       <div className="dashboard-request">
         <StatisticItem
-          label={t(`${ROLE_ENV}.dashboard-page.chart-section.in-requests`)}
+          label={t(`${role}.dashboard-page.chart-section.in-requests`)}
           big
         >
           <NumberFormat
@@ -93,7 +93,11 @@ const mapDispatchToProps = (
   )
 });
 
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+interface Props
+  extends OwnProps,
+    DispatchProps,
+    InjectedTranslateProps,
+    WithRoleProps {}
 
 interface OwnProps {
   cancelRequest: CancelRequestType;
@@ -114,6 +118,7 @@ interface State {
 const DashboardInRequestsContainer = compose<
   React.ComponentType<OwnProps & WithLoaderProps>
 >(
+  withRole,
   withLoader,
   translate(),
   connect<null, DispatchProps, OwnProps, AuthRootState>(
