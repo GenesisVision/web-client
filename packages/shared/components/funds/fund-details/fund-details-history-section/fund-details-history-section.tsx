@@ -1,13 +1,12 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { FundAssetsListInfo } from "gv-api-web";
-import * as React from "react";
 import { SyntheticEvent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
-import { GVTooltipTab } from "shared/components/gv-tabs/components/gv-tooltip-tab";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
@@ -16,6 +15,7 @@ import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/compone
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { AuthState } from "shared/reducers/auth-reducer";
 import RootState from "shared/reducers/root-reducer";
 
@@ -61,9 +61,10 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
               <GVTab
                 value={TABS.STRUCTURE}
                 label={
-                  <GVTooltipTab
+                  <TooltipLabel
                     tooltipContent={t("fund-details-page.tooltip.structure")}
-                    tabLabel={t("fund-details-page.history.structure.title")}
+                    labelText={t("fund-details-page.history.structure.title")}
+                    className="tooltip__label--cursor-pointer"
                   />
                 }
               />

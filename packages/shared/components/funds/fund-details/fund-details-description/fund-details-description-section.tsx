@@ -85,7 +85,7 @@ class FundFundDetailsDescription extends React.PureComponent<
                   </div>
                 )}
               >
-                <h4 className="details-description__subheading tooltip__child">
+                <h4 className="details-description__subheading tooltip__label">
                   {t("fund-details-page.description.assets")}
                 </h4>
               </Tooltip>

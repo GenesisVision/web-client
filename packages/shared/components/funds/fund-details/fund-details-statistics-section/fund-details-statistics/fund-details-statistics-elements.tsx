@@ -9,6 +9,7 @@ import {
   ChartPeriodType
 } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { FundDetailsStatistic } from "../../services/fund-details.types";
@@ -23,8 +24,12 @@ const FundDetailsStatisticsElements: React.FC<
     <div className="details-statistics__particular-information">
       <div className="details-statistics__vertical-info-block">
         <StatisticItem
-          label={t("fund-details-page.statistics.balance")}
-          labelTooltip={t("fund-details-page.tooltip.balance")}
+          label={
+            <TooltipLabel
+              tooltipContent={t("fund-details-page.tooltip.balance")}
+              labelText={t("fund-details-page.statistics.balance")}
+            />
+          }
           accent
         >
           <NumberFormat
@@ -35,16 +40,24 @@ const FundDetailsStatisticsElements: React.FC<
           />
         </StatisticItem>
         <StatisticItem
-          label={t("fund-details-page.statistics.start-day")}
-          labelTooltip={t("fund-details-page.tooltip.start-day")}
+          label={
+            <TooltipLabel
+              tooltipContent={t("fund-details-page.tooltip.start-day")}
+              labelText={t("fund-details-page.statistics.start-day")}
+            />
+          }
         >
           {moment(statistic.creationDate).format("ll")}
         </StatisticItem>
       </div>
       <div className="details-statistics__vertical-info-block">
         <StatisticItem
-          label={t("fund-details-page.statistics.investors")}
-          labelTooltip={t("fund-details-page.tooltip.investors")}
+          label={
+            <TooltipLabel
+              tooltipContent={t("fund-details-page.tooltip.investors")}
+              labelText={t("fund-details-page.statistics.investors")}
+            />
+          }
         >
           <NumberFormat
             value={statistic.investors}
@@ -61,8 +74,12 @@ const FundDetailsStatisticsElements: React.FC<
     <div className="details-statistics__particular-information">
       <div className="details-statistics__column">
         <StatisticItem
-          label={t("fund-details-page.statistics.calmarRatio")}
-          labelTooltip={t("fund-details-page.tooltip.calmar-ratio")}
+          label={
+            <TooltipLabel
+              tooltipContent={t("fund-details-page.tooltip.calmar-ratio")}
+              labelText={t("fund-details-page.statistics.calmarRatio")}
+            />
+          }
           half
         >
           <NumberFormat
@@ -72,8 +89,12 @@ const FundDetailsStatisticsElements: React.FC<
           />
         </StatisticItem>
         <StatisticItem
-          label={t("fund-details-page.statistics.profit-change")}
-          labelTooltip={t("fund-details-page.tooltip.profit-change")}
+          label={
+            <TooltipLabel
+              tooltipContent={t("fund-details-page.tooltip.profit-change")}
+              labelText={t("fund-details-page.statistics.profit-change")}
+            />
+          }
           half
         >
           <NumberFormat
@@ -88,8 +109,12 @@ const FundDetailsStatisticsElements: React.FC<
           />
         </StatisticItem>
         <StatisticItem
-          label={t("fund-details-page.statistics.max-drawdown")}
-          labelTooltip={t("fund-details-page.tooltip.max-drawdown")}
+          label={
+            <TooltipLabel
+              tooltipContent={t("fund-details-page.tooltip.max-drawdown")}
+              labelText={t("fund-details-page.statistics.max-drawdown")}
+            />
+          }
           half
         >
           <NumberFormat
@@ -102,8 +127,12 @@ const FundDetailsStatisticsElements: React.FC<
       </div>
       <div className="details-statistics__column">
         <StatisticItem
-          label={t("fund-details-page.statistics.sharpe-ratio")}
-          labelTooltip={t("fund-details-page.tooltip.sharpe-ratio")}
+          label={
+            <TooltipLabel
+              tooltipContent={t("fund-details-page.tooltip.sharpe-ratio")}
+              labelText={t("fund-details-page.statistics.sharpe-ratio")}
+            />
+          }
           half
         >
           <NumberFormat
@@ -114,8 +143,12 @@ const FundDetailsStatisticsElements: React.FC<
         </StatisticItem>
 
         <StatisticItem
-          label={t("fund-details-page.statistics.sortino-ratio")}
-          labelTooltip={t("fund-details-page.tooltip.sortino-ratio")}
+          label={
+            <TooltipLabel
+              tooltipContent={t("fund-details-page.tooltip.sortino-ratio")}
+              labelText={t("fund-details-page.statistics.sortino-ratio")}
+            />
+          }
           half
         >
           <NumberFormat

@@ -17,7 +17,7 @@ export const _FundStructureHeaderCell: React.FC<
         column.name
       }`,
       {
-        tooltip__child: column.tooltip
+        tooltip__label: column.tooltip
       }
     )}
   >
