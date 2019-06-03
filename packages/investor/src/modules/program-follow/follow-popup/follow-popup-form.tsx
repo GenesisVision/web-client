@@ -6,6 +6,7 @@ import {
   AttachToSignalProviderInitialDepositCurrencyEnum,
   AttachToSignalProviderModeEnum,
   CopyTradingAccountInfo,
+  SignalSubscription,
   WalletData
 } from "gv-api-web";
 import * as React from "react";
@@ -52,7 +53,8 @@ class FollowForm extends React.PureComponent<
     this.setState({ step: TABS.CREATE_ACCOUNT });
   };
   componentDidMount() {
-    if (this.props.hasSignalAccount) this.setState({ step: TABS.PARAMS });
+    if (this.props.signalSubscription.hasSignalAccount)
+      this.setState({ step: TABS.PARAMS });
   }
   submit = (
     {
@@ -86,23 +88,29 @@ class FollowForm extends React.PureComponent<
       });
   };
   render() {
-    const { wallets, currency, hasSignalAccount, minDeposit } = this.props;
+    const { wallets, currency, signalSubscription, minDeposit } = this.props;
     const { errors, step } = this.state;
     const adaptStep =
       step === TABS.CREATE_ACCOUNT ? "create-account" : "params";
+    const paramsSubscription = signalSubscription.hasActiveSubscription
+      ? signalSubscription
+      : undefined;
     return (
       <>
         <FollowTop step={adaptStep} />
-        {!hasSignalAccount && step === TABS.CREATE_ACCOUNT && (
-          <FollowCreateAccount
-            minDeposit={minDeposit}
-            wallets={wallets}
-            currency={currency}
-            onClick={this.createdCopytradingAccount}
-          />
-        )}
+        {!signalSubscription.hasSignalAccount &&
+          step === TABS.CREATE_ACCOUNT && (
+            <FollowCreateAccount
+              minDeposit={minDeposit}
+              wallets={wallets}
+              currency={currency}
+              onClick={this.createdCopytradingAccount}
+            />
+          )}
         {step === TABS.PARAMS && (
           <FollowParams
+            isShowBack={!signalSubscription.hasSignalAccount}
+            paramsSubscription={paramsSubscription}
             onSubmit={this.submit}
             onPrevStep={this.returnToCreateCopytradingAccount}
           />
@@ -121,7 +129,7 @@ enum TABS {
 }
 export interface Props {
   minDeposit: number;
-  hasSignalAccount: boolean;
+  signalSubscription: SignalSubscription;
   alertSuccess: (msg: string) => void;
   alertError: (msg: string) => void;
   handleSubmit: () => void;

@@ -283,8 +283,15 @@
   },
   "unfollow-program": {
     "title": "Unfollow Trades",
+    "submit": "Submit",
+    "type": "type",
     "text": "Do you really want to unsubscribe?",
-    "success-alert-message": "You have been unsubscribed."
+    "success-alert-message": "You have been unsubscribed.",
+    "modes": {
+      "manual-closing": "Manual closing",
+      "close-only": "Close only",
+      "close-all-immediately": "Close all immediately"
+    }
   },
   "follow-program": {
     "create-account": {
@@ -514,6 +521,7 @@
       "close-program": "Close Program",
       "follow-trade": "Follow Trades",
       "unfollow": "Unfollow",
+      "edit-subscription": "Edit subscription",
       "signal-provider": {
         "title": "Make a signal provider",
         "disclaimer": "Parameters cannot be changed in the future."
