@@ -17,7 +17,8 @@ import {
   SelectFilterValue
 } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import { IDataModel, ROLE, ROLE_ENV } from "shared/constants/constants";
+import { IDataModel, ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/withRole";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { AuthState } from "shared/reducers/auth-reducer";
 import RootState from "shared/reducers/root-reducer";
@@ -67,6 +68,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       subscriptionsCount
     } = this.state;
     const {
+      role,
       isForex,
       t,
       programId,
@@ -81,7 +83,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       isSignalProgram
     } = this.props;
 
-    const isManager = ROLE_ENV === ROLE.MANAGER;
+    const isManager = role === ROLE.MANAGER;
 
     return (
       <Surface className="details-history">
@@ -151,7 +153,11 @@ const mapStateToProps = (state: RootState): StateProps => {
   return { isAuthenticated };
 };
 
-interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
+interface Props
+  extends OwnProps,
+    StateProps,
+    InjectedTranslateProps,
+    WithRoleProps {}
 
 interface OwnProps {
   isSignalProgram: boolean;
@@ -180,6 +186,7 @@ interface State extends HistoryCountsType {
 }
 
 const ProgramDetailsHistorySection = compose<React.ComponentType<OwnProps>>(
+  withRole,
   translate(),
   connect(mapStateToProps)
 )(_ProgramDetailsHistorySection);
