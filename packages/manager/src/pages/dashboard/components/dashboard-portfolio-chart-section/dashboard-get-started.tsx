@@ -9,7 +9,7 @@ import withRole, { WithRoleProps } from "shared/decorators/withRole";
 
 const _DashboardGetStarted: React.FC<
   InjectedTranslateProps & WithRoleProps
-  > = ({ role, t }) => (
+> = ({ role, t }) => (
   <Surface className="dashboard-portfolio-chart-section">
     <div className="get-started">
       <h1>{t(`${role}.dashboard-page.get-started.title`)}</h1>
