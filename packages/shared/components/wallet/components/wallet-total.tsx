@@ -9,7 +9,8 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
-import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/withRole";
 import { IApiState } from "shared/reducers/api-reducer/api-reducer";
 import RootState from "shared/reducers/root-reducer";
 
@@ -23,6 +24,7 @@ import WalletSettingsContainer from "./wallet-settings/wallet-settings-container
 class WalletTotal extends React.PureComponent<Props & WalletRouteProps> {
   render() {
     const {
+      role,
       t,
       info,
       wallets,
@@ -61,7 +63,7 @@ class WalletTotal extends React.PureComponent<Props & WalletRouteProps> {
                 }
                 wallets={wallets}
                 filters={filters}
-                copytrading={ROLE_ENV === ROLE.INVESTOR}
+                copytrading={role === ROLE.INVESTOR}
               />
             </>
           )}
@@ -83,7 +85,7 @@ const mapStateToProps = (state: RootState) => ({
     : undefined
 });
 
-interface Props extends StateProps, InjectedTranslateProps {}
+interface Props extends StateProps, InjectedTranslateProps, WithRoleProps {}
 
 interface StateProps {
   wallets: WalletData[];
@@ -94,6 +96,7 @@ interface StateProps {
 }
 
 export default compose<React.FunctionComponent<WalletRouteProps>>(
+  withRole,
   connect(mapStateToProps),
   translate()
 )(WalletTotal);
