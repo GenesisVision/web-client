@@ -1,8 +1,6 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.55",
     "classnames": "^2.2.5",
@@ -111,19 +109,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "git add"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "linters": {
-      "**/*.{ts,tsx,js,json,scss}": [
-        "prettier --write",
-        "git add"
-      ],
-      "**/*.{ts,tsx,js}": [
-        "import-sort --write",
-        "git add"
-      ]
+      "**/*.{ts,tsx,js,json,scss}": ["prettier --write", "git add"],
+      "**/*.{ts,tsx,js}": ["import-sort --write", "git add"]
     }
   },
   "scripts": {
@@ -146,10 +138,6 @@
       "last 2 firefox versions",
       "last 2 edge versions"
     ],
-    "production": [
-      ">0.25%",
-      "not op_mini all",
-      "ie 11"
-    ]
+    "production": [">0.25%", "not op_mini all", "ie 11"]
   }
 }
