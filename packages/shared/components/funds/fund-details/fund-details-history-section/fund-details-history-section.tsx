@@ -1,14 +1,14 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { FundAssetsListInfo } from "gv-api-web";
-import * as React from "react";
 import { SyntheticEvent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
+import { TooltipTab } from "shared/components/gv-tabs/components/gv-tooltip-tab";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import Surface from "shared/components/surface/surface";
@@ -16,7 +16,6 @@ import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/compone
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import Tooltip from "shared/components/tooltip/tooltip";
 import { AuthState } from "shared/reducers/auth-reducer";
 import RootState from "shared/reducers/root-reducer";
 
@@ -26,15 +25,6 @@ const EVENTS_FILTERING = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
   type: EVENT_TYPE_FILTER_DEFAULT_VALUE
 };
-
-const renderTooltipTab = (tooltipContent: string, tabLabel: string) => (
-  <Tooltip
-    horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-    render={() => <div className="tooltip__content">{tooltipContent}</div>}
-  >
-    <span>{tabLabel}</span>
-  </Tooltip>
-);
 
 class FundDetailsHistorySection extends React.PureComponent<Props, State> {
   state = {
@@ -70,10 +60,12 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
             <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 value={TABS.STRUCTURE}
-                label={renderTooltipTab(
-                  t("fund-details-page.tooltip.structure"),
-                  t("fund-details-page.history.structure.title")
-                )}
+                label={
+                  <TooltipTab
+                    tooltipContent={t("fund-details-page.tooltip.structure")}
+                    tabLabel={t("fund-details-page.history.structure.title")}
+                  />
+                }
               />
               <GVTab
                 value={TABS.EVENTS}
