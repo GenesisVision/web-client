@@ -19,6 +19,7 @@ import {
   DashboardChartRequestLoader
 } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
+import Surface from "shared/components/surface/surface";
 import { CurrencyEnum, Nullable } from "shared/utils/types";
 
 import { IDashboardAssetChart } from "../../reducers/dashboard.reducers";
@@ -62,7 +63,7 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
     } = this.props;
     if (isNewUser) return <DashboardGetStarted />;
     return (
-      <>
+      <Surface className="dashboard-portfolio-chart-section">
         <h3 className="dashboard-portfolio-chart-section__heading">
           {t("manager.dashboard-page.chart-section.header")}
         </h3>
@@ -91,7 +92,7 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
           period={period}
           assetChart={assetChart!}
         />
-      </>
+      </Surface>
     );
   }
 }

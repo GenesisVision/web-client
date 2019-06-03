@@ -1,5 +1,8 @@
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { TAddNotification, TRemoveNotification } from "shared/modules/asset-notifications/asset-notifications.types";
+import {
+  TAddNotification,
+  TRemoveNotification
+} from "shared/modules/asset-notifications/asset-notifications.types";
 import {
   addNotificationSettingAction,
   fetchNotificationSettingsAction,
