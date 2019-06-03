@@ -6,15 +6,15 @@ import { compose } from "redux";
 import Page from "shared/components/page/page";
 import PortfolioEventsTableContainer from "shared/components/portfolio-events-table/portfolio-events-table-container";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
-import { ROLE_ENV } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/withRole";
 import { getUnique } from "shared/utils/array";
 
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
-const _PortfolioEventsAllComponent: React.FC<Props> = ({ t, events }) => (
-  <Page title={t(`${ROLE_ENV}.dashboard-page.portfolio-events.title`)}>
+const _PortfolioEventsAllComponent: React.FC<Props> = ({ role, t, events }) => (
+  <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
     <PortfolioEventsTableContainer
       fetchPortfolioEvents={fetchPortfolioEvents}
-      tableTitle={t(`${ROLE_ENV}.dashboard-page.portfolio-events.table-title`)}
+      tableTitle={t(`${role}.dashboard-page.portfolio-events.table-title`)}
       className="portfolio-events-all-table"
       dateRangeStartLabel={t("filters.date-range.account-creation")}
       eventTypeFilterValues={events}
@@ -35,7 +35,11 @@ const mapStateToProps = (state: InvestorRootState): StateProps => {
   return { events };
 };
 
-interface Props extends InjectedTranslateProps, StateProps, OwnProps {}
+interface Props
+  extends InjectedTranslateProps,
+    StateProps,
+    OwnProps,
+    WithRoleProps {}
 
 interface OwnProps {}
 
@@ -45,6 +49,7 @@ interface StateProps {
 
 const PortfolioEventsAllComponent = compose<React.ComponentType<OwnProps>>(
   React.memo,
+  withRole,
   translate(),
   connect(mapStateToProps)
 )(_PortfolioEventsAllComponent);
