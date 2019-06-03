@@ -1,4 +1,3 @@
-import { PROGRAM_TRADES_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
 import {
   DATA_RANGE_FILTER_TYPES,
   DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -6,19 +5,8 @@ import {
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
 export const COPYTRADING_OPEN_TRADES_COLUMNS = [
-  ...PROGRAM_TRADES_COLUMNS,
-  { name: "providers" }
-];
-
-export const COPYTRADING_OPEN_TRADES_COLUMNS_old = [
   {
-    name: "program"
-  },
-  {
-    name: "manager"
-  },
-  {
-    name: "open-date"
+    name: "providers"
   },
   {
     name: "symbol"
@@ -27,7 +15,10 @@ export const COPYTRADING_OPEN_TRADES_COLUMNS_old = [
     name: "volume"
   },
   {
-    name: "open-price"
+    name: "price-open"
+  },
+  {
+    name: "price"
   },
   {
     name: "profit"

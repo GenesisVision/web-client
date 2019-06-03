@@ -63,7 +63,7 @@ class TradesHistoryTable extends Component<
         getItems={getCopytradingTradesHistory(currency)}
         dataSelector={dashboardTradesHistoryTableSelector}
         isFetchOnMount={true}
-        columns={COPYTRADING_OPEN_TRADES_COLUMNS}
+        columns={COPYTRADING_TRADES_HISTORY_COLUMNS}
         renderFilters={(
           updateFilter: UpdateFilterFunc,
           filtering: FilteringType
