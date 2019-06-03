@@ -3,11 +3,10 @@ import "./statistic-item.scss";
 import classNames from "classnames";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
+import Tooltip from "shared/components/tooltip/tooltip";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
-
-import { HORIZONTAL_POPOVER_POS } from "../popover/popover";
-import Tooltip from "../tooltip/tooltip";
 
 const _StatisticItem: React.FC<Props> = ({
   invert = false,

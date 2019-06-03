@@ -77,8 +77,6 @@ class DetailsInvestment extends PureComponent<
 
     const profitValue = personalDetails.value - personalDetails.invested;
 
-    console.log(asset);
-
     return (
       <ProgramDetailContext.Consumer>
         {({ updateDetails }: IProgramDetailContext) => (
