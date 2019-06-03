@@ -3,7 +3,6 @@ import "shared/components/dashboard/dashboard.scss";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import Page from "shared/components/page/page";
-import Surface from "shared/components/surface/surface";
 import { ROLE_ENV } from "shared/constants/constants";
 
 import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
@@ -17,9 +16,7 @@ const _DashboardPage: React.FC<InjectedTranslateProps> = ({ t }) => {
       <div className="dashboard">
         <div className="dashboard__row">
           <div className="dashboard__chart">
-            <Surface className="dashboard-portfolio-chart-section">
-              <DashboardChartSection />
-            </Surface>
+            <DashboardChartSection />
           </div>
           <div className="dashboard__portfolio-events-aside">
             <DashboardPortfolioEventsSection title={title} />

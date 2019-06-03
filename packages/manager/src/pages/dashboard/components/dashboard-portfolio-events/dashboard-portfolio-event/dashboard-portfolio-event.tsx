@@ -1,11 +1,14 @@
 import "./dashboard-portfolio-event.scss";
 
+import { ManagerPortfolioEvent } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { EVENT_LOGO_TYPE } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -13,9 +16,6 @@ import {
   isUseProfitability,
   valueDescriptionLocalizationConstant
 } from "../../helpers/dashboard-portfolio.helpers";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { ManagerPortfolioEvent } from "gv-api-web";
-import { EVENT_LOGO_TYPE } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
 const formatDate = (date: Date) => {
   const now = moment(new Date());

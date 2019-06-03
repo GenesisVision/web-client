@@ -43,7 +43,8 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
     tab: TABS.OPEN_POSITIONS,
     tradesCount: 0,
     eventsCount: 0,
-    openPositionsCount: 0
+    openPositionsCount: 0,
+    subscriptionsCount: 0
   };
 
   componentDidMount() {
@@ -58,7 +59,13 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { tab, tradesCount, eventsCount, openPositionsCount } = this.state;
+    const {
+      tab,
+      tradesCount,
+      eventsCount,
+      openPositionsCount,
+      subscriptionsCount
+    } = this.state;
     const {
       isForex,
       t,
@@ -100,7 +107,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
               <GVTab
                 value={TABS.SUBSCRIBERS}
                 label={t("program-details-page.history.tabs.subscriptions")}
-                count={3}
+                count={subscriptionsCount}
                 visible={isAuthenticated && isSignalProgram && isManager}
               />
             </GVTabs>
@@ -130,7 +137,9 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
               currency={programCurrency}
             />
           )}
-          {tab === TABS.SUBSCRIBERS && <ProgramSubscriptions />}
+          {tab === TABS.SUBSCRIBERS && (
+            <ProgramSubscriptions id={programId} currency={currency} />
+          )}
         </div>
       </Surface>
     );

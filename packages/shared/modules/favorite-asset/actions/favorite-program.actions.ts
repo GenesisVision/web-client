@@ -21,13 +21,9 @@ export const removeFavoriteProgram = ({
   authorization
 }: FavoriteActionProps): FavoriteActionType<CancelablePromise<any>> => ({
   type: SET_FAVORITE_PROGRAM,
-  payload: programApi.v10ProgramsByIdFavoriteRemovePost(
-    id,
-    authorization
-  ),
+  payload: programApi.v10ProgramsByIdFavoriteRemovePost(id, authorization),
   meta: {
     id,
     isFavorite: false
   }
 });
-
