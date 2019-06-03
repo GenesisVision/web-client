@@ -286,7 +286,12 @@
     "submit": "Submit",
     "type": "type",
     "text": "Do you really want to unsubscribe?",
-    "success-alert-message": "You have been unsubscribed."
+    "success-alert-message": "You have been unsubscribed.",
+    "modes": {
+      "manual-closing": "Manual closing",
+      "close-only": "Close only",
+      "close-all-immediately": "Close all immediately"
+    }
   },
   "follow-program": {
     "create-account": {
