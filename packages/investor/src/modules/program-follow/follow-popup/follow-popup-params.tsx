@@ -109,7 +109,7 @@ type mode = {
 
 const modes: { [key: string]: mode } = {
   byBalance: { label: "By balance", value: "ByBalance" },
-  percentage: { label: "Percentage", value: "Percentage" },
+  percentage: { label: "Percentage", value: "Percent" },
   fixed: { label: "Fixed", value: "Fixed" }
 };
 
