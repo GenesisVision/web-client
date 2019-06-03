@@ -1,6 +1,5 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
-import classNames from "classnames";
 import { FundAssetInfo, FundAssetsListInfo } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -16,6 +15,7 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { formatValue } from "shared/utils/formatter";
+import FundStructureHeaderCell from "./fund-structure-header-content";
 
 interface Props {
   id: string;
@@ -49,23 +49,6 @@ class FundStructure extends React.Component<
     this.fetchFundStructure();
   }
 
-  renderHeaderContent = (column: SortingColumn): JSX.Element => {
-    return (
-      <span
-        className={classNames(
-          `details-structure__head-cell fund-details-structure__cell--${
-            column.name
-          }`,
-          {
-            tooltip__child: column.tooltip
-          }
-        )}
-      >
-        {this.props.t(`fund-details-page.history.structure.${column.name}`)}
-      </span>
-    );
-  };
-
   render() {
     const { t } = this.props;
 
@@ -94,10 +77,10 @@ class FundStructure extends React.Component<
                 </div>
               )}
             >
-              {this.renderHeaderContent(column)}
+              <FundStructureHeaderCell column={column} />
             </Tooltip>
           ) : (
-            this.renderHeaderContent(column)
+            <FundStructureHeaderCell column={column} />
           );
         }}
         renderBodyRow={(item: FundAssetInfo) => (
