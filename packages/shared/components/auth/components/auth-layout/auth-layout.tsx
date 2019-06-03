@@ -5,7 +5,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
-import { ROLE_ENV } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/withRole";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 
 import { ILoginFooterProps } from "../login-footer/login-footer";
@@ -19,6 +19,7 @@ class _AuthLayout extends React.PureComponent<Props, State> {
 
   render() {
     const {
+      role,
       t,
       children,
       title,
@@ -40,11 +41,11 @@ class _AuthLayout extends React.PureComponent<Props, State> {
             <GvBrand />
           </NavLink>
           <blockquote className="auth__quote">
-            {t(`${ROLE_ENV}.auth-quotes.${quoteNo}.quote`)}
+            {t(`${role}.auth-quotes.${quoteNo}.quote`)}
             <footer className="auth__quote-footer">
               —{" "}
               <cite className="auth__quote-author">
-                {t(`${ROLE_ENV}.auth-quotes.${quoteNo}.author`)}
+                {t(`${role}.auth-quotes.${quoteNo}.author`)}
               </cite>
             </footer>
           </blockquote>
@@ -65,7 +66,9 @@ class _AuthLayout extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props extends InjectedTranslateProps {
+interface Props extends InjectedTranslateProps, OwnProps, WithRoleProps {}
+
+interface OwnProps {
   Footer: React.ComponentType<ILoginFooterProps>;
   title: string;
   SIGNUP_ROUTE?: string;
@@ -76,5 +79,5 @@ interface State {
   quoteNo: number;
 }
 
-const AuthLayout = translate()(_AuthLayout);
+const AuthLayout = withRole<OwnProps>(translate()(_AuthLayout));
 export default AuthLayout;
