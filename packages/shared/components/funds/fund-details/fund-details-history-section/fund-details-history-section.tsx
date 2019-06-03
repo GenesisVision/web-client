@@ -1,13 +1,13 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { FundAssetsListInfo } from "gv-api-web";
-import { SyntheticEvent } from "react";
 import * as React from "react";
+import { SyntheticEvent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
-import { TooltipTab } from "shared/components/gv-tabs/components/gv-tooltip-tab";
+import { GVTooltipTab } from "shared/components/gv-tabs/components/gv-tooltip-tab";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
@@ -61,7 +61,7 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
               <GVTab
                 value={TABS.STRUCTURE}
                 label={
-                  <TooltipTab
+                  <GVTooltipTab
                     tooltipContent={t("fund-details-page.tooltip.structure")}
                     tabLabel={t("fund-details-page.history.structure.title")}
                   />

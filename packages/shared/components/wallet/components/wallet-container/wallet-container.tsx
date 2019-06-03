@@ -6,7 +6,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
-import { TooltipTab } from "shared/components/gv-tabs/components/gv-tooltip-tab";
+import { GVTooltipTab } from "shared/components/gv-tabs/components/gv-tooltip-tab";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
@@ -55,7 +55,7 @@ class _WalletContainer extends React.PureComponent<Props, State> {
                         state: t("wallet-page.title")
                       }}
                     >
-                      <TooltipTab
+                      <GVTooltipTab
                         tooltipContent={t("wallet-page.tooltip.transactions")}
                         tabLabel={t("wallet-page.tabs.transactions")}
                       />
@@ -72,11 +72,11 @@ class _WalletContainer extends React.PureComponent<Props, State> {
                         state: t("wallet-page.title")
                       }}
                     >
-                      <TooltipTab
+                      <GVTooltipTab
                         tooltipContent={t("wallet-page.tooltip.deposit")}
                         tabLabel={t("wallet-page.tabs.deposit")}
                       />
-                      <TooltipTab
+                      <GVTooltipTab
                         tooltipContent={t("wallet-page.tooltip.withdrawals")}
                         tabLabel={t("wallet-page.tabs.withdrawals")}
                       />
