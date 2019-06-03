@@ -6,7 +6,9 @@ import {
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
+import Tooltip from "shared/components/tooltip/tooltip";
 
 import { toggleReinvesting } from "../services/program-reinvesting.service";
 
@@ -52,8 +54,18 @@ class _ProgramReinvestingContainer extends React.PureComponent<Props, State> {
               value={isReinvesting}
               color="primary"
               onChange={this.onReinvestingLabelClick(updateDetails)}
-              label={t("program-details-page.description.reinvest")}
-              labelTooltip={t("program-details-page.tooltip.reinvest")}
+              label={
+                <Tooltip
+                  horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                  render={() => (
+                    <div className="tooltip__content">
+                      {t("program-details-page.tooltip.reinvest")}
+                    </div>
+                  )}
+                >
+                  <span>{t("program-details-page.description.reinvest")}</span>
+                </Tooltip>
+              }
               disabled={isPending}
             />
           </span>

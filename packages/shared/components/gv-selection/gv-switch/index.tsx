@@ -2,8 +2,6 @@ import "./style.scss";
 
 import classnames from "classnames";
 import React from "react";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
-import Tooltip from "shared/components/tooltip/tooltip";
 
 class GVSwitch extends React.Component<GVSwitchProps> {
   static propTypes: any;
@@ -26,15 +24,6 @@ class GVSwitch extends React.Component<GVSwitchProps> {
     e.stopPropagation();
   };
 
-  renderLabel = () => {
-    const { label } = this.props;
-    return (
-      <span className="gv-switch__label" onClick={this.handleClick}>
-        {label}
-      </span>
-    );
-  };
-
   renderError = () => {
     const { touched, error } = this.props;
     if (!touched || !error) return null;
@@ -50,26 +39,16 @@ class GVSwitch extends React.Component<GVSwitchProps> {
       value,
       label,
       touched,
-      labelTooltip,
       disabled,
       ...other
     } = this.props;
     return (
       <span className="gv-switch-wrapper">
-        {label ? (
-          labelTooltip ? (
-            <Tooltip
-              horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-              render={() => (
-                <div className="tooltip__content">{labelTooltip}</div>
-              )}
-            >
-              {this.renderLabel()}
-            </Tooltip>
-          ) : (
-            this.renderLabel()
-          )
-        ) : null}
+        {label && (
+          <span className="gv-switch__label" onClick={this.handleClick}>
+            {label}
+          </span>
+        )}
         <span
           className={classnames("gv-switch", className, {
             "gv-switch--checked": value,
@@ -110,7 +89,6 @@ interface GVSwitchProps {
   touched: boolean;
   value: boolean;
   error?: string;
-  label?: string;
+  label?: string | React.ReactNode;
   disabled?: boolean;
-  labelTooltip?: string;
 }
