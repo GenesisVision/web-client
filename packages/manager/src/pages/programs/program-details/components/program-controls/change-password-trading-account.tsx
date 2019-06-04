@@ -1,7 +1,7 @@
 import "./signal-provider-controls.scss";
 
 import ChangePasswordTradingAccountPopup from "modules/change-password-trading-account/change-password-trading-account-popup";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import DetailsChangePassword from "shared/components/details/details-description-section/details-description/controls/details-change-password";
 import { IChangePasswordTradingAccountProps } from "shared/components/programs/program-details/program-details.types";
 
@@ -32,16 +32,15 @@ class ChangePasswordTradingAccount extends React.PureComponent<
     const { programDescription } = this.props;
     const { isOpenChangePasswordTradingAccountPopup } = this.state;
     return (
-      <Fragment>
+      <>
         <DetailsChangePassword onClick={this.openPopup} />
-
         <ChangePasswordTradingAccountPopup
           programName={programDescription.title}
           open={isOpenChangePasswordTradingAccountPopup}
           id={programDescription.id}
           onClose={this.closePopup}
         />
-      </Fragment>
+      </>
     );
   }
 }

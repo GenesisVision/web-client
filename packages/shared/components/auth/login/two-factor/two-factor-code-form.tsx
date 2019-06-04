@@ -13,7 +13,7 @@ import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
-class _TwoFactorCodeForm extends React.Component<
+class _TwoFactorCodeForm extends React.PureComponent<
   InjectedFormikProps<Props, ITwoFactorCodeFormValues>,
   State
 > {

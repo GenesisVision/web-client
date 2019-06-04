@@ -1,7 +1,7 @@
 import ResizeObserver from "@juggle/resize-observer";
 import debounce from "debounce";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { windowScroll } from "shared/actions/ui-actions";

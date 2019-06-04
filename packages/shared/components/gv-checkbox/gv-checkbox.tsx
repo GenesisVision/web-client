@@ -15,7 +15,7 @@ interface IGVCheckboxProps {
   label: string;
 }
 
-class GVCheckbox extends React.Component<IGVCheckboxProps> {
+class GVCheckbox extends React.PureComponent<IGVCheckboxProps> {
   checkbox: RefObject<HTMLInputElement> = React.createRef();
 
   handleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {

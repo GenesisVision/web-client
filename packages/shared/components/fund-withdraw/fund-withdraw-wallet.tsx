@@ -1,5 +1,5 @@
 import { WalletBaseData } from "gv-api-web";
-import React, { Component } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Select, { ISelectChangeEvent } from "shared/components/select/select";

@@ -1,7 +1,7 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import ProgramFollowContainer from "modules/program-follow/program-follow-container";
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import {
   IProgramDetailContext,
@@ -65,7 +65,7 @@ class SignalProviderControls extends React.PureComponent<
     const { t, programDescription, isAuthenticated } = this.props;
     const { popups } = this.state;
     return (
-      <Fragment>
+      <>
         <SignalProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
           {programDescription.personalProgramDetails &&
@@ -97,7 +97,7 @@ class SignalProviderControls extends React.PureComponent<
         </div>
         <ProgramDetailContext.Consumer>
           {({ updateDetails }: IProgramDetailContext) => (
-            <Fragment>
+            <>
               <ProgramFollowContainer
                 id={programDescription.id}
                 open={popups[SIGNAL_POPUP.FOLLOW]}
@@ -114,10 +114,10 @@ class SignalProviderControls extends React.PureComponent<
                 onClose={this.closePopup(SIGNAL_POPUP.UNFOLLOW)}
                 onApply={this.applyChanges(updateDetails)}
               />
-            </Fragment>
+            </>
           )}
         </ProgramDetailContext.Consumer>
-      </Fragment>
+      </>
     );
   }
 }

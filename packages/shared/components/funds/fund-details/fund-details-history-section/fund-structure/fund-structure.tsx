@@ -28,7 +28,7 @@ interface State {
   data?: FundAssetsListInfo;
 }
 
-class FundStructure extends React.Component<
+class FundStructure extends React.PureComponent<
   Props & InjectedTranslateProps,
   State
 > {

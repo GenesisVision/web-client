@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { IFundControlsProps } from "shared/components/funds/fund-details/fund-details.types";
 

@@ -27,7 +27,7 @@ interface OwnProps {
 
 interface Props extends InjectedTranslateProps, OwnProps, FormProps {}
 
-class PhoneVerificationForm extends React.Component<Props> {
+class PhoneVerificationForm extends React.PureComponent<Props> {
   componentDidMount() {
     this.props.onResendClick();
   }

@@ -1,31 +1,25 @@
 import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
-import React, { Component, ComponentType } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
-import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
+import DetailsFavorite
+  from "shared/components/details/details-description-section/details-description/controls/details-favorite";
+import DetailsNotification
+  from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import GVButton from "shared/components/gv-button";
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS,
-  anchorElType
-} from "shared/components/popover/popover";
+import Popover, { HORIZONTAL_POPOVER_POS, VERTICAL_POPOVER_POS, anchorElType } from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import {
-  composeManagerDetailsUrl,
-  composeProgramNotificationsUrl
-} from "shared/utils/compose-url";
+import { composeManagerDetailsUrl, composeProgramNotificationsUrl } from "shared/utils/compose-url";
 
 import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
 
 interface IIProgramDetailsDescriptionMainOwnProps {
   programDescription: ProgramDetailsFull;
-  ChangePasswordTradingAccount?: ComponentType<
+  ChangePasswordTradingAccount?: React.ComponentType<
     IChangePasswordTradingAccountProps
   >;
   isOwnProgram: boolean;
