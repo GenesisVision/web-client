@@ -37,7 +37,7 @@ interface IChangePasswordTradingAccountPopupState {
   errorMessage: string;
 }
 
-class _ChangePasswordTradingAccountPopup extends Component<
+class _ChangePasswordTradingAccountPopup extends React.PureComponent<
   IChangePasswordTradingAccountPopupProps,
   IChangePasswordTradingAccountPopupState
 > {

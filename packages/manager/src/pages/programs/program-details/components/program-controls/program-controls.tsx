@@ -5,7 +5,7 @@ import { IProgramControlsProps } from "shared/components/programs/program-detail
 import InvestmentProgramControls from "./investment-program-controls";
 import SignalProviderControls from "./signal-provider-controls";
 
-class ProgramControls extends Component<
+class ProgramControls extends React.PureComponent<
   IProgramControlsProps & InjectedTranslateProps
 > {
   render() {

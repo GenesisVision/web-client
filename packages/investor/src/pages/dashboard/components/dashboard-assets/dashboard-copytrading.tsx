@@ -33,7 +33,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { DASHBOARD_COPYTRADING_COLUMNS } from "./dashboard-copytrading.constants";
 import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
 
-class _DashboardCopytrading extends React.Component<Props> {
+class _DashboardCopytrading extends React.PureComponent<Props> {
   render() {
     const { t, title, role } = this.props;
     return (

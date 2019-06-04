@@ -28,7 +28,7 @@ interface ISignalProviderControlState {
 type SignalProviderControlsProps = ISignalProviderControlOwnProps &
   InjectedTranslateProps;
 
-class SignalProviderControls extends Component<
+class SignalProviderControls extends React.PureComponent<
   SignalProviderControlsProps,
   ISignalProviderControlState
 > {

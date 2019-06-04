@@ -15,7 +15,7 @@ interface GVSwitchProps {
   disabled?: boolean;
 }
 
-class GVSwitch extends React.Component<GVSwitchProps> {
+class GVSwitch extends React.PureComponent<GVSwitchProps> {
   static propTypes: any;
   static defaultProps: any;
   checkbox: React.RefObject<HTMLInputElement>;

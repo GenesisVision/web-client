@@ -9,7 +9,7 @@ interface IChangePasswordTradingAccountState {
   isOpenChangePasswordTradingAccountPopup: boolean;
 }
 
-class ChangePasswordTradingAccount extends Component<
+class ChangePasswordTradingAccount extends React.PureComponent<
   IChangePasswordTradingAccountProps,
   IChangePasswordTradingAccountState
 > {

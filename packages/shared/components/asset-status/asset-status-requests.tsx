@@ -14,7 +14,7 @@ import {
   getAssetRequests
 } from "./services/asset-status.service";
 
-class AssetStatusRequests extends React.Component<Props, State> {
+class AssetStatusRequests extends React.PureComponent<Props, State> {
   state: State = {
     requests: undefined
   };

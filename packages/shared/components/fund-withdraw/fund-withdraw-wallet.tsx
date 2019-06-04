@@ -4,7 +4,9 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Select, { ISelectChangeEvent } from "shared/components/select/select";
 
-class _FundWithdrawWallet extends Component<OwnProps & InjectedTranslateProps> {
+class _FundWithdrawWallet extends React.PureComponent<
+  OwnProps & InjectedTranslateProps
+> {
   handleChange = (event: ISelectChangeEvent) => {
     this.props.onChange(event.target.value);
   };

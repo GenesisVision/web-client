@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import debounce from "debounce";
+import { SearchViewModel } from "gv-api-web";
 import * as React from "react";
+import { Nullable } from "shared/utils/types";
 
 import { search } from "../../services/global-search-result.service";
 import GlobalSearchInput from "./global-search-input";
 import GlobalSearchResult from "./global-search-result/global-search-result";
-import { SearchViewModel } from "gv-api-web";
-import { Nullable } from "shared/utils/types";
 
 interface Props {
   title: string;
@@ -17,7 +17,7 @@ interface State {
   data: Nullable<SearchViewModel>;
 }
 
-class GlobalSearchResultContainer extends React.Component<Props, State> {
+class GlobalSearchResultContainer extends React.PureComponent<Props, State> {
   state = {
     query: "",
     data: null

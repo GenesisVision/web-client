@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import { windowScroll } from "shared/actions/ui-actions";
 import GVScroll from "shared/components/scroll/gvscroll";
 
-class GVScrollContainer extends Component {
+class GVScrollContainer extends React.PureComponent {
   scroll = React.createRef();
   container = React.createRef();
 

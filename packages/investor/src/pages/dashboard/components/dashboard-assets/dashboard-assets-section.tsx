@@ -43,7 +43,7 @@ interface IDashboardAssetsState extends IDashboardAssetsCounts {
   tab: ASSET_TAB;
 }
 
-class DashboardAssetsSection extends Component<
+class DashboardAssetsSection extends React.PureComponent<
   IDashboardOwnProps & IDashboardAssetsProps & InjectedTranslateProps,
   IDashboardAssetsState
 > {

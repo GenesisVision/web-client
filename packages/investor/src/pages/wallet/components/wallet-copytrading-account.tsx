@@ -30,7 +30,7 @@ interface IWalletCopytradingAccountState {
   hasError: boolean;
 }
 
-class WalletCopytradingAccount extends Component<
+class WalletCopytradingAccount extends React.PureComponent<
   IWalletCopytradingAccountProps,
   IWalletCopytradingAccountState
 > {

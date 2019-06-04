@@ -1,12 +1,12 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import React, { Component } from "react";
+import * as React from "react";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import { IProgramSignalFormValues } from "./components/program-signal-form";
 import ProgramSignalForm from "./components/program-signal-form";
 
-class _ProgramSignalPopup extends Component<Props> {
+class _ProgramSignalPopup extends React.PureComponent<Props> {
   state = {
     errorMessage: ""
   };

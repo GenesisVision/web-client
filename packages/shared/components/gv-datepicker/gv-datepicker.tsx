@@ -43,7 +43,7 @@ interface IGVDatePickerState {
   anchorEl?: EventTarget;
 }
 
-class GVDatePicker extends React.Component<
+class GVDatePicker extends React.PureComponent<
   IGVDatePickerProps,
   IGVDatePickerState
 > {

@@ -39,7 +39,7 @@ interface IProgramDetailsDescriptionMainState {
   anchor?: anchorElType;
 }
 
-class ProgramDetailsDescriptionMain extends Component<
+class ProgramDetailsDescriptionMain extends React.PureComponent<
   IProgramDetailsDescriptionMainProps,
   IProgramDetailsDescriptionMainState
 > {

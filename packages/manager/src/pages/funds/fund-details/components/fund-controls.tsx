@@ -4,7 +4,7 @@ import { IFundControlsProps } from "shared/components/funds/fund-details/fund-de
 
 import InvestmentFundControls from "./investment-fund-controls";
 
-class FundControls extends Component<
+class FundControls extends React.PureComponent<
   IFundControlsProps & InjectedTranslateProps
 > {
   render() {

@@ -30,7 +30,7 @@ interface IDetailsDescriptionProps
 
 interface IDetailsDescriptionState {}
 
-class DetailsDescription extends React.Component<
+class DetailsDescription extends React.PureComponent<
   IDetailsDescriptionProps,
   IDetailsDescriptionState
 > {

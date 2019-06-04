@@ -9,7 +9,7 @@ interface Props {
   query: string;
 }
 
-class GlobalSearchInput extends React.Component<Props> {
+class GlobalSearchInput extends React.PureComponent<Props> {
   handleOnChange = (event: React.ChangeEvent<any>) => {
     const { onChange } = this.props;
     onChange(event.target.value);

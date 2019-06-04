@@ -2,7 +2,7 @@ import "./error-notifier.scss";
 
 import React from "react";
 
-class ErrorNotifier extends React.Component {
+class ErrorNotifier extends React.PureComponent {
   render() {
     const { errors, name, touched, placeholder } = this.props;
     return (
