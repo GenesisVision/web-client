@@ -39,4 +39,4 @@ const ManagersTableRow: React.FC<
   );
 };
 
-export default translate()(ManagersTableRow);
+export default React.memo(translate()(ManagersTableRow));

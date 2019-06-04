@@ -40,4 +40,4 @@ const InvestmentFundInfo: React.FC<
   );
 };
 
-export default translate()(InvestmentFundInfo);
+export default React.memo(translate()(InvestmentFundInfo));

@@ -84,4 +84,4 @@ const FundsTable: React.FC<Props & InjectedTranslateProps> = ({
   );
 };
 
-export default translate()(FundsTable);
+export default React.memo(translate()(FundsTable));

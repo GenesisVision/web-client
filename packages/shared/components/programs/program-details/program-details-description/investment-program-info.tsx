@@ -92,4 +92,4 @@ const InvestmentProgramInfo: React.FC<
   );
 };
 
-export default translate()(InvestmentProgramInfo);
+export default React.memo(translate()(InvestmentProgramInfo));

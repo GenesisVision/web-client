@@ -10,33 +10,31 @@ interface ISignalProgramInfoProps {
 
 const SignalProgramInfo: React.FC<
   InjectedTranslateProps & ISignalProgramInfoProps
-> = ({ t, programDescription }) => {
-  return (
-    <div className="program-details-description__statistic-container">
-      <StatisticItem
-        label={t("program-details-page.description.successFee")}
-        className="program-details-description__short-statistic-item"
-        accent
-      >
-        <NumberFormat
-          value={programDescription.signalSuccessFee}
-          displayType="text"
-          suffix=" %"
-        />
-      </StatisticItem>
-      <StatisticItem
-        label={t("program-details-page.description.volume-fee")}
-        className="program-details-description__short-statistic-item"
-        accent
-      >
-        <NumberFormat
-          value={programDescription.signalVolumeFee}
-          displayType="text"
-          suffix=" %"
-        />
-      </StatisticItem>
-    </div>
-  );
-};
+> = ({ t, programDescription }) => (
+  <div className="program-details-description__statistic-container">
+    <StatisticItem
+      label={t("program-details-page.description.successFee")}
+      className="program-details-description__short-statistic-item"
+      accent
+    >
+      <NumberFormat
+        value={programDescription.signalSuccessFee}
+        displayType="text"
+        suffix=" %"
+      />
+    </StatisticItem>
+    <StatisticItem
+      label={t("program-details-page.description.volume-fee")}
+      className="program-details-description__short-statistic-item"
+      accent
+    >
+      <NumberFormat
+        value={programDescription.signalVolumeFee}
+        displayType="text"
+        suffix=" %"
+      />
+    </StatisticItem>
+  </div>
+);
 
-export default translate()(SignalProgramInfo); // TODO refactor
+export default React.memo(translate()(SignalProgramInfo)); // TODO refactor

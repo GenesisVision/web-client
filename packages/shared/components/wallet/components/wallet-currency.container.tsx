@@ -50,7 +50,7 @@ interface StateProps {
   filters?: MultiWalletFilters;
 }
 
-const WalletCurrencyContainer = connect(mapStateToProps)(
-  _WalletCurrencyContainer
+const WalletCurrencyContainer = React.memo(
+  connect(mapStateToProps)(_WalletCurrencyContainer)
 );
 export default WalletCurrencyContainer;
