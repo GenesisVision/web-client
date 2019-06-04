@@ -181,8 +181,8 @@ const _DashboardPrograms: React.FC<Props> = ({
 );
 
 const DashboardPrograms = compose<React.ComponentType<OwnProps>>(
-  withRole,
   React.memo,
+  withRole,
   translate()
 )(_DashboardPrograms);
 export default DashboardPrograms;

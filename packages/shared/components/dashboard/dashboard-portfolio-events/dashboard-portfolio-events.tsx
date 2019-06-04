@@ -99,8 +99,8 @@ interface OwnProps {
 }
 
 const DashboardPortfolioEvents = compose<React.ComponentType<OwnProps>>(
-  withRole,
   React.memo,
+  withRole,
   translate()
 )(_DashboardPortfolioEvents);
 export default DashboardPortfolioEvents;

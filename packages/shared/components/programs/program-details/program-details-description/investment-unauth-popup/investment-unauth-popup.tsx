@@ -58,6 +58,7 @@ const InvestmentUnauthPopup: React.FC<Props> = ({
 };
 
 export default compose<React.FC<OwnProps>>(
+  React.memo,
   withRole,
   translate()
 )(InvestmentUnauthPopup);
