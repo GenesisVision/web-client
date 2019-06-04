@@ -3,18 +3,6 @@ import "./style.scss";
 import classnames from "classnames";
 import React from "react";
 
-interface GVSwitchProps {
-  name: string;
-  checked?: boolean;
-  color?: string;
-  className?: string;
-  touched: boolean;
-  value: boolean;
-  error?: string;
-  label?: string;
-  disabled?: boolean;
-}
-
 class GVSwitch extends React.Component<GVSwitchProps> {
   static propTypes: any;
   static defaultProps: any;
@@ -36,17 +24,6 @@ class GVSwitch extends React.Component<GVSwitchProps> {
     e.stopPropagation();
   };
 
-  renderLabel = () => {
-    const { label } = this.props;
-    if (!label) return null;
-
-    return (
-      <span className="gv-switch__label" onClick={this.handleClick}>
-        {label}
-      </span>
-    );
-  };
-
   renderError = () => {
     const { touched, error } = this.props;
     if (!touched || !error) return null;
@@ -60,13 +37,18 @@ class GVSwitch extends React.Component<GVSwitchProps> {
       className,
       color,
       value,
+      label,
       touched,
       disabled,
       ...other
     } = this.props;
     return (
       <span className="gv-switch-wrapper">
-        {this.renderLabel()}
+        {label && (
+          <span className="gv-switch__label" onClick={this.handleClick}>
+            {label}
+          </span>
+        )}
         <span
           className={classnames("gv-switch", className, {
             "gv-switch--checked": value,
@@ -98,3 +80,15 @@ class GVSwitch extends React.Component<GVSwitchProps> {
 }
 
 export default GVSwitch;
+
+interface GVSwitchProps {
+  name: string;
+  checked?: boolean;
+  color?: string;
+  className?: string;
+  touched: boolean;
+  value: boolean;
+  error?: string;
+  label?: string | React.ReactNode;
+  disabled?: boolean;
+}

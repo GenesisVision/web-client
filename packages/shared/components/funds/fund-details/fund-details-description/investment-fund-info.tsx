@@ -3,6 +3,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { formatValue } from "shared/utils/formatter";
 
 interface IInvestmentFundInfoProps {
@@ -15,8 +16,13 @@ const InvestmentFundInfo: React.FunctionComponent<
   return (
     <div className="program-details-description__statistic-container">
       <StatisticItem
-        label={t("fund-details-page.description.entryFee")}
         className={"details-description__short-statistic-item"}
+        label={
+          <TooltipLabel
+            tooltipContent={t("fund-details-page.tooltip.entry-fee")}
+            labelText={t("fund-details-page.description.entryFee")}
+          />
+        }
         accent
       >
         <NumberFormat
@@ -26,7 +32,12 @@ const InvestmentFundInfo: React.FunctionComponent<
         />
       </StatisticItem>
       <StatisticItem
-        label={t("fund-details-page.description.exitFee")}
+        label={
+          <TooltipLabel
+            tooltipContent={t("fund-details-page.tooltip.exit-fee")}
+            labelText={t("fund-details-page.description.exitFee")}
+          />
+        }
         className={"details-description__short-statistic-item"}
         accent
       >
