@@ -16,7 +16,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import Tooltip from "shared/components/tooltip/tooltip";
 import { formatValue } from "shared/utils/formatter";
 
-import FundStructureHeaderCell from "./fund-structure-header-content";
+import FundStructureHeaderCell from "./fund-structure-header-cell";
 
 interface Props {
   id: string;
