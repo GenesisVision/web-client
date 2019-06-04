@@ -91,7 +91,7 @@ class _WalletWidget extends React.PureComponent<
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
-              <StatisticItem label={t("wallet-widget.pending-value")}>
+              <StatisticItem label={t("wallet-widget.pending")}>
                 {`${formatCurrencyValue(pending, currency)} ${currency}`}
               </StatisticItem>
             </div>
