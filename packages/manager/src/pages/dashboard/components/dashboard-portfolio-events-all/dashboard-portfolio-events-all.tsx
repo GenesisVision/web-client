@@ -7,7 +7,7 @@ import Page from "shared/components/page/page";
 import PortfolioEventsTableContainerComponent from "shared/components/portfolio-events-table/portfolio-events-table-container";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { getUnique } from "shared/utils/array";
 
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";

@@ -25,7 +25,7 @@ import {
   UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { FUND } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 

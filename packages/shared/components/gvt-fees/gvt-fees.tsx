@@ -4,7 +4,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 import { ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 const GVTFees: React.FC<Props> = ({ role, t, open, onClose }) => (
   <Dialog wider open={open} onClose={onClose} className="gvt-fees">

@@ -10,7 +10,7 @@ import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncActionType } from "shared/components/table/components/table.types";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 class _DashboardAssets extends React.PureComponent<Props, State> {
   state = {

@@ -5,7 +5,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 
 import { ILoginFooterProps } from "../login-footer/login-footer";

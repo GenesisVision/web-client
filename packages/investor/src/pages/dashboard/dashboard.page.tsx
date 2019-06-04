@@ -6,7 +6,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 import DashboardAssetsSection from "./components/dashboard-assets/dashboard-assets-section";
 import DashboardPortfolioChartSectionContainer from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section-container";

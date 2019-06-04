@@ -3,7 +3,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const _DepositTop: React.FC<Props> = ({

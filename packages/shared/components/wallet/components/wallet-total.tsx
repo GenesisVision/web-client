@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
 import { ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { IApiState } from "shared/reducers/api-reducer/api-reducer";
 import RootState from "shared/reducers/root-reducer";
 

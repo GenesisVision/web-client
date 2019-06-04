@@ -26,7 +26,7 @@ import {
   Column,
   UpdateFilterFunc
 } from "shared/components/table/components/table.types";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue } from "shared/utils/formatter";
 

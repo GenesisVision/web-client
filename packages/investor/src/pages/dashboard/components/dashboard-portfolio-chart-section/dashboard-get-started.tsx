@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 const _DashboardGetStarted: React.FC<
   InjectedTranslateProps & WithRoleProps

@@ -8,7 +8,7 @@ import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-
 import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { EVENT_LOGO_TYPE } from "../../dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";

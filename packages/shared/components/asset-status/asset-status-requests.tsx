@@ -6,7 +6,7 @@ import { compose } from "redux";
 import DashboardRequest from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
 import { CancelRequestPropsType } from "shared/components/dashboard/dashboard.constants";
 import { ASSET } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import {

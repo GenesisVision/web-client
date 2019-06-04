@@ -4,7 +4,7 @@ import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import { ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 const Tabs: React.FC<Props> = ({ role, t, authPartUrl }) => (
   <GVTabs value={role}>

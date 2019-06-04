@@ -19,7 +19,7 @@ import Popover, {
 import GVScroll from "shared/components/scroll/gvscroll";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { AuthRootState } from "shared/utils/types";
 

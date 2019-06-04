@@ -10,7 +10,7 @@ import DepositTop, {
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import GVButton from "shared/components/gv-button";
 import { ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/withRole";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/pages/login.routes";
 
 const InvestmentUnauthPopup: React.FC<Props> = ({
