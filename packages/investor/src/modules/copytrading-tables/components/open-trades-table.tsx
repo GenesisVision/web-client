@@ -47,7 +47,6 @@ interface IOpenTradesTableOwnProps {
 interface IOpenTradesDispatchProps {
   service: {
     clearCopytradingTable(): void;
-    closeCopytradingTrade(id: string, onSuccess: () => void): void;
   };
 }
 
@@ -75,11 +74,6 @@ class OpenTradesTable extends Component<
     this.setState({ isConfirmPopupOpen: false });
   };
 
-  closeTrade = (id: string, onSuccess: any) => () => {
-    this.props.service.closeCopytradingTrade(id, onSuccess);
-    this.closeConfirmPopup();
-  };
-
   render() {
     const { t, title, currency } = this.props;
     const { isConfirmPopupOpen } = this.state;
@@ -101,7 +95,7 @@ class OpenTradesTable extends Component<
         )}
         renderBodyRow={(trade: OrderSignalModel, updateRow: any) => (
           <>
-            <TradeRow trade={trade} />
+            <TradeRow trade={trade} title={title} />
             {/*<TableRow>
             <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
@@ -209,10 +203,7 @@ class OpenTradesTable extends Component<
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  service: bindActionCreators(
-    { clearCopytradingTable, closeCopytradingTrade },
-    dispatch
-  )
+  service: bindActionCreators({ clearCopytradingTable }, dispatch)
 });
 
 export default compose<ComponentType<IOpenTradesTableOwnProps>>(

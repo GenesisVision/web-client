@@ -1,4 +1,5 @@
 import { OrderSignalModel, TradesSignalViewModel } from "gv-api-web";
+import TradesHistoryRow from "modules/copytrading-tables/components/trades-history-row";
 import moment from "moment";
 import React, { Component, ComponentType, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -17,7 +18,6 @@ import DateRangeFilter from "shared/components/table/components/filtering/date-r
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableContainer from "shared/components/table/components/table-container";
-import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
   UpdateFilterFunc
@@ -48,7 +48,7 @@ interface ITradesHistoryDispatchProps {
   };
 }
 
-class TradesHistoryTable extends Component<
+class _TradesHistoryTable extends Component<
   ITradesHistoryTableOwnProps &
     InjectedTranslateProps &
     ITradesHistoryDispatchProps
@@ -68,14 +68,14 @@ class TradesHistoryTable extends Component<
           updateFilter: UpdateFilterFunc,
           filtering: FilteringType
         ) => (
-          <Fragment>
+          <>
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}
               value={filtering[DATE_RANGE_FILTER_NAME]}
               onChange={updateFilter}
               startLabel={t("filters.date-range.program-start")}
             />
-          </Fragment>
+          </>
         )}
         renderHeader={column => (
           <span
@@ -83,12 +83,14 @@ class TradesHistoryTable extends Component<
               column.name
             }`}
           >
-            {t(`investor.copytrading-tables.open-trades-header.${column.name}`)}
+            {t(
+              `investor.copytrading-tables.trades-history-header.${column.name}`
+            )}
           </span>
         )}
         renderBodyRow={(trade: OrderSignalModel, updateRow: any) => (
           <>
-            <TradeRow trade={trade} />
+            <TradesHistoryRow trade={trade} />
             {/*<TableRow>
               <TableCell className="programs-table__cell dashboard-programs__cell--title">
                 <div className="dashboard-programs__cell--avatar-title">
@@ -190,10 +192,12 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   service: bindActionCreators({ clearCopytradingTable }, dispatch)
 });
 
-export default compose<ComponentType<ITradesHistoryTableOwnProps>>(
+const TradesHistoryTable = compose<ComponentType<ITradesHistoryTableOwnProps>>(
   translate(),
   connect(
     null,
     mapDispatchToProps
   )
-)(TradesHistoryTable);
+)(_TradesHistoryTable);
+
+export default TradesHistoryTable;

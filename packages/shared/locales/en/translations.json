@@ -1157,29 +1157,30 @@
         "error-message": "An error occurred while closing the trade"
       },
       "open-trades-header": {
-        "swap": "Swap",
-        "commission": "Commission",
         "providers": "Providers",
-        "direction-entry": "Dir/Entry",
-        "direction": "Dir",
-        "ticket": "Ticket",
+        "date-open": "Date open",
         "symbol": "Symbol",
+        "direction": "Dir",
         "volume": "Volume",
-        "profit": "Profit",
+        "price-open": "Price open",
         "price": "Price",
-        "entry": "Entry",
-        "date": "Date"
+        "profit": "Profit"
       },
       "trades-history-header": {
-        "providers": "Providers",
-        "direction": "Dir",
-        "ticket": "Ticket",
+        "direction-entry": "Dir/Entry",
         "symbol": "Symbol",
         "volume": "Volume",
-        "profit": "Profit",
         "price": "Price",
-        "entry": "Entry",
-        "date": "Date"
+        "profit": "Profit",
+        "commission": "Commission",
+        "date": "Date",
+        "providers": "Providers"
+      },
+      "fees": {
+        "trading": "Trading Commission: {{amount}} {{currency}}",
+        "ManagerSignalMasterVolumeFee": "Volume fee: {{amount}} {{currency}}",
+        "ManagerSignalMasterSuccessFee": "Manager Success fee: {{amount}} {{currency}}",
+        "GvSignalSuccessFee": "Platform Success Fee: {{amount}} {{currency}}"
       }
     },
     "dashboard-page": {

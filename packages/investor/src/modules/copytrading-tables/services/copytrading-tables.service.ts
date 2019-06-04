@@ -43,12 +43,20 @@ export const fetchCopytradingTradesCount = (
   }));
 };
 
-export const closeCopytradingTrade = (id: string, onSuccess: () => void) => (
-  dispatch: Dispatch
-) => {
+export type CloseCopytradingTrade = (
+  tradeId: string,
+  onSuccess: () => void,
+  programId?: string
+) => void;
+
+export const closeCopytradingTrade: CloseCopytradingTrade = (
+  tradeId,
+  onSuccess,
+  programId
+) => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
   return signalApi
-    .v10SignalTradesByIdClosePost(id, authorization)
+    .v10SignalTradesByIdClosePost(tradeId, authorization, { programId })
     .then(() => {
       onSuccess();
       dispatch(

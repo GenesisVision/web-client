@@ -9,7 +9,13 @@ export const COPYTRADING_OPEN_TRADES_COLUMNS = [
     name: "providers"
   },
   {
+    name: "date-open"
+  },
+  {
     name: "symbol"
+  },
+  {
+    name: "direction"
   },
   {
     name: "volume"
@@ -22,27 +28,12 @@ export const COPYTRADING_OPEN_TRADES_COLUMNS = [
   },
   {
     name: "profit"
-  },
-  {
-    name: "close"
   }
 ];
 
 export const COPYTRADING_TRADES_HISTORY_COLUMNS = [
   {
-    name: "program"
-  },
-  {
-    name: "manager"
-  },
-  {
-    name: "direction"
-  },
-  {
-    name: "open-date"
-  },
-  {
-    name: "close-date"
+    name: "direction-entry"
   },
   {
     name: "symbol"
@@ -51,13 +42,19 @@ export const COPYTRADING_TRADES_HISTORY_COLUMNS = [
     name: "volume"
   },
   {
-    name: "open-price"
-  },
-  {
-    name: "close-price"
+    name: "price"
   },
   {
     name: "profit"
+  },
+  {
+    name: "commission"
+  },
+  {
+    name: "date"
+  },
+  {
+    name: "providers"
   }
 ];
 
