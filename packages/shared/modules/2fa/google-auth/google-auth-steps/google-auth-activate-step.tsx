@@ -74,7 +74,7 @@ export interface IGoogleActivateStepFormValues {
   enablePassword: boolean;
 }
 
-const GoogleActivateStep = compose<React.FunctionComponent<OwnProps>>(
+const GoogleActivateStep = compose<React.ComponentType<OwnProps>>(
   React.memo,
   translate(),
   withFormik<Props, IGoogleActivateStepFormValues>({

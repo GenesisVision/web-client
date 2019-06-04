@@ -1,6 +1,6 @@
 import "./dashboard-funds.scss";
 
-import React, { Fragment, FunctionComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -32,7 +32,7 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 import { DASHBOARD_FUNDS_COLUMNS } from "../../dashboard.constants";
 import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
-const _DashboardFunds: FunctionComponent<Props> = ({
+const _DashboardFunds: React.FC<Props> = ({
   role,
   t,
   onChangeStatus,
@@ -52,14 +52,14 @@ const _DashboardFunds: FunctionComponent<Props> = ({
       updateFilter: UpdateFilterFunc,
       filtering: FilteringType
     ) => (
-      <Fragment>
+      <>
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}
           value={filtering[DATE_RANGE_FILTER_NAME]}
           onChange={updateFilter}
           startLabel={t("filters.date-range.fund-start")}
         />
-      </Fragment>
+      </>
     )}
     renderHeader={(column: Column) => (
       <span

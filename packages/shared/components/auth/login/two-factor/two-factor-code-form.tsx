@@ -105,7 +105,7 @@ interface State {
   isChecking: boolean;
 }
 
-const TwoFactorCodeForm = compose<React.FunctionComponent<OwnProps>>(
+const TwoFactorCodeForm = compose<React.FC<OwnProps>>(
   React.memo,
   translate(),
   withFormik<Props, ITwoFactorCodeFormValues>({

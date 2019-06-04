@@ -95,7 +95,7 @@ interface StateProps {
   isPayFeesWithGvt?: boolean;
 }
 
-export default compose<React.FunctionComponent<WalletRouteProps>>(
+export default compose<React.FC<WalletRouteProps>>(
   withRole,
   connect(mapStateToProps),
   translate()

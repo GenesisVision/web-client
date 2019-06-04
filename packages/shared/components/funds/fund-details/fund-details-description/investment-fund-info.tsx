@@ -9,7 +9,7 @@ interface IInvestmentFundInfoProps {
   fundDescription: FundDetailsFull;
 }
 
-const InvestmentFundInfo: React.FunctionComponent<
+const InvestmentFundInfo: React.FC<
   IInvestmentFundInfoProps & InjectedTranslateProps
 > = ({ t, fundDescription }) => {
   return (

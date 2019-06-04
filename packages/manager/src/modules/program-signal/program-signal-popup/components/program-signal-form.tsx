@@ -1,6 +1,6 @@
 import { FormikProps, withFormik } from "formik";
 import SignalsFeeFormPartial from "pages/create-program/components/create-program-settings/signals-fee-form.partial";
-import React, { ComponentType, FunctionComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -8,7 +8,7 @@ import { SetSubmittingType } from "shared/utils/types";
 
 import { SignalValidationSchema } from "./program-signal.validators";
 
-const _ProgramSignalForm: FunctionComponent<Props> = ({
+const _ProgramSignalForm: React.FC<Props> = ({
   t,
   dirty,
   handleSubmit,
@@ -46,7 +46,7 @@ const _ProgramSignalForm: FunctionComponent<Props> = ({
   );
 };
 
-const ProgramSignalForm = compose<ComponentType<OwnProps>>(
+const ProgramSignalForm = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<OwnProps, IProgramSignalFormValues>({
     displayName: "make-signal-form",

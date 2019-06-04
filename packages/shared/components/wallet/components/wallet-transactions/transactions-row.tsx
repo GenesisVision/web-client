@@ -23,7 +23,7 @@ export interface ITransactionRowState {
   isOpen: boolean;
 }
 
-const ConvertTransaction: React.FunctionComponent<ITransactionRowProps> = ({
+const ConvertTransaction: React.FC<ITransactionRowProps> = ({
   transaction
 }) => {
   return (
@@ -51,7 +51,7 @@ const ConvertTransaction: React.FunctionComponent<ITransactionRowProps> = ({
   );
 };
 
-const AmountConvertTransaction: React.FunctionComponent<{
+const AmountConvertTransaction: React.FC<{
   transaction: MultiWalletTransaction;
 }> = props => (
   <Fragment>

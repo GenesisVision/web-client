@@ -111,7 +111,7 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-const AboutForm = compose<React.FunctionComponent<IAboutFormOwnProps>>(
+const AboutForm = compose<React.ComponentType<IAboutFormOwnProps>>(
   React.memo,
   translate(),
   connect(

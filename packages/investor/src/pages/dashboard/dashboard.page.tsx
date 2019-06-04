@@ -15,10 +15,7 @@ import DashboardTrades from "./components/dashboard-trades/dashboard-trades";
 
 interface IDashboardPageProps extends InjectedTranslateProps, WithRoleProps {}
 
-const DashboardPage: React.FunctionComponent<IDashboardPageProps> = ({
-  t,
-  role
-}) => {
+const DashboardPage: React.FC<IDashboardPageProps> = ({ t, role }) => {
   const title = t(`${role}.dashboard-page.title`);
   return (
     <Page title={title}>

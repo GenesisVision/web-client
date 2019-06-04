@@ -112,7 +112,7 @@ const mapDispatchToProps = {
   error: alertMessageActions.error
 };
 
-const TransactionDetailsDialog = compose<React.FunctionComponent<OwnProps>>(
+const TransactionDetailsDialog = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect<null, DispatchProps>(
     null,

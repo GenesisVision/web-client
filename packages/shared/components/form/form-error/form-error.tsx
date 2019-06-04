@@ -6,7 +6,7 @@ interface IFormErrorProps {
   error?: string;
 }
 
-const FormError: React.FunctionComponent<IFormErrorProps> = ({ error }) => {
+const FormError: React.FC<IFormErrorProps> = ({ error }) => {
   if (error) {
     return <div className="form-error">{error}</div>;
   }

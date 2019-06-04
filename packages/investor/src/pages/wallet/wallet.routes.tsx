@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import { Route, Switch } from "react-router";
 import WalletRoutesCommon from "shared/components/wallet/wallet.routes";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
@@ -8,7 +8,7 @@ import WalletCopytradingAccount from "./components/wallet-copytrading-account";
 
 interface IWalletRoutesProps {}
 
-const WalletRoutes: FunctionComponent<IWalletRoutesProps> = () => {
+const WalletRoutes: React.FC<IWalletRoutesProps> = () => {
   return (
     <Switch>
       {/* <Route

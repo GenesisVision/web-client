@@ -11,7 +11,7 @@ import {
 import Sidebar, { SIDEBAR_POSITION } from "shared/components/sidebar/sidebar";
 import RootState from "shared/reducers/root-reducer";
 
-const NotificationsContainer: React.FunctionComponent<Props> = ({
+const NotificationsContainer: React.FC<Props> = ({
   service,
   open,
   notifications,
