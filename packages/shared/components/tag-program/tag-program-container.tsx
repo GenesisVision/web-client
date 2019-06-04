@@ -15,7 +15,9 @@ interface ITagProgramContainerProps {
   tags: ProgramTag[];
 }
 
-class TagProgramContainer extends React.Component<ITagProgramContainerProps> {
+class TagProgramContainer extends React.PureComponent<
+  ITagProgramContainerProps
+> {
   render() {
     const { tags } = this.props;
     const length = tags.length;

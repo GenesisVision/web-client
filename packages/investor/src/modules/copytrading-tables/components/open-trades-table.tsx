@@ -54,7 +54,7 @@ interface IOpenTradesTableState {
   isConfirmPopupOpen: boolean;
 }
 
-class OpenTradesTable extends Component<
+class OpenTradesTable extends React.PureComponent<
   IOpenTradesTableOwnProps & InjectedTranslateProps & IOpenTradesDispatchProps,
   IOpenTradesTableState
 > {

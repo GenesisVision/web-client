@@ -54,7 +54,7 @@ interface INotificationOwnProps {
 
 type INotificationProps = NotificationViewModel & INotificationOwnProps;
 
-const Notification: React.FunctionComponent<INotificationProps> = props => {
+const Notification: React.FC<INotificationProps> = props => {
   const { date, text, isUnread, type } = props;
   const staticIconUrl = getStaticIconUrl(type.toLowerCase());
   return (

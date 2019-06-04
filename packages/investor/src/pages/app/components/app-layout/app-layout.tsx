@@ -8,7 +8,7 @@ import HeaderContainer from "shared/components/header/header.container";
 import NotificationsContainer from "shared/components/notifications/components/notifications-container";
 import { MiddlewareDispatch } from "shared/utils/types";
 
-class _AppLayout extends React.Component<Props> {
+class _AppLayout extends React.PureComponent<Props> {
   componentDidMount() {
     this.props.fetchPlatformSettings();
     this.props.initOnResizeEvent();

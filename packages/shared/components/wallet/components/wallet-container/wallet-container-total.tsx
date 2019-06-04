@@ -12,8 +12,10 @@ import { Link, withRouter } from "react-router-dom";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
+import Tooltip from "shared/components/tooltip/tooltip";
 
 import WalletCopytrading from "../wallet-copytrading/wallet-copytrading";
 import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposits-withdrawals-row";
@@ -87,7 +89,16 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
                         hash: TABS.TRANSACTIONS_TAB
                       }}
                     >
-                      {t("wallet-page.tabs.transactions")}
+                      <Tooltip
+                        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                        render={() => (
+                          <div className="tooltip__content">
+                            {t("wallet-page.tooltip.transactions")}
+                          </div>
+                        )}
+                      >
+                        <span>{t("wallet-page.tabs.transactions")}</span>
+                      </Tooltip>
                     </Link>
                   }
                 />
@@ -100,7 +111,26 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
                         hash: TABS.EXTERNAL_TAB
                       }}
                     >
-                      {t("wallet-page.tabs.external")}
+                      <Tooltip
+                        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                        render={() => (
+                          <div className="tooltip__content">
+                            {t("wallet-page.tooltip.deposit")}
+                          </div>
+                        )}
+                      >
+                        <span>{t("wallet-page.tabs.deposit")}</span>
+                      </Tooltip>
+                      <Tooltip
+                        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                        render={() => (
+                          <div className="tooltip__content">
+                            {t("wallet-page.tooltip.withdrawals")}
+                          </div>
+                        )}
+                      >
+                        <span>{t("wallet-page.tabs.withdrawals")}</span>
+                      </Tooltip>
                     </Link>
                   }
                 />

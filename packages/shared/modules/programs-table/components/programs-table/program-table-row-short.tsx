@@ -178,4 +178,4 @@ const ProgramTableRowShort: React.FC<
   );
 };
 
-export default translate()(ProgramTableRowShort);
+export default React.memo(translate()(ProgramTableRowShort));

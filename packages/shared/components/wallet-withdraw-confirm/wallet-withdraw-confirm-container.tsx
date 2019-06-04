@@ -21,7 +21,7 @@ interface IEmailConfirmContainerDispatchProps {
   };
 }
 
-class EmailConfirmContainer extends React.Component<
+class EmailConfirmContainer extends React.PureComponent<
   IEmailConfirmContainerProps & IEmailConfirmContainerDispatchProps
 > {
   componentDidMount() {

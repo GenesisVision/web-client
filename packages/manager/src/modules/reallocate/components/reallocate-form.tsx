@@ -161,9 +161,7 @@ interface State {
   anchor?: anchorElType;
 }
 
-const ReallocateForm = compose<
-  React.FunctionComponent<IReallocateFormOwnProps>
->(
+const ReallocateForm = compose<React.FC<IReallocateFormOwnProps>>(
   translate(),
   withFormik<IReallocateFormOwnProps, IReallocateFormValues>({
     displayName: "reallocate",

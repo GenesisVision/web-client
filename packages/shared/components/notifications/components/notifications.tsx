@@ -14,7 +14,7 @@ import Spinner from "shared/components/spiner/spiner";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 
-class Notifications extends React.Component<Props> {
+class Notifications extends React.PureComponent<Props> {
   state = {
     isPending: false
   };

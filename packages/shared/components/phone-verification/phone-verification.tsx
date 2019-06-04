@@ -16,7 +16,7 @@ interface IPhoneVerificationState {
   disabledResend: boolean;
 }
 
-class PhoneVerification extends React.Component<
+class PhoneVerification extends React.PureComponent<
   IPhoneVerificationProps,
   IPhoneVerificationState
 > {

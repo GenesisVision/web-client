@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
   service: bindActionCreators({ goBack, push }, dispatch)
 });
 
-export default compose<React.FunctionComponent>(
+export default compose<React.FC>(
   translate(),
   connect(
     mapStateToProps,

@@ -49,7 +49,7 @@ interface OwnProps {
   serverError: string;
 }
 
-const ConfirmForm = compose<React.FunctionComponent<OwnProps>>(
+const ConfirmForm = compose<React.ComponentType<OwnProps>>(
   React.memo,
   translate(),
   withFormik<Props, IConfirmFormValues>({

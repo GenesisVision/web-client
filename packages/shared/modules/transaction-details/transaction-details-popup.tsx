@@ -10,7 +10,7 @@ interface ITransactionDetailsProps {
   onAction(): void;
 }
 
-class TransactionDetailsPopup extends React.Component<
+class TransactionDetailsPopup extends React.PureComponent<
   ITransactionDetailsProps
 > {
   render() {

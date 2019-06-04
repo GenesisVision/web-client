@@ -8,7 +8,7 @@ import { IDialogProps } from "shared/components/dialog/dialog";
 import ProgramSignalPopup from "../program-signal-popup/program-signal-popup";
 import { programMakeSignal } from "./services/program-make-signal.service";
 
-class _ProgramMakeSignalContainer extends React.Component<Props> {
+class _ProgramMakeSignalContainer extends React.PureComponent<Props> {
   render() {
     const { t, service, ...others } = this.props;
     return (

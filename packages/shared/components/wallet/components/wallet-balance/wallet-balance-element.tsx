@@ -6,6 +6,7 @@ import NumberFormat from "react-number-format";
 import GVColors from "shared/components/gv-styles/gv-colors";
 import PieContainer from "shared/components/pie-container/pie-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -21,7 +22,8 @@ const _WalletBalanceElement: React.FC<Props> = ({
   currency,
   title,
   color = GVColors.$primaryColor,
-  className
+  className,
+  tooltipContentLabel
 }) => (
   <div className={classNames("wallet-balance__statistic-item", className)}>
     {pieContainer && (
@@ -31,7 +33,9 @@ const _WalletBalanceElement: React.FC<Props> = ({
       />
     )}
     <StatisticItem
-      label={title}
+      label={
+        <TooltipLabel tooltipContent={tooltipContentLabel} labelText={title} />
+      }
       className="wallet-balance__statistic-big"
       big
       accent
@@ -57,4 +61,5 @@ interface Props {
   color?: string;
   pieContainer?: boolean;
   className?: string;
+  tooltipContentLabel: string;
 }

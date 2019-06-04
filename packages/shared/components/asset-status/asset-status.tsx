@@ -8,7 +8,7 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
-import { ROLE_ENV, STATUS } from "shared/constants/constants";
+import { STATUS } from "shared/constants/constants";
 
 import AssetStatusRequests from "./asset-status-requests";
 
@@ -44,7 +44,7 @@ class AssetStatus extends React.PureComponent<
   render() {
     const { t, className, status, id, asset, onCancel } = this.props;
     return (
-      <React.Fragment>
+      <>
         <span
           className={getStatusClassName(status, className)}
           onClick={this.handleOpenDropdown}
@@ -62,7 +62,6 @@ class AssetStatus extends React.PureComponent<
             <div className="dashboard-request-popover">
               <AssetStatusRequests
                 id={id}
-                role={ROLE_ENV}
                 asset={asset}
                 handleCloseDropdown={this.handleCloseDropdown}
                 onCancel={onCancel}
@@ -70,7 +69,7 @@ class AssetStatus extends React.PureComponent<
             </div>
           </GVScroll>
         </Popover>
-      </React.Fragment>
+      </>
     );
   }
 }

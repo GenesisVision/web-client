@@ -17,7 +17,7 @@ interface GVTextAreaState {
   height: number;
 }
 
-class GVTextArea extends React.Component<GVTextAreaProps, GVTextAreaState> {
+class GVTextArea extends React.PureComponent<GVTextAreaProps, GVTextAreaState> {
   static defaultProps: Partial<GVTextAreaProps> = {
     rows: 1
   };

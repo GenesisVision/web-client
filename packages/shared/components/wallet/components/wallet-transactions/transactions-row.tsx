@@ -23,11 +23,9 @@ export interface ITransactionRowState {
   isOpen: boolean;
 }
 
-const ConvertTransaction: React.FunctionComponent<ITransactionRowProps> = ({
-  transaction
-}) => {
-  return (
-    <Fragment>
+const ConvertTransaction: React.FC<ITransactionRowProps> = React.memo(
+  ({ transaction }) => (
+    <>
       <div className="wallet-transactions__col">
         <WalletImage
           url={transaction.logoFrom}
@@ -47,14 +45,14 @@ const ConvertTransaction: React.FunctionComponent<ITransactionRowProps> = ({
         />
         {transaction.currencyTo}
       </div>
-    </Fragment>
-  );
-};
+    </>
+  )
+);
 
-const AmountConvertTransaction: React.FunctionComponent<{
+const AmountConvertTransaction: React.FC<{
   transaction: MultiWalletTransaction;
-}> = props => (
-  <Fragment>
+}> = React.memo(props => (
+  <>
     <span className="wallet-transactions__col">
       <NumberFormat
         value={formatValue(
@@ -78,10 +76,10 @@ const AmountConvertTransaction: React.FunctionComponent<{
         suffix={` ${props.transaction.currencyTo}`}
       />
     </span>
-  </Fragment>
-);
+  </>
+));
 
-class TransactionsRow extends React.Component<
+class TransactionsRow extends React.PureComponent<
   ITransactionRowProps,
   ITransactionRowState
 > {

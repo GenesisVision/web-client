@@ -9,7 +9,7 @@ import Popover from "shared/components/popover/popover";
 import Regulator from "shared/components/regulator/regulator";
 import GVScroll from "shared/components/scroll/gvscroll";
 
-class CreateFundSettingsAddAsset extends React.Component {
+class CreateFundSettingsAddAsset extends React.PureComponent {
   state = {
     filteredAssets: this.props.assets
   };

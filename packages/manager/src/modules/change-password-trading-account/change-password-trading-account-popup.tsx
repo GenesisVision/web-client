@@ -1,5 +1,5 @@
 import { ProgramPwdUpdate } from "gv-api-web";
-import React, { Component } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
@@ -37,7 +37,7 @@ interface IChangePasswordTradingAccountPopupState {
   errorMessage: string;
 }
 
-class _ChangePasswordTradingAccountPopup extends Component<
+class _ChangePasswordTradingAccountPopup extends React.PureComponent<
   IChangePasswordTradingAccountPopupProps,
   IChangePasswordTradingAccountPopupState
 > {

@@ -19,7 +19,7 @@ import {
   resendWithdrawRequest
 } from "../../services/wallet.services";
 
-class _WalletTransactionActions extends React.Component<Props, State> {
+class _WalletTransactionActions extends React.PureComponent<Props, State> {
   state = {
     anchor: undefined,
     isResendPending: false,

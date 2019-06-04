@@ -36,7 +36,7 @@ const GVLink: React.FC<IGVLinkProps> = ({
   );
 };
 
-export default class Button extends React.Component<IButton> {
+export default class Button extends React.PureComponent<IButton> {
   render() {
     const {
       label = null,

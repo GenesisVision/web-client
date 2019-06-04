@@ -1,7 +1,7 @@
 import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
-import React, { Component, ComponentType } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -14,7 +14,6 @@ import Popover, {
   anchorElType
 } from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
@@ -25,7 +24,7 @@ import InvestmentLimitsPopover from "./investment-limits-popover";
 
 interface IIProgramDetailsDescriptionMainOwnProps {
   programDescription: ProgramDetailsFull;
-  ChangePasswordTradingAccount?: ComponentType<
+  ChangePasswordTradingAccount?: React.ComponentType<
     IChangePasswordTradingAccountProps
   >;
   isOwnProgram: boolean;
@@ -39,7 +38,7 @@ interface IProgramDetailsDescriptionMainState {
   anchor?: anchorElType;
 }
 
-class ProgramDetailsDescriptionMain extends Component<
+class ProgramDetailsDescriptionMain extends React.PureComponent<
   IProgramDetailsDescriptionMainProps,
   IProgramDetailsDescriptionMainState
 > {

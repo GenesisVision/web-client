@@ -5,7 +5,7 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 import {
@@ -22,7 +22,7 @@ import {
 } from "../transfer.types";
 import TransferForm, { TransferFormValues } from "./transfer-form";
 
-class _TransferContainer extends React.Component<Props, State> {
+class _TransferContainer extends React.PureComponent<Props, State> {
   state = {
     errorMessage: undefined
   };
