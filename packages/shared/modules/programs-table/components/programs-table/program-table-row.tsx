@@ -17,7 +17,7 @@ interface IProgramTableRowState {
   isDetailed: boolean;
 }
 
-class ProgramTableRow extends React.Component<
+class ProgramTableRow extends React.PureComponent<
   IProgramTableRowProps,
   IProgramTableRowState
 > {

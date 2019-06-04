@@ -1,6 +1,6 @@
 import { CopyTradingAccountInfo } from "gv-api-web";
 import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
-import React, { Component, ComponentType, Fragment } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
@@ -30,7 +30,7 @@ interface IWalletCopytradingAccountState {
   hasError: boolean;
 }
 
-class WalletCopytradingAccount extends Component<
+class WalletCopytradingAccount extends React.PureComponent<
   IWalletCopytradingAccountProps,
   IWalletCopytradingAccountState
 > {
@@ -86,14 +86,14 @@ class WalletCopytradingAccount extends Component<
                 variant="outlined"
                 onClick={/*handleTransfer*/ () => {}}
               >
-                <Fragment>
+                <>
                   <img
                     className="wallet-balance__button-icon"
                     src={ConvertIcon}
                     alt="Convert Icon"
                   />
                   {t("wallet-page.transfer")}
-                </Fragment>
+                </>
               </GVButton>
             </div>
           </div>
@@ -118,7 +118,7 @@ const mapStateToProps = (
   return { preferredCurrency, walletCurrency };
 };
 
-export default compose<ComponentType<void>>(
+export default compose<React.ComponentType<void>>(
   connect(mapStateToProps),
   translate()
 )(WalletCopytradingAccount);

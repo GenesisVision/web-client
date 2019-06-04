@@ -102,7 +102,7 @@ interface Props
     FormikProps<ProfileFormValues>,
     IProfileFormOwnProps {}
 
-const ProfileForm = compose<React.FunctionComponent<IProfileFormOwnProps>>(
+const ProfileForm = compose<React.ComponentType<IProfileFormOwnProps>>(
   React.memo,
   translate(),
   withFormik<IProfileFormOwnProps, ProfileFormValues>({

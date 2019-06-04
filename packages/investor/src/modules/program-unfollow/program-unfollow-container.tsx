@@ -8,7 +8,7 @@ import ProgramUnfollowForm, {
 } from "./components/program-unfollow-form";
 import { detachToSignal } from "./services/program-unfollow.service";
 
-class ProgramUnfollowContainer extends React.Component<Props> {
+class ProgramUnfollowContainer extends React.PureComponent<Props> {
   handleClose = () => {
     const { onClose } = this.props;
     onClose();

@@ -11,7 +11,7 @@ export interface IPieContainer {
   pieDirection?: PIE_DIRECTION;
 }
 
-const _PieContainer: React.FunctionComponent<IPieContainer> = ({
+const _PieContainer: React.FC<IPieContainer> = ({
   color,
   value,
   pieDirection

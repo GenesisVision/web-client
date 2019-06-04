@@ -1,5 +1,5 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -9,7 +9,7 @@ interface ISignalProgramInfoProps {
   programDescription: ProgramDetailsFull;
 }
 
-const SignalProgramInfo: FunctionComponent<
+const SignalProgramInfo: React.FC<
   InjectedTranslateProps & ISignalProgramInfoProps
 > = ({ t, programDescription }) => {
   return (
@@ -52,4 +52,4 @@ const SignalProgramInfo: FunctionComponent<
   );
 };
 
-export default translate()(SignalProgramInfo);
+export default React.memo(translate()(SignalProgramInfo)); // TODO refactor

@@ -48,7 +48,7 @@ interface ITradesHistoryDispatchProps {
   };
 }
 
-class TradesHistoryTable extends Component<
+class TradesHistoryTable extends React.PureComponent<
   ITradesHistoryTableOwnProps &
     InjectedTranslateProps &
     ITradesHistoryDispatchProps

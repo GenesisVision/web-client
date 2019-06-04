@@ -24,7 +24,7 @@ interface GVProgramAvatarState {
   errored: boolean;
 }
 
-class GVProgramAvatar extends React.Component<
+class GVProgramAvatar extends React.PureComponent<
   GVProgramAvatarProps,
   GVProgramAvatarState
 > {

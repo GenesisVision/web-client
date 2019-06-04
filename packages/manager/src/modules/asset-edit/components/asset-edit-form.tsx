@@ -146,7 +146,7 @@ export interface IAssetEditProps
     InjectedTranslateProps {}
 
 const AssetEditForm = compose<
-  React.FunctionComponent<IAssetEditFormOwnProps & WithLoaderProps>
+  React.FC<IAssetEditFormOwnProps & WithLoaderProps>
 >(
   withLoader,
   React.memo,

@@ -13,7 +13,7 @@ import {
 import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
 import GVButton from "shared/components/gv-button";
 import { ChartIcon } from "shared/components/icon/chart-icon";
-import { ROLE_ENV } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
@@ -71,13 +71,16 @@ const CreateButtonToolbar: React.FC<{ text: string; route: string }> = ({
   </div>
 );
 
-const _EmptyFunds: React.FC<InjectedTranslateProps> = ({ t }) => (
+const _EmptyFunds: React.FC<InjectedTranslateProps & WithRoleProps> = ({
+  role,
+  t
+}) => (
   <div className="create-asset">
     <div className="create-asset__create-icon">
       <ChartIcon />
     </div>
     <div className="create-asset__text">
-      {t(`${ROLE_ENV}.dashboard-page.create-fund-text`)}
+      {t(`${role}.dashboard-page.create-fund-text`)}
     </div>
     <div className="create-asset__button">
       <Link to={CREATE_FUND_PAGE_ROUTE} className="dashboard__body-button">
@@ -86,15 +89,18 @@ const _EmptyFunds: React.FC<InjectedTranslateProps> = ({ t }) => (
     </div>
   </div>
 );
-const EmptyFunds = translate()(_EmptyFunds);
+const EmptyFunds = withRole(translate()(_EmptyFunds));
 
-const _EmptyPrograms: React.FC<InjectedTranslateProps> = ({ t }) => (
+const _EmptyPrograms: React.FC<InjectedTranslateProps & WithRoleProps> = ({
+  role,
+  t
+}) => (
   <div className="create-asset">
     <div className="create-asset__create-icon">
       <ChartIcon />
     </div>
     <div className="create-asset__text">
-      {t(`${ROLE_ENV}.dashboard-page.create-program-text`)}
+      {t(`${role}.dashboard-page.create-program-text`)}
     </div>
     <div className="create-asset__button">
       <Link to={CREATE_PROGRAM_PAGE_ROUTE} className="dashboard__body-button">
@@ -103,7 +109,7 @@ const _EmptyPrograms: React.FC<InjectedTranslateProps> = ({ t }) => (
     </div>
   </div>
 );
-const EmptyPrograms = translate()(_EmptyPrograms);
+const EmptyPrograms = withRole(translate()(_EmptyPrograms));
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(

@@ -19,7 +19,7 @@ enum FUND_WITHDRAW_FORM {
   CONFIRM = "CONFIRM"
 }
 
-class FundWithdrawPopup extends React.Component<
+class FundWithdrawPopup extends React.PureComponent<
   IFundWithdrawPopupProps,
   State
 > {

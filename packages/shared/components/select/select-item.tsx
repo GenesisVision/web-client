@@ -2,7 +2,7 @@ import classNames from "classnames";
 import * as React from "react";
 import GVButton from "shared/components/gv-button";
 
-class SelectItem extends React.Component<Props> {
+class SelectItem extends React.PureComponent<Props> {
   handleClick = (event: SelectItemClick) => {
     this.props.onClick({ event, isSelected: Boolean(this.props.isSelected) });
   };

@@ -10,7 +10,7 @@ import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
 import PasswordChangeForm from "./password-change-form";
 import { changePassword } from "./service/password-change.service";
 
-class PasswordChange extends React.Component<Props, State> {
+class PasswordChange extends React.PureComponent<Props, State> {
   state = {
     errorMessage: undefined
   };

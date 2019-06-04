@@ -13,6 +13,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import {
@@ -21,7 +22,6 @@ import {
 } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import ProgramBigChart from "./program-big-chart/program-big-chart";
 
 interface IProgramTableRowDetailedProps {
@@ -36,7 +36,7 @@ interface IProgramTableRowDetailedState {
   isOpenInvestToProgramPopup: boolean;
 }
 
-class ProgramTableRowDetailed extends React.Component<
+class ProgramTableRowDetailed extends React.PureComponent<
   IProgramTableRowDetailedProps & InjectedTranslateProps,
   IProgramTableRowDetailedState
 > {

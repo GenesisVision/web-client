@@ -10,7 +10,7 @@ interface IInvestmentFundInfoProps {
   fundDescription: FundDetailsFull;
 }
 
-const InvestmentFundInfo: React.FunctionComponent<
+const InvestmentFundInfo: React.FC<
   IInvestmentFundInfoProps & InjectedTranslateProps
 > = ({ t, fundDescription }) => {
   return (
@@ -51,4 +51,4 @@ const InvestmentFundInfo: React.FunctionComponent<
   );
 };
 
-export default translate()(InvestmentFundInfo);
+export default React.memo(translate()(InvestmentFundInfo));

@@ -53,7 +53,7 @@ interface OwnProps {
 }
 interface IFormValues extends PasswordModel {}
 
-const GenerateRecoveryWithFormik = compose<React.FunctionComponent<OwnProps>>(
+const GenerateRecoveryWithFormik = compose<React.ComponentType<OwnProps>>(
   React.memo,
   translate(),
   withFormik<Props, IFormValues>({

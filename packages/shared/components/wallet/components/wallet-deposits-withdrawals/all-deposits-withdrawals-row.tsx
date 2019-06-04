@@ -22,7 +22,7 @@ export interface ITransactionRowState {
   isOpen: boolean;
 }
 
-class AllDepositsWithdrawalsRow extends React.Component<
+class AllDepositsWithdrawalsRow extends React.PureComponent<
   ITransactionRowProps,
   ITransactionRowState
 > {

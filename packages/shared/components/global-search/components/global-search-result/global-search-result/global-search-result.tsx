@@ -31,7 +31,7 @@ interface State {
   tab: SEARCH_TABS;
 }
 
-class GlobalSearchResult extends React.Component<
+class GlobalSearchResult extends React.PureComponent<
   Props & InjectedTranslateProps,
   State
 > {

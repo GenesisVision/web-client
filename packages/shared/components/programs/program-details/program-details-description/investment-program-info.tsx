@@ -13,7 +13,7 @@ interface IInvestmentProgramInfoProps {
   programDescription: ProgramDetailsFull;
 }
 
-const InvestmentProgramInfo: React.FunctionComponent<
+const InvestmentProgramInfo: React.FC<
   InjectedTranslateProps & IInvestmentProgramInfoProps
 > = ({ t, programDescription, isOwnProgram }) => {
   const {
@@ -113,4 +113,4 @@ const InvestmentProgramInfo: React.FunctionComponent<
   );
 };
 
-export default translate()(InvestmentProgramInfo);
+export default React.memo(translate()(InvestmentProgramInfo));

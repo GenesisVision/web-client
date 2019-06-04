@@ -1,10 +1,7 @@
 import "shared/components/dashboard/dashboard-assets/dashboard-assets.scss";
 
-import {
-  getDashboardFunds,
-  getDashboardPrograms
-} from "pages/dashboard/services/dashboard-assets.service";
-import React, { Component, ComponentType } from "react";
+import { getDashboardFunds, getDashboardPrograms } from "pages/dashboard/services/dashboard-assets.service";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
@@ -16,10 +13,7 @@ import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
 
 import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
-import {
-  IDashboardAssetsCounts,
-  fetchAssetsCount
-} from "../../services/dashboard.service";
+import { IDashboardAssetsCounts, fetchAssetsCount } from "../../services/dashboard.service";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 import DashboardCopytrading from "./dashboard-copytrading";
 
@@ -43,7 +37,7 @@ interface IDashboardAssetsState extends IDashboardAssetsCounts {
   tab: ASSET_TAB;
 }
 
-class DashboardAssetsSection extends Component<
+class DashboardAssetsSection extends React.PureComponent<
   IDashboardOwnProps & IDashboardAssetsProps & InjectedTranslateProps,
   IDashboardAssetsState
 > {
@@ -135,7 +129,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   service: bindActionCreators({ clearDashboardAssetsTable }, dispatch)
 });
 
-export default compose<ComponentType<IDashboardOwnProps>>(
+export default compose<React.ComponentType<IDashboardOwnProps>>(
   translate(),
   connect(
     null,

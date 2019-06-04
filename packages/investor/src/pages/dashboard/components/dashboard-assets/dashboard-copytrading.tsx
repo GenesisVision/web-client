@@ -26,22 +26,16 @@ import {
   Column,
   UpdateFilterFunc
 } from "shared/components/table/components/table.types";
-import { ROLE_ENV } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import {
-  formatCurrencyValue,
-  formatPercent,
-  formatValue
-} from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { DASHBOARD_COPYTRADING_COLUMNS } from "./dashboard-copytrading.constants";
 import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
 
-class _DashboardCopytrading extends React.Component<
-  Props & InjectedTranslateProps
-> {
+class _DashboardCopytrading extends React.PureComponent<Props> {
   render() {
-    const { t, title } = this.props;
+    const { t, title, role } = this.props;
     return (
       <TableContainer
         getItems={getDashboardCopytrading}
@@ -55,9 +49,7 @@ class _DashboardCopytrading extends React.Component<
           <>
             <SelectFilter
               name={ACTION_STATUS_FILTER_NAME}
-              label={t(
-                `${ROLE_ENV}.dashboard-page.actions-status-filter.label`
-              )}
+              label={t(`${role}.dashboard-page.actions-status-filter.label`)}
               value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType}
               values={ACTION_STATUS_FILTER_VALUES}
               onChange={updateFilter}
@@ -139,9 +131,13 @@ class _DashboardCopytrading extends React.Component<
   }
 }
 
-const DashboardCopytrading = translate()(_DashboardCopytrading);
+const DashboardCopytrading = withRole<OwnProps>(
+  translate()(_DashboardCopytrading)
+);
 export default DashboardCopytrading;
 
-interface Props {
+interface Props extends WithRoleProps, InjectedTranslateProps, OwnProps {}
+
+interface OwnProps {
   title: string;
 }

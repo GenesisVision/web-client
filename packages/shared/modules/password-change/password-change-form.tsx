@@ -82,6 +82,7 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
 };
 
 export default compose<ComponentType<IPasswordChangeFormOwnProps>>(
+  React.memo,
   translate(),
   withFormik<IPasswordChangeFormOwnProps, ChangePasswordViewModel>({
     displayName: "change-password",
