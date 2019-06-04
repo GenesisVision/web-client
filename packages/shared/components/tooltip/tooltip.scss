@@ -8,4 +8,17 @@ $tooltip-padding: 16px;
     @include vertical-paddings($tooltip-padding, $divider-text);
     color: white;
   }
+
+  &__content {
+    font-size: 13px;
+    max-width: 400px;
+  }
+
+  &__label {
+    cursor: help;
+
+    &--cursor-pointer {
+      cursor: pointer;
+    }
+  }
 }

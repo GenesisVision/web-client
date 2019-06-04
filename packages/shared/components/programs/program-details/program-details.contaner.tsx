@@ -17,10 +17,10 @@ import {
 } from "shared/components/programs/program-details/services/program-details.types";
 import { STATUS } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
-import { CurrencyEnum } from "shared/utils/types";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   updateDetails,

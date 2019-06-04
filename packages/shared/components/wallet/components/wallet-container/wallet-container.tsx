@@ -9,6 +9,7 @@ import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
@@ -54,7 +55,11 @@ class _WalletContainer extends React.PureComponent<Props, State> {
                         state: t("wallet-page.title")
                       }}
                     >
-                      {t("wallet-page.tabs.transactions")}
+                      <TooltipLabel
+                        tooltipContent={t("wallet-page.tooltip.transactions")}
+                        labelText={t("wallet-page.tabs.transactions")}
+                        className="tooltip__label--cursor-pointer"
+                      />
                     </Link>
                   }
                 />
@@ -68,7 +73,16 @@ class _WalletContainer extends React.PureComponent<Props, State> {
                         state: t("wallet-page.title")
                       }}
                     >
-                      {t("wallet-page.tabs.external")}
+                      <TooltipLabel
+                        tooltipContent={t("wallet-page.tooltip.deposit")}
+                        labelText={t("wallet-page.tabs.deposit")}
+                        className="tooltip__label--cursor-pointer"
+                      />
+                      <TooltipLabel
+                        tooltipContent={t("wallet-page.tooltip.withdrawals")}
+                        labelText={t("wallet-page.tabs.withdrawals")}
+                        className="tooltip__label--cursor-pointer"
+                      />
                     </Link>
                   }
                 />

@@ -4,11 +4,13 @@ import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import DetailsDescription from "shared/components/details/details-description-section/details-description/details-description";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { FUND } from "shared/constants/constants";
 import { composeFundNotificationsUrl } from "shared/utils/compose-url";
@@ -18,7 +20,7 @@ import {
   IFundWithdrawalContainerProps
 } from "../fund-details.types";
 
-interface IFundDetailsDescriptionProps {
+interface IFundFundDetailsDescriptionProps {
   fundDescription: FundDetailsFull;
   isAuthenticated: boolean;
   redirectToLogin(): void;
@@ -27,8 +29,8 @@ interface IFundDetailsDescriptionProps {
   accountCurrency: string;
 }
 
-class FundDetailsDescription extends React.PureComponent<
-  IFundDetailsDescriptionProps & InjectedTranslateProps
+class FundFundDetailsDescription extends React.PureComponent<
+  IFundFundDetailsDescriptionProps & InjectedTranslateProps
 > {
   render() {
     const {
@@ -61,7 +63,7 @@ class FundDetailsDescription extends React.PureComponent<
 
     return (
       <div className="program-details-description">
-        <DetailsDescription
+        <FundDetailsDescription
           assetDescription={assetDescription}
           AssetDetailsAvatar={() => (
             <div className="details-description__avatar">
@@ -75,9 +77,18 @@ class FundDetailsDescription extends React.PureComponent<
           )}
           AssetDetailsExtraBlock={() => (
             <div className="details-description__info-block">
-              <h4 className="details-description__subheading">
-                {t("fund-details-page.description.assets")}
-              </h4>
+              <Tooltip
+                horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                render={() => (
+                  <div className="tooltip__content">
+                    {t("fund-details-page.tooltip.assets")}
+                  </div>
+                )}
+              >
+                <h4 className="details-description__subheading tooltip__label">
+                  {t("fund-details-page.description.assets")}
+                </h4>
+              </Tooltip>
               <div>
                 <FundAssetContainer
                   type={FUND_ASSET_TYPE.LARGE}
@@ -111,4 +122,4 @@ class FundDetailsDescription extends React.PureComponent<
   }
 }
 
-export default translate()(FundDetailsDescription);
+export default translate()(FundFundDetailsDescription);

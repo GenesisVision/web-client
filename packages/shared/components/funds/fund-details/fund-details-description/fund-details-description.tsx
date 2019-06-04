@@ -6,34 +6,7 @@ import DetailsNotification from "shared/components/details/details-description-s
 import GVButton from "shared/components/gv-button";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 
-type AssetDescription = {
-  id: string;
-  title: string;
-  description: string;
-  logo: string;
-  notificationsUrl: string;
-  isFavorite: boolean;
-  hasNotifications: boolean;
-  managerUrl: string;
-  managerName: string;
-};
-
-interface IDetailsDescriptionOwnProps {
-  AssetDetailsAvatar: React.ComponentType<any>;
-  AssetDetailsExtraBlock: React.ComponentType<any>;
-  assetDescription: AssetDescription;
-}
-
-interface IDetailsDescriptionProps
-  extends IDetailsDescriptionOwnProps,
-    InjectedTranslateProps {}
-
-interface IDetailsDescriptionState {}
-
-class DetailsDescription extends React.PureComponent<
-  IDetailsDescriptionProps,
-  IDetailsDescriptionState
-> {
+class _FundDetailsDescription extends React.PureComponent<Props> { // TODO change to FC
   render() {
     const {
       t,
@@ -86,4 +59,25 @@ class DetailsDescription extends React.PureComponent<
   }
 }
 
-export default translate()(DetailsDescription);
+const FundDetailsDescription = React.memo(translate()(_FundDetailsDescription));
+export default FundDetailsDescription;
+
+type AssetDescription = {
+  id: string;
+  title: string;
+  description: string;
+  logo: string;
+  notificationsUrl: string;
+  isFavorite: boolean;
+  hasNotifications: boolean;
+  managerUrl: string;
+  managerName: string;
+};
+
+interface OwnProps {
+  AssetDetailsAvatar: React.ComponentType<any>;
+  AssetDetailsExtraBlock: React.ComponentType<any>;
+  assetDescription: AssetDescription;
+}
+
+interface Props extends OwnProps, InjectedTranslateProps {}

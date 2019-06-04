@@ -15,6 +15,7 @@ import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/compone
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { AuthState } from "shared/reducers/auth-reducer";
 import RootState from "shared/reducers/root-reducer";
 
@@ -59,7 +60,13 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
             <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 value={TABS.STRUCTURE}
-                label={t("fund-details-page.history.structure.title")}
+                label={
+                  <TooltipLabel
+                    tooltipContent={t("fund-details-page.tooltip.structure")}
+                    labelText={t("fund-details-page.history.structure.title")}
+                    className="tooltip__label--cursor-pointer"
+                  />
+                }
               />
               <GVTab
                 value={TABS.EVENTS}
