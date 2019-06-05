@@ -17,10 +17,9 @@ export const fetchSocialLinks = (): CancelablePromise<SocialLinksViewModel> => {
 export const updateSocialLink = (requestData: UpdateSocialLinkViewModel) => (
   dispatch: Dispatch
 ) => {
-  const requestData = {};
   const authorization = authService.getAuthArg();
   return profileApi
-    .v10ProfileSociallinksUpdatePost(authorization, requestData)
+    .v10ProfileSociallinksUpdatePost(authorization, { model: requestData })
     .then(() => {
       dispatch(
         alertMessageActions.success(
