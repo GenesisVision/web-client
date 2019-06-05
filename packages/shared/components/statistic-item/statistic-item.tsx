@@ -58,14 +58,12 @@ const _StatisticItem: React.FC<Props> = ({
       <div className={generateClasses(ITEM.VALUE)}>{children}</div>
       {equivalent !== undefined && equivalentCurrency !== undefined ? (
         <div className="statistics-item__equivalent">
-          {
-            <NumberFormat
-              value={formatCurrencyValue(+equivalent, equivalentCurrency)}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={` ${equivalentCurrency}`}
-            />
-          }
+          <NumberFormat
+            value={formatCurrencyValue(equivalent, equivalentCurrency)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${equivalentCurrency}`}
+          />
         </div>
       ) : null}
     </div>
@@ -79,7 +77,7 @@ enum ITEM {
 
 interface Props {
   label: string | React.ReactNode;
-  equivalent?: string | number;
+  equivalent?: number;
   equivalentCurrency?: string;
   small?: boolean;
   big?: boolean;
