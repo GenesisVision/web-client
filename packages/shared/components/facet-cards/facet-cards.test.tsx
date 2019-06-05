@@ -10,12 +10,11 @@ import {
   _FacetCardsContainer as FacetCardsContainer
 } from "./faset-cards-container";
 
-type Facet=FundFacet&
-ProgramFacet
+type Facet = FundFacet & ProgramFacet;
 
 describe("Facet Cards tests", () => {
   const facet: Facet = {
-    sorting:"ByProfitAsc",
+    sorting: "ByProfitAsc",
     description: "",
     id: "",
     logo: "",
