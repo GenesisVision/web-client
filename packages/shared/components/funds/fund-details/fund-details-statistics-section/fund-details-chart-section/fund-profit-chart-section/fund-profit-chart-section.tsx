@@ -18,7 +18,7 @@ const FundProfitChartSection: React.FC<Props> = ({
     <div className="details-chart__value">
       <StatisticItem
         label={"Value"}
-        equivalent={formatCurrencyValue(profitChart.timeFrameUsdProfit, "USD")}
+        equivalent={+formatCurrencyValue(profitChart.timeFrameUsdProfit, "USD")}
         equivalentCurrency="USD"
         big
         accent
