@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 
 import ProgramUnfollowForm, {
@@ -8,27 +13,28 @@ import ProgramUnfollowForm, {
 } from "./components/program-unfollow-form";
 import { detachToSignal } from "./services/program-unfollow.service";
 
-class ProgramUnfollowContainer extends React.PureComponent<Props> {
-  handleClose = () => {
-    const { onClose } = this.props;
-    onClose();
-  };
-  handleSubmit = (value: IProgramUnfollowFormValues) => {
-    const { service, onApply, id } = this.props;
-    const model = { mode: value.mode };
-    service.detachToSignal(id, onApply, model);
-    this.handleClose();
-  };
-
-  render() {
-    const { open } = this.props;
-    return (
-      <Dialog open={open} onClose={this.handleClose}>
-        <ProgramUnfollowForm onSubmit={this.handleSubmit} />
-      </Dialog>
-    );
-  }
-}
+const _ProgramUnfollowContainer: React.FC<Props> = ({
+  open,
+  onClose,
+  service,
+  onApply,
+  id
+}) => {
+  const handleClose = useCallback(() => onClose(), [onClose]);
+  const handleSubmit = useCallback(
+    (value: IProgramUnfollowFormValues) => {
+      const model = { mode: value.mode };
+      service.detachToSignal(id, onApply, model);
+      handleClose();
+    },
+    [service, id]
+  );
+  return (
+    <Dialog open={open} onClose={handleClose}>
+      <ProgramUnfollowForm onSubmit={handleSubmit} />
+    </Dialog>
+  );
+};
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
@@ -37,10 +43,14 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-export default connect<null, DispatchProps, OwnProps>(
-  null,
-  mapDispatchToProps
-)(ProgramUnfollowContainer);
+const ProgramUnfollowContainer = compose(
+  React.memo,
+  connect<null, DispatchProps, OwnProps>(
+    null,
+    mapDispatchToProps
+  )
+)(_ProgramUnfollowContainer);
+export default ProgramUnfollowContainer;
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   detachToSignal: typeof detachToSignal;
