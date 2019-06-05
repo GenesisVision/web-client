@@ -1,10 +1,10 @@
-import { shallow } from "enzyme";
+import { ReactWrapper, mount } from "enzyme";
 import * as React from "react";
 import { Provider } from "react-redux";
 import { MockStoreEnhanced } from "redux-mock-store";
 import configureStore from "redux-mock-store";
 
-import { AlertMessagesState } from "../../modules/alert-message/reducers/alert-message-reducers";
+import GVButton from "../gv-button";
 import BackButton from "./back-button";
 
 jest.mock("react-i18next", () => {
@@ -25,28 +25,45 @@ const App = ({ store }: { store: MockStoreEnhanced }) => (
   </Provider>
 );
 
-const getInitialStore = (messages: AlertMessagesState = []) => ({
-  alertMessages: messages
+const getInitialStore = (router: any = {}) => ({
+  router
 });
 
 const mockStore = configureStore();
 
-describe("Popover tests", () => {
-  test("should render popover", () => {
-    // const component = shallow(<BackButton backPath="backPath"/>);
-    // expect(component.find(".popover")).toHaveLength(1);
+const emptyRouter = { location: {} };
+const routerWithState = {
+  location: { state: "backPath", prevPath: "/prevPath" }
+};
+
+describe("BackButton tests", () => {
+  let store: MockStoreEnhanced;
+  let component: ReactWrapper;
+
+  afterEach(() => {
+    component.unmount();
   });
-  // test("should set no-padding class", () => {
-  //   const component = shallow(
-  //     <Popover noPadding scrollTop={0} anchorEl={() => {}} />
-  //   );
-  //   expect(component.find(".popover--no-padding")).toHaveLength(1);
-  // });
-  // test("should set custom class", () => {
-  //   const anyClass = "any-class";
-  //   const component = shallow(
-  //     <Popover className={anyClass} scrollTop={0} anchorEl={() => {}} />
-  //   );
-  //   expect(component.find(`.${anyClass}`)).toHaveLength(1);
-  // });
+
+  test("should not be rendered", () => {
+    store = mockStore(getInitialStore(emptyRouter));
+    component = mount(<App store={store} />);
+    expect(component.find(".back-button")).toHaveLength(0);
+    expect(component.find(GVButton)).toHaveLength(0);
+  });
+
+  describe("should render", () => {
+    beforeEach(() => {
+      store = mockStore(getInitialStore(routerWithState));
+      component = mount(<App store={store} />);
+    });
+    test("should render back button", () => {
+      expect(component.find(".back-button")).toHaveLength(1);
+      expect(component.find(GVButton)).toHaveLength(1);
+    });
+    test("should set text for back button", () => {
+      expect(component.find(".back-button__path").text()).toBe(
+        routerWithState.location.state
+      );
+    });
+  });
 });

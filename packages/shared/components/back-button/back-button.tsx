@@ -22,10 +22,10 @@ export const _BackButton: React.FC<
         color="secondary"
         className="back-button__container"
       >
-        <React.Fragment>
+        <>
           <div className="back-button__back-arrow">&larr;</div>
           <div className="back-button__back">{t("buttons.back")}</div>
-        </React.Fragment>
+        </>
       </GVButton>
       <div className="back-button__path">{backPath}</div>
     </div>
