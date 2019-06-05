@@ -1,6 +1,9 @@
 import "shared/components/dashboard/dashboard-assets/dashboard-assets.scss";
 
-import { getDashboardFunds, getDashboardPrograms } from "pages/dashboard/services/dashboard-assets.service";
+import {
+  getDashboardFunds,
+  getDashboardPrograms
+} from "pages/dashboard/services/dashboard-assets.service";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -13,7 +16,10 @@ import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
 
 import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
-import { IDashboardAssetsCounts, fetchAssetsCount } from "../../services/dashboard.service";
+import {
+  IDashboardAssetsCounts,
+  fetchAssetsCount
+} from "../../services/dashboard.service";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 import DashboardCopytrading from "./dashboard-copytrading";
 
