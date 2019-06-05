@@ -27,7 +27,8 @@ const ProgramProfitChart: React.FC<Props> = ({
   pnlChart,
   currency
 }) => {
-  if (equityChart.length === 0 || pnlChart.length === 0) return null;
+  if (equityChart.length === 0 || pnlChart.length === 0 || !currency)
+    return null;
   const equity = equityChart.map(x => ({
     date: x.date.getTime(),
     value: formartChartMinValue(x.value)
@@ -121,7 +122,7 @@ const ProgramProfitChart: React.FC<Props> = ({
 interface Props {
   equityChart: ChartSimple[];
   pnlChart: ChartSimple[];
-  currency: CurrencyEnum;
+  currency?: CurrencyEnum;
 }
 
 export default React.memo(ProgramProfitChart);

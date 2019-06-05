@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { ITableState } from "shared/components/table/reducers/table.reducer";
-import { Nullable } from "shared/utils/types";
+import { CurrencyEnum, Nullable } from "shared/utils/types";
 
 import dashboardAssetChartReducer from "./dashboard-asset-chart.reducer";
 import dashboardAssetReducer, {
@@ -23,6 +23,7 @@ export interface IDashboardAssetChart {
   type: ASSETS_TYPES;
   id: string;
   title: string;
+  currencyChart?: CurrencyEnum;
   equityChart: ChartSimple[];
   pnLChart?: ChartSimple[];
 }

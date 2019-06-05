@@ -57,7 +57,6 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
       assetsIsPending,
       assetChart,
       period,
-      currency,
       inRequests,
       inRequestsIsPending
     } = this.props;
@@ -81,14 +80,13 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
           />
         </div>
         <DashboardPortfolioChartContainer
-          condition={!!assetChart && !!period && !!currency}
+          condition={!!assetChart && !!period}
           loader={
             <>
               <DashboardChartDescriptionLoader />
               <DashboardChartLoader />
             </>
           }
-          currency={currency}
           period={period}
           assetChart={assetChart!}
         />
@@ -99,7 +97,6 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: ManagerRootState): StateProps => {
   const { profileHeader } = state;
-  const { currency } = state.accountSettings;
   const { assets, assetChart, period, inRequestsData } = state.dashboard;
   return {
     isNewUser: profileHeader.data && profileHeader.data.isNewUser,
@@ -108,8 +105,7 @@ const mapStateToProps = (state: ManagerRootState): StateProps => {
     inRequests: inRequestsData.data,
     inRequestsIsPending: inRequestsData.isPending,
     assetChart,
-    period,
-    currency
+    period
   };
 };
 
@@ -139,7 +135,6 @@ interface StateProps {
   assetsIsPending: boolean;
   inRequestsIsPending: boolean;
   period: ChartDefaultPeriod;
-  currency: CurrencyEnum;
   assetChart: Nullable<IDashboardAssetChart>;
   isNewUser?: boolean;
   assets?: ManagerAssets;
