@@ -1,5 +1,5 @@
 import { ProgramFacetTimeframeEnum } from "gv-api-web";
-import React from "react";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import {
@@ -20,58 +20,58 @@ import {
   FUNDS_FACET_TABLE_FILTERS
 } from "./funds-facet.constants";
 
-class _FundsFacetTable extends React.PureComponent<
+const _FundsFacetTable: React.FC<
   IFundsFacetTableProps & InjectedTranslateProps
-> {
-  toggleFavorite: TableToggleFavoriteType = (fund, updateRow) => () => {
-    const isFavorite = fund.personalDetails.isFavorite;
-    const newProgram = {
-      ...fund,
-      personalDetails: { ...fund.personalDetails, isFavorite: !isFavorite }
-    };
-    updateRow(newProgram);
-    toggleFavoriteFund(fund.id, isFavorite).catch(() => {
-      updateRow(fund);
-    });
-  };
+> = ({ t, title, sorting, getItems, isAuthenticated, timeframe }) => {
+  const toggleFavorite: TableToggleFavoriteType = useCallback(
+    (fund, updateRow) => () => {
+      const isFavorite = fund.personalDetails.isFavorite;
+      const newProgram = {
+        ...fund,
+        personalDetails: { ...fund.personalDetails, isFavorite: !isFavorite }
+      };
+      updateRow(newProgram);
+      toggleFavoriteFund(fund.id, isFavorite).catch(() => {
+        updateRow(fund);
+      });
+    },
+    []
+  );
 
-  composeFiltering = () => {
-    const type = mapServerTimeFrameToFilterType(this.props.timeframe);
-    return {
-      dateRange: {
-        ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type
-      }
-    } as FilteringType;
-  };
+  const composeFiltering = useCallback(
+    () =>
+      ({
+        dateRange: {
+          ...DEFAULT_DATE_RANGE_FILTER_VALUE,
+          type: mapServerTimeFrameToFilterType(timeframe)
+        }
+      } as FilteringType),
+    [timeframe]
+  );
 
-  render() {
-    const { t, title, sorting, getItems, isAuthenticated } = this.props;
-
-    return (
-      <FundsTableModule
-        renderFilters={(updateFilter, filtering) => (
-          <>
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.program-start")}
-            />
-          </>
-        )}
-        title={title}
-        paging={FUNDS_FACET_PAGING}
-        sorting={sorting}
-        filtering={this.composeFiltering()}
-        defaultFilters={FUNDS_FACET_TABLE_FILTERS}
-        toggleFavorite={this.toggleFavorite}
-        getItems={getItems}
-        isAuthenticated={isAuthenticated}
-      />
-    );
-  }
-}
+  return (
+    <FundsTableModule
+      renderFilters={(updateFilter, filtering) => (
+        <>
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.program-start")}
+          />
+        </>
+      )}
+      title={title}
+      paging={FUNDS_FACET_PAGING}
+      sorting={sorting}
+      filtering={composeFiltering()}
+      defaultFilters={FUNDS_FACET_TABLE_FILTERS}
+      toggleFavorite={toggleFavorite}
+      getItems={getItems}
+      isAuthenticated={isAuthenticated}
+    />
+  );
+};
 
 export interface IFundsFacetTableProps {
   title: string;
@@ -81,5 +81,5 @@ export interface IFundsFacetTableProps {
   isAuthenticated?: boolean;
 }
 
-const FundsFacetTable = translate()(_FundsFacetTable);
+const FundsFacetTable = React.memo(translate()(_FundsFacetTable));
 export default FundsFacetTable;
