@@ -16,10 +16,8 @@ export const getAssetChart = (
   assetTitle: string,
   assetType: ASSETS_TYPES
 ) => (dispatch: Dispatch, getState: TGetAuthState) => {
-  const { currency } = getState().accountSettings;
   const { period } = getState().dashboard;
   const chartFilter = {
-    currency,
     dateFrom: period.start,
     dateTo: period.end,
     maxPointCount: 100
@@ -35,6 +33,7 @@ export const getAssetChart = (
             type: assetType,
             id: assetId,
             title: assetTitle,
+            currency: data.programCurrency,
             pnLChart: data.pnLChart,
             equityChart: data.equityChart
           })
