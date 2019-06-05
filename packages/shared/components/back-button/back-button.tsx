@@ -9,7 +9,7 @@ import GVButton from "shared/components/gv-button";
 import RootState from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 
-const BackButton: React.FC<
+export const _BackButton: React.FC<
   StateProps & InjectedTranslateProps & DispatchProps
 > = ({ t, service, backPath, prevPath }) => {
   if (!backPath) return null;
@@ -41,13 +41,15 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
   service: bindActionCreators({ goBack, push }, dispatch)
 });
 
-export default compose<React.FC>(
+const BackButton = compose<React.FC>(
+  React.memo,
   translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(BackButton);
+)(_BackButton);
+export default BackButton;
 
 interface StateProps {
   backPath: string;
