@@ -9,23 +9,7 @@ import { SetSubmittingType } from "shared/utils/types";
 import FormError from "../form/form-error/form-error";
 import FundWithdrawResult from "./fund-withdraw-result";
 
-interface IFundWithdrawConfirmFormOwnProps {
-  availableToWithdraw: number;
-  percent: number;
-  currency: string;
-  exitFee: number;
-  errorMessage?: string;
-  onSubmit(setSubmitting: SetSubmittingType): void;
-  onBackClick(): void;
-}
-
-interface IFundWithdrawConfirmFormProps
-  extends InjectedTranslateProps,
-    IFundWithdrawConfirmFormOwnProps {}
-
-const _FundWithdrawConfirmForm: React.FC<
-  InjectedFormikProps<IFundWithdrawConfirmFormProps, {}>
-> = ({
+const _FundWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
   t,
   availableToWithdraw,
   percent,
@@ -70,12 +54,22 @@ const _FundWithdrawConfirmForm: React.FC<
   </form>
 );
 
-const FundWithdrawConfirmForm = compose<
-  React.ComponentType<IFundWithdrawConfirmFormOwnProps>
->(
+interface OwnProps {
+  availableToWithdraw: number;
+  percent: number;
+  currency: string;
+  exitFee: number;
+  errorMessage?: string;
+  onSubmit(setSubmitting: SetSubmittingType): void;
+  onBackClick(): void;
+}
+
+interface Props extends InjectedTranslateProps, OwnProps {}
+
+const FundWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
   React.memo,
   translate(),
-  withFormik<IFundWithdrawConfirmFormProps, {}>({
+  withFormik<Props, {}>({
     displayName: "withdraw-form",
     handleSubmit: (_, { props, setSubmitting }) => {
       props.onSubmit(setSubmitting);
