@@ -1,6 +1,10 @@
 import "./social-links.scss";
 
-import { CancelablePromise, SocialLinkViewModel } from "gv-api-web";
+import {
+  CancelablePromise,
+  SocialLinkViewModel,
+  UpdateSocialLinkViewModelTypeEnum
+} from "gv-api-web";
 import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
 import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
@@ -16,7 +20,7 @@ import SocialLinksLoader from "./social-links-loader";
 const _Links: React.FC<ILinksProps> = ({ socialLinks, onSubmit }) => (
   <>
     {socialLinks.map(x => (
-      <SocialLinkForm key={x.id} socialLink={x} onSubmit={onSubmit} />
+      <SocialLinkForm key={x.type} socialLink={x} onSubmit={onSubmit} />
     ))}
   </>
 );
@@ -36,8 +40,11 @@ class _SocialLinksContainer extends React.PureComponent<Props, State> {
     this.updateSocialLinks();
   }
 
-  handleSubmitSocialLink = (id: string, value: string) => {
-    return this.props.service.updateSocialLink(id, value).then(() => {
+  handleSubmitSocialLink = (
+    type: UpdateSocialLinkViewModelTypeEnum,
+    value: string
+  ) => {
+    return this.props.service.updateSocialLink({ type, value }).then(() => {
       this.updateSocialLinks();
     });
   };

@@ -90,7 +90,7 @@ const SocialLinkForm = compose<React.ComponentType<OwnProps>>(
       }),
     handleSubmit: (values, { props, setSubmitting, setFieldValue }) => {
       props
-        .onSubmit(props.socialLink.id, values.linkValue)
+        .onSubmit(props.socialLink.type, values.linkValue)
         .then(() => {
           setFieldValue(FORM_FIELD.isButtonsVisible, false);
           setSubmitting(false);

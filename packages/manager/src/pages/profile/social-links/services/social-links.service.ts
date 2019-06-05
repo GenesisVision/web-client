@@ -1,4 +1,8 @@
-import { CancelablePromise, SocialLinksViewModel } from "gv-api-web";
+import {
+  CancelablePromise,
+  SocialLinksViewModel,
+  UpdateSocialLinkViewModel
+} from "gv-api-web";
 import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import profileApi from "shared/services/api-client/profile-api";
@@ -10,7 +14,7 @@ export const fetchSocialLinks = (): CancelablePromise<SocialLinksViewModel> => {
   return profileApi.v10ProfileSociallinksGet(authorization);
 };
 
-export const updateSocialLink = (id: string, value: string) => (
+export const updateSocialLink = (requestData: UpdateSocialLinkViewModel) => (
   dispatch: Dispatch
 ) => {
   const requestData = {};
