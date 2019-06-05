@@ -87,6 +87,7 @@ const SocialLinkForm = compose<React.ComponentType<OwnProps>>(
             100,
             props.t("profile-page.social-links.validation.link-max-length")
           )
+          .nullable(true)
       }),
     handleSubmit: (values, { props, setSubmitting, setFieldValue }) => {
       props
