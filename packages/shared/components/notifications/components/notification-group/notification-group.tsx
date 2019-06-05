@@ -3,29 +3,28 @@ import * as React from "react";
 import { translate } from "react-i18next";
 import Notification from "shared/components/notifications/components/notification/notification";
 
+const _NotificationsGroup: React.FC<Props> = ({
+  closeNotifications,
+  notifications,
+  title
+}) => (
+  <div className="notifications__group">
+    <div className="notifications__title">{title}</div>
+    {notifications.map((notification: NotificationViewModel) => (
+      <Notification
+        key={notification.id}
+        {...notification}
+        closeNotifications={closeNotifications}
+      />
+    ))}
+  </div>
+);
+
 interface Props {
   title: string;
   notifications: NotificationViewModel[];
   closeNotifications(): void;
 }
 
-class NotificationsGroup extends React.PureComponent<Props> {
-  renderNotifications = (notification: NotificationViewModel) => (
-    <Notification
-      key={notification.id}
-      {...notification}
-      closeNotifications={this.props.closeNotifications}
-    />
-  );
-  render() {
-    const { notifications, title } = this.props;
-    return (
-      <div className="notifications__group">
-        <div className="notifications__title">{title}</div>
-        {notifications.map(this.renderNotifications)}
-      </div>
-    );
-  }
-}
-
-export default translate()(NotificationsGroup);
+const NotificationsGroup = React.memo(translate()(_NotificationsGroup));
+export default NotificationsGroup;
