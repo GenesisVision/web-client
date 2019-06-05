@@ -580,4 +580,5 @@ export interface ICreateProgramSettingsFormValues {
   entryFee?: number;
   depositAmount?: number;
   depositWalletId: string;
+  investmentLimit?: number;
 }
