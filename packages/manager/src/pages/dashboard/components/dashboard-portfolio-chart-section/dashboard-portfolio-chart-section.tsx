@@ -20,7 +20,7 @@ import {
 } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
 import Surface from "shared/components/surface/surface";
-import { CurrencyEnum, Nullable } from "shared/utils/types";
+import { Nullable } from "shared/utils/types";
 
 import { IDashboardAssetChart } from "../../reducers/dashboard.reducers";
 import {
@@ -39,14 +39,9 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
     service.getInRequests();
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate() {
     const { assets, service, assetChart } = this.props;
-    if (
-      assets &&
-      (JSON.stringify(prevProps.assetChart) !== JSON.stringify(assetChart) ||
-        !assetChart)
-    )
-      service.composeAssetChart();
+    if (assets && !assetChart) service.composeAssetChart();
   }
 
   render() {
