@@ -1,9 +1,13 @@
 import * as React from "react";
+import { useCallback } from "react";
+import { Dispatch } from "redux";
+import withLoader from "shared/decorators/with-loader";
+import { TGetState } from "shared/utils/types";
 
 import {
   SORTING_DIRECTION,
   getSortingColumnName,
-  getSortingDirection
+  getSortingDirection as getSortingDirectionHelper
 } from "../helpers/sorting.helpers";
 import { SortingColumn } from "./filtering/filter.type";
 import TableHeadCell from "./table-head-cell";
@@ -17,55 +21,90 @@ export interface ITableHeaderProps {
   renderHeader?(column: SortingColumn): JSX.Element;
 }
 
-class TableHeader extends React.PureComponent<ITableHeaderProps> {
-  sortingName = (): string => getSortingColumnName(this.props.sorting);
+const TableHeader: React.FC<ITableHeaderProps> = ({
+  sorting,
+  updateSorting,
+  columns,
+  renderHeader
+}) => {
+  const getSortingName = (): string => getSortingColumnName(sorting);
 
-  getSortingDirection = (sortingName?: string): SORTING_DIRECTION => {
-    if (sortingName !== this.sortingName()) return SORTING_DIRECTION.NONE;
-    return getSortingDirection(this.props.sorting);
-  };
+  const getSortingDirection = useCallback(
+    (name?: string): SORTING_DIRECTION =>
+      (name !== getSortingName() && SORTING_DIRECTION.NONE) ||
+      getSortingDirectionHelper(sorting),
+    [sorting]
+  );
 
-  isSortable = (sortingName?: string): boolean => sortingName !== undefined;
+  const isSortable = useCallback(
+    (sortingName?: string): boolean => sortingName !== undefined,
+    []
+  );
 
-  handleSorting = (sortingName?: string) => ():
-    | ((dispatch: any, getState: any) => void)
-    | void => {
-    const { sorting, updateSorting } = this.props;
-    if (
-      sortingName !== this.sortingName() ||
-      getSortingDirection(sorting) === SORTING_DIRECTION.ASC
-    ) {
-      return (
-        updateSorting && updateSorting(sortingName + SORTING_DIRECTION.DESC)
-      );
-    }
+  const handleSorting: HandleSortingType = useCallback(
+    name => () => {
+      if (
+        name !== getSortingName() ||
+        getSortingDirectionHelper(sorting) === SORTING_DIRECTION.ASC
+      ) {
+        return updateSorting && updateSorting(name + SORTING_DIRECTION.DESC);
+      }
+      return updateSorting && updateSorting(name + SORTING_DIRECTION.ASC);
+    },
+    [updateSorting, sorting]
+  );
 
-    return updateSorting && updateSorting(sortingName + SORTING_DIRECTION.ASC);
-  };
+  return (
+    <thead className="table__head">
+      <TableRow className="table__row--head">
+        <Columns
+          condition={!!columns}
+          columns={columns!}
+          updateSorting={updateSorting}
+          renderHeader={renderHeader}
+          isSortable={isSortable}
+          handleSorting={handleSorting}
+          getSortingDirection={getSortingDirection}
+        />
+      </TableRow>
+    </thead>
+  );
+};
 
-  renderColumns = (): JSX.Element[] =>
-    (this.props.columns || []).map(column => {
-      return (
-        <TableHeadCell
-          key={column.name}
-          sortable={
-            !!this.props.updateSorting && this.isSortable(column.sortingName)
-          }
-          onClick={this.handleSorting(column.sortingName)}
-          sortingDirection={this.getSortingDirection(column.sortingName)}
-        >
-          {this.props.renderHeader && this.props.renderHeader(column)}
-        </TableHeadCell>
-      );
-    });
+const _Columns: React.FC<IColumnsProps> = ({
+  columns,
+  updateSorting,
+  renderHeader,
+  isSortable,
+  handleSorting,
+  getSortingDirection
+}) => (
+  <>
+    {columns.map(column => (
+      <TableHeadCell
+        key={column.name}
+        sortable={!!updateSorting && isSortable(column.sortingName)}
+        onClick={handleSorting(column.sortingName)}
+        sortingDirection={getSortingDirection(column.sortingName)}
+      >
+        {renderHeader && renderHeader(column)}
+      </TableHeadCell>
+    ))}
+  </>
+);
+const Columns = React.memo(withLoader(_Columns));
 
-  render() {
-    return (
-      <thead className="table__head">
-        <TableRow className="table__row--head">{this.renderColumns()}</TableRow>
-      </thead>
-    );
-  }
+interface IColumnsProps {
+  getSortingDirection: (name?: string) => SORTING_DIRECTION;
+  isSortable: (sortingName?: string) => boolean;
+  handleSorting: HandleSortingType;
+  columns: SortingColumn[];
+  updateSorting?: UpdateSortingFuncType;
+  renderHeader?(column: SortingColumn): JSX.Element;
 }
+
+type HandleSortingType = (
+  sortingName?: string
+) => () => ((dispatch: Dispatch, getState: TGetState) => void) | void;
 
 export default TableHeader;
