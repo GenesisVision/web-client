@@ -1,6 +1,6 @@
 import "./details-investment.scss";
 
-import React, { PureComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetStatus from "shared/components/asset-status/asset-status";
@@ -24,27 +24,7 @@ import {
 } from "../../helpers/details-context";
 import { InvestmentDetails } from "./details-investment.helpers";
 
-interface IDetailsInvestmentOwnProps {
-  asset: string;
-  notice?: string;
-  id: string;
-  accountCurrency: string;
-  assetCurrency: string;
-  personalDetails: InvestmentDetails;
-  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
-  ProgramReinvestingWidget?: React.ComponentType<
-    IProgramReinvestingContainerOwnProps
-  >;
-}
-
-interface IDetailsInvestmentProps
-  extends IDetailsInvestmentOwnProps,
-    InjectedTranslateProps {}
-interface IDetailsInvestmentState {
-  isOpenWithdrawalPopup: boolean;
-}
-
-class DetailsInvestment extends PureComponent<
+class _DetailsInvestment extends React.PureComponent<
   IDetailsInvestmentProps,
   IDetailsInvestmentState
 > {
@@ -216,4 +196,25 @@ class DetailsInvestment extends PureComponent<
   }
 }
 
-export default translate()(DetailsInvestment);
+interface IDetailsInvestmentOwnProps {
+  asset: string;
+  notice?: string;
+  id: string;
+  accountCurrency: string;
+  assetCurrency: string;
+  personalDetails: InvestmentDetails;
+  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
+  ProgramReinvestingWidget?: React.ComponentType<
+    IProgramReinvestingContainerOwnProps
+  >;
+}
+
+interface IDetailsInvestmentProps
+  extends IDetailsInvestmentOwnProps,
+    InjectedTranslateProps {}
+interface IDetailsInvestmentState {
+  isOpenWithdrawalPopup: boolean;
+}
+
+const DetailsInvestment = translate()(_DetailsInvestment);
+export default DetailsInvestment;
