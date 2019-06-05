@@ -10,12 +10,9 @@ import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncActionType } from "shared/components/table/components/table.types";
-import { ROLE_ENV } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
-class _DashboardAssets extends React.PureComponent<
-  Props & InjectedTranslateProps,
-  State
-> {
+class _DashboardAssets extends React.PureComponent<Props, State> {
   state = {
     tab: TABS.PROGRAMS,
     programsCount: undefined,
@@ -46,6 +43,7 @@ class _DashboardAssets extends React.PureComponent<
   render() {
     const { tab, programsCount, fundsCount } = this.state;
     const {
+      role,
       t,
       title,
       getDashboardPrograms,
@@ -59,17 +57,17 @@ class _DashboardAssets extends React.PureComponent<
     return (
       <Surface className="dashboard-assets">
         <div className="dashboard-assets__head">
-          <h3>{t(`${ROLE_ENV}.dashboard-page.assets.title`)}</h3>
+          <h3>{t(`${role}.dashboard-page.assets.title`)}</h3>
           <div className="dashboard-assets__tabs">
             <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 value={TABS.PROGRAMS}
-                label={t(`${ROLE_ENV}.dashboard-page.assets.programs`)}
+                label={t(`${role}.dashboard-page.assets.programs`)}
                 count={programsCount}
               />
               <GVTab
                 value={TABS.FUNDS}
-                label={t(`${ROLE_ENV}.dashboard-page.assets.funds`)}
+                label={t(`${role}.dashboard-page.assets.funds`)}
                 count={fundsCount}
               />
             </GVTabs>
@@ -99,7 +97,9 @@ class _DashboardAssets extends React.PureComponent<
   }
 }
 
-interface Props {
+interface Props extends InjectedTranslateProps, WithRoleProps, OwnProps {}
+
+interface OwnProps {
   clearAssets: any;
   fetchAssetsCount: () => Promise<IDashboardAssetsCounts>;
   title: string;
@@ -123,5 +123,5 @@ enum TABS {
   FUNDS = "funds"
 }
 
-const DashboardAssets = translate()(_DashboardAssets);
+const DashboardAssets = withRole<OwnProps>(translate()(_DashboardAssets));
 export default DashboardAssets;

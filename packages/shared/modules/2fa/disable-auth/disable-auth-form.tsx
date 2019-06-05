@@ -51,7 +51,7 @@ const DisableAuth: React.FC<
   </form>
 );
 
-const DisableAuthForm = compose<React.FunctionComponent<OwnProps>>(
+const DisableAuthForm = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<Props, IDisableAuthFormFormValues>({
     displayName: "disable-auth",

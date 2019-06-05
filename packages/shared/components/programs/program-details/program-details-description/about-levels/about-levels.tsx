@@ -6,10 +6,9 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Dialog from "shared/components/dialog/dialog";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
-
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const renderLimits = (
   t: TranslationFunction,
@@ -48,7 +47,7 @@ interface OwnProps {
 
 interface Props extends OwnProps, InjectedTranslateProps {}
 
-class AboutLevelsComponent extends React.Component<Props> {
+class AboutLevelsComponent extends React.PureComponent<Props> {
   render() {
     const { t, open, onClose, investmentsLimits, currency } = this.props;
     return (

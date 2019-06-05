@@ -1,5 +1,5 @@
 import { goBack } from "connected-react-router";
-import React, { Component } from "react";
+import * as React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
@@ -9,7 +9,7 @@ import * as WalletServices from "shared/components/wallet/services/wallet.servic
 import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
 import * as createFundService from "./services/create-fund.service";
 
-class CreateFundContainer extends Component {
+class CreateFundContainer extends React.PureComponent {
   state = {
     isPending: true,
     isNavigationDialogVisible: false,
@@ -88,7 +88,7 @@ class CreateFundContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const headerData = state.profileHeader.info.data;
+  const headerData = state.profileHeader.data;
   return {
     wallets: state.wallet.info.data ? state.wallet.info.data.wallets : {},
     author: headerData ? headerData.name : "",

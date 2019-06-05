@@ -31,7 +31,10 @@ export interface GVTextFieldState {
   focused: boolean;
 }
 
-class GVTextField extends React.Component<GVTextFieldProps, GVTextFieldState> {
+class GVTextField extends React.PureComponent<
+  GVTextFieldProps,
+  GVTextFieldState
+> {
   static defaultProps: Partial<GVTextFieldProps> = {
     type: "text",
     adornmentPosition: "end",

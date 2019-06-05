@@ -1,11 +1,11 @@
 import { push } from "connected-react-router";
 import { FundsList } from "gv-api-web";
+import * as qs from "qs";
 import {
   FUNDS_FACET_ROUTE,
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
-} from "pages/funds/funds.routes";
-import * as qs from "qs";
+} from "shared/components/funds/funds.routes";
 import {
   ComposeFiltersAllType,
   TFilter
@@ -30,9 +30,7 @@ import {
 
 export type GetFundsType = (
   filters: ComposeFiltersAllType
-) => (
-  dispatch: MiddlewareDispatch
-) => void;
+) => (dispatch: MiddlewareDispatch) => void;
 export const getFunds: GetFundsType = filters => dispatch => {
   let requestFilters = dispatch(composeRequestFilters());
   if (authService.getAuthArg()) {

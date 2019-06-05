@@ -44,13 +44,10 @@ interface StateProps {
   errorMessage: string;
 }
 
-const ForgotPasswordContainer = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps,
-  AuthRootState
->(
-  mapStateToProps,
-  mapDispatchToProps
-)(_ForgotPasswordContainer);
+const ForgotPasswordContainer = React.memo(
+  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  )(_ForgotPasswordContainer)
+);
 export default ForgotPasswordContainer;

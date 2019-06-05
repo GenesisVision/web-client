@@ -217,7 +217,7 @@ const mergeProps = (
   };
 };
 
-const ProgramsTableContainer = compose<React.FunctionComponent<OwnProps>>(
+const ProgramsTableContainer = compose<React.FC<OwnProps>>(
   withRouter,
   translate(),
   connect(

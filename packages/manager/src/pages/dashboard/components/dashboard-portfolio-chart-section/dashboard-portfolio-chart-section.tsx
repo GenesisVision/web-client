@@ -19,7 +19,8 @@ import {
   DashboardChartRequestLoader
 } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
-import { CurrencyEnum, Nullable } from "shared/utils/types";
+import Surface from "shared/components/surface/surface";
+import { Nullable } from "shared/utils/types";
 
 import { IDashboardAssetChart } from "../../reducers/dashboard.reducers";
 import {
@@ -38,14 +39,9 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
     service.getInRequests();
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate() {
     const { assets, service, assetChart } = this.props;
-    if (
-      assets &&
-      (JSON.stringify(prevProps.assetChart) !== JSON.stringify(assetChart) ||
-        !assetChart)
-    )
-      service.composeAssetChart();
+    if (assets && !assetChart) service.composeAssetChart();
   }
 
   render() {
@@ -56,13 +52,12 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
       assetsIsPending,
       assetChart,
       period,
-      currency,
       inRequests,
       inRequestsIsPending
     } = this.props;
     if (isNewUser) return <DashboardGetStarted />;
     return (
-      <>
+      <Surface className="dashboard-portfolio-chart-section">
         <h3 className="dashboard-portfolio-chart-section__heading">
           {t("manager.dashboard-page.chart-section.header")}
         </h3>
@@ -80,35 +75,32 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
           />
         </div>
         <DashboardPortfolioChartContainer
-          condition={!!assetChart && !!period && !!currency}
+          condition={!!assetChart && !!period}
           loader={
             <>
               <DashboardChartDescriptionLoader />
               <DashboardChartLoader />
             </>
           }
-          currency={currency}
           period={period}
           assetChart={assetChart!}
         />
-      </>
+      </Surface>
     );
   }
 }
 
 const mapStateToProps = (state: ManagerRootState): StateProps => {
-  const { info } = state.profileHeader;
-  const { currency } = state.accountSettings;
+  const { profileHeader } = state;
   const { assets, assetChart, period, inRequestsData } = state.dashboard;
   return {
-    isNewUser: info.data && info.data.isNewUser,
+    isNewUser: profileHeader.data && profileHeader.data.isNewUser,
     assets: assets.data,
     assetsIsPending: assets.isPending,
     inRequests: inRequestsData.data,
     inRequestsIsPending: inRequestsData.isPending,
     assetChart,
-    period,
-    currency
+    period
   };
 };
 
@@ -138,7 +130,6 @@ interface StateProps {
   assetsIsPending: boolean;
   inRequestsIsPending: boolean;
   period: ChartDefaultPeriod;
-  currency: CurrencyEnum;
   assetChart: Nullable<IDashboardAssetChart>;
   isNewUser?: boolean;
   assets?: ManagerAssets;

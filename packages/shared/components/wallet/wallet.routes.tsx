@@ -35,7 +35,7 @@ interface RouteProps {
 
 export interface WalletRouteProps extends RouteComponentProps<RouteProps> {}
 
-class WalletRoutes extends React.Component<DispatchProps, any> {
+class WalletRoutes extends React.PureComponent<DispatchProps, any> {
   componentDidMount() {
     this.props.fetchWallets();
   }

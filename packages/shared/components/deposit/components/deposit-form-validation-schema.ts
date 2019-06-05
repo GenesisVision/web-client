@@ -3,10 +3,10 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { lazy, number, object } from "yup";
 
-import { IDepositFormValues, IDepositProps } from "./deposit-form";
+import { IDepositFormValues, IDepositOwnProps } from "./deposit-form";
 
 export const managerSchema = (
-  params: InjectedTranslateProps & IDepositProps
+  params: InjectedTranslateProps & IDepositOwnProps
 ) => {
   const { info, t, currency } = params;
   return lazy<IDepositFormValues>(values => {
@@ -39,7 +39,7 @@ export const managerSchema = (
 };
 
 export const investorSchema = (
-  params: InjectedTranslateProps & IDepositProps
+  params: InjectedTranslateProps & IDepositOwnProps
 ) => {
   const { info, t, currency } = params;
   return lazy<IDepositFormValues>(values => {

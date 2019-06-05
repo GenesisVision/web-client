@@ -27,7 +27,7 @@ import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-blo
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 import ErrorNotifier from "./error-notifier/error-notifier";
 
-class CreateFundSettings extends React.Component {
+class CreateFundSettings extends React.PureComponent {
   state = {
     anchor: null,
     assets: this.props.assets.map(asset => {

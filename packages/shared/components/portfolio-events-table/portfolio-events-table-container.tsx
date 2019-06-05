@@ -2,7 +2,7 @@ import * as React from "react";
 import Surface from "shared/components/surface/surface";
 
 import PortfolioEventsTable, {
-  IPortfolioEventsTableProps
+  IPortfolioEventsTableOwnProps
 } from "./portfolio-events-table";
 
 const PortfolioEventsTableContainer: React.FC<Props> = ({
@@ -25,7 +25,7 @@ const PortfolioEventsTableContainer: React.FC<Props> = ({
   );
 };
 
-interface Props extends IPortfolioEventsTableProps {
+interface Props extends IPortfolioEventsTableOwnProps {
   tableTitle: string;
 }
 

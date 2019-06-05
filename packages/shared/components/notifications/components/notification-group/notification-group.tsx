@@ -9,7 +9,7 @@ interface Props {
   closeNotifications(): void;
 }
 
-class NotificationsGroup extends React.Component<Props> {
+class NotificationsGroup extends React.PureComponent<Props> {
   renderNotifications = (notification: NotificationViewModel) => (
     <Notification
       key={notification.id}

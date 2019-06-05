@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 
 import InvestmentProgramControls from "./investment-program-controls";
 import SignalProviderControls from "./signal-provider-controls";
 
-class ProgramControls extends Component<
+class ProgramControls extends React.PureComponent<
   IProgramControlsProps & InjectedTranslateProps
 > {
   render() {

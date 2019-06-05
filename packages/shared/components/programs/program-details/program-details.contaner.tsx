@@ -1,7 +1,7 @@
 import "shared/components/details/details.scss";
 
 import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
-import React from "react";
+import * as React from "react";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
@@ -16,7 +16,8 @@ import {
   ProgramDetailsStatistic
 } from "shared/components/programs/program-details/services/program-details.types";
 import { STATUS } from "shared/constants/constants";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import withLoader from "shared/decorators/with-loader";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
@@ -105,10 +106,12 @@ interface OwnProps {
   balanceChart?: ProgramBalanceChart;
   statistic?: ProgramDetailsStatistic;
   isAuthenticated: boolean;
-  currency: CURRENCIES;
+  currency: CurrencyEnum;
 }
 
 interface Props extends OwnProps {}
 
-const ProgramDetailsContainer = React.memo(_ProgramDetailsContainer);
+const ProgramDetailsContainer = React.memo(
+  withLoader(_ProgramDetailsContainer)
+);
 export default ProgramDetailsContainer;

@@ -11,10 +11,12 @@ export const FUND_STRUCTURE_COLUMNS: SortingColumn[] = [
     name: "symbol"
   },
   {
-    name: "target"
+    name: "target",
+    tooltip: true
   },
   {
-    name: "current"
+    name: "current",
+    tooltip: true
   }
 ];
 

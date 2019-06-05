@@ -59,6 +59,7 @@ export interface SelectFilterValue<T = any> {
 export interface SortingColumn {
   name: string;
   sortingName?: string;
+  tooltip?: boolean;
 }
 
 export type FilteringType = {

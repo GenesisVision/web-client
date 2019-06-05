@@ -1,4 +1,8 @@
-import { AttachToSignalProviderInfo, WalletData } from "gv-api-web";
+import {
+  AttachToSignalProviderInfo,
+  SignalSubscription,
+  WalletData
+} from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { InvestorRootState } from "reducers";
@@ -26,51 +30,48 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
     accounts: [],
     type: undefined,
     volumeFee: undefined,
-    minDeposit: undefined,
-    hasActiveSubscription: undefined,
-    hasSignalAccount: undefined
+    minDeposit: undefined
   };
 
   componentDidMount() {
     if (!authService.getAuthArg()) return;
+    const { id, signalSubscription } = this.props;
     this.setState({ isPending: true });
     getSignalAccounts()
       .then(CopyTradingAccountsList => {
         const { accounts } = CopyTradingAccountsList;
         this.setState({ accounts });
-        return getSignalInfo(this.props.id);
+        return getSignalInfo(id);
       })
       .then((info: AttachToSignalProviderInfo) => {
-        const {
-          hasSignalAccount,
-          volumeFee,
-          minDeposit,
-          hasActiveSubscription
-        } = info;
+        const { volumeFee, minDeposit } = info;
         this.setState({
-          type: hasActiveSubscription ? FOLLOW_TYPE.EDIT : FOLLOW_TYPE.CREATE,
-          hasSignalAccount,
+          type: signalSubscription.hasActiveSubscription
+            ? FOLLOW_TYPE.EDIT
+            : FOLLOW_TYPE.CREATE,
           volumeFee,
           minDeposit,
-          hasActiveSubscription,
           isPending: false
         });
       });
   }
 
   render() {
-    const { service, wallets, open, onClose, currency, id } = this.props;
     const {
-      isPending,
-      type,
-      accounts,
-      hasSignalAccount,
-      minDeposit
-    } = this.state;
+      service,
+      wallets,
+      open,
+      onClose,
+      currency,
+      id,
+      signalSubscription
+    } = this.props;
+    const { isPending, type, accounts, minDeposit } = this.state;
     const handleClose = () => {
       onClose();
     };
     const handleSubmit = () => {
+      this.props.onApply();
       onClose();
     };
     const submitMethod =
@@ -81,8 +82,8 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
           <DialogLoader />
         ) : (
           <FollowPopupForm
+            signalSubscription={signalSubscription}
             minDeposit={minDeposit!}
-            hasSignalAccount={hasSignalAccount!}
             alertError={service.alertError}
             alertSuccess={service.alertSuccess}
             id={id}
@@ -129,13 +130,12 @@ interface Props extends DispatchProps, StateProps {
   onApply(): void;
   currency: string;
   id: string;
+  signalSubscription: SignalSubscription;
 }
 
 interface State {
   isPending: boolean;
   accounts: any | null;
-  hasSignalAccount?: boolean;
-  hasActiveSubscription?: boolean;
   volumeFee?: number;
   minDeposit?: number;
   type?: FOLLOW_TYPE;

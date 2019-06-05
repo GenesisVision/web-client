@@ -8,12 +8,12 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import ProfileForm from "shared/modules/profile/profile-form";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
 
-import { IProfileOwnProps } from "./profile";
-import { IProfileFormOwnProps } from "./profile-form";
+import Profile from "./profile";
 
 class _ProfileContainer extends React.PureComponent<Props, State> {
   state = {
@@ -62,9 +62,13 @@ class _ProfileContainer extends React.PureComponent<Props, State> {
 
   render() {
     const { data } = this.state;
-    const { Child, personal } = this.props;
+    const { personal, editable } = this.props;
     if (!data) return null;
-    return <Child personal={personal} info={data} onSubmit={this.handleEdit} />;
+    return editable ? (
+      <ProfileForm info={data} onSubmit={this.handleEdit} />
+    ) : (
+      <Profile personal={personal} info={data} />
+    );
   }
 }
 
@@ -76,7 +80,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
 });
 
 interface OwnProps {
-  Child: React.ComponentType<IProfileOwnProps | IProfileFormOwnProps>;
+  editable?: boolean;
   personal?: boolean;
 }
 

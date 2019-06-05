@@ -13,6 +13,7 @@ import InputAmountField from "shared/components/input-amount-field/input-amount-
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import rateApi from "shared/services/api-client/rate-api";
 import {
   calculatePercentage,
@@ -28,10 +29,7 @@ import {
 } from "./deposit-form-validation-schema";
 
 class _DepositForm extends React.PureComponent<
-  InjectedFormikProps<
-    IDepositProps & InjectedTranslateProps,
-    IDepositFormValues
-  >
+  InjectedFormikProps<Props, IDepositFormValues>
 > {
   componentDidMount(): void {
     this.fetchRate({ currencyFrom: this.props.values.walletCurrency });
@@ -268,9 +266,10 @@ class _DepositForm extends React.PureComponent<
   }
 }
 
-const DepositForm = compose<React.FC<IDepositProps>>(
+const DepositForm = compose<React.FC<IDepositOwnProps>>(
+  withRole,
   translate(),
-  withFormik<IDepositProps, IDepositFormValues>({
+  withFormik<Props, IDepositFormValues>({
     displayName: "invest-form",
     mapPropsToValues: () => ({
       rate: 1,
@@ -278,7 +277,7 @@ const DepositForm = compose<React.FC<IDepositProps>>(
       amount: undefined,
       walletCurrency: "GVT"
     }),
-    validationSchema: (params: IDepositProps & InjectedTranslateProps) =>
+    validationSchema: (params: Props) =>
       params.role === ROLE.MANAGER
         ? managerSchema(params)
         : investorSchema(params),
@@ -291,9 +290,8 @@ const DepositForm = compose<React.FC<IDepositProps>>(
 
 export default DepositForm;
 
-export interface IDepositProps {
+export interface IDepositOwnProps {
   wallets: WalletBaseData[];
-  role: ROLE;
   asset: ASSET;
   hasEntryFee: boolean;
   info: ProgramInvestInfo | FundInvestInfo;
@@ -305,6 +303,11 @@ export interface IDepositProps {
     setSubmitting: SetSubmittingType
   ) => void;
 }
+
+interface Props
+  extends IDepositOwnProps,
+    WithRoleProps,
+    InjectedTranslateProps {}
 
 export interface IDepositFormValues {
   rate: number;

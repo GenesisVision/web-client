@@ -4,7 +4,7 @@ import {
   getDashboardFunds,
   getDashboardPrograms
 } from "pages/dashboard/services/dashboard-assets.service";
-import React, { Component, ComponentType } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
@@ -43,7 +43,7 @@ interface IDashboardAssetsState extends IDashboardAssetsCounts {
   tab: ASSET_TAB;
 }
 
-class DashboardAssetsSection extends Component<
+class DashboardAssetsSection extends React.PureComponent<
   IDashboardOwnProps & IDashboardAssetsProps & InjectedTranslateProps,
   IDashboardAssetsState
 > {
@@ -135,7 +135,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   service: bindActionCreators({ clearDashboardAssetsTable }, dispatch)
 });
 
-export default compose<ComponentType<IDashboardOwnProps>>(
+export default compose<React.ComponentType<IDashboardOwnProps>>(
   translate(),
   connect(
     null,

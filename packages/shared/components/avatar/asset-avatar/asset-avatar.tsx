@@ -22,7 +22,7 @@ interface IAssetAvatarState {
   anchor?: EventTarget;
 }
 
-class AssetAvatar extends React.Component<
+class AssetAvatar extends React.PureComponent<
   IAssetAvatarProps,
   IAssetAvatarState
 > {

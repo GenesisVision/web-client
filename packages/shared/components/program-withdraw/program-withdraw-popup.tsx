@@ -13,7 +13,7 @@ enum PROGRAM_WITHDRAW_FORM {
   CONFIRM = "CONFIRM"
 }
 
-class _ProgramWithdrawPopup extends React.Component<
+class _ProgramWithdrawPopup extends React.PureComponent<
   IProgramWithdrawPopupProps & InjectedTranslateProps,
   State
 > {

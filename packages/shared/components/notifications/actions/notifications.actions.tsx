@@ -36,7 +36,7 @@ export type SkipTake = Readonly<{
   take: number;
 }>;
 
-export const notificationsToggle = (
+export const notificationsToggleAction = (
   isOpen?: boolean
 ): NotificationToggleAction => ({
   type: NOTIFICATIONS_TOGGLE,

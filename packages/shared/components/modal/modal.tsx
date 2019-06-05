@@ -5,7 +5,7 @@ import * as React from "react";
 import EventListener from "react-event-listener";
 import Portal from "shared/components/portal/portal";
 
-class Modal extends React.Component<Props> {
+class Modal extends React.PureComponent<Props> {
   handleKeyPress = (
     event: KeyboardEvent & React.MouseEvent<HTMLElement>
   ): void => {

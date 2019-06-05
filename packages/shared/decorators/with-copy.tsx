@@ -44,7 +44,7 @@ const mapDispatchToProps: IDispatchMap = {
   error: alertMessageActions.error
 };
 
-const Copy = compose<React.FunctionComponent<ICopyProps>>(
+const Copy = compose<React.FC<ICopyProps>>(
   connect<undefined, IDispatchMap, IOwnProps>(
     undefined,
     mapDispatchToProps

@@ -30,6 +30,9 @@
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
+    & .gv-btn {
+      margin-right: $padding-xsmall;
+    }
   }
 
   &__phone {

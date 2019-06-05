@@ -65,5 +65,7 @@ interface StateProps {
   events: SelectFilterValue<string>[];
 }
 
-const ProgramDetailsPage = connect(mapStateToProps)(_ProgramDetailsPage);
+const ProgramDetailsPage = React.memo(
+  connect(mapStateToProps)(_ProgramDetailsPage)
+);
 export default ProgramDetailsPage;

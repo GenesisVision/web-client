@@ -33,14 +33,16 @@ const DepositButton: React.FC<
 };
 
 const mapStateToProps = (state: RootState): IDepositButtonStateProps => {
-  const available = state.profileHeader.info.data
-    ? state.profileHeader.info.data.available
+  const available = state.profileHeader.data
+    ? state.profileHeader.data.available
     : 0;
   return {
     available
   };
 };
 
-const DepositButtonContainer = connect(mapStateToProps)(DepositButton);
+const DepositButtonContainer = React.memo(
+  connect(mapStateToProps)(DepositButton)
+);
 
 export default DepositButtonContainer;

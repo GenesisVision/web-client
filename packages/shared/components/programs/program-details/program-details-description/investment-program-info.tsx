@@ -5,6 +5,7 @@ import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 interface IInvestmentProgramInfoProps {
@@ -12,7 +13,7 @@ interface IInvestmentProgramInfoProps {
   programDescription: ProgramDetailsFull;
 }
 
-const InvestmentProgramInfo: React.FunctionComponent<
+const InvestmentProgramInfo: React.FC<
   InjectedTranslateProps & IInvestmentProgramInfoProps
 > = ({ t, programDescription, isOwnProgram }) => {
   const {
@@ -26,7 +27,12 @@ const InvestmentProgramInfo: React.FunctionComponent<
   return (
     <div className="program-details-description__statistic-container">
       <StatisticItem
-        label={t("program-details-page.description.avToInvest")}
+        label={
+          <TooltipLabel
+            tooltipContent={t("program-details-page.tooltip.av-to-invest")}
+            labelText={t("program-details-page.description.avToInvest")}
+          />
+        }
         className="program-details-description__short-statistic-item"
         accent
       >
@@ -37,7 +43,12 @@ const InvestmentProgramInfo: React.FunctionComponent<
         />
       </StatisticItem>
       <StatisticItem
-        label={t("program-details-page.description.entryFee")}
+        label={
+          <TooltipLabel
+            tooltipContent={t("program-details-page.tooltip.entry-fee")}
+            labelText={t("program-details-page.description.entryFee")}
+          />
+        }
         className="program-details-description__short-statistic-item"
         accent
       >
@@ -66,7 +77,12 @@ const InvestmentProgramInfo: React.FunctionComponent<
         )}
       </StatisticItem>
       <StatisticItem
-        label={t("program-details-page.description.successFee")}
+        label={
+          <TooltipLabel
+            tooltipContent={t("program-details-page.tooltip.success-fee")}
+            labelText={t("program-details-page.description.successFee")}
+          />
+        }
         className="program-details-description__short-statistic-item"
         accent
       >
@@ -77,8 +93,13 @@ const InvestmentProgramInfo: React.FunctionComponent<
         />
       </StatisticItem>
       <StatisticItem
+        label={
+          <TooltipLabel
+            tooltipContent={t("program-details-page.tooltip.stop-out-level")}
+            labelText={t("program-details-page.description.stop-out-level")}
+          />
+        }
         condition={!!stopOutLevel}
-        label={t("program-details-page.description.stop-out-level")}
         className="program-details-description__short-statistic-item"
         accent
       >
@@ -92,4 +113,4 @@ const InvestmentProgramInfo: React.FunctionComponent<
   );
 };
 
-export default translate()(InvestmentProgramInfo);
+export default React.memo(translate()(InvestmentProgramInfo));

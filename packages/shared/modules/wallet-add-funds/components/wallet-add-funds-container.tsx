@@ -9,7 +9,7 @@ import RootState from "shared/reducers/root-reducer";
 
 import WalletAddFundsForm, { CurrentWallet } from "./wallet-add-funds-form";
 
-class WalletAddFundsContainer extends React.Component<Props> {
+class WalletAddFundsContainer extends React.PureComponent<Props> {
   render() {
     const { currentWallet, notifySuccess, notifyError, wallets } = this.props;
     if (!wallets.length) return <DialogLoader />;

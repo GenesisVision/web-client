@@ -5,7 +5,7 @@ import { Redirect, Route } from "react-router-dom";
 import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import RootState from "shared/reducers/root-reducer";
 
-class _PrivateRoute extends React.Component<RouteProps & StateProps> {
+class _PrivateRoute extends React.PureComponent<RouteProps & StateProps> {
   renderComponent = (props: RouteComponentProps) => {
     const { component: Component, isAuthenticated } = this.props;
     return isAuthenticated && Component ? (

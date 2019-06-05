@@ -1,11 +1,10 @@
 import { replace } from "connected-react-router";
-import { InvestorRootState } from "investor-web-portal/src/reducers";
-import { ManagerRootState } from "manager-web-portal/src/reducers";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
-import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
 import * as authService from "../auth.service";
@@ -50,9 +49,8 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   }
   componentDidUpdate(): void {
     const { isSubmit, prefix, captchaType } = this.state;
-    const { from, service, type } = this.props;
-    const method =
-      ROLE_ENV === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
+    const { role, from, service, type } = this.props;
+    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":
@@ -169,15 +167,13 @@ interface OwnProps {
   type?: CODE_TYPE;
 }
 
-interface Props extends OwnProps, StateProps, DispatchProps {}
+interface Props extends OwnProps, StateProps, DispatchProps, WithRoleProps {}
 
-const CaptchaContainer = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps,
-  AuthRootState
->(
-  mapStateToProps,
-  mapDispatchToProps
+const CaptchaContainer = compose<React.ComponentType<OwnProps>>(
+  withRole,
+  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(_CaptchaContainer);
 export default CaptchaContainer;

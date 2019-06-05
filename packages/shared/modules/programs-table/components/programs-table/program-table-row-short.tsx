@@ -105,7 +105,7 @@ const ProgramTableRowShort: React.FC<
           </div>
         </div>
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--balance">
+      <TableCell className="programs-table__cell programs-table__cell--equity">
         <Tooltip
           render={() => (
             <div>
@@ -178,4 +178,4 @@ const ProgramTableRowShort: React.FC<
   );
 };
 
-export default translate()(ProgramTableRowShort);
+export default React.memo(translate()(ProgramTableRowShort));
