@@ -8,7 +8,22 @@ import GVScroll from "shared/components/scroll/gvscroll";
 
 import { INavigateTab } from "../programs-rating/programs-rating-container";
 
-interface ITabsContainerProps {
+const _TabsContainer: React.FC<Props> = ({ tabs, tab, handleTabChange }) => (
+  <GVScroll autoHide autoHeight autoHeightMax={60}>
+    <GVTabs value={tab.name} onChange={handleTabChange}>
+      {tabs.map(tab => (
+        <GVTab
+          key={tab.name}
+          value={tab.name}
+          label={tab.label}
+          count={tab.count}
+        />
+      ))}
+    </GVTabs>
+  </GVScroll>
+);
+
+interface Props extends InjectedTranslateProps {
   tabs: INavigateTab[];
   tab: INavigateTab;
   handleTabChange(
@@ -17,29 +32,9 @@ interface ITabsContainerProps {
   ): void;
 }
 
-class TabsContainer extends React.PureComponent<
-  ITabsContainerProps & InjectedTranslateProps
-> {
-  render() {
-    const { tabs, tab, handleTabChange } = this.props;
-    return (
-      <GVScroll autoHide autoHeight autoHeightMax={60}>
-        <GVTabs value={tab.name} onChange={handleTabChange}>
-          {tabs.map(tab => (
-            <GVTab
-              key={tab.name}
-              value={tab.name}
-              label={tab.label}
-              count={tab.count}
-            />
-          ))}
-        </GVTabs>
-      </GVScroll>
-    );
-  }
-}
-
-export default compose<React.ComponentType<ITabsContainerProps>>(
+const TabsContainer = compose<React.ComponentType<Props>>(
+  React.memo,
   translate(),
   withRouter
-)(TabsContainer);
+)(_TabsContainer);
+export default TabsContainer;
