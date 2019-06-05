@@ -15,7 +15,7 @@ const renderPrefix = (value: string, prefix: PROFITABILITY_PREFIX) => {
   if (+value < 0) return composeProfitabilityPrefix(prefix).negative;
 };
 
-const _Profitability: React.FC<Props> = ({
+export const _Profitability: React.FC<Props> = ({
   className,
   value,
   variant = PROFITABILITY_VARIANT.TEXT,
