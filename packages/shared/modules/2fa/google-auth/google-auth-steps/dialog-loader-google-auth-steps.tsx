@@ -27,7 +27,7 @@ const mapStateToProps = ({
   innerWidth: ui.innerWidth
 });
 
-const DialogLoaderGoogleAuthSteps = compose(
+const DialogLoaderGoogleAuthSteps = compose<React.ComponentType>(
   React.memo,
   connect(mapStateToProps)
 )(_DialogLoaderGoogleAuthSteps);
