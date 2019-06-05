@@ -47,7 +47,12 @@ const _StatisticItem: React.FC<Props> = ({
         className
       )}
     >
-      <div className={"statistics-item__top " + generateClasses(ITEM.LABEL)}>
+      <div
+        className={classNames(
+          "statistics-item__top",
+          generateClasses(ITEM.LABEL)
+        )}
+      >
         {label}
       </div>
       <div className={generateClasses(ITEM.VALUE)}>{children}</div>
