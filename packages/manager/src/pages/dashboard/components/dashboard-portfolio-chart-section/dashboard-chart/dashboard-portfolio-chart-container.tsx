@@ -9,14 +9,12 @@ import ProgramProfitChart
   from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { CurrencyEnum } from "shared/utils/types";
 
 import { IDashboardAssetChart } from "../../../reducers/dashboard.reducers";
 import { getAssetChart, setPeriod } from "../../../services/dashboard.service";
 
 const _DashboardPortfolioChartContainer: React.FC<Props> = ({
   assetChart,
-  currency,
   period,
   service
 }) => {
@@ -39,7 +37,7 @@ const _DashboardPortfolioChartContainer: React.FC<Props> = ({
           <ProgramProfitChart
             equityChart={assetChart.equityChart}
             pnlChart={assetChart.pnLChart!}
-            currency={currency}
+            currency={assetChart.currency}
           />
         )}
         {assetChart.type === ASSETS_TYPES.Fund && (
@@ -69,7 +67,6 @@ interface DispatchProps {
 
 interface OwnProps {
   assetChart: IDashboardAssetChart;
-  currency: CurrencyEnum;
   period: ChartDefaultPeriod;
 }
 
