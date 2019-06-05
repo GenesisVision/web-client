@@ -1,19 +1,13 @@
-import { line } from "d3-shape";
-import { OrderSignalModel, OrderSignalProgramInfo } from "gv-api-web";
+import { OrderSignalModel } from "gv-api-web";
 import { FeesPopover } from "modules/copytrading-tables/components/fees-popover";
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { GVScroll } from "shared/components/scroll/gvscroll";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
-import Tooltip from "shared/components/tooltip/tooltip";
 import { formatValue } from "shared/utils/formatter";
 
 const DECIMAL_SCALE = 8;

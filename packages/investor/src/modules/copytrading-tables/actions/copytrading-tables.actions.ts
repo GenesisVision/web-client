@@ -1,3 +1,4 @@
+import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import signalApi from "shared/services/api-client/signal-api";
 
 export const CLEAR_COPYTRADING_TABLE = "CLEAR_COPYTRADING_TABLE";
@@ -15,7 +16,10 @@ export const fetchCopytradingOpenTrades = (auth: string, filters: any) => {
   };
 };
 
-export const fetchCopytradingTradesHistory = (auth: string, filters: any) => {
+export const fetchCopytradingTradesHistory = (
+  auth: string,
+  filters: ComposeFiltersAllType
+) => {
   return {
     type: COPYTRADING_TRADES_HISTORY,
     payload: signalApi.v10SignalTradesGet(auth, filters)
