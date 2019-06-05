@@ -8,6 +8,7 @@ import GVTextField from "shared/components/gv-text-field";
 import CopyIcon from "shared/components/icon/copy-icon";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import withLoader from "shared/decorators/with-loader";
 import filesService from "shared/services/file-service";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -98,7 +99,7 @@ class _WalletAddFundsForm extends React.PureComponent<Props, State> {
   }
 }
 
-const WalletAddFundsForm = translate()(_WalletAddFundsForm);
+const WalletAddFundsForm = withLoader(translate()(_WalletAddFundsForm));
 export default WalletAddFundsForm;
 
 export interface CurrentWallet {
