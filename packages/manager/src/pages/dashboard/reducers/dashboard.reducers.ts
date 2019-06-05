@@ -23,7 +23,7 @@ export interface IDashboardAssetChart {
   type: ASSETS_TYPES;
   id: string;
   title: string;
-  currencyChart?: CurrencyEnum;
+  currency?: CurrencyEnum;
   equityChart: ChartSimple[];
   pnLChart?: ChartSimple[];
 }

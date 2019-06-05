@@ -33,7 +33,7 @@ export const getAssetChart = (
             type: assetType,
             id: assetId,
             title: assetTitle,
-            currencyChart: data.programCurrency,
+            currency: data.programCurrency,
             pnLChart: data.pnLChart,
             equityChart: data.equityChart
           })

@@ -36,7 +36,7 @@ class _DashboardPortfolioChartContainer extends React.PureComponent<Props> {
             <ProgramProfitChart
               equityChart={assetChart.equityChart}
               pnlChart={assetChart.pnLChart!}
-              currency={assetChart.currencyChart}
+              currency={assetChart.currency}
             />
           )}
           {assetChart.type === ASSETS_TYPES.Fund && (
