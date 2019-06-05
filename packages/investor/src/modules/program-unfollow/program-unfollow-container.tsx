@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-const ProgramUnfollowContainer = compose(
+const ProgramUnfollowContainer = compose<React.ComponentType<OwnProps>>(
   React.memo,
   connect<null, DispatchProps, OwnProps>(
     null,
@@ -60,9 +60,9 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface OwnProps {
+interface OwnProps extends IDialogProps {
   id: string;
   onApply(): void;
 }
 
-interface Props extends OwnProps, DispatchProps, IDialogProps {}
+interface Props extends OwnProps, DispatchProps {}
