@@ -23,7 +23,9 @@ const _TabsContainer: React.FC<Props> = ({ tabs, tab, handleTabChange }) => (
   </GVScroll>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends InjectedTranslateProps, OwnProps {}
+
+interface OwnProps {
   tabs: INavigateTab[];
   tab: INavigateTab;
   handleTabChange(
@@ -32,7 +34,7 @@ interface Props extends InjectedTranslateProps {
   ): void;
 }
 
-const TabsContainer = compose<React.ComponentType<Props>>(
+const TabsContainer = compose<React.ComponentType<OwnProps>>(
   React.memo,
   translate(),
   withRouter
