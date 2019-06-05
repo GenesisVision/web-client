@@ -6,25 +6,8 @@ import NumberFormat from "react-number-format";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-enum ITEM {
-  LABEL = "LABEL",
-  VALUE = "VALUE"
-}
-
-export interface IFollowStatisticItemProps {
-  label: string | React.ReactNode;
-  equivalent?: string | number;
-  equivalentCurrency?: string;
-  small?: boolean;
-  big?: boolean;
-  large?: boolean;
-  accent?: boolean;
-  half?: boolean;
-  invert?: boolean;
-  className?: string;
-}
-const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
-  invert = false,
+const _StatisticItem: React.FC<Props> = ({
+  invert,
   large,
   big,
   small,
@@ -36,7 +19,7 @@ const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
   equivalent,
   equivalentCurrency
 }) => {
-  const generateClasses = (item: ITEM, invert: boolean) => {
+  const generateClasses = (item: ITEM) => {
     switch (
       (item === ITEM.VALUE && !invert) || (item === ITEM.LABEL && invert)
     ) {
@@ -64,16 +47,10 @@ const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
         className
       )}
     >
-      {label && (
-        <div
-          className={
-            "statistics-item__top " + generateClasses(ITEM.LABEL, invert)
-          }
-        >
-          {label}
-        </div>
-      )}
-      <div className={generateClasses(ITEM.VALUE, invert)}>{children}</div>
+      <div className={"statistics-item__top " + generateClasses(ITEM.LABEL)}>
+        {label}
+      </div>
+      <div className={generateClasses(ITEM.VALUE)}>{children}</div>
       {equivalent !== undefined && equivalentCurrency !== undefined ? (
         <div className="statistics-item__equivalent">
           {
@@ -90,5 +67,23 @@ const _StatisticItem: React.FC<IFollowStatisticItemProps> = ({
   );
 };
 
-const StatisticItem = withLoader(React.memo(_StatisticItem));
+enum ITEM {
+  LABEL = "LABEL",
+  VALUE = "VALUE"
+}
+
+interface Props {
+  label: string | React.ReactNode;
+  equivalent?: string | number;
+  equivalentCurrency?: string;
+  small?: boolean;
+  big?: boolean;
+  large?: boolean;
+  accent?: boolean;
+  half?: boolean;
+  invert?: boolean;
+  className?: string;
+}
+
+const StatisticItem = React.memo(withLoader(_StatisticItem));
 export default StatisticItem;
