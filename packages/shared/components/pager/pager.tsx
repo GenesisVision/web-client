@@ -1,60 +1,60 @@
 import "./pager.scss";
 
-import * as React from "react";
+import React, { useCallback } from "react";
 
 import PagerButton from "./pager-button";
 
-class Pager extends React.PureComponent<Props> {
-  handleChange = (page: number) => (): void => this.props.onPageChanged(page);
-
-  render() {
-    const { total, current, countVisiblePages = 3 } = this.props;
-    const half = Math.floor(countVisiblePages / 2);
-    const firstPage =
-      (current <= half + 1 && 1) ||
-      (current >= total - half && total - countVisiblePages + 1) ||
-      current - half;
-    const visiblePages = generateVisiblePages(firstPage, countVisiblePages);
-    return (
-      <div className="pager">
-        {firstPage > 1 && (
-          <div className="pager__pager-block">
-            <PagerButton
-              page={1}
-              current={current}
-              clickHandle={this.handleChange}
-            />
-            {firstPage > 2 && <PagerSeparator />}
-          </div>
-        )}
+const _Pager: React.FC<Props> = ({
+  total,
+  current,
+  countVisiblePages = 3,
+  onPageChanged
+}) => {
+  const handleChange = useCallback(
+    (page: number) => (): void => onPageChanged(page),
+    [onPageChanged]
+  );
+  const half = Math.floor(countVisiblePages / 2);
+  const firstPage =
+    (current <= half + 1 && 1) ||
+    (current >= total - half && total - countVisiblePages + 1) ||
+    current - half;
+  const visiblePages = generateVisiblePages(firstPage, countVisiblePages);
+  return (
+    <div className="pager">
+      {firstPage > 1 && (
         <div className="pager__pager-block">
-          {visiblePages
-            .filter(page => page <= total)
-            .map(page => (
-              <PagerButton
-                key={page}
-                page={page}
-                current={current}
-                clickHandle={this.handleChange}
-              />
-            ))}
+          <PagerButton page={1} current={current} clickHandle={handleChange} />
+          {firstPage > 2 && <PagerSeparator />}
         </div>
-        {total - firstPage >= countVisiblePages && (
-          <div className="pager__pager-block">
-            {total - firstPage > countVisiblePages && <PagerSeparator />}
+      )}
+      <div className="pager__pager-block">
+        {visiblePages
+          .filter(page => page <= total)
+          .map(page => (
             <PagerButton
-              page={total}
+              key={page}
+              page={page}
               current={current}
-              clickHandle={this.handleChange}
+              clickHandle={handleChange}
             />
-          </div>
-        )}
+          ))}
       </div>
-    );
-  }
-}
+      {total - firstPage >= countVisiblePages && (
+        <div className="pager__pager-block">
+          {total - firstPage > countVisiblePages && <PagerSeparator />}
+          <PagerButton
+            page={total}
+            current={current}
+            clickHandle={handleChange}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
 
-export const PagerSeparator = (): JSX.Element => (
+export const PagerSeparator: React.FC = () => (
   <div className="pager__separator">...</div>
 );
 
@@ -71,4 +71,5 @@ interface Props {
   countVisiblePages?: number;
 }
 
+const Pager = React.memo(_Pager);
 export default Pager;
