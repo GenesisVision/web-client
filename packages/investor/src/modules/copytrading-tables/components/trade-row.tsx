@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import Chip from "shared/components/chip/chip";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVButton from "shared/components/gv-button";
 import BaseProfitability from "shared/components/profitability/base-profitability";
@@ -34,7 +35,8 @@ const _TradeRow: React.FC<Props> = ({
   const [state, setState] = useState<boolean>(false);
   const [isOpenPopup, setOpenPopup] = useState<boolean>(false);
   const program = trade.providers[0].program;
-  const hasOtherPrograms = trade.providers.length - 1 > 0;
+  const otherPrograms = trade.providers.slice(1);
+  const hasOtherPrograms = otherPrograms.length > 0;
   return (
     <>
       <TableRow
@@ -65,6 +67,7 @@ const _TradeRow: React.FC<Props> = ({
                 {program.title}
               </GVButton>
             </Link>
+            {hasOtherPrograms ? <Chip>+{otherPrograms.length}</Chip> : null}
           </div>
         </TableCell>
         <TableCell className="details-trades__cell program-details-trades__cell--symbol">
@@ -137,17 +140,15 @@ const _TradeRow: React.FC<Props> = ({
         </TableCell>
       </TableRow>
       {state
-        ? trade.providers
-            .slice(1)
-            .map(provider => (
-              <TradeSubRow
-                key={trade.id}
-                provider={provider}
-                tradeId={trade.id}
-                symbol={trade.symbol}
-                update={update}
-              />
-            ))
+        ? otherPrograms.map(provider => (
+            <TradeSubRow
+              key={trade.id}
+              provider={provider}
+              tradeId={trade.id}
+              symbol={trade.symbol}
+              update={update}
+            />
+          ))
         : null}
     </>
   );
