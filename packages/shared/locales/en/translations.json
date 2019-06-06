@@ -1525,6 +1525,8 @@
           "provide-signals": "Provide signals",
           "subscription-fee": "Subscription fee",
           "stop-out-level": "Stop out level",
+          "investment-limit": "Investment Limit",
+          "enter-correct-amount": "Enter correct amount",
           "name": "Name",
           "name-requirements": "Requirement from 4 to 20 symbols",
           "account-type": "Account type",
@@ -1589,7 +1591,9 @@
           "signal-volume-fee-required": "Volume fee is required",
           "signal-volume-fee-min": "Volume fee must be greater than {{min} %",
           "signal-volume-fee-max": "Volume fee must be less than {{max}} %",
-          "account-type-required": "Account type is required"
+          "account-type-required": "Account type is required",
+          "investment-limit-min": "Investment Limit must be greater than 0",
+          "investment-limit-required": "Investment Limit is required"
         }
       },
       "notifications": {
