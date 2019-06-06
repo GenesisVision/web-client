@@ -1,6 +1,7 @@
 import { OrderSignalProgramInfo } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 
 const _ProviderFees: React.FC<Props> = ({ provider, isOnlyOne, t }) => {
@@ -28,9 +29,14 @@ const _ProviderFees: React.FC<Props> = ({ provider, isOnlyOne, t }) => {
   );
 };
 
-export const ProviderFees = translate()(React.memo(_ProviderFees));
+export const ProviderFees = compose<React.FC<OwnProps>>(
+  translate(),
+  React.memo
+)(_ProviderFees);
 
-type Props = InjectedTranslateProps & {
+interface OwnProps {
   provider: OrderSignalProgramInfo;
   isOnlyOne: boolean;
-};
+}
+
+interface Props extends InjectedTranslateProps, OwnProps {}

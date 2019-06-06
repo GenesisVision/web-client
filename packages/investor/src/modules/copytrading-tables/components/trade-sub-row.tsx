@@ -83,8 +83,9 @@ const TradeSubRow = compose<React.FC<OwnProps>>(
     {
       closeCopytradingTrade
     }
-  )
-)(React.memo(_TradeSubRow));
+  ),
+  React.memo
+)(_TradeSubRow);
 
 export default TradeSubRow;
 

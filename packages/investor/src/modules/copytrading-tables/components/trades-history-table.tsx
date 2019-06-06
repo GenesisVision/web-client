@@ -15,22 +15,7 @@ import { getCopytradingTradesHistory } from "../services/copytrading-tables.serv
 import { COPYTRADING_TRADES_HISTORY_COLUMNS } from "./copytrading-tables.constants";
 import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.selectors";
 
-interface ITradesHistoryTableOwnProps {
-  title: string;
-  currency?: string;
-}
-
-interface ITradesHistoryDispatchProps {
-  service: {
-    clearCopytradingTable(): void;
-  };
-}
-
-class _TradesHistoryTable extends React.PureComponent<
-  ITradesHistoryTableOwnProps &
-    InjectedTranslateProps &
-    ITradesHistoryDispatchProps
-> {
+class _TradesHistoryTable extends React.PureComponent<Props> {
   componentWillUnmount() {
     this.props.service.clearCopytradingTable();
   }
@@ -78,7 +63,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   service: bindActionCreators({ clearCopytradingTable }, dispatch)
 });
 
-const TradesHistoryTable = compose<React.FC<ITradesHistoryTableOwnProps>>(
+const TradesHistoryTable = compose<React.FC<OwnProps>>(
   translate(),
   connect(
     null,
@@ -87,3 +72,16 @@ const TradesHistoryTable = compose<React.FC<ITradesHistoryTableOwnProps>>(
 )(_TradesHistoryTable);
 
 export default TradesHistoryTable;
+
+interface OwnProps {
+  title: string;
+  currency?: string;
+}
+
+interface DispatchProps {
+  service: {
+    clearCopytradingTable(): void;
+  };
+}
+
+interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}

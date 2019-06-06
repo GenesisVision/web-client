@@ -33,8 +33,8 @@ const _TradeRow: React.FC<Props> = ({
   title,
   update
 }) => {
-  const [state, setState] = useState<boolean>(false);
-  const [isOpenPopup, setOpenPopup] = useState<boolean>(false);
+  const [isOpenSubrows, toggleSubrows] = useState<boolean>(false);
+  const [isOpenPopup, togglePopup] = useState<boolean>(false);
   const program = trade.providers[0].program;
   const otherPrograms = trade.providers.slice(1);
   const hasOtherPrograms = otherPrograms.length > 0;
@@ -42,7 +42,9 @@ const _TradeRow: React.FC<Props> = ({
     <>
       <TableRow
         className="details-trades__row"
-        onClick={hasOtherPrograms ? () => setState(!state) : undefined}
+        onClick={
+          hasOtherPrograms ? () => toggleSubrows(!isOpenSubrows) : undefined
+        }
       >
         <TableCell className="details-trades__cell program-details-trades__cell--direction">
           <div className="dashboard-programs__cell--avatar-title">
@@ -120,7 +122,7 @@ const _TradeRow: React.FC<Props> = ({
           </Profitability>
         </TableCell>
         <TableCell>
-          <GVButton variant="text" onClick={() => setOpenPopup(true)}>
+          <GVButton variant="text" onClick={() => togglePopup(true)}>
             {t("buttons.cancel")}
           </GVButton>
           <ConfirmPopup
@@ -129,10 +131,10 @@ const _TradeRow: React.FC<Props> = ({
               symbol: trade.symbol,
               volume: trade.volume
             })}
-            onClose={() => setOpenPopup(false)}
+            onClose={() => togglePopup(false)}
             open={isOpenPopup}
             onApply={() => {
-              setOpenPopup(false);
+              togglePopup(false);
               closeCopytradingTrade(trade.id, () => {
                 update(undefined);
               });
@@ -140,7 +142,7 @@ const _TradeRow: React.FC<Props> = ({
           />
         </TableCell>
       </TableRow>
-      {state
+      {isOpenSubrows
         ? otherPrograms.map(provider => (
             <TradeSubRow
               key={trade.id}
@@ -164,8 +166,9 @@ const TradeRow = compose<React.FC<OwnProps>>(
   connect(
     undefined,
     mapDispatchToProps
-  )
-)(React.memo(_TradeRow));
+  ),
+  React.memo
+)(_TradeRow);
 
 export default TradeRow;
 

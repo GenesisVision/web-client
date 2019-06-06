@@ -2,6 +2,7 @@ import { OrderSignalModel } from "gv-api-web";
 import { ProviderFees } from "modules/copytrading-tables/components/provider-fee";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { compose } from "redux";
 import { GVScroll } from "shared/components/scroll/gvscroll";
 import Tooltip from "shared/components/tooltip/tooltip";
 
@@ -46,8 +47,13 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
   );
 };
 
-export const FeesPopover = translate()(React.memo(_FeesPopover));
+export const FeesPopover = compose<React.FC<OwnProps>>(
+  translate(),
+  React.memo
+)(_FeesPopover);
 
-type Props = InjectedTranslateProps & {
+interface Props extends InjectedTranslateProps, OwnProps {}
+
+interface OwnProps {
   trade: OrderSignalModel;
-};
+}
