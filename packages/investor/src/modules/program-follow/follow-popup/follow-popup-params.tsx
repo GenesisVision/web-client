@@ -25,17 +25,17 @@ const _FollowParams: React.FC<
 }) => {
   const { mode } = values;
   const setMaxOpenTolerancePercent = useCallback(() => {
-    setFieldValue("openTolerancePercent", "20");
+    setFieldValue(FIELDS.openTolerancePercent, "20");
   }, []);
   const setMaxVolumePercent = useCallback(() => {
-    setFieldValue("percent", "999");
+    setFieldValue(FIELDS.percent, "999");
   }, []);
   const disableButton = isSubmitting || !isValid;
   return (
     <form className="dialog__bottom" id="follow-params" onSubmit={handleSubmit}>
       <div className="dialog-field">
         <GVFormikField
-          name="mode"
+          name={FIELDS.mode}
           component={GVTextField}
           label={t("follow-program.params.type")}
           InputComponent={Select}
@@ -50,7 +50,7 @@ const _FollowParams: React.FC<
       {mode === modes.percentage.value && (
         <div className="dialog-field">
           <InputAmountField
-            name="percent"
+            name={FIELDS.percent}
             label={t("follow-program.params.volume-percent")}
             currency={"%"}
             setMax={setMaxVolumePercent}
@@ -60,7 +60,7 @@ const _FollowParams: React.FC<
       {mode === modes.fixed.value && (
         <div className="dialog-field">
           <InputAmountField
-            name="fixedVolume"
+            name={FIELDS.fixedVolume}
             label={t("follow-program.params.usd-equivalent")}
             currency={"USD"}
           />
@@ -68,7 +68,7 @@ const _FollowParams: React.FC<
       )}
       <div className="dialog-field">
         <InputAmountField
-          name="openTolerancePercent"
+          name={FIELDS.openTolerancePercent}
           label={t("follow-program.params.tolerance-percent")}
           currency={"%"}
           setMax={setMaxOpenTolerancePercent}
@@ -92,9 +92,16 @@ const _FollowParams: React.FC<
   );
 };
 
+enum FIELDS {
+  mode = "mode",
+  openTolerancePercent = "openTolerancePercent",
+  percent = "percent",
+  fixedVolume = "fixedVolume"
+}
+
 type mode = {
   label: string;
-  value: string;
+  value: AttachToSignalProviderModeEnum;
 };
 
 const modes: { [key: string]: mode } = {
@@ -104,10 +111,10 @@ const modes: { [key: string]: mode } = {
 };
 
 export interface FollowParamsFormValues {
-  mode: AttachToSignalProviderModeEnum;
-  openTolerancePercent: number;
-  percent: number;
-  fixedVolume: number;
+  [FIELDS.mode]: AttachToSignalProviderModeEnum;
+  [FIELDS.openTolerancePercent]: number;
+  [FIELDS.percent]: number;
+  [FIELDS.fixedVolume]: number;
 }
 
 interface OwnProps {
@@ -131,23 +138,25 @@ const FollowParams = compose<React.ComponentType<OwnProps>>(
     mapPropsToValues: props => {
       const params = props.paramsSubscription;
       return {
-        mode: params
+        [FIELDS.mode]: params
           ? params.mode
           : (modes.byBalance.value as AttachToSignalProviderModeEnum),
-        openTolerancePercent: params ? params.openTolerancePercent : 0.5,
-        fixedVolume: params ? params.fixedVolume : 100,
-        percent: params ? params.percent : 10
+        [FIELDS.openTolerancePercent]: params
+          ? params.openTolerancePercent
+          : 0.5,
+        [FIELDS.fixedVolume]: params ? params.fixedVolume : 100,
+        [FIELDS.percent]: params ? params.percent : 10
       };
     },
     validationSchema: ({ t }: Props) =>
       object().shape({
-        fixedVolume: number()
+        [FIELDS.fixedVolume]: number()
           .min(0, t("follow-program.params.validation.fixedVolume-min"))
           .max(99999, t("follow-program.params.validation.fixedVolume-max")),
-        percent: number()
+        [FIELDS.percent]: number()
           .min(1, t("follow-program.params.validation.percent-min"))
           .max(999, t("follow-program.params.validation.percent-max")),
-        openTolerancePercent: number()
+        [FIELDS.openTolerancePercent]: number()
           .required(t("follow-program.params.validation.tolerance-required"))
           .min(
             0.01,
