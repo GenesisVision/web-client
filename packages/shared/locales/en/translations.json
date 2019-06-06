@@ -693,9 +693,10 @@
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {
-      "personal-details": "Personal details",
+      "details": "Personal details",
       "settings": "Settings",
-      "verify": "Verify"
+      "verify": "Verify",
+      "social-links": "Social links"
     },
     "verification": {
       "phone": {
@@ -715,6 +716,14 @@
       "image-success-save-message": "The photo has just been successfully changed.",
       "logout-from-another-devices": "Logout from other devices",
       "change-password": "Change password"
+    },
+    "social-links": {
+      "validation": {
+        "link-max-length": "The maximum link length is 100 characters."
+      },
+      "notifications": {
+        "edit-success": "Your profile was successfully updated."
+      }
     }
   },
   "transactions-details": {

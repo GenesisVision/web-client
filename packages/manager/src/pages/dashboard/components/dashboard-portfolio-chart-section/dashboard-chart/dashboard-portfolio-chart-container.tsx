@@ -12,7 +12,6 @@ import FundProfitChart from "shared/components/funds/fund-details/fund-details-s
 import ProgramProfitChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { CurrencyEnum } from "shared/utils/types";
 
 import { IDashboardAssetChart } from "../../../reducers/dashboard.reducers";
 import { getAssetChart, setPeriod } from "../../../services/dashboard.service";
@@ -25,7 +24,7 @@ class _DashboardPortfolioChartContainer extends React.PureComponent<Props> {
   };
 
   render() {
-    const { assetChart, currency, period } = this.props;
+    const { assetChart, period } = this.props;
     return (
       <>
         <h3 className="dashboard-portfolio-chart-section__heading">
@@ -37,7 +36,7 @@ class _DashboardPortfolioChartContainer extends React.PureComponent<Props> {
             <ProgramProfitChart
               equityChart={assetChart.equityChart}
               pnlChart={assetChart.pnLChart!}
-              currency={currency}
+              currency={assetChart.currency}
             />
           )}
           {assetChart.type === ASSETS_TYPES.Fund && (
@@ -68,7 +67,6 @@ interface DispatchProps {
 
 interface OwnProps {
   assetChart: IDashboardAssetChart;
-  currency: CurrencyEnum;
   period: ChartDefaultPeriod;
 }
 
