@@ -25,10 +25,7 @@ export const fetchBrokers = (): CancelablePromise<Broker[]> =>
   });
 
 export const createProgram = (
-  createProgramData: Pick<
-    ICreateProgramSettingsFormValues,
-    keyof NewProgramRequest
-  >
+  createProgramData: ICreateProgramSettingsFormValues
 ): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => () => {
   const authorization = authService.getAuthArg();
 
