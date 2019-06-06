@@ -45,23 +45,25 @@ class _DashboardCopytrading extends React.PureComponent<Props> {
         renderFilters={(
           updateFilter: UpdateFilterFunc,
           filtering: FilteringType
-        ) => (
-          <>
-            <SelectFilter
-              name={ACTION_STATUS_FILTER_NAME}
-              label={t(`${role}.dashboard-page.actions-status-filter.label`)}
-              value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType}
-              values={ACTION_STATUS_FILTER_VALUES}
-              onChange={updateFilter}
-            />
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.program-start")}
-            />
-          </>
-        )}
+        ) => {
+          return (
+            <>
+              <SelectFilter
+                name={ACTION_STATUS_FILTER_NAME}
+                label={t(`${role}.dashboard-page.actions-status-filter.label`)}
+                value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType}
+                values={ACTION_STATUS_FILTER_VALUES}
+                onChange={updateFilter}
+              />
+              <DateRangeFilter
+                name={DATE_RANGE_FILTER_NAME}
+                value={filtering[DATE_RANGE_FILTER_NAME]}
+                onChange={updateFilter}
+                startLabel={t("filters.date-range.program-start")}
+              />
+            </>
+          );
+        }}
         renderHeader={(column: Column) =>
           t(`investor.dashboard-page.copytrading-header.${column.name}`)
         }

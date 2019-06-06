@@ -61,7 +61,7 @@ export const closeCopytradingTrade: CloseCopytradingTrade = (
       onSuccess();
       dispatch(
         alertMessageActions.success(
-          "investor.dashboard-page.trades.close-trade-confirm.success-message",
+          "investor.copytrading-tables.close-trade-confirm.success-message",
           true
         )
       );
@@ -69,7 +69,7 @@ export const closeCopytradingTrade: CloseCopytradingTrade = (
     .catch(() => {
       dispatch(
         alertMessageActions.error(
-          "investor.dashboard-page.trades.close-trade-confirm.error-message",
+          "investor.copytrading-tables.close-trade-confirm.error-message",
           true
         )
       );

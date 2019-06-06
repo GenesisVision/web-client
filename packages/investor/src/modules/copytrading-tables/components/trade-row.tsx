@@ -1,4 +1,5 @@
 import { OrderSignalModel } from "gv-api-web";
+import { DECIMAL_SCALE } from "modules/copytrading-tables/components/copytrading-tables.constants";
 import TradeSubRow from "modules/copytrading-tables/components/trade-sub-row";
 import {
   CloseCopytradingTrade,
@@ -23,24 +24,22 @@ import TableRow from "shared/components/table/components/table-row";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
-const DECIMAL_SCALE = 8;
-
 const _TradeRow: React.FC<Props> = ({
   trade,
   closeCopytradingTrade,
   t,
-  title
+  title,
+  update
 }) => {
   const [state, setState] = useState<boolean>(false);
   const [isOpenPopup, setOpenPopup] = useState<boolean>(false);
   const program = trade.providers[0].program;
+  const hasOtherPrograms = trade.providers.length - 1 > 0;
   return (
     <>
       <TableRow
         className="details-trades__row"
-        onClick={
-          trade.providers.length > 1 ? () => setState(!state) : undefined
-        }
+        onClick={hasOtherPrograms ? () => setState(!state) : undefined}
       >
         <TableCell className="details-trades__cell program-details-trades__cell--direction">
           <div className="dashboard-programs__cell--avatar-title">
@@ -130,19 +129,25 @@ const _TradeRow: React.FC<Props> = ({
             open={isOpenPopup}
             onApply={() => {
               setOpenPopup(false);
-              closeCopytradingTrade(trade.id, () => {});
+              closeCopytradingTrade(trade.id, () => {
+                update();
+              });
             }}
           />
         </TableCell>
       </TableRow>
       {state
-        ? trade.providers.map(provider => (
-            <TradeSubRow
-              provider={provider}
-              tradeId={trade.id}
-              symbol={trade.symbol}
-            />
-          ))
+        ? trade.providers
+            .slice(1)
+            .map(provider => (
+              <TradeSubRow
+                key={trade.id}
+                provider={provider}
+                tradeId={trade.id}
+                symbol={trade.symbol}
+                update={update}
+              />
+            ))
         : null}
     </>
   );
@@ -167,6 +172,7 @@ interface Props extends DispatchProps, OwnProps, InjectedTranslateProps {}
 interface OwnProps {
   trade: OrderSignalModel;
   title: string;
+  update: () => void;
 }
 
 interface DispatchProps {

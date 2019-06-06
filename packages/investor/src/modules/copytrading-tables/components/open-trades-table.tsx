@@ -38,8 +38,14 @@ class OpenTradesTable extends React.PureComponent<
             {t(`investor.copytrading-tables.open-trades-header.${column.name}`)}
           </span>
         )}
-        renderBodyRow={(trade: OrderSignalModel) => (
-          <TradeRow trade={trade} title={title} />
+        renderBodyRow={(trade: OrderSignalModel, updateRow) => (
+          <TradeRow
+            key={trade.id}
+            trade={trade}
+            title={title}
+            //@ts-ignore
+            update={updateRow}
+          />
         )}
       />
     );
@@ -47,7 +53,8 @@ class OpenTradesTable extends React.PureComponent<
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  service: bindActionCreators({ clearCopytradingTable }, dispatch)
+  service: bindActionCreators({ clearCopytradingTable }, dispatch),
+  dispatch
 });
 
 export default compose<ComponentType<OwnProps>>(
