@@ -90,7 +90,7 @@ class TableModule extends React.PureComponent<
           isPending: false
         }));
       })
-      .catch(error => {
+      .catch(() => {
         this.setState({ isPending: false });
       });
   };

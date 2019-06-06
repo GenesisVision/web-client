@@ -28,7 +28,7 @@ const _ProviderFees: React.FC<Props> = ({ provider, isOnlyOne, t }) => {
   );
 };
 
-export const ProviderFees = translate()(_ProviderFees);
+export const ProviderFees = translate()(React.memo(_ProviderFees));
 
 type Props = InjectedTranslateProps & {
   provider: OrderSignalProgramInfo;

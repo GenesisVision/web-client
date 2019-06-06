@@ -14,10 +14,17 @@ import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVButton from "shared/components/gv-button";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { UpdateRowFuncType } from "shared/components/table/components/table.types";
 import { formatValue } from "shared/utils/formatter";
 
-const _TradeSubRow: React.FC<Props> = props => {
-  const { provider, tradeId, closeCopytradingTrade, symbol, t, update } = props;
+const _TradeSubRow: React.FC<Props> = ({
+  provider,
+  tradeId,
+  closeCopytradingTrade,
+  symbol,
+  t,
+  update
+}) => {
   const [isOpenPopup, setOpenPopup] = useState<boolean>(false);
   return (
     <TableRow key={provider.programId}>
@@ -57,7 +64,11 @@ const _TradeSubRow: React.FC<Props> = props => {
           open={isOpenPopup}
           onApply={() => {
             setOpenPopup(false);
-            closeCopytradingTrade(tradeId, () => update(), provider.programId);
+            closeCopytradingTrade(
+              tradeId,
+              () => update(undefined),
+              provider.programId
+            );
           }}
         />
       </TableCell>
@@ -73,7 +84,7 @@ const TradeSubRow = compose<React.FC<OwnProps>>(
       closeCopytradingTrade
     }
   )
-)(_TradeSubRow);
+)(React.memo(_TradeSubRow));
 
 export default TradeSubRow;
 
@@ -83,7 +94,7 @@ interface OwnProps {
   provider: OrderSignalProgramInfo;
   tradeId: string;
   symbol: string;
-  update: () => void;
+  update: UpdateRowFuncType;
 }
 
 interface DispatchProps {

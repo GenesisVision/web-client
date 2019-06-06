@@ -22,6 +22,7 @@ import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { UpdateRowFuncType } from "shared/components/table/components/table.types";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
@@ -133,7 +134,7 @@ const _TradeRow: React.FC<Props> = ({
             onApply={() => {
               setOpenPopup(false);
               closeCopytradingTrade(trade.id, () => {
-                update();
+                update(undefined);
               });
             }}
           />
@@ -164,7 +165,7 @@ const TradeRow = compose<React.FC<OwnProps>>(
     undefined,
     mapDispatchToProps
   )
-)(_TradeRow);
+)(React.memo(_TradeRow));
 
 export default TradeRow;
 
@@ -173,7 +174,7 @@ interface Props extends DispatchProps, OwnProps, InjectedTranslateProps {}
 interface OwnProps {
   trade: OrderSignalModel;
   title: string;
-  update: () => void;
+  update: UpdateRowFuncType;
 }
 
 interface DispatchProps {

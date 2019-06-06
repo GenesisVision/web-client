@@ -1,6 +1,6 @@
 import { OrderSignalModel } from "gv-api-web";
 import TradesHistoryRow from "modules/copytrading-tables/components/trades-history-row";
-import React, { Component, ComponentType } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
@@ -26,7 +26,7 @@ interface ITradesHistoryDispatchProps {
   };
 }
 
-class _TradesHistoryTable extends Component<
+class _TradesHistoryTable extends React.PureComponent<
   ITradesHistoryTableOwnProps &
     InjectedTranslateProps &
     ITradesHistoryDispatchProps
@@ -78,7 +78,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   service: bindActionCreators({ clearCopytradingTable }, dispatch)
 });
 
-const TradesHistoryTable = compose<ComponentType<ITradesHistoryTableOwnProps>>(
+const TradesHistoryTable = compose<React.FC<ITradesHistoryTableOwnProps>>(
   translate(),
   connect(
     null,

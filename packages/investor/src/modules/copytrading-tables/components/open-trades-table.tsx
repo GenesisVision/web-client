@@ -43,8 +43,7 @@ class OpenTradesTable extends React.PureComponent<
             key={trade.id}
             trade={trade}
             title={title}
-            //@ts-ignore
-            update={updateRow}
+            update={updateRow!}
           />
         )}
       />
@@ -53,8 +52,7 @@ class OpenTradesTable extends React.PureComponent<
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  service: bindActionCreators({ clearCopytradingTable }, dispatch),
-  dispatch
+  service: bindActionCreators({ clearCopytradingTable }, dispatch)
 });
 
 export default compose<ComponentType<OwnProps>>(

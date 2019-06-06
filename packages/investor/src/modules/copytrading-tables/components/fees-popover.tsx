@@ -46,7 +46,7 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
   );
 };
 
-export const FeesPopover = translate()(_FeesPopover);
+export const FeesPopover = translate()(React.memo(_FeesPopover));
 
 type Props = InjectedTranslateProps & {
   trade: OrderSignalModel;
