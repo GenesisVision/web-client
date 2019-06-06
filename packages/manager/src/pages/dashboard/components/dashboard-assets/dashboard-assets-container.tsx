@@ -21,42 +21,30 @@ import { getDashboardPrograms } from "../../services/dashboard-programs.service"
 import { fetchAssetsCount } from "../../services/dashboard.service";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 
-class _DashboardAssetsContainer extends React.PureComponent<Props> {
-  getAssets = () => {
-    const { getDashboardFunds, getDashboardPrograms } = this.props.service;
-    getDashboardFunds();
-    getDashboardPrograms();
-  };
-
-  render() {
-    const { t, title, service } = this.props;
-
-    return (
-      <DashboardAssets
-        programColumns={DASHBOARD_PROGRAMS_COLUMNS}
-        clearAssets={service.clearDashboardAssetsTable}
-        getDashboardPrograms={getDashboardPrograms}
-        getDashboardFunds={getDashboardFunds}
-        fetchAssetsCount={fetchAssetsCount}
-        createProgramButtonToolbar={
-          <CreateButtonToolbar
-            text={t("buttons.create-program")}
-            route={CREATE_PROGRAM_PAGE_ROUTE}
-          />
-        }
-        createFundButtonToolbar={
-          <CreateButtonToolbar
-            text={t("buttons.create-fund")}
-            route={CREATE_FUND_PAGE_ROUTE}
-          />
-        }
-        createFund={<EmptyFunds />}
-        createProgram={<EmptyPrograms />}
-        title={title}
+const _DashboardAssetsContainer: React.FC<Props> = ({ t, title, service }) => (
+  <DashboardAssets
+    programColumns={DASHBOARD_PROGRAMS_COLUMNS}
+    clearAssets={service.clearDashboardAssetsTable}
+    getDashboardPrograms={getDashboardPrograms}
+    getDashboardFunds={getDashboardFunds}
+    fetchAssetsCount={fetchAssetsCount}
+    createProgramButtonToolbar={
+      <CreateButtonToolbar
+        text={t("buttons.create-program")}
+        route={CREATE_PROGRAM_PAGE_ROUTE}
       />
-    );
-  }
-}
+    }
+    createFundButtonToolbar={
+      <CreateButtonToolbar
+        text={t("buttons.create-fund")}
+        route={CREATE_FUND_PAGE_ROUTE}
+      />
+    }
+    createFund={<EmptyFunds />}
+    createProgram={<EmptyPrograms />}
+    title={title}
+  />
+);
 
 const CreateButtonToolbar: React.FC<{ text: string; route: string }> = ({
   text,
@@ -134,6 +122,7 @@ interface DispatchProps {
 }
 
 const DashboardAssetsContainer = compose<React.ComponentType<OwnProps>>(
+  React.memo,
   translate(),
   connect(
     null,
