@@ -21,7 +21,7 @@ import WalletSettingsLoader from "./wallet-balance/wallet-settings-loader";
 import WalletContainerTotal from "./wallet-container/wallet-container-total";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 
-const WalletTotal: React.FC<Props & WalletRouteProps> = ({
+const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
   role,
   t,
   info,
@@ -88,9 +88,10 @@ interface StateProps {
   isPayFeesWithGvt?: boolean;
 }
 
-export default compose<React.ComponentType<WalletRouteProps>>(
+const WalletTotal = compose<React.ComponentType<WalletRouteProps>>(
   React.memo,
   withRole,
   connect(mapStateToProps),
   translate()
-)(WalletTotal);
+)(_WalletTotal);
+export default WalletTotal;
