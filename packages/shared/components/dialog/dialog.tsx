@@ -37,9 +37,9 @@ export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
             })}
             onClick={onClose}
           >
-            <React.Fragment>
+            <>
               <CloseIcon /> {t("buttons.close")}
-            </React.Fragment>
+            </>
           </GVButton>
           <div className={classNames("dialog", className)}>
             <GVButton
