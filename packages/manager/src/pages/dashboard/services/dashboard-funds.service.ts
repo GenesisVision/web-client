@@ -8,4 +8,4 @@ import * as actions from "../actions/dashboard.actions";
 export const getDashboardFunds = (
   requestFilters?: ComposeFiltersAllType
 ): ActionType<CancelablePromise<FundsList>> =>
-  actions.fetchDashboardFunds(authService.getAuthArg(), requestFilters);
+  actions.fetchDashboardFundsAction(authService.getAuthArg(), requestFilters);

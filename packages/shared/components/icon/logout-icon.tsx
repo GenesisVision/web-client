@@ -2,7 +2,7 @@ import * as React from "react";
 import { IIconProps, Icon } from "shared/components/icon/icon";
 
 export const LogoutIcon: React.FC<IIconProps> = props => (
-  <Icon type={"logout"} {...props}>
+  <Icon type={"logoutAction"} {...props}>
     <svg
       width="13"
       height="13"

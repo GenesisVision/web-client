@@ -19,12 +19,12 @@ export type RegisterViewModel =
   | RegisterInvestorViewModel
   | RegisterManagerViewModel;
 
-export const signUpUser = (model: RegisterViewModel): ApiAction => ({
+export const signUpUserAction = (model: RegisterViewModel): ApiAction => ({
   type: SIGN_UP,
   payload: signUpMethod({ model })
 });
 
-export const resendConfirmationLink = (
+export const resendConfirmationLinkAction = (
   model: ResendConfirmationViewModel
 ): ApiAction => ({
   type: RESEND_CONFIRMATION_LINK,

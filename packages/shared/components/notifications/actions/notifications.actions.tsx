@@ -43,25 +43,25 @@ export const notificationsToggleAction = (
   payload
 });
 
-export const addNotifications = (
+export const addNotificationsAction = (
   payload: Array<NotificationViewModel>
 ): AddNotificationsAction => ({
   type: ADD_NOTIFICATIONS,
   payload
 });
 
-export const addTotalNotifications = (
+export const addTotalNotificationsAction = (
   payload: number
 ): AddTotalNotificationsAction => ({
   type: ADD_TOTAL_NOTIFICATIONS,
   payload
 });
 
-export const clearNotifications = (): ClearNotificationsAction => ({
+export const clearNotificationsAction = (): ClearNotificationsAction => ({
   type: CLEAR_NOTIFICATIONS
 });
 
-export const setNotificationsOptions = (
+export const setNotificationsOptionsAction = (
   payload: SkipTake
 ): SetNotificationsOptionsAction => ({
   type: SET_NOTIFICATIONS_OPTIONS,

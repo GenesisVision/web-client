@@ -1,10 +1,10 @@
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
-import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
+import { setTwoFactorRequirementAction } from "shared/actions/2fa-actions";
 import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import platformActions from "shared/actions/platform-actions";
-import { windowResize } from "shared/actions/ui-actions";
+import { windowResizeAction } from "shared/actions/ui-actions";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
@@ -45,7 +45,7 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
   )
     .then((response: { value: string }) => {
       authService.storeToken(response.value);
-      dispatch(authActions.updateToken());
+      dispatch(authActions.updateTokenAction());
       if (type) dispatch(clearTwoFactorData());
       dispatch(push(from));
     })
@@ -58,7 +58,7 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
             from
           })
         );
-        dispatch(setTwoFactorRequirement(true));
+        dispatch(setTwoFactorRequirementAction(true));
         dispatch(push(LOGIN_ROUTE_TWO_FACTOR_ROUTE));
       } else {
         setSubmitting!(false);
@@ -78,9 +78,9 @@ export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => 
 
 export const logout: logoutFuncType = () => dispatch => {
   authService.removeToken();
-  dispatch(authActions.logout());
+  dispatch(authActions.logoutAction());
   dispatch(platformActions.fetchPlatformSettings);
-  dispatch(windowResize());
+  dispatch(windowResizeAction());
   dispatch(push(HOME_ROUTE));
 };
 

@@ -10,7 +10,7 @@ import { MiddlewareDispatch, TGetAuthState } from "shared/utils/types";
 import * as actions from "../actions/dashboard.actions";
 
 export const getPortfolioEvents = () => (dispatch: Dispatch) =>
-  dispatch(actions.fetchPortfolioEvents(authService.getAuthArg(), { take: 5 }));
+  dispatch(actions.fetchPortfolioEventsAction(authService.getAuthArg(), { take: 5 }));
 
 export const getAssetChart = (
   assetId: string,
@@ -30,7 +30,7 @@ export const getAssetChart = (
       .v10ProgramsByIdChartsProfitGet(assetId, chartFilter)
       .then(data => {
         dispatch(
-          actions.dashboardChart({
+          actions.dashboardChartAction({
             type: assetType,
             id: assetId,
             title: assetTitle,
@@ -43,7 +43,7 @@ export const getAssetChart = (
   } else {
     fundsApi.v10FundsByIdChartsProfitGet(assetId, chartFilter).then(data => {
       dispatch(
-        actions.dashboardChart({
+        actions.dashboardChartAction({
           type: assetType,
           id: assetId,
           title: assetTitle,
@@ -55,7 +55,7 @@ export const getAssetChart = (
 };
 
 export const getAssets = () => (dispatch: Dispatch) =>
-  dispatch(actions.fetchAssets(authService.getAuthArg()));
+  dispatch(actions.fetchAssetsAction(authService.getAuthArg()));
 
 export const composeAssetChart = () => (
   dispatch: MiddlewareDispatch,
@@ -75,7 +75,7 @@ export const composeAssetChart = () => (
 };
 
 export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
-  dispatch(actions.setPeriod(period));
+  dispatch(actions.setPeriodAction(period));
 
 export const fetchAssetsCount = (): Promise<{
   programsCount: number;

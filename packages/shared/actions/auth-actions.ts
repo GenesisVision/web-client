@@ -12,14 +12,14 @@ const alreadyAuthenticated = () => {
   history.push(HOME_ROUTE);
 };
 
-const updateToken = (): UpdateTokenActionType => ({
+const updateTokenAction = (): UpdateTokenActionType => ({
   type: UPDATE_TOKEN,
   payload: authService.isAuthenticated()
 });
 
-const logout = (): Action => ({
+const logoutAction = (): Action => ({
   type: LOGOUT
 });
 
-const authActions = { updateToken, alreadyAuthenticated, logout };
+const authActions = { updateTokenAction, alreadyAuthenticated, logoutAction };
 export default authActions;

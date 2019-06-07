@@ -3,8 +3,8 @@ import authService from "shared/services/auth-service";
 import { RootThunk } from "shared/utils/types";
 
 import {
-  addFavoriteFund,
-  removeFavoriteFund
+  addFavoriteFundAction,
+  removeFavoriteFundAction
 } from "../actions/favorite-fund.actions";
 
 export type ToggleFavoriteDispatchableType = (
@@ -23,7 +23,7 @@ export const toggleFavoriteFundDispatchable: ToggleFavoriteDispatchableType = (
   };
 
   dispatch(
-    isFavorite ? removeFavoriteFund(requestData) : addFavoriteFund(requestData)
+    isFavorite ? removeFavoriteFundAction(requestData) : addFavoriteFundAction(requestData)
   );
 };
 

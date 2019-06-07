@@ -40,7 +40,7 @@ export const restorePassword = (
   dispatch(restorePasswordAction(model))
     .then(response => {
       authService.storeToken(response.value);
-      dispatch(authActions.updateToken());
+      dispatch(authActions.updateTokenAction());
       dispatch(push(HOME_ROUTE));
       dispatch(
         alertMessageActions.success(

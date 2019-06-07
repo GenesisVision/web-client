@@ -1,11 +1,11 @@
 import { NotificationList } from "gv-api-web";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import {
-  addNotifications,
-  addTotalNotifications,
+  addNotificationsAction,
+  addTotalNotificationsAction,
   calculateOptions,
-  clearNotifications,
-  setNotificationsOptions
+  clearNotificationsAction,
+  setNotificationsOptionsAction
 } from "shared/components/notifications/actions/notifications.actions";
 import notificationsApi from "shared/services/api-client/notifications-api";
 import authService from "shared/services/auth-service";
@@ -19,16 +19,16 @@ export const serviceGetNotifications = (): RootThunkAction<
     .v10NotificationsGet(authService.getAuthArg(), notifications.options)
     .then(response => {
       const options = calculateOptions(notifications.options, response.total);
-      dispatch(addTotalNotifications(response.total));
-      dispatch(addNotifications(response.notifications));
-      dispatch(setNotificationsOptions(options));
+      dispatch(addTotalNotificationsAction(response.total));
+      dispatch(addNotificationsAction(response.notifications));
+      dispatch(setNotificationsOptionsAction(options));
       return response;
     });
 };
 
 export const serviceClearNotifications = (): RootThunkAction => dispatch => {
-  dispatch(clearNotifications());
-  dispatch(addTotalNotifications(0));
-  dispatch(setNotificationsOptions(calculateOptions()));
+  dispatch(clearNotificationsAction());
+  dispatch(addTotalNotificationsAction(0));
+  dispatch(setNotificationsOptionsAction(calculateOptions()));
   dispatch(fetchProfileHeaderInfoAction());
 };

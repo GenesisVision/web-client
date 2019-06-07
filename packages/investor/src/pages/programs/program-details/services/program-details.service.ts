@@ -1,6 +1,6 @@
 import {
-  fetchInvestmentInfo,
-  subscribeAvailable
+  fetchInvestmentInfoAction,
+  subscribeAvailableAction
 } from "pages/programs/program-details/actions/program-details.actions";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
@@ -41,7 +41,7 @@ export const subscribeAvailableToInvest = ({
 }): InvestorThunk<Promise<string>> => dispatch => {
   const authorisation = authService.getAuthArg();
   return dispatch(
-    fetchInvestmentInfo({
+    fetchInvestmentInfoAction({
       authorisation,
       assetId,
       currency
@@ -49,7 +49,7 @@ export const subscribeAvailableToInvest = ({
   )
     .then(info => {
       return dispatch(
-        subscribeAvailable({
+        subscribeAvailableAction({
           assetId,
           authorisation,
           amount: info.value.minInvestmentAmount

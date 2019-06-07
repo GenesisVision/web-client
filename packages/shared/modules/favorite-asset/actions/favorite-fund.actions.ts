@@ -3,7 +3,7 @@ import { FavoriteActionProps, FavoriteActionType } from "shared/utils/types";
 
 export const SET_FAVORITE_FUND = "SET_FAVORITE_FUND";
 
-export const addFavoriteFund = ({
+export const addFavoriteFundAction = ({
   id,
   authorization
 }: FavoriteActionProps): FavoriteActionType<any> => ({
@@ -15,7 +15,7 @@ export const addFavoriteFund = ({
   }
 });
 
-export const removeFavoriteFund = ({
+export const removeFavoriteFundAction = ({
   id,
   authorization
 }: FavoriteActionProps): FavoriteActionType<any> => ({

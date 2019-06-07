@@ -43,7 +43,7 @@ interface UpdateAccountTimestampAction extends ActionType<Date> {
   type: typeof ACCOUNT_LAST_UPDATE;
 }
 
-export const fetchWallets = (
+export const fetchWalletsAction = (
   currency: string,
   authorization: string
 ): FetchWalletAction => ({
@@ -51,12 +51,12 @@ export const fetchWallets = (
   payload: walletApi.v10WalletMultiByCurrencyGet(currency, authorization)
 });
 
-export const fetchAccounts = (authorization: string): FetchAccountsAction => ({
+export const fetchAccountsAction = (authorization: string): FetchAccountsAction => ({
   type: COPYTRADING_ACCOUNTS,
   payload: signalApi.v10SignalAccountsGet(authorization)
 });
 
-export const fetchWalletsByCurrencyAvailable = (
+export const fetchWalletsByCurrencyAvailableAction = (
   currency: string
 ): FetchWalletByCurrencyAction => ({
   type: WALLET_BALANCE_BY_CURRENCY_AVAILABLE,
@@ -66,7 +66,7 @@ export const fetchWalletsByCurrencyAvailable = (
   )
 });
 
-export const fetchWalletTransactionsDispatch = (
+export const fetchWalletTransactionsAction = (
   authorization: string,
   filters?: FilteringType
 ): FetchTransactionsAction => ({
@@ -74,12 +74,12 @@ export const fetchWalletTransactionsDispatch = (
   payload: walletApi.v10WalletTransactionsGet(authorization, filters)
 });
 
-export const updateWalletTimestamp = (): UpdateTimestampAction => ({
+export const updateWalletTimestampAction = (): UpdateTimestampAction => ({
   type: WALLET_LAST_UPDATE,
   payload: new Date()
 });
 
-export const updateAccountTimestamp = (): UpdateAccountTimestampAction => ({
+export const updateAccountTimestampAction = (): UpdateAccountTimestampAction => ({
   type: ACCOUNT_LAST_UPDATE,
   payload: new Date()
 });
