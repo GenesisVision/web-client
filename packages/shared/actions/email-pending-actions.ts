@@ -3,13 +3,11 @@ import { ActionType } from "shared/utils/types";
 
 export const EMAIL_PENDING = "EMAIL_PENDING";
 
-const saveEmail = ({
-  email
-}: EmailPendingState): ActionType<EmailPendingState> => ({
+const saveEmail = (
+  payload: EmailPendingState
+): ActionType<EmailPendingState> => ({
   type: EMAIL_PENDING,
-  payload: {
-    email
-  }
+  payload
 });
 
 const emailPendingActions = {
