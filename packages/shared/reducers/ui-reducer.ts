@@ -16,8 +16,7 @@ const sizeReducer = (
 ): UiSize => {
   switch (action.type) {
     case WINDOW_RESIZE: {
-      const { innerWidth, innerHeight } = action.payload;
-      return { innerHeight, innerWidth };
+      return action.payload;
     }
     default:
       return state;
