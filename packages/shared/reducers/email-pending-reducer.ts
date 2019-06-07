@@ -18,9 +18,7 @@ const emailPendingReducer = (
 ): EmailPendingState => {
   switch (action.type) {
     case EMAIL_PENDING:
-      return {
-        email: action.payload.email
-      };
+      return action.payload;
     case clearDataActionType:
       return initialState;
     default:
