@@ -1,5 +1,7 @@
-import { AnyAction } from "redux";
-import { UPDATE_TOKEN } from "shared/actions/auth-actions";
+import {
+  UPDATE_TOKEN,
+  UpdateTokenActionType
+} from "shared/actions/auth-actions";
 import authService from "shared/services/auth-service";
 
 export type AuthState = Readonly<{
@@ -10,11 +12,14 @@ const getInitialState = () => ({
   isAuthenticated: authService.isAuthenticated()
 });
 
-const authReducer = (state = getInitialState(), action: AnyAction) => {
+const authReducer = (
+  state = getInitialState(),
+  action: UpdateTokenActionType
+) => {
   switch (action.type) {
     case UPDATE_TOKEN:
       return {
-        isAuthenticated: action.isAuthenticated
+        isAuthenticated: action.payload || false
       };
     default:
       return state;
