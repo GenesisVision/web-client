@@ -30,7 +30,7 @@ export interface NotificationsActionType<T = ProgramNotificationSettingList>
 
 export interface ActionType<T = any> extends Action {
   type: string;
-  payload?: T;
+  payload: T;
 }
 
 export type ApiAction<T = any> = ActionType<CancelablePromise<T>>;
