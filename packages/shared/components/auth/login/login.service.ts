@@ -13,7 +13,7 @@ import {
   CODE_TYPE,
   LOGIN,
   LOGIN_TWO_FACTOR,
-  storeTwoFactor
+  storeTwoFactorAction
 } from "./login.actions";
 import { LOGIN_ROUTE, LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
 
@@ -52,7 +52,7 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
     .catch((e: ResponseError) => {
       if (e.code === "RequiresTwoFactor") {
         dispatch(
-          storeTwoFactor({
+          storeTwoFactorAction({
             email,
             password,
             from

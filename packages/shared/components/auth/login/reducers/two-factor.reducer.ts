@@ -1,5 +1,5 @@
 import { composeClearDataActionType } from "shared/actions/clear-data.factory";
-import { LOGIN_TWO_FACTOR } from "shared/components/auth/login/login.actions";
+import { LOGIN_TWO_FACTOR, TStoreTwoFactorAction } from "shared/components/auth/login/login.actions";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 
 export const initialState = {
@@ -10,23 +10,19 @@ export const initialState = {
 
 const clearDataActionType = composeClearDataActionType(LOGIN_TWO_FACTOR);
 
-export type ITwoFactorReducer = Readonly<{
+export type ITwoFactorState = Readonly<{
   email: string;
   password: string;
   from: string | object;
 }>;
 
 const twoFactorReducer = (
-  state: ITwoFactorReducer = initialState,
-  action: any
-): ITwoFactorReducer => {
+  state: ITwoFactorState = initialState,
+  action: TStoreTwoFactorAction
+): ITwoFactorState => {
   switch (action.type) {
     case LOGIN_TWO_FACTOR: {
-      return {
-        email: action.payload.email,
-        password: action.payload.password,
-        from: action.payload.from
-      };
+      return action.payload;
     }
     case clearDataActionType:
       return initialState;
