@@ -3,9 +3,9 @@ import apiReducerFactory, {
   IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
+import { ActionType } from "shared/utils/types";
 
 import { FilteringType } from "../components/filtering/filter.type";
-import { FiltersType } from "../components/table.types";
 import { IPaging } from "../helpers/paging.helpers";
 import tableFiltersReducer from "./table-filters.reducer";
 
@@ -33,13 +33,16 @@ const tableReducerFactory = <ItemsType>({
   defaultFilters,
   clearable,
   clearableActionType
-}: ITableReducerFactoryParams): Reducer<ITableState<ItemsType>> => {
+}: ITableReducerFactoryParams): Reducer<ITableState<ItemsType>, ActionType> => {
   const clearableWrapper: (
-    f: Reducer,
+    f: Reducer<ITableState<ItemsType>, ActionType>,
     clearActionType?: string
-  ) => Reducer = clearable ? clearableReducer : f => f;
+  ) => Reducer<ITableState<ItemsType>, ActionType> = clearable
+    ? clearableReducer
+    : f => f;
+
   return clearableWrapper(
-    combineReducers({
+    combineReducers<ITableState<ItemsType>, ActionType>({
       itemsData: apiReducerFactory<ItemsType>({
         apiType: type
       }),
