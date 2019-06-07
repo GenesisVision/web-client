@@ -17,7 +17,7 @@ const GoogleAuthSteps: React.FC<Props> = props =>
   );
 
 const mapStateToProps = ({ ui }: RootState) => ({
-  innerWidth: ui.innerWidth
+  innerWidth: ui.size.innerWidth
 });
 
 interface Props extends IGoogleAuthProps, StateProps {}

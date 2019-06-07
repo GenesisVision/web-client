@@ -24,7 +24,7 @@ const _DialogLoaderGoogleAuthSteps: React.FC<
 const mapStateToProps = ({
   ui
 }: RootState): IDialogLoaderGoogleAuthStepsStateProps => ({
-  innerWidth: ui.innerWidth
+  innerWidth: ui.size.innerWidth
 });
 
 const DialogLoaderGoogleAuthSteps = compose<React.ComponentType>(

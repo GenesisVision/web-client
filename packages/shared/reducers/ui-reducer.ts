@@ -1,37 +1,45 @@
-import { WINDOW_RESIZE, WINDOW_SCROLL } from "shared/actions/ui-actions";
+import { combineReducers } from "redux";
+import { TWindowResizeAction, TWindowScrollAction, WINDOW_RESIZE, WINDOW_SCROLL } from "shared/actions/ui-actions";
 
 export type IUiState = Readonly<{
-  innerWidth: number;
-  innerHeight: number;
+  size: UiSize;
   scrollTop: number;
 }>;
 
-const initialState: IUiState = {
-  innerWidth: 0,
-  innerHeight: 0,
-  scrollTop: 0
-} as IUiState;
+export type UiSize = Readonly<{ innerWidth: number; innerHeight: number }>;
+const initialSizeState = { innerWidth: 0, innerHeight: 0 };
 
-const uiReducer = (state: IUiState = initialState, actions: any): IUiState => {
-  switch (actions.type) {
+
+const sizeReducer = (
+  state: UiSize = initialSizeState,
+  action: TWindowResizeAction
+): UiSize => {
+  switch (action.type) {
     case WINDOW_RESIZE: {
-      const { innerWidth, innerHeight } = actions;
-      return {
-        ...state,
-        innerHeight,
-        innerWidth
-      };
-    }
-    case WINDOW_SCROLL: {
-      const { scrollTop } = actions;
-      return {
-        ...state,
-        scrollTop
-      };
+      const { innerWidth, innerHeight } = action.payload;
+      return { innerHeight, innerWidth };
     }
     default:
       return state;
   }
 };
+
+const scrollReducer = (
+  state: number = 0,
+  action: TWindowScrollAction
+): number => {
+  switch (action.type) {
+    case WINDOW_SCROLL: {
+      return action.payload;
+    }
+    default:
+      return state;
+  }
+};
+
+const uiReducer = combineReducers<IUiState>({
+  size: sizeReducer,
+  scrollTop: scrollReducer
+});
 
 export default uiReducer;
