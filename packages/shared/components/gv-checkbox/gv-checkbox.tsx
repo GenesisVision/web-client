@@ -48,7 +48,15 @@ class GVCheckbox extends React.PureComponent<IGVCheckboxProps> {
   };
 
   render() {
-    const { name, className, color, value, disabled, ...other } = this.props;
+    const {
+      name,
+      className,
+      color,
+      value,
+      touched,
+      disabled,
+      ...other
+    } = this.props;
     return (
       <span className={"gv-checkbox-wrapper"}>
         <span
