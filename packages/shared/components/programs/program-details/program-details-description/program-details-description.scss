@@ -124,6 +124,8 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     margin-left: $padding-xxsmall/2;
     margin-right: $padding-xxsmall/2;
     flex-grow: 1;
+    display: inline-flex;
+    flex-wrap: wrap;
 
     @include media-breakpoint-landscape-phone() {
       width: auto;
@@ -140,18 +142,25 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       &:last-child {
         margin-right: 0;
       }
+
+      &--small-size {
+        max-width: 250px;
+      }
     }
   }
 
   &__statistic-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: inline-flex;
+    min-width: 50%;
+    box-sizing: border-box;
+    flex-grow: 1;
   }
 
   &__button-container {
     display: flex;
     flex-wrap: wrap;
     margin: 0 (-$padding-small-mobile/2);
+    width: 100%;
 
     .gv-btn {
       @include adaptive-margin(top, $padding-small);
@@ -272,6 +281,8 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 
     &-item {
       flex-grow: 1;
+      flex-basis: 50%;
+      box-sizing: border-box;
 
       @include media-breakpoint-landscape-phone() {
         font-size: $font-size-paragraph;
