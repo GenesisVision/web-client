@@ -1,4 +1,4 @@
-import { WALLET_LAST_UPDATE } from "../actions/wallet.actions";
+import { UpdateTimestampAction, WALLET_LAST_UPDATE } from "../actions/wallet.actions";
 
 export type WalletLastUpdateState = {
   timestamp: Date;
@@ -10,7 +10,7 @@ const initialState: WalletLastUpdateState = {
 
 const walletLastUpdateReducer = (
   state: WalletLastUpdateState = initialState,
-  action: any
+  action: UpdateTimestampAction
 ): WalletLastUpdateState => {
   switch (action.type) {
     case WALLET_LAST_UPDATE:
