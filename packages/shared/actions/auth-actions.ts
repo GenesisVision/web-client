@@ -1,3 +1,4 @@
+import { Action } from "redux";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
 import history from "shared/utils/history";
@@ -16,7 +17,7 @@ const updateToken = (): UpdateTokenActionType => ({
   payload: authService.isAuthenticated()
 });
 
-const logout = (): ActionType => ({
+const logout = (): Action => ({
   type: LOGOUT
 });
 
