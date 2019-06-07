@@ -4,7 +4,10 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { boolean, mixed, number, object, string } from "yup";
 
-import { ICreateProgramSettingsProps } from "./create-program-settings";
+import {
+  CREATE_PROGRAM_FIELDS,
+  ICreateProgramSettingsProps
+} from "./create-program-settings";
 
 const createProgramSettingsValidationSchema = (
   props: ICreateProgramSettingsProps
@@ -20,7 +23,7 @@ const createProgramSettingsValidationSchema = (
     )
   );
   return object().shape({
-    stopOutLevel: number()
+    [CREATE_PROGRAM_FIELDS.stopOutLevel]: number()
       .required(
         t("manager.create-program-page.settings.validation.stop-out-required")
       )
@@ -33,19 +36,19 @@ const createProgramSettingsValidationSchema = (
         t("manager.create-program-page.settings.validation.stop-out-is-large")
       ),
 
-    logo: inputImageShape(t),
-    title: assetTitleShape(t),
-    description: assetDescriptionShape(t),
-    currency: string().required(
+    [CREATE_PROGRAM_FIELDS.logo]: inputImageShape(t),
+    [CREATE_PROGRAM_FIELDS.title]: assetTitleShape(t),
+    [CREATE_PROGRAM_FIELDS.description]: assetDescriptionShape(t),
+    [CREATE_PROGRAM_FIELDS.currency]: string().required(
       t("manager.create-program-page.settings.validation.currency-required")
     ),
-    periodLength: string().required(
+    [CREATE_PROGRAM_FIELDS.periodLength]: string().required(
       t("manager.create-program-page.settings.validation.period-required")
     ),
-    leverage: string().required(
+    [CREATE_PROGRAM_FIELDS.leverage]: string().required(
       t("manager.create-program-page.settings.validation.leverage-required")
     ),
-    entryFee: number()
+    [CREATE_PROGRAM_FIELDS.entryFee]: number()
       .required(
         t("manager.create-program-page.settings.validation.entry-fee-required")
       )
@@ -59,7 +62,7 @@ const createProgramSettingsValidationSchema = (
           max: props.programsInfo.managerMaxEntryFee
         })
       ),
-    successFee: number()
+    [CREATE_PROGRAM_FIELDS.successFee]: number()
       .min(
         0,
         t("manager.create-program-page.settings.validation.success-fee-min")
@@ -75,19 +78,25 @@ const createProgramSettingsValidationSchema = (
           max: props.programsInfo.managerMaxSuccessFee
         })
       ),
-    isSignalProgram: boolean(),
-    signalVolumeFee: mixed().when("isSignalProgram", {
-      is: true,
-      then: signalVolumeFeeShape(t)
-    }),
-    signalSuccessFee: mixed().when("isSignalProgram", {
-      is: true,
-      then: signalSuccessFeeShape(t, props.programsInfo.managerMaxSuccessFee)
-    }),
-    brokerAccountTypeId: string().required(
+    [CREATE_PROGRAM_FIELDS.isSignalProgram]: boolean(),
+    [CREATE_PROGRAM_FIELDS.signalVolumeFee]: mixed().when(
+      CREATE_PROGRAM_FIELDS.isSignalProgram,
+      {
+        is: true,
+        then: signalVolumeFeeShape(t)
+      }
+    ),
+    [CREATE_PROGRAM_FIELDS.signalSuccessFee]: mixed().when(
+      CREATE_PROGRAM_FIELDS.isSignalProgram,
+      {
+        is: true,
+        then: signalSuccessFeeShape(t, props.programsInfo.managerMaxSuccessFee)
+      }
+    ),
+    [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: string().required(
       t("manager.create-program-page.settings.validation.account-type-required")
     ),
-    depositAmount:
+    [CREATE_PROGRAM_FIELDS.depositAmount]:
       props.rate && props.programCurrency && props.rate
         ? number()
             .required(
