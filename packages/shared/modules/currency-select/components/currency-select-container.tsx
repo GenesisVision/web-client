@@ -51,7 +51,7 @@ const mapStateToProps = (state: RootState): StateProps => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     { updateCurrency },
     dispatch
