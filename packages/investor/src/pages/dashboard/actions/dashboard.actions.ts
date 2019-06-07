@@ -7,6 +7,7 @@ import {
   ProgramsList,
   SignalsList
 } from "gv-api-web";
+import { Action } from "redux";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import investorApi from "shared/services/api-client/investor-api";
 import { ActionType } from "shared/utils/types";
@@ -80,6 +81,6 @@ export const cancelProgramRequest = (
   payload: investorApi.v10InvestorProgramsRequestsByIdCancelPost(id, auth)
 });
 
-export const clearDashboardAssetsTable = (): ActionType => ({
+export const clearDashboardAssetsTable = (): Action => ({
   type: CLEAR_DASHBOARD_ASSETS_TABLE
 });
