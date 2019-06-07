@@ -29,12 +29,13 @@ export interface NotificationsActionType<T = ProgramNotificationSettingList>
   errorMessage?: string;
 }
 
-export interface ActionType<T = any> extends Action {
+export interface ActionType<T = any, U = any> extends Action {
   type: string;
   payload: T;
+  meta?: U;
 }
 
-export type ApiAction<T = any> = ActionType<CancelablePromise<T>>;
+export type ApiAction<T = any, U = any> = ActionType<CancelablePromise<T>, U>;
 
 export type RootThunkAction<R = any> = ThunkAction<R, RootState, any, any>;
 
