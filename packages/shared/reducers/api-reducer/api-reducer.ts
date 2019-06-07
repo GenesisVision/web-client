@@ -1,3 +1,5 @@
+import { ActionType } from "shared/utils/types";
+
 import { CLEAR_SUFFIX } from "../../actions/clear-data.factory";
 
 export const API_TYPE = "API";
@@ -30,7 +32,7 @@ const apiReducerFactory = <T>(
     suffixes: [REQUEST_SUFFIX, SUCCESS_SUFFIX, FAILURE_SUFFIX]
   },
   subReducer?: any
-) => (state = initialState, action: any): IApiState<T> => {
+) => (state = initialState, action: ActionType): IApiState<T> => {
   const apiType = config.apiType || API_TYPE;
   const suffixes = config.suffixes || [
     REQUEST_SUFFIX,
