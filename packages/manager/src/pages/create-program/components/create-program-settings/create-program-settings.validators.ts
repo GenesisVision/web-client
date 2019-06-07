@@ -78,6 +78,25 @@ const createProgramSettingsValidationSchema = (
           max: props.programsInfo.managerMaxSuccessFee
         })
       ),
+    [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: boolean(),
+    [CREATE_PROGRAM_FIELDS.investmentLimit]: mixed().when(
+      CREATE_PROGRAM_FIELDS.hasInvestmentLimit,
+      {
+        is: true,
+        then: number()
+          .min(
+            0,
+            t(
+              "manager.create-program-page.settings.validation.investment-limit-min"
+            )
+          )
+          .required(
+            t(
+              "manager.create-program-page.settings.validation.investment-limit-required"
+            )
+          )
+      }
+    ),
     [CREATE_PROGRAM_FIELDS.isSignalProgram]: boolean(),
     [CREATE_PROGRAM_FIELDS.signalVolumeFee]: mixed().when(
       CREATE_PROGRAM_FIELDS.isSignalProgram,

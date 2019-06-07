@@ -10,6 +10,7 @@ import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import GVTextField from "shared/components/gv-text-field";
+import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import ProgramDefaultImage from "shared/media/program-default-image.svg";
@@ -66,17 +67,27 @@ const _AssetEditForm: React.FC<IAssetEditProps> = ({
           )}
         </div>
         {type === ASSET.PROGRAM && (
-          <GVFormikField
-            name={ASSET_EDIT_FIELDS.stopOutLevel}
-            label={t(
-              "manager.create-program-page.settings.fields.stop-out-level"
-            )}
-            adornment="%"
-            component={GVTextField}
-            InputComponent={NumberFormat}
-            autoComplete="off"
-            decimalScale={4}
-          />
+          <>
+            <GVFormikField
+              name={ASSET_EDIT_FIELDS.stopOutLevel}
+              label={t(
+                "manager.create-program-page.settings.fields.stop-out-level"
+              )}
+              adornment="%"
+              component={GVTextField}
+              InputComponent={NumberFormat}
+              autoComplete="off"
+              decimalScale={4}
+            />
+            <InputAmountField
+              autoFocus={false}
+              name={ASSET_EDIT_FIELDS.investmentLimit}
+              label={t(
+                "manager.create-program-page.settings.fields.investment-limit"
+              )}
+              currency={info.currency ? info.currency : ""}
+            />
+          </>
         )}
       </div>
       <div className="dialog__bottom">
@@ -118,7 +129,8 @@ export enum ASSET_EDIT_FIELDS {
   stopOutLevel = "stopOutLevel",
   title = "title",
   description = "description",
-  logo = "logo"
+  logo = "logo",
+  investmentLimit = "investmentLimit"
 }
 
 export interface IAssetEditFormOwnProps {
@@ -138,6 +150,7 @@ export interface IAssetEditFormValues {
   [ASSET_EDIT_FIELDS.description]: string;
   [ASSET_EDIT_FIELDS.logo]: IImageValue;
   [ASSET_EDIT_FIELDS.stopOutLevel]: number;
+  [ASSET_EDIT_FIELDS.investmentLimit]: number;
 }
 
 export interface IAssetEditProps
@@ -159,7 +172,8 @@ const AssetEditForm = compose<
         [ASSET_EDIT_FIELDS.description]: props.info.description,
         [ASSET_EDIT_FIELDS.logo]: {
           src: props.info.logo.src
-        }
+        },
+        [ASSET_EDIT_FIELDS.investmentLimit]: props.info.investmentLimit
       };
     },
     validationSchema: editAssetSettingsValidationSchema,

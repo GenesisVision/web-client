@@ -120,7 +120,14 @@ class CreateProgramSettings extends React.PureComponent<
       programCurrency,
       wallet
     } = this.props;
-    const { depositAmount, isSignalProgram, description, title } = values;
+    const {
+      currency,
+      depositAmount,
+      isSignalProgram,
+      hasInvestmentLimit,
+      description,
+      title
+    } = values;
     const descriptionTrimmedLength = description.trim().length;
 
     const accountCurrencies = accountType ? accountType.currencies : [];
@@ -283,6 +290,33 @@ class CreateProgramSettings extends React.PureComponent<
                   )}
                 />
               </div>
+              <div className="create-program-settings__item create-program-settings__item--wider">
+                <GVFormikField
+                  type="checkbox"
+                  color="primary"
+                  name={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
+                  label={
+                    <span>
+                      {t(
+                        "manager.create-program-page.settings.fields.investment-limit"
+                      )}
+                    </span>
+                  }
+                  component={GVCheckbox}
+                />
+              </div>
+              {hasInvestmentLimit && (
+                <div className="create-program-settings__item">
+                  <InputAmountField
+                    autoFocus={false}
+                    name={CREATE_PROGRAM_FIELDS.investmentLimit}
+                    label={t(
+                      "manager.create-program-page.settings.fields.enter-correct-amount"
+                    )}
+                    currency={currency ? currency : ""}
+                  />
+                </div>
+              )}
               <div className="create-program-settings__item create-program-settings__item--wider">
                 <div className="create-program-settings__logo-title">
                   {t("manager.create-program-page.settings.fields.upload-logo")}
@@ -527,6 +561,8 @@ export default compose<React.ComponentType<OwnProps>>(
         [CREATE_PROGRAM_FIELDS.logo]: {},
         [CREATE_PROGRAM_FIELDS.entryFee]: undefined,
         [CREATE_PROGRAM_FIELDS.successFee]: undefined,
+        [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: true,
+        [CREATE_PROGRAM_FIELDS.investmentLimit]: undefined,
         [CREATE_PROGRAM_FIELDS.isSignalProgram]: broker.isSignalsAvailable,
         [CREATE_PROGRAM_FIELDS.signalSuccessFee]: broker.isSignalsAvailable
           ? undefined
@@ -558,6 +594,7 @@ export enum CREATE_PROGRAM_FIELDS {
   signalSuccessFee = "signalSuccessFee",
   signalVolumeFee = "signalVolumeFee",
   isSignalProgram = "isSignalProgram",
+  hasInvestmentLimit = "hasInvestmentLimit",
   title = "title",
   description = "description",
   logo = "logo",
@@ -600,6 +637,7 @@ export interface ICreateProgramSettingsFormValues {
   [CREATE_PROGRAM_FIELDS.signalSuccessFee]?: number;
   [CREATE_PROGRAM_FIELDS.signalVolumeFee]?: number;
   [CREATE_PROGRAM_FIELDS.isSignalProgram]: boolean;
+  [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: boolean;
   [CREATE_PROGRAM_FIELDS.title]: string;
   [CREATE_PROGRAM_FIELDS.description]: string;
   [CREATE_PROGRAM_FIELDS.logo]: IImageValue;
