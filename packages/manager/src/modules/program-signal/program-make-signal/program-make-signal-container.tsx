@@ -8,18 +8,17 @@ import { IDialogProps } from "shared/components/dialog/dialog";
 import ProgramSignalPopup from "../program-signal-popup/program-signal-popup";
 import { programMakeSignal } from "./services/program-make-signal.service";
 
-class _ProgramMakeSignalContainer extends React.PureComponent<Props> {
-  render() {
-    const { t, service, ...others } = this.props;
-    return (
-      <ProgramSignalPopup
-        header={t("program-details-page.description.signal-provider.title")}
-        serviceMethod={service.programMakeSignal}
-        {...others}
-      />
-    );
-  }
-}
+const _ProgramMakeSignalContainer: React.FC<Props> = ({
+  t,
+  service,
+  ...others
+}) => (
+  <ProgramSignalPopup
+    header={t("program-details-page.description.signal-provider.title")}
+    serviceMethod={service.programMakeSignal}
+    {...others}
+  />
+);
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   service: bindActionCreators(
@@ -35,7 +34,8 @@ const ProgramMakeSignalContainer = compose<React.ComponentType<OwnProps>>(
   connect(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_ProgramMakeSignalContainer);
 
 export default ProgramMakeSignalContainer;

@@ -21,60 +21,53 @@ import WalletSettingsLoader from "./wallet-balance/wallet-settings-loader";
 import WalletContainerTotal from "./wallet-container/wallet-container-total";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 
-class WalletTotal extends React.PureComponent<Props & WalletRouteProps> {
-  render() {
-    const {
-      role,
-      t,
-      info,
-      wallets,
-      filters,
-      isPayFeesWithGvt,
-      copyTradingAccounts
-    } = this.props;
-    return (
-      <Page title={t("wallet-page.title")}>
-        <div className="wallet-balance">
-          <div className="wallet-balance__wrapper">
-            <h1 className="wallet-balance__title">{t("wallet-page.title")}</h1>
-            {isPayFeesWithGvt === undefined ? (
-              <WalletSettingsLoader />
-            ) : (
-              <WalletSettingsContainer isPayFeesWithGvt={isPayFeesWithGvt} />
-            )}
-          </div>
-          {!info || !filters ? (
-            <WalletBalanceLoader />
-          ) : (
-            <>
-              <WalletBalanceElements
-                available={info.availableCcy}
-                pending={info.pendingCcy}
-                total={info.totalCcy}
-                invested={info.investedCcy}
-                currency={info.currencyCcy}
-              />
-              <WalletContainerTotal
-                isPending={copyTradingAccounts.isPending}
-                copyTradingAccounts={
-                  copyTradingAccounts.data
-                    ? copyTradingAccounts.data.accounts
-                    : []
-                }
-                wallets={wallets}
-                filters={filters}
-                copytrading={role === ROLE.INVESTOR}
-              />
-            </>
-          )}
-        </div>
-      </Page>
-    );
-  }
-}
+const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
+  role,
+  t,
+  info,
+  wallets,
+  filters,
+  isPayFeesWithGvt,
+  copyTradingAccounts
+}) => (
+  <Page title={t("wallet-page.title")}>
+    <div className="wallet-balance">
+      <div className="wallet-balance__wrapper">
+        <h1 className="wallet-balance__title">{t("wallet-page.title")}</h1>
+        {isPayFeesWithGvt === undefined ? (
+          <WalletSettingsLoader />
+        ) : (
+          <WalletSettingsContainer isPayFeesWithGvt={isPayFeesWithGvt} />
+        )}
+      </div>
+      {!info || !filters ? (
+        <WalletBalanceLoader />
+      ) : (
+        <>
+          <WalletBalanceElements
+            available={info.availableCcy}
+            pending={info.pendingCcy}
+            total={info.totalCcy}
+            invested={info.investedCcy}
+            currency={info.currencyCcy}
+          />
+          <WalletContainerTotal
+            isPending={copyTradingAccounts.isPending}
+            copyTradingAccounts={
+              copyTradingAccounts.data ? copyTradingAccounts.data.accounts : []
+            }
+            wallets={wallets}
+            filters={filters}
+            copytrading={role === ROLE.INVESTOR}
+          />
+        </>
+      )}
+    </div>
+  </Page>
+);
 
-const mapStateToProps = (state: RootState) => ({
-  info: state.wallet.info.data ? state.wallet.info.data.grandTotal : null,
+const mapStateToProps = (state: RootState): StateProps => ({
+  info: state.wallet.info.data ? state.wallet.info.data.grandTotal : undefined,
   wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],
   copyTradingAccounts: state.copyTradingAccounts.info,
   isPayFeesWithGvt: state.wallet.info.data
@@ -95,8 +88,10 @@ interface StateProps {
   isPayFeesWithGvt?: boolean;
 }
 
-export default compose<React.ComponentType<WalletRouteProps>>(
+const WalletTotal = compose<React.ComponentType<WalletRouteProps>>(
   withRole,
   connect(mapStateToProps),
-  translate()
-)(WalletTotal);
+  translate(),
+  React.memo
+)(_WalletTotal);
+export default WalletTotal;

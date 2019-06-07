@@ -39,5 +39,5 @@ const _SettingsPage: React.FC<InjectedTranslateProps> = ({ t }) => (
   </ProfileLayout>
 );
 
-const SettingsPage = React.memo(translate()(_SettingsPage));
+const SettingsPage = translate()(React.memo(_SettingsPage));
 export default SettingsPage;

@@ -38,5 +38,5 @@ interface Props extends InjectedTranslateProps {
   onPeriodChange: HandlePeriodChangeType;
 }
 
-const ProgramDetailsChart = React.memo(translate()(_ProgramDetailsChart));
+const ProgramDetailsChart = translate()(React.memo(_ProgramDetailsChart));
 export default ProgramDetailsChart;

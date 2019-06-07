@@ -16,5 +16,5 @@ interface Props extends InjectedTranslateProps {
   onResendEmail: () => void;
 }
 
-const EmailPending = React.memo(translate()(_EmailPending));
+const EmailPending = translate()(React.memo(_EmailPending));
 export default EmailPending;

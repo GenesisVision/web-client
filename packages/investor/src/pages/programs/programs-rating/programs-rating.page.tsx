@@ -13,7 +13,7 @@ const _ProgramsRatingPage: React.FC<InjectedTranslateProps> = ({ t }) => (
 );
 
 const ProgramsRatingPage = compose<React.ComponentType>(
-  React.memo,
-  translate()
+  translate(),
+  React.memo
 )(_ProgramsRatingPage);
 export default ProgramsRatingPage;

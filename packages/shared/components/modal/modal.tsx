@@ -1,67 +1,65 @@
 import "./modal.scss";
 
 import classNames from "classnames";
-import * as React from "react";
+import React, { useCallback } from "react";
 import EventListener from "react-event-listener";
 import Portal from "shared/components/portal/portal";
 
-class Modal extends React.PureComponent<Props> {
-  handleKeyPress = (
-    event: KeyboardEvent & React.MouseEvent<HTMLElement>
-  ): void => {
-    if (event.keyCode !== 27) return;
-    this.handleClose(event);
-  };
+const _Modal: React.FC<Props> = ({
+  onClose,
+  open,
+  disableBackdropClick,
+  transparentBackdrop,
+  children,
+  fixed
+}) => {
+  const handleKeyPress = useCallback(
+    (event: KeyboardEvent & React.MouseEvent<HTMLElement>) =>
+      event.keyCode === 27 && handleClose(event),
+    [onClose]
+  );
 
-  handleBackdropClick = (event: React.MouseEvent<HTMLElement>): void => {
-    this.handleClose(event);
-  };
+  const handleBackdropClick = useCallback(
+    (event: React.MouseEvent<HTMLElement>): void => handleClose(event),
+    [onClose]
+  );
 
-  handleClose = (event: React.MouseEvent<HTMLElement>): void => {
-    if (this.props.onClose) {
-      this.props.onClose(event);
-    }
-  };
+  const handleClose = useCallback(
+    (event: React.MouseEvent<HTMLElement>): void => onClose && onClose(event),
+    [onClose]
+  );
 
-  render() {
-    const {
-      open,
-      disableBackdropClick,
-      transparentBackdrop,
-      children,
-      fixed
-    } = this.props;
-    return (
-      <Portal open={open}>
-        <div
-          className={classNames("modal", {
-            "modal--position-absolute": !disableBackdropClick && !fixed,
-            "modal--position-fixed": fixed
-          })}
-        >
-          {disableBackdropClick || (
-            <EventListener target={document} onKeyUp={this.handleKeyPress}>
-              <div
-                className={classNames("modal__backdrop", {
-                  "modal__backdrop--transparent": transparentBackdrop
-                })}
-                onClick={this.handleBackdropClick}
-              />
-            </EventListener>
-          )}
-          {children}
-        </div>
-      </Portal>
-    );
-  }
-}
+  return (
+    <Portal open={open}>
+      <div
+        className={classNames("modal", {
+          "modal--position-absolute": !disableBackdropClick && !fixed,
+          "modal--position-fixed": fixed
+        })}
+      >
+        {disableBackdropClick || (
+          <EventListener target={document} onKeyUp={handleKeyPress}>
+            <div
+              className={classNames("modal__backdrop", {
+                "modal__backdrop--transparent": transparentBackdrop
+              })}
+              onClick={handleBackdropClick}
+            />
+          </EventListener>
+        )}
+        {children}
+      </div>
+    </Portal>
+  );
+};
 
 interface Props {
-  onClose?(event: React.MouseEvent<HTMLElement>): void;
+  onClose?: (event: React.MouseEvent<HTMLElement>) => void;
   open: boolean;
   disableBackdropClick?: boolean;
   transparentBackdrop?: boolean;
   fixed?: boolean;
 }
 
+const Modal = React.memo(_Modal);
 export default Modal;

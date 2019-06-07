@@ -14,45 +14,43 @@ import UserIcon from "shared/media/user-avatar.svg";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
-class _ProfileImage extends React.PureComponent<
-  InjectedFormikProps<Props, FormValues>
-> {
-  render() {
-    const { t, avatar, handleSubmit, isValid, isSubmitting } = this.props;
+const _ProfileImage: React.FC<InjectedFormikProps<Props, FormValues>> = ({
+  t,
+  avatar,
+  handleSubmit,
+  isValid,
+  isSubmitting
+}) => (
+  <form onSubmit={handleSubmit}>
+    <div className="profile-image">
+      <h3 className="profile-image__title">
+        {t("profile-page.settings.profile-image")}
+      </h3>
 
-    return (
-      <form onSubmit={handleSubmit}>
-        <div className="profile-image">
-          <h3 className="profile-image__title">
-            {t("profile-page.settings.profile-image")}
-          </h3>
+      <div className="profile-image__requirements">
+        {t("profile-page.settings.image-requirements")}
+      </div>
 
-          <div className="profile-image__requirements">
-            {t("profile-page.settings.image-requirements")}
-          </div>
+      <GVFormikField
+        name="logo"
+        component={InputImage}
+        src={avatar}
+        className="profile-image__input-image"
+        defaultImage={UserIcon}
+      />
 
-          <GVFormikField
-            name="logo"
-            component={InputImage}
-            src={avatar}
-            className="profile-image__input-image"
-            defaultImage={UserIcon}
-          />
-
-          <GVButton
-            type="submit"
-            color="primary"
-            variant="outlined"
-            className="profile-image__submit-btn"
-            disabled={isSubmitting || !isValid}
-          >
-            {t("profile-page.settings.save-photo")}
-          </GVButton>
-        </div>
-      </form>
-    );
-  }
-}
+      <GVButton
+        type="submit"
+        color="primary"
+        variant="outlined"
+        className="profile-image__submit-btn"
+        disabled={isSubmitting || !isValid}
+      >
+        {t("profile-page.settings.save-photo")}
+      </GVButton>
+    </div>
+  </form>
+);
 
 const ProfileImage = compose<React.ComponentType<OwnProps>>(
   translate(),
@@ -70,7 +68,8 @@ const ProfileImage = compose<React.ComponentType<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values.logo, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_ProfileImage);
 
 export default ProfileImage;

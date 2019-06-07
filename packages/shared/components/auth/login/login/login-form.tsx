@@ -71,7 +71,6 @@ export interface ILoginFormFormValues {
 }
 
 const LoginForm = compose<React.FC<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, ILoginFormFormValues>({
     displayName: "loginForm",
@@ -84,6 +83,7 @@ const LoginForm = compose<React.FC<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_LoginForm);
 export default LoginForm;

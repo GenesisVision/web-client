@@ -30,5 +30,5 @@ const _PieContainer: React.FC<IPieContainer> = ({
   </div>
 );
 
-const PieContainer = React.memo(translate()(_PieContainer));
+const PieContainer = translate()(React.memo(_PieContainer));
 export default PieContainer;

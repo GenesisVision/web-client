@@ -52,4 +52,4 @@ const SignalProgramInfo: React.FC<
   );
 };
 
-export default React.memo(translate()(SignalProgramInfo)); // TODO refactor
+export default translate()(React.memo(SignalProgramInfo)); // TODO refactor

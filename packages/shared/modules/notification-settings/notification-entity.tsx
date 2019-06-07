@@ -41,5 +41,5 @@ interface Props extends InjectedTranslateProps {
   level?: number;
 }
 
-const NotificationEntity = React.memo(translate()(_NotificationEntity));
+const NotificationEntity = translate()(React.memo(_NotificationEntity));
 export default NotificationEntity;

@@ -16,5 +16,5 @@ interface Props extends InjectedTranslateProps {
   errorMessage: string;
 }
 
-const EmailConfirmFailure = React.memo(translate()(_EmailConfirmFailure));
+const EmailConfirmFailure = translate()(React.memo(_EmailConfirmFailure));
 export default EmailConfirmFailure;

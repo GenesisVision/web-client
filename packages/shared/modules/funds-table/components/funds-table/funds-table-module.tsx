@@ -13,49 +13,45 @@ interface Props extends ITableModuleProps {
   toggleFavorite: TableToggleFavoriteType;
 }
 
-class FundsTableModule extends React.PureComponent<Props> {
-  render() {
-    const {
-      getItems,
-      renderFilters,
-      sorting,
-      filtering,
-      defaultFilters,
-      paging,
-      isAuthenticated,
-      title,
-      disableTitle,
-      toggleFavorite
-    } = this.props;
-
-    return (
-      <TableModule
-        disableTitle={disableTitle}
-        getItems={getItems}
-        defaultFilters={defaultFilters}
-        filtering={filtering}
-        sorting={sorting}
-        renderFilters={renderFilters}
-        paging={paging}
-        title={title}
-        columns={FUNDS_TABLE_COLUMNS}
-        renderHeader={column => (
-          <FundsTableHeaderCell
-            column={column}
-            isAuthenticated={isAuthenticated}
-          />
-        )}
-        renderBodyRow={(fund, updateRow = () => {}) => (
-          <FundsTableRow
-            title={title}
-            fund={fund}
-            toggleFavorite={toggleFavorite(fund, updateRow)}
-            isAuthenticated={isAuthenticated}
-          />
-        )}
-      />
-    );
-  }
-}
+const FundsTableModule: React.FC<Props> = React.memo(
+  ({
+    getItems,
+    renderFilters,
+    sorting,
+    filtering,
+    defaultFilters,
+    paging,
+    isAuthenticated,
+    title,
+    disableTitle,
+    toggleFavorite
+  }) => (
+    <TableModule
+      disableTitle={disableTitle}
+      getItems={getItems}
+      defaultFilters={defaultFilters}
+      filtering={filtering}
+      sorting={sorting}
+      renderFilters={renderFilters}
+      paging={paging}
+      title={title}
+      columns={FUNDS_TABLE_COLUMNS}
+      renderHeader={column => (
+        <FundsTableHeaderCell
+          column={column}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
+      renderBodyRow={(fund, updateRow = () => {}) => (
+        <FundsTableRow
+          title={title}
+          fund={fund}
+          toggleFavorite={toggleFavorite(fund, updateRow)}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
+    />
+  )
+);
 
 export default FundsTableModule;

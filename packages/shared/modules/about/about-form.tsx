@@ -112,7 +112,6 @@ interface DispatchProps {
 }
 
 const AboutForm = compose<React.ComponentType<IAboutFormOwnProps>>(
-  React.memo,
   translate(),
   connect(
     null,
@@ -127,6 +126,7 @@ const AboutForm = compose<React.ComponentType<IAboutFormOwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_AboutForm);
 export default AboutForm;

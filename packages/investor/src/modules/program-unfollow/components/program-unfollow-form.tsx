@@ -47,7 +47,6 @@ const _ProgramUnfollowForm: React.FC<Props> = ({
 };
 
 const ProgramUnfollowForm = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<OwnProps, IProgramUnfollowFormValues>({
     displayName: "confirm-form",
@@ -57,7 +56,8 @@ const ProgramUnfollowForm = compose<React.ComponentType<OwnProps>>(
     handleSubmit: (values, { props }) => {
       props.onSubmit(values);
     }
-  })
+  }),
+  React.memo
 )(_ProgramUnfollowForm);
 
 export default ProgramUnfollowForm;

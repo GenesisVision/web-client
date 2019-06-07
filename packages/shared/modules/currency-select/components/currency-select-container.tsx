@@ -1,9 +1,14 @@
 import "./currency-select.scss";
 
 import classNames from "classnames";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import RootState from "shared/reducers/root-reducer";
 import { ActionType, CurrencyEnum } from "shared/utils/types";
@@ -13,28 +18,28 @@ import { updateCurrency } from "../services/currency-select.service";
 import CurrencySelect from "./currency-select";
 import { CurrencySelectLoader } from "./currency-select.loader";
 
-class _CurrencySelectContainer extends React.PureComponent<Props> {
-  handleChange = (event: ISelectChangeEvent) => {
-    this.props.service.updateCurrency(event.target.value as CurrencyEnum);
-  };
-  render() {
-    const {
-      currencyValues = Object.values(HEADER_CURRENCY_VALUES),
-      className,
-      currency
-    } = this.props;
-    return (
-      <CurrencySelect
-        condition={!!currency && !!currencyValues}
-        loader={<CurrencySelectLoader />}
-        className={classNames("currency-select", className)}
-        value={currency}
-        onChange={this.handleChange}
-        currencyValues={currencyValues as CurrencyEnum[]}
-      />
-    );
-  }
-}
+const _CurrencySelectContainer: React.FC<Props> = ({
+  service,
+  currencyValues = Object.values(HEADER_CURRENCY_VALUES),
+  className,
+  currency
+}) => {
+  const handleChange = useCallback(
+    (event: ISelectChangeEvent) =>
+      service.updateCurrency(event.target.value as CurrencyEnum),
+    [service]
+  );
+  return (
+    <CurrencySelect
+      condition={!!currency && !!currencyValues}
+      loader={<CurrencySelectLoader />}
+      className={classNames("currency-select", className)}
+      value={currency}
+      onChange={handleChange}
+      currencyValues={currencyValues as CurrencyEnum[]}
+    />
+  );
+};
 
 const mapStateToProps = (state: RootState): StateProps => {
   const { accountSettings, platformData } = state;
@@ -71,13 +76,11 @@ interface OwnProps {
   className?: string;
 }
 
-const CurrencySelectContainer = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps,
-  RootState
->(
-  mapStateToProps,
-  mapDispatchToProps
+const CurrencySelectContainer = compose<React.ComponentType<OwnProps>>(
+  connect<StateProps, DispatchProps, OwnProps, RootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  React.memo
 )(_CurrencySelectContainer);
 export default CurrencySelectContainer;

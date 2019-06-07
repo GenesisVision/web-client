@@ -59,5 +59,5 @@ interface Props extends InjectedTranslateProps {
   isWithdrawalEnabled?: boolean;
 }
 
-const WalletBalanceButtons = React.memo(translate()(_WalletBalanceButtons));
+const WalletBalanceButtons = translate()(React.memo(_WalletBalanceButtons));
 export default WalletBalanceButtons;

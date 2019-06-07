@@ -53,5 +53,5 @@ const _ManagerDescription: React.FC<
   </div>
 );
 
-const ManagerDescription = React.memo(translate()(_ManagerDescription));
+const ManagerDescription = translate()(React.memo(_ManagerDescription));
 export default ManagerDescription;

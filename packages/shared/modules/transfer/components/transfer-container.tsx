@@ -13,6 +13,7 @@ import {
   fetchWallets
 } from "shared/components/wallet/services/wallet.services";
 import RootState from "shared/reducers/root-reducer";
+import { ResponseError } from "shared/utils/types";
 
 import { transferRequest } from "../services/transfer.services";
 import {
@@ -37,15 +38,19 @@ class _TransferContainer extends React.PureComponent<Props, State> {
   }
 
   handleSubmit = (values: TransferFormValues) => {
-    const { service, onClose } = this.props;
+    const { service, onClose, destinationType, sourceType } = this.props;
     transferRequest(values)
       .then(() => {
         onClose();
         service.fetchWallets();
-        service.fetchAccounts();
         service.updateWalletTimestamp();
+        if (
+          destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
+          sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+        )
+          service.fetchAccounts();
       })
-      .catch((error: any) => {
+      .catch((error: ResponseError) => {
         this.setState({
           errorMessage: error.errorMessage
         });

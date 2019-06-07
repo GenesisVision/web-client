@@ -46,7 +46,7 @@ interface OwnProps {
 }
 
 const ProgramsRatingStats = compose<React.ComponentType<OwnProps>>(
-  React.memo,
-  translate()
+  translate(),
+  React.memo
 )(_ProgramsRatingStats);
 export default ProgramsRatingStats;

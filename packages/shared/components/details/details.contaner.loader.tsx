@@ -141,5 +141,5 @@ const _DetailsContainerLoader: React.FC<
     </div>
   </Page>
 );
-const DetailsContainerLoader = React.memo(translate()(_DetailsContainerLoader));
+const DetailsContainerLoader = translate()(React.memo(_DetailsContainerLoader));
 export default DetailsContainerLoader;

@@ -20,43 +20,40 @@ const _ConfirmPopup: React.ComponentType<
   className,
   handleSubmit,
   isSubmitting
-}) => {
-  return (
-    <Dialog open={open} onClose={onClose} className={className}>
-      <form onSubmit={handleSubmit} noValidate>
-        <div className="dialog__top">
-          {header && <h2>{header}</h2>}
-          <div className="dialog__text">
-            <p>{body}</p>
-          </div>
-          <div className="dialog__buttons">
-            <GVButton type="submit" disabled={isSubmitting}>
-              {applyButtonText}
-            </GVButton>
-            {onCancel && (
-              <GVButton color="secondary" variant="outlined" onClick={onCancel}>
-                {cancelButtonText}
-              </GVButton>
-            )}
-          </div>
+}) => (
+  <Dialog open={open} onClose={onClose} className={className}>
+    <form onSubmit={handleSubmit} noValidate>
+      <div className="dialog__top">
+        {header && <h2>{header}</h2>}
+        <div className="dialog__text">
+          <p>{body}</p>
         </div>
-      </form>
-    </Dialog>
-  );
-};
-
-const ConfirmPopup = React.memo(
-  compose<React.ComponentType<IConfirmPopupProps>>(
-    translate(),
-    withFormik<IConfirmPopupProps, {}>({
-      displayName: "confirm-form",
-      mapPropsToValues: () => ({}),
-      handleSubmit: (_, { props, setSubmitting }) => {
-        props.onApply(setSubmitting);
-      }
-    })
-  )(_ConfirmPopup)
+        <div className="dialog__buttons">
+          <GVButton type="submit" disabled={isSubmitting}>
+            {applyButtonText}
+          </GVButton>
+          {onCancel && (
+            <GVButton color="secondary" variant="outlined" onClick={onCancel}>
+              {cancelButtonText}
+            </GVButton>
+          )}
+        </div>
+      </div>
+    </form>
+  </Dialog>
 );
+
+const ConfirmPopup = compose<React.ComponentType<IConfirmPopupProps>>(
+  translate(),
+  withFormik<IConfirmPopupProps, {}>({
+    displayName: "confirm-form",
+    mapPropsToValues: () => ({}),
+    handleSubmit: (_, { props, setSubmitting }) => {
+      props.onApply(setSubmitting);
+    }
+  }),
+  React.memo
+)(_ConfirmPopup);
 export default ConfirmPopup;
 
 export interface IConfirmPopupProps extends IDialogProps {

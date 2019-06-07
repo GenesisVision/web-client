@@ -1,6 +1,6 @@
 import "./date-range-filter.scss";
 
-import * as React from "react";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
 import { UpdateFilterFunc } from "../../table.types";
@@ -18,36 +18,37 @@ interface IDateRangeFilterProps {
   startLabel: string;
 }
 
-class DateRangeFilter extends React.PureComponent<
+const _DateRangeFilter: React.FC<
   IDateRangeFilterProps & InjectedTranslateProps
-> {
-  renderValueText = (value: IDataRangeFilterValue): string => {
-    const { t } = this.props;
-    switch (value.type) {
-      case DATA_RANGE_FILTER_TYPES.ALL:
-        return t("filters.date-range.all-time");
-      case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:
-        return t("filters.date-range.last-month");
-      case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
-        return t("filters.date-range.last-week");
-      case DATA_RANGE_FILTER_TYPES.CUSTOM:
-      default:
-        return t("filters.date-range.custom");
-    }
-  };
-  render() {
-    return (
-      <Filter
-        label={this.props.t("filters.date-range.label")}
-        name={this.props.name}
-        renderValueText={this.renderValueText}
-        value={this.props.value}
-        updateFilter={this.props.onChange}
-      >
-        <DateRangeFilterPopover startLabel={this.props.startLabel} />
-      </Filter>
-    );
-  }
-}
+> = ({ t, name, value, onChange, startLabel }) => {
+  const renderValueText = useCallback(
+    (value: IDataRangeFilterValue): string => {
+      switch (value.type) {
+        case DATA_RANGE_FILTER_TYPES.ALL:
+          return t("filters.date-range.all-time");
+        case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:
+          return t("filters.date-range.last-month");
+        case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
+          return t("filters.date-range.last-week");
+        case DATA_RANGE_FILTER_TYPES.CUSTOM:
+        default:
+          return t("filters.date-range.custom");
+      }
+    },
+    [t]
+  );
+  return (
+    <Filter
+      label={t("filters.date-range.label")}
+      name={name}
+      renderValueText={renderValueText}
+      value={value}
+      updateFilter={onChange}
+    >
+      <DateRangeFilterPopover startLabel={startLabel} />
+    </Filter>
+  );
+};
 
-export default translate()(DateRangeFilter);
+const DateRangeFilter = translate()(React.memo(_DateRangeFilter));
+export default DateRangeFilter;

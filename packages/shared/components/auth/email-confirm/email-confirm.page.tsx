@@ -24,5 +24,5 @@ interface Props extends InjectedTranslateProps {
   location: Location;
 }
 
-const EmailConfirmPage = React.memo(translate()(_EmailConfirmPage));
+const EmailConfirmPage = translate()(React.memo(_EmailConfirmPage));
 export default EmailConfirmPage;

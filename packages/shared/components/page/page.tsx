@@ -21,8 +21,8 @@ interface OwnProps {
 }
 
 const Page = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   withRole,
-  translate()
+  translate(),
+  React.memo
 )(_Page);
 export default Page;

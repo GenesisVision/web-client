@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useCallback } from "react";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -16,37 +16,40 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { IDashboardAssetChart } from "../../../reducers/dashboard.reducers";
 import { getAssetChart, setPeriod } from "../../../services/dashboard.service";
 
-class _DashboardPortfolioChartContainer extends React.PureComponent<Props> {
-  handleChangePeriod = (period: ChartDefaultPeriod) => {
-    const { service, assetChart } = this.props;
-    service.setPeriod(period);
-    service.getAssetChart(assetChart.id, assetChart.title, assetChart.type);
-  };
+const _DashboardPortfolioChartContainer: React.FC<Props> = ({
+  assetChart,
+  period,
+  service
+}) => {
+  const handleChangePeriod = useCallback(
+    (period: ChartDefaultPeriod) => {
+      service.setPeriod(period);
+      service.getAssetChart(assetChart.id, assetChart.title, assetChart.type);
+    },
+    [service, assetChart]
+  );
 
-  render() {
-    const { assetChart, period } = this.props;
-    return (
-      <>
-        <h3 className="dashboard-portfolio-chart-section__heading">
-          {assetChart.title}
-        </h3>
-        <ChartPeriod period={period} onChange={this.handleChangePeriod} />
-        <div className="dashboard-portfolio-chart-section__chart">
-          {assetChart.type === ASSETS_TYPES.Program && (
-            <ProgramProfitChart
-              equityChart={assetChart.equityChart}
-              pnlChart={assetChart.pnLChart!}
-              currency={assetChart.currency}
-            />
-          )}
-          {assetChart.type === ASSETS_TYPES.Fund && (
-            <FundProfitChart equityChart={assetChart.equityChart} />
-          )}
-        </div>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <h3 className="dashboard-portfolio-chart-section__heading">
+        {assetChart.title}
+      </h3>
+      <ChartPeriod period={period} onChange={handleChangePeriod} />
+      <div className="dashboard-portfolio-chart-section__chart">
+        {assetChart.type === ASSETS_TYPES.Program && (
+          <ProgramProfitChart
+            equityChart={assetChart.equityChart}
+            pnlChart={assetChart.pnLChart!}
+            currency={assetChart.currency}
+          />
+        )}
+        {assetChart.type === ASSETS_TYPES.Fund && (
+          <FundProfitChart equityChart={assetChart.equityChart} />
+        )}
+      </div>
+    </>
+  );
+};
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
@@ -77,6 +80,7 @@ const DashboardPortfolioChartContainer = compose<
   connect(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_DashboardPortfolioChartContainer);
 export default DashboardPortfolioChartContainer;

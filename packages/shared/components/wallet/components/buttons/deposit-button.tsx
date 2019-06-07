@@ -23,5 +23,5 @@ export const _DepositButton: React.FC<Props> = ({
 
 interface Props extends InjectedTranslateProps, ParentWalletButtonProps {}
 
-const DepositButton = React.memo(translate()(_DepositButton));
+const DepositButton = translate()(React.memo(_DepositButton));
 export default DepositButton;

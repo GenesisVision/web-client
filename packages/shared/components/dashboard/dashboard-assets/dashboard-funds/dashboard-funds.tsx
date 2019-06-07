@@ -167,8 +167,8 @@ interface OwnProps {
 }
 
 const DashboardFunds = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   withRole,
-  translate()
+  translate(),
+  React.memo
 )(_DashboardFunds);
 export default DashboardFunds;

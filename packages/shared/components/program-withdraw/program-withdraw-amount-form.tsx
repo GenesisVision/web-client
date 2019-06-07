@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
@@ -10,75 +10,72 @@ import { number, object } from "yup";
 
 import InputAmountField from "../input-amount-field/input-amount-field";
 
-class _ProgramWithdrawAmountForm extends React.PureComponent<
+const _ProgramWithdrawAmountForm: React.FC<
   InjectedFormikProps<Props, FormValues>
-> {
-  isAllow = (values: NumberFormatValues) => {
+> = ({
+  setFieldValue,
+  availableToWithdraw,
+  t,
+  handleSubmit,
+  accountCurrency,
+  programCurrency,
+  rate,
+  values,
+  isValid,
+  dirty
+}) => {
+  const isAllow = useCallback((values: NumberFormatValues) => {
     const { formattedValue, value } = values;
     return (
-      (formattedValue === "" ||
-        validateFraction(value, this.props.programCurrency)) &&
+      (formattedValue === "" || validateFraction(value, programCurrency)) &&
       values.value !== "."
     );
-  };
+  }, []);
 
-  setMaxAmount = () => {
-    const { setFieldValue, availableToWithdraw, programCurrency } = this.props;
-    setFieldValue(
-      "amount",
-      formatCurrencyValue(availableToWithdraw, programCurrency)
-    );
-  };
+  const setMaxAmount = useCallback(
+    () =>
+      setFieldValue(
+        "amount",
+        formatCurrencyValue(availableToWithdraw, programCurrency)
+      ),
+    [availableToWithdraw, programCurrency]
+  );
 
-  render() {
-    const {
-      t,
-      handleSubmit,
-      accountCurrency,
-      programCurrency,
-      rate,
-      values,
-      isValid,
-      dirty
-    } = this.props;
-
-    return (
-      <form id="withdraw-form" onSubmit={handleSubmit}>
-        <InputAmountField
-          name="amount"
-          label={t("withdraw-program.amount-to-withdraw")}
-          currency={programCurrency}
-          isAllow={this.isAllow}
-          setMax={this.setMaxAmount}
-        />
-
-        {programCurrency !== accountCurrency && values.amount && (
-          <div className="">
-            <NumberFormat
-              value={formatCurrencyValue(
-                convertFromCurrency(values.amount, rate),
-                accountCurrency
-              )}
-              prefix="≈ "
-              suffix={` ${accountCurrency}`}
-              displayType="text"
-            />
-          </div>
-        )}
-        <div className="dialog__buttons">
-          <GVButton
-            type="submit"
-            id="programWithdrawAmountFormSubmit"
-            className="invest-form__submit-button"
-            disabled={!values.amount || !isValid || !dirty}
-          >
-            {t("withdraw-program.next")}
-          </GVButton>
+  return (
+    <form id="withdraw-form" onSubmit={handleSubmit}>
+      <InputAmountField
+        name="amount"
+        label={t("withdraw-program.amount-to-withdraw")}
+        currency={programCurrency}
+        isAllow={isAllow}
+        setMax={setMaxAmount}
+      />
+      {programCurrency !== accountCurrency && values.amount && (
+        <div className="">
+          <NumberFormat
+            value={formatCurrencyValue(
+              convertFromCurrency(values.amount, rate),
+              accountCurrency
+            )}
+            prefix="≈ "
+            suffix={` ${accountCurrency}`}
+            displayType="text"
+          />
         </div>
-      </form>
-    );
-  }
-}
+      )}
+      <div className="dialog__buttons">
+        <GVButton
+          type="submit"
+          id="programWithdrawAmountFormSubmit"
+          className="invest-form__submit-button"
+          disabled={!values.amount || !isValid || !dirty}
+        >
+          {t("withdraw-program.next")}
+        </GVButton>
+      </div>
+    </form>
+  );
+};
 
 const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
   translate(),
@@ -100,7 +97,8 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
       if (!values.amount) return;
       props.onSubmit(values.amount);
     }
-  })
+  }),
+  React.memo
 )(_ProgramWithdrawAmountForm);
 
 export default ProgramWithdrawAmountForm;

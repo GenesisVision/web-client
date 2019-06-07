@@ -4,24 +4,21 @@ import { IFundControlsProps } from "shared/components/funds/fund-details/fund-de
 
 import InvestmentFundControls from "./investment-fund-controls";
 
-class FundControls extends React.PureComponent<
-  IFundControlsProps & InjectedTranslateProps
-> {
-  render() {
-    const { fundDescription, isAuthenticated, redirectToLogin } = this.props;
+const _FundControls: React.FC<IFundControlsProps & InjectedTranslateProps> = ({
+  fundDescription,
+  isAuthenticated,
+  redirectToLogin
+}) => (
+  <div className="program-details-description__controls">
+    <div className="program-details-description__col">
+      <InvestmentFundControls
+        fundDescription={fundDescription}
+        isAuthenticated={isAuthenticated}
+        redirectToLogin={redirectToLogin}
+      />
+    </div>
+  </div>
+);
 
-    return (
-      <div className="program-details-description__controls">
-        <div className="program-details-description__col">
-          <InvestmentFundControls
-            fundDescription={fundDescription}
-            isAuthenticated={isAuthenticated}
-            redirectToLogin={redirectToLogin}
-          />
-        </div>
-      </div>
-    );
-  }
-}
-
-export default translate()(FundControls);
+const FundControls = translate()(React.memo(_FundControls));
+export default FundControls;

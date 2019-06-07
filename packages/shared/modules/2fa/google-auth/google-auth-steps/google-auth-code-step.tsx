@@ -26,6 +26,6 @@ interface Props extends InjectedTranslateProps {
   className?: string;
 }
 
-const GoogleCodeStep = React.memo(translate()(GoogleStep2));
+const GoogleCodeStep = translate()(React.memo(GoogleStep2));
 
 export default GoogleCodeStep;

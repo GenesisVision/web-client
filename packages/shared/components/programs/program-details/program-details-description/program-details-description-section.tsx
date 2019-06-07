@@ -78,7 +78,7 @@ interface IProgramDetailsDescriptionSectionProps
   ChangePasswordTradingAccount?: ComponentType<any>;
 }
 
-const ProgramDetailsDescriptionSection = React.memo(
-  translate()(_ProgramDetailsDescriptionSection)
+const ProgramDetailsDescriptionSection = translate()(
+  React.memo(_ProgramDetailsDescriptionSection)
 );
 export default ProgramDetailsDescriptionSection;

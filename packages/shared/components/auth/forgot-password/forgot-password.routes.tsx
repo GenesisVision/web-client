@@ -27,5 +27,5 @@ const _ForgotPasswordRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
   </AuthLayout>
 );
 
-const ForgotPasswordRoutes = React.memo(translate()(_ForgotPasswordRoutes));
+const ForgotPasswordRoutes = translate()(React.memo(_ForgotPasswordRoutes));
 export default ForgotPasswordRoutes;

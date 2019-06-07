@@ -90,7 +90,6 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
 };
 
 const CustomNotificationCreateForm = compose<React.FC<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, ICustomNotificationCreateFormValues>({
     displayName: "create-notification",
@@ -108,7 +107,8 @@ const CustomNotificationCreateForm = compose<React.FC<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_CustomNotificationCreateForm);
 export default CustomNotificationCreateForm;
 
