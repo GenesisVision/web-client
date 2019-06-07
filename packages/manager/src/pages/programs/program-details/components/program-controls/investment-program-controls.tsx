@@ -61,6 +61,8 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
 
     const composeEditInfo: IAssetEditInfo = {
       stopOutLevel: programDescription.stopOutLevel,
+      investmentLimit: programDescription.availableInvestmentLimit,
+      currency: programDescription.currency,
       id: programDescription.id,
       title: programDescription.title,
       description: programDescription.description,

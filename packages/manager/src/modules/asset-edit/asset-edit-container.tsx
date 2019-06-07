@@ -61,6 +61,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
 
 export interface IAssetEditInfo extends IAssetEditFormValues {
   id: string;
+  currency?: string;
 }
 
 interface OwnProps {
