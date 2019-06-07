@@ -14,7 +14,7 @@ const clearDataActionType: string = composeClearDataActionType(EMAIL_PENDING);
 
 const emailPendingReducer = (
   state: EmailPendingState = initialState,
-  action: ActionType
+  action: ActionType<EmailPendingState>
 ): EmailPendingState => {
   switch (action.type) {
     case EMAIL_PENDING:
