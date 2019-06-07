@@ -35,7 +35,7 @@ interface FetchTransactionsAction
   type: typeof WALLET_TRANSACTIONS;
 }
 
-interface UpdateTimestampAction extends ActionType<Date> {
+export interface UpdateTimestampAction extends ActionType<Date> {
   type: typeof WALLET_LAST_UPDATE;
 }
 
