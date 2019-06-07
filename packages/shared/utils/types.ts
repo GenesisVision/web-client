@@ -16,7 +16,7 @@ export interface IDispatchable<T> {
 
 export type FavoriteActionProps = { id: string; authorization: string };
 
-export interface FavoriteActionType<T> extends ActionType<T> {
+export interface FavoriteActionType<T = any> extends ActionType<T> {
   meta: {
     id: string;
     isFavorite: boolean;
