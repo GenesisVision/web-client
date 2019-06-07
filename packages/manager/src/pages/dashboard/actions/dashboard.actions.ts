@@ -5,6 +5,7 @@ import {
   ManagerPortfolioEvents,
   ProgramsList
 } from "gv-api-web";
+import { Action } from "redux";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import managerApi from "shared/services/api-client/manager-api";
 import { ActionType } from "shared/utils/types";
@@ -88,6 +89,8 @@ export const setPeriod = (period: any): ActionType<any> => ({
   payload: period
 });
 
-export const clearDashboardAssetsTable = (): ActionType => ({
+export const clearDashboardAssetsTable = (): Action => ({
   type: CLEAR_DASHBOARD_ASSETS_TABLE
 });
+
+// TODO move actions to shared
