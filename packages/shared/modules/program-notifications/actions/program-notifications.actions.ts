@@ -9,10 +9,10 @@ export const TOGGLE_PROGRAM_NOTIFICATION = "TOGGLE_PROGRAM_NOTIFICATION";
 export const ADD_ERROR_MESSAGE = "ADD_ERROR_MESSAGE";
 
 export const addProgramNotificationsAction = (
-  settings: ProgramNotificationSettingList
+  payload: ProgramNotificationSettingList
 ): NotificationsActionType<ProgramNotificationSettingList> => ({
   type: ADD_PROGRAM_NOTIFICATIONS,
-  settings
+  payload
 });
 
 export const fetchProgramNotificationsAction = (
@@ -26,10 +26,10 @@ export const fetchProgramNotificationsAction = (
 });
 
 export const addErrorMessageAction = (
-  errorMessage: string
+  payload: string
 ): NotificationsActionType<ProgramNotificationSettingList> => ({
   type: ADD_ERROR_MESSAGE,
-  errorMessage
+  payload
 });
 
 export const toggleProgramNotificationsAction = (

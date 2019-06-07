@@ -22,11 +22,11 @@ const programNotificationsReducer = (
   switch (action.type) {
     case ADD_PROGRAM_NOTIFICATIONS:
       return {
-        data: { ...state.data, [action.settings!.url]: action.settings },
+        data: { ...state.data, [action.payload!.url]: action.payload },
         errorMessage: undefined
       };
     case ADD_ERROR_MESSAGE:
-      return { ...state, errorMessage: action.errorMessage };
+      return { ...state, errorMessage: action.payload };
     default:
       return state;
   }

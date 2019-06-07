@@ -9,10 +9,10 @@ export const TOGGLE_FUND_NOTIFICATION = "TOGGLE_FUND_NOTIFICATION";
 export const ADD_ERROR_MESSAGE = "ADD_ERROR_MESSAGE";
 
 export const addFundNotificationsAction = (
-  settings: FundNotificationSettingList
+  payload: FundNotificationSettingList
 ): NotificationsActionType<FundNotificationSettingList> => ({
   type: ADD_FUND_NOTIFICATIONS,
-  settings
+  payload
 });
 
 export const fetchFundNotificationsAction = (
@@ -26,10 +26,10 @@ export const fetchFundNotificationsAction = (
 });
 
 export const addErrorMessageAction = (
-  errorMessage: string
+  payload: string
 ): NotificationsActionType<FundNotificationSettingList> => ({
   type: ADD_ERROR_MESSAGE,
-  errorMessage
+  payload
 });
 
 export const toggleFundNotificationsAction = (
