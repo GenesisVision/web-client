@@ -307,16 +307,13 @@ class CreateProgramSettings extends React.PureComponent<
               </div>
               {hasInvestmentLimit && (
                 <div className="create-program-settings__item">
-                  <GVFormikField
+                  <InputAmountField
+                    autoFocus={false}
                     name={CREATE_PROGRAM_FIELDS.investmentLimit}
                     label={t(
                       "manager.create-program-page.settings.fields.enter-correct-amount"
                     )}
-                    suffix={` ${currency}`}
-                    component={GVTextField}
-                    InputComponent={NumberFormat}
-                    autoComplete="off"
-                    decimalScale={4}
+                    currency={currency ? currency : ""}
                   />
                 </div>
               )}
