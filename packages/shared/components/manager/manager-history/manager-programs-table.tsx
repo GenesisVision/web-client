@@ -74,5 +74,5 @@ interface Props {
   isAuthenticated: boolean;
 }
 
-const ManagerPrograms = React.memo(translate()(_ManagerPrograms));
+const ManagerPrograms = translate()(React.memo(_ManagerPrograms));
 export default ManagerPrograms;

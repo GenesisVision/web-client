@@ -69,8 +69,8 @@ class _ProgramReinvestingContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const ProgramReinvestingContainer = React.memo(
-  translate()(_ProgramReinvestingContainer)
+const ProgramReinvestingContainer = translate()(
+  React.memo(_ProgramReinvestingContainer)
 );
 export default ProgramReinvestingContainer;
 

@@ -16,4 +16,4 @@ const FollowTop: React.FC<IFollowTop & InjectedTranslateProps> = ({
   </div>
 );
 
-export default React.memo(translate()(FollowTop));
+export default translate()(React.memo(FollowTop));

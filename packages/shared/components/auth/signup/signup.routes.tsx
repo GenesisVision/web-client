@@ -23,5 +23,5 @@ const _SignUpRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
   </AuthLayout>
 );
 
-const SignUpRoutes = React.memo(translate()(_SignUpRoutes));
+const SignUpRoutes = translate()(React.memo(_SignUpRoutes));
 export default SignUpRoutes;

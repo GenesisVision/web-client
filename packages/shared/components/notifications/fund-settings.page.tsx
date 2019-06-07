@@ -24,5 +24,5 @@ interface Params {
   id: string;
 }
 
-const FundNotificationPage = React.memo(translate()(_FundNotificationPage));
+const FundNotificationPage = translate()(React.memo(_FundNotificationPage));
 export default FundNotificationPage;

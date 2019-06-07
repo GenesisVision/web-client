@@ -77,10 +77,10 @@ interface OwnProps {
 }
 
 const CurrencySelectContainer = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   connect<StateProps, DispatchProps, OwnProps, RootState>(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_CurrencySelectContainer);
 export default CurrencySelectContainer;

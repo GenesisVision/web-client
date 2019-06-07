@@ -41,4 +41,4 @@ const DashboardPage: React.FC<IDashboardPageProps> = ({ t, role }) => {
   );
 };
 
-export default withRole(React.memo(translate()(DashboardPage)));
+export default withRole(translate()(React.memo(DashboardPage)));

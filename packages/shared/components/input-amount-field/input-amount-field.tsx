@@ -56,5 +56,5 @@ interface Props extends InjectedTranslateProps {
   emptyInit?: boolean;
 }
 
-const InputAmountField = React.memo(translate()(_InputAmountField));
+const InputAmountField = translate()(React.memo(_InputAmountField));
 export default InputAmountField;

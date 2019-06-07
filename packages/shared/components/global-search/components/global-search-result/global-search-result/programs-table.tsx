@@ -34,4 +34,4 @@ const ProgramsTable: React.FC<
   );
 };
 
-export default React.memo(translate()(ProgramsTable));
+export default translate()(React.memo(ProgramsTable));

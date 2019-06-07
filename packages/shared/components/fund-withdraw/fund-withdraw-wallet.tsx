@@ -44,7 +44,7 @@ const _FundWithdrawWallet: React.FC<Props> = ({
   );
 };
 
-const FundWithdrawWallet = React.memo(translate()(_FundWithdrawWallet));
+const FundWithdrawWallet = translate()(React.memo(_FundWithdrawWallet));
 export default FundWithdrawWallet;
 
 interface Props extends InjectedTranslateProps {

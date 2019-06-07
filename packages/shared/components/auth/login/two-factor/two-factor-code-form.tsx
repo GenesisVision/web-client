@@ -106,7 +106,6 @@ interface State {
 }
 
 const TwoFactorCodeForm = compose<React.FC<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, ITwoFactorCodeFormValues>({
     displayName: "twoFactorForm",
@@ -128,6 +127,7 @@ const TwoFactorCodeForm = compose<React.FC<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       return props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_TwoFactorCodeForm);
 export default TwoFactorCodeForm;

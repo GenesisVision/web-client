@@ -67,13 +67,13 @@ interface OwnProps {
 interface Props extends InjectedTranslateProps, OwnProps {}
 
 const FundWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, {}>({
     displayName: "withdraw-form",
     handleSubmit: (_, { props, setSubmitting }) => {
       props.onSubmit(setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_FundWithdrawConfirmForm);
 export default FundWithdrawConfirmForm;

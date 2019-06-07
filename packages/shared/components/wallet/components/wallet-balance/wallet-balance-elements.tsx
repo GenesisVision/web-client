@@ -64,5 +64,5 @@ interface Props extends InjectedTranslateProps {
   currency: CurrencyEnum;
 }
 
-const WalletBalanceElements = React.memo(translate()(_WalletBalanceElements));
+const WalletBalanceElements = translate()(React.memo(_WalletBalanceElements));
 export default WalletBalanceElements;

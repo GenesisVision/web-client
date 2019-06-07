@@ -58,7 +58,7 @@ export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
   );
 };
 
-const Dialog = React.memo(translate()(_Dialog));
+const Dialog = translate()(React.memo(_Dialog));
 export default Dialog;
 
 export interface IDialogProps {

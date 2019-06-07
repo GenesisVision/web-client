@@ -35,8 +35,8 @@ interface OwnProps {
 }
 
 const TabsContainer = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
-  withRouter
+  withRouter,
+  React.memo
 )(_TabsContainer);
 export default TabsContainer;

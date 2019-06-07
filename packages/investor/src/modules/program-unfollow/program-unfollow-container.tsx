@@ -44,11 +44,11 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 const ProgramUnfollowContainer = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   connect<null, DispatchProps, OwnProps>(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_ProgramUnfollowContainer);
 export default ProgramUnfollowContainer;
 

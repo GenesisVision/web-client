@@ -33,5 +33,5 @@ interface Props extends InjectedTranslateProps {
   onChange(value: TFilter<LevelFilterType>): void;
 }
 
-const LevelFilter = React.memo(translate()(_LevelFilter));
+const LevelFilter = translate()(React.memo(_LevelFilter));
 export default LevelFilter;

@@ -15,4 +15,4 @@ const WalletWithdrawRequest: React.FC<InjectedTranslateProps> = ({ t }) => (
   </div>
 );
 
-export default React.memo(translate()(WalletWithdrawRequest));
+export default translate()(React.memo(WalletWithdrawRequest));

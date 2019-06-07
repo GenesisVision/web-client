@@ -96,5 +96,5 @@ interface Props extends InjectedTranslateProps {
   logout(): void;
 }
 
-const NavigationMobile = React.memo(translate()(_NavigationMobile));
+const NavigationMobile = translate()(React.memo(_NavigationMobile));
 export default NavigationMobile;

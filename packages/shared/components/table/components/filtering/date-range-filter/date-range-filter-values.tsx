@@ -108,7 +108,7 @@ const _FirstInput: React.FC<{ value: string } & InjectedTranslateProps> = ({
     disabled
   />
 );
-const FirstInput = React.memo(translate()(_FirstInput));
+const FirstInput = translate()(React.memo(_FirstInput));
 
 const _SecondInput: React.FC<InjectedTranslateProps> = ({ t }) => (
   <GVTextField
@@ -120,7 +120,7 @@ const _SecondInput: React.FC<InjectedTranslateProps> = ({ t }) => (
     disabled
   />
 );
-const SecondInput = React.memo(translate()(_SecondInput));
+const SecondInput = translate()(React.memo(_SecondInput));
 
-const DateRangeFilterValues = React.memo(translate()(_DateRangeFilterValues));
+const DateRangeFilterValues = translate()(React.memo(_DateRangeFilterValues));
 export default DateRangeFilterValues;

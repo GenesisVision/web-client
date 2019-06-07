@@ -41,7 +41,7 @@ const DetailsNotification: React.FC<IDetailsNotificationProps> = ({
 );
 
 export default compose<React.ComponentType<IDetailsNotificationOwnProps>>(
-  React.memo,
   translate(),
-  isAuthenticated
+  isAuthenticated,
+  React.memo
 )(DetailsNotification);

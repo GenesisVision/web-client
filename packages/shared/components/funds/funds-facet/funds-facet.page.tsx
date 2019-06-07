@@ -37,5 +37,5 @@ const _FundsFacetPage: React.FC<Props> = ({ t }) => {
 
 interface Props extends InjectedTranslateProps {}
 
-const FundsFacetPage = React.memo(translate()(_FundsFacetPage));
+const FundsFacetPage = translate()(React.memo(_FundsFacetPage));
 export default FundsFacetPage;

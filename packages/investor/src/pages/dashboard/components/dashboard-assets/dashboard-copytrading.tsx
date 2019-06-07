@@ -128,9 +128,9 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
 );
 
 const DashboardCopytrading = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   withRole,
-  translate()
+  translate(),
+  React.memo
 )(_DashboardCopytrading);
 export default DashboardCopytrading;
 

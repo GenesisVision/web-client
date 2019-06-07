@@ -36,7 +36,7 @@ const _Limits: React.FC<ILimitsProps> = ({
     ))}
   </>
 );
-const Limits = React.memo(translate()(_Limits));
+const Limits = translate()(React.memo(_Limits));
 
 interface ILimitsProps extends InjectedTranslateProps {
   investmentsLimits: LevelInfo[];
@@ -117,5 +117,5 @@ interface OwnProps {
 
 interface Props extends OwnProps, InjectedTranslateProps {}
 
-const AboutLevelsComponent = React.memo(translate()(_AboutLevelsComponent));
+const AboutLevelsComponent = translate()(React.memo(_AboutLevelsComponent));
 export default AboutLevelsComponent;

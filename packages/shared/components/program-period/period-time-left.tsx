@@ -30,7 +30,7 @@ interface OwnProps {
 }
 
 const PeriodTimeLeft = compose<React.ComponentType<OwnProps>>(
-  React.memo,
-  translate()
+  translate(),
+  React.memo
 )(_PeriodTimeLeft);
 export default PeriodTimeLeft;

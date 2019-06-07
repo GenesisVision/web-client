@@ -26,8 +26,8 @@ const _DashboardGetStarted: React.FC<
 );
 
 const DashboardGetStarted = compose<React.ComponentType>(
-  React.memo,
   withRole,
-  translate()
+  translate(),
+  React.memo
 )(_DashboardGetStarted);
 export default DashboardGetStarted;

@@ -39,7 +39,7 @@ const _ClosePeriod: React.FC<IClosePeriodProps & InjectedTranslateProps> = ({
   );
 };
 
-const ClosePeriod = React.memo(translate()(_ClosePeriod));
+const ClosePeriod = translate()(React.memo(_ClosePeriod));
 export default ClosePeriod;
 
 export interface IClosePeriodProps {

@@ -81,5 +81,5 @@ export interface IFundsFacetTableProps {
   isAuthenticated?: boolean;
 }
 
-const FundsFacetTable = React.memo(translate()(_FundsFacetTable));
+const FundsFacetTable = translate()(React.memo(_FundsFacetTable));
 export default FundsFacetTable;

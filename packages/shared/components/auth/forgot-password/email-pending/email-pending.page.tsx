@@ -19,5 +19,5 @@ const _EmailPendingPage: React.FC<InjectedTranslateProps> = ({ t }) => (
   </div>
 );
 
-const EmailPendingPage = React.memo(translate()(_EmailPendingPage));
+const EmailPendingPage = translate()(React.memo(_EmailPendingPage));
 export default EmailPendingPage;

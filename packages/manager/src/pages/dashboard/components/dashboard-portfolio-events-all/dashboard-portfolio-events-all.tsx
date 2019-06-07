@@ -49,9 +49,9 @@ interface StateProps {
 }
 
 const PortfolioEventsAllComponent = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   withRole,
   translate(),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  React.memo
 )(_PortfolioEventsAllComponent);
 export default PortfolioEventsAllComponent;

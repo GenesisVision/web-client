@@ -21,4 +21,4 @@ export interface ILoginFooterProps {
   ROUTE: string;
 }
 
-export default React.memo(translate()(LoginFooter));
+export default translate()(React.memo(LoginFooter));

@@ -61,7 +61,6 @@ enum FIELDS {
 }
 
 const RestorePassword = compose<React.FC<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, IRestorePasswordFormValues>({
     displayName: "passwordRestoreForm",
@@ -86,6 +85,7 @@ const RestorePassword = compose<React.FC<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_RestorePassword);
 export default RestorePassword;

@@ -89,9 +89,9 @@ interface StateProps {
 }
 
 const WalletTotal = compose<React.ComponentType<WalletRouteProps>>(
-  React.memo,
   withRole,
   connect(mapStateToProps),
-  translate()
+  translate(),
+  React.memo
 )(_WalletTotal);
 export default WalletTotal;

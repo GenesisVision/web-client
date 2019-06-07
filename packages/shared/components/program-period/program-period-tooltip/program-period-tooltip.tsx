@@ -20,5 +20,5 @@ interface Props extends InjectedTranslateProps {
   end: Date;
 }
 
-const ProgramPeriodTooltip = React.memo(translate()(_ProgramPeriodTooltip));
+const ProgramPeriodTooltip = translate()(React.memo(_ProgramPeriodTooltip));
 export default ProgramPeriodTooltip;

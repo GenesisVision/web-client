@@ -27,8 +27,8 @@ interface StateProps {
 }
 
 const GoogleAuthStepsContainer = compose<React.ComponentType<IGoogleAuthProps>>(
-  React.memo,
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  React.memo
 )(GoogleAuthSteps);
 
 export default GoogleAuthStepsContainer;

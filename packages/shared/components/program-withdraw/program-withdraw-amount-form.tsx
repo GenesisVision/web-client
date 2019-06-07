@@ -78,7 +78,6 @@ const _ProgramWithdrawAmountForm: React.FC<
 };
 
 const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, FormValues>({
     displayName: "withdraw-form",
@@ -98,7 +97,8 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
       if (!values.amount) return;
       props.onSubmit(values.amount);
     }
-  })
+  }),
+  React.memo
 )(_ProgramWithdrawAmountForm);
 
 export default ProgramWithdrawAmountForm;

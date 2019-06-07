@@ -40,8 +40,8 @@ interface OwnProps {
 }
 
 const AuthTabs = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   withRole,
-  translate()
+  translate(),
+  React.memo
 )(Tabs);
 export default AuthTabs;

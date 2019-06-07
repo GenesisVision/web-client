@@ -12,6 +12,6 @@ const DisableSuccess: React.FC<InjectedTranslateProps> = ({ t }) => {
   );
 };
 
-const DisableAuthSuccess = React.memo(translate()(DisableSuccess));
+const DisableAuthSuccess = translate()(React.memo(DisableSuccess));
 
 export default DisableAuthSuccess;

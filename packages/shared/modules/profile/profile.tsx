@@ -68,7 +68,7 @@ export interface IProfileOwnProps {
 }
 
 const Profile = compose<React.ComponentType<IProfileOwnProps>>(
-  React.memo,
-  translate()
+  translate(),
+  React.memo
 )(_Profile);
 export default Profile;

@@ -101,7 +101,7 @@ const _EventDescription: React.FC<
     </>
   );
 };
-const EventDescription = React.memo(translate()(_EventDescription));
+const EventDescription = translate()(React.memo(_EventDescription));
 
 const _DashboardPortfolioEvent: React.FC<{
   event: DashboardPortfolioEventType;

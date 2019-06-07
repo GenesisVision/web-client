@@ -74,7 +74,6 @@ const _FundWithdrawAmountForm: React.FC<
 };
 
 const FundWithdrawAmountForm = compose<ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, FormValues>({
     displayName: "withdraw-form",
@@ -91,7 +90,8 @@ const FundWithdrawAmountForm = compose<ComponentType<OwnProps>>(
       if (!values.percent) return;
       props.onSubmit(values.percent);
     }
-  })
+  }),
+  React.memo
 )(_FundWithdrawAmountForm);
 export default FundWithdrawAmountForm;
 

@@ -53,10 +53,10 @@ interface DispatchProps {
 interface Props extends OwnProps, StateProps, DispatchProps {}
 
 const WalletAddFundsContainer = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   connect<StateProps, DispatchProps, OwnProps, RootState>(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_WalletAddFundsContainer);
 export default WalletAddFundsContainer;

@@ -41,5 +41,5 @@ interface Props {
   selectAsset: (id: string, title: string, type: ASSETS_TYPES) => void;
 }
 
-const DashboardChartAsset = React.memo(translate()(_DashboardChartAsset));
+const DashboardChartAsset = translate()(React.memo(_DashboardChartAsset));
 export default DashboardChartAsset;

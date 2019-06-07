@@ -103,7 +103,6 @@ interface Props
     IProfileFormOwnProps {}
 
 const ProfileForm = compose<React.ComponentType<IProfileFormOwnProps>>(
-  React.memo,
   translate(),
   withFormik<IProfileFormOwnProps, ProfileFormValues>({
     displayName: "profile-form",
@@ -124,6 +123,7 @@ const ProfileForm = compose<React.ComponentType<IProfileFormOwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_ProfileForm);
 export default ProfileForm;

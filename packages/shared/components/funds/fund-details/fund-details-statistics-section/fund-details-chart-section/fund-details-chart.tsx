@@ -38,5 +38,5 @@ interface Props extends InjectedTranslateProps {
   balanceChart?: FundBalanceChartType;
 }
 
-const FundDetailsChart = React.memo(translate()(_FundDetailsChart));
+const FundDetailsChart = translate()(React.memo(_FundDetailsChart));
 export default FundDetailsChart;

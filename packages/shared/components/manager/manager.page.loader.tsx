@@ -137,7 +137,7 @@ interface Props extends InjectedTranslateProps, OwnProps {}
 interface OwnProps {}
 
 const ManagerPageLoader = compose<React.ComponentType<OwnProps>>(
-  React.memo,
-  translate()
+  translate(),
+  React.memo
 )(_ManagerPageLoader);
 export default ManagerPageLoader;

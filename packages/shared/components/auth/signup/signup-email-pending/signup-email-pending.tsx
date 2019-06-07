@@ -23,5 +23,5 @@ interface Props {
   };
 }
 
-const SignupEmailPending = React.memo(translate()(_SignupEmailPending));
+const SignupEmailPending = translate()(React.memo(_SignupEmailPending));
 export default SignupEmailPending;

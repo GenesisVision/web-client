@@ -69,7 +69,7 @@ const _EmptyMessage: React.FC<{ view: LIST_VIEW } & InjectedTranslateProps> = ({
       );
   }
 };
-const EmptyMessage = React.memo(translate()(_EmptyMessage));
+const EmptyMessage = translate()(React.memo(_EmptyMessage));
 
 interface ITableItemsProps {
   items: any[];

@@ -122,11 +122,11 @@ interface DispatchProps {
 }
 
 const DashboardAssetsContainer = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   connect(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_DashboardAssetsContainer);
 export default DashboardAssetsContainer;

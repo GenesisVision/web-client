@@ -50,7 +50,6 @@ interface OwnProps {
 }
 
 const ConfirmForm = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, IConfirmFormValues>({
     displayName: "confirm-form",
@@ -72,6 +71,7 @@ const ConfirmForm = compose<React.ComponentType<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       return props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_ConfirmForm);
 export default ConfirmForm;

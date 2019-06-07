@@ -195,7 +195,6 @@ const _TransferForm: React.FC<Props> = ({
 };
 
 const TransferForm = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<OwnProps, TransferFormValues>({
     displayName: "transfer",
@@ -264,7 +263,8 @@ const TransferForm = compose<React.ComponentType<OwnProps>>(
       );
       props.onSubmit({ ...values, transferAll }, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_TransferForm);
 export default TransferForm;
 

@@ -48,8 +48,8 @@ const _DashboardPortfolioEmptyView: React.FC<
 );
 
 const DashboardPortfolioEmptyView = compose<React.ComponentType>(
-  React.memo,
   withRole,
-  translate()
+  translate(),
+  React.memo
 )(_DashboardPortfolioEmptyView);
 export default DashboardPortfolioEmptyView;

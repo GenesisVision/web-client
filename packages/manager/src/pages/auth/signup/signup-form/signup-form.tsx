@@ -115,7 +115,6 @@ interface ISignUpFormFormValues extends RegisterManagerViewModel {
 }
 
 const SignUpForm = compose<React.FC<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, ISignUpFormFormValues>({
     displayName: "signup-form",
@@ -133,6 +132,7 @@ const SignUpForm = compose<React.FC<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_SignUpForm);
 export default SignUpForm;

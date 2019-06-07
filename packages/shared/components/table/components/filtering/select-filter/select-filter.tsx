@@ -48,5 +48,5 @@ interface Props {
   onChange: (value: TFilter<SelectFilterType>) => void;
 }
 
-const SelectFilter = React.memo(translate()(_SelectFilter));
+const SelectFilter = translate()(React.memo(_SelectFilter));
 export default SelectFilter;

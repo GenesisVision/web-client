@@ -21,5 +21,5 @@ const _FundAssetTooltip: React.FC<
   </div>
 );
 
-const FundAssetTooltip = React.memo(translate()(_FundAssetTooltip));
+const FundAssetTooltip = translate()(React.memo(_FundAssetTooltip));
 export default FundAssetTooltip;

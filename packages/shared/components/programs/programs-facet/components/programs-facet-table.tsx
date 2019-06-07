@@ -94,5 +94,5 @@ export interface IProgramsFacetTableProps {
   showRating?: boolean;
 }
 
-const ProgramsFacetTable = React.memo(translate()(_ProgramsFacetTable));
+const ProgramsFacetTable = translate()(React.memo(_ProgramsFacetTable));
 export default ProgramsFacetTable;

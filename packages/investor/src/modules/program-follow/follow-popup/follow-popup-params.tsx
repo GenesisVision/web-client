@@ -130,7 +130,6 @@ interface OwnProps {
 interface Props extends OwnProps, InjectedTranslateProps {}
 
 const FollowParams = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, FollowParamsFormValues>({
     isInitialValid: true,
@@ -167,6 +166,7 @@ const FollowParams = compose<React.ComponentType<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_FollowParams);
 export default FollowParams;

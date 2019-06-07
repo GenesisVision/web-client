@@ -32,7 +32,7 @@ const _TooltipBody: React.FC<ITooltipBodyProps & InjectedTranslateProps> = ({
     </StatisticItem>
   </>
 );
-const TooltipBody = React.memo(translate()(_TooltipBody));
+const TooltipBody = translate()(React.memo(_TooltipBody));
 
 const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
   active,

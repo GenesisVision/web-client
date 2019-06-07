@@ -30,12 +30,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 const ProgramMakeSignalContainer = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   connect(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_ProgramMakeSignalContainer);
 
 export default ProgramMakeSignalContainer;

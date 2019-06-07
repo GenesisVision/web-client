@@ -79,5 +79,5 @@ const _ManagerFunds: React.FC<Props & InjectedTranslateProps> = ({
   );
 };
 
-const ManagerFunds = React.memo(translate()(_ManagerFunds));
+const ManagerFunds = translate()(React.memo(_ManagerFunds));
 export default ManagerFunds;

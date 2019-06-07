@@ -18,5 +18,5 @@ interface Props extends InjectedTranslateProps {
   ROUTE: string;
 }
 
-const SignUpFooter = React.memo(translate()(_SignUpFooter));
+const SignUpFooter = translate()(React.memo(_SignUpFooter));
 export default SignUpFooter;

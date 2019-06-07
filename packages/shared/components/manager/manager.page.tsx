@@ -39,7 +39,7 @@ interface OwnProps {
 
 const ManagerPage = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
   withLoader,
-  React.memo,
-  translate()
+  translate(),
+  React.memo
 )(_ManagerPage);
 export default ManagerPage;

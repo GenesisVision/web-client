@@ -112,11 +112,11 @@ export interface INotification {
 }
 
 const AssetNotificationsGeneral = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   connect(
     undefined,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_AssetNotificationsGeneral);
 export default AssetNotificationsGeneral;

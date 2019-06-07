@@ -79,4 +79,4 @@ const SignalsFeeFormPartial: React.FC<
   );
 };
 
-export default React.memo(translate()(SignalsFeeFormPartial));
+export default translate()(React.memo(SignalsFeeFormPartial));

@@ -53,7 +53,6 @@ const _ProfileImage: React.FC<InjectedFormikProps<Props, FormValues>> = ({
 );
 
 const ProfileImage = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, FormValues>({
     displayName: "profile-image",
@@ -69,7 +68,8 @@ const ProfileImage = compose<React.ComponentType<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values.logo, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_ProfileImage);
 
 export default ProfileImage;

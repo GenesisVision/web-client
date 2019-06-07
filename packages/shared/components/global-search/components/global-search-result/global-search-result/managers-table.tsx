@@ -26,4 +26,4 @@ const ManagersTable: React.FC<
   );
 };
 
-export default React.memo(translate()(ManagersTable));
+export default translate()(React.memo(ManagersTable));

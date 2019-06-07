@@ -30,7 +30,7 @@ interface Props {
   ): (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const WalletCopytradingButtons = React.memo(
-  translate()(_WalletCopytradingButtons)
+const WalletCopytradingButtons = translate()(
+  React.memo(_WalletCopytradingButtons)
 );
 export default WalletCopytradingButtons;

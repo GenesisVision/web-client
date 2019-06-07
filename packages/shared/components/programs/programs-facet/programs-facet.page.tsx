@@ -35,5 +35,5 @@ const _ProgramsFacetPage: React.FC<InjectedTranslateProps> = ({ t }) => {
   );
 };
 
-const ProgramsFacetPage = React.memo(translate()(_ProgramsFacetPage));
+const ProgramsFacetPage = translate()(React.memo(_ProgramsFacetPage));
 export default ProgramsFacetPage;

@@ -44,7 +44,6 @@ const _ConfirmPopup: React.ComponentType<
 );
 
 const ConfirmPopup = compose<React.ComponentType<IConfirmPopupProps>>(
-  React.memo,
   translate(),
   withFormik<IConfirmPopupProps, {}>({
     displayName: "confirm-form",
@@ -52,7 +51,8 @@ const ConfirmPopup = compose<React.ComponentType<IConfirmPopupProps>>(
     handleSubmit: (_, { props, setSubmitting }) => {
       props.onApply(setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_ConfirmPopup);
 export default ConfirmPopup;
 

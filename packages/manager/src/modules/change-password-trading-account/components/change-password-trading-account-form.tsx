@@ -93,7 +93,6 @@ const _ChangePasswordTradingAccountForm: React.FC<
 const ChangePasswordTradingAccountForm = compose<
   React.ComponentType<IChangePasswordTradingAccountFormOwnProps>
 >(
-  React.memo,
   translate(),
   withFormik<
     IChangePasswordTradingAccountFormOwnProps,
@@ -109,6 +108,7 @@ const ChangePasswordTradingAccountForm = compose<
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_ChangePasswordTradingAccountForm);
 export default ChangePasswordTradingAccountForm;

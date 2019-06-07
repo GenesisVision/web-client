@@ -76,11 +76,11 @@ interface OwnProps {
 const DashboardPortfolioChartContainer = compose<
   React.ComponentType<OwnProps & WithLoaderProps>
 >(
-  React.memo,
   withLoader,
   connect(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_DashboardPortfolioChartContainer);
 export default DashboardPortfolioChartContainer;
