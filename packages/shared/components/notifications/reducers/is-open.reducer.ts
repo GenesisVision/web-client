@@ -8,7 +8,7 @@ const isOpenReducer = (
   action: NotificationToggleAction
 ): boolean => {
   if (action.type === NOTIFICATIONS_TOGGLE) {
-    if (action.isOpen !== undefined) return action.isOpen;
+    if (action.payload !== null) return action.payload;
     return !isOpen;
   }
   return isOpen;
