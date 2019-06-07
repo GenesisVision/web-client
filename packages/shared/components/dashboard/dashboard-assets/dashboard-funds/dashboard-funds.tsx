@@ -29,7 +29,13 @@ import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
+import SelectFilter from "../../../table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "../../../table/components/filtering/select-filter/select-filter.constants";
 import { DASHBOARD_FUNDS_COLUMNS } from "../../dashboard.constants";
+import {
+  ACTION_STATUS_FILTER_NAME,
+  ACTION_STATUS_FILTER_VALUES
+} from "../dashboard-programs/dashboard-programs.helpers";
 import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
 const _DashboardFunds: React.FC<Props> = ({
@@ -53,6 +59,13 @@ const _DashboardFunds: React.FC<Props> = ({
       filtering: FilteringType
     ) => (
       <>
+        <SelectFilter
+          name={ACTION_STATUS_FILTER_NAME}
+          label={t(`${role}.dashboard-page.actions-status-filter.label`)}
+          value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
+          values={ACTION_STATUS_FILTER_VALUES}
+          onChange={updateFilter}
+        />
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}
           value={filtering[DATE_RANGE_FILTER_NAME]}

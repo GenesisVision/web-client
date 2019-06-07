@@ -70,6 +70,11 @@ export const DASHBOARD_FUNDS_COLUMNS: SortingColumn[] = [
 
 export const DASHBOARD_FUNDS_FILTERS = [
   {
+    type: FILTER_TYPE.GENERAL,
+    name: ACTION_STATUS_FILTER_NAME,
+    defaultValue: ACTION_STATUS_FILTER_DEFAULT_VALUE
+  },
+  {
     ...composeDefaultDateRangeFilter({
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
@@ -80,10 +85,11 @@ export const DASHBOARD_FUNDS_FILTERS = [
 ];
 
 export const DASHBOARD_FUNDS_DEFAULT_FILTERING = {
-  dateRange: {
+  [DATE_RANGE_FILTER_NAME]: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
     type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
-  }
+  },
+  [ACTION_STATUS_FILTER_NAME]: ACTION_STATUS_FILTER_DEFAULT_VALUE
 };
 
 export type CancelRequestPropsType = {
