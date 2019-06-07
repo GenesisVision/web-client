@@ -24,8 +24,7 @@ export interface FavoriteActionType<T = any> extends ActionType<T> {
 }
 
 export interface NotificationsActionType<T = ProgramNotificationSettingList>
-  extends Action {
-  settings?: T;
+  extends ActionType {
   errorMessage?: string;
 }
 
