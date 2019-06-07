@@ -19,6 +19,8 @@ type SkipTake = {
   take: number;
 };
 
+const initialState: NotificationViewModel[] = [];
+
 const optionsReducer = (
   options: SkipTake = { take: TAKE_COUNT, skip: 0 } as SkipTake,
   action: SetNotificationsOptionsAction
@@ -38,7 +40,7 @@ const addNotificationsReducer = (
     case ADD_NOTIFICATIONS:
       return [...notifications, ...action.payload];
     case CLEAR_NOTIFICATIONS:
-      return [];
+      return initialState;
     default:
       return notifications;
   }
@@ -48,10 +50,12 @@ const addTotalCount = (
   total: number = 0,
   action: AddTotalNotificationsAction
 ): number => {
-  if (action.type === ADD_TOTAL_NOTIFICATIONS) {
-    return action.payload;
+  switch (action.type) {
+    case ADD_TOTAL_NOTIFICATIONS:
+      return action.payload;
+    default:
+      return total;
   }
-  return total;
 };
 
 export type NotificationsState = Readonly<{
