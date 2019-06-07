@@ -20,9 +20,9 @@ const addMessage = (
 ): AlertMessagesState => {
   const newMessage = {
     id: uuid.v4(),
-    text: action.payload!.text,
-    className: action.payload!.className,
-    isUseLocalization: action.payload!.isUseLocalization
+    text: action.payload.text,
+    className: action.payload.className,
+    isUseLocalization: action.payload.isUseLocalization
   } as IMessage;
   return [...state.slice(-2), newMessage];
 };
