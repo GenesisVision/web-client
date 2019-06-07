@@ -55,11 +55,3 @@ export type AlertActionCreator = (
 ) => IAlertAction;
 
 export type IAlertAction = ActionType<IMessage>;
-
-export interface IAlertAction_ {
-  type: ALERT_MESSAGE;
-  className?: string;
-  text?: string;
-  isUseLocalization?: boolean;
-  id?: string;
-}
