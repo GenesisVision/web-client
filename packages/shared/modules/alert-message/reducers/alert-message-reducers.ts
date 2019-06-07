@@ -4,10 +4,10 @@ import { IAlertAction } from "../actions/alert-message-actions";
 import { ALERT_MESSAGE } from "../actions/alert-message-actions.constants";
 
 export type IMessage = Readonly<{
-  id: string;
-  text: string;
+  id?: string;
+  text?: string;
   className?: string;
-  isUseLocalization: boolean;
+  isUseLocalization?: boolean;
 }>;
 
 export type AlertMessagesState = Readonly<IMessage[]>;
@@ -20,9 +20,9 @@ const addMessage = (
 ): AlertMessagesState => {
   const newMessage = {
     id: uuid.v4(),
-    text: action.text,
-    className: action.className,
-    isUseLocalization: action.isUseLocalization
+    text: action.payload!.text,
+    className: action.payload!.className,
+    isUseLocalization: action.payload!.isUseLocalization
   } as IMessage;
   return [...state.slice(-2), newMessage];
 };
@@ -31,7 +31,7 @@ const removeMessage = (
   state: AlertMessagesState,
   action: IAlertAction
 ): AlertMessagesState => {
-  return state.filter(message => message.id !== action.id);
+  return state.filter(message => message.id !== action.payload.id);
 };
 
 const removeAllMessages = (): AlertMessagesState => {
