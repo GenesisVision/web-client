@@ -6,6 +6,7 @@ import {
   ProgramsList
 } from "gv-api-web";
 import { Action } from "redux";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import managerApi from "shared/services/api-client/manager-api";
 import { ActionType } from "shared/utils/types";
@@ -84,9 +85,11 @@ export const fetchAssets = (
   payload: managerApi.v10ManagerAssetsGet(auth)
 });
 
-export const setPeriod = (period: any): ActionType<any> => ({
+export const setPeriod = (
+  payload: ChartDefaultPeriod
+): ActionType<ChartDefaultPeriod> => ({
   type: DASHBOARD_PERIOD,
-  payload: period
+  payload
 });
 
 export const clearDashboardAssetsTable = (): Action => ({

@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
@@ -73,7 +74,7 @@ export const composeAssetChart = () => (
   dispatch(getAssetChart(asset.id, asset.title, assetType));
 };
 
-export const setPeriod = (period: any) => (dispatch: Dispatch) =>
+export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
   dispatch(actions.setPeriod(period));
 
 export const fetchAssetsCount = (): Promise<{
