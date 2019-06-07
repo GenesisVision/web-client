@@ -60,6 +60,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
 
     const composeEditInfo: IAssetEditInfo = {
       stopOutLevel: 0,
+      investmentLimit: 0,
       id: fundDescription.id,
       title: fundDescription.title,
       description: fundDescription.description,

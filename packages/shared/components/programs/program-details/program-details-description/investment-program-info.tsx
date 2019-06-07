@@ -38,6 +38,7 @@ const InvestmentProgramInfo: React.FC<
 > = ({ t, programDescription, isOwnProgram }) => {
   const {
     availableInvestmentBase,
+    availableInvestmentLimit,
     currency,
     entryFeeSelected,
     entryFeeCurrent,
@@ -46,6 +47,11 @@ const InvestmentProgramInfo: React.FC<
     stopOutLevelCurrent,
     stopOutLevelSelected
   } = programDescription;
+  const availableInvestment =
+    availableInvestmentLimit < availableInvestmentBase &&
+    availableInvestmentLimit !== null
+      ? availableInvestmentLimit
+      : availableInvestmentBase;
   return (
     <>
       <div className="program-details-description__statistic-container">
@@ -60,7 +66,7 @@ const InvestmentProgramInfo: React.FC<
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(availableInvestmentBase, currency)}
+            value={formatCurrencyValue(availableInvestment, currency)}
             displayType="text"
             suffix={` ${currency}`}
           />
