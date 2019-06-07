@@ -36,9 +36,9 @@ const _DepositTop: React.FC<Props> = ({
 );
 
 const DepositTop = compose<React.ComponentType<DepositTopOwnProps>>(
-  React.memo,
   withRole,
-  translate()
+  translate(),
+  React.memo
 )(_DepositTop);
 export default DepositTop;
 

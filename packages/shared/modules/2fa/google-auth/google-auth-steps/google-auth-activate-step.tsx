@@ -75,7 +75,6 @@ export interface IGoogleActivateStepFormValues {
 }
 
 const GoogleActivateStep = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, IGoogleActivateStepFormValues>({
     displayName: "google-auth",
@@ -95,7 +94,8 @@ const GoogleActivateStep = compose<React.ComponentType<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(GoogleStep3);
 
 export default GoogleActivateStep;

@@ -13,4 +13,4 @@ const SearchResultTable: React.FC<
     )}
   </>
 );
-export default React.memo(translate()(SearchResultTable));
+export default translate()(React.memo(SearchResultTable));

@@ -159,5 +159,5 @@ interface Props {
   ) => Promise<IDataModel>;
 }
 
-const ProgramTrades = React.memo(translate()(_ProgramTrades));
+const ProgramTrades = translate()(React.memo(_ProgramTrades));
 export default ProgramTrades;

@@ -40,5 +40,5 @@ const _ProgramsPage: React.FC<InjectedTranslateProps> = ({ t }) => {
   );
 };
 
-const ProgramsPage = React.memo(translate()(_ProgramsPage));
+const ProgramsPage = translate()(React.memo(_ProgramsPage));
 export default ProgramsPage;

@@ -165,7 +165,7 @@ export interface IPortfolioEventsTableOwnProps {
 }
 
 export default compose<React.ComponentType<IPortfolioEventsTableOwnProps>>(
-  React.memo,
   withRole,
-  translate()
+  translate(),
+  React.memo
 )(PortfolioEventsTable);

@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import { Facet } from "gv-api-web";
+import { FundFacet, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 
 import FacetCard from "./facet-card";
@@ -10,8 +10,11 @@ import {
   _FacetCardsContainer as FacetCardsContainer
 } from "./faset-cards-container";
 
+type Facet = FundFacet & ProgramFacet;
+
 describe("Facet Cards tests", () => {
   const facet: Facet = {
+    sorting: "ByProfitAsc",
     description: "",
     id: "",
     logo: "",

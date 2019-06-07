@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import {
   DialogLoaderGoogleAuthDesktop,
   DialogLoaderGoogleAuthMobile
@@ -11,17 +12,14 @@ interface IDialogLoaderGoogleAuthStepsStateProps {
   innerWidth: number;
 }
 
-class DialogLoaderGoogleAuthSteps extends React.PureComponent<
+const _DialogLoaderGoogleAuthSteps: React.FC<
   IDialogLoaderGoogleAuthStepsStateProps
-> {
-  render() {
-    return isTablet(this.props.innerWidth) ? (
-      <DialogLoaderGoogleAuthMobile />
-    ) : (
-      <DialogLoaderGoogleAuthDesktop />
-    );
-  }
-}
+> = ({ innerWidth }) =>
+  isTablet(innerWidth) ? (
+    <DialogLoaderGoogleAuthMobile />
+  ) : (
+    <DialogLoaderGoogleAuthDesktop />
+  );
 
 const mapStateToProps = ({
   ui
@@ -29,4 +27,8 @@ const mapStateToProps = ({
   innerWidth: ui.innerWidth
 });
 
-export default connect(mapStateToProps)(DialogLoaderGoogleAuthSteps);
+const DialogLoaderGoogleAuthSteps = compose<React.ComponentType>(
+  connect(mapStateToProps),
+  React.memo
+)(_DialogLoaderGoogleAuthSteps);
+export default DialogLoaderGoogleAuthSteps;

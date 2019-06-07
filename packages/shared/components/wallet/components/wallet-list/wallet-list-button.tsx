@@ -42,5 +42,5 @@ const _WalletListButton: React.FC<
   </>
 );
 
-const WalletListButton = React.memo(translate()(_WalletListButton));
+const WalletListButton = translate()(React.memo(_WalletListButton));
 export default WalletListButton;

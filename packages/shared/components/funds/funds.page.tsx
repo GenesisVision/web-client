@@ -35,5 +35,5 @@ const _FundsPage: React.FC<InjectedTranslateProps> = ({ t }) => {
   );
 };
 
-const FundsPage = React.memo(translate()(_FundsPage));
+const FundsPage = translate()(React.memo(_FundsPage));
 export default FundsPage;

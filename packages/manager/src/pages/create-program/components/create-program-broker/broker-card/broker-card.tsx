@@ -51,8 +51,8 @@ const _BrokerCard: React.FC<OwnProps & InjectedTranslateProps> = ({
 };
 
 const BrokerCard = compose<React.ComponentType<OwnProps>>(
-  React.memo,
-  translate()
+  translate(),
+  React.memo
 )(_BrokerCard);
 export default BrokerCard;
 

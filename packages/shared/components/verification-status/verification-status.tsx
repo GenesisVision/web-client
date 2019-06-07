@@ -52,5 +52,5 @@ const _VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
   );
 };
 
-const VerificationStatus = React.memo(translate()(_VerificationStatus));
+const VerificationStatus = translate()(React.memo(_VerificationStatus));
 export default VerificationStatus;

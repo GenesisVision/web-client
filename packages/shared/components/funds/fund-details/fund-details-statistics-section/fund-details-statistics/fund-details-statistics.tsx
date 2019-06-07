@@ -26,5 +26,5 @@ interface Props extends InjectedTranslateProps {
   statistic?: FundDetailsStatistic;
 }
 
-const FundDetailsStatistics = React.memo(translate()(_FundDetailsStatistics));
+const FundDetailsStatistics = translate()(React.memo(_FundDetailsStatistics));
 export default FundDetailsStatistics;

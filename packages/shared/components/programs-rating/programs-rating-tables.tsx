@@ -25,5 +25,5 @@ interface Props extends InjectedTranslateProps {
   id?: string;
 }
 
-const ProgramsRatingTables = React.memo(translate()(_ProgramsRatingTables));
+const ProgramsRatingTables = translate()(React.memo(_ProgramsRatingTables));
 export default ProgramsRatingTables;

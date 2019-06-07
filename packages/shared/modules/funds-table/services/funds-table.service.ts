@@ -40,7 +40,7 @@ export const getFunds: GetFundsType = filters => dispatch => {
     ...requestFilters,
     ...filters
   };
-  dispatch(fundsTableActions.fetchFunds(requestFilters));
+  dispatch(fundsTableActions.fetchFundsAction(requestFilters));
 };
 
 export type FetchFundsType = (
@@ -50,7 +50,7 @@ export const fetchFunds: FetchFundsType = filters => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();
   }
-  return fundsTableActions.fetchFunds(filters).payload;
+  return fundsTableActions.fetchFundsAction(filters).payload;
 };
 
 const composeRequestFilters = () => (

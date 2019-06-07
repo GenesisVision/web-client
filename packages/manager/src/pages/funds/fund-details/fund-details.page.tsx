@@ -67,7 +67,7 @@ interface StateProps {
 }
 
 const FundDetailsPage = compose<React.ComponentType<OwnProps>>(
-  React.memo,
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  React.memo
 )(_FundDetailsPage);
 export default FundDetailsPage;

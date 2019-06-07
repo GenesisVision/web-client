@@ -13,5 +13,5 @@ const _SignUpPage: React.FC = () => (
   </div>
 );
 
-const SignUpPage = React.memo(translate()(_SignUpPage));
+const SignUpPage = translate()(React.memo(_SignUpPage));
 export default SignUpPage;

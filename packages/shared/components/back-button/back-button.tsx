@@ -42,12 +42,12 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
 });
 
 const BackButton = compose<React.FC>(
-  React.memo,
   translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_BackButton);
 export default BackButton;
 

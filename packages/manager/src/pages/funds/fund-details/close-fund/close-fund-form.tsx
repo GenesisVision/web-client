@@ -78,7 +78,6 @@ const tfaValidator = (t: (msg: string) => string) =>
     .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 
 const CloseFundForm = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
-  React.memo,
   withLoader,
   translate(),
   withFormik<Props, ICloseFundFormValues>({
@@ -95,6 +94,7 @@ const CloseFundForm = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_CloseFundForm);
 export default CloseFundForm;

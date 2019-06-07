@@ -55,7 +55,6 @@ export interface IRecoveryCodeFormValues {
 }
 
 const RecoveryCodeForm = compose<React.FC<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, IRecoveryCodeFormValues>({
     displayName: "recoveryForm",
@@ -71,6 +70,7 @@ const RecoveryCodeForm = compose<React.FC<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_RecoveryCodeForm);
 export default RecoveryCodeForm;

@@ -19,5 +19,5 @@ const _EmailPending: React.FC<InjectedTranslateProps> = ({ t }) => {
   );
 };
 
-const EmailPending = React.memo(translate()(_EmailPending));
+const EmailPending = translate()(React.memo(_EmailPending));
 export default EmailPending;

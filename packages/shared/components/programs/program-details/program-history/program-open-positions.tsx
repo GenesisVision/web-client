@@ -117,5 +117,5 @@ interface Props {
   ) => Promise<IDataModel>;
 }
 
-const ProgramOpenPositions = React.memo(translate()(_ProgramOpenPositions));
+const ProgramOpenPositions = translate()(React.memo(_ProgramOpenPositions));
 export default ProgramOpenPositions;

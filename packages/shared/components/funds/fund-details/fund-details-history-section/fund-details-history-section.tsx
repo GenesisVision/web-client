@@ -1,8 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { FundAssetsListInfo } from "gv-api-web";
-import { SyntheticEvent } from "react";
 import * as React from "react";
+import { SyntheticEvent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";

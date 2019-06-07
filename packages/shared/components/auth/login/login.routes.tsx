@@ -30,4 +30,4 @@ const LoginRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
   </AuthLayout>
 );
 
-export default React.memo(translate()(LoginRoutes));
+export default translate()(React.memo(LoginRoutes));

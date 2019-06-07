@@ -8,6 +8,6 @@ const _ProgramTableSortingValue: React.FC<
 > = ({ t, column }) => t(`programs-page.programs-header.${column.name}`);
 
 const ProgramTableSortingValue = withLoader(
-  React.memo(translate()(_ProgramTableSortingValue))
+  translate()(React.memo(_ProgramTableSortingValue))
 );
 export default ProgramTableSortingValue;

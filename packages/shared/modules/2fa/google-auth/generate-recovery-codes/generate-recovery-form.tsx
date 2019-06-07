@@ -54,7 +54,6 @@ interface OwnProps {
 interface IFormValues extends PasswordModel {}
 
 const GenerateRecoveryWithFormik = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, IFormValues>({
     displayName: "generate-recovery-form",
@@ -68,7 +67,8 @@ const GenerateRecoveryWithFormik = compose<React.ComponentType<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(GenerateRecoveryForm);
 
 export default GenerateRecoveryWithFormik;

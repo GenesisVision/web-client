@@ -17,5 +17,5 @@ export const _TransferButton: React.FC<Props> = ({ t, handleOpen }) => (
 
 interface Props extends InjectedTranslateProps, ParentWalletButtonProps {}
 
-const TransferButton = React.memo(translate()(_TransferButton));
+const TransferButton = translate()(React.memo(_TransferButton));
 export default TransferButton;

@@ -34,9 +34,9 @@ const _BrokerCardAdornment: React.FC<OwnProps & InjectedTranslateProps> = ({
 const BrokerCardAdornment = compose<
   React.ComponentType<OwnProps & WithLoaderProps>
 >(
-  React.memo,
   translate(),
-  withLoader
+  withLoader,
+  React.memo
 )(_BrokerCardAdornment);
 
 export default BrokerCardAdornment;

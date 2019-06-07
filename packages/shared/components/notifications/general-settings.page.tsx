@@ -12,5 +12,5 @@ const _NotificationsPage: React.FC<InjectedTranslateProps> = ({ t }) => (
   </Page>
 );
 
-const NotificationsPage = React.memo(translate()(_NotificationsPage));
+const NotificationsPage = translate()(React.memo(_NotificationsPage));
 export default NotificationsPage;

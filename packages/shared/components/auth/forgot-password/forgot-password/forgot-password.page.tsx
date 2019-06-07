@@ -13,5 +13,5 @@ const _ForgotPasswordPage: React.FC<InjectedTranslateProps> = ({ t }) => (
   </div>
 );
 
-const ForgotPasswordPage = React.memo(translate()(_ForgotPasswordPage));
+const ForgotPasswordPage = translate()(React.memo(_ForgotPasswordPage));
 export default ForgotPasswordPage;

@@ -24,4 +24,4 @@ const FundsTable: React.FC<
   );
 };
 
-export default React.memo(translate()(FundsTable));
+export default translate()(React.memo(FundsTable));

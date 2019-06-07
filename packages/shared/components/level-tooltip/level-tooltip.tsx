@@ -19,7 +19,7 @@ const _LevelTooltip: React.FC<ILevelTooltip> = ({ t, level, canLevelUp }) => (
   </div>
 );
 
-const LevelTooltip = React.memo(translate()(_LevelTooltip));
+const LevelTooltip = translate()(React.memo(_LevelTooltip));
 export default LevelTooltip;
 
 export interface ILevelTooltip extends InjectedTranslateProps {

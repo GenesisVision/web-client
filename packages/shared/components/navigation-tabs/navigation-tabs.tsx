@@ -49,5 +49,5 @@ interface Props extends InjectedTranslateProps {
   tab: string;
 }
 
-const NavigationTabs = React.memo(translate()(_NavigationTabs));
+const NavigationTabs = translate()(React.memo(_NavigationTabs));
 export default NavigationTabs;

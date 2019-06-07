@@ -22,5 +22,5 @@ export const _WithdrawButton: React.FC<Props> = ({
 
 interface Props extends InjectedTranslateProps, ParentWalletButtonProps {}
 
-const WithdrawButton = React.memo(translate()(_WithdrawButton));
+const WithdrawButton = translate()(React.memo(_WithdrawButton));
 export default WithdrawButton;

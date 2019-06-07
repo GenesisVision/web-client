@@ -3,27 +3,28 @@ import "./wallet-add-funds-form.scss";
 import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import RootState from "shared/reducers/root-reducer";
 
 import WalletAddFundsForm, { CurrentWallet } from "./wallet-add-funds-form";
 
-class WalletAddFundsContainer extends React.PureComponent<Props> {
-  render() {
-    const { currentWallet, notifySuccess, notifyError, wallets } = this.props;
-    if (!wallets.length) return <DialogLoader />;
-    const enabledWallets = wallets.filter(wallet => wallet.isDepositEnabled);
-    return (
-      <WalletAddFundsForm
-        wallets={enabledWallets}
-        currentWallet={currentWallet}
-        notifySuccess={notifySuccess}
-        notifyError={notifyError}
-      />
-    );
-  }
-}
+const _WalletAddFundsContainer: React.FC<Props> = ({
+  currentWallet,
+  notifySuccess,
+  notifyError,
+  wallets
+}) => (
+  <WalletAddFundsForm
+    condition={!!wallets.length}
+    loader={<DialogLoader />}
+    wallets={wallets.filter(wallet => wallet.isDepositEnabled)}
+    currentWallet={currentWallet}
+    notifySuccess={notifySuccess}
+    notifyError={notifyError}
+  />
+);
 
 const mapStateToProps = (state: RootState): StateProps => {
   if (!state.accountSettings) return { wallets: [] };
@@ -51,7 +52,11 @@ interface DispatchProps {
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
 
-export default connect<StateProps, DispatchProps, OwnProps, RootState>(
-  mapStateToProps,
-  mapDispatchToProps
-)(WalletAddFundsContainer);
+const WalletAddFundsContainer = compose<React.ComponentType<OwnProps>>(
+  connect<StateProps, DispatchProps, OwnProps, RootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  React.memo
+)(_WalletAddFundsContainer);
+export default WalletAddFundsContainer;

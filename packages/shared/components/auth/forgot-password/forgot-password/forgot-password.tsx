@@ -65,7 +65,6 @@ enum FIELDS {
 }
 
 const ForgotPasswordForm = compose<React.FC<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, IForgotPasswordFormValues>({
     displayName: "forgotPassword",
@@ -81,6 +80,7 @@ const ForgotPasswordForm = compose<React.FC<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_ForgotPasswordForm);
 export default ForgotPasswordForm;

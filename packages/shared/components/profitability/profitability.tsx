@@ -15,29 +15,25 @@ const renderPrefix = (value: string, prefix: PROFITABILITY_PREFIX) => {
   if (+value < 0) return composeProfitabilityPrefix(prefix).negative;
 };
 
-const _Profitability: React.FC<Props> = props => {
-  const {
-    className,
-    value,
-    variant = PROFITABILITY_VARIANT.TEXT,
-    prefix = PROFITABILITY_PREFIX.NO_PREFIX,
-    children
-  } = props;
-
-  return (
-    <BaseProfitability
-      className={className}
-      variant={variant}
-      isPositive={+value > 0}
-      isNegative={+value < 0}
-    >
-      <>
-        {renderPrefix(value, prefix)}
-        {children}
-      </>
-    </BaseProfitability>
-  );
-};
+export const _Profitability: React.FC<Props> = ({
+  className,
+  value,
+  variant = PROFITABILITY_VARIANT.TEXT,
+  prefix = PROFITABILITY_PREFIX.NO_PREFIX,
+  children
+}) => (
+  <BaseProfitability
+    className={className}
+    variant={variant}
+    isPositive={+value > 0}
+    isNegative={+value < 0}
+  >
+    <>
+      {renderPrefix(value, prefix)}
+      {children}
+    </>
+  </BaseProfitability>
+);
 
 const Profitability = React.memo(withLoader(_Profitability));
 

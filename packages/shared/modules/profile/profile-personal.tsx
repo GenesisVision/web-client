@@ -80,5 +80,5 @@ interface IProfilePersonalProps extends InjectedTranslateProps {
   info: ProfileFullViewModel;
 }
 
-const ProfilePersonal = React.memo(translate()(_ProfilePersonal));
+const ProfilePersonal = translate()(React.memo(_ProfilePersonal));
 export default ProfilePersonal;

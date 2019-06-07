@@ -13,20 +13,18 @@ import history from "shared/utils/history";
 
 import store from "./store";
 
-const Root = () => {
-  return (
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <GVScrollContainer>
-          <Switch>
-            <Route path={AUTH_ROUTES_REGEX} component={AuthRoutes} />
-            <Route path={HOME_ROUTE} component={AppRoutes} />
-          </Switch>
-          <AlertMessageList />
-        </GVScrollContainer>
-      </ConnectedRouter>
-    </Provider>
-  );
-};
+const Root: React.FC = () => (
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <GVScrollContainer>
+        <Switch>
+          <Route path={AUTH_ROUTES_REGEX} component={AuthRoutes} />
+          <Route path={HOME_ROUTE} component={AppRoutes} />
+        </Switch>
+        <AlertMessageList />
+      </GVScrollContainer>
+    </ConnectedRouter>
+  </Provider>
+);
 
 export default Root;

@@ -21,6 +21,6 @@ export const GoogleStep1: React.FC<InjectedTranslateProps> = ({ t }) => (
   </div>
 );
 
-const GoogleDownloadStep = React.memo(translate()(GoogleStep1));
+const GoogleDownloadStep = translate()(React.memo(GoogleStep1));
 
 export default GoogleDownloadStep;

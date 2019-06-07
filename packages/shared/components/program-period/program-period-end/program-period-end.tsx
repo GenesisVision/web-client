@@ -14,14 +14,13 @@ const _ProgramPeriodEnd: React.FC<Props> = ({ t, periodEnds }) => (
   </Tooltip>
 );
 
-interface Props extends InjectedTranslateProps,OwnProps {
-}
+interface Props extends InjectedTranslateProps, OwnProps {}
 interface OwnProps {
   periodEnds: Date;
 }
 
 const ProgramPeriodEnd = compose<React.ComponentType<OwnProps>>(
-  React.memo,
-  translate()
+  translate(),
+  React.memo
 )(_ProgramPeriodEnd);
 export default ProgramPeriodEnd;

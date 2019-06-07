@@ -1,7 +1,7 @@
 import "shared/components/details/details.scss";
 
 import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
-import React, { ComponentType, PureComponent } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/login/login.service";
@@ -21,7 +21,7 @@ import { CurrencyEnum, ResponseError } from "shared/utils/types";
 import ProgramDetailsContainer from "./program-details.contaner";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 
-class _ProgramDetailsPage extends PureComponent<Props, State> {
+class _ProgramDetailsPage extends React.PureComponent<Props, State> {
   state = {
     hasError: false,
     isPending: false,
@@ -135,7 +135,7 @@ interface State {
   statistic?: ProgramDetailsStatistic;
 }
 
-const ProgramDetailsPage = compose<ComponentType<OwnProps>>(
+const ProgramDetailsPage = compose<React.ComponentType<OwnProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps

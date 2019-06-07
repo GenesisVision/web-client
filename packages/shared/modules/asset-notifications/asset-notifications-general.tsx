@@ -2,7 +2,7 @@ import {
   NotificationSettingViewModel,
   NotificationSettingViewModelTypeEnum
 } from "gv-api-web";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
@@ -22,50 +22,58 @@ import {
   TRemoveNotification
 } from "./asset-notifications.types";
 
-class _AssetNotificationsGeneral extends React.PureComponent<Props> {
-  getNotification = (
-    type: NotificationSettingViewModelTypeEnum
-  ): NotificationSettingViewModel =>
-    this.props.settings.find(setting => setting.type === type)!;
+const _AssetNotificationsGeneral: React.FC<Props> = ({
+  t,
+  assetId,
+  notifications,
+  service,
+  settings
+}) => {
+  const getNotification = useCallback(
+    (
+      type: NotificationSettingViewModelTypeEnum
+    ): NotificationSettingViewModel =>
+      settings.find(setting => setting.type === type)!,
+    [settings]
+  );
 
-  handleAdd = (options: IAddNotificationSettingProps) => {
-    const { service, t } = this.props;
-    return service.addNotification(
-      options,
-      t(`notifications-page.general.${options.type}.enabled-alert`)
-    );
-  };
+  const handleAdd = useCallback(
+    (options: IAddNotificationSettingProps) =>
+      service.addNotification(
+        options,
+        t(`notifications-page.general.${options.type}.enabled-alert`)
+      ),
+    [service]
+  );
 
-  handleRemove = (options: IRemoveNotificationSettingProps) => {
-    const { service, t } = this.props;
-    return service.removeNotification(
-      options,
-      t(`notifications-page.general.${options.type}.disabled-alert`)
-    );
-  };
+  const handleRemove = useCallback(
+    (options: IRemoveNotificationSettingProps) =>
+      service.removeNotification(
+        options,
+        t(`notifications-page.general.${options.type}.disabled-alert`)
+      ),
+    [service]
+  );
 
-  render() {
-    const { t, assetId, notifications } = this.props;
-    return (
-      <div className="notification-settings">
-        <h3 className="notification-settings__subtitle">
-          {t("notifications-page.general.title")}
-        </h3>
-        {notifications.map(notification => (
-          <GeneralNotification
-            key={notification.name}
-            name={notification.name}
-            label={notification.label}
-            assetId={assetId}
-            setting={this.getNotification(notification.name)}
-            addNotification={this.handleAdd}
-            removeNotification={this.handleRemove}
-          />
-        ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="notification-settings">
+      <h3 className="notification-settings__subtitle">
+        {t("notifications-page.general.title")}
+      </h3>
+      {notifications.map(notification => (
+        <GeneralNotification
+          key={notification.name}
+          name={notification.name}
+          label={notification.label}
+          assetId={assetId}
+          setting={getNotification(notification.name)}
+          addNotification={handleAdd}
+          removeNotification={handleRemove}
+        />
+      ))}
+    </div>
+  );
+};
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
@@ -108,6 +116,7 @@ const AssetNotificationsGeneral = compose<React.ComponentType<OwnProps>>(
   connect(
     undefined,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_AssetNotificationsGeneral);
 export default AssetNotificationsGeneral;

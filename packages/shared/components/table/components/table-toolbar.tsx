@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useCallback } from "react";
 import { CardsIcon } from "shared/components/icon/cards-icon";
 import { TableIcon } from "shared/components/icon/table-icon";
 import SortingFilter from "shared/components/table/components/sorting/sorting-filter/sorting-filter";
@@ -11,6 +11,68 @@ import {
   UpdateFilterFunc,
   UpdateSortingFuncType
 } from "./table.types";
+
+const _TableToolbar: React.FC<
+  ITableToolbarExternalProps & ITableToolbarInnerProps
+> = ({
+  onChange,
+  disableTitle,
+  createButtonToolbar,
+  title,
+  renderFilters,
+  updateFilter,
+  filtering,
+  view,
+  columns,
+  sorting,
+  updateSorting,
+  renderSorting,
+  isViewSwitchEnabled
+}) => {
+  const handleIconClick = useCallback(
+    (view: LIST_VIEW) => () => {
+      onChange(view);
+    },
+    [onChange]
+  );
+
+  return (
+    <div className="table__toolbar">
+      {title && !disableTitle && <h3 className="table__title">{title}</h3>}
+      <div className="table__filters">
+        {view === LIST_VIEW.CARDS && sorting !== undefined && (
+          <SortingFilter
+            sorting={sorting}
+            columns={columns}
+            updateSorting={updateSorting}
+            renderValueText={renderSorting}
+          />
+        )}
+        {renderFilters &&
+          updateFilter &&
+          filtering &&
+          renderFilters(updateFilter, filtering)}
+        {createButtonToolbar}
+      </div>
+      {isViewSwitchEnabled && (
+        <div className="table__toggle">
+          <div
+            className="table__toggle-icon"
+            onClick={handleIconClick(LIST_VIEW.CARDS)}
+          >
+            <CardsIcon primary={view === LIST_VIEW.CARDS} />
+          </div>
+          <div
+            className="table__toggle-icon"
+            onClick={handleIconClick(LIST_VIEW.TABLE)}
+          >
+            <TableIcon primary={view === LIST_VIEW.TABLE} />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 interface ITableToolbarInnerProps {
   view: LIST_VIEW;
@@ -31,65 +93,5 @@ export interface ITableToolbarExternalProps {
   renderSorting?: RenderSortingFuncType;
 }
 
-class TableToolbar extends React.PureComponent<
-  ITableToolbarExternalProps & ITableToolbarInnerProps
-> {
-  handleIconClick = (view: LIST_VIEW) => () => {
-    this.props.onChange(view);
-  };
-
-  render() {
-    const {
-      disableTitle,
-      createButtonToolbar,
-      title,
-      renderFilters,
-      updateFilter,
-      filtering,
-      view,
-      columns,
-      sorting,
-      updateSorting,
-      renderSorting,
-      isViewSwitchEnabled
-    } = this.props;
-    return (
-      <div className="table__toolbar">
-        {title && !disableTitle && <h3 className="table__title">{title}</h3>}
-        <div className="table__filters">
-          {view === LIST_VIEW.CARDS && sorting !== undefined && (
-            <SortingFilter
-              sorting={sorting}
-              columns={columns}
-              updateSorting={updateSorting}
-              renderValueText={renderSorting}
-            />
-          )}
-          {renderFilters &&
-            updateFilter &&
-            filtering &&
-            renderFilters(updateFilter, filtering)}
-          {createButtonToolbar}
-        </div>
-        {isViewSwitchEnabled && (
-          <div className="table__toggle">
-            <div
-              className="table__toggle-icon"
-              onClick={this.handleIconClick(LIST_VIEW.CARDS)}
-            >
-              <CardsIcon primary={view === LIST_VIEW.CARDS} />
-            </div>
-            <div
-              className="table__toggle-icon"
-              onClick={this.handleIconClick(LIST_VIEW.TABLE)}
-            >
-              <TableIcon primary={view === LIST_VIEW.TABLE} />
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-}
-
+const TableToolbar = React.memo(_TableToolbar);
 export default TableToolbar;

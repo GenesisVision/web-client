@@ -50,4 +50,4 @@ interface Props {
   status: STATUS;
 }
 
-export default React.memo(translate()(ProgramPeriodLine));
+export default translate()(React.memo(ProgramPeriodLine));

@@ -162,7 +162,6 @@ const AssetEditForm = compose<
   React.FC<IAssetEditFormOwnProps & WithLoaderProps>
 >(
   withLoader,
-  React.memo,
   translate(),
   withFormik<IAssetEditFormOwnProps, IAssetEditFormValues>({
     displayName: "edit-form",
@@ -181,6 +180,7 @@ const AssetEditForm = compose<
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_AssetEditForm);
 export default AssetEditForm;

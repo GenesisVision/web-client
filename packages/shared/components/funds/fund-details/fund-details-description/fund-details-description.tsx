@@ -53,7 +53,7 @@ const _FundDetailsDescription: React.FC<Props> = ({
   </div>
 );
 
-const FundDetailsDescription = React.memo(translate()(_FundDetailsDescription));
+const FundDetailsDescription = translate()(React.memo(_FundDetailsDescription));
 export default FundDetailsDescription;
 
 type AssetDescription = {

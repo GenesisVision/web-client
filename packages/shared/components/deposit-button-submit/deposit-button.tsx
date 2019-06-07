@@ -41,8 +41,8 @@ const mapStateToProps = (state: RootState): IDepositButtonStateProps => {
   };
 };
 
-const DepositButtonContainer = React.memo(
-  connect(mapStateToProps)(DepositButton)
+const DepositButtonContainer = connect(mapStateToProps)(
+  React.memo(DepositButton)
 );
 
 export default DepositButtonContainer;
