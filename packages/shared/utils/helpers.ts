@@ -5,11 +5,12 @@ import { Nullable } from "./types";
 const getType = (value: any): string =>
   Array.isArray(value) ? "array" : typeof value;
 
-const getArrayType = (array: any): Nullable<string> => {
+const getArrayType = (array: any[]): Nullable<string> => {
   const supposedType = getType(array[0]);
   const isUniform = array
     .map(getType)
-    .reduce((acc: string, cur: boolean) => Object.is(acc, supposedType) && cur);
+    .map(item => Object.is(item, supposedType))
+    .reduce((prev: boolean, cur: boolean) => cur && prev);
   return isUniform ? supposedType : null;
 };
 
