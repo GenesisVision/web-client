@@ -34,9 +34,7 @@ const removeMessage = (
   return state.filter(message => message.id !== action.payload.id);
 };
 
-const removeAllMessages = (): AlertMessagesState => {
-  return [];
-};
+const removeAllMessages = (): AlertMessagesState => initialState;
 
 const alertMessagesReducer = (
   state: AlertMessagesState = initialState,
