@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { RouteComponentProps, RouteProps } from "react-router";
 import { Redirect, Route } from "react-router-dom";
 import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 class _PrivateRoute extends React.PureComponent<RouteProps & StateProps> {
   renderComponent = (props: RouteComponentProps) => {

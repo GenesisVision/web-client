@@ -8,7 +8,7 @@ import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { Action, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;

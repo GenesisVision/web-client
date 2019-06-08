@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { Dispatch, compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import AlertMessage from "shared/modules/alert-message/components/alert-message-list/alert-message";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import history from "shared/utils/history";
 import { ActionType } from "shared/utils/types";
 

@@ -22,7 +22,7 @@ import TagFilter from "shared/components/table/components/filtering/tag-filter/t
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { convertToArray } from "shared/utils/helpers";
 
 import * as programsService from "../../services/programs-table.service";

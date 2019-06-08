@@ -12,7 +12,7 @@ import {
   fetchAccounts,
   fetchWallets
 } from "shared/components/wallet/services/wallet.services";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
 
 import { transferRequest } from "../services/transfer.services";

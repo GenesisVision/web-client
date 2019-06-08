@@ -10,7 +10,7 @@ import {
   compose
 } from "redux";
 import { ISelectChangeEvent } from "shared/components/select/select";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { ActionType, CurrencyEnum } from "shared/utils/types";
 
 import { HEADER_CURRENCY_VALUES } from "../currency-select.constants";

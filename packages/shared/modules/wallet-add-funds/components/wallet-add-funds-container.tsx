@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import WalletAddFundsForm, { CurrentWallet } from "./wallet-add-funds-form";
 

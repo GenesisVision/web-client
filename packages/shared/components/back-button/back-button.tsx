@@ -11,7 +11,7 @@ import {
   compose
 } from "redux";
 import GVButton from "shared/components/gv-button";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 
 import { updateCurrency } from "../../modules/currency-select/services/currency-select.service";

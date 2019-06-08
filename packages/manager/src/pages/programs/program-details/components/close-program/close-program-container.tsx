@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { closeProgram } from "shared/components/programs/program-details/services/program-details.service";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
 import CloseProgramForm, {

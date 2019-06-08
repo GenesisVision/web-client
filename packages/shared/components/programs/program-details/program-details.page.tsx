@@ -15,7 +15,7 @@ import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic
 } from "shared/components/programs/program-details/services/program-details.types";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
 import ProgramDetailsContainer from "./program-details.contaner";

@@ -5,7 +5,7 @@ import {
   DialogLoaderGoogleAuthDesktop,
   DialogLoaderGoogleAuthMobile
 } from "shared/components/dialog/dialog-loader/dialog-loader-google-auth";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { isTablet } from "shared/utils/breakpoints";
 
 interface IDialogLoaderGoogleAuthStepsStateProps {

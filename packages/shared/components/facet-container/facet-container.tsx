@@ -10,7 +10,7 @@ import { FilteringType } from "shared/components/table/components/filtering/filt
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 class _FacetContainer extends React.PureComponent<Props, State> {

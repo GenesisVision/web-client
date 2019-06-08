@@ -5,7 +5,7 @@ import {
   calculateSkipAndTake,
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { TGetState } from "shared/utils/types";
 
 import { updateFiltersAction as updateFiltersActionCreator } from "../actions/table.actions";
