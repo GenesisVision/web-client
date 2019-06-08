@@ -1,5 +1,6 @@
 import { NotificationViewModel } from "gv-api-web";
 import { Action } from "redux";
+import { composeClearDataActionType } from "shared/actions/clear-data.factory";
 import { ActionType, Nullable } from "shared/utils/types";
 
 export const NOTIFICATIONS_TOGGLE = "NOTIFICATIONS_TOGGLE";
@@ -24,7 +25,7 @@ export interface AddTotalNotificationsAction extends ActionType<number> {
 }
 
 export interface ClearNotificationsAction extends Action {
-  type: typeof CLEAR_NOTIFICATIONS;
+  type: ReturnType<typeof composeClearDataActionType>;
 }
 
 export interface SetNotificationsOptionsAction extends ActionType<SkipTake> {
@@ -58,7 +59,7 @@ export const addTotalNotificationsAction = (
 });
 
 export const clearNotificationsAction = (): ClearNotificationsAction => ({
-  type: CLEAR_NOTIFICATIONS
+  type: composeClearDataActionType(ADD_NOTIFICATIONS)
 });
 
 export const setNotificationsOptionsAction = (
