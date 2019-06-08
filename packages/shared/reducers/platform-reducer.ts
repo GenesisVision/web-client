@@ -2,7 +2,7 @@ import { PlatformInfo } from "gv-api-web";
 import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 
 export type PlatformState = IApiState<PlatformInfo>;
 

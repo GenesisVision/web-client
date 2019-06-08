@@ -2,7 +2,7 @@ import { ProgramsList } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 
 import { PROGRAMS } from "../actions/programs-table.actions";
 import programsFavoritesReducer from "./programs-favorites.reducer";

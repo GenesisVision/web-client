@@ -1,8 +1,7 @@
 import { Reducer, combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
-import clearableReducer from "shared/reducers/clearable.reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 import { ActionType } from "shared/utils/types";
 
 import { FilteringType } from "../components/filtering/filter.type";

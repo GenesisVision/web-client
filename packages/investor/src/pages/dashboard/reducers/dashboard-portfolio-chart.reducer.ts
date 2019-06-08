@@ -1,7 +1,7 @@
 import { DashboardChartValue } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 
 import { DASHBOARD_PORTFOLIO_CHART } from "../actions/dashboard.actions";
 

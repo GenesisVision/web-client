@@ -2,7 +2,7 @@ import { LevelUpSummary, ProgramsList } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 
 import {
   LEVELUP_SUMMARY,

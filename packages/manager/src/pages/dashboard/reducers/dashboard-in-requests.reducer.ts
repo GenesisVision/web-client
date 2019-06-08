@@ -1,7 +1,7 @@
 import { ProgramRequests } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 
 import { DASHBOARD_IN_REQUESTS } from "../actions/dashboard.actions";
 

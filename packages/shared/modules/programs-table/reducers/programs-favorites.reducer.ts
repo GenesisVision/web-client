@@ -4,7 +4,7 @@ import {
   FAILURE_SUFFIX,
   IApiState,
   REQUEST_SUFFIX
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 import { FavoriteActionType } from "shared/utils/types";
 
 const updateFavoriteLocal = (
