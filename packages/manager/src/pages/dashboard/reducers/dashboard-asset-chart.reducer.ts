@@ -1,3 +1,4 @@
+import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 import { Nullable } from "shared/utils/types";
 
 import {
@@ -11,14 +12,11 @@ const initialState = null;
 const dashboardAssetChartReducer = (
   state: Nullable<IDashboardAssetChart> = initialState,
   action: TDashboardChartAction
-): Nullable<IDashboardAssetChart> => {
-  switch (action.type) {
-    case DASHBOARD_ASSET_CHART:
-      return {
-        ...action.payload
-      };
-    default:
-      return state;
-  }
-};
+): Nullable<IDashboardAssetChart> =>
+  defaultReducer<TDashboardChartAction, Nullable<IDashboardAssetChart>>(
+    action,
+    state,
+    initialState,
+    DASHBOARD_ASSET_CHART
+  );
 export default dashboardAssetChartReducer;
