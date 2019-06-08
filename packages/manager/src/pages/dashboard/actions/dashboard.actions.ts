@@ -71,9 +71,10 @@ export const cancelProgramRequestAction = (
   payload: managerApi.v10ManagerProgramsRequestsByIdCancelPost(id, auth)
 });
 
+export type TDashboardChartAction = ActionType<IDashboardAssetChart>;
 export const dashboardChartAction = (
   assetChart: IDashboardAssetChart
-): ActionType<IDashboardAssetChart> => ({
+): TDashboardChartAction => ({
   type: DASHBOARD_ASSET_CHART,
   payload: assetChart
 });
