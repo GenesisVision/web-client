@@ -31,7 +31,7 @@ import fundsReducer from "shared/modules/funds-table/reducers/funds-table.reduce
 import notificationSettingsReducer from "shared/modules/notification-settings/reducers/notification-settings.reducers";
 import programNotificationsReducer from "shared/modules/program-notifications/reducers/program-notifications.reducers";
 import programsReducer from "shared/modules/programs-table/reducers/programs-table.reducers";
-import accountSettingsReducer from "shared/reducers/account-settings";
+import accountSettingsReducer from "shared/reducers/account-settings-reducer";
 import authReducer from "shared/reducers/auth-reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
 import emailPendingReducer from "shared/reducers/email-pending-reducer";
