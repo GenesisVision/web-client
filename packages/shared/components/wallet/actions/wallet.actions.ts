@@ -10,6 +10,8 @@ import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { ActionType, ApiAction } from "shared/utils/types";
 
+import { WalletLastUpdateState } from "../reducers/wallet-last-update";
+
 export const COPYTRADING_ACCOUNTS = "COPYTRADING_ACCOUNTS";
 export const WALLET_BALANCE = "WALLET_BALANCE";
 export const WALLET_BALANCE_BY_CURRENCY_AVAILABLE =
@@ -35,7 +37,8 @@ interface FetchTransactionsAction
   type: typeof WALLET_TRANSACTIONS;
 }
 
-export interface UpdateTimestampAction extends ActionType<Date> {
+export interface UpdateTimestampAction
+  extends ActionType<WalletLastUpdateState> {
   type: typeof WALLET_LAST_UPDATE;
 }
 
@@ -51,7 +54,9 @@ export const fetchWalletsAction = (
   payload: walletApi.v10WalletMultiByCurrencyGet(currency, authorization)
 });
 
-export const fetchAccountsAction = (authorization: string): FetchAccountsAction => ({
+export const fetchAccountsAction = (
+  authorization: string
+): FetchAccountsAction => ({
   type: COPYTRADING_ACCOUNTS,
   payload: signalApi.v10SignalAccountsGet(authorization)
 });
@@ -76,7 +81,7 @@ export const fetchWalletTransactionsAction = (
 
 export const updateWalletTimestampAction = (): UpdateTimestampAction => ({
   type: WALLET_LAST_UPDATE,
-  payload: new Date()
+  payload: { timestamp: new Date() }
 });
 
 export const updateAccountTimestampAction = (): UpdateAccountTimestampAction => ({
