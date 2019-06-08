@@ -85,9 +85,10 @@ export const fetchAssetsAction = (
   payload: managerApi.v10ManagerAssetsGet(auth)
 });
 
+export type TSetPeriodAction = ActionType<ChartDefaultPeriod>;
 export const setPeriodAction = (
   payload: ChartDefaultPeriod
-): ActionType<ChartDefaultPeriod> => ({
+): TSetPeriodAction => ({
   type: DASHBOARD_PERIOD,
   payload
 });

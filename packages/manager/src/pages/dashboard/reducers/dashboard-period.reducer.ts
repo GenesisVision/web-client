@@ -3,17 +3,15 @@ import {
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
 
-import { DASHBOARD_PERIOD } from "../actions/dashboard.actions";
+import { DASHBOARD_PERIOD, TSetPeriodAction } from "../actions/dashboard.actions";
 
 const dashboardPeriodReducer = (
   state: ChartDefaultPeriod = getDefaultPeriod(),
-  action: any
+  action: TSetPeriodAction
 ): ChartDefaultPeriod => {
   switch (action.type) {
     case DASHBOARD_PERIOD:
-      return {
-        ...action.payload
-      };
+      return action.payload;
     default:
       return state;
   }
