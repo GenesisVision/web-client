@@ -10,7 +10,7 @@ import { FundsTableState } from "shared/modules/funds-table/reducers/funds-table
 import { NotificationSettingsState } from "shared/modules/notification-settings/reducers/notification-settings.reducers";
 import { ProgramNotificationsState } from "shared/modules/program-notifications/reducers/program-notifications.reducers";
 import { ProgramsListState } from "shared/modules/programs-table/reducers/programs-table.reducers";
-import { AccountSettingsState } from "shared/reducers/account-settings";
+import { AccountSettingsState } from "shared/reducers/account-settings-reducer";
 import { AuthState } from "shared/reducers/auth-reducer";
 import { EmailPendingState } from "shared/reducers/email-pending-reducer";
 import { PlatformState } from "shared/reducers/platform-reducer";
