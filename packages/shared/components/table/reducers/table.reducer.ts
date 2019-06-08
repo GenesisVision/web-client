@@ -1,4 +1,5 @@
 import { Reducer, combineReducers } from "redux";
+import clearableReducer from "shared/reducers/clearable.reducer";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
