@@ -4,26 +4,25 @@ import {
 } from "shared/actions/auth-actions";
 import authService from "shared/services/auth-service";
 
+import defaultReducer from "./reducer-creators/default-reducer";
+
 export type AuthState = Readonly<{
   isAuthenticated: boolean;
 }>;
 
-const getInitialState = () => ({
+const getInitialState = (): AuthState => ({
   isAuthenticated: authService.isAuthenticated()
 });
 
 const authReducer = (
   state = getInitialState(),
   action: UpdateTokenActionType
-) => {
-  switch (action.type) {
-    case UPDATE_TOKEN:
-      return {
-        isAuthenticated: action.payload || false
-      };
-    default:
-      return state;
-  }
-};
+): AuthState =>
+  defaultReducer<UpdateTokenActionType, AuthState>(
+    action,
+    state,
+    getInitialState(),
+    UPDATE_TOKEN
+  );
 
 export default authReducer;
