@@ -5,12 +5,11 @@ import {
   ADD_TOTAL_NOTIFICATIONS,
   AddNotificationsAction,
   AddTotalNotificationsAction,
-  CLEAR_NOTIFICATIONS,
-  ClearNotificationsAction,
   SET_NOTIFICATIONS_OPTIONS,
   SetNotificationsOptionsAction,
   TAKE_COUNT
 } from "shared/components/notifications/actions/notifications.actions";
+import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 
 import isOpenReducer from "./is-open.reducer";
 
@@ -22,41 +21,39 @@ type SkipTake = {
 const initialState: NotificationViewModel[] = [];
 
 const optionsReducer = (
-  options: SkipTake = { take: TAKE_COUNT, skip: 0 } as SkipTake,
+  state: SkipTake = { take: TAKE_COUNT, skip: 0 } as SkipTake,
   action: SetNotificationsOptionsAction
-) => {
-  if (action.type === SET_NOTIFICATIONS_OPTIONS) {
-    return action.payload;
-  }
-  return options;
-};
+) =>
+  defaultReducer<SetNotificationsOptionsAction, SkipTake>(
+    action,
+    state,
+    { take: TAKE_COUNT, skip: 0 },
+    SET_NOTIFICATIONS_OPTIONS
+  );
 
 // TODO: добавить нормализацию, когда буду уникальные ID
 const addNotificationsReducer = (
-  notifications: NotificationViewModel[] = [] as NotificationViewModel[],
-  action: AddNotificationsAction | ClearNotificationsAction
-): NotificationViewModel[] => {
-  switch (action.type) {
-    case ADD_NOTIFICATIONS:
-      return [...notifications, ...action.payload];
-    case CLEAR_NOTIFICATIONS:
-      return initialState;
-    default:
-      return notifications;
-  }
-};
+  state: NotificationViewModel[] = initialState,
+  action: AddNotificationsAction
+): NotificationViewModel[] =>
+  defaultReducer<AddNotificationsAction, NotificationViewModel[]>(
+    action,
+    state,
+    initialState,
+    ADD_NOTIFICATIONS,
+    true
+  );
 
 const addTotalCount = (
-  total: number = 0,
+  state: number = 0,
   action: AddTotalNotificationsAction
-): number => {
-  switch (action.type) {
-    case ADD_TOTAL_NOTIFICATIONS:
-      return action.payload;
-    default:
-      return total;
-  }
-};
+): number =>
+  defaultReducer<AddTotalNotificationsAction, number>(
+    action,
+    state,
+    0,
+    ADD_TOTAL_NOTIFICATIONS
+  );
 
 export type NotificationsState = Readonly<{
   notifications: NotificationViewModel[];
