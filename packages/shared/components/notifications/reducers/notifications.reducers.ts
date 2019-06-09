@@ -18,40 +18,41 @@ type SkipTake = {
   take: number;
 };
 
-const initialState: NotificationViewModel[] = [];
-
+const initialOptionsState = { take: TAKE_COUNT, skip: 0 };
 const optionsReducer = (
-  state: SkipTake = { take: TAKE_COUNT, skip: 0 } as SkipTake,
+  state: SkipTake = initialOptionsState,
   action: SetNotificationsOptionsAction
 ) =>
   defaultReducer<SetNotificationsOptionsAction, SkipTake>(
     action,
     state,
-    { take: TAKE_COUNT, skip: 0 },
+    initialOptionsState,
     SET_NOTIFICATIONS_OPTIONS
   );
 
+const initialNotificationsState: NotificationViewModel[] = [];
 // TODO: добавить нормализацию, когда буду уникальные ID
 const addNotificationsReducer = (
-  state: NotificationViewModel[] = initialState,
+  state: NotificationViewModel[] = initialNotificationsState,
   action: AddNotificationsAction
 ): NotificationViewModel[] =>
   defaultReducer<AddNotificationsAction, NotificationViewModel[]>(
     action,
     state,
-    initialState,
+    initialNotificationsState,
     ADD_NOTIFICATIONS,
     true
   );
 
+const initialCountState = 0;
 const addTotalCount = (
-  state: number = 0,
+  state: number = initialCountState,
   action: AddTotalNotificationsAction
 ): number =>
   defaultReducer<AddTotalNotificationsAction, number>(
     action,
     state,
-    0,
+    initialCountState,
     ADD_TOTAL_NOTIFICATIONS
   );
 
