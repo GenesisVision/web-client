@@ -8,11 +8,14 @@ export const FETCH_PROGRAM_NOTIFICATIONS = "FETCH_PROGRAM_NOTIFICATIONS";
 export const TOGGLE_PROGRAM_NOTIFICATION = "TOGGLE_PROGRAM_NOTIFICATION";
 export const ADD_ERROR_MESSAGE = "ADD_ERROR_MESSAGE";
 
+export type TAddProgramNotificationsAction = NotificationsActionType<{
+  [key: string]: ProgramNotificationSettingList;
+}>;
 export const addProgramNotificationsAction = (
   payload: ProgramNotificationSettingList
-): NotificationsActionType<ProgramNotificationSettingList> => ({
+): TAddProgramNotificationsAction => ({
   type: ADD_PROGRAM_NOTIFICATIONS,
-  payload
+  payload: { [payload.url]: payload }
 });
 
 export const fetchProgramNotificationsAction = (
