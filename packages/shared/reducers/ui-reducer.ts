@@ -27,11 +27,17 @@ const sizeReducer = (
     WINDOW_RESIZE
   );
 
+const initialScrollState = 0;
 const scrollReducer = (
-  state: number = 0,
+  state: number = initialScrollState,
   action: TWindowScrollAction
 ): number =>
-  defaultReducer<TWindowScrollAction, number>(action, state, 0, WINDOW_SCROLL);
+  defaultReducer<TWindowScrollAction, number>(
+    action,
+    state,
+    initialScrollState,
+    WINDOW_SCROLL
+  );
 
 const uiReducer = combineReducers<IUiState>({
   size: sizeReducer,
