@@ -5,9 +5,11 @@ import {
   NotificationToggleAction
 } from "../actions/notifications.actions";
 
+export type IsOpenState = boolean;
+
 const initialState = false;
 const isOpenReducer = (
-  state: boolean = initialState,
+  state: IsOpenState = initialState,
   action: NotificationToggleAction
 ): boolean =>
   defaultReducer<NotificationToggleAction, boolean>(

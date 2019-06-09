@@ -1,7 +1,9 @@
 import { NotificationViewModel } from "gv-api-web";
 import { Action } from "redux";
 import { composeClearDataActionType } from "shared/actions/clear-data.factory";
-import { ActionType, Nullable } from "shared/utils/types";
+import { ActionType } from "shared/utils/types";
+
+import { IsOpenState } from "../reducers/is-open.reducer";
 
 export const NOTIFICATIONS_TOGGLE = "NOTIFICATIONS_TOGGLE";
 export const ADD_NOTIFICATIONS = "ADD_NOTIFICATIONS";
@@ -10,8 +12,7 @@ export const CLEAR_NOTIFICATIONS = "CLEAR_NOTIFICATIONS";
 export const ADD_TOTAL_NOTIFICATIONS = "ADD_TOTAL_NOTIFICATIONS";
 export const TAKE_COUNT = 10;
 
-export interface NotificationToggleAction
-  extends ActionType<Nullable<boolean>> {
+export interface NotificationToggleAction extends ActionType<IsOpenState> {
   type: typeof NOTIFICATIONS_TOGGLE;
 }
 
@@ -38,7 +39,7 @@ export type SkipTake = Readonly<{
 }>;
 
 export const notificationsToggleAction = (
-  payload: Nullable<boolean> = null
+  payload: IsOpenState
 ): NotificationToggleAction => ({
   type: NOTIFICATIONS_TOGGLE,
   payload

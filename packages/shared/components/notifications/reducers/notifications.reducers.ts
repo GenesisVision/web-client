@@ -11,7 +11,7 @@ import {
 } from "shared/components/notifications/actions/notifications.actions";
 import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 
-import isOpenReducer from "./is-open.reducer";
+import isOpenReducer, { IsOpenState } from "./is-open.reducer";
 
 type SkipTake = {
   skip: number;
@@ -58,7 +58,7 @@ const addTotalCount = (
 
 export type NotificationsState = Readonly<{
   notifications: NotificationViewModel[];
-  isOpen: boolean;
+  isOpen: IsOpenState;
   total: number;
   options: SkipTake;
 }>;
