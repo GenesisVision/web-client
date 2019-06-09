@@ -1,17 +1,20 @@
+import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
+
 import {
   NOTIFICATIONS_TOGGLE,
   NotificationToggleAction
 } from "../actions/notifications.actions";
 
+const initialState = false;
 const isOpenReducer = (
-  isOpen: boolean = false,
+  state: boolean = initialState,
   action: NotificationToggleAction
-): boolean => {
-  if (action.type === NOTIFICATIONS_TOGGLE) {
-    if (action.payload !== null) return action.payload;
-    return !isOpen;
-  }
-  return isOpen;
-};
+): boolean =>
+  defaultReducer<NotificationToggleAction, boolean>(
+    action,
+    state,
+    initialState,
+    NOTIFICATIONS_TOGGLE
+  );
 
 export default isOpenReducer;
