@@ -11,8 +11,7 @@ const defaultReducer = <T extends ActionType<U>, U>(
 ): U => {
   switch (action.type) {
     case type:
-      // @ts-ignore
-      if (merge) return mergeFunc(state, action.payload); // TODO how?
+      if (merge) return mergeFunc<U>(state, action.payload) as U;
       return action.payload;
     case composeClearDataActionType(type):
       return initialState;

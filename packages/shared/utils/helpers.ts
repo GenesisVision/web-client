@@ -14,12 +14,12 @@ const getArrayType = (array: any[]): Nullable<string> => {
   return isUniform ? supposedType : null;
 };
 
-const merge = <T extends object>(...args: T[]): T => {
+const merge = <T>(...args: any[][] | {}[]): any[] | object | T => {
   switch (getArrayType(args)) {
     case "object":
-      return mergeObjects(args) as T;
+      return mergeObjects(args);
     case "array":
-      return mergeArrays(args as any[][]) as T;
+      return mergeArrays(args as any[][]);
     default:
       return args[0];
   }
