@@ -12,19 +12,39 @@ xdescribe("test helpers functions", () => {
         to: 5
       };
       expect(
-        allowValuesNumberFormat(allows)({ floatValue: 2, formattedValue: "2" })
+        allowValuesNumberFormat(allows)({
+          value: "0",
+          floatValue: 2,
+          formattedValue: "2"
+        })
       ).toBe(true);
       expect(
-        allowValuesNumberFormat(allows)({ floatValue: 6, formattedValue: "6" })
+        allowValuesNumberFormat(allows)({
+          value: "0",
+          floatValue: 6,
+          formattedValue: "6"
+        })
       ).toBe(false);
       expect(
-        allowValuesNumberFormat(allows)({ floatValue: 6, formattedValue: "6" })
+        allowValuesNumberFormat(allows)({
+          value: "0",
+          floatValue: 6,
+          formattedValue: "6"
+        })
       ).toBe(false);
       expect(
-        allowValuesNumberFormat(allows)({ floatValue: 0, formattedValue: "" })
+        allowValuesNumberFormat(allows)({
+          value: "0",
+          floatValue: 0,
+          formattedValue: ""
+        })
       ).toBe(true);
       expect(
-        allowValuesNumberFormat(allows)({ floatValue: 0, formattedValue: "0." })
+        allowValuesNumberFormat(allows)({
+          value: "0",
+          floatValue: 0,
+          formattedValue: "0."
+        })
       ).toBe(true);
     });
   });
