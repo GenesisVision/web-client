@@ -8,11 +8,14 @@ export const FETCH_FUND_NOTIFICATIONS = "FETCH_FUND_NOTIFICATIONS";
 export const TOGGLE_FUND_NOTIFICATION = "TOGGLE_FUND_NOTIFICATION";
 export const ADD_ERROR_MESSAGE = "ADD_ERROR_MESSAGE";
 
+export type TAddFundNotificationsAction = NotificationsActionType<{
+  [key: string]: FundNotificationSettingList;
+}>;
 export const addFundNotificationsAction = (
   payload: FundNotificationSettingList
-): NotificationsActionType<FundNotificationSettingList> => ({
+): TAddFundNotificationsAction => ({
   type: ADD_FUND_NOTIFICATIONS,
-  payload
+  payload: { [payload.url]: payload }
 });
 
 export const fetchFundNotificationsAction = (
