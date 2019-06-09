@@ -1,35 +1,28 @@
 import { FundNotificationSettingList } from "gv-api-web";
+import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 import { NotificationsActionType } from "shared/utils/types";
 
 import {
-  ADD_ERROR_MESSAGE,
-  ADD_FUND_NOTIFICATIONS
+  ADD_FUND_NOTIFICATIONS,
+  TAddFundNotificationsAction
 } from "../actions/fund-notifications.actions";
 
 export type FundNotificationsState = Readonly<{
-  data: { [name: string]: FundNotificationSettingList | undefined };
-  errorMessage?: string;
+  [name: string]: FundNotificationSettingList | undefined;
 }>;
 
-const initialState: FundNotificationsState = {
-  data: {}
-};
+const initialState: FundNotificationsState = {};
 
 const fundNotificationsReducer = (
   state: FundNotificationsState = initialState,
   action: NotificationsActionType<FundNotificationSettingList>
-): FundNotificationsState => {
-  switch (action.type) {
-    case ADD_FUND_NOTIFICATIONS:
-      return {
-        data: { ...state.data, [action.payload!.url]: action.payload },
-        errorMessage: undefined
-      };
-    case ADD_ERROR_MESSAGE:
-      return { ...state, errorMessage: action.payload };
-    default:
-      return state;
-  }
-};
+): FundNotificationsState =>
+  defaultReducer<TAddFundNotificationsAction, FundNotificationsState>(
+    action,
+    state,
+    initialState,
+    ADD_FUND_NOTIFICATIONS,
+    true
+  );
 
 export default fundNotificationsReducer;
