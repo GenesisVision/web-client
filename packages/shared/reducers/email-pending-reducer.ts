@@ -1,5 +1,7 @@
-import { EMAIL_PENDING } from "shared/actions/email-pending-actions";
-import { ActionType } from "shared/utils/types";
+import {
+  EMAIL_PENDING,
+  TSaveEmailAction
+} from "shared/actions/email-pending-actions";
 
 import defaultReducer from "./reducer-creators/default-reducer";
 
@@ -13,9 +15,9 @@ const initialState: EmailPendingState = {
 
 const emailPendingReducer = (
   state: EmailPendingState = initialState,
-  action: ActionType<EmailPendingState>
+  action: TSaveEmailAction
 ): EmailPendingState =>
-  defaultReducer<ActionType<EmailPendingState>, EmailPendingState>(
+  defaultReducer<TSaveEmailAction, EmailPendingState>(
     action,
     state,
     initialState,
