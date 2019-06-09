@@ -73,6 +73,8 @@ const convertToArray = (value: any): any[] =>
   Array.isArray(value) ? value : [value];
 
 export {
+  getType,
+  getArrayType,
   allowValuesNumberFormat,
   getNumberWithoutSuffix,
   convertToArray,
