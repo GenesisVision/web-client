@@ -1,6 +1,5 @@
 import { FundNotificationSettingList } from "gv-api-web";
 import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
-import { NotificationsActionType } from "shared/utils/types";
 
 import {
   ADD_FUND_NOTIFICATIONS,
@@ -15,7 +14,7 @@ const initialState: FundNotificationsState = {};
 
 const fundNotificationsReducer = (
   state: FundNotificationsState = initialState,
-  action: NotificationsActionType<FundNotificationSettingList>
+  action: TAddFundNotificationsAction
 ): FundNotificationsState =>
   defaultReducer<TAddFundNotificationsAction, FundNotificationsState>(
     action,
