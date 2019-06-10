@@ -35,12 +35,11 @@ a {
   color: white;
 }
 
-$scroll-width: 6px;
 $scroll-background: transparent;
 $scroll-thumb-color: rgba(255, 255, 255, 0.3);
 
 ::-webkit-scrollbar {
-  width: $scroll-width;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -49,10 +48,10 @@ $scroll-thumb-color: rgba(255, 255, 255, 0.3);
 
 ::-webkit-scrollbar-thumb {
   background: $scroll-thumb-color;
-  border-radius: $scroll-width / 2;
+  border-radius: 3px;
 }
 
 * {
-  scrollbar-width: $scroll-width;
+  scrollbar-width: thin;
   scrollbar-color: $scroll-thumb-color $scroll-background;
 }
