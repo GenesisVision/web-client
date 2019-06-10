@@ -26,7 +26,7 @@ const mapDispatchToProps = (
 
   return {
     fetchInfo: getProgramWithdrawInfo(id, accountCurrency),
-    withdraw: value => dispatch(withdrawProgram(value))
+    withdraw: values => dispatch(withdrawProgram(values))
   };
 };
 
@@ -43,5 +43,5 @@ export default ProgramWithdrawContainer;
 
 interface DispatchProps {
   fetchInfo(): Promise<ProgramWithdrawInfo>;
-  withdraw(value: ProgramWithdrawType): Promise<void>;
+  withdraw(values: ProgramWithdrawType): Promise<void>;
 }

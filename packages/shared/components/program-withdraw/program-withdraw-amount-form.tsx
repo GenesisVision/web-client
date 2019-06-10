@@ -1,17 +1,17 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { CREATE_PROGRAM_FIELDS } from "manager-web-portal/src/pages/create-program/components/create-program-settings/create-program-settings";
 import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
+import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
+import GVFormikField from "shared/components/gv-formik-field";
+import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import { ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { number, object } from "yup";
-
-import GVCheckbox from "../gv-checkbox/gv-checkbox";
-import GVFormikField from "../gv-formik-field";
-import InputAmountField from "../input-amount-field/input-amount-field";
+import { boolean, mixed, number, object } from "yup";
 
 const _ProgramWithdrawAmountForm: React.FC<
   InjectedFormikProps<Props, IProgramWithdrawAmountFormValues>
@@ -19,6 +19,7 @@ const _ProgramWithdrawAmountForm: React.FC<
   setFieldValue,
   availableToWithdraw,
   t,
+  role,
   handleSubmit,
   accountCurrency,
   programCurrency,
@@ -46,23 +47,27 @@ const _ProgramWithdrawAmountForm: React.FC<
 
   return (
     <form id="withdraw-form" onSubmit={handleSubmit}>
-      <GVFormikField
-        type="checkbox"
-        color="primary"
-        name={"withdrawAll"}
-        label={
-          <span>
-            {t("manager.create-program-page.settings.fields.investment-limit")}
-          </span>
-        }
-        component={GVCheckbox}
-      />
+      {role === ROLE.INVESTOR && (
+        <GVFormikField
+          type="checkbox"
+          color="primary"
+          name={"withdrawAll"}
+          label={
+            <span>
+              Withdraw all
+              {/*{t("manager.create-program-page.settings.fields.investment-limit")}*/}
+            </span>
+          }
+          component={GVCheckbox}
+        />
+      )}
       <InputAmountField
         name="amount"
         label={t("withdraw-program.amount-to-withdraw")}
         currency={programCurrency}
         isAllow={isAllow}
-        setMax={setMaxAmount}
+        disabled={values.withdrawAll}
+        setMax={role === ROLE.MANAGER ? setMaxAmount : undefined}
       />
       {programCurrency !== accountCurrency && values.amount && (
         <div className="">
@@ -82,7 +87,7 @@ const _ProgramWithdrawAmountForm: React.FC<
           type="submit"
           id="programWithdrawAmountFormSubmit"
           className="invest-form__submit-button"
-          disabled={!values.amount || !isValid || !dirty}
+          disabled={!isValid || !dirty}
         >
           {t("withdraw-program.next")}
         </GVButton>
@@ -92,6 +97,7 @@ const _ProgramWithdrawAmountForm: React.FC<
 };
 
 const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
+  withRole,
   translate(),
   withFormik<Props, IProgramWithdrawAmountFormValues>({
     displayName: "withdraw-form",
@@ -101,15 +107,19 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
     }),
     validationSchema: ({ t, availableToWithdraw }: Props) =>
       object().shape({
-        amount: number()
-          .moreThan(0, t("withdraw-program.validation.amount-is-zero"))
-          .max(
-            availableToWithdraw,
-            t("withdraw-program.validation.amount-more-than-available")
-          )
+        withdrawAll: boolean(),
+        amount: mixed().when("withdrawAll", {
+          is: false,
+          then: number()
+            .moreThan(0, t("withdraw-program.validation.amount-is-zero"))
+            .max(
+              availableToWithdraw,
+              t("withdraw-program.validation.amount-more-than-available")
+            )
+        })
       }),
     handleSubmit: (values, { props }) => {
-      if (!values.amount) return;
+      if (!values.amount && !values.withdrawAll) return;
       props.onSubmit(values);
     }
   }),
@@ -127,7 +137,7 @@ interface OwnProps {
   rate: number;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends InjectedTranslateProps, WithRoleProps, OwnProps {}
 
 export interface IProgramWithdrawAmountFormValues {
   amount?: number;

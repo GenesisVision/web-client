@@ -49,11 +49,12 @@ class _ProgramWithdrawPopup extends React.PureComponent<
 
   handleSubmit = (setSubmitting: SetSubmittingType) => {
     const { withdraw } = this.props;
-    const { amount } = this.state;
+    const { amount, withdrawAll } = this.state;
 
     if (!amount) return;
     return withdraw({
-      amount
+      amount,
+      withdrawAll
     }).catch((error: ResponseError) => {
       this.setState({ errorMessage: error.errorMessage });
       setSubmitting(false);
@@ -132,7 +133,7 @@ export interface IProgramWithdrawPopupProps {
   assetCurrency: string;
   accountCurrency: string;
   fetchInfo(): Promise<ProgramWithdrawInfo>;
-  withdraw(value: ProgramWithdrawType): Promise<void>;
+  withdraw(values: ProgramWithdrawType): Promise<void>;
 }
 
 export type ProgramWithdrawType = {
