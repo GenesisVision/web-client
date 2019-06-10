@@ -92,5 +92,3 @@ export type RootState = Readonly<{
   copyTradingAccounts: CopyTradingAccountsState;
   ui: IUiState;
 }>;
-
-// export default RootState;
