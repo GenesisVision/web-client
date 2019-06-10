@@ -4,7 +4,9 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
-import ProgramWithdrawAmountForm from "./program-withdraw-amount-form";
+import ProgramWithdrawAmountForm, {
+  IProgramWithdrawAmountFormValues
+} from "./program-withdraw-amount-form";
 import ProgramWithdrawConfirmForm from "./program-withdraw-confirm-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
 
@@ -24,7 +26,8 @@ class _ProgramWithdrawPopup extends React.PureComponent<
     periodEnds: undefined,
     title: undefined,
     amount: undefined,
-    availableToWithdraw: undefined
+    availableToWithdraw: undefined,
+    withdrawAll: undefined
   };
 
   componentDidMount() {
@@ -57,10 +60,11 @@ class _ProgramWithdrawPopup extends React.PureComponent<
     });
   };
 
-  handleEnterAmountSubmit = (amount?: number) => {
+  handleEnterAmountSubmit = (values: IProgramWithdrawAmountFormValues) => {
     this.setState({
       step: PROGRAM_WITHDRAW_FORM.CONFIRM,
-      amount: amount || 0
+      amount: values.amount || 0,
+      withdrawAll: values.withdrawAll
     });
   };
 
@@ -133,6 +137,7 @@ export interface IProgramWithdrawPopupProps {
 
 export type ProgramWithdrawType = {
   amount: number;
+  withdrawAll?: boolean;
 };
 
 interface State {
@@ -143,4 +148,5 @@ interface State {
   availableToWithdraw?: number;
   periodEnds?: Date;
   title?: string;
+  withdrawAll?: boolean;
 }

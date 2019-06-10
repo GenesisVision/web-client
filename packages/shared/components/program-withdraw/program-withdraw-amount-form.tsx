@@ -1,4 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
+import { CREATE_PROGRAM_FIELDS } from "manager-web-portal/src/pages/create-program/components/create-program-settings/create-program-settings";
 import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
@@ -8,10 +9,12 @@ import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { number, object } from "yup";
 
+import GVCheckbox from "../gv-checkbox/gv-checkbox";
+import GVFormikField from "../gv-formik-field";
 import InputAmountField from "../input-amount-field/input-amount-field";
 
 const _ProgramWithdrawAmountForm: React.FC<
-  InjectedFormikProps<Props, FormValues>
+  InjectedFormikProps<Props, IProgramWithdrawAmountFormValues>
 > = ({
   setFieldValue,
   availableToWithdraw,
@@ -43,6 +46,17 @@ const _ProgramWithdrawAmountForm: React.FC<
 
   return (
     <form id="withdraw-form" onSubmit={handleSubmit}>
+      <GVFormikField
+        type="checkbox"
+        color="primary"
+        name={"withdrawAll"}
+        label={
+          <span>
+            {t("manager.create-program-page.settings.fields.investment-limit")}
+          </span>
+        }
+        component={GVCheckbox}
+      />
       <InputAmountField
         name="amount"
         label={t("withdraw-program.amount-to-withdraw")}
@@ -79,10 +93,11 @@ const _ProgramWithdrawAmountForm: React.FC<
 
 const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik<Props, FormValues>({
+  withFormik<Props, IProgramWithdrawAmountFormValues>({
     displayName: "withdraw-form",
     mapPropsToValues: ({ amount }) => ({
-      amount
+      amount,
+      withdrawAll: false
     }),
     validationSchema: ({ t, availableToWithdraw }: Props) =>
       object().shape({
@@ -95,7 +110,7 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
       }),
     handleSubmit: (values, { props }) => {
       if (!values.amount) return;
-      props.onSubmit(values.amount);
+      props.onSubmit(values);
     }
   }),
   React.memo
@@ -105,7 +120,7 @@ export default ProgramWithdrawAmountForm;
 
 interface OwnProps {
   amount?: number;
-  onSubmit(amount: number): void;
+  onSubmit(values: IProgramWithdrawAmountFormValues): void;
   availableToWithdraw: number;
   programCurrency: string;
   accountCurrency: string;
@@ -114,6 +129,7 @@ interface OwnProps {
 
 interface Props extends InjectedTranslateProps, OwnProps {}
 
-interface FormValues {
+export interface IProgramWithdrawAmountFormValues {
   amount?: number;
+  withdrawAll?: boolean;
 }
