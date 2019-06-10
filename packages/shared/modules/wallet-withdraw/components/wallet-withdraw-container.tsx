@@ -8,7 +8,7 @@ import { InvestorRootState } from "investor-web-portal/src/reducers";
 import * as React from "react";
 import { connect } from "react-redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
+import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
 
 import {
   MiddlewareDispatch,
@@ -107,7 +107,7 @@ const mapStateToProps = (state: InvestorRootState): StateProps => {
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
-    updateWalletTimestamp: () => dispatch(updateWalletTimestamp()),
+    updateWalletTimestamp: () => dispatch(updateWalletTimestampAction()),
     newWithdrawRequest: data =>
       dispatch(walletWithdrawService.newWithdrawRequest(data))
   }

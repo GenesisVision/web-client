@@ -97,7 +97,7 @@ class _AssetNotificationsCustom extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: AuthRootState): StateProps => ({
-  errorMessage: state.programNotifications.errorMessage
+  errorMessage: "" //state.programNotifications.errorMessage TODO
 });
 
 const mapDispatchToProps = (

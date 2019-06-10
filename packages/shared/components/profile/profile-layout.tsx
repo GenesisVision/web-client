@@ -7,7 +7,7 @@ import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Page from "shared/components/page/page";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import {
   KYC_ROUTE,

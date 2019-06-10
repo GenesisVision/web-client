@@ -15,7 +15,7 @@ import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
 
-import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
+import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";
 import {
   IDashboardAssetsCounts,
   fetchAssetsCount
@@ -132,7 +132,10 @@ class DashboardAssetsSection extends React.PureComponent<
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  service: bindActionCreators({ clearDashboardAssetsTable }, dispatch)
+  service: bindActionCreators(
+    { clearDashboardAssetsTable: clearDashboardAssetsTableAction },
+    dispatch
+  )
 });
 
 export default compose<React.ComponentType<IDashboardOwnProps>>(

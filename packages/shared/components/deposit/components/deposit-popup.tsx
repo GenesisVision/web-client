@@ -7,7 +7,7 @@ import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { fetchBaseWallets } from "shared/components/wallet/services/wallet.services";
 import { ASSET } from "shared/constants/constants";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
 import DepositForm from "./deposit-form";

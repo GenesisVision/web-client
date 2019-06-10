@@ -3,11 +3,18 @@ import "./back-button.scss";
 import { CallHistoryMethodAction, goBack, push } from "connected-react-router";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import GVButton from "shared/components/gv-button";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
+
+import { updateCurrency } from "../../modules/currency-select/services/currency-select.service";
 
 export const _BackButton: React.FC<
   StateProps & InjectedTranslateProps & DispatchProps
@@ -37,8 +44,11 @@ const mapStateToProps = (state: RootState): StateProps => ({
   prevPath: state.router.location.prevPath
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
-  service: bindActionCreators({ goBack, push }, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { goBack, push },
+    dispatch
+  )
 });
 
 const BackButton = compose<React.FC>(
@@ -56,9 +66,10 @@ interface StateProps {
   prevPath?: string;
 }
 
+interface ServiceThunks extends ActionCreatorsMapObject {
+  goBack: typeof goBack;
+  push: typeof push;
+}
 interface DispatchProps {
-  service: {
-    goBack(): CallHistoryMethodAction<[]>;
-    push(route: string): void;
-  };
+  service: ResolveThunks<ServiceThunks>;
 }

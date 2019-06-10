@@ -9,18 +9,18 @@ const _AlertMessage: React.FC<Props & InjectedTranslateProps> = ({
   t,
   onClick
 }) => {
-  const handleClick = useCallback(() => onClick(message.id), [
+  const handleClick = useCallback(() => onClick(message.id!), [
     onClick,
     message
   ]);
 
   const getMessageText = useCallback(
     ({
-      text,
+      text = "",
       isUseLocalization
     }: {
-      text: string;
-      isUseLocalization: boolean;
+      text?: string;
+      isUseLocalization?: boolean;
     }): string => (isUseLocalization && t(text)) || text,
     [t]
   );

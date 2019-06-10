@@ -11,7 +11,7 @@ import FundDetailsPageCommon from "shared/components/funds/fund-details/fund-det
 import { fetchEventsCounts } from "shared/components/funds/fund-details/services/fund-details.service";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import { IApiState } from "shared/reducers/api-reducer/api-reducer";
+import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
 
 import FundControls from "./components/fund-controls";
 

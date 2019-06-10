@@ -3,7 +3,7 @@ import investorApi from "shared/services/api-client/investor-api";
 import notificationsApi from "shared/services/api-client/notifications-api";
 import { ApiAction } from "shared/utils/types";
 
-export const fetchInvestmentInfo = ({
+export const fetchInvestmentInfoAction = ({
   assetId,
   currency,
   authorisation
@@ -20,7 +20,7 @@ export const fetchInvestmentInfo = ({
   )
 });
 
-export const subscribeAvailable = ({
+export const subscribeAvailableAction = ({
   assetId,
   amount,
   authorisation

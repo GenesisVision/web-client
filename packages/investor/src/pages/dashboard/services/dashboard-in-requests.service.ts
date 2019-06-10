@@ -8,14 +8,14 @@ import { alertMessageActions } from "shared/modules/alert-message/actions/alert-
 import authService from "shared/services/auth-service";
 
 import {
-  cancelProgramRequest,
-  fetchInRequests
+  cancelProgramRequestAction,
+  fetchInRequestsAction
 } from "../actions/dashboard.actions";
 import { getTopPortfolioEvents } from "./dashboard-events.services";
 
 export const getInRequests: GetInRequestsType = () => dispatch => {
   const authorization = authService.getAuthArg();
-  dispatch(fetchInRequests(authorization, 0, 100));
+  dispatch(fetchInRequestsAction(authorization, 0, 100));
 };
 
 export const cancelRequest: CancelRequestType = ({
@@ -24,7 +24,7 @@ export const cancelRequest: CancelRequestType = ({
   removeDisableBtn
 }) => dispatch => {
   const authorization = authService.getAuthArg();
-  const action = cancelProgramRequest(authorization, id);
+  const action = cancelProgramRequestAction(authorization, id);
 
   return dispatch(action)
     .then(() => {

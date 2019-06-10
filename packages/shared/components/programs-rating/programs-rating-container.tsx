@@ -9,7 +9,7 @@ import ProgramsRatingTables from "shared/components/programs-rating/programs-rat
 import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
 import Surface from "shared/components/surface/surface";
 import TabsContainer from "shared/components/tabs-container/tabs-container";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 class _ProgramsRatingContainer extends React.PureComponent<Props, State> {

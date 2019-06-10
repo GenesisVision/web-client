@@ -10,7 +10,7 @@ import {
   compose
 } from "redux";
 import { ISelectChangeEvent } from "shared/components/select/select";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { ActionType, CurrencyEnum } from "shared/utils/types";
 
 import { HEADER_CURRENCY_VALUES } from "../currency-select.constants";
@@ -51,7 +51,7 @@ const mapStateToProps = (state: RootState): StateProps => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     { updateCurrency },
     dispatch

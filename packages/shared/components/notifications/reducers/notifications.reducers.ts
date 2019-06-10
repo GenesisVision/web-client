@@ -3,53 +3,62 @@ import { combineReducers } from "redux";
 import {
   ADD_NOTIFICATIONS,
   ADD_TOTAL_NOTIFICATIONS,
-  CLEAR_NOTIFICATIONS,
+  AddNotificationsAction,
+  AddTotalNotificationsAction,
   SET_NOTIFICATIONS_OPTIONS,
+  SetNotificationsOptionsAction,
   TAKE_COUNT
 } from "shared/components/notifications/actions/notifications.actions";
+import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 
-import isOpenReducer from "./is-open.reducer";
+import isOpenReducer, { IsOpenState } from "./is-open.reducer";
 
 type SkipTake = {
   skip: number;
   take: number;
 };
 
+const initialOptionsState = { take: TAKE_COUNT, skip: 0 };
 const optionsReducer = (
-  options: SkipTake = { take: TAKE_COUNT, skip: 0 } as SkipTake,
-  action: any
-) => {
-  if (action.type === SET_NOTIFICATIONS_OPTIONS) {
-    return action.options;
-  }
-  return options;
-};
+  state: SkipTake = initialOptionsState,
+  action: SetNotificationsOptionsAction
+) =>
+  defaultReducer<SetNotificationsOptionsAction, SkipTake>(
+    action,
+    state,
+    initialOptionsState,
+    SET_NOTIFICATIONS_OPTIONS
+  );
 
+const initialNotificationsState: NotificationViewModel[] = [];
 // TODO: добавить нормализацию, когда буду уникальные ID
 const addNotificationsReducer = (
-  notifications: NotificationViewModel[] = [] as NotificationViewModel[],
-  action: any
-): NotificationViewModel[] => {
-  switch (action.type) {
-    case ADD_NOTIFICATIONS:
-      return [...notifications, ...action.notifications];
-    case CLEAR_NOTIFICATIONS:
-      return [];
-    default:
-      return notifications;
-  }
-};
+  state: NotificationViewModel[] = initialNotificationsState,
+  action: AddNotificationsAction
+): NotificationViewModel[] =>
+  defaultReducer<AddNotificationsAction, NotificationViewModel[]>(
+    action,
+    state,
+    initialNotificationsState,
+    ADD_NOTIFICATIONS,
+    true
+  );
 
-const addTotalCount = (total: number = 0, action: any): number => {
-  if (action.type === ADD_TOTAL_NOTIFICATIONS) {
-    return action.total;
-  }
-  return total;
-};
+const initialCountState = 0;
+const addTotalCount = (
+  state: number = initialCountState,
+  action: AddTotalNotificationsAction
+): number =>
+  defaultReducer<AddTotalNotificationsAction, number>(
+    action,
+    state,
+    initialCountState,
+    ADD_TOTAL_NOTIFICATIONS
+  );
 
 export type NotificationsState = Readonly<{
   notifications: NotificationViewModel[];
-  isOpen: boolean;
+  isOpen: IsOpenState;
   total: number;
   options: SkipTake;
 }>;

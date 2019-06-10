@@ -3,7 +3,7 @@ import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import { connect } from "react-redux";
 import NotFoundPage from "shared/components/not-found/not-found";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import { WalletRouteProps } from "../wallet.routes";
 import WalletContainerLoader from "./wallet-balance/wallet-container-loader";

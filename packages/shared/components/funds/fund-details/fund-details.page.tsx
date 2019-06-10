@@ -12,7 +12,7 @@ import {
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
 import FundDetailsContainer from "./fund-details.container";

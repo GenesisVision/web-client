@@ -9,7 +9,7 @@ import {
   ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import * as fundsService from "../../services/funds-table.service";
 import {

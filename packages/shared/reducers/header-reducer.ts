@@ -1,9 +1,8 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
-import { combineReducers } from "redux";
 import { PROFILE_HEADER } from "shared/components/header/header.constants";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 
 export type HeaderState = IApiState<ProfileHeaderViewModel>;
 

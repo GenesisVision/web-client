@@ -1,5 +1,8 @@
-import authApi from "../../../services/api-client/auth-api";
 import { LoginViewModel } from "gv-api-web";
+import authApi from "shared/services/api-client/auth-api";
+import { ActionType, ApiAction } from "shared/utils/types";
+
+import { ITwoFactorState } from "./reducers/two-factor.reducer";
 
 export const LOGIN = "LOGIN";
 export const LOGIN_TWO_FACTOR = "LOGIN_TWO_FACTOR";
@@ -11,15 +14,12 @@ export enum CODE_TYPE {
   RECOVERY = "recoveryCode"
 }
 
-export const storeTwoFactor = ({
+export type TStoreTwoFactorAction = ActionType<ITwoFactorState>;
+export const storeTwoFactorAction = ({
   email,
   password,
   from
-}: {
-  email: string;
-  password: string;
-  from: string;
-}) => ({
+}: ITwoFactorState): TStoreTwoFactorAction => ({
   type: LOGIN_TWO_FACTOR,
   payload: {
     email,
@@ -28,14 +28,18 @@ export const storeTwoFactor = ({
   }
 });
 
-export const loginUserManager = (loginData: LoginViewModel) => ({
+export const loginUserManagerAction = (
+  loginData: LoginViewModel
+): ApiAction<string> => ({
   type: LOGIN,
   payload: authApi.v10AuthSigninManagerPost({
     model: loginData
   })
 });
 
-export const loginUserInvestor = (loginData: LoginViewModel) => ({
+export const loginUserInvestorAction = (
+  loginData: LoginViewModel
+): ApiAction<string> => ({
   type: LOGIN,
   payload: authApi.v10AuthSigninInvestorPost({
     model: loginData

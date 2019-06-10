@@ -3,7 +3,7 @@ import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
 import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { updateProfileAvatar } from "../services/profile-settings.service";

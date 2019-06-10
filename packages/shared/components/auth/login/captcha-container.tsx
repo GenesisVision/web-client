@@ -12,8 +12,8 @@ import { CaptchasType } from "../auth.service";
 import Pow from "../captcha/pow";
 import {
   CODE_TYPE,
-  loginUserInvestor,
-  loginUserManager
+  loginUserInvestorAction,
+  loginUserManagerAction
 } from "./login.actions";
 import * as loginService from "./login.service";
 import {
@@ -50,7 +50,8 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   componentDidUpdate(): void {
     const { isSubmit, prefix, captchaType } = this.state;
     const { role, from, service, type } = this.props;
-    const method = role === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
+    const method =
+      role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":

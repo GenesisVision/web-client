@@ -39,7 +39,7 @@ class EmailConfirmContainer extends React.PureComponent<
 }
 
 const mapDispatchToProps = (
-  dispatch: Dispatch<ActionType>
+  dispatch: Dispatch
 ): IEmailConfirmContainerDispatchProps => ({
   service: bindActionCreators(
     {

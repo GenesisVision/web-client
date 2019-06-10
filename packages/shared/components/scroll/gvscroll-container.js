@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { windowScroll } from "shared/actions/ui-actions";
+import { windowScrollAction } from "shared/actions/ui-actions";
 import GVScroll from "shared/components/scroll/gvscroll";
 
 class GVScrollContainer extends React.PureComponent {
@@ -62,7 +62,7 @@ GVScrollContainer.propTypes = {
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     {
-      handleScroll: windowScroll
+      handleScroll: windowScrollAction
     },
     dispatch
   )

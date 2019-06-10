@@ -4,7 +4,7 @@ import {
   FAILURE_SUFFIX,
   IApiState,
   REQUEST_SUFFIX
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 import { FavoriteActionType } from "shared/utils/types";
 
 const updateFavoriteLocal = (
@@ -12,26 +12,22 @@ const updateFavoriteLocal = (
   id: string,
   isFavorite: boolean
 ): IApiState<FundsList> => {
+  if (!state.data) return state;
   return {
     ...state,
     data: {
       ...state.data,
-      total: (state.data && state.data.total) || 0,
-      funds:
-        (state.data &&
-          state.data.funds.map(fund => {
-            if (fund.id === id) {
-              return {
-                ...fund,
-                personalDetails: {
-                  ...fund.personalDetails,
-                  isFavorite: isFavorite
-                }
-              };
+      funds: state.data.funds.map(program =>
+        program.id === id
+          ? {
+              ...program,
+              personalDetails: {
+                ...program.personalDetails,
+                isFavorite
+              }
             }
-            return fund;
-          })) ||
-        []
+          : program
+      )
     }
   };
 };
