@@ -12,26 +12,22 @@ const updateFavoriteLocal = (
   id: string,
   isFavorite: boolean
 ): IApiState<ProgramsList> => {
+  if (!state.data) return state;
   return {
     ...state,
     data: {
       ...state.data,
-      total: (state.data && state.data.total) || 0,
-      programs:
-        (state.data &&
-          state.data.programs.map(program => {
-            if (program.id === id) {
-              return {
-                ...program,
-                personalDetails: {
-                  ...program.personalDetails,
-                  isFavorite: isFavorite
-                }
-              };
+      programs: state.data.programs.map(program =>
+        program.id === id
+          ? {
+              ...program,
+              personalDetails: {
+                ...program.personalDetails,
+                isFavorite
+              }
             }
-            return program;
-          })) ||
-        []
+          : program
+      )
     }
   };
 };
