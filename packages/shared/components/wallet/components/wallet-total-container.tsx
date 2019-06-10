@@ -40,7 +40,6 @@ interface Props extends StateProps, InjectedTranslateProps, WithRoleProps {}
 
 interface StateProps {
   copyTradingAccounts: IApiState<CopyTradingAccountsList>;
-  platformData?: PlatformInfo;
   wallet?: WalletMultiSummary;
 }
 
