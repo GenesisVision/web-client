@@ -1,4 +1,4 @@
-import { SUCCESS_SUFFIX } from "shared/reducers/api-reducer/api-reducer";
+import { SUCCESS_SUFFIX } from "shared/reducers/reducer-creators/api-reducer";
 
 const gtmMiddleware = (
   successSuffix = SUCCESS_SUFFIX
