@@ -1,4 +1,4 @@
-import { MultiWalletFilters, WalletData } from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
@@ -102,5 +102,5 @@ interface State {
   isOpenTransferPopup: boolean;
 }
 
-const WalletCurrency = withLoader(translate()(_WalletCurrency));
+const WalletCurrency = translate()(withLoader(_WalletCurrency));
 export default WalletCurrency;
