@@ -36,7 +36,7 @@ class _WalletCurrency extends React.PureComponent<Props, State> {
     this.setState({ isOpenTransferPopup: false });
 
   render() {
-    const { t, info, filters } = this.props;
+    const { t, info } = this.props;
     const currentWallet: CurrentWallet = {
       currency: info.currency,
       available: info.available
@@ -70,7 +70,7 @@ class _WalletCurrency extends React.PureComponent<Props, State> {
             currency={info.currency}
           />
         </div>
-        <WalletContainer filters={filters} currency={info.currency} />
+        <WalletContainer currency={info.currency} />
         <WalletAddFundsPopup
           currentWallet={currentWallet}
           open={this.state.isOpenAddFundsPopup}
@@ -94,7 +94,6 @@ interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface OwnProps {
   info: WalletData;
-  filters: MultiWalletFilters;
 }
 
 interface State {

@@ -1,4 +1,4 @@
-import { MultiWalletFilters, WalletData } from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import { connect } from "react-redux";
@@ -9,16 +9,11 @@ import { WalletRouteProps } from "../wallet.routes";
 import WalletContainerLoader from "./wallet-balance/wallet-container-loader";
 import WalletCurrency from "./wallet-currency";
 
-const _WalletCurrencyContainer: React.FC<Props> = ({
-  info,
-  isPending,
-  filters
-}) => (
+const _WalletCurrencyContainer: React.FC<Props> = ({ info, isPending }) => (
   <WalletCurrency
-    condition={!isPending && !!info && !!filters}
+    condition={!isPending && !!info}
     loader={!info && !isPending ? <NotFoundPage /> : <WalletContainerLoader />}
     info={info!}
-    filters={filters!}
   />
 );
 
@@ -30,13 +25,9 @@ const mapStateToProps = (state: RootState, props: OwnProps): StateProps => {
         wallet => wallet.currency === currency.toUpperCase()
       )
     : undefined;
-  const filters = state.platformData.data
-    ? state.platformData.data.enums.multiWallet
-    : undefined;
   return {
     info,
-    isPending,
-    filters
+    isPending
   };
 };
 
@@ -47,7 +38,6 @@ interface OwnProps extends WalletRouteProps {}
 interface StateProps {
   info?: WalletData;
   isPending: boolean;
-  filters?: MultiWalletFilters;
 }
 
 const WalletCurrencyContainer = React.memo(
