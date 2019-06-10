@@ -11,7 +11,7 @@ import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
-import GVScroll from "shared/components/scroll/gvscroll";
+// import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
@@ -118,15 +118,15 @@ class ProgramTableRowDetailed extends React.PureComponent<
                   {t("programs-page.programs-header.strategy")}
                 </div>
                 <div className="program-detailed__scroll">
-                  <GVScroll
-                    autoHide
-                    autoHideTimeout={1000}
-                    style={{ width: "100%", height: "100%" }}
-                  >
-                    <div className="program-detailed__description">
-                      {program.description}
-                    </div>
-                  </GVScroll>
+                  {/*<GVScroll*/}
+                  {/*  autoHide*/}
+                  {/*  autoHideTimeout={1000}*/}
+                  {/*  style={{ width: "100%", height: "100%" }}*/}
+                  {/*>*/}
+                  <div className="program-detailed__description">
+                    {program.description}
+                  </div>
+                  {/*</GVScroll>*/}
                 </div>
               </div>
               <div className="program-detailed__statistic">

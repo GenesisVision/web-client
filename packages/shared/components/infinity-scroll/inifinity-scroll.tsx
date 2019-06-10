@@ -1,5 +1,4 @@
 import * as React from "react";
-import GVScroll from "shared/components/scroll/gvscroll";
 
 import Scrollbars from "../scroll/Scrollbars";
 
@@ -18,11 +17,7 @@ class InfinityScroll extends React.PureComponent<Props> {
   };
 
   render() {
-    return (
-      <GVScroll onScroll={this.handleScroll} ref={this.scroll}>
-        {this.props.children}
-      </GVScroll>
-    );
+    return this.props.children;
   }
 }
 

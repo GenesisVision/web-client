@@ -3,7 +3,6 @@ import "./table-cards.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import GVScroll from "shared/components/scroll/gvscroll";
 import TableBody, {
   ITableBodyExternalProps
 } from "shared/components/table/components/table-body";
@@ -110,44 +109,38 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
           isViewSwitchEnabled={this.isViewSwitchEnabled}
           createButtonToolbar={createButtonToolbar}
         />
-        <GVScroll
-          autoHeight
-          autoHeightMax={14000}
-          renderTrackVertical={this.renderTrackVertical}
-        >
-          {view === LIST_VIEW.CARDS && (
-            <div className={classNames("table", className)}>
-              <TableBody
-                isPending={isPending}
-                items={items}
-                className="table-cards"
-                tag="div"
-                view={LIST_VIEW.CARDS}
-                renderBodyItem={renderBodyItem!}
-              />
-            </div>
-          )}
-          {view === LIST_VIEW.TABLE && (
-            <table className={classNames("table", className)}>
-              <TableHeader
-                columns={columns}
-                sorting={sorting}
-                updateSorting={updateSorting}
-                renderHeader={renderHeader}
-              />
-              <TableBody
-                isPending={isPending}
-                items={items}
-                className="table__body"
-                tag="tbody"
-                view={LIST_VIEW.TABLE}
-                updateRow={updateRow}
-                updateItems={updateItems}
-                renderBodyItem={renderBodyItem!}
-              />
-            </table>
-          )}
-        </GVScroll>
+        {view === LIST_VIEW.CARDS && (
+          <div className={classNames("table", className)}>
+            <TableBody
+              isPending={isPending}
+              items={items}
+              className="table-cards"
+              tag="div"
+              view={LIST_VIEW.CARDS}
+              renderBodyItem={renderBodyItem!}
+            />
+          </div>
+        )}
+        {view === LIST_VIEW.TABLE && (
+          <table className={classNames("table", className)}>
+            <TableHeader
+              columns={columns}
+              sorting={sorting}
+              updateSorting={updateSorting}
+              renderHeader={renderHeader}
+            />
+            <TableBody
+              isPending={isPending}
+              items={items}
+              className="table__body"
+              tag="tbody"
+              view={LIST_VIEW.TABLE}
+              updateRow={updateRow}
+              updateItems={updateItems}
+              renderBodyItem={renderBodyItem!}
+            />
+          </table>
+        )}
         <TableFooter
           condition={paging && !!(paging.totalPages && paging.totalPages >= 2)}
           paging={paging}

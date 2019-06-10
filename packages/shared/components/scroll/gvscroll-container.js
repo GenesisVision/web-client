@@ -16,40 +16,30 @@ class GVScrollContainer extends React.PureComponent {
     this.props.services.handleScroll(scroll);
   };
 
-  componentDidUpdate() {
-    const scroll = this.scroll.current.getScrollTop();
-    debounce(() => {
-      this.props.services.handleScroll(scroll);
-    }, 166);
-  }
+  // componentDidUpdate() {
+  //   const scroll = this.scroll.current.getScrollTop();
+  //   debounce(() => {
+  //     this.props.services.handleScroll(scroll);
+  //   }, 166);
+  // }
 
-  getResizer = () => {
-    if (!this.resizer) {
-      this.resizer = new ResizeObserver(this.scroll.current.handleWindowResize);
-    }
-    return this.resizer;
-  };
+  // getResizer = () => {
+  //   if (!this.resizer) {
+  //     this.resizer = new ResizeObserver(this.scroll.current.handleWindowResize);
+  //   }
+  //   return this.resizer;
+  // };
 
-  componentDidMount() {
-    this.getResizer().observe(this.container.current);
-  }
-
-  componentWillUnmount() {
-    this.getResizer().unobserve(this.container.current);
-  }
+  // componentDidMount() {
+  //   this.getResizer().observe(this.container.current);
+  // }
+  //
+  // componentWillUnmount() {
+  //   this.getResizer().unobserve(this.container.current);
+  // }
 
   render() {
-    return (
-      <GVScroll
-        ref={this.scroll}
-        style={{ width: "100%", height: "100%" }}
-        onScrollStop={this.handleScroll}
-      >
-        <div className={"gv-scroll"} ref={this.container}>
-          {this.props.children}
-        </div>
-      </GVScroll>
-    );
+    return this.props.children;
   }
 }
 

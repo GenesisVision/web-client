@@ -13,7 +13,6 @@ import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
-import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 import Tooltip from "shared/components/tooltip/tooltip";
 
@@ -56,86 +55,84 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
       <Surface className="wallet-container">
         <div className="wallet-container__header">
           <div className="wallet-container__tabs">
-            <GVScroll autoHide autoHeight autoHeightMax={60}>
-              <GVTabs value={tab} onChange={this.handleTabChange}>
-                <GVTab
-                  value={TABS.WALLETS_TAB}
-                  label={
-                    <Link to={location.pathname}>
-                      {t("wallet-page.tabs.wallets")}
-                    </Link>
-                  }
-                />
-                <GVTab
-                  className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
-                  visible={copytrading}
-                  value={TABS.COPYTRADING_TAB}
-                  label={
-                    <Link
-                      to={{
-                        hash: TABS.COPYTRADING_TAB
-                      }}
+            <GVTabs value={tab} onChange={this.handleTabChange}>
+              <GVTab
+                value={TABS.WALLETS_TAB}
+                label={
+                  <Link to={location.pathname}>
+                    {t("wallet-page.tabs.wallets")}
+                  </Link>
+                }
+              />
+              <GVTab
+                className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                visible={copytrading}
+                value={TABS.COPYTRADING_TAB}
+                label={
+                  <Link
+                    to={{
+                      hash: TABS.COPYTRADING_TAB
+                    }}
+                  >
+                    {t("wallet-page.tabs.copytrading")}
+                  </Link>
+                }
+              />
+              <GVTab
+                className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
+                label={
+                  <Link
+                    to={{
+                      hash: TABS.TRANSACTIONS_TAB
+                    }}
+                  >
+                    <Tooltip
+                      horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                      render={() => (
+                        <div className="tooltip__content">
+                          {t("wallet-page.tooltip.transactions")}
+                        </div>
+                      )}
                     >
-                      {t("wallet-page.tabs.copytrading")}
-                    </Link>
-                  }
-                />
-                <GVTab
-                  className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
-                  value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
-                  label={
-                    <Link
-                      to={{
-                        hash: TABS.TRANSACTIONS_TAB
-                      }}
+                      <span>{t("wallet-page.tabs.transactions")}</span>
+                    </Tooltip>
+                  </Link>
+                }
+              />
+              <GVTab
+                className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                value={TABS.EXTERNAL_TAB}
+                label={
+                  <Link
+                    to={{
+                      hash: TABS.EXTERNAL_TAB
+                    }}
+                  >
+                    <Tooltip
+                      horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                      render={() => (
+                        <div className="tooltip__content">
+                          {t("wallet-page.tooltip.deposit")}
+                        </div>
+                      )}
                     >
-                      <Tooltip
-                        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                        render={() => (
-                          <div className="tooltip__content">
-                            {t("wallet-page.tooltip.transactions")}
-                          </div>
-                        )}
-                      >
-                        <span>{t("wallet-page.tabs.transactions")}</span>
-                      </Tooltip>
-                    </Link>
-                  }
-                />
-                <GVTab
-                  className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
-                  value={TABS.EXTERNAL_TAB}
-                  label={
-                    <Link
-                      to={{
-                        hash: TABS.EXTERNAL_TAB
-                      }}
+                      <span>{t("wallet-page.tabs.deposit")}</span>
+                    </Tooltip>
+                    <Tooltip
+                      horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                      render={() => (
+                        <div className="tooltip__content">
+                          {t("wallet-page.tooltip.withdrawals")}
+                        </div>
+                      )}
                     >
-                      <Tooltip
-                        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                        render={() => (
-                          <div className="tooltip__content">
-                            {t("wallet-page.tooltip.deposit")}
-                          </div>
-                        )}
-                      >
-                        <span>{t("wallet-page.tabs.deposit")}</span>
-                      </Tooltip>
-                      <Tooltip
-                        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                        render={() => (
-                          <div className="tooltip__content">
-                            {t("wallet-page.tooltip.withdrawals")}
-                          </div>
-                        )}
-                      >
-                        <span>{t("wallet-page.tabs.withdrawals")}</span>
-                      </Tooltip>
-                    </Link>
-                  }
-                />
-              </GVTabs>
-            </GVScroll>
+                      <span>{t("wallet-page.tabs.withdrawals")}</span>
+                    </Tooltip>
+                  </Link>
+                }
+              />
+            </GVTabs>
           </div>
         </div>
         {tab === TABS.WALLETS_TAB && <WalletList wallets={wallets} />}

@@ -7,7 +7,6 @@ import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avata
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Page from "shared/components/page/page";
-import GVScroll from "shared/components/scroll/gvscroll";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
@@ -118,13 +117,11 @@ const _ManagerPageLoader: React.FC<Props> = ({ t }) => (
           </div>
           <div className="table-wrapper">
             <div className="table__toolbar" />
-            <GVScroll autoHeight autoHeightMax={14000}>
-              <table className="table">
-                <tbody>
-                  <TableLoader />
-                </tbody>
-              </table>
-            </GVScroll>
+            <table className="table">
+              <tbody>
+                <TableLoader />
+              </tbody>
+            </table>
           </div>
         </Surface>
       </div>

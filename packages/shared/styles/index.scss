@@ -9,6 +9,10 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+.body--fixed {
+  overflow: hidden;
+}
+
 input,
 textarea,
 select,
@@ -29,4 +33,26 @@ a {
 .app__body {
   height: 100vh;
   color: white;
+}
+
+$scroll-width: 6px;
+$scroll-background: transparent;
+$scroll-thumb-color: rgba(255, 255, 255, 0.3);
+
+::-webkit-scrollbar {
+  width: $scroll-width;
+}
+
+::-webkit-scrollbar-track {
+  background: $scroll-background;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $scroll-thumb-color;
+  border-radius: $scroll-width / 2;
+}
+
+* {
+  scrollbar-width: $scroll-width;
+  scrollbar-color: $scroll-thumb-color $scroll-background;
 }

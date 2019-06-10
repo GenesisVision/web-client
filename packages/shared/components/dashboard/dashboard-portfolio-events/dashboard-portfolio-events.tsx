@@ -11,7 +11,6 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 import withLoader from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
@@ -58,18 +57,16 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
   <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
     <h3>{t(`${role}.dashboard-page.portfolio-events.title`)}</h3>
     <div className="dashboard-portfolio-events__scroll-container">
-      <GVScroll autoHide autoHideTimeout={1000} style={DASHBOARD_EVENTS_STYLE}>
-        <div className="dashboard-portfolio-events__list">
-          <Events
-            condition={!isPending && !!data}
-            loader={<DashboardPortfolioEventsListLoader />}
-            events={data! && data!.events}
-            total={data! && data!.total}
-            EventComponent={DashboardPortfolioEvent}
-            EmptyView={DashboardPortfolioEmptyView}
-          />
-        </div>
-      </GVScroll>
+      <div className="dashboard-portfolio-events__list">
+        <Events
+          condition={!isPending && !!data}
+          loader={<DashboardPortfolioEventsListLoader />}
+          events={data! && data!.events}
+          total={data! && data!.total}
+          EventComponent={DashboardPortfolioEvent}
+          EmptyView={DashboardPortfolioEmptyView}
+        />
+      </div>
     </div>
     <Link
       className="dashboard-portfolio-events__see-all"
