@@ -16,6 +16,8 @@ import ProgramSimpleChart from "shared/components/program-simple-chart/program-s
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -29,8 +31,6 @@ import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import SelectFilter from "../../../table/components/filtering/select-filter/select-filter";
-import { SelectFilterType } from "../../../table/components/filtering/select-filter/select-filter.constants";
 import { DASHBOARD_FUNDS_COLUMNS } from "../../dashboard.constants";
 import {
   ACTION_STATUS_FILTER_NAME,
