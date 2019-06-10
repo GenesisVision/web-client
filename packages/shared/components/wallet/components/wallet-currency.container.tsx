@@ -1,9 +1,11 @@
-import { WalletData } from "gv-api-web";
+import { WalletData, WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import { connect } from "react-redux";
+import { createSelector } from "reselect";
 import NotFoundPage from "shared/components/not-found/not-found";
 import { RootState } from "shared/reducers/root-reducer";
+import { apiSelector } from "shared/utils/selector";
 
 import { WalletRouteProps } from "../wallet.routes";
 import WalletContainerLoader from "./wallet-balance/wallet-container-loader";
@@ -17,16 +19,27 @@ const _WalletCurrencyContainer: React.FC<Props> = ({ info, isPending }) => (
   />
 );
 
+const walletSelector = createSelector<
+  RootState,
+  OwnProps,
+  WalletMultiSummary | undefined,
+  string,
+  WalletData | undefined
+>(
+  (state: RootState) => apiSelector<WalletMultiSummary>(state.wallet.info),
+  (state: RootState, props: OwnProps) => props.match.params.currency,
+  (data: WalletMultiSummary | undefined, currency: string) => {
+    if (!data) return undefined;
+    return data.wallets.find(
+      (wallet: WalletData) => wallet.currency === currency.toUpperCase()
+    );
+  }
+);
+
 const mapStateToProps = (state: RootState, props: OwnProps): StateProps => {
   const isPending = state.wallet.info.isPending;
-  const { currency } = props.match.params;
-  const info = state.wallet.info.data
-    ? state.wallet.info.data.wallets.find(
-        wallet => wallet.currency === currency.toUpperCase()
-      )
-    : undefined;
   return {
-    info,
+    info: walletSelector(state, props),
     isPending
   };
 };
