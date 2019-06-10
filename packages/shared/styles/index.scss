@@ -37,9 +37,10 @@ a {
 
 $scroll-background: transparent;
 $scroll-thumb-color: rgba(255, 255, 255, 0.3);
-
+$scroll-width: 6px;
 ::-webkit-scrollbar {
-  width: 6px;
+  width: $scroll-width;
+  height: $scroll-width;
 }
 
 ::-webkit-scrollbar-track {
@@ -48,7 +49,11 @@ $scroll-thumb-color: rgba(255, 255, 255, 0.3);
 
 ::-webkit-scrollbar-thumb {
   background: $scroll-thumb-color;
-  border-radius: 3px;
+  border-radius: $scroll-width / 2;
+}
+
+::-webkit-scrollbar-corner {
+  background: $scroll-background;
 }
 
 * {
