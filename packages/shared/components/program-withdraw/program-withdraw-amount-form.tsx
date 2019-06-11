@@ -87,7 +87,7 @@ const _ProgramWithdrawAmountForm: React.FC<
           type="submit"
           id="programWithdrawAmountFormSubmit"
           className="invest-form__submit-button"
-          disabled={!isValid || !dirty}
+          disabled={!values.withdrawAll && (!isValid || !dirty)}
         >
           {t("withdraw-program.next")}
         </GVButton>
@@ -101,9 +101,9 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<Props, IProgramWithdrawAmountFormValues>({
     displayName: "withdraw-form",
-    mapPropsToValues: ({ amount }) => ({
+    mapPropsToValues: ({ amount, withdrawAll }) => ({
       amount,
-      withdrawAll: false
+      withdrawAll
     }),
     validationSchema: ({ t, availableToWithdraw }: Props) =>
       object().shape({
@@ -130,6 +130,7 @@ export default ProgramWithdrawAmountForm;
 
 interface OwnProps {
   amount?: number;
+  withdrawAll?: boolean;
   onSubmit(values: IProgramWithdrawAmountFormValues): void;
   availableToWithdraw: number;
   programCurrency: string;
