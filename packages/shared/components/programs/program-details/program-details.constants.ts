@@ -135,6 +135,51 @@ export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
   }
 ];
 
+export const PROGRAM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
+  {
+    name: "period"
+  },
+  {
+    name: "balance"
+  },
+  {
+    name: "profit"
+  },
+  {
+    name: "successFee"
+  },
+  {
+    name: "entryFee"
+  },
+  {
+    name: "depositWithdraw"
+  }
+];
+
+export const PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
+  {
+    name: "period"
+  },
+  {
+    name: "balance"
+  },
+  {
+    name: "profit"
+  },
+  {
+    name: "successFee"
+  },
+  {
+    name: "entryFee"
+  },
+  {
+    name: "depositWithdraw"
+  },
+  {
+    name: "CommissionRebate"
+  }
+];
+
 export const PROGRAM_TRADES_DEFAULT_FILTERS = [
   {
     ...composeDefaultDateRangeFilter({
