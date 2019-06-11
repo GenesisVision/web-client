@@ -26,6 +26,7 @@ import { RootState } from "shared/reducers/root-reducer";
 import { HistoryCountsType } from "../program-details.types";
 import ProgramFinancialStatistic from "./program-financial-statistic";
 import ProgramOpenPositions from "./program-open-positions";
+import ProgramPeriodHistory from "./program-period-history";
 import ProgramSubscriptions from "./program-subscriptions";
 
 const EVENTS_FILTERING = {
@@ -38,7 +39,8 @@ enum TABS {
   EVENTS = "events",
   OPEN_POSITIONS = "openPositions",
   SUBSCRIBERS = "subscribers",
-  FINANCIAL_STATISTIC = "financialStatistic"
+  FINANCIAL_STATISTIC = "financialStatistic",
+  PERIOD_HISTORY = "periodHistory"
 }
 
 class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
@@ -103,6 +105,11 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
                 count={tradesCount}
               />
               <GVTab
+                value={TABS.PERIOD_HISTORY}
+                label={t("program-details-page.history.tabs.period-history")}
+                count={10} //@todo fix this value
+              />
+              <GVTab
                 value={TABS.EVENTS}
                 label={t("program-details-page.history.tabs.events")}
                 count={eventsCount}
@@ -119,7 +126,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
                 label={t(
                   "program-details-page.history.tabs.financial-statistic"
                 )}
-                count={eventsCount}
+                count={42} //@todo fix this value
                 visible={isAuthenticated && isManager} //@todo add condition only for own program
               />
             </GVTabs>
@@ -155,9 +162,14 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
           {tab === TABS.FINANCIAL_STATISTIC && (
             <ProgramFinancialStatistic
               id={programId}
-              currency={currency}
               isGMProgram={false} //@todo fix this value
               fetchFinancialStatistic={fetchPortfolioEvents} //@todo fix this fetch
+            />
+          )}
+          {tab === TABS.PERIOD_HISTORY && (
+            <ProgramPeriodHistory
+              id={programId}
+              fetchPeriodHistory={fetchPortfolioEvents} //@todo fix this fetch
             />
           )}
         </div>
