@@ -17,7 +17,7 @@ export const changePassword = (model: ChangePasswordViewModel) => (
     })
     .then((response: string) => {
       authService.storeToken(response);
-      dispatch(authActions.updateToken());
+      dispatch(authActions.updateTokenAction());
       dispatch(push(SETTINGS_ROUTE));
       dispatch(fetchProfileHeaderInfoAction());
       dispatch(

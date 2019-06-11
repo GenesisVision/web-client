@@ -4,7 +4,7 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import { COLUMNS, PROGRAMS, SELF_PROGRAMS } from "./program-rating.constants";

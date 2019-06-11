@@ -11,7 +11,7 @@ import GVTextField from "shared/components/gv-text-field";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import Select from "shared/components/select/select";
 import { ITwoFactorReducer } from "shared/reducers/2fa-reducer";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 
 import DisableAuthContainer from "./disable-auth/disable-auth-container";

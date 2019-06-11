@@ -8,15 +8,15 @@ import authService from "shared/services/auth-service";
 import { ActionType } from "shared/utils/types";
 
 import {
-  cancelProgramRequest,
-  fetchInRequests
+  cancelProgramRequestAction,
+  fetchInRequestsAction
 } from "../actions/dashboard.actions";
 import { getPortfolioEvents } from "./dashboard.service";
 
 export const getInRequests = () => (
   dispatch: Dispatch
 ): ActionType<CancelablePromise<any>> =>
-  dispatch(fetchInRequests(authService.getAuthArg(), 0, 100));
+  dispatch(fetchInRequestsAction(authService.getAuthArg(), 0, 100));
 
 export const cancelRequest: CancelRequestType = ({
   id,
@@ -24,7 +24,7 @@ export const cancelRequest: CancelRequestType = ({
   removeDisableBtn
 }) => dispatch => {
   const authorization = authService.getAuthArg();
-  const action = cancelProgramRequest(authorization, id);
+  const action = cancelProgramRequestAction(authorization, id);
 
   return dispatch(action)
     .then(() => {

@@ -4,7 +4,7 @@ import { ResolveThunks, connect } from "react-redux";
 import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import { WalletWidgetLoader } from "./wallet-widget.loader";
 

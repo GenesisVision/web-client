@@ -10,7 +10,7 @@ import {
   fetchPortfolioEvents
 } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import { IApiState } from "shared/reducers/api-reducer/api-reducer";
+import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
 
 import ChangePasswordTradingAccount from "./components/program-controls/change-password-trading-account";
 import ProgramControls from "./components/program-controls/program-controls";

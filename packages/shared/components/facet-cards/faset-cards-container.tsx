@@ -1,7 +1,7 @@
 import { FundFacet, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import { composeFacetUrlFunc } from "./facet-card";
 import FacetCards from "./facet-cards";

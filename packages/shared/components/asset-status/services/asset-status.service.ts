@@ -11,10 +11,10 @@ import { ResponseError } from "shared/utils/types";
 import {
   ICancelRequest,
   IFetchInRequests,
-  cancelInvestorProgramRequest,
-  cancelManagerProgramRequest,
-  fetchInRequestsInvestor,
-  fetchInRequestsManager
+  cancelInvestorProgramRequestAction,
+  cancelManagerProgramRequestAction,
+  fetchInRequestsInvestorAction,
+  fetchInRequestsManagerAction
 } from "../actions/asset-status-actions";
 
 export const getAssetRequests = (
@@ -72,12 +72,12 @@ export const cancelRequestDispatch: CancelRequestType = ({
 
   switch (role + asset) {
     case ROLE.MANAGER + ASSET.PROGRAM:
-      actionCreator = cancelManagerProgramRequest;
-      fetchInRequests = fetchInRequestsManager;
+      actionCreator = cancelManagerProgramRequestAction;
+      fetchInRequests = fetchInRequestsManagerAction;
       break;
     case ROLE.INVESTOR + ASSET.PROGRAM:
-      actionCreator = cancelInvestorProgramRequest;
-      fetchInRequests = fetchInRequestsInvestor;
+      actionCreator = cancelInvestorProgramRequestAction;
+      fetchInRequests = fetchInRequestsInvestorAction;
       break;
     default:
       throw `Error role or type [${role}|${asset}]`;

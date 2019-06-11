@@ -21,7 +21,7 @@ import { IDataModel, ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { AuthState } from "shared/reducers/auth-reducer";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import { HistoryCountsType } from "../program-details.types";
 import ProgramOpenPositions from "./program-open-positions";

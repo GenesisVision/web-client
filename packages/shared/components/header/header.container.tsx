@@ -9,7 +9,7 @@ import {
   fetchTwoFactor,
   notificationsToggle
 } from "shared/components/header/header.service";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 class _HeaderContainer extends React.PureComponent<Props> {
   componentDidMount() {

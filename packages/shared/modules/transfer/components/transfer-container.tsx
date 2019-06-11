@@ -7,12 +7,12 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
+import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
 import {
   fetchAccounts,
   fetchWallets
 } from "shared/components/wallet/services/wallet.services";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
 
 import { transferRequest } from "../services/transfer.services";
@@ -106,7 +106,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     {
       fetchAccounts,
       fetchWallets,
-      updateWalletTimestamp
+      updateWalletTimestamp: updateWalletTimestampAction
     },
     dispatch
   )

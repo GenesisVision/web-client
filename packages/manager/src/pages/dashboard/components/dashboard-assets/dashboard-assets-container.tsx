@@ -15,7 +15,7 @@ import GVButton from "shared/components/gv-button";
 import { ChartIcon } from "shared/components/icon/chart-icon";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
-import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
+import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import { fetchAssetsCount } from "../../services/dashboard.service";
@@ -101,7 +101,11 @@ const EmptyPrograms = withRole(translate()(_EmptyPrograms));
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { clearDashboardAssetsTable, getDashboardPrograms, getDashboardFunds },
+    {
+      clearDashboardAssetsTable: clearDashboardAssetsTableAction,
+      getDashboardPrograms,
+      getDashboardFunds
+    },
     dispatch
   )
 });
@@ -113,7 +117,7 @@ interface OwnProps {
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {
-  clearDashboardAssetsTable: typeof clearDashboardAssetsTable;
+  clearDashboardAssetsTable: typeof clearDashboardAssetsTableAction;
   getDashboardPrograms: typeof getDashboardPrograms;
   getDashboardFunds: typeof getDashboardFunds;
 }

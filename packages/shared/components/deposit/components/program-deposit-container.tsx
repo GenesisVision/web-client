@@ -4,7 +4,7 @@ import { ResolveThunks, connect } from "react-redux";
 import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import {

@@ -17,7 +17,7 @@ import { SelectFilterValue } from "shared/components/table/components/filtering/
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { AuthState } from "shared/reducers/auth-reducer";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import FundStructure from "./fund-structure/fund-structure";
 

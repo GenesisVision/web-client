@@ -1,15 +1,15 @@
 import { LoginViewModel } from "gv-api-web";
 import { combineReducers } from "redux";
+import { LOGIN } from "shared/components/auth/login/login.actions";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 
-import twoFactorReducer, { ITwoFactorReducer } from "./two-factor.reducer";
-import { LOGIN } from "shared/components/auth/login/login.actions";
+import twoFactorReducer, { ITwoFactorState } from "./two-factor.reducer";
 
 export type LoginState = Readonly<{
   login: IApiState<LoginViewModel>;
-  twoFactor: ITwoFactorReducer;
+  twoFactor: ITwoFactorState;
 }>;
 
 const loginReducer = combineReducers<LoginState>({

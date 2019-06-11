@@ -1,5 +1,6 @@
 import { push } from "connected-react-router";
 import { ForgotPasswordViewModel, ResetPasswordViewModel } from "gv-api-web";
+import { Dispatch } from "redux";
 import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import emailPendingActions, {
@@ -39,7 +40,7 @@ export const restorePassword = (
   dispatch(restorePasswordAction(model))
     .then(response => {
       authService.storeToken(response.value);
-      dispatch(authActions.updateToken());
+      dispatch(authActions.updateTokenAction());
       dispatch(push(HOME_ROUTE));
       dispatch(
         alertMessageActions.success(
@@ -76,7 +77,7 @@ export const sendForgotPasswordEmail = () => (
 };
 
 export const navigateToPasswordRestore = () => (
-  dispatch: MiddlewareDispatch
+  dispatch: Dispatch
 ) => {
   dispatch(clearDataActionFactory(EMAIL_PENDING).clearData());
   dispatch(push(PASSWORD_RESTORE_ROUTE));

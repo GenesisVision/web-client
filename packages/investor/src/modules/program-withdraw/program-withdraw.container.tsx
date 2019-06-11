@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import ProgramWithdrawDialog from "shared/components/program-withdraw/program-withdraw-dialog";
 import { ProgramWithdrawType } from "shared/components/program-withdraw/program-withdraw-popup";
 import { IProgramWithdrawalContainerProps } from "shared/components/programs/program-details/program-details.types";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import {

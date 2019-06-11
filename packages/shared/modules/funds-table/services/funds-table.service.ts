@@ -50,7 +50,7 @@ export const fetchFunds: FetchFundsType = filters => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();
   }
-  return fundsTableActions.fetchFundsAction(filters).payload;
+  return fundsTableActions.fetchFundsAction(filters).payload!;
 };
 
 const composeRequestFilters = () => (

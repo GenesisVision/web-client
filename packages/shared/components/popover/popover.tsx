@@ -5,7 +5,7 @@ import * as React from "react";
 import { RefObject } from "react";
 import { connect } from "react-redux";
 import Modal from "shared/components/modal/modal";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 const MARGIN_OFFSET = 10;
 

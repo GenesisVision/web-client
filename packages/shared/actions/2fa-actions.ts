@@ -11,7 +11,7 @@ export const fetchTwoFactorAction = (): ApiAction<TwoFactorStatus> => ({
   payload: authApi.v10Auth2faGet(authService.getAuthArg())
 });
 
-export const setTwoFactorRequirement = (
+export const setTwoFactorRequirementAction = (
   twoFactorEnabled: boolean
 ): ActionType<TwoFactorStatus> => ({
   type: TWO_FACTOR_SET_REQUIREMENT,

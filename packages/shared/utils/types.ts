@@ -8,7 +8,7 @@ import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { Action, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
@@ -16,26 +16,26 @@ export interface IDispatchable<T> {
 
 export type FavoriteActionProps = { id: string; authorization: string };
 
-export interface FavoriteActionType<T = any> extends Action {
-  payload: T;
-  meta: {
-    id: string;
-    isFavorite: boolean;
-  };
+type FavoriteActionMeta = {
+  id: string;
+  isFavorite: boolean;
+};
+export interface FavoriteActionType<T = any> extends ApiAction<T> {
+  meta: FavoriteActionMeta;
 }
 
 export interface NotificationsActionType<T = ProgramNotificationSettingList>
-  extends Action {
-  settings?: T;
+  extends ActionType {
   errorMessage?: string;
 }
 
-export interface ActionType<T = any> extends Action {
+export interface ActionType<T = any, U = any> extends Action {
   type: string;
-  payload?: T;
+  payload: T;
+  meta?: U;
 }
 
-export type ApiAction<T = any> = ActionType<CancelablePromise<T>>;
+export type ApiAction<T = any, U = any> = ActionType<CancelablePromise<T>, U>;
 
 export type RootThunkAction<R = any> = ThunkAction<R, RootState, any, any>;
 

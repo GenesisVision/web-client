@@ -20,7 +20,7 @@ export const confirm2fa = (
     })
     .then(response => {
       authService.storeToken(response.authToken);
-      dispatch(authActions.updateToken());
+      dispatch(authActions.updateTokenAction());
       return response;
     });
 };

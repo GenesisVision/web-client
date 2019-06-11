@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
 import ProgramsRatingContainer from "shared/components/programs-rating/programs-rating-container";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 const _ProgramsRatingPage: React.FC<Props> = ({ t, id }) => (
   <Page title={t("rating-page.title")}>

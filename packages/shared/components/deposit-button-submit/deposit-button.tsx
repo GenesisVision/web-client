@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import GVButton from "shared/components/gv-button";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 interface IDepositButtonStateProps {
   available: number;

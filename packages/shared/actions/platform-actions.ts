@@ -4,13 +4,13 @@ import { ApiAction } from "shared/utils/types";
 
 export const PLATFORM_SETTINGS = "PLATFORM_SETTINGS";
 
-const fetchPlatformSettings: ApiAction<PlatformInfo> = {
+const fetchPlatformSettingsAction: ApiAction<PlatformInfo> = {
   type: PLATFORM_SETTINGS,
   payload: platformApi.v10PlatformInfoGet()
 };
 
 const platformActions = {
-  fetchPlatformSettings
+  fetchPlatformSettings: fetchPlatformSettingsAction
 };
 
 export default platformActions;

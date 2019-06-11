@@ -23,16 +23,16 @@ export const fetchWallets = (): RootThunk<void> => (dispatch, getState) => {
   const { info } = getState().wallet;
   if (info.isPending) return;
   const { currency } = getState().accountSettings;
-  dispatch(actions.updateWalletTimestamp());
-  dispatch(actions.fetchWallets(currency, authorization));
+  dispatch(actions.updateWalletTimestampAction());
+  dispatch(actions.fetchWalletsAction(currency, authorization));
 };
 
 export const fetchAccounts = (): RootThunk<void> => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { info } = getState().copyTradingAccounts;
   if (info.isPending) return;
-  dispatch(actions.updateAccountTimestamp());
-  dispatch(actions.fetchAccounts(authorization));
+  dispatch(actions.updateAccountTimestampAction());
+  dispatch(actions.fetchAccountsAction(authorization));
 };
 
 export const fetchBaseWallets = (): RootThunk<
@@ -47,7 +47,7 @@ export const fetchBaseWallets = (): RootThunk<
 };
 
 export const fetchWalletTransactions = (requestFilters?: FilteringType) =>
-  actions.fetchWalletTransactionsDispatch(
+  actions.fetchWalletTransactionsAction(
     authService.getAuthArg(),
     requestFilters
   );

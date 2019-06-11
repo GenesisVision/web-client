@@ -1,7 +1,7 @@
 import { SIGN_UP } from "shared/components/auth/signup/actions/signup.actions";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 
 export type SignUpState = IApiState<any>;
 

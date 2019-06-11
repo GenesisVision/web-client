@@ -10,6 +10,8 @@ import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { ActionType, ApiAction } from "shared/utils/types";
 
+import { WalletLastUpdateState } from "../reducers/wallet-last-update";
+
 export const COPYTRADING_ACCOUNTS = "COPYTRADING_ACCOUNTS";
 export const WALLET_BALANCE = "WALLET_BALANCE";
 export const WALLET_BALANCE_BY_CURRENCY_AVAILABLE =
@@ -35,7 +37,8 @@ interface FetchTransactionsAction
   type: typeof WALLET_TRANSACTIONS;
 }
 
-interface UpdateTimestampAction extends ActionType<Date> {
+export interface UpdateTimestampAction
+  extends ActionType<WalletLastUpdateState> {
   type: typeof WALLET_LAST_UPDATE;
 }
 
@@ -43,7 +46,7 @@ interface UpdateAccountTimestampAction extends ActionType<Date> {
   type: typeof ACCOUNT_LAST_UPDATE;
 }
 
-export const fetchWallets = (
+export const fetchWalletsAction = (
   currency: string,
   authorization: string
 ): FetchWalletAction => ({
@@ -51,12 +54,14 @@ export const fetchWallets = (
   payload: walletApi.v10WalletMultiByCurrencyGet(currency, authorization)
 });
 
-export const fetchAccounts = (authorization: string): FetchAccountsAction => ({
+export const fetchAccountsAction = (
+  authorization: string
+): FetchAccountsAction => ({
   type: COPYTRADING_ACCOUNTS,
   payload: signalApi.v10SignalAccountsGet(authorization)
 });
 
-export const fetchWalletsByCurrencyAvailable = (
+export const fetchWalletsByCurrencyAvailableAction = (
   currency: string
 ): FetchWalletByCurrencyAction => ({
   type: WALLET_BALANCE_BY_CURRENCY_AVAILABLE,
@@ -66,7 +71,7 @@ export const fetchWalletsByCurrencyAvailable = (
   )
 });
 
-export const fetchWalletTransactionsDispatch = (
+export const fetchWalletTransactionsAction = (
   authorization: string,
   filters?: FilteringType
 ): FetchTransactionsAction => ({
@@ -74,12 +79,12 @@ export const fetchWalletTransactionsDispatch = (
   payload: walletApi.v10WalletTransactionsGet(authorization, filters)
 });
 
-export const updateWalletTimestamp = (): UpdateTimestampAction => ({
+export const updateWalletTimestampAction = (): UpdateTimestampAction => ({
   type: WALLET_LAST_UPDATE,
-  payload: new Date()
+  payload: { timestamp: new Date() }
 });
 
-export const updateAccountTimestamp = (): UpdateAccountTimestampAction => ({
+export const updateAccountTimestampAction = (): UpdateAccountTimestampAction => ({
   type: ACCOUNT_LAST_UPDATE,
   payload: new Date()
 });
