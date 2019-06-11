@@ -26,7 +26,7 @@ const _WalletTotalContainer: React.FC<Props & WalletRouteProps> = ({
 );
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  wallet: apiSelector<WalletMultiSummary>(state.wallet.info),
+  wallet: apiSelector()<WalletMultiSummary>(state.wallet.info),
   copyTradingAccounts: state.copyTradingAccounts.info
 });
 

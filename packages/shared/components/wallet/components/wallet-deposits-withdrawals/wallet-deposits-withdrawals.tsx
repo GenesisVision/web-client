@@ -15,7 +15,10 @@ import { SortingColumn } from "shared/components/table/components/filtering/filt
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableModule from "shared/components/table/components/table-module";
-import { GetItemsFuncType, RenderBodyItemFuncType } from "shared/components/table/components/table.types";
+import {
+  GetItemsFuncType,
+  RenderBodyItemFuncType
+} from "shared/components/table/components/table.types";
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
@@ -102,7 +105,7 @@ class _WalletDepositsWithdrawals extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: RootState): StateProps => ({
   timestamp: state.wallet.lastUpdate.timestamp,
-  platformData: apiSelector<PlatformInfo>(state.platformData)
+  platformData: apiSelector()<PlatformInfo>(state.platformData)
 });
 
 interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
@@ -114,7 +117,8 @@ interface OwnProps {
 }
 
 interface StateProps extends WalletLastUpdateState {
-  platformData?: PlatformInfo;}
+  platformData?: PlatformInfo;
+}
 
 const WalletDepositsWithdrawals = compose<React.ComponentType<OwnProps>>(
   translate(),

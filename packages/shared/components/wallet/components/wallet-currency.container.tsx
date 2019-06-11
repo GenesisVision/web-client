@@ -26,7 +26,7 @@ const walletSelector = createSelector<
   string,
   WalletData | undefined
 >(
-  (state: RootState) => apiSelector<WalletMultiSummary>(state.wallet.info),
+  (state: RootState) => apiSelector()<WalletMultiSummary>(state.wallet.info),
   (state: RootState, props: OwnProps) => props.match.params.currency,
   (data: WalletMultiSummary | undefined, currency: string) => {
     if (!data) return undefined;
