@@ -24,6 +24,7 @@ import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/se
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 import { RootState } from "shared/reducers/root-reducer";
 import { convertToArray } from "shared/utils/helpers";
+import { apiSelector } from "shared/utils/selector";
 
 import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
@@ -171,7 +172,8 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: RootState): StateProps => {
   const { isAuthenticated } = state.authData;
-  const { isPending, data } = state.programsData.items;
+  const { isPending } = state.programsData.items;
+  const data = apiSelector()(state.programsData.items);
   const currencies = state.platformData.data
     ? state.platformData.data.currencies
     : [];
