@@ -170,10 +170,11 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
   }
 }
 
+const programsData = apiSelector();
 const mapStateToProps = (state: RootState): StateProps => {
   const { isAuthenticated } = state.authData;
   const { isPending } = state.programsData.items;
-  const data = apiSelector()(state.programsData.items);
+  const data = programsData(state.programsData.items);
   const currencies = state.platformData.data
     ? state.platformData.data.currencies
     : [];
