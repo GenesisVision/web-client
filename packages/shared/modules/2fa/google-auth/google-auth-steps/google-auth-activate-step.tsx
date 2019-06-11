@@ -18,14 +18,13 @@ export const GoogleStep3: React.FC<
   isSubmitting,
   enablePassword = true
 }) => {
-  console.log(enablePassword);
   return (
     <div className="google-auth__step">
       <div className="google-auth__count">03</div>
       <div className="google-auth__title">{t("2fa-page.enter-code")}</div>
       <form id="google-auth" onSubmit={handleSubmit} autoComplete="off">
         <GVFormikField
-          name="code"
+          name={FIELDS.code}
           type="text"
           label={t("2fa-page.google-code")}
           component={GVTextField}
@@ -37,7 +36,7 @@ export const GoogleStep3: React.FC<
         />
         {enablePassword && (
           <GVFormikField
-            name="password"
+            name={FIELDS.password}
             type="password"
             label={t("2fa-page.password")}
             component={GVTextField}
@@ -59,6 +58,12 @@ export const GoogleStep3: React.FC<
   );
 };
 
+enum FIELDS {
+  code = "code",
+  password = "password",
+  enablePassword = "enablePassword"
+}
+
 interface Props extends OwnProps, InjectedTranslateProps {}
 interface OwnProps {
   enablePassword?: boolean;
@@ -69,9 +74,9 @@ interface OwnProps {
   errorMessage?: string;
 }
 export interface IGoogleActivateStepFormValues {
-  code: string;
-  password: string;
-  enablePassword: boolean;
+  [FIELDS.code]: string;
+  [FIELDS.password]: string;
+  [FIELDS.enablePassword]: boolean;
 }
 
 const GoogleActivateStep = compose<React.ComponentType<OwnProps>>(
@@ -79,14 +84,14 @@ const GoogleActivateStep = compose<React.ComponentType<OwnProps>>(
   withFormik<Props, IGoogleActivateStepFormValues>({
     displayName: "google-auth",
     mapPropsToValues: (props: Props) => ({
-      enablePassword: props.enablePassword || true,
-      code: "",
-      password: ""
+      [FIELDS.enablePassword]: props.enablePassword || true,
+      [FIELDS.code]: "",
+      [FIELDS.password]: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        code: number().required(props.t("2fa-page.code-required")),
-        password: string().when("enablePassword", {
+        [FIELDS.code]: number().required(props.t("2fa-page.code-required")),
+        [FIELDS.password]: string().when(FIELDS.enablePassword, {
           is: true,
           than: string().required(props.t("2fa-page.password-required"))
         })
