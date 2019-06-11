@@ -27,7 +27,7 @@ class _ProgramWithdrawPopup extends React.PureComponent<
     title: undefined,
     amount: undefined,
     availableToWithdraw: undefined,
-    withdrawAll: undefined
+    withdrawAll: false
   };
 
   componentDidMount() {
@@ -49,9 +49,9 @@ class _ProgramWithdrawPopup extends React.PureComponent<
 
   handleSubmit = (setSubmitting: SetSubmittingType) => {
     const { withdraw } = this.props;
-    const { amount, withdrawAll } = this.state;
+    const { amount = 0, withdrawAll } = this.state;
 
-    if (!amount) return;
+    if (!amount && !withdrawAll) return;
     return withdraw({
       amount,
       withdrawAll
@@ -64,7 +64,7 @@ class _ProgramWithdrawPopup extends React.PureComponent<
   handleEnterAmountSubmit = (values: IProgramWithdrawAmountFormValues) => {
     this.setState({
       step: PROGRAM_WITHDRAW_FORM.CONFIRM,
-      amount: values.amount || 0,
+      amount: values.amount,
       withdrawAll: values.withdrawAll
     });
   };
@@ -84,12 +84,14 @@ class _ProgramWithdrawPopup extends React.PureComponent<
       rate,
       errorMessage,
       step,
-      amount
+      amount,
+      withdrawAll
     } = this.state;
     const { t, assetCurrency, accountCurrency } = this.props;
     if (availableToWithdraw === undefined || !title || !periodEnds)
       return <DialogLoader />;
 
+    const isAvailableProgramConfirmForm = amount || withdrawAll;
     return (
       <>
         <ProgramWithdrawTop
@@ -101,6 +103,7 @@ class _ProgramWithdrawPopup extends React.PureComponent<
           {step === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
             <ProgramWithdrawAmountForm
               amount={amount}
+              withdrawAll={withdrawAll}
               rate={rate}
               programCurrency={assetCurrency}
               accountCurrency={accountCurrency}
@@ -108,16 +111,18 @@ class _ProgramWithdrawPopup extends React.PureComponent<
               onSubmit={this.handleEnterAmountSubmit}
             />
           )}
-          {step === PROGRAM_WITHDRAW_FORM.CONFIRM && amount && (
-            <ProgramWithdrawConfirmForm
-              errorMessage={errorMessage}
-              amount={amount}
-              onSubmit={this.handleSubmit}
-              onBackClick={this.goToEnterAmountStep}
-              programCurrency={assetCurrency}
-              periodEnds={periodEnds}
-            />
-          )}
+          {step === PROGRAM_WITHDRAW_FORM.CONFIRM &&
+            isAvailableProgramConfirmForm && (
+              <ProgramWithdrawConfirmForm
+                errorMessage={errorMessage}
+                amount={amount}
+                withdrawAll={withdrawAll}
+                onSubmit={this.handleSubmit}
+                onBackClick={this.goToEnterAmountStep}
+                programCurrency={assetCurrency}
+                periodEnds={periodEnds}
+              />
+            )}
           <div className="dialog__info">{t("withdraw-program.info")}</div>
         </div>
       </>

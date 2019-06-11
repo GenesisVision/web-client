@@ -267,6 +267,8 @@
     "next": "Next",
     "info": "Your request will be processed at the end of the reporting period.",
     "withdrawing": "Withdrawing",
+    "all": "All",
+    "withdrawing-all": "Withdrawing all",
     "payout-date": "Payout date",
     "back": "Back",
     "submit": "Submit",
