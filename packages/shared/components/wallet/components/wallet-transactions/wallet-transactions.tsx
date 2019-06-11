@@ -102,9 +102,12 @@ class _WalletTransactions extends React.PureComponent<Props> {
   }
 }
 
+const platformDataSelector = apiSelector<PlatformInfo>(
+  state => state.platformData
+);
 const mapStateToProps = (state: RootState): StateProps => ({
   timestamp: state.wallet.lastUpdate.timestamp,
-  platformData: apiSelector()<PlatformInfo>(state.platformData)
+  platformData: platformDataSelector(state)
 });
 
 interface Props extends OwnProps, StateProps, InjectedTranslateProps {}

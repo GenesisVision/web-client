@@ -19,6 +19,9 @@ const _WalletCurrencyContainer: React.FC<Props> = ({ info, isPending }) => (
   />
 );
 
+const walletsSelector = apiSelector<WalletMultiSummary>(
+  state => state.wallet.info
+);
 const walletSelector = createSelector<
   RootState,
   OwnProps,
@@ -26,7 +29,7 @@ const walletSelector = createSelector<
   string,
   WalletData | undefined
 >(
-  (state: RootState) => apiSelector()<WalletMultiSummary>(state.wallet.info),
+  (state: RootState) => walletsSelector(state),
   (state: RootState, props: OwnProps) => props.match.params.currency,
   (data: WalletMultiSummary | undefined, currency: string) => {
     if (!data) return undefined;
