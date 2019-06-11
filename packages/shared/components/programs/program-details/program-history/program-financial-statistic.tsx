@@ -7,7 +7,6 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import { TableCell, TableRow } from "shared/components/table/components";
 import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import {
@@ -21,7 +20,6 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   t,
   fetchFinancialStatistic,
   id,
-  currency,
   isGMProgram
 }) => {
   const columns = isGMProgram
@@ -51,11 +49,17 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
                 end={new Date("2019-07-17T03:24:00")}
               />
             </TableCell>
-            <TableCell>{event.value}</TableCell>
+            <TableCell>
+              <NumberFormat
+                value={formatCurrencyValue(event.value, event.currency)}
+                displayType="text"
+                thousandSeparator=" "
+              />
+            </TableCell>
             <TableCell>
               <Profitability value={"1010"} prefix={PROFITABILITY_PREFIX.SIGN}>
                 <NumberFormat
-                  value={1010}
+                  value={110}
                   thousandSeparator=" "
                   displayType="text"
                   allowNegative={false}
@@ -77,7 +81,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
                   value={formatCurrencyValue(event.value, event.currency)}
                   thousandSeparator=" "
                   displayType="text"
-                  suffix={` ${currency}`}
+                  suffix={` ${event.currency}`}
                 />
               </Profitability>
             </TableCell>
@@ -102,7 +106,6 @@ export default ProgramFinancialStatistic;
 interface Props extends OwnProps, InjectedTranslateProps {}
 interface OwnProps {
   id: string;
-  currency: CURRENCIES;
   isGMProgram?: boolean;
   fetchFinancialStatistic: GetItemsFuncType;
 }
