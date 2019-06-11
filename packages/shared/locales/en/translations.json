@@ -486,12 +486,18 @@
     "history": {
       "heading": "History",
       "subheading": "Rebalancing",
+      "tabs": {
+        "events": "Events",
+        "structure": "Structure",
+        "reallocate-history": "Reallocate History"
+      },
       "structure": {
-        "title": "Structure",
         "asset": "Asset",
         "symbol": "Symbol",
         "target": "Target",
-        "current": "Current"
+        "current": "Current",
+        "date": "Date",
+        "reallocate-fund": "Reallocate Fund"
       },
       "rebalances": {
         "assets": "Assets",

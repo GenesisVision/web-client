@@ -20,6 +20,7 @@ import { AuthState } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 import FundStructure from "./fund-structure/fund-structure";
+import FundReallocateHistory from "./fund-reallocate-history/fund-reallocate-history";
 
 const EVENTS_FILTERING = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
@@ -63,16 +64,21 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
                 label={
                   <TooltipLabel
                     tooltipContent={t("fund-details-page.tooltip.structure")}
-                    labelText={t("fund-details-page.history.structure.title")}
+                    labelText={t("fund-details-page.history.tabs.structure")}
                     className="tooltip__label--cursor-pointer"
                   />
                 }
               />
               <GVTab
                 value={TABS.EVENTS}
-                label={t("program-details-page.history.tabs.events")}
+                label={t("fund-details-page.history.tabs.events")}
                 count={eventsCount}
                 visible={isAuthenticated && isInvested}
+              />
+              <GVTab
+                value={TABS.REALLOCATE_HISTORY}
+                label={t("fund-details-page.history.tabs.reallocate-history")}
+                count={10}
               />
             </GVTabs>
           </div>
@@ -87,6 +93,12 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
               fetchPortfolioEvents={fetchPortfolioEvents}
               dateRangeStartLabel={t("filters.date-range.program-start")}
               eventTypeFilterValues={eventTypeFilterValues}
+            />
+          )}
+          {tab === TABS.REALLOCATE_HISTORY && (
+            <FundReallocateHistory
+              id={id}
+              fetchStructure={fetchFundStructure}
             />
           )}
         </div>
@@ -104,7 +116,8 @@ interface StateProps extends AuthState {}
 
 enum TABS {
   EVENTS = "events",
-  STRUCTURE = "structure"
+  STRUCTURE = "structure",
+  REALLOCATE_HISTORY = "reallocate history"
 }
 
 interface Props extends StateProps, InjectedTranslateProps, OwnProps {}
