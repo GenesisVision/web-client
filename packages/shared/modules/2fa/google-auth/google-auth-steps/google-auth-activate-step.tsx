@@ -17,46 +17,44 @@ export const GoogleStep3: React.FC<
   errorMessage,
   isSubmitting,
   enablePassword = true
-}) => {
-  return (
-    <div className="google-auth__step">
-      <div className="google-auth__count">03</div>
-      <div className="google-auth__title">{t("2fa-page.enter-code")}</div>
-      <form id="google-auth" onSubmit={handleSubmit} autoComplete="off">
+}) => (
+  <div className="google-auth__step">
+    <div className="google-auth__count">03</div>
+    <div className="google-auth__title">{t("2fa-page.enter-code")}</div>
+    <form id="google-auth" onSubmit={handleSubmit} autoComplete="off">
+      <GVFormikField
+        name={FIELDS.code}
+        type="text"
+        label={t("2fa-page.google-code")}
+        component={GVTextField}
+        autoComplete="off"
+        autoFocus
+        InputComponent={NumberFormat}
+        allowNegative={false}
+        format="######"
+      />
+      {enablePassword && (
         <GVFormikField
-          name={FIELDS.code}
-          type="text"
-          label={t("2fa-page.google-code")}
+          name={FIELDS.password}
+          type="password"
+          label={t("2fa-page.password")}
           component={GVTextField}
-          autoComplete="off"
-          autoFocus
-          InputComponent={NumberFormat}
-          allowNegative={false}
-          format="######"
+          autoComplete="new-password"
         />
-        {enablePassword && (
-          <GVFormikField
-            name={FIELDS.password}
-            type="password"
-            label={t("2fa-page.password")}
-            component={GVTextField}
-            autoComplete="new-password"
-          />
-        )}
-        <div className="form-error">{errorMessage}</div>
-        <GVButton
-          className="google-auth__button"
-          variant="contained"
-          color="primary"
-          type="submit"
-          disabled={isSubmitting}
-        >
-          {t("buttons.activate")}
-        </GVButton>
-      </form>
-    </div>
-  );
-};
+      )}
+      <div className="form-error">{errorMessage}</div>
+      <GVButton
+        className="google-auth__button"
+        variant="contained"
+        color="primary"
+        type="submit"
+        disabled={isSubmitting}
+      >
+        {t("buttons.activate")}
+      </GVButton>
+    </form>
+  </div>
+);
 
 enum FIELDS {
   code = "code",
