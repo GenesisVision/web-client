@@ -608,7 +608,8 @@
         "trades": "Trades",
         "events": "Events",
         "open-positions": "Open positions",
-        "subscriptions": "Subscriptions"
+        "subscriptions": "Subscriptions",
+        "financial-statistic": "Financial statistic"
       },
       "trades": {
         "swap": "Swap",
@@ -642,6 +643,15 @@
         "subscriptionDate": "Subscription date",
         "unsubscriptionDate": "Unsubscription date",
         "status": "Status"
+      },
+      "financial-statistic": {
+        "period": "Period",
+        "balance": "Balance",
+        "profit": "Profit",
+        "successFee": "Success fee",
+        "entryFee": "Entry fee",
+        "depositWithdraw": "Deposit/Withdraw",
+        "CommissionRebate": "GV commission rebate"
       }
     },
     "chart": {

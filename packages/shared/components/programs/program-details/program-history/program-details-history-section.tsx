@@ -24,6 +24,7 @@ import { AuthState } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 import { HistoryCountsType } from "../program-details.types";
+import ProgramFinancialStatistic from "./program-financial-statistic";
 import ProgramOpenPositions from "./program-open-positions";
 import ProgramSubscriptions from "./program-subscriptions";
 
@@ -36,7 +37,8 @@ enum TABS {
   TRADES = "trades",
   EVENTS = "events",
   OPEN_POSITIONS = "openPositions",
-  SUBSCRIBERS = "subscribers"
+  SUBSCRIBERS = "subscribers",
+  FINANCIAL_STATISTIC = "financialStatistic"
 }
 
 class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
@@ -112,6 +114,14 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
                 count={subscriptionsCount}
                 visible={isAuthenticated && isSignalProgram && isManager}
               />
+              <GVTab
+                value={TABS.FINANCIAL_STATISTIC}
+                label={t(
+                  "program-details-page.history.tabs.financial-statistic"
+                )}
+                count={eventsCount}
+                visible={isAuthenticated && isManager} //@todo add condition only for own program
+              />
             </GVTabs>
           </div>
         </div>
@@ -141,6 +151,14 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
           )}
           {tab === TABS.SUBSCRIBERS && (
             <ProgramSubscriptions id={programId} currency={currency} />
+          )}
+          {tab === TABS.FINANCIAL_STATISTIC && (
+            <ProgramFinancialStatistic
+              id={programId}
+              currency={currency}
+              isGMProgram={false} //@todo fix this value
+              fetchFinancialStatistic={fetchPortfolioEvents} //@todo fix this fetch
+            />
           )}
         </div>
       </Surface>
