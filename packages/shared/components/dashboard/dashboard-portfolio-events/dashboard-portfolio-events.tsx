@@ -50,7 +50,6 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
   t,
   fullEventsUrl,
   title,
-  isPending,
   data,
   eventView: DashboardPortfolioEvent,
   emptyView: DashboardPortfolioEmptyView
@@ -61,7 +60,7 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
       <GVScroll autoHide autoHideTimeout={1000} style={DASHBOARD_EVENTS_STYLE}>
         <div className="dashboard-portfolio-events__list">
           <Events
-            condition={!isPending && !!data}
+            condition={!!data}
             loader={<DashboardPortfolioEventsListLoader />}
             events={data! && data!.events}
             total={data! && data!.total}
@@ -92,7 +91,6 @@ interface Props extends OwnProps, InjectedTranslateProps, WithRoleProps {}
 interface OwnProps {
   fullEventsUrl: string;
   title: string;
-  isPending: boolean;
   data?: DashboardPortfolioEventsType | ManagerPortfolioEvents;
   eventView: React.ComponentType<any>;
   emptyView?: React.ComponentType;
