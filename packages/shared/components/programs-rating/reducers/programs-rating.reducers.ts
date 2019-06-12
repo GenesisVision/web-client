@@ -3,6 +3,11 @@ import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
+import {
+  apiFieldSelector,
+  apiSelector,
+  fieldSelector
+} from "shared/utils/selectors";
 
 import {
   LEVELUP_SUMMARY,
@@ -16,6 +21,17 @@ const allProgramsRatingReducer = apiReducerFactory<ProgramsList>({
 const selfProgramsRatingReducer = apiReducerFactory<ProgramsList>({
   apiType: SELF_PROGRAMS_RATING
 });
+
+export const levelupSummarySelector = apiSelector<LevelUpSummary>(
+  state => state.programsRating.levelupSummary
+);
+
+export const levelDataSelector = apiFieldSelector(
+  levelupSummarySelector,
+  fieldSelector(state => state.levelData),
+  {}
+);
+
 const levelupSummaryReducer = apiReducerFactory<LevelUpSummary>({
   apiType: LEVELUP_SUMMARY
 });
