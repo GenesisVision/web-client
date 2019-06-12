@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { createSelector } from "reselect";
 import NotFoundPage from "shared/components/not-found/not-found";
 import { RootState } from "shared/reducers/root-reducer";
-import { apiSelector } from "shared/utils/selector";
 
+import { walletSelector as walletDataSelector } from "../reducers/wallet.reducers";
 import { WalletRouteProps } from "../wallet.routes";
 import WalletContainerLoader from "./wallet-balance/wallet-container-loader";
 import WalletCurrency from "./wallet-currency";
@@ -19,9 +19,6 @@ const _WalletCurrencyContainer: React.FC<Props> = ({ info, isPending }) => (
   />
 );
 
-const walletsSelector = apiSelector<WalletMultiSummary>(
-  state => state.wallet.info
-);
 const walletSelector = createSelector<
   RootState,
   OwnProps,
@@ -29,7 +26,7 @@ const walletSelector = createSelector<
   string,
   WalletData | undefined
 >(
-  (state: RootState) => walletsSelector(state),
+  (state: RootState) => walletDataSelector(state),
   (state: RootState, props: OwnProps) => props.match.params.currency,
   (data: WalletMultiSummary | undefined, currency: string) => {
     if (!data) return undefined;
