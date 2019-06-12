@@ -10,8 +10,9 @@ import {
   compose
 } from "redux";
 import { ISelectChangeEvent } from "shared/components/select/select";
+import { currenciesSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { ActionType, CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { HEADER_CURRENCY_VALUES } from "../currency-select.constants";
 import { updateCurrency } from "../services/currency-select.service";
@@ -41,15 +42,10 @@ const _CurrencySelectContainer: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { accountSettings, platformData } = state;
-  return {
-    currencyValues: platformData.data
-      ? (platformData.data.currencies as CurrencyEnum[])
-      : undefined, //TODO change currencies to CurrencyEnum in api
-    currency: accountSettings.currency
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  currencyValues: currenciesSelector(state),
+  currency: state.accountSettings.currency
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
