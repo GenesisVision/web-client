@@ -1,4 +1,40 @@
 {
+  "dashboard-page": {
+    "portfolio-events": {
+      "types": {
+        "WithdrawByStopOut": "Withdraw by stop out",
+        "All": "All",
+        "Invest": "Invest",
+        "Withdraw": "Withdraw",
+        "Profit": "Profit",
+        "Loss": "Loss",
+        "Reinvest": "Reinvest",
+        "Canceled": "Canceled",
+        "Ended": "Ended",
+        "ManagerInvest": "Manager invest",
+        "EntranceFee": "Entrance fee",
+        "AssetStarted": "Asset started",
+        "InvestorInvest": "Investor investment",
+        "AssetFinished": "Asset finished",
+        "ProgramPeriodStarts": "Program period starts",
+        "ProgramPeriodEnds": "Program period ends",
+        "ProgramSignalSubscribe": "Program signal subscribe",
+        "ProgramStopOut": "Program stop out",
+        "ProgramManagerTradingFeeAccrual": "Program manager trading fee accrual",
+        "all": "All",
+        "invest": "Invest",
+        "withdraw": "Withdraw",
+        "profit": "Profit",
+        "loss": "Loss",
+        "reinvest": "Reinvest",
+        "canceled": "Canceled",
+        "ended": "Ended",
+        "ManagerWithdraw": "Manager withdraw",
+        "ExitFee": "ExitFee",
+        "InvestorWithdraw": "Investor withdraw"
+      }
+    }
+  },
   "table": {
     "loading": "Loading...",
     "no-items": "There are no items to display.",
