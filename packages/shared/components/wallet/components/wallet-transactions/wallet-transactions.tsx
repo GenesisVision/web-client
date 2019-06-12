@@ -24,8 +24,8 @@ import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { apiSelector } from "shared/utils/selector";
 
 import { WalletLastUpdateState } from "../../reducers/wallet-last-update";
 import { fetchMultiTransactions } from "../../services/wallet.services";
@@ -102,9 +102,6 @@ class _WalletTransactions extends React.PureComponent<Props> {
   }
 }
 
-const platformDataSelector = apiSelector<PlatformInfo>(
-  state => state.platformData
-);
 const mapStateToProps = (state: RootState): StateProps => ({
   timestamp: state.wallet.lastUpdate.timestamp,
   platformData: platformDataSelector(state)
