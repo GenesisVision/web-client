@@ -1,12 +1,7 @@
 import "./wallet-container.scss";
 
-import {
-  CopyTradingAccountInfo,
-  MultiWalletFilters,
-  WalletData
-} from "gv-api-web";
+import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import { Location } from "history";
-import { filter } from "minimatch";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
@@ -45,7 +40,6 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
   render() {
     const { tab } = this.state;
     const {
-      isPending,
       t,
       wallets,
       copytrading,
@@ -140,10 +134,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
         </div>
         {tab === TABS.WALLETS_TAB && <WalletList wallets={wallets} />}
         {tab === TABS.COPYTRADING_TAB && (
-          <WalletCopytrading
-            copyTradingAccounts={copyTradingAccounts}
-            isPending={isPending}
-          />
+          <WalletCopytrading copyTradingAccounts={copyTradingAccounts} />
         )}
         {tab === TABS.TRANSACTIONS_TAB && (
           <WalletTransactions
@@ -181,7 +172,6 @@ interface Props extends InjectedTranslateProps, OwnProps {
 }
 
 interface OwnProps {
-  isPending: boolean;
   wallets: WalletData[];
   copytrading: boolean;
   copyTradingAccounts: CopyTradingAccountInfo[];

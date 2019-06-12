@@ -1,13 +1,15 @@
-import { CopyTradingAccountsList, WalletMultiSummary } from "gv-api-web";
+import { CopyTradingAccountInfo, WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { WithRoleProps } from "shared/decorators/with-role";
-import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
-import { walletSelector } from "../reducers/wallet.reducers";
+import {
+  copyTradingAccountsSelector,
+  walletSelector
+} from "../reducers/wallet.reducers";
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletTotal from "./wallet-total";
@@ -27,13 +29,13 @@ const _WalletTotalContainer: React.FC<Props & WalletRouteProps> = ({
 
 const mapStateToProps = (state: RootState): StateProps => ({
   wallet: walletSelector(state),
-  copyTradingAccounts: state.copyTradingAccounts.info
+  copyTradingAccounts: copyTradingAccountsSelector(state)
 });
 
 interface Props extends StateProps, InjectedTranslateProps, WithRoleProps {}
 
 interface StateProps {
-  copyTradingAccounts: IApiState<CopyTradingAccountsList>;
+  copyTradingAccounts: CopyTradingAccountInfo[];
   wallet?: WalletMultiSummary;
 }
 
