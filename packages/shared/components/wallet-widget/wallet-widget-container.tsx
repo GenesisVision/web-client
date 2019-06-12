@@ -6,6 +6,7 @@ import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { RootState } from "shared/reducers/root-reducer";
 
+import { grandTotalSelector } from "../wallet/reducers/wallet.reducers";
 import { WalletWidgetLoader } from "./wallet-widget.loader";
 
 class _WalletWidgetContainer extends React.PureComponent<Props> {
@@ -36,7 +37,7 @@ class _WalletWidgetContainer extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: RootState): StateProps => ({
   currency: state.accountSettings.currency,
-  info: state.wallet.info.data ? state.wallet.info.data.grandTotal : undefined
+  info: grandTotalSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
