@@ -1,9 +1,157 @@
 import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
-import { apiSelector } from "./selectors";
+import { apiFieldSelector, apiSelector, fieldSelector } from "./selectors";
 
 describe("test selectors", () => {
+  describe("test apiFieldSelector", () => {
+    const data = {
+      currency: "BTC",
+      level: 4,
+      levelProgress: 98.57,
+      periodDuration: 30,
+      stopOutLevel: 90.0,
+      periodStarts: "2019-06-11T00:53:22.4578110+00:00",
+      periodEnds: "2019-06-12T06:53:22.4578110+00:00",
+      availableInvestment: 20395.224,
+      availableInvestmentBase: 9.33898564,
+      availableInvestmentLimit: null,
+      dashboardAssetsDetails: null,
+      statistic: {
+        balanceBase: { amount: 1.79814096, currency: "BTC" },
+        balanceGVT: { amount: 3926.9240797248, currency: "GVT" },
+        balanceSecondary: { amount: 14317.8232638672, currency: "USD" },
+        currentValue: 0.0,
+        profitPercent: 4173.79,
+        profitValue: 0.0,
+        drawdownPercent: -10.12575442138245746850882174,
+        investorsCount: 2,
+        tradesCount: 142
+      }
+    };
+    const object = {
+      isPending: false,
+      errorMessage: "",
+      code: null,
+      data: data
+    };
+    const object2 = {
+      isPending: false,
+      errorMessage: "",
+      code: null,
+      data: Object.assign({}, data)
+    };
+    const object3 = {
+      isPending: false,
+      errorMessage: "",
+      code: null,
+      data: Object.assign({}, data)
+    };
+    it("should be memoize data object", () => {
+      const selector = apiFieldSelector<typeof object>(
+        apiSelector(state => (state as unknown) as IApiState<any>),
+        fieldSelector<any>(state => state.statistic)
+      );
+      const field = selector((object as unknown) as RootState);
+      expect(object.data).not.toBe(object2.data);
+      expect(object.data).not.toBe(object3.data);
+      expect(selector((object2 as unknown) as RootState)).toBe(field);
+      expect(selector((object3 as unknown) as RootState)).toBe(field);
+    });
+    it("should be return empty object if data undefined", () => {
+      const object = {
+        isPending: false,
+        errorMessage: "",
+        code: null,
+        data: undefined
+      };
+      const emptyValue: any = [];
+      const selector = apiFieldSelector<typeof object>(
+        apiSelector(state => (state as unknown) as IApiState<any>),
+        fieldSelector<any>(state => state.statistic),
+        emptyValue
+      );
+      const emptyValue2 = {};
+      const selector2 = apiFieldSelector<typeof object>(
+        apiSelector(state => (state as unknown) as IApiState<any>),
+        fieldSelector<any>(state => state.statistic),
+        emptyValue2
+      );
+      const emptyValue3 = 0;
+      const selector3 = apiFieldSelector<typeof object>(
+        apiSelector(state => (state as unknown) as IApiState<any>),
+        fieldSelector<any>(state => state.statistic),
+        emptyValue3
+      );
+      const field = selector((object as unknown) as RootState);
+      const field2 = selector2((object as unknown) as RootState);
+      const field3 = selector3((object as unknown) as RootState);
+      expect(field).toEqual(emptyValue);
+      expect(field2).toEqual(emptyValue2);
+      expect(field3).toEqual(emptyValue3);
+    });
+  });
+  describe("test fieldSelector", () => {
+    it("should be memoize data object", () => {
+      const data = {
+        currency: "BTC",
+        level: 4,
+        levelProgress: 98.57,
+        periodDuration: 30,
+        stopOutLevel: 90.0,
+        periodStarts: "2019-06-11T00:53:22.4578110+00:00",
+        periodEnds: "2019-06-12T06:53:22.4578110+00:00",
+        availableInvestment: 20395.224,
+        availableInvestmentBase: 9.33898564,
+        availableInvestmentLimit: null,
+        dashboardAssetsDetails: null,
+        statistic: {
+          balanceBase: { amount: 1.79814096, currency: "BTC" },
+          balanceGVT: { amount: 3926.9240797248, currency: "GVT" },
+          balanceSecondary: { amount: 14317.8232638672, currency: "USD" },
+          currentValue: 0.0,
+          profitPercent: 4173.79,
+          profitValue: 0.0,
+          drawdownPercent: -10.12575442138245746850882174,
+          investorsCount: 2,
+          tradesCount: 142
+        }
+      };
+      const anotherData = {
+        currency: "GVT",
+        level: 423123123123,
+        levelProgress: 98.5712312312312,
+        periodDuration: 3312312310,
+        stopOutLevel: 90.23123123123,
+        periodStarts: "",
+        periodEnds: "2",
+        availableInvestment: 20395.224,
+        availableInvestmentBase: 9.33898564,
+        availableInvestmentLimit: null,
+        dashboardAssetsDetails: null,
+        statistic: {
+          balanceBase: { amount: 1.79814096, currency: "BTC" },
+          balanceGVT: { amount: 3926.9240797248, currency: "GVT" },
+          balanceSecondary: { amount: 14317.8232638672, currency: "USD" },
+          currentValue: 0.0,
+          profitPercent: 4173.79,
+          profitValue: 0.0,
+          drawdownPercent: -10.12575442138245746850882174,
+          investorsCount: 2,
+          tradesCount: 142
+        }
+      };
+      const data2 = Object.assign({}, data);
+      const data3 = Object.assign({}, data);
+      const selector = fieldSelector<typeof data>(state => state.statistic);
+      const stateStatistic = selector(data);
+      expect(data).not.toBe(data2);
+      expect(data).not.toBe(data3);
+      expect(selector(data2)).toBe(stateStatistic);
+      expect(selector(data3)).toBe(stateStatistic);
+      expect(selector(anotherData)).not.toBe(stateStatistic);
+    });
+  });
   describe("test apiSelector", () => {
     it("should be memoize data object", () => {
       const data = {
