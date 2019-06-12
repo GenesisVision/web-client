@@ -5,6 +5,6 @@ import { RootState } from "shared/reducers/root-reducer";
 export const apiSelector = <T>(
   selector: (state: RootState) => IApiState<T>
 ) => {
-  const func = memoize((data: any) => data);
+  const func = memoize((data: T | undefined) => data);
   return (state: RootState): T | undefined => func(selector(state).data);
 };
