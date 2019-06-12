@@ -47,11 +47,10 @@ interface MergeProps {
 }
 
 interface StateProps {
-  isPending: boolean;
-  data: any;
   isAuthenticated: boolean;
   currencies: string[];
   programTags: ProgramTag[];
+  data?: ProgramsList;
 }
 
 interface DispatchProps {
@@ -112,7 +111,6 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
       t,
       showSwitchView,
       currencies,
-      isPending,
       data,
       filters,
       service,
@@ -123,8 +121,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
       <ProgramsTable
         showSwitchView={showSwitchView}
         title={title}
-        data={data || {}}
-        isPending={isPending}
+        data={data ? data.programs : undefined}
         sorting={filters.sorting}
         updateSorting={service.programsChangeSorting}
         filtering={{
@@ -175,17 +172,12 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { isAuthenticated } = state.authData;
-  const { isPending } = state.programsData.items;
-  return {
-    isPending,
-    isAuthenticated,
-    data: programsDataSelector(state),
-    currencies: currenciesSelector(state),
-    programTags: programTagsSelector(state)
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: state.authData.isAuthenticated,
+  data: programsDataSelector(state),
+  currencies: currenciesSelector(state),
+  programTags: programTagsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
