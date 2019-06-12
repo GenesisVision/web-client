@@ -22,9 +22,13 @@ import TagFilter from "shared/components/table/components/filtering/tag-filter/t
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
+import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
+import {
+  currenciesSelector,
+  programTagsSelector
+} from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { convertToArray } from "shared/utils/helpers";
-import { apiSelector } from "shared/utils/selector";
 
 import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
@@ -89,6 +93,18 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
       service.getPrograms(defaultFilters);
     }
   }
+  tagsFilterValue = (value: any) => {
+    const { programTags } = this.props;
+    //TODO Fix any
+    if (!programTags.length) return [];
+    return convertToArray(value).map(tag => {
+      const programTag = programTags.find(
+        programTag => programTag.name === tag
+      );
+      const color = programTag!.color;
+      return { name: tag, color };
+    });
+  };
 
   render() {
     const {
@@ -103,17 +119,6 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
       isAuthenticated,
       title
     } = this.props;
-    const tagsFilterValue = (value: any) => {
-      //TODO Fix any
-      if (!programTags.length) return [];
-      return convertToArray(value).map(tag => {
-        const programTag = programTags.find(
-          programTag => programTag.name === tag
-        );
-        const color = programTag!.color;
-        return { name: tag, color };
-      });
-    };
     return (
       <ProgramsTable
         showSwitchView={showSwitchView}
@@ -130,7 +135,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
           <>
             <TagFilter
               name={TAG_FILTER_NAME}
-              value={tagsFilterValue(filtering[TAG_FILTER_NAME])}
+              value={this.tagsFilterValue(filtering[TAG_FILTER_NAME])}
               values={programTags}
               onChange={updateFilter}
             />
@@ -170,25 +175,15 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
   }
 }
 
-const programsDataSelector = apiSelector<ProgramsList>(
-  state => state.programsData.items
-);
 const mapStateToProps = (state: RootState): StateProps => {
   const { isAuthenticated } = state.authData;
   const { isPending } = state.programsData.items;
-  const data = programsDataSelector(state);
-  const currencies = state.platformData.data
-    ? state.platformData.data.currencies
-    : [];
-  const programTags = state.platformData.data
-    ? state.platformData.data.enums.program.programTags
-    : [];
   return {
     isPending,
-    data,
     isAuthenticated,
-    currencies,
-    programTags
+    data: programsDataSelector(state),
+    currencies: currenciesSelector(state),
+    programTags: programTagsSelector(state)
   };
 };
 
