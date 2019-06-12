@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { roleSelector } from "shared/reducers/header-reducer";
 import { AuthRootState } from "shared/utils/types";
 
 export interface WithRoleProps {
@@ -14,9 +15,7 @@ const withRole = <T extends {}>(
   compose<React.ComponentType<T>>(
     connect<WithRoleProps, null, T, AuthRootState>(
       (state: AuthRootState): WithRoleProps => {
-        const role = state.profileHeader.data
-          ? state.profileHeader.data.userType
-          : "";
+        const role = roleSelector(state);
         return {
           role: (role.toLowerCase() as ROLE) || ROLE_ENV || ROLE.INVESTOR
         };
