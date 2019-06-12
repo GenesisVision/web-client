@@ -1,8 +1,11 @@
-import { apiSelector } from "./selector";
+import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
+import { RootState } from "shared/reducers/root-reducer";
+
+import { apiSelector } from "./selectors";
 
 describe("test selectors", () => {
   describe("test apiSelector", () => {
-    it("should be memoize object", () => {
+    it("should be memoize data object", () => {
       const data = {
         programs: [
           {
@@ -1320,12 +1323,14 @@ describe("test selectors", () => {
         code: null,
         data: data3
       };
-      const selector = apiSelector();
+      const selector = apiSelector<any>(
+        state => (state as unknown) as IApiState<any>
+      );
       expect(data).not.toBe(data2);
       expect(data).not.toBe(data3);
-      expect(selector(object)).toBe(data);
-      expect(selector(object2)).toBe(data);
-      expect(selector(object3)).toBe(data);
+      expect(selector((object as unknown) as RootState)).toBe(data);
+      expect(selector((object2 as unknown) as RootState)).toBe(data);
+      expect(selector((object3 as unknown) as RootState)).toBe(data);
     });
   });
 });
