@@ -9,9 +9,9 @@ import {
   ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
-import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import * as fundsService from "../../services/funds-table.service";
 import {
