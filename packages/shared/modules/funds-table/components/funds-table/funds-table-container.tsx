@@ -11,6 +11,7 @@ import {
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { RootState } from "shared/reducers/root-reducer";
 
+import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import * as fundsService from "../../services/funds-table.service";
 import {
   FundsChangeFilterType,
@@ -32,9 +33,8 @@ interface MergeProps {
 }
 
 interface StateProps {
-  isPending: boolean;
-  data: FundsList;
   isAuthenticated: boolean;
+  data?: FundsList;
 }
 
 interface DispatchProps {
@@ -69,19 +69,11 @@ class _FundsTableContainer extends React.PureComponent<Props> {
   }
 
   render() {
-    const {
-      isPending,
-      data,
-      filters,
-      service,
-      isAuthenticated,
-      title
-    } = this.props;
+    const { data, filters, service, isAuthenticated, title } = this.props;
     return (
       <FundsTable
         title={title}
-        data={data}
-        isPending={isPending}
+        data={data ? data.funds : undefined}
         sorting={filters.sorting}
         updateSorting={service.fundsChangeSorting}
         filtering={{
@@ -102,11 +94,10 @@ class _FundsTableContainer extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { isAuthenticated } = state.authData;
-  const { isPending, data = { funds: [], total: 0 } } = state.fundsData.items;
-  return { isPending, data, isAuthenticated };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  data: fundsDataSelector(state),
+  isAuthenticated: state.authData.isAuthenticated
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
