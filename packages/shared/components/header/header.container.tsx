@@ -9,6 +9,7 @@ import {
   fetchTwoFactor,
   notificationsToggle
 } from "shared/components/header/header.service";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { headerSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
@@ -58,7 +59,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 const mapStateToProps = (state: RootState): StateProps => ({
   info: headerSelector(state),
-  isAuthenticated: state.authData.isAuthenticated,
+  isAuthenticated: isAuthenticatedSelector(state),
   backPath: state.router.location ? state.router.location.pathname : ""
 });
 
