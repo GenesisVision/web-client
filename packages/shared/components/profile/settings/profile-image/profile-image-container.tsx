@@ -5,6 +5,7 @@ import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
+import { headerSelector } from "shared/reducers/header-reducer";
 
 import { updateProfileAvatar } from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";
