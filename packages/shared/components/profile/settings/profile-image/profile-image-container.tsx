@@ -3,9 +3,9 @@ import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
 import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
+import { headerSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
-import { headerSelector } from "shared/reducers/header-reducer";
 
 import { updateProfileAvatar } from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";
@@ -34,9 +34,9 @@ const _ProfileImageContainer: React.FC<StateProps & DispatchProps> = ({
   );
 };
 
-const mapStateToProps = ({ profileHeader }: RootState): StateProps => {
-  return { headerData: profileHeader.data };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  headerData: headerSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   services: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
