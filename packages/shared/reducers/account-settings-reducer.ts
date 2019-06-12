@@ -8,10 +8,15 @@ import twoFactorReducer from "shared/reducers/2fa-reducer";
 import { loadData } from "shared/utils/localstorage";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { fieldSelector } from "../utils/selectors";
 import { ITwoFactorReducer } from "./2fa-reducer";
 import defaultReducer from "./reducer-creators/default-reducer";
 
 const initialState = (loadData(ACCOUNT_CURRENCY_KEY) as CurrencyEnum) || "BTC";
+
+export const currencySelector = fieldSelector(
+  state => state.accountSettings.currency
+);
 
 const accountCurrencyReducer = (
   state: CurrencyEnum = initialState,
