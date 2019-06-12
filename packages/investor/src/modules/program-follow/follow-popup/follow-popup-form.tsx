@@ -149,4 +149,4 @@ interface State {
   errors: { code: string; errorMessage: string };
 }
 
-export default translate()(FollowForm);
+export default withLoader(translate()(FollowForm));
