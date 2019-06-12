@@ -52,9 +52,9 @@ const eventsSelector = createSelector<
   }
 );
 
-const mapStateToProps = (state: InvestorRootState): StateProps => {
-  return { events: eventsSelector(state) };
-};
+const mapStateToProps = (state: InvestorRootState): StateProps => ({
+  events: eventsSelector(state)
+});
 
 interface Props extends OwnProps, StateProps {}
 
