@@ -22,6 +22,7 @@ import {
 } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardChartStatsLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-stats-loader";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isNewUserSelector } from "shared/reducers/header-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -106,7 +107,7 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
 const mapStateToProps = (state: InvestorRootState): StateProps => ({
   portfolioChartData: dashboardPortfolioChartSelector(state),
   inRequests: dashboardInRequestsSelector(state),
-  currency: state.accountSettings.currency,
+  currency: currencySelector(state),
   isNewUser: isNewUserSelector(state)
 });
 
