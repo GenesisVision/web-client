@@ -6,8 +6,8 @@ import { compose } from "redux";
 import { WithRoleProps } from "shared/decorators/with-role";
 import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { apiSelector } from "shared/utils/selector";
 
+import { walletSelector } from "../reducers/wallet.reducers";
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletTotal from "./wallet-total";
@@ -25,11 +25,8 @@ const _WalletTotalContainer: React.FC<Props & WalletRouteProps> = ({
   />
 );
 
-const walletsSelector = apiSelector<WalletMultiSummary>(
-  state => state.wallet.info
-);
 const mapStateToProps = (state: RootState): StateProps => ({
-  wallet: walletsSelector(state),
+  wallet: walletSelector(state),
   copyTradingAccounts: state.copyTradingAccounts.info
 });
 
