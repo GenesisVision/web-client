@@ -11,6 +11,7 @@ import {
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { RootState } from "shared/reducers/root-reducer";
 
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import * as fundsService from "../../services/funds-table.service";
 import {
@@ -96,7 +97,7 @@ class _FundsTableContainer extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: RootState): StateProps => ({
   data: fundsDataSelector(state),
-  isAuthenticated: state.authData.isAuthenticated
+  isAuthenticated: isAuthenticatedSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

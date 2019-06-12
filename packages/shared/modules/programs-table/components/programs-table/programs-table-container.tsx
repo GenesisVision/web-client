@@ -23,6 +23,7 @@ import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/ta
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import {
   currenciesSelector,
   programTagsSelector
@@ -173,7 +174,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  isAuthenticated: state.authData.isAuthenticated,
+  isAuthenticated: isAuthenticatedSelector(state),
   data: programsDataSelector(state),
   currencies: currenciesSelector(state),
   programTags: programTagsSelector(state)
