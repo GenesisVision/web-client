@@ -8,7 +8,7 @@ import PortfolioEventsTableContainerComponent from "shared/components/portfolio-
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
-import { eventsSelector } from "shared/reducers/platform-reducer";
+import { allEventsSelector } from "shared/reducers/platform-reducer";
 
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 const _PortfolioEventsAllComponent: React.FC<Props> = ({ role, t, events }) => (
@@ -24,7 +24,7 @@ const _PortfolioEventsAllComponent: React.FC<Props> = ({ role, t, events }) => (
 );
 
 const mapStateToProps = (state: ManagerRootState): StateProps => ({
-  events: eventsSelector(state)
+  events: allEventsSelector(state)
 });
 
 interface Props
