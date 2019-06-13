@@ -3,9 +3,8 @@ import "./popover.scss";
 import classNames from "classnames";
 import * as React from "react";
 import { RefObject } from "react";
-import { connect } from "react-redux";
+import EventListener from "react-event-listener";
 import Modal from "shared/components/modal/modal";
-import { RootState } from "shared/reducers/root-reducer";
 
 const MARGIN_OFFSET = 10;
 
@@ -13,16 +12,14 @@ const getAnchorEl = (el?: anchorElType) => {
   return typeof el === "function" ? el() : el;
 };
 
-export class _Popover extends React.PureComponent<
-  OwnProps & StateProps,
-  State
-> {
-  state = {
+export class _Popover extends React.PureComponent<OwnProps, State> {
+  state: State = {
     windowWidth: 0,
-    windowHeight: 0
+    windowHeight: 0,
+    scrollTop: window.scrollY
   };
   popover: RefObject<HTMLDivElement>;
-  constructor(props: OwnProps & StateProps) {
+  constructor(props: OwnProps) {
     super(props);
     this.popover = React.createRef();
   }
@@ -52,7 +49,7 @@ export class _Popover extends React.PureComponent<
     return {
       width: box.width,
       height: box.height,
-      top: box.top + this.props.scrollTop,
+      top: box.top + this.state.scrollTop,
       left: box.left,
       bottom: box.bottom,
       right: box.right
@@ -125,7 +122,7 @@ export class _Popover extends React.PureComponent<
     const popoverBounds = this.getPopoverBounds();
     if (
       this.state.windowHeight +
-        this.props.scrollTop -
+        this.state.scrollTop -
         anchorBounds.top -
         anchorBounds.height -
         MARGIN_OFFSET <
@@ -141,10 +138,13 @@ export class _Popover extends React.PureComponent<
     return this.props.horizontal || HORIZONTAL_POPOVER_POS.LEFT;
   };
 
+  handleScroll = () => this.setState({ scrollTop: window.scrollY });
+
   render() {
     const { anchorEl, noPadding, children, className, ...props } = this.props;
     return (
       <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
+        <EventListener target={"window"} onScroll={this.handleScroll} />
         <div
           className={classNames("popover", className, {
             "popover--no-padding": noPadding
@@ -158,10 +158,6 @@ export class _Popover extends React.PureComponent<
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  scrollTop: state.ui.scrollTop
-});
-
 interface OwnProps {
   onClose?(event: React.MouseEvent<HTMLElement>): void;
   horizontal?: HORIZONTAL_POPOVER_POS;
@@ -172,12 +168,10 @@ interface OwnProps {
   className?: string;
   fixed?: boolean;
 }
-interface StateProps {
-  scrollTop: number;
-}
 interface State {
   windowWidth: number;
   windowHeight: number;
+  scrollTop: number;
 }
 export enum VERTICAL_POPOVER_POS {
   TOP = "top",
@@ -191,5 +185,5 @@ export enum HORIZONTAL_POPOVER_POS {
 }
 export type anchorElType = EventTarget | Function | HTMLElement;
 
-const Popover = connect(mapStateToProps)(_Popover);
+const Popover = _Popover;
 export default Popover;

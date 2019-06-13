@@ -58,7 +58,7 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
     <div className="dashboard-portfolio-events__scroll-container">
       <div className="dashboard-portfolio-events__list">
         <Events
-          condition={!isPending && !!data}
+          condition={!!data}
           loader={<DashboardPortfolioEventsListLoader />}
           events={data! && data!.events}
           total={data! && data!.total}
