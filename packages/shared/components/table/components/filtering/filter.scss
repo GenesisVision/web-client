@@ -5,6 +5,11 @@
   display: flex;
   align-items: center;
   padding: 5px;
+  &:hover {
+    .filter__arrow {
+      stroke: $primary-color;
+    }
+  }
 
   &__label {
     opacity: 0.5;
