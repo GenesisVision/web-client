@@ -2,6 +2,7 @@
   "dashboard-page": {
     "portfolio-events": {
       "types": {
+        "ProgramBrokerChanged": "Program broker changed",
         "WithdrawByStopOut": "Withdraw by stop out",
         "All": "All",
         "Invest": "Invest",
