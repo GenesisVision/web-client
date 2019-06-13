@@ -17,8 +17,11 @@ import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
+import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { headerSelector } from "shared/reducers/header-reducer";
+import { programsInfoSelector } from "shared/reducers/platform-reducer";
 import { rateApi } from "shared/services/api-client/rate-api";
 import {
   MiddlewareDispatch,
@@ -149,7 +152,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
       !selectedBroker ||
       !programsInfo ||
       !headerData ||
-      !wallets ||
+      !wallets.length ||
       !minimumDepositsAmount
     )
       return null;
@@ -217,17 +220,11 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: ManagerRootState): StateProps => {
-  return {
-    wallets: state.wallet.info.data
-      ? state.wallet.info.data.wallets
-      : undefined,
-    headerData: state.profileHeader.data,
-    programsInfo: state.platformData.data
-      ? state.platformData.data.programsInfo
-      : undefined
-  };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  wallets: walletsSelector(state),
+  headerData: headerSelector(state),
+  programsInfo: programsInfoSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
@@ -266,7 +263,7 @@ interface State {
 
 interface StateProps {
   programsInfo?: ProgramsInfo;
-  wallets?: WalletData[];
+  wallets: WalletData[];
   headerData?: ProfileHeaderViewModel;
 }
 

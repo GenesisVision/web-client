@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
 const Authenticated = ({ component: Component, isAuthenticated, ...props }) => {
   return isAuthenticated ? <Component {...props} /> : null;
 };
 
 const AuthenticatedContainer = connect(state => ({
-  isAuthenticated: state.authData.isAuthenticated
+  isAuthenticated: isAuthenticatedSelector(state)
 }))(Authenticated);
 
 const isAuthenticated = Component => props => {
@@ -15,7 +16,7 @@ const isAuthenticated = Component => props => {
 
 export const withAuthenticated = Component => {
   return connect(state => ({
-    isAuthenticated: state.authData.isAuthenticated
+    isAuthenticated: isAuthenticatedSelector(state)
   }))(Component);
 };
 

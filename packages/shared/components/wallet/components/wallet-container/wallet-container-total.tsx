@@ -1,10 +1,6 @@
 import "./wallet-container.scss";
 
-import {
-  CopyTradingAccountInfo,
-  MultiWalletFilters,
-  WalletData
-} from "gv-api-web";
+import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import { Location } from "history";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -43,10 +39,8 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
   render() {
     const { tab } = this.state;
     const {
-      isPending,
       t,
       wallets,
-      filters,
       copytrading,
       location,
       copyTradingAccounts
@@ -65,7 +59,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
                 }
               />
               <GVTab
-                className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                className={"gv-tab"}
                 visible={copytrading}
                 value={TABS.COPYTRADING_TAB}
                 label={
@@ -79,7 +73,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
                 }
               />
               <GVTab
-                className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                className={"gv-tab"}
                 value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
                 label={
                   <Link
@@ -101,7 +95,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
                 }
               />
               <GVTab
-                className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                className={"gv-tab"}
                 value={TABS.EXTERNAL_TAB}
                 label={
                   <Link
@@ -137,15 +131,11 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
         </div>
         {tab === TABS.WALLETS_TAB && <WalletList wallets={wallets} />}
         {tab === TABS.COPYTRADING_TAB && (
-          <WalletCopytrading
-            copyTradingAccounts={copyTradingAccounts}
-            isPending={isPending}
-          />
+          <WalletCopytrading copyTradingAccounts={copyTradingAccounts} />
         )}
         {tab === TABS.TRANSACTIONS_TAB && (
           <WalletTransactions
             columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
-            typeFilterValues={filters.transactionType}
             renderBodyRow={(transaction, updateRow, updateItems) => (
               <TransactionsRow transaction={transaction} update={updateItems} />
             )}
@@ -154,7 +144,6 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
         {tab === TABS.EXTERNAL_TAB && (
           <WalletDepositsWithdrawals
             columns={WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS}
-            typeFilterValues={filters.externalTransactionType}
             renderBodyRow={(transaction, updateRow, updateItems) => (
               <AllDepositsWithdrawalsRow
                 transaction={transaction}
@@ -180,9 +169,7 @@ interface Props extends InjectedTranslateProps, OwnProps {
 }
 
 interface OwnProps {
-  isPending: boolean;
   wallets: WalletData[];
-  filters: MultiWalletFilters;
   copytrading: boolean;
   copyTradingAccounts: CopyTradingAccountInfo[];
 }

@@ -1,6 +1,6 @@
 import "./funds-table.scss";
 
-import { FundsList } from "gv-api-web";
+import { FundDetails } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Table } from "shared/components/table/components";
@@ -16,10 +16,9 @@ import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
 interface Props extends ITableProps {
-  data: FundsList;
+  data?: FundDetails[];
   toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated: boolean;
-  isPending: boolean;
 }
 
 const FundsTable: React.FC<Props & InjectedTranslateProps> = ({
@@ -35,53 +34,47 @@ const FundsTable: React.FC<Props & InjectedTranslateProps> = ({
   toggleFavorite,
   isAuthenticated,
   title
-}) => {
-  return (
-    <Table
-      filtering={filtering}
-      updateFilter={updateFilter}
-      title={title}
-      sorting={sorting}
-      updateSorting={updateSorting}
-      paging={paging}
-      updatePaging={updatePaging}
-      columns={FUNDS_TABLE_COLUMNS}
-      items={data.funds}
-      isPending={isPending}
-      showSwitchView
-      renderFilters={() => (
-        <DateRangeFilter
-          name={DATE_RANGE_FILTER_NAME}
-          value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
-          onChange={updateFilter}
-          startLabel={t("filters.date-range.fund-start")}
-        />
-      )}
-      renderHeader={column => (
-        <FundsTableHeaderCell
-          column={column}
-          isAuthenticated={isAuthenticated}
-        />
-      )}
-      renderSorting={column => (
-        <FundTableSortingValue
-          column={column}
-          isAuthenticated={isAuthenticated}
-        />
-      )}
-      renderBodyRow={fund => (
-        <FundsTableRow
-          title={title}
-          fund={fund}
-          toggleFavorite={toggleFavorite}
-          isAuthenticated={isAuthenticated}
-        />
-      )}
-      renderBodyCard={fund => (
-        <FundCard title={title} fund={fund} toggleFavorite={toggleFavorite} />
-      )}
-    />
-  );
-};
+}) => (
+  <Table
+    filtering={filtering}
+    updateFilter={updateFilter}
+    title={title}
+    sorting={sorting}
+    updateSorting={updateSorting}
+    paging={paging}
+    updatePaging={updatePaging}
+    columns={FUNDS_TABLE_COLUMNS}
+    items={data}
+    showSwitchView
+    renderFilters={() => (
+      <DateRangeFilter
+        name={DATE_RANGE_FILTER_NAME}
+        value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
+        onChange={updateFilter}
+        startLabel={t("filters.date-range.fund-start")}
+      />
+    )}
+    renderHeader={column => (
+      <FundsTableHeaderCell column={column} isAuthenticated={isAuthenticated} />
+    )}
+    renderSorting={column => (
+      <FundTableSortingValue
+        column={column}
+        isAuthenticated={isAuthenticated}
+      />
+    )}
+    renderBodyRow={fund => (
+      <FundsTableRow
+        title={title}
+        fund={fund}
+        toggleFavorite={toggleFavorite}
+        isAuthenticated={isAuthenticated}
+      />
+    )}
+    renderBodyCard={fund => (
+      <FundCard title={title} fund={fund} toggleFavorite={toggleFavorite} />
+    )}
+  />
+);
 
 export default translate()(React.memo(FundsTable));

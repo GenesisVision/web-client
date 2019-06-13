@@ -49,7 +49,6 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
   t,
   fullEventsUrl,
   title,
-  isPending,
   data,
   eventView: DashboardPortfolioEvent,
   emptyView: DashboardPortfolioEmptyView
@@ -89,7 +88,6 @@ interface Props extends OwnProps, InjectedTranslateProps, WithRoleProps {}
 interface OwnProps {
   fullEventsUrl: string;
   title: string;
-  isPending: boolean;
   data?: DashboardPortfolioEventsType | ManagerPortfolioEvents;
   eventView: React.ComponentType<any>;
   emptyView?: React.ComponentType;

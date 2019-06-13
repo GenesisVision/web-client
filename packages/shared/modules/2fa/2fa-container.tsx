@@ -1,6 +1,7 @@
 import "./2fa.scss";
 
 import classNames from "classnames";
+import { TwoFactorStatus } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -10,7 +11,7 @@ import Dialog from "shared/components/dialog/dialog";
 import GVTextField from "shared/components/gv-text-field";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import Select from "shared/components/select/select";
-import { ITwoFactorReducer } from "shared/reducers/2fa-reducer";
+import { twoFactorSelector } from "shared/reducers/2fa-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 
@@ -41,10 +42,10 @@ class _TwoFactorAuthContainer extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { t, twoFactorAuth } = this.props;
+    const { t, twoFactorAuth, isPending } = this.props;
     const { type } = this.state;
 
-    if (!twoFactorAuth.data) return null;
+    if (!twoFactorAuth) return null;
 
     return (
       <div className="two-factor">
@@ -53,21 +54,19 @@ class _TwoFactorAuthContainer extends React.PureComponent<Props, State> {
           name="2fa"
           label={t("2fa-page.type")}
           value={
-            twoFactorAuth.data.twoFactorEnabled
-              ? TYPE_2FA.GOOGLE
-              : TYPE_2FA.DISABLE
+            twoFactorAuth.twoFactorEnabled ? TYPE_2FA.GOOGLE : TYPE_2FA.DISABLE
           }
           onChange={this.handleChange}
           InputComponent={Select}
-          disabled={twoFactorAuth.isPending}
+          disabled={isPending}
         >
           <option value={TYPE_2FA.DISABLE}>{t("2fa-page.none")}</option>
           <option value={TYPE_2FA.GOOGLE}>{t("2fa-page.google")}</option>
         </GVTextField>
-        <GenerateRecoveryCode disabled={twoFactorAuth.data.twoFactorEnabled} />
+        <GenerateRecoveryCode disabled={twoFactorAuth.twoFactorEnabled} />
         <Dialog
           className={classNames({
-            "dialog--width-auto": !twoFactorAuth.data.twoFactorEnabled
+            "dialog--width-auto": !twoFactorAuth.twoFactorEnabled
           })}
           open={Boolean(this.state.type)}
           onClose={this.handleClose}
@@ -84,7 +83,8 @@ class _TwoFactorAuthContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  twoFactorAuth: state.accountSettings.twoFactorAuth
+  twoFactorAuth: twoFactorSelector(state),
+  isPending: state.accountSettings.twoFactorAuth.isPending
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -104,7 +104,8 @@ interface Props
     InjectedTranslateProps {}
 
 interface StateProps {
-  twoFactorAuth: ITwoFactorReducer;
+  isPending: boolean;
+  twoFactorAuth?: TwoFactorStatus;
 }
 
 interface DispatchProps {

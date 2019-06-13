@@ -12,6 +12,8 @@ import {
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
@@ -105,14 +107,10 @@ class FundDetailsPage extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { accountSettings, authData } = state;
-
-  return {
-    currency: accountSettings.currency,
-    isAuthenticated: authData.isAuthenticated
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  currency: currencySelector(state),
+  isAuthenticated: isAuthenticatedSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators({ getFundDescription, redirectToLogin }, dispatch)

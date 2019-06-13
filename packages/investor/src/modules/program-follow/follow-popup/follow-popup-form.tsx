@@ -11,6 +11,7 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import withLoader from "shared/decorators/with-loader";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import FollowCreateAccount, {
@@ -149,4 +150,4 @@ interface State {
   errors: { code: string; errorMessage: string };
 }
 
-export default translate()(FollowForm);
+export default withLoader(translate()(FollowForm));

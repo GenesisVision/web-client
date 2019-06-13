@@ -5,6 +5,7 @@ import { ManagerProfile } from "gv-api-web";
 import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
 import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import { AuthRootState } from "shared/utils/types";
 
@@ -47,7 +48,7 @@ class _ManagerContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: AuthRootState): StateProps => ({
-  isAuthenticated: state.authData.isAuthenticated
+  isAuthenticated: isAuthenticatedSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

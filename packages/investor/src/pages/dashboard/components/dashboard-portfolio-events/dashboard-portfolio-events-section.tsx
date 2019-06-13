@@ -11,6 +11,7 @@ import {
 import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
 
 import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
+import { dashboardEventsSelector } from "../../reducers/dashboard-events.reducer";
 import { getTopPortfolioEvents } from "../../services/dashboard-events.services";
 import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
@@ -20,12 +21,11 @@ class DashboardPortfolioEventsSection extends React.PureComponent<Props> {
     service.getTopPortfolioEvents();
   }
   render() {
-    const { title, isPending, data } = this.props;
+    const { title, data } = this.props;
     return (
       <DashboardPortfolioEvents
         fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
         title={title}
-        isPending={isPending}
         data={data}
         eventView={DashboardPortfolioEvent}
       />
@@ -39,10 +39,9 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     dispatch
   )
 });
-const mapStateToProps = (state: InvestorRootState): StateProps => {
-  const { isPending, data } = state.dashboard.eventsData;
-  return { isPending, data };
-};
+const mapStateToProps = (state: InvestorRootState): StateProps => ({
+  data: dashboardEventsSelector(state)
+});
 
 interface Props extends StateProps, DispatchProps, OwnProps {}
 
@@ -51,7 +50,6 @@ interface OwnProps {
 }
 
 interface StateProps {
-  isPending: boolean;
   data?: DashboardPortfolioEventsType;
 }
 

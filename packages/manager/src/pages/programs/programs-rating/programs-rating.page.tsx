@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
 import ProgramsRatingContainer from "shared/components/programs-rating/programs-rating-container";
+import { idSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 const _ProgramsRatingPage: React.FC<Props> = ({ t, id }) => (
@@ -14,11 +15,9 @@ const _ProgramsRatingPage: React.FC<Props> = ({ t, id }) => (
   </Page>
 );
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { data } = state.profileHeader;
-  if (!data) return {};
-  return { id: data.id };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  id: idSelector(state)
+});
 
 interface Props extends InjectedTranslateProps, StateProps, OwnProps {}
 
