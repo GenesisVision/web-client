@@ -66,7 +66,7 @@ export const assetEventsSelectorCreator = (asset: ASSET) =>
     data => {
       if (!data) return [];
       const assets = (data.enums.program as any)[`${ROLE_ENV}NotificationType`][
-        asset.toLowerCase()
+        `${asset.toLowerCase()}s`
       ];
       return assets.map((event: string) => ({
         value: event,
