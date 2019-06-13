@@ -1,6 +1,7 @@
 import { ConnectedRouter } from "connected-react-router";
 import AppRoutes from "pages/app/app.routes";
 import React from "react";
+import { hot } from "react-hot-loader/root";
 import { Provider } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import AuthRoutes, {
@@ -27,4 +28,4 @@ const Root: React.FC = () => (
   </Provider>
 );
 
-export default Root;
+export default (process.env.NODE_ENV === "development" ? hot(Root) : Root);
