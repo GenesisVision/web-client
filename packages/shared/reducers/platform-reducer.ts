@@ -2,7 +2,7 @@ import { PlatformInfo } from "gv-api-web";
 import { createSelector } from "reselect";
 import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import { ROLE_ENV } from "shared/constants/constants";
+import { ASSET, ROLE_ENV } from "shared/constants/constants";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -56,41 +56,28 @@ export const allEventsSelector = createSelector<
   }
 );
 
-export const fundEventsSelector = createSelector<
-  AuthRootState,
-  PlatformInfo | undefined,
-  SelectFilterValue<string>[]
->(
-  state => platformDataSelector(state),
-  data => {
-    if (!data) return [];
-    const { funds } = (data.enums.program as any)[
-      `${ROLE_ENV}NotificationType`
-    ];
-    return funds.map((event: string) => ({
-      value: event,
-      labelKey: `dashboard-page.portfolio-events.types.${event}`
-    }));
-  }
-);
+export const assetEventsSelectorCreator = (asset: ASSET) =>
+  createSelector<
+    AuthRootState,
+    PlatformInfo | undefined,
+    SelectFilterValue<string>[]
+  >(
+    state => platformDataSelector(state),
+    data => {
+      if (!data) return [];
+      const assets = (data.enums.program as any)[`${ROLE_ENV}NotificationType`][
+        asset.toLowerCase()
+      ];
+      return assets.map((event: string) => ({
+        value: event,
+        labelKey: `dashboard-page.portfolio-events.types.${event}`
+      }));
+    }
+  );
 
-export const programEventsSelector = createSelector<
-  AuthRootState,
-  PlatformInfo | undefined,
-  SelectFilterValue<string>[]
->(
-  state => platformDataSelector(state),
-  data => {
-    if (!data) return [];
-    const { programs } = (data.enums.program as any)[
-      `${ROLE_ENV}NotificationType`
-    ];
-    return programs.map((event: string) => ({
-      value: event,
-      labelKey: `dashboard-page.portfolio-events.types.${event}`
-    }));
-  }
-);
+export const fundEventsSelector = assetEventsSelectorCreator(ASSET.FUND);
+
+export const programEventsSelector = assetEventsSelectorCreator(ASSET.PROGRAM);
 
 const platformReducer = apiReducerFactory<PlatformInfo>({
   apiType: PLATFORM_SETTINGS
