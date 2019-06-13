@@ -6,7 +6,6 @@
     "classnames": "^2.2.5",
     "connected-react-router": "^6.3.1",
     "copy-to-clipboard": "^3.0.8",
-    "debounce": "^1.2.0",
     "dom-css": "^2.1.0",
     "fast-memoize": "^2.5.1",
     "formik": "^1.3.1",
@@ -16,7 +15,6 @@
     "i18next-browser-languagedetector": "^2.2.0",
     "i18next-xhr-backend": "^1.5.1",
     "jwt-decode": "^2.2.0",
-    "lodash.pickby": "^4.6.0",
     "moment": "^2.22.1",
     "node-sass": "^4.9.3",
     "prop-types": "^15.6.2",
@@ -52,7 +50,9 @@
     "scriptjs": "^2.5.9",
     "sha256": "^0.2.0",
     "uuid": "^3.2.1",
-    "yup": "^0.26.6"
+    "yup": "^0.26.6",
+    "lodash": "^4.17.11",
+    "lodash-es": "^4.17.11"
   },
   "devDependencies": {
     "@juggle/resize-observer": "^1.1.1",

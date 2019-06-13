@@ -1,4 +1,4 @@
-import debounce from "debounce";
+import { debounce } from "lodash";
 import { Dispatch } from "redux";
 import { UiSize } from "shared/reducers/ui-reducer";
 import { ActionType } from "shared/utils/types";
