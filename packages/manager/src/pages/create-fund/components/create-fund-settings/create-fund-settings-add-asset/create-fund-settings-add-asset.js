@@ -7,7 +7,6 @@ import GVTextField from "shared/components/gv-text-field";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Popover from "shared/components/popover/popover";
 import Regulator from "shared/components/regulator/regulator";
-import GVScroll from "shared/components/scroll/gvscroll";
 
 class CreateFundSettingsAddAsset extends React.PureComponent {
   state = {
@@ -58,51 +57,49 @@ class CreateFundSettingsAddAsset extends React.PureComponent {
             />
           </div>
           <div className="popover-add__assets">
-            <GVScroll autoHeightMax={180} autoHeight={true}>
-              <table>
-                <tbody>
-                  {filteredAssets.map((asset, idx) => (
-                    <tr key={idx} className="popover-add__asset">
-                      <td className="popover-add__asset-icon-container">
-                        <FundAssetImage
-                          url={asset.icon}
-                          alt={asset.asset}
-                          className="popover-add__asset-icon"
-                        />
-                      </td>
-                      <td className="popover-add__asset-currency-full">
-                        {asset.name}
-                      </td>
-                      <td className="popover-add__asset-currency-short">
-                        {asset.asset}
-                      </td>
-                      <td className="popover-add__regulator-container">
-                        <Regulator
-                          value={asset.percent}
-                          handleDown={handleDown(asset)}
-                          handleUp={handleUp(asset)}
-                        >
-                          <div className={"popover-add__regulator-indicator"}>
-                            <input
-                              value={asset.percent}
-                              onChange={handlePercentChange(asset)}
-                              className={classnames(
-                                "popover-add__regulator-input",
-                                {
-                                  "popover-add__regulator-input--mute":
-                                    asset.percent === 0
-                                }
-                              )}
-                            />
-                            %
-                          </div>
-                        </Regulator>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </GVScroll>
+            <table>
+              <tbody>
+                {filteredAssets.map((asset, idx) => (
+                  <tr key={idx} className="popover-add__asset">
+                    <td className="popover-add__asset-icon-container">
+                      <FundAssetImage
+                        url={asset.icon}
+                        alt={asset.asset}
+                        className="popover-add__asset-icon"
+                      />
+                    </td>
+                    <td className="popover-add__asset-currency-full">
+                      {asset.name}
+                    </td>
+                    <td className="popover-add__asset-currency-short">
+                      {asset.asset}
+                    </td>
+                    <td className="popover-add__regulator-container">
+                      <Regulator
+                        value={asset.percent}
+                        handleDown={handleDown(asset)}
+                        handleUp={handleUp(asset)}
+                      >
+                        <div className={"popover-add__regulator-indicator"}>
+                          <input
+                            value={asset.percent}
+                            onChange={handlePercentChange(asset)}
+                            className={classnames(
+                              "popover-add__regulator-input",
+                              {
+                                "popover-add__regulator-input--mute":
+                                  asset.percent === 0
+                              }
+                            )}
+                          />
+                          %
+                        </div>
+                      </Regulator>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </Popover>
