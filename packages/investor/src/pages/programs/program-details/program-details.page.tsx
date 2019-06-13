@@ -11,7 +11,7 @@ import {
   fetchPortfolioEvents
 } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
+import { platformDataSelector } from "shared/reducers/platform-reducer";
 
 import ProgramControls from "./components/program-controls";
 
@@ -38,15 +38,13 @@ const _ProgramDetailsPage: React.FC<StateProps> = ({ events }) => {
 
 const eventsSelector = createSelector<
   InvestorRootState,
-  IApiState<PlatformInfo>,
+  PlatformInfo | undefined,
   SelectFilterValue<string>[]
 >(
-  state => state.platformData,
+  state => platformDataSelector(state),
   platformData => {
-    if (!platformData.data) return [];
-    const {
-      programs
-    } = platformData.data.enums.program.investorNotificationType;
+    if (!platformData) return [];
+    const { programs } = platformData.enums.program.investorNotificationType;
     const events = programs.map((event: string) => ({
       value: event,
       labelKey: `investor.dashboard-page.portfolio-events.types.${event}`
@@ -55,11 +53,9 @@ const eventsSelector = createSelector<
   }
 );
 
-const mapStateToProps = (state: InvestorRootState): StateProps => {
-  return {
-    events: eventsSelector(state)
-  };
-};
+const mapStateToProps = (state: InvestorRootState): StateProps => ({
+  events: eventsSelector(state)
+});
 
 interface StateProps {
   events: SelectFilterValue<string>[];

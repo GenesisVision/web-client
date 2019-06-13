@@ -3,6 +3,11 @@ import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
+import {
+  apiFieldSelector,
+  apiSelector,
+  fieldSelector
+} from "shared/utils/selectors";
 
 import {
   COPYTRADING_ACCOUNTS,
@@ -18,6 +23,21 @@ export type WalletState = Readonly<{
   lastUpdate: WalletLastUpdateState;
 }>;
 
+export const walletSelector = apiSelector<WalletMultiSummary>(
+  state => state.wallet.info
+);
+
+export const walletsSelector = apiFieldSelector(
+  walletSelector,
+  fieldSelector(state => state.wallets),
+  []
+);
+
+export const grandTotalSelector = apiFieldSelector(
+  walletSelector,
+  fieldSelector(state => state.grandTotal)
+);
+
 export const walletReducer = combineReducers<WalletState>({
   info: apiReducerFactory<WalletMultiSummary>({
     apiType: WALLET_BALANCE
@@ -29,6 +49,16 @@ export type CopyTradingAccountsState = Readonly<{
   info: IApiState<CopyTradingAccountsList>;
   lastUpdate: AccountLastUpdateState;
 }>;
+
+export const copyTradingAccountsDataSelector = apiSelector<
+  CopyTradingAccountsList
+>(state => state.copyTradingAccounts.info);
+
+export const copyTradingAccountsSelector = apiFieldSelector(
+  copyTradingAccountsDataSelector,
+  fieldSelector(state => state.accounts),
+  []
+);
 
 export const CopyTradingAccountsReducer = combineReducers<
   CopyTradingAccountsState

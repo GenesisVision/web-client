@@ -9,6 +9,8 @@ import {
   fetchTwoFactor,
   notificationsToggle
 } from "shared/components/header/header.service";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { headerSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 class _HeaderContainer extends React.PureComponent<Props> {
@@ -55,14 +57,10 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-const mapStateToProps = ({
-  profileHeader,
-  authData,
-  router
-}: RootState): StateProps => ({
-  info: profileHeader.data,
-  isAuthenticated: authData.isAuthenticated,
-  backPath: router.location ? router.location.pathname : ""
+const mapStateToProps = (state: RootState): StateProps => ({
+  info: headerSelector(state),
+  isAuthenticated: isAuthenticatedSelector(state),
+  backPath: state.router.location ? state.router.location.pathname : ""
 });
 
 interface Props extends StateProps, DispatchProps, OwnProps {}

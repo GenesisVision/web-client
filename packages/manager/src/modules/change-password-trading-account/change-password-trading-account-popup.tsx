@@ -1,11 +1,12 @@
 import { ProgramPwdUpdate } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
+import { ManagerRootState } from "reducers";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
-import { ManagerRootState } from "../../reducers";
 import ChangePasswordTradingAccountForm, {
   IChangePasswordTradingAccountFormValues
 } from "./components/change-password-trading-account-form";
@@ -90,12 +91,9 @@ class _ChangePasswordTradingAccountPopup extends React.PureComponent<
 
 const mapStateToProps = (
   state: ManagerRootState
-): IChangePasswordTradingAccountPopupStateProps => {
-  const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
-    ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
-    : false;
-  return { twoFactorEnabled };
-};
+): IChangePasswordTradingAccountPopupStateProps => ({
+  twoFactorEnabled: twoFactorEnabledSelector(state)
+});
 
 const mapDispatchToProps = (
   dispatch: Dispatch

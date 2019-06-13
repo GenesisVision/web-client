@@ -9,6 +9,10 @@ import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
 import {
+  copyTradingAccountsSelector,
+  walletsSelector
+} from "shared/components/wallet/reducers/wallet.reducers";
+import {
   fetchAccounts,
   fetchWallets
 } from "shared/components/wallet/services/wallet.services";
@@ -92,14 +96,10 @@ class _TransferContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  if (!state.accountSettings) return { wallets: [], copyTradingAccounts: [] };
-  const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
-  const copyTradingAccounts = state.copyTradingAccounts.info.data
-    ? state.copyTradingAccounts.info.data.accounts
-    : [];
-  return { wallets, copyTradingAccounts };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  wallets: walletsSelector(state),
+  copyTradingAccounts: copyTradingAccountsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(

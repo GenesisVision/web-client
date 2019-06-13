@@ -10,7 +10,7 @@ import {
   fetchPortfolioEvents
 } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
+import { platformDataSelector } from "shared/reducers/platform-reducer";
 
 import ChangePasswordTradingAccount from "./components/program-controls/change-password-trading-account";
 import ProgramControls from "./components/program-controls/program-controls";
@@ -38,15 +38,13 @@ const _ProgramDetailsPage: React.FC<StateProps> = ({ events }) => {
 
 const eventsSelector = createSelector<
   ManagerRootState,
-  IApiState<PlatformInfo>,
+  PlatformInfo | undefined,
   SelectFilterValue<string>[]
 >(
-  state => state.platformData,
+  state => platformDataSelector(state),
   platformData => {
-    if (!platformData.data) return [];
-    const {
-      programs
-    } = platformData.data.enums.program.managerNotificationType;
+    if (!platformData) return [];
+    const { programs } = platformData.enums.program.managerNotificationType;
     const events = programs.map((event: string) => ({
       value: event,
       labelKey: `manager.dashboard-page.portfolio-events.types.${event}`
@@ -55,11 +53,9 @@ const eventsSelector = createSelector<
   }
 );
 
-const mapStateToProps = (state: ManagerRootState): StateProps => {
-  return {
-    events: eventsSelector(state)
-  };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  events: eventsSelector(state)
+});
 
 interface StateProps {
   events: SelectFilterValue<string>[];

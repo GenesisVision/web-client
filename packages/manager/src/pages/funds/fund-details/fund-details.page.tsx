@@ -11,7 +11,7 @@ import FundDetailsPageCommon from "shared/components/funds/fund-details/fund-det
 import { fetchEventsCounts } from "shared/components/funds/fund-details/services/fund-details.service";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
+import { platformDataSelector } from "shared/reducers/platform-reducer";
 
 import FundControls from "./components/fund-controls";
 
@@ -37,13 +37,13 @@ const _FundDetailsPage: React.FC<Props> = ({ events }) => {
 
 const eventsSelector = createSelector<
   ManagerRootState,
-  IApiState<PlatformInfo>,
+  PlatformInfo | undefined,
   SelectFilterValue<string>[]
 >(
-  state => state.platformData,
+  state => platformDataSelector(state),
   platformData => {
-    if (!platformData.data) return [];
-    const { funds } = platformData.data.enums.program.managerNotificationType;
+    if (!platformData) return [];
+    const { funds } = platformData.enums.program.managerNotificationType;
     const events = funds.map((event: string) => ({
       value: event,
       labelKey: `manager.dashboard-page.portfolio-events.types.${event}`
@@ -52,11 +52,9 @@ const eventsSelector = createSelector<
   }
 );
 
-const mapStateToProps = (state: ManagerRootState): StateProps => {
-  return {
-    events: eventsSelector(state)
-  };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  events: eventsSelector(state)
+});
 
 interface Props extends OwnProps, StateProps {}
 
