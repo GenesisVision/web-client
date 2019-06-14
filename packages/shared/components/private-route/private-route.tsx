@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { RouteComponentProps, RouteProps } from "react-router";
 import { Redirect, Route } from "react-router-dom";
 import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 class _PrivateRoute extends React.PureComponent<RouteProps & StateProps> {
@@ -26,12 +27,9 @@ class _PrivateRoute extends React.PureComponent<RouteProps & StateProps> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { isAuthenticated } = state.authData;
-  return {
-    isAuthenticated
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state)
+});
 
 const PrivateRoute = connect(mapStateToProps)(_PrivateRoute);
 export default PrivateRoute;

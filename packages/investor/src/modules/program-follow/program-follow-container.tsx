@@ -9,6 +9,7 @@ import { InvestorRootState } from "reducers";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
+import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { FOLLOW_TYPE } from "shared/constants/constants";
 import {
   AlertActionCreator,
@@ -78,33 +79,28 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
       type === FOLLOW_TYPE.CREATE ? attachToSignal : updateAttachToSignal;
     return (
       <Dialog open={open} onClose={handleClose}>
-        {isPending ? (
-          <DialogLoader />
-        ) : (
-          <FollowPopupForm
-            signalSubscription={signalSubscription}
-            minDeposit={minDeposit!}
-            alertError={service.alertError}
-            alertSuccess={service.alertSuccess}
-            id={id}
-            accounts={accounts}
-            currency={currency}
-            wallets={wallets!}
-            submitMethod={submitMethod}
-            handleSubmit={handleSubmit}
-          />
-        )}
+        <FollowPopupForm
+          condition={!isPending && !!wallets.length}
+          loader={<DialogLoader />}
+          signalSubscription={signalSubscription}
+          minDeposit={minDeposit!}
+          alertError={service.alertError}
+          alertSuccess={service.alertSuccess}
+          id={id}
+          accounts={accounts}
+          currency={currency}
+          wallets={wallets}
+          submitMethod={submitMethod}
+          handleSubmit={handleSubmit}
+        />
       </Dialog>
     );
   }
 }
 
-const mapStateToProps = (state: InvestorRootState): StateProps => {
-  const { wallet } = state;
-  return {
-    wallets: wallet.info.data ? wallet.info.data.wallets : undefined
-  };
-};
+const mapStateToProps = (state: InvestorRootState): StateProps => ({
+  wallets: walletsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
@@ -121,7 +117,7 @@ interface DispatchProps {
 }
 
 interface StateProps {
-  wallets?: WalletData[];
+  wallets: WalletData[];
 }
 
 interface Props extends DispatchProps, StateProps {

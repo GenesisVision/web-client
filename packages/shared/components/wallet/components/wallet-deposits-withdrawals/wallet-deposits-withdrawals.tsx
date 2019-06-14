@@ -1,5 +1,6 @@
 import "./wallet-deposits-withdrawals.scss";
 
+import { PlatformInfo } from "gv-api-web";
 import React, { RefObject } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -22,11 +23,11 @@ import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 import { WalletLastUpdateState } from "../../reducers/wallet-last-update";
 import { fetchMultiTransactionsExternal } from "../../services/wallet.services";
-import { TRANSACTIONS_TYPE } from "../wallet-transactions/wallet-transactions.constants";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -54,7 +55,9 @@ class _WalletDepositsWithdrawals extends React.PureComponent<Props> {
   };
 
   render() {
-    const { t, renderBodyRow, columns, typeFilterValues } = this.props;
+    const { t, renderBodyRow, columns, platformData } = this.props;
+    if (!platformData) return null;
+    const { externalTransactionType } = platformData.enums.multiWallet;
     return (
       <div className="wallet-deposits-withdrawals">
         <TableModule
@@ -63,7 +66,7 @@ class _WalletDepositsWithdrawals extends React.PureComponent<Props> {
           paging={DEFAULT_PAGING}
           filtering={{
             ...TRANSACTIONS_FILTERS,
-            type: typeFilterValues[0]
+            type: externalTransactionType[0]
           }}
           getItems={this.fetchMultiTransactionsExternal}
           renderFilters={(updateFilter, filtering) => (
@@ -72,7 +75,7 @@ class _WalletDepositsWithdrawals extends React.PureComponent<Props> {
                 name={"type"}
                 label="Type"
                 value={filtering["type"] as SelectFilterType} //TODO fix filtering types
-                values={reduceFilters(typeFilterValues)}
+                values={reduceFilters(externalTransactionType)}
                 onChange={updateFilter}
               />
               <DateRangeFilter
@@ -101,7 +104,8 @@ class _WalletDepositsWithdrawals extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  timestamp: state.wallet.lastUpdate.timestamp
+  timestamp: state.wallet.lastUpdate.timestamp,
+  platformData: platformDataSelector(state)
 });
 
 interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
@@ -109,11 +113,12 @@ interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
 interface OwnProps {
   renderBodyRow: RenderBodyItemFuncType;
   columns: SortingColumn[];
-  typeFilterValues: Array<TRANSACTIONS_TYPE | string>;
   currency?: CURRENCIES;
 }
 
-interface StateProps extends WalletLastUpdateState {}
+interface StateProps extends WalletLastUpdateState {
+  platformData?: PlatformInfo;
+}
 
 const WalletDepositsWithdrawals = compose<React.ComponentType<OwnProps>>(
   translate(),

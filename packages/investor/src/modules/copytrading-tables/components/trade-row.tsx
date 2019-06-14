@@ -36,8 +36,8 @@ const _TradeRow: React.FC<Props> = ({
   const [isOpenSubrows, toggleSubrows] = useState<boolean>(false);
   const [isOpenPopup, togglePopup] = useState<boolean>(false);
   const program = trade.providers[0].program;
-  const otherPrograms = trade.providers.slice(1);
-  const hasOtherPrograms = otherPrograms.length > 0;
+  const otherPrograms = trade.providers;
+  const hasOtherPrograms = trade.providers.length > 1;
   return (
     <>
       <TableRow
@@ -145,6 +145,7 @@ const _TradeRow: React.FC<Props> = ({
       {isOpenSubrows
         ? otherPrograms.map(provider => (
             <TradeSubRow
+              title={title}
               key={trade.id}
               provider={provider}
               tradeId={trade.id}

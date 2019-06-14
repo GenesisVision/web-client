@@ -36,7 +36,7 @@ class _WalletContainer extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const { t, currency, filters, location } = this.props;
+    const { t, currency, location } = this.props;
     const { tab } = this.state;
     return (
       <Surface className="wallet-container">
@@ -45,7 +45,7 @@ class _WalletContainer extends React.PureComponent<Props, State> {
             <GVScroll autoHide autoHeight autoHeightMax={60}>
               <GVTabs value={tab} onChange={this.handleTabChange}>
                 <GVTab
-                  className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                  className={"gv-tab"}
                   value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
                   label={
                     <Link
@@ -93,7 +93,6 @@ class _WalletContainer extends React.PureComponent<Props, State> {
         <div>
           {tab === TABS.TRANSACTIONS_TAB && (
             <WalletTransactions
-              typeFilterValues={filters.transactionType}
               columns={WALLET_TRANSACTIONS_COLUMNS}
               renderBodyRow={(transaction, updateRow, updateItems) => (
                 <TransactionsRow
@@ -108,7 +107,6 @@ class _WalletContainer extends React.PureComponent<Props, State> {
           {tab === TABS.EXTERNAL_TAB && (
             <WalletDepositsWithdrawals
               columns={WALLET_DEPOSITS_WITHDRAWALS_COLUMNS}
-              typeFilterValues={filters.externalTransactionType}
               renderBodyRow={(transaction, updateRow, updateItems) => (
                 <DepositsWithdrawalsRow
                   transaction={transaction}
@@ -135,7 +133,6 @@ interface Props extends InjectedTranslateProps, OwnProps {
 
 interface OwnProps {
   currency: CURRENCIES;
-  filters: MultiWalletFilters;
 }
 
 interface State {

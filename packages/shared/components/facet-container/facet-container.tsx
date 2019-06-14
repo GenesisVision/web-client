@@ -1,8 +1,9 @@
-import { FundFacet, ProgramFacet } from "gv-api-web";
+import { FundFacet, PlatformInfo, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
+import { createSelector } from "reselect";
 import { IFundsFacetTableProps } from "shared/components/funds/funds-facet/components/funds-facet-table";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import { IProgramsFacetTableProps } from "shared/components/programs/programs-facet/components/programs-facet-table";
@@ -10,6 +11,7 @@ import { FilteringType } from "shared/components/table/components/filtering/filt
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
+import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch } from "shared/utils/types";
 
@@ -58,13 +60,24 @@ class _FacetContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, props: Props): StateProps => {
-  const { data } = state.platformData;
-  let facets = null;
-  if (data && props.asset)
-    facets = (data as { [keys: string]: any })[props.asset];
-  return { facets };
-};
+const facetSelector = createSelector<
+  RootState,
+  OwnProps,
+  PlatformInfo | undefined,
+  FACET_ASSET,
+  FacetType[] | undefined
+>(
+  state => platformDataSelector(state),
+  (state, props) => props.asset,
+  (data, asset) => {
+    if (!data) return undefined;
+    return data[asset];
+  }
+);
+
+const mapStateToProps = (state: RootState, props: OwnProps): StateProps => ({
+  facets: facetSelector(state, props)
+});
 
 const mapDispatchToProps = (
   dispatch: MiddlewareDispatch,
@@ -91,7 +104,7 @@ interface OwnProps {
   isAuthenticated?: boolean;
 }
 interface StateProps {
-  facets: FacetType[];
+  facets?: FacetType[];
 }
 interface DispatchProps {
   service: {

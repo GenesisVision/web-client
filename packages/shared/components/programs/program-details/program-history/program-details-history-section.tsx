@@ -20,7 +20,10 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { IDataModel, ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { AuthState } from "shared/reducers/auth-reducer";
+import {
+  AuthState,
+  isAuthenticatedSelector
+} from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 import { HistoryCountsType } from "../program-details.types";
@@ -148,10 +151,9 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { isAuthenticated } = state.authData;
-  return { isAuthenticated };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state)
+});
 
 interface Props
   extends OwnProps,

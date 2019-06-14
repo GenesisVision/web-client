@@ -16,7 +16,10 @@ import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/compone
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import { AuthState } from "shared/reducers/auth-reducer";
+import {
+  AuthState,
+  isAuthenticatedSelector
+} from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 import FundStructure from "./fund-structure/fund-structure";
@@ -95,10 +98,9 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { isAuthenticated } = state.authData;
-  return { isAuthenticated };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state)
+});
 
 interface StateProps extends AuthState {}
 

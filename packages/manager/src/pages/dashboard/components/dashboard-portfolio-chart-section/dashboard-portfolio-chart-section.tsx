@@ -20,8 +20,11 @@ import {
 } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
 import Surface from "shared/components/surface/surface";
+import { isNewUserSelector } from "shared/reducers/header-reducer";
 import { Nullable } from "shared/utils/types";
 
+import { dashboardAssetsSelector } from "../../reducers/dashboard-assets.reducer";
+import { dashboardInRequestsSelector } from "../../reducers/dashboard-in-requests.reducer";
 import { IDashboardAssetChart } from "../../reducers/dashboard.reducers";
 import {
   cancelRequest,
@@ -45,16 +48,7 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
   }
 
   render() {
-    const {
-      t,
-      isNewUser,
-      assets,
-      assetsIsPending,
-      assetChart,
-      period,
-      inRequests,
-      inRequestsIsPending
-    } = this.props;
+    const { t, isNewUser, assets, assetChart, period, inRequests } = this.props;
     if (isNewUser) return <DashboardGetStarted />;
     return (
       <Surface className="dashboard-portfolio-chart-section">
@@ -63,12 +57,12 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
         </h3>
         <div className="dashboard-portfolio-chart-section__actions">
           <DashboardChartAssetsContainer
-            condition={!!assets && !assetsIsPending}
+            condition={!!assets}
             loader={<DashboardChartAssetsLoader />}
             assets={assets!}
           />
           <DashboardInRequestsContainer
-            condition={!!inRequests && !inRequestsIsPending}
+            condition={!!inRequests}
             loader={<DashboardChartRequestLoader />}
             inRequests={inRequests!}
             cancelRequest={cancelRequest}
@@ -90,19 +84,13 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = (state: ManagerRootState): StateProps => {
-  const { profileHeader } = state;
-  const { assets, assetChart, period, inRequestsData } = state.dashboard;
-  return {
-    isNewUser: profileHeader.data && profileHeader.data.isNewUser,
-    assets: assets.data,
-    assetsIsPending: assets.isPending,
-    inRequests: inRequestsData.data,
-    inRequestsIsPending: inRequestsData.isPending,
-    assetChart,
-    period
-  };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  isNewUser: isNewUserSelector(state),
+  assets: dashboardAssetsSelector(state),
+  inRequests: dashboardInRequestsSelector(state),
+  assetChart: state.dashboard.assetChart,
+  period: state.dashboard.period
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
@@ -127,8 +115,6 @@ interface DispatchProps {
 }
 
 interface StateProps {
-  assetsIsPending: boolean;
-  inRequestsIsPending: boolean;
   period: ChartDefaultPeriod;
   assetChart: Nullable<IDashboardAssetChart>;
   isNewUser?: boolean;
