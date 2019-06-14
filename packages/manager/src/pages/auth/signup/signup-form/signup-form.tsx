@@ -10,7 +10,9 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 
-import validationSchema from "./signup-form.validators";
+import validationSchema, {
+  SIGN_UP_FORM_FIELDS
+} from "./signup-form.validators";
 
 const _SignUpForm: React.FC<
   InjectedFormikProps<Props, ISignUpFormFormValues>
@@ -100,17 +102,6 @@ const _SignUpForm: React.FC<
     </GVButton>
   </form>
 );
-
-export enum SIGN_UP_FORM_FIELDS {
-  refCode = "refCode",
-  userName = "userName",
-  email = "email",
-  password = "password",
-  confirmPassword = "confirmPassword",
-  privacyPolicy = "privacyPolicy",
-  acceptTerms = "acceptTerms",
-  isAuto = "isAuto"
-}
 
 interface Props extends InjectedTranslateProps, OwnProps {}
 

@@ -4,11 +4,20 @@ import {
 } from "shared/utils/validators/validators";
 import { boolean, object, ref, string } from "yup";
 
-import { SIGN_UP_FORM_FIELDS } from "./signup-form";
-
 const confirmPasswordValidator = string()
   .oneOf([ref("password")], "Passwords don't match.")
   .required("Confirm Password is required");
+
+export enum SIGN_UP_FORM_FIELDS {
+  refCode = "refCode",
+  userName = "userName",
+  email = "email",
+  password = "password",
+  confirmPassword = "confirmPassword",
+  privacyPolicy = "privacyPolicy",
+  acceptTerms = "acceptTerms",
+  isAuto = "isAuto"
+}
 
 const validationSchema = object().shape({
   [SIGN_UP_FORM_FIELDS.userName]: string()
