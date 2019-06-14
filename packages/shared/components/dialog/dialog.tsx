@@ -19,8 +19,6 @@ export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
   <Modal open={open} fixed onClose={onClose}>
     <GVScroll autoHide>
       <div className="dialog__content">
-        <div className="dialog__background" />
-        <div className="dialog__backdrop" onClick={onClose} />
         <GVButton
           variant="text"
           color="secondary"
