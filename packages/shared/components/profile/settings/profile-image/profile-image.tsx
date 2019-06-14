@@ -32,7 +32,7 @@ const _ProfileImage: React.FC<InjectedFormikProps<Props, FormValues>> = ({
       </div>
 
       <GVFormikField
-        name="logo"
+        name={FIELDS.logo}
         component={InputImage}
         src={avatar}
         className="profile-image__input-image"
@@ -57,22 +57,25 @@ const ProfileImage = compose<React.ComponentType<OwnProps>>(
   withFormik<Props, FormValues>({
     displayName: "profile-image",
     mapPropsToValues: props => ({
-      logo: {
+      [FIELDS.logo]: {
         src: props.avatar
       }
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
-        logo: imageValidationSchema(t)
+        [FIELDS.logo]: imageValidationSchema(t)
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values.logo, setSubmitting);
+      props.onSubmit(values[FIELDS.logo], setSubmitting);
     }
   }),
   React.memo
 )(_ProfileImage);
-
 export default ProfileImage;
+
+enum FIELDS {
+  logo = "logo"
+}
 
 interface OwnProps {
   avatar: string;
