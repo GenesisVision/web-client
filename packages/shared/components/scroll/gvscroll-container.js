@@ -1,5 +1,5 @@
 import ResizeObserver from "@juggle/resize-observer";
-import debounce from "debounce";
+import { debounce } from "lodash";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { connect } from "react-redux";

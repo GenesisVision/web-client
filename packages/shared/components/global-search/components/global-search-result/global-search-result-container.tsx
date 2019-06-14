@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import debounce from "debounce";
 import { SearchViewModel } from "gv-api-web";
+import { debounce } from "lodash";
 import * as React from "react";
 import { Nullable } from "shared/utils/types";
 
