@@ -8,17 +8,30 @@ import Modal from "shared/components/modal/modal";
 
 const MARGIN_OFFSET = 10;
 
+export enum VERTICAL_POPOVER_POS {
+  TOP = "top",
+  BOTTOM = "bottom",
+  CENTER = "center"
+}
+export enum HORIZONTAL_POPOVER_POS {
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center"
+}
+
 const getAnchorEl = (el?: anchorElType) => {
   return typeof el === "function" ? el() : el;
 };
 
-export class _Popover extends React.PureComponent<OwnProps, State> {
+export default class Popover extends React.PureComponent<OwnProps, State> {
   state: State = {
     windowWidth: 0,
     windowHeight: 0,
     scrollTop: window.scrollY
   };
+
   popover: RefObject<HTMLDivElement>;
+
   constructor(props: OwnProps) {
     super(props);
     this.popover = React.createRef();
@@ -40,7 +53,8 @@ export class _Popover extends React.PureComponent<OwnProps, State> {
   static getDerivedStateFromProps() {
     return {
       windowWidth: window.innerWidth,
-      windowHeight: window.innerHeight
+      windowHeight: window.innerHeight,
+      scrollTop: window.scrollY
     };
   }
   getAnchorBounds = (): ClientRect => {
@@ -173,17 +187,5 @@ interface State {
   windowHeight: number;
   scrollTop: number;
 }
-export enum VERTICAL_POPOVER_POS {
-  TOP = "top",
-  BOTTOM = "bottom",
-  CENTER = "center"
-}
-export enum HORIZONTAL_POPOVER_POS {
-  LEFT = "left",
-  RIGHT = "right",
-  CENTER = "center"
-}
-export type anchorElType = EventTarget | Function | HTMLElement;
 
-const Popover = _Popover;
-export default Popover;
+export type anchorElType = EventTarget | Function | HTMLElement;
