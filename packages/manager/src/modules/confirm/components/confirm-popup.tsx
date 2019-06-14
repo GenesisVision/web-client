@@ -7,16 +7,14 @@ import { SetSubmittingType } from "shared/utils/types";
 
 import ConfirmForm, { IConfirmFormValues } from "./confirm-form";
 
-class ConfirmPopup extends React.PureComponent<Props> {
-  render() {
-    const { info, edit, serverError } = this.props;
-    return info ? (
-      <ConfirmForm onSubmit={edit} serverError={serverError} />
-    ) : (
-      <DialogLoader />
-    );
-  }
-}
+const ConfirmPopup: React.FC<Props> = ({ info, edit, serverError }) => (
+  <ConfirmForm
+    condition={!!info}
+    loader={<DialogLoader />}
+    onSubmit={edit}
+    serverError={serverError}
+  />
+);
 
 interface Props {
   info: TwoFactorAuthenticator;
