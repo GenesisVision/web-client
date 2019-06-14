@@ -1,6 +1,5 @@
 import { shallow } from "enzyme";
 import * as React from "react";
-import EventListener from "react-event-listener";
 
 import _Dialog from "./dialog";
 
@@ -74,15 +73,6 @@ describe("Dialog tests", () => {
       </_Dialog>
     );
     component.find(".dialog__close--inside").simulate("click");
-    expect(handleClick).toBeCalled();
-  });
-  test("should call key press esc", () => {
-    const component = shallow(
-      <_Dialog open onClose={handleClick}>
-        {children}
-      </_Dialog>
-    );
-    component.find(EventListener).simulate("keyUp", { keyCode: 27 });
     expect(handleClick).toBeCalled();
   });
 });
