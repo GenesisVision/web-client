@@ -168,7 +168,7 @@ interface OwnProps {
   vertical?: VERTICAL_POPOVER_POS;
   anchorEl?: anchorElType;
   noPadding?: boolean;
-  disableBackdropClick?: boolean;
+  noAbsolute?: boolean;
   className?: string;
   fixed?: boolean;
 }

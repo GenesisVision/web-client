@@ -56,7 +56,6 @@ class AssetAvatar extends React.PureComponent<
         />
         {tooltip && (
           <Popover
-            disableBackdropClick
             noPadding
             anchorEl={this.state.anchor}
             className="tooltip__popover"

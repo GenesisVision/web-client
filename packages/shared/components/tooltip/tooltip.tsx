@@ -1,8 +1,7 @@
 import "./tooltip.scss";
 
 import * as React from "react";
-import Popover from "shared/components/popover/popover";
-import {
+import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
@@ -38,7 +37,7 @@ class Tooltip extends React.PureComponent<Props, State> {
           onTouchEnd={this.handleMouseLeave}
         />
         <Popover
-          disableBackdropClick
+          noAbsolute
           noPadding
           anchorEl={anchor}
           className="tooltip__popover"
