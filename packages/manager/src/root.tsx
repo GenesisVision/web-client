@@ -20,8 +20,8 @@ const Root: React.FC = () => (
         <Route path={AUTH_ROUTES_REGEX} component={AuthRoutes} />
         <Route path={HOME_ROUTE} component={AppRoutes} />
       </Switch>
-      <AlertMessageList />
     </ConnectedRouter>
+    <AlertMessageList />
   </Provider>
 );
 
