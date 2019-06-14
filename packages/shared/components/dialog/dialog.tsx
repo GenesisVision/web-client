@@ -13,24 +13,11 @@ export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
   open,
   onClose,
   className,
-  children,
-  wider
+  children
 }) => (
   <Modal open={open} fixed onClose={onClose}>
     <GVScroll autoHide>
       <div className="dialog__content">
-        <GVButton
-          variant="text"
-          color="secondary"
-          className={classNames("dialog__close dialog__close--outside", {
-            "dialog__close--wider": wider
-          })}
-          onClick={onClose}
-        >
-          <>
-            <CloseIcon /> {t("buttons.close")}
-          </>
-        </GVButton>
         <div className={classNames("dialog", className)}>
           <GVButton
             variant="text"
@@ -54,5 +41,4 @@ export interface IDialogProps {
   open: boolean;
   onClose: (param?: any) => void;
   className?: string;
-  wider?: boolean;
 }
