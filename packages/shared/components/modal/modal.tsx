@@ -20,7 +20,8 @@ const _Modal: React.FC<Props> = ({
   );
 
   const handleBackdropClick = useCallback(
-    (event: React.MouseEvent<HTMLElement>): void => handleClose(event),
+    (event: MouseEvent): void =>
+      handleClose((event as unknown) as React.MouseEvent<HTMLElement>),
     [onClose]
   );
 
@@ -37,12 +38,15 @@ const _Modal: React.FC<Props> = ({
           "modal--position-fixed": fixed
         })}
       >
-        <EventListener target={document} onKeyUp={handleKeyPress}>
+        <EventListener
+          target={document}
+          onKeyUp={handleKeyPress}
+          onClick={handleBackdropClick}
+        >
           <div
             className={classNames("modal__backdrop", {
               "modal__backdrop--transparent": transparentBackdrop
             })}
-            onClick={handleBackdropClick}
           />
         </EventListener>
         {children}
