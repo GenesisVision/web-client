@@ -3,9 +3,9 @@ import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import translate from "react-i18next/src/translate";
 
-import DepositButton from "../../buttons/deposit-button";
-import TransferButton from "../../buttons/transfer-button";
-import WithdrawButton from "../../buttons/withdraw-button";
+import DepositButton from "../buttons/deposit-button";
+import TransferButton from "../buttons/transfer-button";
+import WithdrawButton from "../buttons/withdraw-button";
 
 interface IWalletListButton {
   wallet: WalletData;

@@ -4,11 +4,11 @@ import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { compose } from "redux";
 import Chip from "shared/components/chip/chip";
+import { MiddlewareDispatch } from "shared/utils/types";
 
-import { MiddlewareDispatch } from "../../../../utils/types";
-import * as walletService from "../../services/wallet.services";
+import * as walletService from "../../../services/wallet.services";
 
 class WalletCopytradingActions extends React.PureComponent<Props, State> {
   state = {

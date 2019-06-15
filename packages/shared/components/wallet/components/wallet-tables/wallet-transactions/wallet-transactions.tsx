@@ -27,8 +27,8 @@ import { CURRENCIES } from "shared/modules/currency-select/currency-select.const
 import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
-import { WalletLastUpdateState } from "../../reducers/wallet-last-update";
-import { fetchMultiTransactions } from "../../services/wallet.services";
+import { WalletLastUpdateState } from "../../../reducers/wallet-last-update";
+import { fetchMultiTransactions } from "../../../services/wallet.services";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
