@@ -10,8 +10,8 @@ import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletTablesTotal from "./wallet-container/wallet-tables-total";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
+import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
 
 const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
   t,

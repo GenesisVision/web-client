@@ -11,7 +11,7 @@ import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-
 
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletTables from "./wallet-container/wallet-tables";
+import WalletTables from "./wallet-tables/wallet-tables";
 
 class _WalletCurrency extends React.PureComponent<Props, State> {
   state = {
