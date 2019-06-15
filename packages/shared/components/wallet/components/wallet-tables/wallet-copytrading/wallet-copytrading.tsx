@@ -21,8 +21,8 @@ import {
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { MiddlewareDispatch } from "shared/utils/types";
 
-import { fetchAccounts } from "../../services/wallet.services";
-import { composeWalletCopytradingCurrencyUrl } from "../../wallet.routes";
+import { fetchAccounts } from "../../../services/wallet.services";
+import { composeWalletCopytradingCurrencyUrl } from "../../../wallet.routes";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
 
