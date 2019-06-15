@@ -1,4 +1,4 @@
-import "./wallet-container.scss";
+import "./wallet-tables.scss";
 
 import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import { Location } from "history";
@@ -22,7 +22,7 @@ import TransactionsRow from "../wallet-transactions/transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
 
-class _WalletContainerTotal extends React.PureComponent<Props, State> {
+class _WalletTablesTotal extends React.PureComponent<Props, State> {
   state = {
     tab: TABS.WALLETS_TAB
   };
@@ -184,5 +184,5 @@ interface State {
 const WalletContainerTotal = compose<React.ComponentType<OwnProps>>(
   translate(),
   withRouter
-)(_WalletContainerTotal);
+)(_WalletTablesTotal);
 export default WalletContainerTotal;

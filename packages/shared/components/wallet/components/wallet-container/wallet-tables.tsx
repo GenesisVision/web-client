@@ -1,6 +1,5 @@
-import "./wallet-container.scss";
+import "./wallet-tables.scss";
 
-import { MultiWalletFilters } from "gv-api-web";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
@@ -20,7 +19,7 @@ import TransactionsRow from "../wallet-transactions/transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
 
-class _WalletContainer extends React.PureComponent<Props, State> {
+class _WalletTables extends React.PureComponent<Props, State> {
   state = {
     tab: TABS.TRANSACTIONS_TAB
   };
@@ -142,5 +141,5 @@ interface State {
 const WalletContainer = compose<React.ComponentType<OwnProps>>(
   translate(),
   withRouter
-)(_WalletContainer);
+)(_WalletTables);
 export default WalletContainer;
