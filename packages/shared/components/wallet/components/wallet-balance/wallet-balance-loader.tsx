@@ -7,7 +7,7 @@ import Surface from "shared/components/surface/surface";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 import Table from "shared/components/table/components/table";
 
-import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
+import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-tables/wallet-transactions/wallet-transactions.constants";
 import WalletSettingsLoader from "./wallet-settings-loader";
 
 const _WalletBalanceLoader: React.FC<InjectedTranslateProps> = ({ t }) => (
