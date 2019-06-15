@@ -11,7 +11,7 @@ import TableRow from "shared/components/table/components/table-row";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import { TRANSACTIONS_DECIMAL_SCALE } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
+import { TRANSACTIONS_DECIMAL_SCALE } from "../wallet-tables/wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
