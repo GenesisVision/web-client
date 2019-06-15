@@ -1,4 +1,4 @@
-import "../../wallet-list/wallet-list.scss";
+import "../wallet-list/wallet-list.scss";
 
 import { CopyTradingAccountInfo } from "gv-api-web";
 import * as React from "react";
