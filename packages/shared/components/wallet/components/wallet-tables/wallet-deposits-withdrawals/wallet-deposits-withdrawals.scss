@@ -1,6 +1,6 @@
-@import "../../../../../../../node_modules/shared/styles/colors";
-@import "../../../../../../../node_modules/shared/styles/breakpoint";
-@import "../../../../../../../node_modules/shared/styles/sizes";
+@import "~shared/styles/colors";
+@import "~shared/styles/breakpoint";
+@import "~shared/styles/sizes";
 
 .wallet-deposits-withdrawals {
   &__row:nth-child(2n + 1) {
