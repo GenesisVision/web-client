@@ -11,7 +11,7 @@ import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-
 
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletContainer from "./wallet-container/wallet-container";
+import WalletTables from "./wallet-tables/wallet-tables";
 
 class _WalletCurrency extends React.PureComponent<Props, State> {
   state = {
@@ -70,7 +70,7 @@ class _WalletCurrency extends React.PureComponent<Props, State> {
             currency={info.currency}
           />
         </div>
-        <WalletContainer currency={info.currency} />
+        <WalletTables currency={info.currency} />
         <WalletAddFundsPopup
           currentWallet={currentWallet}
           open={this.state.isOpenAddFundsPopup}

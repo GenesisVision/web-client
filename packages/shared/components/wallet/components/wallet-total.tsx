@@ -10,8 +10,8 @@ import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletContainerTotal from "./wallet-container/wallet-container-total";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
+import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
 
 const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
   t,
@@ -32,7 +32,7 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
         invested={wallet.grandTotal.investedCcy}
         currency={wallet.grandTotal.currencyCcy}
       />
-      <WalletContainerTotal
+      <WalletTablesTotal
         copyTradingAccounts={copyTradingAccounts}
         wallets={wallet.wallets}
         copytrading={role === ROLE.INVESTOR}

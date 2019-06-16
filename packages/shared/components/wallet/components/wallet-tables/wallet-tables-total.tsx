@@ -1,4 +1,4 @@
-import "./wallet-container.scss";
+import "./wallet-tables.scss";
 
 import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import { Location } from "history";
@@ -13,16 +13,16 @@ import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 import Tooltip from "shared/components/tooltip/tooltip";
 
-import WalletCopytrading from "../wallet-copytrading/wallet-copytrading";
-import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposits-withdrawals-row";
-import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
-import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
-import WalletList from "../wallet-list/wallet-list";
-import TransactionsRow from "../wallet-transactions/transactions-row";
-import WalletTransactions from "../wallet-transactions/wallet-transactions";
-import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
+import WalletCopytrading from "./wallet-copytrading/wallet-copytrading";
+import AllDepositsWithdrawalsRow from "./wallet-deposits-withdrawals/all-deposits-withdrawals-row";
+import WalletDepositsWithdrawals from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals";
+import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
+import WalletList from "./wallet-list/wallet-list";
+import TransactionsRow from "./wallet-transactions/transactions-row";
+import WalletTransactions from "./wallet-transactions/wallet-transactions";
+import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "./wallet-transactions/wallet-transactions.constants";
 
-class _WalletContainerTotal extends React.PureComponent<Props, State> {
+class _WalletTablesTotal extends React.PureComponent<Props, State> {
   state = {
     tab: TABS.WALLETS_TAB
   };
@@ -184,5 +184,5 @@ interface State {
 const WalletContainerTotal = compose<React.ComponentType<OwnProps>>(
   translate(),
   withRouter
-)(_WalletContainerTotal);
+)(_WalletTablesTotal);
 export default WalletContainerTotal;

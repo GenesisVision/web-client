@@ -916,6 +916,7 @@
   },
   "wallet-copytrading-page": {
     "title": "Copytrading account",
+    "copytrading-accounts": "Copytrading accounts",
     "balance": "Balance",
     "equity": "Equity",
     "profit": "Profit"

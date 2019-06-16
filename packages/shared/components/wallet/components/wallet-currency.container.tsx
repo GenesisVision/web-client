@@ -8,13 +8,13 @@ import { RootState } from "shared/reducers/root-reducer";
 
 import { walletSelector as walletDataSelector } from "../reducers/wallet.reducers";
 import { WalletRouteProps } from "../wallet.routes";
-import WalletContainerLoader from "./wallet-balance/wallet-container-loader";
 import WalletCurrency from "./wallet-currency";
+import WalletLoader from "./wallet-loader";
 
 const _WalletCurrencyContainer: React.FC<Props> = ({ info, isPending }) => (
   <WalletCurrency
     condition={!isPending && !!info}
-    loader={!info && !isPending ? <NotFoundPage /> : <WalletContainerLoader />}
+    loader={!info && !isPending ? <NotFoundPage /> : <WalletLoader />}
     info={info!}
   />
 );
