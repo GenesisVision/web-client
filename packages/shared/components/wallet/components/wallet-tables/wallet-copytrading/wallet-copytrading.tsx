@@ -30,7 +30,6 @@ class _WalletCopytrading extends React.PureComponent<Props, State> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
-    isOpenTransferPopup: false,
     currentAccount: undefined
   };
 
@@ -186,7 +185,6 @@ interface DispatchProps {
 interface State {
   isOpenAddFundsPopup: boolean;
   isOpenWithdrawPopup: boolean;
-  isOpenTransferPopup: boolean;
   currentAccount?: CopyTradingAccountInfo;
 }
 
