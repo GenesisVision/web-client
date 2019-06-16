@@ -9,13 +9,11 @@ import WalletSettingsLoader from "./wallet-settings/wallet-settings-loader";
 import WalletTablesLoader from "./wallet-tables/wallet-tables-loader";
 
 const WalletContainerLoader = () => (
-  <Page title={""}>
-    <div className="wallet-balance">
-      <WalletTitleLoader />
-      <WalletBalanceLoader />
-      <WalletTablesLoader />
-    </div>
-  </Page>
+  <div className="wallet-balance">
+    <WalletTitleLoader />
+    <WalletBalanceLoader />
+    <WalletTablesLoader />
+  </div>
 );
 
 const WalletTitleLoader: React.FC = () => (
