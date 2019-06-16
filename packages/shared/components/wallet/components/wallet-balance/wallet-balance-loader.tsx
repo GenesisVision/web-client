@@ -1,8 +1,6 @@
 import "./wallet-balance.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
 import Surface from "shared/components/surface/surface";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 import Table from "shared/components/table/components/table";
@@ -10,10 +8,14 @@ import Table from "shared/components/table/components/table";
 import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-tables/wallet-transactions/wallet-transactions.constants";
 import WalletSettingsLoader from "./wallet-settings-loader";
 
-const _WalletBalanceLoader: React.FC<InjectedTranslateProps> = ({ t }) => (
+const WalletBalanceLoader: React.FC = () => (
   <>
     <div className="wallet-balance__wrapper">
-      <h1 className="wallet-balance__title">{t("wallet-page.title")}</h1>
+      <h1 className="wallet-balance__title">
+        <SvgLoader height={15} width={100}>
+          <rect x="0" y="0" width="100" height="15" rx="8" ry="8" />
+        </SvgLoader>
+      </h1>
       <WalletSettingsLoader />
     </div>
     <div className="wallet-balance__wrapper">
@@ -45,7 +47,6 @@ const _WalletBalanceLoader: React.FC<InjectedTranslateProps> = ({ t }) => (
     </Surface>
   </>
 );
-const WalletBalanceLoader = translate()(_WalletBalanceLoader);
 
 const WalletLoaderStat = () => (
   <div className="wallet-balance__loader-stat">
