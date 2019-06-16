@@ -120,5 +120,5 @@ export interface Props extends InjectedTranslateProps {
   openNotifications: () => void;
 }
 
-const Header = translate()(_Header);
+const Header = translate()(React.memo(_Header));
 export default Header;
