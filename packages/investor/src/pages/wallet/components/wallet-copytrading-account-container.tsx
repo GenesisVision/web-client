@@ -2,7 +2,7 @@ import { CopyTradingAccountInfo } from "gv-api-web";
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
 import NotFoundPage from "shared/components/not-found/not-found";
-import WalletContainerLoader from "shared/components/wallet/components/wallet-balance/wallet-container-loader";
+import WalletLoader from "shared/components/wallet/components/wallet-loader";
 
 import { fetchWalletCopytradingAccount } from "../services/wallet-copytrading.service";
 import WalletCopytradingAccount from "./wallet-copytrading-account";
@@ -38,7 +38,7 @@ class WalletCopytradingAccountContainer extends React.PureComponent<
       <WalletCopytradingAccount
         account={account!}
         condition={!!account}
-        loader={<WalletContainerLoader />}
+        loader={<WalletLoader />}
       />
     );
   }
