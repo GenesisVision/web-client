@@ -1,4 +1,4 @@
-import "./wallet-balance.scss";
+import "../wallet-balance/wallet-balance.scss";
 
 import * as React from "react";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
