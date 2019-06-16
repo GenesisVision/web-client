@@ -20,7 +20,8 @@ const _WalletBalanceElements: React.FC<Props> = ({
 }) => (
   <div className="wallet-balance__wrapper">
     <WalletBalanceElement
-      value={total}
+      value={total!}
+      condition={total !== undefined}
       title={t("wallet-page.total-balance")}
       currency={currency}
       pieContainer={false}
@@ -29,7 +30,8 @@ const _WalletBalanceElements: React.FC<Props> = ({
     />
     <div className="wallet-balance__elements">
       <WalletBalanceElement
-        value={available}
+        value={available!}
+        condition={available !== undefined}
         totalValue={total}
         title={t("wallet-page.available")}
         currency={currency}
@@ -37,7 +39,8 @@ const _WalletBalanceElements: React.FC<Props> = ({
         tooltipContentLabel={t("wallet-page.tooltip.available")}
       />
       <WalletBalanceElement
-        value={invested}
+        value={invested!}
+        condition={invested !== undefined}
         totalValue={total}
         title={t("wallet-page.invested")}
         currency={currency}
@@ -45,7 +48,8 @@ const _WalletBalanceElements: React.FC<Props> = ({
         tooltipContentLabel={t("wallet-page.tooltip.invested")}
       />
       <WalletBalanceElement
-        value={pending}
+        value={pending!}
+        condition={pending !== undefined}
         totalValue={total}
         title={t("wallet-page.pending")}
         currency={currency}
@@ -57,10 +61,10 @@ const _WalletBalanceElements: React.FC<Props> = ({
 );
 
 interface Props extends InjectedTranslateProps {
-  total: number;
-  available: number;
-  invested: number;
-  pending: number;
+  total?: number;
+  available?: number;
+  invested?: number;
+  pending?: number;
   currency: CurrencyEnum;
 }
 
