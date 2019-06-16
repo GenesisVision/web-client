@@ -4,7 +4,6 @@ import * as React from "react";
 import Page from "shared/components/page/page";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 
-import WalletImage from "../../avatar/wallet-image/wallet-image";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletSettingsLoader from "./wallet-settings/wallet-settings-loader";
 import WalletTablesLoader from "./wallet-tables/wallet-tables-loader";
