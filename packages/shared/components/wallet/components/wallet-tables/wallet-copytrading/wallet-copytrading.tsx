@@ -85,7 +85,9 @@ class _WalletCopytrading extends React.PureComponent<Props, State> {
                     pathname: composeWalletCopytradingCurrencyUrl(
                       account.currency.toLowerCase()
                     ),
-                    state: `/ ${t("wallet-copytrading-page.title")}`
+                    state: `/ ${t(
+                      "wallet-copytrading-page.copytrading-accounts"
+                    )}`
                   }}
                 >
                   <WalletImage
