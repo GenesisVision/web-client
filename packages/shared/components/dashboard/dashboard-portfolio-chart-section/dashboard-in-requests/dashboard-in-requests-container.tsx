@@ -16,7 +16,6 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import GVScroll from "shared/components/scroll/gvscroll";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
@@ -65,18 +64,16 @@ class _DashboardInRequestsContainer extends React.PureComponent<Props, State> {
           noPadding
           onClose={this.handleCloseDropdown}
         >
-          <GVScroll autoHeight>
-            <div className="dashboard-request-popover">
-              {inRequests.requests.map(x => (
-                <DashboardRequest
-                  key={x.id}
-                  request={x}
-                  cancelRequest={service.cancelRequest}
-                  onApplyCancelRequest={this.handleCloseDropdown}
-                />
-              ))}
-            </div>
-          </GVScroll>
+          <div className="dashboard-request-popover">
+            {inRequests.requests.map(x => (
+              <DashboardRequest
+                key={x.id}
+                request={x}
+                cancelRequest={service.cancelRequest}
+                onApplyCancelRequest={this.handleCloseDropdown}
+              />
+            ))}
+          </div>
         </Popover>
       </div>
     );

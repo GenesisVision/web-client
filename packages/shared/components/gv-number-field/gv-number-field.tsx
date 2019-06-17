@@ -13,8 +13,20 @@ class GVNumberFiled extends React.PureComponent<Props, State> {
     this.setState({ init: false });
     form.setFieldValue(name, value.value);
   };
+
+  input?: HTMLDivElement;
+
+  componentDidMount() {
+    if (this.input && this.props.autoFocus) {
+      const input = this.input;
+      setImmediate(() => {
+        input.focus && input.focus();
+      });
+    }
+  }
+
   render() {
-    const { emptyInit, name, value, ...props } = this.props;
+    const { emptyInit, name, value, autoFocus, ...props } = this.props;
     const setEmpty = emptyInit && this.state.init;
     return (
       //@ts-ignore
@@ -24,6 +36,7 @@ class GVNumberFiled extends React.PureComponent<Props, State> {
         name={name}
         onValueChange={this.handleOnChange}
         InputComponent={NumberFormat}
+        getInputRef={(ref: HTMLDivElement) => (this.input = ref)}
       />
     );
   }

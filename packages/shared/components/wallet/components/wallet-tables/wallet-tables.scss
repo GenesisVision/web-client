@@ -5,6 +5,12 @@
 .wallet-container {
   @include adaptive-margin(top, $padding-xxsmall);
 
+  &__tabs {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .gv-tab {
     white-space: nowrap;
   }
