@@ -8,7 +8,6 @@ import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
   ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
@@ -99,7 +98,7 @@ class _FundsTableContainer extends React.PureComponent<Props, State> {
         filtering={{
           ...filters.filtering
         }}
-        renderFilters={(updateFilter, filtering: FilteringType) => (
+        renderFilters={(updateFilter, filtering) => (
           <>
             <FundAssetFilter
               name={FUND_ASSET_FILTER_NAME}

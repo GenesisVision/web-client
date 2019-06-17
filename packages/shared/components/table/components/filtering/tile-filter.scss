@@ -1,0 +1,69 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+
+.tile-filter {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  margin-right: 10px;
+  cursor: default;
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding: 0 10px;
+    margin-right: 20px;
+  }
+
+  &__button-plus {
+    @include font-size(17px);
+    font-weight: 400;
+    padding-right: 3px;
+  }
+
+  &__button-remove {
+    padding: 0;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #293842;
+    border: 2px solid $panel-background-color;
+    border-radius: 50%;
+    top: -10px;
+    right: -10px;
+    &:hover:not(disabled) {
+      background-color: #161b20;
+    }
+
+    .icon {
+      height: 6px;
+      width: 6px;
+    }
+  }
+
+  &__button-add {
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    transition-property: border-color;
+    border: 1px solid #6e757b;
+    background-color: transparent;
+    line-height: 1;
+    color: $main-color;
+    @include font-size(11px);
+    border-radius: 19.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    height: 18px;
+    padding: 0 $padding-xxsmall;
+    white-space: nowrap;
+
+    &:hover:not(:disabled),
+    &:active:not(:disabled),
+    &--active {
+      border-color: $main-color;
+      background-color: $main-color;
+      color: $panel-background-color;
+    }
+  }
+}

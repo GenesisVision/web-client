@@ -34,18 +34,12 @@ class FundAssetPopover extends React.PureComponent<
           .indexOf(searchValue.toUpperCase())
     );
   };
-  // removeSelected = (
-  //   arr: ProgramTag[],
-  //   selectedArr: ProgramTag[]
-  // ): ProgramTag[] =>
-  //   arr.filter(item => !selectedArr.find(select => item.name === select.name));
-  // filtering = (searchValue: string, array: ProgramTag[]): ProgramTag[] =>
-  //   searchValue
-  //     ? array.filter(
-  //         (item: ProgramTag) =>
-  //           ~item.name.toLowerCase().indexOf(searchValue.toLowerCase())
-  //       )
-  //     : array;
+
+  handleClick = (asset: PlatformAsset) => () => {
+    if (this.props.changeFilter) {
+      this.props.changeFilter(asset.id);
+    }
+  };
 
   render() {
     const { filteredAssets } = this.state;
@@ -53,12 +47,10 @@ class FundAssetPopover extends React.PureComponent<
       <div className="tag-filter">
         <div className="tag-filter__title">Add asset</div>
         <div className="tag-filter__search">
-          {/*
-          //@ts-ignore*/}
           <GVTextField
             name="queryValue"
             wrapperClassName="popover-add__search-input"
-            placeholder="Search for tags"
+            placeholder="Search for assets"
             autoComplete="off"
             adornmentPosition="start"
             onChange={this.search}
@@ -69,7 +61,11 @@ class FundAssetPopover extends React.PureComponent<
             <table>
               <tbody>
                 {filteredAssets.map((asset, idx) => (
-                  <tr key={idx} className="popover-add__asset">
+                  <tr
+                    key={idx}
+                    className="popover-add__asset"
+                    onClick={this.handleClick(asset)}
+                  >
                     <td className="popover-add__asset-icon-container">
                       <FundAssetImage
                         url={asset.icon}
@@ -100,5 +96,5 @@ interface IFundAssetPopoverState {
 interface IFundAssetPopoverProps {
   value: string[];
   values: PlatformAsset[];
-  changeFilter?(value: PlatformAsset[]): void;
+  changeFilter?(value: string): void;
 }

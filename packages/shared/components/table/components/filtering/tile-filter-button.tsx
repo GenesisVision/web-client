@@ -11,13 +11,13 @@ const _TileFilterButton: React.FC<ITagFilterButton> = ({
     <GVButton
       variant="text"
       color="secondary"
-      className={classNames("tag-filter__button tag-button", {
-        "tag-filter__button--active": isActive
+      className={classNames("tile-filter__button-add", {
+        "tile-filter__button-add--active": isActive
       })}
       onClick={onClick}
     >
       <>
-        <span className="tag-filter__button-plus">+</span>
+        <span className="tile-filter__button-plus">+</span>
         {title}
       </>
     </GVButton>
