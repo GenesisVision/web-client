@@ -117,11 +117,13 @@ const _ManagerPageLoader: React.FC<Props> = ({ t }) => (
           </div>
           <div className="table-wrapper">
             <div className="table__toolbar" />
-            <table className="table">
-              <tbody>
-                <TableLoader />
-              </tbody>
-            </table>
+            <div className="table__scroll">
+              <table className="table">
+                <tbody>
+                  <TableLoader />
+                </tbody>
+              </table>
+            </div>
           </div>
         </Surface>
       </div>
