@@ -26,6 +26,7 @@ class CreateFundSettingsAddAsset extends React.PureComponent {
         )
       : array;
   };
+
   render() {
     const {
       anchor,

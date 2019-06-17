@@ -25,6 +25,7 @@ export interface GVTextFieldProps {
   onBlur?: (e: any) => void;
   onChange?: (e: React.ChangeEvent<any>) => void;
   form?: any;
+  autoFocus?: boolean;
 }
 
 export interface GVTextFieldState {
@@ -35,6 +36,8 @@ class GVTextField extends React.PureComponent<
   GVTextFieldProps,
   GVTextFieldState
 > {
+  input = React.createRef<HTMLInputElement | HTMLTextAreaElement>();
+
   static defaultProps: Partial<GVTextFieldProps> = {
     type: "text",
     adornmentPosition: "end",
@@ -109,6 +112,15 @@ class GVTextField extends React.PureComponent<
     );
   };
 
+  componentDidMount() {
+    if (this.props.autoFocus && this.input.current) {
+      const input = this.input.current;
+      setImmediate(() => {
+        input.focus && input.focus();
+      });
+    }
+  }
+
   renderInput = () => {
     const {
       type,
@@ -125,6 +137,7 @@ class GVTextField extends React.PureComponent<
       adornment,
       adornmentPosition,
       form,
+      autoFocus,
       ...otherProps
     } = this.props;
     let Input: React.ComponentType<any> | string;
@@ -137,6 +150,7 @@ class GVTextField extends React.PureComponent<
     }
     return (
       <Input
+        ref={this.input}
         type={type}
         className={classnames("gv-text-field__input", inputClassName)}
         onFocus={this.handleFocus}
