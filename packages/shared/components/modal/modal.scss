@@ -1,6 +1,7 @@
 .modal {
   &[class*="position"] {
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
     top: 0;
     bottom: 0;
