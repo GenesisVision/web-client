@@ -11,6 +11,7 @@
   display: flex;
   box-sizing: border-box;
   color: $main-color;
+  -webkit-overflow-scrolling: touch;
 
   &--left {
     left: 0;
