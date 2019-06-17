@@ -46,6 +46,7 @@ const ProgramTableRowShort: React.FC<
     statistic,
     logo,
     level,
+    levelProgress,
     color,
     url,
     currency,
@@ -79,6 +80,7 @@ const ProgramTableRowShort: React.FC<
             <AssetAvatar
               url={logo}
               level={level}
+              levelProgress={levelProgress}
               alt={program.title}
               color={color}
               tooltip={

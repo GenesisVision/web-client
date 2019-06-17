@@ -98,6 +98,9 @@ $border-radius: 5px;
 
     &:hover {
       background-color: lighten($secondary-color, 2%);
+      & .program-avatar__level {
+        background-color: lighten($secondary-color, 2%);
+      }
     }
   }
   &__collapse-icon {
@@ -113,7 +116,7 @@ $border-radius: 5px;
       margin-left: $padding-xxsmall;
     }
     & .program-avatar__level {
-      border-color: $secondary-color;
+      background-color: $secondary-color;
     }
   }
 
