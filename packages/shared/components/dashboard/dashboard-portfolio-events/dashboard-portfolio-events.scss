@@ -20,7 +20,9 @@
     left: 0;
     bottom: 0;
     right: 0;
-    overflow: overlay;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     @include horizontal-paddings($padding-small, 2);
   }
 
