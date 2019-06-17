@@ -7,6 +7,7 @@ import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
+import Tooltip from "shared/components/tooltip/tooltip";
 
 const _ProgramUnfollowForm: React.FC<Props> = ({
   t,
@@ -26,7 +27,15 @@ const _ProgramUnfollowForm: React.FC<Props> = ({
         >
           {Object.keys(modes).map((mode: string) => (
             <option value={modes[mode].value} key={modes[mode].value}>
-              {t(modes[mode].label)}
+              <Tooltip
+                render={() => (
+                  <div className="tooltip__content">
+                    {t(modes[mode].tooltip)}
+                  </div>
+                )}
+              >
+                <span>{t(modes[mode].label)}</span>
+              </Tooltip>
             </option>
           ))}
         </GVFormikField>
@@ -66,17 +75,24 @@ enum FIELDS {
 
 type mode = {
   label: string;
+  tooltip: string;
   value: DetachFromSignalProviderModeEnum;
 };
 
 const modes: { [key: string]: mode } = {
-  none: { label: "unfollow-program.modes.manual-closing", value: "None" },
+  none: {
+    label: "unfollow-program.modes.manual-closing.label",
+    tooltip: "unfollow-program.modes.manual-closing.tooltip",
+    value: "None"
+  },
   closeOnly: {
-    label: "unfollow-program.modes.close-only",
+    label: "unfollow-program.modes.close-only.label",
+    tooltip: "unfollow-program.modes.close-only.tooltip",
     value: "ProviderCloseOnly"
   },
   closeAll: {
-    label: "unfollow-program.modes.close-all-immediately",
+    label: "unfollow-program.modes.close-all-immediately.label",
+    tooltip: "unfollow-program.modes.close-all-immediately.tooltip",
     value: "CloseAllImmediately"
   }
 };
