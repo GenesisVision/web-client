@@ -8,6 +8,7 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
 
@@ -42,7 +43,15 @@ const _FollowParams: React.FC<
         >
           {Object.keys(modes).map((mode: string) => (
             <option value={modes[mode].value} key={modes[mode].value}>
-              {modes[mode].label}
+              <Tooltip
+                render={() => (
+                  <div className="tooltip__content">
+                    {t(modes[mode].tooltip)}
+                  </div>
+                )}
+              >
+                <span>{t(modes[mode].label)}</span>
+              </Tooltip>
             </option>
           ))}
         </GVFormikField>
@@ -101,13 +110,26 @@ enum FIELDS {
 
 type mode = {
   label: string;
+  tooltip: string;
   value: AttachToSignalProviderModeEnum;
 };
 
 const modes: { [key: string]: mode } = {
-  byBalance: { label: "By balance", value: "ByBalance" },
-  percentage: { label: "Percentage", value: "Percent" },
-  fixed: { label: "Fixed", value: "Fixed" }
+  byBalance: {
+    label: "follow-program.modes.byBalance.label",
+    tooltip: "follow-program.modes.byBalance.tooltip",
+    value: "ByBalance"
+  },
+  percentage: {
+    label: "follow-program.modes.percentage.label",
+    tooltip: "follow-program.modes.percentage.tooltip",
+    value: "Percent"
+  },
+  fixed: {
+    label: "follow-program.modes.fixed.label",
+    tooltip: "follow-program.modes.fixed.tooltip",
+    value: "Fixed"
+  }
 };
 
 export interface FollowParamsFormValues {

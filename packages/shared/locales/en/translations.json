@@ -325,12 +325,35 @@
     "text": "Do you really want to unsubscribe?",
     "success-alert-message": "You have been unsubscribed.",
     "modes": {
-      "manual-closing": "Manual closing",
-      "close-only": "Close only",
-      "close-all-immediately": "Close all immediately"
+      "manual-closing": {
+        "label": "Manual closing",
+        "tooltip": "An investor at any time can perform a manual closing of all of the open positions."
+      },
+      "close-only": {
+        "label": "Close only",
+        "tooltip": "New trades do not open, open positions are closed as the manager closes them."
+      },
+      "close-all-immediately": {
+        "label": "Close all immediately",
+        "tooltip": "Instant closing of all open positions."
+      }
     }
   },
   "follow-program": {
+    "modes":{
+      "byBalance": {
+        "label": "By balance",
+        "tooltip": "The volume of the opened positions is proportional to the balance of the signal provider and an investor."
+      },
+      "percentage": {
+        "label": "Percentage",
+        "tooltip": "Positions are opened according to the percentage of the volume of positions opened by the signal provider."
+      },
+      "fixed": {
+        "label": "Fixed",
+        "tooltip": "Each new position is opened at a fixed amount."
+      }
+    },
     "create-account": {
       "title": "Account creation",
       "available": "Available in wallet",
