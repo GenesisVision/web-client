@@ -16,8 +16,9 @@ $avatar-big-size: 120px;
     width: $avatar-small-size;
     margin-right: 24px;
     .program-avatar__level {
-      right: -24px;
-      border-width: 3px;
+      right: -25px;
+      height: 32px;
+      width: 32px;
     }
   }
 
@@ -26,8 +27,9 @@ $avatar-big-size: 120px;
     width: $avatar-medium-size;
     margin-right: 20px;
     .program-avatar__level {
-      right: -20px;
-      border-width: 5px;
+      right: -18px;
+      height: 36px;
+      width: 36px;
     }
   }
 
@@ -37,6 +39,8 @@ $avatar-big-size: 120px;
     margin-right: 22px;
     .program-avatar__level {
       right: -20px;
+      height: 36px;
+      width: 36px;
     }
   }
 
@@ -46,12 +50,10 @@ $avatar-big-size: 120px;
     justify-content: center;
     align-items: center;
     background-color: $panel-background-color;
-    height: 40px;
-    width: 40px;
     border-radius: 50%;
     & .pie-container {
-      height: 30px;
-      width: 30px;
+      height: 26px;
+      width: 26px;
     }
   }
 
