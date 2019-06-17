@@ -30,6 +30,7 @@ const _WalletBalanceElement: React.FC<Props> = ({
     {pieContainer && (
       <PieContainer
         value={getPercentageValue(value, totalValue)}
+        label={`${getPercentageValue(value, totalValue)} %`}
         color={color}
       />
     )}
