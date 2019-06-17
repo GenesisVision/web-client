@@ -109,38 +109,40 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
           isViewSwitchEnabled={this.isViewSwitchEnabled}
           createButtonToolbar={createButtonToolbar}
         />
-        {view === LIST_VIEW.CARDS && (
-          <div className={classNames("table", className)}>
-            <TableBody
-              isPending={isPending}
-              items={items}
-              className="table-cards"
-              tag="div"
-              view={LIST_VIEW.CARDS}
-              renderBodyItem={renderBodyItem!}
-            />
-          </div>
-        )}
-        {view === LIST_VIEW.TABLE && (
-          <table className={classNames("table", className)}>
-            <TableHeader
-              columns={columns}
-              sorting={sorting}
-              updateSorting={updateSorting}
-              renderHeader={renderHeader}
-            />
-            <TableBody
-              isPending={isPending}
-              items={items}
-              className="table__body"
-              tag="tbody"
-              view={LIST_VIEW.TABLE}
-              updateRow={updateRow}
-              updateItems={updateItems}
-              renderBodyItem={renderBodyItem!}
-            />
-          </table>
-        )}
+        <div className={"table__scroll"}>
+          {view === LIST_VIEW.CARDS && (
+            <div className={classNames("table", className)}>
+              <TableBody
+                isPending={isPending}
+                items={items}
+                className="table-cards"
+                tag="div"
+                view={LIST_VIEW.CARDS}
+                renderBodyItem={renderBodyItem!}
+              />
+            </div>
+          )}
+          {view === LIST_VIEW.TABLE && (
+            <table className={classNames("table", className)}>
+              <TableHeader
+                columns={columns}
+                sorting={sorting}
+                updateSorting={updateSorting}
+                renderHeader={renderHeader}
+              />
+              <TableBody
+                isPending={isPending}
+                items={items}
+                className="table__body"
+                tag="tbody"
+                view={LIST_VIEW.TABLE}
+                updateRow={updateRow}
+                updateItems={updateItems}
+                renderBodyItem={renderBodyItem!}
+              />
+            </table>
+          )}
+        </div>
         <TableFooter
           condition={paging && !!(paging.totalPages && paging.totalPages >= 2)}
           paging={paging}
