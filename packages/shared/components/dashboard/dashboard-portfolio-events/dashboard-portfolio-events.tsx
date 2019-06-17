@@ -17,10 +17,6 @@ import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
 
-const DASHBOARD_EVENTS_STYLE = {
-  height: "100%"
-};
-
 const _Events: React.FC<IEventsProps> = ({
   events,
   total,
