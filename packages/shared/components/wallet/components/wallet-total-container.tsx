@@ -11,7 +11,7 @@ import {
   walletSelector
 } from "../reducers/wallet.reducers";
 import { WalletRouteProps } from "../wallet.routes";
-import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
+import WalletContainerLoader from "./wallet-container-loader";
 import WalletTotal from "./wallet-total";
 
 const _WalletTotalContainer: React.FC<Props & WalletRouteProps> = ({
@@ -21,7 +21,7 @@ const _WalletTotalContainer: React.FC<Props & WalletRouteProps> = ({
 }) => (
   <WalletTotal
     condition={!!wallet}
-    loader={<WalletBalanceLoader />}
+    loader={<WalletContainerLoader />}
     wallet={wallet!}
     copyTradingAccounts={copyTradingAccounts}
   />

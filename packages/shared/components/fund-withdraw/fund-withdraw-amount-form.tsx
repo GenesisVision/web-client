@@ -32,18 +32,19 @@ const _FundWithdrawAmountForm: React.FC<
     []
   );
 
-  const setMaxAmount = useCallback(() => setFieldValue("percent", "100"), [
-    setFieldValue
-  ]);
+  const setMaxAmount = useCallback(
+    () => setFieldValue(FIELDS.percent, "100"),
+    []
+  );
 
   const amountToWithdrawCcy = calculatePercentage(
     availableToWithdraw,
-    values.percent || 0
+    values[FIELDS.percent] || 0
   );
   return (
     <form id="withdraw-form" onSubmit={handleSubmit}>
       <InputAmountField
-        name="percent"
+        name={FIELDS.percent}
         label={t("withdraw-fund.amount-to-withdraw")}
         placeholder="%"
         currency="%"
@@ -61,7 +62,7 @@ const _FundWithdrawAmountForm: React.FC<
       <FundWithdrawResult
         availableToWithdraw={availableToWithdraw}
         currency={wallet.currency}
-        percent={values.percent || 0}
+        percent={values[FIELDS.percent] || 0}
         exitFee={exitFee}
       />
       <div className="dialog__buttons">
@@ -78,22 +79,26 @@ const FundWithdrawAmountForm = compose<ComponentType<OwnProps>>(
   withFormik<Props, FormValues>({
     displayName: "withdraw-form",
     mapPropsToValues: ({ percent }) => ({
-      percent: percent
+      [FIELDS.percent]: percent || 0.01
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
-        percent: number()
+        [FIELDS.percent]: number()
           .required(t("withdraw-fund.validation.required"))
           .min(0.01, t("withdraw-fund.validation.min-value"))
       }),
     handleSubmit: (values, { props }) => {
-      if (!values.percent) return;
-      props.onSubmit(values.percent);
+      if (!values[FIELDS.percent]) return;
+      props.onSubmit(values[FIELDS.percent]);
     }
   }),
   React.memo
 )(_FundWithdrawAmountForm);
 export default FundWithdrawAmountForm;
+
+enum FIELDS {
+  percent = "percent"
+}
 
 interface OwnProps {
   wallets: WalletBaseData[];
@@ -107,5 +112,5 @@ interface OwnProps {
 interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface FormValues {
-  percent?: number;
+  [FIELDS.percent]: number;
 }

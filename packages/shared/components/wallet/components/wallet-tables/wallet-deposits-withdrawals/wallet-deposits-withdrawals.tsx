@@ -1,8 +1,7 @@
-import "./wallet-transactions.scss";
+import "./wallet-deposits-withdrawals.scss";
 
 import { PlatformInfo } from "gv-api-web";
-import { RefObject } from "react";
-import * as React from "react";
+import React, { RefObject } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -22,13 +21,13 @@ import {
 } from "shared/components/table/components/table.types";
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
+import { reduceFilters } from "shared/components/wallet/components/wallet-tables/wallet-transactions/wallet-transaction-type-filter.helpers";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
-import { WalletLastUpdateState } from "../../reducers/wallet-last-update";
-import { fetchMultiTransactions } from "../../services/wallet.services";
+import { WalletLastUpdateState } from "../../../reducers/wallet-last-update";
+import { fetchMultiTransactionsExternal } from "../../../services/wallet.services";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -42,39 +41,41 @@ const DEFAULT_FILTERS = [
   }
 ];
 
-class _WalletTransactions extends React.PureComponent<Props> {
+class _WalletDepositsWithdrawals extends React.PureComponent<Props> {
   ref: RefObject<TableModule> = React.createRef();
 
   componentDidUpdate(prevProps: Props) {
-    if (this.props.timestamp !== prevProps.timestamp)
+    if (this.props.timestamp !== prevProps.timestamp) {
       this.ref.current!.updateItems();
+    }
   }
 
-  fetchMultiTransactions: GetItemsFuncType = filters =>
-    fetchMultiTransactions(this.props.currency, filters);
+  fetchMultiTransactionsExternal: GetItemsFuncType = filters => {
+    return fetchMultiTransactionsExternal(this.props.currency, filters);
+  };
 
   render() {
     const { t, renderBodyRow, columns, platformData } = this.props;
     if (!platformData) return null;
-    const { transactionType } = platformData.enums.multiWallet;
+    const { externalTransactionType } = platformData.enums.multiWallet;
     return (
-      <div className="wallet-transactions">
+      <div className="wallet-deposits-withdrawals">
         <TableModule
           ref={this.ref}
           defaultFilters={DEFAULT_FILTERS}
           paging={DEFAULT_PAGING}
           filtering={{
             ...TRANSACTIONS_FILTERS,
-            type: transactionType[0]
+            type: externalTransactionType[0]
           }}
-          getItems={this.fetchMultiTransactions}
+          getItems={this.fetchMultiTransactionsExternal}
           renderFilters={(updateFilter, filtering) => (
             <>
               <SelectFilter
                 name={"type"}
                 label="Type"
                 value={filtering["type"] as SelectFilterType} //TODO fix filtering types
-                values={reduceFilters(transactionType)}
+                values={reduceFilters(externalTransactionType)}
                 onChange={updateFilter}
               />
               <DateRangeFilter
@@ -88,11 +89,11 @@ class _WalletTransactions extends React.PureComponent<Props> {
           columns={columns}
           renderHeader={column => (
             <span
-              className={`wallet-transactions__cell wallet-transactions__cell--${
+              className={`wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--${
                 column.name
               }`}
             >
-              {t(`wallet-page.transactions.${column.name}`)}
+              {t(`wallet-page.deposits-withdrawals.${column.name}`)}
             </span>
           )}
           renderBodyRow={renderBodyRow}
@@ -119,8 +120,8 @@ interface StateProps extends WalletLastUpdateState {
   platformData?: PlatformInfo;
 }
 
-const WalletTransactions = compose<React.ComponentType<OwnProps>>(
+const WalletDepositsWithdrawals = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect(mapStateToProps)
-)(_WalletTransactions);
-export default WalletTransactions;
+)(_WalletDepositsWithdrawals);
+export default WalletDepositsWithdrawals;

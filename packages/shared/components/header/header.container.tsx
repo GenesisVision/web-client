@@ -1,7 +1,12 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import { logout } from "shared/components/auth/login/login.service";
 import Header from "shared/components/header/header";
 import {
@@ -83,10 +88,10 @@ interface DispatchProps {
 
 interface OwnProps {}
 
-const HeaderContainer = connect<StateProps, DispatchProps, OwnProps, RootState>(
-  mapStateToProps,
-  mapDispatchToProps,
-  null,
-  { pure: false }
+const HeaderContainer = compose<React.ComponentType<OwnProps>>(
+  connect<StateProps, DispatchProps, OwnProps, RootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(_HeaderContainer);
 export default HeaderContainer;
