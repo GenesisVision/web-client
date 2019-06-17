@@ -3,17 +3,16 @@
 
 .tile-filter {
   display: flex;
-  flex-wrap: wrap;
-  position: relative;
-  margin-right: 10px;
-  cursor: default;
+
+  &__value {
+    display: flex;
+  }
 
   &__item {
-    display: inline-flex;
-    align-items: center;
+    display: flex;
     position: relative;
-    padding: 0 10px;
-    margin-right: 20px;
+    align-items: center;
+    margin-right: $padding-xsmall;
   }
 
   &__button-plus {
@@ -32,7 +31,7 @@
     border-radius: 50%;
     top: -10px;
     right: -10px;
-    &:hover:not(disabled) {
+    &:hover:not(:disabled) {
       background-color: #161b20;
     }
 
@@ -42,25 +41,22 @@
     }
   }
 
-  &__button-add {
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
+  &__button-add.gv-btn {
+    @include font-size(11px);
+    border-radius: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 18px;
+    padding: 0 $padding-xxsmall;
+    white-space: nowrap;
     transition-property: border-color;
     border: 1px solid #6e757b;
     background-color: transparent;
-    line-height: 1;
     color: $main-color;
-    @include font-size(11px);
-    border-radius: 19.5px;
-    font-weight: 500;
-    text-transform: uppercase;
-    height: 18px;
-    padding: 0 $padding-xxsmall;
-    white-space: nowrap;
 
+    &.tile-filter__button-add--active,
     &:hover:not(:disabled),
-    &:active:not(:disabled),
-    &--active {
+    &:active:not(:disabled) {
       border-color: $main-color;
       background-color: $main-color;
       color: $panel-background-color;

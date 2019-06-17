@@ -38,7 +38,7 @@ class TileFilter<TValue, TValues> extends React.PureComponent<
     return (
       <>
         <div className="filter tile-filter">
-          <div className="filter__value">{selectedTiles}</div>
+          <div className="tile-filter__value">{selectedTiles}</div>
           <TileFilterButton
             isActive={!!anchor}
             onClick={this.handleOpenPopover}
