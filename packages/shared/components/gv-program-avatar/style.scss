@@ -36,8 +36,7 @@ $avatar-big-size: 120px;
     width: $avatar-big-size;
     margin-right: 22px;
     .program-avatar__level {
-      right: -22px;
-      border-width: 6px;
+      right: -20px;
     }
   }
 
@@ -46,33 +45,13 @@ $avatar-big-size: 120px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    height: 24px;
-    width: 24px;
-    border: solid $panel-background-color;
+    background-color: $panel-background-color;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
-    font-size: 0.8em;
-    font-weight: 600;
-    color: white;
-    &--1 {
-      background-color: $level-color-1;
-    }
-    &--2 {
-      background-color: $level-color-2;
-    }
-    &--3 {
-      background-color: $level-color-3;
-    }
-    &--4 {
-      background-color: $level-color-4;
-    }
-    &--5 {
-      background-color: $level-color-5;
-    }
-    &--6 {
-      background-color: $level-color-6;
-    }
-    &--7 {
-      background-color: $level-color-7;
+    & .pie-container {
+      height: 30px;
+      width: 30px;
     }
   }
 
