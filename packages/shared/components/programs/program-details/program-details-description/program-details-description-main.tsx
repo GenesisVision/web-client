@@ -70,6 +70,7 @@ class ProgramDetailsDescriptionMain extends React.PureComponent<
           <AssetAvatar
             url={programDescription.logo}
             level={programDescription.level}
+            levelProgress={programDescription.levelProgress}
             alt={programDescription.title}
             size="big"
             color={programDescription.color}
