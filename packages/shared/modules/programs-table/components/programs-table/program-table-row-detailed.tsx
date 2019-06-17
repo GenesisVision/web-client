@@ -75,6 +75,7 @@ class ProgramTableRowDetailed extends React.PureComponent<
                     <AssetAvatar
                       url={program.logo}
                       level={program.level}
+                      levelProgress={program.levelProgress}
                       alt={program.title}
                       size="medium"
                       color={program.color}
