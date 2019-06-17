@@ -21,6 +21,8 @@
   min-width: 200px;
   max-height: 200px;
   padding: 30px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 
   &__chart-asset {
     display: flex;
