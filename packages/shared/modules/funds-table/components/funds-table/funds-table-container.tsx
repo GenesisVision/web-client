@@ -13,6 +13,7 @@ import {
   toggleFavoriteFundDispatchable
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { fundAssetsSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import fundsApi from "shared/services/api-client/funds-api";
 
@@ -42,6 +43,7 @@ interface MergeProps {
 interface StateProps {
   isAuthenticated: boolean;
   data?: FundsList;
+  fundAssets: PlatformAsset[];
 }
 
 interface DispatchProps {
@@ -63,21 +65,10 @@ interface Props
     DispatchProps,
     RouteComponentProps {}
 
-interface State {
-  fundAssets?: PlatformAsset[];
-}
-
-class _FundsTableContainer extends React.PureComponent<Props, State> {
-  state = {
-    fundAssets: undefined
-  };
-
+class _FundsTableContainer extends React.PureComponent<Props> {
   componentDidMount() {
     const { service, defaultFilters } = this.props;
     service.getFunds(defaultFilters);
-    fundsApi.v10FundsAssetsGet().then(data => {
-      this.setState({ fundAssets: data.assets });
-    });
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -88,7 +79,15 @@ class _FundsTableContainer extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const { t, data, filters, service, isAuthenticated, title } = this.props;
+    const {
+      t,
+      data,
+      filters,
+      service,
+      isAuthenticated,
+      fundAssets,
+      title
+    } = this.props;
     return (
       <FundsTable
         title={title}
@@ -103,7 +102,7 @@ class _FundsTableContainer extends React.PureComponent<Props, State> {
             <FundAssetFilter
               name={FUND_ASSET_FILTER_NAME}
               value={filtering[FUND_ASSET_FILTER_NAME] as string[]}
-              values={this.state.fundAssets || []}
+              values={fundAssets || []}
               onChange={updateFilter}
             />
             <DateRangeFilter
@@ -131,7 +130,8 @@ class _FundsTableContainer extends React.PureComponent<Props, State> {
 
 const mapStateToProps = (state: RootState): StateProps => ({
   data: fundsDataSelector(state),
-  isAuthenticated: isAuthenticatedSelector(state)
+  isAuthenticated: isAuthenticatedSelector(state),
+  fundAssets: fundAssetsSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
