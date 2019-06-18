@@ -8,6 +8,8 @@ import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import FundAssetFilter from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter";
+import { FUND_ASSET_FILTER_NAME } from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
 import {
   ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
@@ -15,10 +17,7 @@ import {
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { fundAssetsSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import fundsApi from "shared/services/api-client/funds-api";
 
-import FundAssetFilter from "../../../../components/table/components/filtering/fund-asset-filter/fund-asset-filter";
-import { FUND_ASSET_FILTER_NAME } from "../../../../components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import * as fundsService from "../../services/funds-table.service";
 import {
