@@ -25,28 +25,20 @@ const _FundAssetPopover: React.FC<Props & InjectedTranslateProps> = ({
     >
       {(filteredAssets, handleClick) => (
         <GVScroll autoHeightMax={180} autoHeight={true}>
-          <table>
-            <tbody>
-              {filteredAssets.map((asset, idx) => (
-                <tr
-                  key={idx}
-                  className="popover-add__asset"
-                  onClick={() => handleClick(asset.id)}
-                >
-                  <td className="popover-add__asset-icon-container">
-                    <FundAssetImage
-                      url={asset.icon}
-                      alt={asset.asset}
-                      className="popover-add__asset-icon"
-                    />
-                  </td>
-                  <td className="popover-add__asset-currency-full">
-                    {asset.name}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <ul className="fund-asset-filter__assets">
+            {filteredAssets.map((asset, idx) => (
+              <li
+                className="fund-asset-filter__asset-item"
+                key={idx}
+                onClick={() => handleClick(asset.id)}
+              >
+                <FundAssetImage url={asset.icon} alt={asset.asset} />
+                <span className="fund-asset-filter__asset-item-name">
+                  {asset.name}
+                </span>
+              </li>
+            ))}
+          </ul>
         </GVScroll>
       )}
     </TileFilterPopover>
