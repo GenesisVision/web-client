@@ -5,6 +5,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import { GVScroll } from "shared/components/scroll/gvscroll";
 import Tooltip from "shared/components/tooltip/tooltip";
+import { formatValue } from "shared/utils/formatter";
 
 const getCommission = (trade: OrderSignalModel) => {
   let commission = trade.tradingFee ? trade.tradingFee.amount : 0;
@@ -13,7 +14,7 @@ const getCommission = (trade: OrderSignalModel) => {
       commission += fee.amount;
     });
   });
-  return commission;
+  return formatValue(commission, 8);
 };
 
 const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
@@ -21,7 +22,7 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
   const providers = trade.providers.filter(
     provider => provider.fees.length > 0
   );
-  if (commission === 0) return <div>{commission}</div>;
+  if (commission === "0") return <div>{commission}</div>;
   const isOnlyOne = providers.length === 1;
   return (
     <Tooltip
