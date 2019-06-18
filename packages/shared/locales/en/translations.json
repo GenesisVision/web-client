@@ -93,6 +93,11 @@
       "start": "Start",
       "end": "End",
       "today": "Today"
+    },
+    "fund-asset": {
+      "add": "Asset",
+      "popover-header": "Add asset",
+      "popover-search-placeholder": "Search for assets"
     }
   },
   "program-period": {
