@@ -23,6 +23,7 @@ import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/ta
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import {
   currenciesSelector,
   programTagsSelector
@@ -47,11 +48,10 @@ interface MergeProps {
 }
 
 interface StateProps {
-  isPending: boolean;
-  data: any;
   isAuthenticated: boolean;
   currencies: string[];
   programTags: ProgramTag[];
+  data?: ProgramsList;
 }
 
 interface DispatchProps {
@@ -112,7 +112,6 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
       t,
       showSwitchView,
       currencies,
-      isPending,
       data,
       filters,
       service,
@@ -123,8 +122,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
       <ProgramsTable
         showSwitchView={showSwitchView}
         title={title}
-        data={data || {}}
-        isPending={isPending}
+        data={data ? data.programs : undefined}
         sorting={filters.sorting}
         updateSorting={service.programsChangeSorting}
         filtering={{
@@ -175,17 +173,12 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { isAuthenticated } = state.authData;
-  const { isPending } = state.programsData.items;
-  return {
-    isPending,
-    isAuthenticated,
-    data: programsDataSelector(state),
-    currencies: currenciesSelector(state),
-    programTags: programTagsSelector(state)
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state),
+  data: programsDataSelector(state),
+  currencies: currenciesSelector(state),
+  programTags: programTagsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(

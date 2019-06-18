@@ -1,4 +1,4 @@
-import { CopyTradingAccountsList, WalletMultiSummary } from "gv-api-web";
+import { CopyTradingAccountInfo, WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import translate from "react-i18next/src/translate";
@@ -7,12 +7,11 @@ import Page from "shared/components/page/page";
 import { ROLE } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
-import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
 
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletContainerTotal from "./wallet-container/wallet-container-total";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
+import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
 
 const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
   t,
@@ -33,11 +32,8 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
         invested={wallet.grandTotal.investedCcy}
         currency={wallet.grandTotal.currencyCcy}
       />
-      <WalletContainerTotal
-        isPending={copyTradingAccounts.isPending}
-        copyTradingAccounts={
-          copyTradingAccounts.data ? copyTradingAccounts.data.accounts : []
-        }
+      <WalletTablesTotal
+        copyTradingAccounts={copyTradingAccounts}
         wallets={wallet.wallets}
         copytrading={role === ROLE.INVESTOR}
       />
@@ -49,7 +45,7 @@ interface Props extends WithRoleProps, OwnProps, InjectedTranslateProps {}
 
 interface OwnProps {
   wallet: WalletMultiSummary;
-  copyTradingAccounts: IApiState<CopyTradingAccountsList>;
+  copyTradingAccounts: CopyTradingAccountInfo[];
 }
 
 const WalletTotal = compose<React.ComponentType<OwnProps & WithLoaderProps>>(

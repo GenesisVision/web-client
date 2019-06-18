@@ -38,23 +38,25 @@ const _WalletBalanceButtons: React.FC<Props> = ({
         {t("wallet-page.withdraw")}
       </>
     </GVButton>
-    <GVButton color="secondary" variant="outlined" onClick={handleTransfer}>
-      <>
-        <img
-          className="wallet-balance__button-icon"
-          src={ConvertIcon}
-          alt="Convert icon"
-        />
-        {t("wallet-page.transfer")}
-      </>
-    </GVButton>
+    {handleTransfer && (
+      <GVButton color="secondary" variant="outlined" onClick={handleTransfer}>
+        <>
+          <img
+            className="wallet-balance__button-icon"
+            src={ConvertIcon}
+            alt="Convert icon"
+          />
+          {t("wallet-page.transfer")}
+        </>
+      </GVButton>
+    )}
   </div>
 );
 
 interface Props extends InjectedTranslateProps {
   handleAddFunds: () => void;
   handleWithdraw: () => void;
-  handleTransfer: () => void;
+  handleTransfer?: () => void;
   isDepositEnabled?: boolean;
   isWithdrawalEnabled?: boolean;
 }

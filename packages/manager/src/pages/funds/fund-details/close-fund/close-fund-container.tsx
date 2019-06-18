@@ -6,6 +6,7 @@ import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { closeFund } from "shared/components/funds/fund-details/services/fund-details.service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { twoFactorSelector } from "shared/reducers/2fa-reducer";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
 import CloseFundForm, { ICloseFundFormValues } from "./close-fund-form";
@@ -52,10 +53,9 @@ class _CloseFundContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: AuthRootState): StateProps => {
-  const { data } = state.accountSettings.twoFactorAuth;
-  return { twoFactorAuth: data };
-};
+const mapStateToProps = (state: AuthRootState): StateProps => ({
+  twoFactorAuth: twoFactorSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(

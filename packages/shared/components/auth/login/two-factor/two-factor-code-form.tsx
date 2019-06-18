@@ -29,16 +29,14 @@ class _TwoFactorCodeForm extends React.PureComponent<
   };
 
   componentDidUpdate(
-    prevProps: Readonly<Props & FormikProps<ITwoFactorCodeFormValues>>,
-    prevState: Readonly<State>,
-    snapshot?: any
+    prevProps: Readonly<Props & FormikProps<ITwoFactorCodeFormValues>>
   ): void {
     if (
       this.state.isChecking ||
-      this.props.values.code === prevProps.values.code
+      this.props.values[FIELDS.code] === prevProps.values[FIELDS.code]
     )
       return;
-    if (this.props.values.code.length === 6) {
+    if (this.props.values[FIELDS.code].length === 6) {
       this.checkTwoFactor();
     }
   }
@@ -59,7 +57,7 @@ class _TwoFactorCodeForm extends React.PureComponent<
         <GVFormikField
           disabled={isSubmitting}
           type="text"
-          name="code"
+          name={FIELDS.code}
           label={t("auth.login.two-factor.input-label")}
           autoComplete="off"
           autoFocus
@@ -86,8 +84,12 @@ class _TwoFactorCodeForm extends React.PureComponent<
   }
 }
 
+enum FIELDS {
+  code = "code"
+}
+
 export interface ITwoFactorCodeFormValues {
-  code: string;
+  [FIELDS.code]: string;
 }
 
 interface Props extends InjectedTranslateProps, OwnProps {}
@@ -110,11 +112,11 @@ const TwoFactorCodeForm = compose<React.FC<OwnProps>>(
   withFormik<Props, ITwoFactorCodeFormValues>({
     displayName: "twoFactorForm",
     mapPropsToValues: () => ({
-      code: ""
+      [FIELDS.code]: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        code: string()
+        [FIELDS.code]: string()
           .trim()
           .matches(
             /^\d{6}$/,

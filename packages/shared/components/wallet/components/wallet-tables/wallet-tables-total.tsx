@@ -1,12 +1,7 @@
-import "./wallet-container.scss";
+import "./wallet-tables.scss";
 
-import {
-  CopyTradingAccountInfo,
-  MultiWalletFilters,
-  WalletData
-} from "gv-api-web";
+import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import { Location } from "history";
-import { filter } from "minimatch";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
@@ -18,16 +13,16 @@ import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 import Tooltip from "shared/components/tooltip/tooltip";
 
-import WalletCopytrading from "../wallet-copytrading/wallet-copytrading";
-import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposits-withdrawals-row";
-import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
-import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
-import WalletList from "../wallet-list/wallet-list";
-import TransactionsRow from "../wallet-transactions/transactions-row";
-import WalletTransactions from "../wallet-transactions/wallet-transactions";
-import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
+import WalletCopytrading from "./wallet-copytrading/wallet-copytrading";
+import AllDepositsWithdrawalsRow from "./wallet-deposits-withdrawals/all-deposits-withdrawals-row";
+import WalletDepositsWithdrawals from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals";
+import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
+import WalletList from "./wallet-list/wallet-list";
+import TransactionsRow from "./wallet-transactions/transactions-row";
+import WalletTransactions from "./wallet-transactions/wallet-transactions";
+import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "./wallet-transactions/wallet-transactions.constants";
 
-class _WalletContainerTotal extends React.PureComponent<Props, State> {
+class _WalletTablesTotal extends React.PureComponent<Props, State> {
   state = {
     tab: TABS.WALLETS_TAB
   };
@@ -45,7 +40,6 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
   render() {
     const { tab } = this.state;
     const {
-      isPending,
       t,
       wallets,
       copytrading,
@@ -140,10 +134,7 @@ class _WalletContainerTotal extends React.PureComponent<Props, State> {
         </div>
         {tab === TABS.WALLETS_TAB && <WalletList wallets={wallets} />}
         {tab === TABS.COPYTRADING_TAB && (
-          <WalletCopytrading
-            copyTradingAccounts={copyTradingAccounts}
-            isPending={isPending}
-          />
+          <WalletCopytrading copyTradingAccounts={copyTradingAccounts} />
         )}
         {tab === TABS.TRANSACTIONS_TAB && (
           <WalletTransactions
@@ -181,7 +172,6 @@ interface Props extends InjectedTranslateProps, OwnProps {
 }
 
 interface OwnProps {
-  isPending: boolean;
   wallets: WalletData[];
   copytrading: boolean;
   copyTradingAccounts: CopyTradingAccountInfo[];
@@ -194,5 +184,5 @@ interface State {
 const WalletContainerTotal = compose<React.ComponentType<OwnProps>>(
   translate(),
   withRouter
-)(_WalletContainerTotal);
+)(_WalletTablesTotal);
 export default WalletContainerTotal;

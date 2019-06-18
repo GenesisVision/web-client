@@ -2,7 +2,7 @@ import {
   ProfileFullViewModel,
   UpdatePersonalDetailViewModel
 } from "gv-api-web";
-import pickBy from "lodash.pickby";
+import { pickBy } from "lodash";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";

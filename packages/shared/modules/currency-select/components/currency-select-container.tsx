@@ -10,6 +10,7 @@ import {
   compose
 } from "redux";
 import { ISelectChangeEvent } from "shared/components/select/select";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { currenciesSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
@@ -44,7 +45,7 @@ const _CurrencySelectContainer: React.FC<Props> = ({
 
 const mapStateToProps = (state: RootState): StateProps => ({
   currencyValues: currenciesSelector(state),
-  currency: state.accountSettings.currency
+  currency: currencySelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

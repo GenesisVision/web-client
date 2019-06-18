@@ -123,11 +123,11 @@ $padding: $padding-small;
 
     &:hover {
       .program-avatar__level {
-        border-color: #212c34;
+        background-color: #212c34;
       }
 
       .program-detailed__avatar .program-avatar__level {
-        border-color: $secondary-color;
+        background-color: $secondary-color;
       }
     }
 

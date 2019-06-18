@@ -15,9 +15,18 @@ import {
   SELF_PROGRAMS_RATING
 } from "../actions/programs-rating.actions";
 
+export const allProgramsSelector = apiSelector<ProgramsList>(
+  state => state.programsRating.programs
+);
+
 const allProgramsRatingReducer = apiReducerFactory<ProgramsList>({
   apiType: PROGRAMS_RATING
 });
+
+export const selfProgramsSelector = apiSelector<ProgramsList>(
+  state => state.programsRating.selfPrograms
+);
+
 const selfProgramsRatingReducer = apiReducerFactory<ProgramsList>({
   apiType: SELF_PROGRAMS_RATING
 });

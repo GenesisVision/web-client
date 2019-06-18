@@ -21,8 +21,8 @@ import {
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { MiddlewareDispatch } from "shared/utils/types";
 
-import { fetchAccounts } from "../../services/wallet.services";
-import { composeWalletCopytradingCurrencyUrl } from "../../wallet.routes";
+import { fetchAccounts } from "../../../services/wallet.services";
+import { composeWalletCopytradingCurrencyUrl } from "../../../wallet.routes";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
 
@@ -30,7 +30,6 @@ class _WalletCopytrading extends React.PureComponent<Props, State> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
-    isOpenTransferPopup: false,
     currentAccount: undefined
   };
 
@@ -58,7 +57,7 @@ class _WalletCopytrading extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { t, copyTradingAccounts, isPending } = this.props;
+    const { t, copyTradingAccounts } = this.props;
     const {
       isOpenAddFundsPopup,
       isOpenWithdrawPopup,
@@ -67,7 +66,7 @@ class _WalletCopytrading extends React.PureComponent<Props, State> {
     return (
       <div className="wallet-list">
         <Table
-          isPending={isPending && !copyTradingAccounts.length}
+          isPending={!copyTradingAccounts.length}
           items={copyTradingAccounts}
           columns={WALLET_COPYTRADING_COLUMNS}
           renderHeader={column => (
@@ -86,7 +85,9 @@ class _WalletCopytrading extends React.PureComponent<Props, State> {
                     pathname: composeWalletCopytradingCurrencyUrl(
                       account.currency.toLowerCase()
                     ),
-                    state: `/ ${t("wallet-copytrading-page.title")}`
+                    state: `/ ${t(
+                      "wallet-copytrading-page.copytrading-accounts"
+                    )}`
                   }}
                 >
                   <WalletImage
@@ -177,7 +178,6 @@ interface Props extends InjectedTranslateProps, DispatchProps, OwnProps {}
 
 interface OwnProps {
   copyTradingAccounts: CopyTradingAccountInfo[];
-  isPending: boolean;
 }
 
 interface DispatchProps {
@@ -187,7 +187,6 @@ interface DispatchProps {
 interface State {
   isOpenAddFundsPopup: boolean;
   isOpenWithdrawPopup: boolean;
-  isOpenTransferPopup: boolean;
   currentAccount?: CopyTradingAccountInfo;
 }
 
