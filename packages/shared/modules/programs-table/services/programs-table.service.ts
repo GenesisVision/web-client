@@ -186,9 +186,6 @@ export const programsChangeFilter = (filter: TFilter<any>) => (
   if (queryParams.page) {
     delete queryParams.page;
   }
-  const newUrl =
-    router.location.pathname +
-    "?" +
-    qs.stringify(queryParams, { indices: false });
+  const newUrl = router.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
 };

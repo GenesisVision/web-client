@@ -21,7 +21,7 @@ const _FundAssetFilter: React.FC<Props & InjectedTranslateProps> = ({
   const selectedAssets = values
     .filter(x => value.includes(x.id))
     .map(asset => (
-      <TileFilterItem key={asset.id}>
+      <TileFilterItem key={asset.id} id={asset.id}>
         <FundAssetImage url={asset.icon} alt={asset.asset} />
         <span className="fund-asset-filter__asset-name">{asset.asset}</span>
       </TileFilterItem>

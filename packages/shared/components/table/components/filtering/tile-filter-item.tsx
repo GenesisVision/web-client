@@ -3,6 +3,7 @@ import GVButton from "shared/components/gv-button";
 import { CloseIcon } from "shared/components/icon/close-icon";
 
 const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
+  id,
   removeTile,
   children
 }) => {
@@ -13,7 +14,7 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
         variant="text"
         color="secondary"
         className="tile-filter__button-remove"
-        onClick={removeTile}
+        onClick={() => removeTile!(id)}
       >
         <CloseIcon />
       </GVButton>
@@ -25,5 +26,6 @@ const TileFilterItem = React.memo(_TileFilterItem);
 export default TileFilterItem;
 
 export interface ITileFilterItemProps {
-  removeTile?(): void;
+  id: string;
+  removeTile?(id: string): void;
 }

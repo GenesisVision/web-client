@@ -10,8 +10,6 @@ import {
 
 export const programsTagFilter: IComposeDefaultFilter = {
   name: TAG_FILTER_NAME,
-  composeRequestValue: (value: TagFilterType): ComposedRequestTagValue =>
-    Array.isArray(value) ? [...value] : [value],
   defaultValue: TAG_FILTER_DEFAULT_VALUE,
-  type: FILTER_TYPE.CUSTOM
+  type: FILTER_TYPE.GENERAL
 };

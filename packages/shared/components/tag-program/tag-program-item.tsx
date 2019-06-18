@@ -1,39 +1,12 @@
 import "./tag-program.scss";
 
-import classnames from "classnames";
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
-import GVButton from "shared/components/gv-button";
 
-import { CloseIcon } from "../icon/close-icon";
-
-export interface IProgramTagItem {
-  handleRemove?(name: string): () => void;
-}
-
-const TagProgramItem: React.FC<ProgramTag & IProgramTagItem> = ({
-  color,
-  name,
-  handleRemove
-}) => {
+const TagProgramItem: React.FC<ProgramTag> = ({ color, name }) => {
   const styleTag = { color, backgroundColor: `${color}1a` };
   return (
-    <div
-      className={classnames("tag-program tag-button", {
-        "tag-program--self-remove": handleRemove
-      })}
-      style={styleTag}
-    >
-      {handleRemove && (
-        <GVButton
-          variant="text"
-          color="secondary"
-          className="tag-program__button-remove"
-          onClick={handleRemove(name)}
-        >
-          <CloseIcon />
-        </GVButton>
-      )}
+    <div className="tag-program tag-button" style={styleTag}>
       {name}
     </div>
   );

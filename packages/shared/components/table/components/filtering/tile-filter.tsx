@@ -9,7 +9,7 @@ import { UpdateFilterFunc } from "../table.types";
 import TileFilterButton from "./tile-filter-button";
 import { ITileFilterItemProps } from "./tile-filter-item";
 
-class TileFilter<TValue> extends React.PureComponent<Props<TValue>, State> {
+class TileFilter extends React.PureComponent<Props, State> {
   state = {
     anchor: undefined
   };
@@ -17,17 +17,19 @@ class TileFilter<TValue> extends React.PureComponent<Props<TValue>, State> {
   handleOpenPopover = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
     this.setState({ anchor: event.currentTarget });
   handleClosePopover = () => this.setState({ anchor: undefined });
-  handleAdd = (value: TValue) => {
+  handleAdd = (id: string) => {
+    const { name, value, updateFilter } = this.props;
     this.handleClosePopover();
-    this.props.updateFilter({
-      name: this.props.name,
-      value: [...this.props.value, value]
+    updateFilter({
+      name,
+      value: [...value, id]
     });
   };
-  handleRemove = (item: TValue) => () => {
-    this.props.updateFilter({
-      name: this.props.name,
-      value: this.props.value.filter(x => x !== item)
+  handleRemove = (id: string) => {
+    const { name, value, updateFilter } = this.props;
+    updateFilter({
+      name,
+      value: value.filter(x => x !== id)
     });
   };
 
@@ -36,7 +38,7 @@ class TileFilter<TValue> extends React.PureComponent<Props<TValue>, State> {
     const { anchor } = this.state;
     const selectedItems = selectedTiles.map(x =>
       React.cloneElement(x, {
-        removeTile: this.handleRemove((x.key as unknown) as TValue)
+        removeTile: this.handleRemove
       })
     );
     const child = React.cloneElement(children as React.ReactElement<any>, {
@@ -69,8 +71,8 @@ class TileFilter<TValue> extends React.PureComponent<Props<TValue>, State> {
 
 export default TileFilter;
 
-interface Props<TValue> {
-  value: TValue[];
+interface Props {
+  value: string[];
   updateFilter: UpdateFilterFunc;
   name: string;
   buttonTitle: string;
