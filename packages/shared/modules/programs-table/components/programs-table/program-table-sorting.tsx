@@ -1,12 +1,13 @@
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import withLoader from "shared/decorators/with-loader";
 
-const ProgramTableSortingValue: React.FC<
-  { column: SortingColumn; isAuthenticated: boolean } & InjectedTranslateProps
-> = ({ t, column, isAuthenticated }) => {
-  if (!isAuthenticated && column.name === "favorite") return null;
-  return t(`programs-page.programs-header.${column.name}`);
-};
+const _ProgramTableSortingValue: React.FC<
+  { column: SortingColumn } & InjectedTranslateProps
+> = ({ t, column }) => t(`programs-page.programs-header.${column.name}`);
 
-export default translate()(ProgramTableSortingValue);
+const ProgramTableSortingValue = withLoader(
+  translate()(React.memo(_ProgramTableSortingValue))
+);
+export default ProgramTableSortingValue;

@@ -1,17 +1,20 @@
 import "./investment-unauth-popup.scss";
 
 import classnames from "classnames";
-import { GVButton } from "gv-react-components";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import DepositTop, {
-  DepositTopProps
+  DepositTopOwnProps
 } from "shared/components/deposit/components/deposit-top";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import GVButton from "shared/components/gv-button";
+import { ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/pages/login.routes";
 
 const InvestmentUnauthPopup: React.FC<Props> = ({
+  role,
   open,
   onClose,
   title,
@@ -21,10 +24,15 @@ const InvestmentUnauthPopup: React.FC<Props> = ({
   message,
   t
 }) => {
-  const role = process.env.REACT_APP_INVESTOR_PORTAL_URL;
+  const baseUrl =
+    role === ROLE.MANAGER
+      ? process.env.REACT_APP_INVESTOR_PORTAL_URL
+      : process.env.NODE_ENV === "development"
+      ? ``
+      : `/${ROLE.INVESTOR}`;
 
-  const loginUrl = role ? `${role}${LOGIN_ROUTE}` : LOGIN_ROUTE;
-  const signUpUrl = role ? `${role}${SIGNUP_ROUTE}` : SIGNUP_ROUTE;
+  const loginUrl = `${baseUrl}${LOGIN_ROUTE}`;
+  const signUpUrl = `${baseUrl}${SIGNUP_ROUTE}`;
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -49,10 +57,14 @@ const InvestmentUnauthPopup: React.FC<Props> = ({
   );
 };
 
-export default compose<React.FC<OwnProps>>(translate())(InvestmentUnauthPopup);
+export default compose<React.FC<OwnProps>>(
+  withRole,
+  translate(),
+  React.memo
+)(InvestmentUnauthPopup);
 
-interface OwnProps extends DepositTopProps, IDialogProps {
+interface OwnProps extends DepositTopOwnProps, IDialogProps {
   message: string;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, InjectedTranslateProps, WithRoleProps {}

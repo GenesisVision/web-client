@@ -3,75 +3,92 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { lazy, number, object } from "yup";
 
-import { IDepositFormValues, IDepositProps } from "./deposit-form";
+import {
+  DEPOSIT_FORM_FIELDS,
+  IDepositFormValues,
+  IDepositOwnProps
+} from "./deposit-form";
 
-export const managerSchema = (
-  params: InjectedTranslateProps & IDepositProps
-) => {
-  const { info, t, currency } = params;
-  return lazy<IDepositFormValues>(values => {
-    return object<IDepositFormValues>().shape({
-      rate: number(),
-      maxAmount: number(),
-      amount: number()
+export const managerSchema = ({
+  info,
+  t,
+  currency
+}: InjectedTranslateProps & IDepositOwnProps) =>
+  lazy<IDepositFormValues>(values =>
+    object<IDepositFormValues>().shape({
+      [DEPOSIT_FORM_FIELDS.rate]: number(),
+      [DEPOSIT_FORM_FIELDS.maxAmount]: number(),
+      [DEPOSIT_FORM_FIELDS.amount]: number()
         .required()
         .min(
           +formatCurrencyValue(
-            convertToCurrency(info.minInvestmentAmount, values.rate),
-            values.walletCurrency
+            convertToCurrency(
+              info.minInvestmentAmount,
+              values[DEPOSIT_FORM_FIELDS.rate]
+            ),
+            values[DEPOSIT_FORM_FIELDS.walletCurrency]
           ),
           t("deposit-asset.validation.amount-min-value", {
             min: formatCurrencyValue(info.minInvestmentAmount, currency),
             currency,
             walletMin: formatCurrencyValue(
-              convertToCurrency(info.minInvestmentAmount, values.rate),
-              values.walletCurrency
+              convertToCurrency(
+                info.minInvestmentAmount,
+                values[DEPOSIT_FORM_FIELDS.rate]
+              ),
+              values[DEPOSIT_FORM_FIELDS.walletCurrency]
             ),
-            walletCurrency: values.walletCurrency
+            walletCurrency: values[DEPOSIT_FORM_FIELDS.walletCurrency]
           })
         )
         .max(
-          values.availableInWallet || 0,
+          values[DEPOSIT_FORM_FIELDS.availableInWallet] || 0,
           t("deposit-asset.validation.amount-more-than-available")
         )
-    });
-  });
-};
+    })
+  );
 
-export const investorSchema = (
-  params: InjectedTranslateProps & IDepositProps
-) => {
-  const { info, t, currency } = params;
-  return lazy<IDepositFormValues>(values => {
-    return object<IDepositFormValues>().shape({
-      rate: number(),
-      maxAmount: number(),
-      amount: number()
+export const investorSchema = ({
+  info,
+  t,
+  currency
+}: InjectedTranslateProps & IDepositOwnProps) =>
+  lazy<IDepositFormValues>(values =>
+    object<IDepositFormValues>().shape({
+      [DEPOSIT_FORM_FIELDS.rate]: number(),
+      [DEPOSIT_FORM_FIELDS.maxAmount]: number(),
+      [DEPOSIT_FORM_FIELDS.amount]: number()
         .required()
         .min(
           +formatCurrencyValue(
-            convertToCurrency(info.minInvestmentAmount, values.rate),
-            values.walletCurrency
+            convertToCurrency(
+              info.minInvestmentAmount,
+              values[DEPOSIT_FORM_FIELDS.rate]
+            ),
+            values[DEPOSIT_FORM_FIELDS.walletCurrency]
           ),
           t("deposit-asset.validation.amount-min-value", {
             min: formatCurrencyValue(info.minInvestmentAmount, currency),
             currency,
             walletMin: formatCurrencyValue(
-              convertToCurrency(info.minInvestmentAmount, values.rate),
-              values.walletCurrency
+              convertToCurrency(
+                info.minInvestmentAmount,
+                values[DEPOSIT_FORM_FIELDS.rate]
+              ),
+              values[DEPOSIT_FORM_FIELDS.walletCurrency]
             ),
-            walletCurrency: values.walletCurrency
+            walletCurrency: values[DEPOSIT_FORM_FIELDS.walletCurrency]
           })
         )
         .max(
           Math.min(
-            values.availableInWallet || 0,
-            values.availableToInvest || 0
+            values[DEPOSIT_FORM_FIELDS.availableInWallet] || 0,
+            values[DEPOSIT_FORM_FIELDS.availableToInvest] || 0
           ),
-          (values.availableInWallet || 0) < (values.availableToInvest || 0)
+          (values[DEPOSIT_FORM_FIELDS.availableInWallet] || 0) <
+            (values[DEPOSIT_FORM_FIELDS.availableToInvest] || 0)
             ? t("deposit-asset.validation.amount-more-than-available")
             : t("deposit-asset.validation.amount-exceeds-limit")
         )
-    });
-  });
-};
+    })
+  );

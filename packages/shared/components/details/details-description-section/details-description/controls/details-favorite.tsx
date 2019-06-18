@@ -1,6 +1,6 @@
 import "./details-description-control.scss";
 
-import React, { ComponentType, FunctionComponent, PureComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
@@ -23,7 +23,7 @@ interface IDetailsFavoriteState {
   isPending: boolean;
 }
 
-class DetailsFavorite extends PureComponent<
+class DetailsFavorite extends React.PureComponent<
   IDetailsFavoriteProps,
   IDetailsFavoriteState
 > {
@@ -70,7 +70,7 @@ class DetailsFavorite extends PureComponent<
     );
   }
 }
-export default compose<ComponentType<IDetailsFavoriteOwnProps>>(
+export default compose<React.ComponentType<IDetailsFavoriteOwnProps>>(
   translate(),
   isAuthenticated
 )(DetailsFavorite);

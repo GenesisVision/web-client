@@ -1,23 +1,21 @@
 import {
   DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
-  DEFAULT_DATE_RANGE_FILTER_VALUE
+  DEFAULT_DATE_RANGE_FILTER_VALUE,
+  SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME,
+  SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
   composeRequestValueFunc,
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import {
-  SERVER_DATE_RANGE_MAX_FILTER_NAME,
-  SERVER_DATE_RANGE_MIN_FILTER_NAME
-} from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 
 export const MANAGER_TABLE_DATE_RANGE_FILTER = {
   ...composeDefaultDateRangeFilter({
     composeApiRequestValue: composeRequestValueFunc(
-      SERVER_DATE_RANGE_MIN_FILTER_NAME,
-      SERVER_DATE_RANGE_MAX_FILTER_NAME
+      SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME,
+      SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME
     )
   }),
   validate: validateDateRange

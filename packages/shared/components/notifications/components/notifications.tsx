@@ -2,7 +2,6 @@ import "./notifications.scss";
 
 import { NotificationList, NotificationViewModel } from "gv-api-web";
 import moment from "moment";
-import { NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -13,20 +12,9 @@ import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
 import NotificationsGroup from "shared/components/notifications/components/notification-group/notification-group";
 import Spinner from "shared/components/spiner/spiner";
 
-type OwnProps = {
-  fetchNotifications(): Promise<NotificationList>;
-  clearNotifications(): void;
-  closeNotifications(): void;
-  count: number;
-  total: number;
-  notifications: NotificationViewModel[];
-};
+import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 
-type Props = OwnProps & InjectedTranslateProps;
-
-type NotificationGroups = { [name: number]: NotificationViewModel[] };
-
-class Notifications extends React.Component<Props> {
+class Notifications extends React.PureComponent<Props> {
   state = {
     isPending: false
   };
@@ -116,7 +104,7 @@ class Notifications extends React.Component<Props> {
             </div>
             <Link
               to={NOTIFICATIONS_ROUTE}
-              onClick={this.props.closeNotifications}
+              onClick={() => this.props.closeNotifications()}
             >
               <div className="profile-avatar notifications__link">
                 <Icon type={"controls"} />
@@ -136,3 +124,16 @@ class Notifications extends React.Component<Props> {
 }
 
 export default translate()(Notifications);
+
+type OwnProps = {
+  fetchNotifications(): Promise<NotificationList>;
+  clearNotifications(): void;
+  closeNotifications(): void;
+  count: number;
+  total: number;
+  notifications: NotificationViewModel[];
+};
+
+type Props = OwnProps & InjectedTranslateProps;
+
+type NotificationGroups = { [name: number]: NotificationViewModel[] };

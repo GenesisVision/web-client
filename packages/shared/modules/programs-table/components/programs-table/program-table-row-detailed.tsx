@@ -14,6 +14,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import {
@@ -27,8 +28,8 @@ import ProgramBigChart from "./program-big-chart/program-big-chart";
 interface IProgramTableRowDetailedProps {
   title: string;
   program: ProgramDetails;
-  isAuthenticated: boolean;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
+  isAuthenticated?: boolean;
+  toggleFavorite: TableToggleFavoriteHandlerType;
   onCollapseClick(): void;
 }
 
@@ -36,7 +37,7 @@ interface IProgramTableRowDetailedState {
   isOpenInvestToProgramPopup: boolean;
 }
 
-class ProgramTableRowDetailed extends React.Component<
+class ProgramTableRowDetailed extends React.PureComponent<
   IProgramTableRowDetailedProps & InjectedTranslateProps,
   IProgramTableRowDetailedState
 > {
@@ -75,6 +76,7 @@ class ProgramTableRowDetailed extends React.Component<
                     <AssetAvatar
                       url={program.logo}
                       level={program.level}
+                      levelProgress={program.levelProgress}
                       alt={program.title}
                       size="medium"
                       color={program.color}
@@ -131,10 +133,12 @@ class ProgramTableRowDetailed extends React.Component<
               </div>
               <div className="program-detailed__statistic">
                 <div className="program-detailed__chart">
-                  <ProgramBigChart
-                    data={program.chart}
-                    programId={program.id}
-                  />
+                  {program.chart.length && (
+                    <ProgramBigChart
+                      data={program.chart}
+                      programId={program.id}
+                    />
+                  )}
                 </div>
                 <div className="program-detailed__statistic-data">
                   <div>

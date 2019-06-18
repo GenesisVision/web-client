@@ -16,7 +16,7 @@ export type IStatus = {
   className?: string;
 };
 
-const Status: React.FunctionComponent<IStatus> = props => {
+const Status: React.FC<IStatus> = props => {
   return (
     <img
       className={classnames(props.className)}

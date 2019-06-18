@@ -8,18 +8,17 @@ import { ManagerThunk } from "shared/utils/types";
 export const getProgramWithdrawInfo = (
   id: string,
   currency: string
-) => (): Promise<ManagerProgramWithdrawInfo> => {
-  return managerApi.v10ManagerProgramsByIdWithdrawInfoByCurrencyGet(
+) => (): Promise<ManagerProgramWithdrawInfo> =>
+  managerApi.v10ManagerProgramsByIdWithdrawInfoByCurrencyGet(
     id,
     currency,
     authService.getAuthArg()
   );
-};
 
 export const withdrawProgramById = (id: string, onClose: () => void) => (
   value: ProgramWithdrawType
-): ManagerThunk<Promise<void>> => (dispatch): Promise<void> => {
-  return managerApi
+): ManagerThunk<Promise<void>> => (dispatch): Promise<void> =>
+  managerApi
     .v10ManagerProgramsByIdWithdrawMultiByAmountPost(
       id,
       value.amount,
@@ -34,4 +33,3 @@ export const withdrawProgramById = (id: string, onClose: () => void) => (
         )
       );
     });
-};

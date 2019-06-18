@@ -210,6 +210,7 @@ export interface IImageChangeEvent {
 export interface IImageValue {
   src?: string;
   image?: INewImage;
+  id?: string;
 }
 
 interface Props {

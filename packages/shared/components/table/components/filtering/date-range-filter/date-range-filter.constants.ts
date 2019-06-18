@@ -2,17 +2,19 @@ import { MomentInput } from "moment";
 
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 
+export const SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME = "statisticDateFrom";
+export const SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME = "statisticDateTo";
 export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "from";
 export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "to";
 
-export type SERVER_DATE_NAME = "from" | "to" | "dateFrom" | "dateTo";
+export type SERVER_DATE_NAME =
+  | "from"
+  | "to"
+  | "dateFrom"
+  | "dateTo"
+  | "statisticDateFrom"
+  | "statisticDateTo";
 
-export const DateRangeFilterTypes = {
-  all: "all",
-  lastMonth: "lastMonth",
-  lastWeek: "lastWeek",
-  custom: "custom"
-};
 export enum DATA_RANGE_FILTER_TYPES {
   ALL = "all",
   LAST_MOUTH = "lastMonth",

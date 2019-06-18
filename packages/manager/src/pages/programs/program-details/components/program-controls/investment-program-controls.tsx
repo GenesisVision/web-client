@@ -1,6 +1,7 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import { GVButton } from "gv-react-components";
-import AssetEditContainer from "modules/asset-edit/asset-edit-container";
+import AssetEditContainer, {
+  IAssetEditInfo
+} from "modules/asset-edit/asset-edit-container";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
@@ -9,9 +10,10 @@ import {
   IProgramDetailContext,
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
+import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
-import { ASSET, PROGRAM } from "shared/constants/constants";
+import { ASSET } from "shared/constants/constants";
 
 import ClosePeriodContainer from "../close-period/close-period-container";
 import CloseProgramContainer from "../close-program/close-program-container";
@@ -57,8 +59,10 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
       isAuthenticated
     } = this.props;
 
-    const composeEditInfo = {
+    const composeEditInfo: IAssetEditInfo = {
       stopOutLevel: programDescription.stopOutLevel,
+      investmentLimit: programDescription.availableInvestmentLimit,
+      currency: programDescription.currency,
       id: programDescription.id,
       title: programDescription.title,
       description: programDescription.description,
@@ -69,6 +73,10 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
       isAuthenticated && !isOwnProgram
         ? t("program-details-page.description.auth-manager-popup")
         : t("program-details-page.description.unauth-popup");
+    const isDisabledInvestButton = isAuthenticated
+      ? !programDescription.personalProgramDetails ||
+        !programDescription.personalProgramDetails.canInvest
+      : false;
 
     return (
       <>
@@ -82,10 +90,7 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
               <GVButton
                 className="program-details-description__invest-btn"
                 onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
-                disabled={
-                  !programDescription.personalProgramDetails ||
-                  !programDescription.personalProgramDetails.canInvest
-                }
+                disabled={isDisabledInvestButton}
               >
                 {t("program-details-page.description.invest")}
               </GVButton>
@@ -179,7 +184,7 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
                 info={composeEditInfo}
                 onClose={this.closePopup(INVESTMENT_POPUP.EDIT)}
                 onApply={this.applyChanges(updateDetails)}
-                type={PROGRAM}
+                type={ASSET.PROGRAM}
               />
               {programDescription.personalProgramDetails &&
                 programDescription.personalProgramDetails

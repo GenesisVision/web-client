@@ -1,13 +1,13 @@
 import ResizeObserver from "@juggle/resize-observer";
-import debounce from "debounce";
+import { debounce } from "lodash";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { windowScroll } from "shared/actions/ui-actions";
+import { windowScrollAction } from "shared/actions/ui-actions";
 import GVScroll from "shared/components/scroll/gvscroll";
 
-class GVScrollContainer extends Component {
+class GVScrollContainer extends React.PureComponent {
   scroll = React.createRef();
   container = React.createRef();
 
@@ -62,7 +62,7 @@ GVScrollContainer.propTypes = {
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     {
-      handleScroll: windowScroll
+      handleScroll: windowScrollAction
     },
     dispatch
   )

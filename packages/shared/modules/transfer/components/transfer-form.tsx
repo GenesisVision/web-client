@@ -1,189 +1,207 @@
 import "./transfer-form.scss";
 
 import { FormikProps, withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import * as React from "react";
+import { InternalTransferRequestSourceTypeEnum } from "gv-api-web";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TransferRate from "shared/modules/transfer/components/transfer-rate";
 import filesService from "shared/services/file-service";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 import { Schema, lazy, number, object } from "yup";
 
 import * as service from "../services/transfer.services";
-import {
-  ItemType,
-  ItemsType,
-  TRANSFER_CONTAINER,
-  TRANSFER_DIRECTION
-} from "../transfer.types";
+import { ItemType, ItemsType, TRANSFER_CONTAINER } from "../transfer.types";
 
-class _TransferForm extends React.PureComponent<Props> {
-  onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { setFieldValue, values } = this.props;
-    const currencyFromNew = event.target.value;
-    if (currencyFromNew === values.destinationId) {
-      setFieldValue("destinationId", values.sourceId);
-    }
-    setFieldValue("sourceId", currencyFromNew);
+const _TransferForm: React.FC<Props> = ({
+  title,
+  sourceType,
+  destinationType,
+  sourceItems,
+  destinationItems,
+  t,
+  handleSubmit,
+  values,
+  isValid,
+  dirty,
+  errorMessage,
+  setFieldValue,
+  isSubmitting
+}) => {
+  const onChangeSourceId = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const currencyFromNew = event.target.value;
+      if (currencyFromNew === values[FIELDS.destinationId]) {
+        setFieldValue(FIELDS.destinationId, values[FIELDS.sourceId]);
+      }
+      setFieldValue(FIELDS.amount, "");
+      setFieldValue(FIELDS.sourceId, currencyFromNew);
+    },
+    [setFieldValue, values]
+  );
+
+  const onChangeDestinationId = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) =>
+      setFieldValue(FIELDS.destinationId, event.target.value),
+    [setFieldValue]
+  );
+
+  const isAllow = useCallback(
+    (inputValues: NumberFormatValues) => {
+      const { floatValue, formattedValue, value } = inputValues;
+      const selectedSourceItem = service.getSelectedItem(
+        sourceItems,
+        values[FIELDS.sourceId]
+      );
+      const { currency, available } = selectedSourceItem;
+      return (
+        formattedValue === "" ||
+        (validateFraction(value, currency) && floatValue <= available)
+      );
+    },
+    [values]
+  );
+
+  const destinationItemWithoutCurrent = service.getDestinationItems(
+    destinationItems,
+    values[FIELDS.sourceId]
+  );
+  const selectedSourceItem = service.getSelectedItem(
+    sourceItems,
+    values[FIELDS.sourceId]
+  );
+  const formattedAvailableSourceItem = formatCurrencyValue(
+    selectedSourceItem.available,
+    selectedSourceItem.currency
+  );
+  const selectedDestinationItem = service.getSelectedItem(
+    destinationItemWithoutCurrent,
+    values[FIELDS.destinationId]
+  );
+  const formattedAvailableDestinationItem = formatCurrencyValue(
+    selectedDestinationItem.available,
+    selectedDestinationItem.currency
+  );
+
+  const setMaxAmount = () => {
+    setFieldValue(FIELDS.amount, formattedAvailableSourceItem);
   };
 
-  onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { setFieldValue } = this.props;
-    setFieldValue("destinationId", event.target.value);
-  };
+  const disableButton =
+    isSubmitting || !values[FIELDS.amount] || !isValid || !dirty;
 
-  isAllow = (values: NumberFormatValues) => values.value !== ".";
-
-  render() {
-    const {
-      sourceType,
-      destinationType,
-      sourceItems,
-      destinationItems,
-      t,
-      handleSubmit,
-      values,
-      isValid,
-      dirty,
-      errorMessage,
-      setFieldValue,
-      isSubmitting
-    } = this.props;
-    const { title = t("transfer.title") } = this.props;
-    const { sourceId, destinationId } = values;
-    const destinationItemWithoutCurrent = service.getDestinationItems(
-      destinationItems,
-      sourceId
-    );
-    const selectedSourceItem = service.getSelectedItem(sourceItems, sourceId);
-    const formattedAvailableSourceItem = formatCurrencyValue(
-      selectedSourceItem.available,
-      selectedSourceItem.currency
-    );
-    const selectedDestinationItem = service.getSelectedItem(
-      destinationItemWithoutCurrent,
-      destinationId
-    );
-    const formattedAvailableDestinationItem = formatCurrencyValue(
-      selectedDestinationItem.available,
-      selectedDestinationItem.currency
-    );
-
-    const setMaxAmount = () => {
-      setFieldValue("amount", formattedAvailableSourceItem);
-    };
-
-    const disableButton = isSubmitting || !values.amount || !isValid || !dirty;
-
-    return (
-      <form
-        id="transfer"
-        className="transfer-popup"
-        onSubmit={handleSubmit}
-        noValidate
-      >
-        <div className="dialog__top">
-          <div className="dialog__header">
-            <h2>{title}</h2>
-          </div>
-          <GVFormikField
-            name="sourceId"
-            component={GVTextField}
-            label={t("transfer.from")}
-            InputComponent={Select}
-            onChange={this.onChangeSourceId}
-          >
-            {sourceItems.map(item => (
-              <option value={item.id} key={`from-${item.id}`}>
-                <img
-                  src={filesService.getFileUrl(item.logo)}
-                  className="transfer-popup__icon"
-                  alt={item.currency}
-                />
-                {`${item.title} | ${item.currency}`}
-              </option>
-            ))}
-          </GVFormikField>
-          <StatisticItem label={t(`transfer.available${sourceType}From`)}>
-            {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
-          </StatisticItem>
+  return (
+    <form
+      id="transfer"
+      className="transfer-popup"
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <div className="dialog__top">
+        <div className="dialog__header">
+          <h2>{title || t("transfer.title")}</h2>
         </div>
-        <div className="dialog__bottom">
-          <GVFormikField
-            name="destinationId"
-            component={GVTextField}
-            label={t("transfer.to")}
-            InputComponent={Select}
-            onChange={this.onChangeDestinationId}
-          >
-            {destinationItemWithoutCurrent.map(item => (
-              <option value={item.id} key={`to-${item.id}`}>
-                <img
-                  src={filesService.getFileUrl(item.logo)}
-                  className="transfer-popup__icon"
-                  alt={item.currency}
-                />
-                {`${item.title} | ${item.currency}`}
-              </option>
-            ))}
-          </GVFormikField>
-          <StatisticItem label={t(`transfer.available${destinationType}To`)}>
-            {`${formattedAvailableDestinationItem} ${
-              selectedDestinationItem.currency
-            }`}
-          </StatisticItem>
-          <div className="dialog-field">
-            <InputAmountField
-              name="amount"
-              label={t("transfer.amount")}
-              currency={selectedSourceItem.currency}
-              setMax={setMaxAmount}
-              isAllow={this.isAllow}
-            />
-          </div>
-          {values.amount && (
-            <TransferRate
-              destinationCurrency={selectedDestinationItem.currency}
-              sourceCurrency={selectedSourceItem.currency}
-            >
-              {props => (
-                <span>{`≈ ${formatCurrencyValue(
-                  props.rate * Number(values.amount),
-                  selectedDestinationItem.currency
-                )} ${selectedDestinationItem.currency}`}</span>
-              )}
-            </TransferRate>
-          )}
-          <div className="form-error">{errorMessage}</div>
-          <div className="dialog__buttons">
-            <GVButton
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled={disableButton}
-            >
-              {t("buttons.confirm")}
-            </GVButton>
-          </div>
-          <div className="dialog__info">{t("transfer.info")}</div>
+        <GVFormikField
+          name={FIELDS.sourceId}
+          component={GVTextField}
+          label={t("transfer.from")}
+          InputComponent={Select}
+          onChange={onChangeSourceId}
+        >
+          {sourceItems.map(item => (
+            <option value={item.id} key={`from-${item.id}`}>
+              <img
+                src={filesService.getFileUrl(item.logo)}
+                className="transfer-popup__icon"
+                alt={item.currency}
+              />
+              {`${item.title} | ${item.currency}`}
+            </option>
+          ))}
+        </GVFormikField>
+        <StatisticItem label={t(`transfer.available${sourceType}From`)}>
+          {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
+        </StatisticItem>
+      </div>
+      <div className="dialog__bottom">
+        <GVFormikField
+          name={FIELDS.destinationId}
+          component={GVTextField}
+          label={t("transfer.to")}
+          InputComponent={Select}
+          onChange={onChangeDestinationId}
+        >
+          {destinationItemWithoutCurrent.map(item => (
+            <option value={item.id} key={`to-${item.id}`}>
+              <img
+                src={filesService.getFileUrl(item.logo)}
+                className="transfer-popup__icon"
+                alt={item.currency}
+              />
+              {`${item.title} | ${item.currency}`}
+            </option>
+          ))}
+        </GVFormikField>
+        <StatisticItem label={t(`transfer.available${destinationType}To`)}>
+          {`${formattedAvailableDestinationItem} ${
+            selectedDestinationItem.currency
+          }`}
+        </StatisticItem>
+        <div className="dialog-field">
+          <InputAmountField
+            name={FIELDS.amount}
+            label={t("transfer.amount")}
+            currency={selectedSourceItem.currency}
+            setMax={setMaxAmount}
+            isAllow={isAllow}
+          />
         </div>
-      </form>
-    );
-  }
-}
+        {!!values[FIELDS.amount] && (
+          <TransferRate
+            destinationCurrency={selectedDestinationItem.currency}
+            sourceCurrency={selectedSourceItem.currency}
+          >
+            {props => (
+              <span>{`≈ ${formatCurrencyValue(
+                props.rate * Number(values[FIELDS.amount]),
+                selectedDestinationItem.currency
+              )} ${selectedDestinationItem.currency}`}</span>
+            )}
+          </TransferRate>
+        )}
+        <div className="form-error">{errorMessage}</div>
+        <div className="dialog__buttons">
+          <GVButton
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={disableButton}
+          >
+            {t("buttons.confirm")}
+          </GVButton>
+        </div>
+        <div className="dialog__info">{t("transfer.info")}</div>
+      </div>
+    </form>
+  );
+};
 
-const TransferForm = compose<React.FunctionComponent<OwnProps>>(
+const TransferForm = compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik<OwnProps, FormValues>({
+  withFormik<OwnProps, TransferFormValues>({
     displayName: "transfer",
     mapPropsToValues: props => {
       const {
+        destinationType,
+        sourceType,
         sourceItems,
         destinationItems,
         currentItem,
@@ -205,18 +223,25 @@ const TransferForm = compose<React.FunctionComponent<OwnProps>>(
         );
         destinationId = destinationItemWithoutCurrent[0].id;
       }
-      return { sourceId, amount: "", destinationId };
+      return {
+        [FIELDS.sourceId]: sourceId,
+        [FIELDS.amount]: undefined,
+        [FIELDS.destinationId]: destinationId,
+        [FIELDS.sourceType]: sourceType,
+        [FIELDS.destinationType]: destinationType,
+        [FIELDS.transferAll]: false
+      };
     },
     validationSchema: (props: Props) => {
       const { sourceItems, t } = props;
       return lazy(
-        (values: FormValues): Schema<any> => {
+        (values: TransferFormValues): Schema<any> => {
           const selectedSourceItem = service.getSelectedItem(
             sourceItems,
-            values.sourceId
+            values[FIELDS.sourceId]
           );
           return object().shape({
-            amount: number()
+            [FIELDS.amount]: number()
               .moreThan(0, t("transfer.validation.amount-is-zero"))
               .max(
                 +formatCurrencyValue(
@@ -233,40 +258,47 @@ const TransferForm = compose<React.FunctionComponent<OwnProps>>(
       const { amount, sourceId } = values;
 
       const transferAll = service.getTransferAll(
-        { amount, sourceId },
+        { amount: amount!, sourceId },
         props.sourceItems
       );
       props.onSubmit({ ...values, transferAll }, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_TransferForm);
 export default TransferForm;
 
+enum FIELDS {
+  sourceId = "sourceId",
+  sourceType = "sourceType",
+  destinationId = "destinationId",
+  destinationType = "destinationType",
+  amount = "amount",
+  transferAll = "transferAll"
+}
+
 interface OwnProps {
-  onSubmit(
-    values: TransferFormValuesType,
-    setSubmitting: SetSubmittingType
-  ): void;
+  onSubmit(values: TransferFormValues, setSubmitting: SetSubmittingType): void;
   currentItem: ItemType;
+  sourceType: InternalTransferRequestSourceTypeEnum;
+  destinationType: InternalTransferRequestSourceTypeEnum;
+  sourceItems: ItemsType;
+  destinationItems: ItemsType;
   errorMessage?: string;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
-  sourceType?: TRANSFER_DIRECTION;
-  destinationType?: TRANSFER_DIRECTION;
-  sourceItems: ItemsType;
-  destinationItems: ItemsType;
 }
 
-interface FormValues {
+export interface TransferFormValues {
   sourceId: string;
+  sourceType: InternalTransferRequestSourceTypeEnum;
   destinationId: string;
-  amount: string;
+  destinationType: InternalTransferRequestSourceTypeEnum;
+  amount?: number;
+  transferAll: boolean;
 }
 
-type Props = InjectedTranslateProps & FormikProps<FormValues> & OwnProps;
-
-export type TransferFormValuesType = FormValues & {
-  transferAll: boolean;
-  sourceType?: TRANSFER_DIRECTION;
-  destinationType?: TRANSFER_DIRECTION;
-};
+interface Props
+  extends InjectedTranslateProps,
+    FormikProps<TransferFormValues>,
+    OwnProps {}

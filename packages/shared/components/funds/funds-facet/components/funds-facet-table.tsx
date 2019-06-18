@@ -1,7 +1,13 @@
-import React from "react";
+import { ProgramFacetTimeframeEnum } from "gv-api-web";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { mapServerTimeFrameToFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
   GetItemsFuncType,
   TableToggleFavoriteType
@@ -11,59 +17,69 @@ import FundsTableModule from "shared/modules/funds-table/components/funds-table/
 
 import {
   FUNDS_FACET_PAGING,
-  FUNDS_FACET_TABLE_FILTERING,
-  FUNDS_FACET_TABLE_FILTERS,
-  FUNDS_FACET_TABLE_SORTING
+  FUNDS_FACET_TABLE_FILTERS
 } from "./funds-facet.constants";
 
-class _FundsFacetTable extends React.PureComponent<
+const _FundsFacetTable: React.FC<
   IFundsFacetTableProps & InjectedTranslateProps
-> {
-  toggleFavorite: TableToggleFavoriteType = (fund, updateRow) => () => {
-    const isFavorite = fund.personalDetails.isFavorite;
-    const newProgram = {
-      ...fund,
-      personalDetails: { ...fund.personalDetails, isFavorite: !isFavorite }
-    };
-    updateRow(newProgram);
-    toggleFavoriteFund(fund.id, isFavorite).catch(() => {
-      updateRow(fund);
-    });
-  };
+> = ({ t, title, sorting, getItems, isAuthenticated, timeframe }) => {
+  const toggleFavorite: TableToggleFavoriteType = useCallback(
+    (fund, updateRow) => () => {
+      const isFavorite = fund.personalDetails.isFavorite;
+      const newProgram = {
+        ...fund,
+        personalDetails: { ...fund.personalDetails, isFavorite: !isFavorite }
+      };
+      updateRow(newProgram);
+      toggleFavoriteFund(fund.id, isFavorite).catch(() => {
+        updateRow(fund);
+      });
+    },
+    []
+  );
 
-  render() {
-    const { t, title, ...other } = this.props;
+  const composeFiltering = useCallback(
+    () =>
+      ({
+        dateRange: {
+          ...DEFAULT_DATE_RANGE_FILTER_VALUE,
+          type: mapServerTimeFrameToFilterType(timeframe)
+        }
+      } as FilteringType),
+    [timeframe]
+  );
 
-    return (
-      <FundsTableModule
-        renderFilters={(updateFilter, filtering) => (
-          <>
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.program-start")}
-            />
-          </>
-        )}
-        title={title}
-        paging={FUNDS_FACET_PAGING}
-        sorting={FUNDS_FACET_TABLE_SORTING}
-        filtering={FUNDS_FACET_TABLE_FILTERING}
-        defaultFilters={FUNDS_FACET_TABLE_FILTERS}
-        toggleFavorite={this.toggleFavorite}
-        {...other}
-      />
-    );
-  }
-}
+  return (
+    <FundsTableModule
+      renderFilters={(updateFilter, filtering) => (
+        <>
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.program-start")}
+          />
+        </>
+      )}
+      title={title}
+      paging={FUNDS_FACET_PAGING}
+      sorting={sorting}
+      filtering={composeFiltering()}
+      defaultFilters={FUNDS_FACET_TABLE_FILTERS}
+      toggleFavorite={toggleFavorite}
+      getItems={getItems}
+      isAuthenticated={isAuthenticated}
+    />
+  );
+};
 
 export interface IFundsFacetTableProps {
   title: string;
+  sorting: string;
+  timeframe: ProgramFacetTimeframeEnum;
   getItems: GetItemsFuncType;
-  isAuthenticated: boolean;
-  showRating?: boolean;
+  isAuthenticated?: boolean;
 }
 
-const FundsFacetTable = translate()(_FundsFacetTable);
+const FundsFacetTable = translate()(React.memo(_FundsFacetTable));
 export default FundsFacetTable;

@@ -1,13 +1,13 @@
 import { push } from "connected-react-router";
 import { ProgramTag, ProgramsList } from "gv-api-web";
 import { Location } from "history";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
+import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -15,11 +15,20 @@ import {
   TFilter
 } from "shared/components/table/components/filtering/filter.type";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
+import { LevelFilterType } from "shared/components/table/components/filtering/level-filter/level-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
+import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
-import RootState from "shared/reducers/root-reducer";
+import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import {
+  currenciesSelector,
+  programTagsSelector
+} from "shared/reducers/platform-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { convertToArray } from "shared/utils/helpers";
 
 import * as programsService from "../../services/programs-table.service";
@@ -28,24 +37,26 @@ import ProgramsTable from "./programs-table";
 import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
 
 interface OwnProps {
-  isLocationChanged(location: Location): boolean;
-  defaultFilters: any;
   showSwitchView: boolean;
-  filters: { [keys: string]: any };
   title: string;
+  defaultFilters?: any;
+}
+
+interface MergeProps {
+  isLocationChanged: (location: Location) => boolean;
+  filters: { [keys: string]: any };
 }
 
 interface StateProps {
-  isPending: boolean;
-  data: any;
   isAuthenticated: boolean;
   currencies: string[];
   programTags: ProgramTag[];
+  data?: ProgramsList;
 }
 
 interface DispatchProps {
   service: {
-    toggleFavoriteProgram(programId: string, isFavorite: boolean): void;
+    toggleFavoriteProgram: ToggleFavoriteDispatchableType;
     redirectToLogin(): void;
     getPrograms(filters: Object): void;
     fetchPrograms(filters: { [keys: string]: any }): Promise<ProgramsList>;
@@ -64,12 +75,13 @@ interface DispatchProps {
 
 interface Props
   extends OwnProps,
+    MergeProps,
     StateProps,
     DispatchProps,
     InjectedTranslateProps,
     RouteComponentProps {}
 
-class ProgramsTableContainer extends React.Component<Props> {
+class _ProgramsTableContainer extends React.PureComponent<Props> {
   componentDidMount() {
     const { service, defaultFilters } = this.props;
     service.getPrograms(defaultFilters);
@@ -81,6 +93,18 @@ class ProgramsTableContainer extends React.Component<Props> {
       service.getPrograms(defaultFilters);
     }
   }
+  tagsFilterValue = (value: any) => {
+    const { programTags } = this.props;
+    //TODO Fix any
+    if (!programTags.length) return [];
+    return convertToArray(value).map(tag => {
+      const programTag = programTags.find(
+        programTag => programTag.name === tag
+      );
+      const color = programTag!.color;
+      return { name: tag, color };
+    });
+  };
 
   render() {
     const {
@@ -88,66 +112,51 @@ class ProgramsTableContainer extends React.Component<Props> {
       t,
       showSwitchView,
       currencies,
-      isPending,
       data,
       filters,
       service,
       isAuthenticated,
       title
     } = this.props;
-    const tagsFilterValue = (value: any) => {
-      //TODO Fix any
-      if (!programTags.length) return [];
-      return convertToArray(value).map(tag => {
-        const programTag = programTags.find(
-          programTag => programTag.name === tag
-        );
-        const color = programTag!.color;
-        return { name: tag, color };
-      });
-    };
     return (
       <ProgramsTable
         showSwitchView={showSwitchView}
         title={title}
-        data={data || {}}
-        isPending={isPending}
+        data={data ? data.programs : undefined}
         sorting={filters.sorting}
         updateSorting={service.programsChangeSorting}
         filtering={{
           ...filters.filtering
         }}
         updateFilter={service.programsChangeFilter}
-        renderFilters={(updateFilter, filtering: FilteringType) => {
-          return (
-            <React.Fragment>
-              <TagFilter
-                name={TAG_FILTER_NAME}
-                value={tagsFilterValue(filtering[TAG_FILTER_NAME])}
-                values={programTags}
-                onChange={updateFilter}
-              />
-              <LevelFilter
-                name={LEVEL_FILTER_NAME}
-                value={filtering[LEVEL_FILTER_NAME] as number[]} //TODO fix filtering types
-                onChange={updateFilter}
-              />
-              <SelectFilter
-                name={CURRENCY_FILTER_NAME}
-                label="Currency"
-                value={filtering[CURRENCY_FILTER_NAME]}
-                values={composeCurrencyFilter(currencies)}
-                onChange={updateFilter}
-              />
-              <DateRangeFilter
-                name={DATE_RANGE_FILTER_NAME}
-                value={filtering[DATE_RANGE_FILTER_NAME]}
-                onChange={updateFilter}
-                startLabel={t("filters.date-range.program-start")}
-              />
-            </React.Fragment>
-          );
-        }}
+        renderFilters={(updateFilter, filtering: FilteringType) => (
+          <>
+            <TagFilter
+              name={TAG_FILTER_NAME}
+              value={this.tagsFilterValue(filtering[TAG_FILTER_NAME])}
+              values={programTags}
+              onChange={updateFilter}
+            />
+            <LevelFilter
+              name={LEVEL_FILTER_NAME}
+              value={filtering[LEVEL_FILTER_NAME] as LevelFilterType} //TODO fix filtering types
+              onChange={updateFilter}
+            />
+            <SelectFilter
+              name={CURRENCY_FILTER_NAME}
+              label="Currency"
+              value={filtering[CURRENCY_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
+              values={composeCurrencyFilter(currencies)}
+              onChange={updateFilter}
+            />
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering[DATE_RANGE_FILTER_NAME]}
+              onChange={updateFilter}
+              startLabel={t("filters.date-range.program-start")}
+            />
+          </>
+        )}
         paging={{
           totalPages: filters.pages,
           currentPage: filters.page,
@@ -164,23 +173,12 @@ class ProgramsTableContainer extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { isAuthenticated } = state.authData;
-  const { isPending, data } = state.programsData.items;
-  const currencies = state.platformData.data
-    ? state.platformData.data.currencies
-    : [];
-  const programTags = state.platformData.data
-    ? state.platformData.data.enums.program.programTags
-    : [];
-  return {
-    isPending,
-    data,
-    isAuthenticated,
-    currencies,
-    programTags
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state),
+  data: programsDataSelector(state),
+  currencies: currenciesSelector(state),
+  programTags: programTagsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
@@ -197,7 +195,7 @@ const mergeProps = (
   stateProps: StateProps,
   dispatchProps: DispatchProps,
   ownProps: RouteComponentProps
-) => {
+): StateProps & DispatchProps & RouteComponentProps & MergeProps => {
   const { location } = ownProps;
   const isLocationChanged = (prevLocation: Location) => {
     return location.key !== prevLocation.key;
@@ -212,7 +210,7 @@ const mergeProps = (
   };
 };
 
-export default compose<React.FunctionComponent<OwnProps>>(
+const ProgramsTableContainer = compose<React.FC<OwnProps>>(
   withRouter,
   translate(),
   connect(
@@ -220,4 +218,5 @@ export default compose<React.FunctionComponent<OwnProps>>(
     mapDispatchToProps,
     mergeProps
   )
-)(ProgramsTableContainer);
+)(_ProgramsTableContainer);
+export default ProgramsTableContainer;

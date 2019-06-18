@@ -3,17 +3,15 @@ import "shared/components/deposit-details/deposit-details.scss";
 import "./create-fund-settings.scss";
 
 import { Field, withFormik } from "formik";
-import {
-  GVButton,
-  GVFormikField,
-  GVProgramPeriod,
-  GVTextField
-} from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
 import InputImage from "shared/components/form/input-image/input-image";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVProgramPeriod from "shared/components/gv-program-period";
+import GVTextField from "shared/components/gv-text-field";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
@@ -29,7 +27,7 @@ import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-blo
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 import ErrorNotifier from "./error-notifier/error-notifier";
 
-class CreateFundSettings extends React.Component {
+class CreateFundSettings extends React.PureComponent {
   state = {
     anchor: null,
     assets: this.props.assets.map(asset => {
@@ -148,7 +146,7 @@ class CreateFundSettings extends React.Component {
       setSubmitting,
       isValid
     } = this.props;
-    if (!wallets) return;
+    if (!wallets || !wallets.length) return null;
     const {
       depositWalletCurrency,
       depositAmount,
@@ -165,7 +163,7 @@ class CreateFundSettings extends React.Component {
         deposit
       })
         .validate(values)
-        .then(res => {}, () => onValidateError());
+        .then(() => {}, () => onValidateError());
 
       handleSubmit(values, {
         setSubmitting
@@ -361,7 +359,7 @@ class CreateFundSettings extends React.Component {
               <GVFormikField
                 name="depositWalletCurrency" // value={"GVT"}
                 component={GVTextField}
-                label={t("wallet-transfer.from")}
+                label={t("transfer.from")}
                 InputComponent={Select}
                 onChange={this.onChangeDepositWallet}
               >
@@ -381,7 +379,7 @@ class CreateFundSettings extends React.Component {
               <InputAmountField
                 autoFocus={false}
                 name="depositAmount"
-                label={t("wallet-transfer.amount")}
+                label={t("transfer.amount")}
                 currency={depositWalletCurrency}
                 setMax={this.setMaxAmount(
                   selectedWallet.available,

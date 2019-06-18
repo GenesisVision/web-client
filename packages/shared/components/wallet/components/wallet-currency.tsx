@@ -1,67 +1,42 @@
-import { MultiWalletFilters, WalletData } from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
+import withLoader from "shared/decorators/with-loader";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
-import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
+import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-form";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
-import RootState from "shared/reducers/root-reducer";
 
-import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
-import WalletContainer from "./wallet-container/wallet-container";
+import WalletTables from "./wallet-tables/wallet-tables";
 
-interface IWalletProps {
-  info?: WalletData;
-  isPending: boolean;
-  filters?: MultiWalletFilters[];
-}
-
-class WalletCurrency extends React.Component<
-  IWalletProps & InjectedTranslateProps & WalletRouteProps
-> {
+class _WalletCurrency extends React.PureComponent<Props, State> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
-    isOpenTransferPopup: false,
-    currencyWallet: undefined
+    isOpenTransferPopup: false
   };
 
-  handleOpenAddFundsPopup = () => {
-    this.setState({ isOpenAddFundsPopup: true });
-  };
+  handleOpenAddFundsPopup = () => this.setState({ isOpenAddFundsPopup: true });
 
-  handleCloseAddFundsPopup = () => {
+  handleCloseAddFundsPopup = () =>
     this.setState({ isOpenAddFundsPopup: false });
-  };
 
-  handleOpenWithdrawPopup = () => {
-    this.setState({ isOpenWithdrawPopup: true });
-  };
+  handleOpenWithdrawPopup = () => this.setState({ isOpenWithdrawPopup: true });
 
-  handleCloseWithdrawPopup = () => {
+  handleCloseWithdrawPopup = () =>
     this.setState({ isOpenWithdrawPopup: false });
-  };
 
-  handleOpenTransferPopup = (wallet: CurrentWallet) => {
-    this.setState({ isOpenTransferPopup: true, currentWallet: wallet });
-  };
+  handleOpenTransferPopup = () => this.setState({ isOpenTransferPopup: true });
 
-  handleCloseTransferPopup = () => {
-    this.setState({ isOpenTransferPopup: false, currentWallet: {} });
-  };
+  handleCloseTransferPopup = () =>
+    this.setState({ isOpenTransferPopup: false });
 
   render() {
-    const { t, info, isPending, filters } = this.props;
-    if ((!info && isPending) || !filters) return <WalletBalanceLoader />;
-    if (!info) return <NotFoundPage />;
+    const { t, info } = this.props;
     const currentWallet: CurrentWallet = {
       currency: info.currency,
       available: info.available
@@ -95,9 +70,7 @@ class WalletCurrency extends React.Component<
             currency={info.currency}
           />
         </div>
-        {/*
-         //@ts-ignore TODO*/}
-        <WalletContainer filters={filters} currency={info.currency} />
+        <WalletTables currency={info.currency} />
         <WalletAddFundsPopup
           currentWallet={currentWallet}
           open={this.state.isOpenAddFundsPopup}
@@ -117,25 +90,17 @@ class WalletCurrency extends React.Component<
     );
   }
 }
+interface Props extends InjectedTranslateProps, OwnProps {}
 
-const mapStateToProps = (state: RootState, ownProps: WalletRouteProps) => {
-  const isPending = state.wallet.info.isPending;
-  const { currency } = ownProps.match.params;
-  const info = state.wallet.info.data
-    ? state.wallet.info.data.wallets.find(
-        wallet => wallet.currency === currency.toUpperCase()
-      )
-    : null;
-  return {
-    info,
-    isPending,
-    filters: state.platformData.data
-      ? state.platformData.data.enums.multiWallet
-      : undefined
-  };
-};
+interface OwnProps {
+  info: WalletData;
+}
 
-export default compose<React.FunctionComponent<WalletRouteProps>>(
-  connect(mapStateToProps),
-  translate()
-)(WalletCurrency);
+interface State {
+  isOpenAddFundsPopup: boolean;
+  isOpenWithdrawPopup: boolean;
+  isOpenTransferPopup: boolean;
+}
+
+const WalletCurrency = translate()(withLoader(_WalletCurrency));
+export default WalletCurrency;

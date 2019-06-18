@@ -1,13 +1,13 @@
-import { DashboardChartValue } from "gv-api-web";
+import { ProgramRequests } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 
 import { DASHBOARD_IN_REQUESTS } from "../actions/dashboard.actions";
 
-export type DashboardInRequestsState = IApiState<DashboardChartValue>;
+export type DashboardInRequestsState = IApiState<ProgramRequests>;
 
-const dashboardInRequestsReducer = apiReducerFactory<DashboardChartValue>({
+const dashboardInRequestsReducer = apiReducerFactory<ProgramRequests>({
   apiType: DASHBOARD_IN_REQUESTS
 });
 

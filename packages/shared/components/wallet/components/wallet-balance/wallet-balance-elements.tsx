@@ -1,101 +1,72 @@
 import "./wallet-balance.scss";
 
-import { GVColors } from "gv-react-components";
-import React from "react";
-import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-import * as InnerColors from "shared/components/gv-styles/color";
-import PieContainer from "shared/components/pie-container/pie-container";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import GVColors from "shared/components/gv-styles/gv-colors";
+import { CurrencyEnum } from "shared/utils/types";
 
-const getPercentageValue = (value: number, totalValue: number): number => {
-  const percentage = Math.round((value / totalValue) * 100);
-  return isNaN(percentage) ? 0 : percentage;
-};
+import WalletBalanceElement from "./wallet-balance-element";
 
-interface IWalletBalanceElement {
-  t(string: string): string;
-  total: number;
-  available: number;
-  invested: number;
-  pending: number;
-  currency: string;
+export const $piePendingColor = "#f7931a";
+export const $pieAvailableColor = "#5758a5";
+
+const _WalletBalanceElements: React.FC<Props> = ({
+  t,
+  pending,
+  total,
+  currency,
+  available,
+  invested
+}) => (
+  <div className="wallet-balance__wrapper">
+    <WalletBalanceElement
+      value={total!}
+      condition={total !== undefined}
+      title={t("wallet-page.total-balance")}
+      currency={currency}
+      pieContainer={false}
+      className="wallet-balance__statistic-item--total"
+      tooltipContentLabel={t("wallet-page.tooltip.total-balance")}
+    />
+    <div className="wallet-balance__elements">
+      <WalletBalanceElement
+        value={available!}
+        condition={available !== undefined}
+        totalValue={total}
+        title={t("wallet-page.available")}
+        currency={currency}
+        color={$pieAvailableColor}
+        tooltipContentLabel={t("wallet-page.tooltip.available")}
+      />
+      <WalletBalanceElement
+        value={invested!}
+        condition={invested !== undefined}
+        totalValue={total}
+        title={t("wallet-page.invested")}
+        currency={currency}
+        color={GVColors.$primaryColor}
+        tooltipContentLabel={t("wallet-page.tooltip.invested")}
+      />
+      <WalletBalanceElement
+        value={pending!}
+        condition={pending !== undefined}
+        totalValue={total}
+        title={t("wallet-page.pending")}
+        currency={currency}
+        color={$piePendingColor}
+        tooltipContentLabel={t("wallet-page.tooltip.pending")}
+      />
+    </div>
+  </div>
+);
+
+interface Props extends InjectedTranslateProps {
+  total?: number;
+  available?: number;
+  invested?: number;
+  pending?: number;
+  currency: CurrencyEnum;
 }
 
-const WalletBalanceElements = (props: IWalletBalanceElement) => {
-  const { t } = props;
-  return (
-    <div className="wallet-balance__wrapper">
-      <div className="wallet-balance__statistic-item">
-        <StatisticItem label={t("wallet-page.total-balance")} big accent>
-          <NumberFormat
-            value={formatCurrencyValue(props.total, props.currency)}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={` ${props.currency}`}
-          />
-        </StatisticItem>
-      </div>
-      <div className="wallet-balance__statistic-item">
-        <PieContainer
-          value={getPercentageValue(props.available, props.total)}
-          color={InnerColors.$pieAvailableColor}
-        />
-        <StatisticItem
-          label={t("wallet-page.available")}
-          className="wallet-balance__statistic-big"
-          big
-          accent
-        >
-          <NumberFormat
-            value={formatCurrencyValue(props.available, props.currency)}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={` ${props.currency}`}
-          />
-        </StatisticItem>
-      </div>
-      <div className="wallet-balance__statistic-item">
-        <PieContainer
-          value={getPercentageValue(props.invested, props.total)}
-          color={GVColors.$primaryColor}
-        />
-        <StatisticItem
-          label={t("wallet-page.invested-value")}
-          className="wallet-balance__statistic-big"
-          big
-          accent
-        >
-          <NumberFormat
-            value={formatCurrencyValue(props.invested, props.currency)}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={` ${props.currency}`}
-          />
-        </StatisticItem>
-      </div>
-      <div className="wallet-balance__statistic-item">
-        <PieContainer
-          value={getPercentageValue(props.pending, props.total)}
-          color={InnerColors.$piePendingColor}
-        />
-        <StatisticItem
-          label={t("wallet-page.pending")}
-          className="wallet-balance__statistic-big"
-          big
-          accent
-        >
-          <NumberFormat
-            value={props.pending}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={` ${props.currency}`}
-          />
-        </StatisticItem>
-      </div>
-    </div>
-  );
-};
-
-export default translate()(WalletBalanceElements);
+const WalletBalanceElements = translate()(React.memo(_WalletBalanceElements));
+export default WalletBalanceElements;

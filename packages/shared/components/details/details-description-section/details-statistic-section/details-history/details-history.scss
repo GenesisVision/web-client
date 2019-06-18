@@ -6,11 +6,6 @@
   &__header {
     padding-left: $padding-xsmall;
     padding-right: $padding-xsmall;
-
-    @include media-breakpoint-landscape-phone() {
-      padding-left: $padding-small;
-      padding-right: $padding-small;
-    }
   }
 
   &__heading {

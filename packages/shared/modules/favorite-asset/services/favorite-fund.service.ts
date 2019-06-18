@@ -3,14 +3,18 @@ import authService from "shared/services/auth-service";
 import { RootThunk } from "shared/utils/types";
 
 import {
-  addFavoriteFund,
-  removeFavoriteFund
+  addFavoriteFundAction,
+  removeFavoriteFundAction
 } from "../actions/favorite-fund.actions";
 
-export const toggleFavoriteFundDispatchable = (
+export type ToggleFavoriteDispatchableType = (
   id: string,
   isFavorite: boolean
-): RootThunk<void> => dispatch => {
+) => RootThunk<void>;
+export const toggleFavoriteFundDispatchable: ToggleFavoriteDispatchableType = (
+  id,
+  isFavorite
+) => dispatch => {
   if (!authService.getAuthArg()) return;
 
   const requestData = {
@@ -19,7 +23,9 @@ export const toggleFavoriteFundDispatchable = (
   };
 
   dispatch(
-    isFavorite ? removeFavoriteFund(requestData) : addFavoriteFund(requestData)
+    isFavorite
+      ? removeFavoriteFundAction(requestData)
+      : addFavoriteFundAction(requestData)
   );
 };
 

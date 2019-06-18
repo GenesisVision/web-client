@@ -11,15 +11,10 @@ import TagProgramTooltip from "./tag-program-tooltip";
 
 const MAX_VISIBLE_TAGS = 2;
 
-interface ITagProgramContainerProps {
-  tags: ProgramTag[];
-}
-
-class TagProgramContainer extends React.Component<ITagProgramContainerProps> {
-  render() {
-    const { tags } = this.props;
+const TagProgramContainer: React.FC<ITagProgramContainerProps> = React.memo(
+  ({ tags }) => {
     const length = tags.length;
-    const reminder = length > MAX_VISIBLE_TAGS ? length - 1 : null;
+    const reminder = length > MAX_VISIBLE_TAGS ? `${length - 1}` : null;
     return (
       <div className="tag-program-container">
         {tags.map(
@@ -44,6 +39,10 @@ class TagProgramContainer extends React.Component<ITagProgramContainerProps> {
       </div>
     );
   }
+);
+
+interface ITagProgramContainerProps {
+  tags: ProgramTag[];
 }
 
 export default TagProgramContainer;

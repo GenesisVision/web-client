@@ -1,8 +1,14 @@
+import { ChartSimple, FundsList, ProgramsList } from "gv-api-web";
 import { combineReducers } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { ITableState } from "shared/components/table/reducers/table.reducer";
+import { CurrencyEnum, Nullable } from "shared/utils/types";
 
 import dashboardAssetChartReducer from "./dashboard-asset-chart.reducer";
-import dashboardAssetReducer from "./dashboard-assets.reducer";
+import dashboardAssetReducer, {
+  ManagerAssetsState
+} from "./dashboard-assets.reducer";
 import dashboardEventsReducer, {
   ManagerPortfolioEventsState
 } from "./dashboard-events.reducer";
@@ -13,13 +19,22 @@ import dashboardInRequestsReducer, {
 import dashboardPeriodReducer from "./dashboard-period.reducer";
 import dashboardProgramsReducer from "./dashboard-programs.reducer";
 
+export interface IDashboardAssetChart {
+  type: ASSETS_TYPES;
+  id: string;
+  title: string;
+  currency?: CurrencyEnum;
+  equityChart: ChartSimple[];
+  pnLChart?: ChartSimple[];
+}
+
 export type ManagerDashboardState = {
   period: ChartDefaultPeriod;
-  assets: any;
-  assetChart: any;
+  assets: ManagerAssetsState;
+  assetChart: Nullable<IDashboardAssetChart>;
   eventsData: ManagerPortfolioEventsState;
-  programs: any;
-  funds: any;
+  programs: ITableState<ProgramsList>;
+  funds: ITableState<FundsList>;
   inRequestsData: ProgramRequestsState;
 };
 

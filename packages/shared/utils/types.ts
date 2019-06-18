@@ -1,22 +1,41 @@
-import { AmountWithCurrencyCurrencyEnum, CancelablePromise } from "gv-api-web";
+import {
+  AmountWithCurrencyCurrencyEnum,
+  CancelablePromise,
+  ProgramNotificationSettingList
+} from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
-import { Action, AnyAction, Dispatch } from "redux";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-
-import { ChartDefaultPeriod } from "../components/chart/chart-period/chart-period.helpers";
-import RootState from "../reducers/root-reducer";
+import { Action, Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { RootState } from "shared/reducers/root-reducer";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
 }
 
-export interface ActionType<T = any> extends Action {
-  type: string;
-  payload?: T;
+export type FavoriteActionProps = { id: string; authorization: string };
+
+type FavoriteActionMeta = {
+  id: string;
+  isFavorite: boolean;
+};
+export interface FavoriteActionType<T = any> extends ApiAction<T> {
+  meta: FavoriteActionMeta;
 }
 
-export type ApiAction<T = any> = ActionType<CancelablePromise<T>>;
+export interface NotificationsActionType<T = ProgramNotificationSettingList>
+  extends ActionType {
+  errorMessage?: string;
+}
+
+export interface ActionType<T = any, U = any> extends Action {
+  type: string;
+  payload: T;
+  meta?: U;
+}
+
+export type ApiAction<T = any, U = any> = ActionType<CancelablePromise<T>, U>;
 
 export type RootThunkAction<R = any> = ThunkAction<R, RootState, any, any>;
 
@@ -58,3 +77,8 @@ export type SetSubmittingType = (isSubmitting: boolean) => void;
 export type HandlePeriodChangeType = (period: ChartDefaultPeriod) => void;
 
 export type CurrencyEnum = AmountWithCurrencyCurrencyEnum;
+
+export type AuthRootState = ManagerRootState | InvestorRootState;
+
+export type TGetState = () => RootState;
+export type TGetAuthState = () => AuthRootState;

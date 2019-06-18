@@ -1,5 +1,16 @@
+import {
+  CancelablePromise,
+  DashboardChartValue,
+  DashboardPortfolioEvents,
+  FundsList,
+  ProgramRequests,
+  ProgramsList,
+  SignalsList
+} from "gv-api-web";
+import { Action } from "redux";
+import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import investorApi from "shared/services/api-client/investor-api";
-import signalApi from "shared/services/api-client/signal-api";
+import { ActionType } from "shared/utils/types";
 
 export const DASHBOARD_PROGRAMS = "DASHBOARD_PROGRAMS";
 export const DASHBOARD_FUNDS = "DASHBOARD_FUNDS";
@@ -13,55 +24,63 @@ export const DASHBOARD_CANCEL_PROGRAM_REQUESTS =
 
 export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
 
-export const fetchDashboardPrograms = (auth: string, filters: any) => {
-  return {
-    type: DASHBOARD_PROGRAMS,
-    payload: investorApi.v10InvestorProgramsGet(auth, filters)
-  };
-};
+export const fetchDashboardProgramsAction = (
+  auth: string,
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<ProgramsList>> => ({
+  type: DASHBOARD_PROGRAMS,
+  payload: investorApi.v10InvestorProgramsGet(auth, filters)
+});
 
-export const fetchDashboardFunds = (auth: string, filters: any) => {
-  return {
-    type: DASHBOARD_FUNDS,
-    payload: investorApi.v10InvestorFundsGet(auth, filters)
-  };
-};
+export const fetchDashboardFundsAction = (
+  auth: string,
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<FundsList>> => ({
+  type: DASHBOARD_FUNDS,
+  payload: investorApi.v10InvestorFundsGet(auth, filters)
+});
 
-export const fetchDashboardCopytrading = (auth: string, filters: any) => {
-  return {
-    type: DASHBOARD_COPYTRADING,
-    payload: investorApi.v10InvestorSignalsGet(auth, filters)
-  };
-};
+export const fetchDashboardCopytradingAction = (
+  auth: string,
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<SignalsList>> => ({
+  type: DASHBOARD_COPYTRADING,
+  payload: investorApi.v10InvestorSignalsGet(auth, filters)
+});
 
-export const fetchPortfolioChart = (auth: string, filters?: any) => {
-  return {
-    type: DASHBOARD_PORTFOLIO_CHART,
-    payload: investorApi.v10InvestorPortfolioChartGet(auth, filters)
-  };
-};
+export const fetchPortfolioChartAction = (
+  auth: string,
+  filters?: ComposeFiltersAllType
+): ActionType<CancelablePromise<DashboardChartValue>> => ({
+  type: DASHBOARD_PORTFOLIO_CHART,
+  payload: investorApi.v10InvestorPortfolioChartGet(auth, filters)
+});
 
-export const fetchPortfolioEvents = (auth: string, filters: any) => {
-  return {
-    type: DASHBOARD_PORTFOLIO_EVENTS,
-    payload: investorApi.v10InvestorPortfolioEventsGet(auth, filters)
-  };
-};
+export const fetchPortfolioEventsAction = (
+  auth: string,
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<DashboardPortfolioEvents>> => ({
+  type: DASHBOARD_PORTFOLIO_EVENTS,
+  payload: investorApi.v10InvestorPortfolioEventsGet(auth, filters)
+});
 
-export const fetchInRequests = (auth: string, skip: number, take: number) => {
-  return {
-    type: DASHBOARD_IN_REQUESTS,
-    payload: investorApi.v10InvestorRequestsBySkipByTakeGet(skip, take, auth)
-  };
-};
+export const fetchInRequestsAction = (
+  auth: string,
+  skip: number,
+  take: number
+): ActionType<CancelablePromise<ProgramRequests>> => ({
+  type: DASHBOARD_IN_REQUESTS,
+  payload: investorApi.v10InvestorRequestsBySkipByTakeGet(skip, take, auth)
+});
 
-export const cancelProgramRequest = (auth: string, id: string) => {
-  return {
-    type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
-    payload: investorApi.v10InvestorProgramsRequestsByIdCancelPost(id, auth)
-  };
-};
+export const cancelProgramRequestAction = (
+  auth: string,
+  id: string
+): ActionType<CancelablePromise<any>> => ({
+  type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
+  payload: investorApi.v10InvestorProgramsRequestsByIdCancelPost(id, auth)
+});
 
-export const clearDashboardAssetsTable = () => ({
+export const clearDashboardAssetsTableAction = (): Action => ({
   type: CLEAR_DASHBOARD_ASSETS_TABLE
 });

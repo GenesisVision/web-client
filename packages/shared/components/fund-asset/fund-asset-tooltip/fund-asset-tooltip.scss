@@ -2,14 +2,13 @@
 @import "~shared/styles/_sizes.scss";
 
 .fund-asset-tooltip {
+  @include font-size($font-size-paragraph);
   &__header {
-    font-size: $font-size-paragraph;
     letter-spacing: 0.2px;
     color: $text-dark-color;
   }
 
   &__content {
-    font-size: $font-size-paragraph;
     color: $text-accent-color;
   }
 }

@@ -4,40 +4,18 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import DashboardRequest from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
-import { ASSET, ROLE } from "shared/constants/constants";
+import { CancelRequestPropsType } from "shared/components/dashboard/dashboard.constants";
+import { ASSET } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import {
-  CancelRequestType,
   cancelRequestDispatch,
   getAssetRequests
 } from "./services/asset-status.service";
 
-export interface IAssetStatusRequestsOwnProps {
-  id: string;
-  role: ROLE;
-  asset: ASSET;
-  onCancel(): void;
-  handleCloseDropdown(): void;
-}
-
-export interface IAssetStatusRequestsDispatchProps {
-  service: {
-    cancelRequestDispatch(x: CancelRequestType): Promise<any>;
-  };
-}
-
-export interface IAssetStatusRequestsState {
-  requests?: Array<ProgramRequest>;
-}
-
-class AssetStatusRequests extends React.Component<
-  IAssetStatusRequestsOwnProps &
-    InjectedTranslateProps &
-    IAssetStatusRequestsDispatchProps,
-  IAssetStatusRequestsState
-> {
-  state: IAssetStatusRequestsState = {
+class AssetStatusRequests extends React.PureComponent<Props, State> {
+  state: State = {
     requests: undefined
   };
 
@@ -55,7 +33,7 @@ class AssetStatusRequests extends React.Component<
   };
 
   render() {
-    const { t, service, role, asset } = this.props;
+    const { t, service, asset } = this.props;
     const { requests } = this.state;
     if (!requests) return null;
     if (requests.length === 0) {
@@ -64,34 +42,55 @@ class AssetStatusRequests extends React.Component<
       );
     }
     return (
-      <React.Fragment>
+      <>
         {requests.map(x => (
           <DashboardRequest
             key={x.id}
             request={x}
             cancelRequest={service.cancelRequestDispatch}
             asset={asset}
-            role={role}
             onApplyCancelRequest={this.handleCancel}
           />
         ))}
-      </React.Fragment>
+      </>
     );
   }
 }
 
-const mapDispatchToProps = (
-  dispatch: MiddlewareDispatch
-): IAssetStatusRequestsDispatchProps => {
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => {
   return {
     service: {
-      cancelRequestDispatch: (x: CancelRequestType) =>
+      cancelRequestDispatch: (x: CancelRequestPropsType) =>
         dispatch(cancelRequestDispatch(x))
     }
   };
 };
 
-export default compose<React.ComponentType<IAssetStatusRequestsOwnProps>>(
+interface Props
+  extends WithRoleProps,
+    InjectedTranslateProps,
+    DispatchProps,
+    OwnProps {}
+
+interface OwnProps {
+  id: string;
+  asset: ASSET;
+  onCancel(): void;
+  handleCloseDropdown(): void;
+}
+
+export interface DispatchProps {
+  service: {
+    cancelRequestDispatch(x: CancelRequestPropsType): Promise<any>;
+  };
+}
+
+export interface State {
+  requests?: Array<ProgramRequest>;
+}
+
+export default compose<React.ComponentType<OwnProps>>(
+  withRole,
   connect(
     null,
     mapDispatchToProps

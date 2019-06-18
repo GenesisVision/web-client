@@ -1,15 +1,15 @@
 import "../create-fund-settings.scss";
 
 import classnames from "classnames";
-import { GVTextField } from "gv-react-components";
 import React from "react";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
+import GVTextField from "shared/components/gv-text-field";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Popover from "shared/components/popover/popover";
 import Regulator from "shared/components/regulator/regulator";
 import GVScroll from "shared/components/scroll/gvscroll";
 
-class CreateFundSettingsAddAsset extends React.Component {
+class CreateFundSettingsAddAsset extends React.PureComponent {
   state = {
     filteredAssets: this.props.assets
   };
@@ -38,7 +38,7 @@ class CreateFundSettingsAddAsset extends React.Component {
     const { filteredAssets } = this.state;
     return (
       <Popover
-        horizontal="right"
+        horizontal="left"
         vertical="center"
         anchorEl={anchor}
         noPadding

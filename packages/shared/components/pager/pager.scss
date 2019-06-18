@@ -35,6 +35,10 @@ $pager-button-size-mobile: $pager-button-size/$divider-text;
     align-items: center;
     border-radius: 8px;
     cursor: pointer;
+    margin-right: 5px;
+    &:last-child {
+      margin-right: 0;
+    }
     &:hover {
       opacity: 1;
       background-color: #1b2a35;

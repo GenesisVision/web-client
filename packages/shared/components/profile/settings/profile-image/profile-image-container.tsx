@@ -1,9 +1,10 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
-import RootState from "shared/reducers/root-reducer";
+import { headerSelector } from "shared/reducers/header-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { updateProfileAvatar } from "../services/profile-settings.service";
@@ -33,12 +34,15 @@ const _ProfileImageContainer: React.FC<StateProps & DispatchProps> = ({
   );
 };
 
-const mapStateToProps = ({ profileHeader }: RootState): StateProps => {
-  return { headerData: profileHeader.info.data };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  headerData: headerSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  services: bindActionCreators<any, any>({ updateProfileAvatar }, dispatch)
+  services: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { updateProfileAvatar },
+    dispatch
+  )
 });
 
 const ProfileImageContainer = connect(
@@ -52,8 +56,10 @@ interface StateProps {
   headerData?: ProfileHeaderViewModel;
 }
 
+interface ServiceThunks extends ActionCreatorsMapObject {
+  updateProfileAvatar: typeof updateProfileAvatar;
+}
+
 interface DispatchProps {
-  services: {
-    updateProfileAvatar(image: IImageValue): Promise<void>;
-  };
+  services: ResolveThunks<ServiceThunks>;
 }

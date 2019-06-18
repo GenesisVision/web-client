@@ -1,11 +1,12 @@
 import { ProgramPwdUpdate } from "gv-api-web";
-import React, { Component } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
+import { ManagerRootState } from "reducers";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
-import { ManagerRootState } from "../../reducers";
 import ChangePasswordTradingAccountForm, {
   IChangePasswordTradingAccountFormValues
 } from "./components/change-password-trading-account-form";
@@ -37,7 +38,7 @@ interface IChangePasswordTradingAccountPopupState {
   errorMessage: string;
 }
 
-class ChangePasswordTradingAccountPopup extends Component<
+class _ChangePasswordTradingAccountPopup extends React.PureComponent<
   IChangePasswordTradingAccountPopupProps,
   IChangePasswordTradingAccountPopupState
 > {
@@ -58,6 +59,7 @@ class ChangePasswordTradingAccountPopup extends Component<
     service
       .changePasswordTradingAccount(id, model)
       .then(() => {
+        this.setState({ errorMessage: "" });
         onClose();
       })
       .catch((error: any) => {
@@ -89,12 +91,9 @@ class ChangePasswordTradingAccountPopup extends Component<
 
 const mapStateToProps = (
   state: ManagerRootState
-): IChangePasswordTradingAccountPopupStateProps => {
-  const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
-    ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
-    : false;
-  return { twoFactorEnabled };
-};
+): IChangePasswordTradingAccountPopupStateProps => ({
+  twoFactorEnabled: twoFactorEnabledSelector(state)
+});
 
 const mapDispatchToProps = (
   dispatch: Dispatch
@@ -107,7 +106,8 @@ const mapDispatchToProps = (
   )
 });
 
-export default connect(
+const ChangePasswordTradingAccountPopup = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ChangePasswordTradingAccountPopup);
+)(_ChangePasswordTradingAccountPopup);
+export default ChangePasswordTradingAccountPopup;

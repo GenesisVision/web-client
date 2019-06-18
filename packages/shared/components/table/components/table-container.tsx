@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
-import { FilteringType, TFilter } from "./filtering/filter.type";
+import { FilteringType, TDefaults, TFilter } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
 import { GetItemsFuncActionType } from "./table.types";
 
@@ -24,7 +24,7 @@ interface ITableContainerStateProps {
   paging: IPaging;
   filtering: FilteringType;
   fetchItems: GetItemsFuncActionType;
-  defaults: any;
+  defaults: TDefaults;
 }
 
 interface ITableContainerDispatchProps {
@@ -34,7 +34,7 @@ interface ITableContainerDispatchProps {
       dataSelector: (opts?: any) => { [keys: string]: any }
     ): (dispatch: Dispatch, getState: any) => void;
     updateFilters(
-      filters?: Object,
+      filters?: FilteringType,
       type?: string
     ): (dispatch: Dispatch) => void;
   };
@@ -50,7 +50,7 @@ class TableContainer extends React.PureComponent<
     if (isFetchOnMount) this.updateItems();
   }
 
-  updateItems = (changedFilters?: Object) => {
+  updateItems = (changedFilters?: FilteringType) => {
     const { service, dataSelector, fetchItems, defaults } = this.props;
     service.updateFilters(changedFilters, defaults.type);
     service.getItems(fetchItems, dataSelector);

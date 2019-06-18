@@ -1,19 +1,14 @@
 import "./deposit.scss";
 
-import {
-  FundInvestInfo,
-  ProgramInvestInfo,
-  WalletBaseData,
-  WalletMultiAvailable
-} from "gv-api-web";
-import React, { Fragment } from "react";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { FundInvestInfo, ProgramInvestInfo, WalletBaseData } from "gv-api-web";
+import React from "react";
+import { ResolveThunks, connect } from "react-redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { fetchBaseWallets } from "shared/components/wallet/services/wallet.services";
-import { ASSET, ROLE_ENV } from "shared/constants/constants";
-import RootState from "shared/reducers/root-reducer";
-import { RootThunk, SetSubmittingType } from "shared/utils/types";
+import { ASSET } from "shared/constants/constants";
+import { RootState } from "shared/reducers/root-reducer";
+import { SetSubmittingType } from "shared/utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
@@ -48,7 +43,7 @@ class _DepositPopup extends React.PureComponent<Props, State> {
       : undefined;
 
     return (
-      <Fragment>
+      <>
         <DepositTop
           title={investInfo.title}
           availableToInvestBase={availableToInvestBase}
@@ -59,26 +54,21 @@ class _DepositPopup extends React.PureComponent<Props, State> {
           wallets={wallets}
           hasEntryFee={hasEntryFee}
           asset={asset}
-          role={ROLE_ENV}
           errorMessage={errorMessage}
           currency={currency}
           info={investInfo}
           onSubmit={invest}
         />
-      </Fragment>
+      </>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<
-    {
-      fetchBaseWallets: () => RootThunk<Promise<WalletMultiAvailable>>;
-    },
-    {
-      fetchBaseWallets: () => Promise<WalletMultiAvailable>;
-    }
-  >({ fetchBaseWallets }, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { fetchBaseWallets },
+    dispatch
+  )
 });
 
 const DepositPopup = connect<null, DispatchProps, OwnProps, RootState>(
@@ -105,10 +95,12 @@ interface OwnProps {
   errorMessage: string;
 }
 
+interface ServiceThunks extends ActionCreatorsMapObject {
+  fetchBaseWallets: typeof fetchBaseWallets;
+}
+
 interface DispatchProps {
-  service: {
-    fetchBaseWallets(): Promise<WalletMultiAvailable>;
-  };
+  service: ResolveThunks<ServiceThunks>;
 }
 
 interface Props extends OwnProps, DispatchProps {}

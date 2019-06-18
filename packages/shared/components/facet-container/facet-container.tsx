@@ -1,8 +1,9 @@
-import { FundFacet, ProgramFacet } from "gv-api-web";
+import { FundFacet, PlatformInfo, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { compose } from "redux";
+import { createSelector } from "reselect";
 import { IFundsFacetTableProps } from "shared/components/funds/funds-facet/components/funds-facet-table";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import { IProgramsFacetTableProps } from "shared/components/programs/programs-facet/components/programs-facet-table";
@@ -10,7 +11,9 @@ import { FilteringType } from "shared/components/table/components/filtering/filt
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
-import RootState from "shared/reducers/root-reducer";
+import { platformDataSelector } from "shared/reducers/platform-reducer";
+import { RootState } from "shared/reducers/root-reducer";
+import { MiddlewareDispatch } from "shared/utils/types";
 
 class _FacetContainer extends React.PureComponent<Props, State> {
   state = {
@@ -44,10 +47,12 @@ class _FacetContainer extends React.PureComponent<Props, State> {
     const { isPending, notFound, facet } = this.state;
     if (!facet || isPending) return null;
     if (notFound) return <NotFoundPage />;
-    const { title } = facet!;
+    const { title, sorting, timeframe } = facet!;
     return (
       <TableContainer
         title={title}
+        sorting={sorting}
+        timeframe={timeframe}
         getItems={this.getFacetItems}
         isAuthenticated={isAuthenticated}
       />
@@ -55,35 +60,51 @@ class _FacetContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, props: Props): StateProps => {
-  const { data } = state.platformData;
-  let facets = null;
-  if (data && props.asset)
-    facets = (data as { [keys: string]: any })[props.asset];
-  return { facets };
-};
+const facetSelector = createSelector<
+  RootState,
+  OwnProps,
+  PlatformInfo | undefined,
+  FACET_ASSET,
+  FacetType[] | undefined
+>(
+  state => platformDataSelector(state),
+  (state, props) => props.asset,
+  (data, asset) => {
+    if (!data) return undefined;
+    return data[asset];
+  }
+);
+
+const mapStateToProps = (state: RootState, props: OwnProps): StateProps => ({
+  facets: facetSelector(state, props)
+});
 
 const mapDispatchToProps = (
-  dispatch: Dispatch,
+  dispatch: MiddlewareDispatch,
   props: Props
 ): DispatchProps => {
   const { getCurrentFacet } = props;
   return {
-    service: bindActionCreators({ getCurrentFacet }, dispatch)
+    service: {
+      getCurrentFacet: () => dispatch(getCurrentFacet())
+    }
   };
 };
 
 interface OwnProps {
-  getCurrentFacet: () => FacetDataType;
+  getCurrentFacet: () => (
+    dispatch: MiddlewareDispatch,
+    getState: any
+  ) => FacetDataType;
   asset: FACET_ASSET;
   TableContainer: React.ComponentType<
     IProgramsFacetTableProps | IFundsFacetTableProps
   >;
   getItems: (args: FilteringType) => Promise<IDataModel>;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
 }
 interface StateProps {
-  facets: FacetType[];
+  facets?: FacetType[];
 }
 interface DispatchProps {
   service: {
@@ -103,7 +124,7 @@ export enum FACET_ASSET {
   FUNDS = "fundsFacets"
 }
 
-const FacetContainer = compose(
+const FacetContainer = compose<React.ComponentType<OwnProps>>(
   withRouter,
   withAuthenticated,
   connect(

@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
-import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -14,13 +13,25 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-const ProgramTableRowShort: React.FC<Props & InjectedTranslateProps> = ({
+interface IProgramTableRowShortProps {
+  title: string;
+  showRating?: boolean;
+  program: ProgramDetails;
+  isAuthenticated?: boolean;
+  toggleFavorite?: TableToggleFavoriteHandlerType;
+  onExpandClick(): void;
+}
+
+const ProgramTableRowShort: React.FC<
+  IProgramTableRowShortProps & InjectedTranslateProps
+> = ({
   t,
   title,
   showRating,
@@ -35,6 +46,7 @@ const ProgramTableRowShort: React.FC<Props & InjectedTranslateProps> = ({
     statistic,
     logo,
     level,
+    levelProgress,
     color,
     url,
     currency,
@@ -68,6 +80,7 @@ const ProgramTableRowShort: React.FC<Props & InjectedTranslateProps> = ({
             <AssetAvatar
               url={logo}
               level={level}
+              levelProgress={levelProgress}
               alt={program.title}
               color={color}
               tooltip={
@@ -94,7 +107,7 @@ const ProgramTableRowShort: React.FC<Props & InjectedTranslateProps> = ({
           </div>
         </div>
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--balance">
+      <TableCell className="programs-table__cell programs-table__cell--equity">
         <Tooltip
           render={() => (
             <div>
@@ -119,14 +132,17 @@ const ProgramTableRowShort: React.FC<Props & InjectedTranslateProps> = ({
         {formatCurrencyValue(availableInvestmentBase, currency)} {currency}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
-        {periodStarts &&
-          ((status !== STATUS.CLOSED && (
-            <ProgramPeriodPie start={periodStarts} end={periodEnds} />
-          )) ||
-            t("program-period.program-closed"))}
+        {periodStarts && (
+          <ProgramPeriodPie
+            condition={status !== STATUS.CLOSED}
+            loader={t("program-period.program-closed")}
+            start={periodStarts}
+            end={periodEnds}
+          />
+        )}
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--age">
-        {moment(program.creationDate).format("ll")}
+      <TableCell className="programs-table__cell programs-table__cell--trades">
+        {moment(program.creationDate).format()}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat
@@ -149,7 +165,7 @@ const ProgramTableRowShort: React.FC<Props & InjectedTranslateProps> = ({
         </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--chart">
-        <ProgramSimpleChart data={chart} programId={id} />
+        {chart && <ProgramSimpleChart data={chart} programId={id} />}
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">
@@ -164,13 +180,4 @@ const ProgramTableRowShort: React.FC<Props & InjectedTranslateProps> = ({
   );
 };
 
-export default translate()(ProgramTableRowShort);
-
-interface Props {
-  title: string;
-  showRating?: boolean;
-  program: ProgramDetails;
-  isAuthenticated?: boolean;
-  toggleFavorite?(programId: string, isFavorite: boolean): void;
-  onExpandClick(): void;
-}
+export default translate()(React.memo(ProgramTableRowShort));

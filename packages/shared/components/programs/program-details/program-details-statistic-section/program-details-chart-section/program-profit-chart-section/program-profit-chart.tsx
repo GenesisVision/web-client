@@ -1,5 +1,4 @@
 import { ChartSimple } from "gv-api-web";
-import { GVColors } from "gv-react-components";
 import * as React from "react";
 import {
   Area,
@@ -12,12 +11,14 @@ import {
 } from "recharts";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
-import ProgramChartGradient, {
+import {
+  ChartGradient,
   getStrokeColor,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import GVColors from "shared/components/gv-styles/gv-colors";
 import { formatValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 import ProgramProfitTooltip from "./program-profit-tooltip";
 
@@ -26,7 +27,8 @@ const ProgramProfitChart: React.FC<Props> = ({
   pnlChart,
   currency
 }) => {
-  if (equityChart.length === 0 || pnlChart.length === 0) return null;
+  if (equityChart.length === 0 || pnlChart.length === 0 || !currency)
+    return null;
   const equity = equityChart.map(x => ({
     date: x.date.getTime(),
     value: formartChartMinValue(x.value)
@@ -43,7 +45,7 @@ const ProgramProfitChart: React.FC<Props> = ({
     <ResponsiveContainer>
       <ComposedChart data={pnl} margin={{ top: 20 }}>
         <defs>
-          <ProgramChartGradient
+          <ChartGradient
             offset={off}
             name="equityProgramChartFill"
             color={areaStrokeColor}
@@ -88,6 +90,7 @@ const ProgramProfitChart: React.FC<Props> = ({
         <CartesianGrid vertical={false} strokeWidth={0.1} />
         <Bar
           dataKey="value"
+          //@ts-ignore
           data={pnl}
           unit={` ${currency}`}
           barSize={6}
@@ -118,8 +121,8 @@ const ProgramProfitChart: React.FC<Props> = ({
 
 interface Props {
   equityChart: ChartSimple[];
-  pnlChart: any;
-  currency: CURRENCIES;
+  pnlChart: ChartSimple[];
+  currency?: CurrencyEnum;
 }
 
 export default React.memo(ProgramProfitChart);

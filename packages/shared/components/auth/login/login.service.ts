@@ -1,17 +1,19 @@
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
-import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
+import { setTwoFactorRequirementAction } from "shared/actions/2fa-actions";
 import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
+import platformActions from "shared/actions/platform-actions";
+import { windowResizeAction } from "shared/actions/ui-actions";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
-import { ResponseError } from "shared/utils/types";
+import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import {
   CODE_TYPE,
   LOGIN,
   LOGIN_TWO_FACTOR,
-  storeTwoFactor
+  storeTwoFactorAction
 } from "./login.actions";
 import { LOGIN_ROUTE, LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
 
@@ -43,23 +45,23 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
   )
     .then((response: { value: string }) => {
       authService.storeToken(response.value);
-      dispatch(authActions.updateToken());
+      dispatch(authActions.updateTokenAction());
       if (type) dispatch(clearTwoFactorData());
       dispatch(push(from));
     })
     .catch((e: ResponseError) => {
       if (e.code === "RequiresTwoFactor") {
         dispatch(
-          storeTwoFactor({
+          storeTwoFactorAction({
             email,
             password,
             from
           })
         );
-        dispatch(setTwoFactorRequirement(true));
+        dispatch(setTwoFactorRequirementAction(true));
         dispatch(push(LOGIN_ROUTE_TWO_FACTOR_ROUTE));
       } else {
-        setSubmitting(false);
+        setSubmitting!(false);
       }
     });
 };
@@ -76,7 +78,9 @@ export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => 
 
 export const logout: logoutFuncType = () => dispatch => {
   authService.removeToken();
-  dispatch(authActions.updateToken());
+  dispatch(authActions.logoutAction());
+  dispatch(platformActions.fetchPlatformSettings);
+  dispatch(windowResizeAction());
   dispatch(push(HOME_ROUTE));
 };
 
@@ -86,9 +90,9 @@ export type LoginFuncType = (
     prefix?: number;
     email: string;
     password: string;
-    setSubmitting: any;
     method: any;
     code: string;
+    setSubmitting?: SetSubmittingType;
     type?: CODE_TYPE;
     from?: string;
   }

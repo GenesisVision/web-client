@@ -1,12 +1,13 @@
 import { ProgramWithdrawInfo } from "gv-api-web";
-import {
-  FETCH_WITHDRAW_PROGRAM_INFO,
-  WITHDRAW_SUBMIT_BY_ID
-} from "modules/program-withdraw/program-withdraw-constants";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
+
+import {
+  FETCH_WITHDRAW_PROGRAM_INFO,
+  WITHDRAW_SUBMIT_BY_ID
+} from "../program-withdraw.constants";
 
 const programWithdrawReducer = apiReducerFactory<ProgramWithdrawInfo>({
   apiType: FETCH_WITHDRAW_PROGRAM_INFO

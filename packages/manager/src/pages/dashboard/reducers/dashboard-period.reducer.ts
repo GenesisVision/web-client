@@ -2,21 +2,22 @@ import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
+import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 
-import { DASHBOARD_PERIOD } from "../actions/dashboard.actions";
+import {
+  DASHBOARD_PERIOD,
+  TSetPeriodAction
+} from "../actions/dashboard.actions";
 
 const dashboardPeriodReducer = (
   state: ChartDefaultPeriod = getDefaultPeriod(),
-  action: any
-): ChartDefaultPeriod => {
-  switch (action.type) {
-    case DASHBOARD_PERIOD:
-      return {
-        ...action.payload
-      };
-    default:
-      return state;
-  }
-};
+  action: TSetPeriodAction
+): ChartDefaultPeriod =>
+  defaultReducer<TSetPeriodAction, ChartDefaultPeriod>(
+    action,
+    state,
+    getDefaultPeriod(),
+    DASHBOARD_PERIOD
+  );
 
 export default dashboardPeriodReducer;

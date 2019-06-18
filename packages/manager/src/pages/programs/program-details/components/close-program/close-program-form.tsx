@@ -1,5 +1,4 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import {
   InjectedTranslateProps,
@@ -7,47 +6,48 @@ import {
   translate
 } from "react-i18next";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
 const CloseProgramForm: React.FC<
   InjectedFormikProps<FormProps, ICloseProgramFormValues>
-> = ({ t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => {
-  return (
-    <form id="closeProgramForm" onSubmit={handleSubmit} noValidate>
-      <div className="dialog__top">
-        <h2>{t("program-details-page.description.close-program")}</h2>
-        <div className="dialog__text">
-          <p>
-            {t("program-details-page.description.close-program-notification")}
-          </p>
-        </div>
-        {twoFactorEnabled && (
-          <GVFormikField
-            type="text"
-            name="twoFactorCode"
-            label={t("wallet-withdraw.two-factor-code-label")}
-            autoComplete="off"
-            component={GVTextField}
-          />
-        )}
-        <div className="dialog__buttons">
-          <GVButton type="submit" disabled={isSubmitting}>
-            {t("buttons.confirm")}
-          </GVButton>
-          <GVButton
-            color="secondary"
-            variant="outlined"
-            disabled={isSubmitting}
-            onClick={onCancel}
-          >
-            {t("buttons.cancel")}
-          </GVButton>
-        </div>
+> = ({ t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => (
+  <form id="closeProgramForm" onSubmit={handleSubmit} noValidate>
+    <div className="dialog__top">
+      <h2>{t("program-details-page.description.close-program")}</h2>
+      <div className="dialog__text">
+        <p>
+          {t("program-details-page.description.close-program-notification")}
+        </p>
       </div>
-    </form>
-  );
-};
+      {twoFactorEnabled && (
+        <GVFormikField
+          type="text"
+          name={FIELDS.twoFactorCode}
+          label={t("wallet-withdraw.two-factor-code-label")}
+          autoComplete="off"
+          component={GVTextField}
+        />
+      )}
+      <div className="dialog__buttons">
+        <GVButton type="submit" disabled={isSubmitting}>
+          {t("buttons.confirm")}
+        </GVButton>
+        <GVButton
+          color="secondary"
+          variant="outlined"
+          disabled={isSubmitting}
+          onClick={onCancel}
+        >
+          {t("buttons.cancel")}
+        </GVButton>
+      </div>
+    </div>
+  </form>
+);
 
 const twoFactorValidator = (
   t: TranslationFunction,
@@ -67,18 +67,20 @@ export default compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<OwnProps, ICloseProgramFormValues>({
     displayName: "close-program",
-    mapPropsToValues: () => {
-      return { twoFactorCode: "" };
-    },
+    mapPropsToValues: () => ({ [FIELDS.twoFactorCode]: "" }),
     validationSchema: ({ t, twoFactorEnabled }: FormProps) =>
       object().shape({
-        twoFactorCode: twoFactorValidator(t, twoFactorEnabled)
+        [FIELDS.twoFactorCode]: twoFactorValidator(t, twoFactorEnabled)
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
   })
 )(CloseProgramForm);
+
+enum FIELDS {
+  twoFactorCode = "twoFactorCode"
+}
 
 interface OwnProps {
   onCancel(): void;
@@ -90,7 +92,7 @@ interface OwnProps {
 }
 
 export interface ICloseProgramFormValues {
-  twoFactorCode: string;
+  [FIELDS.twoFactorCode]: string;
 }
 
 type FormProps = InjectedTranslateProps & OwnProps;

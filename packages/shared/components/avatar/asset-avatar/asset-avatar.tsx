@@ -1,6 +1,7 @@
-import { GVProgramAvatar } from "gv-react-components";
-import { GVProgramAvatarProps } from "gv-react-components/dist/gv-program-avatar";
 import * as React from "react";
+import GVProgramAvatar, {
+  GVProgramAvatarProps
+} from "shared/components/gv-program-avatar";
 import { ILevelTooltip } from "shared/components/level-tooltip/level-tooltip";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -21,7 +22,7 @@ interface IAssetAvatarState {
   anchor?: EventTarget;
 }
 
-class AssetAvatar extends React.Component<
+class AssetAvatar extends React.PureComponent<
   IAssetAvatarProps,
   IAssetAvatarState
 > {

@@ -1,6 +1,6 @@
 import "./details-description-control.scss";
 
-import React, { ComponentType, PureComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
@@ -19,29 +19,29 @@ interface IDetailsNotificationProps
   extends IDetailsNotificationOwnProps,
     InjectedTranslateProps {}
 
-class DetailsNotification extends PureComponent<IDetailsNotificationProps> {
-  render() {
-    const { t, url, hasNotifications, title } = this.props;
+const DetailsNotification: React.FC<IDetailsNotificationProps> = ({
+  t,
+  url,
+  hasNotifications,
+  title
+}) => (
+  <DetailsDescriptionControl
+    tag={Link}
+    to={{
+      pathname: url,
+      state: `/ ${title}`
+    }}
+    text={t("fund-details-page.description.notifications")}
+  >
+    <RingIcon
+      selected={hasNotifications}
+      className="details-description-control__icon"
+    />
+  </DetailsDescriptionControl>
+);
 
-    return (
-      <DetailsDescriptionControl
-        tag={Link}
-        to={{
-          pathname: url,
-          state: `/ ${title}`
-        }}
-        text={t("fund-details-page.description.notifications")}
-      >
-        <RingIcon
-          selected={hasNotifications}
-          className="details-description-control__icon"
-        />
-      </DetailsDescriptionControl>
-    );
-  }
-}
-
-export default compose<ComponentType<IDetailsNotificationOwnProps>>(
+export default compose<React.ComponentType<IDetailsNotificationOwnProps>>(
   translate(),
-  isAuthenticated
+  isAuthenticated,
+  React.memo
 )(DetailsNotification);

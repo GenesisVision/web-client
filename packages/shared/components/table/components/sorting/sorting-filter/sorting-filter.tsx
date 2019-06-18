@@ -1,7 +1,7 @@
 import "./sorting-filter.scss";
 
-import { GVButton } from "gv-react-components";
-import * as React from "react";
+import React, { useCallback } from "react";
+import GVButton from "shared/components/gv-button";
 
 import {
   SORTING_DIRECTION,
@@ -15,6 +15,64 @@ import {
 } from "../../filtering/filter.type";
 import SelectFilter from "../../filtering/select-filter/select-filter";
 
+const _SortingFilter: React.FC<ISortingFilterProps> = ({
+  renderValueText,
+  columns,
+  updateSorting,
+  sorting
+}) => {
+  const handleOnSelectChange = useCallback(
+    ({ value }: TFilter<any>): void =>
+      updateSorting &&
+      updateSorting(
+        value + (isAsc() ? SORTING_DIRECTION.ASC : SORTING_DIRECTION.DESC)
+      ),
+    [updateSorting]
+  );
+
+  const handleOnDirectionChange = (isAsc: boolean) => (): void =>
+    updateSorting &&
+    updateSorting(
+      composeSortingColumnName() +
+        (isAsc ? SORTING_DIRECTION.ASC : SORTING_DIRECTION.DESC)
+    );
+
+  const composeSortingColumnName = (): string => getSortingColumnName(sorting);
+
+  const composeSortingColumnValues = (): SelectFilterValue[] =>
+    (columns || [])
+      .filter(x => x.sortingName)
+      .map(x => ({
+        value: x.sortingName,
+        label: renderValueText && renderValueText(x)
+      }));
+
+  const isAsc = (): boolean =>
+    getSortingDirection(sorting) === SORTING_DIRECTION.ASC;
+
+  const columnValues = composeSortingColumnValues();
+
+  return (
+    <span className="sorting-filter">
+      <SelectFilter
+        name="sorting"
+        label="Order By"
+        value={composeSortingColumnName()}
+        values={columnValues}
+        onChange={handleOnSelectChange}
+      />
+      <GVButton
+        variant="text"
+        color="secondary"
+        className="sorting-filter__btn"
+        onClick={handleOnDirectionChange(!isAsc())}
+      >
+        {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
+      </GVButton>
+    </span>
+  );
+};
+
 interface ISortingFilterProps {
   sorting?: string;
   columns?: SortingColumn[];
@@ -23,56 +81,5 @@ interface ISortingFilterProps {
   updateSorting?(value: string): void;
 }
 
-class SortingFilter extends React.PureComponent<ISortingFilterProps> {
-  composeSortingColumnValues = (): SelectFilterValue[] =>
-    (this.props.columns || [])
-      .filter(x => x.sortingName)
-      .map(x => ({
-        value: x.sortingName,
-        label: this.props.renderValueText && this.props.renderValueText(x)
-      }));
-
-  composeSortingColumnName = (): string =>
-    getSortingColumnName(this.props.sorting);
-
-  isAsc = (): boolean =>
-    getSortingDirection(this.props.sorting) === SORTING_DIRECTION.ASC;
-
-  handleOnSelectChange = ({ value }: TFilter<any>): void =>
-    this.props.updateSorting &&
-    this.props.updateSorting(
-      value + (this.isAsc() ? SORTING_DIRECTION.ASC : SORTING_DIRECTION.DESC)
-    );
-
-  handleOnDirectionChange = (isAsc: boolean) => (): void =>
-    this.props.updateSorting &&
-    this.props.updateSorting(
-      this.composeSortingColumnName() +
-        (isAsc ? SORTING_DIRECTION.ASC : SORTING_DIRECTION.DESC)
-    );
-
-  render() {
-    const columnValues = this.composeSortingColumnValues();
-    return (
-      <span className="sorting-filter">
-        <SelectFilter
-          name="sorting"
-          label="Order By"
-          value={this.composeSortingColumnName()}
-          values={columnValues}
-          onChange={this.handleOnSelectChange}
-        />
-        <GVButton
-          variant="text"
-          color="secondary"
-          className="sorting-filter__btn"
-          onClick={this.handleOnDirectionChange(!this.isAsc())}
-        >
-          {this.isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
-        </GVButton>
-      </span>
-    );
-  }
-}
-
+const SortingFilter = React.memo(_SortingFilter);
 export default SortingFilter;

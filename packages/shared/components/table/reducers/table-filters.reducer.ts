@@ -1,3 +1,4 @@
+import { TTableAction } from "../actions/table.actions";
 import { FiltersType } from "../components/table.types";
 
 const FILTER_ACTION_SUFFIX = "FILTER";
@@ -15,11 +16,10 @@ const tableFiltersReducer = ({
 }) => {
   const initialState = { ...filters };
   const filterActionType = composeFiltersActionType(type);
-  //@ts-ignore
-  return (state = initialState, action) => {
+  return (state = initialState, action: TTableAction) => {
     switch (action.type) {
       case filterActionType: {
-        return { ...state, ...action.filters };
+        return { ...state, ...action.payload };
       }
 
       default:

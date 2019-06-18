@@ -1,5 +1,12 @@
+@import "~shared/styles/_colors";
+
 .open-trades-table {
   .close-btn {
     padding: 10px;
+  }
+
+  .table-avatar {
+    display: inline-flex;
+    color: $main-color;
   }
 }

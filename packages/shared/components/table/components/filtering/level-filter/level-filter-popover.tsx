@@ -1,22 +1,9 @@
-import { GVButton } from "gv-react-components";
 import { Range } from "rc-slider";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 
-interface ILevelFilterPopoverProps {
-  value: number[];
-  cancel?(): void;
-  changeFilter?(value: number[]): void;
-}
-
-interface ILevelFilterPopoverState {
-  value: number[];
-}
-
-class LevelFilterPopover extends React.PureComponent<
-  ILevelFilterPopoverProps & InjectedTranslateProps,
-  ILevelFilterPopoverState
-> {
+class _LevelFilterPopover extends React.PureComponent<Props, State> {
   state = {
     value: this.props.value
   };
@@ -49,7 +36,7 @@ class LevelFilterPopover extends React.PureComponent<
           marks={this.marks}
           value={this.mapValueToNumber(this.state.value)}
           onChange={this.handleChange}
-          pushable
+          pushable={false}
         />
         <div className="level-filter__btns">
           <GVButton
@@ -73,4 +60,15 @@ class LevelFilterPopover extends React.PureComponent<
   }
 }
 
-export default translate()(LevelFilterPopover);
+interface Props extends InjectedTranslateProps {
+  value: number[];
+  cancel?: () => void;
+  changeFilter?: (value: number[]) => void;
+}
+
+interface State {
+  value: number[];
+}
+
+const LevelFilterPopover = translate()(_LevelFilterPopover);
+export default LevelFilterPopover;

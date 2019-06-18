@@ -8,30 +8,72 @@ import { SortingColumn } from "shared/components/table/components/filtering/filt
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 export const PROGRAM_TRADES_SORTING = "ByDateDesc";
+export const PROGRAM_FOREX_TRADES_COLUMNS: SortingColumn[] = [
+  {
+    name: "direction-entry",
+    sortingName: "ByDirection"
+  },
+  {
+    name: "symbol",
+    sortingName: "BySymbol"
+  },
+  {
+    name: "volume",
+    sortingName: "ByVolume"
+  },
+  {
+    name: "price",
+    sortingName: "ByPrice"
+  },
+  {
+    name: "profit",
+    sortingName: "ByProfit"
+  },
+  {
+    name: "commission",
+    sortingName: "ByCommission"
+  },
+  {
+    name: "swap",
+    sortingName: "BySwap"
+  },
+  {
+    name: "date",
+    sortingName: "ByDate"
+  },
+  {
+    name: "ticket",
+    sortingName: "ByTicket"
+  }
+];
 export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
-    name: "direction"
+    name: "direction-entry",
+    sortingName: "ByDirection"
   },
   {
-    name: "symbol"
+    name: "symbol",
+    sortingName: "BySymbol"
   },
   {
-    name: "volume"
+    name: "volume",
+    sortingName: "ByVolume"
   },
   {
-    name: "price"
+    name: "price",
+    sortingName: "ByPrice"
   },
   {
-    name: "profit"
+    name: "profit",
+    sortingName: "ByProfit"
   },
   {
-    name: "date"
+    name: "commission",
+    sortingName: "ByCommission"
   },
   {
-    name: "ticket"
-  },
-  {
-    name: "entry"
+    name: "date",
+    sortingName: "ByDate"
   }
 ];
 export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
@@ -67,6 +109,30 @@ export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
     name: "profitPercent",
     sortingName: "ByProfitPercent"
   }*/
+];
+
+export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
+  {
+    name: "number"
+  },
+  {
+    name: "trades"
+  },
+  {
+    name: "profit"
+  },
+  {
+    name: "volume"
+  },
+  {
+    name: "subscriptionDate"
+  },
+  {
+    name: "unsubscriptionDate"
+  },
+  {
+    name: "status"
+  }
 ];
 
 export const PROGRAM_TRADES_DEFAULT_FILTERS = [

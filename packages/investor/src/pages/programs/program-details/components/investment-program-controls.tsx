@@ -1,5 +1,4 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -7,14 +6,18 @@ import {
   IProgramDetailContext,
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
+import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
 
+import NotifyButton from "./notify-button";
+
 class InvestmentProgramControls extends React.PureComponent<Props, State> {
   state = {
     isOpenInvestmentPopup: false,
-    isOpenPopup: false
+    isOpenPopup: false,
+    subscription: false
   };
 
   handleClosePopup = () => {
@@ -39,19 +42,37 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { t, programDescription } = this.props;
+    const { t, programDescription, isAuthenticated } = this.props;
     const { isOpenInvestmentPopup } = this.state;
-
+    const notificationId = programDescription.personalProgramDetails
+      ? programDescription.personalProgramDetails
+          .notificationAvailableToInvestId
+      : undefined;
+    const isDisabledInvestButton = isAuthenticated
+      ? !programDescription.personalProgramDetails ||
+        !programDescription.personalProgramDetails.canInvest
+      : false;
     return (
       <>
         <InvestmentProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
-          <GVButton
-            className="program-details-description__invest-btn"
-            onClick={this.openInvestmentPopup}
-          >
-            {t("program-details-page.description.invest")}
-          </GVButton>
+          {programDescription.availableInvestmentBase === 0 &&
+          isAuthenticated ? (
+            <NotifyButton
+              canInvest={programDescription.personalProgramDetails.canInvest}
+              currency={programDescription.currency}
+              assetId={programDescription.id}
+              notificationId={notificationId}
+            />
+          ) : (
+            <GVButton
+              className="program-details-description__invest-btn"
+              onClick={this.openInvestmentPopup}
+              disabled={isDisabledInvestButton}
+            >
+              {t("program-details-page.description.invest")}
+            </GVButton>
+          )}
         </div>
         <ProgramDetailContext.Consumer>
           {({ updateDetails }: IProgramDetailContext) => (

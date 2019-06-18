@@ -1,4 +1,5 @@
 import { ChartSimple, ProgramBalanceChart } from "gv-api-web";
+import { CurrencyEnum } from "shared/utils/types";
 
 export type ProgramDetailsStatistic = {
   trades: number;
@@ -16,7 +17,7 @@ export type ProgramDetailsProfitChart = {
   balance: number;
   timeFrameProgramCurrencyProfit: number;
   timeFrameGvtProfit: number;
-  programCurrency: string;
+  programCurrency: CurrencyEnum;
   profitChangePercent: number;
   equityChart: ChartSimple[];
 };

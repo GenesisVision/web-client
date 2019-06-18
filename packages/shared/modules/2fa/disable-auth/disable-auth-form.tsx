@@ -1,9 +1,11 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { number, object, string } from "yup";
 
@@ -18,7 +20,7 @@ const DisableAuth: React.FC<
   >
     <div className="dialog__title">{t("2fa-page.disable.title")}</div>
     <GVFormikField
-      name="twoFactorCode"
+      name={FIELDS.twoFactorCode}
       type="text"
       label={t("2fa-page.google-code")}
       component={GVTextField}
@@ -28,7 +30,7 @@ const DisableAuth: React.FC<
       format="######"
     />
     <GVFormikField
-      name="password"
+      name={FIELDS.password}
       type="password"
       label={t("2fa-page.password")}
       component={GVTextField}
@@ -49,24 +51,33 @@ const DisableAuth: React.FC<
   </form>
 );
 
-const DisableAuthForm = compose<React.FunctionComponent<OwnProps>>(
+const DisableAuthForm = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<Props, IDisableAuthFormFormValues>({
     displayName: "disable-auth",
     mapPropsToValues: () => ({
-      twoFactorCode: "",
-      password: ""
+      [FIELDS.twoFactorCode]: "",
+      [FIELDS.password]: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        twoFactorCode: number().required(props.t("2fa-page.code-required")),
-        password: string().required(props.t("2fa-page.password-required"))
+        [FIELDS.twoFactorCode]: number().required(
+          props.t("2fa-page.code-required")
+        ),
+        [FIELDS.password]: string().required(
+          props.t("2fa-page.password-required")
+        )
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
   })
 )(DisableAuth);
+
+enum FIELDS {
+  twoFactorCode = "twoFactorCode",
+  password = "password"
+}
 
 interface Props extends InjectedTranslateProps, OwnProps {}
 interface OwnProps {
@@ -78,8 +89,8 @@ interface OwnProps {
 }
 
 export interface IDisableAuthFormFormValues {
-  twoFactorCode: string;
-  password: string;
+  [FIELDS.twoFactorCode]: string;
+  [FIELDS.password]: string;
 }
 
 export default DisableAuthForm;

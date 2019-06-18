@@ -1,6 +1,7 @@
 import { FundDetailsFull } from "gv-api-web";
-import { GVButton } from "gv-react-components";
-import AssetEditContainer from "modules/asset-edit/asset-edit-container";
+import AssetEditContainer, {
+  IAssetEditInfo
+} from "modules/asset-edit/asset-edit-container";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
 import moment from "moment";
@@ -8,8 +9,9 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
+import GVButton from "shared/components/gv-button";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
-import { ASSET, FUND } from "shared/constants/constants";
+import { ASSET } from "shared/constants/constants";
 
 import CloseFundContainer from "../close-fund/close-fund-container";
 
@@ -56,7 +58,9 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
     const possibleReallocationTime =
       personalFundDetails && personalFundDetails.possibleReallocationTime;
 
-    const composeEditInfo = {
+    const composeEditInfo: IAssetEditInfo = {
+      stopOutLevel: 0,
+      investmentLimit: 0,
       id: fundDescription.id,
       title: fundDescription.title,
       description: fundDescription.description,
@@ -70,6 +74,11 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
         ? t("fund-details-page.description.auth-manager-popup")
         : t("fund-details-page.description.unauth-popup");
 
+    const isDisabledInvestButton = isAuthenticated
+      ? !fundDescription.personalFundDetails ||
+        !fundDescription.personalFundDetails.canInvest
+      : false;
+
     return (
       <>
         <InvestmentFundInfo fundDescription={fundDescription} />
@@ -79,6 +88,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
               <GVButton
                 className="details-description__invest-btn"
                 onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
+                disabled={isDisabledInvestButton}
               >
                 {t("fund-details-page.description.invest")}
               </GVButton>
@@ -110,12 +120,12 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
                 >
                   {t("fund-details-page.description.reallocate")}
                 </GVButton>
-                {!canReallocate && personalFundDetails.status !== "Ended" && (
+                {!canReallocate && fundDescription.status !== "Archived" && (
                   <div className="details-description__reallocate-message">
                     {t(
                       "fund-details-page.description.disable-reallocation-message"
                     )}{" "}
-                    {moment(possibleReallocationTime).format("lll")}
+                    {moment(possibleReallocationTime).format()}
                   </div>
                 )}
               </div>
@@ -141,7 +151,6 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
               <CloseFundContainer
                 open={popups[INVESTMENT_POPUP.CLOSE]}
                 onClose={this.closePopup(INVESTMENT_POPUP.CLOSE)}
-                onCancel={this.closePopup(INVESTMENT_POPUP.CLOSE)}
                 onApply={this.applyChanges(updateDetails)}
                 id={fundDescription.id}
               />
@@ -150,7 +159,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
                 info={composeEditInfo}
                 onClose={this.closePopup(INVESTMENT_POPUP.ASSET_EDIT)}
                 onApply={this.applyChanges(updateDetails)}
-                type={FUND}
+                type={ASSET.FUND}
               />
               <ReallocateContainer
                 id={fundDescription.id}

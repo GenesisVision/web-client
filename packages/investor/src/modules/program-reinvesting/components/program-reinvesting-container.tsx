@@ -1,29 +1,18 @@
 import classnames from "classnames";
-import { GVSwitch } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import {
   IProgramDetailContext,
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
+import GVSwitch from "shared/components/gv-selection/gv-switch";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
 import { toggleReinvesting } from "../services/program-reinvesting.service";
 
-interface IProgramReinvestingContainerProps
-  extends IProgramReinvestingContainerOwnProps,
-    InjectedTranslateProps {}
-
-interface IProgramReinvestingContainerState {
-  isReinvesting: boolean;
-  isPending: boolean;
-}
-
-class ProgramReinvestingContainer extends React.PureComponent<
-  IProgramReinvestingContainerProps,
-  IProgramReinvestingContainerState
-> {
-  constructor(props: IProgramReinvestingContainerProps) {
+class _ProgramReinvestingContainer extends React.PureComponent<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       isReinvesting: props.isReinvesting,
@@ -64,7 +53,13 @@ class ProgramReinvestingContainer extends React.PureComponent<
               value={isReinvesting}
               color="primary"
               onChange={this.onReinvestingLabelClick(updateDetails)}
-              label={t("program-details-page.description.reinvest")}
+              label={
+                <TooltipLabel
+                  tooltipContent={t("program-details-page.tooltip.reinvest")}
+                  labelText={t("program-details-page.description.reinvest")}
+                  className="tooltip__label--cursor-pointer"
+                />
+              }
               disabled={isPending}
             />
           </span>
@@ -74,4 +69,16 @@ class ProgramReinvestingContainer extends React.PureComponent<
   }
 }
 
-export default translate()(ProgramReinvestingContainer);
+const ProgramReinvestingContainer = translate()(
+  React.memo(_ProgramReinvestingContainer)
+);
+export default ProgramReinvestingContainer;
+
+interface Props
+  extends IProgramReinvestingContainerOwnProps,
+    InjectedTranslateProps {}
+
+interface State {
+  isReinvesting: boolean;
+  isPending: boolean;
+}

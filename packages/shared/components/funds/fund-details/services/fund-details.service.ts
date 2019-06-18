@@ -1,25 +1,25 @@
 import { FundAssetsListInfo, FundDetailsFull } from "gv-api-web";
-import {
-  FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE
-} from "pages/funds/funds.routes";
 import { Dispatch } from "redux";
 import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  FUNDS_SLUG_URL_PARAM_NAME,
+  FUND_DETAILS_ROUTE
+} from "shared/components/funds/funds.routes";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
-import RootState from "shared/reducers/root-reducer";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
+import { TGetState } from "shared/utils/types";
 
 import { FundStatisticResult } from "./fund-details.types";
 
 export const getFundDescription = () => (
   dispatch: Dispatch,
-  getState: () => RootState
+  getState: TGetState
 ): Promise<FundDetailsFull> => {
   const authorization = authService.getAuthArg();
   const { router } = getState();
@@ -77,7 +77,12 @@ export const fetchFundStructure = (
   return fundsApi.v10FundsByIdAssetsGet(fundId);
 };
 
-export const closeFund = (id: string, opts: any): Promise<void> => {
+export const closeFund = (
+  id: string,
+  opts: {
+    twoFactorCode: string;
+  }
+): Promise<void> => {
   const authorization = authService.getAuthArg();
 
   return managerApi.v10ManagerFundsByIdClosePost(id, authorization, opts);

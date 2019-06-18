@@ -8,7 +8,7 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
-import { ROLE_ENV, STATUS } from "shared/constants/constants";
+import { STATUS } from "shared/constants/constants";
 
 import AssetStatusRequests from "./asset-status-requests";
 
@@ -22,23 +22,9 @@ const getStatusClassName = (status: STATUS, className?: string) => {
   });
 };
 
-interface IAssetStatusOwnProps {
-  className?: string;
-  status: STATUS;
-  id: string;
-  asset: any;
-  onCancel: any;
-}
-
-interface IAssetStatusProps extends IAssetStatusOwnProps {}
-
-interface IAssetStatusState {
-  anchor?: EventTarget;
-}
-
 class AssetStatus extends React.PureComponent<
-  IAssetStatusProps & InjectedTranslateProps,
-  IAssetStatusState
+  Props & InjectedTranslateProps,
+  State
 > {
   state = {
     anchor: undefined
@@ -58,7 +44,7 @@ class AssetStatus extends React.PureComponent<
   render() {
     const { t, className, status, id, asset, onCancel } = this.props;
     return (
-      <React.Fragment>
+      <>
         <span
           className={getStatusClassName(status, className)}
           onClick={this.handleOpenDropdown}
@@ -76,7 +62,6 @@ class AssetStatus extends React.PureComponent<
             <div className="dashboard-request-popover">
               <AssetStatusRequests
                 id={id}
-                role={ROLE_ENV}
                 asset={asset}
                 handleCloseDropdown={this.handleCloseDropdown}
                 onCancel={onCancel}
@@ -84,9 +69,21 @@ class AssetStatus extends React.PureComponent<
             </div>
           </GVScroll>
         </Popover>
-      </React.Fragment>
+      </>
     );
   }
+}
+
+interface Props {
+  className?: string;
+  status: STATUS;
+  id: string;
+  asset: any;
+  onCancel: any;
+}
+
+interface State {
+  anchor?: EventTarget;
 }
 
 export default translate()(AssetStatus);

@@ -25,3 +25,5 @@ export const getSortingDirection = (value?: string): SORTING_DIRECTION => {
   if (new RegExp(isDescRegExp).test(value)) return SORTING_DIRECTION.DESC;
   return SORTING_DIRECTION.NONE;
 };
+
+export type ComposedRequestSortingName = "sorting";

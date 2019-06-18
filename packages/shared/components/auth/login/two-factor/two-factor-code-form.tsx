@@ -1,17 +1,19 @@
 import "./two-factor-code.scss";
 
 import { FormikProps, InjectedFormikProps, withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "shared/components/auth/login/login.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
+import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "shared/components/auth/login/login.routes";
 import FormError from "shared/components/form/form-error/form-error";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
-class _TwoFactorCodeForm extends React.Component<
+class _TwoFactorCodeForm extends React.PureComponent<
   InjectedFormikProps<Props, ITwoFactorCodeFormValues>,
   State
 > {
@@ -27,16 +29,14 @@ class _TwoFactorCodeForm extends React.Component<
   };
 
   componentDidUpdate(
-    prevProps: Readonly<Props & FormikProps<ITwoFactorCodeFormValues>>,
-    prevState: Readonly<State>,
-    snapshot?: any
+    prevProps: Readonly<Props & FormikProps<ITwoFactorCodeFormValues>>
   ): void {
     if (
       this.state.isChecking ||
-      this.props.values.code === prevProps.values.code
+      this.props.values[FIELDS.code] === prevProps.values[FIELDS.code]
     )
       return;
-    if (this.props.values.code.length === 6) {
+    if (this.props.values[FIELDS.code].length === 6) {
       this.checkTwoFactor();
     }
   }
@@ -57,7 +57,7 @@ class _TwoFactorCodeForm extends React.Component<
         <GVFormikField
           disabled={isSubmitting}
           type="text"
-          name="code"
+          name={FIELDS.code}
           label={t("auth.login.two-factor.input-label")}
           autoComplete="off"
           autoFocus
@@ -84,8 +84,12 @@ class _TwoFactorCodeForm extends React.Component<
   }
 }
 
+enum FIELDS {
+  code = "code"
+}
+
 export interface ITwoFactorCodeFormValues {
-  code: string;
+  [FIELDS.code]: string;
 }
 
 interface Props extends InjectedTranslateProps, OwnProps {}
@@ -103,17 +107,16 @@ interface State {
   isChecking: boolean;
 }
 
-const TwoFactorCodeForm = compose<React.FunctionComponent<OwnProps>>(
-  React.memo,
+const TwoFactorCodeForm = compose<React.FC<OwnProps>>(
   translate(),
   withFormik<Props, ITwoFactorCodeFormValues>({
     displayName: "twoFactorForm",
     mapPropsToValues: () => ({
-      code: ""
+      [FIELDS.code]: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        code: string()
+        [FIELDS.code]: string()
           .trim()
           .matches(
             /^\d{6}$/,
@@ -126,6 +129,7 @@ const TwoFactorCodeForm = compose<React.FunctionComponent<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       return props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_TwoFactorCodeForm);
 export default TwoFactorCodeForm;

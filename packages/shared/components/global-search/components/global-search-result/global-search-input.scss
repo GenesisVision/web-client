@@ -41,7 +41,6 @@
     overflow: hidden;
 
     @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-small;
       height: auto;
       overflow: auto;
     }
@@ -69,11 +68,6 @@
   &__heading {
     padding-left: $padding-xsmall;
     padding-right: $padding-xsmall;
-
-    @include media-breakpoint-landscape-phone() {
-      padding-left: $padding-small;
-      padding-right: $padding-small;
-    }
   }
 
   &__loading {

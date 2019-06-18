@@ -10,4 +10,4 @@ const NotFoundPage: React.FC<InjectedTranslateProps> = ({ t }) => (
   </Page>
 );
 
-export default translate()(NotFoundPage);
+export default translate()(React.memo(NotFoundPage));

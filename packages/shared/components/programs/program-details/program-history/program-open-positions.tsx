@@ -53,7 +53,7 @@ const _ProgramOpenPositions: React.FC<Props & InjectedTranslateProps> = ({
         return (
           <TableRow className="details-trades__row">
             <TableCell className="details-trades__cell program-details-trades__cell--date">
-              {moment(position.date).format("lll")}
+              {moment(position.date).format()}
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--symbol">
               {position.symbol}
@@ -89,7 +89,7 @@ const _ProgramOpenPositions: React.FC<Props & InjectedTranslateProps> = ({
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--profit">
               <Profitability
-                value={+formatValue(position.profit, DECIMAL_SCALE)}
+                value={formatValue(position.profit, DECIMAL_SCALE)}
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
@@ -117,5 +117,5 @@ interface Props {
   ) => Promise<IDataModel>;
 }
 
-const ProgramOpenPositions = React.memo(translate()(_ProgramOpenPositions));
+const ProgramOpenPositions = translate()(React.memo(_ProgramOpenPositions));
 export default ProgramOpenPositions;

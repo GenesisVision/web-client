@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -9,7 +9,7 @@ interface IFundWithdrawTopProps {
   title: string;
 }
 
-const FundWithdrawTop: FunctionComponent<
+const FundWithdrawTop: React.FC<
   IFundWithdrawTopProps & InjectedTranslateProps
 > = ({ t, availableToWithdraw, title, currency }) => {
   return (

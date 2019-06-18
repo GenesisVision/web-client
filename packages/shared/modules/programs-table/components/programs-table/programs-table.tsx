@@ -7,6 +7,12 @@ import {
   FilteringType,
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
+import {
+  RenderFiltersFuncType,
+  TableToggleFavoriteHandlerType,
+  UpdatePagingFuncType,
+  UpdateSortingFuncType
+} from "shared/components/table/components/table.types";
 import { IPaging } from "shared/components/table/helpers/paging.helpers";
 
 import ProgramCard from "./program-card";
@@ -15,25 +21,23 @@ import ProgramTableRow from "./program-table-row";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
 
+export const FAVORITE_COLUMN_NAME = "favorite";
+
 interface IProgramsTableProps {
   disableTitle?: boolean;
   columns?: SortingColumn[];
   showRating?: boolean;
   showSwitchView?: boolean;
-  currencies: string[];
-  data: ProgramsList;
-  isPending?: boolean;
-  sorting: string;
-  updateSorting(opt: string): (dispatch: any, getState: any) => void;
-  filtering: FilteringType;
-  updateFilter(filter: any): void;
-  renderFilters?(
-    updateFilter: (filter: any) => void,
-    filtering: FilteringType
-  ): JSX.Element;
+  currencies?: string[];
+  data?: ProgramDetails[];
+  sorting?: string;
+  updateSorting?: UpdateSortingFuncType;
+  filtering?: FilteringType;
+  updateFilter?(filter: any): void;
+  renderFilters?: RenderFiltersFuncType;
   paging: IPaging;
-  updatePaging(page: number): void;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
+  updatePaging: UpdatePagingFuncType;
+  toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated?: boolean;
   title: string;
   redirectToLogin?(): void;
@@ -46,7 +50,6 @@ const ProgramsTable: React.FC<IProgramsTableProps> = ({
   showSwitchView,
   currencies,
   data,
-  isPending,
   sorting,
   updateSorting,
   filtering,
@@ -70,19 +73,24 @@ const ProgramsTable: React.FC<IProgramsTableProps> = ({
       paging={paging}
       updatePaging={updatePaging}
       columns={columns || PROGRAMS_COLUMNS}
-      items={data.programs}
-      // isPending={isPending || data.isPending}
+      items={data}
       renderFilters={renderFilters}
       renderHeader={column => (
         <ProgramTableHeaderCell
+          condition={
+            !isAuthenticated ||
+            (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
+          }
           column={column}
-          isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderSorting={column => (
         <ProgramTableSortingValue
+          condition={
+            !isAuthenticated ||
+            (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
+          }
           column={column}
-          isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderBodyRow={(program: ProgramDetails) => (

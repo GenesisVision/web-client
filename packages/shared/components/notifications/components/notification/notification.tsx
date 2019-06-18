@@ -54,7 +54,7 @@ interface INotificationOwnProps {
 
 type INotificationProps = NotificationViewModel & INotificationOwnProps;
 
-const Notification: React.FunctionComponent<INotificationProps> = props => {
+const Notification: React.FC<INotificationProps> = props => {
   const { date, text, isUnread, type } = props;
   const staticIconUrl = getStaticIconUrl(type.toLowerCase());
   return (
@@ -81,7 +81,7 @@ const Notification: React.FunctionComponent<INotificationProps> = props => {
 
       <div className="notification__content">
         <div className="notification__description">{text}</div>
-        <div className="notification__date">{moment(date).format("LT")}</div>
+        <div className="notification__date">{moment(date).format("HH:mm")}</div>
       </div>
     </div>
   );

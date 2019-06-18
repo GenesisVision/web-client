@@ -25,9 +25,9 @@ const _TooltipBody: React.FC<ITooltipBodyProps & InjectedTranslateProps> = ({
     </StatisticItem>
   </>
 );
-const TooltipBody = React.memo(translate()(_TooltipBody));
+const TooltipBody = translate()(React.memo(_TooltipBody));
 
-const FundBalanceTooltip: React.FC<IFundBalanceTooltipProps> = ({
+const _FundBalanceTooltip: React.FC<IFundBalanceTooltipProps> = ({
   active,
   label,
   payload
@@ -71,4 +71,5 @@ interface IFundBalanceTooltipProps {
   payload: any[];
 }
 
+const FundBalanceTooltip = React.memo(_FundBalanceTooltip);
 export default FundBalanceTooltip;

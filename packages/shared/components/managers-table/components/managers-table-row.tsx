@@ -1,12 +1,12 @@
 import "./managers-table.scss";
 
 import { ManagerProfile } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
+import GVButton from "shared/components/gv-button";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
@@ -39,4 +39,4 @@ const ManagersTableRow: React.FC<
   );
 };
 
-export default translate()(ManagersTableRow);
+export default translate()(React.memo(ManagersTableRow));

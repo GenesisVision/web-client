@@ -5,23 +5,25 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import { HOME_ROUTE } from "shared/routes/app.routes";
+
 import { ILoginFooterProps } from "../login-footer/login-footer";
-import { ROLE_ENV } from "shared/constants/constants";
 
 const QUOTES_COUNT = 5;
 
-class AuthLayout extends React.PureComponent<Props, State> {
+class _AuthLayout extends React.PureComponent<Props, State> {
   state = {
     quoteNo: Math.floor(Math.random() * QUOTES_COUNT + 1)
   };
 
   render() {
     const {
+      role,
       t,
       children,
       title,
       Footer,
-      HOME_ROUTE,
       SIGNUP_ROUTE,
       LOGIN_ROUTE
     } = this.props;
@@ -39,11 +41,11 @@ class AuthLayout extends React.PureComponent<Props, State> {
             <GvBrand />
           </NavLink>
           <blockquote className="auth__quote">
-            {t(`${ROLE_ENV}.auth-quotes.${quoteNo}.quote`)}
+            {t(`${role}.auth-quotes.${quoteNo}.quote`)}
             <footer className="auth__quote-footer">
               —{" "}
               <cite className="auth__quote-author">
-                {t(`${ROLE_ENV}.auth-quotes.${quoteNo}.author`)}
+                {t(`${role}.auth-quotes.${quoteNo}.author`)}
               </cite>
             </footer>
           </blockquote>
@@ -64,10 +66,11 @@ class AuthLayout extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props extends InjectedTranslateProps {
+interface Props extends InjectedTranslateProps, OwnProps, WithRoleProps {}
+
+interface OwnProps {
   Footer: React.ComponentType<ILoginFooterProps>;
   title: string;
-  HOME_ROUTE: string;
   SIGNUP_ROUTE?: string;
   LOGIN_ROUTE?: string;
 }
@@ -76,4 +79,5 @@ interface State {
   quoteNo: number;
 }
 
-export default translate()(AuthLayout);
+const AuthLayout = withRole<OwnProps>(translate()(_AuthLayout));
+export default AuthLayout;

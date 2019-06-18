@@ -1,12 +1,23 @@
 import "./follow-popup.scss";
 
-import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
+import {
+  AttachToSignalProvider,
+  AttachToSignalProviderFixedCurrencyEnum,
+  AttachToSignalProviderInitialDepositCurrencyEnum,
+  AttachToSignalProviderModeEnum,
+  CopyTradingAccountInfo,
+  SignalSubscription,
+  WalletData
+} from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import withLoader from "shared/decorators/with-loader";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
-import FollowCreateAccount from "./follow-popup-create-account";
-import FollowParams from "./follow-popup-params";
+import FollowCreateAccount, {
+  CreateAccountFormValues
+} from "./follow-popup-create-account";
+import FollowParams, { FollowParamsFormValues } from "./follow-popup-params";
 import FollowTop from "./follow-popup-top";
 
 class FollowForm extends React.PureComponent<
@@ -14,25 +25,55 @@ class FollowForm extends React.PureComponent<
   State
 > {
   state = {
-    requestParams: {},
+    requestParams: {
+      mode: "ByBalance" as AttachToSignalProviderModeEnum,
+      percent: 10,
+      openTolerancePercent: 0.5,
+      fixedVolume: 100,
+      fixedCurrency: "USD" as AttachToSignalProviderFixedCurrencyEnum,
+      initialDepositCurrency: "GVT" as AttachToSignalProviderInitialDepositCurrencyEnum,
+      initialDepositAmount: 0
+    },
     step: TABS.CREATE_ACCOUNT,
     errors: { code: "", errorMessage: "" }
   };
-  createdCopytradingAccount = (values: IRequestParams) => {
+  createdCopytradingAccount = ({
+    initialDepositCurrency,
+    initialDepositAmount
+  }: CreateAccountFormValues) => {
     this.setState({
       step: TABS.PARAMS,
-      requestParams: { ...this.state.requestParams, ...values }
+      requestParams: {
+        ...this.state.requestParams,
+        initialDepositCurrency,
+        initialDepositAmount
+      }
     });
   };
   returnToCreateCopytradingAccount = () => {
     this.setState({ step: TABS.CREATE_ACCOUNT });
   };
   componentDidMount() {
-    if (this.props.hasSignalAccount) this.setState({ step: TABS.PARAMS });
+    if (this.props.signalSubscription.hasSignalAccount)
+      this.setState({ step: TABS.PARAMS });
   }
-  submit = (values: IRequestParams, setSubmitting: SetSubmittingType) => {
+  submit = (
+    {
+      mode,
+      openTolerancePercent,
+      percent,
+      fixedVolume
+    }: FollowParamsFormValues,
+    setSubmitting: SetSubmittingType
+  ) => {
     const { t, handleSubmit, id, alertError, alertSuccess } = this.props;
-    let requestParams = { ...this.state.requestParams, ...values };
+    let requestParams = {
+      ...this.state.requestParams,
+      mode,
+      openTolerancePercent,
+      percent,
+      fixedVolume
+    };
     this.setState({
       requestParams
     });
@@ -48,29 +89,29 @@ class FollowForm extends React.PureComponent<
       });
   };
   render() {
-    const {
-      wallets,
-      currency,
-      programName,
-      hasSignalAccount,
-      minDeposit
-    } = this.props;
+    const { wallets, currency, signalSubscription, minDeposit } = this.props;
     const { errors, step } = this.state;
     const adaptStep =
       step === TABS.CREATE_ACCOUNT ? "create-account" : "params";
+    const paramsSubscription = signalSubscription.hasActiveSubscription
+      ? signalSubscription
+      : undefined;
     return (
       <>
-        <FollowTop programName={programName} step={adaptStep} />
-        {!hasSignalAccount && step === TABS.CREATE_ACCOUNT && (
-          <FollowCreateAccount
-            minDeposit={minDeposit}
-            wallets={wallets}
-            currency={currency}
-            onClick={this.createdCopytradingAccount}
-          />
-        )}
+        <FollowTop step={adaptStep} />
+        {!signalSubscription.hasSignalAccount &&
+          step === TABS.CREATE_ACCOUNT && (
+            <FollowCreateAccount
+              minDeposit={minDeposit}
+              wallets={wallets}
+              currency={currency}
+              onClick={this.createdCopytradingAccount}
+            />
+          )}
         {step === TABS.PARAMS && (
           <FollowParams
+            isShowBack={!signalSubscription.hasSignalAccount}
+            paramsSubscription={paramsSubscription}
             onSubmit={this.submit}
             onPrevStep={this.returnToCreateCopytradingAccount}
           />
@@ -89,34 +130,24 @@ enum TABS {
 }
 export interface Props {
   minDeposit: number;
-  hasSignalAccount: boolean;
+  signalSubscription: SignalSubscription;
   alertSuccess: (msg: string) => void;
   alertError: (msg: string) => void;
   handleSubmit: () => void;
   submitMethod: (
     programId: string,
-    requestParams: IRequestParams
+    requestParams: AttachToSignalProvider
   ) => Promise<any>;
   id: string;
   accounts: CopyTradingAccountInfo[];
   wallets: WalletData[];
   currency: string;
-  programName: string;
 }
 
 interface State {
   step: TABS;
-  requestParams: IRequestParams;
+  requestParams: AttachToSignalProvider;
   errors: { code: string; errorMessage: string };
 }
-export interface IRequestParams {
-  mode?: string;
-  percent?: number;
-  openTolerancePercent?: number;
-  fixedVolume?: number;
-  fixedCurrency?: string;
-  initialDepositCurrency?: string;
-  initialDepositAmount?: number;
-}
 
-export default translate()(FollowForm);
+export default withLoader(translate()(FollowForm));

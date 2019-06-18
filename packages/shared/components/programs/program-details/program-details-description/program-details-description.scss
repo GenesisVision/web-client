@@ -37,7 +37,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       margin: 0;
     }
     & .program-avatar__level {
-      border-color: $background-color;
+      background-color: $background-color;
     }
 
     @include media-breakpoint-phone() {
@@ -67,10 +67,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     @include adaptive-padding(top, $padding-xsmall, 2);
     display: flex;
     flex-wrap: wrap;
-
-    .tag-program {
-      margin-bottom: 10px;
-    }
   }
 
   &__additionally {
@@ -128,12 +124,14 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     margin-left: $padding-xxsmall/2;
     margin-right: $padding-xxsmall/2;
     flex-grow: 1;
+    display: inline-flex;
+    flex-wrap: wrap;
 
     @include media-breakpoint-landscape-phone() {
       width: auto;
 
       &--small-size {
-        min-width: 30%;
+        min-width: 220px;
       }
     }
 
@@ -144,19 +142,25 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       &:last-child {
         margin-right: 0;
       }
+
+      &--small-size {
+        max-width: 250px;
+      }
     }
   }
 
   &__statistic-container {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    display: inline-flex;
+    min-width: 50%;
+    box-sizing: border-box;
+    flex-grow: 1;
   }
 
   &__button-container {
     display: flex;
     flex-wrap: wrap;
     margin: 0 (-$padding-small-mobile/2);
+    width: 100%;
 
     .gv-btn {
       @include adaptive-margin(top, $padding-small);
@@ -188,7 +192,8 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__subheading {
-    @include vertical-paddings($padding-big, $padding-small);
+    @include adaptive-padding(top, $padding-big);
+    @include adaptive-padding(bottom, $padding-small);
     @include font-size($font-size-h4);
     font-weight: bold;
     letter-spacing: 0.21px;
@@ -238,6 +243,10 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       width: $btn-width;
       height: $btn-height;
     }
+
+    &.signal-provider__btn {
+      width: auto;
+    }
   }
 
   &__reinvest {
@@ -272,6 +281,8 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 
     &-item {
       flex-grow: 1;
+      flex-basis: 50%;
+      box-sizing: border-box;
 
       @include media-breakpoint-landscape-phone() {
         font-size: $font-size-paragraph;

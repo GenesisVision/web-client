@@ -1,63 +1,68 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
 const _ConfirmForm: React.FC<
   InjectedFormikProps<Props, IConfirmFormValues>
-> = ({ t, handleSubmit, serverError, isSubmitting }) => {
-  return (
-    <form id="confirm-form" onSubmit={handleSubmit}>
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>Confirm</h2>
-          <p>Confirm</p>
-        </div>
+> = ({ t, handleSubmit, serverError, isSubmitting }) => (
+  <form id="confirm-form" onSubmit={handleSubmit}>
+    <div className="dialog__top">
+      <div className="dialog__header">
+        <h2>Confirm</h2>
+        <p>Confirm</p>
       </div>
-      <GVFormikField
-        disabled={isSubmitting}
-        type="text"
-        name="code"
-        label={t("auth.login.two-factor.input-label")}
-        autoComplete="off"
-        autoFocus
-        component={GVTextField}
-      />
-      <div className="dialog__bottom">
-        <div className="form-error">{serverError}</div>
-        <div className="dialog__buttons">
-          <GVButton type="submit" id="signUpFormSubmit" disabled={isSubmitting}>
-            {t("auth.login.two-factor.verify")}
-          </GVButton>
-        </div>
+    </div>
+    <GVFormikField
+      disabled={isSubmitting}
+      type="text"
+      name={FIELDS.code}
+      label={t("auth.login.two-factor.input-label")}
+      autoComplete="off"
+      autoFocus
+      component={GVTextField}
+    />
+    <div className="dialog__bottom">
+      <div className="form-error">{serverError}</div>
+      <div className="dialog__buttons">
+        <GVButton type="submit" id="signUpFormSubmit" disabled={isSubmitting}>
+          {t("auth.login.two-factor.verify")}
+        </GVButton>
       </div>
-    </form>
-  );
-};
+    </div>
+  </form>
+);
+
+enum FIELDS {
+  code = "code"
+}
 
 interface Props extends OwnProps, IConfirmFormValues, InjectedTranslateProps {}
 export interface IConfirmFormValues {
-  code: string;
+  [FIELDS.code]: string;
 }
 interface OwnProps {
   onSubmit(code: IConfirmFormValues, setSubmitting: SetSubmittingType): void;
   serverError: string;
 }
 
-const ConfirmForm = compose<React.FunctionComponent<OwnProps>>(
-  React.memo,
+const ConfirmForm = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+  withLoader,
   translate(),
   withFormik<Props, IConfirmFormValues>({
     displayName: "confirm-form",
     mapPropsToValues: () => ({
-      code: ""
+      [FIELDS.code]: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        code: string()
+        [FIELDS.code]: string()
           .trim()
           .matches(
             /^\d{6}$/,
@@ -70,6 +75,7 @@ const ConfirmForm = compose<React.FunctionComponent<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       return props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_ConfirmForm);
 export default ConfirmForm;

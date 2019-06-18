@@ -1,10 +1,9 @@
-import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
-import { FUNDS_ROUTE } from "pages/funds/funds.routes";
-import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
+import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
+import { FUNDS_ROUTE } from "shared/components/funds/funds.routes";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
 import { DetailsIcon } from "shared/components/icon/details-icon";
 import { FundsIcon } from "shared/components/icon/funds-icon";
@@ -21,87 +20,81 @@ import {
 } from "shared/components/profile/profile.constants";
 import Sidebar from "shared/components/sidebar/sidebar";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
+import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
+import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
-interface INavigationMobileProps {
+const _NavigationMobile: React.FC<Props> = ({
+  t,
+  isAuthenticated,
+  profileHeader,
+  isOpenNavigation,
+  onClose,
+  logout,
+  backPath
+}) => (
+  <Sidebar open={isOpenNavigation} onClose={onClose}>
+    <div className="navigation__mobile mobile">
+      {isAuthenticated && profileHeader && (
+        <div className="mobile__header">
+          <ProfileAvatar
+            url={profileHeader.avatar}
+            alt={profileHeader.email}
+            className="mobile__avatar"
+          />
+          <div className="mobile__email">{profileHeader.email}</div>
+        </div>
+      )}
+      <div className="mobile__top" onClick={onClose}>
+        <NavigationItem icon={<DashboardIcon primary />} href={DASHBOARD_ROUTE}>
+          {t("navigation.dashboard")}
+        </NavigationItem>
+        <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
+          {t("navigation.programs")}
+        </NavigationItem>
+        <NavigationItem icon={<FundsIcon primary />} href={FUNDS_ROUTE}>
+          {t("navigation.funds")}
+        </NavigationItem>
+        <NavigationItem
+          exact
+          icon={<DetailsIcon primary />}
+          href={PROFILE_ROUTE}
+        >
+          {t("navigation.personal-details")}
+        </NavigationItem>
+        <NavigationItem
+          icon={<WalletIcon primary />}
+          href={WALLET_TOTAL_PAGE_ROUTE}
+        >
+          {t("navigation.wallet")}
+        </NavigationItem>
+        <NavigationItem icon={<SettingsIcon primary />} href={SETTINGS_ROUTE}>
+          {t("navigation.settings")}
+        </NavigationItem>
+        {isAuthenticated ? (
+          <NavigationButton icon={<LogoutIcon primary />} onClick={logout}>
+            {t("navigation.logout")}
+          </NavigationButton>
+        ) : (
+          <NavigationItem
+            icon={<LogoutIcon primary rotate />}
+            href={{ pathname: LOGIN_ROUTE, state: backPath }}
+          >
+            {t("navigation.login")}
+          </NavigationItem>
+        )}
+      </div>
+    </div>
+  </Sidebar>
+);
+
+interface Props extends InjectedTranslateProps {
   backPath: string;
   isAuthenticated: boolean;
-  email: string;
-  avatar: string;
+  profileHeader?: ProfileHeaderViewModel;
   isOpenNavigation: boolean;
   onClose(): void;
   logout(): void;
 }
 
-const NavigationMobile: React.FC<
-  INavigationMobileProps & InjectedTranslateProps
-> = ({
-  t,
-  isAuthenticated,
-  email,
-  avatar,
-  isOpenNavigation,
-  onClose,
-  logout,
-  backPath
-}) => {
-  return (
-    <Sidebar open={isOpenNavigation} onClose={onClose}>
-      <div className="navigation__mobile mobile">
-        {isAuthenticated && (
-          <div className="mobile__header">
-            <ProfileAvatar
-              url={avatar}
-              alt={email}
-              className="mobile__avatar"
-            />
-            <div className="mobile__email">{email}</div>
-          </div>
-        )}
-        <div className="mobile__top" onClick={onClose}>
-          <NavigationItem
-            icon={<DashboardIcon primary />}
-            href={DASHBOARD_ROUTE}
-          >
-            {t("navigation.dashboard")}
-          </NavigationItem>
-          <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
-            {t("navigation.programs")}
-          </NavigationItem>
-          <NavigationItem icon={<FundsIcon primary />} href={FUNDS_ROUTE}>
-            {t("navigation.funds")}
-          </NavigationItem>
-          <NavigationItem
-            exact
-            icon={<DetailsIcon primary />}
-            href={PROFILE_ROUTE}
-          >
-            {t("navigation.personal-details")}
-          </NavigationItem>
-          <NavigationItem
-            icon={<WalletIcon primary />}
-            href={WALLET_TOTAL_PAGE_ROUTE}
-          >
-            {t("navigation.wallet")}
-          </NavigationItem>
-          <NavigationItem icon={<SettingsIcon primary />} href={SETTINGS_ROUTE}>
-            {t("navigation.settings")}
-          </NavigationItem>
-          {isAuthenticated ? (
-            <NavigationButton icon={<LogoutIcon primary />} onClick={logout}>
-              {t("navigation.logout")}
-            </NavigationButton>
-          ) : (
-            <NavigationItem
-              icon={<LogoutIcon primary rotate />}
-              href={{ pathname: LOGIN_ROUTE, state: backPath }}
-            >
-              {t("navigation.login")}
-            </NavigationItem>
-          )}
-        </div>
-      </div>
-    </Sidebar>
-  );
-};
-
-export default translate()(NavigationMobile);
+const NavigationMobile = translate()(React.memo(_NavigationMobile));
+export default NavigationMobile;

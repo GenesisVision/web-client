@@ -1,6 +1,7 @@
 import "./profitability.scss";
 
 import * as React from "react";
+import withLoader from "shared/decorators/with-loader";
 
 import BaseProfitability from "./base-profitability";
 import {
@@ -9,42 +10,38 @@ import {
   composeProfitabilityPrefix
 } from "./profitability.helper";
 
-interface IProfitabilityProps {
+const renderPrefix = (value: string, prefix: PROFITABILITY_PREFIX) => {
+  if (+value > 0) return composeProfitabilityPrefix(prefix).positive;
+  if (+value < 0) return composeProfitabilityPrefix(prefix).negative;
+};
+
+export const _Profitability: React.FC<Props> = ({
+  className,
+  value,
+  variant = PROFITABILITY_VARIANT.TEXT,
+  prefix = PROFITABILITY_PREFIX.NO_PREFIX,
+  children
+}) => (
+  <BaseProfitability
+    className={className}
+    variant={variant}
+    isPositive={+value > 0}
+    isNegative={+value < 0}
+  >
+    <>
+      {renderPrefix(value, prefix)}
+      {children}
+    </>
+  </BaseProfitability>
+);
+
+const Profitability = React.memo(withLoader(_Profitability));
+
+export default Profitability;
+
+interface Props {
   className?: string;
-  value: number | string;
+  value: string;
   prefix?: PROFITABILITY_PREFIX;
   variant?: PROFITABILITY_VARIANT;
 }
-
-class Profitability extends React.Component<IProfitabilityProps> {
-  renderPrefix() {
-    const { value, prefix = PROFITABILITY_PREFIX.NO_PREFIX } = this.props;
-    if (value > 0) return composeProfitabilityPrefix(prefix).positive;
-    if (value < 0) return composeProfitabilityPrefix(prefix).negative;
-  }
-
-  render() {
-    const {
-      className,
-      value,
-      variant = PROFITABILITY_VARIANT.TEXT,
-      children
-    } = this.props;
-
-    return (
-      <BaseProfitability
-        className={className}
-        variant={variant}
-        isPositive={value > 0}
-        isNegative={value < 0}
-      >
-        <React.Fragment>
-          {this.renderPrefix()}
-          {children}
-        </React.Fragment>
-      </BaseProfitability>
-    );
-  }
-}
-
-export default Profitability;

@@ -23,8 +23,16 @@ export const fetchWallets = (): RootThunk<void> => (dispatch, getState) => {
   const { info } = getState().wallet;
   if (info.isPending) return;
   const { currency } = getState().accountSettings;
-  dispatch(actions.updateWalletTimestamp());
-  dispatch(actions.fetchWallets(currency, authorization));
+  dispatch(actions.updateWalletTimestampAction());
+  dispatch(actions.fetchWalletsAction(currency, authorization));
+};
+
+export const fetchAccounts = (): RootThunk<void> => (dispatch, getState) => {
+  const authorization = authService.getAuthArg();
+  const { info } = getState().copyTradingAccounts;
+  if (info.isPending) return;
+  dispatch(actions.updateAccountTimestampAction());
+  dispatch(actions.fetchAccountsAction(authorization));
 };
 
 export const fetchBaseWallets = (): RootThunk<
@@ -38,27 +46,23 @@ export const fetchBaseWallets = (): RootThunk<
   );
 };
 
-export const fetchWalletTransactions = (requestFilters?: FilteringType) => {
-  const authorization = authService.getAuthArg();
+export const fetchWalletTransactions = (requestFilters?: FilteringType) =>
+  actions.fetchWalletTransactionsAction(
+    authService.getAuthArg(),
+    requestFilters
+  );
 
-  return actions.fetchWalletTransactionsDispatch(authorization, requestFilters);
-};
+export const offPayFeesWithGvt = () =>
+  walletApi.v10WalletPaygvtfeeOffPost(authService.getAuthArg());
 
-export const offPayFeesWithGvt = () => () => {
-  return walletApi.v10WalletPaygvtfeeOffPost(authService.getAuthArg());
-};
-
-export const onPayFeesWithGvt = () => () => {
-  return walletApi.v10WalletPaygvtfeeOnPost(authService.getAuthArg());
-};
+export const onPayFeesWithGvt = () =>
+  walletApi.v10WalletPaygvtfeeOnPost(authService.getAuthArg());
 
 export const cancelWithdrawRequest = (txId: string) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<any> => {
-  const authorization = authService.getAuthArg();
-
-  return walletApi
-    .v10WalletWithdrawRequestCancelByTxIdPost(txId, authorization)
+): CancelablePromise<any> =>
+  walletApi
+    .v10WalletWithdrawRequestCancelByTxIdPost(txId, authService.getAuthArg())
     .then(response => {
       dispatch(
         alertMessageActions.success(
@@ -73,16 +77,12 @@ export const cancelWithdrawRequest = (txId: string) => (
     .catch(err => {
       dispatch(alertMessageActions.error(err.errorMessage));
     });
-};
 
 export const resendWithdrawRequest = (txId: string) => (
-  dispatch: MiddlewareDispatch,
-  getState: any
-): CancelablePromise<any> => {
-  const authorization = authService.getAuthArg();
-
-  return walletApi
-    .v10WalletWithdrawRequestResendByTxIdPost(txId, authorization)
+  dispatch: MiddlewareDispatch
+): CancelablePromise<any> =>
+  walletApi
+    .v10WalletWithdrawRequestResendByTxIdPost(txId, authService.getAuthArg())
     .then(response => {
       dispatch(
         alertMessageActions.success(
@@ -97,24 +97,9 @@ export const resendWithdrawRequest = (txId: string) => (
     .catch(err => {
       dispatch(alertMessageActions.error(err.errorMessage));
     });
-};
-
-export const fetchMultiTransactionsExternal = (
-  currency: string,
-  filters?: FilteringType
-): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
-  const authorization = authService.getAuthArg();
-  const filtering = {
-    ...filters,
-    currency
-  };
-  return walletApi
-    .v10WalletMultiTransactionsExternalGet(authorization, filtering)
-    .then(mapToTableItems<MultiWalletExternalTransaction>("transactions"));
-};
 
 export const fetchMultiTransactions = (
-  currency: CURRENCIES,
+  currency?: CURRENCIES,
   filters?: FilteringType
 ) => {
   const authorization = authService.getAuthArg();
@@ -127,21 +112,21 @@ export const fetchMultiTransactions = (
     .then(mapToTableItems("transactions"));
 };
 
-export const fetchCopytradingAccounts = () => {
-  const authorization = authService.getAuthArg();
-  return signalApi
-    .v10SignalAccountsGet(authorization)
+export const fetchCopytradingAccounts = () =>
+  signalApi
+    .v10SignalAccountsGet(authService.getAuthArg())
     .then(mapToTableItems<CopyTradingAccountInfo>("accounts"));
-};
 
-let mockCopytrading = {
-  accounts: [
-    {
-      currency: "GVT",
-      logo: "d3d2bc3e-eb20-4941-91e7-c8af00d0efe7",
-      balance: 100,
-      equity: 10,
-      freeMargin: 90
-    }
-  ]
+export const fetchMultiTransactionsExternal = (
+  currency?: string,
+  filters?: FilteringType
+): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
+  const authorization = authService.getAuthArg();
+  const filtering = {
+    ...filters,
+    currency
+  };
+  return walletApi
+    .v10WalletMultiTransactionsExternalGet(authorization, filtering)
+    .then(mapToTableItems<MultiWalletExternalTransaction>("transactions"));
 };

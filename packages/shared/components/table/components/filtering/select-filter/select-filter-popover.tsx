@@ -1,47 +1,52 @@
-import { GVButton } from "gv-react-components";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import GVButton from "shared/components/gv-button";
 
 import { SelectFilterValue } from "../filter.type";
+import { ComposedRequestSelectValue } from "./select-filter.constants";
 
-interface ISelectFilterPopoverProps {
-  changeFilter?(value: SelectFilterValue<any>): void;
-  values: SelectFilterValue<any>[];
-  value?: any;
+const _SelectFilterPopover: React.FC<Props & InjectedTranslateProps> = ({
+  values,
+  value,
+  t,
+  changeFilter
+}) => {
+  const handleClick = useCallback(
+    (value: ComposedRequestSelectValue) => () =>
+      changeFilter && changeFilter(value),
+    [changeFilter]
+  );
+
+  const renderLabel = useCallback(
+    (item: SelectFilterValue<ComposedRequestSelectValue>): string =>
+      item.labelKey ? t(item.labelKey) : item.label,
+    []
+  );
+
+  return (
+    <div className="select-filter">
+      {values.map((x, idx) => {
+        const selected = x.value === value;
+        return (
+          <GVButton
+            variant="text"
+            color={selected ? "primary" : "secondary"}
+            key={idx}
+            onClick={handleClick(x.value)}
+          >
+            {renderLabel(x)}
+          </GVButton>
+        );
+      })}
+    </div>
+  );
+};
+
+interface Props {
+  changeFilter?(value: ComposedRequestSelectValue): void;
+  values: SelectFilterValue<ComposedRequestSelectValue>[];
+  value?: ComposedRequestSelectValue;
 }
 
-class SelectFilterPopover extends React.PureComponent<
-  ISelectFilterPopoverProps & InjectedTranslateProps
-> {
-  handleClick = (value: SelectFilterValue<any>) => () => {
-    if (this.props.changeFilter) {
-      this.props.changeFilter(value);
-    }
-  };
-
-  renderLabel = (item: SelectFilterValue<any>): string =>
-    item.labelKey ? this.props.t(item.labelKey) : item.label;
-
-  render() {
-    const { values, value } = this.props;
-    return (
-      <div className="select-filter">
-        {values.map((x, idx) => {
-          const selected = x.value === value;
-          return (
-            <GVButton
-              variant="text"
-              color={selected ? "primary" : "secondary"}
-              key={idx}
-              onClick={this.handleClick(x.value)}
-            >
-              {this.renderLabel(x)}
-            </GVButton>
-          );
-        })}
-      </div>
-    );
-  }
-}
-
-export default translate()(SelectFilterPopover);
+const SelectFilterPopover = translate()(React.memo(_SelectFilterPopover));
+export default SelectFilterPopover;

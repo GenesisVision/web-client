@@ -1,3 +1,5 @@
+import { ASSET } from "shared/constants/constants";
+
 import replaceParams from "./replace-params";
 
 export const PROGRAM_SLUG_URL_PARAM_NAME = "programSlugUrl";
@@ -12,8 +14,8 @@ export const FUND_DETAILS_ROUTE = `${FUNDS_ROUTE}/:${FUNDS_SLUG_URL_PARAM_NAME}`
 export const NOTIFICATIONS_ROUTE = "/notifications";
 export const PROGRAM_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/program/:id`;
 export const FUND_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/fund/:id`;
-export const PROGRAMS_FACET_ROUTE = `${PROGRAMS_ROUTE}/facets/${PROGRAM_SLUG_URL_PARAM_NAME}`;
-export const FUNDS_FACET_ROUTE = `${FUNDS_ROUTE}/facets/${FUNDS_SLUG_URL_PARAM_NAME}`;
+export const PROGRAMS_FACET_ROUTE = `${PROGRAMS_ROUTE}/facets/:${PROGRAM_SLUG_URL_PARAM_NAME}`;
+export const FUNDS_FACET_ROUTE = `${FUNDS_ROUTE}/facets/:${FUNDS_SLUG_URL_PARAM_NAME}`;
 
 export const composeUrl = (route: string, slugParamName: string) => (
   slugUrl: string
@@ -41,6 +43,19 @@ export const composeProgramNotificationsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
     ":id": slugUrl
   });
+
+export const composeAssetNotificationsUrl = (
+  slugUrl: string,
+  asset: ASSET
+): string =>
+  replaceParams(
+    asset === ASSET.PROGRAM
+      ? PROGRAM_NOTIFICATIONS_ROUTE
+      : FUND_NOTIFICATIONS_ROUTE,
+    {
+      ":id": slugUrl
+    }
+  );
 
 export const composeFundNotificationsUrl = (slugUrl: string): string =>
   replaceParams(FUND_NOTIFICATIONS_ROUTE, {

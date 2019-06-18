@@ -5,7 +5,6 @@ import {
 } from "shared/components/fund-withdraw/fund-withdraw.types";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
-import { rateApi } from "shared/services/api-client/rate-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
@@ -22,10 +21,9 @@ export const getFundWithdrawInfo = (
     walletApi.v10WalletMultiByCurrencyAvailableGet(
       currency,
       authService.getAuthArg()
-    ),
-    rateApi.v10RateByFromByToGet("GVT", currency)
-  ]).then(([withdrawalInfo, walletMulti, rate]) => {
-    return { withdrawalInfo, wallets: walletMulti.wallets, rate };
+    )
+  ]).then(([withdrawalInfo, walletMulti]) => {
+    return { withdrawalInfo, wallets: walletMulti.wallets };
   });
 };
 

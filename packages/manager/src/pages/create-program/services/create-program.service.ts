@@ -24,19 +24,9 @@ export const fetchBrokers = (): CancelablePromise<Broker[]> =>
     return [gvBroker, ...data.brokers];
   });
 
-export const fetchMinDepositsAmount = (): CancelablePromise<{
-  [key: string]: number;
-}> =>
-  managerApi
-    .v10ManagerProgramsInvestmentAmountGet(authService.getAuthArg())
-    .then(investmentAmount => investmentAmount.minimumDepositsAmount);
-
 export const createProgram = (
-  createProgramData: Pick<
-    ICreateProgramSettingsFormValues,
-    keyof NewProgramRequest
-  >
-): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => dispatch => {
+  createProgramData: ICreateProgramSettingsFormValues
+): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => () => {
   const authorization = authService.getAuthArg();
 
   let promise = Promise.resolve("") as CancelablePromise<any>;

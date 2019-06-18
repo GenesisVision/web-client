@@ -21,6 +21,7 @@ import {
   PROGRAMS_VIEW
 } from "shared/components/table/table.constants";
 import { loadData, saveData } from "shared/utils/localstorage";
+
 import { RenderBodyItemFuncType } from "./table.types";
 
 export interface ITableProps
@@ -90,6 +91,8 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
       updateRow
     } = this.props;
     if (!items && emptyMessage) return emptyMessage;
+    const renderBodyItem =
+      view === LIST_VIEW.CARDS ? renderBodyCard : renderBodyRow;
     return (
       <div className="table-wrapper">
         <TableToolbar
@@ -115,11 +118,12 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
           {view === LIST_VIEW.CARDS && (
             <div className={classNames("table", className)}>
               <TableBody
+                isPending={isPending}
                 items={items}
                 className="table-cards"
                 tag="div"
                 view={LIST_VIEW.CARDS}
-                renderBodyItem={renderBodyCard}
+                renderBodyItem={renderBodyItem!}
               />
             </div>
           )}
@@ -139,18 +143,17 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
                 view={LIST_VIEW.TABLE}
                 updateRow={updateRow}
                 updateItems={updateItems}
-                renderBodyItem={renderBodyRow}
+                renderBodyItem={renderBodyItem!}
               />
             </table>
           )}
         </GVScroll>
-        {paging && (
-          <TableFooter
-            paging={paging}
-            updatePaging={updatePaging}
-            isPending={isPending}
-          />
-        )}
+        <TableFooter
+          condition={paging && !!(paging.totalPages && paging.totalPages >= 2)}
+          paging={paging}
+          updatePaging={updatePaging}
+          isPending={isPending}
+        />
       </div>
     );
   }

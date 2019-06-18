@@ -15,7 +15,7 @@ interface IGVCheckboxProps {
   label: string;
 }
 
-class GVCheckbox extends React.Component<IGVCheckboxProps> {
+class GVCheckbox extends React.PureComponent<IGVCheckboxProps> {
   checkbox: RefObject<HTMLInputElement> = React.createRef();
 
   handleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -48,7 +48,15 @@ class GVCheckbox extends React.Component<IGVCheckboxProps> {
   };
 
   render() {
-    const { name, className, color, value, disabled, ...other } = this.props;
+    const {
+      name,
+      className,
+      color,
+      value,
+      touched,
+      disabled,
+      ...other
+    } = this.props;
     return (
       <span className={"gv-checkbox-wrapper"}>
         <span

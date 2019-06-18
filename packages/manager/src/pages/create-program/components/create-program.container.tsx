@@ -7,16 +7,21 @@ import {
   ProgramsInfo,
   WalletData
 } from "gv-api-web";
-import { GVTab, GVTabs } from "gv-react-components";
 import ConfirmContainer from "modules/confirm/confirm-container";
+import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
+import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { headerSelector } from "shared/reducers/header-reducer";
+import { programsInfoSelector } from "shared/reducers/platform-reducer";
 import { rateApi } from "shared/services/api-client/rate-api";
 import {
   MiddlewareDispatch,
@@ -24,11 +29,9 @@ import {
   SetSubmittingType
 } from "shared/utils/types";
 
-import { DASHBOARD_ROUTE } from "../../dashboard/dashboard.routes";
 import {
   createProgram,
-  fetchBrokers,
-  fetchMinDepositsAmount
+  fetchBrokers
 } from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
@@ -55,23 +58,27 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
     fetchBrokers().then(brokers => {
       this.setState({
         brokers: brokers,
-        isPending: false,
-        selectedBroker: brokers[0]
+        selectedBroker: brokers[0],
+        minimumDepositsAmount: brokers[0].accountTypes[0].minimumDepositsAmount,
+        isPending: false
       });
     });
-
-    fetchMinDepositsAmount().then(minimumDepositsAmount =>
-      this.setState({ minimumDepositsAmount })
-    );
   }
 
   selectBroker = (brokerName: string) => () => {
-    const broker = this.state.brokers!.find(x => x.name === brokerName);
-    this.setState({ selectedBroker: broker });
+    const selectedBroker = this.state.brokers!.find(x => x.name === brokerName);
+    const minimumDepositsAmount = selectedBroker
+      ? selectedBroker.accountTypes[0].minimumDepositsAmount
+      : undefined;
+    this.setState({ minimumDepositsAmount, selectedBroker });
   };
 
-  confirmNavigateToBroker = () => {
-    this.setState({ tab: TAB.BROKER, isNavigationDialogVisible: false });
+  confirmNavigateToBroker = (
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => {
+    this.setState({ tab: TAB.BROKER, isNavigationDialogVisible: false }, () => {
+      setSubmitting(false);
+    });
   };
 
   navigateToSettings = () => {
@@ -145,7 +152,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
       !selectedBroker ||
       !programsInfo ||
       !headerData ||
-      !wallets ||
+      !wallets.length ||
       !minimumDepositsAmount
     )
       return null;
@@ -172,6 +179,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
                 selectedBroker={selectedBroker}
                 selectBroker={this.selectBroker}
                 isForexAllowed={headerData.allowForex}
+                isKycConfirmed={headerData.kycConfirmed}
               />
             )}
             {tab === TAB.SETTINGS && (
@@ -212,17 +220,11 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: ManagerRootState): StateProps => {
-  return {
-    wallets: state.wallet.info.data
-      ? state.wallet.info.data.wallets
-      : undefined,
-    headerData: state.profileHeader.info.data,
-    programsInfo: state.platformData.data
-      ? state.platformData.data.programsInfo
-      : undefined
-  };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  wallets: walletsSelector(state),
+  headerData: headerSelector(state),
+  programsInfo: programsInfoSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
@@ -261,7 +263,7 @@ interface State {
 
 interface StateProps {
   programsInfo?: ProgramsInfo;
-  wallets?: WalletData[];
+  wallets: WalletData[];
   headerData?: ProfileHeaderViewModel;
 }
 

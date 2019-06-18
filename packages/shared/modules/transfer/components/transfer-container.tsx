@@ -1,14 +1,23 @@
-import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
+import {
+  CopyTradingAccountInfo,
+  InternalTransferRequestSourceTypeEnum,
+  WalletData
+} from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
+import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
 import {
-  fetchCopytradingAccounts,
+  copyTradingAccountsSelector,
+  walletsSelector
+} from "shared/components/wallet/reducers/wallet.reducers";
+import {
+  fetchAccounts,
   fetchWallets
 } from "shared/components/wallet/services/wallet.services";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
+import { ResponseError } from "shared/utils/types";
 
 import { transferRequest } from "../services/transfer.services";
 import {
@@ -16,33 +25,36 @@ import {
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
 } from "../transfer.types";
-import TransferForm, { TransferFormValuesType } from "./transfer-form";
+import TransferForm, { TransferFormValues } from "./transfer-form";
 
-class _TransferContainer extends React.Component<Props, State> {
+class _TransferContainer extends React.PureComponent<Props, State> {
   state = {
-    errorMessage: undefined,
-    copytradingAccounts: []
+    errorMessage: undefined
   };
 
   componentDidMount() {
+    const { destinationType, sourceType, service } = this.props;
     if (
-      this.props.destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
-      this.props.sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+      destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
+      sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
     )
-      fetchCopytradingAccounts().then(res => {
-        this.setState({ copytradingAccounts: res.items });
-      });
+      service.fetchAccounts();
   }
 
-  handleSubmit = (values: TransferFormValuesType) => {
-    const { sourceType, destinationType, service, onClose } = this.props;
-    transferRequest({ ...values, sourceType, destinationType })
+  handleSubmit = (values: TransferFormValues) => {
+    const { service, onClose, destinationType, sourceType } = this.props;
+    transferRequest(values)
       .then(() => {
         onClose();
         service.fetchWallets();
         service.updateWalletTimestamp();
+        if (
+          destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
+          sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+        )
+          service.fetchAccounts();
       })
-      .catch((error: any) => {
+      .catch((error: ResponseError) => {
         this.setState({
           errorMessage: error.errorMessage
         });
@@ -51,6 +63,7 @@ class _TransferContainer extends React.Component<Props, State> {
 
   render() {
     const {
+      copyTradingAccounts,
       title,
       currentItem,
       wallets,
@@ -58,13 +71,13 @@ class _TransferContainer extends React.Component<Props, State> {
       destinationType,
       currentItemContainer
     } = this.props;
-    const { copytradingAccounts, errorMessage } = this.state;
+    const { errorMessage } = this.state;
     const sourceItems =
-      sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copytradingAccounts;
+      sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copyTradingAccounts;
     const destinationItems =
       destinationType === TRANSFER_DIRECTION.WALLET
         ? wallets
-        : copytradingAccounts;
+        : copyTradingAccounts;
     if (!sourceItems.length || !destinationItems.length)
       return <DialogLoader />;
     return (
@@ -83,17 +96,17 @@ class _TransferContainer extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  if (!state.accountSettings) return { wallets: [] };
-  const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
-  return { wallets };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  wallets: walletsSelector(state),
+  copyTradingAccounts: copyTradingAccountsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
+      fetchAccounts,
       fetchWallets,
-      updateWalletTimestamp
+      updateWalletTimestamp: updateWalletTimestampAction
     },
     dispatch
   )
@@ -114,10 +127,12 @@ interface Props extends StateProps, DispatchProps, ITransferContainerOwnProps {}
 
 interface StateProps {
   wallets: WalletData[];
+  copyTradingAccounts: CopyTradingAccountInfo[];
 }
 
 interface DispatchProps {
   service: {
+    fetchAccounts(): void;
     fetchWallets(): void;
     updateWalletTimestamp(): void;
   };
@@ -126,13 +141,12 @@ interface DispatchProps {
 export interface ITransferContainerOwnProps {
   currentItem: ItemType;
   onClose(): void;
+  sourceType: InternalTransferRequestSourceTypeEnum;
+  destinationType: InternalTransferRequestSourceTypeEnum;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
-  sourceType?: TRANSFER_DIRECTION;
-  destinationType?: TRANSFER_DIRECTION;
 }
 
 interface State {
-  copytradingAccounts?: CopyTradingAccountInfo[];
   errorMessage?: string;
 }

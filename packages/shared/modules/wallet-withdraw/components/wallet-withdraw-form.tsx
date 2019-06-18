@@ -2,7 +2,6 @@ import "./wallet-withdraw-form.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import {
   InjectedTranslateProps,
@@ -11,20 +10,22 @@ import {
 } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import {
   btcUsdtWalletValidator,
   ethGvtWalletValidator
 } from "shared/utils/validators/validators";
 import { Schema, StringSchema, lazy, object, string } from "yup";
 
-import { CurrencyEnum, SetSubmittingType } from "../../../utils/types";
-
-const WalletWithdrawForm: React.FC<
+const _WalletWithdrawForm: React.FC<
   InjectedFormikProps<Props, IWalletWithdrawFormValues>
 > = ({
   t,
@@ -39,8 +40,8 @@ const WalletWithdrawForm: React.FC<
   isSubmitting
 }) => {
   const onChangeCurrency = (name: string, target: any) => {
-    setFieldValue("currency", target.props.value);
-    setFieldValue("amount", "");
+    setFieldValue(FIELDS.currency, target.props.value);
+    setFieldValue(FIELDS.amount, "");
   };
   const { currency, amount } = values;
   const selected = wallets.find(wallet => wallet.currency === currency);
@@ -55,7 +56,7 @@ const WalletWithdrawForm: React.FC<
     );
   };
   const setMaxAmount = () => {
-    setFieldValue("amount", formatCurrencyValue(available, currency));
+    setFieldValue(FIELDS.amount, formatCurrencyValue(available, currency));
   };
 
   return (
@@ -77,7 +78,7 @@ const WalletWithdrawForm: React.FC<
           </div>
         </div>
         <GVFormikField
-          name="currency"
+          name={FIELDS.currency}
           component={GVTextField}
           label={t("wallet-withdraw.select-currency")}
           InputComponent={Select}
@@ -99,14 +100,14 @@ const WalletWithdrawForm: React.FC<
       </div>
       <div className="dialog__bottom">
         <InputAmountField
-          name="amount"
+          name={FIELDS.amount}
           label={t("wallet-withdraw.amount")}
           currency={currency}
           isAllow={isAllow}
           setMax={setMaxAmount}
         />
         <GVFormikField
-          name="address"
+          name={FIELDS.address}
           label={t("wallet-withdraw.address")}
           component={GVTextField}
           autoComplete="off"
@@ -114,7 +115,7 @@ const WalletWithdrawForm: React.FC<
         {twoFactorEnabled && (
           <GVFormikField
             type="text"
-            name="twoFactorCode"
+            name={FIELDS.twoFactorCode}
             label={t("wallet-withdraw.two-factor-code-label")}
             autoComplete="off"
             component={GVTextField}
@@ -176,11 +177,18 @@ const twoFactorvalidator = (
         .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 };
 
+enum FIELDS {
+  currency = "currency",
+  amount = "amount",
+  address = "address",
+  twoFactorCode = "twoFactorCode"
+}
+
 export interface IWalletWithdrawFormValues {
-  currency: CurrencyEnum;
-  amount: string;
-  address: string;
-  twoFactorCode: string;
+  [FIELDS.currency]: CurrencyEnum;
+  [FIELDS.amount]: string;
+  [FIELDS.address]: string;
+  [FIELDS.twoFactorCode]: string;
 }
 
 interface Props extends InjectedTranslateProps, OwnProps {}
@@ -196,7 +204,7 @@ interface OwnProps {
   errorMessage?: string;
 }
 
-export default compose<React.FC<OwnProps>>(
+const WalletWithdrawForm = compose<React.FC<OwnProps>>(
   translate(),
   withFormik<Props, IWalletWithdrawFormValues>({
     displayName: "wallet-withdraw",
@@ -205,27 +213,32 @@ export default compose<React.FC<OwnProps>>(
       if (!props.wallets.find(wallet => wallet.currency === currency)) {
         currency = props.wallets[0] ? props.wallets[0].currency : "";
       }
-      return { currency, amount: "", address: "", twoFactorCode: "" };
+      return {
+        [FIELDS.currency]: currency,
+        [FIELDS.amount]: "",
+        [FIELDS.address]: "",
+        [FIELDS.twoFactorCode]: ""
+      };
     },
     validationSchema: (props: Props) => {
       const { t, twoFactorEnabled } = props;
       return lazy(
         (values: IWalletWithdrawFormValues): Schema<any> => {
-          switch (values.currency) {
+          switch (values[FIELDS.currency]) {
             case "GVT":
             case "ETH":
               return object().shape({
-                address: ethGvtWalletValidator.required(
+                [FIELDS.address]: ethGvtWalletValidator.required(
                   t("wallet-withdraw.validation.address-is-required")
                 ),
-                twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
+                [FIELDS.twoFactorCode]: twoFactorvalidator(t, twoFactorEnabled)
               });
             default:
               return object().shape({
-                address: btcUsdtWalletValidator.required(
+                [FIELDS.address]: btcUsdtWalletValidator.required(
                   t("wallet-withdraw.validation.address-is-required")
                 ),
-                twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
+                [FIELDS.twoFactorCode]: twoFactorvalidator(t, twoFactorEnabled)
               });
           }
         }
@@ -235,4 +248,5 @@ export default compose<React.FC<OwnProps>>(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(WalletWithdrawForm);
+)(_WalletWithdrawForm);
+export default WalletWithdrawForm;

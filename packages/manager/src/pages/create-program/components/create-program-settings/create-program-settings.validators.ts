@@ -4,19 +4,31 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { boolean, mixed, number, object, string } from "yup";
 
-import { ICreateProgramSettingsProps } from "./create-program-settings";
+import {
+  CREATE_PROGRAM_FIELDS,
+  ICreateProgramSettingsProps
+} from "./create-program-settings";
 
 const createProgramSettingsValidationSchema = (
   props: ICreateProgramSettingsProps
 ) => {
   const { t } = props;
+  const minDeposit = parseFloat(
+    formatCurrencyValue(
+      convertToCurrency(
+        props.minimumDepositsAmount[props.programCurrency!],
+        props.rate || 1
+      ),
+      props.programCurrency!
+    )
+  );
   return object().shape({
-    stopOutLevel: number()
+    [CREATE_PROGRAM_FIELDS.stopOutLevel]: number()
       .required(
         t("manager.create-program-page.settings.validation.stop-out-required")
       )
-      .moreThan(
-        0,
+      .min(
+        10,
         t("manager.create-program-page.settings.validation.stop-out-is-zero")
       )
       .max(
@@ -24,35 +36,35 @@ const createProgramSettingsValidationSchema = (
         t("manager.create-program-page.settings.validation.stop-out-is-large")
       ),
 
-    logo: inputImageShape(t),
-    title: assetTitleShape(t),
-    description: assetDescriptionShape(t),
-    currency: string().required(
+    [CREATE_PROGRAM_FIELDS.logo]: inputImageShape(t),
+    [CREATE_PROGRAM_FIELDS.title]: assetTitleShape(t),
+    [CREATE_PROGRAM_FIELDS.description]: assetDescriptionShape(t),
+    [CREATE_PROGRAM_FIELDS.currency]: string().required(
       t("manager.create-program-page.settings.validation.currency-required")
     ),
-    periodLength: string().required(
+    [CREATE_PROGRAM_FIELDS.periodLength]: string().required(
       t("manager.create-program-page.settings.validation.period-required")
     ),
-    leverage: string().required(
+    [CREATE_PROGRAM_FIELDS.leverage]: string().required(
       t("manager.create-program-page.settings.validation.leverage-required")
     ),
-    entryFee: number()
+    [CREATE_PROGRAM_FIELDS.entryFee]: number()
       .required(
         t("manager.create-program-page.settings.validation.entry-fee-required")
       )
-      .moreThan(
-        0.01,
+      .min(
+        0,
         t("manager.create-program-page.settings.validation.entry-fee-min")
       )
-      .lessThan(
+      .max(
         props.programsInfo.managerMaxEntryFee,
         t("manager.create-program-page.settings.validation.entry-fee-max", {
           max: props.programsInfo.managerMaxEntryFee
         })
       ),
-    successFee: number()
-      .moreThan(
-        0.01,
+    [CREATE_PROGRAM_FIELDS.successFee]: number()
+      .min(
+        0,
         t("manager.create-program-page.settings.validation.success-fee-min")
       )
       .required(
@@ -60,25 +72,50 @@ const createProgramSettingsValidationSchema = (
           "manager.create-program-page.settings.validation.success-fee-required"
         )
       )
-      .lessThan(
+      .max(
         props.programsInfo.managerMaxSuccessFee,
         t("manager.create-program-page.settings.validation.success-fee-max", {
           max: props.programsInfo.managerMaxSuccessFee
         })
       ),
-    isSignalProgram: boolean(),
-    signalSubscriptionFee: mixed().when("isSignalProgram", {
-      is: true,
-      then: signalEntryFeeShape(t, 100)
-    }),
-    signalSuccessFee: mixed().when("isSignalProgram", {
-      is: true,
-      then: signalSuccessFeeShape(t, props.programsInfo.managerMaxSuccessFee)
-    }),
-    brokerAccountTypeId: string().required(
+    [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: boolean(),
+    [CREATE_PROGRAM_FIELDS.investmentLimit]: mixed().when(
+      CREATE_PROGRAM_FIELDS.hasInvestmentLimit,
+      {
+        is: true,
+        then: number()
+          .min(
+            0,
+            t(
+              "manager.create-program-page.settings.validation.investment-limit-min"
+            )
+          )
+          .required(
+            t(
+              "manager.create-program-page.settings.validation.investment-limit-required"
+            )
+          )
+      }
+    ),
+    [CREATE_PROGRAM_FIELDS.isSignalProgram]: boolean(),
+    [CREATE_PROGRAM_FIELDS.signalVolumeFee]: mixed().when(
+      CREATE_PROGRAM_FIELDS.isSignalProgram,
+      {
+        is: true,
+        then: signalVolumeFeeShape(t)
+      }
+    ),
+    [CREATE_PROGRAM_FIELDS.signalSuccessFee]: mixed().when(
+      CREATE_PROGRAM_FIELDS.isSignalProgram,
+      {
+        is: true,
+        then: signalSuccessFeeShape(t, props.programsInfo.managerMaxSuccessFee)
+      }
+    ),
+    [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: string().required(
       t("manager.create-program-page.settings.validation.account-type-required")
     ),
-    depositAmount:
+    [CREATE_PROGRAM_FIELDS.depositAmount]:
       props.rate && props.programCurrency && props.rate
         ? number()
             .required(
@@ -87,25 +124,11 @@ const createProgramSettingsValidationSchema = (
               )
             )
             .min(
-              parseFloat(
-                formatCurrencyValue(
-                  convertToCurrency(
-                    props.minimumDepositsAmount[props.programCurrency],
-                    props.rate
-                  ),
-                  props.programCurrency
-                )
-              ),
+              minDeposit,
               t(
                 "manager.create-program-page.settings.validation.amount-is-zero",
                 {
-                  min: formatCurrencyValue(
-                    convertToCurrency(
-                      props.minimumDepositsAmount[props.programCurrency],
-                      props.rate
-                    ),
-                    props.programCurrency
-                  )
+                  min: minDeposit
                 }
               )
             )
@@ -173,27 +196,29 @@ export const signalSuccessFeeShape = (
     );
 };
 
-export const signalEntryFeeShape = (
+export const signalVolumeFeeShape = (
   t: TranslationFunction,
-  managerMaxEntryFee: number
+  minVolumeFee: number = 0,
+  maxVolumeFee: number = 0.1
 ) => {
   return number()
     .required(
       t(
-        "manager.create-program-page.settings.validation.signal-subscription-fee-required"
+        "manager.create-program-page.settings.validation.signal-volume-fee-required"
       )
     )
     .min(
-      0.01,
+      minVolumeFee,
       t(
-        "manager.create-program-page.settings.validation.signal-subscription-fee-min"
+        "manager.create-program-page.settings.validation.signal-volume-fee-min",
+        { min: minVolumeFee.toFixed(2) }
       )
     )
     .max(
-      managerMaxEntryFee,
+      maxVolumeFee,
       t(
-        "manager.create-program-page.settings.validation.signal-subscription-fee-max",
-        { max: managerMaxEntryFee }
+        "manager.create-program-page.settings.validation.signal-volume-fee-max",
+        { max: maxVolumeFee.toFixed(2) }
       )
     );
 };

@@ -1,24 +1,26 @@
 import "shared/components/dashboard/dashboard-assets/dashboard-assets.scss";
 
-import { GVTab, GVTabs } from "gv-react-components";
 import {
   getDashboardFunds,
   getDashboardPrograms
 } from "pages/dashboard/services/dashboard-assets.service";
-import React, { Component, ComponentType } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
 
-import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
+import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";
 import {
   IDashboardAssetsCounts,
   fetchAssetsCount
 } from "../../services/dashboard.service";
+import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 import DashboardCopytrading from "./dashboard-copytrading";
 
 enum ASSET_TAB {
@@ -41,7 +43,7 @@ interface IDashboardAssetsState extends IDashboardAssetsCounts {
   tab: ASSET_TAB;
 }
 
-class DashboardAssetsSection extends Component<
+class DashboardAssetsSection extends React.PureComponent<
   IDashboardOwnProps & IDashboardAssetsProps & InjectedTranslateProps,
   IDashboardAssetsState
 > {
@@ -102,6 +104,7 @@ class DashboardAssetsSection extends Component<
               {/*
             //@ts-ignore */}
               <DashboardPrograms
+                columns={DASHBOARD_PROGRAMS_COLUMNS}
                 getDashboardPrograms={getDashboardPrograms}
                 title={title}
                 role={ROLE.INVESTOR}
@@ -129,10 +132,13 @@ class DashboardAssetsSection extends Component<
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  service: bindActionCreators({ clearDashboardAssetsTable }, dispatch)
+  service: bindActionCreators(
+    { clearDashboardAssetsTable: clearDashboardAssetsTableAction },
+    dispatch
+  )
 });
 
-export default compose<ComponentType<IDashboardOwnProps>>(
+export default compose<React.ComponentType<IDashboardOwnProps>>(
   translate(),
   connect(
     null,

@@ -1,48 +1,68 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import React, { useCallback } from "react";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
+import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 
-import ProgramUnfollow from "./program-unfollow";
+import ProgramUnfollowForm, {
+  IProgramUnfollowFormValues
+} from "./components/program-unfollow-form";
 import { detachToSignal } from "./services/program-unfollow.service";
 
-export interface ITProgramUnfollowContainerProps {
-  service: any;
+const _ProgramUnfollowContainer: React.FC<Props> = ({
+  open,
+  onClose,
+  service,
+  onApply,
+  id
+}) => {
+  const handleClose = useCallback(() => onClose(), [onClose]);
+  const handleSubmit = useCallback(
+    (value: IProgramUnfollowFormValues) => {
+      const model = { mode: value.mode };
+      service.detachToSignal(id, onApply, model);
+      handleClose();
+    },
+    [service, id]
+  );
+  return (
+    <Dialog open={open} onClose={handleClose}>
+      <ProgramUnfollowForm onSubmit={handleSubmit} />
+    </Dialog>
+  );
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { detachToSignal },
+    dispatch
+  )
+});
+
+const ProgramUnfollowContainer = compose<React.ComponentType<OwnProps>>(
+  connect<null, DispatchProps, OwnProps>(
+    null,
+    mapDispatchToProps
+  ),
+  React.memo
+)(_ProgramUnfollowContainer);
+export default ProgramUnfollowContainer;
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  detachToSignal: typeof detachToSignal;
+}
+
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface OwnProps extends IDialogProps {
   id: string;
-  open: boolean;
-  onClose(): void;
   onApply(): void;
 }
 
-class ProgramUnfollowContainer extends React.Component<
-  ITProgramUnfollowContainerProps
-> {
-  handleClose = () => {
-    const { onClose } = this.props;
-    onClose();
-  };
-  handleSubmit = () => {
-    const { service, onApply, id } = this.props;
-    service.detachToSignal(id, onApply);
-    this.handleClose();
-  };
-
-  render() {
-    const { open } = this.props;
-    return (
-      <ProgramUnfollow
-        open={open}
-        onApply={this.handleSubmit}
-        onClose={this.handleClose}
-      />
-    );
-  }
-}
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  service: bindActionCreators({ detachToSignal }, dispatch)
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(ProgramUnfollowContainer);
+interface Props extends OwnProps, DispatchProps {}

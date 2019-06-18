@@ -1,10 +1,15 @@
-import { AttachToSignalProviderInfo, WalletData } from "gv-api-web";
+import {
+  AttachToSignalProviderInfo,
+  SignalSubscription,
+  WalletData
+} from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { InvestorRootState } from "reducers";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
+import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { FOLLOW_TYPE } from "shared/constants/constants";
 import {
   AlertActionCreator,
@@ -21,38 +26,32 @@ import {
 } from "./services/program-follow-service";
 
 class _ProgramFollowContainer extends React.PureComponent<Props, State> {
-  state = {
+  state: State = {
     isPending: false,
     accounts: [],
     type: undefined,
-    subscriptionFee: undefined,
-    minDeposit: undefined,
-    hasActiveSubscription: undefined,
-    hasSignalAccount: undefined
+    volumeFee: undefined,
+    minDeposit: undefined
   };
 
   componentDidMount() {
     if (!authService.getAuthArg()) return;
+    const { id, signalSubscription } = this.props;
     this.setState({ isPending: true });
     getSignalAccounts()
       .then(CopyTradingAccountsList => {
         const { accounts } = CopyTradingAccountsList;
         this.setState({ accounts });
-        return getSignalInfo(this.props.id);
+        return getSignalInfo(id);
       })
       .then((info: AttachToSignalProviderInfo) => {
-        const {
-          hasSignalAccount,
-          subscriptionFee,
-          minDeposit,
-          hasActiveSubscription
-        } = info;
+        const { volumeFee, minDeposit } = info;
         this.setState({
-          type: hasActiveSubscription ? FOLLOW_TYPE.EDIT : FOLLOW_TYPE.CREATE,
-          hasSignalAccount,
-          subscriptionFee,
+          type: signalSubscription.hasActiveSubscription
+            ? FOLLOW_TYPE.EDIT
+            : FOLLOW_TYPE.CREATE,
+          volumeFee,
           minDeposit,
-          hasActiveSubscription,
           isPending: false
         });
       });
@@ -66,20 +65,14 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
       onClose,
       currency,
       id,
-      programName
+      signalSubscription
     } = this.props;
-    const {
-      isPending,
-      type,
-      accounts,
-      hasSignalAccount,
-      minDeposit
-    } = this.state;
-    if (isPending) return <DialogLoader />;
+    const { isPending, type, accounts, minDeposit } = this.state;
     const handleClose = () => {
       onClose();
     };
     const handleSubmit = () => {
+      this.props.onApply();
       onClose();
     };
     const submitMethod =
@@ -87,29 +80,27 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
     return (
       <Dialog open={open} onClose={handleClose}>
         <FollowPopupForm
+          condition={!isPending && !!wallets.length}
+          loader={<DialogLoader />}
+          signalSubscription={signalSubscription}
           minDeposit={minDeposit!}
-          hasSignalAccount={hasSignalAccount!}
           alertError={service.alertError}
           alertSuccess={service.alertSuccess}
           id={id}
           accounts={accounts}
           currency={currency}
-          wallets={wallets!}
+          wallets={wallets}
           submitMethod={submitMethod}
           handleSubmit={handleSubmit}
-          programName={programName}
         />
       </Dialog>
     );
   }
 }
 
-const mapStateToProps = (state: InvestorRootState): StateProps => {
-  const { wallet } = state;
-  return {
-    wallets: wallet.info.data ? wallet.info.data.wallets : undefined
-  };
-};
+const mapStateToProps = (state: InvestorRootState): StateProps => ({
+  wallets: walletsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
@@ -126,24 +117,22 @@ interface DispatchProps {
 }
 
 interface StateProps {
-  wallets?: WalletData[];
+  wallets: WalletData[];
 }
 
 interface Props extends DispatchProps, StateProps {
-  programName: string;
   open: boolean;
   onClose(): void;
   onApply(): void;
   currency: string;
   id: string;
+  signalSubscription: SignalSubscription;
 }
 
 interface State {
   isPending: boolean;
   accounts: any | null;
-  hasSignalAccount?: boolean;
-  hasActiveSubscription?: boolean;
-  subscriptionFee?: number;
+  volumeFee?: number;
   minDeposit?: number;
   type?: FOLLOW_TYPE;
 }

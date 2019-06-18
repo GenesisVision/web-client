@@ -1,28 +1,24 @@
-import { GVFormikField, GVTextField } from "gv-react-components";
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 interface ISignalsFeeFormPartialProps {
-  subscriptionFeeFieldName: string;
+  volumeFeeFieldName: string;
   successFeeFieldName: string;
-  maxEntryFee: number;
-  maxSuccessFee: number;
-
   hasSubscriptionFeeAutofocus?: boolean;
 }
 
-const SignalsFeeFormPartial: FunctionComponent<
+const SignalsFeeFormPartial: React.FC<
   ISignalsFeeFormPartialProps & InjectedTranslateProps
 > = ({
   t,
   successFeeFieldName,
-  subscriptionFeeFieldName,
-  maxEntryFee,
-  maxSuccessFee,
+  volumeFeeFieldName,
   hasSubscriptionFeeAutofocus = false
 }) => {
   return (
@@ -32,26 +28,26 @@ const SignalsFeeFormPartial: FunctionComponent<
       </div>
       <div className="create-program-settings__item">
         <GVFormikField
-          name={subscriptionFeeFieldName}
+          name={volumeFeeFieldName}
           label={t(
-            "manager.create-program-page.settings.fields.subscription-fee"
+            "manager.create-program-page.settings.fields.signal-volume-fee"
           )}
-          adornment="GVT"
+          adornment="%"
           component={GVTextField}
           InputComponent={NumberFormat}
           autoComplete="off"
-          decimalScale={4}
+          decimalScale={2}
           autoFocus={hasSubscriptionFeeAutofocus}
           isAllowed={allowValuesNumberFormat()}
         />
         <Hint
           content={t(
-            "manager.create-program-page.settings.hints.subscription-fee"
+            "manager.create-program-page.settings.hints.signal-volume-fee"
           )}
           className="create-program-settings__item-caption"
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
           tooltipContent={t(
-            "manager.create-program-page.settings.hints.subscription-fee-description"
+            "manager.create-program-page.settings.hints.signal-volume-fee-description"
           )}
         />
       </div>
@@ -65,7 +61,7 @@ const SignalsFeeFormPartial: FunctionComponent<
           component={GVTextField}
           InputComponent={NumberFormat}
           autoComplete="off"
-          decimalScale={4}
+          decimalScale={2}
           isAllowed={allowValuesNumberFormat()}
         />
         <Hint
@@ -83,4 +79,4 @@ const SignalsFeeFormPartial: FunctionComponent<
   );
 };
 
-export default translate()(SignalsFeeFormPartial);
+export default translate()(React.memo(SignalsFeeFormPartial));

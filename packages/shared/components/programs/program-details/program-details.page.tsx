@@ -1,10 +1,11 @@
 import "shared/components/details/details.scss";
 
 import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
-import React, { ComponentType, PureComponent } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/login/login.service";
+import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import {
   getProgramDescription,
@@ -14,14 +15,15 @@ import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic
 } from "shared/components/programs/program-details/services/program-details.types";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import RootState from "shared/reducers/root-reducer";
-import { ResponseError } from "shared/utils/types";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { RootState } from "shared/reducers/root-reducer";
+import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
 import ProgramDetailsContainer from "./program-details.contaner";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 
-class _ProgramDetailsPage extends PureComponent<Props, State> {
+class _ProgramDetailsPage extends React.PureComponent<Props, State> {
   state = {
     hasError: false,
     isPending: false,
@@ -33,10 +35,7 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
 
   componentDidMount() {
     this.updateDetails()
-      .then(data => {
-        this.setState({ isPending: true });
-        return getProgramStatistic(data.id);
-      })
+      .then(data => getProgramStatistic(data.id))
       .then(data => {
         this.setState({ isPending: false, ...data });
       })
@@ -50,9 +49,9 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
     this.setState({ isPending: true });
     return service
       .getProgramDescription()
-      .then(data => {
-        this.setState({ isPending: false, description: data });
-        return data;
+      .then(description => {
+        this.setState({ isPending: false, description });
+        return description;
       })
       .catch((e: ResponseError) => {
         this.setState({ hasError: true });
@@ -76,14 +75,15 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
       balanceChart
     } = this.state;
     if (hasError) return <NotFoundPage />;
-    if (!description) return null;
     return (
       <ProgramDetailsContainer
+        condition={!!description}
+        loader={<DetailsContainerLoader />}
         updateDetails={this.updateDetails}
         redirectToLogin={service.redirectToLogin}
         historySection={historySection}
         descriptionSection={descriptionSection}
-        description={description}
+        description={description!}
         profitChart={profitChart}
         balanceChart={balanceChart}
         statistic={statistic}
@@ -94,13 +94,10 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { accountSettings, authData } = state;
-  return {
-    currency: accountSettings.currency,
-    isAuthenticated: authData.isAuthenticated
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  currency: currencySelector(state),
+  isAuthenticated: isAuthenticatedSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
@@ -116,7 +113,7 @@ interface OwnProps {
 
 interface StateProps {
   isAuthenticated: boolean;
-  currency: CURRENCIES;
+  currency: CurrencyEnum;
 }
 
 interface DispatchProps {
@@ -137,7 +134,7 @@ interface State {
   statistic?: ProgramDetailsStatistic;
 }
 
-const ProgramDetailsPage = compose<ComponentType<OwnProps>>(
+const ProgramDetailsPage = compose<React.ComponentType<OwnProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps

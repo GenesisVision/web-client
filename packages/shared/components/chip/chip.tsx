@@ -3,38 +3,21 @@ import "./chip.scss";
 import classNames from "classnames";
 import * as React from "react";
 
-class Chip extends React.PureComponent<Props> {
-  handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    if (typeof this.props.onClick === "function") {
-      this.props.onClick(event);
-    }
-  };
-
-  render() {
-    const {
-      type,
-      children,
-      rounded,
-      onClick,
-      className,
-      disabled
-    } = this.props;
-    const clickHandle = disabled ? () => {} : onClick;
-    return (
-      <div
-        className={classNames("chip", className, {
-          [`chip--${type}`]: type,
-          "chip--rounded": rounded,
-          "chip--disabled": disabled,
-          "chip--pointer": !disabled && typeof onClick === "function"
-        })}
-        onClick={clickHandle}
-      >
-        <div className="chip__content">{children}</div>
-      </div>
-    );
-  }
-}
+const Chip: React.FC<Props> = React.memo(
+  ({ type, children, rounded, onClick, className, disabled }) => (
+    <div
+      className={classNames("chip", className, {
+        [`chip--${type}`]: type,
+        "chip--rounded": rounded,
+        "chip--disabled": disabled,
+        "chip--pointer": !disabled && typeof onClick === "function"
+      })}
+      onClick={disabled ? () => {} : onClick}
+    >
+      <div className="chip__content">{children}</div>
+    </div>
+  )
+);
 
 export enum CHIP_TYPE {
   POSITIVE = "positive",

@@ -1,42 +1,46 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
+import GVButton from "shared/components/gv-button";
+import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
 const _RecoveryCodeForm: React.FC<
   InjectedFormikProps<Props, IRecoveryCodeFormValues>
-> = ({ t, handleSubmit, isSubmitting, error }) => {
-  return (
-    <form
-      id="recoveryForm"
-      className="recovery-form"
-      onSubmit={handleSubmit}
-      noValidate
+> = ({ t, handleSubmit, isSubmitting, error }) => (
+  <form
+    id="recoveryForm"
+    className="recovery-form"
+    onSubmit={handleSubmit}
+    noValidate
+  >
+    <h3>{t("auth.login.recovery.title")}</h3>
+    <p className="recovery-form__text">{t("auth.login.recovery.text")}</p>
+    <GVFormikField
+      name={FIELDS.code}
+      placeholder="Recovery code"
+      autoFocus
+      component={GVTextField}
+    />
+    <FormError error={error} />
+    <GVButton
+      id="recoverySubmit"
+      disabled={isSubmitting}
+      type="submit"
+      className="recovery-form__submit"
     >
-      <h3>{t("auth.login.recovery.title")}</h3>
-      <p className="recovery-form__text">{t("auth.login.recovery.text")}</p>
-      <GVFormikField
-        name="code"
-        placeholder="Recovery code"
-        autoFocus
-        component={GVTextField}
-      />
-      <FormError error={error} />
-      <GVButton
-        id="recoverySubmit"
-        disabled={isSubmitting}
-        type="submit"
-        className="recovery-form__submit"
-      >
-        {t("auth.login.recovery.continue")}
-      </GVButton>
-    </form>
-  );
-};
+      {t("auth.login.recovery.continue")}
+    </GVButton>
+  </form>
+);
+
+enum FIELDS {
+  code = "code"
+}
 
 interface Props extends OwnProps, InjectedTranslateProps {}
 
@@ -49,26 +53,26 @@ interface OwnProps {
 }
 
 export interface IRecoveryCodeFormValues {
-  code: string;
+  [FIELDS.code]: string;
 }
 
 const RecoveryCodeForm = compose<React.FC<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, IRecoveryCodeFormValues>({
     displayName: "recoveryForm",
     mapPropsToValues: () => ({
-      code: ""
+      [FIELDS.code]: ""
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
-        code: string()
+        [FIELDS.code]: string()
           .trim()
           .required(t("auth.login.recovery.validation.recovery-is-required"))
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_RecoveryCodeForm);
 export default RecoveryCodeForm;

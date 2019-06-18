@@ -1,26 +1,25 @@
 import "./pager.scss";
 
-import * as React from "react";
+import React, { useCallback } from "react";
 
 import PagerButton from "./pager-button";
 
-export const _Pager: React.FC<Props> = ({
+const _Pager: React.FC<Props> = ({
   total,
   current,
   countVisiblePages = 3,
   onPageChanged
 }) => {
-  const handleChange = (page: number) => (): void => onPageChanged(page);
-
+  const handleChange = useCallback(
+    (page: number) => (): void => onPageChanged(page),
+    [onPageChanged]
+  );
   const half = Math.floor(countVisiblePages / 2);
-
   const firstPage =
     (current <= half + 1 && 1) ||
     (current >= total - half && total - countVisiblePages + 1) ||
     current - half;
-
   const visiblePages = generateVisiblePages(firstPage, countVisiblePages);
-
   return (
     <div className="pager">
       {firstPage > 1 && (
@@ -55,7 +54,7 @@ export const _Pager: React.FC<Props> = ({
   );
 };
 
-export const PagerSeparator = (): JSX.Element => (
+export const PagerSeparator: React.FC = () => (
   <div className="pager__separator">...</div>
 );
 

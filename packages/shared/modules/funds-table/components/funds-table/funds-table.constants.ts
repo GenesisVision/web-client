@@ -1,6 +1,8 @@
 import {
+  DATA_RANGE_FILTER_TYPES,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
-  DateRangeFilterTypes
+  SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME,
+  SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
@@ -11,21 +13,18 @@ import { SortingColumn } from "shared/components/table/components/filtering/filt
 
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 
-export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "statisticDateFrom";
-export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "statisticDateTo";
-
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 
 export const FUNDS_TABLE_FILTERS = [
   {
     ...composeDefaultDateRangeFilter({
       composeApiRequestValue: composeRequestValueFunc(
-        SERVER_DATE_RANGE_MIN_FILTER_NAME,
-        SERVER_DATE_RANGE_MAX_FILTER_NAME
+        SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME,
+        SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME
       ),
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastMonth
+        type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
       }
     }),
     validate: validateDateRange
@@ -57,9 +56,6 @@ export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
   },
   {
     name: "chart"
-  },
-  {
-    name: "favourite"
   }
 ];
 

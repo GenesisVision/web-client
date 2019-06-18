@@ -1,15 +1,18 @@
 import { goBack } from "connected-react-router";
-import React, { Component } from "react";
+import * as React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
+import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import * as WalletServices from "shared/components/wallet/services/wallet.services";
+import { nameSelector } from "shared/reducers/header-reducer";
+import { platformDataSelector } from "shared/reducers/platform-reducer";
 
 import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
 import * as createFundService from "./services/create-fund.service";
 
-class CreateFundContainer extends Component {
+class CreateFundContainer extends React.PureComponent {
   state = {
     isPending: true,
     isNavigationDialogVisible: false,
@@ -87,14 +90,11 @@ class CreateFundContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const headerData = state.profileHeader.info.data;
-  return {
-    wallets: state.wallet.info.data ? state.wallet.info.data.wallets : {},
-    author: headerData ? headerData.name : "",
-    platformSettings: state.platformData.data
-  };
-};
+const mapStateToProps = state => ({
+  wallets: walletsSelector(state),
+  author: nameSelector(state),
+  platformSettings: platformDataSelector(state)
+});
 
 const mapDispatchToProps = dispatch => {
   return {

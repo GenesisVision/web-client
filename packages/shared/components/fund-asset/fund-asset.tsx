@@ -5,52 +5,31 @@ import { FundAssetPercent } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
-import {
-  CURRENCIES,
-  CURRENCY_VALUES
-} from "shared/modules/currency-select/currency-select.constants";
+import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
+import { CurrencyEnum } from "shared/utils/types";
 
-export enum FUND_ASSET_TYPE {
-  LARGE = "large",
-  MIDDLE = "middle",
-  SHORT = "short",
-  TEXT = "text"
-}
-
-interface IFundAssetProps {
-  currency: CURRENCIES;
-  type: FUND_ASSET_TYPE;
-  last: boolean;
-  removable?: boolean;
-  removeHandle?(
-    currency: CURRENCIES
-  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  className?: string;
-}
-
-class FundAsset extends React.Component<IFundAssetProps & FundAssetPercent> {
-  render() {
-    const {
-      name,
-      percent,
-      currency,
-      type,
-      last,
-      removable,
-      removeHandle,
-      icon,
-      className,
-      ...other
-    } = this.props;
-    return (
-      (type === FUND_ASSET_TYPE.TEXT && (
+const _FundAsset: React.FC<Props> = ({
+  name,
+  percent,
+  currency,
+  type,
+  last,
+  removable,
+  removeHandle,
+  icon,
+  className,
+  ...other
+}) => {
+  switch (type) {
+    case FUND_ASSET_TYPE.TEXT:
+      return (
         <div {...other}>
           {currency}
-          {/* &nbsp;
-          <NumberFormat value={percent} suffix="%" displayType="text" />*/}
           {!last && <span>,&nbsp;</span>}
         </div>
-      )) || (
+      );
+    default:
+      return (
         <div
           {...other}
           className={classNames(
@@ -63,7 +42,6 @@ class FundAsset extends React.Component<IFundAssetProps & FundAssetPercent> {
           )}
         >
           <FundAssetImage url={icon} alt={currency} />
-
           {currency && (
             <div className="fund-asset__currencies">
               {type === FUND_ASSET_TYPE.LARGE && (
@@ -88,9 +66,27 @@ class FundAsset extends React.Component<IFundAssetProps & FundAssetPercent> {
             </div>
           )}
         </div>
-      )
-    );
+      );
   }
+};
+
+export enum FUND_ASSET_TYPE {
+  LARGE = "large",
+  MIDDLE = "middle",
+  SHORT = "short",
+  TEXT = "text"
 }
 
+interface Props extends FundAssetPercent {
+  currency: CurrencyEnum;
+  type: FUND_ASSET_TYPE;
+  last: boolean;
+  removable?: boolean;
+  removeHandle?(
+    currency: CurrencyEnum
+  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  className?: string;
+}
+
+const FundAsset = React.memo(_FundAsset);
 export default FundAsset;

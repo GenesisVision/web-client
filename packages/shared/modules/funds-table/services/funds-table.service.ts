@@ -1,11 +1,11 @@
 import { push } from "connected-react-router";
 import { FundsList } from "gv-api-web";
+import * as qs from "qs";
 import {
   FUNDS_FACET_ROUTE,
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
-} from "pages/funds/funds.routes";
-import * as qs from "qs";
+} from "shared/components/funds/funds.routes";
 import {
   ComposeFiltersAllType,
   TFilter
@@ -18,6 +18,7 @@ import {
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
+import { MiddlewareDispatch } from "shared/utils/types";
 
 import * as fundsTableActions from "../actions/funds-table.actions";
 import {
@@ -29,9 +30,7 @@ import {
 
 export type GetFundsType = (
   filters: ComposeFiltersAllType
-) => (
-  dispatch: any // temp to declare Dispatch type
-) => void;
+) => (dispatch: MiddlewareDispatch) => void;
 export const getFunds: GetFundsType = filters => dispatch => {
   let requestFilters = dispatch(composeRequestFilters());
   if (authService.getAuthArg()) {
@@ -41,7 +40,7 @@ export const getFunds: GetFundsType = filters => dispatch => {
     ...requestFilters,
     ...filters
   };
-  dispatch(fundsTableActions.fetchFunds(requestFilters));
+  dispatch(fundsTableActions.fetchFundsAction(requestFilters));
 };
 
 export type FetchFundsType = (
@@ -51,7 +50,7 @@ export const fetchFunds: FetchFundsType = filters => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();
   }
-  return fundsTableActions.fetchFunds(filters).payload;
+  return fundsTableActions.fetchFundsAction(filters).payload!;
 };
 
 const composeRequestFilters = () => (

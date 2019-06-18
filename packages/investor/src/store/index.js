@@ -12,7 +12,7 @@ import {
   FAILURE_SUFFIX,
   REQUEST_SUFFIX,
   SUCCESS_SUFFIX
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 import history from "shared/utils/history";

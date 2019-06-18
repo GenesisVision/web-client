@@ -1,124 +1,101 @@
 import { CopyTradingAccountInfo } from "gv-api-web";
-import { GVButton } from "gv-react-components";
 import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
-import React, { Component, ComponentType, Fragment } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { connect } from "react-redux";
-import { RouteComponentProps } from "react-router";
 import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
-import NotFoundPage from "shared/components/not-found/not-found";
 import Page from "shared/components/page/page";
-import WalletBalanceLoader from "shared/components/wallet/components/wallet-balance/wallet-balance-loader";
-import ConvertIcon from "shared/media/convert.svg";
-import RootState from "shared/reducers/root-reducer";
+import WalletBalanceButtons from "shared/components/wallet/components/wallet-balance/wallet-balance-buttons";
+import WalletBalanceElements from "shared/components/wallet/components/wallet-balance/wallet-balance-elements";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import TransferPopup from "shared/modules/transfer/transfer-popup";
+import {
+  TRANSFER_CONTAINER,
+  TRANSFER_DIRECTION
+} from "shared/modules/transfer/transfer.types";
 
-import { fetchWalletCopytradingAccount } from "../services/wallet-copytrading.service";
-import WalletCopytradingBalance from "./wallet-copytrading-balance";
+class _WalletCopytradingAccount extends React.PureComponent<Props, State> {
+  state = { isOpenAddFundsPopup: false, isOpenWithdrawPopup: false };
+  handleOpenAddFundsPopup = () =>
+    this.setState({
+      isOpenAddFundsPopup: true
+    });
 
-interface IWalletCopytradingAccountOwnProps {
-  preferredCurrency: string;
-  walletCurrency: string;
-}
+  handleCloseAddFundsPopup = () =>
+    this.setState({ isOpenAddFundsPopup: false });
 
-interface IWalletCopytradingAccountProps
-  extends IWalletCopytradingAccountOwnProps,
-    InjectedTranslateProps {}
-interface IWalletCopytradingAccountState {
-  wallet?: CopyTradingAccountInfo;
-  isPending: boolean;
-  hasError: boolean;
-}
+  handleOpenWithdrawPopup = () => this.setState({ isOpenWithdrawPopup: true });
 
-class WalletCopytradingAccount extends Component<
-  IWalletCopytradingAccountProps,
-  IWalletCopytradingAccountState
-> {
-  constructor(props: IWalletCopytradingAccountProps) {
-    super(props);
-    this.state = {
-      wallet: undefined,
-      isPending: false,
-      hasError: false
-    };
-  }
-
-  componentDidMount() {
-    this.setState({ isPending: true });
-
-    fetchWalletCopytradingAccount(this.props.walletCurrency)
-      .then(data => {
-        if (!data) {
-          this.setState({ hasError: true, isPending: false });
-        } else {
-          this.setState({ wallet: data });
-        }
-      })
-      .catch(() => this.setState({ isPending: false }));
-  }
+  handleCloseWithdrawPopup = () =>
+    this.setState({ isOpenWithdrawPopup: false });
 
   render() {
-    const { t } = this.props;
-    const { wallet, hasError } = this.state;
-
-    if (hasError) {
-      return <NotFoundPage />;
-    }
-
-    if (!wallet) return <WalletBalanceLoader />;
-
+    const { t, account } = this.props;
+    const { isOpenAddFundsPopup, isOpenWithdrawPopup } = this.state;
     return (
       <Page title={t("wallet-copytrading-page.title")}>
         <div className="wallet-balance">
           <div className="wallet-balance__wrapper">
             <h1 className="wallet-balance__title">
-              {wallet.currency}
+              {account.currency}
               <span>&nbsp;{t("wallet-copytrading-page.title")}&nbsp;</span>
               <WalletImage
-                url={"" /*wallet.logo*/}
+                url={account.logo}
                 imageClassName="wallet-transactions__icon"
-                alt={wallet.currency}
+                alt={account.currency}
               />
             </h1>
-            <div className="wallet-balance__buttons">
-              <GVButton
-                color="secondary"
-                variant="outlined"
-                onClick={/*handleTransfer*/ () => {}}
-              >
-                <Fragment>
-                  <img
-                    className="wallet-balance__button-icon"
-                    src={ConvertIcon}
-                    alt="Convert Icon"
-                  />
-                  {t("wallet-page.transfer")}
-                </Fragment>
-              </GVButton>
-            </div>
+            <WalletBalanceButtons
+              handleAddFunds={this.handleOpenAddFundsPopup}
+              handleWithdraw={this.handleOpenWithdrawPopup}
+              isDepositEnabled={true}
+              isWithdrawalEnabled={true}
+            />
           </div>
-          <WalletCopytradingBalance wallet={wallet} />
+          <WalletBalanceElements
+            available={account.available}
+            total={account.balance}
+            currency={account.currency}
+          />
         </div>
         <CopytradingTablesSection
           title={t("wallet-copytrading-page.title")}
-          currency={wallet.currency}
+          currency={account.currency}
+        />
+        <TransferPopup
+          title={t("wallet-withdraw.title")}
+          sourceType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
+          currentItem={account}
+          open={isOpenWithdrawPopup}
+          onClose={this.handleCloseWithdrawPopup}
+        />
+        <TransferPopup
+          title={t("wallet-deposit.title")}
+          currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
+          destinationType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
+          currentItem={account}
+          open={isOpenAddFundsPopup}
+          onClose={this.handleCloseAddFundsPopup}
         />
       </Page>
     );
   }
 }
 
-const mapStateToProps = (
-  state: RootState,
-  ownProps: RouteComponentProps<{ currency: string }>
-) => {
-  const { currency: walletCurrency } = ownProps.match.params;
-  const { currency: preferredCurrency } = state.accountSettings;
+interface OwnProps {
+  account: CopyTradingAccountInfo;
+}
 
-  return { preferredCurrency, walletCurrency };
-};
+interface Props extends OwnProps, InjectedTranslateProps {}
+interface State {
+  isOpenAddFundsPopup: boolean;
+  isOpenWithdrawPopup: boolean;
+}
 
-export default compose<ComponentType<void>>(
-  connect(mapStateToProps),
+const WalletCopytradingAccount = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
   translate()
-)(WalletCopytradingAccount);
+)(_WalletCopytradingAccount);
+export default WalletCopytradingAccount;

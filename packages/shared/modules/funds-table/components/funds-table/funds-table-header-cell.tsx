@@ -4,7 +4,7 @@ import { SortingColumn } from "shared/components/table/components/filtering/filt
 
 interface Props {
   column: SortingColumn;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
 }
 
 const FundsTableHeaderCell: React.FC<Props & InjectedTranslateProps> = ({

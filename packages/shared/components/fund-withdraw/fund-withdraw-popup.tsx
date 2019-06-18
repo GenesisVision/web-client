@@ -1,5 +1,5 @@
 import { FundWithdrawInfo, WalletBaseData } from "gv-api-web";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import { rateApi } from "shared/services/api-client/rate-api";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
@@ -19,7 +19,10 @@ enum FUND_WITHDRAW_FORM {
   CONFIRM = "CONFIRM"
 }
 
-class FundWithdrawPopup extends Component<IFundWithdrawPopupProps, State> {
+class FundWithdrawPopup extends React.PureComponent<
+  IFundWithdrawPopupProps,
+  State
+> {
   state: State = {
     step: FUND_WITHDRAW_FORM.ENTER_AMOUNT,
     rate: 1,
@@ -34,15 +37,15 @@ class FundWithdrawPopup extends Component<IFundWithdrawPopupProps, State> {
     const { fetchInfo, accountCurrency } = this.props;
     fetchInfo()
       .then(data => {
-        const { wallets, withdrawalInfo, rate } = data;
+        const { wallets, withdrawalInfo } = data;
         const wallet =
           wallets.find(x => x.currency === accountCurrency) || wallets[0];
         this.setState({
           wallets,
           wallet,
-          rate,
           withdrawalInfo
         });
+        this.fetchRate(wallet.currency);
       })
       .catch((e: ResponseError) =>
         this.setState({ errorMessage: e.errorMessage })
@@ -107,7 +110,7 @@ class FundWithdrawPopup extends Component<IFundWithdrawPopupProps, State> {
       rate
     );
     return (
-      <Fragment>
+      <>
         <FundWithdrawTop
           title={withdrawalInfo.title}
           availableToWithdraw={availableToWithdraw}
@@ -115,7 +118,7 @@ class FundWithdrawPopup extends Component<IFundWithdrawPopupProps, State> {
         />
         <div className="dialog__bottom">
           {step === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
-            <Fragment>
+            <>
               <FundWithdrawWallet
                 wallets={wallets}
                 value={wallet.currency}
@@ -129,7 +132,7 @@ class FundWithdrawPopup extends Component<IFundWithdrawPopupProps, State> {
                 percent={percent}
                 onSubmit={this.handleEnterAmountSubmit}
               />
-            </Fragment>
+            </>
           )}
           {step === FUND_WITHDRAW_FORM.CONFIRM && percent && (
             <FundWithdrawConfirmForm
@@ -143,7 +146,7 @@ class FundWithdrawPopup extends Component<IFundWithdrawPopupProps, State> {
             />
           )}
         </div>
-      </Fragment>
+      </>
     );
   }
 }

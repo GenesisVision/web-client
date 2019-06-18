@@ -12,12 +12,12 @@ import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-per
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
-  mapToTableItems,
-  TableItems
+  TableItems,
+  mapToTableItems
 } from "shared/components/table/helpers/mapper";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import platformApi from "shared/services/api-client/platform-api";
@@ -165,6 +165,8 @@ export const fetchInvestmentsLevels = (
 
 export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
   const isAuthenticated = authService.isAuthenticated();
+  const isManager = ROLE_ENV === ROLE.MANAGER;
+
   const filtering = { take: 0 };
   const tradesCountPromise = programsApi.v10ProgramsByIdTradesGet(
     id,
@@ -176,14 +178,20 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
   const openPositionsCountPromise = programsApi.v10ProgramsByIdTradesOpenGet(
     id
   );
+  const subscriptionsCountPromise =
+    isAuthenticated && isManager
+      ? programsApi.v10ProgramsByIdSubscribersGet(id, authService.getAuthArg())
+      : Promise.resolve({ total: 0 });
   return Promise.all([
     tradesCountPromise,
     eventsCountPromise,
-    openPositionsCountPromise
-  ]).then(([tradesData, eventsData, openPositionsData]) => ({
+    openPositionsCountPromise,
+    subscriptionsCountPromise
+  ]).then(([tradesData, eventsData, openPositionsData, subscriptionsData]) => ({
     tradesCount: tradesData.total,
     eventsCount: eventsData.total,
-    openPositionsCount: openPositionsData.total
+    openPositionsCount: openPositionsData.total,
+    subscriptionsCount: subscriptionsData.total
   }));
 };
 

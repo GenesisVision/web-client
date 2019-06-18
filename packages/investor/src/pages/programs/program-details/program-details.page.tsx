@@ -1,16 +1,19 @@
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw.container";
 import * as React from "react";
+import { connect } from "react-redux";
+import { InvestorRootState } from "reducers";
 import ProgramDetailsPageCommon from "shared/components/programs/program-details/program-details.page";
 import {
   fetchHistoryCounts,
   fetchPortfolioEvents
 } from "shared/components/programs/program-details/services/program-details.service";
-import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
+import { programEventsSelector } from "shared/reducers/platform-reducer";
 
 import ProgramControls from "./components/program-controls";
 
-const _ProgramDetailsPage: React.FC = () => {
+const _ProgramDetailsPage: React.FC<StateProps> = ({ events }) => {
   const descriptionSection = {
     ProgramControls: ProgramControls,
     ProgramWithdrawContainer: ProgramWithdrawContainer,
@@ -20,7 +23,7 @@ const _ProgramDetailsPage: React.FC = () => {
   const historySection = {
     fetchPortfolioEvents: fetchPortfolioEvents,
     fetchHistoryCounts: fetchHistoryCounts,
-    eventTypeFilterValues: INVESTOR_EVENT_TYPE_FILTER_VALUES
+    eventTypeFilterValues: events
   };
 
   return (
@@ -31,5 +34,15 @@ const _ProgramDetailsPage: React.FC = () => {
   );
 };
 
-const ProgramDetailsPage = React.memo(_ProgramDetailsPage);
+const mapStateToProps = (state: InvestorRootState): StateProps => ({
+  events: programEventsSelector(state)
+});
+
+interface StateProps {
+  events: SelectFilterValue<string>[];
+}
+
+const ProgramDetailsPage = connect(mapStateToProps)(
+  React.memo(_ProgramDetailsPage)
+);
 export default ProgramDetailsPage;

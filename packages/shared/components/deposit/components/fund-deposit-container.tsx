@@ -1,10 +1,11 @@
 import { FundInvestInfo } from "gv-api-web";
 import React from "react";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
-import RootState from "shared/reducers/root-reducer";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import {
@@ -56,14 +57,14 @@ class _FundDepositContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  currency: state.accountSettings.currency
+  currency: currencySelector(state)
 });
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
   props: OwnProps
 ): DispatchProps => ({
-  service: bindActionCreators<any, any>(
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       fundInvest: fundInvestCreator(props.fundInvest)
     },
@@ -105,10 +106,12 @@ interface StateProps {
   currency: string;
 }
 
+interface ServiceThunks extends ActionCreatorsMapObject {
+  fundInvest: ReturnType<typeof fundInvestCreator>;
+}
+
 interface DispatchProps {
-  service: {
-    fundInvest(id: string, amount: number, currency: string): Promise<void>;
-  };
+  service: ResolveThunks<ServiceThunks>;
 }
 
 interface Props extends OwnProps, IDialogProps, StateProps, DispatchProps {}

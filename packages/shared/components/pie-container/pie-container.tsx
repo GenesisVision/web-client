@@ -1,35 +1,36 @@
 import "./pie-container.scss";
 
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
 
 import Pie, { PIE_DIRECTION } from "./pie";
 
 export interface IPieContainer {
   color: string;
+  label: string;
   value: Date | number;
   pieDirection?: PIE_DIRECTION;
+  className?: string;
 }
 
-const PieContainer: React.FunctionComponent<IPieContainer> = ({
+const _PieContainer: React.FC<IPieContainer> = ({
+  label,
   color,
   value,
   pieDirection
-}) => {
-  return (
-    <div className="pie-container">
-      <Pie
-        start={0}
-        end={100}
-        value={value}
-        color={color}
-        pieDirection={pieDirection}
-      />
-      <div className="pie-container__value-container">
-        <div className="pie-container__value">{value}%</div>
-      </div>
+}) => (
+  <div className="pie-container">
+    <Pie
+      start={0}
+      end={100}
+      value={value}
+      color={color}
+      pieDirection={pieDirection}
+    />
+    <div className="pie-container__value-container">
+      <div className="pie-container__value">{label}</div>
     </div>
-  );
-};
+  </div>
+);
 
-export default translate()(PieContainer);
+const PieContainer = React.memo(_PieContainer);
+export default PieContainer;

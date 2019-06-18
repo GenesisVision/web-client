@@ -1,5 +1,13 @@
 import { FILTER_TYPE } from "../../helpers/filtering.helpers";
 import {
+  ComposedPagingName,
+  ComposedPagingValue,
+  ComposedSkipTakeName,
+  PagingType
+} from "../../helpers/paging.helpers";
+import { ComposedRequestSortingName } from "../../helpers/sorting.helpers";
+import { IComposeDefaultFilter } from "../table.types";
+import {
   AssetFilterType,
   ComposedRequestAssetName,
   ComposedRequestAssetValue
@@ -28,15 +36,22 @@ import {
   TagFilterType
 } from "./tag-filter/tag-filter.constants";
 
-export type TFilter<T> = {
+type TFilterMain = {
   name: string;
-  value: T;
   composeRequestValue?(value: any): any;
   type?: FILTER_TYPE;
 };
 
+export interface TFilter<T = any> extends TFilterMain {
+  value: T;
+}
+
+export interface TDefaultFilter<T = any> extends TFilterMain {
+  defaultValue: T;
+}
+
 export interface SelectFilterValue<T = any> {
-  value: T | undefined;
+  value: T;
   label?: T;
   labelKey?: string;
 }
@@ -44,10 +59,12 @@ export interface SelectFilterValue<T = any> {
 export interface SortingColumn {
   name: string;
   sortingName?: string;
+  tooltip?: boolean;
 }
 
 export type FilteringType = {
   [keys: string]:
+    | PagingType
     | AssetFilterType
     | DateRangeFilterType
     | EventTypeFilterType
@@ -57,17 +74,19 @@ export type FilteringType = {
     | undefined;
 };
 
-export type ComposeFiltersAllType ={
+export type ComposeFiltersAllType = {
   [keys: string]: any;
-}
+};
 
 export type ComposeFiltersType = {
   [keys in
+    | ComposedPagingName
     | ComposedRequestAssetName
     | ComposedRequestDataRangeNames
     | ComposedRequestEventTypeName
     | ComposedRequestLevelFilterNames
     | ComposedRequestTagName]?:
+    | ComposedPagingValue
     | ComposedRequestAssetValue
     | ComposedRequestEventTypeValue
     | ComposedRequestTagValue
@@ -78,6 +97,8 @@ export type ComposeFiltersType = {
 
 export type ComposeFiltersTypeFlat = {
   [keys in
+    | ComposedSkipTakeName
+    | ComposedRequestSortingName
     | ComposedRequestAssetName
     | ComposedRequestDataRangeNames
     | ComposedRequestEventTypeName
@@ -88,4 +109,22 @@ export type ComposeFiltersTypeFlat = {
     | ComposedRequestTagValue
     | ComposedRequestDataRangeValues
     | ComposedRequestLevelFilterValues
+};
+
+export type ComposedFiltersType = {
+  [keys in
+    | ComposedSkipTakeName
+    | ComposedRequestSortingName
+    | ComposedRequestAssetName
+    | ComposedRequestDataRangeNames
+    | ComposedRequestEventTypeName
+    | ComposedRequestLevelFilterNames
+    | ComposedRequestTagName]?: number | string
+};
+
+export type TDefaultFilters = IComposeDefaultFilter[];
+
+export type TDefaults = {
+  defaultFilters: TDefaultFilters;
+  type: string;
 };

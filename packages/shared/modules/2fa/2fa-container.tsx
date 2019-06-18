@@ -1,27 +1,33 @@
 import "./2fa.scss";
 
 import classNames from "classnames";
-import { GVTextField } from "gv-react-components";
+import { TwoFactorStatus } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
-import { fetchTwoFactor } from "shared/actions/2fa-actions";
+import { fetchTwoFactorAction } from "shared/actions/2fa-actions";
 import Dialog from "shared/components/dialog/dialog";
+import GVTextField from "shared/components/gv-text-field";
+import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import Select from "shared/components/select/select";
-import { ITwoFactorReducer } from "shared/reducers/2fa-reducer";
-import RootState from "shared/reducers/root-reducer";
+import { twoFactorSelector } from "shared/reducers/2fa-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 
 import DisableAuthContainer from "./disable-auth/disable-auth-container";
 import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
 import GoogleAuthContainer from "./google-auth/google-auth-container";
 
-class TwoFactorAuthContainer extends React.PureComponent<Props, State> {
+class _TwoFactorAuthContainer extends React.PureComponent<Props, State> {
   state = {
     isPending: false,
     type: undefined
   };
+
+  componentDidMount(): void {
+    this.props.services.fetchTwoFactor();
+  }
 
   handleChange = (event: React.ChangeEvent<any>) => {
     this.setState({ type: event.target.value });
@@ -36,10 +42,10 @@ class TwoFactorAuthContainer extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { t, twoFactorAuth } = this.props;
+    const { t, twoFactorAuth, isPending } = this.props;
     const { type } = this.state;
 
-    if (!twoFactorAuth.data) return null;
+    if (!twoFactorAuth) return null;
 
     return (
       <div className="two-factor">
@@ -48,21 +54,19 @@ class TwoFactorAuthContainer extends React.PureComponent<Props, State> {
           name="2fa"
           label={t("2fa-page.type")}
           value={
-            twoFactorAuth.data.twoFactorEnabled
-              ? TYPE_2FA.GOOGLE
-              : TYPE_2FA.DISABLE
+            twoFactorAuth.twoFactorEnabled ? TYPE_2FA.GOOGLE : TYPE_2FA.DISABLE
           }
           onChange={this.handleChange}
           InputComponent={Select}
-          disabled={twoFactorAuth.isPending}
+          disabled={isPending}
         >
           <option value={TYPE_2FA.DISABLE}>{t("2fa-page.none")}</option>
           <option value={TYPE_2FA.GOOGLE}>{t("2fa-page.google")}</option>
         </GVTextField>
-        <GenerateRecoveryCode disabled={twoFactorAuth.data.twoFactorEnabled} />
+        <GenerateRecoveryCode disabled={twoFactorAuth.twoFactorEnabled} />
         <Dialog
           className={classNames({
-            "dialog--width-auto": !twoFactorAuth.data.twoFactorEnabled
+            "dialog--width-auto": !twoFactorAuth.twoFactorEnabled
           })}
           open={Boolean(this.state.type)}
           onClose={this.handleClose}
@@ -79,11 +83,18 @@ class TwoFactorAuthContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  twoFactorAuth: state.accountSettings.twoFactorAuth
+  twoFactorAuth: twoFactorSelector(state),
+  isPending: state.accountSettings.twoFactorAuth.isPending
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  services: bindActionCreators({ fetchTwoFactor }, dispatch)
+  services: bindActionCreators(
+    {
+      fetchTwoFactor: fetchTwoFactorAction,
+      fetchProfileHeaderInfo: fetchProfileHeaderInfoAction
+    },
+    dispatch
+  )
 });
 
 interface Props
@@ -93,11 +104,15 @@ interface Props
     InjectedTranslateProps {}
 
 interface StateProps {
-  twoFactorAuth: ITwoFactorReducer;
+  isPending: boolean;
+  twoFactorAuth?: TwoFactorStatus;
 }
 
 interface DispatchProps {
-  services: { fetchTwoFactor: () => ActionType };
+  services: {
+    fetchTwoFactor: () => ActionType;
+    fetchProfileHeaderInfo: () => ActionType;
+  };
 }
 
 interface OwnProps {}
@@ -112,10 +127,11 @@ enum TYPE_2FA {
   DISABLE = "disable"
 }
 
-export default compose(
+const TwoFactorAuthContainer = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(TwoFactorAuthContainer);
+)(_TwoFactorAuthContainer);
+export default TwoFactorAuthContainer;

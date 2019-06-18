@@ -2,7 +2,8 @@
 @import "~shared/styles/_sizes.scss";
 
 .surface {
-  @include vertical-paddings($padding-medium, $padding-small);
+  @include adaptive-padding(top, $padding-medium);
+  @include adaptive-padding(bottom, $padding-small);
   background-color: $panel-background-color;
   box-sizing: border-box;
 
