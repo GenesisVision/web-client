@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
+import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
