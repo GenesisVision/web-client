@@ -56,12 +56,13 @@ class _TwoFactorCodeForm extends React.PureComponent<
         </div>
         <GVFormikField
           disabled={isSubmitting}
-          type="text"
+          type="tel"
           name={FIELDS.code}
           label={t("auth.login.two-factor.input-label")}
           autoComplete="off"
           autoFocus
           component={GVTextField}
+          format="######"
         />
 
         <div className="login-two-factor__recovery-info">
