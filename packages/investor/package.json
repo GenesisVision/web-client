@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "shared": "*",
-    "gv-api-web": "*"
+    "shared": "^1.0.0",
+    "gv-api-web": "^1.0.0"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",

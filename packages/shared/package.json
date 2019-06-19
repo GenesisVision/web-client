@@ -1,12 +1,13 @@
 {
   "name": "shared",
-  "version": "*",
+  "version": "1.0.0",
   "scripts": {
     "test": "react-app-rewired test --env=jsdom",
     "test:ui": "majestic"
   },
   "dependencies": {
-    "gv-api-web": "*"
+    "shared": "^1.0.0",
+    "gv-api-web": "^1.0.0"
   },
   "majestic": {
     "jestScriptPath": "../../node_modules/react-app-rewired/bin/jest.js",
