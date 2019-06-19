@@ -41,9 +41,6 @@ $avatar-size-mobile: $avatar-size/$divider-text;
     justify-content: center;
   }
 
-  &__header {
-  }
-
   &__avatar {
     &.profile-avatar {
       width: $avatar-size;
@@ -64,21 +61,8 @@ $avatar-size-mobile: $avatar-size/$divider-text;
     }
   }
 
-  &__social-links {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  &__social-link {
-    display: inline-flex;
-    margin-right: $padding-xxsmall;
-    margin-bottom: $padding-xxsmall;
-
-    &:hover {
-      transform: translateY(-0.5px);
-      box-shadow: 0 6px 6px -3px rgb(0, 0, 0);
-      border-radius: 50%;
-    }
+  .social-links-block {
+    @include adaptive-padding(top, 0, 2);
   }
 
   &__right {

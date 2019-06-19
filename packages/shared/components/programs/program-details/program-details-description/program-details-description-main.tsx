@@ -5,7 +5,6 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import SocialLinkImage from "shared/components/avatar/social-link/social-link";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import GVButton from "shared/components/gv-button";
@@ -14,6 +13,7 @@ import Popover, {
   VERTICAL_POPOVER_POS,
   anchorElType
 } from "shared/components/popover/popover";
+import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 import {
   composeManagerDetailsUrl,
@@ -114,19 +114,9 @@ class ProgramDetailsDescriptionMain extends React.PureComponent<
               <TagProgramItem name={tag.name} color={tag.color} key={idx} />
             ))}
           </div>
-          <div className="program-details-description__social-links">
-            {programDescription.manager.socialLinks.map(socialLink => (
-              <a
-                key={socialLink.type}
-                href={socialLink.url + socialLink.value}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="program-details-description__social-link"
-              >
-                <SocialLinkImage url={socialLink.logo} alt={socialLink.name} />
-              </a>
-            ))}
-          </div>
+          <SocialLinksBlock
+            socialLinks={programDescription.manager.socialLinks}
+          />
           <h4 className="program-details-description__subheading">
             {t("program-details-page.description.strategy")}
           </h4>

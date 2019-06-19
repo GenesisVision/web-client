@@ -75,24 +75,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     }
   }
 
-  &__social-links {
-    display: flex;
-    flex-wrap: wrap;
-    @include adaptive-padding(top, $padding-xsmall, 2);
-  }
-
-  &__social-link {
-    display: inline-flex;
-    margin-right: $padding-xxsmall;
-    margin-bottom: $padding-xxsmall;
-
-    &:hover {
-      transform: translateY(-0.5px);
-      box-shadow: 0 6px 6px -3px rgb(0, 0, 0);
-      border-radius: 50%;
-    }
-  }
-
   &__settings {
     padding: $padding-xsmall-mobile 0 $padding-xsmall;
 

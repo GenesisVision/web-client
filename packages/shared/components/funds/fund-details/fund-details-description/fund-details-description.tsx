@@ -2,10 +2,10 @@ import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
-import SocialLinkImage from "shared/components/avatar/social-link/social-link";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import GVButton from "shared/components/gv-button";
+import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 
 const _FundDetailsDescription: React.FC<Props> = ({
@@ -33,19 +33,7 @@ const _FundDetailsDescription: React.FC<Props> = ({
           {assetDescription.managerName}
         </GVButton>
       </Link>
-      <div className="program-details-description__social-links">
-        {assetDescription.managerSocialLinks.map(socialLink => (
-          <a
-            key={socialLink.type}
-            href={socialLink.url + socialLink.value}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="program-details-description__social-link"
-          >
-            <SocialLinkImage url={socialLink.logo} alt={socialLink.name} />
-          </a>
-        ))}
-      </div>
+      <SocialLinksBlock socialLinks={assetDescription.managerSocialLinks} />
       <AssetDetailsExtraBlock />
       <h4 className="program-details-description__subheading">
         {t("program-details-page.description.strategy")}
