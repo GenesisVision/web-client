@@ -8,11 +8,11 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { formatValue } from "shared/utils/formatter";
 
 const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
-  const commission = trade.totalCommission;
+  const commission = formatValue(trade.totalCommission, 8);
   const providers = trade.providers.filter(
     provider => provider.fees.length > 0
   );
-  if (commission === 0) return <div>{commission}</div>;
+  if (commission === "0") return <div>{commission}</div>;
   const isOnlyOne = providers.length === 1;
   return (
     <Tooltip
