@@ -8,6 +8,7 @@ import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Page from "shared/components/page/page";
 import GVScroll from "shared/components/scroll/gvscroll";
+import SocialLinksBlockLoader from "shared/components/social-links-block/social-links-block.loader";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
@@ -40,6 +41,7 @@ const _ManagerPageLoader: React.FC<Props> = ({ t }) => (
                 </SvgLoader>
               </div>
             </div>
+            <SocialLinksBlockLoader />
             <div className="manager-description__info">
               <h4 className="manager-description__subheading">
                 {t("manager-page.about")}
