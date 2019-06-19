@@ -5,6 +5,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import { GVScroll } from "shared/components/scroll/gvscroll";
 import Tooltip from "shared/components/tooltip/tooltip";
+import { formatValue } from "shared/utils/formatter";
 
 const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
   const commission = trade.totalCommission;
