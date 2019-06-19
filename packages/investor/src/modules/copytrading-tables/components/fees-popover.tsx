@@ -6,18 +6,8 @@ import { compose } from "redux";
 import { GVScroll } from "shared/components/scroll/gvscroll";
 import Tooltip from "shared/components/tooltip/tooltip";
 
-const getCommission = (trade: OrderSignalModel) => {
-  let commission = trade.tradingFee ? trade.tradingFee.amount : 0;
-  trade.providers.forEach(provider => {
-    provider.fees.forEach(fee => {
-      commission += fee.amount;
-    });
-  });
-  return commission;
-};
-
 const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
-  const commission = getCommission(trade);
+  const commission = trade.totalCommission;
   const providers = trade.providers.filter(
     provider => provider.fees.length > 0
   );
