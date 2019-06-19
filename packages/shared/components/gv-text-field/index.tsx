@@ -10,6 +10,8 @@ export interface GVTextFieldProps {
   type?: string;
   label?: string;
   value?: string | number;
+  placeholder?: string;
+  autoComplete?: string;
   touched?: boolean;
   error?: string;
   InputComponent: React.ComponentType<any> | string;

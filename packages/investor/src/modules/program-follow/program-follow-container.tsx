@@ -20,7 +20,6 @@ import authService from "shared/services/auth-service";
 import FollowPopupForm from "./follow-popup/follow-popup-form";
 import {
   attachToSignal,
-  getSignalAccounts,
   getSignalInfo,
   updateAttachToSignal
 } from "./services/program-follow-service";
@@ -28,7 +27,6 @@ import {
 class _ProgramFollowContainer extends React.PureComponent<Props, State> {
   state: State = {
     isPending: false,
-    accounts: [],
     type: undefined,
     volumeFee: undefined,
     minDeposit: undefined
@@ -38,23 +36,17 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
     if (!authService.getAuthArg()) return;
     const { id, signalSubscription } = this.props;
     this.setState({ isPending: true });
-    getSignalAccounts()
-      .then(CopyTradingAccountsList => {
-        const { accounts } = CopyTradingAccountsList;
-        this.setState({ accounts });
-        return getSignalInfo(id);
-      })
-      .then((info: AttachToSignalProviderInfo) => {
-        const { volumeFee, minDeposit } = info;
-        this.setState({
-          type: signalSubscription.hasActiveSubscription
-            ? FOLLOW_TYPE.EDIT
-            : FOLLOW_TYPE.CREATE,
-          volumeFee,
-          minDeposit,
-          isPending: false
-        });
+    getSignalInfo(id).then((info: AttachToSignalProviderInfo) => {
+      const { volumeFee, minDeposit } = info;
+      this.setState({
+        type: signalSubscription.hasActiveSubscription
+          ? FOLLOW_TYPE.EDIT
+          : FOLLOW_TYPE.CREATE,
+        volumeFee,
+        minDeposit,
+        isPending: false
       });
+    });
   }
 
   render() {
@@ -67,7 +59,7 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
       id,
       signalSubscription
     } = this.props;
-    const { isPending, type, accounts, minDeposit } = this.state;
+    const { isPending, type, minDeposit } = this.state;
     const handleClose = () => {
       onClose();
     };
@@ -87,7 +79,6 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
           alertError={service.alertError}
           alertSuccess={service.alertSuccess}
           id={id}
-          accounts={accounts}
           currency={currency}
           wallets={wallets}
           submitMethod={submitMethod}
@@ -131,7 +122,6 @@ interface Props extends DispatchProps, StateProps {
 
 interface State {
   isPending: boolean;
-  accounts: any | null;
   volumeFee?: number;
   minDeposit?: number;
   type?: FOLLOW_TYPE;

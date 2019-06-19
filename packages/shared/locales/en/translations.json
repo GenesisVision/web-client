@@ -93,6 +93,16 @@
       "start": "Start",
       "end": "End",
       "today": "Today"
+    },
+    "tag": {
+      "add": "Tag",
+      "popover-header": "Add tag",
+      "popover-search-placeholder": "Search for tags"
+    },
+    "fund-asset": {
+      "add": "Asset",
+      "popover-header": "Add asset",
+      "popover-search-placeholder": "Search for assets"
     }
   },
   "program-period": {
@@ -340,7 +350,7 @@
     }
   },
   "follow-program": {
-    "modes":{
+    "modes": {
       "byBalance": {
         "label": "By balance",
         "tooltip": "The volume of the opened positions is proportional to the balance of the signal provider and an investor."
@@ -668,7 +678,7 @@
         "trades": "Trades",
         "events": "Events",
         "open-positions": "Open positions",
-        "subscriptions": "Subscriptions"
+        "subscriptions": "Subscribers"
       },
       "trades": {
         "swap": "Swap",

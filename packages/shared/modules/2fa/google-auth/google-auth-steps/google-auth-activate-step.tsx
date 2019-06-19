@@ -24,7 +24,7 @@ export const GoogleStep3: React.FC<
     <form id="google-auth" onSubmit={handleSubmit} autoComplete="off">
       <GVFormikField
         name={FIELDS.code}
-        type="text"
+        type="tel"
         label={t("2fa-page.google-code")}
         component={GVTextField}
         autoComplete="off"

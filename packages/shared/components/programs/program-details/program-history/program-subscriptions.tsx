@@ -4,10 +4,18 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import { ACTION_STATUS_FILTER_VALUES } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { TableCell, TableRow } from "shared/components/table/components";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableModule from "shared/components/table/components/table-module";
+import {
+  GetItemsFuncType,
+  UpdateFilterFunc
+} from "shared/components/table/components/table.types";
 import { mapToTableItems } from "shared/components/table/helpers/mapper";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
@@ -15,18 +23,37 @@ import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { PROGRAM_SUBSCRIBERS_COLUMNS } from "../program-details.constants";
+import {
+  PROGRAM_SUBSCRIBERS_COLUMNS,
+  PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS,
+  PROGRAM_SUBSCRIBERS_FILTERS,
+  SUBSCRIBERS_STATUS_TYPE
+} from "../program-details.constants";
 
 const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
-  const fetch = () =>
+  const fetch: GetItemsFuncType = filters =>
     programsApi
-      .v10ProgramsByIdSubscribersGet(id, authService.getAuthArg())
+      .v10ProgramsByIdSubscribersGet(id, authService.getAuthArg(), filters)
       .then(mapToTableItems<SignalSubscriber>("subscribers"));
   return (
     <TableModule
       getItems={fetch}
       paging={DEFAULT_PAGING}
       columns={PROGRAM_SUBSCRIBERS_COLUMNS}
+      filtering={PROGRAM_SUBSCRIBERS_FILTERS}
+      defaultFilters={PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS}
+      renderFilters={(
+        updateFilter: UpdateFilterFunc,
+        filtering: FilteringType
+      ) => (
+        <SelectFilter
+          name={"type"}
+          label={t("program-details-page.history.subscriptions.status")}
+          value={filtering[SUBSCRIBERS_STATUS_TYPE] as SelectFilterType} //TODO fix filtering types
+          values={ACTION_STATUS_FILTER_VALUES}
+          onChange={updateFilter}
+        />
+      )}
       renderHeader={column => (
         <span
           className={`details-trades__head-cell program-details-trades__cell--${
