@@ -5,6 +5,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import SocialLinkImage from "shared/components/avatar/social-link/social-link";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import GVButton from "shared/components/gv-button";
@@ -111,6 +112,19 @@ class ProgramDetailsDescriptionMain extends React.PureComponent<
           <div className="program-details-description__tag">
             {programDescription.tags.map((tag, idx) => (
               <TagProgramItem name={tag.name} color={tag.color} key={idx} />
+            ))}
+          </div>
+          <div className="program-details-description__social-links">
+            {programDescription.manager.socialLinks.map(socialLink => (
+              <a
+                key={socialLink.type}
+                href={socialLink.url + socialLink.value}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="program-details-description__social-link"
+              >
+                <SocialLinkImage url={socialLink.logo} alt={socialLink.name} />
+              </a>
             ))}
           </div>
           <h4 className="program-details-description__subheading">

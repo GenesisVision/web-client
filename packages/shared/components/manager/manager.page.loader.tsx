@@ -105,12 +105,12 @@ const _ManagerPageLoader: React.FC<Props> = ({ t }) => (
           <div className="manager-history__tabs">
             <GVTabs value={""}>
               <GVTab
-                value={""}
+                value="1"
                 label={t("manager-page.history.tabs.programs")}
                 count={0}
               />
               <GVTab
-                value={""}
+                value="2"
                 label={t("manager-page.history.tabs.funds")}
                 count={0}
               />

@@ -5,6 +5,7 @@ import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
+import SocialLinkImage from "shared/components/avatar/social-link/social-link";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -26,6 +27,19 @@ const _ManagerDescription: React.FC<
         {`${t("manager-page.member-since")} ${moment(
           managerProfile.regDate
         ).format("ll")}`}
+      </div>
+      <div className="manager-description__social-links">
+        {managerProfile.socialLinks.map(socialLink => (
+          <a
+            key={socialLink.type}
+            href={socialLink.url + socialLink.value}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="manager-description__social-link"
+          >
+            <SocialLinkImage url={socialLink.logo} alt={socialLink.name} />
+          </a>
+        ))}
       </div>
       <div className="manager-description__info">
         <h4 className="manager-description__subheading">

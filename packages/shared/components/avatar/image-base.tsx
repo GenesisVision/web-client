@@ -2,6 +2,8 @@ import classNames from "classnames";
 import * as React from "react";
 import withUrl from "shared/decorators/with-url";
 
+import Tooltip from "../tooltip/tooltip";
+
 class _ImageBase extends React.PureComponent<IImageBaseProps, State> {
   state = {
     error: false
