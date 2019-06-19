@@ -2,99 +2,52 @@ import "./tag-filter.scss";
 
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
-import Popover, {
-  HORIZONTAL_POPOVER_POS
-} from "shared/components/popover/popover";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { compose } from "redux";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 
 import { TFilter } from "../filter.type";
-import TagFilterButton from "./tag-filter-button";
+import TileFilter from "../tile-filter";
+import TileFilterItem from "../tile-filter-item";
 import TagFilterPopover from "./tag-filter-popover";
-import { TAG_NAME_TYPE } from "./tag-filter.constants";
 
-interface ITagFilterState {
-  anchor?: EventTarget;
-}
+const _TagFilter: React.FC<Props & InjectedTranslateProps> = ({
+  t,
+  name,
+  values,
+  value,
+  onChange
+}) => {
+  const selectedTags = values
+    .filter(x => value.includes(x.name))
+    .map(tag => (
+      <TileFilterItem key={tag.name} id={tag.name}>
+        <TagProgramItem color={tag.color} name={tag.name} />
+      </TileFilterItem>
+    ));
+  const notSelectedTags = values.filter(x => !value.includes(x.name));
+  return (
+    <TileFilter
+      name={name}
+      value={value}
+      updateFilter={onChange}
+      buttonTitle={t("filters.tag.add")}
+      selectedTiles={selectedTags}
+    >
+      <TagFilterPopover values={notSelectedTags} />
+    </TileFilter>
+  );
+};
 
-export interface ITagFilterProps {
+const TagFilter = compose<React.ComponentType<Props>>(
+  React.memo,
+  translate()
+)(_TagFilter);
+export default TagFilter;
+
+export interface Props {
   name: string;
-  value: ProgramTag[];
+  value: string[];
   values: ProgramTag[];
   onChange(value: TFilter<string[]>): void;
 }
-
-class TagFilter extends React.PureComponent<ITagFilterProps, ITagFilterState> {
-  state = {
-    anchor: undefined
-  };
-  constructor(props: ITagFilterProps) {
-    super(props);
-  }
-  filterChoosed = (arr: ProgramTag[]): ProgramTag[] =>
-    arr.filter(
-      item =>
-        this.props.value &&
-        this.props.value.find(select => item.name === select.name)
-    );
-
-  handleOpenPopover = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ): void => this.setState({ anchor: event.currentTarget });
-  handleClosePopover = (): void => this.setState({ anchor: undefined });
-  handleChangeFilter = (value: ProgramTag[]): void => {
-    this.handleClosePopover();
-    this.props.onChange({
-      name: this.props.name,
-      value: value.map(item => item.name)
-    });
-  };
-
-  handleRemoveTag = (name: TAG_NAME_TYPE) => (): void => {
-    const value = [...this.props.value]
-      .filter(item => item.name !== name)
-      .map(item => item.name);
-    this.props.onChange({
-      name: this.props.name,
-      value
-    });
-  };
-
-  render() {
-    const { values, value } = this.props;
-    const { anchor } = this.state;
-    return (
-      <>
-        <div className="filter filter--tags">
-          <div className="filter__value">
-            {this.filterChoosed(values).map(tag => (
-              <TagProgramItem
-                name={tag.name}
-                color={tag.color}
-                key={tag.name}
-                handleRemove={this.handleRemoveTag}
-              />
-            ))}
-          </div>
-          <TagFilterButton
-            isActive={Boolean(anchor)}
-            onClickHandle={this.handleOpenPopover}
-          />
-        </div>
-        <Popover
-          anchorEl={anchor}
-          onClose={this.handleClosePopover}
-          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-          noPadding
-        >
-          <TagFilterPopover
-            value={value}
-            changeFilter={this.handleChangeFilter}
-            values={values}
-          />
-        </Popover>
-      </>
-    );
-  }
-}
-
-export default TagFilter;

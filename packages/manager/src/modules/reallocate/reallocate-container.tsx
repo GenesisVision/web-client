@@ -11,6 +11,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
+import { fundAssetsSelector } from "shared/reducers/platform-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import ReallocateForm, {
@@ -36,11 +38,9 @@ class _ReallocateContainer extends React.PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    createFundService.fetchAssets().then((response: PlatformAssets) => {
-      const assets = this.getFillAssets(response.assets, this.props.assets);
-      this.setState({
-        assets: assets
-      });
+    const assets = this.getFillAssets(this.props.fundAssets, this.props.assets);
+    this.setState({
+      assets: assets
     });
   }
   handleApply = (values: IReallocateFormValues) => {
@@ -79,6 +79,10 @@ class _ReallocateContainer extends React.PureComponent<Props, State> {
   }
 }
 
+const mapStateToProps = (state: RootState): StateProps => ({
+  fundAssets: fundAssetsSelector(state)
+});
+
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
     updateAssets: (id: string, assets: FundAssetPartWithIcon[]) =>
@@ -86,7 +90,11 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-interface Props extends DispatchProps, OwnProps {}
+interface Props extends DispatchProps, OwnProps, StateProps {}
+
+interface StateProps {
+  fundAssets: PlatformAsset[];
+}
 
 interface OwnProps {
   open: boolean;
@@ -110,8 +118,13 @@ interface State {
   assets: FundAssetPartWithIcon[];
 }
 
-const ReallocateContainer = connect<null, DispatchProps, OwnProps, State>(
-  undefined,
+const ReallocateContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  RootState
+>(
+  mapStateToProps,
   mapDispatchToProps
 )(_ReallocateContainer);
 export default ReallocateContainer;
