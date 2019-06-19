@@ -7,18 +7,8 @@ import { GVScroll } from "shared/components/scroll/gvscroll";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { formatValue } from "shared/utils/formatter";
 
-const getCommission = (trade: OrderSignalModel) => {
-  let commission = trade.tradingFee ? trade.tradingFee.amount : 0;
-  trade.providers.forEach(provider => {
-    provider.fees.forEach(fee => {
-      commission += fee.amount;
-    });
-  });
-  return formatValue(commission, 8);
-};
-
 const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
-  const commission = getCommission(trade);
+  const commission = formatValue(trade.totalCommission, 8);
   const providers = trade.providers.filter(
     provider => provider.fees.length > 0
   );
