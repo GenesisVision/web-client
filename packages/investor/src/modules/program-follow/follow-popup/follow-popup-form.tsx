@@ -139,7 +139,6 @@ export interface Props {
     requestParams: AttachToSignalProvider
   ) => Promise<any>;
   id: string;
-  accounts: CopyTradingAccountInfo[];
   wallets: WalletData[];
   currency: string;
 }

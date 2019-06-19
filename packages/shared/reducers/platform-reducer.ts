@@ -32,6 +32,12 @@ export const programTagsSelector = apiFieldSelector(
   []
 );
 
+export const fundAssetsSelector = apiFieldSelector(
+  platformDataSelector,
+  fieldSelector(state => state.enums.fund.assets),
+  []
+);
+
 export const programsInfoSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.programsInfo),

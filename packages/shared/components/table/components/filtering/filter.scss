@@ -5,6 +5,11 @@
   display: flex;
   align-items: center;
   padding: 5px;
+  &:hover {
+    .filter__arrow {
+      stroke: $primary-color;
+    }
+  }
 
   &__label {
     opacity: 0.5;
@@ -22,21 +27,6 @@
     stroke: $icon-color;
     &__is-open {
       stroke: $primary-color;
-    }
-  }
-
-  &--tags {
-    cursor: default;
-    display: flex;
-    flex-wrap: wrap;
-
-    .filter__value {
-      padding-left: 0;
-    }
-
-    .tag-button {
-      margin-top: 2.5px;
-      margin-bottom: 2.5px;
     }
   }
 }
