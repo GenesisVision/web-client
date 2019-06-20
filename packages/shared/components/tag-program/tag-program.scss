@@ -42,10 +42,6 @@ $tag-font-size: 11px;
       margin-bottom: $padding-xxsmall/2;
     }
   }
-
-  &--self-remove {
-    @include adaptive-margin(right, $padding-xsmall);
-  }
 }
 
 .tag-button {

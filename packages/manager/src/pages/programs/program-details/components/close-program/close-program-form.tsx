@@ -25,7 +25,7 @@ const CloseProgramForm: React.FC<
       </div>
       {twoFactorEnabled && (
         <GVFormikField
-          type="text"
+          type="tel"
           name={FIELDS.twoFactorCode}
           label={t("wallet-withdraw.two-factor-code-label")}
           autoComplete="off"

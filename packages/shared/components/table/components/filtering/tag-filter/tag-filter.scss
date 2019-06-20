@@ -4,60 +4,28 @@
 $tag-vertical-margin: $padding-xxsmall/2;
 
 .tag-filter {
-  width: 236px;
-  padding: $padding-xsmall;
+  cursor: default;
+  display: flex;
+  flex-wrap: wrap;
 
-  &__title {
-    @include font-size($font-size-paragraph);
-    font-weight: 600;
-    color: $main-color;
+  .filter__value {
+    padding-left: 0;
   }
 
-  &__tags-list {
-    padding-top: $padding-xsmall - $tag-vertical-margin;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  &__search {
-    .gv-text-field__wrapper {
-      margin: 0;
-    }
-  }
-
-  &__button {
-    transition-property: border-color;
-    border: 1px solid #6e757b;
-    background-color: transparent;
-    line-height: 1;
-    color: $main-color;
-
-    &.gv-btn--text {
-      &:hover:not(:disabled),
-      &:active:not(:disabled) {
-        border-color: $main-color;
-        background-color: $main-color;
-        color: $panel-background-color;
-      }
-    }
-
-    &--active {
-      border-color: $main-color;
-      background-color: $main-color;
-      color: $panel-background-color;
-    }
-
-    &-plus {
-      @include font-size(17px);
-      font-weight: 400;
-      padding-right: 3px;
-    }
+  .tag-button {
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
   }
 
   .tag-program {
     cursor: pointer;
     margin-top: $tag-vertical-margin;
     margin-bottom: $tag-vertical-margin;
+  }
+}
+
+.tile-filter {
+  .tag-button {
+    margin-right: 0;
   }
 }

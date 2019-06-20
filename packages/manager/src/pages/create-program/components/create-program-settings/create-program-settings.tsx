@@ -275,7 +275,7 @@ class CreateProgramSettings extends React.PureComponent<
                   )}
                   adornment="%"
                   component={GVTextField}
-                  InputComponent={NumberFormat}
+                  type="number"
                   autoComplete="off"
                   decimalScale={4}
                 />
@@ -382,7 +382,7 @@ class CreateProgramSettings extends React.PureComponent<
                   )}
                   adornment="%"
                   component={GVTextField}
-                  InputComponent={NumberFormat}
+                  type="number"
                   autoComplete="off"
                   decimalScale={4}
                   isAllowed={allowValuesNumberFormat()}
@@ -406,7 +406,7 @@ class CreateProgramSettings extends React.PureComponent<
                   )}
                   adornment="%"
                   component={GVTextField}
-                  InputComponent={NumberFormat}
+                  type="number"
                   autoComplete="off"
                   decimalScale={4}
                   isAllowed={allowValuesNumberFormat()}
