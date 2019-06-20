@@ -2,10 +2,17 @@ import "shared/components/deposit-details/deposit-details.scss";
 
 import "./create-fund-settings.scss";
 
-import { Field, withFormik } from "formik";
-import React from "react";
-import { translate } from "react-i18next";
+import { Field, FormikProps, withFormik } from "formik";
+import {
+  FundAssetPartWithIcon,
+  PlatformAsset,
+  ProgramsInfo,
+  WalletData
+} from "gv-api-web";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { compose } from "redux";
 import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
 import InputImage from "shared/components/form/input-image/input-image";
 import GVButton from "shared/components/gv-button";
@@ -21,13 +28,14 @@ import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
+import { SetSubmittingType } from "shared/utils/types";
 
 import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
 import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-block/create-fund-settings-assets-block";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 import ErrorNotifier from "./error-notifier/error-notifier";
 
-class CreateFundSettings extends React.PureComponent {
+class _CreateFundSettings extends React.PureComponent<Props, State> {
   state = {
     anchor: null,
     assets: this.props.assets.map(asset => {
@@ -38,19 +46,19 @@ class CreateFundSettings extends React.PureComponent {
     }),
     remainder: 100
   };
-  allowEntryFee = values => {
+  allowEntryFee = (values: any) => {
     const { managerMaxEntryFee } = this.props.programsInfo;
 
     return allowValuesNumberFormat({ from: 0, to: managerMaxEntryFee })(values);
   };
 
-  allowExitFee = values => {
+  allowExitFee = (values: any) => {
     const { managerMaxExitFee } = this.props.programsInfo;
 
     return allowValuesNumberFormat({ from: 0, to: managerMaxExitFee })(values);
   };
 
-  fetchRate = (fromCurrency, toCurrency) => {
+  fetchRate = (fromCurrency: string, toCurrency: string) => {
     rateApi.v10RateByFromByToGet(fromCurrency, toCurrency).then(rate => {
       if (rate !== this.props.values.rate) {
         this.props.setFieldValue("rate", rate);
@@ -69,27 +77,29 @@ class CreateFundSettings extends React.PureComponent {
     setFieldValue("depositWalletCurrency", depositWalletCurrency);
     setFieldValue(
       "depositWalletId",
-      wallets.find(item => item.currency === (values && depositWalletCurrency))
+      wallets.find(item => item.currency === (values && depositWalletCurrency))!
         .id
     );
     fetchWallets();
     this.fetchRate(depositWalletCurrency, currency);
   };
-  handlePercentChange = asset => e => {
+  handlePercentChange = (asset: FundAssetPartWithIcon) => (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     let value = +e.target.value;
     if (isNaN(value)) return;
-    if (value > this.getRemainderWithoutChoised(asset))
-      value = this.getRemainderWithoutChoised(asset);
+    if (value > this.getRemainderWithoutSelected(asset))
+      value = this.getRemainderWithoutSelected(asset);
     asset.percent = value;
     this.updateAssets();
   };
 
-  handleDown = asset => () => {
+  handleDown = (asset: FundAssetPartWithIcon) => () => {
     if (asset.percent === 0) return;
     asset.percent--;
     this.updateAssets();
   };
-  handleUp = asset => () => {
+  handleUp = (asset: FundAssetPartWithIcon) => () => {
     if (this.state.remainder - 1 < 0) return;
     asset.percent++;
     this.updateAssets();
@@ -97,7 +107,7 @@ class CreateFundSettings extends React.PureComponent {
   getRemainder = () => {
     return 100 - this.state.assets.reduce((sum, item) => sum + item.percent, 0);
   };
-  getRemainderWithoutChoised = asset => {
+  getRemainderWithoutSelected = (asset: FundAssetPartWithIcon) => {
     return (
       100 -
       this.state.assets
@@ -458,17 +468,17 @@ class CreateFundSettings extends React.PureComponent {
   }
 }
 
-export default translate()(
-  withFormik({
+const CreateFundSettings = compose(
+  translate(),
+  withFormik<OwnProps, FormValues>({
     displayName: "CreateFundSettingsForm",
     enableReinitialize: true,
     mapPropsToValues: props => {
       return {
         rate: "1",
         depositWalletCurrency: "GVT",
-        depositWalletId: Array.isArray(props.wallets)
-          ? props.wallets.find(item => item.currency === "GVT").id
-          : null,
+        depositWalletId: props.wallets.find(item => item.currency === "GVT")!
+          .id,
         assets: [],
         remainder: 100,
         exitFee: "",
@@ -482,5 +492,23 @@ export default translate()(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })(CreateFundSettings)
-);
+  })
+)(_CreateFundSettings);
+
+export default CreateFundSettings;
+
+interface OwnProps {
+  programsInfo: ProgramsInfo;
+  assets: PlatformAsset[];
+  wallets: WalletData[];
+  onSubmit(values, setSubmitting: SetSubmittingType): void;
+}
+
+interface FormValues {}
+
+interface Props
+  extends InjectedTranslateProps,
+    OwnProps,
+    FormikProps<FormValues> {}
+
+interface State {}

@@ -1,30 +1,44 @@
 import { goBack } from "connected-react-router";
+import { PlatformAsset, PlatformInfo, WalletData } from "gv-api-web";
 import * as React from "react";
-import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { ResolveThunks, connect } from "react-redux";
+import { ManagerRootState } from "reducers";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
-import * as WalletServices from "shared/components/wallet/services/wallet.services";
+import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { nameSelector } from "shared/reducers/header-reducer";
 import {
   fundAssetsSelector,
   platformDataSelector
 } from "shared/reducers/platform-reducer";
+import { SetSubmittingType } from "shared/utils/types";
 
-import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
-import * as createFundService from "./services/create-fund.service";
+import {
+  createFund,
+  fetchBalance,
+  fetchInvestmentAmount,
+  showValidationError
+} from "../services/create-fund.service";
+import CreateFundSettings from "./create-fund-settings/create-fund-settings";
 
-class CreateFundContainer extends React.PureComponent {
+class _CreateFundContainer extends React.PureComponent<Props, State> {
   state = {
     isPending: true,
-    isNavigationDialogVisible: false
+    isNavigationDialogVisible: false,
+    deposit: undefined
   };
 
   componentDidMount() {
     const { service } = this.props;
     service.fetchWallets();
-    createFundService.fetchInvestmentAmount().then(response => {
+    fetchInvestmentAmount().then(response => {
       this.setState({
         deposit: response,
         isPending: false
@@ -32,7 +46,7 @@ class CreateFundContainer extends React.PureComponent {
     });
   }
 
-  handleSubmit = (values, setSubmitting) => {
+  handleSubmit = (values, setSubmitting: SetSubmittingType) => {
     this.props.service.createFund({ ...values }, setSubmitting);
   };
 
@@ -63,7 +77,7 @@ class CreateFundContainer extends React.PureComponent {
             <CreateFundSettings
               fetchWallets={service.fetchWallets}
               wallets={wallets}
-              currency={"GVT"}
+              currency="GVT"
               onValidateError={this.handleValidateError}
               navigateBack={navigateBack}
               updateBalance={service.fetchBalance}
@@ -87,26 +101,52 @@ class CreateFundContainer extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
   wallets: walletsSelector(state),
   author: nameSelector(state),
   platformSettings: platformDataSelector(state),
   fundAssets: fundAssetsSelector(state)
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
-    service: bindActionCreators(
-      { goBack, ...WalletServices, ...createFundService },
+    service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+      { goBack, createFund, fetchWallets, fetchBalance, showValidationError },
       dispatch
     )
   };
 };
 
-export default compose(
+const CreateFundContainer = compose(
   translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(CreateFundContainer);
+)(_CreateFundContainer);
+export default CreateFundContainer;
+
+interface StateProps {
+  wallets: WalletData[];
+  author: string;
+  platformSettings: PlatformInfo | undefined;
+  fundAssets: PlatformAsset[];
+}
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  goBack: typeof goBack;
+  createFund: typeof createFund;
+  fetchWallets: typeof fetchWallets;
+}
+
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface Props extends StateProps, DispatchProps, InjectedTranslateProps {}
+
+interface State {
+  isPending: boolean;
+  isNavigationDialogVisible: boolean;
+  deposit: number | undefined;
+}

@@ -3,10 +3,8 @@ import "./reallocate-container.scss";
 import {
   CancelablePromise,
   FundAssetPartWithIcon,
-  PlatformAsset,
-  PlatformAssets
+  PlatformAsset
 } from "gv-api-web";
-import * as createFundService from "pages/create-fund/services/create-fund.service";
 import * as React from "react";
 import { connect } from "react-redux";
 import Dialog from "shared/components/dialog/dialog";

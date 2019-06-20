@@ -247,8 +247,6 @@ const CreateProgramContainer = compose<React.ComponentType<OwnProps>>(
 )(_CreateProgramContainer);
 export default CreateProgramContainer;
 
-interface OwnProps {}
-
 interface State {
   minimumDepositsAmount?: { [key: string]: number };
   selectedBroker?: Broker;
@@ -277,8 +275,4 @@ interface DispatchProps {
   };
 }
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    DispatchProps,
-    InjectedTranslateProps {}
+interface Props extends StateProps, DispatchProps, InjectedTranslateProps {}

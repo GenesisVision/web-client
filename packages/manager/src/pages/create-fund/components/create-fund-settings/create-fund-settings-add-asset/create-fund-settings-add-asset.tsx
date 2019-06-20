@@ -1,30 +1,36 @@
 import "../create-fund-settings.scss";
 
 import classnames from "classnames";
-import React from "react";
+import { FundAssetPartWithIcon } from "gv-api-web";
+import * as React from "react";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import GVTextField from "shared/components/gv-text-field";
 import { SearchIcon } from "shared/components/icon/search-icon";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "shared/components/popover/popover";
 import Regulator from "shared/components/regulator/regulator";
 
-class CreateFundSettingsAddAsset extends React.PureComponent {
+class CreateFundSettingsAddAsset extends React.PureComponent<Props, State> {
   state = {
     filteredAssets: this.props.assets
   };
-  search = e => {
+  search = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       filteredAssets: this.filtering(e.target.value, this.props.assets)
     });
   };
-  filtering = (searchValue, array) => {
-    return searchValue
-      ? array.filter(
-          item =>
-            ~item.name.toLowerCase().indexOf(searchValue.toLowerCase()) ||
-            ~item.asset.toLowerCase().indexOf(searchValue.toLowerCase())
-        )
-      : array;
+  filtering = (searchValue: string, assets: FundAssetPartWithIcon[]) => {
+    if (!searchValue) {
+      return assets;
+    }
+    return assets.filter(
+      item =>
+        ~(item.name + item.asset)
+          .toUpperCase()
+          .indexOf(searchValue.toUpperCase())
+    );
   };
 
   render() {
@@ -38,8 +44,8 @@ class CreateFundSettingsAddAsset extends React.PureComponent {
     const { filteredAssets } = this.state;
     return (
       <Popover
-        horizontal="left"
-        vertical="center"
+        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+        vertical={VERTICAL_POPOVER_POS.CENTER}
         anchorEl={anchor}
         noPadding
         onClose={handleCloseDropdown}
@@ -109,3 +115,18 @@ class CreateFundSettingsAddAsset extends React.PureComponent {
 }
 
 export default CreateFundSettingsAddAsset;
+
+interface Props {
+  anchor?: EventTarget;
+  assets: FundAssetPartWithIcon[];
+  handleOpenDropdown(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
+  handleCloseDropdown(): void;
+  handleDown(asset: FundAssetPartWithIcon): () => void;
+  handleUp(asset: FundAssetPartWithIcon): () => void;
+  handlePercentChange(
+    asset: FundAssetPartWithIcon
+  ): (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+interface State {
+  filteredAssets: FundAssetPartWithIcon[];
+}
