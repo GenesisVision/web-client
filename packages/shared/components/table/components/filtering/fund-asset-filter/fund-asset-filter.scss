@@ -4,6 +4,11 @@
     padding-right: 10px;
   }
 
+  &__assets-block {
+    height: 180px;
+    overflow-y: auto;
+  }
+
   &__assets {
     list-style-type: none;
     padding-inline-start: 0;

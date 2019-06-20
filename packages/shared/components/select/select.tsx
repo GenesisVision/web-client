@@ -6,7 +6,6 @@ import { RefObject } from "react";
 import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import GVScroll from "shared/components/scroll/gvscroll";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
 
 import SelectItem from "./select-item";
@@ -143,9 +142,7 @@ class Select extends React.PureComponent<Props, State> {
           anchorEl={this.state.anchor}
           onClose={this.handleClose}
         >
-          <GVScroll autoHeight autoHeightMax="300px">
-            <div className="select__options">{items}</div>
-          </GVScroll>
+          <div className="select__options">{items}</div>
         </Popover>
       </div>
     );

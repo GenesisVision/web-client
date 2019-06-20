@@ -10,7 +10,6 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
-import GVScroll from "shared/components/scroll/gvscroll";
 import VerificationStatus from "shared/components/verification-status/verification-status";
 import About from "shared/modules/about/about";
 import { SetSubmittingType } from "shared/utils/types";
@@ -23,55 +22,53 @@ const _ProfileForm: React.FC<Props> = ({ t, info, handleSubmit }) => (
       className="profile__container"
       onSubmit={handleSubmit}
     >
-      <GVScroll autoHeight autoHeightMax={14000}>
-        <table className={"profile"}>
-          <tbody>
-            <tr className="profile__title">
-              <td className="profile__left">
-                <h4 className="profile__subtitle">01</h4>
-              </td>
-              <td className="profile__center" />
-              <td className="profile__right">
-                <h4 className="profile__subtitle">
-                  {t("profile-page.contacts")}
-                </h4>
-                <VerificationStatus checked={info.phoneNumberConfirmed} />
-              </td>
-            </tr>
-            <tr className="profile__content">
-              <td className="profile__left">
-                <span className="profile__stick" />
-              </td>
-              <td className="profile__center" />
-              <td className="profile__right">
-                <div className="profile__row">
-                  <GVFormikField
-                    disabled // TODO change whe api will upgrade
-                    label={t("profile-page.email")}
-                    value={info.email}
-                    component={GVTextField}
-                    name="email"
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr className="profile__title">
-              <td className="profile__left">
-                <h4 className="profile__subtitle">02</h4>
-              </td>
-              <td className="profile__center" />
-              <td className="profile__right">
-                <h4 className="profile__subtitle">
-                  {t("profile-page.personal-info")}
-                </h4>
-                <VerificationStatus
-                  verificationStatus={info.verificationStatus}
+      <table className={"profile"}>
+        <tbody>
+          <tr className="profile__title">
+            <td className="profile__left">
+              <h4 className="profile__subtitle">01</h4>
+            </td>
+            <td className="profile__center" />
+            <td className="profile__right">
+              <h4 className="profile__subtitle">
+                {t("profile-page.contacts")}
+              </h4>
+              <VerificationStatus checked={info.phoneNumberConfirmed} />
+            </td>
+          </tr>
+          <tr className="profile__content">
+            <td className="profile__left">
+              <span className="profile__stick" />
+            </td>
+            <td className="profile__center" />
+            <td className="profile__right">
+              <div className="profile__row">
+                <GVFormikField
+                  disabled // TODO change whe api will upgrade
+                  label={t("profile-page.email")}
+                  value={info.email}
+                  component={GVTextField}
+                  name="email"
                 />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </GVScroll>
+              </div>
+            </td>
+          </tr>
+          <tr className="profile__title">
+            <td className="profile__left">
+              <h4 className="profile__subtitle">02</h4>
+            </td>
+            <td className="profile__center" />
+            <td className="profile__right">
+              <h4 className="profile__subtitle">
+                {t("profile-page.personal-info")}
+              </h4>
+              <VerificationStatus
+                verificationStatus={info.verificationStatus}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </form>
   </>
 );

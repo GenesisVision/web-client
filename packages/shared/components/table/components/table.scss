@@ -21,6 +21,13 @@ $padding: $padding-small;
   width: 100%;
   border-spacing: 0;
 
+  &__scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
   & .message {
     padding: $padding;
     text-align: center;

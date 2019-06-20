@@ -3,7 +3,6 @@ import { ProviderFees } from "modules/copytrading-tables/components/provider-fee
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
-import { GVScroll } from "shared/components/scroll/gvscroll";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { formatValue } from "shared/utils/formatter";
 
@@ -17,20 +16,18 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
   return (
     <Tooltip
       render={() => (
-        <GVScroll autoHeight autoHeightMax="260px">
-          <div className="fees-popover">
-            {trade.tradingFee
-              ? t(`investor.copytrading-tables.fees.trading`, trade.tradingFee)
-              : null}
-            {providers.map(provider => (
-              <ProviderFees
-                isOnlyOne={isOnlyOne}
-                key={provider.programId}
-                provider={provider}
-              />
-            ))}
-          </div>
-        </GVScroll>
+        <div className="fees-popover">
+          {trade.tradingFee
+            ? t(`investor.copytrading-tables.fees.trading`, trade.tradingFee)
+            : null}
+          {providers.map(provider => (
+            <ProviderFees
+              isOnlyOne={isOnlyOne}
+              key={provider.programId}
+              provider={provider}
+            />
+          ))}
+        </div>
       )}
     >
       <div>{commission}</div>
