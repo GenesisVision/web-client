@@ -93,18 +93,6 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
       service.getPrograms(defaultFilters);
     }
   }
-  tagsFilterValue = (value: any) => {
-    const { programTags } = this.props;
-    //TODO Fix any
-    if (!programTags.length) return [];
-    return convertToArray(value).map(tag => {
-      const programTag = programTags.find(
-        programTag => programTag.name === tag
-      );
-      const color = programTag!.color;
-      return { name: tag, color };
-    });
-  };
 
   render() {
     const {
@@ -133,7 +121,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
           <>
             <TagFilter
               name={TAG_FILTER_NAME}
-              value={this.tagsFilterValue(filtering[TAG_FILTER_NAME])}
+              value={filtering[TAG_FILTER_NAME] as string[]}
               values={programTags}
               onChange={updateFilter}
             />

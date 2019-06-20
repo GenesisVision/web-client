@@ -7,7 +7,6 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import GVScroll from "shared/components/scroll/gvscroll";
 import { STATUS } from "shared/constants/constants";
 
 import AssetStatusRequests from "./asset-status-requests";
@@ -58,16 +57,14 @@ class AssetStatus extends React.PureComponent<
           noPadding
           onClose={this.handleCloseDropdown}
         >
-          <GVScroll autoHeight>
-            <div className="dashboard-request-popover">
-              <AssetStatusRequests
-                id={id}
-                asset={asset}
-                handleCloseDropdown={this.handleCloseDropdown}
-                onCancel={onCancel}
-              />
-            </div>
-          </GVScroll>
+          <div className="dashboard-request-popover">
+            <AssetStatusRequests
+              id={id}
+              asset={asset}
+              handleCloseDropdown={this.handleCloseDropdown}
+              onCancel={onCancel}
+            />
+          </div>
         </Popover>
       </>
     );

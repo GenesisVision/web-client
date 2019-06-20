@@ -34,7 +34,7 @@ const SignalsFeeFormPartial: React.FC<
           )}
           adornment="%"
           component={GVTextField}
-          InputComponent={NumberFormat}
+          type="number"
           autoComplete="off"
           decimalScale={2}
           autoFocus={hasSubscriptionFeeAutofocus}
@@ -59,7 +59,7 @@ const SignalsFeeFormPartial: React.FC<
           )}
           adornment="%"
           component={GVTextField}
-          InputComponent={NumberFormat}
+          type="number"
           autoComplete="off"
           decimalScale={2}
           isAllowed={allowValuesNumberFormat()}

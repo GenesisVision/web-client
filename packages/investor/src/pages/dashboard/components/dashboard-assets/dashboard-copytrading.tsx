@@ -99,14 +99,14 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
         <TableCell>
           <Profitability
             value={formatCurrencyValue(
-              signal.statistic.profitValue,
+              signal.personalDetails.profit,
               signal.currency
             )}
             prefix={PROFITABILITY_PREFIX.SIGN}
           >
             <NumberFormat
               value={formatCurrencyValue(
-                signal.statistic.profitValue,
+                signal.personalDetails.profit,
                 signal.currency
               )}
               thousandSeparator=" "

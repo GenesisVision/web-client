@@ -7,8 +7,7 @@ import EventListener from "react-event-listener";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import { CloseIcon } from "shared/components/icon/close-icon";
-import Modal from "shared/components/modal/modal";
-import GVScroll from "shared/components/scroll/gvscroll";
+import Modal, { BodyFix } from "shared/components/modal/modal";
 
 export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
   t,
@@ -24,36 +23,35 @@ export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
   );
   return (
     <Modal open={open} fixed disableBackdropClick>
+      <BodyFix />
       <EventListener target={document} onKeyUp={handleKeyPress} />
-      <GVScroll autoHide>
-        <div className="dialog__content">
-          <div className="dialog__background" />
-          <div className="dialog__backdrop" onClick={onClose} />
+      <div className="dialog__content">
+        <div className="dialog__background" />
+        <div className="dialog__backdrop" onClick={onClose} />
+        <GVButton
+          variant="text"
+          color="secondary"
+          className={classNames("dialog__close dialog__close--outside", {
+            "dialog__close--wider": wider
+          })}
+          onClick={onClose}
+        >
+          <>
+            <CloseIcon /> {t("buttons.close")}
+          </>
+        </GVButton>
+        <div className={classNames("dialog", className)}>
           <GVButton
             variant="text"
             color="secondary"
-            className={classNames("dialog__close dialog__close--outside", {
-              "dialog__close--wider": wider
-            })}
+            className="dialog__close dialog__close--inside"
             onClick={onClose}
           >
-            <>
-              <CloseIcon /> {t("buttons.close")}
-            </>
+            <CloseIcon />
           </GVButton>
-          <div className={classNames("dialog", className)}>
-            <GVButton
-              variant="text"
-              color="secondary"
-              className="dialog__close dialog__close--inside"
-              onClick={onClose}
-            >
-              <CloseIcon />
-            </GVButton>
-            {children}
-          </div>
+          {children}
         </div>
-      </GVScroll>
+      </div>
     </Modal>
   );
 };

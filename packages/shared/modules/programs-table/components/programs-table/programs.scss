@@ -159,6 +159,13 @@ $border-radius: 5px;
   }
 
   &__description {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 0 $padding/1.5;
     font-size: $font-size-common/1.5;
     line-height: 1.85;

@@ -21,7 +21,7 @@ const DisableAuth: React.FC<
     <div className="dialog__title">{t("2fa-page.disable.title")}</div>
     <GVFormikField
       name={FIELDS.twoFactorCode}
-      type="text"
+      type="tel"
       label={t("2fa-page.google-code")}
       component={GVTextField}
       autoComplete="off"

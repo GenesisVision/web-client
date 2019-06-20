@@ -104,6 +104,7 @@ const _DashboardPrograms: React.FC<Props> = ({
               <AssetAvatar
                 url={program.logo}
                 level={program.level}
+                levelProgress={program.levelProgress}
                 alt={program.title}
                 color={program.color}
                 tooltip={

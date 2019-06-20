@@ -3,16 +3,12 @@ import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import FundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
 export const fetchBalance = () => dispatch =>
   dispatch(fetchProfileHeaderInfoAction());
-
-export const fetchAssets = () =>
-  FundsApi.v10FundsAssetsGet(authService.getAuthArg());
 
 export const fetchInvestmentAmount = () =>
   managerApi.v10ManagerFundsInvestmentAmountGet(authService.getAuthArg());

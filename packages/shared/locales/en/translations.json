@@ -93,6 +93,16 @@
       "start": "Start",
       "end": "End",
       "today": "Today"
+    },
+    "tag": {
+      "add": "Tag",
+      "popover-header": "Add tag",
+      "popover-search-placeholder": "Search for tags"
+    },
+    "fund-asset": {
+      "add": "Asset",
+      "popover-header": "Add asset",
+      "popover-search-placeholder": "Search for assets"
     }
   },
   "program-period": {
@@ -668,7 +678,7 @@
         "trades": "Trades",
         "events": "Events",
         "open-positions": "Open positions",
-        "subscriptions": "Subscriptions"
+        "subscriptions": "Subscribers"
       },
       "trades": {
         "swap": "Swap",
