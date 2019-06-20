@@ -7,7 +7,10 @@ import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import * as WalletServices from "shared/components/wallet/services/wallet.services";
 import { nameSelector } from "shared/reducers/header-reducer";
-import { platformDataSelector } from "shared/reducers/platform-reducer";
+import {
+  fundAssetsSelector,
+  platformDataSelector
+} from "shared/reducers/platform-reducer";
 
 import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
 import * as createFundService from "./services/create-fund.service";
@@ -15,26 +18,18 @@ import * as createFundService from "./services/create-fund.service";
 class CreateFundContainer extends React.PureComponent {
   state = {
     isPending: true,
-    isNavigationDialogVisible: false,
-    assets: null
+    isNavigationDialogVisible: false
   };
 
   componentDidMount() {
     const { service } = this.props;
     service.fetchWallets();
-    createFundService
-      .fetchAssets()
-      .then(response => {
-        this.setState({ assets: response.assets });
-      })
-      .then(() => {
-        createFundService.fetchInvestmentAmount().then(response => {
-          this.setState({
-            deposit: response,
-            isPending: false
-          });
-        });
+    createFundService.fetchInvestmentAmount().then(response => {
+      this.setState({
+        deposit: response,
+        isPending: false
       });
+    });
   }
 
   handleSubmit = (values, setSubmitting) => {
@@ -50,14 +45,16 @@ class CreateFundContainer extends React.PureComponent {
   };
 
   render() {
-    const {
-      isPending,
-      isNavigationDialogVisible,
-      assets,
-      deposit
-    } = this.state;
+    const { isPending, isNavigationDialogVisible, deposit } = this.state;
     const { navigateBack, handleSubmit } = this;
-    const { t, author, service, platformSettings, wallets } = this.props;
+    const {
+      t,
+      author,
+      service,
+      platformSettings,
+      fundAssets,
+      wallets
+    } = this.props;
     if (!platformSettings || !wallets) return null;
     return (
       <div className="create-fund-container">
@@ -72,7 +69,7 @@ class CreateFundContainer extends React.PureComponent {
               updateBalance={service.fetchBalance}
               onSubmit={handleSubmit}
               author={author}
-              assets={assets}
+              assets={fundAssets}
               deposit={deposit}
               programsInfo={platformSettings.programsInfo}
             />
@@ -93,7 +90,8 @@ class CreateFundContainer extends React.PureComponent {
 const mapStateToProps = state => ({
   wallets: walletsSelector(state),
   author: nameSelector(state),
-  platformSettings: platformDataSelector(state)
+  platformSettings: platformDataSelector(state),
+  fundAssets: fundAssetsSelector(state)
 });
 
 const mapDispatchToProps = dispatch => {

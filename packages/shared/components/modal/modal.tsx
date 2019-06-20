@@ -1,9 +1,17 @@
 import "./modal.scss";
 
 import classNames from "classnames";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import EventListener from "react-event-listener";
 import Portal from "shared/components/portal/portal";
+
+export const BodyFix = () => {
+  useEffect(() => {
+    document.body.classList.add("body--fixed");
+    return () => document.body.classList.remove("body--fixed");
+  }, []);
+  return null;
+};
 
 const _Modal: React.FC<Props> = ({
   onClose,

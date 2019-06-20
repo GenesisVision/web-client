@@ -5,7 +5,9 @@ import { compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
 
-import withLoader, { WithLoaderProps } from "../../../../decorators/with-loader";
+import withLoader, {
+  WithLoaderProps
+} from "../../../../decorators/with-loader";
 import {
   offPayFeesWithGvt,
   onPayFeesWithGvt
@@ -82,7 +84,9 @@ interface State {
   isPending: boolean;
 }
 
-const WalletSettingsContainer = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+const WalletSettingsContainer = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
   withLoader,
   translate(),
   connect(

@@ -42,7 +42,8 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
       ? fundDescription.personalFundDetails.hasNotifications
       : false,
     managerUrl: fundDescription.manager.url,
-    managerName: fundDescription.manager.username
+    managerName: fundDescription.manager.username,
+    managerSocialLinks: fundDescription.manager.socialLinks
   };
 
   return (

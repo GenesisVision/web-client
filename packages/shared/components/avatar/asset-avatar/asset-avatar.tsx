@@ -22,7 +22,7 @@ interface IAssetAvatarState {
   anchor?: EventTarget;
 }
 
-class AssetAvatar extends React.PureComponent<
+class _AssetAvatar extends React.PureComponent<
   IAssetAvatarProps,
   IAssetAvatarState
 > {
@@ -70,6 +70,7 @@ class AssetAvatar extends React.PureComponent<
   }
 }
 
-export default withUrl<GVProgramAvatarProps & IAssetAvatarProps>("url")(
-  AssetAvatar
+const AssetAvatar = withUrl<GVProgramAvatarProps & IAssetAvatarProps>("url")(
+  _AssetAvatar
 );
+export default AssetAvatar;

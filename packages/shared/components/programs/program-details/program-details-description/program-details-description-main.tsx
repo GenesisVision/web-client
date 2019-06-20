@@ -13,6 +13,7 @@ import Popover, {
   VERTICAL_POPOVER_POS,
   anchorElType
 } from "shared/components/popover/popover";
+import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 import {
   composeManagerDetailsUrl,
@@ -70,6 +71,7 @@ class ProgramDetailsDescriptionMain extends React.PureComponent<
           <AssetAvatar
             url={programDescription.logo}
             level={programDescription.level}
+            levelProgress={programDescription.levelProgress}
             alt={programDescription.title}
             size="big"
             color={programDescription.color}
@@ -112,6 +114,9 @@ class ProgramDetailsDescriptionMain extends React.PureComponent<
               <TagProgramItem name={tag.name} color={tag.color} key={idx} />
             ))}
           </div>
+          <SocialLinksBlock
+            socialLinks={programDescription.manager.socialLinks}
+          />
           <h4 className="program-details-description__subheading">
             {t("program-details-page.description.strategy")}
           </h4>

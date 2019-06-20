@@ -2,7 +2,7 @@
 @import "~shared/styles/_constants.scss";
 .popover {
   position: absolute;
-  background-color: #273642;
+  background-color: $popover-background;
   border-radius: $border-radius;
   overflow: hidden;
 

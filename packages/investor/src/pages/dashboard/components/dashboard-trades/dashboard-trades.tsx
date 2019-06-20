@@ -8,7 +8,7 @@ interface IDashboardTradesProps {
   title: string;
 }
 
-const DashboardTrades: React.FC<IDashboardTradesProps> = ({ title }) => {
+const _DashboardTrades: React.FC<IDashboardTradesProps> = ({ title }) => {
   return <CopytradingTablesSection title={title} />;
 };
 
@@ -16,10 +16,11 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   service: bindActionCreators({}, dispatch)
 });
 
-export default compose<React.ComponentType<IDashboardTradesProps>>(
+const DashboardTrades = compose<React.ComponentType<IDashboardTradesProps>>(
   translate(),
   connect(
     null,
     mapDispatchToProps
   )
-)(DashboardTrades);
+)(_DashboardTrades);
+export default DashboardTrades;

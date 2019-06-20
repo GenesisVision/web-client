@@ -75,7 +75,7 @@ const _AssetEditForm: React.FC<IAssetEditProps> = ({
               )}
               adornment="%"
               component={GVTextField}
-              InputComponent={NumberFormat}
+              type="number"
               autoComplete="off"
               decimalScale={4}
             />

@@ -9,9 +9,10 @@ import { DASHBOARD_PORTFOLIO_CHART } from "../actions/dashboard.actions";
 
 export type DashboardPortfolioChartState = IApiState<DashboardChartValue>;
 
-export const dashboardPortfolioChartSelector = apiSelector<DashboardChartValue, AuthRootState>(
-  state => state.dashboard.portfolioChartData
-);
+export const dashboardPortfolioChartSelector = apiSelector<
+  DashboardChartValue,
+  AuthRootState
+>(state => state.dashboard.portfolioChartData);
 
 const dashboardPortfolioChartReducer = apiReducerFactory<DashboardChartValue>({
   apiType: DASHBOARD_PORTFOLIO_CHART

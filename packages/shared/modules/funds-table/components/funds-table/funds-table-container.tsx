@@ -1,15 +1,21 @@
-import { FundsList } from "gv-api-web";
+import { FundsList, PlatformAsset } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import FundAssetFilter from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter";
+import { FUND_ASSET_FILTER_NAME } from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
 import {
   ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { fundAssetsSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
@@ -36,6 +42,7 @@ interface MergeProps {
 interface StateProps {
   isAuthenticated: boolean;
   data?: FundsList;
+  fundAssets: PlatformAsset[];
 }
 
 interface DispatchProps {
@@ -51,6 +58,7 @@ interface DispatchProps {
 
 interface Props
   extends OwnProps,
+    InjectedTranslateProps,
     MergeProps,
     StateProps,
     DispatchProps,
@@ -70,7 +78,15 @@ class _FundsTableContainer extends React.PureComponent<Props> {
   }
 
   render() {
-    const { data, filters, service, isAuthenticated, title } = this.props;
+    const {
+      t,
+      data,
+      filters,
+      service,
+      isAuthenticated,
+      fundAssets,
+      title
+    } = this.props;
     return (
       <FundsTable
         title={title}
@@ -80,6 +96,22 @@ class _FundsTableContainer extends React.PureComponent<Props> {
         filtering={{
           ...filters.filtering
         }}
+        renderFilters={(updateFilter, filtering) => (
+          <>
+            <FundAssetFilter
+              name={FUND_ASSET_FILTER_NAME}
+              value={filtering[FUND_ASSET_FILTER_NAME] as string[]}
+              values={fundAssets || []}
+              onChange={updateFilter}
+            />
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
+              onChange={updateFilter}
+              startLabel={t("filters.date-range.fund-start")}
+            />
+          </>
+        )}
         updateFilter={service.fundsChangeFilter}
         paging={{
           totalPages: filters.paging ? filters.paging.totalPages : 0,
@@ -97,7 +129,8 @@ class _FundsTableContainer extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: RootState): StateProps => ({
   data: fundsDataSelector(state),
-  isAuthenticated: isAuthenticatedSelector(state)
+  isAuthenticated: isAuthenticatedSelector(state),
+  fundAssets: fundAssetsSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -131,6 +164,7 @@ const mergeProps = (
 
 const FundsTableContainer = compose<React.ComponentType<OwnProps>>(
   withRouter,
+  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps,

@@ -46,7 +46,7 @@ export const roleSelector = apiFieldSelector(
 
 export const idSelector = apiFieldSelector(
   headerSelector,
-  fieldSelector(state => state.id),
+  fieldSelector(state => state.id)
 );
 
 const headerReducer = apiReducerFactory<ProfileHeaderViewModel>({

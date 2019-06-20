@@ -22,13 +22,12 @@ interface Props extends ITableProps {
 }
 
 const FundsTable: React.FC<Props & InjectedTranslateProps> = ({
-  t,
   data,
-  isPending,
   sorting,
   updateSorting,
   filtering,
   updateFilter,
+  renderFilters,
   paging,
   updatePaging,
   toggleFavorite,
@@ -46,14 +45,7 @@ const FundsTable: React.FC<Props & InjectedTranslateProps> = ({
     columns={FUNDS_TABLE_COLUMNS}
     items={data}
     showSwitchView
-    renderFilters={() => (
-      <DateRangeFilter
-        name={DATE_RANGE_FILTER_NAME}
-        value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
-        onChange={updateFilter}
-        startLabel={t("filters.date-range.fund-start")}
-      />
-    )}
+    renderFilters={renderFilters}
     renderHeader={column => (
       <FundsTableHeaderCell column={column} isAuthenticated={isAuthenticated} />
     )}

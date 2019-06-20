@@ -15,7 +15,6 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import GVScroll from "shared/components/scroll/gvscroll";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
@@ -58,36 +57,34 @@ class _DashboardChartAssetsContainer extends React.PureComponent<Props, State> {
           noPadding
           onClose={this.handleCloseDropdown}
         >
-          <GVScroll autoHeight autoHeightMax="260px">
-            <div className="dashboard-chart-assets-popover">
-              {hasPrograms && (
-                <div className="dashboard-chart-assets-popover__header">
-                  {t("manager.dashboard-page.chart-section.programs")}
-                </div>
-              )}
-              {programs.map(x => (
-                <DashboardChartAsset
-                  key={x.id}
-                  chartAsset={x}
-                  type={ASSETS_TYPES.Program}
-                  selectAsset={this.handleSelectAsset}
-                />
-              ))}
-              {hasFunds && (
-                <div className="dashboard-chart-assets-popover__header">
-                  {t("manager.dashboard-page.chart-section.funds")}
-                </div>
-              )}
-              {funds.map(x => (
-                <DashboardChartAsset
-                  key={x.id}
-                  chartAsset={x}
-                  type={ASSETS_TYPES.Fund}
-                  selectAsset={this.handleSelectAsset}
-                />
-              ))}
-            </div>
-          </GVScroll>
+          <div className="dashboard-chart-assets-popover">
+            {hasPrograms && (
+              <div className="dashboard-chart-assets-popover__header">
+                {t("manager.dashboard-page.chart-section.programs")}
+              </div>
+            )}
+            {programs.map(x => (
+              <DashboardChartAsset
+                key={x.id}
+                chartAsset={x}
+                type={ASSETS_TYPES.Program}
+                selectAsset={this.handleSelectAsset}
+              />
+            ))}
+            {hasFunds && (
+              <div className="dashboard-chart-assets-popover__header">
+                {t("manager.dashboard-page.chart-section.funds")}
+              </div>
+            )}
+            {funds.map(x => (
+              <DashboardChartAsset
+                key={x.id}
+                chartAsset={x}
+                type={ASSETS_TYPES.Fund}
+                selectAsset={this.handleSelectAsset}
+              />
+            ))}
+          </div>
         </Popover>
       </div>
     );

@@ -21,6 +21,13 @@ $padding: $padding-small;
   width: 100%;
   border-spacing: 0;
 
+  &__scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
   & .message {
     padding: $padding;
     text-align: center;
@@ -123,11 +130,11 @@ $padding: $padding-small;
 
     &:hover {
       .program-avatar__level {
-        border-color: #212c34;
+        background-color: #212c34;
       }
 
       .program-detailed__avatar .program-avatar__level {
-        border-color: $secondary-color;
+        background-color: $secondary-color;
       }
     }
 

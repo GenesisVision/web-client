@@ -90,6 +90,10 @@ const createProgramSettingsValidationSchema = (
               "manager.create-program-page.settings.validation.investment-limit-min"
             )
           )
+          .lessThan(
+            10000000000,
+            "Investment Limit must be less than 10000000000"
+          )
           .required(
             t(
               "manager.create-program-page.settings.validation.investment-limit-required"

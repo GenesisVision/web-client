@@ -24,6 +24,9 @@ const _DashboardChartAsset: React.FC<Props> = ({
           alt={chartAsset.title}
           color={chartAsset.color}
           level={"level" in chartAsset ? chartAsset.level : undefined}
+          levelProgress={
+            "levelProgress" in chartAsset ? chartAsset.levelProgress : undefined
+          }
         />
       </div>
       <div className="dashboard-chart-assets-popover__info">

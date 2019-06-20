@@ -3,7 +3,6 @@ import "./table-cards.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import GVScroll from "shared/components/scroll/gvscroll";
 import TableBody, {
   ITableBodyExternalProps
 } from "shared/components/table/components/table-body";
@@ -110,11 +109,7 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
           isViewSwitchEnabled={this.isViewSwitchEnabled}
           createButtonToolbar={createButtonToolbar}
         />
-        <GVScroll
-          autoHeight
-          autoHeightMax={14000}
-          renderTrackVertical={this.renderTrackVertical}
-        >
+        <div className={"table__scroll"}>
           {view === LIST_VIEW.CARDS && (
             <div className={classNames("table", className)}>
               <TableBody
@@ -147,7 +142,7 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
               />
             </table>
           )}
-        </GVScroll>
+        </div>
         <TableFooter
           condition={paging && !!(paging.totalPages && paging.totalPages >= 2)}
           paging={paging}
