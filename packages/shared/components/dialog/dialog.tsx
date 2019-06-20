@@ -12,10 +12,9 @@ export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
   open,
   onClose,
   className,
-  children,
-  wider
+  children
 }) => (
-  <Modal open={open} fixed disableBackdropClick onClose={onClose}>
+  <Modal open={open} fixed onClose={onClose}>
     <BodyFix />
     <div className="dialog__content">
       <div className="dialog__background" />
@@ -23,9 +22,7 @@ export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
       <GVButton
         variant="text"
         color="secondary"
-        className={classNames("dialog__close dialog__close--outside", {
-          "dialog__close--wider": wider
-        })}
+        className="dialog__close dialog__close--outside"
         onClick={onClose}
       >
         <>
