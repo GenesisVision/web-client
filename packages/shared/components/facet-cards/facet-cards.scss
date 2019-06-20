@@ -49,6 +49,8 @@ $padding-app: 20px;
   margin-bottom: -50px;
   padding-bottom: 30px;
 
+  -webkit-overflow-scrolling: touch;
+
   &::-webkit-scrollbar {
     width: 0;
     height: 0;

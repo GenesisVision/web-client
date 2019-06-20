@@ -36,8 +36,9 @@
   flex-direction: column;
   min-width: 300px;
   padding: 20px;
-  overflow: hidden;
   box-sizing: border-box;
+  max-height: 300px;
+  overflow: auto;
 
   &__statistic-item {
     padding: 0;

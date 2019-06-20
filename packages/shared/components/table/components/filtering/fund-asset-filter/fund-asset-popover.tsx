@@ -3,7 +3,6 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
-import GVScroll from "shared/components/scroll/gvscroll";
 
 import TileFilterPopover from "../tile-filter-popover";
 
@@ -24,7 +23,7 @@ const _FundAssetPopover: React.FC<Props & InjectedTranslateProps> = ({
       changeFilter={changeFilter!}
     >
       {(filteredAssets, handleClick) => (
-        <GVScroll autoHeightMax={180} autoHeight={true}>
+        <div className="fund-asset-filter__assets-block">
           <ul className="fund-asset-filter__assets">
             {filteredAssets.map((asset, idx) => (
               <li
@@ -39,7 +38,7 @@ const _FundAssetPopover: React.FC<Props & InjectedTranslateProps> = ({
               </li>
             ))}
           </ul>
-        </GVScroll>
+        </div>
       )}
     </TileFilterPopover>
   );
