@@ -119,7 +119,6 @@ export default CreateFundSettingsAddAsset;
 interface Props {
   anchor?: EventTarget;
   assets: FundAssetPartWithIcon[];
-  handleOpenDropdown(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
   handleCloseDropdown(): void;
   handleDown(asset: FundAssetPartWithIcon): () => void;
   handleUp(asset: FundAssetPartWithIcon): () => void;

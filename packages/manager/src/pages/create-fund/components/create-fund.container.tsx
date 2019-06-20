@@ -22,7 +22,6 @@ import { SetSubmittingType } from "shared/utils/types";
 
 import {
   createFund,
-  fetchBalance,
   fetchInvestmentAmount,
   showValidationError
 } from "../services/create-fund.service";
@@ -69,7 +68,7 @@ class _CreateFundContainer extends React.PureComponent<Props, State> {
       fundAssets,
       wallets
     } = this.props;
-    if (!platformSettings || !wallets) return null;
+    if (!platformSettings || !wallets || !deposit) return null;
     return (
       <div className="create-fund-container">
         <div>
@@ -80,7 +79,6 @@ class _CreateFundContainer extends React.PureComponent<Props, State> {
               currency="GVT"
               onValidateError={this.handleValidateError}
               navigateBack={navigateBack}
-              updateBalance={service.fetchBalance}
               onSubmit={handleSubmit}
               author={author}
               assets={fundAssets}
@@ -111,7 +109,7 @@ const mapStateToProps = (state: ManagerRootState): StateProps => ({
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
     service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-      { goBack, createFund, fetchWallets, fetchBalance, showValidationError },
+      { goBack, createFund, fetchWallets, showValidationError },
       dispatch
     )
   };
