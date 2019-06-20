@@ -74,7 +74,6 @@ const _TradeSubRow: React.FC<Props> = ({
           thousandSeparator=" "
         />
       </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--direction" />
       <TableCell className="details-trades__cell program-details-trades__cell--direction">
         <NumberFormat
           value={formatValue(provider.priceOpenAvg, DECIMAL_SCALE / 2)}
@@ -82,6 +81,7 @@ const _TradeSubRow: React.FC<Props> = ({
           thousandSeparator=" "
         />
       </TableCell>
+      <TableCell className="details-trades__cell program-details-trades__cell--direction" />
       <TableCell className="details-trades__cell program-details-trades__cell--direction" />
       <TableCell className="details-trades__cell program-details-trades__cell--direction">
         <GVButton variant="text" onClick={() => setOpenPopup(true)}>
