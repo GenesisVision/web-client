@@ -24,6 +24,10 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
+  & .program-avatar__level {
+    background-color: $popover-background;
+  }
+
   &__chart-asset {
     display: flex;
     align-items: center;
