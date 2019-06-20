@@ -1307,10 +1307,10 @@
         "providers": "Providers"
       },
       "fees": {
-        "trading": "Trading Commission: {{amount}} {{currency}}",
-        "ManagerSignalMasterVolumeFee": "Volume fee: {{amount}} {{currency}}",
-        "ManagerSignalMasterSuccessFee": "Manager Success fee: {{amount}} {{currency}}",
-        "GvSignalSuccessFee": "Platform Success Fee: {{amount}} {{currency}}"
+        "trading": "Trading Commission",
+        "ManagerSignalMasterVolumeFee": "Volume fee",
+        "ManagerSignalMasterSuccessFee": "Manager Success fee",
+        "GvSignalSuccessFee": "Platform Success Fee"
       }
     },
     "dashboard-page": {
