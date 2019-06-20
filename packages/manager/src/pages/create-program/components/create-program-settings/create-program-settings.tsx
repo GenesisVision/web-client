@@ -7,7 +7,8 @@ import {
   Broker,
   BrokerAccountType,
   ProgramsInfo,
-  WalletData
+  WalletData,
+  WalletDataCurrencyEnum
 } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -35,7 +36,7 @@ import { CurrencyEnum } from "shared/utils/types";
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
-class CreateProgramSettings extends React.PureComponent<
+class _CreateProgramSettings extends React.PureComponent<
   InjectedFormikProps<
     ICreateProgramSettingsProps,
     ICreateProgramSettingsFormValues
@@ -309,6 +310,9 @@ class CreateProgramSettings extends React.PureComponent<
                 <div className="create-program-settings__item">
                   <InputAmountField
                     autoFocus={false}
+                    isAllow={this.isAmountAllow(
+                      currency as WalletDataCurrencyEnum
+                    )}
                     name={CREATE_PROGRAM_FIELDS.investmentLimit}
                     label={t(
                       "manager.create-program-page.settings.fields.enter-correct-amount"
@@ -537,7 +541,7 @@ class CreateProgramSettings extends React.PureComponent<
   }
 }
 
-export default compose<React.ComponentType<OwnProps>>(
+const CreateProgramSettings = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<ICreateProgramSettingsProps, ICreateProgramSettingsFormValues>({
     displayName: "CreateProgramSettingsForm",
@@ -582,7 +586,8 @@ export default compose<React.ComponentType<OwnProps>>(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(CreateProgramSettings);
+)(_CreateProgramSettings);
+export default CreateProgramSettings;
 
 export enum CREATE_PROGRAM_FIELDS {
   currency = "currency",
@@ -613,7 +618,7 @@ interface OwnProps {
   navigateBack(): void;
   author: string;
   notifyError(message: string): void;
-  programCurrency?: string;
+  programCurrency: string;
   changeCurrency(currency: string): void;
   leverage?: number;
   changeLeverage(leverage: number): void;
@@ -628,7 +633,7 @@ export interface ICreateProgramSettingsProps
   extends OwnProps,
     InjectedTranslateProps {}
 export interface ICreateProgramSettingsFormValues {
-  [CREATE_PROGRAM_FIELDS.currency]?: string;
+  [CREATE_PROGRAM_FIELDS.currency]: string;
   [CREATE_PROGRAM_FIELDS.periodLength]?: number;
   [CREATE_PROGRAM_FIELDS.successFee]?: number;
   [CREATE_PROGRAM_FIELDS.stopOutLevel]: number;
