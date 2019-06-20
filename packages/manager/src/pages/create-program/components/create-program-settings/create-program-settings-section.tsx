@@ -107,7 +107,7 @@ class CreateProgramSettingsSection extends React.PureComponent<
         changeWallet={this.handleWalletChange}
         leverage={leverage}
         changeLeverage={this.handleLeverageChange}
-        programCurrency={programCurrency}
+        programCurrency={programCurrency || "GVT"}
         changeCurrency={this.handleCurrencyChange}
         rate={rate}
         accountType={accountType}
