@@ -13,7 +13,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import Chip from "shared/components/chip/chip";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVButton from "shared/components/gv-button";
 import TableCell from "shared/components/table/components/table-cell";
@@ -75,14 +74,14 @@ const _TradeSubRow: React.FC<Props> = ({
           thousandSeparator=" "
         />
       </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--direction" />
       <TableCell className="details-trades__cell program-details-trades__cell--direction">
         <NumberFormat
-          value={formatValue(provider.priceCurrent, DECIMAL_SCALE / 2)}
+          value={formatValue(provider.priceOpenAvg, DECIMAL_SCALE / 2)}
           displayType="text"
           thousandSeparator=" "
         />
       </TableCell>
+      <TableCell className="details-trades__cell program-details-trades__cell--direction" />
       <TableCell className="details-trades__cell program-details-trades__cell--direction" />
       <TableCell className="details-trades__cell program-details-trades__cell--direction">
         <GVButton variant="text" onClick={() => setOpenPopup(true)}>

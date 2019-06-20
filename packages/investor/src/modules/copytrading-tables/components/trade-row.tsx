@@ -1,4 +1,4 @@
-import { OrderSignalModel } from "gv-api-web";
+import { OrderSignalModel, OrderSignalProgramInfo } from "gv-api-web";
 import { DECIMAL_SCALE } from "modules/copytrading-tables/components/copytrading-tables.constants";
 import TradeSubRow from "modules/copytrading-tables/components/trade-sub-row";
 import {
@@ -58,6 +58,8 @@ const _TradeRow: React.FC<Props> = ({
                 url={program.logo}
                 alt={program.title}
                 color={program.color}
+                level={program.level}
+                levelProgress={program.levelProgress}
               />
             </Link>
             <Link
@@ -143,7 +145,7 @@ const _TradeRow: React.FC<Props> = ({
         </TableCell>
       </TableRow>
       {isOpenSubrows
-        ? otherPrograms.map(provider => (
+        ? otherPrograms.map((provider: OrderSignalProgramInfo) => (
             <TradeSubRow
               title={title}
               key={trade.id}
