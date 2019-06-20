@@ -5,6 +5,7 @@ import {
   WalletData
 } from "gv-api-web";
 import * as React from "react";
+import { SetSubmittingType } from "shared/utils/types";
 
 import CreateProgramSettings, {
   ICreateProgramSettingsFormValues
@@ -16,10 +17,7 @@ class CreateProgramSettingsSection extends React.PureComponent<
 > {
   constructor(props: OwnProps) {
     super(props);
-    const brokerAccountType =
-      this.props.broker.accountTypes.length === 1
-        ? this.props.broker.accountTypes[0]
-        : undefined;
+    const brokerAccountType = this.props.broker.accountTypes[0];
     const currency = this.getCurrency(brokerAccountType);
     const leverage = this.getLeverage(brokerAccountType);
     const wallet = this.props.wallets.find(x => x.currency === "GVT")!;
@@ -49,18 +47,18 @@ class CreateProgramSettingsSection extends React.PureComponent<
     const accountType = this.props.broker.accountTypes.find(
       x => x.id === brokerAccountTypeId
     );
-    this.setState({ accountType });
-    this.handleCurrencyChange(this.getCurrency(accountType));
-    this.handleLeverageChange(this.getLeverage(accountType));
+    this.setState({ accountType: accountType! });
+    this.handleCurrencyChange(this.getCurrency(accountType!));
+    this.handleLeverageChange(this.getLeverage(accountType!));
   };
 
-  handleCurrencyChange = (currency?: string): void => {
-    if (this.state.programCurrency === currency) return;
-    this.setState({ programCurrency: currency });
-    this.updateRate(this.state.wallet.currency, currency);
+  handleCurrencyChange = (programCurrency: string): void => {
+    if (this.state.programCurrency === programCurrency) return;
+    this.setState({ programCurrency });
+    this.updateRate(this.state.wallet.currency, programCurrency);
   };
 
-  handleLeverageChange = (leverage?: number): void => {
+  handleLeverageChange = (leverage: number): void => {
     if (this.state.leverage === leverage) return;
     this.setState({ leverage });
   };
@@ -72,13 +70,11 @@ class CreateProgramSettingsSection extends React.PureComponent<
     this.setState({ wallet });
   };
 
-  getCurrency = (accountType?: BrokerAccountType): string | undefined => {
-    return accountType !== undefined ? accountType.currencies[0] : undefined;
-  };
+  getCurrency = (accountType: BrokerAccountType): string =>
+    accountType.currencies[0];
 
-  getLeverage = (accountType?: BrokerAccountType): number | undefined => {
-    return accountType !== undefined ? accountType.leverages[0] : undefined;
-  };
+  getLeverage = (accountType: BrokerAccountType): number =>
+    accountType.leverages[0];
 
   updateRate = (from?: string, to?: string): void => {
     if (!from || !to) {
@@ -107,7 +103,7 @@ class CreateProgramSettingsSection extends React.PureComponent<
         changeWallet={this.handleWalletChange}
         leverage={leverage}
         changeLeverage={this.handleLeverageChange}
-        programCurrency={programCurrency || "GVT"}
+        programCurrency={programCurrency}
         changeCurrency={this.handleCurrencyChange}
         rate={rate}
         accountType={accountType}
@@ -125,7 +121,10 @@ interface OwnProps {
   programsInfo: ProgramsInfo;
   fetchWallets(): void;
   fetchRate(from: string, to: string): Promise<number>;
-  onSubmit(data: ICreateProgramSettingsFormValues, setSubmitting: any): void;
+  onSubmit(
+    data: ICreateProgramSettingsFormValues,
+    setSubmitting: SetSubmittingType
+  ): void;
   minimumDepositsAmount: { [key: string]: number };
   navigateBack(): void;
   author: string;
@@ -133,9 +132,9 @@ interface OwnProps {
 }
 
 interface StateProps {
-  accountType?: BrokerAccountType;
-  programCurrency?: string;
-  leverage?: number;
+  accountType: BrokerAccountType;
+  programCurrency: string;
+  leverage: number;
   rate?: number;
   wallet: WalletData;
 }
