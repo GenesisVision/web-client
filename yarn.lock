@@ -5729,13 +5729,6 @@ gud@^1.0.0:
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
-"gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.661"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#2940bbb1f0510cf58fcd26824053081499442048"
-  dependencies:
-    querystring "0.2.0"
-    superagent "^4.1.0"
-
 gzip-size@5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-5.0.0.tgz#a55ecd99222f4c48fd8c01c625ce3b349d0a0e80"
