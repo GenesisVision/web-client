@@ -77,7 +77,7 @@ const _TradeSubRow: React.FC<Props> = ({
       <TableCell className="details-trades__cell program-details-trades__cell--direction" />
       <TableCell className="details-trades__cell program-details-trades__cell--direction">
         <NumberFormat
-          value={formatValue(provider.priceCurrent, DECIMAL_SCALE / 2)}
+          value={formatValue(provider.priceOpenAvg, DECIMAL_SCALE / 2)}
           displayType="text"
           thousandSeparator=" "
         />
