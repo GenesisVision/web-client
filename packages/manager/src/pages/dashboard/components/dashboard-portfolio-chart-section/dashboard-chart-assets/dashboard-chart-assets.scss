@@ -19,10 +19,14 @@
 
 .dashboard-chart-assets-popover {
   min-width: 200px;
-  max-height: 200px;
+  max-height: 230px;
   padding: 30px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+
+  & .program-avatar__level {
+    background-color: $popover-background;
+  }
 
   &__chart-asset {
     display: flex;
