@@ -5,6 +5,10 @@
     "test": "react-app-rewired test --env=jsdom",
     "test:ui": "majestic"
   },
+  "dependencies": {
+    "shared": "^1.0.0",
+    "gv-api-web": "^1.0.0"
+  },
   "majestic": {
     "jestScriptPath": "../../node_modules/react-app-rewired/bin/jest.js",
     "env": {
