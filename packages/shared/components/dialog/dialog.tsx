@@ -16,17 +16,17 @@ export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
 }) => (
   <Modal open={open} fixed onClose={onClose}>
     <BodyFix />
-      <div className={classNames("dialog", className)}>
-        <GVButton
-          variant="text"
-          color="secondary"
-          className="dialog__close dialog__close--inside"
-          onClick={onClose}
-        >
-          <CloseIcon />
-        </GVButton>
-        {children}
-      </div>
+    <div className={classNames("dialog", className)}>
+      <GVButton
+        variant="text"
+        color="secondary"
+        className="dialog__close dialog__close--inside"
+        onClick={onClose}
+      >
+        <CloseIcon />
+      </GVButton>
+      {children}
+    </div>
   </Modal>
 );
 
