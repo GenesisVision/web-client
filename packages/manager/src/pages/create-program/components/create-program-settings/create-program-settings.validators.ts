@@ -186,7 +186,7 @@ export const signalSuccessFeeShape = (
 ) => {
   return number()
     .min(
-      0.01,
+      0,
       t("manager.create-program-page.settings.validation.success-fee-min")
     )
     .required(
