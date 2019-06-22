@@ -121,7 +121,7 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
             <ProgramSimpleChart data={signal.chart} programId={signal.id} />
           )}
         </TableCell>
-        <TableCell>{signal.status}</TableCell>
+        <TableCell>{signal.personalDetails.status}</TableCell>
       </TableRow>
     )}
   />
