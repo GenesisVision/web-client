@@ -116,11 +116,11 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
             />
           </Profitability>
         </TableCell>
-        <TableCell className="programs-table__cell dashboard-programs__cell--chart">
+        {/*<TableCell className="programs-table__cell dashboard-programs__cell--chart">
           {signal.chart.length && (
             <ProgramSimpleChart data={signal.chart} programId={signal.id} />
           )}
-        </TableCell>
+        </TableCell>*/}
         <TableCell>{signal.personalDetails.status}</TableCell>
       </TableRow>
     )}
