@@ -5,13 +5,16 @@
 
 .dialog {
   position: relative;
-  border-radius: 8px;
   background-color: $secondary-background-color;
   z-index: 1300;
-  max-width: 360px;
   width: 100%;
   margin: 2rem auto;
   overflow: hidden;
+
+  @include media-breakpoint-landscape-phone() {
+    max-width: 360px;
+    border-radius: 8px;
+  }
 
   &__content {
     display: flex;
