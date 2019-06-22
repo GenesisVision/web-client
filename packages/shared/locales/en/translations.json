@@ -1658,7 +1658,7 @@
           "entry-fee-min": "Entry fee must be greater than 0 % ",
           "entry-fee-max": "Entry fee must be less than {{max}} %",
           "success-fee-required": "Success fee is required",
-          "success-fee-min": "Success fee must be greater than 0 % ",
+          "success-fee-min": "Success fee must be greater or equal than 0 % ",
           "success-fee-max": "Success fee must be less than {{max}} % ",
           "signal-volume-fee-required": "Volume fee is required",
           "signal-volume-fee-min": "Volume fee must be greater than {{min} %",
