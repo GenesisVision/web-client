@@ -681,6 +681,7 @@
         "subscriptions": "Subscribers"
       },
       "trades": {
+        "download": "Download",
         "swap": "Swap",
         "providers": "Providers",
         "direction-entry": "Dir/Entry",
