@@ -6,7 +6,7 @@ import DashboardRoutes, {
   DASHBOARD_ROUTE
 } from "pages/dashboard/dashboard.routes";
 import ProfileRoutes from "pages/profile/profile.routes";
-import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
+import ProgramsRoutes  from "pages/programs/programs.routes";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { FUNDS_ROUTE } from "shared/routes/funds.routes";
@@ -31,6 +31,7 @@ import { HOME_ROUTE } from "shared/routes/app.routes";
 
 import FundsRoutes from "../funds/funds.routes";
 import AppLayout from "./components/app-layout/app-layout";
+import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
 const AppRoutes = () => (
   <AppLayout>

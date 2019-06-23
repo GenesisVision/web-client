@@ -1,7 +1,7 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { FUNDS_ROUTE } from "shared/routes/funds.routes";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";

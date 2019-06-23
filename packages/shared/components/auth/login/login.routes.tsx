@@ -12,7 +12,7 @@ export const LOGIN_ROUTE_TWO_FACTOR_ROUTE = `${LOGIN_ROUTE}/two-factor`;
 export const LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE = `${LOGIN_ROUTE_TWO_FACTOR_ROUTE}/recovery`;
 export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
 
-const LoginRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
+const _LoginRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
   <AuthLayout
     Footer={LoginFooter}
     title={t("auth.login.title")}
@@ -29,4 +29,5 @@ const LoginRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
   </AuthLayout>
 );
 
-export default translate()(React.memo(LoginRoutes));
+const LoginRoutes = translate()(React.memo(_LoginRoutes));
+export default LoginRoutes;
