@@ -14,7 +14,7 @@ import {
   FUND_DETAILS_ROUTE,
   FUNDS_FACET_ROUTE,
   FUNDS_SLUG_URL_PARAM_NAME
-} from "shared/components/funds/funds.routes";
+} from "shared/routes/funds.routes";
 import {
   FUND_NOTIFICATIONS_ROUTE,
   PROGRAM_NOTIFICATIONS_ROUTE
