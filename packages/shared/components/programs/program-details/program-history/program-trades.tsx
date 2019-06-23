@@ -25,7 +25,8 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import Tooltip from "shared/components/tooltip/tooltip";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { formatValue } from "shared/utils/formatter";
+import GVButton from "shared/components/gv-button";
 
 const DECIMAL_SCALE = 8;
 
@@ -43,6 +44,7 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
     : PROGRAM_TRADES_COLUMNS;
   return (
     <TableModule
+      createButtonToolbar={<DownloadButtonToolbar />}
       getItems={fetchProgramTrades}
       defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
       filtering={PROGRAM_TRADES_FILTERS}
@@ -158,6 +160,15 @@ interface Props {
     filters?: FilteringType
   ) => Promise<IDataModel>;
 }
+
+const _DownloadButtonToolbar: React.FC<InjectedTranslateProps> = ({ t }) => (
+  <div className="dashboard__button-container dashboard__button">
+    <GVButton color="primary" variant="text">
+      {t("program-details-page.history.trades.download")}
+    </GVButton>
+  </div>
+);
+const DownloadButtonToolbar = translate()(React.memo(_DownloadButtonToolbar));
 
 const ProgramTrades = translate()(React.memo(_ProgramTrades));
 export default ProgramTrades;
