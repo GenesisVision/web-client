@@ -9,7 +9,7 @@ import ProfileRoutes from "pages/profile/profile.routes";
 import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { FUNDS_ROUTE } from "shared/components/funds/funds.routes";
+import { FUNDS_ROUTE } from "shared/routes/funds.routes";
 import GlobalSearchPage from "shared/components/global-search/global-search.page";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import ManagerContainer, {

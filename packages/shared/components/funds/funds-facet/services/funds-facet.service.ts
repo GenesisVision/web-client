@@ -6,7 +6,7 @@ import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 import {
   FUNDS_FACET_ROUTE,
   FUNDS_SLUG_URL_PARAM_NAME
-} from "../../funds.routes";
+} from "../../../../routes/funds.routes";
 
 export const getCurrentFacet = () => (
   dispatch: MiddlewareDispatch,

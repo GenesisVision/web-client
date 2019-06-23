@@ -7,7 +7,7 @@ import {
   FUNDS_FAVORITES_TAB_ROUTE,
   FUNDS_ROUTE,
   FUND_DETAILS_ROUTE_REGEX
-} from "shared/components/funds/funds.routes";
+} from "shared/routes/funds.routes";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import PrivateRoute from "shared/components/private-route/private-route";
 
