@@ -1,10 +1,10 @@
-import "./slider-calculator.scss";
+import "./calculator-slider.scss";
 
 import Slider from "rc-slider";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 
-class _SliderCalculator extends React.PureComponent<Props, State> {
+class _CalculatorSlider extends React.PureComponent<Props, State> {
   state = {
     value: this.props.defaultValue
   };
@@ -26,10 +26,10 @@ class _SliderCalculator extends React.PureComponent<Props, State> {
     const { min, max, title, step, valueSuffix } = this.props;
     const { value } = this.state;
     return (
-      <div className="slider-calculator">
-        <div className="slider-calculator__heading">
-          <div className="slider-calculator__title">{title}</div>
-          <div className="slider-calculator__value">
+      <div className="calculator-slider">
+        <div className="calculator-slider__heading">
+          <div className="calculator-slider__title">{title}</div>
+          <div className="calculator-slider__value">
             <NumberFormat
               value={value}
               displayType="text"
@@ -63,5 +63,5 @@ interface State {
   value: number;
 }
 
-const SliderCalculator = React.memo(_SliderCalculator);
-export default SliderCalculator;
+const CalculatorSlider = React.memo(_CalculatorSlider);
+export default CalculatorSlider;
