@@ -21,17 +21,17 @@ $tooltip-padding: 16px;
     &--cursor-pointer {
       cursor: pointer;
     }
-  }
 
-  &--help {
-    border: 1px solid $main-color;
-    border-radius: 100%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 15px;
-    height: 15px;
-    font-size: 8px;
-    color: $main-color;
+    &--question {
+      border: 1px solid $text-color;
+      border-radius: 100%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 15px;
+      height: 15px;
+      font-size: 8px;
+      color: $text-color;
+    }
   }
 }

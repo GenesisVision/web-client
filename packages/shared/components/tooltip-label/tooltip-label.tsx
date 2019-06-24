@@ -16,7 +16,7 @@ export const TooltipLabel: React.FC<{
       className={classNames(
         "tooltip__label",
         {
-          "tooltip__label--help": !labelText
+          "tooltip__label--question": !labelText
         },
         className
       )}
