@@ -1,0 +1,45 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+
+.calculator-slider {
+  width: 100%;
+
+  .rc-slider {
+    margin-bottom: $padding-xsmall;
+  }
+
+  .rc-slider-track {
+    background-color: $primary-color;
+  }
+
+  .rc-slider-dot {
+    display: none;
+  }
+
+  .rc-slider-handle {
+    background-color: $panel-background-color;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    margin-top: -8px;
+    border: solid 4px $primary-color;
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    &:active,
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 5px $primary-color;
+      background-color: $panel-background-color;
+    }
+  }
+
+  &__heading {
+    @include adaptive-padding(bottom, $padding-xxsmall);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
