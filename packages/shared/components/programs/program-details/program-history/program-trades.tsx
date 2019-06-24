@@ -190,11 +190,8 @@ const _DownloadButtonToolbar: React.FC<IDownloadButtonToolbar> = ({
   t,
   handleClick
 }) => (
-  <div
-    className="dashboard__button-container dashboard__button"
-    onClick={handleClick}
-  >
-    <GVButton color="primary" variant="text">
+  <div className="dashboard__button-container dashboard__button">
+    <GVButton color="primary" variant="text" onClick={handleClick}>
       {t("program-details-page.history.trades.download")}
     </GVButton>
   </div>
