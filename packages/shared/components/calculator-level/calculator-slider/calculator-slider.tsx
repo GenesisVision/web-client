@@ -14,8 +14,30 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
   };
 
   marks = {
-    [this.props.min]: `${this.props.min}`,
-    [this.props.max]: `${this.props.max}`
+    [this.props.min]: {
+      style: {
+        transform: "none"
+      },
+      label: (
+        <NumberFormat
+          value={this.props.min}
+          displayType="text"
+          suffix={this.props.minSuffix}
+        />
+      )
+    },
+    [this.props.max]: {
+      style: {
+        transform: "translateX(-100%)"
+      },
+      label: (
+        <NumberFormat
+          value={this.props.max}
+          displayType="text"
+          suffix={this.props.maxSuffix}
+        />
+      )
+    }
   };
 
   handleChange = (value: number) => {
@@ -53,9 +75,11 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
 interface Props {
   defaultValue: number;
   min: number;
+  minSuffix?: string;
   max: number;
+  maxSuffix?: string;
   step?: number;
-  title?: string;
+  title?: string | React.ReactNode;
   valueSuffix?: string;
 }
 
