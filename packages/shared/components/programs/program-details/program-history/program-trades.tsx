@@ -3,7 +3,7 @@ import "shared/components/details/details-description-section/details-statistic-
 import { CancelablePromise, OrderModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
@@ -42,22 +42,21 @@ const _ProgramTrades: React.FC<Props> = ({
   fetchTrades,
   t
 }) => {
-  const getTradesExport = useCallback(
-    (dateRange?: DateRangeFilterType) => () => {
-      getTradeExport && getTradeExport(programId, dateRange);
-    },
-    [programId, getTradeExport]
-  );
   const fetchProgramTrades: GetItemsFuncType = (filters?: FilteringType) =>
     fetchTrades(programId, filters);
+
   const columns = isForex
     ? PROGRAM_FOREX_TRADES_COLUMNS
     : PROGRAM_TRADES_COLUMNS;
+
   return (
     <TableModule
-      exportButtonToolbarRender={filtering => (
+      exportButtonToolbarRender={(filtering: any) => (
         <DownloadButtonToolbar
-          handleClick={getTradesExport(filtering!.dateRange)}
+          filtering={filtering!.dateRange}
+          programId={programId}
+          getTradeExport={getTradeExport}
+          //handleClick={getTradesExport(filtering!.dateRange)}
         />
       )}
       getItems={fetchProgramTrades}
@@ -183,19 +182,37 @@ interface OwnProps {
 interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface IDownloadButtonToolbar extends InjectedTranslateProps {
-  handleClick: () => void;
+  filtering: any;
+  programId: string;
+  getTradeExport?: TGetTradeExport;
 }
 
 const _DownloadButtonToolbar: React.FC<IDownloadButtonToolbar> = ({
   t,
-  handleClick
-}) => (
-  <div className="dashboard__button-container dashboard__button">
-    <GVButton color="primary" variant="text" onClick={handleClick}>
-      {t("program-details-page.history.trades.download")}
-    </GVButton>
-  </div>
-);
+  filtering,
+  programId,
+  getTradeExport
+}) => {
+  const [file, setFile] = useState<Blob | null>(null);
+
+  useEffect(
+    () => {
+      getTradeExport &&
+        getTradeExport(programId, filtering!.dateRange).then(data => {
+          setFile(data);
+        });
+    },
+    [programId, getTradeExport]
+  );
+  if (!file) return null;
+  return (
+    <div className="dashboard__button-container dashboard__button">
+      <a href={URL.createObjectURL(file)} download={"trades-history.xlsx"}>
+        {t("program-details-page.history.trades.download")}
+      </a>
+    </div>
+  );
+};
 const DownloadButtonToolbar = translate()(React.memo(_DownloadButtonToolbar));
 
 const ProgramTrades = translate()(React.memo(_ProgramTrades));
