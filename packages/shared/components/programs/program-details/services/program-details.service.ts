@@ -30,6 +30,7 @@ import {
 import getParams from "shared/utils/get-params";
 
 import { HistoryCountsType } from "../program-details.types";
+import { TGetTradeExport } from "../program-history/program-trades";
 import { ProgramStatisticResult } from "./program-details.types";
 
 export const getProgramDescription = () => (
@@ -218,3 +219,13 @@ export const fetchPortfolioEvents: GetItemsFuncType = (
     mapToTableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>("events")
   );
 };
+
+export const getTradeExport: TGetTradeExport = (programId, dateRange) =>
+  programsApi.v10ProgramsByProgramIdTradesExportGet(
+    programId,
+    authService.getAuthArg(),
+    {
+      start: dateRange ? (dateRange.dateStart as Date) : undefined,
+      end: dateRange ? (dateRange.dateEnd as Date) : undefined
+    }
+  );
