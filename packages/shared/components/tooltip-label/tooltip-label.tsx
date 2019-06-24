@@ -7,7 +7,7 @@ export const TooltipLabel: React.FC<{
   tooltipContent: string;
   labelText?: string;
   className?: string;
-}> = React.memo(({ tooltipContent, labelText, className }) => (
+}> = React.memo(({ tooltipContent, labelText = "?", className }) => (
   <Tooltip
     horizontal={HORIZONTAL_POPOVER_POS.LEFT}
     render={() => <div className="tooltip__content">{tooltipContent}</div>}
@@ -21,7 +21,7 @@ export const TooltipLabel: React.FC<{
         className
       )}
     >
-      {labelText ? labelText : "?"}
+      {labelText}
     </span>
   </Tooltip>
 ));
