@@ -43,7 +43,7 @@ const _ProgramTrades: React.FC<Props> = ({
   t
 }) => {
   const getTradesExport = useCallback(
-    (dateRange?: DateRangeFilterType) => (event?: React.MouseEvent) => {
+    (dateRange?: DateRangeFilterType) => () => {
       getTradeExport && getTradeExport(programId, dateRange);
     },
     [programId, getTradeExport]
@@ -183,7 +183,7 @@ interface OwnProps {
 interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface IDownloadButtonToolbar extends InjectedTranslateProps {
-  handleClick: (event?: React.MouseEvent) => void;
+  handleClick: () => void;
 }
 
 const _DownloadButtonToolbar: React.FC<IDownloadButtonToolbar> = ({
