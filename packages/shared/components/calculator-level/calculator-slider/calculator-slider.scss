@@ -10,6 +10,13 @@
 
   .rc-slider-track {
     background-color: $primary-color;
+    height: 3px;
+  }
+
+  .rc-slider-rail {
+    height: 1px;
+    background-color: rgba($main-color, 0.1);
+    margin-top: 1px;
   }
 
   .rc-slider-dot {
@@ -18,22 +25,27 @@
 
   .rc-slider-handle {
     background-color: $panel-background-color;
-    width: 20px;
-    height: 20px;
-    margin-left: -10px;
-    margin-top: -8px;
-    border: solid 4px $primary-color;
+    width: 15px;
+    height: 15px;
+    margin-left: -7.5px;
+    border: solid 3px $primary-color;
 
     &:hover {
       border-color: $primary-color;
+      box-shadow: 0 0 5px $primary-color;
     }
 
     &:active,
     &:focus {
       border-color: $primary-color;
-      box-shadow: 0 0 5px $primary-color;
       background-color: $panel-background-color;
     }
+  }
+
+  .rc-slider-mark-text,
+  .rc-slider-mark-text-active {
+    @include font-size($font-size-small);
+    color: $text-color;
   }
 
   &__heading {
@@ -41,5 +53,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  &__title {
+    @include font-size($font-size-small);
+  }
+
+  &__value {
+    @include font-size(15px);
+    font-weight: 500;
   }
 }
