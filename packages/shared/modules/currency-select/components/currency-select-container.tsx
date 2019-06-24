@@ -15,14 +15,13 @@ import { currenciesSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { HEADER_CURRENCY_VALUES } from "../currency-select.constants";
 import { updateCurrency } from "../services/currency-select.service";
 import CurrencySelect from "./currency-select";
 import { CurrencySelectLoader } from "./currency-select.loader";
 
 const _CurrencySelectContainer: React.FC<Props> = ({
   service,
-  currencyValues = Object.values(HEADER_CURRENCY_VALUES),
+  currencyValues,
   className,
   currency
 }) => {
@@ -38,13 +37,13 @@ const _CurrencySelectContainer: React.FC<Props> = ({
       className={classNames("currency-select", className)}
       value={currency}
       onChange={handleChange}
-      currencyValues={currencyValues as CurrencyEnum[]}
+      currencyValues={currencyValues}
     />
   );
 };
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  currencyValues: currenciesSelector(state),
+  currencyValues: currenciesSelector(state) as CurrencyEnum[],
   currency: currencySelector(state)
 });
 
@@ -58,7 +57,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 interface Props extends StateProps, DispatchProps, OwnProps {}
 
 interface StateProps {
-  currencyValues?: CurrencyEnum[];
+  currencyValues: CurrencyEnum[];
   currency: CurrencyEnum;
 }
 

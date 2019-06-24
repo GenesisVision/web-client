@@ -41,7 +41,7 @@ export const nameSelector = apiFieldSelector(
 export const roleSelector = apiFieldSelector(
   headerSelector,
   fieldSelector(state => state.userType),
-  ""
+  undefined
 );
 
 export const idSelector = apiFieldSelector(

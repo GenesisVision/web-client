@@ -13,40 +13,45 @@ import {
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { nameSelector } from "shared/reducers/header-reducer";
 import {
   fundAssetsSelector,
   platformDataSelector
 } from "shared/reducers/platform-reducer";
+import { rateApi } from "shared/services/api-client/rate-api";
 import { SetSubmittingType } from "shared/utils/types";
 
 import {
   createFund,
-  fetchInvestmentAmount,
-  showValidationError
+  fetchMinimumDepositAmount
 } from "../services/create-fund.service";
-import CreateFundSettings from "./create-fund-settings/create-fund-settings";
+import { ICreateFundSettingsFormValues } from "./create-fund-settings/create-fund-settings";
+import CreateFundSettingsSection from "./create-fund-settings/create-fund-settings-section";
 
 class _CreateFundContainer extends React.PureComponent<Props, State> {
   state = {
     isPending: true,
     isNavigationDialogVisible: false,
-    deposit: undefined
+    minimumDepositAmount: undefined
   };
 
   componentDidMount() {
     const { service } = this.props;
     service.fetchWallets();
-    fetchInvestmentAmount().then(response => {
+    fetchMinimumDepositAmount().then(response => {
       this.setState({
-        deposit: response,
+        minimumDepositAmount: response,
         isPending: false
       });
     });
   }
 
-  handleSubmit = (values, setSubmitting: SetSubmittingType) => {
-    this.props.service.createFund({ ...values }, setSubmitting);
+  handleSubmit = (
+    values: ICreateFundSettingsFormValues,
+    setSubmitting: SetSubmittingType
+  ) => {
+    this.props.service.createFund(values, setSubmitting);
   };
 
   handleValidateError = () => {
@@ -57,9 +62,16 @@ class _CreateFundContainer extends React.PureComponent<Props, State> {
     this.setState({ isNavigationDialogVisible: true });
   };
 
+  fetchRate = (fromCurrency: string, toCurrency: string) => {
+    return rateApi.v10RateByFromByToGet(fromCurrency, toCurrency);
+  };
+
   render() {
-    const { isPending, isNavigationDialogVisible, deposit } = this.state;
-    const { navigateBack, handleSubmit } = this;
+    const {
+      isPending,
+      isNavigationDialogVisible,
+      minimumDepositAmount
+    } = this.state;
     const {
       t,
       author,
@@ -68,22 +80,27 @@ class _CreateFundContainer extends React.PureComponent<Props, State> {
       fundAssets,
       wallets
     } = this.props;
-    if (!platformSettings || !wallets || !deposit) return null;
+    if (!platformSettings || !wallets || !minimumDepositAmount) return null;
     return (
       <div className="create-fund-container">
         <div>
           {!isPending && (
-            <CreateFundSettings
+            <CreateFundSettingsSection
               fetchWallets={service.fetchWallets}
               wallets={wallets}
-              currency="GVT"
-              onValidateError={this.handleValidateError}
-              navigateBack={navigateBack}
-              onSubmit={handleSubmit}
+              navigateBack={this.navigateBack}
+              onSubmit={this.handleSubmit}
               author={author}
               assets={fundAssets}
-              deposit={deposit}
-              programsInfo={platformSettings.programsInfo}
+              minimumDepositAmount={minimumDepositAmount}
+              managerMaxExitFee={
+                platformSettings.programsInfo.managerMaxExitFee
+              }
+              managerMaxEntryFee={
+                platformSettings.programsInfo.managerMaxEntryFee
+              }
+              notifyError={service.notifyError}
+              fetchRate={this.fetchRate}
             />
           )}
           <ConfirmPopup
@@ -109,13 +126,18 @@ const mapStateToProps = (state: ManagerRootState): StateProps => ({
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
     service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-      { goBack, createFund, fetchWallets, showValidationError },
+      {
+        goBack,
+        createFund,
+        fetchWallets,
+        notifyError: alertMessageActions.error
+      },
       dispatch
     )
   };
 };
 
-const CreateFundContainer = compose(
+const CreateFundContainer = compose<React.ComponentType>(
   translate(),
   connect(
     mapStateToProps,
@@ -135,6 +157,7 @@ interface ServiceThunks extends ActionCreatorsMapObject {
   goBack: typeof goBack;
   createFund: typeof createFund;
   fetchWallets: typeof fetchWallets;
+  notifyError: typeof alertMessageActions.error;
 }
 
 interface DispatchProps {
@@ -146,5 +169,5 @@ interface Props extends StateProps, DispatchProps, InjectedTranslateProps {}
 interface State {
   isPending: boolean;
   isNavigationDialogVisible: boolean;
-  deposit: number | undefined;
+  minimumDepositAmount?: number;
 }

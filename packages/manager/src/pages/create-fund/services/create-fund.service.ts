@@ -1,7 +1,6 @@
 import { push } from "connected-react-router";
 import { NewFundRequest } from "gv-api-web";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
-import { Dispatch } from "redux";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
@@ -9,11 +8,13 @@ import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 import { RootThunk, SetSubmittingType } from "shared/utils/types";
 
-export const fetchInvestmentAmount = () =>
+import { ICreateFundSettingsFormValues } from "../components/create-fund-settings/create-fund-settings";
+
+export const fetchMinimumDepositAmount = () =>
   managerApi.v10ManagerFundsInvestmentAmountGet(authService.getAuthArg());
 
 export const createFund = (
-  createFundData: NewFundRequest,
+  createFundData: ICreateFundSettingsFormValues,
   setSubmitting: SetSubmittingType
 ): RootThunk<void> => dispatch => {
   const authorization = authService.getAuthArg();
@@ -26,13 +27,13 @@ export const createFund = (
   }
   promise
     .then(response => {
-      createFundData = {
+      const requestData = <NewFundRequest>{
         ...createFundData,
         logo: response
       };
 
       return managerApi.v10ManagerFundsCreatePost(authorization, {
-        request: createFundData
+        request: requestData
       });
     })
     .then(() => {
@@ -50,13 +51,4 @@ export const createFund = (
       setSubmitting(false);
       dispatch(alertMessageActions.error(error.errorMessage));
     });
-};
-
-export const showValidationError = () => (dispatch: Dispatch) => {
-  dispatch(
-    alertMessageActions.error(
-      "manager.create-fund-page.notifications.validate-error",
-      true
-    )
-  );
 };

@@ -238,9 +238,9 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-const CreateProgramContainer = compose<React.ComponentType<OwnProps>>(
+const CreateProgramContainer = compose<React.ComponentType>(
   translate(),
-  connect<StateProps, DispatchProps, OwnProps, ManagerRootState>(
+  connect<StateProps, DispatchProps, {}, ManagerRootState>(
     mapStateToProps,
     mapDispatchToProps
   )

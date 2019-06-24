@@ -1715,13 +1715,6 @@
           "available-in-wallet": "Available in the wallet"
         },
         "validation": {
-          "title-required": "Title is required",
-          "title-is-short": "Title is too short",
-          "title-is-long": "Title is too long",
-          "title-is-latin-and-numbers": "Latin letters and numbers only.",
-          "description-is-long": "Description is too long",
-          "description-is-short": "Description is too short",
-          "description-required": "Description is required",
           "entry-fee-required": "Entry fee is required",
           "exit-fee-required": "Exit fee is required",
           "assets-share": "Total share of all assets should be equal to 100%",
