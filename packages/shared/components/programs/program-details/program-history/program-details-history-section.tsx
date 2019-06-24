@@ -8,7 +8,7 @@ import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
-import ProgramTrades from "shared/components/programs/program-details/program-history/program-trades";
+import ProgramTrades, { TGetTradeExport } from "shared/components/programs/program-details/program-history/program-trades";
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
@@ -71,6 +71,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       subscriptionsCount
     } = this.state;
     const {
+      getTradeExport,
       role,
       isForex,
       t,
@@ -121,6 +122,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
         <div>
           {tab === TABS.TRADES && (
             <ProgramTrades
+              getTradeExport={getTradeExport}
               isForex={isForex}
               fetchTrades={fetchTrades}
               programId={programId}
@@ -179,6 +181,7 @@ interface OwnProps {
   programCurrency: CURRENCIES;
   isInvested: boolean;
   eventTypeFilterValues: SelectFilterValue[];
+  getTradeExport?: TGetTradeExport;
 }
 
 interface StateProps extends AuthState {}
