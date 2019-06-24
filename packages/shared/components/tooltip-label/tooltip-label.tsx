@@ -5,13 +5,23 @@ import Tooltip from "shared/components/tooltip/tooltip";
 
 export const TooltipLabel: React.FC<{
   tooltipContent: string;
-  labelText: string;
+  labelText?: string;
   className?: string;
 }> = React.memo(({ tooltipContent, labelText, className }) => (
   <Tooltip
     horizontal={HORIZONTAL_POPOVER_POS.LEFT}
     render={() => <div className="tooltip__content">{tooltipContent}</div>}
   >
-    <span className={classNames("tooltip__label", className)}>{labelText}</span>
+    <span
+      className={classNames(
+        "tooltip__label",
+        {
+          "tooltip__label--help": !labelText
+        },
+        className
+      )}
+    >
+      {labelText ? labelText : "?"}
+    </span>
   </Tooltip>
 ));
