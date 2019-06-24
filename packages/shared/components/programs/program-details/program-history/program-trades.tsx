@@ -1,10 +1,12 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
-import { OrderModel } from "gv-api-web";
+import { CancelablePromise, OrderModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
+import { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import GVButton from "shared/components/gv-button";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -15,7 +17,10 @@ import {
   PROGRAM_TRADES_FILTERS
 } from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DateRangeFilterType
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
@@ -26,17 +31,23 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
-import GVButton from "shared/components/gv-button";
 
 const DECIMAL_SCALE = 8;
 
-const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
+const _ProgramTrades: React.FC<Props> = ({
+  getTradeExport,
   isForex,
   currency,
   programId,
   fetchTrades,
   t
 }) => {
+  const getTradesExport = useCallback(
+    (dateRange?: DateRangeFilterType) => (event?: React.MouseEvent) => {
+      getTradeExport && getTradeExport(programId, dateRange);
+    },
+    [programId, getTradeExport]
+  );
   const fetchProgramTrades: GetItemsFuncType = (filters?: FilteringType) =>
     fetchTrades(programId, filters);
   const columns = isForex
@@ -44,19 +55,21 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
     : PROGRAM_TRADES_COLUMNS;
   return (
     <TableModule
-      createButtonToolbar={<DownloadButtonToolbar />}
+      exportButtonToolbarRender={filtering => (
+        <DownloadButtonToolbar
+          handleClick={getTradesExport(filtering!.dateRange)}
+        />
+      )}
       getItems={fetchProgramTrades}
       defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
       filtering={PROGRAM_TRADES_FILTERS}
       renderFilters={(updateFilter, filtering) => (
-        <>
-          <DateRangeFilter
-            name={DATE_RANGE_FILTER_NAME}
-            value={filtering[DATE_RANGE_FILTER_NAME]}
-            onChange={updateFilter}
-            startLabel={t("filters.date-range.program-start")}
-          />
-        </>
+        <DateRangeFilter
+          name={DATE_RANGE_FILTER_NAME}
+          value={filtering[DATE_RANGE_FILTER_NAME]}
+          onChange={updateFilter}
+          startLabel={t("filters.date-range.program-start")}
+        />
       )}
       paging={DEFAULT_PAGING}
       columns={columns}
@@ -151,7 +164,13 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
   );
 };
 
-interface Props {
+export type TGetTradeExport = (
+  programId: string,
+  dateRange?: DateRangeFilterType
+) => CancelablePromise<any>;
+
+interface OwnProps {
+  getTradeExport?: TGetTradeExport;
   isForex: boolean;
   currency: CURRENCIES;
   programId: string;
@@ -161,8 +180,20 @@ interface Props {
   ) => Promise<IDataModel>;
 }
 
-const _DownloadButtonToolbar: React.FC<InjectedTranslateProps> = ({ t }) => (
-  <div className="dashboard__button-container dashboard__button">
+interface Props extends InjectedTranslateProps, OwnProps {}
+
+interface IDownloadButtonToolbar extends InjectedTranslateProps {
+  handleClick: (event?: React.MouseEvent) => void;
+}
+
+const _DownloadButtonToolbar: React.FC<IDownloadButtonToolbar> = ({
+  t,
+  handleClick
+}) => (
+  <div
+    className="dashboard__button-container dashboard__button"
+    onClick={handleClick}
+  >
     <GVButton color="primary" variant="text">
       {t("program-details-page.history.trades.download")}
     </GVButton>
