@@ -141,6 +141,8 @@ const _TradeRow: React.FC<Props> = ({
                 update(undefined);
               });
             }}
+            applyButtonText={t("buttons.confirm")}
+            onCancel={() => togglePopup(false)}
           />
         </TableCell>
       </TableRow>
