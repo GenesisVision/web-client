@@ -28,7 +28,7 @@
   }
 
   .rc-slider-handle {
-    background-color: $panel-background-color;
+    background-color: $popover-background;
     width: 17px;
     height: 17px;
     margin-left: -8.5px;
@@ -43,9 +43,13 @@
     &:active,
     &:focus {
       border-color: $primary-color;
-      background-color: $panel-background-color;
+      background-color: $popover-background;
       box-shadow: 0 0 5px $primary-color;
     }
+  }
+
+  .rc-slider-mark {
+    top: 14px;
   }
 
   .rc-slider-mark-text,
