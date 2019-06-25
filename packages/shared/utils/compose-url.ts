@@ -1,24 +1,24 @@
-import { ASSET } from "shared/constants/constants";
-
-import replaceParams from "./replace-params";
-import {
-  PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME,
-  PROGRAMS_FACET_ROUTE
-} from "shared/routes/programs.routes";
-import {
-  MANAGER_DETAILS_ROUTE,
-  MANAGER_SLUG_URL_PARAM_NAME
-} from "shared/components/manager/manager.container";
-import {
-  FUND_DETAILS_ROUTE,
-  FUNDS_FACET_ROUTE,
-  FUNDS_SLUG_URL_PARAM_NAME
-} from "shared/routes/funds.routes";
 import {
   FUND_NOTIFICATIONS_ROUTE,
   PROGRAM_NOTIFICATIONS_ROUTE
 } from "shared/components/notifications/notifications.routes";
+import { ASSET } from "shared/constants/constants";
+import {
+  FUNDS_FACET_ROUTE,
+  FUNDS_SLUG_URL_PARAM_NAME,
+  FUND_DETAILS_ROUTE
+} from "shared/routes/funds.routes";
+import {
+  MANAGER_DETAILS_ROUTE,
+  MANAGER_SLUG_URL_PARAM_NAME
+} from "shared/routes/manager.routes";
+import {
+  PROGRAMS_FACET_ROUTE,
+  PROGRAM_DETAILS_ROUTE,
+  PROGRAM_SLUG_URL_PARAM_NAME
+} from "shared/routes/programs.routes";
+
+import replaceParams from "./replace-params";
 
 export const composeUrl = (route: string, slugParamName: string) => (
   slugUrl: string
