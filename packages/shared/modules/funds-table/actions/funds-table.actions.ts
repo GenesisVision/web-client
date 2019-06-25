@@ -11,4 +11,4 @@ export const fetchFundsAction = (
 ): TFetchFundsAction => ({
   type: FUNDS_TABLE,
   payload: fundsApi.v10FundsGet(filters)
-})
+});
