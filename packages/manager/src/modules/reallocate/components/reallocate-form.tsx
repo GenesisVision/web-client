@@ -1,28 +1,31 @@
 import { FormikProps, withFormik } from "formik";
-import { FundAssetPartWithIcon } from "gv-api-web";
+import {
+  FundAssetPart,
+  FundAssetPartWithIcon,
+  PlatformAsset
+} from "gv-api-web";
+import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
-import ErrorMessage, {
-  MESSAGE_TYPES
-} from "shared/components/error-message/error-message";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
-import { anchorElType } from "shared/components/popover/popover";
+import GVFormikField from "shared/components/gv-formik-field";
 import { SetSubmittingType } from "shared/utils/types";
-import { array, number, object } from "yup";
+import { object } from "yup";
 
-class _ReallocateForm extends React.PureComponent<Props, State> {
+import ReallocateField from "./reallocate-field";
+
+class _ReallocateForm extends React.PureComponent<Props> {
   render() {
-    const { anchor, assets, remainder } = this.state;
     const {
       t,
       handleSubmit,
       isValid,
       dirty,
-      errors,
       errorMessage,
-      isSubmitting
+      isSubmitting,
+      platformAssets
     } = this.props;
     return (
       <form
@@ -33,13 +36,11 @@ class _ReallocateForm extends React.PureComponent<Props, State> {
         <div className="dialog__header">
           <h2>{t("manager.reallocate.title")}</h2>
         </div>
-        {(errors.assets && (
-          <ErrorMessage error={errors.assets} type={MESSAGE_TYPES.OVER} />
-        )) ||
-          (errors.remainder && (
-            <ErrorMessage error={errors.remainder} type={MESSAGE_TYPES.OVER} />
-          ))}
-
+        <GVFormikField
+          name={FIELDS.assets}
+          component={ReallocateField}
+          assets={platformAssets}
+        />
         <div className="reallocate-container__form-error">
           <FormError error={errorMessage} />
         </div>
@@ -57,17 +58,16 @@ class _ReallocateForm extends React.PureComponent<Props, State> {
 }
 
 enum FIELDS {
-  assets = "assets",
-  remainder = "remainder"
+  assets = "assets"
 }
 
 export interface IReallocateFormValues {
-  [FIELDS.assets]: FundAssetPartWithIcon[];
-  [FIELDS.remainder]: number;
+  [FIELDS.assets]: FundAssetPart[];
 }
 
 export interface IReallocateFormOwnProps {
-  assets: FundAssetPartWithIcon[];
+  fundAssets: FundAssetPartWithIcon[];
+  platformAssets: PlatformAsset[];
   onSubmit(
     values: IReallocateFormValues,
     setSubmitting: SetSubmittingType
@@ -80,36 +80,25 @@ interface Props
     IReallocateFormOwnProps,
     InjectedTranslateProps {}
 
-interface State {
-  assets: FundAssetPartWithIcon[];
-  remainder: number;
-  anchor?: anchorElType;
-}
-
 const ReallocateForm = compose<React.FC<IReallocateFormOwnProps>>(
   translate(),
   withFormik<IReallocateFormOwnProps, IReallocateFormValues>({
     displayName: "reallocate",
     enableReinitialize: true,
+    mapPropsToValues: ({ fundAssets, platformAssets }) => {
+      const assets = fundAssets.map(fundAsset => {
+        const platformAsset = platformAssets.find(
+          x => x.asset === fundAsset.asset
+        )!;
+        return { id: platformAsset.id, percent: fundAsset.percent };
+      });
+
+      return {
+        [FIELDS.assets]: assets
+      };
+    },
     validationSchema: (props: Props) =>
-      object().shape({
-        [FIELDS.remainder]: number()
-          .required(
-            props.t("manager.create-fund-page.settings.validation.assets-share")
-          )
-          .max(
-            0,
-            props.t("manager.create-fund-page.settings.validation.assets-share")
-          ),
-        [FIELDS.assets]: array()
-          .required(
-            props.t("manager.create-fund-page.settings.validation.assets-count")
-          )
-          .min(
-            2,
-            props.t("manager.create-fund-page.settings.validation.assets-count")
-          )
-      }),
+      object().shape({ [FIELDS.assets]: assetsShape(props.t) }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }

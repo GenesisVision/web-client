@@ -2,6 +2,7 @@ import "./reallocate-container.scss";
 
 import {
   CancelablePromise,
+  FundAssetPart,
   FundAssetPartWithIcon,
   PlatformAsset
 } from "gv-api-web";
@@ -39,16 +40,17 @@ class _ReallocateContainer extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { open, fundAssets } = this.props;
+    const { open, fundAssets, platformAssets } = this.props;
     return (
       <Dialog open={open} onClose={this.handleClose}>
-        {fundAssets.length ? null : (
-          // <ReallocateForm
-          //   fundAssets={fundAssets}
-          //   assets={assets}
-          //   onSubmit={this.handleApply}
-          //   errorMessage={this.state.errorMessage}
-          // />
+        {fundAssets.length ? (
+          <ReallocateForm
+            fundAssets={fundAssets}
+            platformAssets={platformAssets}
+            onSubmit={this.handleApply}
+            errorMessage={this.state.errorMessage}
+          />
+        ) : (
           <DialogLoader />
         )}
       </Dialog>
@@ -57,12 +59,12 @@ class _ReallocateContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  fundAssets: fundAssetsSelector(state)
+  platformAssets: fundAssetsSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
-    updateAssets: (id: string, assets: FundAssetPartWithIcon[]) =>
+    updateAssets: (id: string, assets: FundAssetPart[]) =>
       dispatch(updateAssets(id, assets))
   }
 });
@@ -70,13 +72,13 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
 interface Props extends DispatchProps, OwnProps, StateProps {}
 
 interface StateProps {
-  fundAssets: PlatformAsset[];
+  platformAssets: PlatformAsset[];
 }
 
 interface OwnProps {
   open: boolean;
   onClose: () => void;
-  assets: FundAssetPartWithIcon[];
+  fundAssets: FundAssetPartWithIcon[];
   id: string;
   onApply: () => void;
 }
@@ -85,7 +87,7 @@ interface DispatchProps {
   service: {
     updateAssets: (
       id: string,
-      assets: FundAssetPartWithIcon[]
+      assets: FundAssetPart[]
     ) => CancelablePromise<void>;
   };
 }

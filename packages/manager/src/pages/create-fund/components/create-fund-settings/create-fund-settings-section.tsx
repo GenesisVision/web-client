@@ -29,6 +29,7 @@ class CreateFundSettingsSection extends React.PureComponent<
 
     const wallet = this.props.wallets.find(x => x.id === this.state.wallet.id)!;
     this.setState({ wallet });
+    this.updateRate(wallet.currency, FUND_CURRENCY);
   }
 
   handleWalletChange = (walletId: string): void => {
@@ -64,7 +65,6 @@ class CreateFundSettingsSection extends React.PureComponent<
     if (!rate) return null;
     return (
       <CreateFundSettings
-        fetchWallets={fetchWallets}
         wallets={wallets}
         fundCurrency={FUND_CURRENCY}
         navigateBack={navigateBack}
@@ -77,6 +77,7 @@ class CreateFundSettingsSection extends React.PureComponent<
         rate={rate}
         wallet={wallet}
         notifyError={notifyError}
+        onWalletChange={this.handleWalletChange}
       />
     );
   }

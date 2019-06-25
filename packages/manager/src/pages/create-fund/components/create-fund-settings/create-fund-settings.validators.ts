@@ -3,7 +3,7 @@ import {
   assetDescriptionShape,
   assetTitleShape
 } from "pages/create-program/components/create-program-settings/create-program-settings.validators";
-import { InjectedTranslateProps } from "react-i18next";
+import { InjectedTranslateProps, TranslationFunction } from "react-i18next";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -61,17 +61,21 @@ const createFundSettingsValidationSchema = (
         props.managerMaxExitFee,
         "Exit fee must be less than  " + props.managerMaxExitFee + " %"
       ),
-    [CREATE_FUND_FIELDS.assets]: array()
-      .test(
-        CREATE_FUND_FIELDS.assets,
-        t("manager.create-fund-page.settings.validation.assets-share"),
-        (val: FundAssetPart[]) => {
-          return val.reduce((acc, next) => acc + next.percent, 0) == 100;
-        }
-      )
-      .required(t("manager.create-fund-page.settings.validation.assets-count"))
-      .min(2, t("manager.create-fund-page.settings.validation.assets-count"))
+    [CREATE_FUND_FIELDS.assets]: assetsShape(t)
   });
+};
+
+export const assetsShape = (t: TranslationFunction) => {
+  return array()
+    .test(
+      CREATE_FUND_FIELDS.assets,
+      t("manager.create-fund-page.settings.validation.assets-share"),
+      (val: FundAssetPart[]) => {
+        return val.reduce((acc, next) => acc + next.percent, 0) == 100;
+      }
+    )
+    .required(t("manager.create-fund-page.settings.validation.assets-count"))
+    .min(2, t("manager.create-fund-page.settings.validation.assets-count"));
 };
 
 export default createFundSettingsValidationSchema;

@@ -32,16 +32,19 @@ import createFundSettingsValidationSchema from "./create-fund-settings.validator
 class _CreateFundSettings extends React.PureComponent<
   InjectedFormikProps<ICreateFundSettingsProps, ICreateFundSettingsFormValues>
 > {
+  componentDidUpdate(prevProps: ICreateFundSettingsProps) {
+    const { validateForm, setFieldValue } = this.props;
+    if (prevProps.wallet !== this.props.wallet) {
+      setFieldValue(CREATE_FUND_FIELDS.depositWalletId, this.props.wallet.id);
+      setFieldValue(CREATE_FUND_FIELDS.depositAmount, "");
+    }
+    if (prevProps.rate !== this.props.rate) {
+      validateForm();
+    }
+  }
+
   onChangeDepositWallet = (name: ISelectChangeEvent, target: JSX.Element) => {
-    const { setFieldValue, values, wallets, fetchWallets } = this.props;
-    const depositWalletCurrency = target.props.value;
-    setFieldValue("depositWalletCurrency", depositWalletCurrency);
-    setFieldValue(
-      "depositWalletId",
-      wallets.find(item => item.currency === (values && depositWalletCurrency))!
-        .id
-    );
-    fetchWallets();
+    this.props.onWalletChange(target.props.value);
   };
 
   setMaxAmount = (available: number, currency: string) => () => {
@@ -81,8 +84,8 @@ class _CreateFundSettings extends React.PureComponent<
       minimumDepositAmount,
       assets
     } = this.props;
-    if (!wallets || !wallets.length) return null;
     const { depositAmount, description, title } = values;
+    const descriptionTrimmedLength = description.trim().length;
 
     return (
       <div className="create-fund-settings">
@@ -99,7 +102,7 @@ class _CreateFundSettings extends React.PureComponent<
               <div className="create-fund-settings__item create-fund-settings__item--wider">
                 <GVFormikField
                   type="text"
-                  name="title"
+                  name={CREATE_FUND_FIELDS.title}
                   label={t("manager.create-fund-page.settings.fields.name")}
                   autoComplete="off"
                   component={GVTextField}
@@ -115,7 +118,7 @@ class _CreateFundSettings extends React.PureComponent<
               <div className="create-fund-settings__item create-fund-settings__item--wider">
                 <GVFormikField
                   type="textarea"
-                  name="description"
+                  name={CREATE_FUND_FIELDS.description}
                   label={t(
                     "manager.create-fund-page.settings.fields.description"
                   )}
@@ -127,15 +130,16 @@ class _CreateFundSettings extends React.PureComponent<
                       "manager.create-fund-page.settings.fields.description-requirements"
                     )}
                   </span>
-                  {description.length > 0 && (
+                  {descriptionTrimmedLength > 0 && (
                     <div className="create-fund-settings__description-chars">
                       <div className="create-fund-settings__description-chars-value">
-                        {description.length}
+                        {descriptionTrimmedLength}
                       </div>
                       <GVProgramPeriod
                         start={0}
                         end={500}
-                        value={description.length}
+                        value={descriptionTrimmedLength}
+                        variant="pie"
                       />
                     </div>
                   )}
@@ -381,7 +385,7 @@ interface OwnProps {
   wallet: WalletData;
   navigateBack(): void;
   author: string;
-  fetchWallets(): void;
+  onWalletChange(walletId: string): void;
   minimumDepositAmount: number;
   onSubmit(
     values: ICreateFundSettingsFormValues,
