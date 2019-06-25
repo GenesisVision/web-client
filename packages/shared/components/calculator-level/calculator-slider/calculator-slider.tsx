@@ -9,10 +9,6 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
     value: this.props.defaultValue
   };
 
-  static defaultProps = {
-    step: 1
-  };
-
   marks = {
     [this.props.min]: {
       style: {
@@ -45,7 +41,7 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { min, max, title, step, valueSuffix } = this.props;
+    const { min, max, title, step = 1, valueSuffix } = this.props;
     const { value } = this.state;
     return (
       <div className="calculator-slider">
