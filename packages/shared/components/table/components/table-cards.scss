@@ -49,10 +49,10 @@ $program-height: 372px;
     height: $program-height/1.2;
     padding: $padding-small 20px;
     border-radius: 8px;
-    background-color: #212c34;
+    background-color: $row-color;
     flex-grow: 1;
     & .program-avatar__level {
-      border-color: #212c34;
+      background-color: $row-color;
     }
     &--title {
       @include title;

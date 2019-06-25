@@ -12,8 +12,8 @@ import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-per
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
-  TableItems,
-  mapToTableItems
+  mapToTableItems,
+  TableItems
 } from "shared/components/table/helpers/mapper";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -23,14 +23,14 @@ import managerApi from "shared/services/api-client/manager-api";
 import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import {
-  PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
-} from "shared/utils/compose-url";
 import getParams from "shared/utils/get-params";
 
 import { HistoryCountsType } from "../program-details.types";
 import { ProgramStatisticResult } from "./program-details.types";
+import {
+  PROGRAM_DETAILS_ROUTE,
+  PROGRAM_SLUG_URL_PARAM_NAME
+} from "shared/routes/programs.routes";
 
 export const getProgramDescription = () => (
   dispatch: Dispatch,

@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
+import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";

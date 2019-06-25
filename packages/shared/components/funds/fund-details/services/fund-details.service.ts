@@ -7,7 +7,7 @@ import {
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE
-} from "shared/components/funds/funds.routes";
+} from "shared/routes/funds.routes";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
