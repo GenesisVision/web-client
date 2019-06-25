@@ -6,8 +6,6 @@ import Page from "shared/components/page/page";
 
 import CreateProgramContainer from "./components/create-program.container";
 
-export const CREATE_PROGRAM_PAGE_ROUTE = "/create-program";
-
 const _CreateProgramPage: React.FC<InjectedTranslateProps> = ({ t }) => (
   <Page title={t("manager.create-program-page.title")}>
     <div className="create-program-page">
@@ -19,5 +17,5 @@ const _CreateProgramPage: React.FC<InjectedTranslateProps> = ({ t }) => (
   </Page>
 );
 
-const CreateProgramPage = translate()(_CreateProgramPage);
+const CreateProgramPage = translate()(React.memo(_CreateProgramPage));
 export default CreateProgramPage;
