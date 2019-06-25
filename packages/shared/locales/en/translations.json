@@ -429,6 +429,7 @@
       "investors": "Investors",
       "available-to-invest": "Av. to invest",
       "trades": "Trades",
+      "age": "Age",
       "period": "Period",
       "drawdown": "D.down",
       "profit": "Profit",
@@ -1307,10 +1308,10 @@
         "providers": "Providers"
       },
       "fees": {
-        "trading": "Trading Commission: {{amount}} {{currency}}",
-        "ManagerSignalMasterVolumeFee": "Volume fee: {{amount}} {{currency}}",
-        "ManagerSignalMasterSuccessFee": "Manager Success fee: {{amount}} {{currency}}",
-        "GvSignalSuccessFee": "Platform Success Fee: {{amount}} {{currency}}"
+        "trading": "Trading Commission",
+        "ManagerSignalMasterVolumeFee": "Volume fee",
+        "ManagerSignalMasterSuccessFee": "Manager Success fee",
+        "GvSignalSuccessFee": "Platform Success Fee"
       }
     },
     "dashboard-page": {
@@ -1658,7 +1659,7 @@
           "entry-fee-min": "Entry fee must be greater than 0 % ",
           "entry-fee-max": "Entry fee must be less than {{max}} %",
           "success-fee-required": "Success fee is required",
-          "success-fee-min": "Success fee must be greater than 0 % ",
+          "success-fee-min": "Success fee must be greater or equal than 0 % ",
           "success-fee-max": "Success fee must be less than {{max}} % ",
           "signal-volume-fee-required": "Volume fee is required",
           "signal-volume-fee-min": "Volume fee must be greater than {{min} %",

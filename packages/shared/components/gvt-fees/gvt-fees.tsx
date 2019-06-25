@@ -7,7 +7,7 @@ import { ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 const GVTFees: React.FC<Props> = ({ role, t, open, onClose }) => (
-  <Dialog wider open={open} onClose={onClose} className="gvt-fees">
+  <Dialog open={open} onClose={onClose} className="gvt-fees">
     <div className="gvt-fees__container">
       <h1>{t("gvt-fees.titles.main")}</h1>
       <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-1")}</p>

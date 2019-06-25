@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { createSelector } from "reselect";
 import { IFundsFacetTableProps } from "shared/components/funds/funds-facet/components/funds-facet-table";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found";
 import { IProgramsFacetTableProps } from "shared/components/programs/programs-facet/components/programs-facet-table";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";

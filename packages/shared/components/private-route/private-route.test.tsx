@@ -3,7 +3,7 @@ import * as React from "react";
 import { Provider } from "react-redux";
 import { MemoryRouter, Route, Switch } from "react-router";
 import configureStore, { MockStoreEnhanced } from "redux-mock-store";
-import { LOGIN_ROUTE } from "shared/pages/login.routes";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 import PrivateRoute from "./private-route";
 

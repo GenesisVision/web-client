@@ -5,13 +5,14 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
-import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "shared/components/auth/login/login.routes";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
+
+import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../login.routes";
 
 class _TwoFactorCodeForm extends React.PureComponent<
   InjectedFormikProps<Props, ITwoFactorCodeFormValues>,

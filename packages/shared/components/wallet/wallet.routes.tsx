@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { Route, Switch } from "react-router-dom";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found";
 import { composeUrl } from "shared/utils/compose-url";
 
 import WalletCurrencyContainer from "./components/wallet-currency.container";

@@ -1,13 +1,12 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
+import {
+  DASHBOARD_EVENTS_ROUTE,
+  DASHBOARD_ROUTE
+} from "shared/routes/dashboard.routes";
 
-import PortfolioEventsAllComponent, {
-  PORTFOLIO_EVENTS_ALL_PAGE_ROUTE
-} from "./components/dashboard-portfolio-events-all/dashboard-portfolio-events-all";
+import PortfolioEventsAllComponent from "./components/dashboard-portfolio-events-all/dashboard-portfolio-events-all";
 import DashboardPage from "./dashboard.page";
-
-export const DASHBOARD_ROUTE = "/dashboard";
-export const DASHBOARD_EVENTS_ROUTE = `${DASHBOARD_ROUTE}/${PORTFOLIO_EVENTS_ALL_PAGE_ROUTE}`;
 
 const DashboardRoutes = React.memo(() => (
   <Switch>

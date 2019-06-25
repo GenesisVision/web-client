@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/login/login.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found";
 import {
   getProgramDescription,
   getProgramStatistic

@@ -4,11 +4,11 @@ import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
+import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE
-} from "shared/components/funds/funds.routes";
-import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
+} from "shared/routes/funds.routes";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";

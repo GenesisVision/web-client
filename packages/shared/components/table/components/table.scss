@@ -125,12 +125,12 @@ $padding: $padding-small;
   &__row {
     transition: background-color 300ms ease;
     &:not(.table__row--head):hover {
-      background-color: #212c34;
+      background-color: $row-color;
     }
 
     &:hover {
       .program-avatar__level {
-        background-color: #212c34;
+        background-color: $row-color;
       }
 
       .program-detailed__avatar .program-avatar__level {

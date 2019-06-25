@@ -78,7 +78,6 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
                   thousandSeparator=" "
                   displayType="text"
                   allowNegative={false}
-                  suffix={` ${currency}`}
                 />
               </Profitability>
             </TableCell>

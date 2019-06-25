@@ -173,10 +173,14 @@ const FollowParams = compose<React.ComponentType<OwnProps>>(
       object().shape({
         [FIELDS.fixedVolume]: number()
           .min(0, t("follow-program.params.validation.fixedVolume-min"))
-          .max(99999, t("follow-program.params.validation.fixedVolume-max")),
+          .lessThan(
+            100000,
+            t("follow-program.params.validation.fixedVolume-max")
+          ),
         [FIELDS.percent]: number()
           .min(1, t("follow-program.params.validation.percent-min"))
-          .max(999, t("follow-program.params.validation.percent-max")),
+          .lessThan(1000, t("follow-program.params.validation.percent-max"))
+          .nullable(true),
         [FIELDS.openTolerancePercent]: number()
           .required(t("follow-program.params.validation.tolerance-required"))
           .min(

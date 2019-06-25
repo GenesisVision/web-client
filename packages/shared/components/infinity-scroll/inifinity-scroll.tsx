@@ -1,6 +1,7 @@
 import "./infinity-scroll.scss";
 
 import React, { createRef } from "react";
+
 class InfinityScroll extends React.PureComponent<Props> {
   scroll: React.RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
   container: React.RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
