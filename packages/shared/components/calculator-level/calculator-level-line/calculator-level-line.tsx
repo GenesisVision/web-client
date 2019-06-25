@@ -9,7 +9,7 @@ const getMarks = (start: number, end: number, value: number) =>
   new Array(end - start + 1).fill(start).reduce((acc, curr, idx) => {
     const mark = curr + idx;
     const positionMark = (((mark - start) / (end - start)) * 100).toFixed(2);
-    acc[mark] = { positionMark, active: value > mark };
+    acc[mark] = { positionMark, active: value >= mark };
     return acc;
   }, {});
 
