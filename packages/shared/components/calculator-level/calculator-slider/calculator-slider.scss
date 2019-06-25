@@ -29,9 +29,10 @@
 
   .rc-slider-handle {
     background-color: $panel-background-color;
-    width: 15px;
-    height: 15px;
-    margin-left: -7.5px;
+    width: 17px;
+    height: 17px;
+    margin-left: -8.5px;
+    margin-top: -6px;
     border: solid 3px $primary-color;
 
     &:hover {
@@ -43,7 +44,7 @@
     &:focus {
       border-color: $primary-color;
       background-color: $panel-background-color;
-      box-shadow: none;
+      box-shadow: 0 0 5px $primary-color;
     }
   }
 
@@ -55,7 +56,7 @@
   }
 
   &__heading {
-    @include adaptive-padding(bottom, $padding-xxsmall);
+    margin-bottom: $padding-xxsmall/2;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,10 +64,11 @@
 
   &__title {
     @include font-size($font-size-small);
+    color: #e6edf1;
   }
 
   &__value {
     @include font-size(15px);
-    font-weight: 500;
+    font-weight: 600;
   }
 }
