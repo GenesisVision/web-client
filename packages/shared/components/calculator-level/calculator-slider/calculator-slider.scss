@@ -43,6 +43,7 @@
     &:focus {
       border-color: $primary-color;
       background-color: $panel-background-color;
+      box-shadow: none;
     }
   }
 
@@ -50,6 +51,7 @@
   .rc-slider-mark-text-active {
     @include font-size($font-size-small);
     color: $text-color;
+    white-space: nowrap;
   }
 
   &__heading {
