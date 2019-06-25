@@ -1,12 +1,11 @@
 import { FundFacet } from "gv-api-web";
 import { FacetDataType } from "shared/components/facet-container/facet-container";
-import getParams from "shared/utils/get-params";
-import { MiddlewareDispatch, TGetState } from "shared/utils/types";
-
 import {
   FUNDS_FACET_ROUTE,
   FUNDS_SLUG_URL_PARAM_NAME
-} from "../../../../routes/funds.routes";
+} from "shared/routes/funds.routes";
+import getParams from "shared/utils/get-params";
+import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
 export const getCurrentFacet = () => (
   dispatch: MiddlewareDispatch,
