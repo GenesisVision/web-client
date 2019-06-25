@@ -30,7 +30,7 @@ const _CalculatorOutput: React.FC<Props> = ({
             value={value}
             thousandSeparator={" "}
             displayType="text"
-            suffix={valueSuffix}
+            suffix={valueSuffix ? ` ${valueSuffix}` : ""}
           />
         </span>
       </StatisticItem>
