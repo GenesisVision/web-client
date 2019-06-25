@@ -23,7 +23,9 @@ export const toggleFavoriteFundDispatchable: ToggleFavoriteDispatchableType = (
   };
 
   dispatch(
-    isFavorite ? removeFavoriteFundAction(requestData) : addFavoriteFundAction(requestData)
+    isFavorite
+      ? removeFavoriteFundAction(requestData)
+      : addFavoriteFundAction(requestData)
   );
 };
 

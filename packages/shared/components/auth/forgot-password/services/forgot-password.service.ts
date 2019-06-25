@@ -76,9 +76,7 @@ export const sendForgotPasswordEmail = () => (
   });
 };
 
-export const navigateToPasswordRestore = () => (
-  dispatch: Dispatch
-) => {
+export const navigateToPasswordRestore = () => (dispatch: Dispatch) => {
   dispatch(clearDataActionFactory(EMAIL_PENDING).clearData());
   dispatch(push(PASSWORD_RESTORE_ROUTE));
 };
