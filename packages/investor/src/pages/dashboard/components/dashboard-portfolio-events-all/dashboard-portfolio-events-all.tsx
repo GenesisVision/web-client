@@ -9,7 +9,6 @@ import { fetchPortfolioEvents } from "shared/components/programs/program-details
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { allEventsSelector } from "shared/reducers/platform-reducer";
 
-export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 const _PortfolioEventsAllComponent: React.FC<Props> = ({ role, t, events }) => (
   <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
     <PortfolioEventsTableContainer
