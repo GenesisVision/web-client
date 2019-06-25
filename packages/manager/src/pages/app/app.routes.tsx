@@ -2,36 +2,27 @@ import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants"
 import createFundPage from "pages/create-fund/create-fund.page";
 import createProgramPage from "pages/create-program/create-program.page";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
-import DashboardRoutes, {
-  DASHBOARD_ROUTE
-} from "pages/dashboard/dashboard.routes";
+import DashboardRoutes, { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import ProfileRoutes from "pages/profile/profile.routes";
-import ProgramsRoutes  from "pages/programs/programs.routes";
+import ProgramsRoutes from "pages/programs/programs.routes";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { FUNDS_ROUTE } from "shared/routes/funds.routes";
 import GlobalSearchPage from "shared/components/global-search/global-search.page";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
-import ManagerContainer, {
-  MANAGER_DETAILS_ROUTE_REGEXP
-} from "shared/components/manager/manager.container";
+import ManagerContainer from "shared/components/manager/manager.container";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
-import NotificationRoutes, {
-  NOTIFICATIONS_ROUTE
-} from "shared/components/notifications/notifications.routes";
+import NotificationRoutes, { NOTIFICATIONS_ROUTE } from "shared/components/notifications/notifications.routes";
 import PrivateRoute from "shared/components/private-route/private-route";
 import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
-import WalletWithdrawConfirmPage, {
-  WALLET_WITHDRAW_CONFIRM_ROUTE
-} from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
-import WalletTotalPage, {
-  WALLET_TOTAL_PAGE_ROUTE
-} from "shared/components/wallet/wallet.routes";
+import WalletWithdrawConfirmPage, { WALLET_WITHDRAW_CONFIRM_ROUTE } from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
+import WalletTotalPage, { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import { HOME_ROUTE } from "shared/routes/app.routes";
+import { FUNDS_ROUTE } from "shared/routes/funds.routes";
+import { MANAGER_DETAILS_ROUTE_REGEXP } from "shared/routes/manager.routes";
+import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
 import FundsRoutes from "../funds/funds.routes";
 import AppLayout from "./components/app-layout/app-layout";
-import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
 const AppRoutes = () => (
   <AppLayout>
