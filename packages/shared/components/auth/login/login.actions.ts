@@ -6,8 +6,6 @@ import { ITwoFactorState } from "./reducers/two-factor.reducer";
 
 export const LOGIN = "LOGIN";
 export const LOGIN_TWO_FACTOR = "LOGIN_TWO_FACTOR";
-export const TWO_FACTOR_CODE = "twoFactorCode";
-export const RECOVERY_CODE = "recoveryCode";
 
 export enum CODE_TYPE {
   TWO_FACTOR = "twoFactorCode",

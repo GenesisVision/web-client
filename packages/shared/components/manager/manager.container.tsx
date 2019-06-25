@@ -13,12 +13,6 @@ import ManagerPage from "./manager.page";
 import ManagerPageLoader from "./manager.page.loader";
 import { fetchManagerProfile } from "./services/manager.service";
 
-export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
-
-export const MANAGERS_ROUTE = "/managers";
-export const MANAGER_DETAILS_ROUTE = `${MANAGERS_ROUTE}/:${MANAGER_SLUG_URL_PARAM_NAME}`;
-export const MANAGER_DETAILS_ROUTE_REGEXP = `${MANAGERS_ROUTE}/:${MANAGER_SLUG_URL_PARAM_NAME}(${SLUG_URL_REGEXP})`;
-
 class _ManagerContainer extends React.PureComponent<Props, State> {
   state = {
     managerProfile: undefined,
