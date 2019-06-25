@@ -2,7 +2,7 @@ import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants"
 import createFundPage from "pages/create-fund/create-fund.page";
 import createProgramPage from "pages/create-program/create-program.page";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
-import DashboardRoutes, { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
+import DashboardRoutes from "pages/dashboard/dashboard.routes";
 import ProfileRoutes from "pages/profile/profile.routes";
 import ProgramsRoutes from "pages/programs/programs.routes";
 import React from "react";
@@ -17,6 +17,7 @@ import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
 import WalletWithdrawConfirmPage, { WALLET_WITHDRAW_CONFIRM_ROUTE } from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
 import WalletTotalPage, { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import { HOME_ROUTE } from "shared/routes/app.routes";
+import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { FUNDS_ROUTE } from "shared/routes/funds.routes";
 import { MANAGER_DETAILS_ROUTE_REGEXP } from "shared/routes/manager.routes";
 import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";

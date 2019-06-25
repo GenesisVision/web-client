@@ -9,8 +9,8 @@ import {
   compose
 } from "redux";
 import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
+import { DASHBOARD_EVENTS_ROUTE } from "shared/routes/dashboard.routes";
 
-import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
 import { dashboardEventsSelector } from "../../reducers/dashboard-events.reducer";
 import { getPortfolioEvents } from "../../services/dashboard.service";
 import DashboardPortfolioEmptyView from "./dashboard-portfolio-empty-view";
