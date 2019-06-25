@@ -5,7 +5,7 @@ import {
   FUNDS_FACET_ROUTE,
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
-} from "shared/components/funds/funds.routes";
+} from "shared/routes/funds.routes";
 import {
   ComposeFiltersAllType,
   TFilter

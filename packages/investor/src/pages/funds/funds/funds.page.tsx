@@ -7,7 +7,7 @@ import {
   FUNDS_EXPLORE_TAB_NAME,
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
-} from "shared/components/funds/funds.routes";
+} from "shared/routes/funds.routes";
 import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
