@@ -2,6 +2,7 @@ import "../create-fund-settings.scss";
 
 import classnames from "classnames";
 import { FundAssetPartWithIcon } from "gv-api-web";
+import { PlatformAssetFull } from "modules/reallocate/components/reallocate-field";
 import * as React from "react";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import GVTextField from "shared/components/gv-text-field";
@@ -14,18 +15,21 @@ import Regulator from "shared/components/regulator/regulator";
 
 class CreateFundSettingsAddAsset extends React.PureComponent<Props, State> {
   state = {
-    filteredAssets: this.props.assets
+    searchValue: ""
   };
+
   search = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      filteredAssets: this.filtering(e.target.value, this.props.assets)
+      searchValue: e.target.value
     });
   };
-  filtering = (searchValue: string, assets: FundAssetPartWithIcon[]) => {
+
+  filtering = () => {
+    const { searchValue } = this.state;
     if (!searchValue) {
-      return assets;
+      return this.props.assets;
     }
-    return assets.filter(
+    return this.props.assets.filter(
       item =>
         ~(item.name + item.asset)
           .toUpperCase()
@@ -41,7 +45,7 @@ class CreateFundSettingsAddAsset extends React.PureComponent<Props, State> {
       handleUp,
       handlePercentChange
     } = this.props;
-    const { filteredAssets } = this.state;
+    const filteredAssets = this.filtering();
     return (
       <Popover
         horizontal={HORIZONTAL_POPOVER_POS.LEFT}
@@ -66,8 +70,8 @@ class CreateFundSettingsAddAsset extends React.PureComponent<Props, State> {
           <div className="popover-add__assets">
             <table>
               <tbody>
-                {filteredAssets.map((asset, idx) => (
-                  <tr key={idx} className="popover-add__asset">
+                {filteredAssets.map(asset => (
+                  <tr key={asset.asset} className="popover-add__asset">
                     <td className="popover-add__asset-icon-container">
                       <FundAssetImage
                         url={asset.icon}
@@ -118,14 +122,14 @@ export default CreateFundSettingsAddAsset;
 
 interface Props {
   anchor?: EventTarget;
-  assets: FundAssetPartWithIcon[];
+  assets: PlatformAssetFull[];
   handleCloseDropdown(): void;
-  handleDown(asset: FundAssetPartWithIcon): () => void;
-  handleUp(asset: FundAssetPartWithIcon): () => void;
+  handleDown(asset: PlatformAssetFull): () => void;
+  handleUp(asset: PlatformAssetFull): () => void;
   handlePercentChange(
     asset: FundAssetPartWithIcon
   ): (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 interface State {
-  filteredAssets: FundAssetPartWithIcon[];
+  searchValue: string;
 }

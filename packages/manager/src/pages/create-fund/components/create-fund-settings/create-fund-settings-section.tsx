@@ -61,6 +61,7 @@ class CreateFundSettingsSection extends React.PureComponent<
       notifyError
     } = this.props;
     const { wallet, rate } = this.state;
+    if (!rate) return null;
     return (
       <CreateFundSettings
         fetchWallets={fetchWallets}
@@ -73,7 +74,7 @@ class CreateFundSettingsSection extends React.PureComponent<
         minimumDepositAmount={minimumDepositAmount}
         managerMaxExitFee={managerMaxExitFee}
         managerMaxEntryFee={managerMaxEntryFee}
-        rate={rate!}
+        rate={rate}
         wallet={wallet}
         notifyError={notifyError}
       />

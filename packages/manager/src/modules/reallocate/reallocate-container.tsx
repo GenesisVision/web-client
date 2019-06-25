@@ -19,28 +19,8 @@ import ReallocateForm, {
 import { updateAssets } from "./services/reallocate.services";
 
 class _ReallocateContainer extends React.PureComponent<Props, State> {
-  state = { errorMessage: "", assets: [] };
+  state = { errorMessage: "" };
 
-  getFillAssets = (
-    target: PlatformAsset[],
-    data: FundAssetPartWithIcon[]
-  ): FundAssetPartWithIcon[] => {
-    const fillAssets = target.map(item => ({ ...item, percent: 0 }));
-    data.forEach(dataItem => {
-      const targetAsset = fillAssets.find(x => x.name === dataItem.name);
-      if (targetAsset) {
-        targetAsset.percent = dataItem.percent;
-      }
-    });
-    return fillAssets;
-  };
-
-  componentDidMount() {
-    const assets = this.getFillAssets(this.props.fundAssets, this.props.assets);
-    this.setState({
-      assets: assets
-    });
-  }
   handleApply = (values: IReallocateFormValues) => {
     const { service, id, onApply } = this.props;
     service
@@ -59,17 +39,16 @@ class _ReallocateContainer extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { open } = this.props;
-    const { assets } = this.state;
+    const { open, fundAssets } = this.props;
     return (
       <Dialog open={open} onClose={this.handleClose}>
-        {assets.length ? (
-          <ReallocateForm
-            assets={assets}
-            onSubmit={this.handleApply}
-            errorMessage={this.state.errorMessage}
-          />
-        ) : (
+        {fundAssets.length ? null : (
+          // <ReallocateForm
+          //   fundAssets={fundAssets}
+          //   assets={assets}
+          //   onSubmit={this.handleApply}
+          //   errorMessage={this.state.errorMessage}
+          // />
           <DialogLoader />
         )}
       </Dialog>
@@ -113,7 +92,6 @@ interface DispatchProps {
 
 interface State {
   errorMessage: string;
-  assets: FundAssetPartWithIcon[];
 }
 
 const ReallocateContainer = connect<

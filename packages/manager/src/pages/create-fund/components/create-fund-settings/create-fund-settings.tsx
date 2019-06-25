@@ -2,13 +2,9 @@ import "shared/components/deposit-details/deposit-details.scss";
 
 import "./create-fund-settings.scss";
 
-import { Field, FieldProps, InjectedFormikProps, withFormik } from "formik";
-import {
-  FundAssetPart,
-  FundAssetPartWithIcon,
-  PlatformAsset,
-  WalletData
-} from "gv-api-web";
+import { InjectedFormikProps, withFormik } from "formik";
+import { FundAssetPart, PlatformAsset, WalletData } from "gv-api-web";
+import ReallocateField from "modules/reallocate/components/reallocate-field";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
@@ -31,34 +27,13 @@ import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
-import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
-import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-block/create-fund-settings-assets-block";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
-import ErrorNotifier from "./error-notifier/error-notifier";
 
 class _CreateFundSettings extends React.PureComponent<
-  InjectedFormikProps<ICreateFundSettingsProps, ICreateFundSettingsFormValues>,
-  State
+  InjectedFormikProps<ICreateFundSettingsProps, ICreateFundSettingsFormValues>
 > {
-  state = {
-    anchor: undefined,
-    assets: this.props.assets.map(asset => {
-      return {
-        ...asset,
-        percent: 0
-      };
-    }),
-    remainder: 100
-  };
-
   onChangeDepositWallet = (name: ISelectChangeEvent, target: JSX.Element) => {
-    const {
-      setFieldValue,
-      values,
-      wallets,
-      fetchWallets,
-      fundCurrency: currency
-    } = this.props;
+    const { setFieldValue, values, wallets, fetchWallets } = this.props;
     const depositWalletCurrency = target.props.value;
     setFieldValue("depositWalletCurrency", depositWalletCurrency);
     setFieldValue(
@@ -68,60 +43,7 @@ class _CreateFundSettings extends React.PureComponent<
     );
     fetchWallets();
   };
-  handlePercentChange = (asset: FundAssetPartWithIcon) => (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    let value = +e.target.value;
-    if (isNaN(value)) return;
-    if (value > this.getRemainderWithoutSelected(asset))
-      value = this.getRemainderWithoutSelected(asset);
-    asset.percent = value;
-    this.updateAssets();
-  };
 
-  handleDown = (asset: FundAssetPartWithIcon) => () => {
-    if (asset.percent === 0) return;
-    asset.percent--;
-    this.updateAssets();
-  };
-  handleUp = (asset: FundAssetPartWithIcon) => () => {
-    if (this.state.remainder - 1 < 0) return;
-    asset.percent++;
-    this.updateAssets();
-  };
-  getRemainder = () => {
-    return 100 - this.state.assets.reduce((sum, item) => sum + item.percent, 0);
-  };
-  getRemainderWithoutSelected = (asset: FundAssetPartWithIcon) => {
-    return (
-      100 -
-      this.state.assets
-        .filter(item => item.asset !== asset.asset)
-        .reduce((sum, item) => sum + item.percent, 0)
-    );
-  };
-  updateAssets = () => {
-    const newRemainder = this.getRemainder();
-    this.setState({
-      //assets: [...this.state.assets],
-      remainder: newRemainder
-    });
-    this.props.setFieldValue("remainder", newRemainder);
-    this.props.setFieldValue(
-      "assets",
-      this.state.assets.filter(item => item.percent > 0)
-    );
-  };
-  removeHandle = (currency: string) => () => {
-    this.state.assets.find(item => item.asset === currency)!.percent = 0;
-    this.updateAssets();
-  };
-  handleOpenDropdown = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    this.setState({ anchor: event.currentTarget });
-  };
-  handleCloseDropdown = () => this.setState({ anchor: undefined });
   setMaxAmount = (available: number, currency: string) => () => {
     const { setFieldValue } = this.props;
     setFieldValue(
@@ -144,7 +66,6 @@ class _CreateFundSettings extends React.PureComponent<
     validateFraction(value, currency);
 
   render() {
-    const { anchor, assets, remainder } = this.state;
     const {
       fundCurrency,
       wallets,
@@ -157,7 +78,8 @@ class _CreateFundSettings extends React.PureComponent<
       managerMaxExitFee,
       managerMaxEntryFee,
       rate,
-      minimumDepositAmount
+      minimumDepositAmount,
+      assets
     } = this.props;
     if (!wallets || !wallets.length) return null;
     const { depositAmount, description, title } = values;
@@ -255,39 +177,10 @@ class _CreateFundSettings extends React.PureComponent<
             {t("manager.create-fund-page.settings.asset-selection")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
-            <div className="create-fund-settings__description">
-              <Field
-                name="remainder"
-                render={({
-                  field,
-                  form
-                }: FieldProps<ICreateFundSettingsFormValues>) => (
-                  <ErrorNotifier
-                    placeholder={t(
-                      "manager.create-fund-page.settings.fields.asset-description"
-                    )}
-                    {...field}
-                    {...form}
-                  />
-                )}
-              />
-            </div>
-            <div className="create-fund-settings__error">
-              <Field
-                name="assets"
-                render={({
-                  field,
-                  form
-                }: FieldProps<ICreateFundSettingsFormValues>) => (
-                  <ErrorNotifier {...field} {...form} />
-                )}
-              />
-            </div>
-            <CreateFundSettingsAssetsComponent
-              assets={assets.filter(item => item.percent > 0)}
-              remainder={remainder}
-              removeHandle={this.removeHandle}
-              addHandle={this.handleOpenDropdown}
+            <GVFormikField
+              name={CREATE_FUND_FIELDS.assets}
+              component={ReallocateField}
+              assets={assets}
             />
           </div>
           <div className="create-fund-settings__subheading">
@@ -429,32 +322,25 @@ class _CreateFundSettings extends React.PureComponent<
               </div>
             </div>
           </div>
+
+          <div className="create-fund-settings__navigation">
+            <GVButton
+              title={t("buttons.create-fund")}
+              color="primary"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {t("buttons.create-fund")}
+            </GVButton>
+            <GVButton
+              variant="text"
+              onClick={navigateBack}
+              className="create-fund-settings__navigation-back"
+            >
+              <>&larr; {t("buttons.back")}</>
+            </GVButton>
+          </div>
         </form>
-        <div className="create-fund-settings__navigation">
-          <GVButton
-            title={t("buttons.create-fund")}
-            color="primary"
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {t("buttons.create-fund")}
-          </GVButton>
-          <GVButton
-            variant="text"
-            onClick={navigateBack}
-            className="create-fund-settings__navigation-back"
-          >
-            <>&larr; {t("buttons.back")}</>
-          </GVButton>
-        </div>
-        <CreateFundSettingsAddAsset
-          anchor={anchor}
-          handleCloseDropdown={this.handleCloseDropdown}
-          assets={assets}
-          handleDown={this.handleDown}
-          handleUp={this.handleUp}
-          handlePercentChange={this.handlePercentChange}
-        />
       </div>
     );
   }
@@ -529,9 +415,3 @@ export interface ICreateFundSettingsFormValues {
 export interface ICreateFundSettingsProps
   extends InjectedTranslateProps,
     OwnProps {}
-
-interface State {
-  anchor: EventTarget | undefined;
-  remainder: number;
-  assets: PlatformAsset[];
-}

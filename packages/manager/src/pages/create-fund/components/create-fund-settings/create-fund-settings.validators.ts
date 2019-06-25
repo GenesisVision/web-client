@@ -1,3 +1,4 @@
+import { FundAssetPart } from "gv-api-web";
 import {
   assetDescriptionShape,
   assetTitleShape
@@ -60,10 +61,14 @@ const createFundSettingsValidationSchema = (
         props.managerMaxExitFee,
         "Exit fee must be less than  " + props.managerMaxExitFee + " %"
       ),
-    // [CREATE_FUND_FIELDS.remainder]: number()
-    //   .required(t("manager.create-fund-page.settings.validation.assets-share"))
-    //   .max(0, t("manager.create-fund-page.settings.validation.assets-share")),
     [CREATE_FUND_FIELDS.assets]: array()
+      .test(
+        CREATE_FUND_FIELDS.assets,
+        t("manager.create-fund-page.settings.validation.assets-share"),
+        (val: FundAssetPart[]) => {
+          return val.reduce((acc, next) => acc + next.percent, 0) == 100;
+        }
+      )
       .required(t("manager.create-fund-page.settings.validation.assets-count"))
       .min(2, t("manager.create-fund-page.settings.validation.assets-count"))
   });
