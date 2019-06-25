@@ -2,8 +2,8 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { CancelablePromise, OrderModel } from "gv-api-web";
 import moment from "moment";
-import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
@@ -31,6 +31,8 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
+
+import download from "../../../../utils/download";
 
 const DECIMAL_SCALE = 8;
 
@@ -193,23 +195,23 @@ const _DownloadButtonToolbar: React.FC<IDownloadButtonToolbar> = ({
   programId,
   getTradeExport
 }) => {
-  const [file, setFile] = useState<Blob | null>(null);
+  // const [file, setFile] = useState<Blob | null>(null);
 
-  useEffect(
-    () => {
-      getTradeExport &&
-        getTradeExport(programId, filtering!.dateRange).then(data => {
-          setFile(data);
-        });
-    },
-    [programId, getTradeExport]
-  );
-  if (!file) return null;
+  const handleClick = () => {
+    getTradeExport &&
+      getTradeExport(programId, filtering!.dateRange).then(data =>
+        download(data, "trades-history.xlsx")
+      );
+  };
+
   return (
     <div className="dashboard__button-container dashboard__button">
-      <a href={URL.createObjectURL(file)} download={"trades-history.xlsx"}>
+      {/*<a href={URL.createObjectURL(file)} download={"trades-history.xlsx"}>*/}
+      {/*  {t("program-details-page.history.trades.download")}*/}
+      {/*</a>*/}
+      <GVButton color="primary" variant="text" onClick={handleClick}>
         {t("program-details-page.history.trades.download")}
-      </a>
+      </GVButton>
     </div>
   );
 };
