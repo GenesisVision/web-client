@@ -4,6 +4,10 @@
 .calculator-slider {
   width: 100%;
 
+  @include media-breakpoint-landscape-phone() {
+    max-width: 255px;
+  }
+
   .rc-slider {
     margin-bottom: $padding-xsmall;
   }
