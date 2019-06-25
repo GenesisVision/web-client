@@ -84,7 +84,7 @@ class _CreateFundContainer extends React.PureComponent<Props, State> {
     return (
       <div className="create-fund-container">
         <div>
-          {!isPending && (
+          {!isPending && wallets && (
             <CreateFundSettingsSection
               fetchWallets={service.fetchWallets}
               wallets={wallets}

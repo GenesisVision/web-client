@@ -87,6 +87,7 @@ class ReallocateField extends React.PureComponent<Props, State> {
   handleOpenDropdown: React.MouseEventHandler = event => {
     this.setState({ anchor: event.currentTarget });
   };
+
   handleCloseDropdown = () => {
     this.setState({ anchor: undefined });
     this.props.onChange({
@@ -97,14 +98,28 @@ class ReallocateField extends React.PureComponent<Props, State> {
         name: this.props.name
       }
     });
+    this.handleBlur();
+  };
+
+  handleBlur = (): void => {
+    const { onBlur, name } = this.props;
+    if (onBlur) {
+      onBlur({
+        target: {
+          name
+        }
+      });
+    }
   };
 
   render() {
-    const { error } = this.props;
+    const { error, touched } = this.props;
     const { anchor, assets, remainder } = this.state;
     return (
       <>
-        {error !== undefined && <div className="form-error">{error}</div>}
+        {error !== undefined && touched && (
+          <div className="form-error">{error}</div>
+        )}
         <CreateFundSettingsAssetsComponent
           assets={assets.filter(item => item.percent > 0) || []}
           remainder={remainder}
@@ -131,9 +146,15 @@ interface Props {
   value: FundAssetPart[];
   assets: PlatformAsset[];
   error?: string;
+  touched: boolean;
   onChange(event: {
     target: {
       value: FundAssetPart[];
+      name: string;
+    };
+  }): void;
+  onBlur(event: {
+    target: {
       name: string;
     };
   }): void;

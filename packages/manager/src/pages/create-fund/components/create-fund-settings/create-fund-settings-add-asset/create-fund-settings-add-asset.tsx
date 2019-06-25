@@ -64,6 +64,7 @@ class CreateFundSettingsAddAsset extends React.PureComponent<Props, State> {
               adornment={<SearchIcon secondary />}
               adornmentPosition="start"
               onChange={this.search}
+              value={this.state.searchValue}
               autoFocus
             />
           </div>
