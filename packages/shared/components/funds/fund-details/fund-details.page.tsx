@@ -10,7 +10,7 @@ import {
   getFundDescription,
   getFundStatistic
 } from "shared/components/funds/fund-details/services/fund-details.service";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found";
 import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";

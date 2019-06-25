@@ -7,7 +7,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import GlobalSearchPage from "shared/components/global-search/global-search.page";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import ManagerContainer from "shared/components/manager/manager.container";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found";
 import NotificationRoutes, {
   NOTIFICATIONS_ROUTE
 } from "shared/components/notifications/notifications.routes";
@@ -18,9 +18,7 @@ import WalletWithdrawConfirmPage, {
 } from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import { HOME_ROUTE } from "shared/routes/app.routes";
-import  {
-  DASHBOARD_ROUTE
-} from "shared/routes/dashboard.routes";
+import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { FUNDS_ROUTE } from "shared/routes/funds.routes";
 import { MANAGER_DETAILS_ROUTE_REGEXP } from "shared/routes/manager.routes";
 import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";

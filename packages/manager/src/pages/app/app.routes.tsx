@@ -10,12 +10,18 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import GlobalSearchPage from "shared/components/global-search/global-search.page";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import ManagerContainer from "shared/components/manager/manager.container";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
-import NotificationRoutes, { NOTIFICATIONS_ROUTE } from "shared/components/notifications/notifications.routes";
+import NotFoundPage from "shared/components/not-found/not-found";
+import NotificationRoutes, {
+  NOTIFICATIONS_ROUTE
+} from "shared/components/notifications/notifications.routes";
 import PrivateRoute from "shared/components/private-route/private-route";
 import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
-import WalletWithdrawConfirmPage, { WALLET_WITHDRAW_CONFIRM_ROUTE } from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
-import WalletTotalPage, { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
+import WalletWithdrawConfirmPage, {
+  WALLET_WITHDRAW_CONFIRM_ROUTE
+} from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
+import WalletTotalPage, {
+  WALLET_TOTAL_PAGE_ROUTE
+} from "shared/components/wallet/wallet.routes";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { FUNDS_ROUTE } from "shared/routes/funds.routes";

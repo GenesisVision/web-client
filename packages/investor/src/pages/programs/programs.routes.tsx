@@ -1,19 +1,19 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found";
 import PrivateRoute from "shared/components/private-route/private-route";
 import ProgramsFacetPage from "shared/components/programs/programs-facet/programs-facet.page";
+import {
+  PROGRAMS_FACET_ROUTE_REGEX,
+  PROGRAMS_FAVORITES_TAB_ROUTE,
+  PROGRAMS_RATING_ROUTE,
+  PROGRAMS_ROUTE,
+  PROGRAM_DETAILS_ROUTE_REGEX
+} from "shared/routes/programs.routes";
 
 import ProgramDetailsPage from "./program-details/program-details.page";
 import ProgramsRatingPage from "./programs-rating/programs-rating.page";
 import ProgramsPage from "./programs/programs.page";
-import {
-  PROGRAM_DETAILS_ROUTE_REGEX,
-  PROGRAMS_FACET_ROUTE_REGEX,
-  PROGRAMS_FAVORITES_TAB_ROUTE,
-  PROGRAMS_RATING_ROUTE,
-  PROGRAMS_ROUTE
-} from "shared/routes/programs.routes";
 
 const ProgramsRoutes: React.FC = () => (
   <Switch>
