@@ -181,6 +181,7 @@ interface OwnProps {
   noAbsolute?: boolean;
   className?: string;
   fixed?: boolean;
+  disableBackdrop?: boolean;
 }
 interface State {
   windowWidth: number;
