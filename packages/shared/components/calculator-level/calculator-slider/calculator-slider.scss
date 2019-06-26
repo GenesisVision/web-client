@@ -49,7 +49,7 @@
   }
 
   .rc-slider-mark {
-    top: 15px;
+    top: 13px;
   }
 
   .rc-slider-mark-text,
@@ -73,6 +73,7 @@
 
   &__value {
     @include font-size(15px);
+    color: $main-color;
     font-weight: 600;
   }
 }
