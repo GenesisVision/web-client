@@ -1,7 +1,6 @@
 import "./asset-status.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -11,10 +10,7 @@ import { STATUS } from "shared/constants/constants";
 import AssetStatusLabel from "./asset-status-label";
 import AssetStatusRequests from "./asset-status-requests";
 
-class AssetStatus extends React.PureComponent<
-  Props & InjectedTranslateProps,
-  State
-> {
+class AssetStatus extends React.PureComponent<Props, State> {
   state = {
     anchor: undefined
   };
