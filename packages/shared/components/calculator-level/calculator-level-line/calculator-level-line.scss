@@ -23,7 +23,7 @@
 
   &__mark {
     @include font-size($font-size-small);
-    top: 15px;
+    top: 10px;
     position: absolute;
     transform: translateX(-50%);
     color: $text-color;
