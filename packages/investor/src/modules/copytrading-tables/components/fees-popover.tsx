@@ -1,30 +1,58 @@
 import { OrderSignalModel } from "gv-api-web";
-import { ProviderFees } from "modules/copytrading-tables/components/provider-fee";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import Tooltip from "shared/components/tooltip/tooltip";
 
+const Commission: React.FC<{
+  title: string;
+  value: number;
+  currency: string;
+}> = ({ title, value, currency }) => (
+  <div className={"fees-tooltip__commission"}>
+    <span className={"fees-tooltip__title"}>{title}</span>
+    <span className={"fees-tooltip__value"}>
+      {value} <span className={"fees-tooltip__currency"}>{currency}</span>
+    </span>
+  </div>
+);
+
 const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
-  const providers = trade.providers.filter(
-    provider => provider.fees.length > 0
-  );
-  const isOnlyOne = providers.length === 1;
   return (
     <Tooltip
+      horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+      className={"fees-tooltip"}
       render={() => (
-        <div className="fees-popover">
-          <StatisticItem label={t(`investor.copytrading-tables.fees.trading`)}>
-            {`${trade.originalCommission} ${trade.originalCommissionCurrency}`}
-          </StatisticItem>
-          {providers.map(provider => (
-            <ProviderFees
-              isOnlyOne={isOnlyOne}
-              key={provider.programId}
-              provider={provider}
+        <div className="profile-menu">
+          <div className="profile-menu__header">
+            <Commission
+              title={t(`investor.copytrading-tables.fees.trading`)}
+              value={trade.originalCommission}
+              currency={trade.originalCommissionCurrency}
             />
-          ))}
+            {trade.totalCommissionByType.map((commission, index) => {
+              return (
+                <Commission
+                  key={index}
+                  title={t(
+                    `investor.copytrading-tables.fees.${commission.type}`
+                  )}
+                  value={commission.amount}
+                  currency={commission.currency}
+                />
+              );
+            })}
+          </div>
+          {trade.totalCommissionByType.length > 0 ? (
+            <div className={"fees-tooltip__footer "}>
+              <Commission
+                title={t(`investor.copytrading-tables.fees.total`)}
+                value={trade.totalCommission}
+                currency={trade.currency}
+              />
+            </div>
+          ) : null}
         </div>
       )}
     >

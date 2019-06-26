@@ -2,180 +2,97 @@ import "shared/components/deposit-details/deposit-details.scss";
 
 import "./create-fund-settings.scss";
 
-import { Field, withFormik } from "formik";
-import React from "react";
-import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
-import InputImage from "shared/components/form/input-image/input-image";
+import { InjectedFormikProps, withFormik } from "formik";
+import { FundAssetPart, PlatformAsset, WalletData } from "gv-api-web";
+import ReallocateField from "modules/reallocate/components/reallocate-field";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import NumberFormat, { NumberFormatValues } from "react-number-format";
+import { compose } from "redux";
+import InputImage, {
+  IImageValue
+} from "shared/components/form/input-image/input-image";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import GVTextField from "shared/components/gv-text-field";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import Select from "shared/components/select/select";
+import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
+import Select, { ISelectChangeEvent } from "shared/components/select/select";
 import FundDefaultImage from "shared/media/program-default-image.svg";
-import rateApi from "shared/services/api-client/rate-api";
 import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
-import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
-import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-block/create-fund-settings-assets-block";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
-import ErrorNotifier from "./error-notifier/error-notifier";
 
-class CreateFundSettings extends React.PureComponent {
-  state = {
-    anchor: null,
-    assets: this.props.assets.map(asset => {
-      return {
-        ...asset,
-        percent: 0
-      };
-    }),
-    remainder: 100
-  };
-  allowEntryFee = values => {
-    const { managerMaxEntryFee } = this.props.programsInfo;
+class _CreateFundSettings extends React.PureComponent<
+  InjectedFormikProps<ICreateFundSettingsProps, ICreateFundSettingsFormValues>
+> {
+  componentDidUpdate(prevProps: ICreateFundSettingsProps) {
+    const { validateForm, setFieldValue } = this.props;
+    if (prevProps.wallet !== this.props.wallet) {
+      setFieldValue(CREATE_FUND_FIELDS.depositWalletId, this.props.wallet.id);
+      setFieldValue(CREATE_FUND_FIELDS.depositAmount, "");
+    }
+    if (prevProps.rate !== this.props.rate) {
+      validateForm();
+    }
+  }
 
-    return allowValuesNumberFormat({ from: 0, to: managerMaxEntryFee })(values);
-  };
-
-  allowExitFee = values => {
-    const { managerMaxExitFee } = this.props.programsInfo;
-
-    return allowValuesNumberFormat({ from: 0, to: managerMaxExitFee })(values);
+  onChangeDepositWallet = (name: ISelectChangeEvent, target: JSX.Element) => {
+    this.props.onWalletChange(target.props.value);
   };
 
-  fetchRate = (fromCurrency, toCurrency) => {
-    rateApi.v10RateByFromByToGet(fromCurrency, toCurrency).then(rate => {
-      if (rate !== this.props.values.rate) {
-        this.props.setFieldValue("rate", rate);
-      }
-    });
-  };
-  onChangeDepositWallet = (name, target) => {
-    const {
-      setFieldValue,
-      values,
-      wallets,
-      fetchWallets,
-      currency
-    } = this.props;
-    const depositWalletCurrency = target.props.value;
-    setFieldValue("depositWalletCurrency", depositWalletCurrency);
-    setFieldValue(
-      "depositWalletId",
-      wallets.find(item => item.currency === (values && depositWalletCurrency))
-        .id
-    );
-    fetchWallets();
-    this.fetchRate(depositWalletCurrency, currency);
-  };
-  handlePercentChange = asset => e => {
-    let value = +e.target.value;
-    if (isNaN(value)) return;
-    if (value > this.getRemainderWithoutChoised(asset))
-      value = this.getRemainderWithoutChoised(asset);
-    asset.percent = value;
-    this.updateAssets();
-  };
-
-  handleDown = asset => () => {
-    if (asset.percent === 0) return;
-    asset.percent--;
-    this.updateAssets();
-  };
-  handleUp = asset => () => {
-    if (this.state.remainder - 1 < 0) return;
-    asset.percent++;
-    this.updateAssets();
-  };
-  getRemainder = () => {
-    return 100 - this.state.assets.reduce((sum, item) => sum + item.percent, 0);
-  };
-  getRemainderWithoutChoised = asset => {
-    return (
-      100 -
-      this.state.assets
-        .filter(item => item.asset !== asset.asset)
-        .reduce((sum, item) => sum + item.percent, 0)
-    );
-  };
-  updateAssets = () => {
-    const newRemainder = this.getRemainder();
-    this.setState({
-      assets: [...this.state.assets],
-      remainder: newRemainder
-    });
-    this.props.setFieldValue("remainder", newRemainder);
-    this.props.setFieldValue(
-      "assets",
-      this.state.assets.filter(item => item.percent > 0)
-    );
-  };
-  removeHandle = currency => () => {
-    this.state.assets.find(item => item.asset === currency).percent = 0;
-    this.updateAssets();
-  };
-  handleOpenDropdown = event => {
-    this.setState({ anchor: event.currentTarget });
-  };
-  handleCloseDropdown = () => this.setState({ anchor: null });
-  setMaxAmount = (available, currency) => () => {
+  setMaxAmount = (available: number, currency: string) => () => {
     const { setFieldValue } = this.props;
-    setFieldValue("depositAmount", formatCurrencyValue(available, currency));
+    setFieldValue(
+      CREATE_FUND_FIELDS.depositAmount,
+      formatCurrencyValue(available, currency)
+    );
   };
+
+  validateAndSubmit = (e?: React.FormEvent<HTMLFormElement> | undefined) => {
+    const { t, isValid, handleSubmit, notifyError } = this.props;
+    handleSubmit(e);
+
+    if (!isValid) {
+      notifyError(t("manager.create-fund-page.notifications.validate-error"));
+      if (e) e.preventDefault();
+    }
+  };
+
+  isAmountAllow = (currency: CurrencyEnum) => ({ value }: NumberFormatValues) =>
+    validateFraction(value, currency);
+
   render() {
-    const { anchor, assets, remainder } = this.state;
     const {
-      currency,
+      fundCurrency,
       wallets,
+      wallet,
       t,
       navigateBack,
       author,
       isSubmitting,
-      handleSubmit,
       values,
-      deposit,
-      programsInfo,
-      onValidateError,
-      setSubmitting,
-      isValid
+      managerMaxExitFee,
+      managerMaxEntryFee,
+      rate,
+      minimumDepositAmount,
+      assets
     } = this.props;
-    if (!wallets || !wallets.length) return null;
-    const {
-      depositWalletCurrency,
-      depositAmount,
-      description,
-      title,
-      rate
-    } = values;
+    const { depositAmount, description, title } = values;
+    const descriptionTrimmedLength = description.trim().length;
 
-    const onSubmit = () => {
-      createFundSettingsValidationSchema({
-        wallets,
-        t,
-        programsInfo,
-        deposit
-      })
-        .validate(values)
-        .then(() => {}, () => onValidateError());
-
-      handleSubmit(values, {
-        setSubmitting
-      });
-    };
-
-    const selectedWallet = wallets.find(
-      item => item.currency === (values && values.depositWalletCurrency)
-    );
     return (
       <div className="create-fund-settings">
-        <form className="create-fund-settings__form">
+        <form
+          className="create-fund-settings__form"
+          onSubmit={this.validateAndSubmit}
+        >
           <div className="create-fund-settings__subheading">
             <span className="create-fund-settings__block-number">01</span>
             {t("manager.create-fund-page.settings.main-settings")}
@@ -185,7 +102,7 @@ class CreateFundSettings extends React.PureComponent {
               <div className="create-fund-settings__item create-fund-settings__item--wider">
                 <GVFormikField
                   type="text"
-                  name="title"
+                  name={CREATE_FUND_FIELDS.title}
                   label={t("manager.create-fund-page.settings.fields.name")}
                   autoComplete="off"
                   component={GVTextField}
@@ -201,7 +118,7 @@ class CreateFundSettings extends React.PureComponent {
               <div className="create-fund-settings__item create-fund-settings__item--wider">
                 <GVFormikField
                   type="textarea"
-                  name="description"
+                  name={CREATE_FUND_FIELDS.description}
                   label={t(
                     "manager.create-fund-page.settings.fields.description"
                   )}
@@ -213,15 +130,16 @@ class CreateFundSettings extends React.PureComponent {
                       "manager.create-fund-page.settings.fields.description-requirements"
                     )}
                   </span>
-                  {description.length > 0 && (
+                  {descriptionTrimmedLength > 0 && (
                     <div className="create-fund-settings__description-chars">
                       <div className="create-fund-settings__description-chars-value">
-                        {description.length}
+                        {descriptionTrimmedLength}
                       </div>
                       <GVProgramPeriod
                         start={0}
                         end={500}
-                        value={description.length}
+                        value={descriptionTrimmedLength}
+                        variant="pie"
                       />
                     </div>
                   )}
@@ -263,33 +181,10 @@ class CreateFundSettings extends React.PureComponent {
             {t("manager.create-fund-page.settings.asset-selection")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
-            <div className="create-fund-settings__description">
-              <Field
-                name="remainder"
-                render={({ field, form }) => (
-                  <ErrorNotifier
-                    placeholder={t(
-                      "manager.create-fund-page.settings.fields.asset-description"
-                    )}
-                    {...field}
-                    {...form}
-                  />
-                )}
-              />
-            </div>
-            <div className="create-fund-settings__error">
-              <Field
-                name="assets"
-                render={({ field, form }) => (
-                  <ErrorNotifier {...field} {...form} />
-                )}
-              />
-            </div>
-            <CreateFundSettingsAssetsComponent
-              assets={assets.filter(item => item.percent > 0)}
-              remainder={remainder}
-              removeHandle={this.removeHandle}
-              addHandle={this.handleOpenDropdown}
+            <GVFormikField
+              name={CREATE_FUND_FIELDS.assets}
+              component={ReallocateField}
+              assets={assets}
             />
           </div>
           <div className="create-fund-settings__subheading">
@@ -300,50 +195,56 @@ class CreateFundSettings extends React.PureComponent {
             <div className="create-fund-settings__row">
               <div className="create-fund-settings__item">
                 <GVFormikField
-                  name="entryFee"
+                  name={CREATE_FUND_FIELDS.entryFee}
                   label={t(
                     "manager.create-fund-page.settings.fields.entry-fee"
                   )}
                   adornment="%"
-                  //isAllowed={this.allowEntryFee}
                   component={GVTextField}
                   InputComponent={NumberFormat}
                   autoComplete="off"
                   decimalScale={4}
+                  isAllowed={allowValuesNumberFormat({
+                    from: 0,
+                    to: managerMaxEntryFee
+                  })}
                 />
                 <Hint
                   content={t(
                     "manager.create-program-page.settings.hints.entry-fee"
                   )}
                   className="create-fund-settings__item-caption"
-                  vertical={"bottom"}
+                  vertical={VERTICAL_POPOVER_POS.BOTTOM}
                   tooltipContent={t(
                     "manager.create-fund-page.settings.hints.entry-fee-description",
-                    { maxFee: programsInfo.managerMaxEntryFee }
+                    { maxFee: managerMaxEntryFee }
                   )}
                 />
               </div>
               <div className="create-fund-settings__item">
                 <GVFormikField
-                  name="exitFee"
+                  name={CREATE_FUND_FIELDS.exitFee}
                   label={t("manager.create-fund-page.settings.fields.exit-fee")}
                   adornment="%"
-                  //isAllowed={this.allowExitFee}
                   component={GVTextField}
                   InputComponent={NumberFormat}
                   autoComplete="off"
                   decimalScale={4}
+                  isAllowed={allowValuesNumberFormat({
+                    from: 0,
+                    to: managerMaxExitFee
+                  })}
                 />
                 <Hint
                   content={t(
                     "manager.create-fund-page.settings.hints.exit-fee"
                   )}
                   className="create-fund-settings__item-caption"
-                  vertical={"bottom"}
+                  vertical={VERTICAL_POPOVER_POS.BOTTOM}
                   tooltipContent={t(
                     "manager.create-fund-page.settings.hints.exit-fee-description",
                     {
-                      maxFee: programsInfo.managerMaxExitFee
+                      maxFee: managerMaxExitFee
                     }
                   )}
                 />
@@ -357,7 +258,7 @@ class CreateFundSettings extends React.PureComponent {
           <div className={"deposit-details create-fund-settings__fill-block"}>
             <div className="create-program-settings__item deposit-details">
               <GVFormikField
-                name="depositWalletCurrency" // value={"GVT"}
+                name={CREATE_FUND_FIELDS.depositWalletId}
                 component={GVTextField}
                 label={t("transfer.from")}
                 InputComponent={Select}
@@ -365,7 +266,7 @@ class CreateFundSettings extends React.PureComponent {
               >
                 {wallets.map(wallet => {
                   return (
-                    <option value={wallet.currency} key={wallet.currency}>
+                    <option value={wallet.id} key={wallet.id}>
                       <img
                         src={filesService.getFileUrl(wallet.logo)}
                         className="transfer-popup__icon"
@@ -378,23 +279,21 @@ class CreateFundSettings extends React.PureComponent {
               </GVFormikField>
               <InputAmountField
                 autoFocus={false}
-                name="depositAmount"
+                name={CREATE_FUND_FIELDS.depositAmount}
                 label={t("transfer.amount")}
-                currency={depositWalletCurrency}
-                setMax={this.setMaxAmount(
-                  selectedWallet.available,
-                  selectedWallet.currency
-                )}
+                currency={wallet.currency}
+                isAllow={this.isAmountAllow(wallet.currency)}
+                setMax={this.setMaxAmount(wallet.available, wallet.currency)}
               />
-              {currency !== depositWalletCurrency && (
+              {fundCurrency !== wallet.currency && depositAmount && (
                 <div className="invest-popup__currency">
                   <NumberFormat
                     value={formatCurrencyValue(
                       convertFromCurrency(depositAmount, rate),
-                      currency
+                      fundCurrency
                     )}
                     prefix="≈ "
-                    suffix={` ${currency}`}
+                    suffix={` ${fundCurrency}`}
                     displayType="text"
                   />
                 </div>
@@ -404,10 +303,10 @@ class CreateFundSettings extends React.PureComponent {
                   {t("manager.create-program-page.settings.fields.min-deposit")}
                   <span className={"deposit-details__available-amount-value"}>
                     <NumberFormat
-                      value={deposit}
+                      value={minimumDepositAmount}
                       thousandSeparator=" "
                       displayType="text"
-                      suffix={` ${currency}`}
+                      suffix={` ${fundCurrency}`}
                     />
                   </span>
                 </div>
@@ -417,70 +316,106 @@ class CreateFundSettings extends React.PureComponent {
                   )}
                   <span className={"deposit-details__available-amount-value"}>
                     <NumberFormat
-                      value={selectedWallet.available}
+                      value={wallet.available}
                       thousandSeparator=" "
                       displayType="text"
-                      suffix={values ? ` ${depositWalletCurrency}` : " GVT"}
+                      suffix={` ${wallet.currency}`}
                     />
                   </span>
                 </div>
               </div>
             </div>
           </div>
+
+          <div className="create-fund-settings__navigation">
+            <GVButton
+              title={t("buttons.create-fund")}
+              color="primary"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {t("buttons.create-fund")}
+            </GVButton>
+            <GVButton
+              variant="text"
+              onClick={navigateBack}
+              className="create-fund-settings__navigation-back"
+            >
+              <>&larr; {t("buttons.back")}</>
+            </GVButton>
+          </div>
         </form>
-        <div className="create-fund-settings__navigation">
-          <DepositButtonContainer
-            title={t("buttons.create-fund")}
-            deposit={deposit}
-            onSubmit={onSubmit}
-            disabled={isSubmitting || !isValid}
-          >
-            {t("buttons.create-fund")}
-          </DepositButtonContainer>
-          <GVButton
-            variant="text"
-            onClick={() => navigateBack(values)}
-            className="create-fund-settings__navigation-back"
-          >
-            &larr; {t("buttons.back")}
-          </GVButton>
-        </div>
-        <CreateFundSettingsAddAsset
-          anchor={anchor}
-          handleCloseDropdown={this.handleCloseDropdown}
-          assets={assets}
-          handleDown={this.handleDown}
-          handleUp={this.handleUp}
-          handlePercentChange={this.handlePercentChange}
-        />
       </div>
     );
   }
 }
 
-export default translate()(
-  withFormik({
+const CreateFundSettings = compose<React.ComponentType<OwnProps>>(
+  translate(),
+  withFormik<ICreateFundSettingsProps, ICreateFundSettingsFormValues>({
     displayName: "CreateFundSettingsForm",
     enableReinitialize: true,
-    mapPropsToValues: props => {
+    mapPropsToValues: ({ wallet }) => {
       return {
-        rate: "1",
-        depositWalletCurrency: "GVT",
-        depositWalletId: Array.isArray(props.wallets)
-          ? props.wallets.find(item => item.currency === "GVT").id
-          : null,
-        assets: [],
-        remainder: 100,
-        exitFee: "",
-        title: "",
-        description: "",
-        logo: {},
-        entryFee: ""
+        [CREATE_FUND_FIELDS.depositWalletId]: wallet.id,
+        [CREATE_FUND_FIELDS.depositAmount]: undefined,
+        [CREATE_FUND_FIELDS.entryFee]: undefined,
+        [CREATE_FUND_FIELDS.logo]: {},
+        [CREATE_FUND_FIELDS.description]: "",
+        [CREATE_FUND_FIELDS.title]: "",
+        [CREATE_FUND_FIELDS.assets]: [],
+        [CREATE_FUND_FIELDS.exitFee]: undefined
       };
     },
     validationSchema: createFundSettingsValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })(CreateFundSettings)
-);
+  })
+)(_CreateFundSettings);
+
+export default CreateFundSettings;
+
+interface OwnProps {
+  fundCurrency: string;
+  managerMaxExitFee: number;
+  managerMaxEntryFee: number;
+  assets: PlatformAsset[];
+  wallets: WalletData[];
+  wallet: WalletData;
+  navigateBack(): void;
+  author: string;
+  onWalletChange(walletId: string): void;
+  minimumDepositAmount: number;
+  onSubmit(
+    values: ICreateFundSettingsFormValues,
+    setSubmitting: SetSubmittingType
+  ): void;
+  rate: number;
+  notifyError(message: string): void;
+}
+
+export enum CREATE_FUND_FIELDS {
+  depositWalletId = "depositWalletId",
+  depositAmount = "depositAmount",
+  entryFee = "entryFee",
+  logo = "logo",
+  description = "description",
+  title = "title",
+  assets = "assets",
+  exitFee = "exitFee"
+}
+export interface ICreateFundSettingsFormValues {
+  [CREATE_FUND_FIELDS.depositWalletId]: string;
+  [CREATE_FUND_FIELDS.depositAmount]?: number;
+  [CREATE_FUND_FIELDS.entryFee]?: number;
+  [CREATE_FUND_FIELDS.logo]: IImageValue;
+  [CREATE_FUND_FIELDS.description]: string;
+  [CREATE_FUND_FIELDS.title]: string;
+  [CREATE_FUND_FIELDS.assets]: FundAssetPart[];
+  [CREATE_FUND_FIELDS.exitFee]?: number;
+}
+
+export interface ICreateFundSettingsProps
+  extends InjectedTranslateProps,
+    OwnProps {}

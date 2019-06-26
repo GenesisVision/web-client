@@ -17,7 +17,7 @@ const withRole = <T extends {}>(
       (state: AuthRootState): WithRoleProps => {
         const role = roleSelector(state);
         return {
-          role: (role.toLowerCase() as ROLE) || ROLE_ENV || ROLE.INVESTOR
+          role: (role || ROLE_ENV || ROLE.INVESTOR).toLowerCase() as ROLE
         };
       }
     )

@@ -1,4 +1,5 @@
 @import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
 
 .open-trades-table {
   .close-btn {
@@ -8,5 +9,41 @@
   .table-avatar {
     display: inline-flex;
     color: $main-color;
+  }
+}
+
+.popover.tooltip__popover.fees-tooltip {
+  padding: 0;
+}
+
+.fees-tooltip {
+  &__commission {
+    white-space: nowrap;
+    letter-spacing: 0.4px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: $font-size-paragraph;
+    &:not(:last-child) {
+      margin-bottom: $font-size-paragraph;
+    }
+  }
+
+  &__title {
+    margin-right: $padding-xsmall;
+  }
+
+  &__currency,
+  &__title {
+    opacity: 0.4;
+  }
+
+  &__footer {
+    padding: 30px 20px;
+    font-weight: bold;
+  }
+
+  &__footer &__title {
+    opacity: 1;
   }
 }

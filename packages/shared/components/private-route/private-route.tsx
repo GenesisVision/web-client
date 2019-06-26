@@ -2,9 +2,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, RouteProps } from "react-router";
 import { Redirect, Route } from "react-router-dom";
-import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 class _PrivateRoute extends React.PureComponent<RouteProps & StateProps> {
   renderComponent = (props: RouteComponentProps) => {

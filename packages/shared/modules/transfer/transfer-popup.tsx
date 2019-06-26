@@ -1,3 +1,4 @@
+import { InternalTransferRequestSourceTypeEnum } from "gv-api-web";
 import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
 
@@ -7,7 +8,6 @@ import {
   TRANSFER_CONTAINER,
   TRANSFER_DIRECTION
 } from "./transfer.types";
-import { InternalTransferRequestSourceTypeEnum } from "gv-api-web";
 
 const _TransferPopup: React.FC<Props> = ({
   title,
