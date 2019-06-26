@@ -7,12 +7,18 @@ import {
 } from "shared/components/table/components/filtering/filter.type";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
+  IPaging,
   calculateSkipAndTake,
-  calculateTotalPages,
-  IPaging
+  calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
 import { RootState } from "shared/reducers/root-reducer";
+import {
+  PROGRAMS_FACET_ROUTE,
+  PROGRAMS_FAVORITES_TAB_NAME,
+  PROGRAMS_TAB_ROUTE,
+  PROGRAM_SLUG_URL_PARAM_NAME
+} from "shared/routes/programs.routes";
 import programApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
@@ -24,12 +30,6 @@ import {
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
 } from "../components/programs-table/programs.constants";
-import {
-  PROGRAM_SLUG_URL_PARAM_NAME,
-  PROGRAMS_FACET_ROUTE,
-  PROGRAMS_FAVORITES_TAB_NAME,
-  PROGRAMS_TAB_ROUTE
-} from "shared/routes/programs.routes";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 
