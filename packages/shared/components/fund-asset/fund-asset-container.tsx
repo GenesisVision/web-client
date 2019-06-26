@@ -108,7 +108,7 @@ interface IHidedAssetsProps {
   expandList: () => void;
 }
 
-export type TFundAssetRemoveHandle = (
+export type FundAssetRemoveType = (
   currency: string
 ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
@@ -118,7 +118,7 @@ interface Props {
   size?: number;
   length?: number;
   removable?: boolean;
-  removeHandle?: TFundAssetRemoveHandle;
+  removeHandle?: FundAssetRemoveType;
   remainder?: number;
   hoveringAsset?: string;
 }

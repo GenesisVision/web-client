@@ -1,21 +1,24 @@
 import { push } from "connected-react-router";
-import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
-import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
+import { NewFundRequest } from "gv-api-web";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
+import { RootThunk, SetSubmittingType } from "shared/utils/types";
 
-export const fetchBalance = () => dispatch =>
-  dispatch(fetchProfileHeaderInfoAction());
+import { ICreateFundSettingsFormValues } from "../components/create-fund-settings/create-fund-settings";
 
-export const fetchInvestmentAmount = () =>
+export const fetchMinimumDepositAmount = () =>
   managerApi.v10ManagerFundsInvestmentAmountGet(authService.getAuthArg());
 
-export const createFund = (createFundData, setSubmitting) => dispatch => {
+export const createFund = (
+  createFundData: ICreateFundSettingsFormValues,
+  setSubmitting: SetSubmittingType
+): RootThunk<void> => dispatch => {
   const authorization = authService.getAuthArg();
-  let promise = Promise.resolve(null);
+  let promise = Promise.resolve("");
   if (createFundData.logo.image) {
     promise = filesService.uploadFile(
       createFundData.logo.image.cropped,
@@ -24,13 +27,13 @@ export const createFund = (createFundData, setSubmitting) => dispatch => {
   }
   promise
     .then(response => {
-      createFundData = {
+      const requestData = <NewFundRequest>{
         ...createFundData,
-        logo: response || ""
+        logo: response
       };
 
       return managerApi.v10ManagerFundsCreatePost(authorization, {
-        request: createFundData
+        request: requestData
       });
     })
     .then(() => {
@@ -48,13 +51,4 @@ export const createFund = (createFundData, setSubmitting) => dispatch => {
       setSubmitting(false);
       dispatch(alertMessageActions.error(error.errorMessage));
     });
-};
-
-export const showValidationError = () => dispatch => {
-  dispatch(
-    alertMessageActions.error(
-      "manager.create-fund-page.notifications.validate-error",
-      true
-    )
-  );
 };
