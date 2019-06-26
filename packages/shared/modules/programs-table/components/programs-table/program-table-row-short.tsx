@@ -143,7 +143,7 @@ const ProgramTableRowShort: React.FC<
         )}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
-        {moment(program.creationDate).format()}
+        {moment(program.creationDate).fromNow(true)}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat

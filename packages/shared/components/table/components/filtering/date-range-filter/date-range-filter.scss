@@ -1,4 +1,5 @@
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
 
 .date-range-filter {
   display: flex;
@@ -11,6 +12,15 @@
     background-color: #24323c;
     padding: 15px;
     letter-spacing: 0.4px;
+  }
+
+  &__values {
+    display: inline-flex;
+    flex-wrap: wrap;
+
+    @include media-breakpoint-landscape-phone() {
+      flex-wrap: nowrap;
+    }
   }
 
   &__dates {

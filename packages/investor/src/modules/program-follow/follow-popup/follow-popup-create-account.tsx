@@ -218,7 +218,7 @@ const FollowCreateAccount = compose<React.ComponentType<OwnProps>>(
                   "follow-program.create-account.validation.amount-required"
                 )
               )
-              .moreThan(
+              .min(
                 convertFromCurrency(props.minDeposit, values[FIELDS.rate]),
                 props.t(
                   "follow-program.create-account.validation.amount-more-than-min-deposit",

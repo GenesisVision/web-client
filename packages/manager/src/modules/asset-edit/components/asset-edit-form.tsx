@@ -1,7 +1,7 @@
 import { FormikProps, withFormik } from "formik";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import NumberFormat from "react-number-format";
+import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import InputImage, {
   IImageValue
@@ -14,7 +14,8 @@ import InputAmountField from "shared/components/input-amount-field/input-amount-
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import ProgramDefaultImage from "shared/media/program-default-image.svg";
-import { SetSubmittingType } from "shared/utils/types";
+import { validateFraction } from "shared/utils/formatter";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import { IAssetEditInfo } from "../asset-edit-container";
 import editAssetSettingsValidationSchema from "./asset-edit.validators";
@@ -31,6 +32,11 @@ const _AssetEditForm: React.FC<IAssetEditProps> = ({
   isSubmitting
 }) => {
   const descriptionTrimmedLength = values.description.trim().length;
+  const isAmountAllow = useCallback(
+    (currency: CurrencyEnum) => ({ value }: NumberFormatValues) =>
+      validateFraction(value, currency),
+    []
+  );
   return (
     <form id="edit-form" onSubmit={handleSubmit}>
       <div className="dialog__top">
@@ -80,6 +86,7 @@ const _AssetEditForm: React.FC<IAssetEditProps> = ({
               decimalScale={4}
             />
             <InputAmountField
+              isAllow={isAmountAllow(info.currency!)}
               autoFocus={false}
               name={ASSET_EDIT_FIELDS.investmentLimit}
               label={t(
