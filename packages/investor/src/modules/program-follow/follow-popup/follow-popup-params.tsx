@@ -15,6 +15,18 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
 
+const getInfoText = (currency: CurrencyEnum): string => {
+  switch (currency) {
+    case "ETH":
+      return "follow-program.info.ETH";
+    case "BTC":
+      return "follow-program.info.BTC";
+    case "USDT":
+    default:
+      return "follow-program.info.USDT";
+  }
+};
+
 const _FollowParams: React.FC<
   InjectedFormikProps<Props, FollowParamsFormValues>
 > = ({
@@ -110,6 +122,9 @@ const _FollowParams: React.FC<
           {t("follow-program.params.submit")}
         </GVButton>
       </div>
+      {values[FIELDS.mode] === modes.fixed.value && (
+        <div className="dialog-field">{t(getInfoText(currency))}</div>
+      )}
     </form>
   );
 };
