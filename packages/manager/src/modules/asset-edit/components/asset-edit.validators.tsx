@@ -22,6 +22,14 @@ const editAssetSettingsValidationSchema = (props: IAssetEditProps) =>
           "manager.create-program-page.settings.validation.stop-out-more-current"
         )
       ),
+    [ASSET_EDIT_FIELDS.investmentLimit]: number()
+      .min(
+        0,
+        props.t(
+          "manager.create-program-page.settings.validation.investment-limit-min"
+        )
+      )
+      .lessThan(10000000000, "Investment Limit must be less than 10000000000"),
     [ASSET_EDIT_FIELDS.logo]: inputImageShape(props.t),
     [ASSET_EDIT_FIELDS.title]: assetTitleShape(props.t),
     [ASSET_EDIT_FIELDS.description]: assetDescriptionShape(props.t)
