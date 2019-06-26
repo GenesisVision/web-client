@@ -238,16 +238,14 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-const CreateProgramContainer = compose<React.ComponentType<OwnProps>>(
+const CreateProgramContainer = compose<React.ComponentType>(
   translate(),
-  connect<StateProps, DispatchProps, OwnProps, ManagerRootState>(
+  connect<StateProps, DispatchProps, {}, ManagerRootState>(
     mapStateToProps,
     mapDispatchToProps
   )
 )(_CreateProgramContainer);
 export default CreateProgramContainer;
-
-interface OwnProps {}
 
 interface State {
   minimumDepositsAmount?: { [key: string]: number };
@@ -277,8 +275,4 @@ interface DispatchProps {
   };
 }
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    DispatchProps,
-    InjectedTranslateProps {}
+interface Props extends StateProps, DispatchProps, InjectedTranslateProps {}

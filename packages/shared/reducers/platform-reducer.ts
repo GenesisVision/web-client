@@ -1,8 +1,9 @@
-import { PlatformInfo } from "gv-api-web";
+import { PlatformInfo, ProgramsInfo } from "gv-api-web";
 import { createSelector } from "reselect";
 import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { ASSET, ROLE_ENV } from "shared/constants/constants";
+import { HEADER_CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -23,7 +24,7 @@ export const platformDataSelector = apiSelector<PlatformInfo>(
 export const currenciesSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.currencies),
-  []
+  Object.values(HEADER_CURRENCY_VALUES)
 );
 
 export const programTagsSelector = apiFieldSelector(
@@ -41,7 +42,7 @@ export const fundAssetsSelector = apiFieldSelector(
 export const programsInfoSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.programsInfo),
-  []
+  {} as ProgramsInfo
 );
 
 export const allEventsSelector = createSelector<

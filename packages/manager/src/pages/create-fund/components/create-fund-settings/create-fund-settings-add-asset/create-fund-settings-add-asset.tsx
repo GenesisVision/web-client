@@ -1,30 +1,40 @@
 import "../create-fund-settings.scss";
 
 import classnames from "classnames";
-import React from "react";
+import { FundAssetPartWithIcon } from "gv-api-web";
+import { PlatformAssetFull } from "modules/reallocate/components/reallocate-field";
+import * as React from "react";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import GVTextField from "shared/components/gv-text-field";
 import { SearchIcon } from "shared/components/icon/search-icon";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "shared/components/popover/popover";
 import Regulator from "shared/components/regulator/regulator";
 
-class CreateFundSettingsAddAsset extends React.PureComponent {
+class CreateFundSettingsAddAsset extends React.PureComponent<Props, State> {
   state = {
-    filteredAssets: this.props.assets
+    searchValue: ""
   };
-  search = e => {
+
+  search = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      filteredAssets: this.filtering(e.target.value, this.props.assets)
+      searchValue: e.target.value
     });
   };
-  filtering = (searchValue, array) => {
-    return searchValue
-      ? array.filter(
-          item =>
-            ~item.name.toLowerCase().indexOf(searchValue.toLowerCase()) ||
-            ~item.asset.toLowerCase().indexOf(searchValue.toLowerCase())
-        )
-      : array;
+
+  filtering = () => {
+    const { searchValue } = this.state;
+    if (!searchValue) {
+      return this.props.assets;
+    }
+    return this.props.assets.filter(
+      item =>
+        ~(item.name + item.asset)
+          .toUpperCase()
+          .indexOf(searchValue.toUpperCase())
+    );
   };
 
   render() {
@@ -35,11 +45,11 @@ class CreateFundSettingsAddAsset extends React.PureComponent {
       handleUp,
       handlePercentChange
     } = this.props;
-    const { filteredAssets } = this.state;
+    const filteredAssets = this.filtering();
     return (
       <Popover
-        horizontal="left"
-        vertical="center"
+        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+        vertical={VERTICAL_POPOVER_POS.CENTER}
         anchorEl={anchor}
         noPadding
         onClose={handleCloseDropdown}
@@ -54,14 +64,15 @@ class CreateFundSettingsAddAsset extends React.PureComponent {
               adornment={<SearchIcon secondary />}
               adornmentPosition="start"
               onChange={this.search}
+              value={this.state.searchValue}
               autoFocus
             />
           </div>
           <div className="popover-add__assets">
             <table>
               <tbody>
-                {filteredAssets.map((asset, idx) => (
-                  <tr key={idx} className="popover-add__asset">
+                {filteredAssets.map(asset => (
+                  <tr key={asset.asset} className="popover-add__asset">
                     <td className="popover-add__asset-icon-container">
                       <FundAssetImage
                         url={asset.icon}
@@ -109,3 +120,17 @@ class CreateFundSettingsAddAsset extends React.PureComponent {
 }
 
 export default CreateFundSettingsAddAsset;
+
+interface Props {
+  anchor?: EventTarget;
+  assets: PlatformAssetFull[];
+  handleCloseDropdown(): void;
+  handleDown(asset: PlatformAssetFull): () => void;
+  handleUp(asset: PlatformAssetFull): () => void;
+  handlePercentChange(
+    asset: FundAssetPartWithIcon
+  ): (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+interface State {
+  searchValue: string;
+}
