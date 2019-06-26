@@ -1316,10 +1316,11 @@
         "providers": "Providers"
       },
       "fees": {
-        "trading": "Trading Commission",
+        "trading": "Trading fee",
         "ManagerSignalMasterVolumeFee": "Volume fee",
         "ManagerSignalMasterSuccessFee": "Manager Success fee",
-        "GvSignalSuccessFee": "Platform Success Fee"
+        "GvSignalSuccessFee": "Platform Success Fee",
+        "total": "Total"
       }
     },
     "dashboard-page": {
