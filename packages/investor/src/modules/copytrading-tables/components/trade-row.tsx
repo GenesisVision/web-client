@@ -1,13 +1,14 @@
 import { OrderSignalModel, OrderSignalProgramInfo } from "gv-api-web";
 import { DECIMAL_SCALE } from "modules/copytrading-tables/components/copytrading-tables.constants";
+import ProviderPopover from "modules/copytrading-tables/components/providers-popup";
 import TradeSubRow from "modules/copytrading-tables/components/trade-sub-row";
 import {
   CloseCopytradingTrade,
   closeCopytradingTrade
 } from "modules/copytrading-tables/services/copytrading-tables.service";
 import moment from "moment";
-import * as React from "react";
 import { useState } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
@@ -20,6 +21,7 @@ import GVButton from "shared/components/gv-button";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
+import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateRowFuncType } from "shared/components/table/components/table.types";
@@ -33,18 +35,17 @@ const _TradeRow: React.FC<Props> = ({
   title,
   update
 }) => {
-  const [isOpenSubrows, toggleSubrows] = useState<boolean>(false);
+  const [anchor, toggleSubrows] = useState<EventTarget | undefined>(undefined);
   const [isOpenPopup, togglePopup] = useState<boolean>(false);
   const program = trade.providers[0].program;
   const otherPrograms = trade.providers;
   const hasOtherPrograms = trade.providers.length > 1;
+  console.info(anchor);
   return (
     <>
       <TableRow
         className="details-trades__row"
-        onClick={
-          hasOtherPrograms ? () => toggleSubrows(!isOpenSubrows) : undefined
-        }
+        onClick={event => toggleSubrows(event.currentTarget)}
       >
         <TableCell className="details-trades__cell program-details-trades__cell--direction">
           <div className="dashboard-programs__cell--avatar-title">
@@ -146,18 +147,18 @@ const _TradeRow: React.FC<Props> = ({
           />
         </TableCell>
       </TableRow>
-      {isOpenSubrows
-        ? otherPrograms.map((provider: OrderSignalProgramInfo) => (
-            <TradeSubRow
-              title={title}
-              key={trade.id}
-              provider={provider}
-              tradeId={trade.id}
-              symbol={trade.symbol}
-              update={update}
-            />
-          ))
-        : null}
+      <ProviderPopover anchor={anchor} onClose={() => toggleSubrows(undefined)}>
+        {otherPrograms.map((provider: OrderSignalProgramInfo) => (
+          <TradeSubRow
+            title={title}
+            key={trade.id}
+            provider={provider}
+            tradeId={trade.id}
+            symbol={trade.symbol}
+            update={update}
+          />
+        ))}
+      </ProviderPopover>
     </>
   );
 };
