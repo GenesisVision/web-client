@@ -12,9 +12,10 @@
   &__value {
     @include font-size(15px);
     display: inline-block;
-    padding: 6px 20px;
+    padding: 6px 22px;
     background-color: $panel-background-color;
     border-radius: 4px;
+    color: $main-color;
   }
 
   .tooltip__label {
