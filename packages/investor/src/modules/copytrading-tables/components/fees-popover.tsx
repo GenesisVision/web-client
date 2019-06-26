@@ -31,9 +31,10 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
               value={trade.originalCommission}
               currency={trade.originalCommissionCurrency}
             />
-            {trade.totalCommissionByType.map(commission => {
+            {trade.totalCommissionByType.map((commission, index) => {
               return (
                 <Commission
+                  key={index}
                   title={t(
                     `investor.copytrading-tables.fees.${commission.type}`
                   )}

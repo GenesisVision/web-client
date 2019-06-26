@@ -18,9 +18,10 @@
 
 .fees-tooltip {
   &__commission {
-    width: max-content;
+    white-space: nowrap;
     letter-spacing: 0.4px;
     display: flex;
+    width: 100%;
     justify-content: space-between;
     font-size: $font-size-paragraph;
     &:not(:last-child) {
@@ -38,7 +39,6 @@
   }
 
   &__footer {
-    width: max-content;
     padding: 30px 20px;
     font-weight: bold;
   }
