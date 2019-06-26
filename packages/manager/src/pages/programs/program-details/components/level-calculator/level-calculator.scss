@@ -9,4 +9,6 @@
 .level-calculator-popup {
   @include vertical-paddings($padding-small);
   @include horizontal-paddings($padding-small);
+  width: 640px;
+  height: 700px;
 }

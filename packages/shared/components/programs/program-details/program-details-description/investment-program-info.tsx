@@ -8,10 +8,12 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
+import { ILevelCalculatorProps } from "../program-details.types";
+
 interface IInvestmentProgramInfoProps {
   isOwnProgram?: boolean;
   programDescription: ProgramDetailsFull;
-  LevelCalculator?: React.ComponentType;
+  LevelCalculator?: React.ComponentType<ILevelCalculatorProps>;
 }
 
 const renderFee = (
@@ -58,7 +60,11 @@ const InvestmentProgramInfo: React.FC<
       <div className="program-details-description__statistic-container">
         {LevelCalculator && (
           <div className="statistics-item program-details-description__level-calculator">
-            <LevelCalculator />
+            <LevelCalculator
+              id={programDescription.id}
+              currency={programDescription.currency}
+              title={programDescription.title}
+            />
           </div>
         )}
         <StatisticItem

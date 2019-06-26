@@ -55,3 +55,9 @@ export interface IProgramReinvestingContainerOwnProps {
 export interface IChangePasswordTradingAccountProps {
   programDescription: ProgramDetailsFull;
 }
+
+export interface ILevelCalculatorProps {
+  id: string;
+  title: string;
+  currency: string;
+}

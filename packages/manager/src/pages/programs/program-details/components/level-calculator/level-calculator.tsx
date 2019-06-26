@@ -4,8 +4,9 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { CalculatorIcon } from "shared/components/icon/calculator-icon";
 import Popover from "shared/components/popover/popover";
+import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 
-import LevelCalculatorPopup from "./level-calculator-popup";
+import LevelCalculatorPopupContainer from "./level-calculator-popup.container";
 
 class _LevelCalculator extends React.PureComponent<
   ILevelCalculatorProps & InjectedTranslateProps,
@@ -20,6 +21,7 @@ class _LevelCalculator extends React.PureComponent<
   handleCloseDetails = () => this.setState({ anchor: undefined });
 
   render() {
+    const { id, title, currency } = this.props;
     return (
       <>
         <div className="level-calculator" onClick={this.handleOpenDetails}>
@@ -27,14 +29,16 @@ class _LevelCalculator extends React.PureComponent<
         </div>
 
         <Popover anchorEl={this.state.anchor} onClose={this.handleCloseDetails}>
-          <LevelCalculatorPopup />
+          <LevelCalculatorPopupContainer
+            id={id}
+            title={title}
+            currency={currency}
+          />
         </Popover>
       </>
     );
   }
 }
-
-export interface ILevelCalculatorProps {}
 
 interface State {
   anchor?: EventTarget;
