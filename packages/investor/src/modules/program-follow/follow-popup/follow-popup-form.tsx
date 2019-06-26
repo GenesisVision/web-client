@@ -5,14 +5,17 @@ import {
   AttachToSignalProviderFixedCurrencyEnum,
   AttachToSignalProviderInitialDepositCurrencyEnum,
   AttachToSignalProviderModeEnum,
-  CopyTradingAccountInfo,
   SignalSubscription,
   WalletData
 } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import withLoader from "shared/decorators/with-loader";
-import { ResponseError, SetSubmittingType } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  ResponseError,
+  SetSubmittingType
+} from "shared/utils/types";
 
 import FollowCreateAccount, {
   CreateAccountFormValues
@@ -89,7 +92,13 @@ class FollowForm extends React.PureComponent<
       });
   };
   render() {
-    const { wallets, currency, signalSubscription, minDeposit } = this.props;
+    const {
+      wallets,
+      currency,
+      signalSubscription,
+      minDeposit,
+      rate
+    } = this.props;
     const { errors, step } = this.state;
     const adaptStep =
       step === TABS.CREATE_ACCOUNT ? "create-account" : "params";
@@ -110,6 +119,8 @@ class FollowForm extends React.PureComponent<
           )}
         {step === TABS.PARAMS && (
           <FollowParams
+            rate={rate}
+            currency={currency}
             isShowBack={!signalSubscription.hasSignalAccount}
             paramsSubscription={paramsSubscription}
             onSubmit={this.submit}
@@ -129,6 +140,7 @@ enum TABS {
   PARAMS = "PARAMS"
 }
 export interface Props {
+  rate: number;
   minDeposit: number;
   signalSubscription: SignalSubscription;
   alertSuccess: (msg: string) => void;
@@ -140,7 +152,7 @@ export interface Props {
   ) => Promise<any>;
   id: string;
   wallets: WalletData[];
-  currency: string;
+  currency: CurrencyEnum;
 }
 
 interface State {

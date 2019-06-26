@@ -1,10 +1,5 @@
-import "./pie.scss";
-
-import classNames from "classnames";
 import moment from "moment";
 import * as React from "react";
-
-import styles from "./pie.scss";
 
 const Pie: React.FC<Props> = ({
   pieDirection = PIE_DIRECTION.CLOCKWISE,
@@ -15,12 +10,7 @@ const Pie: React.FC<Props> = ({
 }) => {
   const valuePercent = calcPercent(value, start, end);
   return (
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 34 34"
-      className={classNames(styles.gvProgramPeriod, styles.gvProgramPeriodPie)}
-    >
+    <svg width="100%" height="100%" viewBox="0 0 34 34">
       <circle
         cx="17"
         cy="17"

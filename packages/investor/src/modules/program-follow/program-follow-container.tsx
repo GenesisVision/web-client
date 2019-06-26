@@ -15,7 +15,9 @@ import {
   AlertActionCreator,
   alertMessageActions
 } from "shared/modules/alert-message/actions/alert-message-actions";
+import { rateApi } from "shared/services/api-client/rate-api";
 import authService from "shared/services/auth-service";
+import { CurrencyEnum } from "shared/utils/types";
 
 import FollowPopupForm from "./follow-popup/follow-popup-form";
 import {
@@ -26,6 +28,7 @@ import {
 
 class _ProgramFollowContainer extends React.PureComponent<Props, State> {
   state: State = {
+    rate: 1,
     isPending: false,
     type: undefined,
     volumeFee: undefined,
@@ -33,20 +36,23 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    if (!authService.getAuthArg()) return;
-    const { id, signalSubscription } = this.props;
+    if (!authService.getAuthArg()) return; // TODO change to HOC
+    const { id, signalSubscription, currency } = this.props;
     this.setState({ isPending: true });
-    getSignalInfo(id).then((info: AttachToSignalProviderInfo) => {
-      const { volumeFee, minDeposit } = info;
-      this.setState({
-        type: signalSubscription.hasActiveSubscription
-          ? FOLLOW_TYPE.EDIT
-          : FOLLOW_TYPE.CREATE,
-        volumeFee,
-        minDeposit,
-        isPending: false
-      });
-    });
+    getSignalInfo(id)
+      .then((info: AttachToSignalProviderInfo) => {
+        const { volumeFee, minDeposit } = info;
+        this.setState({
+          type: signalSubscription.hasActiveSubscription
+            ? FOLLOW_TYPE.EDIT
+            : FOLLOW_TYPE.CREATE,
+          volumeFee,
+          minDeposit,
+          isPending: false
+        });
+        return rateApi.v10RateByFromByToGet("USD", currency);
+      })
+      .then(rate => this.setState({ rate }));
   }
 
   render() {
@@ -59,7 +65,7 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
       id,
       signalSubscription
     } = this.props;
-    const { isPending, type, minDeposit } = this.state;
+    const { isPending, type, minDeposit, rate } = this.state;
     const handleClose = () => {
       onClose();
     };
@@ -72,6 +78,7 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
     return (
       <Dialog open={open} onClose={handleClose}>
         <FollowPopupForm
+          rate={rate}
           condition={!isPending && !!wallets.length}
           loader={<DialogLoader />}
           signalSubscription={signalSubscription}
@@ -115,7 +122,7 @@ interface Props extends DispatchProps, StateProps {
   open: boolean;
   onClose(): void;
   onApply(): void;
-  currency: string;
+  currency: CurrencyEnum;
   id: string;
   signalSubscription: SignalSubscription;
 }
@@ -125,6 +132,7 @@ interface State {
   volumeFee?: number;
   minDeposit?: number;
   type?: FOLLOW_TYPE;
+  rate: number;
 }
 
 const ProgramFollowContainer = connect(

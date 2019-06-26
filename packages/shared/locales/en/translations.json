@@ -350,6 +350,11 @@
     }
   },
   "follow-program": {
+    "info": {
+      "ETH": "The minimum order size on Binance is 0.001 BTC",
+      "BTC": "The minimum order size on Binance is 0.01 ETH",
+      "USDT": "The minimum order size on Binance is 10 USDT"
+    },
     "modes": {
       "byBalance": {
         "label": "By balance",
@@ -721,6 +726,9 @@
         "profit": "Profit",
         "equity": "Equity"
       }
+    },
+    "calculator": {
+      "level": "Level"
     }
   },
   "manager-page": {
