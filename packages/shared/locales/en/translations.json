@@ -726,6 +726,9 @@
         "profit": "Profit",
         "equity": "Equity"
       }
+    },
+    "calculator": {
+      "level": "Level"
     }
   },
   "manager-page": {
