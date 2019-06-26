@@ -565,7 +565,7 @@ const CreateProgramSettings = compose<React.ComponentType<OwnProps>>(
         [CREATE_PROGRAM_FIELDS.logo]: {},
         [CREATE_PROGRAM_FIELDS.entryFee]: undefined,
         [CREATE_PROGRAM_FIELDS.successFee]: undefined,
-        [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: true,
+        [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: false,
         [CREATE_PROGRAM_FIELDS.investmentLimit]: undefined,
         [CREATE_PROGRAM_FIELDS.isSignalProgram]: broker.isSignalsAvailable,
         [CREATE_PROGRAM_FIELDS.signalSuccessFee]: broker.isSignalsAvailable
