@@ -1,0 +1,44 @@
+import "./level-calculator.scss";
+
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { CalculatorIcon } from "shared/components/icon/calculator-icon";
+import Popover from "shared/components/popover/popover";
+
+import LevelCalculatorPopup from "./level-calculator-popup";
+
+class _LevelCalculator extends React.PureComponent<
+  ILevelCalculatorProps & InjectedTranslateProps,
+  State
+> {
+  state = {
+    anchor: undefined
+  };
+  handleOpenDetails = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+    this.setState({ anchor: event.currentTarget });
+
+  handleCloseDetails = () => this.setState({ anchor: undefined });
+
+  render() {
+    return (
+      <>
+        <div className="level-calculator" onClick={this.handleOpenDetails}>
+          <CalculatorIcon primary={this.state.anchor !== undefined} />
+        </div>
+
+        <Popover anchorEl={this.state.anchor} onClose={this.handleCloseDetails}>
+          <LevelCalculatorPopup />
+        </Popover>
+      </>
+    );
+  }
+}
+
+export interface ILevelCalculatorProps {}
+
+interface State {
+  anchor?: EventTarget;
+}
+
+const LevelCalculator = translate()(_LevelCalculator);
+export default LevelCalculator;

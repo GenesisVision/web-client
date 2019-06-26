@@ -17,6 +17,7 @@ import { ASSET } from "shared/constants/constants";
 
 import ClosePeriodContainer from "../close-period/close-period-container";
 import CloseProgramContainer from "../close-program/close-program-container";
+import LevelCalculator from "../level-calculator/level-calculator";
 
 enum INVESTMENT_POPUP {
   INVEST = "INVEST",
@@ -83,6 +84,7 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
         <InvestmentProgramInfo
           isOwnProgram={isOwnProgram}
           programDescription={programDescription}
+          LevelCalculator={LevelCalculator}
         />
         <div className="program-details-description__button-container">
           {isOwnProgram ? (

@@ -1,0 +1,12 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.level-calculator {
+  cursor: pointer;
+}
+
+.level-calculator-popup {
+  @include vertical-paddings($padding-small);
+  @include horizontal-paddings($padding-small);
+}

@@ -11,6 +11,7 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 interface IInvestmentProgramInfoProps {
   isOwnProgram?: boolean;
   programDescription: ProgramDetailsFull;
+  LevelCalculator?: React.ComponentType;
 }
 
 const renderFee = (
@@ -35,7 +36,7 @@ const renderFee = (
 
 const InvestmentProgramInfo: React.FC<
   InjectedTranslateProps & IInvestmentProgramInfoProps
-> = ({ t, programDescription, isOwnProgram }) => {
+> = ({ t, programDescription, LevelCalculator }) => {
   const {
     availableInvestmentBase,
     availableInvestmentLimit,
@@ -55,6 +56,11 @@ const InvestmentProgramInfo: React.FC<
   return (
     <>
       <div className="program-details-description__statistic-container">
+        {LevelCalculator && (
+          <div className="statistics-item program-details-description__level-calculator">
+            <LevelCalculator />
+          </div>
+        )}
         <StatisticItem
           label={
             <TooltipLabel
