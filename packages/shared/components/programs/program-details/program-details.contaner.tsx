@@ -77,7 +77,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           </div>
           <div className="details__history">
             <ProgramDetailsHistorySection
-              isForex={description.isForex}
+              isForex={description.brokerDetails.isForex}
               isSignalProgram={description.isSignalProgram}
               fetchOpenPositions={fetchOpenPositions}
               fetchTrades={fetchProgramTrades}
