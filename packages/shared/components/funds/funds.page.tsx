@@ -3,15 +3,15 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "shared/components/facet-cards/faset-cards-container";
+import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
+import Page from "shared/components/page/page";
+import Surface from "shared/components/surface/surface";
+import FundsTableContainer from "shared/modules/funds-table/components/funds-table/funds-table-container";
 import {
   FUNDS_EXPLORE_TAB_NAME,
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
 } from "shared/routes/funds.routes";
-import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
-import Page from "shared/components/page/page";
-import Surface from "shared/components/surface/surface";
-import FundsTableContainer from "shared/modules/funds-table/components/funds-table/funds-table-container";
 import { composeFundFacetUrl } from "shared/utils/compose-url";
 
 const _FundsPage: React.FC<InjectedTranslateProps> = ({ t }) => {

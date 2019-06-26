@@ -8,6 +8,9 @@
     left: 0;
     right: 0;
     z-index: 1300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &--position-absolute {

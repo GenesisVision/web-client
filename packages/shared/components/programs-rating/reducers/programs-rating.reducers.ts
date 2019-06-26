@@ -38,7 +38,7 @@ export const levelupSummarySelector = apiSelector<LevelUpSummary>(
 export const levelDataSelector = apiFieldSelector(
   levelupSummarySelector,
   fieldSelector(state => state.levelData),
-  {}
+  []
 );
 
 const levelupSummaryReducer = apiReducerFactory<LevelUpSummary>({

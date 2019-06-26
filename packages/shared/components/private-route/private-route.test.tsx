@@ -1,11 +1,11 @@
-import { mount, ReactWrapper } from "enzyme";
+import { ReactWrapper, mount } from "enzyme";
 import * as React from "react";
 import { Provider } from "react-redux";
 import { MemoryRouter, Route, Switch } from "react-router";
 import configureStore, { MockStoreEnhanced } from "redux-mock-store";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 import PrivateRoute from "./private-route";
-import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 const PRIVATE_ROUTE = "/private";
 const initialEntries = [LOGIN_ROUTE, PRIVATE_ROUTE];
