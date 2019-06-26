@@ -33,7 +33,7 @@ import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
-import createProgramSettingsValidationSchema from "./create-program-settings.validators";
+import createProgramSettingsValidationSchema, { CREATE_PROGRAM_FIELDS } from "./create-program-settings.validators";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class _CreateProgramSettings extends React.PureComponent<
@@ -588,26 +588,6 @@ const CreateProgramSettings = compose<React.ComponentType<OwnProps>>(
   })
 )(_CreateProgramSettings);
 export default CreateProgramSettings;
-
-export enum CREATE_PROGRAM_FIELDS {
-  currency = "currency",
-  periodLength = "periodLength",
-  successFee = "successFee",
-  stopOutLevel = "stopOutLevel",
-  leverage = "leverage",
-  brokerAccountTypeId = "brokerAccountTypeId",
-  signalSuccessFee = "signalSuccessFee",
-  signalVolumeFee = "signalVolumeFee",
-  isSignalProgram = "isSignalProgram",
-  hasInvestmentLimit = "hasInvestmentLimit",
-  title = "title",
-  description = "description",
-  logo = "logo",
-  entryFee = "entryFee",
-  depositAmount = "depositAmount",
-  depositWalletId = "depositWalletId",
-  investmentLimit = "investmentLimit"
-}
 
 interface OwnProps {
   broker: Broker;

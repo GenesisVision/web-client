@@ -5,7 +5,6 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { boolean, mixed, number, object, string } from "yup";
 
 import {
-  CREATE_PROGRAM_FIELDS,
   ICreateProgramSettingsProps
 } from "./create-program-settings";
 
@@ -226,5 +225,25 @@ export const signalVolumeFeeShape = (
       )
     );
 };
+
+export enum CREATE_PROGRAM_FIELDS {
+  currency = "currency",
+  periodLength = "periodLength",
+  successFee = "successFee",
+  stopOutLevel = "stopOutLevel",
+  leverage = "leverage",
+  brokerAccountTypeId = "brokerAccountTypeId",
+  signalSuccessFee = "signalSuccessFee",
+  signalVolumeFee = "signalVolumeFee",
+  isSignalProgram = "isSignalProgram",
+  hasInvestmentLimit = "hasInvestmentLimit",
+  title = "title",
+  description = "description",
+  logo = "logo",
+  entryFee = "entryFee",
+  depositAmount = "depositAmount",
+  depositWalletId = "depositWalletId",
+  investmentLimit = "investmentLimit"
+}
 
 export default createProgramSettingsValidationSchema;
