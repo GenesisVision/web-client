@@ -16,7 +16,7 @@ import LevelCalculatorPopup from "./level-calculator-popup";
 import LevelCalculatorPopupLoader from "./level-calculator-popup.loader";
 
 class LevelCalculatorPopupContainer extends React.PureComponent<
-  ILevelCalculatorProps,
+  ILevelCalculatorProps & { onClose(): void },
   State
 > {
   programLevelsPromise?: CancelablePromise<void>;
@@ -60,7 +60,7 @@ class LevelCalculatorPopupContainer extends React.PureComponent<
   }
 
   render() {
-    const { id, title, currency } = this.props;
+    const { id, title, currency, onClose } = this.props;
     const { programLevelInfo, levelsParams, platformLevels } = this.state;
     const isDataReady =
       !!programLevelInfo && !!levelsParams && !!platformLevels;
@@ -74,6 +74,7 @@ class LevelCalculatorPopupContainer extends React.PureComponent<
         programLevelInfo={programLevelInfo!}
         levelsParams={levelsParams!}
         platformLevels={platformLevels!}
+        onClose={onClose}
       />
     );
   }

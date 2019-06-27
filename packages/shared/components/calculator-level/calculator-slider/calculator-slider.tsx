@@ -6,11 +6,7 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
-class _CalculatorSlider extends React.PureComponent<Props, State> {
-  state = {
-    value: this.props.defaultValue
-  };
-
+class _CalculatorSlider extends React.PureComponent<Props> {
   marks = {
     [this.props.min]: {
       style: {
@@ -39,12 +35,12 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
   };
 
   handleChange = (value: number) => {
-    this.setState({ value });
     this.props.onChange(this.props.name, value);
   };
 
   render() {
     const {
+      value,
       min,
       max,
       title,
@@ -53,7 +49,6 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
       className,
       tooltipContent
     } = this.props;
-    const { value } = this.state;
     return (
       <div className={classnames("calculator-slider", className)}>
         <div className="calculator-slider__heading">
@@ -84,7 +79,7 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
 
 interface Props {
   name: string;
-  defaultValue: number;
+  value: number;
   min: number;
   minSuffix?: string;
   max: number;
@@ -95,10 +90,6 @@ interface Props {
   className?: string;
   tooltipContent?: string;
   onChange(name: string, value: number): void;
-}
-
-interface State {
-  value: number;
 }
 
 const CalculatorSlider = React.memo(_CalculatorSlider);

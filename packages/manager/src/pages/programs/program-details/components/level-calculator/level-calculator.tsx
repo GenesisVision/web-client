@@ -33,6 +33,7 @@ class _LevelCalculator extends React.PureComponent<
             id={id}
             title={title}
             currency={currency}
+            onClose={this.handleCloseDetails}
           />
         </Popover>
       </>

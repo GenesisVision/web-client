@@ -10,6 +10,8 @@ import { compose } from "redux";
 import CalculatorLevelLine from "shared/components/calculator-level/calculator-level-line/calculator-level-line";
 import CalculatorOutput from "shared/components/calculator-level/calculator-output/calculator-output";
 import CalculatorSlider from "shared/components/calculator-level/calculator-slider/calculator-slider";
+import GVButton from "shared/components/gv-button";
+import { CloseIcon } from "shared/components/icon/close-icon";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
@@ -80,8 +82,19 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
     this.setState({ [name]: value } as any);
   };
 
+  handleResetForm = () => {
+    this.setState(this.getDefaultValues());
+  };
+
   render() {
-    const { title, currency, programLevelInfo, levelsParams } = this.props;
+    const {
+      t,
+      title,
+      currency,
+      programLevelInfo,
+      levelsParams,
+      onClose
+    } = this.props;
     const {
       genesisRatio,
       programAge,
@@ -95,7 +108,28 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
 
     return (
       <div className="level-calculator-popup">
-        <h2 className="level-calculator-popup__header">Calculator</h2>
+        <div className="level-calculator-popup__header">
+          <h2 className="level-calculator-popup__heading">Calculator</h2>
+          <div>
+            <GVButton
+              onClick={this.handleResetForm}
+              className="level-calculator-popup__reset-button"
+            >
+              <span className="level-calculator-popup__reset-button-text">
+                Reset
+              </span>
+            </GVButton>
+            <GVButton
+              className="level-calculator-popup__close-button"
+              variant="text"
+              color="secondary"
+              onClick={onClose}
+            >
+              <CloseIcon />
+            </GVButton>
+          </div>
+        </div>
+
         <div className="level-calculator-popup__program-name">
           <div className="level-calculator-popup__program-label">Program</div>
           <div className="level-calculator-popup__program-title">{title}</div>
@@ -105,7 +139,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             name="genesisRatio"
             className="level-calculator-popup__calculator-slider"
             title="Genesis Ratio"
-            defaultValue={genesisRatio}
+            value={genesisRatio}
             min={levelsParams.genesisRatioMin}
             max={levelsParams.genesisRatioMax}
             step={0.1}
@@ -115,7 +149,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             name="programAge"
             className="level-calculator-popup__calculator-slider"
             title="Age"
-            defaultValue={programAge}
+            value={programAge}
             min={0}
             max={levelsParams.programAgeMax}
             maxSuffix="+"
@@ -127,7 +161,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             className="level-calculator-popup__calculator-slider"
             title="Weighted volume scale"
             tooltipContent={"tooltip"}
-            defaultValue={weightedVolumeScale}
+            value={weightedVolumeScale}
             min={levelsParams.volumeScaleMin}
             max={levelsParams.volumeScaleMax}
             step={0.1}
@@ -138,7 +172,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             className="level-calculator-popup__calculator-slider"
             title="Manager balance"
             tooltipContent={"tooltip"}
-            defaultValue={+formatValue(managerBalance, 4)}
+            value={+formatValue(managerBalance, 4)}
             valueSuffix={` ${currency}`}
             min={levelsParams.minAvailableToInvest}
             max={levelsParams.maxAvailableToInvest}
@@ -226,6 +260,7 @@ interface OwnProps extends ILevelCalculatorProps {
   programLevelInfo: ProgramLevelInfo;
   platformLevels: ProgramsLevelsInfo;
   levelsParams: LevelsParamsInfo;
+  onClose(): void;
 }
 
 interface Props extends OwnProps, InjectedTranslateProps {}

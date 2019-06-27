@@ -19,8 +19,31 @@
   }
 
   &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__heading {
     color: $primary-color;
     font-weight: 600;
+  }
+
+  &__close-button {
+    padding: 0;
+    @include adaptive-margin("left", $padding-xxsmall);
+  }
+
+  &__reset-button.gv-btn {
+    padding: 5px 10px;
+    background-color: rgba($icon-color, 0.1);
+    &:hover:not(:disabled) {
+      background-color: rgba($icon-color, 0.2);
+    }
+  }
+
+  &__reset-button-text {
+    color: rgba($text-light-color, 0.5);
   }
 
   &__program-name {
