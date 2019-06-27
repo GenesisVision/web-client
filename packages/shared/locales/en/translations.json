@@ -349,6 +349,17 @@
       }
     }
   },
+  "subscription-details": {
+    "title": "Subscription details",
+    "tolerance-percentage": "Tolerance percentage",
+    "subscription-type": "Subscription Type",
+    "modes": {
+      "ByBalance": "By balance",
+      "Percentage": "Percentage",
+      "Fixed": "Fixed"
+    },
+    "edit": "Edit"
+  },
   "follow-program": {
     "info": {
       "ETH": "The minimum order size on Binance is 0.001 BTC",
