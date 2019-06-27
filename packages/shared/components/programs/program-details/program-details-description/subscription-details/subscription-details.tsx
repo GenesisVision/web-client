@@ -4,8 +4,10 @@ import {
   AttachToSignalProviderModeEnum,
   PersonalProgramDetailsFull
 } from "gv-api-web";
+import ProgramFollowContainer from "investor-web-portal/src/modules/program-follow/program-follow-container";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import {
   IProgramDetailContext,
   ProgramDetailContext
@@ -13,11 +15,9 @@ import {
 import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
-import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
-import ProgramFollowContainer from "investor-web-portal/src/modules/program-follow/program-follow-container";
-import { CurrencyEnum } from "shared/utils/types";
 import { convertFromCurrency } from "shared/utils/currency-converter";
-import NumberFormat from "react-number-format";
+import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 class _SubscriptionDetails extends React.PureComponent<Props, State> {
   state = {
@@ -70,7 +70,7 @@ class _SubscriptionDetails extends React.PureComponent<Props, State> {
                   accent
                   label={t("fund-details-page.description.profit")}
                 >
-                  <Profitability value={`${ptotalProfit}`}>
+                  <Profitability value={`${totalProfit}`}>
                     {roundPercents(totalProfit)}
                   </Profitability>
                 </StatisticItem>
