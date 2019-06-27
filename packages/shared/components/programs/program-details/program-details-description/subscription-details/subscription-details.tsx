@@ -13,9 +13,11 @@ import {
 import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
-import { roundPercents } from "shared/utils/formatter";
+import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 import ProgramFollowContainer from "investor-web-portal/src/modules/program-follow/program-follow-container";
-import { CurrencyEnum } from "../../../../../utils/types";
+import { CurrencyEnum } from "shared/utils/types";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import NumberFormat from "react-number-format";
 
 class _SubscriptionDetails extends React.PureComponent<Props, State> {
   state = {
@@ -37,19 +39,29 @@ class _SubscriptionDetails extends React.PureComponent<Props, State> {
   render() {
     const { t, id, currency, personalDetails } = this.props;
 
+    const {
+      mode,
+      openTolerancePercent,
+      percent,
+      fixedVolume,
+      totalProfit
+    } = personalDetails.signalSubscription;
+
+    console.log(personalDetails.signalSubscription);
+
     return (
       <ProgramDetailContext.Consumer>
         {({ updateDetails }: IProgramDetailContext) => (
           <>
             <Surface className="surface--horizontal-paddings subscription-details">
               <div className="subscription-details__heading">
-                <h3>Subscription details</h3>
+                <h3>{t("subscription-details.title")}</h3>
                 <button
                   type="button"
                   onClick={this.openPopup}
                   className="subscription-details__edit-btn"
                 >
-                  Edit
+                  {t("subscription-details.edit")}
                 </button>
               </div>
               <div className="subscription-details__short-statistic">
@@ -58,8 +70,8 @@ class _SubscriptionDetails extends React.PureComponent<Props, State> {
                   accent
                   label={t("fund-details-page.description.profit")}
                 >
-                  <Profitability value={`${personalDetails.profit}`}>
-                    {roundPercents(personalDetails.profit)}
+                  <Profitability value={`${ptotalProfit}`}>
+                    {roundPercents(totalProfit)}
                   </Profitability>
                 </StatisticItem>
                 <StatisticItem
@@ -71,16 +83,38 @@ class _SubscriptionDetails extends React.PureComponent<Props, State> {
                 </StatisticItem>
                 <StatisticItem
                   accent
-                  label={"Subscription Type"}
+                  label={t("subscription-details.subscription-type")}
                   className="subscription-details__short-statistic-item"
                 >
                   <div className="subscription-details__type">
                     <span className="subscription-details__type-item">
-                      By Balance
+                      {t(`subscription-details.modes.${mode}`)}
+                      {mode === modes.percentage && ` volume ${percent}%`}
+                      {mode === modes.fixed && (
+                        <>
+                          <NumberFormat
+                            value={formatCurrencyValue(fixedVolume, "USD")}
+                            prefix=" "
+                            suffix="USD"
+                            displayType="text"
+                          />
+                          <NumberFormat
+                            value={formatCurrencyValue(
+                              convertFromCurrency(fixedVolume, 1),
+                              currency
+                            )}
+                            prefix=" (≈ "
+                            suffix={` ${currency})`}
+                            displayType="text"
+                          />
+                        </>
+                      )}
                     </span>
                     <span className="subscription-details__type-item">
                       <span className="subscription-details__value-accent">
-                        Tolerance percentage 1%
+                        {t(
+                          `subscription-details.tolerance-percentage ${openTolerancePercent}%`
+                        )}
                       </span>
                     </span>
                   </div>
@@ -102,24 +136,10 @@ class _SubscriptionDetails extends React.PureComponent<Props, State> {
   }
 }
 
-type mode = {
-  label: string;
-  value: AttachToSignalProviderModeEnum;
-};
-
-const modes: { [key: string]: mode } = {
-  byBalance: {
-    label: "follow-program.modes.byBalance.label",
-    value: "ByBalance"
-  },
-  percentage: {
-    label: "follow-program.modes.percentage.label",
-    value: "Percent"
-  },
-  fixed: {
-    label: "follow-program.modes.fixed.label",
-    value: "Fixed"
-  }
+const modes: { [key: string]: AttachToSignalProviderModeEnum } = {
+  byBalance: "ByBalance",
+  percentage: "Percent",
+  fixed: "Fixed"
 };
 
 interface OwnProps {
