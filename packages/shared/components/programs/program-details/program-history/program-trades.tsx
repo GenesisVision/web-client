@@ -25,7 +25,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import Tooltip from "shared/components/tooltip/tooltip";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 const DECIMAL_SCALE = 8;
 
@@ -122,7 +122,9 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
                       )} ${trade.originalCommissionCurrency}`}
                     </div>
                   ) : (
-                    <div>{trade.commission} BTC</div>
+                    <div>
+                      {trade.commission} {currency}
+                    </div>
                   )
                 }
               >
