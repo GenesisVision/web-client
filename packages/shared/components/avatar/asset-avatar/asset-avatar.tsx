@@ -47,7 +47,7 @@ class _AssetAvatar extends React.PureComponent<
   render() {
     const { tooltip, onClickLevel } = this.props;
     return (
-      <React.Fragment>
+      <>
         <GVProgramAvatar
           onMouseEnterLevel={this.handleMouseEnter}
           onMouseLeaveLevel={this.handleMouseLeave}
@@ -56,6 +56,7 @@ class _AssetAvatar extends React.PureComponent<
         />
         {tooltip && (
           <Popover
+            disableBackdrop
             noPadding
             anchorEl={this.state.anchor}
             className="tooltip__popover"
@@ -65,7 +66,7 @@ class _AssetAvatar extends React.PureComponent<
             {tooltip}
           </Popover>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -399,7 +399,8 @@
         "tolerance-required": "Tolerance percent is required field"
       }
     },
-    "success-alert-message": "You have been subscribed."
+    "create-success-alert-message": "You have been subscribed.",
+    "edit-success-alert-message": "Subscription settings have been edited."
   },
   "withdraw-fund": {
     "title": "Withdraw",
