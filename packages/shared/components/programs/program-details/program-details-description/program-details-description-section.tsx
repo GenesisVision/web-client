@@ -1,6 +1,10 @@
 import "./program-details-description.scss";
 
-import { ProgramDetailsFull } from "gv-api-web";
+import {
+  LevelsParamsInfo,
+  ProgramDetailsFull,
+  ProgramsLevelsInfo
+} from "gv-api-web";
 import * as React from "react";
 import { ComponentType } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -13,6 +17,7 @@ import ProgramDetailsDescriptionMain from "./program-details-description-main";
 const _ProgramDetailsDescriptionSection: React.FC<
   IProgramDetailsDescriptionSectionProps
 > = ({
+  levelsParameters,
   t,
   accountCurrency,
   programDescription,
@@ -28,6 +33,7 @@ const _ProgramDetailsDescriptionSection: React.FC<
   return (
     <div className="program-details-description">
       <ProgramDetailsDescriptionMain
+        levelsParameters={levelsParameters}
         programDescription={programDescription}
         isOwnProgram={isOwnProgram}
         ChangePasswordTradingAccount={ChangePasswordTradingAccount}
@@ -68,6 +74,7 @@ const _ProgramDetailsDescriptionSection: React.FC<
 
 interface IProgramDetailsDescriptionSectionProps
   extends InjectedTranslateProps {
+  levelsParameters: LevelsParamsInfo;
   accountCurrency: string;
   programDescription: ProgramDetailsFull;
   isAuthenticated: boolean;
