@@ -1,8 +1,4 @@
-import {
-  LevelsParamsInfo,
-  ProgramLevelInfo,
-  ProgramsLevelsInfo
-} from "gv-api-web";
+import { ProgramLevelInfo, ProgramsLevelsInfo } from "gv-api-web";
 import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
@@ -10,7 +6,7 @@ import { ILevelCalculatorProps } from "shared/components/programs/program-detail
 import {
   getPlatformLevels,
   getProgramLevelsInfo
-} from "../../service/level-calculator.service";
+} from "../services/level-calculator.service";
 import LevelCalculatorPopup from "./level-calculator-popup";
 import LevelCalculatorPopupLoader from "./level-calculator-popup.loader";
 

@@ -3,6 +3,7 @@ import AssetEditContainer, {
   IAssetEditInfo
 } from "modules/asset-edit/asset-edit-container";
 import ConfirmContainer from "modules/confirm/confirm-container";
+import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -17,7 +18,6 @@ import { ASSET } from "shared/constants/constants";
 
 import ClosePeriodContainer from "../close-period/close-period-container";
 import CloseProgramContainer from "../close-program/close-program-container";
-import LevelCalculator from "../level-calculator/level-calculator";
 
 enum INVESTMENT_POPUP {
   INVEST = "INVEST",
