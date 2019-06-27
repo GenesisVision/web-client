@@ -159,7 +159,7 @@ export const fetchOpenPositions = (
 
 export const fetchInvestmentsLevels = (
   currency: string
-): Promise<ProgramsLevelsInfo> => {
+): CancelablePromise<ProgramsLevelsInfo> => {
   return platformApi.v10PlatformLevelsGet({ currency });
 };
 

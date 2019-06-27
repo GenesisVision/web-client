@@ -92,6 +92,7 @@ export interface IProgramsFacetTableProps {
   getItems: GetItemsFuncType;
   isAuthenticated?: boolean;
   showRating?: boolean;
+  level?: number;
 }
 
 const ProgramsFacetTable = translate()(React.memo(_ProgramsFacetTable));
