@@ -233,7 +233,9 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           />
         </div>
         {!isKycConfirmed && (
-          <div>{t("manager.level-calculator.kyc-notification")}</div>
+          <div className="level-calculator-popup__kyc-disclaimer">
+            {t("manager.level-calculator.kyc-disclaimer")}
+          </div>
         )}
       </div>
     );

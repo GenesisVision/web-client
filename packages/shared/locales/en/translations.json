@@ -1830,7 +1830,7 @@
       "current-av-to-invest-tooltip": "Current Av. to invest tooltip",
       "new-av-to-invest-tooltip": "New Av. to invest tooltip",
       "investment-scale-tooltip": "Investment scale tooltip",
-      "kyc-notification": "kyc notification"
+      "kyc-disclaimer": "kyc disclaimer"
     }
   }
 }

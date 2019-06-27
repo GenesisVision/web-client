@@ -10,12 +10,8 @@
   @include vertical-paddings($padding-small);
   @include horizontal-paddings($padding-small);
 
-  width: auto;
-  height: auto;
-
   @include media-breakpoint-landscape-phone() {
     width: 640px - $padding-small * 2;
-    height: 700px - $padding-small * 2;
   }
 
   &__header {
@@ -82,5 +78,11 @@
   &__statistic-item-label {
     @include font-size($font-size-small);
     color: $calculator-label-color;
+  }
+
+  &__kyc-disclaimer {
+    font-size: $font-size-small;
+    color: $label-color;
+    letter-spacing: 0.4px;
   }
 }
