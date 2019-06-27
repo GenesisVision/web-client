@@ -2,7 +2,6 @@ import "./calculator-output.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import withLoader from "shared/decorators/with-loader";
@@ -10,7 +9,6 @@ import withLoader from "shared/decorators/with-loader";
 const _CalculatorOutput: React.FC<Props> = ({
   label,
   value,
-  valueSuffix,
   className,
   tooltipContent
 }) => {
@@ -25,14 +23,7 @@ const _CalculatorOutput: React.FC<Props> = ({
         }
         accent
       >
-        <span className="calculator-output__value">
-          <NumberFormat
-            value={value}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={valueSuffix ? ` ${valueSuffix}` : ""}
-          />
-        </span>
+        <span className="calculator-output__value">{value}</span>
       </StatisticItem>
     </div>
   );
@@ -40,9 +31,8 @@ const _CalculatorOutput: React.FC<Props> = ({
 
 interface Props {
   label: string;
-  value: string | number;
+  value: string | React.ReactNode;
   tooltipContent?: string;
-  valueSuffix?: string;
   className?: string;
 }
 

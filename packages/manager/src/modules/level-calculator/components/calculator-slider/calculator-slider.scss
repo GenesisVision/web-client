@@ -48,10 +48,6 @@
     }
   }
 
-  .rc-slider-mark {
-    top: 10px;
-  }
-
   .rc-slider-mark-text,
   .rc-slider-mark-text-active {
     @include font-size($font-size-small);
@@ -60,7 +56,7 @@
   }
 
   &__heading {
-    margin-bottom: $padding-xxsmall/2;
+    margin-bottom: $padding-xxsmall;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -68,7 +64,13 @@
 
   &__title {
     @include font-size($font-size-small);
-    color: #e6edf1;
+    color: $calculator-label-color;
+    display: flex;
+    align-items: center;
+
+    .tooltip__label {
+      margin-left: $padding-xxsmall;
+    }
   }
 
   &__value {
