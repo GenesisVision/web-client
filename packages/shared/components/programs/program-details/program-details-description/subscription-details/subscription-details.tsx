@@ -12,10 +12,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import { roundPercents } from "shared/utils/formatter";
 
-class _SubscriptionDetails extends React.PureComponent<
-  Props,
-  State
-> {
+class _SubscriptionDetails extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -32,28 +29,20 @@ class _SubscriptionDetails extends React.PureComponent<
   };
 
   render() {
-    const {
-      t,
-      id,
-      personalDetails,
-    } = this.props;
+    const { t, id, personalDetails } = this.props;
 
     return (
       <ProgramDetailContext.Consumer>
         {({ updateDetails }: IProgramDetailContext) => (
           <Surface className="surface--horizontal-paddings subscription-details">
-            <h3>
-              Subscription details
-            </h3>
+            <h3>Subscription details</h3>
             <span>Edit</span>
             <div className="subscription-details__short-statistic">
               <StatisticItem
                 accent
                 label={t("fund-details-page.description.profit")}
               >
-                <Profitability
-                  value={`${personalDetails.profit}`}
-                >
+                <Profitability value={`${personalDetails.profit}`}>
                   {roundPercents(personalDetails.profit)}
                 </Profitability>
               </StatisticItem>
@@ -63,23 +52,13 @@ class _SubscriptionDetails extends React.PureComponent<
               >
                 Active
               </StatisticItem>
-              <StatisticItem
-                accent
-                label={"Subscription Type"}
-              >
-                By Balance
+              <StatisticItem accent label={"Subscription Type"}>
+                <span>By Balance</span>
               </StatisticItem>
-              <StatisticItem
-                accent
-                label={"Subscription Type"}
-              >
-                  <span>By Balance</span>
-              </StatisticItem>
-              <StatisticItem
-                accent
-                label=""
-              >
-                  <span className="subscription-details__value-accent">Tolerance percentage 1%</span>
+              <StatisticItem accent label="">
+                <span className="subscription-details__value-accent">
+                  Tolerance percentage 1%
+                </span>
               </StatisticItem>
             </div>
           </Surface>
@@ -94,9 +73,7 @@ interface OwnProps {
   personalDetails: PersonalProgramDetailsFull;
 }
 
-interface Props
-  extends OwnProps,
-    InjectedTranslateProps {}
+interface Props extends OwnProps, InjectedTranslateProps {}
 interface State {
   isOpenWithdrawalPopup: boolean;
 }
