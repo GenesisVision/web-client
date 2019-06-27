@@ -43,7 +43,7 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       value,
       min,
       max,
-      title,
+      label,
       step = 1,
       valueSuffix,
       className,
@@ -53,7 +53,7 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       <div className={classnames("calculator-slider", className)}>
         <div className="calculator-slider__heading">
           <div className="calculator-slider__title">
-            <span>{title}</span>
+            <span>{label}</span>
             {tooltipContent && <TooltipLabel tooltipContent={tooltipContent} />}
           </div>
           <div className="calculator-slider__value">
@@ -85,7 +85,7 @@ interface Props {
   max: number;
   maxSuffix?: string;
   step?: number;
-  title?: string | React.ReactNode;
+  label?: string | React.ReactNode;
   valueSuffix?: string;
   className?: string;
   tooltipContent?: string;

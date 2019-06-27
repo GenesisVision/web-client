@@ -109,14 +109,17 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
     return (
       <div className="level-calculator-popup">
         <div className="level-calculator-popup__header">
-          <h2 className="level-calculator-popup__heading">Calculator</h2>
+          <h2 className="level-calculator-popup__heading">
+            {" "}
+            {t("manager.level-calculator.title")}
+          </h2>
           <div>
             <GVButton
               onClick={this.handleResetForm}
               className="level-calculator-popup__reset-button"
             >
               <span className="level-calculator-popup__reset-button-text">
-                Reset
+                {t("buttons.reset")}
               </span>
             </GVButton>
             <GVButton
@@ -131,14 +134,16 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
         </div>
 
         <div className="level-calculator-popup__program-name">
-          <div className="level-calculator-popup__program-label">Program</div>
+          <div className="level-calculator-popup__program-label">
+            {t("manager.level-calculator.program")}
+          </div>
           <div className="level-calculator-popup__program-title">{title}</div>
         </div>
         <div className="level-calculator-popup__controls">
           <CalculatorSlider
             name="genesisRatio"
             className="level-calculator-popup__calculator-slider"
-            title="Genesis Ratio"
+            label={t("manager.level-calculator.genesis-ratio")}
             value={genesisRatio}
             min={levelsParams.genesisRatioMin}
             max={levelsParams.genesisRatioMax}
@@ -148,7 +153,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           <CalculatorSlider
             name="programAge"
             className="level-calculator-popup__calculator-slider"
-            title="Age"
+            label={t("manager.level-calculator.age")}
             value={programAge}
             min={0}
             max={levelsParams.programAgeMax}
@@ -159,8 +164,10 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           <CalculatorSlider
             name="weightedVolumeScale"
             className="level-calculator-popup__calculator-slider"
-            title="Weighted volume scale"
-            tooltipContent={"tooltip"}
+            label={t("manager.level-calculator.weighted-volume-scale")}
+            tooltipContent={t(
+              "manager.level-calculator.weighted-volume-scale-tooltip"
+            )}
             value={weightedVolumeScale}
             min={levelsParams.volumeScaleMin}
             max={levelsParams.volumeScaleMax}
@@ -170,8 +177,10 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           <CalculatorSlider
             name="managerBalance"
             className="level-calculator-popup__calculator-slider"
-            title="Manager balance"
-            tooltipContent={"tooltip"}
+            label={t("manager.level-calculator.manager-balance")}
+            tooltipContent={t(
+              "manager.level-calculator.manager-balance-tooltip"
+            )}
             value={+formatValue(managerBalance, 4)}
             valueSuffix={` ${currency}`}
             min={levelsParams.minAvailableToInvest}
@@ -184,8 +193,10 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
         <div className="level-calculator-popup__controls">
           <CalculatorOutput
             className="level-calculator-popup__statistic-item"
-            label={"Current av.to invest"}
-            tooltipContent="tooltip"
+            label={t("manager.level-calculator.current-av-to-invest")}
+            tooltipContent={t(
+              "manager.level-calculator.current-av-to-invest-tooltip"
+            )}
             value={
               <NumberFormat
                 value={formatCurrencyValue(
@@ -201,8 +212,10 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
 
           <CalculatorOutput
             className="level-calculator-popup__statistic-item"
-            label={"Investment Scale"}
-            tooltipContent="tooltip"
+            label={t("manager.level-calculator.investment-scale")}
+            tooltipContent={t(
+              "manager.level-calculator.investment-scale-tooltip"
+            )}
             value={
               <NumberFormat
                 value={formatValue(programLevelInfo.investmentScale, 2)}
@@ -212,8 +225,10 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           />
           <CalculatorOutput
             className="level-calculator-popup__statistic-item"
-            label={"New Av. to invest"}
-            tooltipContent="tooltip"
+            label={t("manager.level-calculator.new-av-to-invest")}
+            tooltipContent={t(
+              "manager.level-calculator.new-av-to-invest-tooltip"
+            )}
             value={
               <NumberFormat
                 value={formatCurrencyValue(newAvailableToInvest, currency)}
@@ -225,8 +240,10 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           />
           <CalculatorOutput
             className="level-calculator-popup__statistic-item"
-            label={"Investment Scale"}
-            tooltipContent="tooltip"
+            label={t("manager.level-calculator.investment-scale")}
+            tooltipContent={t(
+              "manager.level-calculator.investment-scale-tooltip"
+            )}
             value={
               <NumberFormat
                 value={formatValue(investmentScale, 2)}

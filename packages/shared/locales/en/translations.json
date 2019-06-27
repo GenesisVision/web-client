@@ -72,7 +72,8 @@
     "edit": "Edit",
     "save": "Save",
     "verify": "Verify",
-    "resend-email": "Resend email"
+    "resend-email": "Resend email",
+    "reset": "Reset"
   },
   "filters": {
     "level": {
@@ -1806,6 +1807,23 @@
       "title": "Reallocate",
       "apply": "Confirm",
       "success-alert-message": "Your assets were successfully reallocated!"
+    },
+    "level-calculator": {
+      "title": "Calculator",
+      "program": "Program",
+      "genesis-ratio": "Genesis Ratio",
+      "age": "Age",
+      "weighted-volume-scale": "Weighted volume scale",
+      "manager-balance": "Manager balance",
+      "current-av-to-invest": "Current Av. to invest",
+      "new-av-to-invest": "New Av. to invest",
+      "investment-scale": "Investment scale",
+      "weighted-volume-scale-tooltip": "Weighted volume scale tooltip",
+      "manager-balance-tooltip": "Manager balance tooltip",
+      "current-av-to-invest-tooltip": "Current Av. to invest tooltip",
+      "new-av-to-invest-tooltip": "New Av. to invest tooltip",
+      "investment-scale-tooltip": "Investment scale tooltip",
+      "kyc-notification": "kyc notification"
     }
   }
 }

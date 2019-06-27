@@ -13,7 +13,7 @@
     @include font-size(15px);
     display: inline-block;
     padding: 6px 22px;
-    background-color: $panel-background-color;
+    background-color: rgba($panel-background-color, 0.3);
     border-radius: 4px;
     color: $main-color;
   }
