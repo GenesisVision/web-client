@@ -1,4 +1,4 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import AssetEditContainer, {
   IAssetEditInfo
 } from "modules/asset-edit/asset-edit-container";
@@ -57,7 +57,8 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
       canCloseProgram,
       isOwnProgram,
       programDescription,
-      isAuthenticated
+      isAuthenticated,
+      levelsParameters
     } = this.props;
 
     const composeEditInfo: IAssetEditInfo = {
@@ -80,87 +81,90 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
       : false;
 
     return (
-      <>
-        <InvestmentProgramInfo
-          isOwnProgram={isOwnProgram}
-          programDescription={programDescription}
-          LevelCalculator={LevelCalculator}
-        />
-        <div className="program-details-description__button-container">
-          {isOwnProgram ? (
-            <>
-              <GVButton
-                className="program-details-description__invest-btn"
-                onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
-                disabled={isDisabledInvestButton}
-              >
-                {t("program-details-page.description.invest")}
-              </GVButton>
-              <GVButton
-                className="program-details-description__invest-btn"
-                color="secondary"
-                variant="outlined"
-                onClick={this.openPopup(INVESTMENT_POPUP.CLOSE_PROGRAM)}
-                disabled={
-                  !programDescription.personalProgramDetails.canCloseProgram
-                }
-              >
-                {t("program-details-page.description.close-program")}
-              </GVButton>
-              <GVButton
-                className="program-details-description__invest-btn"
-                color="secondary"
-                variant="outlined"
-                onClick={this.openPopup(INVESTMENT_POPUP.CLOSE_PERIOD)}
-                disabled={
-                  !programDescription.personalProgramDetails.canClosePeriod
-                }
-              >
-                {t("program-details-page.close-period.title")}
-              </GVButton>
-              <GVButton
-                className="program-details-description__invest-btn"
-                color="secondary"
-                variant="outlined"
-                onClick={this.openPopup(INVESTMENT_POPUP.EDIT)}
-                disabled={!canCloseProgram}
-              >
-                {t("program-details-page.description.edit-program")}
-              </GVButton>
-              {programDescription.personalProgramDetails &&
-                programDescription.personalProgramDetails
-                  .showTwoFactorButton && (
+      <ProgramDetailContext.Consumer>
+        {({ updateDetails, isKycConfirmed }: IProgramDetailContext) => (
+          <>
+            <InvestmentProgramInfo
+              isOwnProgram={isOwnProgram}
+              programDescription={programDescription}
+              levelsParameters={levelsParameters}
+              isKycConfirmed={isKycConfirmed}
+              LevelCalculator={LevelCalculator}
+            />
+            <div className="program-details-description__button-container">
+              {isOwnProgram ? (
+                <>
+                  <GVButton
+                    className="program-details-description__invest-btn"
+                    onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
+                    disabled={isDisabledInvestButton}
+                  >
+                    {t("program-details-page.description.invest")}
+                  </GVButton>
                   <GVButton
                     className="program-details-description__invest-btn"
                     color="secondary"
                     variant="outlined"
-                    onClick={this.openPopup(INVESTMENT_POPUP.TFA)}
+                    onClick={this.openPopup(INVESTMENT_POPUP.CLOSE_PROGRAM)}
+                    disabled={
+                      !programDescription.personalProgramDetails.canCloseProgram
+                    }
+                  >
+                    {t("program-details-page.description.close-program")}
+                  </GVButton>
+                  <GVButton
+                    className="program-details-description__invest-btn"
+                    color="secondary"
+                    variant="outlined"
+                    onClick={this.openPopup(INVESTMENT_POPUP.CLOSE_PERIOD)}
+                    disabled={
+                      !programDescription.personalProgramDetails.canClosePeriod
+                    }
+                  >
+                    {t("program-details-page.close-period.title")}
+                  </GVButton>
+                  <GVButton
+                    className="program-details-description__invest-btn"
+                    color="secondary"
+                    variant="outlined"
+                    onClick={this.openPopup(INVESTMENT_POPUP.EDIT)}
                     disabled={!canCloseProgram}
                   >
-                    {t("Confirm 2FA")}
+                    {t("program-details-page.description.edit-program")}
                   </GVButton>
-                )}
-            </>
-          ) : (
-            <GVButton
-              className="program-details-description__invest-btn"
-              onClick={this.openPopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
-            >
-              {t("program-details-page.description.invest")}
-            </GVButton>
-          )}
-        </div>
-        <InvestmentUnauthPopup
-          message={message}
-          title={programDescription.title}
-          currency={programDescription.currency}
-          availableToInvestBase={programDescription.availableInvestment}
-          asset={ASSET.PROGRAM}
-          open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
-          onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
-        />
-        <ProgramDetailContext.Consumer>
-          {({ updateDetails }: IProgramDetailContext) => (
+                  {programDescription.personalProgramDetails &&
+                    programDescription.personalProgramDetails
+                      .showTwoFactorButton && (
+                      <GVButton
+                        className="program-details-description__invest-btn"
+                        color="secondary"
+                        variant="outlined"
+                        onClick={this.openPopup(INVESTMENT_POPUP.TFA)}
+                        disabled={!canCloseProgram}
+                      >
+                        {t("Confirm 2FA")}
+                      </GVButton>
+                    )}
+                </>
+              ) : (
+                <GVButton
+                  className="program-details-description__invest-btn"
+                  onClick={this.openPopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
+                >
+                  {t("program-details-page.description.invest")}
+                </GVButton>
+              )}
+            </div>
+            <InvestmentUnauthPopup
+              message={message}
+              title={programDescription.title}
+              currency={programDescription.currency}
+              availableToInvestBase={programDescription.availableInvestment}
+              asset={ASSET.PROGRAM}
+              open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
+              onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
+            />
+
             <>
               <ProgramDeposit
                 currency={programDescription.currency}
@@ -199,9 +203,9 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
                   />
                 )}
             </>
-          )}
-        </ProgramDetailContext.Consumer>
-      </>
+          </>
+        )}
+      </ProgramDetailContext.Consumer>
     );
   }
 }
@@ -214,6 +218,7 @@ interface OwnProps {
   canCloseProgram: boolean;
   isOwnProgram: boolean;
   programDescription: ProgramDetailsFull;
+  levelsParameters: LevelsParamsInfo;
 }
 
 interface State {

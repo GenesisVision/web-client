@@ -1,4 +1,5 @@
 import { ProgramDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo } from "gv-api-web/src";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -14,6 +15,8 @@ interface IInvestmentProgramInfoProps {
   isOwnProgram?: boolean;
   programDescription: ProgramDetailsFull;
   LevelCalculator?: React.ComponentType<ILevelCalculatorProps>;
+  levelsParameters?: LevelsParamsInfo;
+  isKycConfirmed?: boolean;
 }
 
 const renderFee = (
@@ -38,7 +41,14 @@ const renderFee = (
 
 const InvestmentProgramInfo: React.FC<
   InjectedTranslateProps & IInvestmentProgramInfoProps
-> = ({ t, isOwnProgram, programDescription, LevelCalculator }) => {
+> = ({
+  t,
+  isOwnProgram,
+  programDescription,
+  levelsParameters,
+  LevelCalculator,
+  isKycConfirmed
+}) => {
   const {
     availableInvestmentBase,
     availableInvestmentLimit,
@@ -64,6 +74,8 @@ const InvestmentProgramInfo: React.FC<
               id={programDescription.id}
               currency={programDescription.currency}
               title={programDescription.title}
+              levelsParameters={levelsParameters!}
+              isKycConfirmed={isKycConfirmed!}
             />
           </div>
         )}

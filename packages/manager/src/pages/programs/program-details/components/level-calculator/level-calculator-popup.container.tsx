@@ -9,7 +9,6 @@ import { ILevelCalculatorProps } from "shared/components/programs/program-detail
 
 import {
   getPlatformLevels,
-  getPlatformLevelsParams,
   getProgramLevelsInfo
 } from "../../service/level-calculator.service";
 import LevelCalculatorPopup from "./level-calculator-popup";
@@ -21,12 +20,10 @@ class LevelCalculatorPopupContainer extends React.PureComponent<
 > {
   programLevelsPromise?: CancelablePromise<void>;
   platformLevelsPromise?: CancelablePromise<void>;
-  levelsParamsPromise?: CancelablePromise<void>;
 
   state: State = {
     programLevelInfo: undefined,
-    platformLevels: undefined,
-    levelsParams: undefined
+    platformLevels: undefined
   };
 
   componentDidMount() {
@@ -40,11 +37,6 @@ class LevelCalculatorPopupContainer extends React.PureComponent<
         this.setState({ platformLevels });
       }
     );
-    this.platformLevelsPromise = getPlatformLevelsParams(
-      this.props.currency
-    ).then(levelsParams => {
-      this.setState({ levelsParams });
-    });
   }
 
   componentWillUnmount() {
@@ -54,16 +46,19 @@ class LevelCalculatorPopupContainer extends React.PureComponent<
     if (this.platformLevelsPromise) {
       this.platformLevelsPromise.cancel();
     }
-    if (this.levelsParamsPromise) {
-      this.levelsParamsPromise.cancel();
-    }
   }
 
   render() {
-    const { id, title, currency, onClose } = this.props;
-    const { programLevelInfo, levelsParams, platformLevels } = this.state;
-    const isDataReady =
-      !!programLevelInfo && !!levelsParams && !!platformLevels;
+    const {
+      id,
+      title,
+      currency,
+      levelsParameters,
+      onClose,
+      isKycConfirmed
+    } = this.props;
+    const { programLevelInfo, platformLevels } = this.state;
+    const isDataReady = !!programLevelInfo && !!platformLevels;
     return (
       <LevelCalculatorPopup
         condition={isDataReady}
@@ -72,9 +67,10 @@ class LevelCalculatorPopupContainer extends React.PureComponent<
         title={title}
         currency={currency}
         programLevelInfo={programLevelInfo!}
-        levelsParams={levelsParams!}
+        levelsParameters={levelsParameters}
         platformLevels={platformLevels!}
         onClose={onClose}
+        isKycConfirmed={isKycConfirmed}
       />
     );
   }
@@ -85,5 +81,4 @@ export default LevelCalculatorPopupContainer;
 interface State {
   programLevelInfo?: ProgramLevelInfo;
   platformLevels?: ProgramsLevelsInfo;
-  levelsParams?: LevelsParamsInfo;
 }

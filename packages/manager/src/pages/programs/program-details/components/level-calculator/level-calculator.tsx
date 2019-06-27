@@ -21,7 +21,13 @@ class _LevelCalculator extends React.PureComponent<
   handleCloseDetails = () => this.setState({ anchor: undefined });
 
   render() {
-    const { id, title, currency } = this.props;
+    const {
+      id,
+      title,
+      currency,
+      levelsParameters,
+      isKycConfirmed
+    } = this.props;
     return (
       <>
         <div className="level-calculator" onClick={this.handleOpenDetails}>
@@ -34,6 +40,8 @@ class _LevelCalculator extends React.PureComponent<
             title={title}
             currency={currency}
             onClose={this.handleCloseDetails}
+            levelsParameters={levelsParameters}
+            isKycConfirmed={isKycConfirmed}
           />
         </Popover>
       </>

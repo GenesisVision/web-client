@@ -1,5 +1,6 @@
 import {
   DashboardPortfolioEvent,
+  LevelsParamsInfo,
   ManagerPortfolioEvent,
   ProgramDetailsFull
 } from "gv-api-web";
@@ -12,6 +13,7 @@ export interface IProgramControlsProps {
   isAuthenticated: boolean;
   redirectToLogin(): void;
   programDescription: ProgramDetailsFull;
+  levelsParameters: LevelsParamsInfo;
 }
 
 export interface IProgramWithdrawalContainerProps extends IDialogProps {
@@ -60,4 +62,6 @@ export interface ILevelCalculatorProps {
   id: string;
   title: string;
   currency: string;
+  levelsParameters: LevelsParamsInfo;
+  isKycConfirmed: boolean;
 }

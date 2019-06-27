@@ -1,8 +1,4 @@
-import {
-  LevelsParamsInfo,
-  ProgramLevelInfo,
-  ProgramsLevelsInfo
-} from "gv-api-web";
+import { ProgramLevelInfo, ProgramsLevelsInfo } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -18,17 +14,17 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
   getDefaultValues = () => {
-    const { programLevelInfo, levelsParams } = this.props;
+    const { programLevelInfo, levelsParameters } = this.props;
     return {
       genesisRatio: programLevelInfo.genesisRatio,
       programAge: Math.min(
         programLevelInfo.programAge,
-        levelsParams.programAgeMax
+        levelsParameters.programAgeMax
       ),
       weightedVolumeScale: programLevelInfo.weightedVolumeScale,
       managerBalance: Math.min(
         programLevelInfo.managerBalance,
-        levelsParams.maxAvailableToInvest
+        levelsParameters.maxAvailableToInvest
       )
     };
   };
@@ -42,26 +38,29 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
     const progress =
       Math.min(
         this.state.programAge * this.state.weightedVolumeScale,
-        this.props.levelsParams.ageByVolumeMax
-      ) / this.props.levelsParams.ageByVolumeMax;
+        this.props.levelsParameters.ageByVolumeMax
+      ) / this.props.levelsParameters.ageByVolumeMax;
     return this.lerp(
-      this.props.levelsParams.investmentScaleMin,
-      this.props.levelsParams.investmentScaleMax,
+      this.props.levelsParameters.investmentScaleMin,
+      this.props.levelsParameters.investmentScaleMax,
       progress
     );
   };
 
   calcNewAvailableToInvest = (investmentScale: number) => {
     let newAvailableToInvest = this.state.managerBalance;
-    if (this.state.genesisRatio >= this.props.levelsParams.genesisRatioHighRisk)
+    if (
+      this.state.genesisRatio >=
+      this.props.levelsParameters.genesisRatioHighRisk
+    )
       newAvailableToInvest *= investmentScale;
 
     return Math.max(
       Math.min(
         newAvailableToInvest,
-        this.props.levelsParams.maxAvailableToInvest
+        this.props.levelsParameters.maxAvailableToInvest
       ),
-      this.props.levelsParams.minAvailableToInvest
+      this.props.levelsParameters.minAvailableToInvest
     );
   };
 
@@ -92,8 +91,9 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
       title,
       currency,
       programLevelInfo,
-      levelsParams,
-      onClose
+      levelsParameters,
+      onClose,
+      isKycConfirmed
     } = this.props;
     const {
       genesisRatio,
@@ -110,7 +110,6 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
       <div className="level-calculator-popup">
         <div className="level-calculator-popup__header">
           <h2 className="level-calculator-popup__heading">
-            {" "}
             {t("manager.level-calculator.title")}
           </h2>
           <div>
@@ -145,8 +144,8 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             className="level-calculator-popup__calculator-slider"
             label={t("manager.level-calculator.genesis-ratio")}
             value={genesisRatio}
-            min={levelsParams.genesisRatioMin}
-            max={levelsParams.genesisRatioMax}
+            min={levelsParameters.genesisRatioMin}
+            max={levelsParameters.genesisRatioMax}
             step={0.1}
             onChange={this.handleSliderChange}
           />
@@ -156,7 +155,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             label={t("manager.level-calculator.age")}
             value={programAge}
             min={0}
-            max={levelsParams.programAgeMax}
+            max={levelsParameters.programAgeMax}
             maxSuffix="+"
             step={1}
             onChange={this.handleSliderChange}
@@ -169,8 +168,8 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
               "manager.level-calculator.weighted-volume-scale-tooltip"
             )}
             value={weightedVolumeScale}
-            min={levelsParams.volumeScaleMin}
-            max={levelsParams.volumeScaleMax}
+            min={levelsParameters.volumeScaleMin}
+            max={levelsParameters.volumeScaleMax}
             step={0.1}
             onChange={this.handleSliderChange}
           />
@@ -183,8 +182,8 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             )}
             value={+formatValue(managerBalance, 4)}
             valueSuffix={` ${currency}`}
-            min={levelsParams.minAvailableToInvest}
-            max={levelsParams.maxAvailableToInvest}
+            min={levelsParameters.minAvailableToInvest}
+            max={levelsParameters.maxAvailableToInvest}
             step={10}
             onChange={this.handleSliderChange}
           />
@@ -260,6 +259,9 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             levelProgress={progress}
           />
         </div>
+        {!isKycConfirmed && (
+          <div>{t("manager.level-calculator.kyc-notification")}</div>
+        )}
       </div>
     );
   }
@@ -276,7 +278,6 @@ export default LevelCalculatorPopup;
 interface OwnProps extends ILevelCalculatorProps {
   programLevelInfo: ProgramLevelInfo;
   platformLevels: ProgramsLevelsInfo;
-  levelsParams: LevelsParamsInfo;
   onClose(): void;
 }
 

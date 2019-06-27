@@ -10,7 +10,3 @@ export const getProgramLevelsInfo = (id: string) => {
 export const getPlatformLevels = (currency: string) => {
   return platformApi.v10PlatformLevelsGet({ currency });
 };
-
-export const getPlatformLevelsParams = (currency: string) => {
-  return platformApi.v10PlatformLevelsParametersGet({ currency });
-};
