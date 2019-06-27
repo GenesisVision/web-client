@@ -72,7 +72,8 @@
     "edit": "Edit",
     "save": "Save",
     "verify": "Verify",
-    "resend-email": "Resend email"
+    "resend-email": "Resend email",
+    "reset": "Reset"
   },
   "filters": {
     "level": {
@@ -351,8 +352,8 @@
   },
   "follow-program": {
     "info": {
-      "ETH": "The minimum order size on Binance is 0.001 BTC",
-      "BTC": "The minimum order size on Binance is 0.01 ETH",
+      "ETH": "The minimum order size on Binance is 0.01 ETH ",
+      "BTC": "The minimum order size on Binance is 0.001 BTC",
       "USDT": "The minimum order size on Binance is 10 USDT"
     },
     "modes": {
@@ -399,7 +400,8 @@
         "tolerance-required": "Tolerance percent is required field"
       }
     },
-    "success-alert-message": "You have been subscribed."
+    "create-success-alert-message": "You have been subscribed.",
+    "edit-success-alert-message": "Subscription settings have been edited."
   },
   "withdraw-fund": {
     "title": "Withdraw",
@@ -591,6 +593,13 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "broker": "Broker",
+      "leverage": "Leverage",
+      "period": "Period",
+      "age": "Age",
+      "genesis-ratio": "Genesis Ratio",
+      "investment-scale": "Invest. scale",
+      "volume-scale": "Volume scale",
       "notify-hint": "Notify me when the program is available for investment",
       "stop-out-level": "Stop out",
       "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
@@ -1805,6 +1814,23 @@
       "title": "Reallocate",
       "apply": "Confirm",
       "success-alert-message": "Your assets were successfully reallocated!"
+    },
+    "level-calculator": {
+      "title": "Calculator",
+      "program": "Program",
+      "genesis-ratio": "Genesis Ratio",
+      "age": "Age",
+      "weighted-volume-scale": "Weighted volume scale",
+      "manager-balance": "Manager balance",
+      "current-av-to-invest": "Current Av. to invest",
+      "new-av-to-invest": "New Av. to invest",
+      "investment-scale": "Investment scale",
+      "weighted-volume-scale-tooltip": "Weighted volume scale tooltip",
+      "manager-balance-tooltip": "Manager balance tooltip",
+      "current-av-to-invest-tooltip": "Current Av. to invest tooltip",
+      "new-av-to-invest-tooltip": "New Av. to invest tooltip",
+      "investment-scale-tooltip": "Investment scale tooltip",
+      "kyc-disclaimer": "kyc disclaimer"
     }
   }
 }

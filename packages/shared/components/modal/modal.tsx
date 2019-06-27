@@ -14,6 +14,7 @@ export const BodyFix = () => {
 };
 
 const _Modal: React.FC<Props> = ({
+  disableBackdrop,
   onClose,
   open,
   noAbsolute,
@@ -41,18 +42,20 @@ const _Modal: React.FC<Props> = ({
     <Portal open={open}>
       <div
         className={classNames("modal", {
-          "modal--position-absolute": !noAbsolute,
+          "modal--position-absolute": !disableBackdrop && !noAbsolute,
           "modal--position-fixed": fixed
         })}
       >
-        <EventListener target={document} onKeyUp={handleKeyPress}>
-          <div
-            className={classNames("modal__backdrop", {
-              "modal__backdrop--transparent": transparentBackdrop
-            })}
-            onClick={handleBackdropClick}
-          />
-        </EventListener>
+        {disableBackdrop || (
+          <EventListener target={document} onKeyUp={handleKeyPress}>
+            <div
+              className={classNames("modal__backdrop", {
+                "modal__backdrop--transparent": transparentBackdrop
+              })}
+              onClick={handleBackdropClick}
+            />
+          </EventListener>
+        )}
         {children}
       </div>
     </Portal>
@@ -65,6 +68,7 @@ interface Props {
   noAbsolute?: boolean;
   transparentBackdrop?: boolean;
   fixed?: boolean;
+  disableBackdrop?: boolean;
 }
 
 const Modal = React.memo(_Modal);

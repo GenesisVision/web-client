@@ -14,6 +14,7 @@ interface GVButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   children: string | JSX.Element;
   name?: string;
+  noPadding?: boolean;
 }
 
 const GVButton: React.FC<GVButtonProps> = ({
@@ -26,14 +27,16 @@ const GVButton: React.FC<GVButtonProps> = ({
   disabled,
   onClick,
   children,
-  name
+  name,
+  noPadding
 }) => {
   const classname = classnames("gv-btn", className, {
     "gv-btn--primary": color === "primary",
     "gv-btn--secondary": color === "secondary",
     "gv-btn--text": variant === "text",
     "gv-btn--outlined": variant === "outlined",
-    "gv-btn--contained": variant === "contained"
+    "gv-btn--contained": variant === "contained",
+    "gv-btn--no-padding": noPadding
   });
   return (
     <button

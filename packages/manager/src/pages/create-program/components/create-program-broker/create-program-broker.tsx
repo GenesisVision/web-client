@@ -57,6 +57,7 @@ const _CreateProgramBroker: React.FC<OwnProps & InjectedTranslateProps> = ({
       <div className="create-program-broker__list">
         {brokers.map(broker => (
           <BrokerCard
+            logo={broker.logo}
             key={broker.name}
             brokerName={broker.name}
             isSelected={broker === selectedBroker}

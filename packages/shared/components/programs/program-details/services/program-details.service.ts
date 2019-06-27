@@ -28,9 +28,13 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { HistoryCountsType } from "../program-details.types";
 import { ProgramStatisticResult } from "./program-details.types";
+
+export const getPlatformLevelsParameters = (currency: CurrencyEnum) =>
+  platformApi.v10PlatformLevelsParametersGet({ currency });
 
 export const getProgramDescription = () => (
   dispatch: Dispatch,
@@ -159,7 +163,7 @@ export const fetchOpenPositions = (
 
 export const fetchInvestmentsLevels = (
   currency: string
-): Promise<ProgramsLevelsInfo> => {
+): CancelablePromise<ProgramsLevelsInfo> => {
   return platformApi.v10PlatformLevelsGet({ currency });
 };
 

@@ -123,7 +123,7 @@ const _FollowParams: React.FC<
         </GVButton>
       </div>
       {values[FIELDS.mode] === modes.fixed.value && (
-        <div className="dialog-field">{t(getInfoText(currency))}</div>
+        <div className="dialog__info">{t(getInfoText(currency))}</div>
       )}
     </form>
   );

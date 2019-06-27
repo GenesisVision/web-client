@@ -189,6 +189,7 @@ interface OwnProps {
   fixed?: boolean;
   ownWidth?: boolean;
   relToWindow?: boolean;
+  disableBackdrop?: boolean;
 }
 interface State {
   windowWidth: number;

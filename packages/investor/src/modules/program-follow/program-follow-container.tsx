@@ -1,12 +1,15 @@
 import {
+  AttachToSignalProvider,
   AttachToSignalProviderInfo,
   SignalSubscription,
   WalletData
 } from "gv-api-web";
 import * as React from "react";
+import { InjectedTranslateProps } from "react-i18next";
+import translate from "react-i18next/src/translate";
 import { connect } from "react-redux";
 import { InvestorRootState } from "reducers";
-import { Dispatch, bindActionCreators } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
@@ -17,7 +20,11 @@ import {
 } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
 import authService from "shared/services/auth-service";
-import { CurrencyEnum } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  ResponseError,
+  SetSubmittingType
+} from "shared/utils/types";
 
 import FollowPopupForm from "./follow-popup/follow-popup-form";
 import {
@@ -55,41 +62,58 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
       .then(rate => this.setState({ rate }));
   }
 
-  render() {
-    const {
-      service,
-      wallets,
-      open,
-      onClose,
-      currency,
-      id,
-      signalSubscription
-    } = this.props;
-    const { isPending, type, minDeposit, rate } = this.state;
-    const handleClose = () => {
-      onClose();
-    };
-    const handleSubmit = () => {
-      this.props.onApply();
-      onClose();
-    };
-    const submitMethod =
+  componentDidUpdate() {
+    this.setState({
+      type: this.props.signalSubscription.hasActiveSubscription
+        ? FOLLOW_TYPE.EDIT
+        : FOLLOW_TYPE.CREATE
+    });
+  }
+
+  handleClose = () => {
+    this.props.onClose();
+  };
+
+  handleSubmit = (
+    programId: string,
+    requestParams: AttachToSignalProvider,
+    setSubmitting: SetSubmittingType
+  ) => {
+    const { type } = this.state;
+    const { service, t, onApply, onClose } = this.props;
+    const method =
       type === FOLLOW_TYPE.CREATE ? attachToSignal : updateAttachToSignal;
+    const message =
+      type === FOLLOW_TYPE.CREATE
+        ? "follow-program.create-success-alert-message"
+        : "follow-program.edit-success-alert-message";
+    method(programId, requestParams)
+      .then(() => {
+        service.alertSuccess(t(message));
+        onApply();
+        onClose();
+      })
+      .catch((errors: ResponseError) => {
+        service.alertError(errors.errorMessage);
+        setSubmitting(false);
+      });
+  };
+
+  render() {
+    const { wallets, open, currency, id, signalSubscription } = this.props;
+    const { isPending, minDeposit, rate } = this.state;
     return (
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={this.handleClose}>
         <FollowPopupForm
           rate={rate}
           condition={!isPending && !!wallets.length}
           loader={<DialogLoader />}
           signalSubscription={signalSubscription}
           minDeposit={minDeposit!}
-          alertError={service.alertError}
-          alertSuccess={service.alertSuccess}
           id={id}
           currency={currency}
           wallets={wallets}
-          submitMethod={submitMethod}
-          handleSubmit={handleSubmit}
+          submitMethod={this.handleSubmit}
         />
       </Dialog>
     );
@@ -118,7 +142,7 @@ interface StateProps {
   wallets: WalletData[];
 }
 
-interface Props extends DispatchProps, StateProps {
+interface OwnProps {
   open: boolean;
   onClose(): void;
   onApply(): void;
@@ -126,6 +150,12 @@ interface Props extends DispatchProps, StateProps {
   id: string;
   signalSubscription: SignalSubscription;
 }
+
+interface Props
+  extends DispatchProps,
+    StateProps,
+    OwnProps,
+    InjectedTranslateProps {}
 
 interface State {
   isPending: boolean;
@@ -135,8 +165,11 @@ interface State {
   rate: number;
 }
 
-const ProgramFollowContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+const ProgramFollowContainer = compose<React.ComponentType<OwnProps>>(
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(_ProgramFollowContainer);
 export default ProgramFollowContainer;
