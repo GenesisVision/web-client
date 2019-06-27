@@ -3,14 +3,15 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import CalculatorLevelLine from "shared/components/calculator-level/calculator-level-line/calculator-level-line";
-import CalculatorOutput from "shared/components/calculator-level/calculator-output/calculator-output";
-import CalculatorSlider from "shared/components/calculator-level/calculator-slider/calculator-slider";
 import GVButton from "shared/components/gv-button";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+
+import CalculatorLevelLine from "../components/calculator-level-line/calculator-level-line";
+import CalculatorOutput from "../components/calculator-output/calculator-output";
+import CalculatorSlider from "../components/calculator-slider/calculator-slider";
 
 class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
   getDefaultValues = () => {
