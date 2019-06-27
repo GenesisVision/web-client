@@ -62,6 +62,14 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
       .then(rate => this.setState({ rate }));
   }
 
+  componentDidUpdate() {
+    this.setState({
+      type: this.props.signalSubscription.hasActiveSubscription
+        ? FOLLOW_TYPE.EDIT
+        : FOLLOW_TYPE.CREATE
+    });
+  }
+
   handleClose = () => {
     this.props.onClose();
   };
@@ -94,6 +102,7 @@ class _ProgramFollowContainer extends React.PureComponent<Props, State> {
   render() {
     const { wallets, open, currency, id, signalSubscription } = this.props;
     const { isPending, minDeposit, rate } = this.state;
+    console.log(this.state.type);
     return (
       <Dialog open={open} onClose={this.handleClose}>
         <FollowPopupForm
