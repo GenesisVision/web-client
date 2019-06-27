@@ -11,11 +11,7 @@ import {
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import withLoader from "shared/decorators/with-loader";
-import {
-  CurrencyEnum,
-  ResponseError,
-  SetSubmittingType
-} from "shared/utils/types";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import FollowCreateAccount, {
   CreateAccountFormValues
@@ -69,7 +65,7 @@ class FollowForm extends React.PureComponent<
     }: FollowParamsFormValues,
     setSubmitting: SetSubmittingType
   ) => {
-    const { t, handleSubmit, id, alertError, alertSuccess } = this.props;
+    const { id } = this.props;
     let requestParams = {
       ...this.state.requestParams,
       mode,
@@ -80,16 +76,7 @@ class FollowForm extends React.PureComponent<
     this.setState({
       requestParams
     });
-    this.props
-      .submitMethod(id, this.state.requestParams)
-      .then(() => {
-        alertSuccess(t("follow-program.success-alert-message"));
-        handleSubmit();
-      })
-      .catch((errors: ResponseError) => {
-        alertError(errors.errorMessage);
-        setSubmitting(false);
-      });
+    this.props.submitMethod(id, this.state.requestParams, setSubmitting);
   };
   render() {
     const {
@@ -143,13 +130,11 @@ export interface Props {
   rate: number;
   minDeposit: number;
   signalSubscription: SignalSubscription;
-  alertSuccess: (msg: string) => void;
-  alertError: (msg: string) => void;
-  handleSubmit: () => void;
   submitMethod: (
     programId: string,
-    requestParams: AttachToSignalProvider
-  ) => Promise<any>;
+    requestParams: AttachToSignalProvider,
+    setSubmitting: SetSubmittingType
+  ) => void;
   id: string;
   wallets: WalletData[];
   currency: CurrencyEnum;
