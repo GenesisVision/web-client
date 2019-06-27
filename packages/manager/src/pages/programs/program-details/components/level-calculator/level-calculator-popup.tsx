@@ -8,9 +8,9 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import CalculatorLevelLine from "shared/components/calculator-level/calculator-level-line/calculator-level-line";
+import CalculatorOutput from "shared/components/calculator-level/calculator-output/calculator-output";
 import CalculatorSlider from "shared/components/calculator-level/calculator-slider/calculator-slider";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -126,6 +126,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             name="weightedVolumeScale"
             className="level-calculator-popup__calculator-slider"
             title="Weighted volume scale"
+            tooltipContent={"tooltip"}
             defaultValue={weightedVolumeScale}
             min={levelsParams.volumeScaleMin}
             max={levelsParams.volumeScaleMax}
@@ -136,7 +137,8 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             name="managerBalance"
             className="level-calculator-popup__calculator-slider"
             title="Manager balance"
-            defaultValue={managerBalance}
+            tooltipContent={"tooltip"}
+            defaultValue={+formatValue(managerBalance, 4)}
             valueSuffix={` ${currency}`}
             min={levelsParams.minAvailableToInvest}
             max={levelsParams.maxAvailableToInvest}
@@ -146,65 +148,62 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
         </div>
 
         <div className="level-calculator-popup__controls">
-          <StatisticItem
+          <CalculatorOutput
             className="level-calculator-popup__statistic-item"
-            labelClassName="level-calculator-popup__statistic-item-label"
             label={"Current av.to invest"}
-            big
-            accent
-          >
-            <NumberFormat
-              value={formatCurrencyValue(
-                programLevelInfo.totalAvailableToInvest,
-                currency
-              )}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={` ${currency}`}
-            />
-          </StatisticItem>
-          <StatisticItem
+            tooltipContent="tooltip"
+            value={
+              <NumberFormat
+                value={formatCurrencyValue(
+                  programLevelInfo.totalAvailableToInvest,
+                  currency
+                )}
+                thousandSeparator={" "}
+                displayType="text"
+                suffix={` ${currency}`}
+              />
+            }
+          />
+
+          <CalculatorOutput
             className="level-calculator-popup__statistic-item"
-            labelClassName="level-calculator-popup__statistic-item-label"
             label={"Investment Scale"}
-            big
-            accent
-          >
-            <NumberFormat
-              value={formatValue(programLevelInfo.investmentScale, 2)}
-              displayType="text"
-            />
-          </StatisticItem>
-          <StatisticItem
+            tooltipContent="tooltip"
+            value={
+              <NumberFormat
+                value={formatValue(programLevelInfo.investmentScale, 2)}
+                displayType="text"
+              />
+            }
+          />
+          <CalculatorOutput
             className="level-calculator-popup__statistic-item"
-            labelClassName="level-calculator-popup__statistic-item-label"
             label={"New Av. to invest"}
-            big
-            accent
-          >
-            <NumberFormat
-              value={formatCurrencyValue(newAvailableToInvest, currency)}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={` ${currency}`}
-            />
-          </StatisticItem>
-          <StatisticItem
+            tooltipContent="tooltip"
+            value={
+              <NumberFormat
+                value={formatCurrencyValue(newAvailableToInvest, currency)}
+                thousandSeparator={" "}
+                displayType="text"
+                suffix={` ${currency}`}
+              />
+            }
+          />
+          <CalculatorOutput
             className="level-calculator-popup__statistic-item"
-            labelClassName="level-calculator-popup__statistic-item-label"
             label={"Investment Scale"}
-            big
-            accent
-          >
-            <NumberFormat
-              value={formatValue(investmentScale, 2)}
-              displayType="text"
-            />
-          </StatisticItem>
+            tooltipContent="tooltip"
+            value={
+              <NumberFormat
+                value={formatValue(investmentScale, 2)}
+                displayType="text"
+              />
+            }
+          />
         </div>
         <div className="level-calculator-popup__level-progress">
           <CalculatorLevelLine
-            start={0}
+            start={1}
             end={7}
             level={level}
             levelProgress={progress}

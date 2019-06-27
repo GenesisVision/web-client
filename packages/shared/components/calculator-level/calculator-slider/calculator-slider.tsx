@@ -4,6 +4,7 @@ import classnames from "classnames";
 import Slider from "rc-slider";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
 class _CalculatorSlider extends React.PureComponent<Props, State> {
   state = {
@@ -43,12 +44,23 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { min, max, title, step = 1, valueSuffix, className } = this.props;
+    const {
+      min,
+      max,
+      title,
+      step = 1,
+      valueSuffix,
+      className,
+      tooltipContent
+    } = this.props;
     const { value } = this.state;
     return (
       <div className={classnames("calculator-slider", className)}>
         <div className="calculator-slider__heading">
-          <div className="calculator-slider__title">{title}</div>
+          <div className="calculator-slider__title">
+            <span>{title}</span>
+            {tooltipContent && <TooltipLabel tooltipContent={tooltipContent} />}
+          </div>
           <div className="calculator-slider__value">
             <NumberFormat
               value={value}
@@ -81,6 +93,7 @@ interface Props {
   title?: string | React.ReactNode;
   valueSuffix?: string;
   className?: string;
+  tooltipContent?: string;
   onChange(name: string, value: number): void;
 }
 

@@ -65,6 +65,12 @@
   &__title {
     @include font-size($font-size-small);
     color: $calculator-label-color;
+    display: flex;
+    align-items: center;
+
+    .tooltip__label {
+      margin-left: $padding-xxsmall;
+    }
   }
 
   &__value {
