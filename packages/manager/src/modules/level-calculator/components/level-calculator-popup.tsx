@@ -12,6 +12,11 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 import CalculatorLevelLine from "../components/calculator-level-line/calculator-level-line";
 import CalculatorOutput from "../components/calculator-output/calculator-output";
 import CalculatorSlider from "../components/calculator-slider/calculator-slider";
+import {
+  calcInvestmentScale,
+  calcLevel,
+  calcNewAvailableToInvest
+} from "../services/level-calculator.helper";
 
 class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
   getDefaultValues = () => {
@@ -32,52 +37,6 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
 
   state = this.getDefaultValues();
 
-  lerp = (from: number, to: number, progress: number) =>
-    from * (1 - progress) + to * progress;
-
-  calcInvestmentScale = () => {
-    const progress =
-      Math.min(
-        this.state.programAge * this.state.weightedVolumeScale,
-        this.props.levelsParameters.ageByVolumeMax
-      ) / this.props.levelsParameters.ageByVolumeMax;
-    return this.lerp(
-      this.props.levelsParameters.investmentScaleMin,
-      this.props.levelsParameters.investmentScaleMax,
-      progress
-    );
-  };
-
-  calcNewAvailableToInvest = (investmentScale: number) => {
-    let newAvailableToInvest = this.state.managerBalance;
-    if (
-      this.state.genesisRatio >=
-      this.props.levelsParameters.genesisRatioHighRisk
-    )
-      newAvailableToInvest *= investmentScale;
-
-    return Math.max(
-      Math.min(
-        newAvailableToInvest,
-        this.props.levelsParameters.maxAvailableToInvest
-      ),
-      this.props.levelsParameters.minAvailableToInvest
-    );
-  };
-
-  calcLevel = (avToInvest: number) => {
-    const { levels } = this.props.platformLevels;
-    let maxLevelIdx = levels.findIndex(x => x.investmentLimit > avToInvest);
-    if (maxLevelIdx === -1) maxLevelIdx = levels.length - 1;
-    const minLevelIdx = Math.max(0, maxLevelIdx - 1);
-    const progress =
-      ((avToInvest - levels[minLevelIdx].investmentLimit) /
-        (levels[maxLevelIdx].investmentLimit -
-          levels[minLevelIdx].investmentLimit)) *
-      100;
-    return [levels[minLevelIdx].level, progress];
-  };
-
   handleSliderChange = (name: string, value: number) => {
     this.setState({ [name]: value } as any);
   };
@@ -93,6 +52,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
       currency,
       programLevelInfo,
       levelsParameters,
+      platformLevels,
       onClose,
       isKycConfirmed
     } = this.props;
@@ -103,9 +63,21 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
       managerBalance
     } = this.state;
 
-    const investmentScale = this.calcInvestmentScale();
-    const newAvailableToInvest = this.calcNewAvailableToInvest(investmentScale);
-    const [level, progress] = this.calcLevel(newAvailableToInvest);
+    const investmentScale = calcInvestmentScale(
+      programAge,
+      weightedVolumeScale,
+      levelsParameters
+    );
+    const newAvailableToInvest = calcNewAvailableToInvest(
+      investmentScale,
+      managerBalance,
+      genesisRatio,
+      levelsParameters
+    );
+    const [level, progress] = calcLevel(
+      newAvailableToInvest,
+      platformLevels.levels
+    );
 
     return (
       <div className="level-calculator-popup">
