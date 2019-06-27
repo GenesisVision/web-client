@@ -1,6 +1,10 @@
 import "shared/components/details/details.scss";
 
-import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
+import {
+  LevelsParamsInfo,
+  ProgramBalanceChart,
+  ProgramDetailsFull
+} from "gv-api-web";
 import * as React from "react";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import Page from "shared/components/page/page";
@@ -23,6 +27,7 @@ import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
+  levelsParameters,
   updateDetails,
   currency,
   isAuthenticated,
@@ -48,6 +53,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         <div className="details">
           <div className="details__section">
             <ProgramDetailsDescriptionSection
+              levelsParameters={levelsParameters}
               accountCurrency={currency}
               programDescription={description}
               isAuthenticated={isAuthenticated}
@@ -105,6 +111,7 @@ interface OwnProps {
   profitChart?: ProgramDetailsProfitChart;
   balanceChart?: ProgramBalanceChart;
   statistic?: ProgramDetailsStatistic;
+  levelsParameters: LevelsParamsInfo;
   isAuthenticated: boolean;
   currency: CurrencyEnum;
 }
