@@ -1,5 +1,6 @@
 import "./calculator-slider.scss";
 
+import classnames from "classnames";
 import Slider from "rc-slider";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -41,10 +42,10 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { min, max, title, step = 1, valueSuffix } = this.props;
+    const { min, max, title, step = 1, valueSuffix, className } = this.props;
     const { value } = this.state;
     return (
-      <div className="calculator-slider">
+      <div className={classnames("calculator-slider", className)}>
         <div className="calculator-slider__heading">
           <div className="calculator-slider__title">{title}</div>
           <div className="calculator-slider__value">
@@ -77,6 +78,7 @@ interface Props {
   step?: number;
   title?: string | React.ReactNode;
   valueSuffix?: string;
+  className?: string;
 }
 
 interface State {

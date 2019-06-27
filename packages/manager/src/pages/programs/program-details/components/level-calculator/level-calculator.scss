@@ -9,6 +9,20 @@
 .level-calculator-popup {
   @include vertical-paddings($padding-small);
   @include horizontal-paddings($padding-small);
-  width: 640px;
-  height: 700px;
+  width: 640px - $padding-small * 2;
+  height: 700px - $padding-small * 2;
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__calculator-slider {
+    margin-bottom: 20px;
+  }
+
+  &__statistic-item {
+    min-width: 254px;
+  }
 }
