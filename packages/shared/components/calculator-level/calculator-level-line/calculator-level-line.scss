@@ -8,7 +8,7 @@
   &__label {
     @include font-size($font-size-small);
     @include adaptive-margin(bottom, $padding-xxsmall);
-    color: #e6edf1;
+    color: $calculator-label-color;
   }
 
   &__value {

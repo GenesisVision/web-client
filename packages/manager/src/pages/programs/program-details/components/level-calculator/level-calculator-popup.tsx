@@ -95,10 +95,10 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
 
     return (
       <div className="level-calculator-popup">
-        <h2>Calculator</h2>
+        <h2 className="level-calculator-popup__header">Calculator</h2>
         <div className="level-calculator-popup__program-name">
-          <div>Program</div>
-          <div>{title}</div>
+          <div className="level-calculator-popup__program-label">Program</div>
+          <div className="level-calculator-popup__program-title">{title}</div>
         </div>
         <div className="level-calculator-popup__controls">
           <CalculatorSlider
@@ -148,6 +148,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
         <div className="level-calculator-popup__controls">
           <StatisticItem
             className="level-calculator-popup__statistic-item"
+            labelClassName="level-calculator-popup__statistic-item-label"
             label={"Current av.to invest"}
             big
             accent
@@ -164,6 +165,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           </StatisticItem>
           <StatisticItem
             className="level-calculator-popup__statistic-item"
+            labelClassName="level-calculator-popup__statistic-item-label"
             label={"Investment Scale"}
             big
             accent
@@ -175,6 +177,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           </StatisticItem>
           <StatisticItem
             className="level-calculator-popup__statistic-item"
+            labelClassName="level-calculator-popup__statistic-item-label"
             label={"New Av. to invest"}
             big
             accent
@@ -188,6 +191,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           </StatisticItem>
           <StatisticItem
             className="level-calculator-popup__statistic-item"
+            labelClassName="level-calculator-popup__statistic-item-label"
             label={"Investment Scale"}
             big
             accent

@@ -9,20 +9,55 @@
 .level-calculator-popup {
   @include vertical-paddings($padding-small);
   @include horizontal-paddings($padding-small);
-  width: 640px - $padding-small * 2;
-  height: 700px - $padding-small * 2;
+
+  width: auto;
+  height: auto;
+
+  @include media-breakpoint-landscape-phone() {
+    width: 640px - $padding-small * 2;
+    height: 700px - $padding-small * 2;
+  }
+
+  &__header {
+    color: $primary-color;
+    font-weight: 600;
+  }
+
+  &__program-name {
+    @include adaptive-margin("top", $padding-small - $padding-xxsmall);
+    @include adaptive-margin("bottom", $padding-xxlarge / 2);
+  }
+
+  &__program-label {
+    opacity: 0.5;
+    letter-spacing: 0.4px;
+    font-size: $font-size-small;
+    @include adaptive-margin("bottom", $padding-xxsmall/2);
+  }
+
+  &__program-title {
+    font-size: $font-size-h4;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
 
   &__controls {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    @include adaptive-margin("bottom", $padding-xsmall);
   }
 
   &__calculator-slider {
-    margin-bottom: 20px;
+    @include adaptive-margin("bottom", $padding-small);
   }
 
   &__statistic-item {
     min-width: 254px;
+  }
+
+  &__statistic-item-label {
+    @include font-size($font-size-small);
+    color: $calculator-label-color;
   }
 }
