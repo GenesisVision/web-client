@@ -89,7 +89,7 @@ class _SubscriptionDetails extends React.PureComponent<Props, State> {
                   <div className="subscription-details__type">
                     <span className="subscription-details__type-item">
                       {t(`subscription-details.modes.${mode}`)}
-                      {mode === modes.percentage && ` volume ${percent}%`}
+                      {mode === modes.percentage && ` Volume ${percent}%`}
                       {mode === modes.fixed && (
                         <>
                           <NumberFormat
@@ -112,9 +112,9 @@ class _SubscriptionDetails extends React.PureComponent<Props, State> {
                     </span>
                     <span className="subscription-details__type-item">
                       <span className="subscription-details__value-accent">
-                        {t(
-                          `subscription-details.tolerance-percentage ${openTolerancePercent}%`
-                        )}
+                        {`${t(
+                          `subscription-details.tolerance-percentage`
+                        )} ${openTolerancePercent}%`}
                       </span>
                     </span>
                   </div>
