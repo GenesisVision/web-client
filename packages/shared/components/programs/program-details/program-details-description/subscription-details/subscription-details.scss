@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_constants.scss";
 
 $withdraw-button-height: 50px;
 $withdraw-button-width: 150px;
@@ -15,8 +16,26 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   margin-right: -$padding-xsmall;
   width: calc(100% + 20px * 2);
 
-  & div {
-    box-sizing: border-box;
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__edit-btn {
+    @include font-size($font-size-common);
+    @include transition(color);
+    color: $main-color;
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    &:hover {
+      outline: none;
+      border: none;
+      color: $primary-color;
+    }
   }
 
   @include media-breakpoint-landscape-phone() {
@@ -25,39 +44,34 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   }
 
   @include media-breakpoint-tablet() {
-    max-width: 750px;
+    max-width: 450px;
   }
 
   &__short-statistic {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: flex-start;
 
     &-item {
-      white-space: nowrap;
-      letter-spacing: 0.44px;
-      font-size: $font-size-paragraph-mobile;
-      display: flex;
-      flex-direction: column;
-      margin-right: $padding-big-mobile;
-      margin-bottom: $font-size-small-mobile;
-      font-weight: 600;
+      flex-grow: 1;
+      flex-basis: 50%;
+      box-sizing: border-box;
+
       @include media-breakpoint-landscape-phone() {
         font-size: $font-size-paragraph;
-        margin-right: $padding-big;
-        margin-bottom: $font-size-small;
       }
     }
+  }
 
-    &-subheading {
-      color: $label-color;
-      font-size: $font-size-small-mobile;
-      margin-bottom: $font-size-small-mobile;
-      font-weight: normal;
-      @include media-breakpoint-landscape-phone() {
-        font-size: $font-size-small;
-      }
-    }
+  &__type {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__type-item {
+    flex-grow: 1;
+    flex-basis: 50%;
+    box-sizing: border-box;
   }
 
   &__value-accent {

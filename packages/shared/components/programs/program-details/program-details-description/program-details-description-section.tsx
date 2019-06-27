@@ -71,6 +71,7 @@ const _ProgramDetailsDescriptionSection: React.FC<
           {personalDetails.signalSubscription.hasActiveSubscription && (
             <SubscriptionDetails
               id={programDescription.id}
+              currency={programDescription.currency}
               personalDetails={personalDetails}
             />
           )}
