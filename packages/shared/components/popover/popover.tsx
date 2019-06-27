@@ -78,7 +78,6 @@ export default class Popover extends React.PureComponent<OwnProps, State> {
   };
 
   getTransformPosition = () => {
-    if (this.props.relToWindow) return null;
     const horizontal = this.getHorizontalPosition();
     const vertical = this.getVerticalPosition();
     let translateX = `0`;
@@ -188,7 +187,6 @@ interface OwnProps {
   className?: string;
   fixed?: boolean;
   ownWidth?: boolean;
-  relToWindow?: boolean;
   disableBackdrop?: boolean;
 }
 interface State {
