@@ -593,6 +593,13 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "broker": "Broker",
+      "leverage": "Leverage",
+      "period": "Period",
+      "age": "Age",
+      "genesis-ratio": "Genesis Ratio",
+      "investment-scale": "Investment scale",
+      "trading-volume": "Trading volume",
       "notify-hint": "Notify me when the program is available for investment",
       "stop-out-level": "Stop out",
       "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",

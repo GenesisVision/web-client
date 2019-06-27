@@ -161,6 +161,20 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     flex-grow: 1;
   }
 
+  &__perfomance-data {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    & .statistics-item {
+      margin-right: $padding-xsmall;
+    }
+  }
+
+  &__broker {
+    width: 100px;
+  }
+
   &__button-container {
     display: flex;
     flex-wrap: wrap;
