@@ -39,6 +39,7 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
 
   handleChange = (value: number) => {
     this.setState({ value });
+    this.props.onChange(this.props.name, value);
   };
 
   render() {
@@ -70,6 +71,7 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
 }
 
 interface Props {
+  name: string;
   defaultValue: number;
   min: number;
   minSuffix?: string;
@@ -79,6 +81,7 @@ interface Props {
   title?: string | React.ReactNode;
   valueSuffix?: string;
   className?: string;
+  onChange(name: string, value: number): void;
 }
 
 interface State {

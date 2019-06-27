@@ -12,7 +12,7 @@ import CalculatorSlider from "shared/components/calculator-level/calculator-slid
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
   getDefaultValues = () => {
@@ -35,13 +35,13 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
 
   lerp = (from: number, to: number, progress: number) =>
     from * (1 - progress) + to * progress;
+
   calcInvestmentScale = () => {
     const progress =
       Math.min(
         this.state.programAge * this.state.weightedVolumeScale,
         this.props.levelsParams.ageByVolumeMax
       ) / this.props.levelsParams.ageByVolumeMax;
-    console.log(progress);
     return this.lerp(
       this.props.levelsParams.investmentScaleMin,
       this.props.levelsParams.investmentScaleMax,
@@ -65,7 +65,8 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
 
   calcLevel = (avToInvest: number) => {
     const { levels } = this.props.platformLevels;
-    const maxLevelIdx = levels.findIndex(x => x.investmentLimit > avToInvest);
+    let maxLevelIdx = levels.findIndex(x => x.investmentLimit > avToInvest);
+    if (maxLevelIdx === -1) maxLevelIdx = levels.length - 1;
     const minLevelIdx = Math.max(0, maxLevelIdx - 1);
     const progress =
       ((avToInvest - levels[minLevelIdx].investmentLimit) /
@@ -73,6 +74,10 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           levels[minLevelIdx].investmentLimit)) *
       100;
     return [levels[minLevelIdx].level, progress];
+  };
+
+  handleSliderChange = (name: string, value: number) => {
+    this.setState({ [name]: value } as any);
   };
 
   render() {
@@ -97,14 +102,17 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
         </div>
         <div className="level-calculator-popup__controls">
           <CalculatorSlider
+            name="genesisRatio"
             className="level-calculator-popup__calculator-slider"
             title="Genesis Ratio"
             defaultValue={genesisRatio}
             min={levelsParams.genesisRatioMin}
             max={levelsParams.genesisRatioMax}
             step={0.1}
+            onChange={this.handleSliderChange}
           />
           <CalculatorSlider
+            name="programAge"
             className="level-calculator-popup__calculator-slider"
             title="Age"
             defaultValue={programAge}
@@ -112,16 +120,20 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             max={levelsParams.programAgeMax}
             maxSuffix="+"
             step={1}
+            onChange={this.handleSliderChange}
           />
           <CalculatorSlider
+            name="weightedVolumeScale"
             className="level-calculator-popup__calculator-slider"
             title="Weighted volume scale"
             defaultValue={weightedVolumeScale}
             min={levelsParams.volumeScaleMin}
             max={levelsParams.volumeScaleMax}
             step={0.1}
+            onChange={this.handleSliderChange}
           />
           <CalculatorSlider
+            name="managerBalance"
             className="level-calculator-popup__calculator-slider"
             title="Manager balance"
             defaultValue={managerBalance}
@@ -129,6 +141,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             min={levelsParams.minAvailableToInvest}
             max={levelsParams.maxAvailableToInvest}
             step={10}
+            onChange={this.handleSliderChange}
           />
         </div>
 
@@ -156,7 +169,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             accent
           >
             <NumberFormat
-              value={programLevelInfo.investmentScale}
+              value={formatValue(programLevelInfo.investmentScale, 2)}
               displayType="text"
             />
           </StatisticItem>
@@ -179,7 +192,10 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             big
             accent
           >
-            <NumberFormat value={investmentScale} displayType="text" />
+            <NumberFormat
+              value={formatValue(investmentScale, 2)}
+              displayType="text"
+            />
           </StatisticItem>
         </div>
         <div className="level-calculator-popup__level-progress">
@@ -215,4 +231,5 @@ interface State {
   genesisRatio: number;
   programAge: number;
   weightedVolumeScale: number;
+  managerBalance: number;
 }
