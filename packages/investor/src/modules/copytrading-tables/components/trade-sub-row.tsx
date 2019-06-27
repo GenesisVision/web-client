@@ -15,6 +15,8 @@ import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVButton from "shared/components/gv-button";
+import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateRowFuncType } from "shared/components/table/components/table.types";
@@ -34,7 +36,7 @@ const _TradeSubRow: React.FC<Props> = ({
   const { program } = provider;
   return (
     <TableRow key={provider.programId}>
-      <TableCell className="details-trades__cell program-details-trades__cell--direction">
+      <TableCell className="details-trades__cell">
         <div className="dashboard-programs__cell--avatar-title">
           <Link
             to={{
@@ -60,29 +62,45 @@ const _TradeSubRow: React.FC<Props> = ({
           </Link>
         </div>
       </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--direction">
+      <TableCell className="details-trades__cell">
         {moment(provider.firstOrderDate).format()}
       </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--direction">
-        {symbol}
-      </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--direction">
+      <TableCell className="details-trades__cell">{symbol}</TableCell>
+      <TableCell className="details-trades__cell">
         <NumberFormat
           value={formatValue(provider.volume, DECIMAL_SCALE / 2)}
           displayType="text"
           thousandSeparator=" "
         />
       </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--direction">
+      <TableCell className="details-trades__cell">
         <NumberFormat
           value={formatValue(provider.priceOpenAvg, DECIMAL_SCALE / 2)}
           displayType="text"
           thousandSeparator=" "
         />
       </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--direction">
-        <GVButton variant="text" onClick={() => setOpenPopup(true)}>
-          {t("buttons.cancel")}
+      <TableCell className="details-trades__cell">
+        <Profitability
+          value={formatValue(provider.profit, DECIMAL_SCALE)}
+          prefix={PROFITABILITY_PREFIX.SIGN}
+        >
+          <NumberFormat
+            value={formatValue(provider.profit, DECIMAL_SCALE)}
+            thousandSeparator=" "
+            allowNegative={false}
+            displayType="text"
+          />
+        </Profitability>
+      </TableCell>
+      <TableCell className="overflow--initial details-trades__cell">
+        <GVButton
+          className={"button--circle"}
+          color={"secondary"}
+          variant={"contained"}
+          onClick={() => setOpenPopup(true)}
+        >
+          +
         </GVButton>
         <ConfirmPopup
           header={t("investor.copytrading-tables.close-trade-confirm.header")}

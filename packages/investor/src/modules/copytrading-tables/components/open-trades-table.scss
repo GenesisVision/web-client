@@ -47,3 +47,25 @@
     opacity: 1;
   }
 }
+
+.providers-table {
+  .table__toolbar,
+  .table__footer,
+  .table {
+    padding: 0;
+    height: 0;
+    min-height: 0;
+  }
+}
+
+.button--circle {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 24px;
+  transform: rotate(45deg);
+}
+
+.overflow--initial {
+  overflow: initial;
+}

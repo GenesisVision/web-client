@@ -38,7 +38,7 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
                   title={t(
                     `investor.copytrading-tables.fees.${commission.type}`
                   )}
-                  value={commission.amount}
+                  value={commission.amount * -1}
                   currency={commission.currency}
                 />
               );
