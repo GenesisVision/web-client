@@ -172,9 +172,9 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
               />
             </StatisticItem>
             <StatisticItem
-              label={t("program-details-page.description.trading-volume")}
+              label={t("program-details-page.description.volume-scale")}
             >
-              {programDescription.tradingVolume}
+              {programDescription.volumeScale}
             </StatisticItem>
           </div>
         </div>
