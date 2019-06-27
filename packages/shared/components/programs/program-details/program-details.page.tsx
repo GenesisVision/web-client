@@ -1,6 +1,10 @@
 import "shared/components/details/details.scss";
 
-import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
+import {
+  LevelsParamsInfo,
+  ProgramBalanceChart,
+  ProgramDetailsFull
+} from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
@@ -8,6 +12,7 @@ import { redirectToLogin } from "shared/components/auth/login/login.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
 import NotFoundPage from "shared/components/not-found/not-found";
 import {
+  getPlatformLevelsParameters,
   getProgramDescription,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
@@ -27,6 +32,7 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
   state = {
     hasError: false,
     isPending: false,
+    levelsParameters: undefined,
     description: undefined,
     profitChart: undefined,
     balanceChart: undefined,
@@ -34,7 +40,8 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    this.updateDetails()
+    const update = this.updateDetails();
+    update
       .then(data => getProgramStatistic(data.id))
       .then(data => {
         this.setState({ isPending: false, ...data });
@@ -42,6 +49,9 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
       .catch(() => {
         this.setState({ isPending: false });
       });
+    update
+      .then(data => getPlatformLevelsParameters(data.currency))
+      .then(levelsParameters => this.setState({ levelsParameters }));
   }
 
   updateDetails = () => {
@@ -68,6 +78,7 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
       isAuthenticated
     } = this.props;
     const {
+      levelsParameters,
       hasError,
       description,
       statistic,
@@ -77,7 +88,7 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
     if (hasError) return <NotFoundPage />;
     return (
       <ProgramDetailsContainer
-        condition={!!description}
+        condition={!!description && !!levelsParameters}
         loader={<DetailsContainerLoader />}
         updateDetails={this.updateDetails}
         redirectToLogin={service.redirectToLogin}
@@ -89,6 +100,7 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
         statistic={statistic}
         currency={currency}
         isAuthenticated={isAuthenticated}
+        levelsParameters={levelsParameters!}
       />
     );
   }
@@ -132,6 +144,7 @@ interface State {
   profitChart?: ProgramDetailsProfitChart;
   balanceChart?: ProgramBalanceChart;
   statistic?: ProgramDetailsStatistic;
+  levelsParameters?: LevelsParamsInfo;
 }
 
 const ProgramDetailsPage = compose<React.ComponentType<OwnProps>>(
