@@ -73,12 +73,7 @@ class SignalProviderControls extends React.PureComponent<
             .hasActiveSubscription ? (
             <>
               <GVButton
-                className="program-details-description__invest-btn signal-provider__btn"
-                onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
-              >
-                {t("program-details-page.description.edit-subscription")}
-              </GVButton>
-              <GVButton
+                color="primary-dark"
                 className="program-details-description__invest-btn"
                 onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
               >
@@ -87,6 +82,7 @@ class SignalProviderControls extends React.PureComponent<
             </>
           ) : (
             <GVButton
+              color="primary-dark"
               className="program-details-description__invest-btn"
               onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
               disabled={!isAuthenticated}
