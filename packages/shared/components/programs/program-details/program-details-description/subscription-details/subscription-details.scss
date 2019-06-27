@@ -40,11 +40,15 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
 
   @include media-breakpoint-landscape-phone() {
     width: 100%;
-    margin: 0;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   @include media-breakpoint-tablet() {
-    max-width: 450px;
+    width: auto;
+    min-width: 450px;
+    max-width: 630px;
   }
 
   &__short-statistic {
@@ -70,7 +74,6 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
 
   &__type-item {
     flex-grow: 1;
-    flex-basis: 50%;
     box-sizing: border-box;
   }
 
