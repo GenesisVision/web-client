@@ -1,0 +1,11 @@
+@import "~shared/styles/_sizes";
+
+.programs-facet {
+  &__filter {
+    margin-bottom: 24px;
+  }
+
+  &__button {
+    margin-right: 24px;
+  }
+}

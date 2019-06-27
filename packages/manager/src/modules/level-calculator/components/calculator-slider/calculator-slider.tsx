@@ -1,14 +1,12 @@
 import "./calculator-slider.scss";
 
+import classnames from "classnames";
 import Slider from "rc-slider";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
-class _CalculatorSlider extends React.PureComponent<Props, State> {
-  state = {
-    value: this.props.defaultValue
-  };
-
+class _CalculatorSlider extends React.PureComponent<Props> {
   marks = {
     [this.props.min]: {
       style: {
@@ -37,16 +35,27 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
   };
 
   handleChange = (value: number) => {
-    this.setState({ value });
+    this.props.onChange(this.props.name, value);
   };
 
   render() {
-    const { min, max, title, step = 1, valueSuffix } = this.props;
-    const { value } = this.state;
+    const {
+      value,
+      min,
+      max,
+      label,
+      step = 1,
+      valueSuffix,
+      className,
+      tooltipContent
+    } = this.props;
     return (
-      <div className="calculator-slider">
+      <div className={classnames("calculator-slider", className)}>
         <div className="calculator-slider__heading">
-          <div className="calculator-slider__title">{title}</div>
+          <div className="calculator-slider__title">
+            <span>{label}</span>
+            {tooltipContent && <TooltipLabel tooltipContent={tooltipContent} />}
+          </div>
           <div className="calculator-slider__value">
             <NumberFormat
               value={value}
@@ -69,18 +78,18 @@ class _CalculatorSlider extends React.PureComponent<Props, State> {
 }
 
 interface Props {
-  defaultValue: number;
+  name: string;
+  value: number;
   min: number;
   minSuffix?: string;
   max: number;
   maxSuffix?: string;
   step?: number;
-  title?: string | React.ReactNode;
+  label?: string | React.ReactNode;
   valueSuffix?: string;
-}
-
-interface State {
-  value: number;
+  className?: string;
+  tooltipContent?: string;
+  onChange(name: string, value: number): void;
 }
 
 const CalculatorSlider = React.memo(_CalculatorSlider);
