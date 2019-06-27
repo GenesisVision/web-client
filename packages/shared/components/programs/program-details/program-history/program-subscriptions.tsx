@@ -89,6 +89,12 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
               {subscription.unsubscriptionDate &&
                 moment(subscription.unsubscriptionDate).format()}
             </TableCell>
+            <TableCell>
+              {formatCurrencyValue(
+                -1 * subscription.totalCommissionAmount,
+                subscription.totalCommissionCurrency
+              )}
+            </TableCell>
             <TableCell>{subscription.status}</TableCell>
           </TableRow>
         );

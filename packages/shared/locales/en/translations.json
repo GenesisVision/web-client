@@ -718,6 +718,7 @@
         "volume": "Volume",
         "subscriptionDate": "Subscription date",
         "unsubscriptionDate": "Unsubscription date",
+        "commission": "Commission",
         "status": "Status"
       }
     },
