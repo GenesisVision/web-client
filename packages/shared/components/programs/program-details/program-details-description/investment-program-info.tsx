@@ -38,7 +38,7 @@ const renderFee = (
 
 const InvestmentProgramInfo: React.FC<
   InjectedTranslateProps & IInvestmentProgramInfoProps
-> = ({ t, programDescription, LevelCalculator }) => {
+> = ({ t, isOwnProgram, programDescription, LevelCalculator }) => {
   const {
     availableInvestmentBase,
     availableInvestmentLimit,
@@ -58,7 +58,7 @@ const InvestmentProgramInfo: React.FC<
   return (
     <>
       <div className="program-details-description__statistic-container">
-        {LevelCalculator && (
+        {LevelCalculator && isOwnProgram && (
           <div className="statistics-item program-details-description__level-calculator">
             <LevelCalculator
               id={programDescription.id}
