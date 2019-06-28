@@ -1,3 +1,5 @@
+import "./program-subscrition-fees-tooltip.scss";
+
 import { SignalSubscriber } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -10,7 +12,7 @@ const _FeesTooltip: React.FC<Props> = ({ t, subscription, children }) => {
   return (
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-      className={"fees-tooltip"}
+      className={"fees-tooltip subscription-fees"}
       render={() => (
         <div className="profile-menu">
           <div className="profile-menu__header">

@@ -17,7 +17,7 @@ class Tooltip extends React.PureComponent<Props, State> {
   };
 
   handleMouseLeave = (): void => {
-    this.setState({ anchor: undefined });
+    // this.setState({ anchor: undefined });
   };
 
   render() {
