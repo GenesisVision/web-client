@@ -42,7 +42,7 @@ const _ProgramSettings: React.FC<Props> = ({
             within the aforementioned program.
           </p>
           <GVButton
-            color="primary-dark"
+            color="primary"
             disabled={!details.personalProgramDetails.canClosePeriod}
             onClick={closePeriod}
           >
@@ -54,7 +54,7 @@ const _ProgramSettings: React.FC<Props> = ({
             The current period of the program will end in one hour.
           </p>
           <GVButton
-            color="primary-dark"
+            color="primary"
             disabled={!details.personalProgramDetails.canCloseProgram}
             onClick={closeProgram}
           >
@@ -69,7 +69,7 @@ const _ProgramSettings: React.FC<Props> = ({
             <p className="program-edit__text">
               Change the password of your trading account.
             </p>
-            <GVButton color="primary-dark" onClick={changePassword}>
+            <GVButton color="primary" onClick={changePassword}>
               {t("program-details-page.description.change-password")}
             </GVButton>
           </section>
