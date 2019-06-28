@@ -140,6 +140,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       max-width: 800px;
 
       &--small-size {
+        flex-grow: 0;
         min-width: 220px;
       }
     }
@@ -153,7 +154,8 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       }
 
       &--small-size {
-        max-width: 250px;
+        min-width: 260px;
+        max-width: 260px;
       }
     }
   }
