@@ -3,7 +3,7 @@ import SvgLoader from "shared/components/svg-loader/svg-loader";
 
 const LevelCalculatorPopupLoader = () => {
   return (
-    <div className="level-calculator-popup">
+    <div>
       <div className="level-calculator-popup__header">
         <SvgLoader height={150} width={600}>
           <rect x="0" y="0" rx="0" ry="0" width="150" height="30" />

@@ -63,13 +63,14 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
       managerBalance
     } = this.state;
 
-    const investmentScale = calcInvestmentScale(
+    const newInvestmentScale = calcInvestmentScale(
       programAge,
+      genesisRatio,
       weightedVolumeScale,
       levelsParameters
     );
     const newAvailableToInvest = calcNewAvailableToInvest(
-      investmentScale,
+      newInvestmentScale,
       managerBalance,
       genesisRatio,
       levelsParameters
@@ -80,7 +81,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
     );
 
     return (
-      <div className="level-calculator-popup">
+      <div>
         <div className="level-calculator-popup__header">
           <h2 className="level-calculator-popup__heading">
             {t("manager.level-calculator.title")}
@@ -116,16 +117,18 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             name="genesisRatio"
             className="level-calculator-popup__calculator-slider"
             label={t("manager.level-calculator.genesis-ratio")}
+            tooltipContent={t("manager.level-calculator.genesis-ratio-tooltip")}
             value={genesisRatio}
             min={levelsParameters.genesisRatioMin}
             max={levelsParameters.genesisRatioMax}
-            step={0.1}
+            step={0.01}
             onChange={this.handleSliderChange}
           />
           <CalculatorSlider
             name="programAge"
             className="level-calculator-popup__calculator-slider"
             label={t("manager.level-calculator.age")}
+            tooltipContent={t("manager.level-calculator.age-tooltip")}
             value={programAge}
             min={0}
             max={levelsParameters.programAgeMax}
@@ -143,7 +146,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             value={weightedVolumeScale}
             min={levelsParameters.volumeScaleMin}
             max={levelsParameters.volumeScaleMax}
-            step={0.1}
+            step={0.01}
             onChange={this.handleSliderChange}
           />
           <CalculatorSlider
@@ -153,11 +156,11 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             tooltipContent={t(
               "manager.level-calculator.manager-balance-tooltip"
             )}
-            value={+formatValue(managerBalance, 4)}
+            value={+formatValue(managerBalance, 2)}
             valueSuffix={` ${currency}`}
-            min={levelsParameters.minAvailableToInvest}
+            min={0}
             max={levelsParameters.maxAvailableToInvest}
-            step={10}
+            step={0.01}
             onChange={this.handleSliderChange}
           />
         </div>
@@ -184,9 +187,9 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
 
           <CalculatorOutput
             className="level-calculator-popup__statistic-item"
-            label={t("manager.level-calculator.investment-scale")}
+            label={t("manager.level-calculator.current-investment-scale")}
             tooltipContent={t(
-              "manager.level-calculator.investment-scale-tooltip"
+              "manager.level-calculator.current-investment-scale-tooltip"
             )}
             value={
               <NumberFormat
@@ -212,13 +215,13 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           />
           <CalculatorOutput
             className="level-calculator-popup__statistic-item"
-            label={t("manager.level-calculator.investment-scale")}
+            label={t("manager.level-calculator.new-investment-scale")}
             tooltipContent={t(
-              "manager.level-calculator.investment-scale-tooltip"
+              "manager.level-calculator.new-investment-scale-tooltip"
             )}
             value={
               <NumberFormat
-                value={formatValue(investmentScale, 2)}
+                value={formatValue(newInvestmentScale, 2)}
                 displayType="text"
               />
             }

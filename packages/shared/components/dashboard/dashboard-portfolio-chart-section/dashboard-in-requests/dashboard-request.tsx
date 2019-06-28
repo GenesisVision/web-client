@@ -78,13 +78,17 @@ class _DashboardRequest extends React.PureComponent<
         <StatisticItem
           className={"dashboard-request-popover__statistic-item"}
           label={
-            <NumberFormat
-              value={formatCurrencyValue(request.value, request.currency)}
-              decimalScale={8}
-              displayType="text"
-              allowNegative={false}
-              suffix={` ${request.currency}`}
-            />
+            request.withdrawAll ? (
+              t("withdraw-program.withdrawing-all")
+            ) : (
+              <NumberFormat
+                value={formatCurrencyValue(request.value, request.currency)}
+                decimalScale={8}
+                displayType="text"
+                allowNegative={false}
+                suffix={` ${request.currency}`}
+              />
+            )
           }
           invert
         >
