@@ -30,5 +30,5 @@ export default TileFilterButton;
 export interface ITagFilterButton {
   title: string;
   isActive: boolean;
-  onClick(e?: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
+  onClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
 }

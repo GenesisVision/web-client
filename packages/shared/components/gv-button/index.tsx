@@ -11,12 +11,13 @@ interface GVButtonProps {
   type?: "button" | "submit";
   className?: string;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   children: string | JSX.Element;
+  name?: string;
   noPadding?: boolean;
 }
 
-const GVButton: React.SFC<GVButtonProps> = ({
+const GVButton: React.FC<GVButtonProps> = ({
   id,
   className,
   title,
@@ -26,6 +27,7 @@ const GVButton: React.SFC<GVButtonProps> = ({
   disabled,
   onClick,
   children,
+  name,
   noPadding
 }) => {
   const classname = classnames("gv-btn", className, {
@@ -45,6 +47,7 @@ const GVButton: React.SFC<GVButtonProps> = ({
       onClick={onClick}
       title={title}
       type={type}
+      name={name}
     >
       {children}
     </button>

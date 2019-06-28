@@ -15,8 +15,7 @@ const SelectItem: React.FC<Props> = React.memo(
         className={classNames("select__option", className, {
           "select__option--selected": isSelected
         })}
-        // @ts-ignore
-        onClick={handleClick} // TODO fix GVButton type
+        onClick={handleClick}
         name={name}
       >
         {children}
