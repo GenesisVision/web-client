@@ -56,45 +56,52 @@ const _BrokerEdit: React.FC<Props> = ({
           cardState={BROKER_CARD_EXTRA_STATE.NONE}
         />
       ))}
-      <label className="gv-text-field__label gv-text-field__label--shrink">
-        {t("manager.create-program-page.settings.fields.brokers-leverage")}
-      </label>
-      <div className="gv-text-field">
-        <Select
-          name={"accounts"}
-          className="gv-text-field__input"
-          value={account.name}
-          onChange={changeAccount}
-        >
-          {selectedBrokerState.accountTypes.map(account => (
-            <option value={account.name} key={account.name}>
-              {account.name}
-            </option>
-          ))}
-        </Select>
+      <div className="gv-text-field__wrapper">
+        <label className="gv-text-field__label gv-text-field__label--shrink">
+          {t("manager.create-program-page.settings.fields.account-type")}
+        </label>
+        <div className="gv-text-field">
+          <Select
+            name={"accounts"}
+            className="gv-text-field__input"
+            value={account.name}
+            onChange={changeAccount}
+          >
+            {selectedBrokerState.accountTypes.map(account => (
+              <option value={account.name} key={account.name}>
+                {account.name}
+              </option>
+            ))}
+          </Select>
+        </div>
       </div>
-      <div className="gv-text-field">
-        <Select
-          name={"leverage"}
-          className="gv-text-field__input"
-          value={String(leverage)}
-          onChange={changeLeverage}
-        >
-          {account.leverages.map(leverage => (
-            <option value={leverage} key={leverage}>
-              {leverage}
-            </option>
-          ))}
-        </Select>
+      <div className="gv-text-field__wrapper">
+        <label className="gv-text-field__label gv-text-field__label--shrink">
+          {t("manager.create-program-page.settings.fields.brokers-leverage")}
+        </label>
+        <div className="gv-text-field">
+          <Select
+            name={"leverage"}
+            className="gv-text-field__input"
+            value={String(leverage)}
+            onChange={changeLeverage}
+          >
+            {account.leverages.map(leverage => (
+              <option value={leverage} key={leverage}>
+                {leverage}
+              </option>
+            ))}
+          </Select>
+        </div>
       </div>
-      <div className="program-edit__text">
+      <p className="program-edit__text program-edit__text--color-accent program-edit__text--padding-top">
         A broker change in the program will occur automatically within 24 hours
         after the end of the reporting period. You will receive a message
         confirming the successful change of the broker and you will receive a
         new login and password from the trading account. The invested funds in
         the program will be transferred to the new broker. All trading history
         and statistics will be saved on the program page.
-      </div>
+      </p>
       <GVButton
         className="invest-form__submit-button"
         onClick={changeBroker(id, selectedBrokerState.accountTypes[0].id, 1)}
