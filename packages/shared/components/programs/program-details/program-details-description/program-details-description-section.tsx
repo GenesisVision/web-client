@@ -9,6 +9,7 @@ import { InvestmentDetails } from "shared/components/details/details-description
 import { PROGRAM, STATUS } from "shared/constants/constants";
 
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
+import SubscriptionDetailsContainer from "./subscription-details/subscription-details-container";
 
 const _ProgramDetailsDescriptionSection: React.FC<
   IProgramDetailsDescriptionSectionProps
@@ -47,24 +48,32 @@ const _ProgramDetailsDescriptionSection: React.FC<
         redirectToLogin={redirectToLogin}
         levelsParameters={levelsParameters}
       />
-      {personalDetails &&
-        personalDetails.isInvested &&
-        personalDetails.status !== STATUS.ENDED && (
-          <div className="program-details-description__additionally">
-            <DetailsInvestment
-              notice={t(
-                "program-details-page.description.withdraw-notice-text"
-              )}
-              asset={PROGRAM}
+      {personalDetails && isAuthenticated && (
+        <div className="program-details-description__additionally">
+          {personalDetails.isInvested &&
+            personalDetails.status !== STATUS.ENDED && (
+              <DetailsInvestment
+                notice={t(
+                  "program-details-page.description.withdraw-notice-text"
+                )}
+                asset={PROGRAM}
+                id={programDescription.id}
+                assetCurrency={programDescription.currency}
+                accountCurrency={accountCurrency}
+                personalDetails={personalDetails as InvestmentDetails} // TODO fix type InvestmentDetails
+                ProgramReinvestingWidget={ProgramReinvestingWidget}
+                WithdrawContainer={ProgramWithdrawContainer}
+              />
+            )}
+          {personalDetails.signalSubscription.hasActiveSubscription && (
+            <SubscriptionDetailsContainer
               id={programDescription.id}
-              assetCurrency={programDescription.currency}
-              accountCurrency={accountCurrency}
-              personalDetails={personalDetails as InvestmentDetails} // TODO fix type InvestmentDetails
-              ProgramReinvestingWidget={ProgramReinvestingWidget}
-              WithdrawContainer={ProgramWithdrawContainer}
+              currency={programDescription.currency}
+              personalDetails={personalDetails}
             />
-          </div>
-        )}
+          )}
+        </div>
+      )}
     </div>
   );
 };

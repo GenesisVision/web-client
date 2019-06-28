@@ -73,6 +73,10 @@
       background-color: $secondary-color;
       @include box-shadow(rgba(darken($secondary-color, 50%), 0.2));
     }
+    &.gv-btn--primary-dark {
+      background-color: rgba($primary-color, 0.2);
+      color: $primary-color;
+    }
 
     &:not(:disabled):active {
       &.gv-btn--primary {
@@ -80,6 +84,9 @@
       }
       &.gv-btn--secondary {
         background-color: darken($secondary-color, 10%);
+      }
+      &.gv-btn--primary-dark {
+        background-color: darken(rgba($primary-color, 0.2), 10%);
       }
     }
 
@@ -89,6 +96,9 @@
       }
       &.gv-btn--secondary {
         background-color: darken($secondary-color, 10%);
+      }
+      &.gv-btn--primary-dark {
+        background-color: darken(rgba($primary-color, 0.2), 10%);
       }
     }
   }
