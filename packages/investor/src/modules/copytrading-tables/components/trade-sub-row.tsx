@@ -48,6 +48,8 @@ const _TradeSubRow: React.FC<Props> = ({
               url={program.logo}
               alt={program.title}
               color={program.color}
+              level={program.level}
+              levelProgress={program.levelProgress}
             />
           </Link>
           <Link
