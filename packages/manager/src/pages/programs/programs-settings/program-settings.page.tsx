@@ -73,7 +73,11 @@ const _ProgramsEditPage: React.FC<Props> = ({ service }) => {
       newBrokerAccountTypeId: string,
       newLeverage: number
     ) => () => {
-      changeBrokerMethod(programId, newBrokerAccountTypeId, newLeverage);
+      service.changeBrokerMethod(
+        programId,
+        newBrokerAccountTypeId,
+        newLeverage
+      );
     },
     []
   );
@@ -144,7 +148,7 @@ const mapStateToProps = (state: RootState): StateProps => ({});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { getProgramDescription, editAsset, programEditSignal },
+    { getProgramDescription, editAsset, programEditSignal, changeBrokerMethod },
     dispatch
   )
 });
@@ -157,6 +161,7 @@ interface ServiceThunks extends ActionCreatorsMapObject {
   getProgramDescription: typeof getProgramDescription;
   editAsset: typeof editAsset;
   programEditSignal: typeof programEditSignal;
+  changeBrokerMethod: typeof changeBrokerMethod;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
