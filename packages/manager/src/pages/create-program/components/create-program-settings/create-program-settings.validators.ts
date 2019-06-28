@@ -4,9 +4,7 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { boolean, mixed, number, object, string } from "yup";
 
-import {
-  ICreateProgramSettingsProps
-} from "./create-program-settings";
+import { ICreateProgramSettingsProps } from "./create-program-settings";
 
 const createProgramSettingsValidationSchema = (
   props: ICreateProgramSettingsProps

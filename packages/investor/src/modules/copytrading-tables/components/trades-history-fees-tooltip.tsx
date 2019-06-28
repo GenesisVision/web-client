@@ -2,23 +2,12 @@ import { OrderSignalModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import FeeCommission from "shared/components/fee-commission/fee-commission";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import Tooltip from "shared/components/tooltip/tooltip";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
-const Commission: React.FC<{
-  title: string;
-  value: number;
-  currency: string;
-}> = ({ title, value, currency }) => (
-  <div className={"fees-tooltip__commission"}>
-    <span className={"fees-tooltip__title"}>{title}</span>
-    <span className={"fees-tooltip__value"}>
-      {value} <span className={"fees-tooltip__currency"}>{currency}</span>
-    </span>
-  </div>
-);
-
-const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
+const _FeesTooltip: React.FC<Props> = ({ trade, t }) => {
   return (
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
@@ -26,19 +15,25 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
       render={() => (
         <div className="profile-menu">
           <div className="profile-menu__header">
-            <Commission
+            <FeeCommission
               title={t(`investor.copytrading-tables.fees.trading`)}
-              value={trade.originalCommission}
+              value={formatCurrencyValue(
+                trade.originalCommission,
+                trade.originalCommissionCurrency
+              )}
               currency={trade.originalCommissionCurrency}
             />
             {trade.totalCommissionByType.map((commission, index) => {
               return (
-                <Commission
+                <FeeCommission
                   key={index}
                   title={t(
                     `investor.copytrading-tables.fees.${commission.type}`
                   )}
-                  value={commission.amount}
+                  value={formatCurrencyValue(
+                    commission.amount,
+                    commission.currency
+                  )}
                   currency={commission.currency}
                 />
               );
@@ -46,9 +41,12 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
           </div>
           {trade.totalCommissionByType.length > 0 ? (
             <div className={"fees-tooltip__footer "}>
-              <Commission
+              <FeeCommission
                 title={t(`investor.copytrading-tables.fees.total`)}
-                value={trade.totalCommission}
+                value={formatCurrencyValue(
+                  trade.totalCommission,
+                  trade.currency
+                )}
                 currency={trade.currency}
               />
             </div>
@@ -56,15 +54,17 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
         </div>
       )}
     >
-      <div>{trade.totalCommission}</div>
+      <div>{formatCurrencyValue(trade.totalCommission, trade.currency)}</div>
     </Tooltip>
   );
 };
 
-export const FeesPopover = compose<React.FC<OwnProps>>(
+const TradesHistoryFeesTooltip = compose<React.FC<OwnProps>>(
   translate(),
   React.memo
-)(_FeesPopover);
+)(_FeesTooltip);
+
+export default TradesHistoryFeesTooltip;
 
 interface Props extends InjectedTranslateProps, OwnProps {}
 

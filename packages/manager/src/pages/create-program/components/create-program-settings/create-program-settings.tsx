@@ -33,7 +33,9 @@ import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
-import createProgramSettingsValidationSchema, { CREATE_PROGRAM_FIELDS } from "./create-program-settings.validators";
+import createProgramSettingsValidationSchema, {
+  CREATE_PROGRAM_FIELDS
+} from "./create-program-settings.validators";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class _CreateProgramSettings extends React.PureComponent<

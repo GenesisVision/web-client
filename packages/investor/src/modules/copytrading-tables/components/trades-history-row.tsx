@@ -1,6 +1,5 @@
 import { OrderSignalModel } from "gv-api-web";
 import { DECIMAL_SCALE } from "modules/copytrading-tables/components/copytrading-tables.constants";
-import { FeesPopover } from "modules/copytrading-tables/components/fees-popover";
 import moment from "moment";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -10,6 +9,8 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { formatValue } from "shared/utils/formatter";
+
+import TradesHistoryFeesTooltip from "./trades-history-fees-tooltip";
 
 const _TradesHistoryRow: React.FC<{ trade: OrderSignalModel }> = ({
   trade
@@ -63,7 +64,7 @@ const _TradesHistoryRow: React.FC<{ trade: OrderSignalModel }> = ({
         </Profitability>
       </TableCell>
       <TableCell className="details-trades__cell program-details-trades__cell--date">
-        <FeesPopover trade={trade} />
+        <TradesHistoryFeesTooltip trade={trade} />
       </TableCell>
     </TableRow>
   );

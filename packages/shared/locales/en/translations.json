@@ -72,7 +72,8 @@
     "edit": "Edit",
     "save": "Save",
     "verify": "Verify",
-    "resend-email": "Resend email"
+    "resend-email": "Resend email",
+    "reset": "Reset"
   },
   "filters": {
     "level": {
@@ -314,6 +315,8 @@
     "next": "Next",
     "info": "Your request will be processed at the end of the reporting period.",
     "withdrawing": "Withdrawing",
+    "all": "All",
+    "withdrawing-all": "Withdrawing all",
     "payout-date": "Payout date",
     "back": "Back",
     "submit": "Submit",
@@ -349,10 +352,23 @@
       }
     }
   },
+  "subscription-details": {
+    "title": "Subscription details",
+    "tolerance-percentage": "Tolerance percentage",
+    "subscription-type": "Subscription Type",
+    "active": "Active",
+    "volume": "Volume",
+    "modes": {
+      "ByBalance": "By balance",
+      "Percent": "Percentage",
+      "Fixed": "Fixed"
+    },
+    "edit": "Edit"
+  },
   "follow-program": {
     "info": {
-      "ETH": "The minimum order size on Binance is 0.001 BTC",
-      "BTC": "The minimum order size on Binance is 0.01 ETH",
+      "ETH": "The minimum order size on Binance is 0.01 ETH ",
+      "BTC": "The minimum order size on Binance is 0.001 BTC",
       "USDT": "The minimum order size on Binance is 10 USDT"
     },
     "modes": {
@@ -592,6 +608,13 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "broker": "Broker",
+      "leverage": "Leverage",
+      "period": "Period",
+      "age": "Age",
+      "genesis-ratio": "Genesis Ratio",
+      "investment-scale": "Invest. scale",
+      "volume-scale": "Volume scale",
       "notify-hint": "Notify me when the program is available for investment",
       "stop-out-level": "Stop out",
       "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
@@ -675,7 +698,7 @@
     },
     "popover": {
       "genesis-level": "Genesis Level",
-      "invest-limit": "Invest limit",
+      "invest-limit": "Total invest limit",
       "text": "Genesis level shows the experience and reliability of the Manager",
       "about-levels": "About levels"
     },
@@ -718,6 +741,7 @@
         "volume": "Volume",
         "subscriptionDate": "Subscription date",
         "unsubscriptionDate": "Unsubscription date",
+        "commission": "Commission",
         "status": "Status"
       }
     },
@@ -859,11 +883,14 @@
       "from-Fund": "From the fund"
     },
     "signal": {
-      "SubscribeSignal": "Subscribe to signal provider",
-      "ReceiveSignal": "Subscription to signal provider",
+      "SubscribeSignal": "Signal fee payment",
+      "ReceiveSignal": "Signal fee received",
       "DepositSignal": "Deposit to signal account",
       "WithdrawalSignal": "Withdrawal from signal account",
-      "Platform": "Platform transaction"
+      "Platform": "Platform transaction",
+      "amount": "Amount",
+      "to-signal-provider": "To the signal provider",
+      "signal-provider": "Signal provider"
     }
   },
   "wallet-page": {
@@ -1320,6 +1347,7 @@
         "trading": "Trading fee",
         "ManagerSignalMasterVolumeFee": "Volume fee",
         "ManagerSignalMasterSuccessFee": "Manager Success fee",
+        "SuccessFee": "Success fee",
         "GvSignalSuccessFee": "Platform Success Fee",
         "total": "Total"
       }
@@ -1806,6 +1834,27 @@
       "title": "Reallocate",
       "apply": "Confirm",
       "success-alert-message": "Your assets were successfully reallocated!"
+    },
+    "level-calculator": {
+      "title": "Calculator",
+      "program": "Program",
+      "genesis-ratio": "Genesis Ratio",
+      "age": "Age",
+      "weighted-volume-scale": "Weighted volume scale",
+      "manager-balance": "Manager balance",
+      "current-av-to-invest": "Av. to invest (current)",
+      "new-av-to-invest": "Av. to invest (new)",
+      "current-investment-scale": "Investment scale (current)",
+      "new-investment-scale": "Investment scale (new)",
+      "age-tooltip": "The age of the program.",
+      "genesis-ratio-tooltip": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. \nIf Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
+      "weighted-volume-scale-tooltip": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. \nIt is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+      "manager-balance-tooltip": "The current value of manager funds in the program.",
+      "current-av-to-invest-tooltip": "The current amount available for investment into the program. The investment limit and the funds already deposited are not taken into account.",
+      "new-av-to-invest-tooltip": "The new Av. to invest value you receive as a result of changing parameters within the calculator.",
+      "current-investment-scale-tooltip": "The current value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 3 to 20. \nAv. to invest = Investment scale * Manager Balance",
+      "new-investment-scale-tooltip": "The new value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 3 to 20. \nAv. to invest = Investment scale * Manager Balance",
+      "kyc-disclaimer": "All of your investment programs are limited to the first level since you have not yet completed the KYC verification procedure. The maximum amount of investment you can attract at the first level is the equivalent of 1000 USD."
     }
   }
 }

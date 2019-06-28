@@ -4,7 +4,9 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
-import ProgramWithdrawAmountForm from "./program-withdraw-amount-form";
+import ProgramWithdrawAmountForm, {
+  IProgramWithdrawAmountFormValues
+} from "./program-withdraw-amount-form";
 import ProgramWithdrawConfirmForm from "./program-withdraw-confirm-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
 
@@ -24,7 +26,8 @@ class _ProgramWithdrawPopup extends React.PureComponent<
     periodEnds: undefined,
     title: undefined,
     amount: undefined,
-    availableToWithdraw: undefined
+    availableToWithdraw: undefined,
+    withdrawAll: false
   };
 
   componentDidMount() {
@@ -46,21 +49,23 @@ class _ProgramWithdrawPopup extends React.PureComponent<
 
   handleSubmit = (setSubmitting: SetSubmittingType) => {
     const { withdraw } = this.props;
-    const { amount } = this.state;
+    const { amount = 0, withdrawAll } = this.state;
 
-    if (!amount) return;
+    if (!amount && !withdrawAll) return;
     return withdraw({
-      amount
+      amount,
+      withdrawAll
     }).catch((error: ResponseError) => {
       this.setState({ errorMessage: error.errorMessage });
       setSubmitting(false);
     });
   };
 
-  handleEnterAmountSubmit = (amount?: number) => {
+  handleEnterAmountSubmit = (values: IProgramWithdrawAmountFormValues) => {
     this.setState({
       step: PROGRAM_WITHDRAW_FORM.CONFIRM,
-      amount: amount || 0
+      amount: values.amount,
+      withdrawAll: values.withdrawAll
     });
   };
 
@@ -79,12 +84,14 @@ class _ProgramWithdrawPopup extends React.PureComponent<
       rate,
       errorMessage,
       step,
-      amount
+      amount,
+      withdrawAll
     } = this.state;
     const { t, assetCurrency, accountCurrency } = this.props;
     if (availableToWithdraw === undefined || !title || !periodEnds)
       return <DialogLoader />;
 
+    const isAvailableProgramConfirmForm = amount || withdrawAll;
     return (
       <>
         <ProgramWithdrawTop
@@ -96,6 +103,7 @@ class _ProgramWithdrawPopup extends React.PureComponent<
           {step === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
             <ProgramWithdrawAmountForm
               amount={amount}
+              withdrawAll={withdrawAll}
               rate={rate}
               programCurrency={assetCurrency}
               accountCurrency={accountCurrency}
@@ -103,16 +111,18 @@ class _ProgramWithdrawPopup extends React.PureComponent<
               onSubmit={this.handleEnterAmountSubmit}
             />
           )}
-          {step === PROGRAM_WITHDRAW_FORM.CONFIRM && amount && (
-            <ProgramWithdrawConfirmForm
-              errorMessage={errorMessage}
-              amount={amount}
-              onSubmit={this.handleSubmit}
-              onBackClick={this.goToEnterAmountStep}
-              programCurrency={assetCurrency}
-              periodEnds={periodEnds}
-            />
-          )}
+          {step === PROGRAM_WITHDRAW_FORM.CONFIRM &&
+            isAvailableProgramConfirmForm && (
+              <ProgramWithdrawConfirmForm
+                errorMessage={errorMessage}
+                amount={amount}
+                withdrawAll={withdrawAll}
+                onSubmit={this.handleSubmit}
+                onBackClick={this.goToEnterAmountStep}
+                programCurrency={assetCurrency}
+                periodEnds={periodEnds}
+              />
+            )}
           <div className="dialog__info">{t("withdraw-program.info")}</div>
         </div>
       </>
@@ -128,11 +138,12 @@ export interface IProgramWithdrawPopupProps {
   assetCurrency: string;
   accountCurrency: string;
   fetchInfo(): Promise<ProgramWithdrawInfo>;
-  withdraw(value: ProgramWithdrawType): Promise<void>;
+  withdraw(values: ProgramWithdrawType): Promise<void>;
 }
 
 export type ProgramWithdrawType = {
   amount: number;
+  withdrawAll?: boolean;
 };
 
 interface State {
@@ -143,4 +154,5 @@ interface State {
   availableToWithdraw?: number;
   periodEnds?: Date;
   title?: string;
+  withdrawAll?: boolean;
 }
