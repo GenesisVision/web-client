@@ -78,6 +78,8 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
                 url={signal.logo}
                 alt={signal.title}
                 color={signal.color}
+                level={signal.level}
+                levelProgress={signal.levelProgress}
               />
             </Link>
             <Link
@@ -117,11 +119,6 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
             />
           </Profitability>
         </TableCell>
-        {/*<TableCell className="programs-table__cell dashboard-programs__cell--chart">
-          {signal.chart.length && (
-            <ProgramSimpleChart data={signal.chart} programId={signal.id} />
-          )}
-        </TableCell>*/}
         <TableCell>
           <AssetStatusLabel status={signal.personalDetails.status as STATUS} />
         </TableCell>
