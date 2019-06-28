@@ -22,7 +22,7 @@ const _SignalingEdit: React.FC<Props> = ({
   const changeIsSignal = useCallback(() => setIsSignal(!isSignal), [isSignal]);
   return (
     <form id="signaling-edit-form" onSubmit={handleSubmit}>
-      <h3>Signaling Program</h3>
+      <h3>{t("manager.program-settings.signaling-program.title")}</h3>
       {!isSignalProgram && (
         <GVSwitch
           touched={false}

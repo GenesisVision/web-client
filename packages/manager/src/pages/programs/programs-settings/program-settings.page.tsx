@@ -29,8 +29,9 @@ import {
   redirectToProgram
 } from "./services/program-settings.service";
 import { IProgramSignalFormValues } from "./signaling-edit";
+import { InjectedTranslateProps, translate } from "react-i18next";
 
-const _ProgramsEditPage: React.FC<Props> = ({ service }) => {
+const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
   const fetchingDescription = () =>
     service
       .getProgramDescription()
@@ -116,7 +117,7 @@ const _ProgramsEditPage: React.FC<Props> = ({ service }) => {
 
   if (!details || !brokersInfo) return null;
   return (
-    <Page title={"Edit"}>
+    <Page title={t("manager.program-settings.title")}>
       <ProgramSettings
         changeSignaling={changeSignaling}
         closePeriod={closePeriod}
@@ -175,9 +176,10 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, DispatchProps {}
+interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
 
 const ProgramSettingsPage = compose<React.ComponentType<OwnProps>>(
+  translate(),
   connect(
     null,
     mapDispatchToProps
