@@ -103,6 +103,7 @@ const _BrokerEdit: React.FC<Props> = ({
         and statistics will be saved on the program page.
       </p>
       <GVButton
+        color="primary-dark"
         className="invest-form__submit-button"
         onClick={changeBroker(id, selectedBrokerState.accountTypes[0].id, 1)}
       >

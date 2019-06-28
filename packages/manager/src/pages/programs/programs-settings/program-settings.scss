@@ -21,6 +21,7 @@
   &__text {
     @include adaptive-padding(bottom, $padding-xsmall);
     color: rgba($text-light-color, 0.5);
+    line-height: 24px;
 
     &--color-accent {
       color: $primary-color;

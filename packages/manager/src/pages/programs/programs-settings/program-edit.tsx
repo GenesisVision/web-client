@@ -54,6 +54,7 @@ const _ProgramEdit: React.FC<Props> = ({
         )}
       </div>
       <GVButton
+        color="primary-dark"
         type={"submit"}
         className="invest-form__submit-button"
         disabled={!dirty || !isValid || isSubmitting}
