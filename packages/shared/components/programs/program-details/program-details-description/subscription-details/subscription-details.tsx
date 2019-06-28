@@ -56,41 +56,45 @@ const _SubscriptionDetails: React.FC<Props> = ({
           accent
           label={t("fund-details-page.description.status")}
         >
-          {t("subscription-details.active")}
+          <span className="subscription-details__value-accent">
+            {t("subscription-details.active")}
+          </span>
         </StatisticItem>
         <StatisticItem
           accent
           label={t("subscription-details.subscription-type")}
           className="subscription-details__short-statistic-item"
         >
-          {t(`subscription-details.modes.${mode}`)}
-          {mode === modes.percentage && (
-            <NumberFormat
-              value={percent}
-              prefix={`. ${t("subscription-details.volume")} `}
-              suffix="%"
-              displayType="text"
-            />
-          )}
-          {mode === modes.fixed && (
-            <>
+          <span className="subscription-details__value-accent">
+            {t(`subscription-details.modes.${mode}`)}
+            {mode === modes.percentage && (
               <NumberFormat
-                value={formatCurrencyValue(fixedVolume, "USD")}
-                prefix=" "
-                suffix="USD"
+                value={percent}
+                prefix={`. ${t("subscription-details.volume")} `}
+                suffix="%"
                 displayType="text"
               />
-              <NumberFormat
-                value={formatCurrencyValue(
-                  convertFromCurrency(fixedVolume, rate),
-                  currency
-                )}
-                prefix=" (≈ "
-                suffix={` ${currency})`}
-                displayType="text"
-              />
-            </>
-          )}
+            )}
+            {mode === modes.fixed && (
+              <>
+                <NumberFormat
+                  value={formatCurrencyValue(fixedVolume, "USD")}
+                  prefix=" "
+                  suffix="USD"
+                  displayType="text"
+                />
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    convertFromCurrency(fixedVolume, rate),
+                    currency
+                  )}
+                  prefix=" (≈ "
+                  suffix={` ${currency})`}
+                  displayType="text"
+                />
+              </>
+            )}
+          </span>
         </StatisticItem>
         <StatisticItem
           className="subscription-details__short-statistic-item"
