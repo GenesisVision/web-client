@@ -10,33 +10,11 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { fetchInvestmentsLevels } from "../services/program-details.service";
 import AboutLevelsComponent from "./about-levels/about-levels";
 
-interface IInvestmentLimitsPopoverOwnProps {
-  currency: CURRENCIES;
-  level: number;
-  canLevelUp: boolean;
-  closePopover(): void;
-}
-
-interface IInvestmentLimitsPopoverProps
-  extends IInvestmentLimitsPopoverOwnProps,
-    InjectedTranslateProps {}
-
-interface IInvestmentLimitsPopoverState {
-  investmentsLimits?: LevelInfo[];
-  isOpenAboutLevels: boolean;
-}
-
-class InvestmentLimitsPopover extends React.PureComponent<
-  IInvestmentLimitsPopoverProps,
-  IInvestmentLimitsPopoverState
-> {
-  constructor(props: IInvestmentLimitsPopoverProps) {
-    super(props);
-    this.state = {
-      investmentsLimits: undefined,
-      isOpenAboutLevels: false
-    };
-  }
+class InvestmentLimitsPopover extends React.PureComponent<Props, State> {
+  state: State = {
+    investmentsLimits: undefined,
+    isOpenAboutLevels: false
+  };
 
   componentDidMount() {
     fetchInvestmentsLevels(this.props.currency).then(data => {
@@ -55,7 +33,7 @@ class InvestmentLimitsPopover extends React.PureComponent<
   };
 
   render() {
-    const { t, level, canLevelUp, currency } = this.props;
+    const { t, level, canLevelUp, currency, limit } = this.props;
     const { investmentsLimits, isOpenAboutLevels } = this.state;
 
     if (!investmentsLimits) return null;
@@ -72,7 +50,7 @@ class InvestmentLimitsPopover extends React.PureComponent<
               {t("program-details-page.popover.genesis-level")} {level}
             </h4>
             <StatisticItem
-              condition={!!canLevelUp}
+              condition={canLevelUp}
               accent
               label={t("level-tooltip.level-up")}
             >
@@ -84,7 +62,7 @@ class InvestmentLimitsPopover extends React.PureComponent<
               label={t("program-details-page.popover.invest-limit")}
             >
               <NumberFormat
-                value={formatCurrencyValue(levelLimit, currency)}
+                value={formatCurrencyValue(limit, currency)}
                 thousandSeparator={" "}
                 displayType="text"
                 suffix={` ${currency}`}
@@ -119,3 +97,19 @@ class InvestmentLimitsPopover extends React.PureComponent<
 }
 
 export default translate()(InvestmentLimitsPopover);
+
+interface OwnProps {
+  currency: CURRENCIES;
+  level: number;
+  canLevelUp: boolean;
+  closePopover(): void;
+}
+
+interface Props extends OwnProps, InjectedTranslateProps {
+  limit: number;
+}
+
+interface State {
+  isOpenAboutLevels: boolean;
+  investmentsLimits?: LevelInfo[];
+}

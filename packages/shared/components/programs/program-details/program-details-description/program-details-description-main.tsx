@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
+import DetailsSettingControl from "shared/components/details/details-description-section/details-description/controls/details-setting-control";
 import GVButton from "shared/components/gv-button";
 import PieContainerSmall from "shared/components/pie-container/pie-container-small";
 import Popover, {
@@ -22,7 +23,8 @@ import { STATUS } from "shared/constants/constants";
 import filesService from "shared/services/file-service";
 import {
   composeManagerDetailsUrl,
-  composeProgramNotificationsUrl
+  composeProgramNotificationsUrl,
+  composeProgramSettingsUrl
 } from "shared/utils/compose-url";
 
 import { IChangePasswordTradingAccountProps } from "../program-details.types";
@@ -82,6 +84,7 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
             onClose={this.handleCloseDropdown}
           >
             <InvestmentLimitsPopover
+              limit={programDescription.totalAvailableInvestment}
               currency={programDescription.currency}
               level={programDescription.level}
               canLevelUp={programDescription.rating.canLevelUp}
@@ -183,14 +186,6 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
           </div>
         </div>
         <div className="program-details-description__settings">
-          {ChangePasswordTradingAccount &&
-            isOwnProgram &&
-            personalDetails &&
-            personalDetails.canChangePassword && (
-              <ChangePasswordTradingAccount
-                programDescription={programDescription}
-              />
-            )}
           <DetailsFavorite
             id={programDescription.id}
             isFavorite={personalDetails && personalDetails.isFavorite}
@@ -202,6 +197,14 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
               personalDetails && personalDetails.hasNotifications
             }
           />
+          {isOwnProgram &&
+            personalDetails &&
+            personalDetails.canCloseProgram && (
+              <DetailsSettingControl
+                title={programDescription.title}
+                url={composeProgramSettingsUrl(programDescription.url)}
+              />
+            )}
         </div>
       </div>
     );

@@ -158,14 +158,18 @@ class _DetailsInvestment extends React.PureComponent<
                 accent
                 label={t("fund-details-page.description.pending-output")}
               >
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    personalDetails.pendingOutput,
-                    assetCurrency
-                  )}
-                  suffix={` ${assetCurrency}`}
-                  displayType="text"
-                />
+                {personalDetails.pendingOutputIsWithdrawAll ? (
+                  t("withdraw-program.withdrawing-all")
+                ) : (
+                  <NumberFormat
+                    value={formatCurrencyValue(
+                      personalDetails.pendingOutput,
+                      assetCurrency
+                    )}
+                    suffix={` ${assetCurrency}`}
+                    displayType="text"
+                  />
+                )}
               </StatisticItem>
             </div>
             <div className="details-investment__footer">

@@ -15,7 +15,8 @@ import {
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
+  PROGRAM_SLUG_URL_PARAM_NAME,
+  PROGRAM_EDIT
 } from "shared/routes/programs.routes";
 
 import replaceParams from "./replace-params";
@@ -45,6 +46,11 @@ export const composeFundsDetailsUrl = (slugUrl: string): string =>
 export const composeProgramNotificationsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
     ":id": slugUrl
+  });
+
+export const composeProgramSettingsUrl = (slugUrl: string): string =>
+  replaceParams(`${PROGRAM_DETAILS_ROUTE}/${PROGRAM_EDIT}`, {
+    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeAssetNotificationsUrl = (

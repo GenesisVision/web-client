@@ -1,0 +1,61 @@
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+
+.program-edit {
+  &__block {
+    @include adaptive-margin(bottom, $padding-large);
+    box-sizing: border-box;
+    border-left: 2px solid $secondary-color;
+    padding-left: 60px;
+
+    &:first-child {
+      @include adaptive-margin(bottom, $padding-large);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__text {
+    @include adaptive-padding(bottom, $padding-xsmall);
+    color: rgba($text-light-color, 0.5);
+    line-height: 24px;
+
+    &--color-accent {
+      color: $primary-color;
+    }
+
+    &--padding-top {
+      @include adaptive-padding(top, $padding-xsmall);
+    }
+
+    @include media-breakpoint-landscape-phone() {
+      max-width: 500px;
+    }
+  }
+
+  &__block-wrapper {
+    @include adaptive-margin(bottom, 50px);
+    width: 100%;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--broker-list {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+
+    .gv-text-field__wrapper {
+      width: 100%;
+    }
+
+    @include media-breakpoint-landscape-phone() {
+      max-width: 765px;
+    }
+  }
+}

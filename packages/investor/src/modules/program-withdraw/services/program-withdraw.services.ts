@@ -17,13 +17,13 @@ export const getProgramWithdrawInfo = (
 };
 
 export const withdrawProgramById = (id: string, onClose: () => void) => (
-  value: ProgramWithdrawType
+  values: ProgramWithdrawType
 ): InvestorThunk<Promise<void>> => (dispatch): Promise<void> => {
   return investorApi
-    .v10InvestorProgramsByIdWithdrawMultiByAmountPost(
+    .v10InvestorProgramsByIdWithdrawMultiPost(
       id,
-      value.amount,
-      authService.getAuthArg()
+      authService.getAuthArg(),
+      values
     )
     .then(() => {
       onClose();

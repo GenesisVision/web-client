@@ -25,7 +25,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import Tooltip from "shared/components/tooltip/tooltip";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const DECIMAL_SCALE = 8;
 
@@ -116,14 +116,17 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
                 render={() =>
                   trade.showOriginalCommission ? (
                     <div>
-                      {`${formatValue(
+                      {`${formatCurrencyValue(
                         trade.originalCommission,
-                        DECIMAL_SCALE
+                        trade.originalCommissionCurrency
                       )} ${trade.originalCommissionCurrency}`}
                     </div>
                   ) : (
                     <div>
-                      {trade.commission} {currency}
+                      {`${formatCurrencyValue(
+                        trade.commission,
+                        currency
+                      )} ${currency}`}
                     </div>
                   )
                 }
