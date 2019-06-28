@@ -46,7 +46,7 @@ const _BrokerEdit: React.FC<Props> = ({
   );
   return (
     <>
-      <h3>Broker</h3>
+      <h3>{t("manager.program-settings.broker.title")}</h3>
       <div className="program-edit__block-wrapper program-edit__block-wrapper--broker-list">
         {brokers.map(broker => (
           <BrokerCard
@@ -98,19 +98,14 @@ const _BrokerEdit: React.FC<Props> = ({
         </div>
       </div>
       <p className="program-edit__text program-edit__text--color-accent program-edit__text--padding-top">
-        A broker change in the program will occur automatically within 24 hours
-        after the end of the reporting period. You will receive a message
-        confirming the successful change of the broker and you will receive a
-        new login and password from the trading account. The invested funds in
-        the program will be transferred to the new broker. All trading history
-        and statistics will be saved on the program page.
+        {t("manager.program-settings.broker.text")}
       </p>
       <GVButton
         color="primary"
         className="invest-form__submit-button"
         onClick={changeBroker(id, selectedBrokerState.accountTypes[0].id, 1)}
       >
-        {"Change broker"}
+        {t("manager.program-settings.buttons.change-broker")}
       </GVButton>
     </>
   );
