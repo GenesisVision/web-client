@@ -32,7 +32,9 @@ class _DepositForm extends React.PureComponent<
   InjectedFormikProps<Props, IDepositFormValues>
 > {
   componentDidMount(): void {
-    this.fetchRate({ currencyFrom: this.props.values.walletCurrency });
+    this.fetchRate({
+      currencyFrom: this.props.values[DEPOSIT_FORM_FIELDS.walletCurrency]
+    });
   }
 
   composeEntryFee = (fee: any): number => {
@@ -65,9 +67,9 @@ class _DepositForm extends React.PureComponent<
   onChangeCurrencyFrom = (name: any, target: any): void => {
     const { setFieldValue, setFieldTouched } = this.props;
     const walletCurrency = target.props.value;
-    setFieldValue("walletCurrency", walletCurrency);
-    setFieldValue("amount", "");
-    setFieldTouched("amount", false);
+    setFieldValue(DEPOSIT_FORM_FIELDS.walletCurrency, walletCurrency);
+    setFieldValue(DEPOSIT_FORM_FIELDS.amount, "");
+    setFieldTouched(DEPOSIT_FORM_FIELDS.amount, false);
     this.fetchRate({ currencyFrom: walletCurrency });
   };
 
@@ -78,7 +80,7 @@ class _DepositForm extends React.PureComponent<
     const { values, currency, setFieldValue } = this.props;
     rateApi
       .v10RateByFromByToGet(
-        params.currencyFrom || values.walletCurrency,
+        params.currencyFrom || values[DEPOSIT_FORM_FIELDS.walletCurrency],
         params.currencyTo || currency
       )
       .then(rate => {
@@ -88,22 +90,26 @@ class _DepositForm extends React.PureComponent<
 
   getMaxAmount = () => {
     const { setFieldValue, info, wallets, values } = this.props;
-    const { walletCurrency, rate } = values;
     const availableToInvestBase = (info as ProgramInvestInfo)
       ? (info as ProgramInvestInfo).availableToInvestBase
       : undefined;
-    const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
+    const wallet = wallets.find(
+      wallet => wallet.currency === values[DEPOSIT_FORM_FIELDS.walletCurrency]
+    );
     const availableInWallet = wallet ? wallet.available : 0;
 
     let maxAvailable = Number.MAX_SAFE_INTEGER;
     if (availableToInvestBase !== undefined)
       maxAvailable = availableToInvestBase;
 
-    const availableToInvest = convertToCurrency(maxAvailable, rate);
-    if (availableInWallet !== values.availableInWallet)
-      setFieldValue("availableInWallet", availableInWallet);
-    if (availableToInvest !== values.availableToInvest)
-      setFieldValue("availableToInvest", availableToInvest);
+    const availableToInvest = convertToCurrency(
+      maxAvailable,
+      values[DEPOSIT_FORM_FIELDS.rate]
+    );
+    if (availableInWallet !== values[DEPOSIT_FORM_FIELDS.availableInWallet])
+      setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, availableInWallet);
+    if (availableToInvest !== values[DEPOSIT_FORM_FIELDS.availableToInvest])
+      setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, availableToInvest);
   };
 
   setMaxAmount = (): void => {
@@ -115,7 +121,7 @@ class _DepositForm extends React.PureComponent<
         : availableInWallet || 0,
       walletCurrency
     );
-    setFieldValue("amount", max);
+    setFieldValue(DEPOSIT_FORM_FIELDS.amount, max);
   };
 
   render() {
@@ -140,31 +146,29 @@ class _DepositForm extends React.PureComponent<
     return (
       <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
         <GVFormikField
-          name="walletCurrency"
+          name={DEPOSIT_FORM_FIELDS.walletCurrency}
           component={GVTextField}
           label={t("follow-program.create-account.from")}
           InputComponent={Select}
           onChange={this.onChangeCurrencyFrom}
         >
-          {wallets.map(wallet => {
-            return (
-              <option value={wallet.currency} key={wallet.currency}>
-                <WalletImage
-                  imageClassName="transfer-popup__icon"
-                  alt={wallet.currency}
-                  url={wallet.logo}
-                />
-                {`${wallet.title} | ${wallet.currency}`}
-              </option>
-            );
-          })}
+          {wallets.map(wallet => (
+            <option value={wallet.currency} key={wallet.currency}>
+              <WalletImage
+                imageClassName="transfer-popup__icon"
+                alt={wallet.currency}
+                url={wallet.logo}
+              />
+              {`${wallet.title} | ${wallet.currency}`}
+            </option>
+          ))}
         </GVFormikField>
         <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
           {formatCurrencyValue(wallet ? wallet.available : 0, walletCurrency)}{" "}
           {walletCurrency}
         </StatisticItem>
         <InputAmountField
-          name="amount"
+          name={DEPOSIT_FORM_FIELDS.amount}
           label={t("deposit-asset.amount")}
           currency={walletCurrency}
           isAllow={this.isAllow(walletCurrency)}
@@ -272,23 +276,34 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
   withFormik<Props, IDepositFormValues>({
     displayName: "invest-form",
     mapPropsToValues: () => ({
-      rate: 1,
-      maxAmount: undefined,
-      amount: undefined,
-      walletCurrency: "GVT"
+      [DEPOSIT_FORM_FIELDS.rate]: 1,
+      [DEPOSIT_FORM_FIELDS.maxAmount]: undefined,
+      [DEPOSIT_FORM_FIELDS.amount]: undefined,
+      [DEPOSIT_FORM_FIELDS.walletCurrency]: "GVT"
     }),
     validationSchema: (params: Props) =>
       params.role === ROLE.MANAGER
         ? managerSchema(params)
         : investorSchema(params),
     handleSubmit: (values, { props, setSubmitting }) => {
-      const { walletCurrency, amount } = values;
-      props.onSubmit(amount!, walletCurrency, setSubmitting);
+      props.onSubmit(
+        values[DEPOSIT_FORM_FIELDS.amount]!,
+        values[DEPOSIT_FORM_FIELDS.walletCurrency],
+        setSubmitting
+      );
     }
   })
 )(_DepositForm);
-
 export default DepositForm;
+
+export enum DEPOSIT_FORM_FIELDS {
+  rate = "rate",
+  maxAmount = "maxAmount",
+  amount = "amount",
+  walletCurrency = "walletCurrency",
+  availableToInvest = "availableToInvest",
+  availableInWallet = "availableInWallet"
+}
 
 export interface IDepositOwnProps {
   wallets: WalletBaseData[];
@@ -310,9 +325,9 @@ interface Props
     InjectedTranslateProps {}
 
 export interface IDepositFormValues {
-  rate: number;
-  availableToInvest?: number;
-  availableInWallet?: number;
-  amount?: number;
-  walletCurrency: string;
+  [DEPOSIT_FORM_FIELDS.rate]: number;
+  [DEPOSIT_FORM_FIELDS.availableToInvest]?: number;
+  [DEPOSIT_FORM_FIELDS.availableInWallet]?: number;
+  [DEPOSIT_FORM_FIELDS.amount]?: number;
+  [DEPOSIT_FORM_FIELDS.walletCurrency]: string;
 }

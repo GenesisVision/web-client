@@ -4,6 +4,7 @@ import { ResolveThunks, connect } from "react-redux";
 import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
@@ -56,7 +57,7 @@ class _FundDepositContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  currency: state.accountSettings.currency
+  currency: currencySelector(state)
 });
 
 const mapDispatchToProps = (

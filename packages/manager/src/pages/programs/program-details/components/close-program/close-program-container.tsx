@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { closeProgram } from "shared/components/programs/program-details/services/program-details.service";
+import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
@@ -48,12 +49,9 @@ class CloseProgramContainer extends React.Component<
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
-    ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
-    : false;
-  return { twoFactorEnabled };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  twoFactorEnabled: twoFactorEnabledSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(

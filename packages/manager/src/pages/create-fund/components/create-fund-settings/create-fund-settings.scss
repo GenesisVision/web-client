@@ -346,6 +346,9 @@ $asset-height-mobile: $asset-height/$divider-text;
   }
   &__assets {
     padding-bottom: $padding-xsmall;
+    height: 180px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     table {
       padding: 0 $padding-xsmall;
       border-spacing: 0;

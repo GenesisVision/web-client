@@ -8,7 +8,6 @@ import {
   WalletData
 } from "gv-api-web";
 import ConfirmContainer from "modules/confirm/confirm-container";
-import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -17,8 +16,12 @@ import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
+import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { headerSelector } from "shared/reducers/header-reducer";
+import { programsInfoSelector } from "shared/reducers/platform-reducer";
+import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { rateApi } from "shared/services/api-client/rate-api";
 import {
   MiddlewareDispatch,
@@ -149,7 +152,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
       !selectedBroker ||
       !programsInfo ||
       !headerData ||
-      !wallets ||
+      !wallets.length ||
       !minimumDepositsAmount
     )
       return null;
@@ -217,17 +220,11 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: ManagerRootState): StateProps => {
-  return {
-    wallets: state.wallet.info.data
-      ? state.wallet.info.data.wallets
-      : undefined,
-    headerData: state.profileHeader.data,
-    programsInfo: state.platformData.data
-      ? state.platformData.data.programsInfo
-      : undefined
-  };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  wallets: walletsSelector(state),
+  headerData: headerSelector(state),
+  programsInfo: programsInfoSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
@@ -241,16 +238,14 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-const CreateProgramContainer = compose<React.ComponentType<OwnProps>>(
+const CreateProgramContainer = compose<React.ComponentType>(
   translate(),
-  connect<StateProps, DispatchProps, OwnProps, ManagerRootState>(
+  connect<StateProps, DispatchProps, {}, ManagerRootState>(
     mapStateToProps,
     mapDispatchToProps
   )
 )(_CreateProgramContainer);
 export default CreateProgramContainer;
-
-interface OwnProps {}
 
 interface State {
   minimumDepositsAmount?: { [key: string]: number };
@@ -266,7 +261,7 @@ interface State {
 
 interface StateProps {
   programsInfo?: ProgramsInfo;
-  wallets?: WalletData[];
+  wallets: WalletData[];
   headerData?: ProfileHeaderViewModel;
 }
 
@@ -280,8 +275,4 @@ interface DispatchProps {
   };
 }
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    DispatchProps,
-    InjectedTranslateProps {}
+interface Props extends StateProps, DispatchProps, InjectedTranslateProps {}

@@ -89,6 +89,11 @@
       -webkit-box-shadow: 0 0 0 30px $secondary-background-color inset;
       caret-color: $text-light-color;
     }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 
   &__label {

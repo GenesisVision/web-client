@@ -1,16 +1,14 @@
-import { PlatformInfo } from "gv-api-web";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import * as React from "react";
 import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
-import { createSelector } from "reselect";
 import ProgramDetailsPageCommon from "shared/components/programs/program-details/program-details.page";
 import {
   fetchHistoryCounts,
   fetchPortfolioEvents
 } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import { IApiState } from "shared/reducers/reducer-creators/api-reducer";
+import { programEventsSelector } from "shared/reducers/platform-reducer";
 
 import ChangePasswordTradingAccount from "./components/program-controls/change-password-trading-account";
 import ProgramControls from "./components/program-controls/program-controls";
@@ -36,30 +34,9 @@ const _ProgramDetailsPage: React.FC<StateProps> = ({ events }) => {
   );
 };
 
-const eventsSelector = createSelector<
-  ManagerRootState,
-  IApiState<PlatformInfo>,
-  SelectFilterValue<string>[]
->(
-  state => state.platformData,
-  platformData => {
-    if (!platformData.data) return [];
-    const {
-      programs
-    } = platformData.data.enums.program.managerNotificationType;
-    const events = programs.map((event: string) => ({
-      value: event,
-      labelKey: `manager.dashboard-page.portfolio-events.types.${event}`
-    }));
-    return events;
-  }
-);
-
-const mapStateToProps = (state: ManagerRootState): StateProps => {
-  return {
-    events: eventsSelector(state)
-  };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  events: programEventsSelector(state)
+});
 
 interface StateProps {
   events: SelectFilterValue<string>[];

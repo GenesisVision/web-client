@@ -4,10 +4,7 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { boolean, mixed, number, object, string } from "yup";
 
-import {
-  CREATE_PROGRAM_FIELDS,
-  ICreateProgramSettingsProps
-} from "./create-program-settings";
+import { ICreateProgramSettingsProps } from "./create-program-settings";
 
 const createProgramSettingsValidationSchema = (
   props: ICreateProgramSettingsProps
@@ -89,6 +86,10 @@ const createProgramSettingsValidationSchema = (
             t(
               "manager.create-program-page.settings.validation.investment-limit-min"
             )
+          )
+          .lessThan(
+            10000000000,
+            "Investment Limit must be less than 10000000000"
           )
           .required(
             t(
@@ -182,7 +183,7 @@ export const signalSuccessFeeShape = (
 ) => {
   return number()
     .min(
-      0.01,
+      0,
       t("manager.create-program-page.settings.validation.success-fee-min")
     )
     .required(
@@ -222,5 +223,25 @@ export const signalVolumeFeeShape = (
       )
     );
 };
+
+export enum CREATE_PROGRAM_FIELDS {
+  currency = "currency",
+  periodLength = "periodLength",
+  successFee = "successFee",
+  stopOutLevel = "stopOutLevel",
+  leverage = "leverage",
+  brokerAccountTypeId = "brokerAccountTypeId",
+  signalSuccessFee = "signalSuccessFee",
+  signalVolumeFee = "signalVolumeFee",
+  isSignalProgram = "isSignalProgram",
+  hasInvestmentLimit = "hasInvestmentLimit",
+  title = "title",
+  description = "description",
+  logo = "logo",
+  entryFee = "entryFee",
+  depositAmount = "depositAmount",
+  depositWalletId = "depositWalletId",
+  investmentLimit = "investmentLimit"
+}
 
 export default createProgramSettingsValidationSchema;

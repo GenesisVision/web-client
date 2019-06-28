@@ -16,6 +16,7 @@ const _StatisticItem: React.FC<Props> = ({
   accent,
   half,
   className,
+  labelClassName,
   equivalent,
   equivalentCurrency
 }) => {
@@ -50,6 +51,7 @@ const _StatisticItem: React.FC<Props> = ({
       <div
         className={classNames(
           "statistics-item__top",
+          labelClassName,
           generateClasses(ITEM.LABEL)
         )}
       >
@@ -86,6 +88,7 @@ interface Props {
   half?: boolean;
   invert?: boolean;
   className?: string;
+  labelClassName?: string;
 }
 
 const StatisticItem = React.memo(withLoader(_StatisticItem));

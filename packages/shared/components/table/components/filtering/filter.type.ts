@@ -23,6 +23,7 @@ import {
   ComposedRequestEventTypeValue,
   EventTypeFilterType
 } from "./event-type-filter/event-type-filter.constants";
+import { FundAssetFilterType } from "./fund-asset-filter/fund-asset-filter.constants";
 import {
   ComposedRequestLevelFilterNames,
   ComposedRequestLevelFilterValue,
@@ -71,6 +72,7 @@ export type FilteringType = {
     | LevelFilterType
     | SelectFilterType
     | TagFilterType
+    | FundAssetFilterType
     | undefined;
 };
 

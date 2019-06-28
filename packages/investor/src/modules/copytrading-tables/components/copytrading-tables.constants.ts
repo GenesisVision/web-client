@@ -36,6 +36,12 @@ export const COPYTRADING_OPEN_TRADES_COLUMNS = [
 
 export const COPYTRADING_TRADES_HISTORY_COLUMNS = [
   {
+    name: "providers"
+  },
+  {
+    name: "date"
+  },
+  {
     name: "direction-entry"
   },
   {
@@ -52,12 +58,6 @@ export const COPYTRADING_TRADES_HISTORY_COLUMNS = [
   },
   {
     name: "commission"
-  },
-  {
-    name: "date"
-  },
-  {
-    name: "providers"
   }
 ];
 

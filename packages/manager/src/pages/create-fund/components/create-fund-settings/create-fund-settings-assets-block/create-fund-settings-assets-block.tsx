@@ -8,7 +8,7 @@ import AddButton from "shared/components/add-button/add-button";
 import FundAssetRatio from "shared/components/fund-asset-ratio/fund-asset-ratio";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer, {
-  TFundAssetRemoveHandle
+  FundAssetRemoveType
 } from "shared/components/fund-asset/fund-asset-container";
 
 class _CreateFundSettingsAssetsComponent extends React.PureComponent<
@@ -70,7 +70,7 @@ class _CreateFundSettingsAssetsComponent extends React.PureComponent<
 interface Props extends InjectedTranslateProps {
   assets: FundAssetPartWithIcon[];
   remainder: number;
-  removeHandle: TFundAssetRemoveHandle;
+  removeHandle: FundAssetRemoveType;
   addHandle: MouseEventHandler;
 }
 

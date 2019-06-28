@@ -12,6 +12,7 @@ import {
 import { AuthRootState } from "shared/utils/types";
 
 import NotificationSettings from "./notification-settings";
+import { notificationSettingsSelector } from "./reducers/notification-settings.reducers";
 import { fetchNotificationSettings } from "./services/notification-settings.services";
 
 class _NotificationSettingsContainer extends React.PureComponent<Props> {
@@ -25,10 +26,9 @@ class _NotificationSettingsContainer extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = (state: AuthRootState): StateProps => {
-  const { data, isPending } = state.notificationSettings;
-  return { settings: data, isPending };
-};
+const mapStateToProps = (state: AuthRootState): StateProps => ({
+  settings: notificationSettingsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
@@ -40,7 +40,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 interface Props extends StateProps, DispatchProps, OwnProps {}
 
 interface StateProps {
-  isPending: boolean;
   settings?: NotificationSettingList;
 }
 

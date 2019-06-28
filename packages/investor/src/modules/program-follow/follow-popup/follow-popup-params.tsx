@@ -2,18 +2,36 @@ import { InjectedFormikProps, withFormik } from "formik";
 import { AttachToSignalProviderModeEnum, SignalSubscription } from "gv-api-web";
 import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
-import { SetSubmittingType } from "shared/utils/types";
+import Tooltip from "shared/components/tooltip/tooltip";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
+
+const getInfoText = (currency: CurrencyEnum): string => {
+  switch (currency) {
+    case "ETH":
+      return "follow-program.info.ETH";
+    case "BTC":
+      return "follow-program.info.BTC";
+    case "USDT":
+    default:
+      return "follow-program.info.USDT";
+  }
+};
 
 const _FollowParams: React.FC<
   InjectedFormikProps<Props, FollowParamsFormValues>
 > = ({
+  rate,
+  currency,
   t,
   setFieldValue,
   isSubmitting,
@@ -23,7 +41,6 @@ const _FollowParams: React.FC<
   values,
   handleSubmit
 }) => {
-  const { mode } = values;
   const setMaxOpenTolerancePercent = useCallback(() => {
     setFieldValue(FIELDS.openTolerancePercent, "20");
   }, []);
@@ -42,12 +59,20 @@ const _FollowParams: React.FC<
         >
           {Object.keys(modes).map((mode: string) => (
             <option value={modes[mode].value} key={modes[mode].value}>
-              {modes[mode].label}
+              <Tooltip
+                render={() => (
+                  <div className="tooltip__content">
+                    {t(modes[mode].tooltip)}
+                  </div>
+                )}
+              >
+                <span>{t(modes[mode].label)}</span>
+              </Tooltip>
             </option>
           ))}
         </GVFormikField>
       </div>
-      {mode === modes.percentage.value && (
+      {values[FIELDS.mode] === modes.percentage.value && (
         <div className="dialog-field">
           <InputAmountField
             name={FIELDS.percent}
@@ -57,12 +82,21 @@ const _FollowParams: React.FC<
           />
         </div>
       )}
-      {mode === modes.fixed.value && (
+      {values[FIELDS.mode] === modes.fixed.value && (
         <div className="dialog-field">
           <InputAmountField
             name={FIELDS.fixedVolume}
-            label={t("follow-program.params.usd-equivalent")}
+            label={`${t("follow-program.params.usd-equivalent")} *`}
             currency={"USD"}
+          />
+          <NumberFormat
+            value={formatCurrencyValue(
+              convertFromCurrency(values[FIELDS.fixedVolume]!, rate),
+              currency
+            )}
+            prefix="≈ "
+            suffix={` ${currency}`}
+            displayType="text"
           />
         </div>
       )}
@@ -88,6 +122,9 @@ const _FollowParams: React.FC<
           {t("follow-program.params.submit")}
         </GVButton>
       </div>
+      {values[FIELDS.mode] === modes.fixed.value && (
+        <div className="dialog__info">* {t(getInfoText(currency))}</div>
+      )}
     </form>
   );
 };
@@ -101,13 +138,26 @@ enum FIELDS {
 
 type mode = {
   label: string;
+  tooltip: string;
   value: AttachToSignalProviderModeEnum;
 };
 
 const modes: { [key: string]: mode } = {
-  byBalance: { label: "By balance", value: "ByBalance" },
-  percentage: { label: "Percentage", value: "Percent" },
-  fixed: { label: "Fixed", value: "Fixed" }
+  byBalance: {
+    label: "follow-program.modes.byBalance.label",
+    tooltip: "follow-program.modes.byBalance.tooltip",
+    value: "ByBalance"
+  },
+  percentage: {
+    label: "follow-program.modes.percentage.label",
+    tooltip: "follow-program.modes.percentage.tooltip",
+    value: "Percent"
+  },
+  fixed: {
+    label: "follow-program.modes.fixed.label",
+    tooltip: "follow-program.modes.fixed.tooltip",
+    value: "Fixed"
+  }
 };
 
 export interface FollowParamsFormValues {
@@ -118,6 +168,8 @@ export interface FollowParamsFormValues {
 }
 
 interface OwnProps {
+  rate: number;
+  currency: CurrencyEnum;
   isShowBack: boolean;
   paramsSubscription?: SignalSubscription;
   onSubmit: (
@@ -151,10 +203,14 @@ const FollowParams = compose<React.ComponentType<OwnProps>>(
       object().shape({
         [FIELDS.fixedVolume]: number()
           .min(0, t("follow-program.params.validation.fixedVolume-min"))
-          .max(99999, t("follow-program.params.validation.fixedVolume-max")),
+          .lessThan(
+            100000,
+            t("follow-program.params.validation.fixedVolume-max")
+          ),
         [FIELDS.percent]: number()
           .min(1, t("follow-program.params.validation.percent-min"))
-          .max(999, t("follow-program.params.validation.percent-max")),
+          .lessThan(1000, t("follow-program.params.validation.percent-max"))
+          .nullable(true),
         [FIELDS.openTolerancePercent]: number()
           .required(t("follow-program.params.validation.tolerance-required"))
           .min(

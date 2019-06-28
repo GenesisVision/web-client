@@ -1,7 +1,12 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import { logout } from "shared/components/auth/login/login.service";
 import Header from "shared/components/header/header";
 import {
@@ -9,6 +14,8 @@ import {
   fetchTwoFactor,
   notificationsToggle
 } from "shared/components/header/header.service";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { headerSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 class _HeaderContainer extends React.PureComponent<Props> {
@@ -55,14 +62,10 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-const mapStateToProps = ({
-  profileHeader,
-  authData,
-  router
-}: RootState): StateProps => ({
-  info: profileHeader.data,
-  isAuthenticated: authData.isAuthenticated,
-  backPath: router.location ? router.location.pathname : ""
+const mapStateToProps = (state: RootState): StateProps => ({
+  info: headerSelector(state),
+  isAuthenticated: isAuthenticatedSelector(state),
+  backPath: state.router.location ? state.router.location.pathname : ""
 });
 
 interface Props extends StateProps, DispatchProps, OwnProps {}
@@ -85,10 +88,10 @@ interface DispatchProps {
 
 interface OwnProps {}
 
-const HeaderContainer = connect<StateProps, DispatchProps, OwnProps, RootState>(
-  mapStateToProps,
-  mapDispatchToProps,
-  null,
-  { pure: false }
+const HeaderContainer = compose<React.ComponentType<OwnProps>>(
+  connect<StateProps, DispatchProps, OwnProps, RootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(_HeaderContainer);
 export default HeaderContainer;

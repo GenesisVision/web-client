@@ -1,6 +1,6 @@
 import { OrderSignalModel } from "gv-api-web";
 import { DECIMAL_SCALE } from "modules/copytrading-tables/components/copytrading-tables.constants";
-import { FeesPopover } from "modules/copytrading-tables/components/fees-popover";
+import { OpenTradesFeesTooltip } from "modules/copytrading-tables/components/open-trades-fees-tooltip";
 import moment from "moment";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -16,6 +16,12 @@ const _TradesHistoryRow: React.FC<{ trade: OrderSignalModel }> = ({
 }) => {
   return (
     <TableRow className="details-trades__row">
+      <TableCell className="details-trades__cell program-details-trades__cell--entry">
+        {trade.providers.map(provider => provider.program.title).join(", ")}
+      </TableCell>
+      <TableCell className="details-trades__cell program-details-trades__cell--ticket">
+        {moment(trade.date).format()}
+      </TableCell>
       <TableCell className="details-trades__cell program-details-trades__cell--direction">
         <BaseProfitability
           isPositive={trade.direction === "Buy"}
@@ -52,17 +58,12 @@ const _TradesHistoryRow: React.FC<{ trade: OrderSignalModel }> = ({
             thousandSeparator=" "
             allowNegative={false}
             displayType="text"
+            suffix={trade.profit !== 0 ? ` ${trade.currency}` : ""}
           />
         </Profitability>
       </TableCell>
       <TableCell className="details-trades__cell program-details-trades__cell--date">
-        <FeesPopover trade={trade} />
-      </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--ticket">
-        {moment(trade.date).format()}
-      </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--entry">
-        {trade.providers.map(provider => provider.program.title).join(", ")}
+        <OpenTradesFeesTooltip trade={trade} />
       </TableCell>
     </TableRow>
   );

@@ -12,6 +12,8 @@ import TabsContainer from "shared/components/tabs-container/tabs-container";
 import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch } from "shared/utils/types";
 
+import { levelDataSelector } from "./reducers/programs-rating.reducers";
+
 class _ProgramsRatingContainer extends React.PureComponent<Props, State> {
   state = {
     tab: undefined,
@@ -70,11 +72,9 @@ class _ProgramsRatingContainer extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { levelupSummary } = state.programsRating;
-  if (!levelupSummary.data) return {};
-  return { levelData: levelupSummary.data.levelData };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  levelData: levelDataSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {

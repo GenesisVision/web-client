@@ -8,9 +8,8 @@ import PortfolioEventsTableContainerComponent from "shared/components/portfolio-
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
-import { getUnique } from "shared/utils/array";
+import { allEventsSelector } from "shared/reducers/platform-reducer";
 
-export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 const _PortfolioEventsAllComponent: React.FC<Props> = ({ role, t, events }) => (
   <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
     <PortfolioEventsTableContainerComponent
@@ -23,18 +22,9 @@ const _PortfolioEventsAllComponent: React.FC<Props> = ({ role, t, events }) => (
   </Page>
 );
 
-const mapStateToProps = (state: ManagerRootState): StateProps => {
-  if (!state.platformData.data) return { events: [] };
-  const {
-    funds,
-    programs
-  } = state.platformData.data.enums.program.managerNotificationType;
-  const events = getUnique([...funds, ...programs]).map(event => ({
-    value: event,
-    labelKey: `manager.dashboard-page.portfolio-events.types.${event}`
-  }));
-  return { events };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  events: allEventsSelector(state)
+});
 
 interface Props
   extends InjectedTranslateProps,

@@ -10,7 +10,9 @@ import { MiddlewareDispatch, TGetAuthState } from "shared/utils/types";
 import * as actions from "../actions/dashboard.actions";
 
 export const getPortfolioEvents = () => (dispatch: Dispatch) =>
-  dispatch(actions.fetchPortfolioEventsAction(authService.getAuthArg(), { take: 5 }));
+  dispatch(
+    actions.fetchPortfolioEventsAction(authService.getAuthArg(), { take: 5 })
+  );
 
 export const getAssetChart = (
   assetId: string,

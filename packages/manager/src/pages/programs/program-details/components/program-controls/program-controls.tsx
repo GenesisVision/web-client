@@ -7,7 +7,12 @@ import SignalProviderControls from "./signal-provider-controls";
 
 const _ProgramControls: React.FC<
   IProgramControlsProps & InjectedTranslateProps
-> = ({ programDescription, isAuthenticated, redirectToLogin }) => {
+> = ({
+  programDescription,
+  levelsParameters,
+  isAuthenticated,
+  redirectToLogin
+}) => {
   const personalProgramDetails = programDescription.personalProgramDetails;
   const canCloseProgram =
     personalProgramDetails && personalProgramDetails.canCloseProgram;
@@ -25,6 +30,7 @@ const _ProgramControls: React.FC<
           isOwnProgram={isOwnProgram}
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
+          levelsParameters={levelsParameters}
         />
       </div>
       {isOwnProgram &&

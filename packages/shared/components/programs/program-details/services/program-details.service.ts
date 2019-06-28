@@ -18,19 +18,23 @@ import {
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
+import {
+  PROGRAM_DETAILS_ROUTE,
+  PROGRAM_SLUG_URL_PARAM_NAME
+} from "shared/routes/programs.routes";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import {
-  PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
-} from "shared/utils/compose-url";
 import getParams from "shared/utils/get-params";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { HistoryCountsType } from "../program-details.types";
 import { ProgramStatisticResult } from "./program-details.types";
+
+export const getPlatformLevelsParameters = (currency: CurrencyEnum) =>
+  platformApi.v10PlatformLevelsParametersGet({ currency });
 
 export const getProgramDescription = () => (
   dispatch: Dispatch,
@@ -159,7 +163,7 @@ export const fetchOpenPositions = (
 
 export const fetchInvestmentsLevels = (
   currency: string
-): Promise<ProgramsLevelsInfo> => {
+): CancelablePromise<ProgramsLevelsInfo> => {
   return platformApi.v10PlatformLevelsGet({ currency });
 };
 

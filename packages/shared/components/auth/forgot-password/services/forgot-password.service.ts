@@ -10,8 +10,8 @@ import {
   EMAIL_PENDING_ROUTE,
   PASSWORD_RESTORE_ROUTE
 } from "shared/components/auth/forgot-password/forgot-password.routes";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
 import {
@@ -76,9 +76,7 @@ export const sendForgotPasswordEmail = () => (
   });
 };
 
-export const navigateToPasswordRestore = () => (
-  dispatch: Dispatch
-) => {
+export const navigateToPasswordRestore = () => (dispatch: Dispatch) => {
   dispatch(clearDataActionFactory(EMAIL_PENDING).clearData());
   dispatch(push(PASSWORD_RESTORE_ROUTE));
 };
