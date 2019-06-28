@@ -23,3 +23,16 @@
 .overflow--initial {
   overflow: initial;
 }
+
+.traders-count {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  border-radius: 14px;
+  font-size: $font-size-small;
+  padding: 3px 8px;
+}
+
+.traders-avatar {
+  position: relative;
+}

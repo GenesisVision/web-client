@@ -44,8 +44,8 @@ const _TradeRow: React.FC<Props> = ({
   const [anchor, toggleSubrows] = useState<EventTarget | undefined>(undefined);
   const [isOpenPopup, togglePopup] = useState<boolean>(false);
   const program = trade.providers[0].program;
-  const otherPrograms = trade.providers.slice(1);
-  const hasOtherPrograms = otherPrograms.length > 0;
+  const otherPrograms = trade.providers;
+  const hasOtherPrograms = otherPrograms.length > 1;
   return (
     <>
       <TableRow
@@ -58,7 +58,7 @@ const _TradeRow: React.FC<Props> = ({
             : undefined
         }
       >
-        <TableCell className="details-trades__cell">
+        <TableCell className="details-trades__cell traders-avatar">
           <div className="dashboard-programs__cell--avatar-title">
             <Link
               to={{
@@ -84,7 +84,9 @@ const _TradeRow: React.FC<Props> = ({
                 {program.title}
               </GVButton>
             </Link>
-            {hasOtherPrograms ? <Chip>+{otherPrograms.length}</Chip> : null}
+            {hasOtherPrograms ? (
+              <Chip className={"traders-count"}>+{otherPrograms.length}</Chip>
+            ) : null}
           </div>
         </TableCell>
         <TableCell className="details-trades__cell">
