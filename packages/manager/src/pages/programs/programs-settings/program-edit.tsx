@@ -26,29 +26,33 @@ const _ProgramEdit: React.FC<Props> = ({
   const descriptionTrimmedLength = values.description.trim().length;
   return (
     <form id="edit-form" onSubmit={handleSubmit}>
-      <h3>Avatar</h3>
-      <GVFormikField
-        name={FIELDS.logo}
-        component={InputImage}
-        defaultImage={ProgramDefaultImage}
-      />
-      <h3>Strategy</h3>
-      <GVFormikField
-        type="textarea"
-        name={FIELDS.description}
-        label={t("manager.create-program-page.settings.fields.description")}
-        component={GVTextField}
-      />
-      {descriptionTrimmedLength > 0 && (
-        <span className="create-program-settings__description-chars">
-          {descriptionTrimmedLength}
-          <GVProgramPeriod
-            start={0}
-            end={500}
-            value={descriptionTrimmedLength}
-          />
-        </span>
-      )}
+      <div className="program-edit__block-wrapper">
+        <h3>Avatar</h3>
+        <GVFormikField
+          name={FIELDS.logo}
+          component={InputImage}
+          defaultImage={ProgramDefaultImage}
+        />
+      </div>
+      <div className="program-edit__block-wrapper">
+        <h3>Strategy</h3>
+        <GVFormikField
+          type="textarea"
+          name={FIELDS.description}
+          label={t("manager.create-program-page.settings.fields.description")}
+          component={GVTextField}
+        />
+        {descriptionTrimmedLength > 0 && (
+          <span className="create-program-settings__description-chars">
+            {descriptionTrimmedLength}
+            <GVProgramPeriod
+              start={0}
+              end={500}
+              value={descriptionTrimmedLength}
+            />
+          </span>
+        )}
+      </div>
       <GVButton
         type={"submit"}
         className="invest-form__submit-button"

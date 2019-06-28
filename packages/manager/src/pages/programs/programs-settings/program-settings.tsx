@@ -1,3 +1,5 @@
+import "./program-settings.scss";
+
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -28,59 +30,56 @@ const _ProgramSettings: React.FC<Props> = ({
     : undefined;
   return (
     <div className="program-edit">
-      <h1 className="title-small-padding">Program settings</h1>
-      <div className="program-edit__block">
+      <h1>Program settings</h1>
+      <section className="program-edit__block">
         <h3>Period and closing</h3>
-        <div className="program-edit__text">
-          The investment program will be closed after this reporting period.
-          Current investment requests will be cancelled, and new requests won’t
-          be accepted. Profit and funds from the trading account will be
-          distributed between investors and manager according to their shares
-          within the aforementioned program.
+        <div className="program-edit__block-wrapper">
+          <p className="program-edit__text">
+            The investment program will be closed after this reporting period.
+            Current investment requests will be cancelled, and new requests
+            won’t be accepted. Profit and funds from the trading account will be
+            distributed between investors and manager according to their shares
+            within the aforementioned program.
+          </p>
+          <GVButton
+            disabled={!details.personalProgramDetails.canClosePeriod}
+            onClick={closePeriod}
+          >
+            {"Close period"}
+          </GVButton>
         </div>
-        <GVButton
-          className="invest-form__submit-button"
-          disabled={!details.personalProgramDetails.canClosePeriod}
-          onClick={closePeriod}
-        >
-          {"Close period"}
-        </GVButton>
-        <div className="program-edit__text">
-          The current period of the program will end in one hour.
+        <div className="program-edit__block-wrapper">
+          <p className="program-edit__text">
+            The current period of the program will end in one hour.
+          </p>
+          <GVButton
+            disabled={!details.personalProgramDetails.canCloseProgram}
+            onClick={closeProgram}
+          >
+            {"Close program"}
+          </GVButton>
         </div>
-        <GVButton
-          className="invest-form__submit-button"
-          disabled={!details.personalProgramDetails.canCloseProgram}
-          onClick={closeProgram}
-        >
-          {"Close program"}
-        </GVButton>
-      </div>
+      </section>
       {details.personalProgramDetails.canChangePassword &&
         details.personalProgramDetails.canCloseProgram && (
-          <div className="program-edit__block">
+          <section className="program-edit__block">
             <h3>Password</h3>
-            <div className="program-edit__text">
+            <p className="program-edit__text">
               Change the password of your trading account.
-            </div>
-            <GVButton
-              className="invest-form__submit-button"
-              onClick={changePassword}
-            >
-              {"Change password"}
-            </GVButton>
-          </div>
+            </p>
+            <GVButton onClick={changePassword}>{"Change password"}</GVButton>
+          </section>
         )}
       {details.personalProgramDetails.canCloseProgram && (
         <>
-          <div className="program-edit__block">
+          <section className="program-edit__block">
             <ProgramEdit
               logo={{ src: details.logo }}
               description={details.description}
               onSubmit={editProgram}
             />
-          </div>
-          <div className="program-edit__block">
+          </section>
+          <section className="program-edit__block">
             <BrokerEdit
               id={details.id}
               brokers={brokersInfo.brokers}
@@ -95,15 +94,15 @@ const _ProgramSettings: React.FC<Props> = ({
               }
               changeBroker={changeBroker}
             />
-          </div>
-          <div className="program-edit__block">
+          </section>
+          <section className="program-edit__block">
             <SignalingEdit
               isSignalProgram={details.isSignalProgram}
               onSubmit={changeSignaling}
               signalSuccessFee={signalSuccessFee}
               signalVolumeFee={signalVolumeFee}
             />
-          </div>
+          </section>
         </>
       )}
     </div>
