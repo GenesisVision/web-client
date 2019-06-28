@@ -1,6 +1,6 @@
 import "./program-details-description.scss";
 
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -51,12 +51,7 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
 
   render() {
     const { anchor } = this.state;
-    const {
-      levelsParameters,
-      t,
-      programDescription,
-      isOwnProgram
-    } = this.props;
+    const { t, programDescription, isOwnProgram } = this.props;
     const personalDetails = programDescription.personalProgramDetails;
     return (
       <div className="program-details-description__main">
@@ -145,7 +140,6 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
 }
 
 interface IIProgramDetailsDescriptionMainOwnProps {
-  levelsParameters: LevelsParamsInfo;
   programDescription: ProgramDetailsFull;
   ChangePasswordTradingAccount?: React.ComponentType<
     IChangePasswordTradingAccountProps

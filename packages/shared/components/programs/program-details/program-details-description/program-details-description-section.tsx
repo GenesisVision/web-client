@@ -31,7 +31,6 @@ const _ProgramDetailsDescriptionSection: React.FC<
   return (
     <div className="program-details-description">
       <ProgramDetailsDescriptionMain
-        levelsParameters={levelsParameters}
         programDescription={programDescription}
         isOwnProgram={isOwnProgram}
         ChangePasswordTradingAccount={ChangePasswordTradingAccount}
