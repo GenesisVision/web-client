@@ -11,8 +11,10 @@
   @include horizontal-paddings($padding-small);
 
   @include media-breakpoint-landscape-phone() {
-    width: 640px - $padding-small * 2;
+    max-width: 640px - $padding-small * 2;
   }
+
+  background-color: $popover-background;
 
   &__header {
     display: flex;

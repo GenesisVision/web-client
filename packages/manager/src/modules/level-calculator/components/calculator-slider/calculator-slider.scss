@@ -64,6 +64,7 @@
 
   &__title {
     @include font-size($font-size-small);
+    white-space: nowrap;
     color: $calculator-label-color;
     display: flex;
     align-items: center;
@@ -75,6 +76,7 @@
 
   &__value {
     @include font-size(15px);
+    white-space: nowrap;
     color: $main-color;
     font-weight: 600;
   }

@@ -17,7 +17,8 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
   t,
   role,
   wallet,
-  copyTradingAccounts
+  copyTradingAccounts,
+  copyTradingAccountsPending
 }) => (
   <Page title={t("wallet-page.title")}>
     <div className="wallet-balance">
@@ -34,6 +35,7 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
       />
       <WalletTablesTotal
         copyTradingAccounts={copyTradingAccounts}
+        copyTradingAccountsPending={copyTradingAccountsPending}
         wallets={wallet.wallets}
         copytrading={role === ROLE.INVESTOR}
       />
@@ -46,6 +48,7 @@ interface Props extends WithRoleProps, OwnProps, InjectedTranslateProps {}
 interface OwnProps {
   wallet: WalletMultiSummary;
   copyTradingAccounts: CopyTradingAccountInfo[];
+  copyTradingAccountsPending: boolean;
 }
 
 const WalletTotal = compose<React.ComponentType<OwnProps & WithLoaderProps>>(

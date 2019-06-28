@@ -84,6 +84,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           </div>
           <div className="details__history">
             <ProgramDetailsHistorySection
+              isOwnProgram={
+                description.personalProgramDetails
+                  ? description.personalProgramDetails.isOwnProgram
+                  : false
+              }
               isForex={description.brokerDetails.isForex}
               isSignalProgram={description.isSignalProgram}
               fetchOpenPositions={fetchOpenPositions}

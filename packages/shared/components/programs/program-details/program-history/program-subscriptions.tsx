@@ -29,6 +29,7 @@ import {
   PROGRAM_SUBSCRIBERS_FILTERS,
   SUBSCRIBERS_STATUS_TYPE
 } from "../program-details.constants";
+import FeesTooltip from "./program-subscriptions-fees-tooltip";
 
 const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
   const fetch: GetItemsFuncType = filters =>
@@ -88,6 +89,14 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
             <TableCell>
               {subscription.unsubscriptionDate &&
                 moment(subscription.unsubscriptionDate).format()}
+            </TableCell>
+            <TableCell>
+              <FeesTooltip subscription={subscription}>
+                {formatCurrencyValue(
+                  -1 * subscription.totalCommissionAmount,
+                  subscription.totalCommissionCurrency
+                )}
+              </FeesTooltip>
             </TableCell>
             <TableCell>{subscription.status}</TableCell>
           </TableRow>

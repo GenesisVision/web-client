@@ -49,7 +49,6 @@ const _ProgramWithdrawAmountForm: React.FC<
         currency={programCurrency}
         isAllow={isAllow}
         setMax={setMaxAmount}
-        emptyInit
       />
       {programCurrency !== accountCurrency && values[FIELDS.amount] && (
         <div className="">
@@ -93,6 +92,7 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
             availableToWithdraw,
             t("withdraw-program.validation.amount-more-than-available")
           )
+          .nullable(true)
       }),
     handleSubmit: (values, { props }) => {
       if (!values[FIELDS.amount]) return;
