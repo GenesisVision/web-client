@@ -868,11 +868,14 @@
       "from-Fund": "From the fund"
     },
     "signal": {
-      "SubscribeSignal": "Subscribe to signal provider",
-      "ReceiveSignal": "Subscription to signal provider",
+      "SubscribeSignal": "Signal fee payment",
+      "ReceiveSignal": "Signal fee received",
       "DepositSignal": "Deposit to signal account",
       "WithdrawalSignal": "Withdrawal from signal account",
-      "Platform": "Platform transaction"
+      "Platform": "Platform transaction",
+      "amount": "Amount",
+      "to-signal-provider": "To the signal provider",
+      "from-signal-provider": "From the signal provider"
     }
   },
   "wallet-page": {
