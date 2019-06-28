@@ -726,6 +726,7 @@
         "volume": "Volume",
         "subscriptionDate": "Subscription date",
         "unsubscriptionDate": "Unsubscription date",
+        "commission": "Commission",
         "status": "Status"
       }
     },
@@ -1328,6 +1329,7 @@
         "trading": "Trading fee",
         "ManagerSignalMasterVolumeFee": "Volume fee",
         "ManagerSignalMasterSuccessFee": "Manager Success fee",
+        "SuccessFee": "Success fee",
         "GvSignalSuccessFee": "Platform Success Fee",
         "total": "Total"
       }
