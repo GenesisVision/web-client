@@ -50,7 +50,7 @@ const _ProgramsEditPage: React.FC<Props> = ({ service }) => {
     BrokersProgramInfo | undefined
   >(undefined);
 
-  const getDescription = useEffect(() => {
+  useEffect(() => {
     fetchingDescription();
   }, []);
 
