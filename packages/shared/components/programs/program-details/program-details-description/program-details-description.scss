@@ -188,13 +188,19 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   &__perfomance-data {
     @include adaptive-padding(top, $padding-xxsmall);
     @include adaptive-padding(bottom, 50px);
+    padding-left: 0;
     display: flex;
     box-sizing: border-box;
     flex-wrap: wrap;
+    margin: 0;
+    @include media-breakpoint-tablet() {
+      padding-left: $padding-small;
+      margin-left: $padding-controls-left;
+    }
     & .statistics-item {
-      margin-right: $padding-small-mobile;
+      margin-right: $padding-medium-mobile;
       @include media-breakpoint-landscape-phone() {
-        margin-right: $padding-small;
+        margin-right: $padding-medium;
       }
     }
   }
