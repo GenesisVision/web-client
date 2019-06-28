@@ -28,7 +28,7 @@ enum INVESTMENT_POPUP {
   INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
-class InvestmentProgramControls extends React.PureComponent<Props, State> {
+class _InvestmentProgramControls extends React.PureComponent<Props, State> {
   state = {
     popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
       curr[INVESTMENT_POPUP[next]] = false;
@@ -210,7 +210,8 @@ class InvestmentProgramControls extends React.PureComponent<Props, State> {
   }
 }
 
-export default translate()(InvestmentProgramControls);
+const InvestmentProgramControls = translate()(_InvestmentProgramControls);
+export default InvestmentProgramControls;
 
 interface OwnProps {
   isAuthenticated: boolean;
