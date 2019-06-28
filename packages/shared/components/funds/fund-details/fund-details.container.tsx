@@ -45,7 +45,8 @@ const _FundDetailsContainer: React.FC<Props> = ({
     <Page title={description.title}>
       <ProgramDetailContext.Provider
         value={{
-          updateDetails: updateDetails
+          updateDetails: updateDetails,
+          isKycConfirmed: false
         }}
       >
         <div className="details">

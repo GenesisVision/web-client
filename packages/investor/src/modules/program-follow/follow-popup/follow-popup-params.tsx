@@ -86,7 +86,7 @@ const _FollowParams: React.FC<
         <div className="dialog-field">
           <InputAmountField
             name={FIELDS.fixedVolume}
-            label={t("follow-program.params.usd-equivalent")}
+            label={`${t("follow-program.params.usd-equivalent")} *`}
             currency={"USD"}
           />
           <NumberFormat
@@ -123,7 +123,7 @@ const _FollowParams: React.FC<
         </GVButton>
       </div>
       {values[FIELDS.mode] === modes.fixed.value && (
-        <div className="dialog-field">{t(getInfoText(currency))}</div>
+        <div className="dialog__info">* {t(getInfoText(currency))}</div>
       )}
     </form>
   );
