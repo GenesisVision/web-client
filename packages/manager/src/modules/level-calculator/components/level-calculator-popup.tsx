@@ -65,6 +65,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
 
     const investmentScale = calcInvestmentScale(
       programAge,
+      genesisRatio,
       weightedVolumeScale,
       levelsParameters
     );
@@ -119,7 +120,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             value={genesisRatio}
             min={levelsParameters.genesisRatioMin}
             max={levelsParameters.genesisRatioMax}
-            step={0.1}
+            step={0.01}
             onChange={this.handleSliderChange}
           />
           <CalculatorSlider
@@ -143,7 +144,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             value={weightedVolumeScale}
             min={levelsParameters.volumeScaleMin}
             max={levelsParameters.volumeScaleMax}
-            step={0.1}
+            step={0.01}
             onChange={this.handleSliderChange}
           />
           <CalculatorSlider
@@ -153,11 +154,11 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             tooltipContent={t(
               "manager.level-calculator.manager-balance-tooltip"
             )}
-            value={+formatValue(managerBalance, 4)}
+            value={+formatValue(managerBalance, 2)}
             valueSuffix={` ${currency}`}
-            min={levelsParameters.minAvailableToInvest}
+            min={0}
             max={levelsParameters.maxAvailableToInvest}
-            step={10}
+            step={0.01}
             onChange={this.handleSliderChange}
           />
         </div>
