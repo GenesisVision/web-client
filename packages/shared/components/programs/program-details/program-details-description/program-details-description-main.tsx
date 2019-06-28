@@ -24,7 +24,6 @@ import {
 
 import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
-import PerfomanceData from "./perfomance-data";
 
 interface IProgramDetailsDescriptionMainProps
   extends IIProgramDetailsDescriptionMainOwnProps,
@@ -118,10 +117,6 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
           <div className="program-details-description__text">
             {programDescription.description}
           </div>
-          <PerfomanceData
-            levelsParameters={levelsParameters}
-            programDescription={programDescription}
-          />
         </div>
         <div className="program-details-description__settings">
           <DetailsFavorite
