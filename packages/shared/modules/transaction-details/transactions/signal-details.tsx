@@ -44,7 +44,7 @@ const _SignalTransaction: React.FC<TransactionDetailsProps & WithRoleProps> = ({
   const transactionDirectionLabel =
     role === ROLE.INVESTOR
       ? t("transactions-details.signal.to-signal-provider")
-      : t("transactions-details.signal.from-signal-provider");
+      : t("transactions-details.signal.signal-provider");
   return (
     <>
       <div className="dialog__top">

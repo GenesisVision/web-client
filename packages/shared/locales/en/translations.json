@@ -875,7 +875,7 @@
       "Platform": "Platform transaction",
       "amount": "Amount",
       "to-signal-provider": "To the signal provider",
-      "from-signal-provider": "From the signal provider"
+      "signal-provider": "Signal provider"
     }
   },
   "wallet-page": {
