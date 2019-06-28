@@ -82,6 +82,7 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
             onClose={this.handleCloseDropdown}
           >
             <InvestmentLimitsPopover
+              limit={programDescription.totalAvailableInvestment}
               currency={programDescription.currency}
               level={programDescription.level}
               canLevelUp={programDescription.rating.canLevelUp}

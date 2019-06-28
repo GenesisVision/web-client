@@ -698,7 +698,7 @@
     },
     "popover": {
       "genesis-level": "Genesis Level",
-      "invest-limit": "Invest limit",
+      "invest-limit": "Total invest limit",
       "text": "Genesis level shows the experience and reliability of the Manager",
       "about-levels": "About levels"
     },
