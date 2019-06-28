@@ -30,16 +30,12 @@ const _ProgramSettings: React.FC<Props> = ({
     : undefined;
   return (
     <div className="program-edit">
-      <h1>Program settings</h1>
+      <h1>{t("manager.program-settings.title")}</h1>
       <section className="program-edit__block">
-        <h3>Period and closing</h3>
+        <h3>{t("manager.program-settings.period-and-closing.title")}</h3>
         <div className="program-edit__block-wrapper">
           <p className="program-edit__text">
-            The investment program will be closed after this reporting period.
-            Current investment requests will be cancelled, and new requests
-            won’t be accepted. Profit and funds from the trading account will be
-            distributed between investors and manager according to their shares
-            within the aforementioned program.
+            {t("manager.program-settings.period-and-closing.text-program")}
           </p>
           <GVButton
             color="primary"
@@ -51,7 +47,7 @@ const _ProgramSettings: React.FC<Props> = ({
         </div>
         <div className="program-edit__block-wrapper">
           <p className="program-edit__text">
-            The current period of the program will end in one hour.
+            {t("manager.program-settings.period-and-closing.text-period")}
           </p>
           <GVButton
             color="primary"
@@ -65,9 +61,9 @@ const _ProgramSettings: React.FC<Props> = ({
       {details.personalProgramDetails.canChangePassword &&
         details.personalProgramDetails.canCloseProgram && (
           <section className="program-edit__block">
-            <h3>Password</h3>
+            <h3>{t("manager.program-settings.password.title")}</h3>
             <p className="program-edit__text">
-              Change the password of your trading account.
+              {t("manager.program-settings.password.text")}
             </p>
             <GVButton color="primary" onClick={changePassword}>
               {t("program-details-page.description.change-password")}

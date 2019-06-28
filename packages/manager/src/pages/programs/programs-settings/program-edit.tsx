@@ -27,7 +27,7 @@ const _ProgramEdit: React.FC<Props> = ({
   return (
     <form id="edit-form" onSubmit={handleSubmit}>
       <div className="program-edit__block-wrapper">
-        <h3>Avatar</h3>
+        <h3>{t("manager.program-settings.avatar.title")}</h3>
         <GVFormikField
           name={FIELDS.logo}
           component={InputImage}
@@ -35,7 +35,7 @@ const _ProgramEdit: React.FC<Props> = ({
         />
       </div>
       <div className="program-edit__block-wrapper">
-        <h3>Strategy</h3>
+        <h3>{t("manager.program-settings.strategy.title")}</h3>
         <GVFormikField
           type="textarea"
           name={FIELDS.description}
@@ -59,7 +59,7 @@ const _ProgramEdit: React.FC<Props> = ({
         className="invest-form__submit-button"
         disabled={!dirty || !isValid || isSubmitting}
       >
-        {"Save"}
+        {t("manager.program-settings.buttons.save")}
       </GVButton>
     </form>
   );
