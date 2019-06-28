@@ -5,9 +5,9 @@ import { compose } from "redux";
 import FeeCommission from "shared/components/fee-commission/fee-commission";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { formatValueWithMin } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
-const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
+const _FeesTooltip: React.FC<Props> = ({ trade, t }) => {
   return (
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
@@ -54,15 +54,17 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
         </div>
       )}
     >
-      <div>{formatValueWithMin(trade.totalCommission)}</div>
+      <div>{formatCurrencyValue(trade.totalCommission, trade.currency)}</div>
     </Tooltip>
   );
 };
 
-export const OpenTradesFeesTooltip = compose<React.FC<OwnProps>>(
+const TradesHistoryFeesTooltip = compose<React.FC<OwnProps>>(
   translate(),
   React.memo
-)(_FeesPopover);
+)(_FeesTooltip);
+
+export default TradesHistoryFeesTooltip;
 
 interface Props extends InjectedTranslateProps, OwnProps {}
 
