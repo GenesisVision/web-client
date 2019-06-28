@@ -16,6 +16,7 @@ class _ProgramWithdrawConfirmForm extends React.PureComponent<
       t,
       programCurrency,
       amount,
+      withdrawAll,
       periodEnds,
       isSubmitting,
       errorMessage,
@@ -28,7 +29,12 @@ class _ProgramWithdrawConfirmForm extends React.PureComponent<
           <li className="dialog-list__item">
             {t("withdraw-program.withdrawing")}
             <span className="dialog-list__value">
-              {formatCurrencyValue(amount, programCurrency)} {programCurrency}
+              {amount && !withdrawAll
+                ? `${formatCurrencyValue(
+                    amount,
+                    programCurrency
+                  )} ${programCurrency}`
+                : t("withdraw-program.all")}
             </span>
           </li>
           <li className="dialog-list__item">
@@ -80,9 +86,10 @@ interface OwnProps {
   errorMessage?: string;
   onSubmit(setSubmitting: SetSubmittingType): void;
   onBackClick(): void;
-  amount: number;
+  amount?: number;
   periodEnds: Date;
   programCurrency: string;
+  withdrawAll?: boolean;
 }
 
 interface Props extends InjectedTranslateProps, OwnProps {}
