@@ -15,6 +15,7 @@ import LevelIcon from "../programs/program-details/program-details-description/a
 import { fetchInvestmentsLevels } from "../programs/program-details/services/program-details.service";
 import ProgramsFacetTable from "../programs/programs-facet/components/programs-facet-table";
 import { getCurrentFacet } from "../programs/programs-facet/services/programs-facet.service";
+import { COLUMNS } from "./program-rating.constants";
 
 const _ProgramsRating: React.FC<InjectedTranslateProps> = ({ t }) => {
   const [levels, setLevels] = useState<LevelInfo[]>([]);
@@ -39,6 +40,7 @@ const _ProgramsRating: React.FC<InjectedTranslateProps> = ({ t }) => {
     (filters: ComposeFiltersAllType): Promise<IDataModel> =>
       fetchPrograms({
         ...filters,
+        sorting: "ByLevelProgressDesc",
         levelsSet: level ? [level] : undefined
       }).then(data => ({
         total: data.total,
@@ -65,7 +67,7 @@ const _ProgramsRating: React.FC<InjectedTranslateProps> = ({ t }) => {
         <FacetContainer
           asset={FACET_ASSET.PROGRAMS}
           TableContainer={props => (
-            <ProgramsFacetTable {...props} level={level} />
+            <ProgramsFacetTable {...props} level={level} columns={COLUMNS} />
           )}
           getCurrentFacet={getCurrentFacet}
           getItems={getPrograms}
