@@ -18,7 +18,6 @@ import {
   getProgramDescription
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
-import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
 import ClosePeriodContainer from "../program-details/components/close-period/close-period-container";
@@ -150,8 +149,6 @@ const _ProgramsEditPage: React.FC<Props> = ({ service }) => {
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => ({});
-
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
@@ -167,8 +164,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 interface OwnProps {}
 
-interface StateProps {}
-
 interface ServiceThunks extends ActionCreatorsMapObject {
   getProgramDescription: typeof getProgramDescription;
   editAsset: typeof editAsset;
@@ -180,12 +175,13 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, StateProps, DispatchProps {}
+interface Props extends OwnProps, DispatchProps {}
 
 const ProgramSettingsPage = compose<React.ComponentType<OwnProps>>(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_ProgramsEditPage);
 export default ProgramSettingsPage;
