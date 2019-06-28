@@ -1463,6 +1463,11 @@
     }
   },
   "manager": {
+    "program-settings": {
+      "notifications": {
+        "broker-success": "Broker has been edited"
+      }
+    },
     "program-make-signal": {
       "success-alert-message": "Your program is a signal provider now"
     },
