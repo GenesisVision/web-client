@@ -1,10 +1,6 @@
 import "./program-details-description.scss";
 
-import {
-  LevelsParamsInfo,
-  ProgramDetailsFull,
-  ProgramsLevelsInfo
-} from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { ComponentType } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -50,6 +46,7 @@ const _ProgramDetailsDescriptionSection: React.FC<
         canWithdraw={personalDetails && personalDetails.canWithdraw}
         isAuthenticated={isAuthenticated}
         redirectToLogin={redirectToLogin}
+        levelsParameters={levelsParameters}
       />
       {personalDetails && isAuthenticated && (
         <div className="program-details-description__additionally">

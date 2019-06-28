@@ -29,6 +29,7 @@ import ProgramDetailsHistorySection from "./program-history/program-details-hist
 const _ProgramDetailsContainer: React.FC<Props> = ({
   levelsParameters,
   updateDetails,
+  isKycConfirmed,
   currency,
   isAuthenticated,
   redirectToLogin,
@@ -49,7 +50,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     description.personalProgramDetails.isInvested;
   return (
     <Page title={description.title}>
-      <ProgramDetailContext.Provider value={{ updateDetails }}>
+      <ProgramDetailContext.Provider value={{ updateDetails, isKycConfirmed }}>
         <div className="details">
           <div className="details__section">
             <ProgramDetailsDescriptionSection
@@ -83,6 +84,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           </div>
           <div className="details__history">
             <ProgramDetailsHistorySection
+              isOwnProgram={
+                description.personalProgramDetails
+                  ? description.personalProgramDetails.isOwnProgram
+                  : false
+              }
               isForex={description.brokerDetails.isForex}
               isSignalProgram={description.isSignalProgram}
               fetchOpenPositions={fetchOpenPositions}
@@ -113,6 +119,7 @@ interface OwnProps {
   statistic?: ProgramDetailsStatistic;
   levelsParameters: LevelsParamsInfo;
   isAuthenticated: boolean;
+  isKycConfirmed: boolean;
   currency: CurrencyEnum;
 }
 

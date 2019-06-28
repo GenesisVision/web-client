@@ -10,9 +10,9 @@ import DetailsNotification from "shared/components/details/details-description-s
 import GVButton from "shared/components/gv-button";
 import PieContainerSmall from "shared/components/pie-container/pie-container-small";
 import Popover, {
+  anchorElType,
   HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS,
-  anchorElType
+  VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
@@ -172,9 +172,13 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
               />
             </StatisticItem>
             <StatisticItem
-              label={t("program-details-page.description.trading-volume")}
+              label={t("program-details-page.description.volume-scale")}
             >
-              {programDescription.tradingVolume}
+              <PieContainerSmall
+                start={levelsParameters.volumeScaleMin}
+                end={levelsParameters.volumeScaleMax}
+                value={programDescription.volumeScale}
+              />
             </StatisticItem>
           </div>
         </div>

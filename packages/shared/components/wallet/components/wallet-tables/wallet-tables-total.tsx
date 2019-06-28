@@ -43,7 +43,8 @@ class _WalletTablesTotal extends React.PureComponent<Props, State> {
       wallets,
       copytrading,
       location,
-      copyTradingAccounts
+      copyTradingAccounts,
+      copyTradingAccountsPending
     } = this.props;
     return (
       <Surface className="wallet-container">
@@ -131,7 +132,10 @@ class _WalletTablesTotal extends React.PureComponent<Props, State> {
         </div>
         {tab === TABS.WALLETS_TAB && <WalletList wallets={wallets} />}
         {tab === TABS.COPYTRADING_TAB && (
-          <WalletCopytrading copyTradingAccounts={copyTradingAccounts} />
+          <WalletCopytrading
+            copyTradingAccounts={copyTradingAccounts}
+            copyTradingAccountsPending={copyTradingAccountsPending}
+          />
         )}
         {tab === TABS.TRANSACTIONS_TAB && (
           <WalletTransactions
@@ -172,6 +176,7 @@ interface OwnProps {
   wallets: WalletData[];
   copytrading: boolean;
   copyTradingAccounts: CopyTradingAccountInfo[];
+  copyTradingAccountsPending: boolean;
 }
 
 interface State {

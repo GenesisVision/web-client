@@ -13,6 +13,7 @@ interface GVButtonProps {
   disabled?: boolean;
   onClick?: () => void;
   children: string | JSX.Element;
+  noPadding?: boolean;
 }
 
 const GVButton: React.SFC<GVButtonProps> = ({
@@ -24,7 +25,8 @@ const GVButton: React.SFC<GVButtonProps> = ({
   type,
   disabled,
   onClick,
-  children
+  children,
+  noPadding
 }) => {
   const classname = classnames("gv-btn", className, {
     "gv-btn--primary": color === "primary",
@@ -32,7 +34,8 @@ const GVButton: React.SFC<GVButtonProps> = ({
     "gv-btn--primary-dark": color === "primary-dark",
     "gv-btn--text": variant === "text",
     "gv-btn--outlined": variant === "outlined",
-    "gv-btn--contained": variant === "contained"
+    "gv-btn--contained": variant === "contained",
+    "gv-btn--no-padding": noPadding
   });
   return (
     <button

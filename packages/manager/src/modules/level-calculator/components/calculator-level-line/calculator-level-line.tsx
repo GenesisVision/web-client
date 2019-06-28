@@ -36,7 +36,13 @@ const _CalculatorLevelLine: React.FC<Props & InjectedTranslateProps> = ({
         </span>
         <span className="calculator-level-line__value">{level}</span>
       </div>
-      <GVProgramPeriod start={start} end={end} value={value} variant="line" />
+      <GVProgramPeriod
+        className="calculator-level-line__substrate"
+        start={start}
+        end={end}
+        value={value}
+        variant="line"
+      />
       <div className="calculator-level-line__marks">
         {marks.map(mark => {
           return (

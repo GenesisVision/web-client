@@ -22,6 +22,7 @@ import {
 } from "shared/components/programs/program-details/services/program-details.types";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { kycConfirmedSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
@@ -75,7 +76,8 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
       descriptionSection,
       historySection,
       currency,
-      isAuthenticated
+      isAuthenticated,
+      isKycConfirmed
     } = this.props;
     const {
       levelsParameters,
@@ -101,6 +103,7 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
         currency={currency}
         isAuthenticated={isAuthenticated}
         levelsParameters={levelsParameters!}
+        isKycConfirmed={isKycConfirmed}
       />
     );
   }
@@ -108,7 +111,8 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
 
 const mapStateToProps = (state: RootState): StateProps => ({
   currency: currencySelector(state),
-  isAuthenticated: isAuthenticatedSelector(state)
+  isAuthenticated: isAuthenticatedSelector(state),
+  isKycConfirmed: kycConfirmedSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -125,6 +129,7 @@ interface OwnProps {
 
 interface StateProps {
   isAuthenticated: boolean;
+  isKycConfirmed: boolean;
   currency: CurrencyEnum;
 }
 

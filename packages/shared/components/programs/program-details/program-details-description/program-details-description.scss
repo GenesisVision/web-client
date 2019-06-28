@@ -117,6 +117,11 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     }
   }
 
+  &__level-calculator {
+    align-self: flex-end;
+    @include adaptive-margin(right, $padding-xsmall/2);
+  }
+
   &__col {
     @include vertical-paddings($padding-small);
     @include horizontal-paddings($padding-small);
@@ -186,7 +191,10 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     box-sizing: border-box;
     flex-wrap: wrap;
     & .statistics-item {
-      margin-right: $padding-xsmall;
+      margin-right: $padding-small-mobile;
+      @include media-breakpoint-landscape-phone() {
+        margin-right: $padding-small;
+      }
     }
   }
 
