@@ -32,7 +32,7 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   }
 
   @include media-breakpoint-tablet() {
-    max-width: 720px;
+    max-width: 700px;
     width: auto;
     margin-right: 30px;
   }

@@ -356,7 +356,7 @@
     "subscription-type": "Subscription Type",
     "modes": {
       "ByBalance": "By balance",
-      "Percentage": "Percentage",
+      "Percent": "Percentage",
       "Fixed": "Fixed"
     },
     "edit": "Edit"

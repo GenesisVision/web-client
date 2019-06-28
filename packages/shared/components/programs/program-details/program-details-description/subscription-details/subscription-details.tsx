@@ -86,38 +86,40 @@ class _SubscriptionDetails extends React.PureComponent<Props, State> {
                   label={t("subscription-details.subscription-type")}
                   className="subscription-details__short-statistic-item"
                 >
-                  <div className="subscription-details__type">
-                    <span className="subscription-details__type-item">
-                      {t(`subscription-details.modes.${mode}`)}
-                      {mode === modes.percentage && ` Volume ${percent}%`}
-                      {mode === modes.fixed && (
-                        <>
-                          <NumberFormat
-                            value={formatCurrencyValue(fixedVolume, "USD")}
-                            prefix=" "
-                            suffix="USD"
-                            displayType="text"
-                          />
-                          <NumberFormat
-                            value={formatCurrencyValue(
-                              convertFromCurrency(fixedVolume, 1),
-                              currency
-                            )}
-                            prefix=" (≈ "
-                            suffix={` ${currency})`}
-                            displayType="text"
-                          />
-                        </>
-                      )}
-                    </span>
-                    <span className="subscription-details__type-item">
-                      <span className="subscription-details__value-accent">
-                        {`${t(
-                          `subscription-details.tolerance-percentage`
-                        )} ${openTolerancePercent}%`}
-                      </span>
-                    </span>
-                  </div>
+                  {t(`subscription-details.modes.${mode}`)}
+                  {mode === modes.percentage && ` Volume ${percent}%`}
+                  {mode === modes.fixed && (
+                    <>
+                      <NumberFormat
+                        value={formatCurrencyValue(fixedVolume, "USD")}
+                        prefix=" "
+                        suffix="USD"
+                        displayType="text"
+                      />
+                      <NumberFormat
+                        value={formatCurrencyValue(
+                          convertFromCurrency(fixedVolume, 1),
+                          currency
+                        )}
+                        prefix=" (≈ "
+                        suffix={` ${currency})`}
+                        displayType="text"
+                      />
+                    </>
+                  )}
+                </StatisticItem>
+                <StatisticItem
+                  className="subscription-details__short-statistic-item"
+                  accent
+                  label={t(`subscription-details.tolerance-percentage`)}
+                >
+                  <span className="subscription-details__value-accent">
+                    <NumberFormat
+                      value={openTolerancePercent}
+                      suffix="%"
+                      displayType="text"
+                    />
+                  </span>
                 </StatisticItem>
               </div>
             </Surface>
