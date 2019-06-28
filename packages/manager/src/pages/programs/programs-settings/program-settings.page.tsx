@@ -5,12 +5,12 @@ import { editAsset } from "modules/asset-edit/services/asset-edit.services";
 import ChangePasswordTradingAccountPopup from "modules/change-password-trading-account/change-password-trading-account-popup";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import Page from "shared/components/page/page";
 import {
@@ -25,7 +25,10 @@ import ClosePeriodContainer from "../program-details/components/close-period/clo
 import CloseProgramContainer from "../program-details/components/close-program/close-program-container";
 import { ProgramEditFormValues } from "./program-edit";
 import ProgramSettings from "./program-settings";
-import { changeBrokerMethod } from "./services/program-settings.service";
+import {
+  changeBrokerMethod,
+  redirectToProgram
+} from "./services/program-settings.service";
 import { IProgramSignalFormValues } from "./signaling-edit";
 
 const _ProgramsEditPage: React.FC<Props> = ({ service }) => {
@@ -108,6 +111,9 @@ const _ProgramsEditPage: React.FC<Props> = ({ service }) => {
     [details]
   );
   const applyChanges = useCallback(() => fetchingDescription(), []);
+  const applyClose = useCallback(() => {
+    applyChanges().then(() => service.redirectToProgram());
+  }, []);
 
   if (!details || !brokersInfo) return null;
   return (
@@ -131,7 +137,7 @@ const _ProgramsEditPage: React.FC<Props> = ({ service }) => {
       <CloseProgramContainer
         open={closeProgramOpen}
         onClose={() => setCloseProgramOpen(false)}
-        onApply={applyChanges}
+        onApply={applyClose}
         id={details.id}
       />
       <ChangePasswordTradingAccountPopup
@@ -148,7 +154,13 @@ const mapStateToProps = (state: RootState): StateProps => ({});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { getProgramDescription, editAsset, programEditSignal, changeBrokerMethod },
+    {
+      getProgramDescription,
+      editAsset,
+      programEditSignal,
+      changeBrokerMethod,
+      redirectToProgram
+    },
     dispatch
   )
 });
@@ -162,6 +174,7 @@ interface ServiceThunks extends ActionCreatorsMapObject {
   editAsset: typeof editAsset;
   programEditSignal: typeof programEditSignal;
   changeBrokerMethod: typeof changeBrokerMethod;
+  redirectToProgram: typeof redirectToProgram;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
