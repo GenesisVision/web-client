@@ -10,7 +10,7 @@ const _FundControls: React.FC<IFundControlsProps & InjectedTranslateProps> = ({
   redirectToLogin
 }) => (
   <div className="program-details-description__controls">
-    <div className="program-details-description__col program-details-description__col--small-size">
+    <div className="program-details-description__col">
       <InvestmentFundControls
         fundDescription={fundDescription}
         isAuthenticated={isAuthenticated}

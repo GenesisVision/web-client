@@ -9,10 +9,12 @@ import {
   PROGRAMS_FAVORITES_TAB_ROUTE,
   PROGRAMS_RATING_ROUTE,
   PROGRAMS_ROUTE,
-  PROGRAM_DETAILS_ROUTE_REGEX
+  PROGRAM_DETAILS_ROUTE_REGEX,
+  PROGRAM_EDIT_ROUTE
 } from "shared/routes/programs.routes";
 
 import ProgramDetailsPage from "./program-details/program-details.page";
+import ProgramSettingsPage from "./programs-settings/program-settings.page";
 import ProgramsPage from "./programs/programs.page";
 
 const ProgramsRoutes: React.FC = () => (
@@ -24,6 +26,7 @@ const ProgramsRoutes: React.FC = () => (
     />
     <Route path={PROGRAMS_RATING_ROUTE} component={ProgramsRatingContainer} />
     <Route path={PROGRAMS_FACET_ROUTE_REGEX} component={ProgramsFacetPage} />
+    <Route path={PROGRAM_EDIT_ROUTE} component={ProgramSettingsPage} />
     <Route path={PROGRAM_DETAILS_ROUTE_REGEX} component={ProgramDetailsPage} />
     <Route component={NotFoundPage} />
   </Switch>

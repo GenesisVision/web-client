@@ -25,8 +25,7 @@ const _ProgramWithdrawAmountForm: React.FC<
   programCurrency,
   rate,
   values,
-  isValid,
-  dirty
+  isValid
 }) => {
   const isAllow = useCallback((values: NumberFormatValues) => {
     const { formattedValue, value } = values;
@@ -52,12 +51,7 @@ const _ProgramWithdrawAmountForm: React.FC<
           type="checkbox"
           color="primary"
           name={FIELDS.withdrawAll}
-          label={
-            <span>
-              Withdraw all
-              {/*{t("manager.create-program-page.settings.fields.investment-limit")}*/}
-            </span>
-          }
+          label={<span>{t("withdraw-program.withdraw-all")}</span>}
           component={GVCheckbox}
         />
       )}
@@ -87,7 +81,9 @@ const _ProgramWithdrawAmountForm: React.FC<
           type="submit"
           id="programWithdrawAmountFormSubmit"
           className="invest-form__submit-button"
-          disabled={!values[FIELDS.withdrawAll] && (!isValid || !dirty)}
+          disabled={
+            (!values[FIELDS.amount] || !isValid) && !values[FIELDS.withdrawAll]
+          }
         >
           {t("withdraw-program.next")}
         </GVButton>
@@ -101,6 +97,7 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<Props, IProgramWithdrawAmountFormValues>({
     displayName: "withdraw-form",
+    isInitialValid: true,
     mapPropsToValues: ({ amount, withdrawAll }) => ({
       [FIELDS.amount]: amount,
       [FIELDS.withdrawAll]: withdrawAll
