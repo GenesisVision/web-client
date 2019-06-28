@@ -109,10 +109,10 @@ const _AboutLevelsComponent: React.FC<Props> = ({
               <p>{t("about-levels-page.notes.note-2")}</p>
             </li>
           </ul>
-          <p className="about-levels__paragraph">
-            {t("about-levels-page.section.link")}
-            <a href="https://genesis.vision">link</a>
-          </p>
+          {/* TODO add link <p className="about-levels__paragraph">*/}
+          {/*  {t("about-levels-page.section.link")}*/}
+          {/*  <a href="https://genesis.vision">link</a>*/}
+          {/*</p>*/}
         </div>
         <div className="about-levels__right-block">
           <h4 className="about-levels__subtitle">
