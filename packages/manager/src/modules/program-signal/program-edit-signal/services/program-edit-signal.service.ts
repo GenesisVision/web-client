@@ -1,8 +1,7 @@
-import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import { ManagerThunk } from "shared/utils/types";
+import { ManagerThunk, ResponseError } from "shared/utils/types";
 
 export const programEditSignal = (
   id: string,
@@ -25,5 +24,8 @@ export const programEditSignal = (
         )
       );
       return;
+    })
+    .catch((error: ResponseError) => {
+      dispatch(alertMessageActions.error(error.errorMessage));
     });
 };
