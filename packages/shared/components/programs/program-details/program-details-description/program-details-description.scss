@@ -37,7 +37,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       margin: 0;
     }
     & .program-avatar__level {
-      border-color: $background-color;
+      background-color: $background-color;
     }
 
     @include media-breakpoint-phone() {
@@ -115,6 +115,11 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     }
   }
 
+  &__level-calculator {
+    align-self: flex-end;
+    @include adaptive-margin(right, $padding-xsmall/2);
+  }
+
   &__col {
     @include vertical-paddings($padding-small);
     @include horizontal-paddings($padding-small);
@@ -154,6 +159,23 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     min-width: 50%;
     box-sizing: border-box;
     flex-grow: 1;
+  }
+
+  &__perfomance-data {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    & .statistics-item {
+      margin-right: $padding-small-mobile;
+      @include media-breakpoint-landscape-phone() {
+        margin-right: $padding-small;
+      }
+    }
+  }
+
+  &__broker {
+    width: 100px;
   }
 
   &__button-container {
@@ -232,6 +254,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__invest-btn {
+    align-self: flex-end;
     font-size: $font-size-paragraph-mobile;
     letter-spacing: 0.3px;
     font-weight: 600;

@@ -29,8 +29,7 @@ interface IProgramsTableProps {
   showRating?: boolean;
   showSwitchView?: boolean;
   currencies?: string[];
-  data: ProgramsList;
-  isPending?: boolean;
+  data?: ProgramDetails[];
   sorting?: string;
   updateSorting?: UpdateSortingFuncType;
   filtering?: FilteringType;
@@ -51,7 +50,6 @@ const ProgramsTable: React.FC<IProgramsTableProps> = ({
   showSwitchView,
   currencies,
   data,
-  isPending,
   sorting,
   updateSorting,
   filtering,
@@ -75,8 +73,7 @@ const ProgramsTable: React.FC<IProgramsTableProps> = ({
       paging={paging}
       updatePaging={updatePaging}
       columns={columns || PROGRAMS_COLUMNS}
-      items={data.programs}
-      // isPending={isPending || data.isPending}
+      items={data}
       renderFilters={renderFilters}
       renderHeader={column => (
         <ProgramTableHeaderCell

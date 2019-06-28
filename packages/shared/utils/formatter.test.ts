@@ -6,6 +6,7 @@ import {
   formatPercent,
   formatValue,
   formatValueDifferentDecimalScale,
+  formatValueWithMin,
   reverseString,
   roundPercents,
   sliceFraction,
@@ -13,6 +14,46 @@ import {
 } from "./formatter";
 
 describe("test formatter functions", () => {
+  describe("test formatValueWithMin", () => {
+    it("should be format Value", () => {
+      expect(formatValueWithMin(1.000000001)).toBe("1.00000001");
+
+      expect(formatValueWithMin(1.123456789)).toBe("1.12345678");
+      expect(formatValueWithMin(11.123456789)).toBe("11.12345678");
+      expect(formatValueWithMin(101.999999999)).toBe("101.99999999");
+      expect(formatValueWithMin(1001.999999999)).toBe("1001.99999999");
+
+      expect(formatValueWithMin(1.0000000001)).toBe("1.00000001");
+      expect(formatValueWithMin(11.0000000001)).toBe("11.00000001");
+      expect(formatValueWithMin(101.00001)).toBe("101.00001");
+      expect(formatValueWithMin(1001.00001)).toBe("1001.00001");
+
+      expect(formatValueWithMin(1001.0)).toBe("1001");
+      expect(formatValueWithMin(1001.0)).toBe("1001");
+    });
+    it("should be show min value", () => {
+      expect(formatValueWithMin(0.000000001)).toBe("<0.00000001");
+      expect(formatValueWithMin(0.00000000001, 9)).toBe("<0.000000001");
+      expect(formatValueWithMin(0.000000001, 7)).toBe("<0.0000001");
+      expect(formatValueWithMin(0.000000001, 6)).toBe("<0.000001");
+      expect(formatValueWithMin(0.000000001, 5)).toBe("<0.00001");
+      expect(formatValueWithMin(0.000000001, 4)).toBe("<0.0001");
+      expect(formatValueWithMin(0.000000001, 3)).toBe("<0.001");
+      expect(formatValueWithMin(0.000000001, 2)).toBe("<0.01");
+      expect(formatValueWithMin(0.000000001, 1)).toBe("<0.1");
+      expect(formatValueWithMin(-0.000000001)).toBe("<0.00000001");
+      expect(formatValueWithMin(-0.00000000001, 9)).toBe("<0.000000001");
+      expect(formatValueWithMin(-0.000000001, 7)).toBe("<0.0000001");
+      expect(formatValueWithMin(-0.000000001, 6)).toBe("<0.000001");
+      expect(formatValueWithMin(-0.000000001, 5)).toBe("<0.00001");
+      expect(formatValueWithMin(-0.000000001, 4)).toBe("<0.0001");
+      expect(formatValueWithMin(-0.000000001, 3)).toBe("<0.001");
+      expect(formatValueWithMin(-0.000000001, 2)).toBe("<0.01");
+      expect(formatValueWithMin(-0.000000001, 1)).toBe("<0.1");
+      const value = -0.001;
+      expect(formatValueWithMin(value)).toBe(String(value));
+    });
+  });
   describe("test reverseString", () => {
     it("should be reverse strings", () => {
       expect(reverseString("qwerty")).toBe("ytrewq");

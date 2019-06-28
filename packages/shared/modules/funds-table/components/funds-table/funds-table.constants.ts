@@ -10,26 +10,27 @@ import {
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import { fundAssetFilter } from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter.helpers";
 
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 
-export const FUNDS_TABLE_FILTERS = [
-  {
-    ...composeDefaultDateRangeFilter({
-      composeApiRequestValue: composeRequestValueFunc(
-        SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME,
-        SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME
-      ),
-      defaultValue: {
-        ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
-      }
-    }),
-    validate: validateDateRange
-  }
-];
+const fundsDateRangeFilter = {
+  ...composeDefaultDateRangeFilter({
+    composeApiRequestValue: composeRequestValueFunc(
+      SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME,
+      SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME
+    ),
+    defaultValue: {
+      ...DEFAULT_DATE_RANGE_FILTER_VALUE,
+      type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
+    }
+  }),
+  validate: validateDateRange
+};
+
+export const FUNDS_TABLE_FILTERS = [fundAssetFilter, fundsDateRangeFilter];
 
 export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
   {

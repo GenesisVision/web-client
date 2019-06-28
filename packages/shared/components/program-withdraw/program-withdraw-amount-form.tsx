@@ -39,7 +39,7 @@ const _ProgramWithdrawAmountForm: React.FC<
   const setMaxAmount = useCallback(
     () =>
       setFieldValue(
-        "amount",
+        FIELDS.amount,
         formatCurrencyValue(availableToWithdraw, programCurrency)
       ),
     [availableToWithdraw, programCurrency]
@@ -62,18 +62,18 @@ const _ProgramWithdrawAmountForm: React.FC<
         />
       )}
       <InputAmountField
-        name="amount"
+        name={FIELDS.amount}
         label={t("withdraw-program.amount-to-withdraw")}
         currency={programCurrency}
         isAllow={isAllow}
         disabled={values.withdrawAll}
         setMax={role === ROLE.MANAGER ? setMaxAmount : undefined}
       />
-      {programCurrency !== accountCurrency && values.amount && (
+      {programCurrency !== accountCurrency && values[FIELDS.amount] && (
         <div className="">
           <NumberFormat
             value={formatCurrencyValue(
-              convertFromCurrency(values.amount, rate),
+              convertFromCurrency(values[FIELDS.amount]!, rate),
               accountCurrency
             )}
             prefix="≈ "
@@ -102,13 +102,13 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
   withFormik<Props, IProgramWithdrawAmountFormValues>({
     displayName: "withdraw-form",
     mapPropsToValues: ({ amount, withdrawAll }) => ({
-      amount,
+      [FIELDS.amount]: amount,
       withdrawAll
     }),
     validationSchema: ({ t, availableToWithdraw }: Props) =>
       object().shape({
         withdrawAll: boolean(),
-        amount: mixed().when("withdrawAll", {
+        [FIELDS.amount]: mixed().when("withdrawAll", {
           is: false,
           then: number()
             .moreThan(0, t("withdraw-program.validation.amount-is-zero"))
@@ -119,14 +119,17 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
         })
       }),
     handleSubmit: (values, { props }) => {
-      if (!values.amount && !values.withdrawAll) return;
+      if (!values[FIELDS.amount] && !values.withdrawAll) return;
       props.onSubmit(values);
     }
   }),
   React.memo
 )(_ProgramWithdrawAmountForm);
-
 export default ProgramWithdrawAmountForm;
+
+enum FIELDS {
+  amount = "amount"
+}
 
 interface OwnProps {
   amount?: number;
@@ -141,6 +144,6 @@ interface OwnProps {
 interface Props extends InjectedTranslateProps, WithRoleProps, OwnProps {}
 
 export interface IProgramWithdrawAmountFormValues {
-  amount?: number;
+  [FIELDS.amount]?: number;
   withdrawAll?: boolean;
 }

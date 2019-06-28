@@ -35,10 +35,12 @@ $avatar-size-mobile: $avatar-size/$divider-text;
     flex-direction: row;
     justify-content: space-between;
   }
+
   &__left {
     display: flex;
     justify-content: center;
   }
+
   &__avatar {
     &.profile-avatar {
       width: $avatar-size;
@@ -57,6 +59,10 @@ $avatar-size-mobile: $avatar-size/$divider-text;
         border-radius: $avatar-size-mobile;
       }
     }
+  }
+
+  .social-links-block {
+    @include adaptive-padding(top, 0, 2);
   }
 
   &__right {
@@ -85,17 +91,22 @@ $avatar-size-mobile: $avatar-size/$divider-text;
 
   &__date {
     padding: 0;
+    padding-bottom: $padding-small-mobile;
     font-size: $font-size-paragraph-mobile;
     letter-spacing: 0.19px;
     font-weight: 500;
     opacity: 0.5;
     @include media-breakpoint-landscape-phone() {
+      padding-bottom: $padding-small;
       font-size: $font-size-paragraph;
     }
   }
 
   &__info {
-    padding-top: $padding-xlarge-mobile;
+    padding-top: $padding-medium-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding-top: $padding-medium;
+    }
   }
 
   &__invest-button-container {
@@ -224,7 +235,7 @@ $avatar-size-mobile: $avatar-size/$divider-text;
       height: $btn-height;
     }
     &__info {
-      padding-top: $padding-xlarge;
+      padding-top: $padding-medium;
     }
     &__short-statistic {
       &-item {

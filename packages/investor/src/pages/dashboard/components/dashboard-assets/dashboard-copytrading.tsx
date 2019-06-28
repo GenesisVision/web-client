@@ -6,6 +6,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
+import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import {
   ACTION_STATUS_FILTER_NAME,
@@ -14,7 +15,6 @@ import {
 import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -27,6 +27,7 @@ import {
   Column,
   UpdateFilterFunc
 } from "shared/components/table/components/table.types";
+import { STATUS } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -99,14 +100,14 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
         <TableCell>
           <Profitability
             value={formatCurrencyValue(
-              signal.statistic.profitValue,
+              signal.personalDetails.profit,
               signal.currency
             )}
             prefix={PROFITABILITY_PREFIX.SIGN}
           >
             <NumberFormat
               value={formatCurrencyValue(
-                signal.statistic.profitValue,
+                signal.personalDetails.profit,
                 signal.currency
               )}
               thousandSeparator=" "
@@ -116,12 +117,14 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
             />
           </Profitability>
         </TableCell>
-        <TableCell className="programs-table__cell dashboard-programs__cell--chart">
+        {/*<TableCell className="programs-table__cell dashboard-programs__cell--chart">
           {signal.chart.length && (
             <ProgramSimpleChart data={signal.chart} programId={signal.id} />
           )}
+        </TableCell>*/}
+        <TableCell>
+          <AssetStatusLabel status={signal.personalDetails.status as STATUS} />
         </TableCell>
-        <TableCell>{signal.status}</TableCell>
       </TableRow>
     )}
   />

@@ -5,7 +5,7 @@ import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import platformActions from "shared/actions/platform-actions";
 import { windowResizeAction } from "shared/actions/ui-actions";
-import { HOME_ROUTE } from "shared/routes/app.routes";
+import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
@@ -15,7 +15,7 @@ import {
   LOGIN_TWO_FACTOR,
   storeTwoFactorAction
 } from "./login.actions";
-import { LOGIN_ROUTE, LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
+import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
 
 export const client = "Web";
 export const redirectToLogin = () => {

@@ -98,6 +98,9 @@ $border-radius: 5px;
 
     &:hover {
       background-color: lighten($secondary-color, 2%);
+      & .program-avatar__level {
+        background-color: lighten($secondary-color, 2%);
+      }
     }
   }
   &__collapse-icon {
@@ -113,7 +116,7 @@ $border-radius: 5px;
       margin-left: $padding-xxsmall;
     }
     & .program-avatar__level {
-      border-color: $secondary-color;
+      background-color: $secondary-color;
     }
   }
 
@@ -156,6 +159,13 @@ $border-radius: 5px;
   }
 
   &__description {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 0 $padding/1.5;
     font-size: $font-size-common/1.5;
     line-height: 1.85;
@@ -178,7 +188,7 @@ $border-radius: 5px;
     align-items: stretch;
     padding: $padding/1.5;
     width: 100%;
-    background-color: #212c34;
+    background-color: $row-color;
   }
 
   &__details {

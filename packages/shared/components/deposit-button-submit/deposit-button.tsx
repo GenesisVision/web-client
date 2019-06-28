@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import GVButton from "shared/components/gv-button";
+import { availableSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 interface IDepositButtonStateProps {
@@ -18,28 +19,21 @@ interface IDepositButtonProps {
 
 const DepositButton: React.FC<
   IDepositButtonProps & IDepositButtonStateProps
-> = ({ onSubmit, children, title, disabled }) => {
-  return (
-    <GVButton
-      title={title}
-      color="primary"
-      type="submit"
-      onClick={onSubmit}
-      disabled={disabled}
-    >
-      {children}
-    </GVButton>
-  );
-};
+> = ({ onSubmit, children, title, disabled }) => (
+  <GVButton
+    title={title}
+    color="primary"
+    type="submit"
+    onClick={onSubmit}
+    disabled={disabled}
+  >
+    {children}
+  </GVButton>
+);
 
-const mapStateToProps = (state: RootState): IDepositButtonStateProps => {
-  const available = state.profileHeader.data
-    ? state.profileHeader.data.available
-    : 0;
-  return {
-    available
-  };
-};
+const mapStateToProps = (state: RootState): IDepositButtonStateProps => ({
+  available: availableSelector(state)
+});
 
 const DepositButtonContainer = connect(mapStateToProps)(
   React.memo(DepositButton)

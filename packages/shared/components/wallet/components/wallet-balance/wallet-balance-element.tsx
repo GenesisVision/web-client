@@ -7,6 +7,7 @@ import GVColors from "shared/components/gv-styles/gv-colors";
 import PieContainer from "shared/components/pie-container/pie-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
+import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -29,6 +30,7 @@ const _WalletBalanceElement: React.FC<Props> = ({
     {pieContainer && (
       <PieContainer
         value={getPercentageValue(value, totalValue)}
+        label={`${getPercentageValue(value, totalValue)} %`}
         color={color}
       />
     )}
@@ -49,7 +51,7 @@ const _WalletBalanceElement: React.FC<Props> = ({
     </StatisticItem>
   </div>
 );
-const WalletBalanceElement = React.memo(_WalletBalanceElement);
+const WalletBalanceElement = withLoader(React.memo(_WalletBalanceElement));
 
 export default WalletBalanceElement;
 

@@ -1,8 +1,8 @@
-import { CancelablePromise, ProfileHeaderViewModel } from "gv-api-web";
+import { ProfileHeaderViewModel } from "gv-api-web";
 import { PROFILE_HEADER } from "shared/components/header/header.constants";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
-import { ActionType, ApiAction } from "shared/utils/types";
+import { ApiAction } from "shared/utils/types";
 
 export const fetchProfileHeaderInfoAction = (): ApiAction<
   ProfileHeaderViewModel

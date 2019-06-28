@@ -1,31 +1,16 @@
 import "./asset-status.scss";
 
-import classNames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import GVScroll from "shared/components/scroll/gvscroll";
 import { STATUS } from "shared/constants/constants";
 
+import AssetStatusLabel from "./asset-status-label";
 import AssetStatusRequests from "./asset-status-requests";
 
-const getStatusClassName = (status: STATUS, className?: string) => {
-  return classNames("asset-status", className, {
-    "asset-status__active": status === STATUS.ACTIVE,
-    "asset-status__investing": status === STATUS.INVESTING,
-    "asset-status__withdrawing": status === STATUS.WITHDRAWING,
-    "asset-status__ended": status === STATUS.ENDED,
-    "asset-status__pending": status === STATUS.PENDING
-  });
-};
-
-class AssetStatus extends React.PureComponent<
-  Props & InjectedTranslateProps,
-  State
-> {
+class AssetStatus extends React.PureComponent<Props, State> {
   state = {
     anchor: undefined
   };
@@ -42,15 +27,14 @@ class AssetStatus extends React.PureComponent<
   handleCloseDropdown = () => this.setState({ anchor: undefined });
 
   render() {
-    const { t, className, status, id, asset, onCancel } = this.props;
+    const { className, status, id, asset, onCancel } = this.props;
     return (
       <>
-        <span
-          className={getStatusClassName(status, className)}
+        <AssetStatusLabel
+          status={status}
+          className={className}
           onClick={this.handleOpenDropdown}
-        >
-          {t(`program-statuses.${status}`)}
-        </span>
+        />
         <Popover
           horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
@@ -58,16 +42,14 @@ class AssetStatus extends React.PureComponent<
           noPadding
           onClose={this.handleCloseDropdown}
         >
-          <GVScroll autoHeight>
-            <div className="dashboard-request-popover">
-              <AssetStatusRequests
-                id={id}
-                asset={asset}
-                handleCloseDropdown={this.handleCloseDropdown}
-                onCancel={onCancel}
-              />
-            </div>
-          </GVScroll>
+          <div className="dashboard-request-popover">
+            <AssetStatusRequests
+              id={id}
+              asset={asset}
+              handleCloseDropdown={this.handleCloseDropdown}
+              onCancel={onCancel}
+            />
+          </div>
         </Popover>
       </>
     );
@@ -86,4 +68,4 @@ interface State {
   anchor?: EventTarget;
 }
 
-export default translate()(AssetStatus);
+export default AssetStatus;

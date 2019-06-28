@@ -11,34 +11,36 @@ import { object, string } from "yup";
 
 const _RecoveryCodeForm: React.FC<
   InjectedFormikProps<Props, IRecoveryCodeFormValues>
-> = ({ t, handleSubmit, isSubmitting, error }) => {
-  return (
-    <form
-      id="recoveryForm"
-      className="recovery-form"
-      onSubmit={handleSubmit}
-      noValidate
+> = ({ t, handleSubmit, isSubmitting, error }) => (
+  <form
+    id="recoveryForm"
+    className="recovery-form"
+    onSubmit={handleSubmit}
+    noValidate
+  >
+    <h3>{t("auth.login.recovery.title")}</h3>
+    <p className="recovery-form__text">{t("auth.login.recovery.text")}</p>
+    <GVFormikField
+      name={FIELDS.code}
+      placeholder="Recovery code"
+      autoFocus
+      component={GVTextField}
+    />
+    <FormError error={error} />
+    <GVButton
+      id="recoverySubmit"
+      disabled={isSubmitting}
+      type="submit"
+      className="recovery-form__submit"
     >
-      <h3>{t("auth.login.recovery.title")}</h3>
-      <p className="recovery-form__text">{t("auth.login.recovery.text")}</p>
-      <GVFormikField
-        name="code"
-        placeholder="Recovery code"
-        autoFocus
-        component={GVTextField}
-      />
-      <FormError error={error} />
-      <GVButton
-        id="recoverySubmit"
-        disabled={isSubmitting}
-        type="submit"
-        className="recovery-form__submit"
-      >
-        {t("auth.login.recovery.continue")}
-      </GVButton>
-    </form>
-  );
-};
+      {t("auth.login.recovery.continue")}
+    </GVButton>
+  </form>
+);
+
+enum FIELDS {
+  code = "code"
+}
 
 interface Props extends OwnProps, InjectedTranslateProps {}
 
@@ -51,7 +53,7 @@ interface OwnProps {
 }
 
 export interface IRecoveryCodeFormValues {
-  code: string;
+  [FIELDS.code]: string;
 }
 
 const RecoveryCodeForm = compose<React.FC<OwnProps>>(
@@ -59,11 +61,11 @@ const RecoveryCodeForm = compose<React.FC<OwnProps>>(
   withFormik<Props, IRecoveryCodeFormValues>({
     displayName: "recoveryForm",
     mapPropsToValues: () => ({
-      code: ""
+      [FIELDS.code]: ""
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
-        code: string()
+        [FIELDS.code]: string()
           .trim()
           .required(t("auth.login.recovery.validation.recovery-is-required"))
       }),

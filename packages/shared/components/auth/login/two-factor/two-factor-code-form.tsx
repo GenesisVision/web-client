@@ -5,13 +5,14 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
-import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "shared/components/auth/login/login.routes";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
+
+import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../login.routes";
 
 class _TwoFactorCodeForm extends React.PureComponent<
   InjectedFormikProps<Props, ITwoFactorCodeFormValues>,
@@ -29,16 +30,14 @@ class _TwoFactorCodeForm extends React.PureComponent<
   };
 
   componentDidUpdate(
-    prevProps: Readonly<Props & FormikProps<ITwoFactorCodeFormValues>>,
-    prevState: Readonly<State>,
-    snapshot?: any
+    prevProps: Readonly<Props & FormikProps<ITwoFactorCodeFormValues>>
   ): void {
     if (
       this.state.isChecking ||
-      this.props.values.code === prevProps.values.code
+      this.props.values[FIELDS.code] === prevProps.values[FIELDS.code]
     )
       return;
-    if (this.props.values.code.length === 6) {
+    if (this.props.values[FIELDS.code].length === 6) {
       this.checkTwoFactor();
     }
   }
@@ -58,12 +57,13 @@ class _TwoFactorCodeForm extends React.PureComponent<
         </div>
         <GVFormikField
           disabled={isSubmitting}
-          type="text"
-          name="code"
+          type="tel"
+          name={FIELDS.code}
           label={t("auth.login.two-factor.input-label")}
           autoComplete="off"
           autoFocus
           component={GVTextField}
+          format="######"
         />
 
         <div className="login-two-factor__recovery-info">
@@ -86,8 +86,12 @@ class _TwoFactorCodeForm extends React.PureComponent<
   }
 }
 
+enum FIELDS {
+  code = "code"
+}
+
 export interface ITwoFactorCodeFormValues {
-  code: string;
+  [FIELDS.code]: string;
 }
 
 interface Props extends InjectedTranslateProps, OwnProps {}
@@ -110,11 +114,11 @@ const TwoFactorCodeForm = compose<React.FC<OwnProps>>(
   withFormik<Props, ITwoFactorCodeFormValues>({
     displayName: "twoFactorForm",
     mapPropsToValues: () => ({
-      code: ""
+      [FIELDS.code]: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        code: string()
+        [FIELDS.code]: string()
           .trim()
           .matches(
             /^\d{6}$/,

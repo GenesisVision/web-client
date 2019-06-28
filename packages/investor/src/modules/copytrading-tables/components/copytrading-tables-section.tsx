@@ -11,7 +11,7 @@ import {
 import OpenTradesTable from "./open-trades-table";
 import TradesHistoryTable from "./trades-history-table";
 
-class ICopytradingTablesSection extends React.PureComponent<
+class _CopytradingTablesSection extends React.PureComponent<
   ICopytradingTablesSectionProps & InjectedTranslateProps,
   ICopytradingTablesSectionState
 > {
@@ -51,14 +51,12 @@ class ICopytradingTablesSection extends React.PureComponent<
             />
           </GVTabs>
         </div>
-        <div className="">
-          {tab === TABS.OPEN_TRADES && (
-            <OpenTradesTable title={title} currency={currency} />
-          )}
-          {tab === TABS.HISTORY && (
-            <TradesHistoryTable title={title} currency={currency} />
-          )}
-        </div>
+        {tab === TABS.OPEN_TRADES && (
+          <OpenTradesTable title={title} currency={currency} />
+        )}
+        {tab === TABS.HISTORY && (
+          <TradesHistoryTable title={title} currency={currency} />
+        )}
       </Surface>
     );
   }
@@ -78,4 +76,5 @@ interface ICopytradingTablesSectionState extends ICopytradingTradesCounts {
   tab: TABS;
 }
 
-export default translate()(ICopytradingTablesSection);
+const CopytradingTablesSection = translate()(_CopytradingTablesSection);
+export default CopytradingTablesSection;

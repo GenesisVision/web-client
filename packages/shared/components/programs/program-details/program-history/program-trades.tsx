@@ -25,7 +25,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import Tooltip from "shared/components/tooltip/tooltip";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 const DECIMAL_SCALE = 8;
 
@@ -113,14 +113,20 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--commission">
               <Tooltip
-                disable={!trade.showOriginalCommission}
-                render={() => (
-                  <div>
-                    {`${formatValue(trade.originalCommission, DECIMAL_SCALE)} ${
-                      trade.originalCommissionCurrency
-                    }`}
-                  </div>
-                )}
+                render={() =>
+                  trade.showOriginalCommission ? (
+                    <div>
+                      {`${formatValue(
+                        trade.originalCommission,
+                        DECIMAL_SCALE
+                      )} ${trade.originalCommissionCurrency}`}
+                    </div>
+                  ) : (
+                    <div>
+                      {trade.commission} {currency}
+                    </div>
+                  )
+                }
               >
                 <NumberFormat
                   value={formatValue(trade.commission, DECIMAL_SCALE)}

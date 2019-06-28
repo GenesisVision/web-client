@@ -5,13 +5,13 @@ import {
   AttachToSignalProviderFixedCurrencyEnum,
   AttachToSignalProviderInitialDepositCurrencyEnum,
   AttachToSignalProviderModeEnum,
-  CopyTradingAccountInfo,
   SignalSubscription,
   WalletData
 } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { ResponseError, SetSubmittingType } from "shared/utils/types";
+import withLoader from "shared/decorators/with-loader";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import FollowCreateAccount, {
   CreateAccountFormValues
@@ -65,7 +65,7 @@ class FollowForm extends React.PureComponent<
     }: FollowParamsFormValues,
     setSubmitting: SetSubmittingType
   ) => {
-    const { t, handleSubmit, id, alertError, alertSuccess } = this.props;
+    const { id } = this.props;
     let requestParams = {
       ...this.state.requestParams,
       mode,
@@ -76,19 +76,16 @@ class FollowForm extends React.PureComponent<
     this.setState({
       requestParams
     });
-    this.props
-      .submitMethod(id, this.state.requestParams)
-      .then(() => {
-        alertSuccess(t("follow-program.success-alert-message"));
-        handleSubmit();
-      })
-      .catch((errors: ResponseError) => {
-        alertError(errors.errorMessage);
-        setSubmitting(false);
-      });
+    this.props.submitMethod(id, this.state.requestParams, setSubmitting);
   };
   render() {
-    const { wallets, currency, signalSubscription, minDeposit } = this.props;
+    const {
+      wallets,
+      currency,
+      signalSubscription,
+      minDeposit,
+      rate
+    } = this.props;
     const { errors, step } = this.state;
     const adaptStep =
       step === TABS.CREATE_ACCOUNT ? "create-account" : "params";
@@ -109,6 +106,8 @@ class FollowForm extends React.PureComponent<
           )}
         {step === TABS.PARAMS && (
           <FollowParams
+            rate={rate}
+            currency={currency}
             isShowBack={!signalSubscription.hasSignalAccount}
             paramsSubscription={paramsSubscription}
             onSubmit={this.submit}
@@ -128,19 +127,17 @@ enum TABS {
   PARAMS = "PARAMS"
 }
 export interface Props {
+  rate: number;
   minDeposit: number;
   signalSubscription: SignalSubscription;
-  alertSuccess: (msg: string) => void;
-  alertError: (msg: string) => void;
-  handleSubmit: () => void;
   submitMethod: (
     programId: string,
-    requestParams: AttachToSignalProvider
-  ) => Promise<any>;
+    requestParams: AttachToSignalProvider,
+    setSubmitting: SetSubmittingType
+  ) => void;
   id: string;
-  accounts: CopyTradingAccountInfo[];
   wallets: WalletData[];
-  currency: string;
+  currency: CurrencyEnum;
 }
 
 interface State {
@@ -149,4 +146,4 @@ interface State {
   errors: { code: string; errorMessage: string };
 }
 
-export default translate()(FollowForm);
+export default withLoader(translate()(FollowForm));

@@ -5,6 +5,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
+import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
 
@@ -26,11 +27,9 @@ const _WalletAddFundsContainer: React.FC<Props> = ({
   />
 );
 
-const mapStateToProps = (state: RootState): StateProps => {
-  if (!state.accountSettings) return { wallets: [] };
-  const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
-  return { wallets };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  wallets: walletsSelector(state)
+});
 
 const mapDispatchToProps: DispatchProps = {
   notifySuccess: alertMessageActions.success,

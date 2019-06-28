@@ -120,6 +120,16 @@
     }
   }
 
+  &--calculator {
+    width: 21px;
+    height: 26px;
+    &:hover {
+      svg [fill] {
+        fill: $primary-color;
+      }
+    }
+  }
+
   &--copy {
     width: 14px;
   }

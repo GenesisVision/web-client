@@ -17,21 +17,25 @@ export interface IFetchInRequests<T = any> {
   (auth: string, skip: number, take: number): ApiAction<T>;
 }
 
-export const cancelInvestorProgramRequestAction: ICancelRequest = (id, auth) => ({
+export const cancelInvestorProgramRequestAction: ICancelRequest = (
+  id,
+  auth
+) => ({
   type: CANCEL_INVESTOR_PROGRAM_REQUESTS,
   payload: investorApi.v10InvestorProgramsRequestsByIdCancelPost(id, auth)
 });
 
-export const cancelManagerProgramRequestAction: ICancelRequest = (id, auth) => ({
+export const cancelManagerProgramRequestAction: ICancelRequest = (
+  id,
+  auth
+) => ({
   type: CANCEL_MANAGER_PROGRAM_REQUESTS,
   payload: managerApi.v10ManagerProgramsRequestsByIdCancelPost(id, auth)
 });
 
-export const fetchInRequestsInvestorAction: IFetchInRequests<ProgramRequests> = (
-  auth,
-  skip,
-  take
-) => ({
+export const fetchInRequestsInvestorAction: IFetchInRequests<
+  ProgramRequests
+> = (auth, skip, take) => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: investorApi.v10InvestorRequestsBySkipByTakeGet(skip, take, auth)
 });

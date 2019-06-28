@@ -1,7 +1,7 @@
 import { push } from "connected-react-router";
-import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 import walletApi from "shared/services/api-client/wallet-api";
 import { ActionType } from "shared/utils/types";
 

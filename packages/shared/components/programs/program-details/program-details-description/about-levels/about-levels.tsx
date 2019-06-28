@@ -9,6 +9,8 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import LevelIcon from "./level-icon";
+
 const _Limits: React.FC<ILimitsProps> = ({
   t,
   investmentsLimits,
@@ -17,14 +19,12 @@ const _Limits: React.FC<ILimitsProps> = ({
   <>
     {investmentsLimits.map(levelInfo => (
       <div key={levelInfo.level} className="about-levels__limit">
-        <div
-          className={`about-levels__icon about-levels__icon--${
-            levelInfo.level
-          }`}
+        <LevelIcon levelInfo={levelInfo} />
+        <StatisticItem
+          className="about-levels__info"
+          accent
+          label={t("about-levels-page.titles.limit")}
         >
-          {levelInfo.level}
-        </div>
-        <StatisticItem accent label={t("about-levels-page.titles.limit")}>
           <NumberFormat
             value={formatCurrencyValue(levelInfo.investmentLimit, currency)}
             thousandSeparator={" "}
@@ -50,7 +50,7 @@ const _AboutLevelsComponent: React.FC<Props> = ({
   investmentsLimits,
   currency
 }) => (
-  <Dialog wider open={open} onClose={onClose} className="about-levels">
+  <Dialog open={open} onClose={onClose} className="about-levels">
     <div className="about-levels__container">
       <div className="about-levels__header">
         <h1>{t("about-levels-page.titles.main")}</h1>

@@ -1,27 +1,36 @@
-import * as React from "react";
-import GVScroll from "shared/components/scroll/gvscroll";
+import "./infinity-scroll.scss";
 
-import Scrollbars from "../scroll/Scrollbars";
+import React, { createRef } from "react";
 
 class InfinityScroll extends React.PureComponent<Props> {
-  scroll = React.createRef() as React.RefObject<Scrollbars>;
+  scroll: React.RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
+  container: React.RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
 
   handleScroll = () => {
-    const scroll = this.scroll.current!;
-    const scrollTop = scroll.getScrollTop();
-    const clientHeight = scroll.getClientHeight();
-    const scrollHeight = scroll.getScrollHeight();
-    const offsetBottom = scrollHeight - scrollTop - clientHeight;
-    if (offsetBottom < 100 && this.props.hasMore) {
-      this.props.loadMore();
+    if (this.scroll.current && this.container.current) {
+      const scroll = this.scroll.current;
+      const scrollTop = scroll.scrollTop;
+      const clientHeight = window.innerHeight;
+      const scrollHeight = this.container.current.getBoundingClientRect()
+        .height;
+      const offsetBottom = scrollHeight - scrollTop - clientHeight;
+      if (offsetBottom < 100 && this.props.hasMore) {
+        this.props.loadMore();
+      }
     }
   };
 
   render() {
     return (
-      <GVScroll onScroll={this.handleScroll} ref={this.scroll}>
-        {this.props.children}
-      </GVScroll>
+      <div
+        className="infinity-scroll"
+        ref={this.scroll}
+        onScroll={this.handleScroll}
+      >
+        <div className="infinity-scroll__container" ref={this.container}>
+          {this.props.children}
+        </div>
+      </div>
     );
   }
 }

@@ -4,6 +4,7 @@ import {
   composeRequestValueFunc
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
@@ -131,6 +132,9 @@ export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
     name: "unsubscriptionDate"
   },
   {
+    name: "commission"
+  },
+  {
     name: "status"
   }
 ];
@@ -148,4 +152,17 @@ export const PROGRAM_TRADES_DEFAULT_FILTERS = [
 
 export const PROGRAM_TRADES_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
+};
+
+export const PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS = [
+  {
+    name: "type",
+    type: FILTER_TYPE.GENERAL
+  }
+];
+
+export const SUBSCRIBERS_STATUS_TYPE = "type";
+
+export const PROGRAM_SUBSCRIBERS_FILTERS = {
+  [SUBSCRIBERS_STATUS_TYPE]: "all"
 };
