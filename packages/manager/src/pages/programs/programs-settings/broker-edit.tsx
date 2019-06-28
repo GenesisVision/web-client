@@ -25,8 +25,9 @@ const _BrokerEdit: React.FC<Props> = ({
   );
   const selectBroker = useCallback(
     (brokerName: string) => () => {
-      const selectedBroker = brokers.find(x => x.name === brokerName);
-      setSelectedBrokerState(selectedBroker!);
+      const broker = brokers.find(x => x.name === brokerName);
+      setSelectedBrokerState(broker!);
+      setAccount(broker!.accountTypes[0]);
     },
     [brokers]
   );
@@ -52,7 +53,7 @@ const _BrokerEdit: React.FC<Props> = ({
             logo={broker.logo}
             key={broker.name}
             brokerName={broker.name}
-            isSelected={broker === selectedBrokerState}
+            isSelected={broker.name === selectedBrokerState.name}
             onSelect={selectBroker}
             cardState={BROKER_CARD_EXTRA_STATE.NONE}
           />
