@@ -51,7 +51,7 @@ const _ProgramWithdrawAmountForm: React.FC<
         <GVFormikField
           type="checkbox"
           color="primary"
-          name={"withdrawAll"}
+          name={FIELDS.withdrawAll}
           label={
             <span>
               Withdraw all
@@ -66,7 +66,7 @@ const _ProgramWithdrawAmountForm: React.FC<
         label={t("withdraw-program.amount-to-withdraw")}
         currency={programCurrency}
         isAllow={isAllow}
-        disabled={values.withdrawAll}
+        disabled={values[FIELDS.withdrawAll]}
         setMax={role === ROLE.MANAGER ? setMaxAmount : undefined}
       />
       {programCurrency !== accountCurrency && values[FIELDS.amount] && (
@@ -87,7 +87,7 @@ const _ProgramWithdrawAmountForm: React.FC<
           type="submit"
           id="programWithdrawAmountFormSubmit"
           className="invest-form__submit-button"
-          disabled={!values.withdrawAll && (!isValid || !dirty)}
+          disabled={!values[FIELDS.withdrawAll] && (!isValid || !dirty)}
         >
           {t("withdraw-program.next")}
         </GVButton>
@@ -103,12 +103,12 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
     displayName: "withdraw-form",
     mapPropsToValues: ({ amount, withdrawAll }) => ({
       [FIELDS.amount]: amount,
-      withdrawAll
+      [FIELDS.withdrawAll]: withdrawAll
     }),
     validationSchema: ({ t, availableToWithdraw }: Props) =>
       object().shape({
-        withdrawAll: boolean(),
-        [FIELDS.amount]: mixed().when("withdrawAll", {
+        [FIELDS.withdrawAll]: boolean(),
+        [FIELDS.amount]: mixed().when(FIELDS.withdrawAll, {
           is: false,
           then: number()
             .moreThan(0, t("withdraw-program.validation.amount-is-zero"))
@@ -119,7 +119,7 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
         })
       }),
     handleSubmit: (values, { props }) => {
-      if (!values[FIELDS.amount] && !values.withdrawAll) return;
+      if (!values[FIELDS.amount] && !values[FIELDS.withdrawAll]) return;
       props.onSubmit(values);
     }
   }),
@@ -128,7 +128,8 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
 export default ProgramWithdrawAmountForm;
 
 enum FIELDS {
-  amount = "amount"
+  amount = "amount",
+  withdrawAll = "withdrawAll"
 }
 
 interface OwnProps {
@@ -145,5 +146,5 @@ interface Props extends InjectedTranslateProps, WithRoleProps, OwnProps {}
 
 export interface IProgramWithdrawAmountFormValues {
   [FIELDS.amount]?: number;
-  withdrawAll?: boolean;
+  [FIELDS.withdrawAll]?: boolean;
 }
