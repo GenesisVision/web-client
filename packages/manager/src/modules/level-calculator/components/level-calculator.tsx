@@ -2,8 +2,8 @@ import "./level-calculator.scss";
 
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import Dialog from "shared/components/dialog/dialog";
 import { CalculatorIcon } from "shared/components/icon/calculator-icon";
-import Popover from "shared/components/popover/popover";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 
 import LevelCalculatorPopupContainer from "./level-calculator-popup.container";
@@ -13,12 +13,12 @@ class _LevelCalculator extends React.PureComponent<
   State
 > {
   state = {
-    anchor: undefined
+    open: false
   };
   handleOpenDetails = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
-    this.setState({ anchor: event.currentTarget });
+    this.setState({ open: true });
 
-  handleCloseDetails = () => this.setState({ anchor: undefined });
+  handleCloseDetails = () => this.setState({ open: false });
 
   render() {
     const {
@@ -31,10 +31,14 @@ class _LevelCalculator extends React.PureComponent<
     return (
       <>
         <div className="level-calculator" onClick={this.handleOpenDetails}>
-          <CalculatorIcon primary={this.state.anchor !== undefined} />
+          <CalculatorIcon primary={this.state.open} />
         </div>
 
-        <Popover anchorEl={this.state.anchor} onClose={this.handleCloseDetails}>
+        <Dialog
+          className="level-calculator-popup"
+          open={this.state.open}
+          onClose={this.handleCloseDetails}
+        >
           <LevelCalculatorPopupContainer
             id={id}
             title={title}
@@ -43,14 +47,14 @@ class _LevelCalculator extends React.PureComponent<
             levelsParameters={levelsParameters}
             isKycConfirmed={isKycConfirmed}
           />
-        </Popover>
+        </Dialog>
       </>
     );
   }
 }
 
 interface State {
-  anchor?: EventTarget;
+  open: boolean;
 }
 
 const LevelCalculator = translate()(_LevelCalculator);
