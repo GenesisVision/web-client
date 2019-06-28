@@ -1,0 +1,92 @@
+import { FormikProps, withFormik } from "formik";
+import { IProgramSignalFormValues } from "modules/program-signal/program-signal-popup/components/program-signal-form";
+import { SignalValidationSchema } from "modules/program-signal/program-signal-popup/components/program-signal.validators";
+import SignalsFeeFormPartial from "pages/create-program/components/create-program-settings/signals-fee-form.partial";
+import React, { useCallback, useState } from "react";
+import { InjectedTranslateProps } from "react-i18next";
+import translate from "react-i18next/src/translate";
+import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
+import GVSwitch from "shared/components/gv-selection/gv-switch";
+import { SetSubmittingType } from "shared/utils/types";
+
+const _SignalingEdit: React.FC<Props> = ({
+  isValid,
+  handleSubmit,
+  dirty,
+  isSubmitting,
+  t,
+  isSignalProgram
+}) => {
+  const [isSignal, setIsSignal] = useState<boolean>(isSignalProgram);
+  const changeIsSignal = useCallback(() => setIsSignal(!isSignal), [isSignal]);
+  return (
+    <form id="signaling-edit-form" onSubmit={handleSubmit}>
+      <h3>Signaling Program</h3>
+      {!isSignalProgram && (
+        <GVSwitch
+          touched={false}
+          className="notification-setting__switch"
+          name={name}
+          value={isSignal}
+          color="primary"
+          onChange={changeIsSignal}
+        />
+      )}
+      <SignalsFeeFormPartial
+        volumeFeeFieldName={FORM_FIELDS.volumeFee}
+        successFeeFieldName={FORM_FIELDS.successFee}
+        hasSubscriptionFeeAutofocus={true}
+      />
+      <GVButton
+        type="submit"
+        id="programMakeSignalSubmit"
+        disabled={!dirty || isSubmitting || !isSignal || !isValid}
+      >
+        {"Save"}
+      </GVButton>
+    </form>
+  );
+};
+
+interface Props
+  extends OwnProps,
+    InjectedTranslateProps,
+    FormikProps<IProgramSignalFormValues> {}
+
+enum FORM_FIELDS {
+  successFee = "successFee",
+  volumeFee = "volumeFee"
+}
+
+export interface IProgramSignalFormValues {
+  [FORM_FIELDS.successFee]?: number;
+  [FORM_FIELDS.volumeFee]?: number;
+}
+
+interface OwnProps {
+  isSignalProgram: boolean;
+  signalSuccessFee?: number;
+  signalVolumeFee?: number;
+  onSubmit(
+    values: IProgramSignalFormValues,
+    setSubmitting: SetSubmittingType
+  ): void;
+}
+
+const SignalingEdit = compose<React.ComponentType<OwnProps>>(
+  translate(),
+  withFormik<OwnProps, IProgramSignalFormValues>({
+    displayName: "make-signal-form",
+    mapPropsToValues: props => ({
+      [FORM_FIELDS.successFee]: props.signalSuccessFee,
+      [FORM_FIELDS.volumeFee]: props.signalVolumeFee
+    }),
+    validationSchema: SignalValidationSchema,
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
+    }
+  }),
+  React.memo
+)(_SignalingEdit);
+export default SignalingEdit;
