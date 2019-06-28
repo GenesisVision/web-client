@@ -67,7 +67,7 @@ class SignalProviderControls extends React.PureComponent<
     return (
       <>
         <SignalProgramInfo programDescription={programDescription} />
-        <div className="program-details-description__button-container">
+        <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
           {programDescription.personalProgramDetails &&
           programDescription.personalProgramDetails.signalSubscription
             .hasActiveSubscription ? (
