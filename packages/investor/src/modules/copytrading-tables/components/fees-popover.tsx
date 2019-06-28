@@ -4,10 +4,11 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import Tooltip from "shared/components/tooltip/tooltip";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 const Commission: React.FC<{
   title: string;
-  value: number;
+  value: number | string;
   currency: string;
 }> = ({ title, value, currency }) => (
   <div className={"fees-tooltip__commission"}>
@@ -28,7 +29,10 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
           <div className="profile-menu__header">
             <Commission
               title={t(`investor.copytrading-tables.fees.trading`)}
-              value={trade.originalCommission}
+              value={formatCurrencyValue(
+                trade.originalCommission,
+                trade.originalCommissionCurrency
+              )}
               currency={trade.originalCommissionCurrency}
             />
             {trade.totalCommissionByType.map((commission, index) => {
@@ -38,7 +42,10 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
                   title={t(
                     `investor.copytrading-tables.fees.${commission.type}`
                   )}
-                  value={commission.amount * -1}
+                  value={formatCurrencyValue(
+                    commission.amount,
+                    commission.currency
+                  )}
                   currency={commission.currency}
                 />
               );
@@ -48,7 +55,10 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
             <div className={"fees-tooltip__footer "}>
               <Commission
                 title={t(`investor.copytrading-tables.fees.total`)}
-                value={trade.totalCommission}
+                value={formatCurrencyValue(
+                  trade.totalCommission,
+                  trade.currency
+                )}
                 currency={trade.currency}
               />
             </div>
@@ -56,7 +66,7 @@ const _FeesPopover: React.FC<Props> = ({ trade, t }) => {
         </div>
       )}
     >
-      <div>{trade.totalCommission}</div>
+      <div>{formatCurrencyValue(trade.totalCommission, trade.currency)}</div>
     </Tooltip>
   );
 };
