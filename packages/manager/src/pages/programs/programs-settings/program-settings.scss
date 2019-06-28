@@ -44,6 +44,12 @@
       margin-bottom: 0;
     }
 
+    &--broker-list {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+
     .gv-text-field__wrapper {
       width: 100%;
     }

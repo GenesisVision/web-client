@@ -46,7 +46,7 @@ const _ProgramSettings: React.FC<Props> = ({
             disabled={!details.personalProgramDetails.canClosePeriod}
             onClick={closePeriod}
           >
-            {"Close period"}
+            {t("program-details-page.close-period.title")}
           </GVButton>
         </div>
         <div className="program-edit__block-wrapper">
@@ -58,7 +58,7 @@ const _ProgramSettings: React.FC<Props> = ({
             disabled={!details.personalProgramDetails.canCloseProgram}
             onClick={closeProgram}
           >
-            {"Close program"}
+            {t("program-details-page.description.close-program")}
           </GVButton>
         </div>
       </section>
@@ -70,7 +70,7 @@ const _ProgramSettings: React.FC<Props> = ({
               Change the password of your trading account.
             </p>
             <GVButton color="primary-dark" onClick={changePassword}>
-              {"Change password"}
+              {t("program-details-page.description.change-password")}
             </GVButton>
           </section>
         )}

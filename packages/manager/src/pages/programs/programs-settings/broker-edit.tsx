@@ -46,16 +46,18 @@ const _BrokerEdit: React.FC<Props> = ({
   return (
     <>
       <h3>Broker</h3>
-      {brokers.map(broker => (
-        <BrokerCard
-          logo={broker.logo}
-          key={broker.name}
-          brokerName={broker.name}
-          isSelected={broker === selectedBrokerState}
-          onSelect={selectBroker}
-          cardState={BROKER_CARD_EXTRA_STATE.NONE}
-        />
-      ))}
+      <div className="program-edit__block-wrapper program-edit__block-wrapper--broker-list">
+        {brokers.map(broker => (
+          <BrokerCard
+            logo={broker.logo}
+            key={broker.name}
+            brokerName={broker.name}
+            isSelected={broker === selectedBrokerState}
+            onSelect={selectBroker}
+            cardState={BROKER_CARD_EXTRA_STATE.NONE}
+          />
+        ))}
+      </div>
       <div className="gv-text-field__wrapper">
         <label className="gv-text-field__label gv-text-field__label--shrink">
           {t("manager.create-program-page.settings.fields.account-type")}
