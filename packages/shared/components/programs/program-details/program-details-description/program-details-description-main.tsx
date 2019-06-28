@@ -199,7 +199,7 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
           />
           {isOwnProgram &&
             personalDetails &&
-            personalDetails.canChangePassword && (
+            personalDetails.canCloseProgram && (
               <DetailsSettingControl
                 title={programDescription.title}
                 url={composeProgramSettingsUrl(programDescription.url)}
