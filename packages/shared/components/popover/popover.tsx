@@ -16,7 +16,8 @@ export enum VERTICAL_POPOVER_POS {
 export enum HORIZONTAL_POPOVER_POS {
   LEFT = "left",
   RIGHT = "right",
-  CENTER = "center"
+  CENTER = "center",
+  RELATIVE = "relative"
 }
 
 const getAnchorEl = (el?: anchorElType) => {
@@ -41,7 +42,7 @@ export default class Popover extends React.PureComponent<OwnProps, State> {
     if (this.popover.current) {
       const left = this.getLeft();
       const top = this.getTop();
-      const width = this.getAnchorBounds().width;
+      const width = this.props.ownWidth ? "auto" : this.getAnchorBounds().width;
       const transform = this.getTransformPosition();
       this.popover.current.style.left = left;
       this.popover.current.style.top = top;
@@ -120,6 +121,10 @@ export default class Popover extends React.PureComponent<OwnProps, State> {
     const anchorBounds = this.getAnchorBounds();
     const horizontal = this.getHorizontalPosition();
 
+    if (horizontal === HORIZONTAL_POPOVER_POS.RELATIVE) {
+      return null;
+    }
+
     if (horizontal === HORIZONTAL_POPOVER_POS.CENTER) {
       return `${anchorBounds.left + anchorBounds.width / 2}px`;
     }
@@ -181,6 +186,7 @@ interface OwnProps {
   noAbsolute?: boolean;
   className?: string;
   fixed?: boolean;
+  ownWidth?: boolean;
   disableBackdrop?: boolean;
 }
 interface State {

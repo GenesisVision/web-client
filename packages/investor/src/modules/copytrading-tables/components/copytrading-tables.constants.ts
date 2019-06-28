@@ -34,6 +34,27 @@ export const COPYTRADING_OPEN_TRADES_COLUMNS = [
   }
 ];
 
+export const OPEN_TRADES_PROVIDERS_COLUMNS = [
+  {
+    name: "providers"
+  },
+  {
+    name: "date-open"
+  },
+  {
+    name: "symbol"
+  },
+  {
+    name: "volume"
+  },
+  {
+    name: "price-open"
+  },
+  {
+    name: "profit"
+  }
+];
+
 export const COPYTRADING_TRADES_HISTORY_COLUMNS = [
   {
     name: "providers"
