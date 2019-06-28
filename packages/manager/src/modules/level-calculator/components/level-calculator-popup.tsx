@@ -81,7 +81,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
     );
 
     return (
-      <div className="level-calculator-popup">
+      <div>
         <div className="level-calculator-popup__header">
           <h2 className="level-calculator-popup__heading">
             {t("manager.level-calculator.title")}

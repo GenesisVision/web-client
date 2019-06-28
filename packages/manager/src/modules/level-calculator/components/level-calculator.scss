@@ -11,7 +11,7 @@
   @include horizontal-paddings($padding-small);
 
   @include media-breakpoint-landscape-phone() {
-    width: 640px - $padding-small * 2;
+    max-width: 640px - $padding-small * 2;
   }
 
   &__header {
