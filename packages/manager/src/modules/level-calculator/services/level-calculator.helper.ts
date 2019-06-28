@@ -5,6 +5,7 @@ const lerp = (from: number, to: number, progress: number) =>
 
 export const calcInvestmentScale = (
   programAge: number,
+  genesisRation: number,
   weightedVolumeScale: number,
   levelsParameters: LevelsParamsInfo
 ) => {
@@ -18,7 +19,7 @@ export const calcInvestmentScale = (
   return lerp(
     levelsParameters.investmentScaleMin,
     levelsParameters.investmentScaleMax,
-    progress
+    progress * genesisRation
   );
 };
 
