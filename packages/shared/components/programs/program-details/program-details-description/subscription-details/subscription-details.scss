@@ -47,7 +47,7 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
 
   @include media-breakpoint-tablet() {
     width: auto;
-    min-width: 450px;
+    min-width: 460px;
     max-width: 490px;
   }
 

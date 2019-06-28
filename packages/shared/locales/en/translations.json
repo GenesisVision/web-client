@@ -354,6 +354,8 @@
     "title": "Subscription details",
     "tolerance-percentage": "Tolerance percentage",
     "subscription-type": "Subscription Type",
+    "active": "Active",
+    "volume": "Volume",
     "modes": {
       "ByBalance": "By balance",
       "Percent": "Percentage",

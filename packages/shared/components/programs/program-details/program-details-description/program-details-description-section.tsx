@@ -9,7 +9,7 @@ import { InvestmentDetails } from "shared/components/details/details-description
 import { PROGRAM, STATUS } from "shared/constants/constants";
 
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
-import SubscriptionDetails from "./subscription-details/subscription-details";
+import SubscriptionDetailsContainer from "./subscription-details/subscription-details-container";
 
 const _ProgramDetailsDescriptionSection: React.FC<
   IProgramDetailsDescriptionSectionProps
@@ -66,7 +66,7 @@ const _ProgramDetailsDescriptionSection: React.FC<
               />
             )}
           {personalDetails.signalSubscription.hasActiveSubscription && (
-            <SubscriptionDetails
+            <SubscriptionDetailsContainer
               id={programDescription.id}
               currency={programDescription.currency}
               personalDetails={personalDetails}
