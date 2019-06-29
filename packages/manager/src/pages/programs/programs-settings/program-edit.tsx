@@ -92,6 +92,7 @@ interface OwnProps {
 const ProgramEdit = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<OwnProps, ProgramEditFormValues>({
+    enableReinitialize: true,
     displayName: "edit-form",
     mapPropsToValues: props => {
       return {
