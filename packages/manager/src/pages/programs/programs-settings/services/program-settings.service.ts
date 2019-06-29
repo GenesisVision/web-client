@@ -34,11 +34,9 @@ export const changeBrokerMethod = (
           true
         )
       );
-      setSubmitting(false);
     })
     .catch((error: ResponseError) => {
       dispatch(alertMessageActions.error(error.errorMessage));
-      setSubmitting(false);
     });
 
 export const redirectToProgram = () => (
