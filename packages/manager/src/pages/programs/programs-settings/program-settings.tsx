@@ -7,7 +7,7 @@ import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
-import BrokerEdit from "./broker-edit";
+import BrokerEdit, { ChangeBrokerFormValues } from "./broker-edit";
 import ProgramEdit, { ProgramEditFormValues } from "./program-edit";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 
@@ -82,18 +82,10 @@ const _ProgramSettings: React.FC<Props> = ({
           {brokersInfo.brokers.length > 1 && (
             <section className="program-edit__block">
               <BrokerEdit
+                onSubmit={changeBroker}
                 id={details.id}
                 brokers={brokersInfo.brokers}
-                selectedBroker={
-                  brokersInfo.brokers.find(
-                    broker =>
-                      !!broker.accountTypes.find(
-                        accountType =>
-                          accountType.id === brokersInfo.currentAccountTypeId
-                      )
-                  )!
-                }
-                changeBroker={changeBroker}
+                currentAccountTypeId={brokersInfo.currentAccountTypeId}
               />
             </section>
           )}
@@ -124,10 +116,9 @@ interface OwnProps {
   closeProgram: () => void;
   changePassword: () => void;
   changeBroker: (
-    programId: string,
-    newBrokerAccountTypeId: string,
-    newLeverage: number
-  ) => () => void;
+    values: ChangeBrokerFormValues,
+    setSubmitting: SetSubmittingType
+  ) => void;
   editProgram: (
     values: ProgramEditFormValues,
     setSubmitting: SetSubmittingType
