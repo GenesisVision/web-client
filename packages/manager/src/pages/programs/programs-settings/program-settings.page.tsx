@@ -30,6 +30,7 @@ import {
 } from "./services/program-settings.service";
 import { IProgramSignalFormValues } from "./signaling-edit";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { ChangeBrokerFormValues } from "./broker-edit";
 
 const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
   const fetchingDescription = () =>
@@ -72,17 +73,19 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
   const closeProgram = useCallback(() => setCloseProgramOpen(true), []);
   const changeBroker = useCallback(
     (
-      programId: string,
-      newBrokerAccountTypeId: string,
-      newLeverage: number
-    ) => () => {
-      service.changeBrokerMethod(
-        programId,
-        newBrokerAccountTypeId,
-        newLeverage
-      );
+      { brokerAccountTypeId, leverage }: ChangeBrokerFormValues,
+      setSubmitting: SetSubmittingType
+    ) => {
+      service
+        .changeBrokerMethod(
+          details!.id,
+          brokerAccountTypeId,
+          leverage,
+          setSubmitting
+        )
+        .then(() => fetchingDescription());
     },
-    []
+    [details]
   );
   const changePassword = useCallback(() => setChangePasswordOpen(true), []);
   const editProgram = useCallback(
