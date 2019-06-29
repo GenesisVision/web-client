@@ -66,46 +66,44 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
           {t(`program-details-page.history.subscriptions.${column.name}`)}
         </span>
       )}
-      renderBodyRow={(subscription: SignalSubscriber) => {
-        return (
-          <TableRow>
-            <TableCell>{subscription.number}</TableCell>
-            <TableCell>{subscription.trades}</TableCell>
-            <TableCell>
-              <Profitability
+      renderBodyRow={(subscription: SignalSubscriber) => (
+        <TableRow>
+          <TableCell>{subscription.number}</TableCell>
+          <TableCell>{subscription.trades}</TableCell>
+          <TableCell>
+            <Profitability
+              value={formatCurrencyValue(subscription.profit, currency)}
+              prefix={PROFITABILITY_PREFIX.SIGN}
+            >
+              <NumberFormat
                 value={formatCurrencyValue(subscription.profit, currency)}
-                prefix={PROFITABILITY_PREFIX.SIGN}
-              >
-                <NumberFormat
-                  value={formatCurrencyValue(subscription.profit, currency)}
-                  thousandSeparator=" "
-                  displayType="text"
-                  allowNegative={false}
-                />
-              </Profitability>
-            </TableCell>
-            <TableCell>
-              <FeesTooltip subscription={subscription}>
-                {formatCurrencyValue(
-                  -1 * subscription.totalCommissionAmount,
-                  subscription.totalCommissionCurrency
-                )}
-              </FeesTooltip>
-            </TableCell>
-            <TableCell>{subscription.volume}</TableCell>
-            <TableCell>
-              {moment(subscription.subscriptionDate).format()}
-            </TableCell>
-            <TableCell>
-              {subscription.unsubscriptionDate &&
-                moment(subscription.unsubscriptionDate).format()}
-            </TableCell>
-            <TableCell>
-              <AssetStatusLabel status={subscription.status as STATUS} />
-            </TableCell>
-          </TableRow>
-        );
-      }}
+                thousandSeparator=" "
+                displayType="text"
+                allowNegative={false}
+              />
+            </Profitability>
+          </TableCell>
+          <TableCell>
+            <FeesTooltip subscription={subscription}>
+              {formatCurrencyValue(
+                -1 * subscription.totalCommissionAmount,
+                subscription.totalCommissionCurrency
+              )}
+            </FeesTooltip>
+          </TableCell>
+          <TableCell>{subscription.volume}</TableCell>
+          <TableCell>
+            {moment(subscription.subscriptionDate).format()}
+          </TableCell>
+          <TableCell>
+            {subscription.unsubscriptionDate &&
+              moment(subscription.unsubscriptionDate).format()}
+          </TableCell>
+          <TableCell>
+            <AssetStatusLabel status={subscription.status as STATUS} />
+          </TableCell>
+        </TableRow>
+      )}
     />
   );
 };
