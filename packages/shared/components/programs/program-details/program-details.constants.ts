@@ -5,6 +5,7 @@ import {
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
+import { ACTION_STATUS_FILTER_TYPES } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
@@ -164,5 +165,5 @@ export const PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS = [
 ];
 
 export const PROGRAM_SUBSCRIBERS_FILTERS = {
-  [SUBSCRIBERS_STATUS_TYPE]: "all"
+  [SUBSCRIBERS_STATUS_TYPE]: ACTION_STATUS_FILTER_TYPES.ACTIVE
 };
