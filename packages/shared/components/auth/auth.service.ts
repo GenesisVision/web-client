@@ -11,6 +11,20 @@ import {
 
 const worker = new SHAWorker();
 
+export const getGuardedFile: TGetGuardedFile = ({
+  login,
+  setCount,
+  setTotal
+}) => {
+  getCaptcha(login)
+    .then(({ pow }) => checkPow({ login, setCount, setTotal, ...pow }))
+    .then(prefix => {
+      window.location = (`${
+        process.env.REACT_APP_API_URL
+      }/v1.0/file/F7149236-E015-47F5-8B43-540FFC64207C?prefix=${prefix}` as unknown) as Location;
+    });
+};
+
 export const calculatePrefix: CalculatePrefixFuncType = props => {
   worker.postMessage([props.difficulty, props.nonce, props.login]);
   const { setCount } = props;
@@ -44,6 +58,13 @@ export const checkPow: CheckPowFuncType = async props => {
   return 0;
 };
 
+export type TGetGuardedFile = (
+  props: {
+    setTotal: SetFuncType;
+    setCount: SetFuncType;
+    login: string;
+  }
+) => void;
 type GetCaptchaFuncType = (login: string) => CancelablePromise<CaptchaDetails>;
 type CalculatePrefixFuncType = (
   props: {
