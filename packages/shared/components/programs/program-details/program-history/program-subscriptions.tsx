@@ -30,6 +30,8 @@ import {
   SUBSCRIBERS_STATUS_TYPE
 } from "../program-details.constants";
 import FeesTooltip from "./program-subscriptions-fees-tooltip";
+import { STATUS } from "shared/constants/constants";
+import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
 
 const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
   const fetch: GetItemsFuncType = filters =>
@@ -82,6 +84,14 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
                 />
               </Profitability>
             </TableCell>
+            <TableCell>
+              <FeesTooltip subscription={subscription}>
+                {formatCurrencyValue(
+                  -1 * subscription.totalCommissionAmount,
+                  subscription.totalCommissionCurrency
+                )}
+              </FeesTooltip>
+            </TableCell>
             <TableCell>{subscription.volume}</TableCell>
             <TableCell>
               {moment(subscription.subscriptionDate).format()}
@@ -91,14 +101,8 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
                 moment(subscription.unsubscriptionDate).format()}
             </TableCell>
             <TableCell>
-              <FeesTooltip subscription={subscription}>
-                {formatCurrencyValue(
-                  -1 * subscription.totalCommissionAmount,
-                  subscription.totalCommissionCurrency
-                )}
-              </FeesTooltip>
+              <AssetStatusLabel status={subscription.status as STATUS} />
             </TableCell>
-            <TableCell>{subscription.status}</TableCell>
           </TableRow>
         );
       }}

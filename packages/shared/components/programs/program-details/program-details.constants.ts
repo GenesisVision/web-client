@@ -123,6 +123,9 @@ export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
     name: "profit"
   },
   {
+    name: "commission"
+  },
+  {
     name: "volume"
   },
   {
@@ -130,9 +133,6 @@ export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
   },
   {
     name: "unsubscriptionDate"
-  },
-  {
-    name: "commission"
   },
   {
     name: "status"
