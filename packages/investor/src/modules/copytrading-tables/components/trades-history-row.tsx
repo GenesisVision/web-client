@@ -54,7 +54,9 @@ const _TradesHistoryRow: React.FC<Props> = ({ trade, title }) => {
               </GVButton>
             </Link>
             {hasOtherPrograms ? (
-              <Chip className={"traders-count"}>+{otherPrograms.length}</Chip>
+              <Chip className={"traders-count"}>
+                +{otherPrograms.length - 1}
+              </Chip>
             ) : null}
           </div>
         ) : null}
