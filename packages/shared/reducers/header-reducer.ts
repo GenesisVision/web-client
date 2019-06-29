@@ -54,6 +54,11 @@ export const idSelector = apiFieldSelector(
   fieldSelector(state => state.id)
 );
 
+export const emailSelector = apiFieldSelector(
+  headerSelector,
+  fieldSelector(state => state.email)
+);
+
 const headerReducer = apiReducerFactory<ProfileHeaderViewModel>({
   apiType: PROFILE_HEADER
 });
