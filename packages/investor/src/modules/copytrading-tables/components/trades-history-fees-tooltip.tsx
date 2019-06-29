@@ -5,7 +5,7 @@ import { compose } from "redux";
 import FeeCommission from "shared/components/fee-commission/fee-commission";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const _FeesTooltip: React.FC<Props> = ({ trade, t }) => {
   return (
@@ -17,36 +17,23 @@ const _FeesTooltip: React.FC<Props> = ({ trade, t }) => {
           <div className="profile-menu__header">
             <FeeCommission
               title={t(`investor.copytrading-tables.fees.trading`)}
-              value={formatCurrencyValue(
-                trade.originalCommission,
-                trade.originalCommissionCurrency
-              )}
+              value={formatValue(trade.originalCommission, 8)}
               currency={trade.originalCommissionCurrency}
             />
-            {trade.totalCommissionByType.map((commission, index) => {
-              return (
-                <FeeCommission
-                  key={index}
-                  title={t(
-                    `investor.copytrading-tables.fees.${commission.type}`
-                  )}
-                  value={formatCurrencyValue(
-                    commission.amount,
-                    commission.currency
-                  )}
-                  currency={commission.currency}
-                />
-              );
-            })}
+            {trade.totalCommissionByType.map((commission, index) => (
+              <FeeCommission
+                key={index}
+                title={t(`investor.copytrading-tables.fees.${commission.type}`)}
+                value={formatValue(commission.amount, 8)}
+                currency={commission.currency}
+              />
+            ))}
           </div>
           {trade.totalCommissionByType.length > 0 ? (
             <div className={"fees-tooltip__footer "}>
               <FeeCommission
                 title={t(`investor.copytrading-tables.fees.total`)}
-                value={formatCurrencyValue(
-                  trade.totalCommission,
-                  trade.currency
-                )}
+                value={formatValue(trade.totalCommission, 8)}
                 currency={trade.currency}
               />
             </div>
