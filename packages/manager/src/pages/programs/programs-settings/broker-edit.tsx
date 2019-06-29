@@ -140,6 +140,7 @@ interface OwnProps {
   ) => void;
   id: string;
   brokers: Broker[];
+  leverage: number;
 }
 
 enum FIELDS {
@@ -160,7 +161,7 @@ const BrokerEdit = compose<React.ComponentType<OwnProps>>(
     mapPropsToValues: props => {
       return {
         [FIELDS.brokerAccountTypeId]: props.currentAccountTypeId,
-        [FIELDS.leverage]: 1
+        [FIELDS.leverage]: props.leverage
       };
     },
     handleSubmit: (values, { props, setSubmitting }) => {

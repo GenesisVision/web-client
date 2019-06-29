@@ -86,6 +86,7 @@ const _ProgramSettings: React.FC<Props> = ({
                 id={details.id}
                 brokers={brokersInfo.brokers}
                 currentAccountTypeId={brokersInfo.currentAccountTypeId}
+                leverage={details.leverageMax}
               />
             </section>
           )}
