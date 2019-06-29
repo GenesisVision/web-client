@@ -21,7 +21,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import {
   PROGRAM_SUBSCRIBERS_COLUMNS,
@@ -85,10 +85,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
           </TableCell>
           <TableCell>
             <FeesTooltip subscription={subscription}>
-              {formatCurrencyValue(
-                -1 * subscription.totalCommissionAmount,
-                subscription.totalCommissionCurrency
-              )}
+              {formatValue(subscription.totalCommissionAmount, 8)}
             </FeesTooltip>
           </TableCell>
           <TableCell>{subscription.volume}</TableCell>
