@@ -22,17 +22,19 @@ const _SignalingEdit: React.FC<Props> = ({
   const changeIsSignal = useCallback(() => setIsSignal(!isSignal), [isSignal]);
   return (
     <form id="signaling-edit-form" onSubmit={handleSubmit}>
-      <h3>{t("manager.program-settings.signaling-program.title")}</h3>
-      {!isSignalProgram && (
-        <GVSwitch
-          touched={false}
-          className="notification-setting__switch"
-          name={name}
-          value={isSignal}
-          color="primary"
-          onChange={changeIsSignal}
-        />
-      )}
+      <div className="program-edit__signaling-edit-form-title-block">
+        <h3>{t("manager.program-settings.signaling-program.title")}</h3>
+        {!isSignalProgram && (
+          <GVSwitch
+            touched={false}
+            className="notification-setting__switch"
+            name={name}
+            value={isSignal}
+            color="primary"
+            onChange={changeIsSignal}
+          />
+        )}
+      </div>
       <SignalsFeeFormPartial
         volumeFeeFieldName={FORM_FIELDS.volumeFee}
         successFeeFieldName={FORM_FIELDS.successFee}
@@ -76,6 +78,7 @@ interface OwnProps {
 const SignalingEdit = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<OwnProps, IProgramSignalFormValues>({
+    enableReinitialize: true,
     displayName: "make-signal-form",
     mapPropsToValues: props => ({
       [FORM_FIELDS.successFee]: props.signalSuccessFee,
