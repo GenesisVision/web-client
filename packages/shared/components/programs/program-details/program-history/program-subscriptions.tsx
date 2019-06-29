@@ -1,4 +1,5 @@
 import { SignalSubscriber } from "gv-api-web";
+import classNames from "classnames";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -83,9 +84,16 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
               />
             </Profitability>
           </TableCell>
-          <TableCell>
+          <TableCell className="subscription-fees">
             <FeesTooltip subscription={subscription}>
-              {formatValue(subscription.totalCommissionAmount, 8)}
+              <span
+                className={classNames({
+                  "fee-commission__value":
+                    subscription.totalCommissionAmount > 0
+                })}
+              >
+                {formatValue(subscription.totalCommissionAmount, 8)}
+              </span>
             </FeesTooltip>
           </TableCell>
           <TableCell>{subscription.volume}</TableCell>
