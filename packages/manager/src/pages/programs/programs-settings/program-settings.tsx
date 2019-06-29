@@ -90,16 +90,18 @@ const _ProgramSettings: React.FC<Props> = ({
               />
             </section>
           )}
-          {details.personalProgramDetails.canMakeSignalProvider && (
-            <section className="program-edit__block">
-              <SignalingEdit
-                isSignalProgram={details.isSignalProgram}
-                onSubmit={changeSignaling}
-                signalSuccessFee={signalSuccessFee}
-                signalVolumeFee={signalVolumeFee}
-              />
-            </section>
-          )}
+          {details.isSignalProgram ||
+            (!details.isSignalProgram &&
+              details.personalProgramDetails.canMakeSignalProvider && (
+                <section className="program-edit__block">
+                  <SignalingEdit
+                    isSignalProgram={details.isSignalProgram}
+                    onSubmit={changeSignaling}
+                    signalSuccessFee={signalSuccessFee}
+                    signalVolumeFee={signalVolumeFee}
+                  />
+                </section>
+              ))}
         </>
       )}
     </div>
