@@ -50,7 +50,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
         filtering: FilteringType
       ) => (
         <SelectFilter
-          name={"type"}
+          name={SUBSCRIBERS_STATUS_TYPE}
           label={t("program-details-page.history.subscriptions.status")}
           value={filtering[SUBSCRIBERS_STATUS_TYPE] as SelectFilterType} //TODO fix filtering types
           values={ACTION_STATUS_FILTER_VALUES}

@@ -154,14 +154,14 @@ export const PROGRAM_TRADES_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
 };
 
+export const SUBSCRIBERS_STATUS_TYPE = "status";
+
 export const PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS = [
   {
-    name: "type",
+    name: SUBSCRIBERS_STATUS_TYPE,
     type: FILTER_TYPE.GENERAL
   }
 ];
-
-export const SUBSCRIBERS_STATUS_TYPE = "type";
 
 export const PROGRAM_SUBSCRIBERS_FILTERS = {
   [SUBSCRIBERS_STATUS_TYPE]: "all"
