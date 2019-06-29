@@ -116,7 +116,9 @@ const _BrokerEdit: React.FC<Props> = ({
         color="primary"
         className="invest-form__submit-button"
         disabled={
-          !dirty || currentAccountTypeId === values[FIELDS.brokerAccountTypeId]
+          !dirty ||
+          currentAccountTypeId === values[FIELDS.brokerAccountTypeId] ||
+          isSubmitting
         }
       >
         {t("manager.program-settings.buttons.change-broker")}
