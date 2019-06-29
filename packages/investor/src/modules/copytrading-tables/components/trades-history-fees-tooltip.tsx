@@ -5,7 +5,7 @@ import { compose } from "redux";
 import FeeCommission from "shared/components/fee-commission/fee-commission";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 const _FeesTooltip: React.FC<Props> = ({ trade, t }) => {
   return (
@@ -41,7 +41,7 @@ const _FeesTooltip: React.FC<Props> = ({ trade, t }) => {
         </div>
       )}
     >
-      <div>{formatCurrencyValue(trade.totalCommission, trade.currency)}</div>
+      <div>{formatValue(trade.totalCommission, 8)}</div>
     </Tooltip>
   );
 };
