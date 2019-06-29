@@ -36,7 +36,6 @@ const _SignalingEdit: React.FC<Props> = ({
       <SignalsFeeFormPartial
         volumeFeeFieldName={FORM_FIELDS.volumeFee}
         successFeeFieldName={FORM_FIELDS.successFee}
-        hasSubscriptionFeeAutofocus={true}
       />
       <GVButton
         type="submit"
