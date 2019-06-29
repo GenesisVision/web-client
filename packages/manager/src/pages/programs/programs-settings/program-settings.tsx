@@ -79,22 +79,24 @@ const _ProgramSettings: React.FC<Props> = ({
               onSubmit={editProgram}
             />
           </section>
-          <section className="program-edit__block">
-            <BrokerEdit
-              id={details.id}
-              brokers={brokersInfo.brokers}
-              selectedBroker={
-                brokersInfo.brokers.find(
-                  broker =>
-                    !!broker.accountTypes.find(
-                      accountType =>
-                        accountType.id === brokersInfo.currentAccountTypeId
-                    )
-                )!
-              }
-              changeBroker={changeBroker}
-            />
-          </section>
+          {brokersInfo.brokers.length > 1 && (
+            <section className="program-edit__block">
+              <BrokerEdit
+                id={details.id}
+                brokers={brokersInfo.brokers}
+                selectedBroker={
+                  brokersInfo.brokers.find(
+                    broker =>
+                      !!broker.accountTypes.find(
+                        accountType =>
+                          accountType.id === brokersInfo.currentAccountTypeId
+                      )
+                  )!
+                }
+                changeBroker={changeBroker}
+              />
+            </section>
+          )}
           <section className="program-edit__block">
             <SignalingEdit
               isSignalProgram={details.isSignalProgram}
