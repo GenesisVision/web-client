@@ -7,7 +7,7 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import { redirectToLogin } from "shared/components/auth/login/login.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
 import NotFoundPage from "shared/components/not-found/not-found";
@@ -22,12 +22,16 @@ import {
 } from "shared/components/programs/program-details/services/program-details.types";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { kycConfirmedSelector } from "shared/reducers/header-reducer";
+import {
+  emailSelector,
+  kycConfirmedSelector
+} from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
 import ProgramDetailsContainer from "./program-details.contaner";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
+import { getGuardedFile } from "../../auth/auth.service";
 
 class _ProgramDetailsPage extends React.PureComponent<Props, State> {
   state = {
@@ -70,6 +74,14 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
       });
   };
 
+  downloadGuardedImage = () => {
+    getGuardedFile({
+      setCount: val => {},
+      setTotal: val => {},
+      login: this.props.email
+    });
+  };
+
   render() {
     const {
       service,
@@ -89,27 +101,33 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
     } = this.state;
     if (hasError) return <NotFoundPage />;
     return (
-      <ProgramDetailsContainer
-        condition={!!description && !!levelsParameters}
-        loader={<DetailsContainerLoader />}
-        updateDetails={this.updateDetails}
-        redirectToLogin={service.redirectToLogin}
-        historySection={historySection}
-        descriptionSection={descriptionSection}
-        description={description!}
-        profitChart={profitChart}
-        balanceChart={balanceChart}
-        statistic={statistic}
-        currency={currency}
-        isAuthenticated={isAuthenticated}
-        levelsParameters={levelsParameters!}
-        isKycConfirmed={isKycConfirmed}
-      />
+      <>
+        <button onClick={this.downloadGuardedImage}>
+          I hate brute force!!!11
+        </button>
+        <ProgramDetailsContainer
+          condition={!!description && !!levelsParameters}
+          loader={<DetailsContainerLoader />}
+          updateDetails={this.updateDetails}
+          redirectToLogin={service.redirectToLogin}
+          historySection={historySection}
+          descriptionSection={descriptionSection}
+          description={description!}
+          profitChart={profitChart}
+          balanceChart={balanceChart}
+          statistic={statistic}
+          currency={currency}
+          isAuthenticated={isAuthenticated}
+          levelsParameters={levelsParameters!}
+          isKycConfirmed={isKycConfirmed}
+        />
+      </>
     );
   }
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
+  email: emailSelector(state),
   currency: currencySelector(state),
   isAuthenticated: isAuthenticatedSelector(state),
   isKycConfirmed: kycConfirmedSelector(state)
@@ -128,6 +146,7 @@ interface OwnProps {
 }
 
 interface StateProps {
+  email: string;
   isAuthenticated: boolean;
   isKycConfirmed: boolean;
   currency: CurrencyEnum;
