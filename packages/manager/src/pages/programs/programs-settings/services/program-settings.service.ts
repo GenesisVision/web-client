@@ -2,7 +2,11 @@ import { CancelablePromise } from "gv-api-web";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import { ManagerThunk, ResponseError } from "shared/utils/types";
+import {
+  ManagerThunk,
+  ResponseError,
+  SetSubmittingType
+} from "shared/utils/types";
 import { push } from "connected-react-router";
 import { Dispatch } from "redux";
 import { RootState } from "shared/reducers/root-reducer";
@@ -16,7 +20,8 @@ import {
 export const changeBrokerMethod = (
   programId: string,
   newBrokerAccountTypeId: string,
-  newLeverage: number
+  newLeverage: number,
+  setSubmitting: SetSubmittingType
 ): ManagerThunk<CancelablePromise<void>> => dispatch =>
   managerApi
     .v10ManagerProgramsBrokerChangePost(authService.getAuthArg(), {
@@ -29,9 +34,11 @@ export const changeBrokerMethod = (
           true
         )
       );
+      setSubmitting(false);
     })
     .catch((error: ResponseError) => {
       dispatch(alertMessageActions.error(error.errorMessage));
+      setSubmitting(false);
     });
 
 export const redirectToProgram = () => (
