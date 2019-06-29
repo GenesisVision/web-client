@@ -3,6 +3,12 @@
 @import "~shared/styles/_breakpoint.scss";
 
 .program-edit {
+  &__signaling-edit-form-title-block {
+    display: flex;
+    & .gv-switch-wrapper {
+      margin: 0 $padding-xsmall;
+    }
+  }
   &__block {
     @include adaptive-margin(bottom, $padding-large);
     box-sizing: border-box;
