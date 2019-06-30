@@ -30,8 +30,8 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
-
-import download from "../../../../utils/download";
+import filesService from "shared/services/file-service";
+import GVButton from "shared/components/gv-button";
 
 const DECIMAL_SCALE = 8;
 
@@ -185,36 +185,26 @@ interface OwnProps {
 interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface IDownloadButtonToolbar extends InjectedTranslateProps {
-  filtering: any;
+  filtering: DateRangeFilterType;
   programId: string;
 }
 
 const _DownloadButtonToolbar: React.FC<IDownloadButtonToolbar> = ({
   t,
   filtering,
-  programId,
-  getTradeExport
-}) => {
-  // const [file, setFile] = useState<Blob | null>(null);
-
-  const handleClick = () => {
-    getTradeExport &&
-      getTradeExport(programId, filtering!.dateRange).then(data =>
-        download(data, "trades-history.xlsx")
-      );
-  };
-
-  return (
-    <div className="dashboard__button-container dashboard__button">
-      {/*<a href={URL.createObjectURL(file)} download={"trades-history.xlsx"}>*/}
-      {/*  {t("program-details-page.history.trades.download")}*/}
-      {/*</a>*/}
-      <GVButton color="primary" variant="text" onClick={handleClick}>
+  programId
+}) => (
+  <div className="dashboard__button-container dashboard__button">
+    <a
+      href={filesService.getExportFileUrl(programId, filtering)}
+      className={"gv-btn"}
+    >
+      <GVButton color="primary" variant="text">
         {t("program-details-page.history.trades.download")}
       </GVButton>
-    </div>
-  );
-};
+    </a>
+  </div>
+);
 const DownloadButtonToolbar = translate()(React.memo(_DownloadButtonToolbar));
 
 const ProgramTrades = translate()(React.memo(_ProgramTrades));
