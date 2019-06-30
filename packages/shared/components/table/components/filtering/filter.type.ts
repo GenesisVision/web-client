@@ -73,7 +73,8 @@ export type FilteringType = {
     | SelectFilterType
     | TagFilterType
     | FundAssetFilterType
-    | undefined;
+    | undefined
+    | any;
 };
 
 export type ComposeFiltersAllType = {

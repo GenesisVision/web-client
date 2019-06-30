@@ -1,16 +1,15 @@
+import { FormikProps, withFormik } from "formik";
 import { Broker, BrokerAccountType } from "gv-api-web";
 import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
+import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React, { useCallback, useState } from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import translate from "react-i18next/src/translate";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import Select from "shared/components/select/select";
-
-import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
-import { FormikProps, withFormik } from "formik";
-import GVTextField from "shared/components/gv-text-field";
 import GVFormikField from "shared/components/gv-formik-field";
+import GVTextField from "shared/components/gv-text-field";
+import Select from "shared/components/select/select";
 import { SetSubmittingType } from "shared/utils/types";
 
 const _BrokerEdit: React.FC<Props> = ({

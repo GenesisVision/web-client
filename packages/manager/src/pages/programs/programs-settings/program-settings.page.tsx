@@ -5,12 +5,13 @@ import { editAsset } from "modules/asset-edit/services/asset-edit.services";
 import ChangePasswordTradingAccountPopup from "modules/change-password-trading-account/change-password-trading-account-popup";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
-import { connect, ResolveThunks } from "react-redux";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import Page from "shared/components/page/page";
 import {
@@ -22,6 +23,7 @@ import { SetSubmittingType } from "shared/utils/types";
 
 import ClosePeriodContainer from "../program-details/components/close-period/close-period-container";
 import CloseProgramContainer from "../program-details/components/close-program/close-program-container";
+import { ChangeBrokerFormValues } from "./broker-edit";
 import { ProgramEditFormValues } from "./program-edit";
 import ProgramSettings from "./program-settings";
 import {
@@ -29,8 +31,6 @@ import {
   redirectToProgram
 } from "./services/program-settings.service";
 import { IProgramSignalFormValues } from "./signaling-edit";
-import { InjectedTranslateProps, translate } from "react-i18next";
-import { ChangeBrokerFormValues } from "./broker-edit";
 
 const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
   const fetchingDescription = () =>

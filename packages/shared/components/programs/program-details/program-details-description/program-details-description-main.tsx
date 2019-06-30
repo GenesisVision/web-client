@@ -10,9 +10,9 @@ import DetailsNotification from "shared/components/details/details-description-s
 import DetailsSettingControl from "shared/components/details/details-description-section/details-description/controls/details-setting-control";
 import GVButton from "shared/components/gv-button";
 import Popover, {
-  anchorElType,
   HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
+  VERTICAL_POPOVER_POS,
+  anchorElType
 } from "shared/components/popover/popover";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";

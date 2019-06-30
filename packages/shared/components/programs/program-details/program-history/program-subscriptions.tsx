@@ -1,10 +1,11 @@
-import { SignalSubscriber } from "gv-api-web";
 import classNames from "classnames";
+import { SignalSubscriber } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
 import { ACTION_STATUS_FILTER_VALUES } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -19,6 +20,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { mapToTableItems } from "shared/components/table/helpers/mapper";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { STATUS } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
@@ -31,8 +33,6 @@ import {
   SUBSCRIBERS_STATUS_TYPE
 } from "../program-details.constants";
 import FeesTooltip from "./program-subscriptions-fees-tooltip";
-import { STATUS } from "shared/constants/constants";
-import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
 
 const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
   const fetch: GetItemsFuncType = filters =>

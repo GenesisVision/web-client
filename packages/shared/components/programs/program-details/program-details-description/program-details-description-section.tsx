@@ -8,9 +8,9 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { PROGRAM, STATUS } from "shared/constants/constants";
 
+import PerfomanceData from "./perfomance-data";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 import SubscriptionDetailsContainer from "./subscription-details/subscription-details-container";
-import PerfomanceData from "./perfomance-data";
 
 const _ProgramDetailsDescriptionSection: React.FC<
   IProgramDetailsDescriptionSectionProps

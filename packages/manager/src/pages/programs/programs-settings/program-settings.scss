@@ -25,7 +25,6 @@
       border-left: 2px solid $secondary-color;
     }
 
-
     &:first-child {
       @include adaptive-margin(bottom, $padding-large);
     }

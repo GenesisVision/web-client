@@ -1,13 +1,13 @@
-import translate from "react-i18next/src/translate";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import filesService from "shared/services/file-service";
-import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
-import { STATUS } from "shared/constants/constants";
-import PieContainerSmall from "shared/components/pie-container/pie-container-small";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import translate from "react-i18next/src/translate";
+import PieContainerSmall from "shared/components/pie-container/pie-container-small";
+import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
+import { STATUS } from "shared/constants/constants";
+import filesService from "shared/services/file-service";
 
 const _PerfomanceData: React.FC<Props> = ({
   t,

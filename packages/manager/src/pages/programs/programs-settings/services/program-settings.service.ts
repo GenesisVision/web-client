@@ -1,21 +1,21 @@
+import { push } from "connected-react-router";
 import { CancelablePromise } from "gv-api-web";
+import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { RootState } from "shared/reducers/root-reducer";
+import {
+  PROGRAMS_ROUTE,
+  PROGRAM_DETAILS_ROUTE,
+  PROGRAM_SLUG_URL_PARAM_NAME
+} from "shared/routes/programs.routes";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
+import getParams from "shared/utils/get-params";
 import {
   ManagerThunk,
   ResponseError,
   SetSubmittingType
 } from "shared/utils/types";
-import { push } from "connected-react-router";
-import { Dispatch } from "redux";
-import { RootState } from "shared/reducers/root-reducer";
-import getParams from "shared/utils/get-params";
-import {
-  PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME,
-  PROGRAMS_ROUTE
-} from "shared/routes/programs.routes";
 
 export const changeBrokerMethod = (
   programId: string,

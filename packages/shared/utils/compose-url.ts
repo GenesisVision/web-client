@@ -15,8 +15,8 @@ import {
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME,
-  PROGRAM_EDIT
+  PROGRAM_EDIT,
+  PROGRAM_SLUG_URL_PARAM_NAME
 } from "shared/routes/programs.routes";
 
 import replaceParams from "./replace-params";
