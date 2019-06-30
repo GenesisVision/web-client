@@ -8,7 +8,6 @@ import {
   WalletData
 } from "gv-api-web";
 import ConfirmContainer from "modules/confirm/confirm-container";
-import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -22,6 +21,7 @@ import { fetchWallets } from "shared/components/wallet/services/wallet.services"
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { headerSelector } from "shared/reducers/header-reducer";
 import { programsInfoSelector } from "shared/reducers/platform-reducer";
+import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { rateApi } from "shared/services/api-client/rate-api";
 import {
   MiddlewareDispatch,
@@ -238,16 +238,14 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-const CreateProgramContainer = compose<React.ComponentType<OwnProps>>(
+const CreateProgramContainer = compose<React.ComponentType>(
   translate(),
-  connect<StateProps, DispatchProps, OwnProps, ManagerRootState>(
+  connect<StateProps, DispatchProps, {}, ManagerRootState>(
     mapStateToProps,
     mapDispatchToProps
   )
 )(_CreateProgramContainer);
 export default CreateProgramContainer;
-
-interface OwnProps {}
 
 interface State {
   minimumDepositsAmount?: { [key: string]: number };
@@ -277,8 +275,4 @@ interface DispatchProps {
   };
 }
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    DispatchProps,
-    InjectedTranslateProps {}
+interface Props extends StateProps, DispatchProps, InjectedTranslateProps {}

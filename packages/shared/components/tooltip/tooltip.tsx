@@ -1,5 +1,6 @@
 import "./tooltip.scss";
 
+import classnames from "classnames";
 import * as React from "react";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -24,7 +25,8 @@ class Tooltip extends React.PureComponent<Props, State> {
     const {
       render,
       vertical = VERTICAL_POPOVER_POS.TOP,
-      horizontal = HORIZONTAL_POPOVER_POS.CENTER
+      horizontal = HORIZONTAL_POPOVER_POS.CENTER,
+      className
     } = this.props;
     const { anchor } = this.state;
     return (
@@ -40,7 +42,7 @@ class Tooltip extends React.PureComponent<Props, State> {
           noAbsolute
           noPadding
           anchorEl={anchor}
-          className="tooltip__popover"
+          className={classnames("tooltip__popover", className)}
           vertical={vertical}
           horizontal={horizontal}
         >
@@ -56,6 +58,7 @@ interface Props {
   disable?: boolean;
   horizontal?: HORIZONTAL_POPOVER_POS;
   vertical?: VERTICAL_POPOVER_POS;
+  className?: string;
 }
 interface State {
   anchor?: EventTarget;

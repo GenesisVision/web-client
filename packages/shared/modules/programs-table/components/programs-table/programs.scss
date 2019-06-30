@@ -46,6 +46,7 @@ $border-radius: 5px;
   }
 
   &--chart {
+    max-width: 136px;
     width: 136px;
     padding-right: 0;
   }
@@ -188,7 +189,7 @@ $border-radius: 5px;
     align-items: stretch;
     padding: $padding/1.5;
     width: 100%;
-    background-color: #212c34;
+    background-color: $row-color;
   }
 
   &__details {

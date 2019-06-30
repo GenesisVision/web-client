@@ -20,7 +20,7 @@ class _TradesHistoryTable extends React.PureComponent<Props> {
     this.props.service.clearCopytradingTable();
   }
   render() {
-    const { t, currency } = this.props;
+    const { t, currency, title } = this.props;
     return (
       <TableContainer
         getItems={getCopytradingTradesHistory(currency)}
@@ -52,7 +52,7 @@ class _TradesHistoryTable extends React.PureComponent<Props> {
           </span>
         )}
         renderBodyRow={(trade: OrderSignalModel) => (
-          <TradesHistoryRow trade={trade} />
+          <TradesHistoryRow trade={trade} title={title} />
         )}
       />
     );

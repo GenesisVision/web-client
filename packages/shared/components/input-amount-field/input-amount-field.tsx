@@ -15,7 +15,8 @@ const _InputAmountField: React.FC<Props> = ({
   isAllow,
   setMax,
   placeholder,
-  autoFocus = true
+  autoFocus = true,
+  disabled
 }) => (
   <GVFormikField
     emptyInit={emptyInit}
@@ -41,6 +42,7 @@ const _InputAmountField: React.FC<Props> = ({
     suffix={` ${currency}`}
     allowNegative={false}
     isAllowed={isAllow}
+    disabled={disabled}
   />
 );
 
@@ -54,6 +56,7 @@ interface Props extends InjectedTranslateProps {
   autoFocus?: boolean;
   onChange?(event: string | number): void;
   emptyInit?: boolean;
+  disabled?: boolean;
 }
 
 const InputAmountField = translate()(React.memo(_InputAmountField));

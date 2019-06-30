@@ -2,6 +2,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import { AttachToSignalProviderModeEnum, SignalSubscription } from "gv-api-web";
 import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -9,12 +10,28 @@ import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { SetSubmittingType } from "shared/utils/types";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
+
+const getInfoText = (currency: CurrencyEnum): string => {
+  switch (currency) {
+    case "ETH":
+      return "follow-program.info.ETH";
+    case "BTC":
+      return "follow-program.info.BTC";
+    case "USDT":
+    default:
+      return "follow-program.info.USDT";
+  }
+};
 
 const _FollowParams: React.FC<
   InjectedFormikProps<Props, FollowParamsFormValues>
 > = ({
+  rate,
+  currency,
   t,
   setFieldValue,
   isSubmitting,
@@ -24,7 +41,6 @@ const _FollowParams: React.FC<
   values,
   handleSubmit
 }) => {
-  const { mode } = values;
   const setMaxOpenTolerancePercent = useCallback(() => {
     setFieldValue(FIELDS.openTolerancePercent, "20");
   }, []);
@@ -56,7 +72,7 @@ const _FollowParams: React.FC<
           ))}
         </GVFormikField>
       </div>
-      {mode === modes.percentage.value && (
+      {values[FIELDS.mode] === modes.percentage.value && (
         <div className="dialog-field">
           <InputAmountField
             name={FIELDS.percent}
@@ -66,12 +82,21 @@ const _FollowParams: React.FC<
           />
         </div>
       )}
-      {mode === modes.fixed.value && (
+      {values[FIELDS.mode] === modes.fixed.value && (
         <div className="dialog-field">
           <InputAmountField
             name={FIELDS.fixedVolume}
-            label={t("follow-program.params.usd-equivalent")}
+            label={`${t("follow-program.params.usd-equivalent")} *`}
             currency={"USD"}
+          />
+          <NumberFormat
+            value={formatCurrencyValue(
+              convertFromCurrency(values[FIELDS.fixedVolume]!, rate),
+              currency
+            )}
+            prefix="≈ "
+            suffix={` ${currency}`}
+            displayType="text"
           />
         </div>
       )}
@@ -97,6 +122,9 @@ const _FollowParams: React.FC<
           {t("follow-program.params.submit")}
         </GVButton>
       </div>
+      {values[FIELDS.mode] === modes.fixed.value && (
+        <div className="dialog__info">* {t(getInfoText(currency))}</div>
+      )}
     </form>
   );
 };
@@ -140,6 +168,8 @@ export interface FollowParamsFormValues {
 }
 
 interface OwnProps {
+  rate: number;
+  currency: CurrencyEnum;
   isShowBack: boolean;
   paramsSubscription?: SignalSubscription;
   onSubmit: (

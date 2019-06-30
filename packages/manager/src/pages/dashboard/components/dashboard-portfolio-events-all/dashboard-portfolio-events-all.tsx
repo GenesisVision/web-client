@@ -10,7 +10,6 @@ import { SelectFilterValue } from "shared/components/table/components/filtering/
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { allEventsSelector } from "shared/reducers/platform-reducer";
 
-export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 const _PortfolioEventsAllComponent: React.FC<Props> = ({ role, t, events }) => (
   <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
     <PortfolioEventsTableContainerComponent

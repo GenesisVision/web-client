@@ -20,6 +20,11 @@ export const isNewUserSelector = apiFieldSelector(
   fieldSelector(state => state.isNewUser)
 );
 
+export const kycConfirmedSelector = apiFieldSelector(
+  headerSelector,
+  fieldSelector(state => state.kycConfirmed)
+);
+
 export const notificationsCountSelector = apiFieldSelector(
   headerSelector,
   fieldSelector(state => state.notificationsCount),
@@ -41,7 +46,7 @@ export const nameSelector = apiFieldSelector(
 export const roleSelector = apiFieldSelector(
   headerSelector,
   fieldSelector(state => state.userType),
-  ""
+  undefined
 );
 
 export const idSelector = apiFieldSelector(

@@ -29,7 +29,7 @@ const _FundAssetPopover: React.FC<Props & InjectedTranslateProps> = ({
               <li
                 className="fund-asset-filter__asset-item"
                 key={idx}
-                onClick={() => handleClick(asset.id)}
+                onClick={() => handleClick(asset.asset)}
               >
                 <FundAssetImage url={asset.icon} alt={asset.asset} />
                 <span className="fund-asset-filter__asset-item-name">

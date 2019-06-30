@@ -1,4 +1,5 @@
 @import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
 
 .open-trades-table {
   .close-btn {
@@ -9,4 +10,29 @@
     display: inline-flex;
     color: $main-color;
   }
+}
+
+.button--circle {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 24px;
+  transform: rotate(45deg);
+}
+
+.overflow--initial {
+  overflow: initial;
+}
+
+.traders-count {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  border-radius: 14px;
+  font-size: $font-size-small;
+  padding: 3px 8px;
+}
+
+.traders-avatar {
+  position: relative;
 }

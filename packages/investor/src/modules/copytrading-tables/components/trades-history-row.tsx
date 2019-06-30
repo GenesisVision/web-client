@@ -1,21 +1,69 @@
-import { OrderSignalModel } from "gv-api-web";
+import { OrderProgramData, OrderSignalModel } from "gv-api-web";
 import { DECIMAL_SCALE } from "modules/copytrading-tables/components/copytrading-tables.constants";
-import { FeesPopover } from "modules/copytrading-tables/components/fees-popover";
 import moment from "moment";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import Chip from "shared/components/chip/chip";
+import GVButton from "shared/components/gv-button";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
-const _TradesHistoryRow: React.FC<{ trade: OrderSignalModel }> = ({
-  trade
-}) => {
+import TradesHistoryFeesTooltip from "./trades-history-fees-tooltip";
+
+const _TradesHistoryRow: React.FC<Props> = ({ trade, title }) => {
+  const program =
+    trade.providers.length > 0
+      ? trade.providers[0].program
+      : ({} as OrderProgramData);
+  const otherPrograms = trade.providers;
+  const hasOtherPrograms = otherPrograms.length > 1;
   return (
     <TableRow className="details-trades__row">
+      <TableCell className="details-trades__cell program-details-trades__cell--entry traders-avatar">
+        {trade.providers.length > 0 ? (
+          <div className="dashboard-programs__cell--avatar-title">
+            <Link
+              to={{
+                pathname: composeProgramDetailsUrl(program.url),
+                state: `/ ${title}`
+              }}
+            >
+              <AssetAvatar
+                url={program.logo}
+                alt={program.title}
+                color={program.color}
+                level={program.level}
+                levelProgress={program.levelProgress}
+              />
+            </Link>
+            <Link
+              to={{
+                pathname: composeProgramDetailsUrl(program.url),
+                state: `/ ${title}`
+              }}
+            >
+              <GVButton variant={"text"} color={"secondary"}>
+                {program.title}
+              </GVButton>
+            </Link>
+            {hasOtherPrograms ? (
+              <Chip className={"traders-count"}>
+                +{otherPrograms.length - 1}
+              </Chip>
+            ) : null}
+          </div>
+        ) : null}
+      </TableCell>
+      <TableCell className="details-trades__cell program-details-trades__cell--ticket">
+        {moment(trade.date).format()}
+      </TableCell>
       <TableCell className="details-trades__cell program-details-trades__cell--direction">
         <BaseProfitability
           isPositive={trade.direction === "Buy"}
@@ -52,17 +100,12 @@ const _TradesHistoryRow: React.FC<{ trade: OrderSignalModel }> = ({
             thousandSeparator=" "
             allowNegative={false}
             displayType="text"
+            suffix={trade.profit !== 0 ? ` ${trade.currency}` : ""}
           />
         </Profitability>
       </TableCell>
       <TableCell className="details-trades__cell program-details-trades__cell--date">
-        <FeesPopover trade={trade} />
-      </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--ticket">
-        {moment(trade.date).format()}
-      </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--entry">
-        {trade.providers.map(provider => provider.program.title).join(", ")}
+        <TradesHistoryFeesTooltip trade={trade} />
       </TableCell>
     </TableRow>
   );
@@ -70,3 +113,8 @@ const _TradesHistoryRow: React.FC<{ trade: OrderSignalModel }> = ({
 
 const TradesHistoryRow = React.memo(_TradesHistoryRow);
 export default TradesHistoryRow;
+
+interface Props {
+  trade: OrderSignalModel;
+  title: string;
+}

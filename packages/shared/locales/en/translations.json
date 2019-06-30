@@ -72,7 +72,8 @@
     "edit": "Edit",
     "save": "Save",
     "verify": "Verify",
-    "resend-email": "Resend email"
+    "resend-email": "Resend email",
+    "reset": "Reset"
   },
   "filters": {
     "level": {
@@ -314,6 +315,9 @@
     "next": "Next",
     "info": "Your request will be processed at the end of the reporting period.",
     "withdrawing": "Withdrawing",
+    "all": "All",
+    "withdraw-all": "Withdraw all",
+    "withdrawing-all": "Withdrawing all",
     "payout-date": "Payout date",
     "back": "Back",
     "submit": "Submit",
@@ -321,7 +325,6 @@
     "invested": "Invested",
     "how-much-withdraw": "How much would you like to withdraw?",
     "enter-amount": "Enter {{token}} amount",
-    "withdraw-all": "Withdraw all invested Tokens",
     "success-alert-message": "Request to withdraw sent successfully.",
     "validation": {
       "amount-is-zero": "Amount must be greater than zero",
@@ -349,7 +352,25 @@
       }
     }
   },
+  "subscription-details": {
+    "title": "Subscription details",
+    "tolerance-percentage": "Tolerance percentage",
+    "subscription-type": "Subscription Type",
+    "active": "Active",
+    "volume": "Volume",
+    "modes": {
+      "ByBalance": "By balance",
+      "Percent": "Percentage",
+      "Fixed": "Fixed"
+    },
+    "edit": "Edit"
+  },
   "follow-program": {
+    "info": {
+      "ETH": "The minimum order size on Binance is 0.01 ETH ",
+      "BTC": "The minimum order size on Binance is 0.001 BTC",
+      "USDT": "The minimum order size on Binance is 10 USDT"
+    },
     "modes": {
       "byBalance": {
         "label": "By balance",
@@ -394,7 +415,8 @@
         "tolerance-required": "Tolerance percent is required field"
       }
     },
-    "success-alert-message": "You have been subscribed."
+    "create-success-alert-message": "You have been subscribed.",
+    "edit-success-alert-message": "Subscription settings have been edited."
   },
   "withdraw-fund": {
     "title": "Withdraw",
@@ -429,6 +451,7 @@
       "investors": "Investors",
       "available-to-invest": "Av. to invest",
       "trades": "Trades",
+      "age": "Age",
       "period": "Period",
       "drawdown": "D.down",
       "profit": "Profit",
@@ -457,18 +480,27 @@
   "about-levels-page": {
     "title": "About levels",
     "section": {
-      "text-1": "Genesis level shows the experience and reliability of a manager.",
-      "text-2": "All of the investment programs of a manager that have not passed KYC are stuck on the first level and can’t level up unless the manager passes the KYC procedure. Once the verification process is completed, the investment programs of a manager receive a second level."
+      "text-1": "Genesis level reflects the experience and reliability of a manager.",
+      "text-2": "All of the investment programs of a non-verified manager are limited to the first level and can’t level up unless the manager passes the KYC procedure. Once the verification process is completed, the investment programs of a manager are levelled up to the second level.",
+      "text-3": "Starting from the second level, the level will depend on Av. to invest and is  subject to constant change.",
+      "text-4": "The available amount of money for investing in the manager is calculated as",
+      "text-5": "The Success of the trading manager is calculated with the help of the Genesis Ratio, which is the ratio of the program profit to its risk. The formula is similar to the Sharpe ratio and is set in a range from 0 to 1.If Genesis Ratio <0.2, then the program is high risk and the Investment scale is limited to 1 meaning that the manager can attract no more than his own deposit.",
+      "text-6": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all periods.",
+      "text-7": "To have a volume multiplier of 1 the managers weekly trading volume needs to be approximately the same as the amount of funds in his/her program. In the case of Forex programs, the volume is divided by the shoulder.",
+      "text-8": "The coefficient is designed so that trading more in one period can compensate for the lack of volume during another period, but one-time high volumes won’t compensate for the lack of trading.",
+      "formula": "Investment Scale * Manager balance.",
+      "link": "More information can be found in the article"
     },
     "list": {
-      "subtitle": "Further levels are given according to the algorithm:",
-      "list-item-1": "All managers are levelled up only on the first day of each month.",
-      "list-item-2": "A manager can only progress one level at a time.",
-      "list-item-3": "In order to level up, you need to end up in the top 10% of investment programs ranked by profit among all of the other competing programs of the same level.",
-      "list-item-4": "Profit is calculated as a percentage and is calculated over a certain period. The general rule of thumb is that the period of time is calculated as “managers’ level — 1 month”. For example: if your current level is 4, then the last three months of your trading will be counted.",
-      "list-item-5": "All programs that have completed at least one trade participate in the rating.",
-      "list-item-6": "Each level needs to have a minimum of ten participants. You can’t level up if fewer than ten people are competing against you.",
-      "list-item-7": "The higher a manager’s level is — the more funds he can attract."
+      "subtitle": "Investment Scale is calculated according to a formula that takes into account:",
+      "list-item-1": "The Age of the program",
+      "list-item-2": "The Success of the trading manager.",
+      "list-item-3": "The trading volume (Weighted volume scale)"
+    },
+    "notes": {
+      "title": "Notes:",
+      "note-1": "If the investor funds in the program exceed Av.to invest, then the Success Fee and Stop out Level are decreased until the investor funds in the program become less or equal to Av. to invest. This change takes effect in the new period.",
+      "note-2": "If the manager is not verified, the available investment limit is always $1000, translated into account currency. Otherwise, the available limit is set in the range from $5k to $300k."
     },
     "table-header": {
       "level": "Level",
@@ -585,6 +617,13 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "broker": "Broker",
+      "leverage": "Leverage",
+      "period": "Period",
+      "age": "Age",
+      "genesis-ratio": "Genesis Ratio",
+      "investment-scale": "Invest. scale",
+      "volume-scale": "Volume scale",
       "notify-hint": "Notify me when the program is available for investment",
       "stop-out-level": "Stop out",
       "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
@@ -620,6 +659,7 @@
         "title": "Edit a signal provider"
       },
       "change-password": "Change password",
+      "program-settings": "Program settings",
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
       "requests-completed": "All requests completed successfully",
@@ -648,6 +688,9 @@
       }
     },
     "tooltip": {
+      "investment-scale": "The current value of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 3 to 20. Av. to invest = Investment scale * Manager Balance",
+      "volume-scale": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+      "genesis-ratio": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
       "av-to-invest": "The amount available for investment up to the next period.",
       "entry-fee": "The commission that is paid to the manager by an investor for investing in the program. The commission is set by the manager and calculated as a percentage of the amount invested. The commission is charged when investing in programs that have reached the third level.",
       "success-fee": "The commission charged from the profit. It is set by the manager and calculated as a percentage of the profits earned over a certain period of time. If there is no profit, then there is no success fee charged.",
@@ -668,7 +711,7 @@
     },
     "popover": {
       "genesis-level": "Genesis Level",
-      "invest-limit": "Invest limit",
+      "invest-limit": "Total invest limit",
       "text": "Genesis level shows the experience and reliability of the Manager",
       "about-levels": "About levels"
     },
@@ -712,6 +755,7 @@
         "volume": "Volume",
         "subscriptionDate": "Subscription date",
         "unsubscriptionDate": "Unsubscription date",
+        "commission": "Commission",
         "status": "Status"
       }
     },
@@ -721,6 +765,9 @@
         "profit": "Profit",
         "equity": "Equity"
       }
+    },
+    "calculator": {
+      "level": "Level"
     }
   },
   "manager-page": {
@@ -850,11 +897,14 @@
       "from-Fund": "From the fund"
     },
     "signal": {
-      "SubscribeSignal": "Subscribe to signal provider",
-      "ReceiveSignal": "Subscription to signal provider",
+      "SubscribeSignal": "Signal fee payment",
+      "ReceiveSignal": "Signal fee received",
       "DepositSignal": "Deposit to signal account",
       "WithdrawalSignal": "Withdrawal from signal account",
-      "Platform": "Platform transaction"
+      "Platform": "Platform transaction",
+      "amount": "Amount",
+      "to-signal-provider": "To the signal provider",
+      "signal-provider": "Signal provider"
     }
   },
   "wallet-page": {
@@ -1308,10 +1358,12 @@
         "providers": "Providers"
       },
       "fees": {
-        "trading": "Trading Commission",
+        "trading": "Trading fee",
         "ManagerSignalMasterVolumeFee": "Volume fee",
         "ManagerSignalMasterSuccessFee": "Manager Success fee",
-        "GvSignalSuccessFee": "Platform Success Fee"
+        "SuccessFee": "Success fee",
+        "GvSignalSuccessFee": "Platform Success Fee",
+        "total": "Total"
       }
     },
     "dashboard-page": {
@@ -1370,7 +1422,6 @@
         "chart": "Chart",
         "status": "Status"
       },
-
       "get-started": {
         "title": "Get started",
         "text-1": "There's no such data right now.",
@@ -1424,6 +1475,38 @@
     }
   },
   "manager": {
+    "program-settings": {
+      "title": "Program settings",
+      "period-and-closing": {
+        "title": "Period and closing",
+        "text-program": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
+        "text-period": "The current period of the program will end in one hour."
+      },
+      "password": {
+        "title": "Password",
+        "text": "Change the password of your trading account."
+      },
+      "broker": {
+        "title": "Broker",
+        "text": "A broker change in the program will occur automatically within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page."
+      },
+      "strategy": {
+        "title": "Strategy"
+      },
+      "avatar": {
+        "title": "Avatar"
+      },
+      "signaling-program": {
+        "title": "Signal provider"
+      },
+      "notifications": {
+        "broker-success": "Broker has been edited"
+      },
+      "buttons": {
+        "save": "Save",
+        "change-broker": "Change broker"
+      }
+    },
     "program-make-signal": {
       "success-alert-message": "Your program is a signal provider now"
     },
@@ -1716,13 +1799,6 @@
           "available-in-wallet": "Available in the wallet"
         },
         "validation": {
-          "title-required": "Title is required",
-          "title-is-short": "Title is too short",
-          "title-is-long": "Title is too long",
-          "title-is-latin-and-numbers": "Latin letters and numbers only.",
-          "description-is-long": "Description is too long",
-          "description-is-short": "Description is too short",
-          "description-required": "Description is required",
           "entry-fee-required": "Entry fee is required",
           "exit-fee-required": "Exit fee is required",
           "assets-share": "Total share of all assets should be equal to 100%",
@@ -1803,6 +1879,27 @@
       "title": "Reallocate",
       "apply": "Confirm",
       "success-alert-message": "Your assets were successfully reallocated!"
+    },
+    "level-calculator": {
+      "title": "Calculator",
+      "program": "Program",
+      "genesis-ratio": "Genesis Ratio",
+      "age": "Age",
+      "weighted-volume-scale": "Weighted volume scale",
+      "manager-balance": "Manager balance",
+      "current-av-to-invest": "Av. to invest (current)",
+      "new-av-to-invest": "Av. to invest (new)",
+      "current-investment-scale": "Investment scale (current)",
+      "new-investment-scale": "Investment scale (new)",
+      "age-tooltip": "The age of the program.",
+      "genesis-ratio-tooltip": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. \nIf Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
+      "weighted-volume-scale-tooltip": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. \nIt is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+      "manager-balance-tooltip": "The current value of manager funds in the program.",
+      "current-av-to-invest-tooltip": "The current amount available for investment into the program. The investment limit and the funds already deposited are not taken into account.",
+      "new-av-to-invest-tooltip": "The new Av. to invest value you receive as a result of changing parameters within the calculator.",
+      "current-investment-scale-tooltip": "The current value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 3 to 20. \nAv. to invest = Investment scale * Manager Balance",
+      "new-investment-scale-tooltip": "The new value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 3 to 20. \nAv. to invest = Investment scale * Manager Balance",
+      "kyc-disclaimer": "All of your investment programs are limited to the first level since you have not yet completed the KYC verification procedure. The maximum amount of investment you can attract at the first level is the equivalent of 1000 USD."
     }
   }
 }

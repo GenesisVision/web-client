@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -29,6 +28,7 @@ import {
   programTagsSelector
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { convertToArray } from "shared/utils/helpers";
 
 import * as programsService from "../../services/programs-table.service";

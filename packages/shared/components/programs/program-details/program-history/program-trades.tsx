@@ -4,6 +4,7 @@ import { CancelablePromise, OrderModel } from "gv-api-web";
 import moment from "moment";
 import { useCallback, useEffect, useState } from "react";
 import * as React from "react";
+import { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
@@ -44,9 +45,10 @@ const _ProgramTrades: React.FC<Props> = ({
   fetchTrades,
   t
 }) => {
-  const fetchProgramTrades: GetItemsFuncType = (filters?: FilteringType) =>
-    fetchTrades(programId, filters);
-
+  const fetchProgramTrades: GetItemsFuncType = useCallback(
+    (filters?: FilteringType) => fetchTrades(programId, filters),
+    []
+  );
   const columns = isForex
     ? PROGRAM_FOREX_TRADES_COLUMNS
     : PROGRAM_TRADES_COLUMNS;
@@ -129,14 +131,19 @@ const _ProgramTrades: React.FC<Props> = ({
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--commission">
               <Tooltip
-                disable={!trade.showOriginalCommission}
-                render={() => (
-                  <div>
-                    {`${formatValue(trade.originalCommission, DECIMAL_SCALE)} ${
-                      trade.originalCommissionCurrency
-                    }`}
-                  </div>
-                )}
+                render={() =>
+                  trade.showOriginalCommission ? (
+                    <div>
+                      {`${formatValue(trade.originalCommission, 8)} ${
+                        trade.originalCommissionCurrency
+                      }`}
+                    </div>
+                  ) : (
+                    <div>
+                      {`${formatValue(trade.commission, 8)} ${currency}`}
+                    </div>
+                  )
+                }
               >
                 <NumberFormat
                   value={formatValue(trade.commission, DECIMAL_SCALE)}

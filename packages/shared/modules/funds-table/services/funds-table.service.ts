@@ -2,11 +2,6 @@ import { push } from "connected-react-router";
 import { FundsList } from "gv-api-web";
 import * as qs from "qs";
 import {
-  FUNDS_FACET_ROUTE,
-  FUNDS_FAVORITES_TAB_NAME,
-  FUNDS_TAB_ROUTE
-} from "shared/components/funds/funds.routes";
-import {
   ComposeFiltersAllType,
   TFilter
 } from "shared/components/table/components/filtering/filter.type";
@@ -16,6 +11,11 @@ import {
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
+import {
+  FUNDS_FACET_ROUTE,
+  FUNDS_FAVORITES_TAB_NAME,
+  FUNDS_TAB_ROUTE
+} from "shared/routes/funds.routes";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 import { MiddlewareDispatch } from "shared/utils/types";

@@ -1,13 +1,18 @@
 import "shared/components/details/details.scss";
 
-import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
+import {
+  LevelsParamsInfo,
+  ProgramBalanceChart,
+  ProgramDetailsFull
+} from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/login/login.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found";
 import {
+  getPlatformLevelsParameters,
   getProgramDescription,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
@@ -17,6 +22,7 @@ import {
 } from "shared/components/programs/program-details/services/program-details.types";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { kycConfirmedSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
@@ -27,6 +33,7 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
   state = {
     hasError: false,
     isPending: false,
+    levelsParameters: undefined,
     description: undefined,
     profitChart: undefined,
     balanceChart: undefined,
@@ -34,7 +41,8 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    this.updateDetails()
+    const update = this.updateDetails();
+    update
       .then(data => getProgramStatistic(data.id))
       .then(data => {
         this.setState({ isPending: false, ...data });
@@ -42,6 +50,9 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
       .catch(() => {
         this.setState({ isPending: false });
       });
+    update
+      .then(data => getPlatformLevelsParameters(data.currency))
+      .then(levelsParameters => this.setState({ levelsParameters }));
   }
 
   updateDetails = () => {
@@ -65,9 +76,11 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
       descriptionSection,
       historySection,
       currency,
-      isAuthenticated
+      isAuthenticated,
+      isKycConfirmed
     } = this.props;
     const {
+      levelsParameters,
       hasError,
       description,
       statistic,
@@ -77,7 +90,7 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
     if (hasError) return <NotFoundPage />;
     return (
       <ProgramDetailsContainer
-        condition={!!description}
+        condition={!!description && !!levelsParameters}
         loader={<DetailsContainerLoader />}
         updateDetails={this.updateDetails}
         redirectToLogin={service.redirectToLogin}
@@ -89,6 +102,8 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
         statistic={statistic}
         currency={currency}
         isAuthenticated={isAuthenticated}
+        levelsParameters={levelsParameters!}
+        isKycConfirmed={isKycConfirmed}
       />
     );
   }
@@ -96,7 +111,8 @@ class _ProgramDetailsPage extends React.PureComponent<Props, State> {
 
 const mapStateToProps = (state: RootState): StateProps => ({
   currency: currencySelector(state),
-  isAuthenticated: isAuthenticatedSelector(state)
+  isAuthenticated: isAuthenticatedSelector(state),
+  isKycConfirmed: kycConfirmedSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -113,6 +129,7 @@ interface OwnProps {
 
 interface StateProps {
   isAuthenticated: boolean;
+  isKycConfirmed: boolean;
   currency: CurrencyEnum;
 }
 
@@ -132,6 +149,7 @@ interface State {
   profitChart?: ProgramDetailsProfitChart;
   balanceChart?: ProgramBalanceChart;
   statistic?: ProgramDetailsStatistic;
+  levelsParameters?: LevelsParamsInfo;
 }
 
 const ProgramDetailsPage = compose<React.ComponentType<OwnProps>>(

@@ -1,0 +1,47 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.calculator-level-line {
+  @include adaptive-margin(bottom, $padding-xxsmall);
+  padding: 10px 0 30px;
+
+  &__substrate {
+    background-color: rgba($main-color, 0.1);
+  }
+
+  &__label {
+    @include font-size($font-size-small);
+    @include adaptive-margin(bottom, $padding-xxsmall);
+    color: $calculator-label-color;
+  }
+
+  &__value {
+    @include font-size(15px);
+    font-weight: 600;
+    margin-left: 5px;
+  }
+
+  &__marks {
+    position: relative;
+  }
+
+  &__mark {
+    @include font-size($font-size-small);
+    top: 10px;
+    position: absolute;
+    transform: translateX(-50%);
+    color: $text-color;
+
+    &--active {
+      color: $primary-color;
+    }
+
+    &:first-child {
+      transform: translateX(0);
+    }
+
+    &:last-child {
+      transform: translateX(-100%);
+    }
+  }
+}

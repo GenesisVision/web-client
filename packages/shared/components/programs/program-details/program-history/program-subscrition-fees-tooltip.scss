@@ -1,0 +1,9 @@
+@import "~shared/styles/_colors";
+
+.subscription-fees {
+  .fee-commission {
+    &__value {
+      color: $positive-color;
+    }
+  }
+}

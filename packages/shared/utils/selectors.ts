@@ -11,14 +11,14 @@ export const apiSelector = <T, U = RootState>(
   return (state: U): TData<T> => func(selector(state).data);
 };
 
-export const fieldSelector = <T = RootState>(selector: (state: T) => any) =>
-  memoize((state: T): any => selector(state));
+export const fieldSelector = <R1, S = RootState>(selector: (state: S) => R1) =>
+  memoize((state: S): R1 => selector(state));
 
-export const apiFieldSelector = <T, U = RootState>(
-  innerApiSelector: (state: U) => TData<T>,
-  innerFieldSelector: (state: T) => any,
-  emptyValue?: any
-) => (state: U) => {
+export const apiFieldSelector = <R1, T, S = RootState>(
+  innerApiSelector: (state: S) => TData<R1>,
+  innerFieldSelector: (state: R1) => T,
+  emptyValue?: T
+) => (state: S) => {
   const data = innerApiSelector(state);
-  return data ? innerFieldSelector(data) : emptyValue;
+  return data !== undefined ? innerFieldSelector(data) : emptyValue!;
 };

@@ -7,7 +7,10 @@ import {
   DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { mapServerTimeFrameToFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  SortingColumn
+} from "shared/components/table/components/filtering/filter.type";
 import {
   GetItemsFuncType,
   TableToggleFavoriteType
@@ -29,7 +32,8 @@ const _ProgramsFacetTable: React.FC<
   getItems,
   isAuthenticated,
   showRating,
-  timeframe
+  timeframe,
+  columns
 }) => {
   const toggleFavorite: TableToggleFavoriteType = useCallback(
     (program, updateRow) => () => {
@@ -81,6 +85,7 @@ const _ProgramsFacetTable: React.FC<
       getItems={getItems}
       isAuthenticated={isAuthenticated}
       showRating={showRating}
+      columns={columns}
     />
   );
 };
@@ -92,6 +97,8 @@ export interface IProgramsFacetTableProps {
   getItems: GetItemsFuncType;
   isAuthenticated?: boolean;
   showRating?: boolean;
+  level?: number;
+  columns?: SortingColumn[];
 }
 
 const ProgramsFacetTable = translate()(React.memo(_ProgramsFacetTable));

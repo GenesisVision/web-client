@@ -4,8 +4,6 @@ import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
-import { SIGNUP_ROUTE } from "shared/components/auth/signup/signup.routes";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import GVButton from "shared/components/gv-button";
 import { Icon } from "shared/components/icon/icon";
@@ -18,6 +16,7 @@ import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import { ProfileWidgetLoader } from "shared/components/profile-widget/profile-widget.loader";
 import WalletWidgetContainer from "shared/components/wallet-widget/wallet-widget-container";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
+import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 
 class _Header extends React.PureComponent<Props, State> {
   state = {

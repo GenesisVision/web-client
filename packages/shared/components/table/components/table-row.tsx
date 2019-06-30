@@ -9,7 +9,7 @@ const TableRow: React.FC<Props> = ({ className = "", children, ...other }) => (
 );
 
 interface Props {
-  onClick?(e: any): void;
+  onClick?(e: React.MouseEvent<HTMLTableRowElement>): void;
   className?: string;
   children: ReactNode;
 }

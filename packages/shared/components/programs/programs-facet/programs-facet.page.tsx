@@ -1,3 +1,5 @@
+import "./programs-facet.scss";
+
 import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import FacetContainer, {
@@ -15,12 +17,15 @@ import { getCurrentFacet } from "./services/programs-facet.service";
 const _ProgramsFacetPage: React.FC<InjectedTranslateProps> = ({ t }) => {
   const getPrograms = useCallback(
     (filters: ComposeFiltersAllType): Promise<IDataModel> =>
-      fetchPrograms(filters).then(data => ({
+      fetchPrograms({
+        ...filters
+      }).then(data => ({
         total: data.total,
         items: data.programs
       })),
     []
   );
+
   return (
     <Page title={t("programs-page.title")}>
       <Surface className="programs-table-container">

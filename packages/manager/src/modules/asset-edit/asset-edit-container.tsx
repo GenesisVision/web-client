@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { ASSET } from "shared/constants/constants";
-import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  MiddlewareDispatch,
+  ResponseError
+} from "shared/utils/types";
 
 import AssetEditForm, {
   IAssetEditFormValues,
@@ -61,7 +65,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
 
 export interface IAssetEditInfo extends IAssetEditFormValues {
   id: string;
-  currency?: string;
+  currency?: CurrencyEnum;
 }
 
 interface OwnProps {

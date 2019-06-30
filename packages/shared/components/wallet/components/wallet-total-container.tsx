@@ -17,25 +17,29 @@ import WalletTotal from "./wallet-total";
 const _WalletTotalContainer: React.FC<Props & WalletRouteProps> = ({
   wallet,
   t,
-  copyTradingAccounts
+  copyTradingAccounts,
+  copyTradingAccountsPending
 }) => (
   <WalletTotal
     condition={!!wallet}
     loader={<WalletContainerLoader />}
     wallet={wallet!}
     copyTradingAccounts={copyTradingAccounts}
+    copyTradingAccountsPending={copyTradingAccountsPending}
   />
 );
 
 const mapStateToProps = (state: RootState): StateProps => ({
   wallet: walletSelector(state),
-  copyTradingAccounts: copyTradingAccountsSelector(state)
+  copyTradingAccounts: copyTradingAccountsSelector(state),
+  copyTradingAccountsPending: state.copyTradingAccounts.info.isPending
 });
 
 interface Props extends StateProps, InjectedTranslateProps, WithRoleProps {}
 
 interface StateProps {
   copyTradingAccounts: CopyTradingAccountInfo[];
+  copyTradingAccountsPending: boolean;
   wallet?: WalletMultiSummary;
 }
 

@@ -1,4 +1,5 @@
 import { ProgramDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo } from "gv-api-web/src";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -8,9 +9,14 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
+import { ILevelCalculatorProps } from "../program-details.types";
+
 interface IInvestmentProgramInfoProps {
   isOwnProgram?: boolean;
   programDescription: ProgramDetailsFull;
+  LevelCalculator?: React.ComponentType<ILevelCalculatorProps>;
+  levelsParameters?: LevelsParamsInfo;
+  isKycConfirmed?: boolean;
 }
 
 const renderFee = (
@@ -35,7 +41,14 @@ const renderFee = (
 
 const InvestmentProgramInfo: React.FC<
   InjectedTranslateProps & IInvestmentProgramInfoProps
-> = ({ t, programDescription, isOwnProgram }) => {
+> = ({
+  t,
+  isOwnProgram,
+  programDescription,
+  levelsParameters,
+  LevelCalculator,
+  isKycConfirmed
+}) => {
   const {
     availableInvestmentBase,
     availableInvestmentLimit,
@@ -55,6 +68,17 @@ const InvestmentProgramInfo: React.FC<
   return (
     <>
       <div className="program-details-description__statistic-container">
+        {LevelCalculator && isOwnProgram && (
+          <div className="statistics-item program-details-description__level-calculator">
+            <LevelCalculator
+              id={programDescription.id}
+              currency={programDescription.currency}
+              title={programDescription.title}
+              levelsParameters={levelsParameters!}
+              isKycConfirmed={isKycConfirmed!}
+            />
+          </div>
+        )}
         <StatisticItem
           label={
             <TooltipLabel
