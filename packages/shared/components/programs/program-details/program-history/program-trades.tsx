@@ -1,6 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
-import { CancelablePromise, OrderModel } from "gv-api-web";
+import { OrderModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { useCallback } from "react";
@@ -190,10 +190,7 @@ const _DownloadButtonToolbar: React.FC<IDownloadButtonToolbar> = ({
   programId
 }) => (
   <div className="dashboard__button-container dashboard__button">
-    <a
-      href={filesService.getExportFileUrl(programId, filtering)}
-      className={"gv-btn"}
-    >
+    <a href={filesService.getExportFileUrl(programId, filtering)}>
       <GVButton color="primary" variant="text">
         {t("program-details-page.history.trades.download")}
       </GVButton>
