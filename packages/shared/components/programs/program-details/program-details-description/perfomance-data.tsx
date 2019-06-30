@@ -7,6 +7,7 @@ import PieContainerSmall from "shared/components/pie-container/pie-container-sma
 import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
 const _PerfomanceData: React.FC<Props> = ({
   t,
@@ -40,7 +41,14 @@ const _PerfomanceData: React.FC<Props> = ({
         suffix={"days"}
       />
     </StatisticItem>
-    <StatisticItem label={t("program-details-page.description.genesis-ratio")}>
+    <StatisticItem
+      label={
+        <TooltipLabel
+          tooltipContent={t("program-details-page.tooltip.genesis-ratio")}
+          labelText={t("program-details-page.description.genesis-ratio")}
+        />
+      }
+    >
       <PieContainerSmall
         start={levelsParameters.genesisRatioMin}
         end={levelsParameters.genesisRatioMax}
@@ -48,7 +56,12 @@ const _PerfomanceData: React.FC<Props> = ({
       />
     </StatisticItem>
     <StatisticItem
-      label={t("program-details-page.description.investment-scale")}
+      label={
+        <TooltipLabel
+          tooltipContent={t("program-details-page.tooltip.investment-scale")}
+          labelText={t("program-details-page.description.investment-scale")}
+        />
+      }
     >
       <PieContainerSmall
         start={levelsParameters.investmentScaleMin}
@@ -56,7 +69,14 @@ const _PerfomanceData: React.FC<Props> = ({
         value={programDescription.investmentScale}
       />
     </StatisticItem>
-    <StatisticItem label={t("program-details-page.description.volume-scale")}>
+    <StatisticItem
+      label={
+        <TooltipLabel
+          tooltipContent={t("program-details-page.tooltip.volume-scale")}
+          labelText={t("program-details-page.description.volume-scale")}
+        />
+      }
+    >
       <PieContainerSmall
         start={levelsParameters.volumeScaleMin}
         end={levelsParameters.volumeScaleMax}
