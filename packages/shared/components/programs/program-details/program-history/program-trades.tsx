@@ -167,11 +167,6 @@ const _ProgramTrades: React.FC<Props> = ({
   );
 };
 
-export type TGetTradeExport = (
-  programId: string,
-  dateRange?: DateRangeFilterType
-) => CancelablePromise<any>;
-
 interface OwnProps {
   isForex: boolean;
   currency: CURRENCIES;
