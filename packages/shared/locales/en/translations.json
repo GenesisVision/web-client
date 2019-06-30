@@ -688,6 +688,9 @@
       }
     },
     "tooltip": {
+      "investment-scale": "The current value of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 3 to 20. Av. to invest = Investment scale * Manager Balance",
+      "volume-scale": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+      "genesis-ratio": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
       "av-to-invest": "The amount available for investment up to the next period.",
       "entry-fee": "The commission that is paid to the manager by an investor for investing in the program. The commission is set by the manager and calculated as a percentage of the amount invested. The commission is charged when investing in programs that have reached the third level.",
       "success-fee": "The commission charged from the profit. It is set by the manager and calculated as a percentage of the profits earned over a certain period of time. If there is no profit, then there is no success fee charged.",
