@@ -3,6 +3,7 @@ import "shared/components/details/details-description-section/details-statistic-
 import { OrderModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
+import { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
@@ -36,8 +37,10 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
   fetchTrades,
   t
 }) => {
-  const fetchProgramTrades: GetItemsFuncType = (filters?: FilteringType) =>
-    fetchTrades(programId, filters);
+  const fetchProgramTrades: GetItemsFuncType = useCallback(
+    (filters?: FilteringType) => fetchTrades(programId, filters),
+    []
+  );
   const columns = isForex
     ? PROGRAM_FOREX_TRADES_COLUMNS
     : PROGRAM_TRADES_COLUMNS;
