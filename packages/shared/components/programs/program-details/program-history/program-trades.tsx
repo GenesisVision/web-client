@@ -2,12 +2,10 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { CancelablePromise, OrderModel } from "gv-api-web";
 import moment from "moment";
-import { useCallback, useEffect, useState } from "react";
 import * as React from "react";
 import { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import GVButton from "shared/components/gv-button";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -38,7 +36,6 @@ import download from "../../../../utils/download";
 const DECIMAL_SCALE = 8;
 
 const _ProgramTrades: React.FC<Props> = ({
-  getTradeExport,
   isForex,
   currency,
   programId,
@@ -59,8 +56,6 @@ const _ProgramTrades: React.FC<Props> = ({
         <DownloadButtonToolbar
           filtering={filtering!.dateRange}
           programId={programId}
-          getTradeExport={getTradeExport}
-          //handleClick={getTradesExport(filtering!.dateRange)}
         />
       )}
       getItems={fetchProgramTrades}
@@ -178,7 +173,6 @@ export type TGetTradeExport = (
 ) => CancelablePromise<any>;
 
 interface OwnProps {
-  getTradeExport?: TGetTradeExport;
   isForex: boolean;
   currency: CURRENCIES;
   programId: string;
@@ -193,7 +187,6 @@ interface Props extends InjectedTranslateProps, OwnProps {}
 interface IDownloadButtonToolbar extends InjectedTranslateProps {
   filtering: any;
   programId: string;
-  getTradeExport?: TGetTradeExport;
 }
 
 const _DownloadButtonToolbar: React.FC<IDownloadButtonToolbar> = ({

@@ -72,7 +72,6 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       subscriptionsCount
     } = this.state;
     const {
-      getTradeExport,
       isForex,
       t,
       programId,
@@ -121,7 +120,6 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
         <div>
           {tab === TABS.TRADES && (
             <ProgramTrades
-              getTradeExport={getTradeExport}
               isForex={isForex}
               fetchTrades={fetchTrades}
               programId={programId}
@@ -177,7 +175,6 @@ interface OwnProps {
   isInvested: boolean;
   eventTypeFilterValues: SelectFilterValue[];
   isOwnProgram: boolean;
-  getTradeExport?: TGetTradeExport;
 }
 
 interface StateProps extends AuthState {}

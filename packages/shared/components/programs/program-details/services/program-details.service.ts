@@ -12,8 +12,8 @@ import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-per
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
-  TableItems,
-  mapToTableItems
+  mapToTableItems,
+  TableItems
 } from "shared/components/table/helpers/mapper";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -32,7 +32,6 @@ import getParams from "shared/utils/get-params";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { HistoryCountsType } from "../program-details.types";
-import { TGetTradeExport } from "../program-history/program-trades";
 import { ProgramStatisticResult } from "./program-details.types";
 
 export const getProgramBrokers = (id: string) =>
@@ -227,13 +226,3 @@ export const fetchPortfolioEvents: GetItemsFuncType = (
     mapToTableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>("events")
   );
 };
-
-export const getTradeExport: TGetTradeExport = (programId, dateRange) =>
-  programsApi.v10ProgramsByProgramIdTradesExportGet(
-    programId,
-    authService.getAuthArg(),
-    {
-      start: dateRange ? (dateRange.dateStart as Date) : undefined,
-      end: dateRange ? (dateRange.dateEnd as Date) : undefined
-    }
-  );

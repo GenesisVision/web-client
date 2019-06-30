@@ -13,8 +13,7 @@ import ProgramDetailsStatisticSection from "shared/components/programs/program-d
 import {
   fetchOpenPositions,
   fetchProgramTrades,
-  getProgramStatistic,
-  getTradeExport
+  getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
 import {
   ProgramDetailsProfitChart,
@@ -92,7 +91,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               }
               isForex={description.brokerDetails.isForex}
               isSignalProgram={description.isSignalProgram}
-              getTradeExport={getTradeExport}
               fetchOpenPositions={fetchOpenPositions}
               fetchTrades={fetchProgramTrades}
               fetchPortfolioEvents={fetchHistoryPortfolioEvents}
