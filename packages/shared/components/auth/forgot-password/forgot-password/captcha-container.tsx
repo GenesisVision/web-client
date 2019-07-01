@@ -27,50 +27,31 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     password: "",
     code: ""
   };
-  componentDidMount() {
-    /*const { email, password, service, type } = this.props;
-    if (type !== undefined && (email === "" || password === "")) {
-      service.showNotFoundPage();
-    }*/
-  }
-  componentWillUnmount() {
-    // this.props.service.clearLoginData();
-  }
+
   componentDidUpdate(): void {
-    const {
-      isSubmit,
-      prefix,
-      captchaType,
-      email,
-      id,
-      setSubmitting
-    } = this.state;
+    const { isSubmit, prefix, email, id, setSubmitting } = this.state;
     const { service } = this.props;
     if (isSubmit) {
-      switch (captchaType) {
-        case "Pow":
-        default:
-          if (prefix) {
-            service.forgotPassword(
-              {
-                email,
-                captchaCheckResult: {
-                  id,
-                  pow: {
-                    prefix
-                  },
-                  geeTest: {}
-                }
-              },
-              setSubmitting!
-            );
-            this.setState({
-              pow: undefined,
-              prefix: undefined,
-              isSubmit: false
-            });
-          }
-          break;
+      if (prefix) {
+        const captchaCheckResult = {
+          id,
+          pow: {
+            prefix
+          },
+          geeTest: {}
+        };
+        service.forgotPassword(
+          {
+            email,
+            captchaCheckResult
+          },
+          setSubmitting!
+        );
+        this.setState({
+          pow: undefined,
+          prefix: undefined,
+          isSubmit: false
+        });
       }
     }
   }
