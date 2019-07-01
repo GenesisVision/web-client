@@ -354,7 +354,6 @@ const CreateFundSettings = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<ICreateFundSettingsProps, ICreateFundSettingsFormValues>({
     displayName: "CreateFundSettingsForm",
-    enableReinitialize: true,
     mapPropsToValues: ({ wallet }) => {
       return {
         [CREATE_FUND_FIELDS.depositWalletId]: wallet.id,

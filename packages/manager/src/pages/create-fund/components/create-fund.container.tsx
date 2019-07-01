@@ -80,11 +80,13 @@ class _CreateFundContainer extends React.PureComponent<Props, State> {
       fundAssets,
       wallets
     } = this.props;
-    if (!platformSettings || !wallets || !minimumDepositAmount) return null;
+    if (!platformSettings || !wallets.length || !minimumDepositAmount)
+      return null;
+
     return (
       <div className="create-fund-container">
         <div>
-          {!isPending && wallets && (
+          {!isPending && (
             <CreateFundSettingsSection
               fetchWallets={service.fetchWallets}
               wallets={wallets}
