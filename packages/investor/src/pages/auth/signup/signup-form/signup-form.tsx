@@ -114,7 +114,7 @@ interface OwnProps {
   refCode?: string;
 }
 
-interface ISignUpFormFormValues extends RegisterInvestorViewModel {
+export interface ISignUpFormFormValues extends RegisterInvestorViewModel {
   [SIGNUP_FORM_FIELDS.privacyPolicy]: boolean;
   [SIGNUP_FORM_FIELDS.acceptTerms]: boolean;
   [SIGNUP_FORM_FIELDS.residentUSA]: boolean;
