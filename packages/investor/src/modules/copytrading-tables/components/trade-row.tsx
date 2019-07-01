@@ -9,30 +9,27 @@ import {
   closeCopytradingTrade
 } from "modules/copytrading-tables/services/copytrading-tables.service";
 import moment from "moment";
-import { useState } from "react";
 import * as React from "react";
+import { useState } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import Chip from "shared/components/chip/chip";
+import Count from "shared/components/avatar/count/count";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVButton from "shared/components/gv-button";
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "shared/components/popover/popover";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateRowFuncType } from "shared/components/table/components/table.types";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
+
+import ProvidersPopup from "./providers-popup";
 
 const _TradeRow: React.FC<Props> = ({
   trade,
@@ -48,16 +45,7 @@ const _TradeRow: React.FC<Props> = ({
   const hasOtherPrograms = otherPrograms.length > 1;
   return (
     <>
-      <TableRow
-        className="details-trades__row"
-        onClick={
-          hasOtherPrograms
-            ? event => {
-                toggleSubrows(event.currentTarget);
-              }
-            : undefined
-        }
-      >
+      <TableRow className="details-trades__row">
         <TableCell className="details-trades__cell traders-avatar">
           <div className="dashboard-programs__cell--avatar-title">
             <Link
@@ -84,11 +72,14 @@ const _TradeRow: React.FC<Props> = ({
                 {program.title}
               </GVButton>
             </Link>
-            {hasOtherPrograms ? (
-              <Chip className={"traders-count"}>
-                +{otherPrograms.length - 1}
-              </Chip>
-            ) : null}
+            {hasOtherPrograms && (
+              <Count
+                count={otherPrograms.length - 1}
+                onClick={event => {
+                  toggleSubrows(event.currentTarget);
+                }}
+              />
+            )}
           </div>
         </TableCell>
         <TableCell className="details-trades__cell">
@@ -151,42 +142,22 @@ const _TradeRow: React.FC<Props> = ({
           </GVButton>
         </TableCell>
       </TableRow>
-      <Popover
-        ownWidth
-        className={"providers-table"}
-        anchorEl={anchor}
+      <ProvidersPopup
+        columns={OPEN_TRADES_PROVIDERS_COLUMNS}
+        anchor={anchor}
         onClose={() => toggleSubrows(undefined)}
-        horizontal={HORIZONTAL_POPOVER_POS.RELATIVE}
-        vertical={VERTICAL_POPOVER_POS.TOP}
-      >
-        <Table
-          items={otherPrograms}
-          columns={OPEN_TRADES_PROVIDERS_COLUMNS}
-          renderHeader={column => (
-            <span
-              className={`details-trades__head-cell program-details-trades__cell--${
-                column.name
-              }`}
-            >
-              {t(
-                `investor.copytrading-tables.open-trades-header.${column.name}`
-              )}
-            </span>
-          )}
-          renderBodyRow={(provider: OrderSignalProgramInfo) => {
-            return (
-              <TradeSubRow
-                title={title}
-                key={trade.id}
-                provider={provider}
-                tradeId={trade.id}
-                symbol={trade.symbol}
-                update={update}
-              />
-            );
-          }}
-        />
-      </Popover>
+        otherPrograms={otherPrograms}
+        renderRow={(provider: OrderSignalProgramInfo) => (
+          <TradeSubRow
+            title={title}
+            key={trade.id}
+            provider={provider}
+            tradeId={trade.id}
+            symbol={trade.symbol}
+            update={update}
+          />
+        )}
+      />
       <ConfirmPopup
         header={t("investor.copytrading-tables.close-trade-confirm.header")}
         body={t("investor.copytrading-tables.close-trade-confirm.body", {
