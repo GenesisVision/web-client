@@ -1,15 +1,15 @@
 import { FormikProps, withFormik } from "formik";
 import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
-import { boolean, mixed, number, object } from "yup";
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import { NumberFormatValues } from "react-number-format";
-import { validateFraction } from "shared/utils/formatter";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import GVFormikField from "shared/components/gv-formik-field";
+import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import { validateFraction } from "shared/utils/formatter";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
+import { boolean, mixed, number, object } from "yup";
 
 const _InvestmentLimit: React.FC<Props> = ({
   t,
@@ -28,7 +28,9 @@ const _InvestmentLimit: React.FC<Props> = ({
   return (
     <form id="edit-form" onSubmit={handleSubmit}>
       <div className="program-edit__block-wrapper">
-        <h3>{t("manager.create-program-page.settings.fields.investment-limit")}</h3>
+        <h3>
+          {t("manager.create-program-page.settings.fields.investment-limit")}
+        </h3>
         <GVFormikField
           type="checkbox"
           color="primary"
@@ -55,15 +57,18 @@ const _InvestmentLimit: React.FC<Props> = ({
             />
           </div>
         )}
+        <p className="program-edit__text">
+          {t("manager.program-settings.investment-limit.text")}
+        </p>
+        <GVButton
+          color="primary"
+          type={"submit"}
+          className="invest-form__submit-button"
+          disabled={!dirty || !isValid || isSubmitting}
+        >
+          {t("manager.program-settings.buttons.save")}
+        </GVButton>
       </div>
-      <GVButton
-        color="primary"
-        type={"submit"}
-        className="invest-form__submit-button"
-        disabled={!dirty || !isValid || isSubmitting}
-      >
-        {t("manager.program-settings.buttons.save")}
-      </GVButton>
     </form>
   );
 };
