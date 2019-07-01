@@ -2,7 +2,6 @@ import { ForgotPasswordViewModel } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import {
   AuthRootState,
   MiddlewareDispatch,
@@ -131,10 +130,9 @@ interface OwnProps {
   ) => JSX.Element;
 }
 
-interface Props extends OwnProps, StateProps, DispatchProps, WithRoleProps {}
+interface Props extends OwnProps, StateProps, DispatchProps {}
 
 const CaptchaContainer = compose<React.ComponentType<OwnProps>>(
-  withRole,
   connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
     mapStateToProps,
     mapDispatchToProps
