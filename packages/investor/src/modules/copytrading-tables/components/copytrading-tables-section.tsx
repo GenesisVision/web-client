@@ -10,6 +10,7 @@ import {
 } from "../services/copytrading-tables.service";
 import OpenTradesTable from "./open-trades-table";
 import TradesHistoryTable from "./trades-history-table";
+import TradesLogTable from "./trades-log-table";
 
 class _CopytradingTablesSection extends React.PureComponent<
   ICopytradingTablesSectionProps & InjectedTranslateProps,
@@ -18,6 +19,7 @@ class _CopytradingTablesSection extends React.PureComponent<
   state = {
     tab: TABS.OPEN_TRADES,
     openTradesCount: undefined,
+    logCount: undefined,
     historyCount: undefined
   };
 
@@ -32,7 +34,7 @@ class _CopytradingTablesSection extends React.PureComponent<
   };
 
   render() {
-    const { tab, openTradesCount, historyCount } = this.state;
+    const { tab, openTradesCount, historyCount, logCount } = this.state;
     const { t, title, currency } = this.props;
     return (
       <Surface>
@@ -49,6 +51,11 @@ class _CopytradingTablesSection extends React.PureComponent<
               label={t("investor.copytrading-tables.history")}
               count={historyCount}
             />
+            <GVTab
+              value={TABS.LOG}
+              label={t("investor.copytrading-tables.log")}
+              count={logCount}
+            />
           </GVTabs>
         </div>
         {tab === TABS.OPEN_TRADES && (
@@ -57,12 +64,14 @@ class _CopytradingTablesSection extends React.PureComponent<
         {tab === TABS.HISTORY && (
           <TradesHistoryTable title={title} currency={currency} />
         )}
+        {tab === TABS.LOG && <TradesLogTable currency={currency} />}
       </Surface>
     );
   }
 }
 
 enum TABS {
+  LOG = "LOG",
   OPEN_TRADES = "OPEN_TRADES",
   HISTORY = "HISTORY"
 }
