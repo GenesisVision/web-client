@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
@@ -35,7 +34,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
     ? PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
     : PROGRAM_FINANCIAL_STATISTIC_COLUMNS;
 
-  const fetchStatistic: GetItemsFuncType = useCallback(
+  const fetchStatistic: GetItemsFuncType = React.useCallback(
     (filters?: FilteringType) => fetchFinancialStatistic(id, filters),
     []
   );
