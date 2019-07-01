@@ -10,9 +10,9 @@ export const FeeCommission: React.FC<Props> = ({
   className
 }) => (
   <div className={classNames("fee-commission", className)}>
-    <span className={"fee-commission__title"}>{title}</span>
-    <span className={"fee-commission__value"}>
-      {value} <span className={"fee-commission__currency"}>{currency}</span>
+    <span className="fee-commission__title">{title}</span>
+    <span className="fee-commission__value">
+      {value} <span className="fee-commission__currency">{currency}</span>
     </span>
   </div>
 );
