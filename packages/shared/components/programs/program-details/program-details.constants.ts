@@ -10,7 +10,18 @@ import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 export const PROGRAM_TRADES_SORTING = "ByDateDesc";
-export const PROGRAM_FOREX_TRADES_COLUMNS: SortingColumn[] = [
+
+export const generateProgramTradesColumns = (
+  hideSwaps?: boolean,
+  hideTickets?: boolean
+) =>
+  PROGRAM_TRADES_COLUMNS.filter(
+    column =>
+      (hideSwaps ? column.name !== "swap" : true) &&
+      (hideTickets ? column.name !== "ticket" : true)
+  );
+
+export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
     name: "direction-entry",
     sortingName: "ByDirection"
@@ -46,36 +57,6 @@ export const PROGRAM_FOREX_TRADES_COLUMNS: SortingColumn[] = [
   {
     name: "ticket",
     sortingName: "ByTicket"
-  }
-];
-export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
-  {
-    name: "direction-entry",
-    sortingName: "ByDirection"
-  },
-  {
-    name: "symbol",
-    sortingName: "BySymbol"
-  },
-  {
-    name: "volume",
-    sortingName: "ByVolume"
-  },
-  {
-    name: "price",
-    sortingName: "ByPrice"
-  },
-  {
-    name: "profit",
-    sortingName: "ByProfit"
-  },
-  {
-    name: "commission",
-    sortingName: "ByCommission"
-  },
-  {
-    name: "date",
-    sortingName: "ByDate"
   }
 ];
 export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [

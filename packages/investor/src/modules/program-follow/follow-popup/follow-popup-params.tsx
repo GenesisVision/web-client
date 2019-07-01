@@ -9,6 +9,7 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -103,7 +104,14 @@ const _FollowParams: React.FC<
       <div className="dialog-field">
         <InputAmountField
           name={FIELDS.openTolerancePercent}
-          label={t("follow-program.params.tolerance-percent")}
+          label={
+            <TooltipLabel
+              tooltipContent={t(
+                "follow-program.params.tolerance-percent-tooltip"
+              )}
+              labelText={t("follow-program.params.tolerance-percent")}
+            />
+          }
           currency={"%"}
           setMax={setMaxOpenTolerancePercent}
         />

@@ -5,10 +5,14 @@ const lerp = (from: number, to: number, progress: number) =>
 
 export const calcInvestmentScale = (
   programAge: number,
-  genesisRation: number,
+  genesisRatio: number,
   weightedVolumeScale: number,
   levelsParameters: LevelsParamsInfo
 ) => {
+  if (genesisRatio < levelsParameters.genesisRatioHighRisk) {
+    return 1;
+  }
+
   const ageByVolume = programAge * weightedVolumeScale;
   const ageByVolumeGuard = Math.min(
     ageByVolume,
@@ -19,20 +23,16 @@ export const calcInvestmentScale = (
   return lerp(
     levelsParameters.investmentScaleMin,
     levelsParameters.investmentScaleMax,
-    progress * genesisRation
+    progress * genesisRatio
   );
 };
 
 export const calcNewAvailableToInvest = (
   investmentScale: number,
   managerBalance: number,
-  genesisRatio: number,
   levelsParameters: LevelsParamsInfo
 ) => {
-  let newAvailableToInvest = managerBalance;
-  if (genesisRatio >= levelsParameters.genesisRatioHighRisk) {
-    newAvailableToInvest *= investmentScale;
-  }
+  const newAvailableToInvest = managerBalance * investmentScale;
 
   let newAvailableToInvestGuard = Math.min(
     newAvailableToInvest,

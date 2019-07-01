@@ -27,7 +27,7 @@
   min-width: 250px;
   border-radius: 8px;
   * {
-    color: $main-color;
+    color: $main-color !important;
   }
   &__header {
     padding: 30px 20px;

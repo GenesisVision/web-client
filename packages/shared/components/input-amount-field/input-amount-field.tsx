@@ -48,7 +48,7 @@ const _InputAmountField: React.FC<Props> = ({
 
 interface Props extends InjectedTranslateProps {
   name: string;
-  label: string;
+  label: React.ReactNode;
   currency: string;
   placeholder?: string;
   isAllow?: (values: NumberFormatValues) => boolean;
