@@ -2,11 +2,11 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { Route, Switch } from "react-router-dom";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found";
 import { composeUrl } from "shared/utils/compose-url";
 
 import WalletCurrencyContainer from "./components/wallet-currency.container";
-import WalletTotal from "./components/wallet-total";
+import WalletTotalContainer from "./components/wallet-total-container";
 import { fetchWallets } from "./services/wallet.services";
 
 export const WALLET_TOTAL_PAGE_ROUTE = "/wallet";
@@ -35,7 +35,7 @@ interface RouteProps {
 
 export interface WalletRouteProps extends RouteComponentProps<RouteProps> {}
 
-class WalletRoutes extends React.Component<DispatchProps, any> {
+class WalletRoutes extends React.PureComponent<DispatchProps, any> {
   componentDidMount() {
     this.props.fetchWallets();
   }
@@ -43,7 +43,11 @@ class WalletRoutes extends React.Component<DispatchProps, any> {
   render() {
     return (
       <Switch>
-        <Route exact path={WALLET_TOTAL_PAGE_ROUTE} component={WalletTotal} />
+        <Route
+          exact
+          path={WALLET_TOTAL_PAGE_ROUTE}
+          component={WalletTotalContainer}
+        />
         <Route
           path={WALLET_CURRENCY_PAGE_ROUTE}
           component={WalletCurrencyContainer}

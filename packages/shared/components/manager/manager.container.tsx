@@ -4,23 +4,14 @@ import { goBack } from "connected-react-router";
 import { ManagerProfile } from "gv-api-web";
 import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import { AuthRootState } from "shared/utils/types";
 
 import ManagerPage from "./manager.page";
+import ManagerPageLoader from "./manager.page.loader";
 import { fetchManagerProfile } from "./services/manager.service";
-
-export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
-
-export const MANAGERS_ROUTE = "/managers";
-export const MANAGER_DETAILS_ROUTE = `${MANAGERS_ROUTE}/:${MANAGER_SLUG_URL_PARAM_NAME}`;
-export const MANAGER_DETAILS_ROUTE_REGEXP = `${MANAGERS_ROUTE}/:${MANAGER_SLUG_URL_PARAM_NAME}(${SLUG_URL_REGEXP})`;
 
 class _ManagerContainer extends React.PureComponent<Props, State> {
   state = {
@@ -41,6 +32,7 @@ class _ManagerContainer extends React.PureComponent<Props, State> {
 
     return (
       <ManagerPage
+        loader={<ManagerPageLoader />}
         condition={!isPending && !!managerProfile}
         managerProfile={managerProfile!}
         isAuthenticated={isAuthenticated}
@@ -50,7 +42,7 @@ class _ManagerContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: AuthRootState): StateProps => ({
-  isAuthenticated: state.authData.isAuthenticated
+  isAuthenticated: isAuthenticatedSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -81,10 +73,13 @@ interface State {
   isPending: boolean;
 }
 
-const ManagerContainer = compose<React.ComponentType<OwnProps>>(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(_ManagerContainer)
-);
+const ManagerContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  AuthRootState
+>(
+  mapStateToProps,
+  mapDispatchToProps
+)(_ManagerContainer);
 export default ManagerContainer;

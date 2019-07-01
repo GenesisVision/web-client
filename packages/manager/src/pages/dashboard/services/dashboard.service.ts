@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
@@ -9,17 +10,17 @@ import { MiddlewareDispatch, TGetAuthState } from "shared/utils/types";
 import * as actions from "../actions/dashboard.actions";
 
 export const getPortfolioEvents = () => (dispatch: Dispatch) =>
-  dispatch(actions.fetchPortfolioEvents(authService.getAuthArg(), { take: 5 }));
+  dispatch(
+    actions.fetchPortfolioEventsAction(authService.getAuthArg(), { take: 5 })
+  );
 
 export const getAssetChart = (
   assetId: string,
   assetTitle: string,
   assetType: ASSETS_TYPES
 ) => (dispatch: Dispatch, getState: TGetAuthState) => {
-  const { currency } = getState().accountSettings;
   const { period } = getState().dashboard;
   const chartFilter = {
-    currency,
     dateFrom: period.start,
     dateTo: period.end,
     maxPointCount: 100
@@ -31,10 +32,11 @@ export const getAssetChart = (
       .v10ProgramsByIdChartsProfitGet(assetId, chartFilter)
       .then(data => {
         dispatch(
-          actions.dashboardChart({
+          actions.dashboardChartAction({
             type: assetType,
             id: assetId,
             title: assetTitle,
+            currency: data.programCurrency,
             pnLChart: data.pnLChart,
             equityChart: data.equityChart
           })
@@ -43,7 +45,7 @@ export const getAssetChart = (
   } else {
     fundsApi.v10FundsByIdChartsProfitGet(assetId, chartFilter).then(data => {
       dispatch(
-        actions.dashboardChart({
+        actions.dashboardChartAction({
           type: assetType,
           id: assetId,
           title: assetTitle,
@@ -55,7 +57,7 @@ export const getAssetChart = (
 };
 
 export const getAssets = () => (dispatch: Dispatch) =>
-  dispatch(actions.fetchAssets(authService.getAuthArg()));
+  dispatch(actions.fetchAssetsAction(authService.getAuthArg()));
 
 export const composeAssetChart = () => (
   dispatch: MiddlewareDispatch,
@@ -74,8 +76,8 @@ export const composeAssetChart = () => (
   dispatch(getAssetChart(asset.id, asset.title, assetType));
 };
 
-export const setPeriod = (period: any) => (dispatch: Dispatch) =>
-  dispatch(actions.setPeriod(period));
+export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
+  dispatch(actions.setPeriodAction(period));
 
 export const fetchAssetsCount = (): Promise<{
   programsCount: number;

@@ -1,5 +1,6 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { RegisterManagerViewModel } from "gv-api-web";
+import { CaptchaCheckResult, RegisterManagerViewModel } from "gv-api-web";
+import { SIGNUP_FORM_FIELDS } from "investor-web-portal/src/pages/auth/signup/signup-form/signup-form.types";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
@@ -10,7 +11,9 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 
-import validationSchema from "./signup-form.validators";
+import validationSchema, {
+  SIGN_UP_FORM_FIELDS
+} from "./signup-form.validators";
 
 const _SignUpForm: React.FC<
   InjectedFormikProps<Props, ISignUpFormFormValues>
@@ -23,7 +26,7 @@ const _SignUpForm: React.FC<
   >
     <GVFormikField
       type="text"
-      name="userName"
+      name={SIGN_UP_FORM_FIELDS.userName}
       label={t("auth.signup.username-field-text")}
       autoComplete="off"
       className="signup-form__username"
@@ -32,21 +35,21 @@ const _SignUpForm: React.FC<
     />
     <GVFormikField
       type="email"
-      name="email"
+      name={SIGN_UP_FORM_FIELDS.email}
       label={t("auth.signup.email-field-text")}
       autoComplete="email"
       component={GVTextField}
     />
     <GVFormikField
       type="password"
-      name="password"
+      name={SIGN_UP_FORM_FIELDS.password}
       label={t("auth.signup.password-field-text")}
       component={GVTextField}
       autoComplete="new-password"
     />
     <GVFormikField
       type="password"
-      name="confirmPassword"
+      name={SIGN_UP_FORM_FIELDS.confirmPassword}
       label={t("auth.signup.password-confirm-field-text")}
       component={GVTextField}
       autoComplete="new-password"
@@ -54,7 +57,7 @@ const _SignUpForm: React.FC<
     <GVFormikField
       type="checkbox"
       color="primary"
-      name="privacyPolicy"
+      name={SIGN_UP_FORM_FIELDS.privacyPolicy}
       label={
         <span>
           {t("auth.signup.i-accept-text")}{" "}
@@ -73,7 +76,7 @@ const _SignUpForm: React.FC<
     <GVFormikField
       type="checkbox"
       color="primary"
-      name="acceptTerms"
+      name={SIGN_UP_FORM_FIELDS.acceptTerms}
       label={
         <span>
           {t("auth.signup.i-accept-text")}{" "}
@@ -109,30 +112,38 @@ interface OwnProps {
   refCode?: string;
 }
 
-interface ISignUpFormFormValues extends RegisterManagerViewModel {
-  privacyPolicy: boolean;
-  acceptTerms: boolean;
+export interface ISignUpFormFormValues extends RegisterManagerViewModel {
+  [SIGN_UP_FORM_FIELDS.privacyPolicy]: boolean;
+  [SIGN_UP_FORM_FIELDS.acceptTerms]: boolean;
+  [SIGNUP_FORM_FIELDS.captchaCheckResult]: CaptchaCheckResult;
 }
 
 const SignUpForm = compose<React.FC<OwnProps>>(
-  React.memo,
   translate(),
   withFormik<Props, ISignUpFormFormValues>({
     displayName: "signup-form",
     mapPropsToValues: props => ({
-      refCode: props.refCode || "",
-      userName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      privacyPolicy: false,
-      acceptTerms: false,
-      isAuto: false //TODO remove when upgrade api
+      [SIGNUP_FORM_FIELDS.captchaCheckResult]: {
+        id: "",
+        pow: {
+          prefix: ""
+        },
+        geeTest: {}
+      },
+      [SIGN_UP_FORM_FIELDS.refCode]: props.refCode || "",
+      [SIGN_UP_FORM_FIELDS.userName]: "",
+      [SIGN_UP_FORM_FIELDS.email]: "",
+      [SIGN_UP_FORM_FIELDS.password]: "",
+      [SIGN_UP_FORM_FIELDS.confirmPassword]: "",
+      [SIGN_UP_FORM_FIELDS.privacyPolicy]: false,
+      [SIGN_UP_FORM_FIELDS.acceptTerms]: false,
+      [SIGN_UP_FORM_FIELDS.isAuto]: false //TODO remove when upgrade api
     }),
     validationSchema: validationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_SignUpForm);
 export default SignUpForm;

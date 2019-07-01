@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import authActions from "shared/actions/auth-actions";
 import { IImageValue } from "shared/components/form/input-image/input-image";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authApi from "shared/services/api-client/auth-api";
 import profileApi from "shared/services/api-client/profile-api";
@@ -29,7 +29,7 @@ export const updateProfileAvatar = (newImage: IImageValue) => (
 
   return promise
     .then(() => {
-      dispatch(fetchProfileHeaderInfo());
+      dispatch(fetchProfileHeaderInfoAction());
       dispatch(
         alertMessageActions.success(
           "profile-page.settings.image-success-save-message",
@@ -47,7 +47,7 @@ export const logoutFromDevices = () => (dispatch: Dispatch) => {
     .v10AuthTokenDevicesLogoutPost(authService.getAuthArg())
     .then(response => {
       authService.storeToken(response);
-      dispatch(authActions.updateToken());
+      dispatch(authActions.updateTokenAction());
       dispatch(
         alertMessageActions.success(
           "auth.logout-from-another-devices.success-message",

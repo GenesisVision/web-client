@@ -17,47 +17,50 @@ export const GoogleStep3: React.FC<
   errorMessage,
   isSubmitting,
   enablePassword = true
-}) => {
-  console.log(enablePassword);
-  return (
-    <div className="google-auth__step">
-      <div className="google-auth__count">03</div>
-      <div className="google-auth__title">{t("2fa-page.enter-code")}</div>
-      <form id="google-auth" onSubmit={handleSubmit} autoComplete="off">
+}) => (
+  <div className="google-auth__step">
+    <div className="google-auth__count">03</div>
+    <div className="google-auth__title">{t("2fa-page.enter-code")}</div>
+    <form id="google-auth" onSubmit={handleSubmit} autoComplete="off">
+      <GVFormikField
+        name={FIELDS.code}
+        type="tel"
+        label={t("2fa-page.google-code")}
+        component={GVTextField}
+        autoComplete="off"
+        autoFocus
+        InputComponent={NumberFormat}
+        allowNegative={false}
+        format="######"
+      />
+      {enablePassword && (
         <GVFormikField
-          name="code"
-          type="text"
-          label={t("2fa-page.google-code")}
+          name={FIELDS.password}
+          type="password"
+          label={t("2fa-page.password")}
           component={GVTextField}
-          autoComplete="off"
-          autoFocus
-          InputComponent={NumberFormat}
-          allowNegative={false}
-          format="######"
+          autoComplete="new-password"
         />
-        {enablePassword && (
-          <GVFormikField
-            name="password"
-            type="password"
-            label={t("2fa-page.password")}
-            component={GVTextField}
-            autoComplete="new-password"
-          />
-        )}
-        <div className="form-error">{errorMessage}</div>
-        <GVButton
-          className="google-auth__button"
-          variant="contained"
-          color="primary"
-          type="submit"
-          disabled={isSubmitting}
-        >
-          {t("buttons.activate")}
-        </GVButton>
-      </form>
-    </div>
-  );
-};
+      )}
+      <div className="form-error">{errorMessage}</div>
+      <GVButton
+        className="google-auth__button"
+        variant="contained"
+        color="primary"
+        type="submit"
+        disabled={isSubmitting}
+      >
+        {t("buttons.activate")}
+      </GVButton>
+    </form>
+  </div>
+);
+
+enum FIELDS {
+  code = "code",
+  password = "password",
+  enablePassword = "enablePassword"
+}
 
 interface Props extends OwnProps, InjectedTranslateProps {}
 interface OwnProps {
@@ -69,25 +72,24 @@ interface OwnProps {
   errorMessage?: string;
 }
 export interface IGoogleActivateStepFormValues {
-  code: string;
-  password: string;
-  enablePassword: boolean;
+  [FIELDS.code]: string;
+  [FIELDS.password]: string;
+  [FIELDS.enablePassword]: boolean;
 }
 
-const GoogleActivateStep = compose<React.FunctionComponent<OwnProps>>(
-  React.memo,
+const GoogleActivateStep = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<Props, IGoogleActivateStepFormValues>({
     displayName: "google-auth",
     mapPropsToValues: (props: Props) => ({
-      enablePassword: props.enablePassword || true,
-      code: "",
-      password: ""
+      [FIELDS.enablePassword]: props.enablePassword || true,
+      [FIELDS.code]: "",
+      [FIELDS.password]: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        code: number().required(props.t("2fa-page.code-required")),
-        password: string().when("enablePassword", {
+        [FIELDS.code]: number().required(props.t("2fa-page.code-required")),
+        [FIELDS.password]: string().when(FIELDS.enablePassword, {
           is: true,
           than: string().required(props.t("2fa-page.password-required"))
         })
@@ -95,7 +97,8 @@ const GoogleActivateStep = compose<React.FunctionComponent<OwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(GoogleStep3);
 
 export default GoogleActivateStep;

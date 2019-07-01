@@ -8,20 +8,17 @@ import { IDialogProps } from "shared/components/dialog/dialog";
 import ProgramSignalPopup from "../program-signal-popup/program-signal-popup";
 import { programEditSignal } from "./services/program-edit-signal.service";
 
-class _ProgramEditSignalContainer extends React.Component<Props> {
-  render() {
-    const { t, service, ...others } = this.props;
-    return (
-      <ProgramSignalPopup
-        header={t(
-          "program-details-page.description.edit-signal-provider.title"
-        )}
-        serviceMethod={service.programEditSignal}
-        {...others}
-      />
-    );
-  }
-}
+const _ProgramEditSignalContainer: React.FC<Props> = ({
+  t,
+  service,
+  ...others
+}) => (
+  <ProgramSignalPopup
+    header={t("program-details-page.description.edit-signal-provider.title")}
+    serviceMethod={service.programEditSignal}
+    {...others}
+  />
+);
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   service: bindActionCreators(
@@ -37,7 +34,8 @@ const ProgramEditSignalContainer = compose<React.ComponentType<OwnProps>>(
   connect(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_ProgramEditSignalContainer);
 
 export default ProgramEditSignalContainer;

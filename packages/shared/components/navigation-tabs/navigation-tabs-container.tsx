@@ -43,12 +43,12 @@ const mapDispatchToProps = (
 });
 
 const NavigationTabsContainer = compose<React.ComponentType<OwnProps>>(
-  React.memo,
   isAuthenticated,
   withRouter,
   connect(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_NavigationTabsContainer);
 export default NavigationTabsContainer;

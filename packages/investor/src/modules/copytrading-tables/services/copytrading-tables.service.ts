@@ -5,55 +5,76 @@ import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/copytrading-tables.actions";
 
-export const getCopytradingOpenTrades = (currency?: string) => (
+export const getCopytradingTradesLog = (accountCurrency?: string) => (
   filters: any
 ) => {
   const authorization = authService.getAuthArg();
-  if (currency) {
-    filters = { ...filters, symbol: currency };
+  if (accountCurrency) {
+    filters = { ...filters, accountCurrency };
   }
-  return actions.fetchCopytradingOpenTrades(authorization, filters);
+  return actions.fetchCopytradingTradesLogAction(authorization, filters);
 };
 
-export const getCopytradingTradesHistory = (currency?: string) => (
+export const getCopytradingOpenTrades = (accountCurrency?: string) => (
   filters: any
 ) => {
   const authorization = authService.getAuthArg();
-  if (currency) {
-    filters = { ...filters, symbol: currency };
+  if (accountCurrency) {
+    filters = { ...filters, accountCurrency };
   }
-  return actions.fetchCopytradingTradesHistory(authorization, filters);
+  return actions.fetchCopytradingOpenTradesAction(authorization, filters);
+};
+
+export const getCopytradingTradesHistory = (accountCurrency?: string) => (
+  filters: any
+) => {
+  const authorization = authService.getAuthArg();
+  if (accountCurrency) {
+    filters = { ...filters, accountCurrency };
+  }
+  return actions.fetchCopytradingTradesHistoryAction(authorization, filters);
 };
 
 export interface ICopytradingTradesCounts {
+  logCount?: number;
   openTradesCount?: number;
   historyCount?: number;
 }
 export const fetchCopytradingTradesCount = (
-  currency?: string
+  accountCurrency?: string
 ): Promise<ICopytradingTradesCounts> => {
   const authorization = authService.getAuthArg();
-  const filtering = { take: 0, symbol: currency };
+  const filtering = { take: 0, accountCurrency };
   return Promise.all([
     signalApi.v10SignalTradesOpenGet(authorization, filtering),
-    signalApi.v10SignalTradesGet(authorization, filtering)
-  ]).then(([openTradesData, historyData]) => ({
+    signalApi.v10SignalTradesGet(authorization, filtering),
+    signalApi.v10SignalTradesLogGet(authorization, filtering)
+  ]).then(([openTradesData, historyData, logData]) => ({
+    logCount: logData.total,
     openTradesCount: openTradesData.total,
     historyCount: historyData.total
   }));
 };
 
-export const closeCopytradingTrade = (id: string, onSuccess: () => void) => (
-  dispatch: Dispatch
-) => {
+export type CloseCopytradingTrade = (
+  tradeId: string,
+  onSuccess: () => void,
+  programId?: string
+) => void;
+
+export const closeCopytradingTrade: CloseCopytradingTrade = (
+  tradeId,
+  onSuccess,
+  programId
+) => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
   return signalApi
-    .v10SignalTradesByIdClosePost(id, authorization)
+    .v10SignalTradesByIdClosePost(tradeId, authorization, { programId })
     .then(() => {
       onSuccess();
       dispatch(
         alertMessageActions.success(
-          "investor.dashboard-page.trades.close-trade-confirm.success-message",
+          "investor.copytrading-tables.close-trade-confirm.success-message",
           true
         )
       );
@@ -61,7 +82,7 @@ export const closeCopytradingTrade = (id: string, onSuccess: () => void) => (
     .catch(() => {
       dispatch(
         alertMessageActions.error(
-          "investor.dashboard-page.trades.close-trade-confirm.error-message",
+          "investor.copytrading-tables.close-trade-confirm.error-message",
           true
         )
       );

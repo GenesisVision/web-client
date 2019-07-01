@@ -2,20 +2,20 @@ import {
   CancelRequestType,
   GetInRequestsType
 } from "shared/components/dashboard/dashboard.constants";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
 import {
-  cancelProgramRequest,
-  fetchInRequests
+  cancelProgramRequestAction,
+  fetchInRequestsAction
 } from "../actions/dashboard.actions";
 import { getTopPortfolioEvents } from "./dashboard-events.services";
 
 export const getInRequests: GetInRequestsType = () => dispatch => {
   const authorization = authService.getAuthArg();
-  dispatch(fetchInRequests(authorization, 0, 100));
+  dispatch(fetchInRequestsAction(authorization, 0, 100));
 };
 
 export const cancelRequest: CancelRequestType = ({
@@ -24,12 +24,12 @@ export const cancelRequest: CancelRequestType = ({
   removeDisableBtn
 }) => dispatch => {
   const authorization = authService.getAuthArg();
-  const action = cancelProgramRequest(authorization, id);
+  const action = cancelProgramRequestAction(authorization, id);
 
   return dispatch(action)
     .then(() => {
       dispatch(getInRequests());
-      dispatch(fetchProfileHeaderInfo());
+      dispatch(fetchProfileHeaderInfoAction());
       dispatch(getTopPortfolioEvents());
       dispatch(
         alertMessageActions.success(

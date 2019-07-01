@@ -1,6 +1,6 @@
 import { ProgramRequest, ProgramRequests } from "gv-api-web";
 import { CancelRequestType } from "shared/components/dashboard/dashboard.constants";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
@@ -11,10 +11,10 @@ import { ResponseError } from "shared/utils/types";
 import {
   ICancelRequest,
   IFetchInRequests,
-  cancelInvestorProgramRequest,
-  cancelManagerProgramRequest,
-  fetchInRequestsInvestor,
-  fetchInRequestsManager
+  cancelInvestorProgramRequestAction,
+  cancelManagerProgramRequestAction,
+  fetchInRequestsInvestorAction,
+  fetchInRequestsManagerAction
 } from "../actions/asset-status-actions";
 
 export const getAssetRequests = (
@@ -72,12 +72,12 @@ export const cancelRequestDispatch: CancelRequestType = ({
 
   switch (role + asset) {
     case ROLE.MANAGER + ASSET.PROGRAM:
-      actionCreator = cancelManagerProgramRequest;
-      fetchInRequests = fetchInRequestsManager;
+      actionCreator = cancelManagerProgramRequestAction;
+      fetchInRequests = fetchInRequestsManagerAction;
       break;
     case ROLE.INVESTOR + ASSET.PROGRAM:
-      actionCreator = cancelInvestorProgramRequest;
-      fetchInRequests = fetchInRequestsInvestor;
+      actionCreator = cancelInvestorProgramRequestAction;
+      fetchInRequests = fetchInRequestsInvestorAction;
       break;
     default:
       throw `Error role or type [${role}|${asset}]`;
@@ -86,7 +86,7 @@ export const cancelRequestDispatch: CancelRequestType = ({
   return dispatch(actionCreator(id, authorization))
     .then(() => {
       dispatch(fetchInRequests(authorization, 0, 100));
-      dispatch(fetchProfileHeaderInfo());
+      dispatch(fetchProfileHeaderInfoAction());
       dispatch(
         alertMessageActions.success(
           `${ROLE_ENV}.dashboard-page.requests.success-cancel-request`,

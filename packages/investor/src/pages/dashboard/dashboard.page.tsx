@@ -2,23 +2,21 @@ import "shared/components/dashboard/dashboard.scss";
 
 import "./dashboard.scss";
 
-import React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
-import { ROLE_ENV } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 import DashboardAssetsSection from "./components/dashboard-assets/dashboard-assets-section";
 import DashboardPortfolioChartSectionContainer from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section-container";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 import DashboardTrades from "./components/dashboard-trades/dashboard-trades";
 
-interface IDashboardPageProps {
-  t: TranslationFunction;
-}
+interface IDashboardPageProps extends InjectedTranslateProps, WithRoleProps {}
 
-const DashboardPage: React.FunctionComponent<IDashboardPageProps> = ({ t }) => {
-  const title = t(`${ROLE_ENV}.dashboard-page.title`);
+const DashboardPage: React.FC<IDashboardPageProps> = ({ t, role }) => {
+  const title = t(`${role}.dashboard-page.title`);
   return (
     <Page title={title}>
       <div className="dashboard">
@@ -35,12 +33,12 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = ({ t }) => {
         <div className="dashboard__table-section">
           <DashboardAssetsSection title={title} />
         </div>
-        {/*<div className="dashboard__table-section">
+        <div className="dashboard__table-section">
           <DashboardTrades title={title} />
-        </div>*/}
+        </div>
       </div>
     </Page>
   );
 };
 
-export default translate()(DashboardPage);
+export default withRole(translate()(React.memo(DashboardPage)));

@@ -1,4 +1,9 @@
 import { NotificationViewModel } from "gv-api-web";
+import { Action } from "redux";
+import { composeClearDataActionType } from "shared/actions/clear-data.factory";
+import { ActionType } from "shared/utils/types";
+
+import { IsOpenState } from "../reducers/is-open.reducer";
 
 export const NOTIFICATIONS_TOGGLE = "NOTIFICATIONS_TOGGLE";
 export const ADD_NOTIFICATIONS = "ADD_NOTIFICATIONS";
@@ -7,65 +12,62 @@ export const CLEAR_NOTIFICATIONS = "CLEAR_NOTIFICATIONS";
 export const ADD_TOTAL_NOTIFICATIONS = "ADD_TOTAL_NOTIFICATIONS";
 export const TAKE_COUNT = 10;
 
-export type NotificationToggleAction = Readonly<{
+export interface NotificationToggleAction extends ActionType<IsOpenState> {
   type: typeof NOTIFICATIONS_TOGGLE;
-  isOpen?: boolean;
-}>;
+}
 
-export type AddNotificationsAction = Readonly<{
+export interface AddNotificationsAction
+  extends ActionType<Array<NotificationViewModel>> {
   type: typeof ADD_NOTIFICATIONS;
-  notifications: Array<NotificationViewModel>;
-}>;
+}
 
-export type AddTotalNotificationsAction = Readonly<{
+export interface AddTotalNotificationsAction extends ActionType<number> {
   type: typeof ADD_TOTAL_NOTIFICATIONS;
-  total: number;
-}>;
+}
 
-export type ClearNotificationsAction = Readonly<{
-  type: typeof CLEAR_NOTIFICATIONS;
-}>;
+export interface ClearNotificationsAction extends Action {
+  type: ReturnType<typeof composeClearDataActionType>;
+}
 
-export type SetNotificationsOptionsAction = Readonly<{
+export interface SetNotificationsOptionsAction extends ActionType<SkipTake> {
   type: typeof SET_NOTIFICATIONS_OPTIONS;
-  options: SkipTake;
-}>;
+}
 
 export type SkipTake = Readonly<{
   skip: number;
   take: number;
 }>;
 
-export const notificationsToggle = (
-  isOpen?: boolean
+export const notificationsToggleAction = (
+  payload: IsOpenState
 ): NotificationToggleAction => ({
   type: NOTIFICATIONS_TOGGLE,
-  isOpen
+  payload
 });
 
-export const addNotifications = (
-  notifications: Array<NotificationViewModel>
+export const addNotificationsAction = (
+  payload: Array<NotificationViewModel>
 ): AddNotificationsAction => ({
   type: ADD_NOTIFICATIONS,
-  notifications
+  payload
 });
 
-export const addTotalNotifications = (
-  total: number
+export const addTotalNotificationsAction = (
+  payload: number
 ): AddTotalNotificationsAction => ({
   type: ADD_TOTAL_NOTIFICATIONS,
-  total
+  payload
 });
 
-export const clearNotifications = (): ClearNotificationsAction => ({
-  type: CLEAR_NOTIFICATIONS
+export const clearNotificationsAction = (): ClearNotificationsAction => ({
+  type: composeClearDataActionType(ADD_NOTIFICATIONS)
 });
 
-export const setNotificationsOptions = (
-  options: SkipTake
+export const setNotificationsOptionsAction = (
+  payload: SkipTake
 ): SetNotificationsOptionsAction => ({
   type: SET_NOTIFICATIONS_OPTIONS,
-  options
+  payload
 });
 
 export const calculateOptions = (

@@ -5,6 +5,8 @@ import {
   ManagerPortfolioEvents,
   ProgramsList
 } from "gv-api-web";
+import { Action } from "redux";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import managerApi from "shared/services/api-client/manager-api";
 import { ActionType } from "shared/utils/types";
@@ -28,7 +30,7 @@ export const DASHBOARD_PERIOD = "DASHBOARD_PERIOD";
 
 export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
 
-export const fetchPortfolioEvents = (
+export const fetchPortfolioEventsAction = (
   auth: string,
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<ManagerPortfolioEvents>> => ({
@@ -36,7 +38,7 @@ export const fetchPortfolioEvents = (
   payload: managerApi.v10ManagerEventsGet(auth, filters)
 });
 
-export const fetchInRequests = (
+export const fetchInRequestsAction = (
   auth: string,
   skip: number,
   take: number
@@ -45,7 +47,7 @@ export const fetchInRequests = (
   payload: managerApi.v10ManagerRequestsBySkipByTakeGet(skip, take, auth)
 });
 
-export const fetchDashboardPrograms = (
+export const fetchDashboardProgramsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
 ): ActionType<CancelablePromise<ProgramsList>> => ({
@@ -53,7 +55,7 @@ export const fetchDashboardPrograms = (
   payload: managerApi.v10ManagerProgramsGet(auth, filters)
 });
 
-export const fetchDashboardFunds = (
+export const fetchDashboardFundsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
 ): ActionType<CancelablePromise<FundsList>> => ({
@@ -61,7 +63,7 @@ export const fetchDashboardFunds = (
   payload: managerApi.v10ManagerFundsGet(auth, filters)
 });
 
-export const cancelProgramRequest = (
+export const cancelProgramRequestAction = (
   auth: string,
   id: string
 ): ActionType<CancelablePromise<any>> => ({
@@ -69,25 +71,31 @@ export const cancelProgramRequest = (
   payload: managerApi.v10ManagerProgramsRequestsByIdCancelPost(id, auth)
 });
 
-export const dashboardChart = (
+export type TDashboardChartAction = ActionType<IDashboardAssetChart>;
+export const dashboardChartAction = (
   assetChart: IDashboardAssetChart
-): ActionType<IDashboardAssetChart> => ({
+): TDashboardChartAction => ({
   type: DASHBOARD_ASSET_CHART,
   payload: assetChart
 });
 
-export const fetchAssets = (
+export const fetchAssetsAction = (
   auth: string
 ): ActionType<CancelablePromise<ManagerAssets>> => ({
   type: DASHBOARD_ASSETS,
   payload: managerApi.v10ManagerAssetsGet(auth)
 });
 
-export const setPeriod = (period: any): ActionType<any> => ({
+export type TSetPeriodAction = ActionType<ChartDefaultPeriod>;
+export const setPeriodAction = (
+  payload: ChartDefaultPeriod
+): TSetPeriodAction => ({
   type: DASHBOARD_PERIOD,
-  payload: period
+  payload
 });
 
-export const clearDashboardAssetsTable = (): ActionType => ({
+export const clearDashboardAssetsTableAction = (): Action => ({
   type: CLEAR_DASHBOARD_ASSETS_TABLE
 });
+
+// TODO move actions to shared

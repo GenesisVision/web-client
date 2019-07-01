@@ -1,12 +1,18 @@
 import "shared/components/details/details.scss";
 
-import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
-import React, { ComponentType, PureComponent } from "react";
+import {
+  LevelsParamsInfo,
+  ProgramBalanceChart,
+  ProgramDetailsFull
+} from "gv-api-web";
+import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/login/login.service";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
+import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
+import NotFoundPage from "shared/components/not-found/not-found";
 import {
+  getPlatformLevelsParameters,
   getProgramDescription,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
@@ -14,17 +20,20 @@ import {
   ProgramDetailsProfitChart,
   ProgramDetailsStatistic
 } from "shared/components/programs/program-details/services/program-details.types";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import RootState from "shared/reducers/root-reducer";
-import { ResponseError } from "shared/utils/types";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { kycConfirmedSelector } from "shared/reducers/header-reducer";
+import { RootState } from "shared/reducers/root-reducer";
+import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
 import ProgramDetailsContainer from "./program-details.contaner";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 
-class _ProgramDetailsPage extends PureComponent<Props, State> {
+class _ProgramDetailsPage extends React.PureComponent<Props, State> {
   state = {
     hasError: false,
     isPending: false,
+    levelsParameters: undefined,
     description: undefined,
     profitChart: undefined,
     balanceChart: undefined,
@@ -32,17 +41,18 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    this.updateDetails()
-      .then(data => {
-        this.setState({ isPending: true });
-        return getProgramStatistic(data.id);
-      })
+    const update = this.updateDetails();
+    update
+      .then(data => getProgramStatistic(data.id))
       .then(data => {
         this.setState({ isPending: false, ...data });
       })
       .catch(() => {
         this.setState({ isPending: false });
       });
+    update
+      .then(data => getPlatformLevelsParameters(data.currency))
+      .then(levelsParameters => this.setState({ levelsParameters }));
   }
 
   updateDetails = () => {
@@ -50,9 +60,9 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
     this.setState({ isPending: true });
     return service
       .getProgramDescription()
-      .then(data => {
-        this.setState({ isPending: false, description: data });
-        return data;
+      .then(description => {
+        this.setState({ isPending: false, description });
+        return description;
       })
       .catch((e: ResponseError) => {
         this.setState({ hasError: true });
@@ -66,9 +76,11 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
       descriptionSection,
       historySection,
       currency,
-      isAuthenticated
+      isAuthenticated,
+      isKycConfirmed
     } = this.props;
     const {
+      levelsParameters,
       hasError,
       description,
       statistic,
@@ -76,31 +88,32 @@ class _ProgramDetailsPage extends PureComponent<Props, State> {
       balanceChart
     } = this.state;
     if (hasError) return <NotFoundPage />;
-    if (!description) return null;
     return (
       <ProgramDetailsContainer
+        condition={!!description && !!levelsParameters}
+        loader={<DetailsContainerLoader />}
         updateDetails={this.updateDetails}
         redirectToLogin={service.redirectToLogin}
         historySection={historySection}
         descriptionSection={descriptionSection}
-        description={description}
+        description={description!}
         profitChart={profitChart}
         balanceChart={balanceChart}
         statistic={statistic}
         currency={currency}
         isAuthenticated={isAuthenticated}
+        levelsParameters={levelsParameters!}
+        isKycConfirmed={isKycConfirmed}
       />
     );
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { accountSettings, authData } = state;
-  return {
-    currency: accountSettings.currency,
-    isAuthenticated: authData.isAuthenticated
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  currency: currencySelector(state),
+  isAuthenticated: isAuthenticatedSelector(state),
+  isKycConfirmed: kycConfirmedSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
@@ -116,7 +129,8 @@ interface OwnProps {
 
 interface StateProps {
   isAuthenticated: boolean;
-  currency: CURRENCIES;
+  isKycConfirmed: boolean;
+  currency: CurrencyEnum;
 }
 
 interface DispatchProps {
@@ -135,9 +149,10 @@ interface State {
   profitChart?: ProgramDetailsProfitChart;
   balanceChart?: ProgramBalanceChart;
   statistic?: ProgramDetailsStatistic;
+  levelsParameters?: LevelsParamsInfo;
 }
 
-const ProgramDetailsPage = compose<ComponentType<OwnProps>>(
+const ProgramDetailsPage = compose<React.ComponentType<OwnProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps

@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   FilteringType,
+  SortingColumn,
   TDefaultFilters
 } from "shared/components/table/components/filtering/filter.type";
 import TableModule from "shared/components/table/components/table-module";
@@ -16,7 +17,57 @@ import ProgramTableRow from "./program-table-row";
 import { FAVORITE_COLUMN_NAME } from "./programs-table";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
 
-interface IProgramTableModuleProps {
+const ProgramTableModule: React.FC<Props> = React.memo(
+  ({
+    getItems,
+    renderFilters,
+    sorting,
+    filtering,
+    defaultFilters,
+    paging,
+    isAuthenticated,
+    showRating,
+    title,
+    disableTitle,
+    toggleFavorite,
+    columns
+  }) => (
+    <TableModule
+      disableTitle={disableTitle}
+      getItems={getItems}
+      defaultFilters={defaultFilters}
+      filtering={filtering}
+      sorting={sorting}
+      renderFilters={renderFilters}
+      paging={paging}
+      title={title}
+      columns={columns || PROGRAMS_COLUMNS}
+      renderHeader={column => (
+        <ProgramTableHeaderCell
+          condition={
+            !isAuthenticated ||
+            (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
+          }
+          column={column}
+        />
+      )}
+      renderBodyRow={(
+        program,
+        updateRow: any //TODO fix updateRow
+      ) => (
+        <ProgramTableRow
+          showRating={showRating}
+          title={title}
+          program={program}
+          toggleFavorite={toggleFavorite(program, updateRow)}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
+    />
+  )
+);
+
+interface Props {
   getItems: GetItemsFuncType;
   renderFilters?: RenderFiltersFuncType;
   sorting: string;
@@ -28,58 +79,7 @@ interface IProgramTableModuleProps {
   title: string;
   disableTitle?: boolean;
   toggleFavorite: TableToggleFavoriteType;
-}
-
-class ProgramTableModule extends React.PureComponent<IProgramTableModuleProps> {
-  render() {
-    const {
-      getItems,
-      renderFilters,
-      sorting,
-      filtering,
-      defaultFilters,
-      paging,
-      isAuthenticated,
-      showRating,
-      title,
-      disableTitle,
-      toggleFavorite
-    } = this.props;
-    return (
-      <TableModule
-        disableTitle={disableTitle}
-        getItems={getItems}
-        defaultFilters={defaultFilters}
-        filtering={filtering}
-        sorting={sorting}
-        renderFilters={renderFilters}
-        paging={paging}
-        title={title}
-        columns={PROGRAMS_COLUMNS}
-        renderHeader={column => (
-          <ProgramTableHeaderCell
-            condition={
-              !isAuthenticated ||
-              (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
-            }
-            column={column}
-          />
-        )}
-        renderBodyRow={(
-          program,
-          updateRow: any //TODO fix updateRow
-        ) => (
-          <ProgramTableRow
-            showRating={showRating}
-            title={title}
-            program={program}
-            toggleFavorite={toggleFavorite(program, updateRow)}
-            isAuthenticated={isAuthenticated}
-          />
-        )}
-      />
-    );
-  }
+  columns?: SortingColumn[];
 }
 
 export default ProgramTableModule;

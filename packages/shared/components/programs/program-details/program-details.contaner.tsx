@@ -1,7 +1,11 @@
 import "shared/components/details/details.scss";
 
-import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
-import React from "react";
+import {
+  LevelsParamsInfo,
+  ProgramBalanceChart,
+  ProgramDetailsFull
+} from "gv-api-web";
+import * as React from "react";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
@@ -16,13 +20,16 @@ import {
   ProgramDetailsStatistic
 } from "shared/components/programs/program-details/services/program-details.types";
 import { STATUS } from "shared/constants/constants";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import withLoader from "shared/decorators/with-loader";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
+  levelsParameters,
   updateDetails,
+  isKycConfirmed,
   currency,
   isAuthenticated,
   redirectToLogin,
@@ -43,10 +50,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     description.personalProgramDetails.isInvested;
   return (
     <Page title={description.title}>
-      <ProgramDetailContext.Provider value={{ updateDetails }}>
+      <ProgramDetailContext.Provider value={{ updateDetails, isKycConfirmed }}>
         <div className="details">
           <div className="details__section">
             <ProgramDetailsDescriptionSection
+              levelsParameters={levelsParameters}
               accountCurrency={currency}
               programDescription={description}
               isAuthenticated={isAuthenticated}
@@ -76,7 +84,13 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           </div>
           <div className="details__history">
             <ProgramDetailsHistorySection
-              isForex={description.isForex}
+              isOwnProgram={
+                description.personalProgramDetails
+                  ? description.personalProgramDetails.isOwnProgram
+                  : false
+              }
+              showSwaps={description.brokerDetails.showSwaps}
+              showTickets={description.brokerDetails.showTickets}
               isSignalProgram={description.isSignalProgram}
               fetchOpenPositions={fetchOpenPositions}
               fetchTrades={fetchProgramTrades}
@@ -104,11 +118,15 @@ interface OwnProps {
   profitChart?: ProgramDetailsProfitChart;
   balanceChart?: ProgramBalanceChart;
   statistic?: ProgramDetailsStatistic;
+  levelsParameters: LevelsParamsInfo;
   isAuthenticated: boolean;
-  currency: CURRENCIES;
+  isKycConfirmed: boolean;
+  currency: CurrencyEnum;
 }
 
 interface Props extends OwnProps {}
 
-const ProgramDetailsContainer = React.memo(_ProgramDetailsContainer);
+const ProgramDetailsContainer = React.memo(
+  withLoader(_ProgramDetailsContainer)
+);
 export default ProgramDetailsContainer;

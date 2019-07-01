@@ -21,7 +21,7 @@ interface IEmailConfirmContainerDispatchProps {
   };
 }
 
-class EmailConfirmContainer extends React.Component<
+class EmailConfirmContainer extends React.PureComponent<
   IEmailConfirmContainerProps & IEmailConfirmContainerDispatchProps
 > {
   componentDidMount() {
@@ -39,7 +39,7 @@ class EmailConfirmContainer extends React.Component<
 }
 
 const mapDispatchToProps = (
-  dispatch: Dispatch<ActionType>
+  dispatch: Dispatch
 ): IEmailConfirmContainerDispatchProps => ({
   service: bindActionCreators(
     {

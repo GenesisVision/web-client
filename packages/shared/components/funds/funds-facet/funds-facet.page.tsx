@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import FacetContainer, {
   FACET_ASSET
@@ -12,31 +12,30 @@ import { fetchFunds } from "shared/modules/funds-table/services/funds-table.serv
 
 import FundsFacetTable from "./components/funds-facet-table";
 
-class _FundsFacetPage extends React.PureComponent<Props> {
-  fetchFunds = (filters: ComposeFiltersAllType): Promise<IDataModel> => {
-    return fetchFunds(filters).then(data => ({
-      total: data.total,
-      items: data.funds
-    }));
-  };
-  render() {
-    const { t } = this.props;
-    return (
-      <Page title={t("funds-page.title")}>
-        <Surface className="funds-table-container">
-          <FacetContainer
-            asset={FACET_ASSET.FUNDS}
-            TableContainer={FundsFacetTable}
-            getCurrentFacet={getCurrentFacet}
-            getItems={this.fetchFunds}
-          />
-        </Surface>
-      </Page>
-    );
-  }
-}
+const _FundsFacetPage: React.FC<Props> = ({ t }) => {
+  const getFunds = useCallback(
+    (filters: ComposeFiltersAllType): Promise<IDataModel> =>
+      fetchFunds(filters).then(data => ({
+        total: data.total,
+        items: data.funds
+      })),
+    []
+  );
+  return (
+    <Page title={t("funds-page.title")}>
+      <Surface className="funds-table-container">
+        <FacetContainer
+          asset={FACET_ASSET.FUNDS}
+          TableContainer={FundsFacetTable}
+          getCurrentFacet={getCurrentFacet}
+          getItems={getFunds}
+        />
+      </Surface>
+    </Page>
+  );
+};
 
 interface Props extends InjectedTranslateProps {}
 
-const FundsFacetPage = translate()(_FundsFacetPage);
+const FundsFacetPage = translate()(React.memo(_FundsFacetPage));
 export default FundsFacetPage;

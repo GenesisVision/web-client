@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
+import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -46,6 +47,7 @@ const ProgramTableRowShort: React.FC<
     statistic,
     logo,
     level,
+    levelProgress,
     color,
     url,
     currency,
@@ -79,6 +81,7 @@ const ProgramTableRowShort: React.FC<
             <AssetAvatar
               url={logo}
               level={level}
+              levelProgress={levelProgress}
               alt={program.title}
               color={color}
               tooltip={
@@ -105,7 +108,7 @@ const ProgramTableRowShort: React.FC<
           </div>
         </div>
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--balance">
+      <TableCell className="programs-table__cell programs-table__cell--equity">
         <Tooltip
           render={() => (
             <div>
@@ -140,7 +143,7 @@ const ProgramTableRowShort: React.FC<
         )}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
-        {statistic.tradesCount}
+        {moment(program.creationDate).fromNow(true)}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat
@@ -178,4 +181,4 @@ const ProgramTableRowShort: React.FC<
   );
 };
 
-export default translate()(ProgramTableRowShort);
+export default translate()(React.memo(ProgramTableRowShort));

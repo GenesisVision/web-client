@@ -14,6 +14,6 @@ const _ProgramTableHeaderCell: React.FC<
 );
 
 const ProgramTableHeaderCell = withLoader(
-  React.memo(translate()(_ProgramTableHeaderCell))
+  translate()(React.memo(_ProgramTableHeaderCell))
 );
 export default ProgramTableHeaderCell;

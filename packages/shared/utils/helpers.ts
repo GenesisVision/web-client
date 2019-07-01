@@ -2,15 +2,42 @@ import { NumberFormatValues } from "react-number-format";
 
 import { Nullable } from "./types";
 
-const merge = function(): object {
-  const args: object[] = [...arguments];
+const getType = (value: any): string =>
+  Array.isArray(value) ? "array" : typeof value;
 
-  let result = {};
+const getArrayType = (array: any[]): Nullable<string> => {
+  const supposedType = getType(array[0]);
+  const isUniform = array
+    .map(getType)
+    .map(item => Object.is(item, supposedType))
+    .reduce((prev: boolean, cur: boolean) => cur && prev);
+  return isUniform ? supposedType : null;
+};
 
-  args.forEach((obj: object) => {
-    result = { ...result, ...obj };
+const merge = <T>(...args: any[][] | {}[]): any[] | object | T => {
+  switch (getArrayType(args)) {
+    case "object":
+      return mergeObjects(args);
+    case "array":
+      return mergeArrays(args as any[][]);
+    default:
+      return args[0];
+  }
+};
+
+const mergeObjects = (items: object[]): object => {
+  let result: object = {};
+  items.forEach((item: object) => {
+    result = { ...result, ...item };
   });
+  return result;
+};
 
+const mergeArrays = (items: any[][]): any[] => {
+  let result: any[] = [];
+  items.forEach((item: any[]) => {
+    result = [...result, ...item];
+  });
   return result;
 };
 
@@ -45,4 +72,13 @@ const getNumberWithoutSuffix = (str: string): Nullable<number> => {
 const convertToArray = (value: any): any[] =>
   Array.isArray(value) ? value : [value];
 
-export { allowValuesNumberFormat, getNumberWithoutSuffix, convertToArray };
+export {
+  getType,
+  getArrayType,
+  allowValuesNumberFormat,
+  getNumberWithoutSuffix,
+  convertToArray,
+  merge,
+  mergeObjects,
+  mergeArrays
+};

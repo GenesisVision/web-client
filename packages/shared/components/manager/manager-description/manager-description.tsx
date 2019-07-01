@@ -7,6 +7,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const _ManagerDescription: React.FC<
@@ -27,6 +28,7 @@ const _ManagerDescription: React.FC<
           managerProfile.regDate
         ).format("ll")}`}
       </div>
+      <SocialLinksBlock socialLinks={managerProfile.socialLinks} />
       <div className="manager-description__info">
         <h4 className="manager-description__subheading">
           {t("manager-page.about")}
@@ -53,5 +55,5 @@ const _ManagerDescription: React.FC<
   </div>
 );
 
-const ManagerDescription = React.memo(translate()(_ManagerDescription));
+const ManagerDescription = translate()(React.memo(_ManagerDescription));
 export default ManagerDescription;

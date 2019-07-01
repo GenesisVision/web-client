@@ -3,24 +3,21 @@ import {
   FundWithdraw,
   FundWithdrawalInfoResponse
 } from "shared/components/fund-withdraw/fund-withdraw.types";
-import { fetchWalletsByCurrencyAvailable } from "shared/components/wallet/actions/wallet.actions";
+import { fetchWalletsByCurrencyAvailableAction } from "shared/components/wallet/actions/wallet.actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
 import { InvestorThunk } from "shared/utils/types";
 
-import {
-  getFundWithdrawInfo,
-  getRate
-} from "../actions/fund-withdrawal.actions";
+import { getFundWithdrawInfoAction } from "../actions/fund-withdrawal.actions";
 
 export const fetchFundWithdrawInfo = (
   id: string,
   currency: string
 ): InvestorThunk<Promise<FundWithdrawalInfoResponse>> => dispatch => {
   return Promise.all([
-    dispatch(getFundWithdrawInfo(id, currency)),
-    dispatch(fetchWalletsByCurrencyAvailable(currency))
+    dispatch(getFundWithdrawInfoAction(id, currency)),
+    dispatch(fetchWalletsByCurrencyAvailableAction(currency))
   ]).then(([withdrawalInfo, wallets]) => {
     return {
       withdrawalInfo: withdrawalInfo.value,

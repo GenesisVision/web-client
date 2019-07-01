@@ -3,7 +3,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import LoginFooter from "shared/components/auth/components/login-footer/login-footer";
-import { SIGNUP_ROUTE } from "shared/components/auth/signup/signup.routes";
+import { SIGNUP_ROUTE } from "shared/routes/app.routes";
 
 import EmailPendingPage from "./email-pending/email-pending.page";
 import ForgotPasswordPage from "./forgot-password/forgot-password.page";
@@ -27,5 +27,5 @@ const _ForgotPasswordRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
   </AuthLayout>
 );
 
-const ForgotPasswordRoutes = React.memo(translate()(_ForgotPasswordRoutes));
+const ForgotPasswordRoutes = translate()(React.memo(_ForgotPasswordRoutes));
 export default ForgotPasswordRoutes;

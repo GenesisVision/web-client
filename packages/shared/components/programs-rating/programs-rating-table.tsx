@@ -4,10 +4,14 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import { COLUMNS, PROGRAMS, SELF_PROGRAMS } from "./program-rating.constants";
+import {
+  allProgramsSelector,
+  selfProgramsSelector
+} from "./reducers/programs-rating.reducers";
 import {
   TGetProgramsRatingFilters,
   getProgramsRating
@@ -48,17 +52,16 @@ class _ProgramsRatingTable extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { title, programs, isPending, disableTitle } = this.props;
+    const { title, programs, disableTitle } = this.props;
     const { totalPages, currentPage, itemsOnPage } = this.state;
     if (!programs || !programs.total) return null;
     return (
       <ProgramsTable
         disableTitle={disableTitle}
-        isPending={isPending}
         columns={COLUMNS}
         showRating
         title={title}
-        data={programs}
+        data={programs.programs}
         paging={{ totalPages, currentPage, itemsOnPage }}
         updatePaging={this.updatePaging}
         toggleFavorite={(asset: any, updateRow: any) => {}}
@@ -67,13 +70,11 @@ class _ProgramsRatingTable extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState, props: Props): StateProps => {
-  const table = props.managerId ? SELF_PROGRAMS : PROGRAMS;
-  const programs = state.programsRating[table];
-  const { isPending } = state.programsRating[table];
-  if (!programs.data) return {};
-  return { programs: programs.data, isPending };
-};
+const mapStateToProps = (state: RootState, props: Props): StateProps => ({
+  programs: props.managerId
+    ? selfProgramsSelector(state)
+    : allProgramsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
@@ -91,7 +92,6 @@ interface OwnProps {
 
 interface StateProps {
   programs?: ProgramsList;
-  isPending?: boolean;
 }
 
 interface DispatchProps {

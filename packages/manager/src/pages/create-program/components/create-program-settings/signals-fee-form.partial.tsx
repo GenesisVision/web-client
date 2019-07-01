@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -13,7 +13,7 @@ interface ISignalsFeeFormPartialProps {
   hasSubscriptionFeeAutofocus?: boolean;
 }
 
-const SignalsFeeFormPartial: FunctionComponent<
+const SignalsFeeFormPartial: React.FC<
   ISignalsFeeFormPartialProps & InjectedTranslateProps
 > = ({
   t,
@@ -34,7 +34,7 @@ const SignalsFeeFormPartial: FunctionComponent<
           )}
           adornment="%"
           component={GVTextField}
-          InputComponent={NumberFormat}
+          type="number"
           autoComplete="off"
           decimalScale={2}
           autoFocus={hasSubscriptionFeeAutofocus}
@@ -59,7 +59,7 @@ const SignalsFeeFormPartial: FunctionComponent<
           )}
           adornment="%"
           component={GVTextField}
-          InputComponent={NumberFormat}
+          type="number"
           autoComplete="off"
           decimalScale={2}
           isAllowed={allowValuesNumberFormat()}
@@ -79,4 +79,4 @@ const SignalsFeeFormPartial: FunctionComponent<
   );
 };
 
-export default translate()(SignalsFeeFormPartial);
+export default translate()(React.memo(SignalsFeeFormPartial));

@@ -49,5 +49,5 @@ interface Props extends InjectedTranslateProps {
   className?: string;
 }
 
-const ProgramPeriodPie = withLoader(React.memo(translate()(_ProgramPeriodPie)));
+const ProgramPeriodPie = withLoader(translate()(React.memo(_ProgramPeriodPie)));
 export default ProgramPeriodPie;

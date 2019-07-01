@@ -10,7 +10,7 @@ const _FundControls: React.FC<IFundControlsProps & InjectedTranslateProps> = ({
   redirectToLogin
 }) => (
   <div className="program-details-description__controls">
-    <div className="program-details-description__col">
+    <div className="program-details-description__col program-details-description__col--small-size">
       <InvestmentFundControls
         fundDescription={fundDescription}
         isAuthenticated={isAuthenticated}
@@ -20,5 +20,5 @@ const _FundControls: React.FC<IFundControlsProps & InjectedTranslateProps> = ({
   </div>
 );
 
-const FundControls = React.memo(translate()(_FundControls));
+const FundControls = translate()(React.memo(_FundControls));
 export default FundControls;

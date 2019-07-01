@@ -1,8 +1,4 @@
-import {
-  CancelablePromise,
-  FundAssetPart,
-  FundAssetPartWithIcon
-} from "gv-api-web";
+import { CancelablePromise, FundAssetPart } from "gv-api-web";
 import {
   ALERT_ACTIONS_FIELDS,
   alertMessageActions
@@ -11,13 +7,13 @@ import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "shared/utils/types";
 
-export const updateAssets = (id: string, assets: FundAssetPartWithIcon[]) => (
+export const updateAssets = (id: string, assets: FundAssetPart[]) => (
   dispatch: MiddlewareDispatch
 ): CancelablePromise<void> => {
   const authorization = authService.getAuthArg();
   return managerApi
     .v10ManagerFundsByIdAssetsUpdatePost(id, authorization, {
-      assets: (assets as unknown) as FundAssetPart[] //TODO remove when update api
+      assets
     })
     .then(() => {
       dispatch(

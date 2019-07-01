@@ -36,5 +36,7 @@ export const getLevelUpSummary = () => (
   dispatch: MiddlewareDispatch
 ): CancelablePromise<LevelUpSummary> => {
   const authorization = authService.getAuthArg();
-  return dispatch(fetchLevelUpSummary({ authorization })).then(res => res.value);
+  return dispatch(fetchLevelUpSummary({ authorization })).then(
+    res => res.value
+  );
 };

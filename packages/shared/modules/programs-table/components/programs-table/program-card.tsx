@@ -73,6 +73,7 @@ class ProgramCard extends React.PureComponent<
             >
               <AssetAvatar
                 url={program.logo}
+                levelProgress={program.levelProgress}
                 level={program.level}
                 alt={program.title}
                 color={program.color}

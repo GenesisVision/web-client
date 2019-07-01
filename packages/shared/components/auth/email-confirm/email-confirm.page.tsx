@@ -4,7 +4,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import SignUpFooter from "shared/components/auth/components/signup-footer/signup-footer";
 import EmailConfirmContainer from "shared/components/auth/email-confirm/email-confirm-container";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 export const EMAIL_CONFIRM_ROUTE = `/email-confirm`;
 
@@ -24,5 +24,5 @@ interface Props extends InjectedTranslateProps {
   location: Location;
 }
 
-const EmailConfirmPage = React.memo(translate()(_EmailConfirmPage));
+const EmailConfirmPage = translate()(React.memo(_EmailConfirmPage));
 export default EmailConfirmPage;

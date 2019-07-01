@@ -1,23 +1,26 @@
-import { HOME_ROUTE } from "pages/app/app.routes";
+import { Action } from "redux";
+import { AuthState } from "shared/reducers/auth-reducer";
+import { HOME_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
 import history from "shared/utils/history";
+import { ActionType } from "shared/utils/types";
 
 export const UPDATE_TOKEN = "UPDATE_TOKEN";
 export const LOGOUT = "LOGOUT";
+export type UpdateTokenActionType = ActionType<AuthState>;
 
 const alreadyAuthenticated = () => {
   history.push(HOME_ROUTE);
 };
 
-const updateToken = () => ({
+const updateTokenAction = (): UpdateTokenActionType => ({
   type: UPDATE_TOKEN,
-  isAuthenticated: authService.isAuthenticated(),
-  userName: authService.getUserName()
+  payload: { isAuthenticated: authService.isAuthenticated() }
 });
 
-const logout = () => ({
+const logoutAction = (): Action => ({
   type: LOGOUT
 });
 
-const authActions = { updateToken, alreadyAuthenticated, logout };
+const authActions = { updateTokenAction, alreadyAuthenticated, logoutAction };
 export default authActions;

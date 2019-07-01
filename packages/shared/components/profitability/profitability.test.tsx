@@ -2,7 +2,7 @@ import { shallow } from "enzyme";
 import * as React from "react";
 
 import BaseProfitability from "./base-profitability";
-import Profitability from "./profitability";
+import { _Profitability as Profitability } from "./profitability";
 import {
   PROFITABILITY_PREFIX,
   PROFITABILITY_VARIANT,

@@ -3,31 +3,23 @@ import Dialog from "shared/components/dialog/dialog";
 
 import TransactionDetailsDialog from "./transaction-details";
 
+const TransactionDetailsPopup: React.FC<ITransactionDetailsProps> = React.memo(
+  ({ open, onClose, transactionId, onAction }) => (
+    <Dialog open={open} onClose={onClose} className="transaction-details">
+      <TransactionDetailsDialog
+        transactionId={transactionId}
+        close={onClose}
+        onAction={onAction}
+      />
+    </Dialog>
+  )
+);
+
 interface ITransactionDetailsProps {
   transactionId: string;
   open: boolean;
   onClose(): void;
   onAction(): void;
-}
-
-class TransactionDetailsPopup extends React.Component<
-  ITransactionDetailsProps
-> {
-  render() {
-    return (
-      <Dialog
-        open={this.props.open}
-        onClose={this.props.onClose}
-        className="transaction-details"
-      >
-        <TransactionDetailsDialog
-          transactionId={this.props.transactionId}
-          close={this.props.onClose}
-          onAction={this.props.onAction}
-        />
-      </Dialog>
-    );
-  }
 }
 
 export default TransactionDetailsPopup;

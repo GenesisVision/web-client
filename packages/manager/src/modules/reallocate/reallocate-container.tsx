@@ -2,15 +2,16 @@ import "./reallocate-container.scss";
 
 import {
   CancelablePromise,
+  FundAssetPart,
   FundAssetPartWithIcon,
-  PlatformAsset,
-  PlatformAssets
+  PlatformAsset
 } from "gv-api-web";
-import * as createFundService from "pages/create-fund/services/create-fund.service";
 import * as React from "react";
 import { connect } from "react-redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
+import { fundAssetsSelector } from "shared/reducers/platform-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import ReallocateForm, {
@@ -19,30 +20,8 @@ import ReallocateForm, {
 import { updateAssets } from "./services/reallocate.services";
 
 class _ReallocateContainer extends React.PureComponent<Props, State> {
-  state = { errorMessage: "", assets: [] };
+  state = { errorMessage: "" };
 
-  getFillAssets = (
-    target: PlatformAsset[],
-    data: FundAssetPartWithIcon[]
-  ): FundAssetPartWithIcon[] => {
-    const fillAssets = target.map(item => ({ ...item, percent: 0 }));
-    data.forEach(dataItem => {
-      const targetAsset = fillAssets.find(x => x.name === dataItem.name);
-      if (targetAsset) {
-        targetAsset.percent = dataItem.percent;
-      }
-    });
-    return fillAssets;
-  };
-
-  componentDidMount() {
-    createFundService.fetchAssets().then((response: PlatformAssets) => {
-      const assets = this.getFillAssets(response.assets, this.props.assets);
-      this.setState({
-        assets: assets
-      });
-    });
-  }
   handleApply = (values: IReallocateFormValues) => {
     const { service, id, onApply } = this.props;
     service
@@ -61,13 +40,13 @@ class _ReallocateContainer extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { open } = this.props;
-    const { assets } = this.state;
+    const { open, fundAssets, platformAssets } = this.props;
     return (
       <Dialog open={open} onClose={this.handleClose}>
-        {assets.length ? (
+        {fundAssets.length ? (
           <ReallocateForm
-            assets={assets}
+            fundAssets={fundAssets}
+            platformAssets={platformAssets}
             onSubmit={this.handleApply}
             errorMessage={this.state.errorMessage}
           />
@@ -79,19 +58,27 @@ class _ReallocateContainer extends React.PureComponent<Props, State> {
   }
 }
 
+const mapStateToProps = (state: RootState): StateProps => ({
+  platformAssets: fundAssetsSelector(state)
+});
+
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
-    updateAssets: (id: string, assets: FundAssetPartWithIcon[]) =>
+    updateAssets: (id: string, assets: FundAssetPart[]) =>
       dispatch(updateAssets(id, assets))
   }
 });
 
-interface Props extends DispatchProps, OwnProps {}
+interface Props extends DispatchProps, OwnProps, StateProps {}
+
+interface StateProps {
+  platformAssets: PlatformAsset[];
+}
 
 interface OwnProps {
   open: boolean;
   onClose: () => void;
-  assets: FundAssetPartWithIcon[];
+  fundAssets: FundAssetPartWithIcon[];
   id: string;
   onApply: () => void;
 }
@@ -100,18 +87,22 @@ interface DispatchProps {
   service: {
     updateAssets: (
       id: string,
-      assets: FundAssetPartWithIcon[]
+      assets: FundAssetPart[]
     ) => CancelablePromise<void>;
   };
 }
 
 interface State {
   errorMessage: string;
-  assets: FundAssetPartWithIcon[];
 }
 
-const ReallocateContainer = connect<null, DispatchProps, OwnProps, State>(
-  undefined,
+const ReallocateContainer = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps,
+  RootState
+>(
+  mapStateToProps,
   mapDispatchToProps
 )(_ReallocateContainer);
 export default ReallocateContainer;

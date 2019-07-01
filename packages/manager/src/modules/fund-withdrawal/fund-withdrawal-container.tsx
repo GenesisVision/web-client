@@ -6,7 +6,7 @@ import {
   FundWithdrawalInfoResponse
 } from "shared/components/fund-withdraw/fund-withdraw.types";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import {
   getFundWithdrawInfo,

@@ -10,14 +10,16 @@ import {
 } from "../services/copytrading-tables.service";
 import OpenTradesTable from "./open-trades-table";
 import TradesHistoryTable from "./trades-history-table";
+import TradesLogTable from "./trades-log-table";
 
-class ICopytradingTablesSection extends React.PureComponent<
+class _CopytradingTablesSection extends React.PureComponent<
   ICopytradingTablesSectionProps & InjectedTranslateProps,
   ICopytradingTablesSectionState
 > {
   state = {
     tab: TABS.OPEN_TRADES,
     openTradesCount: undefined,
+    logCount: undefined,
     historyCount: undefined
   };
 
@@ -32,7 +34,7 @@ class ICopytradingTablesSection extends React.PureComponent<
   };
 
   render() {
-    const { tab, openTradesCount, historyCount } = this.state;
+    const { tab, openTradesCount, historyCount, logCount } = this.state;
     const { t, title, currency } = this.props;
     return (
       <Surface>
@@ -49,22 +51,27 @@ class ICopytradingTablesSection extends React.PureComponent<
               label={t("investor.copytrading-tables.history")}
               count={historyCount}
             />
+            <GVTab
+              value={TABS.LOG}
+              label={t("investor.copytrading-tables.log")}
+              count={logCount}
+            />
           </GVTabs>
         </div>
-        <div className="">
-          {tab === TABS.OPEN_TRADES && (
-            <OpenTradesTable title={title} currency={currency} />
-          )}
-          {tab === TABS.HISTORY && (
-            <TradesHistoryTable title={title} currency={currency} />
-          )}
-        </div>
+        {tab === TABS.OPEN_TRADES && (
+          <OpenTradesTable title={title} currency={currency} />
+        )}
+        {tab === TABS.HISTORY && (
+          <TradesHistoryTable title={title} currency={currency} />
+        )}
+        {tab === TABS.LOG && <TradesLogTable currency={currency} />}
       </Surface>
     );
   }
 }
 
 enum TABS {
+  LOG = "LOG",
   OPEN_TRADES = "OPEN_TRADES",
   HISTORY = "HISTORY"
 }
@@ -78,4 +85,5 @@ interface ICopytradingTablesSectionState extends ICopytradingTradesCounts {
   tab: TABS;
 }
 
-export default translate()(ICopytradingTablesSection);
+const CopytradingTablesSection = translate()(_CopytradingTablesSection);
+export default CopytradingTablesSection;

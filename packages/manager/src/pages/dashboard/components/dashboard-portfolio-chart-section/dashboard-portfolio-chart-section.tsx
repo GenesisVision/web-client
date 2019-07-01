@@ -19,8 +19,12 @@ import {
   DashboardChartRequestLoader
 } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
-import { CurrencyEnum, Nullable } from "shared/utils/types";
+import Surface from "shared/components/surface/surface";
+import { isNewUserSelector } from "shared/reducers/header-reducer";
+import { Nullable } from "shared/utils/types";
 
+import { dashboardAssetsSelector } from "../../reducers/dashboard-assets.reducer";
+import { dashboardInRequestsSelector } from "../../reducers/dashboard-in-requests.reducer";
 import { IDashboardAssetChart } from "../../reducers/dashboard.reducers";
 import {
   cancelRequest,
@@ -38,79 +42,55 @@ class _DashboardPortfolioChartSection extends React.PureComponent<Props> {
     service.getInRequests();
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate() {
     const { assets, service, assetChart } = this.props;
-    if (
-      assets &&
-      (JSON.stringify(prevProps.assetChart) !== JSON.stringify(assetChart) ||
-        !assetChart)
-    )
-      service.composeAssetChart();
+    if (assets && !assetChart) service.composeAssetChart();
   }
 
   render() {
-    const {
-      t,
-      isNewUser,
-      assets,
-      assetsIsPending,
-      assetChart,
-      period,
-      currency,
-      inRequests,
-      inRequestsIsPending
-    } = this.props;
+    const { t, isNewUser, assets, assetChart, period, inRequests } = this.props;
     if (isNewUser) return <DashboardGetStarted />;
     return (
-      <>
+      <Surface className="dashboard-portfolio-chart-section">
         <h3 className="dashboard-portfolio-chart-section__heading">
           {t("manager.dashboard-page.chart-section.header")}
         </h3>
         <div className="dashboard-portfolio-chart-section__actions">
           <DashboardChartAssetsContainer
-            condition={!!assets && !assetsIsPending}
+            condition={!!assets}
             loader={<DashboardChartAssetsLoader />}
             assets={assets!}
           />
           <DashboardInRequestsContainer
-            condition={!!inRequests && !inRequestsIsPending}
+            condition={!!inRequests}
             loader={<DashboardChartRequestLoader />}
             inRequests={inRequests!}
             cancelRequest={cancelRequest}
           />
         </div>
         <DashboardPortfolioChartContainer
-          condition={!!assetChart && !!period && !!currency}
+          condition={!!assetChart && !!period}
           loader={
             <>
               <DashboardChartDescriptionLoader />
               <DashboardChartLoader />
             </>
           }
-          currency={currency}
           period={period}
           assetChart={assetChart!}
         />
-      </>
+      </Surface>
     );
   }
 }
 
-const mapStateToProps = (state: ManagerRootState): StateProps => {
-  const { info } = state.profileHeader;
-  const { currency } = state.accountSettings;
-  const { assets, assetChart, period, inRequestsData } = state.dashboard;
-  return {
-    isNewUser: info.data && info.data.isNewUser,
-    assets: assets.data,
-    assetsIsPending: assets.isPending,
-    inRequests: inRequestsData.data,
-    inRequestsIsPending: inRequestsData.isPending,
-    assetChart,
-    period,
-    currency
-  };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  isNewUser: isNewUserSelector(state),
+  assets: dashboardAssetsSelector(state),
+  inRequests: dashboardInRequestsSelector(state),
+  assetChart: state.dashboard.assetChart,
+  period: state.dashboard.period
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
@@ -135,10 +115,7 @@ interface DispatchProps {
 }
 
 interface StateProps {
-  assetsIsPending: boolean;
-  inRequestsIsPending: boolean;
   period: ChartDefaultPeriod;
-  currency: CurrencyEnum;
   assetChart: Nullable<IDashboardAssetChart>;
   isNewUser?: boolean;
   assets?: ManagerAssets;

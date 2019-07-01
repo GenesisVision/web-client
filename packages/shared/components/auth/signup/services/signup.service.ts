@@ -1,20 +1,55 @@
 import { push } from "connected-react-router";
 import emailPendingActions from "shared/actions/email-pending-actions";
-import { RootThunk, SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "shared/utils/types";
+import { string } from "yup";
 
-import { RegisterViewModel, signUpUser } from "../actions/signup.actions";
+import { RegisterViewModel, signUpUserAction } from "../actions/signup.actions";
 import { SIGNUP_ROUTE_PENDING } from "../signup.routes";
 
-export const signUp = (
-  signUpData: RegisterViewModel,
-  setSubmitting: SetSubmittingType
-): RootThunk<any> => (dispatch: any) => {
-  return dispatch(signUpUser(signUpData))
+export const signUp: SingUpFuncType = props => (dispatch: any) => {
+  const {
+    userName,
+    email,
+    password,
+    confirmPassword,
+    refCode,
+    isAuto,
+    prefix,
+    id,
+    setSubmitting
+  } = props;
+  return dispatch(
+    signUpUserAction({
+      userName,
+      email,
+      password,
+      confirmPassword,
+      refCode,
+      isAuto,
+      captchaCheckResult: {
+        id,
+        pow: {
+          prefix
+        },
+        geeTest: {}
+      }
+    })
+  )
     .then(() => {
-      dispatch(emailPendingActions.saveEmail(signUpData));
+      dispatch(emailPendingActions.saveEmail({ email }));
       dispatch(push(SIGNUP_ROUTE_PENDING));
     })
     .catch(() => {
-      setSubmitting(false);
+      setSubmitting!(false);
     });
 };
+
+export type SingUpFuncType = (
+  props: RegisterViewModel & {
+    id: string;
+    prefix: string;
+    code: string;
+    setSubmitting?: SetSubmittingType;
+    userName?: string;
+  }
+) => (dispatch: any, getState: any) => void;

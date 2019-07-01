@@ -1,20 +1,19 @@
+import { ManagerRootState } from "manager-web-portal/src/reducers";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
-import { InvestorRootState } from "reducers";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
 import PortfolioEventsTableContainer from "shared/components/portfolio-events-table/portfolio-events-table-container";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
-import { ROLE_ENV } from "shared/constants/constants";
-import { getUnique } from "shared/utils/array";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import { allEventsSelector } from "shared/reducers/platform-reducer";
 
-export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
-const _PortfolioEventsAllComponent: React.FC<Props> = ({ t, events }) => (
-  <Page title={t(`${ROLE_ENV}.dashboard-page.portfolio-events.title`)}>
+const _PortfolioEventsAllComponent: React.FC<Props> = ({ role, t, events }) => (
+  <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
     <PortfolioEventsTableContainer
       fetchPortfolioEvents={fetchPortfolioEvents}
-      tableTitle={t(`${ROLE_ENV}.dashboard-page.portfolio-events.table-title`)}
+      tableTitle={t(`${role}.dashboard-page.portfolio-events.table-title`)}
       className="portfolio-events-all-table"
       dateRangeStartLabel={t("filters.date-range.account-creation")}
       eventTypeFilterValues={events}
@@ -22,20 +21,15 @@ const _PortfolioEventsAllComponent: React.FC<Props> = ({ t, events }) => (
   </Page>
 );
 
-const mapStateToProps = (state: InvestorRootState): StateProps => {
-  if (!state.platformData.data) return { events: [] };
-  const {
-    funds,
-    programs
-  } = state.platformData.data.enums.program.investorNotificationType;
-  const events = getUnique([...funds, ...programs]).map(event => ({
-    value: event,
-    labelKey: `investor.dashboard-page.portfolio-events.types.${event}`
-  }));
-  return { events };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  events: allEventsSelector(state)
+});
 
-interface Props extends InjectedTranslateProps, StateProps, OwnProps {}
+interface Props
+  extends InjectedTranslateProps,
+    StateProps,
+    OwnProps,
+    WithRoleProps {}
 
 interface OwnProps {}
 
@@ -44,8 +38,9 @@ interface StateProps {
 }
 
 const PortfolioEventsAllComponent = compose<React.ComponentType<OwnProps>>(
-  React.memo,
+  withRole,
   translate(),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  React.memo
 )(_PortfolioEventsAllComponent);
 export default PortfolioEventsAllComponent;

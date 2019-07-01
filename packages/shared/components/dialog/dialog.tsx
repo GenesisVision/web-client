@@ -2,68 +2,39 @@ import "./dialog.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import EventListener from "react-event-listener";
-import { InjectedTranslateProps } from "react-i18next";
-import { translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import { CloseIcon } from "shared/components/icon/close-icon";
-import Modal from "shared/components/modal/modal";
-import GVScroll from "shared/components/scroll/gvscroll";
+import Modal, { BodyFix } from "shared/components/modal/modal";
 
-export class Dialog extends React.PureComponent<
-  IDialogProps & InjectedTranslateProps
-> {
-  handleKeyPress = (event: KeyboardEvent) => {
-    const { onClose } = this.props;
-    //Esc
-    if (event.keyCode === 27) {
-      onClose(event);
-    }
-  };
-  render() {
-    const { t, open, onClose, className, children, wider } = this.props;
-    return (
-      <Modal open={open} fixed disableBackdropClick>
-        <EventListener target={document} onKeyUp={this.handleKeyPress} />
-        <GVScroll autoHide>
-          <div className="dialog__content">
-            <div className="dialog__background" />
-            <div className="dialog__backdrop" onClick={onClose} />
-            <GVButton
-              variant="text"
-              color="secondary"
-              className={classNames("dialog__close dialog__close--outside", {
-                "dialog__close--wider": wider
-              })}
-              onClick={onClose}
-            >
-              <React.Fragment>
-                <CloseIcon /> {t("buttons.close")}
-              </React.Fragment>
-            </GVButton>
-            <div className={classNames("dialog", className)}>
-              <GVButton
-                variant="text"
-                color="secondary"
-                className="dialog__close dialog__close--inside"
-                onClick={onClose}
-              >
-                <CloseIcon />
-              </GVButton>
-              {children}
-            </div>
-          </div>
-        </GVScroll>
-      </Modal>
-    );
-  }
-}
+export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
+  t,
+  open,
+  onClose,
+  className,
+  children
+}) => (
+  <Modal open={open} fixed onClose={onClose}>
+    <BodyFix />
+    <div className={classNames("dialog", className)}>
+      <GVButton
+        variant="text"
+        color="secondary"
+        className="dialog__close dialog__close--inside"
+        onClick={onClose}
+      >
+        <CloseIcon />
+      </GVButton>
+      {children}
+    </div>
+  </Modal>
+);
 
-export default translate()(Dialog);
+const Dialog = translate()(React.memo(_Dialog));
+export default Dialog;
 
 export interface IDialogProps {
   open: boolean;
   onClose: (param?: any) => void;
   className?: string;
-  wider?: boolean;
 }

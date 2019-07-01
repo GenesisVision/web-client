@@ -6,7 +6,7 @@ interface ISpinnerProps {
   isShown?: boolean;
 }
 
-const Spinner: React.FC<ISpinnerProps> = ({ isShown }) =>
+const Spinner: React.FC<ISpinnerProps> = React.memo(({ isShown }) =>
   isShown ? (
     <div className="gv-spinner__wrapper">
       <div className="gv-spinner">
@@ -24,6 +24,7 @@ const Spinner: React.FC<ISpinnerProps> = ({ isShown }) =>
         <div />
       </div>
     </div>
-  ) : null;
+  ) : null
+);
 
 export default Spinner;

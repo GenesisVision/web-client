@@ -4,12 +4,14 @@ import classnames from "classnames";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import filesService from "shared/services/file-service";
 
 import BrokerCardAdornment from "./broker-card-adornment";
 import { BROKER_CARD_EXTRA_STATE } from "./broker-card.constants";
-import { getBrokerCardImage, slugBrokerName } from "./broker-card.helpers";
+import { slugBrokerName } from "./broker-card.helpers";
 
 const _BrokerCard: React.FC<OwnProps & InjectedTranslateProps> = ({
+  logo,
   t,
   brokerName,
   onSelect,
@@ -39,7 +41,7 @@ const _BrokerCard: React.FC<OwnProps & InjectedTranslateProps> = ({
       )}
       <img
         className={logoClassName}
-        src={getBrokerCardImage(brokerName)}
+        src={filesService.getFileUrl(logo)}
         alt={brokerName}
       />
       <BrokerCardAdornment
@@ -51,12 +53,13 @@ const _BrokerCard: React.FC<OwnProps & InjectedTranslateProps> = ({
 };
 
 const BrokerCard = compose<React.ComponentType<OwnProps>>(
-  React.memo,
-  translate()
+  translate(),
+  React.memo
 )(_BrokerCard);
 export default BrokerCard;
 
 interface OwnProps {
+  logo: string;
   brokerName: string;
   onSelect?(brokerName: string): () => void;
   isSelected: boolean;

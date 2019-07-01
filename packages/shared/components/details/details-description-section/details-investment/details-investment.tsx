@@ -1,6 +1,6 @@
 import "./details-investment.scss";
 
-import React, { PureComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetStatus from "shared/components/asset-status/asset-status";
@@ -14,6 +14,7 @@ import {
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { PROGRAM, STATUS } from "shared/constants/constants";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 
@@ -23,27 +24,7 @@ import {
 } from "../../helpers/details-context";
 import { InvestmentDetails } from "./details-investment.helpers";
 
-interface IDetailsInvestmentOwnProps {
-  asset: string;
-  notice?: string;
-  id: string;
-  accountCurrency: string;
-  assetCurrency: string;
-  personalDetails: InvestmentDetails;
-  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
-  ProgramReinvestingWidget?: React.ComponentType<
-    IProgramReinvestingContainerOwnProps
-  >;
-}
-
-interface IDetailsInvestmentProps
-  extends IDetailsInvestmentOwnProps,
-    InjectedTranslateProps {}
-interface IDetailsInvestmentState {
-  isOpenWithdrawalPopup: boolean;
-}
-
-class DetailsInvestment extends PureComponent<
+class _DetailsInvestment extends React.PureComponent<
   IDetailsInvestmentProps,
   IDetailsInvestmentState
 > {
@@ -101,7 +82,12 @@ class DetailsInvestment extends PureComponent<
               <StatisticItem
                 condition={asset === PROGRAM}
                 accent
-                label={t("fund-details-page.description.profit")}
+                label={
+                  <TooltipLabel
+                    tooltipContent={t("program-details-page.tooltip.profit")}
+                    labelText={t("fund-details-page.description.profit")}
+                  />
+                }
               >
                 <Profitability
                   value={formatCurrencyValue(profitValue, assetCurrency)}
@@ -123,7 +109,14 @@ class DetailsInvestment extends PureComponent<
               </StatisticItem>
               <StatisticItem
                 accent
-                label={t("fund-details-page.description.status")}
+                label={
+                  <TooltipLabel
+                    tooltipContent={t(
+                      `fund-details-page.tooltip.status.${asset}`
+                    )}
+                    labelText={t("fund-details-page.description.status")}
+                  />
+                }
               >
                 <AssetStatus
                   status={personalDetails.status as STATUS}
@@ -165,14 +158,18 @@ class DetailsInvestment extends PureComponent<
                 accent
                 label={t("fund-details-page.description.pending-output")}
               >
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    personalDetails.pendingOutput,
-                    assetCurrency
-                  )}
-                  suffix={` ${assetCurrency}`}
-                  displayType="text"
-                />
+                {personalDetails.pendingOutputIsWithdrawAll ? (
+                  t("withdraw-program.withdrawing-all")
+                ) : (
+                  <NumberFormat
+                    value={formatCurrencyValue(
+                      personalDetails.pendingOutput,
+                      assetCurrency
+                    )}
+                    suffix={` ${assetCurrency}`}
+                    displayType="text"
+                  />
+                )}
               </StatisticItem>
             </div>
             <div className="details-investment__footer">
@@ -203,4 +200,25 @@ class DetailsInvestment extends PureComponent<
   }
 }
 
-export default translate()(DetailsInvestment);
+interface IDetailsInvestmentOwnProps {
+  asset: string;
+  notice?: string;
+  id: string;
+  accountCurrency: string;
+  assetCurrency: string;
+  personalDetails: InvestmentDetails;
+  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
+  ProgramReinvestingWidget?: React.ComponentType<
+    IProgramReinvestingContainerOwnProps
+  >;
+}
+
+interface IDetailsInvestmentProps
+  extends IDetailsInvestmentOwnProps,
+    InjectedTranslateProps {}
+interface IDetailsInvestmentState {
+  isOpenWithdrawalPopup: boolean;
+}
+
+const DetailsInvestment = translate()(_DetailsInvestment);
+export default DetailsInvestment;

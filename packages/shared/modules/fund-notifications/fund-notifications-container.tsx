@@ -56,7 +56,7 @@ const mapStateToProps = (
   state: AuthRootState,
   props: OwnProps
 ): StateProps => ({
-  fund: state.fundNotifications.data[props.id]
+  fund: state.fundNotifications[props.id]
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

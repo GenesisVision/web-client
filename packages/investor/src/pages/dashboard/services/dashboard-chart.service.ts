@@ -19,5 +19,5 @@ export const getPortfolioChart = (from?: Date, to?: Date) => (
     programsPoints: 7
   };
 
-  dispatch(actions.fetchPortfolioChart(authorization, filters));
+  dispatch(actions.fetchPortfolioChartAction(authorization, filters));
 };

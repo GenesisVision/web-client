@@ -5,14 +5,19 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
+import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
+import {
+  copyTradingAccountsSelector,
+  walletsSelector
+} from "shared/components/wallet/reducers/wallet.reducers";
 import {
   fetchAccounts,
   fetchWallets
 } from "shared/components/wallet/services/wallet.services";
-import RootState from "shared/reducers/root-reducer";
+import { RootState } from "shared/reducers/root-reducer";
+import { ResponseError } from "shared/utils/types";
 
 import { transferRequest } from "../services/transfer.services";
 import {
@@ -22,7 +27,7 @@ import {
 } from "../transfer.types";
 import TransferForm, { TransferFormValues } from "./transfer-form";
 
-class _TransferContainer extends React.Component<Props, State> {
+class _TransferContainer extends React.PureComponent<Props, State> {
   state = {
     errorMessage: undefined
   };
@@ -37,15 +42,19 @@ class _TransferContainer extends React.Component<Props, State> {
   }
 
   handleSubmit = (values: TransferFormValues) => {
-    const { service, onClose } = this.props;
+    const { service, onClose, destinationType, sourceType } = this.props;
     transferRequest(values)
       .then(() => {
         onClose();
         service.fetchWallets();
-        service.fetchAccounts();
         service.updateWalletTimestamp();
+        if (
+          destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
+          sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+        )
+          service.fetchAccounts();
       })
-      .catch((error: any) => {
+      .catch((error: ResponseError) => {
         this.setState({
           errorMessage: error.errorMessage
         });
@@ -87,21 +96,17 @@ class _TransferContainer extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  if (!state.accountSettings) return { wallets: [], copyTradingAccounts: [] };
-  const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
-  const copyTradingAccounts = state.copyTradingAccounts.info.data
-    ? state.copyTradingAccounts.info.data.accounts
-    : [];
-  return { wallets, copyTradingAccounts };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  wallets: walletsSelector(state),
+  copyTradingAccounts: copyTradingAccountsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
       fetchAccounts,
       fetchWallets,
-      updateWalletTimestamp
+      updateWalletTimestamp: updateWalletTimestampAction
     },
     dispatch
   )

@@ -32,6 +32,9 @@
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-common;
     }
+    &--loader {
+      opacity: 0.5;
+    }
   }
 
   &__value {

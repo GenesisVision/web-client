@@ -1,11 +1,11 @@
 import { replace } from "connected-react-router";
-import { InvestorRootState } from "investor-web-portal/src/reducers";
-import { ManagerRootState } from "manager-web-portal/src/reducers";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
-import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
 import * as authService from "../auth.service";
@@ -13,8 +13,8 @@ import { CaptchasType } from "../auth.service";
 import Pow from "../captcha/pow";
 import {
   CODE_TYPE,
-  loginUserInvestor,
-  loginUserManager
+  loginUserInvestorAction,
+  loginUserManagerAction
 } from "./login.actions";
 import * as loginService from "./login.service";
 import {
@@ -50,9 +50,9 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   }
   componentDidUpdate(): void {
     const { isSubmit, prefix, captchaType } = this.state;
-    const { from, service, type } = this.props;
+    const { role, from, service, type } = this.props;
     const method =
-      ROLE_ENV === ROLE.MANAGER ? loginUserManager : loginUserInvestor;
+      role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":
@@ -115,9 +115,13 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
 
 const mapStateToProps = (state: AuthRootState): StateProps => {
   const { errorMessage } = state.loginData.login;
-  const { isAuthenticated } = state.authData;
   const { email, password } = state.loginData.twoFactor;
-  return { isAuthenticated, errorMessage, email, password };
+  return {
+    isAuthenticated: isAuthenticatedSelector(state),
+    errorMessage,
+    email,
+    password
+  };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -169,15 +173,13 @@ interface OwnProps {
   type?: CODE_TYPE;
 }
 
-interface Props extends OwnProps, StateProps, DispatchProps {}
+interface Props extends OwnProps, StateProps, DispatchProps, WithRoleProps {}
 
-const CaptchaContainer = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps,
-  AuthRootState
->(
-  mapStateToProps,
-  mapDispatchToProps
+const CaptchaContainer = compose<React.ComponentType<OwnProps>>(
+  withRole,
+  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(_CaptchaContainer);
 export default CaptchaContainer;

@@ -1,8 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { FundAssetsListInfo } from "gv-api-web";
-import * as React from "react";
 import { SyntheticEvent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -15,8 +15,12 @@ import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/compone
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import { AuthState } from "shared/reducers/auth-reducer";
-import RootState from "shared/reducers/root-reducer";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
+import {
+  AuthState,
+  isAuthenticatedSelector
+} from "shared/reducers/auth-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import FundStructure from "./fund-structure/fund-structure";
 
@@ -59,7 +63,13 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
             <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 value={TABS.STRUCTURE}
-                label={t("fund-details-page.history.structure.title")}
+                label={
+                  <TooltipLabel
+                    tooltipContent={t("fund-details-page.tooltip.structure")}
+                    labelText={t("fund-details-page.history.structure.title")}
+                    className="tooltip__label--cursor-pointer"
+                  />
+                }
               />
               <GVTab
                 value={TABS.EVENTS}
@@ -88,10 +98,9 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { isAuthenticated } = state.authData;
-  return { isAuthenticated };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state)
+});
 
 interface StateProps extends AuthState {}
 

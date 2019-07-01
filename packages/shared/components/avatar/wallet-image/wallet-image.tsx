@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import WalletCurrency from "shared/media/wallet-currency.svg";
 
 import ImageBase, { IImageProps } from "../image-base";
 
-const _WalletImage: FunctionComponent<Props & IImageProps> = ({
+const _WalletImage: React.FC<Props & IImageProps> = ({
   url,
   alt,
   className,

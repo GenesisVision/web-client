@@ -53,10 +53,9 @@ const _DashboardPortfolioChartStat: React.FC<
       big
       accent
       label={t("investor.dashboard-page.chart-section.stats.value")}
-      equivalent={formatCurrencyValue(
-        portfolioChartData.valueCurrency,
-        currency
-      )}
+      equivalent={
+        +formatCurrencyValue(portfolioChartData.valueCurrency, currency)
+      }
       equivalentCurrency={currency}
     >
       <NumberFormat
@@ -68,10 +67,9 @@ const _DashboardPortfolioChartStat: React.FC<
     </StatisticItem>
     <StatisticItem
       label={t("investor.dashboard-page.chart-section.stats.change")}
-      equivalent={formatCurrencyValue(
-        portfolioChartData.changeValueCurrency,
-        currency
-      )}
+      equivalent={
+        +formatCurrencyValue(portfolioChartData.changeValueCurrency, currency)
+      }
       equivalentCurrency={currency}
       big
     >

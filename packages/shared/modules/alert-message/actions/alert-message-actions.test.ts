@@ -6,9 +6,11 @@ describe("alertMessageActions", () => {
   it("should create an action with a text about success", () => {
     const expectedAction: IAlertAction = {
       type: ALERT_MESSAGE.SUCCESS,
-      className: "alert-message--success",
-      text,
-      isUseLocalization: false
+      payload: {
+        className: "alert-message--success",
+        text,
+        isUseLocalization: false
+      }
     };
     expect(alertMessageActions.success(text)).toEqual(expectedAction);
   });
@@ -16,9 +18,11 @@ describe("alertMessageActions", () => {
   it("should create an action with a text about error", () => {
     const expectedAction: IAlertAction = {
       type: ALERT_MESSAGE.ERROR,
-      className: "alert-message--danger",
-      text,
-      isUseLocalization: true
+      payload: {
+        className: "alert-message--danger",
+        text,
+        isUseLocalization: true
+      }
     };
     expect(alertMessageActions.error(text, true)).toEqual(expectedAction);
   });
@@ -26,9 +30,11 @@ describe("alertMessageActions", () => {
   it("should create an action with a text about warning", () => {
     const expectedAction: IAlertAction = {
       type: ALERT_MESSAGE.WARNING,
-      className: "alert-message--warning",
-      text,
-      isUseLocalization: false
+      payload: {
+        className: "alert-message--warning",
+        text,
+        isUseLocalization: false
+      }
     };
     expect(alertMessageActions.warning(text)).toEqual(expectedAction);
   });
@@ -37,14 +43,15 @@ describe("alertMessageActions", () => {
     const id = "1";
     const expectedAction: IAlertAction = {
       type: ALERT_MESSAGE.REMOVE_AT,
-      id
+      payload: { id }
     };
     expect(alertMessageActions.remove(id)).toEqual(expectedAction);
   });
 
   it("should create an action for clear message list", () => {
     const expectedAction: IAlertAction = {
-      type: ALERT_MESSAGE.CLEAR_ALL
+      type: ALERT_MESSAGE.CLEAR_ALL,
+      payload: {}
     };
     expect(alertMessageActions.clearAll()).toEqual(expectedAction);
   });

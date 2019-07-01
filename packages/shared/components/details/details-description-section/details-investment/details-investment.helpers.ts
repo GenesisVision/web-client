@@ -15,6 +15,7 @@ export const composeInvestmentDetails = (
   isInvested: personalDetails.isInvested,
   pendingInput: personalDetails.pendingInput,
   pendingOutput: personalDetails.pendingOutput,
+  pendingOutputIsWithdrawAll: personalDetails.pendingOutputIsWithdrawAll,
   status: personalDetails.status,
   value: personalDetails.value,
   invested: personalDetails.invested,

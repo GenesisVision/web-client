@@ -23,6 +23,7 @@ import {
   ComposedRequestEventTypeValue,
   EventTypeFilterType
 } from "./event-type-filter/event-type-filter.constants";
+import { FundAssetFilterType } from "./fund-asset-filter/fund-asset-filter.constants";
 import {
   ComposedRequestLevelFilterNames,
   ComposedRequestLevelFilterValue,
@@ -59,6 +60,7 @@ export interface SelectFilterValue<T = any> {
 export interface SortingColumn {
   name: string;
   sortingName?: string;
+  tooltip?: boolean;
 }
 
 export type FilteringType = {
@@ -70,7 +72,9 @@ export type FilteringType = {
     | LevelFilterType
     | SelectFilterType
     | TagFilterType
-    | undefined;
+    | FundAssetFilterType
+    | undefined
+    | any;
 };
 
 export type ComposeFiltersAllType = {

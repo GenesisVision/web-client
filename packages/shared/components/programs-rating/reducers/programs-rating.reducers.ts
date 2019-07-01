@@ -2,7 +2,12 @@ import { LevelUpSummary, ProgramsList } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
+import {
+  apiFieldSelector,
+  apiSelector,
+  fieldSelector
+} from "shared/utils/selectors";
 
 import {
   LEVELUP_SUMMARY,
@@ -10,12 +15,32 @@ import {
   SELF_PROGRAMS_RATING
 } from "../actions/programs-rating.actions";
 
+export const allProgramsSelector = apiSelector<ProgramsList>(
+  state => state.programsRating.programs
+);
+
 const allProgramsRatingReducer = apiReducerFactory<ProgramsList>({
   apiType: PROGRAMS_RATING
 });
+
+export const selfProgramsSelector = apiSelector<ProgramsList>(
+  state => state.programsRating.selfPrograms
+);
+
 const selfProgramsRatingReducer = apiReducerFactory<ProgramsList>({
   apiType: SELF_PROGRAMS_RATING
 });
+
+export const levelupSummarySelector = apiSelector<LevelUpSummary>(
+  state => state.programsRating.levelupSummary
+);
+
+export const levelDataSelector = apiFieldSelector(
+  levelupSummarySelector,
+  fieldSelector(state => state.levelData),
+  []
+);
+
 const levelupSummaryReducer = apiReducerFactory<LevelUpSummary>({
   apiType: LEVELUP_SUMMARY
 });

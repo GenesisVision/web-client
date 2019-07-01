@@ -1,6 +1,6 @@
 import "./phone-verification.scss";
 
-import { FormikBag, FormikProps, withFormik } from "formik";
+import { FormikProps, withFormik } from "formik";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -11,23 +11,7 @@ import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
 
-interface FormValues {
-  code: string;
-}
-
-interface FormProps extends FormikProps<FormValues> {}
-
-interface OwnProps {
-  phoneNumber: string;
-  errorMessage?: string;
-  onResendClick(): void;
-  disabledResend?: boolean;
-  onSubmit(code: string, setSubmitting: SetSubmittingType): void;
-}
-
-interface Props extends InjectedTranslateProps, OwnProps, FormProps {}
-
-class PhoneVerificationForm extends React.Component<Props> {
+class _PhoneVerificationForm extends React.PureComponent<Props> {
   componentDidMount() {
     this.props.onResendClick();
   }
@@ -59,7 +43,7 @@ class PhoneVerificationForm extends React.Component<Props> {
         <div className="dialog__bottom">
           <GVFormikField
             className="phone-verification__code"
-            name="code"
+            name={FIELDS.code}
             label={t("profile-page.verification.phone.code")}
             component={GVTextField}
             adornment={
@@ -87,21 +71,43 @@ class PhoneVerificationForm extends React.Component<Props> {
   }
 }
 
-export default compose<React.ComponentType<OwnProps>>(
+enum FIELDS {
+  code = "code"
+}
+
+interface FormValues {
+  [FIELDS.code]: string;
+}
+
+interface FormProps extends FormikProps<FormValues> {}
+
+interface OwnProps {
+  phoneNumber: string;
+  errorMessage?: string;
+  onResendClick(): void;
+  disabledResend?: boolean;
+  onSubmit(code: string, setSubmitting: SetSubmittingType): void;
+}
+
+interface Props extends InjectedTranslateProps, OwnProps, FormProps {}
+
+const PhoneVerificationForm = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<Props, FormValues>({
     displayName: "phone-verification",
     mapPropsToValues: () => ({
-      code: ""
+      [FIELDS.code]: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        code: number().required(
+        [FIELDS.code]: number().required(
           props.t("profile-page.verification.phone.required")
         )
       }),
     handleSubmit: (values, bag) => {
-      bag.props.onSubmit(values.code, bag.setSubmitting);
+      bag.props.onSubmit(values[FIELDS.code], bag.setSubmitting);
     }
   })
-)(PhoneVerificationForm);
+)(_PhoneVerificationForm);
+
+export default PhoneVerificationForm;

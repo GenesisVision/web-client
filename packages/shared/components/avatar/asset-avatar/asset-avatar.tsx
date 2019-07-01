@@ -22,7 +22,7 @@ interface IAssetAvatarState {
   anchor?: EventTarget;
 }
 
-class AssetAvatar extends React.Component<
+class _AssetAvatar extends React.PureComponent<
   IAssetAvatarProps,
   IAssetAvatarState
 > {
@@ -47,7 +47,7 @@ class AssetAvatar extends React.Component<
   render() {
     const { tooltip, onClickLevel } = this.props;
     return (
-      <React.Fragment>
+      <>
         <GVProgramAvatar
           onMouseEnterLevel={this.handleMouseEnter}
           onMouseLeaveLevel={this.handleMouseLeave}
@@ -56,7 +56,7 @@ class AssetAvatar extends React.Component<
         />
         {tooltip && (
           <Popover
-            disableBackdropClick
+            disableBackdrop
             noPadding
             anchorEl={this.state.anchor}
             className="tooltip__popover"
@@ -66,11 +66,12 @@ class AssetAvatar extends React.Component<
             {tooltip}
           </Popover>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }
 
-export default withUrl<GVProgramAvatarProps & IAssetAvatarProps>("url")(
-  AssetAvatar
+const AssetAvatar = withUrl<GVProgramAvatarProps & IAssetAvatarProps>("url")(
+  _AssetAvatar
 );
+export default AssetAvatar;

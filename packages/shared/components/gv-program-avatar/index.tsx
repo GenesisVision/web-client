@@ -2,6 +2,8 @@ import "./style.scss";
 
 import classnames from "classnames";
 import React from "react";
+import GVColors from "shared/components/gv-styles/gv-colors";
+import PieContainer from "shared/components/pie-container/pie-container";
 
 import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";
 
@@ -9,6 +11,7 @@ export interface GVProgramAvatarProps {
   url?: string;
   alt: string;
   level?: number;
+  levelProgress?: number;
   size?: "small" | "medium" | "big";
   className?: string;
   color?: string;
@@ -24,7 +27,7 @@ interface GVProgramAvatarState {
   errored: boolean;
 }
 
-class GVProgramAvatar extends React.Component<
+class GVProgramAvatar extends React.PureComponent<
   GVProgramAvatarProps,
   GVProgramAvatarState
 > {
@@ -70,7 +73,7 @@ class GVProgramAvatar extends React.Component<
   renderLevel = () => {
     const {
       level,
-      levelClassName,
+      levelProgress = 0,
       onMouseOverLevel,
       onMouseEnterLevel,
       onMouseLeaveLevel,
@@ -78,23 +81,19 @@ class GVProgramAvatar extends React.Component<
     } = this.props;
     if (level === undefined) return null;
     return (
-      <span
+      <div
         onMouseOver={onMouseOverLevel}
         onMouseEnter={onMouseEnterLevel}
         onMouseLeave={onMouseLeaveLevel}
         onClick={onClickLevel}
-        className={classnames("program-avatar__level", levelClassName, {
-          "program-avatar__level--1": level === 1,
-          "program-avatar__level--2": level === 2,
-          "program-avatar__level--3": level === 3,
-          "program-avatar__level--4": level === 4,
-          "program-avatar__level--5": level === 5,
-          "program-avatar__level--6": level === 6,
-          "program-avatar__level--7": level === 7
-        })}
+        className={"program-avatar__level"}
       >
-        {level}
-      </span>
+        <PieContainer
+          color={(GVColors as any)[`$levelColor${level}`]}
+          label={String(level)}
+          value={levelProgress}
+        />
+      </div>
     );
   };
 

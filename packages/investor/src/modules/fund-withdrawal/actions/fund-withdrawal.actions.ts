@@ -7,7 +7,7 @@ import { ApiAction } from "shared/utils/types";
 export const FUND_WITHDRAWAL_INFO_ACTION = "FUND_WITHDRAWAL_INFO_ACTION";
 export const RATE_ACTION = "RATE_ACTION";
 
-export const getFundWithdrawInfo = (
+export const getFundWithdrawInfoAction = (
   id: string,
   currency: string
 ): ApiAction<FundWithdrawInfo> => ({
@@ -19,7 +19,7 @@ export const getFundWithdrawInfo = (
   )
 });
 
-export const getRate = (currency: string): ApiAction<number> => ({
+export const getRateAction = (currency: string): ApiAction<number> => ({
   type: RATE_ACTION,
   payload: rateApi.v10RateByFromByToGet("GVT", currency)
 });

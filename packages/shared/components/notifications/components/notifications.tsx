@@ -2,7 +2,6 @@ import "./notifications.scss";
 
 import { NotificationList, NotificationViewModel } from "gv-api-web";
 import moment from "moment";
-import { NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -13,7 +12,9 @@ import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
 import NotificationsGroup from "shared/components/notifications/components/notification-group/notification-group";
 import Spinner from "shared/components/spiner/spiner";
 
-class Notifications extends React.Component<Props> {
+import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
+
+class Notifications extends React.PureComponent<Props> {
   state = {
     isPending: false
   };

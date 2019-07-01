@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
+import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -11,8 +12,8 @@ import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
-import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import {
@@ -21,7 +22,6 @@ import {
 } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import ProgramBigChart from "./program-big-chart/program-big-chart";
 
 interface IProgramTableRowDetailedProps {
@@ -36,7 +36,7 @@ interface IProgramTableRowDetailedState {
   isOpenInvestToProgramPopup: boolean;
 }
 
-class ProgramTableRowDetailed extends React.Component<
+class ProgramTableRowDetailed extends React.PureComponent<
   IProgramTableRowDetailedProps & InjectedTranslateProps,
   IProgramTableRowDetailedState
 > {
@@ -75,6 +75,7 @@ class ProgramTableRowDetailed extends React.Component<
                     <AssetAvatar
                       url={program.logo}
                       level={program.level}
+                      levelProgress={program.levelProgress}
                       alt={program.title}
                       size="medium"
                       color={program.color}
@@ -118,15 +119,9 @@ class ProgramTableRowDetailed extends React.Component<
                   {t("programs-page.programs-header.strategy")}
                 </div>
                 <div className="program-detailed__scroll">
-                  <GVScroll
-                    autoHide
-                    autoHideTimeout={1000}
-                    style={{ width: "100%", height: "100%" }}
-                  >
-                    <div className="program-detailed__description">
-                      {program.description}
-                    </div>
-                  </GVScroll>
+                  <div className="program-detailed__description">
+                    {program.description}
+                  </div>
                 </div>
               </div>
               <div className="program-detailed__statistic">
@@ -206,10 +201,10 @@ class ProgramTableRowDetailed extends React.Component<
                   </div>
                   <div>
                     <div className="program-detailed__statistic-data--label">
-                      {t("programs-page.programs-header.trades")}
+                      {t("programs-page.programs-header.age")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {program.statistic.tradesCount}
+                      {moment(program.creationDate).format("ll")}
                     </div>
                   </div>
                   <div>

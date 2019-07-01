@@ -58,7 +58,7 @@ const mapStateToProps = (
   state: AuthRootState,
   props: OwnProps
 ): StateProps => ({
-  program: state.programNotifications.data[props.id]
+  program: state.programNotifications[props.id]
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

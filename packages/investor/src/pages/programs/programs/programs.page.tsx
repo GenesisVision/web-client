@@ -7,13 +7,12 @@ import NavigationTabsContainer from "shared/components/navigation-tabs/navigatio
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 import ProgramsTableContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
-import { composeProgramFacetUrl } from "shared/utils/compose-url";
-
 import {
   PROGRAMS_EXPLORE_TAB_NAME,
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
-} from "../programs.routes";
+} from "shared/routes/programs.routes";
+import { composeProgramFacetUrl } from "shared/utils/compose-url";
 
 const _ProgramsPage: React.FC<InjectedTranslateProps> = ({ t }) => {
   const title = t("programs-page.title");
@@ -39,5 +38,5 @@ const _ProgramsPage: React.FC<InjectedTranslateProps> = ({ t }) => {
   );
 };
 
-const ProgramsPage = React.memo(translate()(_ProgramsPage));
+const ProgramsPage = translate()(React.memo(_ProgramsPage));
 export default ProgramsPage;

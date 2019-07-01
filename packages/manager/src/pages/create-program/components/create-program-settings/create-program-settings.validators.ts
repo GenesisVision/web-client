@@ -20,7 +20,7 @@ const createProgramSettingsValidationSchema = (
     )
   );
   return object().shape({
-    stopOutLevel: number()
+    [CREATE_PROGRAM_FIELDS.stopOutLevel]: number()
       .required(
         t("manager.create-program-page.settings.validation.stop-out-required")
       )
@@ -33,19 +33,19 @@ const createProgramSettingsValidationSchema = (
         t("manager.create-program-page.settings.validation.stop-out-is-large")
       ),
 
-    logo: inputImageShape(t),
-    title: assetTitleShape(t),
-    description: assetDescriptionShape(t),
-    currency: string().required(
+    [CREATE_PROGRAM_FIELDS.logo]: inputImageShape(t),
+    [CREATE_PROGRAM_FIELDS.title]: assetTitleShape(t),
+    [CREATE_PROGRAM_FIELDS.description]: assetDescriptionShape(t),
+    [CREATE_PROGRAM_FIELDS.currency]: string().required(
       t("manager.create-program-page.settings.validation.currency-required")
     ),
-    periodLength: string().required(
+    [CREATE_PROGRAM_FIELDS.periodLength]: string().required(
       t("manager.create-program-page.settings.validation.period-required")
     ),
-    leverage: string().required(
+    [CREATE_PROGRAM_FIELDS.leverage]: string().required(
       t("manager.create-program-page.settings.validation.leverage-required")
     ),
-    entryFee: number()
+    [CREATE_PROGRAM_FIELDS.entryFee]: number()
       .required(
         t("manager.create-program-page.settings.validation.entry-fee-required")
       )
@@ -59,7 +59,7 @@ const createProgramSettingsValidationSchema = (
           max: props.programsInfo.managerMaxEntryFee
         })
       ),
-    successFee: number()
+    [CREATE_PROGRAM_FIELDS.successFee]: number()
       .min(
         0,
         t("manager.create-program-page.settings.validation.success-fee-min")
@@ -75,19 +75,48 @@ const createProgramSettingsValidationSchema = (
           max: props.programsInfo.managerMaxSuccessFee
         })
       ),
-    isSignalProgram: boolean(),
-    signalVolumeFee: mixed().when("isSignalProgram", {
-      is: true,
-      then: signalVolumeFeeShape(t)
-    }),
-    signalSuccessFee: mixed().when("isSignalProgram", {
-      is: true,
-      then: signalSuccessFeeShape(t, props.programsInfo.managerMaxSuccessFee)
-    }),
-    brokerAccountTypeId: string().required(
+    [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: boolean(),
+    [CREATE_PROGRAM_FIELDS.investmentLimit]: mixed().when(
+      CREATE_PROGRAM_FIELDS.hasInvestmentLimit,
+      {
+        is: true,
+        then: number()
+          .min(
+            0,
+            t(
+              "manager.create-program-page.settings.validation.investment-limit-min"
+            )
+          )
+          .lessThan(
+            10000000000,
+            "Investment Limit must be less than 10000000000"
+          )
+          .required(
+            t(
+              "manager.create-program-page.settings.validation.investment-limit-required"
+            )
+          )
+      }
+    ),
+    [CREATE_PROGRAM_FIELDS.isSignalProgram]: boolean(),
+    [CREATE_PROGRAM_FIELDS.signalVolumeFee]: mixed().when(
+      CREATE_PROGRAM_FIELDS.isSignalProgram,
+      {
+        is: true,
+        then: signalVolumeFeeShape(t)
+      }
+    ),
+    [CREATE_PROGRAM_FIELDS.signalSuccessFee]: mixed().when(
+      CREATE_PROGRAM_FIELDS.isSignalProgram,
+      {
+        is: true,
+        then: signalSuccessFeeShape(t, props.programsInfo.managerMaxSuccessFee)
+      }
+    ),
+    [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: string().required(
       t("manager.create-program-page.settings.validation.account-type-required")
     ),
-    depositAmount:
+    [CREATE_PROGRAM_FIELDS.depositAmount]:
       props.rate && props.programCurrency && props.rate
         ? number()
             .required(
@@ -154,7 +183,7 @@ export const signalSuccessFeeShape = (
 ) => {
   return number()
     .min(
-      0.01,
+      0,
       t("manager.create-program-page.settings.validation.success-fee-min")
     )
     .required(
@@ -194,5 +223,25 @@ export const signalVolumeFeeShape = (
       )
     );
 };
+
+export enum CREATE_PROGRAM_FIELDS {
+  currency = "currency",
+  periodLength = "periodLength",
+  successFee = "successFee",
+  stopOutLevel = "stopOutLevel",
+  leverage = "leverage",
+  brokerAccountTypeId = "brokerAccountTypeId",
+  signalSuccessFee = "signalSuccessFee",
+  signalVolumeFee = "signalVolumeFee",
+  isSignalProgram = "isSignalProgram",
+  hasInvestmentLimit = "hasInvestmentLimit",
+  title = "title",
+  description = "description",
+  logo = "logo",
+  entryFee = "entryFee",
+  depositAmount = "depositAmount",
+  depositWalletId = "depositWalletId",
+  investmentLimit = "investmentLimit"
+}
 
 export default createProgramSettingsValidationSchema;

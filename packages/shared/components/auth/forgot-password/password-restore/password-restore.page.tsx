@@ -18,5 +18,5 @@ const _PasswordRestorePage: React.FC<
   </div>
 );
 
-const PasswordRestorePage = React.memo(translate()(_PasswordRestorePage));
+const PasswordRestorePage = translate()(React.memo(_PasswordRestorePage));
 export default PasswordRestorePage;

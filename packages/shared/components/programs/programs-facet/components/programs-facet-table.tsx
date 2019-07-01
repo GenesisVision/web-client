@@ -1,5 +1,5 @@
 import { ProgramFacetTimeframeEnum } from "gv-api-web";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import {
@@ -7,7 +7,10 @@ import {
   DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { mapServerTimeFrameToFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  SortingColumn
+} from "shared/components/table/components/filtering/filter.type";
 import {
   GetItemsFuncType,
   TableToggleFavoriteType
@@ -20,68 +23,72 @@ import {
   PROGRAMS_FACET_TABLE_FILTERS
 } from "./programs-facet.constants";
 
-class _ProgramsFacetTable extends React.PureComponent<
+const _ProgramsFacetTable: React.FC<
   IProgramsFacetTableProps & InjectedTranslateProps
-> {
-  toggleFavorite: TableToggleFavoriteType = (program, updateRow) => () => {
-    const isFavorite = program.personalDetails.isFavorite;
-    const newProgram = {
-      ...program,
-      personalDetails: { ...program.personalDetails, isFavorite: !isFavorite }
-    };
-    updateRow(newProgram);
-    toggleFavoriteProgram(program.id, isFavorite).catch(() => {
-      updateRow(program);
-    });
-  };
+> = ({
+  t,
+  title,
+  sorting,
+  getItems,
+  isAuthenticated,
+  showRating,
+  timeframe,
+  columns
+}) => {
+  const toggleFavorite: TableToggleFavoriteType = useCallback(
+    (program, updateRow) => () => {
+      const isFavorite = program.personalDetails.isFavorite;
+      const newProgram = {
+        ...program,
+        personalDetails: { ...program.personalDetails, isFavorite: !isFavorite }
+      };
+      updateRow(newProgram);
+      toggleFavoriteProgram(program.id, isFavorite).catch(() => {
+        updateRow(program);
+      });
+    },
+    []
+  );
 
-  composeFiltering = () => {
-    const type = mapServerTimeFrameToFilterType(this.props.timeframe);
-    return {
-      dateRange: {
-        ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type
-      }
-    } as FilteringType;
-  };
+  const composeFiltering = useCallback(
+    () =>
+      ({
+        dateRange: {
+          ...DEFAULT_DATE_RANGE_FILTER_VALUE,
+          type: mapServerTimeFrameToFilterType(timeframe)
+        }
+      } as FilteringType),
+    [timeframe]
+  );
 
-  render() {
-    const {
-      t,
-      title,
-      sorting,
-      getItems,
-      isAuthenticated,
-      showRating
-    } = this.props;
-    return (
-      <ProgramTableModule
-        renderFilters={(
-          updateFilter,
-          filtering: FilteringType //TODO fix filtering types
-        ) => (
-          <>
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.program-start")}
-            />
-          </>
-        )}
-        title={title}
-        paging={PROGRAMS_FACET_PAGING}
-        sorting={sorting}
-        filtering={this.composeFiltering()}
-        defaultFilters={PROGRAMS_FACET_TABLE_FILTERS}
-        toggleFavorite={this.toggleFavorite}
-        getItems={getItems}
-        isAuthenticated={isAuthenticated}
-        showRating={showRating}
-      />
-    );
-  }
-}
+  return (
+    <ProgramTableModule
+      renderFilters={(
+        updateFilter,
+        filtering: FilteringType //TODO fix filtering types
+      ) => (
+        <>
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.program-start")}
+          />
+        </>
+      )}
+      title={title}
+      paging={PROGRAMS_FACET_PAGING}
+      sorting={sorting}
+      filtering={composeFiltering()}
+      defaultFilters={PROGRAMS_FACET_TABLE_FILTERS}
+      toggleFavorite={toggleFavorite}
+      getItems={getItems}
+      isAuthenticated={isAuthenticated}
+      showRating={showRating}
+      columns={columns}
+    />
+  );
+};
 
 export interface IProgramsFacetTableProps {
   title: string;
@@ -90,7 +97,9 @@ export interface IProgramsFacetTableProps {
   getItems: GetItemsFuncType;
   isAuthenticated?: boolean;
   showRating?: boolean;
+  level?: number;
+  columns?: SortingColumn[];
 }
 
-const ProgramsFacetTable = translate()(_ProgramsFacetTable);
+const ProgramsFacetTable = translate()(React.memo(_ProgramsFacetTable));
 export default ProgramsFacetTable;

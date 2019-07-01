@@ -1,6 +1,7 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import { DashboardChartValue, ProgramRequests } from "gv-api-web";
+import { dashboardInRequestsSelector } from "manager-web-portal/src/pages/dashboard/reducers/dashboard-in-requests.reducer";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
@@ -21,8 +22,11 @@ import {
 } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardChartStatsLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-stats-loader";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { isNewUserSelector } from "shared/reducers/header-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { dashboardPortfolioChartSelector } from "../../reducers/dashboard-portfolio-chart.reducer";
 import { getPortfolioChart } from "../../services/dashboard-chart.service";
 import {
   cancelRequest,
@@ -65,10 +69,8 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
       t,
       portfolioChartData,
       currency,
-      portfolioChartDataIsPending,
       isNewUser,
-      inRequests,
-      inRequestsIsPending
+      inRequests
     } = this.props;
     const { period } = this.state;
     if (isNewUser) return <DashboardGetStarted />;
@@ -78,19 +80,19 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
           {t("investor.dashboard-page.chart-section.header")}
         </h3>
         <DashboardInRequestsContainer
-          condition={!!inRequests && !inRequestsIsPending}
+          condition={!!inRequests}
           loader={<DashboardChartRequestLoader />}
           inRequests={inRequests!}
           cancelRequest={cancelRequest}
         />
         <DashboardPortfolioChartStat
-          condition={!portfolioChartDataIsPending && !!portfolioChartData}
+          condition={!!portfolioChartData}
           loader={<DashboardChartStatsLoader />}
           currency={currency}
           portfolioChartData={portfolioChartData!}
         />
         <DashboardPortfolioChartSection
-          condition={!portfolioChartDataIsPending && !!portfolioChartData}
+          condition={!!portfolioChartData}
           loader={<DashboardChartLoader />}
           period={period}
           data={portfolioChartData!}
@@ -102,19 +104,12 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
   }
 }
 
-const mapStateToProps = (state: InvestorRootState): StateProps => {
-  const { info } = state.profileHeader;
-  const { portfolioChartData, inRequestsData } = state.dashboard;
-  const { currency } = state.accountSettings;
-  return {
-    portfolioChartData: portfolioChartData.data,
-    portfolioChartDataIsPending: portfolioChartData.isPending,
-    inRequests: inRequestsData.data,
-    inRequestsIsPending: inRequestsData.isPending,
-    currency,
-    isNewUser: info.data ? info.data.isNewUser : false
-  };
-};
+const mapStateToProps = (state: InvestorRootState): StateProps => ({
+  portfolioChartData: dashboardPortfolioChartSelector(state),
+  inRequests: dashboardInRequestsSelector(state),
+  currency: currencySelector(state),
+  isNewUser: isNewUserSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators({ getPortfolioChart, getInRequests }, dispatch)
@@ -131,9 +126,7 @@ interface OwnProps {}
 interface StateProps {
   currency: CurrencyEnum;
   portfolioChartData?: DashboardChartValue;
-  portfolioChartDataIsPending: boolean;
   inRequests?: ProgramRequests;
-  inRequestsIsPending: boolean;
   isNewUser: boolean;
 }
 

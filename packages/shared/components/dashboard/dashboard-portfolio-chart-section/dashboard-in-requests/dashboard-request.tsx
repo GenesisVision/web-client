@@ -7,27 +7,15 @@ import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { ASSET, ROLE } from "shared/constants/constants";
+import { ASSET } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { EVENT_LOGO_TYPE } from "../../dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 import { CancelRequestPropsType } from "../../dashboard.constants";
 
-export interface IDashboardRequestProps extends InjectedTranslateProps {
-  request: ProgramRequest;
-  cancelRequest(x: CancelRequestPropsType): void;
-  onApplyCancelRequest(): void;
-  role?: ROLE;
-  asset?: ASSET;
-}
-
-export interface IDashboardRequestState {
-  isConfirmPopupOpen: boolean;
-  disabled: boolean;
-}
-
-class DashboardRequest extends React.PureComponent<
-  IDashboardRequestProps,
+class _DashboardRequest extends React.PureComponent<
+  Props,
   IDashboardRequestState
 > {
   state = {
@@ -46,7 +34,7 @@ class DashboardRequest extends React.PureComponent<
       request,
       cancelRequest,
       onApplyCancelRequest,
-      role = ROLE.INVESTOR,
+      role,
       asset = ASSET.PROGRAM
     } = this.props;
     this.setState({ disabled: true });
@@ -90,13 +78,17 @@ class DashboardRequest extends React.PureComponent<
         <StatisticItem
           className={"dashboard-request-popover__statistic-item"}
           label={
-            <NumberFormat
-              value={formatCurrencyValue(request.value, request.currency)}
-              decimalScale={8}
-              displayType="text"
-              allowNegative={false}
-              suffix={` ${request.currency}`}
-            />
+            request.withdrawAll ? (
+              t("withdraw-program.withdrawing-all")
+            ) : (
+              <NumberFormat
+                value={formatCurrencyValue(request.value, request.currency)}
+                decimalScale={8}
+                displayType="text"
+                allowNegative={false}
+                suffix={` ${request.currency}`}
+              />
+            )
           }
           invert
         >
@@ -129,4 +121,22 @@ class DashboardRequest extends React.PureComponent<
   }
 }
 
-export default translate()(DashboardRequest);
+export interface Props
+  extends InjectedTranslateProps,
+    WithRoleProps,
+    OwnProps {}
+
+interface OwnProps {
+  request: ProgramRequest;
+  cancelRequest(x: CancelRequestPropsType): void;
+  onApplyCancelRequest(): void;
+  asset?: ASSET;
+}
+
+export interface IDashboardRequestState {
+  isConfirmPopupOpen: boolean;
+  disabled: boolean;
+}
+
+const DashboardRequest = withRole<OwnProps>(translate()(_DashboardRequest));
+export default DashboardRequest;

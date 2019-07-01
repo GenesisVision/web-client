@@ -1,185 +1,58 @@
-import { OrderSignalModel, TradesSignalViewModel } from "gv-api-web";
-import moment from "moment";
-import React, { Component, ComponentType, Fragment } from "react";
+import { OrderSignalModel } from "gv-api-web";
+import TradesHistoryRow from "modules/copytrading-tables/components/trades-history-row";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
-import BaseProfitability from "shared/components/profitability/base-profitability";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { PROGRAM_TRADES_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
-import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableContainer from "shared/components/table/components/table-container";
-import TableRow from "shared/components/table/components/table-row";
-import {
-  Column,
-  UpdateFilterFunc
-} from "shared/components/table/components/table.types";
-import {
-  composeManagerDetailsUrl,
-  composeProgramDetailsUrl
-} from "shared/utils/compose-url";
-import { formatPercent, formatValue } from "shared/utils/formatter";
+import { UpdateFilterFunc } from "shared/components/table/components/table.types";
 
 import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
 import { getCopytradingTradesHistory } from "../services/copytrading-tables.service";
-import {
-  COPYTRADING_OPEN_TRADES_COLUMNS,
-  COPYTRADING_TRADES_HISTORY_COLUMNS
-} from "./copytrading-tables.constants";
+import { COPYTRADING_TRADES_HISTORY_COLUMNS } from "./copytrading-tables.constants";
 import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.selectors";
-import TradeRow from "./trade-row";
 
-interface ITradesHistoryTableOwnProps {
-  title: string;
-  currency?: string;
-}
-
-interface ITradesHistoryDispatchProps {
-  service: {
-    clearCopytradingTable(): void;
-  };
-}
-
-class TradesHistoryTable extends Component<
-  ITradesHistoryTableOwnProps &
-    InjectedTranslateProps &
-    ITradesHistoryDispatchProps
-> {
+class _TradesHistoryTable extends React.PureComponent<Props> {
   componentWillUnmount() {
     this.props.service.clearCopytradingTable();
   }
   render() {
-    const { t, title, currency } = this.props;
+    const { t, currency, title } = this.props;
     return (
       <TableContainer
         getItems={getCopytradingTradesHistory(currency)}
         dataSelector={dashboardTradesHistoryTableSelector}
         isFetchOnMount={true}
-        columns={COPYTRADING_OPEN_TRADES_COLUMNS}
+        columns={COPYTRADING_TRADES_HISTORY_COLUMNS}
         renderFilters={(
           updateFilter: UpdateFilterFunc,
           filtering: FilteringType
-        ) => (
-          <Fragment>
+        ) => {
+          return (
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}
               value={filtering[DATE_RANGE_FILTER_NAME]}
               onChange={updateFilter}
               startLabel={t("filters.date-range.program-start")}
             />
-          </Fragment>
-        )}
+          );
+        }}
         renderHeader={column => (
           <span
             className={`details-trades__head-cell program-details-trades__cell--${
               column.name
             }`}
           >
-            {t(`investor.copytrading-tables.open-trades-header.${column.name}`)}
+            {t(
+              `investor.copytrading-tables.trades-history-header.${column.name}`
+            )}
           </span>
         )}
-        renderBodyRow={(trade: OrderSignalModel, updateRow: any) => (
-          <>
-            <TradeRow trade={trade} />
-            {/*<TableRow>
-              <TableCell className="programs-table__cell dashboard-programs__cell--title">
-                <div className="dashboard-programs__cell--avatar-title">
-                  <Link
-                    to={{
-                      pathname: composeProgramDetailsUrl(signalTrade.program.url),
-                      state: `/ ${title}`
-                    }}
-                  >
-                    <AssetAvatar
-                      url={signalTrade.program.logo}
-                      alt={signalTrade.program.title}
-                      color={signalTrade.program.color}
-                    />
-                  </Link>
-                  <Link
-                    to={{
-                      pathname: composeProgramDetailsUrl(signalTrade.program.url),
-                      state: `/ ${title}`
-                    }}
-                  >
-                    <GVButton variant="text" color="secondary">
-                      {signalTrade.program.title}
-                    </GVButton>
-                  </Link>
-                </div>
-              </TableCell>
-              <TableCell className="managers-table__cell--username">
-                <ProfileAvatar
-                  url={signalTrade.manager.avatar}
-                  alt={signalTrade.manager.username}
-                />
-                <Link
-                  to={{
-                    pathname: composeManagerDetailsUrl(signalTrade.manager.url),
-                    state: `/ ${title}`
-                  }}
-                >
-                  <GVButton variant="text" color="secondary">
-                    {signalTrade.manager.username}
-                  </GVButton>
-                </Link>
-              </TableCell>
-              <TableCell>
-                <BaseProfitability
-                  isPositive={signalTrade.direction === "Buy"}
-                  isNegative={signalTrade.direction === "Sell"}
-                >
-                  {signalTrade.direction}
-                </BaseProfitability>
-              </TableCell>
-              <TableCell>{moment(signalTrade.date).format()}</TableCell>
-              <TableCell>{moment(signalTrade.date).format()}</TableCell>
-              <TableCell>{signalTrade.symbol}</TableCell>
-              <TableCell>
-                <NumberFormat
-                  value={formatValue(signalTrade.volume)}
-                  displayType="text"
-                  thousandSeparator=" "
-                />
-              </TableCell>
-              <TableCell>
-                <NumberFormat
-                  value={formatValue(signalTrade.price)}
-                  displayType="text"
-                  thousandSeparator=" "
-                />
-              </TableCell>
-              <TableCell>
-                <NumberFormat
-                  value={formatValue(signalTrade.priceClose)}
-                  displayType="text"
-                  thousandSeparator=" "
-                />
-              </TableCell>
-              <TableCell>
-                <Profitability
-                  value={+formatPercent(signalTrade.profit)}
-                  prefix={PROFITABILITY_PREFIX.SIGN}
-                >
-                  <NumberFormat
-                    value={formatPercent(signalTrade.profit)}
-                    thousandSeparator=" "
-                    displayType="text"
-                    allowNegative={false}
-                    suffix=" %"
-                  />
-                </Profitability>
-              </TableCell>
-            </TableRow>*/}
-          </>
+        renderBodyRow={(trade: OrderSignalModel) => (
+          <TradesHistoryRow trade={trade} title={title} />
         )}
       />
     );
@@ -190,10 +63,25 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   service: bindActionCreators({ clearCopytradingTable }, dispatch)
 });
 
-export default compose<ComponentType<ITradesHistoryTableOwnProps>>(
+const TradesHistoryTable = compose<React.FC<OwnProps>>(
   translate(),
   connect(
     null,
     mapDispatchToProps
   )
-)(TradesHistoryTable);
+)(_TradesHistoryTable);
+
+export default TradesHistoryTable;
+
+interface OwnProps {
+  title: string;
+  currency?: string;
+}
+
+interface DispatchProps {
+  service: {
+    clearCopytradingTable(): void;
+  };
+}
+
+interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}

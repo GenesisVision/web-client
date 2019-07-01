@@ -4,7 +4,7 @@ import {
   FAILURE_SUFFIX,
   IApiState,
   REQUEST_SUFFIX
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 import { FavoriteActionType } from "shared/utils/types";
 
 const updateFavoriteLocal = (
@@ -12,26 +12,22 @@ const updateFavoriteLocal = (
   id: string,
   isFavorite: boolean
 ): IApiState<ProgramsList> => {
+  if (!state.data) return state;
   return {
     ...state,
     data: {
       ...state.data,
-      total: (state.data && state.data.total) || 0,
-      programs:
-        (state.data &&
-          state.data.programs.map(program => {
-            if (program.id === id) {
-              return {
-                ...program,
-                personalDetails: {
-                  ...program.personalDetails,
-                  isFavorite: isFavorite
-                }
-              };
+      programs: state.data.programs.map(program =>
+        program.id === id
+          ? {
+              ...program,
+              personalDetails: {
+                ...program.personalDetails,
+                isFavorite
+              }
             }
-            return program;
-          })) ||
-        []
+          : program
+      )
     }
   };
 };
@@ -42,11 +38,7 @@ const favoritesReducer = (
 ): IApiState<ProgramsList> => {
   switch (action.type) {
     case `${SET_FAVORITE_PROGRAM}_${REQUEST_SUFFIX}`:
-      return updateFavoriteLocal(
-        state,
-        action.meta.id,
-        action.meta.isFavorite
-      );
+      return updateFavoriteLocal(state, action.meta.id, action.meta.isFavorite);
     case `${SET_FAVORITE_PROGRAM}_${FAILURE_SUFFIX}`: {
       return updateFavoriteLocal(
         state,

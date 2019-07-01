@@ -1,10 +1,11 @@
 import { LOCATION_CHANGE } from "connected-react-router";
-import { AnyAction, Reducer } from "redux";
+import { Reducer } from "redux";
+import { ActionType } from "shared/utils/types";
 
 const clearableReducer = <S = {}>(
-  reducer: Reducer,
+  reducer: Reducer<any, ActionType>,
   clearActionType: string = LOCATION_CHANGE
-): Reducer => (state: S, action: AnyAction) => {
+): Reducer<any, ActionType> => (state: S, action: ActionType) => {
   if (action.type === clearActionType) {
     return reducer(undefined, action);
   }

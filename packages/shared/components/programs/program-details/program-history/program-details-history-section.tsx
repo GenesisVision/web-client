@@ -17,10 +17,13 @@ import {
   SelectFilterValue
 } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import { IDataModel, ROLE, ROLE_ENV } from "shared/constants/constants";
+import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { AuthState } from "shared/reducers/auth-reducer";
-import RootState from "shared/reducers/root-reducer";
+import {
+  AuthState,
+  isAuthenticatedSelector
+} from "shared/reducers/auth-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import { HistoryCountsType } from "../program-details.types";
 import ProgramOpenPositions from "./program-open-positions";
@@ -43,7 +46,8 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
     tab: TABS.OPEN_POSITIONS,
     tradesCount: 0,
     eventsCount: 0,
-    openPositionsCount: 0
+    openPositionsCount: 0,
+    subscriptionsCount: 0
   };
 
   componentDidMount() {
@@ -58,9 +62,16 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { tab, tradesCount, eventsCount, openPositionsCount } = this.state;
     const {
-      isForex,
+      tab,
+      tradesCount,
+      eventsCount,
+      openPositionsCount,
+      subscriptionsCount
+    } = this.state;
+    const {
+      showSwaps,
+      showTickets,
       t,
       programId,
       programCurrency,
@@ -71,10 +82,9 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       fetchPortfolioEvents,
       fetchTrades,
       fetchOpenPositions,
-      isSignalProgram
+      isSignalProgram,
+      isOwnProgram
     } = this.props;
-
-    const isManager = ROLE_ENV === ROLE.MANAGER;
 
     return (
       <Surface className="details-history">
@@ -97,19 +107,20 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
                 count={eventsCount}
                 visible={isAuthenticated && isInvested}
               />
-              {/* <GVTab
+              <GVTab
                 value={TABS.SUBSCRIBERS}
                 label={t("program-details-page.history.tabs.subscriptions")}
-                count={3}
-                visible={isAuthenticated && isSignalProgram && isManager}
-              /> */}
+                count={subscriptionsCount}
+                visible={isAuthenticated && isSignalProgram && isOwnProgram}
+              />
             </GVTabs>
           </div>
         </div>
         <div>
           {tab === TABS.TRADES && (
             <ProgramTrades
-              isForex={isForex}
+              showSwaps={showSwaps}
+              showTickets={showTickets}
               fetchTrades={fetchTrades}
               programId={programId}
               currency={currency}
@@ -130,23 +141,25 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
               currency={programCurrency}
             />
           )}
-          {tab === TABS.SUBSCRIBERS && <ProgramSubscriptions />}
+          {tab === TABS.SUBSCRIBERS && (
+            <ProgramSubscriptions id={programId} currency={currency} />
+          )}
         </div>
       </Surface>
     );
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { isAuthenticated } = state.authData;
-  return { isAuthenticated };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state)
+});
 
 interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
 
 interface OwnProps {
   isSignalProgram: boolean;
-  isForex: boolean;
+  showSwaps: boolean;
+  showTickets: boolean;
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
   fetchPortfolioEvents: GetItemsFuncType;
   fetchOpenPositions: (
@@ -162,6 +175,7 @@ interface OwnProps {
   programCurrency: CURRENCIES;
   isInvested: boolean;
   eventTypeFilterValues: SelectFilterValue[];
+  isOwnProgram: boolean;
 }
 
 interface StateProps extends AuthState {}

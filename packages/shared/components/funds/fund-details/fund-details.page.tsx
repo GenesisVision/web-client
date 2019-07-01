@@ -1,32 +1,30 @@
 import "shared/components/details/details.scss";
 
 import { FundBalanceChart, FundDetailsFull } from "gv-api-web";
-import React, { ComponentType, PureComponent } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/login/login.service";
-import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
-import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
-import FundDetailsHistorySection from "shared/components/funds/fund-details/fund-details-history-section/fund-details-history-section";
-import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
+import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
 import {
-  fetchFundStructure,
   getFundDescription,
   getFundStatistic
 } from "shared/components/funds/fund-details/services/fund-details.service";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
-import Page from "shared/components/page/page";
+import NotFoundPage from "shared/components/not-found/not-found";
 import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
-import RootState from "shared/reducers/root-reducer";
-import { ResponseError } from "shared/utils/types";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { RootState } from "shared/reducers/root-reducer";
+import { CurrencyEnum, ResponseError } from "shared/utils/types";
 
+import FundDetailsContainer from "./fund-details.container";
 import { IDescriptionSection } from "./fund-details.types";
 import {
   FundDetailsProfitChart,
   FundDetailsStatistic
 } from "./services/fund-details.types";
 
-class FundDetailsPage extends PureComponent<Props, State> {
+class FundDetailsPage extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -89,77 +87,30 @@ class FundDetailsPage extends PureComponent<Props, State> {
       profitChart,
       balanceChart
     } = this.state;
-
-    if (hasError) {
-      return <NotFoundPage />;
-    }
-
-    if (!description) return null;
-
-    const fetchHistoryPortfolioEvents = (filters: any) =>
-      historySection.fetchPortfolioEvents({
-        ...filters,
-        assetId: description.id
-      });
-
-    const isInvested =
-      description.personalFundDetails &&
-      description.personalFundDetails.isInvested;
+    if (hasError) return <NotFoundPage />;
     return (
-      <Page title={description.title}>
-        <ProgramDetailContext.Provider
-          value={{
-            updateDetails: this.updateDetails
-          }}
-        >
-          <div className="details">
-            <div className="details__section">
-              <FundDetailsDescriptionSection
-                fundDescription={description}
-                isAuthenticated={isAuthenticated}
-                accountCurrency={currency}
-                redirectToLogin={service.redirectToLogin}
-                FundControls={descriptionSection.FundControls}
-                FundWithdrawContainer={
-                  descriptionSection.FundWithdrawalContainer
-                }
-              />
-            </div>
-            <div className="details__section">
-              <FundDetailsStatisticSection
-                getFundStatistic={getFundStatistic}
-                programId={description.id}
-                currency={currency}
-                statistic={statistic}
-                profitChart={profitChart}
-                balanceChart={balanceChart}
-              />
-            </div>
-            <div className="details__history">
-              <FundDetailsHistorySection
-                id={description.id}
-                fetchFundStructure={fetchFundStructure}
-                fetchPortfolioEvents={fetchHistoryPortfolioEvents}
-                fetchHistoryCounts={historySection.fetchHistoryCounts}
-                eventTypeFilterValues={historySection.eventTypeFilterValues}
-                isInvested={isInvested}
-              />
-            </div>
-          </div>
-        </ProgramDetailContext.Provider>
-      </Page>
+      <FundDetailsContainer
+        condition={!!description}
+        loader={<DetailsContainerLoader assets />}
+        updateDetails={this.updateDetails}
+        redirectToLogin={service.redirectToLogin}
+        historySection={historySection}
+        descriptionSection={descriptionSection}
+        description={description!}
+        profitChart={profitChart}
+        balanceChart={balanceChart}
+        statistic={statistic}
+        currency={currency}
+        isAuthenticated={isAuthenticated}
+      />
     );
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { accountSettings, authData } = state;
-
-  return {
-    currency: accountSettings.currency,
-    isAuthenticated: authData.isAuthenticated
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  currency: currencySelector(state),
+  isAuthenticated: isAuthenticatedSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators({ getFundDescription, redirectToLogin }, dispatch)
@@ -172,7 +123,7 @@ interface OwnProps {
 
 interface StateProps {
   isAuthenticated: boolean;
-  currency: string;
+  currency: CurrencyEnum;
 }
 
 interface DispatchProps {
@@ -193,7 +144,7 @@ interface State {
   statistic?: FundDetailsStatistic;
 }
 
-export default compose<ComponentType<OwnProps>>(
+export default compose<React.ComponentType<OwnProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps

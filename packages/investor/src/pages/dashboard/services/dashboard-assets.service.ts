@@ -14,19 +14,19 @@ export const getDashboardFunds = (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<FundsList>> => {
   const authorization = authService.getAuthArg();
-  return actions.fetchDashboardFunds(authorization, filters);
+  return actions.fetchDashboardFundsAction(authorization, filters);
 };
 
 export const getDashboardPrograms = (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<ProgramsList>> => {
   const authorization = authService.getAuthArg();
-  return actions.fetchDashboardPrograms(authorization, filters);
+  return actions.fetchDashboardProgramsAction(authorization, filters);
 };
 
 export const getDashboardCopytrading = (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<SignalsList>> => {
   const authorization = authService.getAuthArg();
-  return actions.fetchDashboardCopytrading(authorization, filters);
+  return actions.fetchDashboardCopytradingAction(authorization, filters);
 };

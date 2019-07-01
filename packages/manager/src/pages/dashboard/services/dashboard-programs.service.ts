@@ -8,4 +8,7 @@ import * as actions from "../actions/dashboard.actions";
 export const getDashboardPrograms = (
   requestFilters?: ComposeFiltersAllType
 ): ActionType<CancelablePromise<ProgramsList>> =>
-  actions.fetchDashboardPrograms(authService.getAuthArg(), requestFilters);
+  actions.fetchDashboardProgramsAction(
+    authService.getAuthArg(),
+    requestFilters
+  );

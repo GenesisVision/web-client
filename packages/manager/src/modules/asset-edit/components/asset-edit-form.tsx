@@ -1,19 +1,22 @@
 import { FormikProps, withFormik } from "formik";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import NumberFormat from "react-number-format";
+import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import InputImage, {
   IImageValue
 } from "shared/components/form/input-image/input-image";
 import GVButton from "shared/components/gv-button";
+import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import GVTextField from "shared/components/gv-text-field";
+import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import ProgramDefaultImage from "shared/media/program-default-image.svg";
-import { SetSubmittingType } from "shared/utils/types";
+import { validateFraction } from "shared/utils/formatter";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import { IAssetEditInfo } from "../asset-edit-container";
 import editAssetSettingsValidationSchema from "./asset-edit.validators";
@@ -30,6 +33,11 @@ const _AssetEditForm: React.FC<IAssetEditProps> = ({
   isSubmitting
 }) => {
   const descriptionTrimmedLength = values.description.trim().length;
+  const isAmountAllow = useCallback(
+    (currency: CurrencyEnum) => ({ value }: NumberFormatValues) =>
+      validateFraction(value, currency),
+    []
+  );
   return (
     <form id="edit-form" onSubmit={handleSubmit}>
       <div className="dialog__top">
@@ -66,17 +74,43 @@ const _AssetEditForm: React.FC<IAssetEditProps> = ({
           )}
         </div>
         {type === ASSET.PROGRAM && (
-          <GVFormikField
-            name={ASSET_EDIT_FIELDS.stopOutLevel}
-            label={t(
-              "manager.create-program-page.settings.fields.stop-out-level"
+          <>
+            <GVFormikField
+              name={ASSET_EDIT_FIELDS.stopOutLevel}
+              label={t(
+                "manager.create-program-page.settings.fields.stop-out-level"
+              )}
+              adornment="%"
+              component={GVTextField}
+              type="number"
+              autoComplete="off"
+              decimalScale={4}
+            />
+            <GVFormikField
+              type="checkbox"
+              color="primary"
+              name={ASSET_EDIT_FIELDS.hasInvestmentLimit}
+              label={
+                <span>
+                  {t(
+                    "manager.create-program-page.settings.fields.investment-limit"
+                  )}
+                </span>
+              }
+              component={GVCheckbox}
+            />
+            {values.hasInvestmentLimit && (
+              <InputAmountField
+                isAllow={isAmountAllow(info.currency!)}
+                autoFocus={false}
+                name={ASSET_EDIT_FIELDS.investmentLimit}
+                label={t(
+                  "manager.create-program-page.settings.fields.investment-limit"
+                )}
+                currency={info.currency ? info.currency : ""}
+              />
             )}
-            adornment="%"
-            component={GVTextField}
-            InputComponent={NumberFormat}
-            autoComplete="off"
-            decimalScale={4}
-          />
+          </>
         )}
       </div>
       <div className="dialog__bottom">
@@ -118,7 +152,9 @@ export enum ASSET_EDIT_FIELDS {
   stopOutLevel = "stopOutLevel",
   title = "title",
   description = "description",
-  logo = "logo"
+  logo = "logo",
+  investmentLimit = "investmentLimit",
+  hasInvestmentLimit = "hasInvestmentLimit"
 }
 
 export interface IAssetEditFormOwnProps {
@@ -138,18 +174,24 @@ export interface IAssetEditFormValues {
   [ASSET_EDIT_FIELDS.description]: string;
   [ASSET_EDIT_FIELDS.logo]: IImageValue;
   [ASSET_EDIT_FIELDS.stopOutLevel]: number;
+  [ASSET_EDIT_FIELDS.investmentLimit]: number | null;
+}
+
+interface FormValues extends IAssetEditFormValues {
+  [ASSET_EDIT_FIELDS.hasInvestmentLimit]?: boolean;
 }
 
 export interface IAssetEditProps
-  extends FormikProps<IAssetEditFormValues>,
+  extends FormikProps<FormValues>,
     IAssetEditFormOwnProps,
     InjectedTranslateProps {}
 
-const AssetEditForm = compose<React.FunctionComponent<IAssetEditFormOwnProps & WithLoaderProps>>(
+const AssetEditForm = compose<
+  React.FC<IAssetEditFormOwnProps & WithLoaderProps>
+>(
   withLoader,
-  React.memo,
   translate(),
-  withFormik<IAssetEditFormOwnProps, IAssetEditFormValues>({
+  withFormik<IAssetEditFormOwnProps, FormValues>({
     displayName: "edit-form",
     mapPropsToValues: props => {
       return {
@@ -158,13 +200,24 @@ const AssetEditForm = compose<React.FunctionComponent<IAssetEditFormOwnProps & W
         [ASSET_EDIT_FIELDS.description]: props.info.description,
         [ASSET_EDIT_FIELDS.logo]: {
           src: props.info.logo.src
-        }
+        },
+        [ASSET_EDIT_FIELDS.hasInvestmentLimit]:
+          props.info.investmentLimit !== null,
+        [ASSET_EDIT_FIELDS.investmentLimit]: props.info.investmentLimit
       };
     },
     validationSchema: editAssetSettingsValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
+      const { hasInvestmentLimit, investmentLimit, ...others } = values;
+      props.onSubmit(
+        {
+          ...others,
+          investmentLimit: hasInvestmentLimit ? investmentLimit : null
+        },
+        setSubmitting
+      );
     }
-  })
+  }),
+  React.memo
 )(_AssetEditForm);
 export default AssetEditForm;

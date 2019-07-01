@@ -1,26 +1,19 @@
 import { NotificationSettingList } from "gv-api-web";
+import apiReducerFactory, {
+  IApiState
+} from "shared/reducers/reducer-creators/api-reducer";
+import { apiSelector } from "shared/utils/selectors";
 
-import { ADD_NOTIFICATION_SETTINGS } from "../actions/notification-settings.actions";
+import { NOTIFICATION_SETTINGS } from "../actions/notification-settings.actions";
 
-export type NotificationSettingsState = Readonly<NotificationSettingList>;
+export type NotificationSettingsState = IApiState<NotificationSettingList>;
 
-const initialState: NotificationSettingsState = {
-  settingsGeneral: [],
-  settingsProgram: [],
-  settingsManager: [],
-  settingsFund: []
-};
+export const notificationSettingsSelector = apiSelector<
+  NotificationSettingList
+>(state => state.notificationSettings);
 
-const notificationSettingsReducer = (
-  state: NotificationSettingsState = initialState,
-  action: any
-): NotificationSettingsState => {
-  switch (action.type) {
-    case ADD_NOTIFICATION_SETTINGS:
-      return { ...action.settings };
-    default:
-      return state;
-  }
-};
+const notificationSettingsReducer = apiReducerFactory<NotificationSettingList>({
+  apiType: NOTIFICATION_SETTINGS
+});
 
 export default notificationSettingsReducer;

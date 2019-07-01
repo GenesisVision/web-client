@@ -2,38 +2,23 @@ import "./header.scss";
 
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import GVButton from "shared/components/gv-button";
 import { Icon } from "shared/components/icon/icon";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Navigation from "shared/components/navigation/navigation";
 import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
 import NotificationsWidget from "shared/components/notifications-widget/notifications-widget";
+import { NotificationsWidgetLoader } from "shared/components/notifications-widget/notifications-widget.loader";
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
+import { ProfileWidgetLoader } from "shared/components/profile-widget/profile-widget.loader";
 import WalletWidgetContainer from "shared/components/wallet-widget/wallet-widget-container";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
+import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 
-interface IHeaderState {
-  isOpenNavigation: boolean;
-}
-
-export interface IHeaderProps {
-  profileHeader?: ProfileHeaderViewModel;
-  isAuthenticated: boolean;
-  LOGIN_ROUTE: string;
-  SIGNUP_ROUTE: string;
-  GLOBAL_SEARCH_ROUTE: string;
-  backPath: string;
-  t: TranslationFunction;
-  logout(): void;
-  openNotifications(): void;
-}
-
-class Header extends React.Component<IHeaderProps, IHeaderState> {
-  static defaultProps = {
-    profileHeader: {} as ProfileHeaderViewModel
-  };
+class _Header extends React.PureComponent<Props, State> {
   state = {
     isOpenNavigation: false
   };
@@ -47,14 +32,8 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
       logout,
       openNotifications,
       isAuthenticated,
-      LOGIN_ROUTE,
-      SIGNUP_ROUTE,
-      GLOBAL_SEARCH_ROUTE,
       profileHeader
     } = this.props;
-
-    if (!profileHeader) return null;
-    const { avatar, email, notificationsCount } = profileHeader;
     return (
       <div className="header">
         <div className="header__left">
@@ -77,19 +56,24 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
         <div className="header__separator" />
         <div className="header__right">
           {isAuthenticated ? (
-            <React.Fragment>
+            <>
               <WalletWidgetContainer className="header__wallet" />
               <NotificationsWidget
-                notificationsCount={notificationsCount}
+                condition={!!profileHeader}
+                loader={<NotificationsWidgetLoader />}
+                notificationsCount={
+                  profileHeader ? profileHeader.notificationsCount : 0
+                }
                 openNotifications={openNotifications}
               />
               <ProfileWidget
+                condition={!!profileHeader}
+                loader={<ProfileWidgetLoader className="header__profile" />}
+                profileHeader={profileHeader!}
                 className="header__profile"
                 logout={logout}
-                avatar={avatar}
-                email={email}
               />
-            </React.Fragment>
+            </>
           ) : (
             <div className="header__buttons">
               <Link
@@ -114,8 +98,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
           backPath={this.props.backPath}
           logout={logout}
           isOpenNavigation={this.state.isOpenNavigation}
-          email={email}
-          avatar={avatar}
+          profileHeader={profileHeader}
           isAuthenticated={isAuthenticated}
           onClose={this.handleCloseMenu}
         />
@@ -124,4 +107,17 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
   }
 }
 
-export default translate()(Header);
+interface State {
+  isOpenNavigation: boolean;
+}
+
+export interface Props extends InjectedTranslateProps {
+  profileHeader?: ProfileHeaderViewModel;
+  isAuthenticated: boolean;
+  backPath: string;
+  logout: () => void;
+  openNotifications: () => void;
+}
+
+const Header = translate()(React.memo(_Header));
+export default Header;

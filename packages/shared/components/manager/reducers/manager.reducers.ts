@@ -1,7 +1,7 @@
 import { ManagerProfile } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/api-reducer/api-reducer";
+} from "shared/reducers/reducer-creators/api-reducer";
 
 const MANAGER_PROFILE = "MANAGER_PROFILE";
 

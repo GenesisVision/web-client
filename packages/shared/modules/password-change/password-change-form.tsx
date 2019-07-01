@@ -35,10 +35,11 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
 }) => {
   const className = classnames({
     "change-password__equal":
-      !errors.password &&
-      !errors.confirmPassword &&
-      touched.confirmPassword &&
-      values.password === values.confirmPassword
+      !errors[PASSWORD_CHANGE_FORM_FIELDS.password] &&
+      !errors[PASSWORD_CHANGE_FORM_FIELDS.confirmPassword] &&
+      touched[PASSWORD_CHANGE_FORM_FIELDS.confirmPassword] &&
+      values[PASSWORD_CHANGE_FORM_FIELDS.password] ===
+        values[PASSWORD_CHANGE_FORM_FIELDS.confirmPassword]
   });
   return (
     <form
@@ -50,7 +51,7 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
       <GVFormikField
         component={GVTextField}
         label={t("auth.password-change.current-password")}
-        name="oldPassword"
+        name={PASSWORD_CHANGE_FORM_FIELDS.oldPassword}
         type="password"
         autoComplete="new-password"
         autoFocus
@@ -61,7 +62,7 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
           component={GVTextField}
           label={t("auth.password-change.password")}
           type="password"
-          name="password"
+          name={PASSWORD_CHANGE_FORM_FIELDS.password}
           autoComplete="new-password"
         />
         <GVFormikField
@@ -69,7 +70,7 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
           component={GVTextField}
           label={t("auth.password-change.confirm-password")}
           type="password"
-          name="confirmPassword"
+          name={PASSWORD_CHANGE_FORM_FIELDS.confirmPassword}
           autoComplete="new-password"
         />
         <div className="form-error">{errorMessage}</div>
@@ -81,17 +82,24 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
   );
 };
 
+export enum PASSWORD_CHANGE_FORM_FIELDS {
+  oldPassword = "oldPassword",
+  password = "password",
+  confirmPassword = "confirmPassword"
+}
+
 export default compose<ComponentType<IPasswordChangeFormOwnProps>>(
   translate(),
   withFormik<IPasswordChangeFormOwnProps, ChangePasswordViewModel>({
     displayName: "change-password",
     mapPropsToValues: () => ({
-      oldPassword: "",
-      password: "",
-      confirmPassword: ""
+      [PASSWORD_CHANGE_FORM_FIELDS.oldPassword]: "",
+      [PASSWORD_CHANGE_FORM_FIELDS.password]: "",
+      [PASSWORD_CHANGE_FORM_FIELDS.confirmPassword]: ""
     }),
     validationSchema: passwordChangeValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) =>
       props.onSubmit(values, setSubmitting)
-  })
+  }),
+  React.memo
 )(PasswordChangeForm);

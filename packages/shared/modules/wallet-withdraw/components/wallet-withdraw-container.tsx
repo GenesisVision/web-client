@@ -1,6 +1,5 @@
 import {
   CancelablePromise,
-  CopyTradingAccountInfo,
   CreateWithdrawalRequestModel,
   WalletData
 } from "gv-api-web";
@@ -8,13 +7,15 @@ import { InvestorRootState } from "investor-web-portal/src/reducers";
 import * as React from "react";
 import { connect } from "react-redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
-
+import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
+import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
+import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
 import {
   MiddlewareDispatch,
   ResponseError,
   SetSubmittingType
-} from "../../../utils/types";
+} from "shared/utils/types";
+
 import { CurrentWallet } from "../../wallet-add-funds/components/wallet-add-funds-form";
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
 import WalletWithdrawForm, {
@@ -96,18 +97,14 @@ interface State {
   errorMessage?: string;
 }
 
-const mapStateToProps = (state: InvestorRootState): StateProps => {
-  if (!state.accountSettings) return { twoFactorEnabled: false, wallets: [] };
-  const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
-  const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
-    ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
-    : false;
-  return { twoFactorEnabled, wallets };
-};
+const mapStateToProps = (state: InvestorRootState): StateProps => ({
+  twoFactorEnabled: twoFactorEnabledSelector(state),
+  wallets: walletsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
-    updateWalletTimestamp: () => dispatch(updateWalletTimestamp()),
+    updateWalletTimestamp: () => dispatch(updateWalletTimestampAction()),
     newWithdrawRequest: data =>
       dispatch(walletWithdrawService.newWithdrawRequest(data))
   }

@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -22,7 +21,14 @@ import TagFilter from "shared/components/table/components/filtering/tag-filter/t
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
-import RootState from "shared/reducers/root-reducer";
+import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import {
+  currenciesSelector,
+  programTagsSelector
+} from "shared/reducers/platform-reducer";
+import { RootState } from "shared/reducers/root-reducer";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { convertToArray } from "shared/utils/helpers";
 
 import * as programsService from "../../services/programs-table.service";
@@ -42,11 +48,10 @@ interface MergeProps {
 }
 
 interface StateProps {
-  isPending: boolean;
-  data: any;
   isAuthenticated: boolean;
   currencies: string[];
   programTags: ProgramTag[];
+  data?: ProgramsList;
 }
 
 interface DispatchProps {
@@ -95,30 +100,17 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
       t,
       showSwitchView,
       currencies,
-      isPending,
       data,
       filters,
       service,
       isAuthenticated,
       title
     } = this.props;
-    const tagsFilterValue = (value: any) => {
-      //TODO Fix any
-      if (!programTags.length) return [];
-      return convertToArray(value).map(tag => {
-        const programTag = programTags.find(
-          programTag => programTag.name === tag
-        );
-        const color = programTag!.color;
-        return { name: tag, color };
-      });
-    };
     return (
       <ProgramsTable
         showSwitchView={showSwitchView}
         title={title}
-        data={data || {}}
-        isPending={isPending}
+        data={data ? data.programs : undefined}
         sorting={filters.sorting}
         updateSorting={service.programsChangeSorting}
         filtering={{
@@ -129,7 +121,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
           <>
             <TagFilter
               name={TAG_FILTER_NAME}
-              value={tagsFilterValue(filtering[TAG_FILTER_NAME])}
+              value={filtering[TAG_FILTER_NAME] as string[]}
               values={programTags}
               onChange={updateFilter}
             />
@@ -169,23 +161,12 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { isAuthenticated } = state.authData;
-  const { isPending, data } = state.programsData.items;
-  const currencies = state.platformData.data
-    ? state.platformData.data.currencies
-    : [];
-  const programTags = state.platformData.data
-    ? state.platformData.data.enums.program.programTags
-    : [];
-  return {
-    isPending,
-    data,
-    isAuthenticated,
-    currencies,
-    programTags
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state),
+  data: programsDataSelector(state),
+  currencies: currenciesSelector(state),
+  programTags: programTagsSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
@@ -217,7 +198,7 @@ const mergeProps = (
   };
 };
 
-const ProgramsTableContainer = compose<React.FunctionComponent<OwnProps>>(
+const ProgramsTableContainer = compose<React.FC<OwnProps>>(
   withRouter,
   translate(),
   connect(

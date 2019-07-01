@@ -2,8 +2,8 @@ import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
 import {
-  addFavoriteProgram,
-  removeFavoriteProgram
+  addFavoriteProgramAction,
+  removeFavoriteProgramAction
 } from "../actions/favorite-program.actions";
 import { ToggleFavoriteDispatchableType } from "./favorite-fund.service";
 
@@ -20,8 +20,8 @@ export const toggleFavoriteProgramDispatchable: ToggleFavoriteDispatchableType =
 
   dispatch(
     isFavorite
-      ? removeFavoriteProgram(requestData)
-      : addFavoriteProgram(requestData)
+      ? removeFavoriteProgramAction(requestData)
+      : addFavoriteProgramAction(requestData)
   );
 };
 

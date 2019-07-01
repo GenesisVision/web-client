@@ -60,6 +60,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
 
     const composeEditInfo: IAssetEditInfo = {
       stopOutLevel: 0,
+      investmentLimit: 0,
       id: fundDescription.id,
       title: fundDescription.title,
       description: fundDescription.description,
@@ -165,7 +166,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
                 open={popups[INVESTMENT_POPUP.REALLOCATE]}
                 onClose={this.closePopup(INVESTMENT_POPUP.REALLOCATE)}
                 onApply={this.applyChanges(updateDetails)}
-                assets={fundDescription.currentAssets}
+                fundAssets={fundDescription.currentAssets}
               />
             </>
           )}

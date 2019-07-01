@@ -12,5 +12,5 @@ const _PasswordPage: React.FC<InjectedTranslateProps> = ({ t }) => (
   </Page>
 );
 
-const PasswordPage = translate()(_PasswordPage);
+const PasswordPage = translate()(React.memo(_PasswordPage));
 export default PasswordPage;
