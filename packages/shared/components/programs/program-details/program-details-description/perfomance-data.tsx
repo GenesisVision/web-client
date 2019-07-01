@@ -25,7 +25,7 @@ const _PerfomanceData: React.FC<Props> = ({
     <StatisticItem label={t("program-details-page.description.leverage")}>
       <Leverage
         min={programDescription.leverageMin}
-        max={programDescription.leverageMin}
+        max={programDescription.leverageMax}
       />
     </StatisticItem>
     {programDescription.periodStarts && (
