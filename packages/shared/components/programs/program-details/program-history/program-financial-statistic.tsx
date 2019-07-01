@@ -64,6 +64,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
       )}
       renderBodyRow={period => {
         const {
+          profit,
           deposit,
           withdraw,
           commissionRebate,
@@ -89,7 +90,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
-                  value={formatCurrencyValue(period.profit, currency)}
+                  value={formatCurrencyValue(profit, currency)}
                   thousandSeparator=" "
                   displayType="text"
                   allowNegative={false}
