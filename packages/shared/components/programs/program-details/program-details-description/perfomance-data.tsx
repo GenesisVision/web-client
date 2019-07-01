@@ -2,6 +2,7 @@ import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps } from "react-i18next";
 import translate from "react-i18next/src/translate";
+import Leverage from "shared/components/leverage/leverage";
 import PieContainerSmall from "shared/components/pie-container/pie-container-small";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -22,7 +23,10 @@ const _PerfomanceData: React.FC<Props> = ({
       />
     </StatisticItem>
     <StatisticItem label={t("program-details-page.description.leverage")}>
-      {programDescription.leverageMin}:{programDescription.leverageMin}
+      <Leverage
+        min={programDescription.leverageMin}
+        max={programDescription.leverageMin}
+      />
     </StatisticItem>
     {programDescription.periodStarts && (
       <StatisticItem label={t("program-details-page.description.period")}>
