@@ -1,3 +1,4 @@
+import { ForgotPasswordViewModel } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -12,7 +13,6 @@ import * as authService from "../../auth.service";
 import { CaptchasType } from "../../auth.service";
 import Pow from "../../captcha/pow";
 import { forgotPassword } from "../services/forgot-password.service";
-import { ForgotPasswordViewModel } from "gv-api-web";
 
 class _CaptchaContainer extends React.PureComponent<Props, State> {
   state = {
@@ -23,9 +23,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     isSubmit: false,
     captchaType: "None",
     id: "",
-    email: "",
-    password: "",
-    code: ""
+    email: ""
   };
 
   componentDidUpdate(): void {
@@ -60,10 +58,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     this.setState({ prefix });
   };
 
-  handleSubmit = (
-    values: { [keys: string]: any },
-    setSubmitting: SetSubmittingType
-  ) => {
+  handleSubmit = (values: THandleSubmit, setSubmitting: SetSubmittingType) => {
     authService.getCaptcha(values.email).then(res => {
       this.setState({
         ...res,
@@ -76,8 +71,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
 
   render() {
     const { errorMessage, renderForm } = this.props;
-    const { pow } = this.state;
-    const email = this.state.email;
+    const { pow, email } = this.state;
     return (
       <>
         {renderForm(this.handleSubmit, errorMessage)}
@@ -102,15 +96,15 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
+type THandleSubmit = { [keys: string]: any };
+
 interface State extends CaptchasType {
   isSubmit: boolean;
   captchaType: string;
   setSubmitting?: SetSubmittingType;
   id?: string;
   prefix?: number;
-  code?: string;
   email?: string;
-  password?: string;
 }
 
 interface StateProps {
@@ -129,7 +123,10 @@ interface DispatchProps {
 
 interface OwnProps {
   renderForm: (
-    handle: (loginFormData: any, setSubmitting: SetSubmittingType) => void,
+    handle: (
+      loginFormData: THandleSubmit,
+      setSubmitting: SetSubmittingType
+    ) => void,
     errorMessage: string
   ) => JSX.Element;
 }
