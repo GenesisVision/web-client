@@ -1477,6 +1477,9 @@
   "manager": {
     "program-settings": {
       "title": "Program settings",
+      "investment-limit": {
+        "text": "At any time you can enter or cancel certain limitations on av. to invest, or even prohibit new investments if your Investment limit is 0. If the investment limit you've entered is larger than the av. to invest value calculated for your current level, then you will only be able to attract the av. to invest value."
+      },
       "period-and-closing": {
         "title": "Period and closing",
         "text-program": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
