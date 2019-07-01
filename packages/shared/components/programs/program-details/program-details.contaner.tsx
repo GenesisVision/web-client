@@ -89,6 +89,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
                   ? description.personalProgramDetails.isOwnProgram
                   : false
               }
+              showSwaps={description.brokerDetails.showSwaps}
+              showTickets={description.brokerDetails.showTickets}
               isForex={description.brokerDetails.isForex}
               isSignalProgram={description.isSignalProgram}
               fetchOpenPositions={fetchOpenPositions}
