@@ -1,24 +1,19 @@
-import { ForgotPasswordViewModel } from "gv-api-web";
+import { CaptchaCheckResult } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import {
-  AuthRootState,
-  MiddlewareDispatch,
-  SetSubmittingType
-} from "shared/utils/types";
+import { AuthRootState, MiddlewareDispatch } from "shared/utils/types";
 
 import * as authService from "../../auth.service";
 import { CaptchasType } from "../../auth.service";
 import Pow from "../../captcha/pow";
-import { forgotPassword } from "../services/forgot-password.service";
+import { sendForgotPasswordEmail } from "../services/forgot-password.service";
 
 class _CaptchaContainer extends React.PureComponent<Props, State> {
   state = {
     pow: undefined,
     geeTest: undefined,
     prefix: undefined,
-    setSubmitting: undefined,
     isSubmit: false,
     captchaType: "None",
     id: "",
@@ -26,14 +21,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   };
 
   componentDidUpdate(): void {
-    const {
-      isSubmit,
-      prefix = "",
-      email,
-      id,
-      setSubmitting,
-      captchaType
-    } = this.state;
+    const { isSubmit, prefix = "", id, captchaType } = this.state;
     const { service } = this.props;
     const captchaCheckResult = {
       id,
@@ -43,13 +31,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
       geeTest: {}
     };
     const sendRequest = () =>
-      service.forgotPassword(
-        {
-          email,
-          captchaCheckResult
-        },
-        setSubmitting!
-      );
+      service.sendForgotPasswordEmail(captchaCheckResult);
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":
@@ -74,23 +56,23 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     this.setState({ prefix });
   };
 
-  handleSubmit = (values: THandleSubmit, setSubmitting: SetSubmittingType) => {
-    authService.getCaptcha(values.email).then(res => {
+  handleSubmit = () => {
+    authService.getCaptcha(this.props.email).then(res => {
+      console.log(res);
       this.setState({
         ...res,
-        ...values,
-        setSubmitting,
+        email: this.props.email,
         isSubmit: true
       });
     });
   };
 
   render() {
-    const { errorMessage, renderForm } = this.props;
+    const { renderForm } = this.props;
     const { pow, email } = this.state;
     return (
       <>
-        {renderForm(this.handleSubmit, errorMessage)}
+        {renderForm(this.handleSubmit)}
         {pow && <Pow {...pow} login={email} handleSuccess={this.handlePow} />}
       </>
     );
@@ -98,53 +80,38 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: AuthRootState): StateProps => {
-  const { isPending, errorMessage } = state.passwordRestoreData.forgot;
-  return { isPending, errorMessage };
+  const { email } = state.emailPending;
+  return { email };
 };
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
-    forgotPassword: (formData, setSubmitting) => {
-      dispatch(forgotPassword(formData)).catch(() => {
-        setSubmitting(false);
-      });
+    sendForgotPasswordEmail: (captchaCheckResult: CaptchaCheckResult) => {
+      dispatch(sendForgotPasswordEmail(captchaCheckResult));
     }
   }
 });
 
-type THandleSubmit = { [keys: string]: any };
-
 interface State extends CaptchasType {
   isSubmit: boolean;
   captchaType: string;
-  setSubmitting?: SetSubmittingType;
   id?: string;
   prefix?: number;
   email?: string;
 }
 
 interface StateProps {
-  isPending: boolean;
-  errorMessage: string;
+  email: string;
 }
 
 interface DispatchProps {
   service: {
-    forgotPassword: (
-      formData: ForgotPasswordViewModel,
-      setSubmitting: SetSubmittingType
-    ) => void;
+    sendForgotPasswordEmail: (captchaCheckResult: CaptchaCheckResult) => void;
   };
 }
 
 interface OwnProps {
-  renderForm: (
-    handle: (
-      loginFormData: THandleSubmit,
-      setSubmitting: SetSubmittingType
-    ) => void,
-    errorMessage: string
-  ) => JSX.Element;
+  renderForm: (handle: () => void) => JSX.Element;
 }
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
