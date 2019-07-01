@@ -24,6 +24,7 @@ import { STATUS } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { GM_NAME } from "./program-details.constants";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
 
@@ -49,6 +50,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   const isInvested =
     description.personalProgramDetails &&
     description.personalProgramDetails.isInvested;
+  console.log(description.brokerDetails.name);
   return (
     <Page title={description.title}>
       <ProgramDetailContext.Provider value={{ updateDetails, isKycConfirmed }}>
@@ -102,6 +104,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               currency={currency}
               isInvested={isInvested}
               eventTypeFilterValues={historySection.eventTypeFilterValues}
+              isGMProgram={description.brokerDetails.name === GM_NAME}
             />
           </div>
         </div>

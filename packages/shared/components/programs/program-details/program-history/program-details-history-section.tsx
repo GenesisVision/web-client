@@ -91,7 +91,8 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       fetchOpenPositions,
       fetchFinancialStatistic,
       isSignalProgram,
-      isOwnProgram
+      isOwnProgram,
+      isGMProgram
     } = this.props;
 
     const isManager = role === ROLE.MANAGER;
@@ -169,7 +170,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
             <ProgramFinancialStatistic
               id={programId}
               currency={programCurrency}
-              isGMProgram={true} //@todo fix this value
+              isGMProgram={isGMProgram}
               fetchFinancialStatistic={fetchFinancialStatistic}
             />
           )}
@@ -215,6 +216,7 @@ interface OwnProps {
   isInvested: boolean;
   eventTypeFilterValues: SelectFilterValue[];
   isOwnProgram: boolean;
+  isGMProgram: boolean;
 }
 
 interface StateProps extends AuthState {}
