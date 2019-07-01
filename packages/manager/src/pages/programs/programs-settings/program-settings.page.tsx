@@ -6,12 +6,12 @@ import ChangePasswordTradingAccountPopup from "modules/change-password-trading-a
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import Page from "shared/components/page/page";
 import {
@@ -24,13 +24,13 @@ import { SetSubmittingType } from "shared/utils/types";
 import ClosePeriodContainer from "../program-details/components/close-period/close-period-container";
 import CloseProgramContainer from "../program-details/components/close-program/close-program-container";
 import { ChangeBrokerFormValues } from "./broker-edit";
-import { ProgramEditFormValues } from "./program-edit";
 import ProgramSettings from "./program-settings";
 import {
   changeBrokerMethod,
   redirectToProgram
 } from "./services/program-settings.service";
 import { IProgramSignalFormValues } from "./signaling-edit";
+import { IImageValue } from "shared/components/form/input-image/input-image";
 
 const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
   const fetchingDescription = () =>
@@ -88,24 +88,17 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
     [details]
   );
   const changePassword = useCallback(() => setChangePasswordOpen(true), []);
-  const editProgram = useCallback(
-    (
-      { description, logo }: ProgramEditFormValues,
-      setSubmitting: SetSubmittingType
-    ) => {
-      if (!details) return;
-      const {
-        id,
-        title,
-        stopOutLevel,
-        availableInvestmentLimit: investmentLimit
-      } = details;
+  const editProgram: TUpdateProgramFunc = useCallback(
+    (values, setSubmitting) => {
+      const currentValues = {
+        title: details!.title,
+        stopOutLevel: details!.stopOutLevel,
+        description: details!.description,
+        logo: { src: details!.logo },
+        investmentLimit: details!.availableInvestmentLimit
+      };
       service
-        .editAsset(
-          id,
-          { title, stopOutLevel, investmentLimit, description, logo },
-          ASSET.PROGRAM
-        )
+        .editAsset(details!.id, { ...currentValues, ...values }, ASSET.PROGRAM)
         .then(() => {
           setSubmitting(false);
           fetchingDescription();
@@ -165,6 +158,15 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     dispatch
   )
 });
+
+export type TUpdateProgramFunc = (
+  values: {
+    description?: string;
+    logo?: IImageValue;
+    investmentLimit?: number;
+  },
+  setSubmitting: SetSubmittingType
+) => void;
 
 interface OwnProps {}
 

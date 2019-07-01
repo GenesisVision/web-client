@@ -8,8 +8,10 @@ import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
 import BrokerEdit, { ChangeBrokerFormValues } from "./broker-edit";
-import ProgramEdit, { ProgramEditFormValues } from "./program-edit";
+import ProgramEdit from "./program-edit";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
+import InvestmentLimit from "./investment-limit";
+import { TUpdateProgramFunc } from "./program-settings.page";
 
 const _ProgramSettings: React.FC<Props> = ({
   t,
@@ -90,6 +92,13 @@ const _ProgramSettings: React.FC<Props> = ({
               />
             </section>
           )}
+          <section className="program-edit__block">
+            <InvestmentLimit
+              currency={details.currency}
+              investmentLimit={details.availableInvestmentLimit}
+              onSubmit={editProgram}
+            />
+          </section>
           {(details.isSignalProgram ||
             (!details.isSignalProgram &&
               details.personalProgramDetails.canMakeSignalProvider)) && (
@@ -124,10 +133,7 @@ interface OwnProps {
     values: ChangeBrokerFormValues,
     setSubmitting: SetSubmittingType
   ) => void;
-  editProgram: (
-    values: ProgramEditFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  editProgram: TUpdateProgramFunc;
 }
 
 const ProgramSettings = compose<React.ComponentType<OwnProps>>(

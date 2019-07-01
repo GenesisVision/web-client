@@ -209,12 +209,13 @@ const AssetEditForm = compose<
     validationSchema: editAssetSettingsValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       const { hasInvestmentLimit, investmentLimit, ...others } = values;
-      if (!hasInvestmentLimit)
-        return props.onSubmit(
-          { ...others, investmentLimit: null },
-          setSubmitting
-        );
-      props.onSubmit({ ...others, investmentLimit }, setSubmitting);
+      props.onSubmit(
+        {
+          ...others,
+          investmentLimit: hasInvestmentLimit ? investmentLimit : null
+        },
+        setSubmitting
+      );
     }
   }),
   React.memo
