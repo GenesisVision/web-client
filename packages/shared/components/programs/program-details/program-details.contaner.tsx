@@ -50,7 +50,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   const isInvested =
     description.personalProgramDetails &&
     description.personalProgramDetails.isInvested;
-  console.log(description.brokerDetails.name);
   return (
     <Page title={description.title}>
       <ProgramDetailContext.Provider value={{ updateDetails, isKycConfirmed }}>

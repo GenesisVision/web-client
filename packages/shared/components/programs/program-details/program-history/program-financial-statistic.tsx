@@ -7,6 +7,8 @@ import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import { TableCell, TableRow } from "shared/components/table/components";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableModule from "shared/components/table/components/table-module";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
@@ -21,8 +23,6 @@ import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
 } from "../program-details.constants";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
 const _ProgramFinancialStatistic: React.FC<Props> = ({
   t,
@@ -39,7 +39,6 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
     (filters?: FilteringType) => fetchFinancialStatistic(id, filters),
     []
   );
-  console.log(isGMProgram);
   return (
     <TableModule
       getItems={fetchStatistic}
