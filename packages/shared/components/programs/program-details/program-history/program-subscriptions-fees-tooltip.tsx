@@ -12,10 +12,10 @@ const _FeesTooltip: React.FC<Props> = ({ t, subscription, children }) => {
   return (
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-      className={"fees-tooltip subscription-fees"}
+      className={"subscription-fees-tooltip"}
       render={() => (
-        <div className="profile-menu">
-          <div className="profile-menu__header">
+        <>
+          <div className="subscription-fees-tooltip__header">
             <FeeCommission
               title={t(`investor.copytrading-tables.fees.SuccessFee`)}
               value={formatValue(subscription.totalSuccessFeeAmount, 8)}
@@ -29,14 +29,14 @@ const _FeesTooltip: React.FC<Props> = ({ t, subscription, children }) => {
               currency={subscription.totalVolumeFeeCurrency}
             />
           </div>
-          <div className={"fees-tooltip__footer "}>
+          <div className={"subscription-fees-tooltip__footer "}>
             <FeeCommission
               title={t(`investor.copytrading-tables.fees.total`)}
               value={formatValue(subscription.totalCommissionAmount, 8)}
               currency={subscription.totalCommissionCurrency}
             />
           </div>
-        </div>
+        </>
       )}
     >
       <span>{children}</span>
