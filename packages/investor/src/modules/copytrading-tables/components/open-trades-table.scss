@@ -36,3 +36,9 @@
 .traders-avatar {
   position: relative;
 }
+
+.providers-table {
+  & .program-avatar__level {
+    background-color: $popover-background;
+  }
+}
