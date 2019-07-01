@@ -21,7 +21,7 @@ const _ProvidersPopup: React.FC<Props> = ({
     className={"providers-table"}
     anchorEl={anchor}
     onClose={onClose}
-    horizontal={HORIZONTAL_POPOVER_POS.RELATIVE}
+    horizontal={HORIZONTAL_POPOVER_POS.LEFT}
     vertical={VERTICAL_POPOVER_POS.TOP}
   >
     <Table
