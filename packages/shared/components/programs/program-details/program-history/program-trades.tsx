@@ -37,7 +37,6 @@ const DECIMAL_SCALE = 8;
 const _ProgramTrades: React.FC<Props> = ({
   showSwaps,
   showTickets,
-  isForex,
   currency,
   programId,
   fetchTrades,
@@ -169,7 +168,6 @@ const _ProgramTrades: React.FC<Props> = ({
 };
 
 interface OwnProps {
-  isForex: boolean;
   showSwaps: boolean;
   showTickets: boolean;
   currency: CURRENCIES;
