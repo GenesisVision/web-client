@@ -95,6 +95,7 @@ class Select extends React.PureComponent<Props, State> {
   }
 
   render() {
+    const isDisabled = this.isDisabled();
     let displayValue = this.props.value;
 
     const items = this.props.children.map(child => {
@@ -119,7 +120,7 @@ class Select extends React.PureComponent<Props, State> {
     return (
       <div
         className={classNames("select", this.props.className, {
-          "select--disabled": this.isDisabled()
+          "select--disabled": isDisabled
         })}
       >
         <button
@@ -132,7 +133,9 @@ class Select extends React.PureComponent<Props, State> {
         >
           {displayValue && <span className="select__text">{displayValue}</span>}
           <span className="select__icon">
-            <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
+            {!isDisabled && (
+              <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
+            )}
           </span>
         </button>
 
