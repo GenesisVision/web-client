@@ -87,26 +87,25 @@ const _BrokerEdit: React.FC<Props> = ({
           ))}
         </GVFormikField>
       </div>
-      {currentAccountTypeId !== values[FIELDS.brokerAccountTypeId] && (
-        <div className="gv-text-field__wrapper">
-          <GVFormikField
-            name={FIELDS.leverage}
-            component={GVTextField}
-            label={t(
-              "manager.create-program-page.settings.fields.brokers-leverage"
-            )}
-            InputComponent={Select}
-            disableIfSingle
-            className="create-program-settings__leverage"
-          >
-            {account.leverages.map(leverage => (
-              <option value={leverage} key={leverage}>
-                {leverage}
-              </option>
-            ))}
-          </GVFormikField>
-        </div>
-      )}
+      <div className="gv-text-field__wrapper">
+        <GVFormikField
+          disabled={currentAccountTypeId === values[FIELDS.brokerAccountTypeId]}
+          name={FIELDS.leverage}
+          component={GVTextField}
+          label={t(
+            "manager.create-program-page.settings.fields.brokers-leverage"
+          )}
+          InputComponent={Select}
+          disableIfSingle
+          className="create-program-settings__leverage"
+        >
+          {account.leverages.map(leverage => (
+            <option value={leverage} key={leverage}>
+              {leverage}
+            </option>
+          ))}
+        </GVFormikField>
+      </div>
       <p className="program-edit__text program-edit__text--color-accent program-edit__text--padding-top">
         {t("manager.program-settings.broker.text")}
       </p>

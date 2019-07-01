@@ -6,14 +6,14 @@ import * as React from "react";
 import { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import GVButton from "shared/components/gv-button";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import {
-  PROGRAM_FOREX_TRADES_COLUMNS,
-  PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
+  PROGRAM_TRADES_FILTERS,
+  generateProgramTradesColumns
 } from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import {
@@ -29,14 +29,14 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import Tooltip from "shared/components/tooltip/tooltip";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { formatValue } from "shared/utils/formatter";
 import filesService from "shared/services/file-service";
-import GVButton from "shared/components/gv-button";
+import { formatValue } from "shared/utils/formatter";
 
 const DECIMAL_SCALE = 8;
 
 const _ProgramTrades: React.FC<Props> = ({
-  isForex,
+  showSwaps,
+  showTickets,
   currency,
   programId,
   fetchTrades,
@@ -46,9 +46,7 @@ const _ProgramTrades: React.FC<Props> = ({
     (filters?: FilteringType) => fetchTrades(programId, filters),
     []
   );
-  const columns = isForex
-    ? PROGRAM_FOREX_TRADES_COLUMNS
-    : PROGRAM_TRADES_COLUMNS;
+  const columns = generateProgramTradesColumns(!showSwaps, !showTickets);
 
   return (
     <TableModule
@@ -135,7 +133,9 @@ const _ProgramTrades: React.FC<Props> = ({
                     </div>
                   ) : (
                     <div>
-                      {`${formatValue(trade.commission, 8)} ${trade.originalCommissionCurrency}`}
+                      {`${formatValue(trade.commission, 8)} ${
+                        trade.originalCommissionCurrency
+                      }`}
                     </div>
                   )
                 }
@@ -147,7 +147,7 @@ const _ProgramTrades: React.FC<Props> = ({
                 />
               </Tooltip>
             </TableCell>
-            {isForex && (
+            {showSwaps && (
               <TableCell className="details-trades__cell program-details-trades__cell--swap">
                 {trade.swap}
               </TableCell>
@@ -155,7 +155,7 @@ const _ProgramTrades: React.FC<Props> = ({
             <TableCell className="details-trades__cell program-details-trades__cell--date">
               {moment(trade.date).format()}
             </TableCell>
-            {isForex && (
+            {showTickets && (
               <TableCell className="details-trades__cell program-details-trades__cell--ticket">
                 {trade.ticket}
               </TableCell>
@@ -168,7 +168,8 @@ const _ProgramTrades: React.FC<Props> = ({
 };
 
 interface OwnProps {
-  isForex: boolean;
+  showSwaps: boolean;
+  showTickets: boolean;
   currency: CURRENCIES;
   programId: string;
   fetchTrades: (

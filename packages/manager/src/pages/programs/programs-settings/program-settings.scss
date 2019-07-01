@@ -4,22 +4,27 @@
 
 .program-edit {
   padding-left: $padding-xsmall;
+  padding-right: $padding-xsmall;
+  box-sizing: border-box;
   @include media-breakpoint-landscape-phone() {
     padding-left: 0;
+    padding-right: 0;
   }
 
   &__signaling-edit-form-title-block {
     display: flex;
+    align-items: center;
+
     & .gv-switch-wrapper {
+      @include adaptive-padding(bottom, $padding-xsmall);
       margin: 0 $padding-xsmall;
     }
   }
+
   &__block {
     @include adaptive-margin(bottom, $padding-large);
     box-sizing: border-box;
-    padding-left: 0;
-    padding-right: $padding-xsmall;
-    border-left: 0;
+
     @include media-breakpoint-landscape-phone() {
       padding-left: 60px;
       border-left: 2px solid $secondary-color;
@@ -31,6 +36,11 @@
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    .gv-checkbox-wrapper,
+    .gv-text-field__wrapper {
+      margin-left: 0;
     }
   }
 
@@ -67,6 +77,7 @@
     }
 
     .gv-text-field__wrapper {
+      @include adaptive-margin(right, $padding-xsmall);
       width: 100%;
     }
 
