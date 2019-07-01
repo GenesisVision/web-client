@@ -17,7 +17,8 @@ import {
   SelectFilterValue
 } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import { IDataModel } from "shared/constants/constants";
+import { IDataModel, ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import {
   AuthState,
@@ -51,7 +52,8 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
     tradesCount: 0,
     eventsCount: 0,
     openPositionsCount: 0,
-    subscriptionsCount: 0
+    subscriptionsCount: 0,
+    financialStatisticCount: 0
   };
 
   componentDidMount() {
@@ -71,9 +73,11 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       tradesCount,
       eventsCount,
       openPositionsCount,
-      subscriptionsCount
+      subscriptionsCount,
+      financialStatisticCount
     } = this.state;
     const {
+      role,
       isForex,
       t,
       programId,
@@ -85,10 +89,12 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       fetchPortfolioEvents,
       fetchTrades,
       fetchOpenPositions,
+      fetchFinancialStatistic,
       isSignalProgram,
       isOwnProgram
     } = this.props;
 
+    const isManager = role === ROLE.MANAGER;
     return (
       <Surface className="details-history">
         <div className="details-history__header">
@@ -126,8 +132,8 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
                 label={t(
                   "program-details-page.history.tabs.financial-statistic"
                 )}
-                count={42} //@todo fix this value
-                visible={isAuthenticated && isManager} //@todo add condition only for own program
+                count={financialStatisticCount}
+                visible={isAuthenticated && isManager}
               />
             </GVTabs>
           </div>
@@ -162,8 +168,9 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
           {tab === TABS.FINANCIAL_STATISTIC && (
             <ProgramFinancialStatistic
               id={programId}
-              isGMProgram={false} //@todo fix this value
-              fetchFinancialStatistic={fetchPortfolioEvents} //@todo fix this fetch
+              currency={programCurrency}
+              isGMProgram={true} //@todo fix this value
+              fetchFinancialStatistic={fetchFinancialStatistic}
             />
           )}
           {tab === TABS.PERIOD_HISTORY && (
@@ -182,20 +189,25 @@ const mapStateToProps = (state: RootState): StateProps => ({
   isAuthenticated: isAuthenticatedSelector(state)
 });
 
-interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
+interface Props
+  extends OwnProps,
+    StateProps,
+    InjectedTranslateProps,
+    WithRoleProps {}
 
 interface OwnProps {
   isSignalProgram: boolean;
   isForex: boolean;
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
   fetchPortfolioEvents: GetItemsFuncType;
-  fetchOpenPositions: (
-    programId: string,
-    filters?: FilteringType
-  ) => Promise<IDataModel>;
+  fetchOpenPositions: (programId: string, opts?: any) => Promise<IDataModel>;
   fetchTrades: (
     programId: string,
     filters?: FilteringType
+  ) => Promise<IDataModel>;
+  fetchFinancialStatistic: (
+    programId: string,
+    opts: any
   ) => Promise<IDataModel>;
   programId: string;
   currency: CURRENCIES;
@@ -212,6 +224,7 @@ interface State extends HistoryCountsType {
 }
 
 const ProgramDetailsHistorySection = compose<React.ComponentType<OwnProps>>(
+  withRole,
   translate(),
   connect(mapStateToProps)
 )(_ProgramDetailsHistorySection);

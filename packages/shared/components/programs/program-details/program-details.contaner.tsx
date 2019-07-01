@@ -11,6 +11,7 @@ import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
+  fetchFinancialStatistic,
   fetchOpenPositions,
   fetchProgramTrades,
   getProgramStatistic
@@ -92,6 +93,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               isForex={description.brokerDetails.isForex}
               isSignalProgram={description.isSignalProgram}
               fetchOpenPositions={fetchOpenPositions}
+              fetchFinancialStatistic={fetchFinancialStatistic}
               fetchTrades={fetchProgramTrades}
               fetchPortfolioEvents={fetchHistoryPortfolioEvents}
               fetchHistoryCounts={historySection.fetchHistoryCounts}

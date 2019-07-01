@@ -1,34 +1,44 @@
 import * as React from "react";
+import { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
+import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import { TableCell, TableRow } from "shared/components/table/components";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableModule from "shared/components/table/components/table-module";
+import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { IDataModel } from "shared/constants/constants";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import {
   PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
   PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
 } from "../program-details.constants";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 
 const _ProgramFinancialStatistic: React.FC<Props> = ({
   t,
   fetchFinancialStatistic,
+  currency,
   id,
   isGMProgram
 }) => {
   const columns = isGMProgram
     ? PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
     : PROGRAM_FINANCIAL_STATISTIC_COLUMNS;
+
+  const fetchStatistic: GetItemsFuncType = useCallback(
+    (filters?: FilteringType) => fetchFinancialStatistic(id, filters),
+    []
+  );
   return (
     //@todo fix all values in the table below
     <TableModule
-      getItems={fetchFinancialStatistic}
+      getItems={fetchStatistic}
       paging={DEFAULT_PAGING}
       columns={columns}
       renderHeader={column => (
@@ -40,30 +50,32 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
           {t(`program-details-page.history.financial-statistic.${column.name}`)}
         </span>
       )}
-      renderBodyRow={event => {
+      renderBodyRow={period => {
+        const { deposit, withdraw, commissionRebate } = period.managerStatistic;
         return (
           <TableRow>
             <TableCell>
-              <ProgramPeriodPie
-                start={new Date("2019-05-25T03:24:00")}
-                end={new Date("2019-07-17T03:24:00")}
-              />
+              <ProgramPeriodPie start={period.dateFrom} end={period.dateTo} />
             </TableCell>
             <TableCell>
               <NumberFormat
-                value={formatCurrencyValue(event.value, event.currency)}
+                value={formatCurrencyValue(period.balance, currency)}
                 displayType="text"
                 thousandSeparator=" "
+                suffix={` ${currency}`}
               />
             </TableCell>
             <TableCell>
-              <Profitability value={"1010"} prefix={PROFITABILITY_PREFIX.SIGN}>
+              <Profitability
+                value={period.profit}
+                prefix={PROFITABILITY_PREFIX.SIGN}
+              >
                 <NumberFormat
-                  value={110}
+                  value={period.profit}
                   thousandSeparator=" "
                   displayType="text"
                   allowNegative={false}
-                  suffix={` ${event.currency}`}
+                  suffix={` ${currency}`}
                 />
               </Profitability>
             </TableCell>
@@ -74,20 +86,20 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
               <NumberFormat value={3} displayType="text" suffix=" %" />
             </TableCell>
             <TableCell>
-              <Profitability
-                value={formatCurrencyValue(event.value, event.currency)}
-              >
-                <NumberFormat
-                  value={formatCurrencyValue(event.value, event.currency)}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix={` ${event.currency}`}
-                />
-              </Profitability>
+              <NumberFormat value={deposit} displayType="text" />
+              <NumberFormat
+                value={withdraw}
+                displayType="text"
+                prefix={" / "}
+              />
             </TableCell>
             {isGMProgram && (
               <TableCell>
-                <NumberFormat value={2} displayType="text" suffix=" %" />
+                <NumberFormat
+                  value={commissionRebate}
+                  displayType="text"
+                  suffix=" %"
+                />
               </TableCell>
             )}
           </TableRow>
@@ -107,5 +119,9 @@ interface Props extends OwnProps, InjectedTranslateProps {}
 interface OwnProps {
   id: string;
   isGMProgram?: boolean;
-  fetchFinancialStatistic: GetItemsFuncType;
+  currency: CURRENCIES;
+  fetchFinancialStatistic: (
+    programId: string,
+    filters?: FilteringType
+  ) => Promise<IDataModel>;
 }
