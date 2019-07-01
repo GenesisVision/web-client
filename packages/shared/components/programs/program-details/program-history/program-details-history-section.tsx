@@ -70,6 +70,8 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       subscriptionsCount
     } = this.state;
     const {
+      showSwaps,
+      showTickets,
       isForex,
       t,
       programId,
@@ -118,6 +120,8 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
         <div>
           {tab === TABS.TRADES && (
             <ProgramTrades
+              showSwaps={showSwaps}
+              showTickets={showTickets}
               isForex={isForex}
               fetchTrades={fetchTrades}
               programId={programId}
@@ -156,6 +160,8 @@ interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
 
 interface OwnProps {
   isSignalProgram: boolean;
+  showSwaps: boolean;
+  showTickets: boolean;
   isForex: boolean;
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
   fetchPortfolioEvents: GetItemsFuncType;
