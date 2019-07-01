@@ -12,7 +12,7 @@ export const getCopytradingTradesLog = (accountCurrency?: string) => (
   if (accountCurrency) {
     filters = { ...filters, accountCurrency };
   }
-  return actions.fetchCopytradingTradesLog(authorization, filters);
+  return actions.fetchCopytradingTradesLogAction(authorization, filters);
 };
 
 export const getCopytradingOpenTrades = (accountCurrency?: string) => (
@@ -22,7 +22,7 @@ export const getCopytradingOpenTrades = (accountCurrency?: string) => (
   if (accountCurrency) {
     filters = { ...filters, accountCurrency };
   }
-  return actions.fetchCopytradingOpenTrades(authorization, filters);
+  return actions.fetchCopytradingOpenTradesAction(authorization, filters);
 };
 
 export const getCopytradingTradesHistory = (accountCurrency?: string) => (
@@ -32,7 +32,7 @@ export const getCopytradingTradesHistory = (accountCurrency?: string) => (
   if (accountCurrency) {
     filters = { ...filters, accountCurrency };
   }
-  return actions.fetchCopytradingTradesHistory(authorization, filters);
+  return actions.fetchCopytradingTradesHistoryAction(authorization, filters);
 };
 
 export interface ICopytradingTradesCounts {
