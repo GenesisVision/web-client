@@ -7,5 +7,16 @@ export const sendConfirmationLink = (): RootThunk<void> => (
   getState
 ) => {
   let { email } = getState().emailPending;
-  dispatch(resendConfirmationLinkAction({ email }));
+  dispatch(
+    resendConfirmationLinkAction({
+      email,
+      captchaCheckResult: {
+        id: "",
+        pow: {
+          prefix: ""
+        },
+        geeTest: {}
+      }
+    })
+  );
 };

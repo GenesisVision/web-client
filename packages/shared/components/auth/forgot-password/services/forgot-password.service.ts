@@ -66,7 +66,18 @@ export const sendForgotPasswordEmail = () => (
   getState: TGetState
 ) => {
   let { email } = getState().emailPending;
-  dispatch(forgotPassword({ email })).then(() => {
+  dispatch(
+    forgotPassword({
+      email,
+      captchaCheckResult: {
+        id: "",
+        pow: {
+          prefix: ""
+        },
+        geeTest: {}
+      }
+    })
+  ).then(() => {
     dispatch(
       alertMessageActions.success(
         "auth.password-restore.resend-email-alert-message",

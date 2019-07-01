@@ -61,6 +61,7 @@ interface OwnProps {
 export interface IForgotPasswordFormValues extends ForgotPasswordViewModel {}
 
 enum FIELDS {
+  captchaCheckResult = "captchaCheckResult",
   email = "email"
 }
 
@@ -69,6 +70,13 @@ const ForgotPasswordForm = compose<React.FC<OwnProps>>(
   withFormik<Props, IForgotPasswordFormValues>({
     displayName: "forgotPassword",
     mapPropsToValues: () => ({
+      [FIELDS.captchaCheckResult]: {
+        id: "",
+        pow: {
+          prefix: ""
+        },
+        geeTest: {}
+      },
       [FIELDS.email]: ""
     }),
     validationSchema: ({ t }: Props) =>

@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { RegisterManagerViewModel } from "gv-api-web";
+import { CaptchaCheckResult, RegisterManagerViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
@@ -13,6 +13,7 @@ import { SetSubmittingType } from "shared/utils/types";
 import validationSchema, {
   SIGN_UP_FORM_FIELDS
 } from "./signup-form.validators";
+import { SIGNUP_FORM_FIELDS } from "investor-web-portal/src/pages/auth/signup/signup-form/signup-form.types";
 
 const _SignUpForm: React.FC<
   InjectedFormikProps<Props, ISignUpFormFormValues>
@@ -114,6 +115,7 @@ interface OwnProps {
 interface ISignUpFormFormValues extends RegisterManagerViewModel {
   [SIGN_UP_FORM_FIELDS.privacyPolicy]: boolean;
   [SIGN_UP_FORM_FIELDS.acceptTerms]: boolean;
+  [SIGNUP_FORM_FIELDS.captchaCheckResult]: CaptchaCheckResult;
 }
 
 const SignUpForm = compose<React.FC<OwnProps>>(
@@ -121,6 +123,13 @@ const SignUpForm = compose<React.FC<OwnProps>>(
   withFormik<Props, ISignUpFormFormValues>({
     displayName: "signup-form",
     mapPropsToValues: props => ({
+      [SIGNUP_FORM_FIELDS.captchaCheckResult]: {
+        id: "",
+        pow: {
+          prefix: ""
+        },
+        geeTest: {}
+      },
       [SIGN_UP_FORM_FIELDS.refCode]: props.refCode || "",
       [SIGN_UP_FORM_FIELDS.userName]: "",
       [SIGN_UP_FORM_FIELDS.email]: "",
