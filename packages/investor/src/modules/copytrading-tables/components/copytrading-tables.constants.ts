@@ -42,6 +42,12 @@ export const COPYTRADING_TRADES_LOG_COLUMNS = [
   }
 ];
 
+export const TRADES_HISTORY_PROVIDERS_COLUMNS = [
+  {
+    name: "providers"
+  }
+];
+
 export const OPEN_TRADES_PROVIDERS_COLUMNS = [
   {
     name: "providers"
