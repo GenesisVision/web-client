@@ -41,7 +41,6 @@
     .gv-checkbox-wrapper,
     .gv-text-field__wrapper {
       margin-left: 0;
-      margin-right: 0;
     }
   }
 
@@ -78,6 +77,7 @@
     }
 
     .gv-text-field__wrapper {
+      @include adaptive-margin(right, $padding-xsmall);
       width: 100%;
     }
 
