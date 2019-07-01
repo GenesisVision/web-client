@@ -401,6 +401,7 @@
       "title": "Trading settings",
       "type": "Type",
       "tolerance-percent": "Tolerance percentage",
+      "tolerance-percent-tooltip": "This parameter shows the percentage of the maximum possible deviation of investors opening price from the price at which the managers transaction was opened. Deviation ranges from 0% to 20%. If the price at the time of opening the transaction changes by more than the specified percentage, then the transaction will not open.",
       "volume-percent": "Volume percentage",
       "usd-equivalent": "USD equivalent",
       "back": "Back",
