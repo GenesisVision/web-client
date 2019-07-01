@@ -13,8 +13,8 @@ import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-per
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
-  mapToTableItems,
-  TableItems
+  TableItems,
+  mapToTableItems
 } from "shared/components/table/helpers/mapper";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -191,31 +191,26 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
     isAuthenticated && isManager
       ? programsApi.v10ProgramsByIdSubscribersGet(id, authService.getAuthArg())
       : Promise.resolve({ total: 0 });
-  const financialStatisticCountPromise =
-    isAuthenticated && isManager
-      ? programsApi.v10ProgramsByIdPeriodsGet(id, {
-          authorization: authService.getAuthArg()
-        })
-      : Promise.resolve({ total: 0 });
+  const periodHistoryCountPromise = programsApi.v10ProgramsByIdPeriodsGet(id);
   return Promise.all([
     tradesCountPromise,
     eventsCountPromise,
     openPositionsCountPromise,
     subscriptionsCountPromise,
-    financialStatisticCountPromise
+    periodHistoryCountPromise
   ]).then(
     ([
       tradesData,
       eventsData,
       openPositionsData,
       subscriptionsData,
-      financialStatisticData
+      periodHistoryData
     ]) => ({
       tradesCount: tradesData.total,
       eventsCount: eventsData.total,
       openPositionsCount: openPositionsData.total,
       subscriptionsCount: subscriptionsData.total,
-      financialStatisticCount: financialStatisticData.total
+      periodHistoryCount: periodHistoryData.total
     })
   );
 };
@@ -244,7 +239,7 @@ export const fetchPortfolioEvents: GetItemsFuncType = (
   );
 };
 
-export const fetchFinancialStatistic = (
+export const fetchPeriodHistory = (
   id: string,
   filters?: FilteringType
 ): Promise<TableItems<ProgramPeriodsViewModel>> => {

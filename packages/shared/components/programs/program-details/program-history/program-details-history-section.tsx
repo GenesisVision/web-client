@@ -53,7 +53,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
     eventsCount: 0,
     openPositionsCount: 0,
     subscriptionsCount: 0,
-    financialStatisticCount: 0
+    periodHistoryCount: 0
   };
 
   componentDidMount() {
@@ -74,7 +74,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       eventsCount,
       openPositionsCount,
       subscriptionsCount,
-      financialStatisticCount
+      periodHistoryCount
     } = this.state;
     const {
       role,
@@ -89,7 +89,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       fetchPortfolioEvents,
       fetchTrades,
       fetchOpenPositions,
-      fetchFinancialStatistic,
+      fetchPeriodHistory,
       isSignalProgram,
       isOwnProgram,
       isGMProgram
@@ -114,7 +114,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
               <GVTab
                 value={TABS.PERIOD_HISTORY}
                 label={t("program-details-page.history.tabs.period-history")}
-                count={10} //@todo fix this value
+                count={periodHistoryCount}
               />
               <GVTab
                 value={TABS.EVENTS}
@@ -133,8 +133,8 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
                 label={t(
                   "program-details-page.history.tabs.financial-statistic"
                 )}
-                count={financialStatisticCount}
-                visible={isAuthenticated && isManager}
+                count={periodHistoryCount}
+                visible={isAuthenticated && isManager && isOwnProgram}
               />
             </GVTabs>
           </div>
@@ -171,13 +171,14 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
               id={programId}
               currency={programCurrency}
               isGMProgram={isGMProgram}
-              fetchFinancialStatistic={fetchFinancialStatistic}
+              fetchFinancialStatistic={fetchPeriodHistory}
             />
           )}
           {tab === TABS.PERIOD_HISTORY && (
             <ProgramPeriodHistory
               id={programId}
-              fetchPeriodHistory={fetchPortfolioEvents} //@todo fix this fetch
+              currency={programCurrency}
+              fetchPeriodHistory={fetchPeriodHistory}
             />
           )}
         </div>
@@ -206,10 +207,7 @@ interface OwnProps {
     programId: string,
     filters?: FilteringType
   ) => Promise<IDataModel>;
-  fetchFinancialStatistic: (
-    programId: string,
-    opts: any
-  ) => Promise<IDataModel>;
+  fetchPeriodHistory: (programId: string, opts: any) => Promise<IDataModel>;
   programId: string;
   currency: CURRENCIES;
   programCurrency: CURRENCIES;
