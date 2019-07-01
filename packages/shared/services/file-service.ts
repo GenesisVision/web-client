@@ -1,17 +1,21 @@
 import { CancelablePromise } from "gv-api-web";
+import moment from "moment";
+import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
 import fileApi from "./api-client/file-api";
-import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
 const getExportFileUrl = (
   id: string,
   dateRange: DateRangeFilterType
 ): string => {
   const start = dateRange.dateStart
-    ? `start=${new Date(dateRange.dateStart as string).toISOString()}&`
+    ? `start=${moment(dateRange.dateStart as string).toISOString()}&`
     : "";
   const end = dateRange.dateEnd
-    ? `end=${new Date(dateRange.dateEnd as string).toISOString()}`
+    ? `end=${moment(dateRange.dateEnd as string)
+        .add(1, "day")
+        .startOf("day")
+        .toISOString()}`
     : "";
   const filters = `?${start}${end}`;
   return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/trades/export${
