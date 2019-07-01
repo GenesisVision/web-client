@@ -38,6 +38,8 @@
 }
 
 .providers-table {
+  max-height: 400px;
+  overflow-y: auto;
   & .program-avatar__level {
     background-color: $popover-background;
   }
