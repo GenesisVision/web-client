@@ -1,4 +1,3 @@
-import { ISignUpFormFormValues } from "pages/auth/signup/signup-form/signup-form";
 import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -22,7 +21,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     setSubmitting: undefined,
     isSubmit: false,
     captchaType: "None",
-    username: "",
+    userName: "",
     refCode: "",
     isAuto: false,
     email: "",
@@ -38,12 +37,9 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
       switch (captchaType) {
         case "Pow":
           if (prefix) {
-            service.signUp(
-              {
-                ...this.state
-              } as RegisterViewModel,
-              this.state.setSubmitting!
-            );
+            service.signUp({
+              ...this.state
+            });
             this.setState({
               pow: undefined,
               prefix: undefined,
@@ -52,12 +48,9 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
           }
           break;
         default:
-          service.signUp(
-            {
-              ...this.state
-            } as RegisterViewModel,
-            this.state.setSubmitting!
-          );
+          service.signUp({
+            ...this.state
+          });
           this.setState({ isSubmit: false });
           break;
       }
@@ -102,8 +95,7 @@ const mapStateToProps = (state: AuthRootState): StateProps => {
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
-    signUp: (signUpData: RegisterViewModel, setSubmitting: SetSubmittingType) =>
-      dispatch(signUp(signUpData, setSubmitting))
+    signUp: (signUpData: any) => dispatch(signUp(signUpData))
   }
 });
 
@@ -112,6 +104,7 @@ interface State extends CaptchasType {
   captchaType: string;
   setSubmitting?: SetSubmittingType;
   prefix?: number;
+  userName?: string;
   code?: string;
   email?: string;
   password?: string;
@@ -124,10 +117,7 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    signUp(
-      signUpData: RegisterViewModel,
-      setSubmitting: SetSubmittingType
-    ): void;
+    signUp(signUpData: any): void;
   };
 }
 
