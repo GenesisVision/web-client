@@ -55,7 +55,7 @@ interface OwnProps {
     data: IForgotPasswordFormValues,
     setSubmitting: SetSubmittingType
   ): void;
-  error: string;
+  errorMessage: string;
 }
 
 export interface IForgotPasswordFormValues extends ForgotPasswordViewModel {}

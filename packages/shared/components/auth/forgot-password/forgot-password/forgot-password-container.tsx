@@ -13,7 +13,7 @@ const _ForgotPasswordContainer: React.FC<Props> = ({
   isPending,
   errorMessage,
   forgotPassword
-}) => <ForgotPassword error={errorMessage} onSubmit={forgotPassword} />;
+}) => <ForgotPassword errorMessage={errorMessage} onSubmit={forgotPassword} />;
 
 const mapStateToProps = (state: AuthRootState): StateProps => {
   const { isPending, errorMessage } = state.passwordRestoreData.forgot;
@@ -22,6 +22,7 @@ const mapStateToProps = (state: AuthRootState): StateProps => {
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   forgotPassword: (formData, setSubmitting) => {
+    // @ts-ignore
     dispatch(forgotPassword(formData)).catch(() => {
       setSubmitting(false);
     });
