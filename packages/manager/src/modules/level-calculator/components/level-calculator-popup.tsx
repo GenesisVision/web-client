@@ -72,7 +72,6 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
     const newAvailableToInvest = calcNewAvailableToInvest(
       newInvestmentScale,
       managerBalance,
-      genesisRatio,
       levelsParameters
     );
     const [level, progress] = calcLevel(

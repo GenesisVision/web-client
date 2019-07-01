@@ -1,4 +1,5 @@
 @import "~shared/styles/_sizes";
+@import "~shared/styles/_colors.scss";
 
 .fee-commission {
   white-space: nowrap;
@@ -24,10 +25,29 @@
   padding: 0;
 }
 
-.fees-tooltip {
+.subscription-fees-tooltip {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  border-radius: 8px;
+  padding: 0;
+
+  &__header {
+    padding: 30px 20px;
+    letter-spacing: 0.4px;
+    font-size: $font-size-common;
+    font-weight: 400;
+    background-color: $panel-background-color;
+  }
   &__footer {
     padding: 30px 20px;
     font-weight: bold;
+  }
+  .fee-commission__value {
+    color: $positive-color;
+  }
+  .fee-commission__currency {
+    color: $main-color;
   }
 
   &__footer &__title {
