@@ -1,9 +1,9 @@
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 
 import InvestmentProgramControls from "./investment-program-controls";
-import SignalProviderControls from "./signal-provider-controls";
 
 const _ProgramControls: React.FC<
   IProgramControlsProps & InjectedTranslateProps
@@ -36,11 +36,7 @@ const _ProgramControls: React.FC<
       {isOwnProgram &&
       (canMakeSignalProvider || programDescription.isSignalProgram) ? (
         <div className="program-details-description__col program-details-description__col--small-size">
-          <SignalProviderControls
-            programDescription={programDescription}
-            isAuthenticated={isAuthenticated}
-            redirectToLogin={redirectToLogin}
-          />
+          <SignalProgramInfo programDescription={programDescription} />
         </div>
       ) : null}
     </div>

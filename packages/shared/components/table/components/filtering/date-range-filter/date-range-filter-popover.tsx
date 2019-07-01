@@ -19,10 +19,16 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   };
 
   handleChangeType = (type: DATA_RANGE_FILTER_TYPES) => () => {
+    const subtract =
+      type === DATA_RANGE_FILTER_TYPES.LAST_MOUTH
+        ? "month"
+        : type === DATA_RANGE_FILTER_TYPES.LAST_WEEK
+        ? "week"
+        : "day";
     this.setState({
       type,
       dateStart: moment()
-        .subtract(1, "day")
+        .subtract(1, subtract)
         .format("YYYY-MM-DD"),
       dateEnd: moment().format("YYYY-MM-DD")
     });

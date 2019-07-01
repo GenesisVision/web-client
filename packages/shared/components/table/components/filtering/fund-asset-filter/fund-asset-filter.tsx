@@ -19,14 +19,14 @@ const _FundAssetFilter: React.FC<Props & InjectedTranslateProps> = ({
   onChange
 }) => {
   const selectedAssets = values
-    .filter(x => value.includes(x.id))
+    .filter(x => value.includes(x.asset))
     .map(asset => (
-      <TileFilterItem key={asset.id} id={asset.id}>
+      <TileFilterItem key={asset.id} id={asset.asset}>
         <FundAssetImage url={asset.icon} alt={asset.asset} />
         <span className="fund-asset-filter__asset-name">{asset.asset}</span>
       </TileFilterItem>
     ));
-  const notSelectedAssets = values.filter(x => !value.includes(x.id));
+  const notSelectedAssets = values.filter(x => !value.includes(x.asset));
   return (
     <TileFilter
       name={name}

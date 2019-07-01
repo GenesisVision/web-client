@@ -3,6 +3,7 @@ import "shared/components/details/details-description-section/details-statistic-
 import { OrderModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
+import { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
@@ -15,7 +16,10 @@ import {
   PROGRAM_TRADES_FILTERS
 } from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DateRangeFilterType
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
@@ -26,35 +30,44 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
+import filesService from "shared/services/file-service";
+import GVButton from "shared/components/gv-button";
 
 const DECIMAL_SCALE = 8;
 
-const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
+const _ProgramTrades: React.FC<Props> = ({
   isForex,
   currency,
   programId,
   fetchTrades,
   t
 }) => {
-  const fetchProgramTrades: GetItemsFuncType = (filters?: FilteringType) =>
-    fetchTrades(programId, filters);
+  const fetchProgramTrades: GetItemsFuncType = useCallback(
+    (filters?: FilteringType) => fetchTrades(programId, filters),
+    []
+  );
   const columns = isForex
     ? PROGRAM_FOREX_TRADES_COLUMNS
     : PROGRAM_TRADES_COLUMNS;
+
   return (
     <TableModule
+      exportButtonToolbarRender={(filtering: any) => (
+        <DownloadButtonToolbar
+          filtering={filtering!.dateRange}
+          programId={programId}
+        />
+      )}
       getItems={fetchProgramTrades}
       defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
       filtering={PROGRAM_TRADES_FILTERS}
       renderFilters={(updateFilter, filtering) => (
-        <>
-          <DateRangeFilter
-            name={DATE_RANGE_FILTER_NAME}
-            value={filtering[DATE_RANGE_FILTER_NAME]}
-            onChange={updateFilter}
-            startLabel={t("filters.date-range.program-start")}
-          />
-        </>
+        <DateRangeFilter
+          name={DATE_RANGE_FILTER_NAME}
+          value={filtering[DATE_RANGE_FILTER_NAME]}
+          onChange={updateFilter}
+          startLabel={t("filters.date-range.program-start")}
+        />
       )}
       paging={DEFAULT_PAGING}
       columns={columns}
@@ -116,14 +129,13 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
                 render={() =>
                   trade.showOriginalCommission ? (
                     <div>
-                      {`${formatValue(
-                        trade.originalCommission,
-                        DECIMAL_SCALE
-                      )} ${trade.originalCommissionCurrency}`}
+                      {`${formatValue(trade.originalCommission, 8)} ${
+                        trade.originalCommissionCurrency
+                      }`}
                     </div>
                   ) : (
                     <div>
-                      {trade.commission} {currency}
+                      {`${formatValue(trade.commission, 8)} ${trade.originalCommissionCurrency}`}
                     </div>
                   )
                 }
@@ -155,7 +167,7 @@ const _ProgramTrades: React.FC<Props & InjectedTranslateProps> = ({
   );
 };
 
-interface Props {
+interface OwnProps {
   isForex: boolean;
   currency: CURRENCIES;
   programId: string;
@@ -164,6 +176,28 @@ interface Props {
     filters?: FilteringType
   ) => Promise<IDataModel>;
 }
+
+interface Props extends InjectedTranslateProps, OwnProps {}
+
+interface IDownloadButtonToolbar extends InjectedTranslateProps {
+  filtering: DateRangeFilterType;
+  programId: string;
+}
+
+const _DownloadButtonToolbar: React.FC<IDownloadButtonToolbar> = ({
+  t,
+  filtering,
+  programId
+}) => (
+  <div className="dashboard__button-container dashboard__button">
+    <a href={filesService.getExportFileUrl(programId, filtering)}>
+      <GVButton color="primary" variant="text">
+        {t("program-details-page.history.trades.download")}
+      </GVButton>
+    </a>
+  </div>
+);
+const DownloadButtonToolbar = translate()(React.memo(_DownloadButtonToolbar));
 
 const ProgramTrades = translate()(React.memo(_ProgramTrades));
 export default ProgramTrades;

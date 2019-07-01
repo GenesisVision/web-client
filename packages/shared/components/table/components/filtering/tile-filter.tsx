@@ -14,8 +14,9 @@ class TileFilter extends React.PureComponent<Props, State> {
     anchor: undefined
   };
 
-  handleOpenPopover = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
-    this.setState({ anchor: event.currentTarget });
+  handleOpenPopover = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => this.setState({ anchor: event.currentTarget });
   handleClosePopover = () => this.setState({ anchor: undefined });
   handleAdd = (id: string) => {
     const { name, value, updateFilter } = this.props;

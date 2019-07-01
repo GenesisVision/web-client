@@ -22,6 +22,7 @@ import {
 import { loadData, saveData } from "shared/utils/localstorage";
 
 import { RenderBodyItemFuncType } from "./table.types";
+import { FilteringType } from "./filtering/filter.type";
 
 export interface ITableProps
   extends ITableFooterProps,
@@ -32,6 +33,7 @@ export interface ITableProps
   renderBodyRow?: RenderBodyItemFuncType;
   emptyMessage?: JSX.Element | string;
   showSwitchView?: boolean;
+  exportButtonToolbarRender?: (filtering?: FilteringType) => JSX.Element;
 }
 
 interface ITableState {
@@ -67,6 +69,7 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
   render() {
     const { view } = this.state;
     const {
+      exportButtonToolbarRender,
       updateItems,
       className,
       disableTitle,
@@ -108,6 +111,9 @@ class Table extends React.PureComponent<ITableProps, ITableState> {
           renderSorting={renderSorting}
           isViewSwitchEnabled={this.isViewSwitchEnabled}
           createButtonToolbar={createButtonToolbar}
+          exportButtonToolbar={
+            exportButtonToolbarRender && exportButtonToolbarRender(filtering)
+          }
         />
         <div className={"table__scroll"}>
           {view === LIST_VIEW.CARDS && (

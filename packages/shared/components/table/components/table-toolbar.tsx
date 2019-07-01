@@ -18,6 +18,7 @@ const _TableToolbar: React.FC<
   onChange,
   disableTitle,
   createButtonToolbar,
+  exportButtonToolbar,
   title,
   renderFilters,
   updateFilter,
@@ -53,6 +54,7 @@ const _TableToolbar: React.FC<
           filtering &&
           renderFilters(updateFilter, filtering)}
         {createButtonToolbar}
+        {exportButtonToolbar}
       </div>
       {isViewSwitchEnabled && (
         <div className="table__toggle">
@@ -78,6 +80,7 @@ interface ITableToolbarInnerProps {
   view: LIST_VIEW;
   isViewSwitchEnabled: boolean;
   onChange(view: LIST_VIEW): any;
+  exportButtonToolbar?: JSX.Element;
 }
 
 export interface ITableToolbarExternalProps {

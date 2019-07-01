@@ -70,6 +70,8 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__additionally {
+    display: flex;
+    flex-wrap: wrap;
     @include media-breakpoint-tablet() {
       margin-left: $padding-controls-left;
     }
@@ -111,7 +113,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       flex-wrap: nowrap;
       margin-left: $padding-controls-left;
       margin-right: 0;
-      max-width: 750px;
+      max-width: 850px;
     }
   }
 
@@ -131,11 +133,14 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     flex-grow: 1;
     display: inline-flex;
     flex-wrap: wrap;
+    box-sizing: border-box;
 
     @include media-breakpoint-landscape-phone() {
       width: auto;
+      max-width: 800px;
 
       &--small-size {
+        flex-grow: 0;
         min-width: 220px;
       }
     }
@@ -149,27 +154,53 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       }
 
       &--small-size {
-        max-width: 250px;
+        min-width: 260px;
+        max-width: 260px;
       }
     }
   }
 
   &__statistic-container {
+    @include adaptive-margin(bottom, 15px);
     display: inline-flex;
     min-width: 50%;
     box-sizing: border-box;
     flex-grow: 1;
+
+    &--btn {
+      min-width: 100%;
+      margin-bottom: 0;
+    }
+
+    .program-details-description__invest-btn {
+      @include adaptive-margin(right, $padding-small/2);
+    }
+
+    @include media-breakpoint-desktop() {
+      min-width: auto;
+
+      .program-details-description__invest-btn {
+        align-self: flex-start;
+      }
+    }
   }
 
   &__perfomance-data {
+    @include adaptive-padding(top, $padding-xxsmall);
+    @include adaptive-padding(bottom, 50px);
+    padding-left: 0;
     display: flex;
-    justify-content: space-between;
     box-sizing: border-box;
     flex-wrap: wrap;
+    margin: 0;
+    @include media-breakpoint-tablet() {
+      padding-left: $padding-small;
+      margin-left: $padding-controls-left;
+    }
     & .statistics-item {
-      margin-right: $padding-small-mobile;
+      margin-right: $padding-medium-mobile;
       @include media-breakpoint-landscape-phone() {
-        margin-right: $padding-small;
+        margin-right: $padding-medium;
       }
     }
   }
@@ -303,6 +334,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     justify-content: flex-start;
 
     &-item {
+      @include adaptive-margin(right, $padding-xxsmall);
       flex-grow: 1;
       flex-basis: 50%;
       box-sizing: border-box;
