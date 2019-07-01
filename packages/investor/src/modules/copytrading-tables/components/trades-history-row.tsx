@@ -20,7 +20,6 @@ import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
-import { UpdateRowFuncType } from "shared/components/table/components/table.types";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
@@ -28,7 +27,7 @@ import ProvidersPopup from "./providers-popup";
 import TradeHistorySubRow from "./trade-history-sub-row";
 import TradesHistoryFeesTooltip from "./trades-history-fees-tooltip";
 
-const _TradesHistoryRow: React.FC<Props> = ({ trade, title, update }) => {
+const _TradesHistoryRow: React.FC<Props> = ({ trade, title }) => {
   const [anchor, toggleSubrows] = useState<EventTarget | undefined>(undefined);
   const program =
     trade.providers.length > 0
@@ -148,5 +147,4 @@ export default TradesHistoryRow;
 interface Props {
   trade: OrderSignalModel;
   title: string;
-  update: UpdateRowFuncType;
 }
