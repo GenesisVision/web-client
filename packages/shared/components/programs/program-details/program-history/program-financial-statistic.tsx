@@ -17,8 +17,12 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 import {
   PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
-  PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
+  PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS,
+  PROGRAM_TRADES_DEFAULT_FILTERS,
+  PROGRAM_TRADES_FILTERS
 } from "../program-details.constants";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
 const _ProgramFinancialStatistic: React.FC<Props> = ({
   t,
@@ -35,10 +39,20 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
     (filters?: FilteringType) => fetchFinancialStatistic(id, filters),
     []
   );
+  console.log(isGMProgram);
   return (
-    //@todo fix all values in the table below
     <TableModule
       getItems={fetchStatistic}
+      defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
+      filtering={PROGRAM_TRADES_FILTERS}
+      renderFilters={(updateFilter, filtering) => (
+        <DateRangeFilter
+          name={DATE_RANGE_FILTER_NAME}
+          value={filtering[DATE_RANGE_FILTER_NAME]}
+          onChange={updateFilter}
+          startLabel={t("filters.date-range.program-start")}
+        />
+      )}
       paging={DEFAULT_PAGING}
       columns={columns}
       renderHeader={column => (
@@ -51,7 +65,13 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
         </span>
       )}
       renderBodyRow={period => {
-        const { deposit, withdraw, commissionRebate } = period.managerStatistic;
+        const {
+          deposit,
+          withdraw,
+          commissionRebate,
+          successFee,
+          entryFee
+        } = period.managerStatistic;
         return (
           <TableRow>
             <TableCell>
@@ -71,7 +91,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
-                  value={period.profit}
+                  value={formatCurrencyValue(period.profit, currency)}
                   thousandSeparator=" "
                   displayType="text"
                   allowNegative={false}
@@ -80,17 +100,22 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
               </Profitability>
             </TableCell>
             <TableCell>
-              <NumberFormat value={10} displayType="text" suffix=" %" />
+              <NumberFormat value={successFee} suffix="%" displayType="text" />
             </TableCell>
             <TableCell>
-              <NumberFormat value={3} displayType="text" suffix=" %" />
+              <NumberFormat value={entryFee} suffix="%" displayType="text" />
             </TableCell>
             <TableCell>
-              <NumberFormat value={deposit} displayType="text" />
               <NumberFormat
-                value={withdraw}
+                value={formatCurrencyValue(deposit, currency)}
+                displayType="text"
+                suffix={` ${currency}`}
+              />
+              <NumberFormat
+                value={formatCurrencyValue(withdraw, currency)}
                 displayType="text"
                 prefix={" / "}
+                suffix={` ${currency}`}
               />
             </TableCell>
             {isGMProgram && (
