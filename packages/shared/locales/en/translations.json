@@ -1331,6 +1331,7 @@
       "title": "Trades",
       "open-trades": "Open trades",
       "history": "Trades History",
+      "log": "Trading log",
       "close-trade-confirm": {
         "header": "Closing the trade",
         "body": "Are you sure you want to close {{symbol}} trade in volume {{volume}}?",
@@ -1356,6 +1357,10 @@
         "commission": "Commission",
         "date": "Date",
         "providers": "Providers"
+      },
+      "trades-log-header": {
+        "date": "Date",
+        "message": "Message"
       },
       "fees": {
         "trading": "Trading fee",
