@@ -135,7 +135,7 @@ const _ProgramTrades: React.FC<Props> = ({
                     </div>
                   ) : (
                     <div>
-                      {`${formatValue(trade.commission, 8)} ${currency}`}
+                      {`${formatValue(trade.commission, 8)} ${trade.originalCommissionCurrency}`}
                     </div>
                   )
                 }
