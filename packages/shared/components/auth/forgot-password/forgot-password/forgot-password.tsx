@@ -18,7 +18,7 @@ const _ForgotPasswordForm: React.FC<
   <form id="forgotPasswordForm" onSubmit={handleSubmit} noValidate>
     <GVFormikField
       type="email"
-      name={FIELDS.email}
+      name={FORGOT_PASSWORD_FORM_FIELDS.email}
       label={t("auth.password-restore.forgot-password.email-field-text")}
       addon="fas fa-envelope"
       autoComplete="email"
@@ -58,11 +58,13 @@ interface OwnProps {
   errorMessage: string;
 }
 
-export interface IForgotPasswordFormValues extends ForgotPasswordViewModel {}
-
-enum FIELDS {
+export enum FORGOT_PASSWORD_FORM_FIELDS {
   captchaCheckResult = "captchaCheckResult",
   email = "email"
+}
+
+export interface IForgotPasswordFormValues {
+  [FORGOT_PASSWORD_FORM_FIELDS.email]: string;
 }
 
 const ForgotPasswordForm = compose<React.FC<OwnProps>>(
@@ -70,18 +72,11 @@ const ForgotPasswordForm = compose<React.FC<OwnProps>>(
   withFormik<Props, IForgotPasswordFormValues>({
     displayName: "forgotPassword",
     mapPropsToValues: () => ({
-      [FIELDS.captchaCheckResult]: {
-        id: "",
-        pow: {
-          prefix: ""
-        },
-        geeTest: {}
-      },
-      [FIELDS.email]: ""
+      [FORGOT_PASSWORD_FORM_FIELDS.email]: ""
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
-        [FIELDS.email]: string()
+        [FORGOT_PASSWORD_FORM_FIELDS.email]: string()
           .email(t("auth.password-restore.validators.email-invalid"))
           .required(t("auth.password-restore.validators.email-required"))
       }),
