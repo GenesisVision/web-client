@@ -23,11 +23,11 @@ export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
 
-export const login_: LoginFuncType_ = (method, fromPath) => (
+export const login_: LoginFuncType_ = (method, fromPath, type) => (
   props,
   setSubmitting
 ) => (dispatch, getState) => {
-  const { code, type, captchaCheckResult } = props;
+  const { code, captchaCheckResult } = props;
   const stateLoginData = getState().loginData.twoFactor;
   const email = props.email || stateLoginData.email;
   const password = props.password || stateLoginData.password;
@@ -128,7 +128,8 @@ export const logout: logoutFuncType = () => dispatch => {
 
 export type LoginFuncType_ = (
   method: any,
-  from?: string
+  from?: string,
+  type?: CODE_TYPE
 ) => (
   props: {
     captchaCheckResult: CaptchaCheckResult;
@@ -138,7 +139,6 @@ export type LoginFuncType_ = (
     password: string;
     method: any;
     code: string;
-    type?: CODE_TYPE;
     from?: string;
   },
   setSubmitting?: SetSubmittingType
