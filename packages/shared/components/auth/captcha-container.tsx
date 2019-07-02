@@ -92,7 +92,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   }
 }
 
-type TValues = any; //{ [keys: string]: any };
+export type TValues = any; //{ [keys: string]: any };
 
 interface State extends CaptchasType {
   isSubmit: boolean;
