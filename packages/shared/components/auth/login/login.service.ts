@@ -22,6 +22,52 @@ export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
 
+export const login_: LoginFuncType_ = (method, fromPath) => props => (
+  dispatch,
+  getState
+) => {
+  const { code, type, setSubmitting, prefix, id } = props;
+  const stateLoginData = getState().loginData.twoFactor;
+  const email = props.email || stateLoginData.email;
+  const password = props.password || stateLoginData.password;
+  const from = fromPath || stateLoginData.from;
+  return dispatch(
+    method({
+      email,
+      password,
+      client,
+      twoFactorCode: (type === CODE_TYPE.TWO_FACTOR && code) || null,
+      recoveryCode: (type === CODE_TYPE.RECOVERY && code) || null,
+      captchaCheckResult: {
+        id,
+        pow: {
+          prefix
+        }
+      }
+    })
+  )
+    .then((response: { value: string }) => {
+      authService.storeToken(response.value);
+      dispatch(authActions.updateTokenAction());
+      if (type) dispatch(clearTwoFactorData());
+      dispatch(push(from));
+    })
+    .catch((e: ResponseError) => {
+      if (e.code === "RequiresTwoFactor") {
+        dispatch(
+          storeTwoFactorAction({
+            email,
+            password,
+            from
+          })
+        );
+        dispatch(setTwoFactorRequirementAction(true));
+        dispatch(push(LOGIN_ROUTE_TWO_FACTOR_ROUTE));
+      } else {
+        setSubmitting!(false);
+      }
+    });
+};
 export const login: LoginFuncType = props => (dispatch, getState) => {
   const { code, type, setSubmitting, method, prefix, id } = props;
   const stateLoginData = getState().loginData.twoFactor;
@@ -84,6 +130,23 @@ export const logout: logoutFuncType = () => dispatch => {
   dispatch(push(HOME_ROUTE));
 };
 
+export type LoginFuncType_ = (
+  method: any,
+  from?: string
+) => (
+  props: {
+    id: string;
+    prefix?: number;
+    email: string;
+    password: string;
+    method: any;
+    code: string;
+    setSubmitting?: SetSubmittingType;
+    type?: CODE_TYPE;
+    from?: string;
+  }
+) => (dispatch: any, getState: any) => Promise<void>;
+
 export type LoginFuncType = (
   props: {
     id: string;
@@ -102,6 +165,7 @@ type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = () => (dispatch: Dispatch) => void;
 
 export interface LoginService {
+  login_: LoginFuncType_;
   login: LoginFuncType;
   clearLoginData: clearLoginDataFuncType;
   clearTwoFactorData: clearTwoFactorDataFuncType;
