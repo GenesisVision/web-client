@@ -25,7 +25,7 @@ import {
 import * as loginService from "../login.service";
 import CaptchaContainer from "./captcha-container";
 
-const _LoginPage: React.FC<Props> = ({ location, service }) => {
+const _LoginPage: React.FC<Props> = ({ location, service, errorMessage }) => {
   const from = (location.state && location.state.pathname) || HOME_ROUTE;
   useEffect(() => service.clearLoginData, []);
   return (
@@ -33,7 +33,7 @@ const _LoginPage: React.FC<Props> = ({ location, service }) => {
       <AuthTabs authPartUrl={LOGIN_ROUTE} />
       <CaptchaContainer
         from={from}
-        renderForm={(handle, errorMessage) => (
+        renderForm={handle => (
           <LoginForm onSubmit={handle} error={errorMessage} />
         )}
       />

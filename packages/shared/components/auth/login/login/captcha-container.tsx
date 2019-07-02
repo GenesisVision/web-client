@@ -90,12 +90,12 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     });
   };
   render() {
-    const { errorMessage, renderForm } = this.props;
+    const { renderForm } = this.props;
     const { pow } = this.state;
     const email = this.state.email || this.props.email;
     return (
       <>
-        {renderForm(this.handleSubmit, errorMessage)}
+        {renderForm(this.handleSubmit)}
         {pow && <Pow {...pow} login={email} handleSuccess={this.handlePow} />}
       </>
     );
@@ -155,8 +155,7 @@ interface OwnProps {
         | IRecoveryCodeFormValues
         | ITwoFactorCodeFormValues,
       setSubmitting: SetSubmittingType
-    ) => void,
-    errorMessage: string
+    ) => void
   ) => JSX.Element;
   from?: string;
   type?: CODE_TYPE;
