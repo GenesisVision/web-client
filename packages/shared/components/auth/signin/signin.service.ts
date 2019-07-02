@@ -15,8 +15,8 @@ import {
   LOGIN,
   LOGIN_TWO_FACTOR,
   storeTwoFactorAction
-} from "./login.actions";
-import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
+} from "./signin.actions";
+import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./signin.routes";
 
 export const client = "Web";
 export const redirectToLogin = () => {

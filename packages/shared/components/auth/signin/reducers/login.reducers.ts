@@ -1,10 +1,10 @@
 import { LoginViewModel } from "gv-api-web";
 import { combineReducers } from "redux";
-import { LOGIN } from "shared/components/auth/login/login.actions";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
 
+import { LOGIN } from "../signin.actions";
 import twoFactorReducer, { ITwoFactorState } from "./two-factor.reducer";
 
 export type LoginState = Readonly<{

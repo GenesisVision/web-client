@@ -1,5 +1,6 @@
-import "shared/components/auth/login/login/login.scss";
+import "./recovery.scss";
 
+import { replace } from "connected-react-router";
 import { LocationState } from "history";
 import * as React from "react";
 import { useEffect } from "react";
@@ -10,21 +11,24 @@ import {
   bindActionCreators,
   compose
 } from "redux";
-import AuthTabs from "shared/components/auth/components/auth-tabs/auth-tabs";
-import LoginForm from "shared/components/auth/login/login/login-form";
+import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
-import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
+import { HOME_ROUTE } from "shared/routes/app.routes";
 import { AuthRootState } from "shared/utils/types";
 
 import CaptchaContainer from "../../captcha-container";
 import {
+  CODE_TYPE,
   loginUserInvestorAction,
   loginUserManagerAction
-} from "../login.actions";
-import { clearLoginData, login_ } from "../login.service";
+} from "../signin.actions";
+import { clearLoginData, login_ } from "../signin.service";
+import RecoveryCodeForm from "./recovery-code-form";
 
-const _LoginPage: React.FC<Props> = ({
+const _RecoveryPage: React.FC<Props> = ({
+  password,
+  email,
   location,
   service,
   errorMessage,
@@ -34,13 +38,19 @@ const _LoginPage: React.FC<Props> = ({
   const method =
     role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
   useEffect(() => service.clearLoginData, []);
+  useEffect(() => {
+    if (email === "" || password === "") service.showNotFoundPage();
+  }, []);
   return (
-    <div className="login">
-      <AuthTabs authPartUrl={LOGIN_ROUTE} />
+    <div className="recovery-page">
       <CaptchaContainer
-        request={service.login_(method, from)}
+        request={service.login_(method, from, CODE_TYPE.RECOVERY)}
         renderForm={handle => (
-          <LoginForm onSubmit={handle} error={errorMessage} />
+          <RecoveryCodeForm
+            onSubmit={handle}
+            error={errorMessage}
+            email={email}
+          />
         )}
       />
     </div>
@@ -49,7 +59,10 @@ const _LoginPage: React.FC<Props> = ({
 
 const mapStateToProps = (state: AuthRootState): StateProps => {
   const { errorMessage } = state.loginData.login;
+  const { email, password } = state.loginData.twoFactor;
   return {
+    password,
+    email,
     errorMessage
   };
 };
@@ -57,6 +70,7 @@ const mapStateToProps = (state: AuthRootState): StateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
+      showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
       clearLoginData,
       login_
     },
@@ -68,12 +82,15 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 interface ServiceThunks extends ActionCreatorsMapObject {
+  showNotFoundPage: () => void;
   clearLoginData: typeof clearLoginData;
   login_: typeof login_;
 }
 
 interface StateProps {
   errorMessage: string;
+  password: string;
+  email: string;
 }
 
 interface OwnProps {
@@ -82,12 +99,12 @@ interface OwnProps {
 
 interface Props extends OwnProps, StateProps, DispatchProps, WithRoleProps {}
 
-const LoginPage = compose<React.ComponentType<OwnProps>>(
+const RecoveryPage = compose<React.ComponentType<OwnProps>>(
   withRole,
   connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
     mapStateToProps,
     mapDispatchToProps
   ),
   React.memo
-)(_LoginPage);
-export default LoginPage;
+)(_RecoveryPage);
+export default RecoveryPage;

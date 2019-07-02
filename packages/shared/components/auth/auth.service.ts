@@ -1,13 +1,14 @@
-//@ts-ignore
-import SHAWorker from "./sha.worker.js";
-import platformApi from "shared/services/api-client/platform-api";
-import { client } from "./login/login.service";
 import {
   CancelablePromise,
   CaptchaDetails,
   GeeTestDetails,
   PowDetails
 } from "gv-api-web";
+import platformApi from "shared/services/api-client/platform-api";
+
+//@ts-ignore
+import SHAWorker from "./sha.worker.js";
+import { client } from "./signin/signin.service";
 
 const worker = new SHAWorker();
 

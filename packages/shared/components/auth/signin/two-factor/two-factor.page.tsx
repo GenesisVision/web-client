@@ -9,20 +9,20 @@ import {
   bindActionCreators,
   compose
 } from "redux";
-import {
-  CODE_TYPE,
-  loginUserInvestorAction,
-  loginUserManagerAction
-} from "shared/components/auth/login/login.actions";
-import TwoFactorCodeForm from "shared/components/auth/login/two-factor/two-factor-code-form";
+import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import { AuthRootState } from "shared/utils/types";
 
-import { NOT_FOUND_PAGE_ROUTE } from "../../../not-found/not-found.routes";
 import CaptchaContainer from "../../captcha-container";
-import { clearLoginData, login_ } from "../login.service";
+import {
+  CODE_TYPE,
+  loginUserInvestorAction,
+  loginUserManagerAction
+} from "../signin.actions";
+import { clearLoginData, login_ } from "../signin.service";
+import TwoFactorCodeForm from "./two-factor-code-form";
 
 const _TwoFactorPage: React.FC<Props> = ({
   password,
