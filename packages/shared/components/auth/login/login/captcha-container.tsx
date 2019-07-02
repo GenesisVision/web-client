@@ -1,22 +1,14 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
 import * as authService from "../../auth.service";
 import { CaptchasType } from "../../auth.service";
 import Pow from "../../captcha/pow";
-import {
-  CODE_TYPE,
-  loginUserInvestorAction,
-  loginUserManagerAction
-} from "../login.actions";
+import { CODE_TYPE } from "../login.actions";
 import { ILoginFormFormValues } from "../login/login-form";
-import { IRecoveryCodeFormValues } from "../recovery/recovery-code-form";
-import { ITwoFactorCodeFormValues } from "../two-factor/two-factor-code-form";
 
 class _CaptchaContainer extends React.PureComponent<Props, State> {
   state = {
@@ -29,21 +21,29 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     id: "",
     email: "",
     password: "",
-    code: ""
+    code: "",
+    values: undefined
   };
 
   componentDidUpdate(): void {
-    const { isSubmit, prefix, captchaType } = this.state;
-    const { role, from, type, request } = this.props;
-    const method =
-      role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
+    const { isSubmit, prefix, captchaType, id, setSubmitting } = this.state;
+    const { type, request } = this.props;
+    const captchaCheckResult = {
+      id,
+      pow: {
+        prefix
+      },
+      geeTest: {}
+    };
     const sendRequest = () =>
-      request({
-        ...this.state,
-        from,
-        method,
-        type
-      });
+      request(
+        {
+          ...this.state,
+          captchaCheckResult,
+          type
+        },
+        setSubmitting
+      );
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":
@@ -66,25 +66,20 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   handlePow = (prefix: number) => {
     this.setState({ prefix });
   };
-  handleSubmit = (
-    values: { [keys: string]: any },
-    setSubmitting: SetSubmittingType
-  ) => {
-    const email = values.email || this.props.email;
-    authService.getCaptcha(email).then(res => {
+  handleSubmit = (values: TValues, setSubmitting: SetSubmittingType) => {
+    authService.getCaptcha(values.email).then(res => {
       this.setState({
         ...res,
-        ...values,
-        email,
+        values,
         setSubmitting,
-        isSubmit: true
+        isSubmit: true,
+        email: values.email
       });
     });
   };
   render() {
     const { renderForm } = this.props;
-    const { pow } = this.state;
-    const email = this.state.email || this.props.email;
+    const { pow, email } = this.state;
     return (
       <>
         {renderForm(this.handleSubmit)}
@@ -95,11 +90,8 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: AuthRootState): StateProps => {
-  const { email, password } = state.loginData.twoFactor;
   return {
-    isAuthenticated: isAuthenticatedSelector(state),
-    email,
-    password
+    isAuthenticated: isAuthenticatedSelector(state)
   };
 };
 
@@ -112,9 +104,10 @@ interface State extends CaptchasType {
   code?: string;
   email?: string;
   password?: string;
+  values?: any;
 }
 
-interface StateProps extends ILoginFormFormValues {
+interface StateProps {
   isAuthenticated: boolean;
 }
 
@@ -123,21 +116,16 @@ interface OwnProps {
   request: (values: TValues, setSubmitting?: SetSubmittingType) => void;
   renderForm: (
     handle: (
-      loginFormData:
-        | ILoginFormFormValues
-        | IRecoveryCodeFormValues
-        | ITwoFactorCodeFormValues,
+      loginFormData: ILoginFormFormValues,
       setSubmitting: SetSubmittingType
     ) => void
   ) => JSX.Element;
-  from?: string;
   type?: CODE_TYPE;
 }
 
-interface Props extends OwnProps, StateProps, WithRoleProps {}
+interface Props extends OwnProps, StateProps {}
 
 const CaptchaContainer = compose<React.ComponentType<OwnProps>>(
-  withRole,
   connect<StateProps, null, OwnProps, AuthRootState>(mapStateToProps)
 )(_CaptchaContainer);
 export default CaptchaContainer;
