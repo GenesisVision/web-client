@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import AuthTabs from "shared/components/auth/components/auth-tabs/auth-tabs";
-import CaptchaContainer from "shared/components/auth/login/captcha-container";
 import LoginForm, {
   ILoginFormFormValues
 } from "shared/components/auth/login/login/login-form";
@@ -24,6 +23,7 @@ import {
   clearLoginDataFuncType
 } from "../login.service";
 import * as loginService from "../login.service";
+import CaptchaContainer from "./captcha-container";
 
 const _LoginPage: React.FC<Props> = ({ location, service }) => {
   const from = (location.state && location.state.pathname) || HOME_ROUTE;
