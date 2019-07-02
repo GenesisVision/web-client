@@ -24,9 +24,9 @@ export const redirectToLogin = () => {
 };
 
 export const login_: LoginFuncType_ = (method, fromPath, type) => (
-  props,
-  setSubmitting
-) => (dispatch, getState) => {
+  dispatch,
+  getState
+) => (props, setSubmitting) => {
   const { code, captchaCheckResult } = props;
   const stateLoginData = getState().loginData.twoFactor;
   const email = props.email || stateLoginData.email;
@@ -40,49 +40,6 @@ export const login_: LoginFuncType_ = (method, fromPath, type) => (
       twoFactorCode: (type === CODE_TYPE.TWO_FACTOR && code) || null,
       recoveryCode: (type === CODE_TYPE.RECOVERY && code) || null,
       captchaCheckResult
-    })
-  )
-    .then((response: { value: string }) => {
-      authService.storeToken(response.value);
-      dispatch(authActions.updateTokenAction());
-      if (type) dispatch(clearTwoFactorData());
-      dispatch(push(from));
-    })
-    .catch((e: ResponseError) => {
-      if (e.code === "RequiresTwoFactor") {
-        dispatch(
-          storeTwoFactorAction({
-            email,
-            password,
-            from
-          })
-        );
-        dispatch(setTwoFactorRequirementAction(true));
-        dispatch(push(LOGIN_ROUTE_TWO_FACTOR_ROUTE));
-      } else {
-        setSubmitting!(false);
-      }
-    });
-};
-export const login: LoginFuncType = props => (dispatch, getState) => {
-  const { code, type, setSubmitting, method, prefix, id } = props;
-  const stateLoginData = getState().loginData.twoFactor;
-  const email = props.email || stateLoginData.email;
-  const password = props.password || stateLoginData.password;
-  const from = props.from || stateLoginData.from;
-  return dispatch(
-    method({
-      email,
-      password,
-      client,
-      twoFactorCode: (type === CODE_TYPE.TWO_FACTOR && code) || null,
-      recoveryCode: (type === CODE_TYPE.RECOVERY && code) || null,
-      captchaCheckResult: {
-        id,
-        pow: {
-          prefix
-        }
-      }
     })
   )
     .then((response: { value: string }) => {
@@ -131,6 +88,9 @@ export type LoginFuncType_ = (
   from?: string,
   type?: CODE_TYPE
 ) => (
+  dispatch: any,
+  getState: any
+) => (
   props: {
     captchaCheckResult: CaptchaCheckResult;
     id: string;
@@ -142,28 +102,14 @@ export type LoginFuncType_ = (
     from?: string;
   },
   setSubmitting?: SetSubmittingType
-) => (dispatch: any, getState: any) => Promise<void>;
+) => Promise<void>;
 
-export type LoginFuncType = (
-  props: {
-    id: string;
-    prefix?: number;
-    email: string;
-    password: string;
-    method: any;
-    code: string;
-    setSubmitting?: SetSubmittingType;
-    type?: CODE_TYPE;
-    from?: string;
-  }
-) => (dispatch: any, getState: any) => Promise<void>;
 export type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = () => (dispatch: Dispatch) => void;
 
 export interface LoginService {
   login_: LoginFuncType_;
-  login: LoginFuncType;
   clearLoginData: clearLoginDataFuncType;
   clearTwoFactorData: clearTwoFactorDataFuncType;
   logout: logoutFuncType;
