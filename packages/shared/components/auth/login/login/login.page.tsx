@@ -4,14 +4,18 @@ import { replace } from "connected-react-router";
 import { LocationState } from "history";
 import * as React from "react";
 import { useEffect } from "react";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import AuthTabs from "shared/components/auth/components/auth-tabs/auth-tabs";
 import LoginForm, {
   ILoginFormFormValues
 } from "shared/components/auth/login/login/login-form";
-import { HOME_ROUTE } from "shared/routes/app.routes";
-import { LOGIN_ROUTE } from "shared/routes/app.routes";
+import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
 
 import { ROLE } from "../../../../constants/constants";
 import withRole, { WithRoleProps } from "../../../../decorators/with-role";
@@ -22,13 +26,7 @@ import {
   loginUserInvestorAction,
   loginUserManagerAction
 } from "../login.actions";
-import {
-  LoginFuncType,
-  LoginFuncType_,
-  LoginService,
-  clearLoginDataFuncType
-} from "../login.service";
-import * as loginService from "../login.service";
+import { clearLoginData, login_ } from "../login.service";
 import CaptchaContainer from "./captcha-container";
 
 const _LoginPage: React.FC<Props> = ({
@@ -66,9 +64,10 @@ const mapStateToProps = (state: AuthRootState): StateProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators(
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      ...(loginService as LoginService),
+      clearLoginData,
+      login_,
       showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
     },
     dispatch
@@ -76,11 +75,12 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 interface DispatchProps {
-  service: {
-    clearLoginData: clearLoginDataFuncType;
-    login_: LoginFuncType_;
-    showNotFoundPage: () => void;
-  };
+  service: ResolveThunks<ServiceThunks>;
+}
+interface ServiceThunks extends ActionCreatorsMapObject {
+  clearLoginData: typeof clearLoginData;
+  login_: typeof login_;
+  showNotFoundPage: () => void;
 }
 
 interface StateProps extends ILoginFormFormValues {
