@@ -163,13 +163,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
               "manager.level-calculator.manager-balance-tooltip"
             )}
             value={+formatValue(managerBalance, 2)}
-            valueComponent={
-              <NumberFormat
-                value={+formatValue(managerBalance, 2)}
-                displayType="text"
-                suffix={` ${currency}`}
-              />
-            }
+            valueAdornment={` ${currency}`}
             max={levelsParameters.maxAvailableToInvest}
             onChange={this.handleSliderChange}
           />
