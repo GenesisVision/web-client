@@ -1,8 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import { FundAssetsListInfo } from "gv-api-web";
-import { SyntheticEvent } from "react";
+import { FundAssetsListInfo, ReallocationsViewModel } from "gv-api-web";
 import * as React from "react";
+import { SyntheticEvent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -13,7 +13,10 @@ import { HistoryCountsType } from "shared/components/programs/program-details/pr
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  SelectFilterValue
+} from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import {
@@ -22,8 +25,8 @@ import {
 } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
-import FundStructure from "./fund-structure/fund-structure";
 import FundReallocateHistory from "./fund-reallocate-history/fund-reallocate-history";
+import FundStructure from "./fund-structure/fund-structure";
 
 const EVENTS_FILTERING = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
@@ -33,14 +36,16 @@ const EVENTS_FILTERING = {
 class FundDetailsHistorySection extends React.PureComponent<Props, State> {
   state = {
     tab: TABS.STRUCTURE,
-    eventsCount: 0
+    eventsCount: 0,
+    reallocateCount: 0
   };
 
   componentDidMount() {
     const { id, fetchHistoryCounts } = this.props;
-    fetchHistoryCounts(id).then(({ eventsCount }) =>
-      this.setState({ eventsCount })
-    );
+    fetchHistoryCounts(id).then(({ eventsCount, reallocateCount }) => {
+      reallocateCount ? this.setState({ reallocateCount }) : null;
+      this.setState({ eventsCount });
+    });
   }
 
   handleTabChange = (e: SyntheticEvent<EventTarget, Event>, tab: string) => {
@@ -51,12 +56,13 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
       t,
       id,
       fetchFundStructure,
+      fetchFundReallocateHistory,
       isAuthenticated,
       isInvested,
       fetchPortfolioEvents,
       eventTypeFilterValues
     } = this.props;
-    const { tab, eventsCount } = this.state;
+    const { tab, eventsCount, reallocateCount } = this.state;
     return (
       <Surface className="details-history">
         <div className="details-history__header">
@@ -81,7 +87,7 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
               <GVTab
                 value={TABS.REALLOCATE_HISTORY}
                 label={t("fund-details-page.history.tabs.reallocate-history")}
-                count={10}
+                count={reallocateCount}
               />
             </GVTabs>
           </div>
@@ -101,7 +107,7 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
           {tab === TABS.REALLOCATE_HISTORY && (
             <FundReallocateHistory
               id={id}
-              fetchStructure={fetchFundStructure}
+              fetchFundReallocateHistory={fetchFundReallocateHistory}
             />
           )}
         </div>
@@ -127,6 +133,10 @@ interface Props extends StateProps, InjectedTranslateProps, OwnProps {}
 interface OwnProps {
   id: string;
   fetchFundStructure(fundId: string): Promise<FundAssetsListInfo>;
+  fetchFundReallocateHistory(
+    fundId: string,
+    filters?: FilteringType
+  ): Promise<ReallocationsViewModel>;
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
   fetchPortfolioEvents: GetItemsFuncType;
   eventTypeFilterValues: SelectFilterValue<string>[];
@@ -136,6 +146,7 @@ interface OwnProps {
 interface State {
   tab: TABS;
   eventsCount: number;
+  reallocateCount: number;
 }
 
 export default compose<React.ComponentType<OwnProps>>(
