@@ -9,8 +9,7 @@ import { InvestmentDetails } from "shared/components/details/details-description
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
-import Tooltip from "shared/components/tooltip/tooltip";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { FUND, STATUS } from "shared/constants/constants";
 import { composeFundNotificationsUrl } from "shared/utils/compose-url";
 
@@ -18,7 +17,6 @@ import {
   IFundControlsProps,
   IFundWithdrawalContainerProps
 } from "../fund-details.types";
-import { TooltipLabel } from "../../../tooltip-label/tooltip-label";
 
 const _FundFundDetailsDescription: React.FC<Props> = ({
   t,
