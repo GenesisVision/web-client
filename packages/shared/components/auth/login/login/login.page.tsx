@@ -45,7 +45,6 @@ const _LoginPage: React.FC<Props> = ({
     <div className="login">
       <AuthTabs authPartUrl={LOGIN_ROUTE} />
       <CaptchaContainer
-        from={from}
         request={service.login_(method, from)}
         renderForm={handle => (
           <LoginForm onSubmit={handle} error={errorMessage} />
