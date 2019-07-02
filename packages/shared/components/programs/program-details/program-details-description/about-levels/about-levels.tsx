@@ -50,7 +50,7 @@ const _AboutLevelsComponent: React.FC<Props> = ({
   investmentsLimits,
   currency
 }) => (
-  <Dialog open={open} onClose={onClose} className="about-levels">
+  <Dialog open={open} onClose={onClose} className="about-levels" top>
     <div className="about-levels__container">
       <div className="about-levels__header">
         <h1>{t("about-levels-page.titles.main")}</h1>
