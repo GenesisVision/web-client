@@ -18,6 +18,7 @@ import {
   IFundControlsProps,
   IFundWithdrawalContainerProps
 } from "../fund-details.types";
+import { TooltipLabel } from "../../../tooltip-label/tooltip-label";
 
 const _FundFundDetailsDescription: React.FC<Props> = ({
   t,
@@ -62,18 +63,12 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
         )}
         AssetDetailsExtraBlock={() => (
           <div className="details-description__info-block">
-            <Tooltip
-              horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-              render={() => (
-                <div className="tooltip__content">
-                  {t("fund-details-page.tooltip.assets")}
-                </div>
-              )}
-            >
-              <h4 className="details-description__subheading tooltip__label">
-                {t("fund-details-page.description.assets")}
-              </h4>
-            </Tooltip>
+            <h4 className="details-description__subheading tooltip__label">
+              <TooltipLabel
+                tooltipContent={t("fund-details-page.tooltip.assets")}
+                labelText={t("fund-details-page.description.assets")}
+              />
+            </h4>
             <div>
               <FundAssetContainer
                 type={FUND_ASSET_TYPE.LARGE}
