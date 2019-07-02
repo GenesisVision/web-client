@@ -49,7 +49,7 @@ class Filter extends React.PureComponent<IFilterProps, IFilterState> {
         <div className="filter" onClick={this.handleOpenPopover}>
           <div className="filter__label">{label}</div>
           <div className="filter__value">{renderValueText(value)}</div>
-          <FilterArrowIcon isOpen={anchor !== null} />
+          <FilterArrowIcon isOpen={anchor !== undefined} />
         </div>
         <Popover
           anchorEl={anchor}

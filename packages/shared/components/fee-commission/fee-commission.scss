@@ -1,0 +1,79 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors.scss";
+
+.fee-commission {
+  white-space: nowrap;
+  letter-spacing: 0.4px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-size: $font-size-paragraph;
+  &:not(:last-child) {
+    margin-bottom: $font-size-paragraph;
+  }
+  &__title {
+    margin-right: $padding-xsmall;
+  }
+
+  &__currency,
+  &__title {
+    opacity: 0.4;
+  }
+  &__total {
+    font-weight: 600;
+  }
+}
+
+.popover.tooltip__popover.fees-tooltip {
+  padding: 0;
+}
+
+.subscription-fees-tooltip {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  border-radius: 8px;
+  padding: 0;
+
+  &__header {
+    padding: 30px 20px;
+    letter-spacing: 0.4px;
+    font-size: $font-size-common;
+    font-weight: 400;
+    background-color: $panel-background-color;
+  }
+  &__footer {
+    padding: 30px 20px;
+    font-weight: bold;
+  }
+  .fee-commission__value {
+    color: $positive-color;
+  }
+  .fee-commission__currency {
+    color: $main-color;
+  }
+
+  &__footer &__title {
+    opacity: 1;
+  }
+}
+
+.fees-tooltip-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  border-radius: 8px;
+  * {
+    color: $main-color !important;
+  }
+  &__header,
+  &__footer {
+    padding: 30px 20px;
+    letter-spacing: 0.4px;
+    font-size: $font-size-common;
+    font-weight: 400;
+  }
+  &__header {
+    background-color: $panel-background-color;
+  }
+}

@@ -1,14 +1,27 @@
+import { ACTION_STATUS_FILTER_TYPES } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
   composeRequestValueFunc
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 export const PROGRAM_TRADES_SORTING = "ByDateDesc";
-export const PROGRAM_FOREX_TRADES_COLUMNS: SortingColumn[] = [
+
+export const generateProgramTradesColumns = (
+  hideSwaps?: boolean,
+  hideTickets?: boolean
+) =>
+  PROGRAM_TRADES_COLUMNS.filter(
+    column =>
+      (hideSwaps ? column.name !== "swap" : true) &&
+      (hideTickets ? column.name !== "ticket" : true)
+  );
+
+export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
     name: "direction-entry",
     sortingName: "ByDirection"
@@ -44,36 +57,6 @@ export const PROGRAM_FOREX_TRADES_COLUMNS: SortingColumn[] = [
   {
     name: "ticket",
     sortingName: "ByTicket"
-  }
-];
-export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
-  {
-    name: "direction-entry",
-    sortingName: "ByDirection"
-  },
-  {
-    name: "symbol",
-    sortingName: "BySymbol"
-  },
-  {
-    name: "volume",
-    sortingName: "ByVolume"
-  },
-  {
-    name: "price",
-    sortingName: "ByPrice"
-  },
-  {
-    name: "profit",
-    sortingName: "ByProfit"
-  },
-  {
-    name: "commission",
-    sortingName: "ByCommission"
-  },
-  {
-    name: "date",
-    sortingName: "ByDate"
   }
 ];
 export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
@@ -122,6 +105,9 @@ export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
     name: "profit"
   },
   {
+    name: "commission"
+  },
+  {
     name: "volume"
   },
   {
@@ -148,4 +134,17 @@ export const PROGRAM_TRADES_DEFAULT_FILTERS = [
 
 export const PROGRAM_TRADES_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
+};
+
+export const SUBSCRIBERS_STATUS_TYPE = "status";
+
+export const PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS = [
+  {
+    name: SUBSCRIBERS_STATUS_TYPE,
+    type: FILTER_TYPE.GENERAL
+  }
+];
+
+export const PROGRAM_SUBSCRIBERS_FILTERS = {
+  [SUBSCRIBERS_STATUS_TYPE]: ACTION_STATUS_FILTER_TYPES.ACTIVE
 };

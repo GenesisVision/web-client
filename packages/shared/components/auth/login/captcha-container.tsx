@@ -5,6 +5,7 @@ import { Dispatch, bindActionCreators, compose } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
 import * as authService from "../auth.service";
@@ -114,9 +115,13 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
 
 const mapStateToProps = (state: AuthRootState): StateProps => {
   const { errorMessage } = state.loginData.login;
-  const { isAuthenticated } = state.authData;
   const { email, password } = state.loginData.twoFactor;
-  return { isAuthenticated, errorMessage, email, password };
+  return {
+    isAuthenticated: isAuthenticatedSelector(state),
+    errorMessage,
+    email,
+    password
+  };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

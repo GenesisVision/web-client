@@ -5,13 +5,11 @@ import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
-import ImageBase from "shared/components/avatar/image-base";
+import SocialLinkImage from "shared/components/avatar/social-link/social-link";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { object, string } from "yup";
-
-import SocialLink from "../../media/social-link.svg";
 
 const _SocialLinkForm: React.FC<Props> = ({
   t,
@@ -21,18 +19,15 @@ const _SocialLinkForm: React.FC<Props> = ({
   setFieldValue
 }) => {
   const handleCancelClick = () => {
-    setFieldValue(FORM_FIELD.linkValue, socialLink.value);
+    setFieldValue(FORM_FIELD.linkValue, socialLink.value || "");
     setFieldValue(FORM_FIELD.isButtonsVisible, false);
   };
 
   return (
     <div className="social-link">
-      <ImageBase
-        url={socialLink.logo}
-        alt={socialLink.name}
-        defaultImage={SocialLink}
-        imageClassName="social-logo"
-      />
+      <div className="social-logo">
+        <SocialLinkImage url={socialLink.logo} alt={socialLink.name} />
+      </div>
       <form onSubmit={handleSubmit}>
         <GVFormikField
           component={GVTextField}
@@ -76,7 +71,7 @@ const SocialLinkForm = compose<React.ComponentType<OwnProps>>(
   withFormik<OwnProps, ISignalLinkFormValues>({
     displayName: "social-link-form",
     mapPropsToValues: props => ({
-      [FORM_FIELD.linkValue]: props.socialLink.value,
+      [FORM_FIELD.linkValue]: props.socialLink.value || "",
       [FORM_FIELD.isButtonsVisible]: false
     }),
     validationSchema: (props: Props) =>
@@ -87,7 +82,6 @@ const SocialLinkForm = compose<React.ComponentType<OwnProps>>(
             100,
             props.t("profile-page.social-links.validation.link-max-length")
           )
-          .nullable(true)
       }),
     handleSubmit: (values, { props, setSubmitting, setFieldValue }) => {
       props

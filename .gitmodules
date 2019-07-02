@@ -1,0 +1,3 @@
+[submodule "packages/gv-api-web"]
+    path = packages/gv-api-web
+    url = https://github.com/GenesisVision/gv-api-web.git

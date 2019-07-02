@@ -20,8 +20,8 @@ const DisableAuth: React.FC<
   >
     <div className="dialog__title">{t("2fa-page.disable.title")}</div>
     <GVFormikField
-      name="twoFactorCode"
-      type="text"
+      name={FIELDS.twoFactorCode}
+      type="tel"
       label={t("2fa-page.google-code")}
       component={GVTextField}
       autoComplete="off"
@@ -30,7 +30,7 @@ const DisableAuth: React.FC<
       format="######"
     />
     <GVFormikField
-      name="password"
+      name={FIELDS.password}
       type="password"
       label={t("2fa-page.password")}
       component={GVTextField}
@@ -56,19 +56,28 @@ const DisableAuthForm = compose<React.ComponentType<OwnProps>>(
   withFormik<Props, IDisableAuthFormFormValues>({
     displayName: "disable-auth",
     mapPropsToValues: () => ({
-      twoFactorCode: "",
-      password: ""
+      [FIELDS.twoFactorCode]: "",
+      [FIELDS.password]: ""
     }),
     validationSchema: (props: Props) =>
       object().shape({
-        twoFactorCode: number().required(props.t("2fa-page.code-required")),
-        password: string().required(props.t("2fa-page.password-required"))
+        [FIELDS.twoFactorCode]: number().required(
+          props.t("2fa-page.code-required")
+        ),
+        [FIELDS.password]: string().required(
+          props.t("2fa-page.password-required")
+        )
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
   })
 )(DisableAuth);
+
+enum FIELDS {
+  twoFactorCode = "twoFactorCode",
+  password = "password"
+}
 
 interface Props extends InjectedTranslateProps, OwnProps {}
 interface OwnProps {
@@ -80,8 +89,8 @@ interface OwnProps {
 }
 
 export interface IDisableAuthFormFormValues {
-  twoFactorCode: string;
-  password: string;
+  [FIELDS.twoFactorCode]: string;
+  [FIELDS.password]: string;
 }
 
 export default DisableAuthForm;

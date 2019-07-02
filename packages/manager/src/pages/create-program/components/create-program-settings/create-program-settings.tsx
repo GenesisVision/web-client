@@ -7,7 +7,8 @@ import {
   Broker,
   BrokerAccountType,
   ProgramsInfo,
-  WalletData
+  WalletData,
+  WalletDataCurrencyEnum
 } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -32,10 +33,12 @@ import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
-import createProgramSettingsValidationSchema from "./create-program-settings.validators";
+import createProgramSettingsValidationSchema, {
+  CREATE_PROGRAM_FIELDS
+} from "./create-program-settings.validators";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
-class CreateProgramSettings extends React.PureComponent<
+class _CreateProgramSettings extends React.PureComponent<
   InjectedFormikProps<
     ICreateProgramSettingsProps,
     ICreateProgramSettingsFormValues
@@ -275,7 +278,7 @@ class CreateProgramSettings extends React.PureComponent<
                   )}
                   adornment="%"
                   component={GVTextField}
-                  InputComponent={NumberFormat}
+                  type="number"
                   autoComplete="off"
                   decimalScale={4}
                 />
@@ -309,6 +312,9 @@ class CreateProgramSettings extends React.PureComponent<
                 <div className="create-program-settings__item">
                   <InputAmountField
                     autoFocus={false}
+                    isAllow={this.isAmountAllow(
+                      currency as WalletDataCurrencyEnum
+                    )}
                     name={CREATE_PROGRAM_FIELDS.investmentLimit}
                     label={t(
                       "manager.create-program-page.settings.fields.enter-correct-amount"
@@ -382,7 +388,7 @@ class CreateProgramSettings extends React.PureComponent<
                   )}
                   adornment="%"
                   component={GVTextField}
-                  InputComponent={NumberFormat}
+                  type="number"
                   autoComplete="off"
                   decimalScale={4}
                   isAllowed={allowValuesNumberFormat()}
@@ -406,7 +412,7 @@ class CreateProgramSettings extends React.PureComponent<
                   )}
                   adornment="%"
                   component={GVTextField}
-                  InputComponent={NumberFormat}
+                  type="number"
                   autoComplete="off"
                   decimalScale={4}
                   isAllowed={allowValuesNumberFormat()}
@@ -537,7 +543,7 @@ class CreateProgramSettings extends React.PureComponent<
   }
 }
 
-export default compose<React.ComponentType<OwnProps>>(
+const CreateProgramSettings = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<ICreateProgramSettingsProps, ICreateProgramSettingsFormValues>({
     displayName: "CreateProgramSettingsForm",
@@ -561,7 +567,7 @@ export default compose<React.ComponentType<OwnProps>>(
         [CREATE_PROGRAM_FIELDS.logo]: {},
         [CREATE_PROGRAM_FIELDS.entryFee]: undefined,
         [CREATE_PROGRAM_FIELDS.successFee]: undefined,
-        [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: true,
+        [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: false,
         [CREATE_PROGRAM_FIELDS.investmentLimit]: undefined,
         [CREATE_PROGRAM_FIELDS.isSignalProgram]: broker.isSignalsAvailable,
         [CREATE_PROGRAM_FIELDS.signalSuccessFee]: broker.isSignalsAvailable
@@ -582,27 +588,8 @@ export default compose<React.ComponentType<OwnProps>>(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(CreateProgramSettings);
-
-export enum CREATE_PROGRAM_FIELDS {
-  currency = "currency",
-  periodLength = "periodLength",
-  successFee = "successFee",
-  stopOutLevel = "stopOutLevel",
-  leverage = "leverage",
-  brokerAccountTypeId = "brokerAccountTypeId",
-  signalSuccessFee = "signalSuccessFee",
-  signalVolumeFee = "signalVolumeFee",
-  isSignalProgram = "isSignalProgram",
-  hasInvestmentLimit = "hasInvestmentLimit",
-  title = "title",
-  description = "description",
-  logo = "logo",
-  entryFee = "entryFee",
-  depositAmount = "depositAmount",
-  depositWalletId = "depositWalletId",
-  investmentLimit = "investmentLimit"
-}
+)(_CreateProgramSettings);
+export default CreateProgramSettings;
 
 interface OwnProps {
   broker: Broker;
@@ -613,7 +600,7 @@ interface OwnProps {
   navigateBack(): void;
   author: string;
   notifyError(message: string): void;
-  programCurrency?: string;
+  programCurrency: string;
   changeCurrency(currency: string): void;
   leverage?: number;
   changeLeverage(leverage: number): void;
@@ -628,7 +615,7 @@ export interface ICreateProgramSettingsProps
   extends OwnProps,
     InjectedTranslateProps {}
 export interface ICreateProgramSettingsFormValues {
-  [CREATE_PROGRAM_FIELDS.currency]?: string;
+  [CREATE_PROGRAM_FIELDS.currency]: string;
   [CREATE_PROGRAM_FIELDS.periodLength]?: number;
   [CREATE_PROGRAM_FIELDS.successFee]?: number;
   [CREATE_PROGRAM_FIELDS.stopOutLevel]: number;

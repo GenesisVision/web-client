@@ -1,4 +1,4 @@
-import { MultiWalletFilters, WalletData } from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
@@ -11,7 +11,7 @@ import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-
 
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletContainer from "./wallet-container/wallet-container";
+import WalletTables from "./wallet-tables/wallet-tables";
 
 class _WalletCurrency extends React.PureComponent<Props, State> {
   state = {
@@ -36,7 +36,7 @@ class _WalletCurrency extends React.PureComponent<Props, State> {
     this.setState({ isOpenTransferPopup: false });
 
   render() {
-    const { t, info, filters } = this.props;
+    const { t, info } = this.props;
     const currentWallet: CurrentWallet = {
       currency: info.currency,
       available: info.available
@@ -70,7 +70,7 @@ class _WalletCurrency extends React.PureComponent<Props, State> {
             currency={info.currency}
           />
         </div>
-        <WalletContainer filters={filters} currency={info.currency} />
+        <WalletTables currency={info.currency} />
         <WalletAddFundsPopup
           currentWallet={currentWallet}
           open={this.state.isOpenAddFundsPopup}
@@ -94,7 +94,6 @@ interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface OwnProps {
   info: WalletData;
-  filters: MultiWalletFilters;
 }
 
 interface State {
@@ -103,5 +102,5 @@ interface State {
   isOpenTransferPopup: boolean;
 }
 
-const WalletCurrency = withLoader(translate()(_WalletCurrency));
+const WalletCurrency = translate()(withLoader(_WalletCurrency));
 export default WalletCurrency;

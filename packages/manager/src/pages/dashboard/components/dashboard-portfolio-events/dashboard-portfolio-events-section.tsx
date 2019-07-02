@@ -9,8 +9,9 @@ import {
   compose
 } from "redux";
 import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
+import { DASHBOARD_EVENTS_ROUTE } from "shared/routes/dashboard.routes";
 
-import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
+import { dashboardEventsSelector } from "../../reducers/dashboard-events.reducer";
 import { getPortfolioEvents } from "../../services/dashboard.service";
 import DashboardPortfolioEmptyView from "./dashboard-portfolio-empty-view";
 import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
@@ -21,12 +22,11 @@ class _DashboardPortfolioEventsSection extends React.PureComponent<Props> {
     service.getPortfolioEvents();
   }
   render() {
-    const { title, isPending, data } = this.props;
+    const { title, data } = this.props;
     return (
       <DashboardPortfolioEvents
         fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
         title={title}
-        isPending={isPending}
         data={data}
         eventView={DashboardPortfolioEvent}
         emptyView={DashboardPortfolioEmptyView}
@@ -41,10 +41,9 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     dispatch
   )
 });
-const mapStateToProps = (state: ManagerRootState): StateProps => {
-  const { isPending, data } = state.dashboard.eventsData;
-  return { isPending, data };
-};
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  data: dashboardEventsSelector(state)
+});
 
 interface Props extends OwnProps, DispatchProps, StateProps {}
 
@@ -53,7 +52,6 @@ interface OwnProps {
 }
 
 interface StateProps {
-  isPending: boolean;
   data?: ManagerPortfolioEvents;
 }
 

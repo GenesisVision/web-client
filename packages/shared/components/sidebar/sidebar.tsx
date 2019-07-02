@@ -2,7 +2,7 @@ import "./sidebar.scss";
 
 import classnames from "classnames";
 import * as React from "react";
-import Modal from "shared/components/modal/modal";
+import Modal, { BodyFix } from "shared/components/modal/modal";
 import history from "shared/utils/history";
 
 class Sidebar extends React.PureComponent<Props> {
@@ -23,6 +23,7 @@ class Sidebar extends React.PureComponent<Props> {
     } = this.props;
     return (
       <Modal open={open} onClose={onClose}>
+        <BodyFix />
         <div className={classnames("sidebar", `sidebar--${position}`)}>
           {children}
         </div>

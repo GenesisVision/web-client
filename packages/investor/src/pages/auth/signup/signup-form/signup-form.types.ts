@@ -1,4 +1,5 @@
 export enum SIGNUP_FORM_FIELDS {
+  captchaCheckResult = "captchaCheckResult",
   privacyPolicy = "privacyPolicy",
   acceptTerms = "acceptTerms",
   residentUSA = "residentUSA",

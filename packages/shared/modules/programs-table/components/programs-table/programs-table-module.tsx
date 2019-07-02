@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   FilteringType,
+  SortingColumn,
   TDefaultFilters
 } from "shared/components/table/components/filtering/filter.type";
 import TableModule from "shared/components/table/components/table-module";
@@ -28,7 +29,8 @@ const ProgramTableModule: React.FC<Props> = React.memo(
     showRating,
     title,
     disableTitle,
-    toggleFavorite
+    toggleFavorite,
+    columns
   }) => (
     <TableModule
       disableTitle={disableTitle}
@@ -39,7 +41,7 @@ const ProgramTableModule: React.FC<Props> = React.memo(
       renderFilters={renderFilters}
       paging={paging}
       title={title}
-      columns={PROGRAMS_COLUMNS}
+      columns={columns || PROGRAMS_COLUMNS}
       renderHeader={column => (
         <ProgramTableHeaderCell
           condition={
@@ -77,6 +79,7 @@ interface Props {
   title: string;
   disableTitle?: boolean;
   toggleFavorite: TableToggleFavoriteType;
+  columns?: SortingColumn[];
 }
 
 export default ProgramTableModule;

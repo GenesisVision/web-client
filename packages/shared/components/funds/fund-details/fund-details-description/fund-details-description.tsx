@@ -1,9 +1,11 @@
+import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import GVButton from "shared/components/gv-button";
+import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 
 const _FundDetailsDescription: React.FC<Props> = ({
@@ -31,6 +33,7 @@ const _FundDetailsDescription: React.FC<Props> = ({
           {assetDescription.managerName}
         </GVButton>
       </Link>
+      <SocialLinksBlock socialLinks={assetDescription.managerSocialLinks} />
       <AssetDetailsExtraBlock />
       <h4 className="program-details-description__subheading">
         {t("program-details-page.description.strategy")}
@@ -66,6 +69,7 @@ type AssetDescription = {
   hasNotifications: boolean;
   managerUrl: string;
   managerName: string;
+  managerSocialLinks: SocialLinkViewModel[];
 };
 
 interface OwnProps {

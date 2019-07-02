@@ -93,8 +93,7 @@ export const PROGRAMS_COLUMNS: SortingColumn[] = [
     sortingName: "ByEndOfPeriod"
   },
   {
-    name: "trades",
-    sortingName: "ByTrades"
+    name: "age"
   },
   {
     name: "drawdown",

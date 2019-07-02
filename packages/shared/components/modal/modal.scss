@@ -1,15 +1,19 @@
 .modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   &[class*="position"] {
-    overflow: visible;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 1300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.modal--align-top {
+      align-items: flex-start;
+    }
   }
 
   &--position-absolute {
@@ -21,7 +25,7 @@
   }
 
   &__backdrop {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;

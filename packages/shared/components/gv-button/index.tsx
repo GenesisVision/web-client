@@ -7,15 +7,17 @@ interface GVButtonProps {
   id?: string;
   title?: string;
   variant?: "text" | "outlined" | "contained";
-  color?: "primary" | "secondary";
+  color?: "primary" | "secondary" | "primary-dark";
   type?: "button" | "submit";
   className?: string;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   children: string | JSX.Element;
+  name?: string;
+  noPadding?: boolean;
 }
 
-const GVButton: React.SFC<GVButtonProps> = ({
+const GVButton: React.FC<GVButtonProps> = ({
   id,
   className,
   title,
@@ -24,14 +26,18 @@ const GVButton: React.SFC<GVButtonProps> = ({
   type,
   disabled,
   onClick,
-  children
+  children,
+  name,
+  noPadding
 }) => {
   const classname = classnames("gv-btn", className, {
     "gv-btn--primary": color === "primary",
     "gv-btn--secondary": color === "secondary",
+    "gv-btn--primary-dark": color === "primary-dark",
     "gv-btn--text": variant === "text",
     "gv-btn--outlined": variant === "outlined",
-    "gv-btn--contained": variant === "contained"
+    "gv-btn--contained": variant === "contained",
+    "gv-btn--no-padding": noPadding
   });
   return (
     <button
@@ -41,6 +47,7 @@ const GVButton: React.SFC<GVButtonProps> = ({
       onClick={onClick}
       title={title}
       type={type}
+      name={name}
     >
       {children}
     </button>

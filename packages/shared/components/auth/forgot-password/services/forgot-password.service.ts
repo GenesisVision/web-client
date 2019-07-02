@@ -1,5 +1,9 @@
 import { push } from "connected-react-router";
-import { ForgotPasswordViewModel, ResetPasswordViewModel } from "gv-api-web";
+import {
+  CaptchaCheckResult,
+  ForgotPasswordViewModel,
+  ResetPasswordViewModel
+} from "gv-api-web";
 import { Dispatch } from "redux";
 import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
@@ -10,9 +14,8 @@ import {
   EMAIL_PENDING_ROUTE,
   PASSWORD_RESTORE_ROUTE
 } from "shared/components/auth/forgot-password/forgot-password.routes";
-import { LOGIN_ROUTE } from "shared/components/auth/login/login.routes";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { HOME_ROUTE } from "shared/routes/app.routes";
+import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
 import {
   MiddlewareDispatch,
@@ -30,7 +33,7 @@ export const forgotPassword = (data: ForgotPasswordViewModel) => (
   dispatch: MiddlewareDispatch
 ) =>
   dispatch(forgotPasswordAction(data)).then(() => {
-    dispatch(emailPendingActions.saveEmail({ email: data.email }));
+    dispatch(emailPendingActions.saveEmail(data));
     dispatch(push(EMAIL_PENDING_ROUTE));
   });
 
@@ -61,12 +64,16 @@ export const restorePassword = (
       } else model.setSubmitting(false);
     });
 
-export const sendForgotPasswordEmail = () => (
-  dispatch: MiddlewareDispatch,
-  getState: TGetState
-) => {
+export const sendForgotPasswordEmail = (
+  captchaCheckResult: CaptchaCheckResult
+) => (dispatch: MiddlewareDispatch, getState: TGetState) => {
   let { email } = getState().emailPending;
-  dispatch(forgotPassword({ email })).then(() => {
+  dispatch(
+    forgotPassword({
+      email,
+      captchaCheckResult
+    })
+  ).then(() => {
     dispatch(
       alertMessageActions.success(
         "auth.password-restore.resend-email-alert-message",
@@ -76,9 +83,7 @@ export const sendForgotPasswordEmail = () => (
   });
 };
 
-export const navigateToPasswordRestore = () => (
-  dispatch: Dispatch
-) => {
+export const navigateToPasswordRestore = () => (dispatch: Dispatch) => {
   dispatch(clearDataActionFactory(EMAIL_PENDING).clearData());
   dispatch(push(PASSWORD_RESTORE_ROUTE));
 };

@@ -7,28 +7,23 @@ import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
+import DetailsSettingControl from "shared/components/details/details-description-section/details-description/controls/details-setting-control";
 import GVButton from "shared/components/gv-button";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS,
   anchorElType
 } from "shared/components/popover/popover";
+import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 import {
   composeManagerDetailsUrl,
-  composeProgramNotificationsUrl
+  composeProgramNotificationsUrl,
+  composeProgramSettingsUrl
 } from "shared/utils/compose-url";
 
 import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
-
-interface IIProgramDetailsDescriptionMainOwnProps {
-  programDescription: ProgramDetailsFull;
-  ChangePasswordTradingAccount?: React.ComponentType<
-    IChangePasswordTradingAccountProps
-  >;
-  isOwnProgram: boolean;
-}
 
 interface IProgramDetailsDescriptionMainProps
   extends IIProgramDetailsDescriptionMainOwnProps,
@@ -38,7 +33,7 @@ interface IProgramDetailsDescriptionMainState {
   anchor?: anchorElType;
 }
 
-class ProgramDetailsDescriptionMain extends React.PureComponent<
+class _ProgramDetailsDescriptionMain extends React.PureComponent<
   IProgramDetailsDescriptionMainProps,
   IProgramDetailsDescriptionMainState
 > {
@@ -56,20 +51,15 @@ class ProgramDetailsDescriptionMain extends React.PureComponent<
 
   render() {
     const { anchor } = this.state;
-    const {
-      t,
-      programDescription,
-      ChangePasswordTradingAccount,
-      isOwnProgram
-    } = this.props;
+    const { t, programDescription, isOwnProgram } = this.props;
     const personalDetails = programDescription.personalProgramDetails;
-
     return (
       <div className="program-details-description__main">
         <div className="program-details-description__avatar">
           <AssetAvatar
             url={programDescription.logo}
             level={programDescription.level}
+            levelProgress={programDescription.levelProgress}
             alt={programDescription.title}
             size="big"
             color={programDescription.color}
@@ -83,6 +73,7 @@ class ProgramDetailsDescriptionMain extends React.PureComponent<
             onClose={this.handleCloseDropdown}
           >
             <InvestmentLimitsPopover
+              limit={programDescription.totalAvailableInvestment}
               currency={programDescription.currency}
               level={programDescription.level}
               canLevelUp={programDescription.rating.canLevelUp}
@@ -112,6 +103,9 @@ class ProgramDetailsDescriptionMain extends React.PureComponent<
               <TagProgramItem name={tag.name} color={tag.color} key={idx} />
             ))}
           </div>
+          <SocialLinksBlock
+            socialLinks={programDescription.manager.socialLinks}
+          />
           <h4 className="program-details-description__subheading">
             {t("program-details-page.description.strategy")}
           </h4>
@@ -120,14 +114,6 @@ class ProgramDetailsDescriptionMain extends React.PureComponent<
           </div>
         </div>
         <div className="program-details-description__settings">
-          {ChangePasswordTradingAccount &&
-            isOwnProgram &&
-            personalDetails &&
-            personalDetails.canChangePassword && (
-              <ChangePasswordTradingAccount
-                programDescription={programDescription}
-              />
-            )}
           <DetailsFavorite
             id={programDescription.id}
             isFavorite={personalDetails && personalDetails.isFavorite}
@@ -139,10 +125,29 @@ class ProgramDetailsDescriptionMain extends React.PureComponent<
               personalDetails && personalDetails.hasNotifications
             }
           />
+          {isOwnProgram &&
+            personalDetails &&
+            personalDetails.canCloseProgram && (
+              <DetailsSettingControl
+                title={programDescription.title}
+                url={composeProgramSettingsUrl(programDescription.url)}
+              />
+            )}
         </div>
       </div>
     );
   }
 }
 
-export default translate()(ProgramDetailsDescriptionMain);
+interface IIProgramDetailsDescriptionMainOwnProps {
+  programDescription: ProgramDetailsFull;
+  ChangePasswordTradingAccount?: React.ComponentType<
+    IChangePasswordTradingAccountProps
+  >;
+  isOwnProgram: boolean;
+}
+
+const ProgramDetailsDescriptionMain = translate()(
+  _ProgramDetailsDescriptionMain
+);
+export default ProgramDetailsDescriptionMain;

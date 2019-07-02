@@ -78,7 +78,13 @@ const formatValueDifferentDecimalScale = (
   return formatValue(value, decimalScaleBigValue);
 };
 
+const formatValueWithMin = (value: any, decimalScale: number = 8): string =>
+  Math.abs(value) < 1 / 10 ** decimalScale
+    ? `<0.${"0".repeat(decimalScale - 1)}1`
+    : formatValue(value, decimalScale);
+
 export {
+  formatValueWithMin,
   reverseString,
   addOne,
   cleanNulls,

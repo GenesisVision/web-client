@@ -12,6 +12,8 @@ import StatisticItemLoader from "shared/components/statistic-item/statistic-item
 import Surface from "shared/components/surface/surface";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 
+import SocialLinksBlockLoader from "../social-links-block/social-links-block.loader";
+
 const _DetailsContainerLoader: React.FC<
   { assets?: boolean } & InjectedTranslateProps
 > = ({ t, assets }) => (
@@ -45,6 +47,7 @@ const _DetailsContainerLoader: React.FC<
                   </SvgLoader>
                 </div>
               </GVButton>
+              <SocialLinksBlockLoader />
               {assets && (
                 <div className="details-description__info-block">
                   <h4 className="details-description__subheading">
