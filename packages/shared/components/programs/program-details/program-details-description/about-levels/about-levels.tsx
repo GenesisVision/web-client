@@ -88,27 +88,33 @@ const _AboutLevelsComponent: React.FC<Props> = ({
             <h4 className="about-levels__list-item">
               {t("about-levels-page.list.list-item-3")}
             </h4>
+            <p className="about-levels__paragraph">
+              {t("about-levels-page.section.text-6")}
+            </p>
+            <p className="about-levels__paragraph">
+              {t("about-levels-page.section.text-7")}
+            </p>
+            <p className="about-levels__paragraph">
+              {t("about-levels-page.section.text-8")}
+            </p>
+            <h4 className="about-levels__notes">
+              {t("about-levels-page.notes.title")}
+            </h4>
+            <ul className="about-levels__ul">
+              <li>
+                <p>{t("about-levels-page.notes.note-1")}</p>
+              </li>
+              <li>
+                <p>{t("about-levels-page.notes.note-2")}</p>
+              </li>
+            </ul>
+            <p className="about-levels__paragraph">
+              {t("about-levels-page.section.text-9")}{" "}
+              <a href="https://blog.genesis.vision/genesis-vision-update-a-level-up-d01ef51c42a">
+                «https://blog.genesis.vision/genesis-vision-update-a-level-up-d01ef51c42a»
+              </a>
+            </p>
           </div>
-          <p className="about-levels__paragraph">
-            {t("about-levels-page.section.text-6")}
-          </p>
-          <p className="about-levels__paragraph">
-            {t("about-levels-page.section.text-7")}
-          </p>
-          <p className="about-levels__paragraph">
-            {t("about-levels-page.section.text-8")}
-          </p>
-          <h4 className="about-levels__notes">
-            {t("about-levels-page.notes.title")}
-          </h4>
-          <ul className="about-levels__ul">
-            <li>
-              <p>{t("about-levels-page.notes.note-1")}</p>
-            </li>
-            <li>
-              <p>{t("about-levels-page.notes.note-2")}</p>
-            </li>
-          </ul>
           {/* TODO add link <p className="about-levels__paragraph">*/}
           {/*  {t("about-levels-page.section.link")}*/}
           {/*  <a href="https://genesis.vision">link</a>*/}
