@@ -8,13 +8,14 @@ import { CloseIcon } from "shared/components/icon/close-icon";
 import Modal, { BodyFix } from "shared/components/modal/modal";
 
 export const _Dialog: React.FC<IDialogProps & InjectedTranslateProps> = ({
+  top,
   t,
   open,
   onClose,
   className,
   children
 }) => (
-  <Modal open={open} fixed onClose={onClose}>
+  <Modal open={open} fixed onClose={onClose} top={top}>
     <BodyFix />
     <div className={classNames("dialog", className)}>
       <GVButton
@@ -37,4 +38,5 @@ export interface IDialogProps {
   open: boolean;
   onClose: (param?: any) => void;
   className?: string;
+  top?: boolean;
 }
