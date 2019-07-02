@@ -87,16 +87,19 @@ class _TwoFactorCodeForm extends React.PureComponent<
 }
 
 enum FIELDS {
-  code = "code"
+  code = "code",
+  email = "email"
 }
 
 export interface ITwoFactorCodeFormValues {
   [FIELDS.code]: string;
+  [FIELDS.email]: string;
 }
 
 interface Props extends InjectedTranslateProps, OwnProps {}
 
 interface OwnProps {
+  email: string;
   onSubmit(
     code: ITwoFactorCodeFormValues,
     setSubmitting: SetSubmittingType
@@ -113,8 +116,9 @@ const TwoFactorCodeForm = compose<React.FC<OwnProps>>(
   translate(),
   withFormik<Props, ITwoFactorCodeFormValues>({
     displayName: "twoFactorForm",
-    mapPropsToValues: () => ({
-      [FIELDS.code]: ""
+    mapPropsToValues: ({ email }) => ({
+      [FIELDS.code]: "",
+      [FIELDS.email]: email
     }),
     validationSchema: (props: Props) =>
       object().shape({
