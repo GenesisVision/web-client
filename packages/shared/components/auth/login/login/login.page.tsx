@@ -1,6 +1,5 @@
 import "shared/components/auth/login/login/login.scss";
 
-import { replace } from "connected-react-router";
 import { LocationState } from "history";
 import * as React from "react";
 import { useEffect } from "react";
@@ -12,22 +11,18 @@ import {
   compose
 } from "redux";
 import AuthTabs from "shared/components/auth/components/auth-tabs/auth-tabs";
-import LoginForm, {
-  ILoginFormFormValues
-} from "shared/components/auth/login/login/login-form";
+import LoginForm from "shared/components/auth/login/login/login-form";
+import { ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
+import { AuthRootState } from "shared/utils/types";
 
-import { ROLE } from "../../../../constants/constants";
-import withRole, { WithRoleProps } from "../../../../decorators/with-role";
-import { isAuthenticatedSelector } from "../../../../reducers/auth-reducer";
-import { AuthRootState } from "../../../../utils/types";
-import { NOT_FOUND_PAGE_ROUTE } from "../../../not-found/not-found.routes";
+import CaptchaContainer from "../../captcha-container";
 import {
   loginUserInvestorAction,
   loginUserManagerAction
 } from "../login.actions";
 import { clearLoginData, login_ } from "../login.service";
-import CaptchaContainer from "./captcha-container";
 
 const _LoginPage: React.FC<Props> = ({
   location,
@@ -54,12 +49,8 @@ const _LoginPage: React.FC<Props> = ({
 
 const mapStateToProps = (state: AuthRootState): StateProps => {
   const { errorMessage } = state.loginData.login;
-  const { email, password } = state.loginData.twoFactor;
   return {
-    isAuthenticated: isAuthenticatedSelector(state),
-    errorMessage,
-    email,
-    password
+    errorMessage
   };
 };
 
@@ -67,8 +58,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       clearLoginData,
-      login_,
-      showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
+      login_
     },
     dispatch
   )
@@ -80,11 +70,9 @@ interface DispatchProps {
 interface ServiceThunks extends ActionCreatorsMapObject {
   clearLoginData: typeof clearLoginData;
   login_: typeof login_;
-  showNotFoundPage: () => void;
 }
 
-interface StateProps extends ILoginFormFormValues {
-  isAuthenticated: boolean;
+interface StateProps {
   errorMessage: string;
 }
 
