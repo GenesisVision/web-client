@@ -1,8 +1,6 @@
-import { replace } from "connected-react-router";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
-import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
+import { compose } from "redux";
 import { ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
@@ -16,12 +14,6 @@ import {
   loginUserInvestorAction,
   loginUserManagerAction
 } from "../login.actions";
-import * as loginService from "../login.service";
-import {
-  LoginFuncType,
-  LoginService,
-  clearLoginDataFuncType
-} from "../login.service";
 import { ILoginFormFormValues } from "../login/login-form";
 import { IRecoveryCodeFormValues } from "../recovery/recovery-code-form";
 import { ITwoFactorCodeFormValues } from "../two-factor/two-factor-code-form";
@@ -42,11 +34,11 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
 
   componentDidUpdate(): void {
     const { isSubmit, prefix, captchaType } = this.state;
-    const { role, from, service, type } = this.props;
+    const { role, from, type, request } = this.props;
     const method =
       role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
     const sendRequest = () =>
-      service.login({
+      request({
         ...this.state,
         from,
         method,
@@ -111,16 +103,6 @@ const mapStateToProps = (state: AuthRootState): StateProps => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators(
-    {
-      ...(loginService as LoginService),
-      showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
-    },
-    dispatch
-  )
-});
-
 interface State extends CaptchasType {
   isSubmit: boolean;
   captchaType: string;
@@ -136,15 +118,9 @@ interface StateProps extends ILoginFormFormValues {
   isAuthenticated: boolean;
 }
 
-interface DispatchProps {
-  service: {
-    clearLoginData: clearLoginDataFuncType;
-    login: LoginFuncType;
-    showNotFoundPage: () => void;
-  };
-}
-
+type TValues = any; //{ [keys: string]: any };
 interface OwnProps {
+  request: (values: TValues, setSubmitting?: SetSubmittingType) => void;
   renderForm: (
     handle: (
       loginFormData:
@@ -158,13 +134,10 @@ interface OwnProps {
   type?: CODE_TYPE;
 }
 
-interface Props extends OwnProps, StateProps, DispatchProps, WithRoleProps {}
+interface Props extends OwnProps, StateProps, WithRoleProps {}
 
 const CaptchaContainer = compose<React.ComponentType<OwnProps>>(
   withRole,
-  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect<StateProps, null, OwnProps, AuthRootState>(mapStateToProps)
 )(_CaptchaContainer);
 export default CaptchaContainer;

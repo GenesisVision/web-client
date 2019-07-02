@@ -33,6 +33,7 @@ const _LoginPage: React.FC<Props> = ({ location, service, errorMessage }) => {
       <AuthTabs authPartUrl={LOGIN_ROUTE} />
       <CaptchaContainer
         from={from}
+        request={service.login}
         renderForm={handle => (
           <LoginForm onSubmit={handle} error={errorMessage} />
         )}
