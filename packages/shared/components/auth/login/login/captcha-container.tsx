@@ -20,14 +20,19 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     captchaType: "None",
     id: "",
     email: "",
-    password: "",
-    code: "",
     values: undefined
   };
 
   componentDidUpdate(): void {
-    const { isSubmit, prefix, captchaType, id, setSubmitting } = this.state;
-    const { type, request } = this.props;
+    const { request } = this.props;
+    const {
+      isSubmit,
+      prefix,
+      captchaType,
+      id,
+      setSubmitting,
+      values = {}
+    } = this.state;
     const captchaCheckResult = {
       id,
       pow: {
@@ -38,9 +43,8 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     const sendRequest = () =>
       request(
         {
-          ...this.state,
-          captchaCheckResult,
-          type
+          ...values,
+          captchaCheckResult
         },
         setSubmitting
       );
@@ -101,9 +105,7 @@ interface State extends CaptchasType {
   setSubmitting?: SetSubmittingType;
   id?: string;
   prefix?: number;
-  code?: string;
   email?: string;
-  password?: string;
   values?: any;
 }
 
