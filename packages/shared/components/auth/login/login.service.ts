@@ -141,7 +141,7 @@ export type LoginFuncType_ = (
     type?: CODE_TYPE;
     from?: string;
   },
-  setSubmitting: SetSubmittingType
+  setSubmitting?: SetSubmittingType
 ) => (dispatch: any, getState: any) => Promise<void>;
 
 export type LoginFuncType = (
