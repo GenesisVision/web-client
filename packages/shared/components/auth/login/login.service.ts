@@ -1,4 +1,5 @@
 import { push } from "connected-react-router";
+import { CaptchaCheckResult } from "gv-api-web";
 import { Dispatch } from "redux";
 import { setTwoFactorRequirementAction } from "shared/actions/2fa-actions";
 import authActions from "shared/actions/auth-actions";
@@ -22,11 +23,11 @@ export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
 
-export const login_: LoginFuncType_ = (method, fromPath) => props => (
-  dispatch,
-  getState
-) => {
-  const { code, type, setSubmitting, prefix, id } = props;
+export const login_: LoginFuncType_ = (method, fromPath) => (
+  props,
+  setSubmitting
+) => (dispatch, getState) => {
+  const { code, type, captchaCheckResult } = props;
   const stateLoginData = getState().loginData.twoFactor;
   const email = props.email || stateLoginData.email;
   const password = props.password || stateLoginData.password;
@@ -38,12 +39,7 @@ export const login_: LoginFuncType_ = (method, fromPath) => props => (
       client,
       twoFactorCode: (type === CODE_TYPE.TWO_FACTOR && code) || null,
       recoveryCode: (type === CODE_TYPE.RECOVERY && code) || null,
-      captchaCheckResult: {
-        id,
-        pow: {
-          prefix
-        }
-      }
+      captchaCheckResult
     })
   )
     .then((response: { value: string }) => {
@@ -135,16 +131,17 @@ export type LoginFuncType_ = (
   from?: string
 ) => (
   props: {
+    captchaCheckResult: CaptchaCheckResult;
     id: string;
     prefix?: number;
     email: string;
     password: string;
     method: any;
     code: string;
-    setSubmitting?: SetSubmittingType;
     type?: CODE_TYPE;
     from?: string;
-  }
+  },
+  setSubmitting: SetSubmittingType
 ) => (dispatch: any, getState: any) => Promise<void>;
 
 export type LoginFuncType = (
