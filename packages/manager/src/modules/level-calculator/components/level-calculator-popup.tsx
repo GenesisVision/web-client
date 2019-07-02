@@ -17,6 +17,7 @@ import {
   calcLevel,
   calcNewAvailableToInvest
 } from "../services/level-calculator.helper";
+import CalculatorLogarithmicSlider from "./calculator-slider/calculator-logarithmic-slider";
 
 class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
   getDefaultValues = () => {
@@ -148,7 +149,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             step={0.01}
             onChange={this.handleSliderChange}
           />
-          <CalculatorSlider
+          <CalculatorLogarithmicSlider
             name="managerBalance"
             className="level-calculator-popup__calculator-slider"
             label={t("manager.level-calculator.manager-balance")}
@@ -159,7 +160,6 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
             valueSuffix={` ${currency}`}
             min={0}
             max={levelsParameters.maxAvailableToInvest}
-            step={0.01}
             onChange={this.handleSliderChange}
           />
         </div>

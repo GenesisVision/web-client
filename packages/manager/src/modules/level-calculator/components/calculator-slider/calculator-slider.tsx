@@ -6,13 +6,15 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
-class _CalculatorSlider extends React.PureComponent<Props> {
+class _CalculatorSlider extends React.PureComponent<ICalculatorSliderProps> {
   marks = {
     [this.props.min]: {
       style: {
         transform: "none"
       },
-      label: (
+      label: this.props.minLabel ? (
+        this.props.minLabel
+      ) : (
         <NumberFormat
           value={this.props.min}
           displayType="text"
@@ -24,7 +26,9 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       style: {
         transform: "translateX(-100%)"
       },
-      label: (
+      label: this.props.maxLabel ? (
+        this.props.maxLabel
+      ) : (
         <NumberFormat
           value={this.props.max}
           displayType="text"
@@ -44,6 +48,7 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       min,
       max,
       label,
+      formattedValue,
       step = 1,
       valueSuffix,
       className,
@@ -58,7 +63,7 @@ class _CalculatorSlider extends React.PureComponent<Props> {
           </div>
           <div className="calculator-slider__value">
             <NumberFormat
-              value={value}
+              value={formattedValue || value}
               displayType="text"
               suffix={valueSuffix}
             />
@@ -77,13 +82,16 @@ class _CalculatorSlider extends React.PureComponent<Props> {
   }
 }
 
-interface Props {
+export interface ICalculatorSliderProps {
   name: string;
   value: number;
+  formattedValue?: number;
   min: number;
   minSuffix?: string;
+  minLabel?: React.ReactElement<any>;
   max: number;
   maxSuffix?: string;
+  maxLabel?: React.ReactElement<any>;
   step?: number;
   label?: string | React.ReactNode;
   valueSuffix?: string;
