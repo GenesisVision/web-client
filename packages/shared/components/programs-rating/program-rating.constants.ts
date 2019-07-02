@@ -1,6 +1,6 @@
 import { SortingColumn } from "../table/components/filtering/filter.type";
 
-const PROGRAMS_COLUMNS: SortingColumn[] = [
+export const PROGRAMS_COLUMNS: SortingColumn[] = [
   {
     name: "title"
   },

@@ -14,6 +14,7 @@ export const BodyFix = () => {
 };
 
 const _Modal: React.FC<Props> = ({
+  top,
   disableBackdrop,
   onClose,
   open,
@@ -43,7 +44,8 @@ const _Modal: React.FC<Props> = ({
       <div
         className={classNames("modal", {
           "modal--position-absolute": !disableBackdrop && !noAbsolute,
-          "modal--position-fixed": fixed
+          "modal--position-fixed": fixed,
+          "modal--align-top": top
         })}
       >
         {disableBackdrop || (
@@ -69,6 +71,7 @@ interface Props {
   transparentBackdrop?: boolean;
   fixed?: boolean;
   disableBackdrop?: boolean;
+  top?: boolean;
 }
 
 const Modal = React.memo(_Modal);
