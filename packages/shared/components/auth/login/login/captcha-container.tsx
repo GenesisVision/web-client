@@ -103,11 +103,9 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: AuthRootState): StateProps => {
-  const { errorMessage } = state.loginData.login;
   const { email, password } = state.loginData.twoFactor;
   return {
     isAuthenticated: isAuthenticatedSelector(state),
-    errorMessage,
     email,
     password
   };
@@ -136,7 +134,6 @@ interface State extends CaptchasType {
 
 interface StateProps extends ILoginFormFormValues {
   isAuthenticated: boolean;
-  errorMessage: string;
 }
 
 interface DispatchProps {
