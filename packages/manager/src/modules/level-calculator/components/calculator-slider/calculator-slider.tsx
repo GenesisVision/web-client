@@ -12,24 +12,20 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       style: {
         transform: "none"
       },
-      label: (
-        <NumberFormat
-          value={this.props.min}
-          displayType="text"
-          suffix={this.props.minSuffix}
-        />
+      label: this.props.minLabel ? (
+        this.props.minLabel
+      ) : (
+        <NumberFormat value={this.props.min} displayType="text" />
       )
     },
     [this.props.max]: {
       style: {
         transform: "translateX(-100%)"
       },
-      label: (
-        <NumberFormat
-          value={this.props.max}
-          displayType="text"
-          suffix={this.props.maxSuffix}
-        />
+      label: this.props.maxLabel ? (
+        this.props.maxLabel
+      ) : (
+        <NumberFormat value={this.props.max} displayType="text" />
       )
     }
   };
@@ -43,9 +39,9 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       value,
       min,
       max,
-      label,
+      title,
+      valueComponent: ValueComponent,
       step = 1,
-      valueSuffix,
       className,
       tooltipContent
     } = this.props;
@@ -53,15 +49,15 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       <div className={classnames("calculator-slider", className)}>
         <div className="calculator-slider__heading">
           <div className="calculator-slider__title">
-            <span>{label}</span>
+            <span>{title}</span>
             {tooltipContent && <TooltipLabel tooltipContent={tooltipContent} />}
           </div>
           <div className="calculator-slider__value">
-            <NumberFormat
-              value={value}
-              displayType="text"
-              suffix={valueSuffix}
-            />
+            {ValueComponent ? (
+              ValueComponent
+            ) : (
+              <NumberFormat value={value} displayType="text" />
+            )}
           </div>
         </div>
         <Slider
@@ -80,13 +76,13 @@ class _CalculatorSlider extends React.PureComponent<Props> {
 interface Props {
   name: string;
   value: number;
+  valueComponent?: React.ReactElement<any>;
   min: number;
-  minSuffix?: string;
+  minLabel?: React.ReactElement<any>;
   max: number;
-  maxSuffix?: string;
+  maxLabel?: React.ReactElement<any>;
   step?: number;
-  label?: string | React.ReactNode;
-  valueSuffix?: string;
+  title?: React.ReactNode;
   className?: string;
   tooltipContent?: string;
   onChange(name: string, value: number): void;
