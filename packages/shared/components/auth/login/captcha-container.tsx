@@ -53,16 +53,18 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     const { role, from, service, type } = this.props;
     const method =
       role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
+    const sendRequest = () =>
+      service.login({
+        ...this.state,
+        from,
+        method,
+        type
+      });
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":
           if (prefix) {
-            service.login({
-              ...this.state,
-              from,
-              method,
-              type
-            });
+            sendRequest();
             this.setState({
               pow: undefined,
               prefix: undefined,
@@ -71,12 +73,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
           }
           break;
         default:
-          service.login({
-            ...this.state,
-            from,
-            method,
-            type
-          });
+          sendRequest();
           this.setState({ isSubmit: false });
           break;
       }
@@ -86,14 +83,14 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     this.setState({ prefix });
   };
   handleSubmit = (
-    loginFormData: { [keys: string]: any },
+    values: { [keys: string]: any },
     setSubmitting: SetSubmittingType
   ) => {
-    const email = loginFormData.email || this.props.email;
+    const email = values.email || this.props.email;
     authService.getCaptcha(email).then(res => {
       this.setState({
         ...res,
-        ...loginFormData,
+        ...values,
         email,
         setSubmitting,
         isSubmit: true
