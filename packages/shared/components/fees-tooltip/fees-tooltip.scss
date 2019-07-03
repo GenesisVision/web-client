@@ -6,14 +6,15 @@
   flex-direction: column;
   min-width: 250px;
   border-radius: 8px;
+  @include font-size($font-size-paragraph);
   * {
     color: $main-color !important;
   }
   &__header,
   &__footer {
-    padding: 30px 20px;
+    @include vertical-paddings($padding-small);
+    @include horizontal-paddings($padding-small);
     letter-spacing: 0.4px;
-    font-size: $font-size-common;
     font-weight: 400;
   }
   &__header {
