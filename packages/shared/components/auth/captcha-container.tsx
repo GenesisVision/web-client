@@ -1,13 +1,12 @@
 import { CaptchaDetailsCaptchaTypeEnum } from "gv-api-web";
 import * as React from "react";
-import { compose } from "redux";
 import { SetSubmittingType } from "shared/utils/types";
 
 import * as authService from "./auth.service";
 import { CaptchasType } from "./auth.service";
 import Pow from "./captcha/pow";
 
-class _CaptchaContainer extends React.PureComponent<Props, State> {
+class CaptchaContainer extends React.PureComponent<Props, State> {
   state = {
     pow: undefined,
     geeTest: undefined,
@@ -114,7 +113,4 @@ interface OwnProps {
 
 interface Props extends OwnProps {}
 
-const CaptchaContainer = compose<React.ComponentType<OwnProps>>()(
-  _CaptchaContainer
-);
 export default CaptchaContainer;
