@@ -1,9 +1,7 @@
-import {
-  LOGIN_TWO_FACTOR,
-  TStoreTwoFactorAction
-} from "shared/components/auth/login/login.actions";
 import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 import { HOME_ROUTE } from "shared/routes/app.routes";
+
+import { LOGIN_TWO_FACTOR, TStoreTwoFactorAction } from "../signin.actions";
 
 export const initialState = {
   email: "",

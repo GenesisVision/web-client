@@ -11,10 +11,10 @@ const _FeesTooltip: React.FC<Props> = ({ trade, t }) => {
   return (
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-      className={"fees-tooltip"}
+      className="fees-tooltip"
       render={() => (
-        <div className="profile-menu">
-          <div className="profile-menu__header">
+        <div className="fees-tooltip-container">
+          <div className="fees-tooltip-container__header">
             <FeeCommission
               title={t(`investor.copytrading-tables.fees.trading`)}
               value={formatValue(trade.originalCommission, 8)}
@@ -30,8 +30,9 @@ const _FeesTooltip: React.FC<Props> = ({ trade, t }) => {
             ))}
           </div>
           {trade.totalCommissionByType.length > 0 ? (
-            <div className={"fees-tooltip__footer "}>
+            <div className="fees-tooltip-container__footer">
               <FeeCommission
+                className={"fee-commission__total"}
                 title={t(`investor.copytrading-tables.fees.total`)}
                 value={formatValue(trade.totalCommission, 8)}
                 currency={trade.currency}

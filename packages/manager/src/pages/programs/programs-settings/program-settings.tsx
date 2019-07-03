@@ -37,7 +37,7 @@ const _ProgramSettings: React.FC<Props> = ({
         <h3>{t("manager.program-settings.period-and-closing.title")}</h3>
         <div className="program-edit__block-wrapper">
           <p className="program-edit__text">
-            {t("manager.program-settings.period-and-closing.text-program")}
+            {t("manager.program-settings.period-and-closing.text-period")}
           </p>
           <GVButton
             color="primary"
@@ -49,7 +49,7 @@ const _ProgramSettings: React.FC<Props> = ({
         </div>
         <div className="program-edit__block-wrapper">
           <p className="program-edit__text">
-            {t("manager.program-settings.period-and-closing.text-period")}
+            {t("manager.program-settings.period-and-closing.text-program")}
           </p>
           <GVButton
             color="primary"

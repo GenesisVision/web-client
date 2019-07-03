@@ -60,10 +60,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    &--editable-value {
+      margin-bottom: $padding-xxsmall/2;
+    }
   }
 
   &__title {
     @include font-size($font-size-small);
+    cursor: default;
     white-space: nowrap;
     color: $calculator-label-color;
     display: flex;
@@ -76,8 +80,28 @@
 
   &__value {
     @include font-size(15px);
+    cursor: default;
     white-space: nowrap;
     color: $main-color;
+    font-weight: 600;
+  }
+
+  &__editable-value-wrapper {
+    max-width: 120px;
+    margin: 0;
+  }
+
+  &__editable-value {
+    margin-top: 0;
+    @include font-size(15px);
+    padding-bottom: $padding-xxsmall / 2;
+  }
+
+  &__editable-value-input {
+    text-align: right;
+    @include font-size(15px);
+    line-height: normal;
+    padding: 0;
     font-weight: 600;
   }
 }
