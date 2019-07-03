@@ -9,13 +9,6 @@ import FundAsset from "../fund-asset";
 import { IFundAssetContainerProps } from "../fund-asset-container";
 import FundAssetTooltip from "./fund-asset-tooltip";
 
-interface OwnProps {
-  asset: FundAssetPercent;
-  idx: number;
-}
-
-interface Props extends OwnProps, IFundAssetContainerProps {}
-
 const _FundAssetTooltipContainer: React.FC<Props> = ({
   asset,
   idx,
@@ -25,10 +18,8 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
   removeHandle,
   hoveringAsset
 }) => {
-  // const { assets, type, removable, removeHandle, hoveringAsset } = props;
   return (
     <Tooltip
-      key={idx}
       render={() => (
         <FundAssetTooltip
           name={asset.name}
@@ -53,3 +44,10 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
 
 const FundAssetTooltipContainer = React.memo(_FundAssetTooltipContainer);
 export default FundAssetTooltipContainer;
+
+interface OwnProps {
+  asset: FundAssetPercent;
+  idx: number;
+}
+
+interface Props extends OwnProps, IFundAssetContainerProps {}

@@ -13,6 +13,7 @@ import {
 import Popover from "../popover/popover";
 import { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltipContainer from "./fund-asset-tooltip/fund-asset-tooltip-container";
+import HidedAssets from "./hided-assets";
 
 class FundAssetContainer extends React.PureComponent<
   IFundAssetContainerProps,
@@ -44,6 +45,7 @@ class FundAssetContainer extends React.PureComponent<
           (asset, idx) =>
             idx < (size || assets.length) && (
               <FundAssetTooltipContainer
+                key={idx}
                 asset={asset}
                 idx={idx}
                 {...this.props}
@@ -69,6 +71,7 @@ class FundAssetContainer extends React.PureComponent<
                   (asset, idx) =>
                     idx >= size && (
                       <FundAssetTooltipContainer
+                        key={idx}
                         asset={asset}
                         idx={idx}
                         {...this.props}
@@ -87,35 +90,6 @@ class FundAssetContainer extends React.PureComponent<
       </div>
     );
   }
-}
-
-const _HidedAssets: React.FC<IHidedAssetsProps> = ({
-  type,
-  count,
-  handleOpen
-}) => {
-  switch (type) {
-    case FUND_ASSET_TYPE.TEXT:
-      return <div>... +{count}</div>;
-    default:
-      return (
-        <>
-          <div
-            className="fund-asset__container fund-asset__container--others-count"
-            onClick={handleOpen}
-          >
-            <div className="fund-asset fund-asset--others-count">+{count}</div>
-          </div>
-        </>
-      );
-  }
-};
-const HidedAssets = React.memo(_HidedAssets);
-
-interface IHidedAssetsProps {
-  count: number;
-  type: FUND_ASSET_TYPE;
-  handleOpen: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export type FundAssetRemoveType = (
