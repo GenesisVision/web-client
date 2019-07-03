@@ -28,7 +28,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
     <div className="details-statistics__subheading">
       {t("program-details-page.statistics.current")}
     </div>
-    <div className="details-statistics__particular-information">
+    <div className="details-statistics__particular-information details-statistics__particular-information--current">
       <StatisticItem
         label={
           <TooltipLabel
@@ -140,6 +140,23 @@ const _ProgramDetailsStatisticsElements: React.FC<
             }
             displayType="text"
             suffix="%"
+          />
+        </StatisticItem>
+        <StatisticItem
+          label={t("program-details-page.statistics.trading-volume")}
+          half
+        >
+          <NumberFormat
+            value={
+              statistic.tradingVolume !== undefined
+                ? formatCurrencyValue(
+                    statistic.tradingVolume,
+                    profitChart.programCurrency
+                  )
+                : "-"
+            }
+            displayType="text"
+            suffix={` ${profitChart.programCurrency}`}
           />
         </StatisticItem>
       </div>

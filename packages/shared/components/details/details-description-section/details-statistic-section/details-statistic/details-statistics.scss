@@ -26,8 +26,10 @@
     align-items: flex-start;
     align-content: stretch;
     padding-bottom: $padding-small-mobile;
-    @include media-breakpoint-landscape-phone() {
-      padding-bottom: $padding-small;
+    &--current {
+      @include media-breakpoint-landscape-phone() {
+        padding-bottom: $padding-small;
+      }
     }
   }
 
