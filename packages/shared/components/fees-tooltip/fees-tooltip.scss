@@ -1,0 +1,27 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors.scss";
+
+.fees-tooltip {
+  padding: 0;
+}
+
+.fees-tooltip-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  border-radius: $border-radius-middle;
+  letter-spacing: 0.4px;
+  font-weight: 400;
+  @include font-size($font-size-paragraph);
+  &__header,
+  &__footer {
+    @include vertical-paddings($padding-small);
+    @include horizontal-paddings($padding-small);
+  }
+  &__header {
+    background-color: $panel-background-color;
+  }
+  &__footer {
+    font-weight: bold;
+  }
+}
