@@ -89,7 +89,7 @@ interface StateProps {
 
 interface OwnProps {
   renderForm: (
-    handle: (values?: TValues, setSubmitting?: SetSubmittingType) => void,
+    handle: (values: TValues, setSubmitting?: SetSubmittingType) => void,
     email: string,
     errorMessage: string
   ) => JSX.Element;
