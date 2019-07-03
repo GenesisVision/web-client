@@ -1,3 +1,4 @@
+import { CaptchaDetailsCaptchaTypeEnum } from "gv-api-web";
 import * as React from "react";
 import { compose } from "redux";
 import { SetSubmittingType } from "shared/utils/types";
@@ -13,7 +14,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     prefix: undefined,
     setSubmitting: undefined,
     isSubmit: false,
-    captchaType: "None",
+    captchaType: "None" as CaptchaDetailsCaptchaTypeEnum,
     id: "",
     email: "",
     values: undefined
@@ -96,7 +97,7 @@ export type TValues = any;
 
 interface State extends CaptchasType {
   isSubmit: boolean;
-  captchaType: string;
+  captchaType: CaptchaDetailsCaptchaTypeEnum;
   setSubmitting?: SetSubmittingType;
   id?: string;
   prefix?: number;
