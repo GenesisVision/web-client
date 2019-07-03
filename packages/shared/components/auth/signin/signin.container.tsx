@@ -95,18 +95,10 @@ interface OwnProps {
   ) => JSX.Element;
   className: string;
   type?: CODE_TYPE;
-}
-
-interface LocationProps {
   location: LocationState;
 }
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    DispatchProps,
-    WithRoleProps,
-    LocationProps {}
+interface Props extends OwnProps, StateProps, DispatchProps, WithRoleProps {}
 
 const SignInContainer = compose<React.ComponentType<OwnProps>>(
   withRole,
