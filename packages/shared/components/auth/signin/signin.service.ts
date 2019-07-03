@@ -23,7 +23,7 @@ export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
 
-export const login_: LoginFuncType_ = (method, fromPath, type) => (
+export const login: LoginFuncType = (method, fromPath, type) => (
   dispatch,
   getState
 ) => (props, setSubmitting) => {
@@ -83,7 +83,7 @@ export const logout: logoutFuncType = () => dispatch => {
   dispatch(push(HOME_ROUTE));
 };
 
-export type LoginFuncType_ = (
+export type LoginFuncType = (
   method: any,
   from?: string,
   type?: CODE_TYPE
@@ -109,7 +109,7 @@ type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = () => (dispatch: Dispatch) => void;
 
 export interface LoginService {
-  login_: LoginFuncType_;
+  login: LoginFuncType;
   clearLoginData: clearLoginDataFuncType;
   clearTwoFactorData: clearTwoFactorDataFuncType;
   logout: logoutFuncType;

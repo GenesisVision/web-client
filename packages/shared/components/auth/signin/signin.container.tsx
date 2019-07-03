@@ -21,7 +21,7 @@ import {
   loginUserInvestorAction,
   loginUserManagerAction
 } from "./signin.actions";
-import { clearLoginData, login_ } from "./signin.service";
+import { clearLoginData, login } from "./signin.service";
 
 const _SignInContainer: React.FC<Props> = ({
   className,
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     {
       showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
       clearLoginData,
-      login_
+      login_: login
     },
     dispatch
   )
@@ -78,7 +78,7 @@ interface DispatchProps {
 interface ServiceThunks extends ActionCreatorsMapObject {
   showNotFoundPage: () => void;
   clearLoginData: typeof clearLoginData;
-  login_: typeof login_;
+  login_: typeof login;
 }
 
 interface StateProps {
