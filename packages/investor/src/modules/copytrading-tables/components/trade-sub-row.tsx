@@ -28,6 +28,7 @@ const _TradeSubRow: React.FC<Props> = ({
   tradeId,
   closeCopytradingTrade,
   symbol,
+  currency,
   t,
   update,
   title
@@ -92,6 +93,7 @@ const _TradeSubRow: React.FC<Props> = ({
             thousandSeparator=" "
             allowNegative={false}
             displayType="text"
+            suffix={provider.profit !== 0 ? ` ${currency}` : ""}
           />
         </Profitability>
       </TableCell>
@@ -144,6 +146,7 @@ interface Props extends DispatchProps, OwnProps, InjectedTranslateProps {}
 interface OwnProps {
   title: string;
   provider: OrderSignalProgramInfo;
+  currency: string;
   tradeId: string;
   symbol: string;
   update: UpdateRowFuncType;
