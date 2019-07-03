@@ -6,18 +6,18 @@ import EmailConfirmPage, {
 import ForgotPasswordRoutes, {
   FORGOT_PASSWORD_ROUTE
 } from "shared/components/auth/forgot-password/forgot-password.routes";
-import SignupRoutes from "shared/components/auth/signup/signup.routes";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 
-import LoginRoutes from "./login/login.routes";
+import SignInRoutes from "./signin/signin.routes";
+import SignUpRoutes from "./signup/signup.routes";
 
 export const AUTH_ROUTES_REGEX = `(${LOGIN_ROUTE}|${SIGNUP_ROUTE}|${FORGOT_PASSWORD_ROUTE}|${EMAIL_CONFIRM_ROUTE})`;
 
 const _AuthRoutes = () => (
   <Switch>
     <Route path={EMAIL_CONFIRM_ROUTE} component={EmailConfirmPage} />
-    <Route path={LOGIN_ROUTE} component={LoginRoutes} />
-    <Route path={SIGNUP_ROUTE} component={SignupRoutes} />
+    <Route path={LOGIN_ROUTE} component={SignInRoutes} />
+    <Route path={SIGNUP_ROUTE} component={SignUpRoutes} />
     <Route path={FORGOT_PASSWORD_ROUTE} component={ForgotPasswordRoutes} />
   </Switch>
 );
