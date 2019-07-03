@@ -40,23 +40,25 @@ class _CopytradingTablesSection extends React.PureComponent<
       <Surface>
         <div className="dashboard-assets__head">
           <h3>{t("investor.copytrading-tables.title")}</h3>
-          <GVTabs value={tab} onChange={this.handleTabChange}>
-            <GVTab
-              value={TABS.OPEN_TRADES}
-              label={t("investor.copytrading-tables.open-trades")}
-              count={openTradesCount}
-            />
-            <GVTab
-              value={TABS.HISTORY}
-              label={t("investor.copytrading-tables.history")}
-              count={historyCount}
-            />
-            <GVTab
-              value={TABS.LOG}
-              label={t("investor.copytrading-tables.log")}
-              count={logCount}
-            />
-          </GVTabs>
+          <div className="dashboard-assets__tabs">
+            <GVTabs value={tab} onChange={this.handleTabChange}>
+              <GVTab
+                value={TABS.OPEN_TRADES}
+                label={t("investor.copytrading-tables.open-trades")}
+                count={openTradesCount}
+              />
+              <GVTab
+                value={TABS.HISTORY}
+                label={t("investor.copytrading-tables.history")}
+                count={historyCount}
+              />
+              <GVTab
+                value={TABS.LOG}
+                label={t("investor.copytrading-tables.log")}
+                count={logCount}
+              />
+            </GVTabs>
+          </div>
         </div>
         {tab === TABS.OPEN_TRADES && (
           <OpenTradesTable title={title} currency={currency} />
