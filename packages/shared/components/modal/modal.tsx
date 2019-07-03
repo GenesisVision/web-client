@@ -14,7 +14,6 @@ export const BodyFix = () => {
 };
 
 const _Modal: React.FC<Props> = ({
-  top,
   onClose,
   open,
   noAbsolute,
@@ -43,8 +42,7 @@ const _Modal: React.FC<Props> = ({
       <div
         className={classNames("modal", {
           "modal--position-absolute": !noAbsolute,
-          "modal--position-fixed": fixed,
-          "modal--align-top": top
+          "modal--position-fixed": fixed
         })}
       >
         <EventListener target={document} onKeyUp={handleKeyPress}>
@@ -67,7 +65,6 @@ interface Props {
   noAbsolute?: boolean;
   transparentBackdrop?: boolean;
   fixed?: boolean;
-  top?: boolean;
 }
 
 const Modal = React.memo(_Modal);
