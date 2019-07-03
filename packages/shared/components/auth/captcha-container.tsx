@@ -68,7 +68,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
     this.setState({ prefix });
   };
 
-  handleSubmit = (values?: TValues, setSubmitting?: SetSubmittingType) => {
+  handleSubmit = (values: TValues, setSubmitting?: SetSubmittingType) => {
     authService.getCaptcha(values.email).then(res => {
       this.setState({
         ...res,
@@ -92,7 +92,7 @@ class _CaptchaContainer extends React.PureComponent<Props, State> {
   }
 }
 
-export type TValues = any; //{ [keys: string]: any };
+export type TValues = any;
 
 interface State extends CaptchasType {
   isSubmit: boolean;
@@ -107,7 +107,7 @@ interface State extends CaptchasType {
 interface OwnProps {
   request: (values: TValues, setSubmitting: SetSubmittingType) => void;
   renderForm: (
-    handle: (values?: TValues, setSubmitting?: SetSubmittingType) => void
+    handle: (values: TValues, setSubmitting?: SetSubmittingType) => void
   ) => JSX.Element;
 }
 
