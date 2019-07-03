@@ -3,7 +3,6 @@ import "shared/components/details/details-description-section/details-statistic-
 import { ReallocationsViewModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import { FUND_REALLOCATE_HISTORY_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
@@ -19,10 +18,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 
 import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cell";
 
-class _FundReallocateHistory extends React.PureComponent<
-  Props & InjectedTranslateProps,
-  State
-> {
+class _FundReallocateHistory extends React.PureComponent<Props, State> {
   state: State = {
     isPending: false,
     data: undefined
@@ -42,8 +38,6 @@ class _FundReallocateHistory extends React.PureComponent<
   }
 
   render() {
-    const { t } = this.props;
-
     if (!this.state.data) return null;
     const data = {
       items: this.state.data.reallocations,
@@ -72,7 +66,7 @@ class _FundReallocateHistory extends React.PureComponent<
                 //@ts-ignore
                 assets={item.parts}
                 type={FUND_ASSET_TYPE.SHORT}
-                size={2}
+                size={4}
                 //@ts-ignore
                 length={item.parts.length}
                 hasPopoverList
@@ -85,7 +79,7 @@ class _FundReallocateHistory extends React.PureComponent<
   }
 }
 
-const FundReallocateHistory = translate()(_FundReallocateHistory);
+const FundReallocateHistory = React.memo(_FundReallocateHistory);
 
 export default FundReallocateHistory;
 

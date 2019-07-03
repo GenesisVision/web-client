@@ -4,13 +4,12 @@ import classNames from "classnames";
 import { FundAssetPercent } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-
-import {
+import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS,
   anchorElType
-} from "../popover/popover";
-import Popover from "../popover/popover";
+} from "shared/components/popover/popover";
+
 import { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltipContainer from "./fund-asset-tooltip/fund-asset-tooltip-container";
 import HidedAssets from "./hided-assets";

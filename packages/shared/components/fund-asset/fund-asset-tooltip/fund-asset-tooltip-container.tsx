@@ -2,9 +2,9 @@ import "./fund-asset-tooltip.scss";
 
 import { FundAssetPercent } from "gv-api-web";
 import * as React from "react";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { CurrencyEnum } from "shared/utils/types";
 
-import Tooltip from "../../tooltip/tooltip";
 import FundAsset from "../fund-asset";
 import { IFundAssetContainerProps } from "../fund-asset-container";
 import FundAssetTooltip from "./fund-asset-tooltip";
