@@ -64,7 +64,7 @@ const mapStateToProps = (state: AuthRootState): StateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
+      showNotFoundPage: () => replace(NOT_FOUND_PAGE_ROUTE),
       clearLoginData,
       login
     },
