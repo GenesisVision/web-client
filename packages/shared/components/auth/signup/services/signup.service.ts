@@ -1,24 +1,24 @@
 import { push } from "connected-react-router";
+import { CaptchaCheckResult } from "gv-api-web";
 import emailPendingActions from "shared/actions/email-pending-actions";
 import { SetSubmittingType } from "shared/utils/types";
-import { string } from "yup";
 
 import { RegisterViewModel, signUpUserAction } from "../actions/signup.actions";
 import { SIGNUP_ROUTE_PENDING } from "../signup.routes";
 
-export const signUp: SingUpFuncType = props => (dispatch: any) => {
-  const {
+export const signUp: SingUpFuncType = (
+  {
     userName,
     email,
     password,
     confirmPassword,
     refCode,
     isAuto,
-    prefix,
-    id,
-    setSubmitting
-  } = props;
-  return dispatch(
+    captchaCheckResult
+  },
+  setSubmitting
+) => (dispatch: any) =>
+  dispatch(
     signUpUserAction({
       userName,
       email,
@@ -26,13 +26,7 @@ export const signUp: SingUpFuncType = props => (dispatch: any) => {
       confirmPassword,
       refCode,
       isAuto,
-      captchaCheckResult: {
-        id,
-        pow: {
-          prefix
-        },
-        geeTest: {}
-      }
+      captchaCheckResult
     })
   )
     .then(() => {
@@ -42,14 +36,12 @@ export const signUp: SingUpFuncType = props => (dispatch: any) => {
     .catch(() => {
       setSubmitting!(false);
     });
-};
 
 export type SingUpFuncType = (
   props: RegisterViewModel & {
-    id: string;
-    prefix: string;
     code: string;
-    setSubmitting?: SetSubmittingType;
     userName?: string;
-  }
+    captchaCheckResult: CaptchaCheckResult;
+  },
+  setSubmitting: SetSubmittingType
 ) => (dispatch: any, getState: any) => void;
