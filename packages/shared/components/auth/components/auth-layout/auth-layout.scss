@@ -81,7 +81,7 @@
   }
 
   .gv-text-field__error {
-    bottom: 0;
+    transform: translateY(-100%);
   }
 
   & .gv-btn.gv-btn--text {
