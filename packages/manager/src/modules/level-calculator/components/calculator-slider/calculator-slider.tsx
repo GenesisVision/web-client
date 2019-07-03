@@ -57,6 +57,7 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       valueAdornment,
       step = 1,
       className,
+      valueClassName,
       tooltipContent,
       editableValue = false
     } = this.props;
@@ -80,13 +81,17 @@ class _CalculatorSlider extends React.PureComponent<Props> {
                 onChange={this.handleValueChange}
                 adornment={valueAdornment}
                 adornmentPosition="end"
-                wrapperClassName="calculator-slider__editable-value-wrapper"
+                wrapperClassName={classnames(
+                  "calculator-slider__editable-value-wrapper",
+                  valueClassName
+                )}
                 className="calculator-slider__editable-value"
                 inputClassName="calculator-slider__editable-value-input"
                 InputComponent={NumberFormat}
               />
             ) : (
               <NumberFormat
+                className={valueClassName}
                 value={formattedValue || value}
                 displayType="text"
                 suffix={valueAdornment}
@@ -120,6 +125,7 @@ interface Props {
   step?: number;
   title?: React.ReactNode;
   className?: string;
+  valueClassName?: string;
   tooltipContent?: string;
   onChange(name: string, value: number): void;
   onChangeValue?(name: string, value: number): void;
