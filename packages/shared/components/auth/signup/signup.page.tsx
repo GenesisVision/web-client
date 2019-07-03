@@ -3,8 +3,8 @@ import "./signup.scss";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import * as React from "react";
 import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import { ActionCreatorsMapObject, bindActionCreators, compose } from "redux";
 import AuthTabs from "shared/components/auth/components/auth-tabs/auth-tabs";
 import { SIGNUP_ROUTE } from "shared/routes/app.routes";
 import { getRef } from "shared/utils/ref";
@@ -39,9 +39,12 @@ const mapStateToProps = (state: AuthRootState): StateProps => {
 };
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
-  service: {
-    signUp: (signUpData: any) => dispatch(signUp(signUpData))
-  }
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      signUp
+    },
+    dispatch
+  )
 });
 
 interface StateProps {
@@ -49,9 +52,10 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  service: {
-    signUp(signUpData: any): void;
-  };
+  service: ResolveThunks<ServiceThunks>;
+}
+interface ServiceThunks extends ActionCreatorsMapObject {
+  signUp: typeof signUp;
 }
 
 interface OwnProps {}
