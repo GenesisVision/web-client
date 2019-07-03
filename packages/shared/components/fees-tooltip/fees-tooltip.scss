@@ -1,0 +1,22 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors.scss";
+
+.fees-tooltip-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  border-radius: 8px;
+  * {
+    color: $main-color !important;
+  }
+  &__header,
+  &__footer {
+    padding: 30px 20px;
+    letter-spacing: 0.4px;
+    font-size: $font-size-common;
+    font-weight: 400;
+  }
+  &__header {
+    background-color: $panel-background-color;
+  }
+}
