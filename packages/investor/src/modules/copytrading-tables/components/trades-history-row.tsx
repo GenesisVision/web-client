@@ -120,7 +120,9 @@ const _TradesHistoryRow: React.FC<Props> = ({ trade, title }) => {
           </Profitability>
         </TableCell>
         <TableCell className="details-trades__cell program-details-trades__cell--date">
-          <TradesHistoryFeesTooltip trade={trade} />
+          <TradesHistoryFeesTooltip trade={trade}>
+            <span>{formatValue(trade.totalCommission, 8)}</span>
+          </TradesHistoryFeesTooltip>
         </TableCell>
       </TableRow>
       <ProvidersPopup
