@@ -9,8 +9,7 @@ import { InvestmentDetails } from "shared/components/details/details-description
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
-import Tooltip from "shared/components/tooltip/tooltip";
+import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { FUND, STATUS } from "shared/constants/constants";
 import { composeFundNotificationsUrl } from "shared/utils/compose-url";
 
@@ -62,18 +61,12 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
         )}
         AssetDetailsExtraBlock={() => (
           <div className="details-description__info-block">
-            <Tooltip
-              horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-              render={() => (
-                <div className="tooltip__content">
-                  {t("fund-details-page.tooltip.assets")}
-                </div>
-              )}
-            >
-              <h4 className="details-description__subheading tooltip__label">
-                {t("fund-details-page.description.assets")}
-              </h4>
-            </Tooltip>
+            <h4 className="details-description__subheading tooltip__label">
+              <TooltipLabel
+                tooltipContent={t("fund-details-page.tooltip.assets")}
+                labelText={t("fund-details-page.description.assets")}
+              />
+            </h4>
             <div>
               <FundAssetContainer
                 type={FUND_ASSET_TYPE.LARGE}

@@ -1,6 +1,6 @@
 import { connectRouter } from "connected-react-router";
 import passwordRestoreReducer from "shared/components/auth/forgot-password/reducers/password-restore-reducers";
-import loginReducer from "shared/components/auth/login/reducers/login.reducers";
+import loginReducer from "shared/components/auth/signin/reducers/login.reducers";
 import signUpReducer from "shared/components/auth/signup/reducers/signup.reducers";
 import managerReducer from "shared/components/manager/reducers/manager.reducers";
 import notificationsReducer, {

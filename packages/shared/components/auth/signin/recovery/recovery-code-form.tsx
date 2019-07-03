@@ -39,12 +39,14 @@ const _RecoveryCodeForm: React.FC<
 );
 
 enum FIELDS {
-  code = "code"
+  code = "code",
+  email = "email"
 }
 
 interface Props extends OwnProps, InjectedTranslateProps {}
 
 interface OwnProps {
+  email: string;
   onSubmit(
     data: IRecoveryCodeFormValues,
     setSubmitting: SetSubmittingType
@@ -54,14 +56,16 @@ interface OwnProps {
 
 export interface IRecoveryCodeFormValues {
   [FIELDS.code]: string;
+  [FIELDS.email]: string;
 }
 
 const RecoveryCodeForm = compose<React.FC<OwnProps>>(
   translate(),
   withFormik<Props, IRecoveryCodeFormValues>({
     displayName: "recoveryForm",
-    mapPropsToValues: () => ({
-      [FIELDS.code]: ""
+    mapPropsToValues: ({ email }) => ({
+      [FIELDS.code]: "",
+      [FIELDS.email]: email
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
