@@ -125,6 +125,7 @@ const _TradeRow: React.FC<Props> = ({
               thousandSeparator=" "
               allowNegative={false}
               displayType="text"
+              suffix={trade.profit !== 0 ? ` ${trade.currency}` : ""}
             />
           </Profitability>
         </TableCell>
@@ -152,6 +153,7 @@ const _TradeRow: React.FC<Props> = ({
             title={title}
             key={trade.id}
             provider={provider}
+            currency={trade.currency}
             tradeId={trade.id}
             symbol={trade.symbol}
             update={update}
