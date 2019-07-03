@@ -32,7 +32,7 @@ import {
   PROGRAM_SUBSCRIBERS_FILTERS,
   SUBSCRIBERS_STATUS_TYPE
 } from "../program-details.constants";
-import FeesTooltip from "./program-subscriptions-fees-tooltip";
+import SubscriptionsFeesTooltip from "./program-subscriptions-fees-tooltip";
 
 const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
   const fetch: GetItemsFuncType = filters =>
@@ -85,7 +85,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
             </Profitability>
           </TableCell>
           <TableCell className="subscription-fees">
-            <FeesTooltip subscription={subscription}>
+            <SubscriptionsFeesTooltip subscription={subscription}>
               <span
                 className={classNames({
                   "fee-commission__value":
@@ -94,7 +94,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
               >
                 {formatValue(subscription.totalCommissionAmount, 8)}
               </span>
-            </FeesTooltip>
+            </SubscriptionsFeesTooltip>
           </TableCell>
           <TableCell>{subscription.volume}</TableCell>
           <TableCell>
