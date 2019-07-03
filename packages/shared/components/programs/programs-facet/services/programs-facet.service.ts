@@ -21,5 +21,5 @@ export const getCurrentFacet = () => (
   ];
   const facet = programsFacets.find((x: ProgramFacet) => x.url === facetUrl);
   if (!facet) return { notFound: true };
-  return { facet };
+  return { facet, isPending: false };
 };

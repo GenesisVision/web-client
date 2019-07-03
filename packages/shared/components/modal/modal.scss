@@ -11,6 +11,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    &.modal--align-top {
+      align-items: flex-start;
+    }
   }
 
   &--position-absolute {
