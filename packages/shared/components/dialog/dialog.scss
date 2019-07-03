@@ -3,17 +3,28 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_constants.scss";
 
+.dialog-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .dialog {
   position: relative;
   background-color: $secondary-background-color;
   z-index: 1300;
-  width: 100%;
   margin: 2rem auto;
-  overflow: hidden;
-
+  overflow-x: hidden;
+  overflow-y: auto;
   @include media-breakpoint-landscape-phone() {
     max-width: 360px;
     border-radius: 8px;
+  }
+
+  &--top {
+    align-self: flex-start;
   }
 
   &__content {
