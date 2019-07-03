@@ -44,7 +44,7 @@ const _SignInContainer: React.FC<Props> = ({
   return (
     <div className={className}>
       <CaptchaContainer
-        request={service.login_(method, from, type)}
+        request={service.login(method, from, type)}
         renderForm={handle => renderForm(handle, email, errorMessage)}
       />
     </div>
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     {
       showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
       clearLoginData,
-      login_: login
+      login
     },
     dispatch
   )
@@ -78,7 +78,7 @@ interface DispatchProps {
 interface ServiceThunks extends ActionCreatorsMapObject {
   showNotFoundPage: () => void;
   clearLoginData: typeof clearLoginData;
-  login_: typeof login;
+  login: typeof login;
 }
 
 interface StateProps {
