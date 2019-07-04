@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_constants.scss";
+@import "~shared/styles/_sizes.scss";
 
 .navigation {
   display: flex;
@@ -92,7 +93,7 @@
 
   @include media-breakpoint-large-desktop() {
     &__item:first-child {
-      margin-right: 50px;
+      margin-right: $padding-upper-medium;
     }
     &__item {
       margin-right: 70px;
