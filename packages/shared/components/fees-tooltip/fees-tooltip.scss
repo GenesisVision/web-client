@@ -16,7 +16,11 @@
 
   &__header,
   &__footer {
-    padding: $padding-xsmall 25px;
+    padding: $padding-xxsmall;
+
+    @include media-breakpoint-landscape-tablet() {
+      padding: $padding-xsmall $padding-upper-medium/2;
+    }
   }
 
   &__header {
