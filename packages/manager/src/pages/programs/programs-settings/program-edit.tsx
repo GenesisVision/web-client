@@ -58,16 +58,23 @@ const _ProgramEdit: React.FC<Props> = ({
           label={t("manager.create-program-page.settings.fields.description")}
           component={GVTextField}
         />
-        {descriptionTrimmedLength > 0 && (
-          <span className="create-program-settings__description-chars">
-            {descriptionTrimmedLength}
-            <GVProgramPeriod
-              start={0}
-              end={500}
-              value={descriptionTrimmedLength}
-            />
+        <div className="create-program-settings__item-caption create-program-settings__description">
+          <span className="create-program-settings__description-requirements">
+            {t(
+              "manager.create-program-page.settings.fields.description-requirements"
+            )}
           </span>
-        )}
+          {descriptionTrimmedLength > 0 && (
+            <span className="create-program-settings__description-chars">
+              {descriptionTrimmedLength}
+              <GVProgramPeriod
+                start={0}
+                end={500}
+                value={descriptionTrimmedLength}
+              />
+            </span>
+          )}
+        </div>
       </div>
       <GVButton
         color="primary"
