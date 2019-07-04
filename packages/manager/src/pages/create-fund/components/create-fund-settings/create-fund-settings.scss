@@ -288,7 +288,7 @@ $asset-height-mobile: $asset-height/$divider-text;
   }
 
   &__navigation {
-    margin-top: 50px;
+    margin-top: $padding-upper-medium;
     margin-bottom: 40px;
 
     &-back {
