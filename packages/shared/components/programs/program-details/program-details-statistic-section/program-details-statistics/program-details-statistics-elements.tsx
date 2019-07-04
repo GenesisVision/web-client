@@ -143,7 +143,14 @@ const _ProgramDetailsStatisticsElements: React.FC<
           />
         </StatisticItem>
         <StatisticItem
-          label={t("program-details-page.statistics.trading-volume")}
+          label={
+            <TooltipLabel
+              tooltipContent={t(
+                "program-details-page.statistics.tooltip.trading-volume"
+              )}
+              labelText={t("program-details-page.statistics.trading-volume")}
+            />
+          }
           half
         >
           <NumberFormat
