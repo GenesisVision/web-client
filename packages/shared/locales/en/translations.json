@@ -1503,6 +1503,9 @@
       "strategy": {
         "title": "Strategy"
       },
+      "name": {
+        "title": "Title"
+      },
       "avatar": {
         "title": "Avatar"
       },
