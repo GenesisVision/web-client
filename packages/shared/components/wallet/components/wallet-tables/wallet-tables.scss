@@ -6,13 +6,16 @@
   @include adaptive-margin(top, $padding-xxsmall);
 
   &__tabs {
+    width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-  }
+    -ms-overflow-style: none;
 
-  .gv-tab {
-    white-space: nowrap;
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
   }
 
   .gv-tab--disabled {
