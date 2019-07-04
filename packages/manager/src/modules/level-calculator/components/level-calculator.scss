@@ -71,6 +71,9 @@
 
   &__calculator-slider {
     @include adaptive-margin("bottom", $padding-small);
+    .level-calculator-popup__calculator-slider-value {
+      max-width: 70px;
+    }
   }
 
   &__statistic-item {

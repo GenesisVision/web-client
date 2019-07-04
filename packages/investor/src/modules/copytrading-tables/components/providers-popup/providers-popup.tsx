@@ -1,3 +1,5 @@
+import "./providers-popup.scss";
+
 import { OrderSignalProgramInfo } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
 
-import TransactionDetailsDialog from "./transaction-details";
+import TransactionDetailsDialog from "./transaction-details-dialog";
 
 const TransactionDetailsPopup: React.FC<ITransactionDetailsProps> = React.memo(
   ({ open, onClose, transactionId, onAction }) => (

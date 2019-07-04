@@ -27,12 +27,10 @@ import TableRow from "shared/components/table/components/table-row";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { IDataModel } from "shared/constants/constants";
+import { DEFAULT_DECIMAL_SCALE, IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import filesService from "shared/services/file-service";
 import { formatValue } from "shared/utils/formatter";
-
-const DECIMAL_SCALE = 8;
 
 const _ProgramTrades: React.FC<Props> = ({
   showSwaps,
@@ -79,7 +77,7 @@ const _ProgramTrades: React.FC<Props> = ({
         </span>
       )}
       renderBodyRow={(trade: OrderModel) => {
-        const volume = +formatValue(trade.volume, DECIMAL_SCALE / 2);
+        const volume = +formatValue(trade.volume, DEFAULT_DECIMAL_SCALE / 2);
         return (
           <TableRow className="details-trades__row">
             <TableCell className="details-trades__cell program-details-trades__cell--direction/entry">
@@ -104,18 +102,18 @@ const _ProgramTrades: React.FC<Props> = ({
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--price">
               <NumberFormat
-                value={formatValue(trade.price, DECIMAL_SCALE)}
+                value={formatValue(trade.price, DEFAULT_DECIMAL_SCALE)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--profit">
               <Profitability
-                value={formatValue(trade.profit, DECIMAL_SCALE)}
+                value={formatValue(trade.profit, DEFAULT_DECIMAL_SCALE)}
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
-                  value={formatValue(trade.profit, DECIMAL_SCALE)}
+                  value={formatValue(trade.profit, DEFAULT_DECIMAL_SCALE)}
                   thousandSeparator=" "
                   allowNegative={false}
                   displayType="text"
@@ -127,21 +125,23 @@ const _ProgramTrades: React.FC<Props> = ({
                 render={() =>
                   trade.showOriginalCommission ? (
                     <div>
-                      {`${formatValue(trade.originalCommission, 8)} ${
-                        trade.originalCommissionCurrency
-                      }`}
+                      {`${formatValue(
+                        trade.originalCommission,
+                        DEFAULT_DECIMAL_SCALE
+                      )} ${trade.originalCommissionCurrency}`}
                     </div>
                   ) : (
                     <div>
-                      {`${formatValue(trade.commission, 8)} ${
-                        trade.originalCommissionCurrency
-                      }`}
+                      {`${formatValue(
+                        trade.commission,
+                        DEFAULT_DECIMAL_SCALE
+                      )} ${trade.originalCommissionCurrency}`}
                     </div>
                   )
                 }
               >
                 <NumberFormat
-                  value={formatValue(trade.commission, DECIMAL_SCALE)}
+                  value={formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)}
                   displayType="text"
                   thousandSeparator=" "
                 />

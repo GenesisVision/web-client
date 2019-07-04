@@ -63,7 +63,7 @@
   }
 
   &__block-wrapper {
-    @include adaptive-margin(bottom, 50px);
+    @include adaptive-margin(bottom, $padding-upper-medium);
     width: 100%;
 
     &:last-child {

@@ -12,10 +12,11 @@ import {
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
-import { HOME_ROUTE } from "shared/routes/app.routes";
+import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
 import CaptchaContainer, { TValues } from "../captcha-container";
+import AuthTabs from "../components/auth-tabs/auth-tabs";
 import {
   CODE_TYPE,
   loginUserInvestorAction,
@@ -43,6 +44,7 @@ const _SignInContainer: React.FC<Props> = ({
   }, []);
   return (
     <div className={className}>
+      {!type && <AuthTabs authPartUrl={LOGIN_ROUTE} />}
       <CaptchaContainer
         request={service.login(method, from, type)}
         renderForm={handle => renderForm(handle, email, errorMessage)}

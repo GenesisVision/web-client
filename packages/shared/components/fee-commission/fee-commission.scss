@@ -8,7 +8,11 @@
   width: 100%;
   justify-content: space-between;
   &:not(:last-child) {
-    margin-bottom: $font-size-paragraph;
+    margin-bottom: $padding-xxsmall;
+
+    @include media-breakpoint-landscape-tablet() {
+      margin-bottom: $padding-small/2;
+    }
   }
   &__title {
     margin-right: $padding-xsmall;
