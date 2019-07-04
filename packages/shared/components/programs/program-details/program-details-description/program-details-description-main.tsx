@@ -15,7 +15,7 @@ import Popover, {
   anchorElType
 } from "shared/components/popover/popover";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
-import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import TagItem from "shared/components/tags/tag-item/tag-item";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl,
@@ -100,7 +100,7 @@ class _ProgramDetailsDescriptionMain extends React.PureComponent<
           </Link>
           <div className="program-details-description__tag">
             {programDescription.tags.map((tag, idx) => (
-              <TagProgramItem name={tag.name} color={tag.color} key={idx} />
+              <TagItem name={tag.name} color={tag.color} key={idx} />
             ))}
           </div>
           <SocialLinksBlock

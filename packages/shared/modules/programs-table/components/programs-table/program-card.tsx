@@ -20,7 +20,7 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
-import TagProgramContainer from "shared/components/tag-program/tag-program-container";
+import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import {
   composeManagerDetailsUrl,

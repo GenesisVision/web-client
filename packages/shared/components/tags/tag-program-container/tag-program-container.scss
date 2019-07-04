@@ -1,0 +1,17 @@
+@import "../../../../../node_modules/shared/styles/colors";
+@import "../../../../../node_modules/shared/styles/breakpoint";
+@import "../../../../../node_modules/shared/styles/sizes";
+
+.tag-program-container {
+  display: flex;
+  align-items: center;
+
+  &__others {
+    line-height: 1;
+  }
+
+  .tag-item {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
