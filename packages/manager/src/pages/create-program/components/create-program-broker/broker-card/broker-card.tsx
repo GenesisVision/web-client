@@ -1,9 +1,11 @@
 import "./broker-card.scss";
 
 import classnames from "classnames";
+import { ProgramTag } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
+import TagBrokerContainer from "shared/components/tags/tag-broker-container/tag-broker-container";
 import filesService from "shared/services/file-service";
 
 import BrokerCardAdornment from "./broker-card-adornment";
@@ -16,7 +18,8 @@ const _BrokerCard: React.FC<OwnProps & InjectedTranslateProps> = ({
   brokerName,
   onSelect,
   isSelected,
-  cardState
+  cardState,
+  tags
 }) => {
   const isActive = [
     BROKER_CARD_EXTRA_STATE.NONE,
@@ -44,8 +47,9 @@ const _BrokerCard: React.FC<OwnProps & InjectedTranslateProps> = ({
         src={filesService.getFileUrl(logo)}
         alt={brokerName}
       />
+      <TagBrokerContainer tags={tags} condition={tags.length !== 0} />
       <BrokerCardAdornment
-        condition={cardState !== BROKER_CARD_EXTRA_STATE.NONE}
+        // condition={cardState !== BROKER_CARD_EXTRA_STATE.NONE}
         cardState={cardState}
       />
     </div>
@@ -64,4 +68,5 @@ interface OwnProps {
   onSelect?(brokerName: string): () => void;
   isSelected: boolean;
   cardState: BROKER_CARD_EXTRA_STATE;
+  tags: ProgramTag[];
 }

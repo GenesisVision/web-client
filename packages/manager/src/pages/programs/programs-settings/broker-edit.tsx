@@ -68,6 +68,7 @@ const _BrokerEdit: React.FC<Props> = ({
             isSelected={broker.name === selectedBroker.name}
             onSelect={selectBroker}
             cardState={BROKER_CARD_EXTRA_STATE.NONE}
+            tags={broker.tags}
           />
         ))}
       </div>
