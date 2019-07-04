@@ -12,8 +12,8 @@ import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-per
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
-  mapToTableItems,
-  TableItems
+  TableItems,
+  mapToTableItems
 } from "shared/components/table/helpers/mapper";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -79,7 +79,8 @@ export const getProgramStatistic = (
       sortinoRatio: profitChart.sortinoRatio,
       maxDrawdown: profitChart.maxDrawdown,
       periodStarts: profitChart.lastPeriodStarts,
-      periodEnds: profitChart.lastPeriodEnds
+      periodEnds: profitChart.lastPeriodEnds,
+      tradingVolume: profitChart.tradingVolume
     };
     const profitChartData = {
       balance: profitChart.balance,
