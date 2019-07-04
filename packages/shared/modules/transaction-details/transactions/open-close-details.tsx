@@ -3,26 +3,25 @@ import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
-import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
+import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details-dialog";
 import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
 import { formatValue } from "shared/utils/formatter";
+
+import TransactionDetails from "./transaction-details";
 
 const OpenCloseTransaction: React.FC<TransactionDetailsProps> = ({
   data,
   t
 }) => (
-  <>
-    <div className="dialog__top">
-      <div className="dialog__header">
-        <h2>{t(`transactions-details.title`)}</h2>
-        <p>
-          {t(
-            `transactions-details.${data.type}.${
-              data.programDetails.programType
-            }`
-          )}
-        </p>
-      </div>
+  <TransactionDetails
+    header={
+      <p>
+        {t(
+          `transactions-details.${data.type}.${data.programDetails.programType}`
+        )}
+      </p>
+    }
+    body={
       <StatisticItem
         label={t(`transactions-details.${data.programDetails.programType}`)}
       >
@@ -31,23 +30,25 @@ const OpenCloseTransaction: React.FC<TransactionDetailsProps> = ({
           data={data.programDetails}
         />
       </StatisticItem>
-    </div>
-    <div className="dialog__bottom">
-      <StatisticItem label={t(`transactions-details.status.title`)}>
-        <div className="external-transaction__status">
-          {data.status} <Status status={data.status} />
-        </div>
-      </StatisticItem>
-      <StatisticItem label={t(`transactions-details.investment.amount`)} big>
-        <NumberFormat
-          value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
-          suffix={` ${data.currency}`}
-          allowNegative={true}
-          displayType="text"
-        />
-      </StatisticItem>
-    </div>
-  </>
+    }
+    bottom={
+      <>
+        <StatisticItem label={t(`transactions-details.status.title`)}>
+          <div className="external-transaction__status">
+            {data.status} <Status status={data.status} />
+          </div>
+        </StatisticItem>
+        <StatisticItem label={t(`transactions-details.investment.amount`)} big>
+          <NumberFormat
+            value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
+            suffix={` ${data.currency}`}
+            allowNegative={true}
+            displayType="text"
+          />
+        </StatisticItem>
+      </>
+    }
+  />
 );
 
 export default OpenCloseTransaction;
