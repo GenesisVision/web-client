@@ -20,7 +20,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { mapToTableItems } from "shared/components/table/helpers/mapper";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { STATUS } from "shared/constants/constants";
+import { DEFAULT_DECIMAL_SCALE, STATUS } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
@@ -92,7 +92,10 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
                     subscription.totalCommissionAmount > 0
                 })}
               >
-                {formatValue(subscription.totalCommissionAmount, 8)}
+                {formatValue(
+                  subscription.totalCommissionAmount,
+                  DEFAULT_DECIMAL_SCALE
+                )}
               </span>
             </SubscriptionsFeesTooltip>
           </TableCell>

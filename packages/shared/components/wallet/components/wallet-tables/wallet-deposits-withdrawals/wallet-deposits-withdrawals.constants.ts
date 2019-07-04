@@ -24,5 +24,3 @@ export const WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS = [
     name: "amount"
   }
 ];
-
-export const TRANSACTIONS_DECIMAL_SCALE = 8;

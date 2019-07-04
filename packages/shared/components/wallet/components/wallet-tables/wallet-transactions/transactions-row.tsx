@@ -8,10 +8,9 @@ import Profitability from "shared/components/profitability/profitability";
 import Status from "shared/components/status/status";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-
-import { TRANSACTIONS_DECIMAL_SCALE } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
+import { formatValue } from "shared/utils/formatter";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
@@ -55,10 +54,7 @@ const AmountConvertTransaction: React.FC<{
   <>
     <span className="wallet-transactions__col">
       <NumberFormat
-        value={formatValue(
-          props.transaction.amount,
-          TRANSACTIONS_DECIMAL_SCALE
-        )}
+        value={formatValue(props.transaction.amount, DEFAULT_DECIMAL_SCALE)}
         thousandSeparator=" "
         displayType="text"
         suffix={` ${props.transaction.currencyFrom}`}
@@ -67,10 +63,7 @@ const AmountConvertTransaction: React.FC<{
     <span className="wallet-transactions__back-arrow">&rarr;</span>
     <span className="wallet-transactions__col">
       <NumberFormat
-        value={formatValue(
-          props.transaction.amountTo,
-          TRANSACTIONS_DECIMAL_SCALE
-        )}
+        value={formatValue(props.transaction.amountTo, DEFAULT_DECIMAL_SCALE)}
         thousandSeparator=" "
         displayType="text"
         suffix={` ${props.transaction.currencyTo}`}
@@ -143,16 +136,10 @@ class TransactionsRow extends React.PureComponent<
               <AmountConvertTransaction transaction={transaction} />
             ) : (
               <Profitability
-                value={formatValue(
-                  transaction.amount,
-                  TRANSACTIONS_DECIMAL_SCALE
-                )}
+                value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
               >
                 <NumberFormat
-                  value={formatValue(
-                    transaction.amount,
-                    TRANSACTIONS_DECIMAL_SCALE
-                  )}
+                  value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
                   thousandSeparator=" "
                   displayType="text"
                   allowNegative={false}
