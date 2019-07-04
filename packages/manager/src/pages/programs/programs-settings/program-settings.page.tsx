@@ -6,13 +6,14 @@ import ChangePasswordTradingAccountPopup from "modules/change-password-trading-a
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
+import { IImageValue } from "shared/components/form/input-image/input-image";
 import Page from "shared/components/page/page";
 import {
   getProgramBrokers,
@@ -30,7 +31,6 @@ import {
   redirectToProgram
 } from "./services/program-settings.service";
 import { IProgramSignalFormValues } from "./signaling-edit";
-import { IImageValue } from "shared/components/form/input-image/input-image";
 
 const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
   const fetchingDescription = () =>
@@ -164,6 +164,7 @@ export type TUpdateProgramFunc = (
     description?: string;
     logo?: IImageValue;
     investmentLimit?: number;
+    stopOutLevel?: number;
   },
   setSubmitting: SetSubmittingType
 ) => void;
