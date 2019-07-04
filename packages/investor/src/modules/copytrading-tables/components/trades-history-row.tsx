@@ -23,7 +23,7 @@ import TableRow from "shared/components/table/components/table-row";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
-import ProvidersPopup from "./providers-popup";
+import ProvidersPopup from "./providers-popup/providers-popup";
 import TradeHistorySubRow from "./trade-history-sub-row";
 import TradesHistoryFeesTooltip from "./trades-history-fees-tooltip";
 

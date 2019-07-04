@@ -29,7 +29,7 @@ import { UpdateRowFuncType } from "shared/components/table/components/table.type
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
-import ProvidersPopup from "./providers-popup";
+import ProvidersPopup from "./providers-popup/providers-popup";
 
 const _TradeRow: React.FC<Props> = ({
   trade,
