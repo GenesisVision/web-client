@@ -46,6 +46,9 @@ const _ProgramEdit: React.FC<Props> = ({
           autoComplete="off"
           component={GVTextField}
         />
+        <div className="create-program-settings__item-caption">
+          {t("manager.create-program-page.settings.fields.name-requirements")}
+        </div>
       </div>
       <div className="program-edit__block-wrapper">
         <h3>{t("manager.program-settings.strategy.title")}</h3>
