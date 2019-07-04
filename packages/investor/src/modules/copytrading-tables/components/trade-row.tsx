@@ -1,8 +1,5 @@
 import { OrderSignalModel, OrderSignalProgramInfo } from "gv-api-web";
-import {
-  DECIMAL_SCALE,
-  OPEN_TRADES_PROVIDERS_COLUMNS
-} from "modules/copytrading-tables/components/copytrading-tables.constants";
+import { OPEN_TRADES_PROVIDERS_COLUMNS } from "modules/copytrading-tables/components/copytrading-tables.constants";
 import TradeSubRow from "modules/copytrading-tables/components/trade-sub-row";
 import {
   CloseCopytradingTrade,
@@ -26,6 +23,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateRowFuncType } from "shared/components/table/components/table.types";
+import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
@@ -96,32 +94,32 @@ const _TradeRow: React.FC<Props> = ({
         </TableCell>
         <TableCell className="details-trades__cell">
           <NumberFormat
-            value={formatValue(trade.volume, DECIMAL_SCALE / 2)}
+            value={formatValue(trade.volume, DEFAULT_DECIMAL_SCALE / 2)}
             displayType="text"
             thousandSeparator=" "
           />
         </TableCell>
         <TableCell className="details-trades__cell">
           <NumberFormat
-            value={formatValue(trade.price, DECIMAL_SCALE)}
+            value={formatValue(trade.price, DEFAULT_DECIMAL_SCALE)}
             displayType="text"
             thousandSeparator=" "
           />
         </TableCell>
         <TableCell className="details-trades__cell">
           <NumberFormat
-            value={formatValue(trade.priceCurrent, DECIMAL_SCALE)}
+            value={formatValue(trade.priceCurrent, DEFAULT_DECIMAL_SCALE)}
             displayType="text"
             thousandSeparator=" "
           />
         </TableCell>
         <TableCell className="details-trades__cell">
           <Profitability
-            value={formatValue(trade.profit, DECIMAL_SCALE)}
+            value={formatValue(trade.profit, DEFAULT_DECIMAL_SCALE)}
             prefix={PROFITABILITY_PREFIX.SIGN}
           >
             <NumberFormat
-              value={formatValue(trade.profit, DECIMAL_SCALE)}
+              value={formatValue(trade.profit, DEFAULT_DECIMAL_SCALE)}
               thousandSeparator=" "
               allowNegative={false}
               displayType="text"

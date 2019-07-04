@@ -4,32 +4,28 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
-import { ROLE } from "shared/constants/constants";
+import { DEFAULT_DECIMAL_SCALE, ROLE } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
 import { formatValue } from "shared/utils/formatter";
 
-import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
-
 const SignalFees: React.ComponentType<
   SignalFeesProps & WithLoaderProps
-> = withLoader(({ fees }) => {
-  return (
-    <>
-      {fees.map((x, idx) => (
-        <StatisticItem label={x.title} key={idx}>
-          <NumberFormat
-            value={formatValue(x.value, TRANSACTIONS_DECIMAL_SCALE)}
-            suffix={` ${x.currency}`}
-            displayType="text"
-          />
-        </StatisticItem>
-      ))}
-    </>
-  );
-});
+> = withLoader(({ fees }) => (
+  <>
+    {fees.map((x, idx) => (
+      <StatisticItem label={x.title} key={idx}>
+        <NumberFormat
+          value={formatValue(x.value, DEFAULT_DECIMAL_SCALE)}
+          suffix={` ${x.currency}`}
+          displayType="text"
+        />
+      </StatisticItem>
+    ))}
+  </>
+));
 
 interface SignalFeesProps {
   fees: SignalFee[];
@@ -68,7 +64,7 @@ const _SignalTransaction: React.FC<TransactionDetailsProps & WithRoleProps> = ({
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.signal.amount`)} big>
           <NumberFormat
-            value={formatValue(data.amount, TRANSACTIONS_DECIMAL_SCALE)}
+            value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
             suffix={data.currency}
             displayType="text"
           />

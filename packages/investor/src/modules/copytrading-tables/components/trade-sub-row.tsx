@@ -1,5 +1,4 @@
 import { OrderSignalProgramInfo } from "gv-api-web";
-import { DECIMAL_SCALE } from "modules/copytrading-tables/components/copytrading-tables.constants";
 import {
   CloseCopytradingTrade,
   closeCopytradingTrade
@@ -20,6 +19,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateRowFuncType } from "shared/components/table/components/table.types";
+import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
@@ -71,25 +71,25 @@ const _TradeSubRow: React.FC<Props> = ({
       <TableCell className="details-trades__cell">{symbol}</TableCell>
       <TableCell className="details-trades__cell">
         <NumberFormat
-          value={formatValue(provider.volume, DECIMAL_SCALE / 2)}
+          value={formatValue(provider.volume, DEFAULT_DECIMAL_SCALE / 2)}
           displayType="text"
           thousandSeparator=" "
         />
       </TableCell>
       <TableCell className="details-trades__cell">
         <NumberFormat
-          value={formatValue(provider.priceOpenAvg, DECIMAL_SCALE)}
+          value={formatValue(provider.priceOpenAvg, DEFAULT_DECIMAL_SCALE)}
           displayType="text"
           thousandSeparator=" "
         />
       </TableCell>
       <TableCell className="details-trades__cell">
         <Profitability
-          value={formatValue(provider.profit, DECIMAL_SCALE)}
+          value={formatValue(provider.profit, DEFAULT_DECIMAL_SCALE)}
           prefix={PROFITABILITY_PREFIX.SIGN}
         >
           <NumberFormat
-            value={formatValue(provider.profit, DECIMAL_SCALE)}
+            value={formatValue(provider.profit, DEFAULT_DECIMAL_SCALE)}
             thousandSeparator=" "
             allowNegative={false}
             displayType="text"
