@@ -1,0 +1,40 @@
+@import "~shared/styles/colors";
+@import "~shared/styles/breakpoint";
+@import "~shared/styles/_sizes.scss";
+
+.tag-broker-container {
+  display: flex;
+  align-items: center;
+  margin-top: $padding-xxsmall;
+
+  &__others {
+    line-height: 20px;
+    background-color: rgba($primary-color, 0.05);
+    color: $primary-color;
+    height: 28px;
+    width: 28px;
+    border-radius: 100%;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  &__tooltip.tag-item-tooltip {
+    .tag-item {
+      margin-top: 0;
+      margin-bottom: 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .tag-item {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
