@@ -2,7 +2,8 @@ import "./subscription-details.scss";
 
 import {
   AttachToSignalProviderModeEnum,
-  PersonalProgramDetailsFull
+  PersonalProgramDetailsFull,
+  SignalSubscriptionModeEnum
 } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -28,42 +29,6 @@ const _SubscriptionDetails: React.FC<Props> = ({
     fixedVolume,
     totalProfit
   } = personalDetails.signalSubscription;
-
-  const renderSubscriptionTypeValue = () => (
-    <>
-      <span className="subscription-details__value-accent">
-        {t(`subscription-details.modes.${mode}`)}
-        {mode === modes.percentage && (
-          <NumberFormat
-            value={percent}
-            prefix={`. ${t("subscription-details.volume")} `}
-            suffix="%"
-            displayType="text"
-          />
-        )}
-        {mode === modes.fixed && (
-          <NumberFormat
-            value={formatCurrencyValue(fixedVolume, "USD")}
-            prefix=" "
-            suffix="USD"
-            displayType="text"
-          />
-        )}
-      </span>
-      {mode === modes.fixed && (
-        <NumberFormat
-          value={formatCurrencyValue(
-            convertFromCurrency(fixedVolume, rate),
-            currency
-          )}
-          prefix=" (≈ "
-          suffix={` ${currency})`}
-          displayType="text"
-        />
-      )}
-    </>
-  );
-
   return (
     <Surface className="surface--horizontal-paddings subscription-details">
       <div className="subscription-details__heading">
@@ -98,25 +63,80 @@ const _SubscriptionDetails: React.FC<Props> = ({
           label={t("subscription-details.subscription-type")}
           className="subscription-details__short-statistic-item"
         >
-          {renderSubscriptionTypeValue()}
+          <SubscriptionTypeValue
+            currency={currency}
+            rate={rate}
+            mode={mode}
+            percent={percent}
+            fixedVolume={fixedVolume}
+          />
         </StatisticItem>
         <StatisticItem
           className="subscription-details__short-statistic-item"
           accent
           label={t(`subscription-details.tolerance-percentage`)}
         >
-          <span className="subscription-details__value-accent">
-            <NumberFormat
-              value={openTolerancePercent}
-              suffix="%"
-              displayType="text"
-            />
-          </span>
+          <NumberFormat
+            value={openTolerancePercent}
+            suffix="%"
+            displayType="text"
+          />
         </StatisticItem>
       </div>
     </Surface>
   );
 };
+
+const _SubscriptionTypeValue: React.FC<ISubscriptionTypeValueProps> = ({
+  t,
+  mode,
+  percent,
+  fixedVolume,
+  rate,
+  currency
+}) => (
+  <>
+    <>
+      {t(`subscription-details.modes.${mode}`)}
+      {mode === modes.percentage && (
+        <NumberFormat
+          value={percent}
+          prefix={`. ${t("subscription-details.volume")} `}
+          suffix="%"
+          displayType="text"
+        />
+      )}
+      {mode === modes.fixed && (
+        <NumberFormat
+          value={formatCurrencyValue(fixedVolume, "USD")}
+          prefix=" "
+          suffix="USD"
+          displayType="text"
+        />
+      )}
+    </>
+    {mode === modes.fixed && (
+      <NumberFormat
+        value={formatCurrencyValue(
+          convertFromCurrency(fixedVolume, rate),
+          currency
+        )}
+        prefix=" (≈ "
+        suffix={` ${currency})`}
+        displayType="text"
+      />
+    )}
+  </>
+);
+const SubscriptionTypeValue = translate()(React.memo(_SubscriptionTypeValue));
+
+interface ISubscriptionTypeValueProps extends InjectedTranslateProps {
+  mode: SignalSubscriptionModeEnum;
+  percent: number;
+  fixedVolume: number;
+  rate: number;
+  currency: CurrencyEnum;
+}
 
 const modes: { [key: string]: AttachToSignalProviderModeEnum } = {
   byBalance: "ByBalance",
