@@ -14,7 +14,7 @@ import TransactionDetails from "./transaction-details";
 
 const ExternalDeposit: React.FC<TransactionDetailsProps> = ({ data, t }) => (
   <TransactionDetails
-    header={<p>{t(`transactions-details.deposit`)}</p>}
+    header={t(`transactions-details.deposit`)}
     body={
       <StatisticItem label={t(`transactions-details.external.from`)}>
         <div className="external-transaction">

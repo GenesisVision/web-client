@@ -8,10 +8,11 @@ import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
 import BrokerEdit, { ChangeBrokerFormValues } from "./broker-edit";
-import ProgramEdit from "./program-edit";
-import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import InvestmentLimit from "./investment-limit";
+import ProgramEdit from "./program-edit";
 import { TUpdateProgramFunc } from "./program-settings.page";
+import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
+import StopOutLevel from "./stop-out-level";
 
 const _ProgramSettings: React.FC<Props> = ({
   t,
@@ -76,6 +77,7 @@ const _ProgramSettings: React.FC<Props> = ({
         <>
           <section className="program-edit__block">
             <ProgramEdit
+              title={details.title}
               logo={{ src: details.logo }}
               description={details.description}
               onSubmit={editProgram}
@@ -92,6 +94,12 @@ const _ProgramSettings: React.FC<Props> = ({
               />
             </section>
           )}
+          <section className="program-edit__block">
+            <StopOutLevel
+              stopOutLevel={details.stopOutLevel}
+              onSubmit={editProgram}
+            />
+          </section>
           <section className="program-edit__block">
             <InvestmentLimit
               currency={details.currency}

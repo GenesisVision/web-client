@@ -11,6 +11,7 @@ export type ProgramDetailsStatistic = {
   maxDrawdown: number;
   periodStarts: Date;
   periodEnds: Date;
+  tradingVolume: number;
 };
 
 export type ProgramDetailsProfitChart = {
