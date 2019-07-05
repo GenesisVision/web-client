@@ -1,8 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { FundAssetsListInfo } from "gv-api-web";
-import { SyntheticEvent } from "react";
 import * as React from "react";
+import { SyntheticEvent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -60,7 +60,7 @@ class FundDetailsHistorySection extends React.PureComponent<Props, State> {
       <Surface className="details-history">
         <div className="details-history__header">
           <div className="details-history__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange}>
+            <GVTabs value={tab} onChange={this.handleTabChange} hasScroll>
               <GVTab
                 value={TABS.STRUCTURE}
                 label={

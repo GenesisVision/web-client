@@ -38,15 +38,6 @@
   &__tabs {
     padding: 0 $padding-xsmall;
     height: 25px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-    }
 
     @include media-breakpoint-landscape-phone() {
       height: auto;
