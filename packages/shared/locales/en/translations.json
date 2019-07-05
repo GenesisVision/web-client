@@ -688,7 +688,7 @@
         "profit": "Profit",
         "investors-funds": "Investors Funds",
         "managers-funds": "Managers Funds",
-        "trading-volume": "The total trading volume for the selected period (in the account currency)."
+        "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
       }
     },
     "tooltip": {
