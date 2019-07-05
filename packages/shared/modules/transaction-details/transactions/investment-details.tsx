@@ -14,13 +14,9 @@ const InvestingTransaction: React.FC<TransactionDetailsProps> = ({
   t
 }) => (
   <TransactionDetails
-    header={
-      <p>
-        {t(
-          `transactions-details.investment.${data.programDetails.programType}`
-        )}
-      </p>
-    }
+    header={t(
+      `transactions-details.investment.${data.programDetails.programType}`
+    )}
     body={
       <StatisticItem
         label={t(

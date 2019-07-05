@@ -11,9 +11,7 @@ import TransactionDetails from "./transaction-details";
 
 const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
   <TransactionDetails
-    header={
-        <p>{t("transactions-details.converting.title")}</p>
-    }
+    header={t("transactions-details.converting.title")}
     body={
       <>
         <StatisticItem label={t(`transactions-details.external.from-wallet`)}>

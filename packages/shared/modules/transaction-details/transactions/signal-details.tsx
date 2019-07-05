@@ -45,7 +45,7 @@ const _SignalTransaction: React.FC<TransactionDetailsProps & WithRoleProps> = ({
       : t("transactions-details.signal.signal-provider");
   return (
     <TransactionDetails
-      header={<p>{t(`transactions-details.signal.${data.type}`)}</p>}
+      header={t(`transactions-details.signal.${data.type}`)}
       body={
         <StatisticItem condition={!!details} label={transactionDirectionLabel}>
           <TransactionAsset url={details ? details.logo : ""} data={details} />

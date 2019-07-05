@@ -13,7 +13,7 @@ const InvestingTransaction: React.FC<TransactionDetailsProps> = ({
   t
 }) => (
   <TransactionDetails
-    header={<p>{t(`transactions-details.platform-fee`)}</p>}
+    header={t(`transactions-details.platform-fee`)}
     body={
       <StatisticItem label={t(`transactions-details.external.from`)}>
         <div className="external-transaction">
