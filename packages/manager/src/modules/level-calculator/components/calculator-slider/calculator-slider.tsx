@@ -4,6 +4,7 @@ import classnames from "classnames";
 import Slider from "rc-slider";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import GVTextField from "shared/components/gv-text-field";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
 class _CalculatorSlider extends React.PureComponent<Props> {
@@ -34,29 +35,67 @@ class _CalculatorSlider extends React.PureComponent<Props> {
     this.props.onChange(this.props.name, value);
   };
 
+  handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (this.props.onChangeValue) {
+      this.props.onChangeValue(this.props.name, +event.target.value);
+    } else {
+      let val = parseFloat(event.target.value);
+      if (Number.isNaN(val)) val = 0;
+      if (val < this.props.min) val = this.props.min;
+      if (val > this.props.max) val = this.props.max;
+      this.handleChange(val);
+    }
+  };
+
   render() {
     const {
       value,
       min,
       max,
       title,
-      valueComponent: ValueComponent,
+      formattedValue,
+      valueAdornment,
       step = 1,
       className,
-      tooltipContent
+      valueClassName,
+      tooltipContent,
+      editableValue = false
     } = this.props;
     return (
       <div className={classnames("calculator-slider", className)}>
-        <div className="calculator-slider__heading">
+        <div
+          className={classnames("calculator-slider__heading", {
+            "calculator-slider__heading--editable-value": editableValue
+          })}
+        >
           <div className="calculator-slider__title">
             <span>{title}</span>
             {tooltipContent && <TooltipLabel tooltipContent={tooltipContent} />}
           </div>
           <div className="calculator-slider__value">
-            {ValueComponent ? (
-              ValueComponent
+            {editableValue ? (
+              <GVTextField
+                name={name}
+                autoComplete="off"
+                value={formattedValue || value}
+                onChange={this.handleValueChange}
+                adornment={valueAdornment}
+                adornmentPosition="end"
+                wrapperClassName={classnames(
+                  "calculator-slider__editable-value-wrapper",
+                  valueClassName
+                )}
+                className="calculator-slider__editable-value"
+                inputClassName="calculator-slider__editable-value-input"
+                InputComponent={NumberFormat}
+              />
             ) : (
-              <NumberFormat value={value} displayType="text" />
+              <NumberFormat
+                className={valueClassName}
+                value={formattedValue || value}
+                displayType="text"
+                suffix={valueAdornment}
+              />
             )}
           </div>
         </div>
@@ -76,7 +115,9 @@ class _CalculatorSlider extends React.PureComponent<Props> {
 interface Props {
   name: string;
   value: number;
-  valueComponent?: React.ReactElement<any>;
+  formattedValue?: number;
+  editableValue?: boolean;
+  valueAdornment?: string;
   min: number;
   minLabel?: React.ReactElement<any>;
   max: number;
@@ -84,8 +125,10 @@ interface Props {
   step?: number;
   title?: React.ReactNode;
   className?: string;
+  valueClassName?: string;
   tooltipContent?: string;
   onChange(name: string, value: number): void;
+  onChangeValue?(name: string, value: number): void;
 }
 
 const CalculatorSlider = React.memo(_CalculatorSlider);

@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useCallback } from "react";
+import { compose } from "redux";
 import GVProgramAvatar, {
   GVProgramAvatarProps
 } from "shared/components/gv-program-avatar";
@@ -8,8 +10,41 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import withUrl from "shared/decorators/with-url";
+import useAnchor from "shared/hooks/anchor.hook";
 
-interface IAssetAvatarProps {
+const _AssetAvatar: React.FC<Props> = props => {
+  const { tooltip, onClickLevel, click, vertical, horizontal } = props;
+  const { anchor, setAnchor, clearAnchor } = useAnchor();
+  const handleMouseEnter = useCallback(
+    (event: React.MouseEvent) => !click && setAnchor(event),
+    [click]
+  );
+  const handleMouseLeave = useCallback(() => !click && clearAnchor(), [click]);
+  return (
+    <>
+      <GVProgramAvatar
+        onMouseEnterLevel={handleMouseEnter}
+        onMouseLeaveLevel={handleMouseLeave}
+        onClickLevel={onClickLevel}
+        {...props}
+      />
+      {tooltip && (
+        <Popover
+          noAbsolute
+          noPadding
+          anchorEl={anchor}
+          className="tooltip__popover"
+          vertical={vertical}
+          horizontal={horizontal}
+        >
+          {tooltip}
+        </Popover>
+      )}
+    </>
+  );
+};
+
+interface Props extends GVProgramAvatarProps {
   tooltip?: React.ReactElement<ILevelTooltip>;
   click?: boolean;
   vertical?: VERTICAL_POPOVER_POS;
@@ -18,60 +53,8 @@ interface IAssetAvatarProps {
   alt: string;
 }
 
-interface IAssetAvatarState {
-  anchor?: EventTarget;
-}
-
-class _AssetAvatar extends React.PureComponent<
-  IAssetAvatarProps,
-  IAssetAvatarState
-> {
-  state = {
-    anchor: undefined
-  };
-
-  handleClick = (event: React.SyntheticEvent) => {
-    this.setState({ anchor: event.currentTarget });
-  };
-
-  handleMouseEnter = (event: React.MouseEvent) => {
-    if (this.props.click) return;
-    this.setState({ anchor: event.currentTarget });
-  };
-
-  handleMouseLeave = (event: React.MouseEvent) => {
-    if (this.props.click) return;
-    this.setState({ anchor: undefined });
-  };
-
-  render() {
-    const { tooltip, onClickLevel } = this.props;
-    return (
-      <>
-        <GVProgramAvatar
-          onMouseEnterLevel={this.handleMouseEnter}
-          onMouseLeaveLevel={this.handleMouseLeave}
-          onClickLevel={onClickLevel}
-          {...this.props}
-        />
-        {tooltip && (
-          <Popover
-            disableBackdrop
-            noPadding
-            anchorEl={this.state.anchor}
-            className="tooltip__popover"
-            vertical={this.props.vertical}
-            horizontal={this.props.horizontal}
-          >
-            {tooltip}
-          </Popover>
-        )}
-      </>
-    );
-  }
-}
-
-const AssetAvatar = withUrl<GVProgramAvatarProps & IAssetAvatarProps>("url")(
-  _AssetAvatar
-);
+const AssetAvatar = compose<React.ComponentType<Props>>(
+  withUrl<Props>("url"),
+  React.memo
+)(_AssetAvatar);
 export default AssetAvatar;

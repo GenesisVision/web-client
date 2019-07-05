@@ -4,11 +4,14 @@ import { formatValue } from "shared/utils/formatter";
 
 import CalculatorSlider from "./calculator-slider";
 
+const STEP = 0.0001;
+
 const CalculatorLogarithmicSlider: React.FC<Props> = ({
   name,
   value,
   max,
-  valueComponent,
+  maxLabel,
+  valueAdornment,
   title,
   className,
   tooltipContent,
@@ -18,7 +21,18 @@ const CalculatorLogarithmicSlider: React.FC<Props> = ({
     (name: string, newValue: number) => {
       const val = Math.pow(newValue, 4);
       const t = max * val;
-      onChange(name, +formatValue(t, 2));
+      onChange(name, +formatValue(t, 4));
+    },
+    [max]
+  );
+
+  const handleChangeValue = React.useCallback(
+    (name: string, newValue: number) => {
+      let newValueGuard = newValue;
+      if (Number.isNaN(newValueGuard)) newValueGuard = 0;
+      if (newValueGuard < 0) newValueGuard = 0;
+      if (newValueGuard > max) newValueGuard = max;
+      onChange(name, +formatValue(newValueGuard, 2));
     },
     [max]
   );
@@ -27,7 +41,7 @@ const CalculatorLogarithmicSlider: React.FC<Props> = ({
     value => {
       const val = value / max;
       let t = Math.pow(val, 1 / 4);
-      return +formatValue(t, 2);
+      return +formatValue(t, 4);
     },
     [max]
   );
@@ -37,17 +51,22 @@ const CalculatorLogarithmicSlider: React.FC<Props> = ({
       name={name}
       min={0}
       max={1}
-      step={0.0001}
+      step={STEP}
       value={logarithmicValue(value)}
-      valueComponent={valueComponent}
+      formattedValue={value}
+      valueAdornment={valueAdornment}
+      editableValue={true}
       title={title}
-      minLabel={<NumberFormat value={0} displayType="text" />}
+      minLabel={maxLabel || <NumberFormat value={0} displayType="text" />}
       maxLabel={
-        <NumberFormat value={max} displayType="text" thousandSeparator=" " />
+        maxLabel || (
+          <NumberFormat value={max} displayType="text" thousandSeparator=" " />
+        )
       }
       className={className}
       tooltipContent={tooltipContent}
       onChange={handleChange}
+      onChangeValue={handleChangeValue}
     />
   );
 };
@@ -57,8 +76,9 @@ export default CalculatorLogarithmicSlider;
 interface Props {
   name: string;
   value: number;
-  valueComponent?: React.ReactElement<any>;
+  valueAdornment?: string;
   max: number;
+  maxLabel?: React.ReactElement<any>;
   title?: React.ReactNode;
   className?: string;
   tooltipContent?: string;

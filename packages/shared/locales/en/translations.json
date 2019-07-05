@@ -683,10 +683,12 @@
       "start-day": "Start day",
       "period-end": "Period end",
       "period": "Period",
+      "trading-volume": "Trading Volume",
       "tooltip": {
         "profit": "Profit",
         "investors-funds": "Investors Funds",
-        "managers-funds": "Managers Funds"
+        "managers-funds": "Managers Funds",
+        "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
       }
     },
     "tooltip": {
@@ -1502,6 +1504,9 @@
       },
       "strategy": {
         "title": "Strategy"
+      },
+      "name": {
+        "title": "Title"
       },
       "avatar": {
         "title": "Avatar"

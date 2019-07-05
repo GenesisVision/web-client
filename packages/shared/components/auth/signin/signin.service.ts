@@ -1,4 +1,5 @@
 import { push } from "connected-react-router";
+import { CaptchaCheckResult } from "gv-api-web";
 import { Dispatch } from "redux";
 import { setTwoFactorRequirementAction } from "shared/actions/2fa-actions";
 import authActions from "shared/actions/auth-actions";
@@ -14,20 +15,23 @@ import {
   LOGIN,
   LOGIN_TWO_FACTOR,
   storeTwoFactorAction
-} from "./login.actions";
-import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./login.routes";
+} from "./signin.actions";
+import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./signin.routes";
 
 export const client = "Web";
 export const redirectToLogin = () => {
   push(LOGIN_ROUTE);
 };
 
-export const login: LoginFuncType = props => (dispatch, getState) => {
-  const { code, type, setSubmitting, method, prefix, id } = props;
+export const login: LoginFuncType = (method, fromPath, type) => (
+  dispatch,
+  getState
+) => (props, setSubmitting) => {
+  const { code, captchaCheckResult } = props;
   const stateLoginData = getState().loginData.twoFactor;
   const email = props.email || stateLoginData.email;
   const password = props.password || stateLoginData.password;
-  const from = props.from || stateLoginData.from;
+  const from = fromPath || stateLoginData.from;
   return dispatch(
     method({
       email,
@@ -35,12 +39,7 @@ export const login: LoginFuncType = props => (dispatch, getState) => {
       client,
       twoFactorCode: (type === CODE_TYPE.TWO_FACTOR && code) || null,
       recoveryCode: (type === CODE_TYPE.RECOVERY && code) || null,
-      captchaCheckResult: {
-        id,
-        pow: {
-          prefix
-        }
-      }
+      captchaCheckResult
     })
   )
     .then((response: { value: string }) => {
@@ -85,18 +84,26 @@ export const logout: logoutFuncType = () => dispatch => {
 };
 
 export type LoginFuncType = (
+  method: any,
+  from?: string,
+  type?: CODE_TYPE
+) => (
+  dispatch: any,
+  getState: any
+) => (
   props: {
+    captchaCheckResult: CaptchaCheckResult;
     id: string;
     prefix?: number;
     email: string;
     password: string;
     method: any;
     code: string;
-    setSubmitting?: SetSubmittingType;
-    type?: CODE_TYPE;
     from?: string;
-  }
-) => (dispatch: any, getState: any) => Promise<void>;
+  },
+  setSubmitting?: SetSubmittingType
+) => Promise<void>;
+
 export type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = () => (dispatch: Dispatch) => void;

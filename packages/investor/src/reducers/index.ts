@@ -7,7 +7,7 @@ import dashboardReducer, {
 import { combineReducers } from "redux";
 import { LOGOUT } from "shared/actions/auth-actions";
 import { PasswordState } from "shared/components/auth/forgot-password/reducers/password-restore-reducers";
-import { LoginState } from "shared/components/auth/login/reducers/login.reducers";
+import { LoginState } from "shared/components/auth/signin/reducers/login.reducers";
 import { SignUpState } from "shared/components/auth/signup/reducers/signup.reducers";
 import { ManagerState } from "shared/components/manager/reducers/manager.reducers";
 import clearableReducer from "shared/reducers/clearable.reducer";

@@ -22,7 +22,7 @@ const _FundDetailsStatisticsElements: React.FC<
     <div className="details-statistics__subheading">
       {t("fund-details-page.statistics.current")}
     </div>
-    <div className="details-statistics__particular-information">
+    <div className=" details-statistics__particular-information details-statistics__particular-information--current">
       <div className="details-statistics__vertical-info-block">
         <StatisticItem
           label={

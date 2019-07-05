@@ -70,6 +70,15 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
         font-size: $font-size-small;
       }
     }
+
+    .reinvesting-widget {
+      padding-bottom: $padding-xsmall;
+    }
+
+    .gv-switch-wrapper {
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 
   &__footer {

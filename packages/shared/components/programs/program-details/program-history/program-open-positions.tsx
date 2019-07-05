@@ -13,7 +13,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import { IDataModel } from "shared/constants/constants";
+import { DEFAULT_DECIMAL_SCALE, IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
 
@@ -22,8 +22,6 @@ const PAGING = {
   itemsOnPage: 2000,
   totalPages: 0
 };
-
-const DECIMAL_SCALE = 8;
 
 const _ProgramOpenPositions: React.FC<Props & InjectedTranslateProps> = ({
   t,
@@ -68,32 +66,35 @@ const _ProgramOpenPositions: React.FC<Props & InjectedTranslateProps> = ({
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--volume">
               <NumberFormat
-                value={formatValue(position.volume, DECIMAL_SCALE / 2)}
+                value={formatValue(position.volume, DEFAULT_DECIMAL_SCALE / 2)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--price">
               <NumberFormat
-                value={formatValue(position.price, DECIMAL_SCALE)}
+                value={formatValue(position.price, DEFAULT_DECIMAL_SCALE)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--priceCurrent">
               <NumberFormat
-                value={formatValue(position.priceCurrent, DECIMAL_SCALE)}
+                value={formatValue(
+                  position.priceCurrent,
+                  DEFAULT_DECIMAL_SCALE
+                )}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--profit">
               <Profitability
-                value={formatValue(position.profit, DECIMAL_SCALE)}
+                value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
-                  value={formatValue(position.profit, DECIMAL_SCALE)}
+                  value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
                   thousandSeparator=" "
                   displayType="text"
                   allowNegative={false}

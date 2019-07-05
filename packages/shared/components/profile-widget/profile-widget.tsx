@@ -5,6 +5,7 @@ import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import { compose } from "redux";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import GVButton from "shared/components/gv-button";
 import { DetailsIcon } from "shared/components/icon/details-icon";
@@ -18,74 +19,72 @@ import {
   SETTINGS_ROUTE
 } from "shared/components/profile/profile.constants";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
-import withLoader from "shared/decorators/with-loader";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import useAnchor from "shared/hooks/anchor.hook";
 
-class _ProfileWidget extends React.PureComponent<Props, State> {
-  state = {
-    anchor: undefined
-  };
-
-  handleOpen = (event: React.MouseEvent<HTMLDivElement>): void =>
-    this.setState({ anchor: event.currentTarget });
-
-  handleClose = (): void => this.setState({ anchor: undefined });
-
-  render() {
-    const { t, profileHeader, logout, className } = this.props;
-    return (
-      <div className={classNames("profile-widget", className)}>
-        <div className="profile-widget__content" onClick={this.handleOpen}>
-          <ProfileAvatar
-            url={profileHeader.avatar}
-            alt={profileHeader.email}
-            className="profile-widget__avatar"
-          />
-          <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
-        </div>
-        <Popover
-          anchorEl={this.state.anchor}
-          onClose={this.handleClose}
-          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-        >
-          <div className="profile-menu">
-            <div className="profile-menu__header">{profileHeader.email}</div>
-            <div className="profile-menu__container">
-              <div className="profile-menu__item profile-menu__item--details">
-                <Link to={PROFILE_ROUTE} onClick={this.handleClose}>
-                  <DetailsIcon />
-                  {t("profile-widget.personal-details")}
-                </Link>
-              </div>
-              <div className="profile-menu__item profile-menu__item--settings">
-                <Link to={SETTINGS_ROUTE} onClick={this.handleClose}>
-                  <SettingsIcon />
-                  {t("profile-widget.settings")}
-                </Link>
-              </div>
-              <div className="profile-menu__item profile-menu__item--logout">
-                <GVButton variant="text" onClick={logout}>
-                  <React.Fragment>
-                    <LogoutIcon />
-                    {t("profile-widget.logout")}
-                  </React.Fragment>
-                </GVButton>
-              </div>
+const _ProfileWidget: React.FC<Props> = ({
+  t,
+  profileHeader,
+  logout,
+  className
+}) => {
+  const { anchor, setAnchor, clearAnchor } = useAnchor();
+  return (
+    <div className={classNames("profile-widget", className)}>
+      <div className="profile-widget__content" onClick={setAnchor}>
+        <ProfileAvatar
+          url={profileHeader.avatar}
+          alt={profileHeader.email}
+          className="profile-widget__avatar"
+        />
+        <FilterArrowIcon isOpen={!!anchor} />
+      </div>
+      <Popover
+        anchorEl={anchor}
+        onClose={clearAnchor}
+        horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+      >
+        <div className="profile-menu">
+          <div className="profile-menu__header">{profileHeader.email}</div>
+          <div className="profile-menu__container">
+            <div className="profile-menu__item profile-menu__item--details">
+              <Link to={PROFILE_ROUTE} onClick={clearAnchor}>
+                <DetailsIcon />
+                {t("profile-widget.personal-details")}
+              </Link>
+            </div>
+            <div className="profile-menu__item profile-menu__item--settings">
+              <Link to={SETTINGS_ROUTE} onClick={clearAnchor}>
+                <SettingsIcon />
+                {t("profile-widget.settings")}
+              </Link>
+            </div>
+            <div className="profile-menu__item profile-menu__item--logout">
+              <GVButton variant="text" onClick={logout}>
+                <React.Fragment>
+                  <LogoutIcon />
+                  {t("profile-widget.logout")}
+                </React.Fragment>
+              </GVButton>
             </div>
           </div>
-        </Popover>
-      </div>
-    );
-  }
-}
+        </div>
+      </Popover>
+    </div>
+  );
+};
 
-interface Props extends InjectedTranslateProps {
+interface OwnProps {
   profileHeader: ProfileHeaderViewModel;
   logout(): void;
   className?: string;
 }
-interface State {
-  anchor?: EventTarget;
-}
 
-const ProfileWidget = withLoader(translate()(_ProfileWidget));
+interface Props extends InjectedTranslateProps, OwnProps {}
+
+const ProfileWidget = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+  withLoader,
+  translate(),
+  React.memo
+)(_ProfileWidget);
 export default ProfileWidget;

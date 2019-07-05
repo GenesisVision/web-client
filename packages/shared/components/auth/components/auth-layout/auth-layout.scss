@@ -81,7 +81,7 @@
   }
 
   .gv-text-field__error {
-    bottom: 0;
+    transform: translateY(-100%);
   }
 
   & .gv-btn.gv-btn--text {
@@ -98,7 +98,9 @@
 
   @include media-breakpoint-tablet() {
     flex-direction: column;
-    justify-content: space-around;
+    &__left {
+      margin-bottom: $padding-small;
+    }
     &__right {
       min-width: 460px;
       min-height: 600px;
@@ -124,6 +126,8 @@
     &__left {
       height: 100%;
       min-height: 600px;
+      margin-bottom: 0;
+      padding-left: $padding-medium;
     }
 
     &__quote {
@@ -142,6 +146,9 @@
   @include media-breakpoint-desktop() {
     padding: 80px 100px;
     justify-content: space-between;
+    &__left {
+      padding-left: 0;
+    }
     &__right {
       display: flex;
       flex-direction: column;

@@ -4,7 +4,7 @@ import { FundBalanceChart, FundDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
-import { redirectToLogin } from "shared/components/auth/login/login.service";
+import { redirectToLogin } from "shared/components/auth/signin/signin.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
 import {
   getFundDescription,

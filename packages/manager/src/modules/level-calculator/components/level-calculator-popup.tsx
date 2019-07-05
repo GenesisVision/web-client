@@ -116,9 +116,11 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           <CalculatorSlider
             name="genesisRatio"
             className="level-calculator-popup__calculator-slider"
+            valueClassName="level-calculator-popup__calculator-slider-value"
             title={t("manager.level-calculator.genesis-ratio")}
             tooltipContent={t("manager.level-calculator.genesis-ratio-tooltip")}
             value={genesisRatio}
+            editableValue
             min={levelsParameters.genesisRatioMin}
             max={levelsParameters.genesisRatioMax}
             step={0.01}
@@ -127,9 +129,11 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           <CalculatorSlider
             name="programAge"
             className="level-calculator-popup__calculator-slider"
+            valueClassName="level-calculator-popup__calculator-slider-value"
             title={t("manager.level-calculator.age")}
             tooltipContent={t("manager.level-calculator.age-tooltip")}
             value={programAge}
+            editableValue
             min={0}
             max={levelsParameters.programAgeMax}
             maxLabel={
@@ -145,11 +149,13 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           <CalculatorSlider
             name="weightedVolumeScale"
             className="level-calculator-popup__calculator-slider"
+            valueClassName="level-calculator-popup__calculator-slider-value"
             title={t("manager.level-calculator.weighted-volume-scale")}
             tooltipContent={t(
               "manager.level-calculator.weighted-volume-scale-tooltip"
             )}
             value={weightedVolumeScale}
+            editableValue
             min={levelsParameters.volumeScaleMin}
             max={levelsParameters.volumeScaleMax}
             step={0.01}
@@ -163,13 +169,7 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
               "manager.level-calculator.manager-balance-tooltip"
             )}
             value={+formatValue(managerBalance, 2)}
-            valueComponent={
-              <NumberFormat
-                value={+formatValue(managerBalance, 2)}
-                displayType="text"
-                suffix={` ${currency}`}
-              />
-            }
+            valueAdornment={` ${currency}`}
             max={levelsParameters.maxAvailableToInvest}
             onChange={this.handleSliderChange}
           />

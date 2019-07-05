@@ -7,7 +7,7 @@ import {
   bindActionCreators,
   compose
 } from "redux";
-import { logout } from "shared/components/auth/login/login.service";
+import { logout } from "shared/components/auth/signin/signin.service";
 import Header from "shared/components/header/header";
 import {
   fetchProfileHeaderInfo,
