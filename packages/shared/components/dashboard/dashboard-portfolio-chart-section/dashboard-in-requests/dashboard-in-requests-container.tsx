@@ -19,66 +19,61 @@ import Popover, {
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import useAnchor from "shared/hooks/anchor.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { AuthRootState } from "shared/utils/types";
 
 import { CancelRequestType } from "../../dashboard.constants";
 import DashboardRequest from "./dashboard-request";
 
-class _DashboardInRequestsContainer extends React.PureComponent<Props, State> {
-  state = {
-    anchor: undefined
-  };
-
-  handleOpenDropdown = (event: React.MouseEvent<HTMLElement, MouseEvent>) =>
-    this.setState({ anchor: event.currentTarget });
-
-  handleCloseDropdown = () => this.setState({ anchor: undefined });
-
-  render() {
-    const { role, inRequests, service, t } = this.props;
-    return (
-      <div className="dashboard-request">
-        <StatisticItem
-          label={t(`${role}.dashboard-page.chart-section.in-requests`)}
-          big
-        >
-          <NumberFormat
-            value={formatCurrencyValue(inRequests.totalValue, "GVT")}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={" GVT"}
-          />
-          <ActionsCircleIcon
-            condition={inRequests.requests.length !== 0}
-            className="dashboard-request__icon"
-            primary={this.state.anchor !== undefined}
-            onClick={this.handleOpenDropdown}
-            dashboard__portfolio-events-aside
-          />
-        </StatisticItem>
-        <Popover
-          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-          vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          anchorEl={this.state.anchor}
-          noPadding
-          onClose={this.handleCloseDropdown}
-        >
-          <div className="dashboard-request-popover">
-            {inRequests.requests.map(x => (
-              <DashboardRequest
-                key={x.id}
-                request={x}
-                cancelRequest={service.cancelRequest}
-                onApplyCancelRequest={this.handleCloseDropdown}
-              />
-            ))}
-          </div>
-        </Popover>
-      </div>
-    );
-  }
-}
+const _DashboardInRequestsContainer: React.FC<Props> = ({
+  role,
+  inRequests,
+  service,
+  t
+}) => {
+  const { anchor, setAnchor, clearAnchor } = useAnchor();
+  return (
+    <div className="dashboard-request">
+      <StatisticItem
+        label={t(`${role}.dashboard-page.chart-section.in-requests`)}
+        big
+      >
+        <NumberFormat
+          value={formatCurrencyValue(inRequests.totalValue, "GVT")}
+          thousandSeparator={" "}
+          displayType="text"
+          suffix={" GVT"}
+        />
+        <ActionsCircleIcon
+          condition={inRequests.requests.length !== 0}
+          className="dashboard-request__icon"
+          primary={!!anchor}
+          onClick={setAnchor}
+          dashboard__portfolio-events-aside
+        />
+      </StatisticItem>
+      <Popover
+        horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+        vertical={VERTICAL_POPOVER_POS.BOTTOM}
+        anchorEl={anchor}
+        noPadding
+        onClose={clearAnchor}
+      >
+        <div className="dashboard-request-popover">
+          {inRequests.requests.map(x => (
+            <DashboardRequest
+              key={x.id}
+              request={x}
+              cancelRequest={service.cancelRequest}
+              onApplyCancelRequest={clearAnchor}
+            />
+          ))}
+        </div>
+      </Popover>
+    </div>
+  );
+};
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
@@ -108,10 +103,6 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface State {
-  anchor?: HTMLElement;
-}
-
 const DashboardInRequestsContainer = compose<
   React.ComponentType<OwnProps & WithLoaderProps>
 >(
@@ -121,6 +112,7 @@ const DashboardInRequestsContainer = compose<
   connect<null, DispatchProps, OwnProps, AuthRootState>(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_DashboardInRequestsContainer);
 export default DashboardInRequestsContainer;
