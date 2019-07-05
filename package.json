@@ -56,6 +56,7 @@
   "devDependencies": {
     "@hot-loader/react-dom": "^16.8.6",
     "@juggle/resize-observer": "^1.1.1",
+    "@testing-library/react-hooks": "^1.1.0",
     "@types/classnames": "^2.2.7",
     "@types/debounce": "^1.2.0",
     "@types/enzyme": "^3.9.1",
@@ -107,9 +108,9 @@
     "react-test-renderer": "^16.8.6",
     "redux-devtools": "^3.5.0",
     "redux-mock-store": "^1.5.3",
+    "source-map-explorer": "^2.0.1",
     "typescript": "^3.2.2",
-    "worker-loader": "^2.0.0",
-    "source-map-explorer": "^2.0.1"
+    "worker-loader": "^2.0.0"
   },
   "husky": {
     "hooks": {
