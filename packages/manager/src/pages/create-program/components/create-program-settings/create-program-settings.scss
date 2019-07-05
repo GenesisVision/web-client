@@ -8,10 +8,6 @@
 
   @include media-breakpoint-landscape-phone() {
     padding-left: 0;
-
-    .create-program-settings__item-caption {
-      padding-top: $padding-small;
-    }
   }
 
   @include media-breakpoint-tablet() {
@@ -68,15 +64,11 @@
     }
 
     &-caption {
-      padding-top: $padding-small;
+      padding-top: $padding-xsmall;
       font-size: 12px;
       color: $label-color;
       letter-spacing: 0.4px;
       width: 100%;
-
-      @include media-breakpoint-landscape-phone() {
-        padding-top: $padding-xsmall;
-      }
 
       &.hint {
         cursor: pointer;
