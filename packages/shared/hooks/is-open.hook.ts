@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-type TOpen = boolean;
+type TValue = boolean;
+export const nullValue: TValue = false;
 
 const useIsOpen = (
-  initValue: TOpen = false
-): [TOpen, () => void, () => void] => {
-  const [open, setOpenInner] = useState<TOpen>(initValue);
+  initValue: TValue = nullValue
+): [TValue, () => void, () => void] => {
+  const [open, setOpenInner] = useState<TValue>(initValue);
   const setOpen = () => setOpenInner(true);
   const setClose = () => setOpenInner(false);
   return [open, setOpen, setClose];
