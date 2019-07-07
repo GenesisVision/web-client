@@ -1,13 +1,13 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import * as React from "react";
 
-import useIsOpen from "./is-open.hook";
+import useIsOpen, { nullValue } from "./is-open.hook";
 
 describe("test isOpen hook", () => {
   describe("test init isOpen", () => {
     it("should be init isOpen", () => {
       const { result } = renderHook(() => useIsOpen());
-      expect(result.current[0]).toBe(false);
+      expect(result.current[0]).toBe(nullValue);
     });
   });
   describe("test set isOpen", () => {
