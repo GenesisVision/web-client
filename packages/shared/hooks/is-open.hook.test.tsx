@@ -29,5 +29,18 @@ describe("test isOpen hook", () => {
       });
       expect(result.current[0]).toBe(false);
     });
+    it("should be set isOpen to value", () => {
+      const { result } = renderHook(() => useIsOpen());
+      const value = true;
+      act(() => {
+        result.current[3](value);
+      });
+      expect(result.current[0]).toBe(value);
+      const value2 = false;
+      act(() => {
+        result.current[3](value2);
+      });
+      expect(result.current[0]).toBe(value2);
+    });
   });
 });
