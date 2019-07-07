@@ -2,34 +2,34 @@ import "./password-change.scss";
 
 import { ChangePasswordViewModel } from "gv-api-web";
 import * as React from "react";
+import { useCallback } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import useErrorMessage from "shared/hooks/error-message.hook";
 import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
 
 import PasswordChangeForm from "./password-change-form";
 import { changePassword } from "./service/password-change.service";
 
-class PasswordChange extends React.PureComponent<Props, State> {
-  state = {
-    errorMessage: undefined
-  };
-
-  handleSubmit = (model: ChangePasswordViewModel) => {
-    this.props.service.changePassword(model).catch((errors: ResponseError) => {
-      this.setState({ errorMessage: errors.errorMessage });
-    });
-  };
-
-  render() {
-    return (
-      <PasswordChangeForm
-        onSubmit={this.handleSubmit}
-        errorMessage={this.state.errorMessage}
-      />
-    );
-  }
-}
+const _PasswordChange: React.FC<Props> = ({ service }) => {
+  const {
+    errorMessage,
+    setErrorMessage,
+    cleanErrorMessage
+  } = useErrorMessage();
+  const handleSubmit = useCallback(
+    (model: ChangePasswordViewModel) =>
+      service
+        .changePassword(model)
+        .then(cleanErrorMessage)
+        .catch(setErrorMessage),
+    []
+  );
+  return (
+    <PasswordChangeForm onSubmit={handleSubmit} errorMessage={errorMessage} />
+  );
+};
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
@@ -46,15 +46,12 @@ interface DispatchProps {
   };
 }
 
-interface State {
-  errorMessage?: string;
-}
-
-const PasswordChangeContainer = compose<React.ComponentType>(
+const PasswordChange = compose<React.ComponentType>(
   connect(
     null,
     mapDispatchToProps
   ),
-  translate()
-)(PasswordChange);
-export default PasswordChangeContainer;
+  translate(),
+  React.memo
+)(_PasswordChange);
+export default PasswordChange;
