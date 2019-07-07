@@ -7,9 +7,12 @@ import {
   PlatformAsset
 } from "gv-api-web";
 import * as React from "react";
+import { useCallback } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
+import useErrorMessage from "shared/hooks/error-message.hook";
 import { fundAssetsSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch } from "shared/utils/types";
@@ -19,44 +22,49 @@ import ReallocateForm, {
 } from "./components/reallocate-form";
 import { updateAssets } from "./services/reallocate.services";
 
-class _ReallocateContainer extends React.PureComponent<Props, State> {
-  state = { errorMessage: "" };
-
-  handleApply = (values: IReallocateFormValues) => {
-    const { service, id, onApply } = this.props;
-    service
-      .updateAssets(id, values.assets)
-      .then(() => {
-        this.handleClose();
-        onApply();
-      })
-      .catch(error => {
-        this.setState({ errorMessage: error.errorMessage });
-      });
-  };
-  handleClose = () => {
-    this.setState({ errorMessage: "" });
-    this.props.onClose();
-  };
-
-  render() {
-    const { open, fundAssets, platformAssets } = this.props;
-    return (
-      <Dialog open={open} onClose={this.handleClose}>
-        {fundAssets.length ? (
-          <ReallocateForm
-            fundAssets={fundAssets}
-            platformAssets={platformAssets}
-            onSubmit={this.handleApply}
-            errorMessage={this.state.errorMessage}
-          />
-        ) : (
-          <DialogLoader />
-        )}
-      </Dialog>
-    );
-  }
-}
+const _ReallocateContainer: React.FC<Props> = ({
+  open,
+  fundAssets,
+  platformAssets,
+  service,
+  id,
+  onApply,
+  onClose
+}) => {
+  const {
+    errorMessage,
+    setErrorMessage,
+    cleanErrorMessage
+  } = useErrorMessage();
+  const handleApply = useCallback(
+    (values: IReallocateFormValues) => {
+      service
+        .updateAssets(id, values.assets)
+        .then(() => {
+          handleClose();
+          onApply();
+        })
+        .catch(setErrorMessage);
+    },
+    [id]
+  );
+  const handleClose = useCallback(() => {
+    cleanErrorMessage();
+    onClose();
+  }, []);
+  return (
+    <Dialog open={open} onClose={handleClose}>
+      <ReallocateForm
+        condition={!!fundAssets.length}
+        loader={<DialogLoader />}
+        fundAssets={fundAssets}
+        platformAssets={platformAssets}
+        onSubmit={handleApply}
+        errorMessage={errorMessage}
+      />
+    </Dialog>
+  );
+};
 
 const mapStateToProps = (state: RootState): StateProps => ({
   platformAssets: fundAssetsSelector(state)
@@ -92,17 +100,11 @@ interface DispatchProps {
   };
 }
 
-interface State {
-  errorMessage: string;
-}
-
-const ReallocateContainer = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps,
-  RootState
->(
-  mapStateToProps,
-  mapDispatchToProps
+const ReallocateContainer = compose<React.ComponentType<OwnProps>>(
+  connect<StateProps, DispatchProps, OwnProps, RootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  React.memo
 )(_ReallocateContainer);
 export default ReallocateContainer;
