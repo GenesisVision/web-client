@@ -5,10 +5,14 @@ import {
 } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import * as React from "react";
+import { useCallback } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
+import useErrorMessage from "shared/hooks/error-message.hook";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
 import {
   MiddlewareDispatch,
@@ -23,54 +27,44 @@ import WalletWithdrawForm, {
 } from "./wallet-withdraw-form";
 import WalletWithdrawRequest from "./wallet-withdraw-request/wallet-withdraw-request";
 
-class WalletWithdrawContainer extends React.PureComponent<Props, State> {
-  state = {
-    errorMessage: undefined,
-    success: false
-  };
-
-  handleSubmit = (
-    values: IWalletWithdrawFormValues,
-    setSubmitting: SetSubmittingType
-  ) => {
-    this.props.service
-      .newWithdrawRequest({ ...values, amount: Number(values.amount) })
-      .then(() => {
-        this.setState({
-          success: true
+const WalletWithdrawContainer: React.FC<Props> = ({
+  twoFactorEnabled,
+  wallets,
+  currentWallet,
+  service
+}) => {
+  const [isSuccess, setSuccess, setNotSuccess] = useIsOpen();
+  const { errorMessage, setErrorMessage } = useErrorMessage();
+  const handleSubmit = useCallback(
+    (values: IWalletWithdrawFormValues, setSubmitting: SetSubmittingType) => {
+      service
+        .newWithdrawRequest({ ...values, amount: Number(values.amount) })
+        .then(() => {
+          setSuccess();
+          service.updateWalletTimestamp();
+        })
+        .catch(error => {
+          setNotSuccess();
+          setErrorMessage(error);
+          setSubmitting(false);
         });
-        this.props.service.updateWalletTimestamp();
-      })
-      .catch((error: ResponseError) => {
-        this.setState({
-          success: false,
-          errorMessage: error.errorMessage
-        });
-        setSubmitting(false);
-      });
-  };
-
-  render() {
-    const { errorMessage, success } = this.state;
-    const { twoFactorEnabled, wallets, currentWallet } = this.props;
-
-    if (!wallets.length) return <DialogLoader />;
-
-    const enabledWallets = wallets.filter(wallet => wallet.isWithdrawalEnabled);
-
-    return success ? (
-      <WalletWithdrawRequest />
-    ) : (
-      <WalletWithdrawForm
-        wallets={enabledWallets}
-        currentWallet={currentWallet}
-        errorMessage={errorMessage}
-        onSubmit={this.handleSubmit}
-        twoFactorEnabled={twoFactorEnabled}
-      />
-    );
-  }
-}
+    },
+    []
+  );
+  if (!wallets.length) return <DialogLoader />;
+  const enabledWallets = wallets.filter(wallet => wallet.isWithdrawalEnabled);
+  return isSuccess ? (
+    <WalletWithdrawRequest />
+  ) : (
+    <WalletWithdrawForm
+      wallets={enabledWallets}
+      currentWallet={currentWallet}
+      errorMessage={errorMessage}
+      onSubmit={handleSubmit}
+      twoFactorEnabled={twoFactorEnabled}
+    />
+  );
+};
 
 interface Props extends DispatchProps, StateProps, OwnProps {}
 
@@ -92,11 +86,6 @@ interface StateProps {
   twoFactorEnabled: boolean;
 }
 
-interface State {
-  success: boolean;
-  errorMessage?: string;
-}
-
 const mapStateToProps = (state: InvestorRootState): StateProps => ({
   twoFactorEnabled: twoFactorEnabledSelector(state),
   wallets: walletsSelector(state)
@@ -110,7 +99,10 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-export default connect<StateProps, DispatchProps, OwnProps, InvestorRootState>(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose<React.ComponentType<OwnProps>>(
+  connect<StateProps, DispatchProps, OwnProps, InvestorRootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  React.memo
 )(WalletWithdrawContainer);
