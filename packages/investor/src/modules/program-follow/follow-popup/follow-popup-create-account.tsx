@@ -220,5 +220,3 @@ const FollowCreateAccount = compose<React.ComponentType<OwnProps>>(
   })
 )(_FollowCreateAccount);
 export default FollowCreateAccount;
-
-export default FollowCreateAccount;
