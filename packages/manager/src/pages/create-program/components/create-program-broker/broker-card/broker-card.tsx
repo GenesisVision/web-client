@@ -42,14 +42,18 @@ const _BrokerCard: React.FC<OwnProps & InjectedTranslateProps> = ({
       {isSelected && (
         <div className="broker-card__selected-mark"> &#10004;</div>
       )}
+      <TagBrokerContainer
+        tags={tags}
+        condition={tags.length !== 0}
+        className="broker-card__tags"
+      />
       <img
         className={logoClassName}
         src={filesService.getFileUrl(logo)}
         alt={brokerName}
       />
-      <TagBrokerContainer tags={tags} condition={tags.length !== 0} />
       <BrokerCardAdornment
-        // condition={cardState !== BROKER_CARD_EXTRA_STATE.NONE}
+        condition={cardState !== BROKER_CARD_EXTRA_STATE.NONE}
         cardState={cardState}
       />
     </div>

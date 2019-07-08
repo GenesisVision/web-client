@@ -2,26 +2,19 @@ import { ProgramTag } from "gv-api-web";
 import * as React from "react";
 
 import TagItem from "./tag-item";
-import classnames from "classnames";
+import classNames from "classnames";
 
 interface Props {
   tags: ProgramTag[];
-  color?: string;
   className?: string;
 }
 
-const _TagItemTooltip: React.FC<Props> = ({ tags, color, className }) => {
+const _TagItemTooltip: React.FC<Props> = ({ tags, className }) => {
   return (
-    <div className={classnames("tag-item-tooltip", className)}>
+    <div className={classNames("tag-item-tooltip", className)}>
       {tags.map(
         (tag, idx) =>
-          idx > 0 && (
-            <TagItem
-              name={tag.name}
-              color={color ? color : tag.color}
-              key={idx}
-            />
-          )
+          idx > 0 && <TagItem name={tag.name} color={tag.color} key={idx} />
       )}
     </div>
   );

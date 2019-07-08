@@ -1,26 +1,28 @@
 import "./tag-broker-container.scss";
 
+import classNames from "classnames";
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
-import { PROFITABILITY_VARIANT } from "shared/components/profitability/profitability.helper";
 import Tooltip from "shared/components/tooltip/tooltip";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+
 import TagItem from "../tag-item/tag-item";
 import TagItemTooltip from "../tag-item/tag-item-tooltip";
-import Profitability from "shared/components/profitability/profitability";
-import withLoader, { WithLoaderProps } from "../../../decorators/with-loader";
 
 const MAX_VISIBLE_TAGS = 1;
-const COLOR_TAGS = "#ffffff";
 
-const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({ tags }) => {
+const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({
+  tags,
+  className
+}) => {
   const length = tags.length;
   const reminder = length > MAX_VISIBLE_TAGS ? `${length - 1}` : null;
   return (
-    <div className="tag-broker-container">
+    <div className={classNames("tag-broker-container", className)}>
       {tags.map(
         (tag, idx) =>
           ((reminder && idx === 0) || !reminder) && (
-            <TagItem name={tag.name} color={COLOR_TAGS} key={idx} />
+            <TagItem name={tag.name} color={tag.color} key={idx} />
           )
       )}
       {reminder && (
@@ -28,7 +30,6 @@ const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({ tags }) => {
           render={() => (
             <TagItemTooltip
               tags={tags}
-              color={COLOR_TAGS}
               className="tag-broker-container__tooltip"
             />
           )}
@@ -42,6 +43,7 @@ const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({ tags }) => {
 
 interface Props {
   tags: ProgramTag[];
+  className?: string;
 }
 
 const TagBrokerContainer = React.memo(withLoader(_TagBrokerContainer));
