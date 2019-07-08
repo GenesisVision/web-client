@@ -14,15 +14,9 @@
     border-radius: 100%;
     text-align: center;
     vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    line-height: 12px;
-
-    @include media-breakpoint-landscape-phone() {
-      height: 28px;
-      width: 28px;
-      line-height: 20px;
-    }
+    width: 18px;
+    height: 18px;
+    line-height: 9px;
   }
 
   &__tooltip.tag-item-tooltip {
@@ -36,12 +30,20 @@
     }
   }
 
-  .tag-item {
+  .tag-button {
     margin-top: 0;
     margin-bottom: 0;
 
     &:last-child {
       margin-right: 0;
     }
+
+    //@include media-breakpoint-landscape-phone() {
+    //  padding: 0 $padding-xxsmall;
+    //  max-height: 28px;
+    //  height: 28px;
+    //  line-height: 28px;
+    //  font-size: 14px;
+    //}
   }
 }
