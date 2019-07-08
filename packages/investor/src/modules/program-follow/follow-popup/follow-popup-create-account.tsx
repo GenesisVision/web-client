@@ -19,10 +19,14 @@ import {
   convertFromCurrency,
   convertToCurrency
 } from "shared/utils/currency-converter";
-import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { Schema, lazy, number, object } from "yup";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
-class _FollowCreateAccount extends React.PureComponent<Props, State> {
+import CreateAccountFormValidationSchema from "./follow-popup-create-account.validators";
+
+class _FollowCreateAccount extends React.PureComponent<
+  CreateAccountFormProps,
+  State
+> {
   state = {
     isPending: false
   };
@@ -34,9 +38,12 @@ class _FollowCreateAccount extends React.PureComponent<Props, State> {
   onChangeCurrencyFrom = (name: any, target: any) => {
     const { setFieldValue, setFieldTouched } = this.props;
     const initialDepositCurrencyNew = target.props.value;
-    setFieldValue(FIELDS.initialDepositCurrency, initialDepositCurrencyNew);
-    setFieldValue(FIELDS.initialDepositAmount, "");
-    setFieldTouched(FIELDS.initialDepositAmount, false);
+    setFieldValue(
+      CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency,
+      initialDepositCurrencyNew
+    );
+    setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, "");
+    setFieldTouched(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, false);
     this.fetchRate(initialDepositCurrencyNew);
   };
   fetchRate = (initialDepositCurrency?: any) => {
@@ -44,10 +51,12 @@ class _FollowCreateAccount extends React.PureComponent<Props, State> {
     rateApi
       .v10RateByFromByToGet(
         currency,
-        initialDepositCurrency || values[FIELDS.initialDepositCurrency]
+        initialDepositCurrency ||
+          values[CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]
       )
       .then((rate: number) => {
-        if (rate !== values.rate) setFieldValue(FIELDS.rate, rate);
+        if (rate !== values.rate)
+          setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.rate, rate);
       });
   };
   handleNext = () => {
@@ -70,20 +79,16 @@ class _FollowCreateAccount extends React.PureComponent<Props, State> {
       (wallet: WalletData) => wallet.currency === initialDepositCurrency
     );
     const availableToWithdraw = wallet ? wallet.available : 0;
-    const isAllow = (values: any) => {
-      const { formattedValue, value } = values;
-      return formattedValue === "" || validateFraction(value, currency);
-    };
 
     const setMaxAmount = () => {
       setFieldValue(
-        FIELDS.initialDepositAmount,
+        CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount,
         formatCurrencyValue(availableToWithdraw, currency)
       );
     };
     const disableButton = () => {
       return (
-        errors[FIELDS.initialDepositAmount] !== undefined ||
+        errors[CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount] !== undefined ||
         (!dirty && !isValid) ||
         initialDepositAmount > availableToWithdraw
       );
@@ -92,7 +97,7 @@ class _FollowCreateAccount extends React.PureComponent<Props, State> {
       <form className="dialog__bottom" id="follow-create-account">
         <div className="dialog-field">
           <GVFormikField
-            name={FIELDS.initialDepositCurrency}
+            name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency}
             component={GVTextField}
             label={t("follow-program.create-account.from")}
             InputComponent={Select}
@@ -121,7 +126,7 @@ class _FollowCreateAccount extends React.PureComponent<Props, State> {
         </div>
         <div className="dialog-field">
           <InputAmountField
-            name={FIELDS.initialDepositAmount}
+            name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount}
             label={t("follow-program.create-account.amount")}
             currency={initialDepositCurrency}
             setMax={setMaxAmount}
@@ -154,7 +159,7 @@ class _FollowCreateAccount extends React.PureComponent<Props, State> {
   }
 }
 
-enum FIELDS {
+export enum CREATE_ACCOUNT_FORM_FIELDS {
   initialDepositCurrency = "initialDepositCurrency",
   initialDepositAmount = "initialDepositAmount",
   rate = "rate"
@@ -172,14 +177,15 @@ interface State {
 }
 
 export interface CreateAccountFormValues {
-  [FIELDS.initialDepositCurrency]: AttachToSignalProviderInitialDepositCurrencyEnum;
-  [FIELDS.initialDepositAmount]: number;
-  [FIELDS.rate]: number;
+  [CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]: AttachToSignalProviderInitialDepositCurrencyEnum;
+  [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: number;
+  [CREATE_ACCOUNT_FORM_FIELDS.rate]: number;
 }
 
-type Props = OwnProps &
-  InjectedTranslateProps &
-  FormikProps<CreateAccountFormValues>;
+export interface CreateAccountFormProps
+  extends OwnProps,
+    InjectedTranslateProps,
+    FormikProps<CreateAccountFormValues> {}
 
 const FollowCreateAccount = compose<React.ComponentType<OwnProps>>(
   translate(),
@@ -197,56 +203,22 @@ const FollowCreateAccount = compose<React.ComponentType<OwnProps>>(
         initialDepositCurrency = wallets[0].currency;
       }
       return {
-        [FIELDS.initialDepositCurrency]: initialDepositCurrency,
-        [FIELDS.initialDepositAmount]: "",
-        [FIELDS.rate]: 1
+        [CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]: initialDepositCurrency,
+        [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: "",
+        [CREATE_ACCOUNT_FORM_FIELDS.rate]: 1
       };
     },
-    validationSchema: (props: Props) => {
-      const getAvailable = (currency: string, rate: number): number => {
-        const wallet = props.wallets.find(
-          (wallet: WalletData) => wallet.currency === currency
-        );
-        return convertToCurrency(wallet ? wallet.available : 0, rate);
-      };
-      return lazy(
-        (values: CreateAccountFormValues): Schema<any> =>
-          object().shape({
-            [FIELDS.initialDepositAmount]: number()
-              .required(
-                props.t(
-                  "follow-program.create-account.validation.amount-required"
-                )
-              )
-              .min(
-                convertFromCurrency(props.minDeposit, values[FIELDS.rate]),
-                props.t(
-                  "follow-program.create-account.validation.amount-more-than-min-deposit",
-                  {
-                    value: convertFromCurrency(
-                      props.minDeposit,
-                      values[FIELDS.rate]
-                    )
-                  }
-                )
-              )
-              .max(
-                getAvailable(values[FIELDS.initialDepositCurrency], 1),
-                props.t(
-                  "follow-program.create-account.validation.amount-more-than-available"
-                )
-              )
-          })
-      );
-    },
+    validationSchema: CreateAccountFormValidationSchema,
     handleSubmit: (values, { props }) => {
       props.onSubmit(
         convertFromCurrency(
-          values[FIELDS.initialDepositCurrency]!,
-          values.rate || 1
+          values[CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]!,
+          values.rate!
         )
       );
     }
   })
 )(_FollowCreateAccount);
+export default FollowCreateAccount;
+
 export default FollowCreateAccount;
