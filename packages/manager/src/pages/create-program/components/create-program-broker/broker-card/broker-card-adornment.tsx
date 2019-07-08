@@ -15,16 +15,10 @@ const _BrokerCardAdornment: React.FC<OwnProps & InjectedTranslateProps> = ({
   return (
     <>
       <div className="broker-card__adornment-text">
-        <span>
-          {t(
-            `manager.create-program-page.broker-card.${
-              BROKER_CARD_EXTRA_STATE.KYC_REQUIRED
-            }`
-          )}
-        </span>
-        {/*{cardState === BROKER_CARD_EXTRA_STATE.KYC_REQUIRED && (*/}
-        <HelpButton onClick={() => setIsOpen(true)} />
-        {/*)}*/}
+        <span>{t(`manager.create-program-page.broker-card.${cardState}`)}</span>
+        {cardState === BROKER_CARD_EXTRA_STATE.KYC_REQUIRED && (
+          <HelpButton onClick={() => setIsOpen(true)} />
+        )}
       </div>
       <ConfirmPopup
         open={isOpenPopup}
