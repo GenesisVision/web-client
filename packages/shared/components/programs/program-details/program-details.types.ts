@@ -40,6 +40,7 @@ export type HistoryCountsType = {
   eventsCount: number;
   tradesCount?: number;
   openPositionsCount?: number;
+  reallocateCount?: number;
 };
 
 export interface IHistorySection {
