@@ -3,9 +3,9 @@ import {
   InternalTransferRequestSourceTypeEnum,
   WalletData
 } from "gv-api-web";
-import * as React from "react";
+import React, { useCallback, useEffect } from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
 import {
@@ -16,8 +16,8 @@ import {
   fetchAccounts,
   fetchWallets
 } from "shared/components/wallet/services/wallet.services";
+import useErrorMessage from "shared/hooks/error-message.hook";
 import { RootState } from "shared/reducers/root-reducer";
-import { ResponseError } from "shared/utils/types";
 
 import { transferRequest } from "../services/transfer.services";
 import {
@@ -27,74 +27,63 @@ import {
 } from "../transfer.types";
 import TransferForm, { TransferFormValues } from "./transfer-form";
 
-class _TransferContainer extends React.PureComponent<Props, State> {
-  state = {
-    errorMessage: undefined
-  };
-
-  componentDidMount() {
-    const { destinationType, sourceType, service } = this.props;
+const _TransferContainer: React.FC<Props> = ({
+  copyTradingAccounts,
+  title,
+  currentItem,
+  wallets,
+  sourceType,
+  destinationType,
+  currentItemContainer,
+  service,
+  onClose
+}) => {
+  const { errorMessage, setErrorMessage } = useErrorMessage();
+  useEffect(() => {
     if (
       destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
       sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
     )
       service.fetchAccounts();
-  }
-
-  handleSubmit = (values: TransferFormValues) => {
-    const { service, onClose, destinationType, sourceType } = this.props;
-    transferRequest(values)
-      .then(() => {
-        onClose();
-        service.fetchWallets();
-        service.updateWalletTimestamp();
-        if (
-          destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
-          sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
-        )
-          service.fetchAccounts();
-      })
-      .catch((error: ResponseError) => {
-        this.setState({
-          errorMessage: error.errorMessage
-        });
-      });
-  };
-
-  render() {
-    const {
-      copyTradingAccounts,
-      title,
-      currentItem,
-      wallets,
-      sourceType,
-      destinationType,
-      currentItemContainer
-    } = this.props;
-    const { errorMessage } = this.state;
-    const sourceItems =
-      sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copyTradingAccounts;
-    const destinationItems =
-      destinationType === TRANSFER_DIRECTION.WALLET
-        ? wallets
-        : copyTradingAccounts;
-    if (!sourceItems.length || !destinationItems.length)
-      return <DialogLoader />;
-    return (
-      <TransferForm
-        sourceType={sourceType}
-        destinationType={destinationType}
-        title={title}
-        currentItemContainer={currentItemContainer}
-        sourceItems={sourceItems}
-        destinationItems={destinationItems}
-        currentItem={currentItem}
-        errorMessage={errorMessage}
-        onSubmit={this.handleSubmit}
-      />
-    );
-  }
-}
+  }, []);
+  const handleSubmit = useCallback(
+    (values: TransferFormValues) =>
+      transferRequest(values)
+        .then(() => {
+          onClose();
+          service.fetchWallets();
+          service.updateWalletTimestamp();
+          if (
+            destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
+            sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+          )
+            service.fetchAccounts();
+        })
+        .catch(setErrorMessage),
+    [destinationType, sourceType]
+  );
+  const sourceItems =
+    sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copyTradingAccounts;
+  const destinationItems =
+    destinationType === TRANSFER_DIRECTION.WALLET
+      ? wallets
+      : copyTradingAccounts;
+  return (
+    <TransferForm
+      condition={!!sourceItems.length && !!destinationItems.length}
+      loader={<DialogLoader />}
+      sourceType={sourceType}
+      destinationType={destinationType}
+      title={title}
+      currentItemContainer={currentItemContainer}
+      sourceItems={sourceItems}
+      destinationItems={destinationItems}
+      currentItem={currentItem}
+      errorMessage={errorMessage}
+      onSubmit={handleSubmit}
+    />
+  );
+};
 
 const mapStateToProps = (state: RootState): StateProps => ({
   wallets: walletsSelector(state),
@@ -112,14 +101,14 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-const TransferContainer = connect<
-  StateProps,
-  DispatchProps,
-  ITransferContainerOwnProps,
-  RootState
+const TransferContainer = compose<
+  React.ComponentType<ITransferContainerOwnProps>
 >(
-  mapStateToProps,
-  mapDispatchToProps
+  connect<StateProps, DispatchProps, ITransferContainerOwnProps, RootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  React.memo
 )(_TransferContainer);
 export default TransferContainer;
 
@@ -145,8 +134,4 @@ export interface ITransferContainerOwnProps {
   destinationType: InternalTransferRequestSourceTypeEnum;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
-}
-
-interface State {
-  errorMessage?: string;
 }
