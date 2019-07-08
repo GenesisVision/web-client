@@ -13,6 +13,7 @@ import ProgramEdit from "./program-edit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 const _ProgramSettings: React.FC<Props> = ({
   t,
@@ -144,7 +145,10 @@ interface OwnProps {
   editProgram: TUpdateProgramFunc;
 }
 
-const ProgramSettings = compose<React.ComponentType<OwnProps>>(
+const ProgramSettings = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
   translate(),
   React.memo
 )(_ProgramSettings);

@@ -26,6 +26,7 @@ import ClosePeriodContainer from "../program-details/components/close-period/clo
 import CloseProgramContainer from "../program-details/components/close-program/close-program-container";
 import { ChangeBrokerFormValues } from "./broker-edit";
 import ProgramSettings from "./program-settings";
+import ProgramSettingsLoader from "./program-settings.loader";
 import {
   changeBrokerMethod,
   redirectToProgram
@@ -111,37 +112,43 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
     applyChanges().then(() => service.redirectToProgram());
   }, []);
 
-  if (!details || !brokersInfo) return null;
+  const isDataReady = !!details && !!brokersInfo;
   return (
     <Page title={t("manager.program-settings.title")}>
       <ProgramSettings
+        condition={isDataReady}
+        loader={<ProgramSettingsLoader />}
         changeSignaling={changeSignaling}
         closePeriod={closePeriod}
         closeProgram={closeProgram}
-        details={details}
+        details={details!}
         changePassword={changePassword}
-        brokersInfo={brokersInfo}
+        brokersInfo={brokersInfo!}
         changeBroker={changeBroker}
         editProgram={editProgram}
       />
-      <ClosePeriodContainer
-        open={closePeriodOpen}
-        onClose={() => setClosePeriodOpen(false)}
-        onApply={applyChanges}
-        id={details.id}
-      />
-      <CloseProgramContainer
-        open={closeProgramOpen}
-        onClose={() => setCloseProgramOpen(false)}
-        onApply={applyClose}
-        id={details.id}
-      />
-      <ChangePasswordTradingAccountPopup
-        programName={details.title}
-        open={changePasswordOpen}
-        id={details.id}
-        onClose={() => setChangePasswordOpen(false)}
-      />
+      {details && (
+        <>
+          <ClosePeriodContainer
+            open={closePeriodOpen}
+            onClose={() => setClosePeriodOpen(false)}
+            onApply={applyChanges}
+            id={details.id}
+          />
+          <CloseProgramContainer
+            open={closeProgramOpen}
+            onClose={() => setCloseProgramOpen(false)}
+            onApply={applyClose}
+            id={details.id}
+          />
+          <ChangePasswordTradingAccountPopup
+            programName={details.title!}
+            open={changePasswordOpen}
+            id={details.id}
+            onClose={() => setChangePasswordOpen(false)}
+          />
+        </>
+      )}
     </Page>
   );
 };
