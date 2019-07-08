@@ -37,43 +37,47 @@ const _ProgramEdit: React.FC<Props> = ({
           defaultImage={ProgramDefaultImage}
         />
       </div>
-      <div className="program-edit__block-wrapper">
-        <h3>{t("manager.program-settings.name.title")}</h3>
-        <GVFormikField
-          type="text"
-          name={FIELDS.title}
-          label={t("manager.create-program-page.settings.fields.name")}
-          autoComplete="off"
-          component={GVTextField}
-        />
-        <div className="create-program-settings__item-caption">
-          {t("manager.create-program-page.settings.fields.name-requirements")}
+      <div className="program-edit__block-wrapper create-program-settings__row">
+        <div className="create-program-settings__item">
+          <h3>{t("manager.program-settings.name.title")}</h3>
+          <GVFormikField
+            type="text"
+            name={FIELDS.title}
+            label={t("manager.create-program-page.settings.fields.name")}
+            autoComplete="off"
+            component={GVTextField}
+          />
+          <div className="create-program-settings__item-caption">
+            {t("manager.create-program-page.settings.fields.name-requirements")}
+          </div>
         </div>
       </div>
-      <div className="program-edit__block-wrapper">
-        <h3>{t("manager.program-settings.strategy.title")}</h3>
-        <GVFormikField
-          type="textarea"
-          name={FIELDS.description}
-          label={t("manager.create-program-page.settings.fields.description")}
-          component={GVTextField}
-        />
-        <div className="create-program-settings__item-caption create-program-settings__description">
-          <span className="create-program-settings__description-requirements">
-            {t(
-              "manager.create-program-page.settings.fields.description-requirements"
-            )}
-          </span>
-          {descriptionTrimmedLength > 0 && (
-            <span className="create-program-settings__description-chars">
-              {descriptionTrimmedLength}
-              <GVProgramPeriod
-                start={0}
-                end={500}
-                value={descriptionTrimmedLength}
-              />
+      <div className="program-edit__block-wrapper create-program-settings__row">
+        <div className="create-program-settings__item create-program-settings__item--wider">
+          <h3>{t("manager.program-settings.strategy.title")}</h3>
+          <GVFormikField
+            type="textarea"
+            name={FIELDS.description}
+            label={t("manager.create-program-page.settings.fields.description")}
+            component={GVTextField}
+          />
+          <div className="create-program-settings__item-caption create-program-settings__description">
+            <span className="create-program-settings__description-requirements">
+              {t(
+                "manager.create-program-page.settings.fields.description-requirements"
+              )}
             </span>
-          )}
+            {descriptionTrimmedLength > 0 && (
+              <span className="create-program-settings__description-chars">
+                {descriptionTrimmedLength}
+                <GVProgramPeriod
+                  start={0}
+                  end={500}
+                  value={descriptionTrimmedLength}
+                />
+              </span>
+            )}
+          </div>
         </div>
       </div>
       <GVButton

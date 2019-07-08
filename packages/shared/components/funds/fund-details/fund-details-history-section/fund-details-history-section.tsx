@@ -12,7 +12,10 @@ import { HistoryCountsType } from "shared/components/programs/program-details/pr
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  SelectFilterValue
+} from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import useTab from "shared/hooks/tab.hook";
@@ -22,6 +25,7 @@ import {
 } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
+import FundReallocateHistory from "./fund-reallocate-history/fund-reallocate-history";
 import FundStructure from "./fund-structure/fund-structure";
 
 const EVENTS_FILTERING = {
@@ -70,6 +74,11 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
               count={eventsCount}
               visible={isAuthenticated && isInvested}
             />
+            <GVTab
+              value={TABS.REALLOCATE_HISTORY}
+              label={t("fund-details-page.history.tabs.reallocate-history")}
+              count={reallocateCount}
+            />
           </GVTabs>
         </div>
       </div>
@@ -85,6 +94,12 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
             eventTypeFilterValues={eventTypeFilterValues}
           />
         )}
+        {tab === TABS.REALLOCATE_HISTORY && (
+          <FundReallocateHistory
+            id={id}
+            fetchFundReallocateHistory={fetchFundReallocateHistory}
+          />
+        )}
       </div>
     </Surface>
   );
@@ -98,7 +113,8 @@ interface StateProps extends AuthState {}
 
 enum TABS {
   EVENTS = "events",
-  STRUCTURE = "structure"
+  STRUCTURE = "structure",
+  REALLOCATE_HISTORY = "reallocate history"
 }
 
 interface Props extends StateProps, InjectedTranslateProps, OwnProps {}
@@ -106,6 +122,10 @@ interface Props extends StateProps, InjectedTranslateProps, OwnProps {}
 interface OwnProps {
   id: string;
   fetchFundStructure(fundId: string): Promise<FundAssetsListInfo>;
+  fetchFundReallocateHistory(
+    fundId: string,
+    filters?: FilteringType
+  ): Promise<ReallocationsViewModel>;
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
   fetchPortfolioEvents: GetItemsFuncType;
   eventTypeFilterValues: SelectFilterValue<string>[];
