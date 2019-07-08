@@ -1,6 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import { FundAssetsListInfo } from "gv-api-web";
+import { FundAssetsListInfo, ReallocationsViewModel } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -37,6 +37,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
   t,
   id,
   fetchFundStructure,
+  fetchFundReallocateHistory,
   isAuthenticated,
   isInvested,
   fetchPortfolioEvents,
@@ -44,15 +45,14 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
   fetchHistoryCounts
 }) => {
   const { tab, setTab } = useTab<TABS>(TABS.STRUCTURE);
-  const [eventsCount, setEventsCount] = useState(0);
+  const [counts, setCounts] = useState<HistoryCountsType>({});
   useEffect(
     () => {
-      fetchHistoryCounts(id)
-        .then(({ eventsCount }) => eventsCount)
-        .then(setEventsCount);
+      fetchHistoryCounts(id).then(setCounts);
     },
     [id]
   );
+  const { eventsCount, reallocateCount } = counts;
   return (
     <Surface className="details-history">
       <div className="details-history__header">
