@@ -19,6 +19,13 @@ $remove-button-color: #293842;
   @include media-breakpoint-landscape-phone() {
     align-items: center;
   }
+
+  &__container {
+    padding: $padding-xsmall;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 350px;
+  }
 }
 
 .fund-asset {

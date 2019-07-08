@@ -13,6 +13,7 @@ import FundDetailsHistorySection from "./fund-details-history-section/fund-detai
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
 import { IDescriptionSection } from "./fund-details.types";
 import {
+  fetchFundReallocateHistory,
   fetchFundStructure,
   getFundStatistic
 } from "./services/fund-details.service";
@@ -74,6 +75,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
             <FundDetailsHistorySection
               id={description.id}
               fetchFundStructure={fetchFundStructure}
+              fetchFundReallocateHistory={fetchFundReallocateHistory}
               fetchPortfolioEvents={fetchHistoryPortfolioEvents}
               fetchHistoryCounts={historySection.fetchHistoryCounts}
               eventTypeFilterValues={historySection.eventTypeFilterValues}
