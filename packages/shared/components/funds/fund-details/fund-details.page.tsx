@@ -24,7 +24,7 @@ import {
   FundDetailsStatistic
 } from "./services/fund-details.types";
 
-class FundDetailsPage extends React.PureComponent<Props, State> {
+class _FundDetailsPage extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -144,9 +144,10 @@ interface State {
   statistic?: FundDetailsStatistic;
 }
 
-export default compose<React.ComponentType<OwnProps>>(
+const FundDetailsPage = compose<React.ComponentType<OwnProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(FundDetailsPage);
+)(_FundDetailsPage);
+export default FundDetailsPage;
