@@ -3,10 +3,7 @@ import {
   OrderSignalModel,
   OrderSignalProgramInfo
 } from "gv-api-web";
-import {
-  DECIMAL_SCALE,
-  TRADES_HISTORY_PROVIDERS_COLUMNS
-} from "modules/copytrading-tables/components/copytrading-tables.constants";
+import { TRADES_HISTORY_PROVIDERS_COLUMNS } from "modules/copytrading-tables/components/copytrading-tables.constants";
 import moment from "moment";
 import * as React from "react";
 import { useState } from "react";
@@ -20,10 +17,11 @@ import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
-import ProvidersPopup from "./providers-popup";
+import ProvidersPopup from "./providers-popup/providers-popup";
 import TradeHistorySubRow from "./trade-history-sub-row";
 import TradesHistoryFeesTooltip from "./trades-history-fees-tooltip";
 
@@ -93,25 +91,25 @@ const _TradesHistoryRow: React.FC<Props> = ({ trade, title }) => {
         </TableCell>
         <TableCell className="details-trades__cell program-details-trades__cell--volume">
           <NumberFormat
-            value={formatValue(trade.volume, DECIMAL_SCALE / 2)}
+            value={formatValue(trade.volume, DEFAULT_DECIMAL_SCALE / 2)}
             displayType="text"
             thousandSeparator=" "
           />
         </TableCell>
         <TableCell className="details-trades__cell program-details-trades__cell--price">
           <NumberFormat
-            value={formatValue(trade.price, DECIMAL_SCALE)}
+            value={formatValue(trade.price, DEFAULT_DECIMAL_SCALE)}
             displayType="text"
             thousandSeparator=" "
           />
         </TableCell>
         <TableCell className="details-trades__cell program-details-trades__cell--profit">
           <Profitability
-            value={formatValue(trade.profit, DECIMAL_SCALE)}
+            value={formatValue(trade.profit, DEFAULT_DECIMAL_SCALE)}
             prefix={PROFITABILITY_PREFIX.SIGN}
           >
             <NumberFormat
-              value={formatValue(trade.profit, DECIMAL_SCALE)}
+              value={formatValue(trade.profit, DEFAULT_DECIMAL_SCALE)}
               thousandSeparator=" "
               allowNegative={false}
               displayType="text"
@@ -120,7 +118,11 @@ const _TradesHistoryRow: React.FC<Props> = ({ trade, title }) => {
           </Profitability>
         </TableCell>
         <TableCell className="details-trades__cell program-details-trades__cell--date">
-          <TradesHistoryFeesTooltip trade={trade} />
+          <TradesHistoryFeesTooltip trade={trade}>
+            <span>
+              {formatValue(trade.totalCommission, DEFAULT_DECIMAL_SCALE)}
+            </span>
+          </TradesHistoryFeesTooltip>
         </TableCell>
       </TableRow>
       <ProvidersPopup

@@ -3,17 +3,28 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_constants.scss";
 
+.dialog-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .dialog {
   position: relative;
   background-color: $secondary-background-color;
   z-index: 1300;
-  width: 100%;
   margin: 2rem auto;
-  overflow: hidden;
-
+  overflow-x: hidden;
+  overflow-y: auto;
   @include media-breakpoint-landscape-phone() {
     max-width: 360px;
     border-radius: 8px;
+  }
+
+  &--top {
+    align-self: flex-start;
   }
 
   &__content {
@@ -85,10 +96,10 @@
 
   &__top {
     max-width: 360px;
-    padding: 50px $padding-small $padding-medium;
+    padding: $padding-upper-medium $padding-small $padding-medium;
 
     &:last-child {
-      padding-bottom: 50px;
+      padding-bottom: $padding-upper-medium;
     }
 
     .statistics-item:last-child {
@@ -110,7 +121,7 @@
 
   &__bottom {
     background-color: rgba(255, 255, 255, 0.02);
-    padding: $padding-small $padding-small 50px;
+    padding: $padding-small $padding-small $padding-upper-medium;
 
     .gv-text-field__wrapper:first-child {
       margin-top: 0;

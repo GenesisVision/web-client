@@ -5,23 +5,25 @@ import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
+import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import Copy from "shared/decorators/with-copy";
 import ArrowIcon from "shared/media/arrow-up-thin.svg";
-import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
+import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details-dialog";
 import filesService from "shared/services/file-service";
 import { formatValue } from "shared/utils/formatter";
 
-import { TRANSACTIONS_DECIMAL_SCALE } from "./transactions.constants";
+import TransactionDetails from "./transaction-details";
 
-const ExternalWithdrawal: React.FC<TransactionDetailsProps> = props => {
-  const { data, t, handleCancel, handleResend } = props;
-  return (
-    <React.Fragment>
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{t(`transactions-details.title`)}</h2>
-          <p>{t(`transactions-details.withdrawal.title`)}</p>
-        </div>
+const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
+  data,
+  t,
+  handleCancel,
+  handleResend
+}) => (
+  <TransactionDetails
+    header={t(`transactions-details.withdrawal.title`)}
+    body={
+      <>
         <StatisticItem label={t(`transactions-details.external.from-wallet`)}>
           <div className="external-transaction">
             <div className="external-transaction__icon">
@@ -40,14 +42,16 @@ const ExternalWithdrawal: React.FC<TransactionDetailsProps> = props => {
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.external.amount`)} big>
           <NumberFormat
-            value={formatValue(data.amount, TRANSACTIONS_DECIMAL_SCALE)}
+            value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
             suffix={` ${data.currency}`}
             allowNegative={true}
             displayType="text"
           />
         </StatisticItem>
-      </div>
-      <div className="dialog__bottom">
+      </>
+    }
+    bottom={
+      <>
         <StatisticItem label={t(`transactions-details.external.to`)}>
           <div className="external-transaction">
             <div className="external-transaction__icon">
@@ -92,9 +96,9 @@ const ExternalWithdrawal: React.FC<TransactionDetailsProps> = props => {
             />
           </div>
         )}
-      </div>
-    </React.Fragment>
-  );
-};
+      </>
+    }
+  />
+);
 
 export default ExternalWithdrawal;

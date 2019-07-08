@@ -12,6 +12,7 @@ import ProgramDetailsDescriptionSection from "shared/components/programs/program
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
   fetchOpenPositions,
+  fetchPeriodHistory,
   fetchProgramTrades,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
@@ -23,6 +24,7 @@ import { STATUS } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { GM_NAME } from "./program-details.constants";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
 
@@ -93,6 +95,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               showTickets={description.brokerDetails.showTickets}
               isSignalProgram={description.isSignalProgram}
               fetchOpenPositions={fetchOpenPositions}
+              fetchPeriodHistory={fetchPeriodHistory}
               fetchTrades={fetchProgramTrades}
               fetchPortfolioEvents={fetchHistoryPortfolioEvents}
               fetchHistoryCounts={historySection.fetchHistoryCounts}
@@ -101,6 +104,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               currency={currency}
               isInvested={isInvested}
               eventTypeFilterValues={historySection.eventTypeFilterValues}
+              isGMProgram={description.brokerDetails.name === GM_NAME}
             />
           </div>
         </div>

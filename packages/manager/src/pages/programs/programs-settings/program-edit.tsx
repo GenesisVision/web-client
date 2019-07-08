@@ -1,5 +1,8 @@
 import { FormikProps, withFormik } from "formik";
-import { assetDescriptionShape } from "pages/create-program/components/create-program-settings/create-program-settings.validators";
+import {
+  assetDescriptionShape,
+  assetTitleShape
+} from "pages/create-program/components/create-program-settings/create-program-settings.validators";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
@@ -34,24 +37,48 @@ const _ProgramEdit: React.FC<Props> = ({
           defaultImage={ProgramDefaultImage}
         />
       </div>
-      <div className="program-edit__block-wrapper">
-        <h3>{t("manager.program-settings.strategy.title")}</h3>
-        <GVFormikField
-          type="textarea"
-          name={FIELDS.description}
-          label={t("manager.create-program-page.settings.fields.description")}
-          component={GVTextField}
-        />
-        {descriptionTrimmedLength > 0 && (
-          <span className="create-program-settings__description-chars">
-            {descriptionTrimmedLength}
-            <GVProgramPeriod
-              start={0}
-              end={500}
-              value={descriptionTrimmedLength}
-            />
-          </span>
-        )}
+      <div className="program-edit__block-wrapper create-program-settings__row">
+        <div className="create-program-settings__item">
+          <h3>{t("manager.program-settings.name.title")}</h3>
+          <GVFormikField
+            type="text"
+            name={FIELDS.title}
+            label={t("manager.create-program-page.settings.fields.name")}
+            autoComplete="off"
+            component={GVTextField}
+          />
+          <div className="create-program-settings__item-caption">
+            {t("manager.create-program-page.settings.fields.name-requirements")}
+          </div>
+        </div>
+      </div>
+      <div className="program-edit__block-wrapper create-program-settings__row">
+        <div className="create-program-settings__item create-program-settings__item--wider">
+          <h3>{t("manager.program-settings.strategy.title")}</h3>
+          <GVFormikField
+            type="textarea"
+            name={FIELDS.description}
+            label={t("manager.create-program-page.settings.fields.description")}
+            component={GVTextField}
+          />
+          <div className="create-program-settings__item-caption create-program-settings__description">
+            <span className="create-program-settings__description-requirements">
+              {t(
+                "manager.create-program-page.settings.fields.description-requirements"
+              )}
+            </span>
+            {descriptionTrimmedLength > 0 && (
+              <span className="create-program-settings__description-chars">
+                {descriptionTrimmedLength}
+                <GVProgramPeriod
+                  start={0}
+                  end={500}
+                  value={descriptionTrimmedLength}
+                />
+              </span>
+            )}
+          </div>
+        </div>
       </div>
       <GVButton
         color="primary"
@@ -66,11 +93,13 @@ const _ProgramEdit: React.FC<Props> = ({
 };
 
 enum FIELDS {
+  title = "title",
   logo = "logo",
   description = "description"
 }
 
 export interface ProgramEditFormValues {
+  [FIELDS.title]: string;
   [FIELDS.description]: string;
   [FIELDS.logo]: IImageValue;
 }
@@ -82,6 +111,7 @@ interface Props
 
 interface OwnProps {
   logo: IImageValue;
+  title: string;
   description: string;
   onSubmit: (
     values: ProgramEditFormValues,
@@ -96,6 +126,7 @@ const ProgramEdit = compose<React.ComponentType<OwnProps>>(
     displayName: "edit-form",
     mapPropsToValues: props => {
       return {
+        [FIELDS.title]: props.title,
         [FIELDS.description]: props.description,
         [FIELDS.logo]: {
           src: props.logo.src
@@ -104,6 +135,7 @@ const ProgramEdit = compose<React.ComponentType<OwnProps>>(
     },
     validationSchema: (props: Props) =>
       object().shape({
+        [FIELDS.title]: assetTitleShape(props.t),
         [FIELDS.description]: assetDescriptionShape(props.t),
         [FIELDS.logo]: inputImageShape(props.t)
       }),

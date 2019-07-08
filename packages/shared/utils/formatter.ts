@@ -1,3 +1,5 @@
+import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
+
 import { CURRENCY_FRACTIONS, checkCurrencyValue } from "./currency-converter";
 
 const reverseString = (value: string | number): string =>
@@ -78,7 +80,10 @@ const formatValueDifferentDecimalScale = (
   return formatValue(value, decimalScaleBigValue);
 };
 
-const formatValueWithMin = (value: any, decimalScale: number = 8): string =>
+const formatValueWithMin = (
+  value: any,
+  decimalScale: number = DEFAULT_DECIMAL_SCALE
+): string =>
   Math.abs(value) < 1 / 10 ** decimalScale
     ? `<0.${"0".repeat(decimalScale - 1)}1`
     : formatValue(value, decimalScale);

@@ -1,57 +1,51 @@
 import "./tooltip.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import * as React from "react";
+import { useCallback } from "react";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
+import useAnchor from "shared/hooks/anchor.hook";
 
-class Tooltip extends React.PureComponent<Props, State> {
-  state = { anchor: undefined };
-
-  handleMouseEnter = (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ): void => {
-    if (!this.props.disable) this.setState({ anchor: event.currentTarget });
-  };
-
-  handleMouseLeave = (): void => {
-    this.setState({ anchor: undefined });
-  };
-
-  render() {
-    const child = React.Children.only(this.props.children);
-    const {
-      render,
-      vertical = VERTICAL_POPOVER_POS.TOP,
-      horizontal = HORIZONTAL_POPOVER_POS.CENTER,
-      className
-    } = this.props;
-    const { anchor } = this.state;
-    return (
-      <>
-        <child.type
-          {...child.props}
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
-          onTouchStart={this.handleMouseEnter}
-          onTouchEnd={this.handleMouseLeave}
-        />
-        <Popover
-          noAbsolute
-          noPadding
-          anchorEl={anchor}
-          className={classnames("tooltip__popover", className)}
-          vertical={vertical}
-          horizontal={horizontal}
-        >
-          {render()}
-        </Popover>
-      </>
-    );
-  }
-}
+const _Tooltip: React.FC<Props> = ({
+  render,
+  vertical = VERTICAL_POPOVER_POS.TOP,
+  horizontal = HORIZONTAL_POPOVER_POS.CENTER,
+  className,
+  children,
+  disable
+}) => {
+  const { anchor, setAnchor, clearAnchor } = useAnchor();
+  const handleMouseEnter = useCallback(
+    (event: React.MouseEvent<HTMLElement, MouseEvent>) =>
+      !disable && setAnchor(event),
+    [disable]
+  );
+  const child = React.Children.only(children);
+  return (
+    <>
+      <child.type
+        {...child.props}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={clearAnchor}
+        onTouchStart={handleMouseEnter}
+        onTouchEnd={clearAnchor}
+      />
+      <Popover
+        noAbsolute
+        noPadding
+        anchorEl={anchor}
+        className={classNames("tooltip__popover", className)}
+        vertical={vertical}
+        horizontal={horizontal}
+      >
+        {render()}
+      </Popover>
+    </>
+  );
+};
 
 interface Props {
   render: Function;
@@ -60,8 +54,6 @@ interface Props {
   vertical?: VERTICAL_POPOVER_POS;
   className?: string;
 }
-interface State {
-  anchor?: EventTarget;
-}
 
+const Tooltip = React.memo(_Tooltip);
 export default Tooltip;

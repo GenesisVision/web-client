@@ -3,75 +3,75 @@ import "shared/components/details/details-description-section/details-statistic-
 import { ProgramBalanceChart } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { compose } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import withLoader from "shared/decorators/with-loader";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import useTab from "shared/hooks/tab.hook";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
 import { ProgramDetailsProfitChart } from "../../services/program-details.types";
 import ProgramBalanceChartSection from "./program-balance-chart-section/program-balance-chart-section";
 import ProgramProfitChartSection from "./program-profit-chart-section/program-profit-chart-section";
 
-class _DetailsChartElements extends React.PureComponent<Props, State> {
-  state = {
-    tab: TABS.PROFIT
-  };
+const _DetailsChartElements: React.FC<Props> = ({
+  t,
+  profitChart,
+  balanceChart,
+  period,
+  onPeriodChange
+}) => {
+  const { tab, setTab } = useTab<TABS>(TABS.PROFIT);
+  return (
+    <>
+      <GVTabs value={tab} onChange={setTab}>
+        <GVTab
+          value={TABS.PROFIT}
+          label={t("program-details-page.chart.tabs.profit")}
+        />
+        <GVTab
+          value={TABS.EQUITY}
+          label={t("program-details-page.chart.tabs.equity")}
+        />
+      </GVTabs>
+      {tab === TABS.PROFIT && (
+        <ProgramProfitChartSection
+          profitChart={profitChart}
+          period={period}
+          onPeriodChange={onPeriodChange}
+        />
+      )}
+      {tab === TABS.EQUITY && (
+        <ProgramBalanceChartSection
+          balanceChart={balanceChart}
+          period={period}
+          onPeriodChange={onPeriodChange}
+        />
+      )}
+    </>
+  );
+};
 
-  handleTabChange = (e: React.SyntheticEvent<EventTarget>, tab: string) =>
-    this.setState({ tab: tab as TABS });
-
-  render() {
-    const { t, profitChart, balanceChart, period, onPeriodChange } = this.props;
-    const { tab } = this.state;
-    return (
-      <>
-        <GVTabs value={tab} onChange={this.handleTabChange}>
-          <GVTab
-            value={TABS.PROFIT}
-            label={t("program-details-page.chart.tabs.profit")}
-          />
-          <GVTab
-            value={TABS.EQUITY}
-            label={t("program-details-page.chart.tabs.equity")}
-          />
-        </GVTabs>
-        {tab === TABS.PROFIT && (
-          <ProgramProfitChartSection
-            profitChart={profitChart}
-            period={period}
-            onPeriodChange={onPeriodChange}
-          />
-        )}
-        {tab === TABS.EQUITY && (
-          <ProgramBalanceChartSection
-            balanceChart={balanceChart}
-            period={period}
-            onPeriodChange={onPeriodChange}
-          />
-        )}
-      </>
-    );
-  }
-}
-
-interface Props extends InjectedTranslateProps {
+interface OwnProps {
   profitChart: ProgramDetailsProfitChart;
   balanceChart: ProgramBalanceChart;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
 }
 
+interface Props extends InjectedTranslateProps, OwnProps {}
+
 enum TABS {
   PROFIT = "profit",
   EQUITY = "equity"
 }
 
-interface State {
-  tab: TABS;
-}
-
-const ProgramDetailsChartElements = withLoader(
-  translate()(_DetailsChartElements)
-);
+const ProgramDetailsChartElements = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
+  translate(),
+  React.memo
+)(_DetailsChartElements);
 export default ProgramDetailsChartElements;

@@ -689,10 +689,12 @@
       "start-day": "Start day",
       "period-end": "Period end",
       "period": "Period",
+      "trading-volume": "Trading Volume",
       "tooltip": {
         "profit": "Profit",
         "investors-funds": "Investors Funds",
-        "managers-funds": "Managers Funds"
+        "managers-funds": "Managers Funds",
+        "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
       }
     },
     "tooltip": {
@@ -729,7 +731,9 @@
         "trades": "Trades",
         "events": "Events",
         "open-positions": "Open positions",
-        "subscriptions": "Subscribers"
+        "subscriptions": "Subscriptions",
+        "financial-statistic": "Financial statistic",
+        "period-history": "Period History"
       },
       "trades": {
         "download": "Export",
@@ -765,6 +769,23 @@
         "unsubscriptionDate": "Unsubscription date",
         "commission": "Commission",
         "status": "Status"
+      },
+      "financial-statistic": {
+        "period": "Period",
+        "balance": "Balance",
+        "profit": "Profit",
+        "success-fee": "Success fee",
+        "entry-fee": "Entry fee",
+        "deposit-withdraw": "Deposit/Withdraw",
+        "commission-rebate": "GV commission rebate"
+      },
+      "period-history": {
+        "period": "Period",
+        "date-start": "Date start",
+        "date-finish": "Date finish",
+        "balance": "Program balance",
+        "profit": "Profit",
+        "investors": "Investors"
       }
     },
     "chart": {
@@ -1508,6 +1529,9 @@
       },
       "strategy": {
         "title": "Strategy"
+      },
+      "name": {
+        "title": "Title"
       },
       "avatar": {
         "title": "Avatar"
