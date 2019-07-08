@@ -14,13 +14,9 @@ const OpenCloseTransaction: React.FC<TransactionDetailsProps> = ({
   t
 }) => (
   <TransactionDetails
-    header={
-      <p>
-        {t(
-          `transactions-details.${data.type}.${data.programDetails.programType}`
-        )}
-      </p>
-    }
+    header={t(
+      `transactions-details.${data.type}.${data.programDetails.programType}`
+    )}
     body={
       <StatisticItem
         label={t(`transactions-details.${data.programDetails.programType}`)}

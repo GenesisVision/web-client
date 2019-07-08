@@ -1,6 +1,7 @@
 import "./dashboard-chart-assets.scss";
 
 import { ManagerAssets } from "gv-api-web";
+import { useCallback } from "react";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
@@ -17,88 +18,83 @@ import Popover, {
 } from "shared/components/popover/popover";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import useAnchor, { anchorNullValue } from "shared/hooks/anchor.hook";
 
 import { getAssetChart } from "../../../services/dashboard.service";
 import DashboardChartAsset from "./dashboard-chart-asset";
 
-class _DashboardChartAssetsContainer extends React.PureComponent<Props, State> {
-  state = {
-    anchor: undefined
-  };
-
-  handleOpenDropdown = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
-    this.setState({ anchor: event.currentTarget });
-  handleCloseDropdown = () => this.setState({ anchor: undefined });
-  handleSelectAsset = (id: string, title: string, type: ASSETS_TYPES) => {
-    this.props.service.getAssetChart(id, title, type);
-    this.handleCloseDropdown();
-  };
-
-  render() {
-    const { t, assets } = this.props;
-    const { programs, funds } = assets;
-    const hasPrograms = programs.length > 0;
-    const hasFunds = funds.length > 0;
-
-    return (
-      <div className="dashboard-chart-assets">
-        <div className="dashboard-chart-assets__title">
-          {t("manager.dashboard-page.chart-section.my-assets")}{" "}
-          <ActionsCircleIcon
-            className="dashboard-chart-assets__icon"
-            primary={this.state.anchor !== null}
-            onClick={this.handleOpenDropdown}
-          />
-        </div>
-        <Popover
-          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-          vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          anchorEl={this.state.anchor}
-          noPadding
-          onClose={this.handleCloseDropdown}
-        >
-          <div className="dashboard-chart-assets-popover">
-            {hasPrograms && (
-              <div className="dashboard-chart-assets-popover__header">
-                {t("manager.dashboard-page.chart-section.programs")}
-              </div>
-            )}
-            {programs.map(x => (
-              <DashboardChartAsset
-                key={x.id}
-                chartAsset={x}
-                type={ASSETS_TYPES.Program}
-                selectAsset={this.handleSelectAsset}
-              />
-            ))}
-            {hasFunds && (
-              <div className="dashboard-chart-assets-popover__header">
-                {t("manager.dashboard-page.chart-section.funds")}
-              </div>
-            )}
-            {funds.map(x => (
-              <DashboardChartAsset
-                key={x.id}
-                chartAsset={x}
-                type={ASSETS_TYPES.Fund}
-                selectAsset={this.handleSelectAsset}
-              />
-            ))}
-          </div>
-        </Popover>
+const _DashboardChartAssetsContainer: React.FC<Props> = ({
+  t,
+  assets,
+  service
+}) => {
+  const { anchor, setAnchor, clearAnchor } = useAnchor();
+  const handleSelectAsset = useCallback(
+    (id: string, title: string, type: ASSETS_TYPES) => {
+      service.getAssetChart(id, title, type);
+      clearAnchor();
+    },
+    []
+  );
+  const { programs, funds } = assets;
+  const hasPrograms = programs.length > 0;
+  const hasFunds = funds.length > 0;
+  return (
+    <div className="dashboard-chart-assets">
+      <div className="dashboard-chart-assets__title">
+        {t("manager.dashboard-page.chart-section.my-assets")}{" "}
+        <ActionsCircleIcon
+          className="dashboard-chart-assets__icon"
+          primary={anchor !== anchorNullValue}
+          onClick={setAnchor}
+        />
       </div>
-    );
-  }
-}
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
-  return {
-    service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-      { getAssetChart },
-      dispatch
-    )
-  };
+      <Popover
+        horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+        vertical={VERTICAL_POPOVER_POS.BOTTOM}
+        anchorEl={anchor}
+        noPadding
+        onClose={clearAnchor}
+      >
+        <div className="dashboard-chart-assets-popover">
+          {hasPrograms && (
+            <div className="dashboard-chart-assets-popover__header">
+              {t("manager.dashboard-page.chart-section.programs")}
+            </div>
+          )}
+          {programs.map(x => (
+            <DashboardChartAsset
+              key={x.id}
+              chartAsset={x}
+              type={ASSETS_TYPES.Program}
+              selectAsset={handleSelectAsset}
+            />
+          ))}
+          {hasFunds && (
+            <div className="dashboard-chart-assets-popover__header">
+              {t("manager.dashboard-page.chart-section.funds")}
+            </div>
+          )}
+          {funds.map(x => (
+            <DashboardChartAsset
+              key={x.id}
+              chartAsset={x}
+              type={ASSETS_TYPES.Fund}
+              selectAsset={handleSelectAsset}
+            />
+          ))}
+        </div>
+      </Popover>
+    </div>
+  );
 };
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { getAssetChart },
+    dispatch
+  )
+});
 
 interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
 
@@ -113,10 +109,6 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface State {
-  anchor?: EventTarget;
-}
-
 const DashboardChartAssetsContainer = compose<
   React.ComponentType<OwnProps & WithLoaderProps>
 >(
@@ -125,6 +117,7 @@ const DashboardChartAssetsContainer = compose<
   connect(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_DashboardChartAssetsContainer);
 export default DashboardChartAssetsContainer;

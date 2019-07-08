@@ -14,13 +14,9 @@ const WithdrawalTransaction: React.FC<TransactionDetailsProps> = ({
   t
 }) => (
   <TransactionDetails
-    header={
-      <p>
-        {t(
-          `transactions-details.withdrawal.${data.programDetails.programType}`
-        )}
-      </p>
-    }
+    header={t(
+      `transactions-details.withdrawal.${data.programDetails.programType}`
+    )}
     body={
       <StatisticItem
         label={t(

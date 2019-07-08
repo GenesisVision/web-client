@@ -21,7 +21,7 @@ const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
   handleResend
 }) => (
   <TransactionDetails
-    header={<p>{t(`transactions-details.withdrawal.title`)}</p>}
+    header={t(`transactions-details.withdrawal.title`)}
     body={
       <>
         <StatisticItem label={t(`transactions-details.external.from-wallet`)}>

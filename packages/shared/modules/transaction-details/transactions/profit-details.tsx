@@ -6,11 +6,12 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details-dialog";
 import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
 import { formatValue } from "shared/utils/formatter";
+
 import TransactionDetails from "./transaction-details";
 
 const ProfitDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
   <TransactionDetails
-    header={<p>{t(`transactions-details.profit`)}</p>}
+    header={t(`transactions-details.profit`)}
     body={
       <StatisticItem label={`${data.programDetails.programType}`}>
         <TransactionAsset

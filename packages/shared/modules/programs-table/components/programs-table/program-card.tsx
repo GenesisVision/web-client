@@ -1,5 +1,6 @@
 import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
+import { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -22,6 +23,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
+import useAnchor from "shared/hooks/anchor.hook";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
@@ -32,7 +34,7 @@ import {
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
 
-interface IProgramCardProps {
+interface Props extends InjectedTranslateProps {
   program: ProgramDetails;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
@@ -41,224 +43,211 @@ interface IProgramCardProps {
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
-interface IProgramCardState {
-  anchor?: EventTarget;
-}
-
-class ProgramCard extends React.PureComponent<
-  IProgramCardProps & InjectedTranslateProps,
-  IProgramCardState
-> {
-  state = {
-    anchor: undefined
-  };
-  handleOpenDropdown = (
-    event: React.MouseEvent<HTMLInputElement, MouseEvent>
-  ) => this.setState({ anchor: event.currentTarget });
-  handleCloseDropdown = () => this.setState({ anchor: undefined });
-  render() {
-    const { t, program, toggleFavorite, title } = this.props;
-    const handleToggleFavorite = () => {
-      toggleFavorite(program.id, program.personalDetails.isFavorite);
-    };
-    return (
-      <div className="table-cards__card">
-        <div className="table-cards__row">
-          <div className="table-cards__avatar">
+const _ProgramCard: React.FC<Props> = ({
+  t,
+  program,
+  toggleFavorite,
+  title
+}) => {
+  const { anchor, setAnchor, clearAnchor } = useAnchor();
+  const handleToggleFavorite = useCallback(
+    () => toggleFavorite(program.id, program.personalDetails.isFavorite),
+    [program]
+  );
+  return (
+    <div className="table-cards__card">
+      <div className="table-cards__row">
+        <div className="table-cards__avatar">
+          <Link
+            to={{
+              pathname: composeProgramDetailsUrl(program.url),
+              state: `/ ${title}`
+            }}
+          >
+            <AssetAvatar
+              url={program.logo}
+              levelProgress={program.levelProgress}
+              level={program.level}
+              alt={program.title}
+              color={program.color}
+              size="medium"
+              tooltip={
+                <LevelTooltip
+                  level={program.level}
+                  canLevelUp={program.rating.canLevelUp}
+                />
+              }
+            />
+          </Link>
+        </div>
+        <div className="table-cards__main-info">
+          <div className="table-cards__title-wrapper">
             <Link
+              className="table-cards__title"
               to={{
                 pathname: composeProgramDetailsUrl(program.url),
                 state: `/ ${title}`
               }}
             >
-              <AssetAvatar
-                url={program.logo}
-                levelProgress={program.levelProgress}
-                level={program.level}
-                alt={program.title}
-                color={program.color}
-                size="medium"
-                tooltip={
-                  <LevelTooltip
-                    level={program.level}
-                    canLevelUp={program.rating.canLevelUp}
-                  />
-                }
-              />
+              {program.title}
+            </Link>
+            <Link
+              className="table-cards__name"
+              to={{
+                pathname: composeManagerDetailsUrl(program.manager.url),
+                state: `/ ${title}`
+              }}
+            >
+              {program.manager.username}
             </Link>
           </div>
-          <div className="table-cards__main-info">
-            <div className="table-cards__title-wrapper">
-              <Link
-                className="table-cards__title"
-                to={{
-                  pathname: composeProgramDetailsUrl(program.url),
-                  state: `/ ${title}`
-                }}
-              >
-                {program.title}
-              </Link>
-              <Link
-                className="table-cards__name"
-                to={{
-                  pathname: composeManagerDetailsUrl(program.manager.url),
-                  state: `/ ${title}`
-                }}
-              >
-                {program.manager.username}
-              </Link>
-            </div>
-            <div className="table-cards__actions">
-              <ActionsCircleIcon
-                primary={!!this.state.anchor}
-                onClick={this.handleOpenDropdown}
-              />
-              <Popover
-                horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-                vertical={VERTICAL_POPOVER_POS.BOTTOM}
-                anchorEl={this.state.anchor}
-                noPadding
-                onClose={this.handleCloseDropdown}
-              >
-                <div className="popover-list">
-                  <Link
-                    to={{
-                      pathname: composeProgramDetailsUrl(program.url),
-                      state: `/ ${title}`
-                    }}
+          <div className="table-cards__actions">
+            <ActionsCircleIcon primary={!!anchor} onClick={setAnchor} />
+            <Popover
+              horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+              vertical={VERTICAL_POPOVER_POS.BOTTOM}
+              anchorEl={anchor}
+              noPadding
+              onClose={clearAnchor}
+            >
+              <div className="popover-list">
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(program.url),
+                    state: `/ ${title}`
+                  }}
+                >
+                  <GVButton
+                    variant="text"
+                    color="secondary"
+                    onClick={clearAnchor}
                   >
+                    {t("program-actions.details")}
+                  </GVButton>
+                </Link>
+                {program.personalDetails &&
+                  !program.personalDetails.isFavorite && (
                     <GVButton
                       variant="text"
                       color="secondary"
-                      onClick={this.handleCloseDropdown}
+                      onClick={handleToggleFavorite}
                     >
-                      {t("program-actions.details")}
+                      {t("program-actions.add-to-favorites")}
                     </GVButton>
-                  </Link>
-                  {program.personalDetails &&
-                    !program.personalDetails.isFavorite && (
-                      <GVButton
-                        variant="text"
-                        color="secondary"
-                        onClick={handleToggleFavorite}
-                      >
-                        {t("program-actions.add-to-favorites")}
-                      </GVButton>
-                    )}
-                  {program.personalDetails &&
-                    program.personalDetails.isFavorite && (
-                      <GVButton
-                        variant="text"
-                        color="secondary"
-                        onClick={handleToggleFavorite}
-                      >
-                        {t("program-actions.remove-from-favorites")}
-                      </GVButton>
-                    )}
-                </div>
-              </Popover>
-            </div>
-            <TagProgramContainer tags={program.tags} />
-          </div>
-        </div>
-        <div className="table-cards__row">
-          <div className="table-cards__chart">
-            {program.chart && (
-              <ProgramSimpleChart data={program.chart} programId={program.id} />
-            )}
-          </div>
-          <div className="table-cards__chart-info">
-            <div className="table-cards__profit">
-              <Profitability
-                value={formatValue(program.statistic.profitPercent, 2)}
-                variant={PROFITABILITY_VARIANT.CHIPS}
-                prefix={PROFITABILITY_PREFIX.ARROW}
-              >
-                <NumberFormat
-                  value={formatValue(program.statistic.profitPercent, 2)}
-                  suffix="%"
-                  allowNegative={false}
-                  displayType="text"
-                />
-              </Profitability>
-            </div>
-          </div>
-        </div>
-        <div className="table-cards__table">
-          <div className="table-cards__table-column">
-            <StatisticItem label={t("programs-page.programs-header.equity")}>
-              <Tooltip
-                vertical={VERTICAL_POPOVER_POS.TOP}
-                render={() => (
-                  <div>
-                    {formatCurrencyValue(
-                      program.statistic.balanceGVT.amount,
-                      "GVT"
-                    )}{" "}
-                    {"GVT"}
-                  </div>
-                )}
-              >
-                <NumberFormat
-                  value={formatValueDifferentDecimalScale(
-                    program.statistic.balanceBase.amount,
-                    DECIMAL_SCALE_SMALL_VALUE,
-                    DECIMAL_SCALE_BIG_VALUE
                   )}
-                  suffix={` ${program.currency}`}
-                  displayType="text"
-                />
-              </Tooltip>
-            </StatisticItem>
-            <StatisticItem label={t("programs-page.programs-header.period")}>
-              <ProgramPeriodPie
-                start={program.periodStarts}
-                end={program.periodEnds}
-              />
-            </StatisticItem>
+                {program.personalDetails && program.personalDetails.isFavorite && (
+                  <GVButton
+                    variant="text"
+                    color="secondary"
+                    onClick={handleToggleFavorite}
+                  >
+                    {t("program-actions.remove-from-favorites")}
+                  </GVButton>
+                )}
+              </div>
+            </Popover>
           </div>
-          <div className="table-cards__table-column">
-            <StatisticItem label={t("programs-page.programs-header.investors")}>
-              <NumberFormat
-                value={program.statistic.investorsCount}
-                displayType="text"
-                decimalScale={0}
-              />
-            </StatisticItem>
-            <StatisticItem label={t("programs-page.programs-header.trades")}>
-              <NumberFormat
-                value={program.statistic.tradesCount}
-                displayType="text"
-                decimalScale={0}
-              />
-            </StatisticItem>
-          </div>
-          <div className="table-cards__table-column">
-            <StatisticItem
-              label={t("programs-page.programs-header.available-to-invest")}
+          <TagProgramContainer tags={program.tags} />
+        </div>
+      </div>
+      <div className="table-cards__row">
+        <div className="table-cards__chart">
+          {program.chart && (
+            <ProgramSimpleChart data={program.chart} programId={program.id} />
+          )}
+        </div>
+        <div className="table-cards__chart-info">
+          <div className="table-cards__profit">
+            <Profitability
+              value={formatValue(program.statistic.profitPercent, 2)}
+              variant={PROFITABILITY_VARIANT.CHIPS}
+              prefix={PROFITABILITY_PREFIX.ARROW}
             >
               <NumberFormat
-                value={formatValueDifferentDecimalScale(
-                  program.availableInvestmentBase,
-                  DECIMAL_SCALE_SMALL_VALUE,
-                  DECIMAL_SCALE_BIG_VALUE
-                )}
-                displayType="text"
-                suffix={` ${program.currency}`}
-              />
-            </StatisticItem>
-            <StatisticItem label={t("programs-page.programs-header.drawdown")}>
-              <NumberFormat
-                value={formatValue(program.statistic.drawdownPercent, 2)}
-                displayType="text"
+                value={formatValue(program.statistic.profitPercent, 2)}
                 suffix="%"
+                allowNegative={false}
+                displayType="text"
               />
-            </StatisticItem>
+            </Profitability>
           </div>
         </div>
       </div>
-    );
-  }
-}
+      <div className="table-cards__table">
+        <div className="table-cards__table-column">
+          <StatisticItem label={t("programs-page.programs-header.equity")}>
+            <Tooltip
+              vertical={VERTICAL_POPOVER_POS.TOP}
+              render={() => (
+                <div>
+                  {formatCurrencyValue(
+                    program.statistic.balanceGVT.amount,
+                    "GVT"
+                  )}{" "}
+                  {"GVT"}
+                </div>
+              )}
+            >
+              <NumberFormat
+                value={formatValueDifferentDecimalScale(
+                  program.statistic.balanceBase.amount,
+                  DECIMAL_SCALE_SMALL_VALUE,
+                  DECIMAL_SCALE_BIG_VALUE
+                )}
+                suffix={` ${program.currency}`}
+                displayType="text"
+              />
+            </Tooltip>
+          </StatisticItem>
+          <StatisticItem label={t("programs-page.programs-header.period")}>
+            <ProgramPeriodPie
+              start={program.periodStarts}
+              end={program.periodEnds}
+            />
+          </StatisticItem>
+        </div>
+        <div className="table-cards__table-column">
+          <StatisticItem label={t("programs-page.programs-header.investors")}>
+            <NumberFormat
+              value={program.statistic.investorsCount}
+              displayType="text"
+              decimalScale={0}
+            />
+          </StatisticItem>
+          <StatisticItem label={t("programs-page.programs-header.trades")}>
+            <NumberFormat
+              value={program.statistic.tradesCount}
+              displayType="text"
+              decimalScale={0}
+            />
+          </StatisticItem>
+        </div>
+        <div className="table-cards__table-column">
+          <StatisticItem
+            label={t("programs-page.programs-header.available-to-invest")}
+          >
+            <NumberFormat
+              value={formatValueDifferentDecimalScale(
+                program.availableInvestmentBase,
+                DECIMAL_SCALE_SMALL_VALUE,
+                DECIMAL_SCALE_BIG_VALUE
+              )}
+              displayType="text"
+              suffix={` ${program.currency}`}
+            />
+          </StatisticItem>
+          <StatisticItem label={t("programs-page.programs-header.drawdown")}>
+            <NumberFormat
+              value={formatValue(program.statistic.drawdownPercent, 2)}
+              displayType="text"
+              suffix="%"
+            />
+          </StatisticItem>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default translate()(ProgramCard);
+const ProgramCard = translate()(React.memo(_ProgramCard));
+export default ProgramCard;

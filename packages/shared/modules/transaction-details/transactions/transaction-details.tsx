@@ -7,7 +7,7 @@ const _TransactionDetails: React.FC<Props> = ({ header, body, bottom, t }) => (
     <div className="dialog__top">
       <div className="dialog__header">
         <h2>{t(`transactions-details.title`)}</h2>
-        {header}
+        <p>{header}</p>
       </div>
       {body}
     </div>
