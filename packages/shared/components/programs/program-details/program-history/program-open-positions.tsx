@@ -49,7 +49,7 @@ const _ProgramOpenPositions: React.FC<Props & WithTranslation> = ({
       )}
       renderBodyRow={position => {
         return (
-          <TableRow className="details-trades__row">
+          <TableRow stripy>
             <TableCell className="details-trades__cell program-details-trades__cell--date">
               {moment(position.date).format()}
             </TableCell>

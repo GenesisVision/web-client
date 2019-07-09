@@ -72,7 +72,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
           entryFee
         } = period.managerStatistic;
         return (
-          <TableRow>
+          <TableRow stripy>
             <TableCell>
               <ProgramPeriodPie start={period.dateFrom} end={period.dateTo} />
             </TableCell>

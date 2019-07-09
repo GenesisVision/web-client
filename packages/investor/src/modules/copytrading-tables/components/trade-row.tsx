@@ -43,7 +43,7 @@ const _TradeRow: React.FC<Props> = ({
   const hasOtherPrograms = otherPrograms.length > 1;
   return (
     <>
-      <TableRow className="details-trades__row">
+      <TableRow stripy>
         <TableCell className="details-trades__cell traders-avatar">
           <div className="dashboard-programs__cell--avatar-title">
             <Link

@@ -24,7 +24,13 @@ const renderDurationText = (t: i18next.TFunction, start: Date, end: Date) => {
   }
 };
 
-const _ProgramPeriodPie: React.FC<Props> = ({ start, end, className }) => {
+const _ProgramPeriodPie: React.FC<Props> = ({
+  t,
+  start,
+  end,
+  className,
+  numberPeriod
+}) => {
   const { t } = useTranslation();
   return (
     <Tooltip render={() => <ProgramPeriodTooltip end={end} />}>
@@ -38,6 +44,9 @@ const _ProgramPeriodPie: React.FC<Props> = ({ start, end, className }) => {
         <div className="program-period-pie__text">
           {renderDurationText(t, start, end)}
         </div>
+        {numberPeriod && (
+          <div className="program-period-pie__number">{numberPeriod}</div>
+        )}
       </div>
     </Tooltip>
   );
@@ -47,6 +56,7 @@ interface Props {
   start: Date;
   end: Date;
   className?: string;
+  numberPeriod?: number;
 }
 
 const ProgramPeriodPie = withLoader(React.memo(_ProgramPeriodPie));

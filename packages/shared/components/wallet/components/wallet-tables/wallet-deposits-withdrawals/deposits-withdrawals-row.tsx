@@ -28,10 +28,7 @@ const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
         onClose={setClosePopup}
         onAction={handleAction}
       />
-      <TableRow
-        className="wallet-deposits-withdrawals__row"
-        onClick={setOpenPopup}
-      >
+      <TableRow stripy onClick={setOpenPopup}>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
           {moment(transaction.date).format()}
         </TableCell>
