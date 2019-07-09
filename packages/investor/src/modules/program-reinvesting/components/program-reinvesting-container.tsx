@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import {
   IProgramDetailContext,
@@ -21,14 +21,17 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
   const [isReinvesting, setIs, setNotIs, setIsReinvestingValue] = useIsOpen(
     propIsReinvesting
   );
-  const onReinvestingLabelClick = (updateDetails: () => void) => () => {
-    setIsPending();
-    setIsReinvestingValue(!isReinvesting);
-    toggleReinvesting(programId, !isReinvesting)
-      .then(updateDetails)
-      .catch(() => setIsReinvestingValue(isReinvesting))
-      .then(setNotIsPending); // TODO change to finally
-  };
+  const onReinvestingLabelClick = useCallback(
+    (updateDetails: () => void) => () => {
+      setIsPending();
+      setIsReinvestingValue(!isReinvesting);
+      toggleReinvesting(programId, !isReinvesting)
+        .then(updateDetails)
+        .catch(() => setIsReinvestingValue(isReinvesting))
+        .then(setNotIsPending); // TODO change to finally
+    },
+    [programId]
+  );
   return (
     <ProgramDetailContext.Consumer>
       {({ updateDetails }: IProgramDetailContext) => (
