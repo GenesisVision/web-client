@@ -121,6 +121,72 @@ export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
   }
 ];
 
+export const PROGRAM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
+  {
+    name: "period"
+  },
+  {
+    name: "balance"
+  },
+  {
+    name: "profit"
+  },
+  {
+    name: "success-fee"
+  },
+  {
+    name: "entry-fee"
+  },
+  {
+    name: "deposit-withdraw"
+  }
+];
+
+export const PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
+  {
+    name: "period"
+  },
+  {
+    name: "balance"
+  },
+  {
+    name: "profit"
+  },
+  {
+    name: "success-fee"
+  },
+  {
+    name: "entry-fee"
+  },
+  {
+    name: "deposit-withdraw"
+  },
+  {
+    name: "commission-rebate"
+  }
+];
+
+export const PROGRAM_PERIOD_HISTORY: SortingColumn[] = [
+  {
+    name: "period"
+  },
+  {
+    name: "date-start"
+  },
+  {
+    name: "date-finish"
+  },
+  {
+    name: "balance"
+  },
+  {
+    name: "profit"
+  },
+  {
+    name: "investors"
+  }
+];
+
 export const PROGRAM_TRADES_DEFAULT_FILTERS = [
   {
     ...composeDefaultDateRangeFilter({
@@ -148,3 +214,5 @@ export const PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS = [
 export const PROGRAM_SUBSCRIBERS_FILTERS = {
   [SUBSCRIBERS_STATUS_TYPE]: ACTION_STATUS_FILTER_TYPES.ACTIVE
 };
+
+export const GM_NAME = "Genesis Markets";

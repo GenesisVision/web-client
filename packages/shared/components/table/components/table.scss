@@ -124,8 +124,13 @@ $padding: $padding-small;
 
   &__row {
     transition: background-color 300ms ease;
+
     &:not(.table__row--head):hover {
       background-color: $row-color;
+    }
+
+    &--stripy:nth-child(2n + 1) {
+      background-color: $table-background-subcolor;
     }
 
     &:hover {

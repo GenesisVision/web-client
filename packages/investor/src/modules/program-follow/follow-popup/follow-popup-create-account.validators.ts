@@ -1,0 +1,56 @@
+import { WalletData } from "gv-api-web";
+import {
+  convertFromCurrency,
+  convertToCurrency
+} from "shared/utils/currency-converter";
+import { Schema, lazy, number, object } from "yup";
+
+import {
+  CREATE_ACCOUNT_FORM_FIELDS,
+  CreateAccountFormProps,
+  CreateAccountFormValues
+} from "./follow-popup-create-account";
+
+const CreateAccountFormValidationSchema = (props: CreateAccountFormProps) => {
+  const getAvailable = (currency: string, rate: number): number => {
+    const wallet = props.wallets.find(
+      (wallet: WalletData) => wallet.currency === currency
+    );
+    return convertToCurrency(wallet ? wallet.available : 0, rate);
+  };
+  return lazy(
+    (values: CreateAccountFormValues): Schema<any> =>
+      object().shape({
+        [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: number()
+          .required(
+            props.t("follow-program.create-account.validation.amount-required")
+          )
+          .min(
+            convertFromCurrency(
+              props.minDeposit,
+              values[CREATE_ACCOUNT_FORM_FIELDS.rate]
+            ),
+            props.t(
+              "follow-program.create-account.validation.amount-more-than-min-deposit",
+              {
+                value: convertFromCurrency(
+                  props.minDeposit,
+                  values[CREATE_ACCOUNT_FORM_FIELDS.rate]
+                )
+              }
+            )
+          )
+          .max(
+            getAvailable(
+              values[CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency],
+              1
+            ),
+            props.t(
+              "follow-program.create-account.validation.amount-more-than-available"
+            )
+          )
+      })
+  );
+};
+
+export default CreateAccountFormValidationSchema;

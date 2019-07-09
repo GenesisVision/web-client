@@ -101,7 +101,7 @@ const PortfolioEventsTable: React.FC<Props> = ({
         </span>
       )}
       renderBodyRow={event => (
-        <TableRow className="portfolio-events-all-table__row">
+        <TableRow stripy>
           <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
             {moment(event.date).format()}
           </TableCell>

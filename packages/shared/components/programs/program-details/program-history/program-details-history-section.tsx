@@ -17,7 +17,8 @@ import {
   SelectFilterValue
 } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import { IDataModel } from "shared/constants/constants";
+import { IDataModel, ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import {
   AuthState,
@@ -26,7 +27,9 @@ import {
 import { RootState } from "shared/reducers/root-reducer";
 
 import { HistoryCountsType } from "../program-details.types";
+import ProgramFinancialStatistic from "./program-financial-statistic";
 import ProgramOpenPositions from "./program-open-positions";
+import ProgramPeriodHistory from "./program-period-history";
 import ProgramSubscriptions from "./program-subscriptions";
 
 const EVENTS_FILTERING = {
@@ -38,7 +41,9 @@ enum TABS {
   TRADES = "trades",
   EVENTS = "events",
   OPEN_POSITIONS = "openPositions",
-  SUBSCRIBERS = "subscribers"
+  SUBSCRIBERS = "subscribers",
+  FINANCIAL_STATISTIC = "financialStatistic",
+  PERIOD_HISTORY = "periodHistory"
 }
 
 class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
@@ -47,7 +52,8 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
     tradesCount: 0,
     eventsCount: 0,
     openPositionsCount: 0,
-    subscriptionsCount: 0
+    subscriptionsCount: 0,
+    periodHistoryCount: 0
   };
 
   componentDidMount() {
@@ -67,7 +73,8 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       tradesCount,
       eventsCount,
       openPositionsCount,
-      subscriptionsCount
+      subscriptionsCount,
+      periodHistoryCount
     } = this.state;
     const {
       showSwaps,
@@ -82,10 +89,14 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       fetchPortfolioEvents,
       fetchTrades,
       fetchOpenPositions,
+      fetchPeriodHistory,
       isSignalProgram,
-      isOwnProgram
+      isOwnProgram,
+      role,
+      isGMProgram
     } = this.props;
 
+    const isManager = role === ROLE.MANAGER;
     return (
       <Surface className="details-history">
         <div className="details-history__header">
@@ -102,6 +113,11 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
                 count={tradesCount}
               />
               <GVTab
+                value={TABS.PERIOD_HISTORY}
+                label={t("program-details-page.history.tabs.period-history")}
+                count={periodHistoryCount}
+              />
+              <GVTab
                 value={TABS.EVENTS}
                 label={t("program-details-page.history.tabs.events")}
                 count={eventsCount}
@@ -112,6 +128,14 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
                 label={t("program-details-page.history.tabs.subscriptions")}
                 count={subscriptionsCount}
                 visible={isAuthenticated && isSignalProgram && isOwnProgram}
+              />
+              <GVTab
+                value={TABS.FINANCIAL_STATISTIC}
+                label={t(
+                  "program-details-page.history.tabs.financial-statistic"
+                )}
+                count={periodHistoryCount}
+                visible={isAuthenticated && isManager && isOwnProgram}
               />
             </GVTabs>
           </div>
@@ -144,6 +168,21 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
           {tab === TABS.SUBSCRIBERS && (
             <ProgramSubscriptions id={programId} currency={currency} />
           )}
+          {tab === TABS.FINANCIAL_STATISTIC && (
+            <ProgramFinancialStatistic
+              id={programId}
+              currency={programCurrency}
+              isGMProgram={isGMProgram}
+              fetchFinancialStatistic={fetchPeriodHistory}
+            />
+          )}
+          {tab === TABS.PERIOD_HISTORY && (
+            <ProgramPeriodHistory
+              id={programId}
+              currency={programCurrency}
+              fetchPeriodHistory={fetchPeriodHistory}
+            />
+          )}
         </div>
       </Surface>
     );
@@ -154,7 +193,11 @@ const mapStateToProps = (state: RootState): StateProps => ({
   isAuthenticated: isAuthenticatedSelector(state)
 });
 
-interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
+interface Props
+  extends OwnProps,
+    StateProps,
+    InjectedTranslateProps,
+    WithRoleProps {}
 
 interface OwnProps {
   isSignalProgram: boolean;
@@ -170,12 +213,17 @@ interface OwnProps {
     programId: string,
     filters?: FilteringType
   ) => Promise<IDataModel>;
+  fetchPeriodHistory: (
+    programId: string,
+    filters?: FilteringType
+  ) => Promise<IDataModel>;
   programId: string;
   currency: CURRENCIES;
   programCurrency: CURRENCIES;
   isInvested: boolean;
   eventTypeFilterValues: SelectFilterValue[];
   isOwnProgram: boolean;
+  isGMProgram: boolean;
 }
 
 interface StateProps extends AuthState {}
@@ -185,6 +233,7 @@ interface State extends HistoryCountsType {
 }
 
 const ProgramDetailsHistorySection = compose<React.ComponentType<OwnProps>>(
+  withRole,
   translate(),
   connect(mapStateToProps)
 )(_ProgramDetailsHistorySection);

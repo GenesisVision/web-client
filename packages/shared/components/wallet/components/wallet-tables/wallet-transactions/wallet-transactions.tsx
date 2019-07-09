@@ -1,8 +1,8 @@
 import "./wallet-transactions.scss";
 
 import { PlatformInfo } from "gv-api-web";
-import { RefObject } from "react";
 import * as React from "react";
+import { RefObject } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";

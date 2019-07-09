@@ -5,7 +5,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 
 const _TradesLogRow: React.FC<Props> = ({ event }) => (
-  <TableRow className="details-trades__row">
+  <TableRow stripy>
     <TableCell className="details-trades__cell ">
       {moment(event.date).format()}
     </TableCell>

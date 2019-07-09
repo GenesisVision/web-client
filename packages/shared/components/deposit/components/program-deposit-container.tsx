@@ -1,11 +1,17 @@
 import { FundInvestInfo } from "gv-api-web";
-import React from "react";
+import React, { useCallback } from "react";
 import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
+import useErrorMessage from "shared/hooks/error-message.hook";
 import { RootState } from "shared/reducers/root-reducer";
-import { ResponseError, SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "shared/utils/types";
 
 import {
   getProgramInfoCreator,
@@ -13,47 +19,46 @@ import {
 } from "../services/program-deposit.service";
 import DepositPopup from "./deposit-popup";
 
-class _ProgramDepositContainer extends React.PureComponent<Props, State> {
-  state = {
-    errorMessage: ""
-  };
-
-  handleInvest = (
-    amount: number,
-    currency: string,
-    setSubmitting: SetSubmittingType
-  ) => {
-    const { id, service } = this.props;
-    service
-      .programInvest(id, amount, currency)
-      .then(() => {
-        this.props.onApply();
-        this.props.onClose();
-      })
-      .catch((error: ResponseError) => {
-        this.setState({ errorMessage: error.errorMessage });
-        setSubmitting(false);
-      });
-  };
-
-  render() {
-    const { id, open, hasEntryFee, onClose, currency, fetchInfo } = this.props;
-    const { errorMessage } = this.state;
-    return (
-      <Dialog open={open} onClose={onClose}>
-        <DepositPopup
-          asset={ASSET.PROGRAM}
-          hasEntryFee={hasEntryFee}
-          currency={currency}
-          id={id}
-          fetchInfo={getProgramInfoCreator(fetchInfo)}
-          invest={this.handleInvest}
-          errorMessage={errorMessage}
-        />
-      </Dialog>
-    );
-  }
-}
+const _ProgramDepositContainer: React.FC<Props> = ({
+  id,
+  open,
+  hasEntryFee,
+  onClose,
+  currency,
+  fetchInfo,
+  service,
+  onApply
+}) => {
+  const { errorMessage, setErrorMessage } = useErrorMessage();
+  const handleInvest = useCallback(
+    (amount: number, currency: string, setSubmitting: SetSubmittingType) => {
+      service
+        .programInvest(id, amount, currency)
+        .then(() => {
+          onApply();
+          onClose();
+        })
+        .catch(error => {
+          setErrorMessage(error);
+          setSubmitting(false);
+        });
+    },
+    [id]
+  );
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DepositPopup
+        asset={ASSET.PROGRAM}
+        hasEntryFee={hasEntryFee}
+        currency={currency}
+        id={id}
+        fetchInfo={getProgramInfoCreator(fetchInfo)}
+        invest={handleInvest}
+        errorMessage={errorMessage}
+      />
+    </Dialog>
+  );
+};
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
@@ -67,18 +72,16 @@ const mapDispatchToProps = (
   )
 });
 
-const ProgramDepositContainer = connect<
-  null,
-  DispatchProps,
-  OwnProps,
-  RootState
->(
-  null,
-  mapDispatchToProps
+const ProgramDepositContainer = compose<React.ComponentType<OwnProps>>(
+  connect<null, DispatchProps, OwnProps, RootState>(
+    null,
+    mapDispatchToProps
+  ),
+  React.memo
 )(_ProgramDepositContainer);
 export default ProgramDepositContainer;
 
-interface OwnProps {
+interface OwnProps extends IDialogProps {
   id: string;
   hasEntryFee?: boolean;
   currency: string;
@@ -106,8 +109,4 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, IDialogProps, DispatchProps {}
-
-interface State {
-  errorMessage: string;
-}
+interface Props extends OwnProps, DispatchProps {}

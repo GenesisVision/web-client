@@ -9,20 +9,18 @@ const ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   onApply,
   open,
   onClose
-}) => {
-  return (
-    <ProgramDepositContainer
-      id={id}
-      hasEntryFee
-      currency={currency}
-      onApply={onApply}
-      open={open}
-      onClose={onClose}
-      programInvest={investorApi.v10InvestorProgramsByIdInvestByAmountPost}
-      fetchInfo={investorApi.v10InvestorProgramsByIdInvestInfoByCurrencyGet}
-    />
-  );
-};
+}) => (
+  <ProgramDepositContainer
+    id={id}
+    hasEntryFee
+    currency={currency}
+    onApply={onApply}
+    open={open}
+    onClose={onClose}
+    programInvest={investorApi.v10InvestorProgramsByIdInvestByAmountPost}
+    fetchInfo={investorApi.v10InvestorProgramsByIdInvestInfoByCurrencyGet}
+  />
+);
 
 export default React.memo(ProgramDeposit);
 

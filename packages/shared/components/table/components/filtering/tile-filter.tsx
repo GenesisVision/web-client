@@ -1,75 +1,77 @@
 import "./tile-filter.scss";
 
 import * as React from "react";
+import { useCallback } from "react";
 import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";
+import useAnchor from "shared/hooks/anchor.hook";
 
 import { UpdateFilterFunc } from "../table.types";
 import TileFilterButton from "./tile-filter-button";
 import { ITileFilterItemProps } from "./tile-filter-item";
 
-class TileFilter extends React.PureComponent<Props, State> {
-  state = {
-    anchor: undefined
-  };
+const _TileFilter: React.FC<Props> = ({
+  selectedTiles,
+  buttonTitle,
+  value,
+  children,
+  name,
+  updateFilter
+}) => {
+  const { anchor, setAnchor, clearAnchor } = useAnchor();
+  const handleAdd = useCallback(
+    (id: string) => {
+      clearAnchor();
+      updateFilter({
+        name,
+        value: [...value, id]
+      });
+    },
+    [updateFilter, name, value]
+  );
+  const handleRemove = useCallback(
+    (id: string) =>
+      updateFilter({
+        name,
+        value: value.filter(x => x !== id)
+      }),
+    [updateFilter, name, value]
+  );
 
-  handleOpenPopover = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => this.setState({ anchor: event.currentTarget });
-  handleClosePopover = () => this.setState({ anchor: undefined });
-  handleAdd = (id: string) => {
-    const { name, value, updateFilter } = this.props;
-    this.handleClosePopover();
-    updateFilter({
-      name,
-      value: [...value, id]
-    });
-  };
-  handleRemove = (id: string) => {
-    const { name, value, updateFilter } = this.props;
-    updateFilter({
-      name,
-      value: value.filter(x => x !== id)
-    });
-  };
+  const selectedItems = selectedTiles.map(x =>
+    React.cloneElement(x, {
+      removeTile: handleRemove
+    })
+  );
+  const child = React.cloneElement(children as React.ReactElement<any>, {
+    value,
+    changeFilter: handleAdd,
+    cancel: clearAnchor
+  });
+  return (
+    <>
+      <div className="filter tile-filter">
+        <div className="tile-filter__value">{selectedItems}</div>
+        <TileFilterButton
+          isActive={!!anchor}
+          onClick={setAnchor}
+          title={buttonTitle}
+        />
+      </div>
+      <Popover
+        anchorEl={anchor}
+        onClose={clearAnchor}
+        horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+        noPadding
+      >
+        {child}
+      </Popover>
+    </>
+  );
+};
 
-  render() {
-    const { selectedTiles, buttonTitle, value, children } = this.props;
-    const { anchor } = this.state;
-    const selectedItems = selectedTiles.map(x =>
-      React.cloneElement(x, {
-        removeTile: this.handleRemove
-      })
-    );
-    const child = React.cloneElement(children as React.ReactElement<any>, {
-      value,
-      changeFilter: this.handleAdd,
-      cancel: this.handleClosePopover
-    });
-    return (
-      <>
-        <div className="filter tile-filter">
-          <div className="tile-filter__value">{selectedItems}</div>
-          <TileFilterButton
-            isActive={!!anchor}
-            onClick={this.handleOpenPopover}
-            title={buttonTitle}
-          />
-        </div>
-        <Popover
-          anchorEl={anchor}
-          onClose={this.handleClosePopover}
-          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-          noPadding
-        >
-          {child}
-        </Popover>
-      </>
-    );
-  }
-}
-
+const TileFilter = React.memo(_TileFilter);
 export default TileFilter;
 
 interface Props {
@@ -78,8 +80,4 @@ interface Props {
   name: string;
   buttonTitle: string;
   selectedTiles: React.ReactElement<ITileFilterItemProps>[];
-}
-
-interface State {
-  anchor?: EventTarget;
 }

@@ -4,10 +4,13 @@ import { LevelInfo } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 import LevelIcon from "./level-icon";
 
@@ -142,10 +145,16 @@ interface OwnProps {
   open: boolean;
   onClose(): void;
   investmentsLimits: LevelInfo[];
-  currency: CURRENCIES;
+  currency: CurrencyEnum;
 }
 
 interface Props extends OwnProps, InjectedTranslateProps {}
 
-const AboutLevelsComponent = translate()(React.memo(_AboutLevelsComponent));
+const AboutLevelsComponent = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
+  translate(),
+  React.memo
+)(_AboutLevelsComponent);
 export default AboutLevelsComponent;
