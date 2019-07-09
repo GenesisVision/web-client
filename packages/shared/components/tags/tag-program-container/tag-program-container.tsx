@@ -13,24 +13,24 @@ const MAX_VISIBLE_TAGS = 2;
 
 const TagProgramContainer: React.FC<Props> = React.memo(({ tags }) => {
   const length = tags.length;
-  const reminder = length > MAX_VISIBLE_TAGS ? `${length - 1}` : null;
+  const remainder = length > MAX_VISIBLE_TAGS ? `${length - 1}` : null;
   return (
     <div className="tag-program-container">
       {tags.map(
         (tag, idx) =>
-          ((reminder && idx === 0) || !reminder) && (
+          ((remainder && idx === 0) || !remainder) && (
             <TagItem name={tag.name} color={tag.color} key={idx} />
           )
       )}
-      {reminder && (
+      {remainder && (
         <Tooltip render={() => <TagItemTooltip tags={tags} />}>
           <div className="tag-program-container__others">
             <Profitability
               className="tag-button"
-              value={reminder}
+              value={remainder}
               variant={PROFITABILITY_VARIANT.CHIPS}
             >
-              + {reminder}
+              + {remainder}
             </Profitability>
           </div>
         </Tooltip>

@@ -16,16 +16,16 @@ const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({
   className
 }) => {
   const length = tags.length;
-  const reminder = length > MAX_VISIBLE_TAGS ? `${length - 1}` : null;
+  const remainder = length > MAX_VISIBLE_TAGS ? `${length - 1}` : null;
   return (
     <div className={classNames("tag-broker-container", className)}>
       {tags.map(
         (tag, idx) =>
-          ((reminder && idx === 0) || !reminder) && (
+          ((remainder && idx === 0) || !remainder) && (
             <TagItem name={tag.name} color={tag.color} key={idx} />
           )
       )}
-      {reminder && (
+      {remainder && (
         <Tooltip
           render={() => (
             <TagItemTooltip

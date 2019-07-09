@@ -37,13 +37,5 @@
     &:last-child {
       margin-right: 0;
     }
-
-    //@include media-breakpoint-landscape-phone() {
-    //  padding: 0 $padding-xxsmall;
-    //  max-height: 28px;
-    //  height: 28px;
-    //  line-height: 28px;
-    //  font-size: 14px;
-    //}
   }
 }
