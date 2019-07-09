@@ -16,10 +16,10 @@
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-paragraph;
     }
+  }
 
-    .fund-assets {
-      flex-wrap: nowrap;
-    }
+  &__cell--reallocate-funds {
+    padding-left: $padding-xsmall;
   }
 
   &__symbol {

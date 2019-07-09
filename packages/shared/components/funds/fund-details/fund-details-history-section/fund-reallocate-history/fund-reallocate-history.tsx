@@ -17,12 +17,16 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 
 import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cell";
+import { RefObject } from "react";
 
 class _FundReallocateHistory extends React.PureComponent<Props, State> {
   state: State = {
     isPending: false,
-    data: undefined
+    data: undefined,
+    containerWidth: 0
   };
+
+  ref: RefObject<HTMLDivElement> = React.createRef();
 
   fetchFundReallocate: GetItemsFuncType = () => {
     this.setState({ isPending: true });
@@ -35,6 +39,13 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
 
   componentDidMount() {
     this.fetchFundReallocate();
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    if (this.ref.current) {
+      const { width } = this.ref.current.getBoundingClientRect();
+      this.setState({ containerWidth: width });
+    }
   }
 
   render() {
@@ -58,19 +69,22 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
         }}
         renderBodyRow={(item: any) => (
           <TableRow className="details-structure__row">
-            <TableCell className="details-structure__cell fund-details-structure__cell">
+            <TableCell className="details-structure__cell">
               {moment(item.date).format()}
             </TableCell>
-            <TableCell className="details-structure__cell">
-              <FundAssetContainer
-                //@ts-ignore
-                assets={item.parts}
-                type={FUND_ASSET_TYPE.SHORT}
-                size={10}
-                //@ts-ignore
-                length={item.parts.length}
-                hasPopoverList
-              />
+            <TableCell className="details-structure__cell details-structure__cell--reallocate-funds">
+              <div ref={this.ref}>
+                <FundAssetContainer
+                  //@ts-ignore
+                  assets={item.parts}
+                  type={FUND_ASSET_TYPE.SHORT}
+                  // size={10}
+                  //@ts-ignore
+                  length={item.parts.length}
+                  containerWidth={this.state.containerWidth}
+                  hasPopoverList
+                />
+              </div>
             </TableCell>
           </TableRow>
         )}
@@ -94,4 +108,5 @@ interface Props {
 interface State {
   isPending: boolean;
   data?: ReallocationsViewModel;
+  containerWidth: number;
 }
