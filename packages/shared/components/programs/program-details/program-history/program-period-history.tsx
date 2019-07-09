@@ -61,7 +61,7 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
       renderBodyRow={period => {
         return (
           <TableRow stripy>
-            <TableCell className="details-trades__cell--period">
+            <TableCell>
               <ProgramPeriodPie
                 numberPeriod={period.number}
                 start={period.dateFrom}
