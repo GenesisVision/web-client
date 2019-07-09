@@ -1,4 +1,5 @@
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 @import "~shared/styles/_breakpoint.scss";
 
 .program-period-pie {
@@ -8,7 +9,10 @@
 
   &__text {
     white-space: nowrap;
-    //min-width: 95px;
     padding-left: 0.5rem;
+  }
+
+  &__number {
+    padding-left: $padding-xsmall;
   }
 }
