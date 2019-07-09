@@ -16,6 +16,10 @@
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-paragraph;
     }
+
+    .fund-assets {
+      flex-wrap: nowrap;
+    }
   }
 
   &__symbol {

@@ -66,7 +66,7 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
                 //@ts-ignore
                 assets={item.parts}
                 type={FUND_ASSET_TYPE.SHORT}
-                size={4}
+                size={10}
                 //@ts-ignore
                 length={item.parts.length}
                 hasPopoverList

@@ -59,8 +59,8 @@ class FundAssetContainer extends React.PureComponent<
               handleOpen={this.handleOpen}
             />
             <Popover
-              horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-              vertical={VERTICAL_POPOVER_POS.BOTTOM}
+              horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+              vertical={VERTICAL_POPOVER_POS.TOP}
               anchorEl={anchor}
               noPadding
               onClose={this.handleClose}
