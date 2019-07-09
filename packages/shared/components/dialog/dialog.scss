@@ -19,7 +19,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   @include media-breakpoint-landscape-phone() {
-    max-width: 360px;
+    min-width: 360px;
     border-radius: 8px;
   }
 

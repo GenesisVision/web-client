@@ -2,6 +2,8 @@ import "./email-confirm-failure.scss";
 
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { compose } from "redux";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 const _EmailConfirmFailure: React.FC<Props> = ({ t, errorMessage }) => (
   <div className="email-confirm-failure">
@@ -12,9 +14,16 @@ const _EmailConfirmFailure: React.FC<Props> = ({ t, errorMessage }) => (
   </div>
 );
 
-interface Props extends InjectedTranslateProps {
+interface OwnProps {
   errorMessage: string;
 }
+interface Props extends InjectedTranslateProps, OwnProps {}
 
-const EmailConfirmFailure = translate()(React.memo(_EmailConfirmFailure));
+const EmailConfirmFailure = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
+  translate(),
+  React.memo
+)(_EmailConfirmFailure);
 export default EmailConfirmFailure;

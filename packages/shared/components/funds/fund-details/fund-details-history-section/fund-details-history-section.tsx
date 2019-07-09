@@ -1,8 +1,7 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { FundAssetsListInfo, ReallocationsViewModel } from "gv-api-web";
-import * as React from "react";
-import { SyntheticEvent } from "react";
+import React, { useEffect, useState } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -19,6 +18,7 @@ import {
 } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
+import useTab from "shared/hooks/tab.hook";
 import {
   AuthState,
   isAuthenticatedSelector
@@ -33,88 +33,77 @@ const EVENTS_FILTERING = {
   type: EVENT_TYPE_FILTER_DEFAULT_VALUE
 };
 
-class FundDetailsHistorySection extends React.PureComponent<Props, State> {
-  state = {
-    tab: TABS.STRUCTURE,
-    eventsCount: 0,
-    reallocateCount: 0
-  };
-
-  componentDidMount() {
-    const { id, fetchHistoryCounts } = this.props;
-    fetchHistoryCounts(id).then(({ eventsCount, reallocateCount }) => {
-      reallocateCount ? this.setState({ reallocateCount }) : null;
-      this.setState({ eventsCount });
-    });
-  }
-
-  handleTabChange = (e: SyntheticEvent<EventTarget, Event>, tab: string) => {
-    this.setState({ tab: tab as TABS });
-  };
-  render() {
-    const {
-      t,
-      id,
-      fetchFundStructure,
-      fetchFundReallocateHistory,
-      isAuthenticated,
-      isInvested,
-      fetchPortfolioEvents,
-      eventTypeFilterValues
-    } = this.props;
-    const { tab, eventsCount, reallocateCount } = this.state;
-    return (
-      <Surface className="details-history">
-        <div className="details-history__header">
-          <div className="details-history__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange}>
-              <GVTab
-                value={TABS.STRUCTURE}
-                label={
-                  <TooltipLabel
-                    tooltipContent={t("fund-details-page.tooltip.structure")}
-                    labelText={t("fund-details-page.history.tabs.structure")}
-                    className="tooltip__label--cursor-pointer"
-                  />
-                }
-              />
-              <GVTab
-                value={TABS.EVENTS}
-                label={t("fund-details-page.history.tabs.events")}
-                count={eventsCount}
-                visible={isAuthenticated && isInvested}
-              />
-              <GVTab
-                value={TABS.REALLOCATE_HISTORY}
-                label={t("fund-details-page.history.tabs.reallocate-history")}
-                count={reallocateCount}
-              />
-            </GVTabs>
-          </div>
-        </div>
-        <div>
-          {tab === TABS.STRUCTURE && (
-            <FundStructure id={id} fetchStructure={fetchFundStructure} />
-          )}
-          {tab === TABS.EVENTS && (
-            <PortfolioEventsTable
-              filtering={EVENTS_FILTERING}
-              fetchPortfolioEvents={fetchPortfolioEvents}
-              dateRangeStartLabel={t("filters.date-range.program-start")}
-              eventTypeFilterValues={eventTypeFilterValues}
+const _FundDetailsHistorySection: React.FC<Props> = ({
+  t,
+  id,
+  fetchFundStructure,
+  fetchFundReallocateHistory,
+  isAuthenticated,
+  isInvested,
+  fetchPortfolioEvents,
+  eventTypeFilterValues,
+  fetchHistoryCounts
+}) => {
+  const { tab, setTab } = useTab<TABS>(TABS.STRUCTURE);
+  const [counts, setCounts] = useState<HistoryCountsType>({});
+  useEffect(
+    () => {
+      fetchHistoryCounts(id).then(setCounts);
+    },
+    [id]
+  );
+  const { eventsCount, reallocateCount } = counts;
+  return (
+    <Surface className="details-history">
+      <div className="details-history__header">
+        <div className="details-history__tabs">
+          <GVTabs value={tab} onChange={setTab}>
+            <GVTab
+              value={TABS.STRUCTURE}
+              label={
+                <TooltipLabel
+                  tooltipContent={t("fund-details-page.tooltip.structure")}
+                  labelText={t("fund-details-page.history.structure.title")}
+                  className="tooltip__label--cursor-pointer"
+                />
+              }
             />
-          )}
-          {tab === TABS.REALLOCATE_HISTORY && (
-            <FundReallocateHistory
-              id={id}
-              fetchFundReallocateHistory={fetchFundReallocateHistory}
+            <GVTab
+              value={TABS.EVENTS}
+              label={t("program-details-page.history.tabs.events")}
+              count={eventsCount}
+              visible={isAuthenticated && isInvested}
             />
-          )}
+            <GVTab
+              value={TABS.REALLOCATE_HISTORY}
+              label={t("fund-details-page.history.tabs.reallocate-history")}
+              count={reallocateCount}
+            />
+          </GVTabs>
         </div>
-      </Surface>
-    );
-  }
-}
+      </div>
+      <div>
+        {tab === TABS.STRUCTURE && (
+          <FundStructure id={id} fetchStructure={fetchFundStructure} />
+        )}
+        {tab === TABS.EVENTS && (
+          <PortfolioEventsTable
+            filtering={EVENTS_FILTERING}
+            fetchPortfolioEvents={fetchPortfolioEvents}
+            dateRangeStartLabel={t("filters.date-range.program-start")}
+            eventTypeFilterValues={eventTypeFilterValues}
+          />
+        )}
+        {tab === TABS.REALLOCATE_HISTORY && (
+          <FundReallocateHistory
+            id={id}
+            fetchFundReallocateHistory={fetchFundReallocateHistory}
+          />
+        )}
+      </div>
+    </Surface>
+  );
+};
 
 const mapStateToProps = (state: RootState): StateProps => ({
   isAuthenticated: isAuthenticatedSelector(state)
@@ -143,13 +132,9 @@ interface OwnProps {
   isInvested: boolean;
 }
 
-interface State {
-  tab: TABS;
-  eventsCount: number;
-  reallocateCount: number;
-}
-
-export default compose<React.ComponentType<OwnProps>>(
+const FundDetailsHistorySection = compose<React.ComponentType<OwnProps>>(
   translate(),
-  connect(mapStateToProps)
-)(FundDetailsHistorySection);
+  connect(mapStateToProps),
+  React.memo
+)(_FundDetailsHistorySection);
+export default FundDetailsHistorySection;

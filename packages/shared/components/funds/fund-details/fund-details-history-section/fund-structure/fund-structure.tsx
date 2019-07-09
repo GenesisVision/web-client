@@ -87,7 +87,7 @@ class FundStructure extends React.PureComponent<
           );
         }}
         renderBodyRow={(item: FundAssetInfo) => (
-          <TableRow className="details-structure__row">
+          <TableRow stripy>
             <TableCell className="details-structure__cell fund-details-structure__cell">
               {item.asset}
             </TableCell>
