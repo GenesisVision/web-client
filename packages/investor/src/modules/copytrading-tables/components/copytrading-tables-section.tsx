@@ -41,7 +41,7 @@ class _CopytradingTablesSection extends React.PureComponent<
         <div className="dashboard-assets__head">
           <h3>{t("investor.copytrading-tables.title")}</h3>
           <div className="dashboard-assets__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange} hasScroll>
+            <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 value={TABS.OPEN_TRADES}
                 label={t("investor.copytrading-tables.open-trades")}

@@ -8,7 +8,6 @@ import { GVTabProps } from "./gv-tab";
 export interface GVTabsProps {
   value: string;
   className?: string;
-  hasScroll?: boolean;
   onChange?: (e: React.SyntheticEvent<EventTarget>, value: string) => void;
   children: Array<React.ReactElement<GVTabProps>>;
 }
@@ -16,7 +15,6 @@ export interface GVTabsProps {
 const GVTabs: React.SFC<GVTabsProps> = ({
   className,
   value,
-  hasScroll,
   onChange,
   children
 }) => {
@@ -29,15 +27,7 @@ const GVTabs: React.SFC<GVTabsProps> = ({
       onChange
     });
   });
-  return (
-    <div
-      className={classnames(className, "gv-tabs", {
-        "gv-tabs--scroll": hasScroll
-      })}
-    >
-      {tabs}
-    </div>
-  );
+  return <div className={classnames(className, "gv-tabs")}>{tabs}</div>;
 };
 
 export default GVTabs;

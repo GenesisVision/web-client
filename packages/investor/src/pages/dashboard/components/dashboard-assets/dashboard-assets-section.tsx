@@ -79,7 +79,7 @@ class DashboardAssetsSection extends React.PureComponent<
         <div className="dashboard-assets__head">
           <h3>{t("investor.dashboard-page.assets.title")}</h3>
           <div className="dashboard-assets__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange} hasScroll>
+            <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 value={ASSET_TAB.PROGRAMS}
                 label={t("investor.dashboard-page.assets.programs")}

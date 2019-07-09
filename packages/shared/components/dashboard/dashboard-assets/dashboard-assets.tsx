@@ -59,7 +59,7 @@ class _DashboardAssets extends React.PureComponent<Props, State> {
         <div className="dashboard-assets__head">
           <h3>{t(`${role}.dashboard-page.assets.title`)}</h3>
           <div className="dashboard-assets__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange} hasScroll>
+            <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 value={TABS.PROGRAMS}
                 label={t(`${role}.dashboard-page.assets.programs`)}

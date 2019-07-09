@@ -90,7 +90,7 @@ class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
       <Surface className="details-history">
         <div className="details-history__header">
           <div className="details-history__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange} hasScroll>
+            <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 value={TABS.OPEN_POSITIONS}
                 label={t("program-details-page.history.tabs.open-positions")}

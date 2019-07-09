@@ -40,7 +40,7 @@ class _WalletTables extends React.PureComponent<Props, State> {
       <Surface className="wallet-container">
         <div className="wallet-container__header">
           <div className="wallet-container__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange} hasScroll>
+            <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 className={"gv-tab"}
                 value={TABS.TRANSACTIONS_TAB} //TODO add disable prop

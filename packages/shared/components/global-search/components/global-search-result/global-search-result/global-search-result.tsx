@@ -79,7 +79,7 @@ class GlobalSearchResult extends React.PureComponent<
           {t("global-search-page.heading")}
         </h3>
         <div className="global-search-result__tabs">
-          <GVTabs value={tab} onChange={this.handleTabChange} hasScroll>
+          <GVTabs value={tab} onChange={this.handleTabChange}>
             <GVTab
               value={SEARCH_TABS.PROGRAMS}
               label={t("global-search-page.programs")}
