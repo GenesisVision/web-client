@@ -144,7 +144,7 @@ const _CreateProgramBroker: React.FC<OwnProps & WithTranslation> = ({
 );
 
 const CreateProgramBroker = translate()(React.memo(_CreateProgramBroker));
-export default translate()(CreateProgramBroker);
+export default CreateProgramBroker;
 
 interface OwnProps {
   brokers: Broker[];

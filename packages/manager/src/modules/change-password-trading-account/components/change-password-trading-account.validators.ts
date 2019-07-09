@@ -7,7 +7,7 @@ interface IChangePasswordTradingAccountValidationSchema {
 }
 
 const twoFactorValidator = (
-  params: TranslationProps & IChangePasswordTradingAccountValidationSchema
+  params: i18next.WithT & IChangePasswordTradingAccountValidationSchema
 ) => {
   const { t, twoFactorEnabled } = params;
   return twoFactorEnabled
@@ -20,7 +20,7 @@ const twoFactorValidator = (
         .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 };
 
-const passwordValidator = ({ t }: TranslationProps) => {
+const passwordValidator = ({ t }: i18next.WithT) => {
   return string()
     .min(8, t("password-change-trading-account.validators.password-is-short"))
     .max(32, t("password-change-trading-account.validators.password-is-long"))
@@ -34,7 +34,7 @@ const passwordValidator = ({ t }: TranslationProps) => {
 };
 
 export const ChangePasswordTradingAccountValidationSchema = (
-  params: TranslationProps & IChangePasswordTradingAccountValidationSchema
+  params: i18next.WithT & IChangePasswordTradingAccountValidationSchema
 ) =>
   object().shape({
     twoFactorCode: twoFactorValidator(params),

@@ -123,5 +123,5 @@ enum TABS {
   FUNDS = "funds"
 }
 
-const DashboardAssets = withRole<OwnProps>(translate()(_DashboardAssets));
+const DashboardAssets = withRole(translate()(_DashboardAssets));
 export default DashboardAssets;
