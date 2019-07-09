@@ -57,7 +57,7 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
           return <FundStructureHeaderCell column={column} />;
         }}
         renderBodyRow={(item: any) => (
-          <TableRow className="details-structure__row">
+          <TableRow stripy>
             <TableCell className="details-structure__cell fund-details-structure__cell">
               {moment(item.date).format()}
             </TableCell>
