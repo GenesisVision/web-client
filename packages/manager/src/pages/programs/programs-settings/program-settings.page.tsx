@@ -112,11 +112,10 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
     applyChanges().then(() => service.redirectToProgram());
   }, []);
 
-  const isDataReady = !!details && !!brokersInfo;
   return (
     <Page title={t("manager.program-settings.title")}>
       <ProgramSettings
-        condition={isDataReady}
+        condition={!!details && !!brokersInfo}
         loader={<ProgramSettingsLoader />}
         changeSignaling={changeSignaling}
         closePeriod={closePeriod}
