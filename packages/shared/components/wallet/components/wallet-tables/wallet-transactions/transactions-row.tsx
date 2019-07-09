@@ -82,7 +82,7 @@ const _TransactionsRow: React.FC<Props> = ({
         onClose={setOpenPopup}
         onAction={handleAction}
       />
-      <TableRow className="wallet-transactions__row" onClick={setOpenPopup}>
+      <TableRow stripy onClick={setOpenPopup}>
         {!walletCurrency && (
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
             <div className="wallet-transactions__cell--wallet-wrapper">
