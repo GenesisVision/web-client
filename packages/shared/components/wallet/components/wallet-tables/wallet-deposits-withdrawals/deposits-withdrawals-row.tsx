@@ -1,82 +1,67 @@
 import { MultiWalletExternalTransaction } from "gv-api-web";
 import moment from "moment";
-import * as React from "react";
-import { Fragment } from "react";
+import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
+import useIsOpen from "shared/hooks/is-open.hook";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatValue } from "shared/utils/formatter";
 
-export interface ITransactionRowProps {
+const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
+  const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
+  const handleAction = useCallback(
+    () => {
+      if (update) update();
+      setClosePopup();
+    },
+    [update]
+  );
+  return (
+    <>
+      <TransactionDetailsPopup
+        transactionId={transaction.id}
+        open={isOpenPopup}
+        onClose={setClosePopup}
+        onAction={handleAction}
+      />
+      <TableRow
+        className="wallet-deposits-withdrawals__row"
+        onClick={setOpenPopup}
+      >
+        <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
+          {moment(transaction.date).format()}
+        </TableCell>
+        <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
+          {(transaction.statusUrl && (
+            <a href={transaction.statusUrl} target="_blank">
+              {transaction.status}
+            </a>
+          )) || <>{transaction.status}</>}
+        </TableCell>
+        <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
+          <Profitability
+            value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
+          >
+            <NumberFormat
+              value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
+              thousandSeparator=" "
+              displayType="text"
+              suffix={` ${transaction.currency}`}
+            />
+          </Profitability>
+        </TableCell>
+      </TableRow>
+    </>
+  );
+};
+interface Props {
   transaction: MultiWalletExternalTransaction;
   update?: UpdateItemsFuncType;
 }
 
-export interface ITransactionRowState {
-  isOpen: boolean;
-}
-
-class DepositsWithdrawalsRow extends React.PureComponent<
-  ITransactionRowProps,
-  ITransactionRowState
-> {
-  state = {
-    isOpen: false
-  };
-  openPopup = () => {
-    this.setState({ isOpen: true });
-  };
-  closePopup = () => {
-    this.setState({ isOpen: false });
-  };
-  handleAction = () => {
-    if (this.props.update) this.props.update();
-    this.closePopup();
-  };
-  render() {
-    const { transaction } = this.props;
-    return (
-      <React.Fragment>
-        <TransactionDetailsPopup
-          transactionId={transaction.id}
-          open={this.state.isOpen}
-          onClose={this.closePopup}
-          onAction={this.handleAction}
-        />
-        <TableRow
-          className="wallet-deposits-withdrawals__row"
-          onClick={this.openPopup}
-        >
-          <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
-            {moment(transaction.date).format()}
-          </TableCell>
-          <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
-            {(transaction.statusUrl && (
-              <a href={transaction.statusUrl} target="_blank">
-                {transaction.status}
-              </a>
-            )) || <Fragment>{transaction.status}</Fragment>}
-          </TableCell>
-          <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
-            <Profitability
-              value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
-            >
-              <NumberFormat
-                value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
-                thousandSeparator=" "
-                displayType="text"
-                suffix={` ${transaction.currency}`}
-              />
-            </Profitability>
-          </TableCell>
-        </TableRow>
-      </React.Fragment>
-    );
-  }
-}
-
+const DepositsWithdrawalsRow = React.memo(_DepositsWithdrawalsRow);
 export default DepositsWithdrawalsRow;

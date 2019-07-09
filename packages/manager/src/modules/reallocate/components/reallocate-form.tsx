@@ -15,6 +15,7 @@ import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
 import ReallocateField from "./reallocate-field";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 class _ReallocateForm extends React.PureComponent<Props> {
   render() {
@@ -80,7 +81,10 @@ interface Props
     IReallocateFormOwnProps,
     InjectedTranslateProps {}
 
-const ReallocateForm = compose<React.FC<IReallocateFormOwnProps>>(
+const ReallocateForm = compose<
+  React.FC<IReallocateFormOwnProps & WithLoaderProps>
+>(
+  withLoader,
   translate(),
   withFormik<IReallocateFormOwnProps, IReallocateFormValues>({
     displayName: "reallocate",

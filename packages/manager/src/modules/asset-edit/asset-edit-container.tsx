@@ -1,14 +1,12 @@
 import { CancelablePromise } from "gv-api-web";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { ASSET } from "shared/constants/constants";
-import {
-  CurrencyEnum,
-  MiddlewareDispatch,
-  ResponseError
-} from "shared/utils/types";
+import useErrorMessage from "shared/hooks/error-message.hook";
+import { CurrencyEnum, MiddlewareDispatch } from "shared/utils/types";
 
 import AssetEditForm, {
   IAssetEditFormValues,
@@ -16,45 +14,51 @@ import AssetEditForm, {
 } from "./components/asset-edit-form";
 import { editAsset } from "./services/asset-edit.services";
 
-class _AssetEditContainer extends React.PureComponent<Props, State> {
-  state = { serverError: "" };
-
-  handleClose = () => {
-    const { onClose } = this.props;
-    this.setState({ serverError: "" });
+const _AssetEditContainer: React.FC<Props> = ({
+  service,
+  info,
+  onApply,
+  open,
+  onClose,
+  type
+}) => {
+  const {
+    errorMessage,
+    setErrorMessage,
+    cleanErrorMessage
+  } = useErrorMessage();
+  const handleClose = useCallback(() => {
+    cleanErrorMessage();
     onClose();
-  };
-
-  handleEdit: TAssetEditFormSubmit = (values, setSubmitting) => {
-    const { service, info, onApply, type } = this.props;
-    service
-      .editAsset(info.id, values, type)
-      .then(() => {
-        this.handleClose();
-        onApply && onApply();
-      })
-      .catch((error: ResponseError) => {
-        this.setState({ serverError: error.errorMessage });
-        setSubmitting(false);
-      });
-  };
-
-  render() {
-    const { info, open, type } = this.props;
-    return (
-      <Dialog open={open} onClose={this.handleClose}>
-        <AssetEditForm
-          type={type}
-          condition={!!info}
-          loader={<DialogLoader />}
-          info={info}
-          onSubmit={this.handleEdit}
-          serverError={this.state.serverError}
-        />
-      </Dialog>
-    );
-  }
-}
+  }, []);
+  const handleEdit: TAssetEditFormSubmit = useCallback(
+    (values, setSubmitting) => {
+      service
+        .editAsset(info.id, values, type)
+        .then(() => {
+          handleClose();
+          onApply && onApply();
+        })
+        .catch(error => {
+          setErrorMessage(error);
+          setSubmitting(false);
+        });
+    },
+    []
+  );
+  return (
+    <Dialog open={open} onClose={handleClose}>
+      <AssetEditForm
+        type={type}
+        condition={!!info}
+        loader={<DialogLoader />}
+        info={info}
+        onSubmit={handleEdit}
+        errorMessage={errorMessage}
+      />
+    </Dialog>
+  );
+};
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
@@ -88,12 +92,11 @@ interface DispatchProps {
 
 interface Props extends OwnProps, DispatchProps {}
 
-interface State {
-  serverError: string;
-}
-
-const AssetEditContainer = connect<null, DispatchProps, OwnProps>(
-  undefined,
-  mapDispatchToProps
+const AssetEditContainer = compose<React.ComponentType<OwnProps>>(
+  connect<null, DispatchProps, OwnProps>(
+    undefined,
+    mapDispatchToProps
+  ),
+  React.memo
 )(_AssetEditContainer);
 export default AssetEditContainer;
