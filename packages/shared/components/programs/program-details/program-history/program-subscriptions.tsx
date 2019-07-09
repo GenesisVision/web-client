@@ -68,7 +68,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
         </span>
       )}
       renderBodyRow={(subscription: SignalSubscriber) => (
-        <TableRow>
+        <TableRow stripy>
           <TableCell>{subscription.number}</TableCell>
           <TableCell>{subscription.trades}</TableCell>
           <TableCell>

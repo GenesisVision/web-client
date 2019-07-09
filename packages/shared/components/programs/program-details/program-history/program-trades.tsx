@@ -2,8 +2,8 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { OrderModel } from "gv-api-web";
 import moment from "moment";
-import { useCallback } from "react";
 import * as React from "react";
+import { useCallback } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
@@ -79,7 +79,7 @@ const _ProgramTrades: React.FC<Props> = ({
       renderBodyRow={(trade: OrderModel) => {
         const volume = +formatValue(trade.volume, DEFAULT_DECIMAL_SCALE / 2);
         return (
-          <TableRow className="details-trades__row">
+          <TableRow stripy>
             <TableCell className="details-trades__cell program-details-trades__cell--direction/entry">
               <BaseProfitability
                 isPositive={trade.direction === "Buy"}
