@@ -11,13 +11,9 @@ import AlertMessageList from "./alert-message-list";
 
 jest.mock("react-i18next", () => {
   return {
-    translate: () => (Component: any) => {
-      Component.defaultProps = {
-        ...Component.defaultProps,
-        t: (key: string): string => key
-      };
-      return Component;
-    }
+    useTranslation: () => ({
+      t: (string: string) => string
+    })
   };
 });
 
