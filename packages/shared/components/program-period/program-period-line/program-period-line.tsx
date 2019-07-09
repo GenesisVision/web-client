@@ -3,7 +3,7 @@ import "./program-period-line.scss";
 import classNames from "classnames";
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import { STATUS } from "shared/constants/constants";
 
@@ -14,7 +14,7 @@ const calcDuration = (start: number | Date, end: number | Date): string => {
   return moment.duration(dateEnd.diff(dateStart)).humanize();
 };
 
-const ProgramPeriodLine: React.FC<Props & InjectedTranslateProps> = ({
+const ProgramPeriodLine: React.FC<Props & WithTranslation> = ({
   t,
   start,
   end,

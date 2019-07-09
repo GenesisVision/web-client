@@ -1,6 +1,6 @@
 import { FormikProps, withFormik } from "formik";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import InputImage, {
@@ -184,7 +184,7 @@ interface FormValues extends IAssetEditFormValues {
 export interface IAssetEditProps
   extends FormikProps<FormValues>,
     IAssetEditFormOwnProps,
-    InjectedTranslateProps {}
+    WithTranslation {}
 
 const AssetEditForm = compose<
   React.FC<IAssetEditFormOwnProps & WithLoaderProps>

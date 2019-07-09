@@ -3,8 +3,7 @@ import { Broker, BrokerAccountType } from "gv-api-web";
 import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React, { useCallback, useState } from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -127,7 +126,7 @@ const _BrokerEdit: React.FC<Props> = ({
 
 interface Props
   extends OwnProps,
-    InjectedTranslateProps,
+    WithTranslation,
     FormikProps<ChangeBrokerFormValues> {}
 
 interface OwnProps {

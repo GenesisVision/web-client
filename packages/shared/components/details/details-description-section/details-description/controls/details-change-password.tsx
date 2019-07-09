@@ -1,7 +1,7 @@
 import "./details-description-control.scss";
 
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { MoreIcon } from "shared/components/icon/more-icon";
 
 import DetailsDescriptionControl from "./details-description-control";
@@ -11,7 +11,7 @@ export interface IDetailsChangePassword {
 }
 
 const DetailsChangePassword: React.FC<
-  InjectedTranslateProps & IDetailsChangePassword
+  WithTranslation & IDetailsChangePassword
 > = ({ t, onClick }) => {
   return (
     <DetailsDescriptionControl

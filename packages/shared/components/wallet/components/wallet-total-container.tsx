@@ -1,6 +1,6 @@
 import { CopyTradingAccountInfo, WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { WithRoleProps } from "shared/decorators/with-role";
@@ -35,7 +35,7 @@ const mapStateToProps = (state: RootState): StateProps => ({
   copyTradingAccountsPending: state.copyTradingAccounts.info.isPending
 });
 
-interface Props extends StateProps, InjectedTranslateProps, WithRoleProps {}
+interface Props extends StateProps, WithTranslation, WithRoleProps {}
 
 interface StateProps {
   copyTradingAccounts: CopyTradingAccountInfo[];

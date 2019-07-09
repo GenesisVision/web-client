@@ -1,7 +1,7 @@
 import "./programs-facet.scss";
 
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import FacetContainer, {
   FACET_ASSET
 } from "shared/components/facet-container/facet-container";
@@ -14,7 +14,7 @@ import { fetchPrograms } from "shared/modules/programs-table/services/programs-t
 import ProgramsFacetTable from "./components/programs-facet-table";
 import { getCurrentFacet } from "./services/programs-facet.service";
 
-const _ProgramsFacetPage: React.FC<InjectedTranslateProps> = ({ t }) => {
+const _ProgramsFacetPage: React.FC<WithTranslation> = ({ t }) => {
   const getPrograms = useCallback(
     (filters: ComposeFiltersAllType): Promise<IDataModel> =>
       fetchPrograms({

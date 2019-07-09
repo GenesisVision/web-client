@@ -1,10 +1,10 @@
 import "./signup-email-pending.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 
-const _SignupEmailPending: React.FC<Props & InjectedTranslateProps> = ({
+const _SignupEmailPending: React.FC<Props & WithTranslation> = ({
   t,
   service
 }) => (

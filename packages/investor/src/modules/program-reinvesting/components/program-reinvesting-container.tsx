@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import {
   IProgramDetailContext,
   ProgramDetailContext
@@ -74,9 +74,7 @@ const ProgramReinvestingContainer = translate()(
 );
 export default ProgramReinvestingContainer;
 
-interface Props
-  extends IProgramReinvestingContainerOwnProps,
-    InjectedTranslateProps {}
+interface Props extends IProgramReinvestingContainerOwnProps, WithTranslation {}
 
 interface State {
   isReinvesting: boolean;

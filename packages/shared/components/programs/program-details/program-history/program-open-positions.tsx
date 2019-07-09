@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
@@ -23,7 +23,7 @@ const PAGING = {
   totalPages: 0
 };
 
-const _ProgramOpenPositions: React.FC<Props & InjectedTranslateProps> = ({
+const _ProgramOpenPositions: React.FC<Props & WithTranslation> = ({
   t,
   currency,
   programId,

@@ -1,7 +1,7 @@
 import { FundDetailsFull } from "gv-api-web";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
 import GVButton from "shared/components/gv-button";
@@ -99,4 +99,4 @@ interface State {
   popups: { [k: string]: boolean };
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}

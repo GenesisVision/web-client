@@ -1,6 +1,6 @@
 import { ProgramFacetTimeframeEnum } from "gv-api-web";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import {
   DATE_RANGE_FILTER_NAME,
@@ -24,7 +24,7 @@ import {
 } from "./programs-facet.constants";
 
 const _ProgramsFacetTable: React.FC<
-  IProgramsFacetTableProps & InjectedTranslateProps
+  IProgramsFacetTableProps & WithTranslation
 > = ({
   t,
   title,

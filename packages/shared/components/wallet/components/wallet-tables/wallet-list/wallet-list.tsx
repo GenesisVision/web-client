@@ -2,7 +2,7 @@ import "./wallet-list.scss";
 
 import { WalletData } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
@@ -161,7 +161,7 @@ class _WalletList extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   wallets: WalletData[];
   createButtonToolbar?: () => void;
 }

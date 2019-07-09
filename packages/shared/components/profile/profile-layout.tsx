@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
@@ -83,4 +83,4 @@ interface StateProps {
   prevPath?: string;
 }
 
-interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
+interface Props extends OwnProps, StateProps, WithTranslation {}

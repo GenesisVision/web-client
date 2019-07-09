@@ -1,7 +1,7 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { PasswordModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -48,7 +48,7 @@ enum FIELDS {
   password = "password"
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 interface OwnProps {
   errorMessage?: string;
   onSubmit(twoFactorCode: IFormValues, setSubmitting: SetSubmittingType): void;

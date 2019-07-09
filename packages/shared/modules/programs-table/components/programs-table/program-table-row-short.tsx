@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -31,7 +31,7 @@ interface IProgramTableRowShortProps {
 }
 
 const ProgramTableRowShort: React.FC<
-  IProgramTableRowShortProps & InjectedTranslateProps
+  IProgramTableRowShortProps & WithTranslation
 > = ({
   t,
   title,

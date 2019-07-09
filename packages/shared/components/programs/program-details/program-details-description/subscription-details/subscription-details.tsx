@@ -6,7 +6,7 @@ import {
   SignalSubscriptionModeEnum
 } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -130,7 +130,7 @@ const _SubscriptionTypeValue: React.FC<ISubscriptionTypeValueProps> = ({
 );
 const SubscriptionTypeValue = translate()(React.memo(_SubscriptionTypeValue));
 
-interface ISubscriptionTypeValueProps extends InjectedTranslateProps {
+interface ISubscriptionTypeValueProps extends WithTranslation {
   mode: SignalSubscriptionModeEnum;
   percent: number;
   fixedVolume: number;
@@ -151,7 +151,7 @@ interface OwnProps {
   rate: number;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 const SubscriptionDetails = translate()(React.memo(_SubscriptionDetails));
 export default SubscriptionDetails;

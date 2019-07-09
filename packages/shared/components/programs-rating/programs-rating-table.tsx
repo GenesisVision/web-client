@@ -1,6 +1,6 @@
 import { CancelablePromise, ProgramsList } from "gv-api-web";
 import * as React from "react";
-import { translate } from "react-i18next";
+import { withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";

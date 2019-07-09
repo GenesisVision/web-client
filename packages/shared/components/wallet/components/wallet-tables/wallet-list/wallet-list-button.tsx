@@ -1,7 +1,6 @@
 import { WalletData } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import DepositButton from "../buttons/deposit-button";
 import TransferButton from "../buttons/transfer-button";
@@ -20,9 +19,7 @@ interface IWalletListButton {
   ): (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const _WalletListButton: React.FC<
-  IWalletListButton & InjectedTranslateProps
-> = ({
+const _WalletListButton: React.FC<IWalletListButton & WithTranslation> = ({
   t,
   wallet,
   handleOpenTransferPopup,

@@ -2,7 +2,7 @@ import "./manager-history.scss";
 
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
@@ -75,7 +75,7 @@ const _ManagerHistorySection: React.FC<Props> = ({
   );
 };
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   managerId: string;
   title: string;
   isAuthenticated: boolean;

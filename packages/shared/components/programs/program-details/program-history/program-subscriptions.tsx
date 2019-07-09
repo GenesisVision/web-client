@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { SignalSubscriber } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
@@ -122,7 +122,7 @@ const ProgramSubscriptions = compose<React.FC<OwnProps>>(translate())(
 
 export default ProgramSubscriptions;
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 interface OwnProps {
   id: string;
   currency: CURRENCIES;

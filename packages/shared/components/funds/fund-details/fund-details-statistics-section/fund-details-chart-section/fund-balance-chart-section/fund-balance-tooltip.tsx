@@ -1,11 +1,10 @@
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const _TooltipBody: React.FC<ITooltipBodyProps & InjectedTranslateProps> = ({
+const _TooltipBody: React.FC<ITooltipBodyProps & WithTranslation> = ({
   t,
   managersFunds,
   investorsFunds

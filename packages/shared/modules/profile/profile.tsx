@@ -2,7 +2,7 @@ import "./profile.scss";
 
 import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import VerificationStatus from "shared/components/verification-status/verification-status";
 
@@ -53,7 +53,7 @@ const _Profile: React.FC<Props> = ({ t, info, personal }) => (
   </div>
 );
 
-interface Props extends InjectedTranslateProps, IProfileOwnProps {}
+interface Props extends WithTranslation, IProfileOwnProps {}
 
 export interface IProfileOwnProps {
   info: ProfileFullViewModel;

@@ -2,10 +2,7 @@ import "./funds-table.scss";
 
 import { FundDetails } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
 import { Table } from "shared/components/table/components";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { ITableProps } from "shared/components/table/components/table";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 
@@ -21,7 +18,7 @@ interface Props extends ITableProps {
   isAuthenticated: boolean;
 }
 
-const FundsTable: React.FC<Props & InjectedTranslateProps> = ({
+const FundsTable: React.FC<Props> = ({
   data,
   sorting,
   updateSorting,
@@ -69,4 +66,4 @@ const FundsTable: React.FC<Props & InjectedTranslateProps> = ({
   />
 );
 
-export default translate()(React.memo(FundsTable));
+export default React.memo(FundsTable);

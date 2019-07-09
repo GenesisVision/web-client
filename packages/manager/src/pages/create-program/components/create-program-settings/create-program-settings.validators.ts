@@ -1,4 +1,4 @@
-import { TranslationFunction } from "react-i18next";
+import i18next from "i18next";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -145,7 +145,7 @@ const createProgramSettingsValidationSchema = (
   });
 };
 
-export const assetTitleShape = (t: TranslationFunction) => {
+export const assetTitleShape = (t: i18next.TFunction) => {
   return string()
     .trim()
     .required(
@@ -161,7 +161,7 @@ export const assetTitleShape = (t: TranslationFunction) => {
     );
 };
 
-export const assetDescriptionShape = (t: TranslationFunction) => {
+export const assetDescriptionShape = (t: i18next.TFunction) => {
   return string()
     .trim()
     .required(
@@ -178,7 +178,7 @@ export const assetDescriptionShape = (t: TranslationFunction) => {
 };
 
 export const signalSuccessFeeShape = (
-  t: TranslationFunction,
+  t: i18next.TFunction,
   managerMaxSuccessFee: number
 ) => {
   return number()
@@ -198,7 +198,7 @@ export const signalSuccessFeeShape = (
 };
 
 export const signalVolumeFeeShape = (
-  t: TranslationFunction,
+  t: i18next.TFunction,
   minVolumeFee: number = 0,
   maxVolumeFee: number = 0.1
 ) => {

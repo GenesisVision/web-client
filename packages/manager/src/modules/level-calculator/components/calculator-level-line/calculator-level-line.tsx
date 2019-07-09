@@ -2,7 +2,7 @@ import "./calculator-level-line.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVProgramPeriod from "shared/components/gv-program-period";
 
 const getMarks = (start: number, end: number, value: number) =>
@@ -17,7 +17,7 @@ const calcProgressValue = (level: number, levelProgress: number) => {
   return level + levelProgress / 100;
 };
 
-const _CalculatorLevelLine: React.FC<Props & InjectedTranslateProps> = ({
+const _CalculatorLevelLine: React.FC<Props & WithTranslation> = ({
   t,
   start,
   end,

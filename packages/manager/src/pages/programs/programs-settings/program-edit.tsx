@@ -4,7 +4,7 @@ import {
   assetTitleShape
 } from "pages/create-program/components/create-program-settings/create-program-settings.validators";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import InputImage, {
   IImageValue
@@ -106,7 +106,7 @@ export interface ProgramEditFormValues {
 
 interface Props
   extends OwnProps,
-    InjectedTranslateProps,
+    WithTranslation,
     FormikProps<ProgramEditFormValues> {}
 
 interface OwnProps {

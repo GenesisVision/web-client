@@ -1,7 +1,7 @@
 import "./auth-layout.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
@@ -66,7 +66,7 @@ class _AuthLayout extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props extends InjectedTranslateProps, OwnProps, WithRoleProps {}
+interface Props extends WithTranslation, OwnProps, WithRoleProps {}
 
 interface OwnProps {
   Footer: React.ComponentType<ILoginFooterProps>;

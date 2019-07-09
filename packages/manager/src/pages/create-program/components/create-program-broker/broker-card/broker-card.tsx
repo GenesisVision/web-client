@@ -2,7 +2,7 @@ import "./broker-card.scss";
 
 import classnames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import filesService from "shared/services/file-service";
 
@@ -10,7 +10,7 @@ import BrokerCardAdornment from "./broker-card-adornment";
 import { BROKER_CARD_EXTRA_STATE } from "./broker-card.constants";
 import { slugBrokerName } from "./broker-card.helpers";
 
-const _BrokerCard: React.FC<OwnProps & InjectedTranslateProps> = ({
+const _BrokerCard: React.FC<OwnProps & WithTranslation> = ({
   logo,
   t,
   brokerName,

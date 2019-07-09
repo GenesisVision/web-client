@@ -2,7 +2,7 @@ import "./create-program-broker.scss";
 
 import { Broker, BrokerAccountType } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";
@@ -43,7 +43,7 @@ const getBrokerState = (
   return BROKER_CARD_EXTRA_STATE.NONE;
 };
 
-const _CreateProgramBroker: React.FC<OwnProps & InjectedTranslateProps> = ({
+const _CreateProgramBroker: React.FC<OwnProps & WithTranslation> = ({
   t,
   brokers,
   selectedBroker,

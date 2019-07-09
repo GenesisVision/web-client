@@ -11,7 +11,7 @@ import {
   WalletDataCurrencyEnum
 } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import InputImage, {
@@ -613,7 +613,7 @@ interface OwnProps {
 
 export interface ICreateProgramSettingsProps
   extends OwnProps,
-    InjectedTranslateProps {}
+    WithTranslation {}
 export interface ICreateProgramSettingsFormValues {
   [CREATE_PROGRAM_FIELDS.currency]: string;
   [CREATE_PROGRAM_FIELDS.periodLength]?: number;

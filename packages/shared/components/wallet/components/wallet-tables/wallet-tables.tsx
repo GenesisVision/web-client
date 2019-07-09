@@ -1,7 +1,7 @@
 import "./wallet-tables.scss";
 
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
@@ -123,7 +123,7 @@ enum TABS {
   EXTERNAL_TAB = "#external"
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {
+interface Props extends WithTranslation, OwnProps {
   location: Location;
 }
 

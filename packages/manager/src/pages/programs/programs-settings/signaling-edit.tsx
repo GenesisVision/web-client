@@ -3,8 +3,7 @@ import { IProgramSignalFormValues } from "modules/program-signal/program-signal-
 import { SignalValidationSchema } from "modules/program-signal/program-signal-popup/components/program-signal.validators";
 import SignalsFeeFormPartial from "pages/create-program/components/create-program-settings/signals-fee-form.partial";
 import React, { useCallback, useState } from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
@@ -52,7 +51,7 @@ const _SignalingEdit: React.FC<Props> = ({
 
 interface Props
   extends OwnProps,
-    InjectedTranslateProps,
+    WithTranslation,
     FormikProps<IProgramSignalFormValues> {}
 
 enum FORM_FIELDS {

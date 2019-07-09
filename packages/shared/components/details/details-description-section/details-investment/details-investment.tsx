@@ -1,7 +1,7 @@
 import "./details-investment.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
@@ -190,7 +190,7 @@ interface OwnProps {
   >;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 const DetailsInvestment = translate()(React.memo(_DetailsInvestment));
 export default DetailsInvestment;

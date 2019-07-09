@@ -1,5 +1,5 @@
-import { TranslationFunction } from "i18next";
-import { InjectedTranslateProps } from "react-i18next";
+import i18next from "i18next";
+import { TranslationProps } from "react-i18next";
 import { object, ref, string } from "yup";
 
 interface IChangePasswordTradingAccountValidationSchema {
@@ -7,7 +7,7 @@ interface IChangePasswordTradingAccountValidationSchema {
 }
 
 const twoFactorValidator = (
-  params: InjectedTranslateProps & IChangePasswordTradingAccountValidationSchema
+  params: TranslationProps & IChangePasswordTradingAccountValidationSchema
 ) => {
   const { t, twoFactorEnabled } = params;
   return twoFactorEnabled
@@ -20,7 +20,7 @@ const twoFactorValidator = (
         .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 };
 
-const passwordValidator = ({ t }: InjectedTranslateProps) => {
+const passwordValidator = ({ t }: TranslationProps) => {
   return string()
     .min(8, t("password-change-trading-account.validators.password-is-short"))
     .max(32, t("password-change-trading-account.validators.password-is-long"))
@@ -34,7 +34,7 @@ const passwordValidator = ({ t }: InjectedTranslateProps) => {
 };
 
 export const ChangePasswordTradingAccountValidationSchema = (
-  params: InjectedTranslateProps & IChangePasswordTradingAccountValidationSchema
+  params: TranslationProps & IChangePasswordTradingAccountValidationSchema
 ) =>
   object().shape({
     twoFactorCode: twoFactorValidator(params),

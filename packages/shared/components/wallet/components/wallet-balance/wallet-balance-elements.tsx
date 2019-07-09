@@ -1,7 +1,7 @@
 import "./wallet-balance.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVColors from "shared/components/gv-styles/gv-colors";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -60,7 +60,7 @@ const _WalletBalanceElements: React.FC<Props> = ({
   </div>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   total?: number;
   available?: number;
   invested?: number;

@@ -1,6 +1,6 @@
 import { SearchViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
@@ -84,7 +84,7 @@ export interface SearchTableProps<T> {
   data: T;
 }
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   data: SearchViewModel;
   title: string;
 }

@@ -2,7 +2,7 @@ import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
@@ -112,7 +112,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
   );
 };
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   programDescription: ProgramDetailsFull;

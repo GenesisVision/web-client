@@ -1,7 +1,7 @@
 import "./email-confirm-failure.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
@@ -17,7 +17,7 @@ const _EmailConfirmFailure: React.FC<Props> = ({ t, errorMessage }) => (
 interface OwnProps {
   errorMessage: string;
 }
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 const EmailConfirmFailure = compose<
   React.ComponentType<OwnProps & WithLoaderProps>

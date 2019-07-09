@@ -1,6 +1,6 @@
 import { ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
@@ -16,7 +16,7 @@ enum PROGRAM_WITHDRAW_FORM {
 }
 
 class _ProgramWithdrawPopup extends React.PureComponent<
-  IProgramWithdrawPopupProps & InjectedTranslateProps,
+  IProgramWithdrawPopupProps & WithTranslation,
   State
 > {
   state: State = {

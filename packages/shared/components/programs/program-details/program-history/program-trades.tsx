@@ -2,9 +2,9 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { OrderModel } from "gv-api-web";
 import moment from "moment";
-import { useCallback } from "react";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { useCallback } from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
 import BaseProfitability from "shared/components/profitability/base-profitability";
@@ -178,9 +178,9 @@ interface OwnProps {
   ) => Promise<IDataModel>;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
-interface IDownloadButtonToolbar extends InjectedTranslateProps {
+interface IDownloadButtonToolbar extends WithTranslation {
   filtering: DateRangeFilterType;
   programId: string;
 }

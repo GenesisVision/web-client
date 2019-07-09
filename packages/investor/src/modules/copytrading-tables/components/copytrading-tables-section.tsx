@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
@@ -61,7 +61,7 @@ enum TABS {
   HISTORY = "HISTORY"
 }
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   title: string;
   currency?: string;
 }
