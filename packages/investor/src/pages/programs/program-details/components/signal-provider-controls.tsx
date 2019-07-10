@@ -73,7 +73,8 @@ class SignalProviderControls extends React.PureComponent<
             .hasActiveSubscription ? (
             <>
               <GVButton
-                color="primary-dark"
+                color="secondary"
+                variant="outlined"
                 className="program-details-description__invest-btn"
                 onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
               >
@@ -82,7 +83,6 @@ class SignalProviderControls extends React.PureComponent<
             </>
           ) : (
             <GVButton
-              color="primary-dark"
               className="program-details-description__invest-btn"
               onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
               disabled={!isAuthenticated}
