@@ -65,6 +65,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
       renderBodyRow={period => {
         const {
           profit,
+          balance,
           deposit,
           withdraw,
           commissionRebate,
@@ -73,22 +74,17 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
         } = period.managerStatistic;
         return (
           <TableRow stripy>
-            <TableCell>
-              <ProgramPeriodPie start={period.dateFrom} end={period.dateTo} />
-            </TableCell>
+            <TableCell>{period.number}</TableCell>
             <TableCell>
               <NumberFormat
-                value={formatCurrencyValue(period.balance, currency)}
+                value={formatCurrencyValue(balance, currency)}
                 displayType="text"
                 thousandSeparator=" "
                 suffix={` ${currency}`}
               />
             </TableCell>
             <TableCell>
-              <Profitability
-                value={period.profit}
-                prefix={PROFITABILITY_PREFIX.SIGN}
-              >
+              <Profitability value={profit} prefix={PROFITABILITY_PREFIX.SIGN}>
                 <NumberFormat
                   value={formatCurrencyValue(profit, currency)}
                   thousandSeparator=" "
@@ -99,10 +95,18 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
               </Profitability>
             </TableCell>
             <TableCell>
-              <NumberFormat value={successFee} suffix="%" displayType="text" />
+              <NumberFormat
+                value={successFee}
+                suffix={` ${currency}`}
+                displayType="text"
+              />
             </TableCell>
             <TableCell>
-              <NumberFormat value={entryFee} suffix="%" displayType="text" />
+              <NumberFormat
+                value={entryFee}
+                suffix={` ${currency}`}
+                displayType="text"
+              />
             </TableCell>
             <TableCell>
               <NumberFormat
@@ -122,7 +126,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
                 <NumberFormat
                   value={commissionRebate}
                   displayType="text"
-                  suffix=" %"
+                  suffix={` ${currency}`}
                 />
               </TableCell>
             )}
