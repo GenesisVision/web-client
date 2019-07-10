@@ -4,7 +4,7 @@ import { goBack } from "connected-react-router";
 import { FormikProps, withFormik } from "formik";
 import { UpdateProfileViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -96,7 +96,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 interface Props
-  extends InjectedTranslateProps,
+  extends WithTranslation,
     FormikProps<IAboutFormValues>,
     IAboutFormOwnProps,
     DispatchProps {}

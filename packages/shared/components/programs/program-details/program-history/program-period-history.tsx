@@ -1,6 +1,6 @@
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import Profitability from "shared/components/profitability/profitability";
@@ -61,12 +61,8 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
       renderBodyRow={period => {
         return (
           <TableRow stripy>
-            <TableCell>
-              <ProgramPeriodPie
-                numberPeriod={period.number}
-                start={period.dateFrom}
-                end={period.dateTo}
-              />
+            <TableCell className="details-trades__cell--period">
+              {period.number}
             </TableCell>
             <TableCell>{moment(new Date(period.dateFrom)).format()}</TableCell>
             <TableCell>{moment(new Date(period.dateTo)).format()}</TableCell>
@@ -108,7 +104,7 @@ const ProgramPeriodHistory = compose<React.FC<OwnProps>>(translate())(
 
 export default ProgramPeriodHistory;
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 interface OwnProps {
   id: string;
   currency: CURRENCIES;

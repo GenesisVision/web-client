@@ -1,6 +1,6 @@
 import { FormikProps, withFormik } from "formik";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -31,7 +31,7 @@ export interface IChangePasswordTradingAccountFormValues {
   [FORM_FIELDS.twoFactorCode]: string;
 }
 
-type ChangePasswordTradingAccountFormProps = InjectedTranslateProps &
+type ChangePasswordTradingAccountFormProps = WithTranslation &
   IChangePasswordTradingAccountFormOwnProps &
   FormikProps<IChangePasswordTradingAccountFormValues>;
 

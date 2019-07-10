@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { FundBalanceChart as FundBalanceChartType } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import Surface from "shared/components/surface/surface";
@@ -31,7 +31,7 @@ const _FundDetailsChart: React.FC<Props> = ({
   </Surface>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
   profitChart?: FundDetailsProfitChart;

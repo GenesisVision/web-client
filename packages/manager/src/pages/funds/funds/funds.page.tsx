@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "shared/components/facet-cards/faset-cards-container";
@@ -14,7 +14,7 @@ import {
 } from "shared/routes/funds.routes";
 import { composeFundFacetUrl } from "shared/utils/compose-url";
 
-const _FundsPage: React.FC<InjectedTranslateProps> = ({ t }) => {
+const _FundsPage: React.FC<WithTranslation> = ({ t }) => {
   const title = t("funds-page.title");
   return (
     <Page title={title}>

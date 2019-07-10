@@ -1,6 +1,6 @@
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 const _PropgramPeriodEndTooltip: React.FC<Props> = ({ t, periodEnds }) => (
   <div className="program-period-tooltip">
@@ -15,7 +15,7 @@ const _PropgramPeriodEndTooltip: React.FC<Props> = ({ t, periodEnds }) => (
   </div>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   periodEnds: Date;
 }
 

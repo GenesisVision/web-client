@@ -1,7 +1,7 @@
 import "./details-description-control.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import isAuthenticated from "shared/decorators/is-authenticated";
@@ -16,7 +16,7 @@ interface IDetailsFavoriteOwnProps {
 
 interface IDetailsFavoriteProps
   extends IDetailsFavoriteOwnProps,
-    InjectedTranslateProps {}
+    WithTranslation {}
 
 interface IDetailsFavoriteState {
   isFavorite: boolean;

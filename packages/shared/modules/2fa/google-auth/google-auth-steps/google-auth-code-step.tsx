@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVqr from "shared/components/gv-qr/gv-qr";
 
 const GoogleStep2: React.FC<Props> = ({
@@ -20,7 +20,7 @@ const GoogleStep2: React.FC<Props> = ({
   </div>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   authenticatorUri: string;
   sharedKey: string;
   className?: string;

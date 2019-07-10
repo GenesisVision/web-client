@@ -1,14 +1,14 @@
 import "./select-filter.scss";
 
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import Filter from "../filter";
 import { SelectFilterValue, TFilter } from "../filter.type";
 import SelectFilterPopover from "./select-filter-popover";
 import { SelectFilterType } from "./select-filter.constants";
 
-const _SelectFilter: React.FC<Props & InjectedTranslateProps> = ({
+const _SelectFilter: React.FC<Props & WithTranslation> = ({
   t,
   label,
   name,

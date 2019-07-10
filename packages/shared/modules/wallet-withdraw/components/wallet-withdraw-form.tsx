@@ -2,12 +2,9 @@ import "./wallet-withdraw-form.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
+import i18next from "i18next";
 import * as React from "react";
-import {
-  InjectedTranslateProps,
-  TranslationFunction,
-  translate
-} from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -164,7 +161,7 @@ const _WalletWithdrawForm: React.FC<
 };
 
 const twoFactorvalidator = (
-  t: TranslationFunction,
+  t: i18next.TFunction,
   twoFactorEnabled: boolean
 ): StringSchema => {
   return twoFactorEnabled
@@ -191,7 +188,7 @@ export interface IWalletWithdrawFormValues {
   [FIELDS.twoFactorCode]: string;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
   twoFactorEnabled: boolean;

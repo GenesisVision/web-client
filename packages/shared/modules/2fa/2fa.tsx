@@ -3,7 +3,7 @@ import "./2fa.scss";
 import classNames from "classnames";
 import { TwoFactorStatus } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import GVTextField from "shared/components/gv-text-field";
@@ -55,7 +55,7 @@ const _TwoFactor: React.FC<Props> = ({
   </div>
 );
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   twoFactorAuth: TwoFactorStatus;

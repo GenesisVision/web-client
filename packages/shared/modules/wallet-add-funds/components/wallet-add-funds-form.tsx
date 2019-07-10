@@ -1,7 +1,7 @@
 import copy from "copy-to-clipboard";
 import { WalletData } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import GVqr from "shared/components/gv-qr/gv-qr";
 import GVTextField from "shared/components/gv-text-field";
@@ -118,4 +118,4 @@ interface State {
   currency: CurrencyEnum;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}

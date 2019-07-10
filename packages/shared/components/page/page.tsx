@@ -1,6 +1,6 @@
 import * as React from "react";
 import DocumentTitle from "react-document-title";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import BackButton from "shared/components/back-button/back-button";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
@@ -14,7 +14,7 @@ const _Page: React.FC<Props> = ({ t, title, children, role }) => (
   </DocumentTitle>
 );
 
-interface Props extends InjectedTranslateProps, OwnProps, WithRoleProps {}
+interface Props extends WithTranslation, OwnProps, WithRoleProps {}
 
 interface OwnProps {
   title: string;

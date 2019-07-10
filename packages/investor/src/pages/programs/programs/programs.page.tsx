@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "shared/components/facet-cards/faset-cards-container";
@@ -14,7 +14,7 @@ import {
 } from "shared/routes/programs.routes";
 import { composeProgramFacetUrl } from "shared/utils/compose-url";
 
-const _ProgramsPage: React.FC<InjectedTranslateProps> = ({ t }) => {
+const _ProgramsPage: React.FC<WithTranslation> = ({ t }) => {
   const title = t("programs-page.title");
   return (
     <Page title={title}>

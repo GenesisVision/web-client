@@ -1,20 +1,24 @@
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 @import "~shared/styles/_breakpoint.scss";
 
 .broker-card {
+  @include adaptive-margin(right, $padding-upper-medium/2);
+  @include adaptive-margin(bottom, $padding-upper-medium/2);
   box-sizing: border-box;
-  width: 115px;
-  height: 115px;
+  width: 130px;
+  height: 130px;
   border-radius: 8px;
   background-color: transparent;
   border: 1px solid $panel-background-color;
-  margin-right: 25px;
-  margin-bottom: 25px;
   position: relative;
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: $padding-medium;
+  padding-bottom: $padding-medium;
 
   &--active {
     background-color: $panel-background-color;
@@ -44,11 +48,13 @@
     font-weight: 600;
     opacity: 0.3;
     position: absolute;
-    bottom: 12%;
-    left: 12%;
+    top: $padding-upper-medium/2;
     display: flex;
-    width: calc(100% - 30px);
     justify-content: space-between;
+    padding-left: $padding-small/2;
+    padding-right: $padding-small/2;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   &__logo {
@@ -71,10 +77,18 @@
     right: -8px;
   }
 
-  @include media-breakpoint-tablet() {
-    width: 137px;
-    height: 137px;
+  &__tags {
+    position: absolute;
+    padding-left: $padding-small/2;
+    padding-right: $padding-small/2;
+    width: 100%;
+    bottom: $padding-xsmall;
+  }
+
+  @include media-breakpoint-landscape-phone() {
     border-radius: 10px;
+    width: 140px;
+    height: 140px;
   }
 
   @include media-breakpoint-desktop() {

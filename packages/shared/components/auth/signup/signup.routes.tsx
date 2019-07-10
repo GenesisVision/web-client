@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import SignUpFooter from "shared/components/auth/components/signup-footer/signup-footer";
@@ -10,7 +10,7 @@ import { SIGNUP_ROUTE } from "shared/routes/app.routes";
 
 export const SIGNUP_ROUTE_PENDING = `${SIGNUP_ROUTE}/pending`;
 
-const _SignUpRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
+const _SignUpRoutes: React.FC<WithTranslation> = ({ t }) => (
   <AuthLayout
     title={t("auth.signup.title")}
     Footer={SignUpFooter}

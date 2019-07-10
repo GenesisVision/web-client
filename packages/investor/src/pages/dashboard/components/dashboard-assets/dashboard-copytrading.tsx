@@ -2,7 +2,7 @@ import { SignalDetails } from "gv-api-web";
 import moment from "moment";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
@@ -134,7 +134,7 @@ const DashboardCopytrading = compose<React.ComponentType<OwnProps>>(
 )(_DashboardCopytrading);
 export default DashboardCopytrading;
 
-interface Props extends WithRoleProps, InjectedTranslateProps, OwnProps {}
+interface Props extends WithRoleProps, WithTranslation, OwnProps {}
 
 interface OwnProps {
   title: string;

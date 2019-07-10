@@ -2,7 +2,7 @@ import "./signup.scss";
 
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import * as React from "react";
-import { translate } from "react-i18next";
+import { withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, compose } from "redux";
 import AuthTabs from "shared/components/auth/components/auth-tabs/auth-tabs";

@@ -1,7 +1,7 @@
 import "./dashboard-funds.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
@@ -169,7 +169,7 @@ const _DashboardFunds: React.FC<Props> = ({
   />
 );
 
-interface Props extends InjectedTranslateProps, WithRoleProps, OwnProps {}
+interface Props extends WithTranslation, WithRoleProps, OwnProps {}
 
 interface OwnProps {
   title: string;

@@ -5,7 +5,7 @@ import {
   getDashboardPrograms
 } from "pages/dashboard/services/dashboard-assets.service";
 import React, { useCallback, useEffect, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
@@ -116,7 +116,7 @@ interface DispatchProps {
   };
 }
 
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+interface Props extends OwnProps, DispatchProps, WithTranslation {}
 
 export default compose<React.ComponentType<OwnProps>>(
   translate(),

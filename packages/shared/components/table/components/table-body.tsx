@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import withLoader from "shared/decorators/with-loader";
 
 import { LIST_VIEW } from "../table.constants";
@@ -51,7 +51,7 @@ const _TableItems: React.FC<ITableItemsProps> = ({
   );
 const TableItems = withLoader(React.memo(_TableItems));
 
-const _EmptyMessage: React.FC<{ view: LIST_VIEW } & InjectedTranslateProps> = ({
+const _EmptyMessage: React.FC<{ view: LIST_VIEW } & WithTranslation> = ({
   view,
   t
 }) => {

@@ -2,7 +2,7 @@ import classnames from "classnames";
 import { FormikProps, withFormik } from "formik";
 import { ChangePasswordViewModel } from "gv-api-web";
 import React, { ComponentType } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -19,7 +19,7 @@ interface IPasswordChangeFormOwnProps {
   ): void;
 }
 
-type PasswordChangeFormProps = InjectedTranslateProps &
+type PasswordChangeFormProps = WithTranslation &
   IPasswordChangeFormOwnProps &
   FormikProps<ChangePasswordViewModel>;
 const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({

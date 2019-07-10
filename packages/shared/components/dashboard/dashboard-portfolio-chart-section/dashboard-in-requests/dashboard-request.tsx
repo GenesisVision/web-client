@@ -1,7 +1,7 @@
 import { ProgramRequest } from "gv-api-web";
 import moment from "moment";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
@@ -101,10 +101,7 @@ const _DashboardRequest: React.FC<Props> = ({
   );
 };
 
-export interface Props
-  extends InjectedTranslateProps,
-    WithRoleProps,
-    OwnProps {}
+export interface Props extends WithTranslation, WithRoleProps, OwnProps {}
 
 interface OwnProps {
   request: ProgramRequest;

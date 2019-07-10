@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -14,7 +14,7 @@ interface ISignalsFeeFormPartialProps {
 }
 
 const SignalsFeeFormPartial: React.FC<
-  ISignalsFeeFormPartialProps & InjectedTranslateProps
+  ISignalsFeeFormPartialProps & WithTranslation
 > = ({
   t,
   successFeeFieldName,
@@ -26,7 +26,7 @@ const SignalsFeeFormPartial: React.FC<
       <div className="create-program-settings__row-title">
         {t("manager.create-program-page.settings.signal-provider-fees")}
       </div>
-      <div className="create-program-settings__item">
+      <div className="create-program-settings__field">
         <GVFormikField
           name={volumeFeeFieldName}
           label={t(
@@ -44,14 +44,14 @@ const SignalsFeeFormPartial: React.FC<
           content={t(
             "manager.create-program-page.settings.hints.signal-volume-fee"
           )}
-          className="create-program-settings__item-caption"
+          className="create-program-settings__field-caption"
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
           tooltipContent={t(
             "manager.create-program-page.settings.hints.signal-volume-fee-description"
           )}
         />
       </div>
-      <div className="create-program-settings__item">
+      <div className="create-program-settings__field">
         <GVFormikField
           name={successFeeFieldName}
           label={t(
@@ -68,7 +68,7 @@ const SignalsFeeFormPartial: React.FC<
           content={t(
             "manager.create-program-page.settings.hints.signal-success-fee"
           )}
-          className="create-program-settings__item-caption"
+          className="create-program-settings__field-caption"
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
           tooltipContent={t(
             "manager.create-program-page.settings.hints.signal-success-fee-description"

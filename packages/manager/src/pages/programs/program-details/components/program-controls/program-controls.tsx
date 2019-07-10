@@ -1,13 +1,11 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 
 import InvestmentProgramControls from "./investment-program-controls";
 
-const _ProgramControls: React.FC<
-  IProgramControlsProps & InjectedTranslateProps
-> = ({
+const _ProgramControls: React.FC<IProgramControlsProps & WithTranslation> = ({
   programDescription,
   levelsParameters,
   isAuthenticated,

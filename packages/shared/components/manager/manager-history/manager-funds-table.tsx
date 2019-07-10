@@ -1,7 +1,7 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
@@ -27,7 +27,7 @@ interface Props {
   isAuthenticated: boolean;
 }
 
-const _ManagerFunds: React.FC<Props & InjectedTranslateProps> = ({
+const _ManagerFunds: React.FC<Props & WithTranslation> = ({
   t,
   title,
   isAuthenticated,

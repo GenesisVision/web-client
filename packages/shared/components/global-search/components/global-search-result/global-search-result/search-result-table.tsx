@@ -1,16 +1,22 @@
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { useTranslation } from "react-i18next";
 
-const SearchResultTable: React.FC<
-  { data: boolean } & InjectedTranslateProps
-> = ({ data, children, t }) => (
-  <>
-    {data ? (
-      children
-    ) : (
-      <div className="global-search-result__loading">{t("table.loading")}</div>
-    )}
-  </>
-);
-export default translate()(React.memo(SearchResultTable));
+const SearchResultTable: React.FC<Props> = ({ data, children }) => {
+  const { t } = useTranslation();
+  return (
+    <>
+      {data ? (
+        children
+      ) : (
+        <div className="global-search-result__loading">
+          {t("table.loading")}
+        </div>
+      )}
+    </>
+  );
+};
+export default React.memo(SearchResultTable);
+
+interface Props {
+  data: boolean;
+}

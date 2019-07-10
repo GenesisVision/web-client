@@ -1,6 +1,6 @@
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 
 import DateRangeFilterValues from "./date-range-filter-values";
@@ -126,7 +126,7 @@ interface OwnProps {
   cancel?(): void;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface State extends IDataRangeFilterValue {}
 

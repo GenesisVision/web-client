@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import {
   ChartDefaultPeriod,
@@ -16,7 +16,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { FundDetailsStatistic } from "../../services/fund-details.types";
 
 const _FundDetailsStatisticsElements: React.FC<
-  IFundDetailsStatisticsElementsProps & InjectedTranslateProps
+  IFundDetailsStatisticsElementsProps & WithTranslation
 > = ({ t, statistic, period }) => (
   <>
     <div className="details-statistics__subheading">

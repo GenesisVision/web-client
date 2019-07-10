@@ -2,7 +2,7 @@ import "shared/components/auth/forgot-password/forgot-password/forgot-password.s
 
 import { ForgotPasswordViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import {
@@ -60,11 +60,7 @@ interface DispatchProps {
 
 interface OwnProps {}
 
-interface Props
-  extends InjectedTranslateProps,
-    OwnProps,
-    DispatchProps,
-    StateProps {}
+interface Props extends WithTranslation, OwnProps, DispatchProps, StateProps {}
 
 const ForgotPasswordPage = compose<React.ComponentType<OwnProps>>(
   translate(),

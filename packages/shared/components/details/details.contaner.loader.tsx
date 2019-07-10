@@ -1,7 +1,7 @@
 import "shared/components/details/details.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
@@ -15,7 +15,7 @@ import SvgLoader from "shared/components/svg-loader/svg-loader";
 import SocialLinksBlockLoader from "../social-links-block/social-links-block.loader";
 
 const _DetailsContainerLoader: React.FC<
-  { assets?: boolean } & InjectedTranslateProps
+  { assets?: boolean } & WithTranslation
 > = ({ t, assets }) => (
   <Page title={""}>
     <div className="details">

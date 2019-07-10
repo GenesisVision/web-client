@@ -1,7 +1,7 @@
 import { OrderSignalModel } from "gv-api-web";
 import TradesHistoryRow from "modules/copytrading-tables/components/trades-history-row";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -84,4 +84,4 @@ interface DispatchProps {
   };
 }
 
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+interface Props extends OwnProps, DispatchProps, WithTranslation {}
