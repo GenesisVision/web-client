@@ -127,23 +127,23 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
       {details && (
         <>
           <ClosePeriodContainer
-          open={isClosePeriodOpen}
-          onClose={setClosePeriodClose}
-          onApply={fetchingDescription}
-          id={details.id}
-        />
-        <CloseProgramContainer
-        open={isCloseProgramOpen}
-        onClose={setCloseProgramClose}
-        onApply={applyClose}
-        id={details.id}
-        />
-        <ChangePasswordTradingAccountPopup
-        programName={details.title}
-        open={isChangePasswordOpen}
-        id={details.id}
-        onClose={setChangePasswordClose}
-        />
+            open={isClosePeriodOpen}
+            onClose={setClosePeriodClose}
+            onApply={fetchingDescription}
+            id={details.id}
+          />
+          <CloseProgramContainer
+            open={isCloseProgramOpen}
+            onClose={setCloseProgramClose}
+            onApply={applyClose}
+            id={details.id}
+          />
+          <ChangePasswordTradingAccountPopup
+            programName={details.title}
+            open={isChangePasswordOpen}
+            id={details.id}
+            onClose={setChangePasswordClose}
+          />
         </>
       )}
     </Page>
