@@ -79,7 +79,7 @@ const _ProgramTrades: React.FC<Props> = ({
       renderBodyRow={(trade: OrderModel) => {
         const volume = +formatValue(trade.volume, DEFAULT_DECIMAL_SCALE / 2);
         return (
-          <TableRow className="details-trades__row">
+          <TableRow stripy>
             <TableCell className="details-trades__cell program-details-trades__cell--direction/entry">
               <BaseProfitability
                 isPositive={trade.direction === "Buy"}

@@ -3,6 +3,7 @@ import "shared/components/details/details-description-section/details-statistic-
 import { ReallocationsViewModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
+import { RefObject } from "react";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import { FUND_REALLOCATE_HISTORY_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
@@ -17,7 +18,6 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 
 import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cell";
-import { RefObject } from "react";
 
 class _FundReallocateHistory extends React.PureComponent<Props, State> {
   state: State = {
@@ -68,8 +68,8 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
           return <FundStructureHeaderCell column={column} />;
         }}
         renderBodyRow={(item: any) => (
-          <TableRow className="details-structure__row">
-            <TableCell className="details-structure__cell">
+          <TableRow stripy>
+            <TableCell className="details-structure__cell fund-details-structure__cell">
               {moment(item.date).format()}
             </TableCell>
             <TableCell className="details-structure__cell details-structure__cell--reallocate-funds">
