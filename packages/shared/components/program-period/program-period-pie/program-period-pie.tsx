@@ -27,13 +27,7 @@ const renderDurationText = (t: TranslationFunction, start: Date, end: Date) => {
   }
 };
 
-const _ProgramPeriodPie: React.FC<Props> = ({
-  t,
-  start,
-  end,
-  className,
-  numberPeriod
-}) => (
+const _ProgramPeriodPie: React.FC<Props> = ({ t, start, end, className }) => (
   <Tooltip render={() => <ProgramPeriodTooltip end={end} />}>
     <div className={classNames("program-period-pie", className)}>
       <GVProgramPeriod
@@ -45,9 +39,6 @@ const _ProgramPeriodPie: React.FC<Props> = ({
       <div className="program-period-pie__text">
         {renderDurationText(t, start, end)}
       </div>
-      {numberPeriod && (
-        <div className="program-period-pie__number">{numberPeriod}</div>
-      )}
     </div>
   </Tooltip>
 );
@@ -56,7 +47,6 @@ interface Props extends InjectedTranslateProps {
   start: Date;
   end: Date;
   className?: string;
-  numberPeriod?: number;
 }
 
 const ProgramPeriodPie = withLoader(translate()(React.memo(_ProgramPeriodPie)));
