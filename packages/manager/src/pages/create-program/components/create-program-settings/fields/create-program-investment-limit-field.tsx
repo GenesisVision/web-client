@@ -15,7 +15,7 @@ const _CreateProgramInvestmentLimitField: React.FC<Props> = ({
   currency
 }) => (
   <>
-    <div className="create-program-settings__item create-program-settings__item--wider">
+    <div className="create-program-settings__field create-program-settings__field--wider">
       <GVFormikField
         type="checkbox"
         color="primary"
@@ -29,7 +29,7 @@ const _CreateProgramInvestmentLimitField: React.FC<Props> = ({
       />
     </div>
     {hasInvestmentLimit && (
-      <div className="create-program-settings__item">
+      <div className="create-program-settings__field">
         <InputAmountField
           autoFocus={false}
           isAllow={isAllow}

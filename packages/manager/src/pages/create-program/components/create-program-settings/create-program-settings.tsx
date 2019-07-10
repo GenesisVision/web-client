@@ -128,7 +128,7 @@ class _CreateProgramSettings extends React.PureComponent<
       depositAmount,
       isSignalProgram,
       hasInvestmentLimit,
-      description,
+      description
     } = values;
     const accountCurrencies = accountType ? accountType.currencies : [];
     const accountLeverages = accountType ? accountType.leverages : [];
@@ -146,7 +146,7 @@ class _CreateProgramSettings extends React.PureComponent<
           <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
             <div className="create-program-settings__row">
               <CreateProgramTitleField name={CREATE_PROGRAM_FIELDS.title} />
-              <div className="create-program-settings__item">
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
                   component={GVTextField}
@@ -164,7 +164,7 @@ class _CreateProgramSettings extends React.PureComponent<
                   ))}
                 </GVFormikField>
               </div>
-              <div className="create-program-settings__item">
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.currency}
                   component={GVTextField}
@@ -189,7 +189,7 @@ class _CreateProgramSettings extends React.PureComponent<
                 name={CREATE_PROGRAM_FIELDS.description}
                 description={description}
               />
-              <div className="create-program-settings__item">
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.leverage}
                   component={GVTextField}
@@ -211,7 +211,7 @@ class _CreateProgramSettings extends React.PureComponent<
                   })}
                 </GVFormikField>
               </div>
-              <div className="create-program-settings__item">
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.periodLength}
                   component={GVTextField}
@@ -247,7 +247,7 @@ class _CreateProgramSettings extends React.PureComponent<
                 )}
               />
               {broker.isSignalsAvailable && (
-                <div className="create-program-settings__item">
+                <div className="create-program-settings__field">
                   <GVFormikField
                     type="checkbox"
                     color="primary"
@@ -276,7 +276,7 @@ class _CreateProgramSettings extends React.PureComponent<
                   "manager.create-program-page.settings.investment-program-fees"
                 )}
               </div>
-              <div className="create-program-settings__item">
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.entryFee}
                   label={t(
@@ -293,14 +293,14 @@ class _CreateProgramSettings extends React.PureComponent<
                   content={t(
                     "manager.create-program-page.settings.hints.entry-fee"
                   )}
-                  className="create-program-settings__item-caption"
+                  className="create-program-settings__field-caption"
                   vertical={VERTICAL_POPOVER_POS.BOTTOM}
                   tooltipContent={t(
                     "manager.create-program-page.settings.hints.entry-fee-description"
                   )}
                 />
               </div>
-              <div className="create-program-settings__item">
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.successFee}
                   label={t(
@@ -317,7 +317,7 @@ class _CreateProgramSettings extends React.PureComponent<
                   content={t(
                     "manager.create-program-page.settings.hints.success-fee"
                   )}
-                  className="create-program-settings__item-caption"
+                  className="create-program-settings__field-caption"
                   vertical={VERTICAL_POPOVER_POS.BOTTOM}
                   tooltipContent={t(
                     "manager.create-program-page.settings.hints.success-fee-description"
@@ -339,7 +339,7 @@ class _CreateProgramSettings extends React.PureComponent<
           <div
             className={"deposit-details create-program-settings__fill-block"}
           >
-            <div className="create-program-settings__item deposit-details">
+            <div className="create-program-settings__field deposit-details">
               <GVFormikField
                 name={CREATE_PROGRAM_FIELDS.depositWalletId}
                 component={GVTextField}

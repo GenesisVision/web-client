@@ -4,7 +4,7 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 
 const _CreateProgramTitleField: React.FC<Props> = ({ name, t }) => (
-  <div className="create-program-settings__item">
+  <div className="create-program-settings__field">
     <GVFormikField
       type="text"
       name={name}
@@ -12,7 +12,7 @@ const _CreateProgramTitleField: React.FC<Props> = ({ name, t }) => (
       autoComplete="off"
       component={GVTextField}
     />
-    <div className="create-program-settings__item-caption">
+    <div className="create-program-settings__field-caption">
       {t("manager.create-program-page.settings.fields.name-requirements")}
     </div>
   </div>

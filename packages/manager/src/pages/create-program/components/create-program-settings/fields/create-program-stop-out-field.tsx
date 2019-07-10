@@ -6,7 +6,7 @@ import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
 const _CreateProgramStopOutField: React.FC<Props> = ({ name, t }) => (
-  <div className="create-program-settings__item">
+  <div className="create-program-settings__field">
     <GVFormikField
       name={name}
       label={t("manager.create-program-page.settings.fields.stop-out-level")}
@@ -18,7 +18,7 @@ const _CreateProgramStopOutField: React.FC<Props> = ({ name, t }) => (
     />
     <Hint
       content={t("manager.create-program-page.settings.hints.stop-out-level")}
-      className="create-program-settings__item-caption"
+      className="create-program-settings__field-caption"
       vertical={VERTICAL_POPOVER_POS.BOTTOM}
       tooltipContent={t(
         "manager.create-program-page.settings.hints.stop-out-level-description"
