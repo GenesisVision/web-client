@@ -14,7 +14,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
-import TagProgramContainer from "shared/components/tag-program/tag-program-container";
+import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import {
   composeManagerDetailsUrl,

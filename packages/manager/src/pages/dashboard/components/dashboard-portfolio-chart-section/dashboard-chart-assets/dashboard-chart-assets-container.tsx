@@ -1,8 +1,8 @@
 import "./dashboard-chart-assets.scss";
 
 import { ManagerAssets } from "gv-api-web";
-import * as React from "react";
 import { useCallback } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {

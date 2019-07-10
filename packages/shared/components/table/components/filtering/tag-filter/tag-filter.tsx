@@ -4,7 +4,7 @@ import { ProgramTag } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
-import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import TagItem from "shared/components/tags/tag-item/tag-item";
 
 import { TFilter } from "../filter.type";
 import TileFilter from "../tile-filter";
@@ -22,7 +22,7 @@ const _TagFilter: React.FC<Props & InjectedTranslateProps> = ({
     .filter(x => value.includes(x.name))
     .map(tag => (
       <TileFilterItem key={tag.name} id={tag.name}>
-        <TagProgramItem color={tag.color} name={tag.name} />
+        <TagItem color={tag.color} name={tag.name} />
       </TileFilterItem>
     ));
   const notSelectedTags = values.filter(x => !value.includes(x.name));
