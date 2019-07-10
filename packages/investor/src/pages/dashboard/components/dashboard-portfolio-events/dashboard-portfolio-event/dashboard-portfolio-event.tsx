@@ -3,7 +3,7 @@ import "./dashboard-portfolio-event.scss";
 import { DashboardPortfolioEvent as DashboardPortfolioEventType } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { EVENT_LOGO_TYPE } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
@@ -25,7 +25,7 @@ const formatDate = (date: Date) => {
 };
 
 const _EventDescription: React.FC<
-  { event: DashboardPortfolioEventType } & InjectedTranslateProps
+  { event: DashboardPortfolioEventType } & WithTranslation
 > = ({ t, event }) => {
   const valueTotal =
     event.type === PROFIT_EVENT ? event.valueTotal : event.value;

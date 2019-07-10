@@ -2,7 +2,7 @@ import { ProgramDetailsFull } from "gv-api-web";
 import ProgramFollowContainer from "modules/program-follow/program-follow-container";
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import {
   IProgramDetailContext,
   ProgramDetailContext
@@ -26,7 +26,7 @@ interface ISignalProviderControlState {
 }
 
 type SignalProviderControlsProps = ISignalProviderControlOwnProps &
-  InjectedTranslateProps;
+  WithTranslation;
 
 class SignalProviderControls extends React.PureComponent<
   SignalProviderControlsProps,

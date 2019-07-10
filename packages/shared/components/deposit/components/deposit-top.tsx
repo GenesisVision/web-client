@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
@@ -48,7 +48,4 @@ export interface DepositTopOwnProps {
   availableToInvestBase?: number;
   asset: ASSET;
 }
-interface Props
-  extends DepositTopOwnProps,
-    InjectedTranslateProps,
-    WithRoleProps {}
+interface Props extends DepositTopOwnProps, WithTranslation, WithRoleProps {}

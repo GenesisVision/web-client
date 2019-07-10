@@ -1,6 +1,6 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
@@ -40,7 +40,7 @@ const _RestorePassword: React.FC<
   </form>
 );
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   onSubmit(

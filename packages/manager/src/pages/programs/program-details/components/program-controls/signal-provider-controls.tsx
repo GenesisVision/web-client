@@ -4,13 +4,13 @@ import { ProgramDetailsFull } from "gv-api-web";
 import ProgramEditSignalContainer from "modules/program-signal/program-edit-signal/program-edit-signal-container";
 import ProgramMakeSignalContainer from "modules/program-signal/program-make-signal/program-make-signal-container";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import GVButton from "shared/components/gv-button";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 
 class SignalProviderControls extends React.PureComponent<
-  OwnProps & InjectedTranslateProps,
+  OwnProps & WithTranslation,
   State
 > {
   state = {

@@ -9,7 +9,7 @@ import {
   WalletData
 } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useTab from "shared/hooks/tab.hook";
@@ -135,7 +135,7 @@ interface OwnProps {
   currency: CurrencyEnum;
 }
 
-export interface Props extends InjectedTranslateProps, OwnProps {}
+export interface Props extends WithTranslation, OwnProps {}
 
 const FollowForm = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
   withLoader,

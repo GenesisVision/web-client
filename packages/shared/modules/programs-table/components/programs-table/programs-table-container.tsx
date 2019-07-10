@@ -2,7 +2,7 @@ import { push } from "connected-react-router";
 import { ProgramTag, ProgramsList } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
@@ -78,7 +78,7 @@ interface Props
     MergeProps,
     StateProps,
     DispatchProps,
-    InjectedTranslateProps,
+    WithTranslation,
     RouteComponentProps {}
 
 class _ProgramsTableContainer extends React.PureComponent<Props> {

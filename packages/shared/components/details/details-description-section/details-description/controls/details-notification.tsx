@@ -1,7 +1,7 @@
 import "./details-description-control.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import { RingIcon } from "shared/components/icon/ring-icon";
@@ -17,7 +17,7 @@ interface IDetailsNotificationOwnProps {
 
 interface IDetailsNotificationProps
   extends IDetailsNotificationOwnProps,
-    InjectedTranslateProps {}
+    WithTranslation {}
 
 const DetailsNotification: React.FC<IDetailsNotificationProps> = ({
   t,

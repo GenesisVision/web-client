@@ -2,7 +2,7 @@ import "./notify-button.scss";
 
 import { subscribeAvailableToInvest } from "pages/programs/program-details/services/program-details.service";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -88,7 +88,7 @@ interface DispatchProps {
   ) => Promise<string>;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps, DispatchProps {}
+interface Props extends OwnProps, WithTranslation, DispatchProps {}
 
 interface State {
   notificationId?: string;

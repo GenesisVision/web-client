@@ -1,7 +1,7 @@
 import "./level-calculator.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 import { CalculatorIcon } from "shared/components/icon/calculator-icon";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
@@ -9,9 +9,13 @@ import useIsOpen from "shared/hooks/is-open.hook";
 
 import LevelCalculatorPopupContainer from "./level-calculator-popup.container";
 
-const _LevelCalculator: React.FC<
-  ILevelCalculatorProps & InjectedTranslateProps
-> = ({ id, title, currency, levelsParameters, isKycConfirmed }) => {
+const _LevelCalculator: React.FC<ILevelCalculatorProps & WithTranslation> = ({
+  id,
+  title,
+  currency,
+  levelsParameters,
+  isKycConfirmed
+}) => {
   const [isOpen, setOpen, setClose] = useIsOpen();
   return (
     <>

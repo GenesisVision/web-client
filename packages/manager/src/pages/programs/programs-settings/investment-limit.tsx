@@ -1,7 +1,7 @@
 import { FormikProps, withFormik } from "formik";
 import CreateProgramInvestmentLimitField from "pages/create-program/components/create-program-settings/fields/create-program-investment-limit-field";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -64,7 +64,7 @@ export interface InvesmentLimitFormValues {
 
 interface Props
   extends OwnProps,
-    InjectedTranslateProps,
+    WithTranslation,
     FormikProps<InvesmentLimitFormValues> {}
 
 interface OwnProps {

@@ -2,7 +2,7 @@ import "./navigation.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { withRouter } from "react-router";
 import { compose } from "redux";
 import GVLogo from "shared/components/gv-logo/gv-logo";
@@ -19,7 +19,7 @@ interface INavigationProps {
   className?: string;
 }
 
-const _Navigation: React.FC<INavigationProps & InjectedTranslateProps> = ({
+const _Navigation: React.FC<INavigationProps & WithTranslation> = ({
   t,
   className
 }) => (

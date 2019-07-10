@@ -1,6 +1,6 @@
 import { ProgramRequest } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import DashboardRequest from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
@@ -68,7 +68,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => {
 
 interface Props
   extends WithRoleProps,
-    InjectedTranslateProps,
+    WithTranslation,
     DispatchProps,
     OwnProps {}
 

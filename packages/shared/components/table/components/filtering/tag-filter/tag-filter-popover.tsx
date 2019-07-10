@@ -1,12 +1,12 @@
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import TagItem from "shared/components/tags/tag-item/tag-item";
 
 import TileFilterPopover from "../tile-filter-popover";
 
-const _TagFilterPopover: React.FC<Props & InjectedTranslateProps> = ({
+const _TagFilterPopover: React.FC<Props & WithTranslation> = ({
   t,
   values,
   changeFilter

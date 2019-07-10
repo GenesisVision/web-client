@@ -3,7 +3,7 @@ import "./wallet-widget.scss";
 import classNames from "classnames";
 import { WalletsGrandTotal } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
@@ -90,7 +90,7 @@ interface OwnProps {
   className?: string;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 const WalletWidget = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
   withLoader,

@@ -1,7 +1,7 @@
 import "./settings.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
 import ProfileLayout from "shared/components/profile/profile-layout";
@@ -10,7 +10,7 @@ import LogoutButtonContainer from "shared/components/profile/settings/logout-but
 import ProfileImageContainer from "shared/components/profile/settings/profile-image/profile-image-container";
 import TwoFactorAuthContainer from "shared/modules/2fa/2fa-container";
 
-const _SettingsPage: React.FC<InjectedTranslateProps> = ({ t }) => (
+const _SettingsPage: React.FC<WithTranslation> = ({ t }) => (
   <ProfileLayout route="settings">
     <div className="profile-settings__content">
       <TwoFactorAuthContainer />

@@ -1,4 +1,4 @@
-import { InjectedTranslateProps } from "react-i18next";
+import { WithTranslation } from "react-i18next";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { lazy, number, object } from "yup";
@@ -13,7 +13,7 @@ export const managerSchema = ({
   info,
   t,
   currency
-}: InjectedTranslateProps & IDepositOwnProps) =>
+}: WithTranslation & IDepositOwnProps) =>
   lazy<IDepositFormValues>(values =>
     object<IDepositFormValues>().shape({
       [DEPOSIT_FORM_FIELDS.rate]: number(),
@@ -52,7 +52,7 @@ export const investorSchema = ({
   info,
   t,
   currency
-}: InjectedTranslateProps & IDepositOwnProps) =>
+}: WithTranslation & IDepositOwnProps) =>
   lazy<IDepositFormValues>(values =>
     object<IDepositFormValues>().shape({
       [DEPOSIT_FORM_FIELDS.rate]: number(),

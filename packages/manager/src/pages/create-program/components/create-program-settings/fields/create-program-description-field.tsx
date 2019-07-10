@@ -1,14 +1,14 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import GVTextField from "shared/components/gv-text-field";
 
 const _CreateProgramDescriptionField: React.FC<Props> = ({
   name,
-  t,
   description
 }) => {
+  const { t } = useTranslation();
   const descriptionTrimmedLength = description.trim().length;
   return (
     <div className="create-program-settings__field create-program-settings__field--wider">
@@ -40,12 +40,12 @@ const _CreateProgramDescriptionField: React.FC<Props> = ({
   );
 };
 
-interface Props extends InjectedTranslateProps {
+interface Props {
   name: string;
   description: string;
 }
 
-const CreateProgramDescriptionField = translate()(
-  React.memo(_CreateProgramDescriptionField)
+const CreateProgramDescriptionField = React.memo(
+  _CreateProgramDescriptionField
 );
 export default CreateProgramDescriptionField;

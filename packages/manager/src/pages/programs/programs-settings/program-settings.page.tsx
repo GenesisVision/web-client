@@ -5,7 +5,7 @@ import { editAsset } from "modules/asset-edit/services/asset-edit.services";
 import ChangePasswordTradingAccountPopup from "modules/change-password-trading-account/change-password-trading-account-popup";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -186,7 +186,7 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+interface Props extends OwnProps, DispatchProps, WithTranslation {}
 
 const ProgramSettingsPage = compose<React.ComponentType<OwnProps>>(
   translate(),

@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 
 import { SelectFilterValue } from "../filter.type";
 import { ComposedRequestSelectValue } from "./select-filter.constants";
 
-const _SelectFilterPopover: React.FC<Props & InjectedTranslateProps> = ({
+const _SelectFilterPopover: React.FC<Props & WithTranslation> = ({
   values,
   value,
   t,
@@ -19,7 +19,7 @@ const _SelectFilterPopover: React.FC<Props & InjectedTranslateProps> = ({
 
   const renderLabel = useCallback(
     (item: SelectFilterValue<ComposedRequestSelectValue>): string =>
-      item.labelKey ? t(item.labelKey) : item.label,
+      (item.labelKey ? t(item.labelKey) : item.label) as string,
     []
   );
 

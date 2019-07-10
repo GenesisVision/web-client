@@ -1,5 +1,5 @@
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 
@@ -10,9 +10,12 @@ export interface IProgramUnfollowProps {
   onCancel?(): void;
 }
 
-const ProgramUnfollow: React.FC<
-  InjectedTranslateProps & IProgramUnfollowProps
-> = ({ t, open, onClose, onApply }) => {
+const ProgramUnfollow: React.FC<WithTranslation & IProgramUnfollowProps> = ({
+  t,
+  open,
+  onClose,
+  onApply
+}) => {
   return (
     <ConfirmPopup
       open={open}

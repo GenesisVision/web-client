@@ -3,7 +3,7 @@ import "../wallet-list/wallet-list.scss";
 
 import { CopyTradingAccountInfo } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -174,7 +174,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-interface Props extends InjectedTranslateProps, DispatchProps, OwnProps {}
+interface Props extends WithTranslation, DispatchProps, OwnProps {}
 
 interface OwnProps {
   copyTradingAccounts: CopyTradingAccountInfo[];

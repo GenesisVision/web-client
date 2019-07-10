@@ -6,7 +6,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import { FundAssetPart, PlatformAsset, WalletData } from "gv-api-web";
 import ReallocateField from "modules/reallocate/components/reallocate-field";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import InputImage, {
@@ -415,6 +415,4 @@ export interface ICreateFundSettingsFormValues {
   [CREATE_FUND_FIELDS.exitFee]?: number;
 }
 
-export interface ICreateFundSettingsProps
-  extends InjectedTranslateProps,
-    OwnProps {}
+export interface ICreateFundSettingsProps extends WithTranslation, OwnProps {}

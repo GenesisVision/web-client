@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { SetSubmittingType } from "shared/utils/types";
 
-const _ClosePeriod: React.FC<IClosePeriodProps & InjectedTranslateProps> = ({
+const _ClosePeriod: React.FC<IClosePeriodProps & WithTranslation> = ({
   t,
   open,
   id,

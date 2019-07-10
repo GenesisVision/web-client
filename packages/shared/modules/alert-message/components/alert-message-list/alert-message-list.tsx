@@ -2,7 +2,7 @@ import "./alert-message-list.scss";
 
 import { useEffect } from "react";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import posed, { PoseGroup } from "react-pose";
 import { connect } from "react-redux";
 import { Dispatch, compose } from "redux";
@@ -25,7 +25,8 @@ const AlertBox = posed.div({
 });
 
 const _AlertMessageList: React.FC<Props> = props => {
-  const { messages, removeMessage, t, clearAllMessages } = props;
+  const { t } = useTranslation();
+  const { messages, removeMessage, clearAllMessages } = props;
 
   useEffect(() => {
     return history.listen(() => {
@@ -71,7 +72,6 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
 });
 
 const AlertMessageList = compose<React.FC>(
-  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
@@ -90,4 +90,4 @@ interface DispatchProps {
   clearAllMessages(): void;
 }
 
-interface Props extends InjectedTranslateProps, StateProps, DispatchProps {}
+interface Props extends StateProps, DispatchProps {}

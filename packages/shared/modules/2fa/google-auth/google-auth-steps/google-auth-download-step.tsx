@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GooglePlay from "shared/media/badge-android.png";
 import AppStore from "shared/media/badge-ios.png";
 
@@ -8,7 +8,7 @@ const AuthAndroidLink =
 const AuthIosLink =
   "https://itunes.apple.com/app/google-authenticator/id388497605";
 
-export const GoogleStep1: React.FC<InjectedTranslateProps> = ({ t }) => (
+export const GoogleStep1: React.FC<WithTranslation> = ({ t }) => (
   <div className="google-auth__step">
     <div className="google-auth__count">01</div>
     <div className="google-auth__title">{t("2fa-page.download-app")}</div>

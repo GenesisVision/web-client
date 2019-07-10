@@ -7,7 +7,7 @@ import CreateProgramDescriptionField from "pages/create-program/components/creat
 import CreateProgramLogoField from "pages/create-program/components/create-program-settings/fields/create-program-logo-field";
 import CreateProgramTitleField from "pages/create-program/components/create-program-settings/fields/create-program-title-field";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
@@ -64,7 +64,7 @@ export interface ProgramEditFormValues {
 
 interface Props
   extends OwnProps,
-    InjectedTranslateProps,
+    WithTranslation,
     FormikProps<ProgramEditFormValues> {}
 
 interface OwnProps {

@@ -2,7 +2,7 @@ import "./dashboard-assets.scss";
 
 import { IDashboardAssetsCounts } from "investor-web-portal/src/pages/dashboard/services/dashboard.service";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import GVTabs from "shared/components/gv-tabs";
@@ -97,7 +97,7 @@ class _DashboardAssets extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props extends InjectedTranslateProps, WithRoleProps, OwnProps {}
+interface Props extends WithTranslation, WithRoleProps, OwnProps {}
 
 interface OwnProps {
   clearAssets: any;
@@ -123,5 +123,5 @@ enum TABS {
   FUNDS = "funds"
 }
 
-const DashboardAssets = withRole<OwnProps>(translate()(_DashboardAssets));
+const DashboardAssets = withRole(translate()(_DashboardAssets));
 export default DashboardAssets;

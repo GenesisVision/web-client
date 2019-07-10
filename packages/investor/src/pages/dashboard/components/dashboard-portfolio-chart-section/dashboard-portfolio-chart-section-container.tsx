@@ -3,7 +3,7 @@ import "./dashboard-portfolio-chart-section.scss";
 import { DashboardChartValue, ProgramRequests } from "gv-api-web";
 import { dashboardInRequestsSelector } from "manager-web-portal/src/pages/dashboard/reducers/dashboard-in-requests.reducer";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import { InvestorRootState } from "reducers";
 import {
@@ -115,11 +115,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators({ getPortfolioChart, getInRequests }, dispatch)
 });
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    DispatchProps,
-    InjectedTranslateProps {}
+interface Props extends OwnProps, StateProps, DispatchProps, WithTranslation {}
 
 interface OwnProps {}
 

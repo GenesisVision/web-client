@@ -1,7 +1,7 @@
 import { LevelInfo } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -87,7 +87,7 @@ interface OwnProps {
   closePopover(): void;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {
+interface Props extends OwnProps, WithTranslation {
   limit: number;
 }
 

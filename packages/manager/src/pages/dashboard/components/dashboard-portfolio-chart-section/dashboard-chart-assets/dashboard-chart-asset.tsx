@@ -1,6 +1,6 @@
 import { ManagerSimpleFund, ManagerSimpleProgram } from "gv-api-web";
 import React, { useCallback } from "react";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 
@@ -38,7 +38,7 @@ const _DashboardChartAsset: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends WithTranslation {
   chartAsset: ManagerSimpleProgram | ManagerSimpleFund;
   type: ASSETS_TYPES;
   selectAsset: (id: string, title: string, type: ASSETS_TYPES) => void;

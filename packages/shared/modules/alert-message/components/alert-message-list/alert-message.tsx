@@ -1,14 +1,11 @@
 import classNames from "classnames";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { IMessage } from "../../reducers/alert-message-reducers";
 
-const _AlertMessage: React.FC<Props & InjectedTranslateProps> = ({
-  message,
-  t,
-  onClick
-}) => {
+const _AlertMessage: React.FC<Props> = ({ message, onClick }) => {
+  const { t } = useTranslation();
   const handleClick = useCallback(() => onClick(message.id!), [
     onClick,
     message
@@ -40,5 +37,5 @@ interface Props {
   message: IMessage;
 }
 
-const AlertMessage = translate()(React.memo(_AlertMessage));
+const AlertMessage = React.memo(_AlertMessage);
 export default AlertMessage;

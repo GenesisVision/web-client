@@ -1,7 +1,7 @@
 import { FundDetails } from "gv-api-web";
 import { useCallback } from "react";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -33,13 +33,8 @@ import {
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
-interface Props extends InjectedTranslateProps {
-  fund: FundDetails;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
-  title?: JSX.Element | string;
-}
-
-const _FundCard: React.FC<Props> = ({ t, fund, toggleFavorite, title }) => {
+const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
+  const { t } = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleToggleFavorite = useCallback(
     () => toggleFavorite(fund.id, fund.personalDetails.isFavorite),
@@ -199,5 +194,11 @@ const _FundCard: React.FC<Props> = ({ t, fund, toggleFavorite, title }) => {
   );
 };
 
-const FundCard = translate()(React.memo(_FundCard));
+const FundCard = React.memo(_FundCard);
 export default FundCard;
+
+interface Props {
+  fund: FundDetails;
+  toggleFavorite(programId: string, isFavorite: boolean): void;
+  title?: JSX.Element | string;
+}

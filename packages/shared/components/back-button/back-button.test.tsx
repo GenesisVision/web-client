@@ -9,7 +9,7 @@ import BackButton from "./back-button";
 
 jest.mock("react-i18next", () => {
   return {
-    translate: () => (Component: any) => {
+    withTranslation: () => (Component: any) => {
       Component.defaultProps = {
         ...Component.defaultProps,
         t: (key: string): string => key

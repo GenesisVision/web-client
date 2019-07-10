@@ -2,11 +2,11 @@ import "shared/components/auth/forgot-password/password-restore/password-restore
 
 import qs from "qs";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import PasswordRestoreContainer from "shared/components/auth/forgot-password/password-restore/password-restore-container";
 
 const _PasswordRestorePage: React.FC<
-  { location: Location } & InjectedTranslateProps
+  { location: Location } & WithTranslation
 > = ({ location, t }) => (
   <div className="password-restore">
     <p className="password-restore__text">

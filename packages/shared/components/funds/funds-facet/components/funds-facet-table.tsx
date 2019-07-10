@@ -1,6 +1,6 @@
 import { ProgramFacetTimeframeEnum } from "gv-api-web";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import {
   DATE_RANGE_FILTER_NAME,
@@ -20,9 +20,14 @@ import {
   FUNDS_FACET_TABLE_FILTERS
 } from "./funds-facet.constants";
 
-const _FundsFacetTable: React.FC<
-  IFundsFacetTableProps & InjectedTranslateProps
-> = ({ t, title, sorting, getItems, isAuthenticated, timeframe }) => {
+const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
+  t,
+  title,
+  sorting,
+  getItems,
+  isAuthenticated,
+  timeframe
+}) => {
   const toggleFavorite: TableToggleFavoriteType = useCallback(
     (fund, updateRow) => () => {
       const isFavorite = fund.personalDetails.isFavorite;

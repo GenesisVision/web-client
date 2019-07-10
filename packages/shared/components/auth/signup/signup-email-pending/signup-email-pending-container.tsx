@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -24,7 +24,7 @@ const mapDispatchToProps = (
   }
 });
 
-interface Props extends InjectedTranslateProps, DispatchProps, OwnProps {}
+interface Props extends WithTranslation, DispatchProps, OwnProps {}
 
 interface OwnProps {
   sendConfirmationLink: () => RootThunk<void>;
