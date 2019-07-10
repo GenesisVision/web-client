@@ -25,7 +25,6 @@ const renderDurationText = (t: i18next.TFunction, start: Date, end: Date) => {
 };
 
 const _ProgramPeriodPie: React.FC<Props> = ({
-  t,
   start,
   end,
   className,
