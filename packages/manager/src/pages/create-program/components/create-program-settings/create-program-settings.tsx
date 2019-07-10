@@ -14,19 +14,15 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import InputImage, {
-  IImageValue
-} from "shared/components/form/input-image/input-image";
+import { IImageValue } from "shared/components/form/input-image/input-image";
 import GVButton from "shared/components/gv-button";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import GVFormikField from "shared/components/gv-formik-field";
-import GVProgramPeriod from "shared/components/gv-program-period";
 import GVTextField from "shared/components/gv-text-field";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import Select from "shared/components/select/select";
-import ProgramDefaultImage from "shared/media/program-default-image.svg";
 import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
@@ -36,6 +32,11 @@ import { CurrencyEnum } from "shared/utils/types";
 import createProgramSettingsValidationSchema, {
   CREATE_PROGRAM_FIELDS
 } from "./create-program-settings.validators";
+import CreateProgramDescriptionField from "./fields/create-program-description-field";
+import CreateProgramInvestmentLimitField from "./fields/create-program-investment-limit-field";
+import CreateProgramLogoField from "./fields/create-program-logo-field";
+import CreateProgramStopOutField from "./fields/create-program-stop-out-field";
+import CreateProgramTitleField from "./fields/create-program-title-field";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class _CreateProgramSettings extends React.PureComponent<
@@ -114,7 +115,6 @@ class _CreateProgramSettings extends React.PureComponent<
       t,
       navigateBack,
       broker,
-      author,
       isSubmitting,
       values,
       programsInfo,
@@ -128,11 +128,8 @@ class _CreateProgramSettings extends React.PureComponent<
       depositAmount,
       isSignalProgram,
       hasInvestmentLimit,
-      description,
-      title
+      description
     } = values;
-    const descriptionTrimmedLength = description.trim().length;
-
     const accountCurrencies = accountType ? accountType.currencies : [];
     const accountLeverages = accountType ? accountType.leverages : [];
 
@@ -148,21 +145,8 @@ class _CreateProgramSettings extends React.PureComponent<
           </div>
           <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
             <div className="create-program-settings__row">
-              <div className="create-program-settings__item">
-                <GVFormikField
-                  type="text"
-                  name={CREATE_PROGRAM_FIELDS.title}
-                  label={t("manager.create-program-page.settings.fields.name")}
-                  autoComplete="off"
-                  component={GVTextField}
-                />
-                <div className="create-program-settings__item-caption">
-                  {t(
-                    "manager.create-program-page.settings.fields.name-requirements"
-                  )}
-                </div>
-              </div>
-              <div className="create-program-settings__item">
+              <CreateProgramTitleField name={CREATE_PROGRAM_FIELDS.title} />
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
                   component={GVTextField}
@@ -180,7 +164,7 @@ class _CreateProgramSettings extends React.PureComponent<
                   ))}
                 </GVFormikField>
               </div>
-              <div className="create-program-settings__item">
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.currency}
                   component={GVTextField}
@@ -201,35 +185,11 @@ class _CreateProgramSettings extends React.PureComponent<
                   })}
                 </GVFormikField>
               </div>
-              <div className="create-program-settings__item create-program-settings__item--wider">
-                <GVFormikField
-                  type="textarea"
-                  name={CREATE_PROGRAM_FIELDS.description}
-                  label={t(
-                    "manager.create-program-page.settings.fields.description"
-                  )}
-                  component={GVTextField}
-                />
-                <div className="create-program-settings__item-caption create-program-settings__description">
-                  <span className="create-program-settings__description-requirements">
-                    {t(
-                      "manager.create-program-page.settings.fields.description-requirements"
-                    )}
-                  </span>
-                  {descriptionTrimmedLength > 0 && (
-                    <span className="create-program-settings__description-chars">
-                      {descriptionTrimmedLength}
-                      <GVProgramPeriod
-                        start={0}
-                        end={500}
-                        value={descriptionTrimmedLength}
-                        variant="pie"
-                      />
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="create-program-settings__item">
+              <CreateProgramDescriptionField
+                name={CREATE_PROGRAM_FIELDS.description}
+                description={description}
+              />
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.leverage}
                   component={GVTextField}
@@ -251,7 +211,7 @@ class _CreateProgramSettings extends React.PureComponent<
                   })}
                 </GVFormikField>
               </div>
-              <div className="create-program-settings__item">
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.periodLength}
                   component={GVTextField}
@@ -270,88 +230,24 @@ class _CreateProgramSettings extends React.PureComponent<
                   ))}
                 </GVFormikField>
               </div>
-              <div className="create-program-settings__item">
-                <GVFormikField
-                  name={CREATE_PROGRAM_FIELDS.stopOutLevel}
-                  label={t(
-                    "manager.create-program-page.settings.fields.stop-out-level"
-                  )}
-                  adornment="%"
-                  component={GVTextField}
-                  type="number"
-                  autoComplete="off"
-                  decimalScale={4}
-                />
-                <Hint
-                  content={t(
-                    "manager.create-program-page.settings.hints.stop-out-level"
-                  )}
-                  className="create-program-settings__item-caption"
-                  vertical={VERTICAL_POPOVER_POS.BOTTOM}
-                  tooltipContent={t(
-                    "manager.create-program-page.settings.hints.stop-out-level-description"
-                  )}
-                />
-              </div>
-              <div className="create-program-settings__item create-program-settings__item--wider">
-                <GVFormikField
-                  type="checkbox"
-                  color="primary"
-                  name={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
-                  label={
-                    <span>
-                      {t(
-                        "manager.create-program-page.settings.fields.investment-limit"
-                      )}
-                    </span>
-                  }
-                  component={GVCheckbox}
-                />
-              </div>
-              {hasInvestmentLimit && (
-                <div className="create-program-settings__item">
-                  <InputAmountField
-                    autoFocus={false}
-                    isAllow={this.isAmountAllow(
-                      currency as WalletDataCurrencyEnum
-                    )}
-                    name={CREATE_PROGRAM_FIELDS.investmentLimit}
-                    label={t(
-                      "manager.create-program-page.settings.fields.enter-correct-amount"
-                    )}
-                    currency={currency ? currency : ""}
-                  />
-                </div>
-              )}
-              <div className="create-program-settings__item create-program-settings__item--wider">
-                <div className="create-program-settings__logo-title">
-                  {t("manager.create-program-page.settings.fields.upload-logo")}
-                </div>
-                <div className="create-program-settings__logo-notice">
-                  {t(
-                    "manager.create-program-page.settings.fields.upload-logo-rules"
-                  )}
-                </div>
-              </div>
-              <div className="create-program-settings__item create-program-settings__item--wider create-program-settings__logo-section">
-                <div className="create-program-settings__file-field-container">
-                  <GVFormikField
-                    name={CREATE_PROGRAM_FIELDS.logo}
-                    component={InputImage}
-                    defaultImage={ProgramDefaultImage}
-                  />
-                </div>
-                <div className="create-program-settings__image-info">
-                  <div className="create-program-settings__image-title">
-                    {title}
-                  </div>
-                  <div className="create-program-settings__image-author">
-                    {author}
-                  </div>
-                </div>
-              </div>
+              <CreateProgramStopOutField
+                name={CREATE_PROGRAM_FIELDS.stopOutLevel}
+              />
+              <CreateProgramInvestmentLimitField
+                checkboxName={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
+                inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
+                hasInvestmentLimit={hasInvestmentLimit}
+                currency={currency}
+                isAllow={this.isAmountAllow(currency as WalletDataCurrencyEnum)}
+              />
+              <CreateProgramLogoField
+                name={CREATE_PROGRAM_FIELDS.logo}
+                title={t(
+                  "manager.create-program-page.settings.fields.upload-logo"
+                )}
+              />
               {broker.isSignalsAvailable && (
-                <div className="create-program-settings__item">
+                <div className="create-program-settings__field">
                   <GVFormikField
                     type="checkbox"
                     color="primary"
@@ -380,7 +276,7 @@ class _CreateProgramSettings extends React.PureComponent<
                   "manager.create-program-page.settings.investment-program-fees"
                 )}
               </div>
-              <div className="create-program-settings__item">
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.entryFee}
                   label={t(
@@ -397,14 +293,14 @@ class _CreateProgramSettings extends React.PureComponent<
                   content={t(
                     "manager.create-program-page.settings.hints.entry-fee"
                   )}
-                  className="create-program-settings__item-caption"
+                  className="create-program-settings__field-caption"
                   vertical={VERTICAL_POPOVER_POS.BOTTOM}
                   tooltipContent={t(
                     "manager.create-program-page.settings.hints.entry-fee-description"
                   )}
                 />
               </div>
-              <div className="create-program-settings__item">
+              <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.successFee}
                   label={t(
@@ -421,7 +317,7 @@ class _CreateProgramSettings extends React.PureComponent<
                   content={t(
                     "manager.create-program-page.settings.hints.success-fee"
                   )}
-                  className="create-program-settings__item-caption"
+                  className="create-program-settings__field-caption"
                   vertical={VERTICAL_POPOVER_POS.BOTTOM}
                   tooltipContent={t(
                     "manager.create-program-page.settings.hints.success-fee-description"
@@ -443,7 +339,7 @@ class _CreateProgramSettings extends React.PureComponent<
           <div
             className={"deposit-details create-program-settings__fill-block"}
           >
-            <div className="create-program-settings__item deposit-details">
+            <div className="create-program-settings__field deposit-details">
               <GVFormikField
                 name={CREATE_PROGRAM_FIELDS.depositWalletId}
                 component={GVTextField}
@@ -600,7 +496,7 @@ interface OwnProps {
   navigateBack(): void;
   author: string;
   notifyError(message: string): void;
-  programCurrency: string;
+  programCurrency: CurrencyEnum;
   changeCurrency(currency: string): void;
   leverage?: number;
   changeLeverage(leverage: number): void;
@@ -615,7 +511,7 @@ export interface ICreateProgramSettingsProps
   extends OwnProps,
     InjectedTranslateProps {}
 export interface ICreateProgramSettingsFormValues {
-  [CREATE_PROGRAM_FIELDS.currency]: string;
+  [CREATE_PROGRAM_FIELDS.currency]: CurrencyEnum;
   [CREATE_PROGRAM_FIELDS.periodLength]?: number;
   [CREATE_PROGRAM_FIELDS.successFee]?: number;
   [CREATE_PROGRAM_FIELDS.stopOutLevel]: number;

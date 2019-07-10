@@ -5,7 +5,7 @@ import {
   WalletData
 } from "gv-api-web";
 import * as React from "react";
-import { SetSubmittingType } from "shared/utils/types";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import CreateProgramSettings, {
   ICreateProgramSettingsFormValues
@@ -52,7 +52,7 @@ class CreateProgramSettingsSection extends React.PureComponent<
     this.handleLeverageChange(this.getLeverage(accountType!));
   };
 
-  handleCurrencyChange = (programCurrency: string): void => {
+  handleCurrencyChange = (programCurrency: CurrencyEnum): void => {
     if (this.state.programCurrency === programCurrency) return;
     this.setState({ programCurrency });
     this.updateRate(this.state.wallet.currency, programCurrency);
@@ -70,8 +70,8 @@ class CreateProgramSettingsSection extends React.PureComponent<
     this.setState({ wallet });
   };
 
-  getCurrency = (accountType: BrokerAccountType): string =>
-    accountType.currencies[0];
+  getCurrency = (accountType: BrokerAccountType): CurrencyEnum =>
+    accountType.currencies[0] as CurrencyEnum; // TODO say to backend change type to CurrencyEnum[]
 
   getLeverage = (accountType: BrokerAccountType): number =>
     accountType.leverages[0];
@@ -133,7 +133,7 @@ interface OwnProps {
 
 interface StateProps {
   accountType: BrokerAccountType;
-  programCurrency: string;
+  programCurrency: CurrencyEnum;
   leverage: number;
   rate?: number;
   wallet: WalletData;

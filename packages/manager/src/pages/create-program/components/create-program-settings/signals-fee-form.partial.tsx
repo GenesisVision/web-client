@@ -26,7 +26,7 @@ const SignalsFeeFormPartial: React.FC<
       <div className="create-program-settings__row-title">
         {t("manager.create-program-page.settings.signal-provider-fees")}
       </div>
-      <div className="create-program-settings__item">
+      <div className="create-program-settings__field">
         <GVFormikField
           name={volumeFeeFieldName}
           label={t(
@@ -44,14 +44,14 @@ const SignalsFeeFormPartial: React.FC<
           content={t(
             "manager.create-program-page.settings.hints.signal-volume-fee"
           )}
-          className="create-program-settings__item-caption"
+          className="create-program-settings__field-caption"
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
           tooltipContent={t(
             "manager.create-program-page.settings.hints.signal-volume-fee-description"
           )}
         />
       </div>
-      <div className="create-program-settings__item">
+      <div className="create-program-settings__field">
         <GVFormikField
           name={successFeeFieldName}
           label={t(
@@ -68,7 +68,7 @@ const SignalsFeeFormPartial: React.FC<
           content={t(
             "manager.create-program-page.settings.hints.signal-success-fee"
           )}
-          className="create-program-settings__item-caption"
+          className="create-program-settings__field-caption"
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
           tooltipContent={t(
             "manager.create-program-page.settings.hints.signal-success-fee-description"
