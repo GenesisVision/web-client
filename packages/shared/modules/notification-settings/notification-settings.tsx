@@ -2,7 +2,7 @@ import "./notification-settings.scss";
 
 import { NotificationSettingList } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ASSET } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import AssetNotificationsGeneral from "shared/modules/asset-notifications/asset-notifications-general";
@@ -58,7 +58,7 @@ const _NotificationSettings: React.FC<Props> = ({ t, settings }) => {
   );
 };
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   settings: NotificationSettingList;

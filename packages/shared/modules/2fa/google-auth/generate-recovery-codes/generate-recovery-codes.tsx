@@ -1,6 +1,6 @@
 import { PasswordModel, RecoveryCodesViewModel } from "gv-api-web";
 import React, { useCallback, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 import GVButton from "shared/components/gv-button";
 import useErrorMessage from "shared/hooks/error-message.hook";
@@ -51,7 +51,7 @@ const GenerateRecoveryCode: React.FC<Props> = ({ disabled, t }) => {
   );
 };
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   disabled: boolean;
 }
 

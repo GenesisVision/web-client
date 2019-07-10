@@ -1,6 +1,6 @@
 import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
 import GVTextField from "shared/components/gv-text-field";
@@ -76,7 +76,7 @@ const _ProfilePersonal: React.FC<IProfilePersonalProps> = ({ t, info }) => (
   </>
 );
 
-interface IProfilePersonalProps extends InjectedTranslateProps {
+interface IProfilePersonalProps extends WithTranslation {
   info: ProfileFullViewModel;
 }
 

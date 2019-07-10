@@ -1,6 +1,6 @@
 import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
 import * as React from "react";
-import { translate } from "react-i18next";
+import { withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
 

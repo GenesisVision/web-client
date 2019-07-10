@@ -1,6 +1,6 @@
 import { WalletData, WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
+import { WithTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
 import NotFoundPage from "shared/components/not-found/not-found";
@@ -44,7 +44,7 @@ const mapStateToProps = (state: RootState, props: OwnProps): StateProps => {
   };
 };
 
-interface Props extends InjectedTranslateProps, OwnProps, StateProps {}
+interface Props extends WithTranslation, OwnProps, StateProps {}
 
 interface OwnProps extends WalletRouteProps {}
 

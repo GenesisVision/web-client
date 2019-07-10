@@ -1,6 +1,6 @@
 import { LevelInfo } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import FacetContainer, {
   FACET_ASSET
 } from "shared/components/facet-container/facet-container";
@@ -17,7 +17,7 @@ import ProgramsFacetTable from "../programs/programs-facet/components/programs-f
 import { getCurrentFacet } from "../programs/programs-facet/services/programs-facet.service";
 import { PROGRAMS_COLUMNS } from "./program-rating.constants";
 
-const _ProgramsRating: React.FC<InjectedTranslateProps> = ({ t }) => {
+const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   const [levels, setLevels] = useState<LevelInfo[]>([]);
   const [level, setLevel] = useState<number | undefined>(undefined);
 

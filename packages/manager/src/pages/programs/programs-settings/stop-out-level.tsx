@@ -1,7 +1,7 @@
 import { FormikProps, withFormik } from "formik";
 import CreateProgramStopOutField from "pages/create-program/components/create-program-settings/fields/create-program-stop-out-field";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
@@ -41,7 +41,7 @@ export interface StopOutLevelFormValues {
 
 interface Props
   extends OwnProps,
-    InjectedTranslateProps,
+    WithTranslation,
     FormikProps<StopOutLevelFormValues> {}
 
 interface OwnProps {

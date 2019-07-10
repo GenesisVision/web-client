@@ -1,6 +1,6 @@
 import { WalletData } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Page from "shared/components/page/page";
@@ -84,7 +84,7 @@ const _WalletCurrency: React.FC<Props> = ({ t, info }) => {
   );
 };
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
   info: WalletData;

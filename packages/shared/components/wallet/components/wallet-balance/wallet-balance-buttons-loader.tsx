@@ -1,13 +1,11 @@
 import "./wallet-balance.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import ArrowIcon from "shared/media/arrow-up.svg";
 
-const _WalletBalanceButtonsLoader: React.FC<InjectedTranslateProps> = ({
-  t
-}) => (
+const _WalletBalanceButtonsLoader: React.FC<WithTranslation> = ({ t }) => (
   <div className="wallet-balance__buttons">
     <GVButton>
       <>

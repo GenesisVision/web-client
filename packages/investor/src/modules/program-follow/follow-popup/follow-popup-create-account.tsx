@@ -5,7 +5,7 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -165,7 +165,7 @@ export interface CreateAccountFormValues {
 
 export interface CreateAccountFormProps
   extends OwnProps,
-    InjectedTranslateProps,
+    WithTranslation,
     FormikProps<CreateAccountFormValues> {}
 
 const FollowCreateAccount = compose<React.ComponentType<OwnProps>>(

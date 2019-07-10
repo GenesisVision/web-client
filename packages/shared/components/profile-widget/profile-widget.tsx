@@ -3,7 +3,7 @@ import "./profile-widget.scss";
 import classNames from "classnames";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
@@ -80,11 +80,12 @@ interface OwnProps {
   className?: string;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 const ProfileWidget = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
   withLoader,
   translate(),
   React.memo
 )(_ProfileWidget);
+
 export default ProfileWidget;

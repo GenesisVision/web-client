@@ -17,12 +17,12 @@ describe("test errorMessage hook", () => {
       act(() => {
         result.current.setErrorMessage(testValue);
       });
-      expect(result.current.errorMessage).toBe(testValue);
+      expect(result.current.errorMessage).toBe(testValue.errorMessage);
       const testValue2 = { errorMessage: "testValue2", code: "" };
       act(() => {
         result.current.setErrorMessage(testValue2);
       });
-      expect(result.current.errorMessage).toBe(testValue2);
+      expect(result.current.errorMessage).toBe(testValue2.errorMessage);
     });
     it("should be clean errorMessage", () => {
       const { result } = renderHook(() => useErrorMessage());
@@ -30,7 +30,7 @@ describe("test errorMessage hook", () => {
       act(() => {
         result.current.setErrorMessage(testValue);
       });
-      expect(result.current.errorMessage).toBe(testValue);
+      expect(result.current.errorMessage).toBe(testValue.errorMessage);
       act(() => {
         result.current.cleanErrorMessage();
       });

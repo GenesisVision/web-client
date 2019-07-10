@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import LoginFooter from "shared/components/auth/components/login-footer/login-footer";
@@ -13,7 +13,7 @@ export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
 export const EMAIL_PENDING_ROUTE = `${FORGOT_PASSWORD_ROUTE}/email-pending`;
 export const PASSWORD_RESTORE_ROUTE = `${FORGOT_PASSWORD_ROUTE}/restore`;
 
-const _ForgotPasswordRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
+const _ForgotPasswordRoutes: React.FC<WithTranslation> = ({ t }) => (
   <AuthLayout
     Footer={LoginFooter}
     title={t("auth.password-restore.title")}

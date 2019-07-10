@@ -1,7 +1,7 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import {
   IProgramDetailContext,
   ProgramDetailContext
@@ -108,4 +108,4 @@ interface OwnProps {
   programDescription: ProgramDetailsFull;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}

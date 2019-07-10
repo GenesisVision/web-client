@@ -2,7 +2,7 @@ import "./investment-unauth-popup.scss";
 
 import classnames from "classnames";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import DepositTop, {
   DepositTopOwnProps
@@ -67,4 +67,4 @@ interface OwnProps extends DepositTopOwnProps, IDialogProps {
   message: string;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps, WithRoleProps {}
+interface Props extends OwnProps, WithTranslation, WithRoleProps {}

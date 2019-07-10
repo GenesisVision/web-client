@@ -1,6 +1,6 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -62,7 +62,7 @@ enum FIELDS {
   enablePassword = "enablePassword"
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 interface OwnProps {
   enablePassword?: boolean;
   onSubmit(

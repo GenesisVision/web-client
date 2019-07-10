@@ -2,13 +2,12 @@ import "../wallet-list/wallet-list.scss";
 
 import { CopyTradingAccountInfo } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import DepositButton from "../buttons/deposit-button";
 import WithdrawButton from "../buttons/withdraw-button";
 
-const _WalletCopytradingButtons: React.FC<Props & InjectedTranslateProps> = ({
+const _WalletCopytradingButtons: React.FC<Props & WithTranslation> = ({
   t,
   account,
   handleOpenWithdrawPopup,

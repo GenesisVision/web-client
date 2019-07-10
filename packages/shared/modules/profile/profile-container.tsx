@@ -4,7 +4,7 @@ import {
 } from "gv-api-web";
 import { pickBy } from "lodash";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -90,7 +90,7 @@ interface DispatchProps {
   };
 }
 
-interface Props extends InjectedTranslateProps, DispatchProps, OwnProps {}
+interface Props extends WithTranslation, DispatchProps, OwnProps {}
 
 interface State {
   isPending: boolean;

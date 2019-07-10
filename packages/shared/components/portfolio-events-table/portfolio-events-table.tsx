@@ -3,7 +3,7 @@ import "./portfolio-events.scss";
 
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
@@ -152,7 +152,7 @@ const PortfolioEventsTable: React.FC<Props> = ({
 
 interface Props
   extends WithRoleProps,
-    InjectedTranslateProps,
+    WithTranslation,
     IPortfolioEventsTableOwnProps {}
 
 export interface IPortfolioEventsTableOwnProps {

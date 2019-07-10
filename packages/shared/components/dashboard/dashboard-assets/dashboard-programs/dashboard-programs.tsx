@@ -3,7 +3,7 @@ import "./dashboard-programs.scss";
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
@@ -188,7 +188,7 @@ const DashboardPrograms = compose<React.ComponentType<OwnProps>>(
 )(_DashboardPrograms);
 export default DashboardPrograms;
 
-interface Props extends WithRoleProps, OwnProps, InjectedTranslateProps {}
+interface Props extends WithRoleProps, OwnProps, WithTranslation {}
 
 interface OwnProps {
   title: string;

@@ -1,9 +1,9 @@
 import "./wallet-transactions.scss";
 
 import { PlatformInfo } from "gv-api-web";
-import * as React from "react";
 import { RefObject } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import * as React from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -107,7 +107,7 @@ const mapStateToProps = (state: RootState): StateProps => ({
   platformData: platformDataSelector(state)
 });
 
-interface Props extends OwnProps, StateProps, InjectedTranslateProps {}
+interface Props extends OwnProps, StateProps, WithTranslation {}
 
 interface OwnProps {
   renderBodyRow: RenderBodyItemFuncType;

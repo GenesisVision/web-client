@@ -1,7 +1,7 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { ForgotPasswordViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
@@ -48,7 +48,7 @@ const _ForgotPasswordForm: React.FC<
   </form>
 );
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   onSubmit(

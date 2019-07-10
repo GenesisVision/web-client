@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 
 const _TransactionDetails: React.FC<Props> = ({ header, body, bottom, t }) => (
@@ -15,7 +15,7 @@ const _TransactionDetails: React.FC<Props> = ({ header, body, bottom, t }) => (
   </>
 );
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   header: JSX.Element;

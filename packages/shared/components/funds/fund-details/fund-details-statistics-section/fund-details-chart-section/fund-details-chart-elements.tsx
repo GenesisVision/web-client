@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { FundBalanceChart as FundBalanceChartType } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import GVTabs from "shared/components/gv-tabs";
@@ -65,7 +65,7 @@ interface OwnProps {
   balanceChart: FundBalanceChartType;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 const FundDetailsChartElements = compose<
   React.ComponentType<OwnProps & WithLoaderProps>

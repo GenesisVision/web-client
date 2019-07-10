@@ -26,8 +26,8 @@ describe("GVProgramAvatar tests", () => {
   });
 
   test("should add level prop", () => {
-    const levelClassName = "program-avatar__level";
-    const programAvatar = shallow(
+    const levelClassName = "pie-container__value";
+    const programAvatar = mount(
       <GVProgramAvatar url="example.com/image.jpg" alt="avatar" level={1} />
     );
     expect(programAvatar.find(`.${levelClassName}`).text()).toBe("1");

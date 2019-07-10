@@ -3,7 +3,7 @@ import "./social-link.scss";
 import { FormikProps, withFormik } from "formik";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import SocialLinkImage from "shared/components/avatar/social-link/social-link";
 import GVButton from "shared/components/gv-button";
@@ -116,4 +116,4 @@ interface ISignalLinkFormValues {
 interface Props
   extends OwnProps,
     FormikProps<ISignalLinkFormValues>,
-    InjectedTranslateProps {}
+    WithTranslation {}

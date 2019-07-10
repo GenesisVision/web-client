@@ -7,11 +7,11 @@ import classNames from "classnames";
 import * as React from "react";
 import Cropper from "react-cropper";
 import Dropzone, { FileWithPreview } from "react-dropzone";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import InputImageDefault from "./input-image-default";
 
-class _InputImage extends React.PureComponent<Props & InjectedTranslateProps> {
+class _InputImage extends React.PureComponent<Props & WithTranslation> {
   dropzone: React.RefObject<Dropzone> = React.createRef();
   cropper: React.RefObject<Cropper> = React.createRef();
 

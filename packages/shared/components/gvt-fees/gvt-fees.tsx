@@ -1,12 +1,12 @@
 import "./gvt-fees.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 import { ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
-const GVTFees: React.FC<Props> = ({ role, t, open, onClose }) => (
+const _GVTFees: React.FC<Props> = ({ role, t, open, onClose }) => (
   <Dialog open={open} onClose={onClose} className="gvt-fees">
     <div className="gvt-fees__container">
       <h1>{t("gvt-fees.titles.main")}</h1>
@@ -109,11 +109,11 @@ const GVTFees: React.FC<Props> = ({ role, t, open, onClose }) => (
   </Dialog>
 );
 
-interface Props extends OwnProps, InjectedTranslateProps, WithRoleProps {}
+interface Props extends OwnProps, WithTranslation, WithRoleProps {}
 
 interface OwnProps {
   open: boolean;
   onClose(): void;
 }
-
-export default withRole<OwnProps>(translate()(GVTFees));
+const GVTFees = withRole(translate()(_GVTFees));
+export default GVTFees;

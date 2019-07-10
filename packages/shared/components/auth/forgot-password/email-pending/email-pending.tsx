@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 
 const _EmailPending: React.FC<Props> = ({ onSubmit, t, email }) => (
@@ -10,7 +10,7 @@ const _EmailPending: React.FC<Props> = ({ onSubmit, t, email }) => (
   </div>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   onSubmit: (values: { email: string }) => void;
   email: string;
 }

@@ -3,7 +3,7 @@ import {
   ProgramNotificationSettingList
 } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import withLoader from "shared/decorators/with-loader";
 import AssetNotificationsCustom from "shared/modules/asset-notifications/asset-notifications-custom";
 import AssetNotificationsGeneral from "shared/modules/asset-notifications/asset-notifications-general";
@@ -41,7 +41,7 @@ const _AssetNotifications: React.FC<Props> = ({
   </div>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   asset: ProgramNotificationSettingList | FundNotificationSettingList;
   notifications: NotificationsList;
   addNotification: TAddNotification;

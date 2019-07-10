@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { RouteComponentProps } from "react-router";
 import Page from "shared/components/page/page";
 import FundNotificationsContainer from "shared/modules/fund-notifications/fund-notifications-container";
@@ -18,7 +18,7 @@ const _FundNotificationPage: React.FC<Props> = ({ t, match }) => {
   );
 };
 
-interface Props extends RouteComponentProps<Params>, InjectedTranslateProps {}
+interface Props extends RouteComponentProps<Params>, WithTranslation {}
 
 interface Params {
   id: string;

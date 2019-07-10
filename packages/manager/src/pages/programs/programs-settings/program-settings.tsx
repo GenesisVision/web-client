@@ -2,9 +2,10 @@ import "./program-settings.scss";
 
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 
 import BrokerEdit, { ChangeBrokerFormValues } from "./broker-edit";
@@ -13,7 +14,6 @@ import ProgramEdit from "./program-edit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 const _ProgramSettings: React.FC<Props> = ({
   t,
@@ -126,7 +126,7 @@ const _ProgramSettings: React.FC<Props> = ({
   );
 };
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   details: ProgramDetailsFull;
