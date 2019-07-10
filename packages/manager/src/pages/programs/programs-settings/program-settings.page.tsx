@@ -20,12 +20,14 @@ import {
   getProgramDescription
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { SetSubmittingType } from "shared/utils/types";
 
 import ClosePeriodContainer from "../program-details/components/close-period/close-period-container";
 import CloseProgramContainer from "../program-details/components/close-program/close-program-container";
 import { ChangeBrokerFormValues } from "./broker-edit";
 import ProgramSettings from "./program-settings";
+import ProgramSettingsLoader from "./program-settings.loader";
 import {
   changeBrokerMethod,
   redirectToProgram
@@ -33,6 +35,27 @@ import {
 import { IProgramSignalFormValues } from "./signaling-edit";
 
 const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
+  const [
+    isClosePeriodOpen,
+    setClosePeriodOpen,
+    setClosePeriodClose
+  ] = useIsOpen();
+  const [
+    isCloseProgramOpen,
+    setCloseProgramOpen,
+    setCloseProgramClose
+  ] = useIsOpen();
+  const [
+    isChangePasswordOpen,
+    setChangePasswordOpen,
+    setChangePasswordClose
+  ] = useIsOpen();
+  const [details, setDetails] = useState<ProgramDetailsFull | undefined>(
+    undefined
+  );
+  const [brokersInfo, setBrokersInfo] = useState<
+    BrokersProgramInfo | undefined
+  >(undefined);
   const fetchingDescription = () =>
     service
       .getProgramDescription()
@@ -40,37 +63,17 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
         setDetails(description);
         return getProgramBrokers(description.id);
       })
-      .then(brokers => setBrokersInfo(brokers));
-
-  const [closePeriodOpen, setClosePeriodOpen] = useState<boolean>(false);
-  const [closeProgramOpen, setCloseProgramOpen] = useState<boolean>(false);
-  const [changePasswordOpen, setChangePasswordOpen] = useState<boolean>(false);
-  const [details, setDetails] = useState<ProgramDetailsFull | undefined>(
-    undefined
-  );
-  const [brokersInfo, setBrokersInfo] = useState<
-    BrokersProgramInfo | undefined
-  >(undefined);
-
+      .then(setBrokersInfo);
   useEffect(() => {
     fetchingDescription();
   }, []);
-
   const changeSignaling = useCallback(
-    (
-      { volumeFee, successFee }: IProgramSignalFormValues,
-      setSubmitting: SetSubmittingType
-    ) =>
+    ({ volumeFee, successFee }: IProgramSignalFormValues) =>
       service
         .programEditSignal(details!.id, successFee!, volumeFee!)
-        .then(() => {
-          setSubmitting(false);
-          fetchingDescription();
-        }),
+        .then(fetchingDescription),
     [details]
   );
-  const closePeriod = useCallback(() => setClosePeriodOpen(true), []);
-  const closeProgram = useCallback(() => setCloseProgramOpen(true), []);
   const changeBroker = useCallback(
     (
       { brokerAccountTypeId, leverage }: ChangeBrokerFormValues,
@@ -83,13 +86,12 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
           leverage,
           setSubmitting
         )
-        .then(() => fetchingDescription());
+        .then(fetchingDescription);
     },
     [details]
   );
-  const changePassword = useCallback(() => setChangePasswordOpen(true), []);
   const editProgram: TUpdateProgramFunc = useCallback(
-    (values, setSubmitting) => {
+    values => {
       const currentValues = {
         title: details!.title,
         stopOutLevel: details!.stopOutLevel,
@@ -99,49 +101,51 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
       };
       service
         .editAsset(details!.id, { ...currentValues, ...values }, ASSET.PROGRAM)
-        .then(() => {
-          setSubmitting(false);
-          fetchingDescription();
-        });
+        .then(fetchingDescription);
     },
     [details]
   );
-  const applyChanges = useCallback(() => fetchingDescription(), []);
-  const applyClose = useCallback(() => {
-    applyChanges().then(() => service.redirectToProgram());
-  }, []);
+  const applyClose = useCallback(
+    () => fetchingDescription().then(service.redirectToProgram),
+    []
+  );
 
-  if (!details || !brokersInfo) return null;
   return (
     <Page title={t("manager.program-settings.title")}>
       <ProgramSettings
+        condition={!!details && !!brokersInfo}
+        loader={<ProgramSettingsLoader />}
         changeSignaling={changeSignaling}
-        closePeriod={closePeriod}
-        closeProgram={closeProgram}
-        details={details}
-        changePassword={changePassword}
-        brokersInfo={brokersInfo}
+        closePeriod={setClosePeriodOpen}
+        closeProgram={setCloseProgramOpen}
+        details={details!}
+        changePassword={setChangePasswordOpen}
+        brokersInfo={brokersInfo!}
         changeBroker={changeBroker}
         editProgram={editProgram}
       />
-      <ClosePeriodContainer
-        open={closePeriodOpen}
-        onClose={() => setClosePeriodOpen(false)}
-        onApply={applyChanges}
-        id={details.id}
-      />
-      <CloseProgramContainer
-        open={closeProgramOpen}
-        onClose={() => setCloseProgramOpen(false)}
-        onApply={applyClose}
-        id={details.id}
-      />
-      <ChangePasswordTradingAccountPopup
-        programName={details.title}
-        open={changePasswordOpen}
-        id={details.id}
-        onClose={() => setChangePasswordOpen(false)}
-      />
+      {details && (
+        <>
+          <ClosePeriodContainer
+            open={isClosePeriodOpen}
+            onClose={setClosePeriodClose}
+            onApply={fetchingDescription}
+            id={details.id}
+          />
+          <CloseProgramContainer
+            open={isCloseProgramOpen}
+            onClose={setCloseProgramClose}
+            onApply={applyClose}
+            id={details.id}
+          />
+          <ChangePasswordTradingAccountPopup
+            programName={details.title}
+            open={isChangePasswordOpen}
+            id={details.id}
+            onClose={setChangePasswordClose}
+          />
+        </>
+      )}
     </Page>
   );
 };

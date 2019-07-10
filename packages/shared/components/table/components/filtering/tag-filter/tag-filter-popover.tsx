@@ -2,7 +2,7 @@ import { ProgramTag } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import TagItem from "shared/components/tags/tag-item/tag-item";
 
 import TileFilterPopover from "../tile-filter-popover";
 
@@ -31,7 +31,7 @@ const _TagFilterPopover: React.FC<Props & WithTranslation> = ({
               className="tag-filter__tag"
               onClick={() => handleClick(tag.id)}
             >
-              <TagProgramItem name={tag.name} color={tag.color} />
+              <TagItem name={tag.name} color={tag.color} />
             </div>
           ))}
         </div>

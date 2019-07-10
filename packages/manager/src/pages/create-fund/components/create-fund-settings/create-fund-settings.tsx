@@ -256,7 +256,7 @@ class _CreateFundSettings extends React.PureComponent<
             {t("manager.create-fund-page.settings.deposit-details")}
           </div>
           <div className={"deposit-details create-fund-settings__fill-block"}>
-            <div className="create-program-settings__item deposit-details">
+            <div className="create-program-settings__field deposit-details">
               <GVFormikField
                 name={CREATE_FUND_FIELDS.depositWalletId}
                 component={GVTextField}

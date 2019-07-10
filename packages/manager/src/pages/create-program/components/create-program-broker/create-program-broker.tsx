@@ -67,6 +67,7 @@ const _CreateProgramBroker: React.FC<OwnProps & WithTranslation> = ({
               isForexAllowed,
               isKycConfirmed
             )}
+            tags={broker.tags}
           />
         ))}
         <div className="create-program-broker__navigation">
