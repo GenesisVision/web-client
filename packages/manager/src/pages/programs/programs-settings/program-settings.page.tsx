@@ -27,6 +27,7 @@ import ClosePeriodContainer from "../program-details/components/close-period/clo
 import CloseProgramContainer from "../program-details/components/close-program/close-program-container";
 import { ChangeBrokerFormValues } from "./broker-edit";
 import ProgramSettings from "./program-settings";
+import ProgramSettingsLoader from "./program-settings.loader";
 import {
   changeBrokerMethod,
   redirectToProgram
@@ -109,37 +110,42 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
     []
   );
 
-  if (!details || !brokersInfo) return null;
   return (
     <Page title={t("manager.program-settings.title")}>
       <ProgramSettings
+        condition={!!details && !!brokersInfo}
+        loader={<ProgramSettingsLoader />}
         changeSignaling={changeSignaling}
         closePeriod={setClosePeriodOpen}
         closeProgram={setCloseProgramOpen}
-        details={details}
+        details={details!}
         changePassword={setChangePasswordOpen}
-        brokersInfo={brokersInfo}
+        brokersInfo={brokersInfo!}
         changeBroker={changeBroker}
         editProgram={editProgram}
       />
-      <ClosePeriodContainer
-        open={isClosePeriodOpen}
-        onClose={setClosePeriodClose}
-        onApply={fetchingDescription}
-        id={details.id}
-      />
-      <CloseProgramContainer
-        open={isCloseProgramOpen}
-        onClose={setCloseProgramClose}
-        onApply={applyClose}
-        id={details.id}
-      />
-      <ChangePasswordTradingAccountPopup
-        programName={details.title}
-        open={isChangePasswordOpen}
-        id={details.id}
-        onClose={setChangePasswordClose}
-      />
+      {details && (
+        <>
+          <ClosePeriodContainer
+            open={isClosePeriodOpen}
+            onClose={setClosePeriodClose}
+            onApply={fetchingDescription}
+            id={details.id}
+          />
+          <CloseProgramContainer
+            open={isCloseProgramOpen}
+            onClose={setCloseProgramClose}
+            onApply={applyClose}
+            id={details.id}
+          />
+          <ChangePasswordTradingAccountPopup
+            programName={details.title}
+            open={isChangePasswordOpen}
+            id={details.id}
+            onClose={setChangePasswordClose}
+          />
+        </>
+      )}
     </Page>
   );
 };
