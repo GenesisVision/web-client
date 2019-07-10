@@ -24,8 +24,15 @@ $remove-button-color: #293842;
     padding: $padding-xsmall;
     display: flex;
     flex-wrap: wrap;
-    max-width: 350px;
-    min-width: 180px;
+    width: 100px;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    @include media-breakpoint-landscape-phone() {
+      width: 180px;
+    }
   }
 }
 

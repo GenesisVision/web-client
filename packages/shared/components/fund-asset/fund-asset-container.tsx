@@ -4,21 +4,18 @@ import classNames from "classnames";
 import { FundAssetPercent } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import { connect } from "react-redux";
-import { compose } from "redux";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS,
   anchorElType
 } from "shared/components/popover/popover";
 
-import { RootState } from "../../reducers/root-reducer";
 import { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltipContainer from "./fund-asset-tooltip/fund-asset-tooltip-container";
 import HidedAssets from "./hided-assets";
 
 class _FundAssetContainer extends React.PureComponent<
-  IFundAssetContainerProps & StateProps,
+  IFundAssetContainerProps,
   State
 > {
   state = {
@@ -34,18 +31,21 @@ class _FundAssetContainer extends React.PureComponent<
 
   handleClose = () => this.setState({ anchor: undefined });
 
+  componentDidUpdate() {
+    this.setState({ size: this.props.size });
+  }
+
   render() {
-    const { assets, type, length, remainder = 0, innerWidth } = this.props;
+    const { assets, type, length, remainder = 0 } = this.props;
     const { size, anchor } = this.state;
-    console.log(innerWidth);
     return (
       <div
         className={classNames("fund-assets", {
           "fund-assets--text": type === FUND_ASSET_TYPE.TEXT
         })}
       >
-        {assets.map(
-          (asset, idx) =>
+        {assets.map((asset, idx) => {
+          return (
             idx < (size || assets.length) && (
               <FundAssetTooltipContainer
                 key={idx}
@@ -54,7 +54,8 @@ class _FundAssetContainer extends React.PureComponent<
                 {...this.props}
               />
             )
-        )}
+          );
+        })}
         {size && size < (length || assets.length) && (
           <>
             <HidedAssets
@@ -95,10 +96,6 @@ class _FundAssetContainer extends React.PureComponent<
   }
 }
 
-const mapStateToProps = ({ ui }: RootState): StateProps => ({
-  innerWidth: ui.size.innerWidth
-});
-
 export type FundAssetRemoveType = (
   currency: string
 ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -113,7 +110,7 @@ export interface IFundAssetContainerProps {
   remainder?: number;
   hoveringAsset?: string;
   hasPopoverList?: boolean;
-  containerWidth?: number;
+  cell?: any;
 }
 
 interface State {
@@ -121,15 +118,6 @@ interface State {
   anchor?: anchorElType;
 }
 
-interface StateProps {
-  innerWidth: number;
-}
-
-const FundAssetContainer = compose<
-  React.ComponentType<IFundAssetContainerProps>
->(
-  connect(mapStateToProps),
-  React.memo
-)(_FundAssetContainer);
+const FundAssetContainer = React.memo(_FundAssetContainer);
 
 export default FundAssetContainer;

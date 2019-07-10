@@ -13,8 +13,16 @@
     }
   }
 
-  &__cell--reallocate-funds {
-    padding-left: $padding-xsmall;
+  &__cell--reallocate-date {
+    padding-right: $padding-xsmall;
+  }
+
+  &__funds-asset {
+    width: 100%;
+
+    .fund-assets {
+      flex-wrap: nowrap;
+    }
   }
 
   &__symbol {

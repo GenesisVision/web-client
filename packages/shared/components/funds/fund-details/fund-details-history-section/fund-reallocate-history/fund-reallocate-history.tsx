@@ -3,7 +3,6 @@ import "shared/components/details/details-description-section/details-statistic-
 import { ReallocationsViewModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { RefObject } from "react";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import { FUND_REALLOCATE_HISTORY_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
@@ -18,15 +17,32 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 
 import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cell";
+import { RootState } from "shared/reducers/root-reducer";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import {
+  isDesktop,
+  isPhone,
+  isPhoneLandscape,
+  isTablet,
+  isTabletLandscape
+} from "shared/utils/breakpoints";
+
+enum SIZE_ASSETS {
+  isPhone = 3,
+  isPhoneLandscape = 4,
+  isTablet = 6,
+  isTabletLandscape = 9,
+  isDesktop = 11,
+  isLargeDesktop = 13
+}
 
 class _FundReallocateHistory extends React.PureComponent<Props, State> {
   state: State = {
     isPending: false,
     data: undefined,
-    containerWidth: 0
+    size: undefined
   };
-
-  ref: RefObject<HTMLDivElement> = React.createRef();
 
   fetchFundReallocate: GetItemsFuncType = () => {
     this.setState({ isPending: true });
@@ -39,29 +55,33 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
 
   componentDidMount() {
     this.fetchFundReallocate();
+    this.updateSizeAssets();
   }
 
-  componentDidUpdate(prevProps: Props) {
-    if (this.ref.current) {
-      const { width } = this.ref.current.getBoundingClientRect();
-      this.setState({ containerWidth: width });
-    }
+  componentDidUpdate() {
+    this.updateSizeAssets();
   }
+
+  updateSizeAssets = () => {
+    const innerWidth = this.props.innerWidth;
+    const size = isPhone(innerWidth)
+      ? SIZE_ASSETS.isPhone
+      : isPhoneLandscape(innerWidth)
+      ? SIZE_ASSETS.isPhoneLandscape
+      : isTablet(innerWidth)
+      ? SIZE_ASSETS.isTablet
+      : isTabletLandscape(innerWidth)
+      ? SIZE_ASSETS.isTabletLandscape
+      : isDesktop(innerWidth)
+      ? SIZE_ASSETS.isDesktop
+      : SIZE_ASSETS.isLargeDesktop;
+    this.setState({ size });
+  };
 
   render() {
-    if (!this.state.data) return null;
-    const data = {
-      items: this.state.data.reallocations,
-      total: this.state.data.total
-    };
-
     return (
       <TableModule
-        data={data}
-        paging={{
-          ...DEFAULT_PAGING,
-          itemsOnPage: data.total
-        }}
+        paging={DEFAULT_PAGING}
         getItems={this.fetchFundReallocate}
         columns={FUND_REALLOCATE_HISTORY_COLUMNS}
         renderHeader={(column: SortingColumn) => {
@@ -69,19 +89,18 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
         }}
         renderBodyRow={(item: any) => (
           <TableRow stripy>
-            <TableCell className="details-structure__cell fund-details-structure__cell">
+            <TableCell className="details-structure__cell details-structure__cell--reallocate-date">
               {moment(item.date).format()}
             </TableCell>
             <TableCell className="details-structure__cell details-structure__cell--reallocate-funds">
-              <div ref={this.ref}>
+              <div className="details-structure__funds-asset">
                 <FundAssetContainer
                   //@ts-ignore
                   assets={item.parts}
                   type={FUND_ASSET_TYPE.SHORT}
-                  // size={10}
+                  size={this.state.size}
                   //@ts-ignore
                   length={item.parts.length}
-                  containerWidth={this.state.containerWidth}
                   hasPopoverList
                 />
               </div>
@@ -93,11 +112,18 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
   }
 }
 
-const FundReallocateHistory = React.memo(_FundReallocateHistory);
+const mapStateToProps = ({ ui }: RootState): StateProps => ({
+  innerWidth: ui.size.innerWidth
+});
+
+const FundReallocateHistory = compose<React.ComponentType<OwnProps>>(
+  connect(mapStateToProps),
+  React.memo
+)(_FundReallocateHistory);
 
 export default FundReallocateHistory;
 
-interface Props {
+interface OwnProps {
   id: string;
   fetchFundReallocateHistory(
     fundId: string,
@@ -105,8 +131,14 @@ interface Props {
   ): Promise<ReallocationsViewModel>;
 }
 
+interface Props extends OwnProps, StateProps {}
+
 interface State {
   isPending: boolean;
   data?: ReallocationsViewModel;
-  containerWidth: number;
+  size?: number;
+}
+
+interface StateProps {
+  innerWidth: number;
 }
