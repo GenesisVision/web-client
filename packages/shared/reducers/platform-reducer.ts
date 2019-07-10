@@ -27,6 +27,12 @@ export const currenciesSelector = apiFieldSelector(
   Object.values(HEADER_CURRENCY_VALUES)
 );
 
+export const programCurrenciesSelector = apiFieldSelector(
+  platformDataSelector,
+  fieldSelector(state => state.programCurrencies),
+  []
+);
+
 export const programTagsSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.enums.program.programTags),
