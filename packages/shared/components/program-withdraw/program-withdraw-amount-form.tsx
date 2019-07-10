@@ -1,6 +1,6 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -139,7 +139,7 @@ interface OwnProps {
   rate: number;
 }
 
-interface Props extends InjectedTranslateProps, WithRoleProps, OwnProps {}
+interface Props extends WithTranslation, WithRoleProps, OwnProps {}
 
 export interface IProgramWithdrawAmountFormValues {
   [FIELDS.amount]?: number;

@@ -1,6 +1,6 @@
 import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
@@ -11,7 +11,7 @@ interface IInvestmentFundInfoProps {
 }
 
 const InvestmentFundInfo: React.FC<
-  IInvestmentFundInfoProps & InjectedTranslateProps
+  IInvestmentFundInfoProps & WithTranslation
 > = ({ t, fundDescription }) => {
   return (
     <div className="program-details-description__statistic-container">

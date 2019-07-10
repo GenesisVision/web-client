@@ -2,7 +2,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import { CaptchaCheckResult, RegisterManagerViewModel } from "gv-api-web";
 import { SIGNUP_FORM_FIELDS } from "investor-web-portal/src/pages/auth/signup/signup-form/signup-form.types";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
@@ -104,7 +104,7 @@ const _SignUpForm: React.FC<
   </form>
 );
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
   onSubmit(data: ISignUpFormFormValues, setSubmitting: SetSubmittingType): void;

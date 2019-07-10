@@ -2,7 +2,7 @@ import "./header.scss";
 
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import GVButton from "shared/components/gv-button";
@@ -97,7 +97,7 @@ const _Header: React.FC<Props> = ({
   );
 };
 
-export interface Props extends InjectedTranslateProps {
+export interface Props extends WithTranslation {
   profileHeader?: ProfileHeaderViewModel;
   isAuthenticated: boolean;
   backPath: string;

@@ -1,12 +1,10 @@
 import { FormikProps, withFormik } from "formik";
+import CreateProgramInvestmentLimitField from "pages/create-program/components/create-program-settings/fields/create-program-investment-limit-field";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
-import GVFormikField from "shared/components/gv-formik-field";
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import { boolean, mixed, number, object } from "yup";
@@ -31,32 +29,13 @@ const _InvestmentLimit: React.FC<Props> = ({
         <h3>
           {t("manager.create-program-page.settings.fields.investment-limit")}
         </h3>
-        <GVFormikField
-          type="checkbox"
-          color="primary"
-          name={FIELDS.hasInvestmentLimit}
-          label={
-            <span>
-              {t(
-                "manager.create-program-page.settings.fields.investment-limit"
-              )}
-            </span>
-          }
-          component={GVCheckbox}
+        <CreateProgramInvestmentLimitField
+          checkboxName={FIELDS.hasInvestmentLimit}
+          inputName={FIELDS.investmentLimit}
+          hasInvestmentLimit={values.hasInvestmentLimit}
+          currency={currency}
+          isAllow={isAmountAllow(currency)}
         />
-        {values.hasInvestmentLimit && (
-          <div className="create-program-settings__item">
-            <InputAmountField
-              autoFocus={false}
-              isAllow={isAmountAllow(currency)}
-              name={FIELDS.investmentLimit}
-              label={t(
-                "manager.create-program-page.settings.fields.enter-correct-amount"
-              )}
-              currency={currency ? currency : ""}
-            />
-          </div>
-        )}
         <p className="program-edit__text">
           {t("manager.program-settings.investment-limit.text")}
         </p>
@@ -85,7 +64,7 @@ export interface InvesmentLimitFormValues {
 
 interface Props
   extends OwnProps,
-    InjectedTranslateProps,
+    WithTranslation,
     FormikProps<InvesmentLimitFormValues> {}
 
 interface OwnProps {

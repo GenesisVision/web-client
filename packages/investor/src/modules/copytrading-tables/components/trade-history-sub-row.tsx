@@ -1,6 +1,6 @@
 import { OrderSignalProgramInfo } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -51,7 +51,7 @@ const TradeHistorySubRow = compose<React.FC<OwnProps>>(
 )(_TradeHistorySubRow);
 export default TradeHistorySubRow;
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   title: string;

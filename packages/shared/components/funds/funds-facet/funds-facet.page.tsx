@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import FacetContainer, {
   FACET_ASSET
 } from "shared/components/facet-container/facet-container";
@@ -35,7 +35,7 @@ const _FundsFacetPage: React.FC<Props> = ({ t }) => {
   );
 };
 
-interface Props extends InjectedTranslateProps {}
+interface Props extends WithTranslation {}
 
 const FundsFacetPage = translate()(React.memo(_FundsFacetPage));
 export default FundsFacetPage;

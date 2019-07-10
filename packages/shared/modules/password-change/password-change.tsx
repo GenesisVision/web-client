@@ -3,7 +3,7 @@ import "./password-change.scss";
 import { ChangePasswordViewModel } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
-import { translate } from "react-i18next";
+import { withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import useErrorMessage from "shared/hooks/error-message.hook";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import { compose } from "redux";
@@ -26,11 +26,7 @@ const mapStateToProps = (state: ManagerRootState): StateProps => ({
   events: allEventsSelector(state)
 });
 
-interface Props
-  extends InjectedTranslateProps,
-    StateProps,
-    OwnProps,
-    WithRoleProps {}
+interface Props extends WithTranslation, StateProps, OwnProps, WithRoleProps {}
 
 interface OwnProps {}
 

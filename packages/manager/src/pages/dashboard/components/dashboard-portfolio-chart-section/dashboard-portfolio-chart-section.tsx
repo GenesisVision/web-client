@@ -2,7 +2,7 @@ import "./dashboard-portfolio-chart-section.scss";
 
 import { ManagerAssets, ProgramRequests } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import {
@@ -99,11 +99,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-interface Props
-  extends DispatchProps,
-    StateProps,
-    OwnProps,
-    InjectedTranslateProps {}
+interface Props extends DispatchProps, StateProps, OwnProps, WithTranslation {}
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   getAssets: typeof getAssets;

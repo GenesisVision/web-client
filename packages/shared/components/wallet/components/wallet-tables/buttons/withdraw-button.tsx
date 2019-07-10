@@ -1,6 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import ArrowIcon from "shared/media/arrow-up.svg";
 
 import WalletButton, { ParentWalletButtonProps } from "./wallet-button";
@@ -20,7 +19,7 @@ export const _WithdrawButton: React.FC<Props> = ({
   </WalletButton>
 );
 
-interface Props extends InjectedTranslateProps, ParentWalletButtonProps {}
+interface Props extends WithTranslation, ParentWalletButtonProps {}
 
 const WithdrawButton = translate()(React.memo(_WithdrawButton));
 export default WithdrawButton;

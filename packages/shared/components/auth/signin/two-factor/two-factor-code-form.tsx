@@ -2,7 +2,7 @@ import "./two-factor-code.scss";
 
 import { FormikProps, InjectedFormikProps, withFormik } from "formik";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
@@ -96,7 +96,7 @@ export interface ITwoFactorCodeFormValues {
   [FIELDS.email]: string;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
   email: string;

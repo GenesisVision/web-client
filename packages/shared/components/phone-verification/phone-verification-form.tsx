@@ -2,7 +2,7 @@ import "./phone-verification.scss";
 
 import { FormikProps, withFormik } from "formik";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -89,7 +89,7 @@ interface OwnProps {
   onSubmit(code: string, setSubmitting: SetSubmittingType): void;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps, FormProps {}
+interface Props extends WithTranslation, OwnProps, FormProps {}
 
 const PhoneVerificationForm = compose<React.ComponentType<OwnProps>>(
   translate(),

@@ -1,7 +1,7 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import {
   ChartDefaultPeriod,
@@ -22,7 +22,7 @@ import {
 } from "../../services/program-details.types";
 
 const _ProgramDetailsStatisticsElements: React.FC<
-  IProgramDetailsStatisticsElementsProps & InjectedTranslateProps
+  IProgramDetailsStatisticsElementsProps & WithTranslation
 > = ({ status, t, statistic, profitChart, period }) => (
   <>
     <div className="details-statistics__subheading">

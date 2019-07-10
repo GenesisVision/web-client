@@ -1,8 +1,9 @@
 import "./transaction-details.scss";
 
 import { TransactionDetails, TransactionDetailsTypeEnum } from "gv-api-web";
+import i18next from "i18next";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
@@ -128,7 +129,7 @@ type TransactionTypes = {
     | React.ExoticComponent<TransactionDetailsProps>
 };
 
-export interface TransactionDetailsProps extends InjectedTranslateProps {
+export interface TransactionDetailsProps extends i18next.WithT {
   data: TransactionDetails;
   handleCancel?(): void;
   handleResend?(): void;
@@ -150,4 +151,4 @@ interface State {
   errorMessage?: string;
 }
 
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+interface Props extends OwnProps, DispatchProps, WithTranslation {}

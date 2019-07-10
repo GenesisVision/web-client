@@ -1,7 +1,7 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import { LevelsParamsInfo } from "gv-api-web/src";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
@@ -40,7 +40,7 @@ const renderFee = (
 };
 
 const InvestmentProgramInfo: React.FC<
-  InjectedTranslateProps & IInvestmentProgramInfoProps
+  WithTranslation & IInvestmentProgramInfoProps
 > = ({
   t,
   isOwnProgram,

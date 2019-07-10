@@ -7,7 +7,7 @@ import {
   TwoFactorAuthenticatorConfirm
 } from "gv-api-web";
 import * as React from "react";
-import { translate } from "react-i18next";
+import { withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import authApi from "shared/services/api-client/auth-api";

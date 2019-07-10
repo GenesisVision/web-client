@@ -2,7 +2,7 @@ import "./dashboard-in-requests.scss";
 
 import { ProgramRequests } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { ResolveThunks, connect } from "react-redux";
 import {
@@ -88,7 +88,7 @@ const mapDispatchToProps = (
 interface Props
   extends OwnProps,
     DispatchProps,
-    InjectedTranslateProps,
+    WithTranslation,
     WithRoleProps {}
 
 interface OwnProps {

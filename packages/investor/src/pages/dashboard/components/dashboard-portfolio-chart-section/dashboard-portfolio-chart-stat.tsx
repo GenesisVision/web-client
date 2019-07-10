@@ -1,6 +1,6 @@
 import { DashboardChartValue } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Profitability from "shared/components/profitability/profitability";
 import {
@@ -81,7 +81,7 @@ const _DashboardPortfolioChartStat: React.FC<
   </div>
 );
 
-interface IDashboardPortfolioChartStatProps extends InjectedTranslateProps {
+interface IDashboardPortfolioChartStatProps extends WithTranslation {
   currency: CurrencyEnum;
   portfolioChartData: DashboardChartValue;
 }

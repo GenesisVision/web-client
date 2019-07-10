@@ -2,7 +2,7 @@ import "./custom-notification.scss";
 
 import { NotificationSettingViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { ResolveThunks, connect } from "react-redux";
 import {
@@ -113,7 +113,7 @@ const mapDispatchToProps = (
   )
 });
 
-interface Props extends DispatchProps, OwnProps, InjectedTranslateProps {}
+interface Props extends DispatchProps, OwnProps, WithTranslation {}
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   success: typeof alertMessageActions.success;

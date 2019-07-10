@@ -4,7 +4,6 @@ import moment from "moment";
 import * as React from "react";
 import { RefObject } from "react";
 import Calendar from "react-calendar";
-import { translate } from "react-i18next";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -12,42 +11,8 @@ import Popover, {
 
 export const DATE_FORMAT = "ll";
 
-interface IGVDatePickerProps {
-  value?: Date | string | Object;
-  onChange(event: {
-    persist(): void;
-    target: {
-      value: string;
-      name: string;
-    };
-  }): void;
-  minDate?: Date | string | Object;
-  maxDate?: Date | string | Object;
-  horizontal?: HORIZONTAL_POPOVER_POS;
-  disabled: boolean;
-  onFocus(
-    event:
-      | React.FocusEvent<HTMLButtonElement>
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void;
-  onBlur(target: {
-    target: {
-      name: string;
-    };
-  }): void;
-  name: string;
-  lng: string;
-}
-
-interface IGVDatePickerState {
-  anchorEl?: EventTarget;
-}
-
-class GVDatePicker extends React.PureComponent<
-  IGVDatePickerProps,
-  IGVDatePickerState
-> {
-  state = {
+class GVDatePicker extends React.PureComponent<Props, State> {
+  state: State = {
     anchorEl: undefined
   };
 
@@ -167,4 +132,35 @@ class GVDatePicker extends React.PureComponent<
   }
 }
 
-export default translate()(GVDatePicker);
+export default GVDatePicker;
+
+interface Props {
+  value?: Date | string | Object;
+  onChange(event: {
+    persist(): void;
+    target: {
+      value: string;
+      name: string;
+    };
+  }): void;
+  minDate?: Date | string | Object;
+  maxDate?: Date | string | Object;
+  horizontal?: HORIZONTAL_POPOVER_POS;
+  disabled: boolean;
+  onFocus(
+    event:
+      | React.FocusEvent<HTMLButtonElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void;
+  onBlur(target: {
+    target: {
+      name: string;
+    };
+  }): void;
+  name: string;
+  lng: string;
+}
+
+interface State {
+  anchorEl?: EventTarget;
+}

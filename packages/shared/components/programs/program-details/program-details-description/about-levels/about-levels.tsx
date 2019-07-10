@@ -2,7 +2,7 @@ import "./about-level.scss";
 
 import { LevelInfo } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
@@ -41,7 +41,7 @@ const _Limits: React.FC<ILimitsProps> = ({
 );
 const Limits = translate()(React.memo(_Limits));
 
-interface ILimitsProps extends InjectedTranslateProps {
+interface ILimitsProps extends WithTranslation {
   investmentsLimits: LevelInfo[];
   currency: CURRENCIES;
 }
@@ -148,7 +148,7 @@ interface OwnProps {
   currency: CurrencyEnum;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 const AboutLevelsComponent = compose<
   React.ComponentType<OwnProps & WithLoaderProps>

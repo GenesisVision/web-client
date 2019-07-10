@@ -1,12 +1,12 @@
 import "./create-program.page.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import Page from "shared/components/page/page";
 
 import CreateProgramContainer from "./components/create-program.container";
 
-const _CreateProgramPage: React.FC<InjectedTranslateProps> = ({ t }) => (
+const _CreateProgramPage: React.FC<WithTranslation> = ({ t }) => (
   <Page title={t("manager.create-program-page.title")}>
     <div className="create-program-page">
       <div className="create-program-page__header">

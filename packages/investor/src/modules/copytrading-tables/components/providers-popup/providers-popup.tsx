@@ -2,7 +2,7 @@ import "./providers-popup.scss";
 
 import { OrderSignalProgramInfo } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -43,7 +43,7 @@ const _ProvidersPopup: React.FC<Props> = ({
   </Popover>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   columns: SortingColumn[];
   anchor?: EventTarget;
   onClose: () => void;

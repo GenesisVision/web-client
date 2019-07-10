@@ -1,10 +1,10 @@
-@import "~shared/styles/_colors.scss";
-@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes.scss";
 
 $tag-font-size: 11px;
 
-.tag-program {
+.tag-item {
   display: inline-block;
   position: relative;
   margin-right: 10px;
@@ -30,16 +30,27 @@ $tag-font-size: 11px;
   .gv-btn:hover:not(disabled).gv-btn--secondary {
     background-color: #161b20;
   }
+}
 
-  &-tooltip {
-    max-width: 205px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+.tag-item-tooltip {
+  max-width: 205px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 
-    .tag-program {
-      margin-top: $padding-xxsmall/2;
-      margin-bottom: $padding-xxsmall/2;
+  .tag-item {
+    margin-top: $padding-xxsmall/2;
+    margin-bottom: $padding-xxsmall/2;
+  }
+
+  &.tag-broker-container {
+    .tag-item {
+      margin-top: 0;
+      margin-bottom: 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }

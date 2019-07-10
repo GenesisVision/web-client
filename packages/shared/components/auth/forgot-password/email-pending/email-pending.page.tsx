@@ -2,7 +2,7 @@ import "shared/components/auth/forgot-password/email-pending/email-pending.scss"
 
 import { CaptchaCheckResult } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { AuthRootState, MiddlewareDispatch } from "shared/utils/types";
@@ -60,11 +60,7 @@ interface OwnProps {
   renderForm: (handle: () => void) => JSX.Element;
 }
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    DispatchProps,
-    InjectedTranslateProps {}
+interface Props extends OwnProps, StateProps, DispatchProps, WithTranslation {}
 
 const EmailPendingPage = compose<React.ComponentType<OwnProps>>(
   translate(),

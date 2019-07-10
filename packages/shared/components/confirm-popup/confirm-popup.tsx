@@ -1,13 +1,13 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
 const _ConfirmPopup: React.ComponentType<
-  InjectedFormikProps<IConfirmPopupProps & InjectedTranslateProps, {}>
+  InjectedFormikProps<IConfirmPopupProps & WithTranslation, {}>
 > = ({
   t,
   open,

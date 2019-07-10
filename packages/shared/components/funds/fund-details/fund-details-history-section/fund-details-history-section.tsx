@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { FundAssetsListInfo, ReallocationsViewModel } from "gv-api-web";
 import React, { useEffect, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
@@ -117,7 +117,7 @@ enum TABS {
   REALLOCATE_HISTORY = "reallocate history"
 }
 
-interface Props extends StateProps, InjectedTranslateProps, OwnProps {}
+interface Props extends StateProps, WithTranslation, OwnProps {}
 
 interface OwnProps {
   id: string;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
@@ -33,7 +33,7 @@ const Tabs: React.FC<Props> = ({ role, t, authPartUrl }) => (
   </GVTabs>
 );
 
-interface Props extends OwnProps, WithRoleProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithRoleProps, WithTranslation {}
 
 interface OwnProps {
   authPartUrl: string;

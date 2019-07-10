@@ -1,6 +1,6 @@
 import { SignalTradingEvent } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import TableContainer from "shared/components/table/components/table-container";
@@ -64,4 +64,4 @@ interface DispatchProps {
   };
 }
 
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+interface Props extends OwnProps, DispatchProps, WithTranslation {}

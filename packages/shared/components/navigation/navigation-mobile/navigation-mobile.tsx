@@ -1,6 +1,6 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
 import { DetailsIcon } from "shared/components/icon/details-icon";
@@ -87,7 +87,7 @@ const _NavigationMobile: React.FC<Props> = ({
   </Sidebar>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   backPath: string;
   isAuthenticated: boolean;
   profileHeader?: ProfileHeaderViewModel;

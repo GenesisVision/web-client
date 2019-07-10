@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { SetSubmittingType } from "shared/utils/types";
 
 import GoogleActivateStep, {
@@ -8,7 +8,7 @@ import GoogleActivateStep, {
 import GoogleCodeStep from "./google-auth-code-step";
 import GoogleDownloadStep from "./google-auth-download-step";
 
-const GoogleAuth: React.FC<IGoogleAuthProps & InjectedTranslateProps> = ({
+const GoogleAuth: React.FC<IGoogleAuthProps & WithTranslation> = ({
   enablePassword,
   authenticatorUri,
   sharedKey,

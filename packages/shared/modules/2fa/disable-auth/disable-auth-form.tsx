@@ -1,6 +1,6 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -52,7 +52,7 @@ const DisableAuth: React.FC<
 );
 
 const DisableAuthForm = compose<React.ComponentType<OwnProps>>(
-  translate(),
+  withTranslation(),
   withFormik<Props, IDisableAuthFormFormValues>({
     displayName: "disable-auth",
     mapPropsToValues: () => ({
@@ -79,7 +79,7 @@ enum FIELDS {
   password = "password"
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 interface OwnProps {
   errorMessage?: string;
   onSubmit(

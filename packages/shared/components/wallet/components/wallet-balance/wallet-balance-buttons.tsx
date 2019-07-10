@@ -1,7 +1,7 @@
 import "./wallet-balance.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
@@ -53,7 +53,7 @@ const _WalletBalanceButtons: React.FC<Props> = ({
   </div>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   handleAddFunds: () => void;
   handleWithdraw: () => void;
   handleTransfer?: () => void;

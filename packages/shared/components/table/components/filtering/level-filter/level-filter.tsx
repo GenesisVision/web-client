@@ -1,7 +1,7 @@
 import "./level-filter.scss";
 
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import Filter from "../filter";
 import { TFilter } from "../filter.type";
@@ -27,7 +27,7 @@ const _LevelFilter: React.FC<Props> = ({ t, name, value, onChange }) => {
   );
 };
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   name: string;
   value: LevelFilterType;
   onChange(value: TFilter<LevelFilterType>): void;

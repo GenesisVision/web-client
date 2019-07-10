@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import * as React from "react";
 import { SyntheticEvent } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
@@ -193,11 +193,7 @@ const mapStateToProps = (state: RootState): StateProps => ({
   isAuthenticated: isAuthenticatedSelector(state)
 });
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    InjectedTranslateProps,
-    WithRoleProps {}
+interface Props extends OwnProps, StateProps, WithTranslation, WithRoleProps {}
 
 interface OwnProps {
   isSignalProgram: boolean;
