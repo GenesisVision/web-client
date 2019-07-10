@@ -203,17 +203,6 @@
     line-height: 1.4;
   }
 
-  &__logo-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    @include media-breakpoint-landscape-phone() {
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-
   &__file-field-container {
     position: relative;
   }
