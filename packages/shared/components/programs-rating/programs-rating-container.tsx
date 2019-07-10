@@ -19,7 +19,7 @@ import { PROGRAMS_COLUMNS } from "./program-rating.constants";
 
 const _ProgramsRating: React.FC<InjectedTranslateProps> = ({ t }) => {
   const [levels, setLevels] = useState<LevelInfo[]>([]);
-  const [level, setLevel] = useState<number | undefined>(undefined);
+  const [level, setLevel] = useState<number | undefined>(1);
 
   const updateLevel = (newLevel: number) => {
     if (newLevel === level) {
@@ -52,14 +52,15 @@ const _ProgramsRating: React.FC<InjectedTranslateProps> = ({ t }) => {
   return (
     <Page title={t("programs-page.title")}>
       <div className="programs-facet__filter">
-        {levels.map((level, index) => (
+        {levels.map((lvl, i) => (
           <GVButton
             className={"programs-facet__button"}
-            key={index}
-            onClick={() => updateLevel(level.level)}
+            key={i}
+            onClick={() => updateLevel(lvl.level)}
             noPadding
+            variant={"text"}
           >
-            <LevelIcon levelInfo={level} />
+            <LevelIcon levelInfo={lvl} current={lvl.level === level} />
           </GVButton>
         ))}
       </div>
