@@ -19,7 +19,7 @@ import { PROGRAMS_COLUMNS } from "./program-rating.constants";
 
 const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   const [levels, setLevels] = useState<LevelInfo[]>([]);
-  const [level, setLevel] = useState<number | undefined>(1);
+  const [level, setLevel] = useState<number | undefined>(undefined);
 
   const updateLevel = (newLevel: number) => {
     if (newLevel === level) {

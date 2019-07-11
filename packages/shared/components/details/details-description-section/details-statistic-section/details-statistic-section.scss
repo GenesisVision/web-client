@@ -5,10 +5,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  &__statistic,
-  &__chart {
-    @include adaptive-margin(top, $padding-medium);
-  }
   &__statistic {
     display: flex;
     width: 100%;
