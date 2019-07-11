@@ -59,6 +59,7 @@ class Select extends React.PureComponent<Props, State> {
     }
 
     this.handleClose();
+    this.input.current && this.input.current.focus();
   };
 
   handleBlur = (event: React.FocusEvent<HTMLButtonElement>): void => {
@@ -130,6 +131,7 @@ class Select extends React.PureComponent<Props, State> {
           onBlur={this.handleBlur}
           onFocus={this.handleFocus}
           ref={this.input}
+          type="button"
         >
           {displayValue && <span className="select__text">{displayValue}</span>}
           <span className="select__icon">
@@ -138,7 +140,7 @@ class Select extends React.PureComponent<Props, State> {
             )}
           </span>
         </button>
-
+        <input type="hidden" value={this.props.value} name={this.props.name} />
         <Popover
           horizontal={HORIZONTAL_POPOVER_POS.LEFT}
           noPadding
