@@ -25,18 +25,21 @@ import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 import DashboardCopytrading from "./dashboard-copytrading";
 
 const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
-  const { tab, setTab } = useTab<ASSET_TAB>(ASSET_TAB.PROGRAMS);
+  const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
   const [counts, setCounts] = useState<IDashboardAssetsCounts>({});
   useEffect(() => {
     fetchAssetsCount().then(setCounts);
     return service.clearDashboardAssetsTable;
   }, []);
   const { programsCount, fundsCount, tradesCount } = counts;
-  const handleTabChange = useCallback((e: any, eventTab: string) => {
-    if (eventTab === tab) return;
-    service.clearDashboardAssetsTable();
-    setTab(e, tab);
-  }, []);
+  const handleTabChange = useCallback(
+    (e: any, eventTab: string) => {
+      if (eventTab === tab) return;
+      service.clearDashboardAssetsTable();
+      setTab(e, eventTab);
+    },
+    [tab]
+  );
   return (
     <Surface className="dashboard-assets">
       <div className="dashboard-assets__head">
@@ -44,17 +47,17 @@ const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
         <div className="dashboard-assets__tabs">
           <GVTabs value={tab} onChange={handleTabChange}>
             <GVTab
-              value={ASSET_TAB.PROGRAMS}
+              value={TABS.PROGRAMS}
               label={t("investor.dashboard-page.assets.programs")}
               count={programsCount}
             />
             <GVTab
-              value={ASSET_TAB.FUNDS}
+              value={TABS.FUNDS}
               label={t("investor.dashboard-page.assets.funds")}
               count={fundsCount}
             />
             <GVTab
-              value={ASSET_TAB.COPYTRADING}
+              value={TABS.COPYTRADING}
               label={t("investor.dashboard-page.assets.copytrading")}
               count={tradesCount}
             />
@@ -62,7 +65,7 @@ const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
         </div>
       </div>
       <div className="dashboard-assets__table">
-        {tab === ASSET_TAB.PROGRAMS && (
+        {tab === TABS.PROGRAMS && (
           <>
             {/*
             //@ts-ignore */}
@@ -74,7 +77,7 @@ const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
             />
           </>
         )}
-        {tab === ASSET_TAB.FUNDS && (
+        {tab === TABS.FUNDS && (
           <>
             {/*
             //@ts-ignore */}
@@ -85,9 +88,7 @@ const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
             />
           </>
         )}
-        {tab === ASSET_TAB.COPYTRADING && (
-          <DashboardCopytrading title={title} />
-        )}
+        {tab === TABS.COPYTRADING && <DashboardCopytrading title={title} />}
       </div>
     </Surface>
   );
@@ -100,7 +101,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
   )
 });
 
-enum ASSET_TAB {
+enum TABS {
   PROGRAMS = "PROGRAMS",
   FUNDS = "FUNDS",
   COPYTRADING = "COPYTRADING"
