@@ -79,7 +79,7 @@ const _TransactionsRow: React.FC<Props> = ({
       <TransactionDetailsPopup
         transactionId={transaction.id}
         open={isOpenPopup}
-        onClose={setOpenPopup}
+        onClose={setClosePopup}
         onAction={handleAction}
       />
       <TableRow stripy onClick={setOpenPopup}>
