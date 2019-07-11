@@ -44,8 +44,8 @@ class _FundAssetContainer extends React.PureComponent<
           "fund-assets--text": type === FUND_ASSET_TYPE.TEXT
         })}
       >
-        {assets.map((asset, idx) => {
-          return (
+        {assets.map(
+          (asset, idx) =>
             idx < (size || assets.length) && (
               <FundAssetTooltipContainer
                 key={idx}
@@ -54,8 +54,7 @@ class _FundAssetContainer extends React.PureComponent<
                 {...this.props}
               />
             )
-          );
-        })}
+        )}
         {size && size < (length || assets.length) && (
           <>
             <HidedAssets
