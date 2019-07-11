@@ -59,6 +59,11 @@ const _CreateFundContainer: React.FC<Props> = ({
       service.createFund(values, setSubmitting),
     []
   );
+  const fetchRate = useCallback(
+    (fromCurrency: string, toCurrency: string) =>
+      rateApi.v10RateByFromByToGet(fromCurrency, toCurrency),
+    []
+  );
   if (!platformSettings || !wallets.length || !minimumDepositAmount)
     return null;
   return (
@@ -78,7 +83,7 @@ const _CreateFundContainer: React.FC<Props> = ({
               platformSettings.programsInfo.managerMaxEntryFee
             }
             notifyError={service.notifyError}
-            fetchRate={rateApi.v10RateByFromByToGet}
+            fetchRate={fetchRate}
           />
         )}
         <ConfirmPopup
