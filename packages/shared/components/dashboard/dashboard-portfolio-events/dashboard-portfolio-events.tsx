@@ -7,7 +7,7 @@ import {
   ManagerPortfolioEvents
 } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -79,7 +79,7 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
   </Surface>
 );
 
-interface Props extends OwnProps, InjectedTranslateProps, WithRoleProps {}
+interface Props extends OwnProps, WithTranslation, WithRoleProps {}
 
 interface OwnProps {
   fullEventsUrl: string;

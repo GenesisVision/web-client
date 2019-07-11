@@ -20,7 +20,7 @@
     "src"
   ],
   "files": [
-    "../../node_modules/gv-api-web/distribution/types.d.ts"
+    "../gv-api-web/src/types.d.ts"
   ],
   "exclude": [
     "node_modules",

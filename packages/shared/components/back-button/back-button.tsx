@@ -2,7 +2,7 @@ import "./back-button.scss";
 
 import { CallHistoryMethodAction, goBack, push } from "connected-react-router";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -17,7 +17,7 @@ import { ActionType } from "shared/utils/types";
 import { updateCurrency } from "../../modules/currency-select/services/currency-select.service";
 
 export const _BackButton: React.FC<
-  StateProps & InjectedTranslateProps & DispatchProps
+  StateProps & WithTranslation & DispatchProps
 > = ({ t, service, backPath, prevPath }) => {
   if (!backPath) return null;
 

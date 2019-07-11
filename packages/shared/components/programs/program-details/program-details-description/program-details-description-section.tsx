@@ -3,7 +3,7 @@ import "./program-details-description.scss";
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { ComponentType } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { PROGRAM, STATUS } from "shared/constants/constants";
@@ -82,8 +82,7 @@ const _ProgramDetailsDescriptionSection: React.FC<
   );
 };
 
-interface IProgramDetailsDescriptionSectionProps
-  extends InjectedTranslateProps {
+interface IProgramDetailsDescriptionSectionProps extends WithTranslation {
   levelsParameters: LevelsParamsInfo;
   accountCurrency: string;
   programDescription: ProgramDetailsFull;

@@ -1,8 +1,8 @@
+import i18next from "i18next";
 import {
   signalSuccessFeeShape,
   signalVolumeFeeShape
 } from "pages/create-program/components/create-program-settings/create-program-settings.validators";
-import { TranslationFunction } from "react-i18next";
 import { object } from "yup";
 
 export const SignalValidationSchema = ({
@@ -16,7 +16,7 @@ export const SignalValidationSchema = ({
   });
 
 interface SignalValidationSchemaProps {
-  t: TranslationFunction;
+  t: i18next.TFunction;
   signalSuccessFee: number;
   signalVolumeFee: number;
 }

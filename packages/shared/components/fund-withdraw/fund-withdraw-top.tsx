@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -9,9 +9,12 @@ interface IFundWithdrawTopProps {
   title: string;
 }
 
-const FundWithdrawTop: React.FC<
-  IFundWithdrawTopProps & InjectedTranslateProps
-> = ({ t, availableToWithdraw, title, currency }) => {
+const FundWithdrawTop: React.FC<IFundWithdrawTopProps & WithTranslation> = ({
+  t,
+  availableToWithdraw,
+  title,
+  currency
+}) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">

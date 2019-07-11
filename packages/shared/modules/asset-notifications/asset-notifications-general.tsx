@@ -3,7 +3,7 @@ import {
   NotificationSettingViewModelTypeEnum
 } from "gv-api-web";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -88,7 +88,7 @@ const mapDispatchToProps = (
   )
 });
 
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+interface Props extends OwnProps, DispatchProps, WithTranslation {}
 
 interface OwnProps {
   settings: NotificationSettingViewModel[];

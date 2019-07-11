@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-descriptio
 
 import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
@@ -99,7 +99,7 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
   );
 };
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   fundDescription: FundDetailsFull;
   isAuthenticated: boolean;
   redirectToLogin(): void;

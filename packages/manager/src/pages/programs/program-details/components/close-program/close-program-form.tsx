@@ -1,10 +1,7 @@
 import { InjectedFormikProps, withFormik } from "formik";
+import i18next from "i18next";
 import * as React from "react";
-import {
-  InjectedTranslateProps,
-  TranslationFunction,
-  translate
-} from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -50,7 +47,7 @@ const CloseProgramForm: React.FC<
 );
 
 const twoFactorValidator = (
-  t: TranslationFunction,
+  t: i18next.TFunction,
   twoFactorEnabled: boolean
 ) => {
   return twoFactorEnabled
@@ -95,4 +92,4 @@ export interface ICloseProgramFormValues {
   [FIELDS.twoFactorCode]: string;
 }
 
-type FormProps = InjectedTranslateProps & OwnProps;
+type FormProps = WithTranslation & OwnProps;

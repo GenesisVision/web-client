@@ -1,6 +1,6 @@
 import { ManagerNotificationSettingList } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import withLoader from "shared/decorators/with-loader";
 import replaceParams from "shared/utils/replace-params";
 
@@ -25,7 +25,7 @@ const _NotificationManagers: React.FC<Props> = ({ t, settings }) => (
   </div>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   settings: ManagerNotificationSettingList[];
 }
 

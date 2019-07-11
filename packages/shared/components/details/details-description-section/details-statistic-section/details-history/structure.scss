@@ -5,11 +5,6 @@
 .details-structure {
   overflow: hidden;
 
-  & .table__row--head,
-  &__row:nth-child(2n + 1) {
-    background-color: $table-background-subcolor;
-  }
-
   &__cell,
   &__head-cell {
     font-size: $font-size-paragraph-mobile;

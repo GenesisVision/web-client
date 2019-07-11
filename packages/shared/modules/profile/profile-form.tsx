@@ -6,7 +6,7 @@ import {
   UpdatePersonalDetailViewModel
 } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -95,7 +95,7 @@ export interface IProfileFormOwnProps {
 export interface ProfileFormValues extends UpdatePersonalDetailViewModel {}
 
 interface Props
-  extends InjectedTranslateProps,
+  extends WithTranslation,
     FormikProps<ProfileFormValues>,
     IProfileFormOwnProps {}
 

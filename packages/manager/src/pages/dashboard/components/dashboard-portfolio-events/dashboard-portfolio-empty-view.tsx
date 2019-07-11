@@ -1,12 +1,12 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { EvenLogoIcon } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { EVENT_LOGO_TYPE } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 const _DashboardPortfolioEmptyView: React.FC<
-  InjectedTranslateProps & WithRoleProps
+  WithTranslation & WithRoleProps
 > = ({ role, t }) => (
   <div className="dashboard__empty-events">
     <div className="dashboard__empty-events-text">

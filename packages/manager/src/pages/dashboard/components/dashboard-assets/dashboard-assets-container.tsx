@@ -1,7 +1,7 @@
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -59,7 +59,7 @@ const CreateButtonToolbar: React.FC<{ text: string; route: string }> = ({
   </div>
 );
 
-const _EmptyFunds: React.FC<InjectedTranslateProps & WithRoleProps> = ({
+const _EmptyFunds: React.FC<WithTranslation & WithRoleProps> = ({
   role,
   t
 }) => (
@@ -79,7 +79,7 @@ const _EmptyFunds: React.FC<InjectedTranslateProps & WithRoleProps> = ({
 );
 const EmptyFunds = withRole(translate()(_EmptyFunds));
 
-const _EmptyPrograms: React.FC<InjectedTranslateProps & WithRoleProps> = ({
+const _EmptyPrograms: React.FC<WithTranslation & WithRoleProps> = ({
   role,
   t
 }) => (
@@ -110,7 +110,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-interface Props extends DispatchProps, OwnProps, InjectedTranslateProps {}
+interface Props extends DispatchProps, OwnProps, WithTranslation {}
 
 interface OwnProps {
   title: string;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 
 import GoogleActivateStep from "./google-auth-activate-step";
@@ -58,7 +58,7 @@ class GoogleAuth extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props extends IGoogleAuthProps, InjectedTranslateProps {}
+interface Props extends IGoogleAuthProps, WithTranslation {}
 
 interface State {
   step: number;

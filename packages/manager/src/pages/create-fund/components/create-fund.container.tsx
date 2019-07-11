@@ -1,7 +1,7 @@
 import { goBack } from "connected-react-router";
 import { PlatformAsset, PlatformInfo, WalletData } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import {
@@ -140,4 +140,4 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends StateProps, DispatchProps, InjectedTranslateProps {}
+interface Props extends StateProps, DispatchProps, WithTranslation {}

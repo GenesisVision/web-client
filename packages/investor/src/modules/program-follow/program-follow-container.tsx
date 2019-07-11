@@ -5,8 +5,7 @@ import {
   WalletData
 } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { InvestorRootState } from "reducers";
 import { Dispatch, bindActionCreators, compose } from "redux";
@@ -151,11 +150,7 @@ interface OwnProps {
   signalSubscription: SignalSubscription;
 }
 
-interface Props
-  extends DispatchProps,
-    StateProps,
-    OwnProps,
-    InjectedTranslateProps {}
+interface Props extends DispatchProps, StateProps, OwnProps, WithTranslation {}
 
 interface State {
   isPending: boolean;

@@ -32,10 +32,7 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
         onClose={setClosePopup}
         onAction={handleAction}
       />
-      <TableRow
-        className="wallet-deposits-withdrawals__row"
-        onClick={setOpenPopup}
-      >
+      <TableRow stripy onClick={setOpenPopup}>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--wallet">
           <WalletImage
             url={transaction.logo}

@@ -8,7 +8,7 @@ import {
 import moment from "moment";
 import * as React from "react";
 import { useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -43,7 +43,7 @@ const _TradeRow: React.FC<Props> = ({
   const hasOtherPrograms = otherPrograms.length > 1;
   return (
     <>
-      <TableRow className="details-trades__row">
+      <TableRow stripy>
         <TableCell className="details-trades__cell traders-avatar">
           <div className="dashboard-programs__cell--avatar-title">
             <Link
@@ -194,7 +194,7 @@ const TradeRow = compose<React.FC<OwnProps>>(
 
 export default TradeRow;
 
-interface Props extends DispatchProps, OwnProps, InjectedTranslateProps {}
+interface Props extends DispatchProps, OwnProps, WithTranslation {}
 
 interface OwnProps {
   trade: OrderSignalModel;

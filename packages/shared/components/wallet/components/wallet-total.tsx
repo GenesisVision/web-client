@@ -1,7 +1,6 @@
 import { CopyTradingAccountInfo, WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
 import { ROLE } from "shared/constants/constants";
@@ -43,7 +42,7 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
   </Page>
 );
 
-interface Props extends WithRoleProps, OwnProps, InjectedTranslateProps {}
+interface Props extends WithRoleProps, OwnProps, WithTranslation {}
 
 interface OwnProps {
   wallet: WalletMultiSummary;

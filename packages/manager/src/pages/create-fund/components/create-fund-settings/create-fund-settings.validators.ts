@@ -1,9 +1,10 @@
 import { FundAssetPart } from "gv-api-web";
+import i18next from "i18next";
 import {
   assetDescriptionShape,
   assetTitleShape
 } from "pages/create-program/components/create-program-settings/create-program-settings.validators";
-import { InjectedTranslateProps, TranslationFunction } from "react-i18next";
+import { WithTranslation } from "react-i18next";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -15,7 +16,7 @@ import {
 } from "./create-fund-settings";
 
 const createFundSettingsValidationSchema = (
-  props: ICreateFundSettingsProps & InjectedTranslateProps
+  props: ICreateFundSettingsProps & WithTranslation
 ) => {
   const { t } = props;
   const minDeposit = parseFloat(
@@ -65,7 +66,7 @@ const createFundSettingsValidationSchema = (
   });
 };
 
-export const assetsShape = (t: TranslationFunction) => {
+export const assetsShape = (t: i18next.TFunction) => {
   return array()
     .test(
       CREATE_FUND_FIELDS.assets,

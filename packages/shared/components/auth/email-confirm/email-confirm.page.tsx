@@ -1,6 +1,6 @@
 import qs from "qs";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import SignUpFooter from "shared/components/auth/components/signup-footer/signup-footer";
 import EmailConfirmContainer from "shared/components/auth/email-confirm/email-confirm-container";
@@ -20,7 +20,7 @@ const _EmailConfirmPage: React.FC<Props> = ({ t, location }) => (
   </AuthLayout>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   location: Location;
 }
 

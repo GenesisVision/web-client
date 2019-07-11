@@ -82,3 +82,5 @@ export type AuthRootState = ManagerRootState | InvestorRootState;
 
 export type TGetState = () => RootState;
 export type TGetAuthState = () => AuthRootState;
+
+export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;

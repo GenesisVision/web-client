@@ -2,7 +2,7 @@ import "../create-fund-settings.scss";
 
 import { FundAssetPartWithIcon } from "gv-api-web";
 import React, { MouseEventHandler, useCallback, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import AddButton from "shared/components/add-button/add-button";
 import FundAssetRatio from "shared/components/fund-asset-ratio/fund-asset-ratio";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
@@ -61,7 +61,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   );
 };
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   assets: FundAssetPartWithIcon[];
   remainder: number;
   removeHandle: FundAssetRemoveType;

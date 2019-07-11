@@ -1,6 +1,6 @@
 import moment, { MomentInput } from "moment";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
 import GVTextField from "shared/components/gv-text-field";
 
@@ -18,7 +18,7 @@ interface IDateRangeFilterValuesProps {
 }
 
 const _DateRangeFilterValues: React.FC<
-  IDateRangeFilterValuesProps & InjectedTranslateProps
+  IDateRangeFilterValuesProps & WithTranslation
 > = ({ t, type, dateStart, dateEnd, startLabel, onChange }) => {
   const handleOnChange = useCallback(
     (type: keyof IDataRangeFilterValue) => (e: React.ChangeEvent<any>) =>
@@ -94,7 +94,7 @@ const _DateRangeFilterValues: React.FC<
   }
 };
 
-const _FirstInput: React.FC<{ value: string } & InjectedTranslateProps> = ({
+const _FirstInput: React.FC<{ value: string } & WithTranslation> = ({
   t,
   value
 }) => (
@@ -110,13 +110,13 @@ const _FirstInput: React.FC<{ value: string } & InjectedTranslateProps> = ({
 );
 const FirstInput = translate()(React.memo(_FirstInput));
 
-const _SecondInput: React.FC<InjectedTranslateProps> = ({ t }) => (
+const _SecondInput: React.FC<WithTranslation> = ({ t }) => (
   <GVTextField
     wrapperClassName="date-range-filter__date-input"
     type="text"
     name="endDate"
     label={t("filters.date-range.end")}
-    value={t("filters.date-range.today")}
+    value={t<string>("filters.date-range.today")}
     disabled
   />
 );

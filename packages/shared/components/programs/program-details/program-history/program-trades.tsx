@@ -4,7 +4,7 @@ import { OrderModel } from "gv-api-web";
 import moment from "moment";
 import { useCallback } from "react";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
 import BaseProfitability from "shared/components/profitability/base-profitability";
@@ -79,7 +79,7 @@ const _ProgramTrades: React.FC<Props> = ({
       renderBodyRow={(trade: OrderModel) => {
         const volume = +formatValue(trade.volume, DEFAULT_DECIMAL_SCALE / 2);
         return (
-          <TableRow className="details-trades__row">
+          <TableRow stripy>
             <TableCell className="details-trades__cell program-details-trades__cell--direction/entry">
               <BaseProfitability
                 isPositive={trade.direction === "Buy"}
@@ -178,9 +178,9 @@ interface OwnProps {
   ) => Promise<IDataModel>;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
-interface IDownloadButtonToolbar extends InjectedTranslateProps {
+interface IDownloadButtonToolbar extends WithTranslation {
   filtering: DateRangeFilterType;
   programId: string;
 }

@@ -5,10 +5,6 @@ $middle-padding: 33px;
 $large-padding: 42px;
 
 .portfolio-events-all-table {
-  &__row:nth-child(2n + 1) {
-    background-color: $table-background-subcolor;
-  }
-
   & .table__row {
     padding: 0 32px;
   }

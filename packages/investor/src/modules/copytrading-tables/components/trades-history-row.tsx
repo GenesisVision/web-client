@@ -35,7 +35,7 @@ const _TradesHistoryRow: React.FC<Props> = ({ trade, title }) => {
   const hasOtherPrograms = otherPrograms.length > 1;
   return (
     <>
-      <TableRow className="details-trades__row">
+      <TableRow stripy>
         <TableCell className="details-trades__cell program-details-trades__cell--entry traders-avatar">
           {trade.providers.length > 0 ? (
             <div className="dashboard-programs__cell--avatar-title">

@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { ProgramBalanceChart } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import {
   ChartDefaultPeriod,
   DEFAULT_PERIOD
@@ -76,7 +76,7 @@ class _ProgramDetailsStatisticSection extends React.PureComponent<
   }
 }
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   currency: CurrencyEnum;
   programId: string;
   getProgramStatistic: (

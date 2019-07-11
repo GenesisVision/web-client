@@ -1,7 +1,7 @@
 import { CopyTradingAccountInfo } from "gv-api-web";
 import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Page from "shared/components/page/page";
@@ -79,7 +79,7 @@ interface OwnProps {
   account: CopyTradingAccountInfo;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 const WalletCopytradingAccount = compose<
   React.ComponentType<OwnProps & WithLoaderProps>

@@ -3,7 +3,7 @@ import "shared/components/dashboard/dashboard.scss";
 import "./dashboard.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
@@ -13,7 +13,7 @@ import DashboardPortfolioChartSectionContainer from "./components/dashboard-port
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 import DashboardTrades from "./components/dashboard-trades/dashboard-trades";
 
-interface IDashboardPageProps extends InjectedTranslateProps, WithRoleProps {}
+interface IDashboardPageProps extends WithTranslation, WithRoleProps {}
 
 const DashboardPage: React.FC<IDashboardPageProps> = ({ t, role }) => {
   const title = t(`${role}.dashboard-page.title`);

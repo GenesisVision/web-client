@@ -1,7 +1,7 @@
 import { FundsList, PlatformAsset } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
@@ -28,41 +28,6 @@ import {
   GetFundsType
 } from "../../services/funds-table.service";
 import FundsTable from "./funds-table";
-
-interface OwnProps {
-  defaultFilters?: any;
-  title?: string;
-}
-
-interface MergeProps {
-  isLocationChanged: (location: Location) => boolean;
-  filters: { [keys: string]: any };
-}
-
-interface StateProps {
-  isAuthenticated: boolean;
-  data?: FundsList;
-  fundAssets: PlatformAsset[];
-}
-
-interface DispatchProps {
-  service: {
-    getFunds: GetFundsType;
-    fundsChangeSorting: FundsChangeSortingType;
-    fundsChangeFilter: FundsChangeFilterType;
-    fundsChangePage: FundsChangePageType;
-    getFundsFilters: GetFundsFiltersType;
-    toggleFavoriteFund: ToggleFavoriteDispatchableType;
-  };
-}
-
-interface Props
-  extends OwnProps,
-    InjectedTranslateProps,
-    MergeProps,
-    StateProps,
-    DispatchProps,
-    RouteComponentProps {}
 
 class _FundsTableContainer extends React.PureComponent<Props> {
   componentDidMount() {
@@ -164,11 +129,47 @@ const mergeProps = (
 
 const FundsTableContainer = compose<React.ComponentType<OwnProps>>(
   withRouter,
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps,
     mergeProps
   )
 )(_FundsTableContainer);
+
 export default FundsTableContainer;
+
+interface OwnProps {
+  defaultFilters?: any;
+  title?: string;
+}
+
+interface MergeProps {
+  isLocationChanged: (location: Location) => boolean;
+  filters: { [keys: string]: any };
+}
+
+interface StateProps {
+  isAuthenticated: boolean;
+  data?: FundsList;
+  fundAssets: PlatformAsset[];
+}
+
+interface DispatchProps {
+  service: {
+    getFunds: GetFundsType;
+    fundsChangeSorting: FundsChangeSortingType;
+    fundsChangeFilter: FundsChangeFilterType;
+    fundsChangePage: FundsChangePageType;
+    getFundsFilters: GetFundsFiltersType;
+    toggleFavoriteFund: ToggleFavoriteDispatchableType;
+  };
+}
+
+interface Props
+  extends OwnProps,
+    WithTranslation,
+    MergeProps,
+    StateProps,
+    DispatchProps,
+    RouteComponentProps {}

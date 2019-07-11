@@ -23,18 +23,18 @@
     justify-content: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
-    width: 59%;
-    margin-right: 1%;
     min-width: 280px;
     padding: 0 $padding-xsmall;
 
     @include media-breakpoint-landscape-phone {
+      margin-right: 1%;
       padding: 0;
     }
 
     @include media-breakpoint-tablet() {
       margin-right: 4%;
       min-width: 324px;
+      width: 59%;
     }
 
     @include media-breakpoint-desktop() {

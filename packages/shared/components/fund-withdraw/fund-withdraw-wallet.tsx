@@ -1,15 +1,11 @@
 import { WalletBaseData } from "gv-api-web";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Select, { ISelectChangeEvent } from "shared/components/select/select";
 
-const _FundWithdrawWallet: React.FC<Props> = ({
-  t,
-  wallets,
-  value,
-  onChange
-}) => {
+const _FundWithdrawWallet: React.FC<Props> = ({ wallets, value, onChange }) => {
+  const { t } = useTranslation();
   const handleChange = useCallback(
     (event: ISelectChangeEvent) => onChange(event.target.value),
     [onChange]
@@ -44,10 +40,10 @@ const _FundWithdrawWallet: React.FC<Props> = ({
   );
 };
 
-const FundWithdrawWallet = translate()(React.memo(_FundWithdrawWallet));
+const FundWithdrawWallet = React.memo(_FundWithdrawWallet);
 export default FundWithdrawWallet;
 
-interface Props extends InjectedTranslateProps {
+interface Props {
   wallets: WalletBaseData[];
   value: string;
   onChange(value: string): void;

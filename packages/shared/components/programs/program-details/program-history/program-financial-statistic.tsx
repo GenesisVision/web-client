@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import Profitability from "shared/components/profitability/profitability";
@@ -72,7 +72,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
           entryFee
         } = period.managerStatistic;
         return (
-          <TableRow>
+          <TableRow stripy>
             <TableCell>
               <ProgramPeriodPie start={period.dateFrom} end={period.dateTo} />
             </TableCell>
@@ -139,7 +139,7 @@ const ProgramFinancialStatistic = compose<React.FC<OwnProps>>(translate())(
 
 export default ProgramFinancialStatistic;
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 interface OwnProps {
   id: string;
   isGMProgram?: boolean;

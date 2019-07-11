@@ -1,6 +1,6 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { IDialogProps } from "shared/components/dialog/dialog";
@@ -45,7 +45,7 @@ interface OwnProps extends IDialogProps {
   onApply(): void;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {
+interface Props extends OwnProps, WithTranslation {
   service: {
     programMakeSignal(
       id: string,

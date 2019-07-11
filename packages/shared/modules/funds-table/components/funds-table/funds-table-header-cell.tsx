@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 
 interface Props {
@@ -7,11 +7,8 @@ interface Props {
   isAuthenticated?: boolean;
 }
 
-const FundsTableHeaderCell: React.FC<Props & InjectedTranslateProps> = ({
-  t,
-  column,
-  isAuthenticated
-}) => {
+const FundsTableHeaderCell: React.FC<Props> = ({ column, isAuthenticated }) => {
+  const { t } = useTranslation();
   if (!isAuthenticated && column.name === "favorite") return null;
   return (
     <span className={`funds-table__cell funds-table__cell--${column.name}`}>
@@ -20,4 +17,4 @@ const FundsTableHeaderCell: React.FC<Props & InjectedTranslateProps> = ({
   );
 };
 
-export default translate()(React.memo(FundsTableHeaderCell));
+export default React.memo(FundsTableHeaderCell);

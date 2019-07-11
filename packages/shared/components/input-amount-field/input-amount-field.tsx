@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -46,7 +46,7 @@ const _InputAmountField: React.FC<Props> = ({
   />
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   name: string;
   label: React.ReactNode;
   currency: string;
