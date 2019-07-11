@@ -74,7 +74,7 @@ const _WalletWidget: React.FC<Props> = ({ t, info, className }) => {
           </div>
           <div className="wallet-details__item">
             <div className="wallet-details__value">
-              <Link to={WALLET_TOTAL_PAGE_ROUTE} onClick={setClosePopup}>
+              <Link to={WALLET_TOTAL_PAGE_ROUTE} onClick={clearAnchor}>
                 {t("wallet-widget.details")} ›
               </Link>
             </div>

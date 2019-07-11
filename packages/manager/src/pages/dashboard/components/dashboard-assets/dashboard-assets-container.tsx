@@ -77,7 +77,11 @@ const _EmptyFunds: React.FC<WithTranslation & WithRoleProps> = ({
     </div>
   </div>
 );
-const EmptyFunds = withRole(translate()(_EmptyFunds));
+const EmptyFunds = compose<React.ComponentType>(
+  withRole,
+  translate(),
+  React.memo
+)(_EmptyFunds);
 
 const _EmptyPrograms: React.FC<WithTranslation & WithRoleProps> = ({
   role,
@@ -97,7 +101,11 @@ const _EmptyPrograms: React.FC<WithTranslation & WithRoleProps> = ({
     </div>
   </div>
 );
-const EmptyPrograms = withRole(translate()(_EmptyPrograms));
+const EmptyPrograms = compose<React.ComponentType>(
+  withRole,
+  translate(),
+  React.memo
+)(_EmptyPrograms);
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
