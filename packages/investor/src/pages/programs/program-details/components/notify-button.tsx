@@ -1,64 +1,54 @@
 import "./notify-button.scss";
 
 import { subscribeAvailableToInvest } from "pages/programs/program-details/services/program-details.service";
-import * as React from "react";
+import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import Tooltip from "shared/components/tooltip/tooltip";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { CurrencyEnum } from "shared/utils/types";
 
-class _NotifyButton extends React.PureComponent<Props, State> {
-  state = {
-    subscription: false,
-    notificationId: this.props.notificationId
-  };
-
-  handleClick = () => {
-    this.setState({ subscription: true });
-    this.props
-      .subscribeAvailableToInvest({
-        assetId: this.props.assetId,
-        currency: this.props.currency
+const _NotifyButton: React.FC<Props> = ({
+  t,
+  notificationId: propNotificationId,
+  canInvest,
+  assetId,
+  subscribeAvailableToInvest,
+  currency
+}) => {
+  const [isPending, setIsPending, setNotIsPending] = useIsOpen();
+  const [notificationId, setNotificationId] = useState<string | undefined>(
+    propNotificationId
+  );
+  const handleClick = useCallback(
+    () => {
+      setIsPending();
+      subscribeAvailableToInvest({
+        assetId: assetId,
+        currency: currency
       })
-      .then(notificationId => {
-        this.setState({
-          notificationId,
-          subscription: false
-        });
-      })
-      .catch(() => {
-        this.setState({
-          subscription: false
-        });
-      });
-  };
-
-  render() {
-    const { t } = this.props;
-    return (
-      <div className="notify-button">
-        <GVButton
-          className="program-details-description__invest-btn"
-          onClick={this.handleClick}
-          disabled={Boolean(
-            this.state.notificationId ||
-              this.state.subscription ||
-              !this.props.canInvest
-          )}
-        >
-          {t("buttons.notify")}
-        </GVButton>
-        <Tooltip
-          render={() => t("program-details-page.description.notify-hint")}
-        >
-          <div className="notify-button__hint">?</div>
-        </Tooltip>
-      </div>
-    );
-  }
-}
+        .then(setNotificationId)
+        .then(setNotIsPending); // TODO change to finally
+    },
+    [assetId, currency]
+  );
+  return (
+    <div className="notify-button">
+      <GVButton
+        className="program-details-description__invest-btn"
+        onClick={handleClick}
+        disabled={Boolean(notificationId || isPending || !canInvest)}
+      >
+        {t("buttons.notify")}
+      </GVButton>
+      <Tooltip render={() => t("program-details-page.description.notify-hint")}>
+        <div className="notify-button__hint">?</div>
+      </Tooltip>
+    </div>
+  );
+};
 
 const NotifyButton = compose<React.FC<OwnProps>>(
   translate(),
@@ -67,9 +57,9 @@ const NotifyButton = compose<React.FC<OwnProps>>(
     {
       subscribeAvailableToInvest
     }
-  )
+  ),
+  React.memo
 )(_NotifyButton);
-
 export default NotifyButton;
 
 interface OwnProps {
@@ -89,8 +79,3 @@ interface DispatchProps {
 }
 
 interface Props extends OwnProps, WithTranslation, DispatchProps {}
-
-interface State {
-  notificationId?: string;
-  subscription: boolean;
-}
