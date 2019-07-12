@@ -50,7 +50,6 @@ const _DashboardInRequestsContainer: React.FC<Props> = ({
           className="dashboard-request__icon"
           primary={!!anchor}
           onClick={setAnchor}
-          dashboard__portfolio-events-aside
         />
       </StatisticItem>
       <Popover
