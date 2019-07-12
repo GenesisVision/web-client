@@ -30,7 +30,7 @@ const _NotifyButton: React.FC<Props> = ({
         currency: currency
       })
         .then(setNotificationId)
-        .then(setNotIsPending); // TODO change to finally
+        .finally(setNotIsPending);
     },
     [assetId, currency]
   );

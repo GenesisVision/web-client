@@ -19,7 +19,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   @include media-breakpoint-landscape-phone() {
-    min-width: 360px;
+    min-width: $modal-width;
     border-radius: 8px;
   }
 
@@ -95,7 +95,7 @@
   }
 
   &__top {
-    max-width: 360px;
+    max-width: $modal-width;
     padding: $padding-upper-medium $padding-small $padding-medium;
 
     &:last-child {

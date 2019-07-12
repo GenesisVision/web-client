@@ -1,3 +1,5 @@
+@import "~shared/styles/_sizes.scss";
+
 .transfer {
   &__field {
     &:before {
@@ -9,6 +11,7 @@
   }
 
   &-popup {
+    max-width: $modal-width;
     &__two-factor-input {
       margin-bottom: 20px;
     }
