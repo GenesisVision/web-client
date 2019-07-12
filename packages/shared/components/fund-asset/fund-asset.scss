@@ -84,7 +84,7 @@ $remove-button-color: #293842;
     user-select: none;
   }
   &--others-count {
-    cursor: unset;
+    cursor: pointer;
     &:hover {
       background: rgba(255, 255, 255, 0.02);
     }

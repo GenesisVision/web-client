@@ -32,7 +32,7 @@ class _FundAssetContainer extends React.PureComponent<
   handleClose = () => this.setState({ anchor: undefined });
 
   componentDidUpdate() {
-    this.setState({ size: this.props.size });
+    if (this.props.hasPopoverList) this.setState({ size: this.props.size });
   }
 
   render() {
