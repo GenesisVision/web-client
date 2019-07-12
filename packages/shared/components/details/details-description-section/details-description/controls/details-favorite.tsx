@@ -28,7 +28,7 @@ const _DetailsFavorite: React.FC<Props> = ({
       setIsPending();
       toggleFavoriteProgram(id, isFavorite)
         .catch(() => setIsFavoriteValue(isFavorite))
-        .then(setIsNotPending); // TODO change to finally
+        .finally(setIsNotPending);
     },
     []
   );
