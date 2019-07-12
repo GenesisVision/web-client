@@ -50,13 +50,11 @@ const CreateButtonToolbar: React.FC<{ text: string; route: string }> = ({
   text,
   route
 }) => (
-  <div className="dashboard__button-container">
-    <Link to={route} className="dashboard__button">
-      <GVButton color="primary" variant="text">
-        {text}
-      </GVButton>
-    </Link>
-  </div>
+  <Link to={route} className="dashboard__button">
+    <GVButton color="primary" variant="text">
+      {text}
+    </GVButton>
+  </Link>
 );
 
 const _EmptyFunds: React.FC<WithTranslation & WithRoleProps> = ({

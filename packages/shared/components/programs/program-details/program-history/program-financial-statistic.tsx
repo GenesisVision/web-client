@@ -21,6 +21,7 @@ import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
 } from "../program-details.constants";
+import DownloadButtonToolbar from "./download-button-toolbar";
 
 const _ProgramFinancialStatistic: React.FC<Props> = ({
   t,
@@ -39,6 +40,12 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   );
   return (
     <TableModule
+      exportButtonToolbarRender={(filtering: any) => (
+        <DownloadButtonToolbar
+          filtering={filtering!.dateRange}
+          programId={id}
+        />
+      )}
       getItems={fetchStatistic}
       defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
       filtering={PROGRAM_TRADES_FILTERS}
