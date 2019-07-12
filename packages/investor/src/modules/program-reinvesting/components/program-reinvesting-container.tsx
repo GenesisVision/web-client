@@ -28,7 +28,7 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
       toggleReinvesting(programId, !isReinvesting)
         .then(updateDetails)
         .catch(() => setIsReinvestingValue(isReinvesting))
-        .then(setNotIsPending); // TODO change to finally
+        .finally(setNotIsPending);
     },
     [programId]
   );
