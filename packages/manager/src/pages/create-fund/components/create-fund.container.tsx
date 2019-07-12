@@ -52,7 +52,7 @@ const _CreateFundContainer: React.FC<Props> = ({
     service.fetchWallets();
     fetchMinimumDepositAmount()
       .then(setMinimumDepositAmount)
-      .then(setNotIsPending); // TODO change to finally
+      .finally(setNotIsPending);
   }, []);
   const handleSubmit = useCallback(
     (values: ICreateFundSettingsFormValues, setSubmitting: SetSubmittingType) =>
