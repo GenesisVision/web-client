@@ -66,17 +66,16 @@ class FundAssetContainer extends React.PureComponent<
               onClose={this.handleClose}
             >
               <div className="fund-assets__container">
-                {assets.map(
-                  (asset, idx) =>
-                    idx >= size && (
-                      <FundAssetTooltipContainer
-                        key={idx}
-                        asset={asset}
-                        idx={idx}
-                        {...this.props}
-                      />
-                    )
-                )}
+                {assets
+                  .filter((asset, idx) => idx >= size)
+                  .map((asset, idx) => (
+                    <FundAssetTooltipContainer
+                      key={idx}
+                      asset={asset}
+                      idx={idx}
+                      {...this.props}
+                    />
+                  ))}
               </div>
             </Popover>
           </>
