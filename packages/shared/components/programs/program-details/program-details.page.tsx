@@ -1,11 +1,7 @@
 import "shared/components/details/details.scss";
 
-import {
-  LevelsParamsInfo,
-  ProgramBalanceChart,
-  ProgramDetailsFull
-} from "gv-api-web";
-import * as React from "react";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/signin/signin.service";
@@ -16,98 +12,68 @@ import {
   getProgramDescription,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
-import {
-  ProgramDetailsProfitChart,
-  ProgramDetailsStatistic
-} from "shared/components/programs/program-details/services/program-details.types";
+import { ProgramStatisticResult } from "shared/components/programs/program-details/services/program-details.types";
+import useErrorMessage from "shared/hooks/error-message.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { kycConfirmedSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { CurrencyEnum, ResponseError } from "shared/utils/types";
+import { CurrencyEnum } from "shared/utils/types";
 
 import ProgramDetailsContainer from "./program-details.contaner";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 
-class _ProgramDetailsPage extends React.PureComponent<Props, State> {
-  state = {
-    hasError: false,
-    isPending: false,
-    levelsParameters: undefined,
-    description: undefined,
-    profitChart: undefined,
-    balanceChart: undefined,
-    statistic: undefined
-  };
-
-  componentDidMount() {
-    const update = this.updateDetails();
+const _ProgramDetailsPage: React.FC<Props> = ({
+  service,
+  descriptionSection,
+  historySection,
+  currency,
+  isAuthenticated,
+  isKycConfirmed
+}) => {
+  const { errorMessage, setErrorMessage } = useErrorMessage();
+  const [levelsParameters, setLevelsParameters] = useState<
+    LevelsParamsInfo | undefined
+  >(undefined);
+  const [description, setDescription] = useState<
+    ProgramDetailsFull | undefined
+  >(undefined);
+  const [statistic, setStatistic] = useState<
+    ProgramStatisticResult | undefined
+  >(undefined);
+  useEffect(() => {
+    const update = updateDetails();
+    update.then(setDescription).catch(setErrorMessage);
     update
-      .then(data => getProgramStatistic(data.id))
-      .then(data => {
-        this.setState({ isPending: false, ...data });
-      })
-      .catch(() => {
-        this.setState({ isPending: false });
-      });
+      .then(data => data.id)
+      .then(getProgramStatistic)
+      .then(setStatistic)
+      .catch(setErrorMessage);
     update
-      .then(data => getPlatformLevelsParameters(data.currency))
-      .then(levelsParameters => this.setState({ levelsParameters }));
-  }
-
-  updateDetails = () => {
-    const { service } = this.props;
-    this.setState({ isPending: true });
-    return service
-      .getProgramDescription()
-      .then(description => {
-        this.setState({ isPending: false, description });
-        return description;
-      })
-      .catch((e: ResponseError) => {
-        this.setState({ hasError: true });
-        throw e;
-      });
-  };
-
-  render() {
-    const {
-      service,
-      descriptionSection,
-      historySection,
-      currency,
-      isAuthenticated,
-      isKycConfirmed
-    } = this.props;
-    const {
-      levelsParameters,
-      hasError,
-      description,
-      statistic,
-      profitChart,
-      balanceChart
-    } = this.state;
-    if (hasError) return <NotFoundPage />;
-    return (
-      <ProgramDetailsContainer
-        condition={!!description && !!levelsParameters}
-        loader={<DetailsContainerLoader />}
-        updateDetails={this.updateDetails}
-        redirectToLogin={service.redirectToLogin}
-        historySection={historySection}
-        descriptionSection={descriptionSection}
-        description={description!}
-        profitChart={profitChart}
-        balanceChart={balanceChart}
-        statistic={statistic}
-        currency={currency}
-        isAuthenticated={isAuthenticated}
-        levelsParameters={levelsParameters!}
-        isKycConfirmed={isKycConfirmed}
-      />
-    );
-  }
-}
+      .then(data => data.currency)
+      .then(getPlatformLevelsParameters)
+      .then(setLevelsParameters)
+      .catch(setErrorMessage);
+  }, []);
+  const updateDetails = () => service.getProgramDescription();
+  if (errorMessage) return <NotFoundPage />;
+  return (
+    <ProgramDetailsContainer
+      condition={!!description && !!levelsParameters}
+      loader={<DetailsContainerLoader />}
+      updateDetails={updateDetails}
+      redirectToLogin={service.redirectToLogin}
+      historySection={historySection}
+      descriptionSection={descriptionSection}
+      description={description!}
+      statistic={statistic}
+      currency={currency}
+      isAuthenticated={isAuthenticated}
+      levelsParameters={levelsParameters!}
+      isKycConfirmed={isKycConfirmed}
+    />
+  );
+};
 
 const mapStateToProps = (state: RootState): StateProps => ({
   currency: currencySelector(state),
@@ -142,20 +108,11 @@ interface DispatchProps {
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
 
-interface State {
-  isPending: boolean;
-  hasError: boolean;
-  description?: ProgramDetailsFull;
-  profitChart?: ProgramDetailsProfitChart;
-  balanceChart?: ProgramBalanceChart;
-  statistic?: ProgramDetailsStatistic;
-  levelsParameters?: LevelsParamsInfo;
-}
-
 const ProgramDetailsPage = compose<React.ComponentType<OwnProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_ProgramDetailsPage);
 export default ProgramDetailsPage;
