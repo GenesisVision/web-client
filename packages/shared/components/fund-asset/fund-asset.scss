@@ -110,6 +110,12 @@ $remove-button-color: #293842;
     opacity: 0.4;
   }
 
+  &__container {
+    &--others-count {
+      cursor: pointer;
+    }
+  }
+
   @include media-breakpoint-landscape-phone() {
     height: $asset-height;
     font-size: $font-size-paragraph;
