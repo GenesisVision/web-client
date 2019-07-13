@@ -40,17 +40,16 @@ class FundAssetContainer extends React.PureComponent<
           "fund-assets--text": type === FUND_ASSET_TYPE.TEXT
         })}
       >
-        {assets.map(
-          (asset, idx) =>
-            idx < (size || assets.length) && (
-              <FundAssetTooltipContainer
-                key={idx}
-                asset={asset}
-                idx={idx}
-                {...this.props}
-              />
-            )
-        )}
+        {assets
+          .filter((asset, idx) => idx < (size || assets.length))
+          .map((asset, idx) => (
+            <FundAssetTooltipContainer
+              key={idx}
+              asset={asset}
+              idx={idx}
+              {...this.props}
+            />
+          ))}
         {size && size < (length || assets.length) && (
           <>
             <HidedAssets
