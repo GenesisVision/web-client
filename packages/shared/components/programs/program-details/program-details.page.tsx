@@ -1,7 +1,7 @@
 import "shared/components/details/details.scss";
 
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/signin/signin.service";
@@ -41,6 +41,7 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   const [statistic, setStatistic] = useState<
     ProgramStatisticResult | undefined
   >(undefined);
+  const updateDetails = useCallback(() => service.getProgramDescription(), []);
   useEffect(() => {
     const update = updateDetails();
     update.then(setDescription).catch(setErrorMessage);
@@ -55,7 +56,6 @@ const _ProgramDetailsPage: React.FC<Props> = ({
       .then(setLevelsParameters)
       .catch(setErrorMessage);
   }, []);
-  const updateDetails = () => service.getProgramDescription();
   if (errorMessage) return <NotFoundPage />;
   return (
     <ProgramDetailsContainer
