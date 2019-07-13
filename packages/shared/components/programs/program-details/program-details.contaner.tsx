@@ -1,10 +1,6 @@
 import "shared/components/details/details.scss";
 
-import {
-  LevelsParamsInfo,
-  ProgramBalanceChart,
-  ProgramDetailsFull
-} from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import Page from "shared/components/page/page";
@@ -16,10 +12,7 @@ import {
   fetchProgramTrades,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
-import {
-  ProgramDetailsProfitChart,
-  ProgramDetailsStatistic
-} from "shared/components/programs/program-details/services/program-details.types";
+import { ProgramStatisticResult } from "shared/components/programs/program-details/services/program-details.types";
 import { STATUS } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
@@ -38,9 +31,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   descriptionSection,
   historySection,
   description,
-  statistic,
-  profitChart,
-  balanceChart
+  statistic
 }) => {
   const fetchHistoryPortfolioEvents = (filters: any) =>
     historySection.fetchPortfolioEvents({
@@ -80,8 +71,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               programId={description.id}
               currency={currency}
               statistic={statistic}
-              profitChart={profitChart}
-              balanceChart={balanceChart}
             />
           </div>
           <div className="details__history">
@@ -119,13 +108,11 @@ interface OwnProps {
   historySection: IHistorySection;
   descriptionSection: IDescriptionSection;
   description: ProgramDetailsFull;
-  profitChart?: ProgramDetailsProfitChart;
-  balanceChart?: ProgramBalanceChart;
-  statistic?: ProgramDetailsStatistic;
   levelsParameters: LevelsParamsInfo;
   isAuthenticated: boolean;
   isKycConfirmed: boolean;
   currency: CurrencyEnum;
+  statistic?: ProgramStatisticResult;
 }
 
 interface Props extends OwnProps {}
