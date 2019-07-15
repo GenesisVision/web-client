@@ -3,7 +3,7 @@ import "./gv-datepicker.scss";
 import moment from "moment";
 import * as React from "react";
 import { RefObject } from "react";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar"; TODO fix css
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -118,14 +118,15 @@ class GVDatePicker extends React.PureComponent<Props, State> {
           horizontal={horizontal}
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
         >
-          <Calendar
-            className="gv-datepicker__calendar"
-            value={innerValue}
-            onChange={this.handleChange}
-            locale={lng}
-            minDate={innerMinDate}
-            maxDate={innerMaxDate}
-          />
+          <input type="date" />
+          {/*<Calendar*/}
+          {/*  className="gv-datepicker__calendar"*/}
+          {/*  value={innerValue}*/}
+          {/*  onChange={this.handleChange}*/}
+          {/*  locale={lng}*/}
+          {/*  minDate={innerMinDate}*/}
+          {/*  maxDate={innerMaxDate}*/}
+          {/*/>*/}
         </Popover>
       </div>
     );

@@ -1,6 +1,5 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
 import { DetailsIcon } from "shared/components/icon/details-icon";
@@ -18,6 +17,7 @@ import {
 } from "shared/components/profile/profile.constants";
 import Sidebar from "shared/components/sidebar/sidebar";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
+import { WithTranslation, withTranslation } from "shared/i18n";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { FUNDS_ROUTE } from "shared/routes/funds.routes";
@@ -29,8 +29,8 @@ const _NavigationMobile: React.FC<Props> = ({
   profileHeader,
   isOpenNavigation,
   onClose,
-  logout,
-  backPath
+  logout
+  //, backPath
 }) => (
   <Sidebar open={isOpenNavigation} onClose={onClose}>
     <div className="navigation__mobile mobile">
@@ -77,7 +77,10 @@ const _NavigationMobile: React.FC<Props> = ({
         ) : (
           <NavigationItem
             icon={<LogoutIcon primary rotate />}
-            href={{ pathname: LOGIN_ROUTE, state: backPath }}
+            href={
+              LOGIN_ROUTE
+              //{ pathname: LOGIN_ROUTE, state: backPath }
+            }
           >
             {t("navigation.login")}
           </NavigationItem>
@@ -88,7 +91,7 @@ const _NavigationMobile: React.FC<Props> = ({
 );
 
 interface Props extends WithTranslation {
-  backPath: string;
+  // backPath: string;
   isAuthenticated: boolean;
   profileHeader?: ProfileHeaderViewModel;
   isOpenNavigation: boolean;
@@ -96,5 +99,5 @@ interface Props extends WithTranslation {
   logout(): void;
 }
 
-const NavigationMobile = translate()(React.memo(_NavigationMobile));
+const NavigationMobile = withTranslation()(React.memo(_NavigationMobile));
 export default NavigationMobile;
