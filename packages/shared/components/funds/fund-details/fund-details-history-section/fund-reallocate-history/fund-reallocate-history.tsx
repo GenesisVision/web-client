@@ -38,9 +38,19 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
   }
 
   render() {
+    if (!this.state.data) return null;
+    const data = {
+      items: this.state.data.reallocations,
+      total: this.state.data.total
+    };
+
     return (
       <TableModule
-        paging={DEFAULT_PAGING}
+        data={data}
+        paging={{
+          ...DEFAULT_PAGING,
+          itemsOnPage: data.total
+        }}
         getItems={this.fetchFundReallocate}
         columns={FUND_REALLOCATE_HISTORY_COLUMNS}
         renderHeader={(column: SortingColumn) => {
@@ -48,21 +58,19 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
         }}
         renderBodyRow={(item: any) => (
           <TableRow stripy>
-            <TableCell className="details-structure__cell details-structure__cell--reallocate-date">
+            <TableCell className="details-structure__cell fund-details-structure__cell">
               {moment(item.date).format()}
             </TableCell>
-            <TableCell className="details-structure__cell details-structure__cell--reallocate-funds">
-              <div className="details-structure__funds-asset">
-                <FundAssetContainer
-                  //@ts-ignore
-                  assets={item.parts}
-                  type={FUND_ASSET_TYPE.SHORT}
-                  size={13}
-                  //@ts-ignore
-                  length={item.parts.length}
-                  hasPopoverList
-                />
-              </div>
+            <TableCell className="details-structure__cell">
+              <FundAssetContainer
+                //@ts-ignore
+                assets={item.parts}
+                type={FUND_ASSET_TYPE.SHORT}
+                size={4}
+                //@ts-ignore
+                length={item.parts.length}
+                hasPopoverList
+              />
             </TableCell>
           </TableRow>
         )}
@@ -75,7 +83,7 @@ const FundReallocateHistory = React.memo(_FundReallocateHistory);
 
 export default FundReallocateHistory;
 
-interface OwnProps {
+interface Props {
   id: string;
   fetchFundReallocateHistory(
     fundId: string,
@@ -83,10 +91,7 @@ interface OwnProps {
   ): Promise<ReallocationsViewModel>;
 }
 
-interface Props extends OwnProps {}
-
 interface State {
   isPending: boolean;
   data?: ReallocationsViewModel;
-  size?: number;
 }
