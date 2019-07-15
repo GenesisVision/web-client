@@ -28,7 +28,7 @@ export default class Popover extends React.PureComponent<OwnProps, State> {
   state: State = {
     windowWidth: 0,
     windowHeight: 0,
-    scrollTop: window.scrollY
+    scrollTop: 0
   };
 
   popover: RefObject<HTMLDivElement>;
@@ -51,13 +51,14 @@ export default class Popover extends React.PureComponent<OwnProps, State> {
     }
   }
 
-  static getDerivedStateFromProps() {
-    return {
-      windowWidth: window.innerWidth,
-      windowHeight: window.innerHeight,
-      scrollTop: window.scrollY
-    };
-  }
+  // static getDerivedStateFromProps() { TODO check it
+  //   return {
+  //     windowWidth: 0, //window.innerWidth,
+  //     windowHeight: 0, //window.innerHeight,
+  //     scrollTop: 0 //window.scrollY
+  //   };
+  // }
+
   getAnchorBounds = (): ClientRect => {
     const anchorEl = getAnchorEl(this.props.anchorEl);
     const box = anchorEl.getBoundingClientRect();
