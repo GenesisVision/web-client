@@ -8,13 +8,14 @@
     "gv-api-web": "^1.0.0"
   },
   "scripts": {
+    "dev": "yarn copy && node index.js",
+    "build-ssr": "yarn copy && next build",
+    "start-ssr": "next start",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "yarn copy && react-app-rewired start",
-    "build": "yarn copy && react-app-rewired build",
     "test": "react-scripts test --env=jsdom",
     "test:ui": "majestic",
     "eject": "react-scripts eject",
-    "copy": "cpx \"../shared/locales/**/*.json\" \"public/locales\""
+    "copy": "cpx \"../shared/locales/**/*.json\" \"static/locales\""
   },
   "majestic": {
     "jestScriptPath": "../../node_modules/react-app-rewired/bin/jest.js",
