@@ -3,8 +3,6 @@ import "shared/components/details/details-description-section/details-statistic-
 import { ReallocationsViewModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { connect } from "react-redux";
-import { compose } from "redux";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import { FUND_REALLOCATE_HISTORY_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
@@ -17,45 +15,13 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { RootState } from "shared/reducers/root-reducer";
-import {
-  isDesktop,
-  isPhone,
-  isPhoneLandscape,
-  isTablet,
-  isTabletLandscape
-} from "shared/utils/breakpoints";
 
 import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cell";
-
-enum SIZE_ASSETS {
-  isPhoneLandscape = 3,
-  isTablet = 6,
-  isTabletLandscape = 9,
-  isDesktop = 11,
-  isLargeDesktop = 13
-}
-
-const getSizeAssets = (innerWidth: number) => {
-  switch (true) {
-    case isPhoneLandscape(innerWidth):
-      return SIZE_ASSETS.isPhoneLandscape;
-    case isTablet(innerWidth):
-      return SIZE_ASSETS.isTablet;
-    case isTabletLandscape(innerWidth):
-      return SIZE_ASSETS.isTabletLandscape;
-    case isDesktop(innerWidth):
-      return SIZE_ASSETS.isDesktop;
-    default:
-      return SIZE_ASSETS.isLargeDesktop;
-  }
-};
 
 class _FundReallocateHistory extends React.PureComponent<Props, State> {
   state: State = {
     isPending: false,
-    data: undefined,
-    size: undefined
+    data: undefined
   };
 
   fetchFundReallocate: GetItemsFuncType = () => {
@@ -69,32 +35,7 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
 
   componentDidMount() {
     this.fetchFundReallocate();
-    this.updateSizeAssets();
   }
-
-  componentDidUpdate() {
-    this.updateSizeAssets();
-  }
-
-  getSizeAssets = () => {
-    const innerWidth = this.props.innerWidth;
-    switch (true) {
-      case isPhoneLandscape(innerWidth):
-        return SIZE_ASSETS.isPhoneLandscape;
-      case isTablet(innerWidth):
-        return SIZE_ASSETS.isTablet;
-      case isTabletLandscape(innerWidth):
-        return SIZE_ASSETS.isTabletLandscape;
-      case isDesktop(innerWidth):
-        return SIZE_ASSETS.isDesktop;
-      default:
-        return SIZE_ASSETS.isLargeDesktop;
-    }
-  };
-
-  updateSizeAssets = () => {
-    this.setState({ size: this.getSizeAssets() });
-  };
 
   render() {
     return (
@@ -116,7 +57,7 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
                   //@ts-ignore
                   assets={item.parts}
                   type={FUND_ASSET_TYPE.SHORT}
-                  size={this.state.size}
+                  size={13}
                   //@ts-ignore
                   length={item.parts.length}
                   hasPopoverList
@@ -130,14 +71,7 @@ class _FundReallocateHistory extends React.PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = ({ ui }: RootState): StateProps => ({
-  innerWidth: ui.size.innerWidth
-});
-
-const FundReallocateHistory = compose<React.ComponentType<OwnProps>>(
-  connect(mapStateToProps),
-  React.memo
-)(_FundReallocateHistory);
+const FundReallocateHistory = React.memo(_FundReallocateHistory);
 
 export default FundReallocateHistory;
 
@@ -149,14 +83,10 @@ interface OwnProps {
   ): Promise<ReallocationsViewModel>;
 }
 
-interface Props extends OwnProps, StateProps {}
+interface Props extends OwnProps {}
 
 interface State {
   isPending: boolean;
   data?: ReallocationsViewModel;
   size?: number;
-}
-
-interface StateProps {
-  innerWidth: number;
 }
