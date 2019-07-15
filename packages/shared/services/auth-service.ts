@@ -21,11 +21,17 @@ const decodeToken = (token: string): any => {
 };
 
 const storeToken = (token: string): void => {
-  localStorage.setItem(AUTH_TOKEN, token);
+  try {
+    localStorage.setItem(AUTH_TOKEN, token);
+  } catch (e) {}
 };
 
 const getToken = (): Nullable<string> => {
-  return localStorage.getItem(AUTH_TOKEN);
+  try {
+    return localStorage.getItem(AUTH_TOKEN);
+  } catch (e) {
+    return null;
+  }
 };
 
 const getTokenData = () => decodeToken(getToken() || "");
@@ -49,8 +55,12 @@ const isAuthenticated = (): boolean => {
 };
 
 const getUserName = (): string => {
-  const token = localStorage.getItem(AUTH_TOKEN);
-  return isAuthenticated() ? decodeToken(token || "").unique_name : "";
+  try {
+    const token = localStorage.getItem(AUTH_TOKEN);
+    return isAuthenticated() ? decodeToken(token || "").unique_name : "";
+  } catch (e) {
+    return "";
+  }
 };
 
 const removeToken = (): void => {
