@@ -1,4 +1,3 @@
-import { CancelablePromise } from "gv-api-web";
 import moment from "moment";
 import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
@@ -26,10 +25,7 @@ const getExportFileUrl = (
 const getFileUrl = (id: string): string =>
   id ? `${process.env.REACT_APP_API_URL}/v1.0/file/${id}` : "";
 
-const uploadFile = (
-  file: File,
-  authorization: string
-): CancelablePromise<string> => {
+const uploadFile = (file: File, authorization: string): Promise<string> => {
   return fileApi
     .v10FileUploadPost(file, { authorization })
     .then(response => response.id);

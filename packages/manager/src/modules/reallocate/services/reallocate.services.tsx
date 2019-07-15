@@ -1,4 +1,4 @@
-import { CancelablePromise, FundAssetPart } from "gv-api-web";
+import { FundAssetPart } from "gv-api-web";
 import {
   ALERT_ACTIONS_FIELDS,
   alertMessageActions
@@ -9,7 +9,7 @@ import { MiddlewareDispatch } from "shared/utils/types";
 
 export const updateAssets = (id: string, assets: FundAssetPart[]) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<void> => {
+): Promise<void> => {
   const authorization = authService.getAuthArg();
   return managerApi
     .v10ManagerFundsByIdAssetsUpdatePost(id, authorization, {

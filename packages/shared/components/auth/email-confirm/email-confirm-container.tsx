@@ -1,5 +1,4 @@
 import { replace } from "connected-react-router";
-import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
@@ -43,7 +42,7 @@ interface Props extends OwnProps, DispatchProps {}
 
 interface DispatchProps {
   service: {
-    confirmEmail: (userId: string, code: string) => CancelablePromise<void>;
+    confirmEmail: (userId: string, code: string) => Promise<void>;
     showNotFoundPage: () => void;
   };
 }

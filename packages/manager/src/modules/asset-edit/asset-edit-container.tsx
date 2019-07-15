@@ -1,4 +1,3 @@
-import { CancelablePromise } from "gv-api-web";
 import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -86,7 +85,7 @@ interface DispatchProps {
       id: string,
       editAssetData: IAssetEditFormValues,
       type: ASSET
-    ) => CancelablePromise<void>;
+    ) => Promise<void>;
   };
 }
 

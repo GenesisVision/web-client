@@ -1,13 +1,12 @@
 import "./reallocate-container.scss";
 
 import {
-  CancelablePromise,
   FundAssetPart,
   FundAssetPartWithIcon,
   PlatformAsset
 } from "gv-api-web";
-import * as React from "react";
 import { useCallback } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
@@ -93,10 +92,7 @@ interface OwnProps {
 
 interface DispatchProps {
   service: {
-    updateAssets: (
-      id: string,
-      assets: FundAssetPart[]
-    ) => CancelablePromise<void>;
+    updateAssets: (id: string, assets: FundAssetPart[]) => Promise<void>;
   };
 }
 

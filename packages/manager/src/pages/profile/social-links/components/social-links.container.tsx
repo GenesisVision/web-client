@@ -1,7 +1,6 @@
 import "./social-links.scss";
 
 import {
-  CancelablePromise,
   SocialLinkViewModel,
   UpdateSocialLinkViewModelTypeEnum
 } from "gv-api-web";
@@ -28,7 +27,7 @@ const Links = React.memo(withLoader(_Links));
 
 interface ILinksProps {
   socialLinks: SocialLinkViewModel[];
-  onSubmit(id: string, value: string): CancelablePromise<void>;
+  onSubmit(id: string, value: string): Promise<void>;
 }
 
 class _SocialLinksContainer extends React.PureComponent<Props, State> {

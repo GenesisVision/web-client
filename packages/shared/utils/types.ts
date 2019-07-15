@@ -1,6 +1,5 @@
 import {
   AmountWithCurrencyCurrencyEnum,
-  CancelablePromise,
   ProgramNotificationSettingList
 } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
@@ -35,7 +34,7 @@ export interface ActionType<T = any, U = any> extends Action {
   meta?: U;
 }
 
-export type ApiAction<T = any, U = any> = ActionType<CancelablePromise<T>, U>;
+export type ApiAction<T = any, U = any> = ActionType<Promise<T>, U>;
 
 export type RootThunkAction<R = any> = ThunkAction<R, RootState, any, any>;
 
@@ -51,7 +50,7 @@ interface ApiActionResponse<T> {
 }
 
 export interface MiddlewareDispatch {
-  <A extends ApiAction = ApiAction>(apiAction: A): CancelablePromise<
+  <A extends ApiAction = ApiAction>(apiAction: A): Promise<
     ApiActionResponse<A>
   >;
   <A extends ActionType = ActionType>(action: A): A;

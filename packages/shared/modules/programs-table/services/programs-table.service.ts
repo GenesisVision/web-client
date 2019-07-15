@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { CancelablePromise, ProgramsList } from "gv-api-web";
+import { ProgramsList } from "gv-api-web";
 import * as qs from "qs";
 import {
   ComposeFiltersAllType,
@@ -53,7 +53,7 @@ export const getPrograms = (filters: ComposeFiltersAllType) => (
 
 export const fetchPrograms = (
   filters: FetchProgramsFiltersType
-): CancelablePromise<ProgramsList> =>
+): Promise<ProgramsList> =>
   programApi.v10ProgramsGet({
     ...filters,
     authorization: authService.getAuthArg()

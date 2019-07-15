@@ -1,4 +1,4 @@
-import { CancelablePromise, ProgramsList } from "gv-api-web";
+import { ProgramsList } from "gv-api-web";
 import programApi from "shared/services/api-client/programs-api";
 import { ActionType } from "shared/utils/types";
 
@@ -6,7 +6,7 @@ export const PROGRAMS = "PROGRAMS";
 
 export const fetchPrograms = (
   filters: FetchProgramsFiltersType // TODO change api to create interface to this
-): ActionType<CancelablePromise<ProgramsList>> => ({
+): ActionType<Promise<ProgramsList>> => ({
   type: PROGRAMS,
   payload: programApi.v10ProgramsGet(filters)
 });

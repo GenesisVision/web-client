@@ -1,5 +1,4 @@
 import {
-  CancelablePromise,
   CopyTradingAccountInfo,
   MultiWalletExternalTransaction,
   WalletMultiAvailable
@@ -60,7 +59,7 @@ export const onPayFeesWithGvt = () =>
 
 export const cancelWithdrawRequest = (txId: string) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<any> =>
+): Promise<any> =>
   walletApi
     .v10WalletWithdrawRequestCancelByTxIdPost(txId, authService.getAuthArg())
     .then(response => {
@@ -80,7 +79,7 @@ export const cancelWithdrawRequest = (txId: string) => (
 
 export const resendWithdrawRequest = (txId: string) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<any> =>
+): Promise<any> =>
   walletApi
     .v10WalletWithdrawRequestResendByTxIdPost(txId, authService.getAuthArg())
     .then(response => {
@@ -120,7 +119,7 @@ export const fetchCopytradingAccounts = () =>
 export const fetchMultiTransactionsExternal = (
   currency?: string,
   filters?: FilteringType
-): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
+): Promise<TableItems<MultiWalletExternalTransaction>> => {
   const authorization = authService.getAuthArg();
   const filtering = {
     ...filters,

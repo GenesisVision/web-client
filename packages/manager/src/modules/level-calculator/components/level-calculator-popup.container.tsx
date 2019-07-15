@@ -1,5 +1,4 @@
 import { ProgramLevelInfo, ProgramsLevelsInfo } from "gv-api-web";
-import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 
@@ -14,8 +13,8 @@ class LevelCalculatorPopupContainer extends React.PureComponent<
   ILevelCalculatorProps & { onClose(): void },
   State
 > {
-  programLevelsPromise?: CancelablePromise<void>;
-  platformLevelsPromise?: CancelablePromise<void>;
+  programLevelsPromise?: Promise<void>;
+  platformLevelsPromise?: Promise<void>;
 
   state: State = {
     programLevelInfo: undefined,

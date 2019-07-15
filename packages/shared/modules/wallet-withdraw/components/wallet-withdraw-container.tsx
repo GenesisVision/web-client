@@ -1,8 +1,4 @@
-import {
-  CancelablePromise,
-  CreateWithdrawalRequestModel,
-  WalletData
-} from "gv-api-web";
+import { CreateWithdrawalRequestModel, WalletData } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import * as React from "react";
 import { useCallback } from "react";
@@ -74,9 +70,7 @@ interface OwnProps {
 
 interface DispatchProps {
   service: {
-    newWithdrawRequest: (
-      data: CreateWithdrawalRequestModel
-    ) => CancelablePromise<any>;
+    newWithdrawRequest: (data: CreateWithdrawalRequestModel) => Promise<any>;
     updateWalletTimestamp: () => void;
   };
 }

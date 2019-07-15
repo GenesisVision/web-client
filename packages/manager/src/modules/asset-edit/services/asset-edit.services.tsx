@@ -1,4 +1,4 @@
-import { CancelablePromise, ProgramUpdate } from "gv-api-web";
+import { ProgramUpdate } from "gv-api-web";
 import { ASSET } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
@@ -12,14 +12,14 @@ export const editAsset = (
   id: string,
   editAssetData: IAssetEditFormValues,
   type: ASSET
-): ManagerThunk<CancelablePromise<void>> => dispatch => {
+): ManagerThunk<Promise<void>> => dispatch => {
   const authorization = authService.getAuthArg();
   const editMethod =
     type === ASSET.PROGRAM
       ? managerApi.v10ManagerProgramsByIdUpdatePost
       : managerApi.v10ManagerFundsByIdUpdatePost;
   let data = editAssetData;
-  let promise = Promise.resolve("") as CancelablePromise<any>;
+  let promise = Promise.resolve("") as Promise<any>;
   if (data.logo.image)
     promise = filesService.uploadFile(data.logo.image.cropped, authorization);
 

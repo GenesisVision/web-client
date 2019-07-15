@@ -1,5 +1,4 @@
 import {
-  CancelablePromise,
   DashboardPortfolioEvent,
   DashboardPortfolioEvents,
   ManagerPortfolioEvent,
@@ -169,7 +168,7 @@ export const fetchOpenPositions = (
 
 export const fetchInvestmentsLevels = (
   currency: string
-): CancelablePromise<ProgramsLevelsInfo> => {
+): Promise<ProgramsLevelsInfo> => {
   return platformApi.v10PlatformLevelsGet({ currency });
 };
 
@@ -218,14 +217,12 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
 
 export const fetchPortfolioEvents: GetItemsFuncType = (
   filters?
-): CancelablePromise<
-  TableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>
-> => {
+): Promise<TableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>> => {
   const authorization = authService.getAuthArg();
   let request: (
     authorization: string,
     opts?: Object
-  ) => CancelablePromise<DashboardPortfolioEvents | ManagerPortfolioEvents>;
+  ) => Promise<DashboardPortfolioEvents | ManagerPortfolioEvents>;
   switch (ROLE_ENV) {
     case ROLE.INVESTOR:
       request = investorApi.v10InvestorPortfolioEventsGet;

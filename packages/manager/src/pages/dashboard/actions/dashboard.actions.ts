@@ -1,5 +1,4 @@
 import {
-  CancelablePromise,
   FundsList,
   ManagerAssets,
   ManagerPortfolioEvents,
@@ -33,7 +32,7 @@ export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
 export const fetchPortfolioEventsAction = (
   auth: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ManagerPortfolioEvents>> => ({
+): ActionType<Promise<ManagerPortfolioEvents>> => ({
   type: DASHBOARD_PORTFOLIO_EVENTS,
   payload: managerApi.v10ManagerEventsGet(auth, filters)
 });
@@ -42,7 +41,7 @@ export const fetchInRequestsAction = (
   auth: string,
   skip: number,
   take: number
-): ActionType<CancelablePromise<any>> => ({
+): ActionType<Promise<any>> => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: managerApi.v10ManagerRequestsBySkipByTakeGet(skip, take, auth)
 });
@@ -50,7 +49,7 @@ export const fetchInRequestsAction = (
 export const fetchDashboardProgramsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramsList>> => ({
+): ActionType<Promise<ProgramsList>> => ({
   type: DASHBOARD_PROGRAMS,
   payload: managerApi.v10ManagerProgramsGet(auth, filters)
 });
@@ -58,7 +57,7 @@ export const fetchDashboardProgramsAction = (
 export const fetchDashboardFundsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<FundsList>> => ({
+): ActionType<Promise<FundsList>> => ({
   type: DASHBOARD_FUNDS,
   payload: managerApi.v10ManagerFundsGet(auth, filters)
 });
@@ -66,7 +65,7 @@ export const fetchDashboardFundsAction = (
 export const cancelProgramRequestAction = (
   auth: string,
   id: string
-): ActionType<CancelablePromise<any>> => ({
+): ActionType<Promise<any>> => ({
   type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
   payload: managerApi.v10ManagerProgramsRequestsByIdCancelPost(id, auth)
 });
@@ -81,7 +80,7 @@ export const dashboardChartAction = (
 
 export const fetchAssetsAction = (
   auth: string
-): ActionType<CancelablePromise<ManagerAssets>> => ({
+): ActionType<Promise<ManagerAssets>> => ({
   type: DASHBOARD_ASSETS,
   payload: managerApi.v10ManagerAssetsGet(auth)
 });

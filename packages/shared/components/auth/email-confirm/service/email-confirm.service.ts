@@ -1,5 +1,4 @@
 import { push } from "connected-react-router";
-import { CancelablePromise } from "gv-api-web";
 import authActions from "shared/actions/auth-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { HOME_ROUTE } from "shared/routes/app.routes";
@@ -9,7 +8,7 @@ import { MiddlewareDispatch } from "shared/utils/types";
 
 export const confirmEmail = (userId: string, code: string) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<void> =>
+): Promise<void> =>
   authApi
     .v10AuthSignupConfirmPost({
       userId,
