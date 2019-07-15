@@ -2,9 +2,11 @@ import { ProgramLevelInfo, ProgramsLevelsInfo } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import { CloseIcon } from "shared/components/icon/close-icon";
+import { KYC_ROUTE } from "shared/components/profile/profile.constants";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
@@ -246,9 +248,22 @@ class _LevelCalculatorPopup extends React.PureComponent<Props, State> {
           />
         </div>
         {!isKycConfirmed && (
-          <div className="level-calculator-popup__kyc-disclaimer">
-            {t("manager.level-calculator.kyc-disclaimer")}
-          </div>
+          <>
+            <div className="level-calculator-popup__kyc-disclaimer">
+              {t("manager.level-calculator.kyc-disclaimer")}
+            </div>
+            <Link
+              className="level-calculator-popup__btn-verify"
+              to={{
+                pathname: KYC_ROUTE,
+                state: title
+              }}
+            >
+              <GVButton color="primary" variant="outlined">
+                {t("buttons.verify")}
+              </GVButton>
+            </Link>
+          </>
         )}
       </div>
     );
