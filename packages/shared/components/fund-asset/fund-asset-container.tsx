@@ -14,7 +14,7 @@ import { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltipContainer from "./fund-asset-tooltip/fund-asset-tooltip-container";
 import HidedAssets from "./hided-assets";
 
-class FundAssetContainer extends React.PureComponent<
+class _FundAssetContainer extends React.PureComponent<
   IFundAssetContainerProps,
   State
 > {
@@ -30,6 +30,10 @@ class FundAssetContainer extends React.PureComponent<
   };
 
   handleClose = () => this.setState({ anchor: undefined });
+
+  componentDidUpdate() {
+    if (this.props.hasPopoverList) this.setState({ size: this.props.size });
+  }
 
   render() {
     const { assets, type, length, remainder = 0 } = this.props;
@@ -59,8 +63,8 @@ class FundAssetContainer extends React.PureComponent<
               handleOpen={this.handleOpen}
             />
             <Popover
-              horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-              vertical={VERTICAL_POPOVER_POS.BOTTOM}
+              horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+              vertical={VERTICAL_POPOVER_POS.TOP}
               anchorEl={anchor}
               noPadding
               onClose={this.handleClose}
@@ -105,11 +109,14 @@ export interface IFundAssetContainerProps {
   remainder?: number;
   hoveringAsset?: string;
   hasPopoverList?: boolean;
+  cell?: any;
 }
 
 interface State {
   size?: number;
   anchor?: anchorElType;
 }
+
+const FundAssetContainer = React.memo(_FundAssetContainer);
 
 export default FundAssetContainer;
