@@ -59,18 +59,16 @@ export const getAssetChart = (
 export const getAssets = () => (dispatch: Dispatch) =>
   dispatch(actions.fetchAssetsAction(authService.getAuthArg()));
 
-export const composeAssetChart = () => (
+export const composeAssetChart = (assetType: ASSETS_TYPES) => (
   dispatch: MiddlewareDispatch,
   getState: TGetAuthState
 ) => {
   const { programs, funds } = getState().dashboard.assets.data;
-  let asset, assetType;
-  if (programs.length > 0) {
+  let asset;
+  if (assetType === ASSETS_TYPES.Program) {
     asset = programs[0];
-    assetType = ASSETS_TYPES.Program;
-  } else if (funds.length > 0) {
+  } else if (assetType === ASSETS_TYPES.Fund) {
     asset = funds[0];
-    assetType = ASSETS_TYPES.Fund;
   } else return;
 
   dispatch(getAssetChart(asset.id, asset.title, assetType));
