@@ -20,6 +20,11 @@
     }
   }
 
+  &__tabs {
+    @include horizontal-paddings($padding-small);
+    @include adaptive-margin(bottom, $padding-xsmall);
+  }
+
   &__chart-head {
     display: flex;
     justify-content: space-between;

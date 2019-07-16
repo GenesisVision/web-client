@@ -1,8 +1,8 @@
 import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
-import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { redirectToLogin } from "shared/components/auth/signin/signin.service";
