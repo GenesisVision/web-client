@@ -1,7 +1,6 @@
 import { push } from "connected-react-router";
 import {
   Broker,
-  CancelablePromise,
   ManagerProgramCreateResult,
   ProfileHeaderViewModel,
   ProgramsInfo,
@@ -89,10 +88,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
     this.setState({ isNavigationDialogVisible: true });
   };
 
-  fetchRate = (
-    fromCurrency: string,
-    toCurrency: string
-  ): CancelablePromise<number> => {
+  fetchRate = (fromCurrency: string, toCurrency: string): Promise<number> => {
     return rateApi.v10RateByFromByToGet(fromCurrency, toCurrency);
   };
 
@@ -268,7 +264,7 @@ interface StateProps {
 interface DispatchProps {
   service: {
     fetchWallets: () => void;
-    createProgram: (data: any) => CancelablePromise<ManagerProgramCreateResult>;
+    createProgram: (data: any) => Promise<ManagerProgramCreateResult>;
     notifyError: (message: string) => void;
     notifySuccess: (message: string) => void;
     redirectToDashboard: () => void;

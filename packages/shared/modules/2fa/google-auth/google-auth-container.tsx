@@ -1,7 +1,6 @@
 import "./google-auth.scss";
 
 import {
-  CancelablePromise,
   RecoveryCodesViewModel,
   TwoFactorAuthenticator,
   TwoFactorAuthenticatorConfirm
@@ -96,7 +95,7 @@ interface DispatchProps {
   service: {
     confirm2fa: (
       model: TwoFactorAuthenticatorConfirm
-    ) => CancelablePromise<RecoveryCodesViewModel>;
+    ) => Promise<RecoveryCodesViewModel>;
   };
 }
 

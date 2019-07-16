@@ -1,5 +1,4 @@
 import {
-  CancelablePromise,
   DashboardChartValue,
   DashboardPortfolioEvents,
   FundsList,
@@ -27,7 +26,7 @@ export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
 export const fetchDashboardProgramsAction = (
   auth: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramsList>> => ({
+): ActionType<Promise<ProgramsList>> => ({
   type: DASHBOARD_PROGRAMS,
   payload: investorApi.v10InvestorProgramsGet(auth, filters)
 });
@@ -35,7 +34,7 @@ export const fetchDashboardProgramsAction = (
 export const fetchDashboardFundsAction = (
   auth: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<FundsList>> => ({
+): ActionType<Promise<FundsList>> => ({
   type: DASHBOARD_FUNDS,
   payload: investorApi.v10InvestorFundsGet(auth, filters)
 });
@@ -43,7 +42,7 @@ export const fetchDashboardFundsAction = (
 export const fetchDashboardCopytradingAction = (
   auth: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<SignalsList>> => ({
+): ActionType<Promise<SignalsList>> => ({
   type: DASHBOARD_COPYTRADING,
   payload: investorApi.v10InvestorSignalsGet(auth, filters)
 });
@@ -51,7 +50,7 @@ export const fetchDashboardCopytradingAction = (
 export const fetchPortfolioChartAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<DashboardChartValue>> => ({
+): ActionType<Promise<DashboardChartValue>> => ({
   type: DASHBOARD_PORTFOLIO_CHART,
   payload: investorApi.v10InvestorPortfolioChartGet(auth, filters)
 });
@@ -59,7 +58,7 @@ export const fetchPortfolioChartAction = (
 export const fetchPortfolioEventsAction = (
   auth: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<DashboardPortfolioEvents>> => ({
+): ActionType<Promise<DashboardPortfolioEvents>> => ({
   type: DASHBOARD_PORTFOLIO_EVENTS,
   payload: investorApi.v10InvestorPortfolioEventsGet(auth, filters)
 });
@@ -68,7 +67,7 @@ export const fetchInRequestsAction = (
   auth: string,
   skip: number,
   take: number
-): ActionType<CancelablePromise<ProgramRequests>> => ({
+): ActionType<Promise<ProgramRequests>> => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: investorApi.v10InvestorRequestsBySkipByTakeGet(skip, take, auth)
 });
@@ -76,7 +75,7 @@ export const fetchInRequestsAction = (
 export const cancelProgramRequestAction = (
   auth: string,
   id: string
-): ActionType<CancelablePromise<any>> => ({
+): ActionType<Promise<any>> => ({
   type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
   payload: investorApi.v10InvestorProgramsRequestsByIdCancelPost(id, auth)
 });

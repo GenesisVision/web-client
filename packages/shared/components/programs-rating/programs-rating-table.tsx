@@ -1,4 +1,4 @@
-import { CancelablePromise, ProgramsList } from "gv-api-web";
+import { ProgramsList } from "gv-api-web";
 import * as React from "react";
 import { withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -96,9 +96,7 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    getProgramsRating: (
-      filters: TGetProgramsRatingFilters
-    ) => CancelablePromise<number>;
+    getProgramsRating: (filters: TGetProgramsRatingFilters) => Promise<number>;
   };
 }
 

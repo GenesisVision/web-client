@@ -1,5 +1,4 @@
 import { push } from "connected-react-router";
-import { CancelablePromise } from "gv-api-web";
 import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
@@ -22,7 +21,7 @@ export const changeBrokerMethod = (
   newBrokerAccountTypeId: string,
   newLeverage: number,
   setSubmitting: SetSubmittingType
-): ManagerThunk<CancelablePromise<void>> => dispatch =>
+): ManagerThunk<Promise<void>> => dispatch =>
   managerApi
     .v10ManagerProgramsBrokerChangePost(authService.getAuthArg(), {
       request: { programId, newBrokerAccountTypeId, newLeverage }

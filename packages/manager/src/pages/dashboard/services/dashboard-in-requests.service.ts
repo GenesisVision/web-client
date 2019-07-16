@@ -1,4 +1,3 @@
-import { CancelablePromise } from "gv-api-web";
 import { Dispatch } from "redux";
 import { CancelRequestType } from "shared/components/dashboard/dashboard.constants";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
@@ -15,7 +14,7 @@ import { getPortfolioEvents } from "./dashboard.service";
 
 export const getInRequests = () => (
   dispatch: Dispatch
-): ActionType<CancelablePromise<any>> =>
+): ActionType<Promise<any>> =>
   dispatch(fetchInRequestsAction(authService.getAuthArg(), 0, 100));
 
 export const cancelRequest: CancelRequestType = ({

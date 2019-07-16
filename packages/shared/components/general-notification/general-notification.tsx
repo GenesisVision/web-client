@@ -1,6 +1,5 @@
 import "./general-notification.scss";
 
-import { CancelablePromise } from "gv-api-web";
 import React, { useCallback } from "react";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -62,10 +61,8 @@ interface Props {
   name: string;
   label: string;
   assetId?: string;
-  addNotification(opts?: Setting): CancelablePromise<void>;
-  removeNotification(
-    opts?: IRemoveNotificationSettingProps
-  ): CancelablePromise<void>;
+  addNotification(opts?: Setting): Promise<void>;
+  removeNotification(opts?: IRemoveNotificationSettingProps): Promise<void>;
 }
 
 const GeneralNotification = React.memo(_GeneralNotification);

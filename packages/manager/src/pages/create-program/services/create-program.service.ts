@@ -1,6 +1,5 @@
 import {
   Broker,
-  CancelablePromise,
   ManagerProgramCreateResult,
   NewProgramRequest
 } from "gv-api-web";
@@ -16,7 +15,7 @@ import { ICreateProgramSettingsFormValues } from "../components/create-program-s
 
 const GM_BROKER_NAME = "Genesis Markets";
 
-export const fetchBrokers = (): CancelablePromise<Broker[]> =>
+export const fetchBrokers = (): Promise<Broker[]> =>
   brokersApi.v10BrokersGet().then(data => {
     const gvBroker = data.brokers.find(x => x.name === GM_BROKER_NAME)!;
     data.brokers.splice(data.brokers.indexOf(gvBroker), 1);
@@ -26,15 +25,15 @@ export const fetchBrokers = (): CancelablePromise<Broker[]> =>
 
 export const createProgram = (
   createProgramData: ICreateProgramSettingsFormValues
-): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => () => {
+): ManagerThunk<Promise<ManagerProgramCreateResult>> => () => {
   const authorization = authService.getAuthArg();
 
-  let promise = Promise.resolve("") as CancelablePromise<any>;
+  let promise = Promise.resolve("") as Promise<any>;
   if (createProgramData.logo.image) {
     promise = filesService.uploadFile(
       createProgramData.logo.image.cropped,
       authorization
-    ) as CancelablePromise<any>;
+    ) as Promise<any>;
   }
   return promise.then(response => {
     const requestData = <NewProgramRequest>{

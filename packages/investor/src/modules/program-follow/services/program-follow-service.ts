@@ -1,7 +1,6 @@
 import {
   AttachToSignalProvider,
   AttachToSignalProviderInfo,
-  CancelablePromise,
   CopyTradingAccountsList,
   WalletsInfo
 } from "gv-api-web";
@@ -9,16 +8,15 @@ import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
-export const getWalletsAddresses = (): CancelablePromise<WalletsInfo> =>
+export const getWalletsAddresses = (): Promise<WalletsInfo> =>
   walletApi.v10WalletAddressesGet(authService.getAuthArg());
 
-export const getSignalAccounts = (): CancelablePromise<
-  CopyTradingAccountsList
-> => signalApi.v10SignalAccountsGet(authService.getAuthArg());
+export const getSignalAccounts = (): Promise<CopyTradingAccountsList> =>
+  signalApi.v10SignalAccountsGet(authService.getAuthArg());
 
 export const getSignalInfo = (
   id: string
-): CancelablePromise<AttachToSignalProviderInfo> =>
+): Promise<AttachToSignalProviderInfo> =>
   signalApi.v10SignalAttachByIdInfoGet(id, authService.getAuthArg());
 
 export const attachToSignal = (

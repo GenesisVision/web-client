@@ -1,5 +1,4 @@
 import {
-  CancelablePromise,
   RecoveryCodesViewModel,
   TwoFactorAuthenticatorConfirm
 } from "gv-api-web";
@@ -10,9 +9,9 @@ import { RootThunk } from "shared/utils/types";
 
 export const confirm2fa = (
   model: TwoFactorAuthenticatorConfirm
-): RootThunk<CancelablePromise<RecoveryCodesViewModel>> => (
+): RootThunk<Promise<RecoveryCodesViewModel>> => (
   dispatch
-): CancelablePromise<RecoveryCodesViewModel> => {
+): Promise<RecoveryCodesViewModel> => {
   const authorization = authService.getAuthArg();
   return authApi
     .v10Auth2faConfirmPost(authorization, {
