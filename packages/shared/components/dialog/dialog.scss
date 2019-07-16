@@ -18,9 +18,19 @@
   margin: 2rem auto;
   overflow-x: hidden;
   overflow-y: auto;
+  min-width: 100%;
   @include media-breakpoint-landscape-phone() {
     min-width: $modal-width;
     border-radius: 8px;
+  }
+
+  &__top,
+  &__bottom {
+    box-sizing: border-box;
+    max-width: 100%;
+    @include media-breakpoint-landscape-phone() {
+      max-width: $modal-width;
+    }
   }
 
   &--top {
