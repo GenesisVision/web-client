@@ -27,12 +27,12 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
       .catch(() => setRate(0));
   }, []);
   const applyChanges = useCallback(
-    (updateDetails: any) => () => updateDetails(),
+    (updateDescription: any) => () => updateDescription(),
     []
   );
   return (
     <ProgramDetailContext.Consumer>
-      {({ updateDetails }: IProgramDetailContext) => (
+      {({ updateDescription }: IProgramDetailContext) => (
         <>
           <SubscriptionDetails
             currency={currency}
@@ -46,7 +46,7 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
             currency={currency}
             signalSubscription={personalDetails.signalSubscription}
             onClose={setClosePopup}
-            onApply={applyChanges(updateDetails)}
+            onApply={applyChanges(updateDescription)}
           />
         </>
       )}

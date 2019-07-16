@@ -40,7 +40,7 @@ const _DetailsInvestment: React.FC<Props> = ({
   const profitValue = personalDetails.value - personalDetails.invested;
   return (
     <ProgramDetailContext.Consumer>
-      {({ updateDetails }: IProgramDetailContext) => (
+      {({ updateDescription }: IProgramDetailContext) => (
         <Surface className="surface--horizontal-paddings details-investment">
           <h3>{t(`fund-details-page.description.yourInvestment.${asset}`)}</h3>
           <div className="details-investment__short-statistic">
@@ -100,7 +100,7 @@ const _DetailsInvestment: React.FC<Props> = ({
                 status={personalDetails.status as STATUS}
                 id={id}
                 asset={asset}
-                onCancel={updateDetails}
+                onCancel={updateDescription}
               />
             </StatisticItem>
             <StatisticItem
@@ -168,7 +168,7 @@ const _DetailsInvestment: React.FC<Props> = ({
               accountCurrency={accountCurrency}
               assetCurrency={assetCurrency}
               onClose={setClosePopup}
-              onSubmit={updateDetails}
+              onSubmit={updateDescription}
             />
           </div>
         </Surface>

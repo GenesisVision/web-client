@@ -59,7 +59,7 @@ const _FundDetailsPage: React.FC<Props> = ({
     <FundDetailsContainer
       condition={!!description}
       loader={<DetailsContainerLoader assets />}
-      updateDetails={updateDetails}
+      updateDescription={updateDescription}
       redirectToLogin={service.redirectToLogin}
       historySection={historySection}
       descriptionSection={descriptionSection}

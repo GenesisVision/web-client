@@ -20,7 +20,7 @@ import {
 import { FundStatisticResult } from "./services/fund-details.types";
 
 const _FundDetailsContainer: React.FC<Props> = ({
-  updateDetails,
+  updateDescription,
   currency,
   isAuthenticated,
   redirectToLogin,
@@ -41,7 +41,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
     <Page title={description.title}>
       <ProgramDetailContext.Provider
         value={{
-          updateDetails: updateDetails,
+          updateDescription,
           isKycConfirmed: false
         }}
       >
@@ -81,7 +81,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
 };
 
 interface OwnProps {
-  updateDetails: () => void;
+  updateDescription: () => void;
   redirectToLogin: () => void;
   historySection: IHistorySection;
   descriptionSection: IDescriptionSection;

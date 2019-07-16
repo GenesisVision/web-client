@@ -68,7 +68,7 @@ const _ProgramDetailsPage: React.FC<Props> = ({
     <ProgramDetailsContainer
       condition={!!description && !!levelsParameters}
       loader={<DetailsContainerLoader />}
-      updateDetails={updateDetails}
+      updateDescription={updateDescription}
       redirectToLogin={service.redirectToLogin}
       historySection={historySection}
       descriptionSection={descriptionSection}
