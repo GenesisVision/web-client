@@ -3,6 +3,14 @@ import "./dashboard-portfolio-chart-section.scss";
 import { ManagerAssets, ProgramRequests } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { ResolveThunks, connect } from "react-redux";
+import { ManagerRootState } from "reducers";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import {
   DashboardChartAssetsLoader,
@@ -11,125 +19,200 @@ import {
   DashboardChartRequestLoader
 } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
-import Surface from "shared/components/surface/surface";
-import { Nullable } from "shared/utils/types";
-
-import { IDashboardAssetChart } from "../../reducers/dashboard.reducers";
-import { cancelRequest } from "../../services/dashboard-in-requests.service";
-import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-chart-assets-container";
-import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
-import useTab from "shared/hooks/tab.hook";
-import { useCallback } from "react";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
+import Surface from "shared/components/surface/surface";
+import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { isNewUserSelector } from "shared/reducers/header-reducer";
+import { Nullable } from "shared/utils/types";
 
-const _DashboardPortfolioChartSection: React.FC<Props> = ({
-  t,
-  assets,
-  assetChart,
-  period,
-  inRequests
-}) => {
-  const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
-  const handleTabChange = useCallback(
-    (e: any, propTab: string) => {
-      if (propTab === tab) return;
-      setTab(e, propTab);
-    },
-    [tab]
-  );
-  return (
-    <Surface className="dashboard-portfolio-chart-section">
-      {/*<h3 className="dashboard-portfolio-chart-section__heading">*/}
-      {/*{t("manager.dashboard-page.chart-section.header")}*/}
-      {/*</h3>*/}
-      <div className="dashboard-portfolio-chart-section__tabs">
-        <GVTabs value={tab} onChange={handleTabChange}>
-          <GVTab
-            value={TABS.PROGRAMS}
-            label={t(`manager.dashboard-page.assets.programs`)}
-          />
-          <GVTab
-            value={TABS.FUNDS}
-            label={t(`manager.dashboard-page.assets.funds`)}
-          />
-        </GVTabs>
-      </div>
-      {tab === TABS.PROGRAMS && (
-        <>
-          <div className="dashboard-portfolio-chart-section__actions">
-            <DashboardChartAssetsContainer
-              condition={!!assets}
-              loader={<DashboardChartAssetsLoader />}
-              assets={assets!}
-            />
-            <DashboardInRequestsContainer
-              condition={!!inRequests}
-              loader={<DashboardChartRequestLoader />}
-              inRequests={inRequests!}
-              cancelRequest={cancelRequest}
-            />
-          </div>
-          <DashboardPortfolioChartContainer
-            condition={!!assetChart && !!period}
-            loader={
-              <>
-                <DashboardChartDescriptionLoader />
-                <DashboardChartLoader />
-              </>
-            }
-            period={period}
-            assetChart={assetChart!}
-          />
-        </>
-      )}
-      {tab === TABS.FUNDS && (
-        <>
-          <div className="dashboard-portfolio-chart-section__actions">
-            <DashboardChartAssetsContainer
-              condition={!!assets}
-              loader={<DashboardChartAssetsLoader />}
-              assets={assets!}
-            />
-            <DashboardInRequestsContainer
-              condition={!!inRequests}
-              loader={<DashboardChartRequestLoader />}
-              inRequests={inRequests!}
-              cancelRequest={cancelRequest}
-            />
-          </div>
-          <DashboardPortfolioChartContainer
-            condition={!!assetChart && !!period}
-            loader={
-              <>
-                <DashboardChartDescriptionLoader />
-                <DashboardChartLoader />
-              </>
-            }
-            period={period}
-            assetChart={assetChart!}
-          />
-        </>
-      )}
-    </Surface>
-  );
-};
+import { dashboardAssetsSelector } from "../../reducers/dashboard-assets.reducer";
+import { dashboardInRequestsSelector } from "../../reducers/dashboard-in-requests.reducer";
+import { IDashboardAssetChart } from "../../reducers/dashboard.reducers";
+import {
+  cancelRequest,
+  getInRequests
+} from "../../services/dashboard-in-requests.service";
+import { composeAssetChart, getAssets } from "../../services/dashboard.service";
+import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-chart-assets-container";
+import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
+import DashboardGetStarted from "./dashboard-get-started";
 
-interface Props extends IDashboardPortfolioChartSectionProps, WithTranslation {}
+enum TABS {
+  PROGRAMS = "Program",
+  FUNDS = "Fund"
+}
 
-export interface IDashboardPortfolioChartSectionProps {
+class _DashboardPortfolioChartSection extends React.PureComponent<
+  Props,
+  State
+> {
+  state = {
+    tab: TABS.PROGRAMS
+  };
+
+  handleTabChange = (e: React.SyntheticEvent<EventTarget>, tab: string) => {
+    this.setState({ tab: tab as TABS });
+  };
+
+  getTypeAssets = (): ASSETS_TYPES => {
+    const { tab } = this.state;
+    const { assets } = this.props;
+    switch (true) {
+      case assets!.programs.length && tab === TABS.PROGRAMS:
+        return ASSETS_TYPES.Program;
+      case assets!.funds.length && tab === TABS.FUNDS:
+        return ASSETS_TYPES.Fund;
+      default:
+        return ASSETS_TYPES.All;
+    }
+  };
+
+  componentDidMount() {
+    const { service } = this.props;
+    service.getAssets();
+  }
+
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    const { assets, service, assetChart, inRequests } = this.props;
+    if (!assets) return null;
+    const type = this.getTypeAssets();
+    if (!assetChart || prevState.tab !== this.state.tab) {
+      service.composeAssetChart(type);
+    }
+    if (!inRequests || prevState.tab !== this.state.tab) {
+      service.getInRequests(type);
+    }
+  }
+
+  render() {
+    const { t, isNewUser, assets, assetChart, period, inRequests } = this.props;
+    const { tab } = this.state;
+    if (isNewUser) return <DashboardGetStarted />;
+    return (
+      <Surface className="dashboard-portfolio-chart-section">
+        <div className="dashboard-portfolio-chart-section__tabs">
+          <GVTabs value={tab} onChange={this.handleTabChange}>
+            <GVTab
+              value={TABS.PROGRAMS}
+              label={t(`manager.dashboard-page.assets.programs`)}
+              visible={!!assets && !!assets.programs}
+            />
+            <GVTab
+              value={TABS.FUNDS}
+              label={t(`manager.dashboard-page.assets.funds`)}
+              visible={!!assets && !!assets.funds}
+            />
+          </GVTabs>
+        </div>
+        {tab === TABS.PROGRAMS && (
+          <>
+            <div className="dashboard-portfolio-chart-section__actions">
+              <DashboardChartAssetsContainer
+                condition={!!assets && !!assets.programs.length}
+                loader={<DashboardChartAssetsLoader />}
+                assets={assets! && assets!.programs}
+                type={ASSETS_TYPES.Program}
+              />
+              <DashboardInRequestsContainer
+                condition={!!inRequests}
+                loader={<DashboardChartRequestLoader />}
+                inRequests={inRequests!}
+                cancelRequest={cancelRequest}
+              />
+            </div>
+            <DashboardPortfolioChartContainer
+              condition={!!assetChart && !!period}
+              loader={
+                <>
+                  <DashboardChartDescriptionLoader />
+                  <DashboardChartLoader />
+                </>
+              }
+              period={period}
+              assetChart={assetChart!}
+            />
+          </>
+        )}
+        {tab === TABS.FUNDS && (
+          <>
+            <div className="dashboard-portfolio-chart-section__actions">
+              <DashboardChartAssetsContainer
+                condition={!!assets && !!assets.funds.length}
+                loader={<DashboardChartAssetsLoader />}
+                assets={assets! && assets!.funds}
+                type={ASSETS_TYPES.Fund}
+              />
+              <DashboardInRequestsContainer
+                condition={!!inRequests}
+                loader={<DashboardChartRequestLoader />}
+                inRequests={inRequests!}
+                cancelRequest={cancelRequest}
+              />
+            </div>
+            <DashboardPortfolioChartContainer
+              condition={!!assetChart && !!period}
+              loader={
+                <>
+                  <DashboardChartDescriptionLoader />
+                  <DashboardChartLoader />
+                </>
+              }
+              period={period}
+              assetChart={assetChart!}
+            />
+          </>
+        )}
+      </Surface>
+    );
+  }
+}
+
+const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  isNewUser: isNewUserSelector(state),
+  assets: dashboardAssetsSelector(state),
+  inRequests: dashboardInRequestsSelector(state),
+  assetChart: state.dashboard.assetChart,
+  period: state.dashboard.period
+});
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { getAssets, composeAssetChart, getInRequests },
+    dispatch
+  )
+});
+
+interface Props extends DispatchProps, StateProps, OwnProps, WithTranslation {}
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  getAssets: typeof getAssets;
+  composeAssetChart: typeof composeAssetChart;
+  getInRequests: typeof getInRequests;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface State {
+  tab: TABS;
+}
+
+interface StateProps {
   period: ChartDefaultPeriod;
   assetChart: Nullable<IDashboardAssetChart>;
+  isNewUser?: boolean;
   assets?: ManagerAssets;
   inRequests?: ProgramRequests;
 }
 
-enum TABS {
-  PROGRAMS = "programs",
-  FUNDS = "funds"
-}
+interface OwnProps {}
 
-const DashboardPortfolioChartSection = translate()(
-  _DashboardPortfolioChartSection
-);
+const DashboardPortfolioChartSection = compose<React.ComponentType<OwnProps>>(
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(_DashboardPortfolioChartSection);
 export default DashboardPortfolioChartSection;

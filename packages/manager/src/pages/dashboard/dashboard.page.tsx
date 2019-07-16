@@ -7,7 +7,7 @@ import Page from "shared/components/page/page";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
-import DashboardPortfolioChartSectionContainer from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section-container";
+import DashboardPortfolioChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 
 const _DashboardPage: React.FC<WithTranslation & WithRoleProps> = ({
@@ -20,7 +20,7 @@ const _DashboardPage: React.FC<WithTranslation & WithRoleProps> = ({
       <div className="dashboard">
         <div className="dashboard__row">
           <div className="dashboard__chart">
-            <DashboardPortfolioChartSectionContainer />
+            <DashboardPortfolioChartSection />
           </div>
           <div className="dashboard__portfolio-events-aside">
             <DashboardPortfolioEventsSection title={title} />
