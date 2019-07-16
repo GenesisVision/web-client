@@ -41,16 +41,23 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   const [statistic, setStatistic] = useState<
     ProgramStatisticResult | undefined
   >(undefined);
-  const updateDetails = useCallback(() => service.getProgramDescription(), []);
+  const getDescription = service.getProgramDescription;
+  const updateDescription = useCallback(
+    () =>
+      getDescription()
+        .then(setDescription)
+        .catch(setErrorMessage),
+    []
+  );
   useEffect(() => {
-    const update = updateDetails();
-    update.then(setDescription).catch(setErrorMessage);
-    update
+    const description = getDescription();
+    updateDescription();
+    description
       .then(data => data.id)
       .then(getProgramStatistic)
       .then(setStatistic)
       .catch(setErrorMessage);
-    update
+    description
       .then(data => data.currency)
       .then(getPlatformLevelsParameters)
       .then(setLevelsParameters)
