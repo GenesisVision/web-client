@@ -2,7 +2,7 @@ import {
   CancelablePromise,
   CopyTradingAccountInfo,
   MultiWalletExternalTransaction,
-  WalletMultiAvailable
+  WalletBaseData
 } from "gv-api-web";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
@@ -35,15 +35,15 @@ export const fetchAccounts = (): RootThunk<void> => (dispatch, getState) => {
   dispatch(actions.fetchAccountsAction(authorization));
 };
 
-export const fetchBaseWallets = (): RootThunk<
-  Promise<WalletMultiAvailable>
-> => (dispatch, getState) => {
+export const fetchBaseWallets = (): RootThunk<Promise<WalletBaseData[]>> => (
+  dispatch,
+  getState
+) => {
   const authorization = authService.getAuthArg();
   const { currency } = getState().accountSettings;
-  return walletApi.v10WalletMultiByCurrencyAvailableGet(
-    currency,
-    authorization
-  );
+  return walletApi
+    .v10WalletMultiByCurrencyAvailableGet(currency, authorization)
+    .then(res => res.wallets);
 };
 
 export const fetchWalletTransactions = (requestFilters?: FilteringType) =>
