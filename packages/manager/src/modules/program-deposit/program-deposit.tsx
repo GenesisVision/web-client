@@ -1,32 +1,43 @@
 import * as React from "react";
-import ProgramDepositContainer from "shared/components/deposit/components/program-deposit-container";
+import DepositContainer from "shared/components/deposit/components/deposit-container";
+import {
+  getProgramInfoCreator,
+  programInvestCreator
+} from "shared/components/deposit/services/program-deposit.service";
 import { IDialogProps } from "shared/components/dialog/dialog";
+import { ASSET } from "shared/constants/constants";
 import managerApi from "shared/services/api-client/manager-api";
+import { CurrencyEnum } from "shared/utils/types";
 
-const ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
+const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   id,
   currency,
   onApply,
   open,
   onClose
-}) => {
-  return (
-    <ProgramDepositContainer
-      id={id}
-      currency={currency}
-      onApply={onApply}
-      open={open}
-      onClose={onClose}
-      programInvest={managerApi.v10ManagerProgramsByIdInvestByAmountPost}
-      fetchInfo={managerApi.v10ManagerProgramsByIdInvestInfoByCurrencyGet}
-    />
-  );
-};
+}) => (
+  <DepositContainer
+    asset={ASSET.PROGRAM}
+    assetInvest={programInvestCreator(
+      managerApi.v10ManagerProgramsByIdInvestByAmountPost
+    )}
+    fetchInfo={getProgramInfoCreator(
+      managerApi.v10ManagerProgramsByIdInvestInfoByCurrencyGet
+    )}
+    id={id}
+    hasEntryFee
+    currency={currency}
+    onApply={onApply}
+    open={open}
+    onClose={onClose}
+  />
+);
 
-export default React.memo(ProgramDeposit);
+const ProgramDeposit = React.memo(_ProgramDeposit);
+export default ProgramDeposit;
 
 interface OwnProps {
   id: string;
-  currency: string;
+  currency: CurrencyEnum;
   onApply(): void;
 }
