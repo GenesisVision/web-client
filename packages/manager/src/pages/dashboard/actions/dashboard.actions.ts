@@ -41,10 +41,13 @@ export const fetchPortfolioEventsAction = (
 export const fetchInRequestsAction = (
   auth: string,
   skip: number,
-  take: number
+  take: number,
+  assetType?: string
 ): ActionType<CancelablePromise<any>> => ({
   type: DASHBOARD_IN_REQUESTS,
-  payload: managerApi.v10ManagerRequestsBySkipByTakeGet(skip, take, auth)
+  payload: managerApi.v10ManagerRequestsBySkipByTakeGet(skip, take, auth, {
+    assetType
+  })
 });
 
 export const fetchDashboardProgramsAction = (
