@@ -2,7 +2,7 @@ import "./fund-asset.scss";
 
 import classNames from "classnames";
 import { FundAssetPercent } from "gv-api-web";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -33,9 +33,9 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
     },
     [assets]
   );
-  useEffect(()=>{
+  useEffect(() => {
     if (hasPopoverList) setSize(sizeProp);
-  })
+  });
   return (
     <div
       className={classNames("fund-assets", {
