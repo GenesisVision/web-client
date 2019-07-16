@@ -3,7 +3,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
-import GVNumberFiled from "shared/components/gv-number-field/gv-number-field";
+import GVNumberField from "shared/components/gv-number-field/gv-number-field";
 
 const _InputAmountField: React.FC<Props> = ({
   emptyInit,
@@ -24,7 +24,7 @@ const _InputAmountField: React.FC<Props> = ({
     name={name}
     label={label}
     placeholder={placeholder}
-    component={GVNumberFiled}
+    component={GVNumberField}
     adornment={
       setMax && (
         <GVButton

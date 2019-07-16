@@ -1,12 +1,12 @@
 import React from "react";
 
 export interface IProgramDetailContext {
-  updateDetails(): void;
+  updateDescription(): void;
   isKycConfirmed: boolean;
 }
 export const ProgramDetailContext: React.Context<
   IProgramDetailContext
 > = React.createContext({
-  updateDetails: () => {},
+  updateDescription: () => {},
   isKycConfirmed: false
 });

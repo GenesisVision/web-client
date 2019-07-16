@@ -1,6 +1,6 @@
 import "shared/components/details/details.scss";
 
-import { FundBalanceChart, FundDetailsFull } from "gv-api-web";
+import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import Page from "shared/components/page/page";
@@ -17,22 +17,17 @@ import {
   fetchFundStructure,
   getFundStatistic
 } from "./services/fund-details.service";
-import {
-  FundDetailsProfitChart,
-  FundDetailsStatistic
-} from "./services/fund-details.types";
+import { FundStatisticResult } from "./services/fund-details.types";
 
 const _FundDetailsContainer: React.FC<Props> = ({
-  updateDetails,
+  updateDescription,
   currency,
   isAuthenticated,
   redirectToLogin,
   descriptionSection,
   historySection,
   description,
-  statistic,
-  profitChart,
-  balanceChart
+  statistic
 }) => {
   const fetchHistoryPortfolioEvents = (filters: any) =>
     historySection.fetchPortfolioEvents({
@@ -46,7 +41,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
     <Page title={description.title}>
       <ProgramDetailContext.Provider
         value={{
-          updateDetails: updateDetails,
+          updateDescription,
           isKycConfirmed: false
         }}
       >
@@ -65,10 +60,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
             <FundDetailsStatisticSection
               getFundStatistic={getFundStatistic}
               programId={description.id}
-              currency={currency}
               statistic={statistic}
-              profitChart={profitChart}
-              balanceChart={balanceChart}
             />
           </div>
           <div className="details__history">
@@ -89,14 +81,12 @@ const _FundDetailsContainer: React.FC<Props> = ({
 };
 
 interface OwnProps {
-  updateDetails: () => void;
+  updateDescription: () => void;
   redirectToLogin: () => void;
   historySection: IHistorySection;
   descriptionSection: IDescriptionSection;
   description: FundDetailsFull;
-  profitChart?: FundDetailsProfitChart;
-  balanceChart?: FundBalanceChart;
-  statistic?: FundDetailsStatistic;
+  statistic?: FundStatisticResult;
   isAuthenticated: boolean;
   currency: CurrencyEnum;
 }

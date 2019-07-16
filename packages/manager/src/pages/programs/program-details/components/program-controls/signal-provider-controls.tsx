@@ -38,8 +38,8 @@ class SignalProviderControls extends React.PureComponent<
     this.setState({ popups });
   };
 
-  applyChanges = (updateDetails: any) => () => {
-    updateDetails();
+  applyChanges = (updateDescription: any) => () => {
+    updateDescription();
   };
 
   render() {
@@ -47,7 +47,7 @@ class SignalProviderControls extends React.PureComponent<
     const { popups } = this.state;
     return (
       <ProgramDetailContext.Consumer>
-        {({ updateDetails }: any) => (
+        {({ updateDescription }: any) => (
           <>
             {programDescription.isSignalProgram ? (
               <>
@@ -89,13 +89,13 @@ class SignalProviderControls extends React.PureComponent<
               programDescription={programDescription}
               open={popups[SIGNAL_POPUP.MAKE]}
               onClose={this.closePopup(SIGNAL_POPUP.MAKE)}
-              onApply={this.applyChanges(updateDetails)}
+              onApply={this.applyChanges(updateDescription)}
             />
             <ProgramEditSignalContainer
               programDescription={programDescription}
               open={popups[SIGNAL_POPUP.EDIT]}
               onClose={this.closePopup(SIGNAL_POPUP.EDIT)}
-              onApply={this.applyChanges(updateDetails)}
+              onApply={this.applyChanges(updateDescription)}
             />
           </>
         )}

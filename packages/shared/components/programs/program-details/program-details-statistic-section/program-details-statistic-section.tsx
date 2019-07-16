@@ -34,9 +34,11 @@ class _ProgramDetailsStatisticSection extends React.PureComponent<
     let newState: State = {};
     if (state.prevProps !== props) {
       newState.prevProps = props;
-      newState.statistic = props.statistic;
-      newState.profitChart = props.profitChart;
-      newState.balanceChart = props.balanceChart;
+      if (props.statistic) {
+        newState.statistic = props.statistic.statistic;
+        newState.profitChart = props.statistic.profitChart;
+        newState.balanceChart = props.statistic.balanceChart;
+      }
       return newState;
     }
     return state;
@@ -85,9 +87,7 @@ interface Props extends WithTranslation {
     period: ChartDefaultPeriod
   ) => Promise<ProgramStatisticResult>;
   status: STATUS;
-  statistic?: ProgramDetailsStatistic;
-  profitChart?: ProgramDetailsProfitChart;
-  balanceChart?: ProgramBalanceChart;
+  statistic?: ProgramStatisticResult;
 }
 
 interface State {
