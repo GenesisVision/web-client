@@ -1,5 +1,7 @@
+import classNames from "classnames";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import * as React from "react";
-import { NavLink } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
 
 interface INavigationButtonProps {
@@ -37,18 +39,29 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   title,
   children,
   ...other
-}) => (
-  <NavLink
-    className="navigation__item"
-    activeClassName="navigation__item--active"
-    to={href}
-    title={title}
-    {...other}
-  >
-    {<icon.type {...icon.props} className="navigation__icon" />}
-    <span className="navigation__link">{children}</span>
-  </NavLink>
-);
+}) => {
+  const { route } = useRouter();
+  return (
+    //<NavLink
+    //className="navigation__item"
+    //activeClassName="navigation__item--active"
+    //to={href}
+    //title={title}
+    //{...other}
+    //>
+    <Link href={href}>
+      <a
+        className={classNames("navigation__item", {
+          "navigation__item--active": href === route
+        })}
+      >
+        {<icon.type {...icon.props} className="navigation__icon" />}
+        <span className="navigation__link">{children}</span>
+      </a>
+    </Link>
+    // </NavLink>
+  );
+};
 
 const NavigationItem = React.memo(_NavigationItem);
 export default NavigationItem;

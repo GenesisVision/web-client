@@ -1,4 +1,4 @@
-import { connectRouter } from "connected-react-router";
+// import { connectRouter } from "connected-react-router";
 import passwordRestoreReducer from "shared/components/auth/forgot-password/reducers/password-restore-reducers";
 import loginReducer from "shared/components/auth/signin/reducers/login.reducers";
 import signUpReducer from "shared/components/auth/signup/reducers/signup.reducers";
@@ -40,7 +40,6 @@ import { AuthState } from "shared/reducers/auth-reducer";
 import { EmailPendingState } from "shared/reducers/email-pending-reducer";
 import { PlatformState } from "shared/reducers/platform-reducer";
 import { IUiState } from "shared/reducers/ui-reducer";
-import history from "shared/utils/history";
 
 import authReducer from "./auth-reducer";
 import emailPendingReducer from "./email-pending-reducer";
@@ -48,9 +47,11 @@ import headerReducer, { HeaderState } from "./header-reducer";
 import platformReducer from "./platform-reducer";
 import { RouterState } from "./router-reducer";
 import uiReducer from "./ui-reducer";
+// import history from "shared/utils/history";
+
 
 export const sharedRootReducers = {
-  router: connectRouter(history),
+  // router: connectRouter(history),
   platformData: platformReducer,
   programsData: programsReducer,
   programsRating: programsRatingReducer,
@@ -85,7 +86,7 @@ export type RootState = Readonly<{
   programNotifications: ProgramNotificationsState;
   fundNotifications: FundNotificationsState;
   authData: AuthState;
-  router: RouterState;
+  // router: RouterState;
   alertMessages: AlertMessagesState;
   accountSettings: AccountSettingsState;
   wallet: WalletState;

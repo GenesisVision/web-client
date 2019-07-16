@@ -1,15 +1,13 @@
 import React from "react";
 
-import ProgramsPage from "../src/pages/programs/programs/programs.page";
-
-const Programs = () => {
-  return <ProgramsPage />;
+const Index = () => {
+  return <h1 />;
 };
 
-Programs.getInitialProps = async () => {
+Index.getInitialProps = async () => {
   return {
     namespacesRequired: ["translation"]
   };
 };
 
-export default Programs;
+export default Index;

@@ -1,6 +1,6 @@
+import Link from "next/link";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
+import { WithTranslation, withTranslation } from "react-i18next";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import replaceParams from "shared/utils/replace-params";
@@ -18,11 +18,11 @@ const _NavigationTabs: React.FC<Props> = ({
         value={exploreTabName}
         label={
           <Link
-            to={replaceParams(tabRoute, {
+            href={replaceParams(tabRoute, {
               ":tab": exploreTabName
             })}
           >
-            {t("funds-page.tabs.explore")}
+            <a>{t("funds-page.tabs.explore")}</a>
           </Link>
         }
       />
@@ -30,11 +30,11 @@ const _NavigationTabs: React.FC<Props> = ({
         value={favoritesTabName}
         label={
           <Link
-            to={replaceParams(tabRoute, {
+            href={replaceParams(tabRoute, {
               ":tab": favoritesTabName
             })}
           >
-            {t("funds-page.tabs.favorites")}
+            <a>{t("funds-page.tabs.favorites")}</a>
           </Link>
         }
       />
@@ -49,5 +49,5 @@ interface Props extends WithTranslation {
   tab: string;
 }
 
-const NavigationTabs = translate()(React.memo(_NavigationTabs));
+const NavigationTabs = withTranslation()(React.memo(_NavigationTabs));
 export default NavigationTabs;

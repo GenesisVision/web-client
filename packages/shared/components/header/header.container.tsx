@@ -37,11 +37,16 @@ class _HeaderContainer extends React.PureComponent<Props> {
   };
 
   render() {
-    const { service, info, isAuthenticated, backPath } = this.props;
+    const {
+      service,
+      info,
+      isAuthenticated
+      //, backPath
+    } = this.props;
     return (
       <Header
         profileHeader={info}
-        backPath={backPath}
+        // backPath={backPath}
         isAuthenticated={isAuthenticated}
         logout={service.logout}
         openNotifications={service.notificationsToggle}
@@ -64,15 +69,15 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 const mapStateToProps = (state: RootState): StateProps => ({
   info: headerSelector(state),
-  isAuthenticated: isAuthenticatedSelector(state),
-  backPath: state.router.location ? state.router.location.pathname : ""
+  isAuthenticated: isAuthenticatedSelector(state)
+  // backPath: state.router.location ? state.router.location.pathname : ""
 });
 
 interface Props extends StateProps, DispatchProps, OwnProps {}
 
 interface StateProps {
   isAuthenticated: boolean;
-  backPath: string;
+  // backPath: string;
   info?: ProfileHeaderViewModel;
 }
 

@@ -28,12 +28,12 @@ const _ProgramsPage: React.FC<WithTranslation> = ({ t }) => {
         assetsFacets={ASSETS_FACETS.PROGRAMS}
         composeFacetUrl={composeProgramFacetUrl}
       />
-      <Surface className="programs-table-container">
-        <ProgramsTableContainer
-          showSwitchView
-          title={t("programs-page.programs-table")}
-        />
-      </Surface>
+      {/*<Surface className="programs-table-container">*/}
+      {/*  <ProgramsTableContainer*/}
+      {/*    showSwitchView*/}
+      {/*    title={t("programs-page.programs-table")}*/}
+      {/*  />*/}
+      {/*</Surface>*/}
     </Page>
   );
 };

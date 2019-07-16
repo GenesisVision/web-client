@@ -1,9 +1,9 @@
 import "./header.scss";
 
 import { ProfileHeaderViewModel } from "gv-api-web";
+import Link from "next/link";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import GVButton from "shared/components/gv-button";
 import { Icon } from "shared/components/icon/icon";
@@ -24,8 +24,8 @@ const _Header: React.FC<Props> = ({
   logout,
   openNotifications,
   isAuthenticated,
-  profileHeader,
-  backPath
+  profileHeader
+  //, backPath
 }) => {
   const [isOpen, setOpen, setClose] = useIsOpen();
   return (
@@ -39,8 +39,10 @@ const _Header: React.FC<Props> = ({
       <div className="header__center">
         <CurrencySelectContainer className="header__currency" />
         <div className="header__search">
-          <Link to={GLOBAL_SEARCH_ROUTE}>
-            <SearchIcon />
+          <Link href={GLOBAL_SEARCH_ROUTE}>
+            <a>
+              <SearchIcon />
+            </a>
           </Link>
         </div>
       </div>
@@ -68,25 +70,30 @@ const _Header: React.FC<Props> = ({
         ) : (
           <div className="header__buttons">
             <Link
-              to={{
-                pathname: LOGIN_ROUTE,
-                state: backPath
-              }}
+              href={LOGIN_ROUTE}
+              // to={{
+              //   pathname: LOGIN_ROUTE,
+              //   state: backPath
+              // }}
             >
-              <GVButton variant="outlined" color="secondary">
-                {t("auth.login.title")}
-              </GVButton>
+              <a>
+                <GVButton variant="outlined" color="secondary">
+                  {t("auth.login.title")}
+                </GVButton>
+              </a>
             </Link>
-            <Link to={SIGNUP_ROUTE}>
-              <GVButton variant="contained" color="primary">
-                {t("auth.signup.title")}
-              </GVButton>
+            <Link href={SIGNUP_ROUTE}>
+              <a>
+                <GVButton variant="contained" color="primary">
+                  {t("auth.signup.title")}
+                </GVButton>
+              </a>
             </Link>
           </div>
         )}
       </div>
       <NavigationMobile
-        backPath={backPath}
+        // backPath={backPath}
         logout={logout}
         isOpenNavigation={isOpen}
         profileHeader={profileHeader}
@@ -100,7 +107,7 @@ const _Header: React.FC<Props> = ({
 export interface Props extends WithTranslation {
   profileHeader?: ProfileHeaderViewModel;
   isAuthenticated: boolean;
-  backPath: string;
+  // backPath: string;
   logout: () => void;
   openNotifications: () => void;
 }

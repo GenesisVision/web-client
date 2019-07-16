@@ -45,7 +45,7 @@ const _Modal: React.FC<Props> = ({
           "modal--position-fixed": fixed
         })}
       >
-        <EventListener target={document} onKeyUp={handleKeyPress}>
+        <EventListener target={"document"} onKeyUp={handleKeyPress}>
           <div
             className={classNames("modal__backdrop", {
               "modal__backdrop--transparent": transparentBackdrop

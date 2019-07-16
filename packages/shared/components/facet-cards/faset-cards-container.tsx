@@ -1,50 +1,26 @@
-import { FundFacet, PlatformInfo, ProgramFacet } from "gv-api-web";
 import * as React from "react";
-import { connect } from "react-redux";
-import { createSelector } from "reselect";
-import { platformDataSelector } from "shared/reducers/platform-reducer";
-import { RootState } from "shared/reducers/root-reducer";
+import { useContext } from "react";
 
+import { platformContext } from "../../context/platform";
 import { composeFacetUrlFunc } from "./facet-card";
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
 
-export const _FacetCardsContainer: React.FC<Props> = ({
-  facets,
+export const _FacetCardsContainer: React.FC<OwnProps> = ({
   title,
-  composeFacetUrl
-}) => (
-  <FacetCards
-    condition={!!facets.length}
-    loader={<FacetCardsStub />}
-    title={title}
-    facets={facets}
-    composeFacetUrl={composeFacetUrl}
-  />
-);
-
-const facetsSelector = createSelector<
-  RootState,
-  OwnProps,
-  PlatformInfo | undefined,
-  ASSETS_FACETS,
-  Array<ProgramFacet & FundFacet>
->(
-  (state: RootState) => platformDataSelector(state),
-  (state: RootState, props: OwnProps) => props.assetsFacets,
-  (data: PlatformInfo | undefined, assetsFacets: ASSETS_FACETS) =>
-    (data ? data[assetsFacets] : []) as Array<ProgramFacet & FundFacet>
-);
-
-const mapStateToProps = (state: RootState, props: OwnProps): StateProps => ({
-  facets: facetsSelector(state, props)
-});
-
-interface StateProps {
-  facets: Array<ProgramFacet & FundFacet>;
-}
-
-interface Props extends OwnProps, StateProps {}
+  composeFacetUrl,
+  assetsFacets
+}) => {
+  const info = useContext(platformContext);
+  if (!info) return <FacetCardsStub />;
+  return (
+    <FacetCards
+      title={title}
+      facets={info[assetsFacets]}
+      composeFacetUrl={composeFacetUrl}
+    />
+  );
+};
 
 interface OwnProps {
   title: string;
@@ -57,7 +33,4 @@ export enum ASSETS_FACETS {
   PROGRAMS = "programsFacets"
 }
 
-const FacetCardsContainer = connect<StateProps, null, OwnProps, RootState>(
-  mapStateToProps
-)(_FacetCardsContainer);
-export default FacetCardsContainer;
+export default _FacetCardsContainer;
