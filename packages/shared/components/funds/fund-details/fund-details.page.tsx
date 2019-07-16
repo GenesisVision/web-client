@@ -37,19 +37,23 @@ const _FundDetailsPage: React.FC<Props> = ({
   const [description, setDescription] = useState<FundDetailsFull | undefined>(
     undefined
   );
+  const getDescription = service.getFundDescription;
+  const updateDescription = useCallback(
+    () =>
+      getDescription()
+        .then(setDescription)
+        .catch(setErrorMessage),
+    []
+  );
   useEffect(() => {
-    getDetails();
-  }, []);
-  const updateDetails = useCallback(() => service.getFundDescription(), []);
-  const getDetails = (): void => {
-    const update = updateDetails();
-    update.then(setDescription).catch(setErrorMessage);
-    update
+    const description = getDescription();
+    updateDescription();
+    description
       .then(data => data.id)
       .then(getFundStatistic)
       .then(setStatistic)
       .catch(setErrorMessage);
-  };
+  }, []);
   if (errorMessage) return <NotFoundPage />;
   return (
     <FundDetailsContainer
