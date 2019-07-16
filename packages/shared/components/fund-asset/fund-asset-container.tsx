@@ -2,98 +2,101 @@ import "./fund-asset.scss";
 
 import classNames from "classnames";
 import { FundAssetPercent } from "gv-api-web";
-import * as React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS,
-  anchorElType
+  VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
+import useAnchor from "shared/hooks/anchor.hook";
 
 import { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltipContainer from "./fund-asset-tooltip/fund-asset-tooltip-container";
 import HidedAssets from "./hided-assets";
 
-class _FundAssetContainer extends React.PureComponent<
-  IFundAssetContainerProps,
-  State
-> {
-  state = {
-    size: this.props.size,
-    anchor: undefined
-  };
-
-  handleOpen = (event: React.MouseEvent<HTMLElement>) => {
-    this.props.hasPopoverList
-      ? this.setState({ anchor: event.currentTarget })
-      : this.setState({ size: this.props.assets.length });
-  };
-
-  handleClose = () => this.setState({ anchor: undefined });
-
-  componentDidUpdate() {
-    if (this.props.hasPopoverList) this.setState({ size: this.props.size });
-  }
-
-  render() {
-    const { assets, type, length, remainder = 0 } = this.props;
-    const { size, anchor } = this.state;
-    return (
-      <div
-        className={classNames("fund-assets", {
-          "fund-assets--text": type === FUND_ASSET_TYPE.TEXT
-        })}
-      >
-        {assets.map(
-          (asset, idx) =>
-            idx < (size || assets.length) && (
-              <FundAssetTooltipContainer
-                key={idx}
-                asset={asset}
-                idx={idx}
-                {...this.props}
-              />
-            )
-        )}
-        {size && size < (length || assets.length) && (
-          <>
-            <HidedAssets
-              count={(length || assets.length) - size}
-              type={type}
-              handleOpen={this.handleOpen}
-            />
-            <Popover
-              horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-              vertical={VERTICAL_POPOVER_POS.TOP}
-              anchorEl={anchor}
-              noPadding
-              onClose={this.handleClose}
-            >
-              <div className="fund-assets__container">
-                {assets.map(
-                  (asset, idx) =>
-                    idx >= size && (
-                      <FundAssetTooltipContainer
-                        key={idx}
-                        asset={asset}
-                        idx={idx}
-                        {...this.props}
-                      />
-                    )
-                )}
-              </div>
-            </Popover>
-          </>
-        )}
-        {remainder > 0 && (
-          <div className="fund-asset fund-asset--remainder">
-            <NumberFormat value={remainder} suffix="%" displayType="text" />
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
+  assets,
+  type,
+  length,
+  remainder = 0,
+  size: sizeProp,
+  hasPopoverList,
+  removable,
+  removeHandle,
+  hoveringAsset
+}) => {
+  const [size, setSize] = useState<number | undefined>(sizeProp);
+  const { anchor, setAnchor, clearAnchor } = useAnchor();
+  const handleOpen = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      hasPopoverList ? setAnchor(event) : setSize(assets.length);
+    },
+    [assets]
+  );
+  useEffect(() => {
+    if (hasPopoverList) setSize(sizeProp);
+  });
+  return (
+    <div
+      className={classNames("fund-assets", {
+        "fund-assets--text": type === FUND_ASSET_TYPE.TEXT
+      })}
+    >
+      {assets
+        .filter((asset, idx) => idx < (size || assets.length))
+        .map((asset, idx) => (
+          <FundAssetTooltipContainer
+            key={idx}
+            asset={asset}
+            idx={idx}
+            assets={assets}
+            type={type}
+            removable={removable}
+            removeHandle={removeHandle}
+            hoveringAsset={hoveringAsset}
+          />
+        ))}
+      {size && size < (length || assets.length) && (
+        <>
+          <HidedAssets
+            count={(length || assets.length) - size}
+            type={type}
+            handleOpen={handleOpen}
+          />
+          <Popover
+            horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+            vertical={VERTICAL_POPOVER_POS.TOP}
+            anchorEl={anchor}
+            noPadding
+            onClose={clearAnchor}
+          >
+            <div className="fund-assets__container">
+              {assets
+                .filter((asset, idx) => idx >= size)
+                .map((asset, idx) => (
+                  <FundAssetTooltipContainer
+                    key={idx}
+                    asset={asset}
+                    idx={idx}
+                    assets={assets}
+                    type={type}
+                    removable={removable}
+                    removeHandle={removeHandle}
+                    hoveringAsset={hoveringAsset}
+                  />
+                ))}
+            </div>
+          </Popover>
+        </>
+      )}
+      {remainder > 0 && (
+        <div className="fund-asset fund-asset--remainder">
+          <NumberFormat value={remainder} suffix="%" displayType="text" />
+        </div>
+      )}
+    </div>
+  );
+};
 
 export type FundAssetRemoveType = (
   currency: string
@@ -109,14 +112,7 @@ export interface IFundAssetContainerProps {
   remainder?: number;
   hoveringAsset?: string;
   hasPopoverList?: boolean;
-  cell?: any;
-}
-
-interface State {
-  size?: number;
-  anchor?: anchorElType;
 }
 
 const FundAssetContainer = React.memo(_FundAssetContainer);
-
 export default FundAssetContainer;

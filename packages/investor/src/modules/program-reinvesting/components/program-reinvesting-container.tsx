@@ -22,11 +22,11 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
     propIsReinvesting
   );
   const onReinvestingLabelClick = useCallback(
-    (updateDetails: () => void) => () => {
+    (updateDescription: () => void) => () => {
       setIsPending();
       setIsReinvestingValue(!isReinvesting);
       toggleReinvesting(programId, !isReinvesting)
-        .then(updateDetails)
+        .then(updateDescription)
         .catch(() => setIsReinvestingValue(isReinvesting))
         .finally(setNotIsPending);
     },
@@ -34,19 +34,19 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
   );
   return (
     <ProgramDetailContext.Consumer>
-      {({ updateDetails }: IProgramDetailContext) => (
+      {({ updateDescription }: IProgramDetailContext) => (
         <span
           className={classNames("reinvesting-widget", {
             "reinvesting-widget--active": isReinvesting
           })}
-          onClick={onReinvestingLabelClick(updateDetails)}
+          onClick={onReinvestingLabelClick(updateDescription)}
         >
           <GVSwitch
             name="reinvesting"
             touched={false}
             value={isReinvesting}
             color="primary"
-            onChange={onReinvestingLabelClick(updateDetails)}
+            onChange={onReinvestingLabelClick(updateDescription)}
             label={
               <TooltipLabel
                 tooltipContent={t("program-details-page.tooltip.reinvest")}

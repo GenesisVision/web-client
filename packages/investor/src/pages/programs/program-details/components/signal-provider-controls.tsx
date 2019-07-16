@@ -57,8 +57,8 @@ class SignalProviderControls extends React.PureComponent<
     this.setState({ popups });
   };
 
-  applyChanges = (updateDetails: any) => () => {
-    updateDetails();
+  applyChanges = (updateDescription: any) => () => {
+    updateDescription();
   };
 
   render() {
@@ -92,7 +92,7 @@ class SignalProviderControls extends React.PureComponent<
           )}
         </div>
         <ProgramDetailContext.Consumer>
-          {({ updateDetails }: IProgramDetailContext) => (
+          {({ updateDescription }: IProgramDetailContext) => (
             <>
               <ProgramFollowContainer
                 id={programDescription.id}
@@ -102,13 +102,13 @@ class SignalProviderControls extends React.PureComponent<
                   programDescription.personalProgramDetails.signalSubscription
                 }
                 onClose={this.closePopup(SIGNAL_POPUP.FOLLOW)}
-                onApply={this.applyChanges(updateDetails)}
+                onApply={this.applyChanges(updateDescription)}
               />
               <ProgramUnfollowContainer
                 open={popups[SIGNAL_POPUP.UNFOLLOW]}
                 id={programDescription.id}
                 onClose={this.closePopup(SIGNAL_POPUP.UNFOLLOW)}
-                onApply={this.applyChanges(updateDetails)}
+                onApply={this.applyChanges(updateDescription)}
               />
             </>
           )}

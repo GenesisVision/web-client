@@ -42,11 +42,9 @@ export const getFundDescription = () => (
 
 export const getFundStatistic = (
   fundId: string,
-  currency: string,
   period: ChartDefaultPeriod = getDefaultPeriod()
 ): Promise<FundStatisticResult> => {
   const chartFilter = {
-    currency,
     dateFrom: period.start,
     dateTo: period.end,
     maxPointCount: 100

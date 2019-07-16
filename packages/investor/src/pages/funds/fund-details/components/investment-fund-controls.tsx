@@ -31,8 +31,8 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
     this.setState({ popups });
   };
 
-  applyChanges = (updateDetails: () => void) => () => {
-    updateDetails();
+  applyChanges = (updateDescription: () => void) => () => {
+    updateDescription();
   };
 
   render() {
@@ -64,13 +64,13 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
           </div>
         </>
         <ProgramDetailContext.Consumer>
-          {({ updateDetails }) => (
+          {({ updateDescription }) => (
             <>
               <FundDepositContainer
                 open={popups[INVESTMENT_POPUP.INVEST]}
                 id={fundDescription.id}
                 onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-                onApply={this.applyChanges(updateDetails)}
+                onApply={this.applyChanges(updateDescription)}
               />
             </>
           )}
