@@ -78,6 +78,8 @@ $program-height: 372px;
   &__actions {
     text-align: right;
     cursor: pointer;
+    padding-right: $padding-xsmall;
+
     svg {
       width: 30px;
       height: 30px;
@@ -91,7 +93,7 @@ $program-height: 372px;
     display: block;
   }
   &__title-wrapper {
-    max-width: calc(100% - 30px);
+    max-width: calc(100% - 50px);
     padding-right: $padding-small/4;
     box-sizing: border-box;
   }
@@ -123,6 +125,14 @@ $program-height: 372px;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+
+    &:first-child {
+      margin-left: -$padding-xsmall;
+      margin-right: -$padding-xsmall;
+    }
+  }
+  &__avatar {
+    padding-left: $padding-xsmall;
   }
   &__table {
     display: flex;
