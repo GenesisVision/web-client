@@ -62,10 +62,10 @@ class _FacetCards extends React.PureComponent<Props> {
 }
 
 interface Props {
-  facets: Array<FundFacet & ProgramFacet>;
+  facets: Array<FundFacet | ProgramFacet>;
   composeFacetUrl: composeFacetUrlFunc;
   title: string;
 }
 
-const FacetCards = withLoader(_FacetCards);
+const FacetCards = _FacetCards;
 export default FacetCards;
