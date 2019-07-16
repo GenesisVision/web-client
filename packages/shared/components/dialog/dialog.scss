@@ -166,10 +166,6 @@
     }
 
     @include media-breakpoint-tablet() {
-      &--inside {
-        display: none;
-      }
-
       &--outside {
         display: inherit;
       }
