@@ -1,7 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import * as React from "react";
-import { SyntheticEvent } from "react";
+import React, { useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -19,6 +18,7 @@ import {
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel, ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import useTab from "shared/hooks/tab.hook";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import {
   AuthState,
@@ -37,6 +37,132 @@ const EVENTS_FILTERING = {
   type: EVENT_TYPE_FILTER_DEFAULT_VALUE
 };
 
+const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  programId,
+  fetchHistoryCounts,
+  showSwaps,
+  showTickets,
+  t,
+  programCurrency,
+  currency,
+  isAuthenticated,
+  isInvested,
+  eventTypeFilterValues,
+  fetchPortfolioEvents,
+  fetchTrades,
+  fetchOpenPositions,
+  fetchPeriodHistory,
+  isSignalProgram,
+  isOwnProgram,
+  role,
+  isGMProgram
+}) => {
+  const [counts, setCounts] = useState<HistoryCountsType>({});
+  const { tab, setTab } = useTab<TABS>(TABS.OPEN_POSITIONS);
+  useEffect(() => {
+    fetchHistoryCounts(programId).then(setCounts);
+  }, []);
+  const {
+    eventsCount,
+    openPositionsCount,
+    periodHistoryCount,
+    subscriptionsCount,
+    tradesCount
+  } = counts;
+  const isManager = role === ROLE.MANAGER;
+  return (
+    <Surface className="details-history">
+      <div className="details-history__header">
+        <div className="details-history__tabs">
+          <GVTabs value={tab} onChange={setTab}>
+            <GVTab
+              value={TABS.OPEN_POSITIONS}
+              label={t("program-details-page.history.tabs.open-positions")}
+              count={openPositionsCount}
+            />
+            <GVTab
+              value={TABS.TRADES}
+              label={t("program-details-page.history.tabs.trades")}
+              count={tradesCount}
+            />
+            <GVTab
+              value={TABS.PERIOD_HISTORY}
+              label={t("program-details-page.history.tabs.period-history")}
+              count={periodHistoryCount}
+            />
+            <GVTab
+              value={TABS.EVENTS}
+              label={t("program-details-page.history.tabs.events")}
+              count={eventsCount}
+              visible={isAuthenticated && isInvested}
+            />
+            <GVTab
+              value={TABS.SUBSCRIBERS}
+              label={t("program-details-page.history.tabs.subscriptions")}
+              count={subscriptionsCount}
+              visible={isAuthenticated && isSignalProgram && isOwnProgram}
+            />
+            <GVTab
+              value={TABS.FINANCIAL_STATISTIC}
+              label={t("program-details-page.history.tabs.financial-statistic")}
+              count={periodHistoryCount}
+              visible={isAuthenticated && isManager && isOwnProgram}
+            />
+          </GVTabs>
+        </div>
+      </div>
+      <div>
+        {tab === TABS.TRADES && (
+          <ProgramTrades
+            showSwaps={showSwaps}
+            showTickets={showTickets}
+            fetchTrades={fetchTrades}
+            programId={programId}
+            currency={currency}
+          />
+        )}
+        {tab === TABS.EVENTS && (
+          <PortfolioEventsTable
+            filtering={EVENTS_FILTERING}
+            fetchPortfolioEvents={fetchPortfolioEvents}
+            dateRangeStartLabel={t("filters.date-range.program-start")}
+            eventTypeFilterValues={eventTypeFilterValues}
+          />
+        )}
+        {tab === TABS.OPEN_POSITIONS && (
+          <ProgramOpenPositions
+            fetchOpenPositions={fetchOpenPositions}
+            programId={programId}
+            currency={programCurrency}
+          />
+        )}
+        {tab === TABS.SUBSCRIBERS && (
+          <ProgramSubscriptions id={programId} currency={currency} />
+        )}
+        {tab === TABS.FINANCIAL_STATISTIC && (
+          <ProgramFinancialStatistic
+            id={programId}
+            currency={programCurrency}
+            isGMProgram={isGMProgram}
+            fetchFinancialStatistic={fetchPeriodHistory}
+          />
+        )}
+        {tab === TABS.PERIOD_HISTORY && (
+          <ProgramPeriodHistory
+            id={programId}
+            currency={programCurrency}
+            fetchPeriodHistory={fetchPeriodHistory}
+          />
+        )}
+      </div>
+    </Surface>
+  );
+};
+
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state)
+});
+
 enum TABS {
   TRADES = "trades",
   EVENTS = "events",
@@ -45,153 +171,6 @@ enum TABS {
   FINANCIAL_STATISTIC = "financialStatistic",
   PERIOD_HISTORY = "periodHistory"
 }
-
-class _ProgramDetailsHistorySection extends React.PureComponent<Props, State> {
-  state = {
-    tab: TABS.OPEN_POSITIONS,
-    tradesCount: 0,
-    eventsCount: 0,
-    openPositionsCount: 0,
-    subscriptionsCount: 0,
-    periodHistoryCount: 0
-  };
-
-  componentDidMount() {
-    const { programId, fetchHistoryCounts } = this.props;
-    fetchHistoryCounts(programId).then(data => {
-      this.setState({ ...data });
-    });
-  }
-
-  handleTabChange = (e: SyntheticEvent<EventTarget, Event>, tab: string) => {
-    this.setState({ tab: tab as TABS });
-  };
-
-  render() {
-    const {
-      tab,
-      tradesCount,
-      eventsCount,
-      openPositionsCount,
-      subscriptionsCount,
-      periodHistoryCount
-    } = this.state;
-    const {
-      showSwaps,
-      showTickets,
-      t,
-      programId,
-      programCurrency,
-      currency,
-      isAuthenticated,
-      isInvested,
-      eventTypeFilterValues,
-      fetchPortfolioEvents,
-      fetchTrades,
-      fetchOpenPositions,
-      fetchPeriodHistory,
-      isSignalProgram,
-      isOwnProgram,
-      role,
-      isGMProgram
-    } = this.props;
-
-    const isManager = role === ROLE.MANAGER;
-    return (
-      <Surface className="details-history">
-        <div className="details-history__header">
-          <div className="details-history__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange}>
-              <GVTab
-                value={TABS.OPEN_POSITIONS}
-                label={t("program-details-page.history.tabs.open-positions")}
-                count={openPositionsCount}
-              />
-              <GVTab
-                value={TABS.TRADES}
-                label={t("program-details-page.history.tabs.trades")}
-                count={tradesCount}
-              />
-              <GVTab
-                value={TABS.PERIOD_HISTORY}
-                label={t("program-details-page.history.tabs.period-history")}
-                count={periodHistoryCount}
-              />
-              <GVTab
-                value={TABS.EVENTS}
-                label={t("program-details-page.history.tabs.events")}
-                count={eventsCount}
-                visible={isAuthenticated && isInvested}
-              />
-              <GVTab
-                value={TABS.SUBSCRIBERS}
-                label={t("program-details-page.history.tabs.subscriptions")}
-                count={subscriptionsCount}
-                visible={isAuthenticated && isSignalProgram && isOwnProgram}
-              />
-              <GVTab
-                value={TABS.FINANCIAL_STATISTIC}
-                label={t(
-                  "program-details-page.history.tabs.financial-statistic"
-                )}
-                count={periodHistoryCount}
-                visible={isAuthenticated && isManager && isOwnProgram}
-              />
-            </GVTabs>
-          </div>
-        </div>
-        <div>
-          {tab === TABS.TRADES && (
-            <ProgramTrades
-              showSwaps={showSwaps}
-              showTickets={showTickets}
-              fetchTrades={fetchTrades}
-              programId={programId}
-              currency={currency}
-            />
-          )}
-          {tab === TABS.EVENTS && (
-            <PortfolioEventsTable
-              filtering={EVENTS_FILTERING}
-              fetchPortfolioEvents={fetchPortfolioEvents}
-              dateRangeStartLabel={t("filters.date-range.program-start")}
-              eventTypeFilterValues={eventTypeFilterValues}
-            />
-          )}
-          {tab === TABS.OPEN_POSITIONS && (
-            <ProgramOpenPositions
-              fetchOpenPositions={fetchOpenPositions}
-              programId={programId}
-              currency={programCurrency}
-            />
-          )}
-          {tab === TABS.SUBSCRIBERS && (
-            <ProgramSubscriptions id={programId} currency={currency} />
-          )}
-          {tab === TABS.FINANCIAL_STATISTIC && (
-            <ProgramFinancialStatistic
-              id={programId}
-              currency={programCurrency}
-              isGMProgram={isGMProgram}
-              fetchFinancialStatistic={fetchPeriodHistory}
-            />
-          )}
-          {tab === TABS.PERIOD_HISTORY && (
-            <ProgramPeriodHistory
-              id={programId}
-              currency={programCurrency}
-              fetchPeriodHistory={fetchPeriodHistory}
-            />
-          )}
-        </div>
-      </Surface>
-    );
-  }
-}
-
-const mapStateToProps = (state: RootState): StateProps => ({
-  isAuthenticated: isAuthenticatedSelector(state)
-});
 
 interface Props extends OwnProps, StateProps, WithTranslation, WithRoleProps {}
 
@@ -224,13 +203,10 @@ interface OwnProps {
 
 interface StateProps extends AuthState {}
 
-interface State extends HistoryCountsType {
-  tab: TABS;
-}
-
 const ProgramDetailsHistorySection = compose<React.ComponentType<OwnProps>>(
   withRole,
   translate(),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  React.memo
 )(_ProgramDetailsHistorySection);
 export default ProgramDetailsHistorySection;

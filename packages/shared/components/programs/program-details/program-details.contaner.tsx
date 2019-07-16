@@ -1,10 +1,6 @@
 import "shared/components/details/details.scss";
 
-import {
-  LevelsParamsInfo,
-  ProgramBalanceChart,
-  ProgramDetailsFull
-} from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import Page from "shared/components/page/page";
@@ -16,10 +12,7 @@ import {
   fetchProgramTrades,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
-import {
-  ProgramDetailsProfitChart,
-  ProgramDetailsStatistic
-} from "shared/components/programs/program-details/services/program-details.types";
+import { ProgramStatisticResult } from "shared/components/programs/program-details/services/program-details.types";
 import { STATUS } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
@@ -30,7 +23,7 @@ import ProgramDetailsHistorySection from "./program-history/program-details-hist
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   levelsParameters,
-  updateDetails,
+  updateDescription,
   isKycConfirmed,
   currency,
   isAuthenticated,
@@ -38,9 +31,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   descriptionSection,
   historySection,
   description,
-  statistic,
-  profitChart,
-  balanceChart
+  statistic
 }) => {
   const fetchHistoryPortfolioEvents = (filters: any) =>
     historySection.fetchPortfolioEvents({
@@ -52,7 +43,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     description.personalProgramDetails.isInvested;
   return (
     <Page title={description.title}>
-      <ProgramDetailContext.Provider value={{ updateDetails, isKycConfirmed }}>
+      <ProgramDetailContext.Provider
+        value={{ updateDescription, isKycConfirmed }}
+      >
         <div className="details">
           <div className="details__section">
             <ProgramDetailsDescriptionSection
@@ -80,8 +73,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               programId={description.id}
               currency={currency}
               statistic={statistic}
-              profitChart={profitChart}
-              balanceChart={balanceChart}
             />
           </div>
           <div className="details__history">
@@ -114,18 +105,16 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 };
 
 interface OwnProps {
-  updateDetails: () => any;
+  updateDescription: () => any;
   redirectToLogin: () => void;
   historySection: IHistorySection;
   descriptionSection: IDescriptionSection;
   description: ProgramDetailsFull;
-  profitChart?: ProgramDetailsProfitChart;
-  balanceChart?: ProgramBalanceChart;
-  statistic?: ProgramDetailsStatistic;
   levelsParameters: LevelsParamsInfo;
   isAuthenticated: boolean;
   isKycConfirmed: boolean;
   currency: CurrencyEnum;
+  statistic?: ProgramStatisticResult;
 }
 
 interface Props extends OwnProps {}

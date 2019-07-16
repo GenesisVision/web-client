@@ -34,12 +34,10 @@ const _ProgramDepositContainer: React.FC<Props> = ({
     (amount: number, currency: string, setSubmitting: SetSubmittingType) => {
       service
         .programInvest(id, amount, currency)
-        .then(() => {
-          onApply();
-          onClose();
-        })
-        .catch(error => {
-          setErrorMessage(error);
+        .then(onApply)
+        .then(onClose)
+        .catch(setErrorMessage)
+        .finally(() => {
           setSubmitting(false);
         });
     },

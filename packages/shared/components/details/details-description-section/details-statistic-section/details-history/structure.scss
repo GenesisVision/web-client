@@ -13,6 +13,18 @@
     }
   }
 
+  &__cell--reallocate-date {
+    padding-right: $padding-xsmall;
+  }
+
+  &__funds-asset {
+    width: 100%;
+
+    .fund-assets {
+      flex-wrap: nowrap;
+    }
+  }
+
   &__symbol {
     display: flex;
     align-items: center;

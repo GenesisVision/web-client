@@ -3,7 +3,7 @@ import ProgramDepositContainer from "shared/components/deposit/components/progra
 import { IDialogProps } from "shared/components/dialog/dialog";
 import investorApi from "shared/services/api-client/investor-api";
 
-const ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
+const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   id,
   currency,
   onApply,
@@ -22,7 +22,8 @@ const ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   />
 );
 
-export default React.memo(ProgramDeposit);
+const ProgramDeposit = React.memo(_ProgramDeposit);
+export default ProgramDeposit;
 
 interface OwnProps {
   id: string;

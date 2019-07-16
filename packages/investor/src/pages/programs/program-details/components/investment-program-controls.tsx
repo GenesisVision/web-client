@@ -39,8 +39,8 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   );
 
   const applyInvestmentChanges = useCallback(
-    (updateDetails: () => void) => () => {
-      updateDetails();
+    (updateDescription: () => void) => () => {
+      updateDescription();
     },
     []
   );
@@ -74,13 +74,13 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         )}
       </div>
       <ProgramDetailContext.Consumer>
-        {({ updateDetails }: IProgramDetailContext) => (
+        {({ updateDescription }: IProgramDetailContext) => (
           <ProgramDepositContainer
             currency={programDescription.currency}
             open={isOpenInvestmentPopup}
             id={programDescription.id}
             onClose={setCloseInvestmentPopup}
-            onApply={applyInvestmentChanges(updateDetails)}
+            onApply={applyInvestmentChanges(updateDescription)}
           />
         )}
       </ProgramDetailContext.Consumer>

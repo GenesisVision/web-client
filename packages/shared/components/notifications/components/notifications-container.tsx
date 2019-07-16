@@ -1,6 +1,11 @@
-import { NotificationList, NotificationViewModel } from "gv-api-web";
+import {
+  CancelablePromise,
+  NotificationList,
+  NotificationViewModel
+} from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { notificationsToggleAction } from "shared/components/notifications/actions/notifications.actions";
 import Notifications from "shared/components/notifications/components/notifications";
@@ -12,7 +17,7 @@ import Sidebar, { SIDEBAR_POSITION } from "shared/components/sidebar/sidebar";
 import { notificationsCountSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
-const NotificationsContainer: React.FC<Props> = ({
+const _NotificationsContainer: React.FC<Props> = ({
   service,
   open,
   notifications,
@@ -51,15 +56,19 @@ const mapDispatchToProps = (
   service: {
     toggleNotifications: () => dispatch(notificationsToggleAction(false)),
     getNotifications: () =>
-      dispatch<Promise<NotificationList>>(serviceGetNotifications()),
+      dispatch<CancelablePromise<NotificationList>>(serviceGetNotifications()),
     clearNotifications: () => dispatch(serviceClearNotifications())
   }
 });
 
-export default connect<StateProps, DispatchProps, null, RootState>(
-  mapStateToProps,
-  mapDispatchToProps
-)(NotificationsContainer);
+const NotificationsContainer = compose<React.ComponentType>(
+  connect<StateProps, DispatchProps, null, RootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  React.memo
+)(_NotificationsContainer);
+export default NotificationsContainer;
 
 interface StateProps {
   count: number;
@@ -70,7 +79,7 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    getNotifications(): Promise<NotificationList>;
+    getNotifications(): CancelablePromise<NotificationList>;
     clearNotifications(): void;
     toggleNotifications(): void;
   };

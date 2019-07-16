@@ -1,8 +1,12 @@
 import "./notifications.scss";
 
-import { NotificationList, NotificationViewModel } from "gv-api-web";
+import {
+  CancelablePromise,
+  NotificationList,
+  NotificationViewModel
+} from "gv-api-web";
 import moment from "moment";
-import * as React from "react";
+import React, { useCallback, useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
@@ -11,22 +15,26 @@ import { RingIcon } from "shared/components/icon/ring-icon";
 import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
 import NotificationsGroup from "shared/components/notifications/components/notification-group/notification-group";
 import Spinner from "shared/components/spiner/spiner";
+import useIsOpen from "shared/hooks/is-open.hook";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 
-class Notifications extends React.PureComponent<Props> {
-  state = {
-    isPending: false
-  };
-
-  static defaultProps = {
-    notifications: [],
-    total: 0
-  };
-
-  parseDate = (unix: number): string => {
-    const { t } = this.props;
-    return moment
+const _Notifications: React.FC<Props> = ({
+  notifications = [],
+  total = 0,
+  count,
+  t,
+  fetchNotifications,
+  closeNotifications,
+  clearNotifications
+}) => {
+  const [isPending, setIsPending, setIsNotPending] = useIsOpen();
+  useEffect(() => {
+    fetchNotification();
+    return clearNotifications;
+  }, []);
+  const parseDate = (unix: number): string =>
+    moment
       .unix(unix)
       .calendar(undefined, {
         sameDay: `[${t("notifications-aside.today")}], DD MMMM`,
@@ -35,98 +43,75 @@ class Notifications extends React.PureComponent<Props> {
         sameElse: "dddd, DD MMMM"
       })
       .toUpperCase();
-  };
-
-  fetchNotification = () => {
-    if (this.state.isPending) return;
-    this.setState({ isPending: true });
-    this.props
-      .fetchNotifications()
-      .then(() => {
-        this.setState({ isPending: false });
-      })
-      .catch(() => this.setState({ isPending: false }));
-  };
-
-  getGroups = (notifications: NotificationViewModel[]) => {
-    return notifications.reduce<NotificationGroups>((acc, notification) => {
+  const fetchNotification = useCallback(
+    () => {
+      if (isPending) return;
+      setIsPending();
+      fetchNotifications().finally(setIsNotPending);
+    },
+    [isPending]
+  );
+  const renderGroups = (groups: NotificationGroups) => (
+    group: string
+  ): React.ReactNode => (
+    <NotificationsGroup
+      key={group}
+      title={parseDate(parseInt(group))}
+      notifications={groups[parseInt(group)]}
+      closeNotifications={closeNotifications}
+    />
+  );
+  const sortGroups = (a: string, b: string) => parseInt(b) - parseInt(a);
+  const groups = notifications.reduce<NotificationGroups>(
+    (acc, notification) => {
       const key = moment(notification.date)
         .startOf("day")
         .unix();
-
       if (!Array.isArray(acc[key])) {
         acc[key] = [];
       }
       acc[key].push(notification);
       return acc;
-    }, {});
-  };
-
-  renderGroups = (groups: NotificationGroups) => (
-    group: string
-  ): React.ReactNode => (
-    <NotificationsGroup
-      key={group}
-      title={this.parseDate(parseInt(group))}
-      notifications={groups[parseInt(group)]}
-      closeNotifications={this.props.closeNotifications}
-    />
+    },
+    {}
   );
-
-  sortGroups = (a: string, b: string) => parseInt(b) - parseInt(a);
-
-  componentDidMount() {
-    this.fetchNotification();
-  }
-
-  componentWillUnmount() {
-    this.props.clearNotifications();
-  }
-
-  render() {
-    const { t } = this.props;
-    const { notifications, total, count } = this.props;
-    const groups = this.getGroups(notifications);
-    const hasMore = total > notifications.length;
-    const hasNotifications = count > 0;
-    return (
-      <div className="notifications">
-        <InfinityScroll loadMore={this.fetchNotification} hasMore={hasMore}>
-          <div className="notifications__header">
-            <div className="notifications__ring">
-              <RingIcon />
-            </div>
-            {t("notifications-aside.header")}
-            <div className="notifications__count">
-              <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
-                {count}
-              </Chip>
-            </div>
-            <Link
-              to={NOTIFICATIONS_ROUTE}
-              onClick={() => this.props.closeNotifications()}
-            >
-              <div className="profile-avatar notifications__link">
-                <Icon type={"controls"} />
-              </div>
-            </Link>
+  const hasMore = total > notifications.length;
+  const hasNotifications = count > 0;
+  return (
+    <div className="notifications">
+      <InfinityScroll loadMore={fetchNotification} hasMore={hasMore}>
+        <div className="notifications__header">
+          <div className="notifications__ring">
+            <RingIcon />
           </div>
-          <div className="notifications__content">
-            {Object.keys(groups)
-              .sort(this.sortGroups)
-              .map<React.ReactNode>(this.renderGroups(groups))}
-            <Spinner isShown={this.state.isPending} />
+          {t("notifications-aside.header")}
+          <div className="notifications__count">
+            <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
+              {count}
+            </Chip>
           </div>
-        </InfinityScroll>
-      </div>
-    );
-  }
-}
+          <Link to={NOTIFICATIONS_ROUTE} onClick={() => closeNotifications()}>
+            <div className="profile-avatar notifications__link">
+              <Icon type={"controls"} />
+            </div>
+          </Link>
+        </div>
+        <div className="notifications__content">
+          {Object.keys(groups)
+            .sort(sortGroups)
+            .map<React.ReactNode>(renderGroups(groups))}
+          <Spinner isShown={isPending} />
+        </div>
+      </InfinityScroll>
+    </div>
+  );
+};
 
-export default translate()(Notifications);
+const Notifications = translate()(React.memo(_Notifications));
+export default Notifications;
 
 type OwnProps = {
-  fetchNotifications(): Promise<NotificationList>;
+  fetchNotifications(): CancelablePromise<NotificationList>;
   clearNotifications(): void;
   closeNotifications(): void;
   count: number;
