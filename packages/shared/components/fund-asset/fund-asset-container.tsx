@@ -33,6 +33,9 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
     },
     [assets]
   );
+  useEffect(()=>{
+    if (hasPopoverList) setSize(sizeProp);
+  })
   return (
     <div
       className={classNames("fund-assets", {
@@ -61,8 +64,8 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
             handleOpen={handleOpen}
           />
           <Popover
-            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-            vertical={VERTICAL_POPOVER_POS.BOTTOM}
+            horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+            vertical={VERTICAL_POPOVER_POS.TOP}
             anchorEl={anchor}
             noPadding
             onClose={clearAnchor}
