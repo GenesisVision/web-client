@@ -1,5 +1,4 @@
-import { replace } from "connected-react-router";
-import { LocationState } from "history";
+/* import { replace } from "connected-react-router"; */
 import * as React from "react";
 import { useEffect } from "react";
 import { ResolveThunks, connect } from "react-redux";
@@ -12,10 +11,10 @@ import {
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
-import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
-import CaptchaContainer, { TValues } from "../captcha-container";
+/* import CaptchaContainer, { TValues } from "../captcha-container"; */
 import AuthTabs from "../components/auth-tabs/auth-tabs";
 import {
   CODE_TYPE,
@@ -29,13 +28,12 @@ const _SignInContainer: React.FC<Props> = ({
   renderForm,
   password,
   email,
-  location,
+  redirectFrom,
   service,
   errorMessage,
   role,
   type
 }) => {
-  const from = (location.state && location.state.pathname) || HOME_ROUTE;
   const method =
     role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
   useEffect(() => service.clearLoginData, []);
@@ -45,10 +43,10 @@ const _SignInContainer: React.FC<Props> = ({
   return (
     <div className={className}>
       {!type && <AuthTabs authPartUrl={LOGIN_ROUTE} />}
-      <CaptchaContainer
-        request={service.login(method, from, type)}
+      {/* <CaptchaContainer
+        request={service.login(method, redirectFrom, type)}
         renderForm={handle => renderForm(handle, email, errorMessage)}
-      />
+      /> */}
     </div>
   );
 };
@@ -97,7 +95,7 @@ interface OwnProps {
   ) => JSX.Element;
   className: string;
   type?: CODE_TYPE;
-  location: LocationState;
+  redirectFrom: string;
 }
 
 interface Props extends OwnProps, StateProps, DispatchProps, WithRoleProps {}

@@ -2,7 +2,7 @@ import "./auth-layout.scss";
 
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import { compose } from "redux";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
@@ -33,14 +33,14 @@ class _AuthLayout extends React.PureComponent<Props, State> {
     return (
       <div className={"auth page"}>
         <div className="auth__left">
-          <NavLink
+          {/* <NavLink
             className="navigation__link auth__logo"
             activeClassName="navigation__link--active"
             to={HOME_ROUTE}
           >
             <GvLogo />
             <GvBrand />
-          </NavLink>
+          </NavLink> */}
           <blockquote className="auth__quote">
             {t(`${role}.auth-quotes.${quoteNo}.quote`)}
             <footer className="auth__quote-footer">
@@ -56,11 +56,11 @@ class _AuthLayout extends React.PureComponent<Props, State> {
             {title && <h1>{title}</h1>}
             {children}
           </div>
-          {Footer && (
+          {/* {Footer && (
             <div className="auth__footer">
               <Footer ROUTE={SIGNUP_ROUTE || LOGIN_ROUTE!} />
             </div>
-          )}
+          )} */}
         </div>
       </div>
     );

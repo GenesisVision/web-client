@@ -1,4 +1,5 @@
 import React from "react";
+import withDefaultLayout from "shared/decorators/with-default-layout";
 
 import ProgramsPage from "../src/pages/programs/programs/programs.page";
 
@@ -12,4 +13,4 @@ Programs.getInitialProps = async () => {
   };
 };
 
-export default Programs;
+export default withDefaultLayout(Programs);
