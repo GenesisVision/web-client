@@ -107,7 +107,7 @@ const _BrokerEdit: React.FC<Props> = ({
         </GVFormikField>
       </div>
       <p className="program-edit__text program-edit__text--color-accent program-edit__text--padding-top">
-        {t("manager.program-settings.broker.text")}
+        {t("manager.program-settings.broker.text-change")}
       </p>
       <GVButton
         type="submit"
