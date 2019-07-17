@@ -113,15 +113,14 @@ const _AboutLevelsComponent: React.FC<Props> = ({
             </ul>
             <p className="about-levels__paragraph">
               {t("about-levels-page.section.text-9")}{" "}
-              <a href="https://blog.genesis.vision/genesis-vision-update-a-level-up-d01ef51c42a">
-                «https://blog.genesis.vision/genesis-vision-update-a-level-up-d01ef51c42a»
+              <a
+                target="_blank"
+                href="https://blog.genesis.vision/genesis-vision-update-a-level-up-d01ef51c42a"
+              >
+                {t("about-levels-page.section.link")}
               </a>
             </p>
           </div>
-          {/* TODO add link <p className="about-levels__paragraph">*/}
-          {/*  {t("about-levels-page.section.link")}*/}
-          {/*  <a href="https://genesis.vision">link</a>*/}
-          {/*</p>*/}
         </div>
         <div className="about-levels__right-block">
           <h4 className="about-levels__subtitle">

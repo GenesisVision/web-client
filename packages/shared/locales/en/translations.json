@@ -489,9 +489,9 @@
       "text-6": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all periods.",
       "text-7": "To have a volume multiplier of 1 the managers weekly trading volume needs to be approximately the same as the amount of funds in his/her program. In the case of Forex programs, the volume is divided by the shoulder.",
       "text-8": "The coefficient is designed so that trading more in one period can compensate for the lack of volume during another period, but one-time high volumes won’t compensate for the lack of trading.",
-      "text-9": "More information can be found in the article",
+      "text-9": "More information can be found in the",
       "formula": "Investment Scale * Manager balance.",
-      "link": "More information can be found in the article"
+      "link": "article."
     },
     "list": {
       "subtitle": "Investment Scale is calculated according to a formula that takes into account:",
