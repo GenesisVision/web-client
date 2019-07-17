@@ -6,6 +6,7 @@ import {
 } from "shared/components/deposit/services/fund-deposit.service";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
+import withLoader from "shared/decorators/with-loader";
 import investorApi from "shared/services/api-client/investor-api";
 
 const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
@@ -30,7 +31,7 @@ const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   />
 );
 
-const FundDeposit = React.memo(_FundDeposit);
+const FundDeposit = withLoader(React.memo(_FundDeposit));
 export default FundDeposit;
 
 interface OwnProps {
