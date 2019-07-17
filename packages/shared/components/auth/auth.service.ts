@@ -6,17 +6,11 @@ import SHAWorker from "./sha.worker";
 import { client } from "./signin/signin.service";
 
 export const calculatePrefix: CalculatePrefixFuncType = props => {
-  console.log(1);
   const worker = new SHAWorker(); // TODO check
-  console.log(2, worker);
   worker.postMessage([props.difficulty, props.nonce, props.login]);
   const { setCount } = props;
   return new Promise(resolve => {
-    console.log(3);
-
     worker.onmessage = ({ data }: any) => {
-      console.log(4);
-
       if (data.found) {
         resolve(data.prefix);
         setCount(props.total);
