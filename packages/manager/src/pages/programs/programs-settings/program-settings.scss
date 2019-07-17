@@ -11,6 +11,11 @@
     padding-right: 0;
   }
 
+  &__broker-info {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__signaling-edit-form-title-block {
     display: flex;
     align-items: center;

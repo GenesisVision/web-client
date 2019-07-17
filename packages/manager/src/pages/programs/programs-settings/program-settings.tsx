@@ -8,6 +8,7 @@ import GVButton from "shared/components/gv-button";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 
+import BrokerCancel from "./broker-cancel";
 import BrokerEdit, { ChangeBrokerFormValues } from "./broker-edit";
 import InvestmentLimit from "./investment-limit";
 import ProgramEdit from "./program-edit";
@@ -16,6 +17,7 @@ import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
 
 const _ProgramSettings: React.FC<Props> = ({
+  cancelChangeBroker,
   t,
   brokersInfo,
   details,
@@ -84,17 +86,40 @@ const _ProgramSettings: React.FC<Props> = ({
               onSubmit={editProgram}
             />
           </section>
-          {brokersInfo.brokers.length > 1 && (
+          {details.personalProgramDetails.migration && (
             <section className="program-edit__block">
-              <BrokerEdit
-                onSubmit={changeBroker}
-                id={details.id}
-                brokers={brokersInfo.brokers}
+              <BrokerCancel
+                brokerFrom={
+                  brokersInfo.brokers.find(
+                    broker =>
+                      !!broker.accountTypes.find(
+                        accountType =>
+                          accountType.id === brokersInfo.currentAccountTypeId
+                      )
+                  )!
+                }
+                brokerTo={details.personalProgramDetails.migration.newBroker}
+                onSubmit={cancelChangeBroker}
                 currentAccountTypeId={brokersInfo.currentAccountTypeId}
                 leverage={details.leverageMax}
+                newLeverage={
+                  details.personalProgramDetails.migration.newLeverage
+                }
               />
             </section>
           )}
+          {!!!details.personalProgramDetails.migration &&
+            brokersInfo.brokers.length > 1 && (
+              <section className="program-edit__block">
+                <BrokerEdit
+                  onSubmit={changeBroker}
+                  id={details.id}
+                  brokers={brokersInfo.brokers}
+                  currentAccountTypeId={brokersInfo.currentAccountTypeId}
+                  leverage={details.leverageMax}
+                />
+              </section>
+            )}
           <section className="program-edit__block">
             <StopOutLevel
               stopOutLevel={details.stopOutLevel}
@@ -143,6 +168,7 @@ interface OwnProps {
     setSubmitting: SetSubmittingType
   ) => void;
   editProgram: TUpdateProgramFunc;
+  cancelChangeBroker: () => void;
 }
 
 const ProgramSettings = compose<
