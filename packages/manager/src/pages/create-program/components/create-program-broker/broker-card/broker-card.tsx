@@ -52,11 +52,13 @@ const _BrokerCard: React.FC<OwnProps & WithTranslation> = ({
         src={filesService.getFileUrl(logo)}
         alt={brokerName}
       />
-      <TagBrokerContainer
-        tags={tags}
-        condition={tags.length !== 0}
-        className="broker-card__tags"
-      />
+      {tags && (
+        <TagBrokerContainer
+          tags={tags}
+          condition={tags.length !== 0}
+          className="broker-card__tags"
+        />
+      )}
     </div>
   );
 };
