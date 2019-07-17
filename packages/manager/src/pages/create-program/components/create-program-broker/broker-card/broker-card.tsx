@@ -38,7 +38,7 @@ const _BrokerCard: React.FC<OwnProps & WithTranslation> = ({
   return (
     <div
       className={className}
-      onClick={isActive ? onSelect!(brokerName) : undefined}
+      onClick={isActive ? onSelect && onSelect(brokerName) : undefined}
     >
       {isSelected && (
         <div className="broker-card__selected-mark"> &#10004;</div>
@@ -71,7 +71,7 @@ interface OwnProps {
   logo: string;
   brokerName: string;
   onSelect?(brokerName: string): () => void;
-  isSelected: boolean;
   cardState: BROKER_CARD_EXTRA_STATE;
-  tags: ProgramTag[];
+  tags?: ProgramTag[];
+  isSelected?: boolean;
 }
