@@ -1,27 +1,37 @@
 import * as React from "react";
-import FundDepositContainer from "shared/components/deposit/components/fund-deposit-container";
+import DepositContainer from "shared/components/deposit/components/deposit-container";
+import {
+  fundInvestCreator,
+  getFundInfoCreator
+} from "shared/components/deposit/services/fund-deposit.service";
 import { IDialogProps } from "shared/components/dialog/dialog";
+import { ASSET } from "shared/constants/constants";
 import managerApi from "shared/services/api-client/manager-api";
 
-const FundDeposit: React.FC<OwnProps & IDialogProps> = ({
+const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   id,
   onApply,
   open,
   onClose
-}) => {
-  return (
-    <FundDepositContainer
-      id={id}
-      onApply={onApply}
-      open={open}
-      onClose={onClose}
-      fundInvest={managerApi.v10ManagerFundsByIdInvestByAmountPost}
-      fetchInfo={managerApi.v10ManagerFundsByIdInvestInfoByCurrencyGet}
-    />
-  );
-};
+}) => (
+  <DepositContainer
+    asset={ASSET.FUND}
+    assetInvest={fundInvestCreator(
+      managerApi.v10ManagerFundsByIdInvestByAmountPost
+    )}
+    fetchInfo={getFundInfoCreator(
+      managerApi.v10ManagerFundsByIdInvestInfoByCurrencyGet
+    )}
+    id={id}
+    hasEntryFee
+    onApply={onApply}
+    open={open}
+    onClose={onClose}
+  />
+);
 
-export default React.memo(FundDeposit);
+const FundDeposit = React.memo(_FundDeposit);
+export default FundDeposit;
 
 interface OwnProps {
   id: string;
