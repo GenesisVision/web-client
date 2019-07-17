@@ -1,5 +1,4 @@
 import "shared/styles/index.scss";
-import "shared/styles/index.scss";
 
 import App, { Container } from "next/app";
 import React from "react";
