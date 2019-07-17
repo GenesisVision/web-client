@@ -17,8 +17,10 @@ interface IDashboardPageProps extends WithTranslation, WithRoleProps {}
 
 const DashboardPage: React.FC<IDashboardPageProps> = ({ t, role }) => {
   const title = t(`${role}.dashboard-page.title`);
-  return (
-    <Page title={title}>
+  return <>Dashboard</>;
+};
+{
+  /* <Page title={title}>
       <div className="dashboard">
         <div className="dashboard__row">
           <div className="dashboard__chart">
@@ -37,8 +39,7 @@ const DashboardPage: React.FC<IDashboardPageProps> = ({ t, role }) => {
           <DashboardTrades title={title} />
         </div>
       </div>
-    </Page>
-  );
-};
+    </Page> */
+}
 
 export default withRole(translate()(React.memo(DashboardPage)));
