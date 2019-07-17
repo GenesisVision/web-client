@@ -2,10 +2,12 @@
 /*eslint no-undef: "off"*/
 /* eslint no-restricted-globals: "off"*/
 
-importScripts(
+self.importScripts(
   "https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"
 );
-onmessage = event => {
+
+self.onmessage = event => {
+  console.log("in worker");
   const [difficulty, nonce, login] = event.data;
   let prefix = 0;
   const diffString = "0".repeat(difficulty) + "F".repeat(64 - difficulty);

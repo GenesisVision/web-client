@@ -1,7 +1,6 @@
 import "./login.scss";
 
-import { LocationState } from "history";
-import * as React from "react";
+import React from "react";
 
 import SignInContainer from "../signin.container";
 import LoginForm from "./login-form";

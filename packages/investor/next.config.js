@@ -37,6 +37,9 @@ module.exports = withPlugins(
         transpileModules: ["shared", "gv-api-web"]
       }
     ]
+    // withWorkers({
+    //   /* config options here */
+    // })
   ],
   nextConfig
 );

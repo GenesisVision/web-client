@@ -1,7 +1,7 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import * as React from "react";
+import Link from "next/link";
+import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
@@ -37,8 +37,10 @@ const _LoginForm: React.FC<
     />
 
     <div className="login-form__forgot">
-      <Link to={FORGOT_PASSWORD_ROUTE}>
-        <GVButton variant="text">{t("auth.login.forgot")}</GVButton>
+      <Link href={FORGOT_PASSWORD_ROUTE}>
+        <a>
+          <GVButton variant="text">{t("auth.login.forgot")}</GVButton>
+        </a>
       </Link>
     </div>
     <FormError error={error} />

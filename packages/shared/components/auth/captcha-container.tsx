@@ -1,5 +1,5 @@
 import { CaptchaDetailsCaptchaTypeEnum } from "gv-api-web";
-import * as React from "react";
+import React from "react";
 import { SetSubmittingType } from "shared/utils/types";
 
 import * as authService from "./auth.service";
@@ -7,7 +7,7 @@ import { CaptchasType } from "./auth.service";
 import Pow from "./captcha/pow";
 
 class CaptchaContainer extends React.PureComponent<Props, State> {
-  state = {
+  state: State = {
     pow: undefined,
     geeTest: undefined,
     prefix: undefined,
@@ -68,7 +68,7 @@ class CaptchaContainer extends React.PureComponent<Props, State> {
     this.setState({ prefix });
   };
 
-  handleSubmit = (values: TValues, setSubmitting?: SetSubmittingType) => {
+  handleSubmit = (values: ValuesType, setSubmitting?: SetSubmittingType) => {
     authService.getCaptcha(values.email).then(res => {
       this.setState({
         ...res,
@@ -86,13 +86,15 @@ class CaptchaContainer extends React.PureComponent<Props, State> {
     return (
       <>
         {renderForm(this.handleSubmit)}
-        {pow && <Pow {...pow} login={email} handleSuccess={this.handlePow} />}
+        {pow && email && (
+          <Pow {...pow} login={email} handleSuccess={this.handlePow} />
+        )}
       </>
     );
   }
 }
 
-export type TValues = any;
+export type ValuesType = any;
 
 interface State extends CaptchasType {
   isSubmit: boolean;
@@ -101,13 +103,13 @@ interface State extends CaptchasType {
   id?: string;
   prefix?: number;
   email?: string;
-  values?: TValues;
+  values?: ValuesType;
 }
 
 interface OwnProps {
-  request: (values: TValues, setSubmitting: SetSubmittingType) => void;
+  request: (values: ValuesType, setSubmitting: SetSubmittingType) => void;
   renderForm: (
-    handle: (values: TValues, setSubmitting?: SetSubmittingType) => void
+    handle: (values: ValuesType, setSubmitting?: SetSubmittingType) => void
   ) => JSX.Element;
 }
 

@@ -14,7 +14,7 @@ import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
-/* import CaptchaContainer, { TValues } from "../captcha-container"; */
+import CaptchaContainer, { ValuesType } from "../captcha-container";
 import AuthTabs from "../components/auth-tabs/auth-tabs";
 import {
   CODE_TYPE,
@@ -43,10 +43,10 @@ const _SignInContainer: React.FC<Props> = ({
   return (
     <div className={className}>
       {!type && <AuthTabs authPartUrl={LOGIN_ROUTE} />}
-      {/* <CaptchaContainer
+      <CaptchaContainer
         request={service.login(method, redirectFrom, type)}
         renderForm={handle => renderForm(handle, email, errorMessage)}
-      /> */}
+      />
     </div>
   );
 };
@@ -89,7 +89,7 @@ interface StateProps {
 
 interface OwnProps {
   renderForm: (
-    handle: (values: TValues, setSubmitting?: SetSubmittingType) => void,
+    handle: (values: ValuesType, setSubmitting?: SetSubmittingType) => void,
     email: string,
     errorMessage: string
   ) => JSX.Element;

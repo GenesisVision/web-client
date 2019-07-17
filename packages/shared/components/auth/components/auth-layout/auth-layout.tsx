@@ -2,10 +2,8 @@ import "./auth-layout.scss";
 
 import { NextPage } from "next";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-// import { NavLink } from "react-router-dom";
-import { compose } from "redux";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
@@ -19,13 +17,12 @@ const _AuthLayout: NextPage<Props> = ({
   role,
   children,
   title,
+  quoteNo,
   Footer,
   SIGNUP_ROUTE,
   LOGIN_ROUTE
 }) => {
-  const quoteNo = Math.floor(Math.random() * QUOTES_COUNT + 1);
   const [t] = useTranslation();
-
   return (
     <div className="root auth page">
       <div className="auth__left">
@@ -66,6 +63,7 @@ interface Props extends OwnProps, WithRoleProps {}
 interface OwnProps {
   Footer: React.ComponentType<ILoginFooterProps>;
   title: string;
+  quoteNo: number;
   SIGNUP_ROUTE?: string;
   LOGIN_ROUTE?: string;
   children: React.ReactChild;
