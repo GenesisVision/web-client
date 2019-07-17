@@ -1,18 +1,12 @@
 import "./app-layout.scss";
 
-import { NextComponentType } from "next";
-import * as React from "react";
-import { useEffect } from "react";
+import React, { ComponentType, useEffect } from "react";
 import { connect } from "react-redux";
 import { initOnResizeEvent } from "shared/actions/ui-actions";
 import HeaderContainer from "shared/components/header/header.container";
 import NotificationsContainer from "shared/components/notifications/components/notifications-container";
-import { MiddlewareDispatch } from "shared/utils/types";
 
-const _AppLayout: NextComponentType<{}, {}, Props> = ({
-  initOnResizeEvent,
-  children
-}) => {
+const _AppLayout: ComponentType<Props> = ({ initOnResizeEvent, children }) => {
   useEffect(() => {
     initOnResizeEvent();
   }, []);
@@ -30,8 +24,8 @@ const _AppLayout: NextComponentType<{}, {}, Props> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
-  initOnResizeEvent: () => dispatch(initOnResizeEvent())
+const mapDispatchToProps = (): DispatchProps => ({
+  initOnResizeEvent
 });
 
 interface Props extends DispatchProps {}

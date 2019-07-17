@@ -1,7 +1,7 @@
 import { PlatformInfo } from "gv-api-web";
 import { NextPage, NextPageContext } from "next";
-import AppLayout from "pages/app/components/app-layout/app-layout";
 import React, { Component } from "react";
+import AppLayout from "shared/components/app-layout/app-layout";
 import { platformContext } from "shared/context/platform";
 import platformApi from "shared/services/api-client/platform-api";
 
