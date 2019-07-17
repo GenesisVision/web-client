@@ -105,6 +105,7 @@ class _InvestmentProgramControls extends React.PureComponent<Props, State> {
               onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
             />
             <ProgramDeposit
+              condition={isAuthenticated}
               currency={programDescription.currency}
               open={popups[INVESTMENT_POPUP.INVEST]}
               id={programDescription.id}
