@@ -67,6 +67,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
           {({ updateDescription }) => (
             <>
               <FundDepositContainer
+                condition={isAuthenticated}
                 open={popups[INVESTMENT_POPUP.INVEST]}
                 id={fundDescription.id}
                 onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
