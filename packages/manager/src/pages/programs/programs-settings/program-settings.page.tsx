@@ -157,7 +157,7 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
             }
             brokerTo={
               details.personalProgramDetails.migration &&
-              details.personalProgramDetails.migration.brokerName
+              details.personalProgramDetails.migration.newBroker.name
             }
           />
           <ClosePeriodContainer

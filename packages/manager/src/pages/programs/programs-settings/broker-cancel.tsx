@@ -13,7 +13,8 @@ const _BrokerCancel: React.FC<Props> = ({
   brokerFrom,
   brokerTo,
   currentAccountTypeId,
-  leverage
+  leverage,
+  newLeverage
 }) => (
   <div>
     <h3>{t("manager.program-settings.broker.title")}</h3>
@@ -46,30 +47,30 @@ const _BrokerCancel: React.FC<Props> = ({
       <div className="broker-card__next-arrow">&rarr;</div>
       <div className="program-edit__broker-info">
         <BrokerCard
-          logo={brokerTo.brokerLogo}
-          key={brokerTo.brokerName}
-          brokerName={brokerTo.brokerName}
+          logo={brokerTo.logo}
+          key={brokerTo.name}
+          brokerName={brokerTo.name}
           cardState={BROKER_CARD_EXTRA_STATE.NONE}
-          // tags={brokerTo.tags}
+          tags={brokerTo.tags}
         />
         <StatisticItem
           label={t("manager.create-program-page.settings.fields.account-type")}
         >
-          {brokerTo.brokerTradingAccountName}
+          {brokerTo.accountTypes[0].name}
         </StatisticItem>
         <StatisticItem
           label={t(
             "manager.create-program-page.settings.fields.brokers-leverage"
           )}
         >
-          {brokerTo.newLeverage}
+          {newLeverage}
         </StatisticItem>
       </div>
     </div>
     <p className="program-edit__text program-edit__text--color-accent program-edit__text--padding-top">
       {t("manager.program-settings.broker.text-cancel", {
         brokerFrom: brokerFrom.name,
-        brokerTo: brokerTo.brokerName
+        brokerTo: brokerTo.name
       })}
     </p>
     <GVButton
@@ -88,9 +89,10 @@ interface Props extends OwnProps, WithTranslation {}
 interface OwnProps {
   onSubmit: () => void;
   brokerFrom: Broker;
-  brokerTo: MigrationRequest;
+  brokerTo: Broker;
   currentAccountTypeId: string;
   leverage: number;
+  newLeverage: number;
 }
 
 const BrokerCancel = compose<React.ComponentType<OwnProps>>(

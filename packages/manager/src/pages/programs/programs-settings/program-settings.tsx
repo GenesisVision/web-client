@@ -98,10 +98,13 @@ const _ProgramSettings: React.FC<Props> = ({
                       )
                   )!
                 }
-                brokerTo={details.personalProgramDetails.migration}
+                brokerTo={details.personalProgramDetails.migration.newBroker}
                 onSubmit={cancelChangeBroker}
                 currentAccountTypeId={brokersInfo.currentAccountTypeId}
                 leverage={details.leverageMax}
+                newLeverage={
+                  details.personalProgramDetails.migration.newLeverage
+                }
               />
             </section>
           )}
