@@ -26,6 +26,7 @@ const _BrokerCard: React.FC<OwnProps & WithTranslation> = ({
     BROKER_CARD_EXTRA_STATE.KYC_REQUIRED
   ].includes(cardState);
   const className = classnames("broker-card", {
+    "broker-card--clickable": !!onSelect,
     "broker-card--active": isActive,
     "broker-card--inactive": !isActive
   });
