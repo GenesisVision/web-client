@@ -62,7 +62,7 @@ $tag-font-size: 11px;
   text-transform: uppercase;
   height: 18px;
   line-height: 18px;
-  padding: 0 $padding-xxsmall;
+  padding: 0 $padding-xxsmall-mobile;
   white-space: nowrap;
 
   @include media-breakpoint-landscape-phone() {

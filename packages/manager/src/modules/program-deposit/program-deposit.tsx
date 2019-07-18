@@ -6,6 +6,7 @@ import {
 } from "shared/components/deposit/services/program-deposit.service";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
+import withLoader from "shared/decorators/with-loader";
 import managerApi from "shared/services/api-client/manager-api";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -33,7 +34,7 @@ const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   />
 );
 
-const ProgramDeposit = React.memo(_ProgramDeposit);
+const ProgramDeposit = withLoader(React.memo(_ProgramDeposit));
 export default ProgramDeposit;
 
 interface OwnProps {

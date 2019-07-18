@@ -29,6 +29,7 @@ import { ChangeBrokerFormValues } from "./broker-edit";
 import ProgramSettings from "./program-settings";
 import ProgramSettingsLoader from "./program-settings.loader";
 import {
+  cancelChangeBrokerMethod,
   changeBrokerMethod,
   redirectToProgram
 } from "./services/program-settings.service";
@@ -90,6 +91,12 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
     },
     [details]
   );
+  const cancelChangeBroker = useCallback(
+    () => {
+      service.cancelChangeBrokerMethod(details!.id).then(fetchingDescription);
+    },
+    [details]
+  );
   const editProgram: TUpdateProgramFunc = useCallback(
     values => {
       const currentValues = {
@@ -123,6 +130,7 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
         brokersInfo={brokersInfo!}
         changeBroker={changeBroker}
         editProgram={editProgram}
+        cancelChangeBroker={cancelChangeBroker}
       />
       {details && (
         <>
@@ -153,6 +161,7 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
+      cancelChangeBrokerMethod,
       getProgramDescription,
       editAsset,
       programEditSignal,
@@ -176,6 +185,7 @@ export type TUpdateProgramFunc = (
 interface OwnProps {}
 
 interface ServiceThunks extends ActionCreatorsMapObject {
+  cancelChangeBrokerMethod: typeof cancelChangeBrokerMethod;
   getProgramDescription: typeof getProgramDescription;
   editAsset: typeof editAsset;
   programEditSignal: typeof programEditSignal;

@@ -1,5 +1,5 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit";
+import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import {
@@ -75,7 +75,8 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       </div>
       <ProgramDetailContext.Consumer>
         {({ updateDescription }: IProgramDetailContext) => (
-          <ProgramDepositContainer
+          <ProgramDeposit
+            condition={isAuthenticated}
             currency={programDescription.currency}
             open={isOpenInvestmentPopup}
             id={programDescription.id}
