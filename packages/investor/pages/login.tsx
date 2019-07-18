@@ -1,38 +1,26 @@
 import { NextPage } from "next";
 import React from "react";
-import { useTranslation } from "react-i18next";
-import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import LoginFooter from "shared/components/auth/components/login-footer/login-footer";
 import LoginPage from "shared/components/auth/signin/login/login.page";
+import withAuthLayout from "shared/decorators/with-auth-layout";
 import { HOME_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 
-const Login: NextPage<Props> = ({ quoteNo, redirectFrom }) => {
-  const [t] = useTranslation();
-  return (
-    <AuthLayout
-      Footer={LoginFooter}
-      title={t("auth.login.title")}
-      SIGNUP_ROUTE={SIGNUP_ROUTE}
-      quoteNo={quoteNo}
-    >
-      <LoginPage redirectFrom={redirectFrom} />
-    </AuthLayout>
-  );
+const Login: NextPage<Props> = ({ redirectFrom }) => {
+  return <LoginPage redirectFrom={redirectFrom} />;
 };
 
 Login.getInitialProps = async () => {
-  const QUOTES_COUNT = 5;
-  const quoteNo = Math.floor(Math.random() * QUOTES_COUNT + 1);
   return {
-    quoteNo,
-    redirectFrom: HOME_ROUTE,
-    namespacesRequired: ["translation"]
+    redirectFrom: HOME_ROUTE
   };
 };
 
 interface Props {
-  quoteNo: number;
   redirectFrom: string;
 }
 
-export default Login;
+export default withAuthLayout({
+  signUpRoute: SIGNUP_ROUTE,
+  Footer: LoginFooter,
+  titleKey: "auth.login.title"
+})(Login);

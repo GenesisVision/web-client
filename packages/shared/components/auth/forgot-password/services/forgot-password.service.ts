@@ -44,7 +44,7 @@ export const restorePassword = (
     .then(response => {
       authService.storeToken(response.value);
       dispatch(authActions.updateTokenAction());
-      dispatch(push(HOME_ROUTE));
+      Router.push(HOME_ROUTE);
       dispatch(
         alertMessageActions.success(
           "auth.password-restore.success-alert-message",
@@ -54,7 +54,7 @@ export const restorePassword = (
     })
     .catch(({ code }: ResponseError) => {
       if (code === "RequiresTwoFactor") {
-        dispatch(push(LOGIN_ROUTE));
+        Router.push(LOGIN_ROUTE);
         dispatch(
           alertMessageActions.success(
             "auth.password-restore.success-alert-message",
@@ -85,5 +85,5 @@ export const sendForgotPasswordEmail = (
 
 export const navigateToPasswordRestore = () => (dispatch: Dispatch) => {
   dispatch(clearDataActionFactory(EMAIL_PENDING).clearData());
-  dispatch(push(PASSWORD_RESTORE_ROUTE));
+  Router.push(PASSWORD_RESTORE_ROUTE);
 };
