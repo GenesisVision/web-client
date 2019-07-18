@@ -5,7 +5,7 @@ import React from "react";
 import SignInContainer from "../signin.container";
 import LoginForm from "./login-form";
 
-const _LoginPage: React.FC<LocationProps> = ({ redirectFrom }) => (
+const _LoginPage: React.FC<Props> = ({ redirectFrom }) => (
   <SignInContainer
     redirectFrom={redirectFrom}
     className="login"
@@ -15,7 +15,7 @@ const _LoginPage: React.FC<LocationProps> = ({ redirectFrom }) => (
   />
 );
 
-interface LocationProps {
+interface Props {
   redirectFrom: string;
 }
 

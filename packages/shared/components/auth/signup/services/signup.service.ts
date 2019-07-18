@@ -4,7 +4,7 @@ import emailPendingActions from "shared/actions/email-pending-actions";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { RegisterViewModel, signUpUserAction } from "../actions/signup.actions";
-import { SIGNUP_ROUTE_PENDING } from "../signup.routes";
+import { SIGNUP_ROUTE_PENDING } from "../signup.constants";
 
 export const signUp: SingUpFuncType = (
   {

@@ -2,7 +2,7 @@ import "./auth-layout.scss";
 
 import { NextPage } from "next";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
