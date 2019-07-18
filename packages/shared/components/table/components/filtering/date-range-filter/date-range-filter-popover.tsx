@@ -68,8 +68,8 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
             className="date-range-filter__btn date-range-filter__btn--type"
             variant="text"
             color="secondary"
-            onClick={this.handleChangeType(DATA_RANGE_FILTER_TYPES.LAST_MOUTH)}
-            disabled={type === DATA_RANGE_FILTER_TYPES.LAST_MOUTH}
+            onClick={this.handleChangeType(DATA_RANGE_FILTER_TYPES.LAST_MONTH)}
+            disabled={type === DATA_RANGE_FILTER_TYPES.LAST_MONTH}
           >
             {t("filters.date-range.last-month")}
           </GVButton>

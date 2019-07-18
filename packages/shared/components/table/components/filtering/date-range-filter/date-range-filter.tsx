@@ -30,7 +30,7 @@ const _DateRangeFilter: React.FC<IDateRangeFilterProps & WithTranslation> = ({
       switch (value.type) {
         case DATA_RANGE_FILTER_TYPES.ALL:
           return t("filters.date-range.all-time");
-        case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:
+        case DATA_RANGE_FILTER_TYPES.LAST_MONTH:
           return t("filters.date-range.last-month");
         case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
           return t("filters.date-range.last-week");
