@@ -1,19 +1,21 @@
+import { saveAs } from "file-saver";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { fetchStatisticExportFileUrl } from "shared/services/file-service";
-import { saveAs } from "file-saver";
+import filesService from "shared/services/file-service";
 
 const _DownloadButtonToolbarAuth: React.FC<Props> = ({
   t,
-  filtering,
+  dateRange,
   programId
 }) => {
   const loadFile = () => {
-    fetchStatisticExportFileUrl(programId, filtering).then(blob =>
-      saveAs(blob)
-    );
+    filesService
+      .getStatisticExportFile(programId, dateRange)
+      .then(blob =>
+        saveAs(blob, `${dateRange.dateStart}_${dateRange.dateEnd}.xlsx`)
+      );
   };
   return (
     <div className="dashboard__button">
@@ -25,7 +27,7 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
 };
 
 interface Props extends WithTranslation {
-  filtering: DateRangeFilterType;
+  dateRange: DateRangeFilterType;
   programId: string;
 }
 

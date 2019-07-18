@@ -13,19 +13,14 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import filesService, {
-  fetchStatisticExportFileUrl
-} from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import GVButton from "../../../gv-button";
 import {
   PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
   PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
 } from "../program-details.constants";
-import DownloadButtonToolbar from "./download-button-toolbar";
 import DownloadButtonToolbarAuth from "./download-button-toolbar-auth";
 
 const _ProgramFinancialStatistic: React.FC<Props> = ({
@@ -47,7 +42,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
     <TableModule
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadButtonToolbarAuth
-          filtering={filtering!.dateRange}
+          dateRange={filtering!.dateRange}
           programId={id}
         />
       )}
