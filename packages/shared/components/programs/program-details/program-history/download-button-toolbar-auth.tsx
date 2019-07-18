@@ -19,7 +19,6 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
       .getStatisticExportFile(programId, dateRange)
       .then(blob => saveAs(blob, `statistic_${fileName}.xlsx`));
   };
-
   return (
     <div className="dashboard__button">
       <GVButton color="primary" variant="text" onClick={loadFile}>
