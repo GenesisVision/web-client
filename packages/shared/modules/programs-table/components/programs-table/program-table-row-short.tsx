@@ -1,10 +1,9 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
 import moment from "moment";
+import Link from "next/link";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
@@ -18,6 +17,7 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
+import { useTranslation } from "shared/i18n";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -30,10 +30,7 @@ interface IProgramTableRowShortProps {
   onExpandClick(): void;
 }
 
-const ProgramTableRowShort: React.FC<
-  IProgramTableRowShortProps & WithTranslation
-> = ({
-  t,
+const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   title,
   showRating,
   program,
@@ -41,6 +38,7 @@ const ProgramTableRowShort: React.FC<
   toggleFavorite,
   onExpandClick
 }) => {
+  const { t } = useTranslation();
   const {
     status,
     availableInvestmentBase,
@@ -72,34 +70,30 @@ const ProgramTableRowShort: React.FC<
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link
-            to={{
-              pathname: composeProgramDetailsUrl(url),
-              state: `/ ${title}`
-            }}
-            onClick={stopPropagationEvent}
+            href={composeProgramDetailsUrl(url)}
+            // onClick={stopPropagationEvent}
           >
-            <AssetAvatar
-              url={logo}
-              level={level}
-              levelProgress={levelProgress}
-              alt={program.title}
-              color={color}
-              tooltip={
-                <LevelTooltip level={level} canLevelUp={rating.canLevelUp} />
-              }
-            />
+            <a>
+              <AssetAvatar
+                url={logo}
+                level={level}
+                levelProgress={levelProgress}
+                alt={program.title}
+                color={color}
+                tooltip={
+                  <LevelTooltip level={level} canLevelUp={rating.canLevelUp} />
+                }
+              />
+            </a>
           </Link>
           <div className="programs-table__cell--title">
             <div className="programs-table__cell--top">
               <Link
-                className="programs-table__cell--link"
-                to={{
-                  pathname: composeProgramDetailsUrl(url),
-                  state: `/ ${title}`
-                }}
-                onClick={stopPropagationEvent}
+                // className="programs-table__cell--link"
+                href={composeProgramDetailsUrl(url)}
+                // onClick={stopPropagationEvent}
               >
-                {program.title}
+                <a className="programs-table__cell--link">{program.title}</a>
               </Link>
             </div>
             <div className="programs-table__cell--bottom">
@@ -181,4 +175,4 @@ const ProgramTableRowShort: React.FC<
   );
 };
 
-export default translate()(React.memo(ProgramTableRowShort));
+export default React.memo(ProgramTableRowShort);

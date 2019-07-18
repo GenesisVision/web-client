@@ -1,9 +1,8 @@
 import { ProgramDetails } from "gv-api-web";
+import Link from "next/link";
 import * as React from "react";
 import { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import GVButton from "shared/components/gv-button";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
@@ -24,6 +23,7 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import useAnchor from "shared/hooks/anchor.hook";
+import { useTranslation } from "shared/i18n";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
@@ -34,7 +34,7 @@ import {
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
 
-interface Props extends WithTranslation {
+interface Props {
   program: ProgramDetails;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
@@ -43,62 +43,48 @@ interface Props extends WithTranslation {
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
-const _ProgramCard: React.FC<Props> = ({
-  t,
-  program,
-  toggleFavorite,
-  title
-}) => {
+const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleToggleFavorite = useCallback(
     () => toggleFavorite(program.id, program.personalDetails.isFavorite),
     [program]
   );
+  const { t } = useTranslation();
   return (
     <div className="table-cards__card">
       <div className="table-cards__row">
         <div className="table-cards__avatar">
           <Link
-            to={{
+            href={{
               pathname: composeProgramDetailsUrl(program.url),
               state: `/ ${title}`
             }}
           >
-            <AssetAvatar
-              url={program.logo}
-              levelProgress={program.levelProgress}
-              level={program.level}
-              alt={program.title}
-              color={program.color}
-              size="medium"
-              tooltip={
-                <LevelTooltip
-                  level={program.level}
-                  canLevelUp={program.rating.canLevelUp}
-                />
-              }
-            />
+            <a>
+              <AssetAvatar
+                url={program.logo}
+                levelProgress={program.levelProgress}
+                level={program.level}
+                alt={program.title}
+                color={program.color}
+                size="medium"
+                tooltip={
+                  <LevelTooltip
+                    level={program.level}
+                    canLevelUp={program.rating.canLevelUp}
+                  />
+                }
+              />
+            </a>
           </Link>
         </div>
         <div className="table-cards__main-info">
           <div className="table-cards__title-wrapper">
-            <Link
-              className="table-cards__title"
-              to={{
-                pathname: composeProgramDetailsUrl(program.url),
-                state: `/ ${title}`
-              }}
-            >
-              {program.title}
+            <Link href={composeProgramDetailsUrl(program.url)}>
+              <a className="table-cards__title">{program.title}</a>
             </Link>
-            <Link
-              className="table-cards__name"
-              to={{
-                pathname: composeManagerDetailsUrl(program.manager.url),
-                state: `/ ${title}`
-              }}
-            >
-              {program.manager.username}
+            <Link href={composeManagerDetailsUrl(program.manager.url)}>
+              <a className="table-cards__name">{program.manager.username}</a>
             </Link>
           </div>
           <div className="table-cards__actions">
@@ -111,19 +97,16 @@ const _ProgramCard: React.FC<Props> = ({
               onClose={clearAnchor}
             >
               <div className="popover-list">
-                <Link
-                  to={{
-                    pathname: composeProgramDetailsUrl(program.url),
-                    state: `/ ${title}`
-                  }}
-                >
-                  <GVButton
-                    variant="text"
-                    color="secondary"
-                    onClick={clearAnchor}
-                  >
-                    {t("program-actions.details")}
-                  </GVButton>
+                <Link href={composeProgramDetailsUrl(program.url)}>
+                  <a>
+                    <GVButton
+                      variant="text"
+                      color="secondary"
+                      onClick={clearAnchor}
+                    >
+                      {t("program-actions.details")}
+                    </GVButton>
+                  </a>
                 </Link>
                 {program.personalDetails &&
                   !program.personalDetails.isFavorite && (
@@ -249,5 +232,5 @@ const _ProgramCard: React.FC<Props> = ({
   );
 };
 
-const ProgramCard = translate()(React.memo(_ProgramCard));
+const ProgramCard = React.memo(_ProgramCard);
 export default ProgramCard;
