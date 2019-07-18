@@ -9,7 +9,7 @@ import replaceParams from "shared/utils/replace-params";
 import NavigationTabs from "./navigation-tabs";
 
 const _NavigationTabsContainer: React.FC<Props> = props => (
-  <NavigationTabs tab={props.match.params.tab} {...props} />
+  <NavigationTabs tab={props.exploreTabName} {...props} />
 );
 
 interface Props extends OwnProps, DispatchProps {
@@ -44,7 +44,6 @@ const mapDispatchToProps = (
 
 const NavigationTabsContainer = compose<React.ComponentType<OwnProps>>(
   isAuthenticated,
-  withRouter,
   connect(
     null,
     mapDispatchToProps

@@ -22,7 +22,10 @@ const decodeToken = (token: string): any => {
 const storeToken = (token: string): void => {
   const tokenName = getTokenName();
   try {
-    cookie.set(tokenName, token, { secure: true, expires: 1000 });
+    cookie.set(tokenName, token, {
+      secure: process.env.NODE_ENV === "production",
+      expires: 1000
+    });
   } catch (e) {}
 };
 
