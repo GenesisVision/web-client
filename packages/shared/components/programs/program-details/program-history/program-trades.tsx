@@ -2,8 +2,8 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { OrderModel } from "gv-api-web";
 import moment from "moment";
-import { useCallback } from "react";
 import * as React from "react";
+import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
@@ -25,7 +25,9 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import Tooltip from "shared/components/tooltip/tooltip";
 import { DEFAULT_DECIMAL_SCALE, IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import filesService from "shared/services/file-service";
 import { formatValue } from "shared/utils/formatter";
+
 import DownloadButtonToolbar from "./download-button-toolbar";
 
 const _ProgramTrades: React.FC<Props> = ({
@@ -48,6 +50,7 @@ const _ProgramTrades: React.FC<Props> = ({
         <DownloadButtonToolbar
           filtering={filtering!.dateRange}
           programId={programId}
+          getExportFileUrl={filesService.getTradesExportFileUrl}
         />
       )}
       getItems={fetchProgramTrades}
