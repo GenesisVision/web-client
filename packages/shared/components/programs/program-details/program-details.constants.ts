@@ -126,6 +126,9 @@ export const PROGRAM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
     name: "period"
   },
   {
+    name: "date-start"
+  },
+  {
     name: "balance"
   },
   {
@@ -145,6 +148,9 @@ export const PROGRAM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
 export const PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
   {
     name: "period"
+  },
+  {
+    name: "date-start"
   },
   {
     name: "balance"

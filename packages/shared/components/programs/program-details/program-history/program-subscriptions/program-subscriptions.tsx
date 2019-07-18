@@ -31,7 +31,7 @@ import {
   PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS,
   PROGRAM_SUBSCRIBERS_FILTERS,
   SUBSCRIBERS_STATUS_TYPE
-} from "../program-details.constants";
+} from "../../program-details.constants";
 import SubscriptionsFeesTooltip from "./program-subscriptions-fees-tooltip";
 
 const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
