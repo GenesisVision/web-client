@@ -14,7 +14,7 @@ import { ILoginFooterProps } from "../login-footer/login-footer";
 const _AuthLayout: NextPage<Props> = ({
   role,
   children,
-  title,
+  titleKey,
   quoteNo,
   Footer,
   footerAuthRoute
@@ -42,7 +42,7 @@ const _AuthLayout: NextPage<Props> = ({
       </div>
       <div className="auth__right">
         <div className="auth__content">
-          {title && <h1>{title}</h1>}
+          {titleKey && <h1>{t(titleKey)}</h1>}
           {children}
         </div>
         {Footer && (
@@ -60,7 +60,7 @@ interface Props extends OwnProps, WithRoleProps {}
 interface OwnProps {
   Footer: React.ComponentType<ILoginFooterProps>;
   footerAuthRoute: string;
-  title: string;
+  titleKey: string;
   quoteNo: number;
   children: React.ReactChild;
 }

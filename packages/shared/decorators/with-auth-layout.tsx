@@ -8,8 +8,8 @@ const QUOTES_COUNT = 5;
 
 const withAuthLayout = ({ footerAuthRoute, titleKey, Footer }: IAuthLayout) => (
   WrappedComponent: NextPage<any>
-) => {
-  class Auth extends Component<{ quoteNo: number } & WithTranslation> {
+) =>
+  class extends Component<{ quoteNo: number } & WithTranslation> {
     static async getInitialProps(ctx: NextPageContext) {
       const quoteNo = Math.floor(Math.random() * QUOTES_COUNT + 1);
       const componentProps =
@@ -26,7 +26,7 @@ const withAuthLayout = ({ footerAuthRoute, titleKey, Footer }: IAuthLayout) => (
       return (
         <AuthLayout
           Footer={Footer}
-          title={this.props.t(titleKey)}
+          titleKey={titleKey}
           footerAuthRoute={footerAuthRoute}
           quoteNo={this.props.quoteNo}
         >
@@ -34,9 +34,7 @@ const withAuthLayout = ({ footerAuthRoute, titleKey, Footer }: IAuthLayout) => (
         </AuthLayout>
       );
     }
-  }
-  return withTranslation()(Auth);
-};
+  };
 
 export default withAuthLayout;
 
