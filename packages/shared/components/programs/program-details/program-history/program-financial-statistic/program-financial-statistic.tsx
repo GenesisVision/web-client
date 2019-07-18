@@ -23,8 +23,8 @@ import {
   PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
-} from "../program-details.constants";
-import DownloadButtonToolbarAuth from "./download-button-toolbar-auth";
+} from "../../program-details.constants";
+import DownloadButtonToolbarAuth from "../download-button-toolbar/download-button-toolbar-auth";
 
 const _ProgramFinancialStatistic: React.FC<Props> = ({
   t,
@@ -84,9 +84,13 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
         } = period.managerStatistic;
         return (
           <TableRow stripy>
-            <TableCell>{period.number}</TableCell>
-            <TableCell>{moment(new Date(period.dateFrom)).format()}</TableCell>
-            <TableCell>
+            <TableCell className="program-financial-statistic__cell">
+              {period.number}
+            </TableCell>
+            <TableCell className="program-financial-statistic__cell">
+              {moment(new Date(period.dateFrom)).format()}
+            </TableCell>
+            <TableCell className="program-financial-statistic__cell">
               <NumberFormat
                 value={formatCurrencyValue(balance, currency)}
                 displayType="text"
@@ -94,7 +98,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
                 suffix={` ${currency}`}
               />
             </TableCell>
-            <TableCell>
+            <TableCell className="program-financial-statistic__cell">
               <Profitability value={profit} prefix={PROFITABILITY_PREFIX.SIGN}>
                 <NumberFormat
                   value={formatCurrencyValue(profit, currency)}
@@ -105,21 +109,21 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
                 />
               </Profitability>
             </TableCell>
-            <TableCell className="program-financial-statistic__cell">
+            <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
               <NumberFormat
                 value={successFee}
                 suffix={` ${currency}`}
                 displayType="text"
               />
             </TableCell>
-            <TableCell className="program-financial-statistic__cell">
+            <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
               <NumberFormat
                 value={entryFee}
                 suffix={` ${currency}`}
                 displayType="text"
               />
             </TableCell>
-            <TableCell className="program-financial-statistic__cell">
+            <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
               {withdraw ? (
                 <Profitability
                   prefix={PROFITABILITY_PREFIX.SIGN}
@@ -147,7 +151,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
               )}
             </TableCell>
             {isGMProgram && (
-              <TableCell className="program-financial-statistic__cell">
+              <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
                 <NumberFormat
                   value={commissionRebate}
                   displayType="text"
