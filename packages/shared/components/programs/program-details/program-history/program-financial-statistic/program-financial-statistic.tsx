@@ -1,3 +1,6 @@
+import "./program-financial-statistic.scss";
+
+import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -40,6 +43,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   );
   return (
     <TableModule
+      className="program-financial-statistic"
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadButtonToolbarAuth
           dateRange={filtering!.dateRange}
@@ -81,6 +85,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
         return (
           <TableRow stripy>
             <TableCell>{period.number}</TableCell>
+            <TableCell>{moment(new Date(period.dateFrom)).format()}</TableCell>
             <TableCell>
               <NumberFormat
                 value={formatCurrencyValue(balance, currency)}
@@ -100,21 +105,21 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
                 />
               </Profitability>
             </TableCell>
-            <TableCell>
+            <TableCell className="program-financial-statistic__cell">
               <NumberFormat
                 value={successFee}
                 suffix={` ${currency}`}
                 displayType="text"
               />
             </TableCell>
-            <TableCell>
+            <TableCell className="program-financial-statistic__cell">
               <NumberFormat
                 value={entryFee}
                 suffix={` ${currency}`}
                 displayType="text"
               />
             </TableCell>
-            <TableCell>
+            <TableCell className="program-financial-statistic__cell">
               {withdraw ? (
                 <Profitability
                   prefix={PROFITABILITY_PREFIX.SIGN}
@@ -142,7 +147,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
               )}
             </TableCell>
             {isGMProgram && (
-              <TableCell>
+              <TableCell className="program-financial-statistic__cell">
                 <NumberFormat
                   value={commissionRebate}
                   displayType="text"
