@@ -1,8 +1,7 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { ForgotPasswordViewModel } from "gv-api-web";
-import * as React from "react";
+import Link from "next/link";
+import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
@@ -27,13 +26,15 @@ const _ForgotPasswordForm: React.FC<
     />
     <FormError error={error} />
     <div className="forgot-password__navigation">
-      <Link to={LOGIN_ROUTE} className="forgot-password__btn-back">
-        <GVButton variant="text" color="secondary">
-          <>
-            {" "}
-            &larr; {t("auth.password-restore.forgot-password.back-button-text")}
-          </>
-        </GVButton>
+      <Link href={LOGIN_ROUTE}>
+        <a className="forgot-password__btn-back">
+          <GVButton variant="text" color="secondary">
+            <>
+              &larr;{" "}
+              {t("auth.password-restore.forgot-password.back-button-text")}
+            </>
+          </GVButton>
+        </a>
       </Link>
       <GVButton
         id="forgotPassword"

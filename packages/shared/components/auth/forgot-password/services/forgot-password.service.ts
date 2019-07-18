@@ -1,9 +1,9 @@
-import { push } from "connected-react-router";
 import {
   CaptchaCheckResult,
   ForgotPasswordViewModel,
   ResetPasswordViewModel
 } from "gv-api-web";
+import Router from "next/router";
 import { Dispatch } from "redux";
 import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
@@ -34,7 +34,7 @@ export const forgotPassword = (data: ForgotPasswordViewModel) => (
 ) =>
   dispatch(forgotPasswordAction(data)).then(() => {
     dispatch(emailPendingActions.saveEmail(data));
-    dispatch(push(EMAIL_PENDING_ROUTE));
+    Router.push(EMAIL_PENDING_ROUTE);
   });
 
 export const restorePassword = (
