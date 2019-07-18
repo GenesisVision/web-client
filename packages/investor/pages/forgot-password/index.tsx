@@ -11,6 +11,6 @@ const ForgotPassword: NextPage = () => {
 
 export default withAuthLayout({
   titleKey: "auth.password-restore.title",
-  signUpRoute: SIGNUP_ROUTE,
+  footerAuthRoute: SIGNUP_ROUTE,
   Footer: LoginFooter
 })(ForgotPassword);

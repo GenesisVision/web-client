@@ -1,5 +1,5 @@
-import { push } from "connected-react-router";
 import { CaptchaCheckResult } from "gv-api-web";
+import Router from "next/router";
 import emailPendingActions from "shared/actions/email-pending-actions";
 import { SetSubmittingType } from "shared/utils/types";
 
@@ -31,7 +31,7 @@ export const signUp: SingUpFuncType = (
   )
     .then(() => {
       dispatch(emailPendingActions.saveEmail({ email }));
-      dispatch(push(SIGNUP_ROUTE_PENDING));
+      Router.push(SIGNUP_ROUTE_PENDING);
     })
     .catch(() => {
       setSubmitting!(false);

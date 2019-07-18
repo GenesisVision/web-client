@@ -11,16 +11,13 @@ import { HOME_ROUTE } from "shared/routes/app.routes";
 
 import { ILoginFooterProps } from "../login-footer/login-footer";
 
-const QUOTES_COUNT = 5;
-
 const _AuthLayout: NextPage<Props> = ({
   role,
   children,
   title,
   quoteNo,
   Footer,
-  SIGNUP_ROUTE,
-  LOGIN_ROUTE
+  footerAuthRoute
 }) => {
   const [t] = useTranslation();
   return (
@@ -50,7 +47,7 @@ const _AuthLayout: NextPage<Props> = ({
         </div>
         {Footer && (
           <div className="auth__footer">
-            <Footer ROUTE={SIGNUP_ROUTE || LOGIN_ROUTE!} />
+            <Footer ROUTE={footerAuthRoute} />
           </div>
         )}
       </div>
@@ -62,10 +59,9 @@ interface Props extends OwnProps, WithRoleProps {}
 
 interface OwnProps {
   Footer: React.ComponentType<ILoginFooterProps>;
+  footerAuthRoute: string;
   title: string;
   quoteNo: number;
-  SIGNUP_ROUTE?: string;
-  LOGIN_ROUTE?: string;
   children: React.ReactChild;
 }
 

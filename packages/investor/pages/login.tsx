@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default withAuthLayout({
-  signUpRoute: SIGNUP_ROUTE,
+  footerAuthRoute: SIGNUP_ROUTE,
   Footer: LoginFooter,
   titleKey: "auth.login.title"
 })(Login);

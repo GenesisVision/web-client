@@ -6,7 +6,7 @@ import { ILoginFooterProps } from "shared/components/auth/components/login-foote
 
 const QUOTES_COUNT = 5;
 
-const withAuthLayout = ({ signUpRoute, titleKey, Footer }: IAuthLayout) => (
+const withAuthLayout = ({ footerAuthRoute, titleKey, Footer }: IAuthLayout) => (
   WrappedComponent: NextPage<any>
 ) => {
   class Auth extends Component<{ quoteNo: number } & WithTranslation> {
@@ -27,7 +27,7 @@ const withAuthLayout = ({ signUpRoute, titleKey, Footer }: IAuthLayout) => (
         <AuthLayout
           Footer={Footer}
           title={this.props.t(titleKey)}
-          SIGNUP_ROUTE={signUpRoute}
+          footerAuthRoute={footerAuthRoute}
           quoteNo={this.props.quoteNo}
         >
           <WrappedComponent {...this.props} />
@@ -41,7 +41,7 @@ const withAuthLayout = ({ signUpRoute, titleKey, Footer }: IAuthLayout) => (
 export default withAuthLayout;
 
 interface IAuthLayout {
-  signUpRoute: string;
+  footerAuthRoute: string;
   titleKey: string;
   Footer: React.ComponentType<ILoginFooterProps>;
 }

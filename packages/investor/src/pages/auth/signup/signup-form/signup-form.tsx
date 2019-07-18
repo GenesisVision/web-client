@@ -5,7 +5,7 @@ import {
   PowResult,
   RegisterInvestorViewModel
 } from "gv-api-web";
-import * as React from "react";
+import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
@@ -56,14 +56,14 @@ const _SignUpForm: React.FC<
       label={
         <span>
           {t("auth.signup.i-accept-text")}{" "}
-          <a
+          {/* <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://genesis.vision/privacy-policy.html"
             onClick={e => e.stopPropagation()}
           >
             {t("auth.signup.privacy-policy-text")}
-          </a>
+          </a> */}
         </span>
       }
       component={GVCheckbox}
@@ -75,14 +75,14 @@ const _SignUpForm: React.FC<
       label={
         <span>
           {t("auth.signup.i-accept-text")}{" "}
-          <a
+          {/* <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://genesis.vision/terms.html"
             onClick={e => e.stopPropagation()}
           >
             {t("auth.signup.accept-terms-text")}
-          </a>
+          </a> */}
         </span>
       }
       component={GVCheckbox}
