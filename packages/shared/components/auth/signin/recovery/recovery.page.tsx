@@ -1,15 +1,14 @@
 import "./recovery.scss";
 
-import { LocationState } from "history";
-import * as React from "react";
+import React from "react";
 
 import { CODE_TYPE } from "../signin.actions";
 import SignInContainer from "../signin.container";
 import RecoveryCodeForm from "./recovery-code-form";
 
-const _RecoveryPage: React.FC<LocationProps> = ({ location }) => (
+const _RecoveryPage: React.FC<Props> = ({ redirectFrom }) => (
   <SignInContainer
-    location={location}
+    redirectFrom={redirectFrom}
     type={CODE_TYPE.RECOVERY}
     className="recovery-page"
     renderForm={(handle, email, errorMessage) => (
@@ -18,10 +17,9 @@ const _RecoveryPage: React.FC<LocationProps> = ({ location }) => (
   />
 );
 
-interface LocationProps {
-  location: LocationState;
+interface Props {
+  redirectFrom: string;
 }
-
 
 const RecoveryPage = React.memo(_RecoveryPage);
 export default RecoveryPage;

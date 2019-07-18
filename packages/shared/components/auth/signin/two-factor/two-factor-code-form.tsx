@@ -12,7 +12,7 @@ import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
-import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.routes";
+import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.constants";
 
 class _TwoFactorCodeForm extends React.PureComponent<
   InjectedFormikProps<Props, ITwoFactorCodeFormValues>,
