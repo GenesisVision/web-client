@@ -11,11 +11,13 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
   programId
 }) => {
   const loadFile = () => {
+    const fileName =
+      dateRange.dateStart && dateRange.dateEnd
+        ? `${dateRange.dateStart}_${dateRange.dateEnd}`
+        : dateRange.type;
     filesService
       .getStatisticExportFile(programId, dateRange)
-      .then(blob =>
-        saveAs(blob, `${dateRange.dateStart}_${dateRange.dateEnd}.xlsx`)
-      );
+      .then(blob => saveAs(blob, `statistic_${fileName}.xlsx`));
   };
   return (
     <div className="dashboard__button">
