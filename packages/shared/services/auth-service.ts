@@ -1,10 +1,9 @@
+import cookie from "js-cookie";
 //@ts-ignore TODO fix types
 import * as jwt_decode from "jwt-decode";
 
 import { getTokenName } from "../utils/get-token-name";
 import { Nullable } from "../utils/types";
-
-const AUTH_TOKEN = getTokenName();
 
 const canParseToken = (token: string): boolean => {
   try {
@@ -21,14 +20,16 @@ const decodeToken = (token: string): any => {
 };
 
 const storeToken = (token: string): void => {
+  const tokenName = getTokenName();
   try {
-    localStorage.setItem(AUTH_TOKEN, token);
+    cookie.set(tokenName, token, { secure: true, expires: 1000 });
   } catch (e) {}
 };
 
 const getToken = (): Nullable<string> => {
+  const tokenName = getTokenName();
   try {
-    return localStorage.getItem(AUTH_TOKEN);
+    return cookie.get(tokenName) || null;
   } catch (e) {
     return null;
   }
@@ -54,17 +55,9 @@ const isAuthenticated = (): boolean => {
   return decodedToken.exp > dateNowSec;
 };
 
-const getUserName = (): string => {
-  try {
-    const token = localStorage.getItem(AUTH_TOKEN);
-    return isAuthenticated() ? decodeToken(token || "").unique_name : "";
-  } catch (e) {
-    return "";
-  }
-};
-
 const removeToken = (): void => {
-  localStorage.removeItem(AUTH_TOKEN);
+  const tokenName = getTokenName();
+  cookie.remove(tokenName);
 };
 
 const authService = {
@@ -73,8 +66,7 @@ const authService = {
   getToken,
   getTokenData,
   storeToken,
-  removeToken,
-  getUserName
+  removeToken
 };
 
 export default authService;

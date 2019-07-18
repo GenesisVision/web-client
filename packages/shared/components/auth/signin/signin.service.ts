@@ -1,5 +1,5 @@
-import { push } from "connected-react-router";
 import { CaptchaCheckResult } from "gv-api-web";
+import Router from "next/router";
 import { Dispatch } from "redux";
 import { setTwoFactorRequirementAction } from "shared/actions/2fa-actions";
 import authActions from "shared/actions/auth-actions";
@@ -20,7 +20,7 @@ import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./signin.routes";
 
 export const client = "Web";
 export const redirectToLogin = () => {
-  push(LOGIN_ROUTE);
+  Router.push(LOGIN_ROUTE);
 };
 
 export const login: LoginFuncType = (method, fromPath, type) => (
@@ -46,7 +46,7 @@ export const login: LoginFuncType = (method, fromPath, type) => (
       authService.storeToken(response.value);
       dispatch(authActions.updateTokenAction());
       if (type) dispatch(clearTwoFactorData());
-      dispatch(push(from));
+      Router.push(from);
     })
     .catch((e: ResponseError) => {
       if (e.code === "RequiresTwoFactor") {
@@ -58,7 +58,7 @@ export const login: LoginFuncType = (method, fromPath, type) => (
           })
         );
         dispatch(setTwoFactorRequirementAction(true));
-        dispatch(push(LOGIN_ROUTE_TWO_FACTOR_ROUTE));
+        Router.push(LOGIN_ROUTE_TWO_FACTOR_ROUTE);
       } else {
         setSubmitting!(false);
       }
@@ -80,7 +80,7 @@ export const logout: logoutFuncType = () => dispatch => {
   dispatch(authActions.logoutAction());
   dispatch(platformActions.fetchPlatformSettings);
   dispatch(windowResizeAction());
-  dispatch(push(HOME_ROUTE));
+  Router.push(HOME_ROUTE);
 };
 
 export type LoginFuncType = (
