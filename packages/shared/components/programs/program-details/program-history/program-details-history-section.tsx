@@ -94,7 +94,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
               value={TABS.EVENTS}
               label={t("program-details-page.history.tabs.events")}
               count={eventsCount}
-              visible={isAuthenticated && isInvested}
+              visible={isAuthenticated && (isInvested || !!eventsCount)}
             />
             <GVTab
               value={TABS.SUBSCRIBERS}
