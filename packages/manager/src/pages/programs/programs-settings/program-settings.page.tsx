@@ -26,7 +26,6 @@ import { SetSubmittingType } from "shared/utils/types";
 import ClosePeriodContainer from "../program-details/components/close-period/close-period-container";
 import CloseProgramContainer from "../program-details/components/close-program/close-program-container";
 import { ChangeBrokerFormValues } from "./broker-edit";
-import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
 import ProgramSettings from "./program-settings";
 import ProgramSettingsLoader from "./program-settings.loader";
 import {
@@ -37,11 +36,6 @@ import {
 import { IProgramSignalFormValues } from "./signaling-edit";
 
 const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
-  const [
-    isCancelChangeBrokerOpen,
-    setCancelChangeBrokerOpen,
-    setCancelChangeBrokerClose
-  ] = useIsOpen();
   const [
     isClosePeriodOpen,
     setClosePeriodOpen,
@@ -136,30 +130,10 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
         brokersInfo={brokersInfo!}
         changeBroker={changeBroker}
         editProgram={editProgram}
-        cancelChangeBroker={setCancelChangeBrokerOpen}
+        cancelChangeBroker={cancelChangeBroker}
       />
       {details && (
         <>
-          <CancelChangeBroker
-            open={isCancelChangeBrokerOpen}
-            onClose={setCancelChangeBrokerClose}
-            onApply={cancelChangeBroker}
-            id={details.id}
-            brokerFrom={
-              brokersInfo &&
-              brokersInfo.brokers.find(
-                broker =>
-                  !!broker.accountTypes.find(
-                    accountType =>
-                      accountType.id === brokersInfo.currentAccountTypeId
-                  )
-              )!.name
-            }
-            brokerTo={
-              details.personalProgramDetails.migration &&
-              details.personalProgramDetails.migration.newBroker.name
-            }
-          />
           <ClosePeriodContainer
             open={isClosePeriodOpen}
             onClose={setClosePeriodClose}
