@@ -1,5 +1,5 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit";
+import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import {
@@ -39,8 +39,8 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   );
 
   const applyInvestmentChanges = useCallback(
-    (updateDetails: () => void) => () => {
-      updateDetails();
+    (updateDescription: () => void) => () => {
+      updateDescription();
     },
     []
   );
@@ -74,13 +74,14 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         )}
       </div>
       <ProgramDetailContext.Consumer>
-        {({ updateDetails }: IProgramDetailContext) => (
-          <ProgramDepositContainer
+        {({ updateDescription }: IProgramDetailContext) => (
+          <ProgramDeposit
+            condition={isAuthenticated}
             currency={programDescription.currency}
             open={isOpenInvestmentPopup}
             id={programDescription.id}
             onClose={setCloseInvestmentPopup}
-            onApply={applyInvestmentChanges(updateDetails)}
+            onApply={applyInvestmentChanges(updateDescription)}
           />
         )}
       </ProgramDetailContext.Consumer>

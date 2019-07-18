@@ -3,7 +3,7 @@ import * as React from "react";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import GVTextField, { GVTextFieldProps } from "shared/components/gv-text-field";
 
-class GVNumberFiled extends React.PureComponent<Props, State> {
+class GVNumberField extends React.PureComponent<Props, State> {
   state = {
     init: true
   };
@@ -50,4 +50,4 @@ interface State {
   init: boolean;
 }
 
-export default GVNumberFiled;
+export default GVNumberField;

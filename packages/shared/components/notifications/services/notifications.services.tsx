@@ -1,4 +1,4 @@
-import { NotificationList } from "gv-api-web";
+import { CancelablePromise, NotificationList } from "gv-api-web";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import {
   addNotificationsAction,
@@ -12,8 +12,8 @@ import authService from "shared/services/auth-service";
 import { RootThunkAction } from "shared/utils/types";
 
 export const serviceGetNotifications = (): RootThunkAction<
-  Promise<NotificationList>
-> => (dispatch, getState): Promise<NotificationList> => {
+  CancelablePromise<NotificationList>
+> => (dispatch, getState): CancelablePromise<NotificationList> => {
   const { notifications } = getState();
   return notificationsApi
     .v10NotificationsGet(authService.getAuthArg(), notifications.options)

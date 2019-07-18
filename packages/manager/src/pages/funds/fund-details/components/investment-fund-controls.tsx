@@ -41,8 +41,8 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
     this.setState({ popups });
   };
 
-  applyChanges = (updateDetails: () => void) => () => {
-    updateDetails();
+  applyChanges = (updateDescription: () => void) => () => {
+    updateDescription();
   };
 
   render() {
@@ -140,32 +140,33 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
           )}
         </div>
         <ProgramDetailContext.Consumer>
-          {({ updateDetails }) => (
+          {({ updateDescription }) => (
             <>
               <FundDepositContainer
+                condition={isAuthenticated}
                 open={popups[INVESTMENT_POPUP.INVEST]}
                 id={fundDescription.id}
                 onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-                onApply={this.applyChanges(updateDetails)}
+                onApply={this.applyChanges(updateDescription)}
               />
               <CloseFundContainer
                 open={popups[INVESTMENT_POPUP.CLOSE]}
                 onClose={this.closePopup(INVESTMENT_POPUP.CLOSE)}
-                onApply={this.applyChanges(updateDetails)}
+                onApply={this.applyChanges(updateDescription)}
                 id={fundDescription.id}
               />
               <AssetEditContainer
                 open={popups[INVESTMENT_POPUP.ASSET_EDIT]}
                 info={composeEditInfo}
                 onClose={this.closePopup(INVESTMENT_POPUP.ASSET_EDIT)}
-                onApply={this.applyChanges(updateDetails)}
+                onApply={this.applyChanges(updateDescription)}
                 type={ASSET.FUND}
               />
               <ReallocateContainer
                 id={fundDescription.id}
                 open={popups[INVESTMENT_POPUP.REALLOCATE]}
                 onClose={this.closePopup(INVESTMENT_POPUP.REALLOCATE)}
-                onApply={this.applyChanges(updateDetails)}
+                onApply={this.applyChanges(updateDescription)}
                 fundAssets={fundDescription.currentAssets}
               />
             </>

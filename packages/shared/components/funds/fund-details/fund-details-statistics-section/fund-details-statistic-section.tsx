@@ -6,7 +6,7 @@ import {
   ChartDefaultPeriod,
   DEFAULT_PERIOD
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
+import { HandlePeriodChangeType } from "shared/utils/types";
 
 import {
   FundDetailsProfitChart,
@@ -29,18 +29,20 @@ class FundDetailsStatisticSection extends React.PureComponent<Props, State> {
     let newState: State = {};
     if (state.prevProps !== props) {
       newState.prevProps = props;
-      newState.statistic = props.statistic;
-      newState.profitChart = props.profitChart;
-      newState.balanceChart = props.balanceChart;
+      if (props.statistic) {
+        newState.statistic = props.statistic.statistic;
+        newState.profitChart = props.statistic.profitChart;
+        newState.balanceChart = props.statistic.balanceChart;
+      }
       return newState;
     }
     return state;
   };
 
   handlePeriodChange: HandlePeriodChangeType = period => {
-    const { programId, currency, getFundStatistic } = this.props;
+    const { programId, getFundStatistic } = this.props;
 
-    getFundStatistic(programId, currency, period).then(data => {
+    getFundStatistic(programId, period).then(data => {
       this.setState({ period, ...data });
     });
   };
@@ -66,16 +68,12 @@ class FundDetailsStatisticSection extends React.PureComponent<Props, State> {
 }
 
 interface Props {
-  currency: CurrencyEnum;
   programId: string;
   getFundStatistic: (
     programId: string,
-    currency: CurrencyEnum,
     period: ChartDefaultPeriod
   ) => Promise<FundStatisticResult>;
-  statistic?: FundDetailsStatisticType;
-  profitChart?: FundDetailsProfitChart;
-  balanceChart?: FundBalanceChart;
+  statistic?: FundStatisticResult;
 }
 
 interface State {

@@ -26,6 +26,7 @@ const _BrokerCard: React.FC<OwnProps & WithTranslation> = ({
     BROKER_CARD_EXTRA_STATE.KYC_REQUIRED
   ].includes(cardState);
   const className = classnames("broker-card", {
+    "broker-card--clickable": !!onSelect,
     "broker-card--active": isActive,
     "broker-card--inactive": !isActive
   });
@@ -37,7 +38,7 @@ const _BrokerCard: React.FC<OwnProps & WithTranslation> = ({
   return (
     <div
       className={className}
-      onClick={isActive ? onSelect!(brokerName) : undefined}
+      onClick={isActive ? onSelect && onSelect(brokerName) : undefined}
     >
       {isSelected && (
         <div className="broker-card__selected-mark"> &#10004;</div>
@@ -51,11 +52,13 @@ const _BrokerCard: React.FC<OwnProps & WithTranslation> = ({
         src={filesService.getFileUrl(logo)}
         alt={brokerName}
       />
-      <TagBrokerContainer
-        tags={tags}
-        condition={tags.length !== 0}
-        className="broker-card__tags"
-      />
+      {tags && (
+        <TagBrokerContainer
+          tags={tags}
+          condition={tags.length !== 0}
+          className="broker-card__tags"
+        />
+      )}
     </div>
   );
 };
@@ -70,7 +73,7 @@ interface OwnProps {
   logo: string;
   brokerName: string;
   onSelect?(brokerName: string): () => void;
-  isSelected: boolean;
   cardState: BROKER_CARD_EXTRA_STATE;
-  tags: ProgramTag[];
+  tags?: ProgramTag[];
+  isSelected?: boolean;
 }

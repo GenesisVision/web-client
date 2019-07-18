@@ -9,9 +9,14 @@ import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { SetSubmittingType } from "shared/utils/types";
 
+import ChangeBroker from "./change-broker/change-broker";
+
 const _BrokerEdit: React.FC<Props> = ({
+  onSubmit,
+  submitForm,
   currentAccountTypeId,
   handleSubmit,
   values,
@@ -23,6 +28,11 @@ const _BrokerEdit: React.FC<Props> = ({
   id,
   brokers
 }) => {
+  const [
+    isChangeBrokerOpen,
+    setChangeBrokerOpen,
+    setChangeBrokerClose
+  ] = useIsOpen();
   const [selectedBroker, setSelectedBroker] = useState<Broker>(
     brokers.find(
       broker =>
@@ -55,6 +65,7 @@ const _BrokerEdit: React.FC<Props> = ({
     },
     [selectedBroker]
   );
+  const { brokerAccountTypeId, brokerFrom } = values;
   return (
     <form id="change-broker-form" onSubmit={handleSubmit}>
       <h3>{t("manager.program-settings.broker.title")}</h3>
@@ -107,10 +118,10 @@ const _BrokerEdit: React.FC<Props> = ({
         </GVFormikField>
       </div>
       <p className="program-edit__text program-edit__text--color-accent program-edit__text--padding-top">
-        {t("manager.program-settings.broker.text")}
+        {t("manager.program-settings.broker.text-change")}
       </p>
       <GVButton
-        type="submit"
+        onClick={setChangeBrokerOpen}
         color="primary"
         className="invest-form__submit-button"
         disabled={
@@ -121,6 +132,20 @@ const _BrokerEdit: React.FC<Props> = ({
       >
         {t("manager.program-settings.buttons.change-broker")}
       </GVButton>
+      <ChangeBroker
+        open={isChangeBrokerOpen}
+        onClose={setChangeBrokerClose}
+        onApply={()=>{}}
+        brokerFrom={brokerFrom.name}
+        brokerTo={
+          brokers.find(
+            broker =>
+              !!broker.accountTypes.find(
+                accountType => accountType.id === brokerAccountTypeId
+              )
+          )!.name
+        }
+      />
     </form>
   );
 };
@@ -142,6 +167,7 @@ interface OwnProps {
 }
 
 enum FIELDS {
+  brokerFrom = "brokerFrom",
   brokerAccountTypeId = "brokerAccountTypeId",
   leverage = "leverage"
 }
@@ -149,6 +175,7 @@ enum FIELDS {
 export interface ChangeBrokerFormValues {
   [FIELDS.brokerAccountTypeId]: string;
   [FIELDS.leverage]: number;
+  [FIELDS.brokerFrom]: Broker;
 }
 
 const BrokerEdit = compose<React.ComponentType<OwnProps>>(
@@ -156,12 +183,16 @@ const BrokerEdit = compose<React.ComponentType<OwnProps>>(
   withFormik<OwnProps, ChangeBrokerFormValues>({
     enableReinitialize: true,
     displayName: "edit-form",
-    mapPropsToValues: props => {
-      return {
-        [FIELDS.brokerAccountTypeId]: props.currentAccountTypeId,
-        [FIELDS.leverage]: props.leverage
-      };
-    },
+    mapPropsToValues: ({ brokers, currentAccountTypeId, leverage }) => ({
+      [FIELDS.brokerFrom]: brokers.find(
+        broker =>
+          !!broker.accountTypes.find(
+            accountType => accountType.id === currentAccountTypeId
+          )
+      )!,
+      [FIELDS.brokerAccountTypeId]: currentAccountTypeId,
+      [FIELDS.leverage]: leverage
+    }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }

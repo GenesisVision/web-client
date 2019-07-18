@@ -43,8 +43,8 @@ class _InvestmentProgramControls extends React.PureComponent<Props, State> {
     this.setState({ popups });
   };
 
-  applyChanges = (updateDetails: any) => () => {
-    updateDetails();
+  applyChanges = (updateDescription: any) => () => {
+    updateDescription();
   };
 
   render() {
@@ -68,7 +68,7 @@ class _InvestmentProgramControls extends React.PureComponent<Props, State> {
 
     return (
       <ProgramDetailContext.Consumer>
-        {({ updateDetails, isKycConfirmed }: IProgramDetailContext) => (
+        {({ updateDescription, isKycConfirmed }: IProgramDetailContext) => (
           <>
             <InvestmentProgramInfo
               isOwnProgram={isOwnProgram}
@@ -105,11 +105,12 @@ class _InvestmentProgramControls extends React.PureComponent<Props, State> {
               onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
             />
             <ProgramDeposit
+              condition={isAuthenticated}
               currency={programDescription.currency}
               open={popups[INVESTMENT_POPUP.INVEST]}
               id={programDescription.id}
               onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-              onApply={this.applyChanges(updateDetails)}
+              onApply={this.applyChanges(updateDescription)}
             />
           </>
         )}

@@ -63,14 +63,14 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
               label={
                 <TooltipLabel
                   tooltipContent={t("fund-details-page.tooltip.structure")}
-                  labelText={t("fund-details-page.history.structure.title")}
+                  labelText={t("fund-details-page.history.tabs.structure")}
                   className="tooltip__label--cursor-pointer"
                 />
               }
             />
             <GVTab
               value={TABS.EVENTS}
-              label={t("program-details-page.history.tabs.events")}
+              label={t("fund-details-page.history.tabs.events")}
               count={eventsCount}
               visible={isAuthenticated && isInvested}
             />
