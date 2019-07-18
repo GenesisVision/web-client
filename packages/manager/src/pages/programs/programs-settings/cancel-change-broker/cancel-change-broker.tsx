@@ -7,7 +7,6 @@ import { SetSubmittingType } from "shared/utils/types";
 const _CancelChangeBroker: React.FC<Props> = ({
   t,
   open,
-  id,
   onApply,
   onClose,
   brokerFrom,
@@ -25,8 +24,8 @@ const _CancelChangeBroker: React.FC<Props> = ({
       onClose={onClose}
       onCancel={onClose}
       onApply={handleApplyClick}
-      header={t("manager.program-settings.broker.text-confirm-title")}
-      body={t("manager.program-settings.broker.text-confirm", {
+      header={t("manager.program-settings.broker.text-cancel-confirm-title")}
+      body={t("manager.program-settings.broker.text-cancel-confirm", {
         brokerFrom,
         brokerTo
       })}
@@ -39,7 +38,6 @@ const _CancelChangeBroker: React.FC<Props> = ({
 interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
-  id: string;
   open: boolean;
   onApply(): void;
   onClose(): void;
