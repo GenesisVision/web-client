@@ -2,14 +2,14 @@ import { CancelablePromise } from "gv-api-web";
 import moment from "moment";
 import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
-import fileApi from "./api-client/file-api";
 import { FilteringType } from "../components/table/components/filtering/filter.type";
 import {
-  mapToTableItems,
-  TableItems
+  TableItems,
+  mapToTableItems
 } from "../components/table/helpers/mapper";
-import authService from "./auth-service";
+import fileApi from "./api-client/file-api";
 import programsApi from "./api-client/programs-api";
+import authService from "./auth-service";
 
 const getDateFilters = (dateRange: DateRangeFilterType): string => {
   const start = dateRange.dateStart
@@ -34,26 +34,17 @@ const getTradesExportFileUrl = (
   }`;
 };
 
-const getStatisticExportFileUrl = (
-  id: string,
-  dateRange: DateRangeFilterType
-): string => {
-  const filters = getDateFilters(dateRange);
-  return `${
-    process.env.REACT_APP_API_URL
-  }/v1.0/programs/${id}/periods/export/statistic${
-    dateRange.dateStart || dateRange.dateEnd ? filters : ""
-  }`;
-};
-
-export const fetchStatisticExportFileUrl = (
+const getStatisticExportFile = (
   id: string,
   dateRange: DateRangeFilterType
 ): CancelablePromise<Blob> => {
   const authorization = authService.getAuthArg();
-  const { dateStart, dateEnd } = dateRange;
+  const opts = {
+    dateFrom: dateRange.dateStart as Date,
+    dateTo: dateRange.dateEnd as Date
+  };
   return programsApi
-    .v10ProgramsByIdPeriodsExportStatisticGet(id, authorization)
+    .v10ProgramsByIdPeriodsExportStatisticGet(id, authorization, opts)
     .then(blob => blob);
 };
 
@@ -77,8 +68,7 @@ const uploadDocument = (file: File, authorization: string): Promise<string> => {
 
 const filesService = {
   getTradesExportFileUrl,
-  getStatisticExportFileUrl,
-  fetchStatisticExportFileUrl,
+  getStatisticExportFile,
   getFileUrl,
   uploadFile,
   uploadDocument
