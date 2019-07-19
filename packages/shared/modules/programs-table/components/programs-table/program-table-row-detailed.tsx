@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
 import moment from "moment";
-import Link from "next/link";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import { Icon } from "shared/components/icon/icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
@@ -32,6 +32,10 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
   onCollapseClick
 }) => {
   const { t } = useTranslation();
+  const programLinkProps = {
+    state: `/ ${title}`,
+    href: composeProgramDetailsUrl(program.url)
+  };
   return (
     <TableRow>
       <td
@@ -44,37 +48,38 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
           <div className="program-detailed__container program-detailed__container--inner">
             <div className="program-detailed__info">
               <div className="program-detailed__avatar">
-                <Link href={composeProgramDetailsUrl(program.url)}>
-                  <a>
-                    <AssetAvatar
-                      url={program.logo}
-                      level={program.level}
-                      levelProgress={program.levelProgress}
-                      alt={program.title}
-                      size="medium"
-                      color={program.color}
-                      tooltip={
-                        <LevelTooltip
-                          level={program.level}
-                          canLevelUp={program.rating.canLevelUp}
-                        />
-                      }
-                    />
-                  </a>
+                <Link {...programLinkProps}>
+                  <AssetAvatar
+                    url={program.logo}
+                    level={program.level}
+                    levelProgress={program.levelProgress}
+                    alt={program.title}
+                    size="medium"
+                    color={program.color}
+                    tooltip={
+                      <LevelTooltip
+                        level={program.level}
+                        canLevelUp={program.rating.canLevelUp}
+                      />
+                    }
+                  />
                 </Link>
                 <div className="program-detailed__avatar--name">
                   <div className="program-detailed__title">
-                    <Link href={composeProgramDetailsUrl(program.url)}>
-                      <a className="program-detailed__title-link">
-                        {program.title}
-                      </a>
+                    <Link
+                      className="program-detailed__title-link"
+                      {...programLinkProps}
+                    >
+                      {program.title}
                     </Link>
                   </div>
                   <div className="program-detailed__manager">
-                    <Link href={composeManagerDetailsUrl(program.manager.url)}>
-                      <a className="program-detailed__manager-link">
-                        {program.manager.username}
-                      </a>
+                    <Link
+                      className="program-detailed__manager-link"
+                      href={composeManagerDetailsUrl(program.manager.url)}
+                      state={programLinkProps.state}
+                    >
+                      {program.manager.username}
                     </Link>
                   </div>
                   <TagProgramContainer tags={program.tags} />
@@ -217,10 +222,11 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
               )}
               <div className="program-detailed__bottom-block">
                 <div className="program-detailed__details">
-                  <Link href={composeProgramDetailsUrl(program.url)}>
-                    <a className="program-detailed__details-link">
-                      {t("program-actions.details")}
-                    </a>
+                  <Link
+                    className="program-detailed__details-link"
+                    {...programLinkProps}
+                  >
+                    {t("program-actions.details")}
                   </Link>
                 </div>
               </div>

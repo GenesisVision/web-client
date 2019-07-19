@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
 import moment from "moment";
-import Link from "next/link";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
@@ -57,8 +57,10 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     tags,
     rating
   } = program;
-  const stopPropagationEvent = (event: React.MouseEvent) =>
-    event.stopPropagation();
+  const programLinkProps = {
+    state: `/ ${title}`,
+    href: composeProgramDetailsUrl(url)
+  };
   return (
     <TableRow
       className={classNames({
@@ -69,31 +71,25 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       {showRating && <TableCell>{rating.rating}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
-          <Link
-            href={composeProgramDetailsUrl(url)}
-            // onClick={stopPropagationEvent}
-          >
-            <a>
-              <AssetAvatar
-                url={logo}
-                level={level}
-                levelProgress={levelProgress}
-                alt={program.title}
-                color={color}
-                tooltip={
-                  <LevelTooltip level={level} canLevelUp={rating.canLevelUp} />
-                }
-              />
-            </a>
+          <Link {...programLinkProps}>
+            <AssetAvatar
+              url={logo}
+              level={level}
+              levelProgress={levelProgress}
+              alt={program.title}
+              color={color}
+              tooltip={
+                <LevelTooltip level={level} canLevelUp={rating.canLevelUp} />
+              }
+            />
           </Link>
           <div className="programs-table__cell--title">
             <div className="programs-table__cell--top">
               <Link
-                // className="programs-table__cell--link"
-                href={composeProgramDetailsUrl(url)}
-                // onClick={stopPropagationEvent}
+                className="programs-table__cell--link"
+                {...programLinkProps}
               >
-                <a className="programs-table__cell--link">{program.title}</a>
+                {program.title}
               </Link>
             </div>
             <div className="programs-table__cell--bottom">

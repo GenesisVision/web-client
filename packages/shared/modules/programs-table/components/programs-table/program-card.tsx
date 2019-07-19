@@ -1,12 +1,12 @@
 import { ProgramDetails } from "gv-api-web";
-import Link from "next/link";
-import * as React from "react";
 import { useCallback } from "react";
+import * as React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import GVButton from "shared/components/gv-button";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Link from "shared/components/link/link";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -50,41 +50,42 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
     [program]
   );
   const { t } = useTranslation();
+  const linkProps = {
+    href: composeProgramDetailsUrl(program.url),
+    state: `/ ${title}`
+  };
   return (
     <div className="table-cards__card">
       <div className="table-cards__row">
         <div className="table-cards__avatar">
-          <Link
-            href={{
-              pathname: composeProgramDetailsUrl(program.url),
-              state: `/ ${title}`
-            }}
-          >
-            <a>
-              <AssetAvatar
-                url={program.logo}
-                levelProgress={program.levelProgress}
-                level={program.level}
-                alt={program.title}
-                color={program.color}
-                size="medium"
-                tooltip={
-                  <LevelTooltip
-                    level={program.level}
-                    canLevelUp={program.rating.canLevelUp}
-                  />
-                }
-              />
-            </a>
+          <Link {...linkProps}>
+            <AssetAvatar
+              url={program.logo}
+              levelProgress={program.levelProgress}
+              level={program.level}
+              alt={program.title}
+              color={program.color}
+              size="medium"
+              tooltip={
+                <LevelTooltip
+                  level={program.level}
+                  canLevelUp={program.rating.canLevelUp}
+                />
+              }
+            />
           </Link>
         </div>
         <div className="table-cards__main-info">
           <div className="table-cards__title-wrapper">
-            <Link href={composeProgramDetailsUrl(program.url)}>
-              <a className="table-cards__title">{program.title}</a>
+            <Link className="table-cards__title" {...linkProps}>
+              {program.title}
             </Link>
-            <Link href={composeManagerDetailsUrl(program.manager.url)}>
-              <a className="table-cards__name">{program.manager.username}</a>
+            <Link
+              className="table-cards__name"
+              href={composeManagerDetailsUrl(program.manager.url)}
+              state={`/ ${title}`}
+            >
+              {program.manager.username}
             </Link>
           </div>
           <div className="table-cards__actions">
@@ -97,16 +98,14 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
               onClose={clearAnchor}
             >
               <div className="popover-list">
-                <Link href={composeProgramDetailsUrl(program.url)}>
-                  <a>
-                    <GVButton
-                      variant="text"
-                      color="secondary"
-                      onClick={clearAnchor}
-                    >
-                      {t("program-actions.details")}
-                    </GVButton>
-                  </a>
+                <Link {...linkProps}>
+                  <GVButton
+                    variant="text"
+                    color="secondary"
+                    onClick={clearAnchor}
+                  >
+                    {t("program-actions.details")}
+                  </GVButton>
                 </Link>
                 {program.personalDetails &&
                   !program.personalDetails.isFavorite && (
@@ -166,7 +165,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
                   {formatCurrencyValue(
                     program.statistic.balanceGVT.amount,
                     "GVT"
-                  )}{" "}
+                  )}
                   {"GVT"}
                 </div>
               )}
