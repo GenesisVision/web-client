@@ -17,6 +17,7 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
 
       return {
         info,
+        namespacesRequired: ["translation"],
         ...componentProps
       };
     }

@@ -7,10 +7,4 @@ const Programs = () => {
   return <ProgramsPage />;
 };
 
-Programs.getInitialProps = async () => {
-  return {
-    namespacesRequired: ["translation"]
-  };
-};
-
 export default withDefaultLayout(Programs);
