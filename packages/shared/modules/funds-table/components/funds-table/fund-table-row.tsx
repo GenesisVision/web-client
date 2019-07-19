@@ -1,7 +1,6 @@
 import { FundDetails } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
@@ -16,6 +15,8 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
+import Link from "../../../../components/link/link";
+
 const _FundsTableRow: React.FC<Props> = ({
   fund,
   isAuthenticated,
@@ -25,21 +26,11 @@ const _FundsTableRow: React.FC<Props> = ({
   <TableRow>
     <TableCell className="funds-table__cell funds-table__cell--name">
       <div className="funds-table__cell--avatar-title">
-        <Link
-          to={{
-            pathname: composeFundsDetailsUrl(fund.url),
-            state: `/ ${title}`
-          }}
-        >
+        <Link href={composeFundsDetailsUrl(fund.url)} state={`/ ${title}`}>
           <AssetAvatar url={fund.logo} alt={fund.title} color={fund.color} />
         </Link>
         <div className="funds-table__cell--title">
-          <Link
-            to={{
-              pathname: composeFundsDetailsUrl(fund.url),
-              state: `/ ${title}`
-            }}
-          >
+          <Link href={composeFundsDetailsUrl(fund.url)} state={`/ ${title}`}>
             <GVButton variant="text" color="secondary">
               {fund.title}
             </GVButton>
