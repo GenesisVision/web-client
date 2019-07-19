@@ -1,9 +1,9 @@
 import "./two-factor-code.scss";
 
 import { FormikProps, InjectedFormikProps, withFormik } from "formik";
-import * as React from "react";
+import Link from "next/link";
+import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
@@ -12,7 +12,7 @@ import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
-import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.routes";
+import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.constants";
 
 class _TwoFactorCodeForm extends React.PureComponent<
   InjectedFormikProps<Props, ITwoFactorCodeFormValues>,
@@ -70,8 +70,8 @@ class _TwoFactorCodeForm extends React.PureComponent<
           {t("auth.login.two-factor.recovery-info")}
         </div>
         <GVButton className="login-two-factor__recovery-link" variant="text">
-          <Link to={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}>
-            {t("auth.login.two-factor.link-to-recovery")}
+          <Link href={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}>
+            <a>{t("auth.login.two-factor.link-to-recovery")}</a>
           </Link>
         </GVButton>
 

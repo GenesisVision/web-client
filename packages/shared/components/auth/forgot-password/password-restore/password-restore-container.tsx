@@ -1,4 +1,3 @@
-import { replace } from "connected-react-router";
 import { ResetPasswordViewModel } from "gv-api-web";
 import React, { useCallback } from "react";
 import { connect } from "react-redux";
@@ -37,7 +36,7 @@ const _PasswordRestoreContainer: React.FC<Props> = ({
   );
 
   if (!queryParams.userId || !queryParams.code) {
-    service.showNotFoundPage();
+    Router.replace(NOT_FOUND_PAGE_ROUTE);
   }
   return <PasswordRestore error={errorMessage} onSubmit={handleSubmit} />;
 };
@@ -49,7 +48,6 @@ const mapStateToProps = (state: AuthRootState): StateProps => {
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch) => ({
   service: {
-    showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
     restorePassword: (
       data: ResetPasswordViewModel & { setSubmitting: SetSubmittingType }
     ) => dispatch(restorePassword(data))
@@ -69,7 +67,6 @@ interface OwnProps {
 
 interface DispatchProps {
   service: {
-    showNotFoundPage: () => void;
     restorePassword: (
       data: ResetPasswordViewModel & { setSubmitting: SetSubmittingType }
     ) => void;

@@ -1,4 +1,4 @@
-import { replace } from "connected-react-router";
+import Router from "next/router";
 import * as React from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
@@ -21,7 +21,7 @@ const _EmailConfirmContainer: React.FC<Props> = ({ queryParams, service }) => {
           .confirmEmail(queryParams.userId, queryParams.code)
           .catch(setErrorMessage)
           .then(setNotPending);
-      } else service.showNotFoundPage();
+      } else Router.replace(NOT_FOUND_PAGE_ROUTE);
     },
     [queryParams]
   );
@@ -33,8 +33,7 @@ const _EmailConfirmContainer: React.FC<Props> = ({ queryParams, service }) => {
 const mapDispatchToProps = (dispatch: MiddlewareDispatch) => ({
   service: {
     confirmEmail: (userId: string, code: string) =>
-      dispatch(confirmEmail(userId, code)),
-    showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
+      dispatch(confirmEmail(userId, code))
   }
 });
 
@@ -43,7 +42,6 @@ interface Props extends OwnProps, DispatchProps {}
 interface DispatchProps {
   service: {
     confirmEmail: (userId: string, code: string) => Promise<void>;
-    showNotFoundPage: () => void;
   };
 }
 
