@@ -5,8 +5,8 @@ import programs from "investor-web-portal/pages/programs";
 import { NextPageContext } from "next";
 import { NextRouter, useRouter } from "next/router";
 import qs from "qs";
-import * as React from "react";
 import { useContext } from "react";
+import * as React from "react";
 import { MergeProps, connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
@@ -194,7 +194,7 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
       )}
       paging={{
         totalPages: totalPages,
-        currentPage: parseInt(filters.page),
+        currentPage: parseInt(filters.page || 1),
         itemsOnPage: ITEMS_ON_PAGE,
         totalItems: data.total
       }}
