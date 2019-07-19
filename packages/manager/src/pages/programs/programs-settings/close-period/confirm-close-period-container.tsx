@@ -2,15 +2,15 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { closePeriod } from "shared/components/programs/program-details/services/program-details.service";
 
-import ClosePeriod from "./close-period";
+import ConfirmClosePeriod from "./confirm-close-period";
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   service: bindActionCreators({ closePeriod }, dispatch)
 });
 
-const ClosePeriodContainer = connect(
+const ConfirmClosePeriodContainer = connect(
   null,
   mapDispatchToProps
-)(ClosePeriod);
+)(ConfirmClosePeriod);
 
-export default ClosePeriodContainer;
+export default ConfirmClosePeriodContainer;

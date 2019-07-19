@@ -9,15 +9,12 @@ import {
 } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
-
-import ChangePasswordTradingAccount from "./components/program-controls/change-password-trading-account";
 import ProgramControls from "./components/program-controls/program-controls";
 
 const _ProgramDetailsPage: React.FC<StateProps> = ({ events }) => {
   const descriptionSection = {
     ProgramControls: ProgramControls,
-    ProgramWithdrawContainer: ProgramWithdrawContainer,
-    ChangePasswordTradingAccount: ChangePasswordTradingAccount
+    ProgramWithdrawContainer: ProgramWithdrawContainer
   };
 
   const historySection = {

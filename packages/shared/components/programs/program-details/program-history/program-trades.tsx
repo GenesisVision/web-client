@@ -2,8 +2,8 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { OrderModel } from "gv-api-web";
 import moment from "moment";
-import * as React from "react";
 import { useCallback } from "react";
+import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
@@ -28,7 +28,7 @@ import { CURRENCIES } from "shared/modules/currency-select/currency-select.const
 import filesService from "shared/services/file-service";
 import { formatValue } from "shared/utils/formatter";
 
-import DownloadButtonToolbar from "./download-button-toolbar";
+import DownloadButtonToolbar from "./download-button-toolbar/download-button-toolbar";
 
 const _ProgramTrades: React.FC<Props> = ({
   showSwaps,
