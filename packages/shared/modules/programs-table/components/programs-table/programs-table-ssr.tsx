@@ -2,8 +2,10 @@ import { push } from "connected-react-router";
 import { ProgramTag, ProgramsList } from "gv-api-web";
 import { Location } from "history";
 import programs from "investor-web-portal/pages/programs";
-import { useContext } from "react";
+import { useRouter } from "next/router";
+import qs from "qs";
 import * as React from "react";
+import { useContext } from "react";
 import { MergeProps, connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
@@ -96,6 +98,12 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
   const { t } = useTranslation();
   const context = useContext(platformContext);
   if (!context) return null;
+
+  const { asPath, pathname } = useRouter();
+
+  console.info(asPath, pathname, asPath.slice(pathname.length + 1));
+  console.info(qs.parse(asPath.slice(pathname.length + 1)));
+
   return (
     <ProgramsTable
       showSwitchView={showSwitchView}

@@ -14,8 +14,8 @@ const Programs: NextPage<{
 
 Programs.getInitialProps = async () => {
   const programs = await programsApi.v10ProgramsGet({
-    take: 12,
-    skip: 0
+    take: 32,
+    skip: 20
   });
   return {
     namespacesRequired: ["translation"],
