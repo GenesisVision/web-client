@@ -13,10 +13,10 @@ import authService from "./auth-service";
 
 const getDateFilters = (dateRange: DateRangeFilterType): string => {
   const start = dateRange.dateStart
-    ? `start=${moment(dateRange.dateStart as string).toISOString()}&`
+    ? `DateFrom=${moment(dateRange.dateStart as string).toISOString()}&`
     : "";
   const end = dateRange.dateEnd
-    ? `end=${moment(dateRange.dateEnd as string)
+    ? `DateTo=${moment(dateRange.dateEnd as string)
         .add(1, "day")
         .startOf("day")
         .toISOString()}`
@@ -30,6 +30,16 @@ const getTradesExportFileUrl = (
 ): string => {
   const filters = getDateFilters(dateRange);
   return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/trades/export${
+    dateRange.dateStart || dateRange.dateEnd ? filters : ""
+  }`;
+};
+
+const getPeriodExportFileUrl = (
+  id: string,
+  dateRange: DateRangeFilterType
+): string => {
+  const filters = getDateFilters(dateRange);
+  return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/periods/export${
     dateRange.dateStart || dateRange.dateEnd ? filters : ""
   }`;
 };
@@ -69,6 +79,7 @@ const uploadDocument = (file: File, authorization: string): Promise<string> => {
 const filesService = {
   getTradesExportFileUrl,
   getStatisticExportFile,
+  getPeriodExportFileUrl,
   getFileUrl,
   uploadFile,
   uploadDocument
