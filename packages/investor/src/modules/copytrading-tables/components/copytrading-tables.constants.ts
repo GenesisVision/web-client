@@ -103,7 +103,7 @@ export const COPYTRADING_TRADES_HISTORY_FILTERS = [
       composeApiRequestValue: composeRequestValueFunc("dateFrom", "dateTo"),
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
+        type: DATA_RANGE_FILTER_TYPES.LAST_MONTH
       }
     })
   }
@@ -112,6 +112,6 @@ export const COPYTRADING_TRADES_HISTORY_FILTERS = [
 export const COPYTRADING_TRADES_HISTORY_DEFAULT_FILTERING = {
   dateRange: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
+    type: DATA_RANGE_FILTER_TYPES.LAST_MONTH
   }
 };

@@ -31,9 +31,6 @@ export interface IDescriptionSection {
   ProgramReinvestingWidget?: React.ComponentType<
     IProgramReinvestingContainerOwnProps
   >;
-  ChangePasswordTradingAccount?: React.ComponentType<
-    IChangePasswordTradingAccountProps
-  >;
 }
 
 export type HistoryCountsType = {

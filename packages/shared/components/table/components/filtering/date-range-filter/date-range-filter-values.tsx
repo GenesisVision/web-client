@@ -34,7 +34,7 @@ const _DateRangeFilterValues: React.FC<
           <SecondInput />
         </>
       );
-    case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:
+    case DATA_RANGE_FILTER_TYPES.LAST_MONTH:
       return (
         <>
           <FirstInput

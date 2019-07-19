@@ -37,10 +37,10 @@ const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
       };
       service
         .changePasswordTradingAccount(id, model)
-        .then(() => handleClose())
-        .catch(error => {
+        .then(handleClose)
+        .catch(setErrorMessage)
+        .finally(() => {
           setSubmitting(false);
-          setErrorMessage(error);
         });
     },
     [id]

@@ -27,10 +27,10 @@ import {
 import { RootState } from "shared/reducers/root-reducer";
 
 import { HistoryCountsType } from "../program-details.types";
-import ProgramFinancialStatistic from "./program-financial-statistic";
+import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
 import ProgramOpenPositions from "./program-open-positions";
 import ProgramPeriodHistory from "./program-period-history";
-import ProgramSubscriptions from "./program-subscriptions";
+import ProgramSubscriptions from "./program-subscriptions/program-subscriptions";
 
 const EVENTS_FILTERING = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
