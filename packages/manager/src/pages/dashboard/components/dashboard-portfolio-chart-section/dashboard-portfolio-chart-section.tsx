@@ -96,12 +96,12 @@ class _DashboardPortfolioChartSection extends React.PureComponent<
             <GVTab
               value={TABS.PROGRAMS}
               label={t(`manager.dashboard-page.assets.programs`)}
-              visible={!!assets && !!assets.programs}
+              visible={!!assets && !!assets.programs.length}
             />
             <GVTab
               value={TABS.FUNDS}
               label={t(`manager.dashboard-page.assets.funds`)}
-              visible={!!assets && !!assets.funds}
+              visible={!!assets && !!assets.funds.length}
             />
           </GVTabs>
         </div>
