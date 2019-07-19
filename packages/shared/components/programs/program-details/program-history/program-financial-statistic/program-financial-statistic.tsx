@@ -153,7 +153,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
             {isGMProgram && (
               <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
                 <NumberFormat
-                  value={commissionRebate}
+                  value={formatCurrencyValue(commissionRebate, currency)}
                   displayType="text"
                   suffix={` ${currency}`}
                 />
