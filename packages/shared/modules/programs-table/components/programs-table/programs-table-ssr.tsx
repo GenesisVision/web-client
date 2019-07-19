@@ -2,7 +2,8 @@ import { push } from "connected-react-router";
 import { ProgramTag, ProgramsList } from "gv-api-web";
 import { Location } from "history";
 import programs from "investor-web-portal/pages/programs";
-import { useRouter } from "next/router";
+import { NextPageContext } from "next";
+import { NextRouter, useRouter } from "next/router";
 import qs from "qs";
 import * as React from "react";
 import { useContext } from "react";
@@ -11,7 +12,10 @@ import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   FilteringType,
   TFilter
@@ -21,7 +25,10 @@ import { LevelFilterType } from "shared/components/table/components/filtering/le
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
-import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
+import {
+  TAG_FILTER_DEFAULT_VALUE,
+  TAG_FILTER_NAME
+} from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { useTranslation } from "shared/i18n";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
@@ -35,12 +42,23 @@ import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 import { DispatchProps } from "../../../../components/asset-status/asset-status-requests";
+import {
+  calculateSkipAndTake,
+  calculateTotalPages
+} from "../../../../components/table/helpers/paging.helpers";
 import { platformContext } from "../../../../context/platform";
 import isAuthenticated from "../../../../decorators/is-authenticated";
+import { PROGRAMS_ROUTE } from "../../../../routes/programs.routes";
 import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
-import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
+import {
+  CURRENCY_FILTER_NAME,
+  CURRENCY_FILTER_VALUE,
+  LEVEL_FILTER_NAME,
+  LEVEL_MAX_FILTER_VALUE,
+  LEVEL_MIN_FILTER_VALUE
+} from "./programs.constants";
 
 interface OwnProps {
   showSwitchView: boolean;
@@ -82,6 +100,23 @@ interface OwnProps {
 
 interface Props extends OwnProps {}
 
+const ITEMS_ON_PAGE = 12;
+
+export const getFiltersFromContext = ({
+  asPath = "",
+  pathname
+}: NextPageContext) => {
+  const { page, ...other } = qs.parse(asPath.slice(pathname.length + 1));
+  const skipAndTake = calculateSkipAndTake({
+    itemsOnPage: ITEMS_ON_PAGE,
+    currentPage: page
+  });
+  return {
+    ...other,
+    ...skipAndTake
+  };
+};
+
 const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
   // componentDidMount() {
   //   const { service, defaultFilters } = this.props;
@@ -99,10 +134,21 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
   const context = useContext(platformContext);
   if (!context) return null;
 
-  const { asPath, pathname } = useRouter();
+  const { asPath, pathname, push } = useRouter();
 
   console.info(asPath, pathname, asPath.slice(pathname.length + 1));
-  console.info(qs.parse(asPath.slice(pathname.length + 1)));
+  const filters = qs.parse(asPath.slice(pathname.length + 1));
+
+  const totalPages = calculateTotalPages(data.total, ITEMS_ON_PAGE);
+
+  const updatePage = (page: number) => {
+    push({
+      pathname: PROGRAMS_ROUTE,
+      query: {
+        page: page + 1
+      }
+    });
+  };
 
   return (
     <ProgramsTable
@@ -111,10 +157,13 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
       data={data.programs}
       // sorting={filters.sorting}
       // updateSorting={service.programsChangeSorting}
-      // filtering={{
-      //   ...filters.filtering
-      // }}
-      // updateFilter={service.programsChangeFilter}
+      filtering={{
+        [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
+        [TAG_FILTER_NAME]: TAG_FILTER_DEFAULT_VALUE,
+        [LEVEL_FILTER_NAME]: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
+        [CURRENCY_FILTER_NAME]: CURRENCY_FILTER_VALUE
+      }}
+      updateFilter={filter => console.info(filter)}
       renderFilters={(updateFilter, filtering: FilteringType) => (
         <>
           <TagFilter
@@ -144,12 +193,12 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
         </>
       )}
       paging={{
-        totalPages: 19,
-        currentPage: 1,
-        itemsOnPage: 12,
+        totalPages: totalPages,
+        currentPage: parseInt(filters.page),
+        itemsOnPage: ITEMS_ON_PAGE,
         totalItems: data.total
       }}
-      updatePaging={() => {}}
+      updatePaging={updatePage}
       toggleFavorite={() => {}}
       // redirectToLogin={service.redirectToLogin}
       isAuthenticated={false}
