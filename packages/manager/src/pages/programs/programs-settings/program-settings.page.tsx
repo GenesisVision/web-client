@@ -2,16 +2,15 @@ import "shared/components/details/details.scss";
 
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
 import { editAsset } from "modules/asset-edit/services/asset-edit.services";
-import ChangePasswordTradingAccountPopup from "modules/change-password-trading-account/change-password-trading-account-popup";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import Page from "shared/components/page/page";
@@ -20,12 +19,8 @@ import {
   getProgramDescription
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
-import useIsOpen from "shared/hooks/is-open.hook";
 import { SetSubmittingType } from "shared/utils/types";
-
-import ClosePeriodContainer from "../program-details/components/close-period/close-period-container";
-import CloseProgramContainer from "../program-details/components/close-program/close-program-container";
-import { ChangeBrokerFormValues } from "./broker-edit";
+import { ChangeBrokerFormValues } from "./change-broker/change-broker";
 import ProgramSettings from "./program-settings";
 import ProgramSettingsLoader from "./program-settings.loader";
 import {
@@ -36,21 +31,6 @@ import {
 import { IProgramSignalFormValues } from "./signaling-edit";
 
 const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
-  const [
-    isClosePeriodOpen,
-    setClosePeriodOpen,
-    setClosePeriodClose
-  ] = useIsOpen();
-  const [
-    isCloseProgramOpen,
-    setCloseProgramOpen,
-    setCloseProgramClose
-  ] = useIsOpen();
-  const [
-    isChangePasswordOpen,
-    setChangePasswordOpen,
-    setChangePasswordClose
-  ] = useIsOpen();
   const [details, setDetails] = useState<ProgramDetailsFull | undefined>(
     undefined
   );
@@ -112,7 +92,7 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
     },
     [details]
   );
-  const applyClose = useCallback(
+  const applyCloseProgram = useCallback(
     () => fetchingDescription().then(service.redirectToProgram),
     []
   );
@@ -123,37 +103,14 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
         condition={!!details && !!brokersInfo}
         loader={<ProgramSettingsLoader />}
         changeSignaling={changeSignaling}
-        closePeriod={setClosePeriodOpen}
-        closeProgram={setCloseProgramOpen}
+        closePeriod={fetchingDescription}
+        closeProgram={applyCloseProgram}
         details={details!}
-        changePassword={setChangePasswordOpen}
         brokersInfo={brokersInfo!}
         changeBroker={changeBroker}
         editProgram={editProgram}
         cancelChangeBroker={cancelChangeBroker}
       />
-      {details && (
-        <>
-          <ClosePeriodContainer
-            open={isClosePeriodOpen}
-            onClose={setClosePeriodClose}
-            onApply={fetchingDescription}
-            id={details.id}
-          />
-          <CloseProgramContainer
-            open={isCloseProgramOpen}
-            onClose={setCloseProgramClose}
-            onApply={applyClose}
-            id={details.id}
-          />
-          <ChangePasswordTradingAccountPopup
-            programName={details.title}
-            open={isChangePasswordOpen}
-            id={details.id}
-            onClose={setChangePasswordClose}
-          />
-        </>
-      )}
     </Page>
   );
 };
