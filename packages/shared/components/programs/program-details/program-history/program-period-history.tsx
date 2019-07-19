@@ -5,7 +5,6 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import { TableCell, TableRow } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -15,6 +14,7 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import {
@@ -22,6 +22,7 @@ import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
 } from "../program-details.constants";
+import DownloadButtonToolbar from "./download-button-toolbar/download-button-toolbar";
 
 const _ProgramPeriodHistory: React.FC<Props> = ({
   t,
@@ -36,6 +37,13 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
 
   return (
     <TableModule
+      exportButtonToolbarRender={(filtering: any) => (
+        <DownloadButtonToolbar
+          filtering={filtering!.dateRange}
+          programId={id}
+          getExportFileUrl={filesService.getPeriodExportFileUrl}
+        />
+      )}
       getItems={fetchPeriod}
       defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
       filtering={PROGRAM_TRADES_FILTERS}
