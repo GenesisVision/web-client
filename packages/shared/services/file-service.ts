@@ -13,10 +13,10 @@ import authService from "./auth-service";
 
 const getDateFilters = (dateRange: DateRangeFilterType): string => {
   const start = dateRange.dateStart
-    ? `start=${moment(dateRange.dateStart as string).toISOString()}&`
+    ? `DateFrom=${moment(dateRange.dateStart as string).toISOString()}&`
     : "";
   const end = dateRange.dateEnd
-    ? `end=${moment(dateRange.dateEnd as string)
+    ? `DateTo=${moment(dateRange.dateEnd as string)
         .add(1, "day")
         .startOf("day")
         .toISOString()}`
