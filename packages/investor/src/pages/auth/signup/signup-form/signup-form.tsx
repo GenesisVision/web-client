@@ -56,14 +56,14 @@ const _SignUpForm: React.FC<
       label={
         <span>
           {t("auth.signup.i-accept-text")}{" "}
-          {/* <a
+          <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://genesis.vision/privacy-policy.html"
             onClick={e => e.stopPropagation()}
           >
             {t("auth.signup.privacy-policy-text")}
-          </a> */}
+          </a>
         </span>
       }
       component={GVCheckbox}
@@ -75,14 +75,14 @@ const _SignUpForm: React.FC<
       label={
         <span>
           {t("auth.signup.i-accept-text")}{" "}
-          {/* <a
+          <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://genesis.vision/terms.html"
             onClick={e => e.stopPropagation()}
           >
             {t("auth.signup.accept-terms-text")}
-          </a> */}
+          </a>
         </span>
       }
       component={GVCheckbox}
