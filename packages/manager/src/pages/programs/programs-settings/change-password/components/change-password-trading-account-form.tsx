@@ -98,7 +98,7 @@ const ChangePasswordTradingAccountForm = compose<
     IChangePasswordTradingAccountFormOwnProps,
     IChangePasswordTradingAccountFormValues
   >({
-    displayName: "change-password-trading-account",
+    displayName: "change-password",
     mapPropsToValues: () => ({
       [FORM_FIELDS.password]: "",
       [FORM_FIELDS.confirmPassword]: "",

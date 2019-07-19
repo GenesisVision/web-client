@@ -56,11 +56,7 @@ interface DispatchProps {
   };
 }
 
-interface OwnProps {
-  renderForm: (handle: () => void) => JSX.Element;
-}
-
-interface Props extends OwnProps, StateProps, DispatchProps, WithTranslation {}
+interface Props extends StateProps, DispatchProps, WithTranslation {}
 
 const EmailPendingPage = compose<React.ComponentType<OwnProps>>(
   translate(),

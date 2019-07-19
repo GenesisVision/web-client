@@ -9,6 +9,11 @@ import {
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 
+const subtract: { [keys: string]: string } = {
+  [DATA_RANGE_FILTER_TYPES.LAST_MONTH]: "month",
+  [DATA_RANGE_FILTER_TYPES.LAST_WEEK]: "week"
+};
+
 class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   state = {
     type: this.props.value
@@ -18,18 +23,20 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
     dateEnd: this.props.value ? this.props.value.dateEnd : undefined
   };
 
+  getDateStart = (type: DATA_RANGE_FILTER_TYPES) => {
+    switch (type) {
+      case DATA_RANGE_FILTER_TYPES.ALL:
+        return moment(0).format("YYYY-MM-DD");
+      default:
+        return moment()
+          .subtract(1 as any, subtract[type])
+          .format("YYYY-MM-DD");
+    }
+  };
   handleChangeType = (type: DATA_RANGE_FILTER_TYPES) => () => {
-    const subtract =
-      type === DATA_RANGE_FILTER_TYPES.LAST_MOUTH
-        ? "month"
-        : type === DATA_RANGE_FILTER_TYPES.LAST_WEEK
-        ? "week"
-        : "day";
     this.setState({
       type,
-      dateStart: moment()
-        .subtract(1, subtract)
-        .format("YYYY-MM-DD"),
+      dateStart: this.getDateStart(type),
       dateEnd: moment().format("YYYY-MM-DD")
     });
   };
@@ -61,8 +68,8 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
             className="date-range-filter__btn date-range-filter__btn--type"
             variant="text"
             color="secondary"
-            onClick={this.handleChangeType(DATA_RANGE_FILTER_TYPES.LAST_MOUTH)}
-            disabled={type === DATA_RANGE_FILTER_TYPES.LAST_MOUTH}
+            onClick={this.handleChangeType(DATA_RANGE_FILTER_TYPES.LAST_MONTH)}
+            disabled={type === DATA_RANGE_FILTER_TYPES.LAST_MONTH}
           >
             {t("filters.date-range.last-month")}
           </GVButton>

@@ -9,7 +9,7 @@ const withApiProxy = (api: any) => {
         // TODO fix types
         return originalMethod.apply(target, args).catch((ex: any) => {
           return Promise.reject({
-            ...handleErrorResponse(ex.response)
+            ...handleErrorResponse(ex)
           });
         });
       };

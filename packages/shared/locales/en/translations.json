@@ -772,6 +772,7 @@
       },
       "financial-statistic": {
         "period": "Period",
+        "date-start": "Date start",
         "balance": "Balance",
         "profit": "Profit",
         "success-fee": "Success fee",

@@ -1,4 +1,4 @@
-/* import { replace } from "connected-react-router"; */
+import Router from "next/router";
 import * as React from "react";
 import { useEffect } from "react";
 import { ResolveThunks, connect } from "react-redux";
@@ -38,7 +38,8 @@ const _SignInContainer: React.FC<Props> = ({
     role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
   useEffect(() => service.clearLoginData, []);
   useEffect(() => {
-    if (type && (email === "" || password === "")) service.showNotFoundPage();
+    if (type && (email === "" || password === ""))
+      Router.replace(NOT_FOUND_PAGE_ROUTE);
   }, []);
   return (
     <div className={className}>
@@ -64,7 +65,6 @@ const mapStateToProps = (state: AuthRootState): StateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      showNotFoundPage: () => replace(NOT_FOUND_PAGE_ROUTE),
       clearLoginData,
       login
     },

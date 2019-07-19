@@ -21,7 +21,7 @@ export const mapServerTimeFrameToFilterType = (
     case "Week":
       return DATA_RANGE_FILTER_TYPES.LAST_WEEK;
     case "Month":
-      return DATA_RANGE_FILTER_TYPES.LAST_MOUTH;
+      return DATA_RANGE_FILTER_TYPES.LAST_MONTH;
     case "AllTime":
     default:
       return DATA_RANGE_FILTER_TYPES.ALL;
@@ -67,7 +67,7 @@ export const composeRequestValueFunc = (
         [fromFilterName]: dateFrom(undefined, 20181001),
         [toFilterName]: dateTo()
       };
-    case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:
+    case DATA_RANGE_FILTER_TYPES.LAST_MONTH:
       return {
         [fromFilterName]: dateFrom("month"),
         [toFilterName]: dateTo()

@@ -17,7 +17,7 @@ export type SERVER_DATE_NAME =
 
 export enum DATA_RANGE_FILTER_TYPES {
   ALL = "all",
-  LAST_MOUTH = "lastMonth",
+  LAST_MONTH = "lastMonth",
   LAST_WEEK = "lastWeek",
   CUSTOM = "custom"
 }
