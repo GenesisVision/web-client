@@ -3,7 +3,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { SetSubmittingType } from "shared/utils/types";
 
-const _ClosePeriod: React.FC<IClosePeriodProps & WithTranslation> = ({
+const _ConfirmClosePeriod: React.FC<IClosePeriodProps & WithTranslation> = ({
   t,
   open,
   id,
@@ -39,8 +39,8 @@ const _ClosePeriod: React.FC<IClosePeriodProps & WithTranslation> = ({
   );
 };
 
-const ClosePeriod = translate()(React.memo(_ClosePeriod));
-export default ClosePeriod;
+const ConfirmClosePeriod = translate()(React.memo(_ConfirmClosePeriod));
+export default ConfirmClosePeriod;
 
 export interface IClosePeriodProps {
   id: string;
