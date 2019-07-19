@@ -34,6 +34,16 @@ const getTradesExportFileUrl = (
   }`;
 };
 
+const getPeriodExportFileUrl = (
+  id: string,
+  dateRange: DateRangeFilterType
+): string => {
+  const filters = getDateFilters(dateRange);
+  return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/periods/export${
+    dateRange.dateStart || dateRange.dateEnd ? filters : ""
+  }`;
+};
+
 const getStatisticExportFile = (
   id: string,
   dateRange: DateRangeFilterType
@@ -69,6 +79,7 @@ const uploadDocument = (file: File, authorization: string): Promise<string> => {
 const filesService = {
   getTradesExportFileUrl,
   getStatisticExportFile,
+  getPeriodExportFileUrl,
   getFileUrl,
   uploadFile,
   uploadDocument

@@ -9,6 +9,8 @@ const _DownloadButtonToolbar: React.FC<Props> = ({
   programId,
   getExportFileUrl
 }) => {
+  console.log(filtering);
+  console.log(getExportFileUrl(programId, filtering));
   return (
     <a
       href={getExportFileUrl(programId, filtering)}
