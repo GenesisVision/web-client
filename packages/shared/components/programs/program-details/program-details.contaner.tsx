@@ -55,9 +55,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               isAuthenticated={isAuthenticated}
               redirectToLogin={redirectToLogin}
               ProgramControls={descriptionSection.ProgramControls}
-              ChangePasswordTradingAccount={
-                descriptionSection.ChangePasswordTradingAccount
-              }
               ProgramWithdrawContainer={
                 descriptionSection.ProgramWithdrawContainer
               }
