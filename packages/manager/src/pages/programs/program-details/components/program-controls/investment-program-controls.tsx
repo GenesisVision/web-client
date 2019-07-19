@@ -1,8 +1,4 @@
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
-import AssetEditContainer, {
-  IAssetEditInfo
-} from "modules/asset-edit/asset-edit-container";
-import ConfirmContainer from "modules/confirm/confirm-container";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
@@ -15,9 +11,6 @@ import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
-
-import ClosePeriodContainer from "../close-period/close-period-container";
-import CloseProgramContainer from "../close-program/close-program-container";
 
 enum INVESTMENT_POPUP {
   INVEST = "INVEST",
