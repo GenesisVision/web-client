@@ -32,8 +32,15 @@
   border-radius: $border-radius;
   margin: 0 -16px;
 
+  & .program-avatar__level {
+    background-color: $background-color;
+  }
+
   &:hover {
     background-color: $secondary-background-color;
+    & .program-avatar__level {
+      background-color: $secondary-background-color;
+    }
   }
 
   &__list {
