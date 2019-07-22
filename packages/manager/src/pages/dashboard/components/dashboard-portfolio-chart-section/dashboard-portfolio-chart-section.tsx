@@ -48,23 +48,36 @@ class _DashboardPortfolioChartSection extends React.PureComponent<
   State
 > {
   state = {
-    tab: TABS.PROGRAMS
+    tab: TABS.PROGRAMS,
+    type: undefined
   };
 
   handleTabChange = (e: React.SyntheticEvent<EventTarget>, tab: string) => {
     this.setState({ tab: tab as TABS });
+    this.setTypeAssets(tab);
   };
 
-  getTypeAssets = (): ASSETS_TYPES => {
-    const { tab } = this.state;
+  setDefaultTab = () => {
+    const { assets } = this.props;
+    switch (true) {
+      case !!assets!.programs.length:
+        this.setState({ tab: TABS.PROGRAMS });
+        break;
+      case !!assets!.funds.length:
+        this.setState({ tab: TABS.FUNDS });
+        break;
+    }
+  };
+
+  setTypeAssets = (tab?: string) => {
     const { assets } = this.props;
     switch (true) {
       case assets!.programs.length && tab === TABS.PROGRAMS:
-        return ASSETS_TYPES.Program;
+        this.setState({ type: ASSETS_TYPES.Program });
+        break;
       case assets!.funds.length && tab === TABS.FUNDS:
-        return ASSETS_TYPES.Fund;
-      default:
-        return ASSETS_TYPES.All;
+        this.setState({ type: ASSETS_TYPES.Fund });
+        break;
     }
   };
 
@@ -75,12 +88,16 @@ class _DashboardPortfolioChartSection extends React.PureComponent<
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     const { assets, service, assetChart, inRequests } = this.props;
+    const { tab, type } = this.state;
     if (!assets) return null;
-    const type = this.getTypeAssets();
-    if (!assetChart || prevState.tab !== this.state.tab) {
+    if (!type) {
+      this.setDefaultTab();
+      this.setTypeAssets(tab);
+    }
+    if ((!assetChart || prevState.tab !== tab) && type) {
       service.composeAssetChart(type);
     }
-    if (!inRequests || prevState.tab !== this.state.tab) {
+    if ((!inRequests || prevState.tab !== tab) && type) {
       service.getInRequests(type);
     }
   }
@@ -196,6 +213,7 @@ interface DispatchProps {
 
 interface State {
   tab: TABS;
+  type?: ASSETS_TYPES;
 }
 
 interface StateProps {
