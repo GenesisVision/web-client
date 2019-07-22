@@ -5,7 +5,7 @@ import programs from "investor-web-portal/pages/programs";
 import { NextPageContext } from "next";
 import { NextRouter, useRouter } from "next/router";
 import qs from "qs";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import * as React from "react";
 import { MergeProps, connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
@@ -32,6 +32,7 @@ import {
 import { useTranslation } from "shared/i18n";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
+import { PROGRAMS_TABLE_FILTERS } from "shared/modules/programs-table/components/programs-table/programs.constants";
 import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import {
@@ -42,6 +43,7 @@ import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 import { DispatchProps } from "../../../../components/asset-status/asset-status-requests";
+import { composeFilters } from "../../../../components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
   calculateTotalPages
@@ -102,6 +104,13 @@ interface Props extends OwnProps {}
 
 const ITEMS_ON_PAGE = 12;
 
+const DEFAULT_FILTERS = {
+  [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
+  [TAG_FILTER_NAME]: TAG_FILTER_DEFAULT_VALUE,
+  [LEVEL_FILTER_NAME]: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
+  [CURRENCY_FILTER_NAME]: CURRENCY_FILTER_VALUE
+};
+
 export const getFiltersFromContext = ({
   asPath = "",
   pathname
@@ -111,9 +120,10 @@ export const getFiltersFromContext = ({
     itemsOnPage: ITEMS_ON_PAGE,
     currentPage: page
   });
+  // const filters = composeFilters(PROGRAMS_TABLE_FILTERS, other);
   return {
-    ...other,
-    ...skipAndTake
+    ...skipAndTake,
+    ...composeFilters(PROGRAMS_TABLE_FILTERS, { ...DEFAULT_FILTERS, ...other })
   };
 };
 
@@ -136,18 +146,26 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
 
   const { asPath, pathname, push } = useRouter();
 
-  console.info(asPath, pathname, asPath.slice(pathname.length + 1));
-  const filters = qs.parse(asPath.slice(pathname.length + 1));
+  const filtering = qs.parse(asPath.slice(pathname.length + 1));
 
   const totalPages = calculateTotalPages(data.total, ITEMS_ON_PAGE);
 
+  const updateFilter = (filter: any) => {
+    const nf = {
+      ...filtering,
+      [filter.name]: filter.value
+    };
+    const route = `${PROGRAMS_ROUTE}?${qs.stringify(nf)}`;
+    push(route);
+  };
+
   const updatePage = (page: number) => {
-    push({
-      pathname: PROGRAMS_ROUTE,
-      query: {
-        page: page + 1
-      }
-    });
+    const nf = {
+      ...filtering,
+      page: page + 1
+    };
+    const route = `${PROGRAMS_ROUTE}?${qs.stringify(nf)}`;
+    push(route);
   };
 
   return (
@@ -157,13 +175,8 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
       data={data.programs}
       // sorting={filters.sorting}
       // updateSorting={service.programsChangeSorting}
-      filtering={{
-        [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
-        [TAG_FILTER_NAME]: TAG_FILTER_DEFAULT_VALUE,
-        [LEVEL_FILTER_NAME]: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
-        [CURRENCY_FILTER_NAME]: CURRENCY_FILTER_VALUE
-      }}
-      updateFilter={filter => console.info(filter)}
+      filtering={{ ...DEFAULT_FILTERS, ...filtering }}
+      updateFilter={updateFilter}
       renderFilters={(updateFilter, filtering: FilteringType) => (
         <>
           <TagFilter
@@ -194,7 +207,7 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
       )}
       paging={{
         totalPages: totalPages,
-        currentPage: parseInt(filters.page || 1),
+        currentPage: parseInt(filtering.page || 1),
         itemsOnPage: ITEMS_ON_PAGE,
         totalItems: data.total
       }}
