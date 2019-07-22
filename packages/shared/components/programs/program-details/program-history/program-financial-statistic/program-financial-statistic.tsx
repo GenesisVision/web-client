@@ -31,7 +31,8 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   fetchFinancialStatistic,
   currency,
   id,
-  isGMProgram
+  isGMProgram,
+  title
 }) => {
   const columns = isGMProgram
     ? PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
@@ -48,6 +49,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
         <DownloadButtonToolbarAuth
           dateRange={filtering!.dateRange}
           programId={id}
+          title={title}
         />
       )}
       getItems={fetchStatistic}
@@ -175,6 +177,7 @@ export default ProgramFinancialStatistic;
 interface Props extends OwnProps, WithTranslation {}
 interface OwnProps {
   id: string;
+  title: string;
   isGMProgram?: boolean;
   currency: CURRENCIES;
   fetchFinancialStatistic: (
