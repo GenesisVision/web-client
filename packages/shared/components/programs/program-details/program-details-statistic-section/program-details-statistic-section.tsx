@@ -32,7 +32,11 @@ class _ProgramDetailsStatisticSection extends React.PureComponent<
 
   static getDerivedStateFromProps = (props: Props, state: State): State => {
     let newState: State = {};
-    if (state.prevProps !== props) {
+    const isCurrencyChanged =
+      state.prevProps !== undefined &&
+      state.prevProps.currency !== props.currency;
+
+    if (state.prevProps !== props && !isCurrencyChanged) {
       newState.prevProps = props;
       if (props.statistic) {
         newState.statistic = props.statistic.statistic;
