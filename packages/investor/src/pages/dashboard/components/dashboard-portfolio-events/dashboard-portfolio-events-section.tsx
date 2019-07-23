@@ -18,7 +18,7 @@ import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portf
 class DashboardPortfolioEventsSection extends React.PureComponent<Props> {
   componentDidMount() {
     const { service } = this.props;
-    service.getTopPortfolioEvents();
+    //service.getTopPortfolioEvents();
   }
   render() {
     const { title, data } = this.props;

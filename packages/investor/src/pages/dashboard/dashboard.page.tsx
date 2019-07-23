@@ -2,8 +2,8 @@ import "shared/components/dashboard/dashboard.scss";
 
 import "./dashboard.scss";
 
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
@@ -13,33 +13,33 @@ import DashboardPortfolioChartSectionContainer from "./components/dashboard-port
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 import DashboardTrades from "./components/dashboard-trades/dashboard-trades";
 
-interface IDashboardPageProps extends WithTranslation, WithRoleProps {}
+interface IDashboardPageProps extends WithRoleProps {}
 
-const DashboardPage: React.FC<IDashboardPageProps> = ({ t, role }) => {
+const DashboardPage: React.FC<IDashboardPageProps> = ({ role }) => {
+  const [t] = useTranslation();
   const title = t(`${role}.dashboard-page.title`);
-  return <>Dashboard</>;
-};
-{
-  /* <Page title={title}>
+  return (
+    <Page title={title}>
       <div className="dashboard">
         <div className="dashboard__row">
           <div className="dashboard__chart">
-            <Surface className="dashboard-portfolio-chart-section">
+            {/* <Surface className="dashboard-portfolio-chart-section">
               <DashboardPortfolioChartSectionContainer />
-            </Surface>
+            </Surface> */}
           </div>
           <div className="dashboard__portfolio-events-aside">
             <DashboardPortfolioEventsSection title={title} />
           </div>
         </div>
-        <div className="dashboard__table-section">
+        {/* <div className="dashboard__table-section">
           <DashboardAssetsSection title={title} />
         </div>
         <div className="dashboard__table-section">
           <DashboardTrades title={title} />
-        </div>
+        </div> */}
       </div>
-    </Page> */
-}
+    </Page>
+  );
+};
 
-export default withRole(translate()(React.memo(DashboardPage)));
+export default withRole(React.memo(DashboardPage));
