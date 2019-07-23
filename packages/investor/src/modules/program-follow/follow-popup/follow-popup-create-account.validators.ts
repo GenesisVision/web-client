@@ -11,9 +11,13 @@ import {
   CreateAccountFormValues
 } from "./follow-popup-create-account";
 
-const CreateAccountFormValidationSchema = (props: CreateAccountFormProps) => {
+const CreateAccountFormValidationSchema = ({
+  minDeposit,
+  wallets,
+  t
+}: CreateAccountFormProps) => {
   const getAvailable = (currency: string, rate: number): number => {
-    const wallet = props.wallets.find(
+    const wallet = wallets.find(
       (wallet: WalletData) => wallet.currency === currency
     );
     return convertToCurrency(wallet ? wallet.available : 0, rate);
@@ -23,18 +27,18 @@ const CreateAccountFormValidationSchema = (props: CreateAccountFormProps) => {
       object().shape({
         [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: number()
           .required(
-            props.t("follow-program.create-account.validation.amount-required")
+            t("follow-program.create-account.validation.amount-required")
           )
           .min(
             convertFromCurrency(
-              props.minDeposit,
+              minDeposit,
               values[CREATE_ACCOUNT_FORM_FIELDS.rate]
             ),
-            props.t(
+            t(
               "follow-program.create-account.validation.amount-more-than-min-deposit",
               {
                 value: convertFromCurrency(
-                  props.minDeposit,
+                  minDeposit,
                   values[CREATE_ACCOUNT_FORM_FIELDS.rate]
                 )
               }
@@ -45,7 +49,7 @@ const CreateAccountFormValidationSchema = (props: CreateAccountFormProps) => {
               values[CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency],
               1
             ),
-            props.t(
+            t(
               "follow-program.create-account.validation.amount-more-than-available"
             )
           )

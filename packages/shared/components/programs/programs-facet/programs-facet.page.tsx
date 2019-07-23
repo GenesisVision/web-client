@@ -19,10 +19,7 @@ const _ProgramsFacetPage: React.FC<WithTranslation> = ({ t }) => {
     (filters: ComposeFiltersAllType): Promise<IDataModel> =>
       fetchPrograms({
         ...filters
-      }).then(data => ({
-        total: data.total,
-        items: data.programs
-      })),
+      }),
     []
   );
 
