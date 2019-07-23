@@ -4,10 +4,10 @@ import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
 import { Store, compose } from "redux";
+import withReduxStore from "shared/decorators/with-redux-store";
 import { appWithTranslation } from "shared/i18n";
 
 import { initializeStore } from "../src/store";
-import withReduxStore from "../with-redux-store";
 
 class CustomApp extends App<Props> {
   render() {

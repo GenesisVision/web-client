@@ -4,9 +4,7 @@ import { Store } from "redux";
 import { RootState } from "shared/reducers/root-reducer";
 import {
   InitializeStoreType,
-  MiddlewareDispatch,
-  NextPageWithReduxContext,
-  RootThunkAction
+  NextPageWithReduxContext
 } from "shared/utils/types";
 
 const isServer = typeof window === "undefined";
