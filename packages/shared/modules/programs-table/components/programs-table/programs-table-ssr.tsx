@@ -51,6 +51,8 @@ import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
+import useRouteFilters from "../../../../hooks/route-filters.hook";
+import { FUNDS_ROUTE } from "../../../../routes/funds.routes";
 import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
@@ -142,22 +144,10 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
 
   const { t } = useTranslation();
   const context = useContext(platformContext);
+  const [filtering, update] = useRouteFilters(PROGRAMS_ROUTE, DEFAULT_FILTERS);
   if (!context) return null;
 
-  const { asPath, pathname, push } = useRouter();
-
-  const filtering = qs.parse(asPath.slice(pathname.length + 1));
-
   const totalPages = calculateTotalPages(data.total, ITEMS_ON_PAGE);
-
-  const updateFilter = (filter: any) => {
-    const nf = {
-      ...filtering,
-      [filter.name]: filter.value
-    };
-    const route = `${PROGRAMS_ROUTE}?${qs.stringify(nf)}`;
-    push(route);
-  };
 
   const updatePage = (page: number) => {
     const nf = {
@@ -175,8 +165,8 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
       data={data.programs}
       // sorting={filters.sorting}
       // updateSorting={service.programsChangeSorting}
-      filtering={{ ...DEFAULT_FILTERS, ...filtering }}
-      updateFilter={updateFilter}
+      filtering={filtering}
+      updateFilter={update}
       renderFilters={(updateFilter, filtering: FilteringType) => (
         <>
           <TagFilter

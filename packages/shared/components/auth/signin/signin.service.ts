@@ -78,7 +78,7 @@ export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => 
 export const logout: logoutFuncType = () => dispatch => {
   authService.removeToken();
   dispatch(authActions.logoutAction());
-  dispatch(platformActions.fetchPlatformSettings);
+  // dispatch(platformActions.fetchPlatformSettings);
   dispatch(windowResizeAction());
   Router.push(HOME_ROUTE);
 };

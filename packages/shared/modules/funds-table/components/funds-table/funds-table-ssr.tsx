@@ -50,6 +50,12 @@ import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { FUNDS_ROUTE } from "shared/routes/funds.routes";
 import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
+import FundAssetFilter from "../../../../components/table/components/filtering/fund-asset-filter/fund-asset-filter";
+import {
+  FUND_ASSET_DEFAULT_VALUE,
+  FUND_ASSET_FILTER_NAME
+} from "../../../../components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
+import useRouteFilters from "../../../../hooks/route-filters.hook";
 import FundsTable from "./funds-table";
 
 interface OwnProps {
@@ -109,6 +115,11 @@ export const getFiltersFromContext = ({
   };
 };
 
+const defaultFilters = {
+  [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
+  [FUND_ASSET_FILTER_NAME]: [FUND_ASSET_DEFAULT_VALUE]
+};
+
 const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
   // componentDidMount() {
   //   const { service, defaultFilters } = this.props;
@@ -124,16 +135,16 @@ const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
 
   const { t } = useTranslation();
   const context = useContext(platformContext);
+  const [filtering, update] = useRouteFilters(FUNDS_ROUTE, defaultFilters);
+  // const { asPath, pathname, push } = useRouter();
+
   if (!context) return null;
 
-  const { asPath, pathname, push } = useRouter();
-
-  console.info(asPath, pathname, asPath.slice(pathname.length + 1));
-  const filters = qs.parse(asPath.slice(pathname.length + 1));
+  // console.info(asPath, pathname, asPath.slice(pathname.length + 1));
 
   const totalPages = calculateTotalPages(data.total, ITEMS_ON_PAGE);
 
-  const updatePage = (page: number) => {
+  const updatePage = (page: number): any => {
     push({
       pathname: FUNDS_ROUTE,
       query: {
@@ -142,6 +153,8 @@ const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
     });
   };
 
+  console.info("redner");
+
   return (
     <FundsTable
       title={title}
@@ -149,12 +162,16 @@ const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
       showSwitchView={showSwitchView}
       // sorting={filters.sorting}
       // updateSorting={service.programsChangeSorting}
-      filtering={{
-        [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE
-      }}
-      updateFilter={(filter: any) => console.info(filter)}
+      filtering={filtering}
+      updateFilter={update}
       renderFilters={(updateFilter: any, filtering: FilteringType) => (
         <>
+          <FundAssetFilter
+            name={FUND_ASSET_FILTER_NAME}
+            value={filtering[FUND_ASSET_FILTER_NAME] as string[]}
+            values={context.enums.fund.assets}
+            onChange={updateFilter}
+          />
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}
             value={filtering[DATE_RANGE_FILTER_NAME]}
@@ -165,7 +182,7 @@ const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
       )}
       paging={{
         totalPages: totalPages,
-        currentPage: parseInt(filters.page || 1),
+        currentPage: parseInt(filtering.page || 1),
         itemsOnPage: ITEMS_ON_PAGE,
         totalItems: data.total
       }}
