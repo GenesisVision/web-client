@@ -2,11 +2,11 @@ import {
   CancelablePromise,
   DashboardPortfolioEvent,
   DashboardPortfolioEvents,
+  LevelInfo,
   ManagerPortfolioEvent,
   ManagerPortfolioEvents,
   OrderModel,
-  ProgramPeriodsViewModel,
-  ProgramsLevelsInfo
+  ProgramPeriodsViewModel
 } from "gv-api-web";
 import { Dispatch } from "redux";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -169,9 +169,8 @@ export const fetchOpenPositions = (
 
 export const fetchInvestmentsLevels = (
   currency: string
-): CancelablePromise<ProgramsLevelsInfo> => {
-  return platformApi.v10PlatformLevelsGet({ currency });
-};
+): CancelablePromise<LevelInfo[]> =>
+  platformApi.v10PlatformLevelsGet({ currency }).then(({ levels }) => levels);
 
 export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
   const isAuthenticated = authService.isAuthenticated();
