@@ -1,9 +1,9 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const ProgramWithdrawTop: React.FC<OwnProps & InjectedTranslateProps> = ({
+const ProgramWithdrawTop: React.FC<OwnProps & WithTranslation> = ({
   t,
   availableToWithdraw,
   title,

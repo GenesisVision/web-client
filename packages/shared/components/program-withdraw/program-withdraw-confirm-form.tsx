@@ -1,7 +1,7 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
@@ -92,4 +92,4 @@ interface OwnProps {
   withdrawAll?: boolean;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}

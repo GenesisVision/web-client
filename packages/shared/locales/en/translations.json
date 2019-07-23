@@ -489,9 +489,9 @@
       "text-6": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all periods.",
       "text-7": "To have a volume multiplier of 1 the managers weekly trading volume needs to be approximately the same as the amount of funds in his/her program. In the case of Forex programs, the volume is divided by the shoulder.",
       "text-8": "The coefficient is designed so that trading more in one period can compensate for the lack of volume during another period, but one-time high volumes won’t compensate for the lack of trading.",
-      "text-9": "More information can be found in the article",
+      "text-9": "More information can be found in the",
       "formula": "Investment Scale * Manager balance.",
-      "link": "More information can be found in the article"
+      "link": "article."
     },
     "list": {
       "subtitle": "Investment Scale is calculated according to a formula that takes into account:",
@@ -590,12 +590,18 @@
     "history": {
       "heading": "History",
       "subheading": "Rebalancing",
+      "tabs": {
+        "events": "Events",
+        "structure": "Structure",
+        "reallocate-history": "Reallocate History"
+      },
       "structure": {
-        "title": "Structure",
         "asset": "Asset",
         "symbol": "Symbol",
         "target": "Target",
-        "current": "Current"
+        "current": "Current",
+        "date": "Date",
+        "reallocate-fund": "Reallocate Fund"
       },
       "rebalances": {
         "assets": "Assets",
@@ -725,7 +731,9 @@
         "trades": "Trades",
         "events": "Events",
         "open-positions": "Open positions",
-        "subscriptions": "Subscribers"
+        "subscriptions": "Subscriptions",
+        "financial-statistic": "Financial statistic",
+        "period-history": "Period History"
       },
       "trades": {
         "download": "Export",
@@ -761,6 +769,24 @@
         "unsubscriptionDate": "Unsubscription date",
         "commission": "Commission",
         "status": "Status"
+      },
+      "financial-statistic": {
+        "period": "Period",
+        "date-start": "Date start",
+        "balance": "Balance",
+        "profit": "Profit",
+        "success-fee": "Success fee",
+        "entry-fee": "Entry fee",
+        "deposit-withdraw": "Deposit/Withdraw",
+        "commission-rebate": "GV commission rebate"
+      },
+      "period-history": {
+        "period": "Period",
+        "date-start": "Date start",
+        "date-finish": "Date finish",
+        "balance": "Program balance",
+        "profit": "Profit",
+        "investors": "Investors"
       }
     },
     "chart": {
@@ -1500,7 +1526,12 @@
       },
       "broker": {
         "title": "Broker",
-        "text": "A broker change in the program will occur automatically within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page."
+        "text-change": "A broker change in the program will occur automatically within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page.",
+        "text-cancel": "Your broker will be changed from {{brokerFrom}} to {{brokerTo}} within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page.",
+        "text-cancel-confirm": "Do you really want to cancel the change from {{brokerFrom}} to {{brokerTo}}?",
+        "text-cancel-confirm-title": "Change broker",
+        "text-change-confirm": "Do you really want to change from {{brokerFrom}} to {{brokerTo}}?",
+        "text-change-confirm-title": "Change broker"
       },
       "strategy": {
         "title": "Strategy"
@@ -1515,9 +1546,11 @@
         "title": "Signal provider"
       },
       "notifications": {
+        "cancel-broker-success": "Change broker has been canceled",
         "broker-success": "Broker has been edited"
       },
       "buttons": {
+        "cancel-broker": "Cancel",
         "save": "Save",
         "change-broker": "Change broker"
       }

@@ -3,10 +3,6 @@
 @import "~shared/styles/_sizes.scss";
 
 .wallet-transactions {
-  &__row:nth-child(2n + 1) {
-    background-color: $table-background-subcolor;
-  }
-
   &__icon-currency {
     @include adaptive-margin(right, $padding-xsmall);
   }

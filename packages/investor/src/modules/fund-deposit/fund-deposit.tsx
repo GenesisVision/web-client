@@ -1,28 +1,38 @@
 import * as React from "react";
-import FundDepositContainer from "shared/components/deposit/components/fund-deposit-container";
+import DepositContainer from "shared/components/deposit/components/deposit-container";
+import {
+  fundInvestCreator,
+  getFundInfoCreator
+} from "shared/components/deposit/services/fund-deposit.service";
 import { IDialogProps } from "shared/components/dialog/dialog";
+import { ASSET } from "shared/constants/constants";
+import withLoader from "shared/decorators/with-loader";
 import investorApi from "shared/services/api-client/investor-api";
 
-const FundDeposit: React.FC<OwnProps & IDialogProps> = ({
+const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   id,
   onApply,
   open,
   onClose
-}) => {
-  return (
-    <FundDepositContainer
-      id={id}
-      hasEntryFee
-      onApply={onApply}
-      open={open}
-      onClose={onClose}
-      fundInvest={investorApi.v10InvestorFundsByIdInvestByAmountPost}
-      fetchInfo={investorApi.v10InvestorFundsByIdInvestInfoByCurrencyGet}
-    />
-  );
-};
+}) => (
+  <DepositContainer
+    asset={ASSET.FUND}
+    assetInvest={fundInvestCreator(
+      investorApi.v10InvestorFundsByIdInvestByAmountPost
+    )}
+    fetchInfo={getFundInfoCreator(
+      investorApi.v10InvestorFundsByIdInvestInfoByCurrencyGet
+    )}
+    id={id}
+    hasEntryFee
+    onApply={onApply}
+    open={open}
+    onClose={onClose}
+  />
+);
 
-export default React.memo(FundDeposit);
+const FundDeposit = withLoader(React.memo(_FundDeposit));
+export default FundDeposit;
 
 interface OwnProps {
   id: string;

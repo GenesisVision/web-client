@@ -31,15 +31,15 @@ export interface IDescriptionSection {
   ProgramReinvestingWidget?: React.ComponentType<
     IProgramReinvestingContainerOwnProps
   >;
-  ChangePasswordTradingAccount?: React.ComponentType<
-    IChangePasswordTradingAccountProps
-  >;
 }
 
 export type HistoryCountsType = {
-  eventsCount: number;
+  eventsCount?: number;
   tradesCount?: number;
   openPositionsCount?: number;
+  reallocateCount?: number;
+  subscriptionsCount?: number;
+  periodHistoryCount?: number;
 };
 
 export interface IHistorySection {

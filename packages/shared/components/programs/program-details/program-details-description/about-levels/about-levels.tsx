@@ -2,12 +2,15 @@ import "./about-level.scss";
 
 import { LevelInfo } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 import LevelIcon from "./level-icon";
 
@@ -38,7 +41,7 @@ const _Limits: React.FC<ILimitsProps> = ({
 );
 const Limits = translate()(React.memo(_Limits));
 
-interface ILimitsProps extends InjectedTranslateProps {
+interface ILimitsProps extends WithTranslation {
   investmentsLimits: LevelInfo[];
   currency: CURRENCIES;
 }
@@ -110,15 +113,14 @@ const _AboutLevelsComponent: React.FC<Props> = ({
             </ul>
             <p className="about-levels__paragraph">
               {t("about-levels-page.section.text-9")}{" "}
-              <a href="https://blog.genesis.vision/genesis-vision-update-a-level-up-d01ef51c42a">
-                «https://blog.genesis.vision/genesis-vision-update-a-level-up-d01ef51c42a»
+              <a
+                target="_blank"
+                href="https://blog.genesis.vision/genesis-vision-update-a-level-up-d01ef51c42a"
+              >
+                {t("about-levels-page.section.link")}
               </a>
             </p>
           </div>
-          {/* TODO add link <p className="about-levels__paragraph">*/}
-          {/*  {t("about-levels-page.section.link")}*/}
-          {/*  <a href="https://genesis.vision">link</a>*/}
-          {/*</p>*/}
         </div>
         <div className="about-levels__right-block">
           <h4 className="about-levels__subtitle">
@@ -142,10 +144,16 @@ interface OwnProps {
   open: boolean;
   onClose(): void;
   investmentsLimits: LevelInfo[];
-  currency: CURRENCIES;
+  currency: CurrencyEnum;
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
-const AboutLevelsComponent = translate()(React.memo(_AboutLevelsComponent));
+const AboutLevelsComponent = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
+  translate(),
+  React.memo
+)(_AboutLevelsComponent);
 export default AboutLevelsComponent;

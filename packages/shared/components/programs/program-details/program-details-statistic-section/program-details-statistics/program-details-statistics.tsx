@@ -1,7 +1,7 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
 import Surface from "shared/components/surface/surface";
@@ -33,7 +33,7 @@ const _ProgramDetailsStatistics: React.FC<Props> = ({
   </Surface>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   status: STATUS;
   statistic: ProgramDetailsStatistic;
   profitChart: ProgramDetailsProfitChart;

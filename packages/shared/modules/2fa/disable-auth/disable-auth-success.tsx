@@ -1,7 +1,8 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-const DisableSuccess: React.FC<InjectedTranslateProps> = ({ t }) => {
+const DisableSuccess: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -12,6 +13,5 @@ const DisableSuccess: React.FC<InjectedTranslateProps> = ({ t }) => {
   );
 };
 
-const DisableAuthSuccess = translate()(React.memo(DisableSuccess));
-
+const DisableAuthSuccess = React.memo(DisableSuccess);
 export default DisableAuthSuccess;

@@ -1,6 +1,6 @@
 import { LevelInfo } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import FacetContainer, {
   FACET_ASSET
 } from "shared/components/facet-container/facet-container";
@@ -17,22 +17,16 @@ import ProgramsFacetTable from "../programs/programs-facet/components/programs-f
 import { getCurrentFacet } from "../programs/programs-facet/services/programs-facet.service";
 import { PROGRAMS_COLUMNS } from "./program-rating.constants";
 
-const _ProgramsRating: React.FC<InjectedTranslateProps> = ({ t }) => {
+const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   const [levels, setLevels] = useState<LevelInfo[]>([]);
   const [level, setLevel] = useState<number | undefined>(undefined);
 
   const updateLevel = (newLevel: number) => {
-    if (newLevel === level) {
-      setLevel(undefined);
-    } else {
-      setLevel(newLevel);
-    }
+    newLevel === level ? setLevel(undefined) : setLevel(newLevel);
   };
 
   useEffect(() => {
-    const request = fetchInvestmentsLevels("GVT").then(data => {
-      setLevels(data.levels);
-    });
+    const request = fetchInvestmentsLevels("GVT").then(setLevels);
     return () => request.cancel();
   }, []);
 
@@ -42,24 +36,22 @@ const _ProgramsRating: React.FC<InjectedTranslateProps> = ({ t }) => {
         ...filters,
         sorting: "ByLevelProgressDesc",
         levelsSet: level ? [level] : undefined
-      }).then(data => ({
-        total: data.total,
-        items: data.programs
-      })),
+      }),
     [level]
   );
 
   return (
     <Page title={t("programs-page.title")}>
       <div className="programs-facet__filter">
-        {levels.map((level, index) => (
+        {levels.map((lvl, i) => (
           <GVButton
             className={"programs-facet__button"}
-            key={index}
-            onClick={() => updateLevel(level.level)}
+            key={i}
+            onClick={() => updateLevel(lvl.level)}
             noPadding
+            variant={"text"}
           >
-            <LevelIcon levelInfo={level} />
+            <LevelIcon levelInfo={lvl} current={lvl.level === level} />
           </GVButton>
         ))}
       </div>

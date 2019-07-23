@@ -1,5 +1,5 @@
 import { FundFacet, PlatformInfo, ProgramFacet } from "gv-api-web";
-import * as React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
@@ -8,57 +8,56 @@ import { IFundsFacetTableProps } from "shared/components/funds/funds-facet/compo
 import NotFoundPage from "shared/components/not-found/not-found";
 import { IProgramsFacetTableProps } from "shared/components/programs/programs-facet/components/programs-facet-table";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { IDataModel } from "shared/constants/constants";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { MiddlewareDispatch } from "shared/utils/types";
+import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
-class _FacetContainer extends React.PureComponent<Props, State> {
-  state = {
-    isPending: undefined,
-    notFound: undefined,
-    facet: undefined
-  };
-
-  componentDidMount() {
-    const { service, facets } = this.props;
-    if (facets !== null) {
-      this.setState({ ...service.getCurrentFacet() });
-    }
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    const { service, facets } = this.props;
-    if (prevProps.facets !== facets) {
-      this.setState({ ...service.getCurrentFacet() });
-    }
-  }
-
-  getFacetItems: GetItemsFuncType = filtering => {
-    const { getItems } = this.props;
-    const { id } = this.state.facet!;
-    return getItems({ ...filtering, facetId: id });
-  };
-
-  render() {
-    const { TableContainer, isAuthenticated } = this.props;
-    const { isPending, notFound, facet } = this.state;
-    if (!facet || isPending) return null;
-    if (notFound) return <NotFoundPage />;
-    const { title, sorting, timeframe } = facet!;
-    return (
-      <TableContainer
-        title={title}
-        sorting={sorting}
-        timeframe={timeframe}
-        getItems={this.getFacetItems}
-        isAuthenticated={isAuthenticated}
-      />
-    );
-  }
-}
+const _FacetContainer: React.FC<Props> = ({
+  TableContainer,
+  isAuthenticated,
+  service,
+  facets,
+  getItems
+}) => {
+  const [
+    isPending,
+    setIsPending,
+    setIsNotPending,
+    setPendingValue
+  ] = useIsOpen();
+  const [notFound, setNotFound, setFound, setFoundValue] = useIsOpen();
+  const [facet, setFacet] = useState<FacetType | undefined>(undefined);
+  useEffect(
+    () => {
+      if (facets !== null) {
+        const { facet, isPending, notFound } = service.getCurrentFacet();
+        setFacet(facet);
+        setPendingValue(!!isPending);
+        setFoundValue(!!notFound);
+      }
+    },
+    [facets]
+  );
+  const getFacetItems = useCallback(
+    filtering => getItems({ ...filtering, facetId: facet!.id }),
+    [facet, getItems]
+  );
+  if (!facet || isPending) return null;
+  if (notFound) return <NotFoundPage />;
+  const { title, sorting, timeframe } = facet!;
+  return (
+    <TableContainer
+      title={title}
+      sorting={sorting}
+      timeframe={timeframe}
+      getItems={getFacetItems}
+      isAuthenticated={isAuthenticated}
+    />
+  );
+};
 
 const facetSelector = createSelector<
   RootState,
@@ -81,20 +80,17 @@ const mapStateToProps = (state: RootState, props: OwnProps): StateProps => ({
 
 const mapDispatchToProps = (
   dispatch: MiddlewareDispatch,
-  props: Props
-): DispatchProps => {
-  const { getCurrentFacet } = props;
-  return {
-    service: {
-      getCurrentFacet: () => dispatch(getCurrentFacet())
-    }
-  };
-};
+  { getCurrentFacet }: Props
+): DispatchProps => ({
+  service: {
+    getCurrentFacet: () => dispatch(getCurrentFacet())
+  }
+});
 
 interface OwnProps {
   getCurrentFacet: () => (
     dispatch: MiddlewareDispatch,
-    getState: any
+    getState: TGetState
   ) => FacetDataType;
   asset: FACET_ASSET;
   TableContainer: React.ComponentType<
@@ -112,7 +108,6 @@ interface DispatchProps {
   };
 }
 interface Props extends OwnProps, StateProps, DispatchProps {}
-interface State extends FacetDataType {}
 export type FacetType = ProgramFacet | FundFacet;
 export type FacetDataType = {
   isPending?: boolean;
@@ -130,6 +125,7 @@ const FacetContainer = compose<React.ComponentType<OwnProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_FacetContainer);
 export default FacetContainer;

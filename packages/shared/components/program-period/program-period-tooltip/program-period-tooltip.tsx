@@ -1,7 +1,7 @@
 import "./program-period-tooltip.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import PeriodTimeLeft from "../period-time-left";
 
@@ -16,7 +16,7 @@ const _ProgramPeriodTooltip: React.FC<Props> = ({ t, end }) => (
   </div>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   end: Date;
 }
 

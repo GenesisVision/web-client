@@ -1,87 +1,75 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
 
-import withLoader, {
-  WithLoaderProps
-} from "../../../../decorators/with-loader";
 import {
   offPayFeesWithGvt,
   onPayFeesWithGvt
 } from "../../services/wallet.services";
 import WalletSettings from "./wallet-settings";
 
-class _WalletSettingsContainer extends React.PureComponent<Props, State> {
-  state = {
-    isPayFeesWithGvt: this.props.isPayFeesWithGvt,
-    isOpenGVTFees: false,
-    isPending: false
-  };
-
-  catchError = (error: ResponseError) => {
-    this.props.services.alertError(error.errorMessage);
-    this.setState({ isPending: false });
-  };
-
-  handleOpenGVTFees = () => this.setState({ isOpenGVTFees: true });
-
-  handleCloseGVTFees = () => this.setState({ isOpenGVTFees: false });
-
-  handleSwitch = () => {
-    const { isPayFeesWithGvt } = this.state;
+const _WalletSettingsContainer: React.FC<Props> = ({
+  t,
+  isPayFeesWithGvt: isPayFeesWithGvtProp,
+  service
+}) => {
+  const [isPending, setIsPending, setNotPending] = useIsOpen();
+  const [isOpenGVTFees, setOpenGVTFees, setCloseGVTFees] = useIsOpen();
+  const [
+    isPayFeesWithGvt,
+    setPayFeesWithGvt,
+    setNotPayFeesWithGvt,
+    setPayFeesWithGvtValue
+  ] = useIsOpen(isPayFeesWithGvtProp);
+  const handleSwitch = () => {
     const method = isPayFeesWithGvt ? offPayFeesWithGvt : onPayFeesWithGvt;
-    this.setState({ isPending: true });
+    setIsPending();
     return method()
-      .then(() =>
-        this.setState({ isPayFeesWithGvt: !isPayFeesWithGvt, isPending: false })
-      )
-      .catch(this.catchError);
+      .then(() => {
+        setPayFeesWithGvtValue(!isPayFeesWithGvt);
+        setNotPending();
+      })
+      .catch(({ errorMessage }: ResponseError) => {
+        service.alertError(errorMessage);
+        setNotPending();
+      });
   };
-
-  render() {
-    const { t } = this.props;
-    const { isPayFeesWithGvt, isPending, isOpenGVTFees } = this.state;
-    return (
-      <WalletSettings
-        name="PayGVTFee"
-        label={t("wallet-page.settings.label")}
-        isPayFeesWithGvt={isPayFeesWithGvt}
-        isPending={isPending}
-        handleOpenGVTFees={this.handleOpenGVTFees}
-        handleCloseGVTFees={this.handleCloseGVTFees}
-        handleSwitch={this.handleSwitch}
-        isOpenGVTFees={isOpenGVTFees}
-      />
-    );
-  }
-}
+  return (
+    <WalletSettings
+      name="PayGVTFee"
+      label={t("wallet-page.settings.label")}
+      isPayFeesWithGvt={isPayFeesWithGvt}
+      isPending={isPending}
+      handleOpenGVTFees={setOpenGVTFees}
+      handleCloseGVTFees={setCloseGVTFees}
+      handleSwitch={handleSwitch}
+      isOpenGVTFees={isOpenGVTFees}
+    />
+  );
+};
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
-  services: {
+  service: {
     alertError: (message: string) =>
       dispatch(alertMessageActions.error(message))
   }
 });
 
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+interface Props extends OwnProps, DispatchProps, WithTranslation {}
 
 interface OwnProps {
   isPayFeesWithGvt: boolean;
 }
 
 interface DispatchProps {
-  services: {
+  service: {
     alertError: (message: string) => void;
   };
-}
-
-interface State {
-  isPayFeesWithGvt: boolean;
-  isOpenGVTFees: boolean;
-  isPending: boolean;
 }
 
 const WalletSettingsContainer = compose<
@@ -92,6 +80,7 @@ const WalletSettingsContainer = compose<
   connect(
     null,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_WalletSettingsContainer);
 export default WalletSettingsContainer;

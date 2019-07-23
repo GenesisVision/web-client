@@ -2,7 +2,7 @@ import { ProgramDetailsFull } from "gv-api-web";
 import ProgramFollowContainer from "modules/program-follow/program-follow-container";
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import {
   IProgramDetailContext,
   ProgramDetailContext
@@ -26,7 +26,7 @@ interface ISignalProviderControlState {
 }
 
 type SignalProviderControlsProps = ISignalProviderControlOwnProps &
-  InjectedTranslateProps;
+  WithTranslation;
 
 class SignalProviderControls extends React.PureComponent<
   SignalProviderControlsProps,
@@ -57,8 +57,8 @@ class SignalProviderControls extends React.PureComponent<
     this.setState({ popups });
   };
 
-  applyChanges = (updateDetails: any) => () => {
-    updateDetails();
+  applyChanges = (updateDescription: any) => () => {
+    updateDescription();
   };
 
   render() {
@@ -73,7 +73,8 @@ class SignalProviderControls extends React.PureComponent<
             .hasActiveSubscription ? (
             <>
               <GVButton
-                color="primary-dark"
+                color="secondary"
+                variant="outlined"
                 className="program-details-description__invest-btn"
                 onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
               >
@@ -82,7 +83,6 @@ class SignalProviderControls extends React.PureComponent<
             </>
           ) : (
             <GVButton
-              color="primary-dark"
               className="program-details-description__invest-btn"
               onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
               disabled={!isAuthenticated}
@@ -92,7 +92,7 @@ class SignalProviderControls extends React.PureComponent<
           )}
         </div>
         <ProgramDetailContext.Consumer>
-          {({ updateDetails }: IProgramDetailContext) => (
+          {({ updateDescription }: IProgramDetailContext) => (
             <>
               <ProgramFollowContainer
                 id={programDescription.id}
@@ -102,13 +102,13 @@ class SignalProviderControls extends React.PureComponent<
                   programDescription.personalProgramDetails.signalSubscription
                 }
                 onClose={this.closePopup(SIGNAL_POPUP.FOLLOW)}
-                onApply={this.applyChanges(updateDetails)}
+                onApply={this.applyChanges(updateDescription)}
               />
               <ProgramUnfollowContainer
                 open={popups[SIGNAL_POPUP.UNFOLLOW]}
                 id={programDescription.id}
                 onClose={this.closePopup(SIGNAL_POPUP.UNFOLLOW)}
-                onApply={this.applyChanges(updateDetails)}
+                onApply={this.applyChanges(updateDescription)}
               />
             </>
           )}

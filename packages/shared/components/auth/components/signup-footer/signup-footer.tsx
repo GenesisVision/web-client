@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
 
@@ -14,7 +14,7 @@ const _SignUpFooter: React.FC<Props> = ({ t, ROUTE }) => (
   </>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   ROUTE: string;
 }
 

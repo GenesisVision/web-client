@@ -3,7 +3,7 @@ import "./chart-period.scss";
 import classNames from "classnames";
 import moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import withLoader from "shared/decorators/with-loader";
 import { HandlePeriodChangeType } from "shared/utils/types";
@@ -14,11 +14,8 @@ import {
   getPeriodStartDate
 } from "./chart-period.helpers";
 
-const _ChartPeriod: React.FC<Props & InjectedTranslateProps> = ({
-  t,
-  period,
-  onChange
-}) => {
+const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
+  const { t } = useTranslation();
   const handleChangePeriod = (newPeriodType: ChartPeriodType) => () => {
     if (period.type !== newPeriodType) {
       const start = getPeriodStartDate(newPeriodType);
@@ -62,5 +59,5 @@ interface Props {
   onChange: HandlePeriodChangeType;
 }
 
-const ChartPeriod = React.memo(withLoader(translate()(_ChartPeriod)));
+const ChartPeriod = React.memo(withLoader(_ChartPeriod));
 export default ChartPeriod;

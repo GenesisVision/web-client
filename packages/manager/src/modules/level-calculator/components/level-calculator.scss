@@ -16,6 +16,10 @@
 
   background-color: $popover-background;
 
+  & .dialog__close {
+    display: none;
+  }
+
   &__header {
     display: flex;
     align-items: center;
@@ -86,8 +90,14 @@
   }
 
   &__kyc-disclaimer {
+    @include vertical-paddings($padding-xsmall);
     font-size: $font-size-small;
     color: $label-color;
     letter-spacing: 0.4px;
+  }
+
+  &__btn-verify {
+    display: flex;
+    justify-content: flex-end;
   }
 }

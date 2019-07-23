@@ -1,12 +1,8 @@
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
-import AssetEditContainer, {
-  IAssetEditInfo
-} from "modules/asset-edit/asset-edit-container";
-import ConfirmContainer from "modules/confirm/confirm-container";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import {
   IProgramDetailContext,
   ProgramDetailContext
@@ -15,9 +11,6 @@ import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
-
-import ClosePeriodContainer from "../close-period/close-period-container";
-import CloseProgramContainer from "../close-program/close-program-container";
 
 enum INVESTMENT_POPUP {
   INVEST = "INVEST",
@@ -43,8 +36,8 @@ class _InvestmentProgramControls extends React.PureComponent<Props, State> {
     this.setState({ popups });
   };
 
-  applyChanges = (updateDetails: any) => () => {
-    updateDetails();
+  applyChanges = (updateDescription: any) => () => {
+    updateDescription();
   };
 
   render() {
@@ -68,7 +61,7 @@ class _InvestmentProgramControls extends React.PureComponent<Props, State> {
 
     return (
       <ProgramDetailContext.Consumer>
-        {({ updateDetails, isKycConfirmed }: IProgramDetailContext) => (
+        {({ updateDescription, isKycConfirmed }: IProgramDetailContext) => (
           <>
             <InvestmentProgramInfo
               isOwnProgram={isOwnProgram}
@@ -105,11 +98,12 @@ class _InvestmentProgramControls extends React.PureComponent<Props, State> {
               onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
             />
             <ProgramDeposit
+              condition={isAuthenticated}
               currency={programDescription.currency}
               open={popups[INVESTMENT_POPUP.INVEST]}
               id={programDescription.id}
               onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-              onApply={this.applyChanges(updateDetails)}
+              onApply={this.applyChanges(updateDescription)}
             />
           </>
         )}
@@ -134,4 +128,4 @@ interface State {
   popups: { [k: string]: boolean };
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}

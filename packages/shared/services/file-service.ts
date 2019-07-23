@@ -2,25 +2,60 @@ import { CancelablePromise } from "gv-api-web";
 import moment from "moment";
 import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
+import { FilteringType } from "../components/table/components/filtering/filter.type";
+import {
+  TableItems,
+  mapToTableItems
+} from "../components/table/helpers/mapper";
 import fileApi from "./api-client/file-api";
+import programsApi from "./api-client/programs-api";
+import authService from "./auth-service";
 
-const getExportFileUrl = (
-  id: string,
-  dateRange: DateRangeFilterType
-): string => {
+const getDateFilters = (dateRange: DateRangeFilterType): string => {
   const start = dateRange.dateStart
-    ? `start=${moment(dateRange.dateStart as string).toISOString()}&`
+    ? `DateFrom=${moment(dateRange.dateStart as string).toISOString()}&`
     : "";
   const end = dateRange.dateEnd
-    ? `end=${moment(dateRange.dateEnd as string)
+    ? `DateTo=${moment(dateRange.dateEnd as string)
         .add(1, "day")
         .startOf("day")
         .toISOString()}`
     : "";
-  const filters = `?${start}${end}`;
+  return `?${start}${end}`;
+};
+
+const getTradesExportFileUrl = (
+  id: string,
+  dateRange: DateRangeFilterType
+): string => {
+  const filters = getDateFilters(dateRange);
   return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/trades/export${
     dateRange.dateStart || dateRange.dateEnd ? filters : ""
   }`;
+};
+
+const getPeriodExportFileUrl = (
+  id: string,
+  dateRange: DateRangeFilterType
+): string => {
+  const filters = getDateFilters(dateRange);
+  return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/periods/export${
+    dateRange.dateStart || dateRange.dateEnd ? filters : ""
+  }`;
+};
+
+const getStatisticExportFile = (
+  id: string,
+  dateRange: DateRangeFilterType
+): CancelablePromise<Blob> => {
+  const authorization = authService.getAuthArg();
+  const opts = {
+    dateFrom: dateRange.dateStart as Date,
+    dateTo: dateRange.dateEnd as Date
+  };
+  return programsApi
+    .v10ProgramsByIdPeriodsExportStatisticGet(id, authorization, opts)
+    .then(blob => blob);
 };
 
 const getFileUrl = (id: string): string =>
@@ -42,7 +77,9 @@ const uploadDocument = (file: File, authorization: string): Promise<string> => {
 };
 
 const filesService = {
-  getExportFileUrl,
+  getTradesExportFileUrl,
+  getStatisticExportFile,
+  getPeriodExportFileUrl,
   getFileUrl,
   uploadFile,
   uploadDocument

@@ -2,12 +2,11 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import classNames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 
 export const _FundStructureHeaderCell: React.FC<
-  InjectedTranslateProps & {
+  WithTranslation & {
     column: SortingColumn;
   }
 > = ({ t, column }) => (

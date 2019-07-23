@@ -1,6 +1,6 @@
 import { OrderSignalModel } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FeeCommission from "shared/components/fee-commission/fee-commission";
 import FeesTooltip from "shared/components/fees-tooltip/fees-tooltip";
@@ -47,7 +47,7 @@ const TradesHistoryFeesTooltip = compose<React.FC<OwnProps>>(
 
 export default TradesHistoryFeesTooltip;
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
   trade: OrderSignalModel;

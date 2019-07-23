@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { FundAssetInfo, FundAssetsListInfo } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import { FUND_STRUCTURE_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
@@ -29,7 +29,7 @@ interface State {
 }
 
 class FundStructure extends React.PureComponent<
-  Props & InjectedTranslateProps,
+  Props & WithTranslation,
   State
 > {
   state: State = {
@@ -87,7 +87,7 @@ class FundStructure extends React.PureComponent<
           );
         }}
         renderBodyRow={(item: FundAssetInfo) => (
-          <TableRow className="details-structure__row">
+          <TableRow stripy>
             <TableCell className="details-structure__cell fund-details-structure__cell">
               {item.asset}
             </TableCell>

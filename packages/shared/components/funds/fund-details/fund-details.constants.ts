@@ -48,3 +48,12 @@ export const FUND_REBALANCING_DEFAULT_FILTERS = [
 export const FUND_REBALANCING_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
 };
+
+export const FUND_REALLOCATE_HISTORY_COLUMNS: SortingColumn[] = [
+  {
+    name: "date"
+  },
+  {
+    name: "reallocate-fund"
+  }
+];

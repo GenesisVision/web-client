@@ -1,6 +1,6 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import { formatValue } from "shared/utils/formatter";
@@ -64,7 +64,7 @@ interface OwnProps {
   onBackClick(): void;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 const FundWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
   translate(),

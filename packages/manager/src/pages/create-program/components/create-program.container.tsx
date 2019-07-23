@@ -9,7 +9,7 @@ import {
 } from "gv-api-web";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import { compose } from "redux";
@@ -275,4 +275,4 @@ interface DispatchProps {
   };
 }
 
-interface Props extends StateProps, DispatchProps, InjectedTranslateProps {}
+interface Props extends StateProps, DispatchProps, WithTranslation {}

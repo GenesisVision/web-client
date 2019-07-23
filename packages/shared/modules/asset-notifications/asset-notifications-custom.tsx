@@ -1,6 +1,6 @@
 import { ProgramNotificationSettingList } from "gv-api-web";
-import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import React, { useCallback } from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -12,6 +12,7 @@ import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import Dialog from "shared/components/dialog/dialog";
 import GVButton from "shared/components/gv-button";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
 import {
@@ -24,77 +25,65 @@ import CustomNotificationCreateForm, {
   ICustomNotificationCreateFormValues
 } from "./custom-notification-create-form";
 
-class _AssetNotificationsCustom extends React.PureComponent<Props, State> {
-  state = {
-    isOpenCreatePopup: false
-  };
-
-  handleSubmit = (
-    values: ICustomNotificationCreateFormValues,
-    setSubmitting: SetSubmittingType
-  ) => {
-    const { t, service } = this.props;
-    service
-      .addNotification(
-        {
-          assetId: this.props.asset.assetId,
-          ...values
-        },
-        t(`notifications-page.custom.create-alert`)
-      )
-      .then(() => this.handleClosePopup())
-      .catch(() => {
-        setSubmitting(false);
-      });
-  };
-
-  handleClosePopup = () => this.setState({ isOpenCreatePopup: false });
-
-  handleOpenPopup = () => this.setState({ isOpenCreatePopup: true });
-
-  render() {
-    const {
-      t,
-      asset,
-      errorMessage,
-      removeNotification,
-      toggleNotification
-    } = this.props;
-    return (
-      <div className="notification-settings custom-notifications">
-        <h3 className="notification-settings__subtitle">
-          {t("notifications-page.custom.title")}
-        </h3>
-        {asset.settingsCustom.map(settings => (
-          <CustomNotification
-            settings={settings}
-            key={settings.id}
-            removeNotification={removeNotification}
-            toggleNotifications={toggleNotification}
-          />
-        ))}
-        <div className="custom-notification__create">
-          <GVButton variant="text" onClick={this.handleOpenPopup}>
-            <>
-              <Chip type={CHIP_TYPE.POSITIVE}>+</Chip>
-              {t("notifications-page.create.title")}
-            </>
-          </GVButton>
-        </div>
-        <Dialog
-          open={this.state.isOpenCreatePopup}
-          onClose={this.handleClosePopup}
-        >
-          <CustomNotificationCreateForm
-            asset={asset}
-            errorMessage={errorMessage}
-            onSubmit={this.handleSubmit}
-          />
-        </Dialog>
+const _AssetNotificationsCustom: React.FC<Props> = ({
+  t,
+  service,
+  asset,
+  errorMessage,
+  removeNotification,
+  toggleNotification
+}) => {
+  const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
+  const handleSubmit = useCallback(
+    (
+      values: ICustomNotificationCreateFormValues,
+      setSubmitting: SetSubmittingType
+    ) =>
+      service
+        .addNotification(
+          {
+            assetId: asset.assetId,
+            ...values
+          },
+          t(`notifications-page.custom.create-alert`)
+        )
+        .then(setClosePopup)
+        .catch(() => {
+          setSubmitting(false);
+        }),
+    [asset]
+  );
+  return (
+    <div className="notification-settings custom-notifications">
+      <h3 className="notification-settings__subtitle">
+        {t("notifications-page.custom.title")}
+      </h3>
+      {asset.settingsCustom.map(settings => (
+        <CustomNotification
+          settings={settings}
+          key={settings.id}
+          removeNotification={removeNotification}
+          toggleNotifications={toggleNotification}
+        />
+      ))}
+      <div className="custom-notification__create">
+        <GVButton variant="text" onClick={setOpenPopup}>
+          <>
+            <Chip type={CHIP_TYPE.POSITIVE}>+</Chip>
+            {t("notifications-page.create.title")}
+          </>
+        </GVButton>
       </div>
-    );
-  }
-}
+      <Dialog open={isOpenPopup} onClose={setClosePopup}>
+        <CustomNotificationCreateForm
+          asset={asset}
+          errorMessage={errorMessage}
+          onSubmit={handleSubmit}
+        />
+      </Dialog>
+    </div>
+  );
+};
 
 const mapStateToProps = (state: AuthRootState): StateProps => ({
   errorMessage: "" //state.programNotifications.errorMessage TODO
@@ -110,11 +99,7 @@ const mapDispatchToProps = (
   )
 });
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    DispatchProps,
-    InjectedTranslateProps {}
+interface Props extends OwnProps, StateProps, DispatchProps, WithTranslation {}
 
 interface OwnProps {
   asset: ProgramNotificationSettingList;
@@ -134,10 +119,6 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface State {
-  isOpenCreatePopup: boolean;
-}
-
 const AssetNotificationsCustom = compose<
   React.ComponentType<OwnProps & WithLoaderProps>
 >(
@@ -146,6 +127,7 @@ const AssetNotificationsCustom = compose<
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_AssetNotificationsCustom);
 export default AssetNotificationsCustom;

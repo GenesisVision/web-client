@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { ProgramBalanceChart } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import {
   ChartDefaultPeriod,
   DEFAULT_PERIOD
@@ -32,11 +32,17 @@ class _ProgramDetailsStatisticSection extends React.PureComponent<
 
   static getDerivedStateFromProps = (props: Props, state: State): State => {
     let newState: State = {};
-    if (state.prevProps !== props) {
+    const isCurrencyChanged =
+      state.prevProps !== undefined &&
+      state.prevProps.currency !== props.currency;
+
+    if (state.prevProps !== props && !isCurrencyChanged) {
       newState.prevProps = props;
-      newState.statistic = props.statistic;
-      newState.profitChart = props.profitChart;
-      newState.balanceChart = props.balanceChart;
+      if (props.statistic) {
+        newState.statistic = props.statistic.statistic;
+        newState.profitChart = props.statistic.profitChart;
+        newState.balanceChart = props.statistic.balanceChart;
+      }
       return newState;
     }
     return state;
@@ -76,7 +82,7 @@ class _ProgramDetailsStatisticSection extends React.PureComponent<
   }
 }
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   currency: CurrencyEnum;
   programId: string;
   getProgramStatistic: (
@@ -85,9 +91,7 @@ interface Props extends InjectedTranslateProps {
     period: ChartDefaultPeriod
   ) => Promise<ProgramStatisticResult>;
   status: STATUS;
-  statistic?: ProgramDetailsStatistic;
-  profitChart?: ProgramDetailsProfitChart;
-  balanceChart?: ProgramBalanceChart;
+  statistic?: ProgramStatisticResult;
 }
 
 interface State {

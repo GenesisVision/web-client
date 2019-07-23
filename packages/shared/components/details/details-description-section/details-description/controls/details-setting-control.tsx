@@ -1,7 +1,7 @@
 import "./details-description-control.scss";
 
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { SettingsIcon } from "shared/components/icon/settings-icon";
 
@@ -12,7 +12,7 @@ export interface Props {
   title: string;
 }
 
-const _DetailsSettingControl: React.FC<InjectedTranslateProps & Props> = ({
+const _DetailsSettingControl: React.FC<WithTranslation & Props> = ({
   t,
   url,
   title

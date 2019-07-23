@@ -1,6 +1,6 @@
 import { Range } from "rc-slider";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 
 class _LevelFilterPopover extends React.PureComponent<Props, State> {
@@ -60,7 +60,7 @@ class _LevelFilterPopover extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   value: number[];
   cancel?: () => void;
   changeFilter?: (value: number[]) => void;

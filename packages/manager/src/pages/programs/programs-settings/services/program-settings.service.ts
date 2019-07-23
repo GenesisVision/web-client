@@ -17,6 +17,25 @@ import {
   SetSubmittingType
 } from "shared/utils/types";
 
+export const cancelChangeBrokerMethod = (
+  programId: string
+): ManagerThunk<CancelablePromise<void>> => dispatch =>
+  managerApi
+    .v10ManagerProgramsBrokerChangeCancelPost(authService.getAuthArg(), {
+      programId
+    })
+    .then(() => {
+      dispatch(
+        alertMessageActions.success(
+          "manager.program-settings.notifications.broker-success",
+          true
+        )
+      );
+    })
+    .catch((error: ResponseError) => {
+      dispatch(alertMessageActions.error(error.errorMessage));
+    });
+
 export const changeBrokerMethod = (
   programId: string,
   newBrokerAccountTypeId: string,

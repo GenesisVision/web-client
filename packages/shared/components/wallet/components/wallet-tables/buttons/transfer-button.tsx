@@ -1,6 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import ConvertIcon from "shared/media/convert.svg";
 
 import WalletButton, { ParentWalletButtonProps } from "./wallet-button";
@@ -15,7 +14,7 @@ export const _TransferButton: React.FC<Props> = ({ t, handleOpen }) => (
   </WalletButton>
 );
 
-interface Props extends InjectedTranslateProps, ParentWalletButtonProps {}
+interface Props extends WithTranslation, ParentWalletButtonProps {}
 
 const TransferButton = translate()(React.memo(_TransferButton));
 export default TransferButton;

@@ -1,10 +1,16 @@
-import { FundAssetsListInfo, FundDetailsFull } from "gv-api-web";
+import {
+  FundAssetsListInfo,
+  FundDetailsFull,
+  ReallocationsViewModel
+} from "gv-api-web";
 import { Dispatch } from "redux";
 import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
+import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE
@@ -36,11 +42,9 @@ export const getFundDescription = () => (
 
 export const getFundStatistic = (
   fundId: string,
-  currency: string,
   period: ChartDefaultPeriod = getDefaultPeriod()
 ): Promise<FundStatisticResult> => {
   const chartFilter = {
-    currency,
     dateFrom: period.start,
     dateTo: period.end,
     maxPointCount: 100
@@ -77,6 +81,13 @@ export const fetchFundStructure = (
   return fundsApi.v10FundsByIdAssetsGet(fundId);
 };
 
+export const fetchFundReallocateHistory = (
+  fundId: string,
+  filters?: FilteringType
+): Promise<ReallocationsViewModel> => {
+  return fundsApi.v10FundsByIdReallocationsGet(fundId, filters);
+};
+
 export const closeFund = (
   id: string,
   opts: {
@@ -88,15 +99,17 @@ export const closeFund = (
   return managerApi.v10ManagerFundsByIdClosePost(id, authorization, opts);
 };
 
-export const fetchEventsCounts = (
-  id: string
-): Promise<{ eventsCount: number }> => {
+export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
   const isAuthenticated = authService.isAuthenticated();
   const filtering = { take: 0 };
   const eventsCountPromise = isAuthenticated
     ? fetchPortfolioEvents({ ...filtering, assetId: id })
     : Promise.resolve({ total: 0 });
-  return eventsCountPromise.then(eventsData => ({
-    eventsCount: eventsData.total
-  }));
+  const reallocateCountPromise = fetchFundReallocateHistory(id, filtering);
+  return Promise.all([eventsCountPromise, reallocateCountPromise]).then(
+    ([eventsData, reallocateData]) => ({
+      eventsCount: eventsData.total,
+      reallocateCount: reallocateData.total
+    })
+  );
 };

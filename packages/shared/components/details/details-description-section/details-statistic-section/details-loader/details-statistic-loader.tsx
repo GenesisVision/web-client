@@ -1,8 +1,8 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import StatisticItemLoader from "shared/components/statistic-item/statistic-item.loader";
 
-const _DetailsStatisticsLoader: React.FC<InjectedTranslateProps> = ({ t }) => (
+const _DetailsStatisticsLoader: React.FC<WithTranslation> = ({ t }) => (
   <>
     <div className="details-statistics__subheading">
       {t("fund-details-page.statistics.current")}

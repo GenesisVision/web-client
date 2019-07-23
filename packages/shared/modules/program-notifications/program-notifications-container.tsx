@@ -1,6 +1,6 @@
 import { ProgramNotificationSettingList } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -68,11 +68,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-interface Props
-  extends OwnProps,
-    StateProps,
-    DispatchProps,
-    InjectedTranslateProps {}
+interface Props extends OwnProps, StateProps, DispatchProps, WithTranslation {}
 
 interface OwnProps {
   id: string;

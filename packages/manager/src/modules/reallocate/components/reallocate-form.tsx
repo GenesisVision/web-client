@@ -6,11 +6,12 @@ import {
 } from "gv-api-web";
 import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
@@ -78,9 +79,12 @@ export interface IReallocateFormOwnProps {
 interface Props
   extends FormikProps<IReallocateFormValues>,
     IReallocateFormOwnProps,
-    InjectedTranslateProps {}
+    WithTranslation {}
 
-const ReallocateForm = compose<React.FC<IReallocateFormOwnProps>>(
+const ReallocateForm = compose<
+  React.FC<IReallocateFormOwnProps & WithLoaderProps>
+>(
+  withLoader,
   translate(),
   withFormik<IReallocateFormOwnProps, IReallocateFormValues>({
     displayName: "reallocate",

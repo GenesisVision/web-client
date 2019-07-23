@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 
-type TEvent = React.SyntheticEvent<EventTarget>;
+type TEvent = React.SyntheticEvent<EventTarget> | null;
 
 const useTab = <T>(
   initValue: T

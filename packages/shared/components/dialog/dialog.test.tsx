@@ -1,19 +1,19 @@
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import * as React from "react";
 
 import _Dialog from "./dialog";
 
 jest.mock("react-i18next", () => {
   return {
-    translate: () => (Component: any) => {
-      Component.defaultProps = {
-        ...Component.defaultProps,
-        t: (key: string): string => key
-      };
-      return Component;
-    }
+    useTranslation: () => ({
+      t: (string: string) => string
+    })
   };
 });
+
+const modalRoot = document.createElement("div");
+modalRoot.setAttribute("id", "modal-root");
+document.body.append(modalRoot);
 
 const handleClick = jest.fn();
 const children = <span className="test-children">Any</span>;
@@ -39,22 +39,12 @@ describe("Dialog tests", () => {
   });
   test("should call click backdrop", () => {
     const handleClick = jest.fn();
-    const component = shallow(
+    const component = mount(
       <_Dialog open onClose={handleClick}>
         {children}
       </_Dialog>
     );
-    component.find(".dialog__backdrop").simulate("click");
-    expect(handleClick).toBeCalled();
-  });
-  test("should call click close outside button", () => {
-    const handleClick = jest.fn();
-    const component = shallow(
-      <_Dialog open onClose={handleClick}>
-        {children}
-      </_Dialog>
-    );
-    component.find(".dialog__close--outside").simulate("click");
+    component.find(".dialog-wrapper").simulate("click");
     expect(handleClick).toBeCalled();
   });
   test("should call click close inside button", () => {

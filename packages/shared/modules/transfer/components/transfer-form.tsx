@@ -3,7 +3,7 @@ import "./transfer-form.scss";
 import { FormikProps, withFormik } from "formik";
 import { InternalTransferRequestSourceTypeEnum } from "gv-api-web";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -12,6 +12,7 @@ import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import TransferRate from "shared/modules/transfer/components/transfer-rate";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
@@ -194,7 +195,8 @@ const _TransferForm: React.FC<Props> = ({
   );
 };
 
-const TransferForm = compose<React.ComponentType<OwnProps>>(
+const TransferForm = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+  withLoader,
   translate(),
   withFormik<OwnProps, TransferFormValues>({
     displayName: "transfer",
@@ -299,6 +301,6 @@ export interface TransferFormValues {
 }
 
 interface Props
-  extends InjectedTranslateProps,
+  extends WithTranslation,
     FormikProps<TransferFormValues>,
     OwnProps {}

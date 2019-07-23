@@ -2,7 +2,7 @@ import { push } from "connected-react-router";
 import { ProgramTag, ProgramsList } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
@@ -19,17 +19,17 @@ import SelectFilter from "shared/components/table/components/filtering/select-fi
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
+import { IDataModel } from "shared/constants/constants";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import {
-  currenciesSelector,
+  programCurrenciesSelector,
   programTagsSelector
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
-import { convertToArray } from "shared/utils/helpers";
 
 import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
@@ -59,7 +59,7 @@ interface DispatchProps {
     toggleFavoriteProgram: ToggleFavoriteDispatchableType;
     redirectToLogin(): void;
     getPrograms(filters: Object): void;
-    fetchPrograms(filters: { [keys: string]: any }): Promise<ProgramsList>;
+    fetchPrograms(filters: { [keys: string]: any }): Promise<IDataModel>;
     getProgramsFilters(): (dispatch: any, getState: any) => Object;
     programsChangePage(
       nextPage: number
@@ -78,7 +78,7 @@ interface Props
     MergeProps,
     StateProps,
     DispatchProps,
-    InjectedTranslateProps,
+    WithTranslation,
     RouteComponentProps {}
 
 class _ProgramsTableContainer extends React.PureComponent<Props> {
@@ -164,7 +164,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
 const mapStateToProps = (state: RootState): StateProps => ({
   isAuthenticated: isAuthenticatedSelector(state),
   data: programsDataSelector(state),
-  currencies: currenciesSelector(state),
+  currencies: programCurrenciesSelector(state),
   programTags: programTagsSelector(state)
 });
 

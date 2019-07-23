@@ -2,7 +2,7 @@ import "./asset-status.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { STATUS } from "shared/constants/constants";
 
 const getStatusClassName = (status: STATUS, className?: string) =>
@@ -25,7 +25,7 @@ const _AssetStatusLabel: React.FC<Props> = ({
   </span>
 );
 
-interface Props extends InjectedTranslateProps {
+interface Props extends WithTranslation {
   status: STATUS;
   onClick?: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
   className?: string;

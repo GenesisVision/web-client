@@ -1,10 +1,9 @@
 import { FormikProps, withFormik } from "formik";
+import CreateProgramStopOutField from "pages/create-program/components/create-program-settings/fields/create-program-stop-out-field";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
 
@@ -17,30 +16,18 @@ const _StopOutLevel: React.FC<Props> = ({
   isSubmitting
 }) => (
   <form id="edit-form" onSubmit={handleSubmit}>
-    <div className="program-edit__block-wrapper">
-      <h3>{t("manager.create-program-page.settings.fields.stop-out-level")}</h3>
-      <div className="create-program-settings__item">
-        <GVFormikField
-          name={FIELDS.stopOutLevel}
-          label={t(
-            "manager.create-program-page.settings.fields.stop-out-level"
-          )}
-          adornment="%"
-          component={GVTextField}
-          type="number"
-          autoComplete="off"
-          decimalScale={4}
-        />
-      </div>
-      <GVButton
-        color="primary"
-        type={"submit"}
-        className="invest-form__submit-button"
-        disabled={!dirty || !isValid || isSubmitting}
-      >
-        {t("manager.program-settings.buttons.save")}
-      </GVButton>
+    <h3>{t("manager.create-program-page.settings.fields.stop-out-level")}</h3>
+    <div className="program-edit__block-wrapper create-program-settings__row">
+      <CreateProgramStopOutField name={FIELDS.stopOutLevel} />
     </div>
+    <GVButton
+      color="primary"
+      type={"submit"}
+      className="invest-form__submit-button"
+      disabled={!dirty || !isValid || isSubmitting}
+    >
+      {t("manager.program-settings.buttons.save")}
+    </GVButton>
   </form>
 );
 
@@ -54,7 +41,7 @@ export interface StopOutLevelFormValues {
 
 interface Props
   extends OwnProps,
-    InjectedTranslateProps,
+    WithTranslation,
     FormikProps<StopOutLevelFormValues> {}
 
 interface OwnProps {

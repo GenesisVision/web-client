@@ -1,7 +1,7 @@
 import "./manager.page.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import GVTabs from "shared/components/gv-tabs";
@@ -133,7 +133,7 @@ const _ManagerPageLoader: React.FC<Props> = ({ t }) => (
   </Page>
 );
 
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {}
 

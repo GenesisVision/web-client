@@ -2,11 +2,10 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { OrderModel } from "gv-api-web";
 import moment from "moment";
-import * as React from "react";
 import { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import * as React from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import GVButton from "shared/components/gv-button";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -16,10 +15,7 @@ import {
   generateProgramTradesColumns
 } from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import {
-  DATE_RANGE_FILTER_NAME,
-  DateRangeFilterType
-} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
@@ -31,6 +27,8 @@ import { DEFAULT_DECIMAL_SCALE, IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import filesService from "shared/services/file-service";
 import { formatValue } from "shared/utils/formatter";
+
+import DownloadButtonToolbar from "./download-button-toolbar/download-button-toolbar";
 
 const _ProgramTrades: React.FC<Props> = ({
   showSwaps,
@@ -52,6 +50,7 @@ const _ProgramTrades: React.FC<Props> = ({
         <DownloadButtonToolbar
           filtering={filtering!.dateRange}
           programId={programId}
+          getExportFileUrl={filesService.getTradesExportFileUrl}
         />
       )}
       getItems={fetchProgramTrades}
@@ -79,7 +78,7 @@ const _ProgramTrades: React.FC<Props> = ({
       renderBodyRow={(trade: OrderModel) => {
         const volume = +formatValue(trade.volume, DEFAULT_DECIMAL_SCALE / 2);
         return (
-          <TableRow className="details-trades__row">
+          <TableRow stripy>
             <TableCell className="details-trades__cell program-details-trades__cell--direction/entry">
               <BaseProfitability
                 isPositive={trade.direction === "Buy"}
@@ -178,27 +177,7 @@ interface OwnProps {
   ) => Promise<IDataModel>;
 }
 
-interface Props extends InjectedTranslateProps, OwnProps {}
-
-interface IDownloadButtonToolbar extends InjectedTranslateProps {
-  filtering: DateRangeFilterType;
-  programId: string;
-}
-
-const _DownloadButtonToolbar: React.FC<IDownloadButtonToolbar> = ({
-  t,
-  filtering,
-  programId
-}) => (
-  <div className="dashboard__button-container dashboard__button">
-    <a href={filesService.getExportFileUrl(programId, filtering)}>
-      <GVButton color="primary" variant="text">
-        {t("program-details-page.history.trades.download")}
-      </GVButton>
-    </a>
-  </div>
-);
-const DownloadButtonToolbar = translate()(React.memo(_DownloadButtonToolbar));
+interface Props extends WithTranslation, OwnProps {}
 
 const ProgramTrades = translate()(React.memo(_ProgramTrades));
 export default ProgramTrades;

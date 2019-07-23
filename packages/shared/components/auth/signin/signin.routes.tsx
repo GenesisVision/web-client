@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import LoginFooter from "shared/components/auth/components/login-footer/login-footer";
@@ -13,7 +13,7 @@ export const LOGIN_ROUTE_TWO_FACTOR_ROUTE = `${LOGIN_ROUTE}/two-factor`;
 export const LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE = `${LOGIN_ROUTE_TWO_FACTOR_ROUTE}/recovery`;
 export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
 
-const _SignInRoutes: React.FC<InjectedTranslateProps> = ({ t }) => (
+const _SignInRoutes: React.FC<WithTranslation> = ({ t }) => (
   <AuthLayout
     Footer={LoginFooter}
     title={t("auth.login.title")}

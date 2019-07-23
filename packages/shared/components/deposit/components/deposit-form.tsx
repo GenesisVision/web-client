@@ -1,7 +1,7 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { FundInvestInfo, ProgramInvestInfo, WalletBaseData } from "gv-api-web";
+import { ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
@@ -21,12 +21,13 @@ import {
   convertToCurrency
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { SetSubmittingType } from "shared/utils/types";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import {
   investorSchema,
   managerSchema
 } from "./deposit-form-validation-schema";
+import { TInvestInfo } from "./deposit.types";
 
 class _DepositForm extends React.PureComponent<
   InjectedFormikProps<Props, IDepositFormValues>
@@ -309,25 +310,22 @@ export interface IDepositOwnProps {
   wallets: WalletBaseData[];
   asset: ASSET;
   hasEntryFee: boolean;
-  info: ProgramInvestInfo | FundInvestInfo;
-  currency: string;
+  info: TInvestInfo;
+  currency: CurrencyEnum;
   errorMessage: string;
   onSubmit: (
     amount: number,
-    currency: string,
+    currency: CurrencyEnum,
     setSubmitting: SetSubmittingType
   ) => void;
 }
 
-interface Props
-  extends IDepositOwnProps,
-    WithRoleProps,
-    InjectedTranslateProps {}
+interface Props extends IDepositOwnProps, WithRoleProps, WithTranslation {}
 
 export interface IDepositFormValues {
   [DEPOSIT_FORM_FIELDS.rate]: number;
   [DEPOSIT_FORM_FIELDS.availableToInvest]?: number;
   [DEPOSIT_FORM_FIELDS.availableInWallet]?: number;
   [DEPOSIT_FORM_FIELDS.amount]?: number;
-  [DEPOSIT_FORM_FIELDS.walletCurrency]: string;
+  [DEPOSIT_FORM_FIELDS.walletCurrency]: CurrencyEnum;
 }

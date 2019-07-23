@@ -2,7 +2,7 @@ import "./fund-asset-filter.scss";
 
 import { PlatformAsset } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 
@@ -11,7 +11,7 @@ import TileFilter from "../tile-filter";
 import TileFilterItem from "../tile-filter-item";
 import FundAssetPopover from "./fund-asset-popover";
 
-const _FundAssetFilter: React.FC<Props & InjectedTranslateProps> = ({
+const _FundAssetFilter: React.FC<Props & WithTranslation> = ({
   t,
   name,
   values,

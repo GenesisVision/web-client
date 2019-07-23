@@ -19,6 +19,21 @@ $remove-button-color: #293842;
   @include media-breakpoint-landscape-phone() {
     align-items: center;
   }
+
+  &__container {
+    padding: $padding-xsmall;
+    display: flex;
+    flex-wrap: wrap;
+    width: 90px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    @include media-breakpoint-landscape-phone() {
+      width: 170px;
+    }
+  }
 }
 
 .fund-asset {
@@ -69,7 +84,7 @@ $remove-button-color: #293842;
     user-select: none;
   }
   &--others-count {
-    cursor: unset;
+    cursor: pointer;
     &:hover {
       background: rgba(255, 255, 255, 0.02);
     }
@@ -101,6 +116,12 @@ $remove-button-color: #293842;
 
   &__currency-short {
     opacity: 0.4;
+  }
+
+  &__container {
+    &--others-count {
+      cursor: pointer;
+    }
   }
 
   @include media-breakpoint-landscape-phone() {

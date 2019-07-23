@@ -59,6 +59,7 @@ const _DashboardPortfolioChartSection: React.FC<Props> = ({
     />
     <div className="dashboard-portfolio-chart-section__chart">
       <DashboardPortfolioChart
+        condition={composeBalanceChartData(data.balanceChart).length !== 0}
         assets={composeAssetsChartData(data.investedProgramsInfo)}
         balance={composeBalanceChartData(data.balanceChart)}
       />

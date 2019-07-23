@@ -2,10 +2,11 @@ import {
   CancelablePromise,
   DashboardPortfolioEvent,
   DashboardPortfolioEvents,
+  LevelInfo,
   ManagerPortfolioEvent,
   ManagerPortfolioEvents,
   OrderModel,
-  ProgramsLevelsInfo
+  ProgramPeriodsViewModel
 } from "gv-api-web";
 import { Dispatch } from "redux";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -168,9 +169,8 @@ export const fetchOpenPositions = (
 
 export const fetchInvestmentsLevels = (
   currency: string
-): CancelablePromise<ProgramsLevelsInfo> => {
-  return platformApi.v10PlatformLevelsGet({ currency });
-};
+): CancelablePromise<LevelInfo[]> =>
+  platformApi.v10PlatformLevelsGet({ currency }).then(({ levels }) => levels);
 
 export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
   const isAuthenticated = authService.isAuthenticated();
@@ -191,17 +191,28 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
     isAuthenticated && isManager
       ? programsApi.v10ProgramsByIdSubscribersGet(id, authService.getAuthArg())
       : Promise.resolve({ total: 0 });
+  const periodHistoryCountPromise = programsApi.v10ProgramsByIdPeriodsGet(id);
   return Promise.all([
     tradesCountPromise,
     eventsCountPromise,
     openPositionsCountPromise,
-    subscriptionsCountPromise
-  ]).then(([tradesData, eventsData, openPositionsData, subscriptionsData]) => ({
-    tradesCount: tradesData.total,
-    eventsCount: eventsData.total,
-    openPositionsCount: openPositionsData.total,
-    subscriptionsCount: subscriptionsData.total
-  }));
+    subscriptionsCountPromise,
+    periodHistoryCountPromise
+  ]).then(
+    ([
+      tradesData,
+      eventsData,
+      openPositionsData,
+      subscriptionsData,
+      periodHistoryData
+    ]) => ({
+      tradesCount: tradesData.total,
+      eventsCount: eventsData.total,
+      openPositionsCount: openPositionsData.total,
+      subscriptionsCount: subscriptionsData.total,
+      periodHistoryCount: periodHistoryData.total
+    })
+  );
 };
 
 export const fetchPortfolioEvents: GetItemsFuncType = (
@@ -226,4 +237,14 @@ export const fetchPortfolioEvents: GetItemsFuncType = (
   return request(authorization, filters).then(
     mapToTableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>("events")
   );
+};
+
+export const fetchPeriodHistory = (
+  id: string,
+  filters?: FilteringType
+): Promise<TableItems<ProgramPeriodsViewModel>> => {
+  const authorization = authService.getAuthArg();
+  return programsApi
+    .v10ProgramsByIdPeriodsGet(id, { authorization, ...filters })
+    .then(mapToTableItems<ProgramPeriodsViewModel>("periods"));
 };

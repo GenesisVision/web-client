@@ -1,7 +1,7 @@
 import { goBack } from "connected-react-router";
 import { PlatformAsset, PlatformInfo, WalletData } from "gv-api-web";
-import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import React, { useCallback, useEffect, useState } from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import {
@@ -13,6 +13,7 @@ import {
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { nameSelector } from "shared/reducers/header-reducer";
 import {
@@ -29,94 +30,73 @@ import {
 import { ICreateFundSettingsFormValues } from "./create-fund-settings/create-fund-settings";
 import CreateFundSettingsSection from "./create-fund-settings/create-fund-settings-section";
 
-class _CreateFundContainer extends React.PureComponent<Props, State> {
-  state = {
-    isPending: true,
-    isNavigationDialogVisible: false,
-    minimumDepositAmount: undefined
-  };
-
-  componentDidMount() {
-    const { service } = this.props;
+const _CreateFundContainer: React.FC<Props> = ({
+  t,
+  author,
+  service,
+  platformSettings,
+  fundAssets,
+  wallets
+}) => {
+  const [isPending, setIsPending, setNotIsPending] = useIsOpen();
+  const [
+    isNavigationDialogVisible,
+    setIsNavigationDialogVisible,
+    setNotIsNavigationDialogVisible
+  ] = useIsOpen();
+  const [minimumDepositAmount, setMinimumDepositAmount] = useState<
+    number | undefined
+  >(undefined);
+  useEffect(() => {
+    setIsPending();
     service.fetchWallets();
-    fetchMinimumDepositAmount().then(response => {
-      this.setState({
-        minimumDepositAmount: response,
-        isPending: false
-      });
-    });
-  }
-
-  handleSubmit = (
-    values: ICreateFundSettingsFormValues,
-    setSubmitting: SetSubmittingType
-  ) => {
-    this.props.service.createFund(values, setSubmitting);
-  };
-
-  handleValidateError = () => {
-    this.props.service.showValidationError();
-  };
-
-  navigateBack = () => {
-    this.setState({ isNavigationDialogVisible: true });
-  };
-
-  fetchRate = (fromCurrency: string, toCurrency: string) => {
-    return rateApi.v10RateByFromByToGet(fromCurrency, toCurrency);
-  };
-
-  render() {
-    const {
-      isPending,
-      isNavigationDialogVisible,
-      minimumDepositAmount
-    } = this.state;
-    const {
-      t,
-      author,
-      service,
-      platformSettings,
-      fundAssets,
-      wallets
-    } = this.props;
-    if (!platformSettings || !wallets.length || !minimumDepositAmount)
-      return null;
-
-    return (
-      <div className="create-fund-container">
-        <div>
-          {!isPending && (
-            <CreateFundSettingsSection
-              fetchWallets={service.fetchWallets}
-              wallets={wallets}
-              navigateBack={this.navigateBack}
-              onSubmit={this.handleSubmit}
-              author={author}
-              assets={fundAssets}
-              minimumDepositAmount={minimumDepositAmount}
-              managerMaxExitFee={
-                platformSettings.programsInfo.managerMaxExitFee
-              }
-              managerMaxEntryFee={
-                platformSettings.programsInfo.managerMaxEntryFee
-              }
-              notifyError={service.notifyError}
-              fetchRate={this.fetchRate}
-            />
-          )}
-          <ConfirmPopup
-            open={isNavigationDialogVisible}
-            onClose={() => this.setState({ isNavigationDialogVisible: false })}
-            onApply={service.goBack}
-            body={t("manager.create-fund-page.navigation-back-text")}
-            applyButtonText={t("buttons.continue")}
+    fetchMinimumDepositAmount()
+      .then(setMinimumDepositAmount)
+      .finally(setNotIsPending);
+  }, []);
+  const handleSubmit = useCallback(
+    (values: ICreateFundSettingsFormValues, setSubmitting: SetSubmittingType) =>
+      service.createFund(values, setSubmitting),
+    []
+  );
+  const fetchRate = useCallback(
+    (fromCurrency: string, toCurrency: string) =>
+      rateApi.v10RateByFromByToGet(fromCurrency, toCurrency),
+    []
+  );
+  if (!platformSettings || !wallets.length || !minimumDepositAmount)
+    return null;
+  return (
+    <div className="create-fund-container">
+      <div>
+        {!isPending && (
+          <CreateFundSettingsSection
+            fetchWallets={service.fetchWallets}
+            wallets={wallets}
+            navigateBack={setIsNavigationDialogVisible}
+            onSubmit={handleSubmit}
+            author={author}
+            assets={fundAssets}
+            minimumDepositAmount={minimumDepositAmount}
+            managerMaxExitFee={platformSettings.programsInfo.managerMaxExitFee}
+            managerMaxEntryFee={
+              platformSettings.programsInfo.managerMaxEntryFee
+            }
+            notifyError={service.notifyError}
+            fetchRate={fetchRate}
           />
-        </div>
+        )}
+        <ConfirmPopup
+          open={isNavigationDialogVisible}
+          onClose={setNotIsNavigationDialogVisible}
+          onApply={service.goBack}
+          body={t("manager.create-fund-page.navigation-back-text")}
+          applyButtonText={t("buttons.continue")}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = (state: ManagerRootState): StateProps => ({
   wallets: walletsSelector(state),
@@ -125,26 +105,25 @@ const mapStateToProps = (state: ManagerRootState): StateProps => ({
   fundAssets: fundAssetsSelector(state)
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
-  return {
-    service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-      {
-        goBack,
-        createFund,
-        fetchWallets,
-        notifyError: alertMessageActions.error
-      },
-      dispatch
-    )
-  };
-};
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      goBack,
+      createFund,
+      fetchWallets,
+      notifyError: alertMessageActions.error
+    },
+    dispatch
+  )
+});
 
 const CreateFundContainer = compose<React.ComponentType>(
   translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  React.memo
 )(_CreateFundContainer);
 export default CreateFundContainer;
 
@@ -166,10 +145,4 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends StateProps, DispatchProps, InjectedTranslateProps {}
-
-interface State {
-  isPending: boolean;
-  isNavigationDialogVisible: boolean;
-  minimumDepositAmount?: number;
-}
+interface Props extends StateProps, DispatchProps, WithTranslation {}

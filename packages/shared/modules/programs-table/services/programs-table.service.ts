@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { CancelablePromise, ProgramsList } from "gv-api-web";
+import { CancelablePromise } from "gv-api-web";
 import * as qs from "qs";
 import {
   ComposeFiltersAllType,
@@ -12,6 +12,7 @@ import {
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
+import { IDataModel } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
 import {
   PROGRAMS_FACET_ROUTE,
@@ -48,16 +49,21 @@ export const getPrograms = (filters: ComposeFiltersAllType) => (
     ...requestFilters,
     ...filters
   };
-  dispatch(programTableActions.fetchPrograms(requestFilters));
+  dispatch(programTableActions.fetchProgramsAction(requestFilters));
 };
 
 export const fetchPrograms = (
   filters: FetchProgramsFiltersType
-): CancelablePromise<ProgramsList> =>
-  programApi.v10ProgramsGet({
-    ...filters,
-    authorization: authService.getAuthArg()
-  });
+): CancelablePromise<IDataModel> =>
+  programApi
+    .v10ProgramsGet({
+      ...filters,
+      authorization: authService.getAuthArg()
+    })
+    .then(data => ({
+      total: data.total,
+      items: data.programs
+    }));
 
 const composeRequestFilters = () => (
   dispatch: any,

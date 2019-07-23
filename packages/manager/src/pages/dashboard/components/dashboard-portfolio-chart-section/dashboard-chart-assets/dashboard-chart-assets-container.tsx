@@ -1,9 +1,9 @@
 import "./dashboard-chart-assets.scss";
 
-import { ManagerAssets } from "gv-api-web";
+import { ManagerSimpleFund, ManagerSimpleProgram } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -26,6 +26,7 @@ import DashboardChartAsset from "./dashboard-chart-asset";
 const _DashboardChartAssetsContainer: React.FC<Props> = ({
   t,
   assets,
+  type,
   service
 }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
@@ -36,9 +37,6 @@ const _DashboardChartAssetsContainer: React.FC<Props> = ({
     },
     []
   );
-  const { programs, funds } = assets;
-  const hasPrograms = programs.length > 0;
-  const hasFunds = funds.length > 0;
   return (
     <div className="dashboard-chart-assets">
       <div className="dashboard-chart-assets__title">
@@ -57,29 +55,11 @@ const _DashboardChartAssetsContainer: React.FC<Props> = ({
         onClose={clearAnchor}
       >
         <div className="dashboard-chart-assets-popover">
-          {hasPrograms && (
-            <div className="dashboard-chart-assets-popover__header">
-              {t("manager.dashboard-page.chart-section.programs")}
-            </div>
-          )}
-          {programs.map(x => (
+          {assets.map(x => (
             <DashboardChartAsset
               key={x.id}
               chartAsset={x}
-              type={ASSETS_TYPES.Program}
-              selectAsset={handleSelectAsset}
-            />
-          ))}
-          {hasFunds && (
-            <div className="dashboard-chart-assets-popover__header">
-              {t("manager.dashboard-page.chart-section.funds")}
-            </div>
-          )}
-          {funds.map(x => (
-            <DashboardChartAsset
-              key={x.id}
-              chartAsset={x}
-              type={ASSETS_TYPES.Fund}
+              type={type}
               selectAsset={handleSelectAsset}
             />
           ))}
@@ -96,10 +76,11 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+interface Props extends OwnProps, DispatchProps, WithTranslation {}
 
 interface OwnProps {
-  assets: ManagerAssets;
+  assets: Array<ManagerSimpleProgram | ManagerSimpleFund>;
+  type: ASSETS_TYPES;
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {

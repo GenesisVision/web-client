@@ -1,6 +1,5 @@
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { CHIP_TYPE } from "shared/components/chip/chip";
 
 import WalletButton, { ParentWalletButtonProps } from "./wallet-button";
@@ -21,7 +20,7 @@ export const _DepositButton: React.FC<Props> = ({
   </WalletButton>
 );
 
-interface Props extends InjectedTranslateProps, ParentWalletButtonProps {}
+interface Props extends WithTranslation, ParentWalletButtonProps {}
 
 const DepositButton = translate()(React.memo(_DepositButton));
 export default DepositButton;

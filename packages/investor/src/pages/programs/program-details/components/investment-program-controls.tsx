@@ -1,7 +1,7 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit";
-import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import ProgramDeposit from "modules/program-deposit/program-deposit";
+import React, { useCallback } from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import {
   IProgramDetailContext,
   ProgramDetailContext
@@ -10,96 +10,98 @@ import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
+import useIsOpen from "shared/hooks/is-open.hook";
 
 import NotifyButton from "./notify-button";
 
-class InvestmentProgramControls extends React.PureComponent<Props, State> {
-  state = {
-    isOpenInvestmentPopup: false,
-    isOpenPopup: false,
-    subscription: false
-  };
+const _InvestmentProgramControls: React.FC<Props> = ({
+  isAuthenticated,
+  t,
+  programDescription
+}) => {
+  const [
+    isOpenInvestmentPopup,
+    setOpenInvestmentPopup,
+    setCloseInvestmentPopup
+  ] = useIsOpen();
+  const [
+    isOpenUnAuthInvestmentPopup,
+    setOpenUnAuthInvestmentPopup,
+    setCloseUnAuthInvestmentPopup
+  ] = useIsOpen();
 
-  handleClosePopup = () => {
-    this.setState({ isOpenPopup: false });
-  };
+  const openInvestmentPopup = useCallback(
+    () => {
+      if (isAuthenticated) setOpenInvestmentPopup();
+      else setOpenUnAuthInvestmentPopup();
+    },
+    [isAuthenticated]
+  );
 
-  openInvestmentPopup = () => {
-    const { isAuthenticated } = this.props;
-    if (isAuthenticated) {
-      this.setState({ isOpenInvestmentPopup: true });
-    } else {
-      this.setState({ isOpenPopup: true });
-    }
-  };
+  const applyInvestmentChanges = useCallback(
+    (updateDescription: () => void) => () => {
+      updateDescription();
+    },
+    []
+  );
 
-  closeInvestmentPopup = () => {
-    this.setState({ isOpenInvestmentPopup: false });
-  };
+  const notificationId = programDescription.personalProgramDetails
+    ? programDescription.personalProgramDetails.notificationAvailableToInvestId
+    : undefined;
+  const isDisabledInvestButton = isAuthenticated
+    ? !programDescription.personalProgramDetails ||
+      !programDescription.personalProgramDetails.canInvest
+    : false;
+  return (
+    <>
+      <InvestmentProgramInfo programDescription={programDescription} />
+      <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
+        {programDescription.availableInvestmentBase === 0 && isAuthenticated ? (
+          <NotifyButton
+            canInvest={programDescription.personalProgramDetails.canInvest}
+            currency={programDescription.currency}
+            assetId={programDescription.id}
+            notificationId={notificationId}
+          />
+        ) : (
+          <GVButton
+            className="program-details-description__invest-btn"
+            onClick={openInvestmentPopup}
+            disabled={isDisabledInvestButton}
+          >
+            {t("program-details-page.description.invest")}
+          </GVButton>
+        )}
+      </div>
+      <ProgramDetailContext.Consumer>
+        {({ updateDescription }: IProgramDetailContext) => (
+          <ProgramDeposit
+            condition={isAuthenticated}
+            currency={programDescription.currency}
+            open={isOpenInvestmentPopup}
+            id={programDescription.id}
+            onClose={setCloseInvestmentPopup}
+            onApply={applyInvestmentChanges(updateDescription)}
+          />
+        )}
+      </ProgramDetailContext.Consumer>
+      <InvestmentUnauthPopup
+        message={t("program-details-page.description.unauth-popup")}
+        asset={ASSET.PROGRAM}
+        availableToInvestBase={programDescription.availableInvestmentBase}
+        title={programDescription.title}
+        currency={programDescription.currency}
+        open={isOpenUnAuthInvestmentPopup}
+        onClose={setCloseUnAuthInvestmentPopup}
+      />
+    </>
+  );
+};
 
-  applyInvestmentChanges = (updateDetails: () => void) => () => {
-    updateDetails();
-  };
-
-  render() {
-    const { t, programDescription, isAuthenticated } = this.props;
-    const { isOpenInvestmentPopup } = this.state;
-    const notificationId = programDescription.personalProgramDetails
-      ? programDescription.personalProgramDetails
-          .notificationAvailableToInvestId
-      : undefined;
-    const isDisabledInvestButton = isAuthenticated
-      ? !programDescription.personalProgramDetails ||
-        !programDescription.personalProgramDetails.canInvest
-      : false;
-    return (
-      <>
-        <InvestmentProgramInfo programDescription={programDescription} />
-        <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
-          {programDescription.availableInvestmentBase === 0 &&
-          isAuthenticated ? (
-            <NotifyButton
-              canInvest={programDescription.personalProgramDetails.canInvest}
-              currency={programDescription.currency}
-              assetId={programDescription.id}
-              notificationId={notificationId}
-            />
-          ) : (
-            <GVButton
-              className="program-details-description__invest-btn"
-              onClick={this.openInvestmentPopup}
-              disabled={isDisabledInvestButton}
-            >
-              {t("program-details-page.description.invest")}
-            </GVButton>
-          )}
-        </div>
-        <ProgramDetailContext.Consumer>
-          {({ updateDetails }: IProgramDetailContext) => (
-            <ProgramDepositContainer
-              currency={programDescription.currency}
-              open={isOpenInvestmentPopup}
-              id={programDescription.id}
-              onClose={this.closeInvestmentPopup}
-              onApply={this.applyInvestmentChanges(updateDetails)}
-            />
-          )}
-        </ProgramDetailContext.Consumer>
-        <InvestmentUnauthPopup
-          message={t("program-details-page.description.unauth-popup")}
-          asset={ASSET.PROGRAM}
-          availableToInvestBase={programDescription.availableInvestmentBase}
-          title={programDescription.title}
-          currency={programDescription.currency}
-          open={this.state.isOpenPopup}
-          onClose={this.handleClosePopup}
-        />
-      </>
-    );
-  }
-}
-
-export default translate()(InvestmentProgramControls);
+const InvestmentProgramControls = translate()(
+  React.memo(_InvestmentProgramControls)
+);
+export default InvestmentProgramControls;
 
 interface OwnProps {
   isAuthenticated: boolean;
@@ -107,9 +109,4 @@ interface OwnProps {
   programDescription: ProgramDetailsFull;
 }
 
-interface State {
-  isOpenInvestmentPopup: boolean;
-  isOpenPopup: boolean;
-}
-
-interface Props extends InjectedTranslateProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}

@@ -2,10 +2,16 @@
 
 .programs-facet {
   &__filter {
-    margin-bottom: 24px;
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
+
+    @include media-breakpoint-landscape-phone() {
+      padding: 0;
+    }
   }
 
-  &__button {
-    margin-right: 24px;
+  &__button:not(:last-child) {
+    margin-bottom: $padding-xsmall;
+    margin-right: $padding-xsmall;
   }
 }

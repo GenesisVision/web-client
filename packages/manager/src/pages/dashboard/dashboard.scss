@@ -57,6 +57,11 @@
     margin-top: $padding-xsmall;
     width: 100%;
     margin-left: 0;
+
+    @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-small;
+    }
+
     @include media-breakpoint-tablet() {
       width: 315px;
       margin-left: 2rem;

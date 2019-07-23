@@ -1,6 +1,6 @@
 import { FormikProps, withFormik } from "formik";
 import React, { useCallback } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import InputImage, {
@@ -28,7 +28,7 @@ const _AssetEditForm: React.FC<IAssetEditProps> = ({
   values,
   handleSubmit,
   info,
-  serverError,
+  errorMessage,
   type,
   isSubmitting
 }) => {
@@ -132,7 +132,7 @@ const _AssetEditForm: React.FC<IAssetEditProps> = ({
             />
           </div>
         </div>
-        <div className="form-error">{serverError}</div>
+        <div className="form-error">{errorMessage}</div>
         <div className="dialog__buttons">
           <GVButton
             type="submit"
@@ -159,7 +159,7 @@ export enum ASSET_EDIT_FIELDS {
 
 export interface IAssetEditFormOwnProps {
   info: IAssetEditInfo;
-  serverError: string;
+  errorMessage: string;
   type: ASSET;
   onSubmit: TAssetEditFormSubmit;
 }
@@ -184,7 +184,7 @@ interface FormValues extends IAssetEditFormValues {
 export interface IAssetEditProps
   extends FormikProps<FormValues>,
     IAssetEditFormOwnProps,
-    InjectedTranslateProps {}
+    WithTranslation {}
 
 const AssetEditForm = compose<
   React.FC<IAssetEditFormOwnProps & WithLoaderProps>

@@ -57,7 +57,7 @@ export const programsDateRangeFilter = {
     ),
     defaultValue: {
       ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-      type: DATA_RANGE_FILTER_TYPES.LAST_MOUTH
+      type: DATA_RANGE_FILTER_TYPES.LAST_MONTH
     }
   }),
   validate: validateDateRange

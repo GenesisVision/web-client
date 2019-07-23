@@ -2,25 +2,29 @@ import "./program-settings.scss";
 
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import GVButton from "shared/components/gv-button";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 
-import BrokerEdit, { ChangeBrokerFormValues } from "./broker-edit";
+import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
+import ChangeBroker, { ChangeBrokerFormValues } from "./change-broker/change-broker";
 import InvestmentLimit from "./investment-limit";
 import ProgramEdit from "./program-edit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
+import CloseProgram from "./close-program/close-program";
+import CloseProgramPeriod from "./close-period/close-program-period";
+import ChangePassword from "./change-password/change-password";
 
 const _ProgramSettings: React.FC<Props> = ({
+  cancelChangeBroker,
   t,
   brokersInfo,
   details,
   changeBroker,
   editProgram,
-  changePassword,
   closePeriod,
   closeProgram,
   changeSignaling
@@ -36,41 +40,21 @@ const _ProgramSettings: React.FC<Props> = ({
       <h1>{t("manager.program-settings.title")}</h1>
       <section className="program-edit__block">
         <h3>{t("manager.program-settings.period-and-closing.title")}</h3>
-        <div className="program-edit__block-wrapper">
-          <p className="program-edit__text">
-            {t("manager.program-settings.period-and-closing.text-period")}
-          </p>
-          <GVButton
-            color="primary"
-            disabled={!details.personalProgramDetails.canClosePeriod}
-            onClick={closePeriod}
-          >
-            {t("program-details-page.close-period.title")}
-          </GVButton>
-        </div>
-        <div className="program-edit__block-wrapper">
-          <p className="program-edit__text">
-            {t("manager.program-settings.period-and-closing.text-program")}
-          </p>
-          <GVButton
-            color="primary"
-            disabled={!details.personalProgramDetails.canCloseProgram}
-            onClick={closeProgram}
-          >
-            {t("program-details-page.description.close-program")}
-          </GVButton>
-        </div>
+        <CloseProgramPeriod
+          canClose={details.personalProgramDetails.canClosePeriod}
+          onApply={closePeriod}
+          id={details.id}
+        />
+        <CloseProgram
+          canClose={details.personalProgramDetails.canCloseProgram}
+          onApply={closeProgram}
+          id={details.id}
+        />
       </section>
       {details.personalProgramDetails.canChangePassword &&
         details.personalProgramDetails.canCloseProgram && (
           <section className="program-edit__block">
-            <h3>{t("manager.program-settings.password.title")}</h3>
-            <p className="program-edit__text">
-              {t("manager.program-settings.password.text")}
-            </p>
-            <GVButton color="primary" onClick={changePassword}>
-              {t("program-details-page.description.change-password")}
-            </GVButton>
+            <ChangePassword title={details.title} id={details.id} />
           </section>
         )}
       {details.personalProgramDetails.canCloseProgram && (
@@ -83,17 +67,40 @@ const _ProgramSettings: React.FC<Props> = ({
               onSubmit={editProgram}
             />
           </section>
-          {brokersInfo.brokers.length > 1 && (
+          {details.personalProgramDetails.migration && (
             <section className="program-edit__block">
-              <BrokerEdit
-                onSubmit={changeBroker}
-                id={details.id}
-                brokers={brokersInfo.brokers}
+              <CancelChangeBroker
+                brokerFrom={
+                  brokersInfo.brokers.find(
+                    broker =>
+                      !!broker.accountTypes.find(
+                        accountType =>
+                          accountType.id === brokersInfo.currentAccountTypeId
+                      )
+                  )!
+                }
+                brokerTo={details.personalProgramDetails.migration.newBroker}
+                onSubmit={cancelChangeBroker}
                 currentAccountTypeId={brokersInfo.currentAccountTypeId}
                 leverage={details.leverageMax}
+                newLeverage={
+                  details.personalProgramDetails.migration.newLeverage
+                }
               />
             </section>
           )}
+          {!!!details.personalProgramDetails.migration &&
+            brokersInfo.brokers.length > 1 && (
+              <section className="program-edit__block">
+                <ChangeBroker
+                  onSubmit={changeBroker}
+                  id={details.id}
+                  brokers={brokersInfo.brokers}
+                  currentAccountTypeId={brokersInfo.currentAccountTypeId}
+                  leverage={details.leverageMax}
+                />
+              </section>
+            )}
           <section className="program-edit__block">
             <StopOutLevel
               stopOutLevel={details.stopOutLevel}
@@ -125,7 +132,7 @@ const _ProgramSettings: React.FC<Props> = ({
   );
 };
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   details: ProgramDetailsFull;
@@ -136,15 +143,18 @@ interface OwnProps {
   ) => void;
   closePeriod: () => void;
   closeProgram: () => void;
-  changePassword: () => void;
   changeBroker: (
     values: ChangeBrokerFormValues,
     setSubmitting: SetSubmittingType
   ) => void;
   editProgram: TUpdateProgramFunc;
+  cancelChangeBroker: () => void;
 }
 
-const ProgramSettings = compose<React.ComponentType<OwnProps>>(
+const ProgramSettings = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
   translate(),
   React.memo
 )(_ProgramSettings);

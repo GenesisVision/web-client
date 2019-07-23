@@ -1,11 +1,11 @@
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
 import { KYC_ROUTE } from "shared/components/profile/profile.constants";
 
-const _NavigateToSettings: React.FC<OwnProps & InjectedTranslateProps> = ({
+const _NavigateToSettings: React.FC<OwnProps & WithTranslation> = ({
   t,
   isForex,
   isKycConfirmed,

@@ -1,12 +1,12 @@
 import { PlatformAsset } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 
 import TileFilterPopover from "../tile-filter-popover";
 
-const _FundAssetPopover: React.FC<Props & InjectedTranslateProps> = ({
+const _FundAssetPopover: React.FC<Props & WithTranslation> = ({
   t,
   values,
   changeFilter

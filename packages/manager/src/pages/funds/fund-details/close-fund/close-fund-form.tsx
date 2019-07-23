@@ -1,6 +1,6 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -56,7 +56,7 @@ enum FIELDS {
   twoFactorCode = "twoFactorCode"
 }
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   twoFactorEnabled: boolean;

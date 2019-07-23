@@ -1,8 +1,9 @@
 import "./auth-layout.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import { compose } from "redux";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
@@ -12,61 +13,53 @@ import { ILoginFooterProps } from "../login-footer/login-footer";
 
 const QUOTES_COUNT = 5;
 
-class _AuthLayout extends React.PureComponent<Props, State> {
-  state = {
-    quoteNo: Math.floor(Math.random() * QUOTES_COUNT + 1)
-  };
-
-  render() {
-    const {
-      role,
-      t,
-      children,
-      title,
-      Footer,
-      SIGNUP_ROUTE,
-      LOGIN_ROUTE
-    } = this.props;
-    const { quoteNo } = this.state;
-
-    return (
-      <div className={"auth page"}>
-        <div className="auth__left">
-          <NavLink
-            className="navigation__link auth__logo"
-            activeClassName="navigation__link--active"
-            to={HOME_ROUTE}
-          >
-            <GvLogo />
-            <GvBrand />
-          </NavLink>
-          <blockquote className="auth__quote">
-            {t(`${role}.auth-quotes.${quoteNo}.quote`)}
-            <footer className="auth__quote-footer">
-              —{" "}
-              <cite className="auth__quote-author">
-                {t(`${role}.auth-quotes.${quoteNo}.author`)}
-              </cite>
-            </footer>
-          </blockquote>
-        </div>
-        <div className="auth__right">
-          <div className="auth__content">
-            {title && <h1>{title}</h1>}
-            {children}
-          </div>
-          {Footer && (
-            <div className="auth__footer">
-              <Footer ROUTE={SIGNUP_ROUTE || LOGIN_ROUTE!} />
-            </div>
-          )}
-        </div>
+const _AuthLayout: React.FC<Props> = ({
+  role,
+  t,
+  children,
+  title,
+  Footer,
+  SIGNUP_ROUTE,
+  LOGIN_ROUTE
+}) => {
+  const quoteNo = Math.floor(Math.random() * QUOTES_COUNT + 1);
+  return (
+    <div className={"auth page"}>
+      <div className="auth__left">
+        <NavLink
+          className="navigation__link auth__logo"
+          activeClassName="navigation__link--active"
+          to={HOME_ROUTE}
+        >
+          <GvLogo />
+          <GvBrand />
+        </NavLink>
+        <blockquote className="auth__quote">
+          {t(`${role}.auth-quotes.${quoteNo}.quote`)}
+          <footer className="auth__quote-footer">
+            —{" "}
+            <cite className="auth__quote-author">
+              {t(`${role}.auth-quotes.${quoteNo}.author`)}
+            </cite>
+          </footer>
+        </blockquote>
       </div>
-    );
-  }
-}
+      <div className="auth__right">
+        <div className="auth__content">
+          {title && <h1>{title}</h1>}
+          {children}
+        </div>
+        {Footer && (
+          <div className="auth__footer">
+            <Footer ROUTE={SIGNUP_ROUTE || LOGIN_ROUTE!} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
-interface Props extends InjectedTranslateProps, OwnProps, WithRoleProps {}
+interface Props extends WithTranslation, OwnProps, WithRoleProps {}
 
 interface OwnProps {
   Footer: React.ComponentType<ILoginFooterProps>;
@@ -75,9 +68,9 @@ interface OwnProps {
   LOGIN_ROUTE?: string;
 }
 
-interface State {
-  quoteNo: number;
-}
-
-const AuthLayout = withRole<OwnProps>(translate()(_AuthLayout));
+const AuthLayout = compose<React.FC<OwnProps>>(
+  withRole,
+  translate(),
+  React.memo
+)(_AuthLayout);
 export default AuthLayout;

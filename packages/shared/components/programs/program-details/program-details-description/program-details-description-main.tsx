@@ -2,7 +2,7 @@ import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
@@ -15,7 +15,7 @@ import Popover, {
   anchorElType
 } from "shared/components/popover/popover";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
-import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import TagItem from "shared/components/tags/tag-item/tag-item";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl,
@@ -78,7 +78,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
         </Link>
         <div className="program-details-description__tag">
           {programDescription.tags.map((tag, idx) => (
-            <TagProgramItem name={tag.name} color={tag.color} key={idx} />
+            <TagItem name={tag.name} color={tag.color} key={idx} />
           ))}
         </div>
         <SocialLinksBlock
@@ -112,7 +112,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
   );
 };
 
-interface Props extends OwnProps, InjectedTranslateProps {}
+interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   programDescription: ProgramDetailsFull;
