@@ -22,11 +22,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   const [level, setLevel] = useState<number | undefined>(undefined);
 
   const updateLevel = (newLevel: number) => {
-    if (newLevel === level) {
-      setLevel(undefined);
-    } else {
-      setLevel(newLevel);
-    }
+    newLevel === level ? setLevel(undefined) : setLevel(newLevel);
   };
 
   useEffect(() => {
