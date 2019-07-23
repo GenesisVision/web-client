@@ -19,6 +19,7 @@ import SelectFilter from "shared/components/table/components/filtering/select-fi
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
+import { IDataModel } from "shared/constants/constants";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
@@ -58,7 +59,7 @@ interface DispatchProps {
     toggleFavoriteProgram: ToggleFavoriteDispatchableType;
     redirectToLogin(): void;
     getPrograms(filters: Object): void;
-    fetchPrograms(filters: { [keys: string]: any }): Promise<ProgramsList>;
+    fetchPrograms(filters: { [keys: string]: any }): Promise<IDataModel>;
     getProgramsFilters(): (dispatch: any, getState: any) => Object;
     programsChangePage(
       nextPage: number

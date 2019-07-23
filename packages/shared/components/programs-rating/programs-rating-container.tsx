@@ -40,10 +40,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
         ...filters,
         sorting: "ByLevelProgressDesc",
         levelsSet: level ? [level] : undefined
-      }).then(data => ({
-        total: data.total,
-        items: data.programs
-      })),
+      }),
     [level]
   );
 
