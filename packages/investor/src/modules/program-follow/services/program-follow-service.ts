@@ -16,27 +16,22 @@ export const getSignalAccounts = (): CancelablePromise<
   CopyTradingAccountsList
 > => signalApi.v10SignalAccountsGet(authService.getAuthArg());
 
-export const getSignalInfo = (
-  id: string
-): CancelablePromise<AttachToSignalProviderInfo> =>
-  signalApi.v10SignalAttachByIdInfoGet(id, authService.getAuthArg());
+export const getSignalInfo = (id: string): CancelablePromise<number> =>
+  signalApi
+    .v10SignalAttachByIdInfoGet(id, authService.getAuthArg())
+    .then(({ minDeposit }) => minDeposit);
 
-export const attachToSignal = (
-  programId: string,
-  requestParams: AttachToSignalProvider
-) =>
-  signalApi.v10SignalAttachByIdPost(programId, authService.getAuthArg(), {
+export const attachToSignal: TAttachToSignal = (id, requestParams) =>
+  signalApi.v10SignalAttachByIdPost(id, authService.getAuthArg(), {
     model: requestParams
   });
 
-export const updateAttachToSignal = (
+export const updateAttachToSignal: TAttachToSignal = (id, requestParams) =>
+  signalApi.v10SignalByIdUpdatePost(id, authService.getAuthArg(), {
+    model: requestParams
+  });
+
+export type TAttachToSignal = (
   id: string,
   requestParams: AttachToSignalProvider
-) => {
-  const params = {
-    ...requestParams
-  };
-  return signalApi.v10SignalByIdUpdatePost(id, authService.getAuthArg(), {
-    model: params
-  });
-};
+) => CancelablePromise<any>;
