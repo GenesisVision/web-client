@@ -24,14 +24,14 @@ $remove-button-color: #293842;
     padding: $padding-xsmall;
     display: flex;
     flex-wrap: wrap;
-    width: 100px;
-    height: 300px;
+    width: 90px;
+    max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
 
     @include media-breakpoint-landscape-phone() {
-      width: 180px;
+      width: 170px;
     }
   }
 }
