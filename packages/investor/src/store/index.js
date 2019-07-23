@@ -46,7 +46,7 @@ const middleware = [
 
 const composedEnhancers = composeWithDevTools(applyMiddleware(...middleware));
 
-export const initializeStore = (initialState = {}) =>
+export const initializeStore = (initialState = undefined) =>
   createStore(rootReducer, initialState, composedEnhancers);
 
 const store = initializeStore();

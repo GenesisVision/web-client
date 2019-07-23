@@ -1,43 +1,52 @@
-import { NextPage } from "next";
 import DashboardPage from "pages/dashboard/dashboard.page";
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
+import { NextPageWithRedux } from "shared/utils/types";
 
 import { getTopPortfolioEvents } from "../src/pages/dashboard/services/dashboard-events.services";
 
-const Dashboard: NextPage<Props> = ({ getTopPortfolioEvents }) => {
+const Dashboard: NextPageWithRedux<Props, {}> = ({ service }) => {
   useEffect(() => {
-    getTopPortfolioEvents();
+    service.getTopPortfolioEvents();
   }, []);
   return <DashboardPage />;
 };
 
-Dashboard.getInitialProps = async (ctx: any) => {
+Dashboard.getInitialProps = async ctx => {
   if (ctx.req) {
     await ctx.reduxStore.dispatch(getTopPortfolioEvents(ctx));
   }
-  return { getTopPortfolioEvents };
+  return {};
 };
 
-// const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-//   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-//     { getTopPortfolioEvents },
-//     dispatch
-//   )
-// });
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { getTopPortfolioEvents },
+    dispatch
+  )
+});
 
 export default compose(
   connect(
     null,
-    { getTopPortfolioEvents }
+    mapDispatchToProps
   ),
   withDefaultLayout,
   withPrivateRoute
 )(Dashboard);
-
-interface Props {
-  getTopPortfolioEvents: any;
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
 }
+interface ServiceThunks extends ActionCreatorsMapObject {
+  getTopPortfolioEvents: typeof getTopPortfolioEvents;
+}
+
+interface Props extends DispatchProps {}
