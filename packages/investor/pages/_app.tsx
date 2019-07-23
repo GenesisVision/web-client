@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { compose } from "redux";
 import { appWithTranslation } from "shared/i18n";
 
+import { initializeStore } from "../src/store";
 import withReduxStore from "../with-redux-store";
 
 class CustomApp extends App<{ reduxStore: any }> {
@@ -22,6 +23,6 @@ class CustomApp extends App<{ reduxStore: any }> {
 }
 
 export default compose(
-  appWithTranslation,
-  withReduxStore()
+  //appWithTranslation,
+  withReduxStore(initializeStore)
 )(CustomApp);

@@ -49,7 +49,6 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
   eventView: DashboardPortfolioEvent,
   emptyView: DashboardPortfolioEmptyView
 }) => {
-  if (!data) return null;
   return (
     <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
       <h3>{t(`${role}.dashboard-page.portfolio-events.title`)}</h3>

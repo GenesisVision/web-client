@@ -4,9 +4,11 @@ import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/dashboard.actions";
 
-export const getTopPortfolioEvents = (ctx?: NextPageContext) => (
+export const getTopPortfolioEvents = (ctx?: NextPageContext) => async (
   dispatch: Dispatch
 ) => {
   const authorization = authService.getAuthArg(ctx);
-  dispatch(actions.fetchPortfolioEventsAction(authorization, { take: 5 }));
+  await dispatch(
+    actions.fetchPortfolioEventsAction(authorization, { take: 5 })
+  );
 };

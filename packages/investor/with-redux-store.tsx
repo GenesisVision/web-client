@@ -1,36 +1,37 @@
-import { NextPage, NextPageContext } from "next";
-import { AppContextType } from "next-server/dist/lib/utils";
-import App from "next/app";
+import { AppContextType, NextPageContext } from "next-server/dist/lib/utils";
 import React, { Component } from "react";
-import { StoreCreator } from "redux";
-
-import { initializeStore } from "./src/store";
+import { RootState } from "shared/reducers/root-reducer";
+import { InitializeStoreType } from "shared/utils/types";
 
 const isServer = typeof window === "undefined";
 const __NEXT_REDUX_STORE__ = "__NEXT_REDUX_STORE__";
 
-function getOrCreateStore(initialState: any = undefined) {
+function getOrCreateStore(
+  initializeStore: InitializeStoreType,
+  initialState?: RootState
+) {
   // Always make a new store if server, otherwise state is shared between requests
   if (isServer) {
     return initializeStore(initialState);
   }
 
   // Create store if unavailable on the client and set it on the window object
-  let t = (window as any)[__NEXT_REDUX_STORE__];
-  if (!t) {
-    t = initializeStore(initialState);
+  if (!(window as any)[__NEXT_REDUX_STORE__]) {
+    (window as any)[__NEXT_REDUX_STORE__] = initializeStore(initialState);
   }
-  return t;
+  return (window as any)[__NEXT_REDUX_STORE__];
 }
 
-const withReduxStore = () => (WrappedComponent: any) =>
+const withReduxStore = (initializeStore: InitializeStoreType) => (
+  WrappedComponent: any
+) =>
   class extends Component {
     reduxStore: any;
     static async getInitialProps(ctx: AppContextType) {
-      const reduxStore = getOrCreateStore();
+      const reduxStore = getOrCreateStore(initializeStore);
 
       // Provide the store to getInitialProps of pages
-      (ctx.ctx as any).reduxStore = reduxStore;
+      (ctx.ctx as NextPageWithReduxContext).reduxStore = reduxStore;
 
       const componentProps =
         WrappedComponent.getInitialProps &&
@@ -38,21 +39,29 @@ const withReduxStore = () => (WrappedComponent: any) =>
 
       return {
         initialReduxState: reduxStore.getState(),
-        //reduxStore: reduxStore,
-        ...componentProps
+
+        //...componentProps,
+        reduxStore: reduxStore
       };
     }
 
     constructor(props: any) {
       super(props);
-      this.reduxStore = getOrCreateStore(props.initialReduxState);
+      this.reduxStore = getOrCreateStore(
+        initializeStore,
+        props.initialReduxState
+      );
+      //this.reduxStore = props.reduxStore;
     }
 
     render() {
-      console.log("render redux component");
       let t = this.props;
-      return <WrappedComponent {...this.props} reduxStore={this.reduxStore} />;
+      return (
+        <WrappedComponent {...this.props} /* reduxStore={this.reduxStore}  */ />
+      );
     }
   };
 
 export default withReduxStore;
+
+type NextPageWithReduxContext = NextPageContext & { reduxStore: any };

@@ -17,7 +17,7 @@ const Dashboard: NextPage<Props> = ({ getTopPortfolioEvents }) => {
 
 Dashboard.getInitialProps = async (ctx: any) => {
   if (ctx.req) {
-    ctx.reduxStore.dispatch(getTopPortfolioEvents(ctx));
+    await ctx.reduxStore.dispatch(getTopPortfolioEvents(ctx));
   }
   return { getTopPortfolioEvents };
 };
