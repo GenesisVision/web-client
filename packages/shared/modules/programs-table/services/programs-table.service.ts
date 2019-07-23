@@ -48,7 +48,7 @@ export const getPrograms = (filters: ComposeFiltersAllType) => (
     ...requestFilters,
     ...filters
   };
-  dispatch(programTableActions.fetchPrograms(requestFilters));
+  dispatch(programTableActions.fetchProgramsAction(requestFilters));
 };
 
 export const fetchPrograms = (
