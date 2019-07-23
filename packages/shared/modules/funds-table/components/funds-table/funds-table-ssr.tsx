@@ -11,6 +11,7 @@ import { MergeProps, connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
 import { Dispatch, bindActionCreators, compose } from "redux";
+import { DispatchProps } from "shared/components/asset-status/asset-status-requests";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import {
   DATE_RANGE_FILTER_NAME,
@@ -29,6 +30,12 @@ import {
   TAG_FILTER_DEFAULT_VALUE,
   TAG_FILTER_NAME
 } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
+import {
+  calculateSkipAndTake,
+  calculateTotalPages
+} from "shared/components/table/helpers/paging.helpers";
+import { platformContext } from "shared/context/platform";
+import isAuthenticated from "shared/decorators/is-authenticated";
 import { useTranslation } from "shared/i18n";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
@@ -40,27 +47,10 @@ import {
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
+import { FUNDS_ROUTE } from "shared/routes/funds.routes";
+import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
-import { DispatchProps } from "../../../../components/asset-status/asset-status-requests";
-import {
-  calculateSkipAndTake,
-  calculateTotalPages
-} from "../../../../components/table/helpers/paging.helpers";
-import { platformContext } from "../../../../context/platform";
-import isAuthenticated from "../../../../decorators/is-authenticated";
-import { FUNDS_ROUTE } from "../../../../routes/funds.routes";
-import { PROGRAMS_ROUTE } from "../../../../routes/programs.routes";
-import * as programsService from "../../services/programs-table.service";
 import FundsTable from "./funds-table";
-import { composeCurrencyFilter } from "./program-table.helpers";
-import ProgramsTable from "./programs-table";
-import {
-  CURRENCY_FILTER_NAME,
-  CURRENCY_FILTER_VALUE,
-  LEVEL_FILTER_NAME,
-  LEVEL_MAX_FILTER_VALUE,
-  LEVEL_MIN_FILTER_VALUE
-} from "./programs.constants";
 
 interface OwnProps {
   showSwitchView: boolean;
