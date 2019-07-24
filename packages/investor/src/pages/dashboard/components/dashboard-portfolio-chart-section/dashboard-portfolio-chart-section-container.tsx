@@ -26,7 +26,10 @@ import { isNewUserSelector } from "shared/reducers/header-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { dashboardInRequestsSelector } from "../../reducers/dashboard-in-requests.reducer";
-import { dashboardPortfolioChartSelector } from "../../reducers/dashboard-portfolio-chart.reducer";
+import {
+  dashboardPortfolioChartPeriodSelector,
+  dashboardPortfolioChartSelector
+} from "../../reducers/dashboard-portfolio-chart.reducer";
 import { getPortfolioChart } from "../../services/dashboard-chart.service";
 import {
   cancelRequest,
@@ -37,23 +40,16 @@ import DashboardPortfolioChartSection from "./dashboard-portfolio-chart-section"
 import DashboardPortfolioChartStat from "./dashboard-portfolio-chart-stat";
 
 class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
-  Props,
-  State
+  Props
 > {
-  state = {
-    period: DEFAULT_PERIOD
-  };
-
   componentDidMount() {
-    const { period } = this.state;
-    const { service } = this.props;
     // service.getPortfolioChart(period.start, period.end);
   }
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.currency !== this.props.currency) {
       this.props.service.getPortfolioChart(
-        this.state.period.start,
-        this.state.period.end
+        this.props.period.start,
+        this.props.period.end
       );
     }
   }
@@ -66,12 +62,12 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
   render() {
     const {
       t,
+      period,
       portfolioChartData,
       currency,
       isNewUser,
       inRequests
     } = this.props;
-    const { period } = this.state;
     if (isNewUser) return <DashboardGetStarted />;
     return (
       <>
@@ -84,13 +80,13 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
           inRequests={inRequests!}
           cancelRequest={cancelRequest}
         />
-        {/*<DashboardPortfolioChartStat
+        <DashboardPortfolioChartStat
           condition={!!portfolioChartData}
           loader={<DashboardChartStatsLoader />}
           currency={currency}
           portfolioChartData={portfolioChartData!}
         />
-        <DashboardPortfolioChartSection
+        {/*<DashboardPortfolioChartSection
           condition={!!portfolioChartData}
           loader={<DashboardChartLoader />}
           period={period}
@@ -104,6 +100,7 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
 }
 
 const mapStateToProps = (state: InvestorRootState): StateProps => ({
+  period: dashboardPortfolioChartPeriodSelector(state),
   portfolioChartData: dashboardPortfolioChartSelector(state),
   inRequests: dashboardInRequestsSelector(state),
   currency: currencySelector(state),
@@ -120,6 +117,7 @@ interface OwnProps {}
 
 interface StateProps {
   currency: CurrencyEnum;
+  period: ChartDefaultPeriod;
   portfolioChartData?: DashboardChartValue;
   inRequests?: ProgramRequests;
   isNewUser: boolean;
@@ -130,10 +128,6 @@ interface ServiceThunks extends ActionCreatorsMapObject {
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
-}
-
-interface State {
-  period: ChartDefaultPeriod;
 }
 
 const DashboardPortfolioChartSectionContainer = compose<
