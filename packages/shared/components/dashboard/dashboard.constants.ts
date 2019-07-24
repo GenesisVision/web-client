@@ -102,5 +102,3 @@ export type CancelRequestPropsType = {
 export type CancelRequestType = (
   props: CancelRequestPropsType
 ) => (dispatch: MiddlewareDispatch) => Promise<void>;
-
-export type GetInRequestsType = () => (dispatch: MiddlewareDispatch) => void;

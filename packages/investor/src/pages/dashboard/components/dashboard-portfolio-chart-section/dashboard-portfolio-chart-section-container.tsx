@@ -1,7 +1,6 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import { DashboardChartValue, ProgramRequests } from "gv-api-web";
-import { dashboardInRequestsSelector } from "manager-web-portal/src/pages/dashboard/reducers/dashboard-in-requests.reducer";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
@@ -26,6 +25,7 @@ import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isNewUserSelector } from "shared/reducers/header-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { dashboardInRequestsSelector } from "../../reducers/dashboard-in-requests.reducer";
 import { dashboardPortfolioChartSelector } from "../../reducers/dashboard-portfolio-chart.reducer";
 import { getPortfolioChart } from "../../services/dashboard-chart.service";
 import {
@@ -47,8 +47,7 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
   componentDidMount() {
     const { period } = this.state;
     const { service } = this.props;
-    service.getPortfolioChart(period.start, period.end);
-    service.getInRequests();
+    // service.getPortfolioChart(period.start, period.end);
   }
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (prevProps.currency !== this.props.currency) {
@@ -85,7 +84,7 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
           inRequests={inRequests!}
           cancelRequest={cancelRequest}
         />
-        <DashboardPortfolioChartStat
+        {/*<DashboardPortfolioChartStat
           condition={!!portfolioChartData}
           loader={<DashboardChartStatsLoader />}
           currency={currency}
@@ -98,7 +97,7 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
           data={portfolioChartData!}
           currency={currency}
           handleChangePeriod={this.handleChangePeriod}
-        />
+        /> */}
       </>
     );
   }
@@ -112,7 +111,7 @@ const mapStateToProps = (state: InvestorRootState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators({ getPortfolioChart, getInRequests }, dispatch)
+  service: bindActionCreators({ getPortfolioChart }, dispatch)
 });
 
 interface Props extends OwnProps, StateProps, DispatchProps, WithTranslation {}
@@ -128,7 +127,6 @@ interface StateProps {
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   getPortfolioChart: typeof getPortfolioChart;
-  getInRequests: typeof getInRequests;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;

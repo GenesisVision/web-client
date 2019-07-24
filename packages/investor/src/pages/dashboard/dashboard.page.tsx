@@ -23,9 +23,9 @@ const DashboardPage: React.FC<IDashboardPageProps> = ({ role }) => {
       <div className="dashboard">
         <div className="dashboard__row">
           <div className="dashboard__chart">
-            {/* <Surface className="dashboard-portfolio-chart-section">
+            <Surface className="dashboard-portfolio-chart-section">
               <DashboardPortfolioChartSectionContainer />
-            </Surface> */}
+            </Surface>
           </div>
           <div className="dashboard__portfolio-events-aside">
             <DashboardPortfolioEventsSection title={title} />
