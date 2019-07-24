@@ -9,14 +9,14 @@ import { SetSubmittingType } from "shared/utils/types";
 
 import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
 import ChangeBroker, { ChangeBrokerFormValues } from "./change-broker/change-broker";
+import ChangePassword from "./change-password/change-password";
+import CloseProgramPeriod from "./close-period/close-program-period";
+import CloseProgram from "./close-program/close-program";
 import InvestmentLimit from "./investment-limit";
 import ProgramEdit from "./program-edit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
-import CloseProgram from "./close-program/close-program";
-import CloseProgramPeriod from "./close-period/close-program-period";
-import ChangePassword from "./change-password/change-password";
 
 const _ProgramSettings: React.FC<Props> = ({
   cancelChangeBroker,
@@ -97,7 +97,7 @@ const _ProgramSettings: React.FC<Props> = ({
                   id={details.id}
                   brokers={brokersInfo.brokers}
                   currentAccountTypeId={brokersInfo.currentAccountTypeId}
-                  leverage={details.leverageMax}
+                  currentLeverage={details.leverageMax}
                 />
               </section>
             )}
