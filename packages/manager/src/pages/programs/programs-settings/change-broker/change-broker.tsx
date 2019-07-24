@@ -135,7 +135,6 @@ const _ChangeBroker: React.FC<Props> = ({
       <ConfirmChangeBroker
         open={isChangeBrokerOpen}
         onClose={setChangeBrokerClose}
-        onApply={()=>{}}
         brokerFrom={brokerFrom.name}
         brokerTo={
           brokers.find(

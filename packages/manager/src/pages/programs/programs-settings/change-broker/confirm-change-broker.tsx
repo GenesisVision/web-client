@@ -7,13 +7,11 @@ import { SetSubmittingType } from "shared/utils/types";
 const _ConfirmChangeBroker: React.FC<Props> = ({
   t,
   open,
-  onApply,
   onClose,
   brokerFrom,
   brokerTo
 }) => {
   const handleApplyClick = useCallback((setSubmitting: SetSubmittingType) => {
-    onApply();
     onClose();
     setSubmitting(false);
   }, []);
@@ -39,7 +37,6 @@ interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
   open: boolean;
-  onApply(): void;
   onClose(): void;
   brokerFrom?: string;
   brokerTo?: string;
