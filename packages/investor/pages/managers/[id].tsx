@@ -4,18 +4,25 @@ import React from "react";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import ManagerPage from "shared/components/manager/manager.page";
 import ManagerApi from "shared/services/api-client/manager-api";
+import { AuthRootState } from "shared/utils/types";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
-const Managers: NextPage<{
-  managerProfile: ManagerProfile;
-}> = ({ managerProfile }) => {
-  return <div>{managerProfile}</div>
-  // return <ManagerPage
-  //   isAuthenticated={false}
-  //   managerProfile={managerProfile}
-  // />
+const Managers: NextPage<Props, {}> = ({ isAuthenticated, managerProfile }) => {
+  return (
+    <ManagerPage
+    isAuthenticated={isAuthenticated}
+    managerProfile={managerProfile}
+  />
+  )
 };
 
-Managers.getInitialProps = async (ctx: NextPageContext) => {
+const mapStateToProps = (state: AuthRootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state)
+});
+
+Managers.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const managerProfile = await ManagerApi.v10ManagerByIdGet(id as string);
   return {
@@ -24,4 +31,17 @@ Managers.getInitialProps = async (ctx: NextPageContext) => {
   };
 };
 
-export default withDefaultLayout(Managers);
+interface StateProps {
+  isAuthenticated: boolean;
+}
+
+interface OwnProps {
+  managerProfile: ManagerProfile;
+}
+
+interface Props extends StateProps, OwnProps {}
+
+export default compose(
+  connect(mapStateToProps),
+  withDefaultLayout
+)(Managers);

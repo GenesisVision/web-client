@@ -56,20 +56,20 @@ const _ManagerHistorySection: React.FC<Props> = ({
       </div>
 
       <div>
-        {tab === MANAGER_HISTORY_TAB.PROGRAMS && (
-          <ManagerPrograms
-            title={title}
-            managerId={managerId}
-            isAuthenticated={isAuthenticated}
-          />
-        )}
-        {tab === MANAGER_HISTORY_TAB.FUNDS && (
-          <ManagerFunds
-            title={title}
-            managerId={managerId}
-            isAuthenticated={isAuthenticated}
-          />
-        )}
+        {/*{tab === MANAGER_HISTORY_TAB.PROGRAMS && (*/}
+        {/*<ManagerPrograms*/}
+        {/*title={title}*/}
+        {/*managerId={managerId}*/}
+        {/*isAuthenticated={isAuthenticated}*/}
+        {/*/>*/}
+        {/*)}*/}
+        {/*{tab === MANAGER_HISTORY_TAB.FUNDS && (*/}
+        {/*<ManagerFunds*/}
+        {/*title={title}*/}
+        {/*managerId={managerId}*/}
+        {/*isAuthenticated={isAuthenticated}*/}
+        {/*/>*/}
+        {/*)}*/}
       </div>
     </Surface>
   );
