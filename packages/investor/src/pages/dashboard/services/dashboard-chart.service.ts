@@ -17,8 +17,8 @@ export const getPortfolioChart = (ctx?: NextPageContext) => async (
   const { currency } = getState().accountSettings;
   const filters = {
     currency,
-    from: period.start ? new Date(period.start) : undefined,
-    to: period.end ? period.end.toISOString() : undefined,
+    from: period.start,
+    to: period.end,
     balancePoints: 30,
     programsPoints: 7
   };
