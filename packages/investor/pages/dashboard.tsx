@@ -1,4 +1,5 @@
 import DashboardPage from "pages/dashboard/dashboard.page";
+import { getPortfolioChart } from "pages/dashboard/services/dashboard-chart.service";
 import { getTopPortfolioEvents } from "pages/dashboard/services/dashboard-events.services";
 import { getInRequests } from "pages/dashboard/services/dashboard-in-requests.service";
 import React, { useEffect } from "react";
@@ -25,7 +26,8 @@ Dashboard.getInitialProps = async ctx => {
   if (ctx.req) {
     Promise.all([
       await ctx.reduxStore.dispatch(getTopPortfolioEvents(ctx)),
-      await ctx.reduxStore.dispatch(getInRequests(ctx))
+      await ctx.reduxStore.dispatch(getInRequests(ctx)),
+      await ctx.reduxStore.dispatch(await getPortfolioChart(ctx))
     ]);
   }
   return {};
@@ -33,7 +35,7 @@ Dashboard.getInitialProps = async ctx => {
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { getTopPortfolioEvents, getInRequests },
+    { getTopPortfolioEvents, getInRequests, getPortfolioChart },
     dispatch
   )
 });
@@ -52,6 +54,7 @@ interface DispatchProps {
 interface ServiceThunks extends ActionCreatorsMapObject {
   getTopPortfolioEvents: typeof getTopPortfolioEvents;
   getInRequests: typeof getInRequests;
+  getPortfolioChart: typeof getPortfolioChart;
 }
 
 interface Props extends DispatchProps {}

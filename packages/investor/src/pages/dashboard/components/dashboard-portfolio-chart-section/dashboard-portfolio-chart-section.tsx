@@ -11,7 +11,7 @@ import DashboardPortfolioChart from "./dashboard-portfolio-chart";
 
 const composeBalanceChartData = (balanceChart: any) =>
   balanceChart.map((x: any) => ({
-    date: x.date.getTime(),
+    date: new Date(x.date).getTime(),
     balance: formartChartMinValue(x.value)
   }));
 
@@ -21,7 +21,7 @@ const composeAssetsChartData = (
   assetsChart.map((x: any) => {
     let assetsCount = 0;
     const newAsset: { [keys: string]: any } = {
-      date: x.date.getTime(),
+      date: new Date(x.date).getTime(),
       value: formartChartMinValue(x.value)
     };
     x.topAssets.forEach((asset: any) => {
@@ -50,22 +50,24 @@ const _DashboardPortfolioChartSection: React.FC<Props> = ({
   currency,
   period,
   handleChangePeriod
-}) => (
-  <>
-    <ChartPeriod
-      condition={!!data.balanceChart.length}
-      period={period}
-      onChange={handleChangePeriod}
-    />
-    <div className="dashboard-portfolio-chart-section__chart">
-      <DashboardPortfolioChart
-        condition={composeBalanceChartData(data.balanceChart).length !== 0}
-        assets={composeAssetsChartData(data.investedProgramsInfo)}
-        balance={composeBalanceChartData(data.balanceChart)}
+}) => {
+  return (
+    <>
+      <ChartPeriod
+        condition={!!data.balanceChart.length}
+        period={period}
+        onChange={handleChangePeriod}
       />
-    </div>
-  </>
-);
+      <div className="dashboard-portfolio-chart-section__chart">
+        <DashboardPortfolioChart
+          condition={composeBalanceChartData(data.balanceChart).length !== 0}
+          assets={composeAssetsChartData(data.investedProgramsInfo)}
+          balance={composeBalanceChartData(data.balanceChart)}
+        />
+      </div>
+    </>
+  );
+};
 
 interface Props extends OwnProps {}
 

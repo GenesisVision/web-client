@@ -8,6 +8,7 @@ import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
 import chartPeriodReducer from "shared/reducers/reducer-creators/chart-period.reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { apiSelector } from "shared/utils/selectors";
 import { AuthRootState } from "shared/utils/types";
 
@@ -18,8 +19,9 @@ export type DashboardPortfolioChartState = {
   chartData: IApiState<DashboardChartValue>;
 };
 
-export const dashboardPortfolioChartPeriodSelector = (state: AuthRootState) =>
-  state.dashboard.portfolioChart.period;
+export const dashboardPortfolioChartPeriodSelector = (
+  state: AuthRootState
+): ChartDefaultPeriod => state.dashboard.portfolioChart.period;
 
 export const dashboardPortfolioChartSelector = apiSelector<
   DashboardChartValue,

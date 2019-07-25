@@ -1,14 +1,5 @@
-import { Dispatch } from "redux";
 import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
-
-import * as actions from "../actions/dashboard.actions";
-
-export const getPortfolioChart = () => (dispatch: Dispatch) => {
-  const authorization = authService.getAuthArg();
-
-  dispatch(actions.fetchPortfolioChartAction(authorization));
-};
 
 export interface IDashboardAssetsCounts {
   programsCount?: number;
