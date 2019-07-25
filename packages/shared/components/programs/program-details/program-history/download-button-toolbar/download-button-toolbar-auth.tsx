@@ -1,4 +1,5 @@
 import { saveAs } from "file-saver";
+import moment from "moment";
 import * as React from "react";
 import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -9,17 +10,17 @@ import filesService from "shared/services/file-service";
 const _DownloadButtonToolbarAuth: React.FC<Props> = ({
   t,
   dateRange,
-  programId
+  programId,
+  title
 }) => {
   const loadFile = useCallback(
     () => {
-      const fileName =
-        dateRange.dateStart && dateRange.dateEnd
-          ? `${dateRange.dateStart}_${dateRange.dateEnd}`
-          : dateRange.type;
+      const dateNow = moment(new Date()).format("YYYY-MM-DD_HH-mm-ss");
       filesService
         .getStatisticExportFile(programId, dateRange)
-        .then((blob: Blob) => saveAs(blob, `statistic_${fileName}.xlsx`));
+        .then((blob: Blob) =>
+          saveAs(blob, `${title}_statistic_${dateNow}.xlsx`)
+        );
     },
     [dateRange.dateStart, dateRange.dateEnd, dateRange.type]
   );
@@ -35,6 +36,7 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
 interface Props extends WithTranslation {
   dateRange: DateRangeFilterType;
   programId: string;
+  title: string;
 }
 
 const DownloadButtonToolbarAuth = translate()(

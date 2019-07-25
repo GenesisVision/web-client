@@ -93,6 +93,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               isInvested={isInvested}
               eventTypeFilterValues={historySection.eventTypeFilterValues}
               isGMProgram={description.brokerDetails.name === GM_NAME}
+              title={description.title}
             />
           </div>
         </div>

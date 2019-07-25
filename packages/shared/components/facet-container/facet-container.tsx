@@ -43,7 +43,7 @@ const _FacetContainer: React.FC<Props> = ({
   );
   const getFacetItems = useCallback(
     filtering => getItems({ ...filtering, facetId: facet!.id }),
-    [facet]
+    [facet, getItems]
   );
   if (!facet || isPending) return null;
   if (notFound) return <NotFoundPage />;

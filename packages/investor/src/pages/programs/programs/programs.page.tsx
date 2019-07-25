@@ -1,12 +1,17 @@
+import { ProgramsList } from "gv-api-web";
+import { NextComponentType } from "next";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useContext } from "react";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "shared/components/facet-cards/faset-cards-container";
 import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
-import ProgramsTableContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
+import { platformContext } from "shared/context/platform";
+import { useTranslation } from "shared/i18n";
+import ProgramsTableSSR from "shared/modules/programs-table/components/programs-table/programs-table-ssr";
+// import ProgramsTableContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
 import {
   PROGRAMS_EXPLORE_TAB_NAME,
   PROGRAMS_FAVORITES_TAB_NAME,
@@ -14,29 +19,34 @@ import {
 } from "shared/routes/programs.routes";
 import { composeProgramFacetUrl } from "shared/utils/compose-url";
 
-const _ProgramsPage: React.FC<WithTranslation> = ({ t }) => {
+const _ProgramsPage: NextComponentType<{}, InitialProps, InitialProps> = ({
+  programs
+}) => {
+  const { t } = useTranslation();
   const title = t("programs-page.title");
+
   return (
     <Page title={title}>
-      <NavigationTabsContainer
-        exploreTabName={PROGRAMS_EXPLORE_TAB_NAME}
-        tabRoute={PROGRAMS_TAB_ROUTE}
-        favoritesTabName={PROGRAMS_FAVORITES_TAB_NAME}
-      />
       <FacetCardsContainer
+        key={"facets"}
         title={title}
         assetsFacets={ASSETS_FACETS.PROGRAMS}
         composeFacetUrl={composeProgramFacetUrl}
       />
-      {/*<Surface className="programs-table-container">*/}
-      {/*  <ProgramsTableContainer*/}
-      {/*    showSwitchView*/}
-      {/*    title={t("programs-page.programs-table")}*/}
-      {/*  />*/}
-      {/*</Surface>*/}
+      <Surface className="programs-table-container" key={"table"}>
+        <ProgramsTableSSR
+          data={programs}
+          showSwitchView
+          title={t("programs-page.programs-table")}
+        />
+      </Surface>
     </Page>
   );
 };
 
-const ProgramsPage = translate()(React.memo(_ProgramsPage));
+const ProgramsPage = _ProgramsPage;
 export default ProgramsPage;
+
+interface InitialProps {
+  programs: ProgramsList;
+}

@@ -3,12 +3,12 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import GVButton from "shared/components/gv-button";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import Link from "shared/components/link/link";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -44,12 +44,7 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
     <div className="table-cards__card">
       <div className="table-cards__row">
         <div className="table-cards__avatar">
-          <Link
-            to={{
-              pathname: composeFundsDetailsUrl(fund.url),
-              state: `/ ${title}`
-            }}
-          >
+          <Link href={composeFundsDetailsUrl(fund.url)} state={`/ ${title}`}>
             <AssetAvatar
               url={fund.logo}
               alt={fund.title}
@@ -62,19 +57,15 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
           <div className="table-cards__title-wrapper">
             <Link
               className="table-cards__title"
-              to={{
-                pathname: composeFundsDetailsUrl(fund.url),
-                state: `/ ${title}`
-              }}
+              href={composeFundsDetailsUrl(fund.url)}
+              state={`/ ${title}`}
             >
               {fund.title}
             </Link>
             <Link
               className="table-cards__name"
-              to={{
-                pathname: composeManagerDetailsUrl(fund.manager.url),
-                state: `/ ${title}`
-              }}
+              href={composeManagerDetailsUrl(fund.manager.url)}
+              state={`/ ${title}`}
             >
               {fund.manager.username}
             </Link>
@@ -90,10 +81,8 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
             >
               <div className="popover-list">
                 <Link
-                  to={{
-                    pathname: composeFundsDetailsUrl(fund.url),
-                    state: `/ ${title}`
-                  }}
+                  href={composeFundsDetailsUrl(fund.url)}
+                  state={`/ ${title}`}
                 >
                   <GVButton
                     variant="text"

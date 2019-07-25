@@ -55,7 +55,8 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   isSignalProgram,
   isOwnProgram,
   role,
-  isGMProgram
+  isGMProgram,
+  title
 }) => {
   const [counts, setCounts] = useState<HistoryCountsType>({});
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_POSITIONS);
@@ -145,6 +146,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
             currency={programCurrency}
             isGMProgram={isGMProgram}
             fetchFinancialStatistic={fetchPeriodHistory}
+            title={title}
           />
         )}
         {tab === TABS.PERIOD_HISTORY && (
@@ -199,6 +201,7 @@ interface OwnProps {
   eventTypeFilterValues: SelectFilterValue[];
   isOwnProgram: boolean;
   isGMProgram: boolean;
+  title: string;
 }
 
 interface StateProps extends AuthState {}

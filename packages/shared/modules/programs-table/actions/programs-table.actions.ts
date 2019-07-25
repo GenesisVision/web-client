@@ -4,7 +4,7 @@ import { ActionType } from "shared/utils/types";
 
 export const PROGRAMS = "PROGRAMS";
 
-export const fetchPrograms = (
+export const fetchProgramsAction = (
   filters: FetchProgramsFiltersType // TODO change api to create interface to this
 ): ActionType<Promise<ProgramsList>> => ({
   type: PROGRAMS,
