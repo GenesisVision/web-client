@@ -15,21 +15,15 @@ import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
 
 const Dashboard: NextPageWithRedux<Props, {}> = ({ service }) => {
-  useEffect(() => {
-    service.getTopPortfolioEvents();
-    service.getInRequests();
-  }, []);
   return <DashboardPage />;
 };
 
 Dashboard.getInitialProps = async ctx => {
-  if (ctx.req) {
-    Promise.all([
-      await ctx.reduxStore.dispatch(getTopPortfolioEvents(ctx)),
-      await ctx.reduxStore.dispatch(getInRequests(ctx)),
-      await ctx.reduxStore.dispatch(getPortfolioChart(ctx))
-    ]);
-  }
+  await Promise.all([
+    ctx.reduxStore.dispatch(getTopPortfolioEvents(ctx)),
+    ctx.reduxStore.dispatch(getInRequests(ctx)),
+    ctx.reduxStore.dispatch(getPortfolioChart(ctx))
+  ]);
   return {};
 };
 

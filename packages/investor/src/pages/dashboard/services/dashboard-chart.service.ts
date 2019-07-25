@@ -10,7 +10,7 @@ import { dashboardPortfolioChartPeriodSelector } from "../reducers/dashboard-por
 export const getPortfolioChart = (ctx?: NextPageContext) => async (
   dispatch: MiddlewareDispatch,
   getState: () => AuthRootState
-): Promise<void> => {
+) => {
   const authorization = authService.getAuthArg(ctx);
   const period = dashboardPortfolioChartPeriodSelector(getState());
 
