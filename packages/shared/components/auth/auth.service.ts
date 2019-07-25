@@ -63,11 +63,3 @@ type CheckPowFuncType = (
   }
 ) => Promise<number>;
 export type SetFuncType = (val: number) => void;
-export type CounterType = { count?: number; total?: number };
-export type CaptchasType = { pow?: PowDetails; geeTest?: GeeTestDetails };
-
-export interface AuthService {
-  getCaptcha: GetCaptchaFuncType;
-  calculatePrefix: CalculatePrefixFuncType;
-  runCalculatingPow: CheckPowFuncType;
-}
