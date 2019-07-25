@@ -64,14 +64,7 @@ export const getFundStatistic = (
       maxDrawdown: profitChart.maxDrawdown,
       creationDate: profitChart.creationDate
     };
-    const profitChartData = {
-      timeFrameGvtProfit: profitChart.timeframeGvtProfit,
-      timeFrameUsdProfit: profitChart.timeframeUsdProfit,
-      profitChangePercent: profitChart.profitChangePercent,
-      equityChart: profitChart.equityChart
-    };
-
-    return { statistic, profitChart: profitChartData, balanceChart };
+    return { statistic, profitChart, balanceChart };
   });
 };
 
