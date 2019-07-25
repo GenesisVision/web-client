@@ -6,12 +6,12 @@ import {
   closeCopytradingTrade
 } from "modules/copytrading-tables/services/copytrading-tables.service";
 import moment from "moment";
+import Link from "next/link";
 import * as React from "react";
 import { useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import Count from "shared/components/avatar/count/count";
@@ -47,28 +47,34 @@ const _TradeRow: React.FC<Props> = ({
         <TableCell className="details-trades__cell traders-avatar">
           <div className="dashboard-programs__cell--avatar-title">
             <Link
-              to={{
-                pathname: composeProgramDetailsUrl(program.url),
-                state: `/ ${title}`
-              }}
+              href={composeProgramDetailsUrl(program.url)}
+              // to={{
+              //   pathname: composeProgramDetailsUrl(program.url),
+              //   state: `/ ${title}`
+              // }}
             >
-              <AssetAvatar
-                url={program.logo}
-                alt={program.title}
-                color={program.color}
-                level={program.level}
-                levelProgress={program.levelProgress}
-              />
+              <a>
+                <AssetAvatar
+                  url={program.logo}
+                  alt={program.title}
+                  color={program.color}
+                  level={program.level}
+                  levelProgress={program.levelProgress}
+                />
+              </a>
             </Link>
             <Link
-              to={{
-                pathname: composeProgramDetailsUrl(program.url),
-                state: `/ ${title}`
-              }}
+              href={composeProgramDetailsUrl(program.url)}
+              // to={{
+              //   pathname: composeProgramDetailsUrl(program.url),
+              //   state: `/ ${title}`
+              // }}
             >
-              <GVButton variant={"text"} color={"secondary"}>
-                {program.title}
-              </GVButton>
+              <a>
+                <GVButton variant={"text"} color={"secondary"}>
+                  {program.title}
+                </GVButton>
+              </a>
             </Link>
             {hasOtherPrograms && (
               <Count
