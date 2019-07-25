@@ -2,12 +2,11 @@ import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
@@ -18,6 +17,7 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
+import { useTranslation } from "shared/i18n";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -30,10 +30,7 @@ interface IProgramTableRowShortProps {
   onExpandClick(): void;
 }
 
-const ProgramTableRowShort: React.FC<
-  IProgramTableRowShortProps & WithTranslation
-> = ({
-  t,
+const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   title,
   showRating,
   program,
@@ -41,6 +38,7 @@ const ProgramTableRowShort: React.FC<
   toggleFavorite,
   onExpandClick
 }) => {
+  const { t } = useTranslation();
   const {
     status,
     availableInvestmentBase,
@@ -59,8 +57,10 @@ const ProgramTableRowShort: React.FC<
     tags,
     rating
   } = program;
-  const stopPropagationEvent = (event: React.MouseEvent) =>
-    event.stopPropagation();
+  const programLinkProps = {
+    state: `/ ${title}`,
+    href: composeProgramDetailsUrl(url)
+  };
   return (
     <TableRow
       className={classNames({
@@ -71,13 +71,7 @@ const ProgramTableRowShort: React.FC<
       {showRating && <TableCell>{rating.rating}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
-          <Link
-            to={{
-              pathname: composeProgramDetailsUrl(url),
-              state: `/ ${title}`
-            }}
-            onClick={stopPropagationEvent}
-          >
+          <Link {...programLinkProps}>
             <AssetAvatar
               url={logo}
               level={level}
@@ -93,11 +87,7 @@ const ProgramTableRowShort: React.FC<
             <div className="programs-table__cell--top">
               <Link
                 className="programs-table__cell--link"
-                to={{
-                  pathname: composeProgramDetailsUrl(url),
-                  state: `/ ${title}`
-                }}
-                onClick={stopPropagationEvent}
+                {...programLinkProps}
               >
                 {program.title}
               </Link>
@@ -181,4 +171,4 @@ const ProgramTableRowShort: React.FC<
   );
 };
 
-export default translate()(React.memo(ProgramTableRowShort));
+export default React.memo(ProgramTableRowShort);

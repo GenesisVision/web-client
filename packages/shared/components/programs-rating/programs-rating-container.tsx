@@ -22,17 +22,11 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   const [level, setLevel] = useState<number | undefined>(undefined);
 
   const updateLevel = (newLevel: number) => {
-    if (newLevel === level) {
-      setLevel(undefined);
-    } else {
-      setLevel(newLevel);
-    }
+    newLevel === level ? setLevel(undefined) : setLevel(newLevel);
   };
 
   useEffect(() => {
-    const request = fetchInvestmentsLevels("GVT").then(data => {
-      setLevels(data.levels);
-    });
+    const request = fetchInvestmentsLevels("GVT").then(setLevels);
     return () => request.cancel();
   }, []);
 
@@ -42,10 +36,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
         ...filters,
         sorting: "ByLevelProgressDesc",
         levelsSet: level ? [level] : undefined
-      }).then(data => ({
-        total: data.total,
-        items: data.programs
-      })),
+      }),
     [level]
   );
 

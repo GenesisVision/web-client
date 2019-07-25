@@ -38,7 +38,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     (wallet: WalletData) => wallet.currency === initialDepositCurrency
   )!;
   const disableButton =
-    (!dirty && !isValid) || initialDepositAmount > wallet.available;
+    !dirty || !isValid || initialDepositAmount > wallet.available;
   const fetchRate = useCallback(
     (initialDepositCurrency?: CurrencyEnum) => {
       rateApi
@@ -77,7 +77,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
         CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount,
         formatCurrencyValue(wallet.available, currency)
       ),
-    [currency]
+    [currency, wallet]
   );
   return (
     <form className="dialog__bottom" id="follow-create-account">

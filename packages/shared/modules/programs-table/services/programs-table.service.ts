@@ -12,6 +12,7 @@ import {
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
+import { IDataModel } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
 import {
   PROGRAMS_FACET_ROUTE,
@@ -48,16 +49,21 @@ export const getPrograms = (filters: ComposeFiltersAllType) => (
     ...requestFilters,
     ...filters
   };
-  dispatch(programTableActions.fetchPrograms(requestFilters));
+  dispatch(programTableActions.fetchProgramsAction(requestFilters));
 };
 
 export const fetchPrograms = (
   filters: FetchProgramsFiltersType
-): Promise<ProgramsList> =>
-  programApi.v10ProgramsGet({
-    ...filters,
-    authorization: authService.getAuthArg()
-  });
+): Promise<IDataModel> =>
+  programApi
+    .v10ProgramsGet({
+      ...filters,
+      authorization: authService.getAuthArg()
+    })
+    .then(data => ({
+      total: data.total,
+      items: data.programs
+    }));
 
 const composeRequestFilters = () => (
   dispatch: any,

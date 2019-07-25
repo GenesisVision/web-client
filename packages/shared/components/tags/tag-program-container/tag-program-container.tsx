@@ -25,13 +25,9 @@ const TagProgramContainer: React.FC<Props> = React.memo(({ tags }) => {
       {remainder && (
         <Tooltip render={() => <TagItemTooltip tags={tags} />}>
           <div className="tag-program-container__others">
-            <Profitability
-              className="tag-button"
-              value={remainder}
-              variant={PROFITABILITY_VARIANT.CHIPS}
-            >
+            <div className="tag-button tag-button--remainder">
               + {remainder}
-            </Profitability>
+            </div>
           </div>
         </Tooltip>
       )}

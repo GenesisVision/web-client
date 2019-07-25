@@ -2,7 +2,7 @@ import "./back-button.scss";
 
 import { CallHistoryMethodAction, goBack, push } from "connected-react-router";
 import Router, { useRouter } from "next/router";
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -20,7 +20,14 @@ import { updateCurrency } from "../../modules/currency-select/services/currency-
 export const _BackButton: React.FC<
   /*StateProps & */ WithTranslation /* & DispatchProps*/
 > = ({ t }) => {
-  // if (!backPath) return null;
+  const [backPath, setBackPath] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const { state } = window.history;
+    setBackPath(state.state);
+  }, []);
+
+  if (!backPath) return null;
 
   return (
     <div className="back-button">
@@ -35,7 +42,7 @@ export const _BackButton: React.FC<
           <div className="back-button__back">{t("buttons.back")}</div>
         </>
       </GVButton>
-      {/*<div className="back-button__path">{backPath}</div>*/}
+      <div className="back-button__path">{backPath}</div>
     </div>
   );
 };

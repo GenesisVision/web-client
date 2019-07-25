@@ -72,7 +72,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
               value={TABS.EVENTS}
               label={t("fund-details-page.history.tabs.events")}
               count={eventsCount}
-              visible={isAuthenticated && isInvested}
+              visible={isAuthenticated && !!eventsCount}
             />
             <GVTab
               value={TABS.REALLOCATE_HISTORY}

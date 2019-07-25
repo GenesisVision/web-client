@@ -85,7 +85,7 @@ const _FollowForm: React.FC<Props> = ({
       setRequestParams(params);
       submitMethod(id, params, setSubmitting);
     },
-    []
+    [requestParams]
   );
   const adaptStep = tab === TABS.CREATE_ACCOUNT ? "create-account" : "params";
   const paramsSubscription = signalSubscription.hasActiveSubscription

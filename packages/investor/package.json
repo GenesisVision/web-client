@@ -8,7 +8,7 @@
     "gv-api-web": "^1.0.0"
   },
   "scripts": {
-    "dev": "yarn copy && node index.js",
+    "start": "yarn copy && node index.js",
     "build-ssr": "yarn copy && next build",
     "start-ssr": "cross-env NODE_ENV=production node index.js",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
