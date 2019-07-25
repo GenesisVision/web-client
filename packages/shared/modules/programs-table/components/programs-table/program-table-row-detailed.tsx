@@ -34,7 +34,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
   const { t } = useTranslation();
   const programLinkProps = {
     state: `/ ${title}`,
-    href: composeProgramDetailsUrl(program.url)
+    pathname: composeProgramDetailsUrl(program.url)
   };
   return (
     <TableRow>
@@ -48,7 +48,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
           <div className="program-detailed__container program-detailed__container--inner">
             <div className="program-detailed__info">
               <div className="program-detailed__avatar">
-                <Link {...programLinkProps}>
+                <Link to={programLinkProps}>
                   <AssetAvatar
                     url={program.logo}
                     level={program.level}
@@ -68,7 +68,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   <div className="program-detailed__title">
                     <Link
                       className="program-detailed__title-link"
-                      {...programLinkProps}
+                      to={programLinkProps}
                     >
                       {program.title}
                     </Link>
@@ -76,8 +76,10 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   <div className="program-detailed__manager">
                     <Link
                       className="program-detailed__manager-link"
-                      href={composeManagerDetailsUrl(program.manager.url)}
-                      state={programLinkProps.state}
+                      to={{
+                        pathname: composeManagerDetailsUrl(program.manager.url),
+                        state: programLinkProps.state
+                      }}
                     >
                       {program.manager.username}
                     </Link>
@@ -224,7 +226,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                 <div className="program-detailed__details">
                   <Link
                     className="program-detailed__details-link"
-                    {...programLinkProps}
+                    to={programLinkProps}
                   >
                     {t("program-actions.details")}
                   </Link>

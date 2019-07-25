@@ -25,11 +25,21 @@ const _FundsTableRow: React.FC<Props> = ({
   <TableRow>
     <TableCell className="funds-table__cell funds-table__cell--name">
       <div className="funds-table__cell--avatar-title">
-        <Link href={composeFundsDetailsUrl(fund.url)} state={`/ ${title}`}>
+        <Link
+          to={{
+            pathname: composeFundsDetailsUrl(fund.url),
+            state: `/ ${title}`
+          }}
+        >
           <AssetAvatar url={fund.logo} alt={fund.title} color={fund.color} />
         </Link>
         <div className="funds-table__cell--title">
-          <Link href={composeFundsDetailsUrl(fund.url)} state={`/ ${title}`}>
+          <Link
+            to={{
+              pathname: composeFundsDetailsUrl(fund.url),
+              state: `/ ${title}`
+            }}
+          >
             <GVButton variant="text" color="secondary">
               {fund.title}
             </GVButton>

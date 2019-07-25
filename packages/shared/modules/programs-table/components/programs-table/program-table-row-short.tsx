@@ -59,7 +59,7 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   } = program;
   const programLinkProps = {
     state: `/ ${title}`,
-    href: composeProgramDetailsUrl(url)
+    pathname: composeProgramDetailsUrl(url)
   };
   return (
     <TableRow
@@ -71,7 +71,7 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       {showRating && <TableCell>{rating.rating}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
-          <Link {...programLinkProps}>
+          <Link to={programLinkProps}>
             <AssetAvatar
               url={logo}
               level={level}
@@ -87,7 +87,7 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
             <div className="programs-table__cell--top">
               <Link
                 className="programs-table__cell--link"
-                {...programLinkProps}
+                to={programLinkProps}
               >
                 {program.title}
               </Link>
