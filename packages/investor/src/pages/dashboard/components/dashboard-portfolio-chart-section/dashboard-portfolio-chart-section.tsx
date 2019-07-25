@@ -47,7 +47,6 @@ const composeAssetsChartData = (
 
 const _DashboardPortfolioChartSection: React.FC<Props> = ({
   data,
-  currency,
   period,
   handleChangePeriod
 }) => {

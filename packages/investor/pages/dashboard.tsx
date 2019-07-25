@@ -27,7 +27,7 @@ Dashboard.getInitialProps = async ctx => {
     Promise.all([
       await ctx.reduxStore.dispatch(getTopPortfolioEvents(ctx)),
       await ctx.reduxStore.dispatch(getInRequests(ctx)),
-      await ctx.reduxStore.dispatch(await getPortfolioChart(ctx))
+      await ctx.reduxStore.dispatch(getPortfolioChart(ctx))
     ]);
   }
   return {};

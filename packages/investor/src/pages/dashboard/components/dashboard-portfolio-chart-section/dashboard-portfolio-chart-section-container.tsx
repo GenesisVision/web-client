@@ -11,10 +11,7 @@ import {
   bindActionCreators,
   compose
 } from "redux";
-import {
-  ChartDefaultPeriod,
-  DEFAULT_PERIOD
-} from "shared/components/chart/chart-period/chart-period.helpers";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import {
   DashboardChartLoader,
   DashboardChartRequestLoader
@@ -30,7 +27,10 @@ import {
   dashboardPortfolioChartPeriodSelector,
   dashboardPortfolioChartSelector
 } from "../../reducers/dashboard-portfolio-chart.reducer";
-import { getPortfolioChart } from "../../services/dashboard-chart.service";
+import {
+  changePeriod,
+  getPortfolioChart
+} from "../../services/dashboard-chart.service";
 import { cancelRequest } from "../../services/dashboard-in-requests.service";
 import DashboardGetStarted from "./dashboard-get-started";
 import DashboardPortfolioChartSection from "./dashboard-portfolio-chart-section";
@@ -46,7 +46,7 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
   }
 
   handleChangePeriod = (period: ChartDefaultPeriod) => {
-    //dispatch period changed
+    this.props.service.changePeriod(period);
     this.props.service.getPortfolioChart();
   };
 
@@ -98,8 +98,11 @@ const mapStateToProps = (state: InvestorRootState): StateProps => ({
   isNewUser: isNewUserSelector(state)
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators({ getPortfolioChart }, dispatch)
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { getPortfolioChart, changePeriod },
+    dispatch
+  )
 });
 
 interface Props extends OwnProps, StateProps, DispatchProps, WithTranslation {}
@@ -116,6 +119,7 @@ interface StateProps {
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   getPortfolioChart: typeof getPortfolioChart;
+  changePeriod: typeof changePeriod;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
