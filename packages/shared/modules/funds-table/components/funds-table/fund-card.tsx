@@ -1,6 +1,6 @@
 import { FundDetails } from "gv-api-web";
-import { useCallback } from "react";
 import * as React from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -8,6 +8,7 @@ import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import GVButton from "shared/components/gv-button";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import Link from "shared/components/link/link";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -28,8 +29,6 @@ import {
   formatValue,
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
-
-import Link from "../../../../components/link/link";
 
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;

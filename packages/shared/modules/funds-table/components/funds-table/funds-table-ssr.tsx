@@ -5,8 +5,8 @@ import programs from "investor-web-portal/pages/programs";
 import { NextPageContext } from "next";
 import { NextRouter, useRouter } from "next/router";
 import qs from "qs";
-import * as React from "react";
 import { useContext } from "react";
+import * as React from "react";
 import { MergeProps, connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
@@ -21,6 +21,11 @@ import {
   FilteringType,
   TFilter
 } from "shared/components/table/components/filtering/filter.type";
+import FundAssetFilter from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter";
+import {
+  FUND_ASSET_DEFAULT_VALUE,
+  FUND_ASSET_FILTER_NAME
+} from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
 import { LevelFilterType } from "shared/components/table/components/filtering/level-filter/level-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
@@ -36,6 +41,7 @@ import {
 } from "shared/components/table/helpers/paging.helpers";
 import { platformContext } from "shared/context/platform";
 import isAuthenticated from "shared/decorators/is-authenticated";
+import useRouteFilters from "shared/hooks/route-filters.hook";
 import { useTranslation } from "shared/i18n";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
@@ -50,12 +56,6 @@ import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { FUNDS_ROUTE } from "shared/routes/funds.routes";
 import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
-import FundAssetFilter from "../../../../components/table/components/filtering/fund-asset-filter/fund-asset-filter";
-import {
-  FUND_ASSET_DEFAULT_VALUE,
-  FUND_ASSET_FILTER_NAME
-} from "../../../../components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
-import useRouteFilters from "../../../../hooks/route-filters.hook";
 import FundsTable from "./funds-table";
 
 interface OwnProps {

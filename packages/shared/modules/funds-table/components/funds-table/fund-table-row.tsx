@@ -6,6 +6,7 @@ import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorit
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
@@ -14,8 +15,6 @@ import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-
-import Link from "../../../../components/link/link";
 
 const _FundsTableRow: React.FC<Props> = ({
   fund,
