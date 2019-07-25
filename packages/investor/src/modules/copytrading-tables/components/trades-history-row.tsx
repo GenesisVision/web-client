@@ -5,13 +5,13 @@ import {
 } from "gv-api-web";
 import { TRADES_HISTORY_PROVIDERS_COLUMNS } from "modules/copytrading-tables/components/copytrading-tables.constants";
 import moment from "moment";
-import Link from "next/link";
 import * as React from "react";
 import { useState } from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import Count from "shared/components/avatar/count/count";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -40,34 +40,28 @@ const _TradesHistoryRow: React.FC<Props> = ({ trade, title }) => {
           {trade.providers.length > 0 ? (
             <div className="dashboard-programs__cell--avatar-title">
               <Link
-                href={composeProgramDetailsUrl(program.url)}
-                // to={{
-                //   pathname: composeProgramDetailsUrl(program.url),
-                //   state: `/ ${title}`
-                // }}
+                to={{
+                  pathname: composeProgramDetailsUrl(program.url),
+                  state: `/ ${title}`
+                }}
               >
-                <a>
-                  <AssetAvatar
-                    url={program.logo}
-                    alt={program.title}
-                    color={program.color}
-                    level={program.level}
-                    levelProgress={program.levelProgress}
-                  />
-                </a>
+                <AssetAvatar
+                  url={program.logo}
+                  alt={program.title}
+                  color={program.color}
+                  level={program.level}
+                  levelProgress={program.levelProgress}
+                />
               </Link>
               <Link
-                href={composeProgramDetailsUrl(program.url)}
-                // to={{
-                //   pathname: composeProgramDetailsUrl(program.url),
-                //   state: `/ ${title}`
-                // }}
+                to={{
+                  pathname: composeProgramDetailsUrl(program.url),
+                  state: `/ ${title}`
+                }}
               >
-                <a>
-                  <GVButton variant={"text"} color={"secondary"}>
-                    {program.title}
-                  </GVButton>
-                </a>
+                <GVButton variant={"text"} color={"secondary"}>
+                  {program.title}
+                </GVButton>
               </Link>
               {hasOtherPrograms && (
                 <Count

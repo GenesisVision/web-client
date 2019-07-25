@@ -1,6 +1,5 @@
 import "./dashboard-funds.scss";
 
-import Link from "next/link";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -10,6 +9,7 @@ import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
@@ -88,33 +88,27 @@ const _DashboardFunds: React.FC<Props> = ({
         <TableCell className="funds-table__cell funds-table__cell--name">
           <div className="funds-table__cell--avatar-title">
             <Link
-              href={composeFundsDetailsUrl(fund.url)}
-              // to={{
-              //   pathname:,
-              //   state: `/ ${title}`
-              // }}
+              to={{
+                pathname: composeFundsDetailsUrl(fund.url),
+                state: `/ ${title}`
+              }}
             >
-              <a>
-                <AssetAvatar
-                  url={fund.logo}
-                  alt={fund.title}
-                  color={fund.color}
-                />
-              </a>
+              <AssetAvatar
+                url={fund.logo}
+                alt={fund.title}
+                color={fund.color}
+              />
             </Link>
             <div className="funds-table__cell--title">
               <Link
-                href={composeFundsDetailsUrl(fund.url)}
-                // to={{
-                //   pathname: composeFundsDetailsUrl(fund.url),
-                //   state: `/ ${title}`
-                // }}
+                to={{
+                  pathname: composeFundsDetailsUrl(fund.url),
+                  state: `/ ${title}`
+                }}
               >
-                <a>
-                  <GVButton variant="text" color="secondary">
-                    {fund.title}
-                  </GVButton>
-                </a>
+                <GVButton variant="text" color="secondary">
+                  {fund.title}
+                </GVButton>
               </Link>
             </div>
           </div>

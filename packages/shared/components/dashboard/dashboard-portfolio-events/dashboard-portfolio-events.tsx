@@ -6,11 +6,11 @@ import {
   ManagerPortfolioEvent,
   ManagerPortfolioEvents
 } from "gv-api-web";
-import Link from "next/link";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Surface from "shared/components/surface/surface";
 import withLoader from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
@@ -65,20 +65,18 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
         </div>
       </div>
       <Link
-        href={fullEventsUrl}
-        // to={{
-        //   pathname: fullEventsUrl,
-        //   state: `/ ${title}`
-        // }}
+        className="dashboard-portfolio-events__see-all"
+        to={{
+          pathname: fullEventsUrl,
+          state: `/ ${title}`
+        }}
       >
-        <a className="dashboard-portfolio-events__see-all">
-          <GVButton variant="text" color="secondary">
-            <>
-              {t(`${role}.dashboard-page.portfolio-events.see-all-button`)}{" "}
-              &#8250;
-            </>
-          </GVButton>
-        </a>
+        <GVButton variant="text" color="secondary">
+          <>
+            {t(`${role}.dashboard-page.portfolio-events.see-all-button`)}{" "}
+            &#8250;
+          </>
+        </GVButton>
       </Link>
     </Surface>
   );

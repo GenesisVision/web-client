@@ -1,6 +1,5 @@
 import { SignalDetails } from "gv-api-web";
 import moment from "moment";
-import Link from "next/link";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -13,6 +12,7 @@ import {
   ACTION_STATUS_FILTER_VALUES
 } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { TableCell } from "shared/components/table/components";
@@ -69,34 +69,28 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
         <TableCell className="programs-table__cell dashboard-programs__cell--title">
           <div className="dashboard-programs__cell--avatar-title">
             <Link
-              href={composeProgramDetailsUrl(signal.url)}
-              // to={{
-              //   pathname: composeProgramDetailsUrl(signal.url),
-              //   state: `/ ${title}`
-              // }}
+              to={{
+                pathname: composeProgramDetailsUrl(signal.url),
+                state: `/ ${title}`
+              }}
             >
-              <a>
-                <AssetAvatar
-                  url={signal.logo}
-                  alt={signal.title}
-                  color={signal.color}
-                  level={signal.level}
-                  levelProgress={signal.levelProgress}
-                />
-              </a>
+              <AssetAvatar
+                url={signal.logo}
+                alt={signal.title}
+                color={signal.color}
+                level={signal.level}
+                levelProgress={signal.levelProgress}
+              />
             </Link>
             <Link
-              href={composeProgramDetailsUrl(signal.url)}
-              // to={{
-              //   pathname: composeProgramDetailsUrl(signal.url),
-              //   state: `/ ${title}`
-              // }}
+              to={{
+                pathname: composeProgramDetailsUrl(signal.url),
+                state: `/ ${title}`
+              }}
             >
-              <a>
-                <GVButton variant="text" color="secondary">
-                  {signal.title}
-                </GVButton>
-              </a>
+              <GVButton variant="text" color="secondary">
+                {signal.title}
+              </GVButton>
             </Link>
           </div>
         </TableCell>
