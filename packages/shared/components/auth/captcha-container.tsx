@@ -20,9 +20,9 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   const [id, setId] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [values, setValues] = useState<TValues | undefined>(undefined);
-  const [setSubmitting, setSetSubmitting] = useState<
-    SetSubmittingType | undefined
-  >(undefined);
+  const [setSubmitting, setSetSubmitting] = useState<{
+    func?: SetSubmittingType;
+  }>({});
   const [isSubmit, setIsSubmit, setIsNotSubmit] = useIsOpen();
 
   useEffect(
@@ -40,9 +40,9 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
             ...values,
             captchaCheckResult
           },
-          setSubmitting!
+          setSubmitting.func!
         );
-      if (false) {
+      if (isSubmit) {
         switch (captchaType) {
           case "Pow":
             if (prefix) {
@@ -72,7 +72,7 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
           setPow(pow);
           setValues(values);
           setEmail(values.email);
-          setSetSubmitting(setSubmittingProp);
+          setSetSubmitting({ func: setSubmittingProp });
           setIsSubmit();
         });
     },
