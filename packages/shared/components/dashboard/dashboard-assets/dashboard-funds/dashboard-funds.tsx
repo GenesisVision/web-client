@@ -1,9 +1,9 @@
 import "./dashboard-funds.scss";
 
+import Link from "next/link";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -88,27 +88,33 @@ const _DashboardFunds: React.FC<Props> = ({
         <TableCell className="funds-table__cell funds-table__cell--name">
           <div className="funds-table__cell--avatar-title">
             <Link
-              to={{
-                pathname: composeFundsDetailsUrl(fund.url),
-                state: `/ ${title}`
-              }}
+              href={composeFundsDetailsUrl(fund.url)}
+              // to={{
+              //   pathname:,
+              //   state: `/ ${title}`
+              // }}
             >
-              <AssetAvatar
-                url={fund.logo}
-                alt={fund.title}
-                color={fund.color}
-              />
+              <a>
+                <AssetAvatar
+                  url={fund.logo}
+                  alt={fund.title}
+                  color={fund.color}
+                />
+              </a>
             </Link>
             <div className="funds-table__cell--title">
               <Link
-                to={{
-                  pathname: composeFundsDetailsUrl(fund.url),
-                  state: `/ ${title}`
-                }}
+                href={composeFundsDetailsUrl(fund.url)}
+                // to={{
+                //   pathname: composeFundsDetailsUrl(fund.url),
+                //   state: `/ ${title}`
+                // }}
               >
-                <GVButton variant="text" color="secondary">
-                  {fund.title}
-                </GVButton>
+                <a>
+                  <GVButton variant="text" color="secondary">
+                    {fund.title}
+                  </GVButton>
+                </a>
               </Link>
             </div>
           </div>

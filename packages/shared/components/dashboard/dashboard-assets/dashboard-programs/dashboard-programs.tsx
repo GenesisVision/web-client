@@ -2,10 +2,10 @@ import "./dashboard-programs.scss";
 
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
+import Link from "next/link";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -96,34 +96,40 @@ const _DashboardPrograms: React.FC<Props> = ({
         <TableCell className="programs-table__cell dashboard-programs__cell--title">
           <div className="dashboard-programs__cell--avatar-title">
             <Link
-              to={{
-                pathname: composeProgramDetailsUrl(program.url),
-                state: `/ ${title}`
-              }}
+              href={composeProgramDetailsUrl(program.url)}
+              // to={{
+              //   pathname: composeProgramDetailsUrl(program.url),
+              //   state: `/ ${title}`
+              // }}
             >
-              <AssetAvatar
-                url={program.logo}
-                level={program.level}
-                levelProgress={program.levelProgress}
-                alt={program.title}
-                color={program.color}
-                tooltip={
-                  <LevelTooltip
-                    level={program.level}
-                    canLevelUp={program.rating.canLevelUp}
-                  />
-                }
-              />
+              <a>
+                <AssetAvatar
+                  url={program.logo}
+                  level={program.level}
+                  levelProgress={program.levelProgress}
+                  alt={program.title}
+                  color={program.color}
+                  tooltip={
+                    <LevelTooltip
+                      level={program.level}
+                      canLevelUp={program.rating.canLevelUp}
+                    />
+                  }
+                />
+              </a>
             </Link>
             <Link
-              to={{
-                pathname: composeProgramDetailsUrl(program.url),
-                state: `/ ${title}`
-              }}
+              href={composeProgramDetailsUrl(program.url)}
+              // to={{
+              //   pathname: composeProgramDetailsUrl(program.url),
+              //   state: `/ ${title}`
+              // }}
             >
-              <GVButton variant="text" color="secondary">
-                {program.title}
-              </GVButton>
+              <a>
+                <GVButton variant="text" color="secondary">
+                  {program.title}
+                </GVButton>
+              </a>
             </Link>
           </div>
         </TableCell>

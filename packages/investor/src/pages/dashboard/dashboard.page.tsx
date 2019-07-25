@@ -31,10 +31,10 @@ const DashboardPage: React.FC<IDashboardPageProps> = ({ role }) => {
             <DashboardPortfolioEventsSection title={title} />
           </div>
         </div>
-        {/* <div className="dashboard__table-section">
+        <div className="dashboard__table-section">
           <DashboardAssetsSection title={title} />
         </div>
-        <div className="dashboard__table-section">
+        {/* <div className="dashboard__table-section">
           <DashboardTrades title={title} />
         </div> */}
       </div>

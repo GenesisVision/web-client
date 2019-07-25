@@ -1,10 +1,10 @@
 import { SignalDetails } from "gv-api-web";
 import moment from "moment";
+import Link from "next/link";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -69,28 +69,34 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
         <TableCell className="programs-table__cell dashboard-programs__cell--title">
           <div className="dashboard-programs__cell--avatar-title">
             <Link
-              to={{
-                pathname: composeProgramDetailsUrl(signal.url),
-                state: `/ ${title}`
-              }}
+              href={composeProgramDetailsUrl(signal.url)}
+              // to={{
+              //   pathname: composeProgramDetailsUrl(signal.url),
+              //   state: `/ ${title}`
+              // }}
             >
-              <AssetAvatar
-                url={signal.logo}
-                alt={signal.title}
-                color={signal.color}
-                level={signal.level}
-                levelProgress={signal.levelProgress}
-              />
+              <a>
+                <AssetAvatar
+                  url={signal.logo}
+                  alt={signal.title}
+                  color={signal.color}
+                  level={signal.level}
+                  levelProgress={signal.levelProgress}
+                />
+              </a>
             </Link>
             <Link
-              to={{
-                pathname: composeProgramDetailsUrl(signal.url),
-                state: `/ ${title}`
-              }}
+              href={composeProgramDetailsUrl(signal.url)}
+              // to={{
+              //   pathname: composeProgramDetailsUrl(signal.url),
+              //   state: `/ ${title}`
+              // }}
             >
-              <GVButton variant="text" color="secondary">
-                {signal.title}
-              </GVButton>
+              <a>
+                <GVButton variant="text" color="secondary">
+                  {signal.title}
+                </GVButton>
+              </a>
             </Link>
           </div>
         </TableCell>
