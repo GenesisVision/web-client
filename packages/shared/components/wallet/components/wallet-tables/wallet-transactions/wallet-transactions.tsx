@@ -43,24 +43,17 @@ const DEFAULT_FILTERS = [
 ];
 
 class _WalletTransactions extends React.PureComponent<Props> {
-  ref: RefObject<TableModule> = React.createRef();
-
-  componentDidUpdate(prevProps: Props) {
-    if (this.props.timestamp !== prevProps.timestamp)
-      this.ref.current!.updateItems();
-  }
-
   fetchMultiTransactions: GetItemsFuncType = filters =>
     fetchMultiTransactions(this.props.currency, filters);
 
   render() {
-    const { t, renderBodyRow, columns, platformData } = this.props;
+    const { t, renderBodyRow, columns, platformData, timestamp } = this.props;
     if (!platformData) return null;
     const { transactionType } = platformData.enums.multiWallet;
     return (
       <div className="wallet-transactions">
         <TableModule
-          ref={this.ref}
+          timestamp={timestamp.getMilliseconds()}
           defaultFilters={DEFAULT_FILTERS}
           paging={DEFAULT_PAGING}
           filtering={{
