@@ -3,15 +3,18 @@ import "./manager.page.scss";
 import { ManagerProfile } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { connect } from "react-redux";
 import { compose } from "redux";
 import ManagerDescription from "shared/components/manager/manager-description/manager-description";
 import ManagerHistorySection from "shared/components/manager/manager-history/manager-history-section";
 import Page from "shared/components/page/page";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { AuthRootState } from "shared/utils/types";
 
 const _ManagerPage: React.FC<Props> = ({
-  isAuthenticated,
   managerProfile,
+  isAuthenticated,
   t
 }) => (
   <Page title={`${t("manager-page.title")} ${managerProfile.username}`}>
@@ -30,14 +33,22 @@ const _ManagerPage: React.FC<Props> = ({
   </Page>
 );
 
-interface Props extends WithTranslation, OwnProps {}
+interface Props extends StateProps, WithTranslation, OwnProps {}
 
 interface OwnProps {
-  isAuthenticated: boolean;
   managerProfile: ManagerProfile;
 }
 
+interface StateProps {
+  isAuthenticated: boolean;
+}
+
+const mapStateToProps = (state: AuthRootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state)
+});
+
 const ManagerPage = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+  connect(mapStateToProps),
   withLoader,
   translate(),
   React.memo

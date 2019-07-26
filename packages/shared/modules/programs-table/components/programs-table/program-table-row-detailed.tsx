@@ -23,6 +23,7 @@ import {
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
+import NextLink from "next/link";
 
 const _ProgramTableRowDetailed: React.FC<Props> = ({
   title,
@@ -36,6 +37,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
     state: `/ ${title}`,
     pathname: composeProgramDetailsUrl(program.url)
   };
+  console.log(composeManagerDetailsUrl(program.manager.url));
   return (
     <TableRow>
       <td
@@ -74,15 +76,18 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     </Link>
                   </div>
                   <div className="program-detailed__manager">
-                    <Link
-                      className="program-detailed__manager-link"
-                      to={{
-                        pathname: composeManagerDetailsUrl(program.manager.url),
-                        state: programLinkProps.state
-                      }}
+                    <NextLink
+                      href="/managers/[id]"
+                      as={composeManagerDetailsUrl(program.manager.url)}
+                      // to={{
+                      //   pathname: composeManagerDetailsUrl(program.manager.url),
+                      //   state: programLinkProps.state
+                      // }}
                     >
-                      {program.manager.username}
-                    </Link>
+                      <a className="program-detailed__manager-link">
+                        {program.manager.username}
+                      </a>
+                    </NextLink>
                   </div>
                   <TagProgramContainer tags={program.tags} />
                 </div>
