@@ -56,10 +56,11 @@ class GVProgramAvatar extends React.PureComponent<
 
   renderImage = () => {
     const { url, alt, color, imageClassName } = this.props;
-    if (this.state.errored || url === undefined || url === null)
+    if (this.state.errored || !url) {
       return (
         <GVProgramDefaultAvatar color={color} imageClassName={imageClassName} />
       );
+    }
     return (
       <img
         className={classnames(imageClassName, "program-avatar__image")}

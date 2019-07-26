@@ -3,12 +3,12 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import GVButton from "shared/components/gv-button";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import Link from "shared/components/link/link";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -38,7 +38,7 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleToggleFavorite = useCallback(
     () => toggleFavorite(fund.id, fund.personalDetails.isFavorite),
-    [fund]
+    [fund.id, fund.personalDetails.isFavorite, toggleFavorite]
   );
   return (
     <div className="table-cards__card">

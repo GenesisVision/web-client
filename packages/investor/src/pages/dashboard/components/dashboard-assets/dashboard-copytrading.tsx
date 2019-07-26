@@ -4,7 +4,6 @@ import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-asse
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -13,6 +12,7 @@ import {
   ACTION_STATUS_FILTER_VALUES
 } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { TableCell } from "shared/components/table/components";

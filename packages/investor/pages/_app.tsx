@@ -3,15 +3,18 @@ import "shared/styles/index.scss";
 import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "react-redux";
+import { Store, compose } from "redux";
+import withReduxStore from "shared/decorators/with-redux-store";
 import { appWithTranslation } from "shared/i18n";
-import store from "store";
 
-class CustomApp extends App {
+import { initializeStore } from "../src/store";
+
+class CustomApp extends App<Props> {
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, reduxStore } = this.props;
     return (
       <Container>
-        <Provider store={store}>
+        <Provider store={reduxStore}>
           <Component {...pageProps} />
         </Provider>
       </Container>
@@ -19,4 +22,11 @@ class CustomApp extends App {
   }
 }
 
-export default appWithTranslation(CustomApp);
+export default compose(
+  appWithTranslation,
+  withReduxStore(initializeStore)
+)(CustomApp);
+
+interface Props {
+  reduxStore: Store;
+}

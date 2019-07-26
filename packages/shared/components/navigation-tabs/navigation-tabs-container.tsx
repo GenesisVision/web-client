@@ -50,4 +50,5 @@ const NavigationTabsContainer = compose<React.ComponentType<OwnProps>>(
   ),
   React.memo
 )(_NavigationTabsContainer);
+
 export default NavigationTabsContainer;

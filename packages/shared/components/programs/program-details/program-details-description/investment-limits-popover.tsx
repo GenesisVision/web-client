@@ -24,9 +24,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
     LevelInfo[] | undefined
   >(undefined);
   useEffect(() => {
-    fetchInvestmentsLevels(currency).then(({ levels }) =>
-      setInvestmentsLimits(levels)
-    );
+    fetchInvestmentsLevels(currency).then(setInvestmentsLimits);
   }, []);
   return (
     <>

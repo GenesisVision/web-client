@@ -70,4 +70,8 @@ $tag-font-size: 11px;
     max-height: 18px;
     line-height: 18px;
   }
+  &--remainder {
+    color: $positive-color;
+    background-color: rgba($positive-color, 0.1);
+  }
 }

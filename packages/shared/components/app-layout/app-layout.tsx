@@ -11,7 +11,7 @@ const _AppLayout: ComponentType<Props> = ({ initOnResizeEvent, children }) => {
     initOnResizeEvent();
   }, []);
   return (
-    <div className="app__wrapper">
+    <div className="app__wrapper root">
       <div className="app">
         <div className="app__header">
           <HeaderContainer />

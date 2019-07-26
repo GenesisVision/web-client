@@ -37,7 +37,7 @@ const _ProgramsFacetTable: React.FC<
 }) => {
   const toggleFavorite: TableToggleFavoriteType = useCallback(
     (program, updateRow) => () => {
-      const isFavorite = program.personalDetails.isFavorite;
+      const { isFavorite } = program.personalDetails;
       const newProgram = {
         ...program,
         personalDetails: { ...program.personalDetails, isFavorite: !isFavorite }

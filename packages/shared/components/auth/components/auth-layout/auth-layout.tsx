@@ -11,15 +11,17 @@ import { HOME_ROUTE } from "shared/routes/app.routes";
 
 import { ILoginFooterProps } from "../login-footer/login-footer";
 
+const QUOTES_COUNT = 5;
+
 const _AuthLayout: NextPage<Props> = ({
   role,
   children,
   titleKey,
-  quoteNo,
   Footer,
   footerAuthRoute
 }) => {
   const [t] = useTranslation();
+  const quoteNo = Math.floor(Math.random() * QUOTES_COUNT + 1);
   return (
     <div className="root auth page">
       <div className="auth__left">
@@ -61,7 +63,6 @@ interface OwnProps {
   Footer: React.ComponentType<ILoginFooterProps>;
   footerAuthRoute: string;
   titleKey: string;
-  quoteNo: number;
   children: React.ReactChild;
 }
 

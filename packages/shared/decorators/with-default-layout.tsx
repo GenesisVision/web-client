@@ -17,17 +17,18 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
 
       return {
         info,
+        namespacesRequired: ["translation"],
         ...componentProps
       };
     }
     render() {
       const { info } = this.props;
       return (
-        <AppLayout>
-          <platformContext.Provider value={info}>
+        <platformContext.Provider value={info}>
+          <AppLayout>
             <WrappedComponent {...this.props} />
-          </platformContext.Provider>
-        </AppLayout>
+          </AppLayout>
+        </platformContext.Provider>
       );
     }
   };

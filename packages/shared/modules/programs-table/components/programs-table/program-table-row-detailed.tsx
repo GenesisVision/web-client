@@ -2,13 +2,12 @@ import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import { Icon } from "shared/components/icon/icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
@@ -16,6 +15,7 @@ import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
+import { useTranslation } from "shared/i18n";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
@@ -32,6 +32,10 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
   onCollapseClick
 }) => {
   const { t } = useTranslation();
+  const programLinkProps = {
+    state: `/ ${title}`,
+    pathname: composeProgramDetailsUrl(program.url)
+  };
   return (
     <TableRow>
       <td
@@ -44,12 +48,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
           <div className="program-detailed__container program-detailed__container--inner">
             <div className="program-detailed__info">
               <div className="program-detailed__avatar">
-                <Link
-                  to={{
-                    pathname: composeProgramDetailsUrl(program.url),
-                    state: `/ ${title}`
-                  }}
-                >
+                <Link to={programLinkProps}>
                   <AssetAvatar
                     url={program.logo}
                     level={program.level}
@@ -69,10 +68,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   <div className="program-detailed__title">
                     <Link
                       className="program-detailed__title-link"
-                      to={{
-                        pathname: composeProgramDetailsUrl(program.url),
-                        state: `/ ${title}`
-                      }}
+                      to={programLinkProps}
                     >
                       {program.title}
                     </Link>
@@ -82,7 +78,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                       className="program-detailed__manager-link"
                       to={{
                         pathname: composeManagerDetailsUrl(program.manager.url),
-                        state: `/ ${title}`
+                        state: programLinkProps.state
                       }}
                     >
                       {program.manager.username}
@@ -230,12 +226,9 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                 <div className="program-detailed__details">
                   <Link
                     className="program-detailed__details-link"
-                    to={{
-                      pathname: composeProgramDetailsUrl(program.url),
-                      state: `/ ${title}`
-                    }}
+                    to={programLinkProps}
                   >
-                    {t("program-actions.details")} &#8250;
+                    {t("program-actions.details")}
                   </Link>
                 </div>
               </div>

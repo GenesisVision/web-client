@@ -1,8 +1,8 @@
 import "./dashboard-portfolio-event-logo.scss";
 
 import { DashboardPortfolioEventAssetTypeEnum } from "gv-api-web";
+import Link from "next/link";
 import * as React from "react";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import EventCancelledIconRed from "shared/media/event-cancelled-red.svg";
 import EventCancelledIcon from "shared/media/event-cancelled.svg";
@@ -83,13 +83,15 @@ const PortfolioEventLogo: React.FC<Props> = ({
   return (
     <div className="portfolio-event-logo">
       {(url && (
-        <Link to={to} className="portfolio-event-logo__photo">
-          <AssetAvatar
-            url={logo}
-            alt={type}
-            className="portfolio-event-logo__logo"
-            color={color}
-          />
+        <Link href={to}>
+          <a className="portfolio-event-logo__photo">
+            <AssetAvatar
+              url={logo}
+              alt={type}
+              className="portfolio-event-logo__logo"
+              color={color}
+            />
+          </a>
         </Link>
       )) || (
         <div className="portfolio-event-logo__photo">

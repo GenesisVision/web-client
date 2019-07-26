@@ -18,14 +18,13 @@ import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 import rootReducer from "../reducers";
-// import history from "shared/utils/history";
 
+// import history from "shared/utils/history";
 
 const suffixes = [REQUEST_SUFFIX, SUCCESS_SUFFIX, FAILURE_SUFFIX];
 
 const reduxDevTools = process.env.NODE_ENV === false;
 
-const initialState = {};
 const enhancers = [];
 if (reduxDevTools) {
   enhancers.push(reduxDevTools);
@@ -47,6 +46,9 @@ const middleware = [
 
 const composedEnhancers = composeWithDevTools(applyMiddleware(...middleware));
 
-const store = createStore(rootReducer, initialState, composedEnhancers);
+export const initializeStore = (initialState = undefined) =>
+  createStore(rootReducer, initialState, composedEnhancers);
+
+const store = initializeStore();
 
 export default store;

@@ -1,13 +1,13 @@
 import "./header.scss";
 
 import { ProfileHeaderViewModel } from "gv-api-web";
-import Link from "next/link";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import GVButton from "shared/components/gv-button";
 import { Icon } from "shared/components/icon/icon";
 import { SearchIcon } from "shared/components/icon/search-icon";
+import Link from "shared/components/link/link";
 import Navigation from "shared/components/navigation/navigation";
 import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
 import NotificationsWidget from "shared/components/notifications-widget/notifications-widget";
@@ -39,10 +39,8 @@ const _Header: React.FC<Props> = ({
       <div className="header__center">
         <CurrencySelectContainer className="header__currency" />
         <div className="header__search">
-          <Link href={GLOBAL_SEARCH_ROUTE}>
-            <a>
-              <SearchIcon />
-            </a>
+          <Link to={GLOBAL_SEARCH_ROUTE}>
+            <SearchIcon />
           </Link>
         </div>
       </div>
@@ -70,24 +68,19 @@ const _Header: React.FC<Props> = ({
         ) : (
           <div className="header__buttons">
             <Link
-              href={LOGIN_ROUTE}
-              // to={{
-              //   pathname: LOGIN_ROUTE,
-              //   state: backPath
-              // }}
+              to={{
+                pathname: LOGIN_ROUTE,
+                state: "backPath"
+              }}
             >
-              <a>
-                <GVButton variant="outlined" color="secondary">
-                  {t("auth.login.title")}
-                </GVButton>
-              </a>
+              <GVButton variant="outlined" color="secondary">
+                {t("auth.login.title")}
+              </GVButton>
             </Link>
-            <Link href={SIGNUP_ROUTE}>
-              <a>
-                <GVButton variant="contained" color="primary">
-                  {t("auth.signup.title")}
-                </GVButton>
-              </a>
+            <Link to={SIGNUP_ROUTE}>
+              <GVButton variant="contained" color="primary">
+                {t("auth.signup.title")}
+              </GVButton>
             </Link>
           </div>
         )}

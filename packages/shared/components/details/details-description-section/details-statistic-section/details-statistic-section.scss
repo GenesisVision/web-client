@@ -13,7 +13,7 @@
     @include media-breakpoint-landscape-phone() {
       margin-bottom: 0;
       margin-right: $padding-big-mobile;
-      max-width: 300px;
+      max-width: $details-statistic-section-width;
     }
   }
 

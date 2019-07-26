@@ -4,7 +4,9 @@ import {
 } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
-import { Action, Dispatch } from "redux";
+import { NextPage } from "next";
+import { NextPageContext } from "next-server/dist/lib/utils";
+import { Action, Dispatch, Store } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { RootState } from "shared/reducers/root-reducer";
@@ -36,7 +38,7 @@ export interface ActionType<T = any, U = any> extends Action {
 
 export type ApiAction<T = any, U = any> = ActionType<Promise<T>, U>;
 
-export type RootThunkAction<R = any> = ThunkAction<R, RootState, any, any>;
+export type RootThunkAction<R = any> = ThunkAction<R, AuthRootState, any, any>;
 
 export interface DispatchType<R> {
   (asyncAction: ActionType): R;
@@ -57,7 +59,7 @@ export interface MiddlewareDispatch {
   <R, S>(asyncAction: RootThunk<R, S>): R;
 }
 
-export type RootThunk<R, S = RootState> = (
+export type RootThunk<R, S = AuthRootState> = (
   dispatch: MiddlewareDispatch,
   getState: () => S
 ) => R;
@@ -83,3 +85,17 @@ export type TGetState = () => RootState;
 export type TGetAuthState = () => AuthRootState;
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+
+export type InitializeStoreType = (
+  initialState?: {}
+) => Store<any, ActionType<any, any>> & {
+  dispatch: any;
+};
+
+export interface NextPageWithReduxContext extends NextPageContext {
+  reduxStore: Store<AuthRootState, RootThunkAction>;
+}
+
+export interface NextPageWithRedux<P, IP = P> extends NextPage<P, IP> {
+  getInitialProps?(ctx: NextPageWithReduxContext): Promise<IP>;
+}
