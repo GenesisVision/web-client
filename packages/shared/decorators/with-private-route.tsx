@@ -17,7 +17,9 @@ const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
       }
 
       if (!token) {
-        Router.push(LOGIN_ROUTE);
+        debugger;
+        Router.push(LOGIN_ROUTE, undefined, { from: ctx.pathname });
+        return;
       }
 
       const componentProps =
