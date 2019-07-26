@@ -1,6 +1,8 @@
 import cookie from "js-cookie";
 //@ts-ignore TODO fix types
 import * as jwt_decode from "jwt-decode";
+import { NextPageContext } from "next";
+import nextCookie from "next-cookies";
 
 import { getTokenName } from "../utils/get-token-name";
 import { Nullable } from "../utils/types";
@@ -29,19 +31,20 @@ const storeToken = (token: string): void => {
   } catch (e) {}
 };
 
-const getToken = (): Nullable<string> => {
+const getTokenFromServer = (ctx: NextPageContext): Nullable<string> => {
   const tokenName = getTokenName();
-  try {
-    return cookie.get(tokenName) || null;
-  } catch (e) {
-    return null;
-  }
+  return nextCookie(ctx)[tokenName] || null;
 };
 
-const getTokenData = () => decodeToken(getToken() || "");
+const getTokenFromClient = (): Nullable<string> => {
+  const tokenName = getTokenName();
+  return cookie.get(tokenName) || null;
+};
 
-const getAuthArg = (): string => {
-  const token = getToken();
+const getTokenData = () => decodeToken(getTokenFromClient() || "");
+
+const getAuthArg = (ctx?: NextPageContext): string => {
+  const token = ctx ? getTokenFromServer(ctx) : getTokenFromClient();
   if (token === null) {
     return "";
   }
@@ -50,7 +53,7 @@ const getAuthArg = (): string => {
 };
 
 const isAuthenticated = (): boolean => {
-  const token = getToken();
+  const token = getTokenFromClient();
 
   if (!canParseToken(token || "")) return false;
   const dateNowSec = Math.floor(Date.now() / 1000);
@@ -66,7 +69,8 @@ const removeToken = (): void => {
 const authService = {
   isAuthenticated,
   getAuthArg,
-  getToken,
+  getTokenFromServer,
+  getTokenFromClient,
   getTokenData,
   storeToken,
   removeToken

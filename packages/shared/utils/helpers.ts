@@ -72,6 +72,10 @@ const getNumberWithoutSuffix = (str: string): Nullable<number> => {
 const convertToArray = (value: any): any[] =>
   Array.isArray(value) ? value : [value];
 
+const isServer = () => {
+  return global.hasOwnProperty("window");
+};
+
 export {
   getType,
   getArrayType,
@@ -80,5 +84,6 @@ export {
   convertToArray,
   merge,
   mergeObjects,
-  mergeArrays
+  mergeArrays,
+  isServer
 };

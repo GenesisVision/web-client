@@ -23,7 +23,6 @@ Programs.getInitialProps = async ctx => {
   // @ts-ignore
   const programs = await programsApi.v10ProgramsGet(filtering);
   return {
-    namespacesRequired: ["translation"],
     programs
   };
 };

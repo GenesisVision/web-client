@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { getTokenName } from "shared/utils/get-token-name";
 
-const withPrivateRoute = (WrappedComponent: NextPage<any>) =>
+const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
   class extends Component {
     static async getInitialProps(ctx: NextPageContext) {
       const tokenName = getTokenName();

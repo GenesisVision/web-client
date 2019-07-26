@@ -38,13 +38,18 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleToggleFavorite = useCallback(
     () => toggleFavorite(fund.id, fund.personalDetails.isFavorite),
-    [fund]
+    [fund.id, fund.personalDetails.isFavorite, toggleFavorite]
   );
   return (
     <div className="table-cards__card">
       <div className="table-cards__row">
         <div className="table-cards__avatar">
-          <Link href={composeFundsDetailsUrl(fund.url)} state={`/ ${title}`}>
+          <Link
+            to={{
+              pathname: composeFundsDetailsUrl(fund.url),
+              state: `/ ${title}`
+            }}
+          >
             <AssetAvatar
               url={fund.logo}
               alt={fund.title}
@@ -57,15 +62,19 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
           <div className="table-cards__title-wrapper">
             <Link
               className="table-cards__title"
-              href={composeFundsDetailsUrl(fund.url)}
-              state={`/ ${title}`}
+              to={{
+                pathname: composeFundsDetailsUrl(fund.url),
+                state: `/ ${title}`
+              }}
             >
               {fund.title}
             </Link>
             <Link
               className="table-cards__name"
-              href={composeManagerDetailsUrl(fund.manager.url)}
-              state={`/ ${title}`}
+              to={{
+                pathname: composeManagerDetailsUrl(fund.manager.url),
+                state: `/ ${title}`
+              }}
             >
               {fund.manager.username}
             </Link>
@@ -81,8 +90,10 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
             >
               <div className="popover-list">
                 <Link
-                  href={composeFundsDetailsUrl(fund.url)}
-                  state={`/ ${title}`}
+                  to={{
+                    pathname: composeFundsDetailsUrl(fund.url),
+                    state: `/ ${title}`
+                  }}
                 >
                   <GVButton
                     variant="text"

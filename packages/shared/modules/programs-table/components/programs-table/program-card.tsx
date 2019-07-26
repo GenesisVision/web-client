@@ -47,18 +47,18 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleToggleFavorite = useCallback(
     () => toggleFavorite(program.id, program.personalDetails.isFavorite),
-    [program]
+    [program.id, program.personalDetails.isFavorite, toggleFavorite]
   );
   const { t } = useTranslation();
   const linkProps = {
-    href: composeProgramDetailsUrl(program.url),
+    pathname: composeProgramDetailsUrl(program.url),
     state: `/ ${title}`
   };
   return (
     <div className="table-cards__card">
       <div className="table-cards__row">
         <div className="table-cards__avatar">
-          <Link {...linkProps}>
+          <Link to={linkProps}>
             <AssetAvatar
               url={program.logo}
               levelProgress={program.levelProgress}
@@ -77,13 +77,15 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
         </div>
         <div className="table-cards__main-info">
           <div className="table-cards__title-wrapper">
-            <Link className="table-cards__title" {...linkProps}>
+            <Link className="table-cards__title" to={linkProps}>
               {program.title}
             </Link>
             <Link
               className="table-cards__name"
-              href={composeManagerDetailsUrl(program.manager.url)}
-              state={`/ ${title}`}
+              to={{
+                pathname: composeManagerDetailsUrl(program.manager.url),
+                state: `/ ${title}`
+              }}
             >
               {program.manager.username}
             </Link>

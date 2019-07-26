@@ -7,6 +7,8 @@ import {
   SignalsList
 } from "gv-api-web";
 import { Action } from "redux";
+import chartPeriodActionCreator from "shared/actions/chart-period.action-creator";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import investorApi from "shared/services/api-client/investor-api";
 import { ActionType } from "shared/utils/types";
@@ -79,6 +81,9 @@ export const cancelProgramRequestAction = (
   type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
   payload: investorApi.v10InvestorProgramsRequestsByIdCancelPost(id, auth)
 });
+
+export const changeChartPeriodAction = (period: ChartDefaultPeriod): Action =>
+  chartPeriodActionCreator(DASHBOARD_PORTFOLIO_CHART, period);
 
 export const clearDashboardAssetsTableAction = (): Action => ({
   type: CLEAR_DASHBOARD_ASSETS_TABLE

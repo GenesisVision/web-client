@@ -16,7 +16,6 @@ Funds.getInitialProps = async (ctx: NextPageContext) => {
   const filters = getFiltersFromContext(ctx);
   const funds = await fundsApi.v10FundsGet(filters);
   return {
-    namespacesRequired: ["translation"],
     funds
   };
 };

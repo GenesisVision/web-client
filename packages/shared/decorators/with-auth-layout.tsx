@@ -1,6 +1,6 @@
 import { NextPage, NextPageContext } from "next";
 import React, { Component } from "react";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { WithTranslation } from "react-i18next";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import { ILoginFooterProps } from "shared/components/auth/components/login-footer/login-footer";
 

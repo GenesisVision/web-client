@@ -8,9 +8,9 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Surface from "shared/components/surface/surface";
 import withLoader from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
@@ -48,36 +48,39 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
   data,
   eventView: DashboardPortfolioEvent,
   emptyView: DashboardPortfolioEmptyView
-}) => (
-  <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
-    <h3>{t(`${role}.dashboard-page.portfolio-events.title`)}</h3>
-    <div className="dashboard-portfolio-events__scroll-container">
-      <div className="dashboard-portfolio-events__list">
-        <Events
-          condition={!!data}
-          loader={<DashboardPortfolioEventsListLoader />}
-          events={data! && data!.events}
-          total={data! && data!.total}
-          EventComponent={DashboardPortfolioEvent}
-          EmptyView={DashboardPortfolioEmptyView}
-        />
+}) => {
+  return (
+    <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
+      <h3>{t(`${role}.dashboard-page.portfolio-events.title`)}</h3>
+      <div className="dashboard-portfolio-events__scroll-container">
+        <div className="dashboard-portfolio-events__list">
+          <Events
+            condition={!!data}
+            loader={<DashboardPortfolioEventsListLoader />}
+            events={data! && data!.events}
+            total={data! && data!.total}
+            EventComponent={DashboardPortfolioEvent}
+            EmptyView={DashboardPortfolioEmptyView}
+          />
+        </div>
       </div>
-    </div>
-    <Link
-      className="dashboard-portfolio-events__see-all"
-      to={{
-        pathname: fullEventsUrl,
-        state: `/ ${title}`
-      }}
-    >
-      <GVButton variant="text" color="secondary">
-        <>
-          {t(`${role}.dashboard-page.portfolio-events.see-all-button`)} &#8250;
-        </>
-      </GVButton>
-    </Link>
-  </Surface>
-);
+      <Link
+        className="dashboard-portfolio-events__see-all"
+        to={{
+          pathname: fullEventsUrl,
+          state: `/ ${title}`
+        }}
+      >
+        <GVButton variant="text" color="secondary">
+          <>
+            {t(`${role}.dashboard-page.portfolio-events.see-all-button`)}{" "}
+            &#8250;
+          </>
+        </GVButton>
+      </Link>
+    </Surface>
+  );
+};
 
 interface Props extends OwnProps, WithTranslation, WithRoleProps {}
 

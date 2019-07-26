@@ -1,37 +1,56 @@
-import classNames from "classnames";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useCallback } from "react";
 
-const Link: React.FC<Props> = props => {
-  const { push } = useRouter();
-  const handleClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    push({
-      pathname: props.href,
-      query: props.query
-    }).then(data => {
-      if (data) {
-        window.history.state.state = props.state;
+import { normalizeTo, pushState } from "./link.helper";
+
+const Link: React.FC<Props> = ({ to, className, children }) => {
+  const normalizedTo = normalizeTo(to);
+  const handleClick = useCallback(
+    () => {
+      if (normalizedTo.state) {
+        pushState(normalizedTo.state);
       }
-    });
-  };
+    },
+    [normalizedTo.state]
+  );
+  //const { push } = useRouter();
+
+  // const handleClick = (event: React.MouseEvent) => {
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  //   push({
+  //     pathname: props.href,
+  //     query: props.search
+  //   }).then(data => {
+  //     if (data) {
+  //       pushState(props.state);
+  //     }
+  //   });
+  // };
   return (
-    <a
-      className={classNames(props.className)}
-      href={props.href}
-      onClick={handleClick}
-    >
-      {props.children}
-    </a>
+    <NextLink>
+      <a
+        className={className}
+        href={normalizedTo.pathname}
+        onClick={handleClick}
+      >
+        {children}
+      </a>
+    </NextLink>
   );
 };
 
 export default Link;
 
 interface Props {
-  state?: string;
-  href: string;
+  to: ToType | string;
   className?: string;
-  query?: { [key: string]: string | number };
+  //search?: { [key: string]: string | number };
 }
+
+export type ToType = {
+  pathname: string;
+  state?: any;
+  search?: string;
+};
