@@ -46,8 +46,16 @@ const DECIMAL_SCALE_BIG_VALUE = 2;
 const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleToggleFavorite = useCallback(
-    () => toggleFavorite(program.id, program.personalDetails.isFavorite),
-    [program.id, program.personalDetails.isFavorite, toggleFavorite]
+    () =>
+      toggleFavorite(
+        program.id,
+        !!program.personalDetails && program.personalDetails.isFavorite
+      ),
+    [
+      program.id,
+      !!program.personalDetails && program.personalDetails.isFavorite,
+      toggleFavorite
+    ]
   );
   const { t } = useTranslation();
   const linkProps = {
@@ -100,7 +108,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
               onClose={clearAnchor}
             >
               <div className="popover-list">
-                <Link {...linkProps}>
+                <Link to={linkProps}>
                   <GVButton
                     variant="text"
                     color="secondary"

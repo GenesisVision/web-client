@@ -121,11 +121,9 @@ const _DashboardPrograms: React.FC<Props> = ({
                 state: `/ ${title}`
               }}
             >
-              <a>
-                <GVButton variant="text" color="secondary">
-                  {program.title}
-                </GVButton>
-              </a>
+              <GVButton variant="text" color="secondary">
+                {program.title}
+              </GVButton>
             </Link>
           </div>
         </TableCell>
