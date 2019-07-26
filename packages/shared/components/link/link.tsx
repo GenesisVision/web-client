@@ -29,12 +29,8 @@ const Link: React.FC<Props> = ({ to, className, children }) => {
   //   });
   // };
   return (
-    <NextLink>
-      <a
-        className={className}
-        href={normalizedTo.pathname}
-        onClick={handleClick}
-      >
+    <NextLink href={normalizedTo.pathname}>
+      <a className={className} onClick={handleClick}>
         {children}
       </a>
     </NextLink>
