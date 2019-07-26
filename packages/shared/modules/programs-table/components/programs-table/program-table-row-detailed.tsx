@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
 import moment from "moment";
+import NextLink from "next/link";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -23,7 +24,6 @@ import {
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
-import NextLink from "next/link";
 
 const _ProgramTableRowDetailed: React.FC<Props> = ({
   title,
@@ -76,18 +76,18 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     </Link>
                   </div>
                   <div className="program-detailed__manager">
-                    <NextLink
-                      href="/managers/[id]"
-                      as={composeManagerDetailsUrl(program.manager.url)}
-                      // to={{
-                      //   pathname: composeManagerDetailsUrl(program.manager.url),
-                      //   state: programLinkProps.state
-                      // }}
+                    <Link
+                      // href="/managers/[id]"
+                      // as={composeManagerDetailsUrl(program.manager.url)}
+                      className="program-detailed__manager-link"
+                      to={{
+                        pathname: "/managers/[id]",
+                        as: composeManagerDetailsUrl(program.manager.url),
+                        state: programLinkProps.state
+                      }}
                     >
-                      <a className="program-detailed__manager-link">
-                        {program.manager.username}
-                      </a>
-                    </NextLink>
+                      {program.manager.username}
+                    </Link>
                   </div>
                   <TagProgramContainer tags={program.tags} />
                 </div>

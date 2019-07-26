@@ -29,7 +29,7 @@ const Link: React.FC<Props> = ({ to, className, children }) => {
   //   });
   // };
   return (
-    <NextLink href={normalizedTo.pathname}>
+    <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
       <a className={className} onClick={handleClick}>
         {children}
       </a>
@@ -49,4 +49,5 @@ export type ToType = {
   pathname: string;
   state?: any;
   search?: string;
+  as?: string;
 };
