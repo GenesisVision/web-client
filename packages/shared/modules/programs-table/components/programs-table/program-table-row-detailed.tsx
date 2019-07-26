@@ -77,8 +77,6 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   </div>
                   <div className="program-detailed__manager">
                     <Link
-                      // href="/managers/[id]"
-                      // as={composeManagerDetailsUrl(program.manager.url)}
                       className="program-detailed__manager-link"
                       to={{
                         pathname: "/managers/[id]",

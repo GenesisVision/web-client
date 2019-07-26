@@ -35,7 +35,6 @@ const _ManagerHistorySection: React.FC<Props> = ({
     },
     [managerId]
   );
-  console.log(isAuthenticated);
   return (
     <Surface className="manager-history">
       <div className="manager-history__heading">
