@@ -48,7 +48,6 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
 
   useEffect(
     () => {
-      console.log(paging, pagingProp);
       updateItems();
     },
     [paging, sorting, filtering, timestamp]
@@ -58,20 +57,13 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
     () => {
       if (loader) setIsPending();
       const filters = composeRequestFilters({
-        paging: paging || {},
-        sorting: sorting || "",
-        filtering: filtering || {},
+        paging,
+        sorting,
+        filtering,
         defaultFilters
       });
       getItems(filters)
-        .then((data: IDataModel) => {
-          const totalPages = calculateTotalPages(
-            data.total,
-            paging && paging.itemsOnPage
-          );
-          setPaging({ ...paging, totalPages });
-          setData(data);
-        })
+        .then(setData)
         .finally(setIsNotPending);
     },
     [loader, paging, sorting, filtering, timestamp]
@@ -118,7 +110,11 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
     [data]
   );
 
-  const newPaging = { ...paging, totalItems: data.total ? data.total : 0 };
+  const newPaging = {
+    ...paging,
+    totalItems: data.total ? data.total : 0,
+    totalPages: calculateTotalPages(data.total, paging && paging.itemsOnPage)
+  };
   return (
     <Table
       {...props}
