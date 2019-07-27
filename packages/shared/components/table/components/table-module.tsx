@@ -1,10 +1,11 @@
-import * as React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   IPaging,
   calculateTotalPages
 } from "shared/components/table//helpers/paging.helpers";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
+import useIsOpen from "shared/hooks/is-open.hook";
 
 import { composeRequestFilters } from "../services/table.service";
 import {
@@ -15,6 +16,122 @@ import {
 import Table, { ITableProps } from "./table";
 import { GetItemsFuncType } from "./table.types";
 
+const _TableModule: React.FC<ITableModuleProps> = props => {
+  const {
+    paging: pagingProp,
+    sorting: sortingProp,
+    filtering: filteringProp,
+    loader = true,
+    data: dataProp,
+    defaultFilters,
+    getItems,
+    timestamp
+  } = props;
+  const [paging, setPaging] = useState<IPaging | undefined>(pagingProp);
+  const [sorting, setSorting] = useState<string | undefined>(sortingProp);
+  const [filtering, setFiltering] = useState<FilteringType | undefined>(
+    filteringProp
+  );
+  const [data, setData] = useState<IDataModel>(defaultData);
+  const [isPending, setIsPending, setIsNotPending] = useIsOpen();
+
+  useEffect(() => {
+    if (dataProp && pagingProp) {
+      const totalPages = calculateTotalPages(
+        data.total,
+        pagingProp.itemsOnPage
+      );
+      setData(dataProp);
+      setPaging({ ...pagingProp, totalPages });
+    } else updateItems();
+  }, []);
+
+  useEffect(
+    () => {
+      updateItems();
+    },
+    [paging, sorting, filtering, timestamp]
+  );
+
+  const updateItems = useCallback(
+    () => {
+      if (loader) setIsPending();
+      const filters = composeRequestFilters({
+        paging,
+        sorting,
+        filtering,
+        defaultFilters
+      });
+      getItems(filters)
+        .then(setData)
+        .finally(setIsNotPending);
+    },
+    [loader, paging, sorting, filtering, timestamp]
+  );
+
+  const handleUpdateSorting = useCallback(
+    (sorting: string) => {
+      setSorting(sorting);
+      setPaging({ ...paging, currentPage: 1 });
+    },
+    [paging]
+  );
+
+  const handleUpdateFilter = useCallback(
+    (filter: TFilter<any>) => {
+      if (!filtering || !paging) return;
+      setFiltering(updateFilter(filtering, filter));
+      setPaging({
+        ...paging,
+        currentPage: 1
+      });
+    },
+    [filtering, paging]
+  );
+
+  const handleUpdatePaging = useCallback(
+    (nextPageIndex: number) => {
+      setPaging({
+        ...paging,
+        currentPage: nextPageIndex + 1
+      });
+    },
+    [paging]
+  );
+
+  const handleUpdateRow = useCallback(
+    (row: any) => {
+      const newData = {
+        ...data,
+        items: data.items.map((x: any) => (x.id === row.id ? row : x))
+      };
+      setData(newData);
+    },
+    [data]
+  );
+
+  const newPaging = {
+    ...paging,
+    totalItems: data.total ? data.total : 0,
+    totalPages: calculateTotalPages(data.total, paging && paging.itemsOnPage)
+  };
+  return (
+    <Table
+      {...props}
+      sorting={sorting}
+      filtering={filtering}
+      paging={newPaging}
+      items={data.items}
+      isPending={isPending}
+      updateSorting={handleUpdateSorting}
+      updatePaging={handleUpdatePaging}
+      updateFilter={handleUpdateFilter}
+      updateRow={handleUpdateRow}
+      updateItems={updateItems}
+    />
+  );
+};
+
 const defaultData: IDataModel = { items: null, total: 0 };
 
 export interface ITableModuleProps extends ITableProps {
@@ -22,144 +139,8 @@ export interface ITableModuleProps extends ITableProps {
   defaultFilters?: TDefaultFilters;
   loader?: boolean;
   data?: IDataModel;
+  timestamp?: number;
 }
 
-interface ITableModuleState {
-  paging?: IPaging;
-  sorting?: string;
-  filtering?: FilteringType;
-  data: IDataModel;
-  isPending: boolean;
-}
-
-class TableModule extends React.PureComponent<
-  ITableModuleProps,
-  ITableModuleState
-> {
-  static defaultProps = {
-    loader: true
-  };
-  constructor(props: ITableModuleProps) {
-    super(props);
-
-    const { paging, sorting, filtering } = this.props;
-
-    this.state = {
-      paging: paging,
-      sorting: sorting,
-      filtering: filtering,
-      data: defaultData,
-      isPending: false
-    };
-  }
-
-  componentDidMount() {
-    const { data, paging } = this.props;
-    if (data && paging) {
-      const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
-      this.setState({
-        data,
-        paging: { ...paging, totalPages }
-      });
-    } else {
-      this.updateItems();
-    }
-  }
-
-  updateItems = () => {
-    const { paging = {}, sorting = "", filtering = {} } = this.state;
-    const { defaultFilters, getItems, loader } = this.props;
-
-    if (loader) this.setState({ isPending: true });
-
-    const filters = composeRequestFilters({
-      paging,
-      sorting,
-      filtering,
-      defaultFilters
-    });
-    getItems(filters)
-      .then((data: IDataModel) => {
-        const totalPages = calculateTotalPages(
-          data.total,
-          paging && paging.itemsOnPage
-        );
-        this.setState(prevState => ({
-          data,
-          paging: { ...prevState.paging, totalPages },
-          isPending: false
-        }));
-      })
-      .catch(() => {
-        this.setState({ isPending: false });
-      });
-  };
-
-  handleUpdateSorting = (sorting: string) => {
-    this.setState(
-      prevState => ({
-        sorting: sorting,
-        paging: {
-          ...prevState.paging,
-          currentPage: 1
-        }
-      }),
-      this.updateItems
-    );
-  };
-
-  handleUpdateFilter = (filter: TFilter<any>) => {
-    this.setState(prevState => {
-      if (!prevState.filtering || !prevState.paging) return {};
-      return {
-        filtering: updateFilter(prevState.filtering, filter),
-        paging: {
-          ...prevState.paging,
-          currentPage: 1
-        }
-      };
-    }, this.updateItems);
-  };
-
-  handleUpdatePaging = (nextPageIndex: number) => {
-    this.setState(
-      prevState => ({
-        paging: {
-          ...prevState.paging,
-          currentPage: nextPageIndex + 1
-        }
-      }),
-      this.updateItems
-    );
-  };
-
-  handleUpdateRow = (row: any) => {
-    const { data } = this.state;
-    const newData = {
-      ...data,
-      items: data.items.map((x: any) => (x.id === row.id ? row : x))
-    };
-    this.setState({ data: newData });
-  };
-
-  render() {
-    const { data, isPending, paging } = this.state;
-    const newPaging = { ...paging, totalItems: data.total ? data.total : 0 };
-    return (
-      <Table
-        {...this.props}
-        {...this.state}
-        paging={newPaging}
-        items={data.items}
-        isPending={isPending}
-        updateSorting={this.handleUpdateSorting}
-        updatePaging={this.handleUpdatePaging}
-        updateFilter={this.handleUpdateFilter}
-        updateRow={this.handleUpdateRow}
-        updateItems={this.updateItems}
-      />
-    );
-  }
-}
-
+const TableModule = React.memo(_TableModule);
 export default TableModule;

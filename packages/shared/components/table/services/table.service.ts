@@ -16,15 +16,15 @@ import {
 import { IComposeDefaultFilter } from "../components/table.types";
 
 interface IComposeRequestFiltersProps {
-  paging: IPaging;
-  sorting: string;
-  filtering: FilteringType;
+  paging?: IPaging;
+  sorting?: string;
+  filtering?: FilteringType;
   defaultFilters?: IComposeDefaultFilter[];
 }
 export const composeRequestFilters = ({
-  paging,
-  sorting,
-  filtering,
+  paging = {},
+  sorting = "",
+  filtering = {},
   defaultFilters = []
 }: IComposeRequestFiltersProps): ComposeFiltersAllType => {
   const { skip, take } = calculateSkipAndTake(paging);
