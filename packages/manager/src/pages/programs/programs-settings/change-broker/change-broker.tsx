@@ -15,6 +15,7 @@ import { SetSubmittingType } from "shared/utils/types";
 import ConfirmChangeBroker from "./confirm-change-broker";
 
 const _ChangeBroker: React.FC<Props> = ({
+  currentLeverage,
   onSubmit,
   submitForm,
   currentAccountTypeId,
@@ -47,13 +48,22 @@ const _ChangeBroker: React.FC<Props> = ({
   const selectBroker = useCallback(
     (brokerName: string) => () => {
       const broker = brokers.find(x => x.name === brokerName)!;
-      const firstAccount = broker.accountTypes[0];
+      const account =
+        brokerName === values[FIELDS.brokerFrom].name
+          ? broker.accountTypes.find(
+              accountType => accountType.id === currentAccountTypeId
+            )!
+          : broker.accountTypes[0];
+      const leverage =
+        brokerName === values[FIELDS.brokerFrom].name
+          ? currentLeverage
+          : account.leverages[0];
       setSelectedBroker(broker);
-      setAccount(firstAccount);
-      setFieldValue(FIELDS.brokerAccountTypeId, firstAccount.id);
-      setFieldValue(FIELDS.leverage, firstAccount.leverages[0]);
+      setAccount(account);
+      setFieldValue(FIELDS.brokerAccountTypeId, account.id);
+      setFieldValue(FIELDS.leverage, leverage);
     },
-    [brokers]
+    [brokers, currentAccountTypeId, values, currentLeverage]
   );
   const changeAccount = useCallback(
     ({ target }) => {
@@ -135,7 +145,6 @@ const _ChangeBroker: React.FC<Props> = ({
       <ConfirmChangeBroker
         open={isChangeBrokerOpen}
         onClose={setChangeBrokerClose}
-        onApply={() => {}}
         brokerFrom={brokerFrom.name}
         brokerTo={
           brokers.find(
@@ -163,7 +172,7 @@ interface OwnProps {
   ) => void;
   id: string;
   brokers: Broker[];
-  leverage: number;
+  currentLeverage: number;
 }
 
 enum FIELDS {
@@ -183,7 +192,7 @@ const ChangeBroker = compose<React.ComponentType<OwnProps>>(
   withFormik<OwnProps, ChangeBrokerFormValues>({
     enableReinitialize: true,
     displayName: "edit-form",
-    mapPropsToValues: ({ brokers, currentAccountTypeId, leverage }) => ({
+    mapPropsToValues: ({ brokers, currentAccountTypeId, currentLeverage }) => ({
       [FIELDS.brokerFrom]: brokers.find(
         broker =>
           !!broker.accountTypes.find(
@@ -191,7 +200,7 @@ const ChangeBroker = compose<React.ComponentType<OwnProps>>(
           )
       )!,
       [FIELDS.brokerAccountTypeId]: currentAccountTypeId,
-      [FIELDS.leverage]: leverage
+      [FIELDS.leverage]: currentLeverage
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);

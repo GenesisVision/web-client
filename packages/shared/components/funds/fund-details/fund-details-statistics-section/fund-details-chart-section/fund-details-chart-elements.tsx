@@ -1,6 +1,9 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
-import { FundBalanceChart as FundBalanceChartType } from "gv-api-web";
+import {
+  FundBalanceChart as FundBalanceChartType,
+  FundProfitChart
+} from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -11,7 +14,6 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useTab from "shared/hooks/tab.hook";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
-import { FundDetailsProfitChart } from "../../services/fund-details.types";
 import FundBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
 import FundProfitChartSection from "./fund-profit-chart-section/fund-profit-chart-section";
 
@@ -61,7 +63,7 @@ enum TABS {
 interface OwnProps {
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
-  profitChart: FundDetailsProfitChart;
+  profitChart: FundProfitChart;
   balanceChart: FundBalanceChartType;
 }
 
