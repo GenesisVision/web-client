@@ -1,40 +1,34 @@
 import classNames from "classnames";
 import * as React from "react";
+import { useCallback } from "react";
 import withUrl from "shared/decorators/with-url";
+import useIsOpen from "shared/hooks/is-open.hook";
 
-class _ImageBase extends React.PureComponent<IImageBaseProps, State> {
-  state = {
-    error: false
-  };
-  handleError = (e: any) => {
+const _ImageBase: React.FC<IImageBaseProps> = ({
+  url,
+  alt,
+  defaultImage,
+  imageClassName,
+  defaultImageClassName
+}) => {
+  const [isError, setIsError] = useIsOpen();
+  const handleError = useCallback((e: any) => {
     e.target.onerror = null;
-    this.setState({ error: true });
-  };
-  render() {
-    const {
-      url,
-      alt,
-      defaultImage,
-      imageClassName,
-      defaultImageClassName
-    } = this.props;
-    const currentSrc = this.state.error || !url ? defaultImage : url;
+    setIsError();
+  }, []);
+  const currentSrc = isError || !url ? defaultImage : url;
+  const className = isError || !url ? defaultImageClassName : "";
+  return (
+    <img
+      alt={alt}
+      className={classNames(imageClassName, className)}
+      src={currentSrc}
+      onError={handleError}
+    />
+  );
+};
 
-    return (
-      <img
-        alt={alt}
-        className={classNames(
-          imageClassName,
-          this.state.error || !url ? defaultImageClassName : ""
-        )}
-        src={currentSrc}
-        onError={this.handleError}
-      />
-    );
-  }
-}
-
-const ImageBase = withUrl<IImageBaseProps>("url")(_ImageBase);
+const ImageBase = withUrl<IImageBaseProps>("url")(React.memo(_ImageBase));
 export default ImageBase;
 
 export interface IImageProps {
@@ -49,8 +43,4 @@ export interface IImageBaseProps {
   defaultImage: string;
   imageClassName?: string;
   defaultImageClassName?: string;
-}
-
-interface State {
-  error: boolean;
 }
