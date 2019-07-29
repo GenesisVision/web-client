@@ -8,7 +8,9 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 
 import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
-import ChangeBroker, { ChangeBrokerFormValues } from "./change-broker/change-broker";
+import ChangeBroker, {
+  ChangeBrokerFormValues
+} from "./change-broker/change-broker";
 import ChangePassword from "./change-password/change-password";
 import CloseProgramPeriod from "./close-period/close-program-period";
 import CloseProgram from "./close-program/close-program";
@@ -17,6 +19,7 @@ import ProgramEdit from "./program-edit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
+import TwoFactorConfirm from "./two-factor-confirm/two-factor-confirm";
 
 const _ProgramSettings: React.FC<Props> = ({
   cancelChangeBroker,
@@ -38,6 +41,9 @@ const _ProgramSettings: React.FC<Props> = ({
   return (
     <div className="program-edit">
       <h1>{t("manager.program-settings.title")}</h1>
+      {details.personalProgramDetails.showTwoFactorButton && (
+        <TwoFactorConfirm id={details.id} />
+      )}
       <section className="program-edit__block">
         <h3>{t("manager.program-settings.period-and-closing.title")}</h3>
         <CloseProgramPeriod
