@@ -9,6 +9,9 @@ import notificationsReducer, {
 import programsRatingReducer, {
   ProgramsRatingState
 } from "shared/components/programs-rating/reducers/programs-rating.reducers";
+import programDetailsReducer, {
+  ProgramDetailsState
+} from "shared/components/programs/reducers/program-details.reducer";
 import {
   CopyTradingAccountsReducer,
   CopyTradingAccountsState,
@@ -50,6 +53,7 @@ import { RouterState } from "./router-reducer";
 import uiReducer from "./ui-reducer";
 
 export const sharedRootReducers = {
+  programDetails: programDetailsReducer,
   router: connectRouter(history),
   platformData: platformReducer,
   programsData: programsReducer,
@@ -74,6 +78,7 @@ export const sharedRootReducers = {
 };
 
 export type RootState = Readonly<{
+  programDetails: ProgramDetailsState;
   notifications: NotificationsState;
   profileHeader: HeaderState;
   notificationSettings: NotificationSettingsState;
