@@ -24,11 +24,11 @@ const _InvestmentLimit: React.FC<Props> = ({
     []
   );
   return (
-    <form id="edit-form" onSubmit={handleSubmit}>
-      <div className="program-edit__block-wrapper">
-        <h3>
-          {t("manager.create-program-page.settings.fields.investment-limit")}
-        </h3>
+    <div className="program-edit__block-wrapper">
+      <h3>
+        {t("manager.create-program-page.settings.fields.investment-limit")}
+      </h3>
+      <form id="edit-form" onSubmit={handleSubmit}>
         <CreateProgramInvestmentLimitField
           checkboxName={FIELDS.hasInvestmentLimit}
           inputName={FIELDS.investmentLimit}
@@ -47,8 +47,8 @@ const _InvestmentLimit: React.FC<Props> = ({
         >
           {t("manager.program-settings.buttons.save")}
         </GVButton>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 
