@@ -2,7 +2,7 @@ import { FundDetailsFull } from "gv-api-web";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
+import { FundDetailContext } from "shared/components/details/helpers/details-context";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
 import GVButton from "shared/components/gv-button";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
@@ -63,7 +63,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
             </GVButton>
           </div>
         </>
-        <ProgramDetailContext.Consumer>
+        <FundDetailContext.Consumer>
           {({ updateDescription }) => (
             <>
               <FundDepositContainer
@@ -75,7 +75,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
               />
             </>
           )}
-        </ProgramDetailContext.Consumer>
+        </FundDetailContext.Consumer>
         <InvestmentUnauthPopup
           message={t("fund-details-page.description.unauth-popup")}
           asset={ASSET.FUND}
