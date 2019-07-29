@@ -4,27 +4,24 @@ import React from "react";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import ManagerPage from "shared/components/manager/manager.page";
 import ManagerApi from "shared/services/api-client/manager-api";
-import { getTokenName } from "shared/utils/get-token-name";
-import nextCookie from "next-cookies";
+import authService from "shared/services/auth-service";
 
 const Managers: NextPage<OwnProps> = ({ managerProfile, isAuthenticated }) => {
   return (
     <ManagerPage
-    managerProfile={managerProfile}
-    isAuthenticated={isAuthenticated}
-  />
-  )
+      managerProfile={managerProfile}
+      isAuthenticated={isAuthenticated}
+    />
+  );
 };
 
 Managers.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const managerProfile = await ManagerApi.v10ManagerByIdGet(id as string);
-  const tokenName = getTokenName();
-  const token = nextCookie(ctx)[tokenName];
   return {
     namespacesRequired: ["translation"],
-    isAuthenticated: !!token,
-    managerProfile,
+    isAuthenticated: authService.isAuthenticated(),
+    managerProfile
   };
 };
 
