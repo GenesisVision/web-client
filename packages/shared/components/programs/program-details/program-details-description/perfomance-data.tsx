@@ -1,17 +1,17 @@
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { compose } from "redux";
 import Leverage from "shared/components/leverage/leverage";
 import PieContainerSmall from "shared/components/pie-container/pie-container-small";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
-import filesService from "shared/services/file-service";
-import { compose } from "redux";
 import withLoader, {
   WithLoaderProps
 } from "shared/decorators/with-loader";
+import filesService from "shared/services/file-service";
 
 const _PerfomanceData: React.FC<Props> = ({
   t,
