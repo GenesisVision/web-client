@@ -8,6 +8,10 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
 import filesService from "shared/services/file-service";
+import { compose } from "redux";
+import withLoader, {
+  WithLoaderProps
+} from "shared/decorators/with-loader";
 
 const _PerfomanceData: React.FC<Props> = ({
   t,
@@ -96,5 +100,9 @@ interface OwnProps {
   programDescription: ProgramDetailsFull;
 }
 
-const PerfomanceData = translate()(React.memo(_PerfomanceData));
+const PerfomanceData = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+  withLoader,
+  translate(),
+  React.memo
+)(_PerfomanceData);
 export default PerfomanceData;
