@@ -86,6 +86,7 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
       {personalFundDetails && personalFundDetails.status !== STATUS.ENDED && (
         <div className="program-details-description__additionally">
           <DetailsInvestment
+            updateDescription={() => {}}
             asset={FUND}
             id={fundDescription.id}
             assetCurrency={"GVT"}
