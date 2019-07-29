@@ -2,7 +2,6 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -37,13 +36,13 @@ const _ProgramDetailsStatisticSection: React.FC<Props> = ({
   balanceChart,
   profitChart,
   id,
-  service
+  service: { getProfitChart, getBalanceChart }
 }) => {
   const [period, setPeriod] = useState<ChartDefaultPeriod>(DEFAULT_PERIOD);
   useEffect(
     () => {
-      service.getProfitChart({ id, period });
-      service.getBalanceChart({ id, period });
+      getProfitChart({ id, period });
+      getBalanceChart({ id, period });
     },
     [period, id]
   );
@@ -90,13 +89,12 @@ interface OwnProps {
   status: STATUS;
 }
 
-interface Props extends WithTranslation, OwnProps, DispatchProps, StateProps {}
+interface Props extends OwnProps, DispatchProps, StateProps {}
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   getProfitChart: typeof getProfitChart;
   getBalanceChart: typeof getBalanceChart;
 }
-
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
@@ -106,7 +104,6 @@ const ProgramDetailsStatisticSection = compose<React.ComponentType<OwnProps>>(
     mapStateToProps,
     mapDispatchToProps
   ),
-  translate(),
   React.memo
 )(_ProgramDetailsStatisticSection);
 export default ProgramDetailsStatisticSection;
