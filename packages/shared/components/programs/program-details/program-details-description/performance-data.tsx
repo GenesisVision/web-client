@@ -8,12 +8,10 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
-import withLoader, {
-  WithLoaderProps
-} from "shared/decorators/with-loader";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import filesService from "shared/services/file-service";
 
-const _PerfomanceData: React.FC<Props> = ({
+const _PerformanceData: React.FC<Props> = ({
   t,
   programDescription,
   levelsParameters
@@ -100,9 +98,11 @@ interface OwnProps {
   programDescription: ProgramDetailsFull;
 }
 
-const PerfomanceData = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+const PerformanceData = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
   withLoader,
   translate(),
   React.memo
-)(_PerfomanceData);
-export default PerfomanceData;
+)(_PerformanceData);
+export default PerformanceData;

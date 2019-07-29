@@ -19,7 +19,7 @@ import { RootState } from "shared/reducers/root-reducer";
 
 import { levelParametersSelector } from "../reducers/level-parameters.reducer";
 import { dispatchProgramDescription } from "../services/program-details.service";
-import PerfomanceData from "./perfomance-data";
+import PerformanceData from "./performance-data";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 import SubscriptionDetailsContainer from "./subscription-details/subscription-details-container";
 
@@ -47,7 +47,7 @@ const _ProgramDetailsDescriptionSection: React.FC<
         isOwnProgram={isOwnProgram}
         ChangePasswordTradingAccount={ChangePasswordTradingAccount}
       />
-      <PerfomanceData
+      <PerformanceData
         condition={!!levelsParameters}
         levelsParameters={levelsParameters!}
         programDescription={programDescription}
