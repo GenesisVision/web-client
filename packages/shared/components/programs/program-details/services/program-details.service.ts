@@ -51,21 +51,6 @@ export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
   dispatch: Dispatch
 ) => dispatch(fetchLevelParametersAction(currency));
 
-export const getProgramDescription = () => (
-  dispatch: Dispatch,
-  getState: () => RootState
-) => {
-  const authorization = authService.getAuthArg();
-  const { router } = getState();
-
-  const programSlugUrl = getParams(
-    router.location.pathname,
-    PROGRAM_DETAILS_ROUTE
-  )[PROGRAM_SLUG_URL_PARAM_NAME];
-
-  return programsApi.v10ProgramsByIdGet(programSlugUrl, { authorization });
-};
-
 export const dispatchProgramDescription = () => (
   dispatch: MiddlewareDispatch,
   getState: () => RootState
@@ -73,12 +58,11 @@ export const dispatchProgramDescription = () => (
   const authorization = authService.getAuthArg();
   const { router } = getState();
 
-  const programSlugUrl = getParams(
-    router.location.pathname,
-    PROGRAM_DETAILS_ROUTE
-  )[PROGRAM_SLUG_URL_PARAM_NAME];
+  const slugUrl = getParams(router.location.pathname, PROGRAM_DETAILS_ROUTE)[
+    PROGRAM_SLUG_URL_PARAM_NAME
+  ];
 
-  return dispatch(fetchProgramDescriptionAction(programSlugUrl, authorization));
+  return dispatch(fetchProgramDescriptionAction(slugUrl, authorization));
 };
 
 export const getProgramStatistic = (
