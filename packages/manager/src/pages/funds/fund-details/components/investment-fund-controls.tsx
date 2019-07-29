@@ -7,7 +7,7 @@ import ReallocateContainer from "modules/reallocate/reallocate-container";
 import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
+import { FundDetailContext } from "shared/components/details/helpers/details-context";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
 import GVButton from "shared/components/gv-button";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
@@ -139,7 +139,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
             </GVButton>
           )}
         </div>
-        <ProgramDetailContext.Consumer>
+        <FundDetailContext.Consumer>
           {({ updateDescription }) => (
             <>
               <FundDepositContainer
@@ -171,7 +171,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
               />
             </>
           )}
-        </ProgramDetailContext.Consumer>
+        </FundDetailContext.Consumer>
         <InvestmentUnauthPopup
           message={message}
           title={fundDescription.title}
