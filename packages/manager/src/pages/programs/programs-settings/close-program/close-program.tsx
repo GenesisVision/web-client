@@ -2,8 +2,9 @@ import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import ConfirmCloseProgramContainer from "./confirm-close-program-container";
 import useIsOpen from "shared/hooks/is-open.hook";
+
+import ConfirmCloseProgramContainer from "./confirm-close-program-container";
 
 const _CloseProgram: React.FC<Props> = ({ id, t, onApply, canClose }) => {
   const [
@@ -13,8 +14,8 @@ const _CloseProgram: React.FC<Props> = ({ id, t, onApply, canClose }) => {
   ] = useIsOpen();
   return (
     <>
-      <div className="program-edit__block-wrapper">
-        <p className="program-edit__text">
+      <div className="program-settings__block-wrapper">
+        <p className="program-settings__text">
           {t("manager.program-settings.period-and-closing.text-program")}
         </p>
         <GVButton

@@ -24,7 +24,7 @@ const _InvestmentLimit: React.FC<Props> = ({
     []
   );
   return (
-    <div className="program-edit__block-wrapper">
+    <div className="program-settings__block-wrapper">
       <h3>
         {t("manager.create-program-page.settings.fields.investment-limit")}
       </h3>
@@ -36,7 +36,7 @@ const _InvestmentLimit: React.FC<Props> = ({
           currency={currency}
           isAllow={isAmountAllow(currency)}
         />
-        <p className="program-edit__text">
+        <p className="program-settings__text">
           {t("manager.program-settings.investment-limit.text")}
         </p>
         <GVButton

@@ -39,12 +39,12 @@ const _ProgramSettings: React.FC<Props> = ({
     ? details.signalVolumeFee
     : undefined;
   return (
-    <div className="program-edit">
+    <div className="program-settings">
       <h1>{t("manager.program-settings.title")}</h1>
       {details.personalProgramDetails.showTwoFactorButton && (
         <TwoFactorConfirm id={details.id} />
       )}
-      <section className="program-edit__block">
+      <section className="program-settings__block">
         <h3>{t("manager.program-settings.period-and-closing.title")}</h3>
         <CloseProgramPeriod
           canClose={details.personalProgramDetails.canClosePeriod}
@@ -59,13 +59,13 @@ const _ProgramSettings: React.FC<Props> = ({
       </section>
       {details.personalProgramDetails.canChangePassword &&
         details.personalProgramDetails.canCloseProgram && (
-          <section className="program-edit__block">
+          <section className="program-settings__block">
             <ChangePassword title={details.title} id={details.id} />
           </section>
         )}
       {details.personalProgramDetails.canCloseProgram && (
         <>
-          <section className="program-edit__block">
+          <section className="program-settings__block">
             <ProgramEdit
               title={details.title}
               logo={{ src: details.logo }}
@@ -74,7 +74,7 @@ const _ProgramSettings: React.FC<Props> = ({
             />
           </section>
           {details.personalProgramDetails.migration && (
-            <section className="program-edit__block">
+            <section className="program-settings__block">
               <CancelChangeBroker
                 brokerFrom={
                   brokersInfo.brokers.find(
@@ -97,7 +97,7 @@ const _ProgramSettings: React.FC<Props> = ({
           )}
           {!!!details.personalProgramDetails.migration &&
             brokersInfo.brokers.length > 1 && (
-              <section className="program-edit__block">
+              <section className="program-settings__block">
                 <ChangeBroker
                   onSubmit={changeBroker}
                   id={details.id}
@@ -107,13 +107,13 @@ const _ProgramSettings: React.FC<Props> = ({
                 />
               </section>
             )}
-          <section className="program-edit__block">
+          <section className="program-settings__block">
             <StopOutLevel
               stopOutLevel={details.stopOutLevel}
               onSubmit={editProgram}
             />
           </section>
-          <section className="program-edit__block">
+          <section className="program-settings__block">
             <InvestmentLimit
               currency={details.currency}
               investmentLimit={details.availableInvestmentLimit}
@@ -123,7 +123,7 @@ const _ProgramSettings: React.FC<Props> = ({
           {(details.isSignalProgram ||
             (!details.isSignalProgram &&
               details.personalProgramDetails.canMakeSignalProvider)) && (
-            <section className="program-edit__block">
+            <section className="program-settings__block">
               <SignalingEdit
                 isSignalProgram={details.isSignalProgram}
                 onSubmit={changeSignaling}

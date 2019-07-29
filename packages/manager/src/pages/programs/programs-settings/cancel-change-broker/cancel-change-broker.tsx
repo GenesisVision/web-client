@@ -27,8 +27,8 @@ const _CancelChangeBroker: React.FC<Props> = ({
   return (
     <div>
       <h3>{t("manager.program-settings.broker.title")}</h3>
-      <div className="program-edit__block-wrapper program-edit__block-wrapper--broker-list">
-        <div className="program-edit__broker-info">
+      <div className="program-settings__block-wrapper program-settings__block-wrapper--broker-list">
+        <div className="program-settings__broker-info">
           <BrokerCard
             logo={brokerFrom.logo}
             key={brokerFrom.name}
@@ -56,7 +56,7 @@ const _CancelChangeBroker: React.FC<Props> = ({
           </StatisticItem>
         </div>
         <div className="broker-card__next-arrow">&rarr;</div>
-        <div className="program-edit__broker-info">
+        <div className="program-settings__broker-info">
           <BrokerCard
             logo={brokerTo.logo}
             key={brokerTo.name}
@@ -80,7 +80,7 @@ const _CancelChangeBroker: React.FC<Props> = ({
           </StatisticItem>
         </div>
       </div>
-      <p className="program-edit__text program-edit__text--color-accent program-edit__text--padding-top">
+      <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
         {t("manager.program-settings.broker.text-cancel", {
           brokerFrom: brokerFrom.name,
           brokerTo: brokerTo.name
