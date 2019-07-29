@@ -2,7 +2,7 @@ import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
+import { FundDetailContext } from "shared/components/details/helpers/details-context";
 import Page from "shared/components/page/page";
 import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
 import withLoader from "shared/decorators/with-loader";
@@ -39,7 +39,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
     description.personalFundDetails.isInvested;
   return (
     <Page title={description.title}>
-      <ProgramDetailContext.Provider
+      <FundDetailContext.Provider
         value={{
           updateDescription,
           isKycConfirmed: false
@@ -75,7 +75,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
             />
           </div>
         </div>
-      </ProgramDetailContext.Provider>
+      </FundDetailContext.Provider>
     </Page>
   );
 };
