@@ -1,9 +1,9 @@
 import "./dashboard-portfolio-event-logo.scss";
 
 import { DashboardPortfolioEventAssetTypeEnum } from "gv-api-web";
-import Link from "next/link";
 import * as React from "react";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import Link from "shared/components/link/link";
 import EventCancelledIconRed from "shared/media/event-cancelled-red.svg";
 import EventCancelledIcon from "shared/media/event-cancelled.svg";
 import EventEndedRedIcon from "shared/media/event-ended-red.svg";
@@ -19,6 +19,8 @@ import EventReinvestIcon from "shared/media/event-reinvest.svg";
 import EventStartedIcon from "shared/media/event-started.svg";
 import EventWithdrawIcon from "shared/media/event-withdraw.svg";
 import {
+  composeAssetDetailsFolderUrl,
+  composeAssetDetailsUrl,
   composeFundsDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
@@ -74,24 +76,20 @@ const PortfolioEventLogo: React.FC<Props> = ({
   assetType = undefined
 }) => {
   const to = {
-    pathname:
-      assetType === "Program"
-        ? composeProgramDetailsUrl(url || "")
-        : composeFundsDetailsUrl(url || ""),
+    pathname: composeAssetDetailsFolderUrl(assetType),
+    as: composeAssetDetailsUrl(assetType, url),
     state: `/ ${type}`
   };
   return (
     <div className="portfolio-event-logo">
       {(url && (
-        <Link href={to}>
-          <a className="portfolio-event-logo__photo">
-            <AssetAvatar
-              url={logo}
-              alt={type}
-              className="portfolio-event-logo__logo"
-              color={color}
-            />
-          </a>
+        <Link to={to} className="portfolio-event-logo__photo">
+          <AssetAvatar
+            url={logo}
+            alt={type}
+            className="portfolio-event-logo__logo"
+            color={color}
+          />
         </Link>
       )) || (
         <div className="portfolio-event-logo__photo">
