@@ -47,9 +47,6 @@ import { ProgramStatisticResult } from "./program-details.types";
 export const getProgramBrokers = (id: string) =>
   brokersApi.v10BrokersByProgramIdGet(id);
 
-export const getPlatformLevelsParameters = (currency: CurrencyEnum) =>
-  platformApi.v10PlatformLevelsParametersGet({ currency });
-
 export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
   dispatch: Dispatch
 ) => dispatch(fetchLevelParametersAction(currency));
