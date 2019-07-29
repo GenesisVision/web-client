@@ -37,7 +37,6 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
     state: `/ ${title}`,
     pathname: composeProgramDetailsUrl(program.url)
   };
-  console.log(composeManagerDetailsUrl(program.manager.url));
   return (
     <TableRow>
       <td

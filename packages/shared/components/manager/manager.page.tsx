@@ -33,24 +33,31 @@ const _ManagerPage: React.FC<Props> = ({
   </Page>
 );
 
-interface Props extends StateProps, WithTranslation, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
   managerProfile: ManagerProfile;
-}
-
-interface StateProps {
   isAuthenticated: boolean;
 }
 
-const mapStateToProps = (state: AuthRootState): StateProps => ({
-  isAuthenticated: isAuthenticatedSelector(state)
-});
+// interface StateProps {
+//   isAuthenticated: boolean;
+// }
+
+// const mapStateToProps = (state: AuthRootState): StateProps => ({
+//   isAuthenticated: isAuthenticatedSelector(state)
+// });
 
 const ManagerPage = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
-  connect(mapStateToProps),
   withLoader,
   translate(),
   React.memo
 )(_ManagerPage);
+
+// const ManagerPage = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+//   connect(mapStateToProps),
+//   withLoader,
+//   translate(),
+//   React.memo
+// )(_ManagerPage);
 export default ManagerPage;
