@@ -11,6 +11,7 @@ import {
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import { RootState } from "shared/reducers/root-reducer";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE
@@ -19,8 +20,13 @@ import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import { TGetState } from "shared/utils/types";
+import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
+import {
+  fetchFundBalanceChartAction,
+  fetchFundDescriptionAction,
+  fetchFundProfitChartAction
+} from "../actions/fund-details.actions";
 import { FundStatisticResult } from "./fund-details.types";
 
 export const getFundDescription = () => (
@@ -38,6 +44,20 @@ export const getFundDescription = () => (
   return fundsApi.v10FundsByIdGet(programSlugUrl, {
     authorization
   });
+};
+
+export const dispatchFundDescription = () => (
+  dispatch: MiddlewareDispatch,
+  getState: () => RootState
+) => {
+  const authorization = authService.getAuthArg();
+  const { router } = getState();
+
+  const slugUrl = getParams(router.location.pathname, FUND_DETAILS_ROUTE)[
+    FUNDS_SLUG_URL_PARAM_NAME
+  ];
+
+  return dispatch(fetchFundDescriptionAction(slugUrl, authorization));
 };
 
 export const getFundStatistic = (
@@ -105,4 +125,19 @@ export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
       reallocateCount: reallocateData.total
     })
   );
+};
+
+export const getProfitChart = ({ id, period }: TGetChartArgs) => (
+  dispatch: Dispatch
+) => dispatch(fetchFundProfitChartAction(id, period));
+
+export const getBalanceChart = ({ id, period }: TGetChartArgs) => (
+  dispatch: Dispatch
+) => {
+  dispatch(fetchFundBalanceChartAction(id, period));
+};
+
+type TGetChartArgs = {
+  id: string;
+  period?: ChartDefaultPeriod;
 };
