@@ -56,7 +56,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
     const canReallocate =
       personalFundDetails && personalFundDetails.canReallocate;
     const possibleReallocationTime =
-      personalFundDetails && personalFundDetails.possibleReallocationTime;
+      personalFundDetails && personalFundDetails.nextReallocationPercents;
 
     const composeEditInfo: IAssetEditInfo = {
       stopOutLevel: 0,
