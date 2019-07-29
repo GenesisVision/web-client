@@ -35,7 +35,7 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
         .catch(() => setIsReinvestingValue(isReinvesting))
         .finally(setNotIsPending);
     },
-    [programId]
+    [programId, isReinvesting]
   );
   return (
     <span
