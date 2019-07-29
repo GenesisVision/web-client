@@ -1,6 +1,9 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
-import { FundBalanceChart } from "gv-api-web";
+import {
+  FundBalanceChart,
+  FundProfitChart as FundProfitChartType
+} from "gv-api-web";
 import * as React from "react";
 import {
   ChartDefaultPeriod,
@@ -9,7 +12,6 @@ import {
 import { HandlePeriodChangeType } from "shared/utils/types";
 
 import {
-  FundDetailsProfitChart,
   FundDetailsStatistic as FundDetailsStatisticType,
   FundStatisticResult
 } from "../services/fund-details.types";
@@ -79,7 +81,7 @@ interface Props {
 interface State {
   period?: ChartDefaultPeriod;
   statistic?: FundDetailsStatisticType;
-  profitChart?: FundDetailsProfitChart;
+  profitChart?: FundProfitChartType;
   balanceChart?: FundBalanceChart;
   prevProps?: Props;
 }

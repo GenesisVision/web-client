@@ -8,9 +8,7 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 
 import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
-import ChangeBroker, {
-  ChangeBrokerFormValues
-} from "./change-broker/change-broker";
+import ChangeBroker, { ChangeBrokerFormValues } from "./change-broker/change-broker";
 import ChangePassword from "./change-password/change-password";
 import CloseProgramPeriod from "./close-period/close-program-period";
 import CloseProgram from "./close-program/close-program";
@@ -99,7 +97,7 @@ const _ProgramSettings: React.FC<Props> = ({
                   id={details.id}
                   brokers={brokersInfo.brokers}
                   currentAccountTypeId={brokersInfo.currentAccountTypeId}
-                  leverage={details.leverageMax}
+                  currentLeverage={details.leverageMax}
                 />
               </section>
             )}

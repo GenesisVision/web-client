@@ -1,6 +1,6 @@
 import copy from "copy-to-clipboard";
 import { WalletData } from "gv-api-web";
-import * as React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import GVqr from "shared/components/gv-qr/gv-qr";
@@ -12,94 +12,87 @@ import withLoader from "shared/decorators/with-loader";
 import filesService from "shared/services/file-service";
 import { CurrencyEnum } from "shared/utils/types";
 
-class _WalletAddFundsForm extends React.PureComponent<Props, State> {
-  state = {
-    currency: this.props.wallets[0].currency
-  };
-
-  componentDidMount() {
-    const { wallets, currentWallet } = this.props;
+const _WalletAddFundsForm: React.FC<Props> = ({
+  t,
+  wallets,
+  notifySuccess,
+  notifyError,
+  currentWallet
+}) => {
+  const [currency, setCurrency] = useState<CurrencyEnum>(wallets[0].currency);
+  useEffect(() => {
     const currentCurrency = currentWallet.currency;
-    if (wallets.find(wallet => wallet.currency === currentCurrency)) {
-      this.setState({ currency: currentCurrency });
-    }
-  }
-
-  onChangeCurrency = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ currency: event.target.value as CurrencyEnum });
-  };
-
-  render() {
-    const { t, wallets, notifySuccess, notifyError } = this.props;
-    const selected = wallets.find(
-      wallet => wallet.currency === this.state.currency
-    )!;
-    const { depositAddress } = selected;
-    const onCopy = () => {
+    if (wallets.find(wallet => wallet.currency === currentCurrency))
+      setCurrency(currentCurrency);
+  });
+  const onChangeCurrency = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) =>
+      setCurrency(event.target.value as CurrencyEnum),
+    []
+  );
+  const selected = wallets.find(wallet => wallet.currency === currency)!;
+  const { depositAddress } = selected;
+  const onCopy = useCallback(
+    () => {
       try {
         copy(depositAddress);
         notifySuccess(t("wallet-deposit.copy-to-clipboard-success"));
       } catch (error) {
         notifyError(t("wallet-deposit.copy-to-clipboard-error"));
       }
-    };
-
-    return (
-      <div className="wallet-add-funds-popup">
-        <div className="dialog__top">
-          <div className="dialog__header">
-            <h2>{t("wallet-deposit.title")}</h2>
-          </div>
-          <div className="dialog-field">
-            <GVTextField
-              name="currency"
-              label={t("wallet-deposit.select-currency")}
-              InputComponent={Select}
-              value={this.state.currency}
-              onChange={this.onChangeCurrency}
-            >
-              {wallets.map(wallet => {
-                const { title, currency } = wallet;
-                return (
-                  <option value={currency} key={currency}>
-                    <img
-                      src={filesService.getFileUrl(wallet.logo)}
-                      className="wallet-withdraw-popup__icon"
-                      alt={currency}
-                    />
-                    {`${title} | ${currency}`}
-                  </option>
-                );
-              })}
-            </GVTextField>
-          </div>
+    },
+    [depositAddress]
+  );
+  return (
+    <div className="wallet-add-funds-popup">
+      <div className="dialog__top">
+        <div className="dialog__header">
+          <h2>{t("wallet-deposit.title")}</h2>
         </div>
-        <div className="dialog__bottom wallet-add-funds-popup__bottom">
-          <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
-          <StatisticItem
-            className="wallet-add-funds-popup__address"
-            label={t("wallet-deposit.deposit-address")}
+        <div className="dialog-field">
+          <GVTextField
+            name="currency"
+            label={t("wallet-deposit.select-currency")}
+            InputComponent={Select}
+            value={currency}
+            onChange={onChangeCurrency}
           >
-            {depositAddress}
-          </StatisticItem>
-          <GVButton
-            color="secondary"
-            onClick={onCopy}
-            disabled={!depositAddress}
-          >
-            <>
-              <CopyIcon />
-              &nbsp;
-              {t("buttons.copy")}
-            </>
-          </GVButton>
+            {wallets.map(({ title, currency, logo }) => (
+              <option value={currency} key={currency}>
+                <img
+                  src={filesService.getFileUrl(logo)}
+                  className="wallet-withdraw-popup__icon"
+                  alt={currency}
+                />
+                {`${title} | ${currency}`}
+              </option>
+            ))}
+          </GVTextField>
         </div>
       </div>
-    );
-  }
-}
+      <div className="dialog__bottom wallet-add-funds-popup__bottom">
+        <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
+        <StatisticItem
+          className="wallet-add-funds-popup__address"
+          label={t("wallet-deposit.deposit-address")}
+        >
+          {depositAddress}
+        </StatisticItem>
+        <GVButton color="secondary" onClick={onCopy} disabled={!depositAddress}>
+          <>
+            <CopyIcon />
+            &nbsp;
+            {t("buttons.copy")}
+          </>
+        </GVButton>
+      </div>
+    </div>
+  );
+};
 
-const WalletAddFundsForm = withLoader(translate()(_WalletAddFundsForm));
+const WalletAddFundsForm = withLoader(
+  translate()(React.memo(_WalletAddFundsForm))
+);
 export default WalletAddFundsForm;
 
 export interface CurrentWallet {
@@ -112,10 +105,6 @@ interface OwnProps {
   currentWallet: CurrentWallet;
   notifySuccess(text: string): void;
   notifyError(text: string): void;
-}
-
-interface State {
-  currency: CurrencyEnum;
 }
 
 interface Props extends WithTranslation, OwnProps {}
