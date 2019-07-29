@@ -19,7 +19,7 @@ import ProgramEdit from "./program-edit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
-import TwoFactorConfirm from "./two-factor-confirm/two-factor-confirm";
+import TwoFactorConfirm from "./two-factor-confirm";
 
 const _ProgramSettings: React.FC<Props> = ({
   cancelChangeBroker,
