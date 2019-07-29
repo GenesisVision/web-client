@@ -2,7 +2,6 @@ import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { FundDetailContext } from "shared/components/details/helpers/details-context";
 import Page from "shared/components/page/page";
 import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
 import withLoader from "shared/decorators/with-loader";
@@ -14,20 +13,17 @@ import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-
 import { IDescriptionSection } from "./fund-details.types";
 import {
   fetchFundReallocateHistory,
-  fetchFundStructure,
-  getFundStatistic
+  fetchFundStructure
 } from "./services/fund-details.service";
-import { FundStatisticResult } from "./services/fund-details.types";
 
 const _FundDetailsContainer: React.FC<Props> = ({
-  updateDescription,
+  isKycConfirmed,
   currency,
   isAuthenticated,
   redirectToLogin,
   descriptionSection,
   historySection,
-  description,
-  statistic
+  description
 }) => {
   const fetchHistoryPortfolioEvents = (filters: any) =>
     historySection.fetchPortfolioEvents({
@@ -39,54 +35,42 @@ const _FundDetailsContainer: React.FC<Props> = ({
     description.personalFundDetails.isInvested;
   return (
     <Page title={description.title}>
-      <FundDetailContext.Provider
-        value={{
-          updateDescription,
-          isKycConfirmed: false
-        }}
-      >
-        <div className="details">
-          <div className="details__section">
-            <FundDetailsDescriptionSection
-              fundDescription={description}
-              isAuthenticated={isAuthenticated}
-              accountCurrency={currency}
-              redirectToLogin={redirectToLogin}
-              FundControls={descriptionSection.FundControls}
-              FundWithdrawContainer={descriptionSection.FundWithdrawalContainer}
-            />
-          </div>
-          <div className="details__section">
-            <FundDetailsStatisticSection
-              getFundStatistic={getFundStatistic}
-              programId={description.id}
-              statistic={statistic}
-            />
-          </div>
-          <div className="details__history">
-            <FundDetailsHistorySection
-              id={description.id}
-              fetchFundStructure={fetchFundStructure}
-              fetchFundReallocateHistory={fetchFundReallocateHistory}
-              fetchPortfolioEvents={fetchHistoryPortfolioEvents}
-              fetchHistoryCounts={historySection.fetchHistoryCounts}
-              eventTypeFilterValues={historySection.eventTypeFilterValues}
-              isInvested={isInvested}
-            />
-          </div>
+      <div className="details">
+        <div className="details__section">
+          <FundDetailsDescriptionSection
+            fundDescription={description}
+            isAuthenticated={isAuthenticated}
+            accountCurrency={currency}
+            redirectToLogin={redirectToLogin}
+            FundControls={descriptionSection.FundControls}
+            FundWithdrawContainer={descriptionSection.FundWithdrawalContainer}
+          />
         </div>
-      </FundDetailContext.Provider>
+        <div className="details__section">
+          <FundDetailsStatisticSection id={description.id} />
+        </div>
+        <div className="details__history">
+          <FundDetailsHistorySection
+            id={description.id}
+            fetchFundStructure={fetchFundStructure}
+            fetchFundReallocateHistory={fetchFundReallocateHistory}
+            fetchPortfolioEvents={fetchHistoryPortfolioEvents}
+            fetchHistoryCounts={historySection.fetchHistoryCounts}
+            eventTypeFilterValues={historySection.eventTypeFilterValues}
+            isInvested={isInvested}
+          />
+        </div>
+      </div>
     </Page>
   );
 };
 
 interface OwnProps {
-  updateDescription: () => void;
+  isKycConfirmed: boolean;
   redirectToLogin: () => void;
   historySection: IHistorySection;
   descriptionSection: IDescriptionSection;
   description: FundDetailsFull;
-  statistic?: FundStatisticResult;
   isAuthenticated: boolean;
   currency: CurrencyEnum;
 }
