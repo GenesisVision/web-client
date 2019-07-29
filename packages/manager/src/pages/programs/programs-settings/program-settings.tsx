@@ -41,9 +41,10 @@ const _ProgramSettings: React.FC<Props> = ({
   return (
     <div className="program-settings">
       <h1>{t("manager.program-settings.title")}</h1>
-      {details.personalProgramDetails.showTwoFactorButton && (
-        <TwoFactorConfirm id={details.id} />
-      )}
+      <TwoFactorConfirm
+        condition={details.personalProgramDetails.showTwoFactorButton}
+        id={details.id}
+      />
       <section className="program-settings__block">
         <h3>{t("manager.program-settings.period-and-closing.title")}</h3>
         <CloseProgramPeriod
@@ -57,12 +58,14 @@ const _ProgramSettings: React.FC<Props> = ({
           id={details.id}
         />
       </section>
-      {details.personalProgramDetails.canChangePassword &&
-        details.personalProgramDetails.canCloseProgram && (
-          <section className="program-settings__block">
-            <ChangePassword title={details.title} id={details.id} />
-          </section>
-        )}
+      <ChangePassword
+        condition={
+          details.personalProgramDetails.canChangePassword &&
+          details.personalProgramDetails.canCloseProgram
+        }
+        title={details.title}
+        id={details.id}
+      />
       {details.personalProgramDetails.canCloseProgram && (
         <>
           <section className="program-settings__block">
