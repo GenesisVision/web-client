@@ -107,21 +107,7 @@ const _DetailsContainerLoader: React.FC<
               />
             </div>
           </div>
-          <div className="program-details-description__controls">
-            <div className="program-details-description__col">
-              <div className="program-details-description__statistic-container">
-                <StatisticItemLoader className="program-details-description__short-statistic-item" />
-                <StatisticItemLoader className="program-details-description__short-statistic-item" />
-                <StatisticItemLoader className="program-details-description__short-statistic-item" />
-                <StatisticItemLoader className="program-details-description__short-statistic-item" />
-              </div>
-              <div className="program-details-description__button-container">
-                <GVButton className="program-details-description__invest-btn">
-                  ...
-                </GVButton>
-              </div>
-            </div>
-          </div>
+          <ProgramControlsLoader />
         </div>
       </div>
       <div className="details__section">
@@ -144,5 +130,24 @@ const _DetailsContainerLoader: React.FC<
     </div>
   </Page>
 );
+
+export const ProgramControlsLoader = () => (
+  <div className="program-details-description__controls">
+    <div className="program-details-description__col">
+      <div className="program-details-description__statistic-container">
+        <StatisticItemLoader className="program-details-description__short-statistic-item" />
+        <StatisticItemLoader className="program-details-description__short-statistic-item" />
+        <StatisticItemLoader className="program-details-description__short-statistic-item" />
+        <StatisticItemLoader className="program-details-description__short-statistic-item" />
+      </div>
+      <div className="program-details-description__button-container">
+        <GVButton className="program-details-description__invest-btn">
+          ...
+        </GVButton>
+      </div>
+    </div>
+  </div>
+);
+
 const DetailsContainerLoader = translate()(React.memo(_DetailsContainerLoader));
 export default DetailsContainerLoader;
