@@ -20,11 +20,11 @@ import { RootState } from "shared/reducers/root-reducer";
 import {
   ProgramBalanceChartDataType,
   programBalanceChartSelector
-} from "../../reducers/balance-chart.reducer";
+} from "../reducers/balance-chart.reducer";
 import {
   ProgramProfitChartDataType,
   programProfitChartSelector
-} from "../../reducers/profit-chart.reducer";
+} from "../reducers/profit-chart.reducer";
 import {
   getBalanceChart,
   getProfitChart

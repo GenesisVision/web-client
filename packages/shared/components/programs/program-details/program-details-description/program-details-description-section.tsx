@@ -17,7 +17,7 @@ import { ProgramControlsLoader } from "shared/components/details/details.contane
 import { PROGRAM, STATUS } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
 
-import { levelParametersSelector } from "../../reducers/level-parameters.reducer";
+import { levelParametersSelector } from "../reducers/level-parameters.reducer";
 import { dispatchProgramDescription } from "../services/program-details.service";
 import PerfomanceData from "./perfomance-data";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";

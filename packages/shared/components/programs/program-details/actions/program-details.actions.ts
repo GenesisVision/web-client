@@ -5,10 +5,9 @@ import {
   ProgramProfitChart
 } from "gv-api-web";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import { ApiAction, CurrencyEnum } from "shared/utils/types";
-
-import platformApi from "../../../services/api-client/platform-api";
 
 export const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
 export const FETCH_PROGRAM_BALANCE_CHART = "FETCH_PROGRAM_BALANCE_CHART";
@@ -48,7 +47,7 @@ export const fetchProgramDescriptionAction = (
 });
 
 export const fetchLevelParametersAction = (
-  currency: CurrencyEnum,
+  currency: CurrencyEnum
 ): ApiAction<LevelsParamsInfo> => ({
   type: FETCH_LEVEL_PARAMETERS,
   payload: platformApi.v10PlatformLevelsParametersGet({ currency })

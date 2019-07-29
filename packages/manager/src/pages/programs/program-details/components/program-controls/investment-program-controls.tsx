@@ -13,8 +13,8 @@ import {
 import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
+import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
-import { programDescriptionSelector } from "shared/components/programs/reducers/description.reducer";
 import { ASSET } from "shared/constants/constants";
 import { kycConfirmedSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";

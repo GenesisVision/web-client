@@ -23,9 +23,9 @@ import { kycConfirmedSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { programDescriptionSelector } from "../reducers/description.reducer";
 import ProgramDetailsContainer from "./program-details.contaner";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
+import { programDescriptionSelector } from "./reducers/description.reducer";
 
 const _ProgramDetailsPage: React.FC<Props> = ({
   description,

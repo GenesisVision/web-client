@@ -40,7 +40,7 @@ import {
   fetchProgramBalanceChartAction,
   fetchProgramDescriptionAction,
   fetchProgramProfitChartAction
-} from "../../actions/program-details.actions";
+} from "../actions/program-details.actions";
 import { HistoryCountsType } from "../program-details.types";
 import { ProgramStatisticResult } from "./program-details.types";
 

@@ -11,7 +11,7 @@ import programsRatingReducer, {
 } from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import programDetailsReducer, {
   ProgramDetailsState
-} from "shared/components/programs/reducers/program-details.reducer";
+} from "shared/components/programs/program-details/reducers/program-details.reducer";
 import {
   CopyTradingAccountsReducer,
   CopyTradingAccountsState,
