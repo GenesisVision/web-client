@@ -5,14 +5,16 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import VerificationStatus from "shared/components/verification-status/verification-status";
+import { ROLE } from "shared/constants/constants";
+import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 import ProfilePersonal, { ProfileField } from "./profile-personal";
 
-const _Profile: React.FC<Props> = ({ t, info, personal }) => (
+const _Profile: React.FC<Props> = ({ t, info, role }) => (
   <div className="profile__container profile__container--padding-top">
     <table className="profile profile--is-disabled">
       <tbody>
-        {personal && <ProfilePersonal info={info} />}
+        {role === ROLE.MANAGER && <ProfilePersonal info={info} />}
         <tr className="profile__title">
           <td className="profile__left">
             <h4 className="profile__subtitle">01</h4>
@@ -53,14 +55,14 @@ const _Profile: React.FC<Props> = ({ t, info, personal }) => (
   </div>
 );
 
-interface Props extends WithTranslation, IProfileOwnProps {}
+interface Props extends WithTranslation, WithRoleProps, OwnProps {}
 
-export interface IProfileOwnProps {
+export interface OwnProps {
   info: ProfileFullViewModel;
-  personal?: boolean;
 }
 
-const Profile = compose<React.ComponentType<IProfileOwnProps>>(
+const Profile = compose<React.ComponentType<OwnProps>>(
+  withRole,
   translate(),
   React.memo
 )(_Profile);

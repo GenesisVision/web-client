@@ -1,9 +1,9 @@
+import Router from "next/router";
 import React, { useCallback } from "react";
 import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
 import useErrorMessage from "shared/hooks/error-message.hook";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
-import history from "shared/utils/history";
 import { SetSubmittingType } from "shared/utils/types";
 
 import AboutForm, { IAboutFormValues } from "./about-form";
@@ -16,7 +16,7 @@ const _About: React.FC<Props> = ({ userName, about }) => {
         .v10ProfileUpdatePost(authService.getAuthArg(), {
           model
         })
-        .then(() => history.push(PROFILE_ROUTE))
+        .then(() => Router.push(PROFILE_ROUTE))
         .catch(setErrorMessage)
         .finally(() => setSubmitting(false)),
     []
