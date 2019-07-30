@@ -30,6 +30,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { STATUS } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -71,7 +72,8 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
           <div className="dashboard-programs__cell--avatar-title">
             <Link
               to={{
-                pathname: composeProgramDetailsUrl(signal.url),
+                pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
+                as: composeProgramDetailsUrl(signal.url),
                 state: `/ ${title}`
               }}
             >
@@ -85,7 +87,8 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
             </Link>
             <Link
               to={{
-                pathname: composeProgramDetailsUrl(signal.url),
+                pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
+                as: composeProgramDetailsUrl(signal.url),
                 state: `/ ${title}`
               }}
             >

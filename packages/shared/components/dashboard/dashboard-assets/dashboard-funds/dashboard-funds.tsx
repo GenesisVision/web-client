@@ -28,6 +28,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { FUND } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import { FUND_DETAILS_FOLDER_ROUTE } from "shared/routes/funds.routes";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -89,7 +90,8 @@ const _DashboardFunds: React.FC<Props> = ({
           <div className="funds-table__cell--avatar-title">
             <Link
               to={{
-                pathname: composeFundsDetailsUrl(fund.url),
+                pathname: FUND_DETAILS_FOLDER_ROUTE,
+                as: composeFundsDetailsUrl(fund.url),
                 state: `/ ${title}`
               }}
             >
@@ -102,7 +104,8 @@ const _DashboardFunds: React.FC<Props> = ({
             <div className="funds-table__cell--title">
               <Link
                 to={{
-                  pathname: composeFundsDetailsUrl(fund.url),
+                  pathname: FUND_DETAILS_FOLDER_ROUTE,
+                  as: composeFundsDetailsUrl(fund.url),
                   state: `/ ${title}`
                 }}
               >
