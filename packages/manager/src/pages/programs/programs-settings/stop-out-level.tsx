@@ -7,6 +7,8 @@ import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
 
+import SettingsBlock from "./settings-block";
+
 const _StopOutLevel: React.FC<Props> = ({
   t,
   values,
@@ -15,20 +17,24 @@ const _StopOutLevel: React.FC<Props> = ({
   isValid,
   isSubmitting
 }) => (
-  <form id="edit-form" onSubmit={handleSubmit}>
-    <h3>{t("manager.create-program-page.settings.fields.stop-out-level")}</h3>
-    <div className="program-edit__block-wrapper create-program-settings__row">
-      <CreateProgramStopOutField name={FIELDS.stopOutLevel} />
-    </div>
-    <GVButton
-      color="primary"
-      type={"submit"}
-      className="invest-form__submit-button"
-      disabled={!dirty || !isValid || isSubmitting}
-    >
-      {t("manager.program-settings.buttons.save")}
-    </GVButton>
-  </form>
+  <SettingsBlock
+    label={t("manager.create-program-page.settings.fields.stop-out-level")}
+    content={
+      <form id="edit-form" onSubmit={handleSubmit}>
+        <div className="program-settings__block-wrapper create-program-settings__row">
+          <CreateProgramStopOutField name={FIELDS.stopOutLevel} />
+        </div>
+        <GVButton
+          color="primary"
+          type={"submit"}
+          className="invest-form__submit-button"
+          disabled={!dirty || !isValid || isSubmitting}
+        >
+          {t("manager.program-settings.buttons.save")}
+        </GVButton>
+      </form>
+    }
+  />
 );
 
 enum FIELDS {

@@ -2,8 +2,10 @@ import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useIsOpen from "shared/hooks/is-open.hook";
 
+import SettingsBlock from "../settings-block";
 import ChangePasswordTradingAccountPopup from "./change-password-trading-account-popup";
 
 const _ChangePassword: React.FC<Props> = ({ id, t, title }) => {
@@ -13,21 +15,25 @@ const _ChangePassword: React.FC<Props> = ({ id, t, title }) => {
     setChangePasswordClose
   ] = useIsOpen();
   return (
-    <>
-      <h3>{t("manager.program-settings.password.title")}</h3>
-      <p className="program-edit__text">
-        {t("manager.program-settings.password.text")}
-      </p>
-      <GVButton color="primary" onClick={setChangePasswordOpen}>
-        {t("program-details-page.description.change-password")}
-      </GVButton>
-      <ChangePasswordTradingAccountPopup
-        programName={title}
-        open={isChangePasswordOpen}
-        id={id}
-        onClose={setChangePasswordClose}
-      />
-    </>
+    <SettingsBlock
+      label={t("manager.program-settings.password.title")}
+      content={
+        <>
+          <p className="program-settings__text">
+            {t("manager.program-settings.password.text")}
+          </p>
+          <GVButton color="primary" onClick={setChangePasswordOpen}>
+            {t("program-details-page.description.change-password")}
+          </GVButton>
+          <ChangePasswordTradingAccountPopup
+            programName={title}
+            open={isChangePasswordOpen}
+            id={id}
+            onClose={setChangePasswordClose}
+          />
+        </>
+      }
+    />
   );
 };
 
@@ -38,7 +44,8 @@ interface OwnProps {
   id: string;
 }
 
-const ChangePassword = compose<React.ComponentType<OwnProps>>(
+const ChangePassword = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+  withLoader,
   translate(),
   React.memo
 )(_ChangePassword);

@@ -13,7 +13,7 @@ import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { FundDetailsStatistic } from "../../services/fund-details.types";
+import { FundProfitChartDataType } from "../../reducers/profit-chart.reducer";
 
 const _FundDetailsStatisticsElements: React.FC<
   IFundDetailsStatisticsElementsProps & WithTranslation
@@ -166,7 +166,7 @@ const _FundDetailsStatisticsElements: React.FC<
 );
 
 export interface IFundDetailsStatisticsElementsProps {
-  statistic: FundDetailsStatistic;
+  statistic: FundProfitChartDataType;
   period: ChartDefaultPeriod;
 }
 
