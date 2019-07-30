@@ -24,11 +24,7 @@ import {
   FundDescriptionDataType,
   fundDescriptionSelector
 } from "./reducers/description.reducer";
-import {
-  dispatchFundDescription,
-  getBalanceChart,
-  getProfitChart
-} from "./services/fund-details.service";
+import { dispatchFundDescription } from "./services/fund-details.service";
 
 const _FundDetailsPage: React.FC<Props> = ({
   isKycConfirmed,
@@ -68,9 +64,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
       dispatchFundDescription,
-      redirectToLogin,
-      getProfitChart,
-      getBalanceChart
+      redirectToLogin
     },
     dispatch
   )
@@ -91,8 +85,6 @@ interface StateProps {
 interface ServiceThunks extends ActionCreatorsMapObject {
   dispatchFundDescription: typeof dispatchFundDescription;
   redirectToLogin: typeof redirectToLogin;
-  getProfitChart: typeof getProfitChart;
-  getBalanceChart: typeof getBalanceChart;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
