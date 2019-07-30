@@ -35,7 +35,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       if (isAuthenticated) setOpenInvestmentPopup();
       else setOpenUnAuthInvestmentPopup();
     },
-    [isAuthenticated]
+    [isAuthenticated, setOpenInvestmentPopup, setOpenUnAuthInvestmentPopup]
   );
 
   const applyInvestmentChanges = useCallback(

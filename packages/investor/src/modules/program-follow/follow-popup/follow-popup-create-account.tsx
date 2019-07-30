@@ -52,11 +52,14 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
             setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.rate, rate);
         });
     },
-    [currency, values]
+    [currency, setFieldValue, values]
   );
-  useEffect(() => {
-    fetchRate();
-  }, []);
+  useEffect(
+    () => {
+      fetchRate();
+    },
+    [fetchRate]
+  );
   const onChangeCurrencyFrom = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element) => {
       const initialDepositCurrencyNew = target.props.value;
@@ -68,16 +71,16 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
       setFieldTouched(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, false);
       fetchRate(initialDepositCurrencyNew);
     },
-    []
+    [fetchRate, setFieldTouched, setFieldValue]
   );
-  const handleNext = useCallback(() => onClick(values), [values]);
+  const handleNext = useCallback(() => onClick(values), [onClick, values]);
   const setMaxAmount = useCallback(
     () =>
       setFieldValue(
         CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount,
         formatCurrencyValue(wallet.available, currency)
       ),
-    [currency, wallet]
+    [currency, setFieldValue, wallet.available]
   );
   return (
     <form className="dialog__bottom" id="follow-create-account">

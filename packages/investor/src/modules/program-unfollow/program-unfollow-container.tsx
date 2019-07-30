@@ -27,7 +27,7 @@ const _ProgramUnfollowContainer: React.FC<Props> = ({
       service.detachToSignal(id, onApply, model);
       handleClose();
     },
-    [service, id]
+    [service, id, onApply, handleClose]
   );
   return (
     <Dialog open={open} onClose={handleClose}>

@@ -27,10 +27,13 @@ import DashboardCopytrading from "./dashboard-copytrading";
 const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
   const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
   const [counts, setCounts] = useState<IDashboardAssetsCounts>({});
-  useEffect(() => {
-    fetchAssetsCount().then(setCounts);
-    return service.clearDashboardAssetsTable;
-  }, []);
+  useEffect(
+    () => {
+      fetchAssetsCount().then(setCounts);
+      return service.clearDashboardAssetsTable;
+    },
+    [service.clearDashboardAssetsTable]
+  );
   const { programsCount, fundsCount, tradesCount } = counts;
   const handleTabChange = useCallback(
     (e: any, eventTab: string) => {
@@ -38,7 +41,7 @@ const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
       service.clearDashboardAssetsTable();
       setTab(e, eventTab);
     },
-    [tab]
+    [service, setTab, tab]
   );
   return (
     <Surface className="dashboard-assets">

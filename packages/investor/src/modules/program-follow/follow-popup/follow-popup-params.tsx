@@ -42,12 +42,18 @@ const _FollowParams: React.FC<
   values,
   handleSubmit
 }) => {
-  const setMaxOpenTolerancePercent = useCallback(() => {
-    setFieldValue(FIELDS.openTolerancePercent, "20");
-  }, []);
-  const setMaxVolumePercent = useCallback(() => {
-    setFieldValue(FIELDS.percent, "999");
-  }, []);
+  const setMaxOpenTolerancePercent = useCallback(
+    () => {
+      setFieldValue(FIELDS.openTolerancePercent, "20");
+    },
+    [setFieldValue]
+  );
+  const setMaxVolumePercent = useCallback(
+    () => {
+      setFieldValue(FIELDS.percent, "999");
+    },
+    [setFieldValue]
+  );
   const disableButton = isSubmitting || !isValid;
   return (
     <form className="dialog__bottom" id="follow-params" onSubmit={handleSubmit}>

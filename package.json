@@ -146,15 +146,14 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "**/*.{ts,tsx,js,json,scss}": ["prettier --write", "git add"],
-      "**/*.{ts,tsx,js}": ["import-sort --write", "git add"]
-    }
+    "**/*.{ts,tsx,js,json,scss}": ["prettier --write", "git add"],
+    "**/*.{ts,tsx,js}": ["eslint --fix", "git add"]
   },
   "scripts": {
     "upgrade-api": "cd packages/gv-api-web && git checkout development && git pull",
     "investor": "cd packages/investor && yarn start",
-    "manager": "cd packages/manager && yarn start"
+    "manager": "cd packages/manager && yarn start",
+    "sort": "import-sort --fix ./packages/investor/**/*.tsx"
   },
   "importSort": {
     ".js": {
