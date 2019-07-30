@@ -75,28 +75,22 @@ const _ProgramSettings: React.FC<Props> = ({
               onSubmit={editProgram}
             />
           </section>
-          {details.personalProgramDetails.migration && (
-            <section className="program-settings__block">
-              <CancelChangeBroker
-                brokerFrom={
-                  brokersInfo.brokers.find(
-                    broker =>
-                      !!broker.accountTypes.find(
-                        accountType =>
-                          accountType.id === brokersInfo.currentAccountTypeId
-                      )
-                  )!
-                }
-                brokerTo={details.personalProgramDetails.migration.newBroker}
-                onSubmit={cancelChangeBroker}
-                currentAccountTypeId={brokersInfo.currentAccountTypeId}
-                leverage={details.leverageMax}
-                newLeverage={
-                  details.personalProgramDetails.migration.newLeverage
-                }
-              />
-            </section>
-          )}
+          <CancelChangeBroker
+            condition={!!details.personalProgramDetails.migration}
+            brokerFrom={
+              brokersInfo.brokers.find(
+                broker =>
+                  !!broker.accountTypes.find(
+                    accountType =>
+                      accountType.id === brokersInfo.currentAccountTypeId
+                  )
+              )!
+            }
+            migration={details.personalProgramDetails.migration}
+            onSubmit={cancelChangeBroker}
+            currentAccountTypeId={brokersInfo.currentAccountTypeId}
+            leverage={details.leverageMax}
+          />
           <ChangeBroker
             condition={
               !!!details.personalProgramDetails.migration &&
