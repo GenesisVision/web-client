@@ -9,9 +9,9 @@ import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
   Dispatch,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import Page from "shared/components/page/page";
