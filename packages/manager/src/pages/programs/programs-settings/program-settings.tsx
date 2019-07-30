@@ -110,12 +110,10 @@ const _ProgramSettings: React.FC<Props> = ({
                 />
               </section>
             )}
-          <section className="program-settings__block">
-            <StopOutLevel
-              stopOutLevel={details.stopOutLevel}
-              onSubmit={editProgram}
-            />
-          </section>
+          <StopOutLevel
+            stopOutLevel={details.stopOutLevel}
+            onSubmit={editProgram}
+          />
           <InvestmentLimit
             currency={details.currency}
             investmentLimit={details.availableInvestmentLimit}
