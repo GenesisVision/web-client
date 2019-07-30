@@ -123,18 +123,17 @@ const _ProgramSettings: React.FC<Props> = ({
               onSubmit={editProgram}
             />
           </section>
-          {(details.isSignalProgram ||
-            (!details.isSignalProgram &&
-              details.personalProgramDetails.canMakeSignalProvider)) && (
-            <section className="program-settings__block">
-              <SignalingEdit
-                isSignalProgram={details.isSignalProgram}
-                onSubmit={changeSignaling}
-                signalSuccessFee={signalSuccessFee}
-                signalVolumeFee={signalVolumeFee}
-              />
-            </section>
-          )}
+          <SignalingEdit
+            condition={
+              details.isSignalProgram ||
+              (!details.isSignalProgram &&
+                details.personalProgramDetails.canMakeSignalProvider)
+            }
+            isSignalProgram={details.isSignalProgram}
+            onSubmit={changeSignaling}
+            signalSuccessFee={signalSuccessFee}
+            signalVolumeFee={signalVolumeFee}
+          />
         </>
       )}
     </div>
