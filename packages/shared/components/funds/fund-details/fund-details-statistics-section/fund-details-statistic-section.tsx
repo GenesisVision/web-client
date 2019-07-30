@@ -1,89 +1,102 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
-import {
-  FundBalanceChart,
-  FundProfitChart as FundProfitChartType
-} from "gv-api-web";
 import * as React from "react";
+import { useEffect, useState } from "react";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import {
   ChartDefaultPeriod,
   DEFAULT_PERIOD
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import { HandlePeriodChangeType } from "shared/utils/types";
+import { RootState } from "shared/reducers/root-reducer";
 
 import {
-  FundDetailsStatistic as FundDetailsStatisticType,
-  FundStatisticResult
-} from "../services/fund-details.types";
+  FundBalanceChartDataType,
+  fundBalanceChartSelector
+} from "../reducers/balance-chart.reducer";
+import {
+  FundProfitChartDataType,
+  fundProfitChartSelector
+} from "../reducers/profit-chart.reducer";
+import {
+  getBalanceChart,
+  getProfitChart
+} from "../services/fund-details.service";
 import FundDetailsChart from "./fund-details-chart-section/fund-details-chart";
 import FundDetailsStatistics from "./fund-details-statistics/fund-details-statistics";
 
-class FundDetailsStatisticSection extends React.PureComponent<Props, State> {
-  state = {
-    period: DEFAULT_PERIOD,
-    statistic: undefined,
-    profitChart: undefined,
-    balanceChart: undefined,
-    prevProps: undefined
-  };
-
-  static getDerivedStateFromProps = (props: Props, state: State): State => {
-    let newState: State = {};
-    if (state.prevProps !== props) {
-      newState.prevProps = props;
-      if (props.statistic) {
-        newState.statistic = props.statistic.statistic;
-        newState.profitChart = props.statistic.profitChart;
-        newState.balanceChart = props.statistic.balanceChart;
-      }
-      return newState;
-    }
-    return state;
-  };
-
-  handlePeriodChange: HandlePeriodChangeType = period => {
-    const { programId, getFundStatistic } = this.props;
-
-    getFundStatistic(programId, period).then(data => {
-      this.setState({ period, ...data });
-    });
-  };
-
-  render() {
-    const { statistic, profitChart, balanceChart, period } = this.state;
-    return (
-      <div className="details-statistic-section">
-        <div className="details-statistic-section__statistic">
-          <FundDetailsStatistics statistic={statistic} period={period} />
-        </div>
-        <div className="details-statistic-section__chart">
-          <FundDetailsChart
-            profitChart={profitChart}
-            balanceChart={balanceChart}
-            period={period}
-            onPeriodChange={this.handlePeriodChange}
-          />
-        </div>
+const _FundDetailsStatisticSection: React.FC<Props> = ({
+  balanceChart,
+  profitChart,
+  id,
+  service: { getProfitChart, getBalanceChart }
+}) => {
+  const [period, setPeriod] = useState<ChartDefaultPeriod>(DEFAULT_PERIOD);
+  useEffect(
+    () => {
+      getProfitChart({ id, period });
+      getBalanceChart({ id, period });
+    },
+    [period, id]
+  );
+  return (
+    <div className="details-statistic-section">
+      <div className="details-statistic-section__statistic">
+        <FundDetailsStatistics statistic={profitChart} period={period} />
       </div>
-    );
-  }
+      <div className="details-statistic-section__chart">
+        <FundDetailsChart
+          profitChart={profitChart}
+          balanceChart={balanceChart}
+          period={period}
+          onPeriodChange={setPeriod}
+        />
+      </div>
+    </div>
+  );
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { getProfitChart, getBalanceChart },
+    dispatch
+  )
+});
+
+const mapStateToProps = (state: RootState): StateProps => ({
+  profitChart: fundProfitChartSelector(state),
+  balanceChart: fundBalanceChartSelector(state)
+});
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  getProfitChart: typeof getProfitChart;
+  getBalanceChart: typeof getBalanceChart;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props {
-  programId: string;
-  getFundStatistic: (
-    programId: string,
-    period: ChartDefaultPeriod
-  ) => Promise<FundStatisticResult>;
-  statistic?: FundStatisticResult;
+interface StateProps {
+  profitChart?: FundProfitChartDataType;
+  balanceChart?: FundBalanceChartDataType;
 }
 
-interface State {
-  period?: ChartDefaultPeriod;
-  statistic?: FundDetailsStatisticType;
-  profitChart?: FundProfitChartType;
-  balanceChart?: FundBalanceChart;
-  prevProps?: Props;
+interface OwnProps {
+  id: string;
 }
 
+interface Props extends OwnProps, StateProps, DispatchProps {}
+
+const FundDetailsStatisticSection = compose<React.ComponentType<OwnProps>>(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  React.memo
+)(_FundDetailsStatisticSection);
 export default FundDetailsStatisticSection;

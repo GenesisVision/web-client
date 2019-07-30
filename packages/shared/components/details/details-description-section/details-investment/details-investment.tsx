@@ -19,13 +19,10 @@ import { PROGRAM, STATUS } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 
-import {
-  IProgramDetailContext,
-  ProgramDetailContext
-} from "../../helpers/details-context";
 import { InvestmentDetails } from "./details-investment.helpers";
 
 const _DetailsInvestment: React.FC<Props> = ({
+  updateDescription,
   t,
   id,
   assetCurrency,
@@ -39,145 +36,134 @@ const _DetailsInvestment: React.FC<Props> = ({
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const profitValue = personalDetails.value - personalDetails.invested;
   return (
-    <ProgramDetailContext.Consumer>
-      {({ updateDescription }: IProgramDetailContext) => (
-        <Surface className="surface--horizontal-paddings details-investment">
-          <h3>{t(`fund-details-page.description.yourInvestment.${asset}`)}</h3>
-          <div className="details-investment__short-statistic">
-            <StatisticItem
-              accent
-              label={t("fund-details-page.description.value")}
-            >
-              <NumberFormat
-                value={formatCurrencyValue(
-                  personalDetails.value,
-                  assetCurrency
-                )}
-                suffix={` ${assetCurrency}`}
-                displayType="text"
-              />
-            </StatisticItem>
-            <StatisticItem
-              condition={asset === PROGRAM}
-              accent
-              label={
-                <TooltipLabel
-                  tooltipContent={t("program-details-page.tooltip.profit")}
-                  labelText={t("fund-details-page.description.profit")}
-                />
-              }
-            >
-              <Profitability
-                value={formatCurrencyValue(profitValue, assetCurrency)}
-                prefix={PROFITABILITY_PREFIX.SIGN}
-              >
-                <NumberFormat
-                  value={formatCurrencyValue(profitValue, assetCurrency)}
-                  suffix={` ${assetCurrency}`}
-                  allowNegative={false}
-                  displayType="text"
-                />
-              </Profitability>
-              <Profitability
-                value={`${personalDetails.profit}`}
-                variant={PROFITABILITY_VARIANT.CHIPS}
-              >
-                {roundPercents(personalDetails.profit)}
-              </Profitability>
-            </StatisticItem>
-            <StatisticItem
-              accent
-              label={
-                <TooltipLabel
-                  tooltipContent={t(
-                    `fund-details-page.tooltip.status.${asset}`
-                  )}
-                  labelText={t("fund-details-page.description.status")}
-                />
-              }
-            >
-              <AssetStatus
-                status={personalDetails.status as STATUS}
-                id={id}
-                asset={asset}
-                onCancel={updateDescription}
-              />
-            </StatisticItem>
-            <StatisticItem
-              condition={
-                personalDetails.pendingInput !== undefined &&
-                personalDetails.pendingInput !== 0
-              }
-              accent
-              label={t("fund-details-page.description.pending-input")}
-            >
-              <NumberFormat
-                value={formatCurrencyValue(
-                  personalDetails.pendingInput,
-                  assetCurrency
-                )}
-                suffix={` ${assetCurrency}`}
-                displayType="text"
-              />
-            </StatisticItem>
-            {ProgramReinvestingWidget &&
-              personalDetails.isInvested &&
-              personalDetails.canInvest && (
-                <ProgramReinvestingWidget
-                  programId={id}
-                  isReinvesting={personalDetails.isReinvest}
-                />
-              )}
-            <StatisticItem
-              condition={
-                personalDetails.pendingOutput !== undefined &&
-                personalDetails.pendingOutput !== 0
-              }
-              accent
-              label={t("fund-details-page.description.pending-output")}
-            >
-              {personalDetails.pendingOutputIsWithdrawAll ? (
-                t("withdraw-program.withdrawing-all")
-              ) : (
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    personalDetails.pendingOutput,
-                    assetCurrency
-                  )}
-                  suffix={` ${assetCurrency}`}
-                  displayType="text"
-                />
-              )}
-            </StatisticItem>
-          </div>
-          <div className="details-investment__footer">
-            <GVButton
-              color="secondary"
-              variant="outlined"
-              onClick={setOpenPopup}
-              disabled={!personalDetails.canWithdraw}
-            >
-              {t("fund-details-page.description.withdraw")}
-            </GVButton>
-            {notice && (
-              <p className="details-investment__withdraw-notice">{notice}</p>
-            )}
-            <WithdrawContainer
-              open={isOpenPopup}
-              id={id}
-              accountCurrency={accountCurrency}
-              assetCurrency={assetCurrency}
-              onClose={setClosePopup}
-              onSubmit={updateDescription}
+    <Surface className="surface--horizontal-paddings details-investment">
+      <h3>{t(`fund-details-page.description.yourInvestment.${asset}`)}</h3>
+      <div className="details-investment__short-statistic">
+        <StatisticItem accent label={t("fund-details-page.description.value")}>
+          <NumberFormat
+            value={formatCurrencyValue(personalDetails.value, assetCurrency)}
+            suffix={` ${assetCurrency}`}
+            displayType="text"
+          />
+        </StatisticItem>
+        <StatisticItem
+          condition={asset === PROGRAM}
+          accent
+          label={
+            <TooltipLabel
+              tooltipContent={t("program-details-page.tooltip.profit")}
+              labelText={t("fund-details-page.description.profit")}
             />
-          </div>
-        </Surface>
-      )}
-    </ProgramDetailContext.Consumer>
+          }
+        >
+          <Profitability
+            value={formatCurrencyValue(profitValue, assetCurrency)}
+            prefix={PROFITABILITY_PREFIX.SIGN}
+          >
+            <NumberFormat
+              value={formatCurrencyValue(profitValue, assetCurrency)}
+              suffix={` ${assetCurrency}`}
+              allowNegative={false}
+              displayType="text"
+            />
+          </Profitability>
+          <Profitability
+            value={`${personalDetails.profit}`}
+            variant={PROFITABILITY_VARIANT.CHIPS}
+          >
+            {roundPercents(personalDetails.profit)}
+          </Profitability>
+        </StatisticItem>
+        <StatisticItem
+          accent
+          label={
+            <TooltipLabel
+              tooltipContent={t(`fund-details-page.tooltip.status.${asset}`)}
+              labelText={t("fund-details-page.description.status")}
+            />
+          }
+        >
+          <AssetStatus
+            status={personalDetails.status as STATUS}
+            id={id}
+            asset={asset}
+            onCancel={updateDescription}
+          />
+        </StatisticItem>
+        <StatisticItem
+          condition={
+            personalDetails.pendingInput !== undefined &&
+            personalDetails.pendingInput !== 0
+          }
+          accent
+          label={t("fund-details-page.description.pending-input")}
+        >
+          <NumberFormat
+            value={formatCurrencyValue(
+              personalDetails.pendingInput,
+              assetCurrency
+            )}
+            suffix={` ${assetCurrency}`}
+            displayType="text"
+          />
+        </StatisticItem>
+        {ProgramReinvestingWidget &&
+          personalDetails.isInvested &&
+          personalDetails.canInvest && (
+            <ProgramReinvestingWidget
+              programId={id}
+              isReinvesting={personalDetails.isReinvest}
+            />
+          )}
+        <StatisticItem
+          condition={
+            personalDetails.pendingOutput !== undefined &&
+            personalDetails.pendingOutput !== 0
+          }
+          accent
+          label={t("fund-details-page.description.pending-output")}
+        >
+          {personalDetails.pendingOutputIsWithdrawAll ? (
+            t("withdraw-program.withdrawing-all")
+          ) : (
+            <NumberFormat
+              value={formatCurrencyValue(
+                personalDetails.pendingOutput,
+                assetCurrency
+              )}
+              suffix={` ${assetCurrency}`}
+              displayType="text"
+            />
+          )}
+        </StatisticItem>
+      </div>
+      <div className="details-investment__footer">
+        <GVButton
+          color="secondary"
+          variant="outlined"
+          onClick={setOpenPopup}
+          disabled={!personalDetails.canWithdraw}
+        >
+          {t("fund-details-page.description.withdraw")}
+        </GVButton>
+        {notice && (
+          <p className="details-investment__withdraw-notice">{notice}</p>
+        )}
+        <WithdrawContainer
+          open={isOpenPopup}
+          id={id}
+          accountCurrency={accountCurrency}
+          assetCurrency={assetCurrency}
+          onClose={setClosePopup}
+          onSubmit={updateDescription}
+        />
+      </div>
+    </Surface>
   );
 };
 
 interface OwnProps {
+  updateDescription: () => void;
   asset: string;
   notice?: string;
   id: string;

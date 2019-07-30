@@ -2,6 +2,9 @@ import { connectRouter } from "connected-react-router";
 import passwordRestoreReducer from "shared/components/auth/forgot-password/reducers/password-restore-reducers";
 import loginReducer from "shared/components/auth/signin/reducers/login.reducers";
 import signUpReducer from "shared/components/auth/signup/reducers/signup.reducers";
+import fundDetailsReducer, {
+  FundDetailsState
+} from "shared/components/funds/fund-details/reducers/fund-details.reducer";
 import managerReducer from "shared/components/manager/reducers/manager.reducers";
 import notificationsReducer, {
   NotificationsState
@@ -9,6 +12,9 @@ import notificationsReducer, {
 import programsRatingReducer, {
   ProgramsRatingState
 } from "shared/components/programs-rating/reducers/programs-rating.reducers";
+import programDetailsReducer, {
+  ProgramDetailsState
+} from "shared/components/programs/program-details/reducers/program-details.reducer";
 import {
   CopyTradingAccountsReducer,
   CopyTradingAccountsState,
@@ -50,6 +56,8 @@ import { RouterState } from "./router-reducer";
 import uiReducer from "./ui-reducer";
 
 export const sharedRootReducers = {
+  fundDetails: fundDetailsReducer,
+  programDetails: programDetailsReducer,
   router: connectRouter(history),
   platformData: platformReducer,
   programsData: programsReducer,
@@ -74,6 +82,8 @@ export const sharedRootReducers = {
 };
 
 export type RootState = Readonly<{
+  fundDetails: FundDetailsState;
+  programDetails: ProgramDetailsState;
   notifications: NotificationsState;
   profileHeader: HeaderState;
   notificationSettings: NotificationSettingsState;

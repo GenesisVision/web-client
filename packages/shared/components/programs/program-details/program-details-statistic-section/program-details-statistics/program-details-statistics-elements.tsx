@@ -1,5 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
+import { ProgramProfitChart } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -16,14 +17,9 @@ import { STATUS } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import {
-  ProgramDetailsProfitChart,
-  ProgramDetailsStatistic
-} from "../../services/program-details.types";
-
 const _ProgramDetailsStatisticsElements: React.FC<
   IProgramDetailsStatisticsElementsProps & WithTranslation
-> = ({ status, t, statistic, profitChart, period }) => (
+> = ({ status, t, profitChart, period }) => (
   <>
     <div className="details-statistics__subheading">
       {t("program-details-page.statistics.current")}
@@ -57,7 +53,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
         }
       >
         <NumberFormat
-          value={statistic.investors}
+          value={profitChart.investors}
           thousandSeparator={" "}
           displayType="text"
         />
@@ -76,8 +72,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
           </span>
         </Tooltip>
         <ProgramPeriodLine
-          start={statistic.periodStarts}
-          end={statistic.periodEnds}
+          start={profitChart.lastPeriodStarts}
+          end={profitChart.lastPeriodEnds}
           status={status}
         />
       </div>
@@ -100,7 +96,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
           half
         >
           <NumberFormat
-            value={statistic.trades !== undefined ? statistic.trades : "-"}
+            value={profitChart.trades !== undefined ? profitChart.trades : "-"}
             thousandSeparator={" "}
             displayType="text"
           />
@@ -116,8 +112,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
         >
           <NumberFormat
             value={
-              statistic.profitFactor !== undefined
-                ? formatValue(statistic.profitFactor, 2)
+              profitChart.profitFactor !== undefined
+                ? formatValue(profitChart.profitFactor, 2)
                 : "-"
             }
             displayType="text"
@@ -134,8 +130,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
         >
           <NumberFormat
             value={
-              statistic.maxDrawdown !== undefined
-                ? formatValue(statistic.maxDrawdown, 2)
+              profitChart.maxDrawdown !== undefined
+                ? formatValue(profitChart.maxDrawdown, 2)
                 : "-"
             }
             displayType="text"
@@ -155,9 +151,9 @@ const _ProgramDetailsStatisticsElements: React.FC<
         >
           <NumberFormat
             value={
-              statistic.tradingVolume !== undefined
+              profitChart.tradingVolume !== undefined
                 ? formatCurrencyValue(
-                    statistic.tradingVolume,
+                    profitChart.tradingVolume,
                     profitChart.programCurrency
                   )
                 : "-"
@@ -180,8 +176,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
         >
           <NumberFormat
             value={
-              statistic.successTradesPercent !== undefined
-                ? formatValue(statistic.successTradesPercent, 2)
+              profitChart.successTradesPercent !== undefined
+                ? formatValue(profitChart.successTradesPercent, 2)
                 : "-"
             }
             displayType="text"
@@ -199,8 +195,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
         >
           <NumberFormat
             value={
-              statistic.sharpeRatio !== undefined
-                ? formatValue(statistic.sharpeRatio, 2)
+              profitChart.sharpeRatio !== undefined
+                ? formatValue(profitChart.sharpeRatio, 2)
                 : "-"
             }
             displayType="text"
@@ -217,8 +213,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
         >
           <NumberFormat
             value={
-              statistic.sortinoRatio !== undefined
-                ? formatValue(statistic.sortinoRatio, 2)
+              profitChart.sortinoRatio !== undefined
+                ? formatValue(profitChart.sortinoRatio, 2)
                 : "-"
             }
             displayType="text"
@@ -231,8 +227,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
 
 export interface IProgramDetailsStatisticsElementsProps {
   status: STATUS;
-  statistic: ProgramDetailsStatistic;
-  profitChart: ProgramDetailsProfitChart;
+  profitChart: ProgramProfitChart;
   period: ChartDefaultPeriod;
 }
 

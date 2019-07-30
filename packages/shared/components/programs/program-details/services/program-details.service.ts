@@ -9,7 +9,10 @@ import {
   ProgramPeriodsViewModel
 } from "gv-api-web";
 import { Dispatch } from "redux";
-import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  ChartDefaultPeriod,
+  getDefaultPeriod
+} from "shared/components/chart/chart-period/chart-period.helpers";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
@@ -30,30 +33,36 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum, MiddlewareDispatch } from "shared/utils/types";
 
+import {
+  fetchLevelParametersAction,
+  fetchProgramBalanceChartAction,
+  fetchProgramDescriptionAction,
+  fetchProgramProfitChartAction
+} from "../actions/program-details.actions";
 import { HistoryCountsType } from "../program-details.types";
 import { ProgramStatisticResult } from "./program-details.types";
 
 export const getProgramBrokers = (id: string) =>
   brokersApi.v10BrokersByProgramIdGet(id);
 
-export const getPlatformLevelsParameters = (currency: CurrencyEnum) =>
-  platformApi.v10PlatformLevelsParametersGet({ currency });
+export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
+  dispatch: Dispatch
+) => dispatch(fetchLevelParametersAction(currency));
 
-export const getProgramDescription = () => (
-  dispatch: Dispatch,
+export const dispatchProgramDescription = () => (
+  dispatch: MiddlewareDispatch,
   getState: () => RootState
 ) => {
   const authorization = authService.getAuthArg();
   const { router } = getState();
 
-  const programSlugUrl = getParams(
-    router.location.pathname,
-    PROGRAM_DETAILS_ROUTE
-  )[PROGRAM_SLUG_URL_PARAM_NAME];
+  const slugUrl = getParams(router.location.pathname, PROGRAM_DETAILS_ROUTE)[
+    PROGRAM_SLUG_URL_PARAM_NAME
+  ];
 
-  return programsApi.v10ProgramsByIdGet(programSlugUrl, { authorization });
+  return dispatch(fetchProgramDescriptionAction(slugUrl, authorization));
 };
 
 export const getProgramStatistic = (
@@ -83,18 +92,7 @@ export const getProgramStatistic = (
       periodEnds: profitChart.lastPeriodEnds,
       tradingVolume: profitChart.tradingVolume
     };
-    const profitChartData = {
-      balance: profitChart.balance,
-      timeFrameProgramCurrencyProfit:
-        profitChart.timeframeProgramCurrencyProfit,
-      timeFrameGvtProfit: profitChart.timeframeGvtProfit,
-      programCurrency: profitChart.programCurrency,
-      profitChangePercent: profitChart.profitChangePercent,
-      pnLChart: profitChart.pnLChart,
-      equityChart: profitChart.equityChart
-    };
-
-    return { statistic, profitChart: profitChartData, balanceChart };
+    return { statistic, profitChart, balanceChart };
   });
 };
 
@@ -247,4 +245,19 @@ export const fetchPeriodHistory = (
   return programsApi
     .v10ProgramsByIdPeriodsGet(id, { authorization, ...filters })
     .then(mapToTableItems<ProgramPeriodsViewModel>("periods"));
+};
+
+export const getProfitChart = ({ id, period }: TGetChartArgs) => (
+  dispatch: Dispatch
+) => dispatch(fetchProgramProfitChartAction(id, period));
+
+export const getBalanceChart = ({ id, period }: TGetChartArgs) => (
+  dispatch: Dispatch
+) => {
+  dispatch(fetchProgramBalanceChartAction(id, period));
+};
+
+type TGetChartArgs = {
+  id: string;
+  period?: ChartDefaultPeriod;
 };
