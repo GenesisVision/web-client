@@ -1,33 +1,15 @@
 import "./back-button.scss";
 
-import { CallHistoryMethodAction, goBack, push } from "connected-react-router";
-import Router, { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import Router from "next/router";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import GVButton from "shared/components/gv-button";
-import { WithTranslation, withTranslation } from "shared/i18n";
-import { RootState } from "shared/reducers/root-reducer";
-import { ActionType } from "shared/utils/types";
+import useHistoryContext from "shared/decorators/history-provider/use-history-context";
 
-import { updateCurrency } from "../../modules/currency-select/services/currency-select.service";
-
-export const _BackButton: React.FC<
-  /*StateProps & */ WithTranslation /* & DispatchProps*/
-> = ({ t }) => {
-  const [backPath, setBackPath] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    const { state } = window.history;
-    setBackPath(state.state);
-  }, []);
-
-  if (!backPath) return null;
+export const _BackButton: React.FC = () => {
+  const [t] = useTranslation();
+  const { from } = useHistoryContext();
+  if (!from) return null;
 
   return (
     <div className="back-button">
@@ -42,42 +24,10 @@ export const _BackButton: React.FC<
           <div className="back-button__back">{t("buttons.back")}</div>
         </>
       </GVButton>
-      <div className="back-button__path">{backPath}</div>
+      <div className="back-button__path">{from}</div>
     </div>
   );
 };
 
-// const mapStateToProps = (state: RootState): StateProps => ({
-//   backPath: state.router.location.state,
-//   prevPath: state.router.location.prevPath
-// });
-
-// const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-//   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-//     { goBack, push },
-//     dispatch
-//   )
-// });
-
-const BackButton = compose<React.FC>(
-  withTranslation(),
-  // connect(
-  //   mapStateToProps,
-  //   mapDispatchToProps
-  // ),
-  React.memo
-)(_BackButton);
+const BackButton = React.memo(_BackButton);
 export default BackButton;
-
-interface StateProps {
-  backPath: string;
-  prevPath?: string;
-}
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  goBack: typeof goBack;
-  push: typeof push;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}

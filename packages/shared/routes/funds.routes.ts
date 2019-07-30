@@ -6,6 +6,7 @@ export const FUNDS_SLUG_URL_PARAM_NAME = "fundsSlugUrl";
 
 export const FUNDS_ROUTE = "/funds";
 export const FUND_DETAILS_ROUTE = `${FUNDS_ROUTE}/:${FUNDS_SLUG_URL_PARAM_NAME}`;
+export const FUND_DETAILS_FOLDER_ROUTE = `${FUNDS_ROUTE}/[id]`;
 export const FUND_DETAILS_ROUTE_REGEX = `${FUNDS_ROUTE}/:${FUNDS_SLUG_URL_PARAM_NAME}(${SLUG_URL_REGEXP})`;
 
 export const FUNDS_FACET_ROUTE = `${FUNDS_ROUTE}/facets/:${FUNDS_SLUG_URL_PARAM_NAME}`;

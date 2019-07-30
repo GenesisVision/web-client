@@ -1,8 +1,9 @@
 import { NextPage, NextPageContext } from "next";
 import nextCookie from "next-cookies";
 import Router from "next/router";
+import qs from "qs";
 import React, { Component } from "react";
-import { LOGIN_ROUTE } from "shared/routes/app.routes";
+import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
 import { getTokenName } from "shared/utils/get-token-name";
 
 const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
@@ -10,8 +11,11 @@ const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
     static async getInitialProps(ctx: NextPageContext) {
       const tokenName = getTokenName();
       const token = nextCookie(ctx)[tokenName];
-      if (ctx.res && !token) {
-        ctx.res.writeHead(302, { Location: LOGIN_ROUTE });
+      if (ctx.req && ctx.res && !token) {
+        const redirectUrl = `${LOGIN_ROUTE}?from=${qs.stringify(
+          ctx.req.url || HOME_ROUTE
+        )}`;
+        ctx.res.writeHead(302, { Location: redirectUrl });
         ctx.res.end();
         return;
       }

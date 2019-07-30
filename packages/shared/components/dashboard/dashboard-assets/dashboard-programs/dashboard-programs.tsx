@@ -33,6 +33,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -97,7 +98,8 @@ const _DashboardPrograms: React.FC<Props> = ({
           <div className="dashboard-programs__cell--avatar-title">
             <Link
               to={{
-                pathname: composeProgramDetailsUrl(program.url),
+                pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
+                as: composeProgramDetailsUrl(program.url),
                 state: `/ ${title}`
               }}
             >
@@ -117,7 +119,8 @@ const _DashboardPrograms: React.FC<Props> = ({
             </Link>
             <Link
               to={{
-                pathname: composeProgramDetailsUrl(program.url),
+                pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
+                as: composeProgramDetailsUrl(program.url),
                 state: `/ ${title}`
               }}
             >
