@@ -5,12 +5,12 @@ import { editAsset } from "modules/asset-edit/services/asset-edit.services";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import Page from "shared/components/page/page";
@@ -20,7 +20,8 @@ import {
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 import { SetSubmittingType } from "shared/utils/types";
-import { ChangeBrokerFormValues } from "./change-broker/change-broker";
+
+import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ProgramSettings from "./program-settings";
 import ProgramSettingsLoader from "./program-settings.loader";
 import {

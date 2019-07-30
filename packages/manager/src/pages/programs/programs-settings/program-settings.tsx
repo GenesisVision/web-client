@@ -8,9 +8,8 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 
 import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
-import ChangeBroker, {
-  ChangeBrokerFormValues
-} from "./change-broker/change-broker";
+import ChangeBroker from "./change-broker/change-broker";
+import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ChangePassword from "./change-password/change-password";
 import CloseProgramPeriod from "./close-period/close-program-period";
 import CloseProgram from "./close-program/close-program";
@@ -98,18 +97,17 @@ const _ProgramSettings: React.FC<Props> = ({
               />
             </section>
           )}
-          {!!!details.personalProgramDetails.migration &&
-            brokersInfo.brokers.length > 1 && (
-              <section className="program-settings__block">
-                <ChangeBroker
-                  onSubmit={changeBroker}
-                  id={details.id}
-                  brokers={brokersInfo.brokers}
-                  currentAccountTypeId={brokersInfo.currentAccountTypeId}
-                  currentLeverage={details.leverageMax}
-                />
-              </section>
-            )}
+          <ChangeBroker
+            condition={
+              !!!details.personalProgramDetails.migration &&
+              brokersInfo.brokers.length > 1
+            }
+            onSubmit={changeBroker}
+            id={details.id}
+            brokers={brokersInfo.brokers}
+            currentAccountTypeId={brokersInfo.currentAccountTypeId}
+            currentLeverage={details.leverageMax}
+          />
           <StopOutLevel
             stopOutLevel={details.stopOutLevel}
             onSubmit={editProgram}
