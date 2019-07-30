@@ -8,8 +8,7 @@ const HistoryProvider: React.FC<Props> = ({ from, children }) => {
       if (from) {
         return from;
       }
-      debugger;
-      if (global.hasOwnProperty("window") && window.history.state.options) {
+      if (typeof window !== "undefined" && window.history.state.options) {
         return window.history.state.options.from;
       }
       return undefined;
