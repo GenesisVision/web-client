@@ -15,6 +15,8 @@ import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
+import SettingsBlock from "./settings-block";
+
 const _ProgramEdit: React.FC<Props> = ({
   t,
   values,
@@ -23,31 +25,35 @@ const _ProgramEdit: React.FC<Props> = ({
   isValid,
   isSubmitting
 }) => (
-  <form id="edit-form" onSubmit={handleSubmit}>
-    <div className="program-settings__block-wrapper">
-      <h3>{t("manager.program-settings.avatar.title")}</h3>
-      <CreateProgramLogoField name={FIELDS.logo} />
-    </div>
-    <h3>{t("manager.program-settings.name.title")}</h3>
-    <div className="program-settings__block-wrapper create-program-settings__row">
-      <CreateProgramTitleField name={FIELDS.title} />
-    </div>
-    <h3>{t("manager.program-settings.strategy.title")}</h3>
-    <div className="program-settings__block-wrapper program-settings__block-wrapper--wide create-program-settings__row">
-      <CreateProgramDescriptionField
-        name={FIELDS.description}
-        description={values.description}
-      />
-    </div>
-    <GVButton
-      color="primary"
-      type={"submit"}
-      className="invest-form__submit-button"
-      disabled={!dirty || !isValid || isSubmitting}
-    >
-      {t("manager.program-settings.buttons.save")}
-    </GVButton>
-  </form>
+  <SettingsBlock
+    content={
+      <form id="edit-form" onSubmit={handleSubmit}>
+        <div className="program-settings__block-wrapper">
+          <h3>{t("manager.program-settings.avatar.title")}</h3>
+          <CreateProgramLogoField name={FIELDS.logo} />
+        </div>
+        <h3>{t("manager.program-settings.name.title")}</h3>
+        <div className="program-settings__block-wrapper create-program-settings__row">
+          <CreateProgramTitleField name={FIELDS.title} />
+        </div>
+        <h3>{t("manager.program-settings.strategy.title")}</h3>
+        <div className="program-settings__block-wrapper program-settings__block-wrapper--wide create-program-settings__row">
+          <CreateProgramDescriptionField
+            name={FIELDS.description}
+            description={values.description}
+          />
+        </div>
+        <GVButton
+          color="primary"
+          type={"submit"}
+          className="invest-form__submit-button"
+          disabled={!dirty || !isValid || isSubmitting}
+        >
+          {t("manager.program-settings.buttons.save")}
+        </GVButton>
+      </form>
+    }
+  />
 );
 
 enum FIELDS {

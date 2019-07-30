@@ -58,65 +58,59 @@ const _ProgramSettings: React.FC<Props> = ({
         title={details.title}
         id={details.id}
       />
-      {details.personalProgramDetails.canCloseProgram && (
-        <>
-          <section className="program-settings__block">
-            <ProgramEdit
-              title={details.title}
-              logo={{ src: details.logo }}
-              description={details.description}
-              onSubmit={editProgram}
-            />
-          </section>
-          <CancelChangeBroker
-            condition={!!details.personalProgramDetails.migration}
-            brokerFrom={
-              brokersInfo.brokers.find(
-                broker =>
-                  !!broker.accountTypes.find(
-                    accountType =>
-                      accountType.id === brokersInfo.currentAccountTypeId
-                  )
-              )!
-            }
-            migration={details.personalProgramDetails.migration}
-            onSubmit={cancelChangeBroker}
-            currentAccountTypeId={brokersInfo.currentAccountTypeId}
-            leverage={details.leverageMax}
-          />
-          <ChangeBroker
-            condition={
-              !!!details.personalProgramDetails.migration &&
-              brokersInfo.brokers.length > 1
-            }
-            onSubmit={changeBroker}
-            id={details.id}
-            brokers={brokersInfo.brokers}
-            currentAccountTypeId={brokersInfo.currentAccountTypeId}
-            currentLeverage={details.leverageMax}
-          />
-          <StopOutLevel
-            stopOutLevel={details.stopOutLevel}
-            onSubmit={editProgram}
-          />
-          <InvestmentLimit
-            currency={details.currency}
-            investmentLimit={details.availableInvestmentLimit}
-            onSubmit={editProgram}
-          />
-          <SignalingEdit
-            condition={
-              details.isSignalProgram ||
-              (!details.isSignalProgram &&
-                details.personalProgramDetails.canMakeSignalProvider)
-            }
-            isSignalProgram={details.isSignalProgram}
-            onSubmit={changeSignaling}
-            signalSuccessFee={signalSuccessFee}
-            signalVolumeFee={signalVolumeFee}
-          />
-        </>
-      )}
+      <ProgramEdit
+        title={details.title}
+        logo={{ src: details.logo }}
+        description={details.description}
+        onSubmit={editProgram}
+      />
+      <CancelChangeBroker
+        condition={!!details.personalProgramDetails.migration}
+        brokerFrom={
+          brokersInfo.brokers.find(
+            broker =>
+              !!broker.accountTypes.find(
+                accountType =>
+                  accountType.id === brokersInfo.currentAccountTypeId
+              )
+          )!
+        }
+        migration={details.personalProgramDetails.migration}
+        onSubmit={cancelChangeBroker}
+        currentAccountTypeId={brokersInfo.currentAccountTypeId}
+        leverage={details.leverageMax}
+      />
+      <ChangeBroker
+        condition={
+          !!!details.personalProgramDetails.migration &&
+          brokersInfo.brokers.length > 1
+        }
+        onSubmit={changeBroker}
+        id={details.id}
+        brokers={brokersInfo.brokers}
+        currentAccountTypeId={brokersInfo.currentAccountTypeId}
+        currentLeverage={details.leverageMax}
+      />
+      <StopOutLevel
+        stopOutLevel={details.stopOutLevel}
+        onSubmit={editProgram}
+      />
+      <InvestmentLimit
+        currency={details.currency}
+        investmentLimit={details.availableInvestmentLimit}
+        onSubmit={editProgram}
+      />
+      <SignalingEdit
+        condition={
+          details.isSignalProgram ||
+          (!details.isSignalProgram &&
+            details.personalProgramDetails.canMakeSignalProvider)
+        }
+        isSignalProgram={details.isSignalProgram}
+        onSubmit={changeSignaling}
+        signalSuccessFee={signalSuccessFee}
+        signalVolumeFee={signalVolumeFee}
+      />
     </div>
   );
 };
