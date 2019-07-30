@@ -1,33 +1,19 @@
 import NextLink from "next/link";
-import { useRouter } from "next/router";
 import React, { useCallback } from "react";
 
-import { normalizeTo, pushState } from "./link.helper";
+import { normalizeTo, pushHistoryState } from "./link.helper";
 
 const Link: React.FC<Props> = ({ to, className, children }) => {
   const normalizedTo = normalizeTo(to);
   const handleClick = useCallback(
     () => {
       if (normalizedTo.state) {
-        pushState(normalizedTo.state);
+        pushHistoryState(normalizedTo);
       }
     },
-    [normalizedTo.state]
+    [normalizedTo]
   );
-  //const { push } = useRouter();
 
-  // const handleClick = (event: React.MouseEvent) => {
-  //   event.preventDefault();
-  //   event.stopPropagation();
-  //   push({
-  //     pathname: props.href,
-  //     query: props.search
-  //   }).then(data => {
-  //     if (data) {
-  //       pushState(props.state);
-  //     }
-  //   });
-  // };
   return (
     <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
       <a className={className} onClick={handleClick}>
@@ -42,7 +28,6 @@ export default Link;
 interface Props {
   to: ToType | string;
   className?: string;
-  //search?: { [key: string]: string | number };
 }
 
 export type ToType = {
