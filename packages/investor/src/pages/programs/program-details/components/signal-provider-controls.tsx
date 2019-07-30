@@ -78,7 +78,7 @@ class _SignalProviderControls extends React.PureComponent<
             </GVButton>
           )}
         </div>
-        <ProgramFollowContainer
+        {/*<ProgramFollowContainer
           id={programDescription.id}
           open={popups[SIGNAL_POPUP.FOLLOW]}
           currency={programDescription.currency}
@@ -87,7 +87,7 @@ class _SignalProviderControls extends React.PureComponent<
           }
           onClose={this.closePopup(SIGNAL_POPUP.FOLLOW)}
           onApply={dispatchProgramDescription}
-        />
+        />*/}
         <ProgramUnfollowContainer
           open={popups[SIGNAL_POPUP.UNFOLLOW]}
           id={programDescription.id}

@@ -34,14 +34,14 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
         openPopup={setOpenPopup}
         rate={rate}
       />
-      <ProgramFollowContainer
+      {/*<ProgramFollowContainer
         id={id}
         open={isOpenPopup}
         currency={currency}
         signalSubscription={personalDetails.signalSubscription}
         onClose={setClosePopup}
         onApply={dispatchProgramDescription}
-      />
+      />*/}
     </>
   );
 };
