@@ -84,6 +84,15 @@
     .gv-text-field__wrapper {
       @include adaptive-margin(right, $padding-xsmall);
       width: 100%;
+      @include media-breakpoint-landscape-phone() {
+        width: auto;
+      }
+    }
+
+    &--wide {
+      .gv-text-field__wrapper {
+        width: 100%;
+      }
     }
 
     @include media-breakpoint-landscape-phone() {
