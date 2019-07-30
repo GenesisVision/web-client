@@ -1,6 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
-import { ProgramBalanceChart } from "gv-api-web";
+import { ProgramBalanceChart, ProgramProfitChart } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -54,7 +54,7 @@ const _DetailsChartElements: React.FC<Props> = ({
 };
 
 interface OwnProps {
-  profitChart: ProgramDetailsProfitChart;
+  profitChart: ProgramProfitChart;
   balanceChart: ProgramBalanceChart;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;

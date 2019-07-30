@@ -1,70 +1,52 @@
 import "shared/components/details/details.scss";
 
-import { FundDetailsFull } from "gv-api-web";
-import { useCallback, useEffect, useState } from "react";
 import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { useEffect } from "react";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import { redirectToLogin } from "shared/components/auth/signin/signin.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
-import {
-  getFundDescription,
-  getFundStatistic
-} from "shared/components/funds/fund-details/services/fund-details.service";
-import NotFoundPage from "shared/components/not-found/not-found";
 import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
-import useErrorMessage from "shared/hooks/error-message.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { kycConfirmedSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import FundDetailsContainer from "./fund-details.container";
 import { IDescriptionSection } from "./fund-details.types";
-import { FundStatisticResult } from "./services/fund-details.types";
+import {
+  FundDescriptionDataType,
+  fundDescriptionSelector
+} from "./reducers/description.reducer";
+import { dispatchFundDescription } from "./services/fund-details.service";
 
 const _FundDetailsPage: React.FC<Props> = ({
+  isKycConfirmed,
+  description,
   historySection,
   currency,
-  service,
+  service: { dispatchFundDescription, redirectToLogin },
   isAuthenticated,
   descriptionSection
 }) => {
-  const [statistic, setStatistic] = useState<FundStatisticResult | undefined>(
-    undefined
-  );
-  const { errorMessage, setErrorMessage } = useErrorMessage();
-  const [description, setDescription] = useState<FundDetailsFull | undefined>(
-    undefined
-  );
-  const getDescription = service.getFundDescription;
-  const updateDescription = useCallback(
-    () =>
-      getDescription()
-        .then(setDescription)
-        .catch(setErrorMessage),
-    []
-  );
   useEffect(() => {
-    const description = getDescription();
-    updateDescription();
-    description
-      .then(data => data.id)
-      .then(getFundStatistic)
-      .then(setStatistic)
-      .catch(setErrorMessage);
+    dispatchFundDescription();
   }, []);
-  if (errorMessage) return <NotFoundPage />;
   return (
     <FundDetailsContainer
+      isKycConfirmed={isKycConfirmed}
       condition={!!description}
       loader={<DetailsContainerLoader assets />}
-      updateDescription={updateDescription}
-      redirectToLogin={service.redirectToLogin}
+      redirectToLogin={redirectToLogin}
       historySection={historySection}
       descriptionSection={descriptionSection}
       description={description!}
-      statistic={statistic}
       currency={currency}
       isAuthenticated={isAuthenticated}
     />
@@ -72,12 +54,20 @@ const _FundDetailsPage: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: RootState): StateProps => ({
+  isKycConfirmed: kycConfirmedSelector(state),
+  description: fundDescriptionSelector(state),
   currency: currencySelector(state),
   isAuthenticated: isAuthenticatedSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators({ getFundDescription, redirectToLogin }, dispatch)
+  service: bindActionCreators(
+    {
+      dispatchFundDescription,
+      redirectToLogin
+    },
+    dispatch
+  )
 });
 
 interface OwnProps {
@@ -86,15 +76,18 @@ interface OwnProps {
 }
 
 interface StateProps {
+  description?: FundDescriptionDataType;
+  isKycConfirmed: boolean;
   isAuthenticated: boolean;
   currency: CurrencyEnum;
 }
 
+interface ServiceThunks extends ActionCreatorsMapObject {
+  dispatchFundDescription: typeof dispatchFundDescription;
+  redirectToLogin: typeof redirectToLogin;
+}
 interface DispatchProps {
-  service: {
-    getFundDescription(): Promise<FundDetailsFull>;
-    redirectToLogin(): void;
-  };
+  service: ResolveThunks<ServiceThunks>;
 }
 
 interface Props extends OwnProps, StateProps, DispatchProps {}

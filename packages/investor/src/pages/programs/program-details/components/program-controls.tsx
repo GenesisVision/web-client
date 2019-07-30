@@ -10,7 +10,6 @@ const ProgramControls: React.FC<IProgramControlsProps> = ({
   redirectToLogin
 }) => {
   const isAvailableFollowingTrades = programDescription.isSignalProgram;
-
   return (
     <div className="program-details-description__controls">
       <div className="program-details-description__col">

@@ -1,3 +1,4 @@
+import { ProgramProfitChart as ProgramProfitChartType } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
@@ -6,7 +7,6 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
-import { ProgramDetailsProfitChart } from "../../../services/program-details.types";
 import ProgramProfitChart from "./program-profit-chart";
 
 const ProgramProfitChartSection: React.FC<Props> = ({
@@ -18,13 +18,13 @@ const ProgramProfitChartSection: React.FC<Props> = ({
     <div className="details-chart__value">
       <StatisticItem
         label={"Value"}
-        equivalent={profitChart.timeFrameProgramCurrencyProfit}
+        equivalent={profitChart.timeframeProgramCurrencyProfit}
         equivalentCurrency={profitChart.programCurrency}
         big
         accent
       >
         <NumberFormat
-          value={formatCurrencyValue(profitChart.timeFrameGvtProfit, "GVT")}
+          value={formatCurrencyValue(profitChart.timeframeGvtProfit, "GVT")}
           thousandSeparator={" "}
           displayType="text"
           suffix={" GVT"}
@@ -44,7 +44,7 @@ const ProgramProfitChartSection: React.FC<Props> = ({
 );
 
 interface Props {
-  profitChart: ProgramDetailsProfitChart;
+  profitChart: ProgramProfitChartType;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
 }
