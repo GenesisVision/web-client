@@ -23,7 +23,7 @@ import { ASSET } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
-import { ChangeBrokerFormValues } from "./change-broker/change-broker";
+import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ProgramSettings from "./program-settings";
 import ProgramSettingsLoader from "./program-settings.loader";
 import {
@@ -39,11 +39,16 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t, description }) => {
   >(undefined);
   const fetchingDescription = () => {
     service.dispatchProgramDescription();
-    description && getProgramBrokers(description.id).then(setBrokersInfo);
   };
   useEffect(() => {
     fetchingDescription();
   }, []);
+  useEffect(
+    () => {
+      description && getProgramBrokers(description.id).then(setBrokersInfo);
+    },
+    [description]
+  );
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
       service
@@ -95,7 +100,7 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t, description }) => {
     [description]
   );
   const applyCloseProgram = useCallback(() => service.redirectToProgram(), []);
-
+  console.log(description, brokersInfo);
   return (
     <Page title={t("manager.program-settings.title")}>
       <ProgramSettings
