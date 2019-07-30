@@ -13,9 +13,7 @@ import { redirectToLogin } from "shared/components/auth/signin/signin.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
 import {
   dispatchPlatformLevelsParameters,
-  dispatchProgramDescription,
-  getBalanceChart,
-  getProfitChart
+  dispatchProgramDescription
 } from "shared/components/programs/program-details/services/program-details.service";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
@@ -76,8 +74,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     {
       dispatchProgramDescription,
       redirectToLogin,
-      getProfitChart,
-      getBalanceChart,
       dispatchPlatformLevelsParameters
     },
     dispatch
@@ -99,8 +95,6 @@ interface StateProps {
 interface ServiceThunks extends ActionCreatorsMapObject {
   dispatchProgramDescription: typeof dispatchProgramDescription;
   redirectToLogin: typeof redirectToLogin;
-  getProfitChart: typeof getProfitChart;
-  getBalanceChart: typeof getBalanceChart;
   dispatchPlatformLevelsParameters: typeof dispatchPlatformLevelsParameters;
 }
 interface DispatchProps {
