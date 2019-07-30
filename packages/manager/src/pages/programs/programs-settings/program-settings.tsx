@@ -116,13 +116,11 @@ const _ProgramSettings: React.FC<Props> = ({
               onSubmit={editProgram}
             />
           </section>
-          <section className="program-settings__block">
-            <InvestmentLimit
-              currency={details.currency}
-              investmentLimit={details.availableInvestmentLimit}
-              onSubmit={editProgram}
-            />
-          </section>
+          <InvestmentLimit
+            currency={details.currency}
+            investmentLimit={details.availableInvestmentLimit}
+            onSubmit={editProgram}
+          />
           <SignalingEdit
             condition={
               details.isSignalProgram ||
