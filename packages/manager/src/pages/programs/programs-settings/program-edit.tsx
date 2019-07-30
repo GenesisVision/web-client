@@ -33,7 +33,7 @@ const _ProgramEdit: React.FC<Props> = ({
       <CreateProgramTitleField name={FIELDS.title} />
     </div>
     <h3>{t("manager.program-settings.strategy.title")}</h3>
-    <div className="program-settings__block-wrapper create-program-settings__row">
+    <div className="program-settings__block-wrapper program-settings__block-wrapper--wide create-program-settings__row">
       <CreateProgramDescriptionField
         name={FIELDS.description}
         description={values.description}

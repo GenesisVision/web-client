@@ -89,6 +89,12 @@
       }
     }
 
+    &--wide {
+      .gv-text-field__wrapper {
+        width: 100%;
+      }
+    }
+
     @include media-breakpoint-landscape-phone() {
       max-width: 765px;
     }
