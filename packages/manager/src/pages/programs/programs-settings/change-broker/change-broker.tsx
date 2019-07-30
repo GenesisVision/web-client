@@ -79,7 +79,7 @@ const _ChangeBroker: React.FC<Props> = ({
   return (
     <form id="change-broker-form" onSubmit={handleSubmit}>
       <h3>{t("manager.program-settings.broker.title")}</h3>
-      <div className="program-edit__block-wrapper program-edit__block-wrapper--broker-list">
+      <div className="program-settings__block-wrapper program-settings__block-wrapper--broker-list">
         {brokers.map(broker => (
           <BrokerCard
             logo={broker.logo}
@@ -127,7 +127,7 @@ const _ChangeBroker: React.FC<Props> = ({
           ))}
         </GVFormikField>
       </div>
-      <p className="program-edit__text program-edit__text--color-accent program-edit__text--padding-top">
+      <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
         {t("manager.program-settings.broker.text-change")}
       </p>
       <GVButton

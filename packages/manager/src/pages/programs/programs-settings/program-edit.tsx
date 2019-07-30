@@ -24,16 +24,16 @@ const _ProgramEdit: React.FC<Props> = ({
   isSubmitting
 }) => (
   <form id="edit-form" onSubmit={handleSubmit}>
-    <div className="program-edit__block-wrapper">
+    <div className="program-settings__block-wrapper">
       <h3>{t("manager.program-settings.avatar.title")}</h3>
       <CreateProgramLogoField name={FIELDS.logo} />
     </div>
     <h3>{t("manager.program-settings.name.title")}</h3>
-    <div className="program-edit__block-wrapper create-program-settings__row">
+    <div className="program-settings__block-wrapper create-program-settings__row">
       <CreateProgramTitleField name={FIELDS.title} />
     </div>
     <h3>{t("manager.program-settings.strategy.title")}</h3>
-    <div className="program-edit__block-wrapper create-program-settings__row">
+    <div className="program-settings__block-wrapper create-program-settings__row">
       <CreateProgramDescriptionField
         name={FIELDS.description}
         description={values.description}

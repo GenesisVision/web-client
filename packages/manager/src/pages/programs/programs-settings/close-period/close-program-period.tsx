@@ -3,6 +3,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import useIsOpen from "shared/hooks/is-open.hook";
+
 import ConfirmClosePeriodContainer from "./confirm-close-period-container";
 
 const _CloseProgramPeriod: React.FC<Props> = ({ id, t, onApply, canClose }) => {
@@ -13,8 +14,8 @@ const _CloseProgramPeriod: React.FC<Props> = ({ id, t, onApply, canClose }) => {
   ] = useIsOpen();
   return (
     <>
-      <div className="program-edit__block-wrapper">
-        <p className="program-edit__text">
+      <div className="program-settings__block-wrapper">
+        <p className="program-settings__text">
           {t("manager.program-settings.period-and-closing.text-period")}
         </p>
         <GVButton

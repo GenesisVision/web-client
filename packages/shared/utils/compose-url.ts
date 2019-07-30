@@ -15,7 +15,7 @@ import {
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAM_DETAILS_ROUTE,
-  PROGRAM_EDIT,
+  PROGRAM_SETTINGS,
   PROGRAM_SLUG_URL_PARAM_NAME
 } from "shared/routes/programs.routes";
 
@@ -49,7 +49,7 @@ export const composeProgramNotificationsUrl = (slugUrl: string): string =>
   });
 
 export const composeProgramSettingsUrl = (slugUrl: string): string =>
-  replaceParams(`${PROGRAM_DETAILS_ROUTE}/${PROGRAM_EDIT}`, {
+  replaceParams(`${PROGRAM_DETAILS_ROUTE}/${PROGRAM_SETTINGS}`, {
     [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
