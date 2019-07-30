@@ -15,6 +15,7 @@ import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
+import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -121,6 +122,11 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
               suffix={` ${signal.currency}`}
             />
           </Profitability>
+        </TableCell>
+        <TableCell className="programs-table__cell dashboard-programs__cell--chart">
+          {signal.chart.length && (
+            <ProgramSimpleChart data={signal.chart} programId={signal.id} />
+          )}
         </TableCell>
         <TableCell>
           <AssetStatusLabel status={signal.personalDetails.status as STATUS} />
