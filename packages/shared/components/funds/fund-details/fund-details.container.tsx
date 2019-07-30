@@ -1,7 +1,7 @@
 import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
-import * as React from "react";
+import React, { useCallback } from "react";
 import Page from "shared/components/page/page";
 import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
 import withLoader from "shared/decorators/with-loader";
@@ -25,11 +25,14 @@ const _FundDetailsContainer: React.FC<Props> = ({
   historySection,
   description
 }) => {
-  const fetchHistoryPortfolioEvents = (filters: any) =>
-    historySection.fetchPortfolioEvents({
-      ...filters,
-      assetId: description.id
-    });
+  const fetchHistoryPortfolioEvents = useCallback(
+    (filters: any) =>
+      historySection.fetchPortfolioEvents({
+        ...filters,
+        assetId: description.id
+      }),
+    [historySection, description]
+  );
   const isInvested =
     description.personalFundDetails &&
     description.personalFundDetails.isInvested;
