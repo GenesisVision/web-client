@@ -11,9 +11,8 @@ import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
 import ChangeBroker from "./change-broker/change-broker";
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ChangePassword from "./change-password/change-password";
-import CloseProgramPeriod from "./close-period/close-program-period";
-import CloseProgram from "./close-program/close-program";
 import InvestmentLimit from "./investment-limit";
+import PeriodAndClosing from "./period-and-closing";
 import ProgramEdit from "./program-edit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
@@ -44,19 +43,13 @@ const _ProgramSettings: React.FC<Props> = ({
         condition={details.personalProgramDetails.showTwoFactorButton}
         id={details.id}
       />
-      <section className="program-settings__block">
-        <h3>{t("manager.program-settings.period-and-closing.title")}</h3>
-        <CloseProgramPeriod
-          canClose={details.personalProgramDetails.canClosePeriod}
-          onApply={closePeriod}
-          id={details.id}
-        />
-        <CloseProgram
-          canClose={details.personalProgramDetails.canCloseProgram}
-          onApply={closeProgram}
-          id={details.id}
-        />
-      </section>
+      <PeriodAndClosing
+        canClosePeriod={details.personalProgramDetails.canClosePeriod}
+        canCloseProgram={details.personalProgramDetails.canCloseProgram}
+        id={details.id}
+        closePeriod={closePeriod}
+        closeProgram={closeProgram}
+      />
       <ChangePassword
         condition={
           details.personalProgramDetails.canChangePassword &&
