@@ -33,15 +33,23 @@ import {
 } from "./services/program-settings.service";
 import { IProgramSignalFormValues } from "./signaling-edit";
 
-const _ProgramsEditPage: React.FC<Props> = ({ service, t, description }) => {
+const _ProgramsEditPage: React.FC<Props> = ({
+  service: {
+    dispatchProgramDescription,
+    programEditSignal,
+    changeBrokerMethod,
+    cancelChangeBrokerMethod,
+    editAsset,
+    redirectToProgram
+  },
+  t,
+  description
+}) => {
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
   >(undefined);
-  const fetchingDescription = () => {
-    service.dispatchProgramDescription();
-  };
   useEffect(() => {
-    fetchingDescription();
+    dispatchProgramDescription();
   }, []);
   useEffect(
     () => {
@@ -51,9 +59,9 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t, description }) => {
   );
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
-      service
-        .programEditSignal(description!.id, successFee!, volumeFee!)
-        .then(fetchingDescription),
+      programEditSignal(description!.id, successFee!, volumeFee!).then(
+        dispatchProgramDescription
+      ),
     [description]
   );
   const changeBroker = useCallback(
@@ -61,22 +69,20 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t, description }) => {
       { brokerAccountTypeId, leverage }: ChangeBrokerFormValues,
       setSubmitting: SetSubmittingType
     ) => {
-      service
-        .changeBrokerMethod(
-          description!.id,
-          brokerAccountTypeId,
-          leverage,
-          setSubmitting
-        )
-        .then(fetchingDescription);
+      changeBrokerMethod(
+        description!.id,
+        brokerAccountTypeId,
+        leverage,
+        setSubmitting
+      ).then(dispatchProgramDescription);
     },
     [description]
   );
   const cancelChangeBroker = useCallback(
     () => {
-      service
-        .cancelChangeBrokerMethod(description!.id)
-        .then(fetchingDescription);
+      cancelChangeBrokerMethod(description!.id).then(
+        dispatchProgramDescription
+      );
     },
     [description]
   );
@@ -89,17 +95,15 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t, description }) => {
         logo: { src: description!.logo },
         investmentLimit: description!.availableInvestmentLimit
       };
-      service
-        .editAsset(
-          description!.id,
-          { ...currentValues, ...values },
-          ASSET.PROGRAM
-        )
-        .then(fetchingDescription);
+      editAsset(
+        description!.id,
+        { ...currentValues, ...values },
+        ASSET.PROGRAM
+      ).then(dispatchProgramDescription);
     },
     [description]
   );
-  const applyCloseProgram = useCallback(() => service.redirectToProgram(), []);
+  const applyCloseProgram = useCallback(() => redirectToProgram(), []);
   console.log(description, brokersInfo);
   return (
     <Page title={t("manager.program-settings.title")}>
@@ -107,7 +111,7 @@ const _ProgramsEditPage: React.FC<Props> = ({ service, t, description }) => {
         condition={!!description && !!brokersInfo}
         loader={<ProgramSettingsLoader />}
         changeSignaling={changeSignaling}
-        closePeriod={fetchingDescription}
+        closePeriod={dispatchProgramDescription}
         closeProgram={applyCloseProgram}
         details={description!}
         brokersInfo={brokersInfo!}
