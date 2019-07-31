@@ -3,10 +3,11 @@ import {
   MultiWalletExternalTransaction,
   WalletBaseData
 } from "gv-api-web";
+import { NextPageContext } from "next";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
-  TableItems,
-  mapToTableItems
+  mapToTableItems,
+  TableItems
 } from "shared/components/table/helpers/mapper";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
@@ -17,8 +18,11 @@ import { MiddlewareDispatch, RootThunk } from "shared/utils/types";
 
 import * as actions from "../actions/wallet.actions";
 
-export const fetchWallets = (): RootThunk<void> => (dispatch, getState) => {
-  const authorization = authService.getAuthArg();
+export const fetchWallets = (ctx?: NextPageContext): RootThunk<void> => (
+  dispatch,
+  getState
+) => {
+  const authorization = authService.getAuthArg(ctx);
   const { info } = getState().wallet;
   if (info.isPending) return;
   const { currency } = getState().accountSettings;
