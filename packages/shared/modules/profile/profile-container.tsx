@@ -17,12 +17,7 @@ import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
 
 import Profile from "./profile";
 
-const _ProfileContainer: React.FC<Props> = ({
-  service,
-  personal,
-  editable,
-  t
-}) => {
+const _ProfileContainer: React.FC<Props> = ({ service, editable, t }) => {
   const [data, setData] = useState<ProfileFullViewModel | undefined>(undefined);
   useEffect(() => {
     fetch();
@@ -56,7 +51,7 @@ const _ProfileContainer: React.FC<Props> = ({
   return editable ? (
     <ProfileForm info={data} onSubmit={handleEdit} />
   ) : (
-    <Profile personal={personal} info={data} />
+    <Profile info={data} />
   );
 };
 
@@ -69,7 +64,6 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
 
 interface OwnProps {
   editable?: boolean;
-  personal?: boolean;
 }
 
 interface DispatchProps {
