@@ -6,9 +6,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
@@ -38,9 +38,12 @@ const _WalletCopytrading: React.FC<Props> = ({
   const [currentAccount, setCurrentAccount] = useState<
     CopyTradingAccountInfo | undefined
   >(undefined);
-  useEffect(() => {
-    service.fetchAccounts();
-  }, []);
+  useEffect(
+    () => {
+      service.fetchAccounts();
+    },
+    [service]
+  );
   const handleOpenPopup = useCallback(
     (openMethod: () => void) => (
       currentAccount?: CopyTradingAccountInfo

@@ -1,10 +1,10 @@
 import { OrderSignalProgramInfo } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";

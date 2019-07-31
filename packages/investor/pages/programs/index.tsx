@@ -17,8 +17,6 @@ const Programs: NextPage<{
 Programs.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
 
-  console.info(filtering, "filtering");
-
   // @ts-ignore
   const programs = await programsApi.v10ProgramsGet(filtering);
   return {
