@@ -4,36 +4,30 @@ import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-p
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import { RootState } from "shared/reducers/root-reducer";
-import {
-  FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE
-} from "shared/routes/funds.routes";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import getParams from "shared/utils/get-params";
-import { MiddlewareDispatch } from "shared/utils/types";
+import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
 import {
   fetchFundBalanceChartAction,
   fetchFundDescriptionAction,
-  fetchFundProfitChartAction
+  fetchFundProfitChartAction,
+  setFundIdAction
 } from "../actions/fund-details.actions";
 
 export const dispatchFundDescription = () => (
   dispatch: MiddlewareDispatch,
-  getState: () => RootState
+  getState: TGetState
 ) => {
-  const authorization = authService.getAuthArg();
-  const { router } = getState();
-
-  const slugUrl = getParams(router.location.pathname, FUND_DETAILS_ROUTE)[
-    FUNDS_SLUG_URL_PARAM_NAME
-  ];
-
-  return dispatch(fetchFundDescriptionAction(slugUrl, authorization));
+  const {
+    fundDetails: { id }
+  } = getState();
+  return dispatch(fetchFundDescriptionAction(id, authService.getAuthArg()));
 };
+
+export const dispatchFundId = (id: string) => (dispatch: MiddlewareDispatch) =>
+  dispatch(setFundIdAction(id));
 
 export const fetchFundStructure = (
   fundId: string
