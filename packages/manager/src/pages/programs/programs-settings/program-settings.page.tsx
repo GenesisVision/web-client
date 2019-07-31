@@ -105,7 +105,6 @@ const _ProgramsEditPage: React.FC<Props> = ({
     [description]
   );
   const applyCloseProgram = useCallback(() => redirectToProgram(), []);
-  console.log(description, brokersInfo);
   return (
     <Page title={t("manager.program-settings.title")}>
       <ProgramSettings
