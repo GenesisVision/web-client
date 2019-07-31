@@ -10,11 +10,10 @@ import {
   copyTradingAccountsSelector,
   walletSelector
 } from "../reducers/wallet.reducers";
-import { WalletRouteProps } from "../wallet.routes";
 import WalletContainerLoader from "./wallet-container-loader";
 import WalletTotal from "./wallet-total";
 
-const _WalletTotalContainer: React.FC<Props & WalletRouteProps> = ({
+const _WalletTotalContainer: React.FC<Props> = ({
   wallet,
   t,
   copyTradingAccounts,
@@ -43,7 +42,7 @@ interface StateProps {
   wallet?: WalletMultiSummary;
 }
 
-const WalletTotalContainer = compose<React.ComponentType<WalletRouteProps>>(
+const WalletTotalContainer = compose<React.ComponentType>(
   connect(mapStateToProps),
   translate(),
   React.memo
