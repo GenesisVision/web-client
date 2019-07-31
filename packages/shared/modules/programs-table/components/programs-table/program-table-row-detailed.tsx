@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
 import moment from "moment";
+import NextLink from "next/link";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -77,7 +78,8 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     <Link
                       className="program-detailed__manager-link"
                       to={{
-                        pathname: composeManagerDetailsUrl(program.manager.url),
+                        pathname: "/managers/[id]",
+                        as: composeManagerDetailsUrl(program.manager.url),
                         state: programLinkProps.state
                       }}
                     >

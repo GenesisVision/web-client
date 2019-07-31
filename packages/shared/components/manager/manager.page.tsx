@@ -10,8 +10,8 @@ import Page from "shared/components/page/page";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 const _ManagerPage: React.FC<Props> = ({
-  isAuthenticated,
   managerProfile,
+  isAuthenticated,
   t
 }) => (
   <Page title={`${t("manager-page.title")} ${managerProfile.username}`}>
@@ -33,8 +33,8 @@ const _ManagerPage: React.FC<Props> = ({
 interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
-  isAuthenticated: boolean;
   managerProfile: ManagerProfile;
+  isAuthenticated: boolean;
 }
 
 const ManagerPage = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
@@ -42,4 +42,5 @@ const ManagerPage = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
   translate(),
   React.memo
 )(_ManagerPage);
+
 export default ManagerPage;
