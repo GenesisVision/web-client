@@ -17,10 +17,6 @@ const Wallet: NextPageWithRedux<Props, {}> = () => {
 };
 
 Wallet.getInitialProps = async ctx => {
-  return {};
-};
-
-Wallet.getInitialProps = async ctx => {
   await Promise.all([ctx.reduxStore.dispatch(fetchWallets(ctx))]);
   return {};
 };
