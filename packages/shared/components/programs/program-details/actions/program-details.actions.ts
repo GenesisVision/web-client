@@ -7,12 +7,15 @@ import {
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
-import { ApiAction, CurrencyEnum } from "shared/utils/types";
+import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
+
+import { ProgramIdState } from "../reducers/id.reducer";
 
 export const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
 export const FETCH_PROGRAM_BALANCE_CHART = "FETCH_PROGRAM_BALANCE_CHART";
 export const FETCH_PROGRAM_DESCRIPTION = "FETCH_PROGRAM_DESCRIPTION";
 export const FETCH_LEVEL_PARAMETERS = "FETCH_LEVEL_PARAMETERS";
+export const SET_PROGRAM_ID = "SET_PROGRAM_ID";
 
 export const fetchProgramProfitChartAction = (
   id: string,
@@ -51,4 +54,12 @@ export const fetchLevelParametersAction = (
 ): ApiAction<LevelsParamsInfo> => ({
   type: FETCH_LEVEL_PARAMETERS,
   payload: platformApi.v10PlatformLevelsParametersGet({ currency })
+});
+
+export interface SetProgramIdAction extends ActionType<ProgramIdState> {
+  type: typeof SET_PROGRAM_ID;
+}
+export const setProgramIdAction = (id: string): SetProgramIdAction => ({
+  type: SET_PROGRAM_ID,
+  payload: id
 });
