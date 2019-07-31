@@ -1,5 +1,4 @@
 import "shared/components/deposit-details/deposit-details.scss";
-
 import "./create-program-settings.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";

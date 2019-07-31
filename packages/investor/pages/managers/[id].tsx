@@ -1,8 +1,8 @@
 import { ManagerProfile } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
-import withDefaultLayout from "shared/decorators/with-default-layout";
 import ManagerPage from "shared/components/manager/manager.page";
+import withDefaultLayout from "shared/decorators/with-default-layout";
 import ManagerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 

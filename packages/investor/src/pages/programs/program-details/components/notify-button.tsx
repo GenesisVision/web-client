@@ -32,7 +32,13 @@ const _NotifyButton: React.FC<Props> = ({
         .then(setNotificationId)
         .finally(setNotIsPending);
     },
-    [assetId, currency]
+    [
+      assetId,
+      currency,
+      setIsPending,
+      setNotIsPending,
+      subscribeAvailableToInvest
+    ]
   );
   return (
     <div className="notify-button">

@@ -2,7 +2,7 @@ import { SignalTradingEvent } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Action, Dispatch, bindActionCreators, compose } from "redux";
+import { Action, bindActionCreators, compose, Dispatch } from "redux";
 import TableContainer from "shared/components/table/components/table-container";
 
 import { clearCopytradingTable } from "../actions/copytrading-tables.actions";

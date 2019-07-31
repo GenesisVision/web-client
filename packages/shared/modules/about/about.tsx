@@ -19,7 +19,7 @@ const _About: React.FC<Props> = ({ userName, about }) => {
         .then(() => Router.push(PROFILE_ROUTE))
         .catch(setErrorMessage)
         .finally(() => setSubmitting(false)),
-    []
+    [setErrorMessage]
   );
   return (
     <AboutForm

@@ -3,12 +3,12 @@ import LevelCalculator from "modules/level-calculator/components/level-calculato
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";

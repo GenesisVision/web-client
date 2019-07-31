@@ -1,10 +1,11 @@
 import React from "react";
-import withDefaultLayout from "shared/decorators/with-default-layout";
 import { compose } from "redux";
 import { dispatchProgramId } from "shared/components/programs/program-details/services/program-details.service";
-import { NextPageWithRedux } from "shared/utils/types";
-import ProgramDetailsPage from "../../src/pages/programs/program-details/program-details.page";
+import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
+import { NextPageWithRedux } from "shared/utils/types";
+
+import ProgramDetailsPage from "../../src/pages/programs/program-details/program-details.page";
 
 const ProgramDetails: NextPageWithRedux<Props, {}> = () => {
   return <ProgramDetailsPage />;

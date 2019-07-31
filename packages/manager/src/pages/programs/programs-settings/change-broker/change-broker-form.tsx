@@ -63,7 +63,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
       setFieldValue(FIELDS.brokerAccountTypeId, account.id);
       setFieldValue(FIELDS.leverage, leverage);
     },
-    [brokers, currentAccountTypeId, values, currentLeverage]
+    [brokers, values, currentLeverage, setFieldValue, currentAccountTypeId]
   );
   const changeAccount = useCallback(
     ({ target }) => {

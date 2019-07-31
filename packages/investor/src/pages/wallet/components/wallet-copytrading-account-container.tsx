@@ -13,15 +13,18 @@ const _WalletCopytradingAccountContainer: React.FC<Props> = ({ match }) => {
     undefined
   );
   const [hasError, setHasError] = useIsOpen();
-  useEffect(() => {
-    fetchWalletCopytradingAccount(match.params.currency)
-      .then(data => {
-        if (!data) throw "";
-        return data;
-      })
-      .then(setAccount)
-      .catch(setHasError);
-  }, []);
+  useEffect(
+    () => {
+      fetchWalletCopytradingAccount(match.params.currency)
+        .then(data => {
+          if (!data) throw "";
+          return data;
+        })
+        .then(setAccount)
+        .catch(setHasError);
+    },
+    [match.params.currency, setHasError]
+  );
   if (hasError) return <NotFoundPage />;
   return (
     <WalletCopytradingAccount

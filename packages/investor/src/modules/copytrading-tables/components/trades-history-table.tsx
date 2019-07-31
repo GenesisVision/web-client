@@ -3,7 +3,7 @@ import TradesHistoryRow from "modules/copytrading-tables/components/trades-histo
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Action, Dispatch, bindActionCreators, compose } from "redux";
+import { Action, bindActionCreators, compose, Dispatch } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";

@@ -5,13 +5,13 @@ import { editAsset } from "modules/asset-edit/services/asset-edit.services";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch,
+  Dispatch
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import Page from "shared/components/page/page";
@@ -49,9 +49,12 @@ const _ProgramsEditPage: React.FC<Props> = ({
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
   >(undefined);
-  useEffect(() => {
-    dispatchProgramDescription();
-  }, []);
+  useEffect(
+    () => {
+      dispatchProgramDescription();
+    },
+    [dispatchProgramDescription]
+  );
   useEffect(
     () => {
       description && getProgramBrokers(description.id).then(setBrokersInfo);
@@ -63,7 +66,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
       programEditSignal(description!.id, successFee!, volumeFee!).then(
         dispatchProgramDescription
       ),
-    [description]
+    [description, dispatchProgramDescription, programEditSignal]
   );
   const changeBroker = useCallback(
     (
@@ -77,7 +80,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
         setSubmitting
       ).then(dispatchProgramDescription);
     },
-    [description]
+    [changeBrokerMethod, description, dispatchProgramDescription]
   );
   const cancelChangeBroker = useCallback(
     () => {
@@ -85,7 +88,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
         dispatchProgramDescription
       );
     },
-    [description]
+    [cancelChangeBrokerMethod, description, dispatchProgramDescription]
   );
   const editProgram: TUpdateProgramFunc = useCallback(
     values => {
@@ -102,9 +105,11 @@ const _ProgramsEditPage: React.FC<Props> = ({
         ASSET.PROGRAM
       ).then(dispatchProgramDescription);
     },
-    [description]
+    [description, dispatchProgramDescription, editAsset]
   );
-  const applyCloseProgram = useCallback(() => redirectToProgram(), []);
+  const applyCloseProgram = useCallback(() => redirectToProgram(), [
+    redirectToProgram
+  ]);
   return (
     <Page title={t("manager.program-settings.title")}>
       <ProgramSettings

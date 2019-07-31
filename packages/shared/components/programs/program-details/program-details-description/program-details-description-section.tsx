@@ -4,12 +4,12 @@ import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { ComponentType } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";

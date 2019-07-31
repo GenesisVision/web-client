@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 
@@ -27,7 +27,7 @@ const _ProgramUnfollowContainer: React.FC<Props> = ({
       service.detachToSignal(id, onApply, model);
       handleClose();
     },
-    [service, id]
+    [service, id, onApply, handleClose]
   );
   return (
     <Dialog open={open} onClose={handleClose}>

@@ -32,7 +32,7 @@ const _SignalingEdit: React.FC<Props> = ({
               <GVSwitch
                 touched={false}
                 className="notification-setting__switch"
-                name={name}
+                name="isSignal"
                 value={isSignal}
                 color="primary"
                 onChange={changeIsSignal}

@@ -2,12 +2,12 @@ import "shared/components/details/details.scss";
 
 import * as React from "react";
 import { useEffect } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { redirectToLogin } from "shared/components/auth/signin/signin.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
@@ -35,9 +35,12 @@ const _FundDetailsPage: React.FC<Props> = ({
   isAuthenticated,
   descriptionSection
 }) => {
-  useEffect(() => {
-    dispatchFundDescription();
-  }, []);
+  useEffect(
+    () => {
+      dispatchFundDescription();
+    },
+    [dispatchFundDescription]
+  );
   return (
     <FundDetailsContainer
       isKycConfirmed={isKycConfirmed}

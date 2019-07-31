@@ -7,8 +7,7 @@ import programBalanceChartReducer, {
 import programDescriptionReducer, {
   ProgramDescriptionState
 } from "./description.reducer";
-import { ProgramIdState } from "./id.reducer";
-import programIdReducer from "./id.reducer";
+import programIdReducer, { ProgramIdState } from "./id.reducer";
 import levelParametersReducer, {
   LevelParametersState
 } from "./level-parameters.reducer";

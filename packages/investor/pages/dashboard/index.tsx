@@ -3,12 +3,12 @@ import { getPortfolioChart } from "pages/dashboard/services/dashboard-chart.serv
 import { getTopPortfolioEvents } from "pages/dashboard/services/dashboard-events.services";
 import { getInRequests } from "pages/dashboard/services/dashboard-in-requests.service";
 import React, { useEffect } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";

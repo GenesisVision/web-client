@@ -7,7 +7,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { InvestorRootState } from "reducers";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
@@ -55,13 +55,16 @@ const _ProgramFollowContainer: React.FC<Props> = ({
       ? "follow-program.create-success-alert-message"
       : "follow-program.edit-success-alert-message"
   );
-  useEffect(() => {
-    setIsPending();
-    getSignalInfo(id)
-      .then(setMinDeposit)
-      .finally(setIsNotPending);
-    rateApi.v10RateByFromByToGet("USD", currency).then(setRate);
-  }, []);
+  useEffect(
+    () => {
+      setIsPending();
+      getSignalInfo(id)
+        .then(setMinDeposit)
+        .finally(setIsNotPending);
+      rateApi.v10RateByFromByToGet("USD", currency).then(setRate);
+    },
+    [currency, id, setIsNotPending, setIsPending]
+  );
   useEffect(
     () => {
       setType(
@@ -89,7 +92,7 @@ const _ProgramFollowContainer: React.FC<Props> = ({
           setSubmitting(false);
         });
     },
-    [type]
+    [onApply, onClose, service, successMessage, t, type]
   );
   return (
     <Dialog open={open} onClose={onClose}>

@@ -51,11 +51,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
         program.id,
         !!program.personalDetails && program.personalDetails.isFavorite
       ),
-    [
-      program.id,
-      !!program.personalDetails && program.personalDetails.isFavorite,
-      toggleFavorite
-    ]
+    [program.id, program.personalDetails, toggleFavorite]
   );
   const { t } = useTranslation();
   const linkProps = {

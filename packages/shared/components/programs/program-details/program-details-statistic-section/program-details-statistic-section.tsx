@@ -2,12 +2,12 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import {
   ChartDefaultPeriod,
@@ -44,7 +44,7 @@ const _ProgramDetailsStatisticSection: React.FC<Props> = ({
       getProfitChart({ id, period });
       getBalanceChart({ id, period });
     },
-    [period, id]
+    [period, id, getProfitChart, getBalanceChart]
   );
   return (
     <div className="details-statistic-section">

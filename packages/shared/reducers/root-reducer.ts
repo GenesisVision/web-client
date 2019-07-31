@@ -18,8 +18,8 @@ import programDetailsReducer, {
 import {
   CopyTradingAccountsReducer,
   CopyTradingAccountsState,
-  WalletState,
-  walletReducer
+  walletReducer,
+  WalletState
 } from "shared/components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer, {
   AlertMessagesState
@@ -55,7 +55,6 @@ import { RouterState } from "./router-reducer";
 import uiReducer from "./ui-reducer";
 
 // import history from "shared/utils/history";
-
 
 export const sharedRootReducers = {
   fundDetails: fundDetailsReducer,

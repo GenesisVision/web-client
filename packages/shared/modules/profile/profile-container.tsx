@@ -43,7 +43,7 @@ const _ProfileContainer: React.FC<Props> = ({ service, editable, t }) => {
           setSubmitting(false);
         });
     },
-    []
+    [success, t]
   );
   const fetch = () =>
     profileApi.v10ProfileGet(authService.getAuthArg()).then(setData);

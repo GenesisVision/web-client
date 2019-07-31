@@ -6,8 +6,8 @@ import Surface from "shared/components/surface/surface";
 import useTab from "shared/hooks/tab.hook";
 
 import {
-  ICopytradingTradesCounts,
-  fetchCopytradingTradesCount
+  fetchCopytradingTradesCount,
+  ICopytradingTradesCounts
 } from "../services/copytrading-tables.service";
 import OpenTradesTable from "./open-trades-table";
 import TradesHistoryTable from "./trades-history-table";
@@ -16,9 +16,12 @@ import TradesLogTable from "./trades-log-table";
 const _CopytradingTablesSection: React.FC<Props> = ({ t, title, currency }) => {
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_TRADES);
   const [counts, setCounts] = useState<ICopytradingTradesCounts>({});
-  useEffect(() => {
-    fetchCopytradingTradesCount(currency).then(setCounts);
-  }, []);
+  useEffect(
+    () => {
+      fetchCopytradingTradesCount(currency).then(setCounts);
+    },
+    [currency]
+  );
   const { openTradesCount, logCount, historyCount } = counts;
   return (
     <Surface>

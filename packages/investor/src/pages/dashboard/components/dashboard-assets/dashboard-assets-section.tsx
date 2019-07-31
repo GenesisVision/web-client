@@ -7,7 +7,7 @@ import {
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Action, Dispatch, bindActionCreators, compose } from "redux";
+import { Action, bindActionCreators, compose, Dispatch } from "redux";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import GVTabs from "shared/components/gv-tabs";
@@ -18,8 +18,8 @@ import useTab from "shared/hooks/tab.hook";
 
 import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";
 import {
-  IDashboardAssetsCounts,
-  fetchAssetsCount
+  fetchAssetsCount,
+  IDashboardAssetsCounts
 } from "../../services/dashboard.service";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 import DashboardCopytrading from "./dashboard-copytrading";
@@ -27,10 +27,13 @@ import DashboardCopytrading from "./dashboard-copytrading";
 const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
   const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
   const [counts, setCounts] = useState<IDashboardAssetsCounts>({});
-  useEffect(() => {
-    fetchAssetsCount().then(setCounts);
-    return service.clearDashboardAssetsTable;
-  }, []);
+  useEffect(
+    () => {
+      fetchAssetsCount().then(setCounts);
+      return service.clearDashboardAssetsTable;
+    },
+    [service.clearDashboardAssetsTable]
+  );
   const { programsCount, fundsCount, tradesCount } = counts;
   const handleTabChange = useCallback(
     (e: any, eventTab: string) => {
@@ -38,7 +41,7 @@ const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
       service.clearDashboardAssetsTable();
       setTab(e, eventTab);
     },
-    [tab]
+    [service, setTab, tab]
   );
   return (
     <Surface className="dashboard-assets">

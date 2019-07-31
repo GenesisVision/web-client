@@ -7,8 +7,7 @@ import FacetCardsContainer, {
 import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
-import { WithTranslation, withTranslation } from "shared/i18n";
-import { useTranslation } from "shared/i18n";
+import { useTranslation, WithTranslation, withTranslation } from "shared/i18n";
 import FundsTableContainer from "shared/modules/funds-table/components/funds-table/funds-table-container";
 import FundsTableSSR from "shared/modules/funds-table/components/funds-table/funds-table-ssr";
 import ProgramsTableSSR from "shared/modules/programs-table/components/programs-table/programs-table-ssr";

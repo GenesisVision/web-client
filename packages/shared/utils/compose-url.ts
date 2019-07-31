@@ -5,21 +5,21 @@ import {
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { ASSET } from "shared/constants/constants";
 import {
-  FUNDS_FACET_ROUTE,
-  FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_FOLDER_ROUTE,
-  FUND_DETAILS_ROUTE
+  FUND_DETAILS_ROUTE,
+  FUNDS_FACET_ROUTE,
+  FUNDS_SLUG_URL_PARAM_NAME
 } from "shared/routes/funds.routes";
 import {
   MANAGER_DETAILS_ROUTE,
   MANAGER_SLUG_URL_PARAM_NAME
 } from "shared/routes/manager.routes";
 import {
-  PROGRAMS_FACET_ROUTE,
   PROGRAM_DETAILS_FOLDER_ROUTE,
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SETTINGS,
-  PROGRAM_SLUG_URL_PARAM_NAME
+  PROGRAM_SLUG_URL_PARAM_NAME,
+  PROGRAMS_FACET_ROUTE
 } from "shared/routes/programs.routes";
 
 import replaceParams from "./replace-params";

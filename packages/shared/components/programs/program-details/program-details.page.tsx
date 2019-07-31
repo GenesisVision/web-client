@@ -2,12 +2,12 @@ import "shared/components/details/details.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import React, { useEffect } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { redirectToLogin } from "shared/components/auth/signin/signin.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
@@ -38,14 +38,17 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   isAuthenticated,
   isKycConfirmed
 }) => {
-  useEffect(() => {
-    dispatchProgramDescription();
-  }, []);
+  useEffect(
+    () => {
+      dispatchProgramDescription();
+    },
+    [dispatchProgramDescription]
+  );
   useEffect(
     () => {
       description && dispatchPlatformLevelsParameters(description.currency);
     },
-    [description]
+    [description, dispatchPlatformLevelsParameters]
   );
   return (
     <ProgramDetailsContainer

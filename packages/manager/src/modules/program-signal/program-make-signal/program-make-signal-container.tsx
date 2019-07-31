@@ -2,7 +2,7 @@ import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 
@@ -25,7 +25,8 @@ const _ProgramMakeSignalContainer: React.FC<Props> = ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   service: bindActionCreators(
     {
-      programMakeSignal,dispatchProgramDescription
+      programMakeSignal,
+      dispatchProgramDescription
     },
     dispatch
   )
@@ -53,6 +54,6 @@ interface Props extends OwnProps, WithTranslation {
       successFee: number,
       volumeFee: number
     ): Promise<void>;
-    dispatchProgramDescription: ()=>void
+    dispatchProgramDescription: () => void;
   };
 }

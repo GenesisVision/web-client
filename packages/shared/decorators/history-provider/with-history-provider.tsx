@@ -1,4 +1,5 @@
 import { AppContextType, AppType } from "next-server/dist/lib/utils";
+import Router from "next/router";
 import React, { Component } from "react";
 import HistoryProvider from "shared/decorators/history-provider/history.provider";
 
@@ -13,6 +14,20 @@ const withHistoryProvider = (WrappedComponent: AppType | any) => {
         }
         if (from.length > 0 && from.startsWith("/")) {
           pathFrom = from;
+        }
+      }
+
+      if (!ctx.ctx.req) {
+        if (process.env.NODE_ENV !== "production") {
+          Router.events.on("routeChangeComplete", () => {
+            const chunksSelector =
+              'link[href*="/_next/static/css/styles.chunk.css"]';
+            const chunksNodes = document.querySelectorAll(
+              chunksSelector
+            ) as any;
+            const timestamp = new Date().valueOf();
+            chunksNodes[0].href = `/_next/static/css/styles.chunk.css?${timestamp}`;
+          });
         }
       }
 

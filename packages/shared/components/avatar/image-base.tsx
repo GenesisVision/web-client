@@ -12,10 +12,13 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   defaultImageClassName
 }) => {
   const [isError, setIsError] = useIsOpen();
-  const handleError = useCallback((e: any) => {
-    e.target.onerror = null;
-    setIsError();
-  }, []);
+  const handleError = useCallback(
+    (e: any) => {
+      e.target.onerror = null;
+      setIsError();
+    },
+    [setIsError]
+  );
   const currentSrc = isError || !url ? defaultImage : url;
   const className = isError || !url ? defaultImageClassName : "";
   return (

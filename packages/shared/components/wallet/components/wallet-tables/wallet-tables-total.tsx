@@ -35,7 +35,7 @@ const _WalletTablesTotal: React.FC<Props> = ({
     () => {
       setTab(null, location.hash);
     },
-    [location]
+    [location, setTab]
   );
   return (
     <Surface className="wallet-container">

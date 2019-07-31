@@ -1,10 +1,11 @@
 import React from "react";
-import withDefaultLayout from "shared/decorators/with-default-layout";
 import { compose } from "redux";
 import { dispatchFundId } from "shared/components/funds/fund-details/services/fund-details.service";
-import { NextPageWithRedux } from "shared/utils/types";
-import FundDetailsPage from "../../src/pages/funds/fund-details/fund-details.page";
+import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
+import { NextPageWithRedux } from "shared/utils/types";
+
+import FundDetailsPage from "../../src/pages/funds/fund-details/fund-details.page";
 
 const FundDetails: NextPageWithRedux<Props, {}> = () => {
   return <FundDetailsPage />;
