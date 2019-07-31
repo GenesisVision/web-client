@@ -53,7 +53,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   return (
     <>
       <InvestmentProgramInfo programDescription={programDescription} />
-      <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
+      <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         {programDescription.availableInvestmentBase === 0 && isAuthenticated ? (
           <NotifyButton
             canInvest={programDescription.personalProgramDetails.canInvest}
@@ -63,7 +63,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
           />
         ) : (
           <GVButton
-            className="program-details-description__invest-btn"
+            className="asset-details-description__invest-btn"
             onClick={openInvestmentPopup}
             disabled={isDisabledInvestButton}
           >

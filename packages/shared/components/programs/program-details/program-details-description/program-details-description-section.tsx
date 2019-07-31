@@ -1,4 +1,4 @@
-import "./program-details-description.scss";
+import "shared/components/details/details-description-section/details-description/details-description.scss";
 
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
@@ -41,7 +41,7 @@ const _ProgramDetailsDescriptionSection: React.FC<
   const personalDetails = programDescription.personalProgramDetails;
   const isOwnProgram = personalDetails && personalDetails.isOwnProgram;
   return (
-    <div className="program-details-description">
+    <div className="asset-details-description">
       <ProgramDetailsDescriptionMain
         programDescription={programDescription}
         isOwnProgram={isOwnProgram}
@@ -68,7 +68,7 @@ const _ProgramDetailsDescriptionSection: React.FC<
         redirectToLogin={redirectToLogin}
       />
       {personalDetails && isAuthenticated && (
-        <div className="program-details-description__additionally">
+        <div className="asset-details-description__additionally">
           {personalDetails.isInvested &&
             personalDetails.status !== STATUS.ENDED && (
               <DetailsInvestment

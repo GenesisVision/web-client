@@ -73,10 +73,10 @@ class _InvestmentProgramControls extends React.PureComponent<Props, State> {
           isKycConfirmed={isKycConfirmed}
           LevelCalculator={LevelCalculator}
         />
-        <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
+        <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
           {isOwnProgram ? (
             <GVButton
-              className="program-details-description__invest-btn"
+              className="asset-details-description__invest-btn"
               onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
               disabled={isDisabledInvestButton}
             >
@@ -84,7 +84,7 @@ class _InvestmentProgramControls extends React.PureComponent<Props, State> {
             </GVButton>
           ) : (
             <GVButton
-              className="program-details-description__invest-btn"
+              className="asset-details-description__invest-btn"
               onClick={this.openPopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
             >
               {t("program-details-page.description.invest")}

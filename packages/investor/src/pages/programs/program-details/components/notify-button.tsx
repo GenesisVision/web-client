@@ -37,7 +37,7 @@ const _NotifyButton: React.FC<Props> = ({
   return (
     <div className="notify-button">
       <GVButton
-        className="program-details-description__invest-btn"
+        className="asset-details-description__invest-btn"
         onClick={handleClick}
         disabled={Boolean(notificationId || isPending || !canInvest)}
       >

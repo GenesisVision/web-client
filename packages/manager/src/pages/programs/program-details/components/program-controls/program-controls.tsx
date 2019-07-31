@@ -22,8 +22,8 @@ const _ProgramControls: React.FC<Props> = ({
     personalProgramDetails && personalProgramDetails.isOwnProgram;
 
   return (
-    <div className="program-details-description__controls">
-      <div className="program-details-description__col">
+    <div className="asset-details-description__controls">
+      <div className="asset-details-description__col">
         <InvestmentProgramControls
           programDescription={programDescription}
           canCloseProgram={canCloseProgram}
@@ -35,7 +35,7 @@ const _ProgramControls: React.FC<Props> = ({
       </div>
       {isOwnProgram &&
       (canMakeSignalProvider || programDescription.isSignalProgram) ? (
-        <div className="program-details-description__col program-details-description__col--small-size">
+        <div className="asset-details-description__col asset-details-description__col--small-size">
           <SignalProgramInfo programDescription={programDescription} />
         </div>
       ) : null}

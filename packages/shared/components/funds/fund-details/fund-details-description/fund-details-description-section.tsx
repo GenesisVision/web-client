@@ -35,7 +35,7 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
   FundControls,
   FundWithdrawContainer
 }) => (
-  <div className="program-details-description">
+  <div className="asset-details-description">
     <FundDetailsDescription
       description={fundDescription}
       AssetDetailsAvatar={() => (

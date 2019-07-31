@@ -67,9 +67,9 @@ const InvestmentProgramInfo: React.FC<
       : availableInvestmentBase;
   return (
     <>
-      <div className="program-details-description__statistic-container">
+      <div className="asset-details-description__statistic-container">
         {LevelCalculator && isOwnProgram && (
-          <div className="statistics-item program-details-description__level-calculator">
+          <div className="statistics-item asset-details-description__level-calculator">
             <LevelCalculator
               id={programDescription.id}
               currency={programDescription.currency}
@@ -86,7 +86,7 @@ const InvestmentProgramInfo: React.FC<
               labelText={t("program-details-page.description.avToInvest")}
             />
           }
-          className="program-details-description__short-statistic-item"
+          className="asset-details-description__short-statistic-item"
           accent
         >
           <NumberFormat
@@ -102,7 +102,7 @@ const InvestmentProgramInfo: React.FC<
               labelText={t("program-details-page.description.entryFee")}
             />
           }
-          className="program-details-description__short-statistic-item"
+          className="asset-details-description__short-statistic-item"
           accent
         >
           {entryFeeSelected !== entryFeeCurrent ? (
@@ -115,7 +115,7 @@ const InvestmentProgramInfo: React.FC<
                   suffix=" %)"
                 />
               }
-              className="program-details-description__short-statistic-hint"
+              className="asset-details-description__short-statistic-hint"
               vertical={VERTICAL_POPOVER_POS.BOTTOM}
               tooltipContent={t(
                 "program-details-page.description.entry-fee-levels"
@@ -130,7 +130,7 @@ const InvestmentProgramInfo: React.FC<
           )}
         </StatisticItem>
       </div>
-      <div className="program-details-description__statistic-container">
+      <div className="asset-details-description__statistic-container">
         <StatisticItem
           label={
             <TooltipLabel
@@ -138,7 +138,7 @@ const InvestmentProgramInfo: React.FC<
               labelText={t("program-details-page.description.successFee")}
             />
           }
-          className="program-details-description__short-statistic-item"
+          className="asset-details-description__short-statistic-item"
           accent
         >
           {renderFee(successFeeSelected, successFeeCurrent)}
@@ -151,7 +151,7 @@ const InvestmentProgramInfo: React.FC<
             />
           }
           condition={!!stopOutLevelCurrent && !!stopOutLevelSelected}
-          className="program-details-description__short-statistic-item"
+          className="asset-details-description__short-statistic-item"
           accent
         >
           {renderFee(stopOutLevelSelected, stopOutLevelCurrent)}

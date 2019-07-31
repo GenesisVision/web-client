@@ -11,8 +11,8 @@ const ProgramControls: React.FC<IProgramControlsProps> = ({
 }) => {
   const isAvailableFollowingTrades = programDescription.isSignalProgram;
   return (
-    <div className="program-details-description__controls">
-      <div className="program-details-description__col">
+    <div className="asset-details-description__controls">
+      <div className="asset-details-description__col">
         <InvestmentProgramControls
           programDescription={programDescription}
           isAuthenticated={isAuthenticated}
@@ -20,7 +20,7 @@ const ProgramControls: React.FC<IProgramControlsProps> = ({
         />
       </div>
       {isAvailableFollowingTrades && isAuthenticated ? (
-        <div className="program-details-description__col program-details-description__col--small-size">
+        <div className="asset-details-description__col asset-details-description__col--small-size">
           <SignalProviderControls
             programDescription={programDescription}
             isAuthenticated={isAuthenticated}

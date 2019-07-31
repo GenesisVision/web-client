@@ -54,7 +54,7 @@ class _SignalProviderControls extends React.PureComponent<
     return (
       <>
         <SignalProgramInfo programDescription={programDescription} />
-        <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
+        <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
           {programDescription.personalProgramDetails &&
           programDescription.personalProgramDetails.signalSubscription
             .hasActiveSubscription ? (
@@ -62,7 +62,7 @@ class _SignalProviderControls extends React.PureComponent<
               <GVButton
                 color="secondary"
                 variant="outlined"
-                className="program-details-description__invest-btn"
+                className="asset-details-description__invest-btn"
                 onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
               >
                 {t("program-details-page.description.unfollow")}
@@ -70,7 +70,7 @@ class _SignalProviderControls extends React.PureComponent<
             </>
           ) : (
             <GVButton
-              className="program-details-description__invest-btn"
+              className="asset-details-description__invest-btn"
               onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
               disabled={!isAuthenticated}
             >
