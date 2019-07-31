@@ -22,7 +22,7 @@ import FundProfitTooltip from "./fund-profit-tooltip";
 const FundProfitChart: React.FC<Props> = ({ equityChart }) => {
   if (equityChart.length === 0) return null;
   const equity = equityChart.map(x => ({
-    date: x.date.getTime(),
+    date: new Date(x.date).getTime(),
     value: formartChartMinValue(x.value)
   }));
 

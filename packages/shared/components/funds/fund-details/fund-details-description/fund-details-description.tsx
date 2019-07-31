@@ -1,56 +1,67 @@
-import { SocialLinkViewModel } from "gv-api-web";
+import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
+import {
+  composeFundNotificationsUrl,
+  composeManagerDetailsUrl
+} from "shared/utils/compose-url";
 
 const _FundDetailsDescription: React.FC<Props> = ({
   t,
-  assetDescription,
+  description,
   AssetDetailsAvatar,
   AssetDetailsExtraBlock
 }) => (
-  <div className="program-details-description__main">
-    <div className="program-details-description__avatar">
+  <div className="asset-details-description__main">
+    <div className="asset-details-description__avatar">
       <AssetDetailsAvatar />
     </div>
-    <div className="program-details-description__info">
-      <h1 className="title-small-padding">{assetDescription.title}</h1>
+    <div className="asset-details-description__info">
+      <h1 className="title-small-padding">{description.title}</h1>
       <Link
         to={{
-          pathname: composeManagerDetailsUrl(assetDescription.managerUrl),
-          state: `/ ${assetDescription.title}`
+          pathname: composeManagerDetailsUrl(description.manager.url),
+          state: `/ ${description.title}`
         }}
       >
         <GVButton
           variant="text"
-          className="program-details-description__author-btn"
+          className="asset-details-description__author-btn"
         >
-          {assetDescription.managerName}
+          {description.manager.username}
         </GVButton>
       </Link>
-      <SocialLinksBlock socialLinks={assetDescription.managerSocialLinks} />
+      <SocialLinksBlock socialLinks={description.manager.socialLinks} />
       <AssetDetailsExtraBlock />
-      <h4 className="program-details-description__subheading">
+      <h4 className="asset-details-description__subheading">
         {t("program-details-page.description.strategy")}
       </h4>
-      <div className="program-details-description__text">
-        {assetDescription.description}
+      <div className="asset-details-description__text">
+        {description.description}
       </div>
     </div>
-    <div className="program-details-description__settings">
+    <div className="asset-details-description__settings">
       <DetailsFavorite
-        id={assetDescription.id}
-        isFavorite={assetDescription.isFavorite}
+        id={description.id}
+        isFavorite={
+          description.personalFundDetails
+            ? description.personalFundDetails.isFavorite
+            : false
+        }
       />
       <DetailsNotification
-        title={assetDescription.title}
-        url={assetDescription.notificationsUrl}
-        hasNotifications={assetDescription.hasNotifications}
+        title={description.title}
+        url={composeFundNotificationsUrl(description.url)}
+        hasNotifications={
+          description.personalFundDetails
+            ? description.personalFundDetails.hasNotifications
+            : false
+        }
       />
     </div>
   </div>
@@ -59,23 +70,10 @@ const _FundDetailsDescription: React.FC<Props> = ({
 const FundDetailsDescription = translate()(React.memo(_FundDetailsDescription));
 export default FundDetailsDescription;
 
-type AssetDescription = {
-  id: string;
-  title: string;
-  description: string;
-  logo: string;
-  notificationsUrl: string;
-  isFavorite: boolean;
-  hasNotifications: boolean;
-  managerUrl: string;
-  managerName: string;
-  managerSocialLinks: SocialLinkViewModel[];
-};
-
 interface OwnProps {
   AssetDetailsAvatar: React.ComponentType<any>;
   AssetDetailsExtraBlock: React.ComponentType<any>;
-  assetDescription: AssetDescription;
+  description: FundDetailsFull;
 }
 
 interface Props extends OwnProps, WithTranslation {}

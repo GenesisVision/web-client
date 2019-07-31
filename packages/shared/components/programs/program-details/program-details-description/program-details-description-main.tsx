@@ -1,28 +1,27 @@
-import "./program-details-description.scss";
+import "shared/components/details/details-description-section/details-description/details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import DetailsSettingControl from "shared/components/details/details-description-section/details-description/controls/details-setting-control";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS,
-  anchorElType
+  VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import TagItem from "shared/components/tags/tag-item/tag-item";
+import useAnchor from "shared/hooks/anchor.hook";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl,
   composeProgramSettingsUrl
 } from "shared/utils/compose-url";
 
-import useAnchor from "../../../../hooks/anchor.hook";
 import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
 
@@ -34,8 +33,8 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const personalDetails = programDescription.personalProgramDetails;
   return (
-    <div className="program-details-description__main">
-      <div className="program-details-description__avatar">
+    <div className="asset-details-description__main">
+      <div className="asset-details-description__avatar">
         <AssetAvatar
           url={programDescription.logo}
           level={programDescription.level}
@@ -61,7 +60,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
           />
         </Popover>
       </div>
-      <div className="program-details-description__info">
+      <div className="asset-details-description__info">
         <h1 className="title-small-padding">{programDescription.title}</h1>
         <Link
           to={{
@@ -71,12 +70,12 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
         >
           <GVButton
             variant="text"
-            className="program-details-description__author-btn"
+            className="asset-details-description__author-btn"
           >
             {programDescription.manager.username}
           </GVButton>
         </Link>
-        <div className="program-details-description__tag">
+        <div className="asset-details-description__tag">
           {programDescription.tags.map((tag, idx) => (
             <TagItem name={tag.name} color={tag.color} key={idx} />
           ))}
@@ -84,14 +83,14 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
         <SocialLinksBlock
           socialLinks={programDescription.manager.socialLinks}
         />
-        <h4 className="program-details-description__subheading">
+        <h4 className="asset-details-description__subheading">
           {t("program-details-page.description.strategy")}
         </h4>
-        <div className="program-details-description__text">
+        <div className="asset-details-description__text">
           {programDescription.description}
         </div>
       </div>
-      <div className="program-details-description__settings">
+      <div className="asset-details-description__settings">
         <DetailsFavorite
           id={programDescription.id}
           isFavorite={personalDetails && personalDetails.isFavorite}

@@ -1,5 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
+import { ProgramProfitChart } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -16,16 +17,14 @@ import ProgramDetailsStatisticsElements from "./program-details-statistics-eleme
 const _ProgramDetailsStatistics: React.FC<Props> = ({
   status,
   t,
-  statistic,
   profitChart,
   period
 }) => (
   <Surface className="surface--horizontal-paddings details-statistics">
     <h3>{t("program-details-page.statistics.heading")}</h3>
     <ProgramDetailsStatisticsElements
-      condition={!!statistic && !!profitChart}
+      condition={!!profitChart}
       loader={<DetailsStatisticsLoader />}
-      statistic={statistic!}
       profitChart={profitChart!}
       period={period}
       status={status}
@@ -35,8 +34,7 @@ const _ProgramDetailsStatistics: React.FC<Props> = ({
 
 interface Props extends WithTranslation {
   status: STATUS;
-  statistic: ProgramDetailsStatistic;
-  profitChart: ProgramDetailsProfitChart;
+  profitChart: ProgramProfitChart;
   period: ChartDefaultPeriod;
 }
 

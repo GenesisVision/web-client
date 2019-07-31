@@ -13,7 +13,7 @@ const SignalProgramInfo: React.FC<
   WithTranslation & ISignalProgramInfoProps
 > = ({ t, programDescription }) => {
   return (
-    <div className="program-details-description__statistic-container">
+    <div className="asset-details-description__statistic-container">
       <StatisticItem
         label={
           <TooltipLabel
@@ -23,7 +23,7 @@ const SignalProgramInfo: React.FC<
             labelText={t("program-details-page.description.successFee")}
           />
         }
-        className="program-details-description__short-statistic-item"
+        className="asset-details-description__short-statistic-item"
         accent
       >
         <NumberFormat
@@ -39,7 +39,7 @@ const SignalProgramInfo: React.FC<
             labelText={t("program-details-page.description.volume-fee")}
           />
         }
-        className="program-details-description__short-statistic-item"
+        className="asset-details-description__short-statistic-item"
         accent
       >
         <NumberFormat

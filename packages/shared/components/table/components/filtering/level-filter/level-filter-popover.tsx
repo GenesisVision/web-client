@@ -1,64 +1,55 @@
 import { Range } from "rc-slider";
-import * as React from "react";
+import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 
-class _LevelFilterPopover extends React.PureComponent<Props, State> {
-  state = {
-    value: this.props.value
-  };
-
-  marks = new Array(7).fill(0).reduce((prev, curr, idx) => {
+const _LevelFilterPopover: React.FC<Props> = ({
+  t,
+  cancel,
+  value: valueProp,
+  changeFilter
+}) => {
+  const [value, setValue] = useState<number[]>(valueProp);
+  const marks = new Array(7).fill(0).reduce((prev, curr, idx) => {
     prev[idx + 1] = idx + 1;
     return prev;
   }, {});
-
-  handleChange = (e: number[]) => {
-    this.setState({ value: e });
-  };
-  handleSubmit = () => {
-    if (this.props.changeFilter) {
-      this.props.changeFilter(this.state.value);
-    }
-  };
-
-  mapValueToNumber = (values: Array<number | string>): number[] =>
-    values.map(x => (typeof x === "number" ? x : parseInt(x)));
-
-  render() {
-    const { t, cancel } = this.props;
-    return (
-      <div className="level-filter">
-        <Range
-          dots
-          min={1}
-          max={7}
-          marks={this.marks}
-          value={this.mapValueToNumber(this.state.value)}
-          onChange={this.handleChange}
-          pushable={false}
-        />
-        <div className="level-filter__btns">
-          <GVButton
-            className="level-filter__btn"
-            variant="text"
-            onClick={this.handleSubmit}
-          >
-            {t("buttons.apply")}
-          </GVButton>
-          <GVButton
-            className="level-filter__btn"
-            variant="text"
-            color="secondary"
-            onClick={cancel}
-          >
-            {t("buttons.cancel")}
-          </GVButton>
-        </div>
+  const handleChange = useCallback((e: number[]) => setValue(e), []);
+  const handleSubmit = useCallback(() => changeFilter && changeFilter(value), [
+    value,
+    changeFilter
+  ]);
+  return (
+    <div className="level-filter">
+      <Range
+        dots
+        min={1}
+        max={7}
+        marks={marks}
+        value={value}
+        onChange={handleChange}
+        pushable={false}
+      />
+      <div className="level-filter__btns">
+        <GVButton
+          className="level-filter__btn"
+          variant="text"
+          onClick={handleSubmit}
+        >
+          {t("buttons.apply")}
+        </GVButton>
+        <GVButton
+          className="level-filter__btn"
+          variant="text"
+          color="secondary"
+          onClick={cancel}
+        >
+          {t("buttons.cancel")}
+        </GVButton>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 interface Props extends WithTranslation {
   value: number[];
@@ -66,9 +57,5 @@ interface Props extends WithTranslation {
   changeFilter?: (value: number[]) => void;
 }
 
-interface State {
-  value: number[];
-}
-
-const LevelFilterPopover = translate()(_LevelFilterPopover);
+const LevelFilterPopover = translate()(React.memo(_LevelFilterPopover));
 export default LevelFilterPopover;
