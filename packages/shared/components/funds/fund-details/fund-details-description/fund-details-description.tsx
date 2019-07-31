@@ -1,10 +1,10 @@
 import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import {
   composeFundNotificationsUrl,
