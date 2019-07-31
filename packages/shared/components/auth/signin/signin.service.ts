@@ -44,7 +44,7 @@ export const login: LoginFuncType = (method, fromPath, type) => (
   )
     .then((response: { value: string }) => {
       authService.storeToken(response.value);
-      dispatch(authActions.updateTokenAction());
+      dispatch(authActions.updateTokenAction(true));
       if (type) dispatch(clearTwoFactorData());
       Router.push(from);
     })
@@ -78,6 +78,7 @@ export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => 
 export const logout: logoutFuncType = () => dispatch => {
   authService.removeToken();
   dispatch(authActions.logoutAction());
+  dispatch(authActions.updateTokenAction(false));
   dispatch(platformActions.fetchPlatformSettings());
   dispatch(windowResizeAction());
   Router.push(HOME_ROUTE);

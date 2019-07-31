@@ -11,7 +11,6 @@ const useRouteFilters = (url: string, defaultFilter: any): any => {
   const { asPath, pathname, push } = useRouter();
   const filtering = qs.parse(asPath.slice(pathname.length + 1));
   const updateFilter = (filter: any) => {
-    console.info(filter);
     const nf = {
       ...filtering,
       [filter.name]: filter.value

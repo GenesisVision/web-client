@@ -2,8 +2,6 @@ import Router from "next/router";
 import { Action } from "redux";
 import { AuthState } from "shared/reducers/auth-reducer";
 import { HOME_ROUTE } from "shared/routes/app.routes";
-import authService from "shared/services/auth-service";
-// import history from "shared/utils/history";
 import { ActionType } from "shared/utils/types";
 
 export const UPDATE_TOKEN = "UPDATE_TOKEN";
@@ -14,9 +12,11 @@ const alreadyAuthenticated = () => {
   Router.push(HOME_ROUTE);
 };
 
-const updateTokenAction = (): UpdateTokenActionType => ({
+const updateTokenAction = (
+  isAuthenticated: boolean
+): UpdateTokenActionType => ({
   type: UPDATE_TOKEN,
-  payload: { isAuthenticated: authService.isAuthenticated() }
+  payload: { isAuthenticated }
 });
 
 const logoutAction = (): Action => ({

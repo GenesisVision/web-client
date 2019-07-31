@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { FundsList, ProgramTag, ProgramsList } from "gv-api-web";
+import { FundsList, ProgramsList, ProgramTag } from "gv-api-web";
 import { Location } from "history";
 import programs from "investor-web-portal/pages/programs";
 import { NextPageContext } from "next";
@@ -7,10 +7,10 @@ import { NextRouter, useRouter } from "next/router";
 import qs from "qs";
 import { useContext } from "react";
 import * as React from "react";
-import { MergeProps, connect } from "react-redux";
+import { connect, MergeProps } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import { DispatchProps } from "shared/components/asset-status/asset-status-requests";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import {
@@ -152,8 +152,6 @@ const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
       }
     });
   };
-
-  console.info("redner");
 
   return (
     <FundsTable
