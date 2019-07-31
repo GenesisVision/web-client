@@ -2,9 +2,9 @@ import "./details-description-control.scss";
 
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import { RingIcon } from "shared/components/icon/ring-icon";
+import Link from "shared/components/link/link";
 import isAuthenticated from "shared/decorators/is-authenticated";
 
 import DetailsDescriptionControl from "./details-description-control";

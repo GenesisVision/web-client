@@ -2,8 +2,8 @@ import "./settings.scss";
 
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import ProfileLayout from "shared/components/profile/profile-layout";
 import { PASSWORD_ROUTE } from "shared/components/profile/profile.constants";
 import LogoutButtonContainer from "shared/components/profile/settings/logout-button/logout-button-container";

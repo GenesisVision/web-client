@@ -1,8 +1,8 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 

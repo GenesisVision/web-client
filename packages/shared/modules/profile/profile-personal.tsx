@@ -1,9 +1,9 @@
 import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
 import GVTextField from "shared/components/gv-text-field";
+import Link from "shared/components/link/link";
 import { PROFILE_EDIT_ROUTE } from "shared/components/profile/profile.constants";
 
 export const ProfileField: React.FC<IProfileFieldProps> = React.memo(

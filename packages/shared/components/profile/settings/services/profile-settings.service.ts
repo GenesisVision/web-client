@@ -47,7 +47,7 @@ export const logoutFromDevices = () => (dispatch: Dispatch) => {
     .v10AuthTokenDevicesLogoutPost(authService.getAuthArg())
     .then(response => {
       authService.storeToken(response);
-      dispatch(authActions.updateTokenAction());
+      dispatch(authActions.updateTokenAction(true));
       dispatch(
         alertMessageActions.success(
           "auth.logout-from-another-devices.success-message",

@@ -1,7 +1,9 @@
 import { AppContextType, AppType } from "next-server/dist/lib/utils";
 import React, { Component } from "react";
 import { Store } from "redux";
+import authActions from "shared/actions/auth-actions";
 import { RootState } from "shared/reducers/root-reducer";
+import authService from "shared/services/auth-service";
 import {
   InitializeStoreType,
   NextPageWithReduxContext
@@ -33,6 +35,11 @@ const withReduxStore = (initializeStore: InitializeStoreType) => (
       const componentProps =
         WrappedComponent.getInitialProps &&
         (await WrappedComponent.getInitialProps(ctx));
+
+      const token = authService.getAuthArg(ctx.ctx);
+      if (token) {
+        reduxStore.dispatch(authActions.updateTokenAction(true));
+      }
 
       return {
         initialReduxState: reduxStore.getState(),

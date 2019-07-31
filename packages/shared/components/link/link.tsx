@@ -3,15 +3,18 @@ import React, { useCallback } from "react";
 
 import { normalizeTo, pushHistoryState } from "./link.helper";
 
-const Link: React.FC<Props> = ({ to, className, children }) => {
+const Link: React.FC<Props> = ({ to, className, onClick, children }) => {
   const normalizedTo = normalizeTo(to);
   const handleClick = useCallback(
-    () => {
+    (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      if (onClick) {
+        onClick(e);
+      }
       if (normalizedTo.state) {
         pushHistoryState(normalizedTo);
       }
     },
-    [normalizedTo]
+    [normalizedTo, onClick]
   );
 
   return (
@@ -28,6 +31,7 @@ export default Link;
 interface Props {
   to: ToType | string;
   className?: string;
+  onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
 }
 
 export type ToType = {
