@@ -1,4 +1,4 @@
-import { FundsList, ProgramsList } from "gv-api-web";
+import { FundsList } from "gv-api-web";
 import { NextPage, NextPageContext } from "next";
 import FundsPage from "pages/funds/funds/funds.page";
 import React from "react";

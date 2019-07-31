@@ -30,11 +30,11 @@ const ProgramProfitChart: React.FC<Props> = ({
   if (equityChart.length === 0 || pnlChart.length === 0 || !currency)
     return null;
   const equity = equityChart.map(x => ({
-    date: x.date.getTime(),
+    date: new Date(x.date).getTime(),
     value: formartChartMinValue(x.value)
   }));
   const pnl = pnlChart.map((x: any) => ({
-    date: x.date.getTime(),
+    date: new Date(x.date).getTime(),
     value: formartChartMinValue(x.value)
   }));
   const equityValues = equity.map(x => x.value);

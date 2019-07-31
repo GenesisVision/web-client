@@ -14,8 +14,8 @@ const _CloseProgramPeriod: React.FC<Props> = ({ id, t, onApply, canClose }) => {
   ] = useIsOpen();
   return (
     <>
-      <div className="program-edit__block-wrapper">
-        <p className="program-edit__text">
+      <div className="program-settings__block-wrapper">
+        <p className="program-settings__text">
           {t("manager.program-settings.period-and-closing.text-period")}
         </p>
         <GVButton

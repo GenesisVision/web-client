@@ -3,36 +3,22 @@ import ProgramFollowContainer from "modules/program-follow/program-follow-contai
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { connect, ResolveThunks } from "react-redux";
 import {
-  IProgramDetailContext,
-  ProgramDetailContext
-} from "shared/components/details/helpers/details-context";
+  ActionCreatorsMapObject,
+  bindActionCreators,
+  compose,
+  Dispatch
+} from "redux";
 import GVButton from "shared/components/gv-button";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
+import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 
-enum SIGNAL_POPUP {
-  FOLLOW = "FOLLOW",
-  UNFOLLOW = "UNFOLLOW"
-}
-
-interface ISignalProviderControlOwnProps {
-  isAuthenticated: boolean;
-  redirectToLogin(): void;
-  programDescription: ProgramDetailsFull;
-}
-
-interface ISignalProviderControlState {
-  popups: { [k: string]: boolean };
-}
-
-type SignalProviderControlsProps = ISignalProviderControlOwnProps &
-  WithTranslation;
-
-class SignalProviderControls extends React.PureComponent<
-  SignalProviderControlsProps,
+class _SignalProviderControls extends React.PureComponent<
+  Props,
   ISignalProviderControlState
 > {
-  constructor(props: SignalProviderControlsProps) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       popups: Object.keys(SIGNAL_POPUP).reduce((curr: any, next: any) => {
@@ -57,17 +43,18 @@ class SignalProviderControls extends React.PureComponent<
     this.setState({ popups });
   };
 
-  applyChanges = (updateDescription: any) => () => {
-    updateDescription();
-  };
-
   render() {
-    const { t, programDescription, isAuthenticated } = this.props;
+    const {
+      t,
+      programDescription,
+      isAuthenticated,
+      service: { dispatchProgramDescription }
+    } = this.props;
     const { popups } = this.state;
     return (
       <>
         <SignalProgramInfo programDescription={programDescription} />
-        <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
+        <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
           {programDescription.personalProgramDetails &&
           programDescription.personalProgramDetails.signalSubscription
             .hasActiveSubscription ? (
@@ -75,7 +62,7 @@ class SignalProviderControls extends React.PureComponent<
               <GVButton
                 color="secondary"
                 variant="outlined"
-                className="program-details-description__invest-btn"
+                className="asset-details-description__invest-btn"
                 onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
               >
                 {t("program-details-page.description.unfollow")}
@@ -83,7 +70,7 @@ class SignalProviderControls extends React.PureComponent<
             </>
           ) : (
             <GVButton
-              className="program-details-description__invest-btn"
+              className="asset-details-description__invest-btn"
               onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
               disabled={!isAuthenticated}
             >
@@ -91,31 +78,65 @@ class SignalProviderControls extends React.PureComponent<
             </GVButton>
           )}
         </div>
-        <ProgramDetailContext.Consumer>
-          {({ updateDescription }: IProgramDetailContext) => (
-            <>
-              <ProgramFollowContainer
-                id={programDescription.id}
-                open={popups[SIGNAL_POPUP.FOLLOW]}
-                currency={programDescription.currency}
-                signalSubscription={
-                  programDescription.personalProgramDetails.signalSubscription
-                }
-                onClose={this.closePopup(SIGNAL_POPUP.FOLLOW)}
-                onApply={this.applyChanges(updateDescription)}
-              />
-              <ProgramUnfollowContainer
-                open={popups[SIGNAL_POPUP.UNFOLLOW]}
-                id={programDescription.id}
-                onClose={this.closePopup(SIGNAL_POPUP.UNFOLLOW)}
-                onApply={this.applyChanges(updateDescription)}
-              />
-            </>
-          )}
-        </ProgramDetailContext.Consumer>
+        {/*<ProgramFollowContainer
+          id={programDescription.id}
+          open={popups[SIGNAL_POPUP.FOLLOW]}
+          currency={programDescription.currency}
+          signalSubscription={
+            programDescription.personalProgramDetails.signalSubscription
+          }
+          onClose={this.closePopup(SIGNAL_POPUP.FOLLOW)}
+          onApply={dispatchProgramDescription}
+        />*/}
+        <ProgramUnfollowContainer
+          open={popups[SIGNAL_POPUP.UNFOLLOW]}
+          id={programDescription.id}
+          onClose={this.closePopup(SIGNAL_POPUP.UNFOLLOW)}
+          onApply={dispatchProgramDescription}
+        />
       </>
     );
   }
 }
 
-export default translate()(SignalProviderControls);
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      dispatchProgramDescription
+    },
+    dispatch
+  )
+});
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  dispatchProgramDescription: typeof dispatchProgramDescription;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+enum SIGNAL_POPUP {
+  FOLLOW = "FOLLOW",
+  UNFOLLOW = "UNFOLLOW"
+}
+
+interface OwnProps {
+  isAuthenticated: boolean;
+  redirectToLogin(): void;
+  programDescription: ProgramDetailsFull;
+}
+
+interface ISignalProviderControlState {
+  popups: { [k: string]: boolean };
+}
+
+interface Props extends OwnProps, WithTranslation, DispatchProps {}
+
+const SignalProviderControls = compose<React.ComponentType<OwnProps>>(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  translate()
+)(_SignalProviderControls);
+export default SignalProviderControls;

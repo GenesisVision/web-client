@@ -7,8 +7,15 @@ import ReallocateContainer from "modules/reallocate/reallocate-container";
 import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
+import { connect, ResolveThunks } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  bindActionCreators,
+  compose,
+  Dispatch
+} from "redux";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
+import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
 import GVButton from "shared/components/gv-button";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
@@ -23,7 +30,7 @@ enum INVESTMENT_POPUP {
   INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
-class InvestmentFundControls extends React.PureComponent<Props, State> {
+class _InvestmentFundControls extends React.PureComponent<Props, State> {
   state = {
     popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
       curr[INVESTMENT_POPUP[next]] = false;
@@ -47,7 +54,12 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
 
   render() {
     const { popups } = this.state;
-    const { t, fundDescription, isAuthenticated } = this.props;
+    const {
+      t,
+      fundDescription,
+      isAuthenticated,
+      service: { dispatchFundDescription }
+    } = this.props;
     const { personalFundDetails } = fundDescription;
     const canCloseProgram =
       personalFundDetails && personalFundDetails.canCloseProgram;
@@ -56,7 +68,7 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
     const canReallocate =
       personalFundDetails && personalFundDetails.canReallocate;
     const possibleReallocationTime =
-      personalFundDetails && personalFundDetails.possibleReallocationTime;
+      personalFundDetails && personalFundDetails.nextReallocationPercents;
 
     const composeEditInfo: IAssetEditInfo = {
       stopOutLevel: 0,
@@ -139,39 +151,33 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
             </GVButton>
           )}
         </div>
-        <ProgramDetailContext.Consumer>
-          {({ updateDescription }) => (
-            <>
-              <FundDepositContainer
-                condition={isAuthenticated}
-                open={popups[INVESTMENT_POPUP.INVEST]}
-                id={fundDescription.id}
-                onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-                onApply={this.applyChanges(updateDescription)}
-              />
-              <CloseFundContainer
-                open={popups[INVESTMENT_POPUP.CLOSE]}
-                onClose={this.closePopup(INVESTMENT_POPUP.CLOSE)}
-                onApply={this.applyChanges(updateDescription)}
-                id={fundDescription.id}
-              />
-              <AssetEditContainer
-                open={popups[INVESTMENT_POPUP.ASSET_EDIT]}
-                info={composeEditInfo}
-                onClose={this.closePopup(INVESTMENT_POPUP.ASSET_EDIT)}
-                onApply={this.applyChanges(updateDescription)}
-                type={ASSET.FUND}
-              />
-              <ReallocateContainer
-                id={fundDescription.id}
-                open={popups[INVESTMENT_POPUP.REALLOCATE]}
-                onClose={this.closePopup(INVESTMENT_POPUP.REALLOCATE)}
-                onApply={this.applyChanges(updateDescription)}
-                fundAssets={fundDescription.currentAssets}
-              />
-            </>
-          )}
-        </ProgramDetailContext.Consumer>
+        <FundDepositContainer
+          condition={isAuthenticated}
+          open={popups[INVESTMENT_POPUP.INVEST]}
+          id={fundDescription.id}
+          onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
+          onApply={dispatchFundDescription}
+        />
+        <CloseFundContainer
+          open={popups[INVESTMENT_POPUP.CLOSE]}
+          onClose={this.closePopup(INVESTMENT_POPUP.CLOSE)}
+          onApply={dispatchFundDescription}
+          id={fundDescription.id}
+        />
+        <AssetEditContainer
+          open={popups[INVESTMENT_POPUP.ASSET_EDIT]}
+          info={composeEditInfo}
+          onClose={this.closePopup(INVESTMENT_POPUP.ASSET_EDIT)}
+          onApply={dispatchFundDescription}
+          type={ASSET.FUND}
+        />
+        <ReallocateContainer
+          id={fundDescription.id}
+          open={popups[INVESTMENT_POPUP.REALLOCATE]}
+          onClose={this.closePopup(INVESTMENT_POPUP.REALLOCATE)}
+          onApply={dispatchFundDescription}
+          fundAssets={fundDescription.currentAssets}
+        />
         <InvestmentUnauthPopup
           message={message}
           title={fundDescription.title}
@@ -184,7 +190,21 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
   }
 }
 
-export default translate()(InvestmentFundControls);
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      dispatchFundDescription
+    },
+    dispatch
+  )
+});
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  dispatchFundDescription: typeof dispatchFundDescription;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
 
 interface OwnProps {
   isAuthenticated: boolean;
@@ -196,4 +216,13 @@ interface State {
   popups: { [k: string]: boolean };
 }
 
-interface Props extends WithTranslation, OwnProps {}
+interface Props extends WithTranslation, OwnProps, DispatchProps {}
+
+const InvestmentFundControls = compose<React.ComponentType<OwnProps>>(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  translate()
+)(_InvestmentFundControls);
+export default InvestmentFundControls;

@@ -2,19 +2,24 @@ import { ProgramDetailsFull } from "gv-api-web";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { connect, ResolveThunks } from "react-redux";
 import {
-  IProgramDetailContext,
-  ProgramDetailContext
-} from "shared/components/details/helpers/details-context";
+  ActionCreatorsMapObject,
+  bindActionCreators,
+  compose,
+  Dispatch
+} from "redux";
 import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
+import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 
 import NotifyButton from "./notify-button";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
+  service: { dispatchProgramDescription },
   isAuthenticated,
   t,
   programDescription
@@ -38,13 +43,6 @@ const _InvestmentProgramControls: React.FC<Props> = ({
     [isAuthenticated, setOpenInvestmentPopup, setOpenUnAuthInvestmentPopup]
   );
 
-  const applyInvestmentChanges = useCallback(
-    (updateDescription: () => void) => () => {
-      updateDescription();
-    },
-    []
-  );
-
   const notificationId = programDescription.personalProgramDetails
     ? programDescription.personalProgramDetails.notificationAvailableToInvestId
     : undefined;
@@ -55,7 +53,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   return (
     <>
       <InvestmentProgramInfo programDescription={programDescription} />
-      <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
+      <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         {programDescription.availableInvestmentBase === 0 && isAuthenticated ? (
           <NotifyButton
             canInvest={programDescription.personalProgramDetails.canInvest}
@@ -65,7 +63,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
           />
         ) : (
           <GVButton
-            className="program-details-description__invest-btn"
+            className="asset-details-description__invest-btn"
             onClick={openInvestmentPopup}
             disabled={isDisabledInvestButton}
           >
@@ -73,18 +71,14 @@ const _InvestmentProgramControls: React.FC<Props> = ({
           </GVButton>
         )}
       </div>
-      <ProgramDetailContext.Consumer>
-        {({ updateDescription }: IProgramDetailContext) => (
-          <ProgramDeposit
-            condition={isAuthenticated}
-            currency={programDescription.currency}
-            open={isOpenInvestmentPopup}
-            id={programDescription.id}
-            onClose={setCloseInvestmentPopup}
-            onApply={applyInvestmentChanges(updateDescription)}
-          />
-        )}
-      </ProgramDetailContext.Consumer>
+      <ProgramDeposit
+        condition={isAuthenticated}
+        currency={programDescription.currency}
+        open={isOpenInvestmentPopup}
+        id={programDescription.id}
+        onClose={setCloseInvestmentPopup}
+        onApply={dispatchProgramDescription}
+      />
       <InvestmentUnauthPopup
         message={t("program-details-page.description.unauth-popup")}
         asset={ASSET.PROGRAM}
@@ -98,10 +92,21 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   );
 };
 
-const InvestmentProgramControls = translate()(
-  React.memo(_InvestmentProgramControls)
-);
-export default InvestmentProgramControls;
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      dispatchProgramDescription
+    },
+    dispatch
+  )
+});
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  dispatchProgramDescription: typeof dispatchProgramDescription;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
 
 interface OwnProps {
   isAuthenticated: boolean;
@@ -109,4 +114,14 @@ interface OwnProps {
   programDescription: ProgramDetailsFull;
 }
 
-interface Props extends WithTranslation, OwnProps {}
+interface Props extends WithTranslation, OwnProps, DispatchProps {}
+
+const InvestmentProgramControls = compose<React.ComponentType<OwnProps>>(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  translate(),
+  React.memo
+)(_InvestmentProgramControls);
+export default InvestmentProgramControls;

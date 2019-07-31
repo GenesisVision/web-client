@@ -2,8 +2,12 @@ import * as uuid from "uuid";
 
 import { ToType } from "./link";
 
-export const pushState = (state: any) => {
-  window.history.pushState(state, uuid.v4());
+export const pushHistoryState = (to: ToType) => {
+  window.history.pushState(
+    { options: { from: to.state } },
+    uuid.v4(),
+    to.as || to.pathname
+  );
 };
 
 export const normalizeTo = (to: ToType | string): ToType => {

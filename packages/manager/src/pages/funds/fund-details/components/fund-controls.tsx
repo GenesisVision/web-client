@@ -9,8 +9,8 @@ const _FundControls: React.FC<IFundControlsProps & WithTranslation> = ({
   isAuthenticated,
   redirectToLogin
 }) => (
-  <div className="program-details-description__controls">
-    <div className="program-details-description__col">
+  <div className="asset-details-description__controls">
+    <div className="asset-details-description__col">
       <InvestmentFundControls
         fundDescription={fundDescription}
         isAuthenticated={isAuthenticated}

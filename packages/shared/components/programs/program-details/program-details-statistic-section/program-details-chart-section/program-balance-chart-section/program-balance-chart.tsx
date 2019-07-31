@@ -22,7 +22,7 @@ const ProgramBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
       profitNegative: 0,
       managerFunds: x.managerFunds,
       investorsFunds: x.investorsFunds,
-      date: x.date.getTime()
+      date: new Date(x.date).getTime()
     };
     if (x.profit > 0) {
       dot.profit = x.profit;

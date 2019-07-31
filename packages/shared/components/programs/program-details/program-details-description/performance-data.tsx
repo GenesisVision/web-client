@@ -1,23 +1,25 @@
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { compose } from "redux";
 import Leverage from "shared/components/leverage/leverage";
 import PieContainerSmall from "shared/components/pie-container/pie-container-small";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import filesService from "shared/services/file-service";
 
-const _PerfomanceData: React.FC<Props> = ({
+const _PerformanceData: React.FC<Props> = ({
   t,
   programDescription,
   levelsParameters
 }) => (
-  <div className="program-details-description__perfomance-data">
+  <div className="asset-details-description__performance-data">
     <StatisticItem label={t("program-details-page.description.broker")}>
       <img
-        className={"program-details-description__broker"}
+        className={"asset-details-description__broker"}
         src={filesService.getFileUrl(programDescription.brokerDetails.logo)}
       />
     </StatisticItem>
@@ -30,7 +32,7 @@ const _PerfomanceData: React.FC<Props> = ({
     {programDescription.periodStarts && (
       <StatisticItem label={t("program-details-page.description.period")}>
         <ProgramPeriodPie
-          condition={status !== STATUS.CLOSED}
+          condition={programDescription.status !== STATUS.CLOSED}
           loader={t("program-period.program-closed")}
           start={programDescription.periodStarts}
           end={programDescription.periodEnds}
@@ -96,5 +98,11 @@ interface OwnProps {
   programDescription: ProgramDetailsFull;
 }
 
-const PerfomanceData = translate()(React.memo(_PerfomanceData));
-export default PerfomanceData;
+const PerformanceData = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
+  translate(),
+  React.memo
+)(_PerformanceData);
+export default PerformanceData;

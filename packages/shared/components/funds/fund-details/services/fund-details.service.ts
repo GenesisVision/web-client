@@ -1,72 +1,33 @@
-import {
-  FundAssetsListInfo,
-  FundDetailsFull,
-  ReallocationsViewModel
-} from "gv-api-web";
+import { FundAssetsListInfo, ReallocationsViewModel } from "gv-api-web";
 import { Dispatch } from "redux";
-import {
-  ChartDefaultPeriod,
-  getDefaultPeriod
-} from "shared/components/chart/chart-period/chart-period.helpers";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import {
-  FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE
-} from "shared/routes/funds.routes";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import getParams from "shared/utils/get-params";
-import { TGetState } from "shared/utils/types";
+import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
-import { FundStatisticResult } from "./fund-details.types";
+import {
+  fetchFundBalanceChartAction,
+  fetchFundDescriptionAction,
+  fetchFundProfitChartAction,
+  setFundIdAction
+} from "../actions/fund-details.actions";
 
-export const getFundDescription = () => (
-  dispatch: Dispatch,
+export const dispatchFundDescription = () => (
+  dispatch: MiddlewareDispatch,
   getState: TGetState
-): Promise<FundDetailsFull> => {
-  const authorization = authService.getAuthArg();
-  const { router } = getState();
-
-  const programSlugUrl = getParams(
-    router.location.pathname,
-    FUND_DETAILS_ROUTE
-  )[FUNDS_SLUG_URL_PARAM_NAME];
-
-  return fundsApi.v10FundsByIdGet(programSlugUrl, {
-    authorization
-  });
+) => {
+  const {
+    fundDetails: { id }
+  } = getState();
+  return dispatch(fetchFundDescriptionAction(id, authService.getAuthArg()));
 };
 
-export const getFundStatistic = (
-  fundId: string,
-  period: ChartDefaultPeriod = getDefaultPeriod()
-): Promise<FundStatisticResult> => {
-  const chartFilter = {
-    dateFrom: period.start,
-    dateTo: period.end,
-    maxPointCount: 100
-  };
-  return Promise.all([
-    fundsApi.v10FundsByIdChartsProfitGet(fundId, chartFilter),
-    fundsApi.v10FundsByIdChartsBalanceGet(fundId, chartFilter)
-  ]).then(([profitChart, balanceChart]) => {
-    const statistic = {
-      calmarRatio: profitChart.calmarRatio,
-      profitChangePercent: profitChart.profitChangePercent,
-      rebalances: profitChart.rebalances,
-      balance: profitChart.balance,
-      investors: profitChart.investors,
-      sharpeRatio: profitChart.sharpeRatio,
-      sortinoRatio: profitChart.sortinoRatio,
-      maxDrawdown: profitChart.maxDrawdown,
-      creationDate: profitChart.creationDate
-    };
-    return { statistic, profitChart, balanceChart };
-  });
-};
+export const dispatchFundId = (id: string) => (dispatch: MiddlewareDispatch) =>
+  dispatch(setFundIdAction(id));
 
 export const fetchFundStructure = (
   fundId: string
@@ -105,4 +66,19 @@ export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
       reallocateCount: reallocateData.total
     })
   );
+};
+
+export const getProfitChart = ({ id, period }: TGetChartArgs) => (
+  dispatch: Dispatch
+) => dispatch(fetchFundProfitChartAction(id, period));
+
+export const getBalanceChart = ({ id, period }: TGetChartArgs) => (
+  dispatch: Dispatch
+) => {
+  dispatch(fetchFundBalanceChartAction(id, period));
+};
+
+type TGetChartArgs = {
+  id: string;
+  period?: ChartDefaultPeriod;
 };

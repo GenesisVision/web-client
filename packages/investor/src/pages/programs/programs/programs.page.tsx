@@ -1,7 +1,6 @@
 import { ProgramsList } from "gv-api-web";
 import { NextComponentType } from "next";
-import * as React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "shared/components/facet-cards/faset-cards-container";

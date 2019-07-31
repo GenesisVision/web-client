@@ -34,8 +34,6 @@ class CreateProgramSettingsSection extends React.PureComponent<
   }
 
   componentDidUpdate(prevProps: OwnProps) {
-    if (this.props.wallets === prevProps.wallets) return;
-
     const wallet = this.props.wallets.find(x => x.id === this.state.wallet.id)!;
     this.setState({ wallet });
     if (this.state.programCurrency) {
@@ -100,13 +98,13 @@ class CreateProgramSettingsSection extends React.PureComponent<
         programsInfo={this.props.programsInfo}
         wallets={this.props.wallets}
         wallet={wallet}
-        changeWallet={this.handleWalletChange}
         leverage={leverage}
-        changeLeverage={this.handleLeverageChange}
         programCurrency={programCurrency}
-        changeCurrency={this.handleCurrencyChange}
         rate={rate}
         accountType={accountType}
+        changeLeverage={this.handleLeverageChange}
+        changeWallet={this.handleWalletChange}
+        changeCurrency={this.handleCurrencyChange}
         changeAccountType={this.handleAccountTypeChange}
       />
     );

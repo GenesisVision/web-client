@@ -25,8 +25,6 @@ class CreateFundSettingsSection extends React.PureComponent<
   }
 
   componentDidUpdate(prevProps: OwnProps) {
-    if (this.props.wallets === prevProps.wallets) return;
-
     const wallet = this.props.wallets.find(x => x.id === this.state.wallet.id)!;
     this.setState({ wallet });
     this.updateRate(wallet.currency, FUND_CURRENCY);

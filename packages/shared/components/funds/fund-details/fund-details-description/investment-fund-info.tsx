@@ -14,7 +14,7 @@ const InvestmentFundInfo: React.FC<
   IInvestmentFundInfoProps & WithTranslation
 > = ({ t, fundDescription }) => {
   return (
-    <div className="program-details-description__statistic-container">
+    <div className="asset-details-description__statistic-container">
       <StatisticItem
         className={"details-description__short-statistic-item"}
         label={

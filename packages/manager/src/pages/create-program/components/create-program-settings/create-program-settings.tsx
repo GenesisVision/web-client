@@ -1,5 +1,4 @@
 import "shared/components/deposit-details/deposit-details.scss";
-
 import "./create-program-settings.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
@@ -46,33 +45,32 @@ class _CreateProgramSettings extends React.PureComponent<
   >
 > {
   componentDidUpdate(prevProps: ICreateProgramSettingsProps) {
-    const { validateForm, setFieldValue } = this.props;
-    if (prevProps.accountType !== this.props.accountType) {
-      setFieldValue(
-        CREATE_PROGRAM_FIELDS.brokerAccountTypeId,
-        this.props.accountType!.id
-      );
+    const {
+      validateForm,
+      setFieldValue,
+      accountType,
+      programCurrency,
+      leverage,
+      rate,
+      wallet
+    } = this.props;
+    if (prevProps.accountType !== accountType) {
+      setFieldValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, accountType!.id);
     }
-    if (prevProps.programCurrency !== this.props.programCurrency) {
-      setFieldValue(
-        CREATE_PROGRAM_FIELDS.currency,
-        this.props.programCurrency || ""
-      );
+    if (prevProps.programCurrency !== programCurrency) {
+      setFieldValue(CREATE_PROGRAM_FIELDS.currency, programCurrency || "");
     }
-    if (prevProps.leverage !== this.props.leverage) {
-      setFieldValue(CREATE_PROGRAM_FIELDS.leverage, this.props.leverage || "");
+    if (prevProps.leverage !== leverage) {
+      setFieldValue(CREATE_PROGRAM_FIELDS.leverage, leverage || "");
     }
-    if (prevProps.wallet !== this.props.wallet) {
-      setFieldValue(
-        CREATE_PROGRAM_FIELDS.depositWalletId,
-        this.props.wallet.id
-      );
+    if (prevProps.wallet !== wallet) {
+      setFieldValue(CREATE_PROGRAM_FIELDS.depositWalletId, wallet.id);
       setFieldValue(CREATE_PROGRAM_FIELDS.depositAmount, "");
     }
-    if (prevProps.leverage !== this.props.leverage) {
-      setFieldValue(CREATE_PROGRAM_FIELDS.leverage, this.props.leverage || "");
+    if (prevProps.leverage !== leverage) {
+      setFieldValue(CREATE_PROGRAM_FIELDS.leverage, leverage || "");
     }
-    if (prevProps.rate !== this.props.rate) {
+    if (prevProps.rate !== rate) {
       validateForm();
     }
   }

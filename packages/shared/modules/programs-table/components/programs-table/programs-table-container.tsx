@@ -1,12 +1,12 @@
 import { push } from "connected-react-router";
-import { ProgramTag, ProgramsList } from "gv-api-web";
+import { ProgramsList, ProgramTag } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -127,7 +127,9 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
             />
             <LevelFilter
               name={LEVEL_FILTER_NAME}
-              value={filtering[LEVEL_FILTER_NAME] as LevelFilterType} //TODO fix filtering types
+              value={filtering[LEVEL_FILTER_NAME].map((value: string) =>
+                parseInt(value)
+              )}
               onChange={updateFilter}
             />
             <SelectFilter
