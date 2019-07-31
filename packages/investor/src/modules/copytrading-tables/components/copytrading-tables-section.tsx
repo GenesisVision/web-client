@@ -6,8 +6,8 @@ import Surface from "shared/components/surface/surface";
 import useTab from "shared/hooks/tab.hook";
 
 import {
-  ICopytradingTradesCounts,
-  fetchCopytradingTradesCount
+  fetchCopytradingTradesCount,
+  ICopytradingTradesCounts
 } from "../services/copytrading-tables.service";
 import OpenTradesTable from "./open-trades-table";
 import TradesHistoryTable from "./trades-history-table";

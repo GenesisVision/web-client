@@ -1,5 +1,4 @@
 import "shared/components/dashboard/dashboard.scss";
-
 import "./dashboard.scss";
 
 import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
