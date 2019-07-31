@@ -7,6 +7,8 @@ import programBalanceChartReducer, {
 import programDescriptionReducer, {
   ProgramDescriptionState
 } from "./description.reducer";
+import { ProgramIdState } from "./id.reducer";
+import programIdReducer from "./id.reducer";
 import levelParametersReducer, {
   LevelParametersState
 } from "./level-parameters.reducer";
@@ -15,6 +17,7 @@ import programProfitChartReducer, {
 } from "./profit-chart.reducer";
 
 type ProgramDetailsDataType = Readonly<{
+  id: ProgramIdState;
   profitChart: ProgramProfitChartState;
   balanceChart: ProgramBalanceChartState;
   description: ProgramDescriptionState;
@@ -25,6 +28,7 @@ export type ProgramDetailsState = ProgramDetailsDataType;
 
 const programDetailsReducer = clearableReducer(
   combineReducers<ProgramDetailsState>({
+    id: programIdReducer,
     levelParameters: levelParametersReducer,
     description: programDescriptionReducer,
     profitChart: programProfitChartReducer,
