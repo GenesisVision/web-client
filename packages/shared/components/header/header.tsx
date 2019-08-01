@@ -24,8 +24,8 @@ const _Header: React.FC<Props> = ({
   logout,
   openNotifications,
   isAuthenticated,
-  profileHeader
-  //, backPath
+  profileHeader,
+  backPath
 }) => {
   const [isOpen, setOpen, setClose] = useIsOpen();
   return (
@@ -70,7 +70,7 @@ const _Header: React.FC<Props> = ({
             <Link
               to={{
                 pathname: LOGIN_ROUTE,
-                state: "backPath"
+                state: backPath
               }}
             >
               <GVButton variant="outlined" color="secondary">
@@ -86,7 +86,7 @@ const _Header: React.FC<Props> = ({
         )}
       </div>
       <NavigationMobile
-        // backPath={backPath}
+        backPath={backPath}
         logout={logout}
         isOpenNavigation={isOpen}
         profileHeader={profileHeader}
@@ -100,7 +100,7 @@ const _Header: React.FC<Props> = ({
 export interface Props extends WithTranslation {
   profileHeader?: ProfileHeaderViewModel;
   isAuthenticated: boolean;
-  // backPath: string;
+  backPath: string;
   logout: () => void;
   openNotifications: () => void;
 }
