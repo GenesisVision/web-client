@@ -7,6 +7,7 @@ import {
   OrderModel,
   ProgramPeriodsViewModel
 } from "gv-api-web";
+import { NextPageContext } from "next";
 import { Dispatch } from "redux";
 import {
   ChartDefaultPeriod,
@@ -15,8 +16,8 @@ import {
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
-  mapToTableItems,
-  TableItems
+  TableItems,
+  mapToTableItems
 } from "shared/components/table/helpers/mapper";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -49,7 +50,7 @@ export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
   dispatch: Dispatch
 ) => dispatch(fetchLevelParametersAction(currency));
 
-export const dispatchProgramDescription = (id?: string) => async (
+export const dispatchProgramDescription = (ctx?: NextPageContext) => async (
   dispatch: MiddlewareDispatch,
   getState: TGetState
 ) => {
@@ -57,7 +58,10 @@ export const dispatchProgramDescription = (id?: string) => async (
     programDetails: { id: stateId }
   } = getState();
   return await dispatch(
-    fetchProgramDescriptionAction(id || stateId, authService.getAuthArg())
+    fetchProgramDescriptionAction(
+      ctx ? (ctx.query.id as string) : stateId,
+      authService.getAuthArg(ctx)
+    )
   );
 };
 
