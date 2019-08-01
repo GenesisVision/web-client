@@ -33,14 +33,7 @@ const _ProfileLayout: React.FC<Props> = ({ t, route, children }) => {
             <GVTab
               key={x.value}
               label={
-                <Link
-                  to={{
-                    pathname: x.pathname,
-                    state: x.value
-                  }}
-                >
-                  {t(`profile-page.tabs.${x.value}`)}
-                </Link>
+                <Link to={x.pathname}>{t(`profile-page.tabs.${x.value}`)}</Link>
               }
               value={x.value}
             />

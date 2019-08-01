@@ -1,13 +1,12 @@
-import * as React from "react";
+import React from "react";
 import ProfileLayout from "shared/components/profile/profile-layout";
 import ProfileContainer from "shared/modules/profile/profile-container";
 
-const ProfilePage: React.FC<{ personal?: boolean }> = React.memo(
-  ({ personal }) => (
-    <ProfileLayout route="details">
-      <ProfileContainer personal={personal} />
-    </ProfileLayout>
-  )
+const _ProfilePage: React.FC = () => (
+  <ProfileLayout route="details">
+    <ProfileContainer />
+  </ProfileLayout>
 );
 
+const ProfilePage = React.memo(_ProfilePage);
 export default ProfilePage;

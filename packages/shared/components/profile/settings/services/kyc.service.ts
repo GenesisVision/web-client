@@ -1,14 +1,13 @@
-import $script from "scriptjs";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 
 export const loadKycIFrame = () => {
+  const $script = require("scriptjs");
   const authorization = authService.getAuthArg();
-
   $script(process.env.REACT_APP_IDENSIC_SRC, function() {
-    if (!window.idensic.init) return;
+    if (!(window as any).idensic.init) return;
     profileApi.v10ProfileVerificationTokenPost(authorization).then(data => {
-      window.idensic.init(
+      (window as any).idensic.init(
         // selector of an IFrame container (see above)
         "#idensic",
         // configuration object (see preparation steps)
@@ -48,7 +47,7 @@ export const loadKycIFrame = () => {
           }
         },
         // function for the IFrame callbacks
-        function(messageType, payload) {
+        function(messageType: any, payload: any) {
           // just logging the incoming messages
           console.log("[IDENSIC DEMO] Idensic message:", messageType, payload);
         }

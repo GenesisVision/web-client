@@ -1,4 +1,3 @@
-import ProfileRoutes from "pages/profile/profile.routes";
 import ProgramsRoutes from "pages/programs/programs.routes";
 import WalletRoutes from "pages/wallet/wallet.routes";
 import React from "react";
@@ -36,7 +35,6 @@ const AppRoutes: React.FC = () => (
         path={WALLET_WITHDRAW_CONFIRM_ROUTE}
         component={WalletWithdrawConfirmPage}
       />
-      <PrivateRoute path={PROFILE_ROUTE} component={ProfileRoutes} />
       <PrivateRoute path={NOTIFICATIONS_ROUTE} component={NotificationRoutes} />
       <PrivateRoute path={WALLET_TOTAL_PAGE_ROUTE} component={WalletRoutes} />
       <Route component={NotFoundPage} />

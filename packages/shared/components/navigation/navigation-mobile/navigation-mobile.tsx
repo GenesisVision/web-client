@@ -29,8 +29,8 @@ const _NavigationMobile: React.FC<Props> = ({
   profileHeader,
   isOpenNavigation,
   onClose,
-  logout
-  //, backPath
+  logout,
+  backPath
 }) => (
   <Sidebar open={isOpenNavigation} onClose={onClose}>
     <div className="navigation__mobile mobile">
@@ -77,10 +77,7 @@ const _NavigationMobile: React.FC<Props> = ({
         ) : (
           <NavigationItem
             icon={<LogoutIcon primary rotate />}
-            href={
-              LOGIN_ROUTE
-              //{ pathname: LOGIN_ROUTE, state: backPath }
-            }
+            href={{ pathname: LOGIN_ROUTE, state: backPath }}
           >
             {t("navigation.login")}
           </NavigationItem>
@@ -91,7 +88,7 @@ const _NavigationMobile: React.FC<Props> = ({
 );
 
 interface Props extends WithTranslation {
-  // backPath: string;
+  backPath: string;
   isAuthenticated: boolean;
   profileHeader?: ProfileHeaderViewModel;
   isOpenNavigation: boolean;
