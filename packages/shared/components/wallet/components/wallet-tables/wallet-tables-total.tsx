@@ -31,12 +31,9 @@ const _WalletTablesTotal: React.FC<Props> = ({
   copyTradingAccountsPending
 }) => {
   const { tab, setTab } = useTab<TABS>(TABS.WALLETS_TAB);
-  useEffect(
-    () => {
-      setTab(null, getLocation().hash);
-    },
-    [setTab]
-  );
+  useEffect(() => {
+    setTab(null, getLocation().hash);
+  }, []);
   useEffect(
     () => {
       setHash(tab);
