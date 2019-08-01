@@ -33,28 +33,24 @@ const _WalletTablesTotal: React.FC<Props> = ({
 }) => {
   const [location, setLocation] = useState<Location | undefined>();
   const { tab, setTab } = useTab<TABS>(TABS.WALLETS_TAB);
+  useEffect(() => {
+    setLocation(getLocation());
+    setTab(null, location ? location.hash : TABS.WALLETS_TAB);
+  }, []);
   useEffect(
     () => {
-      setLocation(getLocation());
-      setTab(null, location ? location.hash : TABS.WALLETS_TAB);
+      setHash(tab);
     },
-    [location, setTab]
+    [tab]
   );
-  const handleChangeTab = (
-    e: React.SyntheticEvent<EventTarget>,
-    value: string
-  ) => {
-    setHash(value);
-    setTab(e, value);
-  };
   return (
     <Surface className="wallet-container">
       <div className="wallet-container__header">
         <div className="wallet-container__tabs">
-          <GVTabs value={tab} onChange={handleChangeTab}>
+          <GVTabs value={tab} onChange={setTab}>
             <GVTab
               value={TABS.WALLETS_TAB}
-              label={<Link to={""}>{t("wallet-page.tabs.wallets")}</Link>}
+              label={t("wallet-page.tabs.wallets")}
             />
             <GVTab
               className={"gv-tab"}
