@@ -2,9 +2,8 @@ import "./wallet-tables.scss";
 
 import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import { Location } from "history";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import Link from "shared/components/link/link";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
@@ -12,6 +11,7 @@ import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import Surface from "shared/components/surface/surface";
 import Tooltip from "shared/components/tooltip/tooltip";
 import useTab from "shared/hooks/tab.hook";
+import { getLocation, setHash } from "shared/utils/location";
 
 import WalletCopytrading from "./wallet-copytrading/wallet-copytrading";
 import AllDepositsWithdrawalsRow from "./wallet-deposits-withdrawals/all-deposits-withdrawals-row";
@@ -21,7 +21,6 @@ import WalletList from "./wallet-list/wallet-list";
 import TransactionsRow from "./wallet-transactions/transactions-row";
 import WalletTransactions from "./wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "./wallet-transactions/wallet-transactions.constants";
-import { getLocation, setHash } from "shared/utils/location";
 
 const _WalletTablesTotal: React.FC<Props> = ({
   t,
@@ -31,12 +30,13 @@ const _WalletTablesTotal: React.FC<Props> = ({
   copyTradingAccounts,
   copyTradingAccountsPending
 }) => {
-  const [location, setLocation] = useState<Location | undefined>();
   const { tab, setTab } = useTab<TABS>(TABS.WALLETS_TAB);
-  useEffect(() => {
-    setLocation(getLocation());
-    setTab(null, location ? location.hash : TABS.WALLETS_TAB);
-  }, []);
+  useEffect(
+    () => {
+      setTab(null, getLocation().hash);
+    },
+    [setTab]
+  );
   useEffect(
     () => {
       setHash(tab);
@@ -72,12 +72,6 @@ const _WalletTablesTotal: React.FC<Props> = ({
                 >
                   <span>{t("wallet-page.tabs.transactions")}</span>
                 </Tooltip>
-                /*<Link
-                  to={{
-                    hash: TABS.TRANSACTIONS_TAB
-                  }}
-                >
-                </Link>*/
               }
             />
             <GVTab
@@ -106,13 +100,6 @@ const _WalletTablesTotal: React.FC<Props> = ({
                     <span>{t("wallet-page.tabs.withdrawals")}</span>
                   </Tooltip>
                 </>
-
-                /*<Link
-                  to={{
-                    hash: TABS.EXTERNAL_TAB
-                  }}
-                >
-                </Link>*/
               }
             />
           </GVTabs>
