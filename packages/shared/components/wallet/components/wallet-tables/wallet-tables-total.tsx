@@ -2,7 +2,7 @@ import "./wallet-tables.scss";
 
 import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import { Location } from "history";
-import React, { useEffect } from "react";
+import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
@@ -10,9 +10,8 @@ import GVTab from "shared/components/gv-tabs/gv-tab";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import Surface from "shared/components/surface/surface";
 import Tooltip from "shared/components/tooltip/tooltip";
-import useTab from "shared/hooks/tab.hook";
-import { getLocation, setHash } from "shared/utils/location";
 
+import useHashTab from "../../services/hashTab.hook";
 import WalletCopytrading from "./wallet-copytrading/wallet-copytrading";
 import AllDepositsWithdrawalsRow from "./wallet-deposits-withdrawals/all-deposits-withdrawals-row";
 import WalletDepositsWithdrawals from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals";
@@ -30,16 +29,7 @@ const _WalletTablesTotal: React.FC<Props> = ({
   copyTradingAccounts,
   copyTradingAccountsPending
 }) => {
-  const { tab, setTab } = useTab<TABS>(TABS.WALLETS_TAB);
-  useEffect(() => {
-    setTab(null, getLocation().hash);
-  }, []);
-  useEffect(
-    () => {
-      setHash(tab);
-    },
-    [tab]
-  );
+  const { tab, setTab } = useHashTab<TABS>(TABS.WALLETS_TAB);
   return (
     <Surface className="wallet-container">
       <div className="wallet-container__header">
