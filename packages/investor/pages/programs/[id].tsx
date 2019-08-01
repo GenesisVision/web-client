@@ -26,7 +26,7 @@ ProgramDetails.getInitialProps = async ctx => {
   const { id } = ctx.query;
   await Promise.all([
     ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
-    ctx.reduxStore.dispatch(dispatchProgramDescription(id as string))
+    ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
   ]);
   return {};
 };
