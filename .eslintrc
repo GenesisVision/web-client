@@ -1,9 +1,13 @@
 {
-  "parser": "@typescript-eslint/parser",
   "extends": "react-app",
-  "plugins": ["react", "jsx-a11y", "import", "@typescript-eslint", "prettier"],
+  "plugins": ["simple-import-sort",  "prettier", "import"],
   "rules": {
+    "simple-import-sort/sort": "error",
+    "sort-imports": "off",
     "prettier/prettier": "error",
-    "@typescript-eslint/no-unused-vars": "error"
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "off",
+    "no-use-before-define": "off"
   }
 }
