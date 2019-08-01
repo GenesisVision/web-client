@@ -16,7 +16,7 @@ export const confirmEmail = (userId: string, code: string) => (
     })
     .then(response => {
       authService.storeToken(response);
-      dispatch(authActions.updateTokenAction());
+      dispatch(authActions.updateTokenAction(true));
       dispatch(push(HOME_ROUTE));
       dispatch(
         alertMessageActions.success(

@@ -8,11 +8,11 @@ import {
 import moment from "moment";
 import React, { useCallback, useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { Icon } from "shared/components/icon/icon";
 import { RingIcon } from "shared/components/icon/ring-icon";
 import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
+import Link from "shared/components/link/link";
 import NotificationsGroup from "shared/components/notifications/components/notification-group/notification-group";
 import Spinner from "shared/components/spiner/spiner";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -29,10 +29,13 @@ const _Notifications: React.FC<Props> = ({
   clearNotifications
 }) => {
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
-  useEffect(() => {
-    fetchNotification();
-    return clearNotifications;
-  }, []);
+  useEffect(
+    () => {
+      fetchNotification();
+      return clearNotifications;
+    },
+    [clearNotifications, fetchNotification]
+  );
   const parseDate = (unix: number): string =>
     moment
       .unix(unix)
@@ -49,7 +52,7 @@ const _Notifications: React.FC<Props> = ({
       setIsPending();
       fetchNotifications().finally(setIsNotPending);
     },
-    [isPending]
+    [fetchNotifications, isPending, setIsNotPending, setIsPending]
   );
   const renderGroups = (groups: NotificationGroups) => (
     group: string

@@ -1,11 +1,11 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { logout } from "shared/components/auth/signin/signin.service";
 import Header from "shared/components/header/header";

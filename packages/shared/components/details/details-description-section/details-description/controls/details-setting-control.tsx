@@ -2,8 +2,8 @@ import "./details-description-control.scss";
 
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { SettingsIcon } from "shared/components/icon/settings-icon";
+import Link from "shared/components/link/link";
 
 import DetailsDescriptionControl from "./details-description-control";
 

@@ -2,12 +2,12 @@ import "./wallet-widget.scss";
 
 import classNames from "classnames";
 import { WalletsGrandTotal } from "gv-api-web";
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { WalletIcon } from "shared/components/icon/wallet-icon";
+import Link from "shared/components/link/link";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
@@ -18,7 +18,8 @@ import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const _WalletWidget: React.FC<Props> = ({ t, info, className }) => {
+const _WalletWidget: React.FC<Props> = ({ info, className }) => {
+  const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const {
@@ -85,16 +86,13 @@ const _WalletWidget: React.FC<Props> = ({ t, info, className }) => {
   );
 };
 
-interface OwnProps {
+interface Props {
   info: WalletsGrandTotal;
   className?: string;
 }
 
-interface Props extends WithTranslation, OwnProps {}
-
-const WalletWidget = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+const WalletWidget = compose<React.ComponentType<Props & WithLoaderProps>>(
   withLoader,
-  translate(),
   React.memo
 )(_WalletWidget);
 export default WalletWidget;
