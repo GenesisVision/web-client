@@ -1,40 +1,39 @@
 import React from "react";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
+import platformActions from "shared/actions/platform-actions";
+import WalletTotalContainer from "shared/components/wallet/components/wallet-total-container";
 import {
-  dispatchFundDescription,
-  dispatchFundId
-} from "shared/components/funds/fund-details/services/fund-details.service";
+  fetchAccounts,
+  fetchWallets
+} from "shared/components/wallet/services/wallet.services";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
 
-import FundDetailsPage from "../../src/pages/funds/fund-details/fund-details.page";
-import { connect, ResolveThunks } from "react-redux";
-
-const FundDetails: NextPageWithRedux<Props, {}> = () => {
-  return <FundDetailsPage />;
+const Wallet: NextPageWithRedux<Props, {}> = () => {
+  return <WalletTotalContainer />;
 };
 
-FundDetails.getInitialProps = async ctx => {
-  const { id } = ctx.query;
+Wallet.getInitialProps = async ctx => {
   await Promise.all([
-    ctx.reduxStore.dispatch(dispatchFundId(id as string)),
-    ctx.reduxStore.dispatch(dispatchFundDescription(ctx))
+    ctx.reduxStore.dispatch(
+      async dispatch => await dispatch(platformActions.fetchPlatformSettings())
+    ),
+    ctx.reduxStore.dispatch(fetchWallets(ctx)),
+    ctx.reduxStore.dispatch(fetchAccounts(ctx))
   ]);
   return {};
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      dispatchFundId,
-      dispatchFundDescription
-    },
+    { fetchWallets, fetchAccounts },
     dispatch
   )
 });
@@ -46,14 +45,14 @@ export default compose(
   ),
   withDefaultLayout,
   withPrivateRoute
-)(FundDetails);
+)(Wallet);
 
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 interface ServiceThunks extends ActionCreatorsMapObject {
-  dispatchFundId: typeof dispatchFundId;
-  dispatchFundDescription: typeof dispatchFundDescription;
+  fetchWallets: typeof fetchWallets;
+  fetchAccounts: typeof fetchAccounts;
 }
 
 interface Props extends DispatchProps {}

@@ -1,4 +1,5 @@
 import { FundAssetsListInfo, ReallocationsViewModel } from "gv-api-web";
+import { NextPageContext } from "next";
 import { Dispatch } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
@@ -16,18 +17,24 @@ import {
   setFundIdAction
 } from "../actions/fund-details.actions";
 
-export const dispatchFundDescription = () => (
+export const dispatchFundDescription = (ctx?: NextPageContext) => async (
   dispatch: MiddlewareDispatch,
   getState: TGetState
 ) => {
   const {
-    fundDetails: { id }
+    fundDetails: { id: stateId }
   } = getState();
-  return dispatch(fetchFundDescriptionAction(id, authService.getAuthArg()));
+  return await dispatch(
+    fetchFundDescriptionAction(
+      ctx ? (ctx.query.id as string) : stateId,
+      authService.getAuthArg(ctx)
+    )
+  );
 };
 
-export const dispatchFundId = (id: string) => (dispatch: MiddlewareDispatch) =>
-  dispatch(setFundIdAction(id));
+export const dispatchFundId = (id: string) => async (
+  dispatch: MiddlewareDispatch
+) => await dispatch(setFundIdAction(id));
 
 export const fetchFundStructure = (
   fundId: string

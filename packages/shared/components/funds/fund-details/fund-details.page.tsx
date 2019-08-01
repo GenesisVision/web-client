@@ -1,13 +1,12 @@
 import "shared/components/details/details.scss";
 
 import * as React from "react";
-import { useEffect } from "react";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import { redirectToLogin } from "shared/components/auth/signin/signin.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
@@ -34,27 +33,19 @@ const _FundDetailsPage: React.FC<Props> = ({
   service: { dispatchFundDescription, redirectToLogin },
   isAuthenticated,
   descriptionSection
-}) => {
-  useEffect(
-    () => {
-      dispatchFundDescription();
-    },
-    [dispatchFundDescription]
-  );
-  return (
-    <FundDetailsContainer
-      isKycConfirmed={isKycConfirmed}
-      condition={!!description}
-      loader={<DetailsContainerLoader assets />}
-      redirectToLogin={redirectToLogin}
-      historySection={historySection}
-      descriptionSection={descriptionSection}
-      description={description!}
-      currency={currency}
-      isAuthenticated={isAuthenticated}
-    />
-  );
-};
+}) => (
+  <FundDetailsContainer
+    isKycConfirmed={isKycConfirmed}
+    condition={!!description}
+    loader={<DetailsContainerLoader assets />}
+    redirectToLogin={redirectToLogin}
+    historySection={historySection}
+    descriptionSection={descriptionSection}
+    description={description!}
+    currency={currency}
+    isAuthenticated={isAuthenticated}
+  />
+);
 
 const mapStateToProps = (state: RootState): StateProps => ({
   isKycConfirmed: kycConfirmedSelector(state),
