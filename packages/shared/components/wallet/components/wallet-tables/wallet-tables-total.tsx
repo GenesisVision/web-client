@@ -25,7 +25,6 @@ const _WalletTablesTotal: React.FC<Props> = ({
   t,
   wallets,
   copytrading,
-  locationTab,
   copyTradingAccounts,
   copyTradingAccountsPending
 }) => {
@@ -138,7 +137,6 @@ interface OwnProps {
   copytrading: boolean;
   copyTradingAccounts: CopyTradingAccountInfo[];
   copyTradingAccountsPending: boolean;
-  locationTab?: TABS;
 }
 
 const WalletContainerTotal = compose<React.ComponentType<OwnProps>>(
