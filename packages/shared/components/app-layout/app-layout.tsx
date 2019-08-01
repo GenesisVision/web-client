@@ -7,9 +7,12 @@ import HeaderContainer from "shared/components/header/header.container";
 import NotificationsContainer from "shared/components/notifications/components/notifications-container";
 
 const _AppLayout: ComponentType<Props> = ({ initOnResizeEvent, children }) => {
-  useEffect(() => {
-    initOnResizeEvent();
-  }, []);
+  useEffect(
+    () => {
+      initOnResizeEvent();
+    },
+    [initOnResizeEvent]
+  );
   return (
     <div className="app__wrapper root">
       <div className="app">
@@ -24,9 +27,9 @@ const _AppLayout: ComponentType<Props> = ({ initOnResizeEvent, children }) => {
   );
 };
 
-const mapDispatchToProps = (): DispatchProps => ({
+const mapDispatchToProps: DispatchProps = {
   initOnResizeEvent
-});
+};
 
 interface Props extends DispatchProps {}
 

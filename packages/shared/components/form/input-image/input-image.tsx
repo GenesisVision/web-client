@@ -1,7 +1,5 @@
 import "cropperjs/dist/cropper.css";
-
 import "./input-image.scss";
-import "./edge-canvas-polyfill";
 
 import classNames from "classnames";
 import * as React from "react";

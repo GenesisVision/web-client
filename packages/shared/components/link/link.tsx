@@ -7,6 +7,7 @@ const Link: React.FC<Props> = ({ to, className, onClick, children }) => {
   const normalizedTo = normalizeTo(to);
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      e.stopPropagation();
       if (onClick) {
         onClick(e);
       }
