@@ -2,19 +2,13 @@ import DashboardPage from "pages/dashboard/dashboard.page";
 import { getPortfolioChart } from "pages/dashboard/services/dashboard-chart.service";
 import { getTopPortfolioEvents } from "pages/dashboard/services/dashboard-events.services";
 import { getInRequests } from "pages/dashboard/services/dashboard-in-requests.service";
-import React, { useEffect } from "react";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
+import React from "react";
+import { compose } from "redux";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
 
-const Dashboard: NextPageWithRedux<Props, {}> = ({ service }) => {
+const Dashboard: NextPageWithRedux<{}> = () => {
   return <DashboardPage />;
 };
 
@@ -27,28 +21,7 @@ Dashboard.getInitialProps = async ctx => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { getTopPortfolioEvents, getInRequests, getPortfolioChart },
-    dispatch
-  )
-});
-
 export default compose(
-  connect(
-    null,
-    mapDispatchToProps
-  ),
   withDefaultLayout,
   withPrivateRoute
 )(Dashboard);
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-interface ServiceThunks extends ActionCreatorsMapObject {
-  getTopPortfolioEvents: typeof getTopPortfolioEvents;
-  getInRequests: typeof getInRequests;
-  getPortfolioChart: typeof getPortfolioChart;
-}
-
-interface Props extends DispatchProps {}

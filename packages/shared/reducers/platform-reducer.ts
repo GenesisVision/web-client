@@ -3,7 +3,6 @@ import { createSelector } from "reselect";
 import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { ASSET, ROLE_ENV } from "shared/constants/constants";
-import { HEADER_CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -24,7 +23,7 @@ export const platformDataSelector = apiSelector<PlatformInfo>(
 export const currenciesSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.currencies),
-  Object.values(HEADER_CURRENCY_VALUES)
+  ["BTC"]
 );
 
 export const programCurrenciesSelector = apiFieldSelector(

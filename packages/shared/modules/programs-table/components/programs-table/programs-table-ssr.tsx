@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { ProgramTag, ProgramsList } from "gv-api-web";
+import { ProgramsList, ProgramTag } from "gv-api-web";
 import { Location } from "history";
 import programs from "investor-web-portal/pages/programs";
 import { NextPageContext } from "next";
@@ -7,10 +7,10 @@ import { NextRouter, useRouter } from "next/router";
 import qs from "qs";
 import { useContext, useState } from "react";
 import * as React from "react";
-import { MergeProps, connect } from "react-redux";
+import { connect, MergeProps } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import { DispatchProps } from "shared/components/asset-status/asset-status-requests";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import {
@@ -35,7 +35,6 @@ import {
   calculateSkipAndTake,
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
-import { platformContext } from "shared/context/platform";
 import isAuthenticated from "shared/decorators/is-authenticated";
 import { useTranslation } from "shared/i18n";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
@@ -143,8 +142,8 @@ const ProgramsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
   // }
 
   const { t } = useTranslation();
-  const context = useContext(platformContext);
   const [filtering, update] = useRouteFilters(PROGRAMS_ROUTE, DEFAULT_FILTERS);
+  let context: any = null;
   if (!context) return null;
 
   const totalPages = calculateTotalPages(data.total, ITEMS_ON_PAGE);

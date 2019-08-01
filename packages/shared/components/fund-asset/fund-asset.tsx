@@ -5,7 +5,6 @@ import { FundAssetPercent } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
-import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _FundAsset: React.FC<Props> = ({
@@ -45,9 +44,7 @@ const _FundAsset: React.FC<Props> = ({
           {currency && (
             <div className="fund-asset__currencies">
               {type === FUND_ASSET_TYPE.LARGE && (
-                <div className="fund-asset__currency-full">
-                  {name || CURRENCY_VALUES[currency]}
-                </div>
+                <div className="fund-asset__currency-full">{name}</div>
               )}
               {type !== FUND_ASSET_TYPE.SHORT && (
                 <div className="fund-asset__currency-short">{currency}</div>

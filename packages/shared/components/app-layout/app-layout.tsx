@@ -34,7 +34,7 @@ const mapDispatchToProps: DispatchProps = {
 interface Props extends DispatchProps {}
 
 interface DispatchProps {
-  initOnResizeEvent: () => void;
+  initOnResizeEvent(): void;
 }
 
 const AppLayout = connect<null, DispatchProps>(

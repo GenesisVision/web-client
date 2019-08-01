@@ -2,15 +2,14 @@ import "./currency-select.scss";
 
 import classNames from "classnames";
 import React, { useCallback, useContext } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { ISelectChangeEvent } from "shared/components/select/select";
-import { platformContext } from "shared/context/platform";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { currenciesSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
@@ -31,16 +30,14 @@ const _CurrencySelectContainer: React.FC<Props> = ({
       service.updateCurrency(event.target.value as CurrencyEnum),
     [service]
   );
-  const platform = useContext(platformContext);
-  const values = (platform ? platform.currencies : []) as CurrencyEnum[];
   return (
     <CurrencySelect
-      condition={!!currency && !!values}
+      condition={!!currency && !!currencyValues}
       loader={<CurrencySelectLoader />}
       className={classNames("currency-select", className)}
       value={currency}
       onChange={handleChange}
-      currencyValues={values}
+      currencyValues={currencyValues}
     />
   );
 };

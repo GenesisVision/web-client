@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useContext } from "react";
 
-import { platformContext } from "../../context/platform";
 import { composeFacetUrlFunc } from "./facet-card";
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
@@ -11,7 +10,7 @@ export const _FacetCardsContainer: React.FC<OwnProps> = ({
   composeFacetUrl,
   assetsFacets
 }) => {
-  const info = useContext(platformContext);
+  let info: any = null;
   if (!info) return <FacetCardsStub />;
   return (
     <FacetCards

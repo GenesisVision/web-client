@@ -39,7 +39,6 @@ import {
   calculateSkipAndTake,
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
-import { platformContext } from "shared/context/platform";
 import isAuthenticated from "shared/decorators/is-authenticated";
 import useRouteFilters from "shared/hooks/route-filters.hook";
 import { useTranslation } from "shared/i18n";
@@ -134,10 +133,9 @@ const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
   // }
 
   const { t } = useTranslation();
-  const context = useContext(platformContext);
   const [filtering, update] = useRouteFilters(FUNDS_ROUTE, defaultFilters);
   // const { asPath, pathname, push } = useRouter();
-
+  let context: any = null;
   if (!context) return null;
 
   // console.info(asPath, pathname, asPath.slice(pathname.length + 1));
