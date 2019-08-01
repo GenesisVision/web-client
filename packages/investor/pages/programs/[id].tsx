@@ -35,9 +35,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       dispatchProgramId,
-      dispatchProgramDescription,
-      getProfitChart,
-      getBalanceChart
+      dispatchProgramDescription
     },
     dispatch
   )
@@ -58,8 +56,6 @@ interface DispatchProps {
 interface ServiceThunks extends ActionCreatorsMapObject {
   dispatchProgramId: typeof dispatchProgramId;
   dispatchProgramDescription: typeof dispatchProgramDescription;
-  getProfitChart: typeof getProfitChart;
-  getBalanceChart: typeof getBalanceChart;
 }
 
 interface Props extends DispatchProps {}
