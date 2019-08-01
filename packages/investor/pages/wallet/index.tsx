@@ -10,20 +10,26 @@ import {
 import { connect, ResolveThunks } from "react-redux";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
-import { fetchWallets } from "shared/components/wallet/services/wallet.services";
+import {
+  fetchAccounts,
+  fetchWallets
+} from "shared/components/wallet/services/wallet.services";
 
 const Wallet: NextPageWithRedux<Props, {}> = () => {
   return <WalletTotalContainer />;
 };
 
 Wallet.getInitialProps = async ctx => {
-  await Promise.all([ctx.reduxStore.dispatch(fetchWallets(ctx))]);
+  await Promise.all([
+    ctx.reduxStore.dispatch(fetchWallets(ctx)),
+    ctx.reduxStore.dispatch(fetchAccounts(ctx))
+  ]);
   return {};
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { fetchWallets },
+    { fetchWallets, fetchAccounts },
     dispatch
   )
 });
@@ -42,6 +48,7 @@ interface DispatchProps {
 }
 interface ServiceThunks extends ActionCreatorsMapObject {
   fetchWallets: typeof fetchWallets;
+  fetchAccounts: typeof fetchAccounts;
 }
 
 interface Props extends DispatchProps {}
