@@ -49,19 +49,21 @@ export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
   dispatch: Dispatch
 ) => dispatch(fetchLevelParametersAction(currency));
 
-export const dispatchProgramDescription = (id?: string) => (
+export const dispatchProgramDescription = (id?: string) => async (
   dispatch: MiddlewareDispatch,
   getState: TGetState
 ) => {
   const {
     programDetails: { id: stateId }
   } = getState();
-  return dispatch(fetchProgramDescriptionAction(id || stateId, authService.getAuthArg()));
+  return await dispatch(
+    fetchProgramDescriptionAction(id || stateId, authService.getAuthArg())
+  );
 };
 
-export const dispatchProgramId = (id: string) => (
+export const dispatchProgramId = (id: string) => async (
   dispatch: MiddlewareDispatch
-) => dispatch(setProgramIdAction(id));
+) => await dispatch(setProgramIdAction(id));
 
 export const getProgramStatistic = (
   programId: string,
@@ -243,15 +245,13 @@ export const fetchPeriodHistory = (
     .then(mapToTableItems<ProgramPeriodsViewModel>("periods"));
 };
 
-export const getProfitChart = ({ id, period }: TGetChartArgs) => (
+export const getProfitChart = ({ id, period }: TGetChartArgs) => async (
   dispatch: Dispatch
-) => dispatch(fetchProgramProfitChartAction(id, period));
+) => await dispatch(fetchProgramProfitChartAction(id, period));
 
-export const getBalanceChart = ({ id, period }: TGetChartArgs) => (
+export const getBalanceChart = ({ id, period }: TGetChartArgs) => async (
   dispatch: Dispatch
-) => {
-  dispatch(fetchProgramBalanceChartAction(id, period));
-};
+) => await dispatch(fetchProgramBalanceChartAction(id, period));
 
 type TGetChartArgs = {
   id: string;
