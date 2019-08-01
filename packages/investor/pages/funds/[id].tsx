@@ -24,7 +24,7 @@ FundDetails.getInitialProps = async ctx => {
   const { id } = ctx.query;
   await Promise.all([
     ctx.reduxStore.dispatch(dispatchFundId(id as string)),
-    ctx.reduxStore.dispatch(dispatchFundDescription(id as string))
+    ctx.reduxStore.dispatch(dispatchFundDescription(ctx))
   ]);
   return {};
 };
