@@ -16,18 +16,21 @@ import {
   setFundIdAction
 } from "../actions/fund-details.actions";
 
-export const dispatchFundDescription = () => (
+export const dispatchFundDescription = (id?: string) => async (
   dispatch: MiddlewareDispatch,
   getState: TGetState
 ) => {
   const {
-    fundDetails: { id }
+    fundDetails: { id: stateId }
   } = getState();
-  return dispatch(fetchFundDescriptionAction(id, authService.getAuthArg()));
+  return await dispatch(
+    fetchFundDescriptionAction(id || stateId, authService.getAuthArg())
+  );
 };
 
-export const dispatchFundId = (id: string) => (dispatch: MiddlewareDispatch) =>
-  dispatch(setFundIdAction(id));
+export const dispatchFundId = (id: string) => async (
+  dispatch: MiddlewareDispatch
+) => await dispatch(setFundIdAction(id));
 
 export const fetchFundStructure = (
   fundId: string
