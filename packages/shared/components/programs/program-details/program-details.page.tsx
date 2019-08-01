@@ -40,12 +40,6 @@ const _ProgramDetailsPage: React.FC<Props> = ({
 }) => {
   useEffect(
     () => {
-      dispatchProgramDescription();
-    },
-    [dispatchProgramDescription]
-  );
-  useEffect(
-    () => {
       description && dispatchPlatformLevelsParameters(description.currency);
     },
     [description, dispatchPlatformLevelsParameters]
