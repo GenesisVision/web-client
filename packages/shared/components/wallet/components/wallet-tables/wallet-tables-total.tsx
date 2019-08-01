@@ -2,9 +2,9 @@ import "./wallet-tables.scss";
 
 import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
 import { Location } from "history";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link, withRouter } from "react-router-dom";
+import Link from "shared/components/link/link";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
@@ -21,80 +21,74 @@ import WalletList from "./wallet-list/wallet-list";
 import TransactionsRow from "./wallet-transactions/transactions-row";
 import WalletTransactions from "./wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "./wallet-transactions/wallet-transactions.constants";
+import { getLocation, setHash } from "shared/utils/location";
 
 const _WalletTablesTotal: React.FC<Props> = ({
   t,
   wallets,
   copytrading,
-  location,
+  locationTab,
   copyTradingAccounts,
   copyTradingAccountsPending
 }) => {
+  const [location, setLocation] = useState<Location | undefined>();
   const { tab, setTab } = useTab<TABS>(TABS.WALLETS_TAB);
   useEffect(
     () => {
-      setTab(null, location.hash);
+      setLocation(getLocation());
+      setTab(null, location ? location.hash : TABS.WALLETS_TAB);
     },
     [location, setTab]
   );
+  const handleChangeTab = (
+    e: React.SyntheticEvent<EventTarget>,
+    value: string
+  ) => {
+    setHash(value);
+    setTab(e, value);
+  };
   return (
     <Surface className="wallet-container">
       <div className="wallet-container__header">
         <div className="wallet-container__tabs">
-          <GVTabs value={tab} onChange={setTab}>
+          <GVTabs value={tab} onChange={handleChangeTab}>
             <GVTab
               value={TABS.WALLETS_TAB}
-              label={
-                <Link to={location.pathname}>
-                  {t("wallet-page.tabs.wallets")}
-                </Link>
-              }
+              label={<Link to={""}>{t("wallet-page.tabs.wallets")}</Link>}
             />
             <GVTab
               className={"gv-tab"}
               visible={copytrading}
               value={TABS.COPYTRADING_TAB}
-              label={
-                <Link
-                  to={{
-                    hash: TABS.COPYTRADING_TAB
-                  }}
-                >
-                  {t("wallet-page.tabs.copytrading")}
-                </Link>
-              }
+              label={t("wallet-page.tabs.copytrading")}
             />
             <GVTab
               className={"gv-tab"}
               value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
               label={
-                <Link
+                <Tooltip
+                  horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                  render={() => (
+                    <div className="tooltip__content">
+                      {t("wallet-page.tooltip.transactions")}
+                    </div>
+                  )}
+                >
+                  <span>{t("wallet-page.tabs.transactions")}</span>
+                </Tooltip>
+                /*<Link
                   to={{
                     hash: TABS.TRANSACTIONS_TAB
                   }}
                 >
-                  <Tooltip
-                    horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                    render={() => (
-                      <div className="tooltip__content">
-                        {t("wallet-page.tooltip.transactions")}
-                      </div>
-                    )}
-                  >
-                    <span>{t("wallet-page.tabs.transactions")}</span>
-                  </Tooltip>
-                </Link>
+                </Link>*/
               }
             />
             <GVTab
               className={"gv-tab"}
               value={TABS.EXTERNAL_TAB}
               label={
-                <Link
-                  to={{
-                    hash: TABS.EXTERNAL_TAB
-                  }}
-                >
+                <>
                   <Tooltip
                     horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                     render={() => (
@@ -115,7 +109,14 @@ const _WalletTablesTotal: React.FC<Props> = ({
                   >
                     <span>{t("wallet-page.tabs.withdrawals")}</span>
                   </Tooltip>
-                </Link>
+                </>
+
+                /*<Link
+                  to={{
+                    hash: TABS.EXTERNAL_TAB
+                  }}
+                >
+                </Link>*/
               }
             />
           </GVTabs>
@@ -167,11 +168,11 @@ interface OwnProps {
   copytrading: boolean;
   copyTradingAccounts: CopyTradingAccountInfo[];
   copyTradingAccountsPending: boolean;
+  locationTab?: TABS;
 }
 
 const WalletContainerTotal = compose<React.ComponentType<OwnProps>>(
   translate(),
-  withRouter,
   React.memo
 )(_WalletTablesTotal);
 export default WalletContainerTotal;
