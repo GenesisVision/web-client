@@ -18,7 +18,7 @@ import { MiddlewareDispatch, RootThunk } from "shared/utils/types";
 
 import * as actions from "../actions/wallet.actions";
 
-export const fetchWallets = (ctx?: NextPageContext): RootThunk<void> => (
+export const fetchWallets = (ctx?: NextPageContext): RootThunk<void> => async (
   dispatch,
   getState
 ) => {
@@ -26,16 +26,19 @@ export const fetchWallets = (ctx?: NextPageContext): RootThunk<void> => (
   const { info } = getState().wallet;
   if (info.isPending) return;
   const { currency } = getState().accountSettings;
-  dispatch(actions.updateWalletTimestampAction());
-  dispatch(actions.fetchWalletsAction(currency, authorization));
+  await dispatch(actions.updateWalletTimestampAction());
+  await dispatch(actions.fetchWalletsAction(currency, authorization));
 };
 
-export const fetchAccounts = (): RootThunk<void> => (dispatch, getState) => {
-  const authorization = authService.getAuthArg();
+export const fetchAccounts = (ctx?: NextPageContext): RootThunk<void> => async (
+  dispatch,
+  getState
+) => {
+  const authorization = authService.getAuthArg(ctx);
   const { info } = getState().copyTradingAccounts;
   if (info.isPending) return;
-  dispatch(actions.updateAccountTimestampAction());
-  dispatch(actions.fetchAccountsAction(authorization));
+  await dispatch(actions.updateAccountTimestampAction());
+  await dispatch(actions.fetchAccountsAction(authorization));
 };
 
 export const fetchBaseWallets = (): RootThunk<Promise<WalletBaseData[]>> => (
