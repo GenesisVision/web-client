@@ -49,14 +49,14 @@ export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
   dispatch: Dispatch
 ) => dispatch(fetchLevelParametersAction(currency));
 
-export const dispatchProgramDescription = () => (
+export const dispatchProgramDescription = (id?: string) => (
   dispatch: MiddlewareDispatch,
   getState: TGetState
 ) => {
   const {
-    programDetails: { id }
+    programDetails: { id: stateId }
   } = getState();
-  return dispatch(fetchProgramDescriptionAction(id, authService.getAuthArg()));
+  return dispatch(fetchProgramDescriptionAction(id || stateId, authService.getAuthArg()));
 };
 
 export const dispatchProgramId = (id: string) => (
