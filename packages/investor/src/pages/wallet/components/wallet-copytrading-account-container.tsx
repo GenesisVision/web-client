@@ -1,45 +1,61 @@
 import { CopyTradingAccountInfo } from "gv-api-web";
-import React, { useEffect, useState } from "react";
-import { RouteComponentProps } from "react-router";
-import NotFoundPage from "shared/components/not-found/not-found";
+import React from "react";
 import WalletLoader from "shared/components/wallet/components/wallet-loader";
-import useIsOpen from "shared/hooks/is-open.hook";
-
-import { fetchWalletCopytradingAccount } from "../services/wallet-copytrading.service";
 import WalletCopytradingAccount from "./wallet-copytrading-account";
+import { createSelector } from "reselect";
+import { RootState } from "shared/reducers/root-reducer";
+import { copyTradingAccountsSelector } from "shared/components/wallet/reducers/wallet.reducers";
+import { compose } from "redux";
+import { connect } from "react-redux";
 
-const _WalletCopytradingAccountContainer: React.FC<Props> = ({ match }) => {
-  const [account, setAccount] = useState<CopyTradingAccountInfo | undefined>(
-    undefined
-  );
-  const [hasError, setHasError] = useIsOpen();
-  useEffect(
-    () => {
-      fetchWalletCopytradingAccount(match.params.currency)
-        .then(data => {
-          if (!data) throw "";
-          return data;
-        })
-        .then(setAccount)
-        .catch(setHasError);
-    },
-    [match.params.currency, setHasError]
-  );
-  if (hasError) return <NotFoundPage />;
-  return (
-    <WalletCopytradingAccount
-      account={account!}
-      condition={!!account}
-      loader={<WalletLoader />}
-    />
-  );
-};
-
-interface OwnProps extends RouteComponentProps<{ currency: string }> {}
-
-interface Props extends OwnProps {}
-
-const WalletCopytradingAccountContainer = React.memo(
-  _WalletCopytradingAccountContainer
+const _WalletCopytradingAccountContainer: React.FC<Props> = ({
+  copyTradingAccount
+}) => (
+  <WalletCopytradingAccount
+    account={copyTradingAccount!}
+    condition={!!copyTradingAccount}
+    loader={<WalletLoader />}
+  />
 );
+
+interface StateProps {
+  copyTradingAccount?: CopyTradingAccountInfo;
+  copyTradingAccounts: CopyTradingAccountInfo[];
+}
+
+interface OwnProps {
+  currency: string;
+}
+
+interface Props extends OwnProps, StateProps {}
+
+const copyTradingAccountSelector = createSelector<
+  RootState,
+  OwnProps,
+  CopyTradingAccountInfo[] | undefined,
+  string,
+  CopyTradingAccountInfo | undefined
+>(
+  (state: RootState) => copyTradingAccountsSelector(state),
+  (state: RootState, props: OwnProps) => props.currency,
+  (data: CopyTradingAccountInfo[] | undefined, currency: string) => {
+    if (!data) return undefined;
+    return data.find(
+      (account: CopyTradingAccountInfo) =>
+        account.currency === currency.toUpperCase()
+    );
+  }
+);
+
+const mapStateToProps = (state: RootState, props: Props): StateProps => ({
+  copyTradingAccount: copyTradingAccountSelector(state, props),
+  copyTradingAccounts: copyTradingAccountsSelector(state)
+});
+
+const WalletCopytradingAccountContainer = compose<
+  React.ComponentType<OwnProps>
+>(
+  connect(mapStateToProps),
+  React.memo
+)(_WalletCopytradingAccountContainer);
 export default WalletCopytradingAccountContainer;
