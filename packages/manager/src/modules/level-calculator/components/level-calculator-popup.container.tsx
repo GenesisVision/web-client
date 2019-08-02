@@ -34,15 +34,6 @@ class LevelCalculatorPopupContainer extends React.PureComponent<
     );
   }
 
-  componentWillUnmount() {
-    if (this.programLevelsPromise) {
-      this.programLevelsPromise.cancel();
-    }
-    if (this.platformLevelsPromise) {
-      this.platformLevelsPromise.cancel();
-    }
-  }
-
   render() {
     const {
       id,

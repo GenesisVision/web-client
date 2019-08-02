@@ -1,3 +1,4 @@
+import { NextPageContext } from "next";
 import { Dispatch } from "redux";
 import { CancelRequestType } from "shared/components/dashboard/dashboard.constants";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
@@ -13,10 +14,13 @@ import {
 } from "../actions/dashboard.actions";
 import { getPortfolioEvents } from "./dashboard.service";
 
-export const getInRequests = (assetType?: ASSETS_TYPES) => (
-  dispatch: Dispatch
-): ActionType<Promise<any>> =>
-  dispatch(fetchInRequestsAction(authService.getAuthArg(), 0, 100, assetType));
+export const getInRequests = (
+  assetType?: ASSETS_TYPES,
+  ctx?: NextPageContext
+) => (dispatch: Dispatch): ActionType<Promise<any>> =>
+  dispatch(
+    fetchInRequestsAction(authService.getAuthArg(ctx), 0, 100, assetType)
+  );
 
 export const cancelRequest: CancelRequestType = ({
   id,

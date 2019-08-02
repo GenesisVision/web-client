@@ -3,15 +3,15 @@ import "shared/components/details/details.scss";
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
 import { editAsset } from "modules/asset-edit/services/asset-edit.services";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
+import { NextPageContext } from "next";
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
   Dispatch,
-  Dispatch
+  bindActionCreators,
+  compose
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import Page from "shared/components/page/page";
@@ -35,6 +35,7 @@ import {
 import { IProgramSignalFormValues } from "./signaling-edit";
 
 const _ProgramsEditPage: React.FC<Props> = ({
+  ctx,
   service: {
     dispatchProgramDescription,
     programEditSignal,
@@ -63,10 +64,10 @@ const _ProgramsEditPage: React.FC<Props> = ({
   );
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
-      programEditSignal(description!.id, successFee!, volumeFee!).then(
-        dispatchProgramDescription
+      programEditSignal(description!.id, successFee!, volumeFee!).then(() =>
+        dispatchProgramDescription(ctx)
       ),
-    [description, dispatchProgramDescription, programEditSignal]
+    [description, dispatchProgramDescription, programEditSignal, ctx]
   );
   const changeBroker = useCallback(
     (
@@ -78,17 +79,17 @@ const _ProgramsEditPage: React.FC<Props> = ({
         brokerAccountTypeId,
         leverage,
         setSubmitting
-      ).then(dispatchProgramDescription);
+      ).then(() => dispatchProgramDescription(ctx));
     },
-    [changeBrokerMethod, description, dispatchProgramDescription]
+    [changeBrokerMethod, description, dispatchProgramDescription, ctx]
   );
   const cancelChangeBroker = useCallback(
     () => {
-      cancelChangeBrokerMethod(description!.id).then(
-        dispatchProgramDescription
+      cancelChangeBrokerMethod(description!.id).then(() =>
+        dispatchProgramDescription(ctx)
       );
     },
-    [cancelChangeBrokerMethod, description, dispatchProgramDescription]
+    [cancelChangeBrokerMethod, description, dispatchProgramDescription, ctx]
   );
   const editProgram: TUpdateProgramFunc = useCallback(
     values => {
@@ -103,9 +104,9 @@ const _ProgramsEditPage: React.FC<Props> = ({
         description!.id,
         { ...currentValues, ...values },
         ASSET.PROGRAM
-      ).then(dispatchProgramDescription);
+      ).then(() => dispatchProgramDescription(ctx));
     },
-    [description, dispatchProgramDescription, editAsset]
+    [description, dispatchProgramDescription, editAsset, ctx]
   );
   const applyCloseProgram = useCallback(() => redirectToProgram(), [
     redirectToProgram
@@ -156,7 +157,9 @@ export type TUpdateProgramFunc = (
   setSubmitting: SetSubmittingType
 ) => void;
 
-interface OwnProps {}
+interface OwnProps {
+  ctx?: NextPageContext;
+}
 
 interface StateProps {
   description?: ProgramDetailsFull;
