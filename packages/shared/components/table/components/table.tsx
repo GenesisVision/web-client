@@ -19,7 +19,7 @@ import {
   LIST_VIEW,
   PROGRAMS_VIEW
 } from "shared/components/table/table.constants";
-import { loadData, saveData } from "shared/utils/localstorage";
+import { getCookie, setCookie } from "shared/utils/cookie";
 
 import { FilteringType } from "./filtering/filter.type";
 import { RenderBodyItemFuncType } from "./table.types";
@@ -54,12 +54,15 @@ const _Table: React.FC<ITableProps> = ({
     renderBodyRow !== undefined &&
     renderBodyCard !== undefined &&
     !!showSwitchView;
-  useEffect(() => {
-    if (isViewSwitchEnabled)
-      setView(loadData(PROGRAMS_VIEW) || LIST_VIEW.TABLE);
-  }, []);
+  useEffect(
+    () => {
+      if (isViewSwitchEnabled)
+        setView(getCookie(PROGRAMS_VIEW) || LIST_VIEW.TABLE);
+    },
+    [isViewSwitchEnabled]
+  );
   const changeView = useCallback((view: LIST_VIEW) => {
-    saveData(PROGRAMS_VIEW, view);
+    setCookie(PROGRAMS_VIEW, view);
     setView(view);
   }, []);
   if (!items && emptyMessage) return emptyMessage;

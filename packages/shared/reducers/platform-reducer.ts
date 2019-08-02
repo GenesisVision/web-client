@@ -23,7 +23,7 @@ export const platformDataSelector = apiSelector<PlatformInfo>(
 export const currenciesSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.currencies),
-  ["BTC"]
+  []
 );
 
 export const programCurrenciesSelector = apiFieldSelector(
