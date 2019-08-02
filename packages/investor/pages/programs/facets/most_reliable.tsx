@@ -1,0 +1,28 @@
+import React from "react";
+import { compose } from "redux";
+import withDefaultLayout from "shared/decorators/with-default-layout";
+import { NextPageWithRedux } from "shared/utils/types";
+
+import { connect } from "react-redux";
+import platformActions from "shared/actions/platform-actions";
+import ProgramsRatingContainer from "shared/components/programs-rating/programs-rating-container";
+
+const ProgramRatingFacet: NextPageWithRedux<Props, {}> = () => {
+  return <ProgramsRatingContainer />;
+};
+
+ProgramRatingFacet.getInitialProps = async ctx => {
+  await Promise.all([
+    ctx.reduxStore.dispatch(
+      async dispatch => await dispatch(platformActions.fetchPlatformSettings())
+    )
+  ]);
+  return {};
+};
+
+export default compose(
+  connect(null),
+  withDefaultLayout
+)(ProgramRatingFacet);
+
+interface Props {}
