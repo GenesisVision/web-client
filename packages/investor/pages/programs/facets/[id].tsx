@@ -2,8 +2,6 @@ import React from "react";
 import { compose } from "redux";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import { NextPageWithRedux } from "shared/utils/types";
-
-import { connect } from "react-redux";
 import ProgramsFacetPage from "shared/components/programs/programs-facet/programs-facet.page";
 import platformActions from "shared/actions/platform-actions";
 
@@ -21,10 +19,7 @@ ProgramFacet.getInitialProps = async ctx => {
   return { id };
 };
 
-export default compose(
-  connect(null),
-  withDefaultLayout
-)(ProgramFacet);
+export default compose(withDefaultLayout)(ProgramFacet);
 
 interface Props {
   id: string;
