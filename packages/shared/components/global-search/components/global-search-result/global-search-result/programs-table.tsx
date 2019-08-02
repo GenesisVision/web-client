@@ -1,15 +1,19 @@
+import "shared/modules/programs-table/components/programs-table/programs.scss";
+
 import { ProgramsList } from "gv-api-web";
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { Table } from "shared/components/table/components";
 import ProgramTableRowShort from "shared/modules/programs-table/components/programs-table/program-table-row-short";
 import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/programs-table/programs.constants";
 
 import { SearchTableProps } from "./global-search-result";
 
-const ProgramsTable: React.FC<
-  SearchTableProps<ProgramsList> & WithTranslation
-> = ({ t, data, title }) => {
+const ProgramsTable: React.FC<SearchTableProps<ProgramsList>> = ({
+  data,
+  title
+}) => {
+  const [t] = useTranslation();
   return (
     <Table
       columns={PROGRAMS_COLUMNS}
@@ -34,4 +38,4 @@ const ProgramsTable: React.FC<
   );
 };
 
-export default translate()(React.memo(ProgramsTable));
+export default React.memo(ProgramsTable);

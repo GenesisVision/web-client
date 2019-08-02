@@ -1,3 +1,5 @@
+import "shared/components/programs/programs-facet/programs-facet.scss";
+
 import { LevelInfo } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -14,8 +16,9 @@ import { fetchPrograms } from "shared/modules/programs-table/services/programs-t
 import LevelIcon from "../programs/program-details/program-details-description/about-levels/level-icon";
 import { fetchInvestmentsLevels } from "../programs/program-details/services/program-details.service";
 import ProgramsFacetTable from "../programs/programs-facet/components/programs-facet-table";
-import { getCurrentFacet } from "../programs/programs-facet/services/programs-facet.service";
 import { PROGRAMS_COLUMNS } from "./program-rating.constants";
+
+const RATING_FACET_NAME = "most_reliable";
 
 const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   const [levels, setLevels] = useState<LevelInfo[]>([]);
@@ -26,8 +29,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   };
 
   useEffect(() => {
-    const request = fetchInvestmentsLevels("GVT").then(setLevels);
-    return () => request.cancel();
+    fetchInvestmentsLevels("GVT").then(setLevels);
   }, []);
 
   const getPrograms = useCallback(
@@ -57,6 +59,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
       </div>
       <Surface className="programs-table-container">
         <FacetContainer
+          id={RATING_FACET_NAME}
           asset={FACET_ASSET.PROGRAMS}
           TableContainer={props => (
             <ProgramsFacetTable
@@ -65,7 +68,6 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
               columns={PROGRAMS_COLUMNS}
             />
           )}
-          getCurrentFacet={getCurrentFacet}
           getItems={getPrograms}
         />
       </Surface>

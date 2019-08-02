@@ -1,7 +1,6 @@
 import { FundFacet, PlatformInfo, ProgramFacet } from "gv-api-web";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { createSelector } from "reselect";
 import { IFundsFacetTableProps } from "shared/components/funds/funds-facet/components/funds-facet-table";
@@ -10,43 +9,23 @@ import { IProgramsFacetTableProps } from "shared/components/programs/programs-fa
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { IDataModel } from "shared/constants/constants";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
-import useIsOpen from "shared/hooks/is-open.hook";
 import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
 const _FacetContainer: React.FC<Props> = ({
+  id,
   TableContainer,
   isAuthenticated,
-  service,
   facets,
+  facet,
   getItems
 }) => {
-  const [
-    isPending,
-    setIsPending,
-    setIsNotPending,
-    setPendingValue
-  ] = useIsOpen();
-  const [notFound, setNotFound, setFound, setFoundValue] = useIsOpen();
-  const [facet, setFacet] = useState<FacetType | undefined>(undefined);
-  useEffect(
-    () => {
-      if (facets !== null) {
-        const { facet, isPending, notFound } = service.getCurrentFacet();
-        setFacet(facet);
-        setPendingValue(!!isPending);
-        setFoundValue(!!notFound);
-      }
-    },
-    [facets]
-  );
   const getFacetItems = useCallback(
     filtering => getItems({ ...filtering, facetId: facet!.id }),
     [facet, getItems]
   );
-  if (!facet || isPending) return null;
-  if (notFound) return <NotFoundPage />;
+  if (!facets) return null;
+  if (!facet) return <NotFoundPage />;
   const { title, sorting, timeframe } = facet!;
   return (
     <TableContainer
@@ -59,7 +38,7 @@ const _FacetContainer: React.FC<Props> = ({
   );
 };
 
-const facetSelector = createSelector<
+const facetsSelector = createSelector<
   RootState,
   OwnProps,
   PlatformInfo | undefined,
@@ -73,25 +52,28 @@ const facetSelector = createSelector<
     return data[asset];
   }
 );
+const facetSelector = createSelector<
+  RootState,
+  OwnProps,
+  FacetType[] | undefined,
+  string,
+  FacetType | undefined
+>(
+  (state, props) => facetsSelector(state, props),
+  (state, props) => props.id,
+  (data, id) => {
+    if (!data) return undefined;
+    return data.find((x: FacetType) => x.url === id);
+  }
+);
 
 const mapStateToProps = (state: RootState, props: OwnProps): StateProps => ({
-  facets: facetSelector(state, props)
-});
-
-const mapDispatchToProps = (
-  dispatch: MiddlewareDispatch,
-  { getCurrentFacet }: Props
-): DispatchProps => ({
-  service: {
-    getCurrentFacet: () => dispatch(getCurrentFacet())
-  }
+  facets: facetsSelector(state, props),
+  facet: facetSelector(state, props)
 });
 
 interface OwnProps {
-  getCurrentFacet: () => (
-    dispatch: MiddlewareDispatch,
-    getState: TGetState
-  ) => FacetDataType;
+  id: string;
   asset: FACET_ASSET;
   TableContainer: React.ComponentType<
     IProgramsFacetTableProps | IFundsFacetTableProps
@@ -101,13 +83,11 @@ interface OwnProps {
 }
 interface StateProps {
   facets?: FacetType[];
+  facet?: FacetType;
 }
-interface DispatchProps {
-  service: {
-    getCurrentFacet: () => FacetDataType;
-  };
-}
-interface Props extends OwnProps, StateProps, DispatchProps {}
+
+interface Props extends OwnProps, StateProps {}
+
 export type FacetType = ProgramFacet | FundFacet;
 export type FacetDataType = {
   isPending?: boolean;
@@ -120,12 +100,8 @@ export enum FACET_ASSET {
 }
 
 const FacetContainer = compose<React.ComponentType<OwnProps>>(
-  withRouter,
   withAuthenticated,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+  connect(mapStateToProps),
   React.memo
 )(_FacetContainer);
 export default FacetContainer;
