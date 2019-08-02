@@ -1,5 +1,4 @@
 import {
-  CancelablePromise,
   NotificationList,
   NotificationViewModel
 } from "gv-api-web";

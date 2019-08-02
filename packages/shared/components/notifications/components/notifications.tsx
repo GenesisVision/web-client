@@ -1,7 +1,6 @@
 import "./notifications.scss";
 
 import {
-  CancelablePromise,
   NotificationList,
   NotificationViewModel
 } from "gv-api-web";
@@ -103,7 +102,7 @@ const _Notifications: React.FC<Props> = ({
           {Object.keys(groups)
             .sort(sortGroups)
             .map<React.ReactNode>(renderGroups(groups))}
-          <Spinner isShown={isPending} />
+          {isPending && <Spinner />}
         </div>
       </InfinityScroll>
     </div>

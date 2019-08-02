@@ -8,13 +8,11 @@ export const ADD_NOTIFICATION_SETTINGS = "ADD_NOTIFICATION_SETTINGS";
 export const REMOVE_NOTIFICATION_SETTING = "REMOVE_NOTIFICATION_SETTING";
 export const ADD_NOTIFICATION_SETTING = "ADD_NOTIFICATION_SETTING";
 
-export const fetchNotificationSettingsAction = (): ActionType<
-  Promise<NotificationSettingList>
-> => ({
+export const fetchNotificationSettingsAction = (
+  auth: string
+): ActionType<Promise<NotificationSettingList>> => ({
   type: NOTIFICATION_SETTINGS,
-  payload: notificationsApi.v10NotificationsSettingsGet(
-    authService.getAuthArg()
-  )
+  payload: notificationsApi.v10NotificationsSettingsGet(auth)
 });
 
 export interface IRemoveNotificationSettingProps {

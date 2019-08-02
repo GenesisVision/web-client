@@ -61,10 +61,10 @@ const _ProfileWidget: React.FC<Props> = ({
             </div>
             <div className="profile-menu__item profile-menu__item--logout">
               <GVButton variant="text" onClick={logout}>
-                <React.Fragment>
+                <>
                   <LogoutIcon />
                   {t("profile-widget.logout")}
-                </React.Fragment>
+                </>
               </GVButton>
             </div>
           </div>
