@@ -1,3 +1,4 @@
+import { NextPageContext } from "next";
 import { Dispatch } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
@@ -56,8 +57,8 @@ export const getAssetChart = (
   }
 };
 
-export const getAssets = () => (dispatch: Dispatch) =>
-  dispatch(actions.fetchAssetsAction(authService.getAuthArg()));
+export const getAssets = (ctx?: NextPageContext) => (dispatch: Dispatch) =>
+  dispatch(actions.fetchAssetsAction(authService.getAuthArg(ctx)));
 
 export const composeAssetChart = (assetType: ASSETS_TYPES) => (
   dispatch: MiddlewareDispatch,
