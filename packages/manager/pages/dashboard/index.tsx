@@ -1,6 +1,4 @@
 import DashboardPage from "pages/dashboard/dashboard.page";
-import { getPortfolioChart } from "pages/dashboard/services/dashboard-chart.service";
-import { getTopPortfolioEvents } from "pages/dashboard/services/dashboard-events.services";
 import { getInRequests } from "pages/dashboard/services/dashboard-in-requests.service";
 import React, { useEffect } from "react";
 import { ResolveThunks, connect } from "react-redux";
@@ -10,9 +8,15 @@ import {
   bindActionCreators,
   compose
 } from "redux";
+import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
+
+import {
+  composeAssetChart,
+  getAssets
+} from "../../src/pages/dashboard/services/dashboard.service";
 
 const Dashboard: NextPageWithRedux<Props, {}> = ({ service }) => {
   return <DashboardPage />;
@@ -20,16 +24,16 @@ const Dashboard: NextPageWithRedux<Props, {}> = ({ service }) => {
 
 Dashboard.getInitialProps = async ctx => {
   await Promise.all([
-    ctx.reduxStore.dispatch(getTopPortfolioEvents(ctx)),
-    ctx.reduxStore.dispatch(getInRequests(ctx)),
-    ctx.reduxStore.dispatch(getPortfolioChart(ctx))
+    ctx.reduxStore.dispatch(composeAssetChart(ASSETS_TYPES.Program)),
+    ctx.reduxStore.dispatch(getInRequests(ASSETS_TYPES.Program, ctx)),
+    ctx.reduxStore.dispatch(getAssets(ctx))
   ]);
   return {};
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { getTopPortfolioEvents, getInRequests, getPortfolioChart },
+    { composeAssetChart, getInRequests, getAssets },
     dispatch
   )
 });
@@ -46,9 +50,9 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 interface ServiceThunks extends ActionCreatorsMapObject {
-  getTopPortfolioEvents: typeof getTopPortfolioEvents;
+  composeAssetChart: typeof composeAssetChart;
   getInRequests: typeof getInRequests;
-  getPortfolioChart: typeof getPortfolioChart;
+  getAssets: typeof getAssets;
 }
 
 interface Props extends DispatchProps {}
