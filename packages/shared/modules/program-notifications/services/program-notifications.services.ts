@@ -9,6 +9,7 @@ import {
   removeNotificationSettingAction
 } from "shared/modules/notification-settings/actions/notification-settings.actions";
 import { MiddlewareDispatch } from "shared/utils/types";
+import { NextPageContext } from "next";
 
 import {
   addErrorMessageAction,
@@ -16,13 +17,17 @@ import {
   fetchProgramNotificationsAction,
   toggleProgramNotificationsAction
 } from "../actions/program-notifications.actions";
+import authService from "shared/services/auth-service";
 
-export const fetchProgramNotifications = (id: string) => (
-  dispatch: MiddlewareDispatch
-) =>
-  dispatch(fetchProgramNotificationsAction(id)).then(data =>
-    dispatch(addProgramNotificationsAction(data.value))
+export const fetchProgramNotifications = (
+  id: string,
+  ctx?: NextPageContext
+) => async (dispatch: MiddlewareDispatch) => {
+  const authorization = authService.getAuthArg(ctx);
+  await dispatch(fetchProgramNotificationsAction(id, authorization)).then(
+    data => dispatch(addProgramNotificationsAction(data.value))
   );
+};
 
 export const addProgramNotification: TAddNotification = (
   opts,

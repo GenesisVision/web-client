@@ -2,7 +2,6 @@ import classnames from "classnames";
 import { NotificationViewModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { Link, LinkProps } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import NewsIcon from "shared/media/news.svg";
 import RedUserIcon from "shared/media/red-user.svg";
@@ -10,6 +9,7 @@ import {
   composeFundsDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
+import Link, { LinkProps } from "shared/components/link/link";
 
 enum TYPE {
   PROFILE = "profile",

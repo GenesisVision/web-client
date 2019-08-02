@@ -31,7 +31,7 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
       setIsPending();
       setIsReinvestingValue(!isReinvesting);
       toggleReinvesting(programId, !isReinvesting)
-        .then(dispatchProgramDescription)
+        .then(() => dispatchProgramDescription())
         .catch(() => setIsReinvestingValue(isReinvesting))
         .finally(setNotIsPending);
     },

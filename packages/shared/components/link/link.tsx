@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 
 import { normalizeTo, pushHistoryState } from "./link.helper";
 
-const Link: React.FC<Props> = ({ to, className, onClick, children }) => {
+const Link: React.FC<LinkProps> = ({ to, className, onClick, children }) => {
   const normalizedTo = normalizeTo(to);
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -29,7 +29,7 @@ const Link: React.FC<Props> = ({ to, className, onClick, children }) => {
 
 export default Link;
 
-interface Props {
+export interface LinkProps {
   to: ToType | string;
   className?: string;
   onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;

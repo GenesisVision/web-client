@@ -19,13 +19,11 @@ export const addProgramNotificationsAction = (
 });
 
 export const fetchProgramNotificationsAction = (
-  id: string
+  id: string,
+  auth: string
 ): ApiAction<ProgramNotificationSettingList> => ({
   type: FETCH_PROGRAM_NOTIFICATIONS,
-  payload: notificationsApi.v10NotificationsSettingsProgramsByIdGet(
-    id,
-    authService.getAuthArg()
-  )
+  payload: notificationsApi.v10NotificationsSettingsProgramsByIdGet(id, auth)
 });
 
 export const addErrorMessageAction = (
