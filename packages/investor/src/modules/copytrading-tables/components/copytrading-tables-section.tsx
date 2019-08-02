@@ -1,3 +1,5 @@
+import "shared/components/dashboard/dashboard-assets/dashboard-assets.scss";
+
 import React, { useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVTabs from "shared/components/gv-tabs";
