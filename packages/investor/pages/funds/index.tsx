@@ -1,7 +1,7 @@
 import { FundsList } from "gv-api-web";
 import { NextPage, NextPageContext } from "next";
-import FundsPage from "pages/funds/funds/funds.page";
 import React from "react";
+import FundsPage from "shared/components/funds/funds.page";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import { getFiltersFromContext } from "shared/modules/funds-table/components/funds-table/funds-table-ssr";
 import fundsApi from "shared/services/api-client/funds-api";
