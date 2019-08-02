@@ -15,13 +15,19 @@ import {
   fetchFundNotificationsAction,
   toggleFundNotificationsAction
 } from "../actions/fund-notifications.actions";
+import authService from "shared/services/auth-service";
 
-export const fetchFundNotifications = (id: string) => (
-  dispatch: MiddlewareDispatch
-) =>
-  dispatch(fetchFundNotificationsAction(id)).then(data =>
+import { NextPageContext } from "next";
+
+export const fetchFundNotifications = (
+  id: string,
+  ctx?: NextPageContext
+) => async (dispatch: MiddlewareDispatch) => {
+  const authorization = authService.getAuthArg(ctx);
+  await dispatch(fetchFundNotificationsAction(id, authorization)).then(data =>
     dispatch(addFundNotificationsAction(data.value))
   );
+};
 
 export const addFundNotification: TAddNotification = (
   opts,
