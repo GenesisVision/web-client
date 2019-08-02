@@ -2,8 +2,6 @@ import React from "react";
 import { compose } from "redux";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import { NextPageWithRedux } from "shared/utils/types";
-
-import { connect } from "react-redux";
 import platformActions from "shared/actions/platform-actions";
 import ProgramsRatingContainer from "shared/components/programs-rating/programs-rating-container";
 
@@ -20,9 +18,6 @@ ProgramRatingFacet.getInitialProps = async ctx => {
   return {};
 };
 
-export default compose(
-  connect(null),
-  withDefaultLayout
-)(ProgramRatingFacet);
+export default compose(withDefaultLayout)(ProgramRatingFacet);
 
 interface Props {}
