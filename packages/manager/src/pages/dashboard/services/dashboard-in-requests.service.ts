@@ -6,7 +6,6 @@ import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset
 import { ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
-import { ActionType } from "shared/utils/types";
 
 import {
   cancelProgramRequestAction,
@@ -17,8 +16,8 @@ import { getPortfolioEvents } from "./dashboard.service";
 export const getInRequests = (
   assetType?: ASSETS_TYPES,
   ctx?: NextPageContext
-) => (dispatch: Dispatch): ActionType<Promise<any>> =>
-  dispatch(
+) => async (dispatch: Dispatch): Promise<any> =>
+  await dispatch(
     fetchInRequestsAction(authService.getAuthArg(ctx), 0, 100, assetType)
   );
 
