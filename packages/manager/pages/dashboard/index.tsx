@@ -24,10 +24,11 @@ const Dashboard: NextPageWithRedux<Props, {}> = ({ service }) => {
 
 Dashboard.getInitialProps = async ctx => {
   await Promise.all([
-    ctx.reduxStore.dispatch(composeAssetChart(ASSETS_TYPES.Program)),
-    ctx.reduxStore.dispatch(getInRequests(ASSETS_TYPES.Program, ctx)),
-    ctx.reduxStore.dispatch(getAssets(ctx))
-  ]);
+    ctx.reduxStore.dispatch(getAssets(ctx)),
+    ctx.reduxStore.dispatch(getInRequests(ASSETS_TYPES.Program, ctx))
+  ]).then(() =>
+    ctx.reduxStore.dispatch(composeAssetChart(ASSETS_TYPES.Program))
+  );
   return {};
 };
 
