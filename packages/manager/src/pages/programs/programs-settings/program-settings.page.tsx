@@ -52,12 +52,6 @@ const _ProgramsEditPage: React.FC<Props> = ({
   >(undefined);
   useEffect(
     () => {
-      dispatchProgramDescription();
-    },
-    [dispatchProgramDescription]
-  );
-  useEffect(
-    () => {
       description && getProgramBrokers(description.id).then(setBrokersInfo);
     },
     [description]
@@ -114,13 +108,13 @@ const _ProgramsEditPage: React.FC<Props> = ({
   return (
     <Page title={t("manager.program-settings.title")}>
       <ProgramSettings
-        condition={!!description && !!brokersInfo}
+        condition={!!description}
         loader={<ProgramSettingsLoader />}
         changeSignaling={changeSignaling}
         closePeriod={dispatchProgramDescription}
         closeProgram={applyCloseProgram}
         details={description!}
-        brokersInfo={brokersInfo!}
+        brokersInfo={brokersInfo}
         changeBroker={changeBroker}
         editProgram={editProgram}
         cancelChangeBroker={cancelChangeBroker}
