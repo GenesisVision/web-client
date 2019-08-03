@@ -65,30 +65,21 @@ const _ProgramSettings: React.FC<Props> = ({
         onSubmit={editProgram}
       />
       <CancelChangeBroker
-        condition={!!details.personalProgramDetails.migration}
-        brokerFrom={
-          brokersInfo.brokers.find(
-            broker =>
-              !!broker.accountTypes.find(
-                accountType =>
-                  accountType.id === brokersInfo.currentAccountTypeId
-              )
-          )!
-        }
+        condition={!!brokersInfo && !!details.personalProgramDetails.migration}
+        brokersInfo={brokersInfo!}
         migration={details.personalProgramDetails.migration}
         onSubmit={cancelChangeBroker}
-        currentAccountTypeId={brokersInfo.currentAccountTypeId}
         leverage={details.leverageMax}
       />
       <ChangeBroker
         condition={
+          !!brokersInfo &&
           !!!details.personalProgramDetails.migration &&
           brokersInfo.brokers.length > 1
         }
         onSubmit={changeBroker}
         id={details.id}
-        brokers={brokersInfo.brokers}
-        currentAccountTypeId={brokersInfo.currentAccountTypeId}
+        brokersInfo={brokersInfo!}
         currentLeverage={details.leverageMax}
       />
       <StopOutLevel
@@ -119,7 +110,7 @@ interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
   details: ProgramDetailsFull;
-  brokersInfo: BrokersProgramInfo;
+  brokersInfo?: BrokersProgramInfo;
   changeSignaling: (
     values: IProgramSignalFormValues,
     setSubmitting: SetSubmittingType
