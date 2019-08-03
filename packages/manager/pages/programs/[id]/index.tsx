@@ -15,7 +15,7 @@ import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
 
-import ProgramDetailsPage from "../../src/pages/programs/program-details/program-details.page";
+import ProgramDetailsPage from "../../../src/pages/programs/program-details/program-details.page";
 import { connect, ResolveThunks } from "react-redux";
 
 const ProgramDetails: NextPageWithRedux<Props, {}> = () => {
