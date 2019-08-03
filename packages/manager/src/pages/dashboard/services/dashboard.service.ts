@@ -57,10 +57,11 @@ export const getAssetChart = (
   }
 };
 
-export const getAssets = (ctx?: NextPageContext) => (dispatch: Dispatch) =>
-  dispatch(actions.fetchAssetsAction(authService.getAuthArg(ctx)));
+export const getAssets = (ctx?: NextPageContext) => async (
+  dispatch: Dispatch
+) => await dispatch(actions.fetchAssetsAction(authService.getAuthArg(ctx)));
 
-export const composeAssetChart = (assetType: ASSETS_TYPES) => (
+export const composeAssetChart = (assetType: ASSETS_TYPES) => async (
   dispatch: MiddlewareDispatch,
   getState: TGetAuthState
 ) => {
@@ -72,7 +73,7 @@ export const composeAssetChart = (assetType: ASSETS_TYPES) => (
     asset = funds[0];
   } else return;
 
-  dispatch(getAssetChart(asset.id, asset.title, assetType));
+  await dispatch(getAssetChart(asset.id, asset.title, assetType));
 };
 
 export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
