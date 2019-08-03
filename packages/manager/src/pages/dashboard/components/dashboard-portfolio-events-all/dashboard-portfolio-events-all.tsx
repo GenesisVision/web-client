@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
-import PortfolioEventsTableContainerComponent from "shared/components/portfolio-events/portfolio-events-table/portfolio-events-table-container";
+import PortfolioEventsTableContainerComponent from "shared/components/portfolio-events-table/portfolio-events-table-container";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
