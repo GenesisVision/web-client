@@ -4,7 +4,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
-import PortfolioEventsTableContainer from "shared/components/portfolio-events-table/portfolio-events-table-container";
+import PortfolioEventsTableContainer from "shared/components/portfolio-events/portfolio-events-table/portfolio-events-table-container";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { allEventsSelector } from "shared/reducers/platform-reducer";

@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
+import PortfolioEventsTable from "shared/components/portfolio-events/portfolio-events-table/portfolio-events-table";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
