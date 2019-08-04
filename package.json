@@ -153,7 +153,8 @@
   "scripts": {
     "upgrade-api": "cd packages/gv-api-web && git checkout development && git pull",
     "investor": "cd packages/investor && yarn start",
-    "manager": "cd packages/manager && yarn start"
+    "manager": "cd packages/manager && yarn start",
+    "lint": "eslint packages/**/*.{ts,tsx} --fix --ignore-pattern packages/gv-api-web/**"
   },
   "importSort": {
     ".js": {
