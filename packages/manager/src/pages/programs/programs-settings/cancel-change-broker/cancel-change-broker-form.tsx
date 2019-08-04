@@ -1,4 +1,4 @@
-import { Broker, MigrationRequest } from "gv-api-web";
+import { BrokersProgramInfo, MigrationRequest } from "gv-api-web";
 import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React from "react";
@@ -13,11 +13,16 @@ import ConfirmCancelChangeBroker from "./confirm-cancel-change-broker";
 const _CancelChangeBrokerForm: React.FC<Props> = ({
   onSubmit,
   t,
-  brokerFrom,
-  currentAccountTypeId,
+  brokersInfo: { currentAccountTypeId, brokers },
   leverage,
   migration: { newBroker: brokerTo, newLeverage }
 }) => {
+  const brokerFrom = brokers.find(
+    broker =>
+      !!broker.accountTypes.find(
+        accountType => accountType.id === currentAccountTypeId
+      )
+  )!;
   const [
     isCancelChangeBrokerOpen,
     setCancelChangeBrokerOpen,
@@ -105,9 +110,8 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
 interface Props extends CancelChangeBrokerFormOwnProps, WithTranslation {}
 
 export interface CancelChangeBrokerFormOwnProps {
+  brokersInfo: BrokersProgramInfo;
   onSubmit: () => void;
-  brokerFrom: Broker;
-  currentAccountTypeId: string;
   leverage: number;
   migration: MigrationRequest;
 }

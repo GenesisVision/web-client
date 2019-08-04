@@ -1,4 +1,5 @@
 import "shared/components/deposit-details/deposit-details.scss";
+
 import "./create-program-settings.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
@@ -130,7 +131,6 @@ class _CreateProgramSettings extends React.PureComponent<
     } = values;
     const accountCurrencies = accountType ? accountType.currencies : [];
     const accountLeverages = accountType ? accountType.leverages : [];
-
     return (
       <div className="create-program-settings">
         <form
