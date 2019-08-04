@@ -1,38 +1,34 @@
 import copy from "copy-to-clipboard";
+import { InjectedFormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVqr from "shared/components/gv-qr/gv-qr";
 import CopyIcon from "shared/components/icon/copy-icon";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
-import withLoader from "shared/decorators/with-loader";
-import { CurrencyEnum } from "shared/utils/types";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
-const _WalletAddFundsForm: React.FC<Props> = ({
+const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
   t,
   wallets,
   notifySuccess,
   notifyError,
-  currentWallet
+  currentWallet,
+  setFieldValue
 }) => {
-  const [currency, setCurrency] = useState<CurrencyEnum>(
-    currentWallet.currency
-  );
-  const [id, setId] = useState<string>(currentWallet.id);
-  useEffect(
-    () => {
-      setCurrency(wallets.find(wallet => wallet.id === id)!.currency);
-    },
-    [id]
-  );
-  const onChangeWallet = useCallback((event: ISelectChangeEvent) => {
-    setId(event.target.value);
-  }, []);
-  const selected = wallets.find(wallet => wallet.currency === currency)!;
+  const [selected, setSelected] = useState<WalletData>(currentWallet);
   const { depositAddress } = selected;
+  const onChangeWallet = useCallback(
+    (event: ISelectChangeEvent) => {
+      setSelected(wallets.find(wallet => wallet.id === event.target.value)!);
+      setFieldValue(FIELDS.id, event.target.value);
+    },
+    [wallets, setSelected]
+  );
   const onCopy = useCallback(
     () => {
       try {
@@ -51,13 +47,14 @@ const _WalletAddFundsForm: React.FC<Props> = ({
           <h2>{t("wallet-deposit.title")}</h2>
         </div>
         <div className="dialog-field">
-          <WalletSelect
-            value={id}
-            name={"currency"}
-            label={t("wallet-deposit.select-currency")}
-            items={wallets}
-            onChange={onChangeWallet}
-          />
+          <form id="wallet-deposit" noValidate>
+            <WalletSelect
+              name={FIELDS.id}
+              label={t("wallet-deposit.select-currency")}
+              items={wallets}
+              onChange={onChangeWallet}
+            />
+          </form>
         </div>
       </div>
       <div className="dialog__bottom wallet-add-funds-popup__bottom">
@@ -80,10 +77,27 @@ const _WalletAddFundsForm: React.FC<Props> = ({
   );
 };
 
-const WalletAddFundsForm = withLoader(
-  translate()(React.memo(_WalletAddFundsForm))
-);
+const WalletAddFundsForm = compose<React.FC<OwnProps & WithLoaderProps>>(
+  withLoader,
+  translate(),
+  withFormik<Props, FormValues>({
+    displayName: "wallet-deposit",
+    mapPropsToValues: ({ currentWallet: { id } }) => ({
+      [FIELDS.id]: id
+    }),
+    handleSubmit: () => {}
+  }),
+  React.memo
+)(_WalletAddFundsForm);
 export default WalletAddFundsForm;
+
+enum FIELDS {
+  id = "id"
+}
+
+interface FormValues {
+  [FIELDS.id]: string;
+}
 
 interface OwnProps {
   wallets: WalletData[];
