@@ -4,12 +4,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import GVqr from "shared/components/gv-qr/gv-qr";
-import GVTextField from "shared/components/gv-text-field";
 import CopyIcon from "shared/components/icon/copy-icon";
-import Select from "shared/components/select/select";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import WalletSelect from "shared/components/wallet-select/wallet-select";
 import withLoader from "shared/decorators/with-loader";
-import filesService from "shared/services/file-service";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _WalletAddFundsForm: React.FC<Props> = ({
@@ -19,17 +18,19 @@ const _WalletAddFundsForm: React.FC<Props> = ({
   notifyError,
   currentWallet
 }) => {
-  const [currency, setCurrency] = useState<CurrencyEnum>(wallets[0].currency);
-  useEffect(() => {
-    const currentCurrency = currentWallet.currency;
-    if (wallets.find(wallet => wallet.currency === currentCurrency))
-      setCurrency(currentCurrency);
-  });
-  const onChangeCurrency = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) =>
-      setCurrency(event.target.value as CurrencyEnum),
-    []
+  const [currency, setCurrency] = useState<CurrencyEnum>(
+    currentWallet.currency
   );
+  const [id, setId] = useState<string>(currentWallet.id);
+  useEffect(
+    () => {
+      setCurrency(wallets.find(wallet => wallet.id === id)!.currency);
+    },
+    [id]
+  );
+  const onChangeWallet = useCallback((event: ISelectChangeEvent) => {
+    setId(event.target.value);
+  }, []);
   const selected = wallets.find(wallet => wallet.currency === currency)!;
   const { depositAddress } = selected;
   const onCopy = useCallback(
@@ -50,24 +51,13 @@ const _WalletAddFundsForm: React.FC<Props> = ({
           <h2>{t("wallet-deposit.title")}</h2>
         </div>
         <div className="dialog-field">
-          <GVTextField
-            name="currency"
+          <WalletSelect
+            value={id}
+            name={"currency"}
             label={t("wallet-deposit.select-currency")}
-            InputComponent={Select}
-            value={currency}
-            onChange={onChangeCurrency}
-          >
-            {wallets.map(({ title, currency, logo }) => (
-              <option value={currency} key={currency}>
-                <img
-                  src={filesService.getFileUrl(logo)}
-                  className="wallet-withdraw-popup__icon"
-                  alt={currency}
-                />
-                {`${title} | ${currency}`}
-              </option>
-            ))}
-          </GVTextField>
+            items={wallets}
+            onChange={onChangeWallet}
+          />
         </div>
       </div>
       <div className="dialog__bottom wallet-add-funds-popup__bottom">
@@ -95,14 +85,9 @@ const WalletAddFundsForm = withLoader(
 );
 export default WalletAddFundsForm;
 
-export interface CurrentWallet {
-  currency: CurrencyEnum;
-  available: number;
-}
-
 interface OwnProps {
   wallets: WalletData[];
-  currentWallet: CurrentWallet;
+  currentWallet: WalletData;
   notifySuccess(text: string): void;
   notifyError(text: string): void;
 }
