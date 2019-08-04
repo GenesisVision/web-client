@@ -22,8 +22,8 @@ import GVTextField from "shared/components/gv-text-field";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
-import Select from "shared/components/select/select";
-import filesService from "shared/services/file-service";
+import Select, { ISelectChangeEvent } from "shared/components/select/select";
+import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
@@ -77,8 +77,8 @@ class _CreateProgramSettings extends React.PureComponent<
   }
 
   onSelectChange = (onChangeFn: (value: string & number) => void) => (
-    _: string,
-    target: any
+    _: ISelectChangeEvent,
+    target: JSX.Element
   ) => {
     onChangeFn(target.props.value);
   };
@@ -339,24 +339,12 @@ class _CreateProgramSettings extends React.PureComponent<
             className={"deposit-details create-program-settings__fill-block"}
           >
             <div className="create-program-settings__field deposit-details">
-              <GVFormikField
+              <WalletSelect
                 name={CREATE_PROGRAM_FIELDS.depositWalletId}
-                component={GVTextField}
                 label={t("transfer.from")}
-                InputComponent={Select}
+                items={wallets}
                 onChange={this.onSelectChange(this.props.changeWallet)}
-              >
-                {wallets.map(wallet => (
-                  <option value={wallet.id} key={wallet.id}>
-                    <img
-                      src={filesService.getFileUrl(wallet.logo)}
-                      className="transfer-popup__icon"
-                      alt={wallet.currency}
-                    />
-                    {`${wallet.title} | ${wallet.currency}`}
-                  </option>
-                ))}
-              </GVFormikField>
+              />
               <InputAmountField
                 autoFocus={false}
                 name={CREATE_PROGRAM_FIELDS.depositAmount}
