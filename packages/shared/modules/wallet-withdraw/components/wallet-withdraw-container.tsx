@@ -14,13 +14,8 @@ import { walletsSelector } from "shared/components/wallet/reducers/wallet.reduce
 import useErrorMessage from "shared/hooks/error-message.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
-import {
-  MiddlewareDispatch,
-  ResponseError,
-  SetSubmittingType
-} from "shared/utils/types";
+import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
 
-import { CurrentWallet } from "../../wallet-add-funds/components/wallet-add-funds-form";
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
 import WalletWithdrawForm, {
   IWalletWithdrawFormValues
@@ -69,7 +64,7 @@ const WalletWithdrawContainer: React.FC<Props> = ({
 interface Props extends DispatchProps, StateProps, OwnProps {}
 
 interface OwnProps {
-  currentWallet: CurrentWallet;
+  currentWallet: WalletData;
 }
 
 interface DispatchProps {
