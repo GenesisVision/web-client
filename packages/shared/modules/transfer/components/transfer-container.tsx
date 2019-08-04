@@ -7,6 +7,7 @@ import React, { useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
+import { ItemType } from "shared/components/wallet-select/wallet-select";
 import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
 import {
   copyTradingAccountsSelector,
@@ -20,11 +21,7 @@ import useErrorMessage from "shared/hooks/error-message.hook";
 import { RootState } from "shared/reducers/root-reducer";
 
 import { transferRequest } from "../services/transfer.services";
-import {
-  ItemType,
-  TRANSFER_CONTAINER,
-  TRANSFER_DIRECTION
-} from "../transfer.types";
+import { TRANSFER_CONTAINER, TRANSFER_DIRECTION } from "../transfer.types";
 import TransferForm, { TransferFormValues } from "./transfer-form";
 
 const _TransferContainer: React.FC<Props> = ({
