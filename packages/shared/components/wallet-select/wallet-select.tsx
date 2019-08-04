@@ -1,26 +1,19 @@
 import "./wallet-select.scss";
 
-import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
+import { CopyTradingAccountInfo, WalletBaseData, WalletData } from "gv-api-web";
 import React from "react";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import Select, { ISelectChangeEvent } from "shared/components/select/select";
 import filesService from "shared/services/file-service";
 
-const _WalletSelect: React.FC<Props> = ({
-  items,
-  onChange,
-  label,
-  name,
-  value
-}) => (
+const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
   <GVFormikField
     name={name}
     component={GVTextField}
     label={label}
     InputComponent={Select}
     onChange={onChange}
-    value={value}
   >
     {items.map(({ id, logo, currency, title }) => (
       <option value={id} key={id}>
@@ -36,14 +29,13 @@ const _WalletSelect: React.FC<Props> = ({
 );
 
 export type ItemsType = Array<ItemType>;
-export type ItemType = CopyTradingAccountInfo | WalletData;
+export type ItemType = CopyTradingAccountInfo | WalletData | WalletBaseData;
 
 interface OwnProps {
   items: ItemsType;
-  onChange: (event: ISelectChangeEvent, child: JSX.Element) => void;
   label: string;
   name: string;
-  value?: string;
+  onChange?: (event: ISelectChangeEvent, child: JSX.Element) => void;
 }
 
 interface Props extends OwnProps {}
