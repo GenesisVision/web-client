@@ -44,9 +44,9 @@ const _WalletWithdrawForm: React.FC<
   const onChangeCurrency = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element) => {
       const wallet = wallets.find(wallet => (wallet.id = target.props.value))!;
-      console.log(wallets, wallet, target.props.value);
       setSelected(wallet);
       setFieldValue(FIELDS.currency, wallet.currency);
+      setFieldValue(FIELDS.id, wallet.id);
       setFieldValue(FIELDS.amount, "");
     },
     [setFieldValue, selected, setSelected, wallets]
