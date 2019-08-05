@@ -111,7 +111,6 @@ const ProgramsTableSSR: React.FC<Props> = ({
   currencies,
   service
 }) => {
-  console.info(isAuthenticated);
   const { t } = useTranslation();
 
   const [filtering, sorting, page, update] = useRouteFilters(

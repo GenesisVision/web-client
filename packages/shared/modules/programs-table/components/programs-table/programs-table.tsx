@@ -1,6 +1,6 @@
 import "./programs.scss";
 
-import { ProgramDetails, ProgramsList } from "gv-api-web";
+import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
 import { Table } from "shared/components/table/components";
 import {
