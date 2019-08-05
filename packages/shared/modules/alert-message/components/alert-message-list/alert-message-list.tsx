@@ -1,16 +1,16 @@
 import "./alert-message-list.scss";
 
-import { useEffect } from "react";
 import * as React from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import posed, { PoseGroup } from "react-pose";
 import { connect } from "react-redux";
-import { Dispatch, compose } from "redux";
+import { compose, Dispatch } from "redux";
 import GVButton from "shared/components/gv-button";
 import AlertMessage from "shared/modules/alert-message/components/alert-message-list/alert-message";
 import { RootState } from "shared/reducers/root-reducer";
-import history from "shared/utils/history";
 import { ActionType } from "shared/utils/types";
+import Router from "next/router";
 
 import { alertMessageActions } from "../../actions/alert-message-actions";
 import { AlertMessagesState } from "../../reducers/alert-message-reducers";
@@ -29,9 +29,13 @@ const _AlertMessageList: React.FC<Props> = props => {
   const { messages, removeMessage, clearAllMessages } = props;
 
   useEffect(() => {
-    /*return history.listen(() => {
+    const handleChange = () => {
       clearAllMessages();
-    });*/
+    };
+    Router.events.on("routeChangeStart", handleChange);
+    return () => {
+      Router.events.off("routeChangeStart", handleChange);
+    };
   }, []);
 
   const children = messages.map(message => (
