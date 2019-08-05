@@ -2,8 +2,7 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 import React from "react";
 import GVButton from "shared/components/gv-button";
-
-import Link from "../link/link";
+import Link from "shared/components/link/link";
 
 interface INavigationButtonProps {
   icon: JSX.Element;
@@ -26,23 +25,25 @@ const _NavigationButton: React.FC<INavigationButtonProps> = ({
 export const NavigationButton = React.memo(_NavigationButton);
 
 interface INavigationItemProps {
-  href: string | { pathname: string; state: string };
+  pathname: string;
+  state?: string;
   icon: JSX.Element;
   exact?: boolean;
   onClick?(): void;
 }
 
 const _NavigationItem: React.FC<INavigationItemProps> = ({
-  href,
+  pathname,
   icon,
-  children
+  children,
+  state
 }) => {
   const { route } = useRouter();
   return (
     <Link
-      to={href}
+      to={{ pathname: pathname, state }}
       className={classNames("navigation__item", {
-        "navigation__item--active": href === route
+        "navigation__item--active": route.startsWith(pathname)
       })}
     >
       {<icon.type {...icon.props} className="navigation__icon" />}

@@ -24,14 +24,17 @@ const _Navigation: React.FC<INavigationProps & WithTranslation> = ({
 }) => (
   <>
     <div className={classNames("navigation", className)}>
-      <NavigationItem icon={<GVLogo />} href={HOME_ROUTE} />
-      <NavigationItem icon={<DashboardIcon primary />} href={DASHBOARD_ROUTE}>
+      <NavigationItem icon={<GVLogo />} pathname={HOME_ROUTE} />
+      <NavigationItem
+        icon={<DashboardIcon primary />}
+        pathname={DASHBOARD_ROUTE}
+      >
         {t("navigation.dashboard")}
       </NavigationItem>
-      <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
+      <NavigationItem icon={<ProgramsIcon primary />} pathname={PROGRAMS_ROUTE}>
         {t("navigation.programs")}
       </NavigationItem>
-      <NavigationItem icon={<FundsIcon primary />} href={FUNDS_ROUTE}>
+      <NavigationItem icon={<FundsIcon primary />} pathname={FUNDS_ROUTE}>
         {t("navigation.funds")}
       </NavigationItem>
     </div>
