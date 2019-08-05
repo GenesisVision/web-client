@@ -23,11 +23,11 @@ const _FundsPage: React.FC<InitialProps> = ({ funds }) => {
   const title = t("funds-page.title");
   return (
     <Page title={title}>
-      {/*<NavigationTabsContainer*/}
-      {/*  exploreTabName={FUNDS_EXPLORE_TAB_NAME}*/}
-      {/*  tabRoute={FUNDS_TAB_ROUTE}*/}
-      {/*  favoritesTabName={FUNDS_FAVORITES_TAB_NAME}*/}
-      {/*/>*/}
+      <NavigationTabsContainer
+        exploreTabName={FUNDS_EXPLORE_TAB_NAME}
+        tabRoute={FUNDS_TAB_ROUTE}
+        favoritesTabName={FUNDS_FAVORITES_TAB_NAME}
+      />
       <FacetCardsContainer
         title={title}
         assetsFacets={ASSETS_FACETS.FUNDS}

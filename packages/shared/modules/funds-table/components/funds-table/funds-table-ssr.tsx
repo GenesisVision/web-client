@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { FundsList, ProgramsList, ProgramTag } from "gv-api-web";
+import { FundsList, PlatformAsset, ProgramsList, ProgramTag } from "gv-api-web";
 import { Location } from "history";
 import programs from "investor-web-portal/pages/programs";
 import { NextPageContext } from "next";
@@ -47,6 +47,7 @@ import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset
 import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import {
+  fundAssetsSelector,
   programCurrenciesSelector,
   programTagsSelector
 } from "shared/reducers/platform-reducer";
@@ -55,47 +56,8 @@ import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { FUNDS_ROUTE } from "shared/routes/funds.routes";
 import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
+import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import FundsTable from "./funds-table";
-
-interface OwnProps {
-  showSwitchView: boolean;
-  title: string;
-  defaultFilters?: any;
-  data: FundsList;
-}
-
-// interface MergeProps {
-//   isLocationChanged: (location: Location) => boolean;
-//   filters: { [keys: string]: any };
-// }
-
-// interface StateProps {
-//   isAuthenticated: boolean;
-//   currencies: string[];
-//   programTags: ProgramTag[];
-//   data?: ProgramsList;
-// }
-
-// interface DispatchProps {
-//   service: {
-//     toggleFavoriteProgram: ToggleFavoriteDispatchableType;
-//     redirectToLogin(): void;
-//     getPrograms(filters: Object): void;
-//     fetchPrograms(filters: { [keys: string]: any }): Promise<ProgramsList>;
-//     getProgramsFilters(): (dispatch: any, getState: any) => Object;
-//     programsChangePage(
-//       nextPage: number
-//     ): (dispatch: any, getState: any) => void;
-//     programsChangeSorting(
-//       sorting: string
-//     ): (dispatch: any, getState: any) => void;
-//     programsChangeFilter(
-//       filter: TFilter<any>
-//     ): (dispatch: any, getState: any) => void;
-//   };
-// }
-
-interface Props extends OwnProps {}
 
 const ITEMS_ON_PAGE = 12;
 
@@ -119,45 +81,30 @@ const defaultFilters = {
   [FUND_ASSET_FILTER_NAME]: [FUND_ASSET_DEFAULT_VALUE]
 };
 
-const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
-  // componentDidMount() {
-  //   const { service, defaultFilters } = this.props;
-  //   service.getPrograms(defaultFilters);
-  // }
-
-  // componentDidUpdate(prevProps: Props) {
-  //   const { service, isLocationChanged, defaultFilters } = this.props;
-  //   if (isLocationChanged(prevProps.location)) {
-  //     service.getPrograms(defaultFilters);
-  //   }
-  // }
-
+const _FundsTableSSR: React.FC<Props> = ({
+  title,
+  data,
+  showSwitchView,
+  isAuthenticated,
+  fundAssets
+}) => {
   const { t } = useTranslation();
-  const [filtering, update] = useRouteFilters(FUNDS_ROUTE, defaultFilters);
-  // const { asPath, pathname, push } = useRouter();
-  let context: any = null;
-  if (!context) return null;
-
-  // console.info(asPath, pathname, asPath.slice(pathname.length + 1));
+  const [filtering, sorting, page, update] = useRouteFilters(
+    FUNDS_ROUTE,
+    defaultFilters
+  );
+  const { push } = useRouter();
 
   const totalPages = calculateTotalPages(data.total, ITEMS_ON_PAGE);
-
-  const updatePage = (page: number): any => {
-    push({
-      pathname: FUNDS_ROUTE,
-      query: {
-        page: page + 1
-      }
-    });
-  };
 
   return (
     <FundsTable
       title={title}
       data={data.funds}
       showSwitchView={showSwitchView}
-      // sorting={filters.sorting}
-      // updateSorting={service.programsChangeSorting}
+      sorting={sorting}
+      //@ts-ignore TODO why update sorting need function with reducer
+      updateSorting={update}
       filtering={filtering}
       updateFilter={update}
       renderFilters={(updateFilter: any, filtering: FilteringType) => (
@@ -165,7 +112,7 @@ const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
           <FundAssetFilter
             name={FUND_ASSET_FILTER_NAME}
             value={filtering[FUND_ASSET_FILTER_NAME] as string[]}
-            values={context.enums.fund.assets}
+            values={fundAssets}
             onChange={updateFilter}
           />
           <DateRangeFilter
@@ -178,24 +125,22 @@ const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
       )}
       paging={{
         totalPages: totalPages,
-        currentPage: parseInt(filtering.page || 1),
+        currentPage: page,
         itemsOnPage: ITEMS_ON_PAGE,
         totalItems: data.total
       }}
-      updatePaging={updatePage}
+      updatePaging={page => update({ name: "page", value: page + 1 })}
       toggleFavorite={() => {}}
-      // redirectToLogin={service.redirectToLogin}
-      isAuthenticated={false}
+      redirectToLogin={() => push(LOGIN_ROUTE)}
+      isAuthenticated={isAuthenticated}
     />
   );
 };
 
-// const mapStateToProps = (state: RootState): StateProps => ({
-//   isAuthenticated: isAuthenticatedSelector(state),
-//   data: programsDataSelector(state),
-//   currencies: programCurrenciesSelector(state),
-//   programTags: programTagsSelector(state)
-// });
+const mapStateToProps = (state: RootState): StateProps => ({
+  isAuthenticated: isAuthenticatedSelector(state),
+  fundAssets: fundAssetsSelector(state)
+});
 
 // const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 //   service: bindActionCreators(
@@ -227,12 +172,25 @@ const FundsTableSSR: React.FC<Props> = ({ title, data, showSwitchView }) => {
 //   };
 // };
 
-// const ProgramsTableContainer = compose<React.FC<OwnProps>>(
-//   withRouter,
-//   connect(
-//     mapStateToProps,
-//     mapDispatchToProps,
-//     mergeProps
-//   )
-// )(_ProgramsTableContainer);
+const FundsTableSSR = compose<React.FC<OwnProps>>(
+  connect(
+    mapStateToProps
+    // mapDispatchToProps,
+    // mergeProps
+  )
+)(_FundsTableSSR);
 export default FundsTableSSR;
+
+interface OwnProps {
+  showSwitchView: boolean;
+  title: string;
+  defaultFilters?: any;
+  data: FundsList;
+}
+
+interface StateProps {
+  isAuthenticated: boolean;
+  fundAssets: PlatformAsset[];
+}
+
+interface Props extends OwnProps, StateProps {}
