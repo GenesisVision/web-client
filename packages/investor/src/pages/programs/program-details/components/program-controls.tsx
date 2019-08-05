@@ -19,7 +19,7 @@ const ProgramControls: React.FC<IProgramControlsProps> = ({
           redirectToLogin={redirectToLogin}
         />
       </div>
-      {isAvailableFollowingTrades && isAuthenticated ? (
+      {isAvailableFollowingTrades ? (
         <div className="program-details-description__col program-details-description__col--small-size">
           <SignalProviderControls
             programDescription={programDescription}
