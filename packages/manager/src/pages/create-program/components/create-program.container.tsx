@@ -28,10 +28,7 @@ import {
   SetSubmittingType
 } from "shared/utils/types";
 
-import {
-  createProgram,
-  fetchBrokers
-} from "../services/create-program.service";
+import { createProgram } from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
 
@@ -42,30 +39,18 @@ enum TAB {
 
 class _CreateProgramContainer extends React.PureComponent<Props, State> {
   state: State = {
-    minimumDepositsAmount: undefined,
+    minimumDepositsAmount: this.props.brokers[0].accountTypes[0]
+      .minimumDepositsAmount,
     tab: TAB.BROKER,
-    selectedBroker: undefined,
-    brokers: undefined,
-    isPending: true,
+    selectedBroker: this.props.brokers[0],
+    brokers: this.props.brokers,
+    isPending: false,
     isConfirmDialogVisible: false,
     isNavigationDialogVisible: false
   };
 
-  componentDidMount() {
-    const { service } = this.props;
-    service.fetchWallets();
-    fetchBrokers().then(brokers => {
-      this.setState({
-        brokers: brokers,
-        selectedBroker: brokers[0],
-        minimumDepositsAmount: brokers[0].accountTypes[0].minimumDepositsAmount,
-        isPending: false
-      });
-    });
-  }
-
   selectBroker = (brokerName: string) => () => {
-    const selectedBroker = this.state.brokers!.find(x => x.name === brokerName);
+    const selectedBroker = this.state.brokers.find(x => x.name === brokerName)!;
     const minimumDepositsAmount = selectedBroker
       ? selectedBroker.accountTypes[0].minimumDepositsAmount
       : undefined;
@@ -143,15 +128,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
     } = this.state;
 
     const { t, headerData, service, programsInfo, wallets } = this.props;
-    if (
-      !brokers ||
-      !selectedBroker ||
-      !programsInfo ||
-      !headerData ||
-      !wallets.length ||
-      !minimumDepositsAmount
-    )
-      return null;
+    if (!programsInfo || !headerData || !wallets.length) return null;
     return (
       <div className="create-program-page__container">
         <div className="create-program-page__tabs">
@@ -180,7 +157,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
             )}
             {tab === TAB.SETTINGS && (
               <CreateProgramSettingsSection
-                minimumDepositsAmount={minimumDepositsAmount}
+                minimumDepositsAmount={minimumDepositsAmount!}
                 fetchWallets={service.fetchWallets}
                 fetchRate={this.fetchRate}
                 wallets={wallets}
@@ -234,7 +211,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-const CreateProgramContainer = compose<React.ComponentType>(
+const CreateProgramContainer = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect<StateProps, DispatchProps, {}, ManagerRootState>(
     mapStateToProps,
@@ -245,8 +222,8 @@ export default CreateProgramContainer;
 
 interface State {
   minimumDepositsAmount?: { [key: string]: number };
-  selectedBroker?: Broker;
-  brokers?: Broker[];
+  selectedBroker: Broker;
+  brokers: Broker[];
   isPending: boolean;
   tab: TAB.BROKER | TAB.SETTINGS;
   isNavigationDialogVisible: boolean;
@@ -271,4 +248,8 @@ interface DispatchProps {
   };
 }
 
-interface Props extends StateProps, DispatchProps, WithTranslation {}
+interface OwnProps {
+  brokers: Broker[];
+}
+
+interface Props extends StateProps, DispatchProps, WithTranslation, OwnProps {}

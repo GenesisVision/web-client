@@ -45,29 +45,38 @@ const _NavigationMobile: React.FC<Props> = ({
         </div>
       )}
       <div className="mobile__top" onClick={onClose}>
-        <NavigationItem icon={<DashboardIcon primary />} href={DASHBOARD_ROUTE}>
+        <NavigationItem
+          icon={<DashboardIcon primary />}
+          pathname={DASHBOARD_ROUTE}
+        >
           {t("navigation.dashboard")}
         </NavigationItem>
-        <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
+        <NavigationItem
+          icon={<ProgramsIcon primary />}
+          pathname={PROGRAMS_ROUTE}
+        >
           {t("navigation.programs")}
         </NavigationItem>
-        <NavigationItem icon={<FundsIcon primary />} href={FUNDS_ROUTE}>
+        <NavigationItem icon={<FundsIcon primary />} pathname={FUNDS_ROUTE}>
           {t("navigation.funds")}
         </NavigationItem>
         <NavigationItem
           exact
           icon={<DetailsIcon primary />}
-          href={PROFILE_ROUTE}
+          pathname={PROFILE_ROUTE}
         >
           {t("navigation.personal-details")}
         </NavigationItem>
         <NavigationItem
           icon={<WalletIcon primary />}
-          href={WALLET_TOTAL_PAGE_ROUTE}
+          pathname={WALLET_TOTAL_PAGE_ROUTE}
         >
           {t("navigation.wallet")}
         </NavigationItem>
-        <NavigationItem icon={<SettingsIcon primary />} href={SETTINGS_ROUTE}>
+        <NavigationItem
+          icon={<SettingsIcon primary />}
+          pathname={SETTINGS_ROUTE}
+        >
           {t("navigation.settings")}
         </NavigationItem>
         {isAuthenticated ? (
@@ -77,7 +86,8 @@ const _NavigationMobile: React.FC<Props> = ({
         ) : (
           <NavigationItem
             icon={<LogoutIcon primary rotate />}
-            href={{ pathname: LOGIN_ROUTE, state: backPath }}
+            pathname={LOGIN_ROUTE}
+            state={backPath}
           >
             {t("navigation.login")}
           </NavigationItem>

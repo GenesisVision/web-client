@@ -9,7 +9,7 @@ import { walletsSelector } from "shared/components/wallet/reducers/wallet.reduce
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
 
-import WalletAddFundsForm, { CurrentWallet } from "./wallet-add-funds-form";
+import WalletAddFundsForm from "./wallet-add-funds-form";
 
 const _WalletAddFundsContainer: React.FC<Props> = ({
   currentWallet,
@@ -37,7 +37,7 @@ const mapDispatchToProps: DispatchProps = {
 };
 
 interface OwnProps {
-  currentWallet: CurrentWallet;
+  currentWallet: WalletData;
 }
 
 interface StateProps {

@@ -10,7 +10,10 @@ import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
+import {
+  WALLET_CURRENCY_FOLDER_ROUTE,
+  composeWalletCurrencyUrl
+} from "shared/components/wallet/wallet.routes";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
@@ -60,9 +63,8 @@ const _WalletList: React.FC<Props> = ({ t, createButtonToolbar, wallets }) => {
               <Link
                 className="wallet-list__link"
                 to={{
-                  pathname: composeWalletCurrencyUrl(
-                    wallet.currency.toLowerCase()
-                  ),
+                  pathname: WALLET_CURRENCY_FOLDER_ROUTE,
+                  as: composeWalletCurrencyUrl(wallet.currency.toLowerCase()),
                   state: "Wallet"
                 }}
               >

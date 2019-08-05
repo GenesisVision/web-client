@@ -4,6 +4,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
 import i18next from "i18next";
 import * as React from "react";
+import { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
@@ -11,9 +12,9 @@ import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import Select from "shared/components/select/select";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import filesService from "shared/services/file-service";
+import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import {
@@ -36,13 +37,21 @@ const _WalletWithdrawForm: React.FC<
   setFieldValue,
   isSubmitting
 }) => {
-  const onChangeCurrency = (name: string, target: any) => {
-    setFieldValue(FIELDS.currency, target.props.value);
-    setFieldValue(FIELDS.amount, "");
-  };
   const { currency, amount } = values;
-  const selected = wallets.find(wallet => wallet.currency === currency);
-  const { withdrawalCommission, available } = selected!;
+  const [selected, setSelected] = useState<WalletData>(
+    wallets.find(wallet => wallet.currency === currency)!
+  );
+  const onChangeCurrency = useCallback(
+    (event: ISelectChangeEvent, target: JSX.Element) => {
+      const wallet = wallets.find(wallet => (wallet.id = target.props.value))!;
+      setSelected(wallet);
+      setFieldValue(FIELDS.currency, wallet.currency);
+      setFieldValue(FIELDS.id, wallet.id);
+      setFieldValue(FIELDS.amount, "");
+    },
+    [setFieldValue, selected, setSelected, wallets]
+  );
+  const { withdrawalCommission, available } = selected;
   const willGet = Math.max(parseFloat(amount) - withdrawalCommission, 0);
   const isAllow = (inputValues: NumberFormatValues) => {
     const { floatValue, formattedValue, value } = inputValues;
@@ -74,26 +83,12 @@ const _WalletWithdrawForm: React.FC<
             </StatisticItem>
           </div>
         </div>
-        <GVFormikField
-          name={FIELDS.currency}
-          component={GVTextField}
+        <WalletSelect
+          name={FIELDS.id}
           label={t("wallet-withdraw.select-currency")}
-          InputComponent={Select}
+          items={wallets}
           onChange={onChangeCurrency}
-        >
-          {wallets.map(wallet => {
-            return (
-              <option value={wallet.currency} key={wallet.currency}>
-                <img
-                  src={filesService.getFileUrl(wallet.logo)}
-                  className="wallet-withdraw-popup__icon"
-                  alt={wallet.currency}
-                />
-                {`${wallet.title} | ${wallet.currency}`}
-              </option>
-            );
-          })}
-        </GVFormikField>
+        />
       </div>
       <div className="dialog__bottom">
         <InputAmountField
@@ -160,7 +155,7 @@ const _WalletWithdrawForm: React.FC<
   );
 };
 
-const twoFactorvalidator = (
+const twoFactorValidator = (
   t: i18next.TFunction,
   twoFactorEnabled: boolean
 ): StringSchema => {
@@ -175,6 +170,7 @@ const twoFactorvalidator = (
 };
 
 enum FIELDS {
+  id = "id",
   currency = "currency",
   amount = "amount",
   address = "address",
@@ -183,6 +179,7 @@ enum FIELDS {
 
 export interface IWalletWithdrawFormValues {
   [FIELDS.currency]: CurrencyEnum;
+  [FIELDS.id]: string;
   [FIELDS.amount]: string;
   [FIELDS.address]: string;
   [FIELDS.twoFactorCode]: string;
@@ -193,7 +190,7 @@ interface Props extends WithTranslation, OwnProps {}
 interface OwnProps {
   twoFactorEnabled: boolean;
   wallets: WalletData[];
-  currentWallet: any;
+  currentWallet: WalletData;
   onSubmit(
     data: IWalletWithdrawFormValues,
     setSubmitting: SetSubmittingType
@@ -205,18 +202,13 @@ const WalletWithdrawForm = compose<React.FC<OwnProps>>(
   translate(),
   withFormik<Props, IWalletWithdrawFormValues>({
     displayName: "wallet-withdraw",
-    mapPropsToValues: props => {
-      let currency = props.currentWallet ? props.currentWallet.currency : "GVT";
-      if (!props.wallets.find(wallet => wallet.currency === currency)) {
-        currency = props.wallets[0] ? props.wallets[0].currency : "";
-      }
-      return {
-        [FIELDS.currency]: currency,
-        [FIELDS.amount]: "",
-        [FIELDS.address]: "",
-        [FIELDS.twoFactorCode]: ""
-      };
-    },
+    mapPropsToValues: ({ currentWallet: { id, currency } }) => ({
+      [FIELDS.id]: id,
+      [FIELDS.currency]: currency,
+      [FIELDS.amount]: "",
+      [FIELDS.address]: "",
+      [FIELDS.twoFactorCode]: ""
+    }),
     validationSchema: (props: Props) => {
       const { t, twoFactorEnabled } = props;
       return lazy(
@@ -228,14 +220,14 @@ const WalletWithdrawForm = compose<React.FC<OwnProps>>(
                 [FIELDS.address]: ethGvtWalletValidator.required(
                   t("wallet-withdraw.validation.address-is-required")
                 ),
-                [FIELDS.twoFactorCode]: twoFactorvalidator(t, twoFactorEnabled)
+                [FIELDS.twoFactorCode]: twoFactorValidator(t, twoFactorEnabled)
               });
             default:
               return object().shape({
                 [FIELDS.address]: btcUsdtWalletValidator.required(
                   t("wallet-withdraw.validation.address-is-required")
                 ),
-                [FIELDS.twoFactorCode]: twoFactorvalidator(t, twoFactorEnabled)
+                [FIELDS.twoFactorCode]: twoFactorValidator(t, twoFactorEnabled)
               });
           }
         }

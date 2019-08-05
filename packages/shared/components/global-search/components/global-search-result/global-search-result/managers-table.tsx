@@ -1,15 +1,17 @@
 import { ManagersList } from "gv-api-web";
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import ManagersTableRow from "shared/components/managers-table/components/managers-table-row";
 import { MANAGERS_TABLE_COLUMNS } from "shared/components/managers-table/managers-table.constants";
 import { Table } from "shared/components/table/components";
 
 import { SearchTableProps } from "./global-search-result";
 
-const ManagersTable: React.FC<
-  SearchTableProps<ManagersList> & WithTranslation
-> = ({ t, data, title }) => {
+const ManagersTable: React.FC<SearchTableProps<ManagersList>> = ({
+  data,
+  title
+}) => {
+  const [t] = useTranslation();
   return (
     <Table
       columns={MANAGERS_TABLE_COLUMNS}
@@ -26,4 +28,4 @@ const ManagersTable: React.FC<
   );
 };
 
-export default translate()(React.memo(ManagersTable));
+export default React.memo(ManagersTable);

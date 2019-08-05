@@ -18,6 +18,7 @@ import TagProgramContainer from "shared/components/tags/tag-program-container/ta
 import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -47,7 +48,6 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     level,
     levelProgress,
     color,
-    url,
     currency,
     periodStarts,
     periodEnds,
@@ -59,7 +59,8 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   } = program;
   const programLinkProps = {
     state: `/ ${title}`,
-    pathname: composeProgramDetailsUrl(url)
+    pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
+    as: composeProgramDetailsUrl(program.url)
   };
   return (
     <TableRow

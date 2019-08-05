@@ -6,15 +6,18 @@ import Page from "shared/components/page/page";
 
 import CreateFundContainer from "./components/create-fund.container";
 
-const _CreateFundPage: React.FC<WithTranslation> = ({ t }) => (
+const _CreateFundPage: React.FC<Props> = ({ t, minimumDepositAmount }) => (
   <Page title={t("manager.create-fund-page.title")}>
     <div className="create-fund-page">
       <h1>{t("manager.create-fund-page.title")}</h1>
-      <CreateFundContainer />
+      <CreateFundContainer minimumDepositAmount={minimumDepositAmount} />
     </div>
   </Page>
 );
 
-const CreateFundPage = translate()(_CreateFundPage);
+interface Props extends WithTranslation {
+  minimumDepositAmount: number;
+}
 
+const CreateFundPage = translate()(_CreateFundPage);
 export default CreateFundPage;

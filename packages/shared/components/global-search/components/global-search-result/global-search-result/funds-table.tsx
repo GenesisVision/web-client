@@ -1,17 +1,17 @@
+import "shared/modules/funds-table/components/funds-table/funds-table.scss";
+
 import { FundsList } from "gv-api-web";
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { Table } from "shared/components/table/components";
 import FundsTableRow from "shared/modules/funds-table/components/funds-table/fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 
 import { SearchTableProps } from "./global-search-result";
 
-const FundsTable: React.FC<SearchTableProps<FundsList> & WithTranslation> = ({
-  t,
-  title,
-  data
-}) => {
+const FundsTable: React.FC<SearchTableProps<FundsList>> = ({ title, data }) => {
+  const [t] = useTranslation();
+
   return (
     <Table
       columns={FUNDS_TABLE_COLUMNS}
@@ -26,4 +26,4 @@ const FundsTable: React.FC<SearchTableProps<FundsList> & WithTranslation> = ({
   );
 };
 
-export default translate()(React.memo(FundsTable));
+export default React.memo(FundsTable);

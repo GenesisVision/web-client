@@ -16,6 +16,7 @@ const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   onClose
 }) => (
   <DepositContainer
+    currency={"GVT"}
     asset={ASSET.FUND}
     assetInvest={fundInvestCreator(
       investorApi.v10InvestorFundsByIdInvestByAmountPost

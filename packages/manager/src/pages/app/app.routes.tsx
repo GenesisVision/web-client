@@ -7,6 +7,7 @@ import ProfileRoutes from "pages/profile/profile.routes";
 import ProgramsRoutes from "pages/programs/programs.routes";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import AppLayout from "shared/components/app-layout/app-layout";
 import GlobalSearchPage from "shared/components/global-search/global-search.page";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import ManagerContainer from "shared/components/manager/manager.container";
@@ -29,7 +30,6 @@ import { MANAGER_DETAILS_ROUTE_REGEXP } from "shared/routes/manager.routes";
 import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
 import FundsRoutes from "../funds/funds.routes";
-import AppLayout from "./components/app-layout/app-layout";
 
 const AppRoutes = () => (
   <AppLayout>

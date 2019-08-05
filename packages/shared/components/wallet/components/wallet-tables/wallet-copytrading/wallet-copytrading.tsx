@@ -23,7 +23,10 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import { fetchAccounts } from "../../../services/wallet.services";
-import { composeWalletCopytradingCurrencyUrl } from "../../../wallet.routes";
+import {
+  COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE,
+  composeWalletCopytradingCurrencyUrl
+} from "../../../wallet.routes";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
 
@@ -72,7 +75,8 @@ const _WalletCopytrading: React.FC<Props> = ({
               <Link
                 className="wallet-list__link"
                 to={{
-                  pathname: composeWalletCopytradingCurrencyUrl(
+                  pathname: COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE,
+                  as: composeWalletCopytradingCurrencyUrl(
                     account.currency.toLowerCase()
                   ),
                   state: `/ ${t(

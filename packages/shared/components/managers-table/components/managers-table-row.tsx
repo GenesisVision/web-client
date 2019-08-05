@@ -9,6 +9,7 @@ import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 
 interface IManagersTableRowProps {
@@ -26,7 +27,8 @@ const ManagersTableRow: React.FC<IManagersTableRowProps & WithTranslation> = ({
         <ProfileAvatar url={manager.avatar} alt={manager.username} />
         <Link
           to={{
-            pathname: composeManagerDetailsUrl(manager.url),
+            pathname: MANAGER_DETAILS_FOLDER_ROUTE,
+            as: composeManagerDetailsUrl(manager.url),
             state: `/ ${title}`
           }}
         >
