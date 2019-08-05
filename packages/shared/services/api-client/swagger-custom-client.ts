@@ -1,7 +1,7 @@
-import { Configuration } from "gv-api-web";
+import { ApiClient } from "gv-api-web";
 
-const apiClient = new Configuration({
-  basePath: process.env.REACT_APP_API_URL
-});
+const apiClient = ApiClient.instance;
+//@ts-ignore TODO fix types
+apiClient.basePath = process.env.REACT_APP_API_URL;
 
 export default apiClient;
