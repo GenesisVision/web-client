@@ -29,9 +29,9 @@ const _AlertMessageList: React.FC<Props> = props => {
   const { messages, removeMessage, clearAllMessages } = props;
 
   useEffect(() => {
-    return history.listen(() => {
+    /*return history.listen(() => {
       clearAllMessages();
-    });
+    });*/
   }, []);
 
   const children = messages.map(message => (
