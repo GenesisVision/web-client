@@ -11,18 +11,17 @@ import DetailsSettingControl from "shared/components/details/details-description
 import GVButton from "shared/components/gv-button";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS,
-  anchorElType
+  VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import TagItem from "shared/components/tags/tag-item/tag-item";
+import useAnchor from "shared/hooks/anchor.hook";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl,
   composeProgramSettingsUrl
 } from "shared/utils/compose-url";
 
-import useAnchor from "../../../../hooks/anchor.hook";
 import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
 
