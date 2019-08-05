@@ -6,7 +6,11 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
-import { FUND_REALLOCATE_HISTORY_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
+import {
+  FUND_REALLOCATE_HISTORY_COLUMNS,
+  FUND_REBALANCING_DEFAULT_FILTERS,
+  FUND_REBALANCING_FILTERS
+} from "shared/components/funds/fund-details/fund-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -20,10 +24,6 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 
 import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cell";
-import {
-  REALLOCATE_HISTORY_DEFAULT_FILTERS,
-  REALLOCATE_HISTORY_FILTERS
-} from "./fund-reallocate-history.constants";
 
 const _FundReallocateHistory: React.FC<Props> = ({
   id,
@@ -40,8 +40,8 @@ const _FundReallocateHistory: React.FC<Props> = ({
       paging={DEFAULT_PAGING}
       getItems={fetchFundReallocate}
       columns={FUND_REALLOCATE_HISTORY_COLUMNS}
-      defaultFilters={REALLOCATE_HISTORY_DEFAULT_FILTERS}
-      filtering={REALLOCATE_HISTORY_FILTERS}
+      defaultFilters={FUND_REBALANCING_DEFAULT_FILTERS}
+      filtering={FUND_REBALANCING_FILTERS}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}
