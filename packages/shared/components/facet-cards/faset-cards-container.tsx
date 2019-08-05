@@ -1,16 +1,23 @@
+import { PlatformInfo } from "gv-api-web";
 import * as React from "react";
-import { useContext } from "react";
+import { connect } from "react-redux";
+import { RootState } from "shared/reducers/root-reducer";
 
 import { composeFacetUrlFunc } from "./facet-card";
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
 
-export const _FacetCardsContainer: React.FC<OwnProps> = ({
+export enum ASSETS_FACETS {
+  FUNDS = "fundsFacets",
+  PROGRAMS = "programsFacets"
+}
+
+export const _FacetCardsContainer: React.FC<Props> = ({
   title,
   composeFacetUrl,
-  assetsFacets
+  assetsFacets,
+  info
 }) => {
-  let info: any = null;
   if (!info) return <FacetCardsStub />;
   return (
     <FacetCards
@@ -21,15 +28,23 @@ export const _FacetCardsContainer: React.FC<OwnProps> = ({
   );
 };
 
+const mapStateToProps = (state: RootState): StateProps => {
+  const info = state.platformData.data;
+  return {
+    info
+  };
+};
+
+export default connect(mapStateToProps)(_FacetCardsContainer);
+
 interface OwnProps {
   title: string;
   composeFacetUrl: composeFacetUrlFunc;
   assetsFacets: ASSETS_FACETS;
 }
 
-export enum ASSETS_FACETS {
-  FUNDS = "fundsFacets",
-  PROGRAMS = "programsFacets"
+interface StateProps {
+  info?: PlatformInfo;
 }
 
-export default _FacetCardsContainer;
+interface Props extends OwnProps, StateProps {}
