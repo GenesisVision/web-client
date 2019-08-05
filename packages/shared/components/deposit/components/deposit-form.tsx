@@ -4,14 +4,12 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import Select from "shared/components/select/select";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { ASSET, ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import rateApi from "shared/services/api-client/rate-api";
@@ -65,13 +63,17 @@ class _DepositForm extends React.PureComponent<
     );
   };
 
-  onChangeCurrencyFrom = (name: any, target: any): void => {
-    const { setFieldValue, setFieldTouched } = this.props;
-    const walletCurrency = target.props.value;
-    setFieldValue(DEPOSIT_FORM_FIELDS.walletCurrency, walletCurrency);
+  onChangeCurrencyFrom = (
+    event: ISelectChangeEvent,
+    target: JSX.Element
+  ): void => {
+    const { setFieldValue, setFieldTouched, wallets } = this.props;
+    const wallet = wallets.find(wallet => wallet.id === target.props.value)!;
+    setFieldValue(DEPOSIT_FORM_FIELDS.walletId, wallet.id);
+    setFieldValue(DEPOSIT_FORM_FIELDS.walletCurrency, wallet.currency);
     setFieldValue(DEPOSIT_FORM_FIELDS.amount, "");
     setFieldTouched(DEPOSIT_FORM_FIELDS.amount, false);
-    this.fetchRate({ currencyFrom: walletCurrency });
+    this.fetchRate({ currencyFrom: wallet.currency });
   };
 
   fetchRate = (params: {
@@ -146,24 +148,12 @@ class _DepositForm extends React.PureComponent<
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
     return (
       <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
-        <GVFormikField
-          name={DEPOSIT_FORM_FIELDS.walletCurrency}
-          component={GVTextField}
+        <WalletSelect
+          name={DEPOSIT_FORM_FIELDS.walletId}
           label={t("follow-program.create-account.from")}
-          InputComponent={Select}
+          items={wallets}
           onChange={this.onChangeCurrencyFrom}
-        >
-          {wallets.map(wallet => (
-            <option value={wallet.currency} key={wallet.currency}>
-              <WalletImage
-                imageClassName="transfer-popup__icon"
-                alt={wallet.currency}
-                url={wallet.logo}
-              />
-              {`${wallet.title} | ${wallet.currency}`}
-            </option>
-          ))}
-        </GVFormikField>
+        />
         <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
           {formatCurrencyValue(wallet ? wallet.available : 0, walletCurrency)}{" "}
           {walletCurrency}
@@ -276,8 +266,11 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
   translate(),
   withFormik<Props, IDepositFormValues>({
     displayName: "invest-form",
-    mapPropsToValues: () => ({
+    mapPropsToValues: ({ wallets }) => ({
       [DEPOSIT_FORM_FIELDS.rate]: 1,
+      [DEPOSIT_FORM_FIELDS.walletId]: wallets.find(
+        wallet => wallet.currency === "GVT"
+      )!.id,
       [DEPOSIT_FORM_FIELDS.maxAmount]: undefined,
       [DEPOSIT_FORM_FIELDS.amount]: undefined,
       [DEPOSIT_FORM_FIELDS.walletCurrency]: "GVT"
@@ -302,6 +295,7 @@ export enum DEPOSIT_FORM_FIELDS {
   maxAmount = "maxAmount",
   amount = "amount",
   walletCurrency = "walletCurrency",
+  walletId = "walletId",
   availableToInvest = "availableToInvest",
   availableInWallet = "availableInWallet"
 }
