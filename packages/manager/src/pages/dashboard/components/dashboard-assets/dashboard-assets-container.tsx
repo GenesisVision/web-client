@@ -3,7 +3,6 @@ import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.r
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
-import { Link } from "react-router-dom";
 import {
   ActionCreatorsMapObject,
   Dispatch,
@@ -13,6 +12,7 @@ import {
 import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
 import GVButton from "shared/components/gv-button";
 import { ChartIcon } from "shared/components/icon/chart-icon";
+import Link from "shared/components/link/link";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";

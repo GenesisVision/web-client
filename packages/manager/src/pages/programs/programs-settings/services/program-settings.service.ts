@@ -18,7 +18,7 @@ import {
 
 export const cancelChangeBrokerMethod = (
   programId: string
-): ManagerThunk<CancelablePromise<void>> => dispatch =>
+): ManagerThunk<Promise<void>> => dispatch =>
   managerApi
     .v10ManagerProgramsBrokerChangeCancelPost(authService.getAuthArg(), {
       programId
@@ -61,10 +61,10 @@ export const redirectToProgram = () => (
   dispatch: Dispatch,
   getState: () => RootState
 ) => {
-  const { router } = getState();
+  /*const { router } = getState();
   const programSlugUrl = getParams(
     router.location.pathname,
     PROGRAM_DETAILS_ROUTE
   )[PROGRAM_SLUG_URL_PARAM_NAME];
-  dispatch(push(`${PROGRAMS_ROUTE}/${programSlugUrl}`));
+  dispatch(push(`${PROGRAMS_ROUTE}/${programSlugUrl}`));*/
 };

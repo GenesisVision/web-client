@@ -16,7 +16,7 @@ import SettingsPage from "shared/components/profile/settings/settings.page";
 import ProfileEditPage from "./edit/edit.page";
 import SocialLinksPage from "./social-links/social-links.page";
 
-const ProfilePageContainer = () => <ProfilePage personal />;
+const ProfilePageContainer = () => <ProfilePage />;
 
 const ProfileRoutes: React.FC = () => (
   <Switch>
