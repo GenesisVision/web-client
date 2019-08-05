@@ -9,10 +9,11 @@ const path = require("path");
 const dotenv = require("dotenv");
 
 const nextConfig = {
-  webpack(config, { dev, webpack }) {
-    if (dev) {
-      dotenv.config({ path: ".env.local" });
+  webpack(config, { dev, webpack, buildId, isServer }) {
+    if (!dev) {
+      dotenv.config({ path: ".env.production" });
     }
+    dotenv.config({ path: ".env.local" });
     dotenv.config({ path: ".env" });
     config.resolve.modules.push(path.resolve("./src"));
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
