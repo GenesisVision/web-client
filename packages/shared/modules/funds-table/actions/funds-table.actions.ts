@@ -6,6 +6,7 @@ import { ApiAction } from "shared/utils/types";
 export const FUNDS_TABLE = "FUNDS_TABLE";
 
 export type TFetchFundsAction = ApiAction<FundsList>;
+
 export const fetchFundsAction = (
   filters: ComposeFiltersAllType
 ): TFetchFundsAction => ({

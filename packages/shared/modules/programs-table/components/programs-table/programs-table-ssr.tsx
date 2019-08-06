@@ -1,5 +1,4 @@
 import { ProgramsList, ProgramTag } from "gv-api-web";
-import { NextPageContext } from "next";
 import { useRouter } from "next/router";
 import qs from "qs";
 import * as React from "react";
@@ -30,7 +29,8 @@ import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/se
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 import {
   PROGRAMS_TABLE_FILTERS,
-  SORTING_FILTER_NAME
+  SORTING_FILTER_NAME,
+  SORTING_FILTER_VALUE
 } from "shared/modules/programs-table/components/programs-table/programs.constants";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import {
@@ -42,6 +42,8 @@ import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 
 import useRouteFilters from "../../../../hooks/route-filters.hook";
+import { NextPageWithReduxContext } from "../../../../utils/types";
+import { DEFAULT_ITEMS_ON_PAGE } from "../../../funds-table/components/funds-table/funds-table.constants";
 import { FetchProgramsFiltersType } from "../../actions/programs-table.actions";
 import { programsDataSelector } from "../../reducers/programs-table.reducers";
 import { composeCurrencyFilter } from "./program-table.helpers";
@@ -65,17 +67,22 @@ const DEFAULT_FILTERS = {
 
 export const getFiltersFromContext = ({
   asPath = "",
-  pathname
-}: NextPageContext): FetchProgramsFiltersType => {
-  const { page, ...other } = qs.parse(asPath.slice(pathname.length + 1));
+  pathname,
+  reduxStore
+}: NextPageWithReduxContext): FetchProgramsFiltersType => {
+  const { page, sorting = SORTING_FILTER_VALUE, ...other } = qs.parse(
+    asPath.slice(pathname.length + 1)
+  );
+  const { currency } = reduxStore.getState().accountSettings;
   const skipAndTake = calculateSkipAndTake({
-    itemsOnPage: ITEMS_ON_PAGE,
+    itemsOnPage: DEFAULT_ITEMS_ON_PAGE,
     currentPage: page
   });
-
   return {
     ...skipAndTake,
-    ...composeFilters(PROGRAMS_TABLE_FILTERS, { ...DEFAULT_FILTERS, ...other })
+    ...composeFilters(PROGRAMS_TABLE_FILTERS, { ...DEFAULT_FILTERS, ...other }),
+    currencySecondary: currency,
+    sorting
   } as FetchProgramsFiltersType;
 };
 
@@ -103,7 +110,7 @@ const _ProgramsTableSSR: React.FC<Props> = ({
       showSwitchView={showSwitchView}
       title={title}
       data={data.programs}
-      sorting={sorting}
+      sorting={sorting || SORTING_FILTER_VALUE}
       updateSorting={value => update({ name: SORTING_FILTER_NAME, value })}
       filtering={filtering}
       updateFilter={update}

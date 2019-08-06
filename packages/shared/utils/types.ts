@@ -100,6 +100,6 @@ export interface AppWithReduxContext extends AppContextType {
   ctx: NextPageWithReduxContext;
 }
 
-export interface NextPageWithRedux<P, IP = P> extends NextPage<P, IP> {
+export interface NextPageWithRedux<P = void, IP = P> extends NextPage<P, IP> {
   getInitialProps?(ctx: NextPageWithReduxContext): Promise<IP>;
 }
