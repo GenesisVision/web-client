@@ -31,7 +31,6 @@ import { RootState } from "shared/reducers/root-reducer";
 import { FUNDS_ROUTE } from "shared/routes/funds.routes";
 import { NextPageWithReduxContext } from "shared/utils/types";
 
-import { SORTING_FILTER_NAME } from "../../../programs-table/components/programs-table/programs.constants";
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import FundsTable from "./funds-table";
 import {
@@ -75,10 +74,7 @@ const _FundsTableSSR: React.FC<Props> = ({
   service
 }) => {
   const { t } = useTranslation();
-  const [filtering, sorting, page, update] = useRouteFilters(
-    FUNDS_ROUTE,
-    DEFAULT_FILTERS
-  );
+  const [filtering, sorting, page, update] = useRouteFilters(DEFAULT_FILTERS);
 
   if (!data) return null;
   const totalPages = calculateTotalPages(data.total, DEFAULT_ITEMS_ON_PAGE);

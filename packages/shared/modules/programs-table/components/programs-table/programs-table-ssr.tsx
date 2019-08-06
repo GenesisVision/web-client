@@ -97,10 +97,7 @@ const _ProgramsTableSSR: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
 
-  const [filtering, sorting, page, update] = useRouteFilters(
-    PROGRAMS_ROUTE,
-    DEFAULT_FILTERS
-  );
+  const [filtering, sorting, page, update] = useRouteFilters(DEFAULT_FILTERS);
 
   const { push } = useRouter();
   if (!data) return null;
