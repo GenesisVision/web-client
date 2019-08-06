@@ -76,7 +76,6 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 interface ServiceThunks extends ActionCreatorsMapObject {
-  showNotFoundPage: () => void;
   clearLoginData: typeof clearLoginData;
   login: typeof login;
 }
