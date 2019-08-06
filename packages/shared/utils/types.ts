@@ -5,7 +5,7 @@ import {
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { NextPage } from "next";
-import { NextPageContext } from "next-server/dist/lib/utils";
+import { AppContextType, NextPageContext } from "next-server/dist/lib/utils";
 import { Action, Dispatch, Store } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -94,6 +94,10 @@ export type InitializeStoreType = (
 
 export interface NextPageWithReduxContext extends NextPageContext {
   reduxStore: Store<AuthRootState, RootThunkAction>;
+}
+
+export interface AppWithReduxContext extends AppContextType {
+  ctx: NextPageWithReduxContext;
 }
 
 export interface NextPageWithRedux<P, IP = P> extends NextPage<P, IP> {

@@ -7,16 +7,15 @@ import FacetCardsContainer, {
 import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
-import { platformContext } from "shared/context/platform";
 import { useTranslation } from "shared/i18n";
 import ProgramsTableSSR from "shared/modules/programs-table/components/programs-table/programs-table-ssr";
-// import ProgramsTableContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
+import { composeProgramFacetUrl } from "shared/utils/compose-url";
+
 import {
   PROGRAMS_EXPLORE_TAB_NAME,
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
-} from "shared/routes/programs.routes";
-import { composeProgramFacetUrl } from "shared/utils/compose-url";
+} from "../../routes/programs.routes";
 
 const _ProgramsPage: NextComponentType<{}, InitialProps, InitialProps> = ({
   programs
@@ -26,6 +25,11 @@ const _ProgramsPage: NextComponentType<{}, InitialProps, InitialProps> = ({
 
   return (
     <Page title={title}>
+      <NavigationTabsContainer
+        exploreTabName={PROGRAMS_EXPLORE_TAB_NAME}
+        tabRoute={PROGRAMS_TAB_ROUTE}
+        favoritesTabName={PROGRAMS_FAVORITES_TAB_NAME}
+      />
       <FacetCardsContainer
         key={"facets"}
         title={title}

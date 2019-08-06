@@ -1,11 +1,8 @@
-import cookie from "js-cookie";
 //@ts-ignore TODO fix types
 import * as jwt_decode from "jwt-decode";
 import { NextPageContext } from "next";
-import nextCookie from "next-cookies";
-
-import { getTokenName } from "../utils/get-token-name";
-import { Nullable } from "../utils/types";
+import { getCookie, removeCookie, setCookie } from "shared/utils/cookie";
+import { getTokenName } from "shared/utils/get-token-name";
 
 const canParseToken = (token: string): boolean => {
   try {
@@ -23,29 +20,15 @@ const decodeToken = (token: string): any => {
 
 const storeToken = (token: string): void => {
   const tokenName = getTokenName();
-  try {
-    cookie.set(tokenName, token, {
-      secure: process.env.NODE_ENV === "production",
-      expires: 1000
-    });
-  } catch (e) {}
+  setCookie(tokenName, token);
 };
 
-const getTokenFromServer = (ctx: NextPageContext): Nullable<string> => {
-  const tokenName = getTokenName();
-  return nextCookie(ctx)[tokenName] || null;
-};
-
-const getTokenFromClient = (): Nullable<string> => {
-  const tokenName = getTokenName();
-  return cookie.get(tokenName) || null;
-};
-
-const getTokenData = () => decodeToken(getTokenFromClient() || "");
+const getTokenData = () => decodeToken(getAuthArg());
 
 const getAuthArg = (ctx?: NextPageContext): string => {
-  const token = ctx ? getTokenFromServer(ctx) : getTokenFromClient();
-  if (token === null) {
+  const tokenName = getTokenName();
+  const token = getCookie(tokenName, ctx);
+  if (!token) {
     return "";
   }
 
@@ -53,9 +36,9 @@ const getAuthArg = (ctx?: NextPageContext): string => {
 };
 
 const isAuthenticated = (): boolean => {
-  const token = getTokenFromClient();
+  const token = getAuthArg();
 
-  if (!canParseToken(token || "")) return false;
+  if (!canParseToken(token)) return false;
   const dateNowSec = Math.floor(Date.now() / 1000);
   const decodedToken = jwt_decode(token);
   return decodedToken.exp > dateNowSec;
@@ -63,14 +46,12 @@ const isAuthenticated = (): boolean => {
 
 const removeToken = (): void => {
   const tokenName = getTokenName();
-  cookie.remove(tokenName);
+  removeCookie(tokenName);
 };
 
 const authService = {
   isAuthenticated,
   getAuthArg,
-  getTokenFromServer,
-  getTokenFromClient,
   getTokenData,
   storeToken,
   removeToken
