@@ -3,16 +3,15 @@ import ProgramFollowContainer from "modules/program-follow/program-follow-contai
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
+import InvestmentUnauthPopup
+  from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
+import SignalProgramInfo
+  from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
+import { ASSET } from "shared/constants/constants";
 
 class _SignalProviderControls extends React.PureComponent<
   Props,
@@ -28,14 +27,7 @@ class _SignalProviderControls extends React.PureComponent<
     };
   }
   openPopup = (popupName: SIGNAL_POPUP) => () => {
-    const { isAuthenticated, redirectToLogin } = this.props;
-    if (isAuthenticated) {
-      let popups = { ...this.state.popups, [popupName]: true };
-
-      this.setState({ popups });
-    } else {
-      redirectToLogin();
-    }
+    this.setState({ popups: { ...this.state.popups, [popupName]: true } });
   };
 
   closePopup = (popupName: SIGNAL_POPUP) => () => {
@@ -71,28 +63,42 @@ class _SignalProviderControls extends React.PureComponent<
           ) : (
             <GVButton
               className="asset-details-description__invest-btn"
-              onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
-              disabled={!isAuthenticated}
+              onClick={this.openPopup(
+                isAuthenticated ? SIGNAL_POPUP.FOLLOW : SIGNAL_POPUP.UNAUTH
+              )}
             >
               {t("program-details-page.description.follow-trade")}
             </GVButton>
           )}
         </div>
-        {/*<ProgramFollowContainer
-          id={programDescription.id}
-          open={popups[SIGNAL_POPUP.FOLLOW]}
+        {programDescription.personalProgramDetails && (
+          <>
+            <ProgramFollowContainer
+              id={programDescription.id}
+              open={popups[SIGNAL_POPUP.FOLLOW]}
+              currency={programDescription.currency}
+              signalSubscription={
+                programDescription.personalProgramDetails.signalSubscription
+              }
+              onClose={this.closePopup(SIGNAL_POPUP.FOLLOW)}
+              onApply={dispatchProgramDescription}
+            />
+            <ProgramUnfollowContainer
+              open={popups[SIGNAL_POPUP.UNFOLLOW]}
+              id={programDescription.id}
+              onClose={this.closePopup(SIGNAL_POPUP.UNFOLLOW)}
+              onApply={dispatchProgramDescription}
+            />
+          </>
+        )}
+        <InvestmentUnauthPopup
+          header={t("program-details-page.description.follow-trade")}
+          message={t("program-details-page.description.unauth-follow-popup")}
+          asset={ASSET.PROGRAM}
+          title={programDescription.title}
           currency={programDescription.currency}
-          signalSubscription={
-            programDescription.personalProgramDetails.signalSubscription
-          }
-          onClose={this.closePopup(SIGNAL_POPUP.FOLLOW)}
-          onApply={dispatchProgramDescription}
-        />*/}
-        <ProgramUnfollowContainer
-          open={popups[SIGNAL_POPUP.UNFOLLOW]}
-          id={programDescription.id}
-          onClose={this.closePopup(SIGNAL_POPUP.UNFOLLOW)}
-          onApply={dispatchProgramDescription}
+          open={popups[SIGNAL_POPUP.UNAUTH]}
+          onClose={this.closePopup(SIGNAL_POPUP.UNAUTH)}
         />
       </>
     );
@@ -116,6 +122,7 @@ interface DispatchProps {
 }
 
 enum SIGNAL_POPUP {
+  UNAUTH = "UNAUTH",
   FOLLOW = "FOLLOW",
   UNFOLLOW = "UNFOLLOW"
 }

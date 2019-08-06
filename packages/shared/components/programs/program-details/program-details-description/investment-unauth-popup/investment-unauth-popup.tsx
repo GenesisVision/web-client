@@ -14,6 +14,7 @@ import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 
 const InvestmentUnauthPopup: React.FC<Props> = ({
+  header,
   role,
   open,
   onClose,
@@ -37,6 +38,7 @@ const InvestmentUnauthPopup: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <DepositTop
+        header={header}
         asset={asset}
         currency={currency}
         title={title}
