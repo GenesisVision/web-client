@@ -1,12 +1,12 @@
 import Router from "next/router";
 import * as React from "react";
 import { useEffect } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ROLE } from "shared/constants/constants";
@@ -36,11 +36,14 @@ const _SignInContainer: React.FC<Props> = ({
 }) => {
   const method =
     role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
-  useEffect(() => service.clearLoginData, []);
-  useEffect(() => {
-    if (type && (email === "" || password === ""))
-      Router.replace(NOT_FOUND_PAGE_ROUTE);
-  }, []);
+  useEffect(() => service.clearLoginData, [service.clearLoginData]);
+  useEffect(
+    () => {
+      if (type && (email === "" || password === ""))
+        Router.replace(NOT_FOUND_PAGE_ROUTE);
+    },
+    [email, password, type]
+  );
   return (
     <div className={className}>
       {!type && <AuthTabs authPartUrl={LOGIN_ROUTE} />}
@@ -76,7 +79,6 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 interface ServiceThunks extends ActionCreatorsMapObject {
-  showNotFoundPage: () => void;
   clearLoginData: typeof clearLoginData;
   login: typeof login;
 }

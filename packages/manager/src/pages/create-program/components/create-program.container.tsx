@@ -1,4 +1,3 @@
-import { push } from "connected-react-router";
 import {
   Broker,
   ManagerProgramCreateResult,
@@ -7,6 +6,7 @@ import {
   WalletData
 } from "gv-api-web";
 import ConfirmContainer from "modules/confirm/confirm-container";
+import Router from "next/router";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -49,6 +49,8 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
     isNavigationDialogVisible: false
   };
 
+  redirectToDashboard = () => Router.replace(DASHBOARD_ROUTE);
+
   selectBroker = (brokerName: string) => () => {
     const selectedBroker = this.state.brokers.find(x => x.name === brokerName)!;
     const minimumDepositsAmount = selectedBroker
@@ -80,7 +82,6 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
   createProgram = (data: any, setSubmitting: SetSubmittingType) => {
     const {
       createProgram,
-      redirectToDashboard,
       notifyError,
       notifySuccess,
       fetchWallets
@@ -95,7 +96,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
             isConfirmDialogVisible: true
           });
         else {
-          redirectToDashboard();
+          this.redirectToDashboard();
           notifySuccess(
             "manager.create-program-page.notifications.create-success"
           );
@@ -111,7 +112,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
 
   closeConfirm = () => {
     this.setState({ isConfirmDialogVisible: false });
-    this.props.service.redirectToDashboard();
+    this.redirectToDashboard();
   };
 
   render() {
@@ -201,7 +202,6 @@ const mapStateToProps = (state: ManagerRootState): StateProps => ({
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
-    redirectToDashboard: () => dispatch(push(DASHBOARD_ROUTE)),
     createProgram: (data: any) => dispatch(createProgram(data)),
     fetchWallets: () => dispatch(fetchWallets()),
     notifyError: (message: string) =>
@@ -244,7 +244,6 @@ interface DispatchProps {
     createProgram: (data: any) => Promise<ManagerProgramCreateResult>;
     notifyError: (message: string) => void;
     notifySuccess: (message: string) => void;
-    redirectToDashboard: () => void;
   };
 }
 

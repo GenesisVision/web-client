@@ -6,12 +6,12 @@ import { programEditSignal } from "modules/program-signal/program-edit-signal/se
 import { NextPageContext } from "next";
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import Page from "shared/components/page/page";
@@ -41,8 +41,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
     programEditSignal,
     changeBrokerMethod,
     cancelChangeBrokerMethod,
-    editAsset,
-    redirectToProgram
+    editAsset
   },
   t,
   description
@@ -102,9 +101,10 @@ const _ProgramsEditPage: React.FC<Props> = ({
     },
     [description, dispatchProgramDescription, editAsset, ctx]
   );
-  const applyCloseProgram = useCallback(() => redirectToProgram(), [
-    redirectToProgram
-  ]);
+  const applyCloseProgram = useCallback(
+    () => redirectToProgram(ctx!.query.id as string),
+    [ctx]
+  );
   return (
     <Page title={t("manager.program-settings.title")}>
       <ProgramSettings
@@ -134,8 +134,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
       dispatchProgramDescription,
       editAsset,
       programEditSignal,
-      changeBrokerMethod,
-      redirectToProgram
+      changeBrokerMethod
     },
     dispatch
   )
@@ -165,7 +164,6 @@ interface ServiceThunks extends ActionCreatorsMapObject {
   editAsset: typeof editAsset;
   programEditSignal: typeof programEditSignal;
   changeBrokerMethod: typeof changeBrokerMethod;
-  redirectToProgram: typeof redirectToProgram;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
