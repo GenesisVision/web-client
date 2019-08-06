@@ -1,4 +1,3 @@
-import { push } from "connected-react-router";
 import { NewFundRequest } from "gv-api-web";
 import { NextPageContext } from "next";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
@@ -10,9 +9,12 @@ import filesService from "shared/services/file-service";
 import { RootThunk, SetSubmittingType } from "shared/utils/types";
 
 import { ICreateFundSettingsFormValues } from "../components/create-fund-settings/create-fund-settings";
+import Router from "next/router";
 
 export const fetchMinimumDepositAmount = async (ctx?: NextPageContext) =>
-  await managerApi.v10ManagerFundsInvestmentAmountGet(authService.getAuthArg(ctx));
+  await managerApi.v10ManagerFundsInvestmentAmountGet(
+    authService.getAuthArg(ctx)
+  );
 
 export const createFund = (
   createFundData: ICreateFundSettingsFormValues,
@@ -46,7 +48,7 @@ export const createFund = (
         )
       );
       dispatch(fetchWallets());
-      dispatch(push(DASHBOARD_ROUTE));
+      Router.replace(DASHBOARD_ROUTE);
     })
     .catch(error => {
       setSubmitting(false);
