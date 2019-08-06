@@ -1,29 +1,24 @@
-import { ProgramsList } from "gv-api-web";
-import { NextPage } from "next";
 import React from "react";
 import ProgramsPage from "shared/components/programs/programs.page";
 import withDefaultLayout from "shared/decorators/with-default-layout";
+import * as programTableActions from "shared/modules/programs-table/actions/programs-table.actions";
 import { getFiltersFromContext } from "shared/modules/programs-table/components/programs-table/programs-table-ssr";
-import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
+import { NextPageWithRedux } from "shared/utils/types";
 
-const Programs: NextPage<{
-  programs: ProgramsList;
-}> = ({ programs }) => {
-  return <ProgramsPage programs={programs} />;
+const Programs: NextPageWithRedux<void> = () => {
+  return <ProgramsPage />;
 };
 
 Programs.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
-  const authorization = authService.getAuthArg(ctx);
-  // @ts-ignore
-  const programs = await programsApi.v10ProgramsGet({
-    ...filtering,
-    authorization
-  });
-  return {
-    programs
-  };
+  await ctx.reduxStore.dispatch(
+    // @ts-ignore TODO why there is error
+    programTableActions.fetchProgramsAction({
+      ...filtering,
+      authorization: authService.getAuthArg(ctx)
+    })
+  );
 };
 
 export default withDefaultLayout(Programs);

@@ -1,6 +1,5 @@
-import { ProgramsList } from "gv-api-web";
 import { NextComponentType } from "next";
-import React, { useContext } from "react";
+import React from "react";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "shared/components/facet-cards/faset-cards-container";
@@ -17,9 +16,7 @@ import {
   PROGRAMS_TAB_ROUTE
 } from "../../routes/programs.routes";
 
-const _ProgramsPage: NextComponentType<{}, InitialProps, InitialProps> = ({
-  programs
-}) => {
+const ProgramsPage: NextComponentType = () => {
   const { t } = useTranslation();
   const title = t("programs-page.title");
 
@@ -38,7 +35,6 @@ const _ProgramsPage: NextComponentType<{}, InitialProps, InitialProps> = ({
       />
       <Surface className="programs-table-container" key={"table"}>
         <ProgramsTableSSR
-          data={programs}
           showSwitchView
           title={t("programs-page.programs-table")}
         />
@@ -47,9 +43,4 @@ const _ProgramsPage: NextComponentType<{}, InitialProps, InitialProps> = ({
   );
 };
 
-const ProgramsPage = _ProgramsPage;
 export default ProgramsPage;
-
-interface InitialProps {
-  programs: ProgramsList;
-}

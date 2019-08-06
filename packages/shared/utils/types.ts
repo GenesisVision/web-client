@@ -93,7 +93,7 @@ export type InitializeStoreType = (
 };
 
 export interface NextPageWithReduxContext extends NextPageContext {
-  reduxStore: Store<AuthRootState, RootThunkAction>;
+  reduxStore: Store<AuthRootState, RootThunkAction>; //TODO error
 }
 
 export interface AppWithReduxContext extends AppContextType {
