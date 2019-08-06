@@ -3,7 +3,7 @@ import React from "react";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "shared/components/facet-cards/faset-cards-container";
-import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
+import NavigationTabs from "shared/components/navigation-tabs/navigation-tabs";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 import { useTranslation } from "shared/i18n";
@@ -22,7 +22,7 @@ const ProgramsPage: NextComponentType = () => {
 
   return (
     <Page title={title}>
-      <NavigationTabsContainer
+      <NavigationTabs
         exploreTabName={PROGRAMS_EXPLORE_TAB_NAME}
         tabRoute={PROGRAMS_TAB_ROUTE}
         favoritesTabName={PROGRAMS_FAVORITES_TAB_NAME}

@@ -2,7 +2,6 @@ import * as React from "react";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "shared/components/facet-cards/faset-cards-container";
-import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 import { useTranslation } from "shared/i18n";
@@ -14,12 +13,14 @@ import {
 } from "shared/routes/funds.routes";
 import { composeFundFacetUrl } from "shared/utils/compose-url";
 
+import NavigationTabs from "../navigation-tabs/navigation-tabs";
+
 const FundsPage: React.FC = () => {
   const { t } = useTranslation();
   const title = t("funds-page.title");
   return (
     <Page title={title}>
-      <NavigationTabsContainer
+      <NavigationTabs
         exploreTabName={FUNDS_EXPLORE_TAB_NAME}
         tabRoute={FUNDS_TAB_ROUTE}
         favoritesTabName={FUNDS_FAVORITES_TAB_NAME}
