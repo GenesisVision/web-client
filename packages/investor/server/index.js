@@ -1,11 +1,20 @@
 const express = require("express");
 const next = require("next");
+const dotenv = require("dotenv");
 const nextI18NextMiddleware = require("next-i18next/middleware");
 
 const nextI18next = require("shared/i18n");
 
+dotenv.config({ path: ".env.local" });
+dotenv.config({ path: ".env" });
+
 const port = process.env.PORT || 3000;
 const dev = process.env.NODE_ENV !== "production";
+
+if (!dev) {
+  dotenv.config({ path: ".env.production" });
+}
+
 const app = next({ dev });
 const handle = app.getRequestHandler();
 

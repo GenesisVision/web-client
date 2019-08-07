@@ -1,4 +1,5 @@
 import React from "react";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
   bindActionCreators,
@@ -16,7 +17,6 @@ import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
 
 import ProgramDetailsPage from "../../../src/pages/programs/program-details/program-details.page";
-import { connect, ResolveThunks } from "react-redux";
 
 const ProgramDetails: NextPageWithRedux<Props, {}> = () => {
   return <ProgramDetailsPage />;
@@ -46,8 +46,7 @@ export default compose(
     null,
     mapDispatchToProps
   ),
-  withDefaultLayout,
-  withPrivateRoute
+  withDefaultLayout
 )(ProgramDetails);
 
 interface DispatchProps {
