@@ -1,12 +1,12 @@
 import Router from "next/router";
 import * as React from "react";
 import { useEffect } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ROLE } from "shared/constants/constants";

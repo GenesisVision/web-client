@@ -103,7 +103,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
   );
   const applyCloseProgram = useCallback(
     () => redirectToProgram(ctx!.query.id as string),
-    [redirectToProgram]
+    [ctx]
   );
   return (
     <Page title={t("manager.program-settings.title")}>

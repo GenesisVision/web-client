@@ -1,23 +1,21 @@
-import { FundsList } from "gv-api-web";
-import { NextPage, NextPageContext } from "next";
 import React from "react";
 import FundsPage from "shared/components/funds/funds.page";
 import withDefaultLayout from "shared/decorators/with-default-layout";
+import { fetchFundsAction } from "shared/modules/funds-table/actions/funds-table.actions";
 import { getFiltersFromContext } from "shared/modules/funds-table/components/funds-table/funds-table-ssr";
-import fundsApi from "shared/services/api-client/funds-api";
+import authService from "shared/services/auth-service";
+import { NextPageWithRedux } from "shared/utils/types";
 
-const Funds: NextPage<{
-  funds: FundsList;
-}> = ({ funds }) => {
-  return <FundsPage funds={funds} />;
+const Funds: NextPageWithRedux = () => {
+  return <FundsPage />;
 };
 
-Funds.getInitialProps = async (ctx: NextPageContext) => {
+Funds.getInitialProps = async ctx => {
   const filters = getFiltersFromContext(ctx);
-  const funds = await fundsApi.v10FundsGet(filters);
-  return {
-    funds
-  };
+  await ctx.reduxStore.dispatch(
+    //@ts-ignore
+    fetchFundsAction({ ...filters, authorization: authService.getAuthArg(ctx) })
+  );
 };
 
 export default withDefaultLayout(Funds);

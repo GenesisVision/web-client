@@ -3,13 +3,16 @@ import ProgramFollowContainer from "modules/program-follow/program-follow-contai
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
+import { connect, ResolveThunks } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  bindActionCreators,
+  compose,
+  Dispatch
+} from "redux";
 import GVButton from "shared/components/gv-button";
-import InvestmentUnauthPopup
-  from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
-import SignalProgramInfo
-  from "shared/components/programs/program-details/program-details-description/signal-program-info";
+import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
+import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 

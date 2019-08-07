@@ -29,7 +29,15 @@ const _Popover: React.FC<Props> = props => {
         popover.current.style.opacity = "1";
       }
     },
-    [anchorEl, scrollTop]
+    [
+      anchorEl,
+      getAnchorBounds,
+      getLeft,
+      getTop,
+      getTransformPosition,
+      ownWidth,
+      scrollTop
+    ]
   );
 
   useEffect(
@@ -40,8 +48,9 @@ const _Popover: React.FC<Props> = props => {
     [anchorEl]
   );
 
-  const getAnchorBounds = (): ClientRect =>
-    getAnchorEl(anchorEl).getBoundingClientRect();
+  const getAnchorBounds = useCallback(
+    (): ClientRect => getAnchorEl(anchorEl).getBoundingClientRect()
+  );
 
   const getPopoverBounds = (): ClientRect =>
     popover.current

@@ -6,6 +6,7 @@ import {
   WalletData
 } from "gv-api-web";
 import ConfirmContainer from "modules/confirm/confirm-container";
+import Router from "next/router";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -30,7 +31,6 @@ import {
 import { createProgram } from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
-import Router from "next/router";
 
 enum TAB {
   BROKER = "BROKER",

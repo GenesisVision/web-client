@@ -1,3 +1,4 @@
+import Router from "next/router";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 import managerApi from "shared/services/api-client/manager-api";
@@ -7,7 +8,6 @@ import {
   ResponseError,
   SetSubmittingType
 } from "shared/utils/types";
-import Router from "next/router";
 
 export const cancelChangeBrokerMethod = (
   programId: string
@@ -52,4 +52,3 @@ export const changeBrokerMethod = (
 
 export const redirectToProgram = (id: string) =>
   Router.replace(`${PROGRAMS_ROUTE}/${id}`);
-
