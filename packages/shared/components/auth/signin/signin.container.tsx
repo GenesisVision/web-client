@@ -36,14 +36,11 @@ const _SignInContainer: React.FC<Props> = ({
 }) => {
   const method =
     role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
-  useEffect(() => service.clearLoginData, [service.clearLoginData]);
-  useEffect(
-    () => {
-      if (type && (email === "" || password === ""))
-        Router.replace(NOT_FOUND_PAGE_ROUTE);
-    },
-    [email, password, type]
-  );
+  useEffect(() => service.clearLoginData, []);
+  useEffect(() => {
+    if (type && (email === "" || password === ""))
+      Router.replace(NOT_FOUND_PAGE_ROUTE);
+  }, []);
   return (
     <div className={className}>
       {!type && <AuthTabs authPartUrl={LOGIN_ROUTE} />}
