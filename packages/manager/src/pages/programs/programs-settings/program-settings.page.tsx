@@ -23,6 +23,7 @@ import { ASSET } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
+import AssetSettingsPage from "../../../modules/asset-settings/asset-settings.page";
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ProgramSettings from "./program-settings";
 import ProgramSettingsLoader from "./program-settings.loader";
@@ -86,40 +87,8 @@ const _ProgramsEditPage: React.FC<Props> = ({
     },
     [description]
   );
-  const editProgram: TUpdateProgramFunc = useCallback(
-    values => {
-      const currentValues = {
-        title: description!.title,
-        stopOutLevel: description!.stopOutLevel,
-        description: description!.description,
-        logo: { src: description!.logo },
-        investmentLimit: description!.availableInvestmentLimit
-      };
-      editAsset(
-        description!.id,
-        { ...currentValues, ...values },
-        ASSET.PROGRAM
-      ).then(dispatchProgramDescription);
-    },
-    [description]
-  );
   const applyCloseProgram = useCallback(() => redirectToProgram(), []);
-  return (
-    <Page title={t("manager.program-settings.title")}>
-      <ProgramSettings
-        condition={!!description && !!brokersInfo}
-        loader={<ProgramSettingsLoader />}
-        changeSignaling={changeSignaling}
-        closePeriod={dispatchProgramDescription}
-        closeProgram={applyCloseProgram}
-        details={description!}
-        brokersInfo={brokersInfo!}
-        changeBroker={changeBroker}
-        editProgram={editProgram}
-        cancelChangeBroker={cancelChangeBroker}
-      />
-    </Page>
-  );
+  return <AssetSettingsPage />;
 };
 
 const mapStateToProps = (state: RootState): StateProps => ({
