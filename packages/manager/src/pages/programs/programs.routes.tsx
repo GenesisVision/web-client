@@ -13,8 +13,8 @@ import {
   PROGRAM_SETTINGS_ROUTE
 } from "shared/routes/programs.routes";
 
-import AssetSettingsPage from "../../modules/asset-settings/asset-settings.page";
 import ProgramDetailsPage from "./program-details/program-details.page";
+import ProgramSettingsPage from "./programs-settings/program-settings.page";
 import ProgramsPage from "./programs/programs.page";
 
 const ProgramsRoutes: React.FC = () => (
@@ -26,7 +26,7 @@ const ProgramsRoutes: React.FC = () => (
     />
     <Route path={PROGRAMS_RATING_ROUTE} component={ProgramsRatingContainer} />
     <Route path={PROGRAMS_FACET_ROUTE_REGEX} component={ProgramsFacetPage} />
-    <Route path={PROGRAM_SETTINGS_ROUTE} component={AssetSettingsPage} />
+    <Route path={PROGRAM_SETTINGS_ROUTE} component={ProgramSettingsPage} />
     <Route path={PROGRAM_DETAILS_ROUTE_REGEX} component={ProgramDetailsPage} />
     <Route component={NotFoundPage} />
   </Switch>
