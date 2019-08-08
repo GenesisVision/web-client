@@ -22,9 +22,9 @@ import { ASSET } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
-import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import AssetSettings from "./asset-settings";
 import AssetSettingsLoader from "./asset-settings.loader";
+import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import {
   cancelChangeBrokerMethod,
   changeBrokerMethod,
@@ -35,7 +35,7 @@ import { IAssetSignalFormValues } from "./signaling-edit";
 
 const _AssetsEditPage: React.FC<Props> = ({
   service: {
-    dispatchAssetDescription,
+    dispatchProgramDescription,
     programEditSignal,
     changeBrokerMethod,
     cancelChangeBrokerMethod,
@@ -49,7 +49,7 @@ const _AssetsEditPage: React.FC<Props> = ({
     BrokersProgramInfo | undefined
   >(undefined);
   useEffect(() => {
-    dispatchAssetDescription();
+    dispatchProgramDescription();
   }, []);
   useEffect(
     () => {
@@ -60,21 +60,23 @@ const _AssetsEditPage: React.FC<Props> = ({
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IAssetSignalFormValues) =>
       programEditSignal(description!.id, successFee!, volumeFee!).then(
-        dispatchAssetDescription
+        dispatchProgramDescription
       ),
     [description]
   );
   const changeBroker = useCallback(
     ({ brokerAccountTypeId, leverage }: ChangeBrokerFormValues) => {
       changeBrokerMethod(description!.id, brokerAccountTypeId, leverage).then(
-        dispatchAssetDescription
+        dispatchProgramDescription
       );
     },
     [description]
   );
   const cancelChangeBroker = useCallback(
     () => {
-      cancelChangeBrokerMethod(description!.id).then(dispatchAssetDescription);
+      cancelChangeBrokerMethod(description!.id).then(
+        dispatchProgramDescription
+      );
     },
     [description]
   );
@@ -91,7 +93,7 @@ const _AssetsEditPage: React.FC<Props> = ({
         description!.id,
         { ...currentValues, ...values },
         ASSET.PROGRAM
-      ).then(dispatchAssetDescription);
+      ).then(dispatchProgramDescription);
     },
     [description]
   );
@@ -102,7 +104,7 @@ const _AssetsEditPage: React.FC<Props> = ({
         condition={!!description && !!brokersInfo}
         loader={<AssetSettingsLoader />}
         changeSignaling={changeSignaling}
-        closePeriod={dispatchAssetDescription}
+        closePeriod={dispatchProgramDescription}
         closeAsset={applyCloseAsset}
         details={description!}
         brokersInfo={brokersInfo!}
