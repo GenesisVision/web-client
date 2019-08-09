@@ -16,7 +16,6 @@ import getParams from "shared/utils/get-params";
 import { ManagerThunk, ResponseError } from "shared/utils/types";
 
 import { IAssetEditFormValues } from "../../asset-edit/components/asset-edit-form";
-import { TUpdateAssetFunc } from "../asset-settings.page";
 
 export const cancelChangeBrokerMethod = (
   programId: string
@@ -98,9 +97,9 @@ export const editAsset = (
         alertMessageActions.success(
           (type === ASSET.PROGRAM &&
             "manager.edit-program.notifications.edit-success") ||
-          (type === ASSET.FUND &&
-            "manager.edit-fund.notifications.edit-success") ||
-          "",
+            (type === ASSET.FUND &&
+              "manager.edit-fund.notifications.edit-success") ||
+            "",
           true
         )
       );
