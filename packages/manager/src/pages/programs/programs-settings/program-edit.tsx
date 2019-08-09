@@ -1,4 +1,5 @@
 import { FormikProps, withFormik } from "formik";
+import SettingsBlock from "modules/asset-settings/settings-block";
 import {
   assetDescriptionShape,
   assetTitleShape
@@ -14,8 +15,6 @@ import inputImageShape from "shared/components/form/input-image/input-image.vali
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
-
-import SettingsBlock from "./settings-block";
 
 const _ProgramEdit: React.FC<Props> = ({
   t,

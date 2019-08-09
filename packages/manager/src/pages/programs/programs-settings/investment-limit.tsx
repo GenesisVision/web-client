@@ -1,4 +1,5 @@
 import { FormikProps, withFormik } from "formik";
+import SettingsBlock from "modules/asset-settings/settings-block";
 import CreateProgramInvestmentLimitField from "pages/create-program/components/create-program-settings/fields/create-program-investment-limit-field";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -8,8 +9,6 @@ import GVButton from "shared/components/gv-button";
 import { validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import { boolean, mixed, number, object } from "yup";
-
-import SettingsBlock from "./settings-block";
 
 const _InvestmentLimit: React.FC<Props> = ({
   t,

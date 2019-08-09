@@ -1,4 +1,5 @@
 import { FormikProps, withFormik } from "formik";
+import SettingsBlock from "modules/asset-settings/settings-block";
 import CreateProgramStopOutField from "pages/create-program/components/create-program-settings/fields/create-program-stop-out-field";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -6,8 +7,6 @@ import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
-
-import SettingsBlock from "./settings-block";
 
 const _StopOutLevel: React.FC<Props> = ({
   t,

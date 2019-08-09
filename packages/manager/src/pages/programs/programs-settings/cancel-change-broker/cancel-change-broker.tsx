@@ -1,9 +1,9 @@
+import SettingsBlock from "modules/asset-settings/settings-block";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
-import SettingsBlock from "../settings-block";
 import CancelChangeBrokerForm, {
   CancelChangeBrokerFormOwnProps
 } from "./cancel-change-broker-form";
