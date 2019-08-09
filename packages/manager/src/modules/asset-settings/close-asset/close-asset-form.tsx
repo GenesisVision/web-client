@@ -6,17 +6,26 @@ import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
+import { ASSET } from "shared/constants/constants";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
-const CloseAssetForm: React.FC<
+const _CloseAssetForm: React.FC<
   InjectedFormikProps<FormProps, ICloseAssetFormValues>
-> = ({ t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => (
+> = ({ asset, t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => (
   <form id="closeAssetForm" onSubmit={handleSubmit} noValidate>
     <div className="dialog__top">
-      <h2>{t("asset-details-page.description.close-asset")}</h2>
+      <h2>
+        {t(
+          `manager.asset-settings.period-and-closing.close-confirm-title-${asset.toLowerCase()}`
+        )}
+      </h2>
       <div className="dialog__text">
-        <p>{t("asset-details-page.description.close-asset-notification")}</p>
+        <p>
+          {t(
+            `manager.asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
+          )}
+        </p>
       </div>
       {twoFactorEnabled && (
         <GVFormikField
@@ -58,7 +67,7 @@ const twoFactorValidator = (
         .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 };
 
-export default compose<React.ComponentType<OwnProps>>(
+const CloseAssetForm = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<OwnProps, ICloseAssetFormValues>({
     displayName: "close-asset",
@@ -71,13 +80,15 @@ export default compose<React.ComponentType<OwnProps>>(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(CloseAssetForm);
+)(_CloseAssetForm);
+export default CloseAssetForm;
 
 enum FIELDS {
   twoFactorCode = "twoFactorCode"
 }
 
 interface OwnProps {
+  asset: ASSET;
   onCancel(): void;
   twoFactorEnabled: boolean;
   onSubmit(
