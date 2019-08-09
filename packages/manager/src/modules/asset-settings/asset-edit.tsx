@@ -1,4 +1,5 @@
 import { FormikProps, withFormik } from "formik";
+import SettingsBlock from "modules/asset-settings/settings-block";
 import {
   assetDescriptionShape,
   assetTitleShape
@@ -15,7 +16,6 @@ import { object } from "yup";
 import DescriptionField from "./fields/description-field";
 import LogoField from "./fields/logo-field";
 import TitleField from "./fields/title-field";
-import SettingsBlock from "./settings-block";
 
 const _AssetEdit: React.FC<Props> = ({
   t,
