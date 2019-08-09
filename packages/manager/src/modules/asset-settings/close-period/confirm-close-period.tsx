@@ -31,8 +31,8 @@ const _ConfirmClosePeriod: React.FC<IClosePeriodProps & WithTranslation> = ({
       onClose={onClose}
       onCancel={onClose}
       onApply={handleApplyClick}
-      header={t("asset-details-page.close-period.title")}
-      body={t("asset-details-page.close-period.body")}
+      header={t("program-details-page.close-period.title")}
+      body={t("program-details-page.close-period.body")}
       applyButtonText={t("buttons.confirm")}
       className="dialog--wider"
     />
