@@ -1,9 +1,11 @@
 import "shared/components/details/details.scss";
 
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
-import { editAsset } from "modules/asset-edit/services/asset-edit.services";
+import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
+import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
+import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
@@ -13,7 +15,6 @@ import {
   compose
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
-import Page from "shared/components/page/page";
 import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
 import {
   dispatchProgramDescription,
@@ -23,10 +24,8 @@ import { ASSET } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
-import AssetSettingsPage from "../../../modules/asset-settings/asset-settings.page";
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ProgramSettings from "./program-settings";
-import ProgramSettingsLoader from "./program-settings.loader";
 import {
   cancelChangeBrokerMethod,
   changeBrokerMethod,
@@ -36,12 +35,10 @@ import { IProgramSignalFormValues } from "./signaling-edit";
 
 const _ProgramsEditPage: React.FC<Props> = ({
   service: {
-    dispatchProgramDescription,
     programEditSignal,
     changeBrokerMethod,
     cancelChangeBrokerMethod,
-    editAsset,
-    redirectToProgram
+    dispatchDescription
   },
   t,
   description
@@ -49,19 +46,13 @@ const _ProgramsEditPage: React.FC<Props> = ({
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
   >(undefined);
-  useEffect(() => {
-    dispatchProgramDescription();
-  }, []);
-  useEffect(
-    () => {
-      description && getProgramBrokers(description.id).then(setBrokersInfo);
-    },
-    [description]
-  );
+  const effect = () => {
+    description && getProgramBrokers(description.id).then(setBrokersInfo);
+  };
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
       programEditSignal(description!.id, successFee!, volumeFee!).then(
-        dispatchProgramDescription
+        dispatchDescription
       ),
     [description]
   );
@@ -75,20 +66,39 @@ const _ProgramsEditPage: React.FC<Props> = ({
         brokerAccountTypeId,
         leverage,
         setSubmitting
-      ).then(dispatchProgramDescription);
+      ).then(dispatchDescription);
     },
     [description]
   );
   const cancelChangeBroker = useCallback(
     () => {
-      cancelChangeBrokerMethod(description!.id).then(
-        dispatchProgramDescription
-      );
+      cancelChangeBrokerMethod(description!.id).then(dispatchDescription);
     },
     [description]
   );
-  const applyCloseProgram = useCallback(() => redirectToProgram(), []);
-  return <AssetSettingsPage />;
+  return (
+    <AssetSettingsPage
+      redirectToAsset={redirectToProgram}
+      asset={ASSET.PROGRAM}
+      description={description as AssetDescriptionType}
+      effect={effect}
+      dispatchDescription={dispatchProgramDescription}
+      settingsBlocks={(editProgram, applyCloseAsset) => (
+        <ProgramSettings
+          condition={!!description && !!brokersInfo}
+          closePeriod={dispatchProgramDescription}
+          closeProgram={applyCloseAsset}
+          details={description!}
+          editProgram={editProgram}
+          brokersInfo={brokersInfo!}
+          changeBroker={changeBroker}
+          loader={<AssetSettingsLoader />}
+          changeSignaling={changeSignaling}
+          cancelChangeBroker={cancelChangeBroker}
+        />
+      )}
+    />
+  );
 };
 
 const mapStateToProps = (state: RootState): StateProps => ({
@@ -99,11 +109,9 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       cancelChangeBrokerMethod,
-      dispatchProgramDescription,
-      editAsset,
+      dispatchDescription: dispatchProgramDescription,
       programEditSignal,
-      changeBrokerMethod,
-      redirectToProgram
+      changeBrokerMethod
     },
     dispatch
   )
@@ -127,11 +135,9 @@ interface StateProps {
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   cancelChangeBrokerMethod: typeof cancelChangeBrokerMethod;
-  dispatchProgramDescription: typeof dispatchProgramDescription;
-  editAsset: typeof editAsset;
+  dispatchDescription: typeof dispatchProgramDescription;
   programEditSignal: typeof programEditSignal;
   changeBrokerMethod: typeof changeBrokerMethod;
-  redirectToProgram: typeof redirectToProgram;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
