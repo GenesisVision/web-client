@@ -1,9 +1,12 @@
 import "./program-settings.scss";
 
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
+import AssetEdit from "modules/asset-settings/asset-edit";
+import PeriodAndClosing from "modules/asset-settings/period-and-closing";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 
@@ -12,8 +15,6 @@ import ChangeBroker from "./change-broker/change-broker";
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ChangePassword from "./change-password/change-password";
 import InvestmentLimit from "./investment-limit";
-import PeriodAndClosing from "./period-and-closing";
-import ProgramEdit from "./program-edit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
@@ -37,18 +38,18 @@ const _ProgramSettings: React.FC<Props> = ({
     ? details.signalVolumeFee
     : undefined;
   return (
-    <div className="program-settings">
-      <h1>{t("manager.program-settings.title")}</h1>
+    <>
       <TwoFactorConfirm
         condition={details.personalProgramDetails.showTwoFactorButton}
         id={details.id}
       />
       <PeriodAndClosing
+        asset={ASSET.PROGRAM}
         canClosePeriod={details.personalProgramDetails.canClosePeriod}
-        canCloseProgram={details.personalProgramDetails.canCloseProgram}
+        canCloseAsset={details.personalProgramDetails.canCloseProgram}
         id={details.id}
         closePeriod={closePeriod}
-        closeProgram={closeProgram}
+        closeAsset={closeProgram}
       />
       <ChangePassword
         condition={
@@ -58,7 +59,7 @@ const _ProgramSettings: React.FC<Props> = ({
         title={details.title}
         id={details.id}
       />
-      <ProgramEdit
+      <AssetEdit
         title={details.title}
         logo={{ src: details.logo }}
         description={details.description}
@@ -111,7 +112,7 @@ const _ProgramSettings: React.FC<Props> = ({
         signalSuccessFee={signalSuccessFee}
         signalVolumeFee={signalVolumeFee}
       />
-    </div>
+    </>
   );
 };
 
