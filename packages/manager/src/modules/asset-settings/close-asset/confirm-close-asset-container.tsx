@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { closeProgram } from "shared/components/programs/program-details/services/program-details.service";
+import { ASSET } from "shared/constants/constants";
 import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
@@ -10,6 +11,7 @@ import { SetSubmittingType } from "shared/utils/types";
 import CloseAssetForm, { ICloseAssetFormValues } from "./close-asset-form";
 
 const _ConfirmCloseAssetContainer: React.FC<Props> = ({
+  asset,
   open,
   twoFactorEnabled,
   onClose,
@@ -38,6 +40,7 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose} className="dialog--wider">
       <CloseAssetForm
+        asset={asset}
         onSubmit={handleSubmit}
         onCancel={onClose}
         twoFactorEnabled={twoFactorEnabled}
@@ -62,6 +65,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 interface Props extends OwnProps, DispatchProps, StateProps {}
 
 interface OwnProps {
+  asset: ASSET;
   open: boolean;
   onClose(): void;
   onApply(): void;
