@@ -1511,6 +1511,31 @@
     }
   },
   "manager": {
+    "asset-settings": {
+      "title": "{{asset}} settings",
+      "period-and-closing": {
+        "title": "Period and closing",
+        "text-program": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
+        "text-fund": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
+        "text-period": "The current period of the program will end in one hour.",
+        "close-confirm-title-program": "Close Program",
+        "close-confirm-notification-program": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares."
+      },
+      "strategy": {
+        "title": "Strategy"
+      },
+      "name": {
+        "title": "Title"
+      },
+      "avatar": {
+        "title": "Avatar"
+      },
+      "buttons": {
+        "close-program": "Close program",
+        "close-fund": "Close fund",
+        "save": "Save"
+      }
+    },
     "program-settings": {
       "two-factor-confirm": {
         "title": "Two-factor authorization (2fa)",
