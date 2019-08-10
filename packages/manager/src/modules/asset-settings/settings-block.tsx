@@ -1,9 +1,9 @@
 import React from "react";
 
 const _SettingsBlock: React.FC<Props> = ({ label, content }) => (
-  <section className="program-settings__block">
+  <section className="asset-settings__block">
     {label && <h3>{label}</h3>}
-    <div className="program-settings__block-wrapper">{content}</div>
+    <div className="asset-settings__block-wrapper">{content}</div>
   </section>
 );
 

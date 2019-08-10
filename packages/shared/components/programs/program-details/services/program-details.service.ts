@@ -21,7 +21,6 @@ import {
 } from "shared/components/table/helpers/mapper";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { RootState } from "shared/reducers/root-reducer";
 import {
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SLUG_URL_PARAM_NAME
@@ -33,7 +32,7 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import { CurrencyEnum, MiddlewareDispatch } from "shared/utils/types";
+import { CurrencyEnum, DispatchDescriptionType } from "shared/utils/types";
 
 import {
   fetchLevelParametersAction,
@@ -51,9 +50,9 @@ export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
   dispatch: Dispatch
 ) => dispatch(fetchLevelParametersAction(currency));
 
-export const dispatchProgramDescription = () => (
-  dispatch: MiddlewareDispatch,
-  getState: () => RootState
+export const dispatchProgramDescription: DispatchDescriptionType = () => (
+  dispatch,
+  getState
 ) => {
   const authorization = authService.getAuthArg();
   const { router } = getState();

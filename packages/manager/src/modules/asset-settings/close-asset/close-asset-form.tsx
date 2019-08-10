@@ -6,18 +6,25 @@ import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
+import { ASSET } from "shared/constants/constants";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
-const CloseProgramForm: React.FC<
-  InjectedFormikProps<FormProps, ICloseProgramFormValues>
-> = ({ t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => (
-  <form id="closeProgramForm" onSubmit={handleSubmit} noValidate>
+const _CloseAssetForm: React.FC<
+  InjectedFormikProps<FormProps, ICloseAssetFormValues>
+> = ({ asset, t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => (
+  <form id="closeAssetForm" onSubmit={handleSubmit} noValidate>
     <div className="dialog__top">
-      <h2>{t("program-details-page.description.close-program")}</h2>
+      <h2>
+        {t(
+          `manager.asset-settings.period-and-closing.close-confirm-title-${asset.toLowerCase()}`
+        )}
+      </h2>
       <div className="dialog__text">
         <p>
-          {t("program-details-page.description.close-program-notification")}
+          {t(
+            `manager.asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
+          )}
         </p>
       </div>
       {twoFactorEnabled && (
@@ -60,10 +67,10 @@ const twoFactorValidator = (
         .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 };
 
-export default compose<React.ComponentType<OwnProps>>(
+const CloseAssetForm = compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik<OwnProps, ICloseProgramFormValues>({
-    displayName: "close-program",
+  withFormik<OwnProps, ICloseAssetFormValues>({
+    displayName: "close-asset",
     mapPropsToValues: () => ({ [FIELDS.twoFactorCode]: "" }),
     validationSchema: ({ t, twoFactorEnabled }: FormProps) =>
       object().shape({
@@ -73,22 +80,24 @@ export default compose<React.ComponentType<OwnProps>>(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(CloseProgramForm);
+)(_CloseAssetForm);
+export default CloseAssetForm;
 
 enum FIELDS {
   twoFactorCode = "twoFactorCode"
 }
 
 interface OwnProps {
+  asset: ASSET;
   onCancel(): void;
   twoFactorEnabled: boolean;
   onSubmit(
-    values: ICloseProgramFormValues,
+    values: ICloseAssetFormValues,
     setSubmitting: SetSubmittingType
   ): void;
 }
 
-export interface ICloseProgramFormValues {
+export interface ICloseAssetFormValues {
   [FIELDS.twoFactorCode]: string;
 }
 

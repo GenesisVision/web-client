@@ -4,9 +4,6 @@ import {
   assetDescriptionShape,
   assetTitleShape
 } from "pages/create-program/components/create-program-settings/create-program-settings.validators";
-import CreateProgramDescriptionField from "pages/create-program/components/create-program-settings/fields/create-program-description-field";
-import CreateProgramLogoField from "pages/create-program/components/create-program-settings/fields/create-program-logo-field";
-import CreateProgramTitleField from "pages/create-program/components/create-program-settings/fields/create-program-title-field";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -16,7 +13,11 @@ import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
-const _ProgramEdit: React.FC<Props> = ({
+import DescriptionField from "./fields/description-field";
+import LogoField from "./fields/logo-field";
+import TitleField from "./fields/title-field";
+
+const _AssetEdit: React.FC<Props> = ({
   t,
   values,
   handleSubmit,
@@ -27,17 +28,17 @@ const _ProgramEdit: React.FC<Props> = ({
   <SettingsBlock
     content={
       <form id="edit-form" onSubmit={handleSubmit}>
-        <div className="program-settings__block-wrapper">
-          <h3>{t("manager.program-settings.avatar.title")}</h3>
-          <CreateProgramLogoField name={FIELDS.logo} />
+        <div className="asset-settings__block-wrapper">
+          <h3>{t("manager.asset-settings.avatar.title")}</h3>
+          <LogoField name={FIELDS.logo} />
         </div>
-        <h3>{t("manager.program-settings.name.title")}</h3>
-        <div className="program-settings__block-wrapper create-program-settings__row">
-          <CreateProgramTitleField name={FIELDS.title} />
+        <h3>{t("manager.asset-settings.name.title")}</h3>
+        <div className="asset-settings__block-wrapper create-program-settings__row">
+          <TitleField name={FIELDS.title} />
         </div>
-        <h3>{t("manager.program-settings.strategy.title")}</h3>
-        <div className="program-settings__block-wrapper program-settings__block-wrapper--wide create-program-settings__row">
-          <CreateProgramDescriptionField
+        <h3>{t("manager.asset-settings.strategy.title")}</h3>
+        <div className="asset-settings__block-wrapper asset-settings__block-wrapper--wide create-program-settings__row">
+          <DescriptionField
             name={FIELDS.description}
             description={values.description}
           />
@@ -48,7 +49,7 @@ const _ProgramEdit: React.FC<Props> = ({
           className="invest-form__submit-button"
           disabled={!dirty || !isValid || isSubmitting}
         >
-          {t("manager.program-settings.buttons.save")}
+          {t("manager.asset-settings.buttons.save")}
         </GVButton>
       </form>
     }
@@ -61,7 +62,7 @@ enum FIELDS {
   description = "description"
 }
 
-export interface ProgramEditFormValues {
+export interface AssetEditFormValues {
   [FIELDS.title]: string;
   [FIELDS.description]: string;
   [FIELDS.logo]: IImageValue;
@@ -70,21 +71,21 @@ export interface ProgramEditFormValues {
 interface Props
   extends OwnProps,
     WithTranslation,
-    FormikProps<ProgramEditFormValues> {}
+    FormikProps<AssetEditFormValues> {}
 
 interface OwnProps {
   logo: IImageValue;
   title: string;
   description: string;
   onSubmit: (
-    values: ProgramEditFormValues,
+    values: AssetEditFormValues,
     setSubmitting: SetSubmittingType
   ) => void;
 }
 
-const ProgramEdit = compose<React.ComponentType<OwnProps>>(
+const AssetEdit = compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik<OwnProps, ProgramEditFormValues>({
+  withFormik<OwnProps, AssetEditFormValues>({
     enableReinitialize: true,
     displayName: "edit-form",
     mapPropsToValues: props => {
@@ -107,5 +108,5 @@ const ProgramEdit = compose<React.ComponentType<OwnProps>>(
     }
   }),
   React.memo
-)(_ProgramEdit);
-export default ProgramEdit;
+)(_AssetEdit);
+export default AssetEdit;

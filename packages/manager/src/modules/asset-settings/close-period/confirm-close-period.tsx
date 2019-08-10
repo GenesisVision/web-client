@@ -46,7 +46,7 @@ export interface IClosePeriodProps {
   id: string;
   service: {
     closePeriod: (
-      programId: string,
+      assetId: string,
       onSuccess: () => void,
       onError: () => void
     ) => void;

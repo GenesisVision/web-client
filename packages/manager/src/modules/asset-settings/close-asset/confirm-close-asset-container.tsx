@@ -1,17 +1,17 @@
 import React, { useCallback } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { closeProgram } from "shared/components/programs/program-details/services/program-details.service";
+import { ASSET } from "shared/constants/constants";
 import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
-import CloseProgramForm, {
-  ICloseProgramFormValues
-} from "./close-program-form";
+import CloseAssetForm, { ICloseAssetFormValues } from "./close-asset-form";
 
-const _ConfirmCloseProgramContainer: React.FC<Props> = ({
+const _ConfirmCloseAssetContainer: React.FC<Props> = ({
+  asset,
   open,
   twoFactorEnabled,
   onClose,
@@ -21,7 +21,7 @@ const _ConfirmCloseProgramContainer: React.FC<Props> = ({
 }) => {
   const handleSubmit = useCallback(
     (
-      { twoFactorCode }: ICloseProgramFormValues,
+      { twoFactorCode }: ICloseAssetFormValues,
       setSubmitting: SetSubmittingType
     ) => {
       const applyFn = () => {
@@ -39,7 +39,8 @@ const _ConfirmCloseProgramContainer: React.FC<Props> = ({
   );
   return (
     <Dialog open={open} onClose={onClose} className="dialog--wider">
-      <CloseProgramForm
+      <CloseAssetForm
+        asset={asset}
         onSubmit={handleSubmit}
         onCancel={onClose}
         twoFactorEnabled={twoFactorEnabled}
@@ -64,6 +65,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 interface Props extends OwnProps, DispatchProps, StateProps {}
 
 interface OwnProps {
+  asset: ASSET;
   open: boolean;
   onClose(): void;
   onApply(): void;
@@ -79,7 +81,7 @@ interface DispatchProps {
     closeProgram(
       onSuccess: () => void,
       onError: () => void,
-      programId: string,
+      assetId: string,
       opts?: {
         twoFactorCode?: string | undefined;
       }
@@ -87,11 +89,11 @@ interface DispatchProps {
   };
 }
 
-const ConfirmCloseProgramContainer = compose<React.ComponentType<OwnProps>>(
+const ConfirmCloseAssetContainer = compose<React.ComponentType<OwnProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
   React.memo
-)(_ConfirmCloseProgramContainer);
-export default ConfirmCloseProgramContainer;
+)(_ConfirmCloseAssetContainer);
+export default ConfirmCloseAssetContainer;
