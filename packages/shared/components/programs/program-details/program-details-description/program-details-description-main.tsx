@@ -104,6 +104,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
           <DetailsSettingControl
             title={programDescription.title}
             url={composeProgramSettingsUrl(programDescription.url)}
+            text={t("program-details-page.description.program-settings")}
           />
         )}
       </div>
