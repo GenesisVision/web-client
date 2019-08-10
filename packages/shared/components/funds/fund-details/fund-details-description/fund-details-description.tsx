@@ -4,6 +4,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
+import DetailsSettingControl from "shared/components/details/details-description-section/details-description/controls/details-setting-control";
 import GVButton from "shared/components/gv-button";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import {
@@ -63,6 +64,15 @@ const _FundDetailsDescription: React.FC<Props> = ({
             : false
         }
       />
+      {description.personalFundDetails.isOwnProgram &&
+        description.personalFundDetails &&
+        description.personalFundDetails.canCloseProgram && (
+          <DetailsSettingControl
+            title={description.title}
+            url={composeFundNotificationsUrl(description.url)}
+            text={t("fund-details-page.description.fund-settings")}
+          />
+        )}
     </div>
   </div>
 );
