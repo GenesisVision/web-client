@@ -521,6 +521,7 @@
   "fund-details-page": {
     "title": "Program detail",
     "description": {
+      "fund-settings": "Fund settings",
       "disable-reallocation-message": "The next reallocation will be available on",
       "reallocate": "Reallocate",
       "edit-fund": "Edit details",
