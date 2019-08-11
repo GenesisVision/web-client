@@ -9,6 +9,7 @@ import GVButton from "shared/components/gv-button";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import {
   composeFundNotificationsUrl,
+  composeFundSettingsUrl,
   composeManagerDetailsUrl
 } from "shared/utils/compose-url";
 
@@ -69,7 +70,7 @@ const _FundDetailsDescription: React.FC<Props> = ({
         description.personalFundDetails.canCloseProgram && (
           <DetailsSettingControl
             title={description.title}
-            url={composeFundNotificationsUrl(description.url)}
+            url={composeFundSettingsUrl(description.url)}
             text={t("fund-details-page.description.fund-settings")}
           />
         )}
