@@ -13,14 +13,15 @@ import {
 } from "shared/routes/funds.routes";
 
 import FundDetailsPage from "./fund-details/fund-details.page";
+import FundSettingsPage from "./fund-settings/fund-settings.page";
 
 const FundsRoutes: React.FC = () => (
   <Switch>
     <Route exact path={FUNDS_ROUTE} component={FundsPage} />
     <PrivateRoute path={FUNDS_FAVORITES_TAB_ROUTE} component={FundsPage} />
     <Route path={FUNDS_FACET_ROUTE_REGEX} component={fundsFacetPage} />
+    <Route path={FUND_SETTINGS_ROUTE} component={FundSettingsPage} />
     <Route path={FUND_DETAILS_ROUTE_REGEX} component={FundDetailsPage} />
-    <Route path={FUND_SETTINGS_ROUTE} component={FundDetailsPage} />
     <Route component={NotFoundPage} />
   </Switch>
 );
