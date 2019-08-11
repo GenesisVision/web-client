@@ -8,7 +8,8 @@ import {
   FUNDS_FACET_ROUTE_REGEX,
   FUNDS_FAVORITES_TAB_ROUTE,
   FUNDS_ROUTE,
-  FUND_DETAILS_ROUTE_REGEX
+  FUND_DETAILS_ROUTE_REGEX,
+  FUND_SETTINGS_ROUTE
 } from "shared/routes/funds.routes";
 
 import FundDetailsPage from "./fund-details/fund-details.page";
@@ -19,6 +20,7 @@ const FundsRoutes: React.FC = () => (
     <PrivateRoute path={FUNDS_FAVORITES_TAB_ROUTE} component={FundsPage} />
     <Route path={FUNDS_FACET_ROUTE_REGEX} component={fundsFacetPage} />
     <Route path={FUND_DETAILS_ROUTE_REGEX} component={FundDetailsPage} />
+    <Route path={FUND_SETTINGS_ROUTE} component={FundDetailsPage} />
     <Route component={NotFoundPage} />
   </Switch>
 );
