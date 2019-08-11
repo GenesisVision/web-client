@@ -1,4 +1,4 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { FundDetailsFull } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import PeriodAndClosing from "modules/asset-settings/period-and-closing";
 import React from "react";
@@ -18,9 +18,8 @@ const _FundSettings: React.FC<Props> = ({
   return (
     <>
       <PeriodAndClosing
-        asset={ASSET.PROGRAM}
-        canClosePeriod={details.personalProgramDetails.canClosePeriod}
-        canCloseAsset={details.personalProgramDetails.canCloseProgram}
+        asset={ASSET.FUND}
+        canCloseAsset={details.personalFundDetails.canCloseProgram}
         id={details.id}
         closeAsset={closeAsset}
       />
@@ -37,7 +36,7 @@ const _FundSettings: React.FC<Props> = ({
 interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
-  details: ProgramDetailsFull;
+  details: FundDetailsFull;
   closeAsset: () => void;
   editAsset: TUpdateProgramFunc;
 }
