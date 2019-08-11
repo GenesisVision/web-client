@@ -12,7 +12,7 @@ const _PeriodAndClosing: React.FC<Props> = ({
   id,
   canClosePeriod,
   canCloseAsset,
-  closePeriod,
+  closePeriod = () => {},
   closeAsset
 }) => (
   <SettingsBlock
@@ -36,8 +36,8 @@ interface Props extends WithTranslation {
   id: string;
   canClosePeriod: boolean;
   canCloseAsset: boolean;
-  closePeriod: () => void;
   closeAsset: () => void;
+  closePeriod?: () => void;
 }
 
 const PeriodAndClosing = translate()(React.memo(_PeriodAndClosing));
