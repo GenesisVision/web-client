@@ -1,4 +1,4 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { FundDetailsFull } from "gv-api-web";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
@@ -13,8 +13,8 @@ import {
   compose
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
+import { fundDescriptionSelector } from "shared/components/funds/fund-details/reducers/description.reducer";
 import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
-import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
 import { ASSET } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
@@ -36,7 +36,7 @@ const _FundSettingsPage: React.FC<Props> = ({
   return (
     <AssetSettingsPage
       redirectToAsset={redirectToFund}
-      asset={ASSET.PROGRAM}
+      asset={ASSET.FUND}
       description={description as AssetDescriptionType}
       effect={effect}
       dispatchDescription={dispatchFundDescription}
@@ -54,7 +54,7 @@ const _FundSettingsPage: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  description: programDescriptionSelector(state)
+  description: fundDescriptionSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -80,7 +80,7 @@ export type TUpdateProgramFunc = (
 interface OwnProps {}
 
 interface StateProps {
-  description?: ProgramDetailsFull;
+  description?: FundDetailsFull;
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {
