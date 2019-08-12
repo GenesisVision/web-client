@@ -83,9 +83,7 @@ class ReallocateField extends React.PureComponent<Props, State> {
     });
     this.props.onChange({
       target: {
-        value: this.state.assets
-          .filter(x => x.percent > 0)
-          .map(x => ({ id: x.id, percent: x.percent })),
+        value: this.state.assets.filter(asset => asset.percent > 0),
         name: this.props.name
       }
     });
