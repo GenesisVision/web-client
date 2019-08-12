@@ -110,7 +110,9 @@ class ReallocateField extends React.PureComponent<Props, State> {
     return (
       <>
         {error !== undefined && touched && (
-          <div className="form-error">{error}</div>
+          <div className="form-error reallocate-container__form-error">
+            {error}
+          </div>
         )}
         <CreateFundSettingsAssetsComponent
           assets={assets.filter(item => item.percent > 0) || []}
