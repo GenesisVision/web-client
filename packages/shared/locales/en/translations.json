@@ -1512,6 +1512,11 @@
     }
   },
   "manager": {
+    "fund-settings": {
+      "reallocation": {
+        "title": "Reallocation"
+      }
+    },
     "asset-settings": {
       "title": "{{asset}} settings",
       "period-and-closing": {
