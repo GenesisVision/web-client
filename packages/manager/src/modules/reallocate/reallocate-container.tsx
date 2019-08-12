@@ -1,3 +1,4 @@
+/*
 import "./reallocate-container.scss";
 
 import {
@@ -108,3 +109,4 @@ const ReallocateContainer = compose<React.ComponentType<OwnProps>>(
   React.memo
 )(_ReallocateContainer);
 export default ReallocateContainer;
+*/
