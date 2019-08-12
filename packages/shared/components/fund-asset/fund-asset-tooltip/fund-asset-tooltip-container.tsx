@@ -1,6 +1,7 @@
 import "./fund-asset-tooltip.scss";
 
 import { FundAssetPercent } from "gv-api-web";
+import { PlatformAssetFull } from "manager-web-portal/src/pages/funds/fund-settings/reallocation/components/reallocate-field";
 import * as React from "react";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { CurrencyEnum } from "shared/utils/types";
@@ -46,7 +47,7 @@ const FundAssetTooltipContainer = React.memo(_FundAssetTooltipContainer);
 export default FundAssetTooltipContainer;
 
 interface OwnProps {
-  asset: FundAssetPercent;
+  asset: PlatformAssetFull;
   idx: number;
 }
 
