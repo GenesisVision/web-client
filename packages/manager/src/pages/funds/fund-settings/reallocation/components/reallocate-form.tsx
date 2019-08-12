@@ -12,16 +12,18 @@ import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
+import ConfirmReallocate from "./confirm-reallocate";
 import ReallocateField, {
   PlatformAssetFull,
   composeSelectedAssets
 } from "./reallocate-field";
 
 const _ReallocateForm: React.FC<Props> = ({
-  values: { currentAssets },
+  values: { currentAssets, assets },
   fundAssets,
   canReallocate,
   t,
@@ -32,6 +34,7 @@ const _ReallocateForm: React.FC<Props> = ({
   isSubmitting,
   platformAssets
 }) => {
+  const [isOpenConfirm, setIsOpenConfirm, setIsCloseConfirm] = useIsOpen();
   return (
     <form
       className="reallocate-container"
@@ -67,11 +70,17 @@ const _ReallocateForm: React.FC<Props> = ({
         {t("manager.fund-settings.reallocation.text")}
       </p>
       <GVButton
-        type={"submit"}
         disabled={!isValid || !dirty || isSubmitting || !canReallocate}
+        onClick={setIsOpenConfirm}
       >
         {t("manager.fund-settings.buttons.reallocation")}
       </GVButton>
+      <ConfirmReallocate
+        assets={assets}
+        open={isOpenConfirm}
+        onClose={setIsCloseConfirm}
+        onApply={handleSubmit}
+      />
     </form>
   );
 };
