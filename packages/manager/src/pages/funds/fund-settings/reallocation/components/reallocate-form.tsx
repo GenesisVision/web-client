@@ -58,9 +58,11 @@ const _ReallocateForm: React.FC<Props> = ({
           assets={platformAssets}
         />
       </StatisticItem>
-      <div className="reallocate-container__form-error">
-        <FormError error={errorMessage} />
-      </div>
+      {errorMessage && (
+        <div className="reallocate-container__form-error">
+          <FormError error={errorMessage} />
+        </div>
+      )}
       <p className="asset-settings__text">
         {t("manager.fund-settings.reallocation.text")}
       </p>
