@@ -4,22 +4,23 @@ import {
   FundAssetPartWithIcon,
   PlatformAsset
 } from "gv-api-web";
+import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
 import * as React from "react";
-import { useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
-import CreateFundSettingsAssetsComponent from "../../../../create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
-import ReallocateField from "./reallocate-field";
+import ReallocateField, { PlatformAssetFull, composeSelectedAssets } from "./reallocate-field";
 
 const _ReallocateForm: React.FC<Props> = ({
+  values: { currentAssets },
   fundAssets,
   canReallocate,
   t,
@@ -30,27 +31,32 @@ const _ReallocateForm: React.FC<Props> = ({
   isSubmitting,
   platformAssets
 }) => {
-  const [currentFundAssets] = useState<FundAssetPartWithIcon[]>([
-    ...fundAssets
-  ]);
   return (
     <form
       className="reallocate-container"
       id="reallocate"
       onSubmit={handleSubmit}
     >
-      <CreateFundSettingsAssetsComponent
-        assets={currentFundAssets.filter(item => item.percent > 0) || []}
-        remainder={0}
-        removeHandle={() => () => {}}
-        addHandle={() => {}}
-        canChange={false}
-      />
-      <GVFormikField
-        name={FIELDS.assets}
-        component={ReallocateField}
-        assets={platformAssets}
-      />
+      <StatisticItem label={"Current"} condition={dirty}>
+        <CreateFundSettingsAssetsComponent
+          assets={
+            composeSelectedAssets(currentAssets, platformAssets).filter(
+              item => item.percent > 0
+            ) || []
+          }
+          remainder={0}
+          removeHandle={() => () => {}}
+          addHandle={() => {}}
+          canChange={false}
+        />
+      </StatisticItem>
+      <StatisticItem label={dirty ? "New" : "Current"}>
+        <GVFormikField
+          name={FIELDS.assets}
+          component={ReallocateField}
+          assets={platformAssets}
+        />
+      </StatisticItem>
       <div className="reallocate-container__form-error">
         <FormError error={errorMessage} />
       </div>
@@ -67,11 +73,13 @@ const _ReallocateForm: React.FC<Props> = ({
 };
 
 enum FIELDS {
+  currentAssets = "currentAssets",
   assets = "assets"
 }
 
 export interface IReallocateFormValues {
-  [FIELDS.assets]: FundAssetPart[];
+  [FIELDS.currentAssets]: PlatformAssetFull[];
+  [FIELDS.assets]: PlatformAssetFull[];
 }
 
 export interface IReallocateFormOwnProps {
@@ -103,10 +111,11 @@ const ReallocateForm = compose<
         const platformAsset = platformAssets.find(
           x => x.asset === fundAsset.asset
         )!;
-        return { id: platformAsset.id, percent: fundAsset.percent };
+        return { ...platformAsset, percent: fundAsset.percent };
       });
 
       return {
+        [FIELDS.currentAssets]: [...assets],
         [FIELDS.assets]: assets
       };
     },
