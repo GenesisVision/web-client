@@ -3,8 +3,6 @@ import AssetEditContainer, {
   IAssetEditInfo
 } from "modules/asset-edit/asset-edit-container";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
-import ReallocateContainer from "modules/reallocate/reallocate-container";
-import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
@@ -122,7 +120,7 @@ class _InvestmentFundControls extends React.PureComponent<Props, State> {
               >
                 {t("fund-details-page.description.close-fund")}
               </GVButton>
-              <div className="details-description__reallocate-container">
+              {/*<div className="details-description__reallocate-container">
                 <GVButton
                   className="details-description__invest-btn"
                   color="secondary"
@@ -140,7 +138,7 @@ class _InvestmentFundControls extends React.PureComponent<Props, State> {
                     {moment(possibleReallocationTime).format()}
                   </div>
                 )}
-              </div>
+              </div>*/}
             </>
           ) : (
             <GVButton
@@ -171,13 +169,13 @@ class _InvestmentFundControls extends React.PureComponent<Props, State> {
           onApply={dispatchFundDescription}
           type={ASSET.FUND}
         />
-        <ReallocateContainer
+        {/*<ReallocateContainer
           id={fundDescription.id}
           open={popups[INVESTMENT_POPUP.REALLOCATE]}
           onClose={this.closePopup(INVESTMENT_POPUP.REALLOCATE)}
           onApply={dispatchFundDescription}
           fundAssets={fundDescription.currentAssets}
-        />
+        />*/}
         <InvestmentUnauthPopup
           message={message}
           title={fundDescription.title}
