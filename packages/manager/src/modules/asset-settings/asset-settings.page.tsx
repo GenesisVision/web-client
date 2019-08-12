@@ -1,15 +1,16 @@
 import "shared/components/details/details.scss";
 
 import "./asset-settings.scss";
+
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
@@ -58,7 +59,7 @@ const _AssetsEditPage: React.FC<Props> = ({
     <Page title={title}>
       <div className="asset-settings">
         <h1 className="asset-settings__title">{title}</h1>
-        {settingsBlocks(editAssetCallback, applyCloseAsset, description)}
+        {settingsBlocks(editAssetCallback, applyCloseAsset)}
       </div>
     </Page>
   );
@@ -86,8 +87,7 @@ interface OwnProps {
   effect: () => void;
   settingsBlocks: (
     editAsset: TUpdateProgramFunc,
-    closeAsset: () => void,
-    description?: AssetDescriptionType
+    closeAsset: () => void
   ) => JSX.Element;
 }
 
