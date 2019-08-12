@@ -13,23 +13,12 @@ class ReallocateField extends React.PureComponent<Props, State> {
     super(props);
     this.state = {
       anchor: undefined,
-      assets: this.composeSelectedAssets(props.value, props.assets),
+      assets: composeSelectedAssets(props.value, props.assets).sort(
+        (a, b) => b.percent - a.percent
+      ),
       remainder: this.getRemainder(props.value)
     };
   }
-
-  composeSelectedAssets = (
-    assetsPercents: FundAssetPart[],
-    assets: PlatformAsset[]
-  ): PlatformAssetFull[] => {
-    const assetsFull = assets.map(asset => {
-      const targetAsset = assetsPercents.find(x => x.id === asset.id);
-      const percent = targetAsset ? targetAsset.percent : 0;
-      return { ...asset, percent };
-    });
-
-    return assetsFull;
-  };
 
   handlePercentChange = (
     asset: PlatformAssetFull
@@ -89,7 +78,10 @@ class ReallocateField extends React.PureComponent<Props, State> {
   };
 
   handleCloseDropdown = () => {
-    this.setState({ anchor: undefined });
+    this.setState({
+      anchor: undefined,
+      assets: this.state.assets.sort((a, b) => b.percent - a.percent)
+    });
     this.props.onChange({
       target: {
         value: this.state.assets
@@ -140,6 +132,16 @@ class ReallocateField extends React.PureComponent<Props, State> {
 }
 
 export default ReallocateField;
+
+export const composeSelectedAssets = (
+  assetsPercents: FundAssetPart[],
+  assets: PlatformAsset[]
+): PlatformAssetFull[] =>
+  assets.map(asset => {
+    const targetAsset = assetsPercents.find(x => x.id === asset.id);
+    const percent = targetAsset ? targetAsset.percent : 0;
+    return { ...asset, percent };
+  });
 
 interface Props {
   name: string;
