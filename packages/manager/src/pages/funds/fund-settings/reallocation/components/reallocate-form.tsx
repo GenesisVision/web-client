@@ -41,9 +41,9 @@ const _ReallocateForm: React.FC<Props> = ({
       <StatisticItem label={"Current"} condition={dirty}>
         <CreateFundSettingsAssetsComponent
           assets={
-            composeSelectedAssets(currentAssets, platformAssets).filter(
-              item => item.percent > 0
-            ) || []
+            composeSelectedAssets(currentAssets, platformAssets)
+              .filter(item => item.percent > 0)
+              .sort((a, b) => b.percent - a.percent) || []
           }
           remainder={0}
           removeHandle={() => () => {}}
@@ -61,14 +61,12 @@ const _ReallocateForm: React.FC<Props> = ({
       <div className="reallocate-container__form-error">
         <FormError error={errorMessage} />
       </div>
-      <div className="dialog__buttons">
-        <GVButton
-          type={"submit"}
-          disabled={!isValid || !dirty || isSubmitting || !canReallocate}
-        >
-          {t("manager.reallocate.apply")}
-        </GVButton>
-      </div>
+      <GVButton
+        type={"submit"}
+        disabled={!isValid || !dirty || isSubmitting || !canReallocate}
+      >
+        {t("manager.reallocate.apply")}
+      </GVButton>
     </form>
   );
 };
