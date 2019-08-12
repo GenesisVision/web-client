@@ -3,7 +3,9 @@ import {
   FundAssetPartWithIcon,
   PlatformAsset
 } from "gv-api-web";
-import CreateFundSettingsAddAsset from "pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
+import CreateFundSettingsAddAsset, {
+  TRegulatorInputHandle
+} from "pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
 import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import * as React from "react";
 import { FundAssetRemoveType } from "shared/components/fund-asset/fund-asset-container";
@@ -20,9 +22,7 @@ class ReallocateField extends React.PureComponent<Props, State> {
     };
   }
 
-  handlePercentChange = (
-    asset: PlatformAssetFull
-  ): React.ChangeEventHandler<HTMLInputElement> => e => {
+  handlePercentChange: TRegulatorInputHandle = asset => e => {
     let value = +e.target.value;
     if (isNaN(value)) return;
     if (value > this.getRemainderWithoutSelected(asset)) {
