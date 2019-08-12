@@ -1,9 +1,7 @@
+import "../reallocate-container.scss";
+
 import { FormikProps, withFormik } from "formik";
-import {
-  FundAssetPart,
-  FundAssetPartWithIcon,
-  PlatformAsset
-} from "gv-api-web";
+import { FundAssetPartWithIcon, PlatformAsset } from "gv-api-web";
 import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
 import * as React from "react";
@@ -17,7 +15,10 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
-import ReallocateField, { PlatformAssetFull, composeSelectedAssets } from "./reallocate-field";
+import ReallocateField, {
+  PlatformAssetFull,
+  composeSelectedAssets
+} from "./reallocate-field";
 
 const _ReallocateForm: React.FC<Props> = ({
   values: { currentAssets },
