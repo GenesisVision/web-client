@@ -88,6 +88,7 @@ class CreateFundSettingsAddAsset extends React.PureComponent<Props, State> {
                     </td>
                     <td className="popover-add__regulator-container">
                       <Regulator
+                        minValue={asset.mandatoryFundPercent}
                         value={asset.percent}
                         handleDown={handleDown(asset)}
                         handleUp={handleUp(asset)}
