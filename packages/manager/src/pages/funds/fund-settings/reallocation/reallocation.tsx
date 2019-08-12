@@ -2,7 +2,6 @@ import {
   CancelablePromise,
   FundAssetPart,
   FundAssetPartWithIcon,
-  FundDetailsFull,
   PlatformAsset
 } from "gv-api-web";
 import SettingsBlock from "modules/asset-settings/settings-block";
