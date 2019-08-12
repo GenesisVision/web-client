@@ -11,6 +11,7 @@ import FundAssetContainer, {
 } from "shared/components/fund-asset/fund-asset-container";
 
 const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
+  canChange = true,
   t,
   assets,
   remainder,
@@ -46,17 +47,19 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
           />
         </div>
       </div>
-      <div className="create-fund-settings__add-assets">
-        <div
-          className="create-fund-settings__add-assets-button"
-          onClick={addHandle}
-        >
-          <div>
-            <AddButton />
+      {canChange && (
+        <div className="create-fund-settings__add-assets">
+          <div
+            className="create-fund-settings__add-assets-button"
+            onClick={addHandle}
+          >
+            <div>
+              <AddButton />
+            </div>
+            <div>{t("buttons.add-assets")}</div>
           </div>
-          <div>{t("buttons.add-assets")}</div>
         </div>
-      </div>
+      )}
     </>
   );
 };
@@ -66,6 +69,7 @@ interface Props extends WithTranslation {
   remainder: number;
   removeHandle: FundAssetRemoveType;
   addHandle: MouseEventHandler;
+  canChange?: boolean;
 }
 
 const CreateFundSettingsAssetsComponent = translate()(
