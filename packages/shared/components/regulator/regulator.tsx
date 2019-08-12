@@ -14,7 +14,7 @@ const Regulator: React.FC<Props> = ({
   return (
     <div
       className={classNames("regulator", {
-        "regulator--mute": value === minValue
+        "regulator--mute": value <= minValue
       })}
     >
       <div
