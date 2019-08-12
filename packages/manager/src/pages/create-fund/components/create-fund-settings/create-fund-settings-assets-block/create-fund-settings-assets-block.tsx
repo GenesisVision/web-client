@@ -1,6 +1,6 @@
 import "../create-fund-settings.scss";
 
-import { FundAssetPartWithIcon } from "gv-api-web";
+import { PlatformAssetFull } from "pages/funds/fund-settings/reallocation/components/reallocate-field";
 import React, { MouseEventHandler, useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import AddButton from "shared/components/add-button/add-button";
@@ -33,7 +33,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
           <FundAssetContainer
             assets={assets}
             type={FUND_ASSET_TYPE.MIDDLE}
-            removable={true}
+            removable={canChange}
             removeHandle={removeHandle}
             remainder={remainder}
             hoveringAsset={hoveringAssetName}
@@ -65,7 +65,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
 };
 
 interface Props extends WithTranslation {
-  assets: FundAssetPartWithIcon[];
+  assets: PlatformAssetFull[];
   remainder: number;
   removeHandle: FundAssetRemoveType;
   addHandle: MouseEventHandler;
