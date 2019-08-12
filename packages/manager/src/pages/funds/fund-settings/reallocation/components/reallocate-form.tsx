@@ -6,6 +6,7 @@ import {
 } from "gv-api-web";
 import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
 import * as React from "react";
+import { useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
@@ -15,48 +16,55 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
+import CreateFundSettingsAssetsComponent from "../../../../create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import ReallocateField from "./reallocate-field";
 
-class _ReallocateForm extends React.PureComponent<Props> {
-  render() {
-    const {
-      t,
-      handleSubmit,
-      isValid,
-      dirty,
-      errorMessage,
-      isSubmitting,
-      platformAssets
-    } = this.props;
-    return (
-      <form
-        className="reallocate-container dialog__top"
-        id="reallocate"
-        onSubmit={handleSubmit}
-      >
-        <div className="dialog__header">
-          <h2>{t("manager.reallocate.title")}</h2>
-        </div>
-        <GVFormikField
-          name={FIELDS.assets}
-          component={ReallocateField}
-          assets={platformAssets}
-        />
-        <div className="reallocate-container__form-error">
-          <FormError error={errorMessage} />
-        </div>
-        <div className="dialog__buttons">
-          <GVButton
-            type={"submit"}
-            disabled={!isValid || !dirty || isSubmitting}
-          >
-            {t("manager.reallocate.apply")}
-          </GVButton>
-        </div>
-      </form>
-    );
-  }
-}
+const _ReallocateForm: React.FC<Props> = ({
+  fundAssets,
+  canReallocate,
+  t,
+  handleSubmit,
+  isValid,
+  dirty,
+  errorMessage,
+  isSubmitting,
+  platformAssets
+}) => {
+  const [currentFundAssets] = useState<FundAssetPartWithIcon[]>([
+    ...fundAssets
+  ]);
+  return (
+    <form
+      className="reallocate-container"
+      id="reallocate"
+      onSubmit={handleSubmit}
+    >
+      <CreateFundSettingsAssetsComponent
+        assets={currentFundAssets.filter(item => item.percent > 0) || []}
+        remainder={0}
+        removeHandle={() => () => {}}
+        addHandle={() => {}}
+        canChange={false}
+      />
+      <GVFormikField
+        name={FIELDS.assets}
+        component={ReallocateField}
+        assets={platformAssets}
+      />
+      <div className="reallocate-container__form-error">
+        <FormError error={errorMessage} />
+      </div>
+      <div className="dialog__buttons">
+        <GVButton
+          type={"submit"}
+          disabled={!isValid || !dirty || isSubmitting || !canReallocate}
+        >
+          {t("manager.reallocate.apply")}
+        </GVButton>
+      </div>
+    </form>
+  );
+};
 
 enum FIELDS {
   assets = "assets"
@@ -67,6 +75,7 @@ export interface IReallocateFormValues {
 }
 
 export interface IReallocateFormOwnProps {
+  canReallocate: boolean;
   fundAssets: FundAssetPartWithIcon[];
   platformAssets: PlatformAsset[];
   onSubmit(
@@ -106,6 +115,7 @@ const ReallocateForm = compose<
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
-  })
+  }),
+  React.memo
 )(_ReallocateForm);
 export default ReallocateForm;
