@@ -1518,7 +1518,7 @@
         "text": "* You are able to reallocate 3% of the Fund per day (cumulative). Example: you will be able to change 30% of the Fund's allocation after 10 days."
       },
       "buttons": {
-        "reallocate": "Reallocate fund"
+        "reallocation": "Reallocate fund"
       }
     },
     "asset-settings": {

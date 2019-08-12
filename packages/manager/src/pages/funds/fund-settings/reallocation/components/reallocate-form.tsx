@@ -62,13 +62,13 @@ const _ReallocateForm: React.FC<Props> = ({
         <FormError error={errorMessage} />
       </div>
       <p className="asset-settings__text">
-        {t("manager.fund-settings.reallocate.text")}
+        {t("manager.fund-settings.reallocation.text")}
       </p>
       <GVButton
         type={"submit"}
         disabled={!isValid || !dirty || isSubmitting || !canReallocate}
       >
-        {t("manager.fund-settings.buttons.reallocate")}
+        {t("manager.fund-settings.buttons.reallocation")}
       </GVButton>
     </form>
   );
