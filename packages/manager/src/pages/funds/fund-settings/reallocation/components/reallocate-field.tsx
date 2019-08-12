@@ -45,9 +45,8 @@ class ReallocateField extends React.PureComponent<Props, State> {
   };
 
   handleRemove: FundAssetRemoveType = currency => () => {
-    const asset = this.state.assets.find(item => item.asset === currency);
-    if (!asset) return;
-    const newAsset = { ...asset, percent: 0 };
+    const asset = this.state.assets.find(item => item.asset === currency)!;
+    const newAsset = { ...asset, percent: asset.mandatoryFundPercent };
     this.updateAssets(newAsset);
   };
 
