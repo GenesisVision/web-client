@@ -2,7 +2,7 @@ import "../create-fund-settings.scss";
 
 import classnames from "classnames";
 import { FundAssetPartWithIcon } from "gv-api-web";
-import { PlatformAssetFull } from "modules/reallocate/components/reallocate-field";
+import { PlatformAssetFull } from "pages/funds/fund-settings/reallocation/components/reallocate-field";
 import * as React from "react";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import GVTextField from "shared/components/gv-text-field";
