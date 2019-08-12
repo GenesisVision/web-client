@@ -4,6 +4,7 @@ import classNames from "classnames";
 import * as React from "react";
 
 interface IRegulatorProps {
+  minValue?: number;
   value: number;
   handleUp(event: React.MouseEvent<HTMLElement>): void;
   handleDown(event: React.MouseEvent<HTMLElement>): void;
@@ -11,6 +12,7 @@ interface IRegulatorProps {
 }
 
 const Regulator: React.FC<IRegulatorProps> = ({
+  minValue = 0,
   value,
   handleUp,
   handleDown,
@@ -19,10 +21,13 @@ const Regulator: React.FC<IRegulatorProps> = ({
   return (
     <div
       className={classNames("regulator", {
-        "regulator--mute": value === 0
+        "regulator--mute": value === minValue
       })}
     >
-      <div className="regulator__button" onClick={handleDown}>
+      <div
+        className="regulator__button regulator__button--minus"
+        onClick={e => value > minValue && handleDown(e)}
+      >
         &minus;
       </div>
       <div className="regulator__indicator">{children}</div>
