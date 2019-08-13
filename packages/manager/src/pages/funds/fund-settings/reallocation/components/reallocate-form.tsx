@@ -25,7 +25,6 @@ import ReallocateField, {
 const _ReallocateForm: React.FC<Props> = ({
   values: { currentAssets, assets },
   fundAssets,
-  canReallocate,
   t,
   handleSubmit,
   isValid,
@@ -68,7 +67,7 @@ const _ReallocateForm: React.FC<Props> = ({
         {t("manager.fund-settings.reallocation.text")}
       </p>
       <GVButton
-        disabled={!isValid || !dirty || isSubmitting || !canReallocate}
+        disabled={!isValid || !dirty || isSubmitting}
         onClick={setIsOpenConfirm}
       >
         {t("manager.fund-settings.buttons.reallocation")}
@@ -94,7 +93,6 @@ export interface IReallocateFormValues {
 }
 
 export interface IReallocateFormOwnProps {
-  canReallocate: boolean;
   fundAssets: FundAssetPartWithIcon[];
   platformAssets: PlatformAsset[];
   onSubmit(

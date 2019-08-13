@@ -19,7 +19,6 @@ import ReallocateForm, {
 import { updateAssets } from "./services/reallocate.services";
 
 const _Reallocation: React.FC<Props> = ({
-  canReallocate,
   onApply,
   platformAssets,
   fundAssets,
@@ -46,7 +45,6 @@ const _Reallocation: React.FC<Props> = ({
       content={
         <>
           <ReallocateForm
-            canReallocate={canReallocate}
             condition={!!assets.length}
             fundAssets={assets}
             platformAssets={platformAssets}
@@ -66,7 +64,6 @@ interface OwnProps {
   platformAssets: PlatformAsset[];
   fundAssets: FundAssetPartWithIcon[];
   onApply: () => void;
-  canReallocate: boolean;
 }
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({

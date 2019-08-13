@@ -33,7 +33,7 @@ const _FundSettings: React.FC<Props> = ({
         onSubmit={editAsset}
       />
       <Reallocation
-        canReallocate={details.personalFundDetails.canReallocate}
+        condition={details.personalFundDetails.canReallocate}
         onApply={reallocate}
         id={details.id}
         fundAssets={details.currentAssets}
