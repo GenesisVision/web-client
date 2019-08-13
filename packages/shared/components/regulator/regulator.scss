@@ -26,10 +26,6 @@ $regulator-button-font-size: 28px;
   &--mute {
     background-color: #202b34;
     color: rgba(255, 255, 255, 0.3);
-    & .regulator__button--minus {
-      cursor: default;
-      color: rgba(255, 255, 255, 0.3);
-    }
   }
   &__button {
     padding: 0 7px;
@@ -38,6 +34,10 @@ $regulator-button-font-size: 28px;
     font-weight: 100;
     user-select: none;
     cursor: pointer;
+    &--mute {
+      cursor: default;
+      color: rgba(255, 255, 255, 0.3);
+    }
     @include media-breakpoint-landscape-phone() {
       font-size: $regulator-button-font-size;
     }
