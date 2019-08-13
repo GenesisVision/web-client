@@ -19,7 +19,7 @@ const Regulator: React.FC<Props> = ({
     >
       <div
         className="regulator__button regulator__button--minus"
-        onClick={e => value > minValue && handleDown(e)}
+        onClick={handleDown}
       >
         &minus;
       </div>

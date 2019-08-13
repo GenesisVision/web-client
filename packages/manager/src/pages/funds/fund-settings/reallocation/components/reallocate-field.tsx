@@ -33,7 +33,7 @@ class ReallocateField extends React.PureComponent<Props, State> {
   };
 
   handleDown = (asset: PlatformAssetFull) => () => {
-    if (asset.percent === 0) return;
+    if (asset.percent === asset.mandatoryFundPercent) return;
     const newAsset = { ...asset, percent: asset.percent - 1 };
     this.updateAssets(newAsset);
   };
