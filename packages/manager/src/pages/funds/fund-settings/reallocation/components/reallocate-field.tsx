@@ -125,6 +125,7 @@ const _ReallocateField: React.FC<Props> = ({
         addHandle={setAnchor}
       />
       <CreateFundSettingsAddAsset
+        remainder={remainder}
         anchor={anchor}
         handleCloseDropdown={clearAnchor}
         assets={stateAssets}
