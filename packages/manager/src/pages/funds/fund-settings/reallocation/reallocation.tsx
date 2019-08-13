@@ -19,6 +19,7 @@ import ReallocateForm, {
 import { updateAssets } from "./services/reallocate.services";
 
 const _Reallocation: React.FC<Props> = ({
+  availableReallocationPercents,
   onApply,
   platformAssets,
   fundAssets,
@@ -41,15 +42,14 @@ const _Reallocation: React.FC<Props> = ({
     <SettingsBlock
       label={t("manager.fund-settings.reallocation.title")}
       content={
-        <>
-          <ReallocateForm
-            condition={!!fundAssets.length}
-            fundAssets={fundAssets}
-            platformAssets={platformAssets}
-            onSubmit={handleApply}
-            errorMessage={errorMessage}
-          />
-        </>
+        <ReallocateForm
+          condition={!!fundAssets.length}
+          availableReallocationPercents={availableReallocationPercents}
+          fundAssets={fundAssets}
+          platformAssets={platformAssets}
+          onSubmit={handleApply}
+          errorMessage={errorMessage}
+        />
       }
     />
   );
@@ -58,6 +58,7 @@ const _Reallocation: React.FC<Props> = ({
 interface Props extends OwnProps, WithTranslation, DispatchProps {}
 
 interface OwnProps {
+  availableReallocationPercents: number;
   id: string;
   platformAssets: PlatformAsset[];
   fundAssets: FundAssetPartWithIcon[];
