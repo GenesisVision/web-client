@@ -1,4 +1,4 @@
-import "../reallocate-container.scss";
+import "../reallocate.scss";
 
 import { FormikProps, withFormik } from "formik";
 import { FundAssetPartWithIcon, PlatformAsset } from "gv-api-web";
