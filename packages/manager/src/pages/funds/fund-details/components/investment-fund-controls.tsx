@@ -1,7 +1,4 @@
 import { FundDetailsFull } from "gv-api-web";
-import AssetEditContainer, {
-  IAssetEditInfo
-} from "modules/asset-edit/asset-edit-container";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -18,13 +15,8 @@ import GVButton from "shared/components/gv-button";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
 
-import CloseFundContainer from "../close-fund/close-fund-container";
-
 enum INVESTMENT_POPUP {
   INVEST = "INVEST",
-  CLOSE = "CLOSE",
-  REALLOCATE = "REALLOCATE",
-  ASSET_EDIT = "ASSET_EDIT",
   INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
@@ -59,25 +51,8 @@ class _InvestmentFundControls extends React.PureComponent<Props, State> {
       service: { dispatchFundDescription }
     } = this.props;
     const { personalFundDetails } = fundDescription;
-    const canCloseProgram =
-      personalFundDetails && personalFundDetails.canCloseProgram;
     const isOwnProgram =
       personalFundDetails && personalFundDetails.isOwnProgram;
-    const canReallocate =
-      personalFundDetails && personalFundDetails.canReallocate;
-    const possibleReallocationTime =
-      personalFundDetails && personalFundDetails.nextReallocationPercents;
-
-    const composeEditInfo: IAssetEditInfo = {
-      stopOutLevel: 0,
-      investmentLimit: 0,
-      id: fundDescription.id,
-      title: fundDescription.title,
-      description: fundDescription.description,
-      logo: {
-        src: fundDescription.logo
-      }
-    };
 
     const message =
       isAuthenticated && !isOwnProgram
