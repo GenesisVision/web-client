@@ -5,7 +5,7 @@ import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
@@ -46,9 +46,12 @@ const _ProgramsEditPage: React.FC<Props> = ({
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
   >(undefined);
-  const effect = () => {
-    description && getProgramBrokers(description.id).then(setBrokersInfo);
-  };
+  useEffect(
+    () => {
+      description && getProgramBrokers(description.id).then(setBrokersInfo);
+    },
+    [description]
+  );
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
       programEditSignal(description!.id, successFee!, volumeFee!).then(
@@ -81,7 +84,6 @@ const _ProgramsEditPage: React.FC<Props> = ({
       redirectToAsset={redirectToProgram}
       asset={ASSET.PROGRAM}
       description={description as AssetDescriptionType}
-      effect={effect}
       dispatchDescription={dispatchProgramDescription}
       settingsBlocks={(editProgram, applyCloseAsset) => (
         <ProgramSettings

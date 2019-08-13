@@ -34,7 +34,6 @@ const _FundSettingsPage: React.FC<Props> = ({
   t,
   description
 }) => {
-  const effect = () => {};
   const reallocate = useCallback(() => {
     dispatchDescription();
   }, []);
@@ -43,7 +42,6 @@ const _FundSettingsPage: React.FC<Props> = ({
       redirectToAsset={redirectToFund}
       asset={ASSET.FUND}
       description={description as AssetDescriptionType}
-      effect={effect}
       dispatchDescription={dispatchFundDescription}
       settingsBlocks={(editProgram, applyCloseAsset) => (
         <FundSettings

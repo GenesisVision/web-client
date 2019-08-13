@@ -21,7 +21,6 @@ import { editAsset } from "./services/asset-settings.service";
 
 const _AssetsEditPage: React.FC<Props> = ({
   asset,
-  effect,
   settingsBlocks,
   service: { dispatchDescription, editAsset, redirectToAsset },
   t,
@@ -30,12 +29,6 @@ const _AssetsEditPage: React.FC<Props> = ({
   useEffect(() => {
     dispatchDescription();
   }, []);
-  useEffect(
-    () => {
-      effect();
-    },
-    [description]
-  );
   const editAssetCallback: TUpdateAssetFunc = useCallback(
     values => {
       const currentValues = {
@@ -84,7 +77,6 @@ interface OwnProps {
   asset: ASSET;
   description?: AssetDescriptionType;
   dispatchDescription: DispatchDescriptionType;
-  effect: () => void;
   settingsBlocks: (
     editAsset: TUpdateProgramFunc,
     closeAsset: () => void
