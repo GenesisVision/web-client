@@ -16,6 +16,7 @@ import Regulator, {
 } from "shared/components/regulator/regulator";
 
 const _CreateFundSettingsAddAsset: React.FC<Props> = ({
+  remainder,
   assets,
   anchor,
   handleCloseDropdown,
@@ -73,6 +74,7 @@ const _CreateFundSettingsAddAsset: React.FC<Props> = ({
             <tbody>
               {filteredAssets.map(asset => (
                 <AssetLine
+                  remainder={remainder}
                   asset={asset}
                   handleDown={handleDown}
                   handleUp={handleUp}
@@ -92,7 +94,7 @@ const CreateFundSettingsAddAsset = React.memo(_CreateFundSettingsAddAsset);
 export default CreateFundSettingsAddAsset;
 
 const AssetLine: React.FC<AssetLineProps> = React.memo(
-  ({ asset, handleDown, handleUp, handlePercentChange }) => (
+  ({ remainder, asset, handleDown, handleUp, handlePercentChange }) => (
     <tr className="popover-add__asset">
       <td className="popover-add__asset-icon-container">
         <FundAssetImage
@@ -105,6 +107,7 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
       <td className="popover-add__asset-currency-short">{asset.asset}</td>
       <td className="popover-add__regulator-container">
         <Regulator
+          remainder={remainder}
           minValue={asset.mandatoryFundPercent}
           value={asset.percent}
           handleDown={handleDown(asset)}
@@ -127,6 +130,7 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
 );
 
 interface AssetLineProps {
+  remainder: number;
   asset: PlatformAssetFull;
   handleDown: TRegulatorHandle;
   handleUp: TRegulatorHandle;
@@ -134,6 +138,7 @@ interface AssetLineProps {
 }
 
 interface Props {
+  remainder: number;
   anchor?: EventTarget;
   assets: PlatformAssetFull[];
   handleCloseDropdown(): void;
