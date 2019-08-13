@@ -3,108 +3,85 @@ import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
 import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
 import GVButton from "shared/components/gv-button";
-import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
+import InvestmentUnauthPopup
+  from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
+import useIsOpen from "shared/hooks/is-open.hook";
 
-enum INVESTMENT_POPUP {
-  INVEST = "INVEST",
-  INVEST_UNAUTH = "INVEST_UNAUTH"
-}
+const _InvestmentFundControls: React.FC<Props> = ({
+  t,
+  service: { dispatchFundDescription },
+  isAuthenticated,
+  redirectToLogin,
+  fundDescription
+}) => {
+  const [
+    isOpenInvestPopup,
+    setIsOpenInvestPopup,
+    setIsCloseInvestPopup
+  ] = useIsOpen();
+  const [
+    isOpenUnAuthInvestPopup,
+    setIsOpenUnAuthInvestPopup,
+    setIsCloseUnAuthInvestPopup
+  ] = useIsOpen();
+  const { personalFundDetails } = fundDescription;
+  const isOwnProgram = personalFundDetails && personalFundDetails.isOwnProgram;
 
-class _InvestmentFundControls extends React.PureComponent<Props, State> {
-  state = {
-    popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
-      curr[INVESTMENT_POPUP[next]] = false;
-      return curr;
-    }, {})
-  };
+  const message =
+    isAuthenticated && !isOwnProgram
+      ? t("fund-details-page.description.auth-manager-popup")
+      : t("fund-details-page.description.unauth-popup");
 
-  openPopup = (popupName: INVESTMENT_POPUP) => () => {
-    let popups = { ...this.state.popups, [popupName]: true };
-    this.setState({ popups });
-  };
+  const isDisabledInvestButton = isAuthenticated
+    ? !personalFundDetails ||
+      !personalFundDetails.canInvest
+    : false;
 
-  closePopup = (popupName: INVESTMENT_POPUP) => () => {
-    let popups = { ...this.state.popups, [popupName]: false };
-    this.setState({ popups });
-  };
-
-  applyChanges = (updateDescription: () => void) => () => {
-    updateDescription();
-  };
-
-  render() {
-    const { popups } = this.state;
-    const {
-      t,
-      fundDescription,
-      isAuthenticated,
-      service: { dispatchFundDescription }
-    } = this.props;
-    const { personalFundDetails } = fundDescription;
-    const isOwnProgram =
-      personalFundDetails && personalFundDetails.isOwnProgram;
-
-    const message =
-      isAuthenticated && !isOwnProgram
-        ? t("fund-details-page.description.auth-manager-popup")
-        : t("fund-details-page.description.unauth-popup");
-
-    const isDisabledInvestButton = isAuthenticated
-      ? !fundDescription.personalFundDetails ||
-        !fundDescription.personalFundDetails.canInvest
-      : false;
-
-    return (
-      <>
-        <InvestmentFundInfo fundDescription={fundDescription} />
-        <div className="details-description__invest-button-container">
-          {isOwnProgram ? (
-            <>
-              <GVButton
-                className="details-description__invest-btn"
-                onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
-                disabled={isDisabledInvestButton}
-              >
-                {t("fund-details-page.description.invest")}
-              </GVButton>
-            </>
-          ) : (
+  return (
+    <>
+      <InvestmentFundInfo fundDescription={fundDescription} />
+      <div className="details-description__invest-button-container">
+        {isOwnProgram ? (
+          <>
             <GVButton
               className="details-description__invest-btn"
-              onClick={this.openPopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
+              onClick={setIsOpenInvestPopup}
+              disabled={isDisabledInvestButton}
             >
               {t("fund-details-page.description.invest")}
             </GVButton>
-          )}
-        </div>
-        <FundDepositContainer
-          condition={isAuthenticated}
-          open={popups[INVESTMENT_POPUP.INVEST]}
-          id={fundDescription.id}
-          onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-          onApply={dispatchFundDescription}
-        />
-        <InvestmentUnauthPopup
-          message={message}
-          title={fundDescription.title}
-          asset={ASSET.FUND}
-          open={popups[INVESTMENT_POPUP.INVEST_UNAUTH]}
-          onClose={this.closePopup(INVESTMENT_POPUP.INVEST_UNAUTH)}
-        />
-      </>
-    );
-  }
-}
+          </>
+        ) : (
+          <GVButton
+            className="details-description__invest-btn"
+            onClick={setIsOpenUnAuthInvestPopup}
+          >
+            {t("fund-details-page.description.invest")}
+          </GVButton>
+        )}
+      </div>
+      <FundDepositContainer
+        condition={isAuthenticated}
+        open={isOpenInvestPopup}
+        id={fundDescription.id}
+        onClose={setIsCloseInvestPopup}
+        onApply={dispatchFundDescription}
+      />
+      <InvestmentUnauthPopup
+        message={message}
+        title={fundDescription.title}
+        asset={ASSET.FUND}
+        open={isOpenUnAuthInvestPopup}
+        onClose={setIsCloseUnAuthInvestPopup}
+      />
+    </>
+  );
+};
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
@@ -128,10 +105,6 @@ interface OwnProps {
   fundDescription: FundDetailsFull;
 }
 
-interface State {
-  popups: { [k: string]: boolean };
-}
-
 interface Props extends WithTranslation, OwnProps, DispatchProps {}
 
 const InvestmentFundControls = compose<React.ComponentType<OwnProps>>(
@@ -139,6 +112,7 @@ const InvestmentFundControls = compose<React.ComponentType<OwnProps>>(
     null,
     mapDispatchToProps
   ),
-  translate()
+  translate(),
+  React.memo
 )(_InvestmentFundControls);
 export default InvestmentFundControls;
