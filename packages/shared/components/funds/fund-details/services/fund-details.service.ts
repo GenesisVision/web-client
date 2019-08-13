@@ -48,17 +48,6 @@ export const fetchFundReallocateHistory = (
   return fundsApi.v10FundsByIdReallocationsGet(fundId, filters);
 };
 
-export const closeFund = (
-  id: string,
-  opts: {
-    twoFactorCode: string;
-  }
-): Promise<void> => {
-  const authorization = authService.getAuthArg();
-
-  return managerApi.v10ManagerFundsByIdClosePost(id, authorization, opts);
-};
-
 export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
   const isAuthenticated = authService.isAuthenticated();
   const filtering = { take: 0 };
