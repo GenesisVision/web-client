@@ -13,7 +13,7 @@ import FundAssetContainer, {
 const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   canChange = true,
   t,
-  assets,
+  assets = [],
   remainder,
   removeHandle,
   addHandle
