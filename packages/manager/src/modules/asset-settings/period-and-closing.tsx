@@ -9,6 +9,7 @@ import ClosePeriod from "./close-period/close-period";
 const _PeriodAndClosing: React.FC<Props> = ({
   asset,
   t,
+  label = t("manager.asset-settings.period-and-closing.title"),
   id,
   canClosePeriod,
   canCloseAsset,
@@ -16,7 +17,7 @@ const _PeriodAndClosing: React.FC<Props> = ({
   closeAsset
 }) => (
   <SettingsBlock
-    label={t("manager.asset-settings.period-and-closing.title")}
+    label={label}
     content={
       <>
         <ClosePeriod
@@ -36,6 +37,7 @@ const _PeriodAndClosing: React.FC<Props> = ({
 );
 
 interface Props extends WithTranslation {
+  label?: string;
   asset: ASSET;
   id: string;
   canClosePeriod?: boolean;
