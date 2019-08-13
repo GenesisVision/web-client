@@ -5,7 +5,7 @@ import {
   PlatformAsset
 } from "gv-api-web";
 import SettingsBlock from "modules/asset-settings/settings-block";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -26,7 +26,6 @@ const _Reallocation: React.FC<Props> = ({
   id,
   service
 }) => {
-  const [assets, setAssets] = useState<FundAssetPartWithIcon[]>(fundAssets);
   const { errorMessage, setErrorMessage } = useErrorMessage();
   const handleApply = useCallback(
     ({ assets }: IReallocateFormValues, isSubmitting) => {
@@ -34,7 +33,6 @@ const _Reallocation: React.FC<Props> = ({
         .updateAssets(id, assets)
         .then(onApply)
         .catch(setErrorMessage)
-        .then(() => setAssets(assets))
         .finally(() => isSubmitting(false));
     },
     [id]
@@ -45,8 +43,8 @@ const _Reallocation: React.FC<Props> = ({
       content={
         <>
           <ReallocateForm
-            condition={!!assets.length}
-            fundAssets={assets}
+            condition={!!fundAssets.length}
+            fundAssets={fundAssets}
             platformAssets={platformAssets}
             onSubmit={handleApply}
             errorMessage={errorMessage}
