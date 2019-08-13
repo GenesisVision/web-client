@@ -19,12 +19,12 @@ import { GetItemsFuncType } from "shared/components/table/components/table.types
 import { IDataModel, ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import useTab from "shared/hooks/tab.hook";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import {
   AuthState,
   isAuthenticatedSelector
 } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { HistoryCountsType } from "../program-details.types";
 import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
@@ -195,8 +195,8 @@ interface OwnProps {
     filters?: FilteringType
   ) => Promise<IDataModel>;
   programId: string;
-  currency: CURRENCIES;
-  programCurrency: CURRENCIES;
+  currency: CurrencyEnum;
+  programCurrency: CurrencyEnum;
   isInvested: boolean;
   eventTypeFilterValues: SelectFilterValue[];
   isOwnProgram: boolean;

@@ -15,8 +15,8 @@ import TableModule from "shared/components/table/components/table-module";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { IDataModel } from "shared/constants/constants";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 import {
   PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
@@ -180,7 +180,7 @@ interface OwnProps {
   id: string;
   title: string;
   isGMProgram?: boolean;
-  currency: CURRENCIES;
+  currency: CurrencyEnum;
   fetchFinancialStatistic: (
     programId: string,
     filters?: FilteringType
