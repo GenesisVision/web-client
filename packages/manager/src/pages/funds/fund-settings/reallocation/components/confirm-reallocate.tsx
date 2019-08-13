@@ -20,7 +20,6 @@ const _ConfirmReallocate: React.FC<Props> = ({
     onClose();
     setSubmitting(false);
   }, []);
-  console.log(assets);
   return (
     <ConfirmPopup
       open={open}
