@@ -105,3 +105,60 @@ export const editAsset = (
       );
     });
 };
+
+export const closeProgram: TCloseAsset = ({
+  onSuccess,
+  onError,
+  id,
+  opts
+}) => dispatch => {
+  const authorization = authService.getAuthArg();
+  managerApi
+    .v10ManagerProgramsByIdClosePost(id, authorization, opts)
+    .then(() => {
+      onSuccess();
+      dispatch(
+        alertMessageActions.success(
+          "program-details-page.description.close-program-notification-success",
+          true
+        )
+      );
+    })
+    .catch(error => {
+      onError();
+      dispatch(alertMessageActions.error(error.errorMessage));
+    });
+};
+
+export const closeFund: TCloseAsset = ({
+  onSuccess,
+  onError,
+  id,
+  opts
+}) => dispatch =>
+  managerApi
+    .v10ManagerFundsByIdClosePost(id, authService.getAuthArg(), opts)
+    .then(() => {
+      onSuccess();
+      dispatch(
+        alertMessageActions.success(
+          "fund-details-page.description.close-fund-notification-success",
+          true
+        )
+      );
+    })
+    .catch(error => {
+      onError();
+      dispatch(alertMessageActions.error(error.errorMessage));
+    });
+
+export type TCloseAsset = (
+  opts: {
+    onSuccess: () => void;
+    onError: () => void;
+    id: string;
+    opts?: {
+      twoFactorCode?: string;
+    };
+  }
+) => (dispatch: Dispatch) => void;
