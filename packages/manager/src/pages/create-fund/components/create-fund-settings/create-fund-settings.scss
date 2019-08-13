@@ -346,7 +346,7 @@ $asset-height-mobile: $asset-height/$divider-text;
   }
   &__assets {
     padding-bottom: $padding-xsmall;
-    height: 180px;
+    max-height: 180px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     table {
