@@ -8,129 +8,141 @@ import CreateFundSettingsAddAsset, {
 } from "pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
 import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import * as React from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FundAssetRemoveType } from "shared/components/fund-asset/fund-asset-container";
+import useAnchor from "shared/hooks/anchor.hook";
 
-class ReallocateField extends React.PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      anchor: undefined,
-      assets: composeSelectedAssets(props.value, props.assets).sort(
-        (a, b) => b.percent - a.percent
-      ),
-      remainder: this.getRemainder(props.value)
-    };
-  }
+const _ReallocateField: React.FC<Props> = ({
+  name,
+  value,
+  assets,
+  error,
+  touched,
+  onChange,
+  onBlur
+}) => {
+  const { anchor, setAnchor, clearAnchor } = useAnchor();
+  const [stateAssets, setStateAssets] = useState<PlatformAssetFull[]>(
+    composeSelectedAssets(value, assets).sort((a, b) => b.percent - a.percent)
+  );
+  const [newAsset, setNewAsset] = useState<PlatformAssetFull | undefined>(
+    undefined
+  );
+  const [remainder, setRemainder] = useState<number>(getRemainder(value));
+  useEffect(
+    () => {
+      if (!newAsset) return;
+      const assets = stateAssets.map(x =>
+        x.asset === newAsset.asset ? newAsset : x
+      );
+      setStateAssets(assets);
+      setRemainder(getRemainder(assets));
+    },
+    [newAsset, stateAssets]
+  );
+  useEffect(
+    () => {
+      if (!!!anchor && !!newAsset) {
+        onBlur &&
+          onBlur({
+            target: {
+              name
+            }
+          });
+        submitChanges();
+      }
+    },
+    [anchor, newAsset]
+  );
+  useEffect(
+    () => {
+      !!!anchor &&
+        setStateAssets(stateAssets.sort((a, b) => b.percent - a.percent));
+    },
+    [anchor, stateAssets]
+  );
 
-  handlePercentChange: TRegulatorInputHandle = asset => e => {
-    let value = +e.target.value;
-    if (isNaN(value)) return;
-    if (value > this.getRemainderWithoutSelected(asset)) {
-      value = this.getRemainderWithoutSelected(asset);
-    }
-    const newAsset = { ...asset, percent: value };
-    this.updateAssets(newAsset);
-  };
+  const handlePercentChange: TRegulatorInputHandle = useCallback(
+    (asset): React.ChangeEventHandler<HTMLInputElement> => ({ target }) => {
+      const value = +target.value;
+      if (isNaN(value)) return;
+      const remainderWithoutSelected = getRemainderWithoutSelected(
+        asset,
+        stateAssets
+      );
+      const percent =
+        value > remainderWithoutSelected ? remainderWithoutSelected : value;
+      setNewAsset({ ...asset, percent });
+    },
+    [stateAssets]
+  );
 
-  handleDown = (asset: PlatformAssetFull) => () => {
-    if (asset.percent === asset.mandatoryFundPercent) return;
-    const newAsset = { ...asset, percent: asset.percent - 1 };
-    this.updateAssets(newAsset);
-  };
+  const handleDown = useCallback(
+    (asset: PlatformAssetFull) => () => {
+      if (asset.percent === asset.mandatoryFundPercent) return;
+      setNewAsset({ ...asset, percent: asset.percent - 1 });
+    },
+    []
+  );
 
-  handleUp = (asset: PlatformAssetFull) => () => {
-    if (this.state.remainder - 1 < 0) return;
-    const newAsset = { ...asset, percent: asset.percent + 1 };
-    this.updateAssets(newAsset);
-  };
+  const handleUp = useCallback(
+    (asset: PlatformAssetFull) => () => {
+      if (remainder - 1 < 0) return;
+      setNewAsset({ ...asset, percent: asset.percent + 1 });
+    },
+    [remainder]
+  );
 
-  handleRemove: FundAssetRemoveType = currency => () => {
-    const asset = this.state.assets.find(item => item.asset === currency)!;
-    const newAsset = { ...asset, percent: asset.mandatoryFundPercent };
-    this.updateAssets(newAsset);
-  };
+  const handleRemove: FundAssetRemoveType = useCallback(
+    currency => () => {
+      const asset = stateAssets.find(item => item.asset === currency)!;
+      setNewAsset({ ...asset, percent: asset.mandatoryFundPercent });
+      submitChanges();
+    },
+    [stateAssets]
+  );
 
-  getRemainder = (assets: { percent: number }[]) =>
-    100 - assets.reduce((sum, item) => sum + item.percent, 0);
-
-  getRemainderWithoutSelected = (asset: FundAssetPartWithIcon) => {
-    return (
-      100 -
-      this.state.assets
-        .filter(item => item.asset !== asset.asset)
-        .reduce((sum, item) => sum + item.percent, 0)
-    );
-  };
-
-  updateAssets = (asset: PlatformAssetFull) => {
-    const assets = this.state.assets.map(x =>
-      x.asset === asset.asset ? asset : x
-    );
-    this.setState({
-      assets,
-      remainder: this.getRemainder(assets)
-    });
-  };
-
-  handleOpenDropdown: React.MouseEventHandler = event => {
-    this.setState({ anchor: event.currentTarget });
-  };
-
-  handleCloseDropdown = () => {
-    this.setState({
-      anchor: undefined,
-      assets: this.state.assets.sort((a, b) => b.percent - a.percent)
-    });
-    this.props.onChange({
+  const submitChanges = () => {
+    onChange({
       target: {
-        value: this.state.assets.filter(asset => asset.percent > 0),
-        name: this.props.name
+        value: stateAssets.filter(asset => asset.percent > 0),
+        name
       }
     });
-    this.handleBlur();
   };
 
-  handleBlur = (): void => {
-    const { onBlur, name } = this.props;
-    if (onBlur) {
-      onBlur({
-        target: {
-          name
-        }
-      });
-    }
-  };
+  return (
+    <>
+      {error !== undefined && touched && (
+        <div className="form-error reallocate-container__form-error">
+          {error}
+        </div>
+      )}
+      <CreateFundSettingsAssetsComponent
+        assets={stateAssets.filter(item => item.percent > 0)}
+        remainder={remainder}
+        removeHandle={handleRemove}
+        addHandle={setAnchor}
+      />
+      <CreateFundSettingsAddAsset
+        anchor={anchor}
+        handleCloseDropdown={clearAnchor}
+        assets={stateAssets}
+        handleDown={handleDown}
+        handleUp={handleUp}
+        handlePercentChange={handlePercentChange}
+      />
+    </>
+  );
+};
 
-  render() {
-    const { error, touched } = this.props;
-    const { anchor, assets, remainder } = this.state;
-    return (
-      <>
-        {error !== undefined && touched && (
-          <div className="form-error reallocate-container__form-error">
-            {error}
-          </div>
-        )}
-        <CreateFundSettingsAssetsComponent
-          assets={assets.filter(item => item.percent > 0) || []}
-          remainder={remainder}
-          removeHandle={this.handleRemove}
-          addHandle={this.handleOpenDropdown}
-        />
-        <CreateFundSettingsAddAsset
-          anchor={anchor}
-          handleCloseDropdown={this.handleCloseDropdown}
-          assets={assets}
-          handleDown={this.handleDown}
-          handleUp={this.handleUp}
-          handlePercentChange={this.handlePercentChange}
-        />
-      </>
-    );
-  }
-}
-
+const ReallocateField = React.memo(_ReallocateField);
 export default ReallocateField;
+
+const MAX_PERCENT = 100;
+
+const getRemainder = (assets: { percent: number }[]) =>
+  MAX_PERCENT - assets.reduce((sum, item) => sum + item.percent, 0);
 
 export const composeSelectedAssets = (
   assetsPercents: FundAssetPart[],
@@ -141,6 +153,15 @@ export const composeSelectedAssets = (
     const percent = targetAsset ? targetAsset.percent : 0;
     return { ...asset, percent };
   });
+
+const getRemainderWithoutSelected = (
+  asset: FundAssetPartWithIcon,
+  assets: PlatformAssetFull[]
+) =>
+  MAX_PERCENT -
+  assets
+    .filter(item => item.asset !== asset.asset)
+    .reduce((sum, item) => sum + item.percent, 0);
 
 interface Props {
   name: string;
@@ -159,12 +180,6 @@ interface Props {
       name: string;
     };
   }): void;
-}
-
-interface State {
-  anchor?: EventTarget;
-  assets: PlatformAssetFull[];
-  remainder: number;
 }
 
 export type PlatformAssetFull = PlatformAsset & FundAssetPart;
