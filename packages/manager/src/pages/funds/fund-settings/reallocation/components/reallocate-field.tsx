@@ -70,9 +70,10 @@ const _ReallocateField: React.FC<Props> = ({
         asset,
         stateAssets
       );
-      const percent =
-        value > remainderWithoutSelected ? remainderWithoutSelected : value;
-      setNewAsset({ ...asset, percent });
+      setNewAsset({
+        ...asset,
+        percent: Math.min(remainderWithoutSelected, Math.abs(value))
+      });
     },
     [stateAssets]
   );
