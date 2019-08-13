@@ -2,12 +2,16 @@ import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
-import { closeProgram } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
+import {
+  TCloseAsset,
+  closeFund,
+  closeProgram
+} from "../services/asset-settings.service";
 import CloseAssetForm, { ICloseAssetFormValues } from "./close-asset-form";
 
 const _ConfirmCloseAssetContainer: React.FC<Props> = ({
@@ -15,7 +19,7 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   open,
   twoFactorEnabled,
   onClose,
-  service,
+  service: { closeProgram, closeFund },
   onApply,
   id
 }) => {
@@ -24,18 +28,22 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
       { twoFactorCode }: ICloseAssetFormValues,
       setSubmitting: SetSubmittingType
     ) => {
-      const applyFn = () => {
+      const method = asset === ASSET.FUND ? closeFund : closeProgram;
+      const onSuccess = () => {
         onApply();
         onClose();
       };
-      const errorFn = () => {
-        setSubmitting(false);
-      };
-      service.closeProgram(applyFn, errorFn, id, {
-        twoFactorCode
+      const onError = () => setSubmitting(false);
+      method({
+        onSuccess,
+        onError,
+        id,
+        opts: {
+          twoFactorCode
+        }
       });
     },
-    [id]
+    [id, asset]
   );
   return (
     <Dialog open={open} onClose={onClose} className="dialog--wider">
@@ -56,7 +64,8 @@ const mapStateToProps = (state: RootState): StateProps => ({
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
-      closeProgram
+      closeProgram,
+      closeFund
     },
     dispatch
   )
@@ -78,14 +87,8 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    closeProgram(
-      onSuccess: () => void,
-      onError: () => void,
-      assetId: string,
-      opts?: {
-        twoFactorCode?: string | undefined;
-      }
-    ): void;
+    closeProgram: TCloseAsset;
+    closeFund: TCloseAsset;
   };
 }
 
