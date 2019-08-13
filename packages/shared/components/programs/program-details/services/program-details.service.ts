@@ -95,32 +95,6 @@ export const getProgramStatistic = (
   });
 };
 
-export const closeProgram = (
-  onSuccess: () => void,
-  onError: () => void,
-  programId: string,
-  opts?: {
-    twoFactorCode?: string | undefined;
-  }
-): any => (dispatch: Dispatch): void => {
-  const authorization = authService.getAuthArg();
-  managerApi
-    .v10ManagerProgramsByIdClosePost(programId, authorization, opts)
-    .then(() => {
-      onSuccess();
-      dispatch(
-        alertMessageActions.success(
-          "program-details-page.description.close-program-notification-success",
-          true
-        )
-      );
-    })
-    .catch(error => {
-      onError();
-      dispatch(alertMessageActions.error(error.errorMessage));
-    });
-};
-
 export const closePeriod = (
   programId: string,
   onSuccess: () => void,
