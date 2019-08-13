@@ -168,9 +168,10 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   );
 };
 
-const ProgramFinancialStatistic = compose<React.FC<OwnProps>>(translate())(
-  _ProgramFinancialStatistic
-);
+const ProgramFinancialStatistic = compose<React.FC<OwnProps>>(
+  translate(),
+  React.memo
+)(_ProgramFinancialStatistic);
 
 export default ProgramFinancialStatistic;
 
