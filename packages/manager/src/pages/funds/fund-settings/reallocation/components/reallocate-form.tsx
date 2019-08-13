@@ -49,8 +49,6 @@ const _ReallocateForm: React.FC<Props> = ({
               .sort((a, b) => b.percent - a.percent) || []
           }
           remainder={0}
-          removeHandle={() => () => {}}
-          addHandle={() => {}}
           canChange={false}
         />
       </StatisticItem>

@@ -15,8 +15,8 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   t,
   assets = [],
   remainder,
-  removeHandle,
-  addHandle
+  removeHandle = () => () => {},
+  addHandle = () => {}
 }) => {
   const [hoveringAssetName, setHoveringAssetName] = useState<
     string | undefined
@@ -67,8 +67,8 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
 interface Props extends WithTranslation {
   assets: PlatformAssetFull[];
   remainder: number;
-  removeHandle: FundAssetRemoveType;
-  addHandle: MouseEventHandler;
+  removeHandle?: FundAssetRemoveType;
+  addHandle?: MouseEventHandler;
   canChange?: boolean;
 }
 
