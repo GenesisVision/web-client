@@ -21,6 +21,7 @@ const _FundSettings: React.FC<Props> = ({
   return (
     <>
       <PeriodAndClosing
+        label={t("manager.fund-settings.close-fund.title")}
         asset={ASSET.FUND}
         canCloseAsset={details.personalFundDetails.canCloseProgram}
         id={details.id}
@@ -34,6 +35,9 @@ const _FundSettings: React.FC<Props> = ({
       />
       <Reallocation
         condition={details.personalFundDetails.canReallocate}
+        availableReallocationPercents={
+          details.personalFundDetails.availableReallocationPercents
+        }
         onApply={reallocate}
         id={details.id}
         fundAssets={details.currentAssets}
