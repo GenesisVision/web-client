@@ -10,12 +10,14 @@ import DetailsDescriptionControl from "./details-description-control";
 export interface Props {
   url: string;
   title: string;
+  text: string;
 }
 
 const _DetailsSettingControl: React.FC<WithTranslation & Props> = ({
   t,
   url,
-  title
+  title,
+  text
 }) => {
   return (
     <DetailsDescriptionControl
@@ -25,7 +27,7 @@ const _DetailsSettingControl: React.FC<WithTranslation & Props> = ({
         state: `/ ${title}`
       }}
       className="details-description-control--button"
-      text={t("program-details-page.description.program-settings")}
+      text={text}
     >
       <SettingsIcon className="details-description-control__icon" />
     </DetailsDescriptionControl>

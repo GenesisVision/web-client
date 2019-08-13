@@ -4,7 +4,7 @@ import "./create-fund-settings.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
 import { FundAssetPart, PlatformAsset, WalletData } from "gv-api-web";
-import ReallocateField from "modules/reallocate/components/reallocate-field";
+import ReallocateField from "pages/funds/fund-settings/reallocation/components/reallocate-field";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
