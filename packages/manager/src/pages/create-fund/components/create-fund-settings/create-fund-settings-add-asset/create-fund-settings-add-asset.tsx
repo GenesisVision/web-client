@@ -50,7 +50,7 @@ const _CreateFundSettingsAddAsset: React.FC<Props> = ({
   return (
     <Popover
       horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-      vertical={VERTICAL_POPOVER_POS.CENTER}
+      vertical={VERTICAL_POPOVER_POS.BOTTOM}
       anchorEl={anchor}
       noPadding
       onClose={handleCloseDropdown}
@@ -66,7 +66,7 @@ const _CreateFundSettingsAddAsset: React.FC<Props> = ({
             adornmentPosition="start"
             onChange={searchHandle}
             value={searchValue}
-            autoFocus
+            // autoFocus
           />
         </div>
         <div className="popover-add__assets">
