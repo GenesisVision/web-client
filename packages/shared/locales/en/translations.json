@@ -1514,6 +1514,8 @@
   "manager": {
     "fund-settings": {
       "reallocation": {
+        "confirm-title": "Reallocate fund",
+        "confirm-text": "Do you really want to Reallocate Fund?",
         "title": "Reallocation",
         "text": "* You are able to reallocate 3% of the Fund per day (cumulative). Example: you will be able to change 30% of the Fund's allocation after 10 days."
       },
@@ -1526,10 +1528,10 @@
       "period-and-closing": {
         "title": "Period and closing",
         "text-program": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
-        "text-fund": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
+        "text-fund": "",
         "text-period": "The current period of the program will end in one hour.",
         "close-confirm-title-fund": "Close Fund",
-        "close-confirm-notification-fund": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
+        "close-confirm-notification-fund": "Are you sure you want to close this Fund? This action is irreversible.",
         "close-confirm-title-program": "Close Program",
         "close-confirm-notification-program": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares."
       },
