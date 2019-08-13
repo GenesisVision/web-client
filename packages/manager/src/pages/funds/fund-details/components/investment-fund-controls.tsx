@@ -102,43 +102,6 @@ class _InvestmentFundControls extends React.PureComponent<Props, State> {
               >
                 {t("fund-details-page.description.invest")}
               </GVButton>
-              <GVButton
-                className="details-description__invest-btn"
-                color="secondary"
-                variant="outlined"
-                onClick={this.openPopup(INVESTMENT_POPUP.ASSET_EDIT)}
-                disabled={!canCloseProgram}
-              >
-                {t("fund-details-page.description.edit-fund")}
-              </GVButton>
-              <GVButton
-                className="details-description__invest-btn"
-                color="secondary"
-                variant="outlined"
-                onClick={this.openPopup(INVESTMENT_POPUP.CLOSE)}
-                disabled={!canCloseProgram}
-              >
-                {t("fund-details-page.description.close-fund")}
-              </GVButton>
-              {/*<div className="details-description__reallocate-container">
-                <GVButton
-                  className="details-description__invest-btn"
-                  color="secondary"
-                  variant="outlined"
-                  onClick={this.openPopup(INVESTMENT_POPUP.REALLOCATE)}
-                  disabled={!canReallocate}
-                >
-                  {t("fund-details-page.description.reallocate")}
-                </GVButton>
-                {!canReallocate && fundDescription.status !== "Archived" && (
-                  <div className="details-description__reallocate-message">
-                    {t(
-                      "fund-details-page.description.disable-reallocation-message"
-                    )}{" "}
-                    {moment(possibleReallocationTime).format()}
-                  </div>
-                )}
-              </div>*/}
             </>
           ) : (
             <GVButton
@@ -156,26 +119,6 @@ class _InvestmentFundControls extends React.PureComponent<Props, State> {
           onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
           onApply={dispatchFundDescription}
         />
-        <CloseFundContainer
-          open={popups[INVESTMENT_POPUP.CLOSE]}
-          onClose={this.closePopup(INVESTMENT_POPUP.CLOSE)}
-          onApply={dispatchFundDescription}
-          id={fundDescription.id}
-        />
-        <AssetEditContainer
-          open={popups[INVESTMENT_POPUP.ASSET_EDIT]}
-          info={composeEditInfo}
-          onClose={this.closePopup(INVESTMENT_POPUP.ASSET_EDIT)}
-          onApply={dispatchFundDescription}
-          type={ASSET.FUND}
-        />
-        {/*<ReallocateContainer
-          id={fundDescription.id}
-          open={popups[INVESTMENT_POPUP.REALLOCATE]}
-          onClose={this.closePopup(INVESTMENT_POPUP.REALLOCATE)}
-          onApply={dispatchFundDescription}
-          fundAssets={fundDescription.currentAssets}
-        />*/}
         <InvestmentUnauthPopup
           message={message}
           title={fundDescription.title}
