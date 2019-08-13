@@ -23,6 +23,7 @@ import ReallocateField, {
 } from "./reallocate-field";
 
 const _ReallocateForm: React.FC<Props> = ({
+  availableReallocationPercents,
   values: { currentAssets, assets },
   fundAssets,
   t,
@@ -40,6 +41,13 @@ const _ReallocateForm: React.FC<Props> = ({
       id="reallocate"
       onSubmit={handleSubmit}
     >
+      <p className="asset-settings__text">
+        {t("manager.fund-settings.reallocation.text-1")}
+        {availableReallocationPercents}%
+      </p>
+      <p className="asset-settings__text">
+        {t("manager.fund-settings.reallocation.text-2")}
+      </p>
       <StatisticItem label={"Current"} condition={dirty}>
         <CreateFundSettingsAssetsComponent
           assets={
@@ -64,7 +72,7 @@ const _ReallocateForm: React.FC<Props> = ({
         </div>
       )}
       <p className="asset-settings__text">
-        {t("manager.fund-settings.reallocation.text")}
+        {t("manager.fund-settings.reallocation.text-3")}
       </p>
       <GVButton
         disabled={!isValid || !dirty || isSubmitting}
@@ -93,6 +101,7 @@ export interface IReallocateFormValues {
 }
 
 export interface IReallocateFormOwnProps {
+  availableReallocationPercents: number;
   fundAssets: FundAssetPartWithIcon[];
   platformAssets: PlatformAsset[];
   onSubmit(
