@@ -29,12 +29,11 @@ const _Reallocation: React.FC<Props> = ({
 }) => {
   const { errorMessage, setErrorMessage } = useErrorMessage();
   const handleApply = useCallback(
-    (values: IReallocateFormValues, isSubmitting) => {
+    (values: IReallocateFormValues) => {
       service
         .updateAssets(id, values.assets)
         .then(onApply)
-        .catch(setErrorMessage)
-        .finally(() => isSubmitting(false));
+        .catch(setErrorMessage);
     },
     [id]
   );
