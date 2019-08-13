@@ -5,6 +5,7 @@ import { PlatformAssetFull } from "manager-web-portal/src/pages/funds/fund-setti
 import * as React from "react";
 
 const Regulator: React.FC<Props> = ({
+  remainder,
   minValue = 0,
   value,
   handleUp,
@@ -18,13 +19,20 @@ const Regulator: React.FC<Props> = ({
       })}
     >
       <div
-        className="regulator__button regulator__button--minus"
+        className={classNames("regulator__button regulator__button--minus", {
+          "regulator__button--mute": value <= minValue
+        })}
         onClick={handleDown}
       >
         &minus;
       </div>
       <div className="regulator__indicator">{children}</div>
-      <div className="regulator__button" onClick={handleUp}>
+      <div
+        className={classNames("regulator__button regulator__button--plus", {
+          "regulator__button--mute": remainder <= 0
+        })}
+        onClick={handleUp}
+      >
         +
       </div>
     </div>
@@ -32,6 +40,7 @@ const Regulator: React.FC<Props> = ({
 };
 
 interface Props {
+  remainder: number;
   minValue?: number;
   value: number;
   handleUp: TSymbolClickHandle;
