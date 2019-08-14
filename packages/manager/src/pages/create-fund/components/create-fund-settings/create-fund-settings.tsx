@@ -4,10 +4,8 @@ import "./create-fund-settings.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
 import { FundAssetPart, PlatformAsset, WalletData } from "gv-api-web";
-import DescriptionField from "modules/asset-settings/fields/description-field";
+import DescriptionBlock from "modules/asset-settings/fields/description-block";
 import FeesSettings from "modules/asset-settings/fields/fees-settings";
-import LogoField from "modules/asset-settings/fields/logo-field";
-import TitleField from "modules/asset-settings/fields/title-field";
 import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
 import DepositDetailsBlock from "pages/create-program/components/create-program-settings/fields/deposit-details-block";
 import ReallocateField from "pages/funds/fund-settings/reallocation/components/reallocate-field";
@@ -80,16 +78,12 @@ class _CreateFundSettings extends React.PureComponent<
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
             <div className="create-fund-settings__row">
-              <TitleField name={CREATE_FUND_FIELDS.title} />
-              <DescriptionField
-                name={CREATE_FUND_FIELDS.description}
+              <DescriptionBlock
+                asset={ASSET.FUND}
+                titleName={CREATE_FUND_FIELDS.title}
+                descriptionName={CREATE_FUND_FIELDS.description}
+                logoName={CREATE_FUND_FIELDS.logo}
                 description={description}
-              />
-              <LogoField
-                name={CREATE_FUND_FIELDS.logo}
-                title={t(
-                  "manager.create-fund-page.settings.fields.upload-logo"
-                )}
               />
             </div>
           </div>
