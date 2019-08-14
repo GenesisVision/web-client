@@ -5,7 +5,6 @@ import {
 } from "modules/copytrading-tables/services/copytrading-tables.service";
 import moment from "moment";
 import * as React from "react";
-import { useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
@@ -20,6 +19,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateRowFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
@@ -33,7 +33,7 @@ const _TradeSubRow: React.FC<Props> = ({
   update,
   title
 }) => {
-  const [isOpenPopup, setOpenPopup] = useState<boolean>(false);
+  const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const { program } = provider;
   return (
     <TableRow key={provider.programId}>
@@ -102,20 +102,22 @@ const _TradeSubRow: React.FC<Props> = ({
           className={"button--circle"}
           color={"secondary"}
           variant={"contained"}
-          onClick={() => setOpenPopup(true)}
+          onClick={setOpenPopup}
         >
           +
         </GVButton>
         <ConfirmPopup
+          applyButtonText={t("buttons.confirm")}
           header={t("investor.copytrading-tables.close-trade-confirm.header")}
           body={t("investor.copytrading-tables.close-trade-confirm.body", {
             symbol: symbol,
             volume: provider.volume
           })}
-          onClose={() => setOpenPopup(false)}
+          onClose={setClosePopup}
+          onCancel={setClosePopup}
           open={isOpenPopup}
           onApply={() => {
-            setOpenPopup(false);
+            setClosePopup;
             closeCopytradingTrade(
               tradeId,
               () => update(undefined),
