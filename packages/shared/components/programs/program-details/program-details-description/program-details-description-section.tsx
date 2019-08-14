@@ -16,6 +16,7 @@ import { InvestmentDetails } from "shared/components/details/details-description
 import { ProgramControlsLoader } from "shared/components/details/details.contaner.loader";
 import { PROGRAM, STATUS } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { levelParametersSelector } from "../reducers/level-parameters.reducer";
 import { dispatchProgramDescription } from "../services/program-details.service";
@@ -123,7 +124,7 @@ interface StateProps {
 }
 
 interface OwnProps {
-  accountCurrency: string;
+  accountCurrency: CurrencyEnum;
   programDescription: ProgramDetailsFull;
   isAuthenticated: boolean;
   redirectToLogin(): void;
