@@ -10,6 +10,12 @@ import {
   WalletData,
   WalletDataCurrencyEnum
 } from "gv-api-web";
+import DescriptionField from "modules/asset-settings/fields/description-field";
+import FeesSettings from "modules/asset-settings/fields/fees-settings";
+import InvestmentLimitField from "modules/asset-settings/fields/investment-limit-field";
+import LogoField from "modules/asset-settings/fields/logo-field";
+import StopOutField from "modules/asset-settings/fields/stop-out-field";
+import TitleField from "modules/asset-settings/fields/title-field";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
@@ -19,24 +25,16 @@ import GVButton from "shared/components/gv-button";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
-import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import Select, { ISelectChangeEvent } from "shared/components/select/select";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { allowValuesNumberFormat } from "shared/utils/helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
 import createProgramSettingsValidationSchema, {
   CREATE_PROGRAM_FIELDS
 } from "./create-program-settings.validators";
-import CreateProgramDescriptionField from "./fields/create-program-description-field";
-import CreateProgramInvestmentLimitField from "./fields/create-program-investment-limit-field";
-import CreateProgramLogoField from "./fields/create-program-logo-field";
-import CreateProgramStopOutField from "./fields/create-program-stop-out-field";
-import CreateProgramTitleField from "./fields/create-program-title-field";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class _CreateProgramSettings extends React.PureComponent<
@@ -144,7 +142,7 @@ class _CreateProgramSettings extends React.PureComponent<
           </div>
           <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
             <div className="create-program-settings__row">
-              <CreateProgramTitleField name={CREATE_PROGRAM_FIELDS.title} />
+              <TitleField name={CREATE_PROGRAM_FIELDS.title} />
               <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
@@ -184,7 +182,7 @@ class _CreateProgramSettings extends React.PureComponent<
                   })}
                 </GVFormikField>
               </div>
-              <CreateProgramDescriptionField
+              <DescriptionField
                 name={CREATE_PROGRAM_FIELDS.description}
                 description={description}
               />
@@ -229,17 +227,15 @@ class _CreateProgramSettings extends React.PureComponent<
                   ))}
                 </GVFormikField>
               </div>
-              <CreateProgramStopOutField
-                name={CREATE_PROGRAM_FIELDS.stopOutLevel}
-              />
-              <CreateProgramInvestmentLimitField
+              <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
+              <InvestmentLimitField
                 checkboxName={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
                 inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
                 hasInvestmentLimit={hasInvestmentLimit}
                 currency={currency}
                 isAllow={this.isAmountAllow(currency as WalletDataCurrencyEnum)}
               />
-              <CreateProgramLogoField
+              <LogoField
                 name={CREATE_PROGRAM_FIELDS.logo}
                 title={t(
                   "manager.create-program-page.settings.fields.upload-logo"
@@ -269,61 +265,19 @@ class _CreateProgramSettings extends React.PureComponent<
             {t("manager.create-program-page.settings.fees-settings")}
           </div>
           <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
-            <div className="create-program-settings__row">
-              <div className="create-program-settings__row-title">
-                {t(
-                  "manager.create-program-page.settings.investment-program-fees"
-                )}
-              </div>
-              <div className="create-program-settings__field">
-                <GVFormikField
-                  name={CREATE_PROGRAM_FIELDS.entryFee}
-                  label={t(
-                    "manager.create-program-page.settings.fields.entry-fee"
-                  )}
-                  adornment="%"
-                  component={GVTextField}
-                  type="number"
-                  autoComplete="off"
-                  decimalScale={4}
-                  isAllowed={allowValuesNumberFormat()}
-                />
-                <Hint
-                  content={t(
-                    "manager.create-program-page.settings.hints.entry-fee"
-                  )}
-                  className="create-program-settings__field-caption"
-                  vertical={VERTICAL_POPOVER_POS.BOTTOM}
-                  tooltipContent={t(
-                    "manager.create-program-page.settings.hints.entry-fee-description"
-                  )}
-                />
-              </div>
-              <div className="create-program-settings__field">
-                <GVFormikField
-                  name={CREATE_PROGRAM_FIELDS.successFee}
-                  label={t(
-                    "manager.create-program-page.settings.fields.success-fee"
-                  )}
-                  adornment="%"
-                  component={GVTextField}
-                  type="number"
-                  autoComplete="off"
-                  decimalScale={4}
-                  isAllowed={allowValuesNumberFormat()}
-                />
-                <Hint
-                  content={t(
-                    "manager.create-program-page.settings.hints.success-fee"
-                  )}
-                  className="create-program-settings__field-caption"
-                  vertical={VERTICAL_POPOVER_POS.BOTTOM}
-                  tooltipContent={t(
-                    "manager.create-program-page.settings.hints.success-fee-description"
-                  )}
-                />
-              </div>
-            </div>
+            <FeesSettings
+              title={t(
+                "manager.create-program-page.settings.investment-program-fees"
+              )}
+              entryFeeName={CREATE_PROGRAM_FIELDS.entryFee}
+              successFeeName={CREATE_PROGRAM_FIELDS.successFee}
+              entryFeeDescription={t(
+                "manager.create-program-page.settings.hints.entry-fee-description"
+              )}
+              successFeeDescription={t(
+                "manager.create-program-page.settings.hints.success-fee-description"
+              )}
+            />
             {isSignalProgram && (
               <SignalsFeeFormPartial
                 volumeFeeFieldName={CREATE_PROGRAM_FIELDS.signalVolumeFee}
