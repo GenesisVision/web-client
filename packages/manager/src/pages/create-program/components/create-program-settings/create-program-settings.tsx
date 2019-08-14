@@ -10,12 +10,10 @@ import {
   WalletData,
   WalletDataCurrencyEnum
 } from "gv-api-web";
-import DescriptionField from "modules/asset-settings/fields/description-field";
+import DescriptionBlock from "modules/asset-settings/fields/description-block";
 import FeesSettings from "modules/asset-settings/fields/fees-settings";
 import InvestmentLimitField from "modules/asset-settings/fields/investment-limit-field";
-import LogoField from "modules/asset-settings/fields/logo-field";
 import StopOutField from "modules/asset-settings/fields/stop-out-field";
-import TitleField from "modules/asset-settings/fields/title-field";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
@@ -133,7 +131,13 @@ class _CreateProgramSettings extends React.PureComponent<
           </div>
           <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
             <div className="create-program-settings__row">
-              <TitleField name={CREATE_PROGRAM_FIELDS.title} />
+              <DescriptionBlock
+                asset={ASSET.PROGRAM}
+                titleName={CREATE_PROGRAM_FIELDS.title}
+                descriptionName={CREATE_PROGRAM_FIELDS.description}
+                logoName={CREATE_PROGRAM_FIELDS.logo}
+                description={description}
+              />
               <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
@@ -173,10 +177,6 @@ class _CreateProgramSettings extends React.PureComponent<
                   })}
                 </GVFormikField>
               </div>
-              <DescriptionField
-                name={CREATE_PROGRAM_FIELDS.description}
-                description={description}
-              />
               <div className="create-program-settings__field">
                 <GVFormikField
                   name={CREATE_PROGRAM_FIELDS.leverage}
@@ -226,14 +226,8 @@ class _CreateProgramSettings extends React.PureComponent<
                 currency={currency}
                 isAllow={this.isAmountAllow(currency as WalletDataCurrencyEnum)}
               />
-              <LogoField
-                name={CREATE_PROGRAM_FIELDS.logo}
-                title={t(
-                  "manager.create-program-page.settings.fields.upload-logo"
-                )}
-              />
               {broker.isSignalsAvailable && (
-                <div className="create-program-settings__field">
+                <div className="create-program-settings__field create-program-settings__field--wider">
                   <GVFormikField
                     type="checkbox"
                     color="primary"
