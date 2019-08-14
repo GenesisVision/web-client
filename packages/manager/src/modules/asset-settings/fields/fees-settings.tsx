@@ -11,9 +11,11 @@ import { allowValuesNumberFormat } from "shared/utils/helpers";
 const _FeesSettings: React.FC<Props> = ({
   title,
   entryFeeName,
-  successFeeName,
   entryFeeDescription,
-  successFeeDescription
+  secondFeeName,
+  secondFeeLabel,
+  secondFeeUnderText,
+  secondFeeDescription
 }) => {
   const { t } = useTranslation();
   return (
@@ -39,8 +41,8 @@ const _FeesSettings: React.FC<Props> = ({
       </div>
       <div className="create-asset-settings__field">
         <GVFormikField
-          name={successFeeName}
-          label={t("manager.create-program-page.settings.fields.success-fee")}
+          name={secondFeeName}
+          label={secondFeeLabel}
           adornment="%"
           component={GVTextField}
           type="number"
@@ -49,10 +51,10 @@ const _FeesSettings: React.FC<Props> = ({
           isAllowed={allowValuesNumberFormat()}
         />
         <Hint
-          content={t("manager.create-program-page.settings.hints.success-fee")}
+          content={secondFeeUnderText}
           className="create-asset-settings__field-caption"
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          tooltipContent={successFeeDescription}
+          tooltipContent={secondFeeDescription}
         />
       </div>
     </div>
@@ -60,11 +62,13 @@ const _FeesSettings: React.FC<Props> = ({
 };
 
 interface Props {
-  title: string;
   entryFeeName: string;
-  successFeeName: string;
   entryFeeDescription: string;
-  successFeeDescription: string;
+  secondFeeName: string;
+  secondFeeLabel: string;
+  secondFeeUnderText: string;
+  secondFeeDescription: string;
+  title?: string;
 }
 
 const FeesSettings = React.memo(_FeesSettings);
