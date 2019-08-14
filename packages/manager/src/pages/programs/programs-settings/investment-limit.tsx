@@ -1,6 +1,6 @@
 import { FormikProps, withFormik } from "formik";
+import InvestmentLimitField from "modules/asset-settings/fields/investment-limit-field";
 import SettingsBlock from "modules/asset-settings/settings-block";
-import CreateProgramInvestmentLimitField from "pages/create-program/components/create-program-settings/fields/create-program-investment-limit-field";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
@@ -29,7 +29,7 @@ const _InvestmentLimit: React.FC<Props> = ({
       label={t("manager.create-program-page.settings.fields.investment-limit")}
       content={
         <form id="edit-form" onSubmit={handleSubmit}>
-          <CreateProgramInvestmentLimitField
+          <InvestmentLimitField
             checkboxName={FIELDS.hasInvestmentLimit}
             inputName={FIELDS.investmentLimit}
             hasInvestmentLimit={values.hasInvestmentLimit}
