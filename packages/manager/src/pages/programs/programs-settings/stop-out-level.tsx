@@ -1,6 +1,6 @@
 import { FormikProps, withFormik } from "formik";
+import StopOutField from "modules/asset-settings/fields/stop-out-field";
 import SettingsBlock from "modules/asset-settings/settings-block";
-import CreateProgramStopOutField from "pages/create-program/components/create-program-settings/fields/create-program-stop-out-field";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -21,7 +21,7 @@ const _StopOutLevel: React.FC<Props> = ({
     content={
       <form id="edit-form" onSubmit={handleSubmit}>
         <div className="program-settings__block-wrapper create-program-settings__row">
-          <CreateProgramStopOutField name={FIELDS.stopOutLevel} />
+          <StopOutField name={FIELDS.stopOutLevel} />
         </div>
         <GVButton
           color="primary"
