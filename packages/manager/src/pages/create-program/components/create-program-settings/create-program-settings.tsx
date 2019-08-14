@@ -18,23 +18,22 @@ import StopOutField from "modules/asset-settings/fields/stop-out-field";
 import TitleField from "modules/asset-settings/fields/title-field";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import NumberFormat, { NumberFormatValues } from "react-number-format";
+import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
-import GVButton from "shared/components/gv-button";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select, { ISelectChangeEvent } from "shared/components/select/select";
-import WalletSelect from "shared/components/wallet-select/wallet-select";
-import { convertFromCurrency } from "shared/utils/currency-converter";
-import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
+import { ASSET } from "shared/constants/constants";
+import { validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 import createProgramSettingsValidationSchema, {
   CREATE_PROGRAM_FIELDS
 } from "./create-program-settings.validators";
+import CreateAssetNavigation from "./fields/create-asset-navigation";
+import DepositDetailsBlock from "./fields/deposit-details-block";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class _CreateProgramSettings extends React.PureComponent<
@@ -81,15 +80,6 @@ class _CreateProgramSettings extends React.PureComponent<
     onChangeFn(target.props.value);
   };
 
-  setMaxAmount = (available?: number, currency?: string) => () => {
-    if (!available || !currency) return;
-    const { setFieldValue } = this.props;
-    setFieldValue(
-      CREATE_PROGRAM_FIELDS.depositAmount,
-      formatCurrencyValue(available, currency)
-    );
-  };
-
   validateAndSubmit = (
     e?: React.FormEvent<HTMLFormElement> | undefined
   ): void => {
@@ -107,6 +97,7 @@ class _CreateProgramSettings extends React.PureComponent<
 
   render() {
     const {
+      setFieldValue,
       minimumDepositsAmount,
       wallets,
       t,
@@ -270,11 +261,17 @@ class _CreateProgramSettings extends React.PureComponent<
                 "manager.create-program-page.settings.investment-program-fees"
               )}
               entryFeeName={CREATE_PROGRAM_FIELDS.entryFee}
-              successFeeName={CREATE_PROGRAM_FIELDS.successFee}
               entryFeeDescription={t(
                 "manager.create-program-page.settings.hints.entry-fee-description"
               )}
-              successFeeDescription={t(
+              secondFeeName={CREATE_PROGRAM_FIELDS.successFee}
+              secondFeeLabel={t(
+                "manager.create-program-page.settings.fields.success-fee"
+              )}
+              secondFeeUnderText={t(
+                "manager.create-program-page.settings.hints.success-fee"
+              )}
+              secondFeeDescription={t(
                 "manager.create-program-page.settings.hints.success-fee-description"
               )}
             />
@@ -285,95 +282,24 @@ class _CreateProgramSettings extends React.PureComponent<
               />
             )}
           </div>
-          <div className="create-program-settings__subheading">
-            <span className="create-program-settings__block-number">03</span>
-            {t("manager.create-program-page.settings.deposit-details")}
-          </div>
-          <div
-            className={"deposit-details create-program-settings__fill-block"}
-          >
-            <div className="create-program-settings__field deposit-details">
-              <WalletSelect
-                name={CREATE_PROGRAM_FIELDS.depositWalletId}
-                label={t("transfer.from")}
-                items={wallets}
-                onChange={this.onSelectChange(this.props.changeWallet)}
-              />
-              <InputAmountField
-                autoFocus={false}
-                name={CREATE_PROGRAM_FIELDS.depositAmount}
-                label={t("transfer.amount")}
-                currency={wallet.currency}
-                isAllow={this.isAmountAllow(wallet.currency)}
-                setMax={this.setMaxAmount(wallet.available, wallet.currency)}
-              />
-              {programCurrency !== wallet.currency && depositAmount && rate && (
-                <div className="invest-popup__currency">
-                  <NumberFormat
-                    value={
-                      programCurrency
-                        ? formatCurrencyValue(
-                            convertFromCurrency(depositAmount, rate),
-                            programCurrency
-                          )
-                        : undefined
-                    }
-                    prefix="≈ "
-                    suffix={` ${programCurrency}`}
-                    displayType="text"
-                  />
-                </div>
-              )}
-              <div className="deposit-details__available-list">
-                <div className="deposit-details__available-amount">
-                  {t("manager.create-program-page.settings.fields.min-deposit")}
-                  <span className={"deposit-details__available-amount-value"}>
-                    <NumberFormat
-                      value={
-                        programCurrency
-                          ? minimumDepositsAmount[programCurrency]
-                          : undefined
-                      }
-                      thousandSeparator=" "
-                      displayType="text"
-                      suffix={` ${programCurrency}`}
-                    />
-                  </span>
-                </div>
-                <div className="deposit-details__available-amount">
-                  {t(
-                    "manager.create-fund-page.settings.fields.available-in-wallet"
-                  )}
-                  <span className={"deposit-details__available-amount-value"}>
-                    <NumberFormat
-                      value={wallet.available}
-                      thousandSeparator=" "
-                      displayType="text"
-                      suffix={` ${wallet.currency}`}
-                    />
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="create-program-settings__navigation">
-            <GVButton
-              title={t("buttons.create-program")}
-              color="primary"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {t("buttons.create-program")}
-            </GVButton>
-            <GVButton
-              variant="text"
-              onClick={navigateBack}
-              className="create-program-settings__navigation-back"
-            >
-              <>&larr; {t("buttons.back")}</>
-            </GVButton>
-          </div>
+          <DepositDetailsBlock
+            walletFieldName={CREATE_PROGRAM_FIELDS.depositWalletId}
+            inputName={CREATE_PROGRAM_FIELDS.depositAmount}
+            depositAmount={depositAmount}
+            minimumDepositAmount={minimumDepositsAmount[programCurrency]}
+            wallets={wallets}
+            rate={rate}
+            setFieldValue={setFieldValue}
+            onWalletChange={this.onSelectChange(this.props.changeWallet)}
+            assetCurrency={programCurrency}
+            walletAvailable={wallet.available}
+            walletCurrency={wallet.currency}
+          />
+          <CreateAssetNavigation
+            asset={ASSET.PROGRAM}
+            navigateBack={navigateBack}
+            isSubmitting={isSubmitting}
+          />
         </form>
       </div>
     );
@@ -443,7 +369,7 @@ interface OwnProps {
   changeLeverage(leverage: number): void;
   accountType?: BrokerAccountType;
   changeAccountType(id: string): void;
-  rate?: number;
+  rate: number;
   wallet: WalletData;
   changeWallet(id: string): void;
 }
