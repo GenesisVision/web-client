@@ -23,55 +23,42 @@ const _AboutForm: React.FC<Props> = ({
   errorMessage,
   isValid,
   dirty,
-  isSubmitting,
-  service
+  isSubmitting
 }) => (
-  <form id="about-manager" onSubmit={handleSubmit} className="about">
-    <table className={"profile"}>
-      <tbody>
-        <tr className="profile__content">
-          <td className="profile__left" />
-          <td className="profile__center" />
-          <td className="profile__right">
-            <div>
-              <div className="profile__row">
-                <GVFormikField
-                  label={t("profile-page.login")}
-                  component={GVTextField}
-                  name={FIELDS.userName}
-                  autoFocus
-                />
-              </div>
-              <div className="profile__row">
-                <GVFormikField
-                  label={t("profile-page.about")}
-                  component={GVTextField}
-                  type="textarea"
-                  name={FIELDS.about}
-                />
-              </div>
-              <div className="form-error">{errorMessage}</div>
-            </div>
-            <div className="profile__row">
-              <GVButton
-                type="submit"
-                disabled={isSubmitting || !isValid || !dirty}
-              >
-                {t("buttons.save")}
-              </GVButton>
-              <GVButton
-                color="secondary"
-                variant="outlined"
-                onClick={service.goBack}
-              >
-                {t("buttons.cancel")}
-              </GVButton>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </form>
+  <tr className="profile__content">
+    <td className="profile__left">
+      <span className="profile__stick" />
+    </td>
+    <td className="profile__center" />
+    <td className="profile__right">
+      <form id="about-manager" onSubmit={handleSubmit} className="about">
+        <div>
+          <div className="profile__row">
+            <GVFormikField
+              label={t("profile-page.login")}
+              component={GVTextField}
+              name={FIELDS.userName}
+              autoFocus
+            />
+          </div>
+          <div className="profile__row">
+            <GVFormikField
+              label={t("profile-page.about")}
+              component={GVTextField}
+              type="textarea"
+              name={FIELDS.about}
+            />
+          </div>
+          <div className="form-error">{errorMessage}</div>
+        </div>
+        <div className="profile__row">
+          <GVButton type="submit" disabled={isSubmitting || !isValid || !dirty}>
+            {t("buttons.save")}
+          </GVButton>
+        </div>
+      </form>
+    </td>
+  </tr>
 );
 
 enum FIELDS {
