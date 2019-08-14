@@ -8,9 +8,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import ProfileForm, {
-  ProfileFormValues
-} from "shared/modules/profile/profile-form";
+import { ProfileFormValues } from "shared/modules/profile/profile-form";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
@@ -24,6 +22,8 @@ const _ProfileContainer: React.FC<Props> = ({
   t
 }) => {
   const [data, setData] = useState<ProfileFullViewModel | undefined>(undefined);
+  const fetch = () =>
+    profileApi.v10ProfileGet(authService.getAuthArg()).then(setData);
   useEffect(() => {
     fetch();
   }, []);
@@ -50,14 +50,8 @@ const _ProfileContainer: React.FC<Props> = ({
     },
     []
   );
-  const fetch = () =>
-    profileApi.v10ProfileGet(authService.getAuthArg()).then(setData);
   if (!data) return null;
-  return editable ? (
-    <ProfileForm info={data} onSubmit={handleEdit} />
-  ) : (
-    <Profile personal={personal} info={data} />
-  );
+  return <Profile personal={personal} info={data} />;
 };
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
