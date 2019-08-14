@@ -18,6 +18,7 @@ import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { PROGRAM, STATUS } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
 
@@ -142,7 +143,7 @@ const _DetailsInvestment: React.FC<Props> = ({
           color="secondary"
           variant="outlined"
           onClick={setOpenPopup}
-          disabled={!personalDetails.canWithdraw}
+          // disabled={!personalDetails.canWithdraw}
         >
           {t("fund-details-page.description.withdraw")}
         </GVButton>
@@ -167,8 +168,8 @@ interface OwnProps {
   asset: string;
   notice?: string;
   id: string;
-  accountCurrency: string;
-  assetCurrency: string;
+  accountCurrency: CurrencyEnum;
+  assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
   WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
   ProgramReinvestingWidget?: React.ComponentType<
