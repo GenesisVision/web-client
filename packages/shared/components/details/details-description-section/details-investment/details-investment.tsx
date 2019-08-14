@@ -143,7 +143,7 @@ const _DetailsInvestment: React.FC<Props> = ({
           color="secondary"
           variant="outlined"
           onClick={setOpenPopup}
-          // disabled={!personalDetails.canWithdraw}
+          disabled={!personalDetails.canWithdraw}
         >
           {t("fund-details-page.description.withdraw")}
         </GVButton>
