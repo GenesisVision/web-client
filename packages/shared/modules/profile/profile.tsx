@@ -6,13 +6,25 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import VerificationStatus from "shared/components/verification-status/verification-status";
 
+import About from "../about/about";
 import ProfilePersonal, { ProfileField } from "./profile-personal";
 
 const _Profile: React.FC<Props> = ({ t, info, personal }) => (
   <div className="profile__container profile__container--padding-top">
     <table className="profile profile--is-disabled">
       <tbody>
-        {personal && <ProfilePersonal info={info} />}
+        <tr className="profile__title">
+          <td className="profile__left">
+            <h4 className="profile__subtitle">01</h4>
+          </td>
+          <td className="profile__center" />
+          <td className="profile__right">
+            <h4 className="profile__subtitle">{t("profile-page.contacts")}</h4>
+          </td>
+        </tr>
+        {(personal && (
+          <About about={info.about} userName={info.userName} />
+        )) || <ProfilePersonal about={info.about} userName={info.userName} />}
         <tr className="profile__title">
           <td className="profile__left">
             <h4 className="profile__subtitle">01</h4>
