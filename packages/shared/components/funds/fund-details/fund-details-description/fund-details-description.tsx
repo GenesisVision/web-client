@@ -65,8 +65,8 @@ const _FundDetailsDescription: React.FC<Props> = ({
             : false
         }
       />
-      {description.personalFundDetails.isOwnProgram &&
-        description.personalFundDetails &&
+      {description.personalFundDetails &&
+        description.personalFundDetails.isOwnProgram &&
         description.personalFundDetails.canCloseProgram && (
           <DetailsSettingControl
             title={description.title}
