@@ -19,6 +19,7 @@ import FundDetailsDescription from "shared/components/funds/fund-details/fund-de
 import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { FUND, STATUS } from "shared/constants/constants";
+import { CurrencyEnum } from "shared/utils/types";
 
 import {
   IFundControlsProps,
@@ -78,7 +79,7 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
             updateDescription={dispatchFundDescription}
             asset={FUND}
             id={fundDescription.id}
-            assetCurrency={"GVT"}
+            assetCurrency={"GVT" as CurrencyEnum}
             accountCurrency={accountCurrency}
             personalDetails={
               fundDescription.personalFundDetails as InvestmentDetails
@@ -112,7 +113,7 @@ interface OwnProps {
   redirectToLogin(): void;
   FundControls: React.ComponentType<IFundControlsProps>;
   FundWithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
-  accountCurrency: string;
+  accountCurrency: CurrencyEnum;
 }
 
 interface Props extends WithTranslation, OwnProps, DispatchProps {}
