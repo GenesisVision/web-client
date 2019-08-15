@@ -24,12 +24,13 @@ const _ProfileBlock: React.FC<Props> = ({
       <td className="profile__center" />
       <td className="profile__right">
         <h4 className="profile__subtitle">{title}</h4>
-        {checked && !!verificationStatus && (
-          <VerificationStatus
-            checked={checked}
-            verificationStatus={verificationStatus}
-          />
-        )}
+        {checked ||
+          (!!verificationStatus && (
+            <VerificationStatus
+              checked={checked}
+              verificationStatus={verificationStatus}
+            />
+          ))}
       </td>
     </tr>
     <tr className="profile__content">
