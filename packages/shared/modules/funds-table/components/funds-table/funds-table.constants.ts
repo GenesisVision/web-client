@@ -48,6 +48,9 @@ export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
     sortingName: "ByInvestors"
   },
   {
+    name: "age"
+  },
+  {
     name: "drawdown",
     sortingName: "ByDrawdown"
   },
