@@ -472,6 +472,7 @@
       "balance": "Size",
       "assets": "Assets",
       "investors": "Investors",
+      "age": "Age",
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart",
