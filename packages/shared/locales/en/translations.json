@@ -1879,6 +1879,7 @@
         "fees-settings": "Fees settings",
         "deposit-details": "Deposit details",
         "fields": {
+          "mandatory-assets": "There is a mandatory 1% GVT allocation per Fund",
           "asset-description": "Total share of all assets should be equal to 100%",
           "name": "Name",
           "name-requirements": "Requirement from 4 to 20 symbols",
