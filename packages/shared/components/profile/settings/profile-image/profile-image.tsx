@@ -23,14 +23,9 @@ const _ProfileImage: React.FC<InjectedFormikProps<Props, FormValues>> = ({
 }) => (
   <form onSubmit={handleSubmit}>
     <div className="profile-image">
-      <h3 className="profile-image__title">
-        {t("profile-page.settings.profile-image")}
-      </h3>
-
       <div className="profile-image__requirements">
         {t("profile-page.settings.image-requirements")}
       </div>
-
       <GVFormikField
         name={FIELDS.logo}
         component={InputImage}
@@ -38,7 +33,6 @@ const _ProfileImage: React.FC<InjectedFormikProps<Props, FormValues>> = ({
         className="profile-image__input-image"
         defaultImage={UserIcon}
       />
-
       <GVButton
         type="submit"
         color="primary"
