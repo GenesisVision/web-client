@@ -8,8 +8,8 @@ import ProfileImageContainer from "shared/components/profile/settings/profile-im
 import { ROLE } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import PublicInfo from "shared/modules/public-info/public-info";
 
-import About from "../about/about";
 import ProfileBlock from "./profile-block";
 import { ProfileField } from "./profile-personal";
 
@@ -25,7 +25,9 @@ const _Profile: React.FC<Props> = ({ t, info, role }) => {
               <ProfileBlock
                 number={"01"}
                 title={t("profile-page.public-info")}
-                content={<About about={info.about} userName={info.userName} />}
+                content={
+                  <PublicInfo about={info.about} userName={info.userName} />
+                }
               />
               <ProfileBlock
                 number={"02"}

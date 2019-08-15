@@ -4,9 +4,9 @@ import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import { SetSubmittingType } from "shared/utils/types";
 
-import AboutForm, { IAboutFormValues } from "./about-form";
+import PublicInfoForm, { IAboutFormValues } from "./public-info-form";
 
-const _About: React.FC<Props> = ({ userName, about }) => {
+const _PublicInfo: React.FC<Props> = ({ userName, about }) => {
   const { errorMessage, setErrorMessage } = useErrorMessage();
   const handleSubmit = useCallback(
     (model: IAboutFormValues, setSubmitting: SetSubmittingType) =>
@@ -19,7 +19,7 @@ const _About: React.FC<Props> = ({ userName, about }) => {
     []
   );
   return (
-    <AboutForm
+    <PublicInfoForm
       userName={userName}
       about={about}
       onSubmit={handleSubmit}
@@ -33,5 +33,5 @@ interface Props {
   about: string;
 }
 
-const About = React.memo(_About);
-export default About;
+const PublicInfo = React.memo(_PublicInfo);
+export default PublicInfo;

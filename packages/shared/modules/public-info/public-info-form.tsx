@@ -1,4 +1,4 @@
-import "./about.scss";
+import "./public-info.scss";
 
 import { goBack } from "connected-react-router";
 import { FormikProps, withFormik } from "formik";
@@ -17,7 +17,7 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 
-const _AboutForm: React.FC<Props> = ({
+const _PublicInfoForm: React.FC<Props> = ({
   t,
   handleSubmit,
   errorMessage,
@@ -87,7 +87,7 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-const AboutForm = compose<React.ComponentType<IAboutFormOwnProps>>(
+const PublicInfoForm = compose<React.ComponentType<IAboutFormOwnProps>>(
   translate(),
   connect(
     null,
@@ -104,5 +104,5 @@ const AboutForm = compose<React.ComponentType<IAboutFormOwnProps>>(
     }
   }),
   React.memo
-)(_AboutForm);
-export default AboutForm;
+)(_PublicInfoForm);
+export default PublicInfoForm;
