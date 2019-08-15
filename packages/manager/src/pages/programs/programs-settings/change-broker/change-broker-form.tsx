@@ -127,6 +127,9 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         </GVFormikField>
       </div>
       <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
+        {t("manager.program-settings.broker.text-warning")}
+      </p>
+      <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
         {t("manager.program-settings.broker.text-change")}
       </p>
       <GVButton
