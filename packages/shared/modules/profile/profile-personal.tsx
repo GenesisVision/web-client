@@ -4,8 +4,7 @@ import GVTextField from "shared/components/gv-text-field";
 
 export const ProfileField: React.FC<IProfileFieldProps> = React.memo(
   ({ name, value, label, disabled = true, type }) => (
-    // @ts-ignore
-    <GVTextField // TODO correct type when gv-components will move
+    <GVTextField
       type={type}
       name={name}
       value={value}
@@ -14,14 +13,6 @@ export const ProfileField: React.FC<IProfileFieldProps> = React.memo(
     />
   )
 );
-
-interface IProfileFieldProps {
-  name: string;
-  value: string | number;
-  label: string;
-  disabled?: boolean;
-  type?: string;
-}
 
 const _ProfilePersonal: React.FC<IProfilePersonalProps> = ({
   t,
@@ -57,6 +48,14 @@ const _ProfilePersonal: React.FC<IProfilePersonalProps> = ({
     </td>
   </tr>
 );
+
+interface IProfileFieldProps {
+  name: string;
+  value: string | number;
+  label: string;
+  disabled?: boolean;
+  type?: string;
+}
 
 interface IProfilePersonalProps extends WithTranslation {
   userName: string;
