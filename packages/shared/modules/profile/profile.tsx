@@ -1,3 +1,6 @@
+import "shared/components/details/details.scss";
+import "shared/modules/asset-settings/asset-settings.scss";
+
 import "./profile.scss";
 
 import { ProfileFullViewModel } from "gv-api-web";
@@ -10,65 +13,50 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import PublicInfo from "shared/modules/public-info/public-info";
 
-import ProfileBlock from "./profile-block";
+import SettingsBlock from "../asset-settings/settings-block";
 import { ProfileField } from "./profile-personal";
 
-const _Profile: React.FC<Props> = ({ t, info, role }) => {
-  const isManager = role === ROLE.MANAGER;
-  const initCount = isManager ? 2 : 0;
-  return (
-    <div className="profile__container profile__container--padding-top">
-      <table className="profile">
-        <tbody>
-          {isManager && (
-            <>
-              <ProfileBlock
-                number={"01"}
-                title={t("profile-page.public-info")}
-                content={
-                  <PublicInfo about={info.about} userName={info.userName} />
-                }
-              />
-              <ProfileBlock
-                number={"02"}
-                title={t("profile-page.public-info")}
-                content={
-                  <ProfileField
-                    label={t("profile-page.id")}
-                    value={info.id}
-                    name="phone"
-                  />
-                }
-              />
-            </>
-          )}
-          <ProfileBlock
-            number={`0${initCount + 1}`}
-            title={t("profile-page.settings.profile-image")}
-            content={<ProfileImageContainer />}
-          />
-          <ProfileBlock
-            number={`0${initCount + 2}`}
-            title={t("profile-page.contacts")}
-            content={
-              <ProfileField
-                label={t("profile-page.email")}
-                value={info.email}
-                name="phone"
-              />
-            }
-            checked={true}
-          />
-          <ProfileBlock
-            number={`0${initCount + 3}`}
-            title={t("profile-page.personal-info")}
-            verificationStatus={info.verificationStatus}
-          />
-        </tbody>
-      </table>
-    </div>
-  );
-};
+const _Profile: React.FC<Props> = ({ t, info, role }) => (
+  <div className="asset-settings profile__container--padding-top">
+    {role === ROLE.MANAGER && (
+      <>
+        <SettingsBlock
+          label={t("profile-page.public-info")}
+          content={<PublicInfo about={info.about} userName={info.userName} />}
+        />
+        <SettingsBlock
+          label={t("profile-page.id")}
+          content={
+            <ProfileField
+              label={t("profile-page.id")}
+              value={info.id}
+              name="phone"
+            />
+          }
+        />
+      </>
+    )}
+    <SettingsBlock
+      label={t("profile-page.settings.profile-image")}
+      content={<ProfileImageContainer />}
+    />
+    <SettingsBlock
+      label={t("profile-page.contacts")}
+      checked={true}
+      content={
+        <ProfileField
+          label={t("profile-page.email")}
+          value={info.email}
+          name="phone"
+        />
+      }
+    />
+    <SettingsBlock
+      label={t("profile-page.personal-info")}
+      verificationStatus={info.verificationStatus}
+    />
+  </div>
+);
 
 interface Props extends WithTranslation, IProfileOwnProps, WithRoleProps {}
 
