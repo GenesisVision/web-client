@@ -59,7 +59,7 @@ const _Profile: React.FC<Props> = ({ t, info, role }) => {
           />
           <ProfileBlock
             number={`0${initCount + 3}`}
-            title={t("profile-page.contacts")}
+            title={t("profile-page.personal-info")}
             verificationStatus={info.verificationStatus}
           />
         </tbody>
