@@ -37,6 +37,12 @@
     }
   }
 
+  &--disabled {
+    &::before {
+      border: 0;
+    }
+  }
+
   &--focused {
     &::after {
       transform: scaleX(1);
