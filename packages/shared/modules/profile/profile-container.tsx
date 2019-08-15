@@ -1,26 +1,16 @@
-import {
-  ProfileFullViewModel,
-  UpdatePersonalDetailViewModel
-} from "gv-api-web";
-import { pickBy } from "lodash";
-import React, { useCallback, useEffect, useState } from "react";
+import { ProfileFullViewModel } from "gv-api-web";
+import React, { useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { ProfileFormValues } from "shared/modules/profile/profile-form";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
-import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
+import { MiddlewareDispatch } from "shared/utils/types";
 
 import Profile from "./profile";
 
-const _ProfileContainer: React.FC<Props> = ({
-  service,
-  personal,
-  editable,
-  t
-}) => {
+const _ProfileContainer: React.FC<Props> = ({ service }) => {
   const [data, setData] = useState<ProfileFullViewModel | undefined>(undefined);
   const fetch = () =>
     profileApi.v10ProfileGet(authService.getAuthArg()).then(setData);
@@ -31,7 +21,7 @@ const _ProfileContainer: React.FC<Props> = ({
     service.alertMessageActionsSuccess(text);
     fetch();
   };
-  const handleEdit = useCallback(
+  /*const handleEdit = useCallback(
     (values: ProfileFormValues, setSubmitting: SetSubmittingType) => {
       const model = pickBy(
         values,
@@ -49,9 +39,8 @@ const _ProfileContainer: React.FC<Props> = ({
         });
     },
     []
-  );
-  if (!data) return null;
-  return <Profile personal={personal} info={data} />;
+  );*/
+  return <Profile condition={!!data} info={data!} />;
 };
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
@@ -61,10 +50,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-interface OwnProps {
-  editable?: boolean;
-  personal?: boolean;
-}
+interface OwnProps {}
 
 interface DispatchProps {
   service: {
