@@ -10,10 +10,6 @@ import {
   WalletData,
   WalletDataCurrencyEnum
 } from "gv-api-web";
-import DescriptionBlock from "modules/asset-settings/fields/description-block";
-import FeesSettings from "modules/asset-settings/fields/fees-settings";
-import InvestmentLimitField from "modules/asset-settings/fields/investment-limit-field";
-import StopOutField from "modules/asset-settings/fields/stop-out-field";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
@@ -24,6 +20,10 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import Select, { ISelectChangeEvent } from "shared/components/select/select";
 import { ASSET } from "shared/constants/constants";
+import DescriptionBlock from "shared/modules/asset-settings/fields/description-block";
+import FeesSettings from "shared/modules/asset-settings/fields/fees-settings";
+import InvestmentLimitField from "shared/modules/asset-settings/fields/investment-limit-field";
+import StopOutField from "shared/modules/asset-settings/fields/stop-out-field";
 import { validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 

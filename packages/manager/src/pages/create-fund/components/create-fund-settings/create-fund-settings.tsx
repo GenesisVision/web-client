@@ -4,8 +4,6 @@ import "./create-fund-settings.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
 import { FundAssetPart, PlatformAsset, WalletData } from "gv-api-web";
-import DescriptionBlock from "modules/asset-settings/fields/description-block";
-import FeesSettings from "modules/asset-settings/fields/fees-settings";
 import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
 import DepositDetailsBlock from "pages/create-program/components/create-program-settings/fields/deposit-details-block";
 import ReallocateField from "pages/funds/fund-settings/reallocation/components/reallocate-field";
@@ -16,6 +14,8 @@ import { IImageValue } from "shared/components/form/input-image/input-image";
 import GVFormikField from "shared/components/gv-formik-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import { ASSET } from "shared/constants/constants";
+import DescriptionBlock from "shared/modules/asset-settings/fields/description-block";
+import FeesSettings from "shared/modules/asset-settings/fields/fees-settings";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";

@@ -1,11 +1,8 @@
 import { FundAssetPart } from "gv-api-web";
 import i18next from "i18next";
-import {
-  assetDescriptionShape,
-  assetTitleShape
-} from "pages/create-program/components/create-program-settings/create-program-settings.validators";
 import { WithTranslation } from "react-i18next";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
+import { assetDescriptionShape, assetTitleShape } from "shared/modules/asset-settings/asset-edit.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { array, number, object } from "yup";

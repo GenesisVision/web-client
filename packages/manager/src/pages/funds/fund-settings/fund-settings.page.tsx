@@ -1,7 +1,4 @@
 import { FundDetailsFull, PlatformAsset } from "gv-api-web";
-import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
-import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
-import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -16,6 +13,9 @@ import { IImageValue } from "shared/components/form/input-image/input-image";
 import { fundDescriptionSelector } from "shared/components/funds/fund-details/reducers/description.reducer";
 import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
 import { ASSET } from "shared/constants/constants";
+import AssetSettingsLoader from "shared/modules/asset-settings/asset-settings.loader";
+import AssetSettingsPage from "shared/modules/asset-settings/asset-settings.page";
+import { AssetDescriptionType } from "shared/modules/asset-settings/asset-settings.types";
 import { fundAssetsSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";

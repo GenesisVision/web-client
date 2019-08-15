@@ -1,9 +1,6 @@
 import "shared/components/details/details.scss";
 
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
-import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
-import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
-import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -21,6 +18,9 @@ import {
   getProgramBrokers
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
+import AssetSettingsLoader from "shared/modules/asset-settings/asset-settings.loader";
+import AssetSettingsPage from "shared/modules/asset-settings/asset-settings.page";
+import { AssetDescriptionType } from "shared/modules/asset-settings/asset-settings.types";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 

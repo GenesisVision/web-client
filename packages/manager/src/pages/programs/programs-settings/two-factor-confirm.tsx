@@ -1,4 +1,3 @@
-import SettingsBlock from "modules/asset-settings/settings-block";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -13,6 +12,7 @@ import GVButton from "shared/components/gv-button";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useIsOpen from "shared/hooks/is-open.hook";
+import SettingsBlock from "shared/modules/asset-settings/settings-block";
 
 const _TwoFactorConfirm: React.FC<Props> = ({
   id,

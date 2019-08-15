@@ -1,10 +1,10 @@
 import { FormikProps, withFormik } from "formik";
-import StopOutField from "modules/asset-settings/fields/stop-out-field";
-import SettingsBlock from "modules/asset-settings/settings-block";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
+import StopOutField from "shared/modules/asset-settings/fields/stop-out-field";
+import SettingsBlock from "shared/modules/asset-settings/settings-block";
 import { SetSubmittingType } from "shared/utils/types";
 import { number, object } from "yup";
 
