@@ -1,9 +1,4 @@
 import { FormikProps, withFormik } from "formik";
-import SettingsBlock from "modules/asset-settings/settings-block";
-import {
-  assetDescriptionShape,
-  assetTitleShape
-} from "pages/create-program/components/create-program-settings/create-program-settings.validators";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -13,9 +8,14 @@ import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
+import {
+  assetDescriptionShape,
+  assetTitleShape
+} from "./asset-edit.validation";
 import DescriptionField from "./fields/description-field";
 import LogoField from "./fields/logo-field";
 import TitleField from "./fields/title-field";
+import SettingsBlock from "./settings-block";
 
 const _AssetEdit: React.FC<Props> = ({
   t,
