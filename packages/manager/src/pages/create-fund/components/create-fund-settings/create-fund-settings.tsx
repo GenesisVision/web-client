@@ -92,6 +92,9 @@ class _CreateFundSettings extends React.PureComponent<
             {t("manager.create-fund-page.settings.asset-selection")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
+            <div className="create-asset-settings__text">
+              {t("manager.create-fund-page.settings.fields.mandatory-assets")}
+            </div>
             <GVFormikField
               name={CREATE_FUND_FIELDS.assets}
               component={ReallocateField}
