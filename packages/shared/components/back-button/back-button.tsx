@@ -1,8 +1,7 @@
 import "./back-button.scss";
 
-import { CallHistoryMethodAction, goBack, push } from "connected-react-router";
+import { goBack, push } from "connected-react-router";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -10,32 +9,21 @@ import {
   bindActionCreators,
   compose
 } from "redux";
-import GVButton from "shared/components/gv-button";
 import { RootState } from "shared/reducers/root-reducer";
-import { ActionType } from "shared/utils/types";
 
-import { updateCurrency } from "../../modules/currency-select/services/currency-select.service";
+import BackButtonBody from "./back-button-body";
 
-export const _BackButton: React.FC<
-  StateProps & WithTranslation & DispatchProps
-> = ({ t, service, backPath, prevPath }) => {
+export const _BackButton: React.FC<StateProps & DispatchProps> = ({
+  service,
+  backPath,
+  prevPath
+}) => {
   if (!backPath) return null;
-
   return (
-    <div className="back-button">
-      <GVButton
-        variant="text"
-        onClick={prevPath ? () => service.push(prevPath) : service.goBack}
-        color="secondary"
-        className="back-button__container"
-      >
-        <>
-          <div className="back-button__back-arrow">&larr;</div>
-          <div className="back-button__back">{t("buttons.back")}</div>
-        </>
-      </GVButton>
-      <div className="back-button__path">{backPath}</div>
-    </div>
+    <BackButtonBody
+      onClick={prevPath ? () => service.push(prevPath) : service.goBack}
+      backPath={backPath}
+    />
   );
 };
 
@@ -52,7 +40,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 const BackButton = compose<React.FC>(
-  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
