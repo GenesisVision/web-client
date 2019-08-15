@@ -103,9 +103,9 @@ const AboutForm = compose<React.ComponentType<IAboutFormOwnProps>>(
   ),
   withFormik<IAboutFormOwnProps, IAboutFormValues>({
     displayName: "about-manager",
-    mapPropsToValues: props => ({
-      [FIELDS.userName]: props.userName || "",
-      [FIELDS.about]: props.about || ""
+    mapPropsToValues: ({ userName = "", about = "" }) => ({
+      [FIELDS.userName]: userName,
+      [FIELDS.about]: about
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
