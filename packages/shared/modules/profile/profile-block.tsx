@@ -38,7 +38,7 @@ const _ProfileBlock: React.FC<Props> = ({
         <span className="profile__stick" />
       </td>
       <td className="profile__center" />
-      <td className="profile__right">{content}</td>
+      {content && <td className="profile__right">{content}</td>}
     </tr>
   </>
 );
