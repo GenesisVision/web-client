@@ -56,8 +56,8 @@ const _ProfileLayout: React.FC<Props> = ({
             />
           ))}
         </GVTabs>
-        {children}
       </div>
+      {children}
     </Page>
   );
 };
