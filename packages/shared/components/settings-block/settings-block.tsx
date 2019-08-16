@@ -12,14 +12,17 @@ const _SettingsBlock: React.FC<Props> = ({
   verificationStatus
 }) => (
   <section className="asset-settings__block">
-    {label && <h3>{label}</h3>}
-    {checked ||
-      (!!verificationStatus && (
-        <VerificationStatus
-          checked={checked}
-          verificationStatus={verificationStatus}
-        />
-      ))}
+    <div className="asset-settings__block-title">
+      {label && <h3>{label}</h3>}
+      <div className="asset-settings__block-status">
+        {(checked || !!verificationStatus) && (
+          <VerificationStatus
+            checked={checked}
+            verificationStatus={verificationStatus}
+          />
+        )}
+      </div>
+    </div>
     <div className="asset-settings__block-wrapper">{content}</div>
   </section>
 );
