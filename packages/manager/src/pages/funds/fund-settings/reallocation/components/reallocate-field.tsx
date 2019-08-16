@@ -114,12 +114,8 @@ const _ReallocateField: React.FC<Props> = ({
 
   return (
     <>
-      {error !== undefined && touched && (
-        <div className="form-error reallocate-container__form-error">
-          {error}
-        </div>
-      )}
       <CreateFundSettingsAssetsComponent
+        error={error}
         assets={stateAssets.filter(item => item.percent > 0)}
         remainder={remainder}
         removeHandle={handleRemove}
