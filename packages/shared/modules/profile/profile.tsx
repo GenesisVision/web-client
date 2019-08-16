@@ -8,12 +8,12 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import ProfileImageContainer from "shared/components/profile/settings/profile-image/profile-image-container";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import { ROLE } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import PublicInfo from "shared/modules/public-info/public-info";
 
-import SettingsBlock from "../asset-settings/settings-block";
 import { ProfileField } from "./profile-personal";
 
 const _Profile: React.FC<Props> = ({ t, info, role }) => (

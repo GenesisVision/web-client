@@ -1,5 +1,8 @@
 import i18next from "i18next";
-import { signalSuccessFeeShape, signalVolumeFeeShape } from "shared/modules/asset-settings/asset-edit.validation";
+import {
+  signalSuccessFeeShape,
+  signalVolumeFeeShape
+} from "modules/asset-settings/asset-edit.validation";
 import { object } from "yup";
 
 export const SignalValidationSchema = ({

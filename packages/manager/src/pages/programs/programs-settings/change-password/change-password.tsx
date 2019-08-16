@@ -2,9 +2,9 @@ import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useIsOpen from "shared/hooks/is-open.hook";
-import SettingsBlock from "shared/modules/asset-settings/settings-block";
 
 import ChangePasswordTradingAccountPopup from "./change-password-trading-account-popup";
 

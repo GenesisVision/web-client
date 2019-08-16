@@ -7,8 +7,8 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import SettingsBlock from "shared/modules/asset-settings/settings-block";
 import { SetSubmittingType } from "shared/utils/types";
 
 const _SignalingEdit: React.FC<Props> = ({

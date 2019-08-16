@@ -1,13 +1,13 @@
 import "./program-settings.scss";
 
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
+import AssetEdit from "modules/asset-settings/asset-edit";
+import PeriodAndClosing from "modules/asset-settings/period-and-closing";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import AssetEdit from "shared/modules/asset-settings/asset-edit";
-import PeriodAndClosing from "shared/modules/asset-settings/period-and-closing";
 import { SetSubmittingType } from "shared/utils/types";
 
 import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";

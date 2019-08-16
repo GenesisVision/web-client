@@ -1,15 +1,15 @@
+import {
+  assetDescriptionShape,
+  assetTitleShape,
+  signalSuccessFeeShape,
+  signalVolumeFeeShape
+} from "modules/asset-settings/asset-edit.validation";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { boolean, mixed, number, object, string } from "yup";
 
 import { ICreateProgramSettingsProps } from "./create-program-settings";
-import {
-  assetDescriptionShape,
-  assetTitleShape,
-  signalSuccessFeeShape,
-  signalVolumeFeeShape
-} from "shared/modules/asset-settings/asset-edit.validation";
 
 const createProgramSettingsValidationSchema = (
   props: ICreateProgramSettingsProps
