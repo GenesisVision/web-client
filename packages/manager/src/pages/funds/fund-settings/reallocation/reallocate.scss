@@ -4,7 +4,8 @@
 
 .reallocate-container {
   &__form-error {
-    margin-bottom: $padding-xsmall;
+    padding-bottom: $padding-xsmall;
+    @include font-size($font-size-small);
   }
 
   &__header {
