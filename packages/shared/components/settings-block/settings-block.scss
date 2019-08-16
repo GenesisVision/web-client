@@ -24,6 +24,17 @@
     margin-left: 0;
   }
 }
+
+.asset-settings__block-title {
+  display: flex;
+  align-items: center;
+}
+
+.asset-settings__block-status {
+  padding-bottom: $padding-xsmall;
+  padding-left: $padding-xsmall;
+}
+
 .asset-settings__block-wrapper {
   @include adaptive-margin(bottom, $padding-upper-medium);
   width: 100%;
