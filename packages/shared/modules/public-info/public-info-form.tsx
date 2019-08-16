@@ -94,6 +94,7 @@ const PublicInfoForm = compose<React.ComponentType<IAboutFormOwnProps>>(
     mapDispatchToProps
   ),
   withFormik<IAboutFormOwnProps, IAboutFormValues>({
+    enableReinitialize: true,
     displayName: "about-manager",
     mapPropsToValues: ({ userName = "", about = "" }) => ({
       [FIELDS.userName]: userName,
