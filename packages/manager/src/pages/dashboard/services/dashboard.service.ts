@@ -1,6 +1,9 @@
+import { ManagerRootState } from "reducers";
 import { Dispatch } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import dashboardFundsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds.selector";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { composeRequestFilters } from "shared/components/table/services/table.service";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
@@ -8,6 +11,7 @@ import authService from "shared/services/auth-service";
 import { MiddlewareDispatch, TGetAuthState } from "shared/utils/types";
 
 import * as actions from "../actions/dashboard.actions";
+import { getDashboardFunds } from "./dashboard-funds.service";
 
 export const getPortfolioEvents = () => (dispatch: Dispatch) =>
   dispatch(
@@ -77,7 +81,7 @@ export const composeAssetChart = (assetType: ASSETS_TYPES) => (
 export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
   dispatch(actions.setPeriodAction(period));
 
-export const fetchAssetsCount = (): Promise<{
+export const getAssetsCount = (): Promise<{
   programsCount: number;
   fundsCount: number;
 }> => {
@@ -90,4 +94,18 @@ export const fetchAssetsCount = (): Promise<{
     programsCount: programsData.total,
     fundsCount: fundsData.total
   }));
+};
+
+export const getAssetsCounts = () => (
+  dispatch: Dispatch,
+  getState: () => ManagerRootState
+) => {
+  const commonFiltering = { take: 0 };
+
+  const { filters, defaults } = dashboardFundsTableSelector(getState());
+  const fundsCountFilters = composeRequestFilters({
+    ...filters,
+    defaultFilters: defaults.defaultFilters
+  });
+  dispatch(getDashboardFunds({ ...fundsCountFilters, ...commonFiltering }));
 };
