@@ -1576,6 +1576,7 @@
       },
       "broker": {
         "title": "Broker",
+        "text-warning": "Warning: all signal program subscriptions will be cancelled when switching from GM to Huobi (we do not currently offer copy trading on Huobi)",
         "text-change": "A broker change in the program will occur automatically within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page.",
         "text-cancel": "Your broker will be changed from {{brokerFrom}} to {{brokerTo}} within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page.",
         "text-cancel-confirm": "Do you really want to cancel the change from {{brokerFrom}} to {{brokerTo}}?",
@@ -1880,6 +1881,7 @@
         "fees-settings": "Fees settings",
         "deposit-details": "Deposit details",
         "fields": {
+          "mandatory-assets": "There is a mandatory 1% GVT allocation per Fund",
           "asset-description": "Total share of all assets should be equal to 100%",
           "name": "Name",
           "name-requirements": "Requirement from 4 to 20 symbols",

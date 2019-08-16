@@ -152,7 +152,9 @@ export const composeSelectedAssets = (
 ): PlatformAssetFull[] =>
   assets.map(asset => {
     const targetAsset = assetsPercents.find(x => x.id === asset.id);
-    const percent = targetAsset ? targetAsset.percent : 0;
+    const percent = targetAsset
+      ? targetAsset.percent
+      : asset.mandatoryFundPercent;
     return { ...asset, percent };
   });
 

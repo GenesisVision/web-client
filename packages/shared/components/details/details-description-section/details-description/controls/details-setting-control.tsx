@@ -22,10 +22,7 @@ const _DetailsSettingControl: React.FC<WithTranslation & Props> = ({
   return (
     <DetailsDescriptionControl
       tag={Link}
-      to={{
-        pathname: url,
-        state: `/ ${title}`
-      }}
+      to={url}
       className="details-description-control--button"
       text={text}
     >
