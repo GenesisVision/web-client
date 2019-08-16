@@ -10,7 +10,9 @@ import { MiddlewareDispatch } from "shared/utils/types";
 
 import Profile from "./profile";
 
-const _ProfileContainer: React.FC<Props> = ({ service }) => {
+const _ProfileContainer: React.FC<Props> = ({
+  service: { alertMessageActionsSuccess }
+}) => {
   const [data, setData] = useState<ProfileFullViewModel | undefined>(undefined);
   const fetch = () =>
     profileApi.v10ProfileGet(authService.getAuthArg()).then(setData);
@@ -18,7 +20,7 @@ const _ProfileContainer: React.FC<Props> = ({ service }) => {
     fetch();
   }, []);
   const success = (text: string) => {
-    service.alertMessageActionsSuccess(text);
+    alertMessageActionsSuccess(text);
     fetch();
   };
   /*const handleEdit = useCallback(
@@ -40,7 +42,13 @@ const _ProfileContainer: React.FC<Props> = ({ service }) => {
     },
     []
   );*/
-  return <Profile condition={!!data} info={data!} />;
+  return (
+    <Profile
+      condition={!!data}
+      info={data!}
+      notifySuccess={alertMessageActionsSuccess}
+    />
+  );
 };
 
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
