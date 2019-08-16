@@ -96,4 +96,19 @@
       }
     }
   }
+
+  &__logo-title {
+    margin-bottom: 8px;
+    font-size: $font-size-common;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+  }
+
+  &__logo-notice {
+    font-size: 11px;
+    color: $label-color;
+    letter-spacing: 0.2px;
+    width: 210px;
+    line-height: 1.4;
+  }
 }
