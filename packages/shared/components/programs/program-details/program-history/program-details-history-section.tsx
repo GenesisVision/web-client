@@ -38,6 +38,7 @@ const EVENTS_FILTERING = {
 };
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  showCommissionRebateSometime,
   programId,
   fetchHistoryCounts,
   showSwaps,
@@ -55,7 +56,6 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   isSignalProgram,
   isOwnProgram,
   role,
-  isGMProgram,
   title
 }) => {
   const [counts, setCounts] = useState<HistoryCountsType>({});
@@ -142,9 +142,9 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
         )}
         {tab === TABS.FINANCIAL_STATISTIC && (
           <ProgramFinancialStatistic
+            showCommissionRebateSometime={showCommissionRebateSometime}
             id={programId}
             currency={programCurrency}
-            isGMProgram={isGMProgram}
             fetchFinancialStatistic={fetchPeriodHistory}
             title={title}
           />
@@ -177,6 +177,7 @@ enum TABS {
 interface Props extends OwnProps, StateProps, WithTranslation, WithRoleProps {}
 
 interface OwnProps {
+  showCommissionRebateSometime: boolean;
   isSignalProgram: boolean;
   showSwaps: boolean;
   showTickets: boolean;
@@ -200,7 +201,6 @@ interface OwnProps {
   isInvested: boolean;
   eventTypeFilterValues: SelectFilterValue[];
   isOwnProgram: boolean;
-  isGMProgram: boolean;
   title: string;
 }
 
