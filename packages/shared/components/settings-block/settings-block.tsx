@@ -1,3 +1,5 @@
+import "./settings-block.scss";
+
 import React from "react";
 import VerificationStatus, {
   IStatusProps
