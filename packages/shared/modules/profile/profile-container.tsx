@@ -23,30 +23,12 @@ const _ProfileContainer: React.FC<Props> = ({
     alertMessageActionsSuccess(text);
     fetch();
   };
-  /*const handleEdit = useCallback(
-    (values: ProfileFormValues, setSubmitting: SetSubmittingType) => {
-      const model = pickBy(
-        values,
-        str => !!str
-      ) as UpdatePersonalDetailViewModel;
-      profileApi
-        .v10ProfilePersonalUpdatePost(authService.getAuthArg(), {
-          model
-        })
-        .then(() => {
-          success(t("profile-page.success-edit"));
-        })
-        .catch(() => {
-          setSubmitting(false);
-        });
-    },
-    []
-  );*/
   return (
     <Profile
       condition={!!data}
       info={data!}
       notifySuccess={alertMessageActionsSuccess}
+      onSuccessEdit={success}
     />
   );
 };
