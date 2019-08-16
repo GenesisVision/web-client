@@ -1,6 +1,5 @@
 import "shared/components/details/details.scss";
-
-import "./asset-settings.scss";
+import "shared/modules/asset-settings/asset-settings.scss";
 
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";

@@ -1,15 +1,13 @@
 import "./profile-image.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
+import LogoField from "manager-web-portal/src/modules/asset-settings/fields/logo-field";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import InputImage, {
-  IImageValue
-} from "shared/components/form/input-image/input-image";
+import { IImageValue } from "shared/components/form/input-image/input-image";
 import imageValidationSchema from "shared/components/form/input-image/input-image.validation";
 import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
 import UserIcon from "shared/media/user-avatar.svg";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
@@ -23,29 +21,8 @@ const _ProfileImage: React.FC<InjectedFormikProps<Props, FormValues>> = ({
 }) => (
   <form onSubmit={handleSubmit}>
     <div className="profile-image">
-      <h3 className="profile-image__title">
-        {t("profile-page.settings.profile-image")}
-      </h3>
-
-      <div className="profile-image__requirements">
-        {t("profile-page.settings.image-requirements")}
-      </div>
-
-      <GVFormikField
-        name={FIELDS.logo}
-        component={InputImage}
-        src={avatar}
-        className="profile-image__input-image"
-        defaultImage={UserIcon}
-      />
-
-      <GVButton
-        type="submit"
-        color="primary"
-        variant="outlined"
-        className="profile-image__submit-btn"
-        disabled={isSubmitting || !isValid}
-      >
+      <LogoField name={FIELDS.logo} defaultImage={UserIcon} />
+      <GVButton type="submit" disabled={isSubmitting || !isValid}>
         {t("profile-page.settings.save-photo")}
       </GVButton>
     </div>

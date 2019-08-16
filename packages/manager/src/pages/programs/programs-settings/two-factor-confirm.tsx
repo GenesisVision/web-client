@@ -1,4 +1,3 @@
-import SettingsBlock from "modules/asset-settings/settings-block";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -11,6 +10,7 @@ import {
 } from "redux";
 import GVButton from "shared/components/gv-button";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useIsOpen from "shared/hooks/is-open.hook";
 

@@ -1,11 +1,11 @@
 import { FormikProps, withFormik } from "formik";
 import InvestmentLimitField from "modules/asset-settings/fields/investment-limit-field";
-import SettingsBlock from "modules/asset-settings/settings-block";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import { validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import { boolean, mixed, number, object } from "yup";

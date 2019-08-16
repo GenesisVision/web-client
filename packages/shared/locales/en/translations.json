@@ -831,6 +831,7 @@
     "not-verified": "Not verified",
     "phone-number": "Phone number",
     "email": "Email address",
+    "public-info": "Public info",
     "personal-info": "Personal info",
     "forename": "Forename",
     "family-name": "Family name",
@@ -841,6 +842,7 @@
     "city": "City",
     "address": "Address",
     "index": "Index",
+    "success-copy": "Id copy is successful",
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {

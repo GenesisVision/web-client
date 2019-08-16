@@ -4,7 +4,7 @@ import ProfileContainer from "shared/modules/profile/profile-container";
 
 const _ProfileEditPage: React.FC = () => (
   <ProfileLayout route="details">
-    <ProfileContainer editable />
+    <ProfileContainer />
   </ProfileLayout>
 );
 

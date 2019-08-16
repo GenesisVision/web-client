@@ -1,4 +1,4 @@
-import "./about.scss";
+import "./public-info.scss";
 
 import { goBack } from "connected-react-router";
 import { FormikProps, withFormik } from "formik";
@@ -17,60 +17,39 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { SetSubmittingType } from "shared/utils/types";
 
-const _AboutForm: React.FC<Props> = ({
+const _PublicInfoForm: React.FC<Props> = ({
   t,
   handleSubmit,
   errorMessage,
   isValid,
   dirty,
-  isSubmitting,
-  service
+  isSubmitting
 }) => (
   <form id="about-manager" onSubmit={handleSubmit} className="about">
-    <table className={"profile"}>
-      <tbody>
-        <tr className="profile__content">
-          <td className="profile__left" />
-          <td className="profile__center" />
-          <td className="profile__right">
-            <div>
-              <div className="profile__row">
-                <GVFormikField
-                  label={t("profile-page.login")}
-                  component={GVTextField}
-                  name={FIELDS.userName}
-                  autoFocus
-                />
-              </div>
-              <div className="profile__row">
-                <GVFormikField
-                  label={t("profile-page.about")}
-                  component={GVTextField}
-                  type="textarea"
-                  name={FIELDS.about}
-                />
-              </div>
-              <div className="form-error">{errorMessage}</div>
-            </div>
-            <div className="profile__row">
-              <GVButton
-                type="submit"
-                disabled={isSubmitting || !isValid || !dirty}
-              >
-                {t("buttons.save")}
-              </GVButton>
-              <GVButton
-                color="secondary"
-                variant="outlined"
-                onClick={service.goBack}
-              >
-                {t("buttons.cancel")}
-              </GVButton>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <div className="profile__row">
+        <GVFormikField
+          label={t("profile-page.login")}
+          component={GVTextField}
+          name={FIELDS.userName}
+          autoFocus
+        />
+      </div>
+      <div className="profile__row">
+        <GVFormikField
+          label={t("profile-page.about")}
+          component={GVTextField}
+          type="textarea"
+          name={FIELDS.about}
+        />
+      </div>
+      <div className="form-error">{errorMessage}</div>
+    </div>
+    <div className="profile__row">
+      <GVButton type="submit" disabled={isSubmitting || !isValid || !dirty}>
+        {t("buttons.save")}
+      </GVButton>
+    </div>
   </form>
 );
 
@@ -108,22 +87,23 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-const AboutForm = compose<React.ComponentType<IAboutFormOwnProps>>(
+const PublicInfoForm = compose<React.ComponentType<IAboutFormOwnProps>>(
   translate(),
   connect(
     null,
     mapDispatchToProps
   ),
   withFormik<IAboutFormOwnProps, IAboutFormValues>({
+    enableReinitialize: true,
     displayName: "about-manager",
-    mapPropsToValues: props => ({
-      [FIELDS.userName]: props.userName || "",
-      [FIELDS.about]: props.about || ""
+    mapPropsToValues: ({ userName = "", about = "" }) => ({
+      [FIELDS.userName]: userName,
+      [FIELDS.about]: about
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
   }),
   React.memo
-)(_AboutForm);
-export default AboutForm;
+)(_PublicInfoForm);
+export default PublicInfoForm;

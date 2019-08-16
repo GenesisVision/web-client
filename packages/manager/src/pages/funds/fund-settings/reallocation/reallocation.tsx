@@ -4,11 +4,11 @@ import {
   FundAssetPartWithIcon,
   PlatformAsset
 } from "gv-api-web";
-import SettingsBlock from "modules/asset-settings/settings-block";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useErrorMessage from "shared/hooks/error-message.hook";
 import { MiddlewareDispatch } from "shared/utils/types";

@@ -1,28 +1,26 @@
 import React, { useCallback } from "react";
-import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
+import { useTranslation } from "react-i18next";
 import useErrorMessage from "shared/hooks/error-message.hook";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
-import history from "shared/utils/history";
-import { SetSubmittingType } from "shared/utils/types";
 
-import AboutForm, { IAboutFormValues } from "./about-form";
+import PublicInfoForm, { IAboutFormValues } from "./public-info-form";
 
-const _About: React.FC<Props> = ({ userName, about }) => {
+const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
+  const [t] = useTranslation();
   const { errorMessage, setErrorMessage } = useErrorMessage();
   const handleSubmit = useCallback(
-    (model: IAboutFormValues, setSubmitting: SetSubmittingType) =>
+    (model: IAboutFormValues) =>
       profileApi
         .v10ProfileUpdatePost(authService.getAuthArg(), {
           model
         })
-        .then(() => history.push(PROFILE_ROUTE))
-        .catch(setErrorMessage)
-        .finally(() => setSubmitting(false)),
+        .then(() => onSuccessEdit(t("profile-page.success-edit")))
+        .catch(setErrorMessage),
     []
   );
   return (
-    <AboutForm
+    <PublicInfoForm
       userName={userName}
       about={about}
       onSubmit={handleSubmit}
@@ -32,9 +30,10 @@ const _About: React.FC<Props> = ({ userName, about }) => {
 };
 
 interface Props {
+  onSuccessEdit: (text: string) => void;
   userName: string;
   about: string;
 }
 
-const About = React.memo(_About);
-export default About;
+const PublicInfo = React.memo(_PublicInfo);
+export default PublicInfo;
