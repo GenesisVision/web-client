@@ -66,42 +66,44 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
           {t(`program-details-page.history.period-history.${column.name}`)}
         </span>
       )}
-      renderBodyRow={period => {
-        return (
-          <TableRow stripy>
-            <TableCell className="details-trades__cell--period">
-              {period.number}
-            </TableCell>
-            <TableCell>{moment(new Date(period.dateFrom)).format()}</TableCell>
-            <TableCell>{moment(new Date(period.dateTo)).format()}</TableCell>
-            <TableCell>
+      renderBodyRow={period => (
+        <TableRow stripy>
+          <TableCell className="details-trades__cell--period">
+            {period.number}
+          </TableCell>
+          <TableCell>
+            {moment(new Date(period.dateFrom)).format("YYYY-MM-DD")}
+          </TableCell>
+          <TableCell>
+            {moment.duration(period.periodLength).humanize()}
+          </TableCell>
+          <TableCell>
+            <NumberFormat
+              value={formatCurrencyValue(period.balance, currency)}
+              displayType="text"
+              thousandSeparator=" "
+              suffix={` ${currency}`}
+            />
+          </TableCell>
+          <TableCell>
+            <Profitability
+              value={period.profit}
+              prefix={PROFITABILITY_PREFIX.SIGN}
+            >
               <NumberFormat
-                value={formatCurrencyValue(period.balance, currency)}
-                displayType="text"
+                value={formatCurrencyValue(period.profit, currency)}
                 thousandSeparator=" "
+                displayType="text"
+                allowNegative={false}
                 suffix={` ${currency}`}
               />
-            </TableCell>
-            <TableCell>
-              <Profitability
-                value={period.profit}
-                prefix={PROFITABILITY_PREFIX.SIGN}
-              >
-                <NumberFormat
-                  value={formatCurrencyValue(period.profit, currency)}
-                  thousandSeparator=" "
-                  displayType="text"
-                  allowNegative={false}
-                  suffix={` ${currency}`}
-                />
-              </Profitability>
-            </TableCell>
-            <TableCell>
-              <NumberFormat value={period.investors} displayType="text" />
-            </TableCell>
-          </TableRow>
-        );
-      }}
+            </Profitability>
+          </TableCell>
+          <TableCell>
+            <NumberFormat value={period.investors} displayType="text" />
+          </TableCell>
+        </TableRow>
+      )}
     />
   );
 };
