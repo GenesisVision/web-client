@@ -841,6 +841,7 @@
     "city": "City",
     "address": "Address",
     "index": "Index",
+    "success-copy": "Id copy is successful",
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {
