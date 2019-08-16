@@ -17,7 +17,13 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import PublicInfo from "shared/modules/public-info/public-info";
 
-const _Profile: React.FC<Props> = ({ t, info, role, notifySuccess }) => {
+const _Profile: React.FC<Props> = ({
+  t,
+  info,
+  role,
+  notifySuccess,
+  onSuccessEdit
+}) => {
   const onCopy = () => {
     copy(info.id);
     notifySuccess(t("profile-page.copy-success"));
@@ -28,7 +34,13 @@ const _Profile: React.FC<Props> = ({ t, info, role, notifySuccess }) => {
         <>
           <SettingsBlock
             label={t("profile-page.public-info")}
-            content={<PublicInfo about={info.about} userName={info.userName} />}
+            content={
+              <PublicInfo
+                about={info.about}
+                userName={info.userName}
+                onSuccessEdit={onSuccessEdit}
+              />
+            }
           />
           <SettingsBlock
             label={t("profile-page.id")}
@@ -67,6 +79,7 @@ interface Props extends WithTranslation, IProfileOwnProps, WithRoleProps {}
 export interface IProfileOwnProps {
   info: ProfileFullViewModel;
   notifySuccess: (val: string) => void;
+  onSuccessEdit: (text: string) => void;
 }
 
 const Profile = compose<
