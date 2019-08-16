@@ -27,14 +27,14 @@ import {
 import DownloadButtonToolbarAuth from "../download-button-toolbar/download-button-toolbar-auth";
 
 const _ProgramFinancialStatistic: React.FC<Props> = ({
+  showCommissionRebateSometime,
   t,
   fetchFinancialStatistic,
   currency,
   id,
-  isGMProgram,
   title
 }) => {
-  const columns = isGMProgram
+  const columns = showCommissionRebateSometime
     ? PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
     : PROGRAM_FINANCIAL_STATISTIC_COLUMNS;
 
@@ -152,7 +152,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
                 </Profitability>
               )}
             </TableCell>
-            {isGMProgram && (
+            {showCommissionRebateSometime && (
               <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
                 <NumberFormat
                   value={formatCurrencyValue(commissionRebate, currency)}
@@ -177,9 +177,9 @@ export default ProgramFinancialStatistic;
 
 interface Props extends OwnProps, WithTranslation {}
 interface OwnProps {
+  showCommissionRebateSometime: boolean;
   id: string;
   title: string;
-  isGMProgram?: boolean;
   currency: CurrencyEnum;
   fetchFinancialStatistic: (
     programId: string,
