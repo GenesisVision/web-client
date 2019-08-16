@@ -67,6 +67,7 @@ const _ProgramSettings: React.FC<Props> = ({
       />
       <CancelChangeBroker
         condition={!!details.personalProgramDetails.migration}
+        isSignalProgram={details.isSignalProgram}
         brokerFrom={
           brokersInfo.brokers.find(
             broker =>
@@ -86,6 +87,7 @@ const _ProgramSettings: React.FC<Props> = ({
           !!!details.personalProgramDetails.migration &&
           brokersInfo.brokers.length > 1
         }
+        isSignalProgram={details.isSignalProgram}
         onSubmit={changeBroker}
         id={details.id}
         brokers={brokersInfo.brokers}
