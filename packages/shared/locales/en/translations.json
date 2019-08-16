@@ -786,7 +786,7 @@
       "period-history": {
         "period": "Period",
         "date-start": "Date start",
-        "date-finish": "Date finish",
+        "period-length": "Period length",
         "balance": "Program balance",
         "profit": "Profit",
         "investors": "Investors"
