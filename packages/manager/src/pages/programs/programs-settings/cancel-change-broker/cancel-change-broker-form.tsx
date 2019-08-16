@@ -8,9 +8,11 @@ import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import useIsOpen from "shared/hooks/is-open.hook";
 
+import { HuobiWarning } from "../change-broker/change-broker-form";
 import ConfirmCancelChangeBroker from "./confirm-cancel-change-broker";
 
 const _CancelChangeBrokerForm: React.FC<Props> = ({
+  isSignalProgram,
   onSubmit,
   t,
   brokerFrom,
@@ -78,6 +80,11 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
           </StatisticItem>
         </div>
       </div>
+      <HuobiWarning
+        from={brokerFrom.name}
+        to={brokerTo.name}
+        isSignalProgram={isSignalProgram}
+      />
       <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
         {t("manager.program-settings.broker.text-cancel", {
           brokerFrom: brokerFrom.name,
@@ -105,6 +112,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
 interface Props extends CancelChangeBrokerFormOwnProps, WithTranslation {}
 
 export interface CancelChangeBrokerFormOwnProps {
+  isSignalProgram: boolean;
   onSubmit: () => void;
   brokerFrom: Broker;
   currentAccountTypeId: string;
