@@ -846,7 +846,8 @@
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {
-      "details": "Personal details",
+      "security": "Security",
+      "profile": "Personal details",
       "settings": "Settings",
       "verify": "Verify",
       "social-links": "Social links"
