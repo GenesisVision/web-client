@@ -14,14 +14,14 @@ const _SettingsBlock: React.FC<Props> = ({
   <section className="asset-settings__block">
     <div className="asset-settings__block-title">
       {label && <h3>{label}</h3>}
-      <div className="asset-settings__block-status">
-        {(checked || !!verificationStatus) && (
+      {(checked || !!verificationStatus) && (
+        <div className="asset-settings__block-status">
           <VerificationStatus
             checked={checked}
             verificationStatus={verificationStatus}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
     <div className="asset-settings__block-wrapper">{content}</div>
   </section>
