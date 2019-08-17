@@ -24,7 +24,6 @@ const _TwoFactor: React.FC<Props> = ({
   isPending
 }) => (
   <div className="two-factor">
-    <h3 className="two-factor__title">{t("2fa-page.title")}</h3>
     <GVTextField
       name="2fa"
       label={t("2fa-page.type")}
