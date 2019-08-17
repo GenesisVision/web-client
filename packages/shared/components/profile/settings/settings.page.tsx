@@ -5,13 +5,15 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
 import ProfileLayout from "shared/components/profile/profile-layout";
-import { PASSWORD_ROUTE } from "shared/components/profile/profile.constants";
+import {
+  PASSWORD_ROUTE,
+  SETTINGS
+} from "shared/components/profile/profile.constants";
 import LogoutButtonContainer from "shared/components/profile/settings/logout-button/logout-button-container";
-import ProfileImageContainer from "shared/components/profile/settings/profile-image/profile-image-container";
 import TwoFactorAuthContainer from "shared/modules/2fa/2fa-container";
 
 const _SettingsPage: React.FC<WithTranslation> = ({ t }) => (
-  <ProfileLayout route="settings">
+  <ProfileLayout route={SETTINGS}>
     <div className="profile-settings__content">
       <TwoFactorAuthContainer />
       <div className="profile-settings__aside-actions">
