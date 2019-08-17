@@ -95,12 +95,13 @@ const formatValueWithMin = (
 
 const humanizeDate = (date: number | string): string => {
   const duration = moment.duration(date);
-  for (const unitName in timeUnits) {
+  const thisTimeUnits = { ...timeUnits };
+  for (const unitName in thisTimeUnits) {
     const dur = duration[unitName as TUnitName]();
-    timeUnits[unitName as TUnitName] = dur;
+    thisTimeUnits[unitName as TUnitName] = dur;
     duration.subtract(moment.duration(dur, unitName as TUnitName));
   }
-  return Object.entries(timeUnits)
+  return Object.entries(thisTimeUnits)
     .map(([name, value]) => [name, Math.floor(value)])
     .filter(([name, value]) => value > 0)
     .filter((unit, i) => i < 2)
