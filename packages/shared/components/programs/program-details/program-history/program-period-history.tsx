@@ -15,7 +15,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import { IDataModel } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import filesService from "shared/services/file-service";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue, humanizeDate } from "shared/utils/formatter";
 
 import {
   PROGRAM_PERIOD_HISTORY,
@@ -75,7 +75,8 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
             {moment(new Date(period.dateFrom)).format("YYYY-MM-DD")}
           </TableCell>
           <TableCell>
-            {moment.duration(period.periodLength).humanize()}
+            {humanizeDate(period.periodLength)}
+            {/*{moment.duration(period.periodLength).humanize()}*/}
           </TableCell>
           <TableCell>
             <NumberFormat
