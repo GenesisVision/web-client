@@ -1,4 +1,9 @@
-import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
+import moment from "moment";
+import {
+  DEFAULT_DECIMAL_SCALE,
+  TUnitName,
+  timeUnits
+} from "shared/constants/constants";
 
 import { CURRENCY_FRACTIONS, checkCurrencyValue } from "./currency-converter";
 
@@ -88,7 +93,22 @@ const formatValueWithMin = (
     ? `<0.${"0".repeat(decimalScale - 1)}1`
     : formatValue(value, decimalScale);
 
+const humanizeDate = (date: number | string): string => {
+  const duration = moment.duration(date);
+  for (const unitName in timeUnits) {
+    const dur = duration[unitName as TUnitName]();
+    timeUnits[unitName as TUnitName] = dur;
+    duration.subtract(moment.duration(dur, unitName as TUnitName));
+  }
+  return Object.entries(timeUnits)
+    .map(([name, value]) => [name, Math.floor(value)])
+    .filter(([name, value]) => value > 0)
+    .filter((unit, i) => i < 2)
+    .reduce((prev, [name, value]) => `${prev} ${value} ${name} `, "");
+};
+
 export {
+  humanizeDate,
   formatValueWithMin,
   reverseString,
   addOne,
