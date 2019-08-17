@@ -863,6 +863,7 @@
       }
     },
     "settings": {
+      "platform-currency": "Platform currency",
       "title": "Settings",
       "profile-image": "Profile image",
       "image-requirements": "Image resolution should be at least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
