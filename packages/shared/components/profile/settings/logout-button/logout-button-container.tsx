@@ -17,21 +17,14 @@ const _LogoutButtonContainer: React.FC<Props> = ({ t, service }) => {
   const [isPending, setPending, setNotPending] = useIsOpen();
   const handleSubmit = useCallback(() => {
     setPending();
-    service
-      .logoutFromDevices()
-      .then(setNotPending)
-      .catch(setNotPending);
+    service.logoutFromDevices().finally(setNotPending);
   }, []);
   return (
-    <GVButton
-      variant="text"
-      onClick={handleSubmit}
-      color="secondary"
-      disabled={isPending}
-      className="profile-settings__logout-devices"
-    >
-      {t("profile-page.settings.logout-from-another-devices")}
-    </GVButton>
+    <div className="logout-container">
+      <GVButton onClick={handleSubmit} disabled={isPending}>
+        {t("profile-page.settings.logout-from-another-devices")}
+      </GVButton>
+    </div>
   );
 };
 
