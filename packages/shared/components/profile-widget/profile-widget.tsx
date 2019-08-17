@@ -16,6 +16,7 @@ import Popover, {
 } from "shared/components/popover/popover";
 import {
   PROFILE_ROUTE,
+  SECURITY_ROUTE,
   SETTINGS_ROUTE
 } from "shared/components/profile/profile.constants";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
@@ -59,12 +60,20 @@ const _ProfileWidget: React.FC<Props> = ({
                 {t("profile-widget.settings")}
               </Link>
             </div>
+            <div className="profile-menu__item profile-menu__item--settings">
+              <Link to={SECURITY_ROUTE} onClick={clearAnchor}>
+                <div style={{ opacity: 0 }}>
+                  <SettingsIcon />
+                </div>
+                {t("profile-widget.security")}
+              </Link>
+            </div>
             <div className="profile-menu__item profile-menu__item--logout">
               <GVButton variant="text" onClick={logout}>
-                <React.Fragment>
+                <>
                   <LogoutIcon />
                   {t("profile-widget.logout")}
-                </React.Fragment>
+                </>
               </GVButton>
             </div>
           </div>
