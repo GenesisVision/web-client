@@ -1,18 +1,21 @@
 import "./password-change.scss";
 
 import { ChangePasswordViewModel } from "gv-api-web";
-import * as React from "react";
-import { useCallback } from "react";
-import { withTranslation as translate } from "react-i18next";
+import React, { useCallback } from "react";
+import { withTranslation as translate, useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import GVButton from "shared/components/gv-button";
 import useErrorMessage from "shared/hooks/error-message.hook";
-import { MiddlewareDispatch, ResponseError } from "shared/utils/types";
+import useIsOpen from "shared/hooks/is-open.hook";
+import { MiddlewareDispatch } from "shared/utils/types";
 
 import PasswordChangeForm from "./password-change-form";
 import { changePassword } from "./service/password-change.service";
 
 const _PasswordChange: React.FC<Props> = ({ service }) => {
+  const [t] = useTranslation();
+  const [isOpen, setIsOpen] = useIsOpen();
   const {
     errorMessage,
     setErrorMessage,
@@ -27,7 +30,19 @@ const _PasswordChange: React.FC<Props> = ({ service }) => {
     []
   );
   return (
-    <PasswordChangeForm onSubmit={handleSubmit} errorMessage={errorMessage} />
+    <>
+      {!isOpen && (
+        <GVButton onClick={setIsOpen}>
+          {t("profile-page.settings.change-password")}
+        </GVButton>
+      )}
+      {isOpen && (
+        <PasswordChangeForm
+          onSubmit={handleSubmit}
+          errorMessage={errorMessage}
+        />
+      )}
+    </>
   );
 };
 
