@@ -11,19 +11,26 @@ import { RootState } from "shared/reducers/root-reducer";
 
 import {
   KYC_ROUTE,
+  PROFILE,
   PROFILE_ROUTE,
+  SECURITY,
+  SECURITY_ROUTE,
+  SETTINGS,
   SETTINGS_ROUTE,
-  SOCIAL_LINKS_ROUTE
+  SOCIAL_LINKS,
+  SOCIAL_LINKS_ROUTE,
+  VERIFY
 } from "./profile.constants";
 
 const tabs = [
-  { pathname: PROFILE_ROUTE, value: "details" },
-  { pathname: KYC_ROUTE, value: "verify" },
-  { pathname: SETTINGS_ROUTE, value: "settings" }
+  { pathname: PROFILE_ROUTE, value: PROFILE },
+  { pathname: KYC_ROUTE, value: VERIFY },
+  { pathname: SETTINGS_ROUTE, value: SETTINGS },
+  { pathname: SECURITY_ROUTE, value: SECURITY }
 ];
 
 if (ROLE_ENV === ROLE.MANAGER) {
-  tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: "social-links" });
+  tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: SOCIAL_LINKS });
 }
 
 const _ProfileLayout: React.FC<Props> = ({
