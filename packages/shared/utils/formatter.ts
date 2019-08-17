@@ -101,9 +101,16 @@ const humanizeDate = (date: number | string): string => {
     thisTimeUnits[unitName as TUnitName] = dur;
     duration.subtract(moment.duration(dur, unitName as TUnitName));
   }
-  return Object.entries(thisTimeUnits)
+  const timeUnitsWithValues = Object.entries(thisTimeUnits);
+  const timeUnitsWithValuesSliced = timeUnitsWithValues.slice(
+    timeUnitsWithValues.findIndex(([name, value]) => value > 0)
+  );
+  return timeUnitsWithValuesSliced
+    .slice(
+      0,
+      timeUnitsWithValuesSliced.findIndex(([name, value]) => value === 0)
+    )
     .map(([name, value]) => [name, Math.floor(value)])
-    .filter(([name, value]) => value > 0)
     .filter((unit, i) => i < 2)
     .reduce((prev, [name, value]) => `${prev} ${value} ${name} `, "");
 };
