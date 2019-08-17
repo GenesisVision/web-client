@@ -275,6 +275,7 @@
     }
   },
   "profile-widget": {
+    "security": "Security",
     "personal-details": "Personal Details",
     "settings": "Settings",
     "logout": "Log out"
