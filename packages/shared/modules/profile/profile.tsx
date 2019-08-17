@@ -26,7 +26,7 @@ const _Profile: React.FC<Props> = ({
 }) => {
   const onCopy = () => {
     copy(info.id);
-    notifySuccess(t("profile-page.copy-success"));
+    notifySuccess(t("profile-page.success-copy"));
   };
   return (
     <div className="asset-settings profile__container--padding-top">
