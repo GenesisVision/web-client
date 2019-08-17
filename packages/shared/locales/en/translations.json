@@ -275,6 +275,7 @@
     }
   },
   "profile-widget": {
+    "security": "Security",
     "personal-details": "Personal Details",
     "settings": "Settings",
     "logout": "Log out"
@@ -846,7 +847,8 @@
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {
-      "details": "Personal details",
+      "security": "Security",
+      "profile": "Personal details",
       "settings": "Settings",
       "verify": "Verify",
       "social-links": "Social links"
@@ -862,6 +864,7 @@
       }
     },
     "settings": {
+      "platform-currency": "Platform currency",
       "title": "Settings",
       "profile-image": "Profile image",
       "image-requirements": "Image resolution should be at least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
