@@ -14,6 +14,8 @@ import { currenciesSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
+const MAX_CHARTS = 2;
+
 const _ChartCurrencySelector: React.FC<Props> = ({ currencyValues }) => {
   const [items, setItems] = useState<any[]>([
     { name: "GVT", color: "#00BDAF", mandatory: true }
@@ -53,7 +55,9 @@ const _ChartCurrencySelector: React.FC<Props> = ({ currencyValues }) => {
           />
         </TileFilterItem>
       ))}
-      <TileFilterButton onClick={addCurrency} title={"Add"} />
+      {items.length < MAX_CHARTS && (
+        <TileFilterButton onClick={addCurrency} title={"Add"} />
+      )}
     </div>
   );
 };
