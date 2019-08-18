@@ -4,6 +4,7 @@ import NumberFormat from "react-number-format";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import ChartCurrencySelector from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
@@ -32,6 +33,7 @@ const _FundProfitChartSection: React.FC<Props> = ({
       </StatisticItem>
     </div>
     <ChartPeriod onChange={onPeriodChange} period={period} />
+    <ChartCurrencySelector />
     <div className="details-chart__profit">
       <FundProfitChart equityChart={profitChart.equityChart} />
     </div>
