@@ -1,7 +1,6 @@
 import "./chart-currency-selector.scss";
 
 import * as React from "react";
-import { useState } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { ISelectChangeEvent } from "shared/components/select/select";
@@ -16,25 +15,21 @@ import { CurrencyEnum } from "shared/utils/types";
 
 const MAX_CHARTS = 2;
 
-const _ChartCurrencySelector: React.FC<Props> = ({ currencyValues }) => {
-  const [items, setItems] = useState<any[]>([
-    { name: "GVT", color: "#00BDAF", mandatory: true }
-  ]);
-  const addCurrency = () => {
-    setItems([...items, { name: "BTC", color: "#56DEF1" }]);
-  };
-  const removeCurrency = (id: string) => {
-    setItems([...items.filter(item => item.name !== id)]);
-  };
-  const changeCurrency = (event: ISelectChangeEvent, child: JSX.Element) => {};
+const _ChartCurrencySelector: React.FC<Props> = ({
+  currencyValues,
+  chartCurrencies,
+  onAdd,
+  onRemove,
+  onChange
+}) => {
   return (
     <div className="chart-currency-selector__container">
-      {items.map(({ name, color, mandatory }) => (
+      {chartCurrencies.map(({ asset, color, mandatory, id }, i) => (
         <TileFilterItem
-          key={name}
-          id={name}
+          key={asset}
+          id={id}
           mandatory={mandatory}
-          removeTile={removeCurrency}
+          removeTile={onRemove}
         >
           <TagBubble
             color={color}
@@ -42,12 +37,17 @@ const _ChartCurrencySelector: React.FC<Props> = ({ currencyValues }) => {
               <div className="chart-currency-selector__item">
                 <TagCircle backgroundColor={color} />
                 {mandatory ? (
-                  name
+                  asset
                 ) : (
                   <CurrencySelect
-                    value={"BTC"}
-                    currencyValues={currencyValues}
-                    onChange={changeCurrency}
+                    value={asset}
+                    onChange={onChange(i)}
+                    currencyValues={currencyValues.filter(
+                      currencyValue =>
+                        !!!chartCurrencies.find(
+                          ({ asset }) => asset === currencyValue
+                        )!
+                    )}
                   />
                 )}
               </div>
@@ -55,17 +55,36 @@ const _ChartCurrencySelector: React.FC<Props> = ({ currencyValues }) => {
           />
         </TileFilterItem>
       ))}
-      {items.length < MAX_CHARTS && (
-        <TileFilterButton onClick={addCurrency} title={"Add"} />
+      {chartCurrencies.length < MAX_CHARTS && (
+        <TileFilterButton onClick={onAdd} title={"Add"} />
       )}
     </div>
   );
 };
 
+export type TChartCurrency = {
+  id: string;
+  asset: CurrencyEnum;
+  color: string;
+  mandatory?: boolean;
+};
+
 interface StateProps {
   currencyValues: CurrencyEnum[];
 }
-interface OwnProps {}
+
+export type TAddChartCurrency = () => void;
+export type TRemoveChartCurrency = (id: string) => void;
+export type TChangeChartCurrency = (
+  i: number
+) => (event: ISelectChangeEvent, child: JSX.Element) => void;
+
+interface OwnProps {
+  chartCurrencies: TChartCurrency[];
+  onAdd: TAddChartCurrency;
+  onRemove: TRemoveChartCurrency;
+  onChange: TChangeChartCurrency;
+}
 
 interface Props extends OwnProps, StateProps {}
 
