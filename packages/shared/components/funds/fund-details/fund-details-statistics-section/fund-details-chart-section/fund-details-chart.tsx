@@ -18,6 +18,7 @@ import { FundProfitChartDataType } from "../../reducers/profit-chart.reducer";
 import FundDetailsChartElements from "./fund-details-chart-elements";
 
 const _FundDetailsChart: React.FC<Props> = ({
+  selectCurrencies,
   chartCurrencies,
   addChartCurrency,
   removeChartCurrency,
@@ -32,6 +33,7 @@ const _FundDetailsChart: React.FC<Props> = ({
     <h3>{t("fund-details-page.chart.heading")}</h3>
     <FundDetailsChartElements
       condition={!!profitChart && !!balanceChart}
+      selectCurrencies={selectCurrencies}
       chartCurrencies={chartCurrencies}
       addChartCurrency={addChartCurrency}
       removeChartCurrency={removeChartCurrency}
@@ -46,6 +48,7 @@ const _FundDetailsChart: React.FC<Props> = ({
 );
 
 interface Props extends WithTranslation {
+  selectCurrencies: TChartCurrency[];
   chartCurrencies: TChartCurrency[];
   addChartCurrency: TAddChartCurrency;
   removeChartCurrency: TRemoveChartCurrency;
