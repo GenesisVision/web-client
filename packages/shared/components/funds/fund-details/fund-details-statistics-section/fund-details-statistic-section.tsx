@@ -17,6 +17,7 @@ import {
 } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import {
   currenciesSelector,
   platformCurrenciesSelector
@@ -123,22 +124,25 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-const convertToChartCurrency = ({
+const convertToChartCurrency = (defaultCurrency: CurrencyEnum) => ({
   name,
   color
 }: PlatformCurrency): TChartCurrency => ({
   name: name as CurrencyEnum,
   color,
-  mandatory: name === "GVT"
+  mandatory: name === defaultCurrency
 });
 
 const chartCurrenciesSelector = createSelector<
   RootState,
   PlatformCurrency[],
+  CurrencyEnum,
   TChartCurrency[]
 >(
   state => platformCurrenciesSelector(state),
-  data => data.map(convertToChartCurrency)
+  state => currencySelector(state),
+  (currencies, defaultCurrency) =>
+    currencies.map(convertToChartCurrency(defaultCurrency))
 );
 
 const mapStateToProps = (state: RootState): StateProps => ({
