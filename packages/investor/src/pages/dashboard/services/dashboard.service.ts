@@ -1,7 +1,7 @@
 import { InvestorRootState } from "reducers";
 import { Dispatch } from "redux";
 import dashboardFundsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds.selector";
-import { composeRequestFilters } from "shared/components/table/services/table.service";
+import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/dashboard.actions";
@@ -23,34 +23,20 @@ export interface IDashboardAssetsCounts {
   tradesCount?: number;
 }
 
-const getFundsCountFilters = (getState: () => InvestorRootState) => {
-  const { filters, defaults } = dashboardFundsTableSelector(getState());
-  const requestFilters = composeRequestFilters({
-    ...filters,
-    defaultFilters: defaults.defaultFilters
-  });
-  return requestFilters;
-};
-
-const getCopytradingCountFilters = (getState: () => InvestorRootState) => {
-  const { filters, defaults } = dashboardCopytradingTableSelector(getState());
-  const requestFilters = composeRequestFilters({
-    ...filters,
-    defaultFilters: defaults.defaultFilters
-  });
-  return requestFilters;
-};
-
 export const getAssetsCounts = () => (
   dispatch: Dispatch,
   getState: () => InvestorRootState
 ) => {
   const commonFiltering = { take: 0 };
 
-  const fundsCountFilters = getFundsCountFilters(getState);
+  const fundsCountFilters = composeRequestFiltersByTableState(
+    dashboardFundsTableSelector(getState())
+  );
   dispatch(getDashboardFunds({ ...fundsCountFilters, ...commonFiltering }));
 
-  const copytradingCountFilters = getCopytradingCountFilters(getState);
+  const copytradingCountFilters = composeRequestFiltersByTableState(
+    dashboardCopytradingTableSelector(getState())
+  );
   dispatch(
     getDashboardCopytrading({ ...copytradingCountFilters, ...commonFiltering })
   );

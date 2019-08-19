@@ -14,7 +14,6 @@ import Surface from "shared/components/surface/surface";
 import useTab from "shared/hooks/tab.hook";
 
 import {
-  fetchCopytradingTradesCount,
   getCopytradingTradesCount,
   ICopytradingTradesCounts
 } from "../services/copytrading-tables.service";

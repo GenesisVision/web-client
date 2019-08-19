@@ -1,9 +1,6 @@
 import { InvestorRootState } from "reducers";
 import { Dispatch } from "redux";
-import {
-  composeRequestFilters,
-  composeRequestFiltersByTableState
-} from "shared/components/table/services/table.service";
+import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import signalApi from "shared/services/api-client/signal-api";
 import authService from "shared/services/auth-service";
@@ -49,21 +46,6 @@ export interface ICopytradingTradesCounts {
   openTradesCount?: number;
   historyCount?: number;
 }
-export const fetchCopytradingTradesCount = (
-  accountCurrency?: string
-): Promise<ICopytradingTradesCounts> => {
-  const authorization = authService.getAuthArg();
-  const filtering = { take: 0, accountCurrency };
-  return Promise.all([
-    signalApi.v10SignalTradesOpenGet(authorization, filtering),
-    signalApi.v10SignalTradesGet(authorization, filtering),
-    signalApi.v10SignalTradesLogGet(authorization, filtering)
-  ]).then(([openTradesData, historyData, logData]) => ({
-    logCount: logData.total,
-    openTradesCount: openTradesData.total,
-    historyCount: historyData.total
-  }));
-};
 
 export const getCopytradingTradesCount = (accountCurrency?: string) => (
   dispatch: Dispatch,

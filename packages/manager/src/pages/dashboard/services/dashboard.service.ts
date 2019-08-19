@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import dashboardFundsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds.selector";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import { composeRequestFilters } from "shared/components/table/services/table.service";
+import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
@@ -102,10 +102,8 @@ export const getAssetsCounts = () => (
 ) => {
   const commonFiltering = { take: 0 };
 
-  const { filters, defaults } = dashboardFundsTableSelector(getState());
-  const fundsCountFilters = composeRequestFilters({
-    ...filters,
-    defaultFilters: defaults.defaultFilters
-  });
+  const fundsCountFilters = composeRequestFiltersByTableState(
+    dashboardFundsTableSelector(getState())
+  );
   dispatch(getDashboardFunds({ ...fundsCountFilters, ...commonFiltering }));
 };
