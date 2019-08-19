@@ -1,34 +1,98 @@
+import { PlatformCurrency } from "gv-api-web";
 import * as React from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { compose } from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
+import { createSelector } from "reselect";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import ChartCurrencySelector, {
-  TAddChartCurrency,
-  TChangeChartCurrency,
-  TChartCurrency,
-  TRemoveChartCurrency
+  TChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
+import {
+  currenciesSelector,
+  platformCurrenciesSelector
+} from "shared/reducers/platform-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import { HandlePeriodChangeType } from "shared/utils/types";
+import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
-import { FundProfitChartDataType } from "../../../reducers/profit-chart.reducer";
+import {
+  FundProfitChartDataType,
+  fundProfitChartSelector
+} from "../../../reducers/profit-chart.reducer";
+import { getProfitChart } from "../../../services/fund-details.service";
 import FundProfitChart from "./fund-profit-chart";
+import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 
 const _FundProfitChartSection: React.FC<Props> = ({
-  selectCurrencies,
   chartCurrencies,
-  addChartCurrency,
-  removeChartCurrency,
-  changeChartCurrency,
-  profitChart,
+  service: { getProfitChart },
+  id,
   period,
+  profitChart,
   onPeriodChange
 }) => {
   const [t] = useTranslation();
   const equivalentCurrency = "USD";
+  const [currencies, setCurrencies] = useState<TChartCurrency[]>([
+    ...chartCurrencies.filter(chartCurrency => chartCurrency.mandatory)
+  ]);
+  const [selectCurrencies, setSelectCurrencies] = useState<TChartCurrency[]>(
+    []
+  );
+  const addCurrency = useCallback(
+    () => {
+      setCurrencies([...currencies, selectCurrencies[0]]);
+    },
+    [currencies, selectCurrencies]
+  );
+  const removeCurrency = useCallback(
+    (name: string) => {
+      setCurrencies([...currencies.filter(item => item.name !== name)]);
+    },
+    [currencies]
+  );
+  const changeCurrency = useCallback(
+    (i: number) => (event: ISelectChangeEvent) => {
+      currencies[i] = chartCurrencies.find(
+        ({ name }) => name === event.target.value
+      )!;
+      setCurrencies([...currencies]);
+    },
+    [currencies, chartCurrencies]
+  );
+  useEffect(
+    () => {
+      setSelectCurrencies(
+        chartCurrencies.filter(
+          ({ name }) => !!!currencies.find(currency => currency.name === name)
+        )
+      );
+    },
+    [chartCurrencies, currencies]
+  );
+  useEffect(
+    () => {
+      getProfitChart({
+        id,
+        period,
+        currencies: currencies.map(({ name }) => name)
+      });
+    },
+    [period, id, currencies]
+  );
+  if (!profitChart) return <ChartValuePeriodLoader />;
   const chart = profitChart[0];
   return (
     <>
@@ -53,35 +117,83 @@ const _FundProfitChartSection: React.FC<Props> = ({
       <ChartPeriod onChange={onPeriodChange} period={period} />
       <ChartCurrencySelector
         selectCurrencies={selectCurrencies}
-        chartCurrencies={chartCurrencies}
-        onAdd={addChartCurrency}
-        onRemove={removeChartCurrency}
-        onChange={changeChartCurrency}
+        chartCurrencies={currencies}
+        onAdd={addCurrency}
+        onRemove={removeCurrency}
+        onChange={changeCurrency}
       />
       <div className="details-chart__profit">
         <FundProfitChart
           profitChart={profitChart}
-          chartCurrencies={chartCurrencies}
+          chartCurrencies={currencies}
         />
       </div>
     </>
   );
 };
 
-interface OwnProps {
-  selectCurrencies: TChartCurrency[];
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    { getProfitChart },
+    dispatch
+  )
+});
+
+const convertToChartCurrency = (defaultCurrency: CurrencyEnum) => ({
+  name,
+  color
+}: PlatformCurrency): TChartCurrency => ({
+  name: name as CurrencyEnum,
+  color,
+  mandatory: name === defaultCurrency
+});
+
+const chartCurrenciesSelector = createSelector<
+  RootState,
+  PlatformCurrency[],
+  CurrencyEnum,
+  TChartCurrency[]
+>(
+  state => platformCurrenciesSelector(state),
+  state => currencySelector(state),
+  (currencies, globalCurrency) =>
+    currencies.map(convertToChartCurrency(globalCurrency))
+);
+
+const mapStateToProps = (state: RootState): StateProps => ({
+  profitChart: fundProfitChartSelector(state),
+  globalCurrency: currencySelector(state),
+  currencyValues: currenciesSelector(state) as CurrencyEnum[],
+  chartCurrencies: chartCurrenciesSelector(state)
+});
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  getProfitChart: typeof getProfitChart;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface StateProps {
+  profitChart?: FundProfitChartDataType;
+  globalCurrency: CurrencyEnum;
+  currencyValues: CurrencyEnum[];
   chartCurrencies: TChartCurrency[];
-  addChartCurrency: TAddChartCurrency;
-  removeChartCurrency: TRemoveChartCurrency;
-  changeChartCurrency: TChangeChartCurrency;
-  profitChart: FundProfitChartDataType;
+}
+
+interface OwnProps {
+  id: string;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
 }
 
-interface Props extends OwnProps {}
+interface Props extends OwnProps, StateProps, DispatchProps {}
 
 const FundProfitChartSection = compose<React.ComponentType<OwnProps>>(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   React.memo
 )(_FundProfitChartSection);
 export default FundProfitChartSection;

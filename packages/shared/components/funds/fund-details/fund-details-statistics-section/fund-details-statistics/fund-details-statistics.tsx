@@ -7,15 +7,22 @@ import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-p
 import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
 import Surface from "shared/components/surface/surface";
 import withLoader from "shared/decorators/with-loader";
+import { CurrencyEnum } from "shared/utils/types";
 
 import FundDetailsStatisticsElements from "./fund-details-statistics-elements";
 
-const _FundDetailsStatistics: React.FC<Props> = ({ t, statistic, period }) => (
+const _FundDetailsStatistics: React.FC<Props> = ({
+  statisticCurrency,
+  t,
+  statistic,
+  period
+}) => (
   <Surface className="surface--horizontal-paddings details-statistics">
     <h3>{t("fund-details-page.statistics.heading")}</h3>
     <FundDetailsStatisticsElements
       condition={!!statistic}
       loader={<DetailsStatisticsLoader />}
+      statisticCurrency={statisticCurrency}
       statistic={statistic!}
       period={period}
     />
@@ -23,6 +30,7 @@ const _FundDetailsStatistics: React.FC<Props> = ({ t, statistic, period }) => (
 );
 
 interface Props extends WithTranslation {
+  statisticCurrency: CurrencyEnum;
   period: ChartDefaultPeriod;
   statistic?: FundProfitChart;
 }

@@ -13,10 +13,11 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 const _FundDetailsStatisticsElements: React.FC<
   IFundDetailsStatisticsElementsProps & WithTranslation
-> = ({ t, statistic, period }) => (
+> = ({ statisticCurrency, t, statistic, period }) => (
   <>
     <div className="details-statistics__subheading">
       {t("fund-details-page.statistics.current")}
@@ -33,10 +34,10 @@ const _FundDetailsStatisticsElements: React.FC<
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(statistic.balance, "GVT")}
+            value={formatCurrencyValue(statistic.balance, statisticCurrency)}
             thousandSeparator={" "}
             displayType="text"
-            suffix={" GVT"}
+            suffix={` ${statisticCurrency}`}
           />
         </StatisticItem>
         <StatisticItem
@@ -165,6 +166,7 @@ const _FundDetailsStatisticsElements: React.FC<
 );
 
 export interface IFundDetailsStatisticsElementsProps {
+  statisticCurrency: CurrencyEnum;
   statistic: FundProfitChart;
   period: ChartDefaultPeriod;
 }
