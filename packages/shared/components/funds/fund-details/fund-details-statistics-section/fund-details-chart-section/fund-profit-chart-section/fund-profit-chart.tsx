@@ -77,7 +77,7 @@ const _FundProfitChart: React.FC<Props> = ({
             stroke={
               chartCurrencies && chartCurrencies[i]
                 ? chartCurrencies[i].color
-                : GVColors.$labelColor
+                : areaStrokeColor
             }
             fill={`url(#equityProgramChartFill)`}
             strokeWidth={3}
