@@ -8,10 +8,9 @@ import {
 import { Action } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
+import { IDashboardAssetChart } from "shared/constants/constants";
 import managerApi from "shared/services/api-client/manager-api";
 import { ActionType } from "shared/utils/types";
-
-import { IDashboardAssetChart } from "../reducers/dashboard.reducers";
 
 export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";
 export const DASHBOARD_PORTFOLIO_EVENTS = "DASHBOARD_PORTFOLIO_EVENTS";
