@@ -63,24 +63,18 @@ export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
   );
 };
 
-export const getProfitChart = ({
-  id,
-  period,
-  currencies
-}: TGetProfitChartArgs) => (dispatch: Dispatch) =>
-  dispatch(fetchFundProfitChartAction(id, period, currencies));
+export const getProfitChart = ({ id, period, currencies }: TGetChartArgs) => (
+  dispatch: Dispatch
+) => dispatch(fetchFundProfitChartAction(id, period, currencies));
 
-export const getBalanceChart = ({ id, period }: TGetChartArgs) => (
+export const getBalanceChart = ({ id, period, currencies }: TGetChartArgs) => (
   dispatch: Dispatch
 ) => {
-  dispatch(fetchFundBalanceChartAction(id, period));
+  dispatch(fetchFundBalanceChartAction(id, period, currencies[0]));
 };
 
-interface TGetProfitChartArgs extends TGetChartArgs {
-  currencies: CurrencyEnum[];
-}
-
 interface TGetChartArgs {
+  currencies: CurrencyEnum[];
   id: string;
   period?: ChartDefaultPeriod;
 }
