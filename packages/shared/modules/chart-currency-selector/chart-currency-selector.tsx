@@ -24,10 +24,10 @@ const _ChartCurrencySelector: React.FC<Props> = ({
 }) => {
   return (
     <div className="chart-currency-selector__container">
-      {chartCurrencies.map(({ asset, color, mandatory, id }, i) => (
+      {chartCurrencies.map(({ name, color, mandatory }, i) => (
         <TileFilterItem
-          key={asset}
-          id={id}
+          key={name}
+          id={name}
           mandatory={mandatory}
           removeTile={onRemove}
         >
@@ -37,15 +37,15 @@ const _ChartCurrencySelector: React.FC<Props> = ({
               <div className="chart-currency-selector__item">
                 <TagCircle backgroundColor={color} />
                 {mandatory ? (
-                  asset
+                  name
                 ) : (
                   <CurrencySelect
-                    value={asset}
+                    value={name}
                     onChange={onChange(i)}
                     currencyValues={currencyValues.filter(
                       currencyValue =>
                         !!!chartCurrencies.find(
-                          ({ asset }) => asset === currencyValue
+                          ({ name }) => name === currencyValue
                         )!
                     )}
                   />
@@ -63,8 +63,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
 };
 
 export type TChartCurrency = {
-  id: string;
-  asset: CurrencyEnum;
+  name: CurrencyEnum;
   color: string;
   mandatory?: boolean;
 };
