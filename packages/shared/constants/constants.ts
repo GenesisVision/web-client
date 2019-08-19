@@ -1,3 +1,7 @@
+import { ChartSimple } from "gv-api-web";
+import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { CurrencyEnum } from "shared/utils/types";
+
 export const MANAGER = "manager";
 export const INVESTOR = "investor";
 export const PROGRAM = "PROGRAM";
@@ -65,3 +69,12 @@ export const timeUnits = {
   [MINUTES]: 0,
   [SECONDS]: 0
 };
+
+export interface IDashboardAssetChart {
+  type: ASSETS_TYPES;
+  id: string;
+  title: string;
+  currency?: CurrencyEnum;
+  equityChart: ChartSimple[];
+  pnLChart?: ChartSimple[];
+}
