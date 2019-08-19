@@ -16,6 +16,7 @@ import { CurrencyEnum } from "shared/utils/types";
 const MAX_CHARTS = 2;
 
 const _ChartCurrencySelector: React.FC<Props> = ({
+  selectCurrencies,
   currencyValues,
   chartCurrencies,
   onAdd,
@@ -42,12 +43,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
                   <CurrencySelect
                     value={name}
                     onChange={onChange(i)}
-                    currencyValues={currencyValues.filter(
-                      currencyValue =>
-                        !!!chartCurrencies.find(
-                          ({ name }) => name === currencyValue
-                        )!
-                    )}
+                    currencyValues={selectCurrencies.map(({ name }) => name)}
                   />
                 )}
               </div>
@@ -79,6 +75,7 @@ export type TChangeChartCurrency = (
 ) => (event: ISelectChangeEvent, child: JSX.Element) => void;
 
 interface OwnProps {
+  selectCurrencies: TChartCurrency[];
   chartCurrencies: TChartCurrency[];
   onAdd: TAddChartCurrency;
   onRemove: TRemoveChartCurrency;
