@@ -13,9 +13,8 @@ import { currenciesSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
-const MAX_CHARTS = 2;
-
 const _ChartCurrencySelector: React.FC<Props> = ({
+  maxCharts = 2,
   selectCurrencies,
   currencyValues,
   chartCurrencies,
@@ -27,6 +26,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
     <div className="chart-currency-selector__container">
       {chartCurrencies.map(({ name, color, mandatory }, i) => (
         <TileFilterItem
+          removable={i > maxCharts - 1}
           key={name}
           id={name}
           mandatory={mandatory}
@@ -51,7 +51,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
           />
         </TileFilterItem>
       ))}
-      {chartCurrencies.length < MAX_CHARTS && (
+      {chartCurrencies.length < maxCharts && (
         <TileFilterButton onClick={onAdd} title={"Add"} />
       )}
     </div>
@@ -75,6 +75,7 @@ export type TChangeChartCurrency = (
 ) => (event: ISelectChangeEvent, child: JSX.Element) => void;
 
 interface OwnProps {
+  maxCharts?: number;
   selectCurrencies: TChartCurrency[];
   chartCurrencies: TChartCurrency[];
   onAdd: TAddChartCurrency;
