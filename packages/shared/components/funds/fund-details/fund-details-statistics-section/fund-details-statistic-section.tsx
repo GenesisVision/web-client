@@ -1,8 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
-import { PlatformAsset, PlatformCurrency } from "gv-api-web";
+import { PlatformCurrency } from "gv-api-web";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -51,21 +51,30 @@ const _FundDetailsStatisticSection: React.FC<Props> = ({
   const [currencies, setCurrencies] = useState<TChartCurrency[]>([
     ...chartCurrencies.filter(chartCurrency => chartCurrency.mandatory)
   ]);
-  const addCurrency = () => {
-    setCurrencies([
-      ...currencies,
-      chartCurrencies.find(({ name }) => name === currencyValues[0])!
-    ]);
-  };
-  const removeCurrency = (name: string) => {
-    setCurrencies([...currencies.filter(item => item.name !== name)]);
-  };
-  const changeCurrency = (i: number) => (event: ISelectChangeEvent) => {
-    currencies[i] = chartCurrencies.find(
-      ({ name }) => name === event.target.value
-    )!;
-    setCurrencies([...currencies]);
-  };
+  const addCurrency = useCallback(
+    () => {
+      setCurrencies([
+        ...currencies,
+        chartCurrencies.find(({ name }) => name === currencyValues[0])!
+      ]);
+    },
+    [currencies, chartCurrencies, currencyValues]
+  );
+  const removeCurrency = useCallback(
+    (name: string) => {
+      setCurrencies([...currencies.filter(item => item.name !== name)]);
+    },
+    [currencies]
+  );
+  const changeCurrency = useCallback(
+    (i: number) => (event: ISelectChangeEvent) => {
+      currencies[i] = chartCurrencies.find(
+        ({ name }) => name === event.target.value
+      )!;
+      setCurrencies([...currencies]);
+    },
+    [currencies, chartCurrencies]
+  );
   useEffect(
     () => {
       getBalanceChart({ id, period });
