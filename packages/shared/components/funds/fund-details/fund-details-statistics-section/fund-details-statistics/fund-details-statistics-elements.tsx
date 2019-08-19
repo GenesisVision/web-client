@@ -1,5 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
+import { FundProfitChart } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -12,8 +13,6 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
-
-import { FundProfitChartDataType } from "../../reducers/profit-chart.reducer";
 
 const _FundDetailsStatisticsElements: React.FC<
   IFundDetailsStatisticsElementsProps & WithTranslation
@@ -166,7 +165,7 @@ const _FundDetailsStatisticsElements: React.FC<
 );
 
 export interface IFundDetailsStatisticsElementsProps {
-  statistic: FundProfitChartDataType;
+  statistic: FundProfitChart;
   period: ChartDefaultPeriod;
 }
 
