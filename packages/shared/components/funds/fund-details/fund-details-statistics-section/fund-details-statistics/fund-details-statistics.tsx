@@ -1,12 +1,13 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
+import { FundProfitChart } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
 import Surface from "shared/components/surface/surface";
+import withLoader from "shared/decorators/with-loader";
 
-import { FundProfitChartDataType } from "../../reducers/profit-chart.reducer";
 import FundDetailsStatisticsElements from "./fund-details-statistics-elements";
 
 const _FundDetailsStatistics: React.FC<Props> = ({ t, statistic, period }) => (
@@ -23,8 +24,10 @@ const _FundDetailsStatistics: React.FC<Props> = ({ t, statistic, period }) => (
 
 interface Props extends WithTranslation {
   period: ChartDefaultPeriod;
-  statistic?: FundProfitChartDataType;
+  statistic?: FundProfitChart;
 }
 
-const FundDetailsStatistics = translate()(React.memo(_FundDetailsStatistics));
+const FundDetailsStatistics = withLoader(
+  translate()(React.memo(_FundDetailsStatistics))
+);
 export default FundDetailsStatistics;

@@ -12,12 +12,23 @@ import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useTab from "shared/hooks/tab.hook";
+import {
+  TAddChartCurrency,
+  TChangeChartCurrency,
+  TChartCurrency,
+  TRemoveChartCurrency
+} from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
+import { FundProfitChartDataType } from "../../reducers/profit-chart.reducer";
 import FundBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
 import FundProfitChartSection from "./fund-profit-chart-section/fund-profit-chart-section";
 
 const _FundDetailsChartSection: React.FC<Props> = ({
+  chartCurrencies,
+  addChartCurrency,
+  removeChartCurrency,
+  changeChartCurrency,
   t,
   period,
   onPeriodChange,
@@ -39,6 +50,10 @@ const _FundDetailsChartSection: React.FC<Props> = ({
       </GVTabs>
       {tab === TABS.PROFIT && (
         <FundProfitChartSection
+          chartCurrencies={chartCurrencies}
+          addChartCurrency={addChartCurrency}
+          removeChartCurrency={removeChartCurrency}
+          changeChartCurrency={changeChartCurrency}
           profitChart={profitChart!}
           period={period}
           onPeriodChange={onPeriodChange}
@@ -61,9 +76,13 @@ enum TABS {
 }
 
 interface OwnProps {
+  chartCurrencies: TChartCurrency[];
+  addChartCurrency: TAddChartCurrency;
+  removeChartCurrency: TRemoveChartCurrency;
+  changeChartCurrency: TChangeChartCurrency;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
-  profitChart: FundProfitChart;
+  profitChart: FundProfitChartDataType;
   balanceChart: FundBalanceChartType;
 }
 
