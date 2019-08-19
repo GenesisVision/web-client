@@ -1,3 +1,4 @@
+import { IDashboardAssetChart } from "shared/constants/constants";
 import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 import { Nullable } from "shared/utils/types";
 
@@ -5,7 +6,6 @@ import {
   DASHBOARD_ASSET_CHART,
   TDashboardChartAction
 } from "../actions/dashboard.actions";
-import { IDashboardAssetChart } from "./dashboard.reducers";
 
 const initialState = null;
 
