@@ -1,6 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
-import { PlatformAsset } from "gv-api-web";
+import { PlatformAsset, PlatformCurrency } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { ResolveThunks, connect } from "react-redux";
@@ -19,7 +19,7 @@ import { ISelectChangeEvent } from "shared/components/select/select";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import {
   currenciesSelector,
-  fundAssetsSelector
+  platformCurrenciesSelector
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
@@ -54,15 +54,15 @@ const _FundDetailsStatisticSection: React.FC<Props> = ({
   const addCurrency = () => {
     setCurrencies([
       ...currencies,
-      chartCurrencies.find(({ asset }) => asset === currencyValues[0])!
+      chartCurrencies.find(({ name }) => name === currencyValues[0])!
     ]);
   };
-  const removeCurrency = (id: string) => {
-    setCurrencies([...currencies.filter(item => item.id !== id)]);
+  const removeCurrency = (name: string) => {
+    setCurrencies([...currencies.filter(item => item.name !== name)]);
   };
   const changeCurrency = (i: number) => (event: ISelectChangeEvent) => {
     currencies[i] = chartCurrencies.find(
-      ({ asset }) => asset === event.target.value
+      ({ name }) => name === event.target.value
     )!;
     setCurrencies([...currencies]);
   };
@@ -77,7 +77,7 @@ const _FundDetailsStatisticSection: React.FC<Props> = ({
       getProfitChart({
         id,
         period,
-        currencies: currencies.map(({ asset }) => asset)
+        currencies: currencies.map(({ name }) => name)
       });
     },
     [period, id, currencies]
@@ -115,21 +115,22 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 const convertToChartCurrency = ({
-  id,
-  asset,
+  name,
   color
-}: PlatformAsset): TChartCurrency => ({
-  id,
-  asset: asset as CurrencyEnum,
+}: PlatformCurrency): TChartCurrency => ({
+  name: name as CurrencyEnum,
   color,
-  mandatory: asset === "GVT"
+  mandatory: name === "GVT"
 });
 
 const chartCurrenciesSelector = createSelector<
   RootState,
-  PlatformAsset[],
+  PlatformCurrency[],
   TChartCurrency[]
->(state => fundAssetsSelector(state), data => data.map(convertToChartCurrency));
+>(
+  state => platformCurrenciesSelector(state),
+  data => data.map(convertToChartCurrency)
+);
 
 const mapStateToProps = (state: RootState): StateProps => ({
   currencyValues: currenciesSelector(state) as CurrencyEnum[],
