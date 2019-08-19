@@ -52,14 +52,14 @@ const _FundDetailsStatisticSection: React.FC<Props> = ({
   const [currencies, setCurrencies] = useState<TChartCurrency[]>([
     ...chartCurrencies.filter(chartCurrency => chartCurrency.mandatory)
   ]);
+  const [selectCurrencies, setSelectCurrencies] = useState<TChartCurrency[]>(
+    []
+  );
   const addCurrency = useCallback(
     () => {
-      setCurrencies([
-        ...currencies,
-        chartCurrencies.find(({ name }) => name === currencyValues[0])!
-      ]);
+      setCurrencies([...currencies, selectCurrencies[0]]);
     },
-    [currencies, chartCurrencies, currencyValues]
+    [currencies, selectCurrencies]
   );
   const removeCurrency = useCallback(
     (name: string) => {
@@ -75,6 +75,16 @@ const _FundDetailsStatisticSection: React.FC<Props> = ({
       setCurrencies([...currencies]);
     },
     [currencies, chartCurrencies]
+  );
+  useEffect(
+    () => {
+      setSelectCurrencies(
+        chartCurrencies.filter(
+          ({ name }) => !!!currencies.find(currency => currency.name === name)
+        )
+      );
+    },
+    [chartCurrencies, currencies]
   );
   useEffect(
     () => {
@@ -103,6 +113,7 @@ const _FundDetailsStatisticSection: React.FC<Props> = ({
       </div>
       <div className="details-statistic-section__chart">
         <FundDetailsChart
+          selectCurrencies={selectCurrencies}
           chartCurrencies={currencies}
           addChartCurrency={addCurrency}
           removeChartCurrency={removeCurrency}
