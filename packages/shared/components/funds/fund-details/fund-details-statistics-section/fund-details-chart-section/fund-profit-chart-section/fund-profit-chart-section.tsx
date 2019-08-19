@@ -18,6 +18,7 @@ import { FundProfitChartDataType } from "../../../reducers/profit-chart.reducer"
 import FundProfitChart from "./fund-profit-chart";
 
 const _FundProfitChartSection: React.FC<Props> = ({
+  selectCurrencies,
   chartCurrencies,
   addChartCurrency,
   removeChartCurrency,
@@ -51,6 +52,7 @@ const _FundProfitChartSection: React.FC<Props> = ({
       </div>
       <ChartPeriod onChange={onPeriodChange} period={period} />
       <ChartCurrencySelector
+        selectCurrencies={selectCurrencies}
         chartCurrencies={chartCurrencies}
         onAdd={addChartCurrency}
         onRemove={removeChartCurrency}
@@ -67,6 +69,7 @@ const _FundProfitChartSection: React.FC<Props> = ({
 };
 
 interface OwnProps {
+  selectCurrencies: TChartCurrency[];
   chartCurrencies: TChartCurrency[];
   addChartCurrency: TAddChartCurrency;
   removeChartCurrency: TRemoveChartCurrency;
