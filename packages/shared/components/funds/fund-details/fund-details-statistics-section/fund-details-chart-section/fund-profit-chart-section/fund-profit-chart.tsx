@@ -39,7 +39,6 @@ const _FundProfitChart: React.FC<Props> = ({
   const firstEquityValues = firstEquity.map(x => x.value);
   const off = gradientOffset(firstEquityValues);
   const areaStrokeColor = getStrokeColor(firstEquityValues);
-  console.log(equities);
   return (
     <ResponsiveContainer>
       <ComposedChart data={firstEquity} margin={{ top: 20 }}>
