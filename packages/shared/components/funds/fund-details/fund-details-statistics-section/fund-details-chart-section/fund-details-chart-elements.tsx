@@ -25,6 +25,7 @@ import FundBalanceChartSection from "./fund-balance-chart-section/fund-balance-c
 import FundProfitChartSection from "./fund-profit-chart-section/fund-profit-chart-section";
 
 const _FundDetailsChartSection: React.FC<Props> = ({
+  selectCurrencies,
   chartCurrencies,
   addChartCurrency,
   removeChartCurrency,
@@ -50,6 +51,7 @@ const _FundDetailsChartSection: React.FC<Props> = ({
       </GVTabs>
       {tab === TABS.PROFIT && (
         <FundProfitChartSection
+          selectCurrencies={selectCurrencies}
           chartCurrencies={chartCurrencies}
           addChartCurrency={addChartCurrency}
           removeChartCurrency={removeChartCurrency}
@@ -76,6 +78,7 @@ enum TABS {
 }
 
 interface OwnProps {
+  selectCurrencies: TChartCurrency[];
   chartCurrencies: TChartCurrency[];
   addChartCurrency: TAddChartCurrency;
   removeChartCurrency: TRemoveChartCurrency;
