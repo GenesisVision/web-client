@@ -16,6 +16,7 @@ import {
 import { createSelector } from "reselect";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import ChartCurrencySelector, {
@@ -36,7 +37,6 @@ import {
   getProfitChart
 } from "../../../services/fund-details.service";
 import FundBalanceChart from "./fund-balance-chart";
-import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 
 const _FundBalanceChartSection: React.FC<Props> = ({
   setStatisticCurrency,
@@ -104,6 +104,7 @@ const _FundBalanceChartSection: React.FC<Props> = ({
     },
     [period, id, currencies]
   );
+  const { name, color } = currencies[0];
   if (!balanceChart) return <ChartValuePeriodLoader />;
   return (
     <>
@@ -116,10 +117,10 @@ const _FundBalanceChartSection: React.FC<Props> = ({
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(balanceChart.gvtBalance, globalCurrency)}
+            value={formatCurrencyValue(balanceChart.balance, name)}
             thousandSeparator={" "}
             displayType="text"
-            suffix={` ${globalCurrency}`}
+            suffix={` ${name}`}
           />
         </StatisticItem>
       </div>
@@ -135,8 +136,8 @@ const _FundBalanceChartSection: React.FC<Props> = ({
       <div className="details-chart__profit">
         <FundBalanceChart
           balanceChart={balanceChart.balanceChart}
-          currency={currencies[0].name}
-          color={currencies[0].color}
+          currency={name}
+          color={color}
         />
       </div>
     </>
