@@ -613,6 +613,7 @@
       }
     },
     "chart": {
+      "value": "Value",
       "heading": "Chart",
       "tabs": {
         "profit": "Profit",
