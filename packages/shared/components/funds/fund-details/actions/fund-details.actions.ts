@@ -42,10 +42,12 @@ export const fetchFundProfitChartAction = (
 
 export const fetchFundBalanceChartAction = (
   id: string,
-  period = getDefaultPeriod()
+  period = getDefaultPeriod(),
+  currency: CurrencyEnum
 ): ApiAction<FundBalanceChart> => ({
   type: FETCH_FUND_BALANCE_CHART,
   payload: fundsApi.v10FundsByIdChartsBalanceGet(id, {
+    currency,
     dateFrom: period.start,
     dateTo: period.end,
     maxPointCount: 100
