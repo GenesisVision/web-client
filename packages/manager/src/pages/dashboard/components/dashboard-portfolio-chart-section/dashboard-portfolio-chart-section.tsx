@@ -23,12 +23,12 @@ import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { IDashboardAssetChart } from "shared/constants/constants";
 import { isNewUserSelector } from "shared/reducers/header-reducer";
 import { Nullable } from "shared/utils/types";
 
 import { dashboardAssetsSelector } from "../../reducers/dashboard-assets.reducer";
 import { dashboardInRequestsSelector } from "../../reducers/dashboard-in-requests.reducer";
-import { IDashboardAssetChart } from "../../reducers/dashboard.reducers";
 import {
   cancelRequest,
   getInRequests
