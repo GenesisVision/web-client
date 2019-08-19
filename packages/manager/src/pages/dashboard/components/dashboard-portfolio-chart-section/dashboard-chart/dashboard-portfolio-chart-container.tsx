@@ -11,9 +11,9 @@ import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-p
 import FundProfitChart from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-profit-chart-section/fund-profit-chart";
 import ProgramProfitChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { IDashboardAssetChart } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
-import { IDashboardAssetChart } from "../../../reducers/dashboard.reducers";
 import { getAssetChart, setPeriod } from "../../../services/dashboard.service";
 
 const _DashboardPortfolioChartContainer: React.FC<Props> = ({
@@ -44,7 +44,7 @@ const _DashboardPortfolioChartContainer: React.FC<Props> = ({
           />
         )}
         {assetChart.type === ASSETS_TYPES.Fund && (
-          <FundProfitChart equityChart={assetChart.equityChart} />
+          <FundProfitChart profitChart={[assetChart]} />
         )}
       </div>
     </>
