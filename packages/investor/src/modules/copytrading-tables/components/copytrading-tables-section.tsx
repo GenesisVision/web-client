@@ -1,24 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { connect, ResolveThunks } from "react-redux";
+import { InvestorRootState } from "reducers";
+import {
+  Action,
+  ActionCreatorsMapObject,
+  bindActionCreators,
+  Dispatch
+} from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import useTab from "shared/hooks/tab.hook";
 
 import {
-  ICopytradingTradesCounts,
-  fetchCopytradingTradesCount
+  fetchCopytradingTradesCount,
+  getCopytradingTradesCount,
+  ICopytradingTradesCounts
 } from "../services/copytrading-tables.service";
+import {
+  dashboardOpenTradesTableSelector,
+  dashboardTradesHistoryTableSelector,
+  dashboardTradesLogTableSelector
+} from "./copytrading-tables.selectors";
 import OpenTradesTable from "./open-trades-table";
 import TradesHistoryTable from "./trades-history-table";
 import TradesLogTable from "./trades-log-table";
 
-const _CopytradingTablesSection: React.FC<Props> = ({ t, title, currency }) => {
+const _CopytradingTablesSection: React.FC<Props> = ({
+  title,
+  counts,
+  service,
+  currency
+}) => {
+  const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_TRADES);
-  const [counts, setCounts] = useState<ICopytradingTradesCounts>({});
-  useEffect(() => {
-    fetchCopytradingTradesCount(currency).then(setCounts);
-  }, []);
+  useEffect(
+    () => {
+      service.getCopytradingTradesCount(currency);
+    },
+    [currency, service]
+  );
   const { openTradesCount, logCount, historyCount } = counts;
   return (
     <Surface>
@@ -55,18 +77,52 @@ const _CopytradingTablesSection: React.FC<Props> = ({ t, title, currency }) => {
   );
 };
 
+const mapStateToProps = (state: InvestorRootState) => {
+  const counts = {
+    openTradesCount: dashboardOpenTradesTableSelector(state).itemsData.data
+      .total,
+    logCount: dashboardTradesLogTableSelector(state).itemsData.data.total,
+    historyCount: dashboardTradesHistoryTableSelector(state).itemsData.data
+      .total
+  };
+  return { counts };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      getCopytradingTradesCount
+    },
+    dispatch
+  )
+});
+
+const CopytradingTablesSection = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_CopytradingTablesSection);
+
+export default CopytradingTablesSection;
+
 enum TABS {
   LOG = "LOG",
   OPEN_TRADES = "OPEN_TRADES",
   HISTORY = "HISTORY"
 }
 
-interface Props extends WithTranslation {
+interface StateProps {
+  counts: ICopytradingTradesCounts;
+}
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  getCopytradingTradesCount: typeof getCopytradingTradesCount;
+}
+
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface Props extends StateProps, DispatchProps {
   title: string;
   currency?: string;
 }
-
-const CopytradingTablesSection = translate()(
-  React.memo(_CopytradingTablesSection)
-);
-export default CopytradingTablesSection;

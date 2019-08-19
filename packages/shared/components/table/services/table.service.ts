@@ -1,9 +1,9 @@
 import { Dispatch } from "redux";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
-  IPaging,
   calculateSkipAndTake,
-  calculateTotalPages
+  calculateTotalPages,
+  IPaging
 } from "shared/components/table/helpers/paging.helpers";
 import { RootState } from "shared/reducers/root-reducer";
 import { TGetState } from "shared/utils/types";
@@ -14,6 +14,7 @@ import {
   FilteringType
 } from "../components/filtering/filter.type";
 import { IComposeDefaultFilter } from "../components/table.types";
+import { ITableState } from "../reducers/table.reducer";
 
 interface IComposeRequestFiltersProps {
   paging?: IPaging;
@@ -35,6 +36,17 @@ export const composeRequestFilters = ({
     sorting,
     ...composedFiltering
   };
+};
+
+export const composeRequestFiltersByTableState = (
+  tableState: ITableState<any>
+) => {
+  const { filters, defaults } = tableState;
+  const requestFilters = composeRequestFilters({
+    ...filters,
+    defaultFilters: defaults.defaultFilters
+  });
+  return requestFilters;
 };
 
 export const updateFilters = (filters: FilteringType, type: string) => (
