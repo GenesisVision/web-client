@@ -13,7 +13,7 @@ import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import { MiddlewareDispatch } from "shared/utils/types";
+import { CurrencyEnum, MiddlewareDispatch } from "shared/utils/types";
 
 import {
   fetchFundBalanceChartAction,
@@ -63,9 +63,12 @@ export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
   );
 };
 
-export const getProfitChart = ({ id, period }: TGetChartArgs) => (
-  dispatch: Dispatch
-) => dispatch(fetchFundProfitChartAction(id, period));
+export const getProfitChart = ({
+  id,
+  period,
+  currencies
+}: TGetProfitChartArgs) => (dispatch: Dispatch) =>
+  dispatch(fetchFundProfitChartAction(id, period, currencies));
 
 export const getBalanceChart = ({ id, period }: TGetChartArgs) => (
   dispatch: Dispatch
@@ -73,7 +76,11 @@ export const getBalanceChart = ({ id, period }: TGetChartArgs) => (
   dispatch(fetchFundBalanceChartAction(id, period));
 };
 
-type TGetChartArgs = {
+interface TGetProfitChartArgs extends TGetChartArgs {
+  currencies: CurrencyEnum[];
+}
+
+interface TGetChartArgs {
   id: string;
   period?: ChartDefaultPeriod;
-};
+}
