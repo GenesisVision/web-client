@@ -13,12 +13,17 @@ import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+  PORTFOLIO_EVENTS_FILTERS
+} from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
-  TableItems,
-  mapToTableItems
+  mapToTableItems,
+  TableItems
 } from "shared/components/table/helpers/mapper";
+import { composeRequestFilters } from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import {
@@ -40,6 +45,12 @@ import {
   fetchProgramDescriptionAction,
   fetchProgramProfitChartAction
 } from "../actions/program-details.actions";
+import {
+  PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS,
+  PROGRAM_SUBSCRIBERS_FILTERS,
+  PROGRAM_TRADES_DEFAULT_FILTERS,
+  PROGRAM_TRADES_FILTERS
+} from "../program-details.constants";
 import { HistoryCountsType } from "../program-details.types";
 import { ProgramStatisticResult } from "./program-details.types";
 
@@ -147,22 +158,54 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
   const isAuthenticated = authService.isAuthenticated();
   const isManager = ROLE_ENV === ROLE.MANAGER;
 
-  const filtering = { take: 0 };
+  const paging = { itemsOnPage: 0 };
+  const tradesFilters = composeRequestFilters({
+    paging,
+    filtering: PROGRAM_TRADES_FILTERS,
+    defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
+  });
   const tradesCountPromise = programsApi.v10ProgramsByIdTradesGet(
     id,
-    filtering
+    tradesFilters
   );
+
+  const eventsFilters = composeRequestFilters({
+    paging,
+    filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+    defaultFilters: PORTFOLIO_EVENTS_FILTERS
+  });
   const eventsCountPromise = isAuthenticated
-    ? fetchPortfolioEvents({ ...filtering, assetId: id })
+    ? fetchPortfolioEvents({ ...eventsFilters, assetId: id })
     : Promise.resolve({ total: 0 });
+
   const openPositionsCountPromise = programsApi.v10ProgramsByIdTradesOpenGet(
     id
   );
+
+  const subscriptionsFilters = composeRequestFilters({
+    paging,
+    filtering: PROGRAM_SUBSCRIBERS_FILTERS,
+    defaultFilters: PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS
+  });
   const subscriptionsCountPromise =
     isAuthenticated && isManager
-      ? programsApi.v10ProgramsByIdSubscribersGet(id, authService.getAuthArg())
+      ? programsApi.v10ProgramsByIdSubscribersGet(
+          id,
+          authService.getAuthArg(),
+          subscriptionsFilters
+        )
       : Promise.resolve({ total: 0 });
-  const periodHistoryCountPromise = programsApi.v10ProgramsByIdPeriodsGet(id);
+
+  const periodHistoryFilters = composeRequestFilters({
+    paging,
+    filtering: PROGRAM_TRADES_FILTERS,
+    defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
+  });
+  const periodHistoryCountPromise = programsApi.v10ProgramsByIdPeriodsGet(
+    id,
+    periodHistoryFilters
+  );
+
   return Promise.all([
     tradesCountPromise,
     eventsCountPromise,
