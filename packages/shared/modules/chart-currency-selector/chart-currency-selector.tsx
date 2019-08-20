@@ -24,12 +24,11 @@ const _ChartCurrencySelector: React.FC<Props> = ({
 }) => {
   return (
     <div className="chart-currency-selector__container">
-      {chartCurrencies.map(({ name, color, mandatory }, i) => (
+      {chartCurrencies.map(({ name, color }, i) => (
         <TileFilterItem
           removable={i > 0}
           key={name}
           id={name}
-          mandatory={mandatory}
           removeTile={onRemove}
         >
           <TagBubble
