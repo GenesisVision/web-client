@@ -2,6 +2,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -11,8 +12,9 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import ChartCurrencySelector, {
   TChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
+import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import { HandlePeriodChangeType } from "shared/utils/types";
+import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import { FundProfitChartDataType } from "../../../reducers/profit-chart.reducer";
 import FundProfitChart from "./fund-profit-chart";
@@ -27,6 +29,7 @@ const _FundProfitChartElements: React.FC<Props> = ({
   changeCurrency,
   selectCurrencies
 }) => {
+  const platformCurrencies = useSelector(platformCurrenciesSelector);
   const [t] = useTranslation();
   const equivalentCurrency = "USD";
   const [chartData, setChartData] = useState<IProfitChartData>({
@@ -65,10 +68,13 @@ const _FundProfitChartElements: React.FC<Props> = ({
       </div>
       <ChartPeriod onChange={onPeriodChange} period={period} />
       <ChartCurrencySelector
+        fullSelectCurrencies={platformCurrencies.map(
+          ({ name }) => name as CurrencyEnum
+        )}
         maxCharts={
           selectCurrencies.length + chartData.selectedCurrencies.length
         }
-        selectCurrencies={selectCurrencies}
+        selectCurrencies={selectCurrencies.map(({ name }) => name)}
         chartCurrencies={chartData.selectedCurrencies}
         onAdd={addCurrency}
         onRemove={removeCurrency}
