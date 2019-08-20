@@ -29,6 +29,7 @@ import { getProfitChart } from "../../../services/fund-details.service";
 import FundProfitChartElements from "./fund-profit-chart-elements";
 
 const _FundProfitChartSection: React.FC<Props> = ({
+  setStatisticCurrency,
   chartCurrencies,
   service: { getProfitChart },
   id,
@@ -62,6 +63,7 @@ const _FundProfitChartSection: React.FC<Props> = ({
         ({ name }) => name === event.target.value
       )!;
       setSelectedCurrencies([...selectedCurrencies]);
+      setStatisticCurrency(selectedCurrencies[0].name);
     },
     [selectedCurrencies, chartCurrencies]
   );
@@ -152,6 +154,7 @@ interface StateProps {
 }
 
 interface OwnProps {
+  setStatisticCurrency: (currency: CurrencyEnum) => void;
   id: string;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
