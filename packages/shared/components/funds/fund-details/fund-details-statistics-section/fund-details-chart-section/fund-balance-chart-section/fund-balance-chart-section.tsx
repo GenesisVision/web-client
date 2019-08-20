@@ -71,6 +71,9 @@ const _FundBalanceChartSection: React.FC<Props> = ({
     },
     [selectedCurrencies, chartCurrencies]
   );
+  useEffect(() => {
+    setStatisticCurrency(globalCurrency);
+  }, []);
   useEffect(
     () => {
       setSelectCurrencies(

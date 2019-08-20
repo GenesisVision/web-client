@@ -29,6 +29,7 @@ import { getProfitChart } from "../../../services/fund-details.service";
 import FundProfitChartElements from "./fund-profit-chart-elements";
 
 const _FundProfitChartSection: React.FC<Props> = ({
+  globalCurrency,
   setStatisticCurrency,
   chartCurrencies,
   service: { getProfitChart },
@@ -67,6 +68,9 @@ const _FundProfitChartSection: React.FC<Props> = ({
     },
     [selectedCurrencies, chartCurrencies]
   );
+  useEffect(() => {
+    setStatisticCurrency(globalCurrency);
+  }, []);
   useEffect(
     () => {
       setSelectCurrencies(
