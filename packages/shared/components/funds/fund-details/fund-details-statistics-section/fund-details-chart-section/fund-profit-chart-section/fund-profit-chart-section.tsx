@@ -31,7 +31,7 @@ import FundProfitChartElements from "./fund-profit-chart-elements";
 const _FundProfitChartSection: React.FC<Props> = ({
   globalCurrency,
   setStatisticCurrency,
-  chartCurrencies,
+  platformCurrencies,
   service: { getProfitChart },
   id,
   period,
@@ -40,7 +40,7 @@ const _FundProfitChartSection: React.FC<Props> = ({
 }) => {
   const [selectedCurrencies, setSelectedCurrencies] = useState<
     TChartCurrency[]
-  >([...chartCurrencies.filter(chartCurrency => chartCurrency.mandatory)]);
+  >([...platformCurrencies.filter(chartCurrency => chartCurrency.mandatory)]);
   const [selectCurrencies, setSelectCurrencies] = useState<TChartCurrency[]>(
     []
   );
@@ -63,13 +63,13 @@ const _FundProfitChartSection: React.FC<Props> = ({
       const newSelectedCurrencies = selectedCurrencies.filter(
         ({ name }) => name !== event.target.value
       );
-      newSelectedCurrencies[i] = chartCurrencies.find(
+      newSelectedCurrencies[i] = platformCurrencies.find(
         ({ name }) => name === event.target.value
       )!;
       setSelectedCurrencies([...newSelectedCurrencies]);
       setStatisticCurrency(newSelectedCurrencies[0].name);
     },
-    [selectedCurrencies, chartCurrencies]
+    [selectedCurrencies, platformCurrencies]
   );
   useEffect(() => {
     setStatisticCurrency(globalCurrency);
@@ -77,13 +77,13 @@ const _FundProfitChartSection: React.FC<Props> = ({
   useEffect(
     () => {
       setSelectCurrencies(
-        chartCurrencies.filter(
+        platformCurrencies.filter(
           ({ name }) =>
             !!!selectedCurrencies.find(currency => currency.name === name)
         )
       );
     },
-    [chartCurrencies, selectedCurrencies]
+    [platformCurrencies, selectedCurrencies]
   );
   useEffect(
     () => {
@@ -127,7 +127,7 @@ const convertToChartCurrency = (defaultCurrency: CurrencyEnum) => ({
   mandatory: name === defaultCurrency
 });
 
-const chartCurrenciesSelector = createSelector<
+const platformChartCurrenciesSelector = createSelector<
   RootState,
   PlatformCurrency[],
   CurrencyEnum,
@@ -143,7 +143,7 @@ const mapStateToProps = (state: RootState): StateProps => ({
   profitChart: fundProfitChartSelector(state),
   globalCurrency: currencySelector(state),
   currencyValues: currenciesSelector(state) as CurrencyEnum[],
-  chartCurrencies: chartCurrenciesSelector(state)
+  platformCurrencies: platformChartCurrenciesSelector(state)
 });
 
 interface ServiceThunks extends ActionCreatorsMapObject {
@@ -157,7 +157,7 @@ interface StateProps {
   profitChart?: FundProfitChartDataType;
   globalCurrency: CurrencyEnum;
   currencyValues: CurrencyEnum[];
-  chartCurrencies: TChartCurrency[];
+  platformCurrencies: TChartCurrency[];
 }
 
 interface OwnProps {

@@ -35,7 +35,7 @@ const _FundBalanceChartSection: React.FC<Props> = ({
   setStatisticCurrency,
   service: { getBalanceChart, getProfitChart },
   globalCurrency,
-  chartCurrencies,
+  platformCurrencies,
   id,
   balanceChart,
   period,
@@ -43,7 +43,7 @@ const _FundBalanceChartSection: React.FC<Props> = ({
 }) => {
   const [selectedCurrencies, setSelectedCurrencies] = useState<
     TChartCurrency[]
-  >([...chartCurrencies.filter(({ name }) => name === globalCurrency)]);
+  >([...platformCurrencies.filter(({ name }) => name === globalCurrency)]);
   const [selectCurrencies, setSelectCurrencies] = useState<TChartCurrency[]>(
     []
   );
@@ -63,13 +63,13 @@ const _FundBalanceChartSection: React.FC<Props> = ({
   );
   const changeCurrency = useCallback(
     (i: number) => (event: ISelectChangeEvent) => {
-      selectedCurrencies[i] = chartCurrencies.find(
+      selectedCurrencies[i] = platformCurrencies.find(
         ({ name }) => name === event.target.value
       )!;
       setSelectedCurrencies([...selectedCurrencies]);
       setStatisticCurrency(event.target.value as CurrencyEnum);
     },
-    [selectedCurrencies, chartCurrencies]
+    [selectedCurrencies, platformCurrencies]
   );
   useEffect(() => {
     setStatisticCurrency(globalCurrency);
@@ -77,13 +77,13 @@ const _FundBalanceChartSection: React.FC<Props> = ({
   useEffect(
     () => {
       setSelectCurrencies(
-        chartCurrencies.filter(
+        platformCurrencies.filter(
           ({ name }) =>
             !!!selectedCurrencies.find(currency => currency.name === name)
         )
       );
     },
-    [chartCurrencies, selectedCurrencies]
+    [platformCurrencies, selectedCurrencies]
   );
   useEffect(
     () => {
@@ -129,7 +129,7 @@ const convertToChartCurrency = ({
   color
 });
 
-const chartCurrenciesSelector = createSelector<
+const platformChartCurrenciesSelector = createSelector<
   RootState,
   PlatformCurrency[],
   TChartCurrency[]
@@ -142,7 +142,7 @@ const mapStateToProps = (state: RootState): StateProps => ({
   balanceChart: fundBalanceChartSelector(state),
   globalCurrency: currencySelector(state),
   currencyValues: currenciesSelector(state) as CurrencyEnum[],
-  chartCurrencies: chartCurrenciesSelector(state)
+  platformCurrencies: platformChartCurrenciesSelector(state)
 });
 
 interface ServiceThunks extends ActionCreatorsMapObject {
@@ -157,7 +157,7 @@ interface StateProps {
   balanceChart?: FundBalanceChartType;
   globalCurrency: CurrencyEnum;
   currencyValues: CurrencyEnum[];
-  chartCurrencies: TChartCurrency[];
+  platformCurrencies: TChartCurrency[];
 }
 
 interface OwnProps {
