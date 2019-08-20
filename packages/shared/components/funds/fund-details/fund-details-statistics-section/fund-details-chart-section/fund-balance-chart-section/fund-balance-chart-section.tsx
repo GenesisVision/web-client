@@ -126,6 +126,7 @@ const _FundBalanceChartSection: React.FC<Props> = ({
       </div>
       <ChartPeriod onChange={onPeriodChange} period={period} />
       <ChartCurrencySelector
+        maxCharts={1}
         selectCurrencies={selectCurrencies}
         chartCurrencies={selectedCurrencies}
         onAdd={addCurrency}
