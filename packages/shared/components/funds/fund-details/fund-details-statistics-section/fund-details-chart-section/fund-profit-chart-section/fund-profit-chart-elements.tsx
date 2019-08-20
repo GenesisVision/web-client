@@ -65,6 +65,9 @@ const _FundProfitChartElements: React.FC<Props> = ({
       </div>
       <ChartPeriod onChange={onPeriodChange} period={period} />
       <ChartCurrencySelector
+        maxCharts={
+          selectCurrencies.length + chartData.selectedCurrencies.length
+        }
         selectCurrencies={selectCurrencies}
         chartCurrencies={chartData.selectedCurrencies}
         onAdd={addCurrency}
