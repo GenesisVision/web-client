@@ -63,7 +63,7 @@ const _FundBalanceChartElements: React.FC<Props> = ({
       <ChartPeriod onChange={onPeriodChange} period={period} />
       <ChartCurrencySelector
         maxCharts={1}
-        selectCurrencies={selectCurrencies}
+        selectCurrencies={selectCurrencies.map(({ name }) => name)}
         chartCurrencies={chartData.selectedCurrencies}
         onAdd={addCurrency}
         onRemove={removeCurrency}
