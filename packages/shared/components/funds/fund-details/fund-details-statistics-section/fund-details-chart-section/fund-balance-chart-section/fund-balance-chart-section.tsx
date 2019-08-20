@@ -50,61 +50,61 @@ const _FundBalanceChartSection: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const equivalentCurrency = "USD";
-  const [currencies, setCurrencies] = useState<TChartCurrency[]>([
-    ...chartCurrencies.filter(({ name }) => name === globalCurrency)
-  ]);
+  const [selectedCurrencies, setSelectedCurrencies] = useState<
+    TChartCurrency[]
+  >([...chartCurrencies.filter(({ name }) => name === globalCurrency)]);
   const [selectCurrencies, setSelectCurrencies] = useState<TChartCurrency[]>(
     []
   );
   const addCurrency = useCallback(
     () => {
-      setCurrencies([...currencies, selectCurrencies[0]]);
+      setSelectedCurrencies([...selectedCurrencies, selectCurrencies[0]]);
     },
-    [currencies, selectCurrencies]
+    [selectedCurrencies, selectCurrencies]
   );
   const removeCurrency = useCallback(
     (name: string) => {
-      setCurrencies([...currencies.filter(item => item.name !== name)]);
+      setSelectedCurrencies([
+        ...selectedCurrencies.filter(item => item.name !== name)
+      ]);
     },
-    [currencies]
+    [selectedCurrencies]
   );
   const changeCurrency = useCallback(
     (i: number) => (event: ISelectChangeEvent) => {
-      currencies[i] = chartCurrencies.find(
+      selectedCurrencies[i] = chartCurrencies.find(
         ({ name }) => name === event.target.value
       )!;
-      setCurrencies([...currencies]);
+      setSelectedCurrencies([...selectedCurrencies]);
       setStatisticCurrency(event.target.value as CurrencyEnum);
     },
-    [currencies, chartCurrencies]
+    [selectedCurrencies, chartCurrencies]
   );
   useEffect(
     () => {
       setSelectCurrencies(
         chartCurrencies.filter(
-          ({ name }) => !!!currencies.find(currency => currency.name === name)
+          ({ name }) =>
+            !!!selectedCurrencies.find(currency => currency.name === name)
         )
       );
     },
-    [chartCurrencies, currencies]
+    [chartCurrencies, selectedCurrencies]
   );
   useEffect(
     () => {
-      const curr = currencies.map(({ name }) => name);
-      getBalanceChart({
+      const currencies = selectedCurrencies.map(({ name }) => name);
+      const opts = {
         id,
         period,
-        currencies: curr
-      });
-      getProfitChart({
-        id,
-        period,
-        currencies: curr
-      });
+        currencies
+      };
+      getBalanceChart(opts);
+      getProfitChart(opts);
     },
-    [period, id, currencies]
+    [period, id, selectedCurrencies]
   );
-  const { name, color } = currencies[0];
+  const { name, color } = selectedCurrencies[0];
   if (!balanceChart) return <ChartValuePeriodLoader />;
   return (
     <>
@@ -127,7 +127,7 @@ const _FundBalanceChartSection: React.FC<Props> = ({
       <ChartPeriod onChange={onPeriodChange} period={period} />
       <ChartCurrencySelector
         selectCurrencies={selectCurrencies}
-        chartCurrencies={currencies}
+        chartCurrencies={selectedCurrencies}
         onAdd={addCurrency}
         onRemove={removeCurrency}
         onChange={changeCurrency}
