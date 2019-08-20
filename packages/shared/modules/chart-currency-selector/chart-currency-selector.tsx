@@ -43,7 +43,9 @@ const _ChartCurrencySelector: React.FC<Props> = ({
                     onChange={onChange(i)}
                     currencyValues={
                       i === 0 && fullSelectCurrencies
-                        ? fullSelectCurrencies
+                        ? fullSelectCurrencies.filter(
+                            fullSelectCurrency => fullSelectCurrency !== name
+                          )
                         : selectCurrencies
                     }
                   />
