@@ -35,7 +35,7 @@ import {
   PORTFOLIO_EVENTS_INVESTOR_COLUMNS
 } from "./portfolio-events-table.constants";
 
-const PortfolioEventsTable: React.FC<Props> = ({
+const _PortfolioEventsTable: React.FC<Props> = ({
   role,
   t,
   filtering = PORTFOLIO_EVENTS_DEFAULT_FILTERING,
@@ -164,8 +164,11 @@ export interface IPortfolioEventsTableOwnProps {
   filtering?: FilteringType;
 }
 
-export default compose<React.ComponentType<IPortfolioEventsTableOwnProps>>(
+const PortfolioEventsTable = compose<
+  React.ComponentType<IPortfolioEventsTableOwnProps>
+>(
   withRole,
   translate(),
   React.memo
-)(PortfolioEventsTable);
+)(_PortfolioEventsTable);
+export default PortfolioEventsTable;
