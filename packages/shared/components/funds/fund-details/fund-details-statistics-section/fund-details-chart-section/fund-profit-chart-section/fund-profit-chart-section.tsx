@@ -45,9 +45,9 @@ const _FundProfitChartSection: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const equivalentCurrency = "USD";
-  const [selectedCurrencies, setSelectedCurrencies] = useState<TChartCurrency[]>([
-    ...chartCurrencies.filter(chartCurrency => chartCurrency.mandatory)
-  ]);
+  const [selectedCurrencies, setSelectedCurrencies] = useState<
+    TChartCurrency[]
+  >([...chartCurrencies.filter(chartCurrency => chartCurrency.mandatory)]);
   const [selectCurrencies, setSelectCurrencies] = useState<TChartCurrency[]>(
     []
   );
@@ -59,7 +59,9 @@ const _FundProfitChartSection: React.FC<Props> = ({
   );
   const removeCurrency = useCallback(
     (name: string) => {
-      setSelectedCurrencies([...selectedCurrencies.filter(item => item.name !== name)]);
+      setSelectedCurrencies([
+        ...selectedCurrencies.filter(item => item.name !== name)
+      ]);
     },
     [selectedCurrencies]
   );
@@ -76,7 +78,8 @@ const _FundProfitChartSection: React.FC<Props> = ({
     () => {
       setSelectCurrencies(
         chartCurrencies.filter(
-          ({ name }) => !!!selectedCurrencies.find(currency => currency.name === name)
+          ({ name }) =>
+            !!!selectedCurrencies.find(currency => currency.name === name)
         )
       );
     },
@@ -197,4 +200,3 @@ const FundProfitChartSection = compose<React.ComponentType<OwnProps>>(
   React.memo
 )(_FundProfitChartSection);
 export default FundProfitChartSection;
-ult FundProfitChartSection;
