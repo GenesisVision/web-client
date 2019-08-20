@@ -37,15 +37,11 @@ const _ChartCurrencySelector: React.FC<Props> = ({
             content={
               <div className="chart-currency-selector__item">
                 <TagCircle backgroundColor={color} />
-                {mandatory ? (
-                  name
-                ) : (
-                  <CurrencySelect
-                    value={name}
-                    onChange={onChange(i)}
-                    currencyValues={selectCurrencies.map(({ name }) => name)}
-                  />
-                )}
+                <CurrencySelect
+                  value={name}
+                  onChange={onChange(i)}
+                  currencyValues={selectCurrencies.map(({ name }) => name)}
+                />
               </div>
             }
           />
