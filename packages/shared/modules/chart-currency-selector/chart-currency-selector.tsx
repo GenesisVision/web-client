@@ -14,6 +14,7 @@ import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _ChartCurrencySelector: React.FC<Props> = ({
+  fullSelectCurrencies,
   maxCharts = 2,
   selectCurrencies,
   currencyValues,
@@ -36,11 +37,15 @@ const _ChartCurrencySelector: React.FC<Props> = ({
             content={
               <div className="chart-currency-selector__item">
                 <TagCircle backgroundColor={color} />
-                {selectCurrencies.length ? (
+                {selectCurrencies.length || i === 0 ? (
                   <CurrencySelect
                     value={name}
                     onChange={onChange(i)}
-                    currencyValues={selectCurrencies.map(({ name }) => name)}
+                    currencyValues={
+                      i === 0 && fullSelectCurrencies
+                        ? fullSelectCurrencies
+                        : selectCurrencies
+                    }
                   />
                 ) : (
                   name
@@ -74,8 +79,9 @@ export type TChangeChartCurrency = (
 ) => (event: ISelectChangeEvent, child: JSX.Element) => void;
 
 interface OwnProps {
+  fullSelectCurrencies?: CurrencyEnum[];
+  selectCurrencies: CurrencyEnum[];
   maxCharts?: number;
-  selectCurrencies: TChartCurrency[];
   chartCurrencies: TChartCurrency[];
   onAdd: TAddChartCurrency;
   onRemove: TRemoveChartCurrency;
