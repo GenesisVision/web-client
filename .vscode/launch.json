@@ -15,9 +15,9 @@
       "name": "Debug CRA Tests",
       "type": "node",
       "request": "launch",
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/react-scripts",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/react-app-rewired",
       "args": ["test", "--runInBand", "--no-cache", "--env=jsdom"],
-      "cwd": "${workspaceRoot}",
+      "cwd": "${workspaceRoot}/packages/shared",
       "protocol": "inspector",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
