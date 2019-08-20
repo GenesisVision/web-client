@@ -2,9 +2,19 @@ import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
 import React, { useCallback } from "react";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
+import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "shared/components/page/page";
 import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
-import withLoader from "shared/decorators/with-loader";
+import { ASSET, STATUS } from "shared/constants/constants";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
 import FundDetailsDescriptionSection from "./fund-details-description/fund-details-description-section";
@@ -12,11 +22,13 @@ import FundDetailsHistorySection from "./fund-details-history-section/fund-detai
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
 import { IDescriptionSection } from "./fund-details.types";
 import {
+  dispatchFundDescription,
   fetchFundReallocateHistory,
   fetchFundStructure
 } from "./services/fund-details.service";
 
 const _FundDetailsContainer: React.FC<Props> = ({
+  service: { dispatchFundDescription },
   isKycConfirmed,
   currency,
   isAuthenticated,
@@ -36,6 +48,9 @@ const _FundDetailsContainer: React.FC<Props> = ({
   const isInvested =
     description.personalFundDetails &&
     description.personalFundDetails.isInvested;
+  const haveInvestmentDetails =
+    description.personalFundDetails &&
+    description.personalFundDetails.status !== STATUS.ENDED;
   return (
     <Page title={description.title}>
       <div className="details">
@@ -46,9 +61,25 @@ const _FundDetailsContainer: React.FC<Props> = ({
             accountCurrency={currency}
             redirectToLogin={redirectToLogin}
             FundControls={descriptionSection.FundControls}
-            FundWithdrawContainer={descriptionSection.FundWithdrawalContainer}
           />
         </div>
+        {haveInvestmentDetails && (
+          <div className="details__section">
+            <div>
+              <DetailsInvestment
+                updateDescription={dispatchFundDescription}
+                asset={ASSET.FUND}
+                id={description.id}
+                assetCurrency={"GVT" as CurrencyEnum}
+                accountCurrency={currency}
+                personalDetails={
+                  description.personalFundDetails as InvestmentDetails
+                }
+                WithdrawContainer={descriptionSection.FundWithdrawalContainer}
+              />
+            </div>
+          </div>
+        )}
         <div className="details__section">
           <FundDetailsStatisticSection id={description.id} />
         </div>
@@ -68,6 +99,21 @@ const _FundDetailsContainer: React.FC<Props> = ({
   );
 };
 
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      dispatchFundDescription
+    },
+    dispatch
+  )
+});
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  dispatchFundDescription: typeof dispatchFundDescription;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
 interface OwnProps {
   isKycConfirmed: boolean;
   redirectToLogin: () => void;
@@ -78,7 +124,16 @@ interface OwnProps {
   currency: CurrencyEnum;
 }
 
-interface Props extends OwnProps {}
+interface Props extends OwnProps, DispatchProps {}
 
-const FundDetailsContainer = React.memo(withLoader(_FundDetailsContainer));
+const FundDetailsContainer = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  React.memo
+)(_FundDetailsContainer);
 export default FundDetailsContainer;
