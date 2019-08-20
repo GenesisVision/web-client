@@ -4,8 +4,6 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -14,21 +12,16 @@ import {
   compose
 } from "redux";
 import { createSelector } from "reselect";
-import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import { ISelectChangeEvent } from "shared/components/select/select";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import ChartCurrencySelector, {
-  TChartCurrency
-} from "shared/modules/chart-currency-selector/chart-currency-selector";
+import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import {
   currenciesSelector,
   platformCurrenciesSelector
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import { fundBalanceChartSelector } from "../../../reducers/balance-chart.reducer";
@@ -36,7 +29,7 @@ import {
   getBalanceChart,
   getProfitChart
 } from "../../../services/fund-details.service";
-import FundBalanceChart from "./fund-balance-chart";
+import FundBalanceChartElements from "./fund-balance-chart-elements";
 
 const _FundBalanceChartSection: React.FC<Props> = ({
   setStatisticCurrency,
@@ -48,8 +41,6 @@ const _FundBalanceChartSection: React.FC<Props> = ({
   period,
   onPeriodChange
 }) => {
-  const [t] = useTranslation();
-  const equivalentCurrency = "USD";
   const [selectedCurrencies, setSelectedCurrencies] = useState<
     TChartCurrency[]
   >([...chartCurrencies.filter(({ name }) => name === globalCurrency)]);
@@ -104,43 +95,19 @@ const _FundBalanceChartSection: React.FC<Props> = ({
     },
     [period, id, selectedCurrencies]
   );
-  const { name, color } = selectedCurrencies[0];
-  if (!balanceChart) return <ChartValuePeriodLoader />;
   return (
-    <>
-      <div className="details-chart__value">
-        <StatisticItem
-          label={t("fund-details-page.chart.value")}
-          equivalent={balanceChart.usdBalance}
-          equivalentCurrency={equivalentCurrency}
-          big
-          accent
-        >
-          <NumberFormat
-            value={formatCurrencyValue(balanceChart.balance, name)}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={` ${name}`}
-          />
-        </StatisticItem>
-      </div>
-      <ChartPeriod onChange={onPeriodChange} period={period} />
-      <ChartCurrencySelector
-        maxCharts={1}
-        selectCurrencies={selectCurrencies}
-        chartCurrencies={selectedCurrencies}
-        onAdd={addCurrency}
-        onRemove={removeCurrency}
-        onChange={changeCurrency}
-      />
-      <div className="details-chart__profit">
-        <FundBalanceChart
-          balanceChart={balanceChart.balanceChart}
-          currency={name}
-          color={color}
-        />
-      </div>
-    </>
+    <FundBalanceChartElements
+      condition={!!balanceChart}
+      loader={<ChartValuePeriodLoader />}
+      selectedCurrencies={selectedCurrencies}
+      balanceChart={balanceChart!}
+      addCurrency={addCurrency}
+      removeCurrency={removeCurrency}
+      changeCurrency={changeCurrency}
+      selectCurrencies={selectCurrencies}
+      period={period}
+      onPeriodChange={onPeriodChange}
+    />
   );
 };
 
