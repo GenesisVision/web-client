@@ -26,7 +26,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
     <div className="chart-currency-selector__container">
       {chartCurrencies.map(({ name, color, mandatory }, i) => (
         <TileFilterItem
-          removable={i > maxCharts - 1}
+          removable={i > 0}
           key={name}
           id={name}
           mandatory={mandatory}
