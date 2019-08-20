@@ -1,16 +1,20 @@
 import { FundAssetsListInfo, ReallocationsViewModel } from "gv-api-web";
 import { Dispatch } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+  PORTFOLIO_EVENTS_FILTERS
+} from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import { composeRequestFilters } from "shared/components/table/services/table.service";
 import { RootState } from "shared/reducers/root-reducer";
 import {
-  FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE
+  FUND_DETAILS_ROUTE,
+  FUNDS_SLUG_URL_PARAM_NAME
 } from "shared/routes/funds.routes";
 import fundsApi from "shared/services/api-client/funds-api";
-import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 import { CurrencyEnum, MiddlewareDispatch } from "shared/utils/types";
@@ -20,6 +24,10 @@ import {
   fetchFundDescriptionAction,
   fetchFundProfitChartAction
 } from "../actions/fund-details.actions";
+import {
+  FUND_REBALANCING_DEFAULT_FILTERS,
+  FUND_REBALANCING_FILTERS
+} from "../fund-details.constants";
 
 export const dispatchFundDescription = () => (
   dispatch: MiddlewareDispatch,
@@ -50,11 +58,25 @@ export const fetchFundReallocateHistory = (
 
 export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
   const isAuthenticated = authService.isAuthenticated();
-  const filtering = { take: 0 };
+  const paging = { itemsOnPage: 0 };
+  const eventsFiltering = composeRequestFilters({
+    paging,
+    filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+    defaultFilters: PORTFOLIO_EVENTS_FILTERS
+  });
   const eventsCountPromise = isAuthenticated
-    ? fetchPortfolioEvents({ ...filtering, assetId: id })
+    ? fetchPortfolioEvents({ ...eventsFiltering, assetId: id })
     : Promise.resolve({ total: 0 });
-  const reallocateCountPromise = fetchFundReallocateHistory(id, filtering);
+
+  const reallocateHistoryFilters = composeRequestFilters({
+    paging,
+    filtering: FUND_REBALANCING_FILTERS,
+    defaultFilters: FUND_REBALANCING_DEFAULT_FILTERS
+  });
+  const reallocateCountPromise = fetchFundReallocateHistory(
+    id,
+    reallocateHistoryFilters
+  );
   return Promise.all([eventsCountPromise, reallocateCountPromise]).then(
     ([eventsData, reallocateData]) => ({
       eventsCount: eventsData.total,
