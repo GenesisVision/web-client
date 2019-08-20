@@ -2,6 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { FundProfitChart } from "gv-api-web";
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
@@ -15,18 +16,35 @@ const _FundDetailsStatistics: React.FC<Props> = ({
   t,
   statistic,
   period
-}) => (
-  <Surface className="surface--horizontal-paddings details-statistics">
-    <h3>{t("fund-details-page.statistics.heading")}</h3>
-    <FundDetailsStatisticsElements
-      condition={!!statistic}
-      loader={<DetailsStatisticsLoader />}
-      statisticCurrency={statisticCurrency}
-      statistic={statistic!}
-      period={period}
-    />
-  </Surface>
-);
+}) => {
+  const [statisticData, setStatisticData] = useState<
+    IStatisticData | undefined
+  >(undefined);
+  useEffect(
+    () => {
+      statistic && setStatisticData({ statisticCurrency, statistic });
+    },
+    [statistic]
+  );
+  return (
+    <Surface className="surface--horizontal-paddings details-statistics">
+      <h3>{t("fund-details-page.statistics.heading")}</h3>
+      <FundDetailsStatisticsElements
+        statisticData={statisticData!}
+        condition={!!statisticData}
+        loader={<DetailsStatisticsLoader />}
+        statisticCurrency={statisticCurrency}
+        statistic={statistic!}
+        period={period}
+      />
+    </Surface>
+  );
+};
+
+export interface IStatisticData {
+  statisticCurrency: CurrencyEnum;
+  statistic: FundProfitChart;
+}
 
 interface Props extends WithTranslation {
   statisticCurrency: CurrencyEnum;

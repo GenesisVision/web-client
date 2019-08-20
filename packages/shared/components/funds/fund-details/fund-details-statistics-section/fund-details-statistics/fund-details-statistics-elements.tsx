@@ -15,9 +15,11 @@ import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { IStatisticData } from "./fund-details-statistics";
+
 const _FundDetailsStatisticsElements: React.FC<
   IFundDetailsStatisticsElementsProps & WithTranslation
-> = ({ statisticCurrency, t, statistic, period }) => (
+> = ({ statisticData: { statisticCurrency, statistic }, t, period }) => (
   <>
     <div className="details-statistics__subheading">
       {t("fund-details-page.statistics.current")}
@@ -166,6 +168,7 @@ const _FundDetailsStatisticsElements: React.FC<
 );
 
 export interface IFundDetailsStatisticsElementsProps {
+  statisticData: IStatisticData;
   statisticCurrency: CurrencyEnum;
   statistic: FundProfitChart;
   period: ChartDefaultPeriod;
