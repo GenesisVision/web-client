@@ -60,11 +60,14 @@ const _FundProfitChartSection: React.FC<Props> = ({
   );
   const changeCurrency = useCallback(
     (i: number) => (event: ISelectChangeEvent) => {
-      selectedCurrencies[i] = chartCurrencies.find(
+      const newSelectedCurrencies = selectedCurrencies.filter(
+        ({ name }) => name !== event.target.value
+      );
+      newSelectedCurrencies[i] = chartCurrencies.find(
         ({ name }) => name === event.target.value
       )!;
-      setSelectedCurrencies([...selectedCurrencies]);
-      setStatisticCurrency(selectedCurrencies[0].name);
+      setSelectedCurrencies([...newSelectedCurrencies]);
+      setStatisticCurrency(newSelectedCurrencies[0].name);
     },
     [selectedCurrencies, chartCurrencies]
   );
