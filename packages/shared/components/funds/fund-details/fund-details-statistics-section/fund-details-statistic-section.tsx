@@ -31,7 +31,6 @@ const _FundDetailsStatisticSection: React.FC<Props> = ({
       <div className="details-statistic-section__statistic">
         <FundDetailsStatistics
           statisticCurrency={statisticCurrency}
-          condition={!!profitChart}
           statistic={profitChart && profitChart[0]}
           period={period}
         />

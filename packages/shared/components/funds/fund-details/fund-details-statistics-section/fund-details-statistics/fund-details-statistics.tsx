@@ -6,7 +6,6 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
 import Surface from "shared/components/surface/surface";
-import withLoader from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
 import FundDetailsStatisticsElements from "./fund-details-statistics-elements";
@@ -35,7 +34,5 @@ interface Props extends WithTranslation {
   statistic?: FundProfitChart;
 }
 
-const FundDetailsStatistics = withLoader(
-  translate()(React.memo(_FundDetailsStatistics))
-);
+const FundDetailsStatistics = translate()(React.memo(_FundDetailsStatistics));
 export default FundDetailsStatistics;
