@@ -31,6 +31,15 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
     margin-right: 30px;
   }
 
+  &__investment-container,
+  &__investment-tabs {
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-landscape-phone() {
+      padding: 0 $padding-small;
+    }
+  }
+
   &__short-statistic-container {
     display: flex;
     justify-content: flex-start;
