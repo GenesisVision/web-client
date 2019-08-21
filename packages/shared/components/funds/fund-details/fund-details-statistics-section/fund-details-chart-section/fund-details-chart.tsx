@@ -4,12 +4,11 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import Surface from "shared/components/surface/surface";
-import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
+import { HandlePeriodChangeType } from "shared/utils/types";
 
 import FundDetailsChartElements from "./fund-details-chart-elements";
 
 const _FundDetailsChart: React.FC<Props> = ({
-  setStatisticCurrency,
   id,
   t,
   period,
@@ -18,7 +17,6 @@ const _FundDetailsChart: React.FC<Props> = ({
   <Surface className="surface--horizontal-paddings details-chart">
     <h3>{t("fund-details-page.chart.heading")}</h3>
     <FundDetailsChartElements
-      setStatisticCurrency={setStatisticCurrency}
       id={id}
       period={period}
       onPeriodChange={onPeriodChange}
@@ -27,7 +25,6 @@ const _FundDetailsChart: React.FC<Props> = ({
 );
 
 interface Props extends WithTranslation {
-  setStatisticCurrency: (currency: CurrencyEnum) => void;
   id: string;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
