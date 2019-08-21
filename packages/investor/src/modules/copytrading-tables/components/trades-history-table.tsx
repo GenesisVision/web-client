@@ -3,7 +3,7 @@ import TradesHistoryRow from "modules/copytrading-tables/components/trades-histo
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Action, Dispatch, bindActionCreators, compose } from "redux";
+import { Action, bindActionCreators, compose, Dispatch } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
@@ -16,9 +16,6 @@ import { COPYTRADING_TRADES_HISTORY_COLUMNS } from "./copytrading-tables.constan
 import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.selectors";
 
 class _TradesHistoryTable extends React.PureComponent<Props> {
-  componentWillUnmount() {
-    this.props.service.clearCopytradingTable();
-  }
   render() {
     const { t, currency, title } = this.props;
     return (

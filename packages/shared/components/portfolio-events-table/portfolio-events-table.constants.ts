@@ -18,6 +18,9 @@ export const PORTFOLIO_EVENTS_COLUMNS: SortingColumn[] = [
     name: "description"
   },
   {
+    name: ""
+  },
+  {
     name: "amount"
   }
 ];
@@ -32,6 +35,7 @@ export const PORTFOLIO_EVENTS_INVESTOR_COLUMNS: SortingColumn[] = [
   {
     name: "fee"
   },
+  { name: "" },
   {
     name: "amount"
   }

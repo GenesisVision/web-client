@@ -13,6 +13,7 @@ import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import useTab from "shared/hooks/tab.hook";
 
+import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
 import {
   getCopytradingTradesCount,
   ICopytradingTradesCounts
@@ -37,6 +38,7 @@ const _CopytradingTablesSection: React.FC<Props> = ({
   useEffect(
     () => {
       service.getCopytradingTradesCount(currency);
+      return service.clearCopytradingTable;
     },
     [currency, service]
   );
@@ -90,7 +92,8 @@ const mapStateToProps = (state: InvestorRootState) => {
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      getCopytradingTradesCount
+      getCopytradingTradesCount,
+      clearCopytradingTable
     },
     dispatch
   )
@@ -115,6 +118,7 @@ interface StateProps {
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   getCopytradingTradesCount: typeof getCopytradingTradesCount;
+  clearCopytradingTable: typeof clearCopytradingTable;
 }
 
 interface DispatchProps {

@@ -1,5 +1,6 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 $middle-padding: 33px;
 $large-padding: 42px;
@@ -34,5 +35,32 @@ $large-padding: 42px;
     &__value {
       color: $text-light-color;
     }
+  }
+}
+
+.portfolio-event-details {
+  margin-right: $padding-small / 2;
+
+  &__button.gv-btn {
+    @include font-size(14px);
+    border-radius: 20px;
+    font-weight: 500;
+    line-height: 16px;
+    padding: $padding-xxsmall/3 $padding-xxsmall;
+    white-space: nowrap;
+    transition-property: background-color, color;
+    background-color: $border-color;
+    color: $text-color;
+
+    &.portfolio-event-details__button--active,
+    &:hover:not(:disabled),
+    &:active:not(:disabled) {
+      background-color: $positive-background-color;
+      color: $positive-color;
+    }
+  }
+
+  &__popover {
+    padding: $padding-xsmall;
   }
 }
