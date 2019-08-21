@@ -42,7 +42,7 @@ const _SubscriptionDetails: React.FC<Props> = ({
     </div>
     <div className="details-investment__short-statistic">
       <StatisticItem
-        className="subscription-details__short-statistic-item"
+        className="details__short-statistic-item"
         accent
         label={t("fund-details-page.description.profit")}
       >
@@ -51,7 +51,7 @@ const _SubscriptionDetails: React.FC<Props> = ({
         </Profitability>
       </StatisticItem>
       <StatisticItem
-        className="subscription-details__short-statistic-item"
+        className="details__short-statistic-item"
         accent
         label={t("fund-details-page.description.status")}
       >
@@ -60,7 +60,7 @@ const _SubscriptionDetails: React.FC<Props> = ({
       <StatisticItem
         accent
         label={t("subscription-details.subscription-type")}
-        className="subscription-details__short-statistic-item"
+        className="details__short-statistic-item"
       >
         <SubscriptionTypeValue
           currency={currency}
@@ -71,7 +71,7 @@ const _SubscriptionDetails: React.FC<Props> = ({
         />
       </StatisticItem>
       <StatisticItem
-        className="subscription-details__short-statistic-item"
+        className="details__short-statistic-item"
         accent
         label={t(`subscription-details.tolerance-percentage`)}
       >
