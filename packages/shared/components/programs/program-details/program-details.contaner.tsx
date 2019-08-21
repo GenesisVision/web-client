@@ -26,7 +26,6 @@ import { ASSET, STATUS } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
-import SubscriptionDetailsContainer from "./program-details-description/subscription-details/subscription-details-container";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
 
@@ -65,41 +64,26 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           />
         </div>
         <div className="details__section">
-          {description.personalProgramDetails && isAuthenticated && (
-            <>
-              {description.personalProgramDetails.isInvested &&
-                description.personalProgramDetails.status !== STATUS.ENDED && (
-                  <DetailsInvestment
-                    eventTypeFilterValues={historySection.eventTypeFilterValues}
-                    fetchPortfolioEvents={fetchPortfolioEvents}
-                    updateDescription={dispatchProgramDescription}
-                    notice={t(
-                      "program-details-page.description.withdraw-notice-text"
-                    )}
-                    asset={ASSET.PROGRAM}
-                    id={description.id}
-                    assetCurrency={description.currency}
-                    accountCurrency={currency}
-                    personalDetails={
-                      description.personalProgramDetails as InvestmentDetails
-                    } // TODO fix type InvestmentDetails
-                    ProgramReinvestingWidget={
-                      descriptionSection.ProgramReinvestingWidget
-                    }
-                    WithdrawContainer={
-                      descriptionSection.ProgramWithdrawContainer
-                    }
-                  />
-                )}
-              {description.personalProgramDetails.signalSubscription
-                .hasActiveSubscription && (
-                <SubscriptionDetailsContainer
-                  id={description.id}
-                  currency={description.currency}
-                  personalDetails={description.personalProgramDetails}
-                />
+          {isAuthenticated && description.personalProgramDetails && (
+            <DetailsInvestment
+              eventTypeFilterValues={historySection.eventTypeFilterValues}
+              fetchPortfolioEvents={fetchPortfolioEvents}
+              updateDescription={dispatchProgramDescription}
+              notice={t(
+                "program-details-page.description.withdraw-notice-text"
               )}
-            </>
+              asset={ASSET.PROGRAM}
+              id={description.id}
+              assetCurrency={description.currency}
+              accountCurrency={currency}
+              personalDetails={
+                description.personalProgramDetails as InvestmentDetails
+              } // TODO fix type InvestmentDetails
+              ProgramReinvestingWidget={
+                descriptionSection.ProgramReinvestingWidget
+              }
+              WithdrawContainer={descriptionSection.ProgramWithdrawContainer}
+            />
           )}
         </div>
         <div className="details__section">
