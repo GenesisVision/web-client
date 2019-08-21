@@ -158,13 +158,6 @@ const _Investment: React.FC<Props> = ({
           onSubmit={updateDescription}
         />
       </div>
-      {personalDetails.signalSubscription.hasActiveSubscription && (
-        <SubscriptionDetailsContainer
-          id={id}
-          currency={assetCurrency}
-          personalDetails={personalDetails}
-        />
-      )}
     </>
   );
 };
