@@ -8,14 +8,12 @@ import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useTab from "shared/hooks/tab.hook";
-import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
+import { HandlePeriodChangeType } from "shared/utils/types";
 
 import FundBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
-import FundDetailsChart from "./fund-details-chart";
 import FundProfitChartSection from "./fund-profit-chart-section/fund-profit-chart-section";
 
 const _FundDetailsChartSection: React.FC<Props> = ({
-  setStatisticCurrency,
   id,
   t,
   period,
@@ -36,7 +34,6 @@ const _FundDetailsChartSection: React.FC<Props> = ({
       </GVTabs>
       {tab === TABS.PROFIT && (
         <FundProfitChartSection
-          setStatisticCurrency={setStatisticCurrency}
           id={id}
           period={period}
           onPeriodChange={onPeriodChange}
@@ -44,7 +41,6 @@ const _FundDetailsChartSection: React.FC<Props> = ({
       )}
       {tab === TABS.BALANCE && (
         <FundBalanceChartSection
-          setStatisticCurrency={setStatisticCurrency}
           id={id}
           period={period}
           onPeriodChange={onPeriodChange}
@@ -60,7 +56,6 @@ enum TABS {
 }
 
 interface OwnProps {
-  setStatisticCurrency: (currency: CurrencyEnum) => void;
   id: string;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
