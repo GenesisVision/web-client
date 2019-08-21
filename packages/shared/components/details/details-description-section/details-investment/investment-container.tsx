@@ -25,28 +25,26 @@ const _InvestmentContainer: React.FC<Props> = ({
 }) => {
   return (
     <div className="details-investment__investment-container">
-      {personalDetails.isInvested &&
-        personalDetails.status !== STATUS.ENDED && (
-          <Investment
-            updateDescription={updateDescription}
-            id={id}
-            assetCurrency={assetCurrency}
-            accountCurrency={accountCurrency}
-            asset={asset}
-            notice={notice}
-            personalDetails={personalDetails}
-            WithdrawContainer={WithdrawContainer}
-            ProgramReinvestingWidget={ProgramReinvestingWidget}
-          />
-        )}
-      {personalDetails.signalSubscription &&
-        personalDetails.signalSubscription.hasActiveSubscription && (
-          <SubscriptionDetailsContainer
-            id={id}
-            currency={assetCurrency}
-            personalDetails={personalDetails}
-          />
-        )}
+      {hasActiveInvestment(personalDetails) && (
+        <Investment
+          updateDescription={updateDescription}
+          id={id}
+          assetCurrency={assetCurrency}
+          accountCurrency={accountCurrency}
+          asset={asset}
+          notice={notice}
+          personalDetails={personalDetails}
+          WithdrawContainer={WithdrawContainer}
+          ProgramReinvestingWidget={ProgramReinvestingWidget}
+        />
+      )}
+      {hasSubscription(personalDetails) && (
+        <SubscriptionDetailsContainer
+          id={id}
+          currency={assetCurrency}
+          personalDetails={personalDetails}
+        />
+      )}
     </div>
   );
 };
@@ -64,6 +62,13 @@ interface OwnProps {
     IProgramReinvestingContainerOwnProps
   >;
 }
+
+export const hasActiveInvestment = (details: InvestmentDetails): boolean =>
+  details.isInvested && details.status !== STATUS.ENDED;
+
+export const hasSubscription = (details: InvestmentDetails): boolean =>
+  details.signalSubscription &&
+  details.signalSubscription.hasActiveSubscription;
 
 interface Props extends OwnProps, WithTranslation {}
 
