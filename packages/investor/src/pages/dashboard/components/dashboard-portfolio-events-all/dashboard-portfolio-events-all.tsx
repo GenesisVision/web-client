@@ -1,7 +1,7 @@
-import { ManagerRootState } from "manager-web-portal/src/reducers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
+import { InvestorRootState } from "reducers";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
@@ -31,7 +31,7 @@ const _PortfolioEventsAllComponent: React.FC<Props> = ({ events }) => {
   );
 };
 
-const mapStateToProps = (state: ManagerRootState): StateProps => ({
+const mapStateToProps = (state: InvestorRootState): StateProps => ({
   events: allEventsSelector(state)
 });
 

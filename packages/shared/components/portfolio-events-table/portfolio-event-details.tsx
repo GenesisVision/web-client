@@ -13,11 +13,7 @@ import FeeCommission from "../fee-commission/fee-commission";
 const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const [t] = useTranslation();
-  let extendedInfo2 = [
-    { title: "title", amount: 1000, currency: "ADA" },
-    { title: "title", amount: 1000, currency: "ADA" }
-  ];
-  if (extendedInfo2.length === 0) return null;
+  if (extendedInfo.length === 0) return null;
   return (
     <div className="portfolio-event-details">
       <GVButton
@@ -36,7 +32,7 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
         className="portfolio-event-details__popover"
       >
-        {extendedInfo2.map((info, idx) => (
+        {extendedInfo.map((info, idx) => (
           <FeeCommission
             key={idx}
             title={info.title}
