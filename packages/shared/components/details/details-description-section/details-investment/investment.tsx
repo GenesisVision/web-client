@@ -11,6 +11,7 @@ import {
   PROFITABILITY_PREFIX,
   PROFITABILITY_VARIANT
 } from "shared/components/profitability/profitability.helper";
+import SubscriptionDetailsContainer from "shared/components/programs/program-details/program-details-description/subscription-details/subscription-details-container";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
@@ -157,6 +158,13 @@ const _Investment: React.FC<Props> = ({
           onSubmit={updateDescription}
         />
       </div>
+      {personalDetails.signalSubscription.hasActiveSubscription && (
+        <SubscriptionDetailsContainer
+          id={id}
+          currency={assetCurrency}
+          personalDetails={personalDetails}
+        />
+      )}
     </>
   );
 };
