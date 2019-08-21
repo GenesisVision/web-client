@@ -3,20 +3,26 @@ import { useTranslation } from "react-i18next";
 import useErrorMessage from "shared/hooks/error-message.hook";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
+import { SetSubmittingType } from "shared/utils/types";
 
 import PublicInfoForm, { IAboutFormValues } from "./public-info-form";
 
 const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
-  const [t] = useTranslation();
-  const { errorMessage, setErrorMessage } = useErrorMessage();
+  const {
+    errorMessage,
+    setErrorMessage,
+    cleanErrorMessage
+  } = useErrorMessage();
   const handleSubmit = useCallback(
-    (model: IAboutFormValues) =>
+    (model: IAboutFormValues, setSubmitting: SetSubmittingType) =>
       profileApi
         .v10ProfileUpdatePost(authService.getAuthArg(), {
           model
         })
-        .then(() => onSuccessEdit(t("profile-page.success-edit")))
-        .catch(setErrorMessage),
+        .then(onSuccessEdit)
+        .then(cleanErrorMessage)
+        .catch(setErrorMessage)
+        .finally(() => setSubmitting(false)),
     []
   );
   return (
@@ -30,7 +36,7 @@ const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
 };
 
 interface Props {
-  onSuccessEdit: (text: string) => void;
+  onSuccessEdit: () => void;
   userName: string;
   about: string;
 }

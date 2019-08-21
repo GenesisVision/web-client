@@ -1,6 +1,10 @@
 import { ProfileFullViewModel } from "gv-api-web";
 import React, { useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import {
+  WithTranslation,
+  withTranslation as translate,
+  useTranslation
+} from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -13,14 +17,15 @@ import Profile from "./profile";
 const _ProfileContainer: React.FC<Props> = ({
   service: { alertMessageActionsSuccess }
 }) => {
+  const [t] = useTranslation();
   const [data, setData] = useState<ProfileFullViewModel | undefined>(undefined);
   const fetch = () =>
     profileApi.v10ProfileGet(authService.getAuthArg()).then(setData);
   useEffect(() => {
     fetch();
   }, []);
-  const success = (text: string) => {
-    alertMessageActionsSuccess(text);
+  const success = () => {
+    alertMessageActionsSuccess(t("profile-page.success-edit"));
     fetch();
   };
   return (
