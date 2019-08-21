@@ -4,6 +4,7 @@ import { goBack } from "connected-react-router";
 import { FormikProps, withFormik } from "formik";
 import { UpdateProfileViewModel } from "gv-api-web";
 import * as React from "react";
+import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
@@ -15,6 +16,9 @@ import {
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
+import TextInputComponent, {
+  TextInputValues
+} from "shared/components/text-input-component/text-input-component";
 import { SetSubmittingType } from "shared/utils/types";
 
 const _PublicInfoForm: React.FC<Props> = ({
@@ -24,34 +28,42 @@ const _PublicInfoForm: React.FC<Props> = ({
   isValid,
   dirty,
   isSubmitting
-}) => (
-  <form id="about-manager" onSubmit={handleSubmit} className="about">
-    <div>
-      <div className="profile__row">
-        <GVFormikField
-          label={t("profile-page.login")}
-          component={GVTextField}
-          name={FIELDS.userName}
-          autoFocus
-        />
+}) => {
+  const isAllow = useCallback(({ symbol }: TextInputValues) => {
+    const regex = new RegExp("^[a-zA-Z0-9 ]+$");
+    return regex.test(symbol);
+  }, []);
+  return (
+    <form id="about-manager" onSubmit={handleSubmit} className="about">
+      <div>
+        <div className="profile__row">
+          <GVFormikField
+            InputComponent={TextInputComponent}
+            isAllowed={isAllow}
+            label={t("profile-page.login")}
+            component={GVTextField}
+            name={FIELDS.userName}
+            autoFocus
+          />
+        </div>
+        <div className="profile__row">
+          <GVFormikField
+            label={t("profile-page.about")}
+            component={GVTextField}
+            type="textarea"
+            name={FIELDS.about}
+          />
+        </div>
+        <div className="form-error">{errorMessage}</div>
       </div>
       <div className="profile__row">
-        <GVFormikField
-          label={t("profile-page.about")}
-          component={GVTextField}
-          type="textarea"
-          name={FIELDS.about}
-        />
+        <GVButton type="submit" disabled={isSubmitting || !isValid || !dirty}>
+          {t("buttons.save")}
+        </GVButton>
       </div>
-      <div className="form-error">{errorMessage}</div>
-    </div>
-    <div className="profile__row">
-      <GVButton type="submit" disabled={isSubmitting || !isValid || !dirty}>
-        {t("buttons.save")}
-      </GVButton>
-    </div>
-  </form>
-);
+    </form>
+  );
+};
 
 enum FIELDS {
   userName = "userName",
