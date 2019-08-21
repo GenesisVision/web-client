@@ -1,7 +1,7 @@
 import { PlatformCurrency } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { ResolveThunks, connect, useDispatch } from "react-redux";
 import {
   ActionCreatorsMapObject,
   Dispatch,
@@ -21,16 +21,17 @@ import {
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
+import { statisticCurrencyAction } from "../../../actions/fund-details.actions";
 import {
   FundProfitChartDataType,
   fundProfitChartSelector
 } from "../../../reducers/profit-chart.reducer";
+import { statisticCurrencySelector } from "../../../reducers/statistic-currency.reducer";
 import { getProfitChart } from "../../../services/fund-details.service";
 import FundProfitChartElements from "./fund-profit-chart-elements";
 
 const _FundProfitChartSection: React.FC<Props> = ({
   globalCurrency,
-  setStatisticCurrency,
   platformCurrencies,
   service: { getProfitChart },
   id,
@@ -38,6 +39,7 @@ const _FundProfitChartSection: React.FC<Props> = ({
   profitChart,
   onPeriodChange
 }) => {
+  const dispatch = useDispatch();
   const [selectedCurrencies, setSelectedCurrencies] = useState<
     TChartCurrency[]
   >([...platformCurrencies.filter(chartCurrency => chartCurrency.mandatory)]);
@@ -67,13 +69,10 @@ const _FundProfitChartSection: React.FC<Props> = ({
         ({ name }) => name === event.target.value
       )!;
       setSelectedCurrencies([...newSelectedCurrencies]);
-      setStatisticCurrency(newSelectedCurrencies[0].name);
+      dispatch(statisticCurrencyAction(newSelectedCurrencies[0].name));
     },
     [selectedCurrencies, platformCurrencies]
   );
-  useEffect(() => {
-    setStatisticCurrency(globalCurrency);
-  }, []);
   useEffect(
     () => {
       setSelectCurrencies(
@@ -134,9 +133,9 @@ const platformChartCurrenciesSelector = createSelector<
   TChartCurrency[]
 >(
   state => platformCurrenciesSelector(state),
-  state => currencySelector(state),
-  (currencies, globalCurrency) =>
-    currencies.map(convertToChartCurrency(globalCurrency))
+  state => statisticCurrencySelector(state),
+  (currencies, statisticCurrency) =>
+    currencies.map(convertToChartCurrency(statisticCurrency))
 );
 
 const mapStateToProps = (state: RootState): StateProps => ({
@@ -161,7 +160,6 @@ interface StateProps {
 }
 
 interface OwnProps {
-  setStatisticCurrency: (currency: CurrencyEnum) => void;
   id: string;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
