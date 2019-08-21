@@ -8,8 +8,6 @@ $withdraw-button-height-mobile: $withdraw-button-height/$divider-text;
 $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
 
 .details-investment {
-  @include adaptive-padding(top, $padding-small);
-
   & div {
     box-sizing: border-box;
   }
@@ -29,6 +27,26 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   @include media-breakpoint-tablet() {
     max-width: 700px;
     margin-right: 30px;
+  }
+
+  &__own-block {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    @include media-breakpoint-tablet() {
+      width: 50%;
+    }
+  }
+
+  &__current-period-investment-data {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__investment-container {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   &__investment-container,
