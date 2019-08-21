@@ -2,6 +2,10 @@
 @import "~shared/styles/_sizes.scss";
 
 .profile {
+  &__form-error {
+    @include adaptive-padding(bottom, $padding-xsmall);
+  }
+
   &__content {
     display: flex;
     flex-direction: row;
