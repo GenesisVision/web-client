@@ -45,13 +45,7 @@ const _FundBalanceChartElements: React.FC<Props> = ({
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem
-          label={t("fund-details-page.chart.value")}
-          equivalent={chartData.balanceChart.usdBalance}
-          equivalentCurrency={equivalentCurrency}
-          big
-          accent
-        >
+        <StatisticItem label={t("fund-details-page.chart.value")} big accent>
           <NumberFormat
             value={formatCurrencyValue(chartData.balanceChart.balance, name)}
             thousandSeparator={" "}

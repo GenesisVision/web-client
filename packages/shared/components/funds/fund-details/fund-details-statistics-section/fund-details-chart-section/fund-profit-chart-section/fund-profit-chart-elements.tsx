@@ -49,15 +49,7 @@ const _FundProfitChartElements: React.FC<Props> = ({
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem
-          label={t("fund-details-page.chart.value")}
-          equivalent={
-            +formatCurrencyValue(chart.timeframeUsdProfit, equivalentCurrency)
-          }
-          equivalentCurrency={equivalentCurrency}
-          big
-          accent
-        >
+        <StatisticItem label={t("fund-details-page.chart.value")} big accent>
           <NumberFormat
             value={chart.profitPercent}
             thousandSeparator={" "}
