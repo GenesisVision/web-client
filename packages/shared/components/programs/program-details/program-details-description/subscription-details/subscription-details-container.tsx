@@ -19,12 +19,12 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
   personalDetails
 }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const [rate, setRate] = useState<number>(0);
+  const [rate, setRate] = useState<number>(1);
   useEffect(() => {
     rateApi
       .v10RateByFromByToGet("USD", currency)
-      .then(rate => setRate(rate))
-      .catch(() => setRate(0));
+      .then(setRate)
+      .catch(() => setRate(1));
   }, []);
   return (
     <>
