@@ -17,7 +17,7 @@ import useTab from "shared/hooks/tab.hook";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
-import Investment from "./investment";
+import InvestmentContainer from "./investment-container";
 
 const EVENTS_FILTERING = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
@@ -40,23 +40,25 @@ const _DetailsInvestment: React.FC<Props> = ({
 }) => {
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   return (
-    <Surface className="surface--horizontal-paddings">
-      {asset === ASSET.PROGRAM ? (
-        <GVTabs value={tab} onChange={setTab}>
-          <GVTab
-            value={TABS.INVESTMENT}
-            label={t(`fund-details-page.description.yourInvestment.${asset}`)}
-          />
-          <GVTab
-            value={TABS.EVENTS}
-            label={t("program-details-page.history.tabs.events")}
-          />
-        </GVTabs>
-      ) : (
-        <h3>{t(`fund-details-page.description.yourInvestment.${asset}`)}</h3>
-      )}
+    <Surface className="surface">
+      <div className="details-investment__investment-tabs">
+        {asset === ASSET.PROGRAM ? (
+          <GVTabs value={tab} onChange={setTab}>
+            <GVTab
+              value={TABS.INVESTMENT}
+              label={t(`fund-details-page.description.yourInvestment.${asset}`)}
+            />
+            <GVTab
+              value={TABS.EVENTS}
+              label={t("program-details-page.history.tabs.events")}
+            />
+          </GVTabs>
+        ) : (
+          <h3>{t(`fund-details-page.description.yourInvestment.${asset}`)}</h3>
+        )}
+      </div>
       {tab === TABS.INVESTMENT && (
-        <Investment
+        <InvestmentContainer
           updateDescription={updateDescription}
           asset={asset}
           notice={notice}
