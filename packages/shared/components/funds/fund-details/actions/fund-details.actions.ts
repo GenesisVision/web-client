@@ -9,10 +9,12 @@ import {
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
 import fundsApi from "shared/services/api-client/funds-api";
-import { ApiAction, CurrencyEnum } from "shared/utils/types";
+import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
 import { FundProfitChartDataType } from "../reducers/profit-chart.reducer";
+import { StatisticCurrencyDataType } from "../reducers/statistic-currency.reducer";
 
+export const SET_STATISTIC_CURRENCY = "SET_STATISTIC_CURRENCY";
 export const FETCH_FUND_PROFIT_CHART = "FETCH_FUND_PROFIT_CHART";
 export const FETCH_FUND_BALANCE_CHART = "FETCH_FUND_BALANCE_CHART";
 export const FETCH_FUND_DESCRIPTION = "FETCH_FUND_DESCRIPTION";
@@ -60,4 +62,12 @@ export const fetchFundDescriptionAction = (
 ): ApiAction<FundDetailsFull> => ({
   type: FETCH_FUND_DESCRIPTION,
   payload: fundsApi.v10FundsByIdGet(id, { authorization })
+});
+
+export type TStatisticCurrencyAction = ActionType<StatisticCurrencyDataType>;
+export const statisticCurrencyAction = (
+  currency: CurrencyEnum
+): TStatisticCurrencyAction => ({
+  type: SET_STATISTIC_CURRENCY,
+  payload: currency
 });
