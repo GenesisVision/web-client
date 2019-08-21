@@ -28,7 +28,7 @@ const _ReallocateField: React.FC<Props> = ({
   const [newAsset, setNewAsset] = useState<PlatformAssetFull | undefined>(
     undefined
   );
-  const [remainder, setRemainder] = useState<number>(getRemainder(value));
+  const [remainder, setRemainder] = useState<number>(getRemainder(stateAssets));
   useEffect(
     () => {
       if (!newAsset) return;
