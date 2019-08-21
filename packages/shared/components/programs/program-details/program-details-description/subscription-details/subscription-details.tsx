@@ -29,7 +29,7 @@ const _SubscriptionDetails: React.FC<Props> = ({
   openPopup,
   rate
 }) => (
-  <>
+  <div className="details-investment__own-block">
     <div className="subscription-details__heading">
       <h5>{t("subscription-details.title")}</h5>
       <button
@@ -82,7 +82,7 @@ const _SubscriptionDetails: React.FC<Props> = ({
         />
       </StatisticItem>
     </div>
-  </>
+  </div>
 );
 
 const _SubscriptionTypeValue: React.FC<ISubscriptionTypeValueProps> = ({
