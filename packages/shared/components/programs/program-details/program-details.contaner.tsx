@@ -26,6 +26,10 @@ import { ASSET, STATUS } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
+import {
+  hasActiveInvestment,
+  hasSubscription
+} from "../../details/details-description-section/details-investment/investment-container";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
 
@@ -64,7 +68,12 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           />
         </div>
         <div className="details__section">
-          {isAuthenticated && description.personalProgramDetails && (
+          {(hasActiveInvestment(
+            description.personalProgramDetails as InvestmentDetails
+          ) ||
+            hasSubscription(
+              description.personalProgramDetails as InvestmentDetails
+            )) && (
             <DetailsInvestment
               eventTypeFilterValues={historySection.eventTypeFilterValues}
               fetchPortfolioEvents={fetchPortfolioEvents}

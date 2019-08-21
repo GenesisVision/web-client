@@ -17,6 +17,10 @@ import { ASSET, STATUS } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
+import {
+  hasActiveInvestment,
+  hasSubscription
+} from "../../details/details-description-section/details-investment/investment-container";
 import FundDetailsDescriptionSection from "./fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "./fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
@@ -48,9 +52,6 @@ const _FundDetailsContainer: React.FC<Props> = ({
   const isInvested =
     description.personalFundDetails &&
     description.personalFundDetails.isInvested;
-  const haveInvestmentDetails =
-    description.personalFundDetails &&
-    description.personalFundDetails.status !== STATUS.ENDED;
   return (
     <Page title={description.title}>
       <div className="details">
@@ -63,7 +64,12 @@ const _FundDetailsContainer: React.FC<Props> = ({
             FundControls={descriptionSection.FundControls}
           />
         </div>
-        {haveInvestmentDetails && (
+        {(hasActiveInvestment(
+          description.personalFundDetails as InvestmentDetails
+        ) ||
+          hasSubscription(
+            description.personalFundDetails as InvestmentDetails
+          )) && (
           <div className="details__section">
             <div>
               <DetailsInvestment
