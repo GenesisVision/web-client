@@ -128,6 +128,7 @@ class _CreateFundSettings extends React.PureComponent<
             />
           </div>
           <DepositDetailsBlock
+            blockNumber={4}
             walletFieldName={CREATE_FUND_FIELDS.depositWalletId}
             inputName={CREATE_FUND_FIELDS.depositAmount}
             depositAmount={depositAmount}
