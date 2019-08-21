@@ -1,7 +1,7 @@
 import "./portfolio-events-table.scss";
 import "./portfolio-events.scss";
 
-import { InvestmentEventItemViewModelChangeStateEnum } from "gv-api-web";
+import { InvestmentEventViewModel } from "gv-api-web";
 import moment from "moment";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,6 +29,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 import PortfolioEventsDetails from "./portfolio-event-details";
 import {
+  EVENT_PROFITABILITY_VALUES,
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
   PORTFOLIO_EVENTS_FILTERS,
@@ -45,20 +46,6 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
 }) => {
   const [t] = useTranslation();
   const role = useRole();
-  const eventProfitabilityValue = useCallback(
-    (changeState: InvestmentEventItemViewModelChangeStateEnum) => {
-      switch (changeState) {
-        case "Decreased":
-          return "-1";
-        case "Increased":
-          return "1";
-        case "NotChanged":
-        default:
-          return "0";
-      }
-    },
-    []
-  );
   return (
     <div className={className}>
       <TableModule
@@ -115,7 +102,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
             )}
           </span>
         )}
-        renderBodyRow={event => (
+        renderBodyRow={(event: InvestmentEventViewModel) => (
           <TableRow stripy>
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
               {moment(event.date).format()}
@@ -141,7 +128,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
             </TableCell>
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
               <Profitability
-                value={eventProfitabilityValue(event.ChangeState)}
+                value={EVENT_PROFITABILITY_VALUES[event.changeState]}
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
