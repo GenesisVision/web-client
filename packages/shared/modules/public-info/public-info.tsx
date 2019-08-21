@@ -8,7 +8,6 @@ import { SetSubmittingType } from "shared/utils/types";
 import PublicInfoForm, { IAboutFormValues } from "./public-info-form";
 
 const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
-  const [t] = useTranslation();
   const {
     errorMessage,
     setErrorMessage,
@@ -20,7 +19,7 @@ const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
         .v10ProfileUpdatePost(authService.getAuthArg(), {
           model
         })
-        .then(() => onSuccessEdit(t("profile-page.success-edit")))
+        .then(onSuccessEdit)
         .then(cleanErrorMessage)
         .catch(setErrorMessage)
         .finally(() => setSubmitting(false)),
@@ -37,7 +36,7 @@ const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
 };
 
 interface Props {
-  onSuccessEdit: (text: string) => void;
+  onSuccessEdit: () => void;
   userName: string;
   about: string;
 }

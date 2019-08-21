@@ -79,7 +79,7 @@ interface Props extends WithTranslation, IProfileOwnProps, WithRoleProps {}
 export interface IProfileOwnProps {
   info: ProfileFullViewModel;
   notifySuccess: (val: string) => void;
-  onSuccessEdit: (text: string) => void;
+  onSuccessEdit: () => void;
 }
 
 const Profile = compose<
