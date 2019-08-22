@@ -1,26 +1,3 @@
-export const EventLogoType = {
-  assetStarted: "AssetStarted",
-  assetFinished: "AssetFinished",
-  ProgramPeriodStarts: "ProgramPeriodStarts",
-  programPeriodEnds: "ProgramPeriodEnds",
-  investorInvest: "InvestorInvest",
-  investorWithdraw: "InvestorWithdraw",
-  managerInvest: "ManagerInvest",
-  managerWithdraw: "ManagerWithdraw",
-  entranceFee: "EntranceFee",
-  exitFee: "ExitFee",
-  profit: "Profit",
-  loss: "Loss",
-  reinvest: "Reinvest",
-  cancelled: "Cancelled",
-  cancelledRed: "CancelledRed",
-  invest: "Invest",
-  withdraw: "Withdraw",
-  started: "Started",
-  ended: "Ended",
-  endedRed: "EndedRed"
-};
-
 export enum EVENT_LOGO_TYPE {
   All = "All",
   ASSET_STARTED = "AssetStarted",

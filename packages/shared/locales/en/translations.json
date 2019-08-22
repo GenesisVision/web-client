@@ -1479,9 +1479,6 @@
         "title": "Portfolio Events",
         "see-all-button": "See All",
         "table-title": "Operations",
-        "success-fee": "Success fee",
-        "gv-commission": "GV commission",
-        "you-ve-earned": "You've earned",
         "empty-events": {
           "text": "The following events will be displayed here",
           "finished": "Fund/Program finished",
