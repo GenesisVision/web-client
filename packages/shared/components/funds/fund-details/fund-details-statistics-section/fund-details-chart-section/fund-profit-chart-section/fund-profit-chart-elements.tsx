@@ -1,11 +1,10 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
@@ -13,25 +12,28 @@ import ChartCurrencySelector, {
   TChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
+import { CurrencyEnum } from "shared/utils/types";
 
+import { statisticPeriodAction } from "../../../actions/fund-details.actions";
 import { FundProfitChartDataType } from "../../../reducers/profit-chart.reducer";
+import { statisticPeriodSelector } from "../../../reducers/statistic-period.reducer";
 import FundProfitChart from "./fund-profit-chart";
 
 const _FundProfitChartElements: React.FC<Props> = ({
   profitChart,
   selectedCurrencies,
-  onPeriodChange,
-  period,
   addCurrency,
   removeCurrency,
   changeCurrency,
   selectCurrencies
 }) => {
+  const period = useSelector(statisticPeriodSelector);
+  const dispatch = useDispatch();
+  const onPeriodChange = useCallback(period => {
+    dispatch(statisticPeriodAction(period));
+  }, []);
   const platformCurrencies = useSelector(platformCurrenciesSelector);
   const [t] = useTranslation();
-  const equivalentCurrency = "USD";
   const [chartData, setChartData] = useState<IProfitChartData>({
     profitChart,
     selectedCurrencies
@@ -94,8 +96,6 @@ interface OwnProps {
   removeCurrency: (name: string) => void;
   changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
   selectCurrencies: TChartCurrency[];
-  period: ChartDefaultPeriod;
-  onPeriodChange: HandlePeriodChangeType;
 }
 
 interface Props extends OwnProps {}

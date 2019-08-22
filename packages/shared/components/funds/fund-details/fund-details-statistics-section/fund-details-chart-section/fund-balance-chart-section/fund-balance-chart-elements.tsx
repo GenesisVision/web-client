@@ -1,10 +1,10 @@
 import { FundBalanceChart as FundBalanceChartType } from "gv-api-web";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { useDispatch, useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
@@ -12,22 +12,25 @@ import ChartCurrencySelector, {
   TChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import { HandlePeriodChangeType } from "shared/utils/types";
 
+import { statisticPeriodAction } from "../../../actions/fund-details.actions";
+import { statisticPeriodSelector } from "../../../reducers/statistic-period.reducer";
 import FundBalanceChart from "./fund-balance-chart";
 
 const _FundBalanceChartElements: React.FC<Props> = ({
   selectedCurrencies,
   balanceChart,
-  onPeriodChange,
-  period,
   addCurrency,
   removeCurrency,
   changeCurrency,
   selectCurrencies
 }) => {
+  const period = useSelector(statisticPeriodSelector);
+  const dispatch = useDispatch();
+  const onPeriodChange = useCallback(period => {
+    dispatch(statisticPeriodAction(period));
+  }, []);
   const [t] = useTranslation();
-  const equivalentCurrency = "USD";
   const [chartData, setChartData] = useState<IBalanceChartData>({
     balanceChart,
     selectedCurrencies
@@ -86,8 +89,6 @@ interface OwnProps {
   removeCurrency: (name: string) => void;
   changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
   selectCurrencies: TChartCurrency[];
-  period: ChartDefaultPeriod;
-  onPeriodChange: HandlePeriodChangeType;
 }
 
 interface Props extends OwnProps {}

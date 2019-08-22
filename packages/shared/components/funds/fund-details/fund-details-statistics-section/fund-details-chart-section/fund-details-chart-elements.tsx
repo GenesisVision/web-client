@@ -3,22 +3,15 @@ import "shared/components/details/details-description-section/details-statistic-
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useTab from "shared/hooks/tab.hook";
-import { HandlePeriodChangeType } from "shared/utils/types";
 
 import FundBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
 import FundProfitChartSection from "./fund-profit-chart-section/fund-profit-chart-section";
 
-const _FundDetailsChartSection: React.FC<Props> = ({
-  id,
-  t,
-  period,
-  onPeriodChange
-}) => {
+const _FundDetailsChartSection: React.FC<Props> = ({ id, t }) => {
   const { tab, setTab } = useTab<TABS>(TABS.PROFIT);
   return (
     <>
@@ -32,20 +25,8 @@ const _FundDetailsChartSection: React.FC<Props> = ({
           label={t("fund-details-page.chart.tabs.balance")}
         />
       </GVTabs>
-      {tab === TABS.PROFIT && (
-        <FundProfitChartSection
-          id={id}
-          period={period}
-          onPeriodChange={onPeriodChange}
-        />
-      )}
-      {tab === TABS.BALANCE && (
-        <FundBalanceChartSection
-          id={id}
-          period={period}
-          onPeriodChange={onPeriodChange}
-        />
-      )}
+      {tab === TABS.PROFIT && <FundProfitChartSection id={id} />}
+      {tab === TABS.BALANCE && <FundBalanceChartSection id={id} />}
     </>
   );
 };
@@ -57,8 +38,6 @@ enum TABS {
 
 interface OwnProps {
   id: string;
-  period: ChartDefaultPeriod;
-  onPeriodChange: HandlePeriodChangeType;
 }
 
 interface Props extends WithTranslation, OwnProps {}
