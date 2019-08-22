@@ -13,8 +13,12 @@ import fundProfitChartReducer, {
 import statisticCurrencyReducer, {
   StatisticCurrencyState
 } from "./statistic-currency.reducer";
+import statisticPeriodReducer, {
+  StatisticPeriodState
+} from "./statistic-period.reducer";
 
 type FundDetailsDataType = Readonly<{
+  statisticPeriod: StatisticPeriodState;
   statisticCurrency: StatisticCurrencyState;
   profitChart: FundProfitChartState;
   balanceChart: FundBalanceChartState;
@@ -25,6 +29,7 @@ export type FundDetailsState = FundDetailsDataType;
 
 const fundDetailsReducer = clearableReducer(
   combineReducers<FundDetailsState>({
+    statisticPeriod: statisticPeriodReducer,
     statisticCurrency: statisticCurrencyReducer,
     description: fundDescriptionReducer,
     profitChart: fundProfitChartReducer,
