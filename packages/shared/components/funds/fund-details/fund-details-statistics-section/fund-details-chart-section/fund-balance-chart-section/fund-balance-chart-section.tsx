@@ -12,7 +12,6 @@ import {
   compose
 } from "redux";
 import { createSelector } from "reselect";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
@@ -22,11 +21,12 @@ import {
   platformCurrenciesSelector
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { statisticCurrencyAction } from "../../../actions/fund-details.actions";
 import { fundBalanceChartSelector } from "../../../reducers/balance-chart.reducer";
 import { statisticCurrencySelector } from "../../../reducers/statistic-currency.reducer";
+import { statisticPeriodSelector } from "../../../reducers/statistic-period.reducer";
 import {
   getBalanceChart,
   getProfitChart
@@ -38,10 +38,9 @@ const _FundBalanceChartSection: React.FC<Props> = ({
   globalCurrency,
   platformCurrencies,
   id,
-  balanceChart,
-  period,
-  onPeriodChange
+  balanceChart
 }) => {
+  const period = useSelector(statisticPeriodSelector);
   const statisticCurrency = useSelector(statisticCurrencySelector);
   const dispatch = useDispatch();
   const [selectedCurrencies, setSelectedCurrencies] = useState<
@@ -108,8 +107,6 @@ const _FundBalanceChartSection: React.FC<Props> = ({
       removeCurrency={removeCurrency}
       changeCurrency={changeCurrency}
       selectCurrencies={selectCurrencies}
-      period={period}
-      onPeriodChange={onPeriodChange}
     />
   );
 };
@@ -162,8 +159,6 @@ interface StateProps {
 
 interface OwnProps {
   id: string;
-  period: ChartDefaultPeriod;
-  onPeriodChange: HandlePeriodChangeType;
 }
 
 interface Props extends OwnProps, StateProps, DispatchProps {}

@@ -13,7 +13,9 @@ import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
 import { FundProfitChartDataType } from "../reducers/profit-chart.reducer";
 import { StatisticCurrencyDataType } from "../reducers/statistic-currency.reducer";
+import { StatisticPeriodDataType } from "../reducers/statistic-period.reducer";
 
+export const SET_STATISTIC_PERIOD = "SET_STATISTIC_PERIOD";
 export const SET_STATISTIC_CURRENCY = "SET_STATISTIC_CURRENCY";
 export const FETCH_FUND_PROFIT_CHART = "FETCH_FUND_PROFIT_CHART";
 export const FETCH_FUND_BALANCE_CHART = "FETCH_FUND_BALANCE_CHART";
@@ -70,4 +72,12 @@ export const statisticCurrencyAction = (
 ): TStatisticCurrencyAction => ({
   type: SET_STATISTIC_CURRENCY,
   payload: currency
+});
+
+export type TStatisticPeriodAction = ActionType<StatisticPeriodDataType>;
+export const statisticPeriodAction = (
+  period: ChartDefaultPeriod
+): TStatisticPeriodAction => ({
+  type: SET_STATISTIC_PERIOD,
+  payload: period
 });
