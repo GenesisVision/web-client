@@ -1,8 +1,8 @@
 import {
   CancelablePromise,
   FundsList,
+  InvestmentEventViewModels,
   ManagerAssets,
-  ManagerPortfolioEvents,
   ProgramsList
 } from "gv-api-web";
 import { Action } from "redux";
@@ -32,9 +32,9 @@ export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
 export const fetchPortfolioEventsAction = (
   auth: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ManagerPortfolioEvents>> => ({
+): ActionType<CancelablePromise<InvestmentEventViewModels>> => ({
   type: DASHBOARD_PORTFOLIO_EVENTS,
-  payload: managerApi.v10ManagerEventsGet(auth, filters)
+  payload: managerApi.v10ManagerInvestmentsEventsGet(auth, filters)
 });
 
 export const fetchInRequestsAction = (

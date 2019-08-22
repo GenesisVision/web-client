@@ -1,8 +1,8 @@
 import {
   CancelablePromise,
   DashboardChartValue,
-  DashboardPortfolioEvents,
   FundsList,
+  InvestmentEventViewModels,
   ProgramRequests,
   ProgramsList,
   SignalsList
@@ -59,9 +59,9 @@ export const fetchPortfolioChartAction = (
 export const fetchPortfolioEventsAction = (
   auth: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<DashboardPortfolioEvents>> => ({
+): ActionType<CancelablePromise<InvestmentEventViewModels>> => ({
   type: DASHBOARD_PORTFOLIO_EVENTS,
-  payload: investorApi.v10InvestorPortfolioEventsGet(auth, filters)
+  payload: investorApi.v10InvestorInvestmentsEventsGet(auth, filters)
 });
 
 export const fetchInRequestsAction = (
