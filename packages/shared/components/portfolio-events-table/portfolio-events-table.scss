@@ -42,7 +42,7 @@ $large-padding: 42px;
   margin-right: $padding-small / 2;
 
   &__button.gv-btn {
-    @include font-size(14px);
+    @include font-size($font-size-common);
     border-radius: 20px;
     font-weight: 500;
     line-height: 16px;
@@ -62,5 +62,6 @@ $large-padding: 42px;
 
   &__popover {
     padding: $padding-xsmall;
+    @include font-size($font-size-common);
   }
 }
