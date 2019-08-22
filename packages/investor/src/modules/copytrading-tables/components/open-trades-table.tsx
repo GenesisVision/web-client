@@ -4,7 +4,7 @@ import { OrderSignalModel } from "gv-api-web";
 import React, { ComponentType } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Action, Dispatch, bindActionCreators, compose } from "redux";
+import { Action, bindActionCreators, compose, Dispatch } from "redux";
 import TableContainer from "shared/components/table/components/table-container";
 
 import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
@@ -16,10 +16,6 @@ import TradeRow from "./trade-row";
 class OpenTradesTable extends React.PureComponent<
   OwnProps & DispatchProps & WithTranslation
 > {
-  componentWillUnmount() {
-    this.props.service.clearCopytradingTable();
-  }
-
   render() {
     const { t, title, currency } = this.props;
     return (

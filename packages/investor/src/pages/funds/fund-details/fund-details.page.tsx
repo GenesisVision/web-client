@@ -7,7 +7,10 @@ import { InvestorRootState } from "reducers";
 import { compose } from "redux";
 import FundDetailsPageCommon from "shared/components/funds/fund-details/fund-details.page";
 import { fetchEventsCounts } from "shared/components/funds/fund-details/services/fund-details.service";
-import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
+import {
+  EVENT_LOCATION,
+  fetchPortfolioEvents
+} from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { fundEventsSelector } from "shared/reducers/platform-reducer";
 
@@ -20,7 +23,7 @@ const _FundDetailsPage: React.FC<Props> = ({ events }) => {
   };
 
   const historySection = {
-    fetchPortfolioEvents: fetchPortfolioEvents,
+    fetchPortfolioEvents: fetchPortfolioEvents(EVENT_LOCATION.Asset),
     fetchHistoryCounts: fetchEventsCounts,
     eventTypeFilterValues: events
   };

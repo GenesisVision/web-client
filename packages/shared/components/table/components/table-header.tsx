@@ -4,9 +4,9 @@ import withLoader from "shared/decorators/with-loader";
 import { TGetState } from "shared/utils/types";
 
 import {
-  SORTING_DIRECTION,
   getSortingColumnName,
-  getSortingDirection as getSortingDirectionHelper
+  getSortingDirection as getSortingDirectionHelper,
+  SORTING_DIRECTION
 } from "../helpers/sorting.helpers";
 import { SortingColumn } from "./filtering/filter.type";
 import TableHeadCell from "./table-head-cell";
@@ -71,7 +71,7 @@ const _TableColumns: React.FC<IColumnsProps> = ({
           onClick={handleSorting(column.sortingName)}
           sortingDirection={getSortingDirection(column.sortingName)}
         >
-          {renderHeader && renderHeader(column)}
+          {column.name && renderHeader ? renderHeader(column) : null}
         </TableHeadCell>
       ))}
     </>

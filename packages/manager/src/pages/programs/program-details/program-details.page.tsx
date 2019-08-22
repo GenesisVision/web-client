@@ -1,14 +1,16 @@
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import ProgramDetailsPageCommon from "shared/components/programs/program-details/program-details.page";
 import {
+  EVENT_LOCATION,
   fetchHistoryCounts,
   fetchPortfolioEvents
 } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
+
 import ProgramControls from "./components/program-controls/program-controls";
 
 const _ProgramDetailsPage: React.FC<StateProps> = ({ events }) => {
@@ -18,7 +20,7 @@ const _ProgramDetailsPage: React.FC<StateProps> = ({ events }) => {
   };
 
   const historySection = {
-    fetchPortfolioEvents: fetchPortfolioEvents,
+    fetchPortfolioEvents: fetchPortfolioEvents(EVENT_LOCATION.Asset),
     fetchHistoryCounts: fetchHistoryCounts,
     eventTypeFilterValues: events
   };

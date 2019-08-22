@@ -1,13 +1,10 @@
 import {
   CancelablePromise,
-  DashboardPortfolioEvent,
-  DashboardPortfolioEvents,
   LevelInfo,
-  ManagerPortfolioEvent,
-  ManagerPortfolioEvents,
   OrderModel,
   ProgramPeriodsViewModel
 } from "gv-api-web";
+import { InvestmentEventViewModels } from "gv-api-web/src";
 import { Dispatch } from "redux";
 import {
   ChartDefaultPeriod,
@@ -175,7 +172,10 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
     defaultFilters: PORTFOLIO_EVENTS_FILTERS
   });
   const eventsCountPromise = isAuthenticated
-    ? fetchPortfolioEvents({ ...eventsFilters, assetId: id })
+    ? fetchPortfolioEvents(EVENT_LOCATION.Asset)({
+        ...eventsFilters,
+        assetId: id
+      })
     : Promise.resolve({ total: 0 });
 
   const openPositionsCountPromise = programsApi.v10ProgramsByIdTradesOpenGet(
@@ -229,27 +229,33 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
   );
 };
 
-export const fetchPortfolioEvents: GetItemsFuncType = (
+export enum EVENT_LOCATION {
+  Asset = "Asset",
+  Dashboard = "Dashboard",
+  EventsAll = "EventsAll"
+}
+
+export const fetchPortfolioEvents = (
+  eventLocation: EVENT_LOCATION
+): GetItemsFuncType => (
   filters?
-): CancelablePromise<
-  TableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>
-> => {
+): CancelablePromise<TableItems<InvestmentEventViewModels>> => {
   const authorization = authService.getAuthArg();
   let request: (
     authorization: string,
     opts?: Object
-  ) => CancelablePromise<DashboardPortfolioEvents | ManagerPortfolioEvents>;
+  ) => CancelablePromise<InvestmentEventViewModels>;
   switch (ROLE_ENV) {
     case ROLE.INVESTOR:
-      request = investorApi.v10InvestorPortfolioEventsGet;
+      request = investorApi.v10InvestorInvestmentsEventsGet;
       break;
     case ROLE.MANAGER:
     default:
-      request = managerApi.v10ManagerEventsGet;
+      request = managerApi.v10ManagerInvestmentsEventsGet;
       break;
   }
-  return request(authorization, filters).then(
-    mapToTableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>("events")
+  return request(authorization, { ...filters, eventLocation }).then(
+    mapToTableItems<InvestmentEventViewModels>("events")
   );
 };
 
