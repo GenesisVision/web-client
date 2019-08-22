@@ -178,7 +178,6 @@ const _FundDetailsStatisticsElements: React.FC<
 export interface IFundDetailsStatisticsElementsProps {
   statisticData: IStatisticData;
   statisticCurrency: CurrencyEnum;
-  statistic: FundProfitChart;
 }
 
 const FundDetailsStatisticsElements = React.memo(
