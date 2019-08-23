@@ -10,6 +10,7 @@ import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avata
 import GVButton from "shared/components/gv-button";
 import { DetailsIcon } from "shared/components/icon/details-icon";
 import { LogoutIcon } from "shared/components/icon/logout-icon";
+import { SecurityIcon } from "shared/components/icon/security-icon";
 import { SettingsIcon } from "shared/components/icon/settings-icon";
 import Popover, {
   HORIZONTAL_POPOVER_POS
@@ -60,11 +61,9 @@ const _ProfileWidget: React.FC<Props> = ({
                 {t("profile-widget.settings")}
               </Link>
             </div>
-            <div className="profile-menu__item profile-menu__item--settings">
+            <div className="profile-menu__item profile-menu__item--security">
               <Link to={SECURITY_ROUTE} onClick={clearAnchor}>
-                <div style={{ opacity: 0 }}>
-                  <SettingsIcon />
-                </div>
+                <SecurityIcon />
                 {t("profile-widget.security")}
               </Link>
             </div>
