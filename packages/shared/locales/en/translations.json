@@ -1536,6 +1536,12 @@
       }
     },
     "asset-settings": {
+      "close-period": {
+        "title": "Close period"
+      },
+      "close-asset": {
+        "title": "Close asset"
+      },
       "title": "{{asset}} settings",
       "period-and-closing": {
         "title": "Period and closing",
