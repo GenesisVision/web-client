@@ -75,6 +75,15 @@
         height: 13px;
       }
     }
+    &--security {
+      .icon {
+        height: 13px;
+        width: 20px;
+      }
+      svg [fill] {
+        fill: none;
+      }
+    }
     &--logout {
       margin-top: 15px;
       .icon {
