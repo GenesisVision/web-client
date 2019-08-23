@@ -1,6 +1,6 @@
 import { FundDetailsFull, PlatformAsset } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
-import PeriodAndClosing from "modules/asset-settings/period-and-closing";
+import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -20,8 +20,7 @@ const _FundSettings: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <PeriodAndClosing
-        label={t("manager.fund-settings.close-fund.title")}
+      <CloseAssetBlock
         asset={ASSET.FUND}
         canCloseAsset={details.personalFundDetails.canCloseProgram}
         id={details.id}
