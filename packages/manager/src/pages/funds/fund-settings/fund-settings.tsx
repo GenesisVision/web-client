@@ -20,18 +20,6 @@ const _FundSettings: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <CloseAssetBlock
-        asset={ASSET.FUND}
-        canCloseAsset={details.personalFundDetails.canCloseProgram}
-        id={details.id}
-        closeAsset={closeAsset}
-      />
-      <AssetEdit
-        title={details.title}
-        logo={{ src: details.logo }}
-        description={details.description}
-        onSubmit={editAsset}
-      />
       <Reallocation
         condition={details.personalFundDetails.canReallocate}
         availableReallocationPercents={
@@ -41,6 +29,18 @@ const _FundSettings: React.FC<Props> = ({
         id={details.id}
         fundAssets={details.currentAssets}
         platformAssets={platformAssets}
+      />
+      <AssetEdit
+        title={details.title}
+        logo={{ src: details.logo }}
+        description={details.description}
+        onSubmit={editAsset}
+      />
+      <CloseAssetBlock
+        asset={ASSET.FUND}
+        canCloseAsset={details.personalFundDetails.canCloseProgram}
+        id={details.id}
+        closeAsset={closeAsset}
       />
     </>
   );

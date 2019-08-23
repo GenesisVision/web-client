@@ -72,12 +72,9 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
             {period.number}
           </TableCell>
           <TableCell>
-            {moment(new Date(period.dateFrom)).format("YYYY-MM-DD")}
+            {moment(new Date(period.dateFrom)).format("YYYY-MM-DD HH:mm")}
           </TableCell>
-          <TableCell>
-            {humanizeDate(period.periodLength)}
-            {/*{moment.duration(period.periodLength).humanize()}*/}
-          </TableCell>
+          <TableCell>{humanizeDate(period.periodLength)}</TableCell>
           <TableCell>
             <NumberFormat
               value={formatCurrencyValue(period.balance, currency)}

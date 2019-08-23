@@ -4,25 +4,26 @@ import { FundProfitChart } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { useSelector } from "react-redux";
 import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
 import Surface from "shared/components/surface/surface";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { fundProfitChartSelector } from "../../reducers/profit-chart.reducer";
+import { statisticCurrencySelector } from "../../reducers/statistic-currency.reducer";
 import FundDetailsStatisticsElements from "./fund-details-statistics-elements";
 
-const _FundDetailsStatistics: React.FC<Props> = ({
-  statisticCurrency,
-  t,
-  statistic,
-  period
-}) => {
+const _FundDetailsStatistics: React.FC<Props> = ({ t }) => {
+  const statistic = useSelector(fundProfitChartSelector);
+  const statisticCurrency = useSelector(statisticCurrencySelector);
   const [statisticData, setStatisticData] = useState<
     IStatisticData | undefined
   >(undefined);
   useEffect(
     () => {
-      statistic && setStatisticData({ statisticCurrency, statistic });
+      statistic &&
+        statistic[0] &&
+        setStatisticData({ statisticCurrency, statistic: statistic[0] });
     },
     [statistic]
   );
@@ -34,8 +35,6 @@ const _FundDetailsStatistics: React.FC<Props> = ({
         condition={!!statisticData}
         loader={<DetailsStatisticsLoader />}
         statisticCurrency={statisticCurrency}
-        statistic={statistic!}
-        period={period}
       />
     </Surface>
   );
@@ -47,8 +46,6 @@ export interface IStatisticData {
 }
 
 interface Props extends WithTranslation {
-  statisticCurrency: CurrencyEnum;
-  period: ChartDefaultPeriod;
   statistic?: FundProfitChart;
 }
 

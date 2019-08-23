@@ -9,6 +9,7 @@ import AmountInfo from "./amount-info";
 import InputDepositAmount from "./input-deposit-amount";
 
 const _DepositDetailsBlock: React.FC<Props> = ({
+  blockNumber = 3,
   walletFieldName,
   inputName,
   assetCurrency,
@@ -25,7 +26,9 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   return (
     <>
       <div className="create-program-settings__subheading">
-        <span className="create-program-settings__block-number">03</span>
+        <span className="create-program-settings__block-number">
+          0{blockNumber}
+        </span>
         {t("manager.create-program-page.settings.deposit-details")}
       </div>
       <div className={"deposit-details create-program-settings__fill-block"}>
@@ -58,6 +61,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
 };
 
 interface Props {
+  blockNumber?: number;
   walletFieldName: string;
   inputName: string;
   depositAmount?: number;

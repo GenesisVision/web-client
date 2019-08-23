@@ -136,7 +136,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         to={selectedBroker.name}
         isSignalProgram={isSignalProgram}
       />
-      <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
+      <p className="program-settings__text program-settings__text--padding-top">
         {t("manager.program-settings.broker.text-change")}
       </p>
       <GVButton

@@ -85,7 +85,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         to={brokerTo.name}
         isSignalProgram={isSignalProgram}
       />
-      <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
+      <p className="program-settings__text program-settings__text--padding-top">
         {t("manager.program-settings.broker.text-cancel", {
           brokerFrom: brokerFrom.name,
           brokerTo: brokerTo.name
