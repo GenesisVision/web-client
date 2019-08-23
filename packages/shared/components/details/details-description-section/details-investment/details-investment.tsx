@@ -40,7 +40,7 @@ const _DetailsInvestment: React.FC<Props> = ({
 }) => {
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   return (
-    <Surface className="surface">
+    <Surface className="details-investment">
       <div className="details-investment__investment-tabs">
         {asset === ASSET.PROGRAM ? (
           <GVTabs value={tab} onChange={setTab}>

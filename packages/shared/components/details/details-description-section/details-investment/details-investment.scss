@@ -6,10 +6,19 @@ $withdraw-button-height: 50px;
 $withdraw-button-width: 150px;
 $withdraw-button-height-mobile: $withdraw-button-height/$divider-text;
 $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
+$padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
 
 .details-investment {
-  & div {
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  @include media-breakpoint-landscape-phone() {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  @include media-breakpoint-tablet() {
+    margin-left: $padding-controls-left;
   }
 
   .profitability--chips {
@@ -17,31 +26,50 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
     margin-top: -5px;
   }
 
-  @include media-breakpoint-landscape-phone() {
-    width: 100%;
-    margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  @include media-breakpoint-tablet() {
-    max-width: 700px;
-    margin-right: 30px;
-  }
-
-  &__own-block {
+  &__block {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 100%;
-    @include media-breakpoint-tablet() {
-      width: 50%;
+    margin-top: $padding-xxsmall;
+    @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-xsmall;
+    }
+
+    &:nth-child(2) {
+      @include media-breakpoint-landscape-tablet() {
+        margin-left: 80px;
+        padding-left: 80px;
+        border-left: 2px solid $secondary-color;
+      }
     }
   }
 
-  &__current-period-investment-data {
+  &__block--investment {
+    flex: 2;
+    min-width: 100%;
+    @include media-breakpoint-landscape-tablet() {
+      min-width: initial;
+      max-width: 70%;
+    }
+  }
+  &__block--subscription {
+    flex: 1;
+
+    @include media-breakpoint-landscape-tablet() {
+      .details__short-statistic-item {
+        min-width: 45%;
+      }
+    }
+  }
+
+  &__heading {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15px;
+    color: $label-color;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &__investment-container {
@@ -95,11 +123,22 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
 
     .reinvesting-widget {
       padding-bottom: $padding-xsmall;
+      display: flex;
+      align-items: flex-end;
     }
 
     .gv-switch-wrapper {
-      margin-left: 0;
-      margin-right: 0;
+      margin: 0;
+      .tooltip__label {
+        letter-spacing: 0.6px;
+        white-space: nowrap;
+        font-weight: 600;
+        color: #e8eff3;
+        font-size: $font-size-common-mobile;
+        @include media-breakpoint-landscape-phone() {
+          font-size: $font-size-paragraph;
+        }
+      }
     }
   }
 

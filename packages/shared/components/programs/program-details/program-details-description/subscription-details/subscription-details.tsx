@@ -29,8 +29,8 @@ const _SubscriptionDetails: React.FC<Props> = ({
   openPopup,
   rate
 }) => (
-  <div className="details-investment__own-block">
-    <div className="subscription-details__heading">
+  <div className="details-investment__block details-investment__block--subscription">
+    <div className="details-investment__heading">
       <h5>{t("subscription-details.title")}</h5>
       <button
         type="button"

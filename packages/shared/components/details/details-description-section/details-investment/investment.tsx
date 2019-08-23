@@ -1,7 +1,7 @@
 import "./details-investment.scss";
 
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
@@ -23,7 +23,6 @@ import { InvestmentDetails } from "./details-investment.helpers";
 
 const _Investment: React.FC<Props> = ({
   updateDescription,
-  t,
   id,
   assetCurrency,
   accountCurrency,
@@ -33,15 +32,16 @@ const _Investment: React.FC<Props> = ({
   WithdrawContainer,
   ProgramReinvestingWidget
 }) => {
+  const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const profitValue = personalDetails.value - personalDetails.invested;
   return (
-    <div className="details-investment__own-block">
+    <div className="details-investment__block details-investment__block--investment">
       <div className="details-investment__heading">
-        <h5>{t("subscription-details.title")}</h5>
+        <h5>{t("program-details-page.description.investment-details")}</h5>
       </div>
       <div className="details-investment__current-period-investment-data">
-        <div className="details-investment details-investment__short-statistic">
+        <div className="details-investment__short-statistic">
           <StatisticItem
             accent
             label={t("fund-details-page.description.value")}
@@ -183,7 +183,7 @@ interface OwnProps {
   >;
 }
 
-interface Props extends OwnProps, WithTranslation {}
+interface Props extends OwnProps {}
 
-const Investment = translate()(React.memo(_Investment));
+const Investment = React.memo(_Investment);
 export default Investment;
