@@ -1,20 +1,22 @@
 import * as React from "react";
-import NumberFormat from "react-number-format";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
+import FundAssetList from "shared/components/fund-asset-list/fund-asset-list";
+import FundAssetRatio from "shared/components/fund-asset-ratio/fund-asset-ratio";
 
 const FundProfitTooltip: React.FC<Props> = ({ active, label, payload }) => {
   if (!active) return null;
   return (
     <ChartTooltip
-      heading="Profit"
+      heading="Assets fund"
       date={new Date(label)}
       body={
-        <NumberFormat
-          value={payload[0].value}
-          decimalScale={2}
-          displayType="text"
-          suffix=" %"
-        />
+        <div>
+          <FundAssetRatio
+            values={payload[0].payload.assets}
+            showBounds={false}
+          />
+          <FundAssetList values={payload[0].payload.assets} />
+        </div>
       }
     />
   );
