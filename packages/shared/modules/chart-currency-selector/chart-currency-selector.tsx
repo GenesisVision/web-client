@@ -1,78 +1,67 @@
 import "./chart-currency-selector.scss";
 
 import * as React from "react";
-import { connect } from "react-redux";
-import { compose } from "redux";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import TileFilterButton from "shared/components/table/components/filtering/tile-filter-button";
 import TileFilterItem from "shared/components/table/components/filtering/tile-filter-item";
 import TagBubble from "shared/components/tags/tag-item/tag-bubble";
 import TagCircle from "shared/components/tags/tag-item/tag-circle";
 import CurrencySelect from "shared/modules/currency-select/components/currency-select";
-import { currenciesSelector } from "shared/reducers/platform-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _ChartCurrencySelector: React.FC<Props> = ({
   fullSelectCurrencies,
   maxCharts = 2,
   selectCurrencies,
-  currencyValues,
   chartCurrencies,
   onAdd,
   onRemove,
   onChange
-}) => {
-  return (
-    <div className="chart-currency-selector__container">
-      {chartCurrencies.map(({ name, color }, i) => (
-        <TileFilterItem
-          removable={i > 0}
-          key={name}
-          id={name}
-          removeTile={onRemove}
-        >
-          <TagBubble
-            color={color}
-            content={
-              <div className="chart-currency-selector__item">
-                <TagCircle backgroundColor={color} />
-                {selectCurrencies.length || i === 0 ? (
-                  <CurrencySelect
-                    value={name}
-                    onChange={onChange(i)}
-                    currencyValues={
-                      i === 0 && fullSelectCurrencies
-                        ? fullSelectCurrencies.filter(
-                            fullSelectCurrency => fullSelectCurrency !== name
-                          )
-                        : selectCurrencies
-                    }
-                  />
-                ) : (
-                  name
-                )}
-              </div>
-            }
-          />
-        </TileFilterItem>
-      ))}
-      {chartCurrencies.length < maxCharts && (
-        <TileFilterButton onClick={onAdd} title={"Add"} />
-      )}
-    </div>
-  );
-};
+}) => (
+  <div className="chart-currency-selector__container">
+    {chartCurrencies.map(({ name, color }, i) => (
+      <TileFilterItem
+        removable={i > 0}
+        key={name}
+        id={name}
+        removeTile={onRemove}
+      >
+        <TagBubble
+          color={color}
+          content={
+            <div className="chart-currency-selector__item">
+              <TagCircle backgroundColor={color} />
+              {selectCurrencies.length || i === 0 ? (
+                <CurrencySelect
+                  value={name}
+                  onChange={onChange(i)}
+                  currencyValues={
+                    i === 0 && fullSelectCurrencies
+                      ? fullSelectCurrencies.filter(
+                          fullSelectCurrency => fullSelectCurrency !== name
+                        )
+                      : selectCurrencies
+                  }
+                />
+              ) : (
+                name
+              )}
+            </div>
+          }
+        />
+      </TileFilterItem>
+    ))}
+    {chartCurrencies.length < maxCharts && (
+      <TileFilterButton onClick={onAdd} title={"Add"} />
+    )}
+  </div>
+);
 
 export type TChartCurrency = {
   name: CurrencyEnum;
   color: string;
   mandatory?: boolean;
 };
-
-interface StateProps {
-  currencyValues: CurrencyEnum[];
-}
 
 export type TAddChartCurrency = () => void;
 export type TRemoveChartCurrency = (id: string) => void;
@@ -90,14 +79,7 @@ interface OwnProps {
   onChange: TChangeChartCurrency;
 }
 
-interface Props extends OwnProps, StateProps {}
+interface Props extends OwnProps {}
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  currencyValues: currenciesSelector(state) as CurrencyEnum[]
-});
-
-const ChartCurrencySelector = compose<React.ComponentType<OwnProps>>(
-  connect<StateProps, null, OwnProps, RootState>(mapStateToProps),
-  React.memo
-)(_ChartCurrencySelector);
+const ChartCurrencySelector = React.memo(_ChartCurrencySelector);
 export default ChartCurrencySelector;
