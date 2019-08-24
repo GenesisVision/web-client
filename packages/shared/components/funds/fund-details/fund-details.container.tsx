@@ -50,7 +50,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
           />
         </div>
         <div className="details__section">
-          <FundDetailsStatisticSection id={description.id} />
+          <FundDetailsStatisticSection />
         </div>
         <div className="details__history">
           <FundDetailsHistorySection

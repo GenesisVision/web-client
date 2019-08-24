@@ -6,16 +6,14 @@ import Surface from "shared/components/surface/surface";
 
 import FundDetailsChartElements from "./fund-details-chart-elements";
 
-const _FundDetailsChart: React.FC<Props> = ({ id, t }) => (
+const _FundDetailsChart: React.FC<Props> = ({ t }) => (
   <Surface className="surface--horizontal-paddings details-chart">
     <h3>{t("fund-details-page.chart.heading")}</h3>
-    <FundDetailsChartElements id={id} />
+    <FundDetailsChartElements />
   </Surface>
 );
 
-interface Props extends WithTranslation {
-  id: string;
-}
+interface Props extends WithTranslation {}
 
 const FundDetailsChart = translate()(React.memo(_FundDetailsChart));
 export default FundDetailsChart;

@@ -6,21 +6,19 @@ import { compose } from "redux";
 import FundDetailsChart from "./fund-details-chart-section/fund-details-chart";
 import FundDetailsStatistics from "./fund-details-statistics/fund-details-statistics";
 
-const _FundDetailsStatisticSection: React.FC<Props> = ({ id }) => {
+const _FundDetailsStatisticSection: React.FC<Props> = () => {
   return (
     <div className="details-statistic-section">
       <div className="details-statistic-section__statistic">
         <FundDetailsStatistics />
       </div>
       <div className="details-statistic-section__chart">
-        <FundDetailsChart id={id} />
+        <FundDetailsChart />
       </div>
     </div>
   );
 };
-interface OwnProps {
-  id: string;
-}
+interface OwnProps {}
 
 interface Props extends OwnProps {}
 

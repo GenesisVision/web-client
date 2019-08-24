@@ -2,18 +2,30 @@ import { PlatformCurrency } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import { createSelector } from "reselect";
 import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { currenciesSelector, platformCurrenciesSelector } from "shared/reducers/platform-reducer";
+import {
+  currenciesSelector,
+  platformCurrenciesSelector
+} from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { statisticCurrencyAction } from "../../../actions/fund-details.actions";
-import { FundProfitChartDataType, fundProfitChartSelector } from "../../../reducers/profit-chart.reducer";
+import { fundIdSelector } from "../../../reducers/description.reducer";
+import {
+  FundProfitChartDataType,
+  fundProfitChartSelector
+} from "../../../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../../../reducers/statistic-currency.reducer";
 import { statisticPeriodSelector } from "../../../reducers/statistic-period.reducer";
 import { getProfitChart } from "../../../services/fund-details.service";
@@ -23,9 +35,9 @@ const _FundProfitChartSection: React.FC<Props> = ({
   globalCurrency,
   platformCurrencies,
   service: { getProfitChart },
-  id,
-  profitChart,
+  profitChart
 }) => {
+  const id = useSelector(fundIdSelector);
   const period = useSelector(statisticPeriodSelector);
   const dispatch = useDispatch();
   const [selectedCurrencies, setSelectedCurrencies] = useState<
@@ -145,9 +157,7 @@ interface StateProps {
   platformCurrencies: TChartCurrency[];
 }
 
-interface OwnProps {
-  id: string;
-}
+interface OwnProps {}
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
 

@@ -32,14 +32,15 @@ import {
   getProfitChart
 } from "../../../services/fund-details.service";
 import FundBalanceChartElements from "./fund-balance-chart-elements";
+import { fundIdSelector } from "../../../reducers/description.reducer";
 
 const _FundBalanceChartSection: React.FC<Props> = ({
   service: { getBalanceChart, getProfitChart },
   globalCurrency,
   platformCurrencies,
-  id,
   balanceChart
 }) => {
+  const id = useSelector(fundIdSelector);
   const period = useSelector(statisticPeriodSelector);
   const statisticCurrency = useSelector(statisticCurrencySelector);
   const dispatch = useDispatch();
@@ -157,9 +158,7 @@ interface StateProps {
   platformCurrencies: TChartCurrency[];
 }
 
-interface OwnProps {
-  id: string;
-}
+interface OwnProps {}
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
 

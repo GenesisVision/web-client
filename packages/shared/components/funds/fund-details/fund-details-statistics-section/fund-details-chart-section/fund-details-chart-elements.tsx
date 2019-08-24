@@ -11,7 +11,7 @@ import useTab from "shared/hooks/tab.hook";
 import FundBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
 import FundProfitChartSection from "./fund-profit-chart-section/fund-profit-chart-section";
 
-const _FundDetailsChartSection: React.FC<Props> = ({ id, t }) => {
+const _FundDetailsChartSection: React.FC<Props> = ({ t }) => {
   const { tab, setTab } = useTab<TABS>(TABS.PROFIT);
   return (
     <>
@@ -25,8 +25,8 @@ const _FundDetailsChartSection: React.FC<Props> = ({ id, t }) => {
           label={t("fund-details-page.chart.tabs.balance")}
         />
       </GVTabs>
-      {tab === TABS.PROFIT && <FundProfitChartSection id={id} />}
-      {tab === TABS.BALANCE && <FundBalanceChartSection id={id} />}
+      {tab === TABS.PROFIT && <FundProfitChartSection />}
+      {tab === TABS.BALANCE && <FundBalanceChartSection />}
     </>
   );
 };
@@ -36,9 +36,7 @@ enum TABS {
   BALANCE = "balance"
 }
 
-interface OwnProps {
-  id: string;
-}
+interface OwnProps {}
 
 interface Props extends WithTranslation, OwnProps {}
 
