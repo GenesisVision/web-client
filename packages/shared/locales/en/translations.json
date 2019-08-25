@@ -786,6 +786,12 @@
         "commission-rebate": "GV commission rebate"
       },
       "period-history": {
+        "investors-deposit": "Investors Invest",
+        "investors-withdraw": "Investors Withdrawal",
+        "manager-deposit": "Manager Investment /Withdrawal",
+        "investors-profit-withdraw": "Investors Withdrawal Profit",
+        "platform-success-fee": "Platform Success Fee",
+        "manager-commission-rebate": "GV commission rebate",
         "period": "Period",
         "date-start": "Date start",
         "period-length": "Period length",
