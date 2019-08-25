@@ -1,8 +1,7 @@
 import { FundBalanceChart as FundBalanceChartType } from "gv-api-web";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { useDispatch, useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ISelectChangeEvent } from "shared/components/select/select";
@@ -13,8 +12,7 @@ import ChartCurrencySelector, {
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { statisticPeriodAction } from "../../../actions/fund-details.actions";
-import { statisticPeriodSelector } from "../../../reducers/statistic-period.reducer";
+import { useChartData, useChartPeriod } from "../fund-details-chart.helpers";
 import FundBalanceChart from "./fund-balance-chart";
 
 const _FundBalanceChartElements: React.FC<Props> = ({
@@ -25,24 +23,11 @@ const _FundBalanceChartElements: React.FC<Props> = ({
   changeCurrency,
   selectCurrencies
 }) => {
-  const period = useSelector(statisticPeriodSelector);
-  const dispatch = useDispatch();
-  const onPeriodChange = useCallback(period => {
-    dispatch(statisticPeriodAction(period));
-  }, []);
   const [t] = useTranslation();
-  const [chartData, setChartData] = useState<IBalanceChartData>({
+  const { period, setPeriod } = useChartPeriod();
+  const chartData = useChartData<FundBalanceChartType>(
     balanceChart,
     selectedCurrencies
-  });
-  useEffect(
-    () => {
-      setChartData({
-        balanceChart,
-        selectedCurrencies: [...selectedCurrencies]
-      });
-    },
-    [balanceChart]
   );
   const { name, color } = chartData.selectedCurrencies[0];
   return (
@@ -50,14 +35,14 @@ const _FundBalanceChartElements: React.FC<Props> = ({
       <div className="details-chart__value">
         <StatisticItem label={t("fund-details-page.chart.value")} big accent>
           <NumberFormat
-            value={formatCurrencyValue(chartData.balanceChart.balance, name)}
+            value={formatCurrencyValue(chartData.chart.balance, name)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${name}`}
           />
         </StatisticItem>
       </div>
-      <ChartPeriod onChange={onPeriodChange} period={period} />
+      <ChartPeriod onChange={setPeriod} period={period} />
       <ChartCurrencySelector
         maxCharts={1}
         selectCurrencies={selectCurrencies.map(({ name }) => name)}
@@ -68,7 +53,7 @@ const _FundBalanceChartElements: React.FC<Props> = ({
       />
       <div className="details-chart__profit">
         <FundBalanceChart
-          balanceChart={chartData.balanceChart.balanceChart}
+          balanceChart={chartData.chart.balanceChart}
           currency={name}
           color={color}
         />
@@ -76,11 +61,6 @@ const _FundBalanceChartElements: React.FC<Props> = ({
     </>
   );
 };
-
-interface IBalanceChartData {
-  balanceChart: FundBalanceChartType;
-  selectedCurrencies: TChartCurrency[];
-}
 
 interface OwnProps {
   selectedCurrencies: TChartCurrency[];
