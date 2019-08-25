@@ -5,10 +5,14 @@ import { createSelector } from "reselect";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
+import { ChartDefaultPeriod } from "../../../../chart/chart-period/chart-period.helpers";
 import { ISelectChangeEvent } from "../../../../select/select";
-import { statisticCurrencyAction } from "../../actions/fund-details.actions";
+import {
+  statisticCurrencyAction,
+  statisticPeriodAction
+} from "../../actions/fund-details.actions";
 import { fundIdSelector } from "../../reducers/description.reducer";
 import { statisticCurrencySelector } from "../../reducers/statistic-currency.reducer";
 import { statisticPeriodSelector } from "../../reducers/statistic-period.reducer";
@@ -111,4 +115,45 @@ export const useFundChartStateValues: TUseFundChartStateValues = () => {
     selectedCurrencies,
     selectCurrencies
   };
+};
+
+type TUseChartPeriod = () => {
+  period: ChartDefaultPeriod;
+  setPeriod: HandlePeriodChangeType;
+};
+export const useChartPeriod: TUseChartPeriod = () => {
+  const period = useSelector(statisticPeriodSelector);
+  const dispatch = useDispatch();
+  const setPeriod = useCallback(period => {
+    dispatch(statisticPeriodAction(period));
+  }, []);
+  return {
+    period,
+    setPeriod
+  };
+};
+
+type TChartData<T> = {
+  chart: T;
+  selectedCurrencies: TChartCurrency[];
+};
+
+export const useChartData = <T>(
+  chart: T,
+  selectedCurrencies: TChartCurrency[]
+): TChartData<T> => {
+  const [chartData, setChartData] = useState<TChartData<T>>({
+    chart,
+    selectedCurrencies
+  });
+  useEffect(
+    () => {
+      setChartData({
+        chart,
+        selectedCurrencies: [...selectedCurrencies]
+      });
+    },
+    [chart]
+  );
+  return chartData;
 };
