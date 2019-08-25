@@ -60,7 +60,6 @@ const _ChartCurrencySelector: React.FC<Props> = ({
 export type TChartCurrency = {
   name: CurrencyEnum;
   color: string;
-  mandatory?: boolean;
 };
 
 export type TAddChartCurrency = () => void;
