@@ -1,8 +1,7 @@
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ISelectChangeEvent } from "shared/components/select/select";
@@ -14,9 +13,8 @@ import ChartCurrencySelector, {
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { statisticPeriodAction } from "../../../actions/fund-details.actions";
 import { FundProfitChartDataType } from "../../../reducers/profit-chart.reducer";
-import { statisticPeriodSelector } from "../../../reducers/statistic-period.reducer";
+import { useChartData, useChartPeriod } from "../fund-details-chart.helpers";
 import FundProfitChart from "./fund-profit-chart";
 
 const _FundProfitChartElements: React.FC<Props> = ({
@@ -27,27 +25,14 @@ const _FundProfitChartElements: React.FC<Props> = ({
   changeCurrency,
   selectCurrencies
 }) => {
-  const period = useSelector(statisticPeriodSelector);
-  const dispatch = useDispatch();
-  const onPeriodChange = useCallback(period => {
-    dispatch(statisticPeriodAction(period));
-  }, []);
-  const platformCurrencies = useSelector(platformCurrenciesSelector);
   const [t] = useTranslation();
-  const [chartData, setChartData] = useState<IProfitChartData>({
+  const { period, setPeriod } = useChartPeriod();
+  const chartData = useChartData<FundProfitChartDataType>(
     profitChart,
     selectedCurrencies
-  });
-  useEffect(
-    () => {
-      setChartData({
-        profitChart,
-        selectedCurrencies: [...selectedCurrencies]
-      });
-    },
-    [profitChart]
   );
-  const chart = chartData.profitChart[0];
+  const platformCurrencies = useSelector(platformCurrenciesSelector);
+  const chart = chartData.chart[0];
   return (
     <>
       <div className="details-chart__value">
@@ -60,7 +45,7 @@ const _FundProfitChartElements: React.FC<Props> = ({
           />
         </StatisticItem>
       </div>
-      <ChartPeriod onChange={onPeriodChange} period={period} />
+      <ChartPeriod onChange={setPeriod} period={period} />
       <ChartCurrencySelector
         fullSelectCurrencies={platformCurrencies.map(
           ({ name }) => name as CurrencyEnum
@@ -76,18 +61,13 @@ const _FundProfitChartElements: React.FC<Props> = ({
       />
       <div className="details-chart__profit">
         <FundProfitChart
-          profitChart={chartData.profitChart}
+          profitChart={chartData.chart}
           chartCurrencies={chartData.selectedCurrencies}
         />
       </div>
     </>
   );
 };
-
-interface IProfitChartData {
-  profitChart: FundProfitChartDataType;
-  selectedCurrencies: TChartCurrency[];
-}
 
 interface OwnProps {
   profitChart: FundProfitChartDataType;
