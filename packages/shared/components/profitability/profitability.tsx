@@ -5,9 +5,9 @@ import withLoader from "shared/decorators/with-loader";
 
 import BaseProfitability from "./base-profitability";
 import {
+  composeProfitabilityPrefix,
   PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT,
-  composeProfitabilityPrefix
+  PROFITABILITY_VARIANT
 } from "./profitability.helper";
 
 const renderPrefix = (value: number, prefix: PROFITABILITY_PREFIX) => {

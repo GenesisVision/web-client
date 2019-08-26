@@ -4,9 +4,9 @@ import BrokerCard from "pages/create-program/components/create-program-broker/br
 import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React, { useCallback, useState } from "react";
 import {
+  useTranslation,
   WithTranslation,
-  withTranslation as translate,
-  useTranslation
+  withTranslation as translate
 } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
@@ -68,7 +68,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
       setFieldValue(FIELDS.brokerAccountTypeId, account.id);
       setFieldValue(FIELDS.leverage, leverage);
     },
-    [brokers, currentAccountTypeId, values, currentLeverage]
+    [brokers, values, currentLeverage, setFieldValue, currentAccountTypeId]
   );
   const changeAccount = useCallback(
     ({ target }) => {

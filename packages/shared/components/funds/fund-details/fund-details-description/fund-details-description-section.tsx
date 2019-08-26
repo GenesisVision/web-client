@@ -3,38 +3,23 @@ import "shared/components/details/details-description-section/details-descriptio
 import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
-import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
-import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import { FUND, STATUS } from "shared/constants/constants";
 import { CurrencyEnum } from "shared/utils/types";
 
-import {
-  IFundControlsProps,
-  IFundWithdrawalContainerProps
-} from "../fund-details.types";
+import { IFundControlsProps } from "../fund-details.types";
 
 const _FundFundDetailsDescription: React.FC<Props> = ({
-  service: { dispatchFundDescription },
   t,
   accountCurrency,
   isAuthenticated,
   redirectToLogin,
   fundDescription,
-  FundControls,
-  FundWithdrawContainer
+  FundControls
 }) => (
   <div className="program-details-description">
     <FundDetailsDescription
@@ -72,57 +57,20 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
       isAuthenticated={isAuthenticated}
       redirectToLogin={redirectToLogin}
     />
-    {fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.status !== STATUS.ENDED && (
-        <div className="program-details-description__additionally">
-          <DetailsInvestment
-            updateDescription={dispatchFundDescription}
-            asset={FUND}
-            id={fundDescription.id}
-            assetCurrency={"GVT" as CurrencyEnum}
-            accountCurrency={accountCurrency}
-            personalDetails={
-              fundDescription.personalFundDetails as InvestmentDetails
-            }
-            WithdrawContainer={FundWithdrawContainer}
-          />
-        </div>
-      )}
   </div>
 );
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      dispatchFundDescription
-    },
-    dispatch
-  )
-});
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  dispatchFundDescription: typeof dispatchFundDescription;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
 
 interface OwnProps {
   fundDescription: FundDetailsFull;
   isAuthenticated: boolean;
   redirectToLogin(): void;
   FundControls: React.ComponentType<IFundControlsProps>;
-  FundWithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
   accountCurrency: CurrencyEnum;
 }
 
-interface Props extends WithTranslation, OwnProps, DispatchProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 const FundFundDetailsDescription = compose<React.ComponentType<OwnProps>>(
-  connect(
-    null,
-    mapDispatchToProps
-  ),
   translate(),
   React.memo
 )(_FundFundDetailsDescription);

@@ -648,6 +648,7 @@
       "subscriptionFee": "Subscription fee",
       "volume-fee": "Volume fee",
       "invest": "Invest",
+      "investment-details": "Investment details",
       "reinvest": "Reinvest profit",
       "yourInvestment": "Current investment",
       "pending-input": "Pending input",
@@ -734,7 +735,7 @@
       "heading": "History",
       "tabs": {
         "trades": "Trades",
-        "events": "Events",
+        "events": "My events",
         "open-positions": "Open positions",
         "subscriptions": "Subscriptions",
         "financial-statistic": "Financial statistic",

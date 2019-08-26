@@ -6,16 +6,9 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import ProgramTrades from "shared/components/programs/program-details/program-history/program-trades";
 import Surface from "shared/components/surface/surface";
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import {
-  FilteringType,
-  SelectFilterValue
-} from "shared/components/table/components/filtering/filter.type";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { IDataModel, ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import useTab from "shared/hooks/tab.hook";
@@ -32,11 +25,6 @@ import ProgramOpenPositions from "./program-open-positions";
 import ProgramPeriodHistory from "./program-period-history";
 import ProgramSubscriptions from "./program-subscriptions/program-subscriptions";
 
-const EVENTS_FILTERING = {
-  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
-  type: EVENT_TYPE_FILTER_DEFAULT_VALUE
-};
-
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
   showCommissionRebateSometime,
   programId,
@@ -48,8 +36,6 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   currency,
   isAuthenticated,
   isInvested,
-  eventTypeFilterValues,
-  fetchPortfolioEvents,
   fetchTrades,
   fetchOpenPositions,
   fetchPeriodHistory,
@@ -64,7 +50,6 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
     fetchHistoryCounts(programId).then(setCounts);
   }, []);
   const {
-    eventsCount,
     openPositionsCount,
     periodHistoryCount,
     subscriptionsCount,
@@ -92,12 +77,6 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
               count={periodHistoryCount}
             />
             <GVTab
-              value={TABS.EVENTS}
-              label={t("program-details-page.history.tabs.events")}
-              count={eventsCount}
-              visible={isAuthenticated && (isInvested || !!eventsCount)}
-            />
-            <GVTab
               value={TABS.SUBSCRIBERS}
               label={t("program-details-page.history.tabs.subscriptions")}
               count={subscriptionsCount}
@@ -120,14 +99,6 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
             fetchTrades={fetchTrades}
             programId={programId}
             currency={currency}
-          />
-        )}
-        {tab === TABS.EVENTS && (
-          <PortfolioEventsTable
-            filtering={EVENTS_FILTERING}
-            fetchPortfolioEvents={fetchPortfolioEvents}
-            dateRangeStartLabel={t("filters.date-range.program-start")}
-            eventTypeFilterValues={eventTypeFilterValues}
           />
         )}
         {tab === TABS.OPEN_POSITIONS && (
@@ -167,7 +138,6 @@ const mapStateToProps = (state: RootState): StateProps => ({
 
 enum TABS {
   TRADES = "trades",
-  EVENTS = "events",
   OPEN_POSITIONS = "openPositions",
   SUBSCRIBERS = "subscribers",
   FINANCIAL_STATISTIC = "financialStatistic",
@@ -182,7 +152,6 @@ interface OwnProps {
   showSwaps: boolean;
   showTickets: boolean;
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
-  fetchPortfolioEvents: GetItemsFuncType;
   fetchOpenPositions: (
     programId: string,
     filters?: FilteringType
@@ -199,7 +168,6 @@ interface OwnProps {
   currency: CurrencyEnum;
   programCurrency: CurrencyEnum;
   isInvested: boolean;
-  eventTypeFilterValues: SelectFilterValue[];
   isOwnProgram: boolean;
   title: string;
 }
