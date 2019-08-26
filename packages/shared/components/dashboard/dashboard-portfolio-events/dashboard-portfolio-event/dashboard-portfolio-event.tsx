@@ -22,11 +22,13 @@ const formatDate = (date: Date) => {
 
 const _DashboardPortfolioEvent: React.FC<Props> = ({ event, from }) => (
   <div className="portfolio-event">
-    <PortfolioEventLogo
-      assetDetails={event.assetDetails}
-      icon={event.icon}
-      from={from}
-    />
+    {event.assetDetails && (
+      <PortfolioEventLogo
+        assetDetails={event.assetDetails}
+        icon={event.icon}
+        from={from}
+      />
+    )}
     <div className="portfolio-event__info">
       <StatisticItem label={formatDate(event.date)}>
         <div className="portfolio-event__values-container">
