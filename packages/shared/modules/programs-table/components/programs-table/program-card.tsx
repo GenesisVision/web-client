@@ -216,11 +216,7 @@ const _ProgramCard: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem label={t("programs-page.programs-header.age")}>
-            <NumberFormat
-              value={moment(program.creationDate).fromNow(true)}
-              displayType="text"
-              decimalScale={0}
-            />
+            {moment(program.creationDate).fromNow(true)}
           </StatisticItem>
         </div>
         <div className="table-cards__table-column">
