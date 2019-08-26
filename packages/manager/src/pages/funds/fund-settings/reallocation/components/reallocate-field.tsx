@@ -29,6 +29,16 @@ const _ReallocateField: React.FC<Props> = ({
     undefined
   );
   const [remainder, setRemainder] = useState<number>(getRemainder(stateAssets));
+
+  const submitChanges = useCallback(() => {
+    onChange({
+      target: {
+        value: stateAssets.filter(asset => asset.percent > 0),
+        name
+      }
+    });
+  }, []);
+
   useEffect(
     () => {
       if (!newAsset) return;
@@ -102,15 +112,6 @@ const _ReallocateField: React.FC<Props> = ({
     },
     [stateAssets, submitChanges]
   );
-
-  const submitChanges = useCallback(() => {
-    onChange({
-      target: {
-        value: stateAssets.filter(asset => asset.percent > 0),
-        name
-      }
-    });
-  });
 
   return (
     <>
