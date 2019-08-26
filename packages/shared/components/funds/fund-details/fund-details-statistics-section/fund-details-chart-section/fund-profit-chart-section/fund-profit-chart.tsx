@@ -39,8 +39,8 @@ const _FundProfitChart: React.FC<Props> = ({
           {
             icon: "",
             color: "grey",
-            name: "other",
-            asset: "other",
+            name: "Other",
+            asset: "Other",
             percent: item.assetsState.otherPercent
           }
         ].filter(({ percent }) => !!percent) || []
