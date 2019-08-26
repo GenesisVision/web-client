@@ -42,7 +42,6 @@ const _Header: React.FC<Props> = ({
           </Link>
         </div>
       </div>
-      <div className="header__separator" />
       <div className="header__right">
         {isAuthenticated ? (
           <>
