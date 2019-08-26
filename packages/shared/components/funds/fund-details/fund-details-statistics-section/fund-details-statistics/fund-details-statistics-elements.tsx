@@ -1,9 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import { FundProfitChart } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -17,8 +16,9 @@ import { statisticPeriodSelector } from "../../reducers/statistic-period.reducer
 import { IStatisticData } from "./fund-details-statistics";
 
 const _FundDetailsStatisticsElements: React.FC<
-  IFundDetailsStatisticsElementsProps & WithTranslation
-> = ({ statisticData: { statisticCurrency, statistic }, t }) => {
+  IFundDetailsStatisticsElementsProps
+> = ({ statisticData: { statisticCurrency, statistic } }) => {
+  const [t] = useTranslation();
   const period = useSelector(statisticPeriodSelector);
   return (
     <>
@@ -181,6 +181,6 @@ export interface IFundDetailsStatisticsElementsProps {
 }
 
 const FundDetailsStatisticsElements = React.memo(
-  withLoader(translate()(_FundDetailsStatisticsElements))
+  withLoader(_FundDetailsStatisticsElements)
 );
 export default FundDetailsStatisticsElements;
