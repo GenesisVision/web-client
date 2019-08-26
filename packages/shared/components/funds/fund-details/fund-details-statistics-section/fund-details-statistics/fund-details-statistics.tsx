@@ -25,7 +25,7 @@ const _FundDetailsStatistics: React.FC<Props> = ({ t }) => {
         statistic[0] &&
         setStatisticData({ statisticCurrency, statistic: statistic[0] });
     },
-    [statistic]
+    [statistic, statisticCurrency]
   );
   return (
     <Surface className="surface--horizontal-paddings details-statistics">

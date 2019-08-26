@@ -2,9 +2,9 @@ import { ProgramPeriodViewModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import {
+  useTranslation,
   WithTranslation,
-  withTranslation as translate,
-  useTranslation
+  withTranslation as translate
 } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
@@ -40,7 +40,7 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
 }) => {
   const fetchPeriod: GetItemsFuncType = React.useCallback(
     (filters?: FilteringType) => fetchPeriodHistory(id, filters),
-    []
+    [fetchPeriodHistory, id]
   );
 
   return (

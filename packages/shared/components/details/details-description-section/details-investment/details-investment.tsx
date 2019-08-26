@@ -2,27 +2,31 @@ import "./details-investment.scss";
 
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-import AssetStatus from "shared/components/asset-status/asset-status";
+import { ASSET } from "shared/components/../constants/constants";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
-import GVButton from "shared/components/gv-button";
-import Profitability from "shared/components/profitability/profitability";
-import {
-  PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT
-} from "shared/components/profitability/profitability.helper";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
+import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
-import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import { PROGRAM, STATUS } from "shared/constants/constants";
-import useIsOpen from "shared/hooks/is-open.hook";
-import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
+import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
+import { GetItemsFuncType } from "shared/components/table/components/table.types";
+import useTab from "shared/hooks/tab.hook";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
+import InvestmentContainer from "./investment-container";
+
+const EVENTS_FILTERING = {
+  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
+  type: EVENT_TYPE_FILTER_DEFAULT_VALUE
+};
 
 const _DetailsInvestment: React.FC<Props> = ({
+  fetchPortfolioEvents,
+  eventTypeFilterValues = [],
   updateDescription,
   t,
   id,
@@ -34,138 +38,60 @@ const _DetailsInvestment: React.FC<Props> = ({
   WithdrawContainer,
   ProgramReinvestingWidget
 }) => {
-  const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const profitValue = personalDetails.value - personalDetails.invested;
+  const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   return (
-    <Surface className="surface--horizontal-paddings details-investment">
-      <h3>{t(`fund-details-page.description.yourInvestment.${asset}`)}</h3>
-      <div className="details-investment__short-statistic">
-        <StatisticItem accent label={t("fund-details-page.description.value")}>
-          <NumberFormat
-            value={formatCurrencyValue(personalDetails.value, assetCurrency)}
-            suffix={` ${assetCurrency}`}
-            displayType="text"
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={asset === PROGRAM}
-          accent
-          label={
-            <TooltipLabel
-              tooltipContent={t("program-details-page.tooltip.profit")}
-              labelText={t("fund-details-page.description.profit")}
+    <Surface className="details-investment">
+      <div className="details-investment__investment-tabs">
+        {asset === ASSET.PROGRAM ? (
+          <GVTabs value={tab} onChange={setTab}>
+            <GVTab
+              value={TABS.INVESTMENT}
+              label={t(`fund-details-page.description.yourInvestment.${asset}`)}
             />
-          }
-        >
-          <Profitability
-            value={formatCurrencyValue(profitValue, assetCurrency)}
-            prefix={PROFITABILITY_PREFIX.SIGN}
-          >
-            <NumberFormat
-              value={formatCurrencyValue(profitValue, assetCurrency)}
-              suffix={` ${assetCurrency}`}
-              allowNegative={false}
-              displayType="text"
+            <GVTab
+              value={TABS.EVENTS}
+              label={t("program-details-page.history.tabs.events")}
             />
-          </Profitability>
-          <Profitability
-            value={`${personalDetails.profit}`}
-            variant={PROFITABILITY_VARIANT.CHIPS}
-          >
-            {roundPercents(personalDetails.profit)}
-          </Profitability>
-        </StatisticItem>
-        <StatisticItem
-          accent
-          label={
-            <TooltipLabel
-              tooltipContent={t(`fund-details-page.tooltip.status.${asset}`)}
-              labelText={t("fund-details-page.description.status")}
-            />
-          }
-        >
-          <AssetStatus
-            status={personalDetails.status as STATUS}
-            id={id}
-            asset={asset}
-            onCancel={updateDescription}
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={
-            personalDetails.pendingInput !== undefined &&
-            personalDetails.pendingInput !== 0
-          }
-          accent
-          label={t("fund-details-page.description.pending-input")}
-        >
-          <NumberFormat
-            value={formatCurrencyValue(
-              personalDetails.pendingInput,
-              assetCurrency
-            )}
-            suffix={` ${assetCurrency}`}
-            displayType="text"
-          />
-        </StatisticItem>
-        {ProgramReinvestingWidget &&
-          personalDetails.isInvested &&
-          personalDetails.canInvest && (
-            <ProgramReinvestingWidget
-              programId={id}
-              isReinvesting={personalDetails.isReinvest}
-            />
-          )}
-        <StatisticItem
-          condition={
-            personalDetails.pendingOutput !== undefined &&
-            personalDetails.pendingOutput !== 0
-          }
-          accent
-          label={t("fund-details-page.description.pending-output")}
-        >
-          {personalDetails.pendingOutputIsWithdrawAll ? (
-            t("withdraw-program.withdrawing-all")
-          ) : (
-            <NumberFormat
-              value={formatCurrencyValue(
-                personalDetails.pendingOutput,
-                assetCurrency
-              )}
-              suffix={` ${assetCurrency}`}
-              displayType="text"
-            />
-          )}
-        </StatisticItem>
-      </div>
-      <div className="details-investment__footer">
-        <GVButton
-          color="secondary"
-          variant="outlined"
-          onClick={setOpenPopup}
-          disabled={!personalDetails.canWithdraw}
-        >
-          {t("fund-details-page.description.withdraw")}
-        </GVButton>
-        {notice && (
-          <p className="details-investment__withdraw-notice">{notice}</p>
+          </GVTabs>
+        ) : (
+          <h3>{t(`fund-details-page.description.yourInvestment.${asset}`)}</h3>
         )}
-        <WithdrawContainer
-          open={isOpenPopup}
+      </div>
+      {tab === TABS.INVESTMENT && (
+        <InvestmentContainer
+          updateDescription={updateDescription}
+          asset={asset}
+          notice={notice}
           id={id}
           accountCurrency={accountCurrency}
           assetCurrency={assetCurrency}
-          onClose={setClosePopup}
-          onSubmit={updateDescription}
+          personalDetails={personalDetails}
+          WithdrawContainer={WithdrawContainer}
+          ProgramReinvestingWidget={ProgramReinvestingWidget}
         />
-      </div>
+      )}
+      {tab === TABS.EVENTS && (
+        <PortfolioEventsTable
+          filtering={EVENTS_FILTERING}
+          fetchPortfolioEvents={fetchPortfolioEvents!}
+          dateRangeStartLabel={t("filters.date-range.program-start")}
+          eventTypeFilterValues={eventTypeFilterValues!}
+        />
+      )}
     </Surface>
   );
 };
 
+enum TABS {
+  INVESTMENT = "INVESTMENT",
+  EVENTS = "EVENTS"
+}
+
 interface OwnProps {
+  fetchPortfolioEvents?: GetItemsFuncType;
+  eventTypeFilterValues?: SelectFilterValue[];
   updateDescription: () => void;
-  asset: string;
+  asset: ASSET;
   notice?: string;
   id: string;
   accountCurrency: CurrencyEnum;

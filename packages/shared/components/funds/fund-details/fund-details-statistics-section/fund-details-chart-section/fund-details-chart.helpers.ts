@@ -79,7 +79,7 @@ export const useFundChartStateValues: TUseFundChartStateValues = () => {
       dispatch(getBalanceChart(opts));
       dispatch(getProfitChart(opts));
     },
-    [period, id, selectedCurrencies]
+    [period, id, selectedCurrencies, dispatch]
   );
   const addCurrency = useCallback(
     () => {
@@ -106,7 +106,7 @@ export const useFundChartStateValues: TUseFundChartStateValues = () => {
       setSelectedCurrencies([...newSelectedCurrencies]);
       dispatch(statisticCurrencyAction(newSelectedCurrencies[0].name));
     },
-    [selectedCurrencies, platformCurrencies]
+    [selectedCurrencies, platformCurrencies, dispatch]
   );
   return {
     addCurrency,
@@ -124,9 +124,12 @@ type TUseChartPeriod = () => {
 export const useChartPeriod: TUseChartPeriod = () => {
   const period = useSelector(statisticPeriodSelector);
   const dispatch = useDispatch();
-  const setPeriod = useCallback(period => {
-    dispatch(statisticPeriodAction(period));
-  }, []);
+  const setPeriod = useCallback(
+    period => {
+      dispatch(statisticPeriodAction(period));
+    },
+    [dispatch]
+  );
   return {
     period,
     setPeriod
@@ -153,7 +156,7 @@ export const useChartData = <T>(
         selectedCurrencies: [...selectedCurrencies]
       });
     },
-    [chart]
+    [chart, selectedCurrencies]
   );
   return chartData;
 };

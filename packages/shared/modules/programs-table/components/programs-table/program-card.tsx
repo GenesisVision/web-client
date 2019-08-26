@@ -53,7 +53,7 @@ const _ProgramCard: React.FC<Props> = ({
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleToggleFavorite = useCallback(
     () => toggleFavorite(program.id, program.personalDetails.isFavorite),
-    [program]
+    [program.id, program.personalDetails.isFavorite, toggleFavorite]
   );
   return (
     <div className="table-cards__card">
