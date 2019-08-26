@@ -1,19 +1,18 @@
-import { DashboardPortfolioEvents as DashboardPortfolioEventsType } from "gv-api-web";
-import * as React from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { InvestmentEventViewModels } from "gv-api-web";
+import React from "react";
+import { connect, ResolveThunks } from "react-redux";
 import { InvestorRootState } from "reducers";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
 import { DASHBOARD_EVENTS_ROUTE } from "shared/routes/dashboard.routes";
 
 import { dashboardEventsSelector } from "../../reducers/dashboard-events.reducer";
 import { getTopPortfolioEvents } from "../../services/dashboard-events.services";
-import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
 class DashboardPortfolioEventsSection extends React.PureComponent<Props> {
   componentDidMount() {
@@ -27,7 +26,6 @@ class DashboardPortfolioEventsSection extends React.PureComponent<Props> {
         fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
         title={title}
         data={data}
-        eventView={DashboardPortfolioEvent}
       />
     );
   }
@@ -50,7 +48,7 @@ interface OwnProps {
 }
 
 interface StateProps {
-  data?: DashboardPortfolioEventsType;
+  data?: InvestmentEventViewModels;
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {

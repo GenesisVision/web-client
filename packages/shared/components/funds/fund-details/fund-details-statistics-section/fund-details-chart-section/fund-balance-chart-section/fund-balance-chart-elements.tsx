@@ -1,10 +1,9 @@
 import { FundBalanceChart as FundBalanceChartType } from "gv-api-web";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
@@ -12,55 +11,38 @@ import ChartCurrencySelector, {
   TChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import { HandlePeriodChangeType } from "shared/utils/types";
 
+import { useChartData, useChartPeriod } from "../fund-details-chart.helpers";
 import FundBalanceChart from "./fund-balance-chart";
 
 const _FundBalanceChartElements: React.FC<Props> = ({
   selectedCurrencies,
   balanceChart,
-  onPeriodChange,
-  period,
   addCurrency,
   removeCurrency,
   changeCurrency,
   selectCurrencies
 }) => {
   const [t] = useTranslation();
-  const equivalentCurrency = "USD";
-  const [chartData, setChartData] = useState<IBalanceChartData>({
+  const { period, setPeriod } = useChartPeriod();
+  const chartData = useChartData<FundBalanceChartType>(
     balanceChart,
     selectedCurrencies
-  });
-  useEffect(
-    () => {
-      setChartData({
-        balanceChart,
-        selectedCurrencies: [...selectedCurrencies]
-      });
-    },
-    [balanceChart]
   );
   const { name, color } = chartData.selectedCurrencies[0];
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem
-          label={t("fund-details-page.chart.value")}
-          equivalent={chartData.balanceChart.usdBalance}
-          equivalentCurrency={equivalentCurrency}
-          big
-          accent
-        >
+        <StatisticItem label={t("fund-details-page.chart.value")} big accent>
           <NumberFormat
-            value={formatCurrencyValue(chartData.balanceChart.balance, name)}
+            value={formatCurrencyValue(chartData.chart.balance, name)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${name}`}
           />
         </StatisticItem>
       </div>
-      <ChartPeriod onChange={onPeriodChange} period={period} />
+      <ChartPeriod onChange={setPeriod} period={period} />
       <ChartCurrencySelector
         maxCharts={1}
         selectCurrencies={selectCurrencies.map(({ name }) => name)}
@@ -71,7 +53,7 @@ const _FundBalanceChartElements: React.FC<Props> = ({
       />
       <div className="details-chart__profit">
         <FundBalanceChart
-          balanceChart={chartData.balanceChart.balanceChart}
+          balanceChart={chartData.chart.balanceChart}
           currency={name}
           color={color}
         />
@@ -80,11 +62,6 @@ const _FundBalanceChartElements: React.FC<Props> = ({
   );
 };
 
-interface IBalanceChartData {
-  balanceChart: FundBalanceChartType;
-  selectedCurrencies: TChartCurrency[];
-}
-
 interface OwnProps {
   selectedCurrencies: TChartCurrency[];
   balanceChart: FundBalanceChartType;
@@ -92,8 +69,6 @@ interface OwnProps {
   removeCurrency: (name: string) => void;
   changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
   selectCurrencies: TChartCurrency[];
-  period: ChartDefaultPeriod;
-  onPeriodChange: HandlePeriodChangeType;
 }
 
 interface Props extends OwnProps {}

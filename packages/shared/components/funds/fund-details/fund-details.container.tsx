@@ -2,12 +2,12 @@ import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
 import React, { useCallback } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
@@ -87,7 +87,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
           </div>
         )}
         <div className="details__section">
-          <FundDetailsStatisticSection id={description.id} />
+          <FundDetailsStatisticSection />
         </div>
         <div className="details__history">
           <FundDetailsHistorySection

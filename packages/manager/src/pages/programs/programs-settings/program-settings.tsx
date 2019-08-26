@@ -2,7 +2,8 @@ import "./program-settings.scss";
 
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
-import PeriodAndClosing from "modules/asset-settings/period-and-closing";
+import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
+import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -43,13 +44,10 @@ const _ProgramSettings: React.FC<Props> = ({
         condition={details.personalProgramDetails.showTwoFactorButton}
         id={details.id}
       />
-      <PeriodAndClosing
-        asset={ASSET.PROGRAM}
-        canClosePeriod={details.personalProgramDetails.canClosePeriod}
-        canCloseAsset={details.personalProgramDetails.canCloseProgram}
+      <ClosePeriodBlock
+        condition={!!details.personalProgramDetails.canClosePeriod}
         id={details.id}
         closePeriod={closePeriod}
-        closeAsset={closeProgram}
       />
       <ChangePassword
         condition={
@@ -58,12 +56,6 @@ const _ProgramSettings: React.FC<Props> = ({
         }
         title={details.title}
         id={details.id}
-      />
-      <AssetEdit
-        title={details.title}
-        logo={{ src: details.logo }}
-        description={details.description}
-        onSubmit={editProgram}
       />
       <CancelChangeBroker
         condition={!!details.personalProgramDetails.migration}
@@ -113,6 +105,18 @@ const _ProgramSettings: React.FC<Props> = ({
         onSubmit={changeSignaling}
         signalSuccessFee={signalSuccessFee}
         signalVolumeFee={signalVolumeFee}
+      />
+      <AssetEdit
+        title={details.title}
+        logo={{ src: details.logo }}
+        description={details.description}
+        onSubmit={editProgram}
+      />
+      <CloseAssetBlock
+        asset={ASSET.PROGRAM}
+        canCloseAsset={details.personalProgramDetails.canCloseProgram}
+        id={details.id}
+        closeAsset={closeProgram}
       />
     </>
   );

@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 
 type TNullValue = undefined;
-type TAnchor = EventTarget | TNullValue;
+export type TAnchor = EventTarget | TNullValue;
 type TEvent = React.MouseEvent<Element, Event>;
 export const anchorNullValue: TNullValue = undefined;
 

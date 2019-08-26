@@ -6,7 +6,10 @@ import {
   PORTFOLIO_EVENTS_FILTERS
 } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
-import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
+import {
+  EVENT_LOCATION,
+  fetchPortfolioEvents
+} from "shared/components/programs/program-details/services/program-details.service";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { composeRequestFilters } from "shared/components/table/services/table.service";
 import { RootState } from "shared/reducers/root-reducer";
@@ -65,7 +68,10 @@ export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
     defaultFilters: PORTFOLIO_EVENTS_FILTERS
   });
   const eventsCountPromise = isAuthenticated
-    ? fetchPortfolioEvents({ ...eventsFiltering, assetId: id })
+    ? fetchPortfolioEvents(EVENT_LOCATION.Asset)({
+        ...eventsFiltering,
+        assetId: id
+      })
     : Promise.resolve({ total: 0 });
 
   const reallocateHistoryFilters = composeRequestFilters({

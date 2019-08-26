@@ -787,6 +787,12 @@
         "commission-rebate": "GV commission rebate"
       },
       "period-history": {
+        "investors-deposit": "Investors Invest",
+        "investors-withdraw": "Investors Withdrawal",
+        "manager-deposit": "Manager Investment /Withdrawal",
+        "investors-profit-withdraw": "Investors Withdrawal Profit",
+        "platform-success-fee": "Platform Success Fee",
+        "manager-commission-rebate": "GV commission rebate",
         "period": "Period",
         "date-start": "Date start",
         "period-length": "Period length",
@@ -1480,9 +1486,6 @@
         "title": "Portfolio Events",
         "see-all-button": "See All",
         "table-title": "Operations",
-        "success-fee": "Success fee",
-        "gv-commission": "GV commission",
-        "you-ve-earned": "You've earned",
         "empty-events": {
           "text": "The following events will be displayed here",
           "finished": "Fund/Program finished",
@@ -1537,6 +1540,12 @@
       }
     },
     "asset-settings": {
+      "close-period": {
+        "title": "Close period"
+      },
+      "close-asset": {
+        "title": "Close asset"
+      },
       "title": "{{asset}} settings",
       "period-and-closing": {
         "title": "Period and closing",

@@ -3,7 +3,11 @@ import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { apiSelector } from "shared/utils/selectors";
+import {
+  apiFieldSelector,
+  apiSelector,
+  fieldSelector
+} from "shared/utils/selectors";
 
 import { FETCH_FUND_DESCRIPTION } from "../actions/fund-details.actions";
 
@@ -15,6 +19,12 @@ export const fundDescriptionSelector = apiSelector<
   FundDescriptionDataType,
   RootState
 >(state => state.fundDetails.description);
+
+export const fundIdSelector = apiFieldSelector(
+  fundDescriptionSelector,
+  fieldSelector(state => state.id),
+  undefined
+);
 
 const fundDescriptionReducer = apiReducerFactory<FundDescriptionDataType>({
   apiType: FETCH_FUND_DESCRIPTION

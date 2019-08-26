@@ -37,12 +37,16 @@ const _Header: React.FC<Props> = ({
       </div>
       <div className="header__center">
         <div className="header__search">
-          <Link to={GLOBAL_SEARCH_ROUTE}>
+          <Link
+            to={{
+              pathname: GLOBAL_SEARCH_ROUTE,
+              state: backPath
+            }}
+          >
             <SearchIcon />
           </Link>
         </div>
       </div>
-      <div className="header__separator" />
       <div className="header__right">
         {isAuthenticated ? (
           <>

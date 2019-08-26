@@ -65,7 +65,7 @@ const _SignalTransaction: React.FC<TransactionDetailsProps & WithRoleProps> = ({
           <StatisticItem label={t(`transactions-details.signal.amount`)} big>
             <NumberFormat
               value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
-              suffix={data.currency}
+              suffix={` ${data.currency}`}
               displayType="text"
             />
           </StatisticItem>
