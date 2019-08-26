@@ -6,6 +6,7 @@ $fund-asset-bubble-size: 5px;
 
 .fund-asset-list {
   display: flex;
+  flex-wrap: wrap;
   @include adaptive-padding(top, $padding-xxsmall);
 
   &__item {
