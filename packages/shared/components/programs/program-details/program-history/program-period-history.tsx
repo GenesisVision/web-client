@@ -2,9 +2,9 @@ import { ProgramPeriodViewModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import {
-  useTranslation,
   WithTranslation,
-  withTranslation as translate
+  withTranslation as translate,
+  useTranslation
 } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
@@ -132,6 +132,14 @@ const ProgramPeriodHistoryPopup: React.FC<ProgramPeriodHistoryPopupProps> = ({
           currency={currency}
         />
         <ProgramPeriodHistoryPopupItem
+          condition={!!period.managerWithdraw}
+          label={t(
+            "program-details-page.history.period-history.manager-withdraw"
+          )}
+          value={period.managerWithdraw}
+          currency={currency}
+        />
+        <ProgramPeriodHistoryPopupItem
           condition={!!period.investorsProfitWithdraw}
           label={t(
             "program-details-page.history.period-history.investors-profit-withdraw"
@@ -169,6 +177,7 @@ const ProgramPeriodHistoryRow: React.FC<ProgramPeriodHistoryRowProps> = ({
     !!period.investorsDeposit ||
     !!period.investorsWithdraw ||
     !!period.managerDeposit ||
+    !!period.managerWithdraw ||
     !!period.investorsProfitWithdraw ||
     !!period.platformSuccessFee ||
     !!period.managerCommissionRebate;
@@ -182,7 +191,11 @@ const ProgramPeriodHistoryRow: React.FC<ProgramPeriodHistoryRowProps> = ({
           onClose={clearAnchor}
         />
       )}
-      <TableRow stripy onClick={setAnchor}>
+      <TableRow
+        stripy
+        onClick={setAnchor}
+        className="table__row table__row--clickable"
+      >
         <TableCell className="details-trades__cell--period">
           {period.number}
         </TableCell>
