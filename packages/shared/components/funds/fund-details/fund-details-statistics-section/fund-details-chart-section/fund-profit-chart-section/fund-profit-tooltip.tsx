@@ -4,7 +4,7 @@ import FundAssetList from "shared/components/fund-asset-list/fund-asset-list";
 import FundAssetRatio from "shared/components/fund-asset-ratio/fund-asset-ratio";
 
 const FundProfitTooltip: React.FC<Props> = ({ active, label, payload }) => {
-  if (!active) return null;
+  if (!active || !payload.length) return null;
   return (
     <ChartTooltip
       heading="Assets fund"
