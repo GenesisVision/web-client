@@ -125,6 +125,15 @@ $padding: $padding-small;
   &__row {
     transition: background-color 300ms ease;
 
+    &--clickable {
+      &:hover {
+        background-color: $background-pretender-level-hover !important;
+      }
+      & .table__cell {
+        cursor: pointer;
+      }
+    }
+
     &:not(.table__row--head):hover {
       background-color: $row-color;
     }
