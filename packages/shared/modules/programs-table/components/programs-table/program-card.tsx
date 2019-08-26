@@ -1,4 +1,5 @@
 import { ProgramDetails } from "gv-api-web";
+import moment from "moment";
 import * as React from "react";
 import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -214,9 +215,9 @@ const _ProgramCard: React.FC<Props> = ({
               decimalScale={0}
             />
           </StatisticItem>
-          <StatisticItem label={t("programs-page.programs-header.trades")}>
+          <StatisticItem label={t("programs-page.programs-header.age")}>
             <NumberFormat
-              value={program.statistic.tradesCount}
+              value={moment(program.creationDate).fromNow(true)}
               displayType="text"
               decimalScale={0}
             />
