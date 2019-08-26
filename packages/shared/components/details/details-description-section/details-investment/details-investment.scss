@@ -22,8 +22,8 @@ $padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
   }
 
   .profitability--chips {
-    margin-left: 5px;
-    margin-top: -5px;
+    margin-left: $padding-xxsmall/2;
+    margin-top: -$padding-xxsmall * 2;
   }
 
   &__block {
@@ -37,9 +37,13 @@ $padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
 
     &:nth-child(2) {
       @include media-breakpoint-landscape-tablet() {
-        margin-left: 80px;
-        padding-left: 80px;
-        border-left: 2px solid $secondary-color;
+        margin-left: $padding-medium;
+        padding-left: $padding-medium;
+        border-left: 2px solid $separator-color;
+      }
+      @include media-breakpoint-desktop() {
+        margin-left: $padding-large;
+        padding-left: $padding-large;
       }
     }
   }
@@ -63,7 +67,7 @@ $padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
   }
 
   &__heading {
-    font-size: 12px;
+    font-size: $font-size-small;
     text-transform: uppercase;
     letter-spacing: 0.15px;
     color: $label-color;
@@ -133,7 +137,7 @@ $padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
         letter-spacing: 0.6px;
         white-space: nowrap;
         font-weight: 600;
-        color: #e8eff3;
+        color: $text-light-color;
         font-size: $font-size-common-mobile;
         @include media-breakpoint-landscape-phone() {
           font-size: $font-size-paragraph;
