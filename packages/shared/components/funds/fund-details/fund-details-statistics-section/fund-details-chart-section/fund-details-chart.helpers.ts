@@ -2,13 +2,13 @@ import { PlatformCurrency } from "gv-api-web";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
-import { ChartDefaultPeriod } from "../../../../chart/chart-period/chart-period.helpers";
-import { ISelectChangeEvent } from "../../../../select/select";
 import {
   statisticCurrencyAction,
   statisticPeriodAction
