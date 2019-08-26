@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { ProgramPeriodViewModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
@@ -194,7 +195,7 @@ const ProgramPeriodHistoryRow: React.FC<ProgramPeriodHistoryRowProps> = ({
       <TableRow
         stripy
         onClick={setAnchor}
-        className="table__row table__row--clickable"
+        className={classNames({ "table__row--clickable": haveInfo })}
       >
         <TableCell className="details-trades__cell--period">
           {period.number}
