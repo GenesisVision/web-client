@@ -2,15 +2,11 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { ReallocationsViewModel } from "gv-api-web";
 import moment from "moment";
-import * as React from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
-import {
-  FUND_REALLOCATE_HISTORY_COLUMNS,
-  FUND_REBALANCING_DEFAULT_FILTERS,
-  FUND_REBALANCING_FILTERS
-} from "shared/components/funds/fund-details/fund-details.constants";
+import { FUND_REALLOCATE_HISTORY_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -18,31 +14,28 @@ import {
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
-import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { UpdateFilterFunc } from "shared/components/table/components/table.types";
+import TableContainer from "shared/table/components/table-container";
 
+import { fundReallocateHistoryTableSelector } from "../../reducers/fund-reallocate-history.reducer";
 import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cell";
 
 const _FundReallocateHistory: React.FC<Props> = ({
-  id,
-  fetchFundReallocateHistory
+  getFundReallocateHistory
 }) => {
   const [t] = useTranslation();
-  const fetchFundReallocate: GetItemsFuncType = filters =>
-    fetchFundReallocateHistory(id, filters).then(data => ({
-      items: data.reallocations,
-      total: data.total
-    }));
+
   return (
-    <TableModule
-      paging={DEFAULT_PAGING}
-      getItems={fetchFundReallocate}
+    <TableContainer
+      getItems={getFundReallocateHistory}
+      dataSelector={fundReallocateHistoryTableSelector}
+      isFetchOnMount={true}
       columns={FUND_REALLOCATE_HISTORY_COLUMNS}
-      defaultFilters={FUND_REBALANCING_DEFAULT_FILTERS}
-      filtering={FUND_REBALANCING_FILTERS}
-      renderFilters={(updateFilter, filtering) => (
+      renderFilters={(
+        updateFilter: UpdateFilterFunc,
+        filtering: FilteringType
+      ) => (
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}
           value={filtering[DATE_RANGE_FILTER_NAME]}
@@ -82,8 +75,7 @@ const FundReallocateHistory = React.memo(_FundReallocateHistory);
 export default FundReallocateHistory;
 
 interface OwnProps {
-  id: string;
-  fetchFundReallocateHistory(
+  getFundReallocateHistory(
     fundId: string,
     filters?: FilteringType
   ): Promise<ReallocationsViewModel>;

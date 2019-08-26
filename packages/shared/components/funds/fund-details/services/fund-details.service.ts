@@ -25,7 +25,8 @@ import { CurrencyEnum, MiddlewareDispatch } from "shared/utils/types";
 import {
   fetchFundBalanceChartAction,
   fetchFundDescriptionAction,
-  fetchFundProfitChartAction
+  fetchFundProfitChartAction,
+  fundReallocateHistoryAction
 } from "../actions/fund-details.actions";
 import {
   FUND_REBALANCING_DEFAULT_FILTERS,
@@ -52,13 +53,6 @@ export const fetchFundStructure = (
   return fundsApi.v10FundsByIdAssetsGet(fundId);
 };
 
-export const fetchFundReallocateHistory = (
-  fundId: string,
-  filters?: FilteringType
-): Promise<ReallocationsViewModel> => {
-  return fundsApi.v10FundsByIdReallocationsGet(fundId, filters);
-};
-
 export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
   const isAuthenticated = authService.isAuthenticated();
   const paging = { itemsOnPage: 0 };
@@ -79,16 +73,23 @@ export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
     filtering: FUND_REBALANCING_FILTERS,
     defaultFilters: FUND_REBALANCING_DEFAULT_FILTERS
   });
-  const reallocateCountPromise = fetchFundReallocateHistory(
+  /*const reallocateCountPromise = fetchFundReallocateHistory(
     id,
     reallocateHistoryFilters
-  );
-  return Promise.all([eventsCountPromise, reallocateCountPromise]).then(
+  );*/
+  return Promise.all([eventsCountPromise /*, reallocateCountPromise*/]).then(
     ([eventsData, reallocateData]) => ({
       eventsCount: eventsData.total,
       reallocateCount: reallocateData.total
     })
   );
+};
+
+export const getFundReallocateHistory = (
+  fundId: string,
+  filters?: FilteringType
+) => (dispatch: Dispatch) => {
+  dispatch(fundReallocateHistoryAction(fundId, filters));
 };
 
 export const getProfitChart = ({ id, period, currencies }: TGetChartArgs) => (

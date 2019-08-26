@@ -2,12 +2,14 @@ import {
   CancelablePromise,
   FundBalanceChart,
   FundDetailsFull,
-  FundProfitChart
+  FundProfitChart,
+  ReallocationsViewModel
 } from "gv-api-web";
 import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import fundsApi from "shared/services/api-client/funds-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
@@ -20,6 +22,8 @@ export const SET_STATISTIC_CURRENCY = "SET_STATISTIC_CURRENCY";
 export const FETCH_FUND_PROFIT_CHART = "FETCH_FUND_PROFIT_CHART";
 export const FETCH_FUND_BALANCE_CHART = "FETCH_FUND_BALANCE_CHART";
 export const FETCH_FUND_DESCRIPTION = "FETCH_FUND_DESCRIPTION";
+
+export const FUND_REALLOCATE_HISTORY = "FUND_REALLOCATE_HISTORY";
 
 const sendFundChartRequest = (
   { start, end }: ChartDefaultPeriod,
@@ -80,4 +84,12 @@ export const statisticPeriodAction = (
 ): TStatisticPeriodAction => ({
   type: SET_STATISTIC_PERIOD,
   payload: period
+});
+
+export const fundReallocateHistoryAction = (
+  fundId: string,
+  filters?: FilteringType
+): ApiAction<ReallocationsViewModel> => ({
+  type: FUND_REALLOCATE_HISTORY,
+  payload: fundsApi.v10FundsByIdReallocationsGet(fundId, filters)
 });

@@ -37,7 +37,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
   t,
   id,
   fetchFundStructure,
-  fetchFundReallocateHistory,
+  getFundReallocateHistory,
   isAuthenticated,
   isInvested,
   fetchPortfolioEvents,
@@ -50,7 +50,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
     () => {
       fetchHistoryCounts(id).then(setCounts);
     },
-    [id]
+    [fetchHistoryCounts, id]
   );
   const { eventsCount, reallocateCount } = counts;
   return (
@@ -96,8 +96,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
         )}
         {tab === TABS.REALLOCATE_HISTORY && (
           <FundReallocateHistory
-            id={id}
-            fetchFundReallocateHistory={fetchFundReallocateHistory}
+            getFundReallocateHistory={getFundReallocateHistory}
           />
         )}
       </div>
@@ -122,7 +121,7 @@ interface Props extends StateProps, WithTranslation, OwnProps {}
 interface OwnProps {
   id: string;
   fetchFundStructure(fundId: string): Promise<FundAssetsListInfo>;
-  fetchFundReallocateHistory(
+  getFundReallocateHistory(
     fundId: string,
     filters?: FilteringType
   ): Promise<ReallocationsViewModel>;

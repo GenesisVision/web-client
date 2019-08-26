@@ -1,12 +1,15 @@
+import { ReallocationsViewModel } from "gv-api-web";
 import { combineReducers } from "redux";
 import clearableReducer from "shared/reducers/clearable.reducer";
 
+import { ITableState } from "../../../table/reducers/table.reducer";
 import fundBalanceChartReducer, {
   FundBalanceChartState
 } from "./balance-chart.reducer";
 import fundDescriptionReducer, {
   FundDescriptionState
 } from "./description.reducer";
+import fundReallocateHistoryReducer from "./fund-reallocate-history.reducer";
 import fundProfitChartReducer, {
   FundProfitChartState
 } from "./profit-chart.reducer";
@@ -23,6 +26,7 @@ type FundDetailsDataType = Readonly<{
   profitChart: FundProfitChartState;
   balanceChart: FundBalanceChartState;
   description: FundDescriptionState;
+  reallocateHistory: ITableState<ReallocationsViewModel>;
 }>;
 
 export type FundDetailsState = FundDetailsDataType;
@@ -33,7 +37,8 @@ const fundDetailsReducer = clearableReducer(
     statisticCurrency: statisticCurrencyReducer,
     description: fundDescriptionReducer,
     profitChart: fundProfitChartReducer,
-    balanceChart: fundBalanceChartReducer
+    balanceChart: fundBalanceChartReducer,
+    reallocateHistory: fundReallocateHistoryReducer
   })
 );
 

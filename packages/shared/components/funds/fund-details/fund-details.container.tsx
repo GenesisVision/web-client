@@ -27,12 +27,12 @@ import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-
 import { IDescriptionSection } from "./fund-details.types";
 import {
   dispatchFundDescription,
-  fetchFundReallocateHistory,
-  fetchFundStructure
+  fetchFundStructure,
+  getFundReallocateHistory
 } from "./services/fund-details.service";
 
 const _FundDetailsContainer: React.FC<Props> = ({
-  service: { dispatchFundDescription },
+  service,
   isKycConfirmed,
   currency,
   isAuthenticated,
@@ -93,7 +93,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
           <FundDetailsHistorySection
             id={description.id}
             fetchFundStructure={fetchFundStructure}
-            fetchFundReallocateHistory={fetchFundReallocateHistory}
+            getFundReallocateHistory={service.getFundReallocateHistory}
             fetchPortfolioEvents={fetchHistoryPortfolioEvents}
             fetchHistoryCounts={historySection.fetchHistoryCounts}
             eventTypeFilterValues={historySection.eventTypeFilterValues}
@@ -108,7 +108,8 @@ const _FundDetailsContainer: React.FC<Props> = ({
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      dispatchFundDescription
+      dispatchFundDescription,
+      getFundReallocateHistory
     },
     dispatch
   )
@@ -116,6 +117,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   dispatchFundDescription: typeof dispatchFundDescription;
+  getFundReallocateHistory: typeof getFundReallocateHistory;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
