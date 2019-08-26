@@ -5,6 +5,7 @@ import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { ReactComponent as ExportIcon } from "shared/media/export.svg";
 import filesService from "shared/services/file-service";
 
 const _DownloadButtonToolbarAuth: React.FC<Props> = ({
@@ -22,12 +23,15 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
           saveAs(blob, `${title}_statistic_${dateNow}.xlsx`)
         );
     },
-    [dateRange.dateStart, dateRange.dateEnd, dateRange.type]
+    [programId, dateRange, title]
   );
   return (
     <div className="dashboard__button">
       <GVButton color="primary" variant="text" onClick={loadFile}>
-        {t("program-details-page.history.trades.download")}
+        <>
+          {t("program-details-page.history.trades.download")}
+          <ExportIcon />
+        </>
       </GVButton>
     </div>
   );
