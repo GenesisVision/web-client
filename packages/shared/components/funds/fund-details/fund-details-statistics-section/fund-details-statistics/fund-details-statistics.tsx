@@ -3,7 +3,7 @@ import "shared/components/details/details-description-section/details-statistic-
 import { FundProfitChart } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
 import Surface from "shared/components/surface/surface";
@@ -13,7 +13,8 @@ import { fundProfitChartSelector } from "../../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../../reducers/statistic-currency.reducer";
 import FundDetailsStatisticsElements from "./fund-details-statistics-elements";
 
-const _FundDetailsStatistics: React.FC<Props> = ({ t }) => {
+const _FundDetailsStatistics: React.FC = () => {
+  const [t] = useTranslation();
   const statistic = useSelector(fundProfitChartSelector);
   const statisticCurrency = useSelector(statisticCurrencySelector);
   const [statisticData, setStatisticData] = useState<
@@ -45,9 +46,5 @@ export interface IStatisticData {
   statistic: FundProfitChart;
 }
 
-interface Props extends WithTranslation {
-  statistic?: FundProfitChart;
-}
-
-const FundDetailsStatistics = translate()(React.memo(_FundDetailsStatistics));
+const FundDetailsStatistics = React.memo(_FundDetailsStatistics);
 export default FundDetailsStatistics;
