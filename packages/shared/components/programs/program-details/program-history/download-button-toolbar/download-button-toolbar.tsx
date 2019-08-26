@@ -1,7 +1,10 @@
+import "./download-button.scss";
+
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { ReactComponent as ExportIcon } from "shared/media/export.svg";
 
 const _DownloadButtonToolbar: React.FC<Props> = ({
   t,
@@ -14,8 +17,11 @@ const _DownloadButtonToolbar: React.FC<Props> = ({
       href={getExportFileUrl(programId, filtering)}
       className="dashboard__button"
     >
-      <GVButton color="primary" variant="text">
-        {t("program-details-page.history.trades.download")}
+      <GVButton className="download-button" color="primary" variant="text">
+        <>
+          {t("program-details-page.history.trades.download")}
+          <ExportIcon className="download-icon" />
+        </>
       </GVButton>
     </a>
   );
