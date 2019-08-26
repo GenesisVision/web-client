@@ -11,7 +11,7 @@ import {
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
 
-const PortfolioEventLogo: React.FC<Props> = ({ assetDetails, icon, from }) => {
+const _PortfolioEventLogo: React.FC<Props> = ({ assetDetails, icon, from }) => {
   const to = {
     pathname:
       assetDetails.assetType === "Programs"
@@ -55,4 +55,5 @@ interface Props {
   from?: string;
 }
 
-export default React.memo(PortfolioEventLogo);
+const PortfolioEventLogo = React.memo(_PortfolioEventLogo);
+export default PortfolioEventLogo;
