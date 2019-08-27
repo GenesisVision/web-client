@@ -1,7 +1,7 @@
 import "./details-investment.scss";
 
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { ASSET } from "shared/components/../constants/constants";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVTabs from "shared/components/gv-tabs";
@@ -28,7 +28,6 @@ const _DetailsInvestment: React.FC<Props> = ({
   fetchPortfolioEvents,
   eventTypeFilterValues = [],
   updateDescription,
-  t,
   id,
   assetCurrency,
   accountCurrency,
@@ -38,24 +37,21 @@ const _DetailsInvestment: React.FC<Props> = ({
   WithdrawContainer,
   ProgramReinvestingWidget
 }) => {
+  const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   return (
     <Surface className="details-investment">
       <div className="details-investment__investment-tabs">
-        {asset === ASSET.PROGRAM ? (
-          <GVTabs value={tab} onChange={setTab}>
-            <GVTab
-              value={TABS.INVESTMENT}
-              label={t(`fund-details-page.description.yourInvestment.${asset}`)}
-            />
-            <GVTab
-              value={TABS.EVENTS}
-              label={t("program-details-page.history.tabs.events")}
-            />
-          </GVTabs>
-        ) : (
-          <h3>{t(`fund-details-page.description.yourInvestment.${asset}`)}</h3>
-        )}
+        <GVTabs value={tab} onChange={setTab}>
+          <GVTab
+            value={TABS.INVESTMENT}
+            label={t(`fund-details-page.description.yourInvestment.${asset}`)}
+          />
+          <GVTab
+            value={TABS.EVENTS}
+            label={t("program-details-page.history.tabs.events")}
+          />
+        </GVTabs>
       </div>
       {tab === TABS.INVESTMENT && (
         <InvestmentContainer
@@ -88,8 +84,8 @@ enum TABS {
 }
 
 interface OwnProps {
-  fetchPortfolioEvents?: GetItemsFuncType;
-  eventTypeFilterValues?: SelectFilterValue[];
+  fetchPortfolioEvents: GetItemsFuncType;
+  eventTypeFilterValues: SelectFilterValue[];
   updateDescription: () => void;
   asset: ASSET;
   notice?: string;
@@ -103,7 +99,7 @@ interface OwnProps {
   >;
 }
 
-interface Props extends OwnProps, WithTranslation {}
+interface Props extends OwnProps {}
 
-const DetailsInvestment = translate()(React.memo(_DetailsInvestment));
+const DetailsInvestment = React.memo(_DetailsInvestment);
 export default DetailsInvestment;
