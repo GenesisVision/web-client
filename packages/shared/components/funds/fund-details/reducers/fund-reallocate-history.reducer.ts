@@ -17,16 +17,15 @@ export const fundReallocateHistoryTableSelector = tableSelectorCreator<
   RootState,
   ReallocationsViewModel,
   ReallocationsViewModel
->(fundReallocateHistorySelector, "trades");
+>(fundReallocateHistorySelector, "reallocations");
 
 const fundReallocateHistoryReducer = tableReducerFactory<
   ReallocationsViewModel
 >({
   type: FUND_REALLOCATE_HISTORY,
   paging: DEFAULT_PAGING,
-  //@ts-ignore
-  filtering: FUND_REBALANCING_DEFAULT_FILTERS,
-  defaultFilters: FUND_REBALANCING_FILTERS,
+  filtering: FUND_REBALANCING_FILTERS,
+  defaultFilters: FUND_REBALANCING_DEFAULT_FILTERS,
   clearable: false,
   clearableActionType: ""
 });

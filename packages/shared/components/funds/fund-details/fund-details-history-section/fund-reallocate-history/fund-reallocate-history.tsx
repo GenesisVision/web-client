@@ -14,21 +14,20 @@ import {
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
+import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateFilterFunc } from "shared/components/table/components/table.types";
-import TableContainer from "shared/table/components/table-container";
 
 import { fundReallocateHistoryTableSelector } from "../../reducers/fund-reallocate-history.reducer";
+import { getFundReallocateHistory } from "../../services/fund-details.service";
 import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cell";
 
-const _FundReallocateHistory: React.FC<Props> = ({
-  getFundReallocateHistory
-}) => {
+const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
 
   return (
     <TableContainer
-      getItems={getFundReallocateHistory}
+      getItems={getFundReallocateHistory(id)}
       dataSelector={fundReallocateHistoryTableSelector}
       isFetchOnMount={true}
       columns={FUND_REALLOCATE_HISTORY_COLUMNS}
@@ -75,10 +74,7 @@ const FundReallocateHistory = React.memo(_FundReallocateHistory);
 export default FundReallocateHistory;
 
 interface OwnProps {
-  getFundReallocateHistory(
-    fundId: string,
-    filters?: FilteringType
-  ): Promise<ReallocationsViewModel>;
+  id: string;
 }
 
 interface Props extends OwnProps {}

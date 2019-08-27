@@ -21,6 +21,7 @@ import statisticPeriodReducer, {
   StatisticPeriodState
 } from "./statistic-period.reducer";
 
+export type FundAssetsViewModel = FundAssetsListInfo & { total: number };
 type FundDetailsDataType = Readonly<{
   statisticPeriod: StatisticPeriodState;
   statisticCurrency: StatisticCurrencyState;
@@ -28,7 +29,7 @@ type FundDetailsDataType = Readonly<{
   balanceChart: FundBalanceChartState;
   description: FundDescriptionState;
   reallocateHistory: ITableState<ReallocationsViewModel>;
-  fundStructure: ITableState<FundAssetsListInfo>;
+  fundStructure: ITableState<FundAssetsViewModel>;
 }>;
 
 export type FundDetailsState = FundDetailsDataType;

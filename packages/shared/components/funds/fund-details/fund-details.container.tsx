@@ -2,12 +2,12 @@ import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
 import React, { useCallback } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
@@ -21,10 +21,9 @@ import { hasActiveInvestment } from "../../details/details-description-section/d
 import FundDetailsDescriptionSection from "./fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "./fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
-import { IDescriptionSection } from "./fund-details.types";
+import { IDescriptionSection, IFundHistorySection } from "./fund-details.types";
 import {
   dispatchFundDescription,
-  fetchFundStructure,
   getFundReallocateHistory
 } from "./services/fund-details.service";
 
@@ -86,15 +85,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
           <FundDetailsStatisticSection />
         </div>
         <div className="details__history">
-          <FundDetailsHistorySection
-            id={description.id}
-            fetchFundStructure={fetchFundStructure}
-            getFundReallocateHistory={service.getFundReallocateHistory}
-            fetchPortfolioEvents={fetchHistoryPortfolioEvents}
-            fetchHistoryCounts={historySection.fetchHistoryCounts}
-            eventTypeFilterValues={historySection.eventTypeFilterValues}
-            isInvested={isInvested}
-          />
+          <FundDetailsHistorySection id={description.id} />
         </div>
       </div>
     </Page>
@@ -104,8 +95,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      dispatchFundDescription,
-      getFundReallocateHistory
+      dispatchFundDescription
     },
     dispatch
   )
@@ -113,7 +103,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   dispatchFundDescription: typeof dispatchFundDescription;
-  getFundReallocateHistory: typeof getFundReallocateHistory;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
@@ -121,7 +110,7 @@ interface DispatchProps {
 interface OwnProps {
   isKycConfirmed: boolean;
   redirectToLogin: () => void;
-  historySection: IHistorySection;
+  historySection: IFundHistorySection;
   descriptionSection: IDescriptionSection;
   description: FundDetailsFull;
   isAuthenticated: boolean;

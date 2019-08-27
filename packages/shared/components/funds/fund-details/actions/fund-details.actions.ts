@@ -14,6 +14,7 @@ import { FilteringType } from "shared/components/table/components/filtering/filt
 import fundsApi from "shared/services/api-client/funds-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
+import { FundAssetsViewModel } from "../reducers/fund-details.reducer";
 import { FundProfitChartDataType } from "../reducers/profit-chart.reducer";
 import { StatisticCurrencyDataType } from "../reducers/statistic-currency.reducer";
 import { StatisticPeriodDataType } from "../reducers/statistic-period.reducer";
@@ -98,7 +99,9 @@ export const fundReallocateHistoryAction = (
 
 export const fundStructureAction = (
   fundId: string
-): ApiAction<FundAssetsListInfo> => ({
+): ApiAction<FundAssetsViewModel> => ({
   type: FUND_STRUCTURE,
-  payload: fundsApi.v10FundsByIdAssetsGet(fundId)
+  payload: fundsApi
+    .v10FundsByIdAssetsGet(fundId)
+    .then(data => ({ ...data, total: data.assets.length }))
 });

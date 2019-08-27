@@ -1,22 +1,22 @@
-import { FundAssetsListInfo } from "gv-api-web";
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import tableReducerFactory from "shared/components/table/reducers/table.reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
-import { FUND_REALLOCATE_HISTORY } from "../actions/fund-details.actions";
+import { FUND_STRUCTURE } from "../actions/fund-details.actions";
+import { FundAssetsViewModel } from "./fund-details.reducer";
 
 const fundStructureSelector = (state: RootState) =>
-  state.fundDetails.reallocateHistory;
+  state.fundDetails.fundStructure;
 
 export const fundStructureTableSelector = tableSelectorCreator<
   RootState,
-  FundAssetsListInfo & { total: number },
-  FundAssetsListInfo
->(fundStructureSelector as any, "assets");
+  FundAssetsViewModel,
+  FundAssetsViewModel
+>(fundStructureSelector, "assets");
 
-const fundStructureReducer = tableReducerFactory<FundAssetsListInfo>({
-  type: FUND_REALLOCATE_HISTORY,
+const fundStructureReducer = tableReducerFactory<FundAssetsViewModel>({
+  type: FUND_STRUCTURE,
   paging: {
     ...DEFAULT_PAGING,
     itemsOnPage: Number.MAX_VALUE

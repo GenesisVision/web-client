@@ -26,6 +26,7 @@ const FundStructure: React.FC<Props> = ({ id }) => {
       getItems={getFundStructure(id)}
       dataSelector={fundStructureTableSelector}
       columns={FUND_STRUCTURE_COLUMNS}
+      isFetchOnMount={true}
       renderHeader={(column: SortingColumn) => {
         return column.tooltip ? (
           <Tooltip
