@@ -116,6 +116,7 @@ const _ReallocateField: React.FC<Props> = ({
   return (
     <>
       <CreateFundSettingsAssetsComponent
+        touched={touched}
         error={error}
         assets={stateAssets.filter(item => item.percent > 0)}
         remainder={remainder}
