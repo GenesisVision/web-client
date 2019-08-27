@@ -26,7 +26,8 @@ import {
   fetchFundBalanceChartAction,
   fetchFundDescriptionAction,
   fetchFundProfitChartAction,
-  fundReallocateHistoryAction
+  fundReallocateHistoryAction,
+  fundStructureAction
 } from "../actions/fund-details.actions";
 import {
   FUND_REBALANCING_DEFAULT_FILTERS,
@@ -45,12 +46,6 @@ export const dispatchFundDescription = () => (
   ];
 
   return dispatch(fetchFundDescriptionAction(slugUrl, authorization));
-};
-
-export const fetchFundStructure = (
-  fundId: string
-): Promise<FundAssetsListInfo> => {
-  return fundsApi.v10FundsByIdAssetsGet(fundId);
 };
 
 export const fetchEventsCounts = (id: string): Promise<HistoryCountsType> => {
@@ -90,6 +85,12 @@ export const getFundReallocateHistory = (
   filters?: FilteringType
 ) => (dispatch: Dispatch) => {
   dispatch(fundReallocateHistoryAction(fundId, filters));
+};
+
+export const getFundStructure = (fundId: string) => () => (
+  dispatch: Dispatch
+) => {
+  dispatch(fundStructureAction(fundId));
 };
 
 export const getProfitChart = ({ id, period, currencies }: TGetChartArgs) => (

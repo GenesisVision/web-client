@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
@@ -40,7 +40,7 @@ interface ITableContainerDispatchProps {
   };
 }
 
-class TableContainer extends React.PureComponent<
+class _TableContainer extends React.PureComponent<
   ITableContainerProps &
     ITableContainerDispatchProps &
     ITableContainerStateProps
@@ -129,7 +129,8 @@ const mapDispatchToProps = (
   service: bindActionCreators({ getItems, updateFilters }, dispatch)
 });
 
-export default connect(
+const TableContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TableContainer);
+)(_TableContainer);
+export default TableContainer;

@@ -1,5 +1,6 @@
 import {
   CancelablePromise,
+  FundAssetsListInfo,
   FundBalanceChart,
   FundDetailsFull,
   FundProfitChart,
@@ -24,6 +25,7 @@ export const FETCH_FUND_BALANCE_CHART = "FETCH_FUND_BALANCE_CHART";
 export const FETCH_FUND_DESCRIPTION = "FETCH_FUND_DESCRIPTION";
 
 export const FUND_REALLOCATE_HISTORY = "FUND_REALLOCATE_HISTORY";
+export const FUND_STRUCTURE = "FUND_STRUCTURE";
 
 const sendFundChartRequest = (
   { start, end }: ChartDefaultPeriod,
@@ -92,4 +94,11 @@ export const fundReallocateHistoryAction = (
 ): ApiAction<ReallocationsViewModel> => ({
   type: FUND_REALLOCATE_HISTORY,
   payload: fundsApi.v10FundsByIdReallocationsGet(fundId, filters)
+});
+
+export const fundStructureAction = (
+  fundId: string
+): ApiAction<FundAssetsListInfo> => ({
+  type: FUND_STRUCTURE,
+  payload: fundsApi.v10FundsByIdAssetsGet(fundId)
 });
