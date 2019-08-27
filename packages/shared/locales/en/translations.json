@@ -613,6 +613,7 @@
       }
     },
     "chart": {
+      "assets": "Assets",
       "value": "Value",
       "heading": "Chart",
       "tabs": {
