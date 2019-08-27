@@ -6,7 +6,6 @@ import { InvestorRootState } from "reducers";
 import ProgramDetailsPageCommon from "shared/components/programs/program-details/program-details.page";
 import {
   EVENT_LOCATION,
-  fetchHistoryCounts,
   fetchPortfolioEvents
 } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
@@ -23,7 +22,6 @@ const _ProgramDetailsPage: React.FC<StateProps> = ({ events }) => {
 
   const historySection = {
     fetchPortfolioEvents: fetchPortfolioEvents(EVENT_LOCATION.Asset),
-    fetchHistoryCounts: fetchHistoryCounts,
     eventTypeFilterValues: events
   };
 

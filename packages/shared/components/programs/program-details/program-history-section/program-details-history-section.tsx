@@ -1,23 +1,25 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import React, { useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import useTab from "shared/hooks/tab.hook";
-import {
-  AuthState,
-  isAuthenticatedSelector
-} from "shared/reducers/auth-reducer";
-import { RootState } from "shared/reducers/root-reducer";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { HistoryCountsType } from "../program-details.types";
+import useRole from "../../../../hooks/use-role.hook";
+import {
+  financialStatisticTableSelector,
+  openPositionsTableSelector,
+  periodHistoryTableSelector,
+  subscriptionsTableSelector,
+  tradesTableSelector
+} from "../reducers/program-history.reducer";
+import { getProgramHistoryCounts } from "../services/program-details.service";
 import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
 import ProgramOpenPositions from "./program-open-positions/program-open-positions";
 import ProgramPeriodHistory from "./program-period-history/program-period-history";
@@ -27,32 +29,37 @@ import ProgramTrades from "./program-trades/program-trades";
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
   showCommissionRebateSometime,
   programId,
-  fetchHistoryCounts,
   showSwaps,
   showTickets,
-  t,
   programCurrency,
   currency,
-  isAuthenticated,
   isSignalProgram,
   isOwnProgram,
-  role,
   title
 }) => {
-  const [counts, setCounts] = useState<HistoryCountsType>({});
+  const [t] = useTranslation();
+  const role = useRole();
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_POSITIONS);
+
+  const dispatch = useDispatch();
+  const openPositionsCount = useSelector(openPositionsTableSelector).itemsData
+    .data.total;
+  const periodHistoryCount = useSelector(periodHistoryTableSelector).itemsData
+    .data.total;
+  const subscriptionsCount = useSelector(subscriptionsTableSelector).itemsData
+    .data.total;
+  const financialStatisticCount = useSelector(financialStatisticTableSelector)
+    .itemsData.data.total;
+  const tradesCount = useSelector(tradesTableSelector).itemsData.data.total;
+
   useEffect(
     () => {
-      fetchHistoryCounts(programId).then(setCounts);
+      dispatch(getProgramHistoryCounts(programId));
     },
-    [fetchHistoryCounts, programId]
+    [dispatch, programId]
   );
-  const {
-    openPositionsCount,
-    periodHistoryCount,
-    subscriptionsCount,
-    tradesCount
-  } = counts;
+
   const isManager = role === ROLE.MANAGER;
   return (
     <Surface className="details-history">
@@ -83,7 +90,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
             <GVTab
               value={TABS.FINANCIAL_STATISTIC}
               label={t("program-details-page.history.tabs.financial-statistic")}
-              count={periodHistoryCount}
+              count={financialStatisticCount}
               visible={isAuthenticated && isManager && isOwnProgram}
             />
           </GVTabs>
@@ -122,10 +129,6 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  isAuthenticated: isAuthenticatedSelector(state)
-});
-
 enum TABS {
   TRADES = "trades",
   OPEN_POSITIONS = "openPositions",
@@ -134,14 +137,13 @@ enum TABS {
   PERIOD_HISTORY = "periodHistory"
 }
 
-interface Props extends OwnProps, StateProps, WithTranslation, WithRoleProps {}
+interface Props extends OwnProps {}
 
 interface OwnProps {
   showCommissionRebateSometime: boolean;
   isSignalProgram: boolean;
   showSwaps: boolean;
   showTickets: boolean;
-  fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
   programId: string;
   currency: CurrencyEnum;
   programCurrency: CurrencyEnum;
@@ -150,12 +152,5 @@ interface OwnProps {
   title: string;
 }
 
-interface StateProps extends AuthState {}
-
-const ProgramDetailsHistorySection = compose<React.ComponentType<OwnProps>>(
-  withRole,
-  translate(),
-  connect(mapStateToProps),
-  React.memo
-)(_ProgramDetailsHistorySection);
+const ProgramDetailsHistorySection = React.memo(_ProgramDetailsHistorySection);
 export default ProgramDetailsHistorySection;

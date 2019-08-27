@@ -25,7 +25,10 @@ import {
   mapToTableItems,
   TableItems
 } from "shared/components/table/helpers/mapper";
-import { composeRequestFilters } from "shared/components/table/services/table.service";
+import {
+  composeRequestFilters,
+  composeRequestFiltersByTableState
+} from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import {
@@ -45,6 +48,7 @@ import {
   DispatchDescriptionType
 } from "shared/utils/types";
 
+import { RootState } from "../../../../reducers/root-reducer";
 import {
   fetchFinancialStatisticAction,
   fetchLevelParametersAction,
@@ -63,6 +67,12 @@ import {
   PROGRAM_TRADES_FILTERS
 } from "../program-details.constants";
 import { HistoryCountsType } from "../program-details.types";
+import {
+  financialStatisticTableSelector,
+  periodHistoryTableSelector,
+  subscriptionsTableSelector,
+  tradesTableSelector
+} from "../reducers/program-history.reducer";
 import { ProgramStatisticResult } from "./program-details.types";
 
 export const getProgramBrokers = (id: string) =>
@@ -181,82 +191,56 @@ export const fetchInvestmentsLevels = (
 ): CancelablePromise<LevelInfo[]> =>
   platformApi.v10PlatformLevelsGet({ currency }).then(({ levels }) => levels);
 
-export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
+export const getProgramHistoryCounts = (id: string) => (
+  dispatch: Dispatch,
+  getState: () => RootState
+) => {
   const isAuthenticated = authService.isAuthenticated();
   const isManager = ROLE_ENV === ROLE.MANAGER;
 
-  const paging = { itemsOnPage: 0 };
-  const tradesFilters = composeRequestFilters({
-    paging,
-    filtering: PROGRAM_TRADES_FILTERS,
-    defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-  });
-  const tradesCountPromise = programsApi.v10ProgramsByIdTradesGet(
-    id,
-    tradesFilters
+  const commonFiltering = { take: 0 };
+
+  const tradesFilters = composeRequestFiltersByTableState(
+    tradesTableSelector(getState())
   );
-
-  const eventsFilters = composeRequestFilters({
-    paging,
-    filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-    defaultFilters: PORTFOLIO_EVENTS_FILTERS
-  });
-  const eventsCountPromise = isAuthenticated
-    ? fetchPortfolioEvents(EVENT_LOCATION.Asset)({
-        ...eventsFilters,
-        assetId: id
-      })
-    : Promise.resolve({ total: 0 });
-
-  const openPositionsCountPromise = programsApi.v10ProgramsByIdTradesOpenGet(
-    id
-  );
-
-  const subscriptionsFilters = composeRequestFilters({
-    paging,
-    filtering: PROGRAM_SUBSCRIBERS_FILTERS,
-    defaultFilters: PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS
-  });
-  const subscriptionsCountPromise =
-    isAuthenticated && isManager
-      ? programsApi.v10ProgramsByIdSubscribersGet(
-          id,
-          authService.getAuthArg(),
-          subscriptionsFilters
-        )
-      : Promise.resolve({ total: 0 });
-
-  const periodHistoryFilters = composeRequestFilters({
-    paging,
-    filtering: PROGRAM_TRADES_FILTERS,
-    defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-  });
-  const periodHistoryCountPromise = programsApi.v10ProgramsByIdPeriodsGet(
-    id,
-    periodHistoryFilters
-  );
-
-  return Promise.all([
-    tradesCountPromise,
-    eventsCountPromise,
-    openPositionsCountPromise,
-    subscriptionsCountPromise,
-    periodHistoryCountPromise
-  ]).then(
-    ([
-      tradesData,
-      eventsData,
-      openPositionsData,
-      subscriptionsData,
-      periodHistoryData
-    ]) => ({
-      tradesCount: tradesData.total,
-      eventsCount: eventsData.total,
-      openPositionsCount: openPositionsData.total,
-      subscriptionsCount: subscriptionsData.total,
-      periodHistoryCount: periodHistoryData.total
+  dispatch(
+    getTrades(id)({
+      ...tradesFilters,
+      ...commonFiltering
     })
   );
+
+  const periodHistoryFilters = composeRequestFiltersByTableState(
+    periodHistoryTableSelector(getState())
+  );
+  dispatch(
+    getPeriodHistory(id)({
+      ...periodHistoryFilters,
+      ...commonFiltering
+    })
+  );
+
+  if (isAuthenticated && isManager) {
+    const subscriptionFilters = composeRequestFiltersByTableState(
+      subscriptionsTableSelector(getState())
+    );
+    dispatch(
+      getSubscriptions(id)({
+        ...subscriptionFilters,
+        ...commonFiltering
+      })
+    );
+
+    const financialStatisticsFilters = composeRequestFiltersByTableState(
+      financialStatisticTableSelector(getState())
+    );
+    dispatch(
+      getFinancialStatistics(id)({
+        ...financialStatisticsFilters,
+        ...commonFiltering
+      })
+    );
+  }
 };
 
 export enum EVENT_LOCATION {
