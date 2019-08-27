@@ -1,41 +1,30 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
 import moment from "moment";
-import * as React from "react";
-import {
-  useTranslation,
-  WithTranslation,
-  withTranslation as translate
-} from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
-import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import { DEFAULT_DECIMAL_SCALE, IDataModel } from "shared/constants/constants";
+import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
 
-const PAGING = {
-  currentPage: 1,
-  itemsOnPage: 2000,
-  totalPages: 0
-};
+import TableContainer from "../../../../table/components/table-container";
+import { openPositionsTableSelector } from "../../reducers/program-history.reducer";
+import { getOpenPositions } from "../../services/program-details.service";
 
 const _ProgramOpenPositions: React.FC<Props> = ({ currency, programId }) => {
-  // const getOpenPositions: GetItemsFuncType = (filters?: FilteringType) =>
-  //   fetchOpenPositions(programId, filters);
   const [t] = useTranslation();
   return (
-    <TableModule
-      loader={false}
-      getItems={"" as any}
-      paging={PAGING}
+    <TableContainer
+      getItems={getOpenPositions(programId)}
+      dataSelector={openPositionsTableSelector}
+      isFetchOnMount={true}
       columns={PROGRAM_OPEN_POSITIONS_COLUMNS}
       renderHeader={column => (
         <span

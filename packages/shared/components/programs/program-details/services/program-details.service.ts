@@ -3,6 +3,7 @@ import {
   LevelInfo,
   OrderModel,
   ProgramPeriodsViewModel,
+  SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
 import { InvestmentEventViewModels } from "gv-api-web/src";
@@ -45,11 +46,15 @@ import {
 } from "shared/utils/types";
 
 import {
+  fetchFinancialStatisticAction,
   fetchLevelParametersAction,
   fetchOpenPositionsAction,
+  fetchPeriodHistoryAction,
   fetchProgramBalanceChartAction,
   fetchProgramDescriptionAction,
-  fetchProgramProfitChartAction
+  fetchProgramProfitChartAction,
+  fetchSubscriptionsAction,
+  fetchTradesAction
 } from "../actions/program-details.actions";
 import {
   PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS,
@@ -135,21 +140,40 @@ export const closePeriod = (
     });
 };
 
-export const fetchProgramTrades = (
-  id: string,
-  filters?: FilteringType
-): Promise<TableItems<OrderModel>> => {
-  return programsApi
-    .v10ProgramsByIdTradesGet(id, {
-      ...filters
-    })
-    .then(mapToTableItems<OrderModel>("trades"));
-};
-
 export const getOpenPositions = (programId: string) => (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<TradesViewModel>> => {
   return fetchOpenPositionsAction(programId, filters);
+};
+
+export const getTrades = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<TradesViewModel>> => {
+  return fetchTradesAction(programId, filters);
+};
+
+export const getPeriodHistory = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => {
+  const authorization = authService.getAuthArg();
+  return fetchPeriodHistoryAction(programId, { authorization, ...filters });
+};
+
+export const getFinancialStatistics = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => {
+  const authorization = authService.getAuthArg();
+  return fetchFinancialStatisticAction(programId, {
+    authorization,
+    ...filters
+  });
+};
+
+export const getSubscriptions = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<SignalProviderSubscribers>> => {
+  const authorization = authService.getAuthArg();
+  return fetchSubscriptionsAction(programId, authorization, filters);
 };
 
 export const fetchInvestmentsLevels = (
@@ -263,16 +287,6 @@ export const fetchPortfolioEvents = (
   return request(authorization, { ...filters, eventLocation }).then(
     mapToTableItems<InvestmentEventViewModels>("events")
   );
-};
-
-export const fetchPeriodHistory = (
-  id: string,
-  filters?: FilteringType
-): Promise<TableItems<ProgramPeriodsViewModel>> => {
-  const authorization = authService.getAuthArg();
-  return programsApi
-    .v10ProgramsByIdPeriodsGet(id, { authorization, ...filters })
-    .then(mapToTableItems<ProgramPeriodsViewModel>("periods"));
 };
 
 export const getProfitChart = ({ id, period }: TGetChartArgs) => (

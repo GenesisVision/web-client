@@ -3,7 +3,9 @@ import {
   LevelsParamsInfo,
   ProgramBalanceChart,
   ProgramDetailsFull,
+  ProgramPeriodsViewModel,
   ProgramProfitChart,
+  SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -19,6 +21,10 @@ export const FETCH_PROGRAM_DESCRIPTION = "FETCH_PROGRAM_DESCRIPTION";
 export const FETCH_LEVEL_PARAMETERS = "FETCH_LEVEL_PARAMETERS";
 
 export const PROGRAM_OPEN_POSITIONS = "PROGRAM_OPEN_POSITIONS";
+export const PROGRAM_TRADES = "PROGRAM_TRADES";
+export const PROGRAM_PERIOD_HISTORY = "PROGRAM_PERIOD_HISTORY";
+export const PROGRAM_FINANCIAL_STATISTIC = "PROGRAM_FINANCIAL_STATISTIC";
+export const PROGRAM_SUBSCRIPTIONS = "PROGRAM_SUBSCRIPTIONS";
 
 export const fetchProgramProfitChartAction = (
   id: string,
@@ -65,4 +71,37 @@ export const fetchOpenPositionsAction = (
 ): ActionType<CancelablePromise<TradesViewModel>> => ({
   type: PROGRAM_OPEN_POSITIONS,
   payload: programsApi.v10ProgramsByIdTradesOpenGet(id, filters)
+});
+
+export const fetchTradesAction = (
+  id: string,
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<TradesViewModel>> => ({
+  type: PROGRAM_TRADES,
+  payload: programsApi.v10ProgramsByIdTradesGet(id, filters)
+});
+
+export const fetchPeriodHistoryAction = (
+  id: string,
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => ({
+  type: PROGRAM_PERIOD_HISTORY,
+  payload: programsApi.v10ProgramsByIdPeriodsGet(id, filters)
+});
+
+export const fetchFinancialStatisticAction = (
+  id: string,
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => ({
+  type: PROGRAM_FINANCIAL_STATISTIC,
+  payload: programsApi.v10ProgramsByIdPeriodsGet(id, filters)
+});
+
+export const fetchSubscriptionsAction = (
+  id: string,
+  authorization: string,
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<SignalProviderSubscribers>> => ({
+  type: PROGRAM_SUBSCRIPTIONS,
+  payload: programsApi.v10ProgramsByIdSubscribersGet(id, authorization, filters)
 });

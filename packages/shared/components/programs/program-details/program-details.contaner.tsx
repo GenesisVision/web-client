@@ -16,11 +16,7 @@ import { InvestmentDetails } from "shared/components/details/details-description
 import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
-import {
-  dispatchProgramDescription,
-  fetchPeriodHistory,
-  fetchProgramTrades
-} from "shared/components/programs/program-details/services/program-details.service";
+import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET, STATUS } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
@@ -113,8 +109,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
             showSwaps={description.brokerDetails.showSwaps}
             showTickets={description.brokerDetails.showTickets}
             isSignalProgram={description.isSignalProgram}
-            fetchPeriodHistory={fetchPeriodHistory}
-            fetchTrades={fetchProgramTrades}
             fetchHistoryCounts={historySection.fetchHistoryCounts}
             programId={description.id}
             programCurrency={description.currency}

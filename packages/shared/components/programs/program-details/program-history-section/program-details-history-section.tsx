@@ -6,10 +6,8 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import ProgramTrades from "shared/components/programs/program-details/program-history/program-trades";
 import Surface from "shared/components/surface/surface";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import { IDataModel, ROLE } from "shared/constants/constants";
+import { ROLE } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import useTab from "shared/hooks/tab.hook";
 import {
@@ -24,6 +22,7 @@ import ProgramFinancialStatistic from "./program-financial-statistic/program-fin
 import ProgramOpenPositions from "./program-open-positions/program-open-positions";
 import ProgramPeriodHistory from "./program-period-history/program-period-history";
 import ProgramSubscriptions from "./program-subscriptions/program-subscriptions";
+import ProgramTrades from "./program-trades/program-trades";
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
   showCommissionRebateSometime,
@@ -35,10 +34,6 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   programCurrency,
   currency,
   isAuthenticated,
-  isInvested,
-  fetchTrades,
-  fetchOpenPositions,
-  fetchPeriodHistory,
   isSignalProgram,
   isOwnProgram,
   role,
@@ -99,9 +94,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           <ProgramTrades
             showSwaps={showSwaps}
             showTickets={showTickets}
-            fetchTrades={fetchTrades}
             programId={programId}
-            currency={currency}
           />
         )}
         {tab === TABS.OPEN_POSITIONS && (
@@ -118,16 +111,11 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
             showCommissionRebateSometime={showCommissionRebateSometime}
             id={programId}
             currency={programCurrency}
-            fetchFinancialStatistic={fetchPeriodHistory}
             title={title}
           />
         )}
         {tab === TABS.PERIOD_HISTORY && (
-          <ProgramPeriodHistory
-            id={programId}
-            currency={programCurrency}
-            fetchPeriodHistory={fetchPeriodHistory}
-          />
+          <ProgramPeriodHistory id={programId} currency={programCurrency} />
         )}
       </div>
     </Surface>
@@ -154,14 +142,6 @@ interface OwnProps {
   showSwaps: boolean;
   showTickets: boolean;
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
-  fetchTrades: (
-    programId: string,
-    filters?: FilteringType
-  ) => Promise<IDataModel>;
-  fetchPeriodHistory: (
-    programId: string,
-    filters?: FilteringType
-  ) => Promise<IDataModel>;
   programId: string;
   currency: CurrencyEnum;
   programCurrency: CurrencyEnum;

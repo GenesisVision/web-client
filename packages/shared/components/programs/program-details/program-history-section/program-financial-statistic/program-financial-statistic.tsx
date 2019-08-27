@@ -2,7 +2,11 @@ import "./program-financial-statistic.scss";
 
 import moment from "moment";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import {
+  useTranslation,
+  WithTranslation,
+  withTranslation as translate
+} from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import Profitability from "shared/components/profitability/profitability";
@@ -18,18 +22,19 @@ import { IDataModel } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
+import TableContainer from "../../../../table/components/table-container";
 import {
   PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
   PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
 } from "../../program-details.constants";
+import { financialStatisticTableSelector } from "../../reducers/program-history.reducer";
+import { getFinancialStatistics } from "../../services/program-details.service";
 import DownloadButtonToolbarAuth from "../download-button-toolbar/download-button-toolbar-auth";
 
 const _ProgramFinancialStatistic: React.FC<Props> = ({
   showCommissionRebateSometime,
-  t,
-  fetchFinancialStatistic,
   currency,
   id,
   title
@@ -38,12 +43,9 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
     ? PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
     : PROGRAM_FINANCIAL_STATISTIC_COLUMNS;
 
-  const fetchStatistic: GetItemsFuncType = React.useCallback(
-    (filters?: FilteringType) => fetchFinancialStatistic(id, filters),
-    [fetchFinancialStatistic, id]
-  );
+  const [t] = useTranslation();
   return (
-    <TableModule
+    <TableContainer
       className="program-financial-statistic"
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadButtonToolbarAuth
@@ -52,9 +54,9 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
           title={title}
         />
       )}
-      getItems={fetchStatistic}
-      defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
-      filtering={PROGRAM_TRADES_FILTERS}
+      getItems={getFinancialStatistics(id)}
+      dataSelector={financialStatisticTableSelector}
+      isFetchOnMount={true}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}
@@ -168,21 +170,14 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   );
 };
 
-const ProgramFinancialStatistic = compose<React.FC<OwnProps>>(
-  translate(),
-  React.memo
-)(_ProgramFinancialStatistic);
+const ProgramFinancialStatistic = React.memo(_ProgramFinancialStatistic);
 
 export default ProgramFinancialStatistic;
 
-interface Props extends OwnProps, WithTranslation {}
+interface Props extends OwnProps {}
 interface OwnProps {
   showCommissionRebateSometime: boolean;
   id: string;
   title: string;
   currency: CurrencyEnum;
-  fetchFinancialStatistic: (
-    programId: string,
-    filters?: FilteringType
-  ) => Promise<IDataModel>;
 }

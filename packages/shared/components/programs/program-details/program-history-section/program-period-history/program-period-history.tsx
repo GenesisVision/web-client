@@ -1,51 +1,32 @@
 import classNames from "classnames";
 import { ProgramPeriodViewModel } from "gv-api-web";
 import moment from "moment";
-import * as React from "react";
-import {
-  useTranslation,
-  WithTranslation,
-  withTranslation as translate
-} from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { compose } from "redux";
 import Popover from "shared/components/popover/popover";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { TableCell, TableRow } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import TableModule from "shared/components/table/components/table-module";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { IDataModel } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import useAnchor, { TAnchor } from "shared/hooks/anchor.hook";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue, humanizeDate } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
-import {
-  PROGRAM_PERIOD_HISTORY,
-  PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
-} from "../../program-details.constants";
+import TableContainer from "../../../../table/components/table-container";
+import { PROGRAM_PERIOD_HISTORY } from "../../program-details.constants";
+import { periodHistoryTableSelector } from "../../reducers/program-history.reducer";
+import { getPeriodHistory } from "../../services/program-details.service";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 
-const _ProgramPeriodHistory: React.FC<Props> = ({
-  t,
-  fetchPeriodHistory,
-  currency,
-  id
-}) => {
-  const fetchPeriod: GetItemsFuncType = React.useCallback(
-    (filters?: FilteringType) => fetchPeriodHistory(id, filters),
-    [fetchPeriodHistory, id]
-  );
-
+const _ProgramPeriodHistory: React.FC<Props> = ({ currency, id }) => {
+  const [t] = useTranslation();
   return (
-    <TableModule
+    <TableContainer
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadButtonToolbar
           filtering={filtering!.dateRange}
@@ -53,9 +34,9 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
           getExportFileUrl={filesService.getPeriodExportFileUrl}
         />
       )}
-      getItems={fetchPeriod}
-      defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
-      filtering={PROGRAM_TRADES_FILTERS}
+      getItems={getPeriodHistory(id)}
+      dataSelector={periodHistoryTableSelector}
+      isFetchOnMount={true}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}
@@ -244,18 +225,12 @@ interface ProgramPeriodHistoryPopupProps extends ProgramPeriodHistoryRowProps {
   onClose: () => void;
 }
 
-const ProgramPeriodHistory = compose<React.FC<OwnProps>>(translate())(
-  _ProgramPeriodHistory
-);
+const ProgramPeriodHistory = React.memo(_ProgramPeriodHistory);
 
 export default ProgramPeriodHistory;
 
-interface Props extends OwnProps, WithTranslation {}
+interface Props extends OwnProps {}
 interface OwnProps {
   id: string;
   currency: CurrencyEnum;
-  fetchPeriodHistory: (
-    programId: string,
-    filters?: FilteringType
-  ) => Promise<IDataModel>;
 }
