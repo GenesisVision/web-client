@@ -2,7 +2,8 @@ import {
   CancelablePromise,
   LevelInfo,
   OrderModel,
-  ProgramPeriodsViewModel
+  ProgramPeriodsViewModel,
+  TradesViewModel
 } from "gv-api-web";
 import { InvestmentEventViewModels } from "gv-api-web/src";
 import { Dispatch } from "redux";
@@ -14,7 +15,10 @@ import {
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
   PORTFOLIO_EVENTS_FILTERS
 } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  ComposeFiltersAllType,
+  FilteringType
+} from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
   mapToTableItems,
@@ -34,10 +38,15 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import { CurrencyEnum, DispatchDescriptionType } from "shared/utils/types";
+import {
+  ActionType,
+  CurrencyEnum,
+  DispatchDescriptionType
+} from "shared/utils/types";
 
 import {
   fetchLevelParametersAction,
+  fetchOpenPositionsAction,
   fetchProgramBalanceChartAction,
   fetchProgramDescriptionAction,
   fetchProgramProfitChartAction
@@ -137,13 +146,10 @@ export const fetchProgramTrades = (
     .then(mapToTableItems<OrderModel>("trades"));
 };
 
-export const fetchOpenPositions = (
-  id: string,
-  filters: any
-): Promise<TableItems<OrderModel>> => {
-  return programsApi
-    .v10ProgramsByIdTradesOpenGet(id, { sorting: filters.sorting })
-    .then(mapToTableItems<OrderModel>("trades"));
+export const getOpenPositions = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<TradesViewModel>> => {
+  return fetchOpenPositionsAction(programId, filters);
 };
 
 export const fetchInvestmentsLevels = (

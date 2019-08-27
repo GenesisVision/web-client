@@ -40,7 +40,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
 
   const fetchStatistic: GetItemsFuncType = React.useCallback(
     (filters?: FilteringType) => fetchFinancialStatistic(id, filters),
-    []
+    [fetchFinancialStatistic, id]
   );
   return (
     <TableModule

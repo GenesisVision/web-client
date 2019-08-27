@@ -13,12 +13,16 @@ import levelParametersReducer, {
 import programProfitChartReducer, {
   ProgramProfitChartState
 } from "./profit-chart.reducer";
+import programHistoryReducer, {
+  ProgramHistoryState
+} from "./program-history.reducer";
 
 type ProgramDetailsDataType = Readonly<{
   profitChart: ProgramProfitChartState;
   balanceChart: ProgramBalanceChartState;
   description: ProgramDescriptionState;
   levelParameters: LevelParametersState;
+  programHistory: ProgramHistoryState;
 }>;
 
 export type ProgramDetailsState = ProgramDetailsDataType;
@@ -28,7 +32,8 @@ const programDetailsReducer = clearableReducer(
     levelParameters: levelParametersReducer,
     description: programDescriptionReducer,
     profitChart: programProfitChartReducer,
-    balanceChart: programBalanceChartReducer
+    balanceChart: programBalanceChartReducer,
+    programHistory: programHistoryReducer
   })
 );
 

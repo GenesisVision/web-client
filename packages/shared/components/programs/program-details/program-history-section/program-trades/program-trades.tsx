@@ -10,9 +10,9 @@ import BaseProfitability from "shared/components/profitability/base-profitabilit
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import {
+  generateProgramTradesColumns,
   PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS,
-  generateProgramTradesColumns
+  PROGRAM_TRADES_FILTERS
 } from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -40,7 +40,7 @@ const _ProgramTrades: React.FC<Props> = ({
 }) => {
   const fetchProgramTrades: GetItemsFuncType = useCallback(
     (filters?: FilteringType) => fetchTrades(programId, filters),
-    []
+    [fetchTrades, programId]
   );
   const columns = generateProgramTradesColumns(!showSwaps, !showTickets);
 

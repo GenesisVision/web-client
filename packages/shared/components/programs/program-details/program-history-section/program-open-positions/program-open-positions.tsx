@@ -2,7 +2,11 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import moment from "moment";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import {
+  useTranslation,
+  WithTranslation,
+  withTranslation as translate
+} from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
@@ -23,19 +27,14 @@ const PAGING = {
   totalPages: 0
 };
 
-const _ProgramOpenPositions: React.FC<Props & WithTranslation> = ({
-  t,
-  currency,
-  programId,
-  fetchOpenPositions
-}) => {
-  const getOpenPositions: GetItemsFuncType = (filters?: FilteringType) =>
-    fetchOpenPositions(programId, filters);
-
+const _ProgramOpenPositions: React.FC<Props> = ({ currency, programId }) => {
+  // const getOpenPositions: GetItemsFuncType = (filters?: FilteringType) =>
+  //   fetchOpenPositions(programId, filters);
+  const [t] = useTranslation();
   return (
     <TableModule
       loader={false}
-      getItems={getOpenPositions}
+      getItems={"" as any}
       paging={PAGING}
       columns={PROGRAM_OPEN_POSITIONS_COLUMNS}
       renderHeader={column => (
@@ -112,11 +111,7 @@ const _ProgramOpenPositions: React.FC<Props & WithTranslation> = ({
 interface Props {
   currency: CURRENCIES;
   programId: string;
-  fetchOpenPositions: (
-    programId: string,
-    filters?: FilteringType
-  ) => Promise<IDataModel>;
 }
 
-const ProgramOpenPositions = translate()(React.memo(_ProgramOpenPositions));
+const ProgramOpenPositions = React.memo(_ProgramOpenPositions);
 export default ProgramOpenPositions;

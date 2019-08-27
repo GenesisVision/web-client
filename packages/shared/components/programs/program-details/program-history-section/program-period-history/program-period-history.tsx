@@ -3,9 +3,9 @@ import { ProgramPeriodViewModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import {
+  useTranslation,
   WithTranslation,
-  withTranslation as translate,
-  useTranslation
+  withTranslation as translate
 } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
@@ -30,8 +30,8 @@ import {
   PROGRAM_PERIOD_HISTORY,
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
-} from "../program-details.constants";
-import DownloadButtonToolbar from "./download-button-toolbar/download-button-toolbar";
+} from "../../program-details.constants";
+import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 
 const _ProgramPeriodHistory: React.FC<Props> = ({
   t,

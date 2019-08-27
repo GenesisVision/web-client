@@ -21,8 +21,8 @@ import { CurrencyEnum } from "shared/utils/types";
 
 import { HistoryCountsType } from "../program-details.types";
 import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
-import ProgramOpenPositions from "./program-open-positions";
-import ProgramPeriodHistory from "./program-period-history";
+import ProgramOpenPositions from "./program-open-positions/program-open-positions";
+import ProgramPeriodHistory from "./program-period-history/program-period-history";
 import ProgramSubscriptions from "./program-subscriptions/program-subscriptions";
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
@@ -46,9 +46,12 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
 }) => {
   const [counts, setCounts] = useState<HistoryCountsType>({});
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_POSITIONS);
-  useEffect(() => {
-    fetchHistoryCounts(programId).then(setCounts);
-  }, []);
+  useEffect(
+    () => {
+      fetchHistoryCounts(programId).then(setCounts);
+    },
+    [fetchHistoryCounts, programId]
+  );
   const {
     openPositionsCount,
     periodHistoryCount,
@@ -103,7 +106,6 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
         )}
         {tab === TABS.OPEN_POSITIONS && (
           <ProgramOpenPositions
-            fetchOpenPositions={fetchOpenPositions}
             programId={programId}
             currency={programCurrency}
           />
@@ -152,10 +154,6 @@ interface OwnProps {
   showSwaps: boolean;
   showTickets: boolean;
   fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
-  fetchOpenPositions: (
-    programId: string,
-    filters?: FilteringType
-  ) => Promise<IDataModel>;
   fetchTrades: (
     programId: string,
     filters?: FilteringType
