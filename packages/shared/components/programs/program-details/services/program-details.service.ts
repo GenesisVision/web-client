@@ -1,7 +1,6 @@
 import {
   CancelablePromise,
   LevelInfo,
-  OrderModel,
   ProgramPeriodsViewModel,
   SignalProviderSubscribers,
   TradesViewModel
@@ -12,25 +11,16 @@ import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import {
-  PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  PORTFOLIO_EVENTS_FILTERS
-} from "shared/components/portfolio-events-table/portfolio-events-table.constants";
-import {
-  ComposeFiltersAllType,
-  FilteringType
-} from "shared/components/table/components/filtering/filter.type";
+import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
   mapToTableItems,
   TableItems
 } from "shared/components/table/helpers/mapper";
-import {
-  composeRequestFilters,
-  composeRequestFiltersByTableState
-} from "shared/components/table/services/table.service";
+import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { RootState } from "shared/reducers/root-reducer";
 import {
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SLUG_URL_PARAM_NAME
@@ -48,7 +38,6 @@ import {
   DispatchDescriptionType
 } from "shared/utils/types";
 
-import { RootState } from "../../../../reducers/root-reducer";
 import {
   fetchFinancialStatisticAction,
   fetchLevelParametersAction,
@@ -60,13 +49,6 @@ import {
   fetchSubscriptionsAction,
   fetchTradesAction
 } from "../actions/program-details.actions";
-import {
-  PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS,
-  PROGRAM_SUBSCRIBERS_FILTERS,
-  PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
-} from "../program-details.constants";
-import { HistoryCountsType } from "../program-details.types";
 import {
   financialStatisticTableSelector,
   periodHistoryTableSelector,

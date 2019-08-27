@@ -1,6 +1,5 @@
 import {
   CancelablePromise,
-  FundAssetsListInfo,
   FundBalanceChart,
   FundDetailsFull,
   FundProfitChart,
@@ -14,7 +13,7 @@ import { FilteringType } from "shared/components/table/components/filtering/filt
 import fundsApi from "shared/services/api-client/funds-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
-import { FundAssetsViewModel } from "../reducers/fund-details.reducer";
+import { FundAssetsViewModel } from "../reducers/fund-history.reducer";
 import { FundProfitChartDataType } from "../reducers/profit-chart.reducer";
 import { StatisticCurrencyDataType } from "../reducers/statistic-currency.reducer";
 import { StatisticPeriodDataType } from "../reducers/statistic-period.reducer";

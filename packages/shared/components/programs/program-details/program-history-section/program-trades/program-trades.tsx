@@ -12,6 +12,7 @@ import { generateProgramTradesColumns } from "shared/components/programs/program
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
+import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import Tooltip from "shared/components/tooltip/tooltip";
@@ -19,7 +20,6 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import filesService from "shared/services/file-service";
 import { formatValue } from "shared/utils/formatter";
 
-import TableContainer from "../../../../table/components/table-container";
 import { tradesTableSelector } from "../../reducers/program-history.reducer";
 import { getTrades } from "../../services/program-details.service";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";

@@ -12,12 +12,12 @@ import { TableCell, TableRow } from "shared/components/table/components";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
+import TableContainer from "shared/components/table/components/table-container";
 import { UpdateFilterFunc } from "shared/components/table/components/table.types";
 import { DEFAULT_DECIMAL_SCALE, STATUS } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import TableContainer from "../../../../table/components/table-container";
 import {
   PROGRAM_SUBSCRIBERS_COLUMNS,
   SUBSCRIBERS_STATUS_TYPE

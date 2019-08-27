@@ -10,6 +10,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import { TableCell, TableRow } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import TableContainer from "shared/components/table/components/table-container";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import withLoader from "shared/decorators/with-loader";
 import useAnchor, { TAnchor } from "shared/hooks/anchor.hook";
@@ -17,7 +18,6 @@ import filesService from "shared/services/file-service";
 import { formatCurrencyValue, humanizeDate } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
-import TableContainer from "../../../../table/components/table-container";
 import { PROGRAM_PERIOD_HISTORY } from "../../program-details.constants";
 import { periodHistoryTableSelector } from "../../reducers/program-history.reducer";
 import { getPeriodHistory } from "../../services/program-details.service";

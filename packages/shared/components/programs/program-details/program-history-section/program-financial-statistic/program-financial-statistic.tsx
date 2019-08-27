@@ -1,33 +1,22 @@
 import "./program-financial-statistic.scss";
 
 import moment from "moment";
-import * as React from "react";
-import {
-  useTranslation,
-  WithTranslation,
-  withTranslation as translate
-} from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { compose } from "redux";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { TableCell, TableRow } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import TableModule from "shared/components/table/components/table-module";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
+import TableContainer from "shared/components/table/components/table-container";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { IDataModel } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
-import TableContainer from "../../../../table/components/table-container";
 import {
   PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
-  PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS,
-  PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
+  PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
 } from "../../program-details.constants";
 import { financialStatisticTableSelector } from "../../reducers/program-history.reducer";
 import { getFinancialStatistics } from "../../services/program-details.service";

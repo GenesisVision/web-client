@@ -4,10 +4,10 @@ import tableReducerFactory from "shared/components/table/reducers/table.reducer"
 import { RootState } from "shared/reducers/root-reducer";
 
 import { FUND_STRUCTURE } from "../actions/fund-details.actions";
-import { FundAssetsViewModel } from "./fund-details.reducer";
+import { FundAssetsViewModel } from "./fund-history.reducer";
 
 const fundStructureSelector = (state: RootState) =>
-  state.fundDetails.fundStructure;
+  state.fundDetails.fundHistory.fundStructure;
 
 export const fundStructureTableSelector = tableSelectorCreator<
   RootState,
@@ -20,9 +20,7 @@ const fundStructureReducer = tableReducerFactory<FundAssetsViewModel>({
   paging: {
     ...DEFAULT_PAGING,
     itemsOnPage: Number.MAX_VALUE
-  },
-  clearable: false,
-  clearableActionType: ""
+  }
 });
 
 export default fundStructureReducer;

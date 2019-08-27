@@ -9,12 +9,12 @@ import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
 import TableCell from "shared/components/table/components/table-cell";
+import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatValue } from "shared/utils/formatter";
 
-import TableContainer from "../../../../table/components/table-container";
 import { openPositionsTableSelector } from "../../reducers/program-history.reducer";
 import { getOpenPositions } from "../../services/program-details.service";
 

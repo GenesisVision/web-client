@@ -8,10 +8,10 @@ import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
+import useRole from "shared/hooks/use-role.hook";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
-import useRole from "../../../../hooks/use-role.hook";
 import {
   financialStatisticTableSelector,
   openPositionsTableSelector,
