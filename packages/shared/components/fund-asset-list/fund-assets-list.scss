@@ -6,6 +6,7 @@ $fund-asset-bubble-size: 5px;
 
 .fund-asset-list {
   display: flex;
+  flex-wrap: wrap;
   @include adaptive-padding(top, $padding-xxsmall);
 
   &__item {
@@ -26,5 +27,6 @@ $fund-asset-bubble-size: 5px;
     font-weight: 400;
     color: $text-accent-color;
     opacity: 0.4;
+    white-space: nowrap;
   }
 }

@@ -1,4 +1,7 @@
-import { FundProfitChart as FundProfitChartType } from "gv-api-web";
+import {
+  FundEquityChartElement,
+  FundProfitChart as FundProfitChartType
+} from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -27,16 +30,27 @@ const _FundProfitChart: React.FC<Props> = ({
 }) => {
   const equityCharts = profitChart.map(({ equityChart }) => equityChart);
   const equities = equityCharts.map(equityChart =>
-    equityChart.map(x => ({
-      date: x.date.getTime(),
-      value: formartChartMinValue(x.value)
+    (equityChart as FundEquityChartElement[]).map((item: any) => ({
+      date: item.date.getTime(),
+      value: formartChartMinValue(item.value),
+      assets:
+        [
+          ...item.assetsState.assets,
+          {
+            icon: "",
+            color: "grey",
+            name: "Other",
+            asset: "Other",
+            percent: item.assetsState.otherPercent
+          }
+        ].filter(({ percent }) => !!percent) || []
     }))
   );
   const firstEquityChart = equityCharts[0];
   if (firstEquityChart.length === 0) return null;
   const firstEquity = equities[0];
 
-  const firstEquityValues = firstEquity.map(x => x.value);
+  const firstEquityValues = firstEquity.map((x: any) => x.value);
   const off = gradientOffset(firstEquityValues);
   const areaStrokeColor = getStrokeColor(firstEquityValues);
   return (
