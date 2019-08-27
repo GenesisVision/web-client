@@ -9,7 +9,7 @@ interface ISignalProgramInfoProps {
   programDescription: ProgramDetailsFull;
 }
 
-const SignalProgramInfo: React.FC<
+const _SignalProgramInfo: React.FC<
   WithTranslation & ISignalProgramInfoProps
 > = ({ t, programDescription }) => {
   return (
@@ -52,4 +52,5 @@ const SignalProgramInfo: React.FC<
   );
 };
 
-export default translate()(React.memo(SignalProgramInfo)); // TODO refactor
+const SignalProgramInfo = translate()(React.memo(_SignalProgramInfo));
+export default SignalProgramInfo; // TODO refactor
