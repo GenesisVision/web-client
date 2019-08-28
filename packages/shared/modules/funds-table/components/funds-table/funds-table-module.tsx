@@ -16,7 +16,7 @@ interface Props extends ITableModuleProps {
 const FundsTableModule: React.FC<Props> = React.memo(
   ({
     getItems,
-    renderFilters,
+    renderMappings,
     sorting,
     filtering,
     defaultFilters,
@@ -32,7 +32,7 @@ const FundsTableModule: React.FC<Props> = React.memo(
       defaultFilters={defaultFilters}
       filtering={filtering}
       sorting={sorting}
-      renderFilters={renderFilters}
+      renderMappings={renderMappings}
       paging={paging}
       title={title}
       columns={FUNDS_TABLE_COLUMNS}

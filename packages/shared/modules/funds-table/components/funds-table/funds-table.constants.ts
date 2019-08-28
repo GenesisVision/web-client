@@ -33,7 +33,7 @@ const fundsDateRangeFilter = {
   validate: validateDateRange
 };
 
-const fundCurrencyFilter = {
+export const fundCurrencyFilter = {
   name: CURRENCY_FILTER_NAME,
   type: FILTER_TYPE.GENERAL,
   defaultValue: CURRENCY_FILTER_VALUE

@@ -1,4 +1,4 @@
-import { ProgramFacetTimeframeEnum } from "gv-api-web";
+import { PlatformCurrency, ProgramFacetTimeframeEnum } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -8,12 +8,15 @@ import {
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { mapServerTimeFrameToFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import {
   GetItemsFuncType,
   TableToggleFavoriteType
 } from "shared/components/table/components/table.types";
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-module";
+import { CURRENCY_FILTER_NAME } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
+import { CurrencyEnum } from "shared/utils/types";
 
 import {
   FUNDS_FACET_PAGING,
@@ -26,7 +29,9 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
   sorting,
   getItems,
   isAuthenticated,
-  timeframe
+  timeframe,
+  currency,
+  currencies
 }) => {
   const toggleFavorite: TableToggleFavoriteType = useCallback(
     (fund, updateRow) => () => {
@@ -46,23 +51,32 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
   const composeFiltering = useCallback(
     () =>
       ({
+        currency,
         dateRange: {
           ...DEFAULT_DATE_RANGE_FILTER_VALUE,
           type: mapServerTimeFrameToFilterType(timeframe)
         }
       } as FilteringType),
-    [timeframe]
+    [currency, timeframe]
   );
 
   return (
     <FundsTableModule
-      renderFilters={(updateFilter, filtering) => (
+      renderMappings={(updateFilter, filtering) => (
         <>
+          <SelectFilter
+            name={CURRENCY_FILTER_NAME}
+            label={t("filters.currency.show-in")}
+            value={filtering && filtering[CURRENCY_FILTER_NAME]}
+            values={currencies!.map(x => ({ value: x.name, label: x.name }))}
+            onChange={updateFilter}
+          />
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}
-            value={filtering[DATE_RANGE_FILTER_NAME]}
+            value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
             onChange={updateFilter}
-            startLabel={t("filters.date-range.program-start")}
+            label={t("filters.date-range.for")}
+            startLabel={t("filters.date-range.fund-start")}
           />
         </>
       )}
@@ -84,6 +98,8 @@ export interface IFundsFacetTableProps {
   timeframe: ProgramFacetTimeframeEnum;
   getItems: GetItemsFuncType;
   isAuthenticated?: boolean;
+  currencies?: PlatformCurrency[];
+  currency?: CurrencyEnum;
 }
 
 const FundsFacetTable = translate()(React.memo(_FundsFacetTable));
