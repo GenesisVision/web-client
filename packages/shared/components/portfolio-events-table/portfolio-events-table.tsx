@@ -94,7 +94,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
         }
         renderHeader={column => (
           <span
-            className={`portfolio-events-all__cell portfolio-events-all__cell--${
+            className={`portfolio-events-all-table__cell portfolio-events-all-table__head-cell--${
               column.name
             }`}
           >
