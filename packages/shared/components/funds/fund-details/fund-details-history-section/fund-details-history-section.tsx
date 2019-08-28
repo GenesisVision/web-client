@@ -25,6 +25,7 @@ import {
 } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
+import { EVENT_LOCATION } from "../../../programs/program-details/services/program-details.service";
 import FundReallocateHistory from "./fund-reallocate-history/fund-reallocate-history";
 import FundStructure from "./fund-structure/fund-structure";
 
@@ -88,6 +89,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
         )}
         {tab === TABS.EVENTS && (
           <PortfolioEventsTable
+            eventLocation={EVENT_LOCATION.Asset}
             filtering={EVENTS_FILTERING}
             fetchPortfolioEvents={fetchPortfolioEvents}
             dateRangeStartLabel={t("filters.date-range.program-start")}
