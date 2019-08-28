@@ -21,6 +21,7 @@ const _PortfolioEventsAllComponent: React.FC<Props> = ({ events }) => {
     <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
       <Surface className="dashboard-portfolio-events-all">
         <PortfolioEventsTable
+          eventLocation={EVENT_LOCATION.EventsAll}
           fetchPortfolioEvents={fetchPortfolioEvents(EVENT_LOCATION.EventsAll)}
           title={t(`${role}.dashboard-page.portfolio-events.table-title`)}
           className="portfolio-events-all-table"
