@@ -3,9 +3,10 @@ import "./portfolio-events.scss";
 
 import { InvestmentEventViewModel } from "gv-api-web";
 import moment from "moment";
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { ASSET_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
@@ -108,7 +109,15 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
               {moment(event.date).format()}
             </TableCell>
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-              {event.title}
+              <div className="portfolio-events-all-table__description">
+                {event.assetDetails && (
+                  <PortfolioEventLogo
+                    assetDetails={event.assetDetails}
+                    icon={event.icon}
+                  />
+                )}
+                <div>{event.title}</div>
+              </div>
             </TableCell>
             {role === ROLE.INVESTOR && (
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
