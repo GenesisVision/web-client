@@ -8,6 +8,7 @@ import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
+import { EVENT_LOCATION } from "shared/components/programs/program-details/services/program-details.service";
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
@@ -68,6 +69,7 @@ const _DetailsInvestment: React.FC<Props> = ({
       )}
       {tab === TABS.EVENTS && (
         <PortfolioEventsTable
+          eventLocation={EVENT_LOCATION.Asset}
           filtering={EVENTS_FILTERING}
           fetchPortfolioEvents={fetchPortfolioEvents!}
           dateRangeStartLabel={t("filters.date-range.program-start")}
