@@ -1,8 +1,9 @@
 import {
   CancelablePromise,
   LevelInfo,
-  OrderModel,
-  ProgramPeriodsViewModel
+  ProgramPeriodsViewModel,
+  SignalProviderSubscribers,
+  TradesViewModel
 } from "gv-api-web";
 import { InvestmentEventViewModels } from "gv-api-web/src";
 import { Dispatch } from "redux";
@@ -10,19 +11,16 @@ import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import {
-  PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  PORTFOLIO_EVENTS_FILTERS
-} from "shared/components/portfolio-events-table/portfolio-events-table.constants";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
   mapToTableItems,
   TableItems
 } from "shared/components/table/helpers/mapper";
-import { composeRequestFilters } from "shared/components/table/services/table.service";
+import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { RootState } from "shared/reducers/root-reducer";
 import {
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SLUG_URL_PARAM_NAME
@@ -34,21 +32,29 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import { CurrencyEnum, DispatchDescriptionType } from "shared/utils/types";
+import {
+  ActionType,
+  CurrencyEnum,
+  DispatchDescriptionType
+} from "shared/utils/types";
 
 import {
+  fetchFinancialStatisticAction,
   fetchLevelParametersAction,
+  fetchOpenPositionsAction,
+  fetchPeriodHistoryAction,
   fetchProgramBalanceChartAction,
   fetchProgramDescriptionAction,
-  fetchProgramProfitChartAction
+  fetchProgramProfitChartAction,
+  fetchSubscriptionsAction,
+  fetchTradesAction
 } from "../actions/program-details.actions";
 import {
-  PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS,
-  PROGRAM_SUBSCRIBERS_FILTERS,
-  PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
-} from "../program-details.constants";
-import { HistoryCountsType } from "../program-details.types";
+  financialStatisticTableSelector,
+  periodHistoryTableSelector,
+  subscriptionsTableSelector,
+  tradesTableSelector
+} from "../reducers/program-history.reducer";
 import { ProgramStatisticResult } from "./program-details.types";
 
 export const getProgramBrokers = (id: string) =>
@@ -126,24 +132,40 @@ export const closePeriod = (
     });
 };
 
-export const fetchProgramTrades = (
-  id: string,
-  filters?: FilteringType
-): Promise<TableItems<OrderModel>> => {
-  return programsApi
-    .v10ProgramsByIdTradesGet(id, {
-      ...filters
-    })
-    .then(mapToTableItems<OrderModel>("trades"));
+export const getOpenPositions = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<TradesViewModel>> => {
+  return fetchOpenPositionsAction(programId, filters);
 };
 
-export const fetchOpenPositions = (
-  id: string,
-  filters: any
-): Promise<TableItems<OrderModel>> => {
-  return programsApi
-    .v10ProgramsByIdTradesOpenGet(id, { sorting: filters.sorting })
-    .then(mapToTableItems<OrderModel>("trades"));
+export const getTrades = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<TradesViewModel>> => {
+  return fetchTradesAction(programId, filters);
+};
+
+export const getPeriodHistory = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => {
+  const authorization = authService.getAuthArg();
+  return fetchPeriodHistoryAction(programId, { authorization, ...filters });
+};
+
+export const getFinancialStatistics = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => {
+  const authorization = authService.getAuthArg();
+  return fetchFinancialStatisticAction(programId, {
+    authorization,
+    ...filters
+  });
+};
+
+export const getSubscriptions = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<SignalProviderSubscribers>> => {
+  const authorization = authService.getAuthArg();
+  return fetchSubscriptionsAction(programId, authorization, filters);
 };
 
 export const fetchInvestmentsLevels = (
@@ -151,82 +173,56 @@ export const fetchInvestmentsLevels = (
 ): CancelablePromise<LevelInfo[]> =>
   platformApi.v10PlatformLevelsGet({ currency }).then(({ levels }) => levels);
 
-export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
+export const getProgramHistoryCounts = (id: string) => (
+  dispatch: Dispatch,
+  getState: () => RootState
+) => {
   const isAuthenticated = authService.isAuthenticated();
   const isManager = ROLE_ENV === ROLE.MANAGER;
 
-  const paging = { itemsOnPage: 0 };
-  const tradesFilters = composeRequestFilters({
-    paging,
-    filtering: PROGRAM_TRADES_FILTERS,
-    defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-  });
-  const tradesCountPromise = programsApi.v10ProgramsByIdTradesGet(
-    id,
-    tradesFilters
+  const commonFiltering = { take: 0 };
+
+  const tradesFilters = composeRequestFiltersByTableState(
+    tradesTableSelector(getState())
   );
-
-  const eventsFilters = composeRequestFilters({
-    paging,
-    filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-    defaultFilters: PORTFOLIO_EVENTS_FILTERS
-  });
-  const eventsCountPromise = isAuthenticated
-    ? fetchPortfolioEvents(EVENT_LOCATION.Asset)({
-        ...eventsFilters,
-        assetId: id
-      })
-    : Promise.resolve({ total: 0 });
-
-  const openPositionsCountPromise = programsApi.v10ProgramsByIdTradesOpenGet(
-    id
-  );
-
-  const subscriptionsFilters = composeRequestFilters({
-    paging,
-    filtering: PROGRAM_SUBSCRIBERS_FILTERS,
-    defaultFilters: PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS
-  });
-  const subscriptionsCountPromise =
-    isAuthenticated && isManager
-      ? programsApi.v10ProgramsByIdSubscribersGet(
-          id,
-          authService.getAuthArg(),
-          subscriptionsFilters
-        )
-      : Promise.resolve({ total: 0 });
-
-  const periodHistoryFilters = composeRequestFilters({
-    paging,
-    filtering: PROGRAM_TRADES_FILTERS,
-    defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-  });
-  const periodHistoryCountPromise = programsApi.v10ProgramsByIdPeriodsGet(
-    id,
-    periodHistoryFilters
-  );
-
-  return Promise.all([
-    tradesCountPromise,
-    eventsCountPromise,
-    openPositionsCountPromise,
-    subscriptionsCountPromise,
-    periodHistoryCountPromise
-  ]).then(
-    ([
-      tradesData,
-      eventsData,
-      openPositionsData,
-      subscriptionsData,
-      periodHistoryData
-    ]) => ({
-      tradesCount: tradesData.total,
-      eventsCount: eventsData.total,
-      openPositionsCount: openPositionsData.total,
-      subscriptionsCount: subscriptionsData.total,
-      periodHistoryCount: periodHistoryData.total
+  dispatch(
+    getTrades(id)({
+      ...tradesFilters,
+      ...commonFiltering
     })
   );
+
+  const periodHistoryFilters = composeRequestFiltersByTableState(
+    periodHistoryTableSelector(getState())
+  );
+  dispatch(
+    getPeriodHistory(id)({
+      ...periodHistoryFilters,
+      ...commonFiltering
+    })
+  );
+
+  if (isAuthenticated && isManager) {
+    const subscriptionFilters = composeRequestFiltersByTableState(
+      subscriptionsTableSelector(getState())
+    );
+    dispatch(
+      getSubscriptions(id)({
+        ...subscriptionFilters,
+        ...commonFiltering
+      })
+    );
+
+    const financialStatisticsFilters = composeRequestFiltersByTableState(
+      financialStatisticTableSelector(getState())
+    );
+    dispatch(
+      getFinancialStatistics(id)({
+        ...financialStatisticsFilters,
+        ...commonFiltering
+      })
+    );
+  }
 };
 
 export enum EVENT_LOCATION {
@@ -257,16 +253,6 @@ export const fetchPortfolioEvents = (
   return request(authorization, { ...filters, eventLocation }).then(
     mapToTableItems<InvestmentEventViewModels>("events")
   );
-};
-
-export const fetchPeriodHistory = (
-  id: string,
-  filters?: FilteringType
-): Promise<TableItems<ProgramPeriodsViewModel>> => {
-  const authorization = authService.getAuthArg();
-  return programsApi
-    .v10ProgramsByIdPeriodsGet(id, { authorization, ...filters })
-    .then(mapToTableItems<ProgramPeriodsViewModel>("periods"));
 };
 
 export const getProfitChart = ({ id, period }: TGetChartArgs) => (

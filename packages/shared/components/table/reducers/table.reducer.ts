@@ -1,4 +1,4 @@
-import { Reducer, combineReducers } from "redux";
+import { combineReducers, Reducer } from "redux";
 import clearableReducer from "shared/reducers/clearable.reducer";
 import apiReducerFactory, {
   IApiState
@@ -21,8 +21,8 @@ interface ITableReducerFactoryParams {
   sorting?: string;
   filtering?: FilteringType;
   defaultFilters?: Object;
-  clearable: boolean;
-  clearableActionType: string;
+  clearable?: boolean;
+  clearableActionType?: string;
 }
 
 const tableReducerFactory = <ItemsType>({
@@ -31,8 +31,8 @@ const tableReducerFactory = <ItemsType>({
   sorting,
   filtering,
   defaultFilters,
-  clearable,
-  clearableActionType
+  clearable = false,
+  clearableActionType = ""
 }: ITableReducerFactoryParams): Reducer<ITableState<ItemsType>, ActionType> => {
   const clearableWrapper: (
     f: Reducer<ITableState<ItemsType>, ActionType>,

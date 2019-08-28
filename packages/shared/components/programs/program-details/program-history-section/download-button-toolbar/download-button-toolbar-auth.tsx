@@ -1,3 +1,5 @@
+import "./download-button.scss";
+
 import { saveAs } from "file-saver";
 import moment from "moment";
 import * as React from "react";
@@ -27,10 +29,15 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
   );
   return (
     <div className="dashboard__button">
-      <GVButton color="primary" variant="text" onClick={loadFile}>
+      <GVButton
+        className="download-button"
+        color="primary"
+        variant="text"
+        onClick={loadFile}
+      >
         <>
           {t("program-details-page.history.trades.download")}
-          <ExportIcon />
+          <ExportIcon className="download-icon" />
         </>
       </GVButton>
     </div>

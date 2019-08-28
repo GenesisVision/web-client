@@ -1,59 +1,33 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import { FundAssetsListInfo, ReallocationsViewModel } from "gv-api-web";
-import React, { useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
-import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import Surface from "shared/components/surface/surface";
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import {
-  FilteringType,
-  SelectFilterValue
-} from "shared/components/table/components/filtering/filter.type";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import useTab from "shared/hooks/tab.hook";
-import {
-  AuthState,
-  isAuthenticatedSelector
-} from "shared/reducers/auth-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 
-import { EVENT_LOCATION } from "../../../programs/program-details/services/program-details.service";
+import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-history.reducer";
+import { getDashboardHistoryDetailsCounts } from "../services/fund-details.service";
 import FundReallocateHistory from "./fund-reallocate-history/fund-reallocate-history";
 import FundStructure from "./fund-structure/fund-structure";
 
-const EVENTS_FILTERING = {
-  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
-  type: EVENT_TYPE_FILTER_DEFAULT_VALUE
-};
-
-const _FundDetailsHistorySection: React.FC<Props> = ({
-  t,
-  id,
-  fetchFundStructure,
-  fetchFundReallocateHistory,
-  isAuthenticated,
-  isInvested,
-  fetchPortfolioEvents,
-  eventTypeFilterValues,
-  fetchHistoryCounts
-}) => {
+const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
+  const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.STRUCTURE);
-  const [counts, setCounts] = useState<HistoryCountsType>({});
+  const dispatch = useDispatch();
+  const reallocateCount = useSelector(fundReallocateHistoryTableSelector)
+    .itemsData.data.total;
+
   useEffect(
     () => {
-      fetchHistoryCounts(id).then(setCounts);
+      dispatch(getDashboardHistoryDetailsCounts(id));
     },
-    [id]
+    [dispatch, id]
   );
-  const { eventsCount, reallocateCount } = counts;
+
   return (
     <Surface className="details-history">
       <div className="details-history__header">
@@ -70,12 +44,6 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
               }
             />
             <GVTab
-              value={TABS.EVENTS}
-              label={t("fund-details-page.history.tabs.events")}
-              count={eventsCount}
-              visible={isAuthenticated && !!eventsCount}
-            />
-            <GVTab
               value={TABS.REALLOCATE_HISTORY}
               label={t("fund-details-page.history.tabs.reallocate-history")}
               count={reallocateCount}
@@ -84,59 +52,23 @@ const _FundDetailsHistorySection: React.FC<Props> = ({
         </div>
       </div>
       <div>
-        {tab === TABS.STRUCTURE && (
-          <FundStructure id={id} fetchStructure={fetchFundStructure} />
-        )}
-        {tab === TABS.EVENTS && (
-          <PortfolioEventsTable
-            eventLocation={EVENT_LOCATION.Asset}
-            filtering={EVENTS_FILTERING}
-            fetchPortfolioEvents={fetchPortfolioEvents}
-            dateRangeStartLabel={t("filters.date-range.program-start")}
-            eventTypeFilterValues={eventTypeFilterValues}
-          />
-        )}
-        {tab === TABS.REALLOCATE_HISTORY && (
-          <FundReallocateHistory
-            id={id}
-            fetchFundReallocateHistory={fetchFundReallocateHistory}
-          />
-        )}
+        {tab === TABS.STRUCTURE && <FundStructure id={id} />}
+        {tab === TABS.REALLOCATE_HISTORY && <FundReallocateHistory id={id} />}
       </div>
     </Surface>
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  isAuthenticated: isAuthenticatedSelector(state)
-});
-
-interface StateProps extends AuthState {}
-
 enum TABS {
-  EVENTS = "events",
   STRUCTURE = "structure",
   REALLOCATE_HISTORY = "reallocate history"
 }
 
-interface Props extends StateProps, WithTranslation, OwnProps {}
+interface Props extends OwnProps {}
 
 interface OwnProps {
   id: string;
-  fetchFundStructure(fundId: string): Promise<FundAssetsListInfo>;
-  fetchFundReallocateHistory(
-    fundId: string,
-    filters?: FilteringType
-  ): Promise<ReallocationsViewModel>;
-  fetchHistoryCounts: (id: string) => Promise<HistoryCountsType>;
-  fetchPortfolioEvents: GetItemsFuncType;
-  eventTypeFilterValues: SelectFilterValue<string>[];
-  isInvested: boolean;
 }
 
-const FundDetailsHistorySection = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  connect(mapStateToProps),
-  React.memo
-)(_FundDetailsHistorySection);
+const FundDetailsHistorySection = React.memo(_FundDetailsHistorySection);
 export default FundDetailsHistorySection;

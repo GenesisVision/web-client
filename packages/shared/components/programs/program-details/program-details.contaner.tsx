@@ -4,24 +4,19 @@ import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
-import {
-  dispatchProgramDescription,
-  fetchOpenPositions,
-  fetchPeriodHistory,
-  fetchProgramTrades
-} from "shared/components/programs/program-details/services/program-details.service";
+import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET, STATUS } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
@@ -31,7 +26,7 @@ import {
   hasSubscription
 } from "../../details/details-description-section/details-investment/investment-container";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
-import ProgramDetailsHistorySection from "./program-history/program-details-history-section";
+import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   service: { dispatchProgramDescription },
@@ -114,10 +109,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
             showSwaps={description.brokerDetails.showSwaps}
             showTickets={description.brokerDetails.showTickets}
             isSignalProgram={description.isSignalProgram}
-            fetchOpenPositions={fetchOpenPositions}
-            fetchPeriodHistory={fetchPeriodHistory}
-            fetchTrades={fetchProgramTrades}
-            fetchHistoryCounts={historySection.fetchHistoryCounts}
             programId={description.id}
             programCurrency={description.currency}
             currency={currency}

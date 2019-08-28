@@ -1,10 +1,9 @@
 import classNames from "classnames";
 import { SignalSubscriber } from "gv-api-web";
 import moment from "moment";
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { compose } from "redux";
 import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
 import { ACTION_STATUS_FILTER_VALUES } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import Profitability from "shared/components/profitability/profitability";
@@ -13,39 +12,28 @@ import { TableCell, TableRow } from "shared/components/table/components";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
-import TableModule from "shared/components/table/components/table-module";
-import {
-  GetItemsFuncType,
-  UpdateFilterFunc
-} from "shared/components/table/components/table.types";
-import { mapToTableItems } from "shared/components/table/helpers/mapper";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import TableContainer from "shared/components/table/components/table-container";
+import { UpdateFilterFunc } from "shared/components/table/components/table.types";
 import { DEFAULT_DECIMAL_SCALE, STATUS } from "shared/constants/constants";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import programsApi from "shared/services/api-client/programs-api";
-import authService from "shared/services/auth-service";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import {
   PROGRAM_SUBSCRIBERS_COLUMNS,
-  PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS,
-  PROGRAM_SUBSCRIBERS_FILTERS,
   SUBSCRIBERS_STATUS_TYPE
 } from "../../program-details.constants";
+import { subscriptionsTableSelector } from "../../reducers/program-history.reducer";
+import { getSubscriptions } from "../../services/program-details.service";
 import SubscriptionsFeesTooltip from "./program-subscriptions-fees-tooltip";
 
-const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
-  const fetch: GetItemsFuncType = filters =>
-    programsApi
-      .v10ProgramsByIdSubscribersGet(id, authService.getAuthArg(), filters)
-      .then(mapToTableItems<SignalSubscriber>("subscribers"));
+const _ProgramSubscriptions: React.FC<Props> = ({ id, currency }) => {
+  const [t] = useTranslation();
   return (
-    <TableModule
-      getItems={fetch}
-      paging={DEFAULT_PAGING}
+    <TableContainer
+      getItems={getSubscriptions(id)}
+      dataSelector={subscriptionsTableSelector}
+      isFetchOnMount={true}
       columns={PROGRAM_SUBSCRIBERS_COLUMNS}
-      filtering={PROGRAM_SUBSCRIBERS_FILTERS}
-      defaultFilters={PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS}
       renderFilters={(
         updateFilter: UpdateFilterFunc,
         filtering: FilteringType
@@ -116,13 +104,11 @@ const _ProgramSubscriptions: React.FC<Props> = ({ t, id, currency }) => {
   );
 };
 
-const ProgramSubscriptions = compose<React.FC<OwnProps>>(translate())(
-  _ProgramSubscriptions
-);
+const ProgramSubscriptions = React.memo(_ProgramSubscriptions);
 
 export default ProgramSubscriptions;
 
-interface Props extends OwnProps, WithTranslation {}
+interface Props extends OwnProps {}
 interface OwnProps {
   id: string;
   currency: CURRENCIES;

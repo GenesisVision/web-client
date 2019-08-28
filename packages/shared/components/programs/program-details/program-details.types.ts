@@ -47,7 +47,6 @@ export interface IHistorySection {
   fetchPortfolioEvents(
     filters: any
   ): Promise<TableItems<DashboardPortfolioEvent | ManagerPortfolioEvent>>;
-  fetchHistoryCounts(id: string): Promise<HistoryCountsType>;
   eventTypeFilterValues: SelectFilterValue[];
 }
 
