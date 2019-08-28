@@ -11,6 +11,7 @@ import FundAssetContainer, {
 } from "shared/components/fund-asset/fund-asset-container";
 
 const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
+  touched,
   error,
   canChange = true,
   t,
@@ -48,7 +49,11 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
           />
         </div>
       </div>
-      <div className="form-error reallocate-container__form-error">{error}</div>
+      {touched && (
+        <div className="form-error reallocate-container__form-error">
+          {error}
+        </div>
+      )}
       {canChange && (
         <div className="create-fund-settings__add-assets">
           <div
@@ -73,6 +78,7 @@ interface Props extends WithTranslation {
   addHandle?: MouseEventHandler;
   canChange?: boolean;
   error?: string;
+  touched?: boolean;
 }
 
 const CreateFundSettingsAssetsComponent = translate()(

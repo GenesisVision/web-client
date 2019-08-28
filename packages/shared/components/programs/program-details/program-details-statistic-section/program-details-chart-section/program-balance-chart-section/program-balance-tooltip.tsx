@@ -7,16 +7,9 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 const _TooltipBody: React.FC<ITooltipBodyProps & WithTranslation> = ({
   t,
   managersFunds,
-  investorsFunds,
-  profit
+  investorsFunds
 }) => (
   <>
-    <StatisticItem
-      label={t("program-details-page.statistics.tooltip.profit")}
-      accent
-    >
-      {profit}
-    </StatisticItem>
     <StatisticItem
       label={t("program-details-page.statistics.tooltip.investors-funds")}
       accent
@@ -49,11 +42,6 @@ const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
     dot.unit
   )} ${dot.unit}`;
 
-  const profit = `${formatCurrencyValue(
-    dot.payload.profit || dot.payload.profitNegative,
-    dot.unit
-  )} ${dot.unit}`;
-
   return (
     <ChartTooltip
       heading="Equity"
@@ -61,7 +49,6 @@ const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
         <TooltipBody
           managersFunds={managersFunds}
           investorsFunds={investorsFunds}
-          profit={profit}
         />
       }
       date={new Date(label)}
@@ -73,7 +60,6 @@ const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
 interface ITooltipBodyProps {
   managersFunds: string;
   investorsFunds: string;
-  profit: string;
 }
 interface IProgramBalanceTooltipProps {
   active: boolean;

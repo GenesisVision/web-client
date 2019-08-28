@@ -6,6 +6,14 @@ $middle-padding: 33px;
 $large-padding: 42px;
 
 .portfolio-events-all-table {
+  &__description {
+    display: flex;
+    align-items: center;
+    & > div {
+      @include adaptive-padding(right, $padding-xxsmall);
+    }
+  }
+
   & .table__row {
     padding: 0 32px;
   }

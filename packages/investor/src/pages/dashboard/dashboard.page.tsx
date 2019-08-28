@@ -3,19 +3,19 @@ import "shared/components/dashboard/dashboard.scss";
 import "./dashboard.scss";
 
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import useRole from "shared/hooks/use-role.hook";
 
 import DashboardAssetsSection from "./components/dashboard-assets/dashboard-assets-section";
 import DashboardPortfolioChartSectionContainer from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section-container";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 import DashboardTrades from "./components/dashboard-trades/dashboard-trades";
 
-interface IDashboardPageProps extends WithTranslation, WithRoleProps {}
-
-const DashboardPage: React.FC<IDashboardPageProps> = ({ t, role }) => {
+const DashboardPage: React.FC = () => {
+  const role = useRole();
+  const [t] = useTranslation();
   const title = t(`${role}.dashboard-page.title`);
   return (
     <Page title={title}>
@@ -41,4 +41,4 @@ const DashboardPage: React.FC<IDashboardPageProps> = ({ t, role }) => {
   );
 };
 
-export default withRole(translate()(React.memo(DashboardPage)));
+export default React.memo(DashboardPage);

@@ -1,8 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
-import { InvestorRootState } from "reducers";
-import { compose } from "redux";
+import { useSelector } from "react-redux";
 import Page from "shared/components/page/page";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import {
@@ -13,7 +11,8 @@ import Surface from "shared/components/surface/surface";
 import useRole from "shared/hooks/use-role.hook";
 import { allEventsSelector } from "shared/reducers/platform-reducer";
 
-const _PortfolioEventsAllComponent: React.FC<Props> = ({ events }) => {
+const _PortfolioEventsAllComponent: React.FC = () => {
+  const events = useSelector(allEventsSelector);
   const [t] = useTranslation();
   const role = useRole();
   return (
@@ -31,20 +30,5 @@ const _PortfolioEventsAllComponent: React.FC<Props> = ({ events }) => {
   );
 };
 
-const mapStateToProps = (state: InvestorRootState): StateProps => ({
-  events: allEventsSelector(state)
-});
-
-interface Props extends StateProps, OwnProps {}
-
-interface OwnProps {}
-
-interface StateProps {
-  events: any[];
-}
-
-const PortfolioEventsAllComponent = compose<React.ComponentType<OwnProps>>(
-  connect(mapStateToProps),
-  React.memo
-)(_PortfolioEventsAllComponent);
+const PortfolioEventsAllComponent = React.memo(_PortfolioEventsAllComponent);
 export default PortfolioEventsAllComponent;
