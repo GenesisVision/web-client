@@ -94,10 +94,19 @@ $padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
     display: flex;
     justify-content: flex-start;
   }
+
+  &__statistic-item {
+    @include adaptive-padding(right, $padding-small);
+  }
+
   &__short-statistic {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+
+    &--investment {
+      justify-content: flex-start;
+    }
 
     &-item {
       white-space: nowrap;
