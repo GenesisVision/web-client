@@ -64,9 +64,10 @@ interface OwnProps {
 }
 
 export const hasActiveInvestment = (details: InvestmentDetails): boolean =>
-  details.isInvested && details.status !== STATUS.ENDED;
+  details && details.isInvested && details.status !== STATUS.ENDED;
 
 export const hasSubscription = (details: InvestmentDetails): boolean =>
+  details &&
   details.signalSubscription &&
   details.signalSubscription.hasActiveSubscription;
 
