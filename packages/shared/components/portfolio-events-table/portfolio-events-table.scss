@@ -18,12 +18,21 @@ $large-padding: 42px;
     padding: 0 32px;
   }
 
+  &__head-cell {
+    &--date {
+      width: 33%;
+      min-width: 180px;
+      padding-left: $padding-xxsmall !important;
+    }
+  }
+
   &__cell {
     color: $text-light-color;
 
     &--date {
       width: 33%;
       min-width: 180px;
+      padding-left: $padding-small !important;
     }
     &--type {
       width: 40%;
