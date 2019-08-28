@@ -43,7 +43,7 @@ const _TableToolbar: React.FC<
       <div className="table__toolbar-heading">
         {title && !disableTitle && <h3 className="table__title">{title}</h3>}
         {renderMappings && updateFilter && filtering && (
-          <div className="table__filters">
+          <div className="table__filters table__filters--mapping">
             {renderMappings(updateFilter, filtering)}
           </div>
         )}

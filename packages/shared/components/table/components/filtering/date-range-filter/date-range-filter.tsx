@@ -15,6 +15,7 @@ interface IDateRangeFilterProps {
   name: string;
   value: any;
   onChange?: UpdateFilterFunc;
+  label?: string;
   startLabel: string;
 }
 
@@ -23,6 +24,7 @@ const _DateRangeFilter: React.FC<IDateRangeFilterProps & WithTranslation> = ({
   name,
   value,
   onChange,
+  label,
   startLabel
 }) => {
   const renderValueText = useCallback(
@@ -43,7 +45,7 @@ const _DateRangeFilter: React.FC<IDateRangeFilterProps & WithTranslation> = ({
   );
   return (
     <Filter
-      label={t("filters.date-range.label")}
+      label={label || t("filters.date-range.label")}
       name={name}
       renderValueText={renderValueText}
       value={value}

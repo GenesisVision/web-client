@@ -80,10 +80,12 @@
       "label": "Level"
     },
     "currency": {
-      "label": "Currency"
+      "label": "Currency",
+      "show-in": "show in"
     },
     "date-range": {
       "label": "Date Range",
+      "for": "for",
       "all-time": "All time",
       "last-month": "Last month",
       "last-week": "Last week",

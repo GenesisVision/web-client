@@ -66,6 +66,7 @@ $padding: $padding-small;
     justify-content: flex-end;
     padding: 0 $padding-xsmall;
     min-height: 20px;
+    flex-wrap: wrap;
   }
 
   &__toggle {
@@ -94,8 +95,7 @@ $padding: $padding-small;
   }
 
   &__title {
-    @include vertical-paddings($padding-xxsmall, 2);
-    @include horizontal-paddings($padding-xxsmall, 2);
+    padding: 0;
 
     justify-self: flex-start;
     margin-right: auto;
@@ -115,6 +115,23 @@ $padding: $padding-small;
 
       &:last-child {
         margin-right: 0;
+      }
+    }
+
+    &--mapping {
+      flex-wrap: nowrap;
+      @include adaptive-margin("left", $padding-xsmall);
+
+      .filter {
+        @include font-size($font-size-h3);
+      }
+      .filter__label {
+        font-weight: 600;
+        color: $text-light-color;
+        opacity: 1;
+      }
+      .filter__value {
+        border-bottom: 1px dotted $text-color;
       }
     }
 
