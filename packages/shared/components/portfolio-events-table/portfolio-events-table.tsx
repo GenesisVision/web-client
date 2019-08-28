@@ -28,6 +28,7 @@ import { ROLE } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import { EVENT_LOCATION } from "../programs/program-details/services/program-details.service";
 import PortfolioEventsDetails from "./portfolio-event-details";
 import {
   EVENT_PROFITABILITY_VALUES,
@@ -38,6 +39,7 @@ import {
 } from "./portfolio-events-table.constants";
 
 const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
+  eventLocation,
   filtering = PORTFOLIO_EVENTS_DEFAULT_FILTERING,
   title,
   className,
@@ -112,6 +114,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
               <div className="portfolio-events-all-table__description">
                 {event.assetDetails && (
                   <PortfolioEventLogo
+                    withAsset={eventLocation !== EVENT_LOCATION.Asset}
                     assetDetails={event.assetDetails}
                     icon={event.icon}
                   />
@@ -160,6 +163,7 @@ const PortfolioEventsTable = React.memo(_PortfolioEventsTable);
 export default PortfolioEventsTable;
 
 export interface IPortfolioEventsTableOwnProps {
+  eventLocation: EVENT_LOCATION;
   fetchPortfolioEvents: GetItemsFuncType;
   dateRangeStartLabel: string;
   eventTypeFilterValues: SelectFilterValue[];
