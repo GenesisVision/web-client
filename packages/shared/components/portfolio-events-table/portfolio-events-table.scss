@@ -22,7 +22,10 @@ $large-padding: 42px;
     &--date {
       width: 33%;
       min-width: 180px;
-      padding-left: $padding-xxsmall !important;
+      padding-left: $padding-xxsmall-mobile !important;
+      @include media-breakpoint-landscape-phone() {
+        padding-left: $padding-xxsmall !important;
+      }
     }
   }
 
@@ -32,7 +35,10 @@ $large-padding: 42px;
     &--date {
       width: 33%;
       min-width: 180px;
-      padding-left: $padding-small !important;
+      padding-left: $padding-xsmall !important;
+      @include media-breakpoint-landscape-phone() {
+        padding-left: $padding-small !important;
+      }
     }
     &--type {
       width: 40%;
