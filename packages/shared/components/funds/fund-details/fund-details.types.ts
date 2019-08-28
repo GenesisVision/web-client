@@ -3,12 +3,11 @@ import {
   FundDetailsFull,
   ManagerPortfolioEvent
 } from "gv-api-web";
-import * as React from "react";
+import React from "react";
 import { IDialogProps } from "shared/components/dialog/dialog";
+import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
+import { TableItems } from "shared/components/table/helpers/mapper";
 import { CurrencyEnum } from "shared/utils/types";
-
-import { SelectFilterValue } from "../../table/components/filtering/filter.type";
-import { TableItems } from "../../table/helpers/mapper";
 
 export interface IDescriptionSection {
   FundWithdrawalContainer: React.ComponentType<IFundWithdrawalContainerProps>;

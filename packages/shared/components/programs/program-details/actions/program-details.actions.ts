@@ -9,11 +9,10 @@ import {
   TradesViewModel
 } from "gv-api-web";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
-
-import { ComposeFiltersAllType } from "../../../table/components/filtering/filter.type";
 
 export const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
 export const FETCH_PROGRAM_BALANCE_CHART = "FETCH_PROGRAM_BALANCE_CHART";
