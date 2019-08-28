@@ -41,8 +41,9 @@ const _Investment: React.FC<Props> = ({
         <h5>{t("program-details-page.description.investment-details")}</h5>
       </div>
       <div className="details-investment__current-period-investment-data">
-        <div className="details-investment__short-statistic">
+        <div className="details-investment__short-statistic details-investment__short-statistic--investment">
           <StatisticItem
+            className="details-investment__statistic-item"
             accent
             label={t("fund-details-page.description.value")}
           >
@@ -53,6 +54,7 @@ const _Investment: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem
+            className="details-investment__statistic-item"
             condition={asset === PROGRAM}
             accent
             label={
@@ -81,6 +83,7 @@ const _Investment: React.FC<Props> = ({
             </Profitability>
           </StatisticItem>
           <StatisticItem
+            className="details-investment__statistic-item"
             accent
             label={
               <TooltipLabel
@@ -97,6 +100,7 @@ const _Investment: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem
+            className="details-investment__statistic-item"
             condition={
               personalDetails.pendingInput !== undefined &&
               personalDetails.pendingInput !== 0
@@ -122,6 +126,7 @@ const _Investment: React.FC<Props> = ({
               />
             )}
           <StatisticItem
+            className="details-investment__statistic-item"
             condition={
               personalDetails.pendingOutput !== undefined &&
               personalDetails.pendingOutput !== 0
