@@ -5,7 +5,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import FundAssetFilter from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter";
@@ -58,9 +58,15 @@ class _FundsTableContainer extends React.PureComponent<Props> {
         data={data ? data.funds : undefined}
         sorting={filters.sorting}
         updateSorting={service.fundsChangeSorting}
-        filtering={{
-          ...filters.filtering
-        }}
+        filtering={filters.filtering}
+        renderMappings={(updateFilter, filtering) => (
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.fund-start")}
+          />
+        )}
         renderFilters={(updateFilter, filtering) => (
           <>
             <FundAssetFilter
@@ -68,12 +74,6 @@ class _FundsTableContainer extends React.PureComponent<Props> {
               value={filtering[FUND_ASSET_FILTER_NAME] as string[]}
               values={fundAssets || []}
               onChange={updateFilter}
-            />
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.fund-start")}
             />
           </>
         )}

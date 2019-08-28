@@ -31,6 +31,7 @@ const _Table: React.FC<ITableProps> = ({
   disableTitle,
   items,
   title,
+  renderMappings,
   renderFilters,
   updateFilter,
   filtering,
@@ -54,10 +55,13 @@ const _Table: React.FC<ITableProps> = ({
     renderBodyRow !== undefined &&
     renderBodyCard !== undefined &&
     !!showSwitchView;
-  useEffect(() => {
-    if (isViewSwitchEnabled)
-      setView(loadData(PROGRAMS_VIEW) || LIST_VIEW.TABLE);
-  }, []);
+  useEffect(
+    () => {
+      if (isViewSwitchEnabled)
+        setView(loadData(PROGRAMS_VIEW) || LIST_VIEW.TABLE);
+    },
+    [isViewSwitchEnabled]
+  );
   const changeView = useCallback((view: LIST_VIEW) => {
     saveData(PROGRAMS_VIEW, view);
     setView(view);
@@ -70,6 +74,7 @@ const _Table: React.FC<ITableProps> = ({
       <TableToolbar
         disableTitle={disableTitle}
         title={title}
+        renderMappings={renderMappings}
         renderFilters={renderFilters}
         updateFilter={updateFilter}
         filtering={filtering}
