@@ -3,7 +3,7 @@ import "./portfolio-events.scss";
 
 import { InvestmentEventViewModel } from "gv-api-web";
 import moment from "moment";
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
@@ -24,7 +24,7 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { ROLE } from "shared/constants/constants";
+import { ASSET, ROLE } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -35,7 +35,7 @@ import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
   PORTFOLIO_EVENTS_FILTERS,
-  PORTFOLIO_EVENTS_INVESTOR_COLUMNS
+  PORTFOLIO_EVENTS_MANAGER_COLUMNS
 } from "./portfolio-events-table.constants";
 
 const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
@@ -45,10 +45,23 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
   className,
   fetchPortfolioEvents,
   dateRangeStartLabel,
-  eventTypeFilterValues
+  eventTypeFilterValues,
+  asset
 }) => {
   const [t] = useTranslation();
   const role = useRole();
+  const hideFeeColumn = useMemo(
+    () => role === ROLE.MANAGER && asset === ASSET.PROGRAM,
+    [asset, role]
+  );
+  const columns = useMemo(
+    () => {
+      return hideFeeColumn
+        ? PORTFOLIO_EVENTS_MANAGER_COLUMNS
+        : PORTFOLIO_EVENTS_COLUMNS;
+    },
+    [hideFeeColumn]
+  );
   return (
     <div className={className}>
       <TableModule
@@ -87,11 +100,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
           </>
         )}
         paging={DEFAULT_PAGING}
-        columns={
-          role === ROLE.INVESTOR
-            ? PORTFOLIO_EVENTS_INVESTOR_COLUMNS
-            : PORTFOLIO_EVENTS_COLUMNS
-        }
+        columns={columns}
         renderHeader={column => (
           <span
             className={`portfolio-events-all-table__cell portfolio-events-all-table__head-cell--${
@@ -122,17 +131,21 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
                 <div>{event.title}</div>
               </div>
             </TableCell>
-            {role === ROLE.INVESTOR && (
+            {!hideFeeColumn && (
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    event.totalFeesAmount,
-                    event.currency
-                  )}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix={" " + event.currency}
-                />
+                {event.totalFeesAmount !== null ? (
+                  <NumberFormat
+                    value={formatCurrencyValue(
+                      event.totalFeesAmount,
+                      event.currency
+                    )}
+                    thousandSeparator=" "
+                    displayType="text"
+                    suffix={" " + event.currency}
+                  />
+                ) : (
+                  <>&nbsp;</>
+                )}
               </TableCell>
             )}
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--details">
@@ -171,4 +184,5 @@ export interface IPortfolioEventsTableOwnProps {
   className?: string;
   title?: string;
   filtering?: FilteringType;
+  asset?: ASSET;
 }

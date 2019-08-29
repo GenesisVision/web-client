@@ -69,6 +69,7 @@ const _DetailsInvestment: React.FC<Props> = ({
       )}
       {tab === TABS.EVENTS && (
         <PortfolioEventsTable
+          asset={asset}
           eventLocation={EVENT_LOCATION.Asset}
           filtering={EVENTS_FILTERING}
           fetchPortfolioEvents={fetchPortfolioEvents!}

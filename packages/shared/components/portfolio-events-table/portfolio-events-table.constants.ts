@@ -11,7 +11,7 @@ import {
 } from "shared/components/table/components/filtering/filter.type";
 import { IComposeDefaultFilter } from "shared/components/table/components/table.types";
 
-export const PORTFOLIO_EVENTS_COLUMNS: SortingColumn[] = [
+export const PORTFOLIO_EVENTS_MANAGER_COLUMNS: SortingColumn[] = [
   {
     name: "date"
   },
@@ -26,7 +26,7 @@ export const PORTFOLIO_EVENTS_COLUMNS: SortingColumn[] = [
   }
 ];
 
-export const PORTFOLIO_EVENTS_INVESTOR_COLUMNS: SortingColumn[] = [
+export const PORTFOLIO_EVENTS_COLUMNS: SortingColumn[] = [
   {
     name: "date"
   },
