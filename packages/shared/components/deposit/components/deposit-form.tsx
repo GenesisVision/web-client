@@ -170,19 +170,14 @@ class _DepositForm extends React.PureComponent<
           isAllow={this.isAllow(walletCurrency)}
           setMax={this.setMaxAmount}
         />
-        <div className="invest-popup__currency">
-          {currency !== walletCurrency && (
-            <NumberFormat
-              value={formatCurrencyValue(
-                convertFromCurrency(values.amount || 0, rate),
-                currency
-              )}
-              prefix="≈ "
-              suffix={` ${currency}`}
-              displayType="text"
-            />
+        <ConvertCurrency
+          condition={currency !== walletCurrency}
+          value={formatCurrencyValue(
+            convertFromCurrency(values.amount || 0, rate),
+            currency
           )}
-        </div>
+          currency={currency}
+        />
         <InvestorFees
           condition={role === ROLE.INVESTOR}
           hasEntryFee={hasEntryFee}
@@ -311,6 +306,21 @@ const _InvestorFees: React.FC<IInvestorFeesProps> = ({
   );
 };
 const InvestorFees = withLoader(React.memo(_InvestorFees));
+
+const _ConvertCurrency: React.FC<{ value: string; currency: CurrencyEnum }> = ({
+  value,
+  currency
+}) => (
+  <div className="invest-popup__currency">
+    <NumberFormat
+      value={value}
+      prefix="≈ "
+      suffix={` ${currency}`}
+      displayType="text"
+    />
+  </div>
+);
+const ConvertCurrency = withLoader(React.memo(_ConvertCurrency));
 
 interface IInvestorFeesProps {
   hasEntryFee: boolean;
