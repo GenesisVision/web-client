@@ -1,6 +1,6 @@
 import { FundInvestInfo, ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { ResolveThunks, connect, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
   Dispatch,
@@ -26,7 +26,6 @@ const _DepositContainer: React.FC<Props> = ({
   hasEntryFee,
   onClose,
   currency,
-  stateCurrency,
   fetchInfo,
   service,
   onApply
@@ -36,6 +35,7 @@ const _DepositContainer: React.FC<Props> = ({
     setErrorMessage,
     cleanErrorMessage
   } = useErrorMessage();
+  const stateCurrency = useSelector(currencySelector);
   const [wallets, setWallets] = useState<WalletBaseData[] | undefined>(
     undefined
   );
@@ -89,10 +89,6 @@ const _DepositContainer: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  stateCurrency: currencySelector(state)
-});
-
 const mapDispatchToProps = (
   dispatch: Dispatch,
   { assetInvest }: OwnProps
@@ -124,16 +120,11 @@ interface ServiceThunks extends ActionCreatorsMapObject {
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
-
-interface StateProps {
-  stateCurrency: CurrencyEnum;
-}
-
-interface Props extends OwnProps, DispatchProps, StateProps {}
+interface Props extends OwnProps, DispatchProps {}
 
 const DepositContainer = compose<React.ComponentType<OwnProps>>(
-  connect<StateProps, DispatchProps, OwnProps, RootState>(
-    mapStateToProps,
+  connect<null, DispatchProps, OwnProps, RootState>(
+    null,
     mapDispatchToProps
   ),
   React.memo
