@@ -43,10 +43,10 @@ export type HistoryCountsType = {
   periodHistoryCount?: number;
 };
 
+export type PortfolioEvent = DashboardPortfolioEvent | ManagerPortfolioEvent;
+
 export interface IHistorySection {
-  fetchPortfolioEvents(
-    filters: any
-  ): Promise<TableItems<DashboardPortfolioEvent | ManagerPortfolioEvent>>;
+  fetchPortfolioEvents(filters: any): Promise<TableItems<PortfolioEvent>>;
   eventTypeFilterValues: SelectFilterValue[];
 }
 
