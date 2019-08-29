@@ -50,8 +50,11 @@ const _FundsTableRow: React.FC<Props> = ({
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--amount">
       <NumberFormat
-        value={formatCurrencyValue(fund.statistic.balanceGVT.amount, "GVT")}
-        suffix=" GVT"
+        value={formatCurrencyValue(
+          fund.statistic.balance.amount,
+          fund.statistic.balance.currency
+        )}
+        suffix={` ${fund.statistic.balance.currency}`}
         displayType="text"
       />
     </TableCell>

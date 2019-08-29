@@ -62,10 +62,11 @@ $padding: $padding-small;
     box-sizing: border-box;
     display: flex;
     width: 100%;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-end;
     padding: 0 $padding-xsmall;
     min-height: 20px;
+    flex-wrap: wrap;
   }
 
   &__toggle {
@@ -87,8 +88,15 @@ $padding: $padding-small;
     }
   }
 
+  &__toolbar-heading {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+  }
+
   &__title {
-    @include adaptive-padding(bottom, $padding-xsmall);
+    padding: 0;
+
     justify-self: flex-start;
     margin-right: auto;
     line-height: 22px;
@@ -107,6 +115,23 @@ $padding: $padding-small;
 
       &:last-child {
         margin-right: 0;
+      }
+    }
+
+    &--mapping {
+      flex-wrap: nowrap;
+      @include adaptive-margin("left", $padding-xsmall);
+
+      .filter {
+        @include font-size($font-size-h3);
+      }
+      .filter__label {
+        font-weight: 600;
+        color: $text-light-color;
+        opacity: 1;
+      }
+      .filter__value {
+        border-bottom: 1px dotted $text-color;
       }
     }
 
@@ -238,7 +263,7 @@ $padding: $padding-small;
       font-size: $td-font-size;
 
       .filter {
-        padding-top: 0;
+        padding: 0;
       }
     }
     &__body {

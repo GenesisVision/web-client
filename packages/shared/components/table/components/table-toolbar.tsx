@@ -20,6 +20,7 @@ const _TableToolbar: React.FC<
   createButtonToolbar,
   exportButtonToolbar,
   title,
+  renderMappings,
   renderFilters,
   updateFilter,
   filtering,
@@ -39,7 +40,14 @@ const _TableToolbar: React.FC<
 
   return (
     <div className="table__toolbar">
-      {title && !disableTitle && <h3 className="table__title">{title}</h3>}
+      <div className="table__toolbar-heading">
+        {title && !disableTitle && <h3 className="table__title">{title}</h3>}
+        {renderMappings && updateFilter && filtering && (
+          <div className="table__filters table__filters--mapping">
+            {renderMappings(updateFilter, filtering)}
+          </div>
+        )}
+      </div>
       <div className="table__filters">
         {view === LIST_VIEW.CARDS && sorting !== undefined && (
           <SortingFilter
@@ -87,6 +95,7 @@ export interface ITableToolbarExternalProps {
   disableTitle?: boolean;
   createButtonToolbar?: JSX.Element;
   title?: JSX.Element | string;
+  renderMappings?: RenderFiltersFuncType;
   renderFilters?: RenderFiltersFuncType;
   updateFilter?: UpdateFilterFunc;
   filtering?: FilteringType;
