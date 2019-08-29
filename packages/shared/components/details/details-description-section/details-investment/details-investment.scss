@@ -17,10 +17,6 @@ $padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
     margin-right: 0;
   }
 
-  @include media-breakpoint-tablet() {
-    margin-left: $padding-controls-left;
-  }
-
   .profitability--chips {
     margin-left: $padding-xxsmall/2;
     margin-top: -$padding-xxsmall * 2;
