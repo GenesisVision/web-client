@@ -92,7 +92,7 @@ $padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
   }
 
   &__statistic-item {
-    @include adaptive-padding(right, $padding-small);
+    @include adaptive-padding(right, $padding-medium);
   }
 
   &__short-statistic {
