@@ -60,21 +60,22 @@ const _DashboardPortfolioEvent: React.FC<Props> = ({ event, from }) => (
             ))}
           </div>
         )}
-        <div className="portfolio-event__value">
-          <Profitability
-            condition={!!event.amount}
-            value={EVENT_PROFITABILITY_VALUES[event.changeState]}
-            prefix={PROFITABILITY_PREFIX.SIGN}
-          >
-            <NumberFormat
-              value={formatCurrencyValue(event.amount, event.currency)}
-              allowNegative={false}
-              thousandSeparator=" "
-              displayType="text"
-              suffix={" " + event.currency}
-            />
-          </Profitability>
-        </div>
+        {!!event.amount && (
+          <div className="portfolio-event__value">
+            <Profitability
+              value={EVENT_PROFITABILITY_VALUES[event.changeState]}
+              prefix={PROFITABILITY_PREFIX.SIGN}
+            >
+              <NumberFormat
+                value={formatCurrencyValue(event.amount, event.currency)}
+                allowNegative={false}
+                thousandSeparator=" "
+                displayType="text"
+                suffix={" " + event.currency}
+              />
+            </Profitability>
+          </div>
+        )}
       </StatisticItem>
     </div>
   </div>
