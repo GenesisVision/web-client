@@ -7,6 +7,7 @@ import Modal from "shared/components/modal/modal";
 
 const _Popover: React.FC<Props> = props => {
   const {
+    orientation = ORIENTATION_POPOVER.LEFT,
     horizontal = HORIZONTAL_POPOVER_POS.LEFT,
     vertical = VERTICAL_POPOVER_POS.BOTTOM,
     anchorEl,
@@ -29,7 +30,7 @@ const _Popover: React.FC<Props> = props => {
         popover.current.style.opacity = "1";
       }
     },
-    [anchorEl, scrollTop]
+    [anchorEl, scrollTop, popover.current]
   );
 
   useEffect(
@@ -51,12 +52,21 @@ const _Popover: React.FC<Props> = props => {
   const getTransformPosition = () => {
     let translateX = `0`;
     let translateY = `0`;
+    let orientationValue = 0;
+    switch (getOrientation()) {
+      case ORIENTATION_POPOVER.RIGHT:
+        orientationValue = 50;
+        break;
+      case ORIENTATION_POPOVER.CENTER:
+        orientationValue = 0;
+        break;
+    }
     switch (horizontal) {
       case HORIZONTAL_POPOVER_POS.CENTER:
-        translateX = `-50%`;
+        translateX = `-${50 - orientationValue}%`;
         break;
       case HORIZONTAL_POPOVER_POS.RIGHT:
-        translateX = `-100%`;
+        translateX = `-${100 - orientationValue}%`;
         break;
     }
     switch (getVerticalPosition()) {
@@ -109,6 +119,23 @@ const _Popover: React.FC<Props> = props => {
     return vertical;
   };
 
+  const getOrientation = (): ORIENTATION_POPOVER => {
+    const popoverBounds = getPopoverBounds();
+    let transform = 0;
+    switch (horizontal) {
+      case HORIZONTAL_POPOVER_POS.CENTER:
+        transform = 0.5;
+        break;
+      case HORIZONTAL_POPOVER_POS.RIGHT:
+        transform = 1;
+        break;
+    }
+    if (popoverBounds.left - popoverBounds.width * transform < 0) {
+      return ORIENTATION_POPOVER.RIGHT;
+    }
+    return orientation;
+  };
+
   const handleScroll = useCallback(() => setScrollTop(window.scrollY), []);
   return (
     <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
@@ -138,6 +165,11 @@ export enum HORIZONTAL_POPOVER_POS {
   CENTER = "center",
   RELATIVE = "relative"
 }
+export enum ORIENTATION_POPOVER {
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center"
+}
 
 const getAnchorEl = (el?: anchorElType) =>
   typeof el === "function" ? el() : el;
@@ -146,6 +178,7 @@ const Popover = React.memo(_Popover);
 export default Popover;
 
 interface Props {
+  orientation?: ORIENTATION_POPOVER;
   onClose?(event: React.MouseEvent<HTMLElement>): void;
   horizontal?: HORIZONTAL_POPOVER_POS;
   vertical?: VERTICAL_POPOVER_POS;
