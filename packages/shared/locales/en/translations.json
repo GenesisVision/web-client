@@ -1745,6 +1745,7 @@
           "date": "Date",
           "type": "Type",
           "description": "Description",
+          "fee": "Fee",
           "amount": "Amount"
         },
         "types": {
