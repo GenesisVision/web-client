@@ -2,14 +2,14 @@ import "shared/components/details/details.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
@@ -22,8 +22,8 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
 import {
-  hasActiveInvestment,
-  hasSubscription
+  haveActiveInvestment,
+  haveSubscription
 } from "../../details/details-description-section/details-investment/investment-container";
 import { IDescriptionSection, IHistorySection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
@@ -39,6 +39,10 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   description
 }) => {
   const [t] = useTranslation();
+  const [haveEvents, setHaveEvents] = useState<boolean>(false);
+  useEffect(() => {
+    fetchPortfolioEvents({}).then(({ total }) => setHaveEvents(total > 0));
+  }, []);
   const fetchPortfolioEvents = useCallback(
     (filters: any) =>
       historySection.fetchPortfolioEvents({
@@ -50,6 +54,13 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   const isInvested =
     description.personalProgramDetails &&
     description.personalProgramDetails.isInvested;
+  const haveInvestment =
+    haveActiveInvestment(
+      description.personalProgramDetails as InvestmentDetails
+    ) ||
+    haveSubscription(description.personalProgramDetails as InvestmentDetails);
+  const showInvestment = haveEvents || haveInvestment;
+
   return (
     <Page title={description.title}>
       <div className="details">
@@ -63,13 +74,10 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           />
         </div>
         <div className="details__section">
-          {(hasActiveInvestment(
-            description.personalProgramDetails as InvestmentDetails
-          ) ||
-            hasSubscription(
-              description.personalProgramDetails as InvestmentDetails
-            )) && (
+          {showInvestment && (
             <DetailsInvestment
+              haveEvents={haveEvents}
+              haveInvestment={haveInvestment}
               eventTypeFilterValues={historySection.eventTypeFilterValues}
               fetchPortfolioEvents={fetchPortfolioEvents}
               updateDescription={dispatchProgramDescription}
