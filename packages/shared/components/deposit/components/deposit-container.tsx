@@ -31,7 +31,11 @@ const _DepositContainer: React.FC<Props> = ({
   service,
   onApply
 }) => {
-  const { errorMessage, setErrorMessage } = useErrorMessage();
+  const {
+    errorMessage,
+    setErrorMessage,
+    cleanErrorMessage
+  } = useErrorMessage();
   const [wallets, setWallets] = useState<WalletBaseData[] | undefined>(
     undefined
   );
@@ -47,6 +51,10 @@ const _DepositContainer: React.FC<Props> = ({
       .then(setInvestInfo)
       .catch(setErrorMessage);
   }, []);
+  const closePopup = useCallback(() => {
+    cleanErrorMessage();
+    onClose();
+  }, []);
   const handleInvest = useCallback(
     (
       amount: number,
@@ -56,7 +64,7 @@ const _DepositContainer: React.FC<Props> = ({
       service
         .assetInvest(id, amount, currency)
         .then(onApply)
-        .then(onClose)
+        .then(closePopup)
         .catch(setErrorMessage)
         .finally(() => {
           setSubmitting(false);
@@ -65,7 +73,7 @@ const _DepositContainer: React.FC<Props> = ({
     [id]
   );
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={closePopup}>
       <DepositPopup
         condition={!!wallets && !!investInfo}
         loader={<DialogLoader />}
