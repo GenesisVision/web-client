@@ -1,7 +1,6 @@
 import "./details-investment.scss";
 
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import SubscriptionDetailsContainer from "shared/components/programs/program-details/program-details-description/subscription-details/subscription-details-container";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
@@ -13,7 +12,6 @@ import Investment from "./investment";
 
 const _InvestmentContainer: React.FC<Props> = ({
   updateDescription,
-  t,
   id,
   assetCurrency,
   accountCurrency,
@@ -25,7 +23,7 @@ const _InvestmentContainer: React.FC<Props> = ({
 }) => {
   return (
     <div className="details-investment__investment-container">
-      {hasActiveInvestment(personalDetails) && (
+      {haveActiveInvestment(personalDetails) && (
         <Investment
           updateDescription={updateDescription}
           id={id}
@@ -38,7 +36,7 @@ const _InvestmentContainer: React.FC<Props> = ({
           ProgramReinvestingWidget={ProgramReinvestingWidget}
         />
       )}
-      {hasSubscription(personalDetails) && (
+      {haveSubscription(personalDetails) && (
         <SubscriptionDetailsContainer
           id={id}
           currency={assetCurrency}
@@ -63,15 +61,15 @@ interface OwnProps {
   >;
 }
 
-export const hasActiveInvestment = (details: InvestmentDetails): boolean =>
+export const haveActiveInvestment = (details: InvestmentDetails): boolean =>
   details && details.isInvested && details.status !== STATUS.ENDED;
 
-export const hasSubscription = (details: InvestmentDetails): boolean =>
+export const haveSubscription = (details: InvestmentDetails): boolean =>
   details &&
   details.signalSubscription &&
   details.signalSubscription.hasActiveSubscription;
 
-interface Props extends OwnProps, WithTranslation {}
+interface Props extends OwnProps {}
 
-const InvestmentContainer = translate()(React.memo(_InvestmentContainer));
+const InvestmentContainer = React.memo(_InvestmentContainer);
 export default InvestmentContainer;
