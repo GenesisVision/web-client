@@ -1,5 +1,6 @@
 import {
   CancelablePromise,
+  InvestmentEventViewModels,
   LevelsParamsInfo,
   ProgramBalanceChart,
   ProgramDetailsFull,
@@ -14,16 +15,30 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
+import {
+  EVENT_LOCATION,
+  fetchPortfolioEventsWithoutTable
+} from "../services/program-details.service";
+
 export const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
 export const FETCH_PROGRAM_BALANCE_CHART = "FETCH_PROGRAM_BALANCE_CHART";
 export const FETCH_PROGRAM_DESCRIPTION = "FETCH_PROGRAM_DESCRIPTION";
 export const FETCH_LEVEL_PARAMETERS = "FETCH_LEVEL_PARAMETERS";
 
+export const PROGRAM_EVENTS = "PROGRAM_EVENTS";
 export const PROGRAM_OPEN_POSITIONS = "PROGRAM_OPEN_POSITIONS";
 export const PROGRAM_TRADES = "PROGRAM_TRADES";
 export const PROGRAM_PERIOD_HISTORY = "PROGRAM_PERIOD_HISTORY";
 export const PROGRAM_FINANCIAL_STATISTIC = "PROGRAM_FINANCIAL_STATISTIC";
 export const PROGRAM_SUBSCRIPTIONS = "PROGRAM_SUBSCRIPTIONS";
+
+export const fetchEventsAction = (eventLocation: EVENT_LOCATION) => (
+  id: string,
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<InvestmentEventViewModels>> => ({
+  type: PROGRAM_TRADES,
+  payload: fetchPortfolioEventsWithoutTable(eventLocation, filters)
+});
 
 export const fetchProgramProfitChartAction = (
   id: string,
