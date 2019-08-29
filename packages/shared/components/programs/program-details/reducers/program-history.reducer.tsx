@@ -1,4 +1,5 @@
 import {
+  InvestmentEventViewModels,
   ProgramPeriodsViewModel,
   SignalProviderSubscribers,
   TradesViewModel
@@ -13,6 +14,7 @@ import clearableReducer from "shared/reducers/clearable.reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 import {
+  PROGRAM_EVENTS,
   PROGRAM_FINANCIAL_STATISTIC,
   PROGRAM_OPEN_POSITIONS,
   PROGRAM_PERIOD_HISTORY,
@@ -25,6 +27,21 @@ import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
 } from "../program-details.constants";
+import { PortfolioEvent } from "../program-details.types";
+
+const eventsSelector = (state: RootState) =>
+  state.programDetails.programHistory.events;
+
+export const eventsTableSelector = tableSelectorCreator<
+  RootState,
+  InvestmentEventViewModels,
+  InvestmentEventViewModels
+>(eventsSelector, "events");
+
+export const eventsReducer = tableReducerFactory<InvestmentEventViewModels>({
+  type: PROGRAM_EVENTS,
+  paging: { ...DEFAULT_PAGING, itemsOnPage: Number.MAX_VALUE }
+});
 
 const openPositionsSelector = (state: RootState) =>
   state.programDetails.programHistory.openPositions;
@@ -111,6 +128,7 @@ export const subscriptionsReducer = tableReducerFactory<
 });
 
 export type ProgramHistoryState = Readonly<{
+  events: ITableState<InvestmentEventViewModels>;
   openPositions: ITableState<TradesViewModel>;
   trades: ITableState<TradesViewModel>;
   periodHistory: ITableState<ProgramPeriodsViewModel>;
@@ -120,6 +138,7 @@ export type ProgramHistoryState = Readonly<{
 
 const programHistoryReducer = clearableReducer(
   combineReducers<ProgramHistoryState>({
+    events: eventsReducer,
     openPositions: openPositionsReducer,
     trades: tradesReducer,
     periodHistory: periodHistoryReducer,
