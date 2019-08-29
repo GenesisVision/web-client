@@ -14,4 +14,13 @@
     width: 0;
     height: 0;
   }
+
+  &--title {
+    .gv-tab--active {
+      cursor: default;
+      &::after {
+        border-bottom: 0;
+      }
+    }
+  }
 }
