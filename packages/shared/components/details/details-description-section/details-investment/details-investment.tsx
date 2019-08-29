@@ -26,6 +26,8 @@ const EVENTS_FILTERING = {
 };
 
 const _DetailsInvestment: React.FC<Props> = ({
+  haveEvents,
+  haveInvestment,
   fetchPortfolioEvents,
   eventTypeFilterValues = [],
   updateDescription,
@@ -39,16 +41,20 @@ const _DetailsInvestment: React.FC<Props> = ({
   ProgramReinvestingWidget
 }) => {
   const [t] = useTranslation();
-  const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
+  const { tab, setTab } = useTab<TABS>(
+    haveInvestment ? TABS.INVESTMENT : TABS.EVENTS
+  );
   return (
     <Surface className="details-investment">
       <div className="details-investment__investment-tabs">
         <GVTabs value={tab} onChange={setTab}>
           <GVTab
+            visible={haveInvestment}
             value={TABS.INVESTMENT}
             label={t(`fund-details-page.description.yourInvestment.${asset}`)}
           />
           <GVTab
+            visible={haveEvents}
             value={TABS.EVENTS}
             label={t("program-details-page.history.tabs.events")}
           />
@@ -86,6 +92,8 @@ enum TABS {
 }
 
 interface OwnProps {
+  haveEvents: boolean;
+  haveInvestment: boolean;
   fetchPortfolioEvents: GetItemsFuncType;
   eventTypeFilterValues: SelectFilterValue[];
   updateDescription: () => void;
