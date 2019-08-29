@@ -62,6 +62,7 @@ const _DashboardPortfolioEvent: React.FC<Props> = ({ event, from }) => (
         )}
         <div className="portfolio-event__value">
           <Profitability
+            condition={!!event.amount}
             value={EVENT_PROFITABILITY_VALUES[event.changeState]}
             prefix={PROFITABILITY_PREFIX.SIGN}
           >
