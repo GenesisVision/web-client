@@ -1,7 +1,11 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import {
+  WithTranslation,
+  withTranslation as translate,
+  useTranslation
+} from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
@@ -21,6 +25,7 @@ import {
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
+import withLoader from "../../../decorators/with-loader";
 import {
   investorSchema,
   managerSchema
@@ -179,66 +184,25 @@ class _DepositForm extends React.PureComponent<
             />
           )}
         </div>
-        {role === ROLE.INVESTOR && (
-          <ul className="dialog-list">
-            {hasEntryFee && (
-              <li className="dialog-list__item">
-                <span className="dialog-list__title">
-                  {t("deposit-asset.entry-fee")}
-                </span>
-                <span className="dialog-list__value">
-                  {info.entryFee} %{" "}
-                  <NumberFormat
-                    value={formatCurrencyValue(
-                      this.entryFee(
-                        convertFromCurrency(values.amount || 0, rate)
-                      ),
-                      currency
-                    )}
-                    prefix=" ("
-                    suffix={` ${currency})`}
-                    displayType="text"
-                  />
-                </span>
-              </li>
-            )}
-            <li className="dialog-list__item">
-              <span className="dialog-list__title">
-                {t("deposit-asset.gv-commission")}
-              </span>
-              <span className="dialog-list__value">
-                {info.gvCommission} %
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    this.gvFee(values.amount || 0),
-                    walletCurrency
-                  )}
-                  prefix={" ("}
-                  suffix={` ${walletCurrency})`}
-                  displayType="text"
-                />
-              </span>
-            </li>
-            <li className="dialog-list__item">
-              <span className="dialog-list__title">
-                {t("deposit-asset.investment-amount")}
-              </span>
-              <span className="dialog-list__value">
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    this.investAmount(
-                      convertFromCurrency(values.amount || 0, rate)
-                    ),
-                    currency
-                  )}
-                  prefix="≈ "
-                  suffix={` ${currency}`}
-                  displayType="text"
-                />
-              </span>
-            </li>
-          </ul>
-        )}
+        <InvestorFees
+          condition={role === ROLE.INVESTOR}
+          hasEntryFee={hasEntryFee}
+          info={info}
+          entryFee={formatCurrencyValue(
+            this.entryFee(convertFromCurrency(values.amount || 0, rate)),
+            currency
+          )}
+          gvCommission={formatCurrencyValue(
+            this.gvFee(values.amount || 0),
+            walletCurrency
+          )}
+          investmentAmount={formatCurrencyValue(
+            this.investAmount(convertFromCurrency(values.amount || 0, rate)),
+            currency
+          )}
+          currency={currency}
+          walletCurrency={walletCurrency}
+        />
         <div className="form-error">
           <FormError error={errorMessage} />
         </div>
@@ -290,6 +254,76 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
   })
 )(_DepositForm);
 export default DepositForm;
+
+const _InvestorFees: React.FC<IInvestorFeesProps> = ({
+  hasEntryFee,
+  info,
+  entryFee,
+  gvCommission,
+  investmentAmount,
+  currency,
+  walletCurrency
+}) => {
+  const [t] = useTranslation();
+  return (
+    <ul className="dialog-list">
+      {hasEntryFee && (
+        <li className="dialog-list__item">
+          <span className="dialog-list__title">
+            {t("deposit-asset.entry-fee")}
+          </span>
+          <span className="dialog-list__value">
+            {info.entryFee} %{" "}
+            <NumberFormat
+              value={entryFee}
+              prefix=" ("
+              suffix={` ${currency})`}
+              displayType="text"
+            />
+          </span>
+        </li>
+      )}
+      <li className="dialog-list__item">
+        <span className="dialog-list__title">
+          {t("deposit-asset.gv-commission")}
+        </span>
+        <span className="dialog-list__value">
+          {info.gvCommission} %
+          <NumberFormat
+            value={gvCommission}
+            prefix={" ("}
+            suffix={` ${walletCurrency})`}
+            displayType="text"
+          />
+        </span>
+      </li>
+      <li className="dialog-list__item">
+        <span className="dialog-list__title">
+          {t("deposit-asset.investment-amount")}
+        </span>
+        <span className="dialog-list__value">
+          <NumberFormat
+            value={investmentAmount}
+            prefix="≈ "
+            suffix={` ${currency}`}
+            displayType="text"
+          />
+        </span>
+      </li>
+    </ul>
+  );
+};
+const InvestorFees = withLoader(React.memo(_InvestorFees));
+
+interface IInvestorFeesProps {
+  hasEntryFee: boolean;
+  info: TInvestInfo;
+  entryFee: string;
+  gvCommission: string;
+  investmentAmount: string;
+  currency: CurrencyEnum;
+  walletCurrency: CurrencyEnum;
+}
 
 export enum DEPOSIT_FORM_FIELDS {
   rate = "rate",
