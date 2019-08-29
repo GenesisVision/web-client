@@ -14,8 +14,8 @@ import {
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
-  mapToTableItems,
-  TableItems
+  TableItems,
+  mapToTableItems
 } from "shared/components/table/helpers/mapper";
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
@@ -230,6 +230,27 @@ export enum EVENT_LOCATION {
   Dashboard = "Dashboard",
   EventsAll = "EventsAll"
 }
+
+export const fetchPortfolioEventsWithoutTable = (
+  eventLocation: EVENT_LOCATION,
+  filters?: any
+): CancelablePromise<InvestmentEventViewModels> => {
+  const authorization = authService.getAuthArg();
+  let request: (
+    authorization: string,
+    opts?: Object
+  ) => CancelablePromise<InvestmentEventViewModels>;
+  switch (ROLE_ENV) {
+    case ROLE.INVESTOR:
+      request = investorApi.v10InvestorInvestmentsEventsGet;
+      break;
+    case ROLE.MANAGER:
+    default:
+      request = managerApi.v10ManagerInvestmentsEventsGet;
+      break;
+  }
+  return request(authorization, { ...filters, eventLocation });
+};
 
 export const fetchPortfolioEvents = (
   eventLocation: EVENT_LOCATION
