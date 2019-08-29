@@ -170,7 +170,6 @@ class _DepositForm extends React.PureComponent<
           isAllow={this.isAllow(walletCurrency)}
           setMax={this.setMaxAmount}
         />
-
         <div className="invest-popup__currency">
           {currency !== walletCurrency && (
             <NumberFormat
@@ -203,9 +202,7 @@ class _DepositForm extends React.PureComponent<
           currency={currency}
           walletCurrency={walletCurrency}
         />
-        <div className="form-error">
-          <FormError error={errorMessage} />
-        </div>
+        <FormError error={errorMessage} />
         <div className="dialog__buttons">
           <GVButton
             type="submit"
