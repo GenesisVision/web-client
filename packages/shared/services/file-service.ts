@@ -1,47 +1,44 @@
 import { CancelablePromise } from "gv-api-web";
-import moment from "moment";
+import * as qs from "qs";
 import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { composeRequestValueFunc } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 
-import { FilteringType } from "../components/table/components/filtering/filter.type";
-import {
-  TableItems,
-  mapToTableItems
-} from "../components/table/helpers/mapper";
 import fileApi from "./api-client/file-api";
 import programsApi from "./api-client/programs-api";
 import authService from "./auth-service";
 
-const getDateFilters = (dateRange: DateRangeFilterType): string => {
-  const start = dateRange.dateStart
-    ? `DateFrom=${moment(dateRange.dateStart as string).toISOString()}&`
-    : "";
-  const end = dateRange.dateEnd
-    ? `DateTo=${moment(dateRange.dateEnd as string)
-        .add(1, "day")
-        .startOf("day")
-        .toISOString()}`
-    : "";
-  return `?${start}${end}`;
+const SERVER_DATE_RANGE_MIN_FILTER_NAME = "DateFrom";
+const SERVER_DATE_RANGE_MAX_FILTER_NAME = "DateTo";
+
+const getDateFilters = (dateRange: DateRangeFilterType): FilteringType => {
+  const dateFilter = composeRequestValueFunc(
+    SERVER_DATE_RANGE_MIN_FILTER_NAME,
+    SERVER_DATE_RANGE_MAX_FILTER_NAME
+  )(dateRange);
+  return dateFilter;
 };
 
 const getTradesExportFileUrl = (
   id: string,
   dateRange: DateRangeFilterType
 ): string => {
-  const filters = getDateFilters(dateRange);
-  return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/trades/export${
-    dateRange.dateStart || dateRange.dateEnd ? filters : ""
-  }`;
+  const dateFilter = getDateFilters(dateRange);
+  const queryString = "?" + qs.stringify(dateFilter);
+  return `${
+    process.env.REACT_APP_API_URL
+  }/v1.0/programs/${id}/trades/export${queryString}`;
 };
 
 const getPeriodExportFileUrl = (
   id: string,
   dateRange: DateRangeFilterType
 ): string => {
-  const filters = getDateFilters(dateRange);
-  return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/periods/export${
-    dateRange.dateStart || dateRange.dateEnd ? filters : ""
-  }`;
+  const dateFilter = getDateFilters(dateRange);
+  const queryString = "?" + qs.stringify(dateFilter);
+  return `${
+    process.env.REACT_APP_API_URL
+  }/v1.0/programs/${id}/periods/export${queryString}`;
 };
 
 const getStatisticExportFile = (
@@ -49,10 +46,7 @@ const getStatisticExportFile = (
   dateRange: DateRangeFilterType
 ): CancelablePromise<Blob> => {
   const authorization = authService.getAuthArg();
-  const opts = {
-    dateFrom: dateRange.dateStart as Date,
-    dateTo: dateRange.dateEnd as Date
-  };
+  const opts = getDateFilters(dateRange);
   return programsApi
     .v10ProgramsByIdPeriodsExportStatisticGet(id, authorization, opts)
     .then(blob => blob);
