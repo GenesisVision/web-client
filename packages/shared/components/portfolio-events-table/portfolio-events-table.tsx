@@ -30,6 +30,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { EVENT_LOCATION } from "../programs/program-details/services/program-details.service";
 import PortfolioEventsDetails from "./portfolio-event-details";
+import PortfolioEventFeesTooltip from "./portfolio-event-fees-tooltip";
 import {
   EVENT_PROFITABILITY_VALUES,
   PORTFOLIO_EVENTS_COLUMNS,
@@ -134,15 +135,17 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
             {!hideFeeColumn && (
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
                 {event.totalFeesAmount !== null ? (
-                  <NumberFormat
-                    value={formatCurrencyValue(
-                      event.totalFeesAmount,
-                      event.currency
-                    )}
-                    thousandSeparator=" "
-                    displayType="text"
-                    suffix={" " + event.currency}
-                  />
+                  <PortfolioEventFeesTooltip fees={event.feesInfo}>
+                    <NumberFormat
+                      value={formatCurrencyValue(
+                        event.totalFeesAmount,
+                        event.totalFeesCurrency
+                      )}
+                      thousandSeparator=" "
+                      displayType="text"
+                      suffix={" " + event.totalFeesCurrency}
+                    />
+                  </PortfolioEventFeesTooltip>
                 ) : (
                   <>&nbsp;</>
                 )}
