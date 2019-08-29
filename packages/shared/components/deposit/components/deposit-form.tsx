@@ -265,6 +265,7 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
   withRole,
   translate(),
   withFormik<Props, IDepositFormValues>({
+    enableReinitialize: true,
     displayName: "invest-form",
     mapPropsToValues: ({ wallets }) => ({
       [DEPOSIT_FORM_FIELDS.rate]: 1,
