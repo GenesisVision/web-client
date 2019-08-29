@@ -113,6 +113,7 @@ const _ProgramSettings: React.FC<Props> = ({
         onSubmit={editProgram}
       />
       <CloseAssetBlock
+        label={t("manager.asset-settings.close-program.title")}
         asset={ASSET.PROGRAM}
         canCloseAsset={details.personalProgramDetails.canCloseProgram}
         id={details.id}
