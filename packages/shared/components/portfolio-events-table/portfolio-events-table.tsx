@@ -140,6 +140,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
             </TableCell>
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
               <Profitability
+                condition={!!event.amount}
                 value={EVENT_PROFITABILITY_VALUES[event.changeState]}
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
