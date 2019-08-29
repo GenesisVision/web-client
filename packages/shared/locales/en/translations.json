@@ -1548,6 +1548,12 @@
       "close-asset": {
         "title": "Close asset"
       },
+      "close-fund": {
+        "title": "Close fund"
+      },
+      "close-program": {
+        "title": "Close program"
+      },
       "title": "{{asset}} settings",
       "period-and-closing": {
         "title": "Period and closing",
