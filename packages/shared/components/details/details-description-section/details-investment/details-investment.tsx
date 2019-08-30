@@ -14,6 +14,7 @@ import {
 } from "shared/components/programs/program-details/services/program-details.service";
 import Surface from "shared/components/surface/surface";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
+import { TableSelectorType } from "shared/components/table/components/table.types";
 import useTab from "shared/hooks/tab.hook";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -88,7 +89,7 @@ enum TABS {
 }
 
 interface OwnProps {
-  selector: any;
+  selector: TableSelectorType;
   haveEvents: boolean;
   haveInvestment: boolean;
   eventTypeFilterValues: SelectFilterValue[];
