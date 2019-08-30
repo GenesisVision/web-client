@@ -1,8 +1,8 @@
 import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
-import React, { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
   Dispatch,
@@ -12,23 +12,22 @@ import {
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "shared/components/page/page";
-import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { haveActiveInvestment } from "../../details/details-description-section/details-investment/investment-container";
 import {
-  haveActiveInvestment,
-  haveSubscription
-} from "../../details/details-description-section/details-investment/investment-container";
+  EVENT_LOCATION,
+  getEvents
+} from "../../programs/program-details/services/program-details.service";
 import FundDetailsDescriptionSection from "./fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "./fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
 import { IDescriptionSection, IFundHistorySection } from "./fund-details.types";
-import {
-  dispatchFundDescription,
-  getFundReallocateHistory
-} from "./services/fund-details.service";
+import { fundEventsTableSelector } from "./reducers/fund-history.reducer";
+import { dispatchFundDescription } from "./services/fund-details.service";
+import { SelectFilterValue } from "../../table/components/filtering/filter.type";
 
 const _FundDetailsContainer: React.FC<Props> = ({
   service,
@@ -37,22 +36,20 @@ const _FundDetailsContainer: React.FC<Props> = ({
   isAuthenticated,
   redirectToLogin,
   descriptionSection,
-  historySection,
+  eventTypeFilterValues,
   description
 }) => {
+  const events = useSelector(fundEventsTableSelector);
+  const dispatch = useDispatch();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
   useEffect(() => {
-    fetchHistoryPortfolioEvents({}).then(({ total }) =>
-      setHaveEvents(total > 0)
-    );
+    dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
   }, []);
-  const fetchHistoryPortfolioEvents = useCallback(
-    (filters: any) =>
-      historySection.fetchPortfolioEvents({
-        ...filters,
-        assetId: description.id
-      }),
-    [historySection, description]
+  useEffect(
+    () => {
+      setHaveEvents(events.itemsData.data.total > 0);
+    },
+    [events]
   );
   const haveInvestment = haveActiveInvestment(
     description.personalFundDetails as InvestmentDetails
@@ -75,10 +72,10 @@ const _FundDetailsContainer: React.FC<Props> = ({
           <div className="details__section">
             <div>
               <DetailsInvestment
+                selector={fundEventsTableSelector}
                 haveEvents={haveEvents}
                 haveInvestment={haveInvestment}
-                eventTypeFilterValues={historySection.eventTypeFilterValues}
-                fetchPortfolioEvents={fetchHistoryPortfolioEvents}
+                eventTypeFilterValues={eventTypeFilterValues}
                 updateDescription={dispatchFundDescription}
                 asset={ASSET.FUND}
                 id={description.id}
@@ -121,7 +118,7 @@ interface DispatchProps {
 interface OwnProps {
   isKycConfirmed: boolean;
   redirectToLogin: () => void;
-  historySection: IFundHistorySection;
+  eventTypeFilterValues: SelectFilterValue[];
   descriptionSection: IDescriptionSection;
   description: FundDetailsFull;
   isAuthenticated: boolean;

@@ -15,6 +15,7 @@ import {
   dispatchPlatformLevelsParameters,
   dispatchProgramDescription
 } from "shared/components/programs/program-details/services/program-details.service";
+import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { kycConfirmedSelector } from "shared/reducers/header-reducer";
@@ -22,7 +23,7 @@ import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import ProgramDetailsContainer from "./program-details.contaner";
-import { IDescriptionSection, IHistorySection } from "./program-details.types";
+import { IDescriptionSection } from "./program-details.types";
 import { programDescriptionSelector } from "./reducers/description.reducer";
 
 const _ProgramDetailsPage: React.FC<Props> = ({
@@ -33,7 +34,7 @@ const _ProgramDetailsPage: React.FC<Props> = ({
     redirectToLogin
   },
   descriptionSection,
-  historySection,
+  eventTypeFilterValues,
   currency,
   isAuthenticated,
   isKycConfirmed
@@ -52,7 +53,7 @@ const _ProgramDetailsPage: React.FC<Props> = ({
       condition={!!description}
       loader={<DetailsContainerLoader />}
       redirectToLogin={redirectToLogin}
-      historySection={historySection}
+      eventTypeFilterValues={eventTypeFilterValues}
       descriptionSection={descriptionSection}
       description={description!}
       currency={currency}
@@ -81,7 +82,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 interface OwnProps {
-  historySection: IHistorySection;
+  eventTypeFilterValues: SelectFilterValue[];
   descriptionSection: IDescriptionSection;
 }
 

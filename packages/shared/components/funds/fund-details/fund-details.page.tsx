@@ -2,16 +2,16 @@ import "shared/components/details/details.scss";
 
 import * as React from "react";
 import { useEffect } from "react";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import { redirectToLogin } from "shared/components/auth/signin/signin.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
-import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
+import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { kycConfirmedSelector } from "shared/reducers/header-reducer";
@@ -19,11 +19,7 @@ import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import FundDetailsContainer from "./fund-details.container";
-import {
-  IDescriptionSection,
-  IFundControlsProps,
-  IFundHistorySection
-} from "./fund-details.types";
+import { IDescriptionSection } from "./fund-details.types";
 import {
   FundDescriptionDataType,
   fundDescriptionSelector
@@ -33,7 +29,7 @@ import { dispatchFundDescription } from "./services/fund-details.service";
 const _FundDetailsPage: React.FC<Props> = ({
   isKycConfirmed,
   description,
-  historySection,
+  eventTypeFilterValues,
   currency,
   service: { dispatchFundDescription, redirectToLogin },
   isAuthenticated,
@@ -51,7 +47,7 @@ const _FundDetailsPage: React.FC<Props> = ({
       condition={!!description}
       loader={<DetailsContainerLoader assets />}
       redirectToLogin={redirectToLogin}
-      historySection={historySection}
+      eventTypeFilterValues={eventTypeFilterValues}
       descriptionSection={descriptionSection}
       description={description!}
       currency={currency}
@@ -79,7 +75,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 interface OwnProps {
   descriptionSection: IDescriptionSection;
-  historySection: IFundHistorySection;
+  eventTypeFilterValues: SelectFilterValue[];
 }
 
 interface StateProps {

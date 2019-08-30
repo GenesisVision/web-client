@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
@@ -9,11 +9,11 @@ import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
 import { FilteringType, TDefaults, TFilter } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
-import { GetItemsFuncActionType } from "./table.types";
+import { GetItemsFuncActionType, TableSelectorType } from "./table.types";
 
 interface ITableContainerProps extends ITableProps {
   getItems: GetItemsFuncActionType;
-  dataSelector: (opts?: any) => { [keys: string]: any };
+  dataSelector: TableSelectorType;
   isFetchOnMount: boolean;
 }
 

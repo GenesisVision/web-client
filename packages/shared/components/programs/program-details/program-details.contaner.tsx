@@ -2,9 +2,9 @@ import "shared/components/details/details.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
   Dispatch,
@@ -13,20 +13,26 @@ import {
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
+import {
+  haveActiveInvestment,
+  haveSubscription
+} from "shared/components/details/details-description-section/details-investment/investment-container";
 import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
-import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
+import {
+  EVENT_LOCATION,
+  dispatchProgramDescription,
+  getEvents
+} from "shared/components/programs/program-details/services/program-details.service";
+import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { ASSET, STATUS } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
-import {
-  haveActiveInvestment,
-  haveSubscription
-} from "../../details/details-description-section/details-investment/investment-container";
-import { IDescriptionSection, IHistorySection } from "./program-details.types";
+import { IDescriptionSection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
+import { programEventsTableSelector } from "./reducers/program-history.reducer";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   service: { dispatchProgramDescription },
@@ -35,21 +41,21 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   isAuthenticated,
   redirectToLogin,
   descriptionSection,
-  historySection,
+  eventTypeFilterValues,
   description
 }) => {
+  const events = useSelector(programEventsTableSelector);
+  const dispatch = useDispatch();
   const [t] = useTranslation();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
   useEffect(() => {
-    fetchPortfolioEvents({}).then(({ total }) => setHaveEvents(total > 0));
+    dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
   }, []);
-  const fetchPortfolioEvents = useCallback(
-    (filters: any) =>
-      historySection.fetchPortfolioEvents({
-        ...filters,
-        assetId: description.id
-      }),
-    [historySection, description]
+  useEffect(
+    () => {
+      setHaveEvents(events.itemsData.data.total > 0);
+    },
+    [events]
   );
   const isInvested =
     description.personalProgramDetails &&
@@ -76,10 +82,10 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         <div className="details__section">
           {showInvestment && (
             <DetailsInvestment
+              selector={programEventsTableSelector}
               haveEvents={haveEvents}
               haveInvestment={haveInvestment}
-              eventTypeFilterValues={historySection.eventTypeFilterValues}
-              fetchPortfolioEvents={fetchPortfolioEvents}
+              eventTypeFilterValues={eventTypeFilterValues}
               updateDescription={dispatchProgramDescription}
               notice={t(
                 "program-details-page.description.withdraw-notice-text"
@@ -147,7 +153,7 @@ interface DispatchProps {
 
 interface OwnProps {
   redirectToLogin: () => void;
-  historySection: IHistorySection;
+  eventTypeFilterValues: SelectFilterValue[];
   descriptionSection: IDescriptionSection;
   description: ProgramDetailsFull;
   isAuthenticated: boolean;

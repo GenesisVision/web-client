@@ -1,4 +1,13 @@
 import { InvestmentEventViewModels } from "gv-api-web";
+import { InvestorRootState } from "reducers";
+import {
+  DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+  DASHBOARD_PORTFOLIO_EVENTS_FILTERS,
+  EVENTS_ACTION_TYPE
+} from "shared/components/portfolio-events-table/portfolio-events-table.constants";
+import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import tableReducerFactory from "shared/components/table/reducers/table.reducer";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -14,8 +23,26 @@ export const dashboardEventsSelector = apiSelector<
   AuthRootState
 >(state => state.dashboard.eventsData);
 
-const dashboardEventsReducer = apiReducerFactory<InvestmentEventViewModels>({
+export const dashboardEventsReducer = apiReducerFactory<
+  InvestmentEventViewModels
+>({
   apiType: DASHBOARD_PORTFOLIO_EVENTS
 });
 
-export default dashboardEventsReducer;
+export const dashboardEventsAllSelector = (state: InvestorRootState) =>
+  state.dashboard.eventsTable;
+
+export const dashboardEventsAllTableSelector = tableSelectorCreator<
+  InvestorRootState,
+  InvestmentEventViewModels,
+  InvestmentEventViewModels
+>(dashboardEventsAllSelector, "events");
+
+export const dashboardEventsAllReducer = tableReducerFactory<
+  InvestmentEventViewModels
+>({
+  type: EVENTS_ACTION_TYPE,
+  paging: DEFAULT_PAGING,
+  filtering: DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+  defaultFilters: DASHBOARD_PORTFOLIO_EVENTS_FILTERS
+});
