@@ -1,4 +1,4 @@
-import { FundsList, ProgramsList } from "gv-api-web";
+import { FundsList, InvestmentEventViewModels, ProgramsList } from "gv-api-web";
 import { combineReducers } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ITableState } from "shared/components/table/reducers/table.reducer";
@@ -10,7 +10,8 @@ import dashboardAssetReducer, {
   ManagerAssetsState
 } from "./dashboard-assets.reducer";
 import dashboardEventsReducer, {
-  ManagerPortfolioEventsState
+  ManagerPortfolioEventsState,
+  dashboardEventsAllReducer
 } from "./dashboard-events.reducer";
 import dashboardFundsReducer from "./dashboard-funds.reducer";
 import dashboardInRequestsReducer, {
@@ -20,6 +21,7 @@ import dashboardPeriodReducer from "./dashboard-period.reducer";
 import dashboardProgramsReducer from "./dashboard-programs.reducer";
 
 export type ManagerDashboardState = {
+  eventsTable: ITableState<InvestmentEventViewModels>;
   period: ChartDefaultPeriod;
   assets: ManagerAssetsState;
   assetChart: Nullable<IDashboardAssetChart>;
@@ -30,6 +32,7 @@ export type ManagerDashboardState = {
 };
 
 const dashboardReducer = combineReducers<ManagerDashboardState>({
+  eventsTable: dashboardEventsAllReducer,
   period: dashboardPeriodReducer,
   assets: dashboardAssetReducer,
   assetChart: dashboardAssetChartReducer,
