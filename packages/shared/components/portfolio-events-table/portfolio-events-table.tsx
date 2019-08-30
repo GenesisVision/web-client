@@ -25,6 +25,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { EVENT_LOCATION } from "../programs/program-details/services/program-details.service";
 import TableContainer from "../table/components/table-container";
+import { GetItemsFuncActionType, TableSelectorType } from "../table/components/table.types";
 import PortfolioEventsDetails from "./portfolio-event-details";
 import PortfolioEventFeesTooltip from "./portfolio-event-fees-tooltip";
 import {
@@ -174,8 +175,8 @@ const PortfolioEventsTable = React.memo(_PortfolioEventsTable);
 export default PortfolioEventsTable;
 
 export interface IPortfolioEventsTableOwnProps {
-  getItems: any;
-  selector: any;
+  getItems: GetItemsFuncActionType;
+  selector: TableSelectorType;
   eventLocation: EVENT_LOCATION;
   dateRangeStartLabel: string;
   eventTypeFilterValues: SelectFilterValue[];
