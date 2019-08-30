@@ -1,11 +1,11 @@
 import {
   CancelablePromise,
+  InvestmentEventViewModels,
   LevelInfo,
   ProgramPeriodsViewModel,
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
-import { InvestmentEventViewModels } from "gv-api-web/src";
 import { Dispatch } from "redux";
 import {
   ChartDefaultPeriod,
@@ -39,6 +39,7 @@ import {
 } from "shared/utils/types";
 
 import {
+  fetchEventsAction,
   fetchFinancialStatisticAction,
   fetchLevelParametersAction,
   fetchOpenPositionsAction,
@@ -56,6 +57,11 @@ import {
   tradesTableSelector
 } from "../reducers/program-history.reducer";
 import { ProgramStatisticResult } from "./program-details.types";
+
+export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
+  filters?: ComposeFiltersAllType
+): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
+  fetchEventsAction(id, eventLocation, filters);
 
 export const getProgramBrokers = (id: string) =>
   brokersApi.v10BrokersByProgramIdGet(id);
