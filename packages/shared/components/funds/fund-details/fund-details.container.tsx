@@ -27,6 +27,7 @@ import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-
 import { IDescriptionSection, IFundHistorySection } from "./fund-details.types";
 import { fundEventsTableSelector } from "./reducers/fund-history.reducer";
 import { dispatchFundDescription } from "./services/fund-details.service";
+import { SelectFilterValue } from "../../table/components/filtering/filter.type";
 
 const _FundDetailsContainer: React.FC<Props> = ({
   service,
@@ -35,7 +36,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
   isAuthenticated,
   redirectToLogin,
   descriptionSection,
-  historySection,
+  eventTypeFilterValues,
   description
 }) => {
   const events = useSelector(fundEventsTableSelector);
@@ -74,7 +75,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
                 selector={fundEventsTableSelector}
                 haveEvents={haveEvents}
                 haveInvestment={haveInvestment}
-                eventTypeFilterValues={historySection.eventTypeFilterValues}
+                eventTypeFilterValues={eventTypeFilterValues}
                 updateDescription={dispatchFundDescription}
                 asset={ASSET.FUND}
                 id={description.id}
@@ -117,7 +118,7 @@ interface DispatchProps {
 interface OwnProps {
   isKycConfirmed: boolean;
   redirectToLogin: () => void;
-  historySection: IFundHistorySection;
+  eventTypeFilterValues: SelectFilterValue[];
   descriptionSection: IDescriptionSection;
   description: FundDetailsFull;
   isAuthenticated: boolean;

@@ -1,13 +1,6 @@
-import {
-  DashboardPortfolioEvent,
-  LevelsParamsInfo,
-  ManagerPortfolioEvent,
-  ProgramDetailsFull
-} from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import React from "react";
 import { IDialogProps } from "shared/components/dialog/dialog";
-import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import { TableItems } from "shared/components/table/helpers/mapper";
 import { CurrencyEnum } from "shared/utils/types";
 
 export interface IProgramControlsProps {
@@ -42,13 +35,6 @@ export type HistoryCountsType = {
   subscriptionsCount?: number;
   periodHistoryCount?: number;
 };
-
-export type PortfolioEvent = DashboardPortfolioEvent | ManagerPortfolioEvent;
-
-export interface IHistorySection {
-  fetchPortfolioEvents(filters: any): Promise<TableItems<PortfolioEvent>>;
-  eventTypeFilterValues: SelectFilterValue[];
-}
 
 export interface IProgramReinvestingContainerOwnProps {
   programId: string;

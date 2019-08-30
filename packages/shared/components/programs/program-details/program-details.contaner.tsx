@@ -25,11 +25,12 @@ import {
   dispatchProgramDescription,
   getEvents
 } from "shared/components/programs/program-details/services/program-details.service";
+import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { ASSET, STATUS } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { IDescriptionSection, IHistorySection } from "./program-details.types";
+import { IDescriptionSection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
 import { programEventsTableSelector } from "./reducers/program-history.reducer";
 
@@ -40,7 +41,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   isAuthenticated,
   redirectToLogin,
   descriptionSection,
-  historySection,
+  eventTypeFilterValues,
   description
 }) => {
   const events = useSelector(programEventsTableSelector);
@@ -84,7 +85,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               selector={programEventsTableSelector}
               haveEvents={haveEvents}
               haveInvestment={haveInvestment}
-              eventTypeFilterValues={historySection.eventTypeFilterValues}
+              eventTypeFilterValues={eventTypeFilterValues}
               updateDescription={dispatchProgramDescription}
               notice={t(
                 "program-details-page.description.withdraw-notice-text"
@@ -152,7 +153,7 @@ interface DispatchProps {
 
 interface OwnProps {
   redirectToLogin: () => void;
-  historySection: IHistorySection;
+  eventTypeFilterValues: SelectFilterValue[];
   descriptionSection: IDescriptionSection;
   description: ProgramDetailsFull;
   isAuthenticated: boolean;
