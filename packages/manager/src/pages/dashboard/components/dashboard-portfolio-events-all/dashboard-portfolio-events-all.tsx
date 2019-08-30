@@ -5,14 +5,14 @@ import { ManagerRootState } from "reducers";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
-import {
-  EVENT_LOCATION,
-  fetchPortfolioEvents
-} from "shared/components/programs/program-details/services/program-details.service";
+import { EVENT_LOCATION } from "shared/components/programs/program-details/services/program-details.service";
 import Surface from "shared/components/surface/surface";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import useRole from "shared/hooks/use-role.hook";
 import { allEventsSelector } from "shared/reducers/platform-reducer";
+
+import { dashboardEventsAllTableSelector } from "../../reducers/dashboard-events.reducer";
+import { getEvents } from "../../services/dashboard.service";
 
 const _PortfolioEventsAllComponent: React.FC<Props> = ({ events }) => {
   const [t] = useTranslation();
@@ -21,8 +21,9 @@ const _PortfolioEventsAllComponent: React.FC<Props> = ({ events }) => {
     <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
       <Surface className="dashboard-portfolio-events-all">
         <PortfolioEventsTable
+          selector={dashboardEventsAllTableSelector}
+          getItems={getEvents(EVENT_LOCATION.EventsAll)}
           eventLocation={EVENT_LOCATION.EventsAll}
-          fetchPortfolioEvents={fetchPortfolioEvents(EVENT_LOCATION.EventsAll)}
           title={t(`${role}.dashboard-page.portfolio-events.table-title`)}
           className="portfolio-events-all-table"
           dateRangeStartLabel={t("filters.date-range.account-creation")}
