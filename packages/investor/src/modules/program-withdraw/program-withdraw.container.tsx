@@ -16,7 +16,7 @@ const mapDispatchToProps = (
   dispatch: MiddlewareDispatch,
   ownProps: IProgramWithdrawalContainerProps
 ): DispatchProps => {
-  const { id, accountCurrency, onSubmit, onClose } = ownProps;
+  const { id, assetCurrency, onSubmit, onClose } = ownProps;
   const onSubmitWithdrawal = () => {
     onClose();
     onSubmit();
@@ -25,7 +25,7 @@ const mapDispatchToProps = (
   const withdrawProgram = withdrawProgramById(id, onSubmitWithdrawal);
 
   return {
-    fetchInfo: getProgramWithdrawInfo(id, accountCurrency),
+    fetchInfo: getProgramWithdrawInfo(id, assetCurrency),
     withdraw: values => dispatch(withdrawProgram(values))
   };
 };
