@@ -29,7 +29,6 @@ const _ProgramWithdrawDialog: React.FC<
       .then(setProgramWithdrawInfo)
       .catch(setErrorMessage);
   }, []);
-  console.log(programWithdrawInfo);
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
