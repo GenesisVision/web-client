@@ -1,6 +1,7 @@
 import { ProgramWithdrawInfo } from "gv-api-web";
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import ProgramWithdrawDialog from "shared/components/program-withdraw/program-withdraw-dialog";
 import { ProgramWithdrawType } from "shared/components/program-withdraw/program-withdraw-popup";
 import { IProgramWithdrawalContainerProps } from "shared/components/programs/program-details/program-details.types";
@@ -30,13 +31,13 @@ const mapDispatchToProps = (
   };
 };
 
-const ProgramWithdrawContainer = connect<
-  RootState,
-  DispatchProps,
-  IProgramWithdrawalContainerProps
+const ProgramWithdrawContainer = compose<
+  React.ComponentType<IProgramWithdrawalContainerProps>
 >(
-  null,
-  mapDispatchToProps
+  connect<RootState, DispatchProps, IProgramWithdrawalContainerProps>(
+    null,
+    mapDispatchToProps
+  )
 )(ProgramWithdrawDialog);
 
 export default ProgramWithdrawContainer;
