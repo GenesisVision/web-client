@@ -1,3 +1,4 @@
+import { ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
@@ -19,32 +20,22 @@ const _ProgramWithdrawDialog: React.FC<
   fetchInfo,
   withdraw
 }) => {
-  const [periodEnds, setPeriodEnds] = useState<Date | undefined>(undefined);
-  const [title, setTitle] = useState<string | undefined>(undefined);
-  const [availableToWithdraw, setAvailableToWithdraw] = useState<
-    number | undefined
+  const [programWithdrawInfo, setProgramWithdrawInfo] = useState<
+    ProgramWithdrawInfo | undefined
   >(undefined);
-  const [rate, setRate] = useState<number>(1);
   const { errorMessage, setErrorMessage } = useErrorMessage();
   useEffect(() => {
     fetchInfo()
-      .then(({ periodEnds, title, availableToWithdraw, rate }) => {
-        setPeriodEnds(periodEnds);
-        setTitle(title);
-        setAvailableToWithdraw(availableToWithdraw);
-        setRate(rate);
-      })
+      .then(setProgramWithdrawInfo)
       .catch(setErrorMessage);
   }, []);
+  console.log(programWithdrawInfo);
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
-        condition={availableToWithdraw === undefined || !title || !periodEnds}
+        condition={!!programWithdrawInfo}
+        programWithdrawInfo={programWithdrawInfo!}
         loader={<DialogLoader />}
-        periodEnds={periodEnds!}
-        title={title!}
-        availableToWithdraw={availableToWithdraw!}
-        rate={rate}
         withdraw={withdraw}
         accountCurrency={accountCurrency}
         assetCurrency={assetCurrency}

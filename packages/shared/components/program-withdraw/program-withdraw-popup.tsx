@@ -19,10 +19,7 @@ enum PROGRAM_WITHDRAW_FORM {
 }
 
 const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
-  rate,
-  availableToWithdraw,
-  periodEnds,
-  title,
+  programWithdrawInfo: { rate, availableToWithdraw, periodEnds, title },
   assetCurrency,
   accountCurrency,
   fetchInfo,
@@ -108,10 +105,7 @@ const ProgramWithdrawPopup = withLoader(React.memo(_ProgramWithdrawPopup));
 export default ProgramWithdrawPopup;
 
 export interface IProgramWithdrawPopupProps {
-  rate: number;
-  availableToWithdraw: number;
-  periodEnds: Date;
-  title: string;
+  programWithdrawInfo: ProgramWithdrawInfo;
   assetCurrency: string;
   accountCurrency: string;
   fetchInfo: () => Promise<ProgramWithdrawInfo>;
