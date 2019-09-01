@@ -34,13 +34,13 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
     setErrorMessage,
     cleanErrorMessage
   } = useErrorMessage();
-  const [amount, setAmount] = useState<number | undefined>(undefined);
+  const [amount, setAmount] = useState<number>(0);
   const [withdrawAll, setWithdrawAll] = useState<boolean>(false);
 
   const handleSubmit = useCallback(
     (setSubmitting: SetSubmittingType) =>
       withdraw({
-        amount: amount || 0,
+        amount,
         withdrawAll
       })
         .catch(setErrorMessage)
@@ -52,7 +52,7 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
     ({ amount, withdrawAll }: IProgramWithdrawAmountFormValues) => {
       setTab(null, PROGRAM_WITHDRAW_FORM.CONFIRM);
       setAmount(amount);
-      setWithdrawAll(!!withdrawAll);
+      setWithdrawAll(withdrawAll);
     },
     []
   );
