@@ -64,9 +64,11 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
   return (
     <>
       <ProgramWithdrawTop
+        rate={rate}
         title={title}
         availableToWithdraw={availableToWithdraw}
         programCurrency={assetCurrency}
+        accountCurrency={accountCurrency}
       />
       <div className="dialog__bottom">
         {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
