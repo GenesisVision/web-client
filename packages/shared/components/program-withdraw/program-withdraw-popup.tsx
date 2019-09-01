@@ -34,25 +34,22 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
     setErrorMessage,
     cleanErrorMessage
   } = useErrorMessage();
-  const [amount, setAmount] = useState<number>(0);
-  const [withdrawAll, setWithdrawAll] = useState<boolean>(false);
+  const [formValues, setFormValues] = useState<
+    IProgramWithdrawAmountFormValues
+  >({ amount: 0, withdrawAll: false });
 
   const handleSubmit = useCallback(
     (setSubmitting: SetSubmittingType) =>
-      withdraw({
-        amount,
-        withdrawAll
-      })
+      withdraw(formValues)
         .catch(setErrorMessage)
         .finally(() => setSubmitting(false)),
-    [amount, withdrawAll]
+    [formValues]
   );
 
   const handleEnterAmountSubmit = useCallback(
-    ({ amount, withdrawAll }: IProgramWithdrawAmountFormValues) => {
+    (values: IProgramWithdrawAmountFormValues) => {
       setTab(null, PROGRAM_WITHDRAW_FORM.CONFIRM);
-      setAmount(amount);
-      setWithdrawAll(withdrawAll);
+      setFormValues(values);
     },
     []
   );
@@ -62,7 +59,8 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
     cleanErrorMessage();
   }, []);
 
-  const isAvailableProgramConfirmForm = amount || withdrawAll;
+  const isAvailableProgramConfirmForm =
+    formValues.amount || formValues.withdrawAll;
   return (
     <>
       <ProgramWithdrawTop
@@ -73,8 +71,7 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
       <div className="dialog__bottom">
         {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
           <ProgramWithdrawAmountForm
-            amount={amount}
-            withdrawAll={withdrawAll}
+            formValues={formValues}
             rate={rate}
             programCurrency={assetCurrency}
             accountCurrency={accountCurrency}
@@ -86,8 +83,7 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
           isAvailableProgramConfirmForm && (
             <ProgramWithdrawConfirmForm
               errorMessage={errorMessage}
-              amount={amount}
-              withdrawAll={withdrawAll}
+              formValues={formValues}
               onSubmit={handleSubmit}
               onBackClick={handleGoToEnterAmountStep}
               programCurrency={assetCurrency}

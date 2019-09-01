@@ -8,10 +8,11 @@ import GVButton from "shared/components/gv-button";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 
+import { IProgramWithdrawAmountFormValues } from "./program-withdraw-amount-form";
+
 const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
   programCurrency,
-  amount,
-  withdrawAll,
+  formValues: { amount, withdrawAll },
   periodEnds,
   isSubmitting,
   errorMessage,
@@ -78,13 +79,12 @@ const ProgramWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
 export default ProgramWithdrawConfirmForm;
 
 interface OwnProps {
+  formValues: IProgramWithdrawAmountFormValues;
   errorMessage?: string;
   onSubmit(setSubmitting: SetSubmittingType): void;
   onBackClick(): void;
-  amount?: number;
   periodEnds: Date;
   programCurrency: string;
-  withdrawAll?: boolean;
 }
 
 interface Props extends OwnProps {}

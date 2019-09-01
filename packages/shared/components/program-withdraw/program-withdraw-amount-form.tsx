@@ -98,7 +98,7 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
   withFormik<Props, IProgramWithdrawAmountFormValues>({
     displayName: "withdraw-form",
     isInitialValid: true,
-    mapPropsToValues: ({ amount, withdrawAll }) => ({
+    mapPropsToValues: ({ formValues: { amount, withdrawAll } }) => ({
       [FIELDS.amount]: amount,
       [FIELDS.withdrawAll]: withdrawAll
     }),
@@ -130,8 +130,7 @@ enum FIELDS {
 }
 
 interface OwnProps {
-  amount: number;
-  withdrawAll: boolean;
+  formValues: IProgramWithdrawAmountFormValues;
   onSubmit(values: IProgramWithdrawAmountFormValues): void;
   availableToWithdraw: number;
   programCurrency: string;
