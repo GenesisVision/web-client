@@ -29,10 +29,8 @@ import { dispatchFundDescription } from "./services/fund-details.service";
 const _FundDetailsPage: React.FC<Props> = ({
   isKycConfirmed,
   description,
-  eventTypeFilterValues,
   currency,
   service: { dispatchFundDescription, redirectToLogin },
-  isAuthenticated,
   descriptionSection
 }) => {
   useEffect(
@@ -47,11 +45,9 @@ const _FundDetailsPage: React.FC<Props> = ({
       condition={!!description}
       loader={<DetailsContainerLoader assets />}
       redirectToLogin={redirectToLogin}
-      eventTypeFilterValues={eventTypeFilterValues}
       descriptionSection={descriptionSection}
       description={description!}
       currency={currency}
-      isAuthenticated={isAuthenticated}
     />
   );
 };
@@ -59,8 +55,7 @@ const _FundDetailsPage: React.FC<Props> = ({
 const mapStateToProps = (state: RootState): StateProps => ({
   isKycConfirmed: kycConfirmedSelector(state),
   description: fundDescriptionSelector(state),
-  currency: currencySelector(state),
-  isAuthenticated: isAuthenticatedSelector(state)
+  currency: currencySelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -75,13 +70,11 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 interface OwnProps {
   descriptionSection: IDescriptionSection;
-  eventTypeFilterValues: SelectFilterValue[];
 }
 
 interface StateProps {
   description?: FundDescriptionDataType;
   isKycConfirmed: boolean;
-  isAuthenticated: boolean;
   currency: CurrencyEnum;
 }
 

@@ -11,45 +11,50 @@ import {
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
+import { haveActiveInvestment } from "shared/components/details/details-description-section/details-investment/investment-container";
 import Page from "shared/components/page/page";
-import { ASSET } from "shared/constants/constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { CurrencyEnum } from "shared/utils/types";
-
-import { haveActiveInvestment } from "../../details/details-description-section/details-investment/investment-container";
 import {
   EVENT_LOCATION,
   getEvents
-} from "../../programs/program-details/services/program-details.service";
+} from "shared/components/programs/program-details/services/program-details.service";
+import { ASSET } from "shared/constants/constants";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { fundEventsSelector } from "shared/reducers/platform-reducer";
+import { CurrencyEnum } from "shared/utils/types";
+
 import FundDetailsDescriptionSection from "./fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "./fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
-import { IDescriptionSection, IFundHistorySection } from "./fund-details.types";
+import { IDescriptionSection } from "./fund-details.types";
 import { fundEventsTableSelector } from "./reducers/fund-history.reducer";
 import { dispatchFundDescription } from "./services/fund-details.service";
-import { SelectFilterValue } from "../../table/components/filtering/filter.type";
 
 const _FundDetailsContainer: React.FC<Props> = ({
   service,
   isKycConfirmed,
   currency,
-  isAuthenticated,
   redirectToLogin,
   descriptionSection,
-  eventTypeFilterValues,
   description
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const events = useSelector(fundEventsTableSelector);
+  const eventTypeFilterValues = useSelector(fundEventsSelector);
   const dispatch = useDispatch();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
-  useEffect(() => {
-    dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
-  }, []);
   useEffect(
     () => {
-      setHaveEvents(events.itemsData.data.total > 0);
+      isAuthenticated &&
+        dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
     },
-    [events]
+    [isAuthenticated]
+  );
+  useEffect(
+    () => {
+      isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);
+    },
+    [isAuthenticated, events]
   );
   const haveInvestment = haveActiveInvestment(
     description.personalFundDetails as InvestmentDetails
@@ -118,10 +123,8 @@ interface DispatchProps {
 interface OwnProps {
   isKycConfirmed: boolean;
   redirectToLogin: () => void;
-  eventTypeFilterValues: SelectFilterValue[];
   descriptionSection: IDescriptionSection;
   description: FundDetailsFull;
-  isAuthenticated: boolean;
   currency: CurrencyEnum;
 }
 
