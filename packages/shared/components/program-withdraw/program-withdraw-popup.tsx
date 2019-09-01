@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import withLoader from "shared/decorators/with-loader";
 import useErrorMessage from "shared/hooks/error-message.hook";
 import useTab from "shared/hooks/tab.hook";
-import { SetSubmittingType } from "shared/utils/types";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import ProgramWithdrawAmountForm, {
   IProgramWithdrawAmountFormValues
@@ -104,8 +104,8 @@ export default ProgramWithdrawPopup;
 
 export interface IProgramWithdrawPopupProps {
   programWithdrawInfo: ProgramWithdrawInfo;
-  assetCurrency: string;
-  accountCurrency: string;
+  assetCurrency: CurrencyEnum;
+  accountCurrency: CurrencyEnum;
   fetchInfo: () => Promise<ProgramWithdrawInfo>;
   withdraw: (values: ProgramWithdrawType) => Promise<void>;
 }
