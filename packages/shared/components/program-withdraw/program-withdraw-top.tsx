@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 const _ProgramWithdrawTop: React.FC<OwnProps> = ({
   rate,
@@ -44,7 +45,7 @@ export default ProgramWithdrawTop;
 interface OwnProps {
   rate: number;
   availableToWithdraw: number;
-  programCurrency: string;
-  accountCurrency: string;
+  programCurrency: CurrencyEnum;
+  accountCurrency: CurrencyEnum;
   title: string;
 }
