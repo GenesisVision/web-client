@@ -6,8 +6,7 @@ import SignalProviderControls from "./signal-provider-controls";
 
 const ProgramControls: React.FC<IProgramControlsProps> = ({
   programDescription,
-  isAuthenticated,
-  redirectToLogin
+  isAuthenticated
 }) => {
   const isAvailableFollowingTrades = programDescription.isSignalProgram;
   return (
@@ -16,7 +15,6 @@ const ProgramControls: React.FC<IProgramControlsProps> = ({
         <InvestmentProgramControls
           programDescription={programDescription}
           isAuthenticated={isAuthenticated}
-          redirectToLogin={redirectToLogin}
         />
       </div>
       {isAvailableFollowingTrades ? (
@@ -24,7 +22,6 @@ const ProgramControls: React.FC<IProgramControlsProps> = ({
           <SignalProviderControls
             programDescription={programDescription}
             isAuthenticated={isAuthenticated}
-            redirectToLogin={redirectToLogin}
           />
         </div>
       ) : null}

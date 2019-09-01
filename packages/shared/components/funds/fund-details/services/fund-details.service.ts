@@ -7,12 +7,12 @@ import {
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { RootState } from "shared/reducers/root-reducer";
 import {
-  FUND_DETAILS_ROUTE,
-  FUNDS_SLUG_URL_PARAM_NAME
+  FUNDS_SLUG_URL_PARAM_NAME,
+  FUND_DETAILS_ROUTE
 } from "shared/routes/funds.routes";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import { CurrencyEnum, MiddlewareDispatch } from "shared/utils/types";
+import { CurrencyEnum, DispatchDescriptionType } from "shared/utils/types";
 
 import {
   fetchFundBalanceChartAction,
@@ -23,9 +23,9 @@ import {
 } from "../actions/fund-details.actions";
 import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-history.reducer";
 
-export const dispatchFundDescription = () => (
-  dispatch: MiddlewareDispatch,
-  getState: () => RootState
+export const dispatchFundDescription: DispatchDescriptionType = () => (
+  dispatch,
+  getState
 ) => {
   const authorization = authService.getAuthArg();
   const { router } = getState();

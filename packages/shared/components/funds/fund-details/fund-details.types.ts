@@ -23,7 +23,6 @@ export interface IFundWithdrawalContainerProps extends IDialogProps {
 
 export interface IFundControlsProps {
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   fundDescription: FundDetailsFull;
 }
 

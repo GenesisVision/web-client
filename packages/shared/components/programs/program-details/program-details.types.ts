@@ -5,7 +5,6 @@ import { CurrencyEnum } from "shared/utils/types";
 
 export interface IProgramControlsProps {
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   programDescription: ProgramDetailsFull;
   levelsParameters: LevelsParamsInfo;
 }

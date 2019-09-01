@@ -36,7 +36,6 @@ import { programEventsTableSelector } from "./reducers/program-history.reducer";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   service: { dispatchProgramDescription },
-  redirectToLogin,
   descriptionSection,
   description
 }) => {
@@ -76,7 +75,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           <ProgramDetailsDescriptionSection
             programDescription={description}
             isAuthenticated={isAuthenticated}
-            redirectToLogin={redirectToLogin}
             ProgramControls={descriptionSection.ProgramControls}
           />
         </div>
@@ -151,7 +149,6 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  redirectToLogin: () => void;
   descriptionSection: IDescriptionSection;
   description: ProgramDetailsFull;
 }

@@ -20,7 +20,6 @@ const _ProgramDetailsDescriptionSection: React.FC<
   t,
   programDescription,
   isAuthenticated,
-  redirectToLogin,
   ProgramControls,
   ChangePasswordTradingAccount
 }) => {
@@ -51,7 +50,6 @@ const _ProgramDetailsDescriptionSection: React.FC<
         canInvest={personalDetails && personalDetails.canInvest}
         canWithdraw={personalDetails && personalDetails.canWithdraw}
         isAuthenticated={isAuthenticated}
-        redirectToLogin={redirectToLogin}
       />
     </div>
   );
@@ -68,7 +66,6 @@ interface StateProps {
 interface OwnProps {
   programDescription: ProgramDetailsFull;
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   ProgramControls: ComponentType<any>;
   ChangePasswordTradingAccount?: ComponentType<any>;
 }

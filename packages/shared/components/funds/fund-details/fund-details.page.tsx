@@ -9,7 +9,6 @@ import {
   bindActionCreators,
   compose
 } from "redux";
-import { redirectToLogin } from "shared/components/auth/signin/signin.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
 
 import FundDetailsContainer from "./fund-details.container";
@@ -18,7 +17,7 @@ import { fundDescriptionSelector } from "./reducers/description.reducer";
 import { dispatchFundDescription } from "./services/fund-details.service";
 
 const _FundDetailsPage: React.FC<Props> = ({
-  service: { dispatchFundDescription, redirectToLogin },
+  service: { dispatchFundDescription },
   descriptionSection
 }) => {
   const description = useSelector(fundDescriptionSelector);
@@ -32,7 +31,6 @@ const _FundDetailsPage: React.FC<Props> = ({
     <FundDetailsContainer
       condition={!!description}
       loader={<DetailsContainerLoader assets />}
-      redirectToLogin={redirectToLogin}
       descriptionSection={descriptionSection}
       description={description!}
     />
@@ -42,8 +40,7 @@ const _FundDetailsPage: React.FC<Props> = ({
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
-      dispatchFundDescription,
-      redirectToLogin
+      dispatchFundDescription
     },
     dispatch
   )
@@ -55,7 +52,6 @@ interface OwnProps {
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   dispatchFundDescription: typeof dispatchFundDescription;
-  redirectToLogin: typeof redirectToLogin;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;

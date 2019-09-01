@@ -8,7 +8,6 @@ import {
   bindActionCreators,
   compose
 } from "redux";
-import { redirectToLogin } from "shared/components/auth/signin/signin.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
 import {
   dispatchPlatformLevelsParameters,
@@ -20,11 +19,7 @@ import { IDescriptionSection } from "./program-details.types";
 import { programDescriptionSelector } from "./reducers/description.reducer";
 
 const _ProgramDetailsPage: React.FC<Props> = ({
-  service: {
-    dispatchProgramDescription,
-    dispatchPlatformLevelsParameters,
-    redirectToLogin
-  },
+  service: { dispatchProgramDescription, dispatchPlatformLevelsParameters },
   descriptionSection
 }) => {
   const description = useSelector(programDescriptionSelector);
@@ -41,7 +36,6 @@ const _ProgramDetailsPage: React.FC<Props> = ({
     <ProgramDetailsContainer
       condition={!!description}
       loader={<DetailsContainerLoader />}
-      redirectToLogin={redirectToLogin}
       descriptionSection={descriptionSection}
       description={description!}
     />
@@ -52,7 +46,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       dispatchProgramDescription,
-      redirectToLogin,
       dispatchPlatformLevelsParameters
     },
     dispatch
@@ -64,7 +57,6 @@ interface OwnProps {
 }
 interface ServiceThunks extends ActionCreatorsMapObject {
   dispatchProgramDescription: typeof dispatchProgramDescription;
-  redirectToLogin: typeof redirectToLogin;
   dispatchPlatformLevelsParameters: typeof dispatchPlatformLevelsParameters;
 }
 interface DispatchProps {

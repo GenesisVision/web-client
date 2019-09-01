@@ -31,8 +31,7 @@ import { fundEventsTableSelector } from "./reducers/fund-history.reducer";
 import { dispatchFundDescription } from "./services/fund-details.service";
 
 const _FundDetailsContainer: React.FC<Props> = ({
-  service,
-  redirectToLogin,
+  service: { dispatchFundDescription },
   descriptionSection,
   description
 }) => {
@@ -66,7 +65,6 @@ const _FundDetailsContainer: React.FC<Props> = ({
           <FundDetailsDescriptionSection
             fundDescription={description}
             isAuthenticated={isAuthenticated}
-            redirectToLogin={redirectToLogin}
             FundControls={descriptionSection.FundControls}
           />
         </div>
@@ -116,8 +114,8 @@ interface ServiceThunks extends ActionCreatorsMapObject {
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
+
 interface OwnProps {
-  redirectToLogin: () => void;
   descriptionSection: IDescriptionSection;
   description: FundDetailsFull;
 }

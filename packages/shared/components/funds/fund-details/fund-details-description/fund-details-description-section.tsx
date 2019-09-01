@@ -9,14 +9,12 @@ import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import { CurrencyEnum } from "shared/utils/types";
 
 import { IFundControlsProps } from "../fund-details.types";
 
 const _FundFundDetailsDescription: React.FC<Props> = ({
   t,
   isAuthenticated,
-  redirectToLogin,
   fundDescription,
   FundControls
 }) => (
@@ -54,7 +52,6 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
     <FundControls
       fundDescription={fundDescription}
       isAuthenticated={isAuthenticated}
-      redirectToLogin={redirectToLogin}
     />
   </div>
 );
@@ -62,7 +59,6 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
 interface OwnProps {
   fundDescription: FundDetailsFull;
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   FundControls: React.ComponentType<IFundControlsProps>;
 }
 

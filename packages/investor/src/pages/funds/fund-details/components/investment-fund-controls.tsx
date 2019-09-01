@@ -105,7 +105,6 @@ interface DispatchProps {
 
 interface OwnProps {
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   fundDescription: FundDetailsFull;
 }
 
