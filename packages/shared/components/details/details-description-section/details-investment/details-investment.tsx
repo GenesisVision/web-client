@@ -29,7 +29,6 @@ const _DetailsInvestment: React.FC<Props> = ({
   updateDescription,
   id,
   assetCurrency,
-  accountCurrency,
   asset,
   notice,
   personalDetails,
@@ -62,7 +61,6 @@ const _DetailsInvestment: React.FC<Props> = ({
           asset={asset}
           notice={notice}
           id={id}
-          accountCurrency={accountCurrency}
           assetCurrency={assetCurrency}
           personalDetails={personalDetails}
           WithdrawContainer={WithdrawContainer}
@@ -97,7 +95,6 @@ interface OwnProps {
   asset: ASSET;
   notice?: string;
   id: string;
-  accountCurrency: CurrencyEnum;
   assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
   WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;

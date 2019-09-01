@@ -15,7 +15,6 @@ import { IFundControlsProps } from "../fund-details.types";
 
 const _FundFundDetailsDescription: React.FC<Props> = ({
   t,
-  accountCurrency,
   isAuthenticated,
   redirectToLogin,
   fundDescription,
@@ -65,7 +64,6 @@ interface OwnProps {
   isAuthenticated: boolean;
   redirectToLogin(): void;
   FundControls: React.ComponentType<IFundControlsProps>;
-  accountCurrency: CurrencyEnum;
 }
 
 interface Props extends WithTranslation, OwnProps {}

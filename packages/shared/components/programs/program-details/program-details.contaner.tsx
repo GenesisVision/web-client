@@ -4,12 +4,12 @@ import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
+import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
@@ -21,25 +21,21 @@ import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
-  dispatchProgramDescription,
   EVENT_LOCATION,
+  dispatchProgramDescription,
   getEvents
 } from "shared/components/programs/program-details/services/program-details.service";
-import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { ASSET, STATUS } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { CurrencyEnum } from "shared/utils/types";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { programEventsSelector } from "shared/reducers/platform-reducer";
 
 import { IDescriptionSection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
 import { programEventsTableSelector } from "./reducers/program-history.reducer";
-import { programEventsSelector } from "shared/reducers/platform-reducer";
-import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   service: { dispatchProgramDescription },
-  isKycConfirmed,
-  currency,
   redirectToLogin,
   descriptionSection,
   description
@@ -78,7 +74,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <div className="details">
         <div className="details__section">
           <ProgramDetailsDescriptionSection
-            accountCurrency={currency}
             programDescription={description}
             isAuthenticated={isAuthenticated}
             redirectToLogin={redirectToLogin}
@@ -99,7 +94,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               asset={ASSET.PROGRAM}
               id={description.id}
               assetCurrency={description.currency}
-              accountCurrency={currency}
               personalDetails={
                 description.personalProgramDetails as InvestmentDetails
               } // TODO fix type InvestmentDetails
@@ -131,7 +125,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
             isSignalProgram={description.isSignalProgram}
             programId={description.id}
             programCurrency={description.currency}
-            currency={currency}
             isInvested={isInvested}
             title={description.title}
           />
@@ -161,8 +154,6 @@ interface OwnProps {
   redirectToLogin: () => void;
   descriptionSection: IDescriptionSection;
   description: ProgramDetailsFull;
-  isKycConfirmed: boolean;
-  currency: CurrencyEnum;
 }
 
 interface Props extends OwnProps, DispatchProps {}

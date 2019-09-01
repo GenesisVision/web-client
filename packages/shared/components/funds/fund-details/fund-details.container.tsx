@@ -32,8 +32,6 @@ import { dispatchFundDescription } from "./services/fund-details.service";
 
 const _FundDetailsContainer: React.FC<Props> = ({
   service,
-  isKycConfirmed,
-  currency,
   redirectToLogin,
   descriptionSection,
   description
@@ -68,7 +66,6 @@ const _FundDetailsContainer: React.FC<Props> = ({
           <FundDetailsDescriptionSection
             fundDescription={description}
             isAuthenticated={isAuthenticated}
-            accountCurrency={currency}
             redirectToLogin={redirectToLogin}
             FundControls={descriptionSection.FundControls}
           />
@@ -85,7 +82,6 @@ const _FundDetailsContainer: React.FC<Props> = ({
                 asset={ASSET.FUND}
                 id={description.id}
                 assetCurrency={"GVT" as CurrencyEnum}
-                accountCurrency={currency}
                 personalDetails={
                   description.personalFundDetails as InvestmentDetails
                 }
@@ -121,11 +117,9 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 interface OwnProps {
-  isKycConfirmed: boolean;
   redirectToLogin: () => void;
   descriptionSection: IDescriptionSection;
   description: FundDetailsFull;
-  currency: CurrencyEnum;
 }
 
 interface Props extends OwnProps, DispatchProps {}

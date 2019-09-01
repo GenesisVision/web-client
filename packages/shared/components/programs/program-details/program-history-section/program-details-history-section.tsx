@@ -9,6 +9,7 @@ import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
 import useRole from "shared/hooks/use-role.hook";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -32,11 +33,11 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   showSwaps,
   showTickets,
   programCurrency,
-  currency,
   isSignalProgram,
   isOwnProgram,
   title
 }) => {
+  const currency = useSelector(currencySelector);
   const [t] = useTranslation();
   const role = useRole();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -145,7 +146,6 @@ interface OwnProps {
   showSwaps: boolean;
   showTickets: boolean;
   programId: string;
-  currency: CurrencyEnum;
   programCurrency: CurrencyEnum;
   isInvested: boolean;
   isOwnProgram: boolean;
