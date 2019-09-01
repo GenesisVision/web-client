@@ -34,9 +34,7 @@ const _ProgramDetailsPage: React.FC<Props> = ({
     redirectToLogin
   },
   descriptionSection,
-  eventTypeFilterValues,
   currency,
-  isAuthenticated,
   isKycConfirmed
 }) => {
   useEffect(() => {
@@ -53,11 +51,9 @@ const _ProgramDetailsPage: React.FC<Props> = ({
       condition={!!description}
       loader={<DetailsContainerLoader />}
       redirectToLogin={redirectToLogin}
-      eventTypeFilterValues={eventTypeFilterValues}
       descriptionSection={descriptionSection}
       description={description!}
       currency={currency}
-      isAuthenticated={isAuthenticated}
       isKycConfirmed={isKycConfirmed}
     />
   );
@@ -66,7 +62,6 @@ const _ProgramDetailsPage: React.FC<Props> = ({
 const mapStateToProps = (state: RootState): StateProps => ({
   description: programDescriptionSelector(state),
   currency: currencySelector(state),
-  isAuthenticated: isAuthenticatedSelector(state),
   isKycConfirmed: kycConfirmedSelector(state)
 });
 
@@ -82,13 +77,11 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 });
 
 interface OwnProps {
-  eventTypeFilterValues: SelectFilterValue[];
   descriptionSection: IDescriptionSection;
 }
 
 interface StateProps {
   description?: ProgramDetailsFull;
-  isAuthenticated: boolean;
   isKycConfirmed: boolean;
   currency: CurrencyEnum;
 }

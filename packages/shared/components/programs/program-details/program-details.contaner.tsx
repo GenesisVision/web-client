@@ -4,12 +4,12 @@ import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
+import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
@@ -21,8 +21,8 @@ import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
-  EVENT_LOCATION,
   dispatchProgramDescription,
+  EVENT_LOCATION,
   getEvents
 } from "shared/components/programs/program-details/services/program-details.service";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
@@ -33,29 +33,35 @@ import { CurrencyEnum } from "shared/utils/types";
 import { IDescriptionSection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
 import { programEventsTableSelector } from "./reducers/program-history.reducer";
+import { programEventsSelector } from "shared/reducers/platform-reducer";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   service: { dispatchProgramDescription },
   isKycConfirmed,
   currency,
-  isAuthenticated,
   redirectToLogin,
   descriptionSection,
-  eventTypeFilterValues,
   description
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const events = useSelector(programEventsTableSelector);
+  const eventTypeFilterValues = useSelector(programEventsSelector);
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
-  useEffect(() => {
-    dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
-  }, []);
   useEffect(
     () => {
-      setHaveEvents(events.itemsData.data.total > 0);
+      isAuthenticated &&
+        dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
     },
-    [events]
+    [isAuthenticated]
+  );
+  useEffect(
+    () => {
+      isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);
+    },
+    [isAuthenticated, events]
   );
   const isInvested =
     description.personalProgramDetails &&
@@ -153,10 +159,8 @@ interface DispatchProps {
 
 interface OwnProps {
   redirectToLogin: () => void;
-  eventTypeFilterValues: SelectFilterValue[];
   descriptionSection: IDescriptionSection;
   description: ProgramDetailsFull;
-  isAuthenticated: boolean;
   isKycConfirmed: boolean;
   currency: CurrencyEnum;
 }
