@@ -44,6 +44,7 @@ export const programEventsTableSelector = tableSelectorCreator<
 export const programEventsReducer = tableReducerFactory<
   InvestmentEventViewModels
 >({
+  clearable: true,
   type: EVENTS_ACTION_TYPE,
   paging: DEFAULT_PAGING,
   filtering: ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
