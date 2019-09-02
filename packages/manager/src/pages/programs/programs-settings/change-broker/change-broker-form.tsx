@@ -1,5 +1,5 @@
 import { FormikProps, withFormik } from "formik";
-import { Broker, BrokerAccountType, BrokersProgramInfo } from "gv-api-web";
+import { Broker, BrokerAccountType } from "gv-api-web";
 import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React, { useCallback, useState } from "react";
@@ -23,14 +23,16 @@ const _ChangeBrokerForm: React.FC<Props> = ({
   currentLeverage,
   onSubmit,
   submitForm,
-  brokersInfo: { brokers, currentAccountTypeId },
+  currentAccountTypeId,
   handleSubmit,
   values,
   dirty,
   isValid,
   isSubmitting,
   setFieldValue,
-  t
+  t,
+  id,
+  brokers
 }) => {
   const [
     isChangeBrokerOpen,
@@ -179,8 +181,8 @@ export interface ChangeBrokerFormOwnProps {
     setSubmitting: SetSubmittingType
   ) => void;
   id: string;
+  brokers: Broker[];
   currentLeverage: number;
-  brokersInfo: BrokersProgramInfo;
 }
 
 enum FIELDS {
@@ -200,10 +202,7 @@ const ChangeBrokerForm = compose<React.ComponentType<ChangeBrokerFormOwnProps>>(
   withFormik<ChangeBrokerFormOwnProps, ChangeBrokerFormValues>({
     enableReinitialize: true,
     displayName: "edit-form",
-    mapPropsToValues: ({
-      brokersInfo: { brokers, currentAccountTypeId },
-      currentLeverage
-    }) => ({
+    mapPropsToValues: ({ brokers, currentAccountTypeId, currentLeverage }) => ({
       [FIELDS.brokerFrom]: brokers.find(
         broker =>
           !!broker.accountTypes.find(

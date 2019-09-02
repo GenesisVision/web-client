@@ -50,5 +50,6 @@ export const changeBrokerMethod = (
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 
-export const redirectToProgram = (id: string) =>
+export const redirectToProgram = (id: string) => {
   Router.replace(`${PROGRAMS_ROUTE}/${id}`);
+};

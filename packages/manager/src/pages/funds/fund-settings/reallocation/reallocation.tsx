@@ -1,5 +1,4 @@
 import {
-  CancelablePromise,
   FundAssetPart,
   FundAssetPartWithIcon,
   PlatformAsset
@@ -74,10 +73,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
 
 interface DispatchProps {
   service: {
-    updateAssets: (
-      id: string,
-      assets: FundAssetPart[]
-    ) => CancelablePromise<void>;
+    updateAssets: (id: string, assets: FundAssetPart[]) => Promise<void>;
   };
 }
 

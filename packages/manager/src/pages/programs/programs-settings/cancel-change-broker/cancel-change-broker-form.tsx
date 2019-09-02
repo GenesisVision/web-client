@@ -1,4 +1,5 @@
 import { BrokersProgramInfo, MigrationRequest } from "gv-api-web";
+import { Broker, BrokerAccountType } from "gv-api-web/src";
 import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React from "react";
@@ -15,16 +16,11 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
   isSignalProgram,
   onSubmit,
   t,
-  brokersInfo: { currentAccountTypeId, brokers },
+  brokerFrom,
+  currentAccountTypeId,
   leverage,
   migration: { newBroker: brokerTo, newLeverage }
 }) => {
-  const brokerFrom = brokers.find(
-    broker =>
-      !!broker.accountTypes.find(
-        accountType => accountType.id === currentAccountTypeId
-      )
-  )!;
   const [
     isCancelChangeBrokerOpen,
     setCancelChangeBrokerOpen,
@@ -48,7 +44,8 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
           >
             {
               brokerFrom.accountTypes.find(
-                account => account.id === currentAccountTypeId
+                (account: BrokerAccountType) =>
+                  account.id === currentAccountTypeId
               )!.name
             }
           </StatisticItem>
@@ -119,6 +116,8 @@ interface Props extends CancelChangeBrokerFormOwnProps, WithTranslation {}
 export interface CancelChangeBrokerFormOwnProps {
   isSignalProgram: boolean;
   onSubmit: () => void;
+  brokerFrom: Broker;
+  currentAccountTypeId: string;
   leverage: number;
   migration: MigrationRequest;
 }

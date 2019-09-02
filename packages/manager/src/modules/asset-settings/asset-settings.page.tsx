@@ -22,7 +22,8 @@ import { editAsset } from "./services/asset-settings.service";
 const _AssetsEditPage: React.FC<Props> = ({
   asset,
   settingsBlocks,
-  service: { dispatchDescription, editAsset, redirectToAsset },
+  redirectToAsset,
+  service: { dispatchDescription, editAsset },
   t,
   description
 }) => {
@@ -47,7 +48,8 @@ const _AssetsEditPage: React.FC<Props> = ({
     },
     [asset, description, dispatchDescription, editAsset]
   );
-  const applyCloseAsset = useCallback(() => redirectToAsset(), [
+  const applyCloseAsset = useCallback(() => redirectToAsset(description!.id), [
+    description,
     redirectToAsset
   ]);
   const title = t("manager.asset-settings.title", {
@@ -69,20 +71,19 @@ const _AssetsEditPage: React.FC<Props> = ({
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
-  { dispatchDescription, redirectToAsset }: Props
+  { dispatchDescription }: Props
 ): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       dispatchDescription,
-      editAsset,
-      redirectToAsset
+      editAsset
     },
     dispatch
   )
 });
 
 interface OwnProps {
-  redirectToAsset: () => void;
+  redirectToAsset: (id: string) => void;
   asset: ASSET;
   description?: AssetDescriptionType;
   dispatchDescription: DispatchDescriptionType;
@@ -95,7 +96,6 @@ interface OwnProps {
 interface ServiceThunks extends ActionCreatorsMapObject {
   dispatchDescription: DispatchDescriptionType;
   editAsset: typeof editAsset;
-  redirectToAsset: () => void;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;

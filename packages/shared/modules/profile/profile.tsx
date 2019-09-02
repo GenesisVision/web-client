@@ -75,7 +75,7 @@ const _Profile: React.FC<Props> = ({
 
 interface Props extends WithTranslation, IProfileOwnProps, WithRoleProps {}
 
-export interface OwnProps {
+export interface IProfileOwnProps {
   info: ProfileFullViewModel;
   notifySuccess: (val: string) => void;
   onSuccessEdit: () => void;
