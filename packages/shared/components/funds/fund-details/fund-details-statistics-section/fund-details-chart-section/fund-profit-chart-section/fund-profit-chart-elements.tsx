@@ -4,27 +4,28 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
-import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import ChartCurrencySelector, {
-  TChartCurrency
-} from "shared/modules/chart-currency-selector/chart-currency-selector";
+import ChartCurrencySelector from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { FundProfitChartDataType } from "../../../reducers/profit-chart.reducer";
-import { useChartData, useChartPeriod } from "../fund-details-chart.helpers";
+import {
+  useChartData,
+  useChartPeriod,
+  useFundChartStateValues
+} from "../fund-details-chart.helpers";
 import FundProfitChart from "./fund-profit-chart";
 
-const _FundProfitChartElements: React.FC<Props> = ({
-  profitChart,
-  selectedCurrencies,
-  addCurrency,
-  removeCurrency,
-  changeCurrency,
-  selectCurrencies
-}) => {
+const _FundProfitChartElements: React.FC<Props> = ({ profitChart }) => {
+  const {
+    addCurrency,
+    removeCurrency,
+    changeCurrency,
+    selectedCurrencies,
+    selectCurrencies
+  } = useFundChartStateValues();
   const [t] = useTranslation();
   const { period, setPeriod } = useChartPeriod();
   const chartData = useChartData<FundProfitChartDataType>(
@@ -71,11 +72,6 @@ const _FundProfitChartElements: React.FC<Props> = ({
 
 interface OwnProps {
   profitChart: FundProfitChartDataType;
-  selectedCurrencies: TChartCurrency[];
-  addCurrency: () => void;
-  removeCurrency: (name: string) => void;
-  changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
-  selectCurrencies: TChartCurrency[];
 }
 
 interface Props extends OwnProps {}
