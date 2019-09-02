@@ -9,8 +9,7 @@ import InvestmentProgramControls from "./investment-program-controls";
 const _ProgramControls: React.FC<Props> = ({
   programDescription,
   levelsParameters,
-  isAuthenticated,
-  redirectToLogin
+  isAuthenticated
 }) => {
   const personalProgramDetails = programDescription.personalProgramDetails;
   const canCloseProgram =
@@ -26,7 +25,6 @@ const _ProgramControls: React.FC<Props> = ({
           canCloseProgram={canCloseProgram}
           isOwnProgram={isOwnProgram}
           isAuthenticated={isAuthenticated}
-          redirectToLogin={redirectToLogin}
           levelsParameters={levelsParameters}
         />
       </div>
