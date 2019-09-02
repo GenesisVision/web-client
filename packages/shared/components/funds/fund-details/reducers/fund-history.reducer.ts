@@ -1,4 +1,8 @@
-import { FundAssetsListInfo, InvestmentEventViewModels, ReallocationsViewModel } from "gv-api-web";
+import {
+  FundAssetsListInfo,
+  InvestmentEventViewModels,
+  ReallocationsViewModel
+} from "gv-api-web";
 import { combineReducers } from "redux";
 import {
   ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
@@ -30,16 +34,17 @@ export const fundEventsTableSelector = tableSelectorCreator<
   RootState,
   InvestmentEventViewModels,
   InvestmentEventViewModels
-  >(fundEventsSelector, "events");
+>(fundEventsSelector, "events");
 
-export const fundEventsReducer = tableReducerFactory<
-  InvestmentEventViewModels
-  >({
-  type: EVENTS_ACTION_TYPE,
-  paging: DEFAULT_PAGING,
-  filtering: ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  defaultFilters: ASSET_PORTFOLIO_EVENTS_FILTERS
-});
+export const fundEventsReducer = tableReducerFactory<InvestmentEventViewModels>(
+  {
+    clearable: true,
+    type: EVENTS_ACTION_TYPE,
+    paging: DEFAULT_PAGING,
+    filtering: ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+    defaultFilters: ASSET_PORTFOLIO_EVENTS_FILTERS
+  }
+);
 
 const fundHistoryReducer = clearableReducer(
   combineReducers<FundHistoryState>({
