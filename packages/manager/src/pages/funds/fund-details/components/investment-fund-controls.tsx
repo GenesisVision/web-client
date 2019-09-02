@@ -3,12 +3,16 @@ import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
 import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
 import GVButton from "shared/components/gv-button";
-import InvestmentUnauthPopup
-  from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
+import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 
@@ -16,7 +20,6 @@ const _InvestmentFundControls: React.FC<Props> = ({
   t,
   service: { dispatchFundDescription },
   isAuthenticated,
-  redirectToLogin,
   fundDescription
 }) => {
   const [
@@ -38,8 +41,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
       : t("fund-details-page.description.unauth-popup");
 
   const isDisabledInvestButton = isAuthenticated
-    ? !personalFundDetails ||
-      !personalFundDetails.canInvest
+    ? !personalFundDetails || !personalFundDetails.canInvest
     : false;
 
   return (
@@ -101,7 +103,6 @@ interface DispatchProps {
 
 interface OwnProps {
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   fundDescription: FundDetailsFull;
 }
 
