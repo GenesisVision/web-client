@@ -1,10 +1,9 @@
 import * as React from "react";
-import { WithTranslation } from "react-i18next";
 import { IFundControlsProps } from "shared/components/funds/fund-details/fund-details.types";
 
 import InvestmentFundControls from "./investment-fund-controls";
 
-const _FundControls: React.FC<IFundControlsProps & WithTranslation> = ({
+const _FundControls: React.FC<IFundControlsProps> = ({
   fundDescription,
   isAuthenticated
 }) => (
