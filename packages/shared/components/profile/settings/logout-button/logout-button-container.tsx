@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import GVButton from "shared/components/gv-button";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -15,23 +15,19 @@ import { logoutFromDevices } from "../services/profile-settings.service";
 
 const _LogoutButtonContainer: React.FC<Props> = ({ t, service }) => {
   const [isPending, setPending, setNotPending] = useIsOpen();
-  const handleSubmit = useCallback(() => {
-    setPending();
-    service
-      .logoutFromDevices()
-      .then(setNotPending)
-      .catch(setNotPending);
-  }, []);
+  const handleSubmit = useCallback(
+    () => {
+      setPending();
+      service.logoutFromDevices().finally(setNotPending);
+    },
+    [service, setNotPending, setPending]
+  );
   return (
-    <GVButton
-      variant="text"
-      onClick={handleSubmit}
-      color="secondary"
-      disabled={isPending}
-      className="profile-settings__logout-devices"
-    >
-      {t("profile-page.settings.logout-from-another-devices")}
-    </GVButton>
+    <div className="logout-container">
+      <GVButton onClick={handleSubmit} disabled={isPending}>
+        {t("profile-page.settings.logout-from-another-devices")}
+      </GVButton>
+    </div>
   );
 };
 

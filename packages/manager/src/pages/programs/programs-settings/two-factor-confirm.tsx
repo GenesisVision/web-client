@@ -10,10 +10,9 @@ import {
 } from "redux";
 import GVButton from "shared/components/gv-button";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useIsOpen from "shared/hooks/is-open.hook";
-
-import SettingsBlock from "./settings-block";
 
 const _TwoFactorConfirm: React.FC<Props> = ({
   id,

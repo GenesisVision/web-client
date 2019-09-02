@@ -27,7 +27,16 @@ const GVTabs: React.SFC<GVTabsProps> = ({
       onChange
     });
   });
-  return <div className={classnames(className, "gv-tabs")}>{tabs}</div>;
+  const visibleTabs = children.filter(child => child.props.visible).length;
+  return (
+    <div
+      className={classnames(className, "gv-tabs", {
+        "gv-tabs--title": visibleTabs === 1
+      })}
+    >
+      {tabs}
+    </div>
+  );
 };
 
 export default GVTabs;

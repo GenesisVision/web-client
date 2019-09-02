@@ -8,6 +8,7 @@ import React from "react";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { TableItems } from "shared/components/table/helpers/mapper";
+import { CurrencyEnum } from "shared/utils/types";
 
 export interface IProgramControlsProps {
   isAuthenticated: boolean;
@@ -18,8 +19,8 @@ export interface IProgramControlsProps {
 
 export interface IProgramWithdrawalContainerProps extends IDialogProps {
   id: string;
-  assetCurrency: string;
-  accountCurrency: string;
+  assetCurrency: CurrencyEnum;
+  accountCurrency: CurrencyEnum;
   onSubmit(): void;
 }
 
@@ -42,11 +43,10 @@ export type HistoryCountsType = {
   periodHistoryCount?: number;
 };
 
+export type PortfolioEvent = DashboardPortfolioEvent | ManagerPortfolioEvent;
+
 export interface IHistorySection {
-  fetchPortfolioEvents(
-    filters: any
-  ): Promise<TableItems<DashboardPortfolioEvent | ManagerPortfolioEvent>>;
-  fetchHistoryCounts(id: string): Promise<HistoryCountsType>;
+  fetchPortfolioEvents(filters: any): Promise<TableItems<PortfolioEvent>>;
   eventTypeFilterValues: SelectFilterValue[];
 }
 

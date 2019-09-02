@@ -80,10 +80,12 @@
       "label": "Level"
     },
     "currency": {
-      "label": "Currency"
+      "label": "Currency",
+      "show-in": "show in"
     },
     "date-range": {
       "label": "Date Range",
+      "for": "for",
       "all-time": "All time",
       "last-month": "Last month",
       "last-week": "Last week",
@@ -275,6 +277,7 @@
     }
   },
   "profile-widget": {
+    "security": "Security",
     "personal-details": "Personal Details",
     "settings": "Settings",
     "logout": "Log out"
@@ -472,6 +475,7 @@
       "balance": "Size",
       "assets": "Assets",
       "investors": "Investors",
+      "age": "Age",
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart",
@@ -521,6 +525,7 @@
   "fund-details-page": {
     "title": "Program detail",
     "description": {
+      "fund-settings": "Fund settings",
       "disable-reallocation-message": "The next reallocation will be available on",
       "reallocate": "Reallocate",
       "edit-fund": "Edit details",
@@ -610,6 +615,8 @@
       }
     },
     "chart": {
+      "assets": "Assets",
+      "value": "Value",
       "heading": "Chart",
       "tabs": {
         "profit": "Profit",
@@ -644,6 +651,7 @@
       "subscriptionFee": "Subscription fee",
       "volume-fee": "Volume fee",
       "invest": "Invest",
+      "investment-details": "Investment details",
       "reinvest": "Reinvest profit",
       "yourInvestment": "Current investment",
       "pending-input": "Pending input",
@@ -730,7 +738,7 @@
       "heading": "History",
       "tabs": {
         "trades": "Trades",
-        "events": "Events",
+        "events": "My events",
         "open-positions": "Open positions",
         "subscriptions": "Subscriptions",
         "financial-statistic": "Financial statistic",
@@ -782,9 +790,16 @@
         "commission-rebate": "GV commission rebate"
       },
       "period-history": {
+        "investors-deposit": "Investors Invest",
+        "investors-withdraw": "Investors Withdrawal",
+        "manager-deposit": "Manager Investment",
+        "manager-withdraw": "Manager Withdrawal",
+        "investors-profit-withdraw": "Investors Withdrawal Profit",
+        "platform-success-fee": "Platform Success Fee",
+        "manager-commission-rebate": "GV commission rebate",
         "period": "Period",
         "date-start": "Date start",
-        "date-finish": "Date finish",
+        "period-length": "Period length",
         "balance": "Program balance",
         "profit": "Profit",
         "investors": "Investors"
@@ -829,6 +844,7 @@
     "not-verified": "Not verified",
     "phone-number": "Phone number",
     "email": "Email address",
+    "public-info": "Public info",
     "personal-info": "Personal info",
     "forename": "Forename",
     "family-name": "Family name",
@@ -839,10 +855,12 @@
     "city": "City",
     "address": "Address",
     "index": "Index",
+    "success-copy": "Id copy is successful",
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {
-      "details": "Personal details",
+      "security": "Security",
+      "profile": "Personal details",
       "settings": "Settings",
       "verify": "Verify",
       "social-links": "Social links"
@@ -858,6 +876,7 @@
       }
     },
     "settings": {
+      "platform-currency": "Platform currency",
       "title": "Settings",
       "profile-image": "Profile image",
       "image-requirements": "Image resolution should be at least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
@@ -1039,13 +1058,13 @@
   "gvt-fees": {
     "title": "Fees and Discounts",
     "section": {
-      "text-1": "Any Genesis Vision user who holds a certain amount of GVT for 7 days receives a discount for transaction fees. The size of a discount can vary and depends on the amount of GVT that is being held. The regular trading fee is 0.3%, and the information on the tiered discount system can be found in the Genesis Markets Trading Conditions section.",
+      "text-1": "Any Genesis Vision user who holds a certain amount of GVT receives a discount for transaction fees. The size of a discount can vary and depends on the amount of GVT that is being held. The regular trading fee is 0.3%, and the information on the tiered discount system can be found in the Genesis Markets Trading Conditions section.",
       "text-2": "Users of the Genesis Vision copy trading feature who hold any GVT on the Genesis Vision balance are eligible for discounts and also have the platform success fee of 10% for both investment programs and copy trading signals reduced by 1% for each 1000 GVT held.",
       "text-3": "For managers the commission for trading will be debited from the manager’s GVT wallet. At the end of the reporting period, the manager will receive a refund of the commission at the expense of increasing the share of own funds in management."
     },
     "note": "* Please note that to be eligible for a discount tier you should hold GVT on your Genesis Vision wallet for at least 7 days",
     "table-header": {
-      "amount": "Amount held for 7 days*",
+      "amount": "Amount",
       "discount": "Discount",
       "fees": "Fees"
     },
@@ -1055,7 +1074,7 @@
       "fees": "0.210%"
     },
     "table-row-2": {
-      "amount": "From 10 GVT up to 25",
+      "amount": "Up to 25",
       "discount": "35%",
       "fees": "0.195%"
     },
@@ -1471,9 +1490,6 @@
         "title": "Portfolio Events",
         "see-all-button": "See All",
         "table-title": "Operations",
-        "success-fee": "Success fee",
-        "gv-commission": "GV commission",
-        "you-ve-earned": "You've earned",
         "empty-events": {
           "text": "The following events will be displayed here",
           "finished": "Fund/Program finished",
@@ -1511,6 +1527,61 @@
     }
   },
   "manager": {
+    "fund-settings": {
+      "reallocation": {
+        "confirm-title": "Reallocate fund",
+        "confirm-text": "Do you really want to Reallocate Fund?",
+        "title": "Reallocation",
+        "text-1": "Reallocation available* — ",
+        "text-2": "There is a mandatory 1% GVT allocation per Fund.",
+        "text-3": "* You are able to reallocate 3% of the Fund per day (cumulative). Example: you will be able to change 30% of the Fund's allocation after 10 days."
+      },
+      "close-fund": {
+        "title": "Closing"
+      },
+      "buttons": {
+        "reallocation": "Reallocate fund"
+      }
+    },
+    "asset-settings": {
+      "close-period": {
+        "title": "Close period"
+      },
+      "close-asset": {
+        "title": "Close asset"
+      },
+      "close-fund": {
+        "title": "Close fund"
+      },
+      "close-program": {
+        "title": "Close program"
+      },
+      "title": "{{asset}} settings",
+      "period-and-closing": {
+        "title": "Period and closing",
+        "text-program": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
+        "text-fund": "The fund will be closed after pressing the button",
+        "text-period": "The current period of the program will end in one hour.",
+        "close-confirm-title-fund": "Close Fund",
+        "close-confirm-notification-fund": "Are you sure you want to close this Fund? This action is irreversible.",
+        "close-confirm-title-program": "Close Program",
+        "close-confirm-notification-program": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares."
+      },
+      "strategy": {
+        "title": "Strategy"
+      },
+      "name": {
+        "title": "Title"
+      },
+      "avatar": {
+        "title": "Avatar"
+      },
+      "buttons": {
+        "close-program": "Close program",
+        "close-fund": "Close fund",
+        "save": "Save"
+      }
+    },
     "program-settings": {
       "two-factor-confirm": {
         "title": "Two-factor authorization (2fa)",
@@ -1531,6 +1602,7 @@
       },
       "broker": {
         "title": "Broker",
+        "text-warning": "Warning: all signal program subscriptions will be cancelled when switching from GM to Huobi (we do not currently offer copy trading on Huobi).",
         "text-change": "A broker change in the program will occur automatically within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page.",
         "text-cancel": "Your broker will be changed from {{brokerFrom}} to {{brokerTo}} within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page.",
         "text-cancel-confirm": "Do you really want to cancel the change from {{brokerFrom}} to {{brokerTo}}?",
@@ -1673,6 +1745,7 @@
           "date": "Date",
           "type": "Type",
           "description": "Description",
+          "fee": "Fee",
           "amount": "Amount"
         },
         "types": {
@@ -1835,6 +1908,7 @@
         "fees-settings": "Fees settings",
         "deposit-details": "Deposit details",
         "fields": {
+          "mandatory-assets": "There is a mandatory 1% GVT allocation per Fund",
           "asset-description": "Total share of all assets should be equal to 100%",
           "name": "Name",
           "name-requirements": "Requirement from 4 to 20 symbols",

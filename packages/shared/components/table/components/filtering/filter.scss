@@ -15,12 +15,14 @@
     opacity: 0.5;
     letter-spacing: 0.2px;
     color: $text-color;
+    white-space: nowrap;
   }
 
   &__value {
     letter-spacing: 0.2px;
     color: $text-accent-color;
     padding: 0 0.4rem;
+    white-space: nowrap;
   }
 
   &__arrow {

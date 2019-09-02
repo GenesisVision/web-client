@@ -24,6 +24,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateRowFuncType } from "shared/components/table/components/table.types";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
@@ -37,7 +38,7 @@ const _TradeRow: React.FC<Props> = ({
   update
 }) => {
   const [anchor, toggleSubrows] = useState<EventTarget | undefined>(undefined);
-  const [isOpenPopup, togglePopup] = useState<boolean>(false);
+  const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const program = trade.providers[0].program;
   const otherPrograms = trade.providers;
   const hasOtherPrograms = otherPrograms.length > 1;
@@ -134,7 +135,7 @@ const _TradeRow: React.FC<Props> = ({
             variant={"contained"}
             onClick={e => {
               e.stopPropagation();
-              togglePopup(true);
+              setOpenPopup();
             }}
           >
             +
@@ -164,16 +165,16 @@ const _TradeRow: React.FC<Props> = ({
           symbol: trade.symbol,
           volume: trade.volume
         })}
-        onClose={() => togglePopup(false)}
+        onClose={setClosePopup}
         open={isOpenPopup}
         onApply={() => {
-          togglePopup(false);
+          setClosePopup();
           closeCopytradingTrade(trade.id, () => {
             update(undefined);
           });
         }}
         applyButtonText={t("buttons.confirm")}
-        onCancel={() => togglePopup(false)}
+        onCancel={setClosePopup}
       />
     </>
   );

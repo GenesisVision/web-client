@@ -25,6 +25,7 @@ const FundsTable: React.FC<Props> = ({
   filtering,
   updateFilter,
   renderFilters,
+  renderMappings,
   paging,
   updatePaging,
   toggleFavorite,
@@ -43,6 +44,7 @@ const FundsTable: React.FC<Props> = ({
     items={data}
     showSwitchView
     renderFilters={renderFilters}
+    renderMappings={renderMappings}
     renderHeader={column => (
       <FundsTableHeaderCell column={column} isAuthenticated={isAuthenticated} />
     )}

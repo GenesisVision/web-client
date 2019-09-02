@@ -1,8 +1,7 @@
 import "./dashboard-assets.scss";
 
-import { IDashboardAssetsCounts } from "investor-web-portal/src/pages/dashboard/services/dashboard.service";
 import React, { useCallback, useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
@@ -15,10 +14,10 @@ import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import useTab from "shared/hooks/tab.hook";
 
 const _DashboardAssets: React.FC<Props> = ({
-  fetchAssetsCount,
+  counts,
+  getAssetsCounts,
   clearAssets,
   role,
-  t,
   title,
   getDashboardPrograms,
   getDashboardFunds,
@@ -28,19 +27,21 @@ const _DashboardAssets: React.FC<Props> = ({
   createProgram,
   programColumns
 }) => {
-  const [counts, setCounts] = useState<IDashboardAssetsCounts>({});
   const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
-  useEffect(() => {
-    fetchAssetsCount().then(setCounts);
-    return clearAssets;
-  }, []);
+  const [t] = useTranslation();
+  useEffect(
+    () => {
+      getAssetsCounts();
+      return clearAssets;
+    },
+    [clearAssets, getAssetsCounts]
+  );
   const handleTabChange = useCallback(
     (e: any, propTab: string) => {
       if (propTab === tab) return;
-      clearAssets && clearAssets();
       setTab(e, propTab);
     },
-    [tab]
+    [setTab, tab]
   );
   const { fundsCount, programsCount } = counts;
   return (
@@ -85,11 +86,12 @@ const _DashboardAssets: React.FC<Props> = ({
   );
 };
 
-interface Props extends WithTranslation, WithRoleProps, OwnProps {}
+interface Props extends WithRoleProps, OwnProps {}
 
 interface OwnProps {
   clearAssets: () => void;
-  fetchAssetsCount: () => Promise<IDashboardAssetsCounts>;
+  counts: any;
+  getAssetsCounts: () => void;
   title: string;
   getDashboardPrograms: GetItemsFuncActionType;
   getDashboardFunds: GetItemsFuncActionType;
@@ -107,7 +109,6 @@ enum TABS {
 
 const DashboardAssets = compose<React.ComponentType<OwnProps>>(
   withRole,
-  translate(),
   React.memo
 )(_DashboardAssets);
 export default DashboardAssets;

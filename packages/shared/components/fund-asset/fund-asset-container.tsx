@@ -2,6 +2,7 @@ import "./fund-asset.scss";
 
 import classNames from "classnames";
 import { FundAssetPercent } from "gv-api-web";
+import { PlatformAssetFull } from "manager-web-portal/src/pages/funds/fund-settings/reallocation/components/reallocate-field";
 import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import Popover, {
@@ -31,7 +32,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
     (event: React.MouseEvent<HTMLElement>) => {
       hasPopoverList ? setAnchor(event) : setSize(assets.length);
     },
-    [assets]
+    [assets.length, hasPopoverList, setAnchor]
   );
   useEffect(() => {
     if (hasPopoverList) setSize(sizeProp);
@@ -47,7 +48,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
         .map((asset, idx) => (
           <FundAssetTooltipContainer
             key={idx}
-            asset={asset}
+            asset={asset as PlatformAssetFull}
             idx={idx}
             assets={assets}
             type={type}
@@ -76,7 +77,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
                 .map((asset, idx) => (
                   <FundAssetTooltipContainer
                     key={idx}
-                    asset={asset}
+                    asset={asset as PlatformAssetFull}
                     idx={idx}
                     assets={assets}
                     type={type}
@@ -103,7 +104,7 @@ export type FundAssetRemoveType = (
 ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
 export interface IFundAssetContainerProps {
-  assets: FundAssetPercent[];
+  assets: Array<PlatformAssetFull | FundAssetPercent>;
   type: FUND_ASSET_TYPE;
   size?: number;
   length?: number;

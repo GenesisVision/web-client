@@ -7,7 +7,7 @@ import { apiSelector } from "shared/utils/selectors";
 
 import { FETCH_FUND_PROFIT_CHART } from "../actions/fund-details.actions";
 
-export type FundProfitChartDataType = FundProfitChart;
+export type FundProfitChartDataType = Array<FundProfitChart>;
 
 export type FundProfitChartState = IApiState<FundProfitChartDataType>;
 

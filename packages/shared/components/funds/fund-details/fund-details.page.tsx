@@ -1,12 +1,13 @@
 import "shared/components/details/details.scss";
 
 import * as React from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { useEffect } from "react";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { redirectToLogin } from "shared/components/auth/signin/signin.service";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
@@ -18,7 +19,11 @@ import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import FundDetailsContainer from "./fund-details.container";
-import { IDescriptionSection } from "./fund-details.types";
+import {
+  IDescriptionSection,
+  IFundControlsProps,
+  IFundHistorySection
+} from "./fund-details.types";
 import {
   FundDescriptionDataType,
   fundDescriptionSelector
@@ -33,19 +38,27 @@ const _FundDetailsPage: React.FC<Props> = ({
   service: { dispatchFundDescription, redirectToLogin },
   isAuthenticated,
   descriptionSection
-}) => (
-  <FundDetailsContainer
-    isKycConfirmed={isKycConfirmed}
-    condition={!!description}
-    loader={<DetailsContainerLoader assets />}
-    redirectToLogin={redirectToLogin}
-    historySection={historySection}
-    descriptionSection={descriptionSection}
-    description={description!}
-    currency={currency}
-    isAuthenticated={isAuthenticated}
-  />
-);
+}) => {
+  useEffect(
+    () => {
+      dispatchFundDescription();
+    },
+    [dispatchFundDescription]
+  );
+  return (
+    <FundDetailsContainer
+      isKycConfirmed={isKycConfirmed}
+      condition={!!description}
+      loader={<DetailsContainerLoader assets />}
+      redirectToLogin={redirectToLogin}
+      historySection={historySection}
+      descriptionSection={descriptionSection}
+      description={description!}
+      currency={currency}
+      isAuthenticated={isAuthenticated}
+    />
+  );
+};
 
 const mapStateToProps = (state: RootState): StateProps => ({
   isKycConfirmed: kycConfirmedSelector(state),
@@ -66,7 +79,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 interface OwnProps {
   descriptionSection: IDescriptionSection;
-  historySection: IHistorySection;
+  historySection: IFundHistorySection;
 }
 
 interface StateProps {

@@ -2,12 +2,14 @@ import "./fund-asset.scss";
 
 import classNames from "classnames";
 import { FundAssetPercent } from "gv-api-web";
+import { PlatformAssetFull } from "manager-web-portal/src/pages/funds/fund-settings/reallocation/components/reallocate-field";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _FundAsset: React.FC<Props> = ({
+  mandatoryFundPercent,
   name,
   percent,
   currency,
@@ -54,7 +56,7 @@ const _FundAsset: React.FC<Props> = ({
           <div className="fund-asset__percent">
             <NumberFormat value={percent} suffix="%" displayType="text" />
           </div>
-          {removable && removeHandle && (
+          {percent > mandatoryFundPercent && removable && removeHandle && (
             <div
               className="fund-asset__remove-button"
               onClick={removeHandle(currency)}
@@ -74,7 +76,7 @@ export enum FUND_ASSET_TYPE {
   TEXT = "text"
 }
 
-interface Props extends FundAssetPercent {
+interface Props extends PlatformAssetFull {
   currency: CurrencyEnum;
   type: FUND_ASSET_TYPE;
   last: boolean;

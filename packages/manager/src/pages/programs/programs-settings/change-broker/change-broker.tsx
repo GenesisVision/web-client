@@ -1,9 +1,9 @@
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
-import SettingsBlock from "../settings-block";
 import ChangeBrokerForm, {
   ChangeBrokerFormOwnProps
 } from "./change-broker-form";

@@ -7,6 +7,7 @@ import { ASSET } from "shared/constants/constants";
 import {
   FUND_DETAILS_FOLDER_ROUTE,
   FUND_DETAILS_ROUTE,
+  FUND_SETTINGS,
   FUNDS_FACET_ROUTE,
   FUNDS_SLUG_URL_PARAM_NAME
 } from "shared/routes/funds.routes";
@@ -85,6 +86,11 @@ export const composeAssetNotificationsUrl = (
 export const composeFundNotificationsUrl = (slugUrl: string): string =>
   replaceParams(FUND_NOTIFICATIONS_ROUTE, {
     ":id": slugUrl
+  });
+
+export const composeFundSettingsUrl = (slugUrl: string): string =>
+  replaceParams(`${FUND_DETAILS_ROUTE}/${FUND_SETTINGS}`, {
+    [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeProgramFacetUrl = (slugUrl: string): string =>

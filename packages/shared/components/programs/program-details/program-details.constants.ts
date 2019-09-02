@@ -180,7 +180,7 @@ export const PROGRAM_PERIOD_HISTORY: SortingColumn[] = [
     name: "date-start"
   },
   {
-    name: "date-finish"
+    name: "period-length"
   },
   {
     name: "balance"

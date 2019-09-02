@@ -3,11 +3,13 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
+import DetailsSettingControl from "shared/components/details/details-description-section/details-description/controls/details-setting-control";
 import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import {
   composeFundNotificationsUrl,
+  composeFundSettingsUrl,
   composeManagerDetailsUrl
 } from "shared/utils/compose-url";
 
@@ -63,6 +65,15 @@ const _FundDetailsDescription: React.FC<Props> = ({
             : false
         }
       />
+      {description.personalFundDetails &&
+        description.personalFundDetails.isOwnProgram &&
+        description.personalFundDetails.canCloseProgram && (
+          <DetailsSettingControl
+            title={description.title}
+            url={composeFundSettingsUrl(description.url)}
+            text={t("fund-details-page.description.fund-settings")}
+          />
+        )}
     </div>
   </div>
 );

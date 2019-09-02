@@ -1,4 +1,4 @@
-import { DashboardPortfolioEvents } from "gv-api-web";
+import { InvestmentEventViewModels } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -7,14 +7,14 @@ import { AuthRootState } from "shared/utils/types";
 
 import { DASHBOARD_PORTFOLIO_EVENTS } from "../actions/dashboard.actions";
 
-export type DashboardEventsState = IApiState<DashboardPortfolioEvents>;
+export type DashboardEventsState = IApiState<InvestmentEventViewModels>;
 
 export const dashboardEventsSelector = apiSelector<
-  DashboardPortfolioEvents,
+  InvestmentEventViewModels,
   AuthRootState
 >(state => state.dashboard.eventsData);
 
-const dashboardEventsReducer = apiReducerFactory<DashboardPortfolioEvents>({
+const dashboardEventsReducer = apiReducerFactory<InvestmentEventViewModels>({
   apiType: DASHBOARD_PORTFOLIO_EVENTS
 });
 

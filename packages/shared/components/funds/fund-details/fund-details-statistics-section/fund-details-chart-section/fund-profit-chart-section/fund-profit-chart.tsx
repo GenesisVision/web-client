@@ -1,4 +1,7 @@
-import { ChartSimple } from "gv-api-web";
+import {
+  FundEquityChartElement,
+  FundProfitChart as FundProfitChartType
+} from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -16,22 +19,43 @@ import {
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
 import GVColors from "shared/components/gv-styles/gv-colors";
+import { IDashboardAssetChart } from "shared/constants/constants";
+import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 
 import FundProfitTooltip from "./fund-profit-tooltip";
 
-const FundProfitChart: React.FC<Props> = ({ equityChart }) => {
-  if (equityChart.length === 0) return null;
-  const equity = equityChart.map(x => ({
-    date: new Date(x.date).getTime(),
-    value: formartChartMinValue(x.value)
-  }));
+const _FundProfitChart: React.FC<Props> = ({
+  profitChart,
+  chartCurrencies
+}) => {
+  const equityCharts = profitChart.map(({ equityChart }) => equityChart);
+  const equities = equityCharts.map(equityChart =>
+    (equityChart as FundEquityChartElement[]).map((item: any) => ({
+      date: item.date.getTime(),
+      value: formartChartMinValue(item.value),
+      assets:
+        [
+          ...item.assetsState.assets,
+          {
+            icon: "",
+            color: "grey",
+            name: "Other",
+            asset: "Other",
+            percent: item.assetsState.otherPercent
+          }
+        ].filter(({ percent }) => !!percent) || []
+    }))
+  );
+  const firstEquityChart = equityCharts[0];
+  if (firstEquityChart.length === 0) return null;
+  const firstEquity = equities[0];
 
-  const equityValues = equity.map(x => x.value);
-  const off = gradientOffset(equityValues);
-  const areaStrokeColor = getStrokeColor(equityValues);
+  const firstEquityValues = firstEquity.map((x: any) => x.value);
+  const off = gradientOffset(firstEquityValues);
+  const areaStrokeColor = getStrokeColor(firstEquityValues);
   return (
     <ResponsiveContainer>
-      <ComposedChart data={equity} margin={{ top: 20 }}>
+      <ComposedChart data={firstEquity} margin={{ top: 20 }}>
         <defs>
           <ChartGradient
             offset={off}
@@ -41,7 +65,10 @@ const FundProfitChart: React.FC<Props> = ({ equityChart }) => {
             stopOpacity={0.01}
           />
         </defs>
-        {chartXAxis(equityChart[0].date, equityChart[equity.length - 1].date)}
+        {chartXAxis(
+          firstEquityChart[0].date,
+          firstEquityChart[firstEquity.length - 1].date
+        )}
         <YAxis
           dataKey="value"
           axisLine={false}
@@ -53,27 +80,35 @@ const FundProfitChart: React.FC<Props> = ({ equityChart }) => {
 
         <Tooltip content={FundProfitTooltip} />
         <CartesianGrid vertical={false} strokeWidth={0.1} />
-        {/*
-        //@ts-ignore*/}
-        <Area
-          dataKey="value"
-          type="monotone"
-          data={equity}
-          connectNulls={true}
-          stroke={areaStrokeColor}
-          fill={`url(#equityProgramChartFill)`}
-          strokeWidth={3}
-          dot={false}
-          unit=" %"
-          isAnimationActive={false}
-        />
+        {equities.map((equity, i) => (
+          // @ts-ignore
+          <Area
+            key={i}
+            dataKey="value"
+            type="monotone"
+            data={equity}
+            connectNulls={true}
+            stroke={
+              chartCurrencies && chartCurrencies[i]
+                ? chartCurrencies[i].color
+                : areaStrokeColor
+            }
+            fill={`url(#equityProgramChartFill)`}
+            strokeWidth={3}
+            dot={false}
+            unit=" %"
+            isAnimationActive={false}
+          />
+        ))}
       </ComposedChart>
     </ResponsiveContainer>
   );
 };
 
 interface Props {
-  equityChart: ChartSimple[];
+  profitChart: Array<FundProfitChartType | IDashboardAssetChart>;
+  chartCurrencies?: TChartCurrency[];
 }
 
-export default React.memo(FundProfitChart);
+const FundProfitChart = React.memo(_FundProfitChart);
+export default FundProfitChart;

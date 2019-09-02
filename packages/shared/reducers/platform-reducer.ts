@@ -32,6 +32,12 @@ export const programCurrenciesSelector = apiFieldSelector(
   []
 );
 
+export const platformCurrenciesSelector = apiFieldSelector(
+  platformDataSelector,
+  fieldSelector(state => state.platformCurrencies),
+  []
+);
+
 export const programTagsSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.enums.program.programTags),

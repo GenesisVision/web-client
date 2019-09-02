@@ -19,7 +19,7 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   &__heading {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
   }
 
   &__edit-btn {

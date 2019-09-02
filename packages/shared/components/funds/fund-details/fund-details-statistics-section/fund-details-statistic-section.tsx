@@ -1,102 +1,20 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
-import {
-  ChartDefaultPeriod,
-  DEFAULT_PERIOD
-} from "shared/components/chart/chart-period/chart-period.helpers";
-import { RootState } from "shared/reducers/root-reducer";
 
-import {
-  FundBalanceChartDataType,
-  fundBalanceChartSelector
-} from "../reducers/balance-chart.reducer";
-import {
-  FundProfitChartDataType,
-  fundProfitChartSelector
-} from "../reducers/profit-chart.reducer";
-import {
-  getBalanceChart,
-  getProfitChart
-} from "../services/fund-details.service";
 import FundDetailsChart from "./fund-details-chart-section/fund-details-chart";
 import FundDetailsStatistics from "./fund-details-statistics/fund-details-statistics";
 
-const _FundDetailsStatisticSection: React.FC<Props> = ({
-  balanceChart,
-  profitChart,
-  id,
-  service: { getProfitChart, getBalanceChart }
-}) => {
-  const [period, setPeriod] = useState<ChartDefaultPeriod>(DEFAULT_PERIOD);
-  useEffect(
-    () => {
-      getProfitChart({ id, period });
-      getBalanceChart({ id, period });
-    },
-    [period, id, getProfitChart, getBalanceChart]
-  );
-  return (
-    <div className="details-statistic-section">
-      <div className="details-statistic-section__statistic">
-        <FundDetailsStatistics statistic={profitChart} period={period} />
-      </div>
-      <div className="details-statistic-section__chart">
-        <FundDetailsChart
-          profitChart={profitChart}
-          balanceChart={balanceChart}
-          period={period}
-          onPeriodChange={setPeriod}
-        />
-      </div>
+const _FundDetailsStatisticSection: React.FC = () => (
+  <div className="details-statistic-section">
+    <div className="details-statistic-section__statistic">
+      <FundDetailsStatistics />
     </div>
-  );
-};
+    <div className="details-statistic-section__chart">
+      <FundDetailsChart />
+    </div>
+  </div>
+);
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { getProfitChart, getBalanceChart },
-    dispatch
-  )
-});
-
-const mapStateToProps = (state: RootState): StateProps => ({
-  profitChart: fundProfitChartSelector(state),
-  balanceChart: fundBalanceChartSelector(state)
-});
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  getProfitChart: typeof getProfitChart;
-  getBalanceChart: typeof getBalanceChart;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface StateProps {
-  profitChart?: FundProfitChartDataType;
-  balanceChart?: FundBalanceChartDataType;
-}
-
-interface OwnProps {
-  id: string;
-}
-
-interface Props extends OwnProps, StateProps, DispatchProps {}
-
-const FundDetailsStatisticSection = compose<React.ComponentType<OwnProps>>(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_FundDetailsStatisticSection);
+const FundDetailsStatisticSection = React.memo(_FundDetailsStatisticSection);
 export default FundDetailsStatisticSection;

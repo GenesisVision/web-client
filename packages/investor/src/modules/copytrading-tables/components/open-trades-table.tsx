@@ -16,10 +16,6 @@ import TradeRow from "./trade-row";
 class OpenTradesTable extends React.PureComponent<
   OwnProps & DispatchProps & WithTranslation
 > {
-  componentWillUnmount() {
-    this.props.service.clearCopytradingTable();
-  }
-
   render() {
     const { t, title, currency } = this.props;
     return (

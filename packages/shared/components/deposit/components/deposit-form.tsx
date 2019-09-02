@@ -1,7 +1,12 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useCallback, useEffect, useState } from "react";
+import {
+  useTranslation,
+  WithTranslation,
+  withTranslation as translate
+} from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
@@ -11,6 +16,7 @@ import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { ASSET, ROLE } from "shared/constants/constants";
+import withLoader from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import rateApi from "shared/services/api-client/rate-api";
 import {
@@ -27,253 +33,163 @@ import {
 } from "./deposit-form-validation-schema";
 import { TInvestInfo } from "./deposit.types";
 
-class _DepositForm extends React.PureComponent<
+const INIT_WALLET_CURRENCY = "GVT";
+
+const _DepositForm: React.FC<
   InjectedFormikProps<Props, IDepositFormValues>
-> {
-  componentDidMount(): void {
-    this.fetchRate({
-      currencyFrom: this.props.values[DEPOSIT_FORM_FIELDS.walletCurrency]
-    });
-  }
-
-  composeEntryFee = (fee: any): number => {
-    const { hasEntryFee } = this.props;
-    return hasEntryFee ? fee : 0;
-  };
-
-  entryFee = (amount: number): number => {
-    const { info } = this.props;
-    return this.composeEntryFee(calculatePercentage(amount, info.entryFee));
-  };
-
-  gvFee = (amount: number): number => {
-    const { info } = this.props;
-    return calculatePercentage(amount, info.gvCommission);
-  };
-
-  investAmount = (amount: number): number => {
-    return (amount || 0) - this.gvFee(amount) - this.entryFee(amount);
-  };
-
-  isAllow = (currency: string) => (values: NumberFormatValues): boolean => {
-    const { formattedValue, value } = values;
-    return (
-      (formattedValue === "" || validateFraction(value, currency)) &&
-      value !== "."
-    );
-  };
-
-  onChangeCurrencyFrom = (
-    event: ISelectChangeEvent,
-    target: JSX.Element
-  ): void => {
-    const { setFieldValue, setFieldTouched, wallets } = this.props;
-    const wallet = wallets.find(wallet => wallet.id === target.props.value)!;
-    setFieldValue(DEPOSIT_FORM_FIELDS.walletId, wallet.id);
-    setFieldValue(DEPOSIT_FORM_FIELDS.walletCurrency, wallet.currency);
-    setFieldValue(DEPOSIT_FORM_FIELDS.amount, "");
-    setFieldTouched(DEPOSIT_FORM_FIELDS.amount, false);
-    this.fetchRate({ currencyFrom: wallet.currency });
-  };
-
-  fetchRate = (params: {
-    currencyFrom?: string;
-    currencyTo?: string;
-  }): void => {
-    const { values, currency, setFieldValue } = this.props;
-    rateApi
-      .v10RateByFromByToGet(
-        params.currencyFrom || values[DEPOSIT_FORM_FIELDS.walletCurrency],
-        params.currencyTo || currency
-      )
-      .then(rate => {
-        setFieldValue("rate", rate);
+> = ({
+  t,
+  role,
+  wallets,
+  asset,
+  hasEntryFee,
+  values,
+  info,
+  currency,
+  isValid,
+  dirty,
+  handleSubmit,
+  isSubmitting,
+  errorMessage,
+  setFieldValue,
+  setFieldTouched
+}) => {
+  const {
+    walletCurrency,
+    rate,
+    availableInWallet = 0,
+    availableToInvest = 0,
+    amount = 0
+  } = values;
+  const [wallet, setWallet] = useState<WalletBaseData>(
+    wallets.find(wallet => wallet.currency === walletCurrency)!
+  );
+  useEffect(
+    () => {
+      rateApi.v10RateByFromByToGet(walletCurrency, currency).then(rate => {
+        setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
       });
-  };
+      setWallet(wallets.find(wallet => wallet.currency === walletCurrency)!);
+    },
+    [currency, setFieldValue, walletCurrency, wallets]
+  );
+  useEffect(
+    () => {
+      const maxAvailable =
+        (info as ProgramInvestInfo).availableToInvestBase !== undefined
+          ? (info as ProgramInvestInfo).availableToInvestBase
+          : Number.MAX_SAFE_INTEGER;
+      const availableToInvest = convertToCurrency(maxAvailable, rate);
+      const availableInWallet = wallets.find(
+        ({ currency }) => currency === walletCurrency
+      )!.available;
 
-  getMaxAmount = () => {
-    const { setFieldValue, info, wallets, values } = this.props;
-    const availableToInvestBase = (info as ProgramInvestInfo)
-      ? (info as ProgramInvestInfo).availableToInvestBase
-      : undefined;
-    const wallet = wallets.find(
-      wallet => wallet.currency === values[DEPOSIT_FORM_FIELDS.walletCurrency]
-    );
-    const availableInWallet = wallet ? wallet.available : 0;
+      if (availableInWallet !== values[DEPOSIT_FORM_FIELDS.availableInWallet])
+        setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, availableInWallet);
+      if (availableToInvest !== values[DEPOSIT_FORM_FIELDS.availableToInvest])
+        setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, availableToInvest);
+    },
+    [info, wallets, values, rate, setFieldValue, walletCurrency]
+  );
 
-    let maxAvailable = Number.MAX_SAFE_INTEGER;
-    if (availableToInvestBase !== undefined)
-      maxAvailable = availableToInvestBase;
+  const isAllow = useCallback(
+    (currency: string) => ({
+      formattedValue,
+      value
+    }: NumberFormatValues): boolean =>
+      (formattedValue === "" || validateFraction(value, currency)) &&
+      value !== ".",
+    []
+  );
 
-    const availableToInvest = convertToCurrency(
-      maxAvailable,
-      values[DEPOSIT_FORM_FIELDS.rate]
-    );
-    if (availableInWallet !== values[DEPOSIT_FORM_FIELDS.availableInWallet])
-      setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, availableInWallet);
-    if (availableToInvest !== values[DEPOSIT_FORM_FIELDS.availableToInvest])
-      setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, availableToInvest);
-  };
+  const onChangeCurrencyFrom = useCallback(
+    (event: ISelectChangeEvent, target: JSX.Element): void => {
+      const wallet = wallets.find(wallet => wallet.id === target.props.value)!;
+      setFieldValue(DEPOSIT_FORM_FIELDS.walletId, wallet.id);
+      setFieldValue(DEPOSIT_FORM_FIELDS.walletCurrency, wallet.currency);
+      setFieldValue(DEPOSIT_FORM_FIELDS.amount, "");
+      setFieldTouched(DEPOSIT_FORM_FIELDS.amount, false);
+    },
+    [setFieldTouched, setFieldValue, wallets]
+  );
 
-  setMaxAmount = (): void => {
-    const { setFieldValue, values, role } = this.props;
-    const { availableInWallet, availableToInvest, walletCurrency } = values;
-    const max = formatCurrencyValue(
-      role === ROLE.INVESTOR
-        ? Math.min(availableInWallet || 0, availableToInvest || 0)
-        : availableInWallet || 0,
-      walletCurrency
-    );
-    setFieldValue(DEPOSIT_FORM_FIELDS.amount, max);
-  };
+  const setMaxAmount = useCallback(
+    (): void => {
+      const max = formatCurrencyValue(
+        role === ROLE.INVESTOR
+          ? Math.min(availableInWallet, availableToInvest)
+          : availableInWallet,
+        walletCurrency
+      );
+      setFieldValue(DEPOSIT_FORM_FIELDS.amount, max);
+    },
+    [availableInWallet, availableToInvest, role, setFieldValue, walletCurrency]
+  );
 
-  render() {
-    this.getMaxAmount();
-    const {
-      role,
-      wallets,
-      t,
-      asset,
-      hasEntryFee,
-      values,
-      info,
-      currency,
-      isValid,
-      dirty,
-      handleSubmit,
-      isSubmitting,
-      errorMessage
-    } = this.props;
-    const { walletCurrency, rate } = values;
-    const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
-    return (
-      <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
-        <WalletSelect
-          name={DEPOSIT_FORM_FIELDS.walletId}
-          label={t("follow-program.create-account.from")}
-          items={wallets}
-          onChange={this.onChangeCurrencyFrom}
-        />
-        <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
-          {formatCurrencyValue(wallet ? wallet.available : 0, walletCurrency)}{" "}
-          {walletCurrency}
-        </StatisticItem>
-        <InputAmountField
-          name={DEPOSIT_FORM_FIELDS.amount}
-          label={t("deposit-asset.amount")}
-          currency={walletCurrency}
-          isAllow={this.isAllow(walletCurrency)}
-          setMax={this.setMaxAmount}
-        />
-
-        <div className="invest-popup__currency">
-          {currency !== walletCurrency && (
-            <NumberFormat
-              value={formatCurrencyValue(
-                convertFromCurrency(values.amount || 0, rate),
-                currency
-              )}
-              prefix="≈ "
-              suffix={` ${currency}`}
-              displayType="text"
-            />
-          )}
-        </div>
-        {role === ROLE.INVESTOR && (
-          <ul className="dialog-list">
-            {hasEntryFee && (
-              <li className="dialog-list__item">
-                <span className="dialog-list__title">
-                  {t("deposit-asset.entry-fee")}
-                </span>
-                <span className="dialog-list__value">
-                  {info.entryFee} %{" "}
-                  <NumberFormat
-                    value={formatCurrencyValue(
-                      this.entryFee(
-                        convertFromCurrency(values.amount || 0, rate)
-                      ),
-                      currency
-                    )}
-                    prefix=" ("
-                    suffix={` ${currency})`}
-                    displayType="text"
-                  />
-                </span>
-              </li>
-            )}
-            <li className="dialog-list__item">
-              <span className="dialog-list__title">
-                {t("deposit-asset.gv-commission")}
-              </span>
-              <span className="dialog-list__value">
-                {info.gvCommission} %
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    this.gvFee(values.amount || 0),
-                    walletCurrency
-                  )}
-                  prefix={" ("}
-                  suffix={` ${walletCurrency})`}
-                  displayType="text"
-                />
-              </span>
-            </li>
-            <li className="dialog-list__item">
-              <span className="dialog-list__title">
-                {t("deposit-asset.investment-amount")}
-              </span>
-              <span className="dialog-list__value">
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    this.investAmount(
-                      convertFromCurrency(values.amount || 0, rate)
-                    ),
-                    currency
-                  )}
-                  prefix="≈ "
-                  suffix={` ${currency}`}
-                  displayType="text"
-                />
-              </span>
-            </li>
-          </ul>
-        )}
-        <div className="form-error">
-          <FormError error={errorMessage} />
-        </div>
-        <div className="dialog__buttons">
-          <GVButton
-            type="submit"
-            className="invest-form__submit-button"
-            disabled={isSubmitting || !isValid || !dirty}
-          >
-            {t("deposit-asset.confirm")}
-          </GVButton>
-        </div>
-        {asset === ASSET.FUND ? (
-          <div className="dialog__info">
-            {t("deposit-asset.fund.disclaimer")}
-          </div>
-        ) : null}
-      </form>
-    );
-  }
-}
+  return (
+    <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
+      <WalletSelect
+        name={DEPOSIT_FORM_FIELDS.walletId}
+        label={t("follow-program.create-account.from")}
+        items={wallets}
+        onChange={onChangeCurrencyFrom}
+      />
+      <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
+        {formatCurrencyValue(wallet.available, walletCurrency)} {walletCurrency}
+      </StatisticItem>
+      <InputAmountField
+        name={DEPOSIT_FORM_FIELDS.amount}
+        label={t("deposit-asset.amount")}
+        currency={walletCurrency}
+        isAllow={isAllow(walletCurrency)}
+        setMax={setMaxAmount}
+      />
+      <ConvertCurrency
+        condition={currency !== walletCurrency}
+        amount={amount}
+        rate={rate}
+        currency={currency}
+      />
+      <InvestorFees
+        condition={role === ROLE.INVESTOR}
+        hasEntryFee={hasEntryFee}
+        info={info}
+        amount={amount}
+        rate={rate}
+        currency={currency}
+        walletCurrency={walletCurrency}
+      />
+      <FormError error={errorMessage} />
+      <div className="dialog__buttons">
+        <GVButton
+          type="submit"
+          className="invest-form__submit-button"
+          disabled={isSubmitting || !isValid || !dirty}
+        >
+          {t("deposit-asset.confirm")}
+        </GVButton>
+      </div>
+      {asset === ASSET.FUND ? (
+        <div className="dialog__info">{t("deposit-asset.fund.disclaimer")}</div>
+      ) : null}
+    </form>
+  );
+};
 
 const DepositForm = compose<React.FC<IDepositOwnProps>>(
   withRole,
   translate(),
   withFormik<Props, IDepositFormValues>({
+    enableReinitialize: true,
     displayName: "invest-form",
     mapPropsToValues: ({ wallets }) => ({
       [DEPOSIT_FORM_FIELDS.rate]: 1,
       [DEPOSIT_FORM_FIELDS.walletId]: wallets.find(
-        wallet => wallet.currency === "GVT"
+        wallet => wallet.currency === INIT_WALLET_CURRENCY
       )!.id,
       [DEPOSIT_FORM_FIELDS.maxAmount]: undefined,
       [DEPOSIT_FORM_FIELDS.amount]: undefined,
-      [DEPOSIT_FORM_FIELDS.walletCurrency]: "GVT"
+      [DEPOSIT_FORM_FIELDS.walletCurrency]: INIT_WALLET_CURRENCY
     }),
     validationSchema: (params: Props) =>
       params.role === ROLE.MANAGER
@@ -289,6 +205,98 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
   })
 )(_DepositForm);
 export default DepositForm;
+
+const _InvestorFees: React.FC<IInvestorFeesProps> = ({
+  amount,
+  rate,
+  hasEntryFee,
+  info,
+  currency,
+  walletCurrency
+}) => {
+  const entryFee = hasEntryFee
+    ? calculatePercentage(convertFromCurrency(amount, rate), info.entryFee)
+    : 0;
+  const gvFee = calculatePercentage(
+    convertFromCurrency(amount, rate),
+    info.gvCommission
+  );
+  const investAmount = convertFromCurrency(amount, rate) - gvFee - entryFee;
+  const [t] = useTranslation();
+  return (
+    <ul className="dialog-list">
+      {hasEntryFee && (
+        <li className="dialog-list__item">
+          <span className="dialog-list__title">
+            {t("deposit-asset.entry-fee")}
+          </span>
+          <span className="dialog-list__value">
+            {info.entryFee} %{" "}
+            <NumberFormat
+              value={formatCurrencyValue(entryFee, currency)}
+              prefix=" ("
+              suffix={` ${currency})`}
+              displayType="text"
+            />
+          </span>
+        </li>
+      )}
+      <li className="dialog-list__item">
+        <span className="dialog-list__title">
+          {t("deposit-asset.gv-commission")}
+        </span>
+        <span className="dialog-list__value">
+          {info.gvCommission} %
+          <NumberFormat
+            value={formatCurrencyValue(gvFee, walletCurrency)}
+            prefix={" ("}
+            suffix={` ${walletCurrency})`}
+            displayType="text"
+          />
+        </span>
+      </li>
+      <li className="dialog-list__item">
+        <span className="dialog-list__title">
+          {t("deposit-asset.investment-amount")}
+        </span>
+        <span className="dialog-list__value">
+          <NumberFormat
+            value={formatCurrencyValue(investAmount, currency)}
+            prefix="≈ "
+            suffix={` ${currency}`}
+            displayType="text"
+          />
+        </span>
+      </li>
+    </ul>
+  );
+};
+const InvestorFees = withLoader(React.memo(_InvestorFees));
+
+const _ConvertCurrency: React.FC<{
+  amount: number;
+  currency: CurrencyEnum;
+  rate: number;
+}> = ({ rate, amount, currency }) => (
+  <div className="invest-popup__currency">
+    <NumberFormat
+      value={formatCurrencyValue(convertFromCurrency(amount, rate), currency)}
+      prefix="≈ "
+      suffix={` ${currency}`}
+      displayType="text"
+    />
+  </div>
+);
+const ConvertCurrency = withLoader(React.memo(_ConvertCurrency));
+
+interface IInvestorFeesProps {
+  hasEntryFee: boolean;
+  info: TInvestInfo;
+  amount: number;
+  rate: number;
+  currency: CurrencyEnum;
+  walletCurrency: CurrencyEnum;
+}
 
 export enum DEPOSIT_FORM_FIELDS {
   rate = "rate",

@@ -12,9 +12,6 @@ import { dashboardTradesLogTableSelector } from "./copytrading-tables.selectors"
 import TradesLogRow from "./trades-log-row";
 
 class _TradesLogTable extends React.PureComponent<Props> {
-  componentWillUnmount() {
-    this.props.service.clearCopytradingTable();
-  }
   render() {
     const { t, currency } = this.props;
     return (

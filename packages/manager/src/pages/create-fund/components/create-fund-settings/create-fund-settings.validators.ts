@@ -3,7 +3,7 @@ import i18next from "i18next";
 import {
   assetDescriptionShape,
   assetTitleShape
-} from "pages/create-program/components/create-program-settings/create-program-settings.validators";
+} from "modules/asset-settings/asset-edit.validation";
 import { WithTranslation } from "react-i18next";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
