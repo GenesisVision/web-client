@@ -17,45 +17,47 @@ const _ChartCurrencySelector: React.FC<Props> = ({
   onAdd,
   onRemove,
   onChange
-}) => (
-  <div className="chart-currency-selector__container">
-    {chartCurrencies.map(({ name, color }, i) => (
-      <TileFilterItem
-        removable={i > 0}
-        key={name}
-        id={name}
-        removeTile={onRemove}
-      >
-        <TagBubble
-          color={color}
-          content={
-            <div className="chart-currency-selector__item">
-              <TagCircle backgroundColor={color} />
-              {selectCurrencies.length || i === 0 ? (
-                <CurrencySelect
-                  value={name}
-                  onChange={onChange(i)}
-                  currencyValues={
-                    i === 0 && fullSelectCurrencies
-                      ? fullSelectCurrencies.filter(
-                          fullSelectCurrency => fullSelectCurrency !== name
-                        )
-                      : selectCurrencies
-                  }
-                />
-              ) : (
-                name
-              )}
-            </div>
-          }
-        />
-      </TileFilterItem>
-    ))}
-    {chartCurrencies.length < maxCharts && (
-      <TileFilterButton onClick={onAdd} title={"Add"} />
-    )}
-  </div>
-);
+}) => {
+  return (
+    <div className="chart-currency-selector__container">
+      {chartCurrencies.map(({ name, color }, i) => (
+        <TileFilterItem
+          removable={i > 0}
+          key={name}
+          id={name}
+          removeTile={onRemove}
+        >
+          <TagBubble
+            color={color}
+            content={
+              <div className="chart-currency-selector__item">
+                <TagCircle backgroundColor={color} />
+                {selectCurrencies.length || i === 0 ? (
+                  <CurrencySelect
+                    value={name}
+                    onChange={onChange(i)}
+                    currencyValues={
+                      i === 0 && fullSelectCurrencies
+                        ? fullSelectCurrencies.filter(
+                            fullSelectCurrency => fullSelectCurrency !== name
+                          )
+                        : selectCurrencies
+                    }
+                  />
+                ) : (
+                  name
+                )}
+              </div>
+            }
+          />
+        </TileFilterItem>
+      ))}
+      {chartCurrencies.length < maxCharts && (
+        <TileFilterButton onClick={onAdd} title={"Add"} />
+      )}
+    </div>
+  );
+};
 
 export type TChartCurrency = {
   name: CurrencyEnum;
