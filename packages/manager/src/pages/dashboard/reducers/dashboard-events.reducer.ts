@@ -35,13 +35,14 @@ export const dashboardEventsAllTableSelector = tableSelectorCreator<
   InvestorRootState,
   InvestmentEventViewModels,
   InvestmentEventViewModels
-  >(dashboardEventsAllSelector, "events");
+>(dashboardEventsAllSelector, "events");
 
 export const dashboardEventsAllReducer = tableReducerFactory<
   InvestmentEventViewModels
-  >({
+>({
   type: EVENTS_ACTION_TYPE,
   paging: DEFAULT_PAGING,
   filtering: DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  defaultFilters: DASHBOARD_PORTFOLIO_EVENTS_FILTERS
+  defaultFilters: DASHBOARD_PORTFOLIO_EVENTS_FILTERS,
+  clearable: true
 });
