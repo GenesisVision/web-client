@@ -25,7 +25,10 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { EVENT_LOCATION } from "../programs/program-details/services/program-details.service";
 import TableContainer from "../table/components/table-container";
-import { GetItemsFuncActionType, TableSelectorType } from "../table/components/table.types";
+import {
+  GetItemsFuncActionType,
+  TableSelectorType
+} from "../table/components/table.types";
 import PortfolioEventsDetails from "./portfolio-event-details";
 import PortfolioEventFeesTooltip from "./portfolio-event-fees-tooltip";
 import {
@@ -67,11 +70,11 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
         isFetchOnMount={true}
         renderFilters={(updateFilter, filtering) => (
           <>
-            {filtering["type"] && (
+            {filtering[EVENT_TYPE_FILTER_NAME] && (
               <SelectFilter
                 name={EVENT_TYPE_FILTER_NAME}
                 label="Type"
-                value={filtering["type"] as SelectFilterType} //TODO fix filtering types
+                value={filtering[EVENT_TYPE_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
                 values={eventTypeFilterValues}
                 onChange={updateFilter}
               />
