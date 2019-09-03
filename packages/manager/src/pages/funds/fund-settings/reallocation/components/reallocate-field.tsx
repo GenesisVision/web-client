@@ -186,5 +186,3 @@ interface Props {
     };
   }): void;
 }
-
-export type PlatformAssetFull = PlatformAsset & FundAssetPart;
