@@ -88,7 +88,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
                 onChange={updateFilter}
               />
             )}
-            {filtering["dateRange"] && (
+            {filtering[DATE_RANGE_FILTER_NAME] && (
               <DateRangeFilter
                 name={DATE_RANGE_FILTER_NAME}
                 value={filtering["dateRange"]}
