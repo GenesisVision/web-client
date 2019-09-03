@@ -3,7 +3,6 @@ import {
   CreateWithdrawalRequestModel,
   WalletData
 } from "gv-api-web";
-import { InvestorRootState } from "investor-web-portal/src/reducers";
 import * as React from "react";
 import { useCallback } from "react";
 import { connect } from "react-redux";
@@ -14,6 +13,7 @@ import { walletsSelector } from "shared/components/wallet/reducers/wallet.reduce
 import useErrorMessage from "shared/hooks/error-message.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
 
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
@@ -81,7 +81,7 @@ interface StateProps {
   twoFactorEnabled: boolean;
 }
 
-const mapStateToProps = (state: InvestorRootState): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   twoFactorEnabled: twoFactorEnabledSelector(state),
   wallets: walletsSelector(state)
 });
@@ -95,7 +95,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
 });
 
 export default compose<React.ComponentType<OwnProps>>(
-  connect<StateProps, DispatchProps, OwnProps, InvestorRootState>(
+  connect<StateProps, DispatchProps, OwnProps, RootState>(
     mapStateToProps,
     mapDispatchToProps
   ),
