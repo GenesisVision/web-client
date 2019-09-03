@@ -135,21 +135,20 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
             </TableCell>
             {!hideFeeColumn && (
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-                {event.totalFeesAmount !== null ? (
-                  <PortfolioEventFeesTooltip fees={event.feesInfo}>
-                    <NumberFormat
-                      value={formatCurrencyValue(
-                        event.totalFeesAmount,
-                        event.totalFeesCurrency
-                      )}
-                      thousandSeparator=" "
-                      displayType="text"
-                      suffix={" " + event.totalFeesCurrency}
-                    />
-                  </PortfolioEventFeesTooltip>
-                ) : (
-                  <>&nbsp;</>
-                )}
+                <PortfolioEventFeesTooltip
+                  fees={event.feesInfo}
+                  condition={event.totalFeesAmount !== null}
+                >
+                  <NumberFormat
+                    value={formatCurrencyValue(
+                      event.totalFeesAmount,
+                      event.totalFeesCurrency
+                    )}
+                    thousandSeparator=" "
+                    displayType="text"
+                    suffix={" " + event.totalFeesCurrency}
+                  />
+                </PortfolioEventFeesTooltip>
               </TableCell>
             )}
             <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--details">
