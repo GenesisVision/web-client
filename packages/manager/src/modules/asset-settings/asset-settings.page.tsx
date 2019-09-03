@@ -38,9 +38,17 @@ const _AssetsEditPage: React.FC<Props> = ({
         logo: { src: description!.logo },
         investmentLimit: description!.availableInvestmentLimit
       };
-      editAsset(description!.id, { ...currentValues, ...values }, asset).then(
-        dispatchDescription
-      );
+      editAsset(
+        description!.id,
+        {
+          ...currentValues,
+          ...values,
+          investmentLimit: values.hasInvestmentLimit
+            ? values.investmentLimit
+            : 0
+        },
+        asset
+      ).then(dispatchDescription);
     },
     [description]
   );
