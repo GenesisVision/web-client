@@ -9,14 +9,14 @@ import {
   WalletData,
   WalletDataCurrencyEnum
 } from "gv-api-web";
-import DescriptionBlock from "modules/asset-settings/fields/description-block";
-import FeesSettings from "modules/asset-settings/fields/fees-settings";
-import InvestmentLimitField from "modules/asset-settings/fields/investment-limit-field";
-import StopOutField from "modules/asset-settings/fields/stop-out-field";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import DescriptionBlock from "shared/components/fields/description-block";
+import FeesSettings from "shared/components/fields/fees-settings";
+import InvestmentLimitField from "shared/components/fields/investment-limit-field";
+import StopOutField from "shared/components/fields/stop-out-field";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import GVFormikField from "shared/components/gv-formik-field";

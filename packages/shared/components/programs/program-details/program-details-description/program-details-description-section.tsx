@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { ProgramControlsLoader } from "shared/components/details/details.contaner.loader";
 import { RootState } from "shared/reducers/root-reducer";
-import { CurrencyEnum } from "shared/utils/types";
 
 import { levelParametersSelector } from "../reducers/level-parameters.reducer";
 import PerformanceData from "./performance-data";
@@ -19,10 +18,8 @@ const _ProgramDetailsDescriptionSection: React.FC<
 > = ({
   levelsParameters,
   t,
-  accountCurrency,
   programDescription,
   isAuthenticated,
-  redirectToLogin,
   ProgramControls,
   ChangePasswordTradingAccount
 }) => {
@@ -53,7 +50,6 @@ const _ProgramDetailsDescriptionSection: React.FC<
         canInvest={personalDetails && personalDetails.canInvest}
         canWithdraw={personalDetails && personalDetails.canWithdraw}
         isAuthenticated={isAuthenticated}
-        redirectToLogin={redirectToLogin}
       />
     </div>
   );
@@ -68,10 +64,8 @@ interface StateProps {
 }
 
 interface OwnProps {
-  accountCurrency: CurrencyEnum;
   programDescription: ProgramDetailsFull;
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   ProgramControls: ComponentType<any>;
   ChangePasswordTradingAccount?: ComponentType<any>;
 }

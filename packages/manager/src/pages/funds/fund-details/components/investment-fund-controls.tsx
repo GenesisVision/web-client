@@ -20,7 +20,6 @@ const _InvestmentFundControls: React.FC<Props> = ({
   t,
   service: { dispatchFundDescription },
   isAuthenticated,
-  redirectToLogin,
   fundDescription
 }) => {
   const [
@@ -104,7 +103,6 @@ interface DispatchProps {
 
 interface OwnProps {
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   fundDescription: FundDetailsFull;
 }
 

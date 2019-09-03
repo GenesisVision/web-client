@@ -1,4 +1,4 @@
-import { PlatformInfo, ProgramsInfo } from "gv-api-web";
+import { FilterModel, PlatformInfo, ProgramsInfo } from "gv-api-web";
 import { createSelector } from "reselect";
 import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
@@ -6,7 +6,6 @@ import { ASSET, ROLE_ENV } from "shared/constants/constants";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
-import { getUnique } from "shared/utils/array";
 import {
   apiFieldSelector,
   apiSelector,
@@ -62,16 +61,13 @@ export const allEventsSelector = createSelector<
   SelectFilterValue<string>[]
 >(
   state => platformDataSelector(state),
-  data => {
-    if (!data) return [];
-    const { funds, programs } = (data.enums.program as any)[
-      `${ROLE_ENV}NotificationType`
-    ];
-    return getUnique([...funds, ...programs]).map(event => ({
-      value: event,
-      labelKey: `dashboard-page.portfolio-events.types.${event}`
-    }));
-  }
+  data =>
+    (data &&
+      data.enums.event[ROLE_ENV].allAssets.map(({ key, title }) => ({
+        value: key,
+        labelKey: title
+      }))) ||
+    []
 );
 
 export const assetEventsSelectorCreator = (asset: ASSET) =>
@@ -83,13 +79,13 @@ export const assetEventsSelectorCreator = (asset: ASSET) =>
     state => platformDataSelector(state),
     data => {
       if (!data) return [];
-      const assets = (data.enums.program as any)[`${ROLE_ENV}NotificationType`][
-        `${asset.toLowerCase()}s`
-      ];
-      return assets.map((event: string) => ({
-        value: event,
-        labelKey: `dashboard-page.portfolio-events.types.${event}`
-      }));
+      // @ts-ignore
+      return data.enums.event[ROLE_ENV][`${asset.toLowerCase()}Details`].map(
+        ({ key, title }: FilterModel) => ({
+          value: key,
+          labelKey: title
+        })
+      );
     }
   );
 

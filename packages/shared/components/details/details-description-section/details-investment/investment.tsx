@@ -3,6 +3,7 @@ import "./details-investment.scss";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVButton from "shared/components/gv-button";
@@ -16,6 +17,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { PROGRAM, STATUS } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -25,13 +27,13 @@ const _Investment: React.FC<Props> = ({
   updateDescription,
   id,
   assetCurrency,
-  accountCurrency,
   asset,
   notice,
   personalDetails,
   WithdrawContainer,
   ProgramReinvestingWidget
 }) => {
+  const accountCurrency = useSelector(currencySelector);
   const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const profitValue = personalDetails.value - personalDetails.invested;
@@ -179,7 +181,6 @@ interface OwnProps {
   asset: string;
   notice?: string;
   id: string;
-  accountCurrency: CurrencyEnum;
   assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
   WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;

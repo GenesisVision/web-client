@@ -4,9 +4,7 @@ import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
-import { SetSubmittingType } from "shared/utils/types";
-
-import { PlatformAssetFull } from "./reallocate-field";
+import { PlatformAssetFull, SetSubmittingType } from "shared/utils/types";
 
 const _ConfirmReallocate: React.FC<Props> = ({
   t,

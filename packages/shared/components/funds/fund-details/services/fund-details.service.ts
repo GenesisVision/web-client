@@ -8,11 +8,20 @@ import {
 } from "shared/components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { RootState } from "shared/reducers/root-reducer";
-import fundsApi from "shared/services/api-client/funds-api";
+import {
+  FUND_DETAILS_ROUTE,
+  FUNDS_SLUG_URL_PARAM_NAME
+} from "shared/routes/funds.routes";
 import authService from "shared/services/auth-service";
-import { MiddlewareDispatch, TGetState } from "shared/utils/types";
-import { CurrencyEnum } from "shared/utils/types";
+import getParams from "shared/utils/get-params";
+import {
+  CurrencyEnum,
+  DispatchDescriptionType,
+  MiddlewareDispatch,
+  TGetState
+} from "shared/utils/types";
 
+import fundsApi from "../../../../services/api-client/funds-api";
 import {
   fetchFundBalanceChartAction,
   fetchFundDescriptionAction,

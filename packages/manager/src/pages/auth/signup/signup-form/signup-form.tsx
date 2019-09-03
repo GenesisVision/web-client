@@ -1,6 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { CaptchaCheckResult, RegisterManagerViewModel } from "gv-api-web";
-import { SIGNUP_FORM_FIELDS } from "investor-web-portal/src/pages/auth/signup/signup-form/signup-form.types";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -115,7 +114,7 @@ interface OwnProps {
 export interface ISignUpFormFormValues extends RegisterManagerViewModel {
   [SIGN_UP_FORM_FIELDS.privacyPolicy]: boolean;
   [SIGN_UP_FORM_FIELDS.acceptTerms]: boolean;
-  [SIGNUP_FORM_FIELDS.captchaCheckResult]: CaptchaCheckResult;
+  [SIGN_UP_FORM_FIELDS.captchaCheckResult]: CaptchaCheckResult;
 }
 
 const SignUpForm = compose<React.FC<OwnProps>>(
@@ -123,7 +122,7 @@ const SignUpForm = compose<React.FC<OwnProps>>(
   withFormik<Props, ISignUpFormFormValues>({
     displayName: "signup-form",
     mapPropsToValues: props => ({
-      [SIGNUP_FORM_FIELDS.captchaCheckResult]: {
+      [SIGN_UP_FORM_FIELDS.captchaCheckResult]: {
         id: "",
         pow: {
           prefix: ""

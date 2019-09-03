@@ -121,18 +121,6 @@ $padding: $padding-small;
     &--mapping {
       flex-wrap: nowrap;
       @include adaptive-margin("left", $padding-xsmall);
-
-      .filter {
-        @include font-size($font-size-h3);
-      }
-      .filter__label {
-        font-weight: 600;
-        color: $text-light-color;
-        opacity: 1;
-      }
-      .filter__value {
-        border-bottom: 1px dotted $text-color;
-      }
     }
 
     .sorting-filter {

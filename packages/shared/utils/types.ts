@@ -1,5 +1,7 @@
 import {
   AmountWithCurrencyCurrencyEnum,
+  FundAssetPart,
+  PlatformAsset,
   ProgramNotificationSettingList
 } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
@@ -107,3 +109,5 @@ export type DispatchDescriptionType = () => (
   dispatch: MiddlewareDispatch,
   getState: () => RootState
 ) => ReturnType<MiddlewareDispatch>;
+
+export type PlatformAssetFull = PlatformAsset & FundAssetPart;

@@ -11,6 +11,7 @@ import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { FundAssetRemoveType } from "shared/components/fund-asset/fund-asset-container";
 import useAnchor from "shared/hooks/anchor.hook";
+import { PlatformAssetFull } from "shared/utils/types";
 
 const _ReallocateField: React.FC<Props> = ({
   name,
@@ -186,5 +187,3 @@ interface Props {
     };
   }): void;
 }
-
-export type PlatformAssetFull = PlatformAsset & FundAssetPart;

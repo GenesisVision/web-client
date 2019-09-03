@@ -5,6 +5,11 @@ import {
   TradesViewModel
 } from "gv-api-web";
 import { combineReducers } from "redux";
+import {
+  ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+  ASSET_PORTFOLIO_EVENTS_FILTERS,
+  EVENTS_ACTION_TYPE
+} from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import tableReducerFactory, {
@@ -14,7 +19,6 @@ import clearableReducer from "shared/reducers/clearable.reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 import {
-  PROGRAM_EVENTS,
   PROGRAM_FINANCIAL_STATISTIC,
   PROGRAM_OPEN_POSITIONS,
   PROGRAM_PERIOD_HISTORY,
@@ -27,20 +31,24 @@ import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
 } from "../program-details.constants";
-import { PortfolioEvent } from "../program-details.types";
 
-const eventsSelector = (state: RootState) =>
+export const programEventsSelector = (state: RootState) =>
   state.programDetails.programHistory.events;
 
-export const eventsTableSelector = tableSelectorCreator<
+export const programEventsTableSelector = tableSelectorCreator<
   RootState,
   InvestmentEventViewModels,
   InvestmentEventViewModels
->(eventsSelector, "events");
+>(programEventsSelector, "events");
 
-export const eventsReducer = tableReducerFactory<InvestmentEventViewModels>({
-  type: PROGRAM_EVENTS,
-  paging: { ...DEFAULT_PAGING, itemsOnPage: Number.MAX_VALUE }
+export const programEventsReducer = tableReducerFactory<
+  InvestmentEventViewModels
+>({
+  clearable: true,
+  type: EVENTS_ACTION_TYPE,
+  paging: DEFAULT_PAGING,
+  filtering: ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+  defaultFilters: ASSET_PORTFOLIO_EVENTS_FILTERS
 });
 
 const openPositionsSelector = (state: RootState) =>
@@ -138,7 +146,7 @@ export type ProgramHistoryState = Readonly<{
 
 const programHistoryReducer = clearableReducer(
   combineReducers<ProgramHistoryState>({
-    events: eventsReducer,
+    events: programEventsReducer,
     openPositions: openPositionsReducer,
     trades: tradesReducer,
     periodHistory: periodHistoryReducer,

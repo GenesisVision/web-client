@@ -1,8 +1,8 @@
 import "./regulator.scss";
 
 import classNames from "classnames";
-import { PlatformAssetFull } from "manager-web-portal/src/pages/funds/fund-settings/reallocation/components/reallocate-field";
 import * as React from "react";
+import { PlatformAssetFull } from "shared/utils/types";
 
 const Regulator: React.FC<Props> = ({
   remainder,

@@ -34,6 +34,22 @@ const _DashboardPortfolioEvent: React.FC<Props> = ({ event, from }) => (
         <div className="portfolio-event__values-container">
           <div className="portfolio-event__description">{event.title}</div>
         </div>
+        {!!event.amount && (
+          <div className="portfolio-event__value">
+            <Profitability
+              value={EVENT_PROFITABILITY_VALUES[event.changeState]}
+              prefix={PROFITABILITY_PREFIX.SIGN}
+            >
+              <NumberFormat
+                value={formatCurrencyValue(event.amount, event.currency)}
+                allowNegative={false}
+                thousandSeparator=" "
+                displayType="text"
+                suffix={" " + event.currency}
+              />
+            </Profitability>
+          </div>
+        )}
         {event.extendedInfo.length > 0 && (
           <div className="portfolio-event__profit-info">
             {event.extendedInfo.map((info, index) => (
@@ -58,22 +74,6 @@ const _DashboardPortfolioEvent: React.FC<Props> = ({ event, from }) => (
                 />
               </StatisticItem>
             ))}
-          </div>
-        )}
-        {!!event.amount && (
-          <div className="portfolio-event__value">
-            <Profitability
-              value={EVENT_PROFITABILITY_VALUES[event.changeState]}
-              prefix={PROFITABILITY_PREFIX.SIGN}
-            >
-              <NumberFormat
-                value={formatCurrencyValue(event.amount, event.currency)}
-                allowNegative={false}
-                thousandSeparator=" "
-                displayType="text"
-                suffix={" " + event.currency}
-              />
-            </Profitability>
           </div>
         )}
       </StatisticItem>

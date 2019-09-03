@@ -1,12 +1,10 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
-import { FundAssetPercent } from "gv-api-web";
-import { PlatformAssetFull } from "manager-web-portal/src/pages/funds/fund-settings/reallocation/components/reallocate-field";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum, PlatformAssetFull } from "shared/utils/types";
 
 const _FundAsset: React.FC<Props> = ({
   mandatoryFundPercent,

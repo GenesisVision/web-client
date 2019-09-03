@@ -32,7 +32,7 @@ const tableReducerFactory = <ItemsType>({
   filtering,
   defaultFilters,
   clearable = false,
-  clearableActionType = ""
+  clearableActionType
 }: ITableReducerFactoryParams): Reducer<ITableState<ItemsType>, ActionType> => {
   const clearableWrapper: (
     f: Reducer<ITableState<ItemsType>, ActionType>,

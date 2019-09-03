@@ -3,13 +3,18 @@ import { ASSET_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/compone
 import { composeDefaultAssetTypeFilter } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.helpers";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import {
+  EVENT_TYPE_FILTER_DEFAULT_VALUE,
+  EVENT_TYPE_FILTER_NAME
+} from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { composeDefaultEventTypeFilter } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.helpers";
 import {
   FilteringType,
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
 import { IComposeDefaultFilter } from "shared/components/table/components/table.types";
+
+export const EVENTS_ACTION_TYPE = "EVENTS_ACTION_TYPE";
 
 export const PORTFOLIO_EVENTS_MANAGER_COLUMNS: SortingColumn[] = [
   {
@@ -42,7 +47,7 @@ export const PORTFOLIO_EVENTS_COLUMNS: SortingColumn[] = [
   }
 ];
 
-export const PORTFOLIO_EVENTS_FILTERS: IComposeDefaultFilter[] = [
+export const DASHBOARD_PORTFOLIO_EVENTS_FILTERS: IComposeDefaultFilter[] = [
   {
     ...composeDefaultDateRangeFilter()
   },
@@ -50,10 +55,22 @@ export const PORTFOLIO_EVENTS_FILTERS: IComposeDefaultFilter[] = [
   { ...composeDefaultEventTypeFilter() }
 ];
 
-export const PORTFOLIO_EVENTS_DEFAULT_FILTERING: FilteringType = {
+export const DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING: FilteringType = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
   assetType: ASSET_TYPE_FILTER_DEFAULT_VALUE,
-  type: EVENT_TYPE_FILTER_DEFAULT_VALUE
+  [EVENT_TYPE_FILTER_NAME]: EVENT_TYPE_FILTER_DEFAULT_VALUE
+};
+
+export const ASSET_PORTFOLIO_EVENTS_FILTERS: IComposeDefaultFilter[] = [
+  {
+    ...composeDefaultDateRangeFilter()
+  },
+  { ...composeDefaultEventTypeFilter() }
+];
+
+export const ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING: FilteringType = {
+  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
+  [EVENT_TYPE_FILTER_NAME]: EVENT_TYPE_FILTER_DEFAULT_VALUE
 };
 
 export const PORTFOLIO_EVENTS_TYPES_ENUM = {

@@ -1,7 +1,6 @@
 import "../create-fund-settings.scss";
 
 import classNames from "classnames";
-import { PlatformAssetFull } from "pages/funds/fund-settings/reallocation/components/reallocate-field";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
@@ -14,6 +13,7 @@ import Popover, {
 import Regulator, {
   TRegulatorHandle
 } from "shared/components/regulator/regulator";
+import { PlatformAssetFull } from "shared/utils/types";
 
 const _CreateFundSettingsAddAsset: React.FC<Props> = ({
   remainder,

@@ -10,6 +10,11 @@ import {
 import { Action } from "redux";
 import chartPeriodActionCreator from "shared/actions/chart-period.action-creator";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { EVENTS_ACTION_TYPE } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
+import {
+  EVENT_LOCATION,
+  fetchPortfolioEventsWithoutTable
+} from "shared/components/programs/program-details/services/program-details.service";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import investorApi from "shared/services/api-client/investor-api";
 import { ActionType } from "shared/utils/types";
@@ -25,6 +30,14 @@ export const DASHBOARD_CANCEL_PROGRAM_REQUESTS =
   "DASHBOARD_CANCEL_PROGRAM_REQUESTS";
 
 export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
+
+export const fetchEventsAction = (
+  filters: ComposeFiltersAllType,
+  eventLocation: EVENT_LOCATION
+): ActionType<CancelablePromise<InvestmentEventViewModels>> => ({
+  type: EVENTS_ACTION_TYPE,
+  payload: fetchPortfolioEventsWithoutTable(eventLocation, filters)
+});
 
 export const fetchDashboardProgramsAction = (
   auth: string,

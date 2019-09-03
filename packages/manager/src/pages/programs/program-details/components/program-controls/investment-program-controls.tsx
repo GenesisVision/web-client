@@ -122,7 +122,6 @@ interface DispatchProps {
 
 interface OwnProps {
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   canCloseProgram: boolean;
   isOwnProgram: boolean;
   programDescription: ProgramDetailsFull;

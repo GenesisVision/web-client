@@ -1,8 +1,8 @@
 import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
-import React, { useCallback, useEffect, useState } from "react";
-import { connect, ResolveThunks } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
   bindActionCreators,
@@ -11,51 +11,47 @@ import {
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
+import { haveActiveInvestment } from "shared/components/details/details-description-section/details-investment/investment-container";
 import Page from "shared/components/page/page";
-import { IHistorySection } from "shared/components/programs/program-details/program-details.types";
+import {
+  EVENT_LOCATION,
+  getEvents
+} from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { fundEventsSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
-import {
-  haveActiveInvestment,
-  haveSubscription
-} from "../../details/details-description-section/details-investment/investment-container";
 import FundDetailsDescriptionSection from "./fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "./fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
-import { IDescriptionSection, IFundHistorySection } from "./fund-details.types";
-import {
-  dispatchFundDescription,
-  getFundReallocateHistory
-} from "./services/fund-details.service";
+import { IDescriptionSection } from "./fund-details.types";
+import { fundEventsTableSelector } from "./reducers/fund-history.reducer";
+import { dispatchFundDescription } from "./services/fund-details.service";
 
 const _FundDetailsContainer: React.FC<Props> = ({
-  service,
-  isKycConfirmed,
-  currency,
-  isAuthenticated,
-  redirectToLogin,
+  service: { dispatchFundDescription },
   descriptionSection,
-  historySection,
   description
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const events = useSelector(fundEventsTableSelector);
+  const eventTypeFilterValues = useSelector(fundEventsSelector);
+  const dispatch = useDispatch();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
   useEffect(
     () => {
-      fetchHistoryPortfolioEvents({}).then(({ total }) =>
-        setHaveEvents(total > 0)
-      );
+      isAuthenticated &&
+        dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
     },
-    [fetchHistoryPortfolioEvents]
+    [description.id, dispatch, isAuthenticated]
   );
-  const fetchHistoryPortfolioEvents = useCallback(
-    (filters: any) =>
-      historySection.fetchPortfolioEvents({
-        ...filters,
-        assetId: description.id
-      }),
-    [historySection, description]
+  useEffect(
+    () => {
+      isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);
+    },
+    [isAuthenticated, events]
   );
   const haveInvestment = haveActiveInvestment(
     description.personalFundDetails as InvestmentDetails
@@ -69,8 +65,6 @@ const _FundDetailsContainer: React.FC<Props> = ({
           <FundDetailsDescriptionSection
             fundDescription={description}
             isAuthenticated={isAuthenticated}
-            accountCurrency={currency}
-            redirectToLogin={redirectToLogin}
             FundControls={descriptionSection.FundControls}
           />
         </div>
@@ -78,15 +72,14 @@ const _FundDetailsContainer: React.FC<Props> = ({
           <div className="details__section">
             <div>
               <DetailsInvestment
+                selector={fundEventsTableSelector}
                 haveEvents={haveEvents}
                 haveInvestment={haveInvestment}
-                eventTypeFilterValues={historySection.eventTypeFilterValues}
-                fetchPortfolioEvents={fetchHistoryPortfolioEvents}
+                eventTypeFilterValues={eventTypeFilterValues}
                 updateDescription={dispatchFundDescription}
                 asset={ASSET.FUND}
                 id={description.id}
                 assetCurrency={"GVT" as CurrencyEnum}
-                accountCurrency={currency}
                 personalDetails={
                   description.personalFundDetails as InvestmentDetails
                 }
@@ -121,14 +114,10 @@ interface ServiceThunks extends ActionCreatorsMapObject {
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
+
 interface OwnProps {
-  isKycConfirmed: boolean;
-  redirectToLogin: () => void;
-  historySection: IFundHistorySection;
   descriptionSection: IDescriptionSection;
   description: FundDetailsFull;
-  isAuthenticated: boolean;
-  currency: CurrencyEnum;
 }
 
 interface Props extends OwnProps, DispatchProps {}

@@ -7,6 +7,11 @@ import {
 } from "gv-api-web";
 import { Action } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { EVENTS_ACTION_TYPE } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
+import {
+  EVENT_LOCATION,
+  fetchPortfolioEventsWithoutTable
+} from "shared/components/programs/program-details/services/program-details.service";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { IDashboardAssetChart } from "shared/constants/constants";
 import managerApi from "shared/services/api-client/manager-api";
@@ -28,6 +33,14 @@ export const DASHBOARD_ASSETS = "DASHBOARD_ASSETS";
 export const DASHBOARD_PERIOD = "DASHBOARD_PERIOD";
 
 export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
+
+export const fetchEventsAction = (
+  filters: ComposeFiltersAllType,
+  eventLocation: EVENT_LOCATION
+): ActionType<CancelablePromise<InvestmentEventViewModels>> => ({
+  type: EVENTS_ACTION_TYPE,
+  payload: fetchPortfolioEventsWithoutTable(eventLocation, filters)
+});
 
 export const fetchPortfolioEventsAction = (
   auth: string,

@@ -4,6 +4,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import LogoField from "shared/components/fields/logo-field";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import imageValidationSchema from "shared/components/form/input-image/input-image.validation";
 import GVButton from "shared/components/gv-button";

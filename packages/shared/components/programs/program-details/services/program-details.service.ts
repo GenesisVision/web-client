@@ -1,11 +1,11 @@
 import {
   CancelablePromise,
+  InvestmentEventViewModels,
   LevelInfo,
   ProgramPeriodsViewModel,
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
-import { InvestmentEventViewModels } from "gv-api-web";
 import { NextPageContext } from "next";
 import { Dispatch } from "redux";
 import {
@@ -38,6 +38,7 @@ import {
 
 import { RootState } from "../../../../reducers/root-reducer";
 import {
+  fetchEventsAction,
   fetchFinancialStatisticAction,
   fetchLevelParametersAction,
   fetchOpenPositionsAction,
@@ -56,6 +57,11 @@ import {
   tradesTableSelector
 } from "../reducers/program-history.reducer";
 import { ProgramStatisticResult } from "./program-details.types";
+
+export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
+  filters?: ComposeFiltersAllType
+): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
+  fetchEventsAction(id, eventLocation, filters);
 
 export const getProgramBrokers = (id: string) =>
   brokersApi.v10BrokersByProgramIdGet(id);
