@@ -5,13 +5,12 @@ import {
   compose,
   Dispatch
 } from "redux";
+import platformActions from "shared/actions/platform-actions";
+import WalletCurrencyContainer from "shared/components/wallet/components/wallet-currency.container";
+import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { CurrencyEnum, NextPageWithRedux } from "shared/utils/types";
-import { connect, ResolveThunks } from "react-redux";
-import WalletCurrencyContainer from "shared/components/wallet/components/wallet-currency.container";
-import platformActions from "shared/actions/platform-actions";
-import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 
 const WalletDetails: NextPageWithRedux<Props, {}> = ({ id }) => {
   return <WalletCurrencyContainer currency={id} />;
@@ -28,33 +27,13 @@ WalletDetails.getInitialProps = async ctx => {
   return { id };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      fetchWallets
-    },
-    dispatch
-  )
-});
-
 export default compose(
-  connect(
-    null,
-    mapDispatchToProps
-  ),
   withDefaultLayout,
   withPrivateRoute
 )(WalletDetails);
-
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-interface ServiceThunks extends ActionCreatorsMapObject {
-  fetchWallets: typeof fetchWallets;
-}
 
 interface OwnProps {
   id: CurrencyEnum;
 }
 
-interface Props extends DispatchProps, OwnProps {}
+interface Props extends OwnProps {}

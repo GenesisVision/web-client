@@ -7,8 +7,4 @@ const PortfolioEvents: NextPage = () => {
   return <PortfolioEventsAllComponent />;
 };
 
-PortfolioEvents.getInitialProps = async ctx => {
-  return {};
-};
-
 export default withDefaultLayout(PortfolioEvents);
