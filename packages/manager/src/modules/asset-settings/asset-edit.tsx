@@ -5,6 +5,7 @@ import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import GVButton from "shared/components/gv-button";
+import LogoField from "shared/components/profile/settings/profile-image/logo-field";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
@@ -14,7 +15,6 @@ import {
   assetTitleShape
 } from "./asset-edit.validation";
 import DescriptionField from "./fields/description-field";
-import LogoField from "./fields/logo-field";
 import TitleField from "./fields/title-field";
 
 const _AssetEdit: React.FC<Props> = ({

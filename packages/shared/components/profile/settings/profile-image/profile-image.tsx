@@ -1,13 +1,13 @@
 import "./profile-image.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
-import LogoField from "manager-web-portal/src/modules/asset-settings/fields/logo-field";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import imageValidationSchema from "shared/components/form/input-image/input-image.validation";
 import GVButton from "shared/components/gv-button";
+import LogoField from "shared/components/logo-field/logo-field";
 import UserIcon from "shared/media/user-avatar.svg";
 import { SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
