@@ -9,7 +9,10 @@ import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { ASSET_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import {
+  ASSET_TYPE_FILTER_NAME,
+  ASSET_TYPE_FILTER_VALUES
+} from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
@@ -79,11 +82,11 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
                 onChange={updateFilter}
               />
             )}
-            {filtering["assetType"] && (
+            {filtering[ASSET_TYPE_FILTER_NAME] && (
               <SelectFilter
-                name="assetType"
+                name={ASSET_TYPE_FILTER_NAME}
                 label="Assets type"
-                value={filtering["assetType"] as SelectFilterType} //TODO fix filtering types
+                value={filtering[ASSET_TYPE_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
                 values={ASSET_TYPE_FILTER_VALUES}
                 onChange={updateFilter}
               />
