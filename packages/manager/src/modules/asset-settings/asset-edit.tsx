@@ -3,11 +3,11 @@ import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import DescriptionField from "shared/components/fields/description-field";
+import LogoField from "shared/components/fields/logo-field";
 import TitleField from "shared/components/fields/title-field";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import GVButton from "shared/components/gv-button";
-import LogoField from "shared/components/profile/settings/profile-image/logo-field";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import { SetSubmittingType } from "shared/utils/types";
 import {
