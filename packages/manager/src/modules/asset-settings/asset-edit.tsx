@@ -10,12 +10,11 @@ import inputImageShape from "shared/components/form/input-image/input-image.vali
 import GVButton from "shared/components/gv-button";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import { SetSubmittingType } from "shared/utils/types";
-import { object } from "yup";
-
 import {
   assetDescriptionShape,
   assetTitleShape
-} from "./asset-edit.validation";
+} from "shared/utils/validators/validators";
+import { object } from "yup";
 
 const _AssetEdit: React.FC<Props> = ({
   t,
