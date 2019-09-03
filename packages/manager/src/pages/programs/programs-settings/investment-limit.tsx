@@ -83,7 +83,8 @@ const InvestmentLimit = compose<React.ComponentType<OwnProps>>(
     enableReinitialize: true,
     displayName: "edit-form",
     mapPropsToValues: ({ investmentLimit }) => ({
-      [FIELDS.hasInvestmentLimit]: investmentLimit !== null,
+      [FIELDS.hasInvestmentLimit]:
+        investmentLimit !== null && investmentLimit !== 0,
       [FIELDS.investmentLimit]: investmentLimit
     }),
     validationSchema: ({ t }: Props) =>
