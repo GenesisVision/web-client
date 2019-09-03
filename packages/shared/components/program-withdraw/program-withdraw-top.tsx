@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -20,18 +19,8 @@ const _ProgramWithdrawTop: React.FC<OwnProps> = ({
         <p>{title}</p>
       </div>
       <div className="dialog-field">
-        <StatisticItem
-          label={t("withdraw-program.available-to-withdraw")}
-          big
-          equivalent={
-            +formatCurrencyValue(availableToWithdraw, accountCurrency)
-          }
-          equivalentCurrency={accountCurrency}
-        >
-          {formatCurrencyValue(
-            convertToCurrency(availableToWithdraw, rate),
-            programCurrency
-          )}{" "}
+        <StatisticItem label={t("withdraw-program.available-to-withdraw")} big>
+          {formatCurrencyValue(availableToWithdraw, programCurrency)}{" "}
           {programCurrency}
         </StatisticItem>
       </div>
