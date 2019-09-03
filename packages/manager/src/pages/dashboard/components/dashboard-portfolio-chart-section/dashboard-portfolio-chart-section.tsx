@@ -3,13 +3,13 @@ import "./dashboard-portfolio-chart-section.scss";
 import { ManagerAssets, ProgramRequests } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import { ManagerRootState } from "reducers";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import {
@@ -23,12 +23,12 @@ import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { IDashboardAssetChart } from "shared/constants/constants";
 import { isNewUserSelector } from "shared/reducers/header-reducer";
 import { Nullable } from "shared/utils/types";
 
 import { dashboardAssetsSelector } from "../../reducers/dashboard-assets.reducer";
 import { dashboardInRequestsSelector } from "../../reducers/dashboard-in-requests.reducer";
-import { IDashboardAssetChart } from "../../reducers/dashboard.reducers";
 import {
   cancelRequest,
   getInRequests

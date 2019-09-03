@@ -62,10 +62,11 @@ $padding: $padding-small;
     box-sizing: border-box;
     display: flex;
     width: 100%;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-end;
     padding: 0 $padding-xsmall;
     min-height: 20px;
+    flex-wrap: wrap;
   }
 
   &__toggle {
@@ -87,8 +88,15 @@ $padding: $padding-small;
     }
   }
 
+  &__toolbar-heading {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+  }
+
   &__title {
-    @include adaptive-padding(bottom, $padding-xsmall);
+    padding: 0;
+
     justify-self: flex-start;
     margin-right: auto;
     line-height: 22px;
@@ -110,6 +118,11 @@ $padding: $padding-small;
       }
     }
 
+    &--mapping {
+      flex-wrap: nowrap;
+      @include adaptive-margin("left", $padding-xsmall);
+    }
+
     .sorting-filter {
       margin-right: 10px;
     }
@@ -124,6 +137,15 @@ $padding: $padding-small;
 
   &__row {
     transition: background-color 300ms ease;
+
+    &--clickable {
+      &:hover {
+        background-color: $background-pretender-level-hover !important;
+      }
+      & .table__cell {
+        cursor: pointer;
+      }
+    }
 
     &:not(.table__row--head):hover {
       background-color: $row-color;
@@ -229,7 +251,7 @@ $padding: $padding-small;
       font-size: $td-font-size;
 
       .filter {
-        padding-top: 0;
+        padding: 0;
       }
     }
     &__body {

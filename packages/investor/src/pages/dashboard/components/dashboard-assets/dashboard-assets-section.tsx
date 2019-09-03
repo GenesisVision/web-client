@@ -4,12 +4,25 @@ import {
   getDashboardFunds,
   getDashboardPrograms
 } from "pages/dashboard/services/dashboard-assets.service";
-import React, { useCallback, useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { Action, bindActionCreators, compose, Dispatch } from "redux";
+import {
+  getAssetsCounts,
+  IDashboardAssetsCounts
+} from "pages/dashboard/services/dashboard.service";
+import React, { useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { connect, ResolveThunks } from "react-redux";
+import { InvestorRootState } from "reducers";
+import {
+  Action,
+  ActionCreatorsMapObject,
+  bindActionCreators,
+  compose,
+  Dispatch
+} from "redux";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
+import dashboardFundsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds.selector";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
+import dashboardProgramsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.selector";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
@@ -17,31 +30,33 @@ import { ROLE } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
 
 import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";
-import {
-  fetchAssetsCount,
-  IDashboardAssetsCounts
-} from "../../services/dashboard.service";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 import DashboardCopytrading from "./dashboard-copytrading";
+import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
 
-const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
+const DashboardAssetsSection: React.FC<Props> = ({
+  title,
+  counts,
+  service
+}) => {
   const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
-  const [counts, setCounts] = useState<IDashboardAssetsCounts>({});
+  const [t] = useTranslation();
   useEffect(
     () => {
-      fetchAssetsCount().then(setCounts);
-      return service.clearDashboardAssetsTable;
+      service.getAssetsCounts();
+      return () => {
+        service.clearDashboardAssetsTable();
+      };
     },
-    [service.clearDashboardAssetsTable]
+    [service]
   );
   const { programsCount, fundsCount, tradesCount } = counts;
   const handleTabChange = useCallback(
     (e: any, eventTab: string) => {
       if (eventTab === tab) return;
-      service.clearDashboardAssetsTable();
       setTab(e, eventTab);
     },
-    [service, setTab, tab]
+    [setTab, tab]
   );
   return (
     <Surface className="dashboard-assets">
@@ -97,9 +112,21 @@ const DashboardAssetsSection: React.FC<Props> = ({ t, title, service }) => {
   );
 };
 
+const mapStateToProps = (state: InvestorRootState) => {
+  const counts = {
+    programsCount: dashboardProgramsTableSelector(state).itemsData.data.total,
+    fundsCount: dashboardFundsTableSelector(state).itemsData.data.total,
+    tradesCount: dashboardCopytradingTableSelector(state).itemsData.data.total
+  };
+  return { counts };
+};
+
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
-  service: bindActionCreators(
-    { clearDashboardAssetsTable: clearDashboardAssetsTableAction },
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      clearDashboardAssetsTable: clearDashboardAssetsTableAction,
+      getAssetsCounts
+    },
     dispatch
   )
 });
@@ -114,18 +141,24 @@ interface OwnProps {
   title: string;
 }
 
-interface DispatchProps {
-  service: {
-    clearDashboardAssetsTable(): void;
-  };
+interface StateProps {
+  counts: IDashboardAssetsCounts;
 }
 
-interface Props extends OwnProps, DispatchProps, WithTranslation {}
+interface ServiceThunks extends ActionCreatorsMapObject {
+  clearDashboardAssetsTable: typeof clearDashboardAssetsTableAction;
+  getAssetsCounts: typeof getAssetsCounts;
+}
+
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface Props extends OwnProps, StateProps, DispatchProps {}
 
 export default compose<React.ComponentType<OwnProps>>(
-  translate(),
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   ),
   React.memo

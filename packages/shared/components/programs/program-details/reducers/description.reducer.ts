@@ -12,8 +12,7 @@ export type ProgramDescriptionDataType = ProgramDetailsFull;
 export type ProgramDescriptionState = IApiState<ProgramDescriptionDataType>;
 
 export const programDescriptionSelector = apiSelector<
-  ProgramDescriptionDataType,
-  RootState
+  ProgramDescriptionDataType
 >(state => state.programDetails.description);
 
 const programDescriptionReducer = apiReducerFactory<ProgramDescriptionDataType>(

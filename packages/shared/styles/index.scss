@@ -7,6 +7,7 @@ body {
   padding: 0;
   background-color: $background-color;
   font-family: "Montserrat", sans-serif;
+  backface-visibility: hidden;
 }
 
 .body--fixed {

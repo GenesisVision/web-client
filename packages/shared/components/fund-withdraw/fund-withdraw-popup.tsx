@@ -1,14 +1,21 @@
 import { FundWithdrawInfo, WalletBaseData } from "gv-api-web";
 import * as React from "react";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import { rateApi } from "shared/services/api-client/rate-api";
 import { convertFromCurrency } from "shared/utils/currency-converter";
-import { ResponseError, SetSubmittingType } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  ResponseError,
+  SetSubmittingType
+} from "shared/utils/types";
 
-import { DialogLoader } from "../dialog/dialog-loader/dialog-loader";
-import FundWithdrawAmountForm from "./fund-withdraw-amount-form";
+import FundWithdrawAmountForm, {
+  FUND_WITHDRAW_FIELDS,
+  FundWithDrawFormValues
+} from "./fund-withdraw-amount-form";
 import FundWithdrawConfirmForm from "./fund-withdraw-confirm-form";
 import FundWithdrawTop from "./fund-withdraw-top";
-import FundWithdrawWallet from "./fund-withdraw-wallet";
 import {
   FundWithdraw,
   FundWithdrawalInfoResponse
@@ -72,8 +79,9 @@ class FundWithdrawPopup extends React.PureComponent<
     });
   };
 
-  handleEnterAmountSubmit = (percent?: number) => {
+  handleEnterAmountSubmit = ({ percent, walletId }: FundWithDrawFormValues) => {
     this.setState({
+      wallet: this.state.wallets!.find(wallet => wallet.id === walletId),
       step: FUND_WITHDRAW_FORM.CONFIRM,
       percent: percent || 0
     });
@@ -86,10 +94,14 @@ class FundWithdrawPopup extends React.PureComponent<
     });
   };
 
-  handleWalletChange = (walletCurrency: string) => {
+  handleWalletChange = (setFieldValue: Function) => (
+    _: ISelectChangeEvent,
+    target: JSX.Element
+  ) => {
     const { wallets } = this.state;
-    const wallet = wallets!.find(x => x.currency === walletCurrency);
-    this.fetchRate(walletCurrency);
+    setFieldValue(FUND_WITHDRAW_FIELDS.walletId, target.props.value);
+    const wallet = wallets!.find(x => x.id === target.props.value)!;
+    this.fetchRate(wallet.currency);
     this.setState({ wallet });
   };
 
@@ -118,21 +130,15 @@ class FundWithdrawPopup extends React.PureComponent<
         />
         <div className="dialog__bottom">
           {step === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
-            <>
-              <FundWithdrawWallet
-                wallets={wallets}
-                value={wallet.currency}
-                onChange={this.handleWalletChange}
-              />
-              <FundWithdrawAmountForm
-                wallets={wallets}
-                wallet={wallet}
-                availableToWithdraw={availableToWithdraw}
-                exitFee={withdrawalInfo.exitFee}
-                percent={percent}
-                onSubmit={this.handleEnterAmountSubmit}
-              />
-            </>
+            <FundWithdrawAmountForm
+              changeWalletHandle={this.handleWalletChange}
+              wallets={wallets}
+              wallet={wallet}
+              availableToWithdraw={availableToWithdraw}
+              exitFee={withdrawalInfo.exitFee}
+              percent={percent}
+              onSubmit={this.handleEnterAmountSubmit}
+            />
           )}
           {step === FUND_WITHDRAW_FORM.CONFIRM && percent && (
             <FundWithdrawConfirmForm
@@ -154,7 +160,7 @@ class FundWithdrawPopup extends React.PureComponent<
 export default FundWithdrawPopup;
 
 export interface IFundWithdrawPopupProps {
-  accountCurrency: string;
+  accountCurrency: CurrencyEnum;
   fetchInfo(): Promise<FundWithdrawalInfoResponse>;
   withdraw(value: FundWithdraw): Promise<void>;
 }

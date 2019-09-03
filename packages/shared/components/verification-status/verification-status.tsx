@@ -12,7 +12,7 @@ export enum VERIFICATION_STATUS {
   REJECTERD = "Rejected"
 }
 
-interface IStatusProps {
+export interface IStatusProps {
   checked?: boolean;
   verificationStatus?: ProfileFullViewModelVerificationStatusEnum;
 }

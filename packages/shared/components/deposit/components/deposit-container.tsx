@@ -1,11 +1,11 @@
 import { FundInvestInfo, ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
@@ -26,27 +26,41 @@ const _DepositContainer: React.FC<Props> = ({
   hasEntryFee,
   onClose,
   currency,
-  stateCurrency,
   fetchInfo,
   service,
   onApply
 }) => {
-  const { errorMessage, setErrorMessage } = useErrorMessage();
+  const {
+    errorMessage,
+    setErrorMessage,
+    cleanErrorMessage
+  } = useErrorMessage();
+  const stateCurrency = useSelector(currencySelector);
   const [wallets, setWallets] = useState<WalletBaseData[] | undefined>(
     undefined
   );
   const [investInfo, setInvestInfo] = useState<
     ProgramInvestInfo | FundInvestInfo | undefined
   >(undefined);
-  useEffect(() => {
-    service
-      .fetchBaseWallets()
-      .then(setWallets)
-      .catch(setErrorMessage);
-    fetchInfo(id, currency || stateCurrency)
-      .then(setInvestInfo)
-      .catch(setErrorMessage);
-  }, []);
+  useEffect(
+    () => {
+      service
+        .fetchBaseWallets()
+        .then(setWallets)
+        .catch(setErrorMessage);
+      fetchInfo(id, currency || stateCurrency)
+        .then(setInvestInfo)
+        .catch(setErrorMessage);
+    },
+    [currency, fetchInfo, id, service, setErrorMessage, stateCurrency]
+  );
+  const closePopup = useCallback(
+    () => {
+      cleanErrorMessage();
+      onClose();
+    },
+    [cleanErrorMessage, onClose]
+  );
   const handleInvest = useCallback(
     (
       amount: number,
@@ -56,16 +70,16 @@ const _DepositContainer: React.FC<Props> = ({
       service
         .assetInvest(id, amount, currency)
         .then(onApply)
-        .then(onClose)
+        .then(closePopup)
         .catch(setErrorMessage)
         .finally(() => {
           setSubmitting(false);
         });
     },
-    [id]
+    [closePopup, id, onApply, service, setErrorMessage]
   );
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={closePopup}>
       <DepositPopup
         condition={!!wallets && !!investInfo}
         loader={<DialogLoader />}
@@ -80,10 +94,6 @@ const _DepositContainer: React.FC<Props> = ({
     </Dialog>
   );
 };
-
-const mapStateToProps = (state: RootState): StateProps => ({
-  stateCurrency: currencySelector(state)
-});
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
@@ -116,16 +126,11 @@ interface ServiceThunks extends ActionCreatorsMapObject {
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
-
-interface StateProps {
-  stateCurrency: CurrencyEnum;
-}
-
-interface Props extends OwnProps, DispatchProps, StateProps {}
+interface Props extends OwnProps, DispatchProps {}
 
 const DepositContainer = compose<React.ComponentType<OwnProps>>(
-  connect<StateProps, DispatchProps, OwnProps, RootState>(
-    mapStateToProps,
+  connect<null, DispatchProps, OwnProps, RootState>(
+    null,
     mapDispatchToProps
   ),
   React.memo

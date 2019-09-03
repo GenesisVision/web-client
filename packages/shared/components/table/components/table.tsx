@@ -31,6 +31,7 @@ const _Table: React.FC<ITableProps> = ({
   disableTitle,
   items,
   title,
+  renderMappings,
   renderFilters,
   updateFilter,
   filtering,
@@ -73,6 +74,7 @@ const _Table: React.FC<ITableProps> = ({
       <TableToolbar
         disableTitle={disableTitle}
         title={title}
+        renderMappings={renderMappings}
         renderFilters={renderFilters}
         updateFilter={updateFilter}
         filtering={filtering}

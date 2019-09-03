@@ -16,9 +16,6 @@ import { COPYTRADING_TRADES_HISTORY_COLUMNS } from "./copytrading-tables.constan
 import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.selectors";
 
 class _TradesHistoryTable extends React.PureComponent<Props> {
-  componentWillUnmount() {
-    this.props.service.clearCopytradingTable();
-  }
   render() {
     const { t, currency, title } = this.props;
     return (

@@ -30,6 +30,12 @@ const DetailsChartLoader: React.FC = () => (
     <div className="details-chart-loader__row">
       <DetailsChartTabsLoader />
     </div>
+    <ChartValuePeriodLoader />
+  </div>
+);
+
+export const ChartValuePeriodLoader: React.FC = () => (
+  <>
     <div className="details-chart-loader__row">
       <DetailsChartValueLoader />
     </div>
@@ -40,7 +46,7 @@ const DetailsChartLoader: React.FC = () => (
     <div className="details-chart-loader__row">
       <ChartLoader className="details-chart-loader__chart" />
     </div>
-  </div>
+  </>
 );
 
 export default DetailsChartLoader;

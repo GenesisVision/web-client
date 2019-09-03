@@ -1,6 +1,5 @@
 import "../create-fund-settings.scss";
 
-import { FundAssetPartWithIcon } from "gv-api-web";
 import React, { MouseEventHandler, useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import AddButton from "shared/components/add-button/add-button";
@@ -9,13 +8,17 @@ import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetRemoveType
 } from "shared/components/fund-asset/fund-asset-container";
+import { PlatformAssetFull } from "shared/utils/types";
 
 const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
+  touched,
+  error,
+  canChange = true,
   t,
-  assets,
+  assets = [],
   remainder,
-  removeHandle,
-  addHandle
+  removeHandle = () => () => {},
+  addHandle = () => {}
 }) => {
   const [hoveringAssetName, setHoveringAssetName] = useState<
     string | undefined
@@ -32,7 +35,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
           <FundAssetContainer
             assets={assets}
             type={FUND_ASSET_TYPE.MIDDLE}
-            removable={true}
+            removable={canChange}
             removeHandle={removeHandle}
             remainder={remainder}
             hoveringAsset={hoveringAssetName}
@@ -46,26 +49,36 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
           />
         </div>
       </div>
-      <div className="create-fund-settings__add-assets">
-        <div
-          className="create-fund-settings__add-assets-button"
-          onClick={addHandle}
-        >
-          <div>
-            <AddButton />
-          </div>
-          <div>{t("buttons.add-assets")}</div>
+      {touched && (
+        <div className="form-error reallocate-container__form-error">
+          {error}
         </div>
-      </div>
+      )}
+      {canChange && (
+        <div className="create-fund-settings__add-assets">
+          <div
+            className="create-fund-settings__add-assets-button"
+            onClick={addHandle}
+          >
+            <div>
+              <AddButton />
+            </div>
+            <div>{t("buttons.add-assets")}</div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
 
 interface Props extends WithTranslation {
-  assets: FundAssetPartWithIcon[];
+  assets: PlatformAssetFull[];
   remainder: number;
-  removeHandle: FundAssetRemoveType;
-  addHandle: MouseEventHandler;
+  removeHandle?: FundAssetRemoveType;
+  addHandle?: MouseEventHandler;
+  canChange?: boolean;
+  error?: string;
+  touched?: boolean;
 }
 
 const CreateFundSettingsAssetsComponent = translate()(

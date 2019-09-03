@@ -2,11 +2,12 @@ import React from "react";
 import ProfileLayout from "shared/components/profile/profile-layout";
 import ProfileContainer from "shared/modules/profile/profile-container";
 
-const _ProfilePage: React.FC = () => (
-  <ProfileLayout route="details">
+import { PROFILE } from "../profile.constants";
+
+const ProfilePage: React.FC = React.memo(() => (
+  <ProfileLayout route={PROFILE}>
     <ProfileContainer />
   </ProfileLayout>
-);
+));
 
-const ProfilePage = React.memo(_ProfilePage);
 export default ProfilePage;

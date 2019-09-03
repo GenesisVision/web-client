@@ -5,42 +5,66 @@ import GVTab from "shared/components/gv-tabs/gv-tab";
 import Link from "shared/components/link/link";
 import Page from "shared/components/page/page";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { kycConfirmedSelector } from "shared/reducers/header-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
 import {
   KYC_ROUTE,
+  PROFILE,
   PROFILE_ROUTE,
+  SECURITY,
+  SECURITY_ROUTE,
+  SETTINGS,
   SETTINGS_ROUTE,
-  SOCIAL_LINKS_ROUTE
+  SOCIAL_LINKS,
+  SOCIAL_LINKS_ROUTE,
+  VERIFY
 } from "./profile.constants";
 
 const tabs = [
-  { pathname: PROFILE_ROUTE, value: "details" },
-  { pathname: KYC_ROUTE, value: "verify" },
-  { pathname: SETTINGS_ROUTE, value: "settings" }
+  { pathname: PROFILE_ROUTE, value: PROFILE },
+  { pathname: KYC_ROUTE, value: VERIFY, hideable: true },
+  { pathname: SETTINGS_ROUTE, value: SETTINGS },
+  { pathname: SECURITY_ROUTE, value: SECURITY }
 ];
 
 if (ROLE_ENV === ROLE.MANAGER) {
-  tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: "social-links" });
+  tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: SOCIAL_LINKS });
 }
 
-const _ProfileLayout: React.FC<Props> = ({ t, route, children }) => {
+const _ProfileLayout: React.FC<Props> = ({
+  verified,
+  t,
+  route,
+  backPath,
+  children
+}) => {
   return (
     <Page title={t("profile-page.title")}>
       <div className="app__main-wrapper">
         <h1>{t("profile-page.title")}</h1>
         <GVTabs value={route}>
-          {tabs.map(x => (
-            <GVTab
-              key={x.value}
-              label={
-                <Link to={x.pathname}>{t(`profile-page.tabs.${x.value}`)}</Link>
-              }
-              value={x.value}
-            />
-          ))}
+          {tabs
+            .filter(tab => !tab.hideable || !verified)
+            .map(x => (
+              <GVTab
+                key={x.value}
+                label={
+                  <Link
+                    to={{
+                      pathname: x.pathname,
+                      state: backPath
+                    }}
+                  >
+                    {t(`profile-page.tabs.${x.value}`)}
+                  </Link>
+                }
+                value={x.value}
+              />
+            ))}
         </GVTabs>
-        {children}
       </div>
+      {children}
     </Page>
   );
 };

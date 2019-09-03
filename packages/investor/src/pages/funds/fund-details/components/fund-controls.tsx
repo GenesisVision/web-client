@@ -6,15 +6,13 @@ import InvestmentFundControls from "./investment-fund-controls";
 
 const _FundControls: React.FC<IFundControlsProps & WithTranslation> = ({
   fundDescription,
-  isAuthenticated,
-  redirectToLogin
+  isAuthenticated
 }) => (
   <div className="asset-details-description__controls">
     <div className="asset-details-description__col asset-details-description__col--small-size">
       <InvestmentFundControls
         fundDescription={fundDescription}
         isAuthenticated={isAuthenticated}
-        redirectToLogin={redirectToLogin}
       />
     </div>
   </div>

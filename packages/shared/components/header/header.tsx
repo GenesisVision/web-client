@@ -16,7 +16,6 @@ import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import { ProfileWidgetLoader } from "shared/components/profile-widget/profile-widget.loader";
 import WalletWidgetContainer from "shared/components/wallet-widget/wallet-widget-container";
 import useIsOpen from "shared/hooks/is-open.hook";
-import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 
 const _Header: React.FC<Props> = ({
@@ -37,14 +36,17 @@ const _Header: React.FC<Props> = ({
         <Navigation className="header__navigation" />
       </div>
       <div className="header__center">
-        <CurrencySelectContainer className="header__currency" />
         <div className="header__search">
-          <Link to={GLOBAL_SEARCH_ROUTE}>
+          <Link
+            to={{
+              pathname: GLOBAL_SEARCH_ROUTE,
+              state: backPath
+            }}
+          >
             <SearchIcon />
           </Link>
         </div>
       </div>
-      <div className="header__separator" />
       <div className="header__right">
         {isAuthenticated ? (
           <>

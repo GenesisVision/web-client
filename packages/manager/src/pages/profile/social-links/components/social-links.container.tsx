@@ -5,8 +5,9 @@ import {
   UpdateSocialLinkViewModelTypeEnum
 } from "gv-api-web";
 import * as React from "react";
-import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import { connect, ResolveThunks } from "react-redux";
+import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import withLoader from "shared/decorators/with-loader";
 
 import {
@@ -57,12 +58,16 @@ class _SocialLinksContainer extends React.PureComponent<Props, State> {
   render() {
     const { socialLinks } = this.state;
     return (
-      <div className="social-links">
-        <Links
-          condition={socialLinks !== undefined}
-          loader={<SocialLinksLoader />}
-          socialLinks={socialLinks!}
-          onSubmit={this.handleSubmitSocialLink}
+      <div className="asset-settings profile__container--padding-top social-links">
+        <SettingsBlock
+          content={
+            <Links
+              condition={socialLinks !== undefined}
+              loader={<SocialLinksLoader />}
+              socialLinks={socialLinks!}
+              onSubmit={this.handleSubmitSocialLink}
+            />
+          }
         />
       </div>
     );

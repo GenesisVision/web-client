@@ -101,9 +101,6 @@ const _GVTFees: React.FC<Props> = ({ role, t, open, onClose }) => (
             </tr>
           </tbody>
         </table>
-        <p className="gvt-fees__paragraph gvt-fees__paragraph--mute">
-          {t("gvt-fees.note")}
-        </p>
       </div>
     </div>
   </Dialog>

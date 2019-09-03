@@ -5,14 +5,14 @@ import withLoader from "shared/decorators/with-loader";
 
 import BaseProfitability from "./base-profitability";
 import {
+  composeProfitabilityPrefix,
   PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT,
-  composeProfitabilityPrefix
+  PROFITABILITY_VARIANT
 } from "./profitability.helper";
 
-const renderPrefix = (value: string, prefix: PROFITABILITY_PREFIX) => {
-  if (+value > 0) return composeProfitabilityPrefix(prefix).positive;
-  if (+value < 0) return composeProfitabilityPrefix(prefix).negative;
+const renderPrefix = (value: number, prefix: PROFITABILITY_PREFIX) => {
+  if (value > 0) return composeProfitabilityPrefix(prefix).positive;
+  if (value < 0) return composeProfitabilityPrefix(prefix).negative;
 };
 
 export const _Profitability: React.FC<Props> = ({
@@ -25,11 +25,11 @@ export const _Profitability: React.FC<Props> = ({
   <BaseProfitability
     className={className}
     variant={variant}
-    isPositive={+value > 0}
-    isNegative={+value < 0}
+    isPositive={value > 0}
+    isNegative={value < 0}
   >
     <>
-      {renderPrefix(value, prefix)}
+      {renderPrefix(+value, prefix)}
       {children}
     </>
   </BaseProfitability>
@@ -41,7 +41,7 @@ export default Profitability;
 
 interface Props {
   className?: string;
-  value: string;
+  value: number | string;
   prefix?: PROFITABILITY_PREFIX;
   variant?: PROFITABILITY_VARIANT;
 }

@@ -1,15 +1,10 @@
-import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import GVButton from "shared/components/gv-button";
 import GVTextField from "shared/components/gv-text-field";
-import Link from "shared/components/link/link";
-import { PROFILE_EDIT_ROUTE } from "shared/components/profile/profile.constants";
 
 export const ProfileField: React.FC<IProfileFieldProps> = React.memo(
   ({ name, value, label, disabled = true, type }) => (
-    // @ts-ignore
-    <GVTextField // TODO correct type when gv-components will move
+    <GVTextField
       type={type}
       name={name}
       value={value}
@@ -17,6 +12,41 @@ export const ProfileField: React.FC<IProfileFieldProps> = React.memo(
       disabled={disabled}
     />
   )
+);
+
+const _ProfilePersonal: React.FC<IProfilePersonalProps> = ({
+  t,
+  userName,
+  about
+}) => (
+  <tr className="profile__content">
+    <td className="profile__left">
+      <span className="profile__stick" />
+    </td>
+    <td className="profile__center" />
+    <td className="profile__right">
+      <div className="profile__row">
+        {userName && (
+          <ProfileField
+            label={t("profile-page.login")}
+            value={userName}
+            name="userName"
+          />
+        )}
+      </div>
+      <div className="profile__row">
+        {about && (
+          <ProfileField
+            disabled
+            type="textarea"
+            name="about"
+            value={about}
+            label={t("profile-page.about")}
+          />
+        )}
+      </div>
+    </td>
+  </tr>
 );
 
 interface IProfileFieldProps {
@@ -27,57 +57,9 @@ interface IProfileFieldProps {
   type?: string;
 }
 
-const _ProfilePersonal: React.FC<IProfilePersonalProps> = ({ t, info }) => (
-  <>
-    <tr className="profile__content">
-      <td className="profile__left" />
-      <td className="profile__center" />
-      <td className="profile__right">
-        <div className="profile__row">
-          {info.id && (
-            <ProfileField
-              label={t("profile-page.id")}
-              value={info.id}
-              name="id"
-            />
-          )}
-        </div>
-        <div className="profile__row">
-          {info.userName && (
-            <ProfileField
-              label={t("profile-page.login")}
-              value={info.userName}
-              name="userName"
-            />
-          )}
-        </div>
-        <div className="profile__row">
-          {info.about && (
-            <ProfileField
-              disabled
-              type="textarea"
-              name="about"
-              value={info.about}
-              label={t("profile-page.about")}
-            />
-          )}
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td />
-      <td />
-      <td>
-        <Link to={PROFILE_EDIT_ROUTE} className="profile__edit-link">
-          <GVButton>{t("buttons.edit")}</GVButton>
-        </Link>
-      </td>
-    </tr>
-  </>
-);
-
 interface IProfilePersonalProps extends WithTranslation {
-  info: ProfileFullViewModel;
+  userName: string;
+  about: string;
 }
 
 const ProfilePersonal = translate()(React.memo(_ProfilePersonal));

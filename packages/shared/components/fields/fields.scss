@@ -1,0 +1,114 @@
+@import "../../../../node_modules/shared/styles/colors";
+@import "../../../../node_modules/shared/styles/breakpoint";
+@import "../../../../node_modules/shared/styles/sizes";
+
+.create-asset-settings {
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    max-width: 230px;
+    position: relative;
+    justify-content: space-between;
+
+    & .gv-text-field__error {
+      width: 100%;
+    }
+
+    .gv-text-field__wrapper,
+    .gv-checkbox-wrapper {
+      margin: 0;
+    }
+
+    .select--disabled .select__value {
+      color: $text-light-color;
+    }
+
+    @include media-breakpoint-landscape-phone() {
+      max-width: 484px;
+    }
+  }
+
+  &__row-title {
+    font-weight: 500;
+    font-size: $font-size-small;
+    letter-spacing: 0.4px;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  &__text {
+    @include font-size($font-size-small);
+    color: $label-color;
+    letter-spacing: 0.4px;
+    width: 100%;
+  }
+
+  &__field {
+    position: relative;
+    margin-bottom: 40px;
+    max-width: 230px;
+
+    .gv-text-field,
+    .gv-text-field__wrapper {
+      width: 230px;
+    }
+
+    &.deposit-details {
+      max-width: 280px;
+
+      .gv-text-field,
+      .gv-text-field__wrapper {
+        width: 280px;
+      }
+    }
+
+    .invest-popup__currency {
+      margin-bottom: 0;
+    }
+
+    &-caption {
+      padding-top: $padding-xsmall;
+      font-size: $font-size-small;
+      color: $label-color;
+      letter-spacing: 0.4px;
+      width: 100%;
+
+      &.hint {
+        cursor: pointer;
+      }
+    }
+
+    &-caption-tooltip-content {
+      width: 248px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: $text-light-color;
+    }
+
+    &--wider {
+      max-width: 100%;
+      width: 100%;
+
+      .gv-text-field,
+      .gv-text-field__wrapper {
+        width: 100%;
+      }
+    }
+  }
+
+  &__logo-title {
+    margin-bottom: 8px;
+    font-size: $font-size-common;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+  }
+
+  &__logo-notice {
+    font-size: 11px;
+    color: $label-color;
+    letter-spacing: 0.2px;
+    width: 210px;
+    line-height: 1.4;
+  }
+}

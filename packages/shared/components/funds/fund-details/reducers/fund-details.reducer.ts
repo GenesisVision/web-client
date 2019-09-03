@@ -8,25 +8,36 @@ import fundBalanceChartReducer, {
 import fundDescriptionReducer, {
   FundDescriptionState
 } from "./description.reducer";
+import fundHistoryReducer, { FundHistoryState } from "./fund-history.reducer";
 import fundProfitChartReducer, {
   FundProfitChartState
 } from "./profit-chart.reducer";
+import statisticCurrencyReducer, {
+  StatisticCurrencyState
+} from "./statistic-currency.reducer";
+import statisticPeriodReducer, {
+  StatisticPeriodState
+} from "./statistic-period.reducer";
 
 type FundDetailsDataType = Readonly<{
-  id: FundIdState;
+  statisticPeriod: StatisticPeriodState;
+  statisticCurrency: StatisticCurrencyState;
   profitChart: FundProfitChartState;
   balanceChart: FundBalanceChartState;
   description: FundDescriptionState;
+  fundHistory: FundHistoryState;
 }>;
 
 export type FundDetailsState = FundDetailsDataType;
 
 const fundDetailsReducer = clearableReducer(
   combineReducers<FundDetailsState>({
-    id: fundIdReducer,
+    statisticPeriod: statisticPeriodReducer,
+    statisticCurrency: statisticCurrencyReducer,
     description: fundDescriptionReducer,
     profitChart: fundProfitChartReducer,
-    balanceChart: fundBalanceChartReducer
+    balanceChart: fundBalanceChartReducer,
+    fundHistory: fundHistoryReducer
   })
 );
 

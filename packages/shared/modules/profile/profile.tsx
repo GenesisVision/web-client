@@ -1,67 +1,90 @@
+import "shared/components/details/details.scss";
+import "shared/modules/asset-settings/asset-settings.scss";
 import "./profile.scss";
 
+import copy from "copy-to-clipboard";
 import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import VerificationStatus from "shared/components/verification-status/verification-status";
+import GVButton from "shared/components/gv-button";
+import ProfileImageContainer from "shared/components/profile/settings/profile-image/profile-image-container";
+import SettingsBlock from "shared/components/settings-block/settings-block";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ROLE } from "shared/constants/constants";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import PublicInfo from "shared/modules/public-info/public-info";
 
-import ProfilePersonal, { ProfileField } from "./profile-personal";
+const _Profile: React.FC<Props> = ({
+  t,
+  info,
+  role,
+  notifySuccess,
+  onSuccessEdit
+}) => {
+  const onCopy = () => {
+    copy(info.id);
+    notifySuccess(t("profile-page.success-copy"));
+  };
+  return (
+    <div className="asset-settings profile__container--padding-top">
+      {role === ROLE.MANAGER && (
+        <>
+          <SettingsBlock
+            label={t("profile-page.public-info")}
+            content={
+              <PublicInfo
+                about={info.about}
+                userName={info.userName}
+                onSuccessEdit={onSuccessEdit}
+              />
+            }
+          />
+          <SettingsBlock
+            label={t("profile-page.id")}
+            content={
+              <div className="profile__content">
+                <div>{info.id}</div>
+                <GVButton onClick={onCopy}>{t("buttons.copy")}</GVButton>
+              </div>
+            }
+          />
+        </>
+      )}
+      <SettingsBlock
+        label={t("profile-page.settings.profile-image")}
+        content={<ProfileImageContainer />}
+      />
+      <SettingsBlock
+        label={t("profile-page.contacts")}
+        checked={true}
+        content={
+          <StatisticItem label={t("profile-page.email")}>
+            {info.email}
+          </StatisticItem>
+        }
+      />
+      <SettingsBlock
+        label={t("profile-page.personal-info")}
+        verificationStatus={info.verificationStatus}
+      />
+    </div>
+  );
+};
 
-const _Profile: React.FC<Props> = ({ t, info, role }) => (
-  <div className="profile__container profile__container--padding-top">
-    <table className="profile profile--is-disabled">
-      <tbody>
-        {role === ROLE.MANAGER && <ProfilePersonal info={info} />}
-        <tr className="profile__title">
-          <td className="profile__left">
-            <h4 className="profile__subtitle">01</h4>
-          </td>
-          <td className="profile__center" />
-          <td className="profile__right">
-            <h4 className="profile__subtitle">{t("profile-page.contacts")}</h4>
-            <VerificationStatus checked={true} />
-          </td>
-        </tr>
-        <tr className="profile__content">
-          <td className="profile__left">
-            <span className="profile__stick" />
-          </td>
-          <td className="profile__center" />
-          <td className="profile__right">
-            <ProfileField
-              label={t("profile-page.email")}
-              value={info.email}
-              name="phone"
-            />
-          </td>
-        </tr>
-        <tr className="profile__title">
-          <td className="profile__left">
-            <h4 className="profile__subtitle">02</h4>
-          </td>
-          <td className="profile__center" />
-          <td className="profile__right">
-            <h4 className="profile__subtitle">
-              {t("profile-page.personal-info")}
-            </h4>
-            <VerificationStatus verificationStatus={info.verificationStatus} />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-);
+interface Props extends WithTranslation, IProfileOwnProps, WithRoleProps {}
 
-interface Props extends WithTranslation, WithRoleProps, OwnProps {}
-
-export interface OwnProps {
+export interface IProfileOwnProps {
   info: ProfileFullViewModel;
+  notifySuccess: (val: string) => void;
+  onSuccessEdit: () => void;
 }
 
-const Profile = compose<React.ComponentType<OwnProps>>(
+const Profile = compose<
+  React.ComponentType<IProfileOwnProps & WithLoaderProps>
+>(
+  withLoader,
   withRole,
   translate(),
   React.memo

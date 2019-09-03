@@ -1,5 +1,10 @@
-import { FundFacet, PlatformInfo, ProgramFacet } from "gv-api-web";
-import React, { useCallback } from "react";
+import {
+  FundFacet,
+  PlatformCurrency,
+  PlatformInfo,
+  ProgramFacet
+} from "gv-api-web";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { createSelector } from "reselect";
@@ -9,16 +14,30 @@ import { IProgramsFacetTableProps } from "shared/components/programs/programs-fa
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { IDataModel } from "shared/constants/constants";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
-import { platformDataSelector } from "shared/reducers/platform-reducer";
+import useIsOpen from "shared/hooks/is-open.hook";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
+import {
+  platformCurrenciesSelector,
+  platformDataSelector
+} from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
+import {
+  CurrencyEnum,
+  MiddlewareDispatch,
+  TGetState
+} from "shared/utils/types";
+
+import { DispatchProps } from "../asset-status/asset-status-requests";
 
 const _FacetContainer: React.FC<Props> = ({
   id,
   TableContainer,
   isAuthenticated,
-  facets,
   facet,
-  getItems
+  facets,
+  getItems,
+  currency,
+  currencies
 }) => {
   const getFacetItems = useCallback(
     filtering => getItems({ ...filtering, facetId: facet!.id }),
@@ -34,6 +53,8 @@ const _FacetContainer: React.FC<Props> = ({
       timeframe={timeframe}
       getItems={getFacetItems}
       isAuthenticated={isAuthenticated}
+      currency={currency}
+      currencies={currencies}
     />
   );
 };
@@ -69,7 +90,9 @@ const facetSelector = createSelector<
 
 const mapStateToProps = (state: RootState, props: OwnProps): StateProps => ({
   facets: facetsSelector(state, props),
-  facet: facetSelector(state, props)
+  facet: facetSelector(state, props),
+  currencies: platformCurrenciesSelector(state),
+  currency: currencySelector(state)
 });
 
 interface OwnProps {
@@ -84,6 +107,8 @@ interface OwnProps {
 interface StateProps {
   facets?: FacetType[];
   facet?: FacetType;
+  currencies: PlatformCurrency[];
+  currency: CurrencyEnum;
 }
 
 interface Props extends OwnProps, StateProps {}

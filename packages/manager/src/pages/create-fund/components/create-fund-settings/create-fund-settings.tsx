@@ -1,30 +1,20 @@
 import "shared/components/deposit-details/deposit-details.scss";
-
 import "./create-fund-settings.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
 import { FundAssetPart, PlatformAsset, WalletData } from "gv-api-web";
-import ReallocateField from "modules/reallocate/components/reallocate-field";
+import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
+import DepositDetailsBlock from "pages/create-program/components/create-program-settings/fields/deposit-details-block";
+import ReallocateField from "pages/funds/fund-settings/reallocation/components/reallocate-field";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import InputImage, {
-  IImageValue
-} from "shared/components/form/input-image/input-image";
-import GVButton from "shared/components/gv-button";
+import DescriptionBlock from "shared/components/fields/description-block";
+import FeesSettings from "shared/components/fields/fees-settings";
+import { IImageValue } from "shared/components/form/input-image/input-image";
 import GVFormikField from "shared/components/gv-formik-field";
-import GVProgramPeriod from "shared/components/gv-program-period";
-import GVTextField from "shared/components/gv-text-field";
-import Hint from "shared/components/hint/hint";
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import { ISelectChangeEvent } from "shared/components/select/select";
-import WalletSelect from "shared/components/wallet-select/wallet-select";
-import FundDefaultImage from "shared/media/program-default-image.svg";
-import { convertFromCurrency } from "shared/utils/currency-converter";
-import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { allowValuesNumberFormat } from "shared/utils/helpers";
+import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
@@ -47,14 +37,6 @@ class _CreateFundSettings extends React.PureComponent<
     this.props.onWalletChange(target.props.value);
   };
 
-  setMaxAmount = (available: number, currency: string) => () => {
-    const { setFieldValue } = this.props;
-    setFieldValue(
-      CREATE_FUND_FIELDS.depositAmount,
-      formatCurrencyValue(available, currency)
-    );
-  };
-
   validateAndSubmit = (e?: React.FormEvent<HTMLFormElement> | undefined) => {
     const { t, isValid, handleSubmit, notifyError } = this.props;
     handleSubmit(e);
@@ -65,17 +47,14 @@ class _CreateFundSettings extends React.PureComponent<
     }
   };
 
-  isAmountAllow = (currency: CurrencyEnum) => ({ value }: NumberFormatValues) =>
-    validateFraction(value, currency);
-
   render() {
     const {
+      setFieldValue,
       fundCurrency,
       wallets,
       wallet,
       t,
       navigateBack,
-      author,
       isSubmitting,
       values,
       managerMaxExitFee,
@@ -84,8 +63,7 @@ class _CreateFundSettings extends React.PureComponent<
       minimumDepositAmount,
       assets
     } = this.props;
-    const { depositAmount, description, title } = values;
-    const descriptionTrimmedLength = description.trim().length;
+    const { depositAmount, description } = values;
 
     return (
       <div className="create-fund-settings">
@@ -99,81 +77,13 @@ class _CreateFundSettings extends React.PureComponent<
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
             <div className="create-fund-settings__row">
-              <div className="create-fund-settings__item create-fund-settings__item--wider">
-                <GVFormikField
-                  type="text"
-                  name={CREATE_FUND_FIELDS.title}
-                  label={t("manager.create-fund-page.settings.fields.name")}
-                  autoComplete="off"
-                  component={GVTextField}
-                />
-                <div className="create-fund-settings__item-caption">
-                  <span className="create-fund-settings__description create-fund-settings__description-requirements">
-                    {t(
-                      "manager.create-fund-page.settings.fields.name-requirements"
-                    )}
-                  </span>
-                </div>
-              </div>
-              <div className="create-fund-settings__item create-fund-settings__item--wider">
-                <GVFormikField
-                  type="textarea"
-                  name={CREATE_FUND_FIELDS.description}
-                  label={t(
-                    "manager.create-fund-page.settings.fields.description"
-                  )}
-                  component={GVTextField}
-                />
-                <div className="create-fund-settings__item-caption create-fund-settings__description">
-                  <span className="create-fund-settings__description-requirements">
-                    {t(
-                      "manager.create-fund-page.settings.fields.description-requirements"
-                    )}
-                  </span>
-                  {descriptionTrimmedLength > 0 && (
-                    <div className="create-fund-settings__description-chars">
-                      <div className="create-fund-settings__description-chars-value">
-                        {descriptionTrimmedLength}
-                      </div>
-                      <GVProgramPeriod
-                        start={0}
-                        end={500}
-                        value={descriptionTrimmedLength}
-                        variant="pie"
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="create-fund-settings__item">
-                <div className="create-fund-settings__logo-title">
-                  {t("manager.create-fund-page.settings.fields.upload-logo")}
-                </div>
-                <div className="create-fund-settings__logo-notice">
-                  {t(
-                    "manager.create-fund-page.settings.fields.upload-logo-rules"
-                  )}
-                </div>
-              </div>
-              <div className="create-fund-settings__item create-fund-settings__item--wider">
-                <div className="create-fund-settings__logo-section">
-                  <div className="create-fund-settings__file-field-container">
-                    <GVFormikField
-                      name="logo"
-                      component={InputImage}
-                      defaultImage={FundDefaultImage}
-                    />
-                  </div>
-                  <div className="create-fund-settings__image-info">
-                    <div className="create-fund-settings__image-title">
-                      {title}
-                    </div>
-                    <div className="create-fund-settings__image-author">
-                      {author}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <DescriptionBlock
+                asset={ASSET.FUND}
+                titleName={CREATE_FUND_FIELDS.title}
+                descriptionName={CREATE_FUND_FIELDS.description}
+                logoName={CREATE_FUND_FIELDS.logo}
+                description={description}
+              />
             </div>
           </div>
           <div className="create-fund-settings__subheading">
@@ -181,6 +91,9 @@ class _CreateFundSettings extends React.PureComponent<
             {t("manager.create-fund-page.settings.asset-selection")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
+            <div className="create-asset-settings__text">
+              {t("manager.create-fund-page.settings.fields.mandatory-assets")}
+            </div>
             <GVFormikField
               name={CREATE_FUND_FIELDS.assets}
               component={ReallocateField}
@@ -192,144 +105,46 @@ class _CreateFundSettings extends React.PureComponent<
             {t("manager.create-fund-page.settings.fees-settings")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
-            <div className="create-fund-settings__row">
-              <div className="create-fund-settings__item">
-                <GVFormikField
-                  name={CREATE_FUND_FIELDS.entryFee}
-                  label={t(
-                    "manager.create-fund-page.settings.fields.entry-fee"
-                  )}
-                  adornment="%"
-                  component={GVTextField}
-                  InputComponent={NumberFormat}
-                  autoComplete="off"
-                  decimalScale={4}
-                  isAllowed={allowValuesNumberFormat({
-                    from: 0,
-                    to: managerMaxEntryFee
-                  })}
-                />
-                <Hint
-                  content={t(
-                    "manager.create-program-page.settings.hints.entry-fee"
-                  )}
-                  className="create-fund-settings__item-caption"
-                  vertical={VERTICAL_POPOVER_POS.BOTTOM}
-                  tooltipContent={t(
-                    "manager.create-fund-page.settings.hints.entry-fee-description",
-                    { maxFee: managerMaxEntryFee }
-                  )}
-                />
-              </div>
-              <div className="create-fund-settings__item">
-                <GVFormikField
-                  name={CREATE_FUND_FIELDS.exitFee}
-                  label={t("manager.create-fund-page.settings.fields.exit-fee")}
-                  adornment="%"
-                  component={GVTextField}
-                  InputComponent={NumberFormat}
-                  autoComplete="off"
-                  decimalScale={4}
-                  isAllowed={allowValuesNumberFormat({
-                    from: 0,
-                    to: managerMaxExitFee
-                  })}
-                />
-                <Hint
-                  content={t(
-                    "manager.create-fund-page.settings.hints.exit-fee"
-                  )}
-                  className="create-fund-settings__item-caption"
-                  vertical={VERTICAL_POPOVER_POS.BOTTOM}
-                  tooltipContent={t(
-                    "manager.create-fund-page.settings.hints.exit-fee-description",
-                    {
-                      maxFee: managerMaxExitFee
-                    }
-                  )}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="create-fund-settings__subheading">
-            <span className="create-fund-settings__block-number">04</span>
-            {t("manager.create-fund-page.settings.deposit-details")}
-          </div>
-          <div className={"deposit-details create-fund-settings__fill-block"}>
-            <div className="create-program-settings__field deposit-details">
-              <WalletSelect
-                name={CREATE_FUND_FIELDS.depositWalletId}
-                label={t("transfer.from")}
-                items={wallets}
-                onChange={this.onChangeDepositWallet}
-              />
-              <InputAmountField
-                autoFocus={false}
-                name={CREATE_FUND_FIELDS.depositAmount}
-                label={t("transfer.amount")}
-                currency={wallet.currency}
-                isAllow={this.isAmountAllow(wallet.currency)}
-                setMax={this.setMaxAmount(wallet.available, wallet.currency)}
-              />
-              {fundCurrency !== wallet.currency && depositAmount && (
-                <div className="invest-popup__currency">
-                  <NumberFormat
-                    value={formatCurrencyValue(
-                      convertFromCurrency(depositAmount, rate),
-                      fundCurrency
-                    )}
-                    prefix="≈ "
-                    suffix={` ${fundCurrency}`}
-                    displayType="text"
-                  />
-                </div>
+            <FeesSettings
+              entryFeeName={CREATE_FUND_FIELDS.entryFee}
+              entryFeeDescription={t(
+                "manager.create-fund-page.settings.hints.entry-fee-description",
+                { maxFee: managerMaxEntryFee }
               )}
-              <div className="deposit-details__available-list">
-                <div className="deposit-details__available-amount">
-                  {t("manager.create-program-page.settings.fields.min-deposit")}
-                  <span className={"deposit-details__available-amount-value"}>
-                    <NumberFormat
-                      value={minimumDepositAmount}
-                      thousandSeparator=" "
-                      displayType="text"
-                      suffix={` ${fundCurrency}`}
-                    />
-                  </span>
-                </div>
-                <div className="deposit-details__available-amount">
-                  {t(
-                    "manager.create-fund-page.settings.fields.available-in-wallet"
-                  )}
-                  <span className={"deposit-details__available-amount-value"}>
-                    <NumberFormat
-                      value={wallet.available}
-                      thousandSeparator=" "
-                      displayType="text"
-                      suffix={` ${wallet.currency}`}
-                    />
-                  </span>
-                </div>
-              </div>
-            </div>
+              secondFeeName={CREATE_FUND_FIELDS.exitFee}
+              secondFeeLabel={t(
+                "manager.create-fund-page.settings.fields.exit-fee"
+              )}
+              secondFeeUnderText={t(
+                "manager.create-fund-page.settings.hints.exit-fee"
+              )}
+              secondFeeDescription={t(
+                "manager.create-fund-page.settings.hints.exit-fee-description",
+                {
+                  maxFee: managerMaxExitFee
+                }
+              )}
+            />
           </div>
-
-          <div className="create-fund-settings__navigation">
-            <GVButton
-              title={t("buttons.create-fund")}
-              color="primary"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {t("buttons.create-fund")}
-            </GVButton>
-            <GVButton
-              variant="text"
-              onClick={navigateBack}
-              className="create-fund-settings__navigation-back"
-            >
-              <>&larr; {t("buttons.back")}</>
-            </GVButton>
-          </div>
+          <DepositDetailsBlock
+            blockNumber={4}
+            walletFieldName={CREATE_FUND_FIELDS.depositWalletId}
+            inputName={CREATE_FUND_FIELDS.depositAmount}
+            depositAmount={depositAmount}
+            minimumDepositAmount={minimumDepositAmount}
+            wallets={wallets}
+            rate={rate}
+            setFieldValue={setFieldValue}
+            onWalletChange={this.onChangeDepositWallet}
+            assetCurrency={fundCurrency}
+            walletAvailable={wallet.available}
+            walletCurrency={wallet.currency}
+          />
+          <CreateAssetNavigation
+            asset={ASSET.FUND}
+            navigateBack={navigateBack}
+            isSubmitting={isSubmitting}
+          />
         </form>
       </div>
     );
@@ -362,7 +177,7 @@ const CreateFundSettings = compose<React.ComponentType<OwnProps>>(
 export default CreateFundSettings;
 
 interface OwnProps {
-  fundCurrency: string;
+  fundCurrency: CurrencyEnum;
   managerMaxExitFee: number;
   managerMaxEntryFee: number;
   assets: PlatformAsset[];

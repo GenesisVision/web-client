@@ -7,3 +7,11 @@ moment.relativeTimeThreshold("m", 60);
 moment.relativeTimeThreshold("h", 24);
 moment.relativeTimeThreshold("d", 30);
 moment.relativeTimeThreshold("M", 12);
+moment.locale("en", {
+  relativeTime: {
+    s: "%d seconds",
+    m: "%d minutes",
+    h: "%d hours",
+    d: "%d days"
+  }
+});

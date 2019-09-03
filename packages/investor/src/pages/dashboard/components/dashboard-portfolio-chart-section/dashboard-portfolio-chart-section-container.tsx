@@ -1,7 +1,7 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import { DashboardChartValue, ProgramRequests } from "gv-api-web";
-import React from "react";
+import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect, ResolveThunks } from "react-redux";
 import { InvestorRootState } from "reducers";

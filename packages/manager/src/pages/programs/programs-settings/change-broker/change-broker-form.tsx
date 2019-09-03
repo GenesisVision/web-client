@@ -1,9 +1,13 @@
 import { FormikProps, withFormik } from "formik";
-import { Broker, BrokerAccountType, BrokersProgramInfo } from "gv-api-web";
+import { Broker, BrokerAccountType } from "gv-api-web";
 import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React, { useCallback, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import {
+  useTranslation,
+  WithTranslation,
+  withTranslation as translate
+} from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -15,17 +19,20 @@ import { SetSubmittingType } from "shared/utils/types";
 import ConfirmChangeBroker from "./confirm-change-broker";
 
 const _ChangeBrokerForm: React.FC<Props> = ({
+  isSignalProgram,
   currentLeverage,
   onSubmit,
   submitForm,
-  brokersInfo: { brokers, currentAccountTypeId },
+  currentAccountTypeId,
   handleSubmit,
   values,
   dirty,
   isValid,
   isSubmitting,
   setFieldValue,
-  t
+  t,
+  id,
+  brokers
 }) => {
   const [
     isChangeBrokerOpen,
@@ -124,7 +131,12 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           ))}
         </GVFormikField>
       </div>
-      <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
+      <HuobiWarning
+        from={values[FIELDS.brokerFrom].name}
+        to={selectedBroker.name}
+        isSignalProgram={isSignalProgram}
+      />
+      <p className="program-settings__text program-settings__text--padding-top">
         {t("manager.program-settings.broker.text-change")}
       </p>
       <GVButton
@@ -162,13 +174,15 @@ interface Props
     FormikProps<ChangeBrokerFormValues> {}
 
 export interface ChangeBrokerFormOwnProps {
+  isSignalProgram: boolean;
+  currentAccountTypeId: string;
   onSubmit: (
     values: ChangeBrokerFormValues,
     setSubmitting: SetSubmittingType
   ) => void;
   id: string;
+  brokers: Broker[];
   currentLeverage: number;
-  brokersInfo: BrokersProgramInfo;
 }
 
 enum FIELDS {
@@ -188,10 +202,7 @@ const ChangeBrokerForm = compose<React.ComponentType<ChangeBrokerFormOwnProps>>(
   withFormik<ChangeBrokerFormOwnProps, ChangeBrokerFormValues>({
     enableReinitialize: true,
     displayName: "edit-form",
-    mapPropsToValues: ({
-      brokersInfo: { brokers, currentAccountTypeId },
-      currentLeverage
-    }) => ({
+    mapPropsToValues: ({ brokers, currentAccountTypeId, currentLeverage }) => ({
       [FIELDS.brokerFrom]: brokers.find(
         broker =>
           !!broker.accountTypes.find(
@@ -208,3 +219,21 @@ const ChangeBrokerForm = compose<React.ComponentType<ChangeBrokerFormOwnProps>>(
   React.memo
 )(_ChangeBrokerForm);
 export default ChangeBrokerForm;
+
+interface IHuobiWarningProps {
+  from: string;
+  to: string;
+  isSignalProgram: boolean;
+}
+export const HuobiWarning: React.FC<IHuobiWarningProps> = ({
+  from,
+  to,
+  isSignalProgram
+}) => {
+  const [t] = useTranslation();
+  return from === "Genesis Markets" && to === "Huobi" && isSignalProgram ? (
+    <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
+      {t("manager.program-settings.broker.text-warning")}
+    </p>
+  ) : null;
+};

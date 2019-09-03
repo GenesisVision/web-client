@@ -1,6 +1,7 @@
 import { ProgramDetails } from "gv-api-web";
-import { useCallback } from "react";
+import moment from "moment";
 import * as React from "react";
+import { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import GVButton from "shared/components/gv-button";
@@ -49,7 +50,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
     () =>
       toggleFavorite(
         program.id,
-        !!program.personalDetails && program.personalDetails.isFavorite
+        program.personalDetails && program.personalDetails.isFavorite
       ),
     [program.id, program.personalDetails, toggleFavorite]
   );
@@ -203,12 +204,8 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
               decimalScale={0}
             />
           </StatisticItem>
-          <StatisticItem label={t("programs-page.programs-header.trades")}>
-            <NumberFormat
-              value={program.statistic.tradesCount}
-              displayType="text"
-              decimalScale={0}
-            />
+          <StatisticItem label={t("programs-page.programs-header.age")}>
+            {moment(program.creationDate).fromNow(true)}
           </StatisticItem>
         </div>
         <div className="table-cards__table-column">

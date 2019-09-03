@@ -2,6 +2,19 @@
 @import "~shared/styles/_sizes.scss";
 
 .profile {
+  &__form-error {
+    @include adaptive-padding(bottom, $padding-xsmall);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    & div {
+      @include adaptive-padding(right, $padding-small);
+    }
+  }
+
   &__edit-link {
     display: flex;
     margin-bottom: 45px;

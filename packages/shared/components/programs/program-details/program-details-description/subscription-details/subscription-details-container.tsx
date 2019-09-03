@@ -1,8 +1,7 @@
 import "./subscription-details.scss";
 
 import { PersonalProgramDetailsFull } from "gv-api-web";
-import ProgramFollowContainer from "investor-web-portal/src/modules/program-follow/program-follow-container";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect, ResolveThunks } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -19,13 +18,13 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
   personalDetails
 }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const [rate, setRate] = useState<number>(0);
+  const [rate, setRate] = useState<number>(1);
   useEffect(
     () => {
       rateApi
         .v10RateByFromByToGet("USD", currency)
-        .then(rate => setRate(rate))
-        .catch(() => setRate(0));
+        .then(setRate)
+        .catch(() => setRate(1));
     },
     [currency]
   );

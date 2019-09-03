@@ -1,8 +1,8 @@
+import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import {
   assetDescriptionShape,
   assetTitleShape
-} from "pages/create-program/components/create-program-settings/create-program-settings.validators";
-import inputImageShape from "shared/components/form/input-image/input-image.validation";
+} from "shared/utils/validators/validators";
 import { boolean, mixed, number, object } from "yup";
 
 import { ASSET_EDIT_FIELDS, IAssetEditProps } from "./asset-edit-form";

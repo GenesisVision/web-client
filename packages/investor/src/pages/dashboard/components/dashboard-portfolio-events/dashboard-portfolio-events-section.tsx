@@ -1,39 +1,36 @@
-import { DashboardPortfolioEvents as DashboardPortfolioEventsType } from "gv-api-web";
-import * as React from "react";
-import { connect } from "react-redux";
-import { InvestorRootState } from "reducers";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
 import { DASHBOARD_EVENTS_ROUTE } from "shared/routes/dashboard.routes";
 
 import { dashboardEventsSelector } from "../../reducers/dashboard-events.reducer";
-import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
+import { getTopPortfolioEvents } from "../../services/dashboard-events.services";
 
-class DashboardPortfolioEventsSection extends React.PureComponent<Props> {
-  render() {
-    const { title, data } = this.props;
-    return (
-      <DashboardPortfolioEvents
-        fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
-        title={title}
-        data={data}
-        eventView={DashboardPortfolioEvent}
-      />
-    );
-  }
-}
+const _DashboardPortfolioEventsSection: React.FC<Props> = ({ title }) => {
+  const dispatch = useDispatch();
+  const data = useSelector(dashboardEventsSelector);
+  useEffect(
+    () => {
+      dispatch(getTopPortfolioEvents);
+    },
+    [dispatch]
+  );
+  return (
+    <DashboardPortfolioEvents
+      fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
+      title={title}
+      data={data}
+    />
+  );
+};
 
-const mapStateToProps = (state: InvestorRootState): StateProps => ({
-  data: dashboardEventsSelector(state)
-});
-
-interface Props extends StateProps, OwnProps {}
+interface Props extends OwnProps {}
 
 interface OwnProps {
   title: string;
 }
 
-interface StateProps {
-  data?: DashboardPortfolioEventsType;
-}
-
-export default connect(mapStateToProps)(DashboardPortfolioEventsSection);
+const DashboardPortfolioEventsSection = React.memo(
+  _DashboardPortfolioEventsSection
+);
+export default DashboardPortfolioEventsSection;

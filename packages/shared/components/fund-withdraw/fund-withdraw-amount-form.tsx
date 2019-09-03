@@ -10,11 +10,15 @@ import { calculatePercentage } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { number, object } from "yup";
 
+import { ISelectChangeEvent } from "../select/select";
+import WalletSelect from "../wallet-select/wallet-select";
 import FundWithdrawResult from "./fund-withdraw-result";
 
 const _FundWithdrawAmountForm: React.FC<
-  InjectedFormikProps<Props, FormValues>
+  InjectedFormikProps<Props, FundWithDrawFormValues>
 > = ({
+  changeWalletHandle,
+  wallets,
   setFieldValue,
   t,
   wallet,
@@ -33,18 +37,25 @@ const _FundWithdrawAmountForm: React.FC<
   );
 
   const setMaxAmount = useCallback(
-    () => setFieldValue(FIELDS.percent, "100"),
-    []
+    () => setFieldValue(FUND_WITHDRAW_FIELDS.percent, "100"),
+    [setFieldValue]
   );
 
   const amountToWithdrawCcy = calculatePercentage(
     availableToWithdraw,
-    values[FIELDS.percent] || 0
+    values[FUND_WITHDRAW_FIELDS.percent] || 0
   );
+
   return (
     <form id="withdraw-form" onSubmit={handleSubmit}>
+      <WalletSelect
+        name={FUND_WITHDRAW_FIELDS.walletId}
+        label={t("withdraw-fund.wallet")}
+        items={wallets}
+        onChange={changeWalletHandle(setFieldValue)}
+      />
       <InputAmountField
-        name={FIELDS.percent}
+        name={FUND_WITHDRAW_FIELDS.percent}
         label={t("withdraw-fund.amount-to-withdraw")}
         placeholder="%"
         currency="%"
@@ -62,7 +73,7 @@ const _FundWithdrawAmountForm: React.FC<
       <FundWithdrawResult
         availableToWithdraw={availableToWithdraw}
         currency={wallet.currency}
-        percent={values[FIELDS.percent] || 0}
+        percent={values[FUND_WITHDRAW_FIELDS.percent] || 0}
         exitFee={exitFee}
       />
       <div className="dialog__buttons">
@@ -76,41 +87,47 @@ const _FundWithdrawAmountForm: React.FC<
 
 const FundWithdrawAmountForm = compose<ComponentType<OwnProps>>(
   translate(),
-  withFormik<Props, FormValues>({
+  withFormik<Props, FundWithDrawFormValues>({
     displayName: "withdraw-form",
-    mapPropsToValues: ({ percent }) => ({
-      [FIELDS.percent]: percent || 0.01
+    mapPropsToValues: ({ percent, wallet }) => ({
+      [FUND_WITHDRAW_FIELDS.walletId]: wallet.id,
+      [FUND_WITHDRAW_FIELDS.percent]: percent || 0.01
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
-        [FIELDS.percent]: number()
+        [FUND_WITHDRAW_FIELDS.percent]: number()
           .required(t("withdraw-fund.validation.required"))
           .min(0.01, t("withdraw-fund.validation.min-value"))
       }),
     handleSubmit: (values, { props }) => {
-      if (!values[FIELDS.percent]) return;
-      props.onSubmit(values[FIELDS.percent]);
+      if (!values[FUND_WITHDRAW_FIELDS.percent]) return;
+      props.onSubmit(values);
     }
   }),
   React.memo
 )(_FundWithdrawAmountForm);
 export default FundWithdrawAmountForm;
 
-enum FIELDS {
+export enum FUND_WITHDRAW_FIELDS {
+  walletId = "walletId",
   percent = "percent"
 }
 
 interface OwnProps {
+  changeWalletHandle: (
+    setFieldValue: Function
+  ) => (event: ISelectChangeEvent, child: JSX.Element) => void;
   wallets: WalletBaseData[];
   wallet: WalletBaseData;
   percent?: number;
-  onSubmit(percent: number): void;
+  onSubmit(values: FundWithDrawFormValues): void;
   exitFee: number;
   availableToWithdraw: number;
 }
 
 interface Props extends WithTranslation, OwnProps {}
 
-interface FormValues {
-  [FIELDS.percent]: number;
+export interface FundWithDrawFormValues {
+  [FUND_WITHDRAW_FIELDS.percent]: number;
+  [FUND_WITHDRAW_FIELDS.walletId]: string;
 }

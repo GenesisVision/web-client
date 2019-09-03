@@ -1,43 +1,36 @@
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { ManagerRootState } from "reducers";
-import { compose } from "redux";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import Page from "shared/components/page/page";
-import PortfolioEventsTableContainerComponent from "shared/components/portfolio-events-table/portfolio-events-table-container";
-import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
-import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
+import { EVENT_LOCATION } from "shared/components/programs/program-details/services/program-details.service";
+import Surface from "shared/components/surface/surface";
+import useRole from "shared/hooks/use-role.hook";
 import { allEventsSelector } from "shared/reducers/platform-reducer";
 
-const _PortfolioEventsAllComponent: React.FC<Props> = ({ role, t, events }) => (
-  <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
-    <PortfolioEventsTableContainerComponent
-      fetchPortfolioEvents={fetchPortfolioEvents}
-      tableTitle={t(`${role}.dashboard-page.portfolio-events.table-title`)}
-      className="portfolio-events-all-table"
-      dateRangeStartLabel={t("filters.date-range.account-creation")}
-      eventTypeFilterValues={events}
-    />
-  </Page>
-);
+import { dashboardEventsAllTableSelector } from "../../reducers/dashboard-events.reducer";
+import { getEvents } from "../../services/dashboard.service";
 
-const mapStateToProps = (state: ManagerRootState): StateProps => ({
-  events: allEventsSelector(state)
-});
+const _PortfolioEventsAllComponent: React.FC = () => {
+  const [t] = useTranslation();
+  const role = useRole();
+  const events = useSelector(allEventsSelector);
+  return (
+    <Page title={t(`${role}.dashboard-page.portfolio-events.title`)}>
+      <Surface className="dashboard-portfolio-events-all">
+        <PortfolioEventsTable
+          selector={dashboardEventsAllTableSelector}
+          getItems={getEvents(EVENT_LOCATION.EventsAll)}
+          eventLocation={EVENT_LOCATION.EventsAll}
+          title={t(`${role}.dashboard-page.portfolio-events.table-title`)}
+          className="portfolio-events-all-table"
+          dateRangeStartLabel={t("filters.date-range.account-creation")}
+          eventTypeFilterValues={events}
+        />
+      </Surface>
+    </Page>
+  );
+};
 
-interface Props extends WithTranslation, StateProps, OwnProps, WithRoleProps {}
-
-interface OwnProps {}
-
-interface StateProps {
-  events: SelectFilterValue<string>[];
-}
-
-const PortfolioEventsAllComponent = compose<React.ComponentType<OwnProps>>(
-  withRole,
-  translate(),
-  connect(mapStateToProps),
-  React.memo
-)(_PortfolioEventsAllComponent);
+const PortfolioEventsAllComponent = React.memo(_PortfolioEventsAllComponent);
 export default PortfolioEventsAllComponent;

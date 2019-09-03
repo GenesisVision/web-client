@@ -5,7 +5,7 @@ import apiReducerFactory, {
 import { RootState } from "shared/reducers/root-reducer";
 import { apiSelector } from "shared/utils/selectors";
 
-import { FETCH_PROGRAM_DESCRIPTION } from "../actions/program-details.actions";
+import { FETCH_LEVEL_PARAMETERS } from "../actions/program-details.actions";
 
 export type LevelParametersDataType = LevelsParamsInfo;
 
@@ -17,7 +17,7 @@ export const levelParametersSelector = apiSelector<
 >(state => state.programDetails.levelParameters);
 
 const levelParametersReducer = apiReducerFactory<LevelParametersDataType>({
-  apiType: FETCH_PROGRAM_DESCRIPTION
+  apiType: FETCH_LEVEL_PARAMETERS
 });
 
 export default levelParametersReducer;

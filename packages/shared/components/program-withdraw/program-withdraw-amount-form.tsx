@@ -8,7 +8,7 @@ import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import GVFormikField from "shared/components/gv-formik-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import useRole from "shared/hooks/use-role.hook";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { boolean, mixed, number, object } from "yup";
@@ -19,7 +19,6 @@ const _ProgramWithdrawAmountForm: React.FC<
   setFieldValue,
   availableToWithdraw,
   t,
-  role,
   handleSubmit,
   accountCurrency,
   programCurrency,
@@ -27,13 +26,17 @@ const _ProgramWithdrawAmountForm: React.FC<
   values,
   isValid
 }) => {
-  const isAllow = useCallback((values: NumberFormatValues) => {
-    const { formattedValue, value } = values;
-    return (
-      (formattedValue === "" || validateFraction(value, programCurrency)) &&
-      values.value !== "."
-    );
-  }, []);
+  const role = useRole();
+  const isAllow = useCallback(
+    (values: NumberFormatValues) => {
+      const { formattedValue, value } = values;
+      return (
+        (formattedValue === "" || validateFraction(value, programCurrency)) &&
+        values.value !== "."
+      );
+    },
+    [programCurrency]
+  );
 
   const setMaxAmount = useCallback(
     () =>
@@ -41,7 +44,7 @@ const _ProgramWithdrawAmountForm: React.FC<
         FIELDS.amount,
         formatCurrencyValue(availableToWithdraw, programCurrency)
       ),
-    [availableToWithdraw, programCurrency]
+    [availableToWithdraw, programCurrency, setFieldValue]
   );
 
   return (
@@ -56,6 +59,7 @@ const _ProgramWithdrawAmountForm: React.FC<
         />
       )}
       <InputAmountField
+        emptyInit
         name={FIELDS.amount}
         label={t("withdraw-program.amount-to-withdraw")}
         currency={programCurrency}
@@ -63,7 +67,7 @@ const _ProgramWithdrawAmountForm: React.FC<
         disabled={values[FIELDS.withdrawAll]}
         setMax={role === ROLE.MANAGER ? setMaxAmount : undefined}
       />
-      {programCurrency !== accountCurrency && values[FIELDS.amount] && (
+      {programCurrency !== accountCurrency && values[FIELDS.amount] !== 0 && (
         <div className="">
           <NumberFormat
             value={formatCurrencyValue(
@@ -93,12 +97,11 @@ const _ProgramWithdrawAmountForm: React.FC<
 };
 
 const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
-  withRole,
   translate(),
   withFormik<Props, IProgramWithdrawAmountFormValues>({
     displayName: "withdraw-form",
     isInitialValid: true,
-    mapPropsToValues: ({ amount, withdrawAll }) => ({
+    mapPropsToValues: ({ formValues: { amount, withdrawAll } }) => ({
       [FIELDS.amount]: amount,
       [FIELDS.withdrawAll]: withdrawAll
     }),
@@ -130,8 +133,7 @@ enum FIELDS {
 }
 
 interface OwnProps {
-  amount?: number;
-  withdrawAll?: boolean;
+  formValues: IProgramWithdrawAmountFormValues;
   onSubmit(values: IProgramWithdrawAmountFormValues): void;
   availableToWithdraw: number;
   programCurrency: string;
@@ -139,9 +141,9 @@ interface OwnProps {
   rate: number;
 }
 
-interface Props extends WithTranslation, WithRoleProps, OwnProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 export interface IProgramWithdrawAmountFormValues {
-  [FIELDS.amount]?: number;
-  [FIELDS.withdrawAll]?: boolean;
+  [FIELDS.amount]: number;
+  [FIELDS.withdrawAll]: boolean;
 }

@@ -2,8 +2,6 @@
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes.scss";
 
-$tag-font-size: 11px;
-
 .tag-item {
   display: inline-block;
   position: relative;
@@ -74,4 +72,11 @@ $tag-font-size: 11px;
     color: $positive-color;
     background-color: rgba($positive-color, 0.1);
   }
+}
+
+.tag-circle {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
 }

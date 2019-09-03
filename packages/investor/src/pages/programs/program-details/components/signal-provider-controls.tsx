@@ -132,7 +132,6 @@ enum SIGNAL_POPUP {
 
 interface OwnProps {
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   programDescription: ProgramDetailsFull;
 }
 

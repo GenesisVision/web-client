@@ -73,3 +73,5 @@ export type RenderSortingFuncType = (
 ) => JSX.Element | string;
 
 export type UpdatePagingFuncType = (page: number) => void;
+
+export type TableSelectorType = (opts?: any) => { [keys: string]: any };

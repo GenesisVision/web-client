@@ -1,5 +1,7 @@
 import {
   AmountWithCurrencyCurrencyEnum,
+  FundAssetPart,
+  PlatformAsset,
   ProgramNotificationSettingList
 } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
@@ -103,3 +105,9 @@ export interface AppWithReduxContext extends AppContextType {
 export interface NextPageWithRedux<P = void, IP = P> extends NextPage<P, IP> {
   getInitialProps?(ctx: NextPageWithReduxContext): Promise<IP>;
 }
+export type DispatchDescriptionType = () => (
+  dispatch: MiddlewareDispatch,
+  getState: () => RootState
+) => ReturnType<MiddlewareDispatch>;
+
+export type PlatformAssetFull = PlatformAsset & FundAssetPart;
