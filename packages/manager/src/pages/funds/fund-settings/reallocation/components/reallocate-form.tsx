@@ -13,14 +13,11 @@ import GVFormikField from "shared/components/gv-formik-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useIsOpen from "shared/hooks/is-open.hook";
-import { SetSubmittingType } from "shared/utils/types";
+import { PlatformAssetFull, SetSubmittingType } from "shared/utils/types";
 import { object } from "yup";
 
 import ConfirmReallocate from "./confirm-reallocate";
-import ReallocateField, {
-  PlatformAssetFull,
-  composeSelectedAssets
-} from "./reallocate-field";
+import ReallocateField, { composeSelectedAssets } from "./reallocate-field";
 
 const _ReallocateForm: React.FC<Props> = ({
   availableReallocationPercents,
