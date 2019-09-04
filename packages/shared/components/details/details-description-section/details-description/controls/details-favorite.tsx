@@ -32,7 +32,7 @@ const _DetailsFavorite: React.FC<Props> = ({
   );
   const handleFavoriteClickOnText = useCallback(
     () => handleFavoriteClickOnButton(id, isFavorite),
-    [id]
+    [id, isFavorite]
   );
   return (
     <DetailsDescriptionControl
