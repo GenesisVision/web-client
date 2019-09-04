@@ -10,11 +10,11 @@ import {
 } from "recharts";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
 import GVColors from "shared/components/gv-styles/gv-colors";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
+import { CurrencyEnum } from "shared/utils/types";
 
 import ProgramBalanceTooltip from "./program-balance-tooltip";
 
-const ProgramBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
+const _ProgramBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
   if (balanceChart.length === 0) return null;
   const chart = balanceChart.map(x => {
     let dot = {
@@ -114,7 +114,8 @@ const ProgramBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
 
 interface Props {
   balanceChart: ProgramBalanceChartElement[];
-  currency: CURRENCIES;
+  currency: CurrencyEnum;
 }
 
-export default React.memo(ProgramBalanceChart);
+const ProgramBalanceChart = React.memo(_ProgramBalanceChart);
+export default ProgramBalanceChart;
