@@ -14,6 +14,7 @@ import fundsApi from "shared/services/api-client/funds-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
 import { FundAssetsViewModel } from "../reducers/fund-history.reducer";
+import { FundIdState } from "../reducers/id.reducer";
 import { FundProfitChartDataType } from "../reducers/profit-chart.reducer";
 import { StatisticCurrencyDataType } from "../reducers/statistic-currency.reducer";
 import { StatisticPeriodDataType } from "../reducers/statistic-period.reducer";
@@ -104,4 +105,12 @@ export const fundStructureAction = (
   payload: fundsApi
     .v10FundsByIdAssetsGet(fundId)
     .then(data => ({ ...data, total: data.assets.length }))
+});
+
+export interface SetFundIdAction extends ActionType<FundIdState> {
+  type: typeof SET_FUND_ID;
+}
+export const setFundIdAction = (id: string): SetFundIdAction => ({
+  type: SET_FUND_ID,
+  payload: id
 });
