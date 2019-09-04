@@ -1,12 +1,13 @@
 import { CopyTradingAccountInfo } from "gv-api-web";
 import React from "react";
-import WalletLoader from "shared/components/wallet/components/wallet-loader";
-import WalletCopytradingAccount from "./wallet-copytrading-account";
-import { createSelector } from "reselect";
-import { RootState } from "shared/reducers/root-reducer";
-import { copyTradingAccountsSelector } from "shared/components/wallet/reducers/wallet.reducers";
-import { compose } from "redux";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { createSelector } from "reselect";
+import WalletLoader from "shared/components/wallet/components/wallet-loader";
+import { copyTradingAccountsSelector } from "shared/components/wallet/reducers/wallet.reducers";
+import { RootState } from "shared/reducers/root-reducer";
+
+import WalletCopytradingAccount from "./wallet-copytrading-account";
 
 const _WalletCopytradingAccountContainer: React.FC<Props> = ({
   copyTradingAccount
