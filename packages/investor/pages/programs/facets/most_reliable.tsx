@@ -1,9 +1,9 @@
 import React from "react";
 import { compose } from "redux";
-import withDefaultLayout from "shared/decorators/with-default-layout";
-import { NextPageWithRedux } from "shared/utils/types";
 import platformActions from "shared/actions/platform-actions";
 import ProgramsRatingContainer from "shared/components/programs-rating/programs-rating-container";
+import withDefaultLayout from "shared/decorators/with-default-layout";
+import { NextPageWithRedux } from "shared/utils/types";
 
 const ProgramRatingFacet: NextPageWithRedux<Props, {}> = () => {
   return <ProgramsRatingContainer />;
