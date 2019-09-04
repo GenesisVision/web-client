@@ -1,8 +1,9 @@
 import { NextPage, NextPageContext } from "next";
 import nextCookie from "next-cookies";
-import Router from "next/router";
 import qs from "qs";
 import React, { Component } from "react";
+import { Push } from "shared/components/link/link";
+import { normalizeUrlString } from "shared/components/link/link.helper";
 import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
 import { getTokenName } from "shared/utils/get-token-name";
 
@@ -15,13 +16,13 @@ const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
         const redirectUrl = `${LOGIN_ROUTE}?from=${qs.stringify(
           ctx.req.url || HOME_ROUTE
         )}`;
-        ctx.res.writeHead(302, { Location: redirectUrl });
+        ctx.res.writeHead(302, { Location: normalizeUrlString(redirectUrl) });
         ctx.res.end();
         return;
       }
 
       if (!token) {
-        Router.push(LOGIN_ROUTE, undefined, { from: ctx.pathname });
+        Push(LOGIN_ROUTE, undefined, { from: ctx.pathname });
         return;
       }
 

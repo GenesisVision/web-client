@@ -1,7 +1,13 @@
 import NextLink from "next/link";
+import Router from "next/router";
 import React, { useCallback } from "react";
+import { UrlObject } from "url";
 
-import { normalizeTo, pushHistoryState } from "./link.helper";
+import {
+  normalizeTo,
+  normalizeUrlString,
+  pushHistoryState
+} from "./link.helper";
 
 const Link: React.FC<LinkProps> = ({ to, className, onClick, children }) => {
   const normalizedTo = normalizeTo(to);
@@ -34,6 +40,15 @@ export interface LinkProps {
   className?: string;
   onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
 }
+
+export const Push = (
+  url: string,
+  as?: string,
+  options?: {}
+): Promise<boolean> => {
+  const newUrl = normalizeUrlString(url);
+  return Router.push(newUrl, as, options);
+};
 
 export type ToType = {
   pathname: string;

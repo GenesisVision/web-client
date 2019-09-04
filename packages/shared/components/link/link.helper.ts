@@ -12,17 +12,21 @@ export const pushHistoryState = (to: ToType) => {
 };
 
 export const normalizeTo = (to: ToType | string): ToType => {
+  return typeof to === "string"
+    ? { pathname: normalizeUrlString(to) }
+    : {
+        ...to,
+        as: to.as && normalizeUrlString(to.as),
+        pathname: normalizeUrlString(to.pathname)
+      };
+};
+
+export const normalizeUrlString = (url: string): string => {
   const role = ROLE_ENV;
   const env = process.env.NODE_ENV;
 
-  if (env === "development") {
-    return typeof to === "string" ? { pathname: to } : to;
+  if (env !== "production") {
+    return url;
   }
-
-  return typeof to === "string"
-    ? { pathname: `\\${role}${to}` }
-    : {
-        ...to,
-        pathname: `\\${role}${to.pathname}`
-      };
+  return `/${role}${url}`;
 };

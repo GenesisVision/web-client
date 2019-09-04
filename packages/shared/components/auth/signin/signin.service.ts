@@ -6,6 +6,7 @@ import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import platformActions from "shared/actions/platform-actions";
 import { windowResizeAction } from "shared/actions/ui-actions";
+import { Push } from "shared/components/link/link";
 import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
@@ -20,7 +21,7 @@ import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./signin.constants";
 
 export const client = "Web";
 export const redirectToLogin = () => {
-  Router.push(LOGIN_ROUTE);
+  Push(LOGIN_ROUTE);
 };
 
 export const login: LoginFuncType = (method, fromPath, type) => (
@@ -46,7 +47,7 @@ export const login: LoginFuncType = (method, fromPath, type) => (
       authService.storeToken(response.value);
       dispatch(authActions.updateTokenAction(true));
       if (type) dispatch(clearTwoFactorData());
-      Router.push(from);
+      Push(from);
     })
     .catch((e: ResponseError) => {
       if (e.code === "RequiresTwoFactor") {
@@ -58,7 +59,7 @@ export const login: LoginFuncType = (method, fromPath, type) => (
           })
         );
         dispatch(setTwoFactorRequirementAction(true));
-        Router.push(LOGIN_ROUTE_TWO_FACTOR_ROUTE);
+        Push(LOGIN_ROUTE_TWO_FACTOR_ROUTE);
       } else {
         setSubmitting!(false);
       }
@@ -81,7 +82,7 @@ export const logout: logoutFuncType = () => dispatch => {
   dispatch(authActions.updateTokenAction(false));
   dispatch(platformActions.fetchPlatformSettings());
   dispatch(windowResizeAction());
-  Router.push(HOME_ROUTE);
+  Push(HOME_ROUTE);
 };
 
 export type LoginFuncType = (
