@@ -154,13 +154,11 @@ const _ProgramTrades: React.FC<Props> = ({
   );
 };
 
-interface OwnProps {
+interface Props {
   showSwaps: boolean;
   showTickets: boolean;
   programId: string;
 }
-
-interface Props extends OwnProps {}
 
 const ProgramTrades = React.memo(_ProgramTrades);
 export default ProgramTrades;

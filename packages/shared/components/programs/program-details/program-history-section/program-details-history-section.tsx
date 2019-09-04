@@ -138,9 +138,7 @@ enum TABS {
   PERIOD_HISTORY = "periodHistory"
 }
 
-interface Props extends OwnProps {}
-
-interface OwnProps {
+interface Props {
   showCommissionRebateSometime: boolean;
   isSignalProgram: boolean;
   showSwaps: boolean;
