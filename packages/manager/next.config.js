@@ -8,6 +8,8 @@ const workers = require("@zeit/next-workers");
 const path = require("path");
 const dotenv = require("dotenv");
 
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig = {
   webpack(config, { dev, webpack }) {
     if (!dev) {
@@ -18,7 +20,8 @@ const nextConfig = {
     config.resolve.modules.push(path.resolve("./src"));
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
     return config;
-  }
+  },
+  assetPrefix: isProd ? "/manager" : ""
 };
 
 module.exports = withPlugins(

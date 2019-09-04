@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import LogoField from "shared/components/profile/settings/profile-image/logo-field";
 import { ASSET } from "shared/constants/constants";
 
 import DescriptionField from "./description-field";
+import LogoField from "./logo-field";
 import TitleField from "./title-field";
 
 const _DescriptionBlock: React.FC<Props> = ({

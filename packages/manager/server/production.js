@@ -9,13 +9,13 @@ module.exports = async (app, port) => {
   const platform = process.env.REACT_APP_PLATFORM;
 
   const server = express();
-  const investor = express();
+  const manager = express();
 
-  investor.use(nextI18NextMiddleware(nextI18next));
+  manager.use(nextI18NextMiddleware(nextI18next));
 
-  investor.get("*", (req, res) => handle(req, res));
+  manager.get("*", (req, res) => handle(req, res));
 
-  server.use("/" + platform, investor);
+  server.use("/" + platform, manager);
   server.listen(port, err => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
