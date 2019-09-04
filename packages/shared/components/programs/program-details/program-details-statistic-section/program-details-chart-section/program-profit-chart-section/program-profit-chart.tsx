@@ -22,7 +22,7 @@ import { CurrencyEnum } from "shared/utils/types";
 
 import ProgramProfitTooltip from "./program-profit-tooltip";
 
-const ProgramProfitChart: React.FC<Props> = ({
+const _ProgramProfitChart: React.FC<Props> = ({
   equityChart,
   pnlChart,
   currency
@@ -125,4 +125,5 @@ interface Props {
   currency?: CurrencyEnum;
 }
 
-export default React.memo(ProgramProfitChart);
+const ProgramProfitChart = React.memo(_ProgramProfitChart);
+export default ProgramProfitChart;
