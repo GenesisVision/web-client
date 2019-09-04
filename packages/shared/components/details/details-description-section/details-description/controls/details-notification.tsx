@@ -7,7 +7,7 @@ import { RingIcon } from "shared/components/icon/ring-icon";
 
 import DetailsDescriptionControl from "./details-description-control";
 
-const DetailsNotification: React.FC<Props> = ({
+const _DetailsNotification: React.FC<Props> = ({
   url,
   hasNotifications,
   title
@@ -36,4 +36,5 @@ interface Props {
   title: string;
 }
 
-export default React.memo(DetailsNotification);
+const DetailsNotification = React.memo(_DetailsNotification);
+export default DetailsNotification;
