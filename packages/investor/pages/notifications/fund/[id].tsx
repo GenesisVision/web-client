@@ -1,16 +1,10 @@
 import React from "react";
-import withDefaultLayout from "shared/decorators/with-default-layout";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
-import { connect, ResolveThunks } from "react-redux";
-import withPrivateRoute from "shared/decorators/with-private-route";
-import { NextPageWithRedux } from "shared/utils/types";
+import { compose } from "redux";
 import FundNotificationPage from "shared/components/notifications/fund-settings.page";
+import withDefaultLayout from "shared/decorators/with-default-layout";
+import withPrivateRoute from "shared/decorators/with-private-route";
 import { fetchFundNotifications } from "shared/modules/fund-notifications/services/fund-notifications.services";
+import { NextPageWithRedux } from "shared/utils/types";
 
 const FundNotifications: NextPageWithRedux<Props, {}> = ({ id }) => {
   return <FundNotificationPage id={id} />;
@@ -26,26 +20,11 @@ FundNotifications.getInitialProps = async ctx => {
   return { id };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { fetchFundNotifications },
-    dispatch
-  )
-});
-
 export default compose(
-  connect(mapDispatchToProps),
   withDefaultLayout,
   withPrivateRoute
 )(FundNotifications);
 
-interface ServiceThunks extends ActionCreatorsMapObject {
-  fetchFundNotifications: typeof fetchFundNotifications;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface Props extends DispatchProps {
+interface Props {
   id: string;
 }
