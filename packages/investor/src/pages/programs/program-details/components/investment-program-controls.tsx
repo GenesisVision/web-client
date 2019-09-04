@@ -1,7 +1,7 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -21,9 +21,9 @@ import NotifyButton from "./notify-button";
 const _InvestmentProgramControls: React.FC<Props> = ({
   service: { dispatchProgramDescription },
   isAuthenticated,
-  t,
   programDescription
 }) => {
+  const [t] = useTranslation();
   const [
     isOpenInvestmentPopup,
     setOpenInvestmentPopup,
@@ -113,14 +113,13 @@ interface OwnProps {
   programDescription: ProgramDetailsFull;
 }
 
-interface Props extends WithTranslation, OwnProps, DispatchProps {}
+interface Props extends OwnProps, DispatchProps {}
 
 const InvestmentProgramControls = compose<React.ComponentType<OwnProps>>(
   connect(
     null,
     mapDispatchToProps
   ),
-  translate(),
   React.memo
 )(_InvestmentProgramControls);
 export default InvestmentProgramControls;
