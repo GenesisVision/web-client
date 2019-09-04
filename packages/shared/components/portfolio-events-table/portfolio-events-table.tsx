@@ -2,13 +2,9 @@ import "./portfolio-events-table.scss";
 import "./portfolio-events.scss";
 
 import { InvestmentEventViewModel } from "gv-api-web";
-import moment from "moment";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
-import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
+import { EVENT_LOCATION } from "shared/components/programs/program-details/services/program-details.service";
 import {
   ASSET_TYPE_FILTER_NAME,
   ASSET_TYPE_FILTER_VALUES
@@ -19,23 +15,17 @@ import { EVENT_TYPE_FILTER_NAME } from "shared/components/table/components/filte
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { ASSET, ROLE } from "shared/constants/constants";
-import useRole from "shared/hooks/use-role.hook";
-import { formatCurrencyValue } from "shared/utils/formatter";
-
-import { EVENT_LOCATION } from "../programs/program-details/services/program-details.service";
-import TableContainer from "../table/components/table-container";
+import TableContainer from "shared/components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType
-} from "../table/components/table.types";
-import PortfolioEventsDetails from "./portfolio-event-details";
-import PortfolioEventFeesTooltip from "./portfolio-event-fees-tooltip";
+} from "shared/components/table/components/table.types";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { ASSET, ROLE } from "shared/constants/constants";
+import useRole from "shared/hooks/use-role.hook";
+
+import PortfolioEventsTableRow from "./portfolio-events-table-row";
 import {
-  EVENT_PROFITABILITY_VALUES,
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_MANAGER_COLUMNS
 } from "./portfolio-events-table.constants";
@@ -117,59 +107,11 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
           </span>
         )}
         renderBodyRow={(event: InvestmentEventViewModel) => (
-          <TableRow stripy>
-            <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
-              {moment(event.date).format()}
-            </TableCell>
-            <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-              <div className="portfolio-events-all-table__description">
-                {event.assetDetails && (
-                  <PortfolioEventLogo
-                    withAsset={eventLocation !== EVENT_LOCATION.Asset}
-                    assetDetails={event.assetDetails}
-                    icon={event.icon}
-                  />
-                )}
-                <div>{event.title}</div>
-              </div>
-            </TableCell>
-            {!hideFeeColumn && (
-              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-                <PortfolioEventFeesTooltip
-                  fees={event.feesInfo}
-                  condition={event.totalFeesAmount !== null}
-                >
-                  <NumberFormat
-                    value={formatCurrencyValue(
-                      event.totalFeesAmount,
-                      event.totalFeesCurrency
-                    )}
-                    thousandSeparator=" "
-                    displayType="text"
-                    suffix={" " + event.totalFeesCurrency}
-                  />
-                </PortfolioEventFeesTooltip>
-              </TableCell>
-            )}
-            <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--details">
-              <PortfolioEventsDetails extendedInfo={event.extendedInfo} />
-            </TableCell>
-            <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
-              <Profitability
-                condition={!!event.amount}
-                value={EVENT_PROFITABILITY_VALUES[event.changeState]}
-                prefix={PROFITABILITY_PREFIX.SIGN}
-              >
-                <NumberFormat
-                  value={formatCurrencyValue(event.amount, event.currency)}
-                  allowNegative={false}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix={" " + event.currency}
-                />
-              </Profitability>
-            </TableCell>
-          </TableRow>
+          <PortfolioEventsTableRow
+            event={event}
+            eventLocation={eventLocation}
+            hideFeeColumn={hideFeeColumn}
+          />
         )}
       />
     </div>

@@ -38,10 +38,12 @@ const _SignalingEdit: React.FC<Props> = ({
               />
             )}
           </div>
-          <SignalsFeeFormPartial
-            volumeFeeFieldName={FORM_FIELDS.volumeFee}
-            successFeeFieldName={FORM_FIELDS.successFee}
-          />
+          {isSignal && (
+            <SignalsFeeFormPartial
+              volumeFeeFieldName={FORM_FIELDS.volumeFee}
+              successFeeFieldName={FORM_FIELDS.successFee}
+            />
+          )}
           <GVButton
             type="submit"
             id="programMakeSignalSubmit"

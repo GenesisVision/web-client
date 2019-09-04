@@ -86,7 +86,7 @@ enum TABS {
   EVENTS = "EVENTS"
 }
 
-interface OwnProps {
+interface Props {
   selector: TableSelectorType;
   haveEvents: boolean;
   haveInvestment: boolean;
@@ -102,8 +102,6 @@ interface OwnProps {
     IProgramReinvestingContainerOwnProps
   >;
 }
-
-interface Props extends OwnProps {}
 
 const DetailsInvestment = React.memo(_DetailsInvestment);
 export default DetailsInvestment;

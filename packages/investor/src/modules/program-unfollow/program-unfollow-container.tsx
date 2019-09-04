@@ -1,11 +1,5 @@
 import React, { useCallback } from "react";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
+import { useDispatch } from "react-redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 
 import ProgramUnfollowForm, {
@@ -16,18 +10,18 @@ import { detachToSignal } from "./services/program-unfollow.service";
 const _ProgramUnfollowContainer: React.FC<Props> = ({
   open,
   onClose,
-  service,
   onApply,
   id
 }) => {
+  const dispatch = useDispatch();
   const handleClose = useCallback(() => onClose(), [onClose]);
   const handleSubmit = useCallback(
     (value: IProgramUnfollowFormValues) => {
       const model = { mode: value.mode };
-      service.detachToSignal(id, onApply, model);
+      dispatch(detachToSignal(id, onApply, model));
       handleClose();
     },
-    [service, id, onApply, handleClose]
+    [dispatch, handleClose, id, onApply]
   );
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -36,33 +30,10 @@ const _ProgramUnfollowContainer: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { detachToSignal },
-    dispatch
-  )
-});
-
-const ProgramUnfollowContainer = compose<React.ComponentType<OwnProps>>(
-  connect<null, DispatchProps, OwnProps>(
-    null,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_ProgramUnfollowContainer);
+const ProgramUnfollowContainer = React.memo(_ProgramUnfollowContainer);
 export default ProgramUnfollowContainer;
 
-interface ServiceThunks extends ActionCreatorsMapObject {
-  detachToSignal: typeof detachToSignal;
-}
-
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface OwnProps extends IDialogProps {
+interface Props extends IDialogProps {
   id: string;
   onApply(): void;
 }
-
-interface Props extends OwnProps, DispatchProps {}

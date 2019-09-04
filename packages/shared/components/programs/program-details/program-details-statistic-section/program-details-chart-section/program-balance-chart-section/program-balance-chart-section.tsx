@@ -9,7 +9,7 @@ import { HandlePeriodChangeType } from "shared/utils/types";
 
 import ProgramBalanceChart from "./program-balance-chart";
 
-const ProgramBalanceChartSection: React.FC<Props> = ({
+const _ProgramBalanceChartSection: React.FC<Props> = ({
   balanceChart,
   period,
   onPeriodChange
@@ -47,4 +47,5 @@ interface Props {
   onPeriodChange: HandlePeriodChangeType;
 }
 
-export default React.memo(ProgramBalanceChartSection);
+const ProgramBalanceChartSection = React.memo(_ProgramBalanceChartSection);
+export default ProgramBalanceChartSection;

@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-descriptio
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
@@ -26,10 +26,10 @@ import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
 
 const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
-  t,
   programDescription,
   isOwnProgram
 }) => {
+  const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const personalDetails = programDescription.personalProgramDetails;
   return (
@@ -112,9 +112,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
   );
 };
 
-interface Props extends OwnProps, WithTranslation {}
-
-interface OwnProps {
+interface Props {
   programDescription: ProgramDetailsFull;
   ChangePasswordTradingAccount?: React.ComponentType<
     IChangePasswordTradingAccountProps
@@ -122,7 +120,7 @@ interface OwnProps {
   isOwnProgram: boolean;
 }
 
-const ProgramDetailsDescriptionMain = translate()(
-  React.memo(_ProgramDetailsDescriptionMain)
+const ProgramDetailsDescriptionMain = React.memo(
+  _ProgramDetailsDescriptionMain
 );
 export default ProgramDetailsDescriptionMain;
