@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { FundFacet, ProgramFacet } from "gv-api-web";
-import Link from "next/link";
 import * as React from "react";
 import ImageBase from "shared/components/avatar/image-base";
+import Link from "shared/components/link/link";
 import Surface from "shared/components/surface/surface";
 import useIsOpen from "shared/hooks/is-open.hook";
 
@@ -19,11 +19,10 @@ const _FacetCard: React.FC<Props> = ({ facet, composeFacetUrl, title }) => {
       onMouseLeave={setNotHovered}
     >
       <Link
-        href={composeFacetUrl(facet.url)}
-        //   {
-        //   pathname: composeFacetUrl(facet.url),
-        //   state: `/ ${title}`
-        // }}
+        to={{
+          pathname: composeFacetUrl(facet.url),
+          state: `/ ${title}`
+        }}
       >
         <a>
           <div className="facet__facet-container">
