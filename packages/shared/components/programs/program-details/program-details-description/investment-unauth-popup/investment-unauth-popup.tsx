@@ -12,7 +12,7 @@ import { ROLE } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 
-const InvestmentUnauthPopup: React.FC<Props> = ({
+const _InvestmentUnauthPopup: React.FC<Props> = ({
   header,
   open,
   onClose,
@@ -58,7 +58,8 @@ const InvestmentUnauthPopup: React.FC<Props> = ({
   );
 };
 
-export default React.memo(InvestmentUnauthPopup);
+const InvestmentUnauthPopup = React.memo(_InvestmentUnauthPopup);
+export default InvestmentUnauthPopup;
 
 interface Props extends DepositTopOwnProps, IDialogProps {
   message: string;
