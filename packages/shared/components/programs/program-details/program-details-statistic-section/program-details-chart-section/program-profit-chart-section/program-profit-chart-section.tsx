@@ -9,7 +9,7 @@ import { HandlePeriodChangeType } from "shared/utils/types";
 
 import ProgramProfitChart from "./program-profit-chart";
 
-const ProgramProfitChartSection: React.FC<Props> = ({
+const _ProgramProfitChartSection: React.FC<Props> = ({
   profitChart,
   period,
   onPeriodChange
@@ -49,4 +49,5 @@ interface Props {
   onPeriodChange: HandlePeriodChangeType;
 }
 
+const ProgramProfitChartSection = React.memo(_ProgramProfitChartSection);
 export default ProgramProfitChartSection;
