@@ -4,7 +4,7 @@ import {
   WalletData
 } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { InvestorRootState } from "reducers";
 import { Dispatch, bindActionCreators, compose } from "redux";
@@ -37,11 +37,11 @@ const _ProgramFollowContainer: React.FC<Props> = ({
   currency,
   onClose,
   service,
-  t,
   onApply,
   wallets,
   open
 }) => {
+  const [t] = useTranslation();
   const [rate, setRate] = useState<number>(1);
   const [minDeposit, setMinDeposit] = useState<number | undefined>(undefined);
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
@@ -139,10 +139,9 @@ interface OwnProps {
   signalSubscription: SignalSubscription;
 }
 
-interface Props extends DispatchProps, StateProps, OwnProps, WithTranslation {}
+interface Props extends DispatchProps, StateProps, OwnProps {}
 
 const ProgramFollowContainer = compose<React.ComponentType<OwnProps>>(
-  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
