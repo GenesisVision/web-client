@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import qs from "qs";
-
+import { Push } from "shared/components/link/link";
 import {
   FilteringType,
   TFilter
-} from "../components/table/components/filtering/filter.type";
+} from "shared/components/table/components/filtering/filter.type";
 
 const useRouteFilters = (defaultFilter: any): UseRouteFilters => {
-  const { asPath, pathname, push } = useRouter();
+  const { asPath, pathname } = useRouter();
   const queryParams = qs.parse(asPath.slice(pathname.length + 1));
   const { sorting = "", page = 1, ...filtering } = queryParams;
 
@@ -17,7 +17,7 @@ const useRouteFilters = (defaultFilter: any): UseRouteFilters => {
       [filter.name]: filter.value
     });
     const route = query ? `${pathname}?${query}` : pathname;
-    push(route);
+    Push(route);
   };
 
   return [
