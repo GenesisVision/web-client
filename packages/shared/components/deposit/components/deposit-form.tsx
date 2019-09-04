@@ -216,12 +216,9 @@ const _InvestorFees: React.FC<IInvestorFeesProps> = ({
 }) => {
   const gvFee = calculatePercentage(amount, info.gvCommission);
   const entryFee = hasEntryFee
-    ? calculatePercentage(
-        convertFromCurrency(amount - gvFee, rate),
-        info.entryFee
-      )
+    ? calculatePercentage(amount - gvFee, info.entryFee)
     : 0;
-  const investAmount = convertFromCurrency(amount, rate) - gvFee - entryFee;
+  const investAmount = amount - gvFee - entryFee;
   const [t] = useTranslation();
   return (
     <ul className="dialog-list">
@@ -233,7 +230,10 @@ const _InvestorFees: React.FC<IInvestorFeesProps> = ({
           <span className="dialog-list__value">
             {info.entryFee} %{" "}
             <NumberFormat
-              value={formatCurrencyValue(entryFee, currency)}
+              value={formatCurrencyValue(
+                convertFromCurrency(entryFee, rate),
+                currency
+              )}
               prefix=" ("
               suffix={` ${currency})`}
               displayType="text"
@@ -261,7 +261,10 @@ const _InvestorFees: React.FC<IInvestorFeesProps> = ({
         </span>
         <span className="dialog-list__value">
           <NumberFormat
-            value={formatCurrencyValue(investAmount, currency)}
+            value={formatCurrencyValue(
+              convertFromCurrency(investAmount, rate),
+              currency
+            )}
             prefix="≈ "
             suffix={` ${currency}`}
             displayType="text"
