@@ -1,11 +1,11 @@
 import "./auth-layout.scss";
 
 import { NextPage } from "next";
-import Link from "next/link";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
+import Link from "shared/components/link/link";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 
@@ -23,7 +23,11 @@ const _AuthLayout: NextPage<Props> = ({
   return (
     <div className="root auth page">
       <div className="auth__left">
-        <Link href={HOME_ROUTE}>
+        <Link
+          to={{
+            pathname: HOME_ROUTE
+          }}
+        >
           <a className="navigation__link auth__logo">
             <GvLogo />
             <GvBrand />

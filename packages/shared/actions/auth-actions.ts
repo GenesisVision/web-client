@@ -1,5 +1,5 @@
-import Router from "next/router";
 import { Action } from "redux";
+import { Push } from "shared/components/link/link";
 import { AuthState } from "shared/reducers/auth-reducer";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 import { ActionType } from "shared/utils/types";
@@ -9,7 +9,7 @@ export const LOGOUT = "LOGOUT";
 export type UpdateTokenActionType = ActionType<AuthState>;
 
 const alreadyAuthenticated = () => {
-  Router.push(HOME_ROUTE);
+  Push(HOME_ROUTE);
 };
 
 const updateTokenAction = (

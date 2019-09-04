@@ -11,7 +11,6 @@ export const getCookie = (
 
 export const setCookie = (name: string, value: string) => {
   cookie.set(name, value, {
-    secure: process.env.NODE_ENV === "production",
     expires: 1000
   });
 };

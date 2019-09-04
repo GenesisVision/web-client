@@ -52,7 +52,7 @@ const _DepositContainer: React.FC<Props> = ({
         .then(setInvestInfo)
         .catch(setErrorMessage);
     },
-    [currency, fetchInfo, id, service, setErrorMessage, stateCurrency]
+    [currency, id, stateCurrency]
   );
   const closePopup = useCallback(
     () => {

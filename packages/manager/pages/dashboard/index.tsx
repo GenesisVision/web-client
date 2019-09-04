@@ -19,7 +19,7 @@ const Dashboard: NextPageWithRedux<void> = () => {
 Dashboard.getInitialProps = async ctx => {
   await Promise.all([
     ctx.reduxStore.dispatch(getAssets(ctx)),
-    ctx.reduxStore.dispatch(getInRequests(ctx)),
+    ctx.reduxStore.dispatch(getInRequests(ASSETS_TYPES.Program, ctx)),
     ctx.reduxStore.dispatch(composeAssetChart(ASSETS_TYPES.Program))
   ]);
 };

@@ -1,9 +1,9 @@
 import { ProgramsList, ProgramTag } from "gv-api-web";
-import { useRouter } from "next/router";
 import qs from "qs";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, compose, Dispatch } from "redux";
+import { Push } from "shared/components/link/link";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import {
   DATE_RANGE_FILTER_NAME,
@@ -24,9 +24,11 @@ import {
   calculateSkipAndTake,
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
+import useRouteFilters from "shared/hooks/route-filters.hook";
 import { useTranslation } from "shared/i18n";
 import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
+import { DEFAULT_ITEMS_ON_PAGE } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 import {
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_NAME,
@@ -39,11 +41,8 @@ import {
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
-import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
+import { NextPageWithReduxContext } from "shared/utils/types";
 
-import useRouteFilters from "../../../../hooks/route-filters.hook";
-import { NextPageWithReduxContext } from "../../../../utils/types";
-import { DEFAULT_ITEMS_ON_PAGE } from "../../../funds-table/components/funds-table/funds-table.constants";
 import { FetchProgramsFiltersType } from "../../actions/programs-table.actions";
 import { programsDataSelector } from "../../reducers/programs-table.reducers";
 import { composeCurrencyFilter } from "./program-table.helpers";
@@ -99,7 +98,6 @@ const _ProgramsTableSSR: React.FC<Props> = ({
 
   const [filtering, sorting, page, update] = useRouteFilters(DEFAULT_FILTERS);
 
-  const { push } = useRouter();
   if (!data) return null;
   const totalPages = calculateTotalPages(data.total, ITEMS_ON_PAGE);
   return (
@@ -147,7 +145,7 @@ const _ProgramsTableSSR: React.FC<Props> = ({
       }}
       updatePaging={page => update({ name: "page", value: page + 1 })}
       toggleFavorite={service.toggleFavoriteProgram}
-      redirectToLogin={() => push(LOGIN_ROUTE)}
+      redirectToLogin={() => Push(LOGIN_ROUTE)}
       isAuthenticated={isAuthenticated}
       currencies={currencies}
     />

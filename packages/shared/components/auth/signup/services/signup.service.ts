@@ -1,6 +1,6 @@
 import { CaptchaCheckResult } from "gv-api-web";
-import Router from "next/router";
 import emailPendingActions from "shared/actions/email-pending-actions";
+import { Push } from "shared/components/link/link";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { RegisterViewModel, signUpUserAction } from "../actions/signup.actions";
@@ -31,7 +31,7 @@ export const signUp: SingUpFuncType = (
   )
     .then(() => {
       dispatch(emailPendingActions.saveEmail({ email }));
-      Router.push(SIGNUP_ROUTE_PENDING);
+      Push(SIGNUP_ROUTE_PENDING);
     })
     .catch(() => {
       setSubmitting!(false);
