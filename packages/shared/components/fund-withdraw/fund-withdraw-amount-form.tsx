@@ -6,12 +6,12 @@ import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import { ISelectChangeEvent } from "shared/components/select/select";
+import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { calculatePercentage } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { number, object } from "yup";
 
-import { ISelectChangeEvent } from "../select/select";
-import WalletSelect from "../wallet-select/wallet-select";
 import FundWithdrawResult from "./fund-withdraw-result";
 
 const _FundWithdrawAmountForm: React.FC<
