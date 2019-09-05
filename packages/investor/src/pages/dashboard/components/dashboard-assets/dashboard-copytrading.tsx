@@ -62,9 +62,15 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
         />
       </>
     )}
-    renderHeader={(column: Column) =>
-      t(`investor.dashboard-page.copytrading-header.${column.name}`)
-    }
+    renderHeader={(column: Column) => (
+      <span
+        className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
+          column.name
+        }`}
+      >
+        {t(`investor.dashboard-page.copytrading-header.${column.name}`)}
+      </span>
+    )}
     renderBodyRow={(signal: SignalDetails) => (
       <TableRow>
         <TableCell className="programs-table__cell dashboard-programs__cell--title">
@@ -95,12 +101,16 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
             </Link>
           </div>
         </TableCell>
-        <TableCell>{signal.currency}</TableCell>
-        <TableCell>{signal.personalDetails.tradesCount}</TableCell>
-        <TableCell>
+        <TableCell className="programs-table__cell">
+          {signal.currency}
+        </TableCell>
+        <TableCell className="programs-table__cell">
+          {signal.personalDetails.tradesCount}
+        </TableCell>
+        <TableCell className="programs-table__cell">
           {moment(signal.personalDetails.subscriptionDate).format()}
         </TableCell>
-        <TableCell>
+        <TableCell className="programs-table__cell">
           <Profitability
             value={formatCurrencyValue(
               signal.personalDetails.profit,
@@ -125,7 +135,7 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
             <ProgramSimpleChart data={signal.chart} programId={signal.id} />
           )}
         </TableCell>
-        <TableCell>
+        <TableCell className="programs-table__cell">
           <AssetStatusLabel status={signal.personalDetails.status as STATUS} />
         </TableCell>
       </TableRow>
