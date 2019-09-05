@@ -2,6 +2,7 @@ export const ASSET_TYPE_FILTER_NAME = "assetType";
 
 export enum ASSETS_TYPES {
   All = "All",
+  Signal = "Signal",
   Program = "Program",
   Fund = "Fund"
 }
