@@ -215,10 +215,8 @@ const _InvestorFees: React.FC<IInvestorFeesProps> = ({
   walletCurrency
 }) => {
   const gvFee = calculatePercentage(amount, info.gvCommission);
-  const entryFee = hasEntryFee
-    ? calculatePercentage(amount - gvFee, info.entryFee)
-    : 0;
-  const investAmount = amount - gvFee - entryFee;
+  const entryFee = calculatePercentage(amount - gvFee, info.entryFee);
+  const investAmount = amount - gvFee - entryFee * +hasEntryFee;
   const [t] = useTranslation();
   return (
     <ul className="dialog-list">
