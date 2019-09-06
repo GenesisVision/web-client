@@ -7,10 +7,6 @@ export enum ASSETS_TYPES {
   Fund = "Fund"
 }
 
-export const ASSET_TYPE_FILTER_VALUES = [...Object.keys(ASSETS_TYPES)].map(
-  x => ({ value: x, label: x })
-);
-
 export const ASSET_TYPE_FILTER_DEFAULT_VALUE = "All";
 
 export type AssetFilterType = ASSETS_TYPES;
