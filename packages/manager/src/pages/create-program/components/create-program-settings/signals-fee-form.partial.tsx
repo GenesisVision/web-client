@@ -1,8 +1,7 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import NumberFormat from "react-number-format";
 import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
+import GVNumberField from "shared/components/gv-number-field/gv-number-field";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
@@ -33,8 +32,7 @@ const SignalsFeeFormPartial: React.FC<
             "manager.create-program-page.settings.fields.signal-volume-fee"
           )}
           adornment="%"
-          component={GVTextField}
-          type="number"
+          component={GVNumberField}
           autoComplete="off"
           decimalScale={2}
           autoFocus={hasSubscriptionFeeAutofocus}
@@ -58,8 +56,7 @@ const SignalsFeeFormPartial: React.FC<
             "manager.create-program-page.settings.fields.signal-success-fee"
           )}
           adornment="%"
-          component={GVTextField}
-          type="number"
+          component={GVNumberField}
           autoComplete="off"
           decimalScale={2}
           isAllowed={allowValuesNumberFormat()}
