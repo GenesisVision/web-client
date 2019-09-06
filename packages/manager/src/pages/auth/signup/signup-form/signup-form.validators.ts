@@ -9,6 +9,7 @@ const confirmPasswordValidator = string()
   .required("Confirm Password is required");
 
 export enum SIGN_UP_FORM_FIELDS {
+  captchaCheckResult = "captchaCheckResult",
   refCode = "refCode",
   userName = "userName",
   email = "email",

@@ -1,21 +1,26 @@
 @import "~shared/styles/_colors.scss";
 
 .portfolio-event-logo {
-  width: 44px;
-  height: 44px;
   position: relative;
+  &--with-asset {
+    width: 44px;
+    height: 44px;
+  }
 
   &__type {
     box-sizing: border-box;
-    width: 28px;
-    height: 28px;
     border-radius: 18px;
-    position: absolute;
-    top: 18px;
-    left: 18px;
-    z-index: 1;
-    line-height: 28px;
     text-align: center;
+    & img {
+      width: 28px;
+      height: 28px;
+    }
+    &--with-asset {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 1;
+    }
   }
 
   &__photo {

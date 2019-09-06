@@ -2,7 +2,7 @@ import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
@@ -11,26 +11,25 @@ import DetailsSettingControl from "shared/components/details/details-description
 import GVButton from "shared/components/gv-button";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS,
-  anchorElType
+  VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import TagItem from "shared/components/tags/tag-item/tag-item";
+import useAnchor from "shared/hooks/anchor.hook";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl,
   composeProgramSettingsUrl
 } from "shared/utils/compose-url";
 
-import useAnchor from "../../../../hooks/anchor.hook";
 import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
 
 const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
-  t,
   programDescription,
   isOwnProgram
 }) => {
+  const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const personalDetails = programDescription.personalProgramDetails;
   return (
@@ -105,6 +104,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
           <DetailsSettingControl
             title={programDescription.title}
             url={composeProgramSettingsUrl(programDescription.url)}
+            text={t("program-details-page.description.program-settings")}
           />
         )}
       </div>
@@ -112,9 +112,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
   );
 };
 
-interface Props extends OwnProps, WithTranslation {}
-
-interface OwnProps {
+interface Props {
   programDescription: ProgramDetailsFull;
   ChangePasswordTradingAccount?: React.ComponentType<
     IChangePasswordTradingAccountProps
@@ -122,7 +120,7 @@ interface OwnProps {
   isOwnProgram: boolean;
 }
 
-const ProgramDetailsDescriptionMain = translate()(
-  React.memo(_ProgramDetailsDescriptionMain)
+const ProgramDetailsDescriptionMain = React.memo(
+  _ProgramDetailsDescriptionMain
 );
 export default ProgramDetailsDescriptionMain;

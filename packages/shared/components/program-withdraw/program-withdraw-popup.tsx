@@ -1,8 +1,11 @@
 import { ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import { ResponseError, SetSubmittingType } from "shared/utils/types";
+import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
+import withLoader from "shared/decorators/with-loader";
+import useErrorMessage from "shared/hooks/error-message.hook";
+import useTab from "shared/hooks/tab.hook";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import ProgramWithdrawAmountForm, {
   IProgramWithdrawAmountFormValues
@@ -15,144 +18,99 @@ enum PROGRAM_WITHDRAW_FORM {
   CONFIRM = "CONFIRM"
 }
 
-class _ProgramWithdrawPopup extends React.PureComponent<
-  IProgramWithdrawPopupProps & WithTranslation,
-  State
-> {
-  state: State = {
-    step: PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT,
-    rate: 1,
-    errorMessage: undefined,
-    periodEnds: undefined,
-    title: undefined,
-    amount: undefined,
-    availableToWithdraw: undefined,
-    withdrawAll: false
-  };
+const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
+  programWithdrawInfo: { rate, availableToWithdraw, periodEnds, title },
+  assetCurrency,
+  accountCurrency,
+  fetchInfo,
+  withdraw
+}) => {
+  const [t] = useTranslation();
+  const { tab, setTab } = useTab<PROGRAM_WITHDRAW_FORM>(
+    PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT
+  );
+  const {
+    errorMessage,
+    setErrorMessage,
+    cleanErrorMessage
+  } = useErrorMessage();
+  const [formValues, setFormValues] = useState<
+    IProgramWithdrawAmountFormValues
+  >({ amount: 0, withdrawAll: false });
 
-  componentDidMount() {
-    const { fetchInfo } = this.props;
-    fetchInfo()
-      .then(data => {
-        const { periodEnds, title, availableToWithdraw, rate } = data;
-        this.setState({
-          periodEnds,
-          title,
-          availableToWithdraw,
-          rate
-        });
-      })
-      .catch((error: ResponseError) =>
-        this.setState({ errorMessage: error.errorMessage })
-      );
-  }
+  const handleSubmit = useCallback(
+    (setSubmitting: SetSubmittingType) =>
+      withdraw(formValues)
+        .catch(setErrorMessage)
+        .finally(() => setSubmitting(false)),
+    [formValues]
+  );
 
-  handleSubmit = (setSubmitting: SetSubmittingType) => {
-    const { withdraw } = this.props;
-    const { amount = 0, withdrawAll } = this.state;
+  const handleEnterAmountSubmit = useCallback(
+    (values: IProgramWithdrawAmountFormValues) => {
+      setTab(null, PROGRAM_WITHDRAW_FORM.CONFIRM);
+      setFormValues(values);
+    },
+    []
+  );
 
-    if (!amount && !withdrawAll) return;
-    return withdraw({
-      amount,
-      withdrawAll
-    }).catch((error: ResponseError) => {
-      this.setState({ errorMessage: error.errorMessage });
-      setSubmitting(false);
-    });
-  };
+  const handleGoToEnterAmountStep = useCallback(() => {
+    setTab(null, PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT);
+    cleanErrorMessage();
+  }, []);
 
-  handleEnterAmountSubmit = (values: IProgramWithdrawAmountFormValues) => {
-    this.setState({
-      step: PROGRAM_WITHDRAW_FORM.CONFIRM,
-      amount: values.amount,
-      withdrawAll: values.withdrawAll
-    });
-  };
-
-  goToEnterAmountStep = () => {
-    this.setState({
-      step: PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT,
-      errorMessage: undefined
-    });
-  };
-
-  render() {
-    const {
-      title,
-      availableToWithdraw,
-      periodEnds,
-      rate,
-      errorMessage,
-      step,
-      amount,
-      withdrawAll
-    } = this.state;
-    const { t, assetCurrency, accountCurrency } = this.props;
-    if (availableToWithdraw === undefined || !title || !periodEnds)
-      return <DialogLoader />;
-
-    const isAvailableProgramConfirmForm = amount || withdrawAll;
-    return (
-      <>
-        <ProgramWithdrawTop
-          title={title}
-          availableToWithdraw={availableToWithdraw}
-          programCurrency={assetCurrency}
-        />
-        <div className="dialog__bottom">
-          {step === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
-            <ProgramWithdrawAmountForm
-              amount={amount}
-              withdrawAll={withdrawAll}
-              rate={rate}
+  const isAvailableProgramConfirmForm =
+    formValues.amount || formValues.withdrawAll;
+  return (
+    <>
+      <ProgramWithdrawTop
+        rate={rate}
+        title={title}
+        availableToWithdraw={availableToWithdraw}
+        programCurrency={assetCurrency}
+        accountCurrency={accountCurrency}
+      />
+      <div className="dialog__bottom">
+        {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
+          <ProgramWithdrawAmountForm
+            formValues={formValues}
+            rate={rate}
+            programCurrency={assetCurrency}
+            accountCurrency={accountCurrency}
+            availableToWithdraw={availableToWithdraw}
+            onSubmit={handleEnterAmountSubmit}
+          />
+        )}
+        {tab === PROGRAM_WITHDRAW_FORM.CONFIRM &&
+          isAvailableProgramConfirmForm && (
+            <ProgramWithdrawConfirmForm
+              errorMessage={errorMessage}
+              formValues={formValues}
+              onSubmit={handleSubmit}
+              onBackClick={handleGoToEnterAmountStep}
               programCurrency={assetCurrency}
-              accountCurrency={accountCurrency}
-              availableToWithdraw={availableToWithdraw}
-              onSubmit={this.handleEnterAmountSubmit}
+              periodEnds={periodEnds}
             />
           )}
-          {step === PROGRAM_WITHDRAW_FORM.CONFIRM &&
-            isAvailableProgramConfirmForm && (
-              <ProgramWithdrawConfirmForm
-                errorMessage={errorMessage}
-                amount={amount}
-                withdrawAll={withdrawAll}
-                onSubmit={this.handleSubmit}
-                onBackClick={this.goToEnterAmountStep}
-                programCurrency={assetCurrency}
-                periodEnds={periodEnds}
-              />
-            )}
-          <div className="dialog__info">{t("withdraw-program.info")}</div>
-        </div>
-      </>
-    );
-  }
-}
+        <div className="dialog__info">{t("withdraw-program.info")}</div>
+      </div>
+    </>
+  );
+};
 
-const ProgramWithdrawPopup = translate()(_ProgramWithdrawPopup);
+const ProgramWithdrawPopup = withLoader(React.memo(_ProgramWithdrawPopup));
 
 export default ProgramWithdrawPopup;
 
 export interface IProgramWithdrawPopupProps {
-  assetCurrency: string;
-  accountCurrency: string;
-  fetchInfo(): Promise<ProgramWithdrawInfo>;
-  withdraw(values: ProgramWithdrawType): Promise<void>;
+  programWithdrawInfo: ProgramWithdrawInfo;
+  assetCurrency: CurrencyEnum;
+  accountCurrency: CurrencyEnum;
+  fetchInfo: () => Promise<ProgramWithdrawInfo>;
+  withdraw: (values: ProgramWithdrawType) => Promise<void>;
 }
 
 export type ProgramWithdrawType = {
   amount: number;
   withdrawAll?: boolean;
 };
-
-interface State {
-  errorMessage?: string;
-  step: PROGRAM_WITHDRAW_FORM;
-  rate: number;
-  amount?: number;
-  availableToWithdraw?: number;
-  periodEnds?: Date;
-  title?: string;
-  withdrawAll?: boolean;
-}

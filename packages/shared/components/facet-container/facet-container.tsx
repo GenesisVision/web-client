@@ -1,4 +1,9 @@
-import { FundFacet, PlatformInfo, ProgramFacet } from "gv-api-web";
+import {
+  FundFacet,
+  PlatformCurrency,
+  PlatformInfo,
+  ProgramFacet
+} from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -11,16 +16,26 @@ import { FilteringType } from "shared/components/table/components/filtering/filt
 import { IDataModel } from "shared/constants/constants";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
 import useIsOpen from "shared/hooks/is-open.hook";
-import { platformDataSelector } from "shared/reducers/platform-reducer";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
+import {
+  platformCurrenciesSelector,
+  platformDataSelector
+} from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { MiddlewareDispatch, TGetState } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  MiddlewareDispatch,
+  TGetState
+} from "shared/utils/types";
 
 const _FacetContainer: React.FC<Props> = ({
   TableContainer,
   isAuthenticated,
   service,
   facets,
-  getItems
+  getItems,
+  currency,
+  currencies
 }) => {
   const [
     isPending,
@@ -39,7 +54,7 @@ const _FacetContainer: React.FC<Props> = ({
         setFoundValue(!!notFound);
       }
     },
-    [facets]
+    [facets, service, setFoundValue, setPendingValue]
   );
   const getFacetItems = useCallback(
     filtering => getItems({ ...filtering, facetId: facet!.id }),
@@ -55,6 +70,8 @@ const _FacetContainer: React.FC<Props> = ({
       timeframe={timeframe}
       getItems={getFacetItems}
       isAuthenticated={isAuthenticated}
+      currency={currency}
+      currencies={currencies}
     />
   );
 };
@@ -75,7 +92,9 @@ const facetSelector = createSelector<
 );
 
 const mapStateToProps = (state: RootState, props: OwnProps): StateProps => ({
-  facets: facetSelector(state, props)
+  facets: facetSelector(state, props),
+  currencies: platformCurrenciesSelector(state),
+  currency: currencySelector(state)
 });
 
 const mapDispatchToProps = (
@@ -101,6 +120,8 @@ interface OwnProps {
 }
 interface StateProps {
   facets?: FacetType[];
+  currencies: PlatformCurrency[];
+  currency: CurrencyEnum;
 }
 interface DispatchProps {
   service: {

@@ -25,20 +25,14 @@ import {
   composeFundsDetailsUrl,
   composeManagerDetailsUrl
 } from "shared/utils/compose-url";
-import {
-  formatValue,
-  formatValueDifferentDecimalScale
-} from "shared/utils/formatter";
-
-const DECIMAL_SCALE_SMALL_VALUE = 4;
-const DECIMAL_SCALE_BIG_VALUE = 2;
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
   const { t } = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleToggleFavorite = useCallback(
     () => toggleFavorite(fund.id, fund.personalDetails.isFavorite),
-    [fund]
+    [fund.id, fund.personalDetails.isFavorite, toggleFavorite]
   );
   return (
     <div className="table-cards__card">
@@ -153,12 +147,11 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
         <div className="table-cards__table-column">
           <StatisticItem label={t("funds-page.funds-header.balance")}>
             <NumberFormat
-              value={formatValueDifferentDecimalScale(
-                fund.statistic.balanceGVT.amount,
-                DECIMAL_SCALE_SMALL_VALUE,
-                DECIMAL_SCALE_BIG_VALUE
+              value={formatCurrencyValue(
+                fund.statistic.balance.amount,
+                fund.statistic.balance.currency
               )}
-              suffix=" GVT"
+              suffix={` ${fund.statistic.balance.currency}`}
               displayType="text"
             />
           </StatisticItem>

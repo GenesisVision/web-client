@@ -2,39 +2,18 @@ import "./settings.scss";
 
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
-import GVButton from "shared/components/gv-button";
 import ProfileLayout from "shared/components/profile/profile-layout";
-import { PASSWORD_ROUTE } from "shared/components/profile/profile.constants";
-import LogoutButtonContainer from "shared/components/profile/settings/logout-button/logout-button-container";
-import ProfileImageContainer from "shared/components/profile/settings/profile-image/profile-image-container";
-import TwoFactorAuthContainer from "shared/modules/2fa/2fa-container";
+import { SETTINGS } from "shared/components/profile/profile.constants";
+import SettingsBlock from "shared/components/settings-block/settings-block";
+import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
 
 const _SettingsPage: React.FC<WithTranslation> = ({ t }) => (
-  <ProfileLayout route="settings">
-    <div className="profile-settings__content">
-      <TwoFactorAuthContainer />
-      <ProfileImageContainer />
-      <div className="profile-settings__aside-actions">
-        <Link
-          to={{
-            pathname: PASSWORD_ROUTE,
-            state: `/ ${t("profile-page.title")}`
-          }}
-        >
-          <GVButton
-            variant="text"
-            color="secondary"
-            className={"profile-settings__password"}
-          >
-            <>
-              {`${t("profile-page.settings.change-password")} `}
-              <span className="profile-settings__password-arrow">&#8250;</span>
-            </>
-          </GVButton>
-        </Link>
-        <LogoutButtonContainer />
-      </div>
+  <ProfileLayout route={SETTINGS}>
+    <div className="asset-settings profile__container--padding-top">
+      <SettingsBlock
+        label={t("profile-page.settings.platform-currency")}
+        content={<CurrencySelectContainer className="header__currency" />}
+      />
     </div>
   </ProfileLayout>
 );

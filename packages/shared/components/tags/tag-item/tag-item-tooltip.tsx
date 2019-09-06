@@ -12,10 +12,11 @@ interface Props {
 const _TagItemTooltip: React.FC<Props> = ({ tags, className }) => {
   return (
     <div className={classNames("tag-item-tooltip", className)}>
-      {tags.map(
-        (tag, idx) =>
-          idx > 0 && <TagItem name={tag.name} color={tag.color} key={idx} />
-      )}
+      {tags
+        .filter((tag, idx) => idx > 0)
+        .map((tag, idx) => (
+          <TagItem name={tag.name} color={tag.color} key={idx} />
+        ))}
     </div>
   );
 };

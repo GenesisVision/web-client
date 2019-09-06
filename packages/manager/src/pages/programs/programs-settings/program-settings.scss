@@ -2,7 +2,7 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_breakpoint.scss";
 
-.program-edit {
+.program-settings {
   padding-left: $padding-xsmall;
   padding-right: $padding-xsmall;
   box-sizing: border-box;
@@ -22,7 +22,7 @@
 
     & .gv-switch-wrapper {
       @include adaptive-padding(bottom, $padding-xsmall);
-      margin: 0 $padding-xsmall;
+      margin: 0;
     }
   }
 
@@ -84,6 +84,15 @@
     .gv-text-field__wrapper {
       @include adaptive-margin(right, $padding-xsmall);
       width: 100%;
+      @include media-breakpoint-landscape-phone() {
+        width: auto;
+      }
+    }
+
+    &--wide {
+      .gv-text-field__wrapper {
+        width: 100%;
+      }
     }
 
     @include media-breakpoint-landscape-phone() {

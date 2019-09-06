@@ -2,17 +2,9 @@ import "./deposit.scss";
 
 import { FundInvestInfo, ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import React from "react";
-import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
-import { fetchBaseWallets } from "shared/components/wallet/services/wallet.services";
+import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import DepositForm from "./deposit-form";
@@ -28,14 +20,13 @@ const _DepositPopup: React.FC<Props> = ({
   wallets,
   investInfo
 }) => {
-  const availableToInvestBase = (investInfo as ProgramInvestInfo)
-    ? (investInfo as ProgramInvestInfo).availableToInvestBase
-    : undefined;
   return (
     <>
       <DepositTop
         title={investInfo.title}
-        availableToInvestBase={availableToInvestBase}
+        availableToInvestBase={
+          (investInfo as ProgramInvestInfo).availableToInvestBase
+        }
         asset={asset}
         currency={currency}
       />
@@ -52,19 +43,8 @@ const _DepositPopup: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { fetchBaseWallets },
-    dispatch
-  )
-});
-
 const DepositPopup = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
   withLoader,
-  connect<null, DispatchProps, OwnProps, RootState>(
-    null,
-    mapDispatchToProps
-  ),
   React.memo
 )(_DepositPopup);
 export default DepositPopup;
@@ -79,12 +59,4 @@ interface OwnProps {
   hasEntryFee?: boolean;
 }
 
-interface ServiceThunks extends ActionCreatorsMapObject {
-  fetchBaseWallets: typeof fetchBaseWallets;
-}
-
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface Props extends OwnProps, DispatchProps {}
+interface Props extends OwnProps {}

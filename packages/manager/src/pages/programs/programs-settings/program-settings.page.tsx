@@ -1,28 +1,31 @@
 import "shared/components/details/details.scss";
 
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
-import { editAsset } from "modules/asset-edit/services/asset-edit.services";
+import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
+import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
+import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
-import Page from "shared/components/page/page";
+import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
 import {
-  getProgramBrokers,
-  getProgramDescription
+  dispatchProgramDescription,
+  getProgramBrokers
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
+import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
-import { ChangeBrokerFormValues } from "./change-broker/change-broker";
+
+import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ProgramSettings from "./program-settings";
-import ProgramSettingsLoader from "./program-settings.loader";
 import {
   cancelChangeBrokerMethod,
   changeBrokerMethod,
@@ -30,100 +33,87 @@ import {
 } from "./services/program-settings.service";
 import { IProgramSignalFormValues } from "./signaling-edit";
 
-const _ProgramsEditPage: React.FC<Props> = ({ service, t }) => {
-  const [details, setDetails] = useState<ProgramDetailsFull | undefined>(
-    undefined
-  );
+const _ProgramsEditPage: React.FC<Props> = ({
+  service: {
+    programEditSignal,
+    changeBrokerMethod,
+    cancelChangeBrokerMethod,
+    dispatchDescription
+  },
+  t,
+  description
+}) => {
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
   >(undefined);
-  const fetchingDescription = () =>
-    service
-      .getProgramDescription()
-      .then(description => {
-        setDetails(description);
-        return getProgramBrokers(description.id);
-      })
-      .then(setBrokersInfo);
-  useEffect(() => {
-    fetchingDescription();
-  }, []);
+  useEffect(
+    () => {
+      description && getProgramBrokers(description.id).then(setBrokersInfo);
+    },
+    [description]
+  );
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
-      service
-        .programEditSignal(details!.id, successFee!, volumeFee!)
-        .then(fetchingDescription),
-    [details]
+      programEditSignal(description!.id, successFee!, volumeFee!).then(
+        dispatchDescription
+      ),
+    [description]
   );
   const changeBroker = useCallback(
     (
       { brokerAccountTypeId, leverage }: ChangeBrokerFormValues,
       setSubmitting: SetSubmittingType
     ) => {
-      service
-        .changeBrokerMethod(
-          details!.id,
-          brokerAccountTypeId,
-          leverage,
-          setSubmitting
-        )
-        .then(fetchingDescription);
+      changeBrokerMethod(
+        description!.id,
+        brokerAccountTypeId,
+        leverage,
+        setSubmitting
+      ).then(dispatchDescription);
     },
-    [details]
+    [description]
   );
   const cancelChangeBroker = useCallback(
     () => {
-      service.cancelChangeBrokerMethod(details!.id).then(fetchingDescription);
+      cancelChangeBrokerMethod(description!.id).then(dispatchDescription);
     },
-    [details]
+    [description]
   );
-  const editProgram: TUpdateProgramFunc = useCallback(
-    values => {
-      const currentValues = {
-        title: details!.title,
-        stopOutLevel: details!.stopOutLevel,
-        description: details!.description,
-        logo: { src: details!.logo },
-        investmentLimit: details!.availableInvestmentLimit
-      };
-      service
-        .editAsset(details!.id, { ...currentValues, ...values }, ASSET.PROGRAM)
-        .then(fetchingDescription);
-    },
-    [details]
-  );
-  const applyCloseProgram = useCallback(
-    () => fetchingDescription().then(service.redirectToProgram),
-    []
-  );
-
   return (
-    <Page title={t("manager.program-settings.title")}>
-      <ProgramSettings
-        condition={!!details && !!brokersInfo}
-        loader={<ProgramSettingsLoader />}
-        changeSignaling={changeSignaling}
-        closePeriod={fetchingDescription}
-        closeProgram={applyCloseProgram}
-        details={details!}
-        brokersInfo={brokersInfo!}
-        changeBroker={changeBroker}
-        editProgram={editProgram}
-        cancelChangeBroker={cancelChangeBroker}
-      />
-    </Page>
+    <AssetSettingsPage
+      redirectToAsset={redirectToProgram}
+      asset={ASSET.PROGRAM}
+      description={description as AssetDescriptionType}
+      dispatchDescription={dispatchProgramDescription}
+      settingsBlocks={(editProgram, applyCloseAsset) => (
+        <ProgramSettings
+          condition={!!description && !!brokersInfo}
+          closePeriod={dispatchProgramDescription}
+          closeProgram={applyCloseAsset}
+          details={description!}
+          editProgram={editProgram}
+          brokersInfo={brokersInfo!}
+          changeBroker={changeBroker}
+          loader={<AssetSettingsLoader />}
+          changeSignaling={changeSignaling}
+          cancelChangeBroker={cancelChangeBroker}
+        />
+      )}
+    />
   );
 };
+
+const mapStateToProps = (state: RootState): StateProps => ({
+  description: programDescriptionSelector(state)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       cancelChangeBrokerMethod,
-      getProgramDescription,
-      editAsset,
+      dispatchDescription: dispatchProgramDescription,
       programEditSignal,
-      changeBrokerMethod,
-      redirectToProgram
+      changeBrokerMethod
     },
     dispatch
   )
@@ -141,24 +131,26 @@ export type TUpdateProgramFunc = (
 
 interface OwnProps {}
 
+interface StateProps {
+  description?: ProgramDetailsFull;
+}
+
 interface ServiceThunks extends ActionCreatorsMapObject {
   cancelChangeBrokerMethod: typeof cancelChangeBrokerMethod;
-  getProgramDescription: typeof getProgramDescription;
-  editAsset: typeof editAsset;
+  dispatchDescription: typeof dispatchProgramDescription;
   programEditSignal: typeof programEditSignal;
   changeBrokerMethod: typeof changeBrokerMethod;
-  redirectToProgram: typeof redirectToProgram;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, DispatchProps, WithTranslation {}
+interface Props extends OwnProps, DispatchProps, WithTranslation, StateProps {}
 
 const ProgramSettingsPage = compose<React.ComponentType<OwnProps>>(
   translate(),
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   ),
   React.memo

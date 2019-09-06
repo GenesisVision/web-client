@@ -1,21 +1,23 @@
 import {
   CancelablePromise,
-  DashboardPortfolioEvent,
-  DashboardPortfolioEvents,
+  InvestmentEventViewModels,
   LevelInfo,
-  ManagerPortfolioEvent,
-  ManagerPortfolioEvents,
-  OrderModel,
-  ProgramPeriodsViewModel
+  ProgramPeriodsViewModel,
+  SignalProviderSubscribers,
+  TradesViewModel
 } from "gv-api-web";
 import { Dispatch } from "redux";
-import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import {
+  ChartDefaultPeriod,
+  getDefaultPeriod
+} from "shared/components/chart/chart-period/chart-period.helpers";
+import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
   TableItems,
   mapToTableItems
 } from "shared/components/table/helpers/mapper";
+import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
@@ -30,30 +32,56 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import { CurrencyEnum } from "shared/utils/types";
+import {
+  ActionType,
+  CurrencyEnum,
+  DispatchDescriptionType
+} from "shared/utils/types";
 
-import { HistoryCountsType } from "../program-details.types";
+import {
+  fetchEventsAction,
+  fetchFinancialStatisticAction,
+  fetchLevelParametersAction,
+  fetchOpenPositionsAction,
+  fetchPeriodHistoryAction,
+  fetchProgramBalanceChartAction,
+  fetchProgramDescriptionAction,
+  fetchProgramProfitChartAction,
+  fetchSubscriptionsAction,
+  fetchTradesAction
+} from "../actions/program-details.actions";
+import {
+  financialStatisticTableSelector,
+  periodHistoryTableSelector,
+  subscriptionsTableSelector,
+  tradesTableSelector
+} from "../reducers/program-history.reducer";
 import { ProgramStatisticResult } from "./program-details.types";
+
+export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
+  filters?: ComposeFiltersAllType
+): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
+  fetchEventsAction(id, eventLocation, filters);
 
 export const getProgramBrokers = (id: string) =>
   brokersApi.v10BrokersByProgramIdGet(id);
 
-export const getPlatformLevelsParameters = (currency: CurrencyEnum) =>
-  platformApi.v10PlatformLevelsParametersGet({ currency });
+export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
+  dispatch: Dispatch
+) => dispatch(fetchLevelParametersAction(currency));
 
-export const getProgramDescription = () => (
-  dispatch: Dispatch,
-  getState: () => RootState
+export const dispatchProgramDescription: DispatchDescriptionType = () => (
+  dispatch,
+  getState
 ) => {
   const authorization = authService.getAuthArg();
   const { router } = getState();
 
-  const programSlugUrl = getParams(
-    router.location.pathname,
-    PROGRAM_DETAILS_ROUTE
-  )[PROGRAM_SLUG_URL_PARAM_NAME];
+  const slugUrl = getParams(router.location.pathname, PROGRAM_DETAILS_ROUTE)[
+    PROGRAM_SLUG_URL_PARAM_NAME
+  ];
 
-  return programsApi.v10ProgramsByIdGet(programSlugUrl, { authorization });
+  return dispatch(fetchProgramDescriptionAction(slugUrl, authorization));
 };
 
 export const getProgramStatistic = (
@@ -83,45 +111,8 @@ export const getProgramStatistic = (
       periodEnds: profitChart.lastPeriodEnds,
       tradingVolume: profitChart.tradingVolume
     };
-    const profitChartData = {
-      balance: profitChart.balance,
-      timeFrameProgramCurrencyProfit:
-        profitChart.timeframeProgramCurrencyProfit,
-      timeFrameGvtProfit: profitChart.timeframeGvtProfit,
-      programCurrency: profitChart.programCurrency,
-      profitChangePercent: profitChart.profitChangePercent,
-      pnLChart: profitChart.pnLChart,
-      equityChart: profitChart.equityChart
-    };
-
-    return { statistic, profitChart: profitChartData, balanceChart };
+    return { statistic, profitChart, balanceChart };
   });
-};
-
-export const closeProgram = (
-  onSuccess: () => void,
-  onError: () => void,
-  programId: string,
-  opts?: {
-    twoFactorCode?: string | undefined;
-  }
-): any => (dispatch: Dispatch): void => {
-  const authorization = authService.getAuthArg();
-  managerApi
-    .v10ManagerProgramsByIdClosePost(programId, authorization, opts)
-    .then(() => {
-      onSuccess();
-      dispatch(
-        alertMessageActions.success(
-          "program-details-page.description.close-program-notification-success",
-          true
-        )
-      );
-    })
-    .catch(error => {
-      onError();
-      dispatch(alertMessageActions.error(error.errorMessage));
-    });
 };
 
 export const closePeriod = (
@@ -147,24 +138,40 @@ export const closePeriod = (
     });
 };
 
-export const fetchProgramTrades = (
-  id: string,
-  filters?: FilteringType
-): Promise<TableItems<OrderModel>> => {
-  return programsApi
-    .v10ProgramsByIdTradesGet(id, {
-      ...filters
-    })
-    .then(mapToTableItems<OrderModel>("trades"));
+export const getOpenPositions = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<TradesViewModel>> => {
+  return fetchOpenPositionsAction(programId, filters);
 };
 
-export const fetchOpenPositions = (
-  id: string,
-  filters: any
-): Promise<TableItems<OrderModel>> => {
-  return programsApi
-    .v10ProgramsByIdTradesOpenGet(id, { sorting: filters.sorting })
-    .then(mapToTableItems<OrderModel>("trades"));
+export const getTrades = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<TradesViewModel>> => {
+  return fetchTradesAction(programId, filters);
+};
+
+export const getPeriodHistory = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => {
+  const authorization = authService.getAuthArg();
+  return fetchPeriodHistoryAction(programId, { authorization, ...filters });
+};
+
+export const getFinancialStatistics = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => {
+  const authorization = authService.getAuthArg();
+  return fetchFinancialStatisticAction(programId, {
+    authorization,
+    ...filters
+  });
+};
+
+export const getSubscriptions = (programId: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<SignalProviderSubscribers>> => {
+  const authorization = authService.getAuthArg();
+  return fetchSubscriptionsAction(programId, authorization, filters);
 };
 
 export const fetchInvestmentsLevels = (
@@ -172,79 +179,120 @@ export const fetchInvestmentsLevels = (
 ): CancelablePromise<LevelInfo[]> =>
   platformApi.v10PlatformLevelsGet({ currency }).then(({ levels }) => levels);
 
-export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
+export const getProgramHistoryCounts = (id: string) => (
+  dispatch: Dispatch,
+  getState: () => RootState
+) => {
   const isAuthenticated = authService.isAuthenticated();
   const isManager = ROLE_ENV === ROLE.MANAGER;
 
-  const filtering = { take: 0 };
-  const tradesCountPromise = programsApi.v10ProgramsByIdTradesGet(
-    id,
-    filtering
+  const commonFiltering = { take: 0 };
+
+  const tradesFilters = composeRequestFiltersByTableState(
+    tradesTableSelector(getState())
   );
-  const eventsCountPromise = isAuthenticated
-    ? fetchPortfolioEvents({ ...filtering, assetId: id })
-    : Promise.resolve({ total: 0 });
-  const openPositionsCountPromise = programsApi.v10ProgramsByIdTradesOpenGet(
-    id
-  );
-  const subscriptionsCountPromise =
-    isAuthenticated && isManager
-      ? programsApi.v10ProgramsByIdSubscribersGet(id, authService.getAuthArg())
-      : Promise.resolve({ total: 0 });
-  const periodHistoryCountPromise = programsApi.v10ProgramsByIdPeriodsGet(id);
-  return Promise.all([
-    tradesCountPromise,
-    eventsCountPromise,
-    openPositionsCountPromise,
-    subscriptionsCountPromise,
-    periodHistoryCountPromise
-  ]).then(
-    ([
-      tradesData,
-      eventsData,
-      openPositionsData,
-      subscriptionsData,
-      periodHistoryData
-    ]) => ({
-      tradesCount: tradesData.total,
-      eventsCount: eventsData.total,
-      openPositionsCount: openPositionsData.total,
-      subscriptionsCount: subscriptionsData.total,
-      periodHistoryCount: periodHistoryData.total
+  dispatch(
+    getTrades(id)({
+      ...tradesFilters,
+      ...commonFiltering
     })
   );
+
+  const periodHistoryFilters = composeRequestFiltersByTableState(
+    periodHistoryTableSelector(getState())
+  );
+  dispatch(
+    getPeriodHistory(id)({
+      ...periodHistoryFilters,
+      ...commonFiltering
+    })
+  );
+
+  if (isAuthenticated && isManager) {
+    const subscriptionFilters = composeRequestFiltersByTableState(
+      subscriptionsTableSelector(getState())
+    );
+    dispatch(
+      getSubscriptions(id)({
+        ...subscriptionFilters,
+        ...commonFiltering
+      })
+    );
+
+    const financialStatisticsFilters = composeRequestFiltersByTableState(
+      financialStatisticTableSelector(getState())
+    );
+    dispatch(
+      getFinancialStatistics(id)({
+        ...financialStatisticsFilters,
+        ...commonFiltering
+      })
+    );
+  }
 };
 
-export const fetchPortfolioEvents: GetItemsFuncType = (
-  filters?
-): CancelablePromise<
-  TableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>
-> => {
+export enum EVENT_LOCATION {
+  Asset = "Asset",
+  Dashboard = "Dashboard",
+  EventsAll = "EventsAll"
+}
+
+export const fetchPortfolioEventsWithoutTable = (
+  eventLocation: EVENT_LOCATION,
+  filters?: any
+): CancelablePromise<InvestmentEventViewModels> => {
   const authorization = authService.getAuthArg();
   let request: (
     authorization: string,
     opts?: Object
-  ) => CancelablePromise<DashboardPortfolioEvents | ManagerPortfolioEvents>;
+  ) => CancelablePromise<InvestmentEventViewModels>;
   switch (ROLE_ENV) {
     case ROLE.INVESTOR:
-      request = investorApi.v10InvestorPortfolioEventsGet;
+      request = investorApi.v10InvestorInvestmentsEventsGet;
       break;
     case ROLE.MANAGER:
     default:
-      request = managerApi.v10ManagerEventsGet;
+      request = managerApi.v10ManagerInvestmentsEventsGet;
       break;
   }
-  return request(authorization, filters).then(
-    mapToTableItems<ManagerPortfolioEvent | DashboardPortfolioEvent>("events")
+  return request(authorization, { ...filters, eventLocation });
+};
+
+export const fetchPortfolioEvents = (
+  eventLocation: EVENT_LOCATION
+): GetItemsFuncType => (
+  filters?
+): CancelablePromise<TableItems<InvestmentEventViewModels>> => {
+  const authorization = authService.getAuthArg();
+  let request: (
+    authorization: string,
+    opts?: Object
+  ) => CancelablePromise<InvestmentEventViewModels>;
+  switch (ROLE_ENV) {
+    case ROLE.INVESTOR:
+      request = investorApi.v10InvestorInvestmentsEventsGet;
+      break;
+    case ROLE.MANAGER:
+    default:
+      request = managerApi.v10ManagerInvestmentsEventsGet;
+      break;
+  }
+  return request(authorization, { ...filters, eventLocation }).then(
+    mapToTableItems<InvestmentEventViewModels>("events")
   );
 };
 
-export const fetchPeriodHistory = (
-  id: string,
-  filters?: FilteringType
-): Promise<TableItems<ProgramPeriodsViewModel>> => {
-  const authorization = authService.getAuthArg();
-  return programsApi
-    .v10ProgramsByIdPeriodsGet(id, { authorization, ...filters })
-    .then(mapToTableItems<ProgramPeriodsViewModel>("periods"));
+export const getProfitChart = ({ id, period }: TGetChartArgs) => (
+  dispatch: Dispatch
+) => dispatch(fetchProgramProfitChartAction(id, period));
+
+export const getBalanceChart = ({ id, period }: TGetChartArgs) => (
+  dispatch: Dispatch
+) => {
+  dispatch(fetchProgramBalanceChartAction(id, period));
+};
+
+type TGetChartArgs = {
+  id: string;
+  period?: ChartDefaultPeriod;
 };

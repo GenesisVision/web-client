@@ -1,6 +1,6 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
@@ -9,9 +9,10 @@ interface ISignalProgramInfoProps {
   programDescription: ProgramDetailsFull;
 }
 
-const SignalProgramInfo: React.FC<
-  WithTranslation & ISignalProgramInfoProps
-> = ({ t, programDescription }) => {
+const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
+  programDescription
+}) => {
+  const [t] = useTranslation();
   return (
     <div className="program-details-description__statistic-container">
       <StatisticItem
@@ -52,4 +53,5 @@ const SignalProgramInfo: React.FC<
   );
 };
 
-export default translate()(React.memo(SignalProgramInfo)); // TODO refactor
+const SignalProgramInfo = React.memo(_SignalProgramInfo);
+export default SignalProgramInfo; // TODO refactor

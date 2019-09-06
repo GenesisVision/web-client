@@ -1,108 +1,92 @@
-import { CaptchaDetailsCaptchaTypeEnum } from "gv-api-web";
-import * as React from "react";
+import {
+  CaptchaDetailsCaptchaTypeEnum,
+  GeeTestDetails,
+  PowDetails
+} from "gv-api-web";
+import React, { useCallback, useEffect, useState } from "react";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { SetSubmittingType } from "shared/utils/types";
 
 import * as authService from "./auth.service";
-import { CaptchasType } from "./auth.service";
 import Pow from "./captcha/pow";
 
-class CaptchaContainer extends React.PureComponent<Props, State> {
-  state = {
-    pow: undefined,
-    geeTest: undefined,
-    prefix: undefined,
-    setSubmitting: undefined,
-    isSubmit: false,
-    captchaType: "None" as CaptchaDetailsCaptchaTypeEnum,
-    id: "",
-    email: "",
-    values: undefined
-  };
+const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
+  const [pow, setPow] = useState<PowDetails | undefined>(undefined);
+  const [geeTest, setGeeTest] = useState<GeeTestDetails | undefined>(undefined);
+  const [captchaType, setCaptchaType] = useState<CaptchaDetailsCaptchaTypeEnum>(
+    "None"
+  );
+  const [prefix, setPrefix] = useState<number | undefined>(undefined);
+  const [id, setId] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [values, setValues] = useState<TValues | undefined>(undefined);
+  const [setSubmitting, setSetSubmitting] = useState<{
+    func?: SetSubmittingType;
+  }>({});
+  const [isSubmit, setIsSubmit, setIsNotSubmit] = useIsOpen();
 
-  componentDidUpdate(): void {
-    const { request } = this.props;
-    const {
-      isSubmit,
-      prefix = "",
-      id,
-      setSubmitting,
-      captchaType,
-      values = {}
-    } = this.state;
-    const captchaCheckResult = {
-      id,
-      pow: {
-        prefix
-      },
-      geeTest: {}
-    };
-    const sendRequest = () =>
-      request(
-        {
-          ...values,
-          captchaCheckResult
+  useEffect(
+    () => {
+      const captchaCheckResult = {
+        id,
+        pow: {
+          prefix
         },
-        setSubmitting!
-      );
-    if (isSubmit) {
-      switch (captchaType) {
-        case "Pow":
-          if (prefix) {
+        geeTest: {}
+      };
+      const sendRequest = () =>
+        request(
+          {
+            ...values,
+            captchaCheckResult
+          },
+          setSubmitting.func!
+        );
+      if (isSubmit) {
+        switch (captchaType) {
+          case "Pow":
+            if (prefix) {
+              sendRequest();
+              setPow(undefined);
+              setPrefix(undefined);
+              setIsNotSubmit();
+            }
+            break;
+          default:
             sendRequest();
-            this.setState({
-              pow: undefined,
-              prefix: undefined,
-              isSubmit: false
-            });
-          }
-          break;
-        default:
-          sendRequest();
-          this.setState({ isSubmit: false });
-          break;
+            setIsNotSubmit();
+            break;
+        }
       }
-    }
-  }
-
-  handlePow = (prefix: number) => {
-    this.setState({ prefix });
-  };
-
-  handleSubmit = (values: TValues, setSubmitting?: SetSubmittingType) => {
-    authService.getCaptcha(values.email).then(res => {
-      this.setState({
-        ...res,
-        values,
-        setSubmitting,
-        isSubmit: true,
-        email: values.email
-      });
-    });
-  };
-
-  render() {
-    const { renderForm } = this.props;
-    const { pow, email } = this.state;
-    return (
-      <>
-        {renderForm(this.handleSubmit)}
-        {pow && <Pow {...pow} login={email} handleSuccess={this.handlePow} />}
-      </>
-    );
-  }
-}
+    },
+    [id, prefix, values, isSubmit, captchaType, setSubmitting]
+  );
+  const handleSubmit = useCallback(
+    (values: TValues, setSubmittingProp?: SetSubmittingType) => {
+      authService
+        .getCaptcha(values.email)
+        .then(({ captchaType, geeTest, id, pow }) => {
+          setCaptchaType(captchaType);
+          setGeeTest(geeTest);
+          setId(id);
+          setPow(pow);
+          setValues(values);
+          setEmail(values.email);
+          setSetSubmitting({ func: setSubmittingProp });
+          setIsSubmit();
+        });
+    },
+    []
+  );
+  return (
+    <>
+      {renderForm(handleSubmit)}
+      {pow && <Pow {...pow} login={email} handleSuccess={setPrefix} />}
+    </>
+  );
+};
 
 export type TValues = any;
-
-interface State extends CaptchasType {
-  isSubmit: boolean;
-  captchaType: CaptchaDetailsCaptchaTypeEnum;
-  setSubmitting?: SetSubmittingType;
-  id?: string;
-  prefix?: number;
-  email?: string;
-  values?: TValues;
-}
 
 interface OwnProps {
   request: (values: TValues, setSubmitting: SetSubmittingType) => void;
@@ -113,4 +97,5 @@ interface OwnProps {
 
 interface Props extends OwnProps {}
 
+const CaptchaContainer = React.memo(_CaptchaContainer);
 export default CaptchaContainer;

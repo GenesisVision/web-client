@@ -1,8 +1,7 @@
 import "./wallet-transactions.scss";
 
 import { PlatformInfo } from "gv-api-web";
-import { RefObject } from "react";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -42,65 +41,62 @@ const DEFAULT_FILTERS = [
   }
 ];
 
-class _WalletTransactions extends React.PureComponent<Props> {
-  ref: RefObject<TableModule> = React.createRef();
-
-  componentDidUpdate(prevProps: Props) {
-    if (this.props.timestamp !== prevProps.timestamp)
-      this.ref.current!.updateItems();
-  }
-
-  fetchMultiTransactions: GetItemsFuncType = filters =>
-    fetchMultiTransactions(this.props.currency, filters);
-
-  render() {
-    const { t, renderBodyRow, columns, platformData } = this.props;
-    if (!platformData) return null;
-    const { transactionType } = platformData.enums.multiWallet;
-    return (
-      <div className="wallet-transactions">
-        <TableModule
-          ref={this.ref}
-          defaultFilters={DEFAULT_FILTERS}
-          paging={DEFAULT_PAGING}
-          filtering={{
-            ...TRANSACTIONS_FILTERS,
-            type: transactionType[0]
-          }}
-          getItems={this.fetchMultiTransactions}
-          renderFilters={(updateFilter, filtering) => (
-            <>
-              <SelectFilter
-                name={"type"}
-                label="Type"
-                value={filtering["type"] as SelectFilterType} //TODO fix filtering types
-                values={reduceFilters(transactionType)}
-                onChange={updateFilter}
-              />
-              <DateRangeFilter
-                name={DATE_RANGE_FILTER_NAME}
-                value={filtering["dateRange"]}
-                onChange={updateFilter}
-                startLabel={t("filters.date-range.account-creation")}
-              />
-            </>
-          )}
-          columns={columns}
-          renderHeader={column => (
-            <span
-              className={`wallet-transactions__cell wallet-transactions__cell--${
-                column.name
-              }`}
-            >
-              {t(`wallet-page.transactions.${column.name}`)}
-            </span>
-          )}
-          renderBodyRow={renderBodyRow}
-        />
-      </div>
-    );
-  }
-}
+const _WalletTransactions: React.FC<Props> = ({
+  t,
+  renderBodyRow,
+  columns,
+  platformData,
+  timestamp,
+  currency
+}) => {
+  const getMultiTransactions: GetItemsFuncType = useCallback(
+    filters => fetchMultiTransactions(currency, filters),
+    [currency]
+  );
+  if (!platformData) return null;
+  const { transactionType } = platformData.enums.multiWallet;
+  return (
+    <div className="wallet-transactions">
+      <TableModule
+        timestamp={timestamp.getMilliseconds()}
+        defaultFilters={DEFAULT_FILTERS}
+        paging={DEFAULT_PAGING}
+        filtering={{ ...TRANSACTIONS_FILTERS, type: transactionType[0] }}
+        getItems={getMultiTransactions}
+        renderFilters={(updateFilter, filtering) => (
+          <>
+            <SelectFilter
+              name={"type"}
+              label="Type"
+              value={filtering["type"] as SelectFilterType}
+              values={
+                reduceFilters(transactionType) //TODO fix filtering types
+              }
+              onChange={updateFilter}
+            />
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering["dateRange"]}
+              onChange={updateFilter}
+              startLabel={t("filters.date-range.account-creation")}
+            />
+          </>
+        )}
+        columns={columns}
+        renderHeader={column => (
+          <span
+            className={`wallet-transactions__cell wallet-transactions__cell--${
+              column.name
+            }`}
+          >
+            {t(`wallet-page.transactions.${column.name}`)}
+          </span>
+        )}
+        renderBodyRow={renderBodyRow}
+      />
+    </div>
+  );
+};
 
 const mapStateToProps = (state: RootState): StateProps => ({
   timestamp: state.wallet.lastUpdate.timestamp,
@@ -121,6 +117,7 @@ interface StateProps extends WalletLastUpdateState {
 
 const WalletTransactions = compose<React.ComponentType<OwnProps>>(
   translate(),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  React.memo
 )(_WalletTransactions);
 export default WalletTransactions;

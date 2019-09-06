@@ -1,8 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
-import { ProgramBalanceChart } from "gv-api-web";
+import { ProgramBalanceChart, ProgramProfitChart } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import GVTabs from "shared/components/gv-tabs";
@@ -11,17 +11,16 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useTab from "shared/hooks/tab.hook";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
-import { ProgramDetailsProfitChart } from "../../services/program-details.types";
 import ProgramBalanceChartSection from "./program-balance-chart-section/program-balance-chart-section";
 import ProgramProfitChartSection from "./program-profit-chart-section/program-profit-chart-section";
 
 const _DetailsChartElements: React.FC<Props> = ({
-  t,
   profitChart,
   balanceChart,
   period,
   onPeriodChange
 }) => {
+  const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.PROFIT);
   return (
     <>
@@ -53,14 +52,12 @@ const _DetailsChartElements: React.FC<Props> = ({
   );
 };
 
-interface OwnProps {
-  profitChart: ProgramDetailsProfitChart;
+interface Props {
+  profitChart: ProgramProfitChart;
   balanceChart: ProgramBalanceChart;
   period: ChartDefaultPeriod;
   onPeriodChange: HandlePeriodChangeType;
 }
-
-interface Props extends WithTranslation, OwnProps {}
 
 enum TABS {
   PROFIT = "profit",
@@ -68,10 +65,9 @@ enum TABS {
 }
 
 const ProgramDetailsChartElements = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
+  React.ComponentType<Props & WithLoaderProps>
 >(
   withLoader,
-  translate(),
   React.memo
 )(_DetailsChartElements);
 export default ProgramDetailsChartElements;

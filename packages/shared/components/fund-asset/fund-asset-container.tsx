@@ -9,6 +9,7 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import useAnchor from "shared/hooks/anchor.hook";
+import { PlatformAssetFull } from "shared/utils/types";
 
 import { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltipContainer from "./fund-asset-tooltip/fund-asset-tooltip-container";
@@ -47,7 +48,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
         .map((asset, idx) => (
           <FundAssetTooltipContainer
             key={idx}
-            asset={asset}
+            asset={asset as PlatformAssetFull}
             idx={idx}
             assets={assets}
             type={type}
@@ -76,7 +77,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
                 .map((asset, idx) => (
                   <FundAssetTooltipContainer
                     key={idx}
-                    asset={asset}
+                    asset={asset as PlatformAssetFull}
                     idx={idx}
                     assets={assets}
                     type={type}
@@ -103,7 +104,7 @@ export type FundAssetRemoveType = (
 ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
 export interface IFundAssetContainerProps {
-  assets: FundAssetPercent[];
+  assets: Array<PlatformAssetFull | FundAssetPercent>;
   type: FUND_ASSET_TYPE;
   size?: number;
   length?: number;

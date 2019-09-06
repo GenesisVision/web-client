@@ -7,6 +7,8 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
+import SettingsBlock from "shared/components/settings-block/settings-block";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 
 const _SignalingEdit: React.FC<Props> = ({
@@ -20,32 +22,38 @@ const _SignalingEdit: React.FC<Props> = ({
   const [isSignal, setIsSignal] = useState<boolean>(isSignalProgram);
   const changeIsSignal = useCallback(() => setIsSignal(!isSignal), [isSignal]);
   return (
-    <form id="signaling-edit-form" onSubmit={handleSubmit}>
-      <div className="program-edit__signaling-edit-form-title-block">
-        <h3>{t("manager.program-settings.signaling-program.title")}</h3>
-        {!isSignalProgram && (
-          <GVSwitch
-            touched={false}
-            className="notification-setting__switch"
-            name={name}
-            value={isSignal}
-            color="primary"
-            onChange={changeIsSignal}
-          />
-        )}
-      </div>
-      <SignalsFeeFormPartial
-        volumeFeeFieldName={FORM_FIELDS.volumeFee}
-        successFeeFieldName={FORM_FIELDS.successFee}
-      />
-      <GVButton
-        type="submit"
-        id="programMakeSignalSubmit"
-        disabled={!dirty || isSubmitting || !isSignal || !isValid}
-      >
-        {"Save"}
-      </GVButton>
-    </form>
+    <SettingsBlock
+      label={t("manager.program-settings.signaling-program.title")}
+      content={
+        <form id="signaling-edit-form" onSubmit={handleSubmit}>
+          <div className="program-settings__signaling-edit-form-title-block">
+            {!isSignalProgram && (
+              <GVSwitch
+                touched={false}
+                className="notification-setting__switch"
+                name={name}
+                value={isSignal}
+                color="primary"
+                onChange={changeIsSignal}
+              />
+            )}
+          </div>
+          {isSignal && (
+            <SignalsFeeFormPartial
+              volumeFeeFieldName={FORM_FIELDS.volumeFee}
+              successFeeFieldName={FORM_FIELDS.successFee}
+            />
+          )}
+          <GVButton
+            type="submit"
+            id="programMakeSignalSubmit"
+            disabled={!dirty || isSubmitting || !isSignal || !isValid}
+          >
+            {"Save"}
+          </GVButton>
+        </form>
+      }
+    />
   );
 };
 
@@ -74,7 +82,8 @@ interface OwnProps {
   ): void;
 }
 
-const SignalingEdit = compose<React.ComponentType<OwnProps>>(
+const SignalingEdit = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+  withLoader,
   translate(),
   withFormik<OwnProps, IProgramSignalFormValues>({
     enableReinitialize: true,

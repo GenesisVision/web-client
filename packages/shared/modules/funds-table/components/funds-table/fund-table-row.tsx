@@ -1,4 +1,5 @@
 import { FundDetails } from "gv-api-web";
+import moment from "moment";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -49,8 +50,11 @@ const _FundsTableRow: React.FC<Props> = ({
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--amount">
       <NumberFormat
-        value={formatCurrencyValue(fund.statistic.balanceGVT.amount, "GVT")}
-        suffix=" GVT"
+        value={formatCurrencyValue(
+          fund.statistic.balance.amount,
+          fund.statistic.balance.currency
+        )}
+        suffix={` ${fund.statistic.balance.currency}`}
         displayType="text"
       />
     </TableCell>
@@ -64,6 +68,9 @@ const _FundsTableRow: React.FC<Props> = ({
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--investors">
       {fund.statistic.investorsCount}
+    </TableCell>
+    <TableCell className="programs-table__cell programs-table__cell--age">
+      {moment(fund.creationDate).fromNow(true)}
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--drawdown">
       <NumberFormat

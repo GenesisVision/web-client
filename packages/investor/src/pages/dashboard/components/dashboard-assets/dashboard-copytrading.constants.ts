@@ -26,9 +26,9 @@ export const DASHBOARD_COPYTRADING_COLUMNS = [
   {
     name: "profit"
   },
-  /*{
+  {
     name: "chart"
-  },*/
+  },
   {
     name: "status"
   }

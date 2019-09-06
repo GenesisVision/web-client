@@ -1,4 +1,4 @@
-import { ChartSimple, FundBalanceChart } from "gv-api-web";
+import { FundBalanceChart, FundProfitChart } from "gv-api-web";
 
 export type FundDetailsStatistic = {
   investors: number;
@@ -12,15 +12,8 @@ export type FundDetailsStatistic = {
   balance: number;
 };
 
-export type FundDetailsProfitChart = {
-  timeFrameUsdProfit: number;
-  timeFrameGvtProfit: number;
-  profitChangePercent: number;
-  equityChart: ChartSimple[];
-};
-
 export type FundStatisticResult = {
   statistic: FundDetailsStatistic;
-  profitChart: FundDetailsProfitChart;
+  profitChart: FundProfitChart;
   balanceChart: FundBalanceChart;
 };

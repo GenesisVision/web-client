@@ -1,17 +1,37 @@
+import { CancelablePromise, InvestmentEventViewModels } from "gv-api-web";
+import { ManagerRootState } from "reducers";
 import { Dispatch } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import dashboardFundsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds.selector";
+import { EVENT_LOCATION } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
+import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import { MiddlewareDispatch, TGetAuthState } from "shared/utils/types";
+import {
+  ActionType,
+  MiddlewareDispatch,
+  TGetAuthState
+} from "shared/utils/types";
 
 import * as actions from "../actions/dashboard.actions";
+import { fetchEventsAction } from "../actions/dashboard.actions";
+import { getDashboardFunds } from "./dashboard-funds.service";
+
+export const getEvents = (eventLocation: EVENT_LOCATION) => (
+  filters: ComposeFiltersAllType
+): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
+  fetchEventsAction(filters, eventLocation);
 
 export const getPortfolioEvents = () => (dispatch: Dispatch) =>
   dispatch(
-    actions.fetchPortfolioEventsAction(authService.getAuthArg(), { take: 5 })
+    actions.fetchPortfolioEventsAction(authService.getAuthArg(), {
+      eventLocation: EVENT_LOCATION.Dashboard,
+      take: 5
+    })
   );
 
 export const getAssetChart = (
@@ -77,7 +97,7 @@ export const composeAssetChart = (assetType: ASSETS_TYPES) => (
 export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
   dispatch(actions.setPeriodAction(period));
 
-export const fetchAssetsCount = (): Promise<{
+export const getAssetsCount = (): Promise<{
   programsCount: number;
   fundsCount: number;
 }> => {
@@ -90,4 +110,16 @@ export const fetchAssetsCount = (): Promise<{
     programsCount: programsData.total,
     fundsCount: fundsData.total
   }));
+};
+
+export const getAssetsCounts = () => (
+  dispatch: Dispatch,
+  getState: () => ManagerRootState
+) => {
+  const commonFiltering = { take: 0 };
+
+  const fundsCountFilters = composeRequestFiltersByTableState(
+    dashboardFundsTableSelector(getState())
+  );
+  dispatch(getDashboardFunds({ ...fundsCountFilters, ...commonFiltering }));
 };

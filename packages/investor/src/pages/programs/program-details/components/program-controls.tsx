@@ -4,28 +4,24 @@ import { IProgramControlsProps } from "shared/components/programs/program-detail
 import InvestmentProgramControls from "./investment-program-controls";
 import SignalProviderControls from "./signal-provider-controls";
 
-const ProgramControls: React.FC<IProgramControlsProps> = ({
+const _ProgramControls: React.FC<IProgramControlsProps> = ({
   programDescription,
-  isAuthenticated,
-  redirectToLogin
+  isAuthenticated
 }) => {
   const isAvailableFollowingTrades = programDescription.isSignalProgram;
-
   return (
     <div className="program-details-description__controls">
       <div className="program-details-description__col">
         <InvestmentProgramControls
           programDescription={programDescription}
           isAuthenticated={isAuthenticated}
-          redirectToLogin={redirectToLogin}
         />
       </div>
-      {isAvailableFollowingTrades && isAuthenticated ? (
+      {isAvailableFollowingTrades ? (
         <div className="program-details-description__col program-details-description__col--small-size">
           <SignalProviderControls
             programDescription={programDescription}
             isAuthenticated={isAuthenticated}
-            redirectToLogin={redirectToLogin}
           />
         </div>
       ) : null}
@@ -33,4 +29,5 @@ const ProgramControls: React.FC<IProgramControlsProps> = ({
   );
 };
 
+const ProgramControls = React.memo(_ProgramControls);
 export default ProgramControls;

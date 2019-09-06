@@ -1,28 +1,15 @@
-import {
-  AttachToSignalProvider,
-  SignalSubscription,
-  WalletData
-} from "gv-api-web";
+import { AttachToSignalProvider, SignalSubscription } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { InvestorRootState } from "reducers";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { FOLLOW_TYPE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
-import {
-  AlertActionCreator,
-  alertMessageActions
-} from "shared/modules/alert-message/actions/alert-message-actions";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
-import {
-  CurrencyEnum,
-  ResponseError,
-  SetSubmittingType
-} from "shared/utils/types";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import FollowPopupForm from "./follow-popup/follow-popup-form";
 import {
@@ -31,17 +18,19 @@ import {
   updateAttachToSignal
 } from "./services/program-follow-service";
 
+const DEFAULT_RATE_CURRENCY = "USD";
+
 const _ProgramFollowContainer: React.FC<Props> = ({
   id,
   signalSubscription,
   currency,
   onClose,
-  service,
-  t,
   onApply,
-  wallets,
   open
 }) => {
+  const dispatch = useDispatch();
+  const wallets = useSelector(walletsSelector);
+  const [t] = useTranslation();
   const [rate, setRate] = useState<number>(1);
   const [minDeposit, setMinDeposit] = useState<number | undefined>(undefined);
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
@@ -60,7 +49,7 @@ const _ProgramFollowContainer: React.FC<Props> = ({
     getSignalInfo(id)
       .then(setMinDeposit)
       .finally(setIsNotPending);
-    rateApi.v10RateByFromByToGet("USD", currency).then(setRate);
+    rateApi.v10RateByFromByToGet(DEFAULT_RATE_CURRENCY, currency).then(setRate);
   }, []);
   useEffect(
     () => {
@@ -81,13 +70,13 @@ const _ProgramFollowContainer: React.FC<Props> = ({
       const submitMethod =
         type === FOLLOW_TYPE.CREATE ? attachToSignal : updateAttachToSignal;
       submitMethod(id, requestParams)
-        .then(() => service.alertSuccess(t(successMessage)))
+        .then(() => dispatch(alertMessageActions.success(t(successMessage))))
         .then(onApply)
         .then(onClose)
-        .catch(({ errorMessage }: ResponseError) => {
-          service.alertError(errorMessage);
-          setSubmitting(false);
-        });
+        .catch(({ errorMessage }) =>
+          dispatch(alertMessageActions.error(errorMessage))
+        )
+        .finally(() => setSubmitting(false));
     },
     [type]
   );
@@ -108,29 +97,7 @@ const _ProgramFollowContainer: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: InvestorRootState): StateProps => ({
-  wallets: walletsSelector(state)
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators(
-    {
-      alertError: alertMessageActions.error,
-      alertSuccess: alertMessageActions.success
-    },
-    dispatch
-  )
-});
-
-interface DispatchProps {
-  service: { alertError: AlertActionCreator; alertSuccess: AlertActionCreator };
-}
-
-interface StateProps {
-  wallets: WalletData[];
-}
-
-interface OwnProps {
+interface Props {
   open: boolean;
   onClose(): void;
   onApply(): void;
@@ -139,14 +106,5 @@ interface OwnProps {
   signalSubscription: SignalSubscription;
 }
 
-interface Props extends DispatchProps, StateProps, OwnProps, WithTranslation {}
-
-const ProgramFollowContainer = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_ProgramFollowContainer);
+const ProgramFollowContainer = React.memo(_ProgramFollowContainer);
 export default ProgramFollowContainer;

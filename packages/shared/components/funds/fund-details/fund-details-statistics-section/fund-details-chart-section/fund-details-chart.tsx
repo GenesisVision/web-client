@@ -1,42 +1,41 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
-import { FundBalanceChart as FundBalanceChartType } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
+import { useTranslation } from "react-i18next";
+import GVTabs from "shared/components/gv-tabs";
+import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
-import { HandlePeriodChangeType } from "shared/utils/types";
+import useTab from "shared/hooks/tab.hook";
 
-import { FundDetailsProfitChart } from "../../services/fund-details.types";
-import FundDetailsChartElements from "./fund-details-chart-elements";
+import FundBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
+import FundProfitChartSection from "./fund-profit-chart-section/fund-profit-chart-section";
 
-const _FundDetailsChart: React.FC<Props> = ({
-  t,
-  period,
-  onPeriodChange,
-  profitChart,
-  balanceChart
-}) => (
-  <Surface className="surface--horizontal-paddings details-chart">
-    <h3>{t("fund-details-page.chart.heading")}</h3>
-    <FundDetailsChartElements
-      condition={!!profitChart && !!balanceChart}
-      loader={<DetailsChartLoader />}
-      profitChart={profitChart!}
-      balanceChart={balanceChart!}
-      period={period}
-      onPeriodChange={onPeriodChange}
-    />
-  </Surface>
-);
+const _FundDetailsChart: React.FC = () => {
+  const [t] = useTranslation();
+  const { tab, setTab } = useTab<TABS>(TABS.PROFIT);
+  return (
+    <Surface className="surface--horizontal-paddings details-chart">
+      <h3>{t("fund-details-page.chart.heading")}</h3>
+      <GVTabs value={tab} onChange={setTab}>
+        <GVTab
+          value={TABS.PROFIT}
+          label={t("fund-details-page.chart.tabs.profit")}
+        />
+        <GVTab
+          value={TABS.BALANCE}
+          label={t("fund-details-page.chart.tabs.balance")}
+        />
+      </GVTabs>
+      {tab === TABS.PROFIT && <FundProfitChartSection />}
+      {tab === TABS.BALANCE && <FundBalanceChartSection />}
+    </Surface>
+  );
+};
 
-interface Props extends WithTranslation {
-  period: ChartDefaultPeriod;
-  onPeriodChange: HandlePeriodChangeType;
-  profitChart?: FundDetailsProfitChart;
-  balanceChart?: FundBalanceChartType;
+enum TABS {
+  PROFIT = "profit",
+  BALANCE = "balance"
 }
 
-const FundDetailsChart = translate()(React.memo(_FundDetailsChart));
+const FundDetailsChart = React.memo(_FundDetailsChart);
 export default FundDetailsChart;

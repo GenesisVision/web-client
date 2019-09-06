@@ -12,6 +12,7 @@ const TransactionAsset = ({ data, url }: Props) => (
       level={data.level > 0 ? data.level : undefined}
       alt={data.title}
       color={data.color}
+      levelProgress={data.levelProgress}
     />
     <div className="transaction-asset__description">
       <p className="transaction-asset__title">{data.title}</p>

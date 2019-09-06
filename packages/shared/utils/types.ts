@@ -1,6 +1,8 @@
 import {
   AmountWithCurrencyCurrencyEnum,
   CancelablePromise,
+  FundAssetPart,
+  PlatformAsset,
   ProgramNotificationSettingList
 } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
@@ -84,3 +86,10 @@ export type TGetState = () => RootState;
 export type TGetAuthState = () => AuthRootState;
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+
+export type DispatchDescriptionType = () => (
+  dispatch: MiddlewareDispatch,
+  getState: () => RootState
+) => ReturnType<MiddlewareDispatch>;
+
+export type PlatformAssetFull = PlatformAsset & FundAssetPart;

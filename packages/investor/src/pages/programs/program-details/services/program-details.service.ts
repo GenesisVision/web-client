@@ -3,7 +3,10 @@ import {
   subscribeAvailableAction
 } from "pages/programs/program-details/actions/program-details.actions";
 import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
-import { fetchPortfolioEvents } from "shared/components/programs/program-details/services/program-details.service";
+import {
+  EVENT_LOCATION,
+  fetchPortfolioEvents
+} from "shared/components/programs/program-details/services/program-details.service";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import { CurrencyEnum, InvestorThunk } from "shared/utils/types";
@@ -16,7 +19,7 @@ export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
     filtering
   );
   const eventsCountPromise = isAuthenticated
-    ? fetchPortfolioEvents({ ...filtering, assetId: id })
+    ? fetchPortfolioEvents(EVENT_LOCATION.Asset)({ ...filtering, assetId: id })
     : Promise.resolve({ total: 0 });
   const openPositionsCountPromise = programsApi.v10ProgramsByIdTradesOpenGet(
     id

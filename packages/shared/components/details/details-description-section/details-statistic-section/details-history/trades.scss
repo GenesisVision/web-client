@@ -5,6 +5,29 @@
 .details-trades {
   overflow: hidden;
 
+  &__history-popup {
+    @include vertical-paddings($padding-medium);
+    @include horizontal-paddings($padding-medium);
+  }
+
+  &__history-popup-item {
+    display: flex;
+  }
+  &__history-popup-item:not(:last-child) {
+    @include adaptive-padding(bottom, $padding-xsmall);
+  }
+
+  &__history-popup-item-name,
+  &__history-popup-item-value {
+    @include font-size($font-size-common);
+  }
+  &__history-popup-item-name {
+    width: 200px;
+    color: $label-color;
+    letter-spacing: 0.4px;
+    font-weight: normal;
+  }
+
   &__cell,
   &__head-cell {
     font-size: $font-size-paragraph-mobile;

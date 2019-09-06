@@ -27,7 +27,7 @@ class CreateProgramSettingsSection extends React.PureComponent<
       programCurrency: currency,
       leverage,
       wallet,
-      rate: undefined
+      rate: 1
     };
 
     this.updateRate(wallet.currency, currency);
@@ -74,14 +74,10 @@ class CreateProgramSettingsSection extends React.PureComponent<
   getLeverage = (accountType: BrokerAccountType): number =>
     accountType.leverages[0];
 
-  updateRate = (from?: string, to?: string): void => {
-    if (!from || !to) {
-      this.setState({ rate: undefined });
-    } else {
-      this.props.fetchRate(from, to).then(rate => {
-        this.setState({ rate });
-      });
-    }
+  updateRate = (from: CurrencyEnum, to: CurrencyEnum): void => {
+    this.props.fetchRate(from, to).then(rate => {
+      this.setState({ rate });
+    });
   };
 
   render() {
@@ -98,13 +94,13 @@ class CreateProgramSettingsSection extends React.PureComponent<
         programsInfo={this.props.programsInfo}
         wallets={this.props.wallets}
         wallet={wallet}
-        changeWallet={this.handleWalletChange}
         leverage={leverage}
-        changeLeverage={this.handleLeverageChange}
         programCurrency={programCurrency}
-        changeCurrency={this.handleCurrencyChange}
         rate={rate}
         accountType={accountType}
+        changeLeverage={this.handleLeverageChange}
+        changeWallet={this.handleWalletChange}
+        changeCurrency={this.handleCurrencyChange}
         changeAccountType={this.handleAccountTypeChange}
       />
     );
@@ -133,6 +129,6 @@ interface StateProps {
   accountType: BrokerAccountType;
   programCurrency: CurrencyEnum;
   leverage: number;
-  rate?: number;
+  rate: number;
   wallet: WalletData;
 }

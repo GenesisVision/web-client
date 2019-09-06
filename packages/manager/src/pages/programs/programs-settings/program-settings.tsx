@@ -1,22 +1,25 @@
 import "./program-settings.scss";
 
 import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
+import AssetEdit from "modules/asset-settings/asset-edit";
+import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
+import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
 
 import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
-import ChangeBroker, { ChangeBrokerFormValues } from "./change-broker/change-broker";
+import ChangeBroker from "./change-broker/change-broker";
+import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ChangePassword from "./change-password/change-password";
-import CloseProgramPeriod from "./close-period/close-program-period";
-import CloseProgram from "./close-program/close-program";
 import InvestmentLimit from "./investment-limit";
-import ProgramEdit from "./program-edit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
+import TwoFactorConfirm from "./two-factor-confirm";
 
 const _ProgramSettings: React.FC<Props> = ({
   cancelChangeBroker,
@@ -36,99 +39,87 @@ const _ProgramSettings: React.FC<Props> = ({
     ? details.signalVolumeFee
     : undefined;
   return (
-    <div className="program-edit">
-      <h1>{t("manager.program-settings.title")}</h1>
-      <section className="program-edit__block">
-        <h3>{t("manager.program-settings.period-and-closing.title")}</h3>
-        <CloseProgramPeriod
-          canClose={details.personalProgramDetails.canClosePeriod}
-          onApply={closePeriod}
-          id={details.id}
-        />
-        <CloseProgram
-          canClose={details.personalProgramDetails.canCloseProgram}
-          onApply={closeProgram}
-          id={details.id}
-        />
-      </section>
-      {details.personalProgramDetails.canChangePassword &&
-        details.personalProgramDetails.canCloseProgram && (
-          <section className="program-edit__block">
-            <ChangePassword title={details.title} id={details.id} />
-          </section>
-        )}
-      {details.personalProgramDetails.canCloseProgram && (
-        <>
-          <section className="program-edit__block">
-            <ProgramEdit
-              title={details.title}
-              logo={{ src: details.logo }}
-              description={details.description}
-              onSubmit={editProgram}
-            />
-          </section>
-          {details.personalProgramDetails.migration && (
-            <section className="program-edit__block">
-              <CancelChangeBroker
-                brokerFrom={
-                  brokersInfo.brokers.find(
-                    broker =>
-                      !!broker.accountTypes.find(
-                        accountType =>
-                          accountType.id === brokersInfo.currentAccountTypeId
-                      )
-                  )!
-                }
-                brokerTo={details.personalProgramDetails.migration.newBroker}
-                onSubmit={cancelChangeBroker}
-                currentAccountTypeId={brokersInfo.currentAccountTypeId}
-                leverage={details.leverageMax}
-                newLeverage={
-                  details.personalProgramDetails.migration.newLeverage
-                }
-              />
-            </section>
-          )}
-          {!!!details.personalProgramDetails.migration &&
-            brokersInfo.brokers.length > 1 && (
-              <section className="program-edit__block">
-                <ChangeBroker
-                  onSubmit={changeBroker}
-                  id={details.id}
-                  brokers={brokersInfo.brokers}
-                  currentAccountTypeId={brokersInfo.currentAccountTypeId}
-                  currentLeverage={details.leverageMax}
-                />
-              </section>
-            )}
-          <section className="program-edit__block">
-            <StopOutLevel
-              stopOutLevel={details.stopOutLevel}
-              onSubmit={editProgram}
-            />
-          </section>
-          <section className="program-edit__block">
-            <InvestmentLimit
-              currency={details.currency}
-              investmentLimit={details.availableInvestmentLimit}
-              onSubmit={editProgram}
-            />
-          </section>
-          {(details.isSignalProgram ||
-            (!details.isSignalProgram &&
-              details.personalProgramDetails.canMakeSignalProvider)) && (
-            <section className="program-edit__block">
-              <SignalingEdit
-                isSignalProgram={details.isSignalProgram}
-                onSubmit={changeSignaling}
-                signalSuccessFee={signalSuccessFee}
-                signalVolumeFee={signalVolumeFee}
-              />
-            </section>
-          )}
-        </>
-      )}
-    </div>
+    <>
+      <TwoFactorConfirm
+        condition={details.personalProgramDetails.showTwoFactorButton}
+        id={details.id}
+      />
+      <ClosePeriodBlock
+        condition={!!details.personalProgramDetails.canClosePeriod}
+        id={details.id}
+        closePeriod={closePeriod}
+      />
+      <ChangePassword
+        condition={
+          details.personalProgramDetails.canChangePassword &&
+          details.personalProgramDetails.canCloseProgram
+        }
+        title={details.title}
+        id={details.id}
+      />
+      <CancelChangeBroker
+        condition={!!details.personalProgramDetails.migration}
+        isSignalProgram={details.isSignalProgram}
+        brokerFrom={
+          brokersInfo.brokers.find(
+            broker =>
+              !!broker.accountTypes.find(
+                accountType =>
+                  accountType.id === brokersInfo.currentAccountTypeId
+              )
+          )!
+        }
+        migration={details.personalProgramDetails.migration}
+        onSubmit={cancelChangeBroker}
+        currentAccountTypeId={brokersInfo.currentAccountTypeId}
+        leverage={details.leverageMax}
+      />
+      <ChangeBroker
+        condition={
+          !!!details.personalProgramDetails.migration &&
+          brokersInfo.brokers.length > 1
+        }
+        isSignalProgram={details.isSignalProgram}
+        onSubmit={changeBroker}
+        id={details.id}
+        brokers={brokersInfo.brokers}
+        currentAccountTypeId={brokersInfo.currentAccountTypeId}
+        currentLeverage={details.leverageMax}
+      />
+      <StopOutLevel
+        stopOutLevel={details.stopOutLevel}
+        onSubmit={editProgram}
+      />
+      <InvestmentLimit
+        currency={details.currency}
+        investmentLimit={details.availableInvestmentLimit}
+        onSubmit={editProgram}
+      />
+      <SignalingEdit
+        condition={
+          details.isSignalProgram ||
+          (!details.isSignalProgram &&
+            details.personalProgramDetails.canMakeSignalProvider)
+        }
+        isSignalProgram={details.isSignalProgram}
+        onSubmit={changeSignaling}
+        signalSuccessFee={signalSuccessFee}
+        signalVolumeFee={signalVolumeFee}
+      />
+      <AssetEdit
+        title={details.title}
+        logo={{ src: details.logo }}
+        description={details.description}
+        onSubmit={editProgram}
+      />
+      <CloseAssetBlock
+        label={t("manager.asset-settings.close-program.title")}
+        asset={ASSET.PROGRAM}
+        canCloseAsset={details.personalProgramDetails.canCloseProgram}
+        id={details.id}
+        closeAsset={closeProgram}
+      />
+    </>
   );
 };
 

@@ -1,62 +1,40 @@
+import { ProfileFullViewModel } from "gv-api-web";
+import React, { useEffect, useState } from "react";
 import {
-  ProfileFullViewModel,
-  UpdatePersonalDetailViewModel
-} from "gv-api-web";
-import { pickBy } from "lodash";
-import React, { useCallback, useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+  WithTranslation,
+  withTranslation as translate,
+  useTranslation
+} from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import ProfileForm, {
-  ProfileFormValues
-} from "shared/modules/profile/profile-form";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
-import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
+import { MiddlewareDispatch } from "shared/utils/types";
 
 import Profile from "./profile";
 
 const _ProfileContainer: React.FC<Props> = ({
-  service,
-  personal,
-  editable,
-  t
+  service: { alertMessageActionsSuccess }
 }) => {
+  const [t] = useTranslation();
   const [data, setData] = useState<ProfileFullViewModel | undefined>(undefined);
+  const fetch = () =>
+    profileApi.v10ProfileGet(authService.getAuthArg()).then(setData);
   useEffect(() => {
     fetch();
   }, []);
-  const success = (text: string) => {
-    service.alertMessageActionsSuccess(text);
+  const success = () => {
+    alertMessageActionsSuccess(t("profile-page.success-edit"));
     fetch();
   };
-  const handleEdit = useCallback(
-    (values: ProfileFormValues, setSubmitting: SetSubmittingType) => {
-      const model = pickBy(
-        values,
-        str => !!str
-      ) as UpdatePersonalDetailViewModel;
-      profileApi
-        .v10ProfilePersonalUpdatePost(authService.getAuthArg(), {
-          model
-        })
-        .then(() => {
-          success(t("profile-page.success-edit"));
-        })
-        .catch(() => {
-          setSubmitting(false);
-        });
-    },
-    []
-  );
-  const fetch = () =>
-    profileApi.v10ProfileGet(authService.getAuthArg()).then(setData);
-  if (!data) return null;
-  return editable ? (
-    <ProfileForm info={data} onSubmit={handleEdit} />
-  ) : (
-    <Profile personal={personal} info={data} />
+  return (
+    <Profile
+      condition={!!data}
+      info={data!}
+      notifySuccess={alertMessageActionsSuccess}
+      onSuccessEdit={success}
+    />
   );
 };
 
@@ -67,10 +45,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-interface OwnProps {
-  editable?: boolean;
-  personal?: boolean;
-}
+interface OwnProps {}
 
 interface DispatchProps {
   service: {

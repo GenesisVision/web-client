@@ -127,7 +127,9 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
             />
             <LevelFilter
               name={LEVEL_FILTER_NAME}
-              value={filtering[LEVEL_FILTER_NAME] as LevelFilterType} //TODO fix filtering types
+              value={filtering[LEVEL_FILTER_NAME].map((value: string) =>
+                parseInt(value)
+              )}
               onChange={updateFilter}
             />
             <SelectFilter

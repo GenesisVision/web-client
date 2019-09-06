@@ -5,14 +5,11 @@ import ProgramEditSignalContainer from "modules/program-signal/program-edit-sign
 import ProgramMakeSignalContainer from "modules/program-signal/program-make-signal/program-make-signal-container";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
+import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 
-class SignalProviderControls extends React.PureComponent<
-  OwnProps & WithTranslation,
-  State
-> {
+class _SignalProviderControls extends React.PureComponent<Props, State> {
   state = {
     popups: Object.keys(SIGNAL_POPUP).reduce<PopupStateType>(
       (curr, next) => {
@@ -38,73 +35,57 @@ class SignalProviderControls extends React.PureComponent<
     this.setState({ popups });
   };
 
-  applyChanges = (updateDescription: any) => () => {
-    updateDescription();
-  };
-
   render() {
     const { t, programDescription } = this.props;
     const { popups } = this.state;
     return (
-      <ProgramDetailContext.Consumer>
-        {({ updateDescription }: any) => (
+      <>
+        {programDescription.isSignalProgram ? (
           <>
-            {programDescription.isSignalProgram ? (
-              <>
-                <SignalProgramInfo programDescription={programDescription} />
-                <div className="program-details-description__button-container">
-                  <GVButton
-                    onClick={this.openPopup(SIGNAL_POPUP.EDIT)}
-                    className="program-details-description__invest-btn signal-provider__btn"
-                  >
-                    {t(
-                      "program-details-page.description.edit-signal-provider.title"
-                    )}
-                  </GVButton>
-                </div>
-              </>
-            ) : (
-              <div className="signal-provider">
-                <div>
-                  {t("program-details-page.description.signal-provider.title")}
-                </div>
-                <div className="signal-provider__disclaimer">
-                  {t(
-                    "program-details-page.description.signal-provider.disclaimer"
-                  )}
-                </div>
-                <div className="program-details-description__button-container">
-                  <GVButton
-                    onClick={this.openPopup(SIGNAL_POPUP.MAKE)}
-                    className="program-details-description__invest-btn signal-provider__btn"
-                  >
-                    {t(
-                      "program-details-page.description.signal-provider.title"
-                    )}
-                  </GVButton>
-                </div>
-              </div>
-            )}
-            <ProgramMakeSignalContainer
-              programDescription={programDescription}
-              open={popups[SIGNAL_POPUP.MAKE]}
-              onClose={this.closePopup(SIGNAL_POPUP.MAKE)}
-              onApply={this.applyChanges(updateDescription)}
-            />
-            <ProgramEditSignalContainer
-              programDescription={programDescription}
-              open={popups[SIGNAL_POPUP.EDIT]}
-              onClose={this.closePopup(SIGNAL_POPUP.EDIT)}
-              onApply={this.applyChanges(updateDescription)}
-            />
+            <SignalProgramInfo programDescription={programDescription} />
+            <div className="program-details-description__button-container">
+              <GVButton
+                onClick={this.openPopup(SIGNAL_POPUP.EDIT)}
+                className="program-details-description__invest-btn signal-provider__btn"
+              >
+                {t(
+                  "program-details-page.description.edit-signal-provider.title"
+                )}
+              </GVButton>
+            </div>
           </>
+        ) : (
+          <div className="signal-provider">
+            <div>
+              {t("program-details-page.description.signal-provider.title")}
+            </div>
+            <div className="signal-provider__disclaimer">
+              {t("program-details-page.description.signal-provider.disclaimer")}
+            </div>
+            <div className="program-details-description__button-container">
+              <GVButton
+                onClick={this.openPopup(SIGNAL_POPUP.MAKE)}
+                className="program-details-description__invest-btn signal-provider__btn"
+              >
+                {t("program-details-page.description.signal-provider.title")}
+              </GVButton>
+            </div>
+          </div>
         )}
-      </ProgramDetailContext.Consumer>
+        <ProgramMakeSignalContainer
+          programDescription={programDescription}
+          open={popups[SIGNAL_POPUP.MAKE]}
+          onClose={this.closePopup(SIGNAL_POPUP.MAKE)}
+        />
+        <ProgramEditSignalContainer
+          programDescription={programDescription}
+          open={popups[SIGNAL_POPUP.EDIT]}
+          onClose={this.closePopup(SIGNAL_POPUP.EDIT)}
+        />
+      </>
     );
   }
 }
-
-export default translate()(SignalProviderControls);
 
 enum SIGNAL_POPUP {
   EDIT = "EDIT",
@@ -122,3 +103,10 @@ interface OwnProps {
 interface State {
   popups: PopupStateType;
 }
+
+interface Props extends OwnProps, WithTranslation {}
+
+const SignalProviderControls = compose<React.ComponentType<OwnProps>>(
+  translate()
+)(_SignalProviderControls);
+export default SignalProviderControls;

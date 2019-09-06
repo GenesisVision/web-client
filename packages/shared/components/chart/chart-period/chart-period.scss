@@ -3,7 +3,7 @@
 @import "~shared/styles/_sizes.scss";
 
 .chart-period {
-  @include adaptive-padding(bottom, $padding-small);
+  @include adaptive-padding(bottom, $padding-xsmall);
   display: inline-flex;
   justify-content: space-between;
   align-items: center;

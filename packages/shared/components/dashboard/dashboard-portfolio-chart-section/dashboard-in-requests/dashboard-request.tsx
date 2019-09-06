@@ -1,29 +1,27 @@
-import { ProgramRequest } from "gv-api-web";
+import { AssetDetailsAssetTypeEnum, ProgramRequest } from "gv-api-web";
 import moment from "moment";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import useIsOpen from "shared/hooks/is-open.hook";
+import useRole from "shared/hooks/use-role.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { EVENT_LOGO_TYPE } from "../../dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 import { CancelRequestPropsType } from "../../dashboard.constants";
 
 const _DashboardRequest: React.FC<Props> = ({
-  t,
   request,
   cancelRequest,
   onApplyCancelRequest,
-  role,
   asset = ASSET.PROGRAM
 }) => {
+  const [t] = useTranslation();
+  const role = useRole();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const [disabled, setDisabled, setNotDisabled] = useIsOpen();
   const handleApplyCancelRequest = useCallback(
@@ -39,16 +37,28 @@ const _DashboardRequest: React.FC<Props> = ({
         asset
       });
     },
-    [onApplyCancelRequest, request, role, asset]
+    [
+      setDisabled,
+      cancelRequest,
+      request.id,
+      role,
+      asset,
+      onApplyCancelRequest,
+      setNotDisabled
+    ]
   );
+  const assetDetails = {
+    logo: request.logo,
+    title: request.title,
+    color: request.color,
+    url: "",
+    id: request.programId,
+    assetType: "Programs" as AssetDetailsAssetTypeEnum
+  };
   return (
     <div className="dashboard-request-popover__request">
       <div className="dashboard-request-popover__logo">
-        <PortfolioEventLogo
-          type={request.type as EVENT_LOGO_TYPE}
-          logo={request.logo}
-          color={request.color}
-        />
+        <PortfolioEventLogo assetDetails={assetDetails} icon={""} />
       </div>
       <StatisticItem
         className={
@@ -101,7 +111,7 @@ const _DashboardRequest: React.FC<Props> = ({
   );
 };
 
-export interface Props extends WithTranslation, WithRoleProps, OwnProps {}
+export interface Props extends OwnProps {}
 
 interface OwnProps {
   request: ProgramRequest;
@@ -110,9 +120,5 @@ interface OwnProps {
   asset?: ASSET;
 }
 
-const DashboardRequest = compose<React.ComponentType<OwnProps>>(
-  withRole,
-  translate(),
-  React.memo
-)(_DashboardRequest);
+const DashboardRequest = React.memo(_DashboardRequest);
 export default DashboardRequest;

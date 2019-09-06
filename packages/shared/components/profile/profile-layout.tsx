@@ -7,26 +7,35 @@ import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Page from "shared/components/page/page";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { kycConfirmedSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 import {
   KYC_ROUTE,
+  PROFILE,
   PROFILE_ROUTE,
+  SECURITY,
+  SECURITY_ROUTE,
+  SETTINGS,
   SETTINGS_ROUTE,
-  SOCIAL_LINKS_ROUTE
+  SOCIAL_LINKS,
+  SOCIAL_LINKS_ROUTE,
+  VERIFY
 } from "./profile.constants";
 
 const tabs = [
-  { pathname: PROFILE_ROUTE, value: "details" },
-  { pathname: KYC_ROUTE, value: "verify" },
-  { pathname: SETTINGS_ROUTE, value: "settings" }
+  { pathname: PROFILE_ROUTE, value: PROFILE },
+  { pathname: KYC_ROUTE, value: VERIFY, hideable: true },
+  { pathname: SETTINGS_ROUTE, value: SETTINGS },
+  { pathname: SECURITY_ROUTE, value: SECURITY }
 ];
 
 if (ROLE_ENV === ROLE.MANAGER) {
-  tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: "social-links" });
+  tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: SOCIAL_LINKS });
 }
 
 const _ProfileLayout: React.FC<Props> = ({
+  verified,
   t,
   route,
   backPath,
@@ -38,31 +47,34 @@ const _ProfileLayout: React.FC<Props> = ({
       <div className="app__main-wrapper">
         <h1>{t("profile-page.title")}</h1>
         <GVTabs value={route}>
-          {tabs.map(x => (
-            <GVTab
-              key={x.value}
-              label={
-                <Link
-                  to={{
-                    pathname: x.pathname,
-                    state: backPath,
-                    prevPath
-                  }}
-                >
-                  {t(`profile-page.tabs.${x.value}`)}
-                </Link>
-              }
-              value={x.value}
-            />
-          ))}
+          {tabs
+            .filter(tab => !tab.hideable || !verified)
+            .map(x => (
+              <GVTab
+                key={x.value}
+                label={
+                  <Link
+                    to={{
+                      pathname: x.pathname,
+                      state: backPath,
+                      prevPath
+                    }}
+                  >
+                    {t(`profile-page.tabs.${x.value}`)}
+                  </Link>
+                }
+                value={x.value}
+              />
+            ))}
         </GVTabs>
-        {children}
       </div>
+      {children}
     </Page>
   );
 };
 
 const mapSateTotProps = (state: RootState): StateProps => ({
+  verified: kycConfirmedSelector(state),
   backPath: state.router.location.state,
   prevPath: state.router.location.prevPath
 });
@@ -81,6 +93,7 @@ interface OwnProps {
 interface StateProps {
   backPath: string;
   prevPath?: string;
+  verified?: boolean;
 }
 
 interface Props extends OwnProps, StateProps, WithTranslation {}

@@ -2,8 +2,15 @@ import { FundDetailsFull } from "gv-api-web";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
+import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
 import GVButton from "shared/components/gv-button";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
@@ -13,7 +20,7 @@ enum INVESTMENT_POPUP {
   INVEST_UNAUTH = "INVEST_UNAUTH"
 }
 
-class InvestmentFundControls extends React.PureComponent<Props, State> {
+class _InvestmentFundControls extends React.PureComponent<Props, State> {
   state = {
     popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
       curr[INVESTMENT_POPUP[next]] = false;
@@ -31,13 +38,14 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
     this.setState({ popups });
   };
 
-  applyChanges = (updateDescription: () => void) => () => {
-    updateDescription();
-  };
-
   render() {
     const { popups } = this.state;
-    const { t, fundDescription, isAuthenticated } = this.props;
+    const {
+      t,
+      fundDescription,
+      isAuthenticated,
+      service: { dispatchFundDescription }
+    } = this.props;
 
     const openPopup = isAuthenticated
       ? this.openPopup(INVESTMENT_POPUP.INVEST)
@@ -51,31 +59,22 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
     return (
       <>
         <InvestmentFundInfo fundDescription={fundDescription} />
-
-        <>
-          <div className="details-description__invest-button-container">
-            <GVButton
-              className="details-description__invest-btn"
-              onClick={openPopup}
-              disabled={isDisabledInvestButton}
-            >
-              {t("fund-details-page.description.invest")}
-            </GVButton>
-          </div>
-        </>
-        <ProgramDetailContext.Consumer>
-          {({ updateDescription }) => (
-            <>
-              <FundDepositContainer
-                condition={isAuthenticated}
-                open={popups[INVESTMENT_POPUP.INVEST]}
-                id={fundDescription.id}
-                onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
-                onApply={this.applyChanges(updateDescription)}
-              />
-            </>
-          )}
-        </ProgramDetailContext.Consumer>
+        <div className="details-description__invest-button-container">
+          <GVButton
+            className="details-description__invest-btn"
+            onClick={openPopup}
+            disabled={isDisabledInvestButton}
+          >
+            {t("fund-details-page.description.invest")}
+          </GVButton>
+        </div>
+        <FundDepositContainer
+          condition={isAuthenticated}
+          open={popups[INVESTMENT_POPUP.INVEST]}
+          id={fundDescription.id}
+          onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
+          onApply={dispatchFundDescription}
+        />
         <InvestmentUnauthPopup
           message={t("fund-details-page.description.unauth-popup")}
           asset={ASSET.FUND}
@@ -88,11 +87,24 @@ class InvestmentFundControls extends React.PureComponent<Props, State> {
   }
 }
 
-export default translate()(InvestmentFundControls);
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      dispatchFundDescription
+    },
+    dispatch
+  )
+});
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  dispatchFundDescription: typeof dispatchFundDescription;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
 
 interface OwnProps {
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   fundDescription: FundDetailsFull;
 }
 
@@ -100,4 +112,13 @@ interface State {
   popups: { [k: string]: boolean };
 }
 
-interface Props extends WithTranslation, OwnProps {}
+interface Props extends WithTranslation, OwnProps, DispatchProps {}
+
+const InvestmentFundControls = compose<React.ComponentType<OwnProps>>(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  translate()
+)(_InvestmentFundControls);
+export default InvestmentFundControls;

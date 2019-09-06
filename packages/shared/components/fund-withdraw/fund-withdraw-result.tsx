@@ -30,8 +30,8 @@ const FundWithdrawResult: React.FC<
               calculatePercentage(amountToWithdraw, exitFee),
               currency
             )}
-            prefix=" &asymp; "
-            suffix={` ${currency}`}
+            prefix=" (&asymp; "
+            suffix={` ${currency})`}
             displayType="text"
           />
         </span>

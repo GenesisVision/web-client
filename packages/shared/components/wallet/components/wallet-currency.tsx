@@ -7,7 +7,6 @@ import Page from "shared/components/page/page";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
-import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-form";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
@@ -31,10 +30,6 @@ const _WalletCurrency: React.FC<Props> = ({ t, info }) => {
     setOpenTransferPopup,
     setCloseTransferPopup
   ] = useIsOpen();
-  const currentWallet: CurrentWallet = {
-    currency: info.currency,
-    available: info.available
-  };
   return (
     <Page title={info.title}>
       <div className="wallet-balance">
@@ -66,7 +61,7 @@ const _WalletCurrency: React.FC<Props> = ({ t, info }) => {
       </div>
       <WalletTables currency={info.currency} />
       <WalletAddFundsPopup
-        currentWallet={currentWallet}
+        currentWallet={info}
         open={isOpenAddFundsPopup}
         onClose={setCloseAddFundsPopup}
       />

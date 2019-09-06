@@ -1,68 +1,33 @@
-import { DashboardPortfolioEvents as DashboardPortfolioEventsType } from "gv-api-web";
-import * as React from "react";
-import { ResolveThunks, connect } from "react-redux";
-import { InvestorRootState } from "reducers";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
 import { DASHBOARD_EVENTS_ROUTE } from "shared/routes/dashboard.routes";
 
 import { dashboardEventsSelector } from "../../reducers/dashboard-events.reducer";
 import { getTopPortfolioEvents } from "../../services/dashboard-events.services";
-import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
-class DashboardPortfolioEventsSection extends React.PureComponent<Props> {
-  componentDidMount() {
-    const { service } = this.props;
-    service.getTopPortfolioEvents();
-  }
-  render() {
-    const { title, data } = this.props;
-    return (
-      <DashboardPortfolioEvents
-        fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
-        title={title}
-        data={data}
-        eventView={DashboardPortfolioEvent}
-      />
-    );
-  }
-}
+const _DashboardPortfolioEventsSection: React.FC<Props> = ({ title }) => {
+  const dispatch = useDispatch();
+  const data = useSelector(dashboardEventsSelector);
+  useEffect(() => {
+    dispatch(getTopPortfolioEvents);
+  }, []);
+  return (
+    <DashboardPortfolioEvents
+      fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
+      title={title}
+      data={data}
+    />
+  );
+};
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { getTopPortfolioEvents },
-    dispatch
-  )
-});
-const mapStateToProps = (state: InvestorRootState): StateProps => ({
-  data: dashboardEventsSelector(state)
-});
-
-interface Props extends StateProps, DispatchProps, OwnProps {}
+interface Props extends OwnProps {}
 
 interface OwnProps {
   title: string;
 }
 
-interface StateProps {
-  data?: DashboardPortfolioEventsType;
-}
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  getTopPortfolioEvents: typeof getTopPortfolioEvents;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-export default compose<React.ComponentType<OwnProps>>(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(DashboardPortfolioEventsSection);
+const DashboardPortfolioEventsSection = React.memo(
+  _DashboardPortfolioEventsSection
+);
+export default DashboardPortfolioEventsSection;

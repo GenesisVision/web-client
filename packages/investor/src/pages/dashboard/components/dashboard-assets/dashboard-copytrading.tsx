@@ -15,6 +15,7 @@ import {
 import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
+import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -61,9 +62,15 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
         />
       </>
     )}
-    renderHeader={(column: Column) =>
-      t(`investor.dashboard-page.copytrading-header.${column.name}`)
-    }
+    renderHeader={(column: Column) => (
+      <span
+        className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
+          column.name
+        }`}
+      >
+        {t(`investor.dashboard-page.copytrading-header.${column.name}`)}
+      </span>
+    )}
     renderBodyRow={(signal: SignalDetails) => (
       <TableRow>
         <TableCell className="programs-table__cell dashboard-programs__cell--title">
@@ -94,12 +101,16 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
             </Link>
           </div>
         </TableCell>
-        <TableCell>{signal.currency}</TableCell>
-        <TableCell>{signal.personalDetails.tradesCount}</TableCell>
-        <TableCell>
+        <TableCell className="programs-table__cell">
+          {signal.currency}
+        </TableCell>
+        <TableCell className="programs-table__cell">
+          {signal.personalDetails.tradesCount}
+        </TableCell>
+        <TableCell className="programs-table__cell">
           {moment(signal.personalDetails.subscriptionDate).format()}
         </TableCell>
-        <TableCell>
+        <TableCell className="programs-table__cell">
           <Profitability
             value={formatCurrencyValue(
               signal.personalDetails.profit,
@@ -119,7 +130,12 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
             />
           </Profitability>
         </TableCell>
-        <TableCell>
+        <TableCell className="programs-table__cell dashboard-programs__cell--chart">
+          {signal.chart.length && (
+            <ProgramSimpleChart data={signal.chart} programId={signal.id} />
+          )}
+        </TableCell>
+        <TableCell className="programs-table__cell">
           <AssetStatusLabel status={signal.personalDetails.status as STATUS} />
         </TableCell>
       </TableRow>

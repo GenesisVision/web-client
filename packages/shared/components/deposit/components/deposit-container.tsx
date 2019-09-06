@@ -1,6 +1,6 @@
 import { FundInvestInfo, ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { ResolveThunks, connect, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
   Dispatch,
@@ -26,12 +26,16 @@ const _DepositContainer: React.FC<Props> = ({
   hasEntryFee,
   onClose,
   currency,
-  stateCurrency,
   fetchInfo,
   service,
   onApply
 }) => {
-  const { errorMessage, setErrorMessage } = useErrorMessage();
+  const {
+    errorMessage,
+    setErrorMessage,
+    cleanErrorMessage
+  } = useErrorMessage();
+  const stateCurrency = useSelector(currencySelector);
   const [wallets, setWallets] = useState<WalletBaseData[] | undefined>(
     undefined
   );
@@ -47,6 +51,10 @@ const _DepositContainer: React.FC<Props> = ({
       .then(setInvestInfo)
       .catch(setErrorMessage);
   }, []);
+  const closePopup = useCallback(() => {
+    cleanErrorMessage();
+    onClose();
+  }, []);
   const handleInvest = useCallback(
     (
       amount: number,
@@ -56,7 +64,7 @@ const _DepositContainer: React.FC<Props> = ({
       service
         .assetInvest(id, amount, currency)
         .then(onApply)
-        .then(onClose)
+        .then(closePopup)
         .catch(setErrorMessage)
         .finally(() => {
           setSubmitting(false);
@@ -65,7 +73,7 @@ const _DepositContainer: React.FC<Props> = ({
     [id]
   );
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={closePopup}>
       <DepositPopup
         condition={!!wallets && !!investInfo}
         loader={<DialogLoader />}
@@ -80,10 +88,6 @@ const _DepositContainer: React.FC<Props> = ({
     </Dialog>
   );
 };
-
-const mapStateToProps = (state: RootState): StateProps => ({
-  stateCurrency: currencySelector(state)
-});
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
@@ -116,16 +120,11 @@ interface ServiceThunks extends ActionCreatorsMapObject {
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
-
-interface StateProps {
-  stateCurrency: CurrencyEnum;
-}
-
-interface Props extends OwnProps, DispatchProps, StateProps {}
+interface Props extends OwnProps, DispatchProps {}
 
 const DepositContainer = compose<React.ComponentType<OwnProps>>(
-  connect<StateProps, DispatchProps, OwnProps, RootState>(
-    mapStateToProps,
+  connect<null, DispatchProps, OwnProps, RootState>(
+    null,
     mapDispatchToProps
   ),
   React.memo

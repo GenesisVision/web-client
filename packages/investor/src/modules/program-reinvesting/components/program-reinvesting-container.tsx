@@ -1,70 +1,93 @@
 import classNames from "classnames";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { ResolveThunks, connect } from "react-redux";
 import {
-  IProgramDetailContext,
-  ProgramDetailContext
-} from "shared/components/details/helpers/details-context";
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
+import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import useIsOpen from "shared/hooks/is-open.hook";
 
 import { toggleReinvesting } from "../services/program-reinvesting.service";
 
 const _ProgramReinvestingContainer: React.FC<Props> = ({
-  t,
+  service: { dispatchProgramDescription },
   isReinvesting: propIsReinvesting,
   programId
 }) => {
+  const [t] = useTranslation();
   const [isPending, setIsPending, setNotIsPending] = useIsOpen();
   const [isReinvesting, setIs, setNotIs, setIsReinvestingValue] = useIsOpen(
     propIsReinvesting
   );
   const onReinvestingLabelClick = useCallback(
-    (updateDescription: () => void) => () => {
+    () => {
       setIsPending();
       setIsReinvestingValue(!isReinvesting);
       toggleReinvesting(programId, !isReinvesting)
-        .then(updateDescription)
+        .then(dispatchProgramDescription)
         .catch(() => setIsReinvestingValue(isReinvesting))
         .finally(setNotIsPending);
     },
     [programId, isReinvesting]
   );
   return (
-    <ProgramDetailContext.Consumer>
-      {({ updateDescription }: IProgramDetailContext) => (
-        <span
-          className={classNames("reinvesting-widget", {
-            "reinvesting-widget--active": isReinvesting
-          })}
-          onClick={onReinvestingLabelClick(updateDescription)}
-        >
-          <GVSwitch
-            name="reinvesting"
-            touched={false}
-            value={isReinvesting}
-            color="primary"
-            onChange={onReinvestingLabelClick(updateDescription)}
-            label={
-              <TooltipLabel
-                tooltipContent={t("program-details-page.tooltip.reinvest")}
-                labelText={t("program-details-page.description.reinvest")}
-                className="tooltip__label--cursor-pointer"
-              />
-            }
-            disabled={isPending}
+    <span
+      className={classNames("reinvesting-widget", {
+        "reinvesting-widget--active": isReinvesting
+      })}
+      onClick={onReinvestingLabelClick}
+    >
+      <GVSwitch
+        name="reinvesting"
+        touched={false}
+        value={isReinvesting}
+        color="primary"
+        onChange={onReinvestingLabelClick}
+        label={
+          <TooltipLabel
+            tooltipContent={t("program-details-page.tooltip.reinvest")}
+            labelText={t("program-details-page.description.reinvest")}
+            className="tooltip__label--cursor-pointer"
           />
-        </span>
-      )}
-    </ProgramDetailContext.Consumer>
+        }
+        disabled={isPending}
+      />
+    </span>
   );
 };
 
-const ProgramReinvestingContainer = translate()(
-  React.memo(_ProgramReinvestingContainer)
-);
-export default ProgramReinvestingContainer;
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      dispatchProgramDescription
+    },
+    dispatch
+  )
+});
 
-interface Props extends IProgramReinvestingContainerOwnProps, WithTranslation {}
+interface ServiceThunks extends ActionCreatorsMapObject {
+  dispatchProgramDescription: typeof dispatchProgramDescription;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface Props extends IProgramReinvestingContainerOwnProps, DispatchProps {}
+
+const ProgramReinvestingContainer = compose<
+  React.ComponentType<IProgramReinvestingContainerOwnProps>
+>(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  React.memo
+)(_ProgramReinvestingContainer);
+export default ProgramReinvestingContainer;

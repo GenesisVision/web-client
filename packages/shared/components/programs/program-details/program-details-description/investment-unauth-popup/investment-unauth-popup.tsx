@@ -2,28 +2,28 @@ import "./investment-unauth-popup.scss";
 
 import classnames from "classnames";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 import DepositTop, {
   DepositTopOwnProps
 } from "shared/components/deposit/components/deposit-top";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import GVButton from "shared/components/gv-button";
 import { ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import useRole from "shared/hooks/use-role.hook";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 
-const InvestmentUnauthPopup: React.FC<Props> = ({
-  role,
+const _InvestmentUnauthPopup: React.FC<Props> = ({
+  header,
   open,
   onClose,
   title,
   currency,
   asset,
   availableToInvestBase,
-  message,
-  t
+  message
 }) => {
+  const [t] = useTranslation();
+  const role = useRole();
   const baseUrl =
     role === ROLE.MANAGER
       ? process.env.REACT_APP_INVESTOR_PORTAL_URL
@@ -37,6 +37,7 @@ const InvestmentUnauthPopup: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <DepositTop
+        header={header}
         asset={asset}
         currency={currency}
         title={title}
@@ -57,14 +58,9 @@ const InvestmentUnauthPopup: React.FC<Props> = ({
   );
 };
 
-export default compose<React.FC<OwnProps>>(
-  withRole,
-  translate(),
-  React.memo
-)(InvestmentUnauthPopup);
+const InvestmentUnauthPopup = React.memo(_InvestmentUnauthPopup);
+export default InvestmentUnauthPopup;
 
-interface OwnProps extends DepositTopOwnProps, IDialogProps {
+interface Props extends DepositTopOwnProps, IDialogProps {
   message: string;
 }
-
-interface Props extends OwnProps, WithTranslation, WithRoleProps {}

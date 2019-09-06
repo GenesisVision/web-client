@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_constants.scss";
 .popover {
+  opacity: 0;
   position: absolute;
   background-color: $popover-background;
   border-radius: $border-radius;
@@ -10,4 +11,5 @@
 
   max-width: calc(100vw - 20px);
   z-index: 1301;
+  transition: opacity 150ms ease-in-out;
 }

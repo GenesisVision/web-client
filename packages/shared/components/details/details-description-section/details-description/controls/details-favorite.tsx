@@ -1,20 +1,18 @@
 import "./details-description-control.scss";
 
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
-import isAuthenticated from "shared/decorators/is-authenticated";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 
 import DetailsDescriptionControl from "./details-description-control";
 
 const _DetailsFavorite: React.FC<Props> = ({
-  t,
   id,
   isFavorite: isFavoriteProp
 }) => {
+  const [t] = useTranslation();
   const [
     isFavorite,
     setIsFavorite,
@@ -34,7 +32,7 @@ const _DetailsFavorite: React.FC<Props> = ({
   );
   const handleFavoriteClickOnText = useCallback(
     () => handleFavoriteClickOnButton(id, isFavorite),
-    [id]
+    [id, isFavorite]
   );
   return (
     <DetailsDescriptionControl
@@ -54,16 +52,10 @@ const _DetailsFavorite: React.FC<Props> = ({
   );
 };
 
-interface OwnProps {
+interface Props {
   id: string;
   isFavorite: boolean;
 }
 
-interface Props extends OwnProps, WithTranslation {}
-
-const DetailsFavorite = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  isAuthenticated,
-  React.memo
-)(_DetailsFavorite);
+const DetailsFavorite = React.memo(_DetailsFavorite);
 export default DetailsFavorite;

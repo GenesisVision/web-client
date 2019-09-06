@@ -1,10 +1,11 @@
 import { FormikProps, withFormik } from "formik";
-import CreateProgramInvestmentLimitField from "pages/create-program/components/create-program-settings/fields/create-program-investment-limit-field";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import InvestmentLimitField from "shared/components/fields/investment-limit-field";
 import GVButton from "shared/components/gv-button";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import { validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import { boolean, mixed, number, object } from "yup";
@@ -24,31 +25,31 @@ const _InvestmentLimit: React.FC<Props> = ({
     []
   );
   return (
-    <form id="edit-form" onSubmit={handleSubmit}>
-      <div className="program-edit__block-wrapper">
-        <h3>
-          {t("manager.create-program-page.settings.fields.investment-limit")}
-        </h3>
-        <CreateProgramInvestmentLimitField
-          checkboxName={FIELDS.hasInvestmentLimit}
-          inputName={FIELDS.investmentLimit}
-          hasInvestmentLimit={values.hasInvestmentLimit}
-          currency={currency}
-          isAllow={isAmountAllow(currency)}
-        />
-        <p className="program-edit__text">
-          {t("manager.program-settings.investment-limit.text")}
-        </p>
-        <GVButton
-          color="primary"
-          type={"submit"}
-          className="invest-form__submit-button"
-          disabled={!dirty || !isValid || isSubmitting}
-        >
-          {t("manager.program-settings.buttons.save")}
-        </GVButton>
-      </div>
-    </form>
+    <SettingsBlock
+      label={t("manager.create-program-page.settings.fields.investment-limit")}
+      content={
+        <form id="edit-form" onSubmit={handleSubmit}>
+          <InvestmentLimitField
+            checkboxName={FIELDS.hasInvestmentLimit}
+            inputName={FIELDS.investmentLimit}
+            hasInvestmentLimit={values.hasInvestmentLimit}
+            currency={currency}
+            isAllow={isAmountAllow(currency)}
+          />
+          <p className="program-settings__text">
+            {t("manager.program-settings.investment-limit.text")}
+          </p>
+          <GVButton
+            color="primary"
+            type={"submit"}
+            className="invest-form__submit-button"
+            disabled={!dirty || !isValid || isSubmitting}
+          >
+            {t("manager.program-settings.buttons.save")}
+          </GVButton>
+        </form>
+      }
+    />
   );
 };
 

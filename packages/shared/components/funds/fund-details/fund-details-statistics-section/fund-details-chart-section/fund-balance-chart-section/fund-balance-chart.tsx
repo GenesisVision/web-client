@@ -14,7 +14,11 @@ import { CURRENCIES } from "shared/modules/currency-select/currency-select.const
 
 import FundBalanceTooltip from "./fund-balance-tooltip";
 
-const FundBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
+const FundBalanceChart: React.FC<Props> = ({
+  color,
+  balanceChart,
+  currency
+}) => {
   if (balanceChart.length === 0) return null;
   const chart = balanceChart.map(x => ({
     ...x,
@@ -40,8 +44,8 @@ const FundBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
           dataKey="managerFunds"
           type="monotone"
           connectNulls={true}
-          fill="#214650"
-          stroke="#214650"
+          fill={`${color}2a`}
+          stroke={`${color}2a`}
           strokeWidth={2}
           dot={false}
           unit={currency}
@@ -52,8 +56,8 @@ const FundBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
           dataKey="investorsFunds"
           type="monotone"
           connectNulls={true}
-          fill={GVColors.$primaryColor}
-          stroke={GVColors.$primaryColor}
+          fill={color}
+          stroke={color}
           strokeWidth={2}
           dot={false}
           unit={currency}
@@ -67,6 +71,7 @@ const FundBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
 };
 
 interface Props {
+  color: string;
   balanceChart: BalanceChartElement[];
   currency: CURRENCIES;
 }

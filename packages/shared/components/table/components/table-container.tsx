@@ -9,11 +9,11 @@ import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
 import { FilteringType, TDefaults, TFilter } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
-import { GetItemsFuncActionType } from "./table.types";
+import { GetItemsFuncActionType, TableSelectorType } from "./table.types";
 
 interface ITableContainerProps extends ITableProps {
   getItems: GetItemsFuncActionType;
-  dataSelector: (opts?: any) => { [keys: string]: any };
+  dataSelector: TableSelectorType;
   isFetchOnMount: boolean;
 }
 
@@ -40,7 +40,7 @@ interface ITableContainerDispatchProps {
   };
 }
 
-class TableContainer extends React.PureComponent<
+class _TableContainer extends React.PureComponent<
   ITableContainerProps &
     ITableContainerDispatchProps &
     ITableContainerStateProps
@@ -56,7 +56,7 @@ class TableContainer extends React.PureComponent<
     service.getItems(fetchItems, dataSelector);
   };
 
-  handleUpdateSorting = (sorting: string) => (): void => {
+  handleUpdateSorting = (sorting: string) => {
     this.updateItems({
       sorting,
       paging: {
@@ -129,7 +129,8 @@ const mapDispatchToProps = (
   service: bindActionCreators({ getItems, updateFilters }, dispatch)
 });
 
-export default connect(
+const TableContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TableContainer);
+)(_TableContainer);
+export default TableContainer;

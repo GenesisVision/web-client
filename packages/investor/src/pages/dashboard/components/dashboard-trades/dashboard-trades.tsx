@@ -1,26 +1,12 @@
 import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
-import * as React from "react";
-import { withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { Action, Dispatch, bindActionCreators, compose } from "redux";
+import React from "react";
 
 interface IDashboardTradesProps {
   title: string;
 }
 
-const _DashboardTrades: React.FC<IDashboardTradesProps> = ({ title }) => {
+const DashboardTrades: React.FC<IDashboardTradesProps> = ({ title }) => {
   return <CopytradingTablesSection title={title} />;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  service: bindActionCreators({}, dispatch)
-});
-
-const DashboardTrades = compose<React.ComponentType<IDashboardTradesProps>>(
-  translate(),
-  connect(
-    null,
-    mapDispatchToProps
-  )
-)(_DashboardTrades);
 export default DashboardTrades;

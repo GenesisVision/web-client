@@ -7,20 +7,21 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import Select from "shared/components/select/select";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import WalletSelect, {
+  ItemType,
+  ItemsType
+} from "shared/components/wallet-select/wallet-select";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import TransferRate from "shared/modules/transfer/components/transfer-rate";
-import filesService from "shared/services/file-service";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 import { Schema, lazy, number, object } from "yup";
 
 import * as service from "../services/transfer.services";
-import { ItemType, ItemsType, TRANSFER_CONTAINER } from "../transfer.types";
+import { TRANSFER_CONTAINER } from "../transfer.types";
 
 const _TransferForm: React.FC<Props> = ({
   title,
@@ -38,7 +39,7 @@ const _TransferForm: React.FC<Props> = ({
   isSubmitting
 }) => {
   const onChangeSourceId = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    (event: ISelectChangeEvent) => {
       const currencyFromNew = event.target.value;
       if (currencyFromNew === values[FIELDS.destinationId]) {
         setFieldValue(FIELDS.destinationId, values[FIELDS.sourceId]);
@@ -50,7 +51,7 @@ const _TransferForm: React.FC<Props> = ({
   );
 
   const onChangeDestinationId = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) =>
+    (event: ISelectChangeEvent) =>
       setFieldValue(FIELDS.destinationId, event.target.value),
     [setFieldValue]
   );
@@ -110,47 +111,23 @@ const _TransferForm: React.FC<Props> = ({
         <div className="dialog__header">
           <h2>{title || t("transfer.title")}</h2>
         </div>
-        <GVFormikField
+        <WalletSelect
           name={FIELDS.sourceId}
-          component={GVTextField}
           label={t("transfer.from")}
-          InputComponent={Select}
+          items={sourceItems}
           onChange={onChangeSourceId}
-        >
-          {sourceItems.map(item => (
-            <option value={item.id} key={`from-${item.id}`}>
-              <img
-                src={filesService.getFileUrl(item.logo)}
-                className="transfer-popup__icon"
-                alt={item.currency}
-              />
-              {`${item.title} | ${item.currency}`}
-            </option>
-          ))}
-        </GVFormikField>
+        />
         <StatisticItem label={t(`transfer.available${sourceType}From`)}>
           {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
         </StatisticItem>
       </div>
       <div className="dialog__bottom">
-        <GVFormikField
+        <WalletSelect
           name={FIELDS.destinationId}
-          component={GVTextField}
           label={t("transfer.to")}
-          InputComponent={Select}
+          items={destinationItemWithoutCurrent}
           onChange={onChangeDestinationId}
-        >
-          {destinationItemWithoutCurrent.map(item => (
-            <option value={item.id} key={`to-${item.id}`}>
-              <img
-                src={filesService.getFileUrl(item.logo)}
-                className="transfer-popup__icon"
-                alt={item.currency}
-              />
-              {`${item.title} | ${item.currency}`}
-            </option>
-          ))}
-        </GVFormikField>
+        />
         <StatisticItem label={t(`transfer.available${destinationType}To`)}>
           {`${formattedAvailableDestinationItem} ${
             selectedDestinationItem.currency

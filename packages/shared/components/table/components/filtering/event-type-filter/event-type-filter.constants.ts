@@ -1,6 +1,6 @@
 import { SelectFilterValue } from "../filter.type";
 
-export const EVENT_TYPE_FILTER_NAME = "type";
+export const EVENT_TYPE_FILTER_NAME = "eventType";
 
 export enum INVESTOR_EVENT_TYPE {
   All = "All",

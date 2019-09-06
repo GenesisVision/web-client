@@ -1,31 +1,22 @@
 import "./program-details-description.scss";
 
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { ComponentType } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
-import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
-import { PROGRAM, STATUS } from "shared/constants/constants";
+import { useSelector } from "react-redux";
+import { ProgramControlsLoader } from "shared/components/details/details.contaner.loader";
 
-import PerfomanceData from "./perfomance-data";
+import { levelParametersSelector } from "../reducers/level-parameters.reducer";
+import PerformanceData from "./performance-data";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
-import SubscriptionDetailsContainer from "./subscription-details/subscription-details-container";
 
-const _ProgramDetailsDescriptionSection: React.FC<
-  IProgramDetailsDescriptionSectionProps
-> = ({
-  levelsParameters,
-  t,
-  accountCurrency,
+const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
   programDescription,
   isAuthenticated,
-  redirectToLogin,
   ProgramControls,
-  ChangePasswordTradingAccount,
-  ProgramReinvestingWidget,
-  ProgramWithdrawContainer
+  ChangePasswordTradingAccount
 }) => {
+  const levelsParameters = useSelector(levelParametersSelector);
   const personalDetails = programDescription.personalProgramDetails;
   const isOwnProgram = personalDetails && personalDetails.isOwnProgram;
   return (
@@ -35,11 +26,15 @@ const _ProgramDetailsDescriptionSection: React.FC<
         isOwnProgram={isOwnProgram}
         ChangePasswordTradingAccount={ChangePasswordTradingAccount}
       />
-      <PerfomanceData
-        levelsParameters={levelsParameters}
+      <PerformanceData
+        condition={!!levelsParameters}
+        levelsParameters={levelsParameters!}
         programDescription={programDescription}
       />
       <ProgramControls
+        condition={!!levelsParameters}
+        loader={<ProgramControlsLoader />}
+        levelsParameters={levelsParameters!}
         programDescription={programDescription}
         canCloseProgram={personalDetails && personalDetails.canCloseProgram}
         canMakeSignalProvider={
@@ -49,52 +44,19 @@ const _ProgramDetailsDescriptionSection: React.FC<
         canInvest={personalDetails && personalDetails.canInvest}
         canWithdraw={personalDetails && personalDetails.canWithdraw}
         isAuthenticated={isAuthenticated}
-        redirectToLogin={redirectToLogin}
-        levelsParameters={levelsParameters}
       />
-      {personalDetails && isAuthenticated && (
-        <div className="program-details-description__additionally">
-          {personalDetails.isInvested &&
-            personalDetails.status !== STATUS.ENDED && (
-              <DetailsInvestment
-                notice={t(
-                  "program-details-page.description.withdraw-notice-text"
-                )}
-                asset={PROGRAM}
-                id={programDescription.id}
-                assetCurrency={programDescription.currency}
-                accountCurrency={accountCurrency}
-                personalDetails={personalDetails as InvestmentDetails} // TODO fix type InvestmentDetails
-                ProgramReinvestingWidget={ProgramReinvestingWidget}
-                WithdrawContainer={ProgramWithdrawContainer}
-              />
-            )}
-          {personalDetails.signalSubscription.hasActiveSubscription && (
-            <SubscriptionDetailsContainer
-              id={programDescription.id}
-              currency={programDescription.currency}
-              personalDetails={personalDetails}
-            />
-          )}
-        </div>
-      )}
     </div>
   );
 };
 
-interface IProgramDetailsDescriptionSectionProps extends WithTranslation {
-  levelsParameters: LevelsParamsInfo;
-  accountCurrency: string;
+interface Props {
   programDescription: ProgramDetailsFull;
   isAuthenticated: boolean;
-  redirectToLogin(): void;
   ProgramControls: ComponentType<any>;
-  ProgramWithdrawContainer: ComponentType<any>;
-  ProgramReinvestingWidget?: ComponentType<any>;
   ChangePasswordTradingAccount?: ComponentType<any>;
 }
 
-const ProgramDetailsDescriptionSection = translate()(
-  React.memo(_ProgramDetailsDescriptionSection)
+const ProgramDetailsDescriptionSection = React.memo(
+  _ProgramDetailsDescriptionSection
 );
 export default ProgramDetailsDescriptionSection;

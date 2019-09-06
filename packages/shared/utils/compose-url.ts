@@ -6,7 +6,8 @@ import { ASSET } from "shared/constants/constants";
 import {
   FUNDS_FACET_ROUTE,
   FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE
+  FUND_DETAILS_ROUTE,
+  FUND_SETTINGS
 } from "shared/routes/funds.routes";
 import {
   MANAGER_DETAILS_ROUTE,
@@ -15,7 +16,7 @@ import {
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAM_DETAILS_ROUTE,
-  PROGRAM_EDIT,
+  PROGRAM_SETTINGS,
   PROGRAM_SLUG_URL_PARAM_NAME
 } from "shared/routes/programs.routes";
 
@@ -49,7 +50,7 @@ export const composeProgramNotificationsUrl = (slugUrl: string): string =>
   });
 
 export const composeProgramSettingsUrl = (slugUrl: string): string =>
-  replaceParams(`${PROGRAM_DETAILS_ROUTE}/${PROGRAM_EDIT}`, {
+  replaceParams(`${PROGRAM_DETAILS_ROUTE}/${PROGRAM_SETTINGS}`, {
     [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
@@ -69,6 +70,11 @@ export const composeAssetNotificationsUrl = (
 export const composeFundNotificationsUrl = (slugUrl: string): string =>
   replaceParams(FUND_NOTIFICATIONS_ROUTE, {
     ":id": slugUrl
+  });
+
+export const composeFundSettingsUrl = (slugUrl: string): string =>
+  replaceParams(`${FUND_DETAILS_ROUTE}/${FUND_SETTINGS}`, {
+    [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeProgramFacetUrl = (slugUrl: string): string =>

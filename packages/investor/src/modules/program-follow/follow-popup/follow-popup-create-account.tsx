@@ -9,13 +9,11 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import Select, { ISelectChangeEvent } from "shared/components/select/select";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import WalletSelect from "shared/components/wallet-select/wallet-select";
 import rateApi from "shared/services/api-client/rate-api";
-import filesService from "shared/services/file-service";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
@@ -59,10 +57,15 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   }, []);
   const onChangeCurrencyFrom = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element) => {
-      const initialDepositCurrencyNew = target.props.value;
+      const wallet = wallets.find(({ id }) => target.props.value === id)!;
+      const initialDepositCurrencyNew = wallet.currency;
       setFieldValue(
         CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency,
         initialDepositCurrencyNew
+      );
+      setFieldValue(
+        CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId,
+        target.props.value
       );
       setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, "");
       setFieldTouched(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, false);
@@ -82,24 +85,12 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   return (
     <form className="dialog__bottom" id="follow-create-account">
       <div className="dialog-field">
-        <GVFormikField
-          name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency}
-          component={GVTextField}
+        <WalletSelect
+          name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId}
           label={t("follow-program.create-account.from")}
-          InputComponent={Select}
+          items={wallets}
           onChange={onChangeCurrencyFrom}
-        >
-          {wallets.map((wallet: WalletData) => (
-            <option value={wallet.currency} key={wallet.currency}>
-              <img
-                src={filesService.getFileUrl(wallet.logo)}
-                className="transfer-popup__icon"
-                alt={wallet.currency}
-              />
-              {`${wallet.title} | ${wallet.currency}`}
-            </option>
-          ))}
-        </GVFormikField>
+        />
       </div>
       <div className="dialog-field">
         <StatisticItem label={t("follow-program.create-account.available")}>
@@ -145,6 +136,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
 };
 
 export enum CREATE_ACCOUNT_FORM_FIELDS {
+  initialDepositWalletId = "initialDepositWalletId",
   initialDepositCurrency = "initialDepositCurrency",
   initialDepositAmount = "initialDepositAmount",
   rate = "rate"
@@ -158,6 +150,7 @@ interface OwnProps {
 }
 
 export interface CreateAccountFormValues {
+  [CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId]: string;
   [CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]: AttachToSignalProviderInitialDepositCurrencyEnum;
   [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: number;
   [CREATE_ACCOUNT_FORM_FIELDS.rate]: number;
@@ -173,6 +166,9 @@ const FollowCreateAccount = compose<React.ComponentType<OwnProps>>(
   withFormik({
     displayName: "follow-create-account",
     mapPropsToValues: ({ wallets, currency }: CreateAccountFormProps) => ({
+      [CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId]: wallets.find(
+        wallet => wallet.currency === currency
+      )!.id,
       [CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]: currency,
       [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: "",
       [CREATE_ACCOUNT_FORM_FIELDS.rate]: 1

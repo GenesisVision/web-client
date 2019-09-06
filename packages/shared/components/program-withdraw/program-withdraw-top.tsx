@@ -1,14 +1,17 @@
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
-const ProgramWithdrawTop: React.FC<OwnProps & WithTranslation> = ({
-  t,
+const _ProgramWithdrawTop: React.FC<OwnProps> = ({
+  rate,
+  accountCurrency,
   availableToWithdraw,
   title,
   programCurrency
 }) => {
+  const [t] = useTranslation();
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -25,10 +28,13 @@ const ProgramWithdrawTop: React.FC<OwnProps & WithTranslation> = ({
   );
 };
 
-export default translate()(ProgramWithdrawTop);
+const ProgramWithdrawTop = React.memo(_ProgramWithdrawTop);
+export default ProgramWithdrawTop;
 
 interface OwnProps {
+  rate: number;
   availableToWithdraw: number;
-  programCurrency: string;
+  programCurrency: CurrencyEnum;
+  accountCurrency: CurrencyEnum;
   title: string;
 }
