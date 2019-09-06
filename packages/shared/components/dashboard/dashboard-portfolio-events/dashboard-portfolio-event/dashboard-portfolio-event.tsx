@@ -66,7 +66,7 @@ const _DashboardPortfolioEvent: React.FC<Props> = ({ event, from }) => (
         {event.feesInfo.length > 0 && (
           <div className="portfolio-event__profit-info">
             {event.feesInfo.map((fee, index) => (
-              <StatisticItem key={index} label={fee.title} accent>
+              <StatisticItem key={index} label={fee.title}>
                 <NumberFormat
                   value={formatCurrencyValue(fee.amount, fee.currency)}
                   displayType="text"
