@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
+import { StatisticCurrencyState } from "shared/components/details/reducers/statistic-currency.reducer";
+import { StatisticPeriodState } from "shared/components/details/reducers/statistic-period.reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
 
 import fundBalanceChartReducer, {
@@ -11,12 +13,8 @@ import fundHistoryReducer, { FundHistoryState } from "./fund-history.reducer";
 import fundProfitChartReducer, {
   FundProfitChartState
 } from "./profit-chart.reducer";
-import statisticCurrencyReducer, {
-  StatisticCurrencyState
-} from "./statistic-currency.reducer";
-import statisticPeriodReducer, {
-  StatisticPeriodState
-} from "./statistic-period.reducer";
+import statisticCurrencyReducer from "./statistic-currency.reducer";
+import statisticPeriodReducer from "./statistic-period.reducer";
 
 type FundDetailsDataType = Readonly<{
   statisticPeriod: StatisticPeriodState;

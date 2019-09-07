@@ -9,14 +9,17 @@ import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  StatisticCurrencyDataType,
+  TStatisticCurrencyAction
+} from "shared/components/details/reducers/statistic-currency.reducer";
+import { TStatisticPeriodAction } from "shared/components/details/reducers/statistic-period.reducer";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import fundsApi from "shared/services/api-client/funds-api";
-import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
+import { ApiAction, CurrencyEnum } from "shared/utils/types";
 
 import { FundAssetsViewModel } from "../reducers/fund-history.reducer";
 import { FundProfitChartDataType } from "../reducers/profit-chart.reducer";
-import { StatisticCurrencyDataType } from "../reducers/statistic-currency.reducer";
-import { StatisticPeriodDataType } from "../reducers/statistic-period.reducer";
 
 export const SET_FUND_STATISTIC_PERIOD = "SET_FUND_STATISTIC_PERIOD";
 export const SET_FUND_STATISTIC_CURRENCY = "SET_FUND_STATISTIC_CURRENCY";
@@ -72,7 +75,6 @@ export const fetchFundDescriptionAction = (
   payload: fundsApi.v10FundsByIdGet(id, { authorization })
 });
 
-export type TStatisticCurrencyAction = ActionType<StatisticCurrencyDataType>;
 export const statisticCurrencyAction = (
   currency: CurrencyEnum
 ): TStatisticCurrencyAction => ({
@@ -80,7 +82,6 @@ export const statisticCurrencyAction = (
   payload: currency
 });
 
-export type TStatisticPeriodAction = ActionType<StatisticPeriodDataType>;
 export const statisticPeriodAction = (
   period: ChartDefaultPeriod
 ): TStatisticPeriodAction => ({
