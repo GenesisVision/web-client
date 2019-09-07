@@ -5,7 +5,7 @@ import { fieldSelector } from "shared/utils/selectors";
 import { CurrencyEnum } from "shared/utils/types";
 
 import {
-  SET_STATISTIC_CURRENCY,
+  SET_FUND_STATISTIC_CURRENCY,
   TStatisticCurrencyAction
 } from "../actions/fund-details.actions";
 
@@ -27,7 +27,7 @@ const statisticCurrencyReducer = (
     action,
     state,
     initialState,
-    SET_STATISTIC_CURRENCY
+    SET_FUND_STATISTIC_CURRENCY
   );
 
 export default statisticCurrencyReducer;

@@ -6,7 +6,7 @@ import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 import { fieldSelector } from "shared/utils/selectors";
 
 import {
-  SET_STATISTIC_PERIOD,
+  SET_FUND_STATISTIC_PERIOD,
   TStatisticPeriodAction
 } from "../actions/fund-details.actions";
 
@@ -28,7 +28,7 @@ const statisticPeriodReducer = (
     action,
     state,
     initialState,
-    SET_STATISTIC_PERIOD
+    SET_FUND_STATISTIC_PERIOD
   );
 
 export default statisticPeriodReducer;
