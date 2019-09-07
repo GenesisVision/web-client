@@ -9,7 +9,12 @@ import {
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
-import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  ChartDefaultPeriod,
+  getDefaultPeriod
+} from "shared/components/chart/chart-period/chart-period.helpers";
+import { TStatisticCurrencyAction } from "shared/components/details/reducers/statistic-currency.reducer";
+import { TStatisticPeriodAction } from "shared/components/details/reducers/statistic-period.reducer";
 import { EVENTS_ACTION_TYPE } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import platformApi from "shared/services/api-client/platform-api";
@@ -21,6 +26,8 @@ import {
   fetchPortfolioEventsWithoutTable
 } from "../services/program-details.service";
 
+export const SET_PROGRAM_STATISTIC_PERIOD = "SET_PROGRAM_STATISTIC_PERIOD";
+export const SET_PROGRAM_STATISTIC_CURRENCY = "SET_PROGRAM_STATISTIC_CURRENCY";
 export const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
 export const FETCH_PROGRAM_BALANCE_CHART = "FETCH_PROGRAM_BALANCE_CHART";
 export const FETCH_PROGRAM_DESCRIPTION = "FETCH_PROGRAM_DESCRIPTION";
@@ -31,6 +38,20 @@ export const PROGRAM_TRADES = "PROGRAM_TRADES";
 export const PROGRAM_PERIOD_HISTORY = "PROGRAM_PERIOD_HISTORY";
 export const PROGRAM_FINANCIAL_STATISTIC = "PROGRAM_FINANCIAL_STATISTIC";
 export const PROGRAM_SUBSCRIPTIONS = "PROGRAM_SUBSCRIPTIONS";
+
+export const statisticCurrencyAction = (
+  currency: CurrencyEnum
+): TStatisticCurrencyAction => ({
+  type: SET_PROGRAM_STATISTIC_CURRENCY,
+  payload: currency
+});
+
+export const statisticPeriodAction = (
+  period: ChartDefaultPeriod
+): TStatisticPeriodAction => ({
+  type: SET_PROGRAM_STATISTIC_PERIOD,
+  payload: period
+});
 
 export const fetchEventsAction = (
   assetId: string,
