@@ -1,4 +1,8 @@
 import { combineReducers } from "redux";
+import { StatisticCurrencyState } from "shared/components/details/reducers/statistic-currency.reducer";
+import { StatisticPeriodState } from "shared/components/details/reducers/statistic-period.reducer";
+import statisticCurrencyReducer from "shared/components/programs/program-details/reducers/statistic-currency.reducer";
+import statisticPeriodReducer from "shared/components/programs/program-details/reducers/statistic-period.reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
 
 import programBalanceChartReducer, {
@@ -18,6 +22,8 @@ import programHistoryReducer, {
 } from "./program-history.reducer";
 
 type ProgramDetailsDataType = Readonly<{
+  statisticPeriod: StatisticPeriodState;
+  statisticCurrency: StatisticCurrencyState;
   profitChart: ProgramProfitChartState;
   balanceChart: ProgramBalanceChartState;
   description: ProgramDescriptionState;
@@ -29,6 +35,8 @@ export type ProgramDetailsState = ProgramDetailsDataType;
 
 const programDetailsReducer = clearableReducer(
   combineReducers<ProgramDetailsState>({
+    statisticPeriod: statisticPeriodReducer,
+    statisticCurrency: statisticCurrencyReducer,
     levelParameters: levelParametersReducer,
     description: programDescriptionReducer,
     profitChart: programProfitChartReducer,
