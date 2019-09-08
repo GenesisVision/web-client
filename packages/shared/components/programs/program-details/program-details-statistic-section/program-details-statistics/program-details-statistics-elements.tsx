@@ -4,6 +4,7 @@ import { ProgramProfitChart } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
 import {
   ChartDefaultPeriod,
   ChartPeriodType
@@ -17,9 +18,12 @@ import { STATUS } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
+import { programStatusSelector } from "../../reducers/description.reducer";
+
 const _ProgramDetailsStatisticsElements: React.FC<
   IProgramDetailsStatisticsElementsProps
-> = ({ status, profitChart, period }) => {
+> = ({ profitChart, period }) => {
+  const status = useSelector(programStatusSelector);
   const [t] = useTranslation();
   return (
     <>
@@ -76,7 +80,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
           <ProgramPeriodLine
             start={profitChart.lastPeriodStarts}
             end={profitChart.lastPeriodEnds}
-            status={status}
+            status={status as STATUS}
           />
         </div>
       </div>
@@ -233,7 +237,6 @@ const _ProgramDetailsStatisticsElements: React.FC<
 };
 
 export interface IProgramDetailsStatisticsElementsProps {
-  status: STATUS;
   profitChart: ProgramProfitChart;
   period: ChartDefaultPeriod;
 }
