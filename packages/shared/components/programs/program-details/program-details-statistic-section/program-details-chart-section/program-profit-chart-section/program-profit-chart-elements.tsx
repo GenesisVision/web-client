@@ -41,10 +41,10 @@ const _ProgramProfitChartElements: React.FC<Props> = ({
       <ChartPeriod onChange={setPeriod} period={period} />
       <div className="details-chart__profit">
         <ProgramProfitChart
-          equityChart={profitChart.equityChart}
-          //@ts-ignore
-          pnlChart={profitChart.pnLChart}
-          currency={profitChart.programCurrency}
+          profitChart={[profitChart]}
+          chartCurrencies={[
+            { name: profitChart.programCurrency, color: "#fff" }
+          ]}
         />
       </div>
     </>
