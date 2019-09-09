@@ -2,12 +2,12 @@ import { PlatformCurrency } from "gv-api-web";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { useChartPeriodCreator } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
+import { CurrencyEnum } from "shared/utils/types";
 
 import {
   statisticCurrencyAction,
@@ -117,24 +117,8 @@ export const useFundChartStateValues: TUseFundChartStateValues = () => {
   };
 };
 
-type TUseChartPeriod = () => {
-  period: ChartDefaultPeriod;
-  setPeriod: HandlePeriodChangeType;
-};
-export const useChartPeriod: TUseChartPeriod = () => {
-  const period = useSelector(statisticPeriodSelector);
-  const dispatch = useDispatch();
-  const setPeriod = useCallback(
-    period => {
-      dispatch(statisticPeriodAction(period));
-    },
-    [dispatch]
-  );
-  return {
-    period,
-    setPeriod
-  };
-};
+export const useChartPeriod = () =>
+  useChartPeriodCreator(statisticPeriodSelector, statisticPeriodAction);
 
 type TChartData<T> = {
   chart: T;
