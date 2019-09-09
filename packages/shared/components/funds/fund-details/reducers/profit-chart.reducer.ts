@@ -11,7 +11,11 @@ export type FundProfitChartDataType = Array<FundProfitChart>;
 
 export type FundProfitChartState = IApiState<FundProfitChartDataType>;
 
-export const fundProfitChartSelector = apiSelector<
+export type TFundProfitChartSelector = (
+  state: RootState
+) => FundProfitChartDataType | undefined;
+
+export const fundProfitChartSelector: TFundProfitChartSelector = apiSelector<
   FundProfitChartDataType,
   RootState
 >(state => state.fundDetails.profitChart);
