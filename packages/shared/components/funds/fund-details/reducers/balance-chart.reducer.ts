@@ -11,7 +11,11 @@ export type FundBalanceChartDataType = FundBalanceChart;
 
 export type FundBalanceChartState = IApiState<FundBalanceChartDataType>;
 
-export const fundBalanceChartSelector = apiSelector<
+export type TFundBalanceChartSelector = (
+  state: RootState
+) => FundBalanceChartDataType | undefined;
+
+export const fundBalanceChartSelector: TFundBalanceChartSelector = apiSelector<
   FundBalanceChartDataType,
   RootState
 >(state => state.fundDetails.balanceChart);
