@@ -5,14 +5,14 @@ import { ChartValuePeriodLoader } from "shared/components/details/details-descri
 
 import { programBalanceChartSelector } from "../../../reducers/balance-chart.reducer";
 import { programIdSelector } from "../../../reducers/description.reducer";
-import { statisticPeriodSelector } from "../../../reducers/statistic-period.reducer";
 import { getBalanceChart } from "../../../services/program-details.service";
+import { useChartPeriod } from "../program-details.chart.helpers";
 import ProgramBalanceChartElements from "./program-balance-chart-elements";
 
 const _ProgramBalanceChartSection: React.FC = () => {
   const dispatch = useDispatch();
   const id = useSelector(programIdSelector);
-  const period = useSelector(statisticPeriodSelector);
+  const { period, setPeriod } = useChartPeriod();
   useEffect(
     () => {
       dispatch(getBalanceChart({ id, period }));
@@ -24,6 +24,8 @@ const _ProgramBalanceChartSection: React.FC = () => {
     <ProgramBalanceChartElements
       condition={!!balanceChart}
       loader={<ChartValuePeriodLoader />}
+      period={period}
+      setPeriod={setPeriod}
       balanceChart={balanceChart!}
     />
   );
