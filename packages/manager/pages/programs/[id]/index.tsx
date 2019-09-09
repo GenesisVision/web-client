@@ -9,7 +9,7 @@ import { NextPageWithRedux } from "shared/utils/types";
 
 import ProgramDetailsPage from "../../../src/pages/programs/program-details/program-details.page";
 
-const ProgramDetails: NextPageWithRedux<void> = () => {
+const ProgramDetails: NextPageWithRedux<{}> = () => {
   return <ProgramDetailsPage />;
 };
 
@@ -19,6 +19,7 @@ ProgramDetails.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
   ]);
+  return {};
 };
 
 export default compose(withDefaultLayout)(ProgramDetails);

@@ -16,7 +16,7 @@ import { NextPageWithRedux } from "shared/utils/types";
 
 import FundDetailsPage from "../../src/pages/funds/fund-details/fund-details.page";
 
-const FundDetails: NextPageWithRedux<void> = () => {
+const FundDetails: NextPageWithRedux<{}, {}> = () => {
   return <FundDetailsPage />;
 };
 
@@ -26,6 +26,7 @@ FundDetails.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(dispatchFundId(id as string)),
     ctx.reduxStore.dispatch(dispatchFundDescription(ctx))
   ]);
+  return {};
 };
 
 export default compose(withDefaultLayout)(FundDetails);

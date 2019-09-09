@@ -59,4 +59,5 @@ const WalletCopytradingAccountContainer = compose<
   connect(mapStateToProps),
   React.memo
 )(_WalletCopytradingAccountContainer);
+
 export default WalletCopytradingAccountContainer;

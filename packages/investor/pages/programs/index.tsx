@@ -6,7 +6,7 @@ import { getFiltersFromContext } from "shared/modules/programs-table/components/
 import authService from "shared/services/auth-service";
 import { NextPageWithRedux } from "shared/utils/types";
 
-const Programs: NextPageWithRedux<void> = () => {
+const Programs: NextPageWithRedux<{}> = () => {
   return <ProgramsPage />;
 };
 
@@ -19,6 +19,7 @@ Programs.getInitialProps = async ctx => {
       authorization: authService.getAuthArg(ctx)
     })
   );
+  return {};
 };
 
 export default withDefaultLayout(Programs);

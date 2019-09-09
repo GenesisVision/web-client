@@ -5,7 +5,8 @@ import { fetchAccounts } from "shared/components/wallet/services/wallet.services
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { CurrencyEnum, NextPageWithRedux } from "shared/utils/types";
-import WalletCopytradingAccountContainer from "pages/wallet/components/wallet-copytrading-account-container";
+
+import WalletCopytradingAccountContainer from "../../../src/pages/wallet/components/wallet-copytrading-account-container";
 
 const CopyTradingDetails: NextPageWithRedux<Props, {}> = ({ id }) => {
   return <WalletCopytradingAccountContainer currency={id} />;
