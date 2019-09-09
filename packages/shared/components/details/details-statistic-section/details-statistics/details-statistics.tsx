@@ -5,13 +5,11 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import Surface from "shared/components/surface/surface";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { ChartDefaultPeriod } from "../../../chart/chart-period/chart-period.helpers";
-import { TFundProfitChartSelector } from "../../../funds/fund-details/reducers/profit-chart.reducer";
-import { TStatisticCurrencySelector } from "../../../funds/fund-details/reducers/statistic-currency.reducer";
-import { TUseChartPeriod } from "../details.chart.helpers";
+import { TProfitChartSelector, TStatisticCurrencySelector, TUseChartPeriod } from "../details.chart.helpers";
 
 const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
   profitChartSelector,
@@ -60,7 +58,7 @@ export type TRenderDetailsStatisticsElements = (
 ) => JSX.Element;
 
 export interface IDetailsStatisticsProps {
-  profitChartSelector: TFundProfitChartSelector;
+  profitChartSelector: TProfitChartSelector;
   statisticCurrencySelector: TStatisticCurrencySelector;
   useChartPeriod: TUseChartPeriod;
   renderDetailsStatisticsElements: TRenderDetailsStatisticsElements;
