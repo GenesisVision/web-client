@@ -5,14 +5,14 @@ import { ChartValuePeriodLoader } from "shared/components/details/details-descri
 
 import { programIdSelector } from "../../../reducers/description.reducer";
 import { programProfitChartSelector } from "../../../reducers/profit-chart.reducer";
-import { statisticPeriodSelector } from "../../../reducers/statistic-period.reducer";
 import { getProfitChart } from "../../../services/program-details.service";
+import { useChartPeriod } from "../program-details.chart.helpers";
 import ProgramProfitChartElements from "./program-profit-chart-elements";
 
 const _ProgramProfitChartSection: React.FC = () => {
   const dispatch = useDispatch();
   const id = useSelector(programIdSelector);
-  const period = useSelector(statisticPeriodSelector);
+  const { period, setPeriod } = useChartPeriod();
   useEffect(
     () => {
       dispatch(getProfitChart({ id, period }));
@@ -24,6 +24,8 @@ const _ProgramProfitChartSection: React.FC = () => {
     <ProgramProfitChartElements
       condition={!!profitChart}
       loader={<ChartValuePeriodLoader />}
+      period={period}
+      setPeriod={setPeriod}
       profitChart={profitChart!}
     />
   );
