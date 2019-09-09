@@ -11,9 +11,11 @@ import { CurrencyEnum } from "shared/utils/types";
 
 import { fundProfitChartSelector } from "../../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../../reducers/statistic-currency.reducer";
+import { statisticPeriodSelector } from "../../reducers/statistic-period.reducer";
 import FundDetailsStatisticsElements from "./fund-details-statistics-elements";
 
 const _FundDetailsStatistics: React.FC = () => {
+  const period = useSelector(statisticPeriodSelector);
   const [t] = useTranslation();
   const statistic = useSelector(fundProfitChartSelector);
   const statisticCurrency = useSelector(statisticCurrencySelector);
@@ -32,9 +34,10 @@ const _FundDetailsStatistics: React.FC = () => {
     <Surface className="surface--horizontal-paddings details-statistics">
       <h3>{t("fund-details-page.statistics.heading")}</h3>
       <FundDetailsStatisticsElements
-        statisticData={statisticData!}
         condition={!!statisticData}
         loader={<DetailsStatisticsLoader />}
+        period={period}
+        statisticData={statisticData!}
         statisticCurrency={statisticCurrency}
       />
     </Surface>
