@@ -38,7 +38,7 @@ export const platformChartCurrenciesSelector = createSelector<
   currencies => currencies.map(convertToChartCurrency)
 );
 
-type TUseFundChartStateValues = () => {
+export type TUseFundChartStateValues = () => {
   selectedCurrencies: TChartCurrency[];
   selectCurrencies: TChartCurrency[];
   addCurrency: () => void;
