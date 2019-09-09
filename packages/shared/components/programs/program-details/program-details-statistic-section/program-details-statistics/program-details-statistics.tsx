@@ -8,12 +8,12 @@ import Surface from "shared/components/surface/surface";
 
 import { programStatusSelector } from "../../reducers/description.reducer";
 import { programProfitChartSelector } from "../../reducers/profit-chart.reducer";
-import { statisticPeriodSelector } from "../../reducers/statistic-period.reducer";
+import { useChartPeriod } from "../program-details-chart-section/program-details.chart.helpers";
 import ProgramDetailsStatisticsElements from "./program-details-statistics-elements";
 
 const _ProgramDetailsStatistics: React.FC = () => {
   const profitChart = useSelector(programProfitChartSelector);
-  const period = useSelector(statisticPeriodSelector);
+  const { period } = useChartPeriod();
   const status = useSelector(programStatusSelector);
   const [t] = useTranslation();
   return (
