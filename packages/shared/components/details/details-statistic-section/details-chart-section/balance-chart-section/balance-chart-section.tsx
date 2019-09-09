@@ -1,13 +1,15 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 
+import { ChartValuePeriodLoader } from "../../../details-description-section/details-statistic-section/details-loader/details-chart-loader";
+import {
+  TBalanceChartSelector,
+  TUseChartPeriod,
+  TUseChartStateValues
+} from "../../details.chart.helpers";
 import BalanceChartElements, {
   TRenderBalanceChart
 } from "./balance-chart-elements";
-import { TUseChartPeriod } from "../../details.chart.helpers";
-import { TFundBalanceChartSelector } from "../../../../funds/fund-details/reducers/balance-chart.reducer";
-import { TUseFundChartStateValues } from "../../../../funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-details-chart.helpers";
 
 const _BalanceChartSection: React.FC<IBalanceChartSectionProps> = ({
   useChartPeriod,
@@ -42,8 +44,8 @@ const _BalanceChartSection: React.FC<IBalanceChartSectionProps> = ({
 };
 
 export interface IBalanceChartSectionProps {
-  useChartStateValues: TUseFundChartStateValues;
-  balanceChartSelector: TFundBalanceChartSelector;
+  useChartStateValues: TUseChartStateValues;
+  balanceChartSelector: TBalanceChartSelector;
   useChartPeriod: TUseChartPeriod;
   renderBalanceChart: TRenderBalanceChart;
 }
