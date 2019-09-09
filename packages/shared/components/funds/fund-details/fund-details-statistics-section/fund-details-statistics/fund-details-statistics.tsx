@@ -11,11 +11,11 @@ import { CurrencyEnum } from "shared/utils/types";
 
 import { fundProfitChartSelector } from "../../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../../reducers/statistic-currency.reducer";
-import { statisticPeriodSelector } from "../../reducers/statistic-period.reducer";
 import FundDetailsStatisticsElements from "./fund-details-statistics-elements";
+import { useChartPeriod } from "../fund-details-chart-section/fund-details-chart.helpers";
 
 const _FundDetailsStatistics: React.FC = () => {
-  const period = useSelector(statisticPeriodSelector);
+  const { period } = useChartPeriod();
   const [t] = useTranslation();
   const statistic = useSelector(fundProfitChartSelector);
   const statisticCurrency = useSelector(statisticCurrencySelector);
