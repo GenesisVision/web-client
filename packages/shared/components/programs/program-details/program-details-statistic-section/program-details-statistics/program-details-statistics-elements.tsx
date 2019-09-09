@@ -1,10 +1,9 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import { ProgramProfitChart } from "gv-api-web";
+import { ProgramDetailsFullStatusEnum, ProgramProfitChart } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { useSelector } from "react-redux";
 import {
   ChartDefaultPeriod,
   ChartPeriodType
@@ -14,16 +13,12 @@ import ProgramPeriodLine from "shared/components/program-period/program-period-l
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { STATUS } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import { programStatusSelector } from "../../reducers/description.reducer";
-
 const _ProgramDetailsStatisticsElements: React.FC<
   IProgramDetailsStatisticsElementsProps
-> = ({ profitChart, period }) => {
-  const status = useSelector(programStatusSelector);
+> = ({ profitChart, period, status }) => {
   const [t] = useTranslation();
   return (
     <>
@@ -80,7 +75,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
           <ProgramPeriodLine
             start={profitChart.lastPeriodStarts}
             end={profitChart.lastPeriodEnds}
-            status={status as STATUS}
+            status={status}
           />
         </div>
       </div>
@@ -237,6 +232,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
 };
 
 export interface IProgramDetailsStatisticsElementsProps {
+  status: ProgramDetailsFullStatusEnum;
   profitChart: ProgramProfitChart;
   period: ChartDefaultPeriod;
 }

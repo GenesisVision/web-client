@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
 import Surface from "shared/components/surface/surface";
 
+import { programStatusSelector } from "../../reducers/description.reducer";
 import { programProfitChartSelector } from "../../reducers/profit-chart.reducer";
 import { statisticPeriodSelector } from "../../reducers/statistic-period.reducer";
 import ProgramDetailsStatisticsElements from "./program-details-statistics-elements";
@@ -13,6 +14,7 @@ import ProgramDetailsStatisticsElements from "./program-details-statistics-eleme
 const _ProgramDetailsStatistics: React.FC = () => {
   const profitChart = useSelector(programProfitChartSelector);
   const period = useSelector(statisticPeriodSelector);
+  const status = useSelector(programStatusSelector);
   const [t] = useTranslation();
   return (
     <Surface className="surface--horizontal-paddings details-statistics">
@@ -20,6 +22,7 @@ const _ProgramDetailsStatistics: React.FC = () => {
       <ProgramDetailsStatisticsElements
         condition={!!profitChart}
         loader={<DetailsStatisticsLoader />}
+        status={status}
         profitChart={profitChart!}
         period={period}
       />
