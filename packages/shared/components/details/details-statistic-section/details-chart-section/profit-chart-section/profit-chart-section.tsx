@@ -1,18 +1,19 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
+import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 
-import { ChartValuePeriodLoader } from "../../../details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import {
   TProfitChartSelector,
   TUseChartPeriod,
   TUseChartStateValues
 } from "../../details.chart.helpers";
 import ProfitChartElements, {
-  TRenderProfitChart
+  TRenderProfitChart,
+  TRenderProfitValue
 } from "./profit-chart-elements";
 
 const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
-  profitValue,
+  renderProfitValue,
   useChartStateValues,
   profitChartSelector,
   useChartPeriod,
@@ -31,7 +32,7 @@ const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
     <ProfitChartElements
       condition={!!profitChart}
       loader={<ChartValuePeriodLoader />}
-      profitValue={profitValue}
+      renderProfitValue={renderProfitValue}
       renderProfitChart={renderProfitChart}
       period={period}
       setPeriod={setPeriod}
@@ -50,7 +51,7 @@ export interface IProfitChartSectionProps {
   useChartPeriod: TUseChartPeriod;
   renderProfitChart: TRenderProfitChart;
   profitChartSelector: TProfitChartSelector;
-  profitValue: JSX.Element;
+  renderProfitValue: TRenderProfitValue;
 }
 
 const ProfitChartSection = React.memo(_ProfitChartSection);
