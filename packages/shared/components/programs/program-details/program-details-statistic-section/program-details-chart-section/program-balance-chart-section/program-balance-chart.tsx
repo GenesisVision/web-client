@@ -14,7 +14,11 @@ import { CurrencyEnum } from "shared/utils/types";
 
 import ProgramBalanceTooltip from "./program-balance-tooltip";
 
-const _ProgramBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
+const _ProgramBalanceChart: React.FC<Props> = ({
+  balanceChart,
+  currency,
+  color
+}) => {
   const chart = balanceChart.map(x => {
     let dot = {
       profit: 0,
@@ -64,8 +68,8 @@ const _ProgramBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
         <Area
           dataKey="managerFunds"
           type="monotone"
-          fill="#214650"
-          stroke="#214650"
+          fill={`${color}2a`}
+          stroke={`${color}2a`}
           strokeWidth={2}
           dot={false}
           unit={currency}
@@ -75,8 +79,8 @@ const _ProgramBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
         <Area
           dataKey="investorsFunds"
           type="monotone"
-          fill={GVColors.$primaryColor}
-          stroke={GVColors.$primaryColor}
+          fill={color}
+          stroke={color}
           strokeWidth={2}
           dot={false}
           unit={currency}
@@ -112,6 +116,7 @@ const _ProgramBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
 };
 
 interface Props {
+  color: string;
   balanceChart: ProgramBalanceChartElement[];
   currency: CurrencyEnum;
 }
