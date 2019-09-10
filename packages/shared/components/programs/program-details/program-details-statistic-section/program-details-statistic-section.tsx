@@ -1,20 +1,76 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
+import {
+  ProgramBalanceChartElement,
+  ProgramProfitChart as ProgramProfitChartType
+} from "gv-api-web";
 import * as React from "react";
+import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
+import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
-import ProgramDetailsChart from "./program-details-chart-section/program-details-chart";
-import ProgramDetailsStatistics from "./program-details-statistics/program-details-statistics";
+import { programBalanceChartSelector } from "../reducers/balance-chart.reducer";
+import { programStatusSelector } from "../reducers/description.reducer";
+import { programProfitChartSelector } from "../reducers/profit-chart.reducer";
+import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
+import ProgramBalanceChart from "./program-details-chart-section/program-balance-chart-section/program-balance-chart";
+import {
+  useChartPeriod,
+  useProgramChartStateValues
+} from "./program-details-chart-section/program-details.chart.helpers";
+import ProgramProfitChart from "./program-details-chart-section/program-profit-chart-section/program-profit-chart";
+import ProgramDetailsStatisticsElements, {
+  IProgramStatisticData
+} from "./program-details-statistics/program-details-statistics-elements";
 
-const _ProgramDetailsStatisticSection: React.FC = () => (
-  <div className="details-statistic-section">
-    <div className="details-statistic-section__statistic">
-      <ProgramDetailsStatistics />
-    </div>
-    <div className="details-statistic-section__chart">
-      <ProgramDetailsChart />
-    </div>
-  </div>
-);
+const PROGRAM_CHART_CURRENCY = "GVT";
+
+const _ProgramDetailsStatisticSection: React.FC = () => {
+  const status = useSelector(programStatusSelector);
+  return (
+    <DetailsStatisticSection
+      balanceChartSelector={programBalanceChartSelector}
+      profitChartSelector={programProfitChartSelector}
+      statisticCurrencySelector={statisticCurrencySelector}
+      useChartStateValues={useProgramChartStateValues}
+      useChartPeriod={useChartPeriod}
+      renderProfitValue={({ chart }) => (
+        <NumberFormat
+          value={formatCurrencyValue(
+            "timeframeGvtProfit" in chart ? chart.timeframeGvtProfit : 0,
+            PROGRAM_CHART_CURRENCY
+          )}
+          thousandSeparator={" "}
+          displayType="text"
+          suffix={` ${PROGRAM_CHART_CURRENCY}`}
+        />
+      )}
+      renderBalanceChart={({ currency, balanceChart }) => (
+        <ProgramBalanceChart
+          balanceChart={balanceChart as ProgramBalanceChartElement[]}
+          currency={currency}
+        />
+      )}
+      renderProfitChart={({ profitChart, chartCurrencies }) => (
+        <ProgramProfitChart
+          profitChart={profitChart as ProgramProfitChartType[]}
+          chartCurrencies={chartCurrencies}
+        />
+      )}
+      renderDetailsStatisticsElements={({ period, statisticData }) => (
+        <ProgramDetailsStatisticsElements
+          condition={!!statisticData}
+          loader={<DetailsStatisticsLoader />}
+          status={status}
+          statisticData={statisticData! as IProgramStatisticData}
+          period={period}
+        />
+      )}
+    />
+  );
+};
 
 const ProgramDetailsStatisticSection = React.memo(
   _ProgramDetailsStatisticSection
