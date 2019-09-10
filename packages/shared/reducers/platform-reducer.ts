@@ -63,16 +63,11 @@ export const assetTypeValuesSelector = createSelector<
 >(
   state => platformDataSelector(state),
   data =>
-    (data && [
-      {
-        value: "All",
-        label: "All"
-      },
-      ...data.enums.assetTypes.map(type => ({
+    (data &&
+      data.enums.assetTypes.map(type => ({
         value: type,
         label: type
-      }))
-    ]) ||
+      }))) ||
     []
 );
 
