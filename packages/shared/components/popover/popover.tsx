@@ -19,38 +19,10 @@ const _Popover: React.FC<Props> = props => {
   const [windowHeight, setWindowHeight] = useState<number>(0);
   const [scrollTop, setScrollTop] = useState<number>(0);
   const popover = useRef<HTMLDivElement>(null);
-  useEffect(
-    () => {
-      if (popover.current) {
-        const width = ownWidth ? "auto" : getAnchorBounds().width;
-        popover.current.style.left = getLeft();
-        popover.current.style.top = `${parseInt(getTop()) + scrollTop}px`;
-        popover.current.style.minWidth = `${width}px`;
-        popover.current.style.transform = getTransformPosition();
-        popover.current.style.opacity = "1";
-      }
-    },
-    [
-      anchorEl,
-      scrollTop,
-      ownWidth,
-      getAnchorBounds,
-      getLeft,
-      getTop,
-      getTransformPosition
-    ]
-  );
-
-  useEffect(
-    () => {
-      setWindowHeight(window.innerHeight);
-      setScrollTop(window.scrollY);
-    },
-    [anchorEl]
-  );
 
   const getAnchorBounds = useCallback(
-    (): ClientRect => getAnchorEl(anchorEl).getBoundingClientRect()
+    (): ClientRect => getAnchorEl(anchorEl).getBoundingClientRect(),
+    [anchorEl]
   );
 
   const getPopoverBounds = (): ClientRect =>
@@ -146,6 +118,37 @@ const _Popover: React.FC<Props> = props => {
   };
 
   const handleScroll = useCallback(() => setScrollTop(window.scrollY), []);
+
+  useEffect(
+    () => {
+      if (popover.current) {
+        const width = ownWidth ? "auto" : getAnchorBounds().width;
+        popover.current.style.left = getLeft();
+        popover.current.style.top = `${parseInt(getTop()) + scrollTop}px`;
+        popover.current.style.minWidth = `${width}px`;
+        popover.current.style.transform = getTransformPosition();
+        popover.current.style.opacity = "1";
+      }
+    },
+    [
+      anchorEl,
+      scrollTop,
+      ownWidth,
+      getAnchorBounds,
+      getLeft,
+      getTop,
+      getTransformPosition
+    ]
+  );
+
+  useEffect(
+    () => {
+      setWindowHeight(window.innerHeight);
+      setScrollTop(window.scrollY);
+    },
+    [anchorEl]
+  );
+
   return (
     <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
       <EventListener target={"window"} onScroll={handleScroll} />

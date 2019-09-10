@@ -1,6 +1,5 @@
 import * as uuid from "uuid";
 
-import { ROLE_ENV } from "../../constants/constants";
 import { ToType } from "./link";
 
 export const pushHistoryState = (to: ToType) => {
@@ -28,5 +27,5 @@ export const normalizeUrlString = (url: string): string => {
   if (env !== "production") {
     return url;
   }
-  return `${role}${url}`;
+  return `/${role}${url}`;
 };
