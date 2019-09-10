@@ -1,6 +1,5 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import { FundProfitChart, ProgramProfitChart } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,7 +8,12 @@ import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-p
 import Surface from "shared/components/surface/surface";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { TProfitChartSelector, TStatisticCurrencySelector, TUseChartPeriod } from "../details.chart.helpers";
+import {
+  ProfitChartType,
+  TProfitChartSelector,
+  TStatisticCurrencySelector,
+  TUseChartPeriod
+} from "../details.chart.helpers";
 
 const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
   profitChartSelector,
@@ -34,10 +38,9 @@ const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
   );
   return (
     <Surface className="surface--horizontal-paddings details-statistics">
-      <h3>{t("-details-page.statistics.heading")}</h3>
+      <h3>{t("details-page.statistics.heading")}</h3>
       {renderDetailsStatisticsElements({
         period,
-        statisticCurrency,
         statisticData
       })}
     </Surface>
@@ -46,15 +49,15 @@ const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
 
 export interface IStatisticData {
   statisticCurrency: CurrencyEnum;
-  statistic: FundProfitChart | ProgramProfitChart;
+  statistic: ProfitChartType;
 }
 
+export type TRenderDetailsStatisticsElementsProps = {
+  period: ChartDefaultPeriod;
+  statisticData?: IStatisticData;
+};
 export type TRenderDetailsStatisticsElements = (
-  props: {
-    period: ChartDefaultPeriod;
-    statisticData?: IStatisticData;
-    statisticCurrency: CurrencyEnum;
-  }
+  props: TRenderDetailsStatisticsElementsProps
 ) => JSX.Element;
 
 export interface IDetailsStatisticsProps {
