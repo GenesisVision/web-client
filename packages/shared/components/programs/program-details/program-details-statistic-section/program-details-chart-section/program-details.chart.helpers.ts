@@ -4,7 +4,10 @@ import {
   useFundChartStateValuesCreator
 } from "shared/components/details/details-statistic-section/details.chart.helpers";
 
-import { statisticPeriodAction } from "../../actions/program-details.actions";
+import {
+  statisticCurrencyAction,
+  statisticPeriodAction
+} from "../../actions/program-details.actions";
 import { programBalanceChartSelector } from "../../reducers/balance-chart.reducer";
 import { programIdSelector } from "../../reducers/description.reducer";
 import { programProfitChartSelector } from "../../reducers/profit-chart.reducer";
@@ -20,6 +23,7 @@ export const useChartPeriod = () =>
 
 export const useProgramChartStateData = () =>
   useChartStateDataCreator({
+    statisticCurrencyAction,
     idSelector: programIdSelector,
     statisticPeriodSelector,
     statisticCurrencySelector,
