@@ -14,7 +14,7 @@ const _DetailsStatisticSection: React.FC<Props> = ({
   balanceChartSelector,
   renderBalanceChart,
   renderProfitChart,
-  profitValue,
+  renderProfitValue,
   profitChartSelector,
   statisticCurrencySelector,
   useChartPeriod,
@@ -37,7 +37,7 @@ const _DetailsStatisticSection: React.FC<Props> = ({
         renderBalanceChart={renderBalanceChart}
         renderProfitChart={renderProfitChart}
         profitChartSelector={profitChartSelector}
-        profitValue={profitValue}
+        renderProfitValue={renderProfitValue}
       />
     </div>
   </div>
