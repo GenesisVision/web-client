@@ -7,10 +7,8 @@ import {
   TradesViewModel
 } from "gv-api-web";
 import { Dispatch } from "redux";
-import {
-  ChartDefaultPeriod,
-  getDefaultPeriod
-} from "shared/components/chart/chart-period/chart-period.helpers";
+import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
@@ -282,17 +280,17 @@ export const fetchPortfolioEvents = (
   );
 };
 
-export const getProfitChart = ({ id, period }: TGetChartArgs) => (
-  dispatch: Dispatch
-) => dispatch(fetchProgramProfitChartAction(id, period));
+export const getProfitChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => dispatch =>
+  dispatch(fetchProgramProfitChartAction(id, period, currencies));
 
-export const getBalanceChart = ({ id, period }: TGetChartArgs) => (
-  dispatch: Dispatch
-) => {
-  dispatch(fetchProgramBalanceChartAction(id, period));
-};
-
-type TGetChartArgs = {
-  id: string;
-  period?: ChartDefaultPeriod;
+export const getBalanceChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => dispatch => {
+  dispatch(fetchProgramBalanceChartAction(id, period, currencies[0]));
 };
