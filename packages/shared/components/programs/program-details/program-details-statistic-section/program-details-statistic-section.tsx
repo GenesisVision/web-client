@@ -47,8 +47,9 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
           suffix={` ${PROGRAM_CHART_CURRENCY}`}
         />
       )}
-      renderBalanceChart={({ currency, balanceChart }) => (
+      renderBalanceChart={({ color, currency, balanceChart }) => (
         <ProgramBalanceChart
+          color={color}
           balanceChart={balanceChart as ProgramBalanceChartElement[]}
           currency={currency}
         />
