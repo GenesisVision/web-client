@@ -21,28 +21,28 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
   renderBalanceChart,
   renderProfitChart,
   profitChartSelector,
-  profitValue
+  renderProfitValue
 }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.PROFIT);
   return (
     <Surface className="surface--horizontal-paddings details-chart">
-      <h3>{t("-details-page.chart.heading")}</h3>
+      <h3>{t("details-page.chart.heading")}</h3>
       <GVTabs value={tab} onChange={setTab}>
         <GVTab
           value={TABS.PROFIT}
-          label={t("-details-page.chart.tabs.profit")}
+          label={t("details-page.chart.tabs.profit")}
         />
         <GVTab
           value={TABS.BALANCE}
-          label={t("-details-page.chart.tabs.balance")}
+          label={t("details-page.chart.tabs.balance")}
         />
       </GVTabs>
       {tab === TABS.PROFIT && (
         <ProfitChartSection
           renderProfitChart={renderProfitChart}
           profitChartSelector={profitChartSelector}
-          profitValue={profitValue}
+          renderProfitValue={renderProfitValue}
           useChartStateValues={useChartStateValues}
           useChartPeriod={useChartPeriod}
         />
