@@ -15,10 +15,11 @@ import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import Tooltip from "shared/components/tooltip/tooltip";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 const _ProgramDetailsStatisticsElements: React.FC<
   IProgramDetailsStatisticsElementsProps
-> = ({ profitChart, period, status }) => {
+> = ({ statisticData: { statistic, statisticCurrency }, period, status }) => {
   const [t] = useTranslation();
   return (
     <>
@@ -36,13 +37,10 @@ const _ProgramDetailsStatisticsElements: React.FC<
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(
-              profitChart.balance,
-              profitChart.programCurrency
-            )}
+            value={formatCurrencyValue(statistic.balance, statisticCurrency)}
             thousandSeparator={" "}
             displayType="text"
-            suffix={` ${profitChart.programCurrency}`}
+            suffix={` ${statisticCurrency}`}
           />
         </StatisticItem>
         <StatisticItem
@@ -54,7 +52,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
           }
         >
           <NumberFormat
-            value={profitChart.investors}
+            value={statistic.investors}
             thousandSeparator={" "}
             displayType="text"
           />
@@ -73,8 +71,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
             </span>
           </Tooltip>
           <ProgramPeriodLine
-            start={profitChart.lastPeriodStarts}
-            end={profitChart.lastPeriodEnds}
+            start={statistic.lastPeriodStarts}
+            end={statistic.lastPeriodEnds}
             status={status}
           />
         </div>
@@ -97,9 +95,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
             half
           >
             <NumberFormat
-              value={
-                profitChart.trades !== undefined ? profitChart.trades : "-"
-              }
+              value={statistic.trades !== undefined ? statistic.trades : "-"}
               thousandSeparator={" "}
               displayType="text"
             />
@@ -115,8 +111,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
           >
             <NumberFormat
               value={
-                profitChart.profitFactor !== undefined
-                  ? formatValue(profitChart.profitFactor, 2)
+                statistic.profitFactor !== undefined
+                  ? formatValue(statistic.profitFactor, 2)
                   : "-"
               }
               displayType="text"
@@ -133,8 +129,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
           >
             <NumberFormat
               value={
-                profitChart.maxDrawdown !== undefined
-                  ? formatValue(profitChart.maxDrawdown, 2)
+                statistic.maxDrawdown !== undefined
+                  ? formatValue(statistic.maxDrawdown, 2)
                   : "-"
               }
               displayType="text"
@@ -154,15 +150,15 @@ const _ProgramDetailsStatisticsElements: React.FC<
           >
             <NumberFormat
               value={
-                profitChart.tradingVolume !== undefined
+                statistic.tradingVolume !== undefined
                   ? formatCurrencyValue(
-                      profitChart.tradingVolume,
-                      profitChart.programCurrency
+                      statistic.tradingVolume,
+                      statistic.programCurrency
                     )
                   : "-"
               }
               displayType="text"
-              suffix={` ${profitChart.programCurrency}`}
+              suffix={` ${statistic.programCurrency}`}
             />
           </StatisticItem>
         </div>
@@ -181,8 +177,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
           >
             <NumberFormat
               value={
-                profitChart.successTradesPercent !== undefined
-                  ? formatValue(profitChart.successTradesPercent, 2)
+                statistic.successTradesPercent !== undefined
+                  ? formatValue(statistic.successTradesPercent, 2)
                   : "-"
               }
               displayType="text"
@@ -200,8 +196,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
           >
             <NumberFormat
               value={
-                profitChart.sharpeRatio !== undefined
-                  ? formatValue(profitChart.sharpeRatio, 2)
+                statistic.sharpeRatio !== undefined
+                  ? formatValue(statistic.sharpeRatio, 2)
                   : "-"
               }
               displayType="text"
@@ -218,8 +214,8 @@ const _ProgramDetailsStatisticsElements: React.FC<
           >
             <NumberFormat
               value={
-                profitChart.sortinoRatio !== undefined
-                  ? formatValue(profitChart.sortinoRatio, 2)
+                statistic.sortinoRatio !== undefined
+                  ? formatValue(statistic.sortinoRatio, 2)
                   : "-"
               }
               displayType="text"
@@ -231,10 +227,15 @@ const _ProgramDetailsStatisticsElements: React.FC<
   );
 };
 
+export interface IProgramStatisticData {
+  statisticCurrency: CurrencyEnum;
+  statistic: ProgramProfitChart;
+}
+
 export interface IProgramDetailsStatisticsElementsProps {
   status: ProgramDetailsFullStatusEnum;
-  profitChart: ProgramProfitChart;
   period: ChartDefaultPeriod;
+  statisticData: IProgramStatisticData;
 }
 
 const ProgramDetailsStatisticsElements = React.memo(
