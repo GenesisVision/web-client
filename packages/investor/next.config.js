@@ -22,7 +22,7 @@ const nextConfig = {
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
     return config;
   },
-  assetPrefix: isProd ? "/investor" : ""
+  assetPrefix: isProd ? "/" + process.env.REACT_APP_BASENAME : ""
 };
 
 module.exports = withPlugins(
