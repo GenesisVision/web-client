@@ -1,6 +1,5 @@
 import "../create-fund-settings.scss";
 
-import { PlatformAssetFull } from "pages/funds/fund-settings/reallocation/components/reallocate-field";
 import React, { MouseEventHandler, useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import AddButton from "shared/components/add-button/add-button";
@@ -9,6 +8,7 @@ import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetRemoveType
 } from "shared/components/fund-asset/fund-asset-container";
+import { PlatformAssetFull } from "shared/utils/types";
 
 const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   touched,

@@ -1872,7 +1872,7 @@
           "success-fee-min": "Success fee must be greater or equal than 0 % ",
           "success-fee-max": "Success fee must be less than {{max}} % ",
           "signal-volume-fee-required": "Volume fee is required",
-          "signal-volume-fee-min": "Volume fee must be greater than {{min} %",
+          "signal-volume-fee-min": "Volume fee must be greater than {{min}} %",
           "signal-volume-fee-max": "Volume fee must be less than {{max}} %",
           "account-type-required": "Account type is required",
           "investment-limit-min": "Investment Limit must be greater than 0",

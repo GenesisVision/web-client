@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -18,10 +18,10 @@ import { toggleReinvesting } from "../services/program-reinvesting.service";
 
 const _ProgramReinvestingContainer: React.FC<Props> = ({
   service: { dispatchProgramDescription },
-  t,
   isReinvesting: propIsReinvesting,
   programId
 }) => {
+  const [t] = useTranslation();
   const [isPending, setIsPending, setNotIsPending] = useIsOpen();
   const [isReinvesting, setIs, setNotIs, setIsReinvestingValue] = useIsOpen(
     propIsReinvesting
@@ -79,10 +79,7 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props
-  extends IProgramReinvestingContainerOwnProps,
-    WithTranslation,
-    DispatchProps {}
+interface Props extends IProgramReinvestingContainerOwnProps, DispatchProps {}
 
 const ProgramReinvestingContainer = compose<
   React.ComponentType<IProgramReinvestingContainerOwnProps>
@@ -91,7 +88,6 @@ const ProgramReinvestingContainer = compose<
     null,
     mapDispatchToProps
   ),
-  translate(),
   React.memo
 )(_ProgramReinvestingContainer);
 export default ProgramReinvestingContainer;

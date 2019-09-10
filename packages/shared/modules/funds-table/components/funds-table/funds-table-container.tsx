@@ -38,14 +38,14 @@ import { CURRENCY_FILTER_NAME } from "./funds-table.constants";
 
 class _FundsTableContainer extends React.PureComponent<Props> {
   componentDidMount() {
-    const { service, defaultFilters } = this.props;
-    service.getFunds(defaultFilters);
+    const { service } = this.props;
+    service.getFunds();
   }
 
   componentDidUpdate(prevProps: Props) {
-    const { service, isLocationChanged, defaultFilters } = this.props;
+    const { service, isLocationChanged } = this.props;
     if (isLocationChanged && isLocationChanged(prevProps.location)) {
-      service.getFunds(defaultFilters);
+      service.getFunds();
     }
   }
 
@@ -164,7 +164,6 @@ const FundsTableContainer = compose<React.ComponentType<OwnProps>>(
 export default FundsTableContainer;
 
 interface OwnProps {
-  defaultFilters?: any;
   title?: string;
 }
 

@@ -4,28 +4,30 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import ChartCurrencySelector from "shared/modules/chart-currency-selector/chart-currency-selector";
+import ChartCurrencySelector, {
+  TChartCurrency
+} from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { HandlePeriodChangeType } from "shared/utils/types";
 
-import {
-  useChartData,
-  useChartPeriod,
-  useFundChartStateValues
-} from "../fund-details-chart.helpers";
+import { useChartData } from "../fund-details-chart.helpers";
 import FundBalanceChart from "./fund-balance-chart";
 
-const _FundBalanceChartElements: React.FC<Props> = ({ balanceChart }) => {
-  const {
-    addCurrency,
-    removeCurrency,
-    changeCurrency,
-    selectedCurrencies,
-    selectCurrencies
-  } = useFundChartStateValues();
+const _FundBalanceChartElements: React.FC<Props> = ({
+  period,
+  setPeriod,
+  selectedCurrencies,
+  balanceChart,
+  addCurrency,
+  removeCurrency,
+  changeCurrency,
+  selectCurrencies
+}) => {
   const [t] = useTranslation();
-  const { period, setPeriod } = useChartPeriod();
   const chartData = useChartData<FundBalanceChartType>(
     balanceChart,
     selectedCurrencies
@@ -64,7 +66,14 @@ const _FundBalanceChartElements: React.FC<Props> = ({ balanceChart }) => {
 };
 
 interface OwnProps {
+  period: ChartDefaultPeriod;
+  setPeriod: HandlePeriodChangeType;
+  selectedCurrencies: TChartCurrency[];
   balanceChart: FundBalanceChartType;
+  addCurrency: () => void;
+  removeCurrency: (name: string) => void;
+  changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
+  selectCurrencies: TChartCurrency[];
 }
 
 interface Props extends OwnProps {}

@@ -1,7 +1,7 @@
 import { LevelInfo } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -13,12 +13,12 @@ import { fetchInvestmentsLevels } from "../services/program-details.service";
 import AboutLevelsComponent from "./about-levels/about-levels";
 
 const _InvestmentLimitsPopover: React.FC<Props> = ({
-  t,
   level,
   canLevelUp,
   currency,
   limit
 }) => {
+  const [t] = useTranslation();
   const [isOpen, setOpen, setClose] = useIsOpen();
   const [investmentsLimits, setInvestmentsLimits] = useState<
     LevelInfo[] | undefined
@@ -78,18 +78,13 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
   );
 };
 
-interface OwnProps {
+interface Props {
+  limit: number;
   currency: CurrencyEnum;
   level: number;
   canLevelUp: boolean;
   closePopover(): void;
 }
 
-interface Props extends OwnProps, WithTranslation {
-  limit: number;
-}
-
-const InvestmentLimitsPopover = translate()(
-  React.memo(_InvestmentLimitsPopover)
-);
+const InvestmentLimitsPopover = React.memo(_InvestmentLimitsPopover);
 export default InvestmentLimitsPopover;

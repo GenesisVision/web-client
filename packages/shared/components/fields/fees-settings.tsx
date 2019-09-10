@@ -3,7 +3,7 @@ import "./fields.scss";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
+import GVNumberField from "shared/components/gv-text-field";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
@@ -26,8 +26,7 @@ const _FeesSettings: React.FC<Props> = ({
           name={entryFeeName}
           label={t("manager.create-program-page.settings.fields.entry-fee")}
           adornment="%"
-          component={GVTextField}
-          type="number"
+          component={GVNumberField}
           autoComplete="off"
           decimalScale={4}
           isAllowed={allowValuesNumberFormat()}
@@ -44,8 +43,7 @@ const _FeesSettings: React.FC<Props> = ({
           name={secondFeeName}
           label={secondFeeLabel}
           adornment="%"
-          component={GVTextField}
-          type="number"
+          component={GVNumberField}
           autoComplete="off"
           decimalScale={4}
           isAllowed={allowValuesNumberFormat()}

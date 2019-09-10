@@ -1,7 +1,6 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import { DashboardChartValue, ProgramRequests } from "gv-api-web";
-import { dashboardInRequestsSelector } from "manager-web-portal/src/pages/dashboard/reducers/dashboard-in-requests.reducer";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
@@ -26,6 +25,7 @@ import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isNewUserSelector } from "shared/reducers/header-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { dashboardInRequestsSelector } from "../../reducers/dashboard-in-requests.reducer";
 import { dashboardPortfolioChartSelector } from "../../reducers/dashboard-portfolio-chart.reducer";
 import { getPortfolioChart } from "../../services/dashboard-chart.service";
 import {

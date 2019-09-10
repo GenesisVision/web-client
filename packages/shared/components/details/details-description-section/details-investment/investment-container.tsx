@@ -45,7 +45,7 @@ const _InvestmentContainer: React.FC<Props> = ({
   );
 };
 
-interface OwnProps {
+interface Props {
   updateDescription: () => void;
   asset: string;
   notice?: string;
@@ -65,8 +65,6 @@ export const haveSubscription = (details: InvestmentDetails): boolean =>
   details &&
   details.signalSubscription &&
   details.signalSubscription.hasActiveSubscription;
-
-interface Props extends OwnProps {}
 
 const InvestmentContainer = React.memo(_InvestmentContainer);
 export default InvestmentContainer;

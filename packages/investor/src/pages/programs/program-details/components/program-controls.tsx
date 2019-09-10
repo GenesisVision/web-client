@@ -4,7 +4,7 @@ import { IProgramControlsProps } from "shared/components/programs/program-detail
 import InvestmentProgramControls from "./investment-program-controls";
 import SignalProviderControls from "./signal-provider-controls";
 
-const ProgramControls: React.FC<IProgramControlsProps> = ({
+const _ProgramControls: React.FC<IProgramControlsProps> = ({
   programDescription,
   isAuthenticated
 }) => {
@@ -29,4 +29,5 @@ const ProgramControls: React.FC<IProgramControlsProps> = ({
   );
 };
 
+const ProgramControls = React.memo(_ProgramControls);
 export default ProgramControls;

@@ -2,7 +2,6 @@ import "./fund-asset.scss";
 
 import classNames from "classnames";
 import { FundAssetPercent } from "gv-api-web";
-import { PlatformAssetFull } from "manager-web-portal/src/pages/funds/fund-settings/reallocation/components/reallocate-field";
 import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import Popover, {
@@ -10,6 +9,7 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import useAnchor from "shared/hooks/anchor.hook";
+import { PlatformAssetFull } from "shared/utils/types";
 
 import { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltipContainer from "./fund-asset-tooltip/fund-asset-tooltip-container";

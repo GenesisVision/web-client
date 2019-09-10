@@ -1,9 +1,10 @@
 import "./program-period-line.scss";
 
 import classNames from "classnames";
+import { ProgramDetailsFullStatusEnum } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import { STATUS } from "shared/constants/constants";
 
@@ -14,13 +15,13 @@ const calcDuration = (start: number | Date, end: number | Date): string => {
   return moment.duration(dateEnd.diff(dateStart)).humanize();
 };
 
-const ProgramPeriodLine: React.FC<Props & WithTranslation> = ({
-  t,
+const _ProgramPeriodLine: React.FC<Props> = ({
   start,
   end,
   className,
   status
 }) => {
+  const [t] = useTranslation();
   const duration = calcDuration(start, end);
   const timeLeft = calcDuration(new Date(), end);
   return (
@@ -47,7 +48,8 @@ interface Props {
   start: number | Date;
   end: number | Date;
   className?: string;
-  status: STATUS;
+  status: ProgramDetailsFullStatusEnum;
 }
 
-export default translate()(React.memo(ProgramPeriodLine));
+const ProgramPeriodLine = React.memo(_ProgramPeriodLine);
+export default ProgramPeriodLine;

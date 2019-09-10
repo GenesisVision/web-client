@@ -1,22 +1,13 @@
-import classNames from "classnames";
 import { SignalSubscriber } from "gv-api-web";
-import moment from "moment";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
-import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
 import { ACTION_STATUS_FILTER_VALUES } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { TableCell, TableRow } from "shared/components/table/components";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableContainer from "shared/components/table/components/table-container";
 import { UpdateFilterFunc } from "shared/components/table/components/table.types";
-import { DEFAULT_DECIMAL_SCALE, STATUS } from "shared/constants/constants";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 import {
   PROGRAM_SUBSCRIBERS_COLUMNS,
@@ -24,7 +15,7 @@ import {
 } from "../../program-details.constants";
 import { subscriptionsTableSelector } from "../../reducers/program-history.reducer";
 import { getSubscriptions } from "../../services/program-details.service";
-import SubscriptionsFeesTooltip from "./program-subscriptions-fees-tooltip";
+import ProgramSubscriptionsRow from "./program-subscriptions-row";
 
 const _ProgramSubscriptions: React.FC<Props> = ({ id, currency }) => {
   const [t] = useTranslation();
@@ -56,60 +47,19 @@ const _ProgramSubscriptions: React.FC<Props> = ({ id, currency }) => {
         </span>
       )}
       renderBodyRow={(subscription: SignalSubscriber) => (
-        <TableRow stripy>
-          <TableCell>{subscription.number}</TableCell>
-          <TableCell>{subscription.trades}</TableCell>
-          <TableCell>
-            <Profitability
-              value={formatCurrencyValue(subscription.profit, currency)}
-              prefix={PROFITABILITY_PREFIX.SIGN}
-            >
-              <NumberFormat
-                value={formatCurrencyValue(subscription.profit, currency)}
-                thousandSeparator=" "
-                displayType="text"
-                allowNegative={false}
-              />
-            </Profitability>
-          </TableCell>
-          <TableCell className="subscription-fees">
-            <SubscriptionsFeesTooltip subscription={subscription}>
-              <span
-                className={classNames({
-                  "fee-commission__value":
-                    subscription.totalCommissionAmount > 0
-                })}
-              >
-                {formatValue(
-                  subscription.totalCommissionAmount,
-                  DEFAULT_DECIMAL_SCALE
-                )}
-              </span>
-            </SubscriptionsFeesTooltip>
-          </TableCell>
-          <TableCell>{subscription.volume}</TableCell>
-          <TableCell>
-            {moment(subscription.subscriptionDate).format()}
-          </TableCell>
-          <TableCell>
-            {subscription.unsubscriptionDate &&
-              moment(subscription.unsubscriptionDate).format()}
-          </TableCell>
-          <TableCell>
-            <AssetStatusLabel status={subscription.status as STATUS} />
-          </TableCell>
-        </TableRow>
+        <ProgramSubscriptionsRow
+          subscription={subscription}
+          currency={currency}
+        />
       )}
     />
   );
 };
 
-const ProgramSubscriptions = React.memo(_ProgramSubscriptions);
-
-export default ProgramSubscriptions;
-
-interface Props extends OwnProps {}
-interface OwnProps {
+interface Props {
   id: string;
-  currency: CURRENCIES;
+  currency: CurrencyEnum;
 }
+
+const ProgramSubscriptions = React.memo(_ProgramSubscriptions);
+export default ProgramSubscriptions;

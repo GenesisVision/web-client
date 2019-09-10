@@ -225,12 +225,10 @@ interface ProgramPeriodHistoryPopupProps extends ProgramPeriodHistoryRowProps {
   onClose: () => void;
 }
 
-const ProgramPeriodHistory = React.memo(_ProgramPeriodHistory);
-
-export default ProgramPeriodHistory;
-
-interface Props extends OwnProps {}
-interface OwnProps {
+interface Props {
   id: string;
   currency: CurrencyEnum;
 }
+
+const ProgramPeriodHistory = React.memo(_ProgramPeriodHistory);
+export default ProgramPeriodHistory;

@@ -4,30 +4,31 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import ChartCurrencySelector from "shared/modules/chart-currency-selector/chart-currency-selector";
+import ChartCurrencySelector, {
+  TChartCurrency
+} from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import { FundProfitChartDataType } from "../../../reducers/profit-chart.reducer";
-import {
-  useChartData,
-  useChartPeriod,
-  useFundChartStateValues
-} from "../fund-details-chart.helpers";
+import { useChartData } from "../fund-details-chart.helpers";
 import FundProfitChart from "./fund-profit-chart";
 
-const _FundProfitChartElements: React.FC<Props> = ({ profitChart }) => {
-  const {
-    addCurrency,
-    removeCurrency,
-    changeCurrency,
-    selectedCurrencies,
-    selectCurrencies
-  } = useFundChartStateValues();
+const _FundProfitChartElements: React.FC<Props> = ({
+  period,
+  setPeriod,
+  profitChart,
+  selectedCurrencies,
+  addCurrency,
+  removeCurrency,
+  changeCurrency,
+  selectCurrencies
+}) => {
   const [t] = useTranslation();
-  const { period, setPeriod } = useChartPeriod();
   const chartData = useChartData<FundProfitChartDataType>(
     profitChart,
     selectedCurrencies
@@ -71,7 +72,14 @@ const _FundProfitChartElements: React.FC<Props> = ({ profitChart }) => {
 };
 
 interface OwnProps {
+  period: ChartDefaultPeriod;
+  setPeriod: HandlePeriodChangeType;
   profitChart: FundProfitChartDataType;
+  selectedCurrencies: TChartCurrency[];
+  addCurrency: () => void;
+  removeCurrency: (name: string) => void;
+  changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
+  selectCurrencies: TChartCurrency[];
 }
 
 interface Props extends OwnProps {}

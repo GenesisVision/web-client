@@ -3,7 +3,6 @@ import "./public-info.scss";
 import { goBack } from "connected-react-router";
 import { FormikProps, withFormik } from "formik";
 import { UpdateProfileViewModel } from "gv-api-web";
-import { assetTitleShape } from "manager-web-portal/src/modules/asset-settings/asset-edit.validation";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
@@ -16,8 +15,8 @@ import {
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
-import { TextInputValues } from "shared/components/text-input-component/text-input-component";
 import { SetSubmittingType } from "shared/utils/types";
+import { assetTitleShape } from "shared/utils/validators/validators";
 import { object } from "yup";
 
 const _PublicInfoForm: React.FC<Props> = ({

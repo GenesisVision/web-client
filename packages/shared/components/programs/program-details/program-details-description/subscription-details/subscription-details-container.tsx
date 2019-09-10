@@ -1,8 +1,8 @@
 import "./subscription-details.scss";
 
 import { PersonalProgramDetailsFull } from "gv-api-web";
-import ProgramFollowContainer from "investor-web-portal/src/modules/program-follow/program-follow-container";
-import React, { useCallback, useEffect, useState } from "react";
+import ProgramFollowContainer from "investor-web-portal/src/modules/program-follow/program-follow-container"; // TODO fix it
+import React, { useEffect, useState } from "react";
 import { ResolveThunks, connect } from "react-redux";
 import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
 import useIsOpen from "shared/hooks/is-open.hook";

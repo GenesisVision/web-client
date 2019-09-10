@@ -1,16 +1,36 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 
-import { useFundChartStateData } from "../fund-details-chart.helpers";
+import { fundBalanceChartSelector } from "../../../reducers/balance-chart.reducer";
+import {
+  useChartPeriod,
+  useFundChartStateValues
+} from "../fund-details-chart.helpers";
 import FundBalanceChartElements from "./fund-balance-chart-elements";
 
 const _FundBalanceChartSection: React.FC = () => {
-  const { balanceChart } = useFundChartStateData();
+  const { period, setPeriod } = useChartPeriod();
+  const {
+    addCurrency,
+    removeCurrency,
+    changeCurrency,
+    selectedCurrencies,
+    selectCurrencies
+  } = useFundChartStateValues();
+  const balanceChart = useSelector(fundBalanceChartSelector);
   return (
     <FundBalanceChartElements
       condition={!!balanceChart}
       loader={<ChartValuePeriodLoader />}
+      period={period}
+      setPeriod={setPeriod}
+      selectedCurrencies={selectedCurrencies}
       balanceChart={balanceChart!}
+      addCurrency={addCurrency}
+      removeCurrency={removeCurrency}
+      changeCurrency={changeCurrency}
+      selectCurrencies={selectCurrencies}
     />
   );
 };

@@ -2,34 +2,29 @@ import "./portfolio-events-table.scss";
 import "./portfolio-events.scss";
 
 import { InvestmentEventViewModel } from "gv-api-web";
-import moment from "moment";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
-import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { ASSET_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { useSelector } from "react-redux";
+import { EVENT_LOCATION } from "shared/components/programs/program-details/services/program-details.service";
+import { ASSET_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
+import TableContainer from "shared/components/table/components/table-container";
+import {
+  GetItemsFuncActionType,
+  TableSelectorType
+} from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { ASSET, ROLE } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { assetTypeValuesSelector } from "shared/reducers/platform-reducer";
 
-import { EVENT_LOCATION } from "../programs/program-details/services/program-details.service";
-import TableContainer from "../table/components/table-container";
-import { GetItemsFuncActionType, TableSelectorType } from "../table/components/table.types";
-import PortfolioEventsDetails from "./portfolio-event-details";
-import PortfolioEventFeesTooltip from "./portfolio-event-fees-tooltip";
+import PortfolioEventsTableRow from "./portfolio-events-table-row";
 import {
-  EVENT_PROFITABILITY_VALUES,
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_MANAGER_COLUMNS
 } from "./portfolio-events-table.constants";
@@ -44,6 +39,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
   eventTypeFilterValues,
   asset
 }) => {
+  const assetTypeValues = useSelector(assetTypeValuesSelector);
   const [t] = useTranslation();
   const role = useRole();
   const hideFeeColumn = useMemo(
@@ -67,28 +63,28 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
         isFetchOnMount={true}
         renderFilters={(updateFilter, filtering) => (
           <>
-            {filtering["type"] && (
+            {filtering[EVENT_TYPE_FILTER_NAME] && (
               <SelectFilter
                 name={EVENT_TYPE_FILTER_NAME}
                 label="Type"
-                value={filtering["type"] as SelectFilterType} //TODO fix filtering types
+                value={filtering[EVENT_TYPE_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
                 values={eventTypeFilterValues}
                 onChange={updateFilter}
               />
             )}
-            {filtering["assetType"] && (
+            {filtering[ASSET_TYPE_FILTER_NAME] && (
               <SelectFilter
-                name="assetType"
+                name={ASSET_TYPE_FILTER_NAME}
                 label="Assets type"
-                value={filtering["assetType"] as SelectFilterType} //TODO fix filtering types
-                values={ASSET_TYPE_FILTER_VALUES}
+                value={filtering[ASSET_TYPE_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
+                values={assetTypeValues}
                 onChange={updateFilter}
               />
             )}
-            {filtering["dateRange"] && (
+            {filtering[DATE_RANGE_FILTER_NAME] && (
               <DateRangeFilter
                 name={DATE_RANGE_FILTER_NAME}
-                value={filtering["dateRange"]}
+                value={filtering[DATE_RANGE_FILTER_NAME]}
                 onChange={updateFilter}
                 startLabel={dateRangeStartLabel}
               />
@@ -111,60 +107,11 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
           </span>
         )}
         renderBodyRow={(event: InvestmentEventViewModel) => (
-          <TableRow stripy>
-            <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
-              {moment(event.date).format()}
-            </TableCell>
-            <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-              <div className="portfolio-events-all-table__description">
-                {event.assetDetails && (
-                  <PortfolioEventLogo
-                    withAsset={eventLocation !== EVENT_LOCATION.Asset}
-                    assetDetails={event.assetDetails}
-                    icon={event.icon}
-                  />
-                )}
-                <div>{event.title}</div>
-              </div>
-            </TableCell>
-            {!hideFeeColumn && (
-              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-                {event.totalFeesAmount !== null ? (
-                  <PortfolioEventFeesTooltip fees={event.feesInfo}>
-                    <NumberFormat
-                      value={formatCurrencyValue(
-                        event.totalFeesAmount,
-                        event.totalFeesCurrency
-                      )}
-                      thousandSeparator=" "
-                      displayType="text"
-                      suffix={" " + event.totalFeesCurrency}
-                    />
-                  </PortfolioEventFeesTooltip>
-                ) : (
-                  <>&nbsp;</>
-                )}
-              </TableCell>
-            )}
-            <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--details">
-              <PortfolioEventsDetails extendedInfo={event.extendedInfo} />
-            </TableCell>
-            <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
-              <Profitability
-                condition={!!event.amount}
-                value={EVENT_PROFITABILITY_VALUES[event.changeState]}
-                prefix={PROFITABILITY_PREFIX.SIGN}
-              >
-                <NumberFormat
-                  value={formatCurrencyValue(event.amount, event.currency)}
-                  allowNegative={false}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix={" " + event.currency}
-                />
-              </Profitability>
-            </TableCell>
-          </TableRow>
+          <PortfolioEventsTableRow
+            event={event}
+            eventLocation={eventLocation}
+            hideFeeColumn={hideFeeColumn}
+          />
         )}
       />
     </div>

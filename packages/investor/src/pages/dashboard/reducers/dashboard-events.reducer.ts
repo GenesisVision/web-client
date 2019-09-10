@@ -41,6 +41,7 @@ export const dashboardEventsAllTableSelector = tableSelectorCreator<
 export const dashboardEventsAllReducer = tableReducerFactory<
   InvestmentEventViewModels
 >({
+  clearable: true,
   type: EVENTS_ACTION_TYPE,
   paging: DEFAULT_PAGING,
   filtering: DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING,

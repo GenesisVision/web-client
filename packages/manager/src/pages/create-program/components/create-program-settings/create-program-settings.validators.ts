@@ -1,12 +1,12 @@
+import inputImageShape from "shared/components/form/input-image/input-image.validation";
+import { convertToCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import {
   assetDescriptionShape,
   assetTitleShape,
   signalSuccessFeeShape,
   signalVolumeFeeShape
-} from "modules/asset-settings/asset-edit.validation";
-import inputImageShape from "shared/components/form/input-image/input-image.validation";
-import { convertToCurrency } from "shared/utils/currency-converter";
-import { formatCurrencyValue } from "shared/utils/formatter";
+} from "shared/utils/validators/validators";
 import { boolean, mixed, number, object, string } from "yup";
 
 import { ICreateProgramSettingsProps } from "./create-program-settings";

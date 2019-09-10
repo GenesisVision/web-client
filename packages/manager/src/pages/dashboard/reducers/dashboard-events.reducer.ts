@@ -1,5 +1,5 @@
 import { InvestmentEventViewModels } from "gv-api-web";
-import { InvestorRootState } from "investor-web-portal/src/reducers";
+import { ManagerRootState } from "reducers";
 import {
   DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
   DASHBOARD_PORTFOLIO_EVENTS_FILTERS,
@@ -28,20 +28,21 @@ const dashboardEventsReducer = apiReducerFactory<InvestmentEventViewModels>({
 });
 export default dashboardEventsReducer;
 
-export const dashboardEventsAllSelector = (state: InvestorRootState) =>
+export const dashboardEventsAllSelector = (state: ManagerRootState) =>
   state.dashboard.eventsTable;
 
 export const dashboardEventsAllTableSelector = tableSelectorCreator<
-  InvestorRootState,
+  ManagerRootState,
   InvestmentEventViewModels,
   InvestmentEventViewModels
-  >(dashboardEventsAllSelector, "events");
+>(dashboardEventsAllSelector, "events");
 
 export const dashboardEventsAllReducer = tableReducerFactory<
   InvestmentEventViewModels
-  >({
+>({
   type: EVENTS_ACTION_TYPE,
   paging: DEFAULT_PAGING,
   filtering: DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  defaultFilters: DASHBOARD_PORTFOLIO_EVENTS_FILTERS
+  defaultFilters: DASHBOARD_PORTFOLIO_EVENTS_FILTERS,
+  clearable: true
 });

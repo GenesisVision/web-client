@@ -25,7 +25,7 @@ import {
   dispatchProgramDescription,
   getEvents
 } from "shared/components/programs/program-details/services/program-details.service";
-import { ASSET, STATUS } from "shared/constants/constants";
+import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
@@ -103,10 +103,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           )}
         </div>
         <div className="details__section">
-          <ProgramDetailsStatisticSection
-            status={description.status as STATUS}
-            id={description.id}
-          />
+          <ProgramDetailsStatisticSection />
         </div>
         <div className="details__history">
           <ProgramDetailsHistorySection

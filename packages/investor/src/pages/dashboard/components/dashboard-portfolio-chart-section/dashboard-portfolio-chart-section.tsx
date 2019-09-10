@@ -52,11 +52,9 @@ const _DashboardPortfolioChartSection: React.FC<Props> = ({
   handleChangePeriod
 }) => (
   <>
-    <ChartPeriod
-      condition={!!data.balanceChart.length}
-      period={period}
-      onChange={handleChangePeriod}
-    />
+    {!!data.balanceChart.length && (
+      <ChartPeriod period={period} onChange={handleChangePeriod} />
+    )}
     <div className="dashboard-portfolio-chart-section__chart">
       <DashboardPortfolioChart
         condition={composeBalanceChartData(data.balanceChart).length !== 0}
@@ -67,9 +65,7 @@ const _DashboardPortfolioChartSection: React.FC<Props> = ({
   </>
 );
 
-interface Props extends OwnProps {}
-
-interface OwnProps {
+interface Props {
   currency: CurrencyEnum;
   data: DashboardChartValue;
   period: ChartDefaultPeriod;
@@ -77,7 +73,7 @@ interface OwnProps {
 }
 
 const DashboardPortfolioChartSection = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
+  React.ComponentType<Props & WithLoaderProps>
 >(
   React.memo,
   withLoader

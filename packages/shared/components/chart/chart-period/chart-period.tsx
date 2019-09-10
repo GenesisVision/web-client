@@ -5,7 +5,6 @@ import moment from "moment";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import GVButton from "shared/components/gv-button";
-import withLoader from "shared/decorators/with-loader";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
 import {
@@ -59,5 +58,5 @@ interface Props {
   onChange: HandlePeriodChangeType;
 }
 
-const ChartPeriod = React.memo(withLoader(_ChartPeriod));
+const ChartPeriod = React.memo(_ChartPeriod);
 export default ChartPeriod;

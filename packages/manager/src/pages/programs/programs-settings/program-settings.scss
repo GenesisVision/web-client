@@ -22,7 +22,7 @@
 
     & .gv-switch-wrapper {
       @include adaptive-padding(bottom, $padding-xsmall);
-      margin: 0 $padding-xsmall;
+      margin: 0;
     }
   }
 

@@ -1,50 +1,35 @@
-import { ProgramBalanceChart as ProgramBalanceChartType } from "gv-api-web";
 import * as React from "react";
-import NumberFormat from "react-number-format";
-import ChartPeriod from "shared/components/chart/chart-period/chart-period";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
-import { HandlePeriodChangeType } from "shared/utils/types";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 
-import ProgramBalanceChart from "./program-balance-chart";
+import { programBalanceChartSelector } from "../../../reducers/balance-chart.reducer";
+import { programIdSelector } from "../../../reducers/description.reducer";
+import { getBalanceChart } from "../../../services/program-details.service";
+import { useChartPeriod } from "../program-details.chart.helpers";
+import ProgramBalanceChartElements from "./program-balance-chart-elements";
 
-const ProgramBalanceChartSection: React.FC<Props> = ({
-  balanceChart,
-  period,
-  onPeriodChange
-}) => (
-  <>
-    <div className="details-chart__value">
-      <StatisticItem
-        label={"Value"}
-        equivalent={balanceChart.programCurrencyBalance}
-        equivalentCurrency={balanceChart.programCurrency}
-        big
-        accent
-      >
-        <NumberFormat
-          value={formatValue(balanceChart.gvtBalance)}
-          thousandSeparator={" "}
-          displayType="text"
-          suffix={" GVT"}
-        />
-      </StatisticItem>
-    </div>
-    <ChartPeriod onChange={onPeriodChange} period={period} />
-    <div className="details-chart__profit">
-      <ProgramBalanceChart
-        balanceChart={balanceChart.balanceChart}
-        currency={balanceChart.programCurrency}
-      />
-    </div>
-  </>
-);
+const _ProgramBalanceChartSection: React.FC = () => {
+  const dispatch = useDispatch();
+  const id = useSelector(programIdSelector);
+  const { period, setPeriod } = useChartPeriod();
+  useEffect(
+    () => {
+      dispatch(getBalanceChart({ id, period }));
+    },
+    [period, id]
+  );
+  const balanceChart = useSelector(programBalanceChartSelector);
+  return (
+    <ProgramBalanceChartElements
+      condition={!!balanceChart}
+      loader={<ChartValuePeriodLoader />}
+      period={period}
+      setPeriod={setPeriod}
+      balanceChart={balanceChart!}
+    />
+  );
+};
 
-interface Props {
-  balanceChart: ProgramBalanceChartType;
-  period: ChartDefaultPeriod;
-  onPeriodChange: HandlePeriodChangeType;
-}
-
-export default React.memo(ProgramBalanceChartSection);
+const ProgramBalanceChartSection = React.memo(_ProgramBalanceChartSection);
+export default ProgramBalanceChartSection;

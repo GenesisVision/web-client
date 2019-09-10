@@ -1,16 +1,36 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 
-import { useFundChartStateData } from "../fund-details-chart.helpers";
+import { fundProfitChartSelector } from "../../../reducers/profit-chart.reducer";
+import {
+  useChartPeriod,
+  useFundChartStateValues
+} from "../fund-details-chart.helpers";
 import FundProfitChartElements from "./fund-profit-chart-elements";
 
 const _FundProfitChartSection: React.FC = () => {
-  const { profitChart } = useFundChartStateData();
+  const { period, setPeriod } = useChartPeriod();
+  const {
+    addCurrency,
+    removeCurrency,
+    changeCurrency,
+    selectedCurrencies,
+    selectCurrencies
+  } = useFundChartStateValues();
+  const profitChart = useSelector(fundProfitChartSelector);
   return (
     <FundProfitChartElements
       condition={!!profitChart}
       loader={<ChartValuePeriodLoader />}
+      period={period}
+      setPeriod={setPeriod}
+      selectedCurrencies={selectedCurrencies}
       profitChart={profitChart!}
+      addCurrency={addCurrency}
+      removeCurrency={removeCurrency}
+      changeCurrency={changeCurrency}
+      selectCurrencies={selectCurrencies}
     />
   );
 };

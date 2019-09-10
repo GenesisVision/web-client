@@ -1,10 +1,10 @@
 import "./profile-image.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
-import LogoField from "manager-web-portal/src/modules/asset-settings/fields/logo-field";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import LogoField from "shared/components/fields/logo-field";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import imageValidationSchema from "shared/components/form/input-image/input-image.validation";
 import GVButton from "shared/components/gv-button";
