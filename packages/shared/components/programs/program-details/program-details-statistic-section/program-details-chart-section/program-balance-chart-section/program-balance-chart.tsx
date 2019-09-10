@@ -15,7 +15,6 @@ import { CurrencyEnum } from "shared/utils/types";
 import ProgramBalanceTooltip from "./program-balance-tooltip";
 
 const _ProgramBalanceChart: React.FC<Props> = ({ balanceChart, currency }) => {
-  if (balanceChart.length === 0) return null;
   const chart = balanceChart.map(x => {
     let dot = {
       profit: 0,
