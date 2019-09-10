@@ -1,7 +1,4 @@
-import {
-  FundEquityChartElement,
-  FundProfitChart as FundProfitChartType
-} from "gv-api-web";
+import { FundEquityChartElement } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -18,8 +15,8 @@ import {
   getStrokeColor,
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
+import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import GVColors from "shared/components/gv-styles/gv-colors";
-import { IDashboardAssetChart } from "shared/constants/constants";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 
 import FundProfitTooltip from "./fund-profit-tooltip";
@@ -106,7 +103,7 @@ const _FundProfitChart: React.FC<Props> = ({
 };
 
 interface Props {
-  profitChart: Array<FundProfitChartType | IDashboardAssetChart>;
+  profitChart: ProfitChartDataType;
   chartCurrencies?: TChartCurrency[];
 }
 
