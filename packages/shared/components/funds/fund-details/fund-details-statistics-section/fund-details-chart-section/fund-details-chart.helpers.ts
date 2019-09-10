@@ -13,7 +13,15 @@ import {
   statisticCurrencyAction,
   statisticPeriodAction
 } from "../../actions/fund-details.actions";
+import {
+  FundBalanceChartDataType,
+  fundBalanceChartSelector
+} from "../../reducers/balance-chart.reducer";
 import { fundIdSelector } from "../../reducers/description.reducer";
+import {
+  FundProfitChartDataType,
+  fundProfitChartSelector
+} from "../../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../../reducers/statistic-currency.reducer";
 import { statisticPeriodSelector } from "../../reducers/statistic-period.reducer";
 import {
@@ -38,6 +46,47 @@ export const platformChartCurrenciesSelector = createSelector<
   currencies => currencies.map(convertToChartCurrency)
 );
 
+type TUseFundChartStateData = () => {
+  platformCurrencies: TChartCurrency[];
+  profitChart?: FundProfitChartDataType;
+  balanceChart?: FundBalanceChartDataType;
+  selectedCurrencies: TChartCurrency[];
+  setSelectedCurrencies: (currencies: TChartCurrency[]) => void;
+};
+
+export const useFundChartStateData: TUseFundChartStateData = () => {
+  const dispatch = useDispatch();
+  const id = useSelector(fundIdSelector);
+  const period = useSelector(statisticPeriodSelector);
+  const statisticCurrency = useSelector(statisticCurrencySelector);
+  const platformCurrencies = useSelector(platformChartCurrenciesSelector);
+  const profitChart = useSelector(fundProfitChartSelector);
+  const balanceChart = useSelector(fundBalanceChartSelector);
+  const [selectedCurrencies, setSelectedCurrencies] = useState<
+    TChartCurrency[]
+  >([platformCurrencies.find(({ name }) => name === statisticCurrency)!]);
+  useEffect(
+    () => {
+      const currencies = selectedCurrencies.map(({ name }) => name);
+      const opts = {
+        id,
+        period,
+        currencies
+      };
+      dispatch(getBalanceChart(opts));
+      dispatch(getProfitChart(opts));
+    },
+    [period, id, selectedCurrencies, dispatch]
+  );
+  return {
+    platformCurrencies,
+    profitChart,
+    balanceChart,
+    selectedCurrencies,
+    setSelectedCurrencies
+  };
+};
+
 type TUseFundChartStateValues = () => {
   selectedCurrencies: TChartCurrency[];
   selectCurrencies: TChartCurrency[];
@@ -45,15 +94,14 @@ type TUseFundChartStateValues = () => {
   removeCurrency: (name: string) => void;
   changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
 };
+
 export const useFundChartStateValues: TUseFundChartStateValues = () => {
   const dispatch = useDispatch();
-  const id = useSelector(fundIdSelector);
-  const period = useSelector(statisticPeriodSelector);
-  const statisticCurrency = useSelector(statisticCurrencySelector);
-  const platformCurrencies = useSelector(platformChartCurrenciesSelector);
-  const [selectedCurrencies, setSelectedCurrencies] = useState<
-    TChartCurrency[]
-  >([...platformCurrencies.filter(({ name }) => name === statisticCurrency)]);
+  const {
+    platformCurrencies,
+    selectedCurrencies,
+    setSelectedCurrencies
+  } = useFundChartStateData();
   const [selectCurrencies, setSelectCurrencies] = useState<TChartCurrency[]>(
     []
   );
@@ -68,19 +116,7 @@ export const useFundChartStateValues: TUseFundChartStateValues = () => {
     },
     [platformCurrencies, selectedCurrencies]
   );
-  useEffect(
-    () => {
-      const currencies = selectedCurrencies.map(({ name }) => name);
-      const opts = {
-        id,
-        period,
-        currencies
-      };
-      dispatch(getBalanceChart(opts));
-      dispatch(getProfitChart(opts));
-    },
-    [period, id, selectedCurrencies, dispatch]
-  );
+
   const addCurrency = useCallback(
     () => {
       setSelectedCurrencies([...selectedCurrencies, selectCurrencies[0]]);
