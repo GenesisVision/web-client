@@ -21,6 +21,7 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
+import { ProgramProfitChartDataType } from "../reducers/profit-chart.reducer";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
@@ -38,6 +39,18 @@ export const PROGRAM_TRADES = "PROGRAM_TRADES";
 export const PROGRAM_PERIOD_HISTORY = "PROGRAM_PERIOD_HISTORY";
 export const PROGRAM_FINANCIAL_STATISTIC = "PROGRAM_FINANCIAL_STATISTIC";
 export const PROGRAM_SUBSCRIPTIONS = "PROGRAM_SUBSCRIPTIONS";
+
+const sendProgramChartRequest = (
+  { start, end }: ChartDefaultPeriod,
+  id: string,
+  currency: CurrencyEnum
+): CancelablePromise<ProgramProfitChart> =>
+  programsApi.v10ProgramsByIdChartsProfitGet(id, {
+    dateFrom: start,
+    dateTo: end,
+    maxPointCount: 100,
+    currency
+  });
 
 export const statisticCurrencyAction = (
   currency: CurrencyEnum
@@ -67,22 +80,23 @@ export const fetchEventsAction = (
 
 export const fetchProgramProfitChartAction = (
   id: string,
-  period = getDefaultPeriod()
-): ApiAction<ProgramProfitChart> => ({
+  period = getDefaultPeriod(),
+  currencies: CurrencyEnum[]
+): ApiAction<ProgramProfitChartDataType> => ({
   type: FETCH_PROGRAM_PROFIT_CHART,
-  payload: programsApi.v10ProgramsByIdChartsProfitGet(id, {
-    dateFrom: period.start,
-    dateTo: period.end,
-    maxPointCount: 100
-  })
+  payload: Promise.all(
+    currencies.map(currency => sendProgramChartRequest(period, id, currency))
+  ) as CancelablePromise<ProgramProfitChartDataType>
 });
 
 export const fetchProgramBalanceChartAction = (
   id: string,
-  period = getDefaultPeriod()
+  period = getDefaultPeriod(),
+  currency: CurrencyEnum
 ): ApiAction<ProgramBalanceChart> => ({
   type: FETCH_PROGRAM_BALANCE_CHART,
   payload: programsApi.v10ProgramsByIdChartsBalanceGet(id, {
+    currency,
     dateFrom: period.start,
     dateTo: period.end,
     maxPointCount: 100
