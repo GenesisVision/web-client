@@ -1,5 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
+import { FundProfitChart } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -13,8 +14,6 @@ import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
-
-import { IStatisticData } from "./fund-details-statistics";
 
 const _FundDetailsStatisticsElements: React.FC<
   IFundDetailsStatisticsElementsProps
@@ -175,10 +174,14 @@ const _FundDetailsStatisticsElements: React.FC<
   );
 };
 
+export interface IFundStatisticData {
+  statisticCurrency: CurrencyEnum;
+  statistic: FundProfitChart;
+}
+
 export interface IFundDetailsStatisticsElementsProps {
   period: ChartDefaultPeriod;
-  statisticData: IStatisticData;
-  statisticCurrency: CurrencyEnum;
+  statisticData: IFundStatisticData;
 }
 
 const FundDetailsStatisticsElements = React.memo(
