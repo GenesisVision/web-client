@@ -1,5 +1,4 @@
 import {
-  BalanceChartElement,
   FundBalanceChart as FundBalanceChartType,
   ProgramBalanceChart as ProgramBalanceChartType
 } from "gv-api-web";
@@ -18,7 +17,10 @@ import ChartCurrencySelector, {
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
-import { useChartData } from "../../details.chart.helpers";
+import {
+  BalanceChartElementType,
+  useChartData
+} from "../../details.chart.helpers";
 
 const _BalanceChartElements: React.FC<Props> = ({
   renderBalanceChart,
@@ -43,7 +45,7 @@ const _BalanceChartElements: React.FC<Props> = ({
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem label={t("-details-page.chart.value")} big accent>
+        <StatisticItem label={t("details-page.chart.value")} big accent>
           <NumberFormat
             value={formatCurrencyValue(balance, name)}
             thousandSeparator={" "}
@@ -62,11 +64,12 @@ const _BalanceChartElements: React.FC<Props> = ({
         onChange={changeCurrency}
       />
       <div className="details-chart__profit">
-        {renderBalanceChart({
-          balanceChart: chartData.chart.balanceChart,
-          currency: name,
-          color
-        })}
+        {chartData.chart.balanceChart.length &&
+          renderBalanceChart({
+            balanceChart: chartData.chart.balanceChart,
+            currency: name,
+            color
+          })}
       </div>
     </>
   );
@@ -75,7 +78,7 @@ const _BalanceChartElements: React.FC<Props> = ({
 export type TRenderBalanceChart = (
   props: {
     color: string;
-    balanceChart: BalanceChartElement[];
+    balanceChart: BalanceChartElementType;
     currency: CurrencyEnum;
   }
 ) => JSX.Element;
