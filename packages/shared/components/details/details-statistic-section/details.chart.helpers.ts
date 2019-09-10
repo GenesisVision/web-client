@@ -21,11 +21,11 @@ import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import { platformCurrenciesSelector } from "../../../reducers/platform-reducer";
-import { statisticCurrencyAction } from "../../funds/fund-details/actions/fund-details.actions";
 import {
   StatisticPeriodState,
   TStatisticPeriodAction
 } from "../reducers/statistic-period.reducer";
+import { TStatisticCurrencyAction } from "../reducers/statistic-currency.reducer";
 
 export type TStatisticCurrencySelector = (state: RootState) => CurrencyEnum;
 
@@ -118,11 +118,6 @@ export type BalanceChartElementType = Array<
 export type BalanceChartType = FundBalanceChart | ProgramBalanceChart;
 export type BalanceChartDataType = BalanceChartType;
 
-export interface IStatisticData {
-  statisticCurrency: CurrencyEnum;
-  statistic: ProfitChartType;
-}
-
 export const convertToChartCurrency = ({
   name,
   color
@@ -145,6 +140,7 @@ export type TGetChartFunc = (
 ) => (dispatch: Dispatch) => void;
 
 type TUseFundChartStateDataMethods = {
+  statisticCurrencyAction: (currency: CurrencyEnum) => TStatisticCurrencyAction;
   platformCurrencies: TChartCurrency[];
   profitChart?: ProfitChartDataType;
   balanceChart?: BalanceChartDataType;
@@ -154,6 +150,9 @@ type TUseFundChartStateDataMethods = {
 type TUseFundChartStateData = () => TUseFundChartStateDataMethods;
 export type TUseFundChartStateDataCreator = (
   props: {
+    statisticCurrencyAction: (
+      currency: CurrencyEnum
+    ) => TStatisticCurrencyAction;
     profitChartSelector: (state: RootState) => ProfitChartDataType | undefined;
     balanceChartSelector: (
       state: RootState
@@ -166,6 +165,7 @@ export type TUseFundChartStateDataCreator = (
   }
 ) => TUseFundChartStateDataMethods;
 export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
+  statisticCurrencyAction,
   profitChartSelector,
   balanceChartSelector,
   statisticCurrencySelector,
@@ -198,6 +198,7 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
     [period, id, selectedCurrencies, dispatch]
   );
   return {
+    statisticCurrencyAction,
     platformCurrencies,
     profitChart,
     balanceChart,
@@ -218,6 +219,7 @@ type TUseFundChartStateValuesCreator = (
 export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = useFundChartStateData => {
   const dispatch = useDispatch();
   const {
+    statisticCurrencyAction,
     platformCurrencies,
     selectedCurrencies,
     setSelectedCurrencies
