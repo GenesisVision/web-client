@@ -96,7 +96,7 @@ const _ProgramSettings: React.FC<Props> = ({
         programsInfo={programsInfo}
         entryFee={details.entryFee}
         successFee={details.successFee}
-        onSubmit={() => {}}
+        onSubmit={editProgram}
       />
       <StopOutLevel
         stopOutLevel={details.stopOutLevel}
