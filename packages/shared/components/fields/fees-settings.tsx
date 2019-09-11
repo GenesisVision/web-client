@@ -20,7 +20,7 @@ const _FeesSettings: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <div className="create-asset-settings__row">
-      <div className="create-asset-settings__row-title">{title}</div>
+      {title && <div className="create-asset-settings__row-title">{title}</div>}
       <div className="create-asset-settings__field">
         <GVFormikField
           name={entryFeeName}
