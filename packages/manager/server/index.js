@@ -6,7 +6,7 @@ const prodServer = require("./production");
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env" });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const dev = process.env.NODE_ENV !== "production";
 
 const app = next({ dev });
