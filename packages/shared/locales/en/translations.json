@@ -1903,6 +1903,7 @@
         "assets": "Assets"
       },
       "settings": {
+        "investment-fund-fees": "Investment fund fees",
         "main-settings": "Main settings",
         "asset-selection": "Asset selection",
         "fees-settings": "Fees settings",
