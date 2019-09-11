@@ -18,24 +18,25 @@ import { ISelectChangeEvent } from "shared/components/select/select";
 import { IDashboardAssetChart } from "shared/constants/constants";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { RootState } from "shared/reducers/root-reducer";
+import { TSelectorData } from "shared/utils/selectors";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import { platformCurrenciesSelector } from "../../../reducers/platform-reducer";
+import { TStatisticCurrencyAction } from "../reducers/statistic-currency.reducer";
 import {
   StatisticPeriodState,
   TStatisticPeriodAction
 } from "../reducers/statistic-period.reducer";
-import { TStatisticCurrencyAction } from "../reducers/statistic-currency.reducer";
 
 export type TStatisticCurrencySelector = (state: RootState) => CurrencyEnum;
 
 export type TBalanceChartSelector = (
   state: RootState
-) => FundBalanceChartDataType | ProgramBalanceChartDataType | undefined;
+) => TSelectorData<BalanceChartDataType>;
 
 export type TProfitChartSelector = (
   state: RootState
-) => ProfitChartDataType | undefined;
+) => TSelectorData<ProfitChartDataType>;
 
 export type TUseChartStateValues = () => {
   selectedCurrencies: TChartCurrency[];
@@ -116,7 +117,7 @@ export type BalanceChartElementType = Array<
   BalanceChartElement | ProgramBalanceChartElement
 >;
 export type BalanceChartType = FundBalanceChart | ProgramBalanceChart;
-export type BalanceChartDataType = BalanceChartType;
+export type BalanceChartDataType = FundBalanceChartDataType | ProgramBalanceChartDataType;
 
 export const convertToChartCurrency = ({
   name,
@@ -143,7 +144,7 @@ type TUseFundChartStateDataMethods = {
   statisticCurrencyAction: (currency: CurrencyEnum) => TStatisticCurrencyAction;
   platformCurrencies: TChartCurrency[];
   profitChart?: ProfitChartDataType;
-  balanceChart?: BalanceChartDataType;
+  balanceChart?: BalanceChartType;
   selectedCurrencies: TChartCurrency[];
   setSelectedCurrencies: (currencies: TChartCurrency[]) => void;
 };
@@ -153,10 +154,10 @@ export type TUseFundChartStateDataCreator = (
     statisticCurrencyAction: (
       currency: CurrencyEnum
     ) => TStatisticCurrencyAction;
-    profitChartSelector: (state: RootState) => ProfitChartDataType | undefined;
+    profitChartSelector: (state: RootState) => TSelectorData<ProfitChartDataType >;
     balanceChartSelector: (
       state: RootState
-    ) => BalanceChartDataType | undefined;
+    ) => TSelectorData<BalanceChartType>;
     statisticCurrencySelector: (state: RootState) => CurrencyEnum;
     idSelector: (state: RootState) => string;
     statisticPeriodSelector: (state: RootState) => ChartDefaultPeriod;
