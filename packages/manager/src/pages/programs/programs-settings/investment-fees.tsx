@@ -23,13 +23,10 @@ const _InvestmentFees: React.FC<Props> = ({
 }) => {
   return (
     <SettingsBlock
-      label={t("manager.create-program-page.settings.fields.investment-limit")}
+      label={t("manager.create-program-page.settings.investment-program-fees")}
       content={
         <form id="edit-form" onSubmit={handleSubmit}>
           <FeesSettings
-            title={t(
-              "manager.create-program-page.settings.investment-program-fees"
-            )}
             entryFeeName={FIELDS.entryFee}
             entryFeeDescription={t(
               "manager.create-program-page.settings.hints.entry-fee-description"
