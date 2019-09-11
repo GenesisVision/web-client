@@ -8,6 +8,7 @@ import {
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
+import InvestmentFees from "modules/asset-settings/investment-fees";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -19,7 +20,6 @@ import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
 import ChangeBroker from "./change-broker/change-broker";
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ChangePassword from "./change-password/change-password";
-import InvestmentFees from "./investment-fees";
 import InvestmentLimit from "./investment-limit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
