@@ -42,9 +42,6 @@ const _InvestmentFees: React.FC<Props> = ({
               "manager.create-program-page.settings.hints.success-fee-description"
             )}
           />
-          <p className="program-settings__text">
-            {t("manager.program-settings.investment-limit.text")}
-          </p>
           <GVButton
             color="primary"
             type={"submit"}
