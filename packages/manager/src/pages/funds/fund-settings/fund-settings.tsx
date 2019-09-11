@@ -1,23 +1,25 @@
-import { FundDetailsFull, PlatformAsset } from "gv-api-web";
+import { FundDetailsFull, PlatformAsset, ProgramsInfo } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
+import InvestmentFees from "modules/asset-settings/investment-fees";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
-import { TUpdateProgramFunc } from "./fund-settings.page";
+import { TUpdateFundFunc } from "./fund-settings.page";
 import Reallocation from "./reallocation/reallocation";
 
 const _FundSettings: React.FC<Props> = ({
+  programsInfo,
   reallocate,
   platformAssets,
-  t,
   details,
   closeAsset,
   editAsset
 }) => {
+  const [t] = useTranslation();
   return (
     <>
       <Reallocation
@@ -29,6 +31,13 @@ const _FundSettings: React.FC<Props> = ({
         id={details.id}
         fundAssets={details.currentAssets}
         platformAssets={platformAssets}
+      />
+      <InvestmentFees
+        asset={ASSET.FUND}
+        programsInfo={programsInfo}
+        entryFee={details.entryFee}
+        exitFee={details.exitFee}
+        onSubmit={editAsset}
       />
       <AssetEdit
         title={details.title}
@@ -47,19 +56,19 @@ const _FundSettings: React.FC<Props> = ({
   );
 };
 
-interface Props extends OwnProps, WithTranslation {}
+interface Props extends OwnProps {}
 
 interface OwnProps {
+  programsInfo: ProgramsInfo;
   reallocate: () => void;
   platformAssets: PlatformAsset[];
   details: FundDetailsFull;
   closeAsset: () => void;
-  editAsset: TUpdateProgramFunc;
+  editAsset: TUpdateFundFunc;
 }
 
 const FundSettings = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
   withLoader,
-  translate(),
   React.memo
 )(_FundSettings);
 export default FundSettings;
