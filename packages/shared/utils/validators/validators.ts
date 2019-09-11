@@ -97,3 +97,38 @@ export const signalVolumeFeeShape = (
       )
     );
 };
+
+export const entryFeeShape = (
+  t: i18next.TFunction,
+  managerMaxEntryFee: number
+) =>
+  number()
+    .required(
+      t("manager.create-program-page.settings.validation.entry-fee-required")
+    )
+    .min(0, t("manager.create-program-page.settings.validation.entry-fee-min"))
+    .max(
+      managerMaxEntryFee,
+      t("manager.create-program-page.settings.validation.entry-fee-max", {
+        max: managerMaxEntryFee
+      })
+    );
+
+export const successFeeShape = (
+  t: i18next.TFunction,
+  managerMaxEntryFee: number
+) =>
+  number()
+    .min(
+      0,
+      t("manager.create-program-page.settings.validation.success-fee-min")
+    )
+    .required(
+      t("manager.create-program-page.settings.validation.success-fee-required")
+    )
+    .max(
+      managerMaxEntryFee,
+      t("manager.create-program-page.settings.validation.success-fee-max", {
+        max: managerMaxEntryFee
+      })
+    );
