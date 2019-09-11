@@ -103,8 +103,8 @@ const _ProgramSettings: React.FC<Props> = ({
       />
       <InvestmentFees
         programsInfo={programsInfo}
-        entryFee={0}
-        successFee={0}
+        entryFee={details.entryFee}
+        successFee={details.successFee}
         onSubmit={() => {}}
       />
       <SignalingEdit
