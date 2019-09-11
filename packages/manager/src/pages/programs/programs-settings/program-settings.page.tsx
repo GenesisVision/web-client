@@ -121,6 +121,8 @@ export type TUpdateProgramFunc = (
     logo?: IImageValue;
     investmentLimit?: number;
     stopOutLevel?: number;
+    entryFee?: number;
+    successFee?: number;
   },
   setSubmitting: SetSubmittingType
 ) => void;
