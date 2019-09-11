@@ -93,6 +93,7 @@ const _ProgramSettings: React.FC<Props> = ({
         currentLeverage={details.leverageMax}
       />
       <InvestmentFees
+        asset={ASSET.PROGRAM}
         programsInfo={programsInfo}
         entryFee={details.entryFee}
         successFee={details.successFee}
