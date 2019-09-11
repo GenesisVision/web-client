@@ -98,26 +98,20 @@ export const signalVolumeFeeShape = (
     );
 };
 
-export const entryFeeShape = (
-  t: i18next.TFunction,
-  managerMaxEntryFee: number
-) =>
+export const entryFeeShape = (t: i18next.TFunction, maxFee: number) =>
   number()
     .required(
       t("manager.create-program-page.settings.validation.entry-fee-required")
     )
     .min(0, t("manager.create-program-page.settings.validation.entry-fee-min"))
     .max(
-      managerMaxEntryFee,
+      maxFee,
       t("manager.create-program-page.settings.validation.entry-fee-max", {
-        max: managerMaxEntryFee
+        max: maxFee
       })
     );
 
-export const successFeeShape = (
-  t: i18next.TFunction,
-  managerMaxEntryFee: number
-) =>
+export const successFeeShape = (t: i18next.TFunction, maxFee: number) =>
   number()
     .min(
       0,
@@ -127,8 +121,16 @@ export const successFeeShape = (
       t("manager.create-program-page.settings.validation.success-fee-required")
     )
     .max(
-      managerMaxEntryFee,
+      maxFee,
       t("manager.create-program-page.settings.validation.success-fee-max", {
-        max: managerMaxEntryFee
+        max: maxFee
       })
     );
+
+export const exitFeeShape = (t: i18next.TFunction, maxFee: number) =>
+  number()
+    .required(
+      t("manager.create-fund-page.settings.validation.exit-fee-required")
+    )
+    .min(0, "Exit fee must be greater than 0 % ")
+    .max(maxFee, "Exit fee must be less than  " + maxFee + " %");
