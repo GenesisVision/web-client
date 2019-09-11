@@ -52,7 +52,7 @@ const getStatisticExportFile = (
     .then(blob => blob);
 };
 
-const getFileUrl = (id: string): string =>
+const getFileUrl = (id?: string): string =>
   id ? `${process.env.REACT_APP_API_URL}/v1.0/file/${id}` : "";
 
 const uploadFile = (
