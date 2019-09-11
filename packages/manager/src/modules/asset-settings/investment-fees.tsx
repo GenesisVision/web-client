@@ -27,7 +27,9 @@ const _InvestmentFees: React.FC<Props> = ({
 }) => {
   return (
     <SettingsBlock
-      label={t("manager.create-program-page.settings.investment-program-fees")}
+      label={t(
+        `manager.create-${asset.toLowerCase()}-page.settings.investment-${asset.toLowerCase()}-fees`
+      )}
       content={
         <form id="edit-form" onSubmit={handleSubmit}>
           {asset === ASSET.PROGRAM && (
