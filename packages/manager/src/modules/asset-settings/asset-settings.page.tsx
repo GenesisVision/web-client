@@ -32,6 +32,7 @@ const _AssetsEditPage: React.FC<Props> = ({
   const editAssetCallback: TUpdateAssetFunc = useCallback(
     values => {
       const currentValues = {
+        exitFee: description!.exitFee,
         entryFee: description!.entryFee,
         successFee: description!.successFee,
         title: description!.title,
