@@ -92,6 +92,12 @@ const _ProgramSettings: React.FC<Props> = ({
         currentAccountTypeId={brokersInfo.currentAccountTypeId}
         currentLeverage={details.leverageMax}
       />
+      <InvestmentFees
+        programsInfo={programsInfo}
+        entryFee={details.entryFee}
+        successFee={details.successFee}
+        onSubmit={() => {}}
+      />
       <StopOutLevel
         stopOutLevel={details.stopOutLevel}
         onSubmit={editProgram}
@@ -100,12 +106,6 @@ const _ProgramSettings: React.FC<Props> = ({
         currency={details.currency}
         investmentLimit={details.availableInvestmentLimit}
         onSubmit={editProgram}
-      />
-      <InvestmentFees
-        programsInfo={programsInfo}
-        entryFee={details.entryFee}
-        successFee={details.successFee}
-        onSubmit={() => {}}
       />
       <SignalingEdit
         condition={
