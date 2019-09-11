@@ -6,7 +6,7 @@ module.exports = async (app, port) => {
   const handle = app.getRequestHandler();
   await app.prepare();
 
-  const platform = process.env.REACT_APP_PLATFORM;
+  const platform = process.env.REACT_APP_BASENAME;
 
   const server = express();
   const manager = express();

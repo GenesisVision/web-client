@@ -10,18 +10,19 @@ const dotenv = require("dotenv");
 
 const isProd = process.env.NODE_ENV === "production";
 
+if (isProd) {
+  dotenv.config({ path: ".env.production" });
+}
+dotenv.config({ path: ".env.local" });
+dotenv.config({ path: ".env" });
+
 const nextConfig = {
-  webpack(config, { dev, webpack }) {
-    if (!dev) {
-      dotenv.config({ path: ".env.production" });
-    }
-    dotenv.config({ path: ".env.local" });
-    dotenv.config({ path: ".env" });
+  webpack(config, { dev, webpack, buildId, isServer }) {
     config.resolve.modules.push(path.resolve("./src"));
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
     return config;
   },
-  assetPrefix: isProd ? "/manager" : ""
+  assetPrefix: isProd ? "/" + process.env.REACT_APP_BASENAME : ""
 };
 
 module.exports = withPlugins(
