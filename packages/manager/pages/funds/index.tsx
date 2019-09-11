@@ -6,7 +6,7 @@ import { getFiltersFromContext } from "shared/modules/funds-table/components/fun
 import authService from "shared/services/auth-service";
 import { NextPageWithRedux } from "shared/utils/types";
 
-const Funds: NextPageWithRedux = () => {
+const Funds: NextPageWithRedux<{}> = () => {
   return <FundsPage />;
 };
 
@@ -16,6 +16,7 @@ Funds.getInitialProps = async ctx => {
     //@ts-ignore
     fetchFundsAction({ ...filters, authorization: authService.getAuthArg(ctx) })
   );
+  return {};
 };
 
 export default withDefaultLayout(Funds);
