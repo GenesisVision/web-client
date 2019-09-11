@@ -7,6 +7,11 @@ import FeesSettings from "shared/components/fields/fees-settings";
 import GVButton from "shared/components/gv-button";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import { SetSubmittingType } from "shared/utils/types";
+import {
+  entryFeeShape,
+  successFeeShape
+} from "shared/utils/validators/validators";
+import { object } from "yup";
 
 const _InvestmentFees: React.FC<Props> = ({
   t,
@@ -91,7 +96,14 @@ const InvestmentFees = compose<React.ComponentType<OwnProps>>(
       [FIELDS.entryFee]: entryFee,
       [FIELDS.successFee]: successFee
     }),
-    validationSchema: () => {},
+    validationSchema: ({ programsInfo, t }: Props) =>
+      object().shape({
+        [FIELDS.entryFee]: entryFeeShape(t, programsInfo.managerMaxEntryFee),
+        [FIELDS.successFee]: successFeeShape(
+          t,
+          programsInfo.managerMaxSuccessFee
+        )
+      }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
