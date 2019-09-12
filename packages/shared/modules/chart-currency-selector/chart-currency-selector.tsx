@@ -65,7 +65,7 @@ export type TChartCurrency = {
   color: string;
 };
 
-export type TAddChartCurrency = () => void;
+export type TAddChartCurrency = (currency: CurrencyEnum) => void;
 export type TRemoveChartCurrency = (id: string) => void;
 export type TChangeChartCurrency = (
   i: number
