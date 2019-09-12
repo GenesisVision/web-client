@@ -65,6 +65,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
         isAuthenticated={isAuthenticated}
         FundControls={descriptionSection.FundControls}
       />
+      <div className="details__divider" />
       {showInvestment && (
         <DetailsInvestment
           selector={fundEventsTableSelector}
