@@ -127,8 +127,8 @@ const InvestmentFees = compose<React.ComponentType<OwnProps>>(
     }),
     validationSchema: ({ programsInfo, t }: Props) =>
       object().shape({
-        [FIELDS.exitFee]: exitFeeShape(t, programsInfo.managerMaxExitFee),
         [FIELDS.entryFee]: entryFeeShape(t, programsInfo.managerMaxEntryFee),
+        [FIELDS.exitFee]: exitFeeShape(t, programsInfo.managerMaxExitFee),
         [FIELDS.successFee]: successFeeShape(
           t,
           programsInfo.managerMaxSuccessFee
