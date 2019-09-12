@@ -66,12 +66,12 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
       authService
         .getCaptcha(values.email)
         .then(({ captchaType, geeTest, id, pow }) => {
+          setEmail(values.email);
           setCaptchaType(captchaType);
           setGeeTest(geeTest);
           setId(id);
           setPow(pow);
           setValues(values);
-          setEmail(values.email);
           setSetSubmitting({ func: setSubmittingProp });
           setIsSubmit();
         });
