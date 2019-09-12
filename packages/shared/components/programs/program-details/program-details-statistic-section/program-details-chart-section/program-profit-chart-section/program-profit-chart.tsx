@@ -101,21 +101,27 @@ const _ProgramProfitChart: React.FC<Props> = ({
           yAxisId="right"
           isAnimationActive={false}
         />
-        {/*
-        //@ts-ignore*/}
-        <Area
-          dataKey="value"
-          type="monotone"
-          data={firstEquity}
-          connectNulls={true}
-          stroke={areaStrokeColor}
-          fill={`url(#equityProgramChartFill)`}
-          strokeWidth={3}
-          dot={false}
-          yAxisId="left"
-          unit="%"
-          isAnimationActive={false}
-        />
+        {equityCharts.map((equity, i) => (
+          //@ts-ignore
+          <Area
+            key={i}
+            dataKey="value"
+            type="monotone"
+            data={equity}
+            connectNulls={true}
+            stroke={
+              chartCurrencies && chartCurrencies[i]
+                ? chartCurrencies[i].color
+                : areaStrokeColor
+            }
+            fill={`url(#equityProgramChartFill)`}
+            strokeWidth={3}
+            dot={false}
+            yAxisId="left"
+            unit="%"
+            isAnimationActive={false}
+          />
+        ))}
       </ComposedChart>
     </ResponsiveContainer>
   );

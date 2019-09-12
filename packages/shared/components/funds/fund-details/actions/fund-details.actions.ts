@@ -34,7 +34,7 @@ const sendFundChartRequest = (
   { start, end }: ChartDefaultPeriod,
   id: string,
   currency: CurrencyEnum
-): Promise<FundProfitChart> =>
+): CancelablePromise<FundProfitChart> =>
   fundsApi.v10FundsByIdChartsProfitGet(id, {
     dateFrom: start,
     dateTo: end,

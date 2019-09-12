@@ -1,7 +1,10 @@
-import * as React from "react";
+import {
+  FundBalanceChart as FundBalanceChartType,
+  ProgramBalanceChart as ProgramBalanceChartType
+} from "gv-api-web";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -11,50 +14,49 @@ import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import ChartCurrencySelector, {
   TChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
-import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
-import { FundProfitChartDataType } from "../../../reducers/profit-chart.reducer";
-import { useChartData } from "../fund-details-chart.helpers";
-import FundProfitChart from "./fund-profit-chart";
+import {
+  BalanceChartElementType,
+  useChartData
+} from "../../details.chart.helpers";
 
-const _FundProfitChartElements: React.FC<Props> = ({
+const _BalanceChartElements: React.FC<Props> = ({
+  renderBalanceChart,
   period,
   setPeriod,
-  profitChart,
   selectedCurrencies,
+  balanceChart,
   addCurrency,
   removeCurrency,
   changeCurrency,
   selectCurrencies
 }) => {
   const [t] = useTranslation();
-  const chartData = useChartData<FundProfitChartDataType>(
-    profitChart,
-    selectedCurrencies
-  );
-  const platformCurrencies = useSelector(platformCurrenciesSelector);
-  const chart = chartData.chart[0];
+  const chartData = useChartData<
+    FundBalanceChartType | ProgramBalanceChartType
+  >(balanceChart, selectedCurrencies);
+  const { name, color } = chartData.selectedCurrencies[0];
+  const balance =
+    "balance" in chartData.chart
+      ? chartData.chart.balance
+      : chartData.chart.gvtBalance;
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem label={t("fund-details-page.chart.value")} big accent>
+        <StatisticItem label={t("details-page.chart.value")} big accent>
           <NumberFormat
-            value={chart.profitPercent}
+            value={formatCurrencyValue(balance, name)}
             thousandSeparator={" "}
             displayType="text"
-            suffix={" %"}
+            suffix={` ${name}`}
           />
         </StatisticItem>
       </div>
       <ChartPeriod onChange={setPeriod} period={period} />
       <ChartCurrencySelector
-        fullSelectCurrencies={platformCurrencies.map(
-          ({ name }) => name as CurrencyEnum
-        )}
-        maxCharts={
-          selectCurrencies.length + chartData.selectedCurrencies.length
-        }
+        maxCharts={1}
         selectCurrencies={selectCurrencies.map(({ name }) => name)}
         chartCurrencies={chartData.selectedCurrencies}
         onAdd={addCurrency}
@@ -62,20 +64,31 @@ const _FundProfitChartElements: React.FC<Props> = ({
         onChange={changeCurrency}
       />
       <div className="details-chart__profit">
-        <FundProfitChart
-          profitChart={chartData.chart}
-          chartCurrencies={chartData.selectedCurrencies}
-        />
+        {chartData.chart.balanceChart.length &&
+          renderBalanceChart({
+            balanceChart: chartData.chart.balanceChart,
+            currency: name,
+            color
+          })}
       </div>
     </>
   );
 };
 
+export type TRenderBalanceChart = (
+  props: {
+    color: string;
+    balanceChart: BalanceChartElementType;
+    currency: CurrencyEnum;
+  }
+) => JSX.Element;
+
 interface OwnProps {
+  renderBalanceChart: TRenderBalanceChart;
   period: ChartDefaultPeriod;
   setPeriod: HandlePeriodChangeType;
-  profitChart: FundProfitChartDataType;
   selectedCurrencies: TChartCurrency[];
+  balanceChart: FundBalanceChartType | ProgramBalanceChartType;
   addCurrency: () => void;
   removeCurrency: (name: string) => void;
   changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
@@ -84,10 +97,10 @@ interface OwnProps {
 
 interface Props extends OwnProps {}
 
-const FundProfitChartElements = compose<
+const BalanceChartElements = compose<
   React.ComponentType<OwnProps & WithLoaderProps>
 >(
   withLoader,
   React.memo
-)(_FundProfitChartElements);
-export default FundProfitChartElements;
+)(_BalanceChartElements);
+export default BalanceChartElements;

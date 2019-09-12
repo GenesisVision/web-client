@@ -1,5 +1,8 @@
 import { Dispatch } from "redux";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  TGetChartArgs,
+  TGetChartFunc
+} from "shared/components/details/details-statistic-section/details.chart.helpers";
 import {
   ComposeFiltersAllType,
   FilteringType
@@ -12,7 +15,7 @@ import {
 } from "shared/routes/funds.routes";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import { CurrencyEnum, DispatchDescriptionType } from "shared/utils/types";
+import { DispatchDescriptionType } from "shared/utils/types";
 
 import {
   fetchFundBalanceChartAction,
@@ -66,18 +69,16 @@ export const getFundStructure = (fundId: string) => (
   return fundStructureAction(fundId);
 };
 
-export const getProfitChart = ({ id, period, currencies }: TGetChartArgs) => (
-  dispatch: Dispatch
-) => dispatch(fetchFundProfitChartAction(id, period, currencies));
+export const getProfitChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => dispatch => dispatch(fetchFundProfitChartAction(id, period, currencies));
 
-export const getBalanceChart = ({ id, period, currencies }: TGetChartArgs) => (
-  dispatch: Dispatch
-) => {
+export const getBalanceChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => dispatch => {
   dispatch(fetchFundBalanceChartAction(id, period, currencies[0]));
 };
-
-interface TGetChartArgs {
-  currencies: CurrencyEnum[];
-  id: string;
-  period?: ChartDefaultPeriod;
-}
