@@ -29,33 +29,35 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
   );
 
   return (
-    <Surface className="details-history">
-      <div className="details-history__header">
-        <div className="details-history__tabs">
-          <GVTabs value={tab} onChange={setTab}>
-            <GVTab
-              value={TABS.STRUCTURE}
-              label={
-                <TooltipLabel
-                  tooltipContent={t("fund-details-page.tooltip.structure")}
-                  labelText={t("fund-details-page.history.tabs.structure")}
-                  className="tooltip__label--cursor-pointer"
-                />
-              }
-            />
-            <GVTab
-              value={TABS.REALLOCATE_HISTORY}
-              label={t("fund-details-page.history.tabs.reallocate-history")}
-              count={reallocateCount}
-            />
-          </GVTabs>
+    <div className="details__history">
+      <Surface className="details-history">
+        <div className="details-history__header">
+          <div className="details-history__tabs">
+            <GVTabs value={tab} onChange={setTab}>
+              <GVTab
+                value={TABS.STRUCTURE}
+                label={
+                  <TooltipLabel
+                    tooltipContent={t("fund-details-page.tooltip.structure")}
+                    labelText={t("fund-details-page.history.tabs.structure")}
+                    className="tooltip__label--cursor-pointer"
+                  />
+                }
+              />
+              <GVTab
+                value={TABS.REALLOCATE_HISTORY}
+                label={t("fund-details-page.history.tabs.reallocate-history")}
+                count={reallocateCount}
+              />
+            </GVTabs>
+          </div>
         </div>
-      </div>
-      <div>
-        {tab === TABS.STRUCTURE && <FundStructure id={id} />}
-        {tab === TABS.REALLOCATE_HISTORY && <FundReallocateHistory id={id} />}
-      </div>
-    </Surface>
+        <div>
+          {tab === TABS.STRUCTURE && <FundStructure id={id} />}
+          {tab === TABS.REALLOCATE_HISTORY && <FundReallocateHistory id={id} />}
+        </div>
+      </Surface>
+    </div>
   );
 };
 
