@@ -44,18 +44,13 @@ const _ProgramFollowContainer: React.FC<Props> = ({
       ? "follow-program.create-success-alert-message"
       : "follow-program.edit-success-alert-message"
   );
-  useEffect(
-    () => {
-      setIsPending();
-      getSignalInfo(id)
-        .then(setMinDeposit)
-        .finally(setIsNotPending);
-      rateApi
-        .v10RateByFromByToGet(DEFAULT_RATE_CURRENCY, currency)
-        .then(setRate);
-    },
-    [currency, id]
-  );
+  useEffect(() => {
+    setIsPending();
+    getSignalInfo(id)
+      .then(setMinDeposit)
+      .finally(setIsNotPending);
+    rateApi.v10RateByFromByToGet(DEFAULT_RATE_CURRENCY, currency).then(setRate);
+  }, []);
   useEffect(() => {
     setType(
       signalSubscription.hasActiveSubscription
