@@ -2,12 +2,12 @@ import "shared/components/details/details.scss";
 
 import * as React from "react";
 import { useEffect } from "react";
-import { connect, ResolveThunks, useSelector } from "react-redux";
+import { ResolveThunks, connect, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
 
@@ -25,7 +25,7 @@ const _FundDetailsPage: React.FC<Props> = ({
     () => {
       dispatchFundDescription();
     },
-    [dispatchFundDescription]
+    []
   );
   return (
     <FundDetailsContainer
