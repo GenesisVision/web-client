@@ -40,7 +40,7 @@ const _DetailsInvestment: React.FC<Props> = ({
     haveInvestment ? TABS.INVESTMENT : TABS.EVENTS
   );
   return (
-    <Surface className="details-investment">
+    <Surface className="details__section details-investment">
       <div className="details-investment__investment-tabs">
         <GVTabs value={tab} onChange={setTab}>
           <GVTab

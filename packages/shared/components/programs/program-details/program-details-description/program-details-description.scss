@@ -6,20 +6,18 @@ $padding-info-left: $padding-upper-medium;
 $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 
 .program-details-description {
-  padding: 0 $padding-xsmall;
-
-  @include media-breakpoint-landscape-phone() {
-    padding: 0;
-  }
-
   &__main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding: 0 $padding-xsmall;
 
     @include media-breakpoint-tablet() {
       flex-wrap: nowrap;
       justify-content: flex-start;
+    }
+    @include media-breakpoint-landscape-phone() {
+      padding: 0;
     }
   }
 
@@ -107,7 +105,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   &__controls {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 (-$padding-xxsmall/2);
 
     @include media-breakpoint-tablet() {
       flex-wrap: nowrap;
@@ -123,19 +120,19 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__col {
-    @include vertical-paddings($padding-small);
-    @include horizontal-paddings($padding-small);
-    @include adaptive-margin(bottom, $padding-small);
+    padding: $padding-xsmall;
+    &:not(:last-child) {
+      margin-bottom: $padding-xsmall;
+    }
     border: 1px solid rgba($main-color, 0.06);
     border-radius: 8px;
-    margin-left: $padding-xxsmall/2;
-    margin-right: $padding-xxsmall/2;
     flex-grow: 1;
     display: inline-flex;
     flex-wrap: wrap;
     box-sizing: border-box;
 
     @include media-breakpoint-landscape-phone() {
+      padding: $padding-small;
       width: auto;
       max-width: 800px;
 
@@ -146,11 +143,8 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     }
 
     @include media-breakpoint-tablet() {
-      margin-right: $padding-small;
-      margin-left: 0;
-
-      &:last-child {
-        margin-right: 0;
+      &:not(:last-child) {
+        margin-bottom: 0;
       }
 
       &--small-size {
@@ -188,11 +182,14 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   &__perfomance-data {
     @include adaptive-padding(top, $padding-xxsmall);
     @include adaptive-padding(bottom, $padding-upper-medium);
-    padding-left: 0;
+    padding: 0 $padding-xsmall;
     display: flex;
     box-sizing: border-box;
     flex-wrap: wrap;
     margin: 0;
+    @include media-breakpoint-landscape-phone() {
+      padding-left: 0;
+    }
     @include media-breakpoint-tablet() {
       padding-left: $padding-small;
       margin-left: $padding-controls-left;
