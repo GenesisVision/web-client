@@ -1,7 +1,7 @@
 import React from "react";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import TileFilterButton from "shared/components/table/components/filtering/tile-filter-button";
-import CurrencySelect from "shared/currency-select/components/currency-select";
+import CurrencySelect from "shared/modules/currency-select/components/currency-select";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { TAddChartCurrency } from "./chart-currency-selector";
