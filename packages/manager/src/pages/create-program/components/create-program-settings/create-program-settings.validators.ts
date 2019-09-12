@@ -4,8 +4,10 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import {
   assetDescriptionShape,
   assetTitleShape,
+  entryFeeShape,
   signalSuccessFeeShape,
-  signalVolumeFeeShape
+  signalVolumeFeeShape,
+  successFeeShape
 } from "shared/utils/validators/validators";
 import { boolean, mixed, number, object, string } from "yup";
 
@@ -50,36 +52,14 @@ const createProgramSettingsValidationSchema = (
     [CREATE_PROGRAM_FIELDS.leverage]: string().required(
       t("manager.create-program-page.settings.validation.leverage-required")
     ),
-    [CREATE_PROGRAM_FIELDS.entryFee]: number()
-      .required(
-        t("manager.create-program-page.settings.validation.entry-fee-required")
-      )
-      .min(
-        0,
-        t("manager.create-program-page.settings.validation.entry-fee-min")
-      )
-      .max(
-        props.programsInfo.managerMaxEntryFee,
-        t("manager.create-program-page.settings.validation.entry-fee-max", {
-          max: props.programsInfo.managerMaxEntryFee
-        })
-      ),
-    [CREATE_PROGRAM_FIELDS.successFee]: number()
-      .min(
-        0,
-        t("manager.create-program-page.settings.validation.success-fee-min")
-      )
-      .required(
-        t(
-          "manager.create-program-page.settings.validation.success-fee-required"
-        )
-      )
-      .max(
-        props.programsInfo.managerMaxSuccessFee,
-        t("manager.create-program-page.settings.validation.success-fee-max", {
-          max: props.programsInfo.managerMaxSuccessFee
-        })
-      ),
+    [CREATE_PROGRAM_FIELDS.entryFee]: entryFeeShape(
+      t,
+      props.programsInfo.managerMaxEntryFee
+    ),
+    [CREATE_PROGRAM_FIELDS.successFee]: successFeeShape(
+      t,
+      props.programsInfo.managerMaxSuccessFee
+    ),
     [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: boolean(),
     [CREATE_PROGRAM_FIELDS.investmentLimit]: mixed().when(
       CREATE_PROGRAM_FIELDS.hasInvestmentLimit,
