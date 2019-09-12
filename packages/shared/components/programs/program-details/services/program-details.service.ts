@@ -8,10 +8,8 @@ import {
 } from "gv-api-web";
 import { NextPageContext } from "next";
 import { Dispatch } from "redux";
-import {
-  ChartDefaultPeriod,
-  getDefaultPeriod
-} from "shared/components/chart/chart-period/chart-period.helpers";
+import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
@@ -287,15 +285,17 @@ export const fetchPortfolioEvents = (
   );
 };
 
-export const getProfitChart = ({ id, period }: TGetChartArgs) => async (
-  dispatch: Dispatch
-) => await dispatch(fetchProgramProfitChartAction(id, period));
+export const getProfitChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => dispatch =>
+  await dispatch(fetchProgramProfitChartAction(id, period, currencies));
 
-export const getBalanceChart = ({ id, period }: TGetChartArgs) => async (
-  dispatch: Dispatch
-) => await dispatch(fetchProgramBalanceChartAction(id, period));
-
-type TGetChartArgs = {
-  id: string;
-  period?: ChartDefaultPeriod;
+export const getBalanceChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => dispatch => {
+  await dispatch(fetchProgramBalanceChartAction(id, period, currencies[0]));
 };

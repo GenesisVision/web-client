@@ -1,9 +1,14 @@
 import "./program-settings.scss";
 
-import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
+import {
+  BrokersProgramInfo,
+  ProgramDetailsFull,
+  ProgramsInfo
+} from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
+import InvestmentFees from "modules/asset-settings/investment-fees";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -22,6 +27,7 @@ import StopOutLevel from "./stop-out-level";
 import TwoFactorConfirm from "./two-factor-confirm";
 
 const _ProgramSettings: React.FC<Props> = ({
+  programsInfo,
   cancelChangeBroker,
   t,
   brokersInfo,
@@ -86,6 +92,13 @@ const _ProgramSettings: React.FC<Props> = ({
         currentAccountTypeId={brokersInfo.currentAccountTypeId}
         currentLeverage={details.leverageMax}
       />
+      <InvestmentFees
+        asset={ASSET.PROGRAM}
+        programsInfo={programsInfo}
+        entryFee={details.entryFee}
+        successFee={details.successFee}
+        onSubmit={editProgram}
+      />
       <StopOutLevel
         stopOutLevel={details.stopOutLevel}
         onSubmit={editProgram}
@@ -126,6 +139,7 @@ const _ProgramSettings: React.FC<Props> = ({
 interface Props extends OwnProps, WithTranslation {}
 
 interface OwnProps {
+  programsInfo: ProgramsInfo;
   details: ProgramDetailsFull;
   brokersInfo: BrokersProgramInfo;
   changeSignaling: (

@@ -1,6 +1,6 @@
-@import "../../../../node_modules/shared/styles/colors";
-@import "../../../../node_modules/shared/styles/breakpoint";
-@import "../../../../node_modules/shared/styles/sizes";
+@import "~shared/styles/colors";
+@import "~shared/styles/breakpoint";
+@import "~shared/styles/sizes";
 
 .create-asset-settings {
   &__row {
@@ -12,7 +12,7 @@
     justify-content: space-between;
 
     & .gv-text-field__error {
-      width: 100%;
+      width: 120%;
     }
 
     .gv-text-field__wrapper,

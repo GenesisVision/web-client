@@ -41,6 +41,12 @@ const mergeArrays = (items: any[][]): any[] => {
   return result;
 };
 
+const hasCorrectCountNulls = (value: string): boolean => {
+  const [whole, fraction] = value.split(".");
+  if (fraction === undefined) return true;
+  return !(whole[0] === "0" && whole.length > 1);
+};
+
 const allowValuesNumberFormat = (
   {
     from,
@@ -49,14 +55,12 @@ const allowValuesNumberFormat = (
     from: number;
     to: number;
   } = { from: Number.MIN_SAFE_INTEGER, to: Number.MAX_SAFE_INTEGER }
-) => (values: NumberFormatValues): boolean => {
-  const { formattedValue, floatValue } = values;
-  return (
-    formattedValue === "" ||
-    formattedValue === "0." ||
-    (floatValue >= from && floatValue <= to)
-  );
-};
+) => ({ formattedValue, floatValue }: NumberFormatValues): boolean =>
+  formattedValue === "" ||
+  formattedValue === "0." ||
+  (floatValue >= from &&
+    floatValue <= to &&
+    hasCorrectCountNulls(formattedValue));
 
 const getNumberWithoutSuffix = (str: string): Nullable<number> => {
   let result = null;

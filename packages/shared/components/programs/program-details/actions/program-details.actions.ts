@@ -9,7 +9,12 @@ import {
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
-import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  ChartDefaultPeriod,
+  getDefaultPeriod
+} from "shared/components/chart/chart-period/chart-period.helpers";
+import { TStatisticCurrencyAction } from "shared/components/details/reducers/statistic-currency.reducer";
+import { TStatisticPeriodAction } from "shared/components/details/reducers/statistic-period.reducer";
 import { EVENTS_ACTION_TYPE } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import platformApi from "shared/services/api-client/platform-api";
@@ -17,11 +22,14 @@ import programsApi from "shared/services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
 import { ProgramIdState } from "../reducers/id.reducer";
+import { ProgramProfitChartDataType } from "../reducers/profit-chart.reducer";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
 } from "../services/program-details.service";
 
+export const SET_PROGRAM_STATISTIC_PERIOD = "SET_PROGRAM_STATISTIC_PERIOD";
+export const SET_PROGRAM_STATISTIC_CURRENCY = "SET_PROGRAM_STATISTIC_CURRENCY";
 export const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
 export const FETCH_PROGRAM_BALANCE_CHART = "FETCH_PROGRAM_BALANCE_CHART";
 export const FETCH_PROGRAM_DESCRIPTION = "FETCH_PROGRAM_DESCRIPTION";
@@ -33,6 +41,32 @@ export const PROGRAM_TRADES = "PROGRAM_TRADES";
 export const PROGRAM_PERIOD_HISTORY = "PROGRAM_PERIOD_HISTORY";
 export const PROGRAM_FINANCIAL_STATISTIC = "PROGRAM_FINANCIAL_STATISTIC";
 export const PROGRAM_SUBSCRIPTIONS = "PROGRAM_SUBSCRIPTIONS";
+
+const sendProgramChartRequest = (
+  { start, end }: ChartDefaultPeriod,
+  id: string,
+  currency: CurrencyEnum
+): CancelablePromise<ProgramProfitChart> =>
+  programsApi.v10ProgramsByIdChartsProfitGet(id, {
+    dateFrom: start,
+    dateTo: end,
+    maxPointCount: 100,
+    currency
+  });
+
+export const statisticCurrencyAction = (
+  currency: CurrencyEnum
+): TStatisticCurrencyAction => ({
+  type: SET_PROGRAM_STATISTIC_CURRENCY,
+  payload: currency
+});
+
+export const statisticPeriodAction = (
+  period: ChartDefaultPeriod
+): TStatisticPeriodAction => ({
+  type: SET_PROGRAM_STATISTIC_PERIOD,
+  payload: period
+});
 
 export const fetchEventsAction = (
   assetId: string,
@@ -48,22 +82,23 @@ export const fetchEventsAction = (
 
 export const fetchProgramProfitChartAction = (
   id: string,
-  period = getDefaultPeriod()
-): ApiAction<ProgramProfitChart> => ({
+  period = getDefaultPeriod(),
+  currencies: CurrencyEnum[]
+): ApiAction<ProgramProfitChartDataType> => ({
   type: FETCH_PROGRAM_PROFIT_CHART,
-  payload: programsApi.v10ProgramsByIdChartsProfitGet(id, {
-    dateFrom: period.start,
-    dateTo: period.end,
-    maxPointCount: 100
-  })
+  payload: Promise.all(
+    currencies.map(currency => sendProgramChartRequest(period, id, currency))
+  ) as CancelablePromise<ProgramProfitChartDataType>
 });
 
 export const fetchProgramBalanceChartAction = (
   id: string,
-  period = getDefaultPeriod()
+  period = getDefaultPeriod(),
+  currency: CurrencyEnum
 ): ApiAction<ProgramBalanceChart> => ({
   type: FETCH_PROGRAM_BALANCE_CHART,
   payload: programsApi.v10ProgramsByIdChartsBalanceGet(id, {
+    currency,
     dateFrom: period.start,
     dateTo: period.end,
     maxPointCount: 100

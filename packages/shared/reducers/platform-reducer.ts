@@ -55,6 +55,21 @@ export const programsInfoSelector = apiFieldSelector(
   {} as ProgramsInfo
 );
 
+export const assetTypeValuesSelector = createSelector<
+  AuthRootState,
+  PlatformInfo | undefined,
+  SelectFilterValue<string>[]
+>(
+  state => platformDataSelector(state),
+  data =>
+    (data &&
+      data.enums.assetTypes.map(type => ({
+        value: type,
+        label: type
+      }))) ||
+    []
+);
+
 export const allEventsSelector = createSelector<
   AuthRootState,
   PlatformInfo | undefined,

@@ -25,7 +25,7 @@ import {
   EVENT_LOCATION,
   getEvents
 } from "shared/components/programs/program-details/services/program-details.service";
-import { ASSET, STATUS } from "shared/constants/constants";
+import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
@@ -70,64 +70,48 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
   return (
     <Page title={description.title}>
-      <div className="details">
-        <div className="details__section">
-          <ProgramDetailsDescriptionSection
-            programDescription={description}
-            isAuthenticated={isAuthenticated}
-            ProgramControls={descriptionSection.ProgramControls}
-          />
-        </div>
-        <div className="details__section">
-          {showInvestment && (
-            <DetailsInvestment
-              selector={programEventsTableSelector}
-              haveEvents={haveEvents}
-              haveInvestment={haveInvestment}
-              eventTypeFilterValues={eventTypeFilterValues}
-              updateDescription={dispatchProgramDescription}
-              notice={t(
-                "program-details-page.description.withdraw-notice-text"
-              )}
-              asset={ASSET.PROGRAM}
-              id={description.id}
-              assetCurrency={description.currency}
-              personalDetails={
-                description.personalProgramDetails as InvestmentDetails
-              } // TODO fix type InvestmentDetails
-              ProgramReinvestingWidget={
-                descriptionSection.ProgramReinvestingWidget
-              }
-              WithdrawContainer={descriptionSection.ProgramWithdrawContainer}
-            />
-          )}
-        </div>
-        <div className="details__section">
-          <ProgramDetailsStatisticSection
-            status={description.status as STATUS}
-            id={description.id}
-          />
-        </div>
-        <div className="details__history">
-          <ProgramDetailsHistorySection
-            showCommissionRebateSometime={
-              description.brokerDetails.showCommissionRebateSometime
-            }
-            isOwnProgram={
-              description.personalProgramDetails
-                ? description.personalProgramDetails.isOwnProgram
-                : false
-            }
-            showSwaps={description.brokerDetails.showSwaps}
-            showTickets={description.brokerDetails.showTickets}
-            isSignalProgram={description.isSignalProgram}
-            programId={description.id}
-            programCurrency={description.currency}
-            isInvested={isInvested}
-            title={description.title}
-          />
-        </div>
-      </div>
+      <ProgramDetailsDescriptionSection
+        programDescription={description}
+        isAuthenticated={isAuthenticated}
+        ProgramControls={descriptionSection.ProgramControls}
+      />
+      <div className="details__divider" />
+      {showInvestment && (
+        <DetailsInvestment
+          selector={programEventsTableSelector}
+          haveEvents={haveEvents}
+          haveInvestment={haveInvestment}
+          eventTypeFilterValues={eventTypeFilterValues}
+          updateDescription={dispatchProgramDescription}
+          notice={t("program-details-page.description.withdraw-notice-text")}
+          asset={ASSET.PROGRAM}
+          id={description.id}
+          assetCurrency={description.currency}
+          personalDetails={
+            description.personalProgramDetails as InvestmentDetails
+          } // TODO fix type InvestmentDetails
+          ProgramReinvestingWidget={descriptionSection.ProgramReinvestingWidget}
+          WithdrawContainer={descriptionSection.ProgramWithdrawContainer}
+        />
+      )}
+      <ProgramDetailsStatisticSection />
+      <ProgramDetailsHistorySection
+        showCommissionRebateSometime={
+          description.brokerDetails.showCommissionRebateSometime
+        }
+        isOwnProgram={
+          description.personalProgramDetails
+            ? description.personalProgramDetails.isOwnProgram
+            : false
+        }
+        showSwaps={description.brokerDetails.showSwaps}
+        showTickets={description.brokerDetails.showTickets}
+        isSignalProgram={description.isSignalProgram}
+        programId={description.id}
+        programCurrency={description.currency}
+        isInvested={isInvested}
+        title={description.title}
+      />
     </Page>
   );
 };

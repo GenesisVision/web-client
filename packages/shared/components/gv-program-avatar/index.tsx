@@ -1,11 +1,59 @@
 import "./style.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import React from "react";
+import ImageBase from "shared/components/avatar/image-base";
 import GVColors from "shared/components/gv-styles/gv-colors";
 import PieContainer from "shared/components/pie-container/pie-container";
 
 import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";
+
+const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
+  url,
+  alt,
+  level,
+  levelProgress = 0,
+  size = "small",
+  className,
+  color,
+  imageClassName,
+  levelClassName,
+  onMouseOverLevel,
+  onMouseEnterLevel,
+  onMouseLeaveLevel,
+  onClickLevel
+}) => (
+  <div
+    className={classNames("program-avatar", className, {
+      "program-avatar--small": size === "small",
+      "program-avatar--medium": size === "medium",
+      "program-avatar--big": size === "big"
+    })}
+  >
+    <ImageBase
+      DefaultImageComponent={GVProgramDefaultAvatar}
+      url={url}
+      color={color}
+      imageClassName={classNames("program-avatar__image", imageClassName)}
+      alt={alt}
+    />
+    {level !== undefined && (
+      <div
+        onMouseOver={onMouseOverLevel}
+        onMouseEnter={onMouseEnterLevel}
+        onMouseLeave={onMouseLeaveLevel}
+        onClick={onClickLevel}
+        className={"program-avatar__level"}
+      >
+        <PieContainer
+          color={(GVColors as any)[`$levelColor${level}`]}
+          label={String(level)}
+          value={levelProgress}
+        />
+      </div>
+    )}
+  </div>
+);
 
 export interface GVProgramAvatarProps {
   url?: string;
@@ -23,97 +71,5 @@ export interface GVProgramAvatarProps {
   onClickLevel?: (e: any) => void;
 }
 
-interface GVProgramAvatarState {
-  errored: boolean;
-}
-
-class GVProgramAvatar extends React.PureComponent<
-  GVProgramAvatarProps,
-  GVProgramAvatarState
-> {
-  static defaultProps: Partial<GVProgramAvatarProps> = {
-    size: "small"
-  };
-
-  constructor(props: GVProgramAvatarProps) {
-    super(props);
-
-    this.state = {
-      errored: false
-    };
-  }
-
-  componentDidUpdate(prevProps: GVProgramAvatarProps) {
-    if (prevProps.url !== this.props.url) {
-      this.setState({ errored: false });
-    }
-  }
-
-  handleError = (e: any) => {
-    e.target.onerror = null;
-    this.setState({ errored: true });
-  };
-
-  renderImage = () => {
-    const { url, alt, color, imageClassName } = this.props;
-    if (this.state.errored || !url) {
-      return (
-        <GVProgramDefaultAvatar color={color} imageClassName={imageClassName} />
-      );
-    }
-    return (
-      <img
-        className={classnames(imageClassName, "program-avatar__image")}
-        src={url}
-        alt={alt}
-        onError={this.handleError}
-      />
-    );
-  };
-
-  renderLevel = () => {
-    const {
-      level,
-      levelProgress = 0,
-      onMouseOverLevel,
-      onMouseEnterLevel,
-      onMouseLeaveLevel,
-      onClickLevel
-    } = this.props;
-    if (level === undefined) return null;
-    return (
-      <div
-        onMouseOver={onMouseOverLevel}
-        onMouseEnter={onMouseEnterLevel}
-        onMouseLeave={onMouseLeaveLevel}
-        onClick={onClickLevel}
-        className={"program-avatar__level"}
-      >
-        <PieContainer
-          color={(GVColors as any)[`$levelColor${level}`]}
-          label={String(level)}
-          value={levelProgress}
-        />
-      </div>
-    );
-  };
-
-  render() {
-    const { size, className } = this.props;
-    return (
-      <div
-        className={classnames("program-avatar", className, {
-          "program-avatar--small": size === "small",
-          "program-avatar--medium": size === "medium",
-          "program-avatar--big": size === "big"
-        })}
-      >
-        {this.renderImage()}
-        {this.renderLevel()}
-      </div>
-    );
-  }
-}
-
-export { GVProgramDefaultAvatar };
+const GVProgramAvatar = React.memo(_GVProgramAvatar);
 export default GVProgramAvatar;

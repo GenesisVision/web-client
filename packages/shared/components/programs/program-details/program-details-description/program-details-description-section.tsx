@@ -20,7 +20,7 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
   const personalDetails = programDescription.personalProgramDetails;
   const isOwnProgram = personalDetails && personalDetails.isOwnProgram;
   return (
-    <div className="asset-details-description">
+    <div className="details__section asset-details-description">
       <ProgramDetailsDescriptionMain
         programDescription={programDescription}
         isOwnProgram={isOwnProgram}

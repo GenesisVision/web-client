@@ -56,7 +56,7 @@ class _TableContainer extends React.PureComponent<
     service.getItems(fetchItems, dataSelector);
   };
 
-  handleUpdateSorting = (sorting: string) => (): void => {
+  handleUpdateSorting = (sorting: string) => {
     this.updateItems({
       sorting,
       paging: {
