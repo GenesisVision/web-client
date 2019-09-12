@@ -1930,6 +1930,8 @@
         "validation": {
           "entry-fee-required": "Entry fee is required",
           "exit-fee-required": "Exit fee is required",
+          "exit-fee-min": "Exit fee must be greater than 0 %",
+          "exit-fee-max": "Exit fee must be less than {{max}} %",
           "assets-share": "Total share of all assets should be equal to 100%",
           "assets-count": "Must be at least two assets.",
           "deposit-min": "Not enough money."
