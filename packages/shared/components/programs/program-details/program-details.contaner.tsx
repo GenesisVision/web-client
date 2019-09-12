@@ -4,12 +4,12 @@ import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
+import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
@@ -21,8 +21,8 @@ import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
-  dispatchProgramDescription,
   EVENT_LOCATION,
+  dispatchProgramDescription,
   getEvents
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
@@ -50,7 +50,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       isAuthenticated &&
         dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
     },
-    [description.id, dispatch, isAuthenticated]
+    [description.id, isAuthenticated]
   );
   useEffect(
     () => {
