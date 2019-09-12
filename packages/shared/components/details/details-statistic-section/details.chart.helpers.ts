@@ -16,7 +16,12 @@ import { FundBalanceChartDataType } from "shared/components/funds/fund-details/r
 import { ProgramBalanceChartDataType } from "shared/components/programs/program-details/reducers/balance-chart.reducer";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import { IDashboardAssetChart } from "shared/constants/constants";
-import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
+import {
+  TAddChartCurrency,
+  TChangeChartCurrency,
+  TChartCurrency,
+  TRemoveChartCurrency
+} from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { RootState } from "shared/reducers/root-reducer";
 import { TSelectorData } from "shared/utils/selectors";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
@@ -41,9 +46,9 @@ export type TProfitChartSelector = (
 export type TUseChartStateValues = () => {
   selectedCurrencies: TChartCurrency[];
   selectCurrencies: TChartCurrency[];
-  addCurrency: () => void;
-  removeCurrency: (name: string) => void;
-  changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
+  addCurrency: TAddChartCurrency;
+  removeCurrency: TRemoveChartCurrency;
+  changeCurrency: TChangeChartCurrency;
 };
 
 export type TUseChartPeriod = () => {
@@ -117,7 +122,9 @@ export type BalanceChartElementType = Array<
   BalanceChartElement | ProgramBalanceChartElement
 >;
 export type BalanceChartType = FundBalanceChart | ProgramBalanceChart;
-export type BalanceChartDataType = FundBalanceChartDataType | ProgramBalanceChartDataType;
+export type BalanceChartDataType =
+  | FundBalanceChartDataType
+  | ProgramBalanceChartDataType;
 
 export const convertToChartCurrency = ({
   name,
@@ -154,10 +161,10 @@ export type TUseFundChartStateDataCreator = (
     statisticCurrencyAction: (
       currency: CurrencyEnum
     ) => TStatisticCurrencyAction;
-    profitChartSelector: (state: RootState) => TSelectorData<ProfitChartDataType >;
-    balanceChartSelector: (
+    profitChartSelector: (
       state: RootState
-    ) => TSelectorData<BalanceChartType>;
+    ) => TSelectorData<ProfitChartDataType>;
+    balanceChartSelector: (state: RootState) => TSelectorData<BalanceChartType>;
     statisticCurrencySelector: (state: RootState) => CurrencyEnum;
     idSelector: (state: RootState) => string;
     statisticPeriodSelector: (state: RootState) => ChartDefaultPeriod;
@@ -213,9 +220,9 @@ type TUseFundChartStateValuesCreator = (
 ) => {
   selectedCurrencies: TChartCurrency[];
   selectCurrencies: TChartCurrency[];
-  addCurrency: () => void;
-  removeCurrency: (name: string) => void;
-  changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
+  addCurrency: TAddChartCurrency;
+  removeCurrency: TRemoveChartCurrency;
+  changeCurrency: TChangeChartCurrency;
 };
 export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = useFundChartStateData => {
   const dispatch = useDispatch();
@@ -241,8 +248,11 @@ export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = u
   );
 
   const addCurrency = useCallback(
-    () => {
-      setSelectedCurrencies([...selectedCurrencies, selectCurrencies[0]]);
+    currency => {
+      setSelectedCurrencies([
+        ...selectedCurrencies,
+        selectCurrencies.find(({ name }) => name === currency)!
+      ]);
     },
     [selectedCurrencies, selectCurrencies]
   );
