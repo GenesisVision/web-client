@@ -7,7 +7,8 @@ import { CurrencyEnum } from "shared/utils/types";
 import { TAddChartCurrency } from "./chart-currency-selector";
 
 const _AddCurrencyButton: React.FC<Props> = ({ onAdd, currencies }) => {
-  const onChange = ({ target: { value } }: ISelectChangeEvent) => onAdd();
+  const onChange = ({ target: { value } }: ISelectChangeEvent) =>
+    onAdd(value as CurrencyEnum);
   return (
     <TileFilterButton
       title={
