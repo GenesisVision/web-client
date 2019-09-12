@@ -8,11 +8,13 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import ChartCurrencySelector, {
-  TChartCurrency
+  TAddChartCurrency,
+  TChangeChartCurrency,
+  TChartCurrency,
+  TRemoveChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
@@ -89,9 +91,9 @@ interface OwnProps {
   setPeriod: HandlePeriodChangeType;
   selectedCurrencies: TChartCurrency[];
   balanceChart: FundBalanceChartType | ProgramBalanceChartType;
-  addCurrency: () => void;
-  removeCurrency: (name: string) => void;
-  changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
+  addCurrency: TAddChartCurrency;
+  removeCurrency: TRemoveChartCurrency;
+  changeCurrency: TChangeChartCurrency;
   selectCurrencies: TChartCurrency[];
 }
 
