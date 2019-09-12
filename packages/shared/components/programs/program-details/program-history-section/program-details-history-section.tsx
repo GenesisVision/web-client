@@ -63,74 +63,70 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
 
   const isManager = role === ROLE.MANAGER;
   return (
-    <div className="details__history">
-      <Surface className="details-history">
-        <div className="details-history__header">
-          <div className="details-history__tabs">
-            <GVTabs value={tab} onChange={setTab}>
-              <GVTab
-                value={TABS.OPEN_POSITIONS}
-                label={t("program-details-page.history.tabs.open-positions")}
-                count={openPositionsCount}
-              />
-              <GVTab
-                value={TABS.TRADES}
-                label={t("program-details-page.history.tabs.trades")}
-                count={tradesCount}
-              />
-              <GVTab
-                value={TABS.PERIOD_HISTORY}
-                label={t("program-details-page.history.tabs.period-history")}
-                count={periodHistoryCount}
-              />
-              <GVTab
-                value={TABS.SUBSCRIBERS}
-                label={t("program-details-page.history.tabs.subscriptions")}
-                count={subscriptionsCount}
-                visible={isAuthenticated && isSignalProgram && isOwnProgram}
-              />
-              <GVTab
-                value={TABS.FINANCIAL_STATISTIC}
-                label={t(
-                  "program-details-page.history.tabs.financial-statistic"
-                )}
-                count={financialStatisticCount}
-                visible={isAuthenticated && isManager && isOwnProgram}
-              />
-            </GVTabs>
-          </div>
+    <Surface className="details-history">
+      <div className="details-history__header">
+        <div className="details-history__tabs">
+          <GVTabs value={tab} onChange={setTab}>
+            <GVTab
+              value={TABS.OPEN_POSITIONS}
+              label={t("program-details-page.history.tabs.open-positions")}
+              count={openPositionsCount}
+            />
+            <GVTab
+              value={TABS.TRADES}
+              label={t("program-details-page.history.tabs.trades")}
+              count={tradesCount}
+            />
+            <GVTab
+              value={TABS.PERIOD_HISTORY}
+              label={t("program-details-page.history.tabs.period-history")}
+              count={periodHistoryCount}
+            />
+            <GVTab
+              value={TABS.SUBSCRIBERS}
+              label={t("program-details-page.history.tabs.subscriptions")}
+              count={subscriptionsCount}
+              visible={isAuthenticated && isSignalProgram && isOwnProgram}
+            />
+            <GVTab
+              value={TABS.FINANCIAL_STATISTIC}
+              label={t("program-details-page.history.tabs.financial-statistic")}
+              count={financialStatisticCount}
+              visible={isAuthenticated && isManager && isOwnProgram}
+            />
+          </GVTabs>
         </div>
-        <div>
-          {tab === TABS.TRADES && (
-            <ProgramTrades
-              showSwaps={showSwaps}
-              showTickets={showTickets}
-              programId={programId}
-            />
-          )}
-          {tab === TABS.OPEN_POSITIONS && (
-            <ProgramOpenPositions
-              programId={programId}
-              currency={programCurrency}
-            />
-          )}
-          {tab === TABS.SUBSCRIBERS && (
-            <ProgramSubscriptions id={programId} currency={currency} />
-          )}
-          {tab === TABS.FINANCIAL_STATISTIC && (
-            <ProgramFinancialStatistic
-              showCommissionRebateSometime={showCommissionRebateSometime}
-              id={programId}
-              currency={programCurrency}
-              title={title}
-            />
-          )}
-          {tab === TABS.PERIOD_HISTORY && (
-            <ProgramPeriodHistory id={programId} currency={programCurrency} />
-          )}
-        </div>
-      </Surface>
-    </div>
+      </div>
+      <div>
+        {tab === TABS.TRADES && (
+          <ProgramTrades
+            showSwaps={showSwaps}
+            showTickets={showTickets}
+            programId={programId}
+          />
+        )}
+        {tab === TABS.OPEN_POSITIONS && (
+          <ProgramOpenPositions
+            programId={programId}
+            currency={programCurrency}
+          />
+        )}
+        {tab === TABS.SUBSCRIBERS && (
+          <ProgramSubscriptions id={programId} currency={currency} />
+        )}
+        {tab === TABS.FINANCIAL_STATISTIC && (
+          <ProgramFinancialStatistic
+            showCommissionRebateSometime={showCommissionRebateSometime}
+            id={programId}
+            currency={programCurrency}
+            title={title}
+          />
+        )}
+        {tab === TABS.PERIOD_HISTORY && (
+          <ProgramPeriodHistory id={programId} currency={programCurrency} />
+        )}
+      </div>
+    </Surface>
   );
 };
 
