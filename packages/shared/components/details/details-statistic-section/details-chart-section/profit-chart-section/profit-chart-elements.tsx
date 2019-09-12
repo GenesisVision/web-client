@@ -4,11 +4,13 @@ import { useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import ChartCurrencySelector, {
-  TChartCurrency
+  TAddChartCurrency,
+  TChangeChartCurrency,
+  TChartCurrency,
+  TRemoveChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
@@ -90,9 +92,9 @@ interface OwnProps {
   setPeriod: HandlePeriodChangeType;
   profitChart: ProfitChartDataType;
   selectedCurrencies: TChartCurrency[];
-  addCurrency: () => void;
-  removeCurrency: (name: string) => void;
-  changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
+  addCurrency: TAddChartCurrency;
+  removeCurrency: TRemoveChartCurrency;
+  changeCurrency: TChangeChartCurrency;
   selectCurrencies: TChartCurrency[];
 }
 
