@@ -75,6 +75,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         isAuthenticated={isAuthenticated}
         ProgramControls={descriptionSection.ProgramControls}
       />
+      <div className="details__divider" />
       {showInvestment && (
         <DetailsInvestment
           selector={programEventsTableSelector}
