@@ -58,7 +58,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
     () => {
       dispatch(getProgramHistoryCounts(programId));
     },
-    [dispatch, programId]
+    [programId]
   );
 
   const isManager = role === ROLE.MANAGER;
