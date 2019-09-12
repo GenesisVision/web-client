@@ -2,12 +2,12 @@ import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
 import React, { useEffect, useState } from "react";
-import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
+import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
@@ -45,7 +45,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
       isAuthenticated &&
         dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
     },
-    [description.id, dispatch, isAuthenticated]
+    [description.id, isAuthenticated]
   );
   useEffect(
     () => {
