@@ -13,7 +13,7 @@ import {
   exitFeeShape,
   successFeeShape
 } from "shared/utils/validators/validators";
-import { object } from "yup";
+import { number, object } from "yup";
 
 const _InvestmentFees: React.FC<Props> = ({
   asset,
@@ -125,15 +125,21 @@ const InvestmentFees = compose<React.ComponentType<OwnProps>>(
       [FIELDS.entryFee]: entryFee,
       [FIELDS.successFee]: successFee
     }),
-    validationSchema: ({ programsInfo, t }: Props) =>
-      object().shape({
+    validationSchema: ({ programsInfo, t, asset }: Props) => {
+      const exitFee =
+        asset === ASSET.FUND
+          ? exitFeeShape(t, programsInfo.managerMaxExitFee)
+          : number();
+      const successFee =
+        asset === ASSET.PROGRAM
+          ? successFeeShape(t, programsInfo.managerMaxSuccessFee)
+          : number();
+      return object().shape({
         [FIELDS.entryFee]: entryFeeShape(t, programsInfo.managerMaxEntryFee),
-        [FIELDS.exitFee]: exitFeeShape(t, programsInfo.managerMaxExitFee),
-        [FIELDS.successFee]: successFeeShape(
-          t,
-          programsInfo.managerMaxSuccessFee
-        )
-      }),
+        [FIELDS.exitFee]: exitFee,
+        [FIELDS.successFee]: successFee
+      });
+    },
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
