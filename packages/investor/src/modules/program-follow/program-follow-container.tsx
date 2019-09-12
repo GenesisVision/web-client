@@ -54,18 +54,15 @@ const _ProgramFollowContainer: React.FC<Props> = ({
         .v10RateByFromByToGet(DEFAULT_RATE_CURRENCY, currency)
         .then(setRate);
     },
-    [currency, id, setIsNotPending, setIsPending]
+    [currency, id]
   );
-  useEffect(
-    () => {
-      setType(
-        signalSubscription.hasActiveSubscription
-          ? FOLLOW_TYPE.EDIT
-          : FOLLOW_TYPE.CREATE
-      );
-    },
-    [signalSubscription]
-  );
+  useEffect(() => {
+    setType(
+      signalSubscription.hasActiveSubscription
+        ? FOLLOW_TYPE.EDIT
+        : FOLLOW_TYPE.CREATE
+    );
+  }, []);
   const handleSubmit = useCallback(
     (
       id: string,

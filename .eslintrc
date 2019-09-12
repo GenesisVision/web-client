@@ -8,6 +8,7 @@
     "import/first": "error",
     "import/newline-after-import": "error",
     "import/no-duplicates": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }
