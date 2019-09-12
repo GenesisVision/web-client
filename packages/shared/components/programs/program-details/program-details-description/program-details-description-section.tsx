@@ -20,33 +20,31 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
   const personalDetails = programDescription.personalProgramDetails;
   const isOwnProgram = personalDetails && personalDetails.isOwnProgram;
   return (
-    <div className="details__section">
-      <div className="program-details-description">
-        <ProgramDetailsDescriptionMain
-          programDescription={programDescription}
-          isOwnProgram={isOwnProgram}
-          ChangePasswordTradingAccount={ChangePasswordTradingAccount}
-        />
-        <PerformanceData
-          condition={!!levelsParameters}
-          levelsParameters={levelsParameters!}
-          programDescription={programDescription}
-        />
-        <ProgramControls
-          condition={!!levelsParameters}
-          loader={<ProgramControlsLoader />}
-          levelsParameters={levelsParameters!}
-          programDescription={programDescription}
-          canCloseProgram={personalDetails && personalDetails.canCloseProgram}
-          canMakeSignalProvider={
-            personalDetails && personalDetails.canMakeSignalProvider
-          }
-          isOwnProgram={isOwnProgram}
-          canInvest={personalDetails && personalDetails.canInvest}
-          canWithdraw={personalDetails && personalDetails.canWithdraw}
-          isAuthenticated={isAuthenticated}
-        />
-      </div>
+    <div className="details__section program-details-description">
+      <ProgramDetailsDescriptionMain
+        programDescription={programDescription}
+        isOwnProgram={isOwnProgram}
+        ChangePasswordTradingAccount={ChangePasswordTradingAccount}
+      />
+      <PerformanceData
+        condition={!!levelsParameters}
+        levelsParameters={levelsParameters!}
+        programDescription={programDescription}
+      />
+      <ProgramControls
+        condition={!!levelsParameters}
+        loader={<ProgramControlsLoader />}
+        levelsParameters={levelsParameters!}
+        programDescription={programDescription}
+        canCloseProgram={personalDetails && personalDetails.canCloseProgram}
+        canMakeSignalProvider={
+          personalDetails && personalDetails.canMakeSignalProvider
+        }
+        isOwnProgram={isOwnProgram}
+        canInvest={personalDetails && personalDetails.canInvest}
+        canWithdraw={personalDetails && personalDetails.canWithdraw}
+        isAuthenticated={isAuthenticated}
+      />
     </div>
   );
 };
