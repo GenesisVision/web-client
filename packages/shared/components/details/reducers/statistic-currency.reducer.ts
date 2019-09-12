@@ -1,6 +1,5 @@
 import { ACCOUNT_CURRENCY_KEY } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
-import { loadData } from "shared/utils/localstorage";
 import { ActionType, CurrencyEnum } from "shared/utils/types";
 
 export type StatisticCurrencyDataType = CurrencyEnum;
