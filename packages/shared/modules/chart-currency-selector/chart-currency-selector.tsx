@@ -2,12 +2,13 @@ import "./chart-currency-selector.scss";
 
 import * as React from "react";
 import { ISelectChangeEvent } from "shared/components/select/select";
-import TileFilterButton from "shared/components/table/components/filtering/tile-filter-button";
 import TileFilterItem from "shared/components/table/components/filtering/tile-filter-item";
 import TagBubble from "shared/components/tags/tag-item/tag-bubble";
 import TagCircle from "shared/components/tags/tag-item/tag-circle";
 import CurrencySelect from "shared/modules/currency-select/components/currency-select";
 import { CurrencyEnum } from "shared/utils/types";
+
+import AddCurrencyButton from "./add-currency-button";
 
 const _ChartCurrencySelector: React.FC<Props> = ({
   fullSelectCurrencies,
@@ -53,7 +54,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
         </TileFilterItem>
       ))}
       {chartCurrencies.length < maxCharts && (
-        <TileFilterButton onClick={onAdd} title={"Add"} />
+        <AddCurrencyButton onAdd={onAdd} currencies={selectCurrencies} />
       )}
     </div>
   );

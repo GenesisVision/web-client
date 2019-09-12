@@ -28,7 +28,7 @@ const TileFilterButton = React.memo(_TileFilterButton);
 export default TileFilterButton;
 
 export interface ITagFilterButton {
-  title: string;
+  title: string | React.ComponentType<any> | JSX.Element;
   isActive?: boolean;
-  onClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }

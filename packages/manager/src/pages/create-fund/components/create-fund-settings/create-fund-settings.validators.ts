@@ -6,7 +6,9 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import {
   assetDescriptionShape,
-  assetTitleShape
+  assetTitleShape,
+  entryFeeShape,
+  exitFeeShape
 } from "shared/utils/validators/validators";
 import { array, number, object } from "yup";
 
@@ -44,24 +46,8 @@ const createFundSettingsValidationSchema = (
     [CREATE_FUND_FIELDS.title]: assetTitleShape(t),
     [CREATE_FUND_FIELDS.description]: assetDescriptionShape(t),
 
-    [CREATE_FUND_FIELDS.entryFee]: number()
-      .required(
-        t("manager.create-fund-page.settings.validation.entry-fee-required")
-      )
-      .min(0, "Entry fee must be greater than 0 % ")
-      .max(
-        props.managerMaxEntryFee,
-        "Entry fee must be less than  " + props.managerMaxEntryFee + " %"
-      ),
-    [CREATE_FUND_FIELDS.exitFee]: number()
-      .required(
-        t("manager.create-fund-page.settings.validation.exit-fee-required")
-      )
-      .min(0, "Exit fee must be greater than 0 % ")
-      .max(
-        props.managerMaxExitFee,
-        "Exit fee must be less than  " + props.managerMaxExitFee + " %"
-      ),
+    [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, props.managerMaxEntryFee),
+    [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, props.managerMaxExitFee),
     [CREATE_FUND_FIELDS.assets]: assetsShape(t)
   });
 };
