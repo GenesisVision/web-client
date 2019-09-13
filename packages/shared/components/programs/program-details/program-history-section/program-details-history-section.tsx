@@ -145,7 +145,6 @@ interface Props {
   showTickets: boolean;
   programId: string;
   programCurrency: CurrencyEnum;
-  isInvested: boolean;
   isOwnProgram: boolean;
   title: string;
 }
