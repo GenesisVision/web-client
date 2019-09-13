@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
@@ -26,6 +26,7 @@ const _ProgramWithdrawAmountForm: React.FC<
   values,
   isValid
 }) => {
+  const [emptyInit, setEmptyInit] = useState<boolean>(true);
   const role = useRole();
   const isAllow = useCallback(
     (values: NumberFormatValues) => {
@@ -39,11 +40,13 @@ const _ProgramWithdrawAmountForm: React.FC<
   );
 
   const setMaxAmount = useCallback(
-    () =>
+    () => {
       setFieldValue(
         FIELDS.amount,
         formatCurrencyValue(availableToWithdraw, programCurrency)
-      ),
+      );
+      setEmptyInit(false);
+    },
     [availableToWithdraw, programCurrency, setFieldValue]
   );
 
@@ -59,7 +62,7 @@ const _ProgramWithdrawAmountForm: React.FC<
         />
       )}
       <InputAmountField
-        emptyInit
+        emptyInit={emptyInit}
         name={FIELDS.amount}
         label={t("withdraw-program.amount-to-withdraw")}
         currency={programCurrency}
@@ -134,7 +137,9 @@ enum FIELDS {
 
 interface OwnProps {
   formValues: IProgramWithdrawAmountFormValues;
+
   onSubmit(values: IProgramWithdrawAmountFormValues): void;
+
   availableToWithdraw: number;
   programCurrency: string;
   accountCurrency: string;

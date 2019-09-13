@@ -11,6 +11,7 @@ import {
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import {
   FUNDS_FACET_ROUTE,
   FUNDS_FAVORITES_TAB_NAME,
@@ -24,22 +25,16 @@ import * as fundsTableActions from "../actions/funds-table.actions";
 import {
   DEFAULT_ITEMS_ON_PAGE,
   FUNDS_TABLE_FILTERS,
-  SORTING_FILTER_VALUE,
-  sortableColumns
+  sortableColumns,
+  SORTING_FILTER_VALUE
 } from "../components/funds-table/funds-table.constants";
 
-export type GetFundsType = (
-  filters: ComposeFiltersAllType
-) => (dispatch: MiddlewareDispatch) => void;
-export const getFunds: GetFundsType = filters => dispatch => {
+export type GetFundsType = () => (dispatch: MiddlewareDispatch) => void;
+export const getFunds: GetFundsType = () => dispatch => {
   let requestFilters = dispatch(composeRequestFilters());
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
-  requestFilters = {
-    ...requestFilters,
-    ...filters
-  };
   dispatch(fundsTableActions.fetchFundsAction(requestFilters));
 };
 
@@ -136,6 +131,10 @@ export const getFundsFilters: GetFundsFiltersType = () => (
     }
     return accum;
   }, {});
+
+  if (!filtering.currency) {
+    filtering.currency = currencySelector(getState());
+  }
 
   return {
     paging: { currentPage, totalPages, itemsOnPage: DEFAULT_ITEMS_ON_PAGE },

@@ -25,7 +25,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
     () => {
       dispatch(getDashboardHistoryDetailsCounts(id));
     },
-    [dispatch, id]
+    [id]
   );
 
   return (

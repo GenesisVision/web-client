@@ -27,7 +27,7 @@ const _CurrencySelect: React.FC<Props> = ({
 );
 
 interface Props {
-  value: CurrencyEnum;
+  value: CurrencyEnum | string;
   onChange: (event: ISelectChangeEvent, child: JSX.Element) => void;
   currencyValues: CurrencyEnum[];
   className?: string;

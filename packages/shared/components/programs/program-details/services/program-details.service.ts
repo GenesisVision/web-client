@@ -8,10 +8,8 @@ import {
 } from "gv-api-web";
 import { NextPageContext } from "next";
 import { Dispatch } from "redux";
-import {
-  ChartDefaultPeriod,
-  getDefaultPeriod
-} from "shared/components/chart/chart-period/chart-period.helpers";
+import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "shared/components/table/components/table.types";
 import {
@@ -21,22 +19,20 @@ import {
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { RootState } from "shared/reducers/root-reducer";
 import brokersApi from "shared/services/api-client/brokers-api";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import getParams from "shared/utils/get-params";
 import {
   ActionType,
   CurrencyEnum,
-  DispatchDescriptionType,
   MiddlewareDispatch,
   TGetState
 } from "shared/utils/types";
 
-import { RootState } from "../../../../reducers/root-reducer";
 import {
   fetchEventsAction,
   fetchFinancialStatisticAction,
@@ -287,15 +283,17 @@ export const fetchPortfolioEvents = (
   );
 };
 
-export const getProfitChart = ({ id, period }: TGetChartArgs) => async (
-  dispatch: Dispatch
-) => await dispatch(fetchProgramProfitChartAction(id, period));
+export const getProfitChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => async dispatch =>
+  await dispatch(fetchProgramProfitChartAction(id, period, currencies));
 
-export const getBalanceChart = ({ id, period }: TGetChartArgs) => async (
-  dispatch: Dispatch
-) => await dispatch(fetchProgramBalanceChartAction(id, period));
-
-type TGetChartArgs = {
-  id: string;
-  period?: ChartDefaultPeriod;
+export const getBalanceChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => async dispatch => {
+  await dispatch(fetchProgramBalanceChartAction(id, period, currencies[0]));
 };

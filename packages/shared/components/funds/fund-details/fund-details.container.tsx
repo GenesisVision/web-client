@@ -2,12 +2,12 @@ import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
 import React, { useEffect, useState } from "react";
-import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
+import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
@@ -45,7 +45,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
       isAuthenticated &&
         dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
     },
-    [description.id, dispatch, isAuthenticated]
+    [description.id, isAuthenticated]
   );
   useEffect(
     () => {
@@ -60,41 +60,28 @@ const _FundDetailsContainer: React.FC<Props> = ({
 
   return (
     <Page title={description.title}>
-      <div className="details">
-        <div className="details__section">
-          <FundDetailsDescriptionSection
-            fundDescription={description}
-            isAuthenticated={isAuthenticated}
-            FundControls={descriptionSection.FundControls}
-          />
-        </div>
-        {showInvestment && (
-          <div className="details__section">
-            <div>
-              <DetailsInvestment
-                selector={fundEventsTableSelector}
-                haveEvents={haveEvents}
-                haveInvestment={haveInvestment}
-                eventTypeFilterValues={eventTypeFilterValues}
-                updateDescription={dispatchFundDescription}
-                asset={ASSET.FUND}
-                id={description.id}
-                assetCurrency={"GVT" as CurrencyEnum}
-                personalDetails={
-                  description.personalFundDetails as InvestmentDetails
-                }
-                WithdrawContainer={descriptionSection.FundWithdrawalContainer}
-              />
-            </div>
-          </div>
-        )}
-        <div className="details__section">
-          <FundDetailsStatisticSection />
-        </div>
-        <div className="details__history">
-          <FundDetailsHistorySection id={description.id} />
-        </div>
-      </div>
+      <FundDetailsDescriptionSection
+        fundDescription={description}
+        isAuthenticated={isAuthenticated}
+        FundControls={descriptionSection.FundControls}
+      />
+      <div className="details__divider" />
+      {showInvestment && (
+        <DetailsInvestment
+          selector={fundEventsTableSelector}
+          haveEvents={haveEvents}
+          haveInvestment={haveInvestment}
+          eventTypeFilterValues={eventTypeFilterValues}
+          updateDescription={dispatchFundDescription}
+          asset={ASSET.FUND}
+          id={description.id}
+          assetCurrency={"GVT" as CurrencyEnum}
+          personalDetails={description.personalFundDetails as InvestmentDetails}
+          WithdrawContainer={descriptionSection.FundWithdrawalContainer}
+        />
+      )}
+      <FundDetailsStatisticSection />
+      <FundDetailsHistorySection id={description.id} />
     </Page>
   );
 };

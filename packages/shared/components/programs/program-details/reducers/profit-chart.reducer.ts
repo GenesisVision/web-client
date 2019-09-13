@@ -7,7 +7,7 @@ import { apiSelector } from "shared/utils/selectors";
 
 import { FETCH_PROGRAM_PROFIT_CHART } from "../actions/program-details.actions";
 
-export type ProgramProfitChartDataType = ProgramProfitChart;
+export type ProgramProfitChartDataType = Array<ProgramProfitChart>;
 
 export type ProgramProfitChartState = IApiState<ProgramProfitChartDataType>;
 

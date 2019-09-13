@@ -38,9 +38,8 @@ const _DashboardPortfolioChartContainer: React.FC<Props> = ({
       <div className="dashboard-portfolio-chart-section__chart">
         {assetChart.type === ASSETS_TYPES.Program && (
           <ProgramProfitChart
-            equityChart={assetChart.equityChart}
-            pnlChart={assetChart.pnLChart!}
-            currency={assetChart.currency}
+            profitChart={[assetChart]}
+            chartCurrencies={[{ name: assetChart.currency!, color: "#fff" }]}
           />
         )}
         {assetChart.type === ASSETS_TYPES.Fund && (

@@ -29,7 +29,7 @@ const _SignalProviderControls: React.FC<Props> = ({
   return (
     <>
       <SignalProgramInfo programDescription={programDescription} />
-      <div className="asset-details-description__statistic-container program-details-description__statistic-container--btn">
+      <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         {programDescription.personalProgramDetails &&
         programDescription.personalProgramDetails.signalSubscription
           .hasActiveSubscription ? (

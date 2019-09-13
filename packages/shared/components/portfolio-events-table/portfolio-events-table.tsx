@@ -4,11 +4,9 @@ import "./portfolio-events.scss";
 import { InvestmentEventViewModel } from "gv-api-web";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { EVENT_LOCATION } from "shared/components/programs/program-details/services/program-details.service";
-import {
-  ASSET_TYPE_FILTER_NAME,
-  ASSET_TYPE_FILTER_VALUES
-} from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { ASSET_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
@@ -23,6 +21,7 @@ import {
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { ASSET, ROLE } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
+import { assetTypeValuesSelector } from "shared/reducers/platform-reducer";
 
 import PortfolioEventsTableRow from "./portfolio-events-table-row";
 import {
@@ -40,6 +39,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
   eventTypeFilterValues,
   asset
 }) => {
+  const assetTypeValues = useSelector(assetTypeValuesSelector);
   const [t] = useTranslation();
   const role = useRole();
   const hideFeeColumn = useMemo(
@@ -77,7 +77,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
                 name={ASSET_TYPE_FILTER_NAME}
                 label="Assets type"
                 value={filtering[ASSET_TYPE_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
-                values={ASSET_TYPE_FILTER_VALUES}
+                values={assetTypeValues}
                 onChange={updateFilter}
               />
             )}

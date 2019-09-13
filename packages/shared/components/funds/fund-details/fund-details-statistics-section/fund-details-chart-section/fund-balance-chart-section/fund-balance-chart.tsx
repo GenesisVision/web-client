@@ -19,7 +19,6 @@ const FundBalanceChart: React.FC<Props> = ({
   balanceChart,
   currency
 }) => {
-  if (balanceChart.length === 0) return null;
   const chart = balanceChart.map(x => ({
     ...x,
     date: new Date(x.date).getTime()

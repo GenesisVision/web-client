@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useCallback } from "react";
-import { compose } from "redux";
 import GVProgramAvatar, {
   GVProgramAvatarProps
 } from "shared/components/gv-program-avatar";
@@ -9,7 +8,6 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import withUrl from "shared/decorators/with-url";
 import useAnchor from "shared/hooks/anchor.hook";
 
 const _AssetAvatar: React.FC<Props> = props => {
@@ -17,9 +15,12 @@ const _AssetAvatar: React.FC<Props> = props => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent) => !click && setAnchor(event),
-    [click]
+    [click, setAnchor]
   );
-  const handleMouseLeave = useCallback(() => !click && clearAnchor(), [click]);
+  const handleMouseLeave = useCallback(() => !click && clearAnchor(), [
+    clearAnchor,
+    click
+  ]);
   return (
     <>
       <GVProgramAvatar
@@ -53,8 +54,5 @@ interface Props extends GVProgramAvatarProps {
   alt: string;
 }
 
-const AssetAvatar = compose<React.ComponentType<Props>>(
-  withUrl<Props>("url"),
-  React.memo
-)(_AssetAvatar);
+const AssetAvatar = React.memo(_AssetAvatar);
 export default AssetAvatar;

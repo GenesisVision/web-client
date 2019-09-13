@@ -1,4 +1,4 @@
-import { ChartSimple } from "gv-api-web";
+import { ProgramProfitChart as ProgramProfitChartType } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -17,33 +17,35 @@ import {
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
 import GVColors from "shared/components/gv-styles/gv-colors";
+import { IDashboardAssetChart } from "shared/constants/constants";
+import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { formatValue } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
 
 import ProgramProfitTooltip from "./program-profit-tooltip";
 
 const _ProgramProfitChart: React.FC<Props> = ({
-  equityChart,
-  pnlChart,
-  currency
+  profitChart,
+  chartCurrencies
 }) => {
-  if (equityChart.length === 0 || pnlChart.length === 0 || !currency)
+  const equityCharts = profitChart.map(({ equityChart }) => equityChart);
+  const pnLCharts = profitChart.map(({ pnLChart }) => pnLChart);
+  if (equityCharts.length === 0 || pnLCharts.length === 0 || !chartCurrencies)
     return null;
-  const equity = equityChart.map(x => ({
+  const firstEquity = equityCharts[0].map(x => ({
     date: new Date(x.date).getTime(),
     value: formartChartMinValue(x.value)
   }));
-  const pnl = pnlChart.map((x: any) => ({
+  const firstPnl = pnLCharts[0]!.map((x: any) => ({
     date: new Date(x.date).getTime(),
     value: formartChartMinValue(x.value)
   }));
-  const equityValues = equity.map(x => x.value);
-  const off = gradientOffset(equityValues);
-  const areaStrokeColor = getStrokeColor(equityValues);
+  const firstEquityValues = firstEquity.map(x => x.value);
+  const off = gradientOffset(firstEquityValues);
+  const areaStrokeColor = getStrokeColor(firstEquityValues);
 
   return (
     <ResponsiveContainer>
-      <ComposedChart data={pnl} margin={{ top: 20 }}>
+      <ComposedChart data={firstPnl} margin={{ top: 20 }}>
         <defs>
           <ChartGradient
             offset={off}
@@ -54,15 +56,15 @@ const _ProgramProfitChart: React.FC<Props> = ({
           />
         </defs>
         {chartXAxis(
-          equityChart[0].date,
-          equityChart[equityChart.length - 1].date
+          new Date(firstEquity[0].date),
+          new Date(firstEquity[firstEquity.length - 1].date)
         )}
         {/*
         //@ts-ignore*/}
         <YAxis
           yAxisId="left"
           dataKey="value"
-          data={equity}
+          data={firstEquity}
           orientation="left"
           axisLine={false}
           tick={{
@@ -78,11 +80,11 @@ const _ProgramProfitChart: React.FC<Props> = ({
         <YAxis
           yAxisId="right"
           dataKey="value"
-          data={pnl}
+          data={firstPnl}
           orientation="right"
           axisLine={false}
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-          unit={currency}
+          unit={chartCurrencies[0].name}
           tickFormatter={x => formatValue(x, 5)}
           width={80}
         />
@@ -91,38 +93,43 @@ const _ProgramProfitChart: React.FC<Props> = ({
         <Bar
           dataKey="value"
           //@ts-ignore
-          data={pnl}
-          unit={` ${currency}`}
+          data={firstPnl}
+          unit={` ${chartCurrencies[0].name}`}
           barSize={6}
           fill={GVColors.$labelColor}
           stroke={GVColors.$labelColor}
           yAxisId="right"
           isAnimationActive={false}
         />
-        {/*
-        //@ts-ignore*/}
-        <Area
-          dataKey="value"
-          type="monotone"
-          data={equity}
-          connectNulls={true}
-          stroke={areaStrokeColor}
-          fill={`url(#equityProgramChartFill)`}
-          strokeWidth={3}
-          dot={false}
-          yAxisId="left"
-          unit="%"
-          isAnimationActive={false}
-        />
+        {equityCharts.map((equity, i) => (
+          //@ts-ignore
+          <Area
+            key={i}
+            dataKey="value"
+            type="monotone"
+            data={equity}
+            connectNulls={true}
+            stroke={
+              chartCurrencies && chartCurrencies[i]
+                ? chartCurrencies[i].color
+                : areaStrokeColor
+            }
+            fill={`url(#equityProgramChartFill)`}
+            strokeWidth={3}
+            dot={false}
+            yAxisId="left"
+            unit="%"
+            isAnimationActive={false}
+          />
+        ))}
       </ComposedChart>
     </ResponsiveContainer>
   );
 };
 
 interface Props {
-  equityChart: ChartSimple[];
-  pnlChart: ChartSimple[];
-  currency?: CurrencyEnum;
+  profitChart: Array<ProgramProfitChartType | IDashboardAssetChart>;
+  chartCurrencies?: TChartCurrency[];
 }
 
 const ProgramProfitChart = React.memo(_ProgramProfitChart);

@@ -1,28 +1,25 @@
 import * as React from "react";
 import DocumentTitle from "react-document-title";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 import BackButton from "shared/components/back-button/back-button";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import useRole from "shared/hooks/use-role.hook";
 
-const _Page: React.FC<Props> = ({ t, title, children, role }) => (
-  <DocumentTitle title={t(`${role}.app.title`) + title}>
-    <>
-      <BackButton />
-      {children}
-    </>
-  </DocumentTitle>
-);
+const _Page: React.FC<Props> = ({ title, children }) => {
+  const [t] = useTranslation();
+  const role = useRole();
+  return (
+    <DocumentTitle title={t(`${role}.app.title`) + title}>
+      <>
+        <BackButton />
+        {children}
+      </>
+    </DocumentTitle>
+  );
+};
 
-interface Props extends WithTranslation, OwnProps, WithRoleProps {}
-
-interface OwnProps {
+interface Props {
   title: string;
 }
 
-const Page = compose<React.ComponentType<OwnProps>>(
-  withRole,
-  translate(),
-  React.memo
-)(_Page);
+const Page = React.memo(_Page);
 export default Page;

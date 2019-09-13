@@ -1,23 +1,31 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
-import { ISelectChangeEvent } from "shared/components/select/select";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import ChartCurrencySelector, {
-  TChartCurrency
+  TAddChartCurrency,
+  TChangeChartCurrency,
+  TChartCurrency,
+  TRemoveChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
-import { FundProfitChartDataType } from "../../../reducers/profit-chart.reducer";
-import { useChartData, useChartPeriod } from "../fund-details-chart.helpers";
-import FundProfitChart from "./fund-profit-chart";
+import {
+  ProfitChartDataType,
+  ProfitChartType,
+  useChartData
+} from "../../details.chart.helpers";
 
-const _FundProfitChartElements: React.FC<Props> = ({
+const _ProfitChartElements: React.FC<Props> = ({
+  renderProfitChart,
+  renderProfitValue,
+  period,
+  setPeriod,
   profitChart,
   selectedCurrencies,
   addCurrency,
@@ -26,8 +34,7 @@ const _FundProfitChartElements: React.FC<Props> = ({
   selectCurrencies
 }) => {
   const [t] = useTranslation();
-  const { period, setPeriod } = useChartPeriod();
-  const chartData = useChartData<FundProfitChartDataType>(
+  const chartData = useChartData<ProfitChartDataType>(
     profitChart,
     selectedCurrencies
   );
@@ -36,13 +43,8 @@ const _FundProfitChartElements: React.FC<Props> = ({
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem label={t("fund-details-page.chart.value")} big accent>
-          <NumberFormat
-            value={chart.profitPercent}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={" %"}
-          />
+        <StatisticItem label={t("details-page.chart.value")} big accent>
+          {renderProfitValue({ chart })}
         </StatisticItem>
       </div>
       <ChartPeriod onChange={setPeriod} period={period} />
@@ -60,30 +62,48 @@ const _FundProfitChartElements: React.FC<Props> = ({
         onChange={changeCurrency}
       />
       <div className="details-chart__profit">
-        <FundProfitChart
-          profitChart={chartData.chart}
-          chartCurrencies={chartData.selectedCurrencies}
-        />
+        {chartData.chart.length &&
+          renderProfitChart({
+            profitChart: chartData.chart,
+            chartCurrencies: chartData.selectedCurrencies
+          })}
       </div>
     </>
   );
 };
 
+export type TRenderProfitValue = (
+  props: {
+    chart: ProfitChartType;
+  }
+) => JSX.Element;
+
+export type TRenderProfitChart = (
+  props: {
+    profitChart: ProfitChartDataType;
+    chartCurrencies?: TChartCurrency[];
+  }
+) => JSX.Element;
+
 interface OwnProps {
-  profitChart: FundProfitChartDataType;
+  renderProfitChart: TRenderProfitChart;
+  renderProfitValue: TRenderProfitValue;
+  period: ChartDefaultPeriod;
+  setPeriod: HandlePeriodChangeType;
+  profitChart: ProfitChartDataType;
   selectedCurrencies: TChartCurrency[];
-  addCurrency: () => void;
-  removeCurrency: (name: string) => void;
-  changeCurrency: (i: number) => (event: ISelectChangeEvent) => void;
+  addCurrency: TAddChartCurrency;
+  removeCurrency: TRemoveChartCurrency;
+  changeCurrency: TChangeChartCurrency;
   selectCurrencies: TChartCurrency[];
 }
 
 interface Props extends OwnProps {}
 
-const FundProfitChartElements = compose<
+const ProfitChartElements = compose<
   React.ComponentType<OwnProps & WithLoaderProps>
 >(
   withLoader,
   React.memo
-)(_FundProfitChartElements);
-export default FundProfitChartElements;
+)(_ProfitChartElements);
+export default ProfitChartElements;

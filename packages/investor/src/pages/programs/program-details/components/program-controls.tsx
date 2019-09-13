@@ -11,14 +11,14 @@ const _ProgramControls: React.FC<IProgramControlsProps> = ({
   const isAvailableFollowingTrades = programDescription.isSignalProgram;
   return (
     <div className="asset-details-description__controls">
-      <div className="asset-details-description__col">
+      <div className="asset-details-description__col  details__block">
         <InvestmentProgramControls
           programDescription={programDescription}
           isAuthenticated={isAuthenticated}
         />
       </div>
       {isAvailableFollowingTrades ? (
-        <div className="asset-details-description__col program-details-description__col--small-size">
+        <div className="asset-details-description__col asset-details-description__col--small-size  details__block">
           <SignalProviderControls
             programDescription={programDescription}
             isAuthenticated={isAuthenticated}

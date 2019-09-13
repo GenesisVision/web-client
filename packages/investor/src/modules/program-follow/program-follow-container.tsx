@@ -54,7 +54,7 @@ const _ProgramFollowContainer: React.FC<Props> = ({
         .v10RateByFromByToGet(DEFAULT_RATE_CURRENCY, currency)
         .then(setRate);
     },
-    [currency, id, setIsNotPending, setIsPending]
+    [currency, id]
   );
   useEffect(
     () => {
