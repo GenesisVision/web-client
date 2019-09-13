@@ -18,7 +18,7 @@ const _ProgramControls: React.FC<IProgramControlsProps> = ({
         />
       </div>
       {isAvailableFollowingTrades ? (
-        <div className="asset-details-description__col program-details-description__col--small-size  details__block">
+        <div className="asset-details-description__col asset-details-description__col--small-size  details__block">
           <SignalProviderControls
             programDescription={programDescription}
             isAuthenticated={isAuthenticated}
