@@ -1,4 +1,4 @@
-import "./program-details-description.scss";
+import "shared/components/details/details-description-section/details-description/details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
