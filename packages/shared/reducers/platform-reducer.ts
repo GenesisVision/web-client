@@ -14,6 +14,8 @@ import {
 } from "shared/utils/selectors";
 import { AuthRootState } from "shared/utils/types";
 
+import { RootState } from "./root-reducer";
+
 export type PlatformState = IApiState<PlatformInfo>;
 
 export const platformDataSelector = apiSelector<PlatformInfo>(
@@ -88,7 +90,7 @@ export const allEventsSelector = createSelector<
 
 export const assetEventsSelectorCreator = (asset: ASSET) =>
   createSelector<
-    AuthRootState,
+    RootState,
     PlatformInfo | undefined,
     SelectFilterValue<string>[]
   >(
