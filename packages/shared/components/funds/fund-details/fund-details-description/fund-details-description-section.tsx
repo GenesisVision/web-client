@@ -18,7 +18,7 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="details__section program-details-description">
+    <div className="details__section asset-details-description">
       <FundDetailsDescription
         description={fundDescription}
         AssetDetailsAvatar={() => (

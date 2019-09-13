@@ -17,10 +17,10 @@ const _PerformanceData: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="program-details-description__perfomance-data">
+    <div className="asset-details-description__performance-data">
       <StatisticItem label={t("program-details-page.description.broker")}>
         <img
-          className={"program-details-description__broker"}
+          className={"asset-details-description__broker"}
           src={filesService.getFileUrl(programDescription.brokerDetails.logo)}
         />
       </StatisticItem>

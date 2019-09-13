@@ -20,16 +20,16 @@ const _DetailsContainerLoader: React.FC<
   <Page title={""}>
     <div className="details">
       <div className="details__section">
-        <div className="program-details-description">
-          <div className="program-details-description__main">
-            <div className="program-details-description__avatar">
+        <div className="asset-details-description">
+          <div className="asset-details-description__main">
+            <div className="asset-details-description__avatar">
               <div style={{ width: 120 }}>
                 <SvgLoader height={120} width={120}>
                   <rect x="0" y="0" rx="8" ry="8" width="120" height="120" />
                 </SvgLoader>
               </div>
             </div>
-            <div className="program-details-description__info">
+            <div className="asset-details-description__info">
               <h1 className="title-small-padding">
                 <div style={{ width: 100 }}>
                   <SvgLoader height={32} width={100}>
@@ -39,7 +39,7 @@ const _DetailsContainerLoader: React.FC<
               </h1>
               <GVButton
                 variant="text"
-                className="program-details-description__author-btn"
+                className="asset-details-description__author-btn"
               >
                 <div style={{ width: 150 }}>
                   <SvgLoader height={13} width={150}>
@@ -76,11 +76,11 @@ const _DetailsContainerLoader: React.FC<
                   </div>
                 </div>
               )}
-              <h4 className="program-details-description__subheading">
+              <h4 className="asset-details-description__subheading">
                 {t("fund-details-page.description.strategy")}
               </h4>
               <div
-                className="program-details-description__text"
+                className="asset-details-description__text"
                 style={{ width: 250 }}
               >
                 <SvgLoader height={65} width={250}>
@@ -98,7 +98,7 @@ const _DetailsContainerLoader: React.FC<
                 </SvgLoader>
               </div>
             </div>
-            <div className="program-details-description__settings">
+            <div className="asset-details-description__settings">
               <DetailsFavorite id={""} isFavorite={false} />
               <DetailsNotification
                 title={""}
@@ -132,16 +132,16 @@ const _DetailsContainerLoader: React.FC<
 );
 
 export const ProgramControlsLoader = () => (
-  <div className="program-details-description__controls">
-    <div className="program-details-description__col">
-      <div className="program-details-description__statistic-container">
-        <StatisticItemLoader className="program-details-description__short-statistic-item" />
-        <StatisticItemLoader className="program-details-description__short-statistic-item" />
-        <StatisticItemLoader className="program-details-description__short-statistic-item" />
-        <StatisticItemLoader className="program-details-description__short-statistic-item" />
+  <div className="asset-details-description__controls">
+    <div className="asset-details-description__col">
+      <div className="asset-details-description__statistic-container">
+        <StatisticItemLoader className="asset-details-description__short-statistic-item" />
+        <StatisticItemLoader className="asset-details-description__short-statistic-item" />
+        <StatisticItemLoader className="asset-details-description__short-statistic-item" />
+        <StatisticItemLoader className="asset-details-description__short-statistic-item" />
       </div>
-      <div className="program-details-description__button-container">
-        <GVButton className="program-details-description__invest-btn">
+      <div className="asset-details-description__button-container">
+        <GVButton className="asset-details-description__invest-btn">
           ...
         </GVButton>
       </div>

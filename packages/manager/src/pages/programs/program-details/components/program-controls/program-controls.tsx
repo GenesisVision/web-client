@@ -1,6 +1,6 @@
 import * as React from "react";
 import { compose } from "redux";
-import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
+import SignalProgramInfo from "shared/components/programs/program-details/asset-details-description/signal-program-info";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
@@ -18,8 +18,8 @@ const _ProgramControls: React.FC<Props> = ({
     personalProgramDetails && personalProgramDetails.isOwnProgram;
 
   return (
-    <div className="program-details-description__controls">
-      <div className="program-details-description__col details__block">
+    <div className="asset-details-description__controls">
+      <div className="asset-details-description__col details__block">
         <InvestmentProgramControls
           programDescription={programDescription}
           canCloseProgram={canCloseProgram}
@@ -29,7 +29,7 @@ const _ProgramControls: React.FC<Props> = ({
         />
       </div>
       {isOwnProgram && programDescription.isSignalProgram && (
-        <div className="program-details-description__col program-details-description__col--small-size  details__block">
+        <div className="asset-details-description__col asset-details-description__col--small-size  details__block">
           <SignalProgramInfo programDescription={programDescription} />
         </div>
       )}

@@ -43,10 +43,10 @@ class _SignalProviderControls extends React.PureComponent<Props, State> {
         {programDescription.isSignalProgram ? (
           <>
             <SignalProgramInfo programDescription={programDescription} />
-            <div className="program-details-description__button-container">
+            <div className="asset-details-description__button-container">
               <GVButton
                 onClick={this.openPopup(SIGNAL_POPUP.EDIT)}
-                className="program-details-description__invest-btn signal-provider__btn"
+                className="asset-details-description__invest-btn signal-provider__btn"
               >
                 {t(
                   "program-details-page.description.edit-signal-provider.title"
@@ -62,10 +62,10 @@ class _SignalProviderControls extends React.PureComponent<Props, State> {
             <div className="signal-provider__disclaimer">
               {t("program-details-page.description.signal-provider.disclaimer")}
             </div>
-            <div className="program-details-description__button-container">
+            <div className="asset-details-description__button-container">
               <GVButton
                 onClick={this.openPopup(SIGNAL_POPUP.MAKE)}
-                className="program-details-description__invest-btn signal-provider__btn"
+                className="asset-details-description__invest-btn signal-provider__btn"
               >
                 {t("program-details-page.description.signal-provider.title")}
               </GVButton>
