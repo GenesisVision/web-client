@@ -24,8 +24,8 @@ export const normalizeUrlString = (url: string): string => {
   const role = process.env.REACT_APP_BASENAME;
   const env = process.env.NODE_ENV;
 
-  if (env !== "production") {
-    return url;
-  }
+  // if (env !== "production") {
+  //   return url;
+  // }
   return `/${role}${url}`;
 };

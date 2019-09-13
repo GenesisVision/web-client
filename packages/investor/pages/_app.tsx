@@ -7,8 +7,7 @@ import { compose, Store } from "redux";
 import withHistoryProvider from "shared/decorators/history-provider/with-history-provider";
 import withReduxStore from "shared/decorators/with-redux-store";
 import { appWithTranslation } from "shared/i18n";
-
-import { initializeStore } from "../src/store";
+import { initializeStore } from "store";
 
 class CustomApp extends App<Props> {
   render() {

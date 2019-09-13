@@ -1,3 +1,4 @@
+import ProgramDetailsPage from "pages/programs/program-details/program-details.page";
 import React from "react";
 import { compose } from "redux";
 import {
@@ -6,8 +7,6 @@ import {
 } from "shared/components/programs/program-details/services/program-details.service";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import { NextPageWithRedux } from "shared/utils/types";
-
-import ProgramDetailsPage from "../../src/pages/programs/program-details/program-details.page";
 
 const ProgramDetails: NextPageWithRedux<{}> = () => {
   return <ProgramDetailsPage />;

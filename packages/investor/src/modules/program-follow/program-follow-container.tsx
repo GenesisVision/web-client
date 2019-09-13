@@ -64,7 +64,7 @@ const _ProgramFollowContainer: React.FC<Props> = ({
           : FOLLOW_TYPE.CREATE
       );
     },
-    [signalSubscription]
+    [signalSubscription.hasActiveSubscription]
   );
   const handleSubmit = useCallback(
     (

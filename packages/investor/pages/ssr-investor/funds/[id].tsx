@@ -1,3 +1,4 @@
+import FundDetailsPage from "pages/funds/fund-details/fund-details.page";
 import React from "react";
 import { connect, ResolveThunks } from "react-redux";
 import {
@@ -13,8 +14,6 @@ import {
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
-
-import FundDetailsPage from "../../src/pages/funds/fund-details/fund-details.page";
 
 const FundDetails: NextPageWithRedux<{}, {}> = () => {
   return <FundDetailsPage />;
