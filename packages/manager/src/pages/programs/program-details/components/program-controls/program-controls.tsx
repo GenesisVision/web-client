@@ -1,6 +1,6 @@
 import * as React from "react";
 import { compose } from "redux";
-import SignalProgramInfo from "shared/components/programs/program-details/asset-details-description/signal-program-info";
+import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
