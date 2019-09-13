@@ -6,16 +6,16 @@ module.exports = async (app, port) => {
   const handle = app.getRequestHandler();
   await app.prepare();
 
-  const platform = process.env.REACT_APP_BASENAME;
+  // const platform = process.env.REACT_APP_BASENAME;
 
   const server = express();
-  const manager = express();
+  // const manager = express();
 
-  manager.use(nextI18NextMiddleware(nextI18next));
+  server.use(nextI18NextMiddleware(nextI18next));
 
-  manager.get("*", (req, res) => handle(req, res));
+  server.get("*", (req, res) => handle(req, res));
 
-  server.use("/" + platform, manager);
+  // server.use("/" + platform, manager);
   server.listen(port, err => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);

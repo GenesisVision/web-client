@@ -1,15 +1,15 @@
 import React from "react";
 import { compose } from "redux";
+import platformActions from "shared/actions/platform-actions";
+import FundsFacetPage from "shared/components/funds/funds-facet/funds-facet.page";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import { NextPageWithRedux } from "shared/utils/types";
-import ProgramsFacetPage from "shared/components/programs/programs-facet/programs-facet.page";
-import platformActions from "shared/actions/platform-actions";
 
-const ProgramFacet: NextPageWithRedux<Props, {}> = ({ id }) => {
-  return <ProgramsFacetPage id={id} />;
+const FundFacet: NextPageWithRedux<Props, {}> = ({ id }) => {
+  return <FundsFacetPage id={id} />;
 };
 
-ProgramFacet.getInitialProps = async ctx => {
+FundFacet.getInitialProps = async ctx => {
   const { id } = ctx.query;
   await Promise.all([
     ctx.reduxStore.dispatch(
@@ -19,7 +19,7 @@ ProgramFacet.getInitialProps = async ctx => {
   return { id };
 };
 
-export default compose(withDefaultLayout)(ProgramFacet);
+export default compose(withDefaultLayout)(FundFacet);
 
 interface Props {
   id: string;

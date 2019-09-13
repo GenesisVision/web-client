@@ -1,3 +1,4 @@
+import ProgramDetailsPage from "pages/programs/program-details/program-details.page";
 import React from "react";
 import { compose } from "redux";
 import {
@@ -5,24 +6,19 @@ import {
   dispatchProgramId
 } from "shared/components/programs/program-details/services/program-details.service";
 import withDefaultLayout from "shared/decorators/with-default-layout";
-import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
 
-import ProgramSettingsPage from "../../../src/pages/programs/programs-settings/program-settings.page";
-
-const ProgramSettings: NextPageWithRedux<void> = () => {
-  return <ProgramSettingsPage />;
+const ProgramDetails: NextPageWithRedux<{}> = () => {
+  return <ProgramDetailsPage />;
 };
 
-ProgramSettings.getInitialProps = async ctx => {
+ProgramDetails.getInitialProps = async ctx => {
   const { id } = ctx.query;
   await Promise.all([
     ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
   ]);
+  return {};
 };
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(ProgramSettings);
+export default compose(withDefaultLayout)(ProgramDetails);

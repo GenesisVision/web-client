@@ -1,4 +1,5 @@
-import { Broker } from "gv-api-web";
+import CreateFundPage from "pages/create-fund/create-fund.page";
+import { fetchMinimumDepositAmount } from "pages/create-fund/services/create-fund.service";
 import React from "react";
 import { compose } from "redux";
 import platformActions from "shared/actions/platform-actions";
@@ -7,30 +8,27 @@ import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
 
-import CreateProgramPage from "../../src/pages/create-program/create-program.page";
-import { fetchBrokers } from "../../src/pages/create-program/services/create-program.service";
-
-const CreateProgram: NextPageWithRedux<Props, {}> = ({ brokers }) => {
-  return <CreateProgramPage brokers={brokers} />;
+const CreateFund: NextPageWithRedux<Props, {}> = ({ minimumDepositAmount }) => {
+  return <CreateFundPage minimumDepositAmount={minimumDepositAmount} />;
 };
 
-CreateProgram.getInitialProps = async ctx => {
-  let brokers;
+CreateFund.getInitialProps = async ctx => {
+  let minimumDepositAmount;
   await Promise.all([
     ctx.reduxStore.dispatch(
       async dispatch => await dispatch(platformActions.fetchPlatformSettings())
     ),
     ctx.reduxStore.dispatch(fetchWallets(ctx)),
-    fetchBrokers().then(res => (brokers = res))
+    fetchMinimumDepositAmount(ctx).then(res => (minimumDepositAmount = res))
   ]);
-  return { brokers };
+  return { minimumDepositAmount };
 };
 
 export default compose(
   withDefaultLayout,
   withPrivateRoute
-)(CreateProgram);
+)(CreateFund);
 
 interface Props {
-  brokers: Broker[];
+  minimumDepositAmount: number;
 }

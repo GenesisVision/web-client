@@ -1,3 +1,4 @@
+import FundDetailsPage from "pages/funds/fund-details/fund-details.page";
 import React from "react";
 import { compose } from "redux";
 import {
@@ -6,8 +7,6 @@ import {
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import { NextPageWithRedux } from "shared/utils/types";
-
-import FundDetailsPage from "../../src/pages/funds/fund-details/fund-details.page";
 
 const FundDetails: NextPageWithRedux<{}> = () => {
   return <FundDetailsPage />;
