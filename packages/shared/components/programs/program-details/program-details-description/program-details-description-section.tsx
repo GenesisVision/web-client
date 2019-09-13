@@ -1,4 +1,4 @@
-import "./asset-details-description.scss";
+import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 import { ProgramControlsLoader } from "shared/components/details/details.contaner.loader";
 
 import { levelParametersSelector } from "../reducers/level-parameters.reducer";
-import ProgramDetailsDescriptionMain from "./asset-details-description-main";
 import PerformanceData from "./performance-data";
+import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
   programDescription,

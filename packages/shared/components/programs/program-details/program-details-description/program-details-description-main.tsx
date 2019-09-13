@@ -1,4 +1,4 @@
-import "./asset-details-description.scss";
+import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
