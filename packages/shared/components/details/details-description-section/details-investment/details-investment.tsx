@@ -15,6 +15,7 @@ import {
 import Surface from "shared/components/surface/surface";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { TableSelectorType } from "shared/components/table/components/table.types";
+import withLoader from "shared/decorators/with-loader";
 import useTab from "shared/hooks/tab.hook";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -103,5 +104,5 @@ interface Props {
   >;
 }
 
-const DetailsInvestment = React.memo(_DetailsInvestment);
+const DetailsInvestment = withLoader(React.memo(_DetailsInvestment));
 export default DetailsInvestment;
