@@ -3,7 +3,7 @@ import "shared/components/details/details.scss";
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { compose } from "redux";
-import DetailsInvestmentContainer from "shared/components/details/details-description-section/details-investment/details-investment-container";
+import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment-container";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
@@ -27,7 +27,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       ProgramControls={descriptionSection.ProgramControls}
     />
     <div className="details__divider" />
-    <DetailsInvestmentContainer
+    <DetailsInvestment
       dispatchDescription={dispatchProgramDescription}
       eventTypesSelector={programEventsSelector}
       asset={ASSET.PROGRAM}
