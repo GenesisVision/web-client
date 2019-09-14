@@ -95,7 +95,7 @@ const _ProgramSettings: React.FC<Props> = ({
       <InvestmentFees
         asset={ASSET.PROGRAM}
         programsInfo={programsInfo}
-        entryFee={details.entryFee}
+        entryFee={details.entryFeeSelected}
         successFee={details.successFee}
         onSubmit={editProgram}
       />

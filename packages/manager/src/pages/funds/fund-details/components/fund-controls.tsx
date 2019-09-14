@@ -7,8 +7,8 @@ const _FundControls: React.FC<IFundControlsProps> = ({
   fundDescription,
   isAuthenticated
 }) => (
-  <div className="program-details-description__controls">
-    <div className="program-details-description__col program-details-description__col--small-size">
+  <div className="asset-details-description__controls">
+    <div className="asset-details-description__col asset-details-description__col--small-size  details__block">
       <InvestmentFundControls
         fundDescription={fundDescription}
         isAuthenticated={isAuthenticated}
