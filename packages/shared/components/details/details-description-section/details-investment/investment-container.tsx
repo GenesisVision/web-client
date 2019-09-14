@@ -59,11 +59,11 @@ interface Props {
 }
 
 export const haveActiveInvestment = (details: InvestmentDetails): boolean =>
-  details && details.isInvested && details.status !== STATUS.ENDED;
+  !!details && details.isInvested && details.status !== STATUS.ENDED;
 
 export const haveSubscription = (details: InvestmentDetails): boolean =>
-  details &&
-  details.signalSubscription &&
+  !!details &&
+  !!details.signalSubscription &&
   details.signalSubscription.hasActiveSubscription;
 
 const InvestmentContainer = React.memo(_InvestmentContainer);
