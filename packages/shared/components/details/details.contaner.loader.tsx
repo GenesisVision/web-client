@@ -97,7 +97,7 @@ const _DetailsContainerLoader: React.FC<
         <h3>{t("program-details-page.statistics.heading")}</h3>
         <DetailsStatisticsLoader />
       </DetailsBlock>
-      <DetailsBlock className="details__new-block--horizontal-paddings details-chart">
+      <DetailsBlock horizontalPaddings className="details-chart">
         <h3>{t("program-details-page.chart.heading")}</h3>
         <DetailsChartLoader />
       </DetailsBlock>
