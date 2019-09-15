@@ -6,6 +6,9 @@
   box-sizing: border-box;
   width: 100%;
   color: $text-light-color;
+  @include media-breakpoint-landscape-phone() {
+    max-width: $details-statistic-section-width;
+  }
 
   &__subheading {
     font-size: $font-size-paragraph-mobile;
