@@ -1,5 +1,8 @@
 import * as React from "react";
 import { compose } from "redux";
+import DetailsBlock, {
+  DETAILS_BLOCK_TYPE
+} from "shared/components/details/details-block";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
@@ -19,19 +22,20 @@ const _ProgramControls: React.FC<Props> = ({
 
   return (
     <div className="asset-details-description__controls">
-      <div className="asset-details-description__col details__block">
-        <InvestmentProgramControls
-          programDescription={programDescription}
-          canCloseProgram={canCloseProgram}
-          isOwnProgram={isOwnProgram}
-          isAuthenticated={isAuthenticated}
-          levelsParameters={levelsParameters}
-        />
-      </div>
+      <InvestmentProgramControls
+        programDescription={programDescription}
+        canCloseProgram={canCloseProgram}
+        isOwnProgram={isOwnProgram}
+        isAuthenticated={isAuthenticated}
+        levelsParameters={levelsParameters}
+      />
       {isOwnProgram && programDescription.isSignalProgram && (
-        <div className="asset-details-description__col asset-details-description__col--small-size  details__block">
+        <DetailsBlock
+          type={DETAILS_BLOCK_TYPE.BORDERED}
+          className="asset-details-description__col"
+        >
           <SignalProgramInfo programDescription={programDescription} />
-        </div>
+        </DetailsBlock>
       )}
     </div>
   );
