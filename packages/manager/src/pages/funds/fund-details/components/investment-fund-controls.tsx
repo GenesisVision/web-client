@@ -1,7 +1,7 @@
 import { FundDetailsFull } from "gv-api-web";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -9,6 +9,9 @@ import {
   bindActionCreators,
   compose
 } from "redux";
+import DetailsBlock, {
+  DETAILS_BLOCK_TYPE
+} from "shared/components/details/details-block";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
 import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
 import GVButton from "shared/components/gv-button";
@@ -17,11 +20,11 @@ import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 
 const _InvestmentFundControls: React.FC<Props> = ({
-  t,
   service: { dispatchFundDescription },
   isAuthenticated,
   fundDescription
 }) => {
+  const [t] = useTranslation();
   const [
     isOpenInvestPopup,
     setIsOpenInvestPopup,
@@ -45,19 +48,20 @@ const _InvestmentFundControls: React.FC<Props> = ({
     : false;
 
   return (
-    <>
+    <DetailsBlock
+      type={DETAILS_BLOCK_TYPE.BORDERED}
+      className="asset-details-description__col"
+    >
       <InvestmentFundInfo fundDescription={fundDescription} />
       <div className="details-description__invest-button-container">
         {isOwnProgram ? (
-          <>
-            <GVButton
-              className="details-description__invest-btn"
-              onClick={setIsOpenInvestPopup}
-              disabled={isDisabledInvestButton}
-            >
-              {t("fund-details-page.description.invest")}
-            </GVButton>
-          </>
+          <GVButton
+            className="details-description__invest-btn"
+            onClick={setIsOpenInvestPopup}
+            disabled={isDisabledInvestButton}
+          >
+            {t("fund-details-page.description.invest")}
+          </GVButton>
         ) : (
           <GVButton
             className="details-description__invest-btn"
@@ -81,7 +85,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
         open={isOpenUnAuthInvestPopup}
         onClose={setIsCloseUnAuthInvestPopup}
       />
-    </>
+    </DetailsBlock>
   );
 };
 
@@ -106,14 +110,13 @@ interface OwnProps {
   fundDescription: FundDetailsFull;
 }
 
-interface Props extends WithTranslation, OwnProps, DispatchProps {}
+interface Props extends OwnProps, DispatchProps {}
 
 const InvestmentFundControls = compose<React.ComponentType<OwnProps>>(
   connect(
     null,
     mapDispatchToProps
   ),
-  translate(),
   React.memo
 )(_InvestmentFundControls);
 export default InvestmentFundControls;

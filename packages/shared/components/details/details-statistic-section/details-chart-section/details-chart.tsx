@@ -2,9 +2,9 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import DetailsBlock from "shared/components/details/details-block";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import Surface from "shared/components/surface/surface";
 import useTab from "shared/hooks/tab.hook";
 
 import BalanceChartSection, {
@@ -26,7 +26,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.PROFIT);
   return (
-    <Surface className="surface--horizontal-paddings details-chart">
+    <DetailsBlock horizontalPaddings className="details-chart">
       <h3>{t("details-page.chart.heading")}</h3>
       <GVTabs value={tab} onChange={setTab}>
         <GVTab
@@ -55,7 +55,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
           renderBalanceChart={renderBalanceChart}
         />
       )}
-    </Surface>
+    </DetailsBlock>
   );
 };
 

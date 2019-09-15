@@ -10,6 +10,7 @@ import {
   bindActionCreators,
   compose
 } from "redux";
+import DetailsBlock from "shared/components/details/details-block";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
@@ -19,7 +20,6 @@ import {
   EVENT_LOCATION,
   getEvents
 } from "shared/components/programs/program-details/services/program-details.service";
-import Surface from "shared/components/surface/surface";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { TableSelectorType } from "shared/components/table/components/table.types";
 import { ASSET } from "shared/constants/constants";
@@ -72,7 +72,7 @@ const _DetailsInvestment: React.FC<Props> = ({
   );
   if (!showInvestment) return null;
   return (
-    <Surface className="details__section details-investment">
+    <DetailsBlock table wide className="details-investment">
       <div className="details-investment__investment-tabs">
         <GVTabs value={tab} onChange={setTab}>
           <GVTab
@@ -109,7 +109,7 @@ const _DetailsInvestment: React.FC<Props> = ({
           eventTypeFilterValues={eventTypeFilterValues!}
         />
       )}
-    </Surface>
+    </DetailsBlock>
   );
 };
 

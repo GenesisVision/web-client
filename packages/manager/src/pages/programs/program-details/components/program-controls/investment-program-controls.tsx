@@ -2,13 +2,13 @@ import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
@@ -17,17 +17,19 @@ import { dispatchProgramDescription } from "shared/components/programs/program-d
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { kycConfirmedSelector } from "shared/reducers/header-reducer";
-import { RootState } from "shared/reducers/root-reducer";
+import DetailsBlock, {
+  DETAILS_BLOCK_TYPE
+} from "shared/components/details/details-block";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
-  isKycConfirmed,
   service: { dispatchProgramDescription },
-  t,
   isOwnProgram,
   programDescription,
   isAuthenticated,
   levelsParameters
 }) => {
+  const [t] = useTranslation();
+  const isKycConfirmed = useSelector(kycConfirmedSelector);
   const [
     isOpenInvestPopup,
     setIsOpenInvestPopup,
@@ -49,7 +51,10 @@ const _InvestmentProgramControls: React.FC<Props> = ({
     : false;
 
   return (
-    <>
+    <DetailsBlock
+      type={DETAILS_BLOCK_TYPE.BORDERED}
+      className="asset-details-description__col"
+    >
       <InvestmentProgramInfo
         isOwnProgram={isOwnProgram}
         programDescription={programDescription}
@@ -92,7 +97,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         onClose={setIsCloseInvestPopup}
         onApply={dispatchProgramDescription}
       />
-    </>
+    </DetailsBlock>
   );
 };
 
@@ -104,14 +109,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     dispatch
   )
 });
-
-const mapStateToProps = (state: RootState): StateProps => ({
-  isKycConfirmed: kycConfirmedSelector(state)
-});
-
-interface StateProps {
-  isKycConfirmed: boolean;
-}
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   dispatchProgramDescription: typeof dispatchProgramDescription;
@@ -128,14 +125,13 @@ interface OwnProps {
   levelsParameters: LevelsParamsInfo;
 }
 
-interface Props extends WithTranslation, OwnProps, DispatchProps, StateProps {}
+interface Props extends OwnProps, DispatchProps {}
 
 const InvestmentProgramControls = compose<React.ComponentType<OwnProps>>(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   ),
-  translate(),
   React.memo
 )(_InvestmentProgramControls);
 export default InvestmentProgramControls;

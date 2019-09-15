@@ -3,9 +3,9 @@ import "shared/components/details/details-description-section/details-statistic-
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import DetailsBlock from "shared/components/details/details-block";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import Surface from "shared/components/surface/surface";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import useTab from "shared/hooks/tab.hook";
 
@@ -29,7 +29,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
   );
 
   return (
-    <Surface className="details-history">
+    <DetailsBlock table>
       <div className="details-history__header">
         <div className="details-history__tabs">
           <GVTabs value={tab} onChange={setTab}>
@@ -55,7 +55,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
         {tab === TABS.STRUCTURE && <FundStructure id={id} />}
         {tab === TABS.REALLOCATE_HISTORY && <FundReallocateHistory id={id} />}
       </div>
-    </Surface>
+    </DetailsBlock>
   );
 };
 
