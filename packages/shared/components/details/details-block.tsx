@@ -12,13 +12,13 @@ const _DetailsBlock: React.FC<React.HTMLAttributes<HTMLDivElement> & Props> = ({
   type = DETAILS_BLOCK_TYPE.SOLID
 }) => (
   <div
-    className={classNames("details__new-block", className, {
-      "details__new-block--horizontal-paddings": !!horizontalPaddings,
-      "details__new-block--table": !!table,
-      "details__new-block--wide": !!wide,
-      "details__new-block--solid": type === DETAILS_BLOCK_TYPE.SOLID,
-      "details__new-block--bordered": type === DETAILS_BLOCK_TYPE.BORDERED,
-      "details__new-block--transparent": type === DETAILS_BLOCK_TYPE.TRANSPARENT
+    className={classNames("details__block", className, {
+      "details__block--horizontal-paddings": !!horizontalPaddings,
+      "details__block--table": !!table,
+      "details__block--wide": !!wide,
+      "details__block--solid": type === DETAILS_BLOCK_TYPE.SOLID,
+      "details__block--bordered": type === DETAILS_BLOCK_TYPE.BORDERED,
+      "details__block--transparent": type === DETAILS_BLOCK_TYPE.TRANSPARENT
     })}
   >
     {children}
