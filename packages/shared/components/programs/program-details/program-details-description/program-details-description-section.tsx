@@ -8,7 +8,7 @@ import { ProgramControlsLoader } from "shared/components/details/details.contane
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
 import { levelParametersSelector } from "../reducers/level-parameters.reducer";
-import PerformanceData from "./performance-data";
+import PerformanceData, { PerformanceDataLoader } from "./performance-data";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
@@ -29,6 +29,7 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
       />
       <PerformanceData
         condition={!!levelsParameters}
+        loader={<PerformanceDataLoader />}
         levelsParameters={levelsParameters!}
         programDescription={programDescription}
       />

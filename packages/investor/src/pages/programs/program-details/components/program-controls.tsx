@@ -1,4 +1,7 @@
 import React from "react";
+import DetailsBlock, {
+  DETAILS_BLOCK_TYPE
+} from "shared/components/details/details-block";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 
 import InvestmentProgramControls from "./investment-program-controls";
@@ -11,19 +14,20 @@ const _ProgramControls: React.FC<IProgramControlsProps> = ({
   const isAvailableFollowingTrades = programDescription.isSignalProgram;
   return (
     <div className="asset-details-description__controls">
-      <div className="asset-details-description__col  details__block">
-        <InvestmentProgramControls
-          programDescription={programDescription}
-          isAuthenticated={isAuthenticated}
-        />
-      </div>
+      <InvestmentProgramControls
+        programDescription={programDescription}
+        isAuthenticated={isAuthenticated}
+      />
       {isAvailableFollowingTrades ? (
-        <div className="asset-details-description__col asset-details-description__col--small-size  details__block">
+        <DetailsBlock
+          type={DETAILS_BLOCK_TYPE.BORDERED}
+          className="asset-details-description__col"
+        >
           <SignalProviderControls
             programDescription={programDescription}
             isAuthenticated={isAuthenticated}
           />
-        </div>
+        </DetailsBlock>
       ) : null}
     </div>
   );

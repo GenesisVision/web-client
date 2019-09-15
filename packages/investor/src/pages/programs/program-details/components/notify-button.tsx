@@ -1,23 +1,21 @@
 import "./notify-button.scss";
 
-import { subscribeAvailableToInvest } from "pages/programs/program-details/services/program-details.service";
 import React, { useCallback, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import Tooltip from "shared/components/tooltip/tooltip";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { getInvestmentInfoAction } from "../services/program-details.service";
+
 const _NotifyButton: React.FC<Props> = ({
-  t,
   notificationId: propNotificationId,
   canInvest,
   assetId,
-  subscribeAvailableToInvest,
   currency
 }) => {
+  const [t] = useTranslation();
   const [isPending, setIsPending, setNotIsPending] = useIsOpen();
   const [notificationId, setNotificationId] = useState<string | undefined>(
     propNotificationId
@@ -25,9 +23,9 @@ const _NotifyButton: React.FC<Props> = ({
   const handleClick = useCallback(
     () => {
       setIsPending();
-      subscribeAvailableToInvest({
-        assetId: assetId,
-        currency: currency
+      getInvestmentInfoAction({
+        assetId,
+        currency
       })
         .then(setNotificationId)
         .finally(setNotIsPending);
@@ -56,32 +54,12 @@ const _NotifyButton: React.FC<Props> = ({
   );
 };
 
-const NotifyButton = compose<React.FC<OwnProps>>(
-  translate(),
-  connect(
-    undefined,
-    {
-      subscribeAvailableToInvest
-    }
-  ),
-  React.memo
-)(_NotifyButton);
-export default NotifyButton;
-
-interface OwnProps {
+interface Props {
   assetId: string;
   notificationId?: string;
   currency: CurrencyEnum;
   canInvest: boolean;
 }
 
-interface DispatchProps {
-  subscribeAvailableToInvest: (
-    props: {
-      assetId: string;
-      currency: string;
-    }
-  ) => Promise<string>;
-}
-
-interface Props extends OwnProps, WithTranslation, DispatchProps {}
+const NotifyButton = React.memo(_NotifyButton);
+export default NotifyButton;

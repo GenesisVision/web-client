@@ -12,6 +12,11 @@ import {
   TFilter
 } from "./filtering/filter.type";
 
+export type TRenderHeaderFunc = (
+  column: SortingColumn,
+  i?: number
+) => JSX.Element;
+
 export type Column = {
   name: string;
 };

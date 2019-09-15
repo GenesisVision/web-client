@@ -6,6 +6,7 @@ import Leverage from "shared/components/leverage/leverage";
 import PieContainerSmall from "shared/components/pie-container/pie-container-small";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import StatisticItemLoader from "shared/components/statistic-item/statistic-item.loader";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
@@ -97,6 +98,18 @@ interface Props {
   levelsParameters: LevelsParamsInfo;
   programDescription: ProgramDetailsFull;
 }
+
+export const PerformanceDataLoader: React.FC = () => (
+  <div className="asset-details-description__performance-data">
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+  </div>
+);
 
 const PerformanceData = compose<React.ComponentType<Props & WithLoaderProps>>(
   withLoader,

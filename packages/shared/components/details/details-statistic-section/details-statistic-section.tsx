@@ -20,26 +20,22 @@ const _DetailsStatisticSection: React.FC<Props> = ({
   useChartPeriod,
   renderDetailsStatisticsElements
 }) => (
-  <div className="details__section details-statistic-section">
-    <div className="details-statistic-section__statistic details__block">
-      <DetailsStatistics
-        profitChartSelector={profitChartSelector}
-        statisticCurrencySelector={statisticCurrencySelector}
-        useChartPeriod={useChartPeriod}
-        renderDetailsStatisticsElements={renderDetailsStatisticsElements}
-      />
-    </div>
-    <div className="details-statistic-section__chart  details__block">
-      <DetailsChart
-        useChartStateValues={useChartStateValues}
-        useChartPeriod={useChartPeriod}
-        balanceChartSelector={balanceChartSelector}
-        renderBalanceChart={renderBalanceChart}
-        renderProfitChart={renderProfitChart}
-        profitChartSelector={profitChartSelector}
-        renderProfitValue={renderProfitValue}
-      />
-    </div>
+  <div className="details-statistic-section">
+    <DetailsStatistics
+      profitChartSelector={profitChartSelector}
+      statisticCurrencySelector={statisticCurrencySelector}
+      useChartPeriod={useChartPeriod}
+      renderDetailsStatisticsElements={renderDetailsStatisticsElements}
+    />
+    <DetailsChart
+      useChartStateValues={useChartStateValues}
+      useChartPeriod={useChartPeriod}
+      balanceChartSelector={balanceChartSelector}
+      renderBalanceChart={renderBalanceChart}
+      renderProfitChart={renderProfitChart}
+      profitChartSelector={profitChartSelector}
+      renderProfitValue={renderProfitValue}
+    />
   </div>
 );
 
