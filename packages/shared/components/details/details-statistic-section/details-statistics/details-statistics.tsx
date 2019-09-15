@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import Surface from "shared/components/surface/surface";
+import DetailsBlock from "shared/components/details/details-block";
 import { CurrencyEnum } from "shared/utils/types";
 
 import {
@@ -37,13 +37,13 @@ const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
     [statistic, statisticCurrency]
   );
   return (
-    <Surface className="surface--horizontal-paddings details-statistics">
+    <DetailsBlock horizontalPaddings className="details-statistics">
       <h3>{t("details-page.statistics.heading")}</h3>
       {renderDetailsStatisticsElements({
         period,
         statisticData
       })}
-    </Surface>
+    </DetailsBlock>
   );
 };
 
