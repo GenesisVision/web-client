@@ -72,45 +72,43 @@ const _DetailsInvestment: React.FC<Props> = ({
   );
   if (!showInvestment) return null;
   return (
-    <DetailsBlock wide>
-      <div className="details-investment">
-        <div className="details-investment__investment-tabs">
-          <GVTabs value={tab} onChange={setTab}>
-            <GVTab
-              visible={haveInvestment}
-              value={TABS.INVESTMENT}
-              label={t(`fund-details-page.description.yourInvestment.${asset}`)}
-            />
-            <GVTab
-              visible={haveEvents}
-              value={TABS.EVENTS}
-              label={t("program-details-page.history.tabs.events")}
-            />
-          </GVTabs>
-        </div>
-        {tab === TABS.INVESTMENT && (
-          <InvestmentContainer
-            updateDescription={dispatchDescription}
-            asset={asset}
-            notice={notice}
-            id={id}
-            assetCurrency={currency}
-            personalDetails={personalDetails}
-            WithdrawContainer={WithdrawContainer}
-            ProgramReinvestingWidget={ProgramReinvestingWidget}
+    <DetailsBlock table wide className="details-investment">
+      <div className="details-investment__investment-tabs">
+        <GVTabs value={tab} onChange={setTab}>
+          <GVTab
+            visible={haveInvestment}
+            value={TABS.INVESTMENT}
+            label={t(`fund-details-page.description.yourInvestment.${asset}`)}
           />
-        )}
-        {tab === TABS.EVENTS && (
-          <PortfolioEventsTable
-            getItems={getEvents(id!, EVENT_LOCATION.Asset)}
-            selector={selector}
-            asset={asset}
-            eventLocation={EVENT_LOCATION.Asset}
-            dateRangeStartLabel={t("filters.date-range.program-start")}
-            eventTypeFilterValues={eventTypeFilterValues!}
+          <GVTab
+            visible={haveEvents}
+            value={TABS.EVENTS}
+            label={t("program-details-page.history.tabs.events")}
           />
-        )}
+        </GVTabs>
       </div>
+      {tab === TABS.INVESTMENT && (
+        <InvestmentContainer
+          updateDescription={dispatchDescription}
+          asset={asset}
+          notice={notice}
+          id={id}
+          assetCurrency={currency}
+          personalDetails={personalDetails}
+          WithdrawContainer={WithdrawContainer}
+          ProgramReinvestingWidget={ProgramReinvestingWidget}
+        />
+      )}
+      {tab === TABS.EVENTS && (
+        <PortfolioEventsTable
+          getItems={getEvents(id!, EVENT_LOCATION.Asset)}
+          selector={selector}
+          asset={asset}
+          eventLocation={EVENT_LOCATION.Asset}
+          dateRangeStartLabel={t("filters.date-range.program-start")}
+          eventTypeFilterValues={eventTypeFilterValues!}
+        />
+      )}
     </DetailsBlock>
   );
 };
