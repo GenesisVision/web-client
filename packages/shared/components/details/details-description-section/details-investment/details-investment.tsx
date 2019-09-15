@@ -10,6 +10,7 @@ import {
   bindActionCreators,
   compose
 } from "redux";
+import DetailsBlock from "shared/components/details/details-block";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
@@ -19,7 +20,6 @@ import {
   EVENT_LOCATION,
   getEvents
 } from "shared/components/programs/program-details/services/program-details.service";
-import Surface from "shared/components/surface/surface";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { TableSelectorType } from "shared/components/table/components/table.types";
 import { ASSET } from "shared/constants/constants";
@@ -72,44 +72,46 @@ const _DetailsInvestment: React.FC<Props> = ({
   );
   if (!showInvestment) return null;
   return (
-    <Surface className="details__section details-investment">
-      <div className="details-investment__investment-tabs">
-        <GVTabs value={tab} onChange={setTab}>
-          <GVTab
-            visible={haveInvestment}
-            value={TABS.INVESTMENT}
-            label={t(`fund-details-page.description.yourInvestment.${asset}`)}
+    <DetailsBlock wide>
+      <div className="details-investment">
+        <div className="details-investment__investment-tabs">
+          <GVTabs value={tab} onChange={setTab}>
+            <GVTab
+              visible={haveInvestment}
+              value={TABS.INVESTMENT}
+              label={t(`fund-details-page.description.yourInvestment.${asset}`)}
+            />
+            <GVTab
+              visible={haveEvents}
+              value={TABS.EVENTS}
+              label={t("program-details-page.history.tabs.events")}
+            />
+          </GVTabs>
+        </div>
+        {tab === TABS.INVESTMENT && (
+          <InvestmentContainer
+            updateDescription={dispatchDescription}
+            asset={asset}
+            notice={notice}
+            id={id}
+            assetCurrency={currency}
+            personalDetails={personalDetails}
+            WithdrawContainer={WithdrawContainer}
+            ProgramReinvestingWidget={ProgramReinvestingWidget}
           />
-          <GVTab
-            visible={haveEvents}
-            value={TABS.EVENTS}
-            label={t("program-details-page.history.tabs.events")}
+        )}
+        {tab === TABS.EVENTS && (
+          <PortfolioEventsTable
+            getItems={getEvents(id!, EVENT_LOCATION.Asset)}
+            selector={selector}
+            asset={asset}
+            eventLocation={EVENT_LOCATION.Asset}
+            dateRangeStartLabel={t("filters.date-range.program-start")}
+            eventTypeFilterValues={eventTypeFilterValues!}
           />
-        </GVTabs>
+        )}
       </div>
-      {tab === TABS.INVESTMENT && (
-        <InvestmentContainer
-          updateDescription={dispatchDescription}
-          asset={asset}
-          notice={notice}
-          id={id}
-          assetCurrency={currency}
-          personalDetails={personalDetails}
-          WithdrawContainer={WithdrawContainer}
-          ProgramReinvestingWidget={ProgramReinvestingWidget}
-        />
-      )}
-      {tab === TABS.EVENTS && (
-        <PortfolioEventsTable
-          getItems={getEvents(id!, EVENT_LOCATION.Asset)}
-          selector={selector}
-          asset={asset}
-          eventLocation={EVENT_LOCATION.Asset}
-          dateRangeStartLabel={t("filters.date-range.program-start")}
-          eventTypeFilterValues={eventTypeFilterValues!}
-        />
-      )}
-    </Surface>
+    </DetailsBlock>
   );
 };
 
