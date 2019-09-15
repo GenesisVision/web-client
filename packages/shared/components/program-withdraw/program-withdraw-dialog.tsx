@@ -40,9 +40,7 @@ const _ProgramWithdrawDialog: React.FC<
         assetCurrency={assetCurrency}
         fetchInfo={fetchInfo}
       />
-      <div className="form-error">
-        <FormError error={errorMessage} />
-      </div>
+      <FormError error={errorMessage} />
     </Dialog>
   );
 };
