@@ -9,6 +9,9 @@ import {
   bindActionCreators,
   compose
 } from "redux";
+import DetailsBlock, {
+  DETAILS_BLOCK_TYPE
+} from "shared/components/details/details-block";
 import GVButton from "shared/components/gv-button";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
@@ -51,7 +54,10 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       !programDescription.personalProgramDetails.canInvest
     : false;
   return (
-    <>
+    <DetailsBlock
+      type={DETAILS_BLOCK_TYPE.BORDERED}
+      className="asset-details-description__col"
+    >
       <InvestmentProgramInfo programDescription={programDescription} />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         {programDescription.availableInvestmentBase === 0 && isAuthenticated ? (
@@ -88,7 +94,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         open={isOpenUnAuthInvestmentPopup}
         onClose={setCloseUnAuthInvestmentPopup}
       />
-    </>
+    </DetailsBlock>
   );
 };
 
