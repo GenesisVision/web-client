@@ -25,8 +25,8 @@ const GenerateRecoveryCode: React.FC<Props> = ({ disabled, t }) => {
           model: values
         })
         .then(setData)
-        .catch(error => {
-          setErrorMessage(error);
+        .catch(setErrorMessage)
+        .finally(() => {
           setSubmitting(false);
         }),
     []
