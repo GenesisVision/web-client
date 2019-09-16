@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { ResponseError } from "../utils/types";
 
-type TErrorMessage = string;
+export type TErrorMessage = string;
 export const nullValue: TErrorMessage = "";
 
 const useErrorMessage = (
