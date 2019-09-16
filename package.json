@@ -24,7 +24,7 @@
     "lodash": "^4.17.11",
     "lodash-es": "^4.17.11",
     "moment": "^2.22.1",
-    "next": "^9.0.5",
+    "next": "./next-v9.0.6-canary.1.tgz",
     "next-compose-plugins": "^2.2.0",
     "next-cookies": "^1.1.2",
     "next-i18next": "^0.45.0",
