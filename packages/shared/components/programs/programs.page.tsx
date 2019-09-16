@@ -12,6 +12,7 @@ import { composeProgramFacetUrl } from "shared/utils/compose-url";
 
 import {
   PROGRAMS_EXPLORE_TAB_NAME,
+  PROGRAMS_FACET_FOLDER_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
 } from "../../routes/programs.routes";
@@ -29,6 +30,7 @@ const ProgramsPage: NextComponentType = () => {
       />
       <FacetCardsContainer
         key={"facets"}
+        fileRoute={PROGRAMS_FACET_FOLDER_ROUTE}
         title={title}
         assetsFacets={ASSETS_FACETS.PROGRAMS}
         composeFacetUrl={composeProgramFacetUrl}

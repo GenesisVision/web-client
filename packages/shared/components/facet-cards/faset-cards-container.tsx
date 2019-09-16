@@ -16,7 +16,8 @@ export const _FacetCardsContainer: React.FC<Props> = ({
   title,
   composeFacetUrl,
   assetsFacets,
-  info
+  info,
+  fileRoute
 }) => {
   if (!info) return <FacetCardsStub />;
   return (
@@ -24,6 +25,7 @@ export const _FacetCardsContainer: React.FC<Props> = ({
       title={title}
       facets={info[assetsFacets]}
       composeFacetUrl={composeFacetUrl}
+      fileRoute={fileRoute}
     />
   );
 };
@@ -35,12 +37,14 @@ const mapStateToProps = (state: RootState): StateProps => {
   };
 };
 
-export default connect(mapStateToProps)(_FacetCardsContainer);
+const FacetCardsContainer = connect(mapStateToProps)(_FacetCardsContainer);
+export default FacetCardsContainer;
 
 interface OwnProps {
   title: string;
   composeFacetUrl: composeFacetUrlFunc;
   assetsFacets: ASSETS_FACETS;
+  fileRoute: string;
 }
 
 interface StateProps {

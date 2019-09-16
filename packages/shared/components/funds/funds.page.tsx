@@ -8,6 +8,7 @@ import { useTranslation } from "shared/i18n";
 import FundsTableSSR from "shared/modules/funds-table/components/funds-table/funds-table-ssr";
 import {
   FUNDS_EXPLORE_TAB_NAME,
+  FUNDS_FACET_FOLDER_ROUTE,
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
 } from "shared/routes/funds.routes";
@@ -29,6 +30,7 @@ const FundsPage: React.FC = () => {
         title={title}
         assetsFacets={ASSETS_FACETS.FUNDS}
         composeFacetUrl={composeFundFacetUrl}
+        fileRoute={FUNDS_FACET_FOLDER_ROUTE}
       />
       <Surface className="funds-table-container">
         <FundsTableSSR title={t("funds-page.all-funds")} showSwitchView />
