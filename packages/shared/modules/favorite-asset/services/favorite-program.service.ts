@@ -1,3 +1,4 @@
+import { CancelablePromise } from "gv-api-web";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
@@ -25,17 +26,24 @@ export const toggleFavoriteProgramDispatchable: ToggleFavoriteDispatchableType =
   );
 };
 
-const addFavorite = (id: string, authorization: string): Promise<any> =>
+const addFavorite = (
+  id: string,
+  authorization: string
+): CancelablePromise<any> =>
   programsApi.v10ProgramsByIdFavoriteAddPost(id, authorization);
 
-const removeFavorite = (id: string, authorization: string): Promise<any> =>
+const removeFavorite = (
+  id: string,
+  authorization: string
+): CancelablePromise<any> =>
   programsApi.v10ProgramsByIdFavoriteRemovePost(id, authorization);
 
 export const toggleFavoriteProgram = (
   id: string,
   isFavorite: boolean
-): Promise<any> => {
-  if (!authService.getAuthArg()) return Promise.reject();
+): CancelablePromise<any> => {
+  if (!authService.getAuthArg())
+    return Promise.reject() as CancelablePromise<any>;
   const authorization = authService.getAuthArg();
 
   return isFavorite
