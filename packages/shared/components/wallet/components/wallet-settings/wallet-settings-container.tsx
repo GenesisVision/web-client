@@ -32,12 +32,11 @@ const _WalletSettingsContainer: React.FC<Props> = ({
     return method()
       .then(() => {
         setPayFeesWithGvtValue(!isPayFeesWithGvt);
-        setNotPending();
       })
       .catch(({ errorMessage }: ResponseError) => {
         service.alertError(errorMessage);
-        setNotPending();
-      });
+      })
+      .finally(() => setNotPending());
   };
   return (
     <WalletSettings
