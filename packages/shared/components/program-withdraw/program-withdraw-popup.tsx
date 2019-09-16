@@ -1,4 +1,4 @@
-import { ProgramWithdrawInfo } from "gv-api-web";
+import { CancelablePromise, ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -106,7 +106,7 @@ export interface IProgramWithdrawPopupProps {
   programWithdrawInfo: ProgramWithdrawInfo;
   assetCurrency: CurrencyEnum;
   accountCurrency: CurrencyEnum;
-  fetchInfo: () => Promise<ProgramWithdrawInfo>;
+  fetchInfo: () => CancelablePromise<ProgramWithdrawInfo>;
   withdraw: (values: ProgramWithdrawType) => Promise<void>;
 }
 
