@@ -3,10 +3,11 @@ import "./transaction-details.scss";
 import { TransactionDetails, TransactionDetailsTypeEnum } from "gv-api-web";
 import i18next from "i18next";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import ConvertingDetails from "shared/modules/transaction-details/transactions/converting-details";
 import ExternalDeposit from "shared/modules/transaction-details/transactions/external-deposit-details";
@@ -20,6 +21,72 @@ import WithdrawalTransaction from "shared/modules/transaction-details/transactio
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { ResponseError } from "shared/utils/types";
+
+const _TransactionDetailsDialog: React.FC<Props> = ({
+  transactionId,
+  close,
+  onAction
+}) => {
+  const [t] = useTranslation();
+  const dispatch = useDispatch();
+  const [isPending, setIsPending, setIsNotPending] = useIsOpen();
+  const [data, setData] = useState<TransactionDetails | undefined>(undefined);
+  useEffect(
+    () => {
+      setIsPending();
+      walletApi
+        .v10WalletTransactionByIdGet(transactionId, authService.getAuthArg())
+        .then(setData)
+        .catch(({ errorMessage }: ResponseError) =>
+          dispatch(alertMessageActions.error(errorMessage))
+        )
+        .finally(setIsNotPending);
+    },
+    [transactionId]
+  );
+
+  const cancel = useCallback(
+    () => {
+      walletApi
+        .v10WalletWithdrawRequestCancelByTxIdPost(
+          transactionId,
+          authService.getAuthArg()
+        )
+        .then(onAction)
+        .catch(({ errorMessage }: ResponseError) =>
+          dispatch(alertMessageActions.error(errorMessage))
+        );
+    },
+    [transactionId]
+  );
+
+  const resendEmail = useCallback(
+    () => {
+      walletApi
+        .v10WalletWithdrawRequestResendByTxIdPost(
+          transactionId,
+          authService.getAuthArg()
+        )
+        .then(close)
+        .catch(({ errorMessage }: ResponseError) =>
+          dispatch(alertMessageActions.error(errorMessage))
+        );
+    },
+    [transactionId]
+  );
+
+  if (isPending || !!!data) return <DialogLoader />;
+  const Component = Types[data.type] || (() => <p>type isn't define</p>);
+
+  return (
+    <Component
+      t={t}
+      data={data}
+      handleCancel={cancel}
+      handleResend={resendEmail}
+    />
+  );
+};
 
 const Types: TransactionTypes = {
   Investing: InvestingTransaction,
@@ -38,91 +105,6 @@ const Types: TransactionTypes = {
   Platform: SignalTransaction
 } as TransactionTypes;
 
-class _TransactionDetailsDialog extends React.PureComponent<Props, State> {
-  state: State = {
-    isPending: false
-  };
-
-  componentDidMount() {
-    this.fetch();
-  }
-
-  fetch = () => {
-    this.setState({ isPending: true });
-    walletApi
-      .v10WalletTransactionByIdGet(
-        this.props.transactionId,
-        authService.getAuthArg()
-      )
-      .then((data: TransactionDetails) =>
-        this.setState({ data, isPending: false })
-      )
-      .catch((errorMessage: ResponseError) => {
-        this.props.error(errorMessage.errorMessage);
-        this.props.close();
-      });
-  };
-
-  cancel = () => {
-    walletApi
-      .v10WalletWithdrawRequestCancelByTxIdPost(
-        this.props.transactionId,
-        authService.getAuthArg()
-      )
-      .then(() => {
-        this.props.onAction();
-      })
-      .catch((errorMessage: ResponseError) => {
-        this.props.error(errorMessage.errorMessage);
-      });
-  };
-
-  resendEmail = () => {
-    walletApi
-      .v10WalletWithdrawRequestResendByTxIdPost(
-        this.props.transactionId,
-        authService.getAuthArg()
-      )
-      .then(() => {
-        this.props.close();
-      })
-      .catch((errorMessage: ResponseError) => {
-        this.props.error(errorMessage.errorMessage);
-      });
-  };
-
-  render() {
-    if (this.state.isPending || !this.state.data) return <DialogLoader />;
-    const Component =
-      Types[this.state.data.type] ||
-      function() {
-        return <p>type isn't define</p>;
-      };
-    return (
-      <Component
-        t={this.props.t}
-        data={this.state.data}
-        handleCancel={this.cancel}
-        handleResend={this.resendEmail}
-      />
-    );
-  }
-}
-
-const mapDispatchToProps = {
-  error: alertMessageActions.error
-};
-
-const TransactionDetailsDialog = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  connect<null, DispatchProps>(
-    null,
-    mapDispatchToProps
-  )
-)(_TransactionDetailsDialog);
-
-export default TransactionDetailsDialog;
-
 type TransactionTypes = {
   [name in TransactionDetailsTypeEnum]:
     | React.FC<TransactionDetailsProps>
@@ -131,24 +113,15 @@ type TransactionTypes = {
 
 export interface TransactionDetailsProps extends i18next.WithT {
   data: TransactionDetails;
-  handleCancel?(): void;
-  handleResend?(): void;
+  handleCancel?: () => void;
+  handleResend?: () => void;
 }
 
-interface OwnProps {
+interface Props {
   transactionId: string;
-  close(): void;
-  onAction(): void;
+  close: () => void;
+  onAction: () => void;
 }
 
-interface DispatchProps {
-  error(message: string): void;
-}
-
-interface State {
-  isPending: boolean;
-  data?: TransactionDetails;
-  errorMessage?: string;
-}
-
-interface Props extends OwnProps, DispatchProps, WithTranslation {}
+const TransactionDetailsDialog = React.memo(_TransactionDetailsDialog);
+export default TransactionDetailsDialog;
