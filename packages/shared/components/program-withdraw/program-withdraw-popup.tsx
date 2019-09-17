@@ -38,7 +38,7 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
 
   const handleSubmit = useCallback(
     (setSubmitting: SetSubmittingType) =>
-      sendRequest({ ...formValues }, setSubmitting),
+      sendRequest(formValues, setSubmitting),
     [formValues]
   );
 
