@@ -2,7 +2,7 @@ import "./manager-history.scss";
 
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
@@ -13,12 +13,8 @@ import { fetchManagerAssetsCount } from "../services/manager.service";
 import ManagerFunds from "./manager-funds-table";
 import ManagerPrograms from "./manager-programs-table";
 
-const _ManagerHistorySection: React.FC<Props> = ({
-  t,
-  managerId,
-  title,
-  isAuthenticated
-}) => {
+const _ManagerHistorySection: React.FC<Props> = ({ managerId, title }) => {
+  const [t] = useTranslation();
   const { tab, setTab } = useTab<MANAGER_HISTORY_TAB>(
     MANAGER_HISTORY_TAB.PROGRAMS
   );
@@ -57,29 +53,20 @@ const _ManagerHistorySection: React.FC<Props> = ({
 
       <div>
         {tab === MANAGER_HISTORY_TAB.PROGRAMS && (
-          <ManagerPrograms
-            title={title}
-            managerId={managerId}
-            isAuthenticated={isAuthenticated}
-          />
+          <ManagerPrograms title={title} managerId={managerId} />
         )}
         {tab === MANAGER_HISTORY_TAB.FUNDS && (
-          <ManagerFunds
-            title={title}
-            managerId={managerId}
-            isAuthenticated={isAuthenticated}
-          />
+          <ManagerFunds title={title} managerId={managerId} />
         )}
       </div>
     </Surface>
   );
 };
 
-interface Props extends WithTranslation {
+interface Props {
   managerId: string;
   title: string;
-  isAuthenticated: boolean;
 }
 
-const ManagerHistorySection = translate()(React.memo(_ManagerHistorySection));
+const ManagerHistorySection = React.memo(_ManagerHistorySection);
 export default ManagerHistorySection;
