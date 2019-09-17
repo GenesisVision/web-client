@@ -26,7 +26,7 @@ const _DetailsFavorite: React.FC<Props> = ({
   const handleFavoriteClickOnButton = useCallback(
     (id: string, isFavorite: boolean) => {
       setIsFavoriteValue(!isFavorite);
-      sendRequest(id, isFavorite);
+      sendRequest({ id, isFavorite });
     },
     []
   );
