@@ -1,4 +1,3 @@
-import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,10 +11,7 @@ const _LogoutButtonContainer: React.FC = () => {
   const [t] = useTranslation();
   const dispatch = useDispatch();
   const { isPending, sendRequest } = useApiRequest({
-    request: () => {
-      dispatch(logoutFromDevices);
-      return Promise.resolve() as CancelablePromise<any>;
-    }
+    request: () => dispatch(logoutFromDevices)
   });
   const handleSubmit = useCallback(() => sendRequest(), []);
   return (
