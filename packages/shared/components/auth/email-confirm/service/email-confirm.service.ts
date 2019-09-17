@@ -7,22 +7,21 @@ import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "shared/utils/types";
 
-export const confirmEmail = (userId: string, code: string) => (
-  dispatch: MiddlewareDispatch
-): CancelablePromise<void> =>
-  authApi
-    .v10AuthSignupConfirmPost({
-      userId,
-      code
-    })
-    .then(response => {
-      authService.storeToken(response);
-      dispatch(authActions.updateTokenAction());
-      dispatch(push(HOME_ROUTE));
-      dispatch(
-        alertMessageActions.success(
-          "auth.email-confirm.success-alert-message",
-          true
-        )
-      );
-    });
+export const confirmEmail = ({
+  userId,
+  code
+}: {
+  userId: string;
+  code: string;
+}) => (dispatch: MiddlewareDispatch): CancelablePromise<void> =>
+  authApi.v10AuthSignupConfirmPost({ userId, code }).then(response => {
+    authService.storeToken(response);
+    dispatch(authActions.updateTokenAction());
+    dispatch(push(HOME_ROUTE));
+    dispatch(
+      alertMessageActions.success(
+        "auth.email-confirm.success-alert-message",
+        true
+      )
+    );
+  });
