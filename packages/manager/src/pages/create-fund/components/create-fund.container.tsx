@@ -1,6 +1,6 @@
 import { goBack } from "connected-react-router";
 import { PlatformAsset, PlatformInfo, WalletData } from "gv-api-web";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import { ManagerRootState } from "reducers";
@@ -13,6 +13,7 @@ import {
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
+import useApiRequest from "shared/hooks/api-request.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { nameSelector } from "shared/reducers/header-reducer";
@@ -38,21 +39,16 @@ const _CreateFundContainer: React.FC<Props> = ({
   fundAssets,
   wallets
 }) => {
-  const [isPending, setIsPending, setNotIsPending] = useIsOpen();
+  const { isPending, data: minimumDepositAmount, sendRequest } = useApiRequest({
+    request: fetchMinimumDepositAmount
+  });
   const [
     isNavigationDialogVisible,
     setIsNavigationDialogVisible,
     setNotIsNavigationDialogVisible
   ] = useIsOpen();
-  const [minimumDepositAmount, setMinimumDepositAmount] = useState<
-    number | undefined
-  >(undefined);
   useEffect(() => {
-    setIsPending();
-    service.fetchWallets();
-    fetchMinimumDepositAmount()
-      .then(setMinimumDepositAmount)
-      .finally(setNotIsPending);
+    sendRequest();
   }, []);
   const handleSubmit = useCallback(
     (values: ICreateFundSettingsFormValues, setSubmitting: SetSubmittingType) =>
