@@ -1,5 +1,4 @@
 import { replace } from "connected-react-router";
-import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -14,10 +13,7 @@ const _EmailConfirmContainer: React.FC<Props> = ({
 }) => {
   const dispatch = useDispatch();
   const { errorMessage, sendRequest, isPending } = useApiRequest({
-    request: ({ userId, code }) => {
-      dispatch(confirmEmail(userId, code));
-      return Promise.resolve() as CancelablePromise<any>;
-    }
+    request: props => dispatch(confirmEmail(props))
   });
   useEffect(
     () => {
