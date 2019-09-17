@@ -13,8 +13,7 @@ export const nullValue = undefined;
 type TRequest<T> = CancelablePromise<T>;
 
 type TUseApiRequestProps<T> = {
-  request: (...args: any) => TRequest<T>;
-  setSubmitting?: SetSubmittingType;
+  request: (...args: any) => any;
   defaultData?: T;
   catchCallback?: (errorMessage?: string) => void;
 };
@@ -23,23 +22,30 @@ type TUseApiRequestOutput<T> = {
   errorMessage: TErrorMessage;
   isPending: boolean;
   data: T | TNullValue;
-  sendRequest: (...args: any) => TRequest<any>;
+  sendRequest: (
+    props?: any,
+    setSubmitting?: SetSubmittingType
+  ) => TRequest<any>;
+  cleanErrorMessage: () => void;
 };
 
 const useApiRequest = <T>({
   request,
-  setSubmitting,
   defaultData,
   catchCallback
 }: TUseApiRequestProps<T>): TUseApiRequestOutput<T> => {
   const dispatch = useDispatch();
   const [data, setData] = useState<T | TNullValue>(defaultData || nullValue);
-  const { errorMessage, setErrorMessage } = useErrorMessage();
+  const {
+    errorMessage,
+    setErrorMessage,
+    cleanErrorMessage
+  } = useErrorMessage();
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
 
-  const sendRequest = (...args: any) => {
+  const sendRequest = (props?: any, setSubmitting?: SetSubmittingType) => {
     setIsPending();
-    return request(...args)
+    return (Promise.resolve(request(props)) as TRequest<T>)
       .then(setData)
       .catch(({ errorMessage }) => {
         setErrorMessage(errorMessage);
@@ -52,6 +58,6 @@ const useApiRequest = <T>({
       });
   };
 
-  return { errorMessage, isPending, data, sendRequest };
+  return { errorMessage, cleanErrorMessage, isPending, data, sendRequest };
 };
 export default useApiRequest;
