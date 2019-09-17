@@ -15,7 +15,7 @@ import { RingIcon } from "shared/components/icon/ring-icon";
 import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
 import NotificationsGroup from "shared/components/notifications/components/notification-group/notification-group";
 import Spinner from "shared/components/spiner/spiner";
-import useIsOpen from "shared/hooks/is-open.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 
@@ -55,19 +55,14 @@ const _Notifications: React.FC<Props> = ({
   clearNotifications
 }) => {
   const [t] = useTranslation();
-  const [isPending, setIsPending, setIsNotPending] = useIsOpen();
+  const { isPending, sendRequest } = useApiRequest({
+    request: fetchNotifications
+  });
   useEffect(() => {
     fetchNotification();
     return clearNotifications;
   }, []);
-  const fetchNotification = useCallback(
-    () => {
-      if (isPending) return;
-      setIsPending();
-      fetchNotifications().finally(setIsNotPending);
-    },
-    [isPending]
-  );
+  const fetchNotification = useCallback(() => !isPending && sendRequest(), []);
   const renderGroups = (groups: NotificationGroups) => (
     group: string
   ): React.ReactNode => (
