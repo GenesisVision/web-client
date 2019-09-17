@@ -38,10 +38,13 @@ const removeFavorite = (
 ): CancelablePromise<any> =>
   programsApi.v10ProgramsByIdFavoriteRemovePost(id, authorization);
 
-export const toggleFavoriteProgram = (
-  id: string,
-  isFavorite: boolean
-): CancelablePromise<any> => {
+export const toggleFavoriteProgram = ({
+  id,
+  isFavorite
+}: {
+  id: string;
+  isFavorite: boolean;
+}): CancelablePromise<any> => {
   if (!authService.getAuthArg())
     return Promise.reject() as CancelablePromise<any>;
   const authorization = authService.getAuthArg();
