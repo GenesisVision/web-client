@@ -39,7 +39,7 @@ const _CreateFundContainer: React.FC<Props> = ({
   fundAssets,
   wallets
 }) => {
-  const { isPending, data: minimumDepositAmount, sendRequest } = useApiRequest({
+  const { data: minimumDepositAmount, sendRequest } = useApiRequest({
     request: fetchMinimumDepositAmount
   });
   const [
@@ -60,28 +60,25 @@ const _CreateFundContainer: React.FC<Props> = ({
       rateApi.v10RateByFromByToGet(fromCurrency, toCurrency),
     []
   );
-  if (!platformSettings || !wallets.length || !minimumDepositAmount)
-    return null;
   return (
     <div className="create-fund-container">
       <div>
-        {!isPending && (
-          <CreateFundSettingsSection
-            fetchWallets={service.fetchWallets}
-            wallets={wallets}
-            navigateBack={setIsNavigationDialogVisible}
-            onSubmit={handleSubmit}
-            author={author}
-            assets={fundAssets}
-            minimumDepositAmount={minimumDepositAmount}
-            managerMaxExitFee={platformSettings.programsInfo.managerMaxExitFee}
-            managerMaxEntryFee={
-              platformSettings.programsInfo.managerMaxEntryFee
-            }
-            notifyError={service.notifyError}
-            fetchRate={fetchRate}
-          />
-        )}
+        <CreateFundSettingsSection
+          condition={
+            !!platformSettings && !!wallets.length && !!minimumDepositAmount
+          }
+          fetchWallets={service.fetchWallets}
+          wallets={wallets}
+          navigateBack={setIsNavigationDialogVisible}
+          onSubmit={handleSubmit}
+          author={author}
+          assets={fundAssets}
+          minimumDepositAmount={minimumDepositAmount}
+          managerMaxExitFee={platformSettings!.programsInfo.managerMaxExitFee}
+          managerMaxEntryFee={platformSettings!.programsInfo.managerMaxEntryFee}
+          notifyError={service.notifyError}
+          fetchRate={fetchRate}
+        />
         <ConfirmPopup
           open={isNavigationDialogVisible}
           onClose={setNotIsNavigationDialogVisible}
