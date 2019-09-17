@@ -5,10 +5,11 @@ import { SetSubmittingType } from "shared/utils/types";
 import CreateFundSettings, {
   ICreateFundSettingsFormValues
 } from "./create-fund-settings";
+import withLoader from "shared/decorators/with-loader";
 
 const FUND_CURRENCY = "GVT";
 
-class CreateFundSettingsSection extends React.PureComponent<
+class _CreateFundSettingsSection extends React.PureComponent<
   OwnProps,
   StateProps
 > {
@@ -80,6 +81,7 @@ class CreateFundSettingsSection extends React.PureComponent<
   }
 }
 
+const CreateFundSettingsSection = withLoader(_CreateFundSettingsSection);
 export default CreateFundSettingsSection;
 
 interface OwnProps {
