@@ -3,11 +3,15 @@ import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import { ManagerThunk, ResponseError } from "shared/utils/types";
 
-export const programEditSignal = (
-  id: string,
-  successFee: number,
-  volumeFee: number
-): ManagerThunk<Promise<void>> => (dispatch): Promise<void> => {
+export const programEditSignal = ({
+  id,
+  successFee,
+  volumeFee
+}: {
+  id: string;
+  successFee: number;
+  volumeFee: number;
+}): ManagerThunk<Promise<void>> => (dispatch): Promise<void> => {
   const authorization = authService.getAuthArg();
   const requestData = {
     programId: id,
