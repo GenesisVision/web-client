@@ -42,8 +42,8 @@ export const updateProfileAvatar = (newImage: IImageValue) => (
     });
 };
 
-export const logoutFromDevices = () => (dispatch: Dispatch) => {
-  return authApi
+export const logoutFromDevices = (dispatch: Dispatch) =>
+  authApi
     .v10AuthTokenDevicesLogoutPost(authService.getAuthArg())
     .then(response => {
       authService.storeToken(response);
@@ -60,4 +60,3 @@ export const logoutFromDevices = () => (dispatch: Dispatch) => {
       dispatch(alertMessageActions.error(error.errorMessage));
       throw error;
     });
-};

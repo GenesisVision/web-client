@@ -5,10 +5,13 @@ import { alertMessageActions } from "shared/modules/alert-message/actions/alert-
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
-export const changePasswordTradingAccount = (
-  id: string,
-  model?: ProgramPwdUpdate
-): any => (dispatch: Dispatch) => {
+export const changePasswordTradingAccount = ({
+  id,
+  model
+}: {
+  id: string;
+  model?: ProgramPwdUpdate;
+}): any => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
   return managerApi
     .v10ManagerProgramsByIdPasswordChangePost(id, authorization, { model })

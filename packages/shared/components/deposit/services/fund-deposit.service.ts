@@ -26,7 +26,7 @@ export const fundInvestCreator: TAssetInvestCreator = fundInvestFn => (
           true
         )
       );
-      dispatch(fetchWallets());
+      dispatch(fetchWallets(currency));
       dispatch(fetchProfileHeaderInfoAction());
     }
   );

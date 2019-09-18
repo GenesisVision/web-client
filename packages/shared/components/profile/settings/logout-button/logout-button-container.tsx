@@ -1,24 +1,19 @@
 import * as React from "react";
 import { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import GVButton from "shared/components/gv-button";
-import useIsOpen from "shared/hooks/is-open.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 
 import { logoutFromDevices } from "../services/profile-settings.service";
 
-const _LogoutButtonContainer: React.FC<Props> = ({ t, service }) => {
-  const [isPending, setPending, setNotPending] = useIsOpen();
-  const handleSubmit = useCallback(() => {
-    setPending();
-    service.logoutFromDevices().finally(setNotPending);
-  }, []);
+const _LogoutButtonContainer: React.FC = () => {
+  const [t] = useTranslation();
+  const dispatch = useDispatch();
+  const { isPending, sendRequest } = useApiRequest({
+    request: () => dispatch(logoutFromDevices)
+  });
+  const handleSubmit = useCallback(() => sendRequest(), []);
   return (
     <div className="logout-container">
       <GVButton onClick={handleSubmit} disabled={isPending}>
@@ -28,30 +23,5 @@ const _LogoutButtonContainer: React.FC<Props> = ({ t, service }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { logoutFromDevices },
-    dispatch
-  )
-});
-
-interface Props extends OwnProps, DispatchProps, WithTranslation {}
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  logoutFromDevices: typeof logoutFromDevices;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface OwnProps {}
-
-const LogoutButtonContainer = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  connect(
-    null,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_LogoutButtonContainer);
+const LogoutButtonContainer = React.memo(_LogoutButtonContainer);
 export default LogoutButtonContainer;

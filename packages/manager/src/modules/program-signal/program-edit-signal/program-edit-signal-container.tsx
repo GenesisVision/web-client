@@ -49,11 +49,11 @@ interface OwnProps extends IDialogProps {
 
 interface Props extends OwnProps, WithTranslation {
   service: {
-    programEditSignal(
-      id: string,
-      successFee: number,
-      volumeFee: number
-    ): Promise<void>;
+    programEditSignal(values: {
+      id: string;
+      successFee: number;
+      volumeFee: number;
+    }): Promise<void>;
     dispatchProgramDescription: () => void;
   };
 }

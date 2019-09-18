@@ -1,7 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -11,6 +12,7 @@ import {
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
 import {
   MANAGER_DEFAULT_FILTERS,
@@ -19,12 +21,9 @@ import {
 } from "../manager.constants";
 import { fetchManagerPrograms } from "../services/manager.service";
 
-const _ManagerPrograms: React.FC<Props & WithTranslation> = ({
-  t,
-  title,
-  isAuthenticated,
-  managerId
-}) => {
+const _ManagerPrograms: React.FC<Props> = ({ title, managerId }) => {
+  const [t] = useTranslation();
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const getManagerPrograms: GetItemsFuncType = useCallback(
     filters => fetchManagerPrograms({ ...filters, managerId }),
     [managerId]
@@ -38,7 +37,7 @@ const _ManagerPrograms: React.FC<Props & WithTranslation> = ({
         personalDetails: { ...program.personalDetails, isFavorite: !isFavorite }
       };
       updateRow(newProgram);
-      toggleFavoriteProgram(program.id, isFavorite).catch(() => {
+      toggleFavoriteProgram({ id: program.id, isFavorite }).catch(() => {
         updateRow(program);
       });
     },
@@ -71,8 +70,7 @@ const _ManagerPrograms: React.FC<Props & WithTranslation> = ({
 interface Props {
   managerId: string;
   title: string;
-  isAuthenticated: boolean;
 }
 
-const ManagerPrograms = translate()(React.memo(_ManagerPrograms));
+const ManagerPrograms = React.memo(_ManagerPrograms);
 export default ManagerPrograms;

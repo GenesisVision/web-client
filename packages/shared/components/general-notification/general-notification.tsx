@@ -1,9 +1,8 @@
 import "./general-notification.scss";
 
-import { CancelablePromise } from "gv-api-web";
 import React, { useCallback } from "react";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
-import useIsOpen from "shared/hooks/is-open.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 import { IRemoveNotificationSettingProps } from "shared/modules/notification-settings/actions/notification-settings.actions";
 
 const _GeneralNotification: React.FC<Props> = ({
@@ -14,24 +13,26 @@ const _GeneralNotification: React.FC<Props> = ({
   assetId,
   removeNotification
 }) => {
-  const [isPending, setIsPending, setNotPending] = useIsOpen();
-  const handleSwitch = useCallback(
-    () => {
-      setIsPending();
-      const method = !!setting
-        ? removeNotification({
-            id: setting.id!, // TODO ask backend remove optional from id
-            assetId: assetId,
-            type: name
-          })
-        : addNotification({
-            type: name,
-            assetId: assetId
-          });
-      method.then(setNotPending).catch(setNotPending);
-    },
-    [name, assetId, setting]
-  );
+  const request = !!setting
+    ? () =>
+        removeNotification({
+          id: setting.id!, // TODO ask backend remove optional from id
+          assetId: assetId,
+          type: name
+        })
+    : () =>
+        addNotification({
+          type: name,
+          assetId: assetId
+        });
+  const { sendRequest, isPending } = useApiRequest({
+    request
+  });
+  const handleSwitch = useCallback(() => sendRequest(), [
+    name,
+    assetId,
+    setting
+  ]);
   return (
     <span className="notification-setting">
       <GVSwitch
@@ -62,10 +63,8 @@ interface Props {
   name: string;
   label: string;
   assetId?: string;
-  addNotification(opts?: Setting): CancelablePromise<void>;
-  removeNotification(
-    opts?: IRemoveNotificationSettingProps
-  ): CancelablePromise<void>;
+  addNotification: (opts: Setting) => any;
+  removeNotification: (opts: IRemoveNotificationSettingProps) => any;
 }
 
 const GeneralNotification = React.memo(_GeneralNotification);

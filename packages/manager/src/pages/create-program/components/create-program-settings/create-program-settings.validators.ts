@@ -131,6 +131,7 @@ const createProgramSettingsValidationSchema = (
 };
 
 export enum CREATE_PROGRAM_FIELDS {
+  tradesDelay = "tradesDelay",
   currency = "currency",
   periodLength = "periodLength",
   successFee = "successFee",

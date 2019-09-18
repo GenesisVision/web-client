@@ -1,17 +1,20 @@
 import {
   CancelablePromise,
-  SocialLinksViewModel,
+  SocialLinkViewModel,
   UpdateSocialLinkViewModel
 } from "gv-api-web";
 import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
-import { ResponseError } from "shared/utils/types";
 
-export const fetchSocialLinks = (): CancelablePromise<SocialLinksViewModel> => {
+export const fetchSocialLinks = (): CancelablePromise<
+  SocialLinkViewModel[]
+> => {
   const authorization = authService.getAuthArg();
-  return profileApi.v10ProfileSociallinksGet(authorization);
+  return profileApi
+    .v10ProfileSociallinksGet(authorization)
+    .then(({ socialLinks }) => socialLinks);
 };
 
 export const updateSocialLink = (requestData: UpdateSocialLinkViewModel) => (
@@ -27,8 +30,5 @@ export const updateSocialLink = (requestData: UpdateSocialLinkViewModel) => (
           true
         )
       );
-    })
-    .catch((error: ResponseError) => {
-      dispatch(alertMessageActions.error(error.errorMessage));
     });
 };

@@ -1,10 +1,10 @@
 import "./notify-button.scss";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import Tooltip from "shared/components/tooltip/tooltip";
-import useIsOpen from "shared/hooks/is-open.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { getInvestmentInfoAction } from "../services/program-details.service";
@@ -16,20 +16,15 @@ const _NotifyButton: React.FC<Props> = ({
   currency
 }) => {
   const [t] = useTranslation();
-  const [isPending, setIsPending, setNotIsPending] = useIsOpen();
-  const [notificationId, setNotificationId] = useState<string | undefined>(
-    propNotificationId
-  );
+  const { isPending, sendRequest, data } = useApiRequest({
+    request: getInvestmentInfoAction
+  });
   const handleClick = useCallback(
-    () => {
-      setIsPending();
-      getInvestmentInfoAction({
+    () =>
+      sendRequest({
         assetId,
         currency
-      })
-        .then(setNotificationId)
-        .finally(setNotIsPending);
-    },
+      }),
     [assetId, currency]
   );
   return (
@@ -37,7 +32,7 @@ const _NotifyButton: React.FC<Props> = ({
       <GVButton
         className="asset-details-description__invest-btn"
         onClick={handleClick}
-        disabled={Boolean(notificationId || isPending || !canInvest)}
+        disabled={Boolean(data || isPending || !canInvest)}
       >
         {t("buttons.notify")}
       </GVButton>

@@ -11,6 +11,8 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import { object, string } from "yup";
 
+import { TOnEditLinkSubmitFunc } from "../social-links.container";
+
 const _SocialLinkForm: React.FC<Props> = ({
   t,
   socialLink,
@@ -85,12 +87,13 @@ const SocialLinkForm = compose<React.ComponentType<OwnProps>>(
       }),
     handleSubmit: (values, { props, setSubmitting, setFieldValue }) => {
       props
-        .onSubmit(props.socialLink.type, values.linkValue)
+        .onSubmit(
+          { type: props.socialLink.type, value: values.linkValue },
+          setSubmitting
+        )
         .then(() => {
           setFieldValue(FORM_FIELD.isButtonsVisible, false);
-          setSubmitting(false);
-        })
-        .catch(() => setSubmitting(false));
+        });
     },
     enableReinitialize: true
   })
@@ -105,7 +108,7 @@ enum FORM_FIELD {
 
 interface OwnProps {
   socialLink: SocialLinkViewModel;
-  onSubmit(id: string, value: string): Promise<void>;
+  onSubmit: TOnEditLinkSubmitFunc;
 }
 
 interface ISignalLinkFormValues {

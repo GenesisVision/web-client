@@ -24,8 +24,14 @@ const getStaticIconUrl = (type: string): string | null => {
     : null;
 };
 
-const renderAssetAvatar = (props: INotificationProps) => {
-  const { type, url, logo, color, closeNotifications, assetType } = props;
+const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
+  type,
+  url,
+  logo,
+  color,
+  closeNotifications,
+  assetType
+}) => {
   const Tag: React.ComponentType<LinkProps | any> | string = url ? Link : "div";
   const to = url
     ? {
@@ -47,6 +53,7 @@ const renderAssetAvatar = (props: INotificationProps) => {
     </Tag>
   );
 };
+const NotificationAssetAvatar = React.memo(_NotificationAssetAvatar);
 
 interface INotificationOwnProps {
   closeNotifications(): void;
@@ -54,7 +61,7 @@ interface INotificationOwnProps {
 
 type INotificationProps = NotificationViewModel & INotificationOwnProps;
 
-const Notification: React.FC<INotificationProps> = props => {
+const _Notification: React.FC<INotificationProps> = props => {
   const { date, text, isUnread, type } = props;
   const staticIconUrl = getStaticIconUrl(type.toLowerCase());
   return (
@@ -76,7 +83,7 @@ const Notification: React.FC<INotificationProps> = props => {
           />
         </div>
       ) : (
-        renderAssetAvatar(props)
+        <NotificationAssetAvatar {...props} />
       )}
 
       <div className="notification__content">
@@ -87,4 +94,5 @@ const Notification: React.FC<INotificationProps> = props => {
   );
 };
 
+const Notification = React.memo(_Notification);
 export default Notification;

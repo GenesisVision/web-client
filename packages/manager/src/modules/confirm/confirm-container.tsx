@@ -1,7 +1,6 @@
-import { TwoFactorAuthenticator } from "gv-api-web";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import Dialog from "shared/components/dialog/dialog";
-import useErrorMessage from "shared/hooks/error-message.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 import GoogleAuthStepsContainer from "shared/modules/2fa/google-auth/google-auth-steps/google-auth-steps";
 import { SetSubmittingType } from "shared/utils/types";
 
@@ -16,15 +15,17 @@ const _ConfirmContainer: React.FC<Props> = ({
 }) => {
   const {
     errorMessage,
-    setErrorMessage,
-    cleanErrorMessage
-  } = useErrorMessage();
-  const [data, setData] = useState<TwoFactorAuthenticator | undefined>(
-    undefined
-  );
+    cleanErrorMessage,
+    sendRequest: confirm
+  } = useApiRequest({ request: service.confirm });
+  const { data, sendRequest: get2faInfo } = useApiRequest({
+    request: service.get2faInfo
+  });
+
   useEffect(() => {
-    service.get2faInfo({ programId }).then(setData);
+    get2faInfo({ programId });
   }, []);
+
   const handleClose = useCallback(
     () => {
       cleanErrorMessage();
@@ -32,16 +33,12 @@ const _ConfirmContainer: React.FC<Props> = ({
     },
     [onClose]
   );
+
   const handleConfirm = useCallback(
     (values: IConfirmFormValues, setSubmitting: SetSubmittingType) => {
-      service
-        .confirm({ ...values, programId })
-        .then(() => {
-          handleClose();
-          onApply && onApply();
-        })
-        .catch(setErrorMessage)
-        .then(() => setSubmitting(false));
+      confirm({ ...values, programId }, setSubmitting)
+        .then(handleClose)
+        .then(onApply);
     },
     [programId]
   );
