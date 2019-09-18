@@ -1,5 +1,6 @@
 import {
   CancelablePromise,
+  PasswordModel,
   RecoveryCodesViewModel,
   TwoFactorAuthenticatorConfirm
 } from "gv-api-web";
@@ -24,3 +25,6 @@ export const confirm2fa = (
       return response;
     });
 };
+
+export const sendPassword = (model: PasswordModel) =>
+  authApi.v10Auth2faRecoverycodesNewPost(authService.getAuthArg(), { model });
