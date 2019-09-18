@@ -11,6 +11,7 @@ import { InvestmentDetails } from "./details-investment.helpers";
 import Investment from "./investment";
 
 const _InvestmentContainer: React.FC<Props> = ({
+  successFeeCurrent,
   updateDescription,
   id,
   assetCurrency,
@@ -24,6 +25,7 @@ const _InvestmentContainer: React.FC<Props> = ({
     <div className="details-investment__investment-container">
       {haveActiveInvestment(personalDetails) && (
         <Investment
+          successFeeCurrent={successFeeCurrent}
           updateDescription={updateDescription}
           id={id}
           assetCurrency={assetCurrency}
@@ -46,6 +48,7 @@ const _InvestmentContainer: React.FC<Props> = ({
 };
 
 interface Props {
+  successFeeCurrent: number;
   updateDescription: () => void;
   asset: string;
   notice?: string;
