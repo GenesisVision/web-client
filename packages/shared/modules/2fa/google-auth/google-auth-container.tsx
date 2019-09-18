@@ -1,19 +1,12 @@
 import "./google-auth.scss";
 
-import {
-  CancelablePromise,
-  RecoveryCodesViewModel,
-  TwoFactorAuthenticator,
-  TwoFactorAuthenticatorConfirm
-} from "gv-api-web";
+import { TwoFactorAuthenticator } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import useErrorMessage from "shared/hooks/error-message.hook";
+import { useDispatch } from "react-redux";
+import useApiRequest from "shared/hooks/api-request.hook";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
-import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "shared/utils/types";
 
 import GoogleAuthCodes from "../google-auth/google-auth-codes";
 import GoogleAuthStepsContainer from "../google-auth/google-auth-steps/google-auth-steps";
@@ -21,32 +14,37 @@ import * as twoFactorServices from "../services/2fa.service";
 import DialogLoaderGoogleAuthSteps from "./google-auth-steps/dialog-loader-google-auth-steps";
 import { IGoogleActivateStepFormValues } from "./google-auth-steps/google-auth-activate-step";
 
-const GoogleAuthContainer: React.FC<Props> = ({ service, onSubmit }) => {
+const GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
+  const dispatch = useDispatch();
+  const {
+    data: recoveryCodesView,
+    errorMessage,
+    sendRequest: confirm2fa
+  } = useApiRequest({
+    request: values => dispatch(twoFactorServices.confirm2fa(values))
+  });
+
   const [TFAData, setTFAData] = useState<TwoFactorAuthenticator | undefined>(
     undefined
   );
-  const [recoveryCodesView, setRecoveryCodesView] = useState<
-    RecoveryCodesViewModel | undefined
-  >(undefined);
-  const { errorMessage, setErrorMessage } = useErrorMessage();
+
   useEffect(() => {
     authApi.v10Auth2faCreatePost(authService.getAuthArg()).then(setTFAData);
   }, []);
+
   const handleSubmit = useCallback(
     (
       values: IGoogleActivateStepFormValues,
       setSubmitting: SetSubmittingType
     ) => {
       if (!TFAData) return;
-      service
-        .confirm2fa({
+      confirm2fa(
+        {
           ...values,
           sharedKey: TFAData.sharedKey
-        })
-        .then(setRecoveryCodesView)
-        .then(onSubmit)
-        .catch(setErrorMessage)
-        .finally(() => setSubmitting(false));
+        },
+        setSubmitting
+      ).then(onSubmit);
     },
     [TFAData]
   );
@@ -66,32 +64,8 @@ const GoogleAuthContainer: React.FC<Props> = ({ service, onSubmit }) => {
   );
 };
 
-interface Props extends DispatchProps, OwnProps {}
-
-interface OwnProps {
+interface Props {
   onSubmit: () => void;
 }
 
-interface DispatchProps {
-  service: {
-    confirm2fa: (
-      model: TwoFactorAuthenticatorConfirm
-    ) => CancelablePromise<RecoveryCodesViewModel>;
-  };
-}
-
-const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
-  service: {
-    confirm2fa: (model: TwoFactorAuthenticatorConfirm) =>
-      dispatch(twoFactorServices.confirm2fa(model))
-  }
-});
-
-export default compose<React.ComponentType<OwnProps>>(
-  translate(),
-  connect(
-    null,
-    mapDispatchToProps
-  ),
-  React.memo
-)(GoogleAuthContainer);
+export default React.memo(GoogleAuthContainer);
