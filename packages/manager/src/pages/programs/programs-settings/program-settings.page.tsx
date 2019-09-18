@@ -7,12 +7,12 @@ import { AssetDescriptionType } from "modules/asset-settings/asset-settings.type
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import { NextPageContext } from "next";
 import React, { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
@@ -59,7 +59,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
         id: description!.id,
         successFee: successFee!,
         volumeFee: volumeFee!
-      }).then(dispatchDescription()),
+      }).then(() => dispatchDescription(ctx)),
     [description]
   );
   const changeBroker = useCallback(
@@ -72,7 +72,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
         brokerAccountTypeId,
         leverage,
         setSubmitting
-      ).then(() => dispatchDescription());
+      ).then(() => dispatchDescription(ctx));
     },
     [description]
   );
