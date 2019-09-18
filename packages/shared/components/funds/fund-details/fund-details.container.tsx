@@ -29,6 +29,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
     />
     <div className="details__divider" />
     <DetailsInvestment
+      successFeeCurrent={0}
       dispatchDescription={dispatchFundDescription}
       eventTypesSelector={fundEventsSelector}
       asset={ASSET.FUND}
