@@ -47,6 +47,7 @@ const useApiRequest = <T>({
     setIsPending();
     return (Promise.resolve(request(props)) as TRequest<T>)
       .then(setData)
+      .then(cleanErrorMessage)
       .catch(({ errorMessage }) => {
         setErrorMessage(errorMessage);
         dispatch(alertMessageActions.error(errorMessage));
