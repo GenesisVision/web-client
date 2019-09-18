@@ -1,10 +1,10 @@
 import { ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import FormError from "shared/components/form/form-error/form-error";
-import useErrorMessage from "shared/hooks/error-message.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 
 import ProgramWithdrawPopup, {
   IProgramWithdrawPopupProps
@@ -20,23 +20,17 @@ const _ProgramWithdrawDialog: React.FC<
   fetchInfo,
   withdraw
 }) => {
-  const [programWithdrawInfo, setProgramWithdrawInfo] = useState<
-    ProgramWithdrawInfo | undefined
-  >(undefined);
-  const { errorMessage, setErrorMessage } = useErrorMessage();
-  useEffect(
-    () => {
-      fetchInfo()
-        .then(setProgramWithdrawInfo)
-        .catch(setErrorMessage);
-    },
-    [fetchInfo, setErrorMessage]
-  );
+  const { errorMessage, data, sendRequest } = useApiRequest<
+    ProgramWithdrawInfo
+  >({ request: fetchInfo });
+  useEffect(() => {
+    sendRequest();
+  }, []);
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
-        condition={!!programWithdrawInfo}
-        programWithdrawInfo={programWithdrawInfo!}
+        condition={!!data}
+        programWithdrawInfo={data!}
         loader={<DialogLoader />}
         withdraw={withdraw}
         accountCurrency={accountCurrency}

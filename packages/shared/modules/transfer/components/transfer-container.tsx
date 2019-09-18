@@ -1,11 +1,6 @@
-import {
-  CopyTradingAccountInfo,
-  InternalTransferRequestSourceTypeEnum,
-  WalletData
-} from "gv-api-web";
+import { InternalTransferRequestSourceTypeEnum } from "gv-api-web";
 import React, { useCallback, useEffect } from "react";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { ItemType } from "shared/components/wallet-select/wallet-select";
 import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
@@ -17,46 +12,47 @@ import {
   fetchAccounts,
   fetchWallets
 } from "shared/components/wallet/services/wallet.services";
-import useErrorMessage from "shared/hooks/error-message.hook";
-import { RootState } from "shared/reducers/root-reducer";
+import useApiRequest from "shared/hooks/api-request.hook";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 
 import { transferRequest } from "../services/transfer.services";
 import { TRANSFER_CONTAINER, TRANSFER_DIRECTION } from "../transfer.types";
 import TransferForm, { TransferFormValues } from "./transfer-form";
 
 const _TransferContainer: React.FC<Props> = ({
-  copyTradingAccounts,
   title,
   currentItem,
-  wallets,
   sourceType,
   destinationType,
   currentItemContainer,
-  service,
   onClose
 }) => {
-  const { errorMessage, setErrorMessage } = useErrorMessage();
+  const dispatch = useDispatch();
+  const wallets = useSelector(walletsSelector);
+  const copyTradingAccounts = useSelector(copyTradingAccountsSelector);
+  const currency = useSelector(currencySelector);
+  const { errorMessage, sendRequest: sendTransferRequest } = useApiRequest({
+    request: transferRequest
+  });
   useEffect(() => {
     if (
       destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
       sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
     )
-      service.fetchAccounts();
+      dispatch(fetchAccounts());
   }, []);
   const handleSubmit = useCallback(
     (values: TransferFormValues) =>
-      transferRequest(values)
-        .then(() => {
-          onClose();
-          service.fetchWallets();
-          service.updateWalletTimestamp();
-          if (
-            destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
-            sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
-          )
-            service.fetchAccounts();
-        })
-        .catch(setErrorMessage),
+      sendTransferRequest(values).then(() => {
+        onClose();
+        dispatch(fetchWallets(currency));
+        dispatch(updateWalletTimestampAction());
+        if (
+          destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
+          sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+        )
+          dispatch(fetchAccounts());
+      }),
     [destinationType, sourceType]
   );
   const sourceItems =
@@ -82,49 +78,7 @@ const _TransferContainer: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  wallets: walletsSelector(state),
-  copyTradingAccounts: copyTradingAccountsSelector(state)
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators(
-    {
-      fetchAccounts,
-      fetchWallets,
-      updateWalletTimestamp: updateWalletTimestampAction
-    },
-    dispatch
-  )
-});
-
-const TransferContainer = compose<
-  React.ComponentType<ITransferContainerOwnProps>
->(
-  connect<StateProps, DispatchProps, ITransferContainerOwnProps, RootState>(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_TransferContainer);
-export default TransferContainer;
-
-interface Props extends StateProps, DispatchProps, ITransferContainerOwnProps {}
-
-interface StateProps {
-  wallets: WalletData[];
-  copyTradingAccounts: CopyTradingAccountInfo[];
-}
-
-interface DispatchProps {
-  service: {
-    fetchAccounts(): void;
-    fetchWallets(): void;
-    updateWalletTimestamp(): void;
-  };
-}
-
-export interface ITransferContainerOwnProps {
+interface Props {
   currentItem: ItemType;
   onClose(): void;
   sourceType: InternalTransferRequestSourceTypeEnum;
@@ -132,3 +86,6 @@ export interface ITransferContainerOwnProps {
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }
+
+const TransferContainer = React.memo(_TransferContainer);
+export default TransferContainer;

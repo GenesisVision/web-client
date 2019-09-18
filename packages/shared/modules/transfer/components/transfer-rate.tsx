@@ -1,58 +1,37 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { rateApi } from "shared/services/api-client/rate-api";
+
+const _TransferRate: React.FC<Props> = ({
+  sourceCurrency,
+  destinationCurrency,
+  children
+}) => {
+  const [rate, setRate] = useState<number>(0);
+  useEffect(
+    () => {
+      rateApi
+        .v10RateByFromByToGet(sourceCurrency, destinationCurrency)
+        .then(setRate)
+        .catch(() => setRate(0));
+    },
+    [sourceCurrency, destinationCurrency]
+  );
+
+  return rate && sourceCurrency !== destinationCurrency
+    ? children({ rate })
+    : null;
+};
 
 type InjectedRate = {
   rate: number;
 };
 
-type ITransferRateProps = Readonly<{
-  children(props: InjectedRate): React.ReactNode;
+interface Props {
+  children: (props: InjectedRate) => JSX.Element;
   sourceCurrency: string;
   destinationCurrency: string;
-}>;
-type ITransferRateState = {
-  rate?: number;
-};
-
-class TransferRate extends React.PureComponent<
-  ITransferRateProps,
-  ITransferRateState
-> {
-  state = {
-    isPending: false,
-    rate: 0
-  };
-
-  fetchRate = () => {
-    rateApi
-      .v10RateByFromByToGet(
-        this.props.sourceCurrency,
-        this.props.destinationCurrency
-      )
-      .then(rate => this.setState({ rate }))
-      .catch(() => this.setState({ rate: 0 }));
-  };
-
-  componentDidMount() {
-    this.fetchRate();
-  }
-
-  componentDidUpdate(
-    prevProps: Readonly<ITransferRateProps>,
-    prevState: Readonly<{}>,
-    snapshot?: any
-  ): void {
-    if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
-      this.fetchRate();
-    }
-  }
-
-  render() {
-    return this.state.rate &&
-      this.props.sourceCurrency !== this.props.destinationCurrency
-      ? this.props.children({ rate: this.state.rate })
-      : null;
-  }
 }
 
+const TransferRate = React.memo(_TransferRate);
 export default TransferRate;

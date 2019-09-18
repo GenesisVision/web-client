@@ -1,20 +1,14 @@
-import {
-  CancelablePromise,
-  CreateWithdrawalRequestModel,
-  WalletData
-} from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestampAction } from "shared/components/wallet/actions/wallet.actions";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
-import useErrorMessage from "shared/hooks/error-message.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
-import { RootState } from "shared/reducers/root-reducer";
-import { MiddlewareDispatch, SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "shared/utils/types";
 
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
 import WalletWithdrawForm, {
@@ -22,29 +16,27 @@ import WalletWithdrawForm, {
 } from "./wallet-withdraw-form";
 import WalletWithdrawRequest from "./wallet-withdraw-request/wallet-withdraw-request";
 
-const WalletWithdrawContainer: React.FC<Props> = ({
-  twoFactorEnabled,
-  wallets,
-  currentWallet,
-  service
-}) => {
+const _WalletWithdrawContainer: React.FC<Props> = ({ currentWallet }) => {
+  const twoFactorEnabled = useSelector(twoFactorEnabledSelector);
+  const wallets = useSelector(walletsSelector);
+  const dispatch = useDispatch();
   const [isSuccess, setSuccess, setNotSuccess] = useIsOpen();
-  const { errorMessage, setErrorMessage } = useErrorMessage();
+  const { errorMessage, sendRequest } = useApiRequest({
+    request: values =>
+      dispatch(walletWithdrawService.newWithdrawRequest(values)),
+    catchCallback: () => setNotSuccess()
+  });
   const handleSubmit = useCallback(
     (values: IWalletWithdrawFormValues, setSubmitting: SetSubmittingType) => {
-      service
-        .newWithdrawRequest({ ...values, amount: Number(values.amount) })
-        .then(() => {
-          setSuccess();
-          service.updateWalletTimestamp();
-        })
-        .catch(error => {
-          setNotSuccess();
-          setErrorMessage(error);
-          setSubmitting(false);
-        });
+      sendRequest(
+        { ...values, amount: Number(values.amount) },
+        setSubmitting
+      ).then(() => {
+        setSuccess();
+        dispatch(updateWalletTimestampAction());
+      });
     },
-    [service, setErrorMessage, setNotSuccess, setSuccess]
+    []
   );
   if (!wallets.length) return <DialogLoader />;
   const enabledWallets = wallets.filter(wallet => wallet.isWithdrawalEnabled);
@@ -61,41 +53,9 @@ const WalletWithdrawContainer: React.FC<Props> = ({
   );
 };
 
-interface Props extends DispatchProps, StateProps, OwnProps {}
-
-interface OwnProps {
+interface Props {
   currentWallet: WalletData;
 }
 
-interface DispatchProps {
-  service: {
-    newWithdrawRequest: (data: CreateWithdrawalRequestModel) => Promise<any>;
-    updateWalletTimestamp: () => void;
-  };
-}
-
-interface StateProps {
-  wallets: WalletData[];
-  twoFactorEnabled: boolean;
-}
-
-const mapStateToProps = (state: RootState): StateProps => ({
-  twoFactorEnabled: twoFactorEnabledSelector(state),
-  wallets: walletsSelector(state)
-});
-
-const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
-  service: {
-    updateWalletTimestamp: () => dispatch(updateWalletTimestampAction()),
-    newWithdrawRequest: data =>
-      dispatch(walletWithdrawService.newWithdrawRequest(data))
-  }
-});
-
-export default compose<React.ComponentType<OwnProps>>(
-  connect<StateProps, DispatchProps, OwnProps, RootState>(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  React.memo
-)(WalletWithdrawContainer);
+const WalletWithdrawContainer = React.memo(_WalletWithdrawContainer);
+export default WalletWithdrawContainer;

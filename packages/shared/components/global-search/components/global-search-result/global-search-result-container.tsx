@@ -2,55 +2,41 @@ import classNames from "classnames";
 import { SearchViewModel } from "gv-api-web";
 import { debounce } from "lodash";
 import * as React from "react";
+import { useCallback, useState } from "react";
 import { Nullable } from "shared/utils/types";
 
 import { search } from "../../services/global-search-result.service";
 import GlobalSearchInput from "./global-search-input";
 import GlobalSearchResult from "./global-search-result/global-search-result";
 
+const _GlobalSearchResultContainer: React.FC<Props> = ({ title }) => {
+  const [query, setQuery] = useState<string>("");
+  const [data, setData] = useState<Nullable<SearchViewModel>>(null);
+
+  const searchDebounced = debounce((value: string) => {
+    search(value).then(setData);
+  }, 300);
+
+  const handleOnChange = useCallback((query: string) => {
+    setQuery(query);
+    searchDebounced(query);
+  }, []);
+
+  return (
+    <>
+      <GlobalSearchInput query={query} onChange={handleOnChange} />
+      {data && (
+        <div className={classNames({ "global-search-hidden": !query })}>
+          <GlobalSearchResult data={data} title={title} />
+        </div>
+      )}
+    </>
+  );
+};
+
 interface Props {
   title: string;
 }
 
-interface State {
-  query: string;
-  data: Nullable<SearchViewModel>;
-}
-
-class GlobalSearchResultContainer extends React.PureComponent<Props, State> {
-  state = {
-    query: "",
-    data: null
-  };
-
-  handleOnChange = (query: string) => {
-    this.setState({ query });
-    this.searchDebounced(query);
-  };
-
-  searchDebounced = debounce((value: string) => {
-    search(value).then(data => {
-      this.setState({ data });
-    });
-  }, 300);
-
-  render() {
-    const { query, data } = this.state;
-    const { title } = this.props;
-    return (
-      <>
-        <GlobalSearchInput
-          query={this.state.query}
-          onChange={this.handleOnChange}
-        />
-        {data && (
-          <div className={classNames({ "global-search-hidden": !query })}>
-            <GlobalSearchResult data={data} title={title} />
-          </div>
-        )}
-      </>
-    );
-  }
-}
-
+const GlobalSearchResultContainer = React.memo(_GlobalSearchResultContainer);
 export default GlobalSearchResultContainer;

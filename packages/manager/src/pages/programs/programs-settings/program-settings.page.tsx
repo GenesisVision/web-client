@@ -7,12 +7,12 @@ import { AssetDescriptionType } from "modules/asset-settings/asset-settings.type
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import { NextPageContext } from "next";
 import React, { useCallback, useEffect, useState } from "react";
-import { connect, ResolveThunks, useSelector } from "react-redux";
+import { ResolveThunks, connect, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
@@ -55,10 +55,12 @@ const _ProgramsEditPage: React.FC<Props> = ({
   );
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
-      programEditSignal(description!.id, successFee!, volumeFee!).then(() =>
-        dispatchDescription()
-      ),
-    [programEditSignal, description, dispatchDescription]
+      programEditSignal({
+        id: description!.id,
+        successFee: successFee!,
+        volumeFee: volumeFee!
+      }).then(dispatchDescription()),
+    [description]
   );
   const changeBroker = useCallback(
     (
@@ -72,7 +74,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
         setSubmitting
       ).then(() => dispatchDescription());
     },
-    [changeBrokerMethod, description, dispatchDescription]
+    [description]
   );
   const cancelChangeBroker = useCallback(
     () => {
@@ -80,7 +82,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
         dispatchDescription()
       );
     },
-    [cancelChangeBrokerMethod, description, dispatchDescription]
+    [description]
   );
   return (
     <AssetSettingsPage

@@ -17,10 +17,13 @@ const disableReinvesting = (programId: string): Promise<void> => {
   );
 };
 
-export const toggleReinvesting = (
-  programId: string,
-  isReinvesting: boolean
-): Promise<void> => {
+export const toggleReinvesting = ({
+  programId,
+  isReinvesting
+}: {
+  programId: string;
+  isReinvesting: boolean;
+}): Promise<void> => {
   return isReinvesting
     ? enableReinvesting(programId)
     : disableReinvesting(programId);

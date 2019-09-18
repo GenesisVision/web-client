@@ -1,14 +1,17 @@
 import "./social-links.scss";
 
 import {
+  CancelablePromise,
   SocialLinkViewModel,
-  UpdateSocialLinkViewModelTypeEnum
+  UpdateSocialLinkViewModel
 } from "gv-api-web";
 import * as React from "react";
-import { connect, ResolveThunks } from "react-redux";
-import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
+import { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import withLoader from "shared/decorators/with-loader";
+import useApiRequest from "shared/hooks/api-request.hook";
+import { SetSubmittingType } from "shared/utils/types";
 
 import {
   fetchSocialLinks,
@@ -26,77 +29,49 @@ const _Links: React.FC<ILinksProps> = ({ socialLinks, onSubmit }) => (
 );
 const Links = React.memo(withLoader(_Links));
 
+export type TOnEditLinkSubmitFunc = (
+  values: UpdateSocialLinkViewModel,
+  setSubmitting: SetSubmittingType
+) => CancelablePromise<void>;
+
 interface ILinksProps {
   socialLinks: SocialLinkViewModel[];
-  onSubmit(id: string, value: string): Promise<void>;
+  onSubmit: TOnEditLinkSubmitFunc;
 }
 
-class _SocialLinksContainer extends React.PureComponent<Props, State> {
-  state: State = {
-    socialLinks: undefined
-  };
+const _SocialLinksContainer: React.FC = () => {
+  const dispatch = useDispatch();
+  const { data: socialLinks, sendRequest: getSocialLinks } = useApiRequest<
+    SocialLinkViewModel[]
+  >({ request: fetchSocialLinks });
+  const { sendRequest: setSocialLinks } = useApiRequest<SocialLinkViewModel[]>({
+    request: args => dispatch(updateSocialLink(args))
+  });
+  useEffect(() => {
+    getSocialLinks();
+  }, []);
 
-  componentDidMount() {
-    this.updateSocialLinks();
-  }
+  const _handleSubmitSocialLink: TOnEditLinkSubmitFunc = (
+    { type, value }: UpdateSocialLinkViewModel,
+    setSubmitting: SetSubmittingType
+  ) => setSocialLinks({ type, value }, setSubmitting).then(getSocialLinks);
+  const handleSubmitSocialLink = useCallback(_handleSubmitSocialLink, []);
 
-  handleSubmitSocialLink = (
-    type: UpdateSocialLinkViewModelTypeEnum,
-    value: string
-  ) => {
-    return this.props.service.updateSocialLink({ type, value }).then(() => {
-      this.updateSocialLinks();
-    });
-  };
+  return (
+    <div className="asset-settings profile__container--padding-top social-links">
+      <SettingsBlock
+        content={
+          <Links
+            condition={socialLinks !== undefined}
+            loader={<SocialLinksLoader />}
+            socialLinks={socialLinks!}
+            onSubmit={handleSubmitSocialLink}
+          />
+        }
+      />
+    </div>
+  );
+};
 
-  updateSocialLinks = () => {
-    fetchSocialLinks().then(data => {
-      this.setState({ socialLinks: data.socialLinks });
-    });
-  };
-
-  render() {
-    const { socialLinks } = this.state;
-    return (
-      <div className="asset-settings profile__container--padding-top social-links">
-        <SettingsBlock
-          content={
-            <Links
-              condition={socialLinks !== undefined}
-              loader={<SocialLinksLoader />}
-              socialLinks={socialLinks!}
-              onSubmit={this.handleSubmitSocialLink}
-            />
-          }
-        />
-      </div>
-    );
-  }
-}
-
-const mapDispatchToProps = (dispatch: Dispatch): Props => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      updateSocialLink
-    },
-    dispatch
-  )
-});
-
-const SocialLinksContainer = connect(
-  null,
-  mapDispatchToProps
-)(_SocialLinksContainer);
+const SocialLinksContainer = React.memo(_SocialLinksContainer);
 export default SocialLinksContainer;
-
-interface State {
-  socialLinks?: SocialLinkViewModel[];
-}
-
-interface Props {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  updateSocialLink: typeof updateSocialLink;
-}

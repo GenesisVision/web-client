@@ -20,12 +20,7 @@ const _NotificationEntity: React.FC<Props> = ({
     }}
   >
     <div className="notification-entity">
-      <GVProgramAvatar
-        url={filesService.getFileUrl(logo)}
-        alt={title}
-        level={level}
-        color={color}
-      />
+      <GVProgramAvatar url={logo} alt={title} level={level} color={color} />
       <div className="notification-entity__title">{title}</div>
       <div className="notification-entity__count">{count}</div>
     </div>

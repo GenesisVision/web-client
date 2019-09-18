@@ -43,7 +43,7 @@ const _ProgramsFacetTable: React.FC<
         personalDetails: { ...program.personalDetails, isFavorite: !isFavorite }
       };
       updateRow(newProgram);
-      toggleFavoriteProgram(program.id, isFavorite).catch(() => {
+      toggleFavoriteProgram({ id: program.id, isFavorite }).catch(() => {
         updateRow(program);
       });
     },

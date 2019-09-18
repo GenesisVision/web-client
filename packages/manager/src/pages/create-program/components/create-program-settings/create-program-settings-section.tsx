@@ -63,7 +63,7 @@ class CreateProgramSettingsSection extends React.PureComponent<
 
   handleWalletChange = (walletId: string): void => {
     if (this.state.wallet && this.state.wallet.id === walletId) return;
-    this.props.fetchWallets();
+    this.props.fetchWallets(this.props.currency);
     const wallet = this.props.wallets.find(x => x.id === walletId)!;
     this.setState({ wallet });
   };
@@ -110,10 +110,11 @@ class CreateProgramSettingsSection extends React.PureComponent<
 export default CreateProgramSettingsSection;
 
 interface OwnProps {
+  currency: CurrencyEnum;
   broker: Broker;
   wallets: WalletData[];
   programsInfo: ProgramsInfo;
-  fetchWallets(): void;
+  fetchWallets: (currency: CurrencyEnum) => void;
   fetchRate(from: string, to: string): Promise<number>;
   onSubmit(
     data: ICreateProgramSettingsFormValues,

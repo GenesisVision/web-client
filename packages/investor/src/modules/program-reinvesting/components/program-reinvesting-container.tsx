@@ -1,17 +1,18 @@
 import classNames from "classnames";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
+import useApiRequest from "shared/hooks/api-request.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
 
 import { toggleReinvesting } from "../services/program-reinvesting.service";
@@ -22,27 +23,20 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
   programId
 }) => {
   const [t] = useTranslation();
-  const [isPending, setIsPending, setNotIsPending] = useIsOpen();
   const [isReinvesting, setIs, setNotIs, setIsReinvestingValue] = useIsOpen(
     propIsReinvesting
   );
+  const { isPending, sendRequest } = useApiRequest({
+    request: toggleReinvesting,
+    catchCallback: () => setIsReinvestingValue(isReinvesting)
+  });
   const onReinvestingLabelClick = useCallback(
-    () => {
-      setIsPending();
-      setIsReinvestingValue(!isReinvesting);
-      toggleReinvesting(programId, !isReinvesting)
-        .then(() => dispatchProgramDescription())
-        .catch(() => setIsReinvestingValue(isReinvesting))
-        .finally(setNotIsPending);
-    },
-    [
-      setIsPending,
-      setIsReinvestingValue,
-      isReinvesting,
-      programId,
-      dispatchProgramDescription,
-      setNotIsPending
-    ]
+    () =>
+      sendRequest({ programId, isReinvesting: !isReinvesting }).then(() => {
+        setIsReinvestingValue(!isReinvesting);
+        dispatchProgramDescription();
+      }),
+    [programId, isReinvesting]
   );
   return (
     <span

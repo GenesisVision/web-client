@@ -1,43 +1,40 @@
 import "./infinity-scroll.scss";
 
-import React, { createRef } from "react";
+import React, { useCallback, useRef } from "react";
 
-class InfinityScroll extends React.PureComponent<Props> {
-  scroll: React.RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
-  container: React.RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
+const _InfinityScroll: React.FC<Props> = ({ hasMore, loadMore, children }) => {
+  const scroll: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const container: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(
+    null
+  );
 
-  handleScroll = () => {
-    if (this.scroll.current && this.container.current) {
-      const scroll = this.scroll.current;
-      const scrollTop = scroll.scrollTop;
-      const clientHeight = window.innerHeight;
-      const scrollHeight = this.container.current.getBoundingClientRect()
-        .height;
-      const offsetBottom = scrollHeight - scrollTop - clientHeight;
-      if (offsetBottom < 100 && this.props.hasMore) {
-        this.props.loadMore();
+  const handleScroll = useCallback(
+    () => {
+      if (scroll.current && container.current) {
+        const scrollCurrent = scroll.current;
+        const scrollTop = scrollCurrent.scrollTop;
+        const clientHeight = window.innerHeight;
+        const scrollHeight = container.current.getBoundingClientRect().height;
+        const offsetBottom = scrollHeight - scrollTop - clientHeight;
+        if (offsetBottom < 100 && hasMore) loadMore();
       }
-    }
-  };
+    },
+    [scroll, container, hasMore, loadMore, window.innerHeight]
+  );
 
-  render() {
-    return (
-      <div
-        className="infinity-scroll"
-        ref={this.scroll}
-        onScroll={this.handleScroll}
-      >
-        <div className="infinity-scroll__container" ref={this.container}>
-          {this.props.children}
-        </div>
+  return (
+    <div className="infinity-scroll" ref={scroll} onScroll={handleScroll}>
+      <div className="infinity-scroll__container" ref={container}>
+        {children}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 interface Props {
   loadMore: () => void;
   hasMore?: boolean;
 }
 
+const InfinityScroll = React.memo(_InfinityScroll);
 export default InfinityScroll;
