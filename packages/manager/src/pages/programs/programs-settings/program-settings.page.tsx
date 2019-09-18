@@ -53,9 +53,11 @@ const _ProgramsEditPage: React.FC<Props> = ({
   );
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
-      programEditSignal(description!.id, successFee!, volumeFee!).then(
-        dispatchDescription
-      ),
+      programEditSignal({
+        id: description!.id,
+        successFee: successFee!,
+        volumeFee: volumeFee!
+      }).then(dispatchDescription),
     [description]
   );
   const changeBroker = useCallback(
