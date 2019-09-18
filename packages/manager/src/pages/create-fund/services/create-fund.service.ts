@@ -1,6 +1,5 @@
 import { push } from "connected-react-router";
 import { NewFundRequest } from "gv-api-web";
-import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import managerApi from "shared/services/api-client/manager-api";
@@ -44,7 +43,6 @@ export const createFund = (
           true
         )
       );
-      dispatch(fetchWallets());
       dispatch(push(DASHBOARD_ROUTE));
     })
     .catch(error => {
