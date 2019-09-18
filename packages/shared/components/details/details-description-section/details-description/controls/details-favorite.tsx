@@ -28,7 +28,7 @@ const _DetailsFavorite: React.FC<Props> = ({
       setIsFavoriteValue(!isFavorite);
       sendRequest({ id, isFavorite });
     },
-    [setIsFavoriteValue, setIsNotPending, setIsPending]
+    [setIsFavoriteValue]
   );
   const handleFavoriteClickOnText = useCallback(
     () => handleFavoriteClickOnButton(id, isFavorite),
