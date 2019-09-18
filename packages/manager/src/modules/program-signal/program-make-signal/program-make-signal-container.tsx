@@ -25,7 +25,8 @@ const _ProgramMakeSignalContainer: React.FC<Props> = ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   service: bindActionCreators(
     {
-      programMakeSignal,dispatchProgramDescription
+      programMakeSignal,
+      dispatchProgramDescription
     },
     dispatch
   )
@@ -48,11 +49,11 @@ interface OwnProps extends IDialogProps {
 
 interface Props extends OwnProps, WithTranslation {
   service: {
-    programMakeSignal(
-      id: string,
-      successFee: number,
-      volumeFee: number
-    ): Promise<void>;
-    dispatchProgramDescription: ()=>void
+    programMakeSignal(values: {
+      id: string;
+      successFee: number;
+      volumeFee: number;
+    }): Promise<void>;
+    dispatchProgramDescription: () => void;
   };
 }
