@@ -21,8 +21,8 @@ const nextConfig = {
     config.resolve.modules.push(path.resolve("./src"));
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
     return config;
-  }
-  // assetPrefix: isProd ? "/" + process.env.REACT_APP_BASENAME : "" //TODO fix it
+  },
+  assetPrefix: isProd ? "/static-investor" : ""
 };
 
 module.exports = withPlugins(

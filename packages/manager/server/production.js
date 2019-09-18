@@ -2,12 +2,12 @@ const express = require("express");
 const nextI18NextMiddleware = require("next-i18next/middleware");
 const nextI18next = require("shared/i18n");
 
-module.exports = async (app, port) => {
+module.exports = async app => {
   const handle = app.getRequestHandler();
   await app.prepare();
 
   // const platform = process.env.REACT_APP_BASENAME;
-
+  const port = process.env.PORT || 3001;
   const server = express();
   // const manager = express();
 
