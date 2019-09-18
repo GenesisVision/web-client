@@ -18,6 +18,18 @@ import { CurrencyEnum, RootThunk } from "shared/utils/types";
 
 import * as actions from "../actions/wallet.actions";
 
+export const fetchWalletsWithCtx = (ctx?: NextPageContext): RootThunk<void> => async (
+  dispatch,
+  getState
+) => {
+  const authorization = authService.getAuthArg(ctx);
+  const { info } = getState().wallet;
+  if (info.isPending) return;
+  const { currency } = getState().accountSettings;
+  await dispatch(actions.updateWalletTimestampAction());
+  await dispatch(actions.fetchWalletsAction(currency, authorization));
+};
+
 export const fetchWallets = (currency: CurrencyEnum, ctx?: NextPageContext): RootThunk<void> => async (
   dispatch
 ) => {
