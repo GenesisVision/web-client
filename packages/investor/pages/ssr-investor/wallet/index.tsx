@@ -4,7 +4,7 @@ import platformActions from "shared/actions/platform-actions";
 import WalletTotalContainer from "shared/components/wallet/components/wallet-total-container";
 import {
   fetchAccounts,
-  fetchWallets
+  fetchWalletsWithCtx
 } from "shared/components/wallet/services/wallet.services";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
@@ -19,7 +19,7 @@ Wallet.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(
       async dispatch => await dispatch(platformActions.fetchPlatformSettings())
     ),
-    ctx.reduxStore.dispatch(fetchWallets(ctx)),
+    ctx.reduxStore.dispatch(fetchWalletsWithCtx(ctx)),
     ctx.reduxStore.dispatch(fetchAccounts(ctx))
   ]);
 };
