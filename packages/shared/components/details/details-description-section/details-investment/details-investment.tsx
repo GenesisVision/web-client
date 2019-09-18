@@ -35,6 +35,7 @@ import InvestmentContainer, {
 } from "./investment-container";
 
 const _DetailsInvestment: React.FC<Props> = ({
+  successFeeCurrent,
   notice,
   asset,
   eventTypesSelector,
@@ -89,6 +90,7 @@ const _DetailsInvestment: React.FC<Props> = ({
       </div>
       {tab === TABS.INVESTMENT && (
         <InvestmentContainer
+          successFeeCurrent={successFeeCurrent}
           updateDescription={dispatchDescription}
           asset={asset}
           notice={notice}
@@ -118,6 +120,7 @@ enum TABS {
   EVENTS = "EVENTS"
 }
 interface OwnProps {
+  successFeeCurrent: number;
   notice?: string;
   asset: ASSET;
   eventTypesSelector: (state: RootState) => SelectFilterValue[];
