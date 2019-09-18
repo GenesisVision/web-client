@@ -24,6 +24,7 @@ import { programsInfoSelector } from "shared/reducers/platform-reducer";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { rateApi } from "shared/services/api-client/rate-api";
 import {
+  CurrencyEnum,
   MiddlewareDispatch,
   ResponseError,
   SetSubmittingType
@@ -35,6 +36,7 @@ import {
 } from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 
 enum TAB {
   BROKER = "BROKER",
@@ -53,8 +55,8 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    const { service } = this.props;
-    service.fetchWallets();
+    const { service, currency } = this.props;
+    service.fetchWallets(currency);
     fetchBrokers().then(brokers => {
       this.setState({
         brokers: brokers,
@@ -118,7 +120,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
           notifySuccess(
             "manager.create-program-page.notifications.create-success"
           );
-          fetchWallets();
+          fetchWallets(this.props.currency);
           setSubmitting(false);
         }
       })
@@ -146,7 +148,14 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
       isNavigationDialogVisible
     } = this.state;
 
-    const { t, headerData, service, programsInfo, wallets } = this.props;
+    const {
+      t,
+      headerData,
+      service,
+      programsInfo,
+      wallets,
+      currency
+    } = this.props;
     if (
       !brokers ||
       !selectedBroker ||
@@ -184,6 +193,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
             )}
             {tab === TAB.SETTINGS && (
               <CreateProgramSettingsSection
+                currency={currency}
                 minimumDepositsAmount={minimumDepositsAmount}
                 fetchWallets={service.fetchWallets}
                 fetchRate={this.fetchRate}
@@ -221,6 +231,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  currency: currencySelector(state),
   wallets: walletsSelector(state),
   headerData: headerSelector(state),
   programsInfo: programsInfoSelector(state)
@@ -230,7 +241,7 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
     redirectToDashboard: () => dispatch(push(DASHBOARD_ROUTE)),
     createProgram: (data: any) => dispatch(createProgram(data)),
-    fetchWallets: () => dispatch(fetchWallets()),
+    fetchWallets: currency => dispatch(fetchWallets(currency)),
     notifyError: (message: string) =>
       dispatch(alertMessageActions.error(message)),
     notifySuccess: (message: string) =>
@@ -260,6 +271,7 @@ interface State {
 }
 
 interface StateProps {
+  currency: CurrencyEnum;
   programsInfo?: ProgramsInfo;
   wallets: WalletData[];
   headerData?: ProfileHeaderViewModel;
@@ -267,7 +279,7 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    fetchWallets: () => void;
+    fetchWallets: (currency: CurrencyEnum) => void;
     createProgram: (data: any) => CancelablePromise<ManagerProgramCreateResult>;
     notifyError: (message: string) => void;
     notifySuccess: (message: string) => void;
