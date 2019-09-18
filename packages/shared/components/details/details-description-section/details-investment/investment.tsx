@@ -24,6 +24,7 @@ import { CurrencyEnum } from "shared/utils/types";
 import { InvestmentDetails } from "./details-investment.helpers";
 
 const _Investment: React.FC<Props> = ({
+  successFeeCurrent,
   updateDescription,
   id,
   assetCurrency,
@@ -83,6 +84,18 @@ const _Investment: React.FC<Props> = ({
             >
               {roundPercents(personalDetails.profit)}
             </Profitability>
+          </StatisticItem>
+          <StatisticItem
+            label={t("program-details-page.description.successFee")}
+            className="details-investment__statistic-item"
+            accent
+          >
+            <NumberFormat
+              value={successFeeCurrent}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
           </StatisticItem>
           <StatisticItem
             className="details-investment__statistic-item"
@@ -176,7 +189,8 @@ const _Investment: React.FC<Props> = ({
   );
 };
 
-interface OwnProps {
+interface Props {
+  successFeeCurrent: number;
   updateDescription: () => void;
   asset: string;
   notice?: string;
@@ -188,8 +202,6 @@ interface OwnProps {
     IProgramReinvestingContainerOwnProps
   >;
 }
-
-interface Props extends OwnProps {}
 
 const Investment = React.memo(_Investment);
 export default Investment;
