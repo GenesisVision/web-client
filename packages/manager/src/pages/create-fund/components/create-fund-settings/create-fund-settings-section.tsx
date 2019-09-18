@@ -1,6 +1,6 @@
 import { PlatformAsset, WalletData } from "gv-api-web";
 import * as React from "react";
-import { SetSubmittingType } from "shared/utils/types";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import CreateFundSettings, {
   ICreateFundSettingsFormValues
@@ -33,7 +33,7 @@ class _CreateFundSettingsSection extends React.PureComponent<
 
   handleWalletChange = (walletId: string): void => {
     if (this.state.wallet && this.state.wallet.id === walletId) return;
-    this.props.fetchWallets();
+    this.props.fetchWallets(this.props.currency);
     const wallet = this.props.wallets.find(x => x.id === walletId)!;
     this.setState({ wallet });
   };
@@ -85,10 +85,11 @@ const CreateFundSettingsSection = withLoader(_CreateFundSettingsSection);
 export default CreateFundSettingsSection;
 
 interface OwnProps {
+  currency: CurrencyEnum;
   managerMaxExitFee: number;
   managerMaxEntryFee: number;
   wallets: WalletData[];
-  fetchWallets(): void;
+  fetchWallets: (currency: CurrencyEnum) => void;
   fetchRate(from: string, to: string): Promise<number>;
   onSubmit(
     data: ICreateFundSettingsFormValues,
