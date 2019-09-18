@@ -24,7 +24,7 @@ import {
 import { ICreateFundSettingsFormValues } from "./create-fund-settings/create-fund-settings";
 import CreateFundSettingsSection from "./create-fund-settings/create-fund-settings-section";
 
-const _CreateFundContainer: React.FC = () => {
+const _CreateFundContainer: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const wallets = useSelector(walletsSelector);
@@ -93,6 +93,10 @@ const _CreateFundContainer: React.FC = () => {
     </div>
   );
 };
+
+interface Props {
+  minimumDepositAmount: number;
+}
 
 const CreateFundContainer = React.memo(_CreateFundContainer);
 export default CreateFundContainer;
