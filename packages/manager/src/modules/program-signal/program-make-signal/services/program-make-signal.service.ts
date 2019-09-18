@@ -3,11 +3,15 @@ import { alertMessageActions } from "shared/modules/alert-message/actions/alert-
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
-export const programMakeSignal = (
-  id: string,
-  successFee: number,
-  volumeFee: number
-): any => (dispatch: Dispatch) => {
+export const programMakeSignal = ({
+  id,
+  successFee,
+  volumeFee
+}: {
+  id: string;
+  successFee: number;
+  volumeFee: number;
+}): any => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
   const requestData = {
     programId: id,
