@@ -12,6 +12,9 @@ import {
 } from "./services/asset-status.service";
 
 const _AssetStatusRequests: React.FC<Props> = ({
+  successFee,
+  entryFee,
+  exitFee,
   id,
   asset,
   onCancel,
@@ -43,10 +46,23 @@ const _AssetStatusRequests: React.FC<Props> = ({
 
   return (
     <>
-      {requests.map(x => (
+      {requests.map(request => (
         <DashboardRequest
-          key={x.id}
-          request={x}
+          successFee={
+            request.successFee && request.successFee !== successFee
+              ? request.successFee
+              : undefined
+          }
+          exitFee={
+            request.exitFee && request.exitFee !== exitFee
+              ? request.exitFee
+              : undefined
+          }
+          entryFee={
+            request.entryFee !== entryFee ? request.entryFee : undefined
+          }
+          key={request.id}
+          request={request}
           cancelRequest={dispatch(cancelRequestDispatch)}
           asset={asset}
           onApplyCancelRequest={handleCancel}
@@ -57,6 +73,9 @@ const _AssetStatusRequests: React.FC<Props> = ({
 };
 
 interface Props {
+  successFee?: number;
+  exitFee?: number;
+  entryFee?: number;
   id: string;
   asset: ASSET;
   onCancel: () => void;

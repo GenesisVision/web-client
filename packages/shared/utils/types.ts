@@ -111,3 +111,13 @@ export type DispatchDescriptionType = () => (
 ) => ReturnType<MiddlewareDispatch>;
 
 export type PlatformAssetFull = PlatformAsset & FundAssetPart;
+
+export type FeesType = {
+  entryFee?: number;
+  entryFeeSelected?: number;
+  entryFeeCurrent?: number;
+  successFee?: number;
+  successFeeSelected?: number;
+  successFeeCurrent?: number;
+  exitFee?: number;
+};

@@ -17,7 +17,7 @@ const _Page: React.FC<Props> = ({ title, children }) => {
   );
 };
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
 }
 

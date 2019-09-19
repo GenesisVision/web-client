@@ -47,7 +47,7 @@ const _Tooltip: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   render: Function;
   disable?: boolean;
   horizontal?: HORIZONTAL_POPOVER_POS;

@@ -1,13 +1,14 @@
 import "./wallet-widget.scss";
 
 import classNames from "classnames";
-import { WalletData, WalletsGrandTotal } from "gv-api-web";
-import React from "react";
+import { WalletsGrandTotal } from "gv-api-web";
+import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { compose } from "redux";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { WalletIcon } from "shared/components/icon/wallet-icon";
-import Link from "shared/components/link/link";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
@@ -17,8 +18,11 @@ import useIsOpen from "shared/hooks/is-open.hook";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import { walletsSelector } from "../wallet/reducers/wallet.reducers";
+
 const _WalletWidget: React.FC<Props> = ({ info, className }) => {
   const [t] = useTranslation();
+  const wallets = useSelector(walletsSelector);
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const {
@@ -45,7 +49,7 @@ const _WalletWidget: React.FC<Props> = ({ info, className }) => {
         </div>
       </div>
       <WalletAddFundsPopup
-        currentWallet={info as WalletData}
+        currentWallet={wallets.find(wallet => wallet.currency === currency)!}
         onClose={setClosePopup}
         open={isOpenPopup}
       />

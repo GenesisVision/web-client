@@ -19,11 +19,12 @@ import { PROGRAM, STATUS } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum, FeesType } from "shared/utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
 
 const _Investment: React.FC<Props> = ({
+  fees,
   updateDescription,
   id,
   assetCurrency,
@@ -33,6 +34,13 @@ const _Investment: React.FC<Props> = ({
   WithdrawContainer,
   ProgramReinvestingWidget
 }) => {
+  const {
+    successFeeCurrent,
+    successFeeSelected,
+    exitFee,
+    entryFeeCurrent,
+    entryFeeSelected
+  } = fees;
   const accountCurrency = useSelector(currencySelector);
   const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
@@ -85,6 +93,47 @@ const _Investment: React.FC<Props> = ({
             </Profitability>
           </StatisticItem>
           <StatisticItem
+            condition={
+              !!successFeeCurrent && successFeeCurrent !== successFeeSelected
+            }
+            label={t("program-details-page.description.successFee")}
+            className="details-investment__statistic-item"
+            accent
+          >
+            <NumberFormat
+              value={successFeeSelected}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
+            condition={entryFeeCurrent !== entryFeeSelected}
+            label={t("program-details-page.description.entryFee")}
+            className="details-investment__statistic-item"
+            accent
+          >
+            <NumberFormat
+              value={entryFeeSelected}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
+            condition={exitFee !== undefined}
+            label={t("fund-details-page.description.exitFee")}
+            className="details-investment__statistic-item"
+            accent
+          >
+            <NumberFormat
+              value={exitFee}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
             className="details-investment__statistic-item"
             accent
             label={
@@ -95,6 +144,9 @@ const _Investment: React.FC<Props> = ({
             }
           >
             <AssetStatus
+              successFee={successFeeCurrent}
+              exitFee={exitFee}
+              entryFee={entryFeeCurrent}
               status={personalDetails.status as STATUS}
               id={id}
               asset={asset}
@@ -176,7 +228,8 @@ const _Investment: React.FC<Props> = ({
   );
 };
 
-interface OwnProps {
+interface Props {
+  fees: FeesType;
   updateDescription: () => void;
   asset: string;
   notice?: string;
@@ -188,8 +241,6 @@ interface OwnProps {
     IProgramReinvestingContainerOwnProps
   >;
 }
-
-interface Props extends OwnProps {}
 
 const Investment = React.memo(_Investment);
 export default Investment;

@@ -3,12 +3,12 @@ import "./details-investment.scss";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
+import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DetailsBlock from "shared/components/details/details-block";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
@@ -26,7 +26,11 @@ import { ASSET } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { CurrencyEnum, DispatchDescriptionType } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  DispatchDescriptionType,
+  FeesType
+} from "shared/utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
 import InvestmentContainer, {
@@ -35,6 +39,7 @@ import InvestmentContainer, {
 } from "./investment-container";
 
 const _DetailsInvestment: React.FC<Props> = ({
+  fees,
   notice,
   asset,
   eventTypesSelector,
@@ -89,6 +94,7 @@ const _DetailsInvestment: React.FC<Props> = ({
       </div>
       {tab === TABS.INVESTMENT && (
         <InvestmentContainer
+          fees={fees}
           updateDescription={dispatchDescription}
           asset={asset}
           notice={notice}
@@ -118,6 +124,7 @@ enum TABS {
   EVENTS = "EVENTS"
 }
 interface OwnProps {
+  fees: FeesType;
   notice?: string;
   asset: ASSET;
   eventTypesSelector: (state: RootState) => SelectFilterValue[];

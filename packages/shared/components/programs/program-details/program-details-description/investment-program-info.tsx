@@ -39,7 +39,7 @@ const renderFee = (
   );
 };
 
-const InvestmentProgramInfo: React.FC<
+const _InvestmentProgramInfo: React.FC<
   WithTranslation & IInvestmentProgramInfoProps
 > = ({
   t,
@@ -161,4 +161,5 @@ const InvestmentProgramInfo: React.FC<
   );
 };
 
-export default translate()(React.memo(InvestmentProgramInfo));
+const InvestmentProgramInfo = translate()(React.memo(_InvestmentProgramInfo));
+export default InvestmentProgramInfo;

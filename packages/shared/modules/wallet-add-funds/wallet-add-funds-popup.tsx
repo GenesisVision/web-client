@@ -4,7 +4,7 @@ import Dialog from "shared/components/dialog/dialog";
 
 import WalletAddFundsContainer from "./components/wallet-add-funds-container";
 
-const WalletAddFundsPopup: React.FC<Props> = ({
+const _WalletAddFundsPopup: React.FC<Props> = ({
   onClose,
   currentWallet,
   open
@@ -17,7 +17,8 @@ const WalletAddFundsPopup: React.FC<Props> = ({
 interface Props {
   currentWallet: WalletData;
   open: boolean;
-  onClose(): void;
+  onClose: () => void;
 }
 
-export default React.memo(WalletAddFundsPopup);
+const WalletAddFundsPopup = React.memo(_WalletAddFundsPopup);
+export default WalletAddFundsPopup;
