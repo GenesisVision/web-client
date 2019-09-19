@@ -1,7 +1,7 @@
 import "./modal.scss";
 
 import classNames from "classnames";
-import React, { useCallback, useEffect } from "react";
+import React, { ReactNode, useCallback, useEffect } from "react";
 import EventListener from "react-event-listener";
 import Portal from "shared/components/portal/portal";
 
@@ -60,6 +60,7 @@ const _Modal: React.FC<Props> = ({
 };
 
 interface Props {
+  children: ReactNode;
   onClose?: (event: React.MouseEvent<HTMLElement>) => void;
   open: boolean;
   noAbsolute?: boolean;
