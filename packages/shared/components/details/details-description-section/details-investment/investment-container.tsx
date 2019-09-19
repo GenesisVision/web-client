@@ -5,13 +5,13 @@ import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-deta
 import SubscriptionDetailsContainer from "shared/components/programs/program-details/program-details-description/subscription-details/subscription-details-container";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import { STATUS } from "shared/constants/constants";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum, FeesType } from "shared/utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
 import Investment from "./investment";
 
 const _InvestmentContainer: React.FC<Props> = ({
-  successFeeCurrent,
+  fees,
   updateDescription,
   id,
   assetCurrency,
@@ -25,7 +25,7 @@ const _InvestmentContainer: React.FC<Props> = ({
     <div className="details-investment__investment-container">
       {haveActiveInvestment(personalDetails) && (
         <Investment
-          successFeeCurrent={successFeeCurrent}
+          fees={fees}
           updateDescription={updateDescription}
           id={id}
           assetCurrency={assetCurrency}
@@ -48,7 +48,7 @@ const _InvestmentContainer: React.FC<Props> = ({
 };
 
 interface Props {
-  successFeeCurrent: number;
+  fees: FeesType;
   updateDescription: () => void;
   asset: string;
   notice?: string;
