@@ -5,7 +5,6 @@ import { WalletsGrandTotal } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { WalletIcon } from "shared/components/icon/wallet-icon";
@@ -19,6 +18,7 @@ import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-fund
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { walletsSelector } from "../wallet/reducers/wallet.reducers";
+import Link from "shared/components/link/link";
 
 const _WalletWidget: React.FC<Props> = ({ info, className }) => {
   const [t] = useTranslation();
