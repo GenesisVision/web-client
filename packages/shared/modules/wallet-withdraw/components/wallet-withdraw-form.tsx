@@ -18,7 +18,7 @@ import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import {
-  btcUsdtWalletValidator,
+  btcWalletValidator,
   ethGvtWalletValidator
 } from "shared/utils/validators/validators";
 import { Schema, StringSchema, lazy, object, string } from "yup";
@@ -224,7 +224,7 @@ const WalletWithdrawForm = compose<React.FC<OwnProps>>(
               });
             default:
               return object().shape({
-                [FIELDS.address]: btcUsdtWalletValidator.required(
+                [FIELDS.address]: btcWalletValidator.required(
                   t("wallet-withdraw.validation.address-is-required")
                 ),
                 [FIELDS.twoFactorCode]: twoFactorValidator(t, twoFactorEnabled)

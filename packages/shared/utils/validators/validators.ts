@@ -14,7 +14,7 @@ export const ethGvtWalletValidator = string().matches(
   "Invalid wallet address"
 );
 
-export const btcUsdtWalletValidator = string().matches(
+export const btcWalletValidator = string().matches(
   /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/,
   "Invalid wallet address"
 );
