@@ -18,6 +18,7 @@ const _Page: React.FC<Props> = ({ title, children }) => {
 };
 
 interface Props {
+  children: JSX.Element;
   title: string;
 }
 
