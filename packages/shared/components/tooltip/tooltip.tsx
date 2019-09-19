@@ -48,6 +48,7 @@ const _Tooltip: React.FC<Props> = ({
 };
 
 interface Props {
+  children: JSX.Element;
   render: Function;
   disable?: boolean;
   horizontal?: HORIZONTAL_POPOVER_POS;
