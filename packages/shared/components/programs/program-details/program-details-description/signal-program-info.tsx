@@ -14,7 +14,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="asset-details-description__statistic-container">
+    <div className="asset-details-description__col">
       <StatisticItem
         label={
           <TooltipLabel

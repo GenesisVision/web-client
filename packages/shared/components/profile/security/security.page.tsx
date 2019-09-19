@@ -1,7 +1,7 @@
 import "./security.scss";
 
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import ProfileLayout from "shared/components/profile/profile-layout";
 import LogoutButtonContainer from "shared/components/profile/settings/logout-button/logout-button-container";
 import SettingsBlock from "shared/components/settings-block/settings-block";
@@ -10,24 +10,27 @@ import PasswordChange from "shared/modules/password-change/password-change";
 
 import { SECURITY } from "../profile.constants";
 
-const _SecurityPage: React.FC<WithTranslation> = ({ t }) => (
-  <ProfileLayout route={SECURITY}>
-    <div className="asset-settings profile__container--padding-top">
-      <SettingsBlock
-        label={t("2fa-page.title")}
-        content={<TwoFactorAuthContainer />}
-      />
-      <SettingsBlock
-        content={
-          <>
-            <PasswordChange />
-            <LogoutButtonContainer />
-          </>
-        }
-      />
-    </div>
-  </ProfileLayout>
-);
+const _SecurityPage: React.FC = () => {
+  const [t] = useTranslation();
+  return (
+    <ProfileLayout route={SECURITY}>
+      <div className="asset-settings profile__container--padding-top">
+        <SettingsBlock
+          label={t("2fa-page.title")}
+          content={<TwoFactorAuthContainer />}
+        />
+        <SettingsBlock
+          content={
+            <>
+              <PasswordChange />
+              <LogoutButtonContainer />
+            </>
+          }
+        />
+      </div>
+    </ProfileLayout>
+  );
+};
 
-const SecurityPage = translate()(React.memo(_SecurityPage));
+const SecurityPage = React.memo(_SecurityPage);
 export default SecurityPage;

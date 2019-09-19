@@ -55,10 +55,12 @@ const _ProgramsEditPage: React.FC<Props> = ({
   );
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
-      programEditSignal(description!.id, successFee!, volumeFee!).then(() =>
-        dispatchDescription()
-      ),
-    [programEditSignal, description, dispatchDescription]
+      programEditSignal({
+        id: description!.id,
+        successFee: successFee!,
+        volumeFee: volumeFee!
+      }).then(() => dispatchDescription(ctx)),
+    [description]
   );
   const changeBroker = useCallback(
     (
@@ -70,9 +72,9 @@ const _ProgramsEditPage: React.FC<Props> = ({
         brokerAccountTypeId,
         leverage,
         setSubmitting
-      ).then(() => dispatchDescription());
+      ).then(() => dispatchDescription(ctx));
     },
-    [changeBrokerMethod, description, dispatchDescription]
+    [description]
   );
   const cancelChangeBroker = useCallback(
     () => {
@@ -80,7 +82,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
         dispatchDescription()
       );
     },
-    [cancelChangeBrokerMethod, description, dispatchDescription]
+    [description]
   );
   return (
     <AssetSettingsPage

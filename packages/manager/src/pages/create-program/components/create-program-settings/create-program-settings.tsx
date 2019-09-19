@@ -5,6 +5,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import {
   Broker,
   BrokerAccountType,
+  NewProgramRequestTradesDelayEnum,
   ProgramsInfo,
   WalletData,
   WalletDataCurrencyEnum
@@ -313,6 +314,7 @@ const CreateProgramSettings = compose<React.ComponentType<OwnProps>>(
       const periodLength =
         programsInfo.periods.length === 1 ? programsInfo.periods[0] : undefined;
       return {
+        [CREATE_PROGRAM_FIELDS.tradesDelay]: "None",
         [CREATE_PROGRAM_FIELDS.stopOutLevel]: 100,
         [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: accountType
           ? accountType.id
@@ -370,6 +372,7 @@ export interface ICreateProgramSettingsProps
   extends OwnProps,
     WithTranslation {}
 export interface ICreateProgramSettingsFormValues {
+  [CREATE_PROGRAM_FIELDS.tradesDelay]: NewProgramRequestTradesDelayEnum;
   [CREATE_PROGRAM_FIELDS.currency]: CurrencyEnum;
   [CREATE_PROGRAM_FIELDS.periodLength]?: number;
   [CREATE_PROGRAM_FIELDS.successFee]?: number;

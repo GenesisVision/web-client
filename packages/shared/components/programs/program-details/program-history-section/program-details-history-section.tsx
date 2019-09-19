@@ -3,9 +3,9 @@ import "shared/components/details/details-description-section/details-statistic-
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import DetailsBlock from "shared/components/details/details-block";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
 import useRole from "shared/hooks/use-role.hook";
@@ -63,7 +63,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
 
   const isManager = role === ROLE.MANAGER;
   return (
-    <Surface className="details-history">
+    <DetailsBlock table>
       <div className="details-history__header">
         <div className="details-history__tabs">
           <GVTabs value={tab} onChange={setTab}>
@@ -97,36 +97,34 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           </GVTabs>
         </div>
       </div>
-      <div>
-        {tab === TABS.TRADES && (
-          <ProgramTrades
-            showSwaps={showSwaps}
-            showTickets={showTickets}
-            programId={programId}
-          />
-        )}
-        {tab === TABS.OPEN_POSITIONS && (
-          <ProgramOpenPositions
-            programId={programId}
-            currency={programCurrency}
-          />
-        )}
-        {tab === TABS.SUBSCRIBERS && (
-          <ProgramSubscriptions id={programId} currency={currency} />
-        )}
-        {tab === TABS.FINANCIAL_STATISTIC && (
-          <ProgramFinancialStatistic
-            showCommissionRebateSometime={showCommissionRebateSometime}
-            id={programId}
-            currency={programCurrency}
-            title={title}
-          />
-        )}
-        {tab === TABS.PERIOD_HISTORY && (
-          <ProgramPeriodHistory id={programId} currency={programCurrency} />
-        )}
-      </div>
-    </Surface>
+      {tab === TABS.TRADES && (
+        <ProgramTrades
+          showSwaps={showSwaps}
+          showTickets={showTickets}
+          programId={programId}
+        />
+      )}
+      {tab === TABS.OPEN_POSITIONS && (
+        <ProgramOpenPositions
+          programId={programId}
+          currency={programCurrency}
+        />
+      )}
+      {tab === TABS.SUBSCRIBERS && (
+        <ProgramSubscriptions id={programId} currency={currency} />
+      )}
+      {tab === TABS.FINANCIAL_STATISTIC && (
+        <ProgramFinancialStatistic
+          showCommissionRebateSometime={showCommissionRebateSometime}
+          id={programId}
+          currency={programCurrency}
+          title={title}
+        />
+      )}
+      {tab === TABS.PERIOD_HISTORY && (
+        <ProgramPeriodHistory id={programId} currency={programCurrency} />
+      )}
+    </DetailsBlock>
   );
 };
 
@@ -145,7 +143,6 @@ interface Props {
   showTickets: boolean;
   programId: string;
   programCurrency: CurrencyEnum;
-  isInvested: boolean;
   isOwnProgram: boolean;
   title: string;
 }

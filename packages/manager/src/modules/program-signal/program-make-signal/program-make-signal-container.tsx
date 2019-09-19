@@ -2,7 +2,7 @@ import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 
@@ -49,11 +49,11 @@ interface OwnProps extends IDialogProps {
 
 interface Props extends OwnProps, WithTranslation {
   service: {
-    programMakeSignal(
-      id: string,
-      successFee: number,
-      volumeFee: number
-    ): Promise<void>;
+    programMakeSignal(values: {
+      id: string;
+      successFee: number;
+      volumeFee: number;
+    }): Promise<void>;
     dispatchProgramDescription: () => void;
   };
 }

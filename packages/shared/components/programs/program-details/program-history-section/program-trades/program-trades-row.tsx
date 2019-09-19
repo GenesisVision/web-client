@@ -21,7 +21,7 @@ const _ProgramTradesRow: React.FC<Props> = ({
   const volume = +formatValue(trade.volume, DEFAULT_DECIMAL_SCALE / 2);
   return (
     <TableRow stripy>
-      <TableCell className="details-trades__cell program-details-trades__cell--direction/entry">
+      <TableCell className="details-trades__cell">
         <BaseProfitability
           isPositive={trade.direction === "Buy"}
           isNegative={trade.direction === "Sell"}
@@ -30,10 +30,8 @@ const _ProgramTradesRow: React.FC<Props> = ({
         </BaseProfitability>
         {` / ${trade.entry}`}
       </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--symbol">
-        {trade.symbol}
-      </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--volume">
+      <TableCell className="details-trades__cell">{trade.symbol}</TableCell>
+      <TableCell className="details-trades__cell">
         <Tooltip
           disable={trade.volume >= volume}
           render={() => <div>{trade.volume}</div>}
@@ -41,14 +39,14 @@ const _ProgramTradesRow: React.FC<Props> = ({
           <span>{trade.volume < volume ? `< ${volume}` : volume}</span>
         </Tooltip>
       </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--price">
+      <TableCell className="details-trades__cell">
         <NumberFormat
           value={formatValue(trade.price, DEFAULT_DECIMAL_SCALE)}
           displayType="text"
           thousandSeparator=" "
         />
       </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--profit">
+      <TableCell className="details-trades__cell">
         <Profitability
           value={formatValue(trade.profit, DEFAULT_DECIMAL_SCALE)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -61,7 +59,7 @@ const _ProgramTradesRow: React.FC<Props> = ({
           />
         </Profitability>
       </TableCell>
-      <TableCell className="details-trades__cell program-details-trades__cell--commission">
+      <TableCell className="details-trades__cell">
         <Tooltip
           render={() =>
             trade.showOriginalCommission ? (
@@ -88,17 +86,13 @@ const _ProgramTradesRow: React.FC<Props> = ({
         </Tooltip>
       </TableCell>
       {showSwaps && (
-        <TableCell className="details-trades__cell program-details-trades__cell--swap">
-          {trade.swap}
-        </TableCell>
+        <TableCell className="details-trades__cell">{trade.swap}</TableCell>
       )}
-      <TableCell className="details-trades__cell program-details-trades__cell--date">
+      <TableCell className="details-trades__cell">
         {moment(trade.date).format()}
       </TableCell>
       {showTickets && (
-        <TableCell className="details-trades__cell program-details-trades__cell--ticket">
-          {trade.ticket}
-        </TableCell>
+        <TableCell className="details-trades__cell">{trade.ticket}</TableCell>
       )}
     </TableRow>
   );

@@ -41,7 +41,7 @@ class _FacetCards extends React.PureComponent<Props> {
   };
 
   render() {
-    const { facets, composeFacetUrl, title } = this.props;
+    const { facets, composeFacetUrl, title, fileRoute } = this.props;
     return (
       <div className="facets__wrapper facets__shadow" ref={this.facetList}>
         <div className="facets" ref={this.scroll} onScroll={this.handleScroll}>
@@ -49,6 +49,7 @@ class _FacetCards extends React.PureComponent<Props> {
             {facets.map(x => (
               <FacetCard
                 title={title}
+                fileRoute={fileRoute}
                 key={x.id}
                 facet={x}
                 composeFacetUrl={composeFacetUrl}
@@ -65,6 +66,7 @@ interface Props {
   facets: Array<FundFacet | ProgramFacet>;
   composeFacetUrl: composeFacetUrlFunc;
   title: string;
+  fileRoute: string;
 }
 
 const FacetCards = _FacetCards;

@@ -4,6 +4,8 @@ import React from "react";
 import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
 
+import { normalizeUrlString } from "../link/link.helper";
+
 interface INavigationButtonProps {
   icon: JSX.Element;
   title?: string;
@@ -43,7 +45,9 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
     <Link
       to={{ pathname: pathname, state }}
       className={classNames("navigation__item", {
-        "navigation__item--active": route.startsWith(pathname)
+        "navigation__item--active": route.startsWith(
+          normalizeUrlString(pathname)
+        )
       })}
     >
       {<icon.type {...icon.props} className="navigation__icon" />}

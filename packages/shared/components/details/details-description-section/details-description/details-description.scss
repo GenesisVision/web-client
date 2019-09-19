@@ -362,6 +362,9 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     flex-wrap: wrap;
     margin: 0 (-$padding-xxsmall/2);
 
+    @include media-breakpoint-landscape-phone() {
+      flex-wrap: nowrap;
+    }
     @include media-breakpoint-tablet() {
       flex-wrap: nowrap;
       margin-left: $padding-controls-left;
@@ -376,13 +379,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__col {
-    @include vertical-paddings($padding-small);
-    @include horizontal-paddings($padding-small);
-    @include adaptive-margin(bottom, $padding-small);
-    border: 1px solid rgba($main-color, 0.06);
-    border-radius: 8px;
-    margin-left: $padding-xxsmall/2;
-    margin-right: $padding-xxsmall/2;
     flex-grow: 1;
     display: inline-flex;
     flex-wrap: wrap;
@@ -399,13 +395,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     }
 
     @include media-breakpoint-tablet() {
-      margin-right: $padding-small;
-      margin-left: 0;
-
-      &:last-child {
-        margin-right: 0;
-      }
-
       &--small-size {
         min-width: 260px;
         max-width: 260px;

@@ -5,17 +5,18 @@ import * as React from "react";
 import { ComponentType } from "react";
 import { useSelector } from "react-redux";
 import { ProgramControlsLoader } from "shared/components/details/details.contaner.loader";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
 import { levelParametersSelector } from "../reducers/level-parameters.reducer";
-import PerformanceData from "./performance-data";
+import PerformanceData, { PerformanceDataLoader } from "./performance-data";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
   programDescription,
-  isAuthenticated,
   ProgramControls,
   ChangePasswordTradingAccount
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const levelsParameters = useSelector(levelParametersSelector);
   const personalDetails = programDescription.personalProgramDetails;
   const isOwnProgram = personalDetails && personalDetails.isOwnProgram;
@@ -28,6 +29,7 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
       />
       <PerformanceData
         condition={!!levelsParameters}
+        loader={<PerformanceDataLoader />}
         levelsParameters={levelsParameters!}
         programDescription={programDescription}
       />
@@ -51,7 +53,6 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
 
 interface Props {
   programDescription: ProgramDetailsFull;
-  isAuthenticated: boolean;
   ProgramControls: ComponentType<any>;
   ChangePasswordTradingAccount?: ComponentType<any>;
 }

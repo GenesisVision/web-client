@@ -4,6 +4,7 @@ import {
   CopyTradingAccountsList,
   WalletsInfo
 } from "gv-api-web";
+import { rateApi } from "shared/services/api-client/rate-api";
 import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
@@ -28,6 +29,9 @@ export const updateAttachToSignal: TAttachToSignal = (id, requestParams) =>
   signalApi.v10SignalByIdUpdatePost(id, authService.getAuthArg(), {
     model: requestParams
   });
+
+export const getRate = ({ from, to }: { from: string; to: string }) =>
+  rateApi.v10RateByFromByToGet(from, to);
 
 export type TAttachToSignal = (
   id: string,

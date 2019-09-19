@@ -1,5 +1,5 @@
 import {
-  Broker,
+  Broker, CancelablePromise,
   ManagerProgramCreateResult,
   NewProgramRequest
 } from "gv-api-web";
@@ -25,15 +25,15 @@ export const fetchBrokers = (): Promise<Broker[]> =>
 
 export const createProgram = (
   createProgramData: ICreateProgramSettingsFormValues
-): ManagerThunk<Promise<ManagerProgramCreateResult>> => () => {
+): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => () => {
   const authorization = authService.getAuthArg();
 
-  let promise = Promise.resolve("") as Promise<any>;
+  let promise = Promise.resolve("") as CancelablePromise<any>;
   if (createProgramData.logo.image) {
     promise = filesService.uploadFile(
       createProgramData.logo.image.cropped,
       authorization
-    ) as Promise<any>;
+    ) as CancelablePromise<any>;
   }
   return promise.then(response => {
     const requestData = <NewProgramRequest>{

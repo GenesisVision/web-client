@@ -1,5 +1,6 @@
 import {
   Broker,
+  CancelablePromise,
   ManagerProgramCreateResult,
   ProfileHeaderViewModel,
   ProgramsInfo,
@@ -23,6 +24,7 @@ import { programsInfoSelector } from "shared/reducers/platform-reducer";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { rateApi } from "shared/services/api-client/rate-api";
 import {
+  CurrencyEnum,
   MiddlewareDispatch,
   ResponseError,
   SetSubmittingType
@@ -31,6 +33,7 @@ import {
 import { createProgram } from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 
 enum TAB {
   BROKER = "BROKER",
@@ -75,7 +78,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
     this.setState({ isNavigationDialogVisible: true });
   };
 
-  fetchRate = (fromCurrency: string, toCurrency: string): Promise<number> => {
+  fetchRate = (fromCurrency: string, toCurrency: string): CancelablePromise<number> => {
     return rateApi.v10RateByFromByToGet(fromCurrency, toCurrency);
   };
 
@@ -100,7 +103,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
           notifySuccess(
             "manager.create-program-page.notifications.create-success"
           );
-          fetchWallets();
+          fetchWallets(this.props.currency);
           setSubmitting(false);
         }
       })
@@ -128,8 +131,23 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
       isNavigationDialogVisible
     } = this.state;
 
-    const { t, headerData, service, programsInfo, wallets } = this.props;
-    if (!programsInfo || !headerData || !wallets.length) return null;
+    const {
+      t,
+      headerData,
+      service,
+      programsInfo,
+      wallets,
+      currency
+    } = this.props;
+    if (
+      !brokers ||
+      !selectedBroker ||
+      !programsInfo ||
+      !headerData ||
+      !wallets.length ||
+      !minimumDepositsAmount
+    )
+      return null;
     return (
       <div className="create-program-page__container">
         <div className="create-program-page__tabs">
@@ -158,6 +176,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
             )}
             {tab === TAB.SETTINGS && (
               <CreateProgramSettingsSection
+                currency={currency}
                 minimumDepositsAmount={minimumDepositsAmount!}
                 fetchWallets={service.fetchWallets}
                 fetchRate={this.fetchRate}
@@ -195,6 +214,7 @@ class _CreateProgramContainer extends React.PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: ManagerRootState): StateProps => ({
+  currency: currencySelector(state),
   wallets: walletsSelector(state),
   headerData: headerSelector(state),
   programsInfo: programsInfoSelector(state)
@@ -203,7 +223,7 @@ const mapStateToProps = (state: ManagerRootState): StateProps => ({
 const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
     createProgram: (data: any) => dispatch(createProgram(data)),
-    fetchWallets: () => dispatch(fetchWallets()),
+    fetchWallets: currency => dispatch(fetchWallets(currency)),
     notifyError: (message: string) =>
       dispatch(alertMessageActions.error(message)),
     notifySuccess: (message: string) =>
@@ -233,6 +253,7 @@ interface State {
 }
 
 interface StateProps {
+  currency: CurrencyEnum;
   programsInfo?: ProgramsInfo;
   wallets: WalletData[];
   headerData?: ProfileHeaderViewModel;
@@ -240,8 +261,8 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    fetchWallets: () => void;
-    createProgram: (data: any) => Promise<ManagerProgramCreateResult>;
+    fetchWallets: (currency: CurrencyEnum) => void;
+    createProgram: (data: any) => CancelablePromise<ManagerProgramCreateResult>;
     notifyError: (message: string) => void;
     notifySuccess: (message: string) => void;
   };

@@ -6,15 +6,13 @@ import Dialog from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { FOLLOW_TYPE } from "shared/constants/constants";
-import useIsOpen from "shared/hooks/is-open.hook";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { rateApi } from "shared/services/api-client/rate-api";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import FollowPopupForm from "./follow-popup/follow-popup-form";
+import { useGetRate, useGetSignalInfo } from "./program-follow-container.hooks";
 import {
   attachToSignal,
-  getSignalInfo,
   updateAttachToSignal
 } from "./services/program-follow-service";
 
@@ -31,31 +29,18 @@ const _ProgramFollowContainer: React.FC<Props> = ({
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
   const [t] = useTranslation();
-  const [rate, setRate] = useState<number>(1);
-  const [minDeposit, setMinDeposit] = useState<number | undefined>(undefined);
-  const [isPending, setIsPending, setIsNotPending] = useIsOpen();
+  const { minDeposit, isMinDepositPending, getMinDeposit } = useGetSignalInfo();
+  const { rate, isRatePending, getRate } = useGetRate();
   const [type, setType] = useState<FOLLOW_TYPE>(
     signalSubscription.hasActiveSubscription
       ? FOLLOW_TYPE.EDIT
       : FOLLOW_TYPE.CREATE
   );
-  const [successMessage] = useState<string>(
-    type === FOLLOW_TYPE.CREATE
-      ? "follow-program.create-success-alert-message"
-      : "follow-program.edit-success-alert-message"
-  );
-  useEffect(
-    () => {
-      setIsPending();
-      getSignalInfo(id)
-        .then(setMinDeposit)
-        .finally(setIsNotPending);
-      rateApi
-        .v10RateByFromByToGet(DEFAULT_RATE_CURRENCY, currency)
-        .then(setRate);
-    },
-    [currency, id]
-  );
+  useEffect(() => {
+    getMinDeposit(id);
+    getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
+  }, []);
+
   useEffect(
     () => {
       setType(
@@ -72,6 +57,10 @@ const _ProgramFollowContainer: React.FC<Props> = ({
       requestParams: AttachToSignalProvider,
       setSubmitting: SetSubmittingType
     ) => {
+      const successMessage =
+        type === FOLLOW_TYPE.CREATE
+          ? "follow-program.create-success-alert-message"
+          : "follow-program.edit-success-alert-message";
       const submitMethod =
         type === FOLLOW_TYPE.CREATE ? attachToSignal : updateAttachToSignal;
       submitMethod(id, requestParams)
@@ -83,8 +72,9 @@ const _ProgramFollowContainer: React.FC<Props> = ({
         )
         .finally(() => setSubmitting(false));
     },
-    [dispatch, onApply, onClose, successMessage, t, type]
+    [type]
   );
+  const isPending = isMinDepositPending && isRatePending;
   return (
     <Dialog open={open} onClose={onClose}>
       <FollowPopupForm

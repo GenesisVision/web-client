@@ -8,7 +8,12 @@ import useIsOpen from "shared/hooks/is-open.hook";
 
 import facetImg from "./facet.png";
 
-const _FacetCard: React.FC<Props> = ({ facet, composeFacetUrl, title }) => {
+const _FacetCard: React.FC<Props> = ({
+  facet,
+  composeFacetUrl,
+  title,
+  fileRoute
+}) => {
   const [isHovered, setHovered, setNotHovered] = useIsOpen();
   return (
     <Surface
@@ -20,8 +25,9 @@ const _FacetCard: React.FC<Props> = ({ facet, composeFacetUrl, title }) => {
     >
       <Link
         to={{
-          pathname: composeFacetUrl(facet.url),
-          state: `/ ${title}`
+          pathname: fileRoute,
+          state: `/ ${title}`,
+          as: composeFacetUrl(facet.url)
         }}
       >
         <a>
@@ -49,6 +55,7 @@ interface Props {
   title: string;
   facet: FundFacet | ProgramFacet;
   composeFacetUrl: composeFacetUrlFunc;
+  fileRoute: string;
 }
 
 export type composeFacetUrlFunc = (url: string) => string;

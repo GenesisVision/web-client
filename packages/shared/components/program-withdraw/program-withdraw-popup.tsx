@@ -1,9 +1,9 @@
-import { ProgramWithdrawInfo } from "gv-api-web";
+import { CancelablePromise, ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import withLoader from "shared/decorators/with-loader";
-import useErrorMessage from "shared/hooks/error-message.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 import useTab from "shared/hooks/tab.hook";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
@@ -29,21 +29,17 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
   const { tab, setTab } = useTab<PROGRAM_WITHDRAW_FORM>(
     PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT
   );
-  const {
-    errorMessage,
-    setErrorMessage,
-    cleanErrorMessage
-  } = useErrorMessage();
+  const { errorMessage, sendRequest, cleanErrorMessage } = useApiRequest({
+    request: withdraw
+  });
   const [formValues, setFormValues] = useState<
     IProgramWithdrawAmountFormValues
   >({ amount: 0, withdrawAll: false });
 
   const handleSubmit = useCallback(
     (setSubmitting: SetSubmittingType) =>
-      withdraw(formValues)
-        .catch(setErrorMessage)
-        .finally(() => setSubmitting(false)),
-    [formValues, setErrorMessage, withdraw]
+      sendRequest(formValues, setSubmitting),
+    [formValues]
   );
 
   const handleEnterAmountSubmit = useCallback(
@@ -51,16 +47,13 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
       setTab(null, PROGRAM_WITHDRAW_FORM.CONFIRM);
       setFormValues(values);
     },
-    [setTab]
+    []
   );
 
-  const handleGoToEnterAmountStep = useCallback(
-    () => {
-      setTab(null, PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT);
-      cleanErrorMessage();
-    },
-    [cleanErrorMessage, setTab]
-  );
+  const handleGoToEnterAmountStep = useCallback(() => {
+    setTab(null, PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT);
+    cleanErrorMessage();
+  }, []);
 
   const isAvailableProgramConfirmForm =
     formValues.amount || formValues.withdrawAll;
@@ -109,8 +102,8 @@ export interface IProgramWithdrawPopupProps {
   programWithdrawInfo: ProgramWithdrawInfo;
   assetCurrency: CurrencyEnum;
   accountCurrency: CurrencyEnum;
-  fetchInfo: () => Promise<ProgramWithdrawInfo>;
-  withdraw: (values: ProgramWithdrawType) => Promise<void>;
+  fetchInfo: () => CancelablePromise<ProgramWithdrawInfo>;
+  withdraw: (values: ProgramWithdrawType) => CancelablePromise<void>;
 }
 
 export type ProgramWithdrawType = {
