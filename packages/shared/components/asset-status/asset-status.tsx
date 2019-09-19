@@ -13,6 +13,9 @@ import AssetStatusLabel from "./asset-status-label";
 import AssetStatusRequests from "./asset-status-requests";
 
 const _AssetStatus: React.FC<Props> = ({
+  successFee,
+  entryFee,
+  exitFee,
   className,
   status,
   id,
@@ -43,6 +46,9 @@ const _AssetStatus: React.FC<Props> = ({
       >
         <div className="dashboard-request-popover">
           <AssetStatusRequests
+            successFee={successFee}
+            entryFee={entryFee}
+            exitFee={exitFee}
             id={id}
             asset={asset}
             handleCloseDropdown={clearAnchor}
@@ -55,6 +61,9 @@ const _AssetStatus: React.FC<Props> = ({
 };
 
 interface Props {
+  successFee?: number;
+  exitFee?: number;
+  entryFee?: number;
   className?: string;
   status: STATUS;
   id: string;
