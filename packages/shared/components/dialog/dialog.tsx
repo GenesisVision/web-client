@@ -47,7 +47,7 @@ export const _Dialog: React.FC<IDialogProps> = ({
 const Dialog = React.memo(_Dialog);
 export default Dialog;
 
-export interface IDialogProps {
+export interface IDialogProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
   onClose: (param?: any) => void;
   className?: string;
