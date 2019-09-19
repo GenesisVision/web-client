@@ -15,6 +15,9 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { CancelRequestPropsType } from "../../dashboard.constants";
 
 const _DashboardRequest: React.FC<Props> = ({
+  successFee,
+  exitFee,
+  entryFee,
   request,
   cancelRequest,
   onApplyCancelRequest,
@@ -37,15 +40,7 @@ const _DashboardRequest: React.FC<Props> = ({
         asset
       });
     },
-    [
-      setDisabled,
-      cancelRequest,
-      request.id,
-      role,
-      asset,
-      onApplyCancelRequest,
-      setNotDisabled
-    ]
+    [request.id, role, asset]
   );
   const assetDetails = {
     logo: request.logo,
@@ -89,6 +84,45 @@ const _DashboardRequest: React.FC<Props> = ({
       >
         {moment(request.date).format("ll")}
       </StatisticItem>
+      <StatisticItem
+        className={"dashboard-request-popover__statistic-item"}
+        condition={successFee !== undefined}
+        label={t("program-details-page.description.successFee")}
+        invert
+      >
+        <NumberFormat
+          value={successFee}
+          suffix={` %`}
+          allowNegative={false}
+          displayType="text"
+        />
+      </StatisticItem>
+      <StatisticItem
+        className={"dashboard-request-popover__statistic-item"}
+        condition={entryFee !== undefined}
+        label={t("program-details-page.description.entryFee")}
+        invert
+      >
+        <NumberFormat
+          value={entryFee}
+          suffix={` %`}
+          allowNegative={false}
+          displayType="text"
+        />
+      </StatisticItem>
+      <StatisticItem
+        className={"dashboard-request-popover__statistic-item"}
+        condition={exitFee !== undefined}
+        label={t("fund-details-page.description.exitFee")}
+        invert
+      >
+        <NumberFormat
+          value={exitFee}
+          suffix={` %`}
+          allowNegative={false}
+          displayType="text"
+        />
+      </StatisticItem>
       <div className="dashboard-request-popover__btns">
         {request.canCancelRequest && (
           <GVButton color="primary" variant="text" onClick={setOpenPopup}>
@@ -114,6 +148,9 @@ const _DashboardRequest: React.FC<Props> = ({
 export interface Props extends OwnProps {}
 
 interface OwnProps {
+  successFee?: number;
+  exitFee?: number;
+  entryFee?: number;
   request: ProgramRequest;
   cancelRequest(x: CancelRequestPropsType): void;
   onApplyCancelRequest(): void;
