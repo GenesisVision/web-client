@@ -1,7 +1,13 @@
 import "./popover.scss";
 
 import classNames from "classnames";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from "react";
 import EventListener from "react-event-listener";
 import Modal from "shared/components/modal/modal";
 
@@ -119,35 +125,29 @@ const _Popover: React.FC<Props> = props => {
 
   const handleScroll = useCallback(() => setScrollTop(window.scrollY), []);
 
-  useEffect(
-    () => {
-      if (popover.current) {
-        const width = ownWidth ? "auto" : getAnchorBounds().width;
-        popover.current.style.left = getLeft();
-        popover.current.style.top = `${parseInt(getTop()) + scrollTop}px`;
-        popover.current.style.minWidth = `${width}px`;
-        popover.current.style.transform = getTransformPosition();
-        popover.current.style.opacity = "1";
-      }
-    },
-    [
-      anchorEl,
-      scrollTop,
-      ownWidth,
-      getAnchorBounds,
-      getLeft,
-      getTop,
-      getTransformPosition
-    ]
-  );
+  useEffect(() => {
+    if (popover.current) {
+      const width = ownWidth ? "auto" : getAnchorBounds().width;
+      popover.current.style.left = getLeft();
+      popover.current.style.top = `${parseInt(getTop()) + scrollTop}px`;
+      popover.current.style.minWidth = `${width}px`;
+      popover.current.style.transform = getTransformPosition();
+      popover.current.style.opacity = "1";
+    }
+  }, [
+    anchorEl,
+    scrollTop,
+    ownWidth,
+    getAnchorBounds,
+    getLeft,
+    getTop,
+    getTransformPosition
+  ]);
 
-  useEffect(
-    () => {
-      setWindowHeight(window.innerHeight);
-      setScrollTop(window.scrollY);
-    },
-    [anchorEl]
-  );
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+    setScrollTop(window.scrollY);
+  }, [anchorEl]);
 
   return (
     <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
@@ -190,6 +190,7 @@ const Popover = React.memo(_Popover);
 export default Popover;
 
 interface Props {
+  children: ReactNode;
   orientation?: ORIENTATION_POPOVER;
   onClose?(event: React.MouseEvent<HTMLElement>): void;
   horizontal?: HORIZONTAL_POPOVER_POS;
