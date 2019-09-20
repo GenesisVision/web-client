@@ -45,6 +45,10 @@ class _DashboardPortfolioChartSectionContainer extends React.PureComponent<
     }
   }
 
+  componentDidMount() {
+    this.props.service.getPortfolioChart();
+  }
+
   handleChangePeriod = (period: ChartDefaultPeriod) => {
     this.props.service.changePeriod(period);
     this.props.service.getPortfolioChart();

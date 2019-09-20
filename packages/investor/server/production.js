@@ -6,7 +6,6 @@ module.exports = async app => {
   const handle = app.getRequestHandler();
   await app.prepare();
 
-  // const platform = process.env.REACT_APP_BASENAME;
   const port = process.env.PORT || 3000;
   const server = express();
   // const investor = express();
@@ -15,7 +14,6 @@ module.exports = async app => {
 
   server.get("*", (req, res) => handle(req, res));
 
-  // server.use("/" + platform, investor);
   server.listen(port, err => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
