@@ -31,8 +31,12 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
   const { t } = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleToggleFavorite = useCallback(
-    () => toggleFavorite(fund.id, fund.personalDetails.isFavorite),
-    [fund.id, fund.personalDetails.isFavorite, toggleFavorite]
+    () =>
+      toggleFavorite(
+        fund.id,
+        fund.personalDetails && fund.personalDetails.isFavorite
+      ),
+    [fund.id, fund.personalDetails, toggleFavorite]
   );
   return (
     <div className="table-cards__card">
