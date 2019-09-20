@@ -9,10 +9,8 @@ const _Page: React.FC<Props> = ({ title, children }) => {
   const role = useRole();
   return (
     <DocumentTitle title={t(`${role}.app.title`) + title}>
-      <>
-        <BackButton />
-        {children}
-      </>
+      <BackButton />
+      {children}
     </DocumentTitle>
   );
 };
