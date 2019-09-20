@@ -6,12 +6,12 @@ import {
 } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
-import { NextPage } from "next";
-import { AppContextType, NextPageContext } from "next-server/dist/lib/utils";
+import { NextPage, NextPageContext } from "next";
 import { Action, Dispatch, Store } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { RootState } from "shared/reducers/root-reducer";
+import { AppContextType } from "next/dist/next-server/lib/utils";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
