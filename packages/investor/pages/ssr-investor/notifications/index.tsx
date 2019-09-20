@@ -6,7 +6,7 @@ import withPrivateRoute from "shared/decorators/with-private-route";
 import { fetchNotificationSettings } from "shared/modules/notification-settings/services/notification-settings.services";
 import { NextPageWithRedux } from "shared/utils/types";
 
-const Notifications: NextPageWithRedux<void> = ({}) => {
+const Notifications: NextPageWithRedux<void> = () => {
   return <NotificationsPage />;
 };
 
