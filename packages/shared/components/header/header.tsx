@@ -11,7 +11,7 @@ import { SearchIcon } from "shared/components/icon/search-icon";
 import Navigation from "shared/components/navigation/navigation";
 import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
 import NotificationsWidget from "shared/components/notifications-widget/notifications-widget";
-import { NotificationsWidgetLoader } from "shared/components/notifications-widget/notifications-widget.loader";
+import { NotificationsWidgetTextLoader } from "shared/components/notifications-widget/notifications-widget.txt-loader";
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import { ProfileWidgetLoader } from "shared/components/profile-widget/profile-widget.loader";
 import WalletWidgetContainer from "shared/components/wallet-widget/wallet-widget-container";
@@ -53,7 +53,7 @@ const _Header: React.FC<Props> = ({
             <WalletWidgetContainer className="header__wallet" />
             <NotificationsWidget
               condition={!!profileHeader}
-              loader={<NotificationsWidgetLoader />}
+              loader={<NotificationsWidgetTextLoader />}
               notificationsCount={
                 profileHeader ? profileHeader.notificationsCount : 0
               }
