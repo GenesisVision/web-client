@@ -7,7 +7,7 @@ import {
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
-import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
+import DetailsStatisticsTextLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic.txt-loader";
 import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -63,7 +63,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       renderDetailsStatisticsElements={({ period, statisticData }) => (
         <ProgramDetailsStatisticsElements
           condition={!!statisticData}
-          loader={<DetailsStatisticsLoader />}
+          loader={<DetailsStatisticsTextLoader />}
           status={status}
           statisticData={statisticData! as IProgramStatisticData}
           period={period}
