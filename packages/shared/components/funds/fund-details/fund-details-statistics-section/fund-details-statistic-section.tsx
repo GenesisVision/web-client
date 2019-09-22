@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
+import DetailsStatisticsTextLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic.txt-loader";
 import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
 
 import { fundBalanceChartSelector } from "../reducers/balance-chart.reducer";
@@ -49,7 +49,7 @@ const _FundDetailsStatisticSection: React.FC = () => (
     renderDetailsStatisticsElements={({ period, statisticData }) => (
       <FundDetailsStatisticsElements
         condition={!!statisticData}
-        loader={<DetailsStatisticsLoader />}
+        loader={<DetailsStatisticsTextLoader />}
         period={period}
         statisticData={statisticData! as IFundStatisticData}
       />
