@@ -8,7 +8,7 @@ import {
   bindActionCreators,
   compose
 } from "redux";
-import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
+import DetailsContainerTextLoader from "shared/components/details/details.contaner.txt-loader";
 import {
   dispatchPlatformLevelsParameters,
   dispatchProgramDescription
@@ -35,7 +35,7 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   return (
     <ProgramDetailsContainer
       condition={!!description}
-      loader={<DetailsContainerLoader />}
+      loader={<DetailsContainerTextLoader />}
       descriptionSection={descriptionSection}
       description={description!}
     />
