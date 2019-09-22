@@ -35,7 +35,7 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   return (
     <ProgramDetailsContainer
       condition={!!description}
-      loader={<DetailsContainerTextLoader />}
+      loader={<DetailsContainerTextLoader performance />}
       descriptionSection={descriptionSection}
       description={description!}
     />
