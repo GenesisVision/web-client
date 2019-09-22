@@ -12,15 +12,16 @@ import DetailsBlock, { DETAILS_BLOCK_TYPE } from "./details-block";
 import DetailsDescriptionTextLoader from "./details-description-section/details-description/details-description.txt-loader";
 import DetailsStatisticsTextLoader from "./details-description-section/details-statistic-section/details-loader/details-statistic.txt-loader";
 
-const _DetailsContainerTextLoader: React.FC<{ assets?: boolean }> = ({
-  assets
-}) => {
+const _DetailsContainerTextLoader: React.FC<{
+  assets?: boolean;
+  performance?: boolean;
+}> = ({ assets, performance }) => {
   const [t] = useTranslation();
   return (
     <Page title={""}>
       <div className="details__section asset-details-description">
         <DetailsDescriptionTextLoader assets={assets} />
-        <PerformanceDataTextLoader />
+        {performance && <PerformanceDataTextLoader />}
         <ProgramControlsTextLoader />
       </div>
       <div className="details__divider" />
