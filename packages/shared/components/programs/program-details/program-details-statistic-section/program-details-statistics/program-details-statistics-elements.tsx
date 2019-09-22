@@ -13,7 +13,7 @@ import ProgramPeriodLine from "shared/components/program-period/program-period-l
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import Tooltip from "shared/components/tooltip/tooltip";
-import withLoader from "shared/decorators/with-loader";
+import withBlurLoader from "shared/decorators/with-blur-loader";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -239,6 +239,6 @@ export interface IProgramDetailsStatisticsElementsProps {
 }
 
 const ProgramDetailsStatisticsElements = React.memo(
-  withLoader(_ProgramDetailsStatisticsElements)
+  withBlurLoader(_ProgramDetailsStatisticsElements)
 );
 export default ProgramDetailsStatisticsElements;

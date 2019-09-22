@@ -7,10 +7,13 @@ import PieContainerSmall from "shared/components/pie-container/pie-container-sma
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import StatisticItemLoader from "shared/components/statistic-item/statistic-item.loader";
+import StatisticItemTextLoader from "shared/components/statistic-item/statistic-item.txt-loader";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import withBlurLoader from "shared/decorators/with-blur-loader";
+import { WithLoaderProps } from "shared/decorators/with-loader";
 import filesService from "shared/services/file-service";
+import { getRandomInteger } from "shared/utils/helpers";
 
 const _PerformanceData: React.FC<Props> = ({
   programDescription,
@@ -111,8 +114,72 @@ export const PerformanceDataLoader: React.FC = () => (
   </div>
 );
 
+export const PerformanceDataTextLoader: React.FC = React.memo(() => {
+  const [t] = useTranslation();
+  return (
+    <div className="asset-details-description__performance-data">
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.broker")}
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.leverage")}
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.period")}
+        value={
+          <PieContainerSmall
+            end={10}
+            value={getRandomInteger(0, 10)}
+            suffix={"days"}
+          />
+        }
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.age")}
+        value={
+          <PieContainerSmall
+            end={10}
+            value={getRandomInteger(0, 10)}
+            suffix={"days"}
+          />
+        }
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.genesis-ratio")}
+        value={
+          <PieContainerSmall
+            end={10}
+            value={getRandomInteger(0, 10)}
+            suffix={"days"}
+          />
+        }
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.investment-scale")}
+        value={
+          <PieContainerSmall
+            end={10}
+            value={getRandomInteger(0, 10)}
+            suffix={"days"}
+          />
+        }
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.volume-scale")}
+        value={
+          <PieContainerSmall
+            end={10}
+            value={getRandomInteger(0, 10)}
+            suffix={"days"}
+          />
+        }
+      />
+    </div>
+  );
+});
+
 const PerformanceData = compose<React.ComponentType<Props & WithLoaderProps>>(
-  withLoader,
+  withBlurLoader,
   React.memo
 )(_PerformanceData);
 export default PerformanceData;
