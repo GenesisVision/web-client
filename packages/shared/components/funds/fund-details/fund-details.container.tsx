@@ -7,7 +7,8 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import withBlurLoader from "shared/decorators/with-blur-loader";
+import { WithLoaderProps } from "shared/decorators/with-loader";
 import { fundEventsSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -52,7 +53,7 @@ interface Props {
 const FundDetailsContainer = compose<
   React.ComponentType<Props & WithLoaderProps>
 >(
-  withLoader,
+  withBlurLoader,
   React.memo
 )(_FundDetailsContainer);
 export default FundDetailsContainer;
