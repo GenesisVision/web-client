@@ -1,0 +1,24 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.referral-program {
+  &__blocks {
+    display: flex;
+  }
+  &__link-block {
+    display: flex;
+    align-items: center;
+  }
+  &__link {
+    @include horizontal-paddings($padding-xxsmall);
+  }
+  &__rewards-table {
+    & td,
+    & th {
+      @include horizontal-paddings($padding-xxsmall);
+      @include vertical-paddings($padding-xxsmall);
+      text-align: center;
+    }
+  }
+}
