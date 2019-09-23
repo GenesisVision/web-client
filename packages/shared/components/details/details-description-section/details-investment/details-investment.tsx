@@ -51,6 +51,7 @@ const _DetailsInvestment: React.FC<Props> = ({
   WithdrawContainer,
   ProgramReinvestingWidget
 }) => {
+  const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const events = useSelector(selector);
@@ -72,8 +73,11 @@ const _DetailsInvestment: React.FC<Props> = ({
   const haveInvestment =
     haveActiveInvestment(personalDetails) || haveSubscription(personalDetails);
   const showInvestment = haveEvents || haveInvestment;
-  const { tab, setTab } = useTab<TABS>(
-    haveInvestment ? TABS.INVESTMENT : TABS.EVENTS
+  useEffect(
+    () => {
+      if (haveEvents && !haveInvestment) setTab(null, TABS.EVENTS);
+    },
+    [haveInvestment, haveEvents]
   );
   if (!showInvestment) return null;
   return (
