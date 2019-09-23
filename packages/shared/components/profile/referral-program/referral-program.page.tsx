@@ -3,7 +3,7 @@ import "./referral-program.scss";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import ProfileLayout from "shared/components/profile/profile-layout";
-import { SETTINGS } from "shared/components/profile/profile.constants";
+import { REFERRAL_PROGRAM } from "shared/components/profile/profile.constants";
 import DetailsBlock from "shared/components/details/details-block";
 import CopyIcon from "shared/components/icon/copy-icon";
 import GVButton from "shared/components/gv-button";
@@ -13,7 +13,7 @@ import { CurrencyEnum } from "shared/utils/types";
 
 const _ReferralProgramPage: React.FC = () => {
   return (
-    <ProfileLayout route={SETTINGS}>
+    <ProfileLayout route={REFERRAL_PROGRAM}>
       <div className="referral-program profile__container--padding-top">
         <div className="referral-program__blocks">
           <InviteBlock link={"http://dddd.r"} />
