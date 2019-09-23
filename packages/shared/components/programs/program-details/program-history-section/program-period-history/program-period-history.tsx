@@ -36,7 +36,7 @@ const _ProgramPeriodHistory: React.FC<Props> = ({ currency, id }) => {
       )}
       getItems={getPeriodHistory(id)}
       dataSelector={periodHistoryTableSelector}
-      isFetchOnMount={true}
+      isFetchOnMount={false}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}
