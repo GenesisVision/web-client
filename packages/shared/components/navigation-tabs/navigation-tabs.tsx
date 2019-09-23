@@ -32,7 +32,7 @@ const _NavigationTabs: React.FC<Props> = ({
                 }).slice(0, -1)
               }}
             >
-              <a>{t("funds-page.tabs.explore")}</a>
+              {t("funds-page.tabs.explore")}
             </Link>
           }
         />
@@ -46,7 +46,7 @@ const _NavigationTabs: React.FC<Props> = ({
                 })
               }}
             >
-              <a>{t("funds-page.tabs.favorites")}</a>
+              {t("funds-page.tabs.favorites")}
             </Link>
           }
         />

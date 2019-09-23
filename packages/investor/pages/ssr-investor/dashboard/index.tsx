@@ -14,9 +14,8 @@ const Dashboard: NextPageWithRedux<{}> = () => {
 
 Dashboard.getInitialProps = async ctx => {
   await Promise.all([
-    ctx.reduxStore.dispatch(getTopPortfolioEvents(ctx))
-    // ctx.reduxStore.dispatch(getInRequests(ctx)), TODO fix it
-    // ctx.reduxStore.dispatch(getPortfolioChart(ctx)) TODO fix it
+    ctx.reduxStore.dispatch(getTopPortfolioEvents(ctx)),
+    ctx.reduxStore.dispatch(getInRequests(ctx))
   ]);
   return {};
 };

@@ -30,22 +30,20 @@ const _FacetCard: React.FC<Props> = ({
           as: composeFacetUrl(facet.url)
         }}
       >
-        <a>
-          <div className="facet__facet-container">
-            <div className="facet__logo-wrapper">
-              <ImageBase
-                url={facet.logo}
-                alt={facet.title}
-                defaultImage={facetImg}
-                imageClassName="facet__logo"
-              />
-            </div>
-            <div className="facet__info">
-              <h2 className="facet__title">{facet.title}</h2>
-              <div className="facet__description">{facet.description}</div>
-            </div>
+        <div className="facet__facet-container">
+          <div className="facet__logo-wrapper">
+            <ImageBase
+              url={facet.logo}
+              alt={facet.title}
+              defaultImage={facetImg}
+              imageClassName="facet__logo"
+            />
           </div>
-        </a>
+          <div className="facet__info">
+            <h2 className="facet__title">{facet.title}</h2>
+            <div className="facet__description">{facet.description}</div>
+          </div>
+        </div>
       </Link>
     </Surface>
   );

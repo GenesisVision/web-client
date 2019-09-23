@@ -8,12 +8,10 @@ const LoginFooter: React.FC<ILoginFooterProps> = ({ ROUTE }) => {
   return (
     <>
       <span>{t("auth.login.footer-text")}</span>
-      <Link to={ROUTE}>
-        <a className="auth-footer__desc">
-          <GVButton color="secondary" variant="outlined">
-            {t("auth.signup.title")}
-          </GVButton>
-        </a>
+      <Link to={ROUTE} className="auth-footer__desc">
+        <GVButton color="secondary" variant="outlined">
+          {t("auth.signup.title")}
+        </GVButton>
       </Link>
     </>
   );

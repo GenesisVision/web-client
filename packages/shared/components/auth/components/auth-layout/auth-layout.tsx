@@ -24,14 +24,15 @@ const _AuthLayout: NextPage<Props> = ({
     <div className="root auth page">
       <div className="auth__left">
         <Link
+          className="navigation__link auth__logo"
           to={{
             pathname: HOME_ROUTE
           }}
         >
-          <a className="navigation__link auth__logo">
+          <>
             <GvLogo />
             <GvBrand />
-          </a>
+          </>
         </Link>
 
         <blockquote className="auth__quote">
