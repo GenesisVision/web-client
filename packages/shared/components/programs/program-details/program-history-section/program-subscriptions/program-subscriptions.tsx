@@ -23,7 +23,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({ id, currency }) => {
     <TableContainer
       getItems={getSubscriptions(id)}
       dataSelector={subscriptionsTableSelector}
-      isFetchOnMount={true}
+      isFetchOnMount={false}
       columns={PROGRAM_SUBSCRIBERS_COLUMNS}
       renderFilters={(
         updateFilter: UpdateFilterFunc,
