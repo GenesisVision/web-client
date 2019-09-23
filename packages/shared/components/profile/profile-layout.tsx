@@ -14,6 +14,8 @@ import {
   KYC_ROUTE,
   PROFILE,
   PROFILE_ROUTE,
+  REFERRAL_PROGRAM,
+  REFERRAL_PROGRAM_ROUTE,
   SECURITY,
   SECURITY_ROUTE,
   SETTINGS,
@@ -27,7 +29,8 @@ const tabs = [
   { pathname: PROFILE_ROUTE, value: PROFILE },
   { pathname: KYC_ROUTE, value: VERIFY, hideable: true },
   { pathname: SETTINGS_ROUTE, value: SETTINGS },
-  { pathname: SECURITY_ROUTE, value: SECURITY }
+  { pathname: SECURITY_ROUTE, value: SECURITY },
+  { pathname: REFERRAL_PROGRAM_ROUTE, value: REFERRAL_PROGRAM }
 ];
 
 if (ROLE_ENV === ROLE.MANAGER) {
