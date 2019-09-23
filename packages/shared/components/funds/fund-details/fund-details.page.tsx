@@ -2,14 +2,14 @@ import "shared/components/details/details.scss";
 
 import * as React from "react";
 import { useEffect } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
-import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
+import DetailsContainerTextLoader from "shared/components/details/details.contaner.txt-loader";
 
 import FundDetailsContainer from "./fund-details.container";
 import { IDescriptionSection } from "./fund-details.types";
@@ -21,16 +21,13 @@ const _FundDetailsPage: React.FC<Props> = ({
   descriptionSection
 }) => {
   const description = useSelector(fundDescriptionSelector);
-  useEffect(
-    () => {
-      dispatchFundDescription();
-    },
-    []
-  );
+  useEffect(() => {
+    dispatchFundDescription();
+  }, []);
   return (
     <FundDetailsContainer
       condition={!!description}
-      loader={<DetailsContainerLoader assets />}
+      loader={<DetailsContainerTextLoader assets />}
       descriptionSection={descriptionSection}
       description={description!}
     />

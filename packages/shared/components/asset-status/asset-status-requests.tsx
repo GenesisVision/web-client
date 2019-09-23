@@ -6,6 +6,7 @@ import DashboardRequest from "shared/components/dashboard/dashboard-portfolio-ch
 import { ASSET } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
 
+import { CancelRequestPropsType } from "../dashboard/dashboard.constants";
 import {
   cancelRequestDispatch,
   getAssetRequests
@@ -26,12 +27,9 @@ const _AssetStatusRequests: React.FC<Props> = ({
   const [requests, setRequests] = useState<Array<ProgramRequest> | undefined>(
     undefined
   );
-  useEffect(
-    () => {
-      getAssetRequests(id, role, asset).then(setRequests);
-    },
-    [id, role, asset]
-  );
+  useEffect(() => {
+    getAssetRequests(id, role, asset).then(setRequests);
+  }, [id, role, asset]);
 
   const handleCancel = useCallback(() => {
     handleCloseDropdown();
@@ -63,7 +61,9 @@ const _AssetStatusRequests: React.FC<Props> = ({
           }
           key={request.id}
           request={request}
-          cancelRequest={dispatch(cancelRequestDispatch)}
+          cancelRequest={(values: CancelRequestPropsType) => {
+            dispatch(cancelRequestDispatch(values));
+          }}
           asset={asset}
           onApplyCancelRequest={handleCancel}
         />

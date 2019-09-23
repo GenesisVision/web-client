@@ -1,14 +1,14 @@
 import "shared/components/details/details.scss";
 
 import React, { useEffect } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
-import DetailsContainerLoader from "shared/components/details/details.contaner.loader";
+import DetailsContainerTextLoader from "shared/components/details/details.contaner.txt-loader";
 import {
   dispatchPlatformLevelsParameters,
   dispatchProgramDescription
@@ -26,16 +26,13 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   useEffect(() => {
     dispatchProgramDescription();
   }, []);
-  useEffect(
-    () => {
-      description && dispatchPlatformLevelsParameters(description.currency);
-    },
-    [description]
-  );
+  useEffect(() => {
+    description && dispatchPlatformLevelsParameters(description.currency);
+  }, [description]);
   return (
     <ProgramDetailsContainer
       condition={!!description}
-      loader={<DetailsContainerLoader />}
+      loader={<DetailsContainerTextLoader performance />}
       descriptionSection={descriptionSection}
       description={description!}
     />

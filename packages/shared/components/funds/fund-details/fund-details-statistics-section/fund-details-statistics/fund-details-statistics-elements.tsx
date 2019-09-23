@@ -11,7 +11,7 @@ import {
 } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import withLoader from "shared/decorators/with-loader";
+import withBlurLoader from "shared/decorators/with-blur-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -185,6 +185,6 @@ export interface IFundDetailsStatisticsElementsProps {
 }
 
 const FundDetailsStatisticsElements = React.memo(
-  withLoader(_FundDetailsStatisticsElements)
+  withBlurLoader(_FundDetailsStatisticsElements)
 );
 export default FundDetailsStatisticsElements;
