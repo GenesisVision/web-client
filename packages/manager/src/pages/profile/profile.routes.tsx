@@ -7,6 +7,7 @@ import {
   PASSWORD_ROUTE,
   PROFILE_EDIT_ROUTE,
   PROFILE_ROUTE,
+  REFERRAL_PROGRAM_ROUTE,
   SECURITY_ROUTE,
   SETTINGS_ROUTE,
   SOCIAL_LINKS_ROUTE
@@ -17,6 +18,7 @@ import SettingsPage from "shared/components/profile/settings/settings.page";
 
 import ProfileEditPage from "./edit/edit.page";
 import SocialLinksPage from "./social-links/social-links.page";
+import ReferralProgramPage from "shared/components/profile/referral-program/referral-program.page";
 
 const ProfilePageContainer = () => <ProfilePage />;
 
@@ -28,6 +30,7 @@ const ProfileRoutes: React.FC = () => (
     <Route path={SOCIAL_LINKS_ROUTE} component={SocialLinksPage} />
     <Route path={PROFILE_EDIT_ROUTE} component={ProfileEditPage} />
     <Route path={SECURITY_ROUTE} component={SecurityPage} />
+    <Route path={REFERRAL_PROGRAM_ROUTE} component={ReferralProgramPage} />
     <Route path={PROFILE_ROUTE} component={ProfilePageContainer} />
   </Switch>
 );
