@@ -12,7 +12,10 @@ import { WalletIcon } from "shared/components/icon/wallet-icon";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
-import withBlurLoader from "shared/decorators/with-blur-loader";
+import {
+  withBlurLoader_,
+  WithBlurLoaderProps
+} from "shared/decorators/with-blur-loader";
 import { WithLoaderProps } from "shared/decorators/with-loader";
 import useAnchor from "shared/hooks/anchor.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -21,7 +24,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { walletsSelector } from "../wallet/reducers/wallet.reducers";
 
-const _WalletWidget: React.FC<Props> = ({ info, className }) => {
+const _WalletWidget: React.FC<Props> = ({ data, className }) => {
   const [t] = useTranslation();
   const wallets = useSelector(walletsSelector);
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
@@ -32,7 +35,7 @@ const _WalletWidget: React.FC<Props> = ({ info, className }) => {
     investedCcy: invested,
     pendingCcy: pending,
     totalCcy: totalBalance
-  } = info;
+  } = data;
   return (
     <>
       <div className={classNames("wallet-widget", className)}>
@@ -90,12 +93,14 @@ const _WalletWidget: React.FC<Props> = ({ info, className }) => {
 };
 
 interface Props {
-  info: WalletsGrandTotal;
+  data: WalletsGrandTotal;
   className?: string;
 }
 
-const WalletWidget = compose<React.ComponentType<Props & WithLoaderProps>>(
-  withBlurLoader,
+const WalletWidget = compose<
+  React.ComponentType<Props & WithBlurLoaderProps<WalletsGrandTotal>>
+>(
+  withBlurLoader_,
   React.memo
 )(_WalletWidget);
 export default WalletWidget;
