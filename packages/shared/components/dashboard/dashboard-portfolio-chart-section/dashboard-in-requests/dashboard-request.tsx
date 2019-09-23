@@ -152,7 +152,7 @@ interface OwnProps {
   exitFee?: number;
   entryFee?: number;
   request: ProgramRequest;
-  cancelRequest(x: CancelRequestPropsType): void;
+  cancelRequest: (x: CancelRequestPropsType) => void;
   onApplyCancelRequest(): void;
   asset?: ASSET;
 }
