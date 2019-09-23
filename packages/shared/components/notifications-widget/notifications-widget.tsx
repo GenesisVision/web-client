@@ -4,7 +4,7 @@ import classNames from "classnames";
 import * as React from "react";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { RingIcon } from "shared/components/icon/ring-icon";
-import withLoader from "shared/decorators/with-loader";
+import withBlurLoader from "shared/decorators/with-blur-loader";
 
 const _NotificationsWidget: React.FC<Props> = ({
   openNotifications,
@@ -34,5 +34,5 @@ interface Props {
   openNotifications: () => void;
 }
 
-const NotificationsWidget = React.memo(withLoader(_NotificationsWidget));
+const NotificationsWidget = React.memo(withBlurLoader(_NotificationsWidget));
 export default NotificationsWidget;

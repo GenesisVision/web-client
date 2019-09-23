@@ -6,23 +6,20 @@ import { fetchWallets } from "shared/components/wallet/services/wallet.services"
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 
 import { grandTotalSelector } from "../wallet/reducers/wallet.reducers";
-import { WalletWidgetLoader } from "./wallet-widget.loader";
+import { WalletWidgetTxtLoader } from "./wallet-widget.txt-loader";
 
 const _WalletWidgetContainer: React.FC<Props> = ({ className }) => {
   const currency = useSelector(currencySelector);
   const info = useSelector(grandTotalSelector);
   const dispatch = useDispatch();
-  useEffect(
-    () => {
-      dispatch(fetchWallets(currency));
-    },
-    [currency]
-  );
+  useEffect(() => {
+    dispatch(fetchWallets(currency));
+  }, [currency]);
 
   return (
     <WalletWidget
       condition={!!info}
-      loader={<WalletWidgetLoader className={className} />}
+      loader={<WalletWidgetTxtLoader className={className} />}
       className={className}
       info={info!}
     />

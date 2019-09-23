@@ -8,17 +8,18 @@ import { useSelector } from "react-redux";
 import { compose } from "redux";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { WalletIcon } from "shared/components/icon/wallet-icon";
+import Link from "shared/components/link/link";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import withBlurLoader from "shared/decorators/with-blur-loader";
+import { WithLoaderProps } from "shared/decorators/with-loader";
 import useAnchor from "shared/hooks/anchor.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { walletsSelector } from "../wallet/reducers/wallet.reducers";
-import Link from "shared/components/link/link";
 
 const _WalletWidget: React.FC<Props> = ({ info, className }) => {
   const [t] = useTranslation();
@@ -94,7 +95,7 @@ interface Props {
 }
 
 const WalletWidget = compose<React.ComponentType<Props & WithLoaderProps>>(
-  withLoader,
+  withBlurLoader,
   React.memo
 )(_WalletWidget);
 export default WalletWidget;

@@ -1,0 +1,6 @@
+.blur-container {
+  top: 0;
+  left: 0;
+  transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1); //easeOutQuint
+  will-change: opacity, filter;
+}

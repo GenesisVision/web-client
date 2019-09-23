@@ -27,21 +27,18 @@ const _DashboardRequest: React.FC<Props> = ({
   const role = useRole();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const [disabled, setDisabled, setNotDisabled] = useIsOpen();
-  const handleApplyCancelRequest = useCallback(
-    () => {
-      setDisabled();
-      const onFinally = () => onApplyCancelRequest();
-      const removeDisableBtn = () => setNotDisabled();
-      cancelRequest({
-        id: request.id,
-        onFinally,
-        removeDisableBtn,
-        role,
-        asset
-      });
-    },
-    [request.id, role, asset]
-  );
+  const handleApplyCancelRequest = useCallback(() => {
+    setDisabled();
+    const onFinally = () => onApplyCancelRequest();
+    const removeDisableBtn = () => setNotDisabled();
+    cancelRequest({
+      id: request.id,
+      onFinally,
+      removeDisableBtn,
+      role,
+      asset
+    });
+  }, [request.id, role, asset]);
   const assetDetails = {
     logo: request.logo,
     title: request.title,
@@ -152,7 +149,7 @@ interface OwnProps {
   exitFee?: number;
   entryFee?: number;
   request: ProgramRequest;
-  cancelRequest(x: CancelRequestPropsType): void;
+  cancelRequest: (x: CancelRequestPropsType) => void;
   onApplyCancelRequest(): void;
   asset?: ASSET;
 }
