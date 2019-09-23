@@ -42,15 +42,19 @@ const _DepositContainer: React.FC<Props> = ({
   const [investInfo, setInvestInfo] = useState<
     ProgramInvestInfo | FundInvestInfo | undefined
   >(undefined);
-  useEffect(() => {
-    service
-      .fetchBaseWallets()
-      .then(setWallets)
-      .catch(setErrorMessage);
-    fetchInfo(id, currency || stateCurrency)
-      .then(setInvestInfo)
-      .catch(setErrorMessage);
-  }, []);
+  useEffect(
+    () => {
+      if (!id) return;
+      service
+        .fetchBaseWallets()
+        .then(setWallets)
+        .catch(setErrorMessage);
+      fetchInfo(id, currency || stateCurrency)
+        .then(setInvestInfo)
+        .catch(setErrorMessage);
+    },
+    [id, currency, stateCurrency]
+  );
   const closePopup = useCallback(() => {
     cleanErrorMessage();
     onClose();
