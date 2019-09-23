@@ -906,11 +906,19 @@
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {
+      "referral-program": "Referral program",
       "security": "Security",
       "profile": "Personal details",
       "settings": "Settings",
       "verify": "Verify",
       "social-links": "Social links"
+    },
+    "referral-program": {
+      "title": "Invite your friends to Genesis vision",
+      "referral-link": "Referral link",
+      "share-your-passion": "Share your passion",
+      "referral-friends": "Referral friends",
+      "total-rewards": "Total rewards"
     },
     "verification": {
       "phone": {
