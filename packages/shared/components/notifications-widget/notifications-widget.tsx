@@ -4,11 +4,11 @@ import classNames from "classnames";
 import * as React from "react";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { RingIcon } from "shared/components/icon/ring-icon";
-import withBlurLoader from "shared/decorators/with-blur-loader";
+import { withBlurLoader_ } from "shared/decorators/with-blur-loader";
 
 const _NotificationsWidget: React.FC<Props> = ({
   openNotifications,
-  notificationsCount
+  data: notificationsCount = 0
 }) => {
   const hasNotifications: boolean = notificationsCount > 0;
   return (
@@ -30,9 +30,9 @@ const _NotificationsWidget: React.FC<Props> = ({
 };
 
 interface Props {
-  notificationsCount: number;
+  data?: number;
   openNotifications: () => void;
 }
 
-const NotificationsWidget = React.memo(withBlurLoader(_NotificationsWidget));
+const NotificationsWidget = React.memo(withBlurLoader_(_NotificationsWidget));
 export default NotificationsWidget;
