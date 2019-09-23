@@ -40,7 +40,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
       )}
       getItems={getFinancialStatistics(id)}
       dataSelector={financialStatisticTableSelector}
-      isFetchOnMount={true}
+      isFetchOnMount={false}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}
