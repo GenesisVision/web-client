@@ -47,7 +47,7 @@ export const login: LoginFuncType = (method, fromPath, type) => (
       authService.storeToken(response.value);
       dispatch(authActions.updateTokenAction(true));
       if (type) dispatch(clearTwoFactorData());
-      Push(from);
+      Router.push(from);
     })
     .catch((e: ResponseError) => {
       if (e.code === "RequiresTwoFactor") {
