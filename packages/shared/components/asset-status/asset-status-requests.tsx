@@ -10,6 +10,7 @@ import {
   cancelRequestDispatch,
   getAssetRequests
 } from "./services/asset-status.service";
+import { CancelRequestPropsType } from "../dashboard/dashboard.constants";
 
 const _AssetStatusRequests: React.FC<Props> = ({
   successFee,
@@ -63,7 +64,9 @@ const _AssetStatusRequests: React.FC<Props> = ({
           }
           key={request.id}
           request={request}
-          cancelRequest={dispatch(cancelRequestDispatch)}
+          cancelRequest={(values: CancelRequestPropsType) => {
+            dispatch(cancelRequestDispatch(values));
+          }}
           asset={asset}
           onApplyCancelRequest={handleCancel}
         />
