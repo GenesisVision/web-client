@@ -1,18 +1,18 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import withLoader from "shared/decorators/with-loader";
 
 import { LIST_VIEW } from "../table.constants";
-import TableLoader from "./table-loader";
 import {
   RenderBodyItemFuncType,
   UpdateItemsFuncType,
   UpdateRowFuncType
 } from "./table.types";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
+import { TagType } from "shared/utils/types";
 
-const TableBody: React.FC<ITableBodyExternalProps & ITableBodyInnerProps> = ({
+const _TableBody: React.FC<ITableBodyExternalProps & ITableBodyInnerProps> = ({
   updateItems,
-  items,
+  data,
   renderBodyItem,
   tag: Tag,
   className,
@@ -20,36 +20,32 @@ const TableBody: React.FC<ITableBodyExternalProps & ITableBodyInnerProps> = ({
   view,
   updateRow
 }) => (
-  <Tag className={className}>
-    <TableItems
-      condition={!isPending && items !== null && items !== undefined}
-      loader={<TableLoader view={view} />}
-      items={items!}
-      view={view}
-      renderBodyItem={renderBodyItem}
-      updateRow={updateRow}
-      updateItems={updateItems}
-    />
-  </Tag>
+  <TableItems
+    data={data!}
+    view={view}
+    renderBodyItem={renderBodyItem}
+    updateRow={updateRow}
+    updateItems={updateItems}
+  />
 );
+const TableBody = withBlurLoader(React.memo(_TableBody));
 
 const _TableItems: React.FC<ITableItemsProps> = ({
-  items,
+  data,
   view,
   renderBodyItem,
   updateRow,
   updateItems
-}) =>
-  (items.length === 0 && <EmptyMessage view={view} />) || (
-    <>
-      {items.map((item, idx: number) => (
-        <React.Fragment key={item.id || idx}>
-          {renderBodyItem(item, updateRow, updateItems)}
-        </React.Fragment>
-      ))}
-    </>
-  );
-const TableItems = withLoader(React.memo(_TableItems));
+}) => (
+  <>
+    {data.map((item, idx: number) => (
+      <React.Fragment key={item.id || idx}>
+        {renderBodyItem(item, updateRow, updateItems)}
+      </React.Fragment>
+    ))}
+  </>
+);
+const TableItems = React.memo(_TableItems);
 
 const _EmptyMessage: React.FC<{ view: LIST_VIEW } & WithTranslation> = ({
   view,
@@ -72,7 +68,7 @@ const _EmptyMessage: React.FC<{ view: LIST_VIEW } & WithTranslation> = ({
 const EmptyMessage = translate()(React.memo(_EmptyMessage));
 
 interface ITableItemsProps {
-  items: any[];
+  data: any[];
   view: LIST_VIEW;
   renderBodyItem: RenderBodyItemFuncType;
   updateRow?: UpdateRowFuncType;
@@ -81,11 +77,12 @@ interface ITableItemsProps {
 
 interface ITableBodyInnerProps {
   renderBodyItem: RenderBodyItemFuncType;
-  tag: React.ComponentType<{ className?: string }> | string;
+  tag: TagType;
   view: LIST_VIEW;
 }
 
-export interface ITableBodyExternalProps {
+export interface ITableBodyContainerExternalProps {
+  loaderData?: any[];
   updateRow?: UpdateRowFuncType;
   updateItems?: UpdateItemsFuncType;
   items?: any[];
@@ -93,4 +90,23 @@ export interface ITableBodyExternalProps {
   className?: string;
 }
 
-export default React.memo(TableBody);
+export interface ITableBodyExternalProps {
+  updateRow?: UpdateRowFuncType;
+  updateItems?: UpdateItemsFuncType;
+  data?: any[];
+  isPending?: boolean;
+  className?: string;
+}
+
+const _TableBodyContainer: React.FC<
+  ITableBodyContainerExternalProps & ITableBodyInnerProps
+> = props => {
+  const { items, view, loaderData, tag } = props;
+  return (
+    (items && items.length === 0 && <EmptyMessage view={view} />) || (
+      <TableBody {...props} loaderData={loaderData!} data={items} tag={tag} />
+    )
+  );
+};
+const TableBodyContainer = React.memo(_TableBodyContainer);
+export default TableBodyContainer;
