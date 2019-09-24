@@ -28,14 +28,8 @@ const _ProgramProfitChart: React.FC<Props> = ({
   chartCurrencies
 }) => {
   const equityCharts = profitChart.map(({ equityChart }) => equityChart);
-  const pnLCharts = profitChart.map(({ pnLChart }) => pnLChart);
-  if (equityCharts.length === 0 || pnLCharts.length === 0 || !chartCurrencies)
-    return null;
+  if (equityCharts.length === 0 || !chartCurrencies) return null;
   const firstEquity = equityCharts[0].map(x => ({
-    date: x.date.getTime(),
-    value: formartChartMinValue(x.value)
-  }));
-  const firstPnl = pnLCharts[0]!.map((x: any) => ({
     date: x.date.getTime(),
     value: formartChartMinValue(x.value)
   }));
@@ -45,7 +39,7 @@ const _ProgramProfitChart: React.FC<Props> = ({
 
   return (
     <ResponsiveContainer>
-      <ComposedChart data={firstPnl} margin={{ top: 20 }}>
+      <ComposedChart data={firstEquity} margin={{ top: 20 }}>
         <defs>
           <ChartGradient
             offset={off}
@@ -62,45 +56,15 @@ const _ProgramProfitChart: React.FC<Props> = ({
         {/*
         //@ts-ignore*/}
         <YAxis
-          yAxisId="left"
           dataKey="value"
-          data={firstEquity}
-          orientation="left"
           axisLine={false}
-          tick={{
-            fill: GVColors.$labelColor,
-            fontSize: "12"
-          }}
-          tickFormatter={x => formatValue(x, 2)}
+          tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+          tickFormatter={x => +x.toFixed(2)}
           unit="%"
           width={35}
         />
-        {/*
-        //@ts-ignore*/}
-        <YAxis
-          yAxisId="right"
-          dataKey="value"
-          data={firstPnl}
-          orientation="right"
-          axisLine={false}
-          tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-          unit={chartCurrencies[0].name}
-          tickFormatter={x => formatValue(x, 5)}
-          width={80}
-        />
         <Tooltip content={ProgramProfitTooltip} />
         <CartesianGrid vertical={false} strokeWidth={0.1} />
-        <Bar
-          dataKey="value"
-          //@ts-ignore
-          data={firstPnl}
-          unit={` ${chartCurrencies[0].name}`}
-          barSize={6}
-          fill={GVColors.$labelColor}
-          stroke={GVColors.$labelColor}
-          yAxisId="right"
-          isAnimationActive={false}
-        />
         {equityCharts.map((equity, i) => (
           //@ts-ignore
           <Area
@@ -117,8 +81,7 @@ const _ProgramProfitChart: React.FC<Props> = ({
             fill={`url(#equityProgramChartFill)`}
             strokeWidth={3}
             dot={false}
-            yAxisId="left"
-            unit="%"
+            unit=" %"
             isAnimationActive={false}
           />
         ))}
