@@ -4,11 +4,50 @@ import {
   LevelsParamsInfo,
   PersonalProgramDetailsFull,
   ProgramDetailsFull,
+  ProgramProfitChart,
   ProgramStatistic
 } from "gv-api-web";
 import { getRandomInteger } from "shared/utils/helpers";
+import { equityChartLoaderData } from "./equity-chart.loader-data";
+import { periodsLoaderData } from "./periods.loader-data";
+import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
+import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
+import { amountWithCurrencyLoaderData, managerLoaderData, mockDate } from "../../details/details.loader-data";
 
-const mockDate = ("2019-09-05T09:50:23.1201470+00:00" as unknown) as Date;
+export const selectedCurrenciesLoaderData: TChartCurrency[] = [
+  { name: "GVT", color: "#f0f0f0" }
+];
+
+export const profitChartLoaderData: ProgramProfitChart = {
+  equityChart: equityChartLoaderData,
+  totalProfit: 0,
+  timeframeProfit: 0,
+  programCurrency: "ETH",
+  trades: 0,
+  successTradesPercent: 0,
+  profitFactor: 0,
+  pnLChart: [],
+  periods: periodsLoaderData,
+  lastPeriodStarts: ("2019-09-24T06:02:14.7974010+00:00" as unknown) as Date,
+  lastPeriodEnds: ("2019-09-24T07:02:14.7974010+00:00" as unknown) as Date,
+  tradingVolume: 0,
+  totalProgramCurrencyProfit: 0,
+  timeframeProgramCurrencyProfit: 0,
+  totalGvtProfit: 0,
+  timeframeGvtProfit: 0,
+  balance: 25.80216005,
+  investors: 3,
+  profitChangePercent: -22.4,
+  sharpeRatio: 1.3872456301077910581826258857,
+  sortinoRatio: 1.9150963753755977061955791825,
+  calmarRatio: 1.0426212040490143846563665424,
+  maxDrawdown: -18.71759074591144794575189469,
+  rate: 158.63
+};
+
+export const profitChartDataLoaderData: ProfitChartDataType = [
+  profitChartLoaderData
+];
 
 export const statisticDataLoaderData = {
   statisticCurrency: "GVT",
@@ -52,18 +91,9 @@ export const brokerDetailsLoaderData: BrokerDetails = {
 };
 
 export const statisticLoaderData: ProgramStatistic = {
-  balanceBase: {
-    amount: getRandomInteger(0, 100),
-    currency: "GVT"
-  },
-  balanceGVT: {
-    amount: getRandomInteger(0, 100),
-    currency: "GVT"
-  },
-  balanceSecondary: {
-    amount: getRandomInteger(0, 100),
-    currency: "GVT"
-  },
+  balanceBase: amountWithCurrencyLoaderData,
+  balanceGVT: amountWithCurrencyLoaderData,
+  balanceSecondary: amountWithCurrencyLoaderData,
   currentValue: getRandomInteger(0, 100),
   profitPercent: getRandomInteger(0, 100),
   profitValue: getRandomInteger(0, 100),
@@ -188,14 +218,7 @@ export const programDetailsLoaderData: ProgramDetailsFull = {
   ipfsHash: "",
   creationDate: mockDate,
   status: "None",
-  manager: {
-    id: "",
-    username: faker.name.firstName(),
-    avatar: "",
-    registrationDate: mockDate,
-    url: "",
-    socialLinks: []
-  }
+  manager: managerLoaderData
 };
 
 export const levelsParamsLoaderData: LevelsParamsInfo = {
