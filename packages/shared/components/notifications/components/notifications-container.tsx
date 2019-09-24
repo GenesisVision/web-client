@@ -1,11 +1,11 @@
 import {
+  CancelablePromise,
   NotificationList,
   NotificationViewModel
 } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { ThunkDispatch } from "redux-thunk";
 import { notificationsToggleAction } from "shared/components/notifications/actions/notifications.actions";
 import Notifications from "shared/components/notifications/components/notifications";
 import {
@@ -16,28 +16,32 @@ import Sidebar, { SIDEBAR_POSITION } from "shared/components/sidebar/sidebar";
 import { notificationsCountSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
+import { MiddlewareDispatch } from "../../../utils/types";
+
 const _NotificationsContainer: React.FC<Props> = ({
   service,
   open,
   notifications,
   count,
   total
-}) => (
-  <Sidebar
-    open={open}
-    position={SIDEBAR_POSITION.RIGHT}
-    onClose={service.toggleNotifications}
-  >
-    <Notifications
-      fetchNotifications={service.getNotifications}
-      count={count}
-      total={total}
-      notifications={notifications}
-      clearNotifications={service.clearNotifications}
-      closeNotifications={service.toggleNotifications}
-    />
-  </Sidebar>
-);
+}) => {
+  return (
+    <Sidebar
+      open={open}
+      position={SIDEBAR_POSITION.RIGHT}
+      onClose={service.toggleNotifications}
+    >
+      <Notifications
+        fetchNotifications={service.getNotifications}
+        count={count}
+        total={total}
+        notifications={notifications}
+        clearNotifications={service.clearNotifications}
+        closeNotifications={service.toggleNotifications}
+      />
+    </Sidebar>
+  );
+};
 
 const mapStateToProps = (state: RootState): StateProps => {
   const { notifications } = state;
@@ -49,13 +53,10 @@ const mapStateToProps = (state: RootState): StateProps => {
   };
 };
 
-const mapDispatchToProps = (
-  dispatch: ThunkDispatch<RootState, any, any>
-): DispatchProps => ({
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   service: {
     toggleNotifications: () => dispatch(notificationsToggleAction(false)),
-    getNotifications: () =>
-      dispatch<CancelablePromise<NotificationList>>(serviceGetNotifications()),
+    getNotifications: () => dispatch(serviceGetNotifications()),
     clearNotifications: () => dispatch(serviceClearNotifications())
   }
 });

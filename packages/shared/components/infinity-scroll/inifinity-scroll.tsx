@@ -8,19 +8,16 @@ const _InfinityScroll: React.FC<Props> = ({ hasMore, loadMore, children }) => {
     null
   );
 
-  const handleScroll = useCallback(
-    () => {
-      if (scroll.current && container.current) {
-        const scrollCurrent = scroll.current;
-        const scrollTop = scrollCurrent.scrollTop;
-        const clientHeight = window.innerHeight;
-        const scrollHeight = container.current.getBoundingClientRect().height;
-        const offsetBottom = scrollHeight - scrollTop - clientHeight;
-        if (offsetBottom < 100 && hasMore) loadMore();
-      }
-    },
-    [scroll, container, hasMore, loadMore, window.innerHeight]
-  );
+  const handleScroll = useCallback(() => {
+    if (scroll.current && container.current) {
+      const scrollCurrent = scroll.current;
+      const scrollTop = scrollCurrent.scrollTop;
+      const clientHeight = window.innerHeight;
+      const scrollHeight = container.current.getBoundingClientRect().height;
+      const offsetBottom = scrollHeight - scrollTop - clientHeight;
+      if (offsetBottom < 100 && hasMore) loadMore();
+    }
+  }, [hasMore, window.innerHeight]);
 
   return (
     <div className="infinity-scroll" ref={scroll} onScroll={handleScroll}>
@@ -36,5 +33,5 @@ interface Props {
   hasMore?: boolean;
 }
 
-const InfinityScroll = React.memo(_InfinityScroll);
+const InfinityScroll = React.memo<React.FC<Props>>(_InfinityScroll);
 export default InfinityScroll;

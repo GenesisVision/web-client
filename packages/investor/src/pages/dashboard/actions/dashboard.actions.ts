@@ -91,7 +91,7 @@ export const fetchInRequestsAction = (
 export const cancelProgramRequestAction = (
   auth: string,
   id: string
-): ActionType<Promise<any>> => ({
+): ActionType<CancelablePromise<any>> => ({
   type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
   payload: investorApi.v10InvestorProgramsRequestsByIdCancelPost(id, auth)
 });
