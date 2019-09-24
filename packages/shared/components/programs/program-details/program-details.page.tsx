@@ -8,13 +8,13 @@ import {
   compose,
   Dispatch
 } from "redux";
-import DetailsContainerTextLoader from "shared/components/details/details.contaner.txt-loader";
 import {
   dispatchPlatformLevelsParameters,
   dispatchProgramDescription
 } from "shared/components/programs/program-details/services/program-details.service";
 
 import ProgramDetailsContainer from "./program-details.contaner";
+import { programDetailsLoaderData } from "./program-details.loader-data";
 import { IDescriptionSection } from "./program-details.types";
 import { programDescriptionSelector } from "./reducers/description.reducer";
 
@@ -31,10 +31,9 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   }, [description]);
   return (
     <ProgramDetailsContainer
-      condition={!!description}
-      loader={<DetailsContainerTextLoader performance />}
+      loaderData={programDetailsLoaderData}
       descriptionSection={descriptionSection}
-      description={description!}
+      data={description!}
     />
   );
 };

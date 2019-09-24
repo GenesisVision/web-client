@@ -11,13 +11,13 @@ import {
 } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import withBlurLoader from "shared/decorators/with-blur-loader";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _FundDetailsStatisticsElements: React.FC<
   IFundDetailsStatisticsElementsProps
-> = ({ period, statisticData: { statisticCurrency, statistic } }) => {
+> = ({ period, data: { statisticCurrency, statistic } }) => {
   const [t] = useTranslation();
   return (
     <>
@@ -181,7 +181,7 @@ export interface IFundStatisticData {
 
 export interface IFundDetailsStatisticsElementsProps {
   period: ChartDefaultPeriod;
-  statisticData: IFundStatisticData;
+  data: IFundStatisticData;
 }
 
 const FundDetailsStatisticsElements = React.memo(

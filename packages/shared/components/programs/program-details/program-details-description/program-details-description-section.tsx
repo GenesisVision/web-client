@@ -7,8 +7,9 @@ import { useSelector } from "react-redux";
 import { ProgramControlsLoader } from "shared/components/details/details.contaner.loader";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
+import { levelsParamsLoaderData } from "../program-details.loader-data";
 import { levelParametersSelector } from "../reducers/level-parameters.reducer";
-import PerformanceData, { PerformanceDataTextLoader } from "./performance-data";
+import PerformanceData from "./performance-data";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
@@ -28,9 +29,8 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
         ChangePasswordTradingAccount={ChangePasswordTradingAccount}
       />
       <PerformanceData
-        condition={!!levelsParameters}
-        loader={<PerformanceDataTextLoader />}
-        levelsParameters={levelsParameters!}
+        loaderData={levelsParamsLoaderData}
+        data={levelsParameters!}
         programDescription={programDescription}
       />
       <ProgramControls

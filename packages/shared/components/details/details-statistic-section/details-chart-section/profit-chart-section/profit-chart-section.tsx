@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { ChartValuePeriodLoader } from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 
 import {
+  ProfitChartDataType,
   TProfitChartSelector,
   TUseChartPeriod,
   TUseChartStateValues
@@ -11,8 +11,10 @@ import ProfitChartElements, {
   TRenderProfitChart,
   TRenderProfitValue
 } from "./profit-chart-elements";
+import { selectedCurrenciesLoaderData } from "shared/components/programs/program-details/program-details.loader-data";
 
 const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
+  loaderData,
   renderProfitValue,
   useChartStateValues,
   profitChartSelector,
@@ -30,14 +32,17 @@ const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
   const profitChart = useSelector(profitChartSelector);
   return (
     <ProfitChartElements
-      condition={!!profitChart}
-      loader={<ChartValuePeriodLoader />}
+      loaderData={loaderData}
       renderProfitValue={renderProfitValue}
       renderProfitChart={renderProfitChart}
       period={period}
       setPeriod={setPeriod}
-      selectedCurrencies={selectedCurrencies}
-      profitChart={profitChart! as any}
+      selectedCurrencies={
+        selectedCurrencies.length
+          ? selectedCurrencies
+          : selectedCurrenciesLoaderData
+      }
+      data={profitChart! as any}
       addCurrency={addCurrency}
       removeCurrency={removeCurrency}
       changeCurrency={changeCurrency}
@@ -47,6 +52,7 @@ const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
 };
 
 export interface IProfitChartSectionProps {
+  loaderData: ProfitChartDataType;
   useChartStateValues: TUseChartStateValues;
   useChartPeriod: TUseChartPeriod;
   renderProfitChart: TRenderProfitChart;

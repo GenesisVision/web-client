@@ -10,14 +10,16 @@ import StatisticItemLoader from "shared/components/statistic-item/statistic-item
 import StatisticItemTextLoader from "shared/components/statistic-item/statistic-item.txt-loader";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
-import withBlurLoader from "shared/decorators/with-blur-loader";
-import { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  WithBlurLoaderProps,
+  withBlurLoader
+} from "shared/decorators/with-blur-loader";
 import filesService from "shared/services/file-service";
 import { getRandomInteger } from "shared/utils/helpers";
 
 const _PerformanceData: React.FC<Props> = ({
   programDescription,
-  levelsParameters
+  data: levelsParameters
 }) => {
   const [t] = useTranslation();
   return (
@@ -98,7 +100,7 @@ const _PerformanceData: React.FC<Props> = ({
 };
 
 interface Props {
-  levelsParameters: LevelsParamsInfo;
+  data: LevelsParamsInfo;
   programDescription: ProgramDetailsFull;
 }
 
@@ -178,7 +180,9 @@ export const PerformanceDataTextLoader: React.FC = React.memo(() => {
   );
 });
 
-const PerformanceData = compose<React.ComponentType<Props & WithLoaderProps>>(
+const PerformanceData = compose<
+  React.ComponentType<Props & WithBlurLoaderProps<LevelsParamsInfo>>
+>(
   withBlurLoader,
   React.memo
 )(_PerformanceData);

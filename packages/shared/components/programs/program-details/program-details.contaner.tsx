@@ -9,8 +9,10 @@ import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ASSET } from "shared/constants/constants";
-import withBlurLoader from "shared/decorators/with-blur-loader";
-import { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  WithBlurLoaderProps,
+  withBlurLoader
+} from "shared/decorators/with-blur-loader";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
 
 import { IDescriptionSection } from "./program-details.types";
@@ -20,7 +22,7 @@ import { dispatchProgramDescription } from "./services/program-details.service";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   descriptionSection,
-  description
+  data: description
 }) => (
   <Page title={description.title}>
     <ProgramDetailsDescriptionSection
@@ -69,11 +71,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
 interface Props {
   descriptionSection: IDescriptionSection;
-  description: ProgramDetailsFull;
+  data: ProgramDetailsFull;
 }
 
 const ProgramDetailsContainer = compose<
-  React.ComponentType<Props & WithLoaderProps>
+  React.ComponentType<Props & WithBlurLoaderProps<ProgramDetailsFull>>
 >(
   withBlurLoader,
   React.memo

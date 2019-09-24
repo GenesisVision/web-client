@@ -5,7 +5,6 @@ import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import ChartCurrencySelector, {
   TAddChartCurrency,
   TChangeChartCurrency,
@@ -20,13 +19,17 @@ import {
   ProfitChartType,
   useChartData
 } from "../../details.chart.helpers";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "shared/decorators/with-blur-loader";
 
 const _ProfitChartElements: React.FC<Props> = ({
   renderProfitChart,
   renderProfitValue,
   period,
   setPeriod,
-  profitChart,
+  data,
   selectedCurrencies,
   addCurrency,
   removeCurrency,
@@ -34,10 +37,7 @@ const _ProfitChartElements: React.FC<Props> = ({
   selectCurrencies
 }) => {
   const [t] = useTranslation();
-  const chartData = useChartData<ProfitChartDataType>(
-    profitChart,
-    selectedCurrencies
-  );
+  const chartData = useChartData<ProfitChartDataType>(data, selectedCurrencies);
   const platformCurrencies = useSelector(platformCurrenciesSelector);
   const chart = chartData.chart[0];
   return (
@@ -90,7 +90,7 @@ interface OwnProps {
   renderProfitValue: TRenderProfitValue;
   period: ChartDefaultPeriod;
   setPeriod: HandlePeriodChangeType;
-  profitChart: ProfitChartDataType;
+  data: ProfitChartDataType;
   selectedCurrencies: TChartCurrency[];
   addCurrency: TAddChartCurrency;
   removeCurrency: TRemoveChartCurrency;
@@ -101,9 +101,9 @@ interface OwnProps {
 interface Props extends OwnProps {}
 
 const ProfitChartElements = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
+  React.ComponentType<OwnProps & WithBlurLoaderProps<ProfitChartDataType>>
 >(
-  withLoader,
+  withBlurLoader,
   React.memo
 )(_ProfitChartElements);
 export default ProfitChartElements;

@@ -1,11 +1,11 @@
 import { FundInvestInfo, ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { connect, ResolveThunks, useSelector } from "react-redux";
+import { ResolveThunks, connect, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
@@ -44,6 +44,7 @@ const _DepositContainer: React.FC<Props> = ({
   >(undefined);
   useEffect(
     () => {
+      if (!id) return;
       service
         .fetchBaseWallets()
         .then(setWallets)
@@ -52,15 +53,12 @@ const _DepositContainer: React.FC<Props> = ({
         .then(setInvestInfo)
         .catch(setErrorMessage);
     },
-    [currency, id, stateCurrency]
+    [id, currency, stateCurrency]
   );
-  const closePopup = useCallback(
-    () => {
-      cleanErrorMessage();
-      onClose();
-    },
-    [cleanErrorMessage, onClose]
-  );
+  const closePopup = useCallback(() => {
+    cleanErrorMessage();
+    onClose();
+  }, []);
   const handleInvest = useCallback(
     (
       amount: number,
@@ -76,7 +74,7 @@ const _DepositContainer: React.FC<Props> = ({
           setSubmitting(false);
         });
     },
-    [closePopup, id, onApply, service, setErrorMessage]
+    [id]
   );
   return (
     <Dialog open={open} onClose={closePopup}>
