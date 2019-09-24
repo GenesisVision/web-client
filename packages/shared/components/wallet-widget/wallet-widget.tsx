@@ -13,10 +13,9 @@ import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import {
-  withBlurLoader_,
+  withBlurLoader,
   WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
-import { WithLoaderProps } from "shared/decorators/with-loader";
 import useAnchor from "shared/hooks/anchor.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
@@ -100,7 +99,7 @@ interface Props {
 const WalletWidget = compose<
   React.ComponentType<Props & WithBlurLoaderProps<WalletsGrandTotal>>
 >(
-  withBlurLoader_,
+  withBlurLoader,
   React.memo
 )(_WalletWidget);
 export default WalletWidget;

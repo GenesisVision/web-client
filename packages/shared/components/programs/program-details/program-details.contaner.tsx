@@ -11,7 +11,7 @@ import ProgramDetailsStatisticSection from "shared/components/programs/program-d
 import { ASSET } from "shared/constants/constants";
 import {
   WithBlurLoaderProps,
-  withBlurLoader_
+  withBlurLoader
 } from "shared/decorators/with-blur-loader";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
 
@@ -77,7 +77,7 @@ interface Props {
 const ProgramDetailsContainer = compose<
   React.ComponentType<Props & WithBlurLoaderProps<ProgramDetailsFull>>
 >(
-  withBlurLoader_,
+  withBlurLoader,
   React.memo
 )(_ProgramDetailsContainer);
 export default ProgramDetailsContainer;

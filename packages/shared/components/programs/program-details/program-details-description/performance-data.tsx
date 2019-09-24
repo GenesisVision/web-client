@@ -12,7 +12,7 @@ import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
 import {
   WithBlurLoaderProps,
-  withBlurLoader_
+  withBlurLoader
 } from "shared/decorators/with-blur-loader";
 import filesService from "shared/services/file-service";
 import { getRandomInteger } from "shared/utils/helpers";
@@ -183,7 +183,7 @@ export const PerformanceDataTextLoader: React.FC = React.memo(() => {
 const PerformanceData = compose<
   React.ComponentType<Props & WithBlurLoaderProps<LevelsParamsInfo>>
 >(
-  withBlurLoader_,
+  withBlurLoader,
   React.memo
 )(_PerformanceData);
 export default PerformanceData;
