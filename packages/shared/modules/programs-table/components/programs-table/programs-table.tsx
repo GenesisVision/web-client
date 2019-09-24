@@ -1,12 +1,9 @@
 import "./programs.scss";
 
-import { ProgramDetails, ProgramsList } from "gv-api-web";
+import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
 import { Table } from "shared/components/table/components";
-import {
-  FilteringType,
-  SortingColumn
-} from "shared/components/table/components/filtering/filter.type";
+import { FilteringType, SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import {
   RenderFiltersFuncType,
   TableToggleFavoriteHandlerType,
@@ -20,6 +17,7 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
+import { programListLoaderData } from "./program-table.loader-data";
 
 export const FAVORITE_COLUMN_NAME = "favorite";
 
@@ -43,7 +41,7 @@ interface IProgramsTableProps {
   redirectToLogin?(): void;
 }
 
-const ProgramsTable: React.FC<IProgramsTableProps> = ({
+const _ProgramsTable: React.FC<IProgramsTableProps> = ({
   disableTitle,
   columns,
   showRating,
@@ -63,6 +61,7 @@ const ProgramsTable: React.FC<IProgramsTableProps> = ({
 }) => {
   return (
     <Table
+      loaderData={programListLoaderData}
       disableTitle={disableTitle}
       title={title}
       showSwitchView={showSwitchView}
@@ -113,4 +112,5 @@ const ProgramsTable: React.FC<IProgramsTableProps> = ({
   );
 };
 
+const ProgramsTable = React.memo(_ProgramsTable);
 export default ProgramsTable;
