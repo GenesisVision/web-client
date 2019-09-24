@@ -98,7 +98,7 @@ export const statisticLoaderData: ProgramStatistic = {
   profitPercent: getRandomInteger(0, 100),
   profitValue: getRandomInteger(0, 100),
   drawdownPercent: getRandomInteger(0, 100),
-  investorsCount: getRandomInteger(0, 100),
+  investorsCount: getRandomInteger(0, 10),
   hasNotifications: false,
   startDate: mockDate,
   startBalance: getRandomInteger(0, 100),
