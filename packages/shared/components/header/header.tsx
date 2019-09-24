@@ -11,12 +11,12 @@ import { SearchIcon } from "shared/components/icon/search-icon";
 import Navigation from "shared/components/navigation/navigation";
 import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
 import NotificationsWidget from "shared/components/notifications-widget/notifications-widget";
-import { NotificationsWidgetTextLoader } from "shared/components/notifications-widget/notifications-widget.txt-loader";
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import { ProfileWidgetLoader } from "shared/components/profile-widget/profile-widget.loader";
 import WalletWidgetContainer from "shared/components/wallet-widget/wallet-widget-container";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
+import { getRandomInteger } from "shared/utils/helpers";
 
 const _Header: React.FC<Props> = ({
   t,
@@ -52,11 +52,8 @@ const _Header: React.FC<Props> = ({
           <>
             <WalletWidgetContainer className="header__wallet" />
             <NotificationsWidget
-              condition={!!profileHeader}
-              loader={<NotificationsWidgetTextLoader />}
-              notificationsCount={
-                profileHeader ? profileHeader.notificationsCount : 0
-              }
+              loaderData={getRandomInteger(0, 1000)}
+              data={profileHeader && profileHeader.notificationsCount}
               openNotifications={openNotifications}
             />
             <ProfileWidget

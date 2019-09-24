@@ -34,7 +34,7 @@ const _ProgramTrades: React.FC<Props> = ({
       )}
       getItems={getTrades(programId)}
       dataSelector={tradesTableSelector}
-      isFetchOnMount={true}
+      isFetchOnMount={false}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}

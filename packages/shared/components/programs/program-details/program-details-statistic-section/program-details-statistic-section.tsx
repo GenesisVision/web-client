@@ -7,10 +7,10 @@ import {
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
-import DetailsStatisticsTextLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic.txt-loader";
 import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import { profitChartDataLoaderData, statisticDataLoaderData } from "../program-details.loader-data";
 import { programBalanceChartSelector } from "../reducers/balance-chart.reducer";
 import { programStatusSelector } from "../reducers/description.reducer";
 import { programProfitChartSelector } from "../reducers/profit-chart.reducer";
@@ -31,6 +31,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
   const status = useSelector(programStatusSelector);
   return (
     <DetailsStatisticSection
+      loaderData={profitChartDataLoaderData}
       balanceChartSelector={programBalanceChartSelector}
       profitChartSelector={programProfitChartSelector}
       statisticCurrencySelector={statisticCurrencySelector}
@@ -62,10 +63,9 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       )}
       renderDetailsStatisticsElements={({ period, statisticData }) => (
         <ProgramDetailsStatisticsElements
-          condition={!!statisticData}
-          loader={<DetailsStatisticsTextLoader />}
+          loaderData={statisticDataLoaderData}
           status={status}
-          statisticData={statisticData! as IProgramStatisticData}
+          data={statisticData! as IProgramStatisticData}
           period={period}
         />
       )}

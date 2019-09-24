@@ -56,7 +56,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
 
   useEffect(
     () => {
-      dispatch(getProgramHistoryCounts(programId));
+      programId && dispatch(getProgramHistoryCounts(programId));
     },
     [dispatch, programId]
   );

@@ -3,12 +3,12 @@ import "./details-investment.scss";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
+import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import DetailsBlock from "shared/components/details/details-block";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
@@ -60,7 +60,7 @@ const _DetailsInvestment: React.FC<Props> = ({
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
   useEffect(
     () => {
-      isAuthenticated && dispatch(getEvents(id, EVENT_LOCATION.Asset)());
+      isAuthenticated && id && dispatch(getEvents(id, EVENT_LOCATION.Asset)());
     },
     [isAuthenticated]
   );

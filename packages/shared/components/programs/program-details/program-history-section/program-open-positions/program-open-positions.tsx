@@ -16,7 +16,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({ currency, programId }) => {
     <TableContainer
       getItems={getOpenPositions(programId)}
       dataSelector={openPositionsTableSelector}
-      isFetchOnMount={true}
+      isFetchOnMount={false}
       columns={PROGRAM_OPEN_POSITIONS_COLUMNS}
       renderHeader={column => (
         <span

@@ -1,24 +1,20 @@
 import * as React from "react";
-import BlurContainer from "shared/components/blur-container/blur-container";
+import { BlurContainer } from "shared/components/blur-container/blur-container";
 
-import { WithLoaderProps } from "./with-loader";
+export interface WithBlurLoaderProps<T> {
+  className?: string;
+  loaderData: T;
+}
 
-const withBlurLoader = <T extends {}>(
-  Component: React.ComponentType<T>
-): React.ComponentType<WithLoaderProps & T> => ({
+export const withBlurLoader = <T, U extends { data?: T }>(
+  Component: React.ComponentType<U>
+): React.ComponentType<WithBlurLoaderProps<T> & U> => ({
+  data,
+  loaderData,
   className,
-  loader,
-  condition = true,
   ...other
 }) => (
-  <div style={{ position: "relative" }} className={className}>
-    <BlurContainer loader show={!!loader && !condition} blur={!condition}>
-      {loader}
-    </BlurContainer>
-    <BlurContainer show={condition} blur={!condition}>
-      {condition ? <Component {...other as T} /> : null}
-    </BlurContainer>
-  </div>
+  <BlurContainer blur={!data} className={className}>
+    <Component {...other as U} data={data ? data : loaderData} />
+  </BlurContainer>
 );
-
-export default withBlurLoader;

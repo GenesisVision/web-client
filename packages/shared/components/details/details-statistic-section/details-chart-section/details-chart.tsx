@@ -15,6 +15,7 @@ import ProfitChartSection, {
 } from "./profit-chart-section/profit-chart-section";
 
 const _DetailsChart: React.FC<IDetailsChartProps> = ({
+  loaderData,
   useChartStateValues,
   useChartPeriod,
   balanceChartSelector,
@@ -40,6 +41,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
       </GVTabs>
       {tab === TABS.PROFIT && (
         <ProfitChartSection
+          loaderData={loaderData}
           renderProfitChart={renderProfitChart}
           profitChartSelector={profitChartSelector}
           renderProfitValue={renderProfitValue}

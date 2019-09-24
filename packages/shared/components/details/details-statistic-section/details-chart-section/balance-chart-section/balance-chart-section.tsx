@@ -28,7 +28,7 @@ const _BalanceChartSection: React.FC<IBalanceChartSectionProps> = ({
   const balanceChart = useSelector(balanceChartSelector);
   return (
     <BalanceChartElements
-      condition={!!balanceChart}
+      condition={!!balanceChart && !!selectedCurrencies.length}
       loader={<ChartValuePeriodLoader />}
       renderBalanceChart={renderBalanceChart}
       period={period}
