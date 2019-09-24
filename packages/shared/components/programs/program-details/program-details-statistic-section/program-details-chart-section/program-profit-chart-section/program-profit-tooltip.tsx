@@ -13,7 +13,7 @@ const TooltipBody: React.FC<{ equity: string; pnl: string }> = React.memo(
 );
 
 const ProgramProfitTooltip: React.FC<Props> = ({ active, label, payload }) => {
-  if (!active) return null;
+  if (!active || !payload.length) return null;
   let equity = "";
   if (payload[1]) {
     equity = `${payload[1].payload.value.toFixed(2)}${payload[1].unit}`;
