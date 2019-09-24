@@ -7,6 +7,7 @@ import DetailsSettingControl from "shared/components/details/details-description
 import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
+import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import {
   composeFundNotificationsUrl,
   composeFundSettingsUrl,
@@ -27,8 +28,9 @@ const _FundDetailsDescription: React.FC<Props> = ({
       <h1 className="title-small-padding">{description.title}</h1>
       <Link
         to={{
-          pathname: composeManagerDetailsUrl(description.manager.url),
-          state: `/ ${description.title}`
+          as: composeManagerDetailsUrl(description.manager.url),
+          state: `/ ${description.title}`,
+          pathname: MANAGER_DETAILS_FOLDER_ROUTE
         }}
       >
         <GVButton

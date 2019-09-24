@@ -26,15 +26,12 @@ const _ForgotPasswordForm: React.FC<
     />
     <FormError error={error} />
     <div className="forgot-password__navigation">
-      <Link to={LOGIN_ROUTE}>
-        <a className="forgot-password__btn-back">
-          <GVButton variant="text" color="secondary">
-            <>
-              &larr;{" "}
-              {t("auth.password-restore.forgot-password.back-button-text")}
-            </>
-          </GVButton>
-        </a>
+      <Link to={LOGIN_ROUTE} className="forgot-password__btn-back">
+        <GVButton variant="text" color="secondary">
+          <>
+            &larr; {t("auth.password-restore.forgot-password.back-button-text")}
+          </>
+        </GVButton>
       </Link>
       <GVButton
         id="forgotPassword"

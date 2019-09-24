@@ -16,6 +16,7 @@ import Popover, {
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import TagItem from "shared/components/tags/tag-item/tag-item";
 import useAnchor from "shared/hooks/anchor.hook";
+import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl,
@@ -64,8 +65,9 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
         <h1 className="title-small-padding">{programDescription.title}</h1>
         <Link
           to={{
-            pathname: composeManagerDetailsUrl(programDescription.manager.url),
-            state: `/ ${programDescription.title}`
+            as: composeManagerDetailsUrl(programDescription.manager.url),
+            state: `/ ${programDescription.title}`,
+            pathname: MANAGER_DETAILS_FOLDER_ROUTE
           }}
         >
           <GVButton
