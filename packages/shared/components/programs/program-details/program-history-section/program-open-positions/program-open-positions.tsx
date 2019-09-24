@@ -12,11 +12,12 @@ import ProgramOpenPositionsRow from "./program-open-positions-row";
 
 const _ProgramOpenPositions: React.FC<Props> = ({ currency, programId }) => {
   const [t] = useTranslation();
+  if (!programId) return null;
   return (
     <TableContainer
       getItems={getOpenPositions(programId)}
       dataSelector={openPositionsTableSelector}
-      isFetchOnMount={false}
+      isFetchOnMount={true}
       columns={PROGRAM_OPEN_POSITIONS_COLUMNS}
       renderHeader={column => (
         <span
