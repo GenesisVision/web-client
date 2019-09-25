@@ -379,7 +379,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__col {
-    flex-grow: 1;
     display: inline-flex;
     flex-wrap: wrap;
     box-sizing: border-box;
@@ -399,6 +398,10 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
         min-width: 260px;
         max-width: 260px;
       }
+    }
+
+    &--fund {
+      max-width: 230px;
     }
   }
 
