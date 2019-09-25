@@ -1,7 +1,9 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
+import { ProgramDetailsFullTradesDelayEnum } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
 import TableContainer from "shared/components/table/components/table-container";
 import { CurrencyEnum } from "shared/utils/types";
@@ -11,9 +13,8 @@ import {
   openPositionsTableSelector
 } from "../../reducers/program-history.reducer";
 import { getOpenPositions } from "../../services/program-details.service";
-import ProgramOpenPositionsRow from "./program-open-positions-row";
-import { useSelector } from "react-redux";
 import { TradesDelayHint } from "../trades-delay-hint";
+import ProgramOpenPositionsRow from "./program-open-positions-row";
 
 export const DELAYS_LABELS = {
   None: "Without",
@@ -24,7 +25,8 @@ export const DELAYS_LABELS = {
   SixHours: "6 hours"
 };
 
-export const DELAYS = [
+type DelayType = { label: string; value: ProgramDetailsFullTradesDelayEnum };
+export const DELAYS: DelayType[] = [
   {
     label: DELAYS_LABELS["None"],
     value: "None"
