@@ -50,7 +50,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
-      className="asset-details-description__col"
+      className="asset-details-description__col asset-details-description__col--fund"
     >
       <InvestmentFundInfo fundDescription={fundDescription} />
       <div className="details-description__invest-button-container">
