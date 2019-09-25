@@ -1,6 +1,9 @@
 import "shared/components/details/details.scss";
 
-import { BrokersProgramInfo } from "gv-api-web";
+import {
+  BrokersProgramInfo,
+  ProgramDetailsFullTradesDelayEnum
+} from "gv-api-web";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
@@ -119,6 +122,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 export type TUpdateProgramFunc = (
   values: {
+    tradesDelay?: ProgramDetailsFullTradesDelayEnum;
     description?: string;
     logo?: IImageValue;
     investmentLimit?: number;
