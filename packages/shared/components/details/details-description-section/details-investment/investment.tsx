@@ -35,9 +35,10 @@ const _Investment: React.FC<Props> = ({
   ProgramReinvestingWidget
 }) => {
   const {
+    successFeePersonal,
     successFeeCurrent,
-    successFeeSelected,
     exitFee,
+    exitFeePersonal,
     entryFeeCurrent,
     entryFeeSelected
   } = fees;
@@ -94,14 +95,15 @@ const _Investment: React.FC<Props> = ({
           </StatisticItem>
           <StatisticItem
             condition={
-              !!successFeeCurrent && successFeeCurrent !== successFeeSelected
+              successFeeCurrent !== undefined &&
+              successFeePersonal !== successFeeCurrent
             }
             label={t("program-details-page.description.successFee")}
             className="details-investment__statistic-item"
             accent
           >
             <NumberFormat
-              value={successFeeSelected}
+              value={successFeeCurrent}
               suffix={` %`}
               allowNegative={false}
               displayType="text"
@@ -121,7 +123,7 @@ const _Investment: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem
-            condition={exitFee !== undefined}
+            condition={exitFee !== undefined && exitFee !== exitFeePersonal}
             label={t("fund-details-page.description.exitFee")}
             className="details-investment__statistic-item"
             accent
