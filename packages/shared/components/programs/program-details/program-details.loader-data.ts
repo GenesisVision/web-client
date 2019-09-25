@@ -12,7 +12,11 @@ import { equityChartLoaderData } from "./equity-chart.loader-data";
 import { periodsLoaderData } from "./periods.loader-data";
 import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
-import { amountWithCurrencyLoaderData, managerLoaderData, mockDate } from "../../details/details.loader-data";
+import {
+  amountWithCurrencyLoaderData,
+  managerLoaderData,
+  mockDate
+} from "../../details/details.loader-data";
 
 export const selectedCurrenciesLoaderData: TChartCurrency[] = [
   { name: "GVT", color: "#f0f0f0" }
@@ -212,7 +216,7 @@ export const programDetailsLoaderData: ProgramDetailsFull = {
   id: "",
   logo: "",
   url: "",
-  color: faker.internet.color(),
+  color: "#fff",
   description: faker.lorem.sentences(3),
   title: faker.lorem.word(),
   ipfsHash: "",
