@@ -3,7 +3,7 @@ import "shared/modules/asset-settings/asset-settings.scss";
 
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -23,15 +23,16 @@ const _AssetsEditPage: React.FC<Props> = ({
   asset,
   settingsBlocks,
   service: { dispatchDescription, editAsset, redirectToAsset },
-  t,
   description
 }) => {
+  const [t] = useTranslation();
   useEffect(() => {
     dispatchDescription();
   }, []);
   const editAssetCallback: TUpdateAssetFunc = useCallback(
     values => {
       const currentValues = {
+        tradesDelay: description!.tradesDelay,
         exitFee: description!.exitFee,
         entryFee: description!.entryFee,
         successFee: description!.successFee,
@@ -107,10 +108,9 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, DispatchProps, WithTranslation {}
+interface Props extends OwnProps, DispatchProps {}
 
 const AssetSettingsPage = compose<React.ComponentType<OwnProps>>(
-  translate(),
   connect(
     null,
     mapDispatchToProps
