@@ -807,6 +807,8 @@
         "date": "Date"
       },
       "open-positions": {
+        "delay": "delay",
+        "delay-tooltip": "This manager makes trades and open positions public with a {{delay}} delay.",
         "date": "Date Open",
         "symbol": "Symbol",
         "direction": "Dir",
