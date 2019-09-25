@@ -25,6 +25,7 @@ import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
 import TwoFactorConfirm from "./two-factor-confirm";
+import TradesUpdating from "./trades-updating";
 
 const _ProgramSettings: React.FC<Props> = ({
   programsInfo,
@@ -98,6 +99,10 @@ const _ProgramSettings: React.FC<Props> = ({
         entryFee={details.entryFeeSelected}
         successFee={details.successFee}
         onSubmit={editProgram}
+      />
+      <TradesUpdating
+        tradesDelay={details.tradesDelay}
+        onSubmit={()=>{}}
       />
       <StopOutLevel
         stopOutLevel={details.stopOutLevel}
