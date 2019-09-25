@@ -1,30 +1,19 @@
 import * as React from "react";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
-import { formatValue } from "shared/utils/formatter";
 
-const TooltipBody: React.FC<{ equity: string; pnl: string }> = React.memo(
-  ({ equity, pnl }) => (
-    <div className="details-tooltip__statistic">
-      <div className="details-tooltip__value">
-        {pnl} ({equity})
-      </div>
-    </div>
-  )
-);
+const TooltipBody: React.FC<{ equity: string }> = React.memo(({ equity }) => (
+  <div className="details-tooltip__statistic">
+    <div className="details-tooltip__value">{equity}</div>
+  </div>
+));
 
 const ProgramProfitTooltip: React.FC<Props> = ({ active, label, payload }) => {
   if (!active || !payload.length) return null;
-  let equity = "";
-  if (payload[1]) {
-    equity = `${payload[1].payload.value.toFixed(2)}${payload[1].unit}`;
-  }
-  let pnl = "";
-  if (payload[0]) {
-    pnl = `${formatValue(payload[0].payload.value)}${payload[0].unit}`;
-  }
+  const equity =
+    payload[0] && `${payload[0].payload.value.toFixed(2)}${payload[0].unit}`;
   return (
     <ChartTooltip
-      body={<TooltipBody equity={equity} pnl={pnl} />}
+      body={<TooltipBody equity={equity} />}
       date={new Date(label)}
       className="details-tooltip"
     />
