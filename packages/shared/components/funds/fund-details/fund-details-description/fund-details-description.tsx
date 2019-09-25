@@ -6,6 +6,7 @@ import DetailsNotification from "shared/components/details/details-description-s
 import DetailsSettingControl from "shared/components/details/details-description-section/details-description/controls/details-setting-control";
 import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
+import { FUND_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import {
@@ -61,6 +62,7 @@ const _FundDetailsDescription: React.FC<Props> = ({
       <DetailsNotification
         title={description.title}
         url={composeFundNotificationsUrl(description.url)}
+        pathname={FUND_NOTIFICATIONS_FOLDER_ROUTE}
         hasNotifications={
           description.personalFundDetails
             ? description.personalFundDetails.hasNotifications

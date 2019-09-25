@@ -2,7 +2,6 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVProgramAvatar from "shared/components/gv-program-avatar";
 import Link from "shared/components/link/link";
-import filesService from "shared/services/file-service";
 
 const _NotificationEntity: React.FC<Props> = ({
   t,
@@ -11,11 +10,13 @@ const _NotificationEntity: React.FC<Props> = ({
   title,
   level,
   color,
-  count
+  count,
+  pathname
 }) => (
   <Link
     to={{
-      pathname: href,
+      pathname,
+      as: href,
       state: `/ ${t("notifications-page.title")}`
     }}
   >
@@ -34,6 +35,7 @@ interface Props extends WithTranslation {
   count: number;
   color?: string;
   level?: number;
+  pathname: string;
 }
 
 const NotificationEntity = translate()(React.memo(_NotificationEntity));

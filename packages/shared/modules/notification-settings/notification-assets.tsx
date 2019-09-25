@@ -8,6 +8,10 @@ import { ASSET } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import { composeAssetNotificationsUrl } from "shared/utils/compose-url";
 
+import {
+  FUND_NOTIFICATIONS_FOLDER_ROUTE,
+  PROGRAM_NOTIFICATIONS_FOLDER_ROUTE
+} from "../../components/notifications/notifications.routes";
 import NotificationEntity from "./notification-entity";
 
 const _NotificationAssets: React.FC<Props> = ({ t, settings, asset }) => (
@@ -19,6 +23,11 @@ const _NotificationAssets: React.FC<Props> = ({ t, settings, asset }) => (
       {settings.map(setting => (
         <NotificationEntity
           href={composeAssetNotificationsUrl(setting.url, asset)}
+          pathname={
+            asset === ASSET.PROGRAM
+              ? PROGRAM_NOTIFICATIONS_FOLDER_ROUTE
+              : FUND_NOTIFICATIONS_FOLDER_ROUTE
+          }
           level={"level" in setting ? setting.level : undefined}
           key={setting.assetId}
           title={setting.title}

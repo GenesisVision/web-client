@@ -1,14 +1,14 @@
 import "./details-description-control.scss";
 
 import classnames from "classnames";
-import H from "history";
 import React from "react";
+import { ToType } from "shared/components/link/link";
 
 interface IDetailsDescriptionControlProps {
   text: string;
   className?: string;
   onClick?(): void;
-  to?: H.LocationDescriptor;
+  to?: ToType;
   disabled?: boolean;
   tag: React.ComponentType<any> | string;
 }
