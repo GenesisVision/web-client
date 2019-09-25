@@ -33,6 +33,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     <DetailsInvestment
       fees={{
         successFee: description.successFee,
+        successFeePersonal: description.personalProgramDetails.successFeePersonal,
         successFeeCurrent: description.successFeeCurrent,
         successFeeSelected: description.successFeeSelected,
         entryFee: description.entryFee,
