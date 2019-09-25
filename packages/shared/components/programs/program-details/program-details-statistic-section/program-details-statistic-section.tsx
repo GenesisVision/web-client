@@ -57,7 +57,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       )}
       renderProfitChart={({ profitChart, chartCurrencies }) => (
         <ProgramProfitChart
-          profitChart={profitChart as ProgramProfitChartType[]}
+          profitChart={profitChart}
           chartCurrencies={chartCurrencies}
         />
       )}
