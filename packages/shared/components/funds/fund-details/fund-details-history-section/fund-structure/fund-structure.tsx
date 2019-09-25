@@ -20,7 +20,7 @@ import FundStructureHeaderCell from "./fund-structure-header-cell";
 
 const FundStructure: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
-
+  if (!id) return null;
   return (
     <TableContainer
       getItems={getFundStructure(id)}
