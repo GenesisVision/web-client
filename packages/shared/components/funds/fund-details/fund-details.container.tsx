@@ -32,7 +32,11 @@ const _FundDetailsContainer: React.FC<Props> = ({
     />
     <div className="details__divider" />
     <DetailsInvestment
-      fees={{ exitFee: description.exitFee, entryFee: description.entryFee }}
+      fees={{
+        exitFee: description.exitFee,
+        entryFee: description.entryFee,
+        exitFeePersonal: description.personalFundDetails.exitFeePersonal
+      }}
       dispatchDescription={dispatchFundDescription}
       eventTypesSelector={fundEventsSelector}
       asset={ASSET.FUND}
