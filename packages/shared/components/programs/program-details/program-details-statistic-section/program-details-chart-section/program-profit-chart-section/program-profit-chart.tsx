@@ -5,6 +5,7 @@ import ProfitChart, {
   EquityChartType
 } from "shared/components/chart/profit-chart";
 import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
+import ProgramProfitTooltip from "./program-profit-tooltip";
 
 const _ProgramProfitChart: React.FC<Props> = ({
   profitChart,
@@ -19,6 +20,7 @@ const _ProgramProfitChart: React.FC<Props> = ({
   );
   return (
     <ProfitChart
+      tooltip={ProgramProfitTooltip}
       equityCharts={equityCharts}
       equities={equities}
       chartCurrencies={chartCurrencies}
