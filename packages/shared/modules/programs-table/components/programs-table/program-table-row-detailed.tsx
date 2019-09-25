@@ -18,6 +18,7 @@ import TagProgramContainer from "shared/components/tags/tag-program-container/ta
 import Tooltip from "shared/components/tooltip/tooltip";
 import { useTranslation } from "shared/i18n";
 import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
@@ -36,7 +37,8 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
   const { t } = useTranslation();
   const programLinkProps = {
     state: `/ ${title}`,
-    pathname: composeProgramDetailsUrl(program.url)
+    as: composeProgramDetailsUrl(program.url),
+    pathname: PROGRAM_DETAILS_FOLDER_ROUTE
   };
   return (
     <TableRow>
