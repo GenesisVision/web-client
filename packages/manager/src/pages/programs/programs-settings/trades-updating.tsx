@@ -9,33 +9,7 @@ import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
 import GVFormikField from "shared/components/gv-formik-field";
 import { ProgramDetailsFullTradesDelayEnum } from "gv-api-web";
-
-const delays = [
-  {
-    label: "Without",
-    value: "None"
-  },
-  {
-    label: "5 minutes",
-    value: "FiveMinutes"
-  },
-  {
-    label: "15 minutes",
-    value: "FifteenMinutes"
-  },
-  {
-    label: "30 minutes",
-    value: "ThirtyMinutes"
-  },
-  {
-    label: "1 hour",
-    value: "OneHour"
-  },
-  {
-    label: "6 hours",
-    value: "SixHours"
-  }
-];
+import { DELAYS } from "shared/components/programs/program-details/program-history-section/program-open-positions/program-open-positions";
 
 const _TradesUpdating: React.FC<Props> = ({
   values,
@@ -57,7 +31,7 @@ const _TradesUpdating: React.FC<Props> = ({
               label={t("manager.program-settings.trades-update.select")}
               InputComponent={Select}
             >
-              {delays.map(({ label, value }) => (
+              {DELAYS.map(({ label, value }) => (
                 <option value={value} key={value}>
                   {label}
                 </option>
