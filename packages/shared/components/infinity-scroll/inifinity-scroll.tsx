@@ -17,7 +17,7 @@ const _InfinityScroll: React.FC<Props> = ({ hasMore, loadMore, children }) => {
       const offsetBottom = scrollHeight - scrollTop - clientHeight;
       if (offsetBottom < 100 && hasMore) loadMore();
     }
-  }, [hasMore, window.innerHeight]);
+  }, [hasMore, window.innerHeight, loadMore]);
 
   return (
     <div className="infinity-scroll" ref={scroll} onScroll={handleScroll}>

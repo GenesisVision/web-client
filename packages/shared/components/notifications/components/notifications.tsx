@@ -62,7 +62,9 @@ const _Notifications: React.FC<Props> = ({
     fetchNotification();
     return clearNotifications;
   }, []);
-  const fetchNotification = useCallback(() => !isPending && sendRequest(), []);
+  const fetchNotification = useCallback(() => !isPending && sendRequest(), [
+    isPending
+  ]);
   const renderGroups = (groups: NotificationGroups) => (
     group: string
   ): React.ReactNode => (
