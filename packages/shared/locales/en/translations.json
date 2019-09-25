@@ -1630,6 +1630,11 @@
       }
     },
     "program-settings": {
+      "trades-update": {
+        "title": "Trades' and open positions updating",
+        "text": "Managers have the ability to delay the public display of their trades and open positions to protect their strategy.",
+        "select": "Delay"
+      },
       "two-factor-confirm": {
         "title": "Two-factor authorization (2fa)",
         "text": "You must confirm your 2fa code to access the Huobi native platform."
