@@ -13,8 +13,11 @@ export const withBlurLoader = <T, U extends { data?: T }>(
   loaderData,
   className,
   ...other
-}) => (
-  <BlurContainer blur={!data} className={className}>
-    <Component {...other as U} data={data ? data : loaderData} />
-  </BlurContainer>
-);
+}) => {
+  const hasData = data !== undefined && data !== null;
+  return (
+    <BlurContainer blur={!hasData} className={className}>
+      <Component {...other as U} data={hasData ? data : loaderData} />
+    </BlurContainer>
+  );
+};
