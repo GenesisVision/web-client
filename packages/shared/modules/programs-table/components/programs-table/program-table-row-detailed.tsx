@@ -17,6 +17,7 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { useTranslation } from "shared/i18n";
+import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
@@ -78,7 +79,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     <Link
                       className="program-detailed__manager-link"
                       to={{
-                        pathname: "/managers/[id]",
+                        pathname: MANAGER_DETAILS_FOLDER_ROUTE,
                         as: composeManagerDetailsUrl(program.manager.url),
                         state: programLinkProps.state
                       }}

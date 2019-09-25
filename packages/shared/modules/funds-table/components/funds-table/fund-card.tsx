@@ -21,6 +21,8 @@ import {
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import useAnchor from "shared/hooks/anchor.hook";
+import { FUND_DETAILS_FOLDER_ROUTE } from "shared/routes/funds.routes";
+import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import {
   composeFundsDetailsUrl,
   composeManagerDetailsUrl
@@ -61,7 +63,8 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
             <Link
               className="table-cards__title"
               to={{
-                pathname: composeFundsDetailsUrl(fund.url),
+                pathname: FUND_DETAILS_FOLDER_ROUTE,
+                as: composeFundsDetailsUrl(fund.url),
                 state: `/ ${title}`
               }}
             >
@@ -70,7 +73,8 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
             <Link
               className="table-cards__name"
               to={{
-                pathname: composeManagerDetailsUrl(fund.manager.url),
+                as: composeManagerDetailsUrl(fund.manager.url),
+                pathname: MANAGER_DETAILS_FOLDER_ROUTE,
                 state: `/ ${title}`
               }}
             >
@@ -89,7 +93,8 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
               <div className="popover-list">
                 <Link
                   to={{
-                    pathname: composeFundsDetailsUrl(fund.url),
+                    as: composeFundsDetailsUrl(fund.url),
+                    pathname: FUND_DETAILS_FOLDER_ROUTE,
                     state: `/ ${title}`
                   }}
                 >

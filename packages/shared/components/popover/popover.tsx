@@ -186,7 +186,7 @@ export enum ORIENTATION_POPOVER {
 const getAnchorEl = (el?: anchorElType) =>
   typeof el === "function" ? el() : el;
 
-const Popover = React.memo(_Popover);
+const Popover = React.memo<React.FC<Props>>(_Popover);
 export default Popover;
 
 interface Props {
