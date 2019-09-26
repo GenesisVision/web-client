@@ -13,8 +13,8 @@ import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import {
-  withBlurLoader,
-  WithBlurLoaderProps
+  WithBlurLoaderProps,
+  withBlurLoader
 } from "shared/decorators/with-blur-loader";
 import useAnchor from "shared/hooks/anchor.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -52,7 +52,7 @@ const _WalletWidget: React.FC<Props> = ({ data, className }) => {
         </div>
       </div>
       <WalletAddFundsPopup
-        currentWallet={wallets.find(wallet => wallet.currency === currency)!}
+        currentWallet={wallets.find(wallet => wallet.currency === "GVT")!}
         onClose={setClosePopup}
         open={isOpenPopup}
       />
