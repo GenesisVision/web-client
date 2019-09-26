@@ -13,7 +13,6 @@ import {
 } from "shared/components/details/details.loader-data";
 import { getRandomInteger } from "shared/utils/helpers";
 
-import { equityChartLoaderData } from "./equity-chart.loader-data";
 import { IFundStatisticData } from "./fund-details-statistics-section/fund-details-statistics/fund-details-statistics-elements";
 
 export const fundChartLoaderData: FundProfitChart = {
@@ -24,7 +23,7 @@ export const fundChartLoaderData: FundProfitChart = {
   timeframeGvtProfit: 0.0,
   creationDate: new Date("2019-08-08T14:59:16.3828400+00:00"),
   profitPercent: 17.94,
-  equityChart: equityChartLoaderData,
+  equityChart: [],
   balance: 115.621828125,
   investors: 0,
   profitChangePercent: 18.84,
