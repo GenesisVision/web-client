@@ -28,6 +28,12 @@ export const LEVEL_MAX_FILTER_VALUE = 7;
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 export const CURRENCY_FILTER_VALUE = undefined;
 
+export const programCurrencyFilter = {
+  name: CURRENCY_FILTER_NAME,
+  type: FILTER_TYPE.GENERAL,
+  defaultValue: CURRENCY_FILTER_VALUE
+};
+
 const programsLevelFilter = {
   name: LEVEL_FILTER_NAME,
   type: FILTER_TYPE.RANGE,
