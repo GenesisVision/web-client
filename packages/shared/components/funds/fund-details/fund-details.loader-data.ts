@@ -110,7 +110,7 @@ export const fundDetailsLoaderData: FundDetailsFull = {
   id: "",
   logo: "",
   url: "",
-  color: faker.internet.color(),
+  color: "#fff",
   description: faker.lorem.sentences(3),
   title: faker.lorem.word(),
   ipfsHash: "",
