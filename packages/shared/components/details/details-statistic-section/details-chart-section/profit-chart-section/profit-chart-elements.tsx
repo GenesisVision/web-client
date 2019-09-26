@@ -43,7 +43,7 @@ const _ProfitChartElements: React.FC<Props> = ({
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem label={t("details-page.chart.value")} big accent>
+        <StatisticItem big accent>
           {renderProfitValue({ chart })}
         </StatisticItem>
       </div>
