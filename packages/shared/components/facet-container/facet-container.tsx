@@ -19,7 +19,8 @@ import useIsOpen from "shared/hooks/is-open.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import {
   platformCurrenciesSelector,
-  platformDataSelector
+  platformDataSelector,
+  programCurrenciesSelector
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import {
@@ -29,6 +30,7 @@ import {
 } from "shared/utils/types";
 
 const _FacetContainer: React.FC<Props> = ({
+  programCurrencies,
   TableContainer,
   isAuthenticated,
   service,
@@ -65,6 +67,7 @@ const _FacetContainer: React.FC<Props> = ({
   const { title, sorting, timeframe } = facet!;
   return (
     <TableContainer
+      programCurrencies={programCurrencies}
       title={title}
       sorting={sorting}
       timeframe={timeframe}
@@ -92,6 +95,7 @@ const facetSelector = createSelector<
 );
 
 const mapStateToProps = (state: RootState, props: OwnProps): StateProps => ({
+  programCurrencies: programCurrenciesSelector(state),
   facets: facetSelector(state, props),
   currencies: platformCurrenciesSelector(state),
   currency: currencySelector(state)
@@ -119,6 +123,7 @@ interface OwnProps {
   isAuthenticated?: boolean;
 }
 interface StateProps {
+  programCurrencies?: string[];
   facets?: FacetType[];
   currencies: PlatformCurrency[];
   currency: CurrencyEnum;
