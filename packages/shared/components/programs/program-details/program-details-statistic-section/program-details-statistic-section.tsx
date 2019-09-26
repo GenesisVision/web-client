@@ -1,16 +1,16 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
-import {
-  ProgramBalanceChartElement,
-  ProgramProfitChart as ProgramProfitChartType
-} from "gv-api-web";
+import { ProgramBalanceChartElement } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { profitChartDataLoaderData, statisticDataLoaderData } from "../program-details.loader-data";
+import {
+  profitChartDataLoaderData,
+  statisticDataLoaderData
+} from "../program-details.loader-data";
 import { programBalanceChartSelector } from "../reducers/balance-chart.reducer";
 import { programStatusSelector } from "../reducers/description.reducer";
 import { programProfitChartSelector } from "../reducers/profit-chart.reducer";
