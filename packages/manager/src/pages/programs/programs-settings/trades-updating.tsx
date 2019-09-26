@@ -1,15 +1,16 @@
 import { FormikProps, withFormik } from "formik";
+import { ProgramDetailsFullTradesDelayEnum } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import { SetSubmittingType } from "shared/utils/types";
-import GVTextField from "shared/components/gv-text-field";
-import Select from "shared/components/select/select";
 import GVFormikField from "shared/components/gv-formik-field";
-import { ProgramDetailsFullTradesDelayEnum } from "gv-api-web";
+import GVTextField from "shared/components/gv-text-field";
 import { DELAYS } from "shared/components/programs/program-details/program-history-section/program-open-positions/program-open-positions";
+import Select from "shared/components/select/select";
+import SettingsBlock from "shared/components/settings-block/settings-block";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import { SetSubmittingType } from "shared/utils/types";
 
 const _TradesUpdating: React.FC<Props> = ({
   values,
@@ -73,7 +74,8 @@ interface OwnProps {
   ) => void;
 }
 
-const TradesUpdating = compose<React.ComponentType<OwnProps>>(
+const TradesUpdating = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+  withLoader,
   withFormik<OwnProps, TradesUpdatingFormValues>({
     enableReinitialize: true,
     displayName: "edit-form",
