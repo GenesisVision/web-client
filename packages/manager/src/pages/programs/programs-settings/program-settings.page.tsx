@@ -130,7 +130,8 @@ export type TUpdateProgramFunc = (
     entryFee?: number;
     successFee?: number;
   },
-  setSubmitting: SetSubmittingType
+  setSubmitting: SetSubmittingType,
+  resetForm?: () => void
 ) => void;
 
 interface OwnProps {}
