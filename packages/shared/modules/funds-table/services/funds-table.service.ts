@@ -25,8 +25,8 @@ import * as fundsTableActions from "../actions/funds-table.actions";
 import {
   DEFAULT_ITEMS_ON_PAGE,
   FUNDS_TABLE_FILTERS,
-  sortableColumns,
-  SORTING_FILTER_VALUE
+  SORTING_FILTER_VALUE,
+  sortableColumns
 } from "../components/funds-table/funds-table.constants";
 
 export type GetFundsType = () => (dispatch: MiddlewareDispatch) => void;
@@ -59,7 +59,7 @@ const composeRequestFilters = () => (
   const { router } = getState();
   const { currency } = getState().accountSettings;
 
-  let filters: ComposeFiltersAllType = { currencySecondary: currency };
+  let filters: ComposeFiltersAllType = { currency: currency };
 
   const { tab } = getParams(router.location.pathname, FUNDS_TAB_ROUTE);
   if (tab === FUNDS_FAVORITES_TAB_NAME) {
