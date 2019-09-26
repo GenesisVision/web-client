@@ -587,6 +587,10 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       @include media-breakpoint-landscape-phone() {
         font-size: $font-size-paragraph;
       }
+
+      & .statistics-item__label {
+        white-space: nowrap;
+      }
     }
 
     &-subheading {
