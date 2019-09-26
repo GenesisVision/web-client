@@ -94,29 +94,13 @@ const _Investment: React.FC<Props> = ({
             </Profitability>
           </StatisticItem>
           <StatisticItem
-            condition={
-              successFeeCurrent !== undefined &&
-              successFeePersonal !== successFeeCurrent
-            }
+            condition={successFeePersonal !== undefined}
             label={t("program-details-page.description.successFee")}
             className="details-investment__statistic-item"
             accent
           >
             <NumberFormat
               value={successFeeCurrent}
-              suffix={` %`}
-              allowNegative={false}
-              displayType="text"
-            />
-          </StatisticItem>
-          <StatisticItem
-            condition={entryFeeCurrent !== entryFeeSelected}
-            label={t("program-details-page.description.entryFee")}
-            className="details-investment__statistic-item"
-            accent
-          >
-            <NumberFormat
-              value={entryFeeSelected}
               suffix={` %`}
               allowNegative={false}
               displayType="text"
