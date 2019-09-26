@@ -30,7 +30,7 @@ const _AssetsEditPage: React.FC<Props> = ({
     dispatchDescription();
   }, []);
   const editAssetCallback: TUpdateAssetFunc = useCallback(
-    values => {
+    (values, setSubmitting, resetForm) => {
       const currentValues = {
         tradesDelay: description!.tradesDelay,
         exitFee: description!.exitFee,
@@ -52,7 +52,9 @@ const _AssetsEditPage: React.FC<Props> = ({
             : null
         },
         asset
-      ).finally(dispatchDescription);
+      )
+        .then(dispatchDescription)
+        .finally(resetForm);
     },
     [description]
   );
