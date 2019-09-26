@@ -10,7 +10,7 @@ import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-bloc
 import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
 import InvestmentFees from "modules/asset-settings/investment-fees";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
@@ -30,7 +30,6 @@ import TwoFactorConfirm from "./two-factor-confirm";
 const _ProgramSettings: React.FC<Props> = ({
   programsInfo,
   cancelChangeBroker,
-  t,
   brokersInfo,
   details,
   changeBroker,
@@ -39,6 +38,7 @@ const _ProgramSettings: React.FC<Props> = ({
   closeProgram,
   changeSignaling
 }) => {
+  const [t] = useTranslation();
   const signalSuccessFee = details.isSignalProgram
     ? details.signalSuccessFee
     : undefined;
@@ -142,9 +142,7 @@ const _ProgramSettings: React.FC<Props> = ({
   );
 };
 
-interface Props extends OwnProps, WithTranslation {}
-
-interface OwnProps {
+interface Props {
   programsInfo: ProgramsInfo;
   details: ProgramDetailsFull;
   brokersInfo: BrokersProgramInfo;
@@ -162,11 +160,8 @@ interface OwnProps {
   cancelChangeBroker: () => void;
 }
 
-const ProgramSettings = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
->(
+const ProgramSettings = compose<React.ComponentType<Props & WithLoaderProps>>(
   withLoader,
-  translate(),
   React.memo
 )(_ProgramSettings);
 export default ProgramSettings;
