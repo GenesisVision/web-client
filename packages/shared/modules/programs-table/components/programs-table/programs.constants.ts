@@ -15,7 +15,7 @@ import { IComposeDefaultFilter } from "shared/components/table/components/table.
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
 export const LEVEL_FILTER_NAME = "level";
-export const CURRENCY_FILTER_NAME = "programCurrency";
+export const CURRENCY_FILTER_NAME = "currency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_NAME = "sorting";
 
