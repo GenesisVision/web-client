@@ -14,9 +14,7 @@ import {
   TFilter
 } from "shared/components/table/components/filtering/filter.type";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
-import { LevelFilterType } from "shared/components/table/components/filtering/level-filter/level-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
-import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { IDataModel } from "shared/constants/constants";
@@ -49,7 +47,7 @@ interface MergeProps {
 
 interface StateProps {
   isAuthenticated: boolean;
-  currencies: string[];
+  programCurrencies: string[];
   programTags: ProgramTag[];
   data?: ProgramsList;
 }
@@ -99,7 +97,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
       programTags,
       t,
       showSwitchView,
-      currencies,
+      programCurrencies,
       data,
       filters,
       service,
@@ -117,6 +115,24 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
           ...filters.filtering
         }}
         updateFilter={service.programsChangeFilter}
+        renderMappings={(updateFilter, filtering) => (
+          <>
+            <SelectFilter
+              name={CURRENCY_FILTER_NAME}
+              label={t("filters.currency.show-in")}
+              value={filtering && filtering[CURRENCY_FILTER_NAME]}
+              values={composeCurrencyFilter(programCurrencies)}
+              onChange={updateFilter}
+            />
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
+              onChange={updateFilter}
+              label={t("filters.date-range.for")}
+              startLabel={t("filters.date-range.fund-start")}
+            />
+          </>
+        )}
         renderFilters={(updateFilter, filtering: FilteringType) => (
           <>
             <TagFilter
@@ -132,19 +148,6 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
               )}
               onChange={updateFilter}
             />
-            <SelectFilter
-              name={CURRENCY_FILTER_NAME}
-              label="Currency"
-              value={filtering[CURRENCY_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
-              values={composeCurrencyFilter(currencies)}
-              onChange={updateFilter}
-            />
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.program-start")}
-            />
           </>
         )}
         paging={{
@@ -157,7 +160,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
         toggleFavorite={service.toggleFavoriteProgram}
         redirectToLogin={service.redirectToLogin}
         isAuthenticated={isAuthenticated}
-        currencies={currencies}
+        currencies={programCurrencies}
       />
     );
   }
@@ -166,7 +169,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
 const mapStateToProps = (state: RootState): StateProps => ({
   isAuthenticated: isAuthenticatedSelector(state),
   data: programsDataSelector(state),
-  currencies: programCurrenciesSelector(state),
+  programCurrencies: programCurrenciesSelector(state),
   programTags: programTagsSelector(state)
 });
 
