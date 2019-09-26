@@ -49,7 +49,7 @@ const _CreateFundContainer: React.FC = () => {
       setSubmitting: SetSubmittingType
     ) => {
       dispatch(createFund(values, setSubmitting));
-      dispatch(fetchWallets(currency));
+      // dispatch(fetchWallets(currency));
     },
     []
   );
