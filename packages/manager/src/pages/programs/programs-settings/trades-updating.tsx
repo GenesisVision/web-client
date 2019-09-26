@@ -1,13 +1,10 @@
 import { FormikProps, withFormik } from "formik";
 import { ProgramDetailsFullTradesDelayEnum } from "gv-api-web";
+import TradesDelay from "pages/create-program/components/create-program-settings/fields/trades-delay";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
-import { DELAYS } from "shared/components/programs/program-details/program-history-section/program-open-positions/program-open-positions";
-import Select from "shared/components/select/select";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { SetSubmittingType } from "shared/utils/types";
@@ -25,20 +22,7 @@ const _TradesUpdating: React.FC<Props> = ({
       label={t("manager.program-settings.trades-update.title")}
       content={
         <form id="edit-form" onSubmit={handleSubmit}>
-          <div className="program-settings__block-wrapper create-program-settings__row">
-            <GVFormikField
-              name={FIELDS.tradesDelay}
-              component={GVTextField}
-              label={t("manager.program-settings.trades-update.select")}
-              InputComponent={Select}
-            >
-              {DELAYS.map(({ label, value }) => (
-                <option value={value} key={value}>
-                  {label}
-                </option>
-              ))}
-            </GVFormikField>
-          </div>
+          <TradesDelay name={FIELDS.tradesDelay} />
           <p className="program-settings__text">
             {t("manager.program-settings.trades-update.text")}
           </p>
