@@ -36,6 +36,9 @@ const _PerformanceData: React.FC<Props> = ({
           max={programDescription.leverageMax}
         />
       </StatisticItem>
+      <StatisticItem label={t("program-details-page.description.currency")}>
+        {programDescription.currency}
+      </StatisticItem>
       {programDescription.periodStarts && (
         <StatisticItem label={t("program-details-page.description.period")}>
           <ProgramPeriodPie
