@@ -75,8 +75,16 @@ const _CreateFundContainer: React.FC = () => {
           author={author}
           assets={fundAssets}
           minimumDepositAmount={minimumDepositAmount}
-          managerMaxExitFee={platformSettings!.programsInfo.managerMaxExitFee}
-          managerMaxEntryFee={platformSettings!.programsInfo.managerMaxEntryFee}
+          managerMaxExitFee={
+            (platformSettings &&
+              platformSettings!.programsInfo.managerMaxExitFee) ||
+            0
+          }
+          managerMaxEntryFee={
+            (platformSettings &&
+              platformSettings!.programsInfo.managerMaxEntryFee) ||
+            0
+          }
           notifyError={(message: string) =>
             dispatch(alertMessageActions.error(message))
           }
