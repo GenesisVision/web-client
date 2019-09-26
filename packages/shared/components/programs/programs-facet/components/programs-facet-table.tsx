@@ -1,4 +1,4 @@
-import { ProgramFacetTimeframeEnum } from "gv-api-web";
+import { PlatformCurrency, ProgramFacetTimeframeEnum } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -11,12 +11,14 @@ import {
   FilteringType,
   SortingColumn
 } from "shared/components/table/components/filtering/filter.type";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import {
   GetItemsFuncType,
   TableToggleFavoriteType
 } from "shared/components/table/components/table.types";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
+import { CURRENCY_FILTER_NAME } from "shared/modules/programs-table/components/programs-table/programs.constants";
 
 import {
   PROGRAMS_FACET_PAGING,
@@ -26,6 +28,7 @@ import {
 const _ProgramsFacetTable: React.FC<
   IProgramsFacetTableProps & WithTranslation
 > = ({
+  currencies,
   t,
   title,
   sorting,
@@ -63,16 +66,21 @@ const _ProgramsFacetTable: React.FC<
 
   return (
     <ProgramTableModule
-      renderFilters={(
-        updateFilter,
-        filtering: FilteringType //TODO fix filtering types
-      ) => (
+      renderMappings={(updateFilter, filtering) => (
         <>
+          <SelectFilter
+            name={CURRENCY_FILTER_NAME}
+            label={t("filters.currency.show-in")}
+            value={filtering && filtering[CURRENCY_FILTER_NAME]}
+            values={currencies!.map(x => ({ value: x.name, label: x.name }))}
+            onChange={updateFilter}
+          />
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}
-            value={filtering[DATE_RANGE_FILTER_NAME]}
+            value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
             onChange={updateFilter}
-            startLabel={t("filters.date-range.program-start")}
+            label={t("filters.date-range.for")}
+            startLabel={t("filters.date-range.fund-start")}
           />
         </>
       )}
@@ -91,6 +99,7 @@ const _ProgramsFacetTable: React.FC<
 };
 
 export interface IProgramsFacetTableProps {
+  currencies?: PlatformCurrency[];
   title: string;
   sorting: string;
   timeframe: ProgramFacetTimeframeEnum;
