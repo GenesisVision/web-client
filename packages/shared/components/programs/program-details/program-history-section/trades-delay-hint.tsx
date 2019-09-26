@@ -21,7 +21,7 @@ const _TradesDelayHint: React.FC<{ delay: TradesViewModelTradesDelayEnum }> = ({
         render={() => (
           <div className="details-trades__delay-tooltip">
             {t("program-details-page.history.open-positions.delay-tooltip", {
-              delay
+              delay: DELAYS_LABELS[delay]
             })}
           </div>
         )}
