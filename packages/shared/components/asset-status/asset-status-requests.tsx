@@ -6,11 +6,11 @@ import DashboardRequest from "shared/components/dashboard/dashboard-portfolio-ch
 import { ASSET } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
 
+import { CancelRequestPropsType } from "../dashboard/dashboard.constants";
 import {
   cancelRequestDispatch,
   getAssetRequests
 } from "./services/asset-status.service";
-import { CancelRequestPropsType } from "../dashboard/dashboard.constants";
 
 const _AssetStatusRequests: React.FC<Props> = ({
   successFee,
@@ -49,11 +49,7 @@ const _AssetStatusRequests: React.FC<Props> = ({
     <>
       {requests.map(request => (
         <DashboardRequest
-          successFee={
-            request.successFee && request.successFee !== successFee
-              ? request.successFee
-              : undefined
-          }
+          successFee={request.successFee}
           exitFee={
             request.exitFee && request.exitFee !== exitFee
               ? request.exitFee
