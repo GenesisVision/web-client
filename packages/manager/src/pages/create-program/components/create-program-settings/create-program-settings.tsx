@@ -33,6 +33,7 @@ import createProgramSettingsValidationSchema, {
 } from "./create-program-settings.validators";
 import CreateAssetNavigation from "./fields/create-asset-navigation";
 import DepositDetailsBlock from "./fields/deposit-details-block";
+import TradesDelay from "./fields/trades-delay";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class _CreateProgramSettings extends React.PureComponent<
@@ -220,6 +221,7 @@ class _CreateProgramSettings extends React.PureComponent<
                 </GVFormikField>
               </div>
               <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
+              <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
               <InvestmentLimitField
                 checkboxName={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
                 inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
