@@ -52,7 +52,7 @@ const _AssetsEditPage: React.FC<Props> = ({
             : null
         },
         asset
-      ).then(dispatchDescription);
+      ).finally(dispatchDescription);
     },
     [description]
   );
