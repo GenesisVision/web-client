@@ -7,23 +7,23 @@ import {
   ProgramProfitChart,
   ProgramStatistic
 } from "gv-api-web";
-import { getRandomInteger } from "shared/utils/helpers";
-import { equityChartLoaderData } from "./equity-chart.loader-data";
-import { periodsLoaderData } from "./periods.loader-data";
 import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
-import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import {
   amountWithCurrencyLoaderData,
   managerLoaderData,
   mockDate
-} from "../../details/details.loader-data";
+} from "shared/components/details/details.loader-data";
+import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
+import { getRandomInteger } from "shared/utils/helpers";
+
+import { periodsLoaderData } from "./periods.loader-data";
 
 export const selectedCurrenciesLoaderData: TChartCurrency[] = [
   { name: "GVT", color: "#f0f0f0" }
 ];
 
 export const profitChartLoaderData: ProgramProfitChart = {
-  equityChart: equityChartLoaderData,
+  equityChart: [],
   totalProfit: 0,
   timeframeProfit: 0,
   programCurrency: "ETH",
