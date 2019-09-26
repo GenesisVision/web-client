@@ -101,6 +101,7 @@ const _ProgramSettings: React.FC<Props> = ({
         onSubmit={editProgram}
       />
       <TradesUpdating
+        condition={!details.isSignalProgram}
         tradesDelay={details.tradesDelay}
         onSubmit={editProgram}
       />
