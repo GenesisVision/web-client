@@ -8,6 +8,9 @@
   &__toolbar {
     display: flex;
     align-items: center;
+    & > div {
+      margin-left: $padding-xxsmall;
+    }
   }
 
   &__delay-question {
