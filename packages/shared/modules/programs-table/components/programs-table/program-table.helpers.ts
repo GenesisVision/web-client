@@ -3,6 +3,6 @@ import { SelectFilterValue } from "shared/components/table/components/filtering/
 export const composeCurrencyFilter = (
   currencies?: string[]
 ): SelectFilterValue<string | undefined>[] => [
-  { value: undefined, label: "All" },
+  { value: undefined, label: "Base" },
   ...(currencies || []).map(x => ({ value: x, label: x }))
 ];
