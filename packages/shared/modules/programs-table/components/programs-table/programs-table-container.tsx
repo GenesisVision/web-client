@@ -15,6 +15,7 @@ import {
 } from "shared/components/table/components/filtering/filter.type";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { IDataModel } from "shared/constants/constants";
@@ -30,9 +31,16 @@ import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 import * as programsService from "../../services/programs-table.service";
-import { composeCurrencyFilter } from "./program-table.helpers";
+import {
+  composeCurrencyFilter,
+  composeCurrencyMap
+} from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
-import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
+import {
+  CURRENCY_MAP_NAME,
+  LEVEL_FILTER_NAME,
+  PROGRAM_CURRENCY_FILTER_NAME
+} from "./programs.constants";
 
 interface OwnProps {
   showSwitchView: boolean;
@@ -118,10 +126,10 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
         renderMappings={(updateFilter, filtering) => (
           <>
             <SelectFilter
-              name={CURRENCY_FILTER_NAME}
+              name={CURRENCY_MAP_NAME}
               label={t("filters.currency.show-in")}
-              value={filtering && filtering[CURRENCY_FILTER_NAME]}
-              values={composeCurrencyFilter(programCurrencies)}
+              value={filtering && filtering[CURRENCY_MAP_NAME]}
+              values={composeCurrencyMap(programCurrencies)}
               onChange={updateFilter}
             />
             <DateRangeFilter
@@ -146,6 +154,15 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
               value={filtering[LEVEL_FILTER_NAME].map((value: string) =>
                 parseInt(value)
               )}
+              onChange={updateFilter}
+            />
+            <SelectFilter
+              name={PROGRAM_CURRENCY_FILTER_NAME}
+              label="Currency"
+              value={
+                filtering[PROGRAM_CURRENCY_FILTER_NAME] as SelectFilterType
+              } //TODO fix filtering types
+              values={composeCurrencyFilter(programCurrencies)}
               onChange={updateFilter}
             />
           </>
