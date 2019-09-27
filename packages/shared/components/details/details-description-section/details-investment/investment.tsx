@@ -15,13 +15,14 @@ import {
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import { PROGRAM, STATUS } from "shared/constants/constants";
+import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 import { CurrencyEnum, FeesType } from "shared/utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
+import useRole from "shared/hooks/use-role.hook";
 
 const _Investment: React.FC<Props> = ({
   fees,
@@ -34,6 +35,8 @@ const _Investment: React.FC<Props> = ({
   WithdrawContainer,
   ProgramReinvestingWidget
 }) => {
+  const role = useRole();
+  const isInvestor = role === ROLE.INVESTOR;
   const {
     successFeePersonal,
     successFeeCurrent,
@@ -94,7 +97,7 @@ const _Investment: React.FC<Props> = ({
             </Profitability>
           </StatisticItem>
           <StatisticItem
-            condition={successFeePersonal !== undefined}
+            condition={isInvestor && successFeePersonal !== undefined}
             label={t("program-details-page.description.successFee")}
             className="details-investment__statistic-item"
             accent
@@ -107,7 +110,9 @@ const _Investment: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem
-            condition={exitFee !== undefined && exitFee !== exitFeePersonal}
+            condition={
+              isInvestor && exitFee !== undefined && exitFee !== exitFeePersonal
+            }
             label={t("fund-details-page.description.exitFee")}
             className="details-investment__statistic-item"
             accent
