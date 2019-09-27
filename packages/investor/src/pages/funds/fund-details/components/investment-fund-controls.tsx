@@ -12,9 +12,9 @@ import {
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "shared/components/details/details-block";
+import { InvestButtons } from "shared/components/details/details-description-section/details-investment/invest-buttons";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
 import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
-import GVButton from "shared/components/gv-button";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -48,18 +48,13 @@ const _InvestmentFundControls: React.FC<Props> = ({
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
-      className="asset-details-description__col asset-details-description__col--fund"
+      className="details-description__control-elements-block"
     >
       <InvestmentFundInfo fundDescription={fundDescription} />
-      <div className="details-description__invest-button-container">
-        <GVButton
-          className="details-description__invest-btn"
-          onClick={openPopup}
-          disabled={isDisabledInvestButton}
-        >
-          {t("fund-details-page.description.invest")}
-        </GVButton>
-      </div>
+      <InvestButtons
+        isDisabledInvestButton={isDisabledInvestButton}
+        setIsOpenInvestPopup={openPopup}
+      />
       <FundDepositContainer
         condition={isAuthenticated}
         open={isOpenInvestPopup}
