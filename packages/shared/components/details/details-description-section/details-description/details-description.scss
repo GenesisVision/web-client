@@ -20,6 +20,11 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     padding: 0;
   }
 
+  &__control-elements-block {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__your-investment {
     max-width: 750px;
   }
@@ -362,11 +367,10 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     flex-wrap: wrap;
     margin: 0 (-$padding-xxsmall/2);
 
-    @include media-breakpoint-landscape-phone() {
+    @include media-breakpoint-landscape-tablet() {
       flex-wrap: nowrap;
     }
     @include media-breakpoint-tablet() {
-      flex-wrap: nowrap;
       margin-left: $padding-controls-left;
       margin-right: 0;
       max-width: 850px;
@@ -382,8 +386,10 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     display: inline-flex;
     flex-wrap: wrap;
     box-sizing: border-box;
+    @include adaptive-margin(bottom, 15px);
 
     @include media-breakpoint-landscape-phone() {
+      flex-wrap: nowrap;
       width: auto;
       max-width: 800px;
 
@@ -398,6 +404,14 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
         min-width: 260px;
         max-width: 260px;
       }
+    }
+
+    & .statistics-item:not(:last-child) {
+      margin-right: $padding-xsmall;
+    }
+
+    &--no-wrap {
+      flex-wrap: nowrap;
     }
 
     &--fund {
@@ -581,7 +595,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     &-item {
       @include adaptive-margin(right, $padding-xxsmall);
       flex-grow: 1;
-      flex-basis: 50%;
       box-sizing: border-box;
 
       @include media-breakpoint-landscape-phone() {
