@@ -115,26 +115,14 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.equity")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    <Tooltip
-                      render={() => (
-                        <div>
-                          {formatCurrencyValue(
-                            program.statistic.balanceGVT.amount,
-                            "GVT"
-                          )}{" "}
-                          {"GVT"}
-                        </div>
+                    <NumberFormat
+                      value={formatCurrencyValue(
+                        program.statistic.balance.amount,
+                        program.currency
                       )}
-                    >
-                      <NumberFormat
-                        value={formatCurrencyValue(
-                          program.statistic.balanceBase.amount,
-                          program.currency
-                        )}
-                        suffix={` ${program.currency}`}
-                        displayType="text"
-                      />
-                    </Tooltip>
+                      suffix={` ${program.currency}`}
+                      displayType="text"
+                    />
                   </div>
                 </div>
                 <div>
@@ -159,7 +147,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     {`${formatCurrencyValue(
-                      program.availableInvestmentBase,
+                      program.availableInvestmentInCurrency,
                       program.currency
                     )} ${program.currency}`}
                   </div>
