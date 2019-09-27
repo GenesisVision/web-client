@@ -16,7 +16,6 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
-import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
@@ -61,6 +60,7 @@ const ProgramTableRowShort: React.FC<
   } = program;
   const stopPropagationEvent = (event: React.MouseEvent) =>
     event.stopPropagation();
+  const requestCurrency = program.statistic.balance.currency;
   return (
     <TableRow
       className={classNames({
@@ -110,8 +110,8 @@ const ProgramTableRowShort: React.FC<
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--equity">
         <NumberFormat
-          value={formatCurrencyValue(statistic.balance.amount, currency)}
-          suffix={` ${currency}`}
+          value={formatCurrencyValue(statistic.balance.amount, requestCurrency)}
+          suffix={` ${requestCurrency}`}
           displayType="text"
         />
       </TableCell>
@@ -122,8 +122,8 @@ const ProgramTableRowShort: React.FC<
         {statistic.investorsCount}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--available-to-invest">
-        {formatCurrencyValue(availableInvestmentInCurrency, currency)}{" "}
-        {currency}
+        {formatCurrencyValue(availableInvestmentInCurrency, requestCurrency)}{" "}
+        {requestCurrency}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
         {periodStarts && (
