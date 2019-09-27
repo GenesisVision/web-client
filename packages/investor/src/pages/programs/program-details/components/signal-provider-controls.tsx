@@ -27,7 +27,7 @@ const _SignalProviderControls: React.FC<Props> = ({
   const [isOpenUnFollow, setIsOpenUnFollow, setIsCloseUnFollow] = useIsOpen();
   const [isOpenUnAuth, setIsOpenUnAuth, setIsCloseUnAuth] = useIsOpen();
   return (
-    <>
+    <div className="details-description__control-elements-block">
       <SignalProgramInfo programDescription={programDescription} />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         {programDescription.personalProgramDetails &&
@@ -81,7 +81,7 @@ const _SignalProviderControls: React.FC<Props> = ({
         open={isOpenUnAuth}
         onClose={setIsCloseUnAuth}
       />
-    </>
+    </div>
   );
 };
 
