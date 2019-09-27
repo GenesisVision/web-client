@@ -43,7 +43,7 @@ const ProgramTableRowShort: React.FC<
 }) => {
   const {
     status,
-    availableInvestmentBase,
+    availableInvestmentInCurrency,
     statistic,
     logo,
     level,
@@ -109,19 +109,11 @@ const ProgramTableRowShort: React.FC<
         </div>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--equity">
-        <Tooltip
-          render={() => (
-            <div>
-              {formatCurrencyValue(statistic.balanceGVT.amount, "GVT")} {"GVT"}
-            </div>
-          )}
-        >
-          <NumberFormat
-            value={formatCurrencyValue(statistic.balanceBase.amount, currency)}
-            suffix={` ${currency}`}
-            displayType="text"
-          />
-        </Tooltip>
+        <NumberFormat
+          value={formatCurrencyValue(statistic.balance.amount, currency)}
+          suffix={` ${currency}`}
+          displayType="text"
+        />
       </TableCell>
       {/*<TableCell className="programs-table__cell programs-table__cell--currency">
         {currency}
@@ -130,7 +122,8 @@ const ProgramTableRowShort: React.FC<
         {statistic.investorsCount}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--available-to-invest">
-        {formatCurrencyValue(availableInvestmentBase, currency)} {currency}
+        {formatCurrencyValue(availableInvestmentInCurrency, currency)}{" "}
+        {currency}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
         {periodStarts && (
