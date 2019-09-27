@@ -34,9 +34,8 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
         programDescription={programDescription}
       />
       <ProgramControls
-        condition={!!levelsParameters}
-        loader={<ProgramControlsLoader />}
-        levelsParameters={levelsParameters!}
+        loaderData={levelsParamsLoaderData}
+        data={levelsParameters!}
         programDescription={programDescription}
         canCloseProgram={personalDetails && personalDetails.canCloseProgram}
         canMakeSignalProvider={
