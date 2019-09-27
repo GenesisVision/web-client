@@ -25,10 +25,9 @@ import ProgramDetailsStatisticsElements, {
   IProgramStatisticData
 } from "./program-details-statistics/program-details-statistics-elements";
 
-const PROGRAM_CHART_CURRENCY = "GVT";
-
 const _ProgramDetailsStatisticSection: React.FC = () => {
   const status = useSelector(programStatusSelector);
+  const statisticCurrency = useSelector(statisticCurrencySelector);
   return (
     <DetailsStatisticSection
       loaderData={profitChartDataLoaderData}
@@ -40,12 +39,12 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       renderProfitValue={({ chart }) => (
         <NumberFormat
           value={formatCurrencyValue(
-            "timeframeGvtProfit" in chart ? chart.timeframeGvtProfit : 0,
-            PROGRAM_CHART_CURRENCY
+            "timeframeProfit" in chart ? chart.timeframeProfit : 0,
+            statisticCurrency
           )}
           thousandSeparator={" "}
           displayType="text"
-          suffix={` ${PROGRAM_CHART_CURRENCY}`}
+          suffix={` ${statisticCurrency}`}
         />
       )}
       renderBalanceChart={({ color, currency, balanceChart }) => (
