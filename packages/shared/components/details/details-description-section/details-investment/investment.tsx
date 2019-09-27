@@ -17,12 +17,12 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
+import useRole from "shared/hooks/use-role.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 import { CurrencyEnum, FeesType } from "shared/utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
-import useRole from "shared/hooks/use-role.hook";
 
 const _Investment: React.FC<Props> = ({
   fees,
@@ -118,7 +118,7 @@ const _Investment: React.FC<Props> = ({
             accent
           >
             <NumberFormat
-              value={exitFee}
+              value={exitFeePersonal}
               suffix={` %`}
               allowNegative={false}
               displayType="text"
