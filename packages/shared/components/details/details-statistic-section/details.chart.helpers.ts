@@ -198,9 +198,9 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
       newSelectedCurrencies[0] = platformCurrencies.find(
         ({ name }) => name === statisticCurrency
       )!;
-      // setSelectedCurrencies(newSelectedCurrencies);
+      setSelectedCurrencies(newSelectedCurrencies);
     },
-    [statisticCurrency, selectedCurrencies, platformCurrencies]
+    [statisticCurrency]
   );
   useEffect(
     () => {
