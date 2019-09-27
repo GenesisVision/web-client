@@ -407,7 +407,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     }
 
     & .statistics-item:not(:last-child) {
-      margin-right: $padding-xsmall;
+      margin-right: $padding-small;
     }
 
     &--no-wrap {
@@ -593,7 +593,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     justify-content: flex-start;
 
     &-item {
-      @include adaptive-margin(right, $padding-xxsmall);
       flex-grow: 1;
       box-sizing: border-box;
 
