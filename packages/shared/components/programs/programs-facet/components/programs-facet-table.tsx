@@ -19,7 +19,7 @@ import {
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 import { composeCurrencyFilter } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
-import { CURRENCY_FILTER_NAME } from "shared/modules/programs-table/components/programs-table/programs.constants";
+import { CURRENCY_MAP_NAME } from "shared/modules/programs-table/components/programs-table/programs.constants";
 import { CurrencyEnum } from "shared/utils/types";
 
 import {
@@ -74,9 +74,9 @@ const _ProgramsFacetTable: React.FC<
       renderMappings={(updateFilter, filtering) => (
         <>
           <SelectFilter
-            name={CURRENCY_FILTER_NAME}
+            name={CURRENCY_MAP_NAME}
             label={t("filters.currency.show-in")}
-            value={filtering && filtering[CURRENCY_FILTER_NAME]}
+            value={filtering && filtering[CURRENCY_MAP_NAME]}
             values={composeCurrencyFilter(programCurrencies)}
             onChange={updateFilter}
           />
