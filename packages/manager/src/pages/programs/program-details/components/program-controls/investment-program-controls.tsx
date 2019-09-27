@@ -3,23 +3,23 @@ import LevelCalculator from "modules/level-calculator/components/level-calculato
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks, useSelector } from "react-redux";
+import { ResolveThunks, connect, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
-import GVButton from "shared/components/gv-button";
+import DetailsBlock, {
+  DETAILS_BLOCK_TYPE
+} from "shared/components/details/details-block";
+import { InvestButtons } from "shared/components/details/details-description-section/details-investment/invest-buttons";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { kycConfirmedSelector } from "shared/reducers/header-reducer";
-import DetailsBlock, {
-  DETAILS_BLOCK_TYPE
-} from "shared/components/details/details-block";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
   service: { dispatchProgramDescription },
@@ -53,7 +53,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
-      className="asset-details-description__col"
+      className="details-description__control-elements-block"
     >
       <InvestmentProgramInfo
         isOwnProgram={isOwnProgram}
@@ -62,24 +62,12 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         isKycConfirmed={isKycConfirmed}
         LevelCalculator={LevelCalculator}
       />
-      <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
-        {isOwnProgram ? (
-          <GVButton
-            className="program-details-description__invest-btn"
-            onClick={setIsOpenInvestPopup}
-            disabled={isDisabledInvestButton}
-          >
-            {t("program-details-page.description.invest")}
-          </GVButton>
-        ) : (
-          <GVButton
-            className="program-details-description__invest-btn"
-            onClick={setIsOpenUnAuthInvestPopup}
-          >
-            {t("program-details-page.description.invest")}
-          </GVButton>
-        )}
-      </div>
+      <InvestButtons
+        isOwnProgram={isOwnProgram}
+        isDisabledInvestButton={isDisabledInvestButton}
+        setIsOpenInvestPopup={setIsOpenInvestPopup}
+        setIsOpenUnAuthInvestPopup={setIsOpenUnAuthInvestPopup}
+      />
       <InvestmentUnauthPopup
         message={message}
         title={programDescription.title}
