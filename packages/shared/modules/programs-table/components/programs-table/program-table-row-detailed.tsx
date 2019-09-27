@@ -15,7 +15,6 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
-import Tooltip from "shared/components/tooltip/tooltip";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
@@ -32,6 +31,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
   onCollapseClick
 }) => {
   const { t } = useTranslation();
+  const requestCurrency = program.statistic.balance.currency;
   return (
     <TableRow>
       <td
@@ -118,9 +118,9 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     <NumberFormat
                       value={formatCurrencyValue(
                         program.statistic.balance.amount,
-                        program.currency
+                        requestCurrency
                       )}
-                      suffix={` ${program.currency}`}
+                      suffix={` ${requestCurrency}`}
                       displayType="text"
                     />
                   </div>
@@ -148,8 +148,8 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   <div className="program-detailed__statistic-data--value">
                     {`${formatCurrencyValue(
                       program.availableInvestmentInCurrency,
-                      program.currency
-                    )} ${program.currency}`}
+                      requestCurrency
+                    )} ${requestCurrency}`}
                   </div>
                 </div>
                 <div>
