@@ -7,7 +7,7 @@ import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { ASSET } from "shared/constants/constants";
+import { ASSET, ROLE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import useRole from "shared/hooks/use-role.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -25,6 +25,7 @@ const _DashboardRequest: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const role = useRole();
+  const isInvestor = role === ROLE.INVESTOR;
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const [disabled, setDisabled, setNotDisabled] = useIsOpen();
   const handleApplyCancelRequest = useCallback(
@@ -86,7 +87,7 @@ const _DashboardRequest: React.FC<Props> = ({
       </StatisticItem>
       <StatisticItem
         className={"dashboard-request-popover__statistic-item"}
-        condition={successFee !== undefined}
+        condition={isInvestor && !!successFee}
         label={t("program-details-page.description.successFee")}
         invert
       >
@@ -99,7 +100,7 @@ const _DashboardRequest: React.FC<Props> = ({
       </StatisticItem>
       <StatisticItem
         className={"dashboard-request-popover__statistic-item"}
-        condition={entryFee !== undefined}
+        condition={isInvestor && !!entryFee}
         label={t("program-details-page.description.entryFee")}
         invert
       >
@@ -112,7 +113,7 @@ const _DashboardRequest: React.FC<Props> = ({
       </StatisticItem>
       <StatisticItem
         className={"dashboard-request-popover__statistic-item"}
-        condition={exitFee !== undefined}
+        condition={isInvestor && !!exitFee}
         label={t("fund-details-page.description.exitFee")}
         invert
       >
