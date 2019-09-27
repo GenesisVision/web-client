@@ -15,7 +15,8 @@ import { IComposeDefaultFilter } from "shared/components/table/components/table.
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
 export const LEVEL_FILTER_NAME = "level";
-export const CURRENCY_FILTER_NAME = "currency";
+export const PROGRAM_CURRENCY_FILTER_NAME = "programCurrency";
+export const CURRENCY_MAP_NAME = "currency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_NAME = "sorting";
 
@@ -27,12 +28,7 @@ export const LEVEL_MAX_FILTER_VALUE = 7;
 
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 export const CURRENCY_FILTER_VALUE = undefined;
-
-export const programCurrencyFilter = {
-  name: CURRENCY_FILTER_NAME,
-  type: FILTER_TYPE.GENERAL,
-  defaultValue: CURRENCY_FILTER_VALUE
-};
+export const CURRENCY_MAP_VALUE = undefined;
 
 const programsLevelFilter = {
   name: LEVEL_FILTER_NAME,
@@ -49,9 +45,16 @@ const programsLevelFilter = {
 };
 
 const programsCurrencyFilter = {
-  name: CURRENCY_FILTER_NAME,
+  name: PROGRAM_CURRENCY_FILTER_NAME,
   type: FILTER_TYPE.GENERAL,
   defaultValue: CURRENCY_FILTER_VALUE
+  //validate: value => CURRENCY_FILTER_VALUES.includes(value) <--fetched from server
+};
+
+export const programsCurrencyMap = {
+  name: CURRENCY_MAP_NAME,
+  type: FILTER_TYPE.GENERAL,
+  defaultValue: CURRENCY_MAP_VALUE
   //validate: value => CURRENCY_FILTER_VALUES.includes(value) <--fetched from server
 };
 
@@ -70,6 +73,7 @@ export const programsDateRangeFilter = {
 };
 
 export const PROGRAMS_TABLE_FILTERS: IComposeDefaultFilter[] = [
+  programsCurrencyMap,
   programsTagFilter,
   programsLevelFilter,
   programsCurrencyFilter,
