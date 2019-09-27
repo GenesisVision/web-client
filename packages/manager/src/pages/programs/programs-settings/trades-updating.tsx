@@ -23,9 +23,6 @@ const _TradesUpdating: React.FC<Props> = ({
       content={
         <form id="edit-form" onSubmit={handleSubmit}>
           <TradesDelay name={FIELDS.tradesDelay} />
-          <p className="program-settings__text">
-            {t("manager.program-settings.trades-update.text")}
-          </p>
           <GVButton
             color="primary"
             type={"submit"}
