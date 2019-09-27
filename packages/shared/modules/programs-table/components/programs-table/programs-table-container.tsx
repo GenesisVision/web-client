@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { ProgramTag, ProgramsList } from "gv-api-web";
+import { PlatformCurrency, ProgramTag, ProgramsList } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -24,6 +24,7 @@ import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset
 import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import {
+  platformCurrenciesSelector,
   programCurrenciesSelector,
   programTagsSelector
 } from "shared/reducers/platform-reducer";
@@ -54,6 +55,7 @@ interface MergeProps {
 }
 
 interface StateProps {
+  currencies: PlatformCurrency[];
   isAuthenticated: boolean;
   programCurrencies: string[];
   programTags: ProgramTag[];
@@ -102,6 +104,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
 
   render() {
     const {
+      currencies,
       programTags,
       t,
       showSwitchView,
@@ -129,7 +132,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
               name={CURRENCY_MAP_NAME}
               label={t("filters.currency.show-in")}
               value={filtering && filtering[CURRENCY_MAP_NAME]}
-              values={composeCurrencyMap(programCurrencies)}
+              values={composeCurrencyMap(currencies)}
               onChange={updateFilter}
             />
             <DateRangeFilter
@@ -184,6 +187,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
+  currencies: platformCurrenciesSelector(state),
   isAuthenticated: isAuthenticatedSelector(state),
   data: programsDataSelector(state),
   programCurrencies: programCurrenciesSelector(state),
