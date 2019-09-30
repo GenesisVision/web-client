@@ -77,7 +77,7 @@ const _CreateProgramContainer: React.FC = () => {
 
   const createProgramHandle = (data: any, setSubmitting: SetSubmittingType) => {
     createProgram(data)
-      .then(({ programId }) => {
+      .then(({ twoFactorRequired, programId }) => {
         if (twoFactorRequired) {
           setProgramId(programId);
           setTwoFactorRequired();
