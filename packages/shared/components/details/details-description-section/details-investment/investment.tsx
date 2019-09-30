@@ -136,7 +136,7 @@ const _Investment: React.FC<Props> = ({
           >
             <AssetStatus
               successFee={successFeeCurrent}
-              exitFee={exitFee}
+              exitFee={exitFee !== exitFeePersonal}
               entryFee={entryFeeCurrent}
               status={personalDetails.status as STATUS}
               id={id}
