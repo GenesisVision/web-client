@@ -5,6 +5,7 @@ import {
   WalletData
 } from "gv-api-web";
 import * as React from "react";
+import { rateApi } from "shared/services/api-client/rate-api";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import CreateProgramSettings, {
@@ -75,7 +76,7 @@ class CreateProgramSettingsSection extends React.PureComponent<
     accountType.leverages[0];
 
   updateRate = (from: CurrencyEnum, to: CurrencyEnum): void => {
-    this.props.fetchRate(from, to).then(rate => {
+    rateApi.v10RateByFromByToGet(from, to).then(rate => {
       this.setState({ rate });
     });
   };
@@ -115,7 +116,6 @@ interface OwnProps {
   wallets: WalletData[];
   programsInfo: ProgramsInfo;
   fetchWallets: (currency: CurrencyEnum) => void;
-  fetchRate(from: string, to: string): Promise<number>;
   onSubmit(
     data: ICreateProgramSettingsFormValues,
     setSubmitting: SetSubmittingType
