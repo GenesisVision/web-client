@@ -2,7 +2,8 @@ import "./create-program-broker.scss";
 
 import { Broker, BrokerAccountType } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";
@@ -43,115 +44,127 @@ const getBrokerState = (
   return BROKER_CARD_EXTRA_STATE.NONE;
 };
 
-const _CreateProgramBroker: React.FC<OwnProps & WithTranslation> = ({
-  t,
+const _CreateProgramBroker: React.FC<OwnProps> = ({
   brokers,
   selectedBroker,
-  selectBroker,
+  setMinimumDepositsAmount,
   isForexAllowed,
   isKycConfirmed,
   navigateToSettings
-}) => (
-  <div className="create-program-broker-container">
-    <div className="create-program-broker">
-      <div className="create-program-broker__list">
-        {brokers.map(broker => (
-          <BrokerCard
-            logo={broker.logo}
-            key={broker.name}
-            brokerName={broker.name}
-            isSelected={broker === selectedBroker}
-            onSelect={selectBroker}
-            cardState={getBrokerState(
-              broker.isForex,
-              isForexAllowed,
-              isKycConfirmed
-            )}
-            tags={broker.tags}
-          />
-        ))}
-        <div className="create-program-broker__navigation">
-          <NavigateToSettings
-            isForex={selectedBroker.isForex}
-            isKycConfirmed={isKycConfirmed}
-            navigateToSettings={navigateToSettings}
-          />
+}) => {
+  const [t] = useTranslation();
+  const selectBrokerHandle = useCallback(
+    (brokerName: string) => () => {
+      const selectedBroker = brokers.find(x => x.name === brokerName);
+      const minimumDepositsAmount = selectedBroker
+        ? selectedBroker.accountTypes[0].minimumDepositsAmount
+        : undefined;
+      setMinimumDepositsAmount(minimumDepositsAmount);
+    },
+    []
+  );
+  return (
+    <div className="create-program-broker-container">
+      <div className="create-program-broker">
+        <div className="create-program-broker__list">
+          {brokers.map(broker => (
+            <BrokerCard
+              logo={broker.logo}
+              key={broker.name}
+              brokerName={broker.name}
+              isSelected={broker === selectedBroker}
+              onSelect={selectBrokerHandle}
+              cardState={getBrokerState(
+                broker.isForex,
+                isForexAllowed,
+                isKycConfirmed
+              )}
+              tags={broker.tags}
+            />
+          ))}
+          <div className="create-program-broker__navigation">
+            <NavigateToSettings
+              isForex={selectedBroker.isForex}
+              isKycConfirmed={isKycConfirmed}
+              navigateToSettings={navigateToSettings}
+            />
+          </div>
         </div>
+        <Surface className="surface--horizontal-paddings create-program-broker__description">
+          <h3 className="create-program-broker__description-heading">
+            {selectedBroker.name}
+          </h3>
+          <div className="create-program-broker__row">
+            <div className="create-program-broker__info-title">
+              {t("manager.create-program-page.broker-info.about")}
+            </div>
+            <div className="create-program-broker__info-text">
+              {selectedBroker.description}
+            </div>
+          </div>
+          <div className="create-program-broker__row">
+            <div className="create-program-broker__info-title">
+              {t("manager.create-program-page.broker-info.account-type")}
+            </div>
+            <div className="create-program-broker__info-text">
+              {getAccountTypes(selectedBroker.accountTypes)}
+            </div>
+          </div>
+          <div className="create-program-broker__row">
+            <div className="create-program-broker__info-title">
+              {t("manager.create-program-page.broker-info.trading-platform")}
+            </div>
+            <div className="create-program-broker__info-text">
+              {selectedBroker.accountTypes[0].type}
+            </div>
+          </div>
+          <div className="create-program-broker__row">
+            <div className="create-program-broker__info-title">
+              {t("manager.create-program-page.broker-info.terms")}
+            </div>
+            <div className="create-program-broker__info-text">
+              <a
+                href={selectedBroker.terms}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("manager.create-program-page.broker-info.read-terms")}
+              </a>
+            </div>
+          </div>
+          <div className="create-program-broker__row create-program-broker__row--small">
+            <div className="create-program-broker__info-title">
+              {t("manager.create-program-page.broker-info.leverage")}
+            </div>
+            <div className="create-program-broker__info-text">
+              {getLeverageDescription(
+                selectedBroker.leverageMin,
+                selectedBroker.leverageMax
+              )}
+            </div>
+          </div>
+          <div className="create-program-broker__row">
+            <div className="create-program-broker__info-title">
+              {t("manager.create-program-page.broker-info.assets")}
+            </div>
+            <div className="create-program-broker__info-text">
+              {selectedBroker.assets}
+            </div>
+          </div>
+        </Surface>
       </div>
-      <Surface className="surface--horizontal-paddings create-program-broker__description">
-        <h3 className="create-program-broker__description-heading">
-          {selectedBroker.name}
-        </h3>
-        <div className="create-program-broker__row">
-          <div className="create-program-broker__info-title">
-            {t("manager.create-program-page.broker-info.about")}
-          </div>
-          <div className="create-program-broker__info-text">
-            {selectedBroker.description}
-          </div>
-        </div>
-        <div className="create-program-broker__row">
-          <div className="create-program-broker__info-title">
-            {t("manager.create-program-page.broker-info.account-type")}
-          </div>
-          <div className="create-program-broker__info-text">
-            {getAccountTypes(selectedBroker.accountTypes)}
-          </div>
-        </div>
-        <div className="create-program-broker__row">
-          <div className="create-program-broker__info-title">
-            {t("manager.create-program-page.broker-info.trading-platform")}
-          </div>
-          <div className="create-program-broker__info-text">
-            {selectedBroker.accountTypes[0].type}
-          </div>
-        </div>
-        <div className="create-program-broker__row">
-          <div className="create-program-broker__info-title">
-            {t("manager.create-program-page.broker-info.terms")}
-          </div>
-          <div className="create-program-broker__info-text">
-            <a
-              href={selectedBroker.terms}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t("manager.create-program-page.broker-info.read-terms")}
-            </a>
-          </div>
-        </div>
-        <div className="create-program-broker__row create-program-broker__row--small">
-          <div className="create-program-broker__info-title">
-            {t("manager.create-program-page.broker-info.leverage")}
-          </div>
-          <div className="create-program-broker__info-text">
-            {getLeverageDescription(
-              selectedBroker.leverageMin,
-              selectedBroker.leverageMax
-            )}
-          </div>
-        </div>
-        <div className="create-program-broker__row">
-          <div className="create-program-broker__info-title">
-            {t("manager.create-program-page.broker-info.assets")}
-          </div>
-          <div className="create-program-broker__info-text">
-            {selectedBroker.assets}
-          </div>
-        </div>
-      </Surface>
     </div>
-  </div>
-);
+  );
+};
 
-const CreateProgramBroker = translate()(React.memo(_CreateProgramBroker));
+const CreateProgramBroker = React.memo(_CreateProgramBroker);
 export default CreateProgramBroker;
 
 interface OwnProps {
   brokers: Broker[];
   navigateToSettings(): void;
   selectedBroker: Broker;
-  selectBroker(brokerName: string): () => void;
+  setMinimumDepositsAmount: (amount: { [key: string]: number }) => void;
   isForexAllowed: boolean;
   isKycConfirmed: boolean;
 }
