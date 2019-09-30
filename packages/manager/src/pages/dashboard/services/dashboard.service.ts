@@ -81,7 +81,7 @@ export const getAssets = (ctx?: NextPageContext) => async (
   dispatch: Dispatch
 ) => await dispatch(actions.fetchAssetsAction(authService.getAuthArg(ctx)));
 
-export const composeAssetChart = (assetType: ASSETS_TYPES) => async (
+export const composeAssetChart = (assetType?: ASSETS_TYPES) => async (
   dispatch: MiddlewareDispatch,
   getState: TGetAuthState
 ) => {

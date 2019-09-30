@@ -27,12 +27,9 @@ const _AssetsEditPage: React.FC<Props> = ({
   t,
   description
 }) => {
-  useEffect(
-    () => {
-      dispatchDescription();
-    },
-    [dispatchDescription]
-  );
+  useEffect(() => {
+    dispatchDescription();
+  }, [dispatchDescription]);
   const editAssetCallback: TUpdateAssetFunc = useCallback(
     values => {
       const currentValues = {
@@ -50,9 +47,8 @@ const _AssetsEditPage: React.FC<Props> = ({
         {
           ...currentValues,
           ...values,
-          investmentLimit: values.hasInvestmentLimit
-            ? values.investmentLimit
-            : null
+          investmentLimit:
+            values && values.investmentLimit ? values.investmentLimit : null
         },
         asset
       ).then(dispatchDescription);

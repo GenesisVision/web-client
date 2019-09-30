@@ -75,7 +75,7 @@ class _CreateProgramSettings extends React.PureComponent<
     _: ISelectChangeEvent,
     target: JSX.Element
   ) => {
-    onChangeFn(target.props.value);
+    onChangeFn(target.props.value as never);
   };
 
   validateAndSubmit = (
