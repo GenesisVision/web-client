@@ -17,7 +17,6 @@ import { CancelRequestPropsType } from "../../dashboard.constants";
 const _DashboardRequest: React.FC<Props> = ({
   successFee,
   exitFee,
-  entryFee,
   request,
   cancelRequest,
   onApplyCancelRequest,
@@ -87,42 +86,35 @@ const _DashboardRequest: React.FC<Props> = ({
       </StatisticItem>
       <StatisticItem
         className={"dashboard-request-popover__statistic-item"}
-        condition={isInvestor && !!successFee}
-        label={t("program-details-page.description.successFee")}
+        condition={
+          isInvestor && successFee !== null && successFee !== undefined
+        }
+        label={
+          <NumberFormat
+            value={successFee}
+            suffix={` %`}
+            allowNegative={false}
+            displayType="text"
+          />
+        }
         invert
       >
-        <NumberFormat
-          value={successFee}
-          suffix={` %`}
-          allowNegative={false}
-          displayType="text"
-        />
+        {t("program-details-page.description.successFee")}
       </StatisticItem>
       <StatisticItem
         className={"dashboard-request-popover__statistic-item"}
-        condition={isInvestor && !!entryFee}
-        label={t("program-details-page.description.entryFee")}
+        condition={isInvestor && exitFee !== null && exitFee !== undefined}
+        label={
+          <NumberFormat
+            value={exitFee}
+            suffix={` %`}
+            allowNegative={false}
+            displayType="text"
+          />
+        }
         invert
       >
-        <NumberFormat
-          value={entryFee}
-          suffix={` %`}
-          allowNegative={false}
-          displayType="text"
-        />
-      </StatisticItem>
-      <StatisticItem
-        className={"dashboard-request-popover__statistic-item"}
-        condition={isInvestor && !!exitFee}
-        label={t("fund-details-page.description.exitFee")}
-        invert
-      >
-        <NumberFormat
-          value={exitFee}
-          suffix={` %`}
-          allowNegative={false}
-          displayType="text"
-        />
+        {t("fund-details-page.description.exitFee")}
       </StatisticItem>
       <div className="dashboard-request-popover__btns">
         {request.canCancelRequest && (
@@ -151,7 +143,6 @@ export interface Props extends OwnProps {}
 interface OwnProps {
   successFee?: number;
   exitFee?: number;
-  entryFee?: number;
   request: ProgramRequest;
   cancelRequest: (x: CancelRequestPropsType) => void;
   onApplyCancelRequest(): void;
