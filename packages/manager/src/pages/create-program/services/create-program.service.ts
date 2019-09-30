@@ -26,7 +26,7 @@ export const fetchBrokers = (): CancelablePromise<Broker[]> =>
 
 export const createProgram = (
   createProgramData: ICreateProgramSettingsFormValues
-): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => () => {
+): CancelablePromise<ManagerProgramCreateResult> => {
   const authorization = authService.getAuthArg();
 
   let promise = Promise.resolve("") as CancelablePromise<any>;
