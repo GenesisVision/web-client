@@ -42,7 +42,7 @@ const _CreateProgramContainer: React.FC = () => {
     undefined
   );
   const [brokers, setBrokers] = useState<Broker[] | undefined>(undefined);
-  const [isPending, setIsPending, setIsNotPending] = useIsOpen(true);
+  const [isPending, setIsPending, setIsNotPending] = useIsOpen();
   const [twoFactorRequired, setTwoFactorRequired] = useIsOpen();
   const [isConfirmDialogVisible] = useIsOpen();
   const [
@@ -53,15 +53,17 @@ const _CreateProgramContainer: React.FC = () => {
   const { tab, setTab } = useTab<TAB>(TAB.BROKER);
 
   useEffect(() => {
+    setIsPending();
     dispatch(fetchWallets(currency));
-    fetchBrokers().then(brokers => {
-      setBrokers(brokers);
-      setSelectedBroker(brokers[0]);
-      setMinimumDepositsAmount(
-        brokers[0].accountTypes[0].minimumDepositsAmount
-      );
-      setIsNotPending();
-    });
+    fetchBrokers()
+      .then(brokers => {
+        setBrokers(brokers);
+        setSelectedBroker(brokers[0]);
+        setMinimumDepositsAmount(
+          brokers[0].accountTypes[0].minimumDepositsAmount
+        );
+      })
+      .finally(setIsNotPending);
   }, []);
 
   const confirmNavigateToBroker = useCallback(
