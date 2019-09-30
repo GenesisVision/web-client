@@ -111,7 +111,10 @@ const _Investment: React.FC<Props> = ({
           </StatisticItem>
           <StatisticItem
             condition={
-              isInvestor && exitFee !== undefined && exitFee !== exitFeePersonal
+              isInvestor &&
+              exitFee !== null &&
+              exitFee !== undefined &&
+              exitFee !== exitFeePersonal
             }
             label={t("fund-details-page.description.exitFee")}
             className="details-investment__statistic-item"
