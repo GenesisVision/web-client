@@ -88,7 +88,6 @@ const _CreateProgramContainer: React.FC = () => {
               "manager.create-program-page.notifications.create-success"
             )
           );
-          dispatch(fetchWallets(currency));
           setSubmitting(false);
         }
       })
@@ -96,6 +95,7 @@ const _CreateProgramContainer: React.FC = () => {
         dispatch(alertMessageActions.error(error.errorMessage));
       })
       .finally(() => {
+        dispatch(fetchWallets(currency));
         setSubmitting(false);
       });
   };
