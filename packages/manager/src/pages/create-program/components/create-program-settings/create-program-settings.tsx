@@ -28,9 +28,7 @@ import { ASSET } from "shared/constants/constants";
 import { validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
-import createProgramSettingsValidationSchema, {
-  CREATE_PROGRAM_FIELDS
-} from "./create-program-settings.validators";
+import createProgramSettingsValidationSchema, { CREATE_PROGRAM_FIELDS } from "./create-program-settings.validators";
 import CreateAssetNavigation from "./fields/create-asset-navigation";
 import DepositDetailsBlock from "./fields/deposit-details-block";
 import TradesDelay from "./fields/trades-delay";
@@ -73,7 +71,7 @@ class _CreateProgramSettings extends React.PureComponent<
     }
   }
 
-  onSelectChange = (onChangeFn: (value: string & number) => void) => (
+  onSelectChange = (onChangeFn: (value: any) => void) => (
     _: ISelectChangeEvent,
     target: JSX.Element
   ) => {
@@ -362,7 +360,7 @@ interface OwnProps {
   author: string;
   notifyError(message: string): void;
   programCurrency: CurrencyEnum;
-  changeCurrency(currency: string): void;
+  changeCurrency(currency: CurrencyEnum): void;
   leverage?: number;
   changeLeverage(leverage: number): void;
   accountType?: BrokerAccountType;
