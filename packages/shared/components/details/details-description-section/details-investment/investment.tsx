@@ -103,7 +103,7 @@ const _Investment: React.FC<Props> = ({
             accent
           >
             <NumberFormat
-              value={successFeeCurrent}
+              value={successFeePersonal}
               suffix={` %`}
               allowNegative={false}
               displayType="text"
