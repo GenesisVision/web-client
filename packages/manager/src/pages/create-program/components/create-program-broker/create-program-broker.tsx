@@ -45,6 +45,7 @@ const getBrokerState = (
 };
 
 const _CreateProgramBroker: React.FC<OwnProps> = ({
+  setSelectedBroker,
   brokers,
   selectedBroker,
   setMinimumDepositsAmount,
@@ -55,11 +56,12 @@ const _CreateProgramBroker: React.FC<OwnProps> = ({
   const [t] = useTranslation();
   const selectBrokerHandle = useCallback(
     (brokerName: string) => () => {
-      const selectedBroker = brokers.find(x => x.name === brokerName);
+      const selectedBroker = brokers.find(x => x.name === brokerName)!;
       const minimumDepositsAmount = selectedBroker
         ? selectedBroker.accountTypes[0].minimumDepositsAmount
         : undefined;
       setMinimumDepositsAmount(minimumDepositsAmount);
+      setSelectedBroker(selectedBroker);
     },
     []
   );
@@ -163,6 +165,7 @@ export default CreateProgramBroker;
 interface OwnProps {
   brokers: Broker[];
   navigateToSettings(): void;
+  setSelectedBroker: (broker: Broker) => void;
   selectedBroker: Broker;
   setMinimumDepositsAmount: (amount: { [key: string]: number }) => void;
   isForexAllowed: boolean;

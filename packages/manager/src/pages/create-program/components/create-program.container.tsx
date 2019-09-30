@@ -17,10 +17,7 @@ import { programsInfoSelector } from "shared/reducers/platform-reducer";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
-import {
-  createProgram,
-  fetchBrokers
-} from "../services/create-program.service";
+import { createProgram, fetchBrokers } from "../services/create-program.service";
 import { TFAConfirmBlock } from "./confirm-block";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
@@ -131,6 +128,7 @@ const _CreateProgramContainer: React.FC = () => {
         <div>
           {tab === TAB.BROKER && (
             <CreateProgramBroker
+              setSelectedBroker={setSelectedBroker}
               navigateToSettings={navigateToSettings}
               brokers={brokers}
               selectedBroker={selectedBroker}
