@@ -3,10 +3,10 @@ import { fetchMinimumDepositAmount } from "pages/create-fund/services/create-fun
 import React from "react";
 import { compose } from "redux";
 import platformActions from "shared/actions/platform-actions";
+import { fetchWalletsWithCtx } from "shared/components/wallet/services/wallet.services";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
-import { fetchWalletsWithCtx } from "shared/components/wallet/services/wallet.services";
 
 const CreateFund: NextPageWithRedux<Props, {}> = ({ minimumDepositAmount }) => {
   return <CreateFundPage minimumDepositAmount={minimumDepositAmount} />;
