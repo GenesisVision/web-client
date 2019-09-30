@@ -50,14 +50,7 @@ const _AssetStatusRequests: React.FC<Props> = ({
       {requests.map(request => (
         <DashboardRequest
           successFee={request.successFee}
-          exitFee={
-            request.exitFee && request.exitFee !== exitFee
-              ? request.exitFee
-              : undefined
-          }
-          entryFee={
-            request.entryFee !== entryFee ? request.entryFee : undefined
-          }
+          exitFee={request.exitFee && exitFee ? request.exitFee : undefined}
           key={request.id}
           request={request}
           cancelRequest={(values: CancelRequestPropsType) => {
@@ -73,7 +66,7 @@ const _AssetStatusRequests: React.FC<Props> = ({
 
 interface Props {
   successFee?: number;
-  exitFee?: number;
+  exitFee?: boolean;
   entryFee?: number;
   id: string;
   asset: ASSET;
