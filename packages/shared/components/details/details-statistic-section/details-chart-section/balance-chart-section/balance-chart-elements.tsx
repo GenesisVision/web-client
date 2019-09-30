@@ -40,7 +40,7 @@ const _BalanceChartElements: React.FC<Props> = ({
     FundBalanceChartType | ProgramBalanceChartType
   >(balanceChart, selectedCurrencies);
   const { name, color } = chartData.selectedCurrencies[0];
-  const balance = chartData.chart.gvtBalance;
+  const balance = chartData.chart.balance;
   return (
     <>
       <div className="details-chart__value">
