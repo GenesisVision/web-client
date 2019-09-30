@@ -1,9 +1,12 @@
-import { Broker, BrokerAccountType, ProgramsInfo, WalletData } from "gv-api-web";
+import { Broker, BrokerAccountType, ManagerProgramCreateResult, ProgramsInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
-import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
+import { CurrencyEnum, ResponseError, SetSubmittingType } from "shared/utils/types";
 
+import { createProgram } from "../../services/create-program.service";
 import CreateProgramSettings, { ICreateProgramSettingsFormValues } from "./create-program-settings";
 
 const getCurrency = (accountType: BrokerAccountType): CurrencyEnum =>
@@ -24,6 +27,7 @@ const CreateProgramSettingsSection: React.FC<OwnProps> = ({
   author,
   notifyError
 }) => {
+  const dispatch = useDispatch();
   const brokerAccountType = broker.accountTypes[0];
   const [accountType, setAccountType] = useState<BrokerAccountType>(
     brokerAccountType
@@ -65,11 +69,31 @@ const CreateProgramSettingsSection: React.FC<OwnProps> = ({
     [wallets]
   );
 
+  const handleCreateProgram = useCallback(
+    (
+      data: ICreateProgramSettingsFormValues,
+      setSubmitting: SetSubmittingType
+    ) => {
+      createProgram(data)
+        .then(data => {
+          onSubmit(data);
+        })
+        .catch((error: ResponseError) => {
+          dispatch(alertMessageActions.error(error.errorMessage));
+        })
+        .finally(() => {
+          dispatch(fetchWallets(currency));
+          setSubmitting(false);
+        });
+    },
+    []
+  );
+
   return (
     <CreateProgramSettings
       notifyError={notifyError}
       navigateBack={navigateBack}
-      onSubmit={onSubmit}
+      onSubmit={handleCreateProgram}
       minimumDepositsAmount={minimumDepositsAmount}
       broker={broker}
       author={author}
@@ -96,10 +120,7 @@ interface OwnProps {
   wallets: WalletData[];
   programsInfo: ProgramsInfo;
   fetchWallets: (currency: CurrencyEnum) => void;
-  onSubmit: (
-    data: ICreateProgramSettingsFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (data: ManagerProgramCreateResult) => void;
   minimumDepositsAmount: { [key: string]: number };
   navigateBack: () => void;
   author: string;

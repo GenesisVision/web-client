@@ -15,9 +15,8 @@ import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { headerSelector } from "shared/reducers/header-reducer";
 import { programsInfoSelector } from "shared/reducers/platform-reducer";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
-import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
-import { createProgram, fetchBrokers } from "../services/create-program.service";
+import { fetchBrokers } from "../services/create-program.service";
 import { TFAConfirmBlock } from "./confirm-block";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
@@ -74,30 +73,19 @@ const _CreateProgramContainer: React.FC = () => {
     setTab(null, TAB.SETTINGS);
   }, []);
 
-  const createProgramHandle = (data: any, setSubmitting: SetSubmittingType) => {
-    createProgram(data)
-      .then(({ twoFactorRequired, programId }) => {
-        if (twoFactorRequired) {
-          setProgramId(programId);
-          setTwoFactorRequired();
-        } else {
-          dispatch(push(DASHBOARD_ROUTE));
-          dispatch(
-            alertMessageActions.success(
-              "manager.create-program-page.notifications.create-success"
-            )
-          );
-          setSubmitting(false);
-        }
-      })
-      .catch((error: ResponseError) => {
-        dispatch(alertMessageActions.error(error.errorMessage));
-      })
-      .finally(() => {
-        dispatch(fetchWallets(currency));
-        setSubmitting(false);
-      });
-  };
+  const onSubmit = useCallback(({ twoFactorRequired, programId }) => {
+    if (twoFactorRequired) {
+      setProgramId(programId);
+      setTwoFactorRequired();
+    } else {
+      dispatch(push(DASHBOARD_ROUTE));
+      dispatch(
+        alertMessageActions.success(
+          "manager.create-program-page.notifications.create-success"
+        )
+      );
+    }
+  }, []);
 
   if (
     !brokers ||
@@ -144,7 +132,7 @@ const _CreateProgramContainer: React.FC = () => {
               wallets={wallets}
               navigateBack={setIsNavigationDialogVisible}
               broker={selectedBroker}
-              onSubmit={createProgramHandle}
+              onSubmit={onSubmit}
               notifyError={message =>
                 dispatch(alertMessageActions.error(message))
               }
