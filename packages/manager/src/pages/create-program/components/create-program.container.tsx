@@ -41,7 +41,6 @@ const _CreateProgramContainer: React.FC = () => {
   const [brokers, setBrokers] = useState<Broker[] | undefined>(undefined);
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
   const [twoFactorRequired, setTwoFactorRequired] = useIsOpen();
-  const [isConfirmDialogVisible] = useIsOpen();
   const [
     isNavigationDialogVisible,
     setIsNavigationDialogVisible,
@@ -153,9 +152,7 @@ const _CreateProgramContainer: React.FC = () => {
               programsInfo={programsInfo}
             />
           )}
-          {twoFactorRequired && (
-            <TFAConfirmBlock isOpen={isConfirmDialogVisible} id={programId!} />
-          )}
+          {twoFactorRequired && <TFAConfirmBlock id={programId!} />}
           <ConfirmPopup
             open={isNavigationDialogVisible}
             onClose={setIsNavigationDialogNotVisible}
