@@ -28,7 +28,7 @@ const _InputDepositAmount: React.FC<Props> = ({
     [name]
   );
   return (
-    <>
+    <div className="deposit-amount-field">
       <InputAmountField
         autoFocus={false}
         name={name}
@@ -50,7 +50,7 @@ const _InputDepositAmount: React.FC<Props> = ({
           />
         </div>
       )}
-    </>
+    </div>
   );
 };
 
