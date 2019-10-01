@@ -1,3 +1,4 @@
+import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
 import { BrokerAccountType } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -9,7 +10,7 @@ import { onSelectChange } from "shared/components/select/select.test-helpers";
 const _BrokerAccount: React.FC<Props> = ({ name, onChange, accountTypes }) => {
   const [t] = useTranslation();
   return (
-    <div className="create-program-settings__field">
+    <CreateAssetField>
       <GVFormikField
         name={name}
         component={GVTextField}
@@ -24,7 +25,7 @@ const _BrokerAccount: React.FC<Props> = ({ name, onChange, accountTypes }) => {
           </option>
         ))}
       </GVFormikField>
-    </div>
+    </CreateAssetField>
   );
 };
 
