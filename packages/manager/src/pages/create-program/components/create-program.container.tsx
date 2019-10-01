@@ -82,7 +82,8 @@ const _CreateProgramContainer: React.FC = () => {
       dispatch(push(DASHBOARD_ROUTE));
       dispatch(
         alertMessageActions.success(
-          "manager.create-program-page.notifications.create-success"
+          "manager.create-program-page.notifications.create-success",
+          true
         )
       );
     }
