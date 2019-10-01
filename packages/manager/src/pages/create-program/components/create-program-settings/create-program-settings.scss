@@ -273,9 +273,6 @@
   }
 
   &__navigation {
-    margin-top: $padding-upper-medium;
-    margin-bottom: 40px;
-
     &-back {
       margin-top: 14px;
 
@@ -285,7 +282,6 @@
 
       @include media-breakpoint-tablet() {
         margin-left: 24px;
-        margin-top: 70px;
       }
     }
   }
