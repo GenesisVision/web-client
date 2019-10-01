@@ -61,7 +61,6 @@ const _CreateProgramSettings: React.FC<Props> = ({
   programCurrency,
   wallet
 }) => {
-  console.log(programsInfo);
   const dispatch = useDispatch();
   const [t] = useTranslation();
   useEffect(
