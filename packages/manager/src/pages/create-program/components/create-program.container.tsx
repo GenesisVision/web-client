@@ -65,6 +65,7 @@ const _CreateProgramContainer: React.FC = () => {
     (setSubmitting: (isSubmitting: boolean) => void) => {
       setTab(null, TAB.BROKER);
       setSubmitting(false);
+      setIsNavigationDialogNotVisible();
     },
     []
   );
