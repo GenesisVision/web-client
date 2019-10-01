@@ -11,7 +11,42 @@ import {
 } from "shared/utils/validators/validators";
 import { boolean, mixed, number, object, string } from "yup";
 
-import { ICreateProgramSettingsProps } from "./create-program-settings";
+import { ICreateProgramSettingsFormValues, ICreateProgramSettingsProps } from "./create-program-settings";
+
+export const createProgramMapPropsToValues = ({
+  wallet,
+  broker,
+  programCurrency,
+  leverage,
+  programsInfo,
+  accountType
+}: ICreateProgramSettingsProps): ICreateProgramSettingsFormValues => ({
+  [CREATE_PROGRAM_FIELDS.tradesDelay]: "None",
+  [CREATE_PROGRAM_FIELDS.stopOutLevel]: 100,
+  [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: accountType
+    ? accountType.id
+    : "",
+  [CREATE_PROGRAM_FIELDS.title]: "",
+  [CREATE_PROGRAM_FIELDS.description]: "",
+  [CREATE_PROGRAM_FIELDS.logo]: {},
+  [CREATE_PROGRAM_FIELDS.entryFee]: undefined,
+  [CREATE_PROGRAM_FIELDS.successFee]: undefined,
+  [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: false,
+  [CREATE_PROGRAM_FIELDS.investmentLimit]: undefined,
+  [CREATE_PROGRAM_FIELDS.isSignalProgram]: broker.isSignalsAvailable,
+  [CREATE_PROGRAM_FIELDS.signalSuccessFee]: broker.isSignalsAvailable
+    ? undefined
+    : 0,
+  [CREATE_PROGRAM_FIELDS.signalVolumeFee]: broker.isSignalsAvailable
+    ? undefined
+    : 0,
+  [CREATE_PROGRAM_FIELDS.currency]: programCurrency,
+  [CREATE_PROGRAM_FIELDS.leverage]: leverage,
+  [CREATE_PROGRAM_FIELDS.periodLength]:
+    programsInfo.periods.length === 1 ? programsInfo.periods[0] : undefined,
+  [CREATE_PROGRAM_FIELDS.depositWalletId]: wallet.id,
+  [CREATE_PROGRAM_FIELDS.depositAmount]: undefined
+});
 
 const createProgramSettingsValidationSchema = (
   props: ICreateProgramSettingsProps
