@@ -1,7 +1,7 @@
 import { WalletData } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ISelectChangeEvent } from "shared/components/select/select";
+import { onSelectChange } from "shared/components/select/select.test-helpers";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -37,7 +37,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
             name={walletFieldName}
             label={t("transfer.from")}
             items={wallets}
-            onChange={onWalletChange}
+            onChange={onSelectChange(onWalletChange)}
           />
           <InputDepositAmount
             name={inputName}
@@ -69,7 +69,7 @@ interface Props {
   wallets: WalletData[];
   rate: number;
   setFieldValue: Function;
-  onWalletChange: (event: ISelectChangeEvent, child: JSX.Element) => void;
+  onWalletChange: (value: any) => void;
   assetCurrency: CurrencyEnum;
   walletAvailable: number;
   walletCurrency: CurrencyEnum;
