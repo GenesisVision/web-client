@@ -1,3 +1,4 @@
+import CreateAssetSection from "components/create-asset/create-asset-section";
 import { WalletData } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -24,41 +25,37 @@ const _DepositDetailsBlock: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <>
-      <div className="create-program-settings__subheading">
-        <span className="create-program-settings__block-number">
-          0{blockNumber}
-        </span>
-        {t("manager.create-program-page.settings.deposit-details")}
-      </div>
-      <div className="deposit-details create-program-settings__fill-block">
-        <div className="create-program-settings__field deposit-details">
-          <div className="deposit-amount-field">
-            <WalletSelect
-              name={walletFieldName}
-              label={t("transfer.from")}
-              items={wallets}
-              onChange={onSelectChange(onWalletChange)}
-            />
-          </div>
-          <InputDepositAmount
-            name={inputName}
-            walletCurrency={walletCurrency}
-            walletAvailable={walletAvailable}
-            assetCurrency={assetCurrency}
-            depositAmount={depositAmount}
-            rate={rate}
-            setFieldValue={setFieldValue}
-          />
-          <AmountInfo
-            assetCurrency={assetCurrency}
-            minimumDepositsAmount={minimumDepositAmount}
-            walletAvailable={walletAvailable}
-            walletCurrency={walletCurrency}
+    <CreateAssetSection
+      title={t("manager.create-program-page.settings.deposit-details")}
+      blockNumber={`0${blockNumber}`}
+      withBorder={false}
+    >
+      <div className="create-program-settings__field deposit-details">
+        <div className="deposit-amount-field">
+          <WalletSelect
+            name={walletFieldName}
+            label={t("transfer.from")}
+            items={wallets}
+            onChange={onSelectChange(onWalletChange)}
           />
         </div>
+        <InputDepositAmount
+          name={inputName}
+          walletCurrency={walletCurrency}
+          walletAvailable={walletAvailable}
+          assetCurrency={assetCurrency}
+          depositAmount={depositAmount}
+          rate={rate}
+          setFieldValue={setFieldValue}
+        />
+        <AmountInfo
+          assetCurrency={assetCurrency}
+          minimumDepositsAmount={minimumDepositAmount}
+          walletAvailable={walletAvailable}
+          walletCurrency={walletCurrency}
+        />
       </div>
-    </>
+    </CreateAssetSection>
   );
 };
 
