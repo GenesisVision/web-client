@@ -106,6 +106,7 @@ const _DashboardRequest: React.FC<Props> = ({
         className={"dashboard-request-popover__statistic-item"}
         condition={
           isInvestor &&
+          request.type === "Invest" &&
           request.entryFee !== null &&
           request.entryFee !== undefined
         }
