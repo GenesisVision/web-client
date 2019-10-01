@@ -28,10 +28,7 @@ import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import { platformCurrenciesSelector } from "../../../reducers/platform-reducer";
 import { TStatisticCurrencyAction } from "../reducers/statistic-currency.reducer";
-import {
-  StatisticPeriodState,
-  TStatisticPeriodAction
-} from "../reducers/statistic-period.reducer";
+import { StatisticPeriodState, TStatisticPeriodAction } from "../reducers/statistic-period.reducer";
 
 export type TStatisticCurrencySelector = (state: RootState) => CurrencyEnum;
 
@@ -194,11 +191,10 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
   >(platformCurrencies.filter(({ name }) => name === statisticCurrency));
   useEffect(
     () => {
-      const newSelectedCurrencies = [...selectedCurrencies];
-      newSelectedCurrencies[0] = platformCurrencies.find(
-        ({ name }) => name === statisticCurrency
-      )!;
-      setSelectedCurrencies(newSelectedCurrencies);
+      setSelectedCurrencies([
+        ...platformCurrencies.filter(({ name }) => name === statisticCurrency),
+        ...selectedCurrencies
+      ]);
     },
     [statisticCurrency]
   );
