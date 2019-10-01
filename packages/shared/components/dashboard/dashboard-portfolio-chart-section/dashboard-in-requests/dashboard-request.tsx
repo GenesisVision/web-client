@@ -4,7 +4,8 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
-import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import PortfolioEventLogo
+  from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
@@ -100,6 +101,25 @@ const _DashboardRequest: React.FC<Props> = ({
         invert
       >
         {t("program-details-page.description.successFee")}
+      </StatisticItem>
+      <StatisticItem
+        className={"dashboard-request-popover__statistic-item"}
+        condition={
+          isInvestor &&
+          request.entryFee !== null &&
+          request.entryFee !== undefined
+        }
+        label={
+          <NumberFormat
+            value={request.entryFee}
+            suffix={` %`}
+            allowNegative={false}
+            displayType="text"
+          />
+        }
+        invert
+      >
+        {t("fund-details-page.description.entryFee")}
       </StatisticItem>
       <StatisticItem
         className={"dashboard-request-popover__statistic-item"}
