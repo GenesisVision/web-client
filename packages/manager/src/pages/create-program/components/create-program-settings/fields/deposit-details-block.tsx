@@ -31,14 +31,16 @@ const _DepositDetailsBlock: React.FC<Props> = ({
         </span>
         {t("manager.create-program-page.settings.deposit-details")}
       </div>
-      <div className={"deposit-details create-program-settings__fill-block"}>
+      <div className="deposit-details create-program-settings__fill-block">
         <div className="create-program-settings__field deposit-details">
-          <WalletSelect
-            name={walletFieldName}
-            label={t("transfer.from")}
-            items={wallets}
-            onChange={onSelectChange(onWalletChange)}
-          />
+          <div className="deposit-amount-field">
+            <WalletSelect
+              name={walletFieldName}
+              label={t("transfer.from")}
+              items={wallets}
+              onChange={onSelectChange(onWalletChange)}
+            />
+          </div>
           <InputDepositAmount
             name={inputName}
             walletCurrency={walletCurrency}
