@@ -227,7 +227,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
   );
 };
 
-interface ICreateProgramSettingsOwnProps {
+export interface ICreateProgramSettingsOwnProps {
   broker: Broker;
   wallets: WalletData[];
   programsInfo: ProgramsInfo;
