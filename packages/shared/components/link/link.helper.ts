@@ -4,7 +4,7 @@ import { ToType } from "./link";
 
 export const pushHistoryState = (to: ToType) => {
   window.history.pushState(
-    { options: { from: to.state } },
+    { options: { from: to.state }, as: to.as, url: to.pathname },
     uuid.v4(),
     to.as || to.pathname
   );
@@ -22,10 +22,5 @@ export const normalizeTo = (to: ToType | string): ToType => {
 
 export const normalizeUrlString = (url: string): string => {
   const role = process.env.REACT_APP_BASENAME;
-  const env = process.env.NODE_ENV;
-
-  // if (env !== "production") {
-  //   return url;
-  // }
   return `/${role}${url}`;
 };
