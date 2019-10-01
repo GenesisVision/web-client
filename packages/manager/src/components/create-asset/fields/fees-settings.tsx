@@ -21,43 +21,45 @@ const _FeesSettings: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <div className="create-asset-settings__row">
+    <>
       {title && <div className="create-asset-settings__row-title">{title}</div>}
-      <CreateAssetField>
-        <GVFormikField
-          name={entryFeeName}
-          label={t("manager.create-program-page.settings.fields.entry-fee")}
-          adornment="%"
-          component={GVNumberField}
-          autoComplete="off"
-          decimalScale={4}
-          isAllowed={allowValuesNumberFormat()}
-        />
-        <Hint
-          content={t("manager.create-program-page.settings.hints.entry-fee")}
-          className="create-asset-settings__field-caption"
-          vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          tooltipContent={entryFeeDescription}
-        />
-      </CreateAssetField>
-      <CreateAssetField>
-        <GVFormikField
-          name={secondFeeName}
-          label={secondFeeLabel}
-          adornment="%"
-          component={GVNumberField}
-          autoComplete="off"
-          decimalScale={4}
-          isAllowed={allowValuesNumberFormat()}
-        />
-        <Hint
-          content={secondFeeUnderText}
-          className="create-asset-settings__field-caption"
-          vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          tooltipContent={secondFeeDescription}
-        />
-      </CreateAssetField>
-    </div>
+      <div className="create-asset-settings__row">
+        <CreateAssetField>
+          <GVFormikField
+            name={entryFeeName}
+            label={t("manager.create-program-page.settings.fields.entry-fee")}
+            adornment="%"
+            component={GVNumberField}
+            autoComplete="off"
+            decimalScale={4}
+            isAllowed={allowValuesNumberFormat()}
+          />
+          <Hint
+            content={t("manager.create-program-page.settings.hints.entry-fee")}
+            className="create-asset-settings__field-caption"
+            vertical={VERTICAL_POPOVER_POS.BOTTOM}
+            tooltipContent={entryFeeDescription}
+          />
+        </CreateAssetField>
+        <CreateAssetField>
+          <GVFormikField
+            name={secondFeeName}
+            label={secondFeeLabel}
+            adornment="%"
+            component={GVNumberField}
+            autoComplete="off"
+            decimalScale={4}
+            isAllowed={allowValuesNumberFormat()}
+          />
+          <Hint
+            content={secondFeeUnderText}
+            className="create-asset-settings__field-caption"
+            vertical={VERTICAL_POPOVER_POS.BOTTOM}
+            tooltipContent={secondFeeDescription}
+          />
+        </CreateAssetField>
+      </div>
+    </>
   );
 };
 
