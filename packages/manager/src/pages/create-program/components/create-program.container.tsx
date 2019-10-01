@@ -19,7 +19,7 @@ import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { fetchBrokers } from "../services/create-program.service";
 import { TFAConfirmBlock } from "./confirm-block";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
-import CreateProgramSettingsSection from "./create-program-settings/create-program-settings-section";
+import { CreateProgramSettingsSection } from "./create-program-settings/create-program-settings-section";
 
 const _CreateProgramContainer: React.FC = () => {
   const [t] = useTranslation();
@@ -128,14 +128,10 @@ const _CreateProgramContainer: React.FC = () => {
             <CreateProgramSettingsSection
               currency={currency}
               minimumDepositsAmount={minimumDepositsAmount}
-              fetchWallets={currency => dispatch(fetchWallets(currency))}
               wallets={wallets}
               navigateBack={setIsNavigationDialogVisible}
               broker={selectedBroker}
               onSubmit={onSubmit}
-              notifyError={message =>
-                dispatch(alertMessageActions.error(message))
-              }
               author={headerData.name}
               programsInfo={programsInfo}
             />
