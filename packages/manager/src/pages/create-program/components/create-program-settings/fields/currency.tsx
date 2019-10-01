@@ -2,7 +2,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
-import Select, { ISelectChangeEvent } from "shared/components/select/select";
+import Select from "shared/components/select/select";
+import { onSelectChange } from "shared/components/select/select.test-helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _Currency: React.FC<Props> = ({
@@ -21,7 +22,7 @@ const _Currency: React.FC<Props> = ({
         InputComponent={Select}
         disabled={disabled}
         disableIfSingle
-        onChange={onChange}
+        onChange={onSelectChange(onChange)}
       >
         {accountCurrencies.map(currency => (
           <option value={currency} key={currency}>
@@ -36,7 +37,7 @@ const _Currency: React.FC<Props> = ({
 interface Props {
   name: string;
   disabled: boolean;
-  onChange: (_: ISelectChangeEvent, target: JSX.Element) => void;
+  onChange: (value: CurrencyEnum) => void;
   accountCurrencies: CurrencyEnum[];
 }
 
