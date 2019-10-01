@@ -1,10 +1,6 @@
 import "./subscription-details.scss";
 
-import {
-  AttachToSignalProviderModeEnum,
-  PersonalProgramDetailsFull,
-  SignalSubscriptionModeEnum
-} from "gv-api-web";
+import { AttachToSignalProviderModeEnum, PersonalProgramDetailsFull, SignalSubscriptionModeEnum } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -108,7 +104,7 @@ const _SubscriptionTypeValue: React.FC<ISubscriptionTypeValueProps> = ({
         <NumberFormat
           value={formatCurrencyValue(fixedVolume, "USD")}
           prefix=" "
-          suffix="USD"
+          suffix=" USD"
           displayType="text"
         />
       )}
