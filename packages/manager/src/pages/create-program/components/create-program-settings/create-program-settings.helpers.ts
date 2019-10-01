@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -11,7 +12,7 @@ import {
 } from "shared/utils/validators/validators";
 import { boolean, mixed, number, object, string } from "yup";
 
-import { ICreateProgramSettingsFormValues, ICreateProgramSettingsProps } from "./create-program-settings";
+import { ICreateProgramSettingsFormValues, ICreateProgramSettingsOwnProps } from "./create-program-settings";
 
 export const createProgramMapPropsToValues = ({
   wallet,
@@ -20,7 +21,7 @@ export const createProgramMapPropsToValues = ({
   leverage,
   programsInfo,
   accountType
-}: ICreateProgramSettingsProps): ICreateProgramSettingsFormValues => ({
+}: ICreateProgramSettingsOwnProps): ICreateProgramSettingsFormValues => ({
   [CREATE_PROGRAM_FIELDS.tradesDelay]: "None",
   [CREATE_PROGRAM_FIELDS.stopOutLevel]: 100,
   [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: accountType
@@ -49,9 +50,9 @@ export const createProgramMapPropsToValues = ({
 });
 
 const createProgramSettingsValidationSchema = (
-  props: ICreateProgramSettingsProps
+  props: ICreateProgramSettingsOwnProps
 ) => {
-  const { t } = props;
+  const [t] = useTranslation();
   const minDeposit = parseFloat(
     formatCurrencyValue(
       convertToCurrency(
