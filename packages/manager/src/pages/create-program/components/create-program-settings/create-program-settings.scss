@@ -17,27 +17,7 @@
   &__row {
     display: flex;
     flex-wrap: wrap;
-    width: auto;
-    max-width: 230px;
-    position: relative;
     justify-content: space-between;
-
-    & .gv-text-field__error {
-      width: 100%;
-    }
-
-    .gv-text-field__wrapper,
-    .gv-checkbox-wrapper {
-      margin: 0;
-    }
-
-    .select--disabled .select__value {
-      color: $text-light-color;
-    }
-
-    @include media-breakpoint-landscape-phone() {
-      max-width: 484px;
-    }
   }
 
   &__field {
@@ -138,6 +118,27 @@
 
     &:last-child {
       padding-bottom: 0;
+    }
+
+    & .deposit-amount-field {
+      margin: $padding-xsmall 0;
+    }
+
+    & .gv-text-field__error {
+      width: 100%;
+    }
+
+    .gv-text-field__wrapper,
+    .gv-checkbox-wrapper {
+      margin: 0;
+    }
+
+    .select--disabled .select__value {
+      color: $text-light-color;
+    }
+
+    @include media-breakpoint-landscape-phone() {
+      max-width: 484px;
     }
 
     @include media-breakpoint-tablet() {
