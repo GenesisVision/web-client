@@ -40,6 +40,7 @@ import PeriodLength from "./fields/period-length";
 import SignalProgram from "./fields/signal-program";
 import TradesDelay from "./fields/trades-delay";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
+import CreateAssetSection from "components/create-asset/create-asset-section";
 
 const isAmountAllow = (currency: CurrencyEnum) => ({
   value
@@ -124,11 +125,10 @@ const _CreateProgramSettings: React.FC<Props> = ({
   return (
     <div className="create-program-settings">
       <form onSubmit={validateAndSubmit}>
-        <div className="create-program-settings__subheading">
-          <span className="create-program-settings__block-number">01</span>
-          {t("manager.create-program-page.settings.main-settings")}
-        </div>
-        <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border create-program-settings__row">
+        <CreateAssetSection
+          title={t("manager.create-program-page.settings.main-settings")}
+          blockNumber={"01"}
+        >
           <DescriptionBlock
             asset={ASSET.PROGRAM}
             titleName={CREATE_PROGRAM_FIELDS.title}
@@ -170,12 +170,11 @@ const _CreateProgramSettings: React.FC<Props> = ({
             condition={broker.isSignalsAvailable}
             name={CREATE_PROGRAM_FIELDS.isSignalProgram}
           />
-        </div>
-        <div className="create-program-settings__subheading">
-          <span className="create-program-settings__block-number">02</span>
-          {t("manager.create-program-page.settings.fees-settings")}
-        </div>
-        <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
+        </CreateAssetSection>
+        <CreateAssetSection
+          title={t("manager.create-program-page.settings.fees-settings")}
+          blockNumber={"02"}
+        >
           <FeesSettings
             title={t(
               "manager.create-program-page.settings.investment-program-fees"
@@ -201,7 +200,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
               successFeeFieldName={CREATE_PROGRAM_FIELDS.signalSuccessFee}
             />
           )}
-        </div>
+        </CreateAssetSection>
         <DepositDetailsBlock
           walletFieldName={CREATE_PROGRAM_FIELDS.depositWalletId}
           inputName={CREATE_PROGRAM_FIELDS.depositAmount}
