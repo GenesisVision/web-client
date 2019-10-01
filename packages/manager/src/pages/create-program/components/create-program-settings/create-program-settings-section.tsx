@@ -2,6 +2,7 @@ import { Broker, BrokerAccountType, ManagerProgramCreateResult, ProgramsInfo, Wa
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { rateApi } from "shared/services/api-client/rate-api";
 import { CurrencyEnum, ResponseError, SetSubmittingType } from "shared/utils/types";
@@ -15,17 +16,15 @@ const getCurrency = (accountType: BrokerAccountType): CurrencyEnum =>
 const getLeverage = (accountType: BrokerAccountType): number =>
   accountType.leverages[0];
 
-const CreateProgramSettingsSection: React.FC<OwnProps> = ({
+const _CreateProgramSettingsSection: React.FC<OwnProps> = ({
   currency,
   broker,
   wallets,
   programsInfo,
-  fetchWallets,
   onSubmit,
   minimumDepositsAmount,
   navigateBack,
   author,
-  notifyError
 }) => {
   const dispatch = useDispatch();
   const brokerAccountType = broker.accountTypes[0];
@@ -91,7 +90,6 @@ const CreateProgramSettingsSection: React.FC<OwnProps> = ({
 
   return (
     <CreateProgramSettings
-      notifyError={notifyError}
       navigateBack={navigateBack}
       onSubmit={handleCreateProgram}
       minimumDepositsAmount={minimumDepositsAmount}
@@ -112,17 +110,17 @@ const CreateProgramSettingsSection: React.FC<OwnProps> = ({
   );
 };
 
-export default CreateProgramSettingsSection;
+export const CreateProgramSettingsSection = React.memo(
+  _CreateProgramSettingsSection
+);
 
 interface OwnProps {
   currency: CurrencyEnum;
   broker: Broker;
   wallets: WalletData[];
   programsInfo: ProgramsInfo;
-  fetchWallets: (currency: CurrencyEnum) => void;
   onSubmit: (data: ManagerProgramCreateResult) => void;
   minimumDepositsAmount: { [key: string]: number };
   navigateBack: () => void;
   author: string;
-  notifyError: (message: string) => void;
 }
