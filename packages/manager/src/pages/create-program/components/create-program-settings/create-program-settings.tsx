@@ -8,24 +8,15 @@ import FeesSettings from "components/create-asset/fields/fees-settings";
 import InvestmentLimitField from "components/create-asset/fields/investment-limit-field";
 import StopOutField from "components/create-asset/fields/stop-out-field";
 import { InjectedFormikProps, withFormik } from "formik";
-import {
-  Broker,
-  BrokerAccountType,
-  NewProgramRequestTradesDelayEnum,
-  ProgramsInfo,
-  WalletData,
-  WalletDataCurrencyEnum
-} from "gv-api-web";
+import { Broker, BrokerAccountType, NewProgramRequestTradesDelayEnum, ProgramsInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { NumberFormatValues } from "react-number-format";
 import { useDispatch } from "react-redux";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { ASSET } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import createProgramSettingsValidationSchema, {
@@ -41,10 +32,6 @@ import PeriodLength from "./fields/period-length";
 import SignalProgram from "./fields/signal-program";
 import TradesDelay from "./fields/trades-delay";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
-
-const isAmountAllow = (currency: CurrencyEnum) => ({
-  value
-}: NumberFormatValues) => validateFraction(value, currency);
 
 const _CreateProgramSettings: React.FC<Props> = ({
   leverage,
@@ -74,6 +61,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
   programCurrency,
   wallet
 }) => {
+  console.log(programsInfo);
   const dispatch = useDispatch();
   const [t] = useTranslation();
   useEffect(
@@ -164,7 +152,6 @@ const _CreateProgramSettings: React.FC<Props> = ({
             inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
             hasInvestmentLimit={hasInvestmentLimit}
             currency={currency}
-            isAllow={isAmountAllow(currency as WalletDataCurrencyEnum)}
           />
           <SignalProgram
             condition={broker.isSignalsAvailable}
