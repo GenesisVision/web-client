@@ -18,7 +18,7 @@ import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import {
-  btcUsdtWalletValidator,
+  btcWalletValidator,
   ethGvtWalletValidator
 } from "shared/utils/validators/validators";
 import { Schema, StringSchema, lazy, object, string } from "yup";
@@ -43,7 +43,7 @@ const _WalletWithdrawForm: React.FC<
   );
   const onChangeCurrency = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element) => {
-      const wallet = wallets.find(wallet => (wallet.id = target.props.value))!;
+      const wallet = wallets.find(wallet => wallet.id === target.props.value)!;
       setSelected(wallet);
       setFieldValue(FIELDS.currency, wallet.currency);
       setFieldValue(FIELDS.id, wallet.id);
@@ -209,13 +209,13 @@ const WalletWithdrawForm = compose<React.FC<OwnProps>>(
       [FIELDS.address]: "",
       [FIELDS.twoFactorCode]: ""
     }),
-    validationSchema: (props: Props) => {
-      const { t, twoFactorEnabled } = props;
-      return lazy(
+    validationSchema: ({ t, twoFactorEnabled }: Props) =>
+      lazy(
         (values: IWalletWithdrawFormValues): Schema<any> => {
           switch (values[FIELDS.currency]) {
             case "GVT":
             case "ETH":
+            case "USDT":
               return object().shape({
                 [FIELDS.address]: ethGvtWalletValidator.required(
                   t("wallet-withdraw.validation.address-is-required")
@@ -224,15 +224,14 @@ const WalletWithdrawForm = compose<React.FC<OwnProps>>(
               });
             default:
               return object().shape({
-                [FIELDS.address]: btcUsdtWalletValidator.required(
+                [FIELDS.address]: btcWalletValidator.required(
                   t("wallet-withdraw.validation.address-is-required")
                 ),
                 [FIELDS.twoFactorCode]: twoFactorValidator(t, twoFactorEnabled)
               });
           }
         }
-      );
-    },
+      ),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }

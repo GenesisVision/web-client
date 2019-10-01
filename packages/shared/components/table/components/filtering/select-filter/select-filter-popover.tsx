@@ -1,16 +1,16 @@
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 
 import { SelectFilterValue } from "../filter.type";
 import { ComposedRequestSelectValue } from "./select-filter.constants";
 
-const _SelectFilterPopover: React.FC<Props & WithTranslation> = ({
+const _SelectFilterPopover: React.FC<Props> = ({
   values,
   value,
-  t,
   changeFilter
 }) => {
+  const [t] = useTranslation();
   const handleClick = useCallback(
     (value: ComposedRequestSelectValue) => () =>
       changeFilter && changeFilter(value),
@@ -48,5 +48,5 @@ interface Props {
   value?: ComposedRequestSelectValue;
 }
 
-const SelectFilterPopover = translate()(React.memo(_SelectFilterPopover));
+const SelectFilterPopover = React.memo(_SelectFilterPopover);
 export default SelectFilterPopover;

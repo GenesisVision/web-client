@@ -20,7 +20,7 @@ export type FetchProgramsFiltersType = {
   profitAvgMax?: number;
   sorting?: string;
   programCurrency?: string;
-  currencySecondary?: string;
+  currency?: string;
   levelUpFrom?: number;
   tags?: string[];
   isSignal?: boolean;

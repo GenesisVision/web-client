@@ -5,23 +5,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-
-  &__statistic {
-    margin-bottom: $padding-big-mobile;
-    display: flex;
-    width: 100%;
-    @include media-breakpoint-landscape-phone() {
-      margin-bottom: 0;
-      margin-right: $padding-big-mobile;
-      max-width: $details-statistic-section-width;
-    }
-  }
-
-  &__chart {
-    display: flex;
-    flex: 1;
-    min-height: 400px;
-  }
 }
 
 .recharts-text {

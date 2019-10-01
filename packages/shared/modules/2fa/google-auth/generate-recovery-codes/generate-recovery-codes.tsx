@@ -1,34 +1,25 @@
 import { PasswordModel, RecoveryCodesViewModel } from "gv-api-web";
-import React, { useCallback, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 import GVButton from "shared/components/gv-button";
-import useErrorMessage from "shared/hooks/error-message.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
-import authApi from "shared/services/api-client/auth-api";
-import authService from "shared/services/auth-service";
 import { SetSubmittingType } from "shared/utils/types";
 
+import { sendPassword } from "../../services/2fa.service";
 import GoogleAuthCodes from "../google-auth-codes";
 import GenerateRecoveryWithFormik from "./generate-recovery-form";
 
-const GenerateRecoveryCode: React.FC<Props> = ({ disabled, t }) => {
+const GenerateRecoveryCode: React.FC<Props> = ({ disabled }) => {
+  const [t] = useTranslation();
+  const { errorMessage, data, sendRequest } = useApiRequest<
+    RecoveryCodesViewModel
+  >({ request: sendPassword });
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const { errorMessage, setErrorMessage } = useErrorMessage();
-  const [data, setData] = useState<RecoveryCodesViewModel | undefined>(
-    undefined
-  );
   const handleSubmit = useCallback(
     (values: PasswordModel, setSubmitting: SetSubmittingType) =>
-      authApi
-        .v10Auth2faRecoverycodesNewPost(authService.getAuthArg(), {
-          model: values
-        })
-        .then(setData)
-        .catch(error => {
-          setErrorMessage(error);
-          setSubmitting(false);
-        }),
+      sendRequest(values, setSubmitting),
     []
   );
   if (!disabled) return null;
@@ -51,8 +42,8 @@ const GenerateRecoveryCode: React.FC<Props> = ({ disabled, t }) => {
   );
 };
 
-interface Props extends WithTranslation {
+interface Props {
   disabled: boolean;
 }
 
-export default translate()(React.memo(GenerateRecoveryCode));
+export default React.memo(GenerateRecoveryCode);

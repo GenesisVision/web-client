@@ -1,33 +1,19 @@
-import { ACCOUNT_CURRENCY_KEY } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
-import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
-import { loadData } from "shared/utils/localstorage";
+import statisticCurrencyReducerCreator from "shared/components/details/reducers/statistic-currency.reducer";
+import { StatisticCurrencyState } from "shared/components/details/reducers/statistic-currency.reducer";
+import { RootState } from "shared/reducers/root-reducer";
 import { fieldSelector } from "shared/utils/selectors";
-import { CurrencyEnum } from "shared/utils/types";
 
-import {
-  SET_STATISTIC_CURRENCY,
-  TStatisticCurrencyAction
-} from "../actions/fund-details.actions";
+import { SET_FUND_STATISTIC_CURRENCY } from "../actions/fund-details.actions";
 
-export type StatisticCurrencyDataType = CurrencyEnum;
+export type TStatisticCurrencySelector = (
+  state: RootState
+) => StatisticCurrencyState;
 
-const initialState = (loadData(ACCOUNT_CURRENCY_KEY) as CurrencyEnum) || "BTC";
-
-export type StatisticCurrencyState = StatisticCurrencyDataType;
-
-export const statisticCurrencySelector = fieldSelector(
+export const statisticCurrencySelector: TStatisticCurrencySelector = fieldSelector(
   state => state.fundDetails.statisticCurrency
 );
 
-const statisticCurrencyReducer = (
-  state: StatisticCurrencyState = initialState,
-  action: TStatisticCurrencyAction
-): StatisticCurrencyDataType =>
-  defaultReducer<TStatisticCurrencyAction, StatisticCurrencyDataType>(
-    action,
-    state,
-    initialState,
-    SET_STATISTIC_CURRENCY
-  );
-
+const statisticCurrencyReducer = statisticCurrencyReducerCreator(
+  SET_FUND_STATISTIC_CURRENCY
+);
 export default statisticCurrencyReducer;

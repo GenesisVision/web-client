@@ -1,25 +1,24 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
+import { FundProfitChart } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { useSelector } from "react-redux";
-import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  ChartDefaultPeriod,
+  ChartPeriodType
+} from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import withLoader from "shared/decorators/with-loader";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { statisticPeriodSelector } from "../../reducers/statistic-period.reducer";
-import { IStatisticData } from "./fund-details-statistics";
-
 const _FundDetailsStatisticsElements: React.FC<
   IFundDetailsStatisticsElementsProps
-> = ({ statisticData: { statisticCurrency, statistic } }) => {
+> = ({ period, data: { statisticCurrency, statistic } }) => {
   const [t] = useTranslation();
-  const period = useSelector(statisticPeriodSelector);
   return (
     <>
       <div className="details-statistics__subheading">
@@ -175,12 +174,17 @@ const _FundDetailsStatisticsElements: React.FC<
   );
 };
 
-export interface IFundDetailsStatisticsElementsProps {
-  statisticData: IStatisticData;
+export interface IFundStatisticData {
   statisticCurrency: CurrencyEnum;
+  statistic: FundProfitChart;
+}
+
+export interface IFundDetailsStatisticsElementsProps {
+  period: ChartDefaultPeriod;
+  data: IFundStatisticData;
 }
 
 const FundDetailsStatisticsElements = React.memo(
-  withLoader(_FundDetailsStatisticsElements)
+  withBlurLoader(_FundDetailsStatisticsElements)
 );
 export default FundDetailsStatisticsElements;

@@ -14,7 +14,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="program-details-description__statistic-container">
+    <div className="asset-details-description__col asset-details-description__col--no-wrap">
       <StatisticItem
         label={
           <TooltipLabel
@@ -24,7 +24,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
             labelText={t("program-details-page.description.successFee")}
           />
         }
-        className="program-details-description__short-statistic-item"
+        className="asset-details-description__short-statistic-item"
         accent
       >
         <NumberFormat
@@ -40,7 +40,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
             labelText={t("program-details-page.description.volume-fee")}
           />
         }
-        className="program-details-description__short-statistic-item"
+        className="asset-details-description__short-statistic-item"
         accent
       >
         <NumberFormat

@@ -522,6 +522,53 @@
     },
     "select": "Show in:"
   },
+  "details-page": {
+    "statistics": {
+      "heading": "Statistics",
+      "current": "Current",
+      "calmarRatio": "Calmar ratio",
+      "rebalances": "Rebalances",
+      "profit-change": "Profit change",
+      "for": "For",
+      "balance": "Balance",
+      "investors": "Investors",
+      "sharpe-ratio": "Sharpe ratio",
+      "sortino-ratio": "Sortino ratio",
+      "max-drawdown": "Max Drawdown",
+      "start-day": "Start day",
+      "period-end": "Period end",
+      "period": "Period"
+    },
+    "tooltip": {
+      "assets": "Objects that have an identifiable value and are traded on crypto markets.",
+      "structure": "The current allocation of funds selected by the Manager.",
+      "entry-fee": "The commission that the investor pays the manager for investing in the fund. Set by the manager and calculated as a percentage of the amount invested.",
+      "exit-fee": "The commission that the investor pays the manager for withdrawing funds from the fund. Set by the manager and calculated as a percentage of the amount invested.",
+      "balance": "The current amount of funds in the fund.",
+      "status": {
+        "PROGRAM": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
+        "FUND": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended)."
+      },
+      "start-day": "Creation day of the fund.",
+      "investors": "The current number of investors in the fund.",
+      "calmar-ratio": "A comparison of the average annual compounded rate of return and the maximum drawdown risk of asset managers and hedge funds.The higher the score, the better the portfolio is formed.",
+      "profit-change": "How much in % has the profit changed in the current time period compared to the previous one in the same period.",
+      "sharpe-ratio": "Program performance indicator, which is calculated as the mathematical ratio of the average return to the average deviation of this return. The higher the Sharpe Ratio value, the lower the portfolio risks.",
+      "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The greater the value of Sortino Ratio, the higher the efficiency of the portfolio and the lower the investment risks of investing in a fund.",
+      "max-drawdown": "The biggest drawdown of a fund during the selected date range.",
+      "target": "The fixed percentage of the coin (asset) allocation in the total fund portfolio.",
+      "current": "The current percentage of the coin (asset) allocation in the total fund portfolio."
+    },
+    "chart": {
+      "assets": "Assets",
+      "value": "Value",
+      "heading": "Chart",
+      "tabs": {
+        "profit": "Profit",
+        "balance": "Balance"
+      }
+    }
+  },
   "fund-details-page": {
     "title": "Program detail",
     "description": {
@@ -632,6 +679,7 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "currency": "Program currency",
       "broker": "Broker",
       "leverage": "Leverage",
       "period": "Period",
@@ -760,6 +808,8 @@
         "date": "Date"
       },
       "open-positions": {
+        "delay": "delay",
+        "delay-tooltip": "This manager makes trades and open positions public with a {{delay}} delay.",
         "date": "Date Open",
         "symbol": "Symbol",
         "direction": "Dir",
@@ -1583,6 +1633,11 @@
       }
     },
     "program-settings": {
+      "trades-update": {
+        "title": "Trades and open positions delay",
+        "text": "Managers have the ability to delay the public display of their trades and open positions to protect their strategy.",
+        "select": "Trades delay"
+      },
       "two-factor-confirm": {
         "title": "Two-factor authorization (2fa)",
         "text": "You must confirm your 2fa code to access the Huobi native platform."
@@ -1832,6 +1887,7 @@
           "available-in-wallet": "Available in wallet"
         },
         "hints": {
+          "trades-delay": "Description about Trades delay is here",
           "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
           "entry-fee": "Description about entry fee is here",
           "entry-fee-description": "A fee charged upon each investment in the program.",
@@ -1903,6 +1959,7 @@
         "assets": "Assets"
       },
       "settings": {
+        "investment-fund-fees": "Investment fund fees",
         "main-settings": "Main settings",
         "asset-selection": "Asset selection",
         "fees-settings": "Fees settings",
@@ -1929,6 +1986,8 @@
         "validation": {
           "entry-fee-required": "Entry fee is required",
           "exit-fee-required": "Exit fee is required",
+          "exit-fee-min": "Exit fee must be greater than 0 %",
+          "exit-fee-max": "Exit fee must be less than {{max}} %",
           "assets-share": "Total share of all assets should be equal to 100%",
           "assets-count": "Must be at least two assets.",
           "deposit-min": "Not enough money."

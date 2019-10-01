@@ -6,7 +6,7 @@ import * as React from "react";
 const _FundAssetList: React.FC<Props> = ({ values }) => (
   <div className="fund-asset-list">
     {values.map((item: FundAssetPartWithIcon) => (
-      <div className="fund-asset-list__item">
+      <div className="fund-asset-list__item" key={item.name}>
         <div
           className="fund-asset-list__bubble"
           style={{ background: item.color }}

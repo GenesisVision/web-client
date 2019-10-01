@@ -19,11 +19,11 @@ const _FundDetailsDescription: React.FC<Props> = ({
   AssetDetailsAvatar,
   AssetDetailsExtraBlock
 }) => (
-  <div className="program-details-description__main">
-    <div className="program-details-description__avatar">
+  <div className="asset-details-description__main">
+    <div className="asset-details-description__avatar">
       <AssetDetailsAvatar />
     </div>
-    <div className="program-details-description__info">
+    <div className="asset-details-description__info">
       <h1 className="title-small-padding">{description.title}</h1>
       <Link
         to={{
@@ -33,21 +33,21 @@ const _FundDetailsDescription: React.FC<Props> = ({
       >
         <GVButton
           variant="text"
-          className="program-details-description__author-btn"
+          className="asset-details-description__author-btn"
         >
           {description.manager.username}
         </GVButton>
       </Link>
       <SocialLinksBlock socialLinks={description.manager.socialLinks} />
       <AssetDetailsExtraBlock />
-      <h4 className="program-details-description__subheading">
+      <h4 className="asset-details-description__subheading">
         {t("program-details-page.description.strategy")}
       </h4>
-      <div className="program-details-description__text">
+      <div className="asset-details-description__text">
         {description.description}
       </div>
     </div>
-    <div className="program-details-description__settings">
+    <div className="asset-details-description__settings">
       <DetailsFavorite
         id={description.id}
         isFavorite={

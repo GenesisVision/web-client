@@ -15,7 +15,6 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
-import Tooltip from "shared/components/tooltip/tooltip";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
@@ -32,6 +31,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
   onCollapseClick
 }) => {
   const { t } = useTranslation();
+  const requestCurrency = program.statistic.balance.currency;
   return (
     <TableRow>
       <td
@@ -115,26 +115,14 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.equity")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    <Tooltip
-                      render={() => (
-                        <div>
-                          {formatCurrencyValue(
-                            program.statistic.balanceGVT.amount,
-                            "GVT"
-                          )}{" "}
-                          {"GVT"}
-                        </div>
+                    <NumberFormat
+                      value={formatCurrencyValue(
+                        program.statistic.balance.amount,
+                        requestCurrency
                       )}
-                    >
-                      <NumberFormat
-                        value={formatCurrencyValue(
-                          program.statistic.balanceBase.amount,
-                          program.currency
-                        )}
-                        suffix={` ${program.currency}`}
-                        displayType="text"
-                      />
-                    </Tooltip>
+                      suffix={` ${requestCurrency}`}
+                      displayType="text"
+                    />
                   </div>
                 </div>
                 <div>
@@ -159,9 +147,9 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     {`${formatCurrencyValue(
-                      program.availableInvestmentBase,
-                      program.currency
-                    )} ${program.currency}`}
+                      program.availableInvestmentInCurrency,
+                      requestCurrency
+                    )} ${requestCurrency}`}
                   </div>
                 </div>
                 <div>

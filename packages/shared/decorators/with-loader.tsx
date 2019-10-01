@@ -12,5 +12,6 @@ const withLoader = <T extends {}>(
 export interface WithLoaderProps {
   loader?: JSX.Element;
   condition?: boolean;
+  className?: string;
 }
 export default withLoader;

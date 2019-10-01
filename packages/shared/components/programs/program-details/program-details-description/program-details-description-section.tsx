@@ -1,40 +1,41 @@
-import "./program-details-description.scss";
+import "shared/components/details/details-description-section/details-description/details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { ComponentType } from "react";
 import { useSelector } from "react-redux";
 import { ProgramControlsLoader } from "shared/components/details/details.contaner.loader";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
+import { levelsParamsLoaderData } from "../program-details.loader-data";
 import { levelParametersSelector } from "../reducers/level-parameters.reducer";
 import PerformanceData from "./performance-data";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
   programDescription,
-  isAuthenticated,
   ProgramControls,
   ChangePasswordTradingAccount
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const levelsParameters = useSelector(levelParametersSelector);
   const personalDetails = programDescription.personalProgramDetails;
   const isOwnProgram = personalDetails && personalDetails.isOwnProgram;
   return (
-    <div className="program-details-description">
+    <div className="details__section asset-details-description">
       <ProgramDetailsDescriptionMain
         programDescription={programDescription}
         isOwnProgram={isOwnProgram}
         ChangePasswordTradingAccount={ChangePasswordTradingAccount}
       />
       <PerformanceData
-        condition={!!levelsParameters}
-        levelsParameters={levelsParameters!}
+        loaderData={levelsParamsLoaderData}
+        data={levelsParameters!}
         programDescription={programDescription}
       />
       <ProgramControls
-        condition={!!levelsParameters}
-        loader={<ProgramControlsLoader />}
-        levelsParameters={levelsParameters!}
+        loaderData={levelsParamsLoaderData}
+        data={levelsParameters!}
         programDescription={programDescription}
         canCloseProgram={personalDetails && personalDetails.canCloseProgram}
         canMakeSignalProvider={
@@ -51,7 +52,6 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
 
 interface Props {
   programDescription: ProgramDetailsFull;
-  isAuthenticated: boolean;
   ProgramControls: ComponentType<any>;
   ChangePasswordTradingAccount?: ComponentType<any>;
 }

@@ -6,21 +6,27 @@ import Leverage from "shared/components/leverage/leverage";
 import PieContainerSmall from "shared/components/pie-container/pie-container-small";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import StatisticItemLoader from "shared/components/statistic-item/statistic-item.loader";
+import StatisticItemTextLoader from "shared/components/statistic-item/statistic-item.txt-loader";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  WithBlurLoaderProps,
+  withBlurLoader
+} from "shared/decorators/with-blur-loader";
 import filesService from "shared/services/file-service";
+import { getRandomInteger } from "shared/utils/helpers";
 
 const _PerformanceData: React.FC<Props> = ({
   programDescription,
-  levelsParameters
+  data: levelsParameters
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="program-details-description__perfomance-data">
+    <div className="asset-details-description__performance-data">
       <StatisticItem label={t("program-details-page.description.broker")}>
         <img
-          className={"program-details-description__broker"}
+          className={"asset-details-description__broker"}
           src={filesService.getFileUrl(programDescription.brokerDetails.logo)}
         />
       </StatisticItem>
@@ -29,6 +35,9 @@ const _PerformanceData: React.FC<Props> = ({
           min={programDescription.leverageMin}
           max={programDescription.leverageMax}
         />
+      </StatisticItem>
+      <StatisticItem label={t("program-details-page.description.currency")}>
+        {programDescription.currency}
       </StatisticItem>
       {programDescription.periodStarts && (
         <StatisticItem label={t("program-details-page.description.period")}>
@@ -94,12 +103,90 @@ const _PerformanceData: React.FC<Props> = ({
 };
 
 interface Props {
-  levelsParameters: LevelsParamsInfo;
+  data: LevelsParamsInfo;
   programDescription: ProgramDetailsFull;
 }
 
-const PerformanceData = compose<React.ComponentType<Props & WithLoaderProps>>(
-  withLoader,
+export const PerformanceDataLoader: React.FC = () => (
+  <div className="asset-details-description__performance-data">
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+    <StatisticItemLoader />
+  </div>
+);
+
+export const PerformanceDataTextLoader: React.FC = React.memo(() => {
+  const [t] = useTranslation();
+  return (
+    <div className="asset-details-description__performance-data">
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.broker")}
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.leverage")}
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.period")}
+        value={
+          <PieContainerSmall
+            end={10}
+            value={getRandomInteger(0, 10)}
+            suffix={"days"}
+          />
+        }
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.age")}
+        value={
+          <PieContainerSmall
+            end={10}
+            value={getRandomInteger(0, 10)}
+            suffix={"days"}
+          />
+        }
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.genesis-ratio")}
+        value={
+          <PieContainerSmall
+            end={10}
+            value={getRandomInteger(0, 10)}
+            suffix={"days"}
+          />
+        }
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.investment-scale")}
+        value={
+          <PieContainerSmall
+            end={10}
+            value={getRandomInteger(0, 10)}
+            suffix={"days"}
+          />
+        }
+      />
+      <StatisticItemTextLoader
+        label={t("program-details-page.description.volume-scale")}
+        value={
+          <PieContainerSmall
+            end={10}
+            value={getRandomInteger(0, 10)}
+            suffix={"days"}
+          />
+        }
+      />
+    </div>
+  );
+});
+
+const PerformanceData = compose<
+  React.ComponentType<Props & WithBlurLoaderProps<LevelsParamsInfo>>
+>(
+  withBlurLoader,
   React.memo
 )(_PerformanceData);
 export default PerformanceData;

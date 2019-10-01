@@ -8,22 +8,21 @@ import AssetStatus from "shared/components/asset-status/asset-status";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
-import {
-  PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT
-} from "shared/components/profitability/profitability.helper";
+import { PROFITABILITY_PREFIX, PROFITABILITY_VARIANT } from "shared/components/profitability/profitability.helper";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import { PROGRAM, STATUS } from "shared/constants/constants";
+import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
+import useRole from "shared/hooks/use-role.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum, FeesType } from "shared/utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
 
 const _Investment: React.FC<Props> = ({
+  fees,
   updateDescription,
   id,
   assetCurrency,
@@ -33,6 +32,16 @@ const _Investment: React.FC<Props> = ({
   WithdrawContainer,
   ProgramReinvestingWidget
 }) => {
+  const role = useRole();
+  const isInvestor = role === ROLE.INVESTOR;
+  const {
+    successFeePersonal,
+    successFeeCurrent,
+    exitFee,
+    exitFeePersonal,
+    entryFeeCurrent,
+    entryFeeSelected
+  } = fees;
   const accountCurrency = useSelector(currencySelector);
   const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
@@ -85,6 +94,42 @@ const _Investment: React.FC<Props> = ({
             </Profitability>
           </StatisticItem>
           <StatisticItem
+            condition={
+              isInvestor &&
+              personalDetails.invested !== 0 &&
+              successFeePersonal !== undefined &&
+              successFeePersonal !== null
+            }
+            label={t("program-details-page.description.successFee")}
+            className="details-investment__statistic-item"
+            accent
+          >
+            <NumberFormat
+              value={successFeePersonal}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
+            condition={
+              isInvestor &&
+              exitFeePersonal !== null &&
+              exitFeePersonal !== undefined &&
+              exitFee !== exitFeePersonal
+            }
+            label={t("fund-details-page.description.exitFee")}
+            className="details-investment__statistic-item"
+            accent
+          >
+            <NumberFormat
+              value={exitFeePersonal}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
             className="details-investment__statistic-item"
             accent
             label={
@@ -95,6 +140,9 @@ const _Investment: React.FC<Props> = ({
             }
           >
             <AssetStatus
+              successFee={successFeeCurrent}
+              exitFee={exitFee !== exitFeePersonal}
+              entryFee={entryFeeCurrent}
               status={personalDetails.status as STATUS}
               id={id}
               asset={asset}
@@ -176,7 +224,8 @@ const _Investment: React.FC<Props> = ({
   );
 };
 
-interface OwnProps {
+interface Props {
+  fees: FeesType;
   updateDescription: () => void;
   asset: string;
   notice?: string;
@@ -188,8 +237,6 @@ interface OwnProps {
     IProgramReinvestingContainerOwnProps
   >;
 }
-
-interface Props extends OwnProps {}
 
 const Investment = React.memo(_Investment);
 export default Investment;

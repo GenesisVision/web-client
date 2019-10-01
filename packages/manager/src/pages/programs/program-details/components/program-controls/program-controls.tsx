@@ -1,14 +1,21 @@
+import { LevelsParamsInfo } from "gv-api-web";
 import * as React from "react";
 import { compose } from "redux";
+import DetailsBlock, {
+  DETAILS_BLOCK_TYPE
+} from "shared/components/details/details-block";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  WithBlurLoaderProps,
+  withBlurLoader
+} from "shared/decorators/with-blur-loader";
 
 import InvestmentProgramControls from "./investment-program-controls";
 
 const _ProgramControls: React.FC<Props> = ({
   programDescription,
-  levelsParameters,
+  data: levelsParameters,
   isAuthenticated
 }) => {
   const personalProgramDetails = programDescription.personalProgramDetails;
@@ -18,20 +25,21 @@ const _ProgramControls: React.FC<Props> = ({
     personalProgramDetails && personalProgramDetails.isOwnProgram;
 
   return (
-    <div className="program-details-description__controls">
-      <div className="program-details-description__col">
-        <InvestmentProgramControls
-          programDescription={programDescription}
-          canCloseProgram={canCloseProgram}
-          isOwnProgram={isOwnProgram}
-          isAuthenticated={isAuthenticated}
-          levelsParameters={levelsParameters}
-        />
-      </div>
+    <div className="asset-details-description__controls">
+      <InvestmentProgramControls
+        programDescription={programDescription}
+        canCloseProgram={canCloseProgram}
+        isOwnProgram={isOwnProgram}
+        isAuthenticated={isAuthenticated}
+        levelsParameters={levelsParameters}
+      />
       {isOwnProgram && programDescription.isSignalProgram && (
-        <div className="program-details-description__col program-details-description__col--small-size">
+        <DetailsBlock
+          type={DETAILS_BLOCK_TYPE.BORDERED}
+          className="asset-details-description__col"
+        >
           <SignalProgramInfo programDescription={programDescription} />
-        </div>
+        </DetailsBlock>
       )}
     </div>
   );
@@ -40,9 +48,9 @@ const _ProgramControls: React.FC<Props> = ({
 interface Props extends IProgramControlsProps {}
 
 const ProgramControls = compose<
-  React.ComponentType<IProgramControlsProps & WithLoaderProps>
+  React.ComponentType<IProgramControlsProps & WithBlurLoaderProps<LevelsParamsInfo>>
 >(
-  withLoader,
+  withBlurLoader,
   React.memo
 )(_ProgramControls);
 export default ProgramControls;

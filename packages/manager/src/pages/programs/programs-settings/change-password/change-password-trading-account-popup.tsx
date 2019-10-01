@@ -1,12 +1,9 @@
-import { ProgramPwdUpdate } from "gv-api-web";
 import React, { useCallback } from "react";
-import { connect } from "react-redux";
-import { ManagerRootState } from "reducers";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
-import useErrorMessage from "shared/hooks/error-message.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
-import { ResponseError, SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "shared/utils/types";
 
 import ChangePasswordTradingAccountForm, {
   IChangePasswordTradingAccountFormValues
@@ -15,17 +12,15 @@ import { changePasswordTradingAccount } from "./services/change-password-trading
 
 const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
   open,
-  twoFactorEnabled,
   programName,
   id,
-  service,
   onClose
 }) => {
-  const {
-    errorMessage,
-    setErrorMessage,
-    cleanErrorMessage
-  } = useErrorMessage();
+  const twoFactorEnabled = useSelector(twoFactorEnabledSelector);
+  const dispatch = useDispatch();
+  const { errorMessage, cleanErrorMessage, sendRequest } = useApiRequest({
+    request: args => dispatch(changePasswordTradingAccount(args))
+  });
   const handleApply = useCallback(
     (
       values: IChangePasswordTradingAccountFormValues,
@@ -35,13 +30,7 @@ const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
         password: values.password,
         twoFactorCode: values.twoFactorCode
       };
-      service
-        .changePasswordTradingAccount(id, model)
-        .then(handleClose)
-        .catch(setErrorMessage)
-        .finally(() => {
-          setSubmitting(false);
-        });
+      sendRequest({ id, model }, setSubmitting).then(handleClose);
     },
     [id]
   );
@@ -61,46 +50,12 @@ const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: ManagerRootState): StateProps => ({
-  twoFactorEnabled: twoFactorEnabledSelector(state)
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators(
-    {
-      changePasswordTradingAccount
-    },
-    dispatch
-  )
-});
-
-interface OwnProps extends IDialogProps {
+interface Props extends IDialogProps {
   id: string;
   programName: string;
 }
 
-interface StateProps {
-  twoFactorEnabled: boolean;
-}
-
-interface DispatchProps {
-  service: {
-    changePasswordTradingAccount(
-      id: string,
-      model?: ProgramPwdUpdate
-    ): Promise<void>;
-  };
-}
-
-interface Props extends OwnProps, StateProps, DispatchProps {}
-
-const ChangePasswordTradingAccountPopup = compose<
-  React.ComponentType<OwnProps>
->(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_ChangePasswordTradingAccountPopup);
+const ChangePasswordTradingAccountPopup = React.memo(
+  _ChangePasswordTradingAccountPopup
+);
 export default ChangePasswordTradingAccountPopup;

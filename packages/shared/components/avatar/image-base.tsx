@@ -1,24 +1,36 @@
 import classNames from "classnames";
 import * as React from "react";
-import { useCallback } from "react";
-import withUrl from "shared/decorators/with-url";
+import { useCallback, useEffect } from "react";
 import useIsOpen from "shared/hooks/is-open.hook";
+import useUrl from "shared/hooks/url.hook";
 
 const _ImageBase: React.FC<IImageBaseProps> = ({
+  color,
+  DefaultImageComponent,
   url,
   alt,
   defaultImage,
   imageClassName,
   defaultImageClassName
 }) => {
-  const [isError, setIsError] = useIsOpen();
+  const fullUrl = useUrl(url);
+  const [isError, setIsError, setIsNotError] = useIsOpen();
+  useEffect(
+    () => {
+      if (url) setIsNotError();
+      else setIsError();
+    },
+    [url]
+  );
   const handleError = useCallback((e: any) => {
     e.target.onerror = null;
     setIsError();
   }, []);
-  const currentSrc = isError || !url ? defaultImage : url;
-  const className = isError || !url ? defaultImageClassName : "";
-  return (
+  const currentSrc = isError ? defaultImage : fullUrl;
+  const className = isError ? defaultImageClassName : "";
+  return isError && DefaultImageComponent ? (
+    <DefaultImageComponent color={color} imageClassName={className} />
+  ) : (
     <img
       alt={alt}
       className={classNames(imageClassName, className)}
@@ -28,7 +40,7 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   );
 };
 
-const ImageBase = withUrl<IImageBaseProps>("url")(React.memo(_ImageBase));
+const ImageBase = React.memo(_ImageBase);
 export default ImageBase;
 
 export interface IImageProps {
@@ -38,9 +50,11 @@ export interface IImageProps {
 }
 
 export interface IImageBaseProps {
-  url: string;
+  color?: string;
+  DefaultImageComponent?: React.ComponentType<any>;
+  url?: string;
   alt: string;
-  defaultImage: string;
+  defaultImage?: string;
   imageClassName?: string;
   defaultImageClassName?: string;
 }

@@ -4,8 +4,7 @@
 
 .details-history {
   &__header {
-    padding-left: $padding-xsmall;
-    padding-right: $padding-xsmall;
+    @include details-block-horizontal-paddings();
   }
 
   &__heading {

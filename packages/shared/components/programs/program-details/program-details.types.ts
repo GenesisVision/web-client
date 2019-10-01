@@ -6,7 +6,7 @@ import { CurrencyEnum } from "shared/utils/types";
 export interface IProgramControlsProps {
   isAuthenticated: boolean;
   programDescription: ProgramDetailsFull;
-  levelsParameters: LevelsParamsInfo;
+  data: LevelsParamsInfo;
 }
 
 export interface IProgramWithdrawalContainerProps extends IDialogProps {

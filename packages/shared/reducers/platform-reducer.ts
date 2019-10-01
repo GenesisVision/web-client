@@ -14,6 +14,8 @@ import {
 } from "shared/utils/selectors";
 import { AuthRootState } from "shared/utils/types";
 
+import { RootState } from "./root-reducer";
+
 export type PlatformState = IApiState<PlatformInfo>;
 
 export const platformDataSelector = apiSelector<PlatformInfo>(
@@ -35,7 +37,13 @@ export const programCurrenciesSelector = apiFieldSelector(
 export const platformCurrenciesSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.platformCurrencies),
-  []
+  [
+    { name: "BTC", color: "#F7931A", rateToGvt: 1 },
+    { name: "ETH", color: "#627EEA", rateToGvt: 1 },
+    { name: "USDT", color: "#26A17B", rateToGvt: 1 },
+    { name: "USD", color: "#207137", rateToGvt: 1 },
+    { name: "GVT", color: "#16B9AD", rateToGvt: 1 }
+  ]
 );
 
 export const programTagsSelector = apiFieldSelector(
@@ -88,7 +96,7 @@ export const allEventsSelector = createSelector<
 
 export const assetEventsSelectorCreator = (asset: ASSET) =>
   createSelector<
-    AuthRootState,
+    RootState,
     PlatformInfo | undefined,
     SelectFilterValue<string>[]
   >(

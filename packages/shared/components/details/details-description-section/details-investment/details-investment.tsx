@@ -1,8 +1,16 @@
 import "./details-investment.scss";
 
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/components/../constants/constants";
+import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
+import DetailsBlock from "shared/components/details/details-block";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
@@ -12,35 +20,68 @@ import {
   EVENT_LOCATION,
   getEvents
 } from "shared/components/programs/program-details/services/program-details.service";
-import Surface from "shared/components/surface/surface";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 import { TableSelectorType } from "shared/components/table/components/table.types";
+import { ASSET } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
-import { CurrencyEnum } from "shared/utils/types";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { RootState } from "shared/reducers/root-reducer";
+import {
+  CurrencyEnum,
+  DispatchDescriptionType,
+  FeesType
+} from "shared/utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
-import InvestmentContainer from "./investment-container";
+import InvestmentContainer, {
+  haveActiveInvestment,
+  haveSubscription
+} from "./investment-container";
 
 const _DetailsInvestment: React.FC<Props> = ({
-  selector,
-  haveEvents,
-  haveInvestment,
-  eventTypeFilterValues = [],
-  updateDescription,
-  id,
-  assetCurrency,
-  asset,
+  fees,
   notice,
+  asset,
+  eventTypesSelector,
+  selector,
+  currency,
+  service: { dispatchDescription },
+  id,
   personalDetails,
   WithdrawContainer,
   ProgramReinvestingWidget
 }) => {
+  const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   const [t] = useTranslation();
-  const { tab, setTab } = useTab<TABS>(
-    haveInvestment ? TABS.INVESTMENT : TABS.EVENTS
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const events = useSelector(selector);
+  const eventTypeFilterValues = useSelector(eventTypesSelector);
+  const dispatch = useDispatch();
+  const [haveEvents, setHaveEvents] = useState<boolean>(false);
+  useEffect(
+    () => {
+      isAuthenticated && id && dispatch(getEvents(id, EVENT_LOCATION.Asset)());
+    },
+    [isAuthenticated, id]
   );
+  useEffect(
+    () => {
+      isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);
+    },
+    [isAuthenticated, events]
+  );
+  const haveInvestment =
+    haveActiveInvestment(personalDetails) || haveSubscription(personalDetails);
+  const showInvestment = haveEvents || haveInvestment;
+  useEffect(
+    () => {
+      if (haveEvents && !haveInvestment) setTab(null, TABS.EVENTS);
+    },
+    [haveInvestment, haveEvents]
+  );
+  if (!showInvestment) return null;
   return (
-    <Surface className="details-investment">
+    <DetailsBlock table wide className="details-investment">
       <div className="details-investment__investment-tabs">
         <GVTabs value={tab} onChange={setTab}>
           <GVTab
@@ -57,11 +98,12 @@ const _DetailsInvestment: React.FC<Props> = ({
       </div>
       {tab === TABS.INVESTMENT && (
         <InvestmentContainer
-          updateDescription={updateDescription}
+          fees={fees}
+          updateDescription={dispatchDescription}
           asset={asset}
           notice={notice}
           id={id}
-          assetCurrency={assetCurrency}
+          assetCurrency={currency}
           personalDetails={personalDetails}
           WithdrawContainer={WithdrawContainer}
           ProgramReinvestingWidget={ProgramReinvestingWidget}
@@ -77,7 +119,7 @@ const _DetailsInvestment: React.FC<Props> = ({
           eventTypeFilterValues={eventTypeFilterValues!}
         />
       )}
-    </Surface>
+    </DetailsBlock>
   );
 };
 
@@ -85,17 +127,15 @@ enum TABS {
   INVESTMENT = "INVESTMENT",
   EVENTS = "EVENTS"
 }
-
-interface Props {
-  selector: TableSelectorType;
-  haveEvents: boolean;
-  haveInvestment: boolean;
-  eventTypeFilterValues: SelectFilterValue[];
-  updateDescription: () => void;
-  asset: ASSET;
+interface OwnProps {
+  fees: FeesType;
   notice?: string;
+  asset: ASSET;
+  eventTypesSelector: (state: RootState) => SelectFilterValue[];
+  dispatchDescription: DispatchDescriptionType;
+  selector: TableSelectorType;
+  currency: CurrencyEnum;
   id: string;
-  assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
   WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
   ProgramReinvestingWidget?: React.ComponentType<
@@ -103,5 +143,32 @@ interface Props {
   >;
 }
 
-const DetailsInvestment = React.memo(_DetailsInvestment);
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  { dispatchDescription }: Props
+): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      dispatchDescription
+    },
+    dispatch
+  )
+});
+
+interface ServiceThunks extends ActionCreatorsMapObject {
+  dispatchDescription: DispatchDescriptionType;
+}
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+
+interface Props extends DispatchProps, OwnProps {}
+
+const DetailsInvestment = compose<React.ComponentType<OwnProps>>(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  React.memo
+)(_DetailsInvestment);
 export default DetailsInvestment;

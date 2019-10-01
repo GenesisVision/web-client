@@ -21,6 +21,7 @@ $font-size-common: 13px;
 $font-size-small: 12px;
 
 //others
+$details-block-padding: $padding-small;
 $tag-font-size: 11px;
 $border-radius: 5px;
 $border-radius-middle: 8px;
@@ -102,4 +103,23 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   @include media-breakpoint-landscape-phone() {
     margin-#{$direction}: $margin-size;
   }
+}
+
+@mixin details-block-left-padding() {
+  padding-left: $details-block-padding;
+  @include media-breakpoint-landscape-phone() {
+    padding-left: $details-block-padding;
+  }
+}
+
+@mixin details-block-right-padding() {
+  padding-right: $details-block-padding;
+  @include media-breakpoint-landscape-phone() {
+    padding-right: $details-block-padding;
+  }
+}
+
+@mixin details-block-horizontal-paddings() {
+  @include details-block-left-padding();
+  @include details-block-right-padding();
 }

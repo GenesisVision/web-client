@@ -102,7 +102,10 @@ export const editAsset = (
           true
         )
       );
-    });
+    })
+    .catch(({ errorMessage }) =>
+      dispatch(alertMessageActions.error(errorMessage))
+    ) as CancelablePromise<void>;
 };
 
 export const closeProgram: TCloseAsset = ({

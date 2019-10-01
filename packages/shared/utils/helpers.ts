@@ -1,3 +1,4 @@
+import randomString from "randomstring";
 import { NumberFormatValues } from "react-number-format";
 
 import { Nullable } from "./types";
@@ -76,7 +77,14 @@ const getNumberWithoutSuffix = (str: string): Nullable<number> => {
 const convertToArray = (value: any): any[] =>
   Array.isArray(value) ? value : [value];
 
+const getRandomInteger = (min: number, max: number): number =>
+  Math.floor(min + Math.random() * (max + 1 - min));
+
+const getRandomText = (params: Object) => randomString.generate(params);
+
 export {
+  getRandomText,
+  getRandomInteger,
   getType,
   getArrayType,
   allowValuesNumberFormat,

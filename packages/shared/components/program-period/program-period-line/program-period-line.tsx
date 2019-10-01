@@ -1,6 +1,7 @@
 import "./program-period-line.scss";
 
 import classNames from "classnames";
+import { ProgramDetailsFullStatusEnum } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -14,7 +15,7 @@ const calcDuration = (start: number | Date, end: number | Date): string => {
   return moment.duration(dateEnd.diff(dateStart)).humanize();
 };
 
-const ProgramPeriodLine: React.FC<Props> = ({
+const _ProgramPeriodLine: React.FC<Props> = ({
   start,
   end,
   className,
@@ -47,7 +48,8 @@ interface Props {
   start: number | Date;
   end: number | Date;
   className?: string;
-  status: STATUS;
+  status: ProgramDetailsFullStatusEnum;
 }
 
-export default React.memo(ProgramPeriodLine);
+const ProgramPeriodLine = React.memo(_ProgramPeriodLine);
+export default ProgramPeriodLine;

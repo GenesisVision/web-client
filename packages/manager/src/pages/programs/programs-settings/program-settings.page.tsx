@@ -1,13 +1,15 @@
 import "shared/components/details/details.scss";
 
-import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
+import {
+  BrokersProgramInfo,
+  ProgramDetailsFullTradesDelayEnum
+} from "gv-api-web";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { ResolveThunks, connect, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
   Dispatch,
@@ -21,7 +23,7 @@ import {
   getProgramBrokers
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
-import { RootState } from "shared/reducers/root-reducer";
+import { programsInfoSelector } from "shared/reducers/platform-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
@@ -39,10 +41,10 @@ const _ProgramsEditPage: React.FC<Props> = ({
     changeBrokerMethod,
     cancelChangeBrokerMethod,
     dispatchDescription
-  },
-  t,
-  description
+  }
 }) => {
+  const programsInfo = useSelector(programsInfoSelector);
+  const description = useSelector(programDescriptionSelector);
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
   >(undefined);
@@ -54,9 +56,11 @@ const _ProgramsEditPage: React.FC<Props> = ({
   );
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
-      programEditSignal(description!.id, successFee!, volumeFee!).then(
-        dispatchDescription
-      ),
+      programEditSignal({
+        id: description!.id,
+        successFee: successFee!,
+        volumeFee: volumeFee!
+      }).then(dispatchDescription),
     [description]
   );
   const changeBroker = useCallback(
@@ -87,7 +91,8 @@ const _ProgramsEditPage: React.FC<Props> = ({
       dispatchDescription={dispatchProgramDescription}
       settingsBlocks={(editProgram, applyCloseAsset) => (
         <ProgramSettings
-          condition={!!description && !!brokersInfo}
+          condition={!!description && !!brokersInfo && !!programsInfo}
+          programsInfo={programsInfo}
           closePeriod={dispatchProgramDescription}
           closeProgram={applyCloseAsset}
           details={description!}
@@ -103,10 +108,6 @@ const _ProgramsEditPage: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  description: programDescriptionSelector(state)
-});
-
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
@@ -121,19 +122,19 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 export type TUpdateProgramFunc = (
   values: {
+    tradesDelay?: ProgramDetailsFullTradesDelayEnum;
     description?: string;
     logo?: IImageValue;
     investmentLimit?: number;
     stopOutLevel?: number;
+    entryFee?: number;
+    successFee?: number;
   },
-  setSubmitting: SetSubmittingType
+  setSubmitting: SetSubmittingType,
+  resetForm?: () => void
 ) => void;
 
 interface OwnProps {}
-
-interface StateProps {
-  description?: ProgramDetailsFull;
-}
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   cancelChangeBrokerMethod: typeof cancelChangeBrokerMethod;
@@ -145,12 +146,11 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, DispatchProps, WithTranslation, StateProps {}
+interface Props extends OwnProps, DispatchProps {}
 
 const ProgramSettingsPage = compose<React.ComponentType<OwnProps>>(
-  translate(),
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   ),
   React.memo

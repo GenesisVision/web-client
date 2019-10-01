@@ -1,7 +1,9 @@
 import {
   CancelablePromise,
+  PasswordModel,
   RecoveryCodesViewModel,
-  TwoFactorAuthenticatorConfirm
+  TwoFactorAuthenticatorConfirm,
+  TwoFactorCodeModel
 } from "gv-api-web";
 import authActions from "shared/actions/auth-actions";
 import authApi from "shared/services/api-client/auth-api";
@@ -24,3 +26,9 @@ export const confirm2fa = (
       return response;
     });
 };
+
+export const sendPassword = (model: PasswordModel) =>
+  authApi.v10Auth2faRecoverycodesNewPost(authService.getAuthArg(), { model });
+
+export const disableTFA = (model: TwoFactorCodeModel) =>
+  authApi.v10Auth2faDisablePost(authService.getAuthArg(), { model });

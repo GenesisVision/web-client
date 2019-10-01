@@ -2,8 +2,8 @@ import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
-import useErrorMessage from "shared/hooks/error-message.hook";
-import { ResponseError, SetSubmittingType } from "shared/utils/types";
+import useApiRequest from "shared/hooks/api-request.hook";
+import { SetSubmittingType } from "shared/utils/types";
 
 import ProgramSignalForm, {
   IProgramSignalFormValues
@@ -17,26 +17,21 @@ const _ProgramSignalPopup: React.FC<Props> = ({
   open,
   header
 }) => {
-  const {
-    errorMessage,
-    setErrorMessage,
-    cleanErrorMessage
-  } = useErrorMessage();
+  const { errorMessage, cleanErrorMessage, sendRequest } = useApiRequest({
+    request: serviceMethod
+  });
   const handleApply = useCallback(
     (values: IProgramSignalFormValues, setSubmitting: SetSubmittingType) => {
-      serviceMethod(
-        programDescription.id,
-        values.successFee!,
-        values.volumeFee!
+      sendRequest(
+        {
+          id: programDescription.id,
+          successFee: values.successFee!,
+          volumeFee: values.volumeFee!
+        },
+        setSubmitting
       )
-        .then(() => {
-          handleClose();
-          onApply();
-        })
-        .catch(error => {
-          setSubmitting(false);
-          setErrorMessage(error);
-        });
+        .then(onApply)
+        .then(handleClose);
     },
     []
   );
@@ -73,9 +68,9 @@ interface OwnProps {
   programDescription: ProgramDetailsFull;
   header: string;
   onApply(): void;
-  serviceMethod(
-    id: string,
-    successFee: number,
-    volumeFee: number
-  ): Promise<void>;
+  serviceMethod(values: {
+    id: string;
+    successFee: number;
+    volumeFee: number;
+  }): Promise<void>;
 }

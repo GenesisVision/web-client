@@ -2,6 +2,7 @@ import "./dialog.scss";
 
 import classNames from "classnames";
 import * as React from "react";
+import { ReactNode } from "react";
 import GVButton from "shared/components/gv-button";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import Modal, { BodyFix } from "shared/components/modal/modal";
@@ -48,6 +49,7 @@ const Dialog = React.memo(_Dialog);
 export default Dialog;
 
 export interface IDialogProps {
+  children?: ReactNode;
   open: boolean;
   onClose: (param?: any) => void;
   className?: string;

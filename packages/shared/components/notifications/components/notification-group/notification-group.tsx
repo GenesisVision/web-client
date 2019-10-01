@@ -1,6 +1,5 @@
 import { NotificationViewModel } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import Notification from "shared/components/notifications/components/notification/notification";
 
 const _NotificationsGroup: React.FC<Props> = ({
@@ -20,11 +19,11 @@ const _NotificationsGroup: React.FC<Props> = ({
   </div>
 );
 
-interface Props extends WithTranslation {
+interface Props {
   title: string;
   notifications: NotificationViewModel[];
   closeNotifications(): void;
 }
 
-const NotificationsGroup = translate()(React.memo(_NotificationsGroup));
+const NotificationsGroup = React.memo(_NotificationsGroup);
 export default NotificationsGroup;

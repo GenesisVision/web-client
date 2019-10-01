@@ -6,7 +6,9 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import {
   assetDescriptionShape,
-  assetTitleShape
+  assetTitleShape,
+  entryFeeShape,
+  exitFeeShape
 } from "shared/utils/validators/validators";
 import { array, number, object } from "yup";
 
@@ -18,11 +20,19 @@ import {
 const createFundSettingsValidationSchema = (
   props: ICreateFundSettingsProps & WithTranslation
 ) => {
-  const { t } = props;
+  const {
+    t,
+    rate,
+    wallet,
+    managerMaxEntryFee,
+    managerMaxExitFee,
+    minimumDepositAmount,
+    fundCurrency
+  } = props;
   const minDeposit = parseFloat(
     formatCurrencyValue(
-      convertToCurrency(props.minimumDepositAmount, props.rate),
-      props.fundCurrency
+      convertToCurrency(minimumDepositAmount, rate),
+      fundCurrency
     )
   );
   return object().shape({
@@ -37,31 +47,15 @@ const createFundSettingsValidationSchema = (
         })
       )
       .max(
-        props.wallet.available,
+        wallet.available,
         t("manager.create-program-page.settings.validation.amount-is-large")
       ),
     [CREATE_FUND_FIELDS.logo]: inputImageShape(t),
     [CREATE_FUND_FIELDS.title]: assetTitleShape(t),
     [CREATE_FUND_FIELDS.description]: assetDescriptionShape(t),
 
-    [CREATE_FUND_FIELDS.entryFee]: number()
-      .required(
-        t("manager.create-fund-page.settings.validation.entry-fee-required")
-      )
-      .min(0, "Entry fee must be greater than 0 % ")
-      .max(
-        props.managerMaxEntryFee,
-        "Entry fee must be less than  " + props.managerMaxEntryFee + " %"
-      ),
-    [CREATE_FUND_FIELDS.exitFee]: number()
-      .required(
-        t("manager.create-fund-page.settings.validation.exit-fee-required")
-      )
-      .min(0, "Exit fee must be greater than 0 % ")
-      .max(
-        props.managerMaxExitFee,
-        "Exit fee must be less than  " + props.managerMaxExitFee + " %"
-      ),
+    [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, managerMaxEntryFee),
+    [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, managerMaxExitFee),
     [CREATE_FUND_FIELDS.assets]: assetsShape(t)
   });
 };

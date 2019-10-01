@@ -27,9 +27,9 @@ const _SignalProviderControls: React.FC<Props> = ({
   const [isOpenUnFollow, setIsOpenUnFollow, setIsCloseUnFollow] = useIsOpen();
   const [isOpenUnAuth, setIsOpenUnAuth, setIsCloseUnAuth] = useIsOpen();
   return (
-    <>
+    <div className="details-description__control-elements-block">
       <SignalProgramInfo programDescription={programDescription} />
-      <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
+      <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         {programDescription.personalProgramDetails &&
         programDescription.personalProgramDetails.signalSubscription
           .hasActiveSubscription ? (
@@ -37,7 +37,7 @@ const _SignalProviderControls: React.FC<Props> = ({
             <GVButton
               color="secondary"
               variant="outlined"
-              className="program-details-description__invest-btn"
+              className="asset-details-description__invest-btn"
               onClick={setIsOpenUnFollow}
             >
               {t("program-details-page.description.unfollow")}
@@ -45,7 +45,7 @@ const _SignalProviderControls: React.FC<Props> = ({
           </>
         ) : (
           <GVButton
-            className="program-details-description__invest-btn"
+            className="asset-details-description__invest-btn"
             onClick={isAuthenticated ? setIsOpenFollow : setIsOpenUnAuth}
           >
             {t("program-details-page.description.follow-trade")}
@@ -81,7 +81,7 @@ const _SignalProviderControls: React.FC<Props> = ({
         open={isOpenUnAuth}
         onClose={setIsCloseUnAuth}
       />
-    </>
+    </div>
   );
 };
 

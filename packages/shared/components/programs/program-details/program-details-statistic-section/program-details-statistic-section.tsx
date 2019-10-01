@@ -1,60 +1,76 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
+import { ProgramBalanceChartElement } from "gv-api-web";
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  ChartDefaultPeriod,
-  DEFAULT_PERIOD
-} from "shared/components/chart/chart-period/chart-period.helpers";
-import { STATUS } from "shared/constants/constants";
+import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
+import {
+  profitChartDataLoaderData,
+  statisticDataLoaderData
+} from "../program-details.loader-data";
 import { programBalanceChartSelector } from "../reducers/balance-chart.reducer";
+import { programStatusSelector } from "../reducers/description.reducer";
 import { programProfitChartSelector } from "../reducers/profit-chart.reducer";
+import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
+import ProgramBalanceChart from "./program-details-chart-section/program-balance-chart-section/program-balance-chart";
 import {
-  getBalanceChart,
-  getProfitChart
-} from "../services/program-details.service";
-import ProgramDetailsChart from "./program-details-chart-section/program-details-chart";
-import ProgramDetailsStatistics from "./program-details-statistics/program-details-statistics";
+  useChartPeriod,
+  useProgramChartStateValues
+} from "./program-details-chart-section/program-details.chart.helpers";
+import ProgramProfitChart from "./program-details-chart-section/program-profit-chart-section/program-profit-chart";
+import ProgramDetailsStatisticsElements, {
+  IProgramStatisticData
+} from "./program-details-statistics/program-details-statistics-elements";
 
-const _ProgramDetailsStatisticSection: React.FC<Props> = ({ status, id }) => {
-  const dispatch = useDispatch();
-  const profitChart = useSelector(programProfitChartSelector);
-  const balanceChart = useSelector(programBalanceChartSelector);
-  const [period, setPeriod] = useState<ChartDefaultPeriod>(DEFAULT_PERIOD);
-  useEffect(
-    () => {
-      dispatch(getProfitChart({ id, period }));
-      dispatch(getBalanceChart({ id, period }));
-    },
-    [period, id]
-  );
+const _ProgramDetailsStatisticSection: React.FC = () => {
+  const status = useSelector(programStatusSelector);
+  const statisticCurrency = useSelector(statisticCurrencySelector);
   return (
-    <div className="details-statistic-section">
-      <div className="details-statistic-section__statistic">
-        <ProgramDetailsStatistics
-          profitChart={profitChart!}
-          period={period}
+    <DetailsStatisticSection
+      loaderData={profitChartDataLoaderData}
+      balanceChartSelector={programBalanceChartSelector}
+      profitChartSelector={programProfitChartSelector}
+      statisticCurrencySelector={statisticCurrencySelector}
+      useChartStateValues={useProgramChartStateValues}
+      useChartPeriod={useChartPeriod}
+      renderProfitValue={({ chart }) => (
+        <NumberFormat
+          value={formatCurrencyValue(
+            "timeframeProfit" in chart ? chart.timeframeProfit : 0,
+            statisticCurrency
+          )}
+          thousandSeparator={" "}
+          displayType="text"
+          suffix={` ${statisticCurrency}`}
+        />
+      )}
+      renderBalanceChart={({ color, currency, balanceChart }) => (
+        <ProgramBalanceChart
+          color={color}
+          balanceChart={balanceChart as ProgramBalanceChartElement[]}
+          currency={currency}
+        />
+      )}
+      renderProfitChart={({ profitChart, chartCurrencies }) => (
+        <ProgramProfitChart
+          profitChart={profitChart}
+          chartCurrencies={chartCurrencies}
+        />
+      )}
+      renderDetailsStatisticsElements={({ period, statisticData }) => (
+        <ProgramDetailsStatisticsElements
+          loaderData={statisticDataLoaderData}
           status={status}
-        />
-      </div>
-      <div className="details-statistic-section__chart">
-        <ProgramDetailsChart
+          data={statisticData! as IProgramStatisticData}
           period={period}
-          onPeriodChange={setPeriod}
-          profitChart={profitChart!}
-          balanceChart={balanceChart!}
         />
-      </div>
-    </div>
+      )}
+    />
   );
 };
-
-interface Props {
-  id: string;
-  status: STATUS;
-}
 
 const ProgramDetailsStatisticSection = React.memo(
   _ProgramDetailsStatisticSection

@@ -7,9 +7,13 @@ import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "shared/utils/types";
 
-export const updateAssets = (id: string, assets: FundAssetPart[]) => (
-  dispatch: MiddlewareDispatch
-): CancelablePromise<void> => {
+export const updateAssets = ({
+  id,
+  assets
+}: {
+  id: string;
+  assets: FundAssetPart[];
+}) => (dispatch: MiddlewareDispatch): CancelablePromise<void> => {
   const authorization = authService.getAuthArg();
   return managerApi
     .v10ManagerFundsByIdAssetsUpdatePost(id, authorization, {
@@ -25,6 +29,7 @@ export const updateAssets = (id: string, assets: FundAssetPart[]) => (
     });
 };
 export const alert = (
+  // TODO What is it?..
   type: ALERT_ACTIONS_FIELDS,
   text: string,
   translate = false

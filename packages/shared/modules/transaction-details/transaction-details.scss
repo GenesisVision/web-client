@@ -13,6 +13,10 @@
   display: flex;
   flex-direction: row;
 
+  & .program-avatar__level {
+    background-color: $secondary-background-color;
+  }
+
   &--fund {
     .program-avatar {
       margin-right: 0;

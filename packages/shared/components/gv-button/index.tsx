@@ -7,7 +7,7 @@ interface GVButtonProps {
   id?: string;
   title?: string;
   variant?: "text" | "outlined" | "contained";
-  color?: "primary" | "secondary" | "primary-dark";
+  color?: "primary" | "secondary" | "primary-dark" | "danger";
   type?: "button" | "submit";
   className?: string;
   disabled?: boolean;
@@ -31,6 +31,7 @@ const GVButton: React.FC<GVButtonProps> = ({
   noPadding
 }) => {
   const classname = classnames("gv-btn", className, {
+    "gv-btn--danger": color === "danger",
     "gv-btn--primary": color === "primary",
     "gv-btn--secondary": color === "secondary",
     "gv-btn--primary-dark": color === "primary-dark",

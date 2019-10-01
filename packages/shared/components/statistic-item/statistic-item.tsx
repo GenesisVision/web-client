@@ -48,15 +48,17 @@ const _StatisticItem: React.FC<Props> = ({
         className
       )}
     >
-      <div
-        className={classNames(
-          "statistics-item__top",
-          labelClassName,
-          generateClasses(ITEM.LABEL)
-        )}
-      >
-        {label}
-      </div>
+      {label && (
+        <div
+          className={classNames(
+            "statistics-item__top",
+            labelClassName,
+            generateClasses(ITEM.LABEL)
+          )}
+        >
+          {label}
+        </div>
+      )}
       <div className={generateClasses(ITEM.VALUE)}>{children}</div>
       {equivalent !== undefined && equivalentCurrency !== undefined ? (
         <div className="statistics-item__equivalent">
@@ -78,7 +80,7 @@ enum ITEM {
 }
 
 interface Props {
-  label: string | React.ReactNode;
+  label?: string | React.ReactNode;
   equivalent?: number;
   equivalentCurrency?: string;
   small?: boolean;

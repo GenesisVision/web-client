@@ -2,167 +2,99 @@ import "shared/components/details/details.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect, useDispatch, useSelector } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { compose } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
-import {
-  haveActiveInvestment,
-  haveSubscription
-} from "shared/components/details/details-description-section/details-investment/investment-container";
 import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
+import { ASSET } from "shared/constants/constants";
 import {
-  EVENT_LOCATION,
-  dispatchProgramDescription,
-  getEvents
-} from "shared/components/programs/program-details/services/program-details.service";
-import { ASSET, STATUS } from "shared/constants/constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+  WithBlurLoaderProps,
+  withBlurLoader
+} from "shared/decorators/with-blur-loader";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
 
+import { statisticCurrencyAction } from "./actions/program-details.actions";
 import { IDescriptionSection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
 import { programEventsTableSelector } from "./reducers/program-history.reducer";
+import { dispatchProgramDescription } from "./services/program-details.service";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
-  service: { dispatchProgramDescription },
   descriptionSection,
-  description
+  data: description
 }) => {
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const events = useSelector(programEventsTableSelector);
-  const eventTypeFilterValues = useSelector(programEventsSelector);
   const dispatch = useDispatch();
-  const [t] = useTranslation();
-  const [haveEvents, setHaveEvents] = useState<boolean>(false);
   useEffect(
     () => {
-      isAuthenticated &&
-        dispatch(getEvents(description.id, EVENT_LOCATION.Asset)());
+      dispatch(statisticCurrencyAction(description.currency));
     },
-    [isAuthenticated]
+    [description]
   );
-  useEffect(
-    () => {
-      isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);
-    },
-    [isAuthenticated, events]
-  );
-  const isInvested =
-    description.personalProgramDetails &&
-    description.personalProgramDetails.isInvested;
-  const haveInvestment =
-    haveActiveInvestment(
-      description.personalProgramDetails as InvestmentDetails
-    ) ||
-    haveSubscription(description.personalProgramDetails as InvestmentDetails);
-  const showInvestment = haveEvents || haveInvestment;
-
   return (
     <Page title={description.title}>
-      <div className="details">
-        <div className="details__section">
-          <ProgramDetailsDescriptionSection
-            programDescription={description}
-            isAuthenticated={isAuthenticated}
-            ProgramControls={descriptionSection.ProgramControls}
-          />
-        </div>
-        <div className="details__section">
-          {showInvestment && (
-            <DetailsInvestment
-              selector={programEventsTableSelector}
-              haveEvents={haveEvents}
-              haveInvestment={haveInvestment}
-              eventTypeFilterValues={eventTypeFilterValues}
-              updateDescription={dispatchProgramDescription}
-              notice={t(
-                "program-details-page.description.withdraw-notice-text"
-              )}
-              asset={ASSET.PROGRAM}
-              id={description.id}
-              assetCurrency={description.currency}
-              personalDetails={
-                description.personalProgramDetails as InvestmentDetails
-              } // TODO fix type InvestmentDetails
-              ProgramReinvestingWidget={
-                descriptionSection.ProgramReinvestingWidget
-              }
-              WithdrawContainer={descriptionSection.ProgramWithdrawContainer}
-            />
-          )}
-        </div>
-        <div className="details__section">
-          <ProgramDetailsStatisticSection
-            status={description.status as STATUS}
-            id={description.id}
-          />
-        </div>
-        <div className="details__history">
-          <ProgramDetailsHistorySection
-            showCommissionRebateSometime={
-              description.brokerDetails.showCommissionRebateSometime
-            }
-            isOwnProgram={
-              description.personalProgramDetails
-                ? description.personalProgramDetails.isOwnProgram
-                : false
-            }
-            showSwaps={description.brokerDetails.showSwaps}
-            showTickets={description.brokerDetails.showTickets}
-            isSignalProgram={description.isSignalProgram}
-            programId={description.id}
-            programCurrency={description.currency}
-            isInvested={isInvested}
-            title={description.title}
-          />
-        </div>
-      </div>
+      <ProgramDetailsDescriptionSection
+        programDescription={description}
+        ProgramControls={descriptionSection.ProgramControls}
+      />
+      <div className="details__divider" />
+      <DetailsInvestment
+        fees={{
+          successFee: description.successFee,
+          successFeePersonal:
+            description.personalProgramDetails &&
+            description.personalProgramDetails.successFeePersonal,
+          successFeeCurrent: description.successFeeCurrent,
+          successFeeSelected: description.successFeeSelected,
+          entryFee: description.entryFee,
+          entryFeeCurrent: description.entryFeeCurrent,
+          entryFeeSelected: description.entryFeeSelected
+        }}
+        dispatchDescription={dispatchProgramDescription}
+        eventTypesSelector={programEventsSelector}
+        asset={ASSET.PROGRAM}
+        selector={programEventsTableSelector}
+        id={description.id}
+        currency={description.currency}
+        personalDetails={
+          description.personalProgramDetails as InvestmentDetails
+        }
+        ProgramReinvestingWidget={descriptionSection.ProgramReinvestingWidget}
+        WithdrawContainer={descriptionSection.ProgramWithdrawContainer}
+      />
+      <ProgramDetailsStatisticSection />
+      <ProgramDetailsHistorySection
+        showCommissionRebateSometime={
+          description.brokerDetails.showCommissionRebateSometime
+        }
+        isOwnProgram={
+          description.personalProgramDetails
+            ? description.personalProgramDetails.isOwnProgram
+            : false
+        }
+        showSwaps={description.brokerDetails.showSwaps}
+        showTickets={description.brokerDetails.showTickets}
+        isSignalProgram={description.isSignalProgram}
+        programId={description.id}
+        programCurrency={description.currency}
+        title={description.title}
+      />
     </Page>
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      dispatchProgramDescription
-    },
-    dispatch
-  )
-});
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  dispatchProgramDescription: typeof dispatchProgramDescription;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface OwnProps {
+interface Props {
   descriptionSection: IDescriptionSection;
-  description: ProgramDetailsFull;
+  data: ProgramDetailsFull;
 }
-
-interface Props extends OwnProps, DispatchProps {}
 
 const ProgramDetailsContainer = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
+  React.ComponentType<Props & WithBlurLoaderProps<ProgramDetailsFull>>
 >(
-  withLoader,
-  connect(
-    null,
-    mapDispatchToProps
-  ),
+  withBlurLoader,
   React.memo
 )(_ProgramDetailsContainer);
 export default ProgramDetailsContainer;

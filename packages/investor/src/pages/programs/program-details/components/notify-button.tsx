@@ -1,45 +1,38 @@
 import "./notify-button.scss";
 
-import { subscribeAvailableToInvest } from "pages/programs/program-details/services/program-details.service";
-import React, { useCallback, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import Tooltip from "shared/components/tooltip/tooltip";
-import useIsOpen from "shared/hooks/is-open.hook";
+import useApiRequest from "shared/hooks/api-request.hook";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { getInvestmentInfoAction } from "../services/program-details.service";
+
 const _NotifyButton: React.FC<Props> = ({
-  t,
   notificationId: propNotificationId,
   canInvest,
   assetId,
-  subscribeAvailableToInvest,
   currency
 }) => {
-  const [isPending, setIsPending, setNotIsPending] = useIsOpen();
-  const [notificationId, setNotificationId] = useState<string | undefined>(
-    propNotificationId
-  );
+  const [t] = useTranslation();
+  const { isPending, sendRequest, data } = useApiRequest({
+    request: getInvestmentInfoAction
+  });
   const handleClick = useCallback(
-    () => {
-      setIsPending();
-      subscribeAvailableToInvest({
-        assetId: assetId,
-        currency: currency
-      })
-        .then(setNotificationId)
-        .finally(setNotIsPending);
-    },
+    () =>
+      sendRequest({
+        assetId,
+        currency
+      }),
     [assetId, currency]
   );
   return (
     <div className="notify-button">
       <GVButton
-        className="program-details-description__invest-btn"
+        className="asset-details-description__invest-btn"
         onClick={handleClick}
-        disabled={Boolean(notificationId || isPending || !canInvest)}
+        disabled={Boolean(data || isPending || !canInvest)}
       >
         {t("buttons.notify")}
       </GVButton>
@@ -50,32 +43,12 @@ const _NotifyButton: React.FC<Props> = ({
   );
 };
 
-const NotifyButton = compose<React.FC<OwnProps>>(
-  translate(),
-  connect(
-    undefined,
-    {
-      subscribeAvailableToInvest
-    }
-  ),
-  React.memo
-)(_NotifyButton);
-export default NotifyButton;
-
-interface OwnProps {
+interface Props {
   assetId: string;
   notificationId?: string;
   currency: CurrencyEnum;
   canInvest: boolean;
 }
 
-interface DispatchProps {
-  subscribeAvailableToInvest: (
-    props: {
-      assetId: string;
-      currency: string;
-    }
-  ) => Promise<string>;
-}
-
-interface Props extends OwnProps, WithTranslation, DispatchProps {}
+const NotifyButton = React.memo(_NotifyButton);
+export default NotifyButton;
