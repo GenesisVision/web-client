@@ -32,7 +32,9 @@
     }
 
     & .deposit-amount-field {
-      margin: $padding-xsmall 0;
+      & .gv-text-field__wrapper {
+        margin: 16px 0;
+      }
     }
 
     & .gv-text-field__error {
