@@ -29,7 +29,7 @@ const _InputDepositAmount: React.FC<Props> = ({
     [name]
   );
   return (
-    <CreateAssetField>
+    <CreateAssetField className="deposit-amount-field">
       <InputAmountField
         autoFocus={false}
         name={name}
