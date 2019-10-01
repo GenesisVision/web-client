@@ -5,10 +5,12 @@ import GVTextField from "shared/components/gv-text-field";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
+import CreateAssetField from "../create-asset-field/create-asset-field";
+
 const _StopOutField: React.FC<Props> = ({ name }) => {
   const { t } = useTranslation();
   return (
-    <div className="create-program-settings__field">
+    <CreateAssetField>
       <GVFormikField
         name={name}
         label={t("manager.create-program-page.settings.fields.stop-out-level")}
@@ -26,7 +28,7 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
           "manager.create-program-page.settings.hints.stop-out-level-description"
         )}
       />
-    </div>
+    </CreateAssetField>
   );
 };
 

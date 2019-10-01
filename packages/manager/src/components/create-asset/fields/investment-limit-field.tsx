@@ -6,6 +6,8 @@ import GVFormikField from "shared/components/gv-formik-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { CurrencyEnum } from "shared/utils/types";
 
+import CreateAssetField from "../create-asset-field/create-asset-field";
+
 const _InvestmentLimitField: React.FC<Props> = ({
   checkboxName,
   inputName,
@@ -16,7 +18,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <>
-      <div className="create-program-settings__field create-program-settings__field--wider">
+      <CreateAssetField wide>
         <GVFormikField
           type="checkbox"
           color="primary"
@@ -30,9 +32,9 @@ const _InvestmentLimitField: React.FC<Props> = ({
           }
           component={GVCheckbox}
         />
-      </div>
+      </CreateAssetField>
       {hasInvestmentLimit && (
-        <div className="create-program-settings__field">
+        <CreateAssetField>
           <InputAmountField
             autoFocus={false}
             isAllow={isAllow}
@@ -42,7 +44,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
             )}
             currency={currency}
           />
-        </div>
+        </CreateAssetField>
       )}
     </>
   );
