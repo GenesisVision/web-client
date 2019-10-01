@@ -4,10 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { rateApi } from "shared/services/api-client/rate-api";
 import { CurrencyEnum, ResponseError, SetSubmittingType } from "shared/utils/types";
 
-import { createProgram } from "../../services/create-program.service";
+import { createProgram, fetchRate } from "../../services/create-program.service";
 import CreateProgramSettings, { ICreateProgramSettingsFormValues } from "./create-program-settings";
 
 const getCurrency = (accountType: BrokerAccountType): CurrencyEnum =>
@@ -24,7 +23,7 @@ const _CreateProgramSettingsSection: React.FC<OwnProps> = ({
   onSubmit,
   minimumDepositsAmount,
   navigateBack,
-  author,
+  author
 }) => {
   const dispatch = useDispatch();
   const brokerAccountType = broker.accountTypes[0];
@@ -44,9 +43,7 @@ const _CreateProgramSettingsSection: React.FC<OwnProps> = ({
 
   useEffect(
     () => {
-      rateApi
-        .v10RateByFromByToGet(wallet.currency, programCurrency)
-        .then(setRate);
+      fetchRate(wallet.currency, programCurrency).then(setRate);
     },
     [programCurrency, wallet]
   );
