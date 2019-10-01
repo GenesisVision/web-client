@@ -1,3 +1,4 @@
+import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -13,7 +14,7 @@ const _Leverage: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="create-program-settings__field">
+    <CreateAssetField>
       <GVFormikField
         name={name}
         component={GVTextField}
@@ -32,7 +33,7 @@ const _Leverage: React.FC<Props> = ({
           </option>
         ))}
       </GVFormikField>
-    </div>
+    </CreateAssetField>
   );
 };
 

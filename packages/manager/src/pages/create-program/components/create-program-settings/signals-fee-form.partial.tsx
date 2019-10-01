@@ -1,3 +1,4 @@
+import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -23,7 +24,7 @@ const SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
       <div className="create-asset-settings__row-title">
         {t("manager.create-program-page.settings.signal-provider-fees")}
       </div>
-      <div className="create-asset-settings__field">
+      <CreateAssetField>
         <GVFormikField
           name={volumeFeeFieldName}
           label={t(
@@ -46,8 +47,8 @@ const SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             "manager.create-program-page.settings.hints.signal-volume-fee-description"
           )}
         />
-      </div>
-      <div className="create-asset-settings__field">
+      </CreateAssetField>
+      <CreateAssetField>
         <GVFormikField
           name={successFeeFieldName}
           label={t(
@@ -69,7 +70,7 @@ const SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             "manager.create-program-page.settings.hints.signal-success-fee-description"
           )}
         />
-      </div>
+      </CreateAssetField>
     </div>
   );
 };

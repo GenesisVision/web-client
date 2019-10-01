@@ -1,3 +1,4 @@
+import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
 import { ProgramsInfo } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +9,7 @@ import Select from "shared/components/select/select";
 const _PeriodLength: React.FC<Props> = ({ name, programsInfo }) => {
   const [t] = useTranslation();
   return (
-    <div className="create-program-settings__field">
+    <CreateAssetField>
       <GVFormikField
         name={name}
         component={GVTextField}
@@ -24,7 +25,7 @@ const _PeriodLength: React.FC<Props> = ({ name, programsInfo }) => {
           </option>
         ))}
       </GVFormikField>
-    </div>
+    </CreateAssetField>
   );
 };
 

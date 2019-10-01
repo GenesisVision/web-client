@@ -1,3 +1,4 @@
+import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
 import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
 import { WalletData } from "gv-api-web";
 import React from "react";
@@ -30,7 +31,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
       blockNumber={`0${blockNumber}`}
       withBorder={false}
     >
-      <div className="create-program-settings__field deposit-details">
+      <CreateAssetField className="deposit-details">
         <div className="deposit-amount-field">
           <WalletSelect
             name={walletFieldName}
@@ -54,7 +55,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
           walletAvailable={walletAvailable}
           walletCurrency={walletCurrency}
         />
-      </div>
+      </CreateAssetField>
     </CreateAssetSection>
   );
 };
