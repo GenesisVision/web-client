@@ -4,7 +4,8 @@ import "./create-fund-settings.scss";
 
 import { InjectedFormikProps, withFormik } from "formik";
 import { FundAssetPart, PlatformAsset, WalletData } from "gv-api-web";
-import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
+import CreateAssetNavigation
+  from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
 import DepositDetailsBlock from "pages/create-program/components/create-program-settings/fields/deposit-details-block";
 import ReallocateField from "pages/funds/fund-settings/reallocation/components/reallocate-field";
 import * as React from "react";
@@ -14,7 +15,6 @@ import DescriptionBlock from "shared/components/fields/description-block";
 import FeesSettings from "shared/components/fields/fees-settings";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import GVFormikField from "shared/components/gv-formik-field";
-import { ISelectChangeEvent } from "shared/components/select/select";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
@@ -33,10 +33,6 @@ class _CreateFundSettings extends React.PureComponent<
       validateForm();
     }
   }
-
-  onChangeDepositWallet = (name: ISelectChangeEvent, target: JSX.Element) => {
-    this.props.onWalletChange(target.props.value);
-  };
 
   validateAndSubmit = (e?: React.FormEvent<HTMLFormElement> | undefined) => {
     const { t, isValid, handleSubmit, notifyError } = this.props;
@@ -136,7 +132,7 @@ class _CreateFundSettings extends React.PureComponent<
             wallets={wallets}
             rate={rate}
             setFieldValue={setFieldValue}
-            onWalletChange={this.onChangeDepositWallet}
+            onWalletChange={this.props.onWalletChange}
             assetCurrency={fundCurrency}
             walletAvailable={wallet.available}
             walletCurrency={wallet.currency}
