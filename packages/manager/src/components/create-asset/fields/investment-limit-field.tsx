@@ -4,15 +4,19 @@ import { NumberFormatValues } from "react-number-format";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import GVFormikField from "shared/components/gv-formik-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import { validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 import CreateAssetField from "../create-asset-field/create-asset-field";
+
+const isAmountAllow = (currency: CurrencyEnum) => ({
+  value
+}: NumberFormatValues) => validateFraction(value, currency);
 
 const _InvestmentLimitField: React.FC<Props> = ({
   checkboxName,
   inputName,
   hasInvestmentLimit,
-  isAllow,
   currency
 }) => {
   const { t } = useTranslation();
@@ -37,7 +41,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
         <CreateAssetField>
           <InputAmountField
             autoFocus={false}
-            isAllow={isAllow}
+            isAllow={isAmountAllow(currency)}
             name={inputName}
             label={t(
               "manager.create-program-page.settings.fields.enter-correct-amount"
@@ -53,7 +57,6 @@ const _InvestmentLimitField: React.FC<Props> = ({
 interface Props {
   checkboxName: string;
   inputName: string;
-  isAllow: (values: NumberFormatValues) => boolean;
   currency: CurrencyEnum;
   hasInvestmentLimit: boolean;
 }
