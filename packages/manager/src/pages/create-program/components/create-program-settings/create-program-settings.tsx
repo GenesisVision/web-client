@@ -128,50 +128,48 @@ const _CreateProgramSettings: React.FC<Props> = ({
           <span className="create-program-settings__block-number">01</span>
           {t("manager.create-program-page.settings.main-settings")}
         </div>
-        <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
-          <div className="create-program-settings__row">
-            <DescriptionBlock
-              asset={ASSET.PROGRAM}
-              titleName={CREATE_PROGRAM_FIELDS.title}
-              descriptionName={CREATE_PROGRAM_FIELDS.description}
-              logoName={CREATE_PROGRAM_FIELDS.logo}
-              description={description}
-            />
-            <BrokerAccount
-              name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-              onChange={changeAccountType}
-              accountTypes={broker.accountTypes}
-            />
-            <Currency
-              name={CREATE_PROGRAM_FIELDS.currency}
-              onChange={changeCurrency}
-              disabled={accountType === undefined}
-              accountCurrencies={accountType.currencies as CurrencyEnum[]}
-            />
-            <Leverage
-              name={CREATE_PROGRAM_FIELDS.leverage}
-              onChange={changeLeverage}
-              disabled={!accountType}
-              accountLeverages={accountType.leverages}
-            />
-            <PeriodLength
-              name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-              programsInfo={programsInfo}
-            />
-            <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
-            <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
-            <InvestmentLimitField
-              checkboxName={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
-              inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
-              hasInvestmentLimit={hasInvestmentLimit}
-              currency={currency}
-              isAllow={isAmountAllow(currency as WalletDataCurrencyEnum)}
-            />
-            <SignalProgram
-              condition={broker.isSignalsAvailable}
-              name={CREATE_PROGRAM_FIELDS.isSignalProgram}
-            />
-          </div>
+        <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border create-program-settings__row">
+          <DescriptionBlock
+            asset={ASSET.PROGRAM}
+            titleName={CREATE_PROGRAM_FIELDS.title}
+            descriptionName={CREATE_PROGRAM_FIELDS.description}
+            logoName={CREATE_PROGRAM_FIELDS.logo}
+            description={description}
+          />
+          <BrokerAccount
+            name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
+            onChange={changeAccountType}
+            accountTypes={broker.accountTypes}
+          />
+          <Currency
+            name={CREATE_PROGRAM_FIELDS.currency}
+            onChange={changeCurrency}
+            disabled={accountType === undefined}
+            accountCurrencies={accountType.currencies as CurrencyEnum[]}
+          />
+          <Leverage
+            name={CREATE_PROGRAM_FIELDS.leverage}
+            onChange={changeLeverage}
+            disabled={!accountType}
+            accountLeverages={accountType.leverages}
+          />
+          <PeriodLength
+            name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
+            programsInfo={programsInfo}
+          />
+          <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
+          <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
+          <InvestmentLimitField
+            checkboxName={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
+            inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
+            hasInvestmentLimit={hasInvestmentLimit}
+            currency={currency}
+            isAllow={isAmountAllow(currency as WalletDataCurrencyEnum)}
+          />
+          <SignalProgram
+            condition={broker.isSignalsAvailable}
+            name={CREATE_PROGRAM_FIELDS.isSignalProgram}
+          />
         </div>
         <div className="create-program-settings__subheading">
           <span className="create-program-settings__block-number">02</span>
