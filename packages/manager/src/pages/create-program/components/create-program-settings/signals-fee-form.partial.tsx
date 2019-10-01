@@ -1,5 +1,5 @@
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVNumberField from "shared/components/gv-number-field/gv-number-field";
 import Hint from "shared/components/hint/hint";
@@ -12,14 +12,12 @@ interface ISignalsFeeFormPartialProps {
   hasSubscriptionFeeAutofocus?: boolean;
 }
 
-const SignalsFeeFormPartial: React.FC<
-  ISignalsFeeFormPartialProps & WithTranslation
-> = ({
-  t,
+const SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
   successFeeFieldName,
   volumeFeeFieldName,
   hasSubscriptionFeeAutofocus = false
 }) => {
+  const [t] = useTranslation();
   return (
     <div className="create-asset-settings__row">
       <div className="create-asset-settings__row-title">
@@ -76,4 +74,4 @@ const SignalsFeeFormPartial: React.FC<
   );
 };
 
-export default translate()(React.memo(SignalsFeeFormPartial));
+export default React.memo(SignalsFeeFormPartial);
