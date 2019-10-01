@@ -3,6 +3,10 @@ import "shared/components/deposit-details/deposit-details.scss";
 import "./create-program-settings.scss";
 
 import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
+import DescriptionBlock from "components/create-asset/fields/description-block";
+import FeesSettings from "components/create-asset/fields/fees-settings";
+import InvestmentLimitField from "components/create-asset/fields/investment-limit-field";
+import StopOutField from "components/create-asset/fields/stop-out-field";
 import { InjectedFormikProps, withFormik } from "formik";
 import {
   Broker,
@@ -18,10 +22,6 @@ import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { useDispatch } from "react-redux";
 import { compose } from "redux";
-import DescriptionBlock from "shared/components/fields/description-block";
-import FeesSettings from "shared/components/fields/fees-settings";
-import InvestmentLimitField from "shared/components/fields/investment-limit-field";
-import StopOutField from "shared/components/fields/stop-out-field";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { ASSET } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";

@@ -1,9 +1,9 @@
+import InvestmentLimitField from "components/create-asset/fields/investment-limit-field";
 import { FormikProps, withFormik } from "formik";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import InvestmentLimitField from "shared/components/fields/investment-limit-field";
 import GVButton from "shared/components/gv-button";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import { validateFraction } from "shared/utils/formatter";

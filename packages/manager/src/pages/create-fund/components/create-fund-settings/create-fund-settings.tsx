@@ -2,6 +2,8 @@ import "shared/components/deposit-details/deposit-details.scss";
 
 import "./create-fund-settings.scss";
 
+import DescriptionBlock from "components/create-asset/fields/description-block";
+import FeesSettings from "components/create-asset/fields/fees-settings";
 import { InjectedFormikProps, withFormik } from "formik";
 import { FundAssetPart, PlatformAsset, WalletData } from "gv-api-web";
 import CreateAssetNavigation
@@ -11,8 +13,6 @@ import ReallocateField from "pages/funds/fund-settings/reallocation/components/r
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import DescriptionBlock from "shared/components/fields/description-block";
-import FeesSettings from "shared/components/fields/fees-settings";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import GVFormikField from "shared/components/gv-formik-field";
 import { ASSET } from "shared/constants/constants";
