@@ -1,4 +1,4 @@
-import "./create-asset.scss";
+import "./create-asset-section.scss";
 
 import classNames from "classnames";
 import * as React from "react";

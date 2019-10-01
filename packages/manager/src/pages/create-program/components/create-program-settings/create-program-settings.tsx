@@ -2,6 +2,7 @@ import "shared/components/deposit-details/deposit-details.scss";
 
 import "./create-program-settings.scss";
 
+import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
 import { InjectedFormikProps, withFormik } from "formik";
 import {
   Broker,
@@ -40,7 +41,6 @@ import PeriodLength from "./fields/period-length";
 import SignalProgram from "./fields/signal-program";
 import TradesDelay from "./fields/trades-delay";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
-import CreateAssetSection from "components/create-asset/create-asset-section";
 
 const isAmountAllow = (currency: CurrencyEnum) => ({
   value

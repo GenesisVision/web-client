@@ -1,4 +1,4 @@
-import CreateAssetSection from "components/create-asset/create-asset-section";
+import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
 import { WalletData } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
