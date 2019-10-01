@@ -11,7 +11,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import { Broker, BrokerAccountType, NewProgramRequestTradesDelayEnum, ProgramsInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
@@ -34,6 +34,7 @@ import TradesDelay from "./fields/trades-delay";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 const _CreateProgramSettings: React.FC<Props> = ({
+  t,
   leverage,
   validateForm,
   isValid,
@@ -62,7 +63,6 @@ const _CreateProgramSettings: React.FC<Props> = ({
   wallet
 }) => {
   const dispatch = useDispatch();
-  const [t] = useTranslation();
   useEffect(
     () => {
       setFieldValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, accountType!.id);
@@ -141,7 +141,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
             accountLeverages={accountType.leverages}
           />
           <PeriodLength
-            name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
+            name={CREATE_PROGRAM_FIELDS.periodLength}
             programsInfo={programsInfo}
           />
           <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
@@ -210,7 +210,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
   );
 };
 
-export interface ICreateProgramSettingsOwnProps {
+interface OwnProps {
   broker: Broker;
   wallets: WalletData[];
   programsInfo: ProgramsInfo;
@@ -231,6 +231,10 @@ export interface ICreateProgramSettingsOwnProps {
   wallet: WalletData;
   changeWallet: (id: string) => void;
 }
+
+export interface ICreateProgramSettingsProps
+  extends OwnProps,
+    WithTranslation {}
 
 export interface ICreateProgramSettingsFormValues {
   [CREATE_PROGRAM_FIELDS.tradesDelay]: NewProgramRequestTradesDelayEnum;
@@ -254,14 +258,13 @@ export interface ICreateProgramSettingsFormValues {
 }
 
 type Props = InjectedFormikProps<
-  ICreateProgramSettingsOwnProps,
+  ICreateProgramSettingsProps,
   ICreateProgramSettingsFormValues
 >;
 
-const CreateProgramSettings = compose<
-  React.ComponentType<ICreateProgramSettingsOwnProps>
->(
-  withFormik<ICreateProgramSettingsOwnProps, ICreateProgramSettingsFormValues>({
+const CreateProgramSettings = compose<React.ComponentType<OwnProps>>(
+  translate(),
+  withFormik<ICreateProgramSettingsProps, ICreateProgramSettingsFormValues>({
     displayName: "CreateProgramSettingsForm",
     mapPropsToValues: createProgramMapPropsToValues,
     validationSchema: createProgramSettingsValidationSchema,

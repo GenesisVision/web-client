@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -12,7 +11,7 @@ import {
 } from "shared/utils/validators/validators";
 import { boolean, mixed, number, object, string } from "yup";
 
-import { ICreateProgramSettingsFormValues, ICreateProgramSettingsOwnProps } from "./create-program-settings";
+import { ICreateProgramSettingsFormValues, ICreateProgramSettingsProps } from "./create-program-settings";
 
 export const createProgramMapPropsToValues = ({
   wallet,
@@ -21,7 +20,7 @@ export const createProgramMapPropsToValues = ({
   leverage,
   programsInfo,
   accountType
-}: ICreateProgramSettingsOwnProps): ICreateProgramSettingsFormValues => ({
+}: ICreateProgramSettingsProps): ICreateProgramSettingsFormValues => ({
   [CREATE_PROGRAM_FIELDS.tradesDelay]: "None",
   [CREATE_PROGRAM_FIELDS.stopOutLevel]: 100,
   [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: accountType
@@ -49,17 +48,18 @@ export const createProgramMapPropsToValues = ({
   [CREATE_PROGRAM_FIELDS.depositAmount]: undefined
 });
 
-const createProgramSettingsValidationSchema = (
-  props: ICreateProgramSettingsOwnProps
-) => {
-  const [t] = useTranslation();
+const createProgramSettingsValidationSchema = ({
+  t,
+  minimumDepositsAmount,
+  programsInfo,
+  rate,
+  wallet,
+  programCurrency
+}: ICreateProgramSettingsProps) => {
   const minDeposit = parseFloat(
     formatCurrencyValue(
-      convertToCurrency(
-        props.minimumDepositsAmount[props.programCurrency!],
-        props.rate || 1
-      ),
-      props.programCurrency!
+      convertToCurrency(minimumDepositsAmount[programCurrency!], rate || 1),
+      programCurrency!
     )
   );
   return object().shape({
@@ -90,11 +90,11 @@ const createProgramSettingsValidationSchema = (
     ),
     [CREATE_PROGRAM_FIELDS.entryFee]: entryFeeShape(
       t,
-      props.programsInfo.managerMaxEntryFee
+      programsInfo.managerMaxEntryFee
     ),
     [CREATE_PROGRAM_FIELDS.successFee]: successFeeShape(
       t,
-      props.programsInfo.managerMaxSuccessFee
+      programsInfo.managerMaxSuccessFee
     ),
     [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: boolean(),
     [CREATE_PROGRAM_FIELDS.investmentLimit]: mixed().when(
@@ -131,14 +131,14 @@ const createProgramSettingsValidationSchema = (
       CREATE_PROGRAM_FIELDS.isSignalProgram,
       {
         is: true,
-        then: signalSuccessFeeShape(t, props.programsInfo.managerMaxSuccessFee)
+        then: signalSuccessFeeShape(t, programsInfo.managerMaxSuccessFee)
       }
     ),
     [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: string().required(
       t("manager.create-program-page.settings.validation.account-type-required")
     ),
     [CREATE_PROGRAM_FIELDS.depositAmount]:
-      props.rate && props.programCurrency && props.rate
+      rate && programCurrency && rate
         ? number()
             .required(
               t(
@@ -155,7 +155,7 @@ const createProgramSettingsValidationSchema = (
               )
             )
             .max(
-              props.wallet.available,
+              wallet.available,
               t(
                 "manager.create-program-page.settings.validation.amount-is-large"
               )
