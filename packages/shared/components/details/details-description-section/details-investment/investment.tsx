@@ -96,6 +96,7 @@ const _Investment: React.FC<Props> = ({
           <StatisticItem
             condition={
               isInvestor &&
+              personalDetails.invested !== 0 &&
               successFeePersonal !== undefined &&
               successFeePersonal !== null
             }
