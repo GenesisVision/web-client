@@ -221,6 +221,7 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
           dispatch(getProfitChart(opts));
           break;
         case DETAILS_CHART_TABS.BALANCE:
+          dispatch(getProfitChart(opts));
           dispatch(getBalanceChart(opts));
       }
     },
