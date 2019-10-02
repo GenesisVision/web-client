@@ -1,13 +1,15 @@
 import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
-import { ProgramsInfo } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
+import { programsInfoSelector } from "shared/reducers/platform-reducer";
 
-const _PeriodLength: React.FC<Props> = ({ name, programsInfo }) => {
+const _PeriodLength: React.FC<Props> = ({ name }) => {
   const [t] = useTranslation();
+  const programsInfo = useSelector(programsInfoSelector);
   return (
     <CreateAssetField>
       <GVFormikField
@@ -31,7 +33,6 @@ const _PeriodLength: React.FC<Props> = ({ name, programsInfo }) => {
 
 interface Props {
   name: string;
-  programsInfo: ProgramsInfo;
 }
 
 const PeriodLength = React.memo(_PeriodLength);
