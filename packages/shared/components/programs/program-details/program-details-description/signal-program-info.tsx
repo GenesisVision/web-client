@@ -2,6 +2,7 @@ import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
@@ -14,7 +15,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="asset-details-description__col asset-details-description__col--no-wrap">
+    <StatisticItemList>
       <StatisticItem
         label={
           <TooltipLabel
@@ -49,7 +50,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
           suffix=" %"
         />
       </StatisticItem>
-    </div>
+    </StatisticItemList>
   );
 };
 

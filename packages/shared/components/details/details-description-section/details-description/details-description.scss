@@ -367,56 +367,17 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     flex-wrap: wrap;
     margin: 0 (-$padding-xxsmall/2);
 
-    @include media-breakpoint-landscape-tablet() {
+    @include media-breakpoint-desktop() {
       flex-wrap: nowrap;
     }
     @include media-breakpoint-tablet() {
       margin-left: $padding-controls-left;
       margin-right: 0;
-      max-width: 850px;
     }
   }
 
   &__level-calculator {
     align-self: flex-end;
-    @include adaptive-margin(right, $padding-xsmall/2);
-  }
-
-  &__col {
-    display: inline-flex;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-    @include adaptive-margin(bottom, 15px);
-
-    @include media-breakpoint-landscape-phone() {
-      flex-wrap: nowrap;
-      width: auto;
-      max-width: 800px;
-
-      &--small-size {
-        flex-grow: 0;
-        min-width: 220px;
-      }
-    }
-
-    @include media-breakpoint-tablet() {
-      &--small-size {
-        min-width: 260px;
-        max-width: 260px;
-      }
-    }
-
-    & .statistics-item:not(:last-child) {
-      margin-right: $padding-small;
-    }
-
-    &--no-wrap {
-      flex-wrap: nowrap;
-    }
-
-    &--fund {
-      max-width: 230px;
-    }
   }
 
   &__statistic-container {
@@ -445,22 +406,13 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__performance-data {
+    padding-left: 0;
+
     @include adaptive-padding(top, $padding-xxsmall);
     @include adaptive-padding(bottom, $padding-upper-medium);
-    padding-left: 0;
-    display: flex;
-    box-sizing: border-box;
-    flex-wrap: wrap;
-    margin: 0;
     @include media-breakpoint-tablet() {
       padding-left: $padding-small;
       margin-left: $padding-controls-left;
-    }
-    & .statistics-item {
-      margin-right: $padding-medium-mobile;
-      @include media-breakpoint-landscape-phone() {
-        margin-right: $padding-medium;
-      }
     }
   }
 
