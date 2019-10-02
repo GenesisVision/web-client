@@ -47,7 +47,6 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     level,
     levelProgress,
     color,
-    currency,
     periodStarts,
     periodEnds,
     chart,
@@ -61,8 +60,6 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
     as: composeProgramDetailsUrl(program.url)
   };
-  const stopPropagationEvent = (event: React.MouseEvent) =>
-    event.stopPropagation();
   const requestCurrency = program.statistic.balance.currency;
   return (
     <TableRow
