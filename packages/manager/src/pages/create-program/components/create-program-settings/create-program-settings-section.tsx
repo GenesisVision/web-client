@@ -31,7 +31,6 @@ const getLeverage = (accountType: BrokerAccountType): number =>
 const _CreateProgramSettingsSection: React.FC<OwnProps> = ({
   currency,
   broker,
-  programsInfo,
   onSubmit,
   minimumDepositsAmount,
   navigateBack,
@@ -93,7 +92,6 @@ const _CreateProgramSettingsSection: React.FC<OwnProps> = ({
       minimumDepositsAmount={minimumDepositsAmount}
       broker={broker}
       author={author}
-      programsInfo={programsInfo}
       wallets={wallets}
       wallet={wallet}
       leverage={leverage}
@@ -115,7 +113,6 @@ export const CreateProgramSettingsSection = React.memo(
 interface OwnProps {
   currency: CurrencyEnum;
   broker: Broker;
-  programsInfo: ProgramsInfo;
   onSubmit: (data: ManagerProgramCreateResult) => void;
   minimumDepositsAmount: { [key: string]: number };
   navigateBack: () => void;
