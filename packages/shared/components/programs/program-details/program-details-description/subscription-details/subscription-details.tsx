@@ -1,14 +1,11 @@
 import "./subscription-details.scss";
 
-import {
-  AttachToSignalProviderModeEnum,
-  PersonalProgramDetailsFull,
-  SignalSubscriptionModeEnum
-} from "gv-api-web";
+import { AttachToSignalProviderModeEnum, PersonalProgramDetailsFull, SignalSubscriptionModeEnum } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Profitability from "shared/components/profitability/profitability";
+import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
@@ -40,7 +37,7 @@ const _SubscriptionDetails: React.FC<Props> = ({
         {t("subscription-details.edit")}
       </button>
     </div>
-    <div className="details-investment__short-statistic details-investment__short-statistic--investment">
+    <StatisticItemList className="details-investment__short-statistic">
       <StatisticItem
         className="details-investment__statistic-item"
         accent
@@ -81,7 +78,7 @@ const _SubscriptionDetails: React.FC<Props> = ({
           displayType="text"
         />
       </StatisticItem>
-    </div>
+    </StatisticItemList>
   </div>
 );
 
@@ -108,7 +105,7 @@ const _SubscriptionTypeValue: React.FC<ISubscriptionTypeValueProps> = ({
         <NumberFormat
           value={formatCurrencyValue(fixedVolume, "USD")}
           prefix=" "
-          suffix="USD"
+          suffix=" USD"
           displayType="text"
         />
       )}

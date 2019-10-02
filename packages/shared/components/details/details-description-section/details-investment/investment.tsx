@@ -8,11 +8,9 @@ import AssetStatus from "shared/components/asset-status/asset-status";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
-import {
-  PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT
-} from "shared/components/profitability/profitability.helper";
+import { PROFITABILITY_PREFIX, PROFITABILITY_VARIANT } from "shared/components/profitability/profitability.helper";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
+import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
@@ -55,9 +53,8 @@ const _Investment: React.FC<Props> = ({
         <h5>{t("program-details-page.description.investment-details")}</h5>
       </div>
       <div className="details-investment__current-period-investment-data">
-        <div className="details-investment__short-statistic details-investment__short-statistic--investment">
+        <StatisticItemList className="details-investment__short-statistic">
           <StatisticItem
-            className="details-investment__statistic-item"
             accent
             label={t("fund-details-page.description.value")}
           >
@@ -68,7 +65,6 @@ const _Investment: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem
-            className="details-investment__statistic-item"
             condition={asset === PROGRAM}
             accent
             label={
@@ -97,13 +93,17 @@ const _Investment: React.FC<Props> = ({
             </Profitability>
           </StatisticItem>
           <StatisticItem
-            condition={isInvestor && successFeePersonal !== undefined}
+            condition={
+              isInvestor &&
+              personalDetails.invested !== 0 &&
+              successFeePersonal !== undefined &&
+              successFeePersonal !== null
+            }
             label={t("program-details-page.description.successFee")}
-            className="details-investment__statistic-item"
             accent
           >
             <NumberFormat
-              value={successFeeCurrent}
+              value={successFeePersonal}
               suffix={` %`}
               allowNegative={false}
               displayType="text"
@@ -111,10 +111,12 @@ const _Investment: React.FC<Props> = ({
           </StatisticItem>
           <StatisticItem
             condition={
-              isInvestor && exitFee !== undefined && exitFee !== exitFeePersonal
+              isInvestor &&
+              exitFeePersonal !== null &&
+              exitFeePersonal !== undefined &&
+              exitFee !== exitFeePersonal
             }
             label={t("fund-details-page.description.exitFee")}
-            className="details-investment__statistic-item"
             accent
           >
             <NumberFormat
@@ -125,7 +127,6 @@ const _Investment: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem
-            className="details-investment__statistic-item"
             accent
             label={
               <TooltipLabel
@@ -136,7 +137,7 @@ const _Investment: React.FC<Props> = ({
           >
             <AssetStatus
               successFee={successFeeCurrent}
-              exitFee={exitFee}
+              exitFee={exitFee !== exitFeePersonal}
               entryFee={entryFeeCurrent}
               status={personalDetails.status as STATUS}
               id={id}
@@ -145,7 +146,6 @@ const _Investment: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem
-            className="details-investment__statistic-item"
             condition={
               personalDetails.pendingInput !== undefined &&
               personalDetails.pendingInput !== 0
@@ -171,7 +171,6 @@ const _Investment: React.FC<Props> = ({
               />
             )}
           <StatisticItem
-            className="details-investment__statistic-item"
             condition={
               personalDetails.pendingOutput !== undefined &&
               personalDetails.pendingOutput !== 0
@@ -192,7 +191,7 @@ const _Investment: React.FC<Props> = ({
               />
             )}
           </StatisticItem>
-        </div>
+        </StatisticItemList>
         <div className="details-investment__footer">
           <GVButton
             color="secondary"

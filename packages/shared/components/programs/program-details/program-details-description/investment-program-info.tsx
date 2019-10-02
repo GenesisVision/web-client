@@ -1,10 +1,10 @@
-import { ProgramDetailsFull } from "gv-api-web";
-import { LevelsParamsInfo } from "gv-api-web/src";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
+import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
@@ -66,7 +66,7 @@ const _InvestmentProgramInfo: React.FC<
       ? availableInvestmentLimit
       : availableInvestmentBase;
   return (
-    <div className="asset-details-description__col ">
+    <StatisticItemList>
       {LevelCalculator && isOwnProgram && (
         <div className="statistics-item asset-details-description__level-calculator">
           <LevelCalculator
@@ -85,7 +85,6 @@ const _InvestmentProgramInfo: React.FC<
             labelText={t("program-details-page.description.avToInvest")}
           />
         }
-        className="asset-details-description__short-statistic-item"
         accent
       >
         <NumberFormat
@@ -101,7 +100,6 @@ const _InvestmentProgramInfo: React.FC<
             labelText={t("program-details-page.description.entryFee")}
           />
         }
-        className="asset-details-description__short-statistic-item"
         accent
       >
         {entryFeeSelected !== entryFeeCurrent ? (
@@ -135,7 +133,6 @@ const _InvestmentProgramInfo: React.FC<
             labelText={t("program-details-page.description.successFee")}
           />
         }
-        className="asset-details-description__short-statistic-item"
         accent
       >
         {renderFee(successFeeSelected, successFeeCurrent)}
@@ -148,12 +145,11 @@ const _InvestmentProgramInfo: React.FC<
           />
         }
         condition={!!stopOutLevelCurrent && !!stopOutLevelSelected}
-        className="asset-details-description__short-statistic-item"
         accent
       >
         {renderFee(stopOutLevelSelected, stopOutLevelCurrent)}
       </StatisticItem>
-    </div>
+    </StatisticItemList>
   );
 };
 

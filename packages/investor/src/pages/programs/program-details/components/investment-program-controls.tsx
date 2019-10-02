@@ -2,7 +2,7 @@ import { ProgramDetailsFull } from "gv-api-web";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { ResolveThunks, connect, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
   Dispatch,
@@ -18,14 +18,15 @@ import InvestmentUnauthPopup from "shared/components/programs/program-details/pr
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
 import NotifyButton from "./notify-button";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
   service: { dispatchProgramDescription },
-  isAuthenticated,
   programDescription
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [t] = useTranslation();
   const [
     isOpenInvestmentPopup,
@@ -115,7 +116,6 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  isAuthenticated: boolean;
   programDescription: ProgramDetailsFull;
 }
 
