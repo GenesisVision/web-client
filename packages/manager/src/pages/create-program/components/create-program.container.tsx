@@ -6,13 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import useIsOpen from "shared/hooks/is-open.hook";
 import useTab from "shared/hooks/tab.hook";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { headerSelector } from "shared/reducers/header-reducer";
+import { headerSelector, nameSelector } from "shared/reducers/header-reducer";
 import { programsInfoSelector } from "shared/reducers/platform-reducer";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 
@@ -25,8 +24,8 @@ const _CreateProgramContainer: React.FC = () => {
   const [t] = useTranslation();
   const dispatch = useDispatch();
 
+  const author = useSelector(nameSelector);
   const currency = useSelector(currencySelector);
-  const wallets = useSelector(walletsSelector);
   const headerData = useSelector(headerSelector);
   const programsInfo = useSelector(programsInfoSelector);
 
@@ -94,7 +93,6 @@ const _CreateProgramContainer: React.FC = () => {
     !selectedBroker ||
     !programsInfo ||
     !headerData ||
-    !wallets.length ||
     !minimumDepositsAmount
   )
     return null;
@@ -130,11 +128,10 @@ const _CreateProgramContainer: React.FC = () => {
             <CreateProgramSettingsSection
               currency={currency}
               minimumDepositsAmount={minimumDepositsAmount}
-              wallets={wallets}
               navigateBack={setIsNavigationDialogVisible}
               broker={selectedBroker}
               onSubmit={onSubmit}
-              author={headerData.name}
+              author={author}
               programsInfo={programsInfo}
             />
           )}
