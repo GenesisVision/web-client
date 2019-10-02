@@ -1,4 +1,4 @@
-import { ProgramsList, ProgramTag } from "gv-api-web";
+import { PlatformCurrency, ProgramsList, ProgramTag } from "gv-api-web";
 import qs from "qs";
 import * as React from "react";
 import { connect } from "react-redux";
@@ -30,12 +30,15 @@ import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/se
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 import { DEFAULT_ITEMS_ON_PAGE } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 import {
+  CURRENCY_MAP_NAME,
+  CURRENCY_MAP_VALUE,
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_NAME,
   SORTING_FILTER_VALUE
 } from "shared/modules/programs-table/components/programs-table/programs.constants";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import {
+  platformCurrenciesSelector,
   programCurrenciesSelector,
   programTagsSelector
 } from "shared/reducers/platform-reducer";
@@ -45,10 +48,13 @@ import { NextPageWithReduxContext } from "shared/utils/types";
 
 import { FetchProgramsFiltersType } from "../../actions/programs-table.actions";
 import { programsDataSelector } from "../../reducers/programs-table.reducers";
-import { composeCurrencyFilter } from "./program-table.helpers";
+import {
+  composeCurrencyFilter,
+  composeCurrencyMap
+} from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
 import {
-  CURRENCY_FILTER_NAME,
+  PROGRAM_CURRENCY_FILTER_NAME,
   CURRENCY_FILTER_VALUE,
   LEVEL_FILTER_NAME,
   LEVEL_MAX_FILTER_VALUE,
@@ -58,10 +64,11 @@ import {
 const ITEMS_ON_PAGE = 12;
 
 const DEFAULT_FILTERS = {
+  [CURRENCY_MAP_NAME]: CURRENCY_MAP_VALUE,
   [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
   [TAG_FILTER_NAME]: TAG_FILTER_DEFAULT_VALUE,
   [LEVEL_FILTER_NAME]: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
-  [CURRENCY_FILTER_NAME]: CURRENCY_FILTER_VALUE
+  [PROGRAM_CURRENCY_FILTER_NAME]: CURRENCY_FILTER_VALUE
 };
 
 export const getFiltersFromContext = ({
@@ -80,12 +87,13 @@ export const getFiltersFromContext = ({
   return {
     ...skipAndTake,
     ...composeFilters(PROGRAMS_TABLE_FILTERS, { ...DEFAULT_FILTERS, ...other }),
-    currencySecondary: currency,
+    currency,
     sorting
   } as FetchProgramsFiltersType;
 };
 
 const _ProgramsTableSSR: React.FC<Props> = ({
+  programCurrencies,
   title,
   data,
   showSwitchView,
@@ -109,6 +117,24 @@ const _ProgramsTableSSR: React.FC<Props> = ({
       updateSorting={value => update({ name: SORTING_FILTER_NAME, value })}
       filtering={filtering}
       updateFilter={update}
+      renderMappings={(updateFilter, filtering) => (
+        <>
+          <SelectFilter
+            name={CURRENCY_MAP_NAME}
+            label={t("filters.currency.show-in")}
+            value={filtering && filtering[CURRENCY_MAP_NAME]}
+            values={composeCurrencyMap(currencies)}
+            onChange={updateFilter}
+          />
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            label={t("filters.date-range.for")}
+            startLabel={t("filters.date-range.fund-start")}
+          />
+        </>
+      )}
       renderFilters={(updateFilter, filtering: FilteringType) => (
         <>
           <TagFilter
@@ -123,10 +149,10 @@ const _ProgramsTableSSR: React.FC<Props> = ({
             onChange={updateFilter}
           />
           <SelectFilter
-            name={CURRENCY_FILTER_NAME}
+            name={PROGRAM_CURRENCY_FILTER_NAME}
             label="Currency"
-            value={filtering[CURRENCY_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
-            values={composeCurrencyFilter(currencies)}
+            value={filtering[PROGRAM_CURRENCY_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
+            values={composeCurrencyFilter(programCurrencies)}
             onChange={updateFilter}
           />
           <DateRangeFilter
@@ -147,14 +173,15 @@ const _ProgramsTableSSR: React.FC<Props> = ({
       toggleFavorite={service.toggleFavoriteProgram}
       redirectToLogin={() => Push(LOGIN_ROUTE)}
       isAuthenticated={isAuthenticated}
-      currencies={currencies}
+      currencies={programCurrencies}
     />
   );
 };
 
 const mapStateToProps = (state: RootState): StateProps => ({
+  programCurrencies: programCurrenciesSelector(state),
   isAuthenticated: isAuthenticatedSelector(state),
-  currencies: programCurrenciesSelector(state),
+  currencies: platformCurrenciesSelector(state),
   programTags: programTagsSelector(state),
   data: programsDataSelector(state)
 });
@@ -183,8 +210,9 @@ interface OwnProps {
 }
 
 interface StateProps {
+  programCurrencies: string[];
   isAuthenticated: boolean;
-  currencies: string[];
+  currencies: PlatformCurrency[];
   programTags: ProgramTag[];
   data?: ProgramsList;
 }
