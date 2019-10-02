@@ -20,6 +20,11 @@ export const isNewUserSelector = apiFieldSelector(
   fieldSelector(state => state.isNewUser)
 );
 
+export const forexAllowedSelector = apiFieldSelector(
+  headerSelector,
+  fieldSelector(state => state.allowForex)
+);
+
 export const kycConfirmedSelector = apiFieldSelector(
   headerSelector,
   fieldSelector(state => state.kycConfirmed)
