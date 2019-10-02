@@ -6,13 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import useIsOpen from "shared/hooks/is-open.hook";
 import useTab from "shared/hooks/tab.hook";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { headerSelector, nameSelector } from "shared/reducers/header-reducer";
-import { programsInfoSelector } from "shared/reducers/platform-reducer";
+import { nameSelector } from "shared/reducers/header-reducer";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 
 import { fetchBrokers } from "../services/create-program.service";
@@ -26,8 +24,6 @@ const _CreateProgramContainer: React.FC = () => {
 
   const author = useSelector(nameSelector);
   const currency = useSelector(currencySelector);
-  const headerData = useSelector(headerSelector);
-  const programsInfo = useSelector(programsInfoSelector);
 
   const [minimumDepositsAmount, setMinimumDepositsAmount] = useState<
     { [key: string]: number } | undefined
@@ -48,7 +44,6 @@ const _CreateProgramContainer: React.FC = () => {
 
   useEffect(() => {
     setIsPending();
-    dispatch(fetchWallets(currency));
     fetchBrokers()
       .then(brokers => {
         setBrokers(brokers);
@@ -88,14 +83,7 @@ const _CreateProgramContainer: React.FC = () => {
     }
   }, []);
 
-  if (
-    !brokers ||
-    !selectedBroker ||
-    !programsInfo ||
-    !headerData ||
-    !minimumDepositsAmount
-  )
-    return null;
+  if (!brokers || !selectedBroker || !minimumDepositsAmount) return null;
 
   return (
     <div className="create-program-page__container">
@@ -120,8 +108,6 @@ const _CreateProgramContainer: React.FC = () => {
               brokers={brokers}
               selectedBroker={selectedBroker}
               setMinimumDepositsAmount={setMinimumDepositsAmount}
-              isForexAllowed={headerData.allowForex}
-              isKycConfirmed={headerData.kycConfirmed}
             />
           )}
           {tab === TAB.SETTINGS && (
@@ -132,7 +118,6 @@ const _CreateProgramContainer: React.FC = () => {
               broker={selectedBroker}
               onSubmit={onSubmit}
               author={author}
-              programsInfo={programsInfo}
             />
           )}
           {twoFactorRequired && <TFAConfirmBlock id={programId!} />}
