@@ -4,6 +4,7 @@ import * as React from "react";
 import { useCallback } from "react";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
+  ORIENTATION_POPOVER,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import { STATUS } from "shared/constants/constants";
@@ -38,6 +39,7 @@ const _AssetStatus: React.FC<Props> = ({
         onClick={handleOpenDropdown}
       />
       <Popover
+        orientation={ORIENTATION_POPOVER.RIGHT}
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         anchorEl={anchor}
@@ -62,7 +64,7 @@ const _AssetStatus: React.FC<Props> = ({
 
 interface Props {
   successFee?: number;
-  exitFee?: number;
+  exitFee?: boolean;
   entryFee?: number;
   className?: string;
   status: STATUS;

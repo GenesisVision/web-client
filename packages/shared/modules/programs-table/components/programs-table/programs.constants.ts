@@ -48,14 +48,12 @@ const programsCurrencyFilter = {
   name: PROGRAM_CURRENCY_FILTER_NAME,
   type: FILTER_TYPE.GENERAL,
   defaultValue: CURRENCY_FILTER_VALUE
-  //validate: value => CURRENCY_FILTER_VALUES.includes(value) <--fetched from server
 };
 
 export const programsCurrencyMap = {
   name: CURRENCY_MAP_NAME,
   type: FILTER_TYPE.GENERAL,
   defaultValue: CURRENCY_MAP_VALUE
-  //validate: value => CURRENCY_FILTER_VALUES.includes(value) <--fetched from server
 };
 
 export const programsDateRangeFilter = {

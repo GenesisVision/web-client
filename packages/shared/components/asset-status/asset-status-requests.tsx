@@ -2,15 +2,13 @@ import { ProgramRequest } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import DashboardRequest from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
+import DashboardRequest
+  from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
 import { ASSET } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
 
 import { CancelRequestPropsType } from "../dashboard/dashboard.constants";
-import {
-  cancelRequestDispatch,
-  getAssetRequests
-} from "./services/asset-status.service";
+import { cancelRequestDispatch, getAssetRequests } from "./services/asset-status.service";
 
 const _AssetStatusRequests: React.FC<Props> = ({
   successFee,
@@ -50,14 +48,7 @@ const _AssetStatusRequests: React.FC<Props> = ({
       {requests.map(request => (
         <DashboardRequest
           successFee={request.successFee}
-          exitFee={
-            request.exitFee && request.exitFee !== exitFee
-              ? request.exitFee
-              : undefined
-          }
-          entryFee={
-            request.entryFee !== entryFee ? request.entryFee : undefined
-          }
+          exitFee={request.exitFee}
           key={request.id}
           request={request}
           cancelRequest={(values: CancelRequestPropsType) => {
@@ -73,7 +64,7 @@ const _AssetStatusRequests: React.FC<Props> = ({
 
 interface Props {
   successFee?: number;
-  exitFee?: number;
+  exitFee?: boolean;
   entryFee?: number;
   id: string;
   asset: ASSET;

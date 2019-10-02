@@ -17,7 +17,7 @@ import {
   TableToggleFavoriteType
 } from "shared/components/table/components/table.types";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
-import { composeCurrencyFilter } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
+import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
 import { CURRENCY_MAP_NAME } from "shared/modules/programs-table/components/programs-table/programs.constants";
 import { CurrencyEnum } from "shared/utils/types";
@@ -31,7 +31,6 @@ const _ProgramsFacetTable: React.FC<
   IProgramsFacetTableProps & WithTranslation
 > = ({
   currency,
-  programCurrencies,
   currencies,
   t,
   title,
@@ -60,7 +59,6 @@ const _ProgramsFacetTable: React.FC<
   const composeFiltering = useCallback(
     () =>
       ({
-        currency,
         dateRange: {
           ...DEFAULT_DATE_RANGE_FILTER_VALUE,
           type: mapServerTimeFrameToFilterType(timeframe)
@@ -77,7 +75,7 @@ const _ProgramsFacetTable: React.FC<
             name={CURRENCY_MAP_NAME}
             label={t("filters.currency.show-in")}
             value={filtering && filtering[CURRENCY_MAP_NAME]}
-            values={composeCurrencyFilter(programCurrencies)}
+            values={composeCurrencyMap(currencies)}
             onChange={updateFilter}
           />
           <DateRangeFilter
@@ -105,7 +103,6 @@ const _ProgramsFacetTable: React.FC<
 
 export interface IProgramsFacetTableProps {
   currency?: CurrencyEnum;
-  programCurrencies?: string[];
   currencies?: PlatformCurrency[];
   title: string;
   sorting: string;

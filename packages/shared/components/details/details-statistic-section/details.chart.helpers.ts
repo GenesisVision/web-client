@@ -200,11 +200,10 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
   >(platformCurrencies.filter(({ name }) => name === statisticCurrency));
   useEffect(
     () => {
-      const newSelectedCurrencies = [...selectedCurrencies];
-      newSelectedCurrencies[0] = platformCurrencies.find(
-        ({ name }) => name === statisticCurrency
-      )!;
-      setSelectedCurrencies(newSelectedCurrencies);
+      setSelectedCurrencies([
+        ...platformCurrencies.filter(({ name }) => name === statisticCurrency),
+        ...selectedCurrencies.slice(1, selectedCurrencies.length)
+      ]);
     },
     [statisticCurrency]
   );
