@@ -19,10 +19,7 @@ const _ProgramControls: React.FC<IProgramControlsProps> = ({
         isAuthenticated={isAuthenticated}
       />
       {isAvailableFollowingTrades ? (
-        <DetailsBlock
-          type={DETAILS_BLOCK_TYPE.BORDERED}
-          className="asset-details-description__col"
-        >
+        <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>
           <SignalProviderControls
             programDescription={programDescription}
             isAuthenticated={isAuthenticated}

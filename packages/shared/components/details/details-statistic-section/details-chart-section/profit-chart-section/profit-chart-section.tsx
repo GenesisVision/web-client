@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
+import { selectedCurrenciesLoaderData } from "shared/components/programs/program-details/program-details.loader-data";
 
 import {
   ProfitChartDataType,
@@ -11,7 +12,6 @@ import ProfitChartElements, {
   TRenderProfitChart,
   TRenderProfitValue
 } from "./profit-chart-elements";
-import { selectedCurrenciesLoaderData } from "shared/components/programs/program-details/program-details.loader-data";
 
 const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
   loaderData,

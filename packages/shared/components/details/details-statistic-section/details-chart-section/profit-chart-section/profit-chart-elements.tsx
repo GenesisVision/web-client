@@ -1,10 +1,10 @@
 import * as React from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { withBlurLoader, WithBlurLoaderProps } from "shared/decorators/with-blur-loader";
 import ChartCurrencySelector, {
   TAddChartCurrency,
   TChangeChartCurrency,
@@ -14,15 +14,7 @@ import ChartCurrencySelector, {
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
-import {
-  ProfitChartDataType,
-  ProfitChartType,
-  useChartData
-} from "../../details.chart.helpers";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "shared/decorators/with-blur-loader";
+import { ProfitChartDataType, ProfitChartType, useChartData } from "../../details.chart.helpers";
 
 const _ProfitChartElements: React.FC<Props> = ({
   renderProfitChart,
@@ -36,14 +28,13 @@ const _ProfitChartElements: React.FC<Props> = ({
   changeCurrency,
   selectCurrencies
 }) => {
-  const [t] = useTranslation();
   const chartData = useChartData<ProfitChartDataType>(data, selectedCurrencies);
   const platformCurrencies = useSelector(platformCurrenciesSelector);
   const chart = chartData.chart[0];
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem label={t("details-page.chart.value")} big accent>
+        <StatisticItem big accent>
           {renderProfitValue({ chart })}
         </StatisticItem>
       </div>

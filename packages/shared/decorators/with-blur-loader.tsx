@@ -3,7 +3,7 @@ import { BlurContainer } from "shared/components/blur-container/blur-container";
 
 export interface WithBlurLoaderProps<T> {
   className?: string;
-  loaderData: T;
+  loaderData?: T;
 }
 
 export const withBlurLoader = <T, U extends { data?: T }>(

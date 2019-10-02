@@ -1,16 +1,16 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
-import {
-  ProgramBalanceChartElement,
-  ProgramProfitChart as ProgramProfitChartType
-} from "gv-api-web";
+import { ProgramBalanceChartElement } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { profitChartDataLoaderData, statisticDataLoaderData } from "../program-details.loader-data";
+import {
+  profitChartDataLoaderData,
+  statisticDataLoaderData
+} from "../program-details.loader-data";
 import { programBalanceChartSelector } from "../reducers/balance-chart.reducer";
 import { programStatusSelector } from "../reducers/description.reducer";
 import { programProfitChartSelector } from "../reducers/profit-chart.reducer";
@@ -25,10 +25,9 @@ import ProgramDetailsStatisticsElements, {
   IProgramStatisticData
 } from "./program-details-statistics/program-details-statistics-elements";
 
-const PROGRAM_CHART_CURRENCY = "GVT";
-
 const _ProgramDetailsStatisticSection: React.FC = () => {
   const status = useSelector(programStatusSelector);
+  const statisticCurrency = useSelector(statisticCurrencySelector);
   return (
     <DetailsStatisticSection
       loaderData={profitChartDataLoaderData}
@@ -40,12 +39,12 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       renderProfitValue={({ chart }) => (
         <NumberFormat
           value={formatCurrencyValue(
-            "timeframeGvtProfit" in chart ? chart.timeframeGvtProfit : 0,
-            PROGRAM_CHART_CURRENCY
+            "timeframeProfit" in chart ? chart.timeframeProfit : 0,
+            statisticCurrency
           )}
           thousandSeparator={" "}
           displayType="text"
-          suffix={` ${PROGRAM_CHART_CURRENCY}`}
+          suffix={` ${statisticCurrency}`}
         />
       )}
       renderBalanceChart={({ color, currency, balanceChart }) => (
@@ -57,7 +56,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       )}
       renderProfitChart={({ profitChart, chartCurrencies }) => (
         <ProgramProfitChart
-          profitChart={profitChart as ProgramProfitChartType[]}
+          profitChart={profitChart}
           chartCurrencies={chartCurrencies}
         />
       )}

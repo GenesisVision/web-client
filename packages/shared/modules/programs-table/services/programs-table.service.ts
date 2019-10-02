@@ -76,7 +76,7 @@ const composeRequestFilters = () => (
   const { router } = getState();
   const { currency } = getState().accountSettings;
 
-  let filters: { [keys: string]: any } = { currencySecondary: currency };
+  let filters: { [keys: string]: any } = { currency: currency };
 
   const { tab } = getParams(router.location.pathname, PROGRAMS_TAB_ROUTE);
   if (tab === PROGRAMS_FAVORITES_TAB_NAME) {

@@ -1,16 +1,8 @@
 import * as React from "react";
-import {
-  FilteringType,
-  SortingColumn,
-  TDefaultFilters
-} from "shared/components/table/components/filtering/filter.type";
-import TableModule from "shared/components/table/components/table-module";
-import {
-  GetItemsFuncType,
-  RenderFiltersFuncType,
-  TableToggleFavoriteType
-} from "shared/components/table/components/table.types";
-import { IPaging } from "shared/components/table/helpers/paging.helpers";
+import TableModule, {
+  ITableModuleProps
+} from "shared/components/table/components/table-module";
+import { TableToggleFavoriteType } from "shared/components/table/components/table.types";
 
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
@@ -19,6 +11,7 @@ import { PROGRAMS_COLUMNS } from "./programs.constants";
 
 const ProgramTableModule: React.FC<Props> = React.memo(
   ({
+    renderMappings,
     getItems,
     renderFilters,
     sorting,
@@ -33,6 +26,7 @@ const ProgramTableModule: React.FC<Props> = React.memo(
     columns
   }) => (
     <TableModule
+      renderMappings={renderMappings}
       disableTitle={disableTitle}
       getItems={getItems}
       defaultFilters={defaultFilters}
@@ -67,19 +61,11 @@ const ProgramTableModule: React.FC<Props> = React.memo(
   )
 );
 
-interface Props {
-  getItems: GetItemsFuncType;
-  renderFilters?: RenderFiltersFuncType;
-  sorting: string;
-  filtering: FilteringType;
-  defaultFilters: TDefaultFilters;
-  paging: IPaging;
+interface Props extends ITableModuleProps {
   isAuthenticated?: boolean;
   showRating?: boolean;
   title: string;
-  disableTitle?: boolean;
   toggleFavorite: TableToggleFavoriteType;
-  columns?: SortingColumn[];
 }
 
 export default ProgramTableModule;

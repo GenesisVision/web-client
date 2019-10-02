@@ -20,11 +20,19 @@ import {
 const createFundSettingsValidationSchema = (
   props: ICreateFundSettingsProps & WithTranslation
 ) => {
-  const { t } = props;
+  const {
+    t,
+    rate,
+    wallet,
+    managerMaxEntryFee,
+    managerMaxExitFee,
+    minimumDepositAmount,
+    fundCurrency
+  } = props;
   const minDeposit = parseFloat(
     formatCurrencyValue(
-      convertToCurrency(props.minimumDepositAmount, props.rate),
-      props.fundCurrency
+      convertToCurrency(minimumDepositAmount, rate),
+      fundCurrency
     )
   );
   return object().shape({
@@ -39,15 +47,15 @@ const createFundSettingsValidationSchema = (
         })
       )
       .max(
-        props.wallet.available,
+        wallet.available,
         t("manager.create-program-page.settings.validation.amount-is-large")
       ),
     [CREATE_FUND_FIELDS.logo]: inputImageShape(t),
     [CREATE_FUND_FIELDS.title]: assetTitleShape(t),
     [CREATE_FUND_FIELDS.description]: assetDescriptionShape(t),
 
-    [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, props.managerMaxEntryFee),
-    [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, props.managerMaxExitFee),
+    [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, managerMaxEntryFee),
+    [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, managerMaxExitFee),
     [CREATE_FUND_FIELDS.assets]: assetsShape(t)
   });
 };

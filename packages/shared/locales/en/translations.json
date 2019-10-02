@@ -683,6 +683,7 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "currency": "Program currency",
       "broker": "Broker",
       "leverage": "Leverage",
       "period": "Period",
@@ -811,6 +812,8 @@
         "date": "Date"
       },
       "open-positions": {
+        "delay": "delay",
+        "delay-tooltip": "This manager makes trades and open positions public with a {{delay}} delay.",
         "date": "Date Open",
         "symbol": "Symbol",
         "direction": "Dir",
@@ -1634,6 +1637,11 @@
       }
     },
     "program-settings": {
+      "trades-update": {
+        "title": "Trades and open positions delay",
+        "text": "Managers have the ability to delay the public display of their trades and open positions to protect their strategy.",
+        "select": "Trades delay"
+      },
       "two-factor-confirm": {
         "title": "Two-factor authorization (2fa)",
         "text": "You must confirm your 2fa code to access the Huobi native platform."
@@ -1883,6 +1891,7 @@
           "available-in-wallet": "Available in wallet"
         },
         "hints": {
+          "trades-delay": "Description about Trades delay is here",
           "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
           "entry-fee": "Description about entry fee is here",
           "entry-fee-description": "A fee charged upon each investment in the program.",

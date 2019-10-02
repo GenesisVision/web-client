@@ -18,7 +18,7 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, t, onApply, canClose }) => {
           )}
         </p>
         <GVButton
-          color="primary"
+          color="danger"
           disabled={!canClose}
           onClick={setCloseAssetOpen}
         >

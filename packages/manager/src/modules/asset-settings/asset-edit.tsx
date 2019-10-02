@@ -78,7 +78,8 @@ interface OwnProps {
   description: string;
   onSubmit: (
     values: AssetEditFormValues,
-    setSubmitting: SetSubmittingType
+    setSubmitting: SetSubmittingType,
+    resetForm?: () => void
   ) => void;
 }
 
@@ -102,8 +103,8 @@ const AssetEdit = compose<React.ComponentType<OwnProps>>(
         [FIELDS.description]: assetDescriptionShape(props.t),
         [FIELDS.logo]: inputImageShape(props.t)
       }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
+    handleSubmit: (values, { props, setSubmitting, resetForm }) => {
+      props.onSubmit(values, setSubmitting, resetForm);
     }
   }),
   React.memo

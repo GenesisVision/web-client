@@ -121,5 +121,7 @@ export type FeesType = {
   successFee?: number;
   successFeeSelected?: number;
   successFeeCurrent?: number;
+  successFeePersonal?: number;
   exitFee?: number;
+  exitFeePersonal?: number;
 };

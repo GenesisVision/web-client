@@ -40,6 +40,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
     as: composeProgramDetailsUrl(program.url),
     pathname: PROGRAM_DETAILS_FOLDER_ROUTE
   };
+  const requestCurrency = program.statistic.balance.currency;
   return (
     <TableRow>
       <td
@@ -116,26 +117,14 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.equity")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    <Tooltip
-                      render={() => (
-                        <div>
-                          {formatCurrencyValue(
-                            program.statistic.balanceGVT.amount,
-                            "GVT"
-                          )}{" "}
-                          {"GVT"}
-                        </div>
+                    <NumberFormat
+                      value={formatCurrencyValue(
+                        program.statistic.balance.amount,
+                        requestCurrency
                       )}
-                    >
-                      <NumberFormat
-                        value={formatCurrencyValue(
-                          program.statistic.balanceBase.amount,
-                          program.currency
-                        )}
-                        suffix={` ${program.currency}`}
-                        displayType="text"
-                      />
-                    </Tooltip>
+                      suffix={` ${requestCurrency}`}
+                      displayType="text"
+                    />
                   </div>
                 </div>
                 <div>
@@ -160,9 +149,9 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     {`${formatCurrencyValue(
-                      program.availableInvestmentBase,
-                      program.currency
-                    )} ${program.currency}`}
+                      program.availableInvestmentInCurrency,
+                      requestCurrency
+                    )} ${requestCurrency}`}
                   </div>
                 </div>
                 <div>

@@ -7,19 +7,24 @@ import {
   ProgramProfitChart,
   ProgramStatistic
 } from "gv-api-web";
-import { getRandomInteger } from "shared/utils/helpers";
-import { equityChartLoaderData } from "./equity-chart.loader-data";
-import { periodsLoaderData } from "./periods.loader-data";
 import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
+import {
+  amountWithCurrencyLoaderData,
+  managerLoaderData,
+  mockDate
+} from "shared/components/details/details.loader-data";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
-import { amountWithCurrencyLoaderData, managerLoaderData, mockDate } from "../../details/details.loader-data";
+import { getRandomInteger } from "shared/utils/helpers";
+import { CurrencyEnum } from "shared/utils/types";
+
+import { periodsLoaderData } from "./periods.loader-data";
 
 export const selectedCurrenciesLoaderData: TChartCurrency[] = [
   { name: "GVT", color: "#f0f0f0" }
 ];
 
 export const profitChartLoaderData: ProgramProfitChart = {
-  equityChart: equityChartLoaderData,
+  equityChart: [],
   totalProfit: 0,
   timeframeProfit: 0,
   programCurrency: "ETH",
@@ -50,7 +55,7 @@ export const profitChartDataLoaderData: ProfitChartDataType = [
 ];
 
 export const statisticDataLoaderData = {
-  statisticCurrency: "GVT",
+  statisticCurrency: "",
   statistic: {
     equityChart: [],
     totalProgramCurrencyProfit: faker.random.number(),
@@ -169,7 +174,7 @@ export const personalProgramDetailsLoaderData: PersonalProgramDetailsFull = {
 };
 
 export const programDetailsLoaderData: ProgramDetailsFull = {
-  currency: "GVT",
+  currency: "" as CurrencyEnum,
   level: getRandomInteger(0, 100),
   levelProgress: getRandomInteger(0, 100),
   periodDuration: getRandomInteger(0, 100),
@@ -212,7 +217,7 @@ export const programDetailsLoaderData: ProgramDetailsFull = {
   id: "",
   logo: "",
   url: "",
-  color: faker.internet.color(),
+  color: "#fff",
   description: faker.lorem.sentences(3),
   title: faker.lorem.word(),
   ipfsHash: "",

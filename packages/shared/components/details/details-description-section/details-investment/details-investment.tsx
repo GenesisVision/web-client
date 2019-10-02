@@ -62,7 +62,7 @@ const _DetailsInvestment: React.FC<Props> = ({
     () => {
       isAuthenticated && id && dispatch(getEvents(id, EVENT_LOCATION.Asset)());
     },
-    [isAuthenticated]
+    [isAuthenticated, id]
   );
   useEffect(
     () => {

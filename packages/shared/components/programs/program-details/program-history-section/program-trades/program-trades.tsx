@@ -10,10 +10,15 @@ import TableContainer from "shared/components/table/components/table-container";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import filesService from "shared/services/file-service";
 
-import { tradesTableSelector } from "../../reducers/program-history.reducer";
+import {
+  tradesSelector,
+  tradesTableSelector
+} from "../../reducers/program-history.reducer";
 import { getTrades } from "../../services/program-details.service";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 import ProgramTradesRow from "./program-trades-row";
+import { useSelector } from "react-redux";
+import { TradesDelayHint } from "../trades-delay-hint";
 
 const _ProgramTrades: React.FC<Props> = ({
   showSwaps,
@@ -22,19 +27,28 @@ const _ProgramTrades: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const columns = generateProgramTradesColumns(!showSwaps, !showTickets);
+  const {
+    itemsData: { data }
+  } = useSelector(tradesSelector);
+  const delay = data ? data.tradesDelay : "None";
 
   return (
     <TableContainer
       exportButtonToolbarRender={(filtering: any) => (
-        <DownloadButtonToolbar
-          filtering={filtering!.dateRange}
-          programId={programId}
-          getExportFileUrl={filesService.getTradesExportFileUrl}
-        />
+        <div className="details-trades__toolbar">
+          <TradesDelayHint delay={delay} />
+          <div>
+            <DownloadButtonToolbar
+              filtering={filtering!.dateRange}
+              programId={programId}
+              getExportFileUrl={filesService.getTradesExportFileUrl}
+            />
+          </div>
+        </div>
       )}
       getItems={getTrades(programId)}
       dataSelector={tradesTableSelector}
-      isFetchOnMount={false}
+      isFetchOnMount={true}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}

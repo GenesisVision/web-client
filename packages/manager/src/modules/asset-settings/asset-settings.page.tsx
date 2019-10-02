@@ -3,8 +3,8 @@ import "shared/modules/asset-settings/asset-settings.scss";
 
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
   bindActionCreators,
@@ -24,15 +24,16 @@ const _AssetsEditPage: React.FC<Props> = ({
   settingsBlocks,
   redirectToAsset,
   service: { dispatchDescription, editAsset },
-  t,
   description
 }) => {
+  const [t] = useTranslation();
   useEffect(() => {
     dispatchDescription();
-  }, [dispatchDescription]);
+  }, []);
   const editAssetCallback: TUpdateAssetFunc = useCallback(
-    values => {
+    (values, setSubmitting, resetForm) => {
       const currentValues = {
+        tradesDelay: description!.tradesDelay,
         exitFee: description!.exitFee,
         entryFee: description!.entryFee,
         successFee: description!.successFee,
@@ -51,7 +52,9 @@ const _AssetsEditPage: React.FC<Props> = ({
             values && values.investmentLimit ? values.investmentLimit : null
         },
         asset
-      ).then(dispatchDescription);
+      )
+        .then(dispatchDescription)
+        .finally(resetForm);
     },
     [asset, description, dispatchDescription, editAsset]
   );
@@ -108,10 +111,9 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, DispatchProps, WithTranslation {}
+interface Props extends OwnProps, DispatchProps {}
 
 const AssetSettingsPage = compose<React.ComponentType<OwnProps>>(
-  translate(),
   connect(
     null,
     mapDispatchToProps

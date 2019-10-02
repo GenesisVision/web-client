@@ -56,7 +56,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
-      className="asset-details-description__col"
+      className="details-description__control-elements-block"
     >
       <InvestmentProgramInfo programDescription={programDescription} />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">

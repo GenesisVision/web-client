@@ -66,98 +66,94 @@ const _InvestmentProgramInfo: React.FC<
       ? availableInvestmentLimit
       : availableInvestmentBase;
   return (
-    <>
-      <div className="asset-details-description__statistic-container">
-        {LevelCalculator && isOwnProgram && (
-          <div className="statistics-item asset-details-description__level-calculator">
-            <LevelCalculator
-              id={programDescription.id}
-              currency={programDescription.currency}
-              title={programDescription.title}
-              levelsParameters={levelsParameters!}
-              isKycConfirmed={isKycConfirmed!}
-            />
-          </div>
-        )}
-        <StatisticItem
-          label={
-            <TooltipLabel
-              tooltipContent={t("program-details-page.tooltip.av-to-invest")}
-              labelText={t("program-details-page.description.avToInvest")}
-            />
-          }
-          className="asset-details-description__short-statistic-item"
-          accent
-        >
-          <NumberFormat
-            value={formatCurrencyValue(availableInvestment, currency)}
-            displayType="text"
-            suffix={` ${currency}`}
+    <div className="asset-details-description__col ">
+      {LevelCalculator && isOwnProgram && (
+        <div className="statistics-item asset-details-description__level-calculator">
+          <LevelCalculator
+            id={programDescription.id}
+            currency={programDescription.currency}
+            title={programDescription.title}
+            levelsParameters={levelsParameters!}
+            isKycConfirmed={isKycConfirmed!}
           />
-        </StatisticItem>
-        <StatisticItem
-          label={
-            <TooltipLabel
-              tooltipContent={t("program-details-page.tooltip.entry-fee")}
-              labelText={t("program-details-page.description.entryFee")}
-            />
-          }
-          className="asset-details-description__short-statistic-item"
-          accent
-        >
-          {entryFeeSelected !== entryFeeCurrent ? (
-            <Hint
-              content={
-                <NumberFormat
-                  value={formatValue(entryFeeSelected, 2)}
-                  displayType="text"
-                  prefix={`${entryFeeCurrent} % (`}
-                  suffix=" %)"
-                />
-              }
-              className="asset-details-description__short-statistic-hint"
-              vertical={VERTICAL_POPOVER_POS.BOTTOM}
-              tooltipContent={t(
-                "program-details-page.description.entry-fee-levels"
-              )}
-            />
-          ) : (
-            <NumberFormat
-              value={formatValue(entryFeeCurrent, 2)}
-              displayType="text"
-              suffix=" %"
-            />
-          )}
-        </StatisticItem>
-      </div>
-      <div className="asset-details-description__statistic-container">
-        <StatisticItem
-          label={
-            <TooltipLabel
-              tooltipContent={t("program-details-page.tooltip.success-fee")}
-              labelText={t("program-details-page.description.successFee")}
-            />
-          }
-          className="asset-details-description__short-statistic-item"
-          accent
-        >
-          {renderFee(successFeeSelected, successFeeCurrent)}
-        </StatisticItem>
-        <StatisticItem
-          label={
-            <TooltipLabel
-              tooltipContent={t("program-details-page.tooltip.stop-out-level")}
-              labelText={t("program-details-page.description.stop-out-level")}
-            />
-          }
-          condition={!!stopOutLevelCurrent && !!stopOutLevelSelected}
-          className="asset-details-description__short-statistic-item"
-          accent
-        >
-          {renderFee(stopOutLevelSelected, stopOutLevelCurrent)}
-        </StatisticItem>
-      </div>
-    </>
+        </div>
+      )}
+      <StatisticItem
+        label={
+          <TooltipLabel
+            tooltipContent={t("program-details-page.tooltip.av-to-invest")}
+            labelText={t("program-details-page.description.avToInvest")}
+          />
+        }
+        className="asset-details-description__short-statistic-item"
+        accent
+      >
+        <NumberFormat
+          value={formatCurrencyValue(availableInvestment, currency)}
+          displayType="text"
+          suffix={` ${currency}`}
+        />
+      </StatisticItem>
+      <StatisticItem
+        label={
+          <TooltipLabel
+            tooltipContent={t("program-details-page.tooltip.entry-fee")}
+            labelText={t("program-details-page.description.entryFee")}
+          />
+        }
+        className="asset-details-description__short-statistic-item"
+        accent
+      >
+        {entryFeeSelected !== entryFeeCurrent ? (
+          <Hint
+            content={
+              <NumberFormat
+                value={formatValue(entryFeeSelected, 2)}
+                displayType="text"
+                prefix={`${entryFeeCurrent} % (`}
+                suffix=" %)"
+              />
+            }
+            className="asset-details-description__short-statistic-hint"
+            vertical={VERTICAL_POPOVER_POS.BOTTOM}
+            tooltipContent={t(
+              "program-details-page.description.entry-fee-levels"
+            )}
+          />
+        ) : (
+          <NumberFormat
+            value={formatValue(entryFeeCurrent, 2)}
+            displayType="text"
+            suffix=" %"
+          />
+        )}
+      </StatisticItem>
+      <StatisticItem
+        label={
+          <TooltipLabel
+            tooltipContent={t("program-details-page.tooltip.success-fee")}
+            labelText={t("program-details-page.description.successFee")}
+          />
+        }
+        className="asset-details-description__short-statistic-item"
+        accent
+      >
+        {renderFee(successFeeSelected, successFeeCurrent)}
+      </StatisticItem>
+      <StatisticItem
+        label={
+          <TooltipLabel
+            tooltipContent={t("program-details-page.tooltip.stop-out-level")}
+            labelText={t("program-details-page.description.stop-out-level")}
+          />
+        }
+        condition={!!stopOutLevelCurrent && !!stopOutLevelSelected}
+        className="asset-details-description__short-statistic-item"
+        accent
+      >
+        {renderFee(stopOutLevelSelected, stopOutLevelCurrent)}
+      </StatisticItem>
+    </div>
   );
 };
 

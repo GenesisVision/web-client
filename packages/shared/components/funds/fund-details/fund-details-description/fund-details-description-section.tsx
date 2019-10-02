@@ -51,10 +51,12 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
           </div>
         )}
       />
-      <FundControls
-        fundDescription={fundDescription}
-        isAuthenticated={isAuthenticated}
-      />
+      <div className="asset-details-description__controls">
+        <FundControls
+          fundDescription={fundDescription}
+          isAuthenticated={isAuthenticated}
+        />
+      </div>
     </div>
   );
 };

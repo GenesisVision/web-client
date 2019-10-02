@@ -8,8 +8,8 @@ import { InvestmentDetails } from "shared/components/details/details-description
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
 import {
-  withBlurLoader,
-  WithBlurLoaderProps
+  WithBlurLoaderProps,
+  withBlurLoader
 } from "shared/decorators/with-blur-loader";
 import { fundEventsSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum } from "shared/utils/types";
@@ -32,7 +32,13 @@ const _FundDetailsContainer: React.FC<Props> = ({
     />
     <div className="details__divider" />
     <DetailsInvestment
-      fees={{ exitFee: description.exitFee, entryFee: description.entryFee }}
+      fees={{
+        exitFee: description.exitFee,
+        entryFee: description.entryFee,
+        exitFeePersonal: description.personalFundDetails
+          ? description.personalFundDetails.exitFeePersonal
+          : 0
+      }}
       dispatchDescription={dispatchFundDescription}
       eventTypesSelector={fundEventsSelector}
       asset={ASSET.FUND}

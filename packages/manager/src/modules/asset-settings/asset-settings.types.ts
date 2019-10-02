@@ -11,5 +11,6 @@ export type TUpdateAssetFunc = (
     investmentLimit?: number;
     stopOutLevel?: number;
   },
-  setSubmitting: SetSubmittingType
+  setSubmitting: SetSubmittingType,
+  resetForm?: () => void
 ) => void;

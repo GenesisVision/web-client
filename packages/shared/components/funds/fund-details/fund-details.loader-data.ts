@@ -1,18 +1,18 @@
+import faker from "faker";
 import {
   FundDetailsFull,
   FundProfitChart,
   FundStatistic,
   PersonalFundDetailsFull
 } from "gv-api-web";
+import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import {
   amountWithCurrencyLoaderData,
   managerLoaderData,
   mockDate
 } from "shared/components/details/details.loader-data";
 import { getRandomInteger } from "shared/utils/helpers";
-import faker from "faker";
-import { equityChartLoaderData } from "./equity-chart.loader-data";
-import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
+
 import { IFundStatisticData } from "./fund-details-statistics-section/fund-details-statistics/fund-details-statistics-elements";
 
 export const fundChartLoaderData: FundProfitChart = {
@@ -23,7 +23,7 @@ export const fundChartLoaderData: FundProfitChart = {
   timeframeGvtProfit: 0.0,
   creationDate: new Date("2019-08-08T14:59:16.3828400+00:00"),
   profitPercent: 17.94,
-  equityChart: equityChartLoaderData,
+  equityChart: [],
   balance: 115.621828125,
   investors: 0,
   profitChangePercent: 18.84,
@@ -46,7 +46,7 @@ export const fundStatisticLoaderData: FundProfitChart = {
   timeframeGvtProfit: getRandomInteger(0, 100),
   creationDate: mockDate,
   profitPercent: getRandomInteger(0, 100),
-  equityChart: equityChartLoaderData,
+  equityChart: [],
   balance: getRandomInteger(0, 100),
   investors: getRandomInteger(0, 100),
   profitChangePercent: getRandomInteger(0, 100),
@@ -110,7 +110,7 @@ export const fundDetailsLoaderData: FundDetailsFull = {
   id: "",
   logo: "",
   url: "",
-  color: faker.internet.color(),
+  color: "#fff",
   description: faker.lorem.sentences(3),
   title: faker.lorem.word(),
   ipfsHash: "",
