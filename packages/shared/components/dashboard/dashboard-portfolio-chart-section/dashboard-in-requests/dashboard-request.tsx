@@ -4,7 +4,8 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
-import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import PortfolioEventLogo
+  from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
@@ -17,7 +18,6 @@ import { CancelRequestPropsType } from "../../dashboard.constants";
 const _DashboardRequest: React.FC<Props> = ({
   successFee,
   exitFee,
-  entryFee,
   request,
   cancelRequest,
   onApplyCancelRequest,
@@ -87,42 +87,55 @@ const _DashboardRequest: React.FC<Props> = ({
       </StatisticItem>
       <StatisticItem
         className={"dashboard-request-popover__statistic-item"}
-        condition={isInvestor && !!successFee}
-        label={t("program-details-page.description.successFee")}
+        condition={
+          isInvestor && successFee !== null && successFee !== undefined
+        }
+        label={
+          <NumberFormat
+            value={successFee}
+            suffix={` %`}
+            allowNegative={false}
+            displayType="text"
+          />
+        }
         invert
       >
-        <NumberFormat
-          value={successFee}
-          suffix={` %`}
-          allowNegative={false}
-          displayType="text"
-        />
+        {t("program-details-page.description.successFee")}
       </StatisticItem>
       <StatisticItem
         className={"dashboard-request-popover__statistic-item"}
-        condition={isInvestor && !!entryFee}
-        label={t("program-details-page.description.entryFee")}
+        condition={
+          isInvestor &&
+          request.type === "Invest" &&
+          request.entryFee !== null &&
+          request.entryFee !== undefined
+        }
+        label={
+          <NumberFormat
+            value={request.entryFee}
+            suffix={` %`}
+            allowNegative={false}
+            displayType="text"
+          />
+        }
         invert
       >
-        <NumberFormat
-          value={entryFee}
-          suffix={` %`}
-          allowNegative={false}
-          displayType="text"
-        />
+        {t("fund-details-page.description.entryFee")}
       </StatisticItem>
       <StatisticItem
         className={"dashboard-request-popover__statistic-item"}
-        condition={isInvestor && !!exitFee}
-        label={t("fund-details-page.description.exitFee")}
+        condition={isInvestor && exitFee !== null && exitFee !== undefined}
+        label={
+          <NumberFormat
+            value={exitFee}
+            suffix={` %`}
+            allowNegative={false}
+            displayType="text"
+          />
+        }
         invert
       >
-        <NumberFormat
-          value={exitFee}
-          suffix={` %`}
-          allowNegative={false}
-          displayType="text"
-        />
+        {t("fund-details-page.description.exitFee")}
       </StatisticItem>
       <div className="dashboard-request-popover__btns">
         {request.canCancelRequest && (
@@ -151,7 +164,6 @@ export interface Props extends OwnProps {}
 interface OwnProps {
   successFee?: number;
   exitFee?: number;
-  entryFee?: number;
   request: ProgramRequest;
   cancelRequest: (x: CancelRequestPropsType) => void;
   onApplyCancelRequest(): void;

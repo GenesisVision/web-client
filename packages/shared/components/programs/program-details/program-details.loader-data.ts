@@ -15,6 +15,7 @@ import {
 } from "shared/components/details/details.loader-data";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { getRandomInteger } from "shared/utils/helpers";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { periodsLoaderData } from "./periods.loader-data";
 
@@ -54,7 +55,7 @@ export const profitChartDataLoaderData: ProfitChartDataType = [
 ];
 
 export const statisticDataLoaderData = {
-  statisticCurrency: "GVT",
+  statisticCurrency: "",
   statistic: {
     equityChart: [],
     totalProgramCurrencyProfit: faker.random.number(),
@@ -173,7 +174,7 @@ export const personalProgramDetailsLoaderData: PersonalProgramDetailsFull = {
 };
 
 export const programDetailsLoaderData: ProgramDetailsFull = {
-  currency: "GVT",
+  currency: "" as CurrencyEnum,
   level: getRandomInteger(0, 100),
   levelProgress: getRandomInteger(0, 100),
   periodDuration: getRandomInteger(0, 100),

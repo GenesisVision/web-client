@@ -8,10 +8,7 @@ import AssetStatus from "shared/components/asset-status/asset-status";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
-import {
-  PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT
-} from "shared/components/profitability/profitability.helper";
+import { PROFITABILITY_PREFIX, PROFITABILITY_VARIANT } from "shared/components/profitability/profitability.helper";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -96,12 +93,17 @@ const _Investment: React.FC<Props> = ({
             </Profitability>
           </StatisticItem>
           <StatisticItem
-            condition={isInvestor && successFeePersonal !== null}
+            condition={
+              isInvestor &&
+              personalDetails.invested !== 0 &&
+              successFeePersonal !== undefined &&
+              successFeePersonal !== null
+            }
             label={t("program-details-page.description.successFee")}
             accent
           >
             <NumberFormat
-              value={successFeeCurrent}
+              value={successFeePersonal}
               suffix={` %`}
               allowNegative={false}
               displayType="text"
@@ -111,6 +113,7 @@ const _Investment: React.FC<Props> = ({
             condition={
               isInvestor &&
               exitFeePersonal !== null &&
+              exitFeePersonal !== undefined &&
               exitFee !== exitFeePersonal
             }
             label={t("fund-details-page.description.exitFee")}
@@ -134,7 +137,7 @@ const _Investment: React.FC<Props> = ({
           >
             <AssetStatus
               successFee={successFeeCurrent}
-              exitFee={exitFee}
+              exitFee={exitFee !== exitFeePersonal}
               entryFee={entryFeeCurrent}
               status={personalDetails.status as STATUS}
               id={id}
