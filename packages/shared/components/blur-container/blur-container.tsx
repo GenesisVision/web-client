@@ -19,4 +19,6 @@ interface Props {
   blur: boolean;
 }
 
-export const BlurContainer = React.memo(_BlurContainer);
+export const BlurContainer = React.memo<React.FunctionComponent<Props>>(
+  _BlurContainer
+);

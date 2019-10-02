@@ -9,9 +9,9 @@ import {
 } from "shared/components/notifications/actions/notifications.actions";
 import notificationsApi from "shared/services/api-client/notifications-api";
 import authService from "shared/services/auth-service";
-import { RootThunkAction } from "shared/utils/types";
+import { RootThunk } from "shared/utils/types";
 
-export const serviceGetNotifications = (): RootThunkAction<
+export const serviceGetNotifications = (): RootThunk<
   CancelablePromise<NotificationList>
 > => (dispatch, getState): CancelablePromise<NotificationList> => {
   const { notifications } = getState();
@@ -26,7 +26,7 @@ export const serviceGetNotifications = (): RootThunkAction<
     });
 };
 
-export const serviceClearNotifications = (): RootThunkAction => dispatch => {
+export const serviceClearNotifications = (): RootThunk<void> => dispatch => {
   dispatch(clearNotificationsAction());
   dispatch(addTotalNotificationsAction(0));
   dispatch(setNotificationsOptionsAction(calculateOptions()));

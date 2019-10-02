@@ -32,6 +32,7 @@ const _NotificationsWidget: React.FC<Props> = ({
 interface Props {
   data?: number;
   openNotifications: () => void;
+  loaderData?: number;
 }
 
 const NotificationsWidget = React.memo(withBlurLoader(_NotificationsWidget));

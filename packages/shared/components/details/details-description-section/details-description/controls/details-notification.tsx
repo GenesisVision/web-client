@@ -10,14 +10,16 @@ import DetailsDescriptionControl from "./details-description-control";
 const _DetailsNotification: React.FC<Props> = ({
   url,
   hasNotifications,
-  title
+  title,
+  pathname
 }) => {
   const [t] = useTranslation();
   return (
     <DetailsDescriptionControl
       tag={Link}
       to={{
-        pathname: url,
+        pathname,
+        as: url,
         state: `/ ${title}`
       }}
       text={t("fund-details-page.description.notifications")}
@@ -32,6 +34,7 @@ const _DetailsNotification: React.FC<Props> = ({
 
 interface Props {
   url: string;
+  pathname: string;
   hasNotifications: boolean;
   title: string;
 }

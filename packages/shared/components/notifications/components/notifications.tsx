@@ -8,11 +8,11 @@ import {
 import moment from "moment";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { Icon } from "shared/components/icon/icon";
 import { RingIcon } from "shared/components/icon/ring-icon";
 import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
+import Link from "shared/components/link/link";
 import NotificationsGroup from "shared/components/notifications/components/notification-group/notification-group";
 import Spinner from "shared/components/spiner/spiner";
 import useApiRequest from "shared/hooks/api-request.hook";
@@ -62,7 +62,9 @@ const _Notifications: React.FC<Props> = ({
     fetchNotification();
     return clearNotifications;
   }, []);
-  const fetchNotification = useCallback(() => !isPending && sendRequest(), []);
+  const fetchNotification = useCallback(() => !isPending && sendRequest(), [
+    isPending
+  ]);
   const renderGroups = (groups: NotificationGroups) => (
     group: string
   ): React.ReactNode => (

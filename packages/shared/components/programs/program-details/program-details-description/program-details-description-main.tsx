@@ -9,6 +9,7 @@ import DetailsNotification from "shared/components/details/details-description-s
 import DetailsSettingControl from "shared/components/details/details-description-section/details-description/controls/details-setting-control";
 import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
+import { PROGRAM_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -100,6 +101,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
         <DetailsNotification
           title={programDescription.title}
           url={composeProgramNotificationsUrl(programDescription.url)}
+          pathname={PROGRAM_NOTIFICATIONS_FOLDER_ROUTE}
           hasNotifications={personalDetails && personalDetails.hasNotifications}
         />
         {isOwnProgram && personalDetails && personalDetails.canCloseProgram && (

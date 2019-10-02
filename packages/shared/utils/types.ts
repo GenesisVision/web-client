@@ -1,5 +1,6 @@
 import {
   AmountWithCurrencyCurrencyEnum,
+  CancelablePromise,
   FundAssetPart,
   PlatformAsset,
   ProgramNotificationSettingList
@@ -7,11 +8,11 @@ import {
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { NextPage, NextPageContext } from "next";
+import { AppContextType } from "next/dist/next-server/lib/utils";
 import { Action, Dispatch, Store } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { RootState } from "shared/reducers/root-reducer";
-import { AppContextType } from "next/dist/next-server/lib/utils";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
@@ -34,11 +35,11 @@ export interface NotificationsActionType<T = ProgramNotificationSettingList>
 
 export interface ActionType<T = any, U = any> extends Action {
   type: string;
-  payload: T;
+  payload?: T;
   meta?: U;
 }
 
-export type ApiAction<T = any, U = any> = ActionType<Promise<T>, U>;
+export type ApiAction<T = any, U = any> = ActionType<CancelablePromise<T>, U>;
 
 export type RootThunkAction<R = any> = ThunkAction<R, AuthRootState, any, any>;
 
@@ -88,9 +89,10 @@ export type TGetAuthState = () => AuthRootState;
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
-export type InitializeStoreType = (
-  initialState?: {}
-) => Store<any, ActionType<any, any>> & {
+export type InitializeStoreType = (initialState?: {}) => Store<
+  any,
+  ActionType<any, any>
+> & {
   dispatch: any;
 };
 
