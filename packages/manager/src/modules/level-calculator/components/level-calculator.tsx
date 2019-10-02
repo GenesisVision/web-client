@@ -1,7 +1,6 @@
 import "./level-calculator.scss";
 
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 import { CalculatorIcon } from "shared/components/icon/calculator-icon";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
@@ -9,7 +8,7 @@ import useIsOpen from "shared/hooks/is-open.hook";
 
 import LevelCalculatorPopupContainer from "./level-calculator-popup.container";
 
-const _LevelCalculator: React.FC<ILevelCalculatorProps & WithTranslation> = ({
+const _LevelCalculator: React.FC<ILevelCalculatorProps> = ({
   id,
   title,
   currency,
@@ -41,5 +40,5 @@ const _LevelCalculator: React.FC<ILevelCalculatorProps & WithTranslation> = ({
   );
 };
 
-const LevelCalculator = translate()(React.memo(_LevelCalculator));
+const LevelCalculator = React.memo(_LevelCalculator);
 export default LevelCalculator;

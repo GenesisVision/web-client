@@ -1,10 +1,7 @@
 import { LevelsParamsInfo } from "gv-api-web";
 import * as React from "react";
 import { compose } from "redux";
-import DetailsBlock, {
-  DETAILS_BLOCK_TYPE
-} from "shared/components/details/details-block";
-import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
+import SignalProviderControls from "shared/components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 import {
   WithBlurLoaderProps,
@@ -34,12 +31,7 @@ const _ProgramControls: React.FC<Props> = ({
         levelsParameters={levelsParameters}
       />
       {isOwnProgram && programDescription.isSignalProgram && (
-        <DetailsBlock
-          type={DETAILS_BLOCK_TYPE.BORDERED}
-          className="asset-details-description__col"
-        >
-          <SignalProgramInfo programDescription={programDescription} />
-        </DetailsBlock>
+        <SignalProviderControls programDescription={programDescription} />
       )}
     </div>
   );
@@ -48,7 +40,9 @@ const _ProgramControls: React.FC<Props> = ({
 interface Props extends IProgramControlsProps {}
 
 const ProgramControls = compose<
-  React.ComponentType<IProgramControlsProps & WithBlurLoaderProps<LevelsParamsInfo>>
+  React.ComponentType<
+    IProgramControlsProps & WithBlurLoaderProps<LevelsParamsInfo>
+  >
 >(
   withBlurLoader,
   React.memo

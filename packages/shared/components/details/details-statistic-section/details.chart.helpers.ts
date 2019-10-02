@@ -22,13 +22,17 @@ import {
   TChartCurrency,
   TRemoveChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
+import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { TSelectorData } from "shared/utils/selectors";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
-import { platformCurrenciesSelector } from "../../../reducers/platform-reducer";
 import { TStatisticCurrencyAction } from "../reducers/statistic-currency.reducer";
-import { StatisticPeriodState, TStatisticPeriodAction } from "../reducers/statistic-period.reducer";
+import {
+  StatisticPeriodState,
+  TStatisticPeriodAction
+} from "../reducers/statistic-period.reducer";
+import { DETAILS_CHART_TABS } from "./details-chart-section/details-chart";
 
 export type TStatisticCurrencySelector = (state: RootState) => CurrencyEnum;
 
@@ -40,13 +44,16 @@ export type TProfitChartSelector = (
   state: RootState
 ) => TSelectorData<ProfitChartDataType>;
 
-export type TUseChartStateValues = () => {
+export type TUseChartStateValuesOutput = {
   selectedCurrencies: TChartCurrency[];
   selectCurrencies: TChartCurrency[];
   addCurrency: TAddChartCurrency;
   removeCurrency: TRemoveChartCurrency;
   changeCurrency: TChangeChartCurrency;
 };
+export type TUseChartStateValues = (
+  view: DETAILS_CHART_TABS
+) => TUseChartStateValuesOutput;
 
 export type TUseChartPeriod = () => {
   period: ChartDefaultPeriod;
@@ -70,7 +77,7 @@ export const useChartPeriodCreator: TUseChartPeriodCreator = (
     period => {
       dispatch(action(period));
     },
-    [action, dispatch]
+    [dispatch]
   );
   return {
     period,
@@ -155,6 +162,7 @@ type TUseFundChartStateDataMethods = {
 type TUseFundChartStateData = () => TUseFundChartStateDataMethods;
 export type TUseFundChartStateDataCreator = (
   props: {
+    view: DETAILS_CHART_TABS;
     statisticCurrencyAction: (
       currency: CurrencyEnum
     ) => TStatisticCurrencyAction;
@@ -170,6 +178,7 @@ export type TUseFundChartStateDataCreator = (
   }
 ) => TUseFundChartStateDataMethods;
 export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
+  view,
   statisticCurrencyAction,
   profitChartSelector,
   balanceChartSelector,
@@ -207,10 +216,16 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
         period,
         currencies
       };
-      dispatch(getBalanceChart(opts));
-      dispatch(getProfitChart(opts));
+      switch (view) {
+        case DETAILS_CHART_TABS.PROFIT:
+          dispatch(getProfitChart(opts));
+          break;
+        case DETAILS_CHART_TABS.BALANCE:
+          dispatch(getProfitChart(opts));
+          dispatch(getBalanceChart(opts));
+      }
     },
-    [period, id, selectedCurrencies, dispatch, getBalanceChart, getProfitChart]
+    [period, id, selectedCurrencies]
   );
   return {
     statisticCurrencyAction,
@@ -223,14 +238,8 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
 };
 
 type TUseFundChartStateValuesCreator = (
-  useFundChartStateData: TUseFundChartStateData
-) => {
-  selectedCurrencies: TChartCurrency[];
-  selectCurrencies: TChartCurrency[];
-  addCurrency: TAddChartCurrency;
-  removeCurrency: TRemoveChartCurrency;
-  changeCurrency: TChangeChartCurrency;
-};
+  useFundChartStateData: TUseFundChartStateDataMethods
+) => TUseChartStateValuesOutput;
 export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = useFundChartStateData => {
   const dispatch = useDispatch();
   const {
@@ -238,7 +247,7 @@ export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = u
     platformCurrencies,
     selectedCurrencies,
     setSelectedCurrencies
-  } = useFundChartStateData();
+  } = useFundChartStateData;
   const [selectCurrencies, setSelectCurrencies] = useState<TChartCurrency[]>(
     []
   );
@@ -261,7 +270,7 @@ export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = u
         selectCurrencies.find(({ name }) => name === currency)!
       ]);
     },
-    [setSelectedCurrencies, selectedCurrencies, selectCurrencies]
+    [selectedCurrencies, selectCurrencies]
   );
   const removeCurrency = useCallback(
     (name: string) => {
@@ -269,7 +278,7 @@ export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = u
         ...selectedCurrencies.filter(item => item.name !== name)
       ]);
     },
-    [selectedCurrencies, setSelectedCurrencies]
+    [selectedCurrencies]
   );
   const changeCurrency = useCallback(
     (i: number) => (event: ISelectChangeEvent) => {
@@ -282,13 +291,7 @@ export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = u
       setSelectedCurrencies([...newSelectedCurrencies]);
       dispatch(statisticCurrencyAction(newSelectedCurrencies[0].name));
     },
-    [
-      selectedCurrencies,
-      platformCurrencies,
-      setSelectedCurrencies,
-      dispatch,
-      statisticCurrencyAction
-    ]
+    [selectedCurrencies, platformCurrencies, dispatch]
   );
   return {
     addCurrency,

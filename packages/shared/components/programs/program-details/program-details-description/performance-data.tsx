@@ -5,6 +5,7 @@ import { compose } from "redux";
 import Leverage from "shared/components/leverage/leverage";
 import PieContainerSmall from "shared/components/pie-container/pie-container-small";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
+import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import StatisticItemLoader from "shared/components/statistic-item/statistic-item.loader";
 import StatisticItemTextLoader from "shared/components/statistic-item/statistic-item.txt-loader";
@@ -23,7 +24,7 @@ const _PerformanceData: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="asset-details-description__performance-data">
+    <StatisticItemList className="asset-details-description__performance-data">
       <StatisticItem label={t("program-details-page.description.broker")}>
         <img
           className={"asset-details-description__broker"}
@@ -98,7 +99,7 @@ const _PerformanceData: React.FC<Props> = ({
           value={programDescription.volumeScale}
         />
       </StatisticItem>
-    </div>
+    </StatisticItemList>
   );
 };
 
