@@ -46,35 +46,33 @@ const _CreateFundContainer: React.FC = () => {
   );
 
   return (
-    <div className="create-fund-container">
-      <div>
-        <CreateFundSettingsSection
-          currency={currency}
-          condition={!!platformSettings && !!minimumDepositAmount}
-          navigateBack={setIsNavigationDialogVisible}
-          onSubmit={handleSubmit}
-          author={author}
-          minimumDepositAmount={minimumDepositAmount}
-          managerMaxExitFee={
-            (platformSettings &&
-              platformSettings!.programsInfo.managerMaxExitFee) ||
-            0
-          }
-          managerMaxEntryFee={
-            (platformSettings &&
-              platformSettings!.programsInfo.managerMaxEntryFee) ||
-            0
-          }
-        />
-        <ConfirmPopup
-          open={isNavigationDialogVisible}
-          onClose={setNotIsNavigationDialogVisible}
-          onApply={() => dispatch(goBack)}
-          body={t("manager.create-fund-page.navigation-back-text")}
-          applyButtonText={t("buttons.continue")}
-        />
-      </div>
-    </div>
+    <>
+      <CreateFundSettingsSection
+        currency={currency}
+        condition={!!platformSettings && !!minimumDepositAmount}
+        navigateBack={setIsNavigationDialogVisible}
+        onSubmit={handleSubmit}
+        author={author}
+        minimumDepositAmount={minimumDepositAmount}
+        managerMaxExitFee={
+          (platformSettings &&
+            platformSettings!.programsInfo.managerMaxExitFee) ||
+          0
+        }
+        managerMaxEntryFee={
+          (platformSettings &&
+            platformSettings!.programsInfo.managerMaxEntryFee) ||
+          0
+        }
+      />
+      <ConfirmPopup
+        open={isNavigationDialogVisible}
+        onClose={setNotIsNavigationDialogVisible}
+        onApply={() => dispatch(goBack)}
+        body={t("manager.create-fund-page.navigation-back-text")}
+        applyButtonText={t("buttons.continue")}
+      />
+    </>
   );
 };
 
