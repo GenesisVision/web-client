@@ -2,6 +2,7 @@ import "shared/components/deposit-details/deposit-details.scss";
 
 import "./create-fund-settings.scss";
 
+import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
 import DescriptionBlock from "components/create-asset/fields/description-block";
 import FeesSettings from "components/create-asset/fields/fees-settings";
 import { InjectedFormikProps, withFormik } from "formik";
@@ -15,13 +16,12 @@ import { useDispatch } from "react-redux";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { ASSET } from "shared/constants/constants";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
-import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 import { AssetsField } from "./assets-field";
-import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 
 const _CreateFundSettings: React.FC<Props> = ({
   onWalletChange,
