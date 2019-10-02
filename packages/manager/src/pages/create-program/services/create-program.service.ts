@@ -1,10 +1,13 @@
-import { Broker, CancelablePromise, ManagerProgramCreateResult, NewProgramRequest } from "gv-api-web";
+import {
+  Broker,
+  CancelablePromise,
+  ManagerProgramCreateResult,
+  NewProgramRequest
+} from "gv-api-web";
 import brokersApi from "shared/services/api-client/brokers-api";
 import managerApi from "shared/services/api-client/manager-api";
-import { rateApi } from "shared/services/api-client/rate-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
-import { CurrencyEnum } from "shared/utils/types";
 
 import { ICreateProgramSettingsFormValues } from "../components/create-program-settings/create-program-settings";
 
@@ -41,8 +44,3 @@ export const createProgram = (
     });
   });
 };
-
-export const fetchRate = (
-  from: CurrencyEnum,
-  to: CurrencyEnum
-): CancelablePromise<number> => rateApi.v10RateByFromByToGet(from, to);
