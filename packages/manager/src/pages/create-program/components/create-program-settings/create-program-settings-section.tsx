@@ -1,13 +1,26 @@
-import { Broker, BrokerAccountType, ManagerProgramCreateResult, ProgramsInfo, WalletData } from "gv-api-web";
+import useCreateAssetSection from "components/create-asset/create-asset-section.hook";
+import {
+  Broker,
+  BrokerAccountType,
+  ManagerProgramCreateResult,
+  ProgramsInfo
+} from "gv-api-web";
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { CurrencyEnum, ResponseError, SetSubmittingType } from "shared/utils/types";
+import { fetchRate } from "shared/services/rate-service";
+import {
+  CurrencyEnum,
+  ResponseError,
+  SetSubmittingType
+} from "shared/utils/types";
 
-import { createProgram, fetchRate } from "../../services/create-program.service";
-import CreateProgramSettings, { ICreateProgramSettingsFormValues } from "./create-program-settings";
+import { createProgram } from "../../services/create-program.service";
+import CreateProgramSettings, {
+  ICreateProgramSettingsFormValues
+} from "./create-program-settings";
 
 const getCurrency = (accountType: BrokerAccountType): CurrencyEnum =>
   accountType.currencies[0] as CurrencyEnum; // TODO say to backend change type to CurrencyEnum[]
@@ -18,34 +31,26 @@ const getLeverage = (accountType: BrokerAccountType): number =>
 const _CreateProgramSettingsSection: React.FC<OwnProps> = ({
   currency,
   broker,
-  wallets,
   programsInfo,
   onSubmit,
   minimumDepositsAmount,
   navigateBack,
   author
 }) => {
-  const dispatch = useDispatch();
   const brokerAccountType = broker.accountTypes[0];
-  const [accountType, setAccountType] = useState<BrokerAccountType>(
-    brokerAccountType
-  );
   const [programCurrency, setProgramCurrency] = useState<CurrencyEnum>(
     getCurrency(brokerAccountType)
   );
+  const { rate, handleWalletChange, wallet, wallets } = useCreateAssetSection({
+    assetCurrency: programCurrency
+  });
+
+  const dispatch = useDispatch();
+  const [accountType, setAccountType] = useState<BrokerAccountType>(
+    brokerAccountType
+  );
   const [leverage, setLeverage] = useState<number>(
     getLeverage(brokerAccountType)
-  );
-  const [wallet, setWallet] = useState<WalletData>(
-    wallets.find(({ currency }) => currency === "GVT")!
-  );
-  const [rate, setRate] = useState<number>(1);
-
-  useEffect(
-    () => {
-      fetchRate(wallet.currency, programCurrency).then(setRate);
-    },
-    [programCurrency, wallet]
   );
 
   const handleAccountTypeChange = useCallback(
@@ -58,11 +63,6 @@ const _CreateProgramSettingsSection: React.FC<OwnProps> = ({
       setLeverage(getLeverage(accountType));
     },
     [broker]
-  );
-
-  const handleWalletChange = useCallback(
-    (walletId: string) => setWallet(wallets.find(({ id }) => id === walletId)!),
-    [wallets]
   );
 
   const handleCreateProgram = useCallback(
@@ -87,6 +87,7 @@ const _CreateProgramSettingsSection: React.FC<OwnProps> = ({
 
   return (
     <CreateProgramSettings
+      condition={!!wallet}
       navigateBack={navigateBack}
       onSubmit={handleCreateProgram}
       minimumDepositsAmount={minimumDepositsAmount}
@@ -114,7 +115,6 @@ export const CreateProgramSettingsSection = React.memo(
 interface OwnProps {
   currency: CurrencyEnum;
   broker: Broker;
-  wallets: WalletData[];
   programsInfo: ProgramsInfo;
   onSubmit: (data: ManagerProgramCreateResult) => void;
   minimumDepositsAmount: { [key: string]: number };
