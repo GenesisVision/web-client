@@ -7,7 +7,6 @@ import useApiRequest from "shared/hooks/api-request.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { nameSelector } from "shared/reducers/header-reducer";
-import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
 import {
@@ -20,9 +19,10 @@ import CreateFundSettingsSection from "./create-fund-settings/create-fund-settin
 const _CreateFundContainer: React.FC = () => {
   const dispatch = useDispatch();
   const [t] = useTranslation();
+
   const author = useSelector(nameSelector);
-  const platformSettings = useSelector(platformDataSelector);
   const currency = useSelector(currencySelector);
+
   const { data: minimumDepositAmount, sendRequest } = useApiRequest({
     request: fetchMinimumDepositAmount
   });
@@ -49,21 +49,11 @@ const _CreateFundContainer: React.FC = () => {
     <>
       <CreateFundSettingsSection
         currency={currency}
-        condition={!!platformSettings && !!minimumDepositAmount}
+        condition={!!minimumDepositAmount}
         navigateBack={setIsNavigationDialogVisible}
         onSubmit={handleSubmit}
         author={author}
         minimumDepositAmount={minimumDepositAmount}
-        managerMaxExitFee={
-          (platformSettings &&
-            platformSettings!.programsInfo.managerMaxExitFee) ||
-          0
-        }
-        managerMaxEntryFee={
-          (platformSettings &&
-            platformSettings!.programsInfo.managerMaxEntryFee) ||
-          0
-        }
       />
       <ConfirmPopup
         open={isNavigationDialogVisible}
