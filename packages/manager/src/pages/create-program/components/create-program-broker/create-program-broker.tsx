@@ -4,7 +4,12 @@ import { Broker, BrokerAccountType } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import Surface from "shared/components/surface/surface";
+import {
+  forexAllowedSelector,
+  kycConfirmedSelector
+} from "shared/reducers/header-reducer";
 
 import BrokerCard from "./broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "./broker-card/broker-card.constants";
@@ -49,10 +54,10 @@ const _CreateProgramBroker: React.FC<OwnProps> = ({
   brokers,
   selectedBroker,
   setMinimumDepositsAmount,
-  isForexAllowed,
-  isKycConfirmed,
   navigateToSettings
 }) => {
+  const isForexAllowed = useSelector(forexAllowedSelector);
+  const isKycConfirmed = useSelector(kycConfirmedSelector);
   const [t] = useTranslation();
   const selectBrokerHandle = useCallback(
     (brokerName: string) => () => {
@@ -168,6 +173,4 @@ interface OwnProps {
   setSelectedBroker: (broker: Broker) => void;
   selectedBroker: Broker;
   setMinimumDepositsAmount: (amount: { [key: string]: number }) => void;
-  isForexAllowed: boolean;
-  isKycConfirmed: boolean;
 }
