@@ -36,7 +36,6 @@ export const createFund = (
       });
     })
     .then(() => {
-      setSubmitting(false);
       dispatch(
         alertMessageActions.success(
           "manager.create-fund-page.notifications.create-success",
@@ -46,7 +45,9 @@ export const createFund = (
       dispatch(push(DASHBOARD_ROUTE));
     })
     .catch(error => {
-      setSubmitting(false);
       dispatch(alertMessageActions.error(error.errorMessage));
+    })
+    .finally(() => {
+      setSubmitting(false);
     });
 };
