@@ -1,6 +1,8 @@
 import useCreateAssetSection from "components/create-asset/create-asset-section.hook";
 import React from "react";
+import { useSelector } from "react-redux";
 import withLoader from "shared/decorators/with-loader";
+import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { fetchRate } from "shared/services/rate-service";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
@@ -14,13 +16,20 @@ const _CreateFundSettingsSection: React.FC<OwnProps> = ({
   navigateBack,
   onSubmit,
   author,
-  minimumDepositAmount,
-  managerMaxExitFee,
-  managerMaxEntryFee
+  minimumDepositAmount
 }) => {
   const { rate, handleWalletChange, wallet, wallets } = useCreateAssetSection({
     assetCurrency: FUND_CURRENCY
   });
+
+  const platformSettings = useSelector(platformDataSelector);
+  const managerMaxExitFee =
+    (platformSettings && platformSettings!.programsInfo.managerMaxExitFee) || 0;
+
+  const managerMaxEntryFee =
+    (platformSettings && platformSettings!.programsInfo.managerMaxEntryFee) ||
+    0;
+
 
   return (
     <CreateFundSettings
@@ -47,8 +56,6 @@ export default CreateFundSettingsSection;
 
 interface OwnProps {
   currency: CurrencyEnum;
-  managerMaxExitFee: number;
-  managerMaxEntryFee: number;
   onSubmit: (
     data: ICreateFundSettingsFormValues,
     setSubmitting: SetSubmittingType
