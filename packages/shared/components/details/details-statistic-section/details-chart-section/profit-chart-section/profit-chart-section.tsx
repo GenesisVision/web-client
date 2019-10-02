@@ -8,6 +8,7 @@ import {
   TUseChartPeriod,
   TUseChartStateValues
 } from "../../details.chart.helpers";
+import { DETAILS_CHART_TABS } from "../details-chart";
 import ProfitChartElements, {
   TRenderProfitChart,
   TRenderProfitValue
@@ -28,7 +29,7 @@ const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
     changeCurrency,
     selectedCurrencies,
     selectCurrencies
-  } = useChartStateValues();
+  } = useChartStateValues(DETAILS_CHART_TABS.PROFIT);
   const profitChart = useSelector(profitChartSelector);
   return (
     <ProfitChartElements

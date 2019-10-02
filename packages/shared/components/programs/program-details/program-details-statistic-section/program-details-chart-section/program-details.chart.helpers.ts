@@ -1,3 +1,4 @@
+import { DETAILS_CHART_TABS } from "shared/components/details/details-statistic-section/details-chart-section/details-chart";
 import {
   useChartPeriodCreator,
   useChartStateDataCreator,
@@ -21,8 +22,9 @@ import {
 export const useChartPeriod = () =>
   useChartPeriodCreator(statisticPeriodSelector, statisticPeriodAction);
 
-export const useProgramChartStateData = () =>
+export const useProgramChartStateData = (view: DETAILS_CHART_TABS) =>
   useChartStateDataCreator({
+    view,
     statisticCurrencyAction,
     idSelector: programIdSelector,
     statisticPeriodSelector,
@@ -33,5 +35,5 @@ export const useProgramChartStateData = () =>
     getProfitChart
   });
 
-export const useProgramChartStateValues = () =>
-  useFundChartStateValuesCreator(useProgramChartStateData);
+export const useProgramChartStateValues = (view: DETAILS_CHART_TABS) =>
+  useFundChartStateValuesCreator(useProgramChartStateData(view));
