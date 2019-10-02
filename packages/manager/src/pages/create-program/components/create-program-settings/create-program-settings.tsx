@@ -63,7 +63,6 @@ const _CreateProgramSettings: React.FC<Props> = ({
     hasInvestmentLimit,
     description
   },
-  programsInfo,
   accountType,
   rate,
   programCurrency,
@@ -147,10 +146,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
             disabled={!accountType}
             accountLeverages={accountType.leverages}
           />
-          <PeriodLength
-            name={CREATE_PROGRAM_FIELDS.periodLength}
-            programsInfo={programsInfo}
-          />
+          <PeriodLength name={CREATE_PROGRAM_FIELDS.periodLength} />
           <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
           <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
           <InvestmentLimitField
@@ -220,7 +216,6 @@ const _CreateProgramSettings: React.FC<Props> = ({
 interface OwnProps {
   broker: Broker;
   wallets: WalletData[];
-  programsInfo: ProgramsInfo;
   onSubmit: (
     data: ICreateProgramSettingsFormValues,
     setSubmitting: SetSubmittingType
