@@ -8,7 +8,13 @@ import FeesSettings from "components/create-asset/fields/fees-settings";
 import InvestmentLimitField from "components/create-asset/fields/investment-limit-field";
 import StopOutField from "components/create-asset/fields/stop-out-field";
 import { InjectedFormikProps, withFormik } from "formik";
-import { Broker, BrokerAccountType, NewProgramRequestTradesDelayEnum, ProgramsInfo, WalletData } from "gv-api-web";
+import {
+  Broker,
+  BrokerAccountType,
+  NewProgramRequestTradesDelayEnum,
+  ProgramsInfo,
+  WalletData
+} from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -32,6 +38,7 @@ import PeriodLength from "./fields/period-length";
 import SignalProgram from "./fields/signal-program";
 import TradesDelay from "./fields/trades-delay";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 const _CreateProgramSettings: React.FC<Props> = ({
   t,
@@ -262,7 +269,10 @@ type Props = InjectedFormikProps<
   ICreateProgramSettingsFormValues
 >;
 
-const CreateProgramSettings = compose<React.ComponentType<OwnProps>>(
+const CreateProgramSettings = compose<
+  React.ComponentType<OwnProps & WithLoaderProps>
+>(
+  withLoader,
   translate(),
   withFormik<ICreateProgramSettingsProps, ICreateProgramSettingsFormValues>({
     displayName: "CreateProgramSettingsForm",
