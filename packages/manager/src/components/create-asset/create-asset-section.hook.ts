@@ -1,7 +1,8 @@
 import { WalletData } from "gv-api-web";
 import { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
+import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { fetchRate } from "shared/services/rate-service";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -19,11 +20,19 @@ type TUseCreateAssetSectionOutput = {
 const useCreateAssetSection = ({
   assetCurrency
 }: TUseCreateAssetSectionProps): TUseCreateAssetSectionOutput => {
+  const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
   const [wallet, setWallet] = useState<WalletData>(
     wallets.find(x => x.currency === assetCurrency)!
   );
   const [rate, setRate] = useState<number>(1);
+
+  useEffect(
+    () => {
+      dispatch(fetchWallets(assetCurrency));
+    },
+    [assetCurrency]
+  );
 
   useEffect(
     () => {
