@@ -6,7 +6,6 @@ import CreateAssetSection from "components/create-asset/create-asset-section/cre
 import DescriptionBlock from "components/create-asset/fields/description-block";
 import FeesSettings from "components/create-asset/fields/fees-settings";
 import { InjectedFormikProps, withFormik } from "formik";
-import { FundAssetPart, WalletData } from "gv-api-web";
 import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
 import DepositDetailsBlock from "pages/create-program/components/create-program-settings/fields/deposit-details-block";
 import * as React from "react";
@@ -25,34 +24,23 @@ import { AssetsField } from "./assets-field";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 
 const _CreateFundSettings: React.FC<Props> = ({
-  onWalletChange,
   validateForm,
   setFieldValue,
   handleSubmit,
   isValid,
-  wallets,
-  wallet,
   t,
   isSubmitting,
-  values: { depositAmount, description },
+  values: { depositAmount, description, depositWalletId },
   managerMaxExitFee,
   managerMaxEntryFee,
-  rate,
   minimumDepositAmount
 }) => {
   const dispatch = useDispatch();
   useEffect(
     () => {
-      setFieldValue(CREATE_FUND_FIELDS.depositWalletId, wallet.id);
       setFieldValue(CREATE_FUND_FIELDS.depositAmount, "");
     },
-    [wallet]
-  );
-  useEffect(
-    () => {
-      validateForm();
-    },
-    [rate]
+    [depositWalletId]
   );
 
   const validateAndSubmit = (
@@ -116,18 +104,15 @@ const _CreateFundSettings: React.FC<Props> = ({
           />
         </CreateAssetSection>
         <DepositDetailsBlock
+          availableName={CREATE_FUND_FIELDS.available}
+          rateName={CREATE_FUND_FIELDS.rate}
           blockNumber={4}
           walletFieldName={CREATE_FUND_FIELDS.depositWalletId}
           inputName={CREATE_FUND_FIELDS.depositAmount}
           depositAmount={depositAmount}
           minimumDepositAmount={minimumDepositAmount}
-          wallets={wallets}
-          rate={rate}
           setFieldValue={setFieldValue}
-          onWalletChange={onWalletChange}
           assetCurrency={FUND_CURRENCY}
-          walletAvailable={wallet.available}
-          walletCurrency={wallet.currency}
         />
         <CreateAssetNavigation asset={ASSET.FUND} isSubmitting={isSubmitting} />
       </form>
@@ -136,6 +121,8 @@ const _CreateFundSettings: React.FC<Props> = ({
 };
 
 export enum CREATE_FUND_FIELDS {
+  available = "available",
+  rate = "rate",
   depositWalletId = "depositWalletId",
   depositAmount = "depositAmount",
   entryFee = "entryFee",
@@ -147,13 +134,15 @@ export enum CREATE_FUND_FIELDS {
 }
 
 export interface ICreateFundSettingsFormValues {
+  [CREATE_FUND_FIELDS.available]: number;
+  [CREATE_FUND_FIELDS.rate]: number;
   [CREATE_FUND_FIELDS.depositWalletId]: string;
   [CREATE_FUND_FIELDS.depositAmount]?: number;
   [CREATE_FUND_FIELDS.entryFee]?: number;
   [CREATE_FUND_FIELDS.logo]: IImageValue;
   [CREATE_FUND_FIELDS.description]: string;
   [CREATE_FUND_FIELDS.title]: string;
-  [CREATE_FUND_FIELDS.assets]: FundAssetPart[];
+  [CREATE_FUND_FIELDS.assets]: Array<any>;
   [CREATE_FUND_FIELDS.exitFee]?: number;
 }
 
@@ -171,18 +160,18 @@ const CreateFundSettings = compose<
   translate(),
   withFormik<ICreateFundSettingsProps, ICreateFundSettingsFormValues>({
     displayName: "CreateFundSettingsForm",
-    mapPropsToValues: ({ wallet }) => {
-      return {
-        [CREATE_FUND_FIELDS.depositWalletId]: wallet.id,
-        [CREATE_FUND_FIELDS.depositAmount]: undefined,
-        [CREATE_FUND_FIELDS.entryFee]: undefined,
-        [CREATE_FUND_FIELDS.logo]: {},
-        [CREATE_FUND_FIELDS.description]: "",
-        [CREATE_FUND_FIELDS.title]: "",
-        [CREATE_FUND_FIELDS.assets]: [],
-        [CREATE_FUND_FIELDS.exitFee]: undefined
-      };
-    },
+    mapPropsToValues: () => ({
+      [CREATE_FUND_FIELDS.available]: 0,
+      [CREATE_FUND_FIELDS.rate]: 1,
+      [CREATE_FUND_FIELDS.depositWalletId]: "",
+      [CREATE_FUND_FIELDS.depositAmount]: undefined,
+      [CREATE_FUND_FIELDS.entryFee]: undefined,
+      [CREATE_FUND_FIELDS.logo]: {},
+      [CREATE_FUND_FIELDS.description]: "",
+      [CREATE_FUND_FIELDS.title]: "",
+      [CREATE_FUND_FIELDS.assets]: [],
+      [CREATE_FUND_FIELDS.exitFee]: undefined
+    }),
     validationSchema: createFundSettingsValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
@@ -194,14 +183,10 @@ export default CreateFundSettings;
 interface OwnProps {
   managerMaxExitFee: number;
   managerMaxEntryFee: number;
-  wallets: WalletData[];
-  wallet: WalletData;
   author: string;
-  onWalletChange: (walletId: string) => void;
   minimumDepositAmount: number;
   onSubmit: (
     values: ICreateFundSettingsFormValues,
     setSubmitting: SetSubmittingType
   ) => void;
-  rate: number;
 }

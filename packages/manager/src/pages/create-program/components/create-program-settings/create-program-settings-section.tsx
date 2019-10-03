@@ -29,9 +29,6 @@ const _CreateProgramSettingsSection: React.FC<OwnProps> = ({ broker }) => {
   const [programCurrency, setProgramCurrency] = useState<CurrencyEnum>(
     getCurrency(brokerAccountType)
   );
-  const { rate, handleWalletChange, wallet, wallets } = useCreateAssetSection({
-    assetCurrency: programCurrency
-  });
 
   const [accountType, setAccountType] = useState<BrokerAccountType>(
     brokerAccountType
@@ -68,19 +65,14 @@ const _CreateProgramSettingsSection: React.FC<OwnProps> = ({ broker }) => {
     <>
       <CreateProgramSettings
         programsInfo={programsInfo}
-        condition={!!wallet}
         onSubmit={handleCreate}
         minimumDepositsAmount={broker.accountTypes[0].minimumDepositsAmount}
         broker={broker}
         author={author}
-        wallets={wallets}
-        wallet={wallet}
         leverage={leverage}
         programCurrency={programCurrency}
-        rate={rate}
         accountType={accountType}
         changeLeverage={setLeverage}
-        changeWallet={handleWalletChange}
         changeCurrency={setProgramCurrency}
         changeAccountType={handleAccountTypeChange}
       />

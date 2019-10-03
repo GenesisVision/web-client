@@ -12,8 +12,7 @@ import {
   Broker,
   BrokerAccountType,
   NewProgramRequestTradesDelayEnum,
-  ProgramsInfo,
-  WalletData
+  ProgramsInfo
 } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
@@ -48,15 +47,14 @@ const _CreateProgramSettings: React.FC<Props> = ({
   isValid,
   handleSubmit,
   changeAccountType,
-  changeWallet,
   changeCurrency,
   changeLeverage,
   setFieldValue,
   minimumDepositsAmount,
-  wallets,
   broker,
   isSubmitting,
   values: {
+    depositWalletId,
     currency,
     depositAmount,
     isSignalProgram,
@@ -64,9 +62,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
     description
   },
   accountType,
-  rate,
-  programCurrency,
-  wallet
+  programCurrency
 }) => {
   const dispatch = useDispatch();
   useEffect(
@@ -89,16 +85,9 @@ const _CreateProgramSettings: React.FC<Props> = ({
   );
   useEffect(
     () => {
-      setFieldValue(CREATE_PROGRAM_FIELDS.depositWalletId, wallet.id);
       setFieldValue(CREATE_PROGRAM_FIELDS.depositAmount, "");
     },
-    [wallet]
-  );
-  useEffect(
-    () => {
-      validateForm();
-    },
-    [rate]
+    [depositWalletId]
   );
 
   const validateAndSubmit = (
@@ -156,7 +145,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
             checkboxName={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
             inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
             hasInvestmentLimit={hasInvestmentLimit}
-            currency={currency}
+            currency={currency as CurrencyEnum}
           />
           <SignalProgram
             condition={broker.isSignalsAvailable}
@@ -194,17 +183,14 @@ const _CreateProgramSettings: React.FC<Props> = ({
           )}
         </CreateAssetSection>
         <DepositDetailsBlock
+          availableName={CREATE_PROGRAM_FIELDS.available}
+          rateName={CREATE_PROGRAM_FIELDS.rate}
           walletFieldName={CREATE_PROGRAM_FIELDS.depositWalletId}
           inputName={CREATE_PROGRAM_FIELDS.depositAmount}
           depositAmount={depositAmount}
           minimumDepositAmount={minimumDepositsAmount[programCurrency]}
-          wallets={wallets}
-          rate={rate}
           setFieldValue={setFieldValue}
-          onWalletChange={changeWallet}
           assetCurrency={programCurrency}
-          walletAvailable={wallet.available}
-          walletCurrency={wallet.currency}
         />
         <CreateAssetNavigation
           asset={ASSET.PROGRAM}
@@ -218,7 +204,6 @@ const _CreateProgramSettings: React.FC<Props> = ({
 interface OwnProps {
   programsInfo: ProgramsInfo;
   broker: Broker;
-  wallets: WalletData[];
   onSubmit: (
     data: ICreateProgramSettingsFormValues,
     setSubmitting: SetSubmittingType
@@ -231,9 +216,6 @@ interface OwnProps {
   changeLeverage: (leverage: number) => void;
   accountType: BrokerAccountType;
   changeAccountType: (id: string) => void;
-  rate: number;
-  wallet: WalletData;
-  changeWallet: (id: string) => void;
 }
 
 export interface ICreateProgramSettingsProps
@@ -241,8 +223,10 @@ export interface ICreateProgramSettingsProps
     WithTranslation {}
 
 export interface ICreateProgramSettingsFormValues {
+  [CREATE_PROGRAM_FIELDS.available]: number;
+  [CREATE_PROGRAM_FIELDS.rate]: number;
   [CREATE_PROGRAM_FIELDS.tradesDelay]: NewProgramRequestTradesDelayEnum;
-  [CREATE_PROGRAM_FIELDS.currency]: CurrencyEnum;
+  [CREATE_PROGRAM_FIELDS.currency]: string;
   [CREATE_PROGRAM_FIELDS.periodLength]?: number;
   [CREATE_PROGRAM_FIELDS.successFee]?: number;
   [CREATE_PROGRAM_FIELDS.stopOutLevel]: number;

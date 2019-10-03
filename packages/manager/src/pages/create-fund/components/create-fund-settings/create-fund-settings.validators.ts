@@ -10,11 +10,12 @@ import {
   entryFeeShape,
   exitFeeShape
 } from "shared/utils/validators/validators";
-import { array, number, object } from "yup";
+import { array, lazy, number, object } from "yup";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";
 import {
   CREATE_FUND_FIELDS,
+  ICreateFundSettingsFormValues,
   ICreateFundSettingsProps
 } from "./create-fund-settings";
 
@@ -23,40 +24,43 @@ const createFundSettingsValidationSchema = (
 ) => {
   const {
     t,
-    rate,
-    wallet,
     managerMaxEntryFee,
     managerMaxExitFee,
-    minimumDepositAmount,
+    minimumDepositAmount
   } = props;
-  const minDeposit = parseFloat(
-    formatCurrencyValue(
-      convertToCurrency(minimumDepositAmount, rate),
-      FUND_CURRENCY
-    )
-  );
-  return object().shape({
-    [CREATE_FUND_FIELDS.depositAmount]: number()
-      .required(
-        t("manager.create-program-page.settings.validation.amount-required")
+  return lazy<ICreateFundSettingsFormValues>(values => {
+    const minDeposit = parseFloat(
+      formatCurrencyValue(
+        convertToCurrency(
+          minimumDepositAmount,
+          values[CREATE_FUND_FIELDS.rate]
+        ),
+        FUND_CURRENCY
       )
-      .min(
-        minDeposit,
-        t("manager.create-program-page.settings.validation.amount-is-zero", {
-          min: minDeposit
-        })
-      )
-      .max(
-        wallet.available,
-        t("manager.create-program-page.settings.validation.amount-is-large")
-      ),
-    [CREATE_FUND_FIELDS.logo]: inputImageShape(t),
-    [CREATE_FUND_FIELDS.title]: assetTitleShape(t),
-    [CREATE_FUND_FIELDS.description]: assetDescriptionShape(t),
+    );
+    return object<ICreateFundSettingsFormValues>().shape({
+      [CREATE_FUND_FIELDS.depositAmount]: number()
+        .required(
+          t("manager.create-program-page.settings.validation.amount-required")
+        )
+        .min(
+          minDeposit,
+          t("manager.create-program-page.settings.validation.amount-is-zero", {
+            min: minDeposit
+          })
+        )
+        .max(
+          values[CREATE_FUND_FIELDS.available],
+          t("manager.create-program-page.settings.validation.amount-is-large")
+        ),
+      [CREATE_FUND_FIELDS.logo]: inputImageShape(t),
+      [CREATE_FUND_FIELDS.title]: assetTitleShape(t),
+      [CREATE_FUND_FIELDS.description]: assetDescriptionShape(t),
 
-    [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, managerMaxEntryFee),
-    [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, managerMaxExitFee),
-    [CREATE_FUND_FIELDS.assets]: assetsShape(t)
+      [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, managerMaxEntryFee),
+      [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, managerMaxExitFee),
+      [CREATE_FUND_FIELDS.assets]: assetsShape(t)
+    });
   });
 };
 

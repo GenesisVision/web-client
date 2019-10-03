@@ -1,7 +1,7 @@
 import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
+import useCreateAssetSection from "components/create-asset/create-asset-section.hook";
 import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
-import { WalletData } from "gv-api-web";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { onSelectChange } from "shared/components/select/select.test-helpers";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
@@ -11,20 +11,33 @@ import AmountInfo from "./amount-info";
 import InputDepositAmount from "./input-deposit-amount";
 
 const _DepositDetailsBlock: React.FC<Props> = ({
+  rateName,
+  availableName,
   blockNumber = 3,
   walletFieldName,
   inputName,
   assetCurrency,
   depositAmount,
   minimumDepositAmount,
-  wallets,
-  rate,
-  setFieldValue,
-  walletAvailable,
-  walletCurrency,
-  onWalletChange
+  setFieldValue
 }) => {
   const [t] = useTranslation();
+  const { rate, handleWalletChange, wallet, wallets } = useCreateAssetSection({
+    assetCurrency
+  });
+  useEffect(
+    () => {
+      setFieldValue(rateName, rate);
+    },
+    [rate]
+  );
+  useEffect(
+    () => {
+      setFieldValue(availableName, wallet.available);
+      setFieldValue(walletFieldName, wallet.id);
+    },
+    [wallet]
+  );
   return (
     <CreateAssetSection
       title={t("manager.create-program-page.settings.deposit-details")}
@@ -37,13 +50,13 @@ const _DepositDetailsBlock: React.FC<Props> = ({
             name={walletFieldName}
             label={t("transfer.from")}
             items={wallets}
-            onChange={onSelectChange(onWalletChange)}
+            onChange={onSelectChange(handleWalletChange)}
           />
         </div>
         <InputDepositAmount
           name={inputName}
-          walletCurrency={walletCurrency}
-          walletAvailable={walletAvailable}
+          walletCurrency={wallet.currency}
+          walletAvailable={wallet.available}
           assetCurrency={assetCurrency}
           depositAmount={depositAmount}
           rate={rate}
@@ -52,8 +65,8 @@ const _DepositDetailsBlock: React.FC<Props> = ({
         <AmountInfo
           assetCurrency={assetCurrency}
           minimumDepositsAmount={minimumDepositAmount}
-          walletAvailable={walletAvailable}
-          walletCurrency={walletCurrency}
+          walletAvailable={wallet.available}
+          walletCurrency={wallet.currency}
         />
       </CreateAssetField>
     </CreateAssetSection>
@@ -61,18 +74,15 @@ const _DepositDetailsBlock: React.FC<Props> = ({
 };
 
 interface Props {
+  availableName: string;
+  rateName: string;
   blockNumber?: number;
   walletFieldName: string;
   inputName: string;
   depositAmount?: number;
   minimumDepositAmount: number;
-  wallets: WalletData[];
-  rate: number;
   setFieldValue: Function;
-  onWalletChange: (value: any) => void;
   assetCurrency: CurrencyEnum;
-  walletAvailable: number;
-  walletCurrency: CurrencyEnum;
 }
 
 const DepositDetailsBlock = React.memo(_DepositDetailsBlock);
