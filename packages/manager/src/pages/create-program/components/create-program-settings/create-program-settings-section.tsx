@@ -2,15 +2,14 @@ import useCreateAssetSection from "components/create-asset/create-asset-section.
 import {
   Broker,
   BrokerAccountType,
-  ManagerProgramCreateResult,
-  ProgramsInfo
+  ManagerProgramCreateResult
 } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { fetchRate } from "shared/services/rate-service";
+import { programsInfoSelector } from "shared/reducers/platform-reducer";
 import {
   CurrencyEnum,
   ResponseError,
@@ -36,6 +35,7 @@ const _CreateProgramSettingsSection: React.FC<OwnProps> = ({
   navigateBack,
   author
 }) => {
+  const programsInfo = useSelector(programsInfoSelector);
   const brokerAccountType = broker.accountTypes[0];
   const [programCurrency, setProgramCurrency] = useState<CurrencyEnum>(
     getCurrency(brokerAccountType)
@@ -86,6 +86,7 @@ const _CreateProgramSettingsSection: React.FC<OwnProps> = ({
 
   return (
     <CreateProgramSettings
+      programsInfo={programsInfo}
       condition={!!wallet}
       navigateBack={navigateBack}
       onSubmit={handleCreateProgram}

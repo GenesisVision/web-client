@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { ASSET } from "shared/constants/constants";
+import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
@@ -38,9 +39,9 @@ import PeriodLength from "./fields/period-length";
 import SignalProgram from "./fields/signal-program";
 import TradesDelay from "./fields/trades-delay";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 const _CreateProgramSettings: React.FC<Props> = ({
+  programsInfo,
   t,
   leverage,
   validateForm,
@@ -146,7 +147,10 @@ const _CreateProgramSettings: React.FC<Props> = ({
             disabled={!accountType}
             accountLeverages={accountType.leverages}
           />
-          <PeriodLength name={CREATE_PROGRAM_FIELDS.periodLength} />
+          <PeriodLength
+            programsInfo={programsInfo}
+            name={CREATE_PROGRAM_FIELDS.periodLength}
+          />
           <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
           <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
           <InvestmentLimitField
@@ -214,6 +218,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
 };
 
 interface OwnProps {
+  programsInfo: ProgramsInfo;
   broker: Broker;
   wallets: WalletData[];
   onSubmit: (
