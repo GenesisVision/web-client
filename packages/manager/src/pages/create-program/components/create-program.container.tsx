@@ -33,10 +33,10 @@ const _CreateProgramContainer: React.FC = () => {
         asset={ASSET.PROGRAM}
         onApply={confirmNavigateToBroker}
       />
-      <div className="create-program-page__header">
+      <div className="create-asset__header">
         <h1>{t("manager.create-program-page.title")}</h1>
       </div>
-      <div className="create-program-page__tabs">
+      <div className="create-asset__tabs">
         <GVTabs value={tab}>
           <GVTab
             value={TAB.BROKER}
@@ -48,16 +48,18 @@ const _CreateProgramContainer: React.FC = () => {
           />
         </GVTabs>
       </div>
-      {tab === TAB.BROKER && (
-        <CreateProgramBroker
-          setSelectedBroker={setSelectedBroker}
-          navigateToSettings={navigateToSettings}
-          selectedBroker={selectedBroker}
-        />
-      )}
-      {tab === TAB.SETTINGS && (
-        <CreateProgramSettingsSection broker={selectedBroker!} />
-      )}
+      <div className="create-asset__content">
+        {tab === TAB.BROKER && (
+          <CreateProgramBroker
+            setSelectedBroker={setSelectedBroker}
+            navigateToSettings={navigateToSettings}
+            selectedBroker={selectedBroker}
+          />
+        )}
+        {tab === TAB.SETTINGS && (
+          <CreateProgramSettingsSection broker={selectedBroker!} />
+        )}
+      </div>
     </div>
   );
 };
