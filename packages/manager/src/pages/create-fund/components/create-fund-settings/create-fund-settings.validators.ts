@@ -12,6 +12,7 @@ import {
 } from "shared/utils/validators/validators";
 import { array, number, object } from "yup";
 
+import { FUND_CURRENCY } from "../../create-fund.constants";
 import {
   CREATE_FUND_FIELDS,
   ICreateFundSettingsProps
@@ -27,12 +28,11 @@ const createFundSettingsValidationSchema = (
     managerMaxEntryFee,
     managerMaxExitFee,
     minimumDepositAmount,
-    fundCurrency
   } = props;
   const minDeposit = parseFloat(
     formatCurrencyValue(
       convertToCurrency(minimumDepositAmount, rate),
-      fundCurrency
+      FUND_CURRENCY
     )
   );
   return object().shape({
