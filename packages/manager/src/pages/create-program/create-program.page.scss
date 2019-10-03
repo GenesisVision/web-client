@@ -9,9 +9,8 @@
     @include media-breakpoint-landscape-phone() {
       padding: 0;
     }
-  }
-
-  .gv-tab {
-    cursor: default;
+    .gv-tab {
+      cursor: default;
+    }
   }
 }
