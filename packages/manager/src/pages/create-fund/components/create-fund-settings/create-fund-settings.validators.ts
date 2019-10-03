@@ -13,22 +13,16 @@ import {
 import { array, lazy, number, object } from "yup";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";
-import {
-  CREATE_FUND_FIELDS,
-  ICreateFundSettingsFormValues,
-  ICreateFundSettingsProps
-} from "./create-fund-settings";
+import { CREATE_FUND_FIELDS, ICreateFundSettingsFormValues, ICreateFundSettingsProps } from "./create-fund-settings";
 
-const createFundSettingsValidationSchema = (
-  props: ICreateFundSettingsProps & WithTranslation
-) => {
-  const {
-    t,
-    managerMaxEntryFee,
-    managerMaxExitFee,
-    minimumDepositAmount
-  } = props;
-  return lazy<ICreateFundSettingsFormValues>(values => {
+const createFundSettingsValidationSchema = ({
+  t,
+  platformSettings: {
+    programsInfo: { managerMaxEntryFee, managerMaxExitFee }
+  },
+  minimumDepositAmount
+}: ICreateFundSettingsProps & WithTranslation) =>
+  lazy<ICreateFundSettingsFormValues>(values => {
     const minDeposit = parseFloat(
       formatCurrencyValue(
         convertToCurrency(
@@ -62,7 +56,6 @@ const createFundSettingsValidationSchema = (
       [CREATE_FUND_FIELDS.assets]: assetsShape(t)
     });
   });
-};
 
 export const assetsShape = (t: i18next.TFunction) => {
   return array()
