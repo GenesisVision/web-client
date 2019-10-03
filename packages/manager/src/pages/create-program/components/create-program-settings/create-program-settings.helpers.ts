@@ -11,7 +11,46 @@ import {
 } from "shared/utils/validators/validators";
 import { boolean, mixed, number, object, string } from "yup";
 
-import { ICreateProgramSettingsFormValues, ICreateProgramSettingsProps } from "./create-program-settings";
+import {
+  ICreateProgramSettingsFormValues,
+  ICreateProgramSettingsProps
+} from "./create-program-settings";
+import { BrokerAccountType } from "gv-api-web";
+import { BROKER_CARD_EXTRA_STATE } from "../create-program-broker/broker-card/broker-card.constants";
+
+export const getLeverageDescription = (
+  leverageMin: number,
+  leverageMax: number
+): string => {
+  let result;
+
+  if (leverageMin === leverageMax) {
+    result = "1:" + leverageMin;
+  } else {
+    result = `1:${leverageMin} - 1:${leverageMax}`;
+  }
+
+  return result;
+};
+
+export const getAccountTypes = (accountTypes: BrokerAccountType[]) => {
+  if (!accountTypes[0].currencies) return null;
+  return accountTypes[0].currencies.join(", ");
+};
+
+export const getBrokerState = (
+  isForex: boolean,
+  isForexAllowed: boolean,
+  isKycConfirmed: boolean
+): BROKER_CARD_EXTRA_STATE => {
+  if (isForex && !isKycConfirmed) {
+    return BROKER_CARD_EXTRA_STATE.KYC_REQUIRED;
+  }
+  if (isForex && !isForexAllowed) {
+    return BROKER_CARD_EXTRA_STATE.FOREX_DISABLED;
+  }
+  return BROKER_CARD_EXTRA_STATE.NONE;
+};
 
 export const createProgramMapPropsToValues = ({
   wallet,
