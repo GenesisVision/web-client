@@ -7,7 +7,7 @@ import GVTab from "shared/components/gv-tabs/gv-tab";
 import { ASSET } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
 
-import CreateProgramBroker from "./create-program-broker/create-program-broker";
+import CreateProgramBrokerContainer from "./create-program-broker/create-program-broker.container";
 import { CreateProgramSettingsSection } from "./create-program-settings/create-program-settings-section";
 
 const _CreateProgramContainer: React.FC = () => {
@@ -50,7 +50,7 @@ const _CreateProgramContainer: React.FC = () => {
       </div>
       <div className="create-asset__content">
         {tab === TAB.BROKER && (
-          <CreateProgramBroker
+          <CreateProgramBrokerContainer
             setSelectedBroker={setSelectedBroker}
             navigateToSettings={navigateToSettings}
             selectedBroker={selectedBroker}
