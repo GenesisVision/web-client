@@ -18,8 +18,9 @@ import { IImageValue } from "shared/components/form/input-image/input-image";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "shared/utils/types";
 
+import { FUND_CURRENCY } from "../../create-fund.constants";
 import { AssetsField } from "./assets-field";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 
@@ -29,11 +30,9 @@ const _CreateFundSettings: React.FC<Props> = ({
   setFieldValue,
   handleSubmit,
   isValid,
-  fundCurrency,
   wallets,
   wallet,
   t,
-  navigateBack,
   isSubmitting,
   values: { depositAmount, description },
   managerMaxExitFee,
@@ -126,15 +125,11 @@ const _CreateFundSettings: React.FC<Props> = ({
           rate={rate}
           setFieldValue={setFieldValue}
           onWalletChange={onWalletChange}
-          assetCurrency={fundCurrency}
+          assetCurrency={FUND_CURRENCY}
           walletAvailable={wallet.available}
           walletCurrency={wallet.currency}
         />
-        <CreateAssetNavigation
-          asset={ASSET.FUND}
-          navigateBack={navigateBack}
-          isSubmitting={isSubmitting}
-        />
+        <CreateAssetNavigation asset={ASSET.FUND} isSubmitting={isSubmitting} />
       </form>
     </div>
   );
@@ -197,18 +192,16 @@ const CreateFundSettings = compose<
 export default CreateFundSettings;
 
 interface OwnProps {
-  fundCurrency: CurrencyEnum;
   managerMaxExitFee: number;
   managerMaxEntryFee: number;
   wallets: WalletData[];
   wallet: WalletData;
-  navigateBack(): void;
   author: string;
-  onWalletChange(walletId: string): void;
+  onWalletChange: (walletId: string) => void;
   minimumDepositAmount: number;
-  onSubmit(
+  onSubmit: (
     values: ICreateFundSettingsFormValues,
     setSubmitting: SetSubmittingType
-  ): void;
+  ) => void;
   rate: number;
 }
