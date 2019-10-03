@@ -33,11 +33,13 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   );
   useEffect(
     () => {
+      setFieldValue(inputName, "");
       setFieldValue(availableName, wallet.available);
       setFieldValue(walletFieldName, wallet.id);
     },
     [wallet]
   );
+  if (!wallet) return null;
   return (
     <CreateAssetSection
       title={t("manager.create-program-page.settings.deposit-details")}
