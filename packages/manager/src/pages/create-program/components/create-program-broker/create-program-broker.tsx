@@ -1,6 +1,6 @@
 import "./create-program-broker.scss";
 
-import { Broker, BrokerAccountType } from "gv-api-web";
+import { Broker } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,48 +12,17 @@ import {
 } from "shared/reducers/header-reducer";
 
 import { fetchBrokers } from "../../services/create-program.service";
+import {
+  getAccountTypes,
+  getBrokerState,
+  getLeverageDescription
+} from "../create-program-settings/create-program-settings.helpers";
 import BrokerCard from "./broker-card/broker-card";
-import { BROKER_CARD_EXTRA_STATE } from "./broker-card/broker-card.constants";
 import NavigateToSettings from "./navigate-to-settings";
-
-const getLeverageDescription = (
-  leverageMin: number,
-  leverageMax: number
-): string => {
-  let result;
-
-  if (leverageMin === leverageMax) {
-    result = "1:" + leverageMin;
-  } else {
-    result = `1:${leverageMin} - 1:${leverageMax}`;
-  }
-
-  return result;
-};
-
-const getAccountTypes = (accountTypes: BrokerAccountType[]) => {
-  if (!accountTypes[0].currencies) return null;
-  return accountTypes[0].currencies.join(", ");
-};
-
-const getBrokerState = (
-  isForex: boolean,
-  isForexAllowed: boolean,
-  isKycConfirmed: boolean
-): BROKER_CARD_EXTRA_STATE => {
-  if (isForex && !isKycConfirmed) {
-    return BROKER_CARD_EXTRA_STATE.KYC_REQUIRED;
-  }
-  if (isForex && !isForexAllowed) {
-    return BROKER_CARD_EXTRA_STATE.FOREX_DISABLED;
-  }
-  return BROKER_CARD_EXTRA_STATE.NONE;
-};
 
 const _CreateProgramBroker: React.FC<OwnProps> = ({
   setSelectedBroker,
   selectedBroker,
-  setMinimumDepositsAmount,
   navigateToSettings
 }) => {
   const [brokers, setBrokers] = useState<Broker[]>([]);
@@ -61,9 +30,6 @@ const _CreateProgramBroker: React.FC<OwnProps> = ({
     fetchBrokers().then(brokers => {
       setBrokers(brokers);
       setSelectedBroker(brokers[0]);
-      setMinimumDepositsAmount(
-        brokers[0].accountTypes[0].minimumDepositsAmount
-      );
     });
   }, []);
   const isForexAllowed = useSelector(forexAllowedSelector);
@@ -72,10 +38,6 @@ const _CreateProgramBroker: React.FC<OwnProps> = ({
   const selectBrokerHandle = useCallback(
     (brokerName: string) => () => {
       const selectedBroker = brokers.find(x => x.name === brokerName)!;
-      const minimumDepositsAmount = selectedBroker
-        ? selectedBroker.accountTypes[0].minimumDepositsAmount
-        : undefined;
-      setMinimumDepositsAmount(minimumDepositsAmount);
       setSelectedBroker(selectedBroker);
     },
     []
@@ -182,5 +144,4 @@ interface OwnProps {
   navigateToSettings(): void;
   setSelectedBroker: (broker: Broker) => void;
   selectedBroker?: Broker;
-  setMinimumDepositsAmount: (amount: { [key: string]: number }) => void;
 }
