@@ -1,74 +1,41 @@
-import { push } from "connected-react-router";
+import { CreateAssetBack } from "components/create-asset/create-asset-back";
 import { Broker } from "gv-api-web";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import useIsOpen from "shared/hooks/is-open.hook";
+import { ASSET } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { nameSelector } from "shared/reducers/header-reducer";
-import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import { CreateProgramSettingsSection } from "./create-program-settings/create-program-settings-section";
-import { TFAConfirmBlock } from "./tfa-confirm-block";
 
 const _CreateProgramContainer: React.FC = () => {
   const [t] = useTranslation();
-  const dispatch = useDispatch();
+  const { tab, setTab } = useTab<TAB>(TAB.BROKER);
 
-  const author = useSelector(nameSelector);
-  const currency = useSelector(currencySelector);
-
-  const [minimumDepositsAmount, setMinimumDepositsAmount] = useState<
-    { [key: string]: number } | undefined
-  >(undefined);
-  const [programId, setProgramId] = useState<string | undefined>(undefined);
   const [selectedBroker, setSelectedBroker] = useState<Broker | undefined>(
     undefined
   );
-  const [twoFactorRequired, setTwoFactorRequired] = useIsOpen();
-  const [
-    isNavigationDialogVisible,
-    setIsNavigationDialogVisible,
-    setIsNavigationDialogNotVisible
-  ] = useIsOpen();
-  const { tab, setTab } = useTab<TAB>(TAB.BROKER);
 
-  const confirmNavigateToBroker = useCallback(
-    (setSubmitting: (isSubmitting: boolean) => void) => {
-      setTab(null, TAB.BROKER);
-      setSubmitting(false);
-      setIsNavigationDialogNotVisible();
-    },
-    []
-  );
+  const confirmNavigateToBroker = useCallback(() => {
+    setTab(null, TAB.BROKER);
+  }, []);
 
   const navigateToSettings = useCallback(() => {
     setTab(null, TAB.SETTINGS);
   }, []);
 
-  const onSubmit = useCallback(({ twoFactorRequired, programId }) => {
-    if (twoFactorRequired) {
-      setProgramId(programId);
-      setTwoFactorRequired();
-    } else {
-      dispatch(push(DASHBOARD_ROUTE));
-      dispatch(
-        alertMessageActions.success(
-          "manager.create-program-page.notifications.create-success",
-          true
-        )
-      );
-    }
-  }, []);
-
   return (
-    <div className="create-program-page__container">
+    <div>
+      <CreateAssetBack
+        condition={tab === TAB.SETTINGS}
+        asset={ASSET.PROGRAM}
+        onApply={confirmNavigateToBroker}
+      />
+      <div className="create-program-page__header">
+        <h1>{t("manager.create-program-page.title")}</h1>
+      </div>
       <div className="create-program-page__tabs">
         <GVTabs value={tab}>
           <GVTab
@@ -86,27 +53,11 @@ const _CreateProgramContainer: React.FC = () => {
           setSelectedBroker={setSelectedBroker}
           navigateToSettings={navigateToSettings}
           selectedBroker={selectedBroker}
-          setMinimumDepositsAmount={setMinimumDepositsAmount}
         />
       )}
       {tab === TAB.SETTINGS && (
-        <CreateProgramSettingsSection
-          currency={currency}
-          minimumDepositsAmount={minimumDepositsAmount!}
-          navigateBack={setIsNavigationDialogVisible}
-          broker={selectedBroker!}
-          onSubmit={onSubmit}
-          author={author}
-        />
+        <CreateProgramSettingsSection broker={selectedBroker!} />
       )}
-      {twoFactorRequired && <TFAConfirmBlock id={programId!} />}
-      <ConfirmPopup
-        open={isNavigationDialogVisible}
-        onClose={setIsNavigationDialogNotVisible}
-        onApply={confirmNavigateToBroker}
-        body={t("manager.create-program-page.navigation-back-text")}
-        applyButtonText={t("buttons.continue")}
-      />
     </div>
   );
 };
