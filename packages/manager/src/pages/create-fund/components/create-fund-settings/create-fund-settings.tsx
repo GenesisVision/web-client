@@ -3,20 +3,20 @@ import "shared/components/deposit-details/deposit-details.scss";
 import "./create-fund-settings.scss";
 
 import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
+import useCreateAssetValidate from "components/create-asset/create-asset-validate.hook";
 import DescriptionBlock from "components/create-asset/fields/description-block";
 import FeesSettings from "components/create-asset/fields/fees-settings";
 import { InjectedFormikProps, withFormik } from "formik";
-import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
+import { PlatformInfo } from "gv-api-web";
+import CreateAssetNavigation
+  from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
 import DepositDetailsBlock from "pages/create-program/components/create-program-settings/fields/deposit-details-block";
 import * as React from "react";
-import { useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { useDispatch } from "react-redux";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";
@@ -31,92 +31,70 @@ const _CreateFundSettings: React.FC<Props> = ({
   t,
   isSubmitting,
   values: { depositAmount, description, depositWalletId },
-  managerMaxExitFee,
-  managerMaxEntryFee,
+  platformSettings: {
+    programsInfo: { managerMaxEntryFee, managerMaxExitFee }
+  },
   minimumDepositAmount
 }) => {
-  const dispatch = useDispatch();
-  useEffect(
-    () => {
-      setFieldValue(CREATE_FUND_FIELDS.depositAmount, "");
-    },
-    [depositWalletId]
-  );
-
-  const validateAndSubmit = (
-    e?: React.FormEvent<HTMLFormElement> | undefined
-  ): void => {
-    handleSubmit(e);
-    if (isValid) handleSubmit(e);
-    else
-      dispatch(
-        alertMessageActions.error(
-          t("manager.create-program-page.notifications.validate-error")
-        )
-      );
-    if (e) e.preventDefault();
-  };
-
+  const validateAndSubmit = useCreateAssetValidate({ handleSubmit, isValid });
   return (
-    <div className="create-fund-settings">
-      <form onSubmit={validateAndSubmit}>
-        <CreateAssetSection
-          title={t("manager.create-fund-page.settings.main-settings")}
-          blockNumber={"01"}
-        >
-          <DescriptionBlock
-            asset={ASSET.FUND}
-            titleName={CREATE_FUND_FIELDS.title}
-            descriptionName={CREATE_FUND_FIELDS.description}
-            logoName={CREATE_FUND_FIELDS.logo}
-            description={description}
-          />
-        </CreateAssetSection>
-        <CreateAssetSection
-          title={t("manager.create-fund-page.settings.asset-selection")}
-          blockNumber={"02"}
-        >
-          <AssetsField name={CREATE_FUND_FIELDS.assets} />
-        </CreateAssetSection>
-        <CreateAssetSection
-          title={t("manager.create-fund-page.settings.fees-settings")}
-          blockNumber={"03"}
-        >
-          <FeesSettings
-            entryFeeName={CREATE_FUND_FIELDS.entryFee}
-            entryFeeDescription={t(
-              "manager.create-fund-page.settings.hints.entry-fee-description",
-              { maxFee: managerMaxEntryFee }
-            )}
-            secondFeeName={CREATE_FUND_FIELDS.exitFee}
-            secondFeeLabel={t(
-              "manager.create-fund-page.settings.fields.exit-fee"
-            )}
-            secondFeeUnderText={t(
-              "manager.create-fund-page.settings.hints.exit-fee"
-            )}
-            secondFeeDescription={t(
-              "manager.create-fund-page.settings.hints.exit-fee-description",
-              {
-                maxFee: managerMaxExitFee
-              }
-            )}
-          />
-        </CreateAssetSection>
-        <DepositDetailsBlock
-          availableName={CREATE_FUND_FIELDS.available}
-          rateName={CREATE_FUND_FIELDS.rate}
-          blockNumber={4}
-          walletFieldName={CREATE_FUND_FIELDS.depositWalletId}
-          inputName={CREATE_FUND_FIELDS.depositAmount}
-          depositAmount={depositAmount}
-          minimumDepositAmount={minimumDepositAmount}
-          setFieldValue={setFieldValue}
-          assetCurrency={FUND_CURRENCY}
+    <form onSubmit={validateAndSubmit}>
+      <CreateAssetSection
+        title={t("manager.create-fund-page.settings.main-settings")}
+        blockNumber={"01"}
+      >
+        <DescriptionBlock
+          asset={ASSET.FUND}
+          titleName={CREATE_FUND_FIELDS.title}
+          descriptionName={CREATE_FUND_FIELDS.description}
+          logoName={CREATE_FUND_FIELDS.logo}
+          description={description}
         />
-        <CreateAssetNavigation asset={ASSET.FUND} isSubmitting={isSubmitting} />
-      </form>
-    </div>
+      </CreateAssetSection>
+      <CreateAssetSection
+        title={t("manager.create-fund-page.settings.asset-selection")}
+        blockNumber={"02"}
+      >
+        <AssetsField name={CREATE_FUND_FIELDS.assets} />
+      </CreateAssetSection>
+      <CreateAssetSection
+        title={t("manager.create-fund-page.settings.fees-settings")}
+        blockNumber={"03"}
+      >
+        <FeesSettings
+          entryFeeName={CREATE_FUND_FIELDS.entryFee}
+          entryFeeDescription={t(
+            "manager.create-fund-page.settings.hints.entry-fee-description",
+            { maxFee: managerMaxEntryFee }
+          )}
+          secondFeeName={CREATE_FUND_FIELDS.exitFee}
+          secondFeeLabel={t(
+            "manager.create-fund-page.settings.fields.exit-fee"
+          )}
+          secondFeeUnderText={t(
+            "manager.create-fund-page.settings.hints.exit-fee"
+          )}
+          secondFeeDescription={t(
+            "manager.create-fund-page.settings.hints.exit-fee-description",
+            {
+              maxFee: managerMaxExitFee
+            }
+          )}
+        />
+      </CreateAssetSection>
+      <DepositDetailsBlock
+        availableName={CREATE_FUND_FIELDS.available}
+        rateName={CREATE_FUND_FIELDS.rate}
+        blockNumber={4}
+        walletFieldName={CREATE_FUND_FIELDS.depositWalletId}
+        inputName={CREATE_FUND_FIELDS.depositAmount}
+        depositAmount={depositAmount}
+        minimumDepositAmount={minimumDepositAmount}
+        setFieldValue={setFieldValue}
+        assetCurrency={FUND_CURRENCY}
+      />
+      <CreateAssetNavigation asset={ASSET.FUND} isSubmitting={isSubmitting} />
+    </form>
   );
 };
 
@@ -181,9 +159,7 @@ const CreateFundSettings = compose<
 export default CreateFundSettings;
 
 interface OwnProps {
-  managerMaxExitFee: number;
-  managerMaxEntryFee: number;
-  author: string;
+  platformSettings: PlatformInfo;
   minimumDepositAmount: number;
   onSubmit: (
     values: ICreateFundSettingsFormValues,
