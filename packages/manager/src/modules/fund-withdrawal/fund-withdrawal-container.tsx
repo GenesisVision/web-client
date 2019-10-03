@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { bindActionCreators } from "redux";
 import FundWithdrawDialog from "shared/components/fund-withdraw/fund-withdraw-dialog";
 import {
   FundWithdraw,
@@ -7,6 +7,7 @@ import {
 } from "shared/components/fund-withdraw/fund-withdraw.types";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import { RootState } from "shared/reducers/root-reducer";
+import { MiddlewareDispatch } from "shared/utils/types";
 
 import {
   getFundWithdrawInfo,
@@ -19,7 +20,7 @@ interface IDispatchProps {
 }
 
 const mapDispatchToProps = (
-  dispatch: Dispatch,
+  dispatch: MiddlewareDispatch,
   ownProps: IFundWithdrawalContainerProps
 ) => {
   const { id, accountCurrency, onSubmit, onClose } = ownProps;
@@ -34,7 +35,14 @@ const mapDispatchToProps = (
     dispatch
   );
   return {
-    fetchInfo: getFundWithdrawInfo(id, accountCurrency),
+    fetchInfo: () => {
+      return dispatch(getFundWithdrawInfo(id, accountCurrency))
+        .then(data => data)
+        .catch(error => {
+          onClose();
+          return error;
+        });
+    },
     withdraw: service.withdrawFund
   };
 };

@@ -1,29 +1,27 @@
+import { getManagerFundWithdrawInfoAction } from "modules/fund-withdrawal/actions/fund-withdrawal.actions";
 import { Dispatch } from "redux";
 import {
   FundWithdraw,
-  FundWithdrawalInfoResponse
+  ManagerFundWithdrawalInfoResponse
 } from "shared/components/fund-withdraw/fund-withdraw.types";
+import { fetchWalletsByCurrencyAvailableAction } from "shared/components/wallet/actions/wallet.actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
-import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
+import { ManagerThunk } from "shared/utils/types";
 
 export const getFundWithdrawInfo = (
   id: string,
   currency: string
-) => (): Promise<FundWithdrawalInfoResponse> => {
+): ManagerThunk<Promise<ManagerFundWithdrawalInfoResponse>> => dispatch => {
   return Promise.all([
-    managerApi.v10ManagerFundsByIdWithdrawInfoByCurrencyGet(
-      id,
-      currency,
-      authService.getAuthArg()
-    ),
-    walletApi.v10WalletMultiByCurrencyAvailableGet(
-      currency,
-      authService.getAuthArg()
-    )
-  ]).then(([withdrawalInfo, walletMulti]) => {
-    return { withdrawalInfo, wallets: walletMulti.wallets };
+    dispatch(getManagerFundWithdrawInfoAction(id, currency)),
+    dispatch(fetchWalletsByCurrencyAvailableAction(currency))
+  ]).then(([withdrawalInfo, wallets]) => {
+    return {
+      withdrawalInfo: withdrawalInfo.value,
+      wallets: wallets.value.wallets
+    };
   });
 };
 
