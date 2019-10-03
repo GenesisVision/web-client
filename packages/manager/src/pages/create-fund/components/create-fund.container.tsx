@@ -14,8 +14,12 @@ const _CreateFundContainer: React.FC = () => {
   return (
     <>
       <CreateAssetBack asset={ASSET.PROGRAM} onApply={() => dispatch(goBack)} />
-      <h1>{t("manager.create-fund-page.title")}</h1>
-      <CreateFundSettingsSection />
+      <div className="create-asset__header">
+        <h1>{t("manager.create-fund-page.title")}</h1>
+      </div>
+      <div className="create-asset__content">
+        <CreateFundSettingsSection />
+      </div>
     </>
   );
 };
