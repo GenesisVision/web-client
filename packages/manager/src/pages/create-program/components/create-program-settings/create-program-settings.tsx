@@ -54,7 +54,6 @@ const _CreateProgramSettings: React.FC<Props> = ({
   setFieldValue,
   minimumDepositsAmount,
   wallets,
-  navigateBack,
   broker,
   isSubmitting,
   values: {
@@ -209,7 +208,6 @@ const _CreateProgramSettings: React.FC<Props> = ({
         />
         <CreateAssetNavigation
           asset={ASSET.PROGRAM}
-          navigateBack={navigateBack}
           isSubmitting={isSubmitting}
         />
       </form>
@@ -226,7 +224,6 @@ interface OwnProps {
     setSubmitting: SetSubmittingType
   ) => void;
   minimumDepositsAmount: { [key: string]: number };
-  navigateBack: () => void;
   author: string;
   programCurrency: CurrencyEnum;
   changeCurrency: (currency: CurrencyEnum) => void;
