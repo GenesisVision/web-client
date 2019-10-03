@@ -1,4 +1,4 @@
-import "./create-fund.page.scss";
+import "components/create-asset/create-asset.scss";
 
 import * as React from "react";
 import { useTranslation } from "react-i18next";
