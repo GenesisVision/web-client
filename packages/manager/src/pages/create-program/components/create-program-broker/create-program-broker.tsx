@@ -18,8 +18,8 @@ const _CreateProgramBroker: React.FC<Props> = ({
   data,
   selectedBroker,
   selectBrokerHandle,
-  isForexAllowed,
-  isKycConfirmed,
+  isForexAllowed = true,
+  isKycConfirmed = true,
   navigateToSettings
 }) => {
   const [t] = useTranslation();
@@ -36,8 +36,8 @@ const _CreateProgramBroker: React.FC<Props> = ({
               onSelect={selectBrokerHandle}
               cardState={getBrokerState(
                 broker.isForex,
-                !!isForexAllowed,
-                !!isKycConfirmed
+                isForexAllowed,
+                isKycConfirmed
               )}
               tags={broker.tags}
             />
@@ -45,7 +45,7 @@ const _CreateProgramBroker: React.FC<Props> = ({
           <div className="create-program-broker__navigation">
             <NavigateToSettings
               isForex={selectedBroker.isForex}
-              isKycConfirmed={!!isKycConfirmed}
+              isKycConfirmed={isKycConfirmed}
               navigateToSettings={navigateToSettings}
             />
           </div>
