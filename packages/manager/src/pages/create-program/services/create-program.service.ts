@@ -14,12 +14,13 @@ import { ICreateProgramSettingsFormValues } from "../components/create-program-s
 const GM_BROKER_NAME = "Genesis Markets";
 
 export const fetchBrokers = (): CancelablePromise<Broker[]> =>
-  brokersApi.v10BrokersGet().then(data => {
-    const gvBroker = data.brokers.find(x => x.name === GM_BROKER_NAME)!;
-    data.brokers.splice(data.brokers.indexOf(gvBroker), 1);
-
-    return [gvBroker, ...data.brokers];
-  });
+  brokersApi
+    .v10BrokersGet()
+    .then(data =>
+      data.brokers.sort(
+        (a, b) => +(b.name === GM_BROKER_NAME) - +(a.name === GM_BROKER_NAME)
+      )
+    );
 
 export const createProgram = (
   createProgramData: ICreateProgramSettingsFormValues
