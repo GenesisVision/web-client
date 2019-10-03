@@ -10,7 +10,6 @@ import StopOutField from "components/create-asset/fields/stop-out-field";
 import { InjectedFormikProps, withFormik } from "formik";
 import {
   Broker,
-  BrokerAccountType,
   NewProgramRequestTradesDelayEnum,
   ProgramsInfo
 } from "gv-api-web";
@@ -42,47 +41,27 @@ import SignalsFeeFormPartial from "./signals-fee-form.partial";
 const _CreateProgramSettings: React.FC<Props> = ({
   programsInfo,
   t,
-  leverage,
   validateForm,
   isValid,
   handleSubmit,
-  changeAccountType,
-  changeCurrency,
-  changeLeverage,
   setFieldValue,
   minimumDepositsAmount,
   broker,
   isSubmitting,
   values: {
+    brokerAccountTypeId,
     depositWalletId,
     currency,
     depositAmount,
     isSignalProgram,
     hasInvestmentLimit,
     description
-  },
-  accountType,
-  programCurrency
+  }
 }) => {
   const dispatch = useDispatch();
-  useEffect(
-    () => {
-      setFieldValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, accountType!.id);
-    },
-    [accountType]
-  );
-  useEffect(
-    () => {
-      setFieldValue(CREATE_PROGRAM_FIELDS.currency, programCurrency || "");
-    },
-    [programCurrency]
-  );
-  useEffect(
-    () => {
-      setFieldValue(CREATE_PROGRAM_FIELDS.leverage, leverage);
-    },
-    [leverage]
-  );
+  const accountType = broker.accountTypes.find(
+    ({ id }) => brokerAccountTypeId === id
+  )!;
   useEffect(
     () => {
       setFieldValue(CREATE_PROGRAM_FIELDS.depositAmount, "");
@@ -119,19 +98,25 @@ const _CreateProgramSettings: React.FC<Props> = ({
             description={description}
           />
           <BrokerAccount
+            setAccountType={(value: string) =>
+              setFieldValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
+            }
+            setLeverage={(value: number) =>
+              setFieldValue(CREATE_PROGRAM_FIELDS.leverage, value)
+            }
+            setCurrency={(value: string) =>
+              setFieldValue(CREATE_PROGRAM_FIELDS.currency, value)
+            }
             name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-            onChange={changeAccountType}
             accountTypes={broker.accountTypes}
           />
           <Currency
             name={CREATE_PROGRAM_FIELDS.currency}
-            onChange={changeCurrency}
             disabled={accountType === undefined}
             accountCurrencies={accountType.currencies as CurrencyEnum[]}
           />
           <Leverage
             name={CREATE_PROGRAM_FIELDS.leverage}
-            onChange={changeLeverage}
             disabled={!accountType}
             accountLeverages={accountType.leverages}
           />
@@ -188,9 +173,9 @@ const _CreateProgramSettings: React.FC<Props> = ({
           walletFieldName={CREATE_PROGRAM_FIELDS.depositWalletId}
           inputName={CREATE_PROGRAM_FIELDS.depositAmount}
           depositAmount={depositAmount}
-          minimumDepositAmount={minimumDepositsAmount[programCurrency]}
+          minimumDepositAmount={minimumDepositsAmount[currency]}
           setFieldValue={setFieldValue}
-          assetCurrency={programCurrency}
+          assetCurrency={currency as CurrencyEnum}
         />
         <CreateAssetNavigation
           asset={ASSET.PROGRAM}
@@ -210,12 +195,6 @@ interface OwnProps {
   ) => void;
   minimumDepositsAmount: { [key: string]: number };
   author: string;
-  programCurrency: CurrencyEnum;
-  changeCurrency: (currency: CurrencyEnum) => void;
-  leverage: number;
-  changeLeverage: (leverage: number) => void;
-  accountType: BrokerAccountType;
-  changeAccountType: (id: string) => void;
 }
 
 export interface ICreateProgramSettingsProps

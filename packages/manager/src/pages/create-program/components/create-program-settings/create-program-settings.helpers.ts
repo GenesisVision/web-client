@@ -2,6 +2,7 @@ import { BrokerAccountType } from "gv-api-web";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 import {
   assetDescriptionShape,
   assetTitleShape,
@@ -17,6 +18,15 @@ import {
   ICreateProgramSettingsFormValues,
   ICreateProgramSettingsProps
 } from "./create-program-settings";
+
+export const getCurrency = (accountType: BrokerAccountType): CurrencyEnum =>
+  accountType.currencies[0] as CurrencyEnum; // TODO say to backend change type to CurrencyEnum[]
+
+export const getLeverage = (accountType: BrokerAccountType): number =>
+  accountType.leverages[0];
+
+export const getBrokerId = (accountTypes: BrokerAccountType[]): string =>
+  accountTypes[0].id;
 
 export const getLeverageDescription = (
   leverageMin: number,
@@ -54,18 +64,13 @@ export const getBrokerState = (
 
 export const createProgramMapPropsToValues = ({
   broker,
-  programCurrency,
-  leverage,
-  programsInfo,
-  accountType
+  programsInfo
 }: ICreateProgramSettingsProps): ICreateProgramSettingsFormValues => ({
   [CREATE_PROGRAM_FIELDS.available]: 0,
   [CREATE_PROGRAM_FIELDS.rate]: 1,
   [CREATE_PROGRAM_FIELDS.tradesDelay]: "None",
   [CREATE_PROGRAM_FIELDS.stopOutLevel]: 100,
-  [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: accountType
-    ? accountType.id
-    : "",
+  [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: getBrokerId(broker.accountTypes),
   [CREATE_PROGRAM_FIELDS.title]: "",
   [CREATE_PROGRAM_FIELDS.description]: "",
   [CREATE_PROGRAM_FIELDS.logo]: {},
@@ -80,8 +85,8 @@ export const createProgramMapPropsToValues = ({
   [CREATE_PROGRAM_FIELDS.signalVolumeFee]: broker.isSignalsAvailable
     ? undefined
     : 0,
-  [CREATE_PROGRAM_FIELDS.currency]: programCurrency,
-  [CREATE_PROGRAM_FIELDS.leverage]: leverage,
+  [CREATE_PROGRAM_FIELDS.currency]: getCurrency(broker.accountTypes[0]),
+  [CREATE_PROGRAM_FIELDS.leverage]: getLeverage(broker.accountTypes[0]),
   [CREATE_PROGRAM_FIELDS.periodLength]:
     programsInfo.periods.length === 1 ? programsInfo.periods[0] : undefined,
   [CREATE_PROGRAM_FIELDS.depositWalletId]: "",
@@ -91,17 +96,16 @@ export const createProgramMapPropsToValues = ({
 const createProgramSettingsValidationSchema = ({
   t,
   minimumDepositsAmount,
-  programsInfo,
-  programCurrency
+  programsInfo
 }: ICreateProgramSettingsProps) => {
   return lazy<ICreateProgramSettingsFormValues>(values => {
     const minDeposit = parseFloat(
       formatCurrencyValue(
         convertToCurrency(
-          minimumDepositsAmount[programCurrency!],
+          minimumDepositsAmount[values[CREATE_PROGRAM_FIELDS.currency]],
           values[CREATE_PROGRAM_FIELDS.rate] || 1
         ),
-        programCurrency!
+        values[CREATE_PROGRAM_FIELDS.currency]
       )
     );
     return object<ICreateProgramSettingsFormValues>().shape({
@@ -181,7 +185,9 @@ const createProgramSettingsValidationSchema = ({
           "manager.create-program-page.settings.validation.account-type-required"
         )
       ),
-      [CREATE_PROGRAM_FIELDS.depositAmount]: programCurrency
+      [CREATE_PROGRAM_FIELDS.depositAmount]: values[
+        CREATE_PROGRAM_FIELDS.currency
+      ]
         ? number()
             .required(
               t(
