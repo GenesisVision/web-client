@@ -2,7 +2,7 @@ import "./create-program-broker.scss";
 
 import { Broker, BrokerAccountType } from "gv-api-web";
 import * as React from "react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import Surface from "shared/components/surface/surface";
@@ -11,6 +11,7 @@ import {
   kycConfirmedSelector
 } from "shared/reducers/header-reducer";
 
+import { fetchBrokers } from "../../services/create-program.service";
 import BrokerCard from "./broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "./broker-card/broker-card.constants";
 import NavigateToSettings from "./navigate-to-settings";
@@ -51,11 +52,20 @@ const getBrokerState = (
 
 const _CreateProgramBroker: React.FC<OwnProps> = ({
   setSelectedBroker,
-  brokers,
   selectedBroker,
   setMinimumDepositsAmount,
   navigateToSettings
 }) => {
+  const [brokers, setBrokers] = useState<Broker[]>([]);
+  useEffect(() => {
+    fetchBrokers().then(brokers => {
+      setBrokers(brokers);
+      setSelectedBroker(brokers[0]);
+      setMinimumDepositsAmount(
+        brokers[0].accountTypes[0].minimumDepositsAmount
+      );
+    });
+  }, []);
   const isForexAllowed = useSelector(forexAllowedSelector);
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const [t] = useTranslation();
@@ -70,6 +80,7 @@ const _CreateProgramBroker: React.FC<OwnProps> = ({
     },
     []
   );
+  if (!selectedBroker) return null;
   return (
     <div className="create-program-broker-container">
       <div className="create-program-broker">
@@ -168,9 +179,8 @@ const CreateProgramBroker = React.memo(_CreateProgramBroker);
 export default CreateProgramBroker;
 
 interface OwnProps {
-  brokers: Broker[];
   navigateToSettings(): void;
   setSelectedBroker: (broker: Broker) => void;
-  selectedBroker: Broker;
+  selectedBroker?: Broker;
   setMinimumDepositsAmount: (amount: { [key: string]: number }) => void;
 }
