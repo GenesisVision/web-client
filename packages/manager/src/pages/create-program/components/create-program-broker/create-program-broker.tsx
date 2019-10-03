@@ -2,16 +2,10 @@ import "./create-program-broker.scss";
 
 import { Broker } from "gv-api-web";
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import Surface from "shared/components/surface/surface";
-import {
-  forexAllowedSelector,
-  kycConfirmedSelector
-} from "shared/reducers/header-reducer";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
 
-import { fetchBrokers } from "../../services/create-program.service";
 import {
   getAccountTypes,
   getBrokerState,
@@ -20,34 +14,20 @@ import {
 import BrokerCard from "./broker-card/broker-card";
 import NavigateToSettings from "./navigate-to-settings";
 
-const _CreateProgramBroker: React.FC<OwnProps> = ({
-  setSelectedBroker,
+const _CreateProgramBroker: React.FC<Props> = ({
+  data,
   selectedBroker,
+  selectBrokerHandle,
+  isForexAllowed,
+  isKycConfirmed,
   navigateToSettings
 }) => {
-  const [brokers, setBrokers] = useState<Broker[]>([]);
-  useEffect(() => {
-    fetchBrokers().then(brokers => {
-      setBrokers(brokers);
-      setSelectedBroker(brokers[0]);
-    });
-  }, []);
-  const isForexAllowed = useSelector(forexAllowedSelector);
-  const isKycConfirmed = useSelector(kycConfirmedSelector);
   const [t] = useTranslation();
-  const selectBrokerHandle = useCallback(
-    (brokerName: string) => () => {
-      const selectedBroker = brokers.find(({ name }) => name === brokerName)!;
-      setSelectedBroker(selectedBroker);
-    },
-    [brokers]
-  );
-  if (!selectedBroker) return null;
   return (
     <div className="create-program-broker-container">
       <div className="create-program-broker">
         <div className="create-program-broker__list">
-          {brokers.map(broker => (
+          {data.map(broker => (
             <BrokerCard
               logo={broker.logo}
               key={broker.name}
@@ -56,8 +36,8 @@ const _CreateProgramBroker: React.FC<OwnProps> = ({
               onSelect={selectBrokerHandle}
               cardState={getBrokerState(
                 broker.isForex,
-                isForexAllowed,
-                isKycConfirmed
+                !!isForexAllowed,
+                !!isKycConfirmed
               )}
               tags={broker.tags}
             />
@@ -65,7 +45,7 @@ const _CreateProgramBroker: React.FC<OwnProps> = ({
           <div className="create-program-broker__navigation">
             <NavigateToSettings
               isForex={selectedBroker.isForex}
-              isKycConfirmed={isKycConfirmed}
+              isKycConfirmed={!!isKycConfirmed}
               navigateToSettings={navigateToSettings}
             />
           </div>
@@ -137,11 +117,14 @@ const _CreateProgramBroker: React.FC<OwnProps> = ({
   );
 };
 
-const CreateProgramBroker = React.memo(_CreateProgramBroker);
-export default CreateProgramBroker;
-
-interface OwnProps {
-  navigateToSettings(): void;
-  setSelectedBroker: (broker: Broker) => void;
-  selectedBroker?: Broker;
+interface Props {
+  data: Broker[];
+  selectedBroker: Broker;
+  selectBrokerHandle: (broker: string) => () => void;
+  isForexAllowed?: boolean;
+  isKycConfirmed?: boolean;
+  navigateToSettings: () => void;
 }
+
+const CreateProgramBroker = React.memo(withBlurLoader(_CreateProgramBroker));
+export default CreateProgramBroker;
