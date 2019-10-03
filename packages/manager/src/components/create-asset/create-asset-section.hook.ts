@@ -38,7 +38,7 @@ const useCreateAssetSection = ({
     () => {
       wallet && fetchRate(wallet.currency, assetCurrency).then(setRate);
     },
-    [wallet]
+    [wallet, assetCurrency]
   );
 
   const handleWalletChange = useCallback(
