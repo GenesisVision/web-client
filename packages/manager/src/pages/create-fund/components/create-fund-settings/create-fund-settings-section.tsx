@@ -1,23 +1,26 @@
 import useCreateAssetSection from "components/create-asset/create-asset-section.hook";
-import React from "react";
+import useCreateAssetSubmit from "components/create-asset/create-asset-submit.hook";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import withLoader from "shared/decorators/with-loader";
+import { ASSET } from "shared/constants/constants";
+import useApiRequest from "shared/hooks/api-request.hook";
+import { nameSelector } from "shared/reducers/header-reducer";
 import { platformDataSelector } from "shared/reducers/platform-reducer";
-import { fetchRate } from "shared/services/rate-service";
-import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
-import CreateFundSettings, {
-  ICreateFundSettingsFormValues
-} from "./create-fund-settings";
+import { FUND_CURRENCY } from "../../create-fund.constants";
+import { fetchMinimumDepositAmount } from "../../services/create-fund.service";
+import CreateFundSettings from "./create-fund-settings";
 
-const FUND_CURRENCY = "GVT";
+const _CreateFundSettingsSection: React.FC = ({}) => {
+  const author = useSelector(nameSelector);
 
-const _CreateFundSettingsSection: React.FC<OwnProps> = ({
-  navigateBack,
-  onSubmit,
-  author,
-  minimumDepositAmount
-}) => {
+  const { data: minimumDepositAmount, sendRequest } = useApiRequest({
+    request: fetchMinimumDepositAmount
+  });
+  useEffect(() => {
+    sendRequest();
+  }, []);
+
   const { rate, handleWalletChange, wallet, wallets } = useCreateAssetSection({
     assetCurrency: FUND_CURRENCY
   });
@@ -30,14 +33,13 @@ const _CreateFundSettingsSection: React.FC<OwnProps> = ({
     (platformSettings && platformSettings!.programsInfo.managerMaxEntryFee) ||
     0;
 
+  const handleCreate = useCreateAssetSubmit({ asset: ASSET.FUND });
 
   return (
     <CreateFundSettings
-      condition={!!wallet}
+      condition={!!wallet && !!minimumDepositAmount}
       wallets={wallets}
-      fundCurrency={FUND_CURRENCY}
-      navigateBack={navigateBack}
-      onSubmit={onSubmit}
+      onSubmit={handleCreate}
       author={author}
       minimumDepositAmount={minimumDepositAmount}
       managerMaxExitFee={managerMaxExitFee}
@@ -49,18 +51,5 @@ const _CreateFundSettingsSection: React.FC<OwnProps> = ({
   );
 };
 
-const CreateFundSettingsSection = withLoader(
-  React.memo(_CreateFundSettingsSection)
-);
+const CreateFundSettingsSection = React.memo(_CreateFundSettingsSection);
 export default CreateFundSettingsSection;
-
-interface OwnProps {
-  currency: CurrencyEnum;
-  onSubmit: (
-    data: ICreateFundSettingsFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
-  navigateBack: () => void;
-  author: string;
-  minimumDepositAmount: number;
-}
