@@ -37,10 +37,10 @@ const _CreateProgramBroker: React.FC<OwnProps> = ({
   const [t] = useTranslation();
   const selectBrokerHandle = useCallback(
     (brokerName: string) => () => {
-      const selectedBroker = brokers.find(x => x.name === brokerName)!;
+      const selectedBroker = brokers.find(({ name }) => name === brokerName)!;
       setSelectedBroker(selectedBroker);
     },
-    []
+    [brokers]
   );
   if (!selectedBroker) return null;
   return (
