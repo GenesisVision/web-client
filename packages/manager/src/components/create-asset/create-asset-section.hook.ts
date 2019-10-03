@@ -23,7 +23,7 @@ const useCreateAssetSection = ({
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
   const [wallet, setWallet] = useState<WalletData>(
-    wallets.find(x => x.currency === assetCurrency)!
+    wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
   );
   const [rate, setRate] = useState<number>(1);
 
