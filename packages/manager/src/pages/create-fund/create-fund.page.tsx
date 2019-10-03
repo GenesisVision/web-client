@@ -10,10 +10,7 @@ const _CreateFundPage: React.FC = () => {
   const [t] = useTranslation();
   return (
     <Page title={t("manager.create-fund-page.title")}>
-      <div className="create-fund-page">
-        <h1>{t("manager.create-fund-page.title")}</h1>
-        <CreateFundContainer />
-      </div>
+      <CreateFundContainer />
     </Page>
   );
 };
