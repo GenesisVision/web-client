@@ -4,13 +4,8 @@ import "shared/modules/asset-settings/asset-settings.scss";
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { connect, ResolveThunks } from "react-redux";
+import { ActionCreatorsMapObject, bindActionCreators, compose, Dispatch } from "redux";
 import BackButtonBody from "shared/components/back-button/back-button-body";
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
@@ -31,6 +26,12 @@ const _AssetsEditPage: React.FC<Props> = ({
   }, []);
   const editAssetCallback: TUpdateAssetFunc = useCallback(
     (values, setSubmitting, resetForm) => {
+      const investmentLimit =
+        "hasInvestmentLimit" in values
+          ? values.hasInvestmentLimit
+            ? values.investmentLimit
+            : null
+          : description!.availableInvestmentLimit;
       const currentValues = {
         tradesDelay: description!.tradesDelay,
         exitFee: description!.exitFee,
@@ -40,16 +41,13 @@ const _AssetsEditPage: React.FC<Props> = ({
         stopOutLevel: description!.stopOutLevel,
         description: description!.description,
         logo: { src: description!.logo },
-        investmentLimit: description!.availableInvestmentLimit
+        investmentLimit
       };
       editAsset(
         description!.id,
         {
           ...currentValues,
-          ...values,
-          investmentLimit: values.hasInvestmentLimit
-            ? values.investmentLimit
-            : null
+          ...values
         },
         asset
       )
