@@ -24,5 +24,7 @@ interface Props {
   programDescription: ProgramDetailsFull;
 }
 
-const SignalProviderControls = React.memo(_SignalProviderControls);
+const SignalProviderControls = React.memo<React.FC<Props>>(
+  _SignalProviderControls
+);
 export default SignalProviderControls;

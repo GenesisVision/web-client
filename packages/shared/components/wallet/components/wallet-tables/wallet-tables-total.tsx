@@ -7,11 +7,13 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
+import Link from "shared/components/link/link";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import Surface from "shared/components/surface/surface";
 import Tooltip from "shared/components/tooltip/tooltip";
 
 import useHashTab from "../../services/hashTab.hook";
+import { WALLET_TOTAL_PAGE_ROUTE } from "../../wallet.routes";
 import WalletCopytrading from "./wallet-copytrading/wallet-copytrading";
 import AllDepositsWithdrawalsRow from "./wallet-deposits-withdrawals/all-deposits-withdrawals-row";
 import WalletDepositsWithdrawals from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals";
@@ -28,21 +30,29 @@ const _WalletTablesTotal: React.FC<Props> = ({
   copyTradingAccounts,
   copyTradingAccountsPending
 }) => {
-  const { tab, setTab } = useHashTab<TABS>(TABS.WALLETS_TAB);
+  const { tab } = useHashTab<TABS>(TABS.WALLETS_TAB);
   return (
     <Surface className="wallet-container">
       <div className="wallet-container__header">
         <div className="wallet-container__tabs">
-          <GVTabs value={tab} onChange={setTab}>
+          <GVTabs value={tab}>
             <GVTab
               value={TABS.WALLETS_TAB}
-              label={t("wallet-page.tabs.wallets")}
+              label={
+                <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`}>
+                  {t("wallet-page.tabs.wallets")}
+                </Link>
+              }
             />
             <GVTab
               className={"gv-tab"}
               visible={copytrading}
               value={TABS.COPYTRADING_TAB}
-              label={t("wallet-page.tabs.copytrading")}
+              label={
+                <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.COPYTRADING_TAB}`}>
+                  {t("wallet-page.tabs.copytrading")}
+                </Link>
+              }
             />
             <GVTab
               className={"gv-tab"}
@@ -56,7 +66,11 @@ const _WalletTablesTotal: React.FC<Props> = ({
                     </div>
                   )}
                 >
-                  <span>{t("wallet-page.tabs.transactions")}</span>
+                  <Link
+                    to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.TRANSACTIONS_TAB}`}
+                  >
+                    {t("wallet-page.tabs.transactions")}
+                  </Link>
                 </Tooltip>
               }
             />
@@ -73,7 +87,9 @@ const _WalletTablesTotal: React.FC<Props> = ({
                       </div>
                     )}
                   >
-                    <span>{t("wallet-page.tabs.deposit")}</span>
+                    <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`}>
+                      {t("wallet-page.tabs.deposit")}
+                    </Link>
                   </Tooltip>
                   <Tooltip
                     horizontal={HORIZONTAL_POPOVER_POS.LEFT}
@@ -83,7 +99,9 @@ const _WalletTablesTotal: React.FC<Props> = ({
                       </div>
                     )}
                   >
-                    <span>{t("wallet-page.tabs.withdrawals")}</span>
+                    <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`}>
+                      {t("wallet-page.tabs.withdrawals")}
+                    </Link>
                   </Tooltip>
                 </>
               }
