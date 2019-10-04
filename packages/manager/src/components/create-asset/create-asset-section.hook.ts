@@ -36,6 +36,15 @@ const useCreateAssetSection = ({
 
   useEffect(
     () => {
+      setWallet(
+        wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
+      );
+    },
+    [wallets]
+  );
+
+  useEffect(
+    () => {
       wallet && fetchRate(wallet.currency, assetCurrency).then(setRate);
     },
     [wallet, assetCurrency]
