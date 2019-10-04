@@ -1948,7 +1948,7 @@
       "title": "Create Fund",
       "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
       "notifications": {
-        "create-success": "Program was successfully created.",
+        "create-success": "Fund was successfully created.",
         "validate-error": "Please fix all the errors on the screen before proceeding"
       },
       "tabs": {

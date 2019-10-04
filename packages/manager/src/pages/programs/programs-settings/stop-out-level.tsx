@@ -1,8 +1,8 @@
+import StopOutField from "components/create-asset/fields/stop-out-field";
 import { FormikProps, withFormik } from "formik";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import StopOutField from "shared/components/fields/stop-out-field";
 import GVButton from "shared/components/gv-button";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import { SetSubmittingType } from "shared/utils/types";

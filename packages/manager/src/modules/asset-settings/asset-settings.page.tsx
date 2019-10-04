@@ -32,6 +32,12 @@ const _AssetsEditPage: React.FC<Props> = ({
   }, []);
   const editAssetCallback: TUpdateAssetFunc = useCallback(
     (values, setSubmitting, resetForm) => {
+      const investmentLimit =
+        "hasInvestmentLimit" in values
+          ? values.hasInvestmentLimit
+            ? values.investmentLimit
+            : null
+          : description!.availableInvestmentLimit;
       const currentValues = {
         tradesDelay: description!.tradesDelay,
         exitFee: description!.exitFee,
@@ -40,16 +46,14 @@ const _AssetsEditPage: React.FC<Props> = ({
         title: description!.title,
         stopOutLevel: description!.stopOutLevel,
         description: description!.description,
-        logo: { src: description!.logo },
-        investmentLimit: description!.availableInvestmentLimit
+        logo: { src: description!.logo }
       };
       editAsset(
         description!.id,
         {
           ...currentValues,
           ...values,
-          investmentLimit:
-            values && values.investmentLimit ? values.investmentLimit : null
+          investmentLimit
         },
         asset
       )

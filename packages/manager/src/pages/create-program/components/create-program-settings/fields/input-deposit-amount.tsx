@@ -1,3 +1,4 @@
+import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
@@ -28,7 +29,7 @@ const _InputDepositAmount: React.FC<Props> = ({
     [name, setFieldValue]
   );
   return (
-    <>
+    <CreateAssetField className="deposit-amount-field">
       <InputAmountField
         autoFocus={false}
         name={name}
@@ -50,7 +51,7 @@ const _InputDepositAmount: React.FC<Props> = ({
           />
         </div>
       )}
-    </>
+    </CreateAssetField>
   );
 };
 

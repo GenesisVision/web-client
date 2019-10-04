@@ -1,23 +1,20 @@
-import "./create-fund.page.scss";
+import "components/create-asset/create-asset.scss";
 
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 
 import CreateFundContainer from "./components/create-fund.container";
 
-const _CreateFundPage: React.FC<Props> = ({ t, minimumDepositAmount }) => (
-  <Page title={t("manager.create-fund-page.title")}>
-    <div className="create-fund-page">
-      <h1>{t("manager.create-fund-page.title")}</h1>
-      <CreateFundContainer minimumDepositAmount={minimumDepositAmount} />
-    </div>
-  </Page>
-);
+const _CreateFundPage: React.FC = () => {
+  const [t] = useTranslation();
+  return (
+    <Page title={t("manager.create-fund-page.title")}>
+      <CreateFundContainer />
+    </Page>
+  );
+};
 
-interface Props extends WithTranslation {
-  minimumDepositAmount: number;
-}
+const CreateFundPage = React.memo(_CreateFundPage);
 
-const CreateFundPage = translate()(_CreateFundPage);
 export default CreateFundPage;

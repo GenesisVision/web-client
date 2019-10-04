@@ -26,3 +26,10 @@ export default class SelectTestParent extends React.Component<Props, any> {
     });
   }
 }
+
+export const onSelectChange = (onChangeFn: (value: any) => void) => (
+  _: ISelectChangeEvent,
+  target: JSX.Element
+) => {
+  onChangeFn(target.props.value);
+};
