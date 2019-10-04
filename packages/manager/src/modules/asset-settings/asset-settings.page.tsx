@@ -4,8 +4,13 @@ import "shared/modules/asset-settings/asset-settings.scss";
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
-import { ActionCreatorsMapObject, bindActionCreators, compose, Dispatch } from "redux";
+import { ResolveThunks, connect } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  Dispatch,
+  bindActionCreators,
+  compose
+} from "redux";
 import BackButtonBody from "shared/components/back-button/back-button-body";
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
@@ -40,14 +45,14 @@ const _AssetsEditPage: React.FC<Props> = ({
         title: description!.title,
         stopOutLevel: description!.stopOutLevel,
         description: description!.description,
-        logo: { src: description!.logo },
-        investmentLimit
+        logo: { src: description!.logo }
       };
       editAsset(
         description!.id,
         {
           ...currentValues,
-          ...values
+          ...values,
+          investmentLimit
         },
         asset
       )
