@@ -24,7 +24,6 @@
     align-content: flex-start;
     flex-wrap: wrap;
     min-width: 280px;
-    padding: 0 $padding-xsmall;
 
     @include media-breakpoint-landscape-phone {
       margin-right: 1%;

@@ -1,58 +1,49 @@
-import {
-  Broker,
-  CancelablePromise,
-  ManagerProgramCreateResult,
-  NewProgramRequest
-} from "gv-api-web";
-import { Dispatch } from "redux";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import faker from "faker";
+import { Broker, CancelablePromise } from "gv-api-web";
 import brokersApi from "shared/services/api-client/brokers-api";
-import managerApi from "shared/services/api-client/manager-api";
-import authService from "shared/services/auth-service";
-import filesService from "shared/services/file-service";
-import { ManagerThunk } from "shared/utils/types";
-
-import { ICreateProgramSettingsFormValues } from "../components/create-program-settings/create-program-settings";
 
 const GM_BROKER_NAME = "Genesis Markets";
 
 export const fetchBrokers = (): CancelablePromise<Broker[]> =>
-  brokersApi.v10BrokersGet().then(data => {
-    const gvBroker = data.brokers.find(x => x.name === GM_BROKER_NAME)!;
-    data.brokers.splice(data.brokers.indexOf(gvBroker), 1);
+  brokersApi
+    .v10BrokersGet()
+    .then(data =>
+      data.brokers.sort(
+        (a, b) => +(b.name === GM_BROKER_NAME) - +(a.name === GM_BROKER_NAME)
+      )
+    );
 
-    return [gvBroker, ...data.brokers];
-  });
-
-export const createProgram = (
-  createProgramData: ICreateProgramSettingsFormValues
-): ManagerThunk<CancelablePromise<ManagerProgramCreateResult>> => () => {
-  const authorization = authService.getAuthArg();
-
-  let promise = Promise.resolve("") as CancelablePromise<any>;
-  if (createProgramData.logo.image) {
-    promise = filesService.uploadFile(
-      createProgramData.logo.image.cropped,
-      authorization
-    ) as CancelablePromise<any>;
-  }
-  return promise.then(response => {
-    const requestData = <NewProgramRequest>{
-      ...createProgramData,
-      logo: response
-    };
-
-    return managerApi.v10ManagerProgramsCreatePost(authorization, {
-      request: requestData
-    });
-  });
-};
-
-export const showValidationError = () => (dispatch: Dispatch) => {
-  dispatch(
-    alertMessageActions.error(
-      "manager.create-program-page.notifications.validate-error",
-      true
-    )
-  );
-};
+export const getBrokerLoaderData: () => Broker = () => ({
+  name: faker.lorem.word(),
+  description: faker.lorem.words(11),
+  logo: "",
+  terms: faker.lorem.word(),
+  assets: faker.lorem.word(),
+  fee: faker.random.number(),
+  leverageMin: faker.random.number(),
+  leverageMax: faker.random.number(),
+  accountTypes: [
+    {
+      id: faker.lorem.word(),
+      name: faker.lorem.word(),
+      description: faker.lorem.words(11),
+      type: "MetaTrader4",
+      leverages: [10],
+      currencies: ["GVT"],
+      minimumDepositsAmount: {},
+      isForex: false,
+      isSignalsAvailable: false
+    }
+  ],
+  isForex: false,
+  isSignalsAvailable: false,
+  tags: [
+    {
+      name: "ANYANY",
+      color: "#FFF"
+    }
+  ]
+});
+export const CreateProgramBrokerLoaderData: Broker[] = new Array(7)
+  .fill("")
+  .map(getBrokerLoaderData);

@@ -1,4 +1,4 @@
-import "./fields.scss";
+import "./logo-field.scss";
 
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -14,20 +14,18 @@ const _LogoField: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <>
-      <div className="create-asset-settings__field create-asset-settings__field--wider">
-        <div className="create-asset-settings__logo-title">{title}</div>
-        <div className="create-asset-settings__logo-notice">
+      <div className="logo-field logo-field--wider">
+        <div className="logo-field__title">{title}</div>
+        <div className="logo-field__notice">
           {t("manager.create-program-page.settings.fields.upload-logo-rules")}
         </div>
       </div>
-      <div className="create-asset-settings__field create-asset-settings__field--wider">
-        <div className="create-asset-settings__file-field-container">
-          <GVFormikField
-            name={name}
-            component={InputImage}
-            defaultImage={defaultImage}
-          />
-        </div>
+      <div className="logo-field logo-field--wider">
+        <GVFormikField
+          name={name}
+          component={InputImage}
+          defaultImage={defaultImage}
+        />
       </div>
     </>
   );

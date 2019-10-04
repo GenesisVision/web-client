@@ -1,7 +1,9 @@
-import { WalletData } from "gv-api-web";
-import React from "react";
+import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
+import useCreateAssetSection from "components/create-asset/create-asset-section.hook";
+import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ISelectChangeEvent } from "shared/components/select/select";
+import { onSelectChange } from "shared/components/select/select.test-helpers";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -9,70 +11,81 @@ import AmountInfo from "./amount-info";
 import InputDepositAmount from "./input-deposit-amount";
 
 const _DepositDetailsBlock: React.FC<Props> = ({
+  rateName,
+  availableName,
   blockNumber = 3,
   walletFieldName,
   inputName,
   assetCurrency,
   depositAmount,
-  minimumDepositAmount,
-  wallets,
-  rate,
-  setFieldValue,
-  walletAvailable,
-  walletCurrency,
-  onWalletChange
+  minimumDepositAmount = 0,
+  setFieldValue
 }) => {
   const [t] = useTranslation();
+  const { rate, handleWalletChange, wallet, wallets } = useCreateAssetSection({
+    assetCurrency
+  });
+  useEffect(
+    () => {
+      setFieldValue(rateName, rate);
+    },
+    [rate]
+  );
+  useEffect(
+    () => {
+      if (!wallet) return;
+      setFieldValue(inputName, "");
+      setFieldValue(availableName, wallet.available);
+      setFieldValue(walletFieldName, wallet.id);
+    },
+    [wallet]
+  );
+  if (!wallet) return null;
   return (
-    <>
-      <div className="create-program-settings__subheading">
-        <span className="create-program-settings__block-number">
-          0{blockNumber}
-        </span>
-        {t("manager.create-program-page.settings.deposit-details")}
-      </div>
-      <div className={"deposit-details create-program-settings__fill-block"}>
-        <div className="create-program-settings__field deposit-details">
+    <CreateAssetSection
+      title={t("manager.create-program-page.settings.deposit-details")}
+      blockNumber={`0${blockNumber}`}
+      withBorder={false}
+    >
+      <CreateAssetField className="deposit-details">
+        <div className="deposit-amount-field">
           <WalletSelect
             name={walletFieldName}
             label={t("transfer.from")}
             items={wallets}
-            onChange={onWalletChange}
-          />
-          <InputDepositAmount
-            name={inputName}
-            walletCurrency={walletCurrency}
-            walletAvailable={walletAvailable}
-            assetCurrency={assetCurrency}
-            depositAmount={depositAmount}
-            rate={rate}
-            setFieldValue={setFieldValue}
-          />
-          <AmountInfo
-            assetCurrency={assetCurrency}
-            minimumDepositsAmount={minimumDepositAmount}
-            walletAvailable={walletAvailable}
-            walletCurrency={walletCurrency}
+            onChange={onSelectChange(handleWalletChange)}
           />
         </div>
-      </div>
-    </>
+        <InputDepositAmount
+          name={inputName}
+          walletCurrency={wallet.currency}
+          walletAvailable={wallet.available}
+          assetCurrency={assetCurrency}
+          depositAmount={depositAmount}
+          rate={rate}
+          setFieldValue={setFieldValue}
+        />
+        <AmountInfo
+          assetCurrency={assetCurrency}
+          minimumDepositsAmount={minimumDepositAmount}
+          walletAvailable={wallet.available}
+          walletCurrency={wallet.currency}
+        />
+      </CreateAssetField>
+    </CreateAssetSection>
   );
 };
 
 interface Props {
+  availableName: string;
+  rateName: string;
   blockNumber?: number;
   walletFieldName: string;
   inputName: string;
   depositAmount?: number;
   minimumDepositAmount: number;
-  wallets: WalletData[];
-  rate: number;
   setFieldValue: Function;
-  onWalletChange: (event: ISelectChangeEvent, child: JSX.Element) => void;
   assetCurrency: CurrencyEnum;
-  walletAvailable: number;
-  walletCurrency: CurrencyEnum;
 }
 
 const DepositDetailsBlock = React.memo(_DepositDetailsBlock);

@@ -7,7 +7,6 @@
     display: flex;
     flex-wrap: wrap;
     width: auto;
-    max-width: 230px;
     position: relative;
     justify-content: space-between;
 
@@ -22,10 +21,6 @@
 
     .select--disabled .select__value {
       color: $text-light-color;
-    }
-
-    @include media-breakpoint-landscape-phone() {
-      max-width: 484px;
     }
   }
 
