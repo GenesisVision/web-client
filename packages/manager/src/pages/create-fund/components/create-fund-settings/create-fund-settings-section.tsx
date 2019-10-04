@@ -5,7 +5,10 @@ import { ASSET } from "shared/constants/constants";
 import useApiRequest from "shared/hooks/api-request.hook";
 import { platformDataSelector } from "shared/reducers/platform-reducer";
 
-import { fetchMinimumDepositAmount } from "../../services/create-fund.service";
+import {
+  PlatformDataLoaderData,
+  fetchMinimumDepositAmount
+} from "../../services/create-fund.service";
 import CreateFundSettings from "./create-fund-settings";
 
 const _CreateFundSettingsSection: React.FC = () => {
@@ -20,10 +23,10 @@ const _CreateFundSettingsSection: React.FC = () => {
 
   return (
     <CreateFundSettings
-      condition={!!minimumDepositAmount && !!platformSettings}
-      onSubmit={handleCreate}
+      loaderData={PlatformDataLoaderData}
+      data={platformSettings!}
       minimumDepositAmount={minimumDepositAmount}
-      platformSettings={platformSettings!}
+      onSubmit={handleCreate}
     />
   );
 };
