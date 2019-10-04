@@ -13,11 +13,15 @@ import {
 import { array, lazy, number, object } from "yup";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";
-import { CREATE_FUND_FIELDS, ICreateFundSettingsFormValues, ICreateFundSettingsProps } from "./create-fund-settings";
+import {
+  CREATE_FUND_FIELDS,
+  ICreateFundSettingsFormValues,
+  ICreateFundSettingsProps
+} from "./create-fund-settings";
 
 const createFundSettingsValidationSchema = ({
   t,
-  platformSettings: {
+  data: {
     programsInfo: { managerMaxEntryFee, managerMaxExitFee }
   },
   minimumDepositAmount
