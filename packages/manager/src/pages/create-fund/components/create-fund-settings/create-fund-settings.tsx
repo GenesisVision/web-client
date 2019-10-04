@@ -8,15 +8,17 @@ import DescriptionBlock from "components/create-asset/fields/description-block";
 import FeesSettings from "components/create-asset/fields/fees-settings";
 import { InjectedFormikProps, withFormik } from "formik";
 import { PlatformInfo } from "gv-api-web";
-import CreateAssetNavigation
-  from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
+import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
 import DepositDetailsBlock from "pages/create-program/components/create-program-settings/fields/deposit-details-block";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { ASSET } from "shared/constants/constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  WithBlurLoaderProps,
+  withBlurLoader
+} from "shared/decorators/with-blur-loader";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";
@@ -31,7 +33,7 @@ const _CreateFundSettings: React.FC<Props> = ({
   t,
   isSubmitting,
   values: { depositAmount, description, depositWalletId },
-  platformSettings: {
+  data: {
     programsInfo: { managerMaxEntryFee, managerMaxExitFee }
   },
   minimumDepositAmount
@@ -132,9 +134,9 @@ type Props = InjectedFormikProps<
 >;
 
 const CreateFundSettings = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
+  React.ComponentType<OwnProps & WithBlurLoaderProps<PlatformInfo>>
 >(
-  withLoader,
+  withBlurLoader,
   translate(),
   withFormik<ICreateFundSettingsProps, ICreateFundSettingsFormValues>({
     displayName: "CreateFundSettingsForm",
@@ -159,7 +161,7 @@ const CreateFundSettings = compose<
 export default CreateFundSettings;
 
 interface OwnProps {
-  platformSettings: PlatformInfo;
+  data: PlatformInfo;
   minimumDepositAmount: number;
   onSubmit: (
     values: ICreateFundSettingsFormValues,
