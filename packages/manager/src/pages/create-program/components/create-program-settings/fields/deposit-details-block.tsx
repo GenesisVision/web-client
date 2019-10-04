@@ -18,7 +18,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   inputName,
   assetCurrency,
   depositAmount,
-  minimumDepositAmount,
+  minimumDepositAmount = 0,
   setFieldValue
 }) => {
   const [t] = useTranslation();
@@ -33,6 +33,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   );
   useEffect(
     () => {
+      if (!wallet) return;
       setFieldValue(inputName, "");
       setFieldValue(availableName, wallet.available);
       setFieldValue(walletFieldName, wallet.id);
