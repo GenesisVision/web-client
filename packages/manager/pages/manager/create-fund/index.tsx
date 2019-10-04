@@ -9,7 +9,7 @@ import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
 
 const CreateFund: NextPageWithRedux<Props, {}> = ({ minimumDepositAmount }) => {
-  return <CreateFundPage minimumDepositAmount={minimumDepositAmount} />;
+  return <CreateFundPage />;
 };
 
 CreateFund.getInitialProps = async ctx => {
