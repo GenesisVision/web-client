@@ -16,7 +16,7 @@ import NavigateToSettings from "./navigate-to-settings";
 
 const _CreateProgramBroker: React.FC<Props> = ({
   data,
-  selectedBroker,
+  selectedBroker = data[0],
   selectBrokerHandle,
   isForexAllowed = true,
   isKycConfirmed = true,
@@ -27,10 +27,10 @@ const _CreateProgramBroker: React.FC<Props> = ({
     <div className="create-program-broker-container">
       <div className="create-program-broker">
         <div className="create-program-broker__list">
-          {data.map(broker => (
+          {data.map((broker, i) => (
             <BrokerCard
               logo={broker.logo}
-              key={broker.name}
+              key={i}
               brokerName={broker.name}
               isSelected={broker === selectedBroker}
               onSelect={selectBrokerHandle}
@@ -119,12 +119,12 @@ const _CreateProgramBroker: React.FC<Props> = ({
 
 interface Props {
   data: Broker[];
-  selectedBroker: Broker;
+  selectedBroker?: Broker;
   selectBrokerHandle: (broker: string) => () => void;
   isForexAllowed?: boolean;
   isKycConfirmed?: boolean;
   navigateToSettings: () => void;
 }
 
-const CreateProgramBroker = React.memo(withBlurLoader(_CreateProgramBroker));
+const CreateProgramBroker = withBlurLoader(React.memo(_CreateProgramBroker));
 export default CreateProgramBroker;
