@@ -37,7 +37,12 @@ export const getBrokerLoaderData: () => Broker = () => ({
   ],
   isForex: false,
   isSignalsAvailable: false,
-  tags: []
+  tags: [
+    {
+      name: "ANYANY",
+      color: "#FFF"
+    }
+  ]
 });
 export const CreateProgramBrokerLoaderData: Broker[] = new Array(7)
   .fill("")
