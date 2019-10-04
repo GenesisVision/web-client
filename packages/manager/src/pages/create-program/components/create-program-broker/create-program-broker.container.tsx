@@ -4,7 +4,10 @@ import { Broker } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { forexAllowedSelector, kycConfirmedSelector } from "shared/reducers/header-reducer";
+import {
+  forexAllowedSelector,
+  kycConfirmedSelector
+} from "shared/reducers/header-reducer";
 
 import {
   CreateProgramBrokerLoaderData,
@@ -38,7 +41,7 @@ const _CreateProgramBrokerContainer: React.FC<Props> = ({
     <CreateProgramBroker
       loaderData={CreateProgramBrokerLoaderData}
       data={brokers!}
-      selectedBroker={selectedBroker || getBrokerLoaderData()}
+      selectedBroker={selectedBroker}
       selectBrokerHandle={selectBrokerHandle}
       isForexAllowed={isForexAllowed}
       isKycConfirmed={isKycConfirmed}
