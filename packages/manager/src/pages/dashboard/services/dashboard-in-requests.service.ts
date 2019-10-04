@@ -29,7 +29,7 @@ export const cancelRequest: CancelRequestType = ({
   const authorization = authService.getAuthArg();
   const action = cancelProgramRequestAction(authorization, id);
 
-  return dispatch(action)
+  return ((dispatch(action) as unknown) as Promise<any>)
     .then(() => {
       dispatch(getInRequests());
       dispatch(fetchProfileHeaderInfoAction());
