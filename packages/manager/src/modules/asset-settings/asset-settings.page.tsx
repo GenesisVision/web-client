@@ -35,7 +35,7 @@ const _AssetsEditPage: React.FC<Props> = ({
       const investmentLimit =
         "hasInvestmentLimit" in values
           ? values.hasInvestmentLimit
-            ? values.investmentLimit
+            ? values.investmentLimit || null
             : null
           : description!.availableInvestmentLimit;
       const currentValues = {
