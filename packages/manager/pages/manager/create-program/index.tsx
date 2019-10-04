@@ -10,7 +10,7 @@ import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";
 
 const CreateProgram: NextPageWithRedux<Props, {}> = ({ brokers }) => {
-  return <CreateProgramPage />;
+  return <CreateProgramPage brokers={brokers} />;
 };
 
 CreateProgram.getInitialProps = async ctx => {
