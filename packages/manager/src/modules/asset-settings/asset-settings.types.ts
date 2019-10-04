@@ -9,6 +9,7 @@ export type TUpdateAssetFunc = (
     description?: string;
     logo?: IImageValue;
     investmentLimit?: number;
+    hasInvestmentLimit?: number;
     stopOutLevel?: number;
   },
   setSubmitting: SetSubmittingType,
