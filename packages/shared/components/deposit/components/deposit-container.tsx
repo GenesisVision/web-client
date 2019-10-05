@@ -1,25 +1,19 @@
 import { FundInvestInfo, ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { fetchBaseWallets } from "shared/components/wallet/services/wallet.services";
 import { ASSET } from "shared/constants/constants";
 import useErrorMessage from "shared/hooks/error-message.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { RootState } from "shared/reducers/root-reducer";
-import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
+import { CurrencyEnum, ReduxDispatch, SetSubmittingType } from "shared/utils/types";
 
 import DepositPopup from "./deposit-popup";
 import { TAssetInvestCreator, TGetAssetInfoCreator } from "./deposit.types";
 
 const _DepositContainer: React.FC<Props> = ({
+  assetInvest,
   asset,
   id,
   open,
@@ -27,9 +21,9 @@ const _DepositContainer: React.FC<Props> = ({
   onClose,
   currency,
   fetchInfo,
-  service,
   onApply
 }) => {
+  const dispatch = useDispatch<ReduxDispatch>();
   const {
     errorMessage,
     setErrorMessage,
@@ -45,8 +39,7 @@ const _DepositContainer: React.FC<Props> = ({
   useEffect(
     () => {
       if (!id) return;
-      service
-        .fetchBaseWallets()
+      dispatch(fetchBaseWallets())
         .then(setWallets)
         .catch(setErrorMessage);
       fetchInfo(id, currency || stateCurrency)
@@ -65,8 +58,7 @@ const _DepositContainer: React.FC<Props> = ({
       currency: CurrencyEnum,
       setSubmitting: SetSubmittingType
     ) => {
-      service
-        .assetInvest(id, amount, currency)
+      dispatch(assetInvest(id, amount, currency))
         .then(onApply)
         .then(closePopup)
         .catch(setErrorMessage)
@@ -93,44 +85,15 @@ const _DepositContainer: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  { assetInvest }: OwnProps
-): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      assetInvest,
-      fetchBaseWallets
-    },
-    dispatch
-  )
-});
-
-interface OwnProps extends IDialogProps {
+interface Props extends IDialogProps {
   asset: ASSET;
   id: string;
-  onApply(): void;
+  onApply: () => void;
   fetchInfo: ReturnType<TGetAssetInfoCreator>;
   assetInvest: ReturnType<TAssetInvestCreator>;
   hasEntryFee?: boolean;
   currency?: CurrencyEnum;
 }
 
-interface ServiceThunks extends ActionCreatorsMapObject {
-  assetInvest: ReturnType<TAssetInvestCreator>;
-  fetchBaseWallets: typeof fetchBaseWallets;
-}
-
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-interface Props extends OwnProps, DispatchProps {}
-
-const DepositContainer = compose<React.ComponentType<OwnProps>>(
-  connect<null, DispatchProps, OwnProps, RootState>(
-    null,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_DepositContainer);
+const DepositContainer = React.memo(_DepositContainer);
 export default DepositContainer;
