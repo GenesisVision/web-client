@@ -43,13 +43,13 @@ const _DepositPopup: React.FC<Props> = ({
   );
 };
 
-const DepositPopup = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
+const DepositPopup = compose<React.ComponentType<Props & WithLoaderProps>>(
   withLoader,
   React.memo
 )(_DepositPopup);
 export default DepositPopup;
 
-interface OwnProps {
+interface Props {
   currency: CurrencyEnum;
   invest: TInvest;
   asset: ASSET;
@@ -58,5 +58,3 @@ interface OwnProps {
   investInfo: ProgramInvestInfo | FundInvestInfo;
   hasEntryFee?: boolean;
 }
-
-interface Props extends OwnProps {}
