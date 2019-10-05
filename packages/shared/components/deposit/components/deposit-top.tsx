@@ -1,56 +1,52 @@
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import useRole from "shared/hooks/use-role.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _DepositTop: React.FC<Props> = ({
-  role,
-  t,
-  header = t("deposit-asset.title"),
+  header,
   asset,
   title,
   currency,
   availableToInvestBase
-}) => (
-  <div className="dialog__top">
-    <div className="dialog__header">
-      <h2>{header}</h2>
-      <p>{title}</p>
+}) => {
+  const [t] = useTranslation();
+  const role = useRole();
+  return (
+    <div className="dialog__top">
+      <div className="dialog__header">
+        <h2>{header || t("deposit-asset.title")}</h2>
+        <p>{title}</p>
+      </div>
+      {asset === ASSET.PROGRAM &&
+        role === ROLE.INVESTOR &&
+        availableToInvestBase && (
+          <div className="dialog-field">
+            <StatisticItem
+              label={t("deposit-asset.program.available-to-invest")}
+              big
+            >
+              {`${formatCurrencyValue(
+                availableToInvestBase!,
+                currency!
+              )} ${currency}`}
+            </StatisticItem>
+          </div>
+        )}
     </div>
-    {asset === ASSET.PROGRAM &&
-      role === ROLE.INVESTOR &&
-      availableToInvestBase && (
-        <div className="dialog-field">
-          <StatisticItem
-            label={t("deposit-asset.program.available-to-invest")}
-            big
-          >
-            {`${formatCurrencyValue(
-              availableToInvestBase!,
-              currency!
-            )} ${currency}`}
-          </StatisticItem>
-        </div>
-      )}
-  </div>
-);
+  );
+};
 
-const DepositTop = compose<React.ComponentType<DepositTopOwnProps>>(
-  withRole,
-  translate(),
-  React.memo
-)(_DepositTop);
-export default DepositTop;
-
-export interface DepositTopOwnProps {
+export interface Props {
   currency?: CurrencyEnum;
   title: string;
   availableToInvestBase?: number;
   asset: ASSET;
   header?: string;
 }
-interface Props extends DepositTopOwnProps, WithTranslation, WithRoleProps {}
+
+const DepositTop = React.memo(_DepositTop);
+export default DepositTop;
