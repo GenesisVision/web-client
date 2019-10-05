@@ -2,11 +2,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import { ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
-import {
-  WithTranslation,
-  withTranslation as translate,
-  useTranslation
-} from "react-i18next";
+import { useTranslation, withTranslation as translate, WithTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
@@ -19,18 +15,11 @@ import { ASSET, ROLE } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import rateApi from "shared/services/api-client/rate-api";
-import {
-  calculatePercentage,
-  convertFromCurrency,
-  convertToCurrency
-} from "shared/utils/currency-converter";
+import { calculatePercentage, convertFromCurrency, convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
-import {
-  investorSchema,
-  managerSchema
-} from "./deposit-form-validation-schema";
+import { investorSchema, managerSchema } from "./deposit-form-validation-schema";
 import { TInvestInfo } from "./deposit.types";
 
 const INIT_WALLET_CURRENCY = "GVT";
@@ -169,9 +158,9 @@ const _DepositForm: React.FC<
           {t("deposit-asset.confirm")}
         </GVButton>
       </div>
-      {asset === ASSET.FUND ? (
+      {asset === ASSET.FUND && (
         <div className="dialog__info">{t("deposit-asset.fund.disclaimer")}</div>
-      ) : null}
+      )}
     </form>
   );
 };
