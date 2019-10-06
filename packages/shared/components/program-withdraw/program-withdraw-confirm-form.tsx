@@ -1,14 +1,55 @@
 import { InjectedFormikProps, withFormik } from "formik";
+import { CancelablePromise } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
+import useApiRequest from "shared/hooks/api-request.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { IProgramWithdrawAmountFormValues } from "./program-withdraw-amount-form";
+import { ProgramWithdrawType } from "./program-withdraw-popup";
+
+const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
+  withdraw,
+  programCurrency,
+  formValues,
+  periodEnds,
+  onBackClick
+}) => {
+  const { errorMessage, sendRequest } = useApiRequest({
+    request: withdraw
+  });
+  const handleSubmit = useCallback(
+    (setSubmitting: SetSubmittingType) =>
+      sendRequest(formValues, setSubmitting),
+    [formValues]
+  );
+
+  return (
+    <ProgramWithdrawConfirmForm
+      errorMessage={errorMessage}
+      formValues={formValues}
+      onSubmit={handleSubmit}
+      onBackClick={onBackClick}
+      programCurrency={programCurrency}
+      periodEnds={periodEnds}
+    />
+  );
+};
+export const ProgramWithdrawConfirm = React.memo(_ProgramWithdrawConfirm);
+
+interface ProgramWithdrawConfirmProps {
+  withdraw: (values: ProgramWithdrawType) => CancelablePromise<void>;
+  formValues: IProgramWithdrawAmountFormValues;
+  onBackClick: () => void;
+  periodEnds: Date;
+  programCurrency: string;
+}
 
 const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
   programCurrency,
@@ -41,9 +82,7 @@ const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
           </span>
         </li>
       </ul>
-      <div className="form-error">
-        <FormError error={errorMessage} />
-      </div>
+      <FormError error={errorMessage} />
       <div className="dialog__buttons">
         <GVButton
           onClick={onBackClick}
@@ -66,7 +105,7 @@ const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
   );
 };
 
-const ProgramWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
+const ProgramWithdrawConfirmForm = compose<React.ComponentType<Props>>(
   withFormik<Props, {}>({
     displayName: "withdraw-submit-form",
     handleSubmit: (_, { props, setSubmitting }) => {
@@ -78,13 +117,11 @@ const ProgramWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
 
 export default ProgramWithdrawConfirmForm;
 
-interface OwnProps {
+interface Props {
   formValues: IProgramWithdrawAmountFormValues;
   errorMessage?: string;
-  onSubmit(setSubmitting: SetSubmittingType): void;
-  onBackClick(): void;
+  onSubmit: (setSubmitting: SetSubmittingType) => void;
+  onBackClick: () => void;
   periodEnds: Date;
   programCurrency: string;
 }
-
-interface Props extends OwnProps {}
