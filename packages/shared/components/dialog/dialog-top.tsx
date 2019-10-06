@@ -15,8 +15,8 @@ export const _DialogTop: React.FC<
 );
 
 interface Props {
-  title?: string;
-  subtitle?: string;
+  title?: string | JSX.Element;
+  subtitle?: string | JSX.Element;
 }
 
 export const DialogTop = React.memo(_DialogTop);
