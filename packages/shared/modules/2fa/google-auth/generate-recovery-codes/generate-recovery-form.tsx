@@ -3,6 +3,7 @@ import { PasswordModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -12,36 +13,36 @@ import { object, string } from "yup";
 const GenerateRecoveryForm: React.FC<
   InjectedFormikProps<Props, IFormValues>
 > = ({ t, handleSubmit, errorMessage, isSubmitting }) => (
-  <div className="dialog__top">
-    <div className="dialog__header">
-      <h2>{t("2fa-page.codes.generate-recovery-codes")}</h2>
+  <>
+    <DialogTop title={t("2fa-page.codes.generate-recovery-codes")} />
+    <div className="dialog__bottom">
+      <form
+        id="generate-recovery-form"
+        onSubmit={handleSubmit}
+        autoComplete="off"
+      >
+        <GVFormikField
+          name={FIELDS.password}
+          type="password"
+          label={t("2fa-page.password")}
+          component={GVTextField}
+          autoComplete="new-password"
+        />
+        <div className="form-error">{errorMessage}</div>
+        <div className="dialog__buttons">
+          <GVButton
+            className="google-auth__button"
+            variant="contained"
+            color="primary"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {t("buttons.generate")}
+          </GVButton>
+        </div>
+      </form>
     </div>
-    <form
-      id="generate-recovery-form"
-      onSubmit={handleSubmit}
-      autoComplete="off"
-    >
-      <GVFormikField
-        name={FIELDS.password}
-        type="password"
-        label={t("2fa-page.password")}
-        component={GVTextField}
-        autoComplete="new-password"
-      />
-      <div className="form-error">{errorMessage}</div>
-      <div className="dialog__buttons">
-        <GVButton
-          className="google-auth__button"
-          variant="contained"
-          color="primary"
-          type="submit"
-          disabled={isSubmitting}
-        >
-          {t("buttons.generate")}
-        </GVButton>
-      </div>
-    </form>
-  </div>
+  </>
 );
 
 enum FIELDS {
