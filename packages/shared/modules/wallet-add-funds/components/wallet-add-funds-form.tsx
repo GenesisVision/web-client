@@ -4,6 +4,7 @@ import { WalletData } from "gv-api-web";
 import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVqr from "shared/components/gv-qr/gv-qr";
 import CopyIcon from "shared/components/icon/copy-icon";
@@ -42,21 +43,16 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
   );
   return (
     <div className="wallet-add-funds-popup">
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{t("wallet-deposit.title")}</h2>
-        </div>
-        <div className="dialog-field">
-          <form id="wallet-deposit" noValidate>
-            <WalletSelect
-              name={FIELDS.id}
-              label={t("wallet-deposit.select-currency")}
-              items={wallets}
-              onChange={onChangeWallet}
-            />
-          </form>
-        </div>
-      </div>
+      <DialogTop title={t("wallet-deposit.title")}>
+        <form id="wallet-deposit" noValidate>
+          <WalletSelect
+            name={FIELDS.id}
+            label={t("wallet-deposit.select-currency")}
+            items={wallets}
+            onChange={onChangeWallet}
+          />
+        </form>
+      </DialogTop>
       <div className="dialog__bottom wallet-add-funds-popup__bottom">
         <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
         <StatisticItem
