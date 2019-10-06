@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -16,17 +17,11 @@ const _FundWithdrawTop: React.FC<IFundWithdrawTopProps> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="dialog__top">
-      <div className="dialog__header">
-        <h2>{t("withdraw-fund.title")}</h2>
-        <p>{title}</p>
-      </div>
-      <div className="dialog-field">
-        <StatisticItem label={t("withdraw-fund.available-to-withdraw")} big>
-          {formatCurrencyValue(availableToWithdraw, currency)} {currency}
-        </StatisticItem>
-      </div>
-    </div>
+    <DialogTop title={t("withdraw-fund.title")} subtitle={title}>
+      <StatisticItem label={t("withdraw-fund.available-to-withdraw")} big>
+        {formatCurrencyValue(availableToWithdraw, currency)} {currency}
+      </StatisticItem>
+    </DialogTop>
   );
 };
 
