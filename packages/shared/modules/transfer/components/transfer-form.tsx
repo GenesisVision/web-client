@@ -6,19 +6,17 @@ import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import WalletSelect, {
-  ItemType,
-  ItemsType
-} from "shared/components/wallet-select/wallet-select";
+import WalletSelect, { ItemsType, ItemType } from "shared/components/wallet-select/wallet-select";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import TransferRate from "shared/modules/transfer/components/transfer-rate";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
-import { Schema, lazy, number, object } from "yup";
+import { lazy, number, object, Schema } from "yup";
 
 import * as service from "../services/transfer.services";
 import { TRANSFER_CONTAINER } from "../transfer.types";
@@ -107,10 +105,7 @@ const _TransferForm: React.FC<Props> = ({
       onSubmit={handleSubmit}
       noValidate
     >
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{title || t("transfer.title")}</h2>
-        </div>
+      <DialogTop title={title || t("transfer.title")}>
         <WalletSelect
           name={FIELDS.sourceId}
           label={t("transfer.from")}
@@ -120,7 +115,7 @@ const _TransferForm: React.FC<Props> = ({
         <StatisticItem label={t(`transfer.available${sourceType}From`)}>
           {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
         </StatisticItem>
-      </div>
+      </DialogTop>
       <div className="dialog__bottom">
         <WalletSelect
           name={FIELDS.destinationId}
