@@ -1,16 +1,13 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 
 const _TransactionDetails: React.FC<Props> = ({ header, body, bottom, t }) => (
   <>
-    <div className="dialog__top">
-      <div className="dialog__header">
-        <h2>{t(`transactions-details.title`)}</h2>
-        <p>{header}</p>
-      </div>
+    <DialogTop title={t(`transactions-details.title`)} subtitle={header}>
       {body}
-    </div>
+    </DialogTop>
     <div className="dialog__bottom">{bottom}</div>
   </>
 );
