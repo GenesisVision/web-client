@@ -1,6 +1,8 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { DialogList } from "shared/components/dialog/dialog-list";
+import { DialogListItem } from "shared/components/dialog/dialog-list-item";
 import { calculatePercentage } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -18,40 +20,30 @@ const FundWithdrawResult: React.FC<
   const feeInCurrency = calculatePercentage(amountToWithdraw, exitFee);
   const withdrawResult = amountToWithdraw - feeInCurrency;
   return (
-    <ul className="dialog-list">
+    <DialogList>
       {exitFee > 0 && (
-        <li className="dialog-list__item">
-          <span className="dialog-list__title">
-            {t("withdraw-fund.exit-fee")}
-          </span>
-          <span className="dialog-list__value">
-            {exitFee} %
-            <NumberFormat
-              value={formatCurrencyValue(
-                calculatePercentage(amountToWithdraw, exitFee),
-                currency
-              )}
-              prefix=" (&asymp; "
-              suffix={` ${currency})`}
-              displayType="text"
-            />
-          </span>
-        </li>
-      )}
-      <li className="dialog-list__item">
-        <span className="dialog-list__title">
-          {t("withdraw-fund.withdraw-amount")}
-        </span>
-        <span className="dialog-list__value">
+        <DialogListItem label={t("withdraw-fund.exit-fee")}>
+          {exitFee} %
           <NumberFormat
-            value={formatCurrencyValue(withdrawResult, currency)}
-            prefix=" &asymp; "
-            suffix={` ${currency}`}
+            value={formatCurrencyValue(
+              calculatePercentage(amountToWithdraw, exitFee),
+              currency
+            )}
+            prefix=" (&asymp; "
+            suffix={` ${currency})`}
             displayType="text"
           />
-        </span>
-      </li>
-    </ul>
+        </DialogListItem>
+      )}
+      <DialogListItem label={t("withdraw-fund.withdraw-amount")}>
+        <NumberFormat
+          value={formatCurrencyValue(withdrawResult, currency)}
+          prefix=" &asymp; "
+          suffix={` ${currency}`}
+          displayType="text"
+        />
+      </DialogListItem>
+    </DialogList>
   );
 };
 
