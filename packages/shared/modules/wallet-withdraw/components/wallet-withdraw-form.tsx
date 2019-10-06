@@ -8,6 +8,9 @@ import { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogList } from "shared/components/dialog/dialog-list";
+import { DialogListItem } from "shared/components/dialog/dialog-list-item";
+import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -17,11 +20,8 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
-import {
-  btcWalletValidator,
-  ethGvtWalletValidator
-} from "shared/utils/validators/validators";
-import { Schema, StringSchema, lazy, object, string } from "yup";
+import { btcWalletValidator, ethGvtWalletValidator } from "shared/utils/validators/validators";
+import { lazy, object, Schema, string, StringSchema } from "yup";
 
 const _WalletWithdrawForm: React.FC<
   InjectedFormikProps<Props, IWalletWithdrawFormValues>
@@ -113,33 +113,23 @@ const _WalletWithdrawForm: React.FC<
             component={GVTextField}
           />
         )}
-        <ul className="dialog-list">
-          <li className="dialog-list__item">
-            <span className="dialog-list__title">
-              {t("wallet-withdraw.will-get")}
-            </span>
-            <span className="dialog-list__value">
-              <NumberFormat
-                value={formatCurrencyValue(willGet, currency)}
-                suffix={` ${currency}`}
-                displayType="text"
-              />
-            </span>
-          </li>
-          <li className="dialog-list__item">
-            <span className="dialog-list__title">
-              {t("wallet-withdraw.fee")}
-            </span>
-            <span className="dialog-list__value">
-              <NumberFormat
-                value={formatCurrencyValue(withdrawalCommission, currency)}
-                suffix={` ${currency}`}
-                displayType="text"
-              />
-            </span>
-          </li>
-        </ul>
-        <div className="form-error">{errorMessage}</div>
+        <DialogList>
+          <DialogListItem label={t("wallet-withdraw.will-get")}>
+            <NumberFormat
+              value={formatCurrencyValue(willGet, currency)}
+              suffix={` ${currency}`}
+              displayType="text"
+            />
+          </DialogListItem>
+          <DialogListItem label={t("wallet-withdraw.fee")}>
+            <NumberFormat
+              value={formatCurrencyValue(withdrawalCommission, currency)}
+              suffix={` ${currency}`}
+              displayType="text"
+            />
+          </DialogListItem>
+        </DialogList>
+        <FormError error={errorMessage} />
         <div className="dialog__buttons">
           <GVButton
             type="submit"
