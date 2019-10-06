@@ -3,6 +3,7 @@ import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
@@ -25,7 +26,7 @@ const _ConfirmPopup: React.ComponentType<
   <Dialog open={open} onClose={onClose} className={className}>
     <form onSubmit={handleSubmit} noValidate>
       <DialogTop title={header} />
-      <div className="dialog__bottom">
+      <DialogBottom>
         <div className="dialog__text">
           <p>{body}</p>
         </div>
@@ -39,7 +40,7 @@ const _ConfirmPopup: React.ComponentType<
             </GVButton>
           )}
         </div>
-      </div>
+      </DialogBottom>
     </form>
   </Dialog>
 );

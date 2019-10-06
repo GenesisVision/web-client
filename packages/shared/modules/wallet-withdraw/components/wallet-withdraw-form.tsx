@@ -23,6 +23,7 @@ import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import { btcWalletValidator, ethGvtWalletValidator } from "shared/utils/validators/validators";
 import { lazy, object, Schema, string, StringSchema } from "yup";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 
 const _WalletWithdrawForm: React.FC<
   InjectedFormikProps<Props, IWalletWithdrawFormValues>
@@ -86,7 +87,7 @@ const _WalletWithdrawForm: React.FC<
           onChange={onChangeCurrency}
         />
       </DialogTop>
-      <div className="dialog__bottom">
+      <DialogBottom>
         <InputAmountField
           name={FIELDS.amount}
           label={t("wallet-withdraw.amount")}
@@ -136,7 +137,7 @@ const _WalletWithdrawForm: React.FC<
             {t("buttons.confirm")}
           </GVButton>
         </div>
-      </div>
+      </DialogBottom>
     </form>
   );
 };

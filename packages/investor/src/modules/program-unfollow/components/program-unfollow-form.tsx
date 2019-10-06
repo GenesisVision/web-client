@@ -3,6 +3,7 @@ import { DetachFromSignalProviderModeEnum } from "gv-api-web";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -18,7 +19,7 @@ const _ProgramUnfollowForm: React.FC<Props> = ({
 }) => (
   <form id="unfollow-form" onSubmit={handleSubmit} noValidate>
     <DialogTop title={t("unfollow-program.title")} />
-    <div className="dialog__bottom">
+    <DialogBottom>
       <GVFormikField
         name={FIELDS.mode}
         component={GVTextField}
@@ -46,7 +47,7 @@ const _ProgramUnfollowForm: React.FC<Props> = ({
           {t("unfollow-program.submit")}
         </GVButton>
       </div>
-    </div>
+    </DialogBottom>
   </form>
 );
 

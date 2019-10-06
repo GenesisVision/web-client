@@ -3,6 +3,7 @@ import i18next from "i18next";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -23,7 +24,7 @@ const _CloseAssetForm: React.FC<
         `manager.asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
       )}
     />
-    <div className="dialog__bottom">
+    <DialogBottom>
       {twoFactorEnabled && (
         <GVFormikField
           type="tel"
@@ -46,7 +47,7 @@ const _CloseAssetForm: React.FC<
           {t("buttons.cancel")}
         </GVButton>
       </div>
-    </div>
+    </DialogBottom>
   </form>
 );
 

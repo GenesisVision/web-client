@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -113,51 +114,55 @@ const _DepositForm: React.FC<
   };
 
   return (
-    <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
-      <WalletField
-        wallets={wallets}
-        name={DEPOSIT_FORM_FIELDS.walletId}
-        onChange={onWalletChange}
-      />
-      <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
-        {formatCurrencyValue(availableInWallet, walletCurrency)}{" "}
-        {walletCurrency}
-      </StatisticItem>
-      <InputAmountField
-        name={DEPOSIT_FORM_FIELDS.amount}
-        label={t("deposit-asset.amount")}
-        currency={walletCurrency}
-        isAllow={isAllow(walletCurrency)}
-        setMax={setMaxAmount}
-      />
-      <ConvertCurrency
-        condition={currency !== walletCurrency}
-        amount={amount}
-        rate={rate}
-        currency={currency}
-      />
-      <InvestorFees
-        condition={role === ROLE.INVESTOR}
-        hasEntryFee={hasEntryFee}
-        info={info}
-        amount={amount}
-        rate={rate}
-        currency={currency}
-        walletCurrency={walletCurrency}
-      />
-      <FormError error={errorMessage} />
-      <div className="dialog__buttons">
-        <GVButton
-          type="submit"
-          className="invest-form__submit-button"
-          disabled={isSubmitting || !isValid || !dirty}
-        >
-          {t("deposit-asset.confirm")}
-        </GVButton>
-      </div>
-      {asset === ASSET.FUND && (
-        <div className="dialog__info">{t("deposit-asset.fund.disclaimer")}</div>
-      )}
+    <form id="invest-form" onSubmit={handleSubmit}>
+      <DialogBottom>
+        <WalletField
+          wallets={wallets}
+          name={DEPOSIT_FORM_FIELDS.walletId}
+          onChange={onWalletChange}
+        />
+        <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
+          {formatCurrencyValue(availableInWallet, walletCurrency)}{" "}
+          {walletCurrency}
+        </StatisticItem>
+        <InputAmountField
+          name={DEPOSIT_FORM_FIELDS.amount}
+          label={t("deposit-asset.amount")}
+          currency={walletCurrency}
+          isAllow={isAllow(walletCurrency)}
+          setMax={setMaxAmount}
+        />
+        <ConvertCurrency
+          condition={currency !== walletCurrency}
+          amount={amount}
+          rate={rate}
+          currency={currency}
+        />
+        <InvestorFees
+          condition={role === ROLE.INVESTOR}
+          hasEntryFee={hasEntryFee}
+          info={info}
+          amount={amount}
+          rate={rate}
+          currency={currency}
+          walletCurrency={walletCurrency}
+        />
+        <FormError error={errorMessage} />
+        <div className="dialog__buttons">
+          <GVButton
+            type="submit"
+            className="invest-form__submit-button"
+            disabled={isSubmitting || !isValid || !dirty}
+          >
+            {t("deposit-asset.confirm")}
+          </GVButton>
+        </div>
+        {asset === ASSET.FUND && (
+          <div className="dialog__info">
+            {t("deposit-asset.fund.disclaimer")}
+          </div>
+        )}
+      </DialogBottom>
     </form>
   );
 };

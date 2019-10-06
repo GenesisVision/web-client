@@ -1,6 +1,7 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 
 const _TransactionDetails: React.FC<Props> = ({ header, body, bottom, t }) => (
@@ -8,7 +9,7 @@ const _TransactionDetails: React.FC<Props> = ({ header, body, bottom, t }) => (
     <DialogTop title={t(`transactions-details.title`)} subtitle={header}>
       {body}
     </DialogTop>
-    <div className="dialog__bottom">{bottom}</div>
+    <DialogBottom>{bottom}</DialogBottom>
   </>
 );
 

@@ -4,6 +4,7 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose, Dispatch } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
@@ -45,7 +46,7 @@ const GoogleAuth: React.FC<Props> = ({
   return (
     <>
       <DialogTop title={t("2fa-page.codes.title")} />
-      <div className="dialog__bottom">
+      <DialogBottom>
         <div className="dialog__text">
           <p>{t("2fa-page.codes.successfully")}</p>
           <p>{t("2fa-page.codes.recovery_codes")}</p>
@@ -61,7 +62,7 @@ const GoogleAuth: React.FC<Props> = ({
           </GVButton>
         </div>
         <div className="dialog__info">{t("2fa-page.codes.warning")}</div>
-      </div>
+      </DialogBottom>
     </>
   );
 };

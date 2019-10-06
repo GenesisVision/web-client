@@ -1,13 +1,11 @@
 import { FormikProps, withFormik } from "formik";
-import {
-  AttachToSignalProviderInitialDepositCurrencyEnum,
-  WalletData
-} from "gv-api-web";
+import { AttachToSignalProviderInitialDepositCurrencyEnum, WalletData } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
@@ -83,54 +81,56 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     [currency, wallet]
   );
   return (
-    <form className="dialog__bottom" id="follow-create-account">
-      <div className="dialog-field">
-        <WalletSelect
-          name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId}
-          label={t("follow-program.create-account.from")}
-          items={wallets}
-          onChange={onChangeCurrencyFrom}
-        />
-      </div>
-      <div className="dialog-field">
-        <StatisticItem label={t("follow-program.create-account.available")}>
-          <NumberFormat
-            value={wallet.available}
-            suffix={` ${initialDepositCurrency}`}
-            displayType="text"
+    <form id="follow-create-account">
+      <DialogBottom>
+        <div className="dialog-field">
+          <WalletSelect
+            name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId}
+            label={t("follow-program.create-account.from")}
+            items={wallets}
+            onChange={onChangeCurrencyFrom}
           />
-        </StatisticItem>
-      </div>
-      <div className="dialog-field">
-        <InputAmountField
-          name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount}
-          label={t("follow-program.create-account.amount")}
-          currency={initialDepositCurrency}
-          setMax={setMaxAmount}
-        />
-        {currency !== initialDepositCurrency && (
-          <div className="invest-popup__currency">
+        </div>
+        <div className="dialog-field">
+          <StatisticItem label={t("follow-program.create-account.available")}>
             <NumberFormat
-              value={formatCurrencyValue(
-                convertToCurrency(initialDepositAmount, rate),
-                currency
-              )}
-              prefix="≈ "
-              suffix={` ${currency}`}
+              value={wallet.available}
+              suffix={` ${initialDepositCurrency}`}
               displayType="text"
             />
-          </div>
-        )}
-      </div>
-      <div className="dialog__buttons">
-        <GVButton
-          onClick={handleNext}
-          className="invest-form__submit-button"
-          disabled={disableButton}
-        >
-          {t("follow-program.create-account.next")}
-        </GVButton>
-      </div>
+          </StatisticItem>
+        </div>
+        <div className="dialog-field">
+          <InputAmountField
+            name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount}
+            label={t("follow-program.create-account.amount")}
+            currency={initialDepositCurrency}
+            setMax={setMaxAmount}
+          />
+          {currency !== initialDepositCurrency && (
+            <div className="invest-popup__currency">
+              <NumberFormat
+                value={formatCurrencyValue(
+                  convertToCurrency(initialDepositAmount, rate),
+                  currency
+                )}
+                prefix="≈ "
+                suffix={` ${currency}`}
+                displayType="text"
+              />
+            </div>
+          )}
+        </div>
+        <div className="dialog__buttons">
+          <GVButton
+            onClick={handleNext}
+            className="invest-form__submit-button"
+            disabled={disableButton}
+          >
+            {t("follow-program.create-account.next")}
+          </GVButton>
+        </div>
+      </DialogBottom>
     </form>
   );
 };

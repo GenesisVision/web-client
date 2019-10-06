@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { FUND_CURRENCY } from "shared/constants/constants";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useTab from "shared/hooks/tab.hook";
@@ -60,7 +61,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
         availableToWithdraw={availableToWithdraw}
         currency={currency}
       />
-      <div className="dialog__bottom">
+      <DialogBottom>
         {tab === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
           <FundWithdrawAmountForm
             currency={currency}
@@ -81,7 +82,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
             onBackClick={goToEnterAmountStep}
           />
         )}
-      </div>
+      </DialogBottom>
     </>
   );
 };

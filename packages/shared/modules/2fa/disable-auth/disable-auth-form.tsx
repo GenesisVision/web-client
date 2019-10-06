@@ -3,6 +3,7 @@ import * as React from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
@@ -16,7 +17,7 @@ const DisableAuth: React.FC<
 > = ({ t, handleSubmit, errorMessage, isSubmitting }) => (
   <form id="disable-auth" onSubmit={handleSubmit} autoComplete="off">
     <DialogTop title={t("2fa-page.disable.title")} />
-    <div className="dialog__bottom">
+    <DialogBottom>
       <GVFormikField
         name={FIELDS.twoFactorCode}
         type="tel"
@@ -46,7 +47,7 @@ const DisableAuth: React.FC<
           {t("buttons.disable")}
         </GVButton>
       </div>
-    </div>
+    </DialogBottom>
   </form>
 );
 

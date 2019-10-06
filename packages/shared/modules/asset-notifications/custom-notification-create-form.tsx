@@ -10,6 +10,7 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
 import { number, object } from "yup";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 
 const _CustomNotificationCreateForm: React.FC<Props> = ({
   errorMessage,
@@ -47,7 +48,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
           </option>
         </GVFormikField>
       </DialogTop>
-      <div className="dialog__bottom">
+      <DialogBottom>
         <GVFormikField
           name={FIELDS.conditionAmount}
           label={t("notifications-page.create.amount-label")}
@@ -80,7 +81,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
             {t("buttons.create")}
           </GVButton>
         </div>
-      </div>
+      </DialogBottom>
     </form>
   );
 };

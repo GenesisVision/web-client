@@ -3,6 +3,7 @@ import { PasswordModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -15,7 +16,7 @@ const GenerateRecoveryForm: React.FC<
 > = ({ t, handleSubmit, errorMessage, isSubmitting }) => (
   <>
     <DialogTop title={t("2fa-page.codes.generate-recovery-codes")} />
-    <div className="dialog__bottom">
+    <DialogBottom>
       <form
         id="generate-recovery-form"
         onSubmit={handleSubmit}
@@ -41,7 +42,7 @@ const GenerateRecoveryForm: React.FC<
           </GVButton>
         </div>
       </form>
-    </div>
+    </DialogBottom>
   </>
 );
 

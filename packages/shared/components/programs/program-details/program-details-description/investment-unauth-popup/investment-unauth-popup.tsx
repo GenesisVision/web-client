@@ -1,12 +1,10 @@
 import "./investment-unauth-popup.scss";
 
-import classnames from "classnames";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import DepositTop, {
-  DepositTopOwnProps
-} from "shared/components/deposit/components/deposit-top";
+import DepositTop, { DepositTopOwnProps } from "shared/components/deposit/components/deposit-top";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import GVButton from "shared/components/gv-button";
 import { ROLE } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
@@ -43,7 +41,7 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
         title={title}
         availableToInvestBase={availableToInvestBase}
       />
-      <div className={classnames("dialog__bottom", "unauth-popup")}>
+      <DialogBottom>
         <p className="unauth-popup__message">{message}</p>
         <div className="unauth-popup__links">
           <a href={loginUrl}>
@@ -53,7 +51,7 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
             <GVButton>{t("auth.signup.title")}</GVButton>
           </a>
         </div>
-      </div>
+      </DialogBottom>
     </Dialog>
   );
 };

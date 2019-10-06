@@ -2,6 +2,7 @@ import { CancelablePromise, ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useTab from "shared/hooks/tab.hook";
 import { CurrencyEnum } from "shared/utils/types";
@@ -53,7 +54,7 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
         programCurrency={assetCurrency}
         accountCurrency={accountCurrency}
       />
-      <div className="dialog__bottom">
+      <DialogBottom>
         {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
           <ProgramWithdrawAmountForm
             formValues={formValues}
@@ -75,7 +76,7 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
             />
           )}
         <div className="dialog__info">{t("withdraw-program.info")}</div>
-      </div>
+      </DialogBottom>
     </>
   );
 };

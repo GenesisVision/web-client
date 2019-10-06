@@ -2,6 +2,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -15,7 +16,7 @@ const _ConfirmForm: React.FC<
 > = ({ t, handleSubmit, serverError, isSubmitting }) => (
   <form id="confirm-form" onSubmit={handleSubmit}>
     <DialogTop title={"Confirm"} />
-    <div className="dialog__bottom">
+    <DialogBottom>
       <GVFormikField
         disabled={isSubmitting}
         type="text"
@@ -31,7 +32,7 @@ const _ConfirmForm: React.FC<
           {t("auth.login.two-factor.verify")}
         </GVButton>
       </div>
-    </div>
+    </DialogBottom>
   </form>
 );
 

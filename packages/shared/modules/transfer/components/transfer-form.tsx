@@ -20,6 +20,7 @@ import { lazy, number, object, Schema } from "yup";
 
 import * as service from "../services/transfer.services";
 import { TRANSFER_CONTAINER } from "../transfer.types";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 
 const _TransferForm: React.FC<Props> = ({
   title,
@@ -116,7 +117,7 @@ const _TransferForm: React.FC<Props> = ({
           {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
         </StatisticItem>
       </DialogTop>
-      <div className="dialog__bottom">
+      <DialogBottom>
         <WalletSelect
           name={FIELDS.destinationId}
           label={t("transfer.to")}
@@ -162,7 +163,7 @@ const _TransferForm: React.FC<Props> = ({
           </GVButton>
         </div>
         <div className="dialog__info">{t("transfer.info")}</div>
-      </div>
+      </DialogBottom>
     </form>
   );
 };

@@ -12,6 +12,7 @@ import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 
 const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
   t,
@@ -53,22 +54,28 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
           />
         </form>
       </DialogTop>
-      <div className="dialog__bottom wallet-add-funds-popup__bottom">
-        <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
-        <StatisticItem
-          className="wallet-add-funds-popup__address"
-          label={t("wallet-deposit.deposit-address")}
-        >
-          {depositAddress}
-        </StatisticItem>
-        <GVButton color="secondary" onClick={onCopy} disabled={!depositAddress}>
-          <>
-            <CopyIcon />
-            &nbsp;
-            {t("buttons.copy")}
-          </>
-        </GVButton>
-      </div>
+      <DialogBottom>
+        <div className="wallet-add-funds-popup__bottom">
+          <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
+          <StatisticItem
+            className="wallet-add-funds-popup__address"
+            label={t("wallet-deposit.deposit-address")}
+          >
+            {depositAddress}
+          </StatisticItem>
+          <GVButton
+            color="secondary"
+            onClick={onCopy}
+            disabled={!depositAddress}
+          >
+            <>
+              <CopyIcon />
+              &nbsp;
+              {t("buttons.copy")}
+            </>
+          </GVButton>
+        </div>
+      </DialogBottom>
     </div>
   );
 };
