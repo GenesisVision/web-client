@@ -1,13 +1,10 @@
 import { FormikProps, withFormik } from "formik";
-import {
-  NotificationSettingViewModelConditionTypeEnum,
-  NotificationViewModelTypeEnum,
-  ProgramInfo
-} from "gv-api-web";
+import { NotificationSettingViewModelConditionTypeEnum, NotificationViewModelTypeEnum, ProgramInfo } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -29,11 +26,10 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
   const isLevel = conditionType === CONDITION_TYPE_VALUES.Level;
   return (
     <form id="create-notification" onSubmit={handleSubmit}>
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{t("notifications-page.create.title")}</h2>
-          <p>{asset.title}</p>
-        </div>
+      <DialogTop
+        title={t("notifications-page.create.title")}
+        subtitle={asset.title}
+      >
         <GVFormikField
           name={FIELDS.conditionType}
           component={GVTextField}
@@ -50,7 +46,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
             {t("notifications-page.create.AvailableToInvest.title")}
           </option>
         </GVFormikField>
-      </div>
+      </DialogTop>
       <div className="dialog__bottom">
         <GVFormikField
           name={FIELDS.conditionAmount}
