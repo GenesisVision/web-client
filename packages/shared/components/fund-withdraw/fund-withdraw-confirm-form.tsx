@@ -2,6 +2,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import useApiRequest from "shared/hooks/api-request.hook";
@@ -80,7 +81,7 @@ const _FundWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
         exitFee={exitFee}
       />
       <FormError error={errorMessage} />
-      <div className="dialog__buttons">
+      <DialogButtons>
         <GVButton
           onClick={onBackClick}
           color="secondary"
@@ -96,7 +97,7 @@ const _FundWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
         >
           {t("buttons.confirm")}
         </GVButton>
-      </div>
+      </DialogButtons>
     </form>
   );
 };

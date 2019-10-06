@@ -6,6 +6,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -148,7 +149,7 @@ const _DepositForm: React.FC<
           walletCurrency={walletCurrency}
         />
         <FormError error={errorMessage} />
-        <div className="dialog__buttons">
+        <DialogButtons>
           <GVButton
             type="submit"
             className="invest-form__submit-button"
@@ -156,7 +157,7 @@ const _DepositForm: React.FC<
           >
             {t("deposit-asset.confirm")}
           </GVButton>
-        </div>
+        </DialogButtons>
         {asset === ASSET.FUND && (
           <div className="dialog__info">
             {t("deposit-asset.fund.disclaimer")}

@@ -4,6 +4,7 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -34,7 +35,7 @@ const _CloseAssetForm: React.FC<
           component={GVTextField}
         />
       )}
-      <div className="dialog__buttons">
+      <DialogButtons>
         <GVButton type="submit" disabled={isSubmitting}>
           {t("buttons.confirm")}
         </GVButton>
@@ -46,7 +47,7 @@ const _CloseAssetForm: React.FC<
         >
           {t("buttons.cancel")}
         </GVButton>
-      </div>
+      </DialogButtons>
     </DialogBottom>
   </form>
 );

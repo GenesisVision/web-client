@@ -3,6 +3,7 @@ import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import GVButton from "shared/components/gv-button";
 import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -78,7 +79,7 @@ const _ProgramWithdrawAmountForm: React.FC<
           displayType="text"
         />
       )}
-      <div className="dialog__buttons">
+      <DialogButtons>
         <GVButton
           type="submit"
           id="programWithdrawAmountFormSubmit"
@@ -89,7 +90,7 @@ const _ProgramWithdrawAmountForm: React.FC<
         >
           {t("withdraw-program.next")}
         </GVButton>
-      </div>
+      </DialogButtons>
     </form>
   );
 };

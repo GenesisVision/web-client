@@ -4,6 +4,7 @@ import React, { ComponentType, useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
@@ -87,11 +88,11 @@ const _FundWithdrawAmountForm: React.FC<
         percent={values[FUND_WITHDRAW_FIELDS.percent] || 0}
         exitFee={exitFee}
       />
-      <div className="dialog__buttons">
+      <DialogButtons>
         <GVButton type="submit" id="fundWithdrawAmountFormSubmit">
           {t("buttons.next")}
         </GVButton>
-      </div>
+      </DialogButtons>
     </form>
   );
 };

@@ -3,7 +3,9 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import { DialogTop } from "shared/components/dialog/dialog-top";
+import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -79,12 +81,12 @@ const _ChangePasswordTradingAccountForm: React.FC<
             component={GVTextField}
           />
         )}
-        <div className="form-error">{errorMessage}</div>
-        <div className="dialog__buttons">
+        <FormError error={errorMessage} />
+        <DialogButtons>
           <GVButton type="submit" disabled={!isValid || !dirty || isSubmitting}>
             {t("buttons.confirm")}
           </GVButton>
-        </div>
+        </DialogButtons>
       </DialogBottom>
     </form>
   );

@@ -4,6 +4,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
@@ -30,7 +31,7 @@ const _ConfirmPopup: React.ComponentType<
         <div className="dialog__text">
           <p>{body}</p>
         </div>
-        <div className="dialog__buttons">
+        <DialogButtons>
           <GVButton type="submit" disabled={isSubmitting}>
             {applyButtonText}
           </GVButton>
@@ -39,7 +40,7 @@ const _ConfirmPopup: React.ComponentType<
               {cancelButtonText}
             </GVButton>
           )}
-        </div>
+        </DialogButtons>
       </DialogBottom>
     </form>
   </Dialog>

@@ -5,6 +5,7 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import { DialogList } from "shared/components/dialog/dialog-list";
 import { DialogListItem } from "shared/components/dialog/dialog-list-item";
 import FormError from "shared/components/form/form-error/form-error";
@@ -79,7 +80,7 @@ const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
         </DialogListItem>
       </DialogList>
       <FormError error={errorMessage} />
-      <div className="dialog__buttons">
+      <DialogButtons>
         <GVButton
           onClick={onBackClick}
           color="secondary"
@@ -96,7 +97,7 @@ const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
         >
           {t("withdraw-program.submit")}
         </GVButton>
-      </div>
+      </DialogButtons>
     </form>
   );
 };

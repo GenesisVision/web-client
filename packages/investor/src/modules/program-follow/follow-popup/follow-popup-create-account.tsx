@@ -17,6 +17,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 import CreateAccountFormValidationSchema from "./follow-popup-create-account.validators";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 
 const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   onClick,
@@ -121,7 +122,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
             </div>
           )}
         </div>
-        <div className="dialog__buttons">
+        <DialogButtons>
           <GVButton
             onClick={handleNext}
             className="invest-form__submit-button"
@@ -129,7 +130,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
           >
             {t("follow-program.create-account.next")}
           </GVButton>
-        </div>
+        </DialogButtons>
       </DialogBottom>
     </form>
   );

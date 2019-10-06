@@ -5,6 +5,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -118,7 +119,7 @@ const _FollowParams: React.FC<
             setMax={setMaxOpenTolerancePercent}
           />
         </div>
-        <div className="dialog__buttons">
+        <DialogButtons>
           {isShowBack && (
             <GVButton onClick={onPrevStep} color="secondary" variant="outlined">
               {t("follow-program.params.back")}
@@ -131,7 +132,7 @@ const _FollowParams: React.FC<
           >
             {t("follow-program.params.submit")}
           </GVButton>
-        </div>
+        </DialogButtons>
         {values[FIELDS.mode] === modes.fixed.value && (
           <div className="dialog__info">* {t(getInfoText(currency))}</div>
         )}

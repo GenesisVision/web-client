@@ -6,7 +6,10 @@ import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import { DialogTop } from "shared/components/dialog/dialog-top";
+import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
@@ -20,7 +23,6 @@ import { lazy, number, object, Schema } from "yup";
 
 import * as service from "../services/transfer.services";
 import { TRANSFER_CONTAINER } from "../transfer.types";
-import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 
 const _TransferForm: React.FC<Props> = ({
   title,
@@ -151,8 +153,8 @@ const _TransferForm: React.FC<Props> = ({
             )}
           </TransferRate>
         )}
-        <div className="form-error">{errorMessage}</div>
-        <div className="dialog__buttons">
+        <FormError error={errorMessage} />
+        <DialogButtons>
           <GVButton
             type="submit"
             variant="contained"
@@ -161,7 +163,7 @@ const _TransferForm: React.FC<Props> = ({
           >
             {t("buttons.confirm")}
           </GVButton>
-        </div>
+        </DialogButtons>
         <div className="dialog__info">{t("transfer.info")}</div>
       </DialogBottom>
     </form>

@@ -9,6 +9,8 @@ import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { SignalValidationSchema } from "./program-signal.validators";
+import FormError from "shared/components/form/form-error/form-error";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 
 const _ProgramSignalForm: React.FC<Props> = ({
   t,
@@ -28,8 +30,8 @@ const _ProgramSignalForm: React.FC<Props> = ({
           successFeeFieldName={FORM_FIELDS.successFee}
           hasSubscriptionFeeAutofocus={true}
         />
-        <div className="form-error">{errorMessage}</div>
-        <div className="dialog__buttons">
+        <FormError error={errorMessage} />
+        <DialogButtons>
           <GVButton
             type="submit"
             id="programMakeSignalSubmit"
@@ -37,7 +39,7 @@ const _ProgramSignalForm: React.FC<Props> = ({
           >
             {t("buttons.confirm")}
           </GVButton>
-        </div>
+        </DialogButtons>
       </DialogBottom>
     </form>
   );

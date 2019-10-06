@@ -1,6 +1,7 @@
 import "../dialog.scss";
 
 import * as React from "react";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 
 import {
   DialogLoaderHeaderGoogleAuth,
@@ -34,9 +35,9 @@ export const DialogLoaderGoogleAuthDesktop: React.FC = () => (
         <div className="dialog__wrapper">
           <DialogLoaderInput />
         </div>
-        <div className="dialog__buttons">
+        <DialogButtons>
           <DialogLoaderShortButton />
-        </div>
+        </DialogButtons>
       </div>
     </div>
   </div>

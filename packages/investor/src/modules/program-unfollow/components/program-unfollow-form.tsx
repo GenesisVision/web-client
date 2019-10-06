@@ -4,6 +4,7 @@ import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -38,7 +39,7 @@ const _ProgramUnfollowForm: React.FC<Props> = ({
           </option>
         ))}
       </GVFormikField>
-      <div className="dialog__buttons">
+      <DialogButtons>
         <GVButton
           type="submit"
           className="invest-form__submit-button"
@@ -46,7 +47,7 @@ const _ProgramUnfollowForm: React.FC<Props> = ({
         >
           {t("unfollow-program.submit")}
         </GVButton>
-      </div>
+      </DialogButtons>
     </DialogBottom>
   </form>
 );

@@ -4,6 +4,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
@@ -36,7 +37,7 @@ const DisableAuth: React.FC<
         autoComplete="new-password"
       />
       <FormError error={errorMessage} />
-      <div className="dialog__buttons">
+      <DialogButtons>
         <GVButton
           className="google-auth__button"
           variant="contained"
@@ -46,7 +47,7 @@ const DisableAuth: React.FC<
         >
           {t("buttons.disable")}
         </GVButton>
-      </div>
+      </DialogButtons>
     </DialogBottom>
   </form>
 );

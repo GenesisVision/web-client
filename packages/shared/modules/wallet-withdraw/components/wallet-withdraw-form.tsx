@@ -8,6 +8,8 @@ import { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import { DialogList } from "shared/components/dialog/dialog-list";
 import { DialogListItem } from "shared/components/dialog/dialog-list-item";
 import { DialogTop } from "shared/components/dialog/dialog-top";
@@ -23,7 +25,6 @@ import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 import { btcWalletValidator, ethGvtWalletValidator } from "shared/utils/validators/validators";
 import { lazy, object, Schema, string, StringSchema } from "yup";
-import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 
 const _WalletWithdrawForm: React.FC<
   InjectedFormikProps<Props, IWalletWithdrawFormValues>
@@ -127,7 +128,7 @@ const _WalletWithdrawForm: React.FC<
           </DialogListItem>
         </DialogList>
         <FormError error={errorMessage} />
-        <div className="dialog__buttons">
+        <DialogButtons>
           <GVButton
             type="submit"
             variant="contained"
@@ -136,7 +137,7 @@ const _WalletWithdrawForm: React.FC<
           >
             {t("buttons.confirm")}
           </GVButton>
-        </div>
+        </DialogButtons>
       </DialogBottom>
     </form>
   );
