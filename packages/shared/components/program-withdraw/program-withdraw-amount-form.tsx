@@ -68,17 +68,15 @@ const _ProgramWithdrawAmountForm: React.FC<
         setMax={role === ROLE.MANAGER ? setMaxAmount : undefined}
       />
       {programCurrency !== accountCurrency && values[FIELDS.amount] !== 0 && (
-        <div className="">
-          <NumberFormat
-            value={formatCurrencyValue(
-              convertFromCurrency(values[FIELDS.amount]!, rate),
-              accountCurrency
-            )}
-            prefix="≈ "
-            suffix={` ${accountCurrency}`}
-            displayType="text"
-          />
-        </div>
+        <NumberFormat
+          value={formatCurrencyValue(
+            convertFromCurrency(values[FIELDS.amount]!, rate),
+            accountCurrency
+          )}
+          prefix="≈ "
+          suffix={` ${accountCurrency}`}
+          displayType="text"
+        />
       )}
       <div className="dialog__buttons">
         <GVButton
