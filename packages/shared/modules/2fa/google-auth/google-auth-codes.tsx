@@ -3,7 +3,8 @@ import { RecoveryCode } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Dispatch, compose } from "redux";
+import { compose, Dispatch } from "redux";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -42,26 +43,26 @@ const GoogleAuth: React.FC<Props> = ({
     }
   };
   return (
-    <div className="dialog__top">
-      <div className="dialog__header">
-        <h2>{t("2fa-page.codes.title")}</h2>
+    <>
+      <DialogTop title={t("2fa-page.codes.title")} />
+      <div className="dialog__bottom">
+        <div className="dialog__text">
+          <p>{t("2fa-page.codes.successfully")}</p>
+          <p>{t("2fa-page.codes.recovery_codes")}</p>
+        </div>
+        <CodeList codes={codes} />
+        <div className="dialog__buttons">
+          <GVButton color="secondary" onClick={onCopy}>
+            <>
+              <CopyIcon />
+              &nbsp;
+              {t("buttons.copy")}
+            </>
+          </GVButton>
+        </div>
+        <div className="dialog__info">{t("2fa-page.codes.warning")}</div>
       </div>
-      <div className="dialog__text">
-        <p>{t("2fa-page.codes.successfully")}</p>
-        <p>{t("2fa-page.codes.recovery_codes")}</p>
-      </div>
-      <CodeList codes={codes} />
-      <div className="dialog__buttons">
-        <GVButton color="secondary" onClick={onCopy}>
-          <>
-            <CopyIcon />
-            &nbsp;
-            {t("buttons.copy")}
-          </>
-        </GVButton>
-      </div>
-      <div className="dialog__info">{t("2fa-page.codes.warning")}</div>
-    </div>
+    </>
   );
 };
 
