@@ -5,6 +5,8 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
+import { DialogList } from "shared/components/dialog/dialog-list";
+import { DialogListItem } from "shared/components/dialog/dialog-list-item";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import useApiRequest from "shared/hooks/api-request.hook";
@@ -63,25 +65,19 @@ const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
   const [t] = useTranslation();
   return (
     <form id="withdraw-submit-form" onSubmit={handleSubmit}>
-      <ul className="dialog-list">
-        <li className="dialog-list__item">
-          {t("withdraw-program.withdrawing")}
-          <span className="dialog-list__value">
-            {amount && !withdrawAll
-              ? `${formatCurrencyValue(
-                  amount,
-                  programCurrency
-                )} ${programCurrency}`
-              : t("withdraw-program.all")}
-          </span>
-        </li>
-        <li className="dialog-list__item">
-          {t("withdraw-program.payout-date")}
-          <span className="dialog-list__value">
-            {moment(periodEnds).format()}
-          </span>
-        </li>
-      </ul>
+      <DialogList>
+        <DialogListItem label={t("withdraw-program.withdrawing")}>
+          {amount && !withdrawAll
+            ? `${formatCurrencyValue(
+                amount,
+                programCurrency
+              )} ${programCurrency}`
+            : t("withdraw-program.all")}
+        </DialogListItem>
+        <DialogListItem label={t("withdraw-program.payout-date")}>
+          {moment(periodEnds).format()}
+        </DialogListItem>
+      </DialogList>
       <FormError error={errorMessage} />
       <div className="dialog__buttons">
         <GVButton
