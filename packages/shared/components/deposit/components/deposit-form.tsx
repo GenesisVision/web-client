@@ -2,27 +2,33 @@ import { InjectedFormikProps, withFormik } from "formik";
 import { ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
-import { useTranslation, withTranslation as translate, WithTranslation } from "react-i18next";
-import NumberFormat, { NumberFormatValues } from "react-number-format";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { ASSET, ROLE } from "shared/constants/constants";
-import withLoader from "shared/decorators/with-loader";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
-import rateApi from "shared/services/api-client/rate-api";
-import { calculatePercentage, convertFromCurrency, convertToCurrency } from "shared/utils/currency-converter";
+import { fetchRate } from "shared/services/rate-service";
+import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import { investorSchema, managerSchema } from "./deposit-form-validation-schema";
 import { TInvestInfo } from "./deposit.types";
+import { ConvertCurrency } from "./form-fields/convert-currency";
+import { InvestorFees } from "./form-fields/investor-fees";
+import { WalletField } from "./form-fields/wallet-field";
 
 const INIT_WALLET_CURRENCY = "GVT";
+
+const isAllow = (currency: string) => ({
+  formattedValue,
+  value
+}: NumberFormatValues): boolean =>
+  (formattedValue === "" || validateFraction(value, currency)) && value !== ".";
 
 const _DepositForm: React.FC<
   InjectedFormikProps<Props, IDepositFormValues>
@@ -43,24 +49,15 @@ const _DepositForm: React.FC<
   setFieldValue,
   setFieldTouched
 }) => {
-  const {
-    walletCurrency,
-    rate,
-    availableInWallet = 0,
-    availableToInvest = 0,
-    amount = 0
-  } = values;
-  const [wallet, setWallet] = useState<WalletBaseData>(
-    wallets.find(wallet => wallet.currency === walletCurrency)!
-  );
+  const { walletCurrency, amount = 0 } = values;
+  const [rate, setRate] = useState<number>(1);
+  const [availableInWallet, setAvailableInWallet] = useState<number>(0);
+  const [availableToInvest, setAvailableToInvest] = useState<number>(0);
   useEffect(
     () => {
-      rateApi.v10RateByFromByToGet(walletCurrency, currency).then(rate => {
-        setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
-      });
-      setWallet(wallets.find(wallet => wallet.currency === walletCurrency)!);
+      fetchRate(walletCurrency, currency).then(setRate);
     },
-    [walletCurrency]
+    [currency, walletCurrency]
   );
   useEffect(
     () => {
@@ -68,38 +65,31 @@ const _DepositForm: React.FC<
         (info as ProgramInvestInfo).availableToInvestBase !== undefined
           ? (info as ProgramInvestInfo).availableToInvestBase
           : Number.MAX_SAFE_INTEGER;
-      const availableToInvest = convertToCurrency(maxAvailable, rate);
-      const availableInWallet = wallets.find(
+      setAvailableToInvest(convertToCurrency(maxAvailable, rate));
+    },
+    [info, rate]
+  );
+  useEffect(
+    () => {
+      const available = wallets.find(
         ({ currency }) => currency === walletCurrency
       )!.available;
-
-      if (availableInWallet !== values[DEPOSIT_FORM_FIELDS.availableInWallet])
-        setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, availableInWallet);
-      if (availableToInvest !== values[DEPOSIT_FORM_FIELDS.availableToInvest])
-        setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, availableToInvest);
+      setAvailableInWallet(available);
+      setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, available);
     },
-    [info, wallets, values]
+    [walletCurrency, wallets]
   );
-
-  const isAllow = useCallback(
-    (currency: string) => ({
-      formattedValue,
-      value
-    }: NumberFormatValues): boolean =>
-      (formattedValue === "" || validateFraction(value, currency)) &&
-      value !== ".",
-    []
-  );
-
-  const onChangeCurrencyFrom = useCallback(
-    (event: ISelectChangeEvent, target: JSX.Element): void => {
-      const wallet = wallets.find(wallet => wallet.id === target.props.value)!;
-      setFieldValue(DEPOSIT_FORM_FIELDS.walletId, wallet.id);
-      setFieldValue(DEPOSIT_FORM_FIELDS.walletCurrency, wallet.currency);
-      setFieldValue(DEPOSIT_FORM_FIELDS.amount, "");
-      setFieldTouched(DEPOSIT_FORM_FIELDS.amount, false);
+  useEffect(
+    () => {
+      setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, availableToInvest);
     },
-    [wallets]
+    [availableToInvest]
+  );
+  useEffect(
+    () => {
+      setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
+    },
+    [rate]
   );
 
   const setMaxAmount = useCallback(
@@ -115,16 +105,23 @@ const _DepositForm: React.FC<
     [availableInWallet, availableToInvest, walletCurrency]
   );
 
+  const onWalletChange = ({ currency, id }: WalletBaseData) => {
+    setFieldValue(DEPOSIT_FORM_FIELDS.walletCurrency, currency);
+    setFieldValue(DEPOSIT_FORM_FIELDS.walletId, id);
+    setFieldValue(DEPOSIT_FORM_FIELDS.amount, "");
+    setFieldTouched(DEPOSIT_FORM_FIELDS.amount, false);
+  };
+
   return (
     <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
-      <WalletSelect
+      <WalletField
+        wallets={wallets}
         name={DEPOSIT_FORM_FIELDS.walletId}
-        label={t("follow-program.create-account.from")}
-        items={wallets}
-        onChange={onChangeCurrencyFrom}
+        onChange={onWalletChange}
       />
       <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
-        {formatCurrencyValue(wallet.available, walletCurrency)} {walletCurrency}
+        {formatCurrencyValue(availableInWallet, walletCurrency)}{" "}
+        {walletCurrency}
       </StatisticItem>
       <InputAmountField
         name={DEPOSIT_FORM_FIELDS.amount}
@@ -176,7 +173,6 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
       [DEPOSIT_FORM_FIELDS.walletId]: wallets.find(
         wallet => wallet.currency === INIT_WALLET_CURRENCY
       )!.id,
-      [DEPOSIT_FORM_FIELDS.maxAmount]: undefined,
       [DEPOSIT_FORM_FIELDS.amount]: undefined,
       [DEPOSIT_FORM_FIELDS.walletCurrency]: INIT_WALLET_CURRENCY
     }),
@@ -195,102 +191,8 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
 )(_DepositForm);
 export default DepositForm;
 
-const _InvestorFees: React.FC<IInvestorFeesProps> = ({
-  amount,
-  rate,
-  hasEntryFee,
-  info,
-  currency,
-  walletCurrency
-}) => {
-  const gvFee = calculatePercentage(amount, info.gvCommission);
-  const entryFee = calculatePercentage(amount - gvFee, info.entryFee);
-  const investAmount = amount - gvFee - entryFee * +hasEntryFee;
-  const [t] = useTranslation();
-  return (
-    <ul className="dialog-list">
-      {hasEntryFee && (
-        <li className="dialog-list__item">
-          <span className="dialog-list__title">
-            {t("deposit-asset.entry-fee")}
-          </span>
-          <span className="dialog-list__value">
-            {info.entryFee} %{" "}
-            <NumberFormat
-              value={formatCurrencyValue(
-                convertFromCurrency(entryFee, rate),
-                currency
-              )}
-              prefix=" ("
-              suffix={` ${currency})`}
-              displayType="text"
-            />
-          </span>
-        </li>
-      )}
-      <li className="dialog-list__item">
-        <span className="dialog-list__title">
-          {t("deposit-asset.gv-commission")}
-        </span>
-        <span className="dialog-list__value">
-          {info.gvCommission} %
-          <NumberFormat
-            value={formatCurrencyValue(gvFee, walletCurrency)}
-            prefix={" ("}
-            suffix={` ${walletCurrency})`}
-            displayType="text"
-          />
-        </span>
-      </li>
-      <li className="dialog-list__item">
-        <span className="dialog-list__title">
-          {t("deposit-asset.investment-amount")}
-        </span>
-        <span className="dialog-list__value">
-          <NumberFormat
-            value={formatCurrencyValue(
-              convertFromCurrency(investAmount, rate),
-              currency
-            )}
-            prefix="≈ "
-            suffix={` ${currency}`}
-            displayType="text"
-          />
-        </span>
-      </li>
-    </ul>
-  );
-};
-const InvestorFees = withLoader(React.memo(_InvestorFees));
-
-const _ConvertCurrency: React.FC<{
-  amount: number;
-  currency: CurrencyEnum;
-  rate: number;
-}> = ({ rate, amount, currency }) => (
-  <div className="invest-popup__currency">
-    <NumberFormat
-      value={formatCurrencyValue(convertFromCurrency(amount, rate), currency)}
-      prefix="≈ "
-      suffix={` ${currency}`}
-      displayType="text"
-    />
-  </div>
-);
-const ConvertCurrency = withLoader(React.memo(_ConvertCurrency));
-
-interface IInvestorFeesProps {
-  hasEntryFee: boolean;
-  info: TInvestInfo;
-  amount: number;
-  rate: number;
-  currency: CurrencyEnum;
-  walletCurrency: CurrencyEnum;
-}
-
 export enum DEPOSIT_FORM_FIELDS {
   rate = "rate",
-  maxAmount = "maxAmount",
   amount = "amount",
   walletCurrency = "walletCurrency",
   walletId = "walletId",

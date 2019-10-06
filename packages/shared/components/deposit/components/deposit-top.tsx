@@ -6,7 +6,7 @@ import useRole from "shared/hooks/use-role.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
-const _DepositTop: React.FC<Props> = ({
+const _DepositTop: React.FC<DepositTopOwnProps> = ({
   header,
   asset,
   title,
@@ -40,7 +40,7 @@ const _DepositTop: React.FC<Props> = ({
   );
 };
 
-export interface Props {
+export interface DepositTopOwnProps {
   currency?: CurrencyEnum;
   title: string;
   availableToInvestBase?: number;
