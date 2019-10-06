@@ -2,6 +2,7 @@ import { FormikProps, withFormik } from "formik";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -49,12 +50,10 @@ const _ChangePasswordTradingAccountForm: React.FC<
 }) => {
   return (
     <form id="change-password-trading-account" onSubmit={handleSubmit}>
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{t("password-change-trading-account.title")}</h2>
-          <p>{programName}</p>
-        </div>
-      </div>
+      <DialogTop
+        title={t("password-change-trading-account.title")}
+        subtitle={programName}
+      />
       <div className="dialog__bottom">
         <GVFormikField
           component={GVTextField}
