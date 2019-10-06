@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { DialogList } from "shared/components/dialog/dialog-list";
+import { DialogListItem } from "shared/components/dialog/dialog-list-item";
 import withLoader from "shared/decorators/with-loader";
 import { calculatePercentage, convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -21,57 +23,42 @@ const _InvestorFees: React.FC<Props> = ({
   const investAmount = amount - gvFee - entryFee * +hasEntryFee;
   const [t] = useTranslation();
   return (
-    <ul className="dialog-list">
+    <DialogList>
       {hasEntryFee && (
-        <li className="dialog-list__item">
-          <span className="dialog-list__title">
-            {t("deposit-asset.entry-fee")}
-          </span>
-          <span className="dialog-list__value">
-            {info.entryFee} %{" "}
-            <NumberFormat
-              value={formatCurrencyValue(
-                convertFromCurrency(entryFee, rate),
-                currency
-              )}
-              prefix=" ("
-              suffix={` ${currency})`}
-              displayType="text"
-            />
-          </span>
-        </li>
-      )}
-      <li className="dialog-list__item">
-        <span className="dialog-list__title">
-          {t("deposit-asset.gv-commission")}
-        </span>
-        <span className="dialog-list__value">
-          {info.gvCommission} %
-          <NumberFormat
-            value={formatCurrencyValue(gvFee, walletCurrency)}
-            prefix={" ("}
-            suffix={` ${walletCurrency})`}
-            displayType="text"
-          />
-        </span>
-      </li>
-      <li className="dialog-list__item">
-        <span className="dialog-list__title">
-          {t("deposit-asset.investment-amount")}
-        </span>
-        <span className="dialog-list__value">
+        <DialogListItem label={t("deposit-asset.entry-fee")}>
+          {info.entryFee} %
           <NumberFormat
             value={formatCurrencyValue(
-              convertFromCurrency(investAmount, rate),
+              convertFromCurrency(entryFee, rate),
               currency
             )}
-            prefix="≈ "
-            suffix={` ${currency}`}
+            prefix=" ("
+            suffix={` ${currency})`}
             displayType="text"
           />
-        </span>
-      </li>
-    </ul>
+        </DialogListItem>
+      )}
+      <DialogListItem label={t("deposit-asset.gv-commission")}>
+        {info.gvCommission} %
+        <NumberFormat
+          value={formatCurrencyValue(gvFee, walletCurrency)}
+          prefix={" ("}
+          suffix={` ${walletCurrency})`}
+          displayType="text"
+        />
+      </DialogListItem>
+      <DialogListItem label={t("deposit-asset.investment-amount")}>
+        <NumberFormat
+          value={formatCurrencyValue(
+            convertFromCurrency(investAmount, rate),
+            currency
+          )}
+          prefix="≈ "
+          suffix={` ${currency}`}
+          displayType="text"
+        />
+      </DialogListItem>
+    </DialogList>
   );
 };
 
