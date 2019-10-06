@@ -3,6 +3,7 @@ import SignalsFeeFormPartial from "pages/create-program/components/create-progra
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
@@ -19,12 +20,7 @@ const _ProgramSignalForm: React.FC<Props> = ({
 }) => {
   return (
     <form id="makeSignalForm" onSubmit={handleSubmit}>
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{header}</h2>
-          <p>{programName}</p>
-        </div>
-      </div>
+      <DialogTop title={header} subtitle={programName} />
       <div className="dialog__bottom">
         <SignalsFeeFormPartial
           volumeFeeFieldName={FORM_FIELDS.volumeFee}
