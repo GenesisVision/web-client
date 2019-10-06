@@ -1,16 +1,62 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { compose } from "redux";
+import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
+import useApiRequest from "shared/hooks/api-request.hook";
 import { formatValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 
-import FormError from "../form/form-error/form-error";
 import FundWithdrawResult from "./fund-withdraw-result";
+import { FundWithdraw } from "./fund-withdraw.types";
+
+const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
+  withdraw,
+  availableToWithdraw,
+  percent,
+  currency,
+  exitFee,
+  onBackClick
+}) => {
+  const { errorMessage, sendRequest } = useApiRequest({
+    request: withdraw
+  });
+  const handleSubmit = useCallback(
+    (setSubmitting: SetSubmittingType) =>
+      sendRequest(
+        {
+          percent,
+          currency
+        },
+        setSubmitting
+      ),
+    [percent, currency]
+  );
+  return (
+    <FundWithdrawConfirmForm
+      errorMessage={errorMessage}
+      availableToWithdraw={availableToWithdraw}
+      percent={percent}
+      currency={currency}
+      exitFee={exitFee}
+      onSubmit={handleSubmit}
+      onBackClick={onBackClick}
+    />
+  );
+};
+interface IFundWithdrawConfirmProps {
+  withdraw: (value: FundWithdraw) => Promise<void>;
+  availableToWithdraw: number;
+  percent: number;
+  currency: string;
+  exitFee: number;
+  errorMessage?: string;
+  onBackClick: () => void;
+}
+export const FundWithdrawConfirm = React.memo(_FundWithdrawConfirm);
 
 const _FundWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
-  t,
   availableToWithdraw,
   percent,
   currency,
@@ -19,40 +65,41 @@ const _FundWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
   errorMessage,
   handleSubmit,
   onBackClick
-}) => (
-  <form id="withdraw-submit-form" onSubmit={handleSubmit}>
-    <div className="dialog-list__item">
-      {t("withdraw-fund.withdrawing")}
-      <span className="dialog-list__value">{formatValue(percent, 2)} %</span>
-    </div>
-    <FundWithdrawResult
-      availableToWithdraw={availableToWithdraw}
-      percent={percent}
-      currency={currency}
-      exitFee={exitFee}
-    />
-    <div className="form-error">
+}) => {
+  const [t] = useTranslation();
+  return (
+    <form id="withdraw-submit-form" onSubmit={handleSubmit}>
+      <div className="dialog-list__item">
+        {t("withdraw-fund.withdrawing")}
+        <span className="dialog-list__value">{formatValue(percent, 2)} %</span>
+      </div>
+      <FundWithdrawResult
+        availableToWithdraw={availableToWithdraw}
+        percent={percent}
+        currency={currency}
+        exitFee={exitFee}
+      />
       <FormError error={errorMessage} />
-    </div>
-    <div className="dialog__buttons">
-      <GVButton
-        onClick={onBackClick}
-        color="secondary"
-        variant="outlined"
-        title={t("buttons.back")}
-      >
-        {t("buttons.back")}
-      </GVButton>
-      <GVButton
-        type="submit"
-        id="fundWithdrawFormSubmit"
-        disabled={isSubmitting}
-      >
-        {t("buttons.confirm")}
-      </GVButton>
-    </div>
-  </form>
-);
+      <div className="dialog__buttons">
+        <GVButton
+          onClick={onBackClick}
+          color="secondary"
+          variant="outlined"
+          title={t("buttons.back")}
+        >
+          {t("buttons.back")}
+        </GVButton>
+        <GVButton
+          type="submit"
+          id="fundWithdrawFormSubmit"
+          disabled={isSubmitting}
+        >
+          {t("buttons.confirm")}
+        </GVButton>
+      </div>
+    </form>
+  );
+};
 
 interface OwnProps {
   availableToWithdraw: number;
@@ -64,10 +111,9 @@ interface OwnProps {
   onBackClick(): void;
 }
 
-interface Props extends WithTranslation, OwnProps {}
+interface Props extends OwnProps {}
 
 const FundWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
-  translate(),
   withFormik<Props, {}>({
     displayName: "withdraw-form",
     handleSubmit: (_, { props, setSubmitting }) => {
