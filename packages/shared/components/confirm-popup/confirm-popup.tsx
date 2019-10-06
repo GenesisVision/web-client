@@ -3,6 +3,7 @@ import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
@@ -23,8 +24,8 @@ const _ConfirmPopup: React.ComponentType<
 }) => (
   <Dialog open={open} onClose={onClose} className={className}>
     <form onSubmit={handleSubmit} noValidate>
-      <div className="dialog__top">
-        {header && <h2>{header}</h2>}
+      <DialogTop title={header} />
+      <div className="dialog__bottom">
         <div className="dialog__text">
           <p>{body}</p>
         </div>
@@ -59,7 +60,7 @@ export default ConfirmPopup;
 export interface IConfirmPopupProps extends IDialogProps {
   onApply(setSubmitting: SetSubmittingType): void;
   onCancel?(): void;
-  header?: React.ReactNode;
+  header?: string;
   body?: React.ReactNode;
   applyButtonText?: string;
   cancelButtonText?: string;
