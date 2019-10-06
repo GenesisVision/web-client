@@ -3,6 +3,7 @@ import { DetachFromSignalProviderModeEnum } from "gv-api-web";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -16,30 +17,26 @@ const _ProgramUnfollowForm: React.FC<Props> = ({
   isSubmitting
 }) => (
   <form id="unfollow-form" onSubmit={handleSubmit} noValidate>
-    <div className="dialog__top">
-      <h2>{t("unfollow-program.title")}</h2>
-      <div className="dialog-field">
-        <GVFormikField
-          name={FIELDS.mode}
-          component={GVTextField}
-          label={t("unfollow-program.type")}
-          InputComponent={Select}
-        >
-          {Object.keys(modes).map((mode: string) => (
-            <option value={modes[mode].value} key={modes[mode].value}>
-              <Tooltip
-                render={() => (
-                  <div className="tooltip__content">
-                    {t(modes[mode].tooltip)}
-                  </div>
-                )}
-              >
-                <span>{t(modes[mode].label)}</span>
-              </Tooltip>
-            </option>
-          ))}
-        </GVFormikField>
-      </div>
+    <DialogTop title={t("unfollow-program.title")} />
+    <div className="dialog__bottom">
+      <GVFormikField
+        name={FIELDS.mode}
+        component={GVTextField}
+        label={t("unfollow-program.type")}
+        InputComponent={Select}
+      >
+        {Object.keys(modes).map((mode: string) => (
+          <option value={modes[mode].value} key={modes[mode].value}>
+            <Tooltip
+              render={() => (
+                <div className="tooltip__content">{t(modes[mode].tooltip)}</div>
+              )}
+            >
+              <span>{t(modes[mode].label)}</span>
+            </Tooltip>
+          </option>
+        ))}
+      </GVFormikField>
       <div className="dialog__buttons">
         <GVButton
           type="submit"
