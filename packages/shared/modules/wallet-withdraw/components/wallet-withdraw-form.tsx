@@ -10,6 +10,7 @@ import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import { DialogList } from "shared/components/dialog/dialog-list";
 import { DialogListItem } from "shared/components/dialog/dialog-list-item";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -72,16 +73,11 @@ const _WalletWithdrawForm: React.FC<
       onSubmit={handleSubmit}
       noValidate
     >
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{t("wallet-withdraw.title")}</h2>
-        </div>
-        <div className="dialog-field">
-          <div className="gv-text-field__wrapper">
-            <StatisticItem label={t("wallet-withdraw.available")} big>
-              {`${formatCurrencyValue(available, currency)} ${currency}`}
-            </StatisticItem>
-          </div>
+      <DialogTop title={t("wallet-withdraw.title")}>
+        <div className="gv-text-field__wrapper">
+          <StatisticItem label={t("wallet-withdraw.available")} big>
+            {`${formatCurrencyValue(available, currency)} ${currency}`}
+          </StatisticItem>
         </div>
         <WalletSelect
           name={FIELDS.id}
@@ -89,7 +85,7 @@ const _WalletWithdrawForm: React.FC<
           items={wallets}
           onChange={onChangeCurrency}
         />
-      </div>
+      </DialogTop>
       <div className="dialog__bottom">
         <InputAmountField
           name={FIELDS.amount}
