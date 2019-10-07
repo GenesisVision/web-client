@@ -14,7 +14,10 @@ import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import WalletSelect, { ItemsType, ItemType } from "shared/components/wallet-select/wallet-select";
+import WalletSelect, {
+  ItemsType,
+  ItemType
+} from "shared/components/wallet-select/wallet-select";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import TransferRate from "shared/modules/transfer/components/transfer-rate";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
@@ -23,6 +26,7 @@ import { lazy, number, object, Schema } from "yup";
 
 import * as service from "../services/transfer.services";
 import { TRANSFER_CONTAINER } from "../transfer.types";
+import { DialogField } from "shared/components/dialog/dialog-field";
 
 const _TransferForm: React.FC<Props> = ({
   title,
@@ -131,7 +135,7 @@ const _TransferForm: React.FC<Props> = ({
             selectedDestinationItem.currency
           }`}
         </StatisticItem>
-        <div className="dialog-field">
+        <DialogField>
           <InputAmountField
             name={FIELDS.amount}
             label={t("transfer.amount")}
@@ -139,7 +143,7 @@ const _TransferForm: React.FC<Props> = ({
             setMax={setMaxAmount}
             isAllow={isAllow}
           />
-        </div>
+        </DialogField>
         {!!values[FIELDS.amount] && (
           <TransferRate
             destinationCurrency={selectedDestinationItem.currency}

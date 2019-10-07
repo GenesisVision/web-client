@@ -1,5 +1,8 @@
 import { FormikProps, withFormik } from "formik";
-import { AttachToSignalProviderInitialDepositCurrencyEnum, WalletData } from "gv-api-web";
+import {
+  AttachToSignalProviderInitialDepositCurrencyEnum,
+  WalletData
+} from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -18,6 +21,7 @@ import { CurrencyEnum } from "shared/utils/types";
 
 import CreateAccountFormValidationSchema from "./follow-popup-create-account.validators";
 import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 
 const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   onClick,
@@ -84,15 +88,15 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   return (
     <form id="follow-create-account">
       <DialogBottom>
-        <div className="dialog-field">
+        <DialogField>
           <WalletSelect
             name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId}
             label={t("follow-program.create-account.from")}
             items={wallets}
             onChange={onChangeCurrencyFrom}
           />
-        </div>
-        <div className="dialog-field">
+        </DialogField>
+        <DialogField>
           <StatisticItem label={t("follow-program.create-account.available")}>
             <NumberFormat
               value={wallet.available}
@@ -100,8 +104,8 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
               displayType="text"
             />
           </StatisticItem>
-        </div>
-        <div className="dialog-field">
+        </DialogField>
+        <DialogField>
           <InputAmountField
             name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount}
             label={t("follow-program.create-account.amount")}
@@ -121,7 +125,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
               />
             </div>
           )}
-        </div>
+        </DialogField>
         <DialogButtons>
           <GVButton
             onClick={handleNext}

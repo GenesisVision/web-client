@@ -2,6 +2,8 @@ import "./dialog.scss";
 
 import * as React from "react";
 
+import { DialogField } from "./dialog-field";
+
 export const _DialogTop: React.FC<
   React.HTMLAttributes<HTMLDivElement> & Props
 > = ({ title, subtitle, children }) => (
@@ -10,7 +12,7 @@ export const _DialogTop: React.FC<
       {title && <h2>{title}</h2>}
       {subtitle && <p>{subtitle}</p>}
     </div>
-    {children && <div className="dialog-field">{children}</div>}
+    {children && <DialogField>{children}</DialogField>}
   </div>
 );
 

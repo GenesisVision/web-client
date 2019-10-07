@@ -6,6 +6,7 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -54,7 +55,7 @@ const _FollowParams: React.FC<
   return (
     <form id="follow-params" onSubmit={handleSubmit}>
       <DialogBottom>
-        <div className="dialog-field">
+        <DialogField>
           <GVFormikField
             name={FIELDS.mode}
             component={GVTextField}
@@ -75,19 +76,19 @@ const _FollowParams: React.FC<
               </option>
             ))}
           </GVFormikField>
-        </div>
+        </DialogField>
         {values[FIELDS.mode] === modes.percentage.value && (
-          <div className="dialog-field">
+          <DialogField>
             <InputAmountField
               name={FIELDS.percent}
               label={t("follow-program.params.volume-percent")}
               currency={"%"}
               setMax={setMaxVolumePercent}
             />
-          </div>
+          </DialogField>
         )}
         {values[FIELDS.mode] === modes.fixed.value && (
-          <div className="dialog-field">
+          <DialogField>
             <InputAmountField
               name={FIELDS.fixedVolume}
               label={`${t("follow-program.params.usd-equivalent")} *`}
@@ -102,9 +103,9 @@ const _FollowParams: React.FC<
               suffix={` ${currency}`}
               displayType="text"
             />
-          </div>
+          </DialogField>
         )}
-        <div className="dialog-field">
+        <DialogField>
           <InputAmountField
             name={FIELDS.openTolerancePercent}
             label={
@@ -118,7 +119,7 @@ const _FollowParams: React.FC<
             currency={"%"}
             setMax={setMaxOpenTolerancePercent}
           />
-        </div>
+        </DialogField>
         <DialogButtons>
           {isShowBack && (
             <GVButton onClick={onPrevStep} color="secondary" variant="outlined">

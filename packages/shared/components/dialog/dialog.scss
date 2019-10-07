@@ -191,21 +191,9 @@
     }
   }
 
-  &-field {
+  &__field {
     margin-top: 30px;
     font-weight: 300;
-
-    &__description {
-      font-size: $font-size-common;
-      opacity: 0.5;
-      margin-bottom: 12px;
-      letter-spacing: 0.4px;
-    }
-
-    &__value {
-      font-size: $font-size-h2;
-      letter-spacing: 0.8px;
-    }
 
     .gv-text-field__wrapper {
       margin-top: 0;
