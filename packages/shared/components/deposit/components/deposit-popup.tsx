@@ -5,10 +5,10 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
+import { WithBlurLoaderProps, withBlurLoader } from "shared/decorators/with-blur-loader";
 import useApiRequest from "shared/hooks/api-request.hook";
 import { CurrencyEnum, ReduxDispatch, SetSubmittingType } from "shared/utils/types";
 
-import { withBlurLoader, WithBlurLoaderProps } from "../../../decorators/with-blur-loader";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 import { TAssetInvestCreator, TInvestInfoWithWallets } from "./deposit.types";
