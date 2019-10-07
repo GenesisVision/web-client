@@ -23,8 +23,11 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
-import { btcWalletValidator, ethGvtWalletValidator } from "shared/utils/validators/validators";
-import { lazy, object, Schema, string, StringSchema } from "yup";
+import {
+  btcWalletValidator,
+  ethGvtWalletValidator
+} from "shared/utils/validators/validators";
+import { Schema, StringSchema, lazy, object, string } from "yup";
 
 const _WalletWithdrawForm: React.FC<
   InjectedFormikProps<Props, IWalletWithdrawFormValues>
@@ -69,12 +72,7 @@ const _WalletWithdrawForm: React.FC<
   };
 
   return (
-    <form
-      id="wallet-withdraw"
-      className="wallet-withdraw-popup"
-      onSubmit={handleSubmit}
-      noValidate
-    >
+    <form id="wallet-withdraw" onSubmit={handleSubmit} noValidate>
       <DialogTop title={t("wallet-withdraw.title")}>
         <div className="gv-text-field__wrapper">
           <StatisticItem label={t("wallet-withdraw.available")} big>
