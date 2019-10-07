@@ -192,7 +192,9 @@
   }
 
   &__field {
-    margin-top: 30px;
+    &:not(:first-child) {
+      margin-top: 30px;
+    }
     font-weight: 300;
 
     .gv-text-field__wrapper {
