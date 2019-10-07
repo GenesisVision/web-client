@@ -1,18 +1,24 @@
-import { useEffect } from "react";
+import Router from "next/router";
+import { useCallback, useEffect } from "react";
 import useTab from "shared/hooks/tab.hook";
-import { getLocation, setHash } from "shared/utils/location";
+import { getLocation } from "shared/utils/location";
 
 const useHashTab = <T>(initValue: T) => {
   const { tab, setTab } = useTab<T>(initValue);
+  const handle = useCallback((tab: string) => {
+    const i = tab.indexOf("#");
+    if (i > 0) {
+      const hash = tab.slice(i, tab.length);
+      setTab(null, hash);
+    } else {
+      setTab(null, "");
+    }
+  }, []);
   useEffect(() => {
     setTab(null, getLocation().hash);
-  }, []);
-  useEffect(
-    () => {
-      setHash(String(tab));
-    },
-    [tab]
-  );
+    Router.events.on("hashChangeComplete", handle);
+    return () => Router.events.off("hashChangeComplete", handle);
+  }, [handle]);
   return { tab, setTab };
 };
 

@@ -11,8 +11,8 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import {
-  WALLET_CURRENCY_FOLDER_ROUTE,
-  composeWalletCurrencyUrl
+  composeWalletCurrencyUrl,
+  WALLET_CURRENCY_FOLDER_ROUTE
 } from "shared/components/wallet/wallet.routes";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
@@ -65,7 +65,7 @@ const _WalletList: React.FC<Props> = ({ t, createButtonToolbar, wallets }) => {
                 to={{
                   pathname: WALLET_CURRENCY_FOLDER_ROUTE,
                   as: composeWalletCurrencyUrl(wallet.currency.toLowerCase()),
-                  state: "Wallet"
+                  state: "/ Wallet"
                 }}
               >
                 <WalletImage

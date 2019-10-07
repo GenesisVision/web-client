@@ -9,7 +9,7 @@ import {
   pushHistoryState
 } from "./link.helper";
 
-const Link: React.FC<LinkProps> = ({ to, className, onClick, children }) => {
+const Link: React.FC<LinkProps> = ({ to, onClick, children, ...other }) => {
   const normalizedTo = normalizeTo(to);
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -26,7 +26,7 @@ const Link: React.FC<LinkProps> = ({ to, className, onClick, children }) => {
 
   return (
     <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
-      <a className={className} onClick={handleClick}>
+      <a onClick={handleClick} {...other}>
         {children}
       </a>
     </NextLink>
