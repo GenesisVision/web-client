@@ -5,6 +5,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
@@ -60,12 +61,14 @@ const _FundWithdrawAmountForm: React.FC<
 
   return (
     <form id="withdraw-form" onSubmit={handleSubmit}>
-      <WalletSelect
-        name={FUND_WITHDRAW_FIELDS.walletId}
-        label={t("withdraw-fund.wallet")}
-        items={wallets}
-        onChange={changeWalletCallback}
-      />
+      <DialogField>
+        <WalletSelect
+          name={FUND_WITHDRAW_FIELDS.walletId}
+          label={t("withdraw-fund.wallet")}
+          items={wallets}
+          onChange={changeWalletCallback}
+        />
+      </DialogField>
       <InputAmountField
         name={FUND_WITHDRAW_FIELDS.percent}
         label={t("withdraw-fund.amount-to-withdraw")}

@@ -7,6 +7,7 @@ import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -122,10 +123,12 @@ const _DepositForm: React.FC<
           name={DEPOSIT_FORM_FIELDS.walletId}
           onChange={onWalletChange}
         />
-        <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
-          {formatCurrencyValue(availableInWallet, walletCurrency)}{" "}
-          {walletCurrency}
-        </StatisticItem>
+        <DialogField>
+          <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
+            {formatCurrencyValue(availableInWallet, walletCurrency)}{" "}
+            {walletCurrency}
+          </StatisticItem>
+        </DialogField>
         <InputAmountField
           name={DEPOSIT_FORM_FIELDS.amount}
           label={t("deposit-asset.amount")}

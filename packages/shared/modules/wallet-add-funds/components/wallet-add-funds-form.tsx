@@ -6,6 +6,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVqr from "shared/components/gv-qr/gv-qr";
@@ -56,13 +57,17 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
         </form>
       </DialogTop>
       <DialogBottom className="wallet-add-funds-popup__bottom">
-        <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
-        <StatisticItem
-          className="wallet-add-funds-popup__address"
-          label={t("wallet-deposit.deposit-address")}
-        >
-          {depositAddress}
-        </StatisticItem>
+        <DialogField>
+          <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
+        </DialogField>
+        <DialogField>
+          <StatisticItem
+            className="wallet-add-funds-popup__address"
+            label={t("wallet-deposit.deposit-address")}
+          >
+            {depositAddress}
+          </StatisticItem>
+        </DialogField>
         <DialogButtons>
           <GVButton
             color="secondary"

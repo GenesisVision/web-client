@@ -2,6 +2,7 @@ import { WalletBaseData } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 
@@ -15,12 +16,14 @@ const _WalletField: React.FC<Props> = ({ name, wallets, onChange }) => {
     [wallets]
   );
   return (
-    <WalletSelect
-      name={name}
-      label={t("follow-program.create-account.from")}
-      items={wallets}
-      onChange={onChangeCurrencyFrom}
-    />
+    <DialogField>
+      <WalletSelect
+        name={name}
+        label={t("follow-program.create-account.from")}
+        items={wallets}
+        onChange={onChangeCurrencyFrom}
+      />
+    </DialogField>
   );
 };
 

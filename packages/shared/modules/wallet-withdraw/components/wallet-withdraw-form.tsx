@@ -10,6 +10,7 @@ import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import { DialogList } from "shared/components/dialog/dialog-list";
 import { DialogListItem } from "shared/components/dialog/dialog-list-item";
 import { DialogTop } from "shared/components/dialog/dialog-top";
@@ -74,17 +75,17 @@ const _WalletWithdrawForm: React.FC<
   return (
     <form id="wallet-withdraw" onSubmit={handleSubmit} noValidate>
       <DialogTop title={t("wallet-withdraw.title")}>
-        <div className="gv-text-field__wrapper">
-          <StatisticItem label={t("wallet-withdraw.available")} big>
-            {`${formatCurrencyValue(available, currency)} ${currency}`}
-          </StatisticItem>
-        </div>
         <WalletSelect
           name={FIELDS.id}
           label={t("wallet-withdraw.select-currency")}
           items={wallets}
           onChange={onChangeCurrency}
         />
+        <DialogField>
+          <StatisticItem label={t("wallet-withdraw.available")} big>
+            {`${formatCurrencyValue(available, currency)} ${currency}`}
+          </StatisticItem>
+        </DialogField>
       </DialogTop>
       <DialogBottom>
         <InputAmountField
@@ -94,20 +95,24 @@ const _WalletWithdrawForm: React.FC<
           isAllow={isAllow}
           setMax={setMaxAmount}
         />
-        <GVFormikField
-          name={FIELDS.address}
-          label={t("wallet-withdraw.address")}
-          component={GVTextField}
-          autoComplete="off"
-        />
-        {twoFactorEnabled && (
+        <DialogField>
           <GVFormikField
-            type="text"
-            name={FIELDS.twoFactorCode}
-            label={t("wallet-withdraw.two-factor-code-label")}
-            autoComplete="off"
+            name={FIELDS.address}
+            label={t("wallet-withdraw.address")}
             component={GVTextField}
+            autoComplete="off"
           />
+        </DialogField>
+        {twoFactorEnabled && (
+          <DialogField>
+            <GVFormikField
+              type="text"
+              name={FIELDS.twoFactorCode}
+              label={t("wallet-withdraw.two-factor-code-label")}
+              autoComplete="off"
+              component={GVTextField}
+            />
+          </DialogField>
         )}
         <DialogList>
           <DialogListItem label={t("wallet-withdraw.will-get")}>

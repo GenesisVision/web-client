@@ -8,6 +8,7 @@ import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
@@ -15,18 +16,17 @@ import InputAmountField from "shared/components/input-amount-field/input-amount-
 import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import WalletSelect, {
-  ItemsType,
-  ItemType
+  ItemType,
+  ItemsType
 } from "shared/components/wallet-select/wallet-select";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import TransferRate from "shared/modules/transfer/components/transfer-rate";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
-import { lazy, number, object, Schema } from "yup";
+import { Schema, lazy, number, object } from "yup";
 
 import * as service from "../services/transfer.services";
 import { TRANSFER_CONTAINER } from "../transfer.types";
-import { DialogField } from "shared/components/dialog/dialog-field";
 
 const _TransferForm: React.FC<Props> = ({
   title,
@@ -119,22 +119,31 @@ const _TransferForm: React.FC<Props> = ({
           items={sourceItems}
           onChange={onChangeSourceId}
         />
-        <StatisticItem label={t(`transfer.available${sourceType}From`)}>
-          {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
-        </StatisticItem>
+        <DialogField>
+          <StatisticItem label={t(`transfer.available${sourceType}From`)} big>
+            {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
+          </StatisticItem>
+        </DialogField>
       </DialogTop>
       <DialogBottom>
-        <WalletSelect
-          name={FIELDS.destinationId}
-          label={t("transfer.to")}
-          items={destinationItemWithoutCurrent}
-          onChange={onChangeDestinationId}
-        />
-        <StatisticItem label={t(`transfer.available${destinationType}To`)}>
-          {`${formattedAvailableDestinationItem} ${
-            selectedDestinationItem.currency
-          }`}
-        </StatisticItem>
+        <DialogField>
+          <WalletSelect
+            name={FIELDS.destinationId}
+            label={t("transfer.to")}
+            items={destinationItemWithoutCurrent}
+            onChange={onChangeDestinationId}
+          />
+        </DialogField>
+        <DialogField>
+          <StatisticItem
+            label={t(`transfer.available${destinationType}To`)}
+            big
+          >
+            {`${formattedAvailableDestinationItem} ${
+              selectedDestinationItem.currency
+            }`}
+          </StatisticItem>
+        </DialogField>
         <DialogField>
           <InputAmountField
             name={FIELDS.amount}
