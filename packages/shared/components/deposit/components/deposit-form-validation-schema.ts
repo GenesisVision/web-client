@@ -3,11 +3,7 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { lazy, number, object } from "yup";
 
-import {
-  DEPOSIT_FORM_FIELDS,
-  IDepositFormValues,
-  IDepositOwnProps
-} from "./deposit-form";
+import { DEPOSIT_FORM_FIELDS, IDepositFormValues, IDepositOwnProps } from "./deposit-form";
 
 export const managerSchema = ({
   info,
@@ -17,7 +13,6 @@ export const managerSchema = ({
   lazy<IDepositFormValues>(values =>
     object<IDepositFormValues>().shape({
       [DEPOSIT_FORM_FIELDS.rate]: number(),
-      [DEPOSIT_FORM_FIELDS.maxAmount]: number(),
       [DEPOSIT_FORM_FIELDS.amount]: number()
         .required()
         .min(
@@ -56,7 +51,6 @@ export const investorSchema = ({
   lazy<IDepositFormValues>(values =>
     object<IDepositFormValues>().shape({
       [DEPOSIT_FORM_FIELDS.rate]: number(),
-      [DEPOSIT_FORM_FIELDS.maxAmount]: number(),
       [DEPOSIT_FORM_FIELDS.amount]: number()
         .required()
         .min(

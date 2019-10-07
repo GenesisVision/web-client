@@ -8,6 +8,13 @@ import { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
+import { DialogList } from "shared/components/dialog/dialog-list";
+import { DialogListItem } from "shared/components/dialog/dialog-list-item";
+import { DialogTop } from "shared/components/dialog/dialog-top";
+import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -66,31 +73,21 @@ const _WalletWithdrawForm: React.FC<
   };
 
   return (
-    <form
-      id="wallet-withdraw"
-      className="wallet-withdraw-popup"
-      onSubmit={handleSubmit}
-      noValidate
-    >
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{t("wallet-withdraw.title")}</h2>
-        </div>
-        <div className="dialog-field">
-          <div className="gv-text-field__wrapper">
-            <StatisticItem label={t("wallet-withdraw.available")} big>
-              {`${formatCurrencyValue(available, currency)} ${currency}`}
-            </StatisticItem>
-          </div>
-        </div>
+    <form id="wallet-withdraw" onSubmit={handleSubmit} noValidate>
+      <DialogTop title={t("wallet-withdraw.title")}>
         <WalletSelect
           name={FIELDS.id}
           label={t("wallet-withdraw.select-currency")}
           items={wallets}
           onChange={onChangeCurrency}
         />
-      </div>
-      <div className="dialog__bottom">
+        <DialogField>
+          <StatisticItem label={t("wallet-withdraw.available")} big>
+            {`${formatCurrencyValue(available, currency)} ${currency}`}
+          </StatisticItem>
+        </DialogField>
+      </DialogTop>
+      <DialogBottom>
         <InputAmountField
           name={FIELDS.amount}
           label={t("wallet-withdraw.amount")}
@@ -98,49 +95,43 @@ const _WalletWithdrawForm: React.FC<
           isAllow={isAllow}
           setMax={setMaxAmount}
         />
-        <GVFormikField
-          name={FIELDS.address}
-          label={t("wallet-withdraw.address")}
-          component={GVTextField}
-          autoComplete="off"
-        />
-        {twoFactorEnabled && (
+        <DialogField>
           <GVFormikField
-            type="text"
-            name={FIELDS.twoFactorCode}
-            label={t("wallet-withdraw.two-factor-code-label")}
-            autoComplete="off"
+            name={FIELDS.address}
+            label={t("wallet-withdraw.address")}
             component={GVTextField}
+            autoComplete="off"
           />
+        </DialogField>
+        {twoFactorEnabled && (
+          <DialogField>
+            <GVFormikField
+              type="text"
+              name={FIELDS.twoFactorCode}
+              label={t("wallet-withdraw.two-factor-code-label")}
+              autoComplete="off"
+              component={GVTextField}
+            />
+          </DialogField>
         )}
-        <ul className="dialog-list">
-          <li className="dialog-list__item">
-            <span className="dialog-list__title">
-              {t("wallet-withdraw.will-get")}
-            </span>
-            <span className="dialog-list__value">
-              <NumberFormat
-                value={formatCurrencyValue(willGet, currency)}
-                suffix={` ${currency}`}
-                displayType="text"
-              />
-            </span>
-          </li>
-          <li className="dialog-list__item">
-            <span className="dialog-list__title">
-              {t("wallet-withdraw.fee")}
-            </span>
-            <span className="dialog-list__value">
-              <NumberFormat
-                value={formatCurrencyValue(withdrawalCommission, currency)}
-                suffix={` ${currency}`}
-                displayType="text"
-              />
-            </span>
-          </li>
-        </ul>
-        <div className="form-error">{errorMessage}</div>
-        <div className="dialog__buttons">
+        <DialogList>
+          <DialogListItem label={t("wallet-withdraw.will-get")}>
+            <NumberFormat
+              value={formatCurrencyValue(willGet, currency)}
+              suffix={` ${currency}`}
+              displayType="text"
+            />
+          </DialogListItem>
+          <DialogListItem label={t("wallet-withdraw.fee")}>
+            <NumberFormat
+              value={formatCurrencyValue(withdrawalCommission, currency)}
+              suffix={` ${currency}`}
+              displayType="text"
+            />
+          </DialogListItem>
+        </DialogList>
+        <FormError error={errorMessage} />
+        <DialogButtons>
           <GVButton
             type="submit"
             variant="contained"
@@ -149,8 +140,8 @@ const _WalletWithdrawForm: React.FC<
           >
             {t("buttons.confirm")}
           </GVButton>
-        </div>
-      </div>
+        </DialogButtons>
+      </DialogBottom>
     </form>
   );
 };

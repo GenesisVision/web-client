@@ -2,6 +2,8 @@ import { ChartSimple } from "gv-api-web";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { CurrencyEnum } from "shared/utils/types";
 
+export const FUND_CURRENCY = "GVT";
+
 export const MANAGER = "manager";
 export const INVESTOR = "investor";
 export const PROGRAM = "PROGRAM";

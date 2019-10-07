@@ -1,176 +1,101 @@
-import { FundWithdrawInfo, WalletBaseData } from "gv-api-web";
 import * as React from "react";
-import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import { ISelectChangeEvent } from "shared/components/select/select";
-import { rateApi } from "shared/services/api-client/rate-api";
+import { useCallback, useEffect, useState } from "react";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { FUND_CURRENCY } from "shared/constants/constants";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
+import useTab from "shared/hooks/tab.hook";
+import { fetchRate } from "shared/services/rate-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
-import {
-  CurrencyEnum,
-  ResponseError,
-  SetSubmittingType
-} from "shared/utils/types";
+import { CurrencyEnum } from "shared/utils/types";
 
-import FundWithdrawAmountForm, {
-  FUND_WITHDRAW_FIELDS,
-  FundWithDrawFormValues
-} from "./fund-withdraw-amount-form";
-import FundWithdrawConfirmForm from "./fund-withdraw-confirm-form";
-import FundWithdrawTop from "./fund-withdraw-top";
-import {
-  FundWithdraw,
-  FundWithdrawalInfoResponse
-} from "./fund-withdraw.types";
+import FundWithdrawAmountForm, { FundWithDrawFormValues } from "./fund-withdraw-amount-form";
+import { FundWithdrawConfirm } from "./fund-withdraw-confirm-form";
+import { FundWithdrawTop } from "./fund-withdraw-top";
+import { FundWithdraw, FundWithdrawalInfoResponse } from "./fund-withdraw.types";
 
 enum FUND_WITHDRAW_FORM {
   ENTER_AMOUNT = "ENTER_AMOUNT",
   CONFIRM = "CONFIRM"
 }
 
-class FundWithdrawPopup extends React.PureComponent<
-  IFundWithdrawPopupProps,
-  State
-> {
-  state: State = {
-    step: FUND_WITHDRAW_FORM.ENTER_AMOUNT,
-    rate: 1,
-    withdrawalInfo: undefined,
-    wallets: undefined,
-    errorMessage: undefined,
-    wallet: undefined,
-    percent: undefined
-  };
+const _FundWithdrawPopup: React.FC<Props> = ({
+  data: { wallets, withdrawalInfo },
+  accountCurrency,
+  withdraw
+}) => {
+  const { tab, setTab } = useTab<FUND_WITHDRAW_FORM>(
+    FUND_WITHDRAW_FORM.ENTER_AMOUNT
+  );
+  const [rate, setRate] = useState<number>(1);
+  const [currency, setCurrency] = useState<CurrencyEnum>(accountCurrency);
+  const [percent, setPercent] = useState<number | undefined>(undefined);
 
-  componentDidMount() {
-    const { fetchInfo, accountCurrency } = this.props;
-    fetchInfo()
-      .then(data => {
-        const { wallets, withdrawalInfo } = data;
-        const wallet =
-          wallets.find(x => x.currency === accountCurrency) || wallets[0];
-        this.setState({
-          wallets,
-          wallet,
-          withdrawalInfo
-        });
-        this.fetchRate(wallet.currency);
-      })
-      .catch((e: ResponseError) =>
-        this.setState({ errorMessage: e.errorMessage })
-      );
-  }
+  useEffect(
+    () => {
+      fetchRate(FUND_CURRENCY, currency).then(setRate);
+    },
+    [currency]
+  );
 
-  fetchRate = (currencyFrom: string): void => {
-    rateApi.v10RateByFromByToGet("GVT", currencyFrom).then(rate => {
-      this.setState({ rate });
-    });
-  };
+  const handleEnterAmountSubmit = useCallback(
+    ({ percent }: FundWithDrawFormValues) => {
+      setPercent(percent);
+      setTab(null, FUND_WITHDRAW_FORM.CONFIRM);
+    },
+    []
+  );
 
-  handleSubmit = (setSubmitting: SetSubmittingType) => {
-    const { withdraw } = this.props;
-    const { percent, wallet } = this.state;
+  const goToEnterAmountStep = useCallback(() => {
+    setTab(null, FUND_WITHDRAW_FORM.ENTER_AMOUNT);
+  }, []);
 
-    if (!percent || !wallet) return;
-    return withdraw({
-      percent: percent,
-      currency: wallet.currency
-    }).catch((e: ResponseError) => {
-      this.setState({ errorMessage: e.errorMessage });
-      setSubmitting(false);
-    });
-  };
+  const availableToWithdraw = convertFromCurrency(
+    withdrawalInfo.availableToWithdraw,
+    rate
+  );
 
-  handleEnterAmountSubmit = ({ percent, walletId }: FundWithDrawFormValues) => {
-    this.setState({
-      wallet: this.state.wallets!.find(wallet => wallet.id === walletId),
-      step: FUND_WITHDRAW_FORM.CONFIRM,
-      percent: percent || 0
-    });
-  };
+  return (
+    <>
+      <FundWithdrawTop
+        title={withdrawalInfo.title}
+        availableToWithdraw={availableToWithdraw}
+        currency={currency}
+      />
+      <DialogBottom>
+        {tab === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
+          <FundWithdrawAmountForm
+            currency={currency}
+            setCurrency={setCurrency}
+            wallets={wallets}
+            availableToWithdraw={availableToWithdraw}
+            exitFee={withdrawalInfo.exitFee}
+            onSubmit={handleEnterAmountSubmit}
+          />
+        )}
+        {tab === FUND_WITHDRAW_FORM.CONFIRM && percent !== undefined && (
+          <FundWithdrawConfirm
+            withdraw={withdraw}
+            availableToWithdraw={availableToWithdraw}
+            percent={percent}
+            currency={currency}
+            exitFee={withdrawalInfo.exitFee}
+            onBackClick={goToEnterAmountStep}
+          />
+        )}
+      </DialogBottom>
+    </>
+  );
+};
 
-  goToEnterAmountStep = () => {
-    this.setState({
-      step: FUND_WITHDRAW_FORM.ENTER_AMOUNT,
-      errorMessage: undefined
-    });
-  };
+export const FundWithdrawPopup = withBlurLoader(React.memo(_FundWithdrawPopup));
 
-  handleWalletChange = (setFieldValue: Function) => (
-    _: ISelectChangeEvent,
-    target: JSX.Element
-  ) => {
-    const { wallets } = this.state;
-    setFieldValue(FUND_WITHDRAW_FIELDS.walletId, target.props.value);
-    const wallet = wallets!.find(x => x.id === target.props.value)!;
-    this.fetchRate(wallet.currency);
-    this.setState({ wallet });
-  };
-
-  render() {
-    const {
-      withdrawalInfo,
-      wallets,
-      wallet,
-      rate,
-      percent,
-      errorMessage,
-      step
-    } = this.state;
-
-    if (!withdrawalInfo || !wallets || !wallet) return <DialogLoader />;
-    const availableToWithdraw = convertFromCurrency(
-      withdrawalInfo.availableToWithdraw,
-      rate
-    );
-    return (
-      <>
-        <FundWithdrawTop
-          title={withdrawalInfo.title}
-          availableToWithdraw={availableToWithdraw}
-          currency={wallet.currency}
-        />
-        <div className="dialog__bottom">
-          {step === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
-            <FundWithdrawAmountForm
-              changeWalletHandle={this.handleWalletChange}
-              wallets={wallets}
-              wallet={wallet}
-              availableToWithdraw={availableToWithdraw}
-              exitFee={withdrawalInfo.exitFee}
-              percent={percent}
-              onSubmit={this.handleEnterAmountSubmit}
-            />
-          )}
-          {step === FUND_WITHDRAW_FORM.CONFIRM && percent && (
-            <FundWithdrawConfirmForm
-              errorMessage={errorMessage}
-              availableToWithdraw={availableToWithdraw}
-              percent={percent}
-              currency={wallet.currency}
-              exitFee={withdrawalInfo.exitFee}
-              onSubmit={this.handleSubmit}
-              onBackClick={this.goToEnterAmountStep}
-            />
-          )}
-        </div>
-      </>
-    );
-  }
-}
-
-export default FundWithdrawPopup;
+interface Props extends IFundWithdrawPopupProps, IFundWithdrawPopupOwnProps {}
 
 export interface IFundWithdrawPopupProps {
   accountCurrency: CurrencyEnum;
-  fetchInfo(): Promise<FundWithdrawalInfoResponse>;
-  withdraw(value: FundWithdraw): Promise<void>;
+  withdraw: (value: FundWithdraw) => Promise<void>;
 }
 
-interface State {
-  withdrawalInfo?: FundWithdrawInfo;
-  wallets?: WalletBaseData[];
-  errorMessage?: string;
-  step: FUND_WITHDRAW_FORM;
-  rate: number;
-  wallet?: WalletBaseData;
-  percent?: number;
+interface IFundWithdrawPopupOwnProps {
+  data: FundWithdrawalInfoResponse;
 }

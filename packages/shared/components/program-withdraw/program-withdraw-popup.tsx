@@ -2,15 +2,13 @@ import { CancelablePromise, ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import withLoader from "shared/decorators/with-loader";
-import useApiRequest from "shared/hooks/api-request.hook";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useTab from "shared/hooks/tab.hook";
-import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
+import { CurrencyEnum } from "shared/utils/types";
 
-import ProgramWithdrawAmountForm, {
-  IProgramWithdrawAmountFormValues
-} from "./program-withdraw-amount-form";
-import ProgramWithdrawConfirmForm from "./program-withdraw-confirm-form";
+import ProgramWithdrawAmountForm, { IProgramWithdrawAmountFormValues } from "./program-withdraw-amount-form";
+import { ProgramWithdrawConfirm } from "./program-withdraw-confirm-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
 
 enum PROGRAM_WITHDRAW_FORM {
@@ -19,44 +17,34 @@ enum PROGRAM_WITHDRAW_FORM {
 }
 
 const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
-  programWithdrawInfo: { rate, availableToWithdraw, periodEnds, title },
+  data: { rate, availableToWithdraw, periodEnds, title },
   assetCurrency,
   accountCurrency,
-  fetchInfo,
   withdraw
 }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<PROGRAM_WITHDRAW_FORM>(
     PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT
   );
-  const { errorMessage, sendRequest, cleanErrorMessage } = useApiRequest({
-    request: withdraw
-  });
   const [formValues, setFormValues] = useState<
     IProgramWithdrawAmountFormValues
   >({ amount: 0, withdrawAll: false });
 
-  const handleSubmit = useCallback(
-    (setSubmitting: SetSubmittingType) =>
-      sendRequest(formValues, setSubmitting),
-    [formValues]
-  );
-
   const handleEnterAmountSubmit = useCallback(
     (values: IProgramWithdrawAmountFormValues) => {
-      setTab(null, PROGRAM_WITHDRAW_FORM.CONFIRM);
       setFormValues(values);
+      setTab(null, PROGRAM_WITHDRAW_FORM.CONFIRM);
     },
     []
   );
 
   const handleGoToEnterAmountStep = useCallback(() => {
     setTab(null, PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT);
-    cleanErrorMessage();
   }, []);
 
   const isAvailableProgramConfirmForm =
     formValues.amount || formValues.withdrawAll;
+
   return (
     <>
       <ProgramWithdrawTop
@@ -66,7 +54,7 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
         programCurrency={assetCurrency}
         accountCurrency={accountCurrency}
       />
-      <div className="dialog__bottom">
+      <DialogBottom>
         {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
           <ProgramWithdrawAmountForm
             formValues={formValues}
@@ -79,30 +67,27 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
         )}
         {tab === PROGRAM_WITHDRAW_FORM.CONFIRM &&
           isAvailableProgramConfirmForm && (
-            <ProgramWithdrawConfirmForm
-              errorMessage={errorMessage}
+            <ProgramWithdrawConfirm
+              withdraw={withdraw}
               formValues={formValues}
-              onSubmit={handleSubmit}
               onBackClick={handleGoToEnterAmountStep}
               programCurrency={assetCurrency}
               periodEnds={periodEnds}
             />
           )}
         <div className="dialog__info">{t("withdraw-program.info")}</div>
-      </div>
+      </DialogBottom>
     </>
   );
 };
 
-const ProgramWithdrawPopup = withLoader(React.memo(_ProgramWithdrawPopup));
-
+const ProgramWithdrawPopup = withBlurLoader(React.memo(_ProgramWithdrawPopup));
 export default ProgramWithdrawPopup;
 
 export interface IProgramWithdrawPopupProps {
-  programWithdrawInfo: ProgramWithdrawInfo;
+  data: ProgramWithdrawInfo;
   assetCurrency: CurrencyEnum;
   accountCurrency: CurrencyEnum;
-  fetchInfo: () => CancelablePromise<ProgramWithdrawInfo>;
   withdraw: (values: ProgramWithdrawType) => CancelablePromise<void>;
 }
 

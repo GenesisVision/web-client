@@ -3,10 +3,14 @@ import SignalsFeeFormPartial from "pages/create-program/components/create-progra
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { SignalValidationSchema } from "./program-signal.validators";
+import FormError from "shared/components/form/form-error/form-error";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 
 const _ProgramSignalForm: React.FC<Props> = ({
   t,
@@ -19,20 +23,15 @@ const _ProgramSignalForm: React.FC<Props> = ({
 }) => {
   return (
     <form id="makeSignalForm" onSubmit={handleSubmit}>
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{header}</h2>
-          <p>{programName}</p>
-        </div>
-      </div>
-      <div className="dialog__bottom">
+      <DialogTop title={header} subtitle={programName} />
+      <DialogBottom>
         <SignalsFeeFormPartial
           volumeFeeFieldName={FORM_FIELDS.volumeFee}
           successFeeFieldName={FORM_FIELDS.successFee}
           hasSubscriptionFeeAutofocus={true}
         />
-        <div className="form-error">{errorMessage}</div>
-        <div className="dialog__buttons">
+        <FormError error={errorMessage} />
+        <DialogButtons>
           <GVButton
             type="submit"
             id="programMakeSignalSubmit"
@@ -40,8 +39,8 @@ const _ProgramSignalForm: React.FC<Props> = ({
           >
             {t("buttons.confirm")}
           </GVButton>
-        </div>
-      </div>
+        </DialogButtons>
+      </DialogBottom>
     </form>
   );
 };

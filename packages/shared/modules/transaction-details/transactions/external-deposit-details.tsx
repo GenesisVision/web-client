@@ -1,5 +1,6 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -48,20 +49,24 @@ const ExternalDeposit: React.FC<TransactionDetailsProps> = ({ data, t }) => (
     }
     bottom={
       <>
-        <StatisticItem label={t(`transactions-details.status.title`)}>
-          <div className="external-transaction__status">
-            {data.status} {data.externalTransactionDetails.description}{" "}
-            <Status status={data.status} />
-          </div>
-        </StatisticItem>
-        <StatisticItem label={t(`transactions-details.external.amount`)} big>
-          <NumberFormat
-            value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
-            suffix={` ${data.currency}`}
-            allowNegative={true}
-            displayType="text"
-          />
-        </StatisticItem>
+        <DialogField>
+          <StatisticItem label={t(`transactions-details.status.title`)}>
+            <div className="external-transaction__status">
+              {data.status} {data.externalTransactionDetails.description}{" "}
+              <Status status={data.status} />
+            </div>
+          </StatisticItem>
+        </DialogField>
+        <DialogField>
+          <StatisticItem label={t(`transactions-details.external.amount`)} big>
+            <NumberFormat
+              value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
+              suffix={` ${data.currency}`}
+              allowNegative={true}
+              displayType="text"
+            />
+          </StatisticItem>
+        </DialogField>
       </>
     }
   />

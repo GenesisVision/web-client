@@ -4,12 +4,15 @@ import React, { ComponentType, useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { calculatePercentage } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 import { number, object } from "yup";
 
 import FundWithdrawResult from "./fund-withdraw-result";
@@ -17,11 +20,11 @@ import FundWithdrawResult from "./fund-withdraw-result";
 const _FundWithdrawAmountForm: React.FC<
   InjectedFormikProps<Props, FundWithDrawFormValues>
 > = ({
-  changeWalletHandle,
+  currency,
+  setCurrency,
   wallets,
   setFieldValue,
   t,
-  wallet,
   availableToWithdraw,
   exitFee,
   handleSubmit,
@@ -46,14 +49,26 @@ const _FundWithdrawAmountForm: React.FC<
     values[FUND_WITHDRAW_FIELDS.percent] || 0
   );
 
+  const changeWalletCallback = useCallback(
+    (_: ISelectChangeEvent, target: JSX.Element) => {
+      setFieldValue(FUND_WITHDRAW_FIELDS.walletId, target.props.value);
+      setCurrency(
+        wallets.find(({ id }) => id === target.props.value)!.currency
+      );
+    },
+    []
+  );
+
   return (
     <form id="withdraw-form" onSubmit={handleSubmit}>
-      <WalletSelect
-        name={FUND_WITHDRAW_FIELDS.walletId}
-        label={t("withdraw-fund.wallet")}
-        items={wallets}
-        onChange={changeWalletHandle(setFieldValue)}
-      />
+      <DialogField>
+        <WalletSelect
+          name={FUND_WITHDRAW_FIELDS.walletId}
+          label={t("withdraw-fund.wallet")}
+          items={wallets}
+          onChange={changeWalletCallback}
+        />
+      </DialogField>
       <InputAmountField
         name={FUND_WITHDRAW_FIELDS.percent}
         label={t("withdraw-fund.amount-to-withdraw")}
@@ -64,23 +79,23 @@ const _FundWithdrawAmountForm: React.FC<
       />
       <div className="invest-popup__currency">
         <NumberFormat
-          value={formatCurrencyValue(amountToWithdrawCcy, wallet.currency)}
+          value={formatCurrencyValue(amountToWithdrawCcy, currency)}
           prefix="≈ "
-          suffix={` ${wallet.currency}`}
+          suffix={` ${currency}`}
           displayType="text"
         />
       </div>
       <FundWithdrawResult
         availableToWithdraw={availableToWithdraw}
-        currency={wallet.currency}
+        currency={currency}
         percent={values[FUND_WITHDRAW_FIELDS.percent] || 0}
         exitFee={exitFee}
       />
-      <div className="dialog__buttons">
+      <DialogButtons>
         <GVButton type="submit" id="fundWithdrawAmountFormSubmit">
           {t("buttons.next")}
         </GVButton>
-      </div>
+      </DialogButtons>
     </form>
   );
 };
@@ -88,10 +103,11 @@ const _FundWithdrawAmountForm: React.FC<
 const FundWithdrawAmountForm = compose<ComponentType<OwnProps>>(
   translate(),
   withFormik<Props, FundWithDrawFormValues>({
+    enableReinitialize: true,
     displayName: "withdraw-form",
-    mapPropsToValues: ({ percent, wallet }) => ({
-      [FUND_WITHDRAW_FIELDS.walletId]: wallet.id,
-      [FUND_WITHDRAW_FIELDS.percent]: percent || 0.01
+    mapPropsToValues: ({ wallets }) => ({
+      [FUND_WITHDRAW_FIELDS.walletId]: wallets[0].id,
+      [FUND_WITHDRAW_FIELDS.percent]: 0.01
     }),
     validationSchema: ({ t }: Props) =>
       object().shape({
@@ -114,13 +130,10 @@ export enum FUND_WITHDRAW_FIELDS {
 }
 
 interface OwnProps {
-  changeWalletHandle: (
-    setFieldValue: Function
-  ) => (event: ISelectChangeEvent, child: JSX.Element) => void;
+  currency: CurrencyEnum;
+  setCurrency: (id: CurrencyEnum) => void;
   wallets: WalletBaseData[];
-  wallet: WalletBaseData;
-  percent?: number;
-  onSubmit(values: FundWithDrawFormValues): void;
+  onSubmit: (values: FundWithDrawFormValues) => void;
   exitFee: number;
   availableToWithdraw: number;
 }

@@ -69,20 +69,22 @@
 
   &-list {
     list-style-type: none;
-    margin: 0;
     padding: 0;
+    &:not(:first-child) {
+      margin: $padding-small 0 0;
+    }
 
     &__item {
-      font-size: 14px;
+      font-size: $font-size-paragraph;
       font-weight: 300;
-      margin-bottom: 14px;
+      margin-bottom: $padding-xsmall;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       letter-spacing: 0.5px;
 
       &:last-child {
-        margin-bottom: 44px;
+        margin-bottom: $padding-medium;
       }
     }
 
@@ -96,7 +98,7 @@
   }
 
   &__info {
-    margin-top: 30px;
+    margin-top: $padding-upper-medium;
     opacity: 0.5;
     font-size: 11px;
     line-height: 1.64;
@@ -106,7 +108,7 @@
 
   &__top {
     max-width: $modal-width;
-    padding: $padding-upper-medium $padding-small $padding-medium;
+    padding: $padding-upper-medium $padding-small $padding-small;
 
     &:last-child {
       padding-bottom: $padding-upper-medium;
@@ -126,7 +128,7 @@
   }
 
   &__top-wrapper {
-    margin-top: 30px;
+    margin-top: $padding-small;
   }
 
   &__bottom {
@@ -191,24 +193,17 @@
     }
   }
 
-  &-field {
-    margin-top: 30px;
+  &__field {
+    &:not(:first-child) {
+      margin-top: $padding-small;
+    }
     font-weight: 300;
-
-    &__description {
-      font-size: $font-size-common;
-      opacity: 0.5;
-      margin-bottom: 12px;
-      letter-spacing: 0.4px;
-    }
-
-    &__value {
-      font-size: $font-size-h2;
-      letter-spacing: 0.8px;
-    }
 
     .gv-text-field__wrapper {
       margin-top: 0;
+    }
+    .gv-checkbox-wrapper {
+      margin-left: 0;
     }
   }
 
@@ -220,9 +215,10 @@
 
   &__buttons {
     display: flex;
-    margin-top: 35px;
+    margin-top: $padding-small;
 
-    .gv-btn {
+    .gv-btn,
+    a {
       flex: 1 1 100%;
     }
 

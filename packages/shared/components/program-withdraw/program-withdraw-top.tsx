@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
@@ -13,18 +14,12 @@ const _ProgramWithdrawTop: React.FC<OwnProps> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="dialog__top">
-      <div className="dialog__header">
-        <h2>{t("withdraw-program.title")}</h2>
-        <p>{title}</p>
-      </div>
-      <div className="dialog-field">
-        <StatisticItem label={t("withdraw-program.available-to-withdraw")} big>
-          {formatCurrencyValue(availableToWithdraw, programCurrency)}{" "}
-          {programCurrency}
-        </StatisticItem>
-      </div>
-    </div>
+    <DialogTop title={t("withdraw-program.title")} subtitle={title}>
+      <StatisticItem label={t("withdraw-program.available-to-withdraw")} big>
+        {formatCurrencyValue(availableToWithdraw, programCurrency)}{" "}
+        {programCurrency}
+      </StatisticItem>
+    </DialogTop>
   );
 };
 

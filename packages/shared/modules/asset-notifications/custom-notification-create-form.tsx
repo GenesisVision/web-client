@@ -1,13 +1,13 @@
 import { FormikProps, withFormik } from "formik";
-import {
-  NotificationSettingViewModelConditionTypeEnum,
-  NotificationViewModelTypeEnum,
-  ProgramInfo
-} from "gv-api-web";
+import { NotificationSettingViewModelConditionTypeEnum, NotificationViewModelTypeEnum, ProgramInfo } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogTop } from "shared/components/dialog/dialog-top";
+import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -29,11 +29,10 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
   const isLevel = conditionType === CONDITION_TYPE_VALUES.Level;
   return (
     <form id="create-notification" onSubmit={handleSubmit}>
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{t("notifications-page.create.title")}</h2>
-          <p>{asset.title}</p>
-        </div>
+      <DialogTop
+        title={t("notifications-page.create.title")}
+        subtitle={asset.title}
+      >
         <GVFormikField
           name={FIELDS.conditionType}
           component={GVTextField}
@@ -50,8 +49,8 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
             {t("notifications-page.create.AvailableToInvest.title")}
           </option>
         </GVFormikField>
-      </div>
-      <div className="dialog__bottom">
+      </DialogTop>
+      <DialogBottom>
         <GVFormikField
           name={FIELDS.conditionAmount}
           label={t("notifications-page.create.amount-label")}
@@ -74,8 +73,8 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
             return true;
           }}
         />
-        <div className="form-error">{errorMessage}</div>
-        <div className="dialog__buttons">
+        <FormError error={errorMessage} />
+        <DialogButtons>
           <GVButton
             color="primary"
             type="submit"
@@ -83,8 +82,8 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
           >
             {t("buttons.create")}
           </GVButton>
-        </div>
-      </div>
+        </DialogButtons>
+      </DialogBottom>
     </form>
   );
 };

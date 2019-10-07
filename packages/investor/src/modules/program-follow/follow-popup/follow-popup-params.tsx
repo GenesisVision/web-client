@@ -4,6 +4,9 @@ import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -50,89 +53,91 @@ const _FollowParams: React.FC<
   }, []);
   const disableButton = isSubmitting || !isValid;
   return (
-    <form className="dialog__bottom" id="follow-params" onSubmit={handleSubmit}>
-      <div className="dialog-field">
-        <GVFormikField
-          name={FIELDS.mode}
-          component={GVTextField}
-          label={t("follow-program.params.type")}
-          InputComponent={Select}
-        >
-          {Object.keys(modes).map((mode: string) => (
-            <option value={modes[mode].value} key={modes[mode].value}>
-              <Tooltip
-                render={() => (
-                  <div className="tooltip__content">
-                    {t(modes[mode].tooltip)}
-                  </div>
-                )}
-              >
-                <span>{t(modes[mode].label)}</span>
-              </Tooltip>
-            </option>
-          ))}
-        </GVFormikField>
-      </div>
-      {values[FIELDS.mode] === modes.percentage.value && (
-        <div className="dialog-field">
-          <InputAmountField
-            name={FIELDS.percent}
-            label={t("follow-program.params.volume-percent")}
-            currency={"%"}
-            setMax={setMaxVolumePercent}
-          />
-        </div>
-      )}
-      {values[FIELDS.mode] === modes.fixed.value && (
-        <div className="dialog-field">
-          <InputAmountField
-            name={FIELDS.fixedVolume}
-            label={`${t("follow-program.params.usd-equivalent")} *`}
-            currency={"USD"}
-          />
-          <NumberFormat
-            value={formatCurrencyValue(
-              convertFromCurrency(values[FIELDS.fixedVolume]!, rate),
-              currency
-            )}
-            prefix="≈ "
-            suffix={` ${currency}`}
-            displayType="text"
-          />
-        </div>
-      )}
-      <div className="dialog-field">
-        <InputAmountField
-          name={FIELDS.openTolerancePercent}
-          label={
-            <TooltipLabel
-              tooltipContent={t(
-                "follow-program.params.tolerance-percent-tooltip"
-              )}
-              labelText={t("follow-program.params.tolerance-percent")}
+    <form id="follow-params" onSubmit={handleSubmit}>
+      <DialogBottom>
+        <DialogField>
+          <GVFormikField
+            name={FIELDS.mode}
+            component={GVTextField}
+            label={t("follow-program.params.type")}
+            InputComponent={Select}
+          >
+            {Object.keys(modes).map((mode: string) => (
+              <option value={modes[mode].value} key={modes[mode].value}>
+                <Tooltip
+                  render={() => (
+                    <div className="tooltip__content">
+                      {t(modes[mode].tooltip)}
+                    </div>
+                  )}
+                >
+                  <span>{t(modes[mode].label)}</span>
+                </Tooltip>
+              </option>
+            ))}
+          </GVFormikField>
+        </DialogField>
+        {values[FIELDS.mode] === modes.percentage.value && (
+          <DialogField>
+            <InputAmountField
+              name={FIELDS.percent}
+              label={t("follow-program.params.volume-percent")}
+              currency={"%"}
+              setMax={setMaxVolumePercent}
             />
-          }
-          currency={"%"}
-          setMax={setMaxOpenTolerancePercent}
-        />
-      </div>
-      <div className="dialog__buttons">
-        {isShowBack && (
-          <GVButton onClick={onPrevStep} color="secondary" variant="outlined">
-            {t("follow-program.params.back")}
-          </GVButton>
+          </DialogField>
         )}
-        <GVButton
-          type="submit"
-          className="invest-form__submit-button"
-          disabled={disableButton}
-        >
-          {t("follow-program.params.submit")}
-        </GVButton>
-      </div>
-      {values[FIELDS.mode] === modes.fixed.value && (
-        <div className="dialog__info">* {t(getInfoText(currency))}</div>
-      )}
+        {values[FIELDS.mode] === modes.fixed.value && (
+          <DialogField>
+            <InputAmountField
+              name={FIELDS.fixedVolume}
+              label={`${t("follow-program.params.usd-equivalent")} *`}
+              currency={"USD"}
+            />
+            <NumberFormat
+              value={formatCurrencyValue(
+                convertFromCurrency(values[FIELDS.fixedVolume]!, rate),
+                currency
+              )}
+              prefix="≈ "
+              suffix={` ${currency}`}
+              displayType="text"
+            />
+          </DialogField>
+        )}
+        <DialogField>
+          <InputAmountField
+            name={FIELDS.openTolerancePercent}
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "follow-program.params.tolerance-percent-tooltip"
+                )}
+                labelText={t("follow-program.params.tolerance-percent")}
+              />
+            }
+            currency={"%"}
+            setMax={setMaxOpenTolerancePercent}
+          />
+        </DialogField>
+        <DialogButtons>
+          {isShowBack && (
+            <GVButton onClick={onPrevStep} color="secondary" variant="outlined">
+              {t("follow-program.params.back")}
+            </GVButton>
+          )}
+          <GVButton
+            type="submit"
+            className="invest-form__submit-button"
+            disabled={disableButton}
+          >
+            {t("follow-program.params.submit")}
+          </GVButton>
+        </DialogButtons>
+        {values[FIELDS.mode] === modes.fixed.value && (
+          <div className="dialog__info">* {t(getInfoText(currency))}</div>
+        )}
+      </DialogBottom>
     </form>
   );
 };
