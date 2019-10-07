@@ -55,29 +55,27 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
           />
         </form>
       </DialogTop>
-      <DialogBottom>
-        <div className="wallet-add-funds-popup__bottom">
-          <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
-          <StatisticItem
-            className="wallet-add-funds-popup__address"
-            label={t("wallet-deposit.deposit-address")}
+      <DialogBottom className="wallet-add-funds-popup__bottom">
+        <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
+        <StatisticItem
+          className="wallet-add-funds-popup__address"
+          label={t("wallet-deposit.deposit-address")}
+        >
+          {depositAddress}
+        </StatisticItem>
+        <DialogButtons>
+          <GVButton
+            color="secondary"
+            onClick={onCopy}
+            disabled={!depositAddress}
           >
-            {depositAddress}
-          </StatisticItem>
-          <DialogButtons>
-            <GVButton
-              color="secondary"
-              onClick={onCopy}
-              disabled={!depositAddress}
-            >
-              <>
-                <CopyIcon />
-                &nbsp;
-                {t("buttons.copy")}
-              </>
-            </GVButton>
-          </DialogButtons>
-        </div>
+            <>
+              <CopyIcon />
+              &nbsp;
+              {t("buttons.copy")}
+            </>
+          </GVButton>
+        </DialogButtons>
       </DialogBottom>
     </div>
   );
