@@ -28,7 +28,7 @@ const _ConfirmForm: React.FC<
         autoFocus
         component={GVTextField}
       />
-      <FormError error={errorMessage}/>
+      <FormError error={serverError} />
       <DialogButtons>
         <GVButton type="submit" id="signUpFormSubmit" disabled={isSubmitting}>
           {t("auth.login.two-factor.verify")}
