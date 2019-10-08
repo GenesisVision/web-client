@@ -3,10 +3,12 @@ import "./statistic-item.scss";
 import classNames from "classnames";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { BlurContainer } from "shared/components/blur-container/blur-container";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const _StatisticItem: React.FC<Props> = ({
+  isPending,
   invert,
   large,
   big,
@@ -59,7 +61,9 @@ const _StatisticItem: React.FC<Props> = ({
           {label}
         </div>
       )}
-      <div className={generateClasses(ITEM.VALUE)}>{children}</div>
+      <div className={generateClasses(ITEM.VALUE)}>
+        <BlurContainer blur={!!isPending}>{children}</BlurContainer>
+      </div>
       {equivalent !== undefined && equivalentCurrency !== undefined ? (
         <div className="statistics-item__equivalent">
           <NumberFormat
@@ -80,6 +84,7 @@ enum ITEM {
 }
 
 interface Props {
+  isPending?: boolean;
   label?: string | React.ReactNode;
   equivalent?: number;
   equivalentCurrency?: string;
