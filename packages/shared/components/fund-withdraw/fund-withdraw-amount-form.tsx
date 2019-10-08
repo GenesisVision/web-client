@@ -56,7 +56,7 @@ const _FundWithdrawAmountForm: React.FC<
         wallets.find(({ id }) => id === target.props.value)!.currency
       );
     },
-    []
+    [wallets]
   );
 
   return (
