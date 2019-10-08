@@ -9,7 +9,7 @@ import useApiRequest from "shared/hooks/api-request.hook";
 import { formatValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 
-import FundWithdrawResult from "./fund-withdraw-result";
+import { FundWithdrawResult } from "./fund-withdraw-result";
 import { FundWithdraw } from "./fund-withdraw.types";
 
 const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
