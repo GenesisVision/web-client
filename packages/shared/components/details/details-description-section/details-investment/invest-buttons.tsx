@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import GVButton from "shared/components/gv-button";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
 const _InvestButtons: React.FC<Props> = ({
   isOwnProgram = true,
@@ -9,9 +11,10 @@ const _InvestButtons: React.FC<Props> = ({
   setIsOpenUnAuthInvestPopup
 }) => {
   const [t] = useTranslation();
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
-      {isOwnProgram ? (
+      {isAuthenticated && isOwnProgram ? (
         <GVButton
           className="details-description__invest-btn"
           onClick={setIsOpenInvestPopup}
