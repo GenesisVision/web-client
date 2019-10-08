@@ -3,15 +3,21 @@ import { useCallback, useEffect, useState } from "react";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { FUND_CURRENCY } from "shared/constants/constants";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
+import useApiRequest from "shared/hooks/api-request.hook";
 import useTab from "shared/hooks/tab.hook";
 import { fetchRate } from "shared/services/rate-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { CurrencyEnum } from "shared/utils/types";
 
-import FundWithdrawAmountForm, { FundWithDrawFormValues } from "./fund-withdraw-amount-form";
+import FundWithdrawAmountForm, {
+  FundWithDrawFormValues
+} from "./fund-withdraw-amount-form";
 import { FundWithdrawConfirm } from "./fund-withdraw-confirm-form";
 import { FundWithdrawTop } from "./fund-withdraw-top";
-import { FundWithdraw, FundWithdrawalInfoResponse } from "./fund-withdraw.types";
+import {
+  FundWithdraw,
+  FundWithdrawalInfoResponse
+} from "./fund-withdraw.types";
 
 enum FUND_WITHDRAW_FORM {
   ENTER_AMOUNT = "ENTER_AMOUNT",
@@ -26,13 +32,15 @@ const _FundWithdrawPopup: React.FC<Props> = ({
   const { tab, setTab } = useTab<FUND_WITHDRAW_FORM>(
     FUND_WITHDRAW_FORM.ENTER_AMOUNT
   );
-  const [rate, setRate] = useState<number>(1);
   const [currency, setCurrency] = useState<CurrencyEnum>(accountCurrency);
   const [percent, setPercent] = useState<number | undefined>(undefined);
+  const { isPending, sendRequest, data: rate = 1 } = useApiRequest<number>({
+    request: ({ from, to }) => fetchRate(from, to)
+  });
 
   useEffect(
     () => {
-      fetchRate(FUND_CURRENCY, currency).then(setRate);
+      sendRequest({ from: FUND_CURRENCY, to: currency });
     },
     [currency]
   );
@@ -51,12 +59,13 @@ const _FundWithdrawPopup: React.FC<Props> = ({
 
   const availableToWithdraw = convertFromCurrency(
     withdrawalInfo.availableToWithdraw,
-    rate
+    rate!
   );
 
   return (
     <>
       <FundWithdrawTop
+        isPending={isPending}
         title={withdrawalInfo.title}
         availableToWithdraw={availableToWithdraw}
         currency={currency}
@@ -64,6 +73,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
       <DialogBottom>
         {tab === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
           <FundWithdrawAmountForm
+            isPending={isPending}
             currency={currency}
             setCurrency={setCurrency}
             wallets={wallets}
