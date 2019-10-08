@@ -6,6 +6,11 @@ import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
+import { DialogTop } from "shared/components/dialog/dialog-top";
+import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
@@ -107,33 +112,39 @@ const _TransferForm: React.FC<Props> = ({
       onSubmit={handleSubmit}
       noValidate
     >
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{title || t("transfer.title")}</h2>
-        </div>
+      <DialogTop title={title || t("transfer.title")}>
         <WalletSelect
           name={FIELDS.sourceId}
           label={t("transfer.from")}
           items={sourceItems}
           onChange={onChangeSourceId}
         />
-        <StatisticItem label={t(`transfer.available${sourceType}From`)}>
-          {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
-        </StatisticItem>
-      </div>
-      <div className="dialog__bottom">
-        <WalletSelect
-          name={FIELDS.destinationId}
-          label={t("transfer.to")}
-          items={destinationItemWithoutCurrent}
-          onChange={onChangeDestinationId}
-        />
-        <StatisticItem label={t(`transfer.available${destinationType}To`)}>
-          {`${formattedAvailableDestinationItem} ${
-            selectedDestinationItem.currency
-          }`}
-        </StatisticItem>
-        <div className="dialog-field">
+        <DialogField>
+          <StatisticItem label={t(`transfer.available${sourceType}From`)} big>
+            {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
+          </StatisticItem>
+        </DialogField>
+      </DialogTop>
+      <DialogBottom>
+        <DialogField>
+          <WalletSelect
+            name={FIELDS.destinationId}
+            label={t("transfer.to")}
+            items={destinationItemWithoutCurrent}
+            onChange={onChangeDestinationId}
+          />
+        </DialogField>
+        <DialogField>
+          <StatisticItem
+            label={t(`transfer.available${destinationType}To`)}
+            big
+          >
+            {`${formattedAvailableDestinationItem} ${
+              selectedDestinationItem.currency
+            }`}
+          </StatisticItem>
+        </DialogField>
+        <DialogField>
           <InputAmountField
             name={FIELDS.amount}
             label={t("transfer.amount")}
@@ -141,7 +152,7 @@ const _TransferForm: React.FC<Props> = ({
             setMax={setMaxAmount}
             isAllow={isAllow}
           />
-        </div>
+        </DialogField>
         {!!values[FIELDS.amount] && (
           <TransferRate
             destinationCurrency={selectedDestinationItem.currency}
@@ -155,8 +166,8 @@ const _TransferForm: React.FC<Props> = ({
             )}
           </TransferRate>
         )}
-        <div className="form-error">{errorMessage}</div>
-        <div className="dialog__buttons">
+        <FormError error={errorMessage} />
+        <DialogButtons>
           <GVButton
             type="submit"
             variant="contained"
@@ -165,9 +176,9 @@ const _TransferForm: React.FC<Props> = ({
           >
             {t("buttons.confirm")}
           </GVButton>
-        </div>
+        </DialogButtons>
         <div className="dialog__info">{t("transfer.info")}</div>
-      </div>
+      </DialogBottom>
     </form>
   );
 };

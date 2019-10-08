@@ -2,6 +2,7 @@ import { SignalFee } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { DEFAULT_DECIMAL_SCALE, ROLE } from "shared/constants/constants";
@@ -18,13 +19,15 @@ const SignalFees: React.ComponentType<
 > = withLoader(({ fees }) => (
   <>
     {fees.map((x, idx) => (
-      <StatisticItem label={x.title} key={idx}>
-        <NumberFormat
-          value={formatValue(x.value, DEFAULT_DECIMAL_SCALE)}
-          suffix={` ${x.currency}`}
-          displayType="text"
-        />
-      </StatisticItem>
+      <DialogField>
+        <StatisticItem label={x.title} key={idx}>
+          <NumberFormat
+            value={formatValue(x.value, DEFAULT_DECIMAL_SCALE)}
+            suffix={` ${x.currency}`}
+            displayType="text"
+          />
+        </StatisticItem>
+      </DialogField>
     ))}
   </>
 ));
@@ -57,18 +60,22 @@ const _SignalTransaction: React.FC<TransactionDetailsProps & WithRoleProps> = ({
             condition={data.signalFees !== null}
             fees={data.signalFees!}
           />
-          <StatisticItem label={t(`transactions-details.status.title`)}>
-            <div className="external-transaction__status">
-              {data.status} <Status status={data.status} />
-            </div>
-          </StatisticItem>
-          <StatisticItem label={t(`transactions-details.signal.amount`)} big>
-            <NumberFormat
-              value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
-              suffix={` ${data.currency}`}
-              displayType="text"
-            />
-          </StatisticItem>
+          <DialogField>
+            <StatisticItem label={t(`transactions-details.status.title`)}>
+              <div className="external-transaction__status">
+                {data.status} <Status status={data.status} />
+              </div>
+            </StatisticItem>
+          </DialogField>
+          <DialogField>
+            <StatisticItem label={t(`transactions-details.signal.amount`)} big>
+              <NumberFormat
+                value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
+                suffix={` ${data.currency}`}
+                displayType="text"
+              />
+            </StatisticItem>
+          </DialogField>
         </>
       }
     />

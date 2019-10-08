@@ -10,9 +10,11 @@ import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { NextPage, NextPageContext } from "next";
 import { AppContextType } from "next/dist/next-server/lib/utils";
 import { Action, Dispatch, Store } from "redux";
-import { ThunkAction } from "redux-thunk";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { RootState } from "shared/reducers/root-reducer";
+
+export type ReduxDispatch = ThunkDispatch<RootState, any, Action>;
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;

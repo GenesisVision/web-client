@@ -1,5 +1,10 @@
-import { FundInvestInfo, ProgramInvestInfo } from "gv-api-web";
+import { FundInvestInfo, ProgramInvestInfo, WalletBaseData } from "gv-api-web";
 import { CurrencyEnum, RootThunk, SetSubmittingType } from "shared/utils/types";
+
+export type TInvestInfoWithWallets = {
+  investInfo: TInvestInfo;
+  wallets: WalletBaseData[];
+};
 
 export type TInvestInfo = FundInvestInfo | ProgramInvestInfo;
 
@@ -27,7 +32,5 @@ export type TAssetInvestFn = (
 export type TAssetInvestCreator = (
   assetInvestFn: TAssetInvestFn
 ) => (
-  id: string,
-  amount: number,
-  currency: CurrencyEnum
+  args: { id: string; amount: number; currency: CurrencyEnum }
 ) => RootThunk<Promise<void>>;

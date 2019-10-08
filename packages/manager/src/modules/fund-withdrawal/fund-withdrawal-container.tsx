@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
-import FundWithdrawDialog from "shared/components/fund-withdraw/fund-withdraw-dialog";
+import { FundWithdrawDialog } from "shared/components/fund-withdraw/fund-withdraw-dialog";
 import {
   FundWithdraw,
   FundWithdrawalInfoResponse

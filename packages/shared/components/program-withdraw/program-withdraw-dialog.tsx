@@ -1,18 +1,14 @@
-import { ProgramWithdrawInfo } from "gv-api-web";
+import { CancelablePromise, ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
-import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import FormError from "shared/components/form/form-error/form-error";
 import useApiRequest from "shared/hooks/api-request.hook";
 
-import ProgramWithdrawPopup, {
-  IProgramWithdrawPopupProps
-} from "./program-withdraw-popup";
+import { ProgramWithdrawInfoLoaderData } from "./program-withdraw-dialog.loader";
+import ProgramWithdrawPopup, { IProgramWithdrawPopupProps } from "./program-withdraw-popup";
 
-const _ProgramWithdrawDialog: React.FC<
-  IDialogProps & IProgramWithdrawPopupProps
-> = ({
+const _ProgramWithdrawDialog: React.FC<Props> = ({
   open,
   onClose,
   accountCurrency,
@@ -23,24 +19,29 @@ const _ProgramWithdrawDialog: React.FC<
   const { errorMessage, data, sendRequest } = useApiRequest<
     ProgramWithdrawInfo
   >({ request: fetchInfo });
-  useEffect(() => {
-    sendRequest();
-  }, []);
+  useEffect(
+    () => {
+      open && sendRequest();
+    },
+    [open]
+  );
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
-        condition={!!data}
-        programWithdrawInfo={data!}
-        loader={<DialogLoader />}
+        data={data!}
+        loaderData={ProgramWithdrawInfoLoaderData}
         withdraw={withdraw}
         accountCurrency={accountCurrency}
         assetCurrency={assetCurrency}
-        fetchInfo={fetchInfo}
       />
       <FormError error={errorMessage} />
     </Dialog>
   );
 };
+
+interface Props extends IDialogProps, IProgramWithdrawPopupProps {
+  fetchInfo: () => CancelablePromise<ProgramWithdrawInfo>;
+}
 
 const ProgramWithdrawDialog = React.memo(_ProgramWithdrawDialog);
 export default ProgramWithdrawDialog;

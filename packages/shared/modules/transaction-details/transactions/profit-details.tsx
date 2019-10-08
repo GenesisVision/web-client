@@ -1,5 +1,6 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
@@ -22,7 +23,8 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
     }
     bottom={
       <>
-        <StatisticItem label={t(`transactions-details.success-fee`)}>
+        <DialogField>
+          <StatisticItem label={t(`transactions-details.success-fee`)}>
           <NumberFormat
             value={data.programDetails.successFeePercent}
             suffix="%"
@@ -38,7 +40,9 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
             displayType="text"
           />
         </StatisticItem>
-        <StatisticItem label={t(`transactions-details.gv-fee`)}>
+        </DialogField>
+        <DialogField>
+          <StatisticItem label={t(`transactions-details.gv-fee`)}>
           <NumberFormat
             value={data.gvCommissionPercent}
             suffix="%"
@@ -53,12 +57,16 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
             displayType="text"
           />
         </StatisticItem>
-        <StatisticItem label={t("transactions-details.status.title")}>
+        </DialogField>
+        <DialogField>
+          <StatisticItem label={t("transactions-details.status.title")}>
           <div className="external-transaction__status">
             {data.status} <Status status={data.status} />
           </div>
         </StatisticItem>
-        <StatisticItem label={t(`transactions-details.external.amount`)} big>
+        </DialogField>
+        <DialogField>
+          <StatisticItem label={t(`transactions-details.external.amount`)} big>
           <NumberFormat
             value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
             suffix={` ${data.currency}`}
@@ -66,6 +74,7 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
             displayType="text"
           />
         </StatisticItem>
+        </DialogField>
       </>
     }
   />

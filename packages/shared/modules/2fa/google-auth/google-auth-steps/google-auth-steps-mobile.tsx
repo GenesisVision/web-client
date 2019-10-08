@@ -1,5 +1,6 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import GVButton from "shared/components/gv-button";
 
 import GoogleActivateStep from "./google-auth-activate-step";
@@ -31,28 +32,30 @@ class GoogleAuth extends React.PureComponent<Props, State> {
         {step === 0 && <GoogleDownloadStep />}
         {step === 1 && <GoogleCodeStep {...this.props} />}
         {step === 2 && <GoogleActivateStep {...this.props} />}
-        <div className="dialog__buttons google-auth__buttons">
-          <GVButton
-            disabled={this.isPrevDisabled()}
-            onClick={this.handlePrev}
-            variant="text"
-          >
-            <>
-              &larr;&nbsp;
-              {t("Prev")}
-            </>
-          </GVButton>
-          <GVButton
-            disabled={this.isNextDisabled()}
-            onClick={this.handleNext}
-            variant="text"
-          >
-            <>
-              {t("Next")}
-              &nbsp;&rarr;
-            </>
-          </GVButton>
-        </div>
+        <DialogButtons>
+          <div className="google-auth__buttons">
+            <GVButton
+              disabled={this.isPrevDisabled()}
+              onClick={this.handlePrev}
+              variant="text"
+            >
+              <>
+                &larr;&nbsp;
+                {t("Prev")}
+              </>
+            </GVButton>
+            <GVButton
+              disabled={this.isNextDisabled()}
+              onClick={this.handleNext}
+              variant="text"
+            >
+              <>
+                {t("Next")}
+                &nbsp;&rarr;
+              </>
+            </GVButton>
+          </div>
+        </DialogButtons>
       </div>
     );
   }
