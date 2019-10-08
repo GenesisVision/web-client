@@ -4,6 +4,7 @@ import React, { ComponentType, useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { BlurContainer } from "shared/components/blur-container/blur-container";
 import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import { DialogField } from "shared/components/dialog/dialog-field";
 import GVButton from "shared/components/gv-button";
@@ -15,11 +16,12 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 import { number, object } from "yup";
 
-import FundWithdrawResult from "./fund-withdraw-result";
+import { FundWithdrawResult } from "./fund-withdraw-result";
 
 const _FundWithdrawAmountForm: React.FC<
   InjectedFormikProps<Props, FundWithDrawFormValues>
 > = ({
+  isPending,
   currency,
   setCurrency,
   wallets,
@@ -78,14 +80,17 @@ const _FundWithdrawAmountForm: React.FC<
         setMax={setMaxAmount}
       />
       <div className="invest-popup__currency">
-        <NumberFormat
-          value={formatCurrencyValue(amountToWithdrawCcy, currency)}
-          prefix="≈ "
-          suffix={` ${currency}`}
-          displayType="text"
-        />
+        <BlurContainer blur={isPending}>
+          <NumberFormat
+            value={formatCurrencyValue(amountToWithdrawCcy, currency)}
+            prefix="≈ "
+            suffix={` ${currency}`}
+            displayType="text"
+          />
+        </BlurContainer>
       </div>
       <FundWithdrawResult
+        isPending={isPending}
         availableToWithdraw={availableToWithdraw}
         currency={currency}
         percent={values[FUND_WITHDRAW_FIELDS.percent] || 0}
@@ -130,6 +135,7 @@ export enum FUND_WITHDRAW_FIELDS {
 }
 
 interface OwnProps {
+  isPending: boolean;
   currency: CurrencyEnum;
   setCurrency: (id: CurrencyEnum) => void;
   wallets: WalletBaseData[];
