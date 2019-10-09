@@ -1,7 +1,6 @@
 import "./request-line.scss";
 
 import { AssetDetailsAssetTypeEnum, ProgramRequest } from "gv-api-web";
-import moment from "moment";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -13,6 +12,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import useRole from "shared/hooks/use-role.hook";
+import { localizedDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const _RequestLine: React.FC<Props> = ({
@@ -80,7 +80,7 @@ const _RequestLine: React.FC<Props> = ({
         }
         invert
       >
-        {moment(request.date).format("ll")}
+        {localizedDate(request.date)}
       </StatisticItem>
       <StatisticItem
         className={"request-line__statistic-item"}

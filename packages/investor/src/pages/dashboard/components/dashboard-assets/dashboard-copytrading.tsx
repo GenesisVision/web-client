@@ -1,5 +1,4 @@
 import { SignalDetails } from "gv-api-web";
-import moment from "moment";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -29,6 +28,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { DASHBOARD_COPYTRADING_COLUMNS } from "./dashboard-copytrading.constants";
@@ -110,7 +110,7 @@ const _DashboardCopytrading: React.FC<Props> = ({ title }) => {
             {signal.personalDetails.tradesCount}
           </TableCell>
           <TableCell className="programs-table__cell">
-            {moment(signal.personalDetails.subscriptionDate).format()}
+            {formatDate(signal.personalDetails.subscriptionDate)}
           </TableCell>
           <TableCell className="programs-table__cell">
             <Profitability
