@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "next": "../../next.tgz",
+    "next": "file:../../next.tgz",
     "shared": "^1.0.0",
     "gv-api-web": "^1.0.0"
   },
