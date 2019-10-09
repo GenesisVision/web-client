@@ -1,7 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
 import { FundProfitChart } from "gv-api-web";
-import moment from "moment";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -12,6 +11,7 @@ import {
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
+import { localizedDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -50,7 +50,7 @@ const _FundDetailsStatisticsElements: React.FC<
               />
             }
           >
-            {moment(statistic.creationDate).format("ll")}
+            {localizedDate(statistic.creationDate)}
           </StatisticItem>
         </div>
         <div className="details-statistics__vertical-info-block">

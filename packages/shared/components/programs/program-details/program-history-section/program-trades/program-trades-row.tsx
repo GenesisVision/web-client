@@ -1,7 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
 import { OrderModel } from "gv-api-web";
-import moment from "moment";
 import React from "react";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
@@ -11,6 +10,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
+import { formatDate } from "shared/utils/dates";
 import { formatValue } from "shared/utils/formatter";
 
 const _ProgramTradesRow: React.FC<Props> = ({
@@ -89,7 +89,7 @@ const _ProgramTradesRow: React.FC<Props> = ({
         <TableCell className="details-trades__cell">{trade.swap}</TableCell>
       )}
       <TableCell className="details-trades__cell">
-        {moment(trade.date).format()}
+        {formatDate(trade.date)}
       </TableCell>
       {showTickets && (
         <TableCell className="details-trades__cell">{trade.ticket}</TableCell>

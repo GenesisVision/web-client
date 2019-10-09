@@ -2,7 +2,6 @@ import "./portfolio-events-table.scss";
 import "./portfolio-events.scss";
 
 import { InvestmentEventViewModel } from "gv-api-web";
-import moment from "moment";
 import React from "react";
 import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
@@ -11,6 +10,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import { EVENT_LOCATION } from "shared/components/programs/program-details/services/program-details.service";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { formatDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import PortfolioEventsDetails from "./portfolio-event-details";
@@ -24,7 +24,7 @@ const _PortfolioEventsTableRow: React.FC<Props> = ({
 }) => (
   <TableRow stripy>
     <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
-      {moment(event.date).format()}
+      {formatDate(event.date)}
     </TableCell>
     <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
       <div className="portfolio-events-all-table__description">

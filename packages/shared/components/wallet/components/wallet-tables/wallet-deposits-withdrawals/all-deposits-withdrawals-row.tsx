@@ -1,5 +1,4 @@
 import { MultiWalletExternalTransaction } from "gv-api-web";
-import moment from "moment";
 import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import { CurrencyItem } from "shared/components/currency-item/currency-item";
@@ -10,6 +9,7 @@ import { UpdateItemsFuncType } from "shared/components/table/components/table.ty
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
+import { formatDate } from "shared/utils/dates";
 import { formatValue } from "shared/utils/formatter";
 
 const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
@@ -38,7 +38,7 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
           />
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
-          {moment(transaction.date).format()}
+          {formatDate(transaction.date)}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
           {(transaction.statusUrl && (

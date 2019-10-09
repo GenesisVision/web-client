@@ -3,7 +3,6 @@ import {
   CloseCopytradingTrade,
   closeCopytradingTrade
 } from "modules/copytrading-tables/services/copytrading-tables.service";
-import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -21,6 +20,7 @@ import { UpdateRowFuncType } from "shared/components/table/components/table.type
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatDate } from "shared/utils/dates";
 import { formatValue } from "shared/utils/formatter";
 
 const _TradeSubRow: React.FC<Props> = ({
@@ -66,7 +66,7 @@ const _TradeSubRow: React.FC<Props> = ({
         </div>
       </TableCell>
       <TableCell className="details-trades__cell">
-        {moment(provider.firstOrderDate).format()}
+        {formatDate(provider.firstOrderDate)}
       </TableCell>
       <TableCell className="details-trades__cell">{symbol}</TableCell>
       <TableCell className="details-trades__cell">

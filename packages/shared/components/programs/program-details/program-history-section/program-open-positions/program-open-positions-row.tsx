@@ -1,7 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
 import { OrderModel } from "gv-api-web";
-import moment from "moment";
 import React from "react";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
@@ -10,13 +9,14 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
+import { formatDate } from "shared/utils/dates";
 import { formatValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _ProgramOpenPositionsRow: React.FC<Props> = ({ position, currency }) => (
   <TableRow stripy>
     <TableCell className="details-trades__cell program-details-trades__cell--date">
-      {moment(position.date).format()}
+      {formatDate(position.date)}
     </TableCell>
     <TableCell className="details-trades__cell program-details-trades__cell--symbol">
       {position.symbol}
