@@ -1,7 +1,7 @@
-import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { durationDate } from "shared/utils/dates";
 
 export const _PeriodTimeLeft: React.FC<Props> = ({
   t,
@@ -9,15 +9,15 @@ export const _PeriodTimeLeft: React.FC<Props> = ({
   className
 }) => {
   const renderTimeLeft = () => {
-    const now = moment();
-    const periodEndsMoment = moment(periodEnds);
+    const now = new Date().getTime();
+    const periodEndsMoment = new Date(periodEnds).getTime();
     if (!periodEnds) {
       return null;
     }
-    if (now.isAfter(periodEndsMoment)) {
+    if (now > periodEndsMoment) {
       return t("program-period.period-is-over");
     }
-    return periodEndsMoment.from(now, true);
+    return durationDate(now, periodEndsMoment);
   };
 
   return <div className={className}>{renderTimeLeft()}</div>;
