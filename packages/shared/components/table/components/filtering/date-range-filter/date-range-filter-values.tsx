@@ -3,6 +3,7 @@ import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
 import GVTextField from "shared/components/gv-text-field";
+import { localizedDate } from "shared/utils/dates";
 
 import {
   DATA_RANGE_FILTER_TYPES,
@@ -38,9 +39,11 @@ const _DateRangeFilterValues: React.FC<
       return (
         <>
           <FirstInput
-            value={moment()
-              .subtract(1, "month")
-              .format("ll")}
+            value={localizedDate(
+              moment()
+                .subtract(1, "month")
+                .toDate()
+            )}
           />
           <SecondInput />
         </>
@@ -49,9 +52,11 @@ const _DateRangeFilterValues: React.FC<
       return (
         <>
           <FirstInput
-            value={moment()
-              .subtract(1, "week")
-              .format("ll")}
+            value={localizedDate(
+              moment()
+                .subtract(1, "week")
+                .toDate()
+            )}
           />
           <SecondInput />
         </>

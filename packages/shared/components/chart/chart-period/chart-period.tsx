@@ -1,10 +1,10 @@
 import "./chart-period.scss";
 
 import classNames from "classnames";
-import moment from "moment";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import GVButton from "shared/components/gv-button";
+import { localizedDate } from "shared/utils/dates";
 import { HandlePeriodChangeType } from "shared/utils/types";
 
 import {
@@ -23,9 +23,10 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   };
   const renderDateRange = (): JSX.Element | null => {
     if (period.type === ChartPeriodType.all) return null;
+    if (!period.start || !period.end) return null;
     return (
       <span>
-        {moment(period.start).format("ll")} - {moment(period.end).format("ll")}
+        {localizedDate(period.start)} - {localizedDate(period.end)}
       </span>
     );
   };

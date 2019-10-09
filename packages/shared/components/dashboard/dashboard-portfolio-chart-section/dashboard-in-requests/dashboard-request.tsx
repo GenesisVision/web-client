@@ -1,16 +1,15 @@
 import { AssetDetailsAssetTypeEnum, ProgramRequest } from "gv-api-web";
-import moment from "moment";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
-import PortfolioEventLogo
-  from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import useRole from "shared/hooks/use-role.hook";
+import { localizedDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { CancelRequestPropsType } from "../../dashboard.constants";
@@ -80,7 +79,7 @@ const _DashboardRequest: React.FC<Props> = ({
         }
         invert
       >
-        {moment(request.date).format("ll")}
+        {localizedDate(request.date)}
       </StatisticItem>
       <StatisticItem
         className={"dashboard-request-popover__statistic-item"}

@@ -1,12 +1,12 @@
 import "./program-financial-statistic.scss";
 
 import { ProgramPeriodViewModel } from "gv-api-web";
-import moment from "moment";
 import React from "react";
 import NumberFormat from "react-number-format";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { TableCell, TableRow } from "shared/components/table/components";
+import { formatDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -30,7 +30,7 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
         {period.number}
       </TableCell>
       <TableCell className="program-financial-statistic__cell">
-        {moment(new Date(period.dateFrom)).format()}
+        {formatDate(period.dateFrom)}
       </TableCell>
       <TableCell className="program-financial-statistic__cell">
         <NumberFormat

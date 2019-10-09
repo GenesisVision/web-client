@@ -1,6 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { CancelablePromise } from "gv-api-web";
-import moment from "moment";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,6 +10,7 @@ import { DialogListItem } from "shared/components/dialog/dialog-list-item";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import useApiRequest from "shared/hooks/api-request.hook";
+import { formatDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
 
@@ -76,7 +76,7 @@ const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
             : t("withdraw-program.all")}
         </DialogListItem>
         <DialogListItem label={t("withdraw-program.payout-date")}>
-          {moment(periodEnds).format()}
+          {formatDate(periodEnds)}
         </DialogListItem>
       </DialogList>
       <FormError error={errorMessage} />

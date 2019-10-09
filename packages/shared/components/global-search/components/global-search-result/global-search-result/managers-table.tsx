@@ -7,7 +7,7 @@ import { Table } from "shared/components/table/components";
 
 import { SearchTableProps } from "./global-search-result";
 
-const ManagersTable: React.FC<SearchTableProps<ManagersList>> = ({
+const _ManagersTable: React.FC<SearchTableProps<ManagersList>> = ({
   data,
   title
 }) => {
@@ -28,4 +28,5 @@ const ManagersTable: React.FC<SearchTableProps<ManagersList>> = ({
   );
 };
 
-export default React.memo(ManagersTable);
+const ManagersTable = React.memo(_ManagersTable);
+export default ManagersTable;

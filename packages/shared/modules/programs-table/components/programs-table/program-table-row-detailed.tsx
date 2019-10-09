@@ -1,7 +1,5 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
-import moment from "moment";
-import NextLink from "next/link";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -23,6 +21,7 @@ import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
+import { localizedDate } from "shared/utils/dates";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
@@ -170,7 +169,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.age")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    {moment(program.creationDate).format("ll")}
+                    {localizedDate(program.creationDate)}
                   </div>
                 </div>
                 <div>

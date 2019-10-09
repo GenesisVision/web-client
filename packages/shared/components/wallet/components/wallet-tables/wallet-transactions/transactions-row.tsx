@@ -1,5 +1,4 @@
 import { MultiWalletTransaction } from "gv-api-web";
-import moment from "moment";
 import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
@@ -10,6 +9,7 @@ import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
+import { formatDate } from "shared/utils/dates";
 import { formatValue } from "shared/utils/formatter";
 
 const ConvertTransaction: React.FC<Props> = React.memo(({ transaction }) => (
@@ -66,13 +66,10 @@ const _TransactionsRow: React.FC<Props> = ({
   walletCurrency
 }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const handleAction = useCallback(
-    () => {
-      if (update) update();
-      setClosePopup();
-    },
-    [update]
-  );
+  const handleAction = useCallback(() => {
+    if (update) update();
+    setClosePopup();
+  }, [update]);
   const isConvertAction = transaction.type === "Converting";
   return (
     <>
@@ -102,7 +99,7 @@ const _TransactionsRow: React.FC<Props> = ({
           </TableCell>
         )}
         <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
-          {moment(transaction.date).format()}
+          {formatDate(transaction.date)}
         </TableCell>
         <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
           <Status

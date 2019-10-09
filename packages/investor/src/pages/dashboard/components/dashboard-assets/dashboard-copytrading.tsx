@@ -1,5 +1,4 @@
 import { SignalDetails } from "gv-api-web";
-import moment from "moment";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -32,6 +31,7 @@ import { STATUS } from "shared/constants/constants";
 import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { DASHBOARD_COPYTRADING_COLUMNS } from "./dashboard-copytrading.constants";
@@ -65,9 +65,7 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
     )}
     renderHeader={(column: Column) => (
       <span
-        className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
-          column.name
-        }`}
+        className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${column.name}`}
       >
         {t(`investor.dashboard-page.copytrading-header.${column.name}`)}
       </span>
@@ -111,7 +109,7 @@ const _DashboardCopytrading: React.FC<Props> = ({ t, title, role }) => (
           {signal.personalDetails.tradesCount}
         </TableCell>
         <TableCell className="programs-table__cell">
-          {moment(signal.personalDetails.subscriptionDate).format()}
+          {formatDate(signal.personalDetails.subscriptionDate)}
         </TableCell>
         <TableCell className="programs-table__cell">
           <Profitability
