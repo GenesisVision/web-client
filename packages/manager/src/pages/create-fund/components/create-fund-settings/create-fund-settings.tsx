@@ -13,6 +13,7 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import { ASSET } from "shared/constants/constants";
 import {
   WithBlurLoaderProps,
@@ -40,8 +41,8 @@ const _CreateFundSettings: React.FC<Props> = ({
   const validateAndSubmit = useCreateAssetValidate({ handleSubmit, isValid });
   return (
     <form onSubmit={validateAndSubmit}>
-      <CreateAssetSection
-        title={t("manager.create-fund-page.settings.main-settings")}
+      <SettingsBlock
+        label={t("manager.create-fund-page.settings.main-settings")}
         blockNumber={"01"}
       >
         <DescriptionBlock
@@ -51,15 +52,15 @@ const _CreateFundSettings: React.FC<Props> = ({
           logoName={CREATE_FUND_FIELDS.logo}
           description={description}
         />
-      </CreateAssetSection>
-      <CreateAssetSection
-        title={t("manager.create-fund-page.settings.asset-selection")}
+      </SettingsBlock>
+      <SettingsBlock
+        label={t("manager.create-fund-page.settings.asset-selection")}
         blockNumber={"02"}
       >
         <AssetsField name={CREATE_FUND_FIELDS.assets} />
-      </CreateAssetSection>
-      <CreateAssetSection
-        title={t("manager.create-fund-page.settings.fees-settings")}
+      </SettingsBlock>
+      <SettingsBlock
+        label={t("manager.create-fund-page.settings.fees-settings")}
         blockNumber={"03"}
       >
         <FeesSettings
@@ -82,7 +83,7 @@ const _CreateFundSettings: React.FC<Props> = ({
             }
           )}
         />
-      </CreateAssetSection>
+      </SettingsBlock>
       <DepositDetailsBlock
         availableName={CREATE_FUND_FIELDS.available}
         rateName={CREATE_FUND_FIELDS.rate}

@@ -6,20 +6,20 @@ import { useTranslation } from "react-i18next";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
 import Link from "shared/components/link/link";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 
 import { ILoginFooterProps } from "../login-footer/login-footer";
+import useRole from "shared/hooks/use-role.hook";
 
 const _AuthLayout: NextPage<Props> = ({
   quoteNo,
-  role,
   children,
   titleKey,
   Footer,
   footerAuthRoute
 }) => {
   const [t] = useTranslation();
+  const role = useRole();
   return (
     <div className="root auth page">
       <div className="auth__left">
@@ -60,7 +60,7 @@ const _AuthLayout: NextPage<Props> = ({
   );
 };
 
-interface Props extends OwnProps, WithRoleProps {}
+interface Props extends OwnProps {}
 
 interface OwnProps {
   Footer: React.ComponentType<ILoginFooterProps>;
@@ -70,5 +70,5 @@ interface OwnProps {
   quoteNo: number;
 }
 
-const AuthLayout = withRole(_AuthLayout);
+const AuthLayout = React.memo(_AuthLayout);
 export default AuthLayout;

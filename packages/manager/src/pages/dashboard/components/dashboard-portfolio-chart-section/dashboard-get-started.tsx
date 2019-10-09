@@ -1,40 +1,36 @@
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import Surface from "shared/components/surface/surface";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import useRole from "shared/hooks/use-role.hook";
 
-const _DashboardGetStarted: React.FC<WithTranslation & WithRoleProps> = ({
-  role,
-  t
-}) => (
-  <Surface className="dashboard-portfolio-chart-section">
-    <div className="get-started">
-      <h1>{t(`${role}.dashboard-page.get-started.title`)}</h1>
-      <div className="get-started__text">
-        <div>{t(`${role}.dashboard-page.get-started.text-1`)}</div>
-        <div>{t(`${role}.dashboard-page.get-started.text-2`)}</div>
+const _DashboardGetStarted: React.FC = () => {
+  const [t] = useTranslation();
+  const role = useRole();
+  return (
+    <Surface className="dashboard-portfolio-chart-section">
+      <div className="get-started">
+        <h1>{t(`${role}.dashboard-page.get-started.title`)}</h1>
+        <div className="get-started__text">
+          <div>{t(`${role}.dashboard-page.get-started.text-1`)}</div>
+          <div>{t(`${role}.dashboard-page.get-started.text-2`)}</div>
+        </div>
+        <div className="get-started__deposit">
+          <Link to={WALLET_TOTAL_PAGE_ROUTE}>
+            <GVButton
+              id="signUpFormSubmit"
+              className="invest-form__submit-button"
+            >
+              {t(`${role}.dashboard-page.get-started.deposit`)}
+            </GVButton>
+          </Link>
+        </div>
       </div>
-      <div className="get-started__deposit">
-        <Link to={WALLET_TOTAL_PAGE_ROUTE}>
-          <GVButton
-            id="signUpFormSubmit"
-            className="invest-form__submit-button"
-          >
-            {t(`${role}.dashboard-page.get-started.deposit`)}
-          </GVButton>
-        </Link>
-      </div>
-    </div>
-  </Surface>
-);
+    </Surface>
+  );
+};
 
-const DashboardGetStarted = compose<React.ComponentType>(
-  withRole,
-  translate(),
-  React.memo
-)(_DashboardGetStarted);
+const DashboardGetStarted = React.memo(_DashboardGetStarted);
 export default DashboardGetStarted;

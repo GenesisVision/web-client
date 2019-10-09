@@ -16,24 +16,15 @@ const _PeriodAndClosing: React.FC<Props> = ({
   closePeriod = () => {},
   closeAsset
 }) => (
-  <SettingsBlock
-    label={label}
-    content={
-      <>
-        <ClosePeriod
-          condition={!!canClosePeriod}
-          onApply={closePeriod}
-          id={id}
-        />
-        <CloseAsset
-          asset={asset}
-          canClose={canCloseAsset}
-          onApply={closeAsset}
-          id={id}
-        />
-      </>
-    }
-  />
+  <SettingsBlock label={label}>
+    <ClosePeriod condition={!!canClosePeriod} onApply={closePeriod} id={id} />
+    <CloseAsset
+      asset={asset}
+      canClose={canCloseAsset}
+      onApply={closeAsset}
+      id={id}
+    />
+  </SettingsBlock>
 );
 
 interface Props extends WithTranslation {

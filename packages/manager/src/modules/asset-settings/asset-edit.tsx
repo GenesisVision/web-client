@@ -10,7 +10,10 @@ import GVButton from "shared/components/gv-button";
 import LogoField from "shared/components/logo-field/logo-field";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import { SetSubmittingType } from "shared/utils/types";
-import { assetDescriptionShape, assetTitleShape } from "shared/utils/validators/validators";
+import {
+  assetDescriptionShape,
+  assetTitleShape
+} from "shared/utils/validators/validators";
 import { object } from "yup";
 
 const _AssetEdit: React.FC<Props> = ({
@@ -21,35 +24,33 @@ const _AssetEdit: React.FC<Props> = ({
   isValid,
   isSubmitting
 }) => (
-  <SettingsBlock
-    content={
-      <form id="edit-form" onSubmit={handleSubmit}>
-        <div className="asset-settings__block-wrapper">
-          <h3>{t("manager.asset-settings.avatar.title")}</h3>
-          <LogoField name={FIELDS.logo} />
-        </div>
-        <h3>{t("manager.asset-settings.name.title")}</h3>
-        <div className="asset-settings__block-wrapper create-program-settings__row">
-          <TitleField name={FIELDS.title} />
-        </div>
-        <h3>{t("manager.asset-settings.strategy.title")}</h3>
-        <div className="asset-settings__block-wrapper asset-settings__block-wrapper--wide create-program-settings__row">
-          <DescriptionField
-            name={FIELDS.description}
-            description={values.description}
-          />
-        </div>
-        <GVButton
-          color="primary"
-          type={"submit"}
-          className="invest-form__submit-button"
-          disabled={!dirty || !isValid || isSubmitting}
-        >
-          {t("manager.asset-settings.buttons.save")}
-        </GVButton>
-      </form>
-    }
-  />
+  <SettingsBlock>
+    <form id="edit-form" onSubmit={handleSubmit}>
+      <div className="asset-settings__block-wrapper">
+        <h3>{t("manager.asset-settings.avatar.title")}</h3>
+        <LogoField name={FIELDS.logo} />
+      </div>
+      <h3>{t("manager.asset-settings.name.title")}</h3>
+      <div className="asset-settings__block-wrapper create-program-settings__row">
+        <TitleField name={FIELDS.title} />
+      </div>
+      <h3>{t("manager.asset-settings.strategy.title")}</h3>
+      <div className="asset-settings__block-wrapper asset-settings__block-wrapper--wide create-program-settings__row">
+        <DescriptionField
+          name={FIELDS.description}
+          description={values.description}
+        />
+      </div>
+      <GVButton
+        color="primary"
+        type={"submit"}
+        className="invest-form__submit-button"
+        disabled={!dirty || !isValid || isSubmitting}
+      >
+        {t("manager.asset-settings.buttons.save")}
+      </GVButton>
+    </form>
+  </SettingsBlock>
 );
 
 enum FIELDS {

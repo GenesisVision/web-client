@@ -4,6 +4,7 @@ import CreateAssetSection from "components/create-asset/create-asset-section/cre
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { onSelectChange } from "shared/components/select/select.test-helpers";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -42,8 +43,8 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   );
   if (!wallet) return null;
   return (
-    <CreateAssetSection
-      title={t("manager.create-program-page.settings.deposit-details")}
+    <SettingsBlock
+      label={t("manager.create-program-page.settings.deposit-details")}
       blockNumber={`0${blockNumber}`}
       withBorder={false}
     >
@@ -72,7 +73,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
           walletCurrency={wallet.currency}
         />
       </CreateAssetField>
-    </CreateAssetSection>
+    </SettingsBlock>
   );
 };
 

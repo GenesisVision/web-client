@@ -1,18 +1,18 @@
 import { SignalFee } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import { compose } from "redux";
 import { DialogField } from "shared/components/dialog/dialog-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { DEFAULT_DECIMAL_SCALE, ROLE } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details-dialog";
 import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
 import { formatValue } from "shared/utils/formatter";
 
 import TransactionDetails from "./transaction-details";
+import { useTranslation } from "react-i18next";
+import useRole from "shared/hooks/use-role.hook";
 
 const SignalFees: React.ComponentType<
   SignalFeesProps & WithLoaderProps
@@ -36,11 +36,9 @@ interface SignalFeesProps {
   fees: SignalFee[];
 }
 
-const _SignalTransaction: React.FC<TransactionDetailsProps & WithRoleProps> = ({
-  t,
-  data,
-  role
-}) => {
+const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data }) => {
+  const [t] = useTranslation();
+  const role = useRole();
   const details = data.programDetails;
   const transactionDirectionLabel =
     role === ROLE.INVESTOR
@@ -81,8 +79,5 @@ const _SignalTransaction: React.FC<TransactionDetailsProps & WithRoleProps> = ({
     />
   );
 };
-const SignalTransaction = compose<React.ComponentType<TransactionDetailsProps>>(
-  React.memo,
-  withRole
-)(_SignalTransaction);
+const SignalTransaction = React.memo(_SignalTransaction);
 export default SignalTransaction;

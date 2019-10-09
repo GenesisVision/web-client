@@ -59,16 +59,14 @@ const _SocialLinksContainer: React.FC = () => {
 
   return (
     <div className="asset-settings profile__container--padding-top social-links">
-      <SettingsBlock
-        content={
-          <Links
-            condition={socialLinks !== undefined}
-            loader={<SocialLinksLoader />}
-            socialLinks={socialLinks!}
-            onSubmit={handleSubmitSocialLink}
-          />
-        }
-      />
+      <SettingsBlock>
+        <Links
+          condition={socialLinks !== undefined}
+          loader={<SocialLinksLoader />}
+          socialLinks={socialLinks!}
+          onSubmit={handleSubmitSocialLink}
+        />
+      </SettingsBlock>
     </div>
   );
 };
