@@ -2,16 +2,15 @@ import { replace } from "connected-react-router";
 import { LocationState } from "history";
 import * as React from "react";
 import { useEffect } from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
@@ -23,6 +22,7 @@ import {
   loginUserManagerAction
 } from "./signin.actions";
 import { clearLoginData, login } from "./signin.service";
+import useRole from "shared/hooks/use-role.hook";
 
 const _SignInContainer: React.FC<Props> = ({
   className,
@@ -32,9 +32,9 @@ const _SignInContainer: React.FC<Props> = ({
   location,
   service,
   errorMessage,
-  role,
   type
 }) => {
+  const role = useRole();
   const from = (location.state && location.state.pathname) || HOME_ROUTE;
   const method =
     role === ROLE.MANAGER ? loginUserManagerAction : loginUserInvestorAction;
@@ -100,10 +100,9 @@ interface OwnProps {
   location: LocationState;
 }
 
-interface Props extends OwnProps, StateProps, DispatchProps, WithRoleProps {}
+interface Props extends OwnProps, StateProps, DispatchProps {}
 
 const SignInContainer = compose<React.ComponentType<OwnProps>>(
-  withRole,
   connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
     mapStateToProps,
     mapDispatchToProps

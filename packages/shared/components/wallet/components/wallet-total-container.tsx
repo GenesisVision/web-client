@@ -1,51 +1,30 @@
-import { CopyTradingAccountInfo, WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { WithRoleProps } from "shared/decorators/with-role";
+import { useSelector } from "react-redux";
 import { RootState } from "shared/reducers/root-reducer";
 
 import {
   copyTradingAccountsSelector,
   walletSelector
 } from "../reducers/wallet.reducers";
-import { WalletRouteProps } from "../wallet.routes";
 import WalletContainerLoader from "./wallet-container-loader";
 import WalletTotal from "./wallet-total";
 
-const _WalletTotalContainer: React.FC<Props & WalletRouteProps> = ({
-  wallet,
-  t,
-  copyTradingAccounts,
-  copyTradingAccountsPending
-}) => (
-  <WalletTotal
-    condition={!!wallet}
-    loader={<WalletContainerLoader />}
-    wallet={wallet!}
-    copyTradingAccounts={copyTradingAccounts}
-    copyTradingAccountsPending={copyTradingAccountsPending}
-  />
-);
+const _WalletTotalContainer: React.FC = () => {
+  const wallet = useSelector(walletSelector);
+  const copyTradingAccounts = useSelector(copyTradingAccountsSelector);
+  const copyTradingAccountsPending = useSelector(
+    (state: RootState) => state.copyTradingAccounts.info.isPending
+  );
+  return (
+    <WalletTotal
+      condition={!!wallet}
+      loader={<WalletContainerLoader />}
+      wallet={wallet!}
+      copyTradingAccounts={copyTradingAccounts}
+      copyTradingAccountsPending={copyTradingAccountsPending}
+    />
+  );
+};
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  wallet: walletSelector(state),
-  copyTradingAccounts: copyTradingAccountsSelector(state),
-  copyTradingAccountsPending: state.copyTradingAccounts.info.isPending
-});
-
-interface Props extends StateProps, WithTranslation, WithRoleProps {}
-
-interface StateProps {
-  copyTradingAccounts: CopyTradingAccountInfo[];
-  copyTradingAccountsPending: boolean;
-  wallet?: WalletMultiSummary;
-}
-
-const WalletTotalContainer = compose<React.ComponentType<WalletRouteProps>>(
-  connect(mapStateToProps),
-  translate(),
-  React.memo
-)(_WalletTotalContainer);
+const WalletTotalContainer = React.memo(_WalletTotalContainer);
 export default WalletTotalContainer;

@@ -6,15 +6,14 @@ import { NavLink } from "react-router-dom";
 import { compose } from "redux";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 
 import { ILoginFooterProps } from "../login-footer/login-footer";
+import useRole from "shared/hooks/use-role.hook";
 
 const QUOTES_COUNT = 5;
 
 const _AuthLayout: React.FC<Props> = ({
-  role,
   t,
   children,
   title,
@@ -22,6 +21,7 @@ const _AuthLayout: React.FC<Props> = ({
   SIGNUP_ROUTE,
   LOGIN_ROUTE
 }) => {
+  const role = useRole();
   const quoteNo = Math.floor(Math.random() * QUOTES_COUNT + 1);
   return (
     <div className={"auth page"}>
@@ -59,7 +59,7 @@ const _AuthLayout: React.FC<Props> = ({
   );
 };
 
-interface Props extends WithTranslation, OwnProps, WithRoleProps {}
+interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
   Footer: React.ComponentType<ILoginFooterProps>;
@@ -69,7 +69,6 @@ interface OwnProps {
 }
 
 const AuthLayout = compose<React.FC<OwnProps>>(
-  withRole,
   translate(),
   React.memo
 )(_AuthLayout);

@@ -3,10 +3,9 @@ import "./dashboard-programs.scss";
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { compose } from "redux";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import GVButton from "shared/components/gv-button";
@@ -32,7 +31,6 @@ import {
   UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -41,156 +39,153 @@ import {
   ACTION_STATUS_FILTER_VALUES
 } from "./dashboard-programs.helpers";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
+import useRole from "shared/hooks/use-role.hook";
 
 const _DashboardPrograms: React.FC<Props> = ({
-  role,
-  t,
   getDashboardPrograms,
   createButtonToolbar,
   createProgram,
   title,
   columns
-}) => (
-  <TableContainer
-    createButtonToolbar={createButtonToolbar}
-    emptyMessage={createProgram}
-    getItems={getDashboardPrograms}
-    dataSelector={dashboardProgramsTableSelector}
-    isFetchOnMount={true}
-    columns={columns}
-    renderFilters={(
-      updateFilter: UpdateFilterFunc,
-      filtering: FilteringType
-    ) => (
-      <>
-        <SelectFilter
-          name={ACTION_STATUS_FILTER_NAME}
-          label={t(`${role}.dashboard-page.actions-status-filter.label`)}
-          value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
-          values={ACTION_STATUS_FILTER_VALUES}
-          onChange={updateFilter}
-        />
-        <DateRangeFilter
-          name={DATE_RANGE_FILTER_NAME}
-          value={filtering[DATE_RANGE_FILTER_NAME]}
-          onChange={updateFilter}
-          startLabel={t("filters.date-range.program-start")}
-        />
-      </>
-    )}
-    renderHeader={(column: Column) => (
-      <span
-        className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
-          column.name
-        }`}
-      >
-        {t(`${role}.dashboard-page.programs-header.${column.name}`)}
-      </span>
-    )}
-    renderBodyRow={(program: ProgramDetails, updateRow: any) => (
-      <TableRow
-        className={classNames({
-          "table__row--pretender": program.rating.canLevelUp
-        })}
-      >
-        <TableCell className="programs-table__cell dashboard-programs__cell--title">
-          <div className="dashboard-programs__cell--avatar-title">
-            <Link
-              to={{
-                pathname: composeProgramDetailsUrl(program.url),
-                state: `/ ${title}`
-              }}
-            >
-              <AssetAvatar
-                url={program.logo}
-                level={program.level}
-                levelProgress={program.levelProgress}
-                alt={program.title}
-                color={program.color}
-                tooltip={
-                  <LevelTooltip
-                    level={program.level}
-                    canLevelUp={program.rating.canLevelUp}
-                  />
-                }
-              />
-            </Link>
-            <Link
-              to={{
-                pathname: composeProgramDetailsUrl(program.url),
-                state: `/ ${title}`
-              }}
-            >
-              <GVButton variant="text" color="secondary">
-                {program.title}
-              </GVButton>
-            </Link>
-          </div>
-        </TableCell>
-        {role === ROLE.MANAGER ? (
-          <TableCell className="programs-table__cell dashboard-programs__cell--login">
-            {program.personalDetails.login}
-          </TableCell>
-        ) : null}
-        <TableCell className="programs-table__cell dashboard-programs__cell--share">
-          {formatValue(program.dashboardAssetsDetails.share, 2)}%
-        </TableCell>
-        <TableCell className="programs-table__cell dashboard-programs__cell--period">
-          <ProgramPeriodEnd periodEnds={program.periodEnds} />
-        </TableCell>
-        <TableCell className="programs-table__cell dashboard-programs__cell--value">
-          <NumberFormat
-            value={formatCurrencyValue(
-              program.personalDetails.value,
-              program.currency
-            )}
-            displayType="text"
+}) => {
+  const [t] = useTranslation();
+  const role = useRole();
+  return (
+    <TableContainer
+      createButtonToolbar={createButtonToolbar}
+      emptyMessage={createProgram}
+      getItems={getDashboardPrograms}
+      dataSelector={dashboardProgramsTableSelector}
+      isFetchOnMount={true}
+      columns={columns}
+      renderFilters={(
+        updateFilter: UpdateFilterFunc,
+        filtering: FilteringType
+      ) => (
+        <>
+          <SelectFilter
+            name={ACTION_STATUS_FILTER_NAME}
+            label={t(`${role}.dashboard-page.actions-status-filter.label`)}
+            value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
+            values={ACTION_STATUS_FILTER_VALUES}
+            onChange={updateFilter}
           />
-        </TableCell>
-        <TableCell className="programs-table__cell dashboard-programs__cell--currency">
-          {program.currency}
-        </TableCell>
-        <TableCell className="programs-table__cell dashboard-programs__cell--profit">
-          <Profitability
-            value={formatValue(program.statistic.profitPercent, 2)}
-            prefix={PROFITABILITY_PREFIX.SIGN}
-          >
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.program-start")}
+          />
+        </>
+      )}
+      renderHeader={(column: Column) => (
+        <span
+          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
+            column.name
+          }`}
+        >
+          {t(`${role}.dashboard-page.programs-header.${column.name}`)}
+        </span>
+      )}
+      renderBodyRow={(program: ProgramDetails, updateRow: any) => (
+        <TableRow
+          className={classNames({
+            "table__row--pretender": program.rating.canLevelUp
+          })}
+        >
+          <TableCell className="programs-table__cell dashboard-programs__cell--title">
+            <div className="dashboard-programs__cell--avatar-title">
+              <Link
+                to={{
+                  pathname: composeProgramDetailsUrl(program.url),
+                  state: `/ ${title}`
+                }}
+              >
+                <AssetAvatar
+                  url={program.logo}
+                  level={program.level}
+                  levelProgress={program.levelProgress}
+                  alt={program.title}
+                  color={program.color}
+                  tooltip={
+                    <LevelTooltip
+                      level={program.level}
+                      canLevelUp={program.rating.canLevelUp}
+                    />
+                  }
+                />
+              </Link>
+              <Link
+                to={{
+                  pathname: composeProgramDetailsUrl(program.url),
+                  state: `/ ${title}`
+                }}
+              >
+                <GVButton variant="text" color="secondary">
+                  {program.title}
+                </GVButton>
+              </Link>
+            </div>
+          </TableCell>
+          {role === ROLE.MANAGER ? (
+            <TableCell className="programs-table__cell dashboard-programs__cell--login">
+              {program.personalDetails.login}
+            </TableCell>
+          ) : null}
+          <TableCell className="programs-table__cell dashboard-programs__cell--share">
+            {formatValue(program.dashboardAssetsDetails.share, 2)}%
+          </TableCell>
+          <TableCell className="programs-table__cell dashboard-programs__cell--period">
+            <ProgramPeriodEnd periodEnds={program.periodEnds} />
+          </TableCell>
+          <TableCell className="programs-table__cell dashboard-programs__cell--value">
             <NumberFormat
-              value={formatValue(program.statistic.profitPercent, 2)}
-              suffix="%"
-              allowNegative={false}
+              value={formatCurrencyValue(
+                program.personalDetails.value,
+                program.currency
+              )}
               displayType="text"
             />
-          </Profitability>
-        </TableCell>
-        <TableCell className="programs-table__cell dashboard-programs__cell--chart">
-          {program.chart.length && (
-            <ProgramSimpleChart data={program.chart} programId={program.id} />
-          )}
-        </TableCell>
-        <TableCell className="programs-table__cell dashboard-programs__cell--status">
-          <AssetStatus
-            status={program.personalDetails.status as STATUS}
-            id={program.id}
-            asset={PROGRAM}
-            onCancel={updateRow}
-          />
-        </TableCell>
-      </TableRow>
-    )}
-  />
-);
+          </TableCell>
+          <TableCell className="programs-table__cell dashboard-programs__cell--currency">
+            {program.currency}
+          </TableCell>
+          <TableCell className="programs-table__cell dashboard-programs__cell--profit">
+            <Profitability
+              value={formatValue(program.statistic.profitPercent, 2)}
+              prefix={PROFITABILITY_PREFIX.SIGN}
+            >
+              <NumberFormat
+                value={formatValue(program.statistic.profitPercent, 2)}
+                suffix="%"
+                allowNegative={false}
+                displayType="text"
+              />
+            </Profitability>
+          </TableCell>
+          <TableCell className="programs-table__cell dashboard-programs__cell--chart">
+            {program.chart.length && (
+              <ProgramSimpleChart data={program.chart} programId={program.id} />
+            )}
+          </TableCell>
+          <TableCell className="programs-table__cell dashboard-programs__cell--status">
+            <AssetStatus
+              status={program.personalDetails.status as STATUS}
+              id={program.id}
+              asset={PROGRAM}
+              onCancel={updateRow}
+            />
+          </TableCell>
+        </TableRow>
+      )}
+    />
+  );
+};
 
-const DashboardPrograms = compose<React.ComponentType<OwnProps>>(
-  withRole,
-  translate(),
-  React.memo
-)(_DashboardPrograms);
+const DashboardPrograms = React.memo(_DashboardPrograms);
 export default DashboardPrograms;
 
-interface Props extends WithRoleProps, OwnProps, WithTranslation {}
-
-interface OwnProps {
+interface Props {
   title: string;
   columns: SortingColumn[];
   getDashboardPrograms: GetItemsFuncActionType;
