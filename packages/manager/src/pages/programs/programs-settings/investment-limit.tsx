@@ -20,28 +20,27 @@ const _InvestmentLimit: React.FC<Props> = ({
   return (
     <SettingsBlock
       label={t("manager.create-program-page.settings.fields.investment-limit")}
-      content={
-        <form id="edit-form" onSubmit={handleSubmit}>
-          <InvestmentLimitField
-            checkboxName={FIELDS.hasInvestmentLimit}
-            inputName={FIELDS.investmentLimit}
-            hasInvestmentLimit={values.hasInvestmentLimit}
-            currency={currency}
-          />
-          <p className="program-settings__text">
-            {t("manager.program-settings.investment-limit.text")}
-          </p>
-          <GVButton
-            color="primary"
-            type={"submit"}
-            className="invest-form__submit-button"
-            disabled={!dirty || !isValid || isSubmitting}
-          >
-            {t("manager.program-settings.buttons.save")}
-          </GVButton>
-        </form>
-      }
-    />
+    >
+      <form id="edit-form" onSubmit={handleSubmit}>
+        <InvestmentLimitField
+          checkboxName={FIELDS.hasInvestmentLimit}
+          inputName={FIELDS.investmentLimit}
+          hasInvestmentLimit={values.hasInvestmentLimit}
+          currency={currency}
+        />
+        <p className="program-settings__text">
+          {t("manager.program-settings.investment-limit.text")}
+        </p>
+        <GVButton
+          color="primary"
+          type={"submit"}
+          className="invest-form__submit-button"
+          disabled={!dirty || !isValid || isSubmitting}
+        >
+          {t("manager.program-settings.buttons.save")}
+        </GVButton>
+      </form>
+    </SettingsBlock>
   );
 };
 

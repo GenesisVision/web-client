@@ -11,10 +11,9 @@ import ChangeBrokerForm, {
 const _ChangeBroker: React.FC<
   ChangeBrokerFormOwnProps & WithTranslation
 > = props => (
-  <SettingsBlock
-    label={props.t("manager.program-settings.broker.title")}
-    content={<ChangeBrokerForm {...props} />}
-  />
+  <SettingsBlock label={props.t("manager.program-settings.broker.title")}>
+    <ChangeBrokerForm {...props} />
+  </SettingsBlock>
 );
 
 const ChangeBroker = compose<
