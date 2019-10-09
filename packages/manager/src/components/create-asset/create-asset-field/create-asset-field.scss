@@ -4,13 +4,20 @@
 
 .create-asset-field {
   position: relative;
-  margin-bottom: 40px;
   max-width: 230px;
   padding-right: $padding-xsmall;
+
+  &:not(:last-child) {
+    margin-bottom: 40px;
+  }
 
   .gv-text-field,
   .gv-text-field__wrapper {
     width: 230px;
+  }
+
+  & .gv-text-field__wrapper {
+    margin-top: 0;
   }
 
   &.deposit-details {
