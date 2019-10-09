@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { ProgramDetails } from "gv-api-web";
-import moment from "moment";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -19,6 +18,7 @@ import { STATUS } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { durationDate } from "shared/utils/dates";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 interface IProgramTableRowShortProps {
@@ -126,7 +126,7 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         )}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
-        {moment(program.creationDate).fromNow(true)}
+        {durationDate(program.creationDate)}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat
