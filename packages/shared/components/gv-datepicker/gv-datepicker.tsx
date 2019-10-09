@@ -1,13 +1,8 @@
 import "./gv-datepicker.scss";
 
-import moment from "moment";
+import { format } from "date-fns";
 import * as React from "react";
 import { RefObject } from "react";
-// import Calendar from "react-calendar"; TODO fix css
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "shared/components/popover/popover";
 
 export const DATE_FORMAT = "ll";
 
@@ -24,7 +19,7 @@ class GVDatePicker extends React.PureComponent<Props, State> {
       this.props.onChange({
         persist: () => {},
         target: {
-          value: newDate && moment(newDate).format(),
+          value: newDate && format(newDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
           name: this.props.name
         }
       });
@@ -78,56 +73,23 @@ class GVDatePicker extends React.PureComponent<Props, State> {
       maxDate,
       name,
       disabled,
-      horizontal,
-      lng
+      lng,
+      className,
+      onChange
     } = this.props;
-    const innerDate = value ? moment(value).format(DATE_FORMAT) : undefined;
-
-    const innerValue = value ? moment(value).toDate() : undefined;
-
-    const innerMinDate = minDate
-      ? minDate instanceof Date
-        ? minDate
-        : moment(minDate).toDate()
-      : undefined;
-
-    const innerMaxDate = maxDate
-      ? maxDate instanceof Date
-        ? maxDate
-        : moment(maxDate).toDate()
-      : undefined;
 
     return (
       <div className="gv-datepicker">
-        <button
-          type="button"
-          ref={this.input}
+        <input
+          type="date"
+          min={minDate}
+          max={maxDate}
+          value={value}
+          onChange={onChange}
           name={name}
-          value={innerDate}
-          onClick={this.handleClick}
-          onFocus={this.handleFocus}
-          className="gv-text-field__input"
-          onBlur={this.handleBlur}
           disabled={disabled}
-        >
-          {innerDate}
-        </button>
-        <Popover
-          anchorEl={this.state.anchorEl}
-          onClose={this.handleClose}
-          horizontal={horizontal}
-          vertical={VERTICAL_POPOVER_POS.BOTTOM}
-        >
-          <input type="date" />
-          {/*<Calendar*/}
-          {/*  className="gv-datepicker__calendar"*/}
-          {/*  value={innerValue}*/}
-          {/*  onChange={this.handleChange}*/}
-          {/*  locale={lng}*/}
-          {/*  minDate={innerMinDate}*/}
-          {/*  maxDate={innerMaxDate}*/}
-          {/*/>*/}
-        </Popover>
+          className={className}
+        />
       </div>
     );
   }
@@ -136,7 +98,7 @@ class GVDatePicker extends React.PureComponent<Props, State> {
 export default GVDatePicker;
 
 interface Props {
-  value?: Date | string | Object;
+  value?: string;
   onChange(event: {
     persist(): void;
     target: {
@@ -144,9 +106,8 @@ interface Props {
       name: string;
     };
   }): void;
-  minDate?: Date | string | Object;
-  maxDate?: Date | string | Object;
-  horizontal?: HORIZONTAL_POPOVER_POS;
+  minDate?: string;
+  maxDate?: string;
   disabled: boolean;
   onFocus(
     event:
@@ -160,6 +121,7 @@ interface Props {
   }): void;
   name: string;
   lng: string;
+  className?: string;
 }
 
 interface State {
