@@ -23,10 +23,10 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   };
   const renderDateRange = (): JSX.Element | null => {
     if (period.type === ChartPeriodType.all) return null;
-    if (!period.start || !period.end) return null;
+    if (!period.start) return null;
     return (
       <span>
-        {localizedDate(period.start)} - {localizedDate(period.end)}
+        {localizedDate(period.start)} - {localizedDate(new Date())}
       </span>
     );
   };

@@ -1,31 +1,34 @@
-import moment, { unitOfTime } from "moment";
+import { subtractDate } from "shared/utils/dates";
 
-export enum ChartPeriodType {
-  day = "day",
-  week = "week",
-  month = "month",
-  quarter = "quarter",
-  year = "year",
-  all = "all"
-}
+export type ChartPeriodType =
+  | "day"
+  | "week"
+  | "month"
+  | "quarter"
+  | "year"
+  | "all";
+
+export const ChartPeriodType = {
+  day: "day" as ChartPeriodType,
+  week: "week" as ChartPeriodType,
+  month: "month" as ChartPeriodType,
+  quarter: "quarter" as ChartPeriodType,
+  year: "year" as ChartPeriodType,
+  all: "all" as ChartPeriodType
+};
 
 export const getPeriodStartDate = (periodType: ChartPeriodType) => {
-  const type: unitOfTime.DurationConstructor = `${periodType}s` as unitOfTime.DurationConstructor;
-  switch (periodType) {
-    case ChartPeriodType.all:
-      return undefined;
-    default:
-      return moment()
-        .subtract(1, type)
-        .toDate();
+  if (periodType === ChartPeriodType.all) {
+    return undefined;
   }
+  return subtractDate(new Date(), 1, periodType);
 };
 
 export const getDefaultPeriod = (): ChartDefaultPeriod => {
   return {
     type: ChartPeriodType.month,
     start: getPeriodStartDate(ChartPeriodType.month),
-    end: moment().toDate()
+    end: new Date()
   };
 };
 
