@@ -1,6 +1,6 @@
 import {
   format,
-  formatDistance,
+  formatDistanceStrict,
   subDays,
   subMonths,
   subQuarters,
@@ -18,9 +18,12 @@ export const formatDate = (date: Date | number | string): string => {
 
 export const durationDate = (
   dateStart: Date | number | string,
-  dateEnd: Date | number | string = new Date()
+  dateEnd: Date | number | string = new Date(),
+  addSuffix: boolean = false
 ): string => {
-  return formatDistance(new Date(dateStart), new Date(dateEnd));
+  return formatDistanceStrict(new Date(dateStart), new Date(dateEnd), {
+    addSuffix
+  });
 };
 
 export const subtractDate = (

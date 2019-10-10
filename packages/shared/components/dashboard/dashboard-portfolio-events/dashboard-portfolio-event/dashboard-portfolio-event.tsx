@@ -1,7 +1,6 @@
 import "./dashboard-portfolio-event.scss";
 
 import { InvestmentEventViewModel } from "gv-api-web";
-import moment from "moment";
 import React from "react";
 import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
@@ -9,16 +8,8 @@ import { EVENT_PROFITABILITY_VALUES } from "shared/components/portfolio-events-t
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { durationDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
-
-const formatDate = (date: Date) => {
-  const now = moment(new Date());
-  const eventCreationDate = moment(date);
-  const dayDifference = moment(now).diff(eventCreationDate, "days");
-  const isShowFullDate = dayDifference > 1;
-  if (isShowFullDate) return eventCreationDate.format();
-  return eventCreationDate.fromNow();
-};
 
 const _DashboardPortfolioEvent: React.FC<Props> = ({ event, from }) => (
   <div className="portfolio-event">
@@ -30,7 +21,9 @@ const _DashboardPortfolioEvent: React.FC<Props> = ({ event, from }) => (
       />
     )}
     <div className="portfolio-event__info">
-      <StatisticItem label={formatDate(event.date)}>
+      <StatisticItem
+        label={durationDate(new Date(event.date), undefined, true)}
+      >
         <div className="portfolio-event__values-container">
           <div className="portfolio-event__description">{event.title}</div>
         </div>
