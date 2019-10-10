@@ -1,9 +1,10 @@
 import classnames from "classnames";
+import { format } from "date-fns";
 import { NotificationViewModel } from "gv-api-web";
-import moment from "moment";
 import * as React from "react";
 import { Link, LinkProps } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import Link, { LinkProps } from "shared/components/link/link";
 import NewsIcon from "shared/media/news.svg";
 import RedUserIcon from "shared/media/red-user.svg";
 import {
@@ -88,7 +89,7 @@ const _Notification: React.FC<INotificationProps> = props => {
 
       <div className="notification__content">
         <div className="notification__description">{text}</div>
-        <div className="notification__date">{moment(date).format("HH:mm")}</div>
+        <div className="notification__date">{format(date, "p")}</div>
       </div>
     </div>
   );
