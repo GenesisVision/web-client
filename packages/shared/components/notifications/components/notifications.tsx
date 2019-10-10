@@ -1,11 +1,12 @@
 import "./notifications.scss";
 
+import { startOfDay } from "date-fns";
+import { format, isToday, isYesterday } from "date-fns";
 import {
   CancelablePromise,
   NotificationList,
   NotificationViewModel
 } from "gv-api-web";
-import moment from "moment";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -19,16 +20,16 @@ import useApiRequest from "shared/hooks/api-request.hook";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 
-const parseDate = (unix: number, sameDay: string, lastDay: string): string =>
-  moment
-    .unix(unix)
-    .calendar(undefined, {
-      sameDay: `[${sameDay}], DD MMMM`,
-      lastDay: `[${lastDay}], DD MMMM`,
-      lastWeek: "dddd, DD MMMM",
-      sameElse: "dddd, DD MMMM"
-    })
-    .toUpperCase();
+const parseDate = (unix: number, sameDay: string, lastDay: string): string => {
+  const date = new Date(unix);
+  if (isToday(date)) {
+    return format(date, `${sameDay}, dd MMMM`).toUpperCase();
+  }
+  if (isYesterday(date)) {
+    return format(date, `${lastDay}, dd MMMM`).toUpperCase();
+  }
+  return format(date, "EEEE, dd MMMM").toUpperCase();
+};
 
 const sortGroups = (a: string, b: string) => parseInt(b) - parseInt(a);
 
@@ -36,9 +37,7 @@ const getGroups = (
   notifications: NotificationViewModel[]
 ): NotificationGroups =>
   notifications.reduce<NotificationGroups>((acc, notification) => {
-    const key = moment(notification.date)
-      .startOf("day")
-      .unix();
+    const key = startOfDay(new Date(notification.date)).getTime();
     if (!Array.isArray(acc[key])) {
       acc[key] = [];
     }
