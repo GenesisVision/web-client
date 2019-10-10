@@ -27,11 +27,11 @@ const _ProgramBalanceChart: React.FC<Props> = ({
       investorsFunds: x.investorsFunds,
       date: x.date.getTime()
     };
-    if (x.profit > 0) {
+    /*if (x.profit > 0) {
       dot.profit = x.profit;
     } else {
       dot.profitNegative = x.profit;
-    }
+    }*/
     return dot;
   });
   return (

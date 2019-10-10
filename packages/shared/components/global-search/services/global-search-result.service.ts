@@ -17,7 +17,7 @@ export const search = (
     filters.authorization = authService.getAuthArg();
   }
 
-  return searchApi.v10SearchGet(filters);
+  return searchApi.search(filters);
 };
 
 type RequestFilters = {

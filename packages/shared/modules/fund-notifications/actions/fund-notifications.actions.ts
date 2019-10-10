@@ -22,7 +22,7 @@ export const fetchFundNotificationsAction = (
   id: string
 ): ApiAction<FundNotificationSettingList> => ({
   type: FETCH_FUND_NOTIFICATIONS,
-  payload: notificationsApi.v10NotificationsSettingsFundsByIdGet(
+  payload: notificationsApi.getNotificationsFundSettings(
     id,
     authService.getAuthArg()
   )
@@ -40,7 +40,7 @@ export const toggleFundNotificationsAction = (
   enabled: boolean
 ): ApiAction<string> => ({
   type: TOGGLE_FUND_NOTIFICATION,
-  payload: notificationsApi.v10NotificationsSettingsByIdByEnablePost(
+  payload: notificationsApi.toggleNotificationSettings(
     id,
     enabled,
     authService.getAuthArg()

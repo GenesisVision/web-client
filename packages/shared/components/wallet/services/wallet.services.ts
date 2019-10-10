@@ -38,7 +38,7 @@ export const fetchBaseWallets = (): RootThunk<Promise<WalletBaseData[]>> => (
   const authorization = authService.getAuthArg();
   const { currency } = getState().accountSettings;
   return walletApi
-    .v10WalletMultiByCurrencyAvailableGet(currency, authorization)
+    .getWalletMultiAvailable(currency, authorization)
     .then(res => res.wallets);
 };
 
@@ -49,10 +49,10 @@ export const fetchWalletTransactions = (requestFilters?: FilteringType) =>
   );
 
 export const offPayFeesWithGvt = () =>
-  walletApi.v10WalletPaygvtfeeOffPost(authService.getAuthArg());
+  walletApi.switchPayFeeInGvtOff(authService.getAuthArg());
 
 export const onPayFeesWithGvt = () =>
-  walletApi.v10WalletPaygvtfeeOnPost(authService.getAuthArg());
+  walletApi.switchPayFeeInGvtOn(authService.getAuthArg());
 
 export const fetchMultiTransactions = (
   currency?: CURRENCIES,
@@ -64,13 +64,13 @@ export const fetchMultiTransactions = (
     currency
   };
   return walletApi
-    .v10WalletMultiTransactionsGet(authorization, filtering)
+    .getMultiWalletTransactions(authorization, filtering)
     .then(mapToTableItems("transactions"));
 };
 
 export const fetchCopytradingAccounts = () =>
   signalApi
-    .v10SignalAccountsGet(authService.getAuthArg())
+    .getCopytradingAccounts(authService.getAuthArg())
     .then(mapToTableItems<CopyTradingAccountInfo>("accounts"));
 
 export const fetchMultiTransactionsExternal = (
@@ -83,6 +83,6 @@ export const fetchMultiTransactionsExternal = (
     currency
   };
   return walletApi
-    .v10WalletMultiTransactionsExternalGet(authorization, filtering)
+    .getWalletExternalTransactions(authorization, filtering)
     .then(mapToTableItems<MultiWalletExternalTransaction>("transactions"));
 };

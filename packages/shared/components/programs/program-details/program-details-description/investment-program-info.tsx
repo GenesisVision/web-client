@@ -1,4 +1,4 @@
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -13,7 +13,7 @@ import { ILevelCalculatorProps } from "../program-details.types";
 
 interface IInvestmentProgramInfoProps {
   isOwnProgram?: boolean;
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
   LevelCalculator?: React.ComponentType<ILevelCalculatorProps>;
   levelsParameters?: LevelsParamsInfo;
   isKycConfirmed?: boolean;

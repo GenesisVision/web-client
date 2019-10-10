@@ -56,7 +56,7 @@ export const fetchPrograms = (
   filters: FetchProgramsFiltersType
 ): CancelablePromise<IDataModel> =>
   programApi
-    .v10ProgramsGet({
+    .getPrograms({
       ...filters,
       authorization: authService.getAuthArg()
     })

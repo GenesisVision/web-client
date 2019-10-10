@@ -17,7 +17,7 @@ export const confirm2fa = (
 ): CancelablePromise<RecoveryCodesViewModel> => {
   const authorization = authService.getAuthArg();
   return authApi
-    .v10Auth2faConfirmPost(authorization, {
+    .confirmTwoStepAuth(authorization, {
       model
     })
     .then(response => {
@@ -28,7 +28,7 @@ export const confirm2fa = (
 };
 
 export const sendPassword = (model: PasswordModel) =>
-  authApi.v10Auth2faRecoverycodesNewPost(authService.getAuthArg(), { model });
+  authApi.createTwoStepAuthRecoveryCodes(authService.getAuthArg(), { model });
 
 export const disableTFA = (model: TwoFactorCodeModel) =>
-  authApi.v10Auth2faDisablePost(authService.getAuthArg(), { model });
+  authApi.disableTwoStepAuth(authService.getAuthArg(), { model });

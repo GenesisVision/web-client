@@ -9,19 +9,19 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
-import rateApi from "shared/services/api-client/rate-api";
+import { fetchRate as fetchRateMethod } from "shared/services/rate-service";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 import CreateAccountFormValidationSchema from "./follow-popup-create-account.validators";
-import { DialogButtons } from "shared/components/dialog/dialog-buttons";
-import { DialogField } from "shared/components/dialog/dialog-field";
 
 const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   onClick,
@@ -42,16 +42,14 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     !dirty || !isValid || initialDepositAmount > wallet.available;
   const fetchRate = useCallback(
     (initialDepositCurrency?: CurrencyEnum) => {
-      rateApi
-        .v10RateByFromByToGet(
-          currency,
-          initialDepositCurrency ||
-            values[CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]
-        )
-        .then((rate: number) => {
-          if (rate !== values.rate)
-            setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.rate, rate);
-        });
+      fetchRateMethod(
+        currency as CurrencyEnum,
+        initialDepositCurrency ||
+          values[CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]
+      ).then((rate: number) => {
+        if (rate !== values.rate)
+          setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.rate, rate);
+      });
     },
     [currency, values]
   );

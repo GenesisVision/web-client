@@ -1,4 +1,4 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -7,7 +7,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
 interface ISignalProgramInfoProps {
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
 }
 
 const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({

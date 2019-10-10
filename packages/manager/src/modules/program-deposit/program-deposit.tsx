@@ -19,12 +19,8 @@ const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
 }) => (
   <DepositContainer
     asset={ASSET.PROGRAM}
-    assetInvest={programInvestCreator(
-      managerApi.v10ManagerProgramsByIdInvestByAmountPost
-    )}
-    fetchInfo={getProgramInfoCreator(
-      managerApi.v10ManagerProgramsByIdInvestInfoByCurrencyGet
-    )}
+    assetInvest={programInvestCreator(managerApi.investIntoProgram)}
+    fetchInfo={getProgramInfoCreator(managerApi.getProgramInvestInfo)}
     id={id}
     hasEntryFee
     currency={currency}

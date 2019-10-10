@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ProgramDetails } from "gv-api-web";
+import { ProgramDetailsOld } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -36,7 +36,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
     <TableRow>
       <td
         className={classNames("program-detailed", {
-          "program-detailed--pretender": program.rating.canLevelUp
+          "program-detailed--pretender": false
         })}
         colSpan={11}
       >
@@ -58,10 +58,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     size="medium"
                     color={program.color}
                     tooltip={
-                      <LevelTooltip
-                        level={program.level}
-                        canLevelUp={program.rating.canLevelUp}
-                      />
+                      <LevelTooltip level={program.level} canLevelUp={false} />
                     }
                   />
                 </Link>
@@ -240,7 +237,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
 
 interface Props {
   title: string;
-  program: ProgramDetails;
+  program: ProgramDetailsOld;
   isAuthenticated?: boolean;
   toggleFavorite: TableToggleFavoriteHandlerType;
   onCollapseClick(): void;

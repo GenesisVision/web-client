@@ -1,11 +1,11 @@
-import { FundsList, PlatformAsset, PlatformCurrency } from "gv-api-web";
+import { FundsListOld, PlatformAsset, PlatformCurrency } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import FundAssetFilter from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter";
@@ -174,7 +174,7 @@ interface MergeProps {
 
 interface StateProps {
   isAuthenticated: boolean;
-  data?: FundsList;
+  data?: FundsListOld;
   fundAssets: PlatformAsset[];
   currencies: PlatformCurrency[];
   currency: CurrencyEnum;

@@ -1,4 +1,4 @@
-import { ProgramDetails } from "gv-api-web";
+import { ProgramDetailsOld } from "gv-api-web";
 import * as React from "react";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -37,7 +37,7 @@ const _ProgramTableRow: React.FC<Props> = ({
 interface Props {
   title: string;
   showRating?: boolean;
-  program: ProgramDetails;
+  program: ProgramDetailsOld;
   isAuthenticated?: boolean;
   toggleFavorite: TableToggleFavoriteHandlerType;
 }

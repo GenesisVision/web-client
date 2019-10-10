@@ -3,7 +3,7 @@ import {
   InvestmentEventViewModels,
   LevelsParamsInfo,
   ProgramBalanceChart,
-  ProgramDetailsFull,
+  ProgramDetailsFullOld,
   ProgramPeriodsViewModel,
   ProgramProfitChart,
   SignalProviderSubscribers,
@@ -45,7 +45,7 @@ const sendProgramChartRequest = (
   id: string,
   currency: CurrencyEnum
 ): CancelablePromise<ProgramProfitChart> =>
-  programsApi.v10ProgramsByIdChartsProfitGet(id, {
+  programsApi.getProgramProfitChart(id, {
     dateFrom: start,
     dateTo: end,
     maxPointCount: 100,
@@ -95,7 +95,7 @@ export const fetchProgramBalanceChartAction = (
   currency: CurrencyEnum
 ): ApiAction<ProgramBalanceChart> => ({
   type: FETCH_PROGRAM_BALANCE_CHART,
-  payload: programsApi.v10ProgramsByIdChartsBalanceGet(id, {
+  payload: programsApi.getProgramBalanceChart(id, {
     currency,
     dateFrom: period.start,
     dateTo: period.end,
@@ -106,16 +106,16 @@ export const fetchProgramBalanceChartAction = (
 export const fetchProgramDescriptionAction = (
   id: string,
   authorization: string
-): ApiAction<ProgramDetailsFull> => ({
+): ApiAction<ProgramDetailsFullOld> => ({
   type: FETCH_PROGRAM_DESCRIPTION,
-  payload: programsApi.v10ProgramsByIdGet(id, { authorization })
+  payload: programsApi.getProgramDetails(id, { authorization })
 });
 
 export const fetchLevelParametersAction = (
   currency: CurrencyEnum
 ): ApiAction<LevelsParamsInfo> => ({
   type: FETCH_LEVEL_PARAMETERS,
-  payload: platformApi.v10PlatformLevelsParametersGet({ currency })
+  payload: platformApi.getLevelsParams({ currency })
 });
 
 export const fetchOpenPositionsAction = (
@@ -123,7 +123,7 @@ export const fetchOpenPositionsAction = (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<TradesViewModel>> => ({
   type: PROGRAM_OPEN_POSITIONS,
-  payload: programsApi.v10ProgramsByIdTradesOpenGet(id, filters)
+  payload: programsApi.getProgramOpenTrades(id, filters)
 });
 
 export const fetchTradesAction = (
@@ -131,7 +131,7 @@ export const fetchTradesAction = (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<TradesViewModel>> => ({
   type: PROGRAM_TRADES,
-  payload: programsApi.v10ProgramsByIdTradesGet(id, filters)
+  payload: programsApi.getProgramTrades(id, filters)
 });
 
 export const fetchPeriodHistoryAction = (
@@ -139,7 +139,7 @@ export const fetchPeriodHistoryAction = (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => ({
   type: PROGRAM_PERIOD_HISTORY,
-  payload: programsApi.v10ProgramsByIdPeriodsGet(id, filters)
+  payload: programsApi.getProgramPeriods(id, filters)
 });
 
 export const fetchFinancialStatisticAction = (
@@ -147,7 +147,7 @@ export const fetchFinancialStatisticAction = (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => ({
   type: PROGRAM_FINANCIAL_STATISTIC,
-  payload: programsApi.v10ProgramsByIdPeriodsGet(id, filters)
+  payload: programsApi.getProgramPeriods(id, filters)
 });
 
 export const fetchSubscriptionsAction = (
@@ -156,5 +156,5 @@ export const fetchSubscriptionsAction = (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<SignalProviderSubscribers>> => ({
   type: PROGRAM_SUBSCRIPTIONS,
-  payload: programsApi.v10ProgramsByIdSubscribersGet(id, authorization, filters)
+  payload: programsApi.getProgramSubscribers(id, authorization, filters)
 });

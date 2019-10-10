@@ -9,13 +9,13 @@ export const confirm = (
   values: IConfirmFormValues & IConfirmProgramProps
 ): CancelablePromise<any> => {
   const authorization = authService.getAuthArg();
-  return managerApi.v10ManagerPrograms2faConfirmPost(authorization, values);
+  return managerApi.confirmProgram2FA(authorization, values);
 };
 export const get2faInfo = (
   values: IConfirmProgramProps
 ): CancelablePromise<TwoFactorAuthenticator> => {
   const authorization = authService.getAuthArg();
-  return managerApi.v10ManagerPrograms2faGetGet(authorization, values);
+  return managerApi.getProgram2FA(authorization, values);
 };
 
 export interface IConfitmService {

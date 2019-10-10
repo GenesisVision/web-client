@@ -1,4 +1,4 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -10,7 +10,7 @@ import {
 
 import { FETCH_PROGRAM_DESCRIPTION } from "../actions/program-details.actions";
 
-export type ProgramDescriptionDataType = ProgramDetailsFull;
+export type ProgramDescriptionDataType = ProgramDetailsFullOld;
 
 export type ProgramDescriptionState = IApiState<ProgramDescriptionDataType>;
 

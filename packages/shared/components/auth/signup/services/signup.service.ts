@@ -1,9 +1,9 @@
 import { push } from "connected-react-router";
-import { CaptchaCheckResult } from "gv-api-web";
+import { RegisterViewModel } from "gv-api-web";
 import emailPendingActions from "shared/actions/email-pending-actions";
 import { SetSubmittingType } from "shared/utils/types";
 
-import { RegisterViewModel, signUpUserAction } from "../actions/signup.actions";
+import { signUpUserAction } from "../actions/signup.actions";
 import { SIGNUP_ROUTE_PENDING } from "../signup.routes";
 
 export const signUp: SingUpFuncType = (
@@ -38,10 +38,6 @@ export const signUp: SingUpFuncType = (
     });
 
 export type SingUpFuncType = (
-  props: RegisterViewModel & {
-    code: string;
-    userName?: string;
-    captchaCheckResult: CaptchaCheckResult;
-  },
+  props: RegisterViewModel,
   setSubmitting: SetSubmittingType
 ) => (dispatch: any, getState: any) => void;

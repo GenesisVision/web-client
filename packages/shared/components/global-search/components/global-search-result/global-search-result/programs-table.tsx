@@ -1,4 +1,4 @@
-import { ProgramsList } from "gv-api-web";
+import { ProgramsListOld } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Table } from "shared/components/table/components";
@@ -8,7 +8,7 @@ import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/progr
 import { SearchTableProps } from "./global-search-result";
 
 const ProgramsTable: React.FC<
-  SearchTableProps<ProgramsList> & WithTranslation
+  SearchTableProps<ProgramsListOld> & WithTranslation
 > = ({ t, data, title }) => {
   return (
     <Table

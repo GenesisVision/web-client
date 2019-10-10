@@ -182,7 +182,6 @@ describe("test selectors", () => {
             rating: {
               rating: 0,
               profit: 0.0,
-              canLevelUp: false,
               topPercent: 0.0
             },
             personalDetails: {
@@ -197,7 +196,7 @@ describe("test selectors", () => {
               isFavorite: true,
               isInvested: true,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -290,7 +289,6 @@ describe("test selectors", () => {
             rating: {
               rating: 0,
               profit: 0.0,
-              canLevelUp: false,
               topPercent: 0.0
             },
             personalDetails: {
@@ -305,7 +303,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: false,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -398,7 +396,6 @@ describe("test selectors", () => {
             rating: {
               rating: 0,
               profit: 0.0,
-              canLevelUp: false,
               topPercent: 0.0
             },
             personalDetails: {
@@ -413,7 +410,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: false,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -506,7 +503,6 @@ describe("test selectors", () => {
             rating: {
               rating: 0,
               profit: 0.0,
-              canLevelUp: false,
               topPercent: 0.0
             },
             personalDetails: {
@@ -521,7 +517,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: true,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -613,7 +609,6 @@ describe("test selectors", () => {
             rating: {
               rating: 0,
               profit: 0.0,
-              canLevelUp: false,
               topPercent: 0.0
             },
             personalDetails: {
@@ -628,7 +623,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: false,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -722,7 +717,6 @@ describe("test selectors", () => {
             rating: {
               rating: 0,
               profit: 0.0,
-              canLevelUp: false,
               topPercent: 0.0
             },
             personalDetails: {
@@ -737,7 +731,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: false,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -829,7 +823,6 @@ describe("test selectors", () => {
             rating: {
               rating: 0,
               profit: 0.0,
-              canLevelUp: false,
               topPercent: 0.0
             },
             personalDetails: {
@@ -844,7 +837,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: false,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -937,7 +930,6 @@ describe("test selectors", () => {
             rating: {
               rating: 0,
               profit: 0.0,
-              canLevelUp: false,
               topPercent: 0.0
             },
             personalDetails: {
@@ -952,7 +944,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: false,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -1044,7 +1036,6 @@ describe("test selectors", () => {
             rating: {
               rating: 0,
               profit: 0.0,
-              canLevelUp: false,
               topPercent: 0.0
             },
             personalDetails: {
@@ -1059,7 +1050,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: false,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -1148,12 +1139,6 @@ describe("test selectors", () => {
               investorsCount: 2,
               tradesCount: 0
             },
-            rating: {
-              rating: 0,
-              profit: 0.0,
-              canLevelUp: false,
-              topPercent: 0.0
-            },
             personalDetails: {
               isReinvest: false,
               gvtValue: 0.0,
@@ -1166,7 +1151,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: false,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -1256,12 +1241,6 @@ describe("test selectors", () => {
               investorsCount: 1,
               tradesCount: 0
             },
-            rating: {
-              rating: 0,
-              profit: 0.0,
-              canLevelUp: false,
-              topPercent: 0.0
-            },
             personalDetails: {
               isReinvest: false,
               gvtValue: 0.0,
@@ -1274,7 +1253,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: false,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,
@@ -1363,12 +1342,6 @@ describe("test selectors", () => {
               investorsCount: 0,
               tradesCount: 0
             },
-            rating: {
-              rating: 0,
-              profit: 0.0,
-              canLevelUp: false,
-              topPercent: 0.0
-            },
             personalDetails: {
               isReinvest: false,
               gvtValue: 0.0,
@@ -1381,7 +1354,7 @@ describe("test selectors", () => {
               isFavorite: false,
               isInvested: false,
               isOwnProgram: false,
-              canCloseProgram: false,
+              canCloseAsset: false,
               canCloseAsset: false,
               isFinishing: false,
               canInvest: false,

@@ -1,6 +1,9 @@
 import * as React from "react";
 import DepositContainer from "shared/components/deposit/components/deposit-container";
-import { fundInvestCreator, getFundInfoCreator } from "shared/components/deposit/services/fund-deposit.service";
+import {
+  fundInvestCreator,
+  getFundInfoCreator
+} from "shared/components/deposit/services/fund-deposit.service";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET, FUND_CURRENCY } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
@@ -15,12 +18,8 @@ const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   <DepositContainer
     currency={FUND_CURRENCY}
     asset={ASSET.FUND}
-    assetInvest={fundInvestCreator(
-      investorApi.v10InvestorFundsByIdInvestByAmountPost
-    )}
-    fetchInfo={getFundInfoCreator(
-      investorApi.v10InvestorFundsByIdInvestInfoByCurrencyGet
-    )}
+    assetInvest={fundInvestCreator(investorApi.investIntoFund)}
+    fetchInfo={getFundInfoCreator(investorApi.getFundInvestInfo)}
     id={id}
     hasEntryFee
     onApply={onApply}
