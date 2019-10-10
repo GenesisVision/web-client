@@ -13,7 +13,7 @@ export const fetchSocialLinks = (): CancelablePromise<
 > => {
   const authorization = authService.getAuthArg();
   return profileApi
-    .v10ProfileSociallinksGet(authorization)
+    .getSocialLinks(authorization)
     .then(({ socialLinks }) => socialLinks);
 };
 
@@ -22,7 +22,7 @@ export const updateSocialLink = (requestData: UpdateSocialLinkViewModel) => (
 ) => {
   const authorization = authService.getAuthArg();
   return profileApi
-    .v10ProfileSociallinksUpdatePost(authorization, { model: requestData })
+    .updateSocialLinks(authorization, { model: requestData })
     .then(() => {
       dispatch(
         alertMessageActions.success(

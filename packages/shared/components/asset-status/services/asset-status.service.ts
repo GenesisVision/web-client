@@ -26,16 +26,16 @@ export const getAssetRequests = (
   let method;
   switch (role + asset) {
     case ROLE.MANAGER + ASSET.PROGRAM:
-      method = managerApi.v10ManagerProgramsByIdRequestsBySkipByTakeGet;
+      method = managerApi.getProgramRequests;
       break;
     case ROLE.MANAGER + ASSET.FUND:
-      method = managerApi.v10ManagerFundsByIdRequestsBySkipByTakeGet;
+      method = managerApi.getProgramRequests;
       break;
     case ROLE.INVESTOR + ASSET.PROGRAM:
-      method = investorApi.v10InvestorProgramsByIdRequestsBySkipByTakeGet;
+      method = investorApi.getProgramRequests;
       break;
     default:
-      method = investorApi.v10InvestorFundsByIdRequestsBySkipByTakeGet;
+      method = investorApi.getProgramRequests;
   }
   return method(id, 0, 10, authorization).then(
     (response: ProgramRequests) => response.requests
@@ -52,10 +52,10 @@ export const cancelRequest = (
 
   switch (role + asset) {
     case ROLE.MANAGER + ASSET.PROGRAM:
-      method = managerApi.v10ManagerProgramsRequestsByIdCancelPost;
+      method = managerApi.cancelRequest;
       break;
     default:
-      method = investorApi.v10InvestorProgramsRequestsByIdCancelPost;
+      method = investorApi.cancelRequest;
   }
   return method(id, authorization);
 };

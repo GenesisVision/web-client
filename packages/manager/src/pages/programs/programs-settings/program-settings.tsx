@@ -2,7 +2,7 @@ import "./program-settings.scss";
 
 import {
   BrokersProgramInfo,
-  ProgramDetailsFull,
+  ProgramDetailsFullOld,
   ProgramsInfo
 } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
@@ -59,7 +59,7 @@ const _ProgramSettings: React.FC<Props> = ({
       <ChangePassword
         condition={
           details.personalProgramDetails.canChangePassword &&
-          details.personalProgramDetails.canCloseProgram
+          details.personalProgramDetails.canCloseAsset
         }
         title={details.title}
         id={details.id}
@@ -97,7 +97,7 @@ const _ProgramSettings: React.FC<Props> = ({
         asset={ASSET.PROGRAM}
         programsInfo={programsInfo}
         entryFee={details.entryFeeSelected}
-        successFee={details.successFee}
+        successFee={details.successFeeCurrent}
         onSubmit={editProgram}
       />
       <TradesUpdating
@@ -106,7 +106,7 @@ const _ProgramSettings: React.FC<Props> = ({
         onSubmit={editProgram}
       />
       <StopOutLevel
-        stopOutLevel={details.stopOutLevel}
+        stopOutLevel={details.stopOutLevelCurrent}
         onSubmit={editProgram}
       />
       <InvestmentLimit
@@ -134,7 +134,7 @@ const _ProgramSettings: React.FC<Props> = ({
       <CloseAssetBlock
         label={t("manager.asset-settings.close-program.title")}
         asset={ASSET.PROGRAM}
-        canCloseAsset={details.personalProgramDetails.canCloseProgram}
+        canCloseAsset={details.personalProgramDetails.canCloseAsset}
         id={details.id}
         closeAsset={closeProgram}
       />
@@ -144,7 +144,7 @@ const _ProgramSettings: React.FC<Props> = ({
 
 interface Props {
   programsInfo: ProgramsInfo;
-  details: ProgramDetailsFull;
+  details: ProgramDetailsFullOld;
   brokersInfo: BrokersProgramInfo;
   changeSignaling: (
     values: IProgramSignalFormValues,

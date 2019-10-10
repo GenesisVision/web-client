@@ -1,7 +1,7 @@
 import "./dashboard-programs.scss";
 
 import classNames from "classnames";
-import { ProgramDetails } from "gv-api-web";
+import { ProgramDetailsOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -31,16 +31,16 @@ import {
   UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
-import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
+import useRole from "shared/hooks/use-role.hook";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 
 import {
   ACTION_STATUS_FILTER_NAME,
   ACTION_STATUS_FILTER_VALUES
 } from "./dashboard-programs.helpers";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
-import useRole from "shared/hooks/use-role.hook";
 
 const _DashboardPrograms: React.FC<Props> = ({
   getDashboardPrograms,
@@ -88,10 +88,10 @@ const _DashboardPrograms: React.FC<Props> = ({
           {t(`${role}.dashboard-page.programs-header.${column.name}`)}
         </span>
       )}
-      renderBodyRow={(program: ProgramDetails, updateRow: any) => (
+      renderBodyRow={(program: ProgramDetailsOld, updateRow: any) => (
         <TableRow
           className={classNames({
-            "table__row--pretender": program.rating.canLevelUp
+            "table__row--pretender": false
           })}
         >
           <TableCell className="programs-table__cell dashboard-programs__cell--title">
@@ -110,10 +110,7 @@ const _DashboardPrograms: React.FC<Props> = ({
                   alt={program.title}
                   color={program.color}
                   tooltip={
-                    <LevelTooltip
-                      level={program.level}
-                      canLevelUp={program.rating.canLevelUp}
-                    />
+                    <LevelTooltip level={program.level} canLevelUp={false} />
                   }
                 />
               </Link>

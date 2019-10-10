@@ -1,5 +1,8 @@
 import { InternalTransferRequest } from "gv-api-web";
-import { ItemType, ItemsType } from "shared/components/wallet-select/wallet-select";
+import {
+  ItemType,
+  ItemsType
+} from "shared/components/wallet-select/wallet-select";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -9,7 +12,7 @@ import { TransferFormValues } from "../components/transfer-form";
 export const transferRequest = (
   request: Pick<TransferFormValues, keyof InternalTransferRequest>
 ): Promise<any> =>
-  walletApi.v10WalletTransferPost(authService.getAuthArg(), {
+  walletApi.transfer(authService.getAuthArg(), {
     request: request as InternalTransferRequest
   });
 

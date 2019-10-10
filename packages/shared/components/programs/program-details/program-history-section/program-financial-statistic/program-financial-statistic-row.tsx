@@ -15,15 +15,11 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
   currency,
   showCommissionRebateSometime
 }) => {
-  const {
-    profit,
-    balance,
-    deposit,
-    withdraw,
-    commissionRebate,
-    successFee,
-    entryFee
-  } = period.managerStatistic;
+  const { profit, balance, successFee, entryFee } = period.managerStatistic;
+
+  const deposit = 0;
+  const withdraw = 0;
+  const commissionRebate = 0;
   return (
     <TableRow stripy>
       <TableCell className="program-financial-statistic__cell">

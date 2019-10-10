@@ -1,6 +1,5 @@
 import Router from "next/router";
 import React, { useCallback } from "react";
-import { useTranslation } from "react-i18next";
 import useErrorMessage from "shared/hooks/error-message.hook";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
@@ -17,7 +16,7 @@ const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
   const handleSubmit = useCallback(
     (model: IAboutFormValues, setSubmitting: SetSubmittingType) =>
       profileApi
-        .v10ProfileUpdatePost(authService.getAuthArg(), {
+        .updateProfile(authService.getAuthArg(), {
           model
         })
         .then(onSuccessEdit)

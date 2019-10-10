@@ -1,4 +1,4 @@
-import { FundsList } from "gv-api-web";
+import { FundsListOld } from "gv-api-web";
 import { SET_FAVORITE_FUND } from "shared/modules/favorite-asset/actions/favorite-fund.actions";
 import {
   FAILURE_SUFFIX,
@@ -8,10 +8,10 @@ import {
 import { FavoriteActionType } from "shared/utils/types";
 
 const updateFavoriteLocal = (
-  state: IApiState<FundsList>,
+  state: IApiState<FundsListOld>,
   id: string,
   isFavorite: boolean
-): IApiState<FundsList> => {
+): IApiState<FundsListOld> => {
   if (!state.data) return state;
   return {
     ...state,
@@ -33,9 +33,9 @@ const updateFavoriteLocal = (
 };
 
 const favoritesReducer = (
-  state: IApiState<FundsList>,
+  state: IApiState<FundsListOld>,
   action: FavoriteActionType
-): IApiState<FundsList> => {
+): IApiState<FundsListOld> => {
   switch (action.type) {
     case `${SET_FAVORITE_FUND}_${REQUEST_SUFFIX}`:
       return updateFavoriteLocal(state, action.meta.id, action.meta.isFavorite);

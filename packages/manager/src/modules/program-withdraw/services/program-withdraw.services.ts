@@ -9,21 +9,13 @@ export const getProgramWithdrawInfo = (
   id: string,
   currency: string
 ) => (): Promise<ManagerProgramWithdrawInfo> =>
-  managerApi.v10ManagerProgramsByIdWithdrawInfoByCurrencyGet(
-    id,
-    currency,
-    authService.getAuthArg()
-  );
+  managerApi.getProgramWithdrawInfo(id, currency, authService.getAuthArg());
 
 export const withdrawProgramById = (id: string, onClose: () => void) => (
   value: ProgramWithdrawType
 ): ManagerThunk<Promise<void>> => (dispatch): Promise<void> =>
   managerApi
-    .v10ManagerProgramsByIdWithdrawMultiByAmountPost(
-      id,
-      value.amount,
-      authService.getAuthArg()
-    )
+    .withdrawFromProgram(id, value.amount, authService.getAuthArg())
     .then(() => {
       onClose();
       dispatch(

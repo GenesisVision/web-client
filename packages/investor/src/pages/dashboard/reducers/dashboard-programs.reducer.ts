@@ -1,4 +1,4 @@
-import { ProgramsList } from "gv-api-web";
+import { ProgramsListOld } from "gv-api-web";
 import {
   DASHBOARD_PROGRAMS_DEFAULT_FILTERING,
   DASHBOARD_PROGRAMS_FILTERS
@@ -11,7 +11,7 @@ import {
   DASHBOARD_PROGRAMS
 } from "../actions/dashboard.actions";
 
-const dashboardProgramsReducer = tableReducerFactory<ProgramsList>({
+const dashboardProgramsReducer = tableReducerFactory<ProgramsListOld>({
   type: DASHBOARD_PROGRAMS,
   paging: DEFAULT_PAGING,
   //@ts-ignore

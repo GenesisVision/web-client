@@ -9,7 +9,7 @@ import { PlatformInfo } from "gv-api-web";
 import { getRandomInteger } from "shared/utils/helpers";
 
 export const fetchMinimumDepositAmount = async (ctx?: NextPageContext) =>
-  await managerApi.v10ManagerFundsInvestmentAmountGet(
+  await managerApi.getFundInvestment(
     authService.getAuthArg(ctx)
   );
 

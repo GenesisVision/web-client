@@ -6,7 +6,7 @@ export const loadKycIFrame = () => {
   const authorization = authService.getAuthArg();
   $script(process.env.REACT_APP_IDENSIC_SRC, function() {
     if (!(window as any).idensic.init) return;
-    profileApi.v10ProfileVerificationTokenPost(authorization).then(data => {
+    profileApi.verificationToken(authorization).then(data => {
       (window as any).idensic.init(
         // selector of an IFrame container (see above)
         "#idensic",

@@ -1,4 +1,4 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
@@ -21,7 +21,7 @@ const _SignalProviderControls: React.FC<Props> = ({
 };
 
 interface Props {
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
 }
 
 const SignalProviderControls = React.memo<React.FC<Props>>(

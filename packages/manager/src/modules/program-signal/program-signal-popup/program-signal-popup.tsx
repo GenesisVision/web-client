@@ -1,4 +1,4 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
@@ -65,7 +65,7 @@ export default ProgramSignalPopup;
 interface Props extends OwnProps, IDialogProps {}
 
 interface OwnProps {
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
   header: string;
   onApply(): void;
   serviceMethod(values: {

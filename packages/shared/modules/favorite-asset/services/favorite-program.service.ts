@@ -29,14 +29,12 @@ export const toggleFavoriteProgramDispatchable: ToggleFavoriteDispatchableType =
 const addFavorite = (
   id: string,
   authorization: string
-): CancelablePromise<any> =>
-  programsApi.v10ProgramsByIdFavoriteAddPost(id, authorization);
+): CancelablePromise<any> => programsApi.addToFavorites(id, authorization);
 
 const removeFavorite = (
   id: string,
   authorization: string
-): CancelablePromise<any> =>
-  programsApi.v10ProgramsByIdFavoriteRemovePost(id, authorization);
+): CancelablePromise<any> => programsApi.removeFromFavorites(id, authorization);
 
 export const toggleFavoriteProgram = ({
   id,

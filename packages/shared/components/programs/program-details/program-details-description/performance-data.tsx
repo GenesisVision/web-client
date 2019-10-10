@@ -1,4 +1,4 @@
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -105,7 +105,7 @@ const _PerformanceData: React.FC<Props> = ({
 
 interface Props {
   data: LevelsParamsInfo;
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
 }
 
 export const PerformanceDataLoader: React.FC = () => (

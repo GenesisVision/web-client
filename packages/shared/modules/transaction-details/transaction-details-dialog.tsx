@@ -35,7 +35,7 @@ const _TransactionDetailsDialog: React.FC<Props> = ({
     () => {
       setIsPending();
       walletApi
-        .v10WalletTransactionByIdGet(transactionId, authService.getAuthArg())
+        .getTransactionDetails(transactionId, authService.getAuthArg())
         .then(setData)
         .catch(({ errorMessage }: ResponseError) =>
           dispatch(alertMessageActions.error(errorMessage))
@@ -48,10 +48,7 @@ const _TransactionDetailsDialog: React.FC<Props> = ({
   const cancel = useCallback(
     () => {
       walletApi
-        .v10WalletWithdrawRequestCancelByTxIdPost(
-          transactionId,
-          authService.getAuthArg()
-        )
+        .cancelWithdrawalRequest(transactionId, authService.getAuthArg())
         .then(onAction)
         .catch(({ errorMessage }: ResponseError) =>
           dispatch(alertMessageActions.error(errorMessage))
@@ -63,10 +60,7 @@ const _TransactionDetailsDialog: React.FC<Props> = ({
   const resendEmail = useCallback(
     () => {
       walletApi
-        .v10WalletWithdrawRequestResendByTxIdPost(
-          transactionId,
-          authService.getAuthArg()
-        )
+        .resendWithdrawalRequestEmail(transactionId, authService.getAuthArg())
         .then(close)
         .catch(({ errorMessage }: ResponseError) =>
           dispatch(alertMessageActions.error(errorMessage))
@@ -75,7 +69,7 @@ const _TransactionDetailsDialog: React.FC<Props> = ({
     [transactionId]
   );
 
-  if (isPending || !!!data) return <DialogLoader />;
+  if (isPending || !data) return <DialogLoader />;
   const Component = Types[data.type] || (() => <p>type isn't define</p>);
 
   return (

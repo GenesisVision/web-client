@@ -12,7 +12,7 @@ export const changePassword = (model: ChangePasswordViewModel) => (
   dispatch: MiddlewareDispatch
 ) =>
   authApi
-    .v10AuthPasswordChangePost(authService.getAuthArg(), {
+    .changePassword(authService.getAuthArg(), {
       model
     })
     .then((response: string) => {

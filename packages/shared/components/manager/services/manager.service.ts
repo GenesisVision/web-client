@@ -22,14 +22,14 @@ export const fetchManagerProfile = () => (
     router.location.pathname,
     MANAGER_DETAILS_ROUTE
   )[MANAGER_SLUG_URL_PARAM_NAME];
-  return ManagerApi.v10ManagerByIdGet(managerSlugUrl);
+  return ManagerApi.getManagerProfile(managerSlugUrl);
 };
 
 export const fetchManagerPrograms = (
   filter: FilteringType
 ): Promise<IDataModel> => {
   return programsApi
-    .v10ProgramsGet({
+    .getPrograms({
       ...filter,
       authorization: authService.getAuthArg(),
       hasInvestorsForClosed: true
@@ -44,7 +44,7 @@ export const fetchManagerFunds = (
   filter: FilteringType
 ): Promise<IDataModel> => {
   return fundsApi
-    .v10FundsGet({
+    .getFunds({
       ...filter,
       authorization: authService.getAuthArg(),
       hasInvestorsForClosed: true
@@ -65,8 +65,8 @@ export const fetchManagerAssetsCount = (
     authorization: authService.getAuthArg()
   };
   return Promise.all([
-    programsApi.v10ProgramsGet(options),
-    fundsApi.v10FundsGet(options)
+    programsApi.getPrograms(options),
+    fundsApi.getFunds(options)
   ]).then(([programsData, fundsData]) => ({
     programsCount: programsData.total,
     fundsCount: fundsData.total

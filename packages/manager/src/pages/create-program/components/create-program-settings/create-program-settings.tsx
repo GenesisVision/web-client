@@ -110,7 +110,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
           currency={currency as CurrencyEnum}
         />
         <SignalProgram
-          condition={broker.isSignalsAvailable}
+          condition={accountType.isSignalsAvailable}
           name={CREATE_PROGRAM_FIELDS.isSignalProgram}
         />
       </SettingsBlock>

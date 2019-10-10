@@ -36,22 +36,10 @@ export const notificationsCountSelector = apiFieldSelector(
   0
 );
 
-export const availableSelector = apiFieldSelector(
-  headerSelector,
-  fieldSelector(state => state.available),
-  0
-);
-
 export const nameSelector = apiFieldSelector(
   headerSelector,
   fieldSelector(state => state.name),
   ""
-);
-
-export const roleSelector = apiFieldSelector(
-  headerSelector,
-  fieldSelector(state => state.userType),
-  undefined
 );
 
 export const idSelector = apiFieldSelector(

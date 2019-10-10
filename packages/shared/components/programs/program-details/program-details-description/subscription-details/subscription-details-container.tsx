@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { connect, ResolveThunks } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
 import useIsOpen from "shared/hooks/is-open.hook";
-import { rateApi } from "shared/services/api-client/rate-api";
+import { fetchRate } from "shared/services/rate-service";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { dispatchProgramDescription } from "../../services/program-details.service";
@@ -19,15 +19,11 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
 }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const [rate, setRate] = useState<number>(1);
-  useEffect(
-    () => {
-      rateApi
-        .v10RateByFromByToGet("USD", currency)
-        .then(setRate)
-        .catch(() => setRate(1));
-    },
-    [currency]
-  );
+  useEffect(() => {
+    fetchRate("USD", currency)
+      .then(setRate)
+      .catch(() => setRate(1));
+  }, [currency]);
   return (
     <>
       <SubscriptionDetails
