@@ -8,7 +8,7 @@ import { EVENT_PROFITABILITY_VALUES } from "shared/components/portfolio-events-t
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { durationDate } from "shared/utils/dates";
+import { distanceDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const _DashboardPortfolioEvent: React.FC<Props> = ({ event, from }) => (
@@ -22,7 +22,7 @@ const _DashboardPortfolioEvent: React.FC<Props> = ({ event, from }) => (
     )}
     <div className="portfolio-event__info">
       <StatisticItem
-        label={durationDate(new Date(event.date), undefined, true)}
+        label={distanceDate(new Date(event.date), undefined, true)}
       >
         <div className="portfolio-event__values-container">
           <div className="portfolio-event__description">{event.title}</div>

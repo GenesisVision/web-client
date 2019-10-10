@@ -1,4 +1,4 @@
-import moment from "moment";
+import { addDays, format, startOfDay } from "date-fns";
 
 export const dateTickFormatter = (start: Date, end: Date) => (
   date: Date
@@ -6,12 +6,12 @@ export const dateTickFormatter = (start: Date, end: Date) => (
   let dateFormat;
   const duration = new Date(end).getTime() - new Date(start).getTime();
   const msInDay = 1000 * 60 * 60 * 24;
-  if (duration <= msInDay) dateFormat = "LT";
-  else if (duration <= msInDay * 90) dateFormat = "MMM Do";
-  else if (duration <= msInDay * 365) dateFormat = "MMM";
-  else dateFormat = "ll";
+  if (duration <= msInDay) dateFormat = "p";
+  else if (duration <= msInDay * 90) dateFormat = "LLL do";
+  else if (duration <= msInDay * 365) dateFormat = "LLL";
+  else dateFormat = "PP";
 
-  return moment(date).format(dateFormat);
+  return format(date, dateFormat);
 };
 
 const getTicksCountByPeriod = (duration: number): number => {
@@ -23,16 +23,8 @@ const getTicksCountByPeriod = (duration: number): number => {
 };
 
 export const composeTicks = (start: Date, end: Date): number[] => {
-  const periodStart = moment(start)
-    .add(1, "days")
-    .startOf("day")
-    .toDate()
-    .getTime();
-
-  const periodEnd = moment(end)
-    .startOf("day")
-    .toDate()
-    .getTime();
+  const periodStart = startOfDay(addDays(start, 1)).getTime();
+  const periodEnd = startOfDay(end).getTime();
 
   const isOneDay = !Boolean(periodEnd - periodStart);
 

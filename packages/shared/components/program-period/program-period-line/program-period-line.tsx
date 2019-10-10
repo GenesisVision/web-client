@@ -6,7 +6,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import { STATUS } from "shared/constants/constants";
-import { durationDate } from "shared/utils/dates";
+import { distanceDate } from "shared/utils/dates";
 
 const _ProgramPeriodLine: React.FC<Props> = ({
   start,
@@ -15,8 +15,8 @@ const _ProgramPeriodLine: React.FC<Props> = ({
   status
 }) => {
   const [t] = useTranslation();
-  const duration = durationDate(start, end);
-  const timeLeft = durationDate(end);
+  const duration = distanceDate(start, end);
+  const timeLeft = distanceDate(end);
   return (
     <div className={classNames("program-period-line", className)}>
       <GVProgramPeriod

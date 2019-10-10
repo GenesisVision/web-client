@@ -18,7 +18,7 @@ import { STATUS } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { durationDate } from "shared/utils/dates";
+import { distanceDate } from "shared/utils/dates";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 interface IProgramTableRowShortProps {
@@ -126,7 +126,7 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         )}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
-        {durationDate(program.creationDate)}
+        {distanceDate(program.creationDate)}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat
