@@ -5,7 +5,7 @@ import * as React from "react";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import Tooltip from "shared/components/tooltip/tooltip";
 import withLoader from "shared/decorators/with-loader";
-import { durationDate } from "shared/utils/dates";
+import { distanceDate } from "shared/utils/dates";
 
 import ProgramPeriodTooltip from "../program-period-tooltip/program-period-tooltip";
 
@@ -20,7 +20,7 @@ const _ProgramPeriodPie: React.FC<Props> = ({ start, end, className }) => {
           variant="pie"
         />
         <div className="program-period-pie__text">
-          {durationDate(start, end)}
+          {distanceDate(start, end)}
         </div>
       </div>
     </Tooltip>

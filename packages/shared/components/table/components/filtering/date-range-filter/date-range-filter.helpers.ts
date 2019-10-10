@@ -44,7 +44,7 @@ export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
 
 const dateFrom = (
   subtract?: DurationInputArg2,
-  date: moment.MomentInput = new Date()
+  date: Date | string | number = new Date()
 ): string =>
   moment(date)
     .subtract(1, subtract)

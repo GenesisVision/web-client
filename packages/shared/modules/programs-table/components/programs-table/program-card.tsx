@@ -27,7 +27,7 @@ import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
-import { durationDate } from "shared/utils/dates";
+import { distanceDate } from "shared/utils/dates";
 import {
   formatValue,
   formatValueDifferentDecimalScale
@@ -203,7 +203,7 @@ const _ProgramCard: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem label={t("programs-page.programs-header.age")}>
-            {durationDate(program.creationDate)}
+            {distanceDate(program.creationDate)}
           </StatisticItem>
         </div>
         <div className="table-cards__table-column">

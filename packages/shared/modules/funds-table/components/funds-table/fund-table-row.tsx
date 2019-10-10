@@ -14,7 +14,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
-import { durationDate } from "shared/utils/dates";
+import { distanceDate } from "shared/utils/dates";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const _FundsTableRow: React.FC<Props> = ({
@@ -70,7 +70,7 @@ const _FundsTableRow: React.FC<Props> = ({
       {fund.statistic.investorsCount}
     </TableCell>
     <TableCell className="programs-table__cell programs-table__cell--age">
-      {durationDate(fund.creationDate)}
+      {distanceDate(fund.creationDate)}
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--drawdown">
       <NumberFormat
