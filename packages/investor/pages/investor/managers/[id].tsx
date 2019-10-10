@@ -11,7 +11,7 @@ const Managers: NextPage<Props> = ({ managerProfile }) => {
 
 Managers.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  const managerProfile = await ManagerApi.v10ManagerByIdGet(id as string);
+  const managerProfile = await ManagerApi.getManagerProfile(id as string);
   return {
     managerProfile
   };
