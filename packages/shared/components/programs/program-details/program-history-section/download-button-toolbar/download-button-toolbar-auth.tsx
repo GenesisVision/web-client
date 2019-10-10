@@ -1,7 +1,7 @@
 import "./download-button.scss";
 
+import { format } from "date-fns";
 import { saveAs } from "file-saver";
-import moment from "moment";
 import * as React from "react";
 import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -16,17 +16,12 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
   programId,
   title
 }) => {
-  const loadFile = useCallback(
-    () => {
-      const dateNow = moment(new Date()).format("YYYY-MM-DD_HH-mm-ss");
-      filesService
-        .getStatisticExportFile(programId, dateRange)
-        .then((blob: Blob) =>
-          saveAs(blob, `${title}_statistic_${dateNow}.xlsx`)
-        );
-    },
-    [programId, dateRange, title]
-  );
+  const loadFile = useCallback(() => {
+    const dateNow = format(new Date(), "YYYY-MM-DD_HH-mm-ss");
+    filesService
+      .getStatisticExportFile(programId, dateRange)
+      .then((blob: Blob) => saveAs(blob, `${title}_statistic_${dateNow}.xlsx`));
+  }, [programId, dateRange, title]);
   return (
     <div className="dashboard__button">
       <GVButton
