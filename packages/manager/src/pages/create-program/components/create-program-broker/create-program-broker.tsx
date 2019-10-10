@@ -34,13 +34,17 @@ const _CreateProgramBroker: React.FC<Props> = ({
               brokerName={broker.name}
               isSelected={broker === selectedBroker}
               onSelect={selectBrokerHandle}
-              cardState={getBrokerState(false, isForexAllowed, isKycConfirmed)}
+              cardState={getBrokerState(
+                broker.isForex,
+                isForexAllowed,
+                isKycConfirmed
+              )}
               tags={broker.tags}
             />
           ))}
           <div className="create-program-broker__navigation">
             <NavigateToSettings
-              isForex={false}
+              isForex={selectedBroker.isForex}
               isKycConfirmed={isKycConfirmed}
               navigateToSettings={navigateToSettings}
             />

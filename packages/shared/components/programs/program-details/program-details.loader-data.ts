@@ -142,6 +142,8 @@ export const personalProgramDetailsLoaderData: PersonalProgramDetailsFull = {
       leverageMin: getRandomInteger(0, 100),
       leverageMax: getRandomInteger(0, 100),
       accountTypes: [],
+      isForex: false,
+      isSignalsAvailable: false,
       tags: []
     }
   },
