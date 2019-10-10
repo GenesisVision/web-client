@@ -1,4 +1,3 @@
-import moment from "moment";
 import * as React from "react";
 
 const Pie: React.FC<Props> = ({
@@ -55,11 +54,11 @@ export const calcPercent = (
     duration = end - start;
     progress = value - start;
   } else {
-    const dateNow = moment(value);
-    const dateStart = moment(start);
-    const dateEnd = moment(end);
-    duration = dateEnd.diff(moment(dateStart), "seconds");
-    progress = dateNow.diff(dateStart, "seconds");
+    const dateNow = new Date(value).getTime();
+    const dateStart = new Date(start).getTime();
+    const dateEnd = new Date(end).getTime();
+    duration = dateEnd - dateStart;
+    progress = dateNow - dateStart;
   }
 
   if (duration === 0 || progress < 0) return 0;
