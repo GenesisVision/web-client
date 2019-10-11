@@ -11,7 +11,7 @@ const _TransferRate: React.FC<Props> = ({
   useEffect(
     () => {
       rateApi
-        .v10RateByFromByToGet(sourceCurrency, destinationCurrency)
+        .getRate(sourceCurrency, destinationCurrency)
         .then(setRate)
         .catch(() => setRate(0));
     },

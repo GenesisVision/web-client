@@ -28,7 +28,7 @@ export const calculatePrefix: CalculatePrefixFuncType = props => {
 };
 
 export const getCaptcha: GetCaptchaFuncType = login => {
-  return platformApi.v10PlatformRiskcontrolGet(login, { client });
+  return platformApi.getCaptchaModel(login, { client });
 };
 
 export const checkPow: CheckPowFuncType = async props => {

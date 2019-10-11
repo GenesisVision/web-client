@@ -14,7 +14,7 @@ export const confirmEmail = ({
   userId: string;
   code: string;
 }) => (dispatch: MiddlewareDispatch): CancelablePromise<void> =>
-  authApi.v10AuthSignupConfirmPost({ userId, code }).then(response => {
+  authApi.confirmEmail({ userId, code }).then(response => {
     authService.storeToken(response);
     dispatch(authActions.updateTokenAction());
     dispatch(push(HOME_ROUTE));

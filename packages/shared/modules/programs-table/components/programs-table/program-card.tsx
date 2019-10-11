@@ -1,4 +1,4 @@
-import { ProgramDetails } from "gv-api-web";
+import { ProgramDetailsOld } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { useCallback } from "react";
@@ -34,7 +34,7 @@ import {
 } from "shared/utils/formatter";
 
 interface Props extends WithTranslation {
-  program: ProgramDetails;
+  program: ProgramDetailsOld;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
@@ -76,10 +76,7 @@ const _ProgramCard: React.FC<Props> = ({
               color={program.color}
               size="medium"
               tooltip={
-                <LevelTooltip
-                  level={program.level}
-                  canLevelUp={program.rating.canLevelUp}
-                />
+                <LevelTooltip level={program.level} canLevelUp={false} />
               }
             />
           </Link>

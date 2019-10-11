@@ -1,4 +1,4 @@
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFullOld } from "gv-api-web";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
@@ -72,7 +72,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         message={message}
         title={programDescription.title}
         currency={programDescription.currency}
-        availableToInvestBase={programDescription.availableInvestment}
+        availableToInvestBase={programDescription.availableInvestmentBase}
         asset={ASSET.PROGRAM}
         open={isOpenUnAuthInvestPopup}
         onClose={setIsCloseUnAuthInvestPopup}
@@ -107,9 +107,9 @@ interface DispatchProps {
 
 interface OwnProps {
   isAuthenticated: boolean;
-  canCloseProgram: boolean;
+  canCloseAsset: boolean;
   isOwnProgram: boolean;
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
   levelsParameters: LevelsParamsInfo;
 }
 

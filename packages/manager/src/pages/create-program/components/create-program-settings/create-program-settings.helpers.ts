@@ -78,7 +78,7 @@ export const createProgramMapPropsToValues = ({
   [CREATE_PROGRAM_FIELDS.successFee]: undefined,
   [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: false,
   [CREATE_PROGRAM_FIELDS.investmentLimit]: undefined,
-  [CREATE_PROGRAM_FIELDS.isSignalProgram]: broker.isSignalsAvailable,
+  [CREATE_PROGRAM_FIELDS.isSignalProgram]: broker.isSignalsAvailable, // TODO move back to server
   [CREATE_PROGRAM_FIELDS.signalSuccessFee]: broker.isSignalsAvailable
     ? undefined
     : 0,

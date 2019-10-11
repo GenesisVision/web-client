@@ -15,15 +15,12 @@ export const updateProfileAvatar = (newImage: IImageValue) => (
   const authorization = authService.getAuthArg();
   let promise;
   if (!newImage.src && !newImage.image) {
-    promise = profileApi.v10ProfileAvatarRemovePost(authorization);
+    promise = profileApi.removeAvatar(authorization);
   } else {
     promise = filesService
       .uploadFile(newImage.image!.cropped, authorization)
       .then(logoId => {
-        return profileApi.v10ProfileAvatarUpdateByFileIdPost(
-          logoId,
-          authorization
-        );
+        return profileApi.updateAvatar(logoId, authorization);
       });
   }
 
@@ -44,7 +41,7 @@ export const updateProfileAvatar = (newImage: IImageValue) => (
 
 export const logoutFromDevices = (dispatch: Dispatch) =>
   authApi
-    .v10AuthTokenDevicesLogoutPost(authService.getAuthArg())
+    .logoutFromAnotherDevices(authService.getAuthArg())
     .then(response => {
       authService.storeToken(response);
       dispatch(authActions.updateTokenAction());

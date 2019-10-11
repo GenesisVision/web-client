@@ -48,22 +48,20 @@ export const getAssetChart = (
 
   if (assetType === ASSETS_TYPES.Program) {
     //TODO удалить if, отрефакторить
-    programsApi
-      .v10ProgramsByIdChartsProfitGet(assetId, chartFilter)
-      .then(data => {
-        dispatch(
-          actions.dashboardChartAction({
-            type: assetType,
-            id: assetId,
-            title: assetTitle,
-            currency: data.programCurrency,
-            pnLChart: data.pnLChart,
-            equityChart: data.equityChart
-          })
-        );
-      });
+    programsApi.getProgramProfitChart(assetId, chartFilter).then(data => {
+      dispatch(
+        actions.dashboardChartAction({
+          type: assetType,
+          id: assetId,
+          title: assetTitle,
+          currency: data.programCurrency,
+          pnLChart: [],
+          equityChart: data.equityChart
+        })
+      );
+    });
   } else {
-    fundsApi.v10FundsByIdChartsProfitGet(assetId, chartFilter).then(data => {
+    fundsApi.getFundProfitChart(assetId, chartFilter).then(data => {
       dispatch(
         actions.dashboardChartAction({
           type: assetType,
@@ -104,8 +102,8 @@ export const getAssetsCount = (): Promise<{
   const authorization = authService.getAuthArg();
   const filtering = { take: 0 };
   return Promise.all([
-    managerApi.v10ManagerProgramsGet(authorization, filtering),
-    managerApi.v10ManagerFundsGet(authorization, filtering)
+    managerApi.getManagerPrograms(authorization, filtering),
+    managerApi.getManagerFunds(authorization, filtering)
   ]).then(([programsData, fundsData]) => ({
     programsCount: programsData.total,
     fundsCount: fundsData.total

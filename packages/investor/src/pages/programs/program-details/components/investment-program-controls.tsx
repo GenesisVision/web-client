@@ -1,4 +1,4 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -116,7 +116,7 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
 }
 
 interface Props extends OwnProps, DispatchProps {}

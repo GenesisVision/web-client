@@ -1,6 +1,6 @@
 import "shared/components/details/details.scss";
 
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -43,13 +43,13 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <div className="details__divider" />
       <DetailsInvestment
         fees={{
-          successFee: description.successFee,
+          successFee: description.successFeeCurrent,
           successFeePersonal:
             description.personalProgramDetails &&
             description.personalProgramDetails.successFeePersonal,
           successFeeCurrent: description.successFeeCurrent,
           successFeeSelected: description.successFeeSelected,
-          entryFee: description.entryFee,
+          entryFee: description.successFeeCurrent,
           entryFeeCurrent: description.entryFeeCurrent,
           entryFeeSelected: description.entryFeeSelected
         }}
@@ -88,11 +88,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
 interface Props {
   descriptionSection: IDescriptionSection;
-  data: ProgramDetailsFull;
+  data: ProgramDetailsFullOld;
 }
 
 const ProgramDetailsContainer = compose<
-  React.ComponentType<Props & WithBlurLoaderProps<ProgramDetailsFull>>
+  React.ComponentType<Props & WithBlurLoaderProps<ProgramDetailsFullOld>>
 >(
   withBlurLoader,
   React.memo

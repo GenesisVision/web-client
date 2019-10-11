@@ -1,4 +1,4 @@
-import { ProgramsList } from "gv-api-web";
+import { ProgramsListOld } from "gv-api-web";
 import { SET_FAVORITE_PROGRAM } from "shared/modules/favorite-asset/actions/favorite-program.actions";
 import {
   FAILURE_SUFFIX,
@@ -8,10 +8,10 @@ import {
 import { FavoriteActionType } from "shared/utils/types";
 
 const updateFavoriteLocal = (
-  state: IApiState<ProgramsList>,
+  state: IApiState<ProgramsListOld>,
   id: string,
   isFavorite: boolean
-): IApiState<ProgramsList> => {
+): IApiState<ProgramsListOld> => {
   if (!state.data) return state;
   return {
     ...state,
@@ -33,9 +33,9 @@ const updateFavoriteLocal = (
 };
 
 const favoritesReducer = (
-  state: IApiState<ProgramsList>,
+  state: IApiState<ProgramsListOld>,
   action: FavoriteActionType
-): IApiState<ProgramsList> => {
+): IApiState<ProgramsListOld> => {
   switch (action.type) {
     case `${SET_FAVORITE_PROGRAM}_${REQUEST_SUFFIX}`:
       return updateFavoriteLocal(state, action.meta.id, action.meta.isFavorite);

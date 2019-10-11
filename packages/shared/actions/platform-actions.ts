@@ -6,7 +6,7 @@ export const PLATFORM_SETTINGS = "PLATFORM_SETTINGS";
 
 const fetchPlatformSettingsAction: ApiAction<PlatformInfo> = {
   type: PLATFORM_SETTINGS,
-  payload: platformApi.v10PlatformInfoGet()
+  payload: platformApi.getPlatformStatus()
 };
 
 const platformActions = {

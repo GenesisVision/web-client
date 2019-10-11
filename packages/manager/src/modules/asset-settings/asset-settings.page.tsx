@@ -41,9 +41,9 @@ const _AssetsEditPage: React.FC<Props> = ({
         tradesDelay: description!.tradesDelay,
         exitFee: description!.exitFee,
         entryFee: description!.entryFee,
-        successFee: description!.successFee,
+        successFee: description!.successFeeCurrent,
         title: description!.title,
-        stopOutLevel: description!.stopOutLevel,
+        stopOutLevel: description!.stopOutLevelCurrent, // TODO current != selected ? current (selected) : current
         description: description!.description,
         logo: { src: description!.logo }
       };

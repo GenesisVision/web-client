@@ -47,12 +47,12 @@ const getCreateMethod = (
   switch (asset) {
     case ASSET.PROGRAM:
       return (request: NewAssetRequest) =>
-        managerApi.v10ManagerProgramsCreatePost(authService.getAuthArg(), {
+        managerApi.createProgram(authService.getAuthArg(), {
           request: request as NewProgramRequest
         });
     case ASSET.FUND:
       return (request: NewAssetRequest) =>
-        managerApi.v10ManagerFundsCreatePost(authService.getAuthArg(), {
+        managerApi.createFund(authService.getAuthArg(), {
           request: request as NewFundRequest
         });
   }

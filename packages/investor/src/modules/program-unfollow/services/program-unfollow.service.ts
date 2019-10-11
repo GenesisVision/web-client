@@ -13,7 +13,7 @@ export const detachToSignal = (
   const authorization = authService.getAuthArg();
   const opts = { model };
   return signalApi
-    .v10SignalDetachByIdPost(programId, authorization, opts)
+    .detachSlaveFromMaster(programId, authorization, opts)
     .then(() => {
       onSuccess();
       dispatch(

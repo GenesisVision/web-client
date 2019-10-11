@@ -3,7 +3,11 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { lazy, number, object } from "yup";
 
-import { DEPOSIT_FORM_FIELDS, IDepositFormValues, IDepositOwnProps } from "./deposit-form";
+import {
+  DEPOSIT_FORM_FIELDS,
+  IDepositFormValues,
+  IDepositOwnProps
+} from "./deposit-form";
 
 export const managerSchema = ({
   info,
@@ -18,17 +22,20 @@ export const managerSchema = ({
         .min(
           +formatCurrencyValue(
             convertToCurrency(
-              info.minInvestmentAmount,
+              info.programCurrencyMinInvestment,
               values[DEPOSIT_FORM_FIELDS.rate]
             ),
             values[DEPOSIT_FORM_FIELDS.walletCurrency]
           ),
           t("deposit-asset.validation.amount-min-value", {
-            min: formatCurrencyValue(info.minInvestmentAmount, currency),
+            min: formatCurrencyValue(
+              info.programCurrencyMinInvestment,
+              currency
+            ),
             currency,
             walletMin: formatCurrencyValue(
               convertToCurrency(
-                info.minInvestmentAmount,
+                info.programCurrencyMinInvestment,
                 values[DEPOSIT_FORM_FIELDS.rate]
               ),
               values[DEPOSIT_FORM_FIELDS.walletCurrency]
@@ -56,17 +63,20 @@ export const investorSchema = ({
         .min(
           +formatCurrencyValue(
             convertToCurrency(
-              info.minInvestmentAmount,
+              info.programCurrencyMinInvestment,
               values[DEPOSIT_FORM_FIELDS.rate]
             ),
             values[DEPOSIT_FORM_FIELDS.walletCurrency]
           ),
           t("deposit-asset.validation.amount-min-value", {
-            min: formatCurrencyValue(info.minInvestmentAmount, currency),
+            min: formatCurrencyValue(
+              info.programCurrencyMinInvestment,
+              currency
+            ),
             currency,
             walletMin: formatCurrencyValue(
               convertToCurrency(
-                info.minInvestmentAmount,
+                info.programCurrencyMinInvestment,
                 values[DEPOSIT_FORM_FIELDS.rate]
               ),
               values[DEPOSIT_FORM_FIELDS.walletCurrency]

@@ -30,12 +30,9 @@ export const withdrawFund = (id: string, onClose: () => void) => (
   value: FundWithdraw
 ): any => (dispatch: Dispatch) => {
   return investorApi
-    .v10InvestorFundsByIdWithdrawByPercentPost(
-      id,
-      value.percent,
-      authService.getAuthArg(),
-      { currency: value.currency }
-    )
+    .withdrawFromFund(id, value.percent, authService.getAuthArg(), {
+      currency: value.currency
+    })
     .then(response => {
       onClose();
       dispatch(

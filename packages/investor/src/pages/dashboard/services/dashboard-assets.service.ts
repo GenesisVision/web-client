@@ -1,7 +1,7 @@
 import {
   CancelablePromise,
   FundsList,
-  ProgramsList,
+  ProgramsListOld,
   SignalsList
 } from "gv-api-web";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
@@ -19,7 +19,7 @@ export const getDashboardFunds = (
 
 export const getDashboardPrograms = (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramsList>> => {
+): ActionType<CancelablePromise<ProgramsListOld>> => {
   const authorization = authService.getAuthArg();
   return actions.fetchDashboardProgramsAction(authorization, filters);
 };

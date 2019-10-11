@@ -1,4 +1,4 @@
-import { LevelUpSummary, ProgramsList } from "gv-api-web";
+import { LevelUpSummary, ProgramsListOld } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
@@ -15,19 +15,19 @@ import {
   SELF_PROGRAMS_RATING
 } from "../actions/programs-rating.actions";
 
-export const allProgramsSelector = apiSelector<ProgramsList>(
+export const allProgramsSelector = apiSelector<ProgramsListOld>(
   state => state.programsRating.programs
 );
 
-const allProgramsRatingReducer = apiReducerFactory<ProgramsList>({
+const allProgramsRatingReducer = apiReducerFactory<ProgramsListOld>({
   apiType: PROGRAMS_RATING
 });
 
-export const selfProgramsSelector = apiSelector<ProgramsList>(
+export const selfProgramsSelector = apiSelector<ProgramsListOld>(
   state => state.programsRating.selfPrograms
 );
 
-const selfProgramsRatingReducer = apiReducerFactory<ProgramsList>({
+const selfProgramsRatingReducer = apiReducerFactory<ProgramsListOld>({
   apiType: SELF_PROGRAMS_RATING
 });
 
@@ -46,8 +46,8 @@ const levelupSummaryReducer = apiReducerFactory<LevelUpSummary>({
 });
 
 export type ProgramsRatingState = Readonly<{
-  programs: IApiState<ProgramsList>;
-  selfPrograms: IApiState<ProgramsList>;
+  programs: IApiState<ProgramsListOld>;
+  selfPrograms: IApiState<ProgramsListOld>;
   levelupSummary: IApiState<LevelUpSummary>;
 }>;
 

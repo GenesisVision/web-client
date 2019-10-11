@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ProgramDetails } from "gv-api-web";
+import { ProgramDetailsOld } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -23,7 +23,7 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 interface IProgramTableRowShortProps {
   title: string;
   showRating?: boolean;
-  program: ProgramDetails;
+  program: ProgramDetailsOld;
   isAuthenticated?: boolean;
   toggleFavorite?: TableToggleFavoriteHandlerType;
   onExpandClick(): void;
@@ -55,8 +55,7 @@ const ProgramTableRowShort: React.FC<
     chart,
     personalDetails,
     id,
-    tags,
-    rating
+    tags
   } = program;
   const stopPropagationEvent = (event: React.MouseEvent) =>
     event.stopPropagation();
@@ -64,11 +63,11 @@ const ProgramTableRowShort: React.FC<
   return (
     <TableRow
       className={classNames({
-        "table__row--pretender": rating.canLevelUp
+        "table__row--pretender": false
       })}
       onClick={onExpandClick}
     >
-      {showRating && <TableCell>{rating.rating}</TableCell>}
+      {showRating && <TableCell>{}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link
@@ -84,9 +83,7 @@ const ProgramTableRowShort: React.FC<
               levelProgress={levelProgress}
               alt={program.title}
               color={color}
-              tooltip={
-                <LevelTooltip level={level} canLevelUp={rating.canLevelUp} />
-              }
+              tooltip={<LevelTooltip level={level} canLevelUp={false} />}
             />
           </Link>
           <div className="programs-table__cell--title">

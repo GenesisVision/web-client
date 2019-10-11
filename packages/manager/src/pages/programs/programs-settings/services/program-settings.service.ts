@@ -21,7 +21,7 @@ export const cancelChangeBrokerMethod = (
   programId: string
 ): ManagerThunk<CancelablePromise<void>> => dispatch =>
   managerApi
-    .v10ManagerProgramsBrokerChangeCancelPost(authService.getAuthArg(), {
+    .cancelChangeBroker(authService.getAuthArg(), {
       programId
     })
     .then(() => {
@@ -43,7 +43,7 @@ export const changeBrokerMethod = (
   setSubmitting: SetSubmittingType
 ): ManagerThunk<CancelablePromise<void>> => dispatch =>
   managerApi
-    .v10ManagerProgramsBrokerChangePost(authService.getAuthArg(), {
+    .changeBroker(authService.getAuthArg(), {
       request: { programId, newBrokerAccountTypeId, newLeverage }
     })
     .then(() => {
