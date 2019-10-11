@@ -25,7 +25,7 @@ import {
   GetItemsFuncActionType,
   UpdateFilterFunc
 } from "shared/components/table/components/table.types";
-import { FUND } from "shared/constants/constants";
+import { FUND, FUND_CURRENCY } from "shared/constants/constants";
 import { FUND_DETAILS_FOLDER_ROUTE } from "shared/routes/funds.routes";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
@@ -77,9 +77,7 @@ const _DashboardFunds: React.FC<Props> = ({
       )}
       renderHeader={(column: Column) => (
         <span
-          className={`funds-table__cell dashboard-funds__cell dashboard-funds__cell--${
-            column.name
-          }`}
+          className={`funds-table__cell dashboard-funds__cell dashboard-funds__cell--${column.name}`}
         >
           {t(`${role}.dashboard-page.funds-header.${column.name}`)}
         </span>
@@ -117,7 +115,8 @@ const _DashboardFunds: React.FC<Props> = ({
             </div>
           </TableCell>
           <TableCell className="funds-table__cell funds-table__cell--amount">
-            {formatCurrencyValue(fund.statistic.balanceGVT.amount, "GVT")} GVT
+            {formatCurrencyValue(fund.statistic.balance.amount, FUND_CURRENCY)}{" "}
+            {FUND_CURRENCY}
           </TableCell>
           <TableCell className="funds-table__cell">
             <FundAssetContainer
@@ -129,8 +128,11 @@ const _DashboardFunds: React.FC<Props> = ({
           </TableCell>
           <TableCell className="funds-table__cell funds-table__cell--value">
             <NumberFormat
-              value={formatCurrencyValue(fund.personalDetails.value, "GVT")}
-              suffix=" GVT"
+              value={formatCurrencyValue(
+                fund.personalDetails.value,
+                FUND_CURRENCY
+              )}
+              suffix={` ${FUND_CURRENCY}`}
               displayType="text"
             />
           </TableCell>
