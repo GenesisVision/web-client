@@ -2,19 +2,13 @@ import "shared/components/details/details.scss";
 
 import React, { useEffect } from "react";
 import { connect, ResolveThunks, useSelector } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
+import { ActionCreatorsMapObject, bindActionCreators, compose, Dispatch } from "redux";
 import {
   dispatchPlatformLevelsParameters,
   dispatchProgramDescription
 } from "shared/components/programs/program-details/services/program-details.service";
 
 import ProgramDetailsContainer from "./program-details.contaner";
-import { programDetailsLoaderData } from "./program-details.loader-data";
 import { IDescriptionSection } from "./program-details.types";
 import { programDescriptionSelector } from "./reducers/description.reducer";
 
@@ -31,7 +25,6 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   }, [description]);
   return (
     <ProgramDetailsContainer
-      loaderData={programDetailsLoaderData}
       descriptionSection={descriptionSection}
       data={description!}
     />
