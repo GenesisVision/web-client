@@ -34,7 +34,7 @@ import {
   GetFundsType
 } from "../../services/funds-table.service";
 import FundsTable from "./funds-table";
-import { CURRENCY_FILTER_NAME } from "./funds-table.constants";
+import { FUND_CURRENCY_FILTER_NAME } from "./funds-table.constants";
 
 class _FundsTableContainer extends React.PureComponent<Props> {
   componentDidMount() {
@@ -70,9 +70,9 @@ class _FundsTableContainer extends React.PureComponent<Props> {
         renderMappings={(updateFilter, filtering) => (
           <>
             <SelectFilter
-              name={CURRENCY_FILTER_NAME}
+              name={FUND_CURRENCY_FILTER_NAME}
               label={t("filters.currency.show-in")}
-              value={filtering && filtering[CURRENCY_FILTER_NAME]}
+              value={filtering && filtering[FUND_CURRENCY_FILTER_NAME]}
               values={currencies.map(x => ({ value: x.name, label: x.name }))}
               onChange={updateFilter}
             />
@@ -139,8 +139,8 @@ const mergeProps = (
   };
   let filters = dispatchProps.service.getFundsFilters() as any;
 
-  if (!filters.filtering[CURRENCY_FILTER_NAME]) {
-    filters.filtering[CURRENCY_FILTER_NAME] = stateProps.currency;
+  if (!filters.filtering[FUND_CURRENCY_FILTER_NAME]) {
+    filters.filtering[FUND_CURRENCY_FILTER_NAME] = stateProps.currency;
   }
   return {
     ...stateProps,
