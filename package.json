@@ -17,7 +17,6 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "lodash-es": "^4.17.11",
-    "moment": "^2.22.1",
     "date-fns": "^2.4.1",
     "node-sass": "^4.9.3",
     "prop-types": "^15.6.2",
