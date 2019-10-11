@@ -14,14 +14,12 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   defaultImageClassName
 }) => {
   const fullUrl = useUrl(url);
+  const hasUrl = fullUrl.length !== 0;
   const [isError, setIsError, setIsNotError] = useIsOpen();
-  useEffect(
-    () => {
-      if (url) setIsNotError();
-      else setIsError();
-    },
-    [setIsError, setIsNotError, url]
-  );
+  useEffect(() => {
+    if (url) setIsNotError();
+    else setIsError();
+  }, [setIsError, setIsNotError, url]);
   const handleError = useCallback(
     (e: any) => {
       e.target.onerror = null;
@@ -31,7 +29,7 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   );
   const currentSrc = isError ? defaultImage : fullUrl;
   const className = isError ? defaultImageClassName : "";
-  return isError && DefaultImageComponent ? (
+  return (isError || !hasUrl) && DefaultImageComponent ? (
     <DefaultImageComponent color={color} imageClassName={className} />
   ) : (
     <img
