@@ -26,14 +26,14 @@ import {
   ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
-import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import {
   fundAssetsSelector,
   platformCurrenciesSelector
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { NextPageWithReduxContext } from "shared/utils/types";
+import { CurrencyEnum, NextPageWithReduxContext } from "shared/utils/types";
 
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import FundsTable from "./funds-table";
@@ -73,6 +73,7 @@ export const getFiltersFromContext = ({
 };
 
 const _FundsTableSSR: React.FC<Props> = ({
+  currency,
   currencies,
   title,
   showSwitchView,
@@ -83,7 +84,9 @@ const _FundsTableSSR: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const [filtering, sorting, page, update] = useRouteFilters(DEFAULT_FILTERS);
-
+  if (!filtering[CURRENCY_MAP_NAME]) {
+    filtering[CURRENCY_MAP_NAME] = currency;
+  }
   if (!data) return null;
   const totalPages = calculateTotalPages(data.total, DEFAULT_ITEMS_ON_PAGE);
 
@@ -102,7 +105,7 @@ const _FundsTableSSR: React.FC<Props> = ({
             name={CURRENCY_MAP_NAME}
             label={t("filters.currency.show-in")}
             value={filtering && filtering[CURRENCY_MAP_NAME]}
-            values={composeCurrencyMap(currencies)}
+            values={currencies.map(x => ({ value: x.name, label: x.name }))}
             onChange={updateFilter}
           />
           <DateRangeFilter
@@ -138,6 +141,7 @@ const _FundsTableSSR: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: RootState): StateProps => ({
+  currency: currencySelector(state),
   currencies: platformCurrenciesSelector(state),
   data: fundsDataSelector(state),
   isAuthenticated: isAuthenticatedSelector(state),
@@ -159,7 +163,6 @@ const FundsTableSSR = compose<React.FC<OwnProps>>(
     mapDispatchToProps
   )
 )(_FundsTableSSR);
-
 export default FundsTableSSR;
 
 interface OwnProps {
@@ -168,6 +171,7 @@ interface OwnProps {
 }
 
 interface StateProps {
+  currency: CurrencyEnum;
   currencies: PlatformCurrency[];
   isAuthenticated: boolean;
   data?: FundsList;
