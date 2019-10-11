@@ -4,7 +4,7 @@ import "shared/modules/asset-settings/asset-settings.scss";
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
   bindActionCreators,
@@ -14,16 +14,16 @@ import {
 import BackButtonBody from "shared/components/back-button/back-button-body";
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
-import { DispatchDescriptionType } from "shared/utils/types";
 
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";
 
 const _AssetsEditPage: React.FC<Props> = ({
+  dispatchDescription,
   asset,
   settingsBlocks,
   redirectToAsset,
-  service: { dispatchDescription, editAsset },
+  service: { editAsset },
   description
 }) => {
   const [t] = useTranslation();
@@ -83,13 +83,9 @@ const _AssetsEditPage: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  { dispatchDescription }: Props
-): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      dispatchDescription,
       editAsset
     },
     dispatch
@@ -100,7 +96,7 @@ interface OwnProps {
   redirectToAsset: (id: string) => void;
   asset: ASSET;
   description?: AssetDescriptionType;
-  dispatchDescription: DispatchDescriptionType;
+  dispatchDescription: () => void;
   settingsBlocks: (
     editAsset: TUpdateProgramFunc,
     closeAsset: () => void
@@ -108,7 +104,6 @@ interface OwnProps {
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {
-  dispatchDescription: DispatchDescriptionType;
   editAsset: typeof editAsset;
 }
 interface DispatchProps {
