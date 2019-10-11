@@ -8,15 +8,12 @@ const _TransferRate: React.FC<Props> = ({
   children
 }) => {
   const [rate, setRate] = useState<number>(0);
-  useEffect(
-    () => {
-      rateApi
-        .v10RateByFromByToGet(sourceCurrency, destinationCurrency)
-        .then(setRate)
-        .catch(() => setRate(0));
-    },
-    [sourceCurrency, destinationCurrency]
-  );
+  useEffect(() => {
+    rateApi
+      .getRate(sourceCurrency, destinationCurrency)
+      .then(setRate)
+      .catch(() => setRate(0));
+  }, [sourceCurrency, destinationCurrency]);
 
   return rate && sourceCurrency !== destinationCurrency
     ? children({ rate })

@@ -1,5 +1,4 @@
 import "shared/components/deposit-details/deposit-details.scss";
-
 import "./create-program-settings.scss";
 
 import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
@@ -9,11 +8,16 @@ import FeesSettings from "components/create-asset/fields/fees-settings";
 import InvestmentLimitField from "components/create-asset/fields/investment-limit-field";
 import StopOutField from "components/create-asset/fields/stop-out-field";
 import { InjectedFormikProps, withFormik } from "formik";
-import { Broker, NewProgramRequestTradesDelayEnum, ProgramsInfo } from "gv-api-web";
+import {
+  Broker,
+  NewProgramRequestTradesDelayEnum,
+  ProgramsInfo
+} from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
@@ -58,8 +62,8 @@ const _CreateProgramSettings: React.FC<Props> = ({
   const validateAndSubmit = useCreateAssetValidate({ handleSubmit, isValid });
   return (
     <form onSubmit={validateAndSubmit}>
-      <CreateAssetSection
-        title={t("manager.create-program-page.settings.main-settings")}
+      <SettingsBlock
+        label={t("manager.create-program-page.settings.main-settings")}
         blockNumber={"01"}
       >
         <DescriptionBlock
@@ -105,12 +109,12 @@ const _CreateProgramSettings: React.FC<Props> = ({
           currency={currency as CurrencyEnum}
         />
         <SignalProgram
-          condition={broker.isSignalsAvailable}
+          condition={accountType.isSignalsAvailable}
           name={CREATE_PROGRAM_FIELDS.isSignalProgram}
         />
-      </CreateAssetSection>
-      <CreateAssetSection
-        title={t("manager.create-program-page.settings.fees-settings")}
+      </SettingsBlock>
+      <SettingsBlock
+        label={t("manager.create-program-page.settings.fees-settings")}
         blockNumber={"02"}
       >
         <FeesSettings
@@ -138,7 +142,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
             successFeeFieldName={CREATE_PROGRAM_FIELDS.signalSuccessFee}
           />
         )}
-      </CreateAssetSection>
+      </SettingsBlock>
       <DepositDetailsBlock
         availableName={CREATE_PROGRAM_FIELDS.available}
         rateName={CREATE_PROGRAM_FIELDS.rate}

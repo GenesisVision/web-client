@@ -24,36 +24,35 @@ const _SignalingEdit: React.FC<Props> = ({
   return (
     <SettingsBlock
       label={t("manager.program-settings.signaling-program.title")}
-      content={
-        <form id="signaling-edit-form" onSubmit={handleSubmit}>
-          <div className="program-settings__signaling-edit-form-title-block">
-            {!isSignalProgram && (
-              <GVSwitch
-                touched={false}
-                className="notification-setting__switch"
-                name="isSignal"
-                value={isSignal}
-                color="primary"
-                onChange={changeIsSignal}
-              />
-            )}
-          </div>
-          {isSignal && (
-            <SignalsFeeFormPartial
-              volumeFeeFieldName={FORM_FIELDS.volumeFee}
-              successFeeFieldName={FORM_FIELDS.successFee}
+    >
+      <form id="signaling-edit-form" onSubmit={handleSubmit}>
+        <div className="program-settings__signaling-edit-form-title-block">
+          {!isSignalProgram && (
+            <GVSwitch
+              touched={false}
+              className="notification-setting__switch"
+              name={name}
+              value={isSignal}
+              color="primary"
+              onChange={changeIsSignal}
             />
           )}
-          <GVButton
-            type="submit"
-            id="programMakeSignalSubmit"
-            disabled={!dirty || isSubmitting || !isSignal || !isValid}
-          >
-            {"Save"}
-          </GVButton>
-        </form>
-      }
-    />
+        </div>
+        {isSignal && (
+          <SignalsFeeFormPartial
+            volumeFeeFieldName={FORM_FIELDS.volumeFee}
+            successFeeFieldName={FORM_FIELDS.successFee}
+          />
+        )}
+        <GVButton
+          type="submit"
+          id="programMakeSignalSubmit"
+          disabled={!dirty || isSubmitting || !isSignal || !isValid}
+        >
+          {"Save"}
+        </GVButton>
+      </form>
+    </SettingsBlock>
   );
 };
 

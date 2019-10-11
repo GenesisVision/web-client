@@ -16,7 +16,7 @@ export const updateAssets = ({
 }) => (dispatch: MiddlewareDispatch): CancelablePromise<void> => {
   const authorization = authService.getAuthArg();
   return managerApi
-    .v10ManagerFundsByIdAssetsUpdatePost(id, authorization, {
+    .updateFundAssets(id, authorization, {
       assets
     })
     .then(() => {

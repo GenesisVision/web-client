@@ -57,7 +57,7 @@ export const dispatchFundId = (id: string) => async (
 export const fetchFundStructure = (
   fundId: string
 ): Promise<FundAssetsListInfo> => {
-  return fundsApi.v10FundsByIdAssetsGet(fundId);
+  return fundsApi.getFundAssets(fundId);
 };
 export const getDashboardHistoryDetailsCounts = (fundId: string) => (
   dispatch: Dispatch,

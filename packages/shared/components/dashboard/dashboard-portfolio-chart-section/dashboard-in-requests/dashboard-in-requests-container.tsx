@@ -2,14 +2,14 @@ import "./dashboard-in-requests.scss";
 
 import { ProgramRequests } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover, {
@@ -18,8 +18,8 @@ import Popover, {
 } from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import useAnchor from "shared/hooks/anchor.hook";
+import useRole from "shared/hooks/use-role.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { AuthRootState } from "shared/utils/types";
 
@@ -27,11 +27,11 @@ import { CancelRequestType } from "../../dashboard.constants";
 import DashboardRequest from "./dashboard-request";
 
 const _DashboardInRequestsContainer: React.FC<Props> = ({
-  role,
   inRequests,
-  service,
-  t
+  service
 }) => {
+  const [t] = useTranslation();
+  const role = useRole();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
     <div className="dashboard-request">
@@ -84,11 +84,7 @@ const mapDispatchToProps = (
   )
 });
 
-interface Props
-  extends OwnProps,
-    DispatchProps,
-    WithTranslation,
-    WithRoleProps {}
+interface Props extends OwnProps, DispatchProps {}
 
 interface OwnProps {
   cancelRequest: CancelRequestType;
@@ -105,9 +101,7 @@ interface DispatchProps {
 const DashboardInRequestsContainer = compose<
   React.ComponentType<OwnProps & WithLoaderProps>
 >(
-  withRole,
   withLoader,
-  translate(),
   connect<null, DispatchProps, OwnProps, AuthRootState>(
     null,
     mapDispatchToProps

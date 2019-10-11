@@ -1,4 +1,4 @@
-import { FundsList } from "gv-api-web";
+import { FundsListOld } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
@@ -9,10 +9,10 @@ import { FUNDS_TABLE } from "../actions/funds-table.actions";
 import fundsFavoritesReducer from "./funds-table-favorites.reducer";
 
 export type FundsTableState = Readonly<{
-  readonly items: IApiState<FundsList>;
+  readonly items: IApiState<FundsListOld>;
 }>;
 
-export const fundsDataSelector = apiSelector<FundsList>(
+export const fundsDataSelector = apiSelector<FundsListOld>(
   state => state.fundsData.items
 );
 

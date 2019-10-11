@@ -15,18 +15,15 @@ const _SecurityPage: React.FC = () => {
   return (
     <ProfileLayout route={SECURITY}>
       <div className="asset-settings profile__container--padding-top">
-        <SettingsBlock
-          label={t("2fa-page.title")}
-          content={<TwoFactorAuthContainer />}
-        />
-        <SettingsBlock
-          content={
-            <>
-              <PasswordChange />
-              <LogoutButtonContainer />
-            </>
-          }
-        />
+        <SettingsBlock label={t("2fa-page.title")}>
+          <TwoFactorAuthContainer />
+        </SettingsBlock>
+        <SettingsBlock>
+          <div>
+            <PasswordChange />
+            <LogoutButtonContainer />
+          </div>
+        </SettingsBlock>
       </div>
     </ProfileLayout>
   );

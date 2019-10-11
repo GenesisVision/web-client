@@ -4,8 +4,8 @@ import { compose } from "redux";
 import SignalProviderControls from "shared/components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 import {
-  WithBlurLoaderProps,
-  withBlurLoader
+  withBlurLoader,
+  WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 
 import InvestmentProgramControls from "./investment-program-controls";
@@ -16,8 +16,8 @@ const _ProgramControls: React.FC<Props> = ({
   isAuthenticated
 }) => {
   const personalProgramDetails = programDescription.personalProgramDetails;
-  const canCloseProgram =
-    personalProgramDetails && personalProgramDetails.canCloseProgram;
+  const canCloseAsset =
+    personalProgramDetails && personalProgramDetails.canCloseAsset;
   const isOwnProgram =
     personalProgramDetails && personalProgramDetails.isOwnProgram;
 
@@ -25,7 +25,7 @@ const _ProgramControls: React.FC<Props> = ({
     <div className="asset-details-description__controls">
       <InvestmentProgramControls
         programDescription={programDescription}
-        canCloseProgram={canCloseProgram}
+        canCloseAsset={canCloseAsset}
         isOwnProgram={isOwnProgram}
         isAuthenticated={isAuthenticated}
         levelsParameters={levelsParameters}

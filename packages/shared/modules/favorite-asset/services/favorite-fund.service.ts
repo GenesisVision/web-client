@@ -30,11 +30,11 @@ export const toggleFavoriteFundDispatchable: ToggleFavoriteDispatchableType = (
 };
 
 const addFavorite = (id: string, authorization: string) => {
-  return fundsApi.v10FundsByIdFavoriteAddPost(id, authorization);
+  return fundsApi.addToFavorites(id, authorization);
 };
 
 const removeFavorite = (id: string, authorization: string) => {
-  return fundsApi.v10FundsByIdFavoriteRemovePost(id, authorization);
+  return fundsApi.removeFromFavorites(id, authorization);
 };
 
 export const toggleFavoriteFund = (

@@ -6,4 +6,4 @@ import { rateApi } from "./api-client/rate-api";
 export const fetchRate = (
   from: CurrencyEnum,
   to: CurrencyEnum
-): CancelablePromise<number> => rateApi.v10RateByFromByToGet(from, to);
+): CancelablePromise<number> => rateApi.getRate(from, to);

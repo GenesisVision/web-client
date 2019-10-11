@@ -1,4 +1,8 @@
-import { FundsList, InvestmentEventViewModels, ProgramsList } from "gv-api-web";
+import {
+  FundsListOld,
+  InvestmentEventViewModels,
+  ProgramsListOld
+} from "gv-api-web";
 import { combineReducers } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { ITableState } from "shared/components/table/reducers/table.reducer";
@@ -26,8 +30,8 @@ export type ManagerDashboardState = {
   assets: ManagerAssetsState;
   assetChart: Nullable<IDashboardAssetChart>;
   eventsData: ManagerPortfolioEventsState;
-  programs: ITableState<ProgramsList>;
-  funds: ITableState<FundsList>;
+  programs: ITableState<ProgramsListOld>;
+  funds: ITableState<FundsListOld>;
   inRequestsData: ProgramRequestsState;
 };
 

@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { FundsList } from "gv-api-web";
+import { FundsListOld } from "gv-api-web";
 import * as qs from "qs";
 import {
   ComposeFiltersAllType,
@@ -25,8 +25,8 @@ import * as fundsTableActions from "../actions/funds-table.actions";
 import {
   DEFAULT_ITEMS_ON_PAGE,
   FUNDS_TABLE_FILTERS,
-  SORTING_FILTER_VALUE,
-  sortableColumns
+  sortableColumns,
+  SORTING_FILTER_VALUE
 } from "../components/funds-table/funds-table.constants";
 
 export type GetFundsType = () => (dispatch: MiddlewareDispatch) => void;
@@ -40,7 +40,7 @@ export const getFunds: GetFundsType = () => dispatch => {
 
 export type FetchFundsType = (
   filters: ComposeFiltersAllType
-) => Promise<FundsList>;
+) => Promise<FundsListOld>;
 export const fetchFunds: FetchFundsType = filters => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();

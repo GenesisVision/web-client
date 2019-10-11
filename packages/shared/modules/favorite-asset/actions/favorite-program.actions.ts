@@ -8,7 +8,7 @@ export const addFavoriteProgramAction = ({
   authorization
 }: FavoriteActionProps): FavoriteActionType<any> => ({
   type: SET_FAVORITE_PROGRAM,
-  payload: programApi.v10ProgramsByIdFavoriteAddPost(id, authorization),
+  payload: programApi.addToFavorites(id, authorization),
   meta: {
     id,
     isFavorite: true
@@ -20,7 +20,7 @@ export const removeFavoriteProgramAction = ({
   authorization
 }: FavoriteActionProps): FavoriteActionType<any> => ({
   type: SET_FAVORITE_PROGRAM,
-  payload: programApi.v10ProgramsByIdFavoriteRemovePost(id, authorization),
+  payload: programApi.removeFromFavorites(id, authorization),
   meta: {
     id,
     isFavorite: false

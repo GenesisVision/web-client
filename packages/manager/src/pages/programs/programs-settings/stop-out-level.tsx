@@ -18,22 +18,21 @@ const _StopOutLevel: React.FC<Props> = ({
 }) => (
   <SettingsBlock
     label={t("manager.create-program-page.settings.fields.stop-out-level")}
-    content={
-      <form id="edit-form" onSubmit={handleSubmit}>
-        <div className="program-settings__block-wrapper create-program-settings__row">
-          <StopOutField name={FIELDS.stopOutLevel} />
-        </div>
-        <GVButton
-          color="primary"
-          type={"submit"}
-          className="invest-form__submit-button"
-          disabled={!dirty || !isValid || isSubmitting}
-        >
-          {t("manager.program-settings.buttons.save")}
-        </GVButton>
-      </form>
-    }
-  />
+  >
+    <form id="edit-form" onSubmit={handleSubmit}>
+      <div className="program-settings__block-wrapper create-program-settings__row">
+        <StopOutField name={FIELDS.stopOutLevel} />
+      </div>
+      <GVButton
+        color="primary"
+        type={"submit"}
+        className="invest-form__submit-button"
+        disabled={!dirty || !isValid || isSubmitting}
+      >
+        {t("manager.program-settings.buttons.save")}
+      </GVButton>
+    </form>
+  </SettingsBlock>
 );
 
 enum FIELDS {

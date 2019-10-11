@@ -12,14 +12,17 @@ import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { ASSET, ROLE } from "shared/constants/constants";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
+import useRole from "shared/hooks/use-role.hook";
 import { fetchRate } from "shared/services/rate-service";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
-import { investorSchema, managerSchema } from "./deposit-form-validation-schema";
+import {
+  investorSchema,
+  managerSchema
+} from "./deposit-form-validation-schema";
 import { TInvestInfo } from "./deposit.types";
 import { ConvertCurrency } from "./form-fields/convert-currency";
 import { InvestorFees } from "./form-fields/investor-fees";
@@ -37,7 +40,6 @@ const _DepositForm: React.FC<
   InjectedFormikProps<Props, IDepositFormValues>
 > = ({
   t,
-  role,
   wallets,
   asset,
   hasEntryFee,
@@ -52,61 +54,44 @@ const _DepositForm: React.FC<
   setFieldValue,
   setFieldTouched
 }) => {
+  const role = useRole();
   const { walletCurrency, amount = 0 } = values;
   const [rate, setRate] = useState<number>(1);
   const [availableInWallet, setAvailableInWallet] = useState<number>(0);
   const [availableToInvest, setAvailableToInvest] = useState<number>(0);
-  useEffect(
-    () => {
-      fetchRate(walletCurrency, currency).then(setRate);
-    },
-    [currency, walletCurrency]
-  );
-  useEffect(
-    () => {
-      const maxAvailable =
-        (info as ProgramInvestInfo).availableToInvestBase !== undefined
-          ? (info as ProgramInvestInfo).availableToInvestBase
-          : Number.MAX_SAFE_INTEGER;
-      setAvailableToInvest(convertToCurrency(maxAvailable, rate));
-    },
-    [info, rate]
-  );
-  useEffect(
-    () => {
-      const available = wallets.find(
-        ({ currency }) => currency === walletCurrency
-      )!.available;
-      setAvailableInWallet(available);
-      setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, available);
-    },
-    [walletCurrency, wallets]
-  );
-  useEffect(
-    () => {
-      setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, availableToInvest);
-    },
-    [availableToInvest]
-  );
-  useEffect(
-    () => {
-      setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
-    },
-    [rate]
-  );
+  useEffect(() => {
+    fetchRate(walletCurrency, currency).then(setRate);
+  }, [currency, walletCurrency]);
+  useEffect(() => {
+    const maxAvailable =
+      (info as ProgramInvestInfo).availableToInvestBase !== undefined
+        ? (info as ProgramInvestInfo).availableToInvestBase
+        : Number.MAX_SAFE_INTEGER;
+    setAvailableToInvest(convertToCurrency(maxAvailable, rate));
+  }, [info, rate]);
+  useEffect(() => {
+    const available = wallets.find(
+      ({ currency }) => currency === walletCurrency
+    )!.available;
+    setAvailableInWallet(available);
+    setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, available);
+  }, [walletCurrency, wallets]);
+  useEffect(() => {
+    setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, availableToInvest);
+  }, [availableToInvest]);
+  useEffect(() => {
+    setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
+  }, [rate]);
 
-  const setMaxAmount = useCallback(
-    (): void => {
-      const max = formatCurrencyValue(
-        role === ROLE.INVESTOR
-          ? Math.min(availableInWallet, availableToInvest)
-          : availableInWallet,
-        walletCurrency
-      );
-      setFieldValue(DEPOSIT_FORM_FIELDS.amount, max);
-    },
-    [availableInWallet, availableToInvest, walletCurrency]
-  );
+  const setMaxAmount = useCallback((): void => {
+    const max = formatCurrencyValue(
+      role === ROLE.INVESTOR
+        ? Math.min(availableInWallet, availableToInvest)
+        : availableInWallet,
+      walletCurrency
+    );
+    setFieldValue(DEPOSIT_FORM_FIELDS.amount, max);
+  }, [availableInWallet, availableToInvest, walletCurrency]);
 
   const onWalletChange = ({ currency, id }: WalletBaseData) => {
     setFieldValue(DEPOSIT_FORM_FIELDS.walletCurrency, currency);
@@ -172,7 +157,6 @@ const _DepositForm: React.FC<
 };
 
 const DepositForm = compose<React.FC<IDepositOwnProps>>(
-  withRole,
   translate(),
   withFormik<Props, IDepositFormValues>({
     enableReinitialize: true,
@@ -186,7 +170,7 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
       [DEPOSIT_FORM_FIELDS.walletCurrency]: INIT_WALLET_CURRENCY
     }),
     validationSchema: (params: Props) =>
-      params.role === ROLE.MANAGER
+      ROLE_ENV === ROLE.MANAGER
         ? managerSchema(params)
         : investorSchema(params),
     handleSubmit: (values, { props, setSubmitting }) => {
@@ -223,7 +207,7 @@ export interface IDepositOwnProps {
   ) => void;
 }
 
-interface Props extends IDepositOwnProps, WithRoleProps, WithTranslation {}
+interface Props extends IDepositOwnProps, WithTranslation {}
 
 export interface IDepositFormValues {
   [DEPOSIT_FORM_FIELDS.rate]: number;

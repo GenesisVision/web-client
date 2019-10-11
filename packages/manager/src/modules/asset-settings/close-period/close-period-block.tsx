@@ -11,10 +11,9 @@ const _ClosePeriodBlock: React.FC<Props> = ({
   id,
   closePeriod = () => {}
 }) => (
-  <SettingsBlock
-    label={label}
-    content={<ClosePeriod onApply={closePeriod} id={id} />}
-  />
+  <SettingsBlock label={label}>
+    <ClosePeriod onApply={closePeriod} id={id} />
+  </SettingsBlock>
 );
 
 interface Props extends WithTranslation {

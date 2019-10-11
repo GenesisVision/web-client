@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { PlatformCurrency, ProgramTag, ProgramsList } from "gv-api-web";
+import { PlatformCurrency, ProgramsListOld, ProgramTag } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -59,7 +59,7 @@ interface StateProps {
   isAuthenticated: boolean;
   programCurrencies: string[];
   programTags: ProgramTag[];
-  data?: ProgramsList;
+  data?: ProgramsListOld;
 }
 
 interface DispatchProps {

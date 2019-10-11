@@ -1,6 +1,6 @@
 import "shared/components/details/details-description-section/details-description/details-description.scss";
 
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -57,7 +57,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
             limit={programDescription.totalAvailableInvestment}
             currency={programDescription.currency}
             level={programDescription.level}
-            canLevelUp={programDescription.rating.canLevelUp}
+            canLevelUp={false}
             closePopover={clearAnchor}
           />
         </Popover>
@@ -104,7 +104,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
           pathname={PROGRAM_NOTIFICATIONS_FOLDER_ROUTE}
           hasNotifications={personalDetails && personalDetails.hasNotifications}
         />
-        {isOwnProgram && personalDetails && personalDetails.canCloseProgram && (
+        {isOwnProgram && personalDetails && personalDetails.canCloseAsset && (
           <DetailsSettingControl
             title={programDescription.title}
             url={composeProgramSettingsUrl(programDescription.url)}
@@ -117,7 +117,7 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
 };
 
 interface Props {
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
   ChangePasswordTradingAccount?: React.ComponentType<
     IChangePasswordTradingAccountProps
   >;

@@ -1,9 +1,9 @@
 import {
   CancelablePromise,
-  FundsList,
+  FundsListOld,
   InvestmentEventViewModels,
   ManagerAssets,
-  ProgramsList
+  ProgramsListOld
 } from "gv-api-web";
 import { Action } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -47,7 +47,7 @@ export const fetchPortfolioEventsAction = (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<InvestmentEventViewModels>> => ({
   type: DASHBOARD_PORTFOLIO_EVENTS,
-  payload: managerApi.v10ManagerInvestmentsEventsGet(auth, filters)
+  payload: managerApi.getEvents(auth, filters)
 });
 
 export const fetchInRequestsAction = (
@@ -55,9 +55,9 @@ export const fetchInRequestsAction = (
   skip: number,
   take: number,
   assetType?: string
-): ActionType<Promise<any>> => ({
+): ActionType<CancelablePromise<any>> => ({
   type: DASHBOARD_IN_REQUESTS,
-  payload: managerApi.v10ManagerRequestsBySkipByTakeGet(skip, take, auth, {
+  payload: managerApi.getRequests(skip, take, auth, {
     assetType
   })
 });
@@ -65,25 +65,25 @@ export const fetchInRequestsAction = (
 export const fetchDashboardProgramsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<Promise<ProgramsList>> => ({
+): ActionType<CancelablePromise<ProgramsListOld>> => ({
   type: DASHBOARD_PROGRAMS,
-  payload: managerApi.v10ManagerProgramsGet(auth, filters)
+  payload: managerApi.getManagerPrograms(auth, filters)
 });
 
 export const fetchDashboardFundsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<Promise<FundsList>> => ({
+): ActionType<CancelablePromise<FundsListOld>> => ({
   type: DASHBOARD_FUNDS,
-  payload: managerApi.v10ManagerFundsGet(auth, filters)
+  payload: managerApi.getManagerFunds(auth, filters)
 });
 
 export const cancelProgramRequestAction = (
   auth: string,
   id: string
-): ActionType<Promise<any>> => ({
+): ActionType<CancelablePromise<any>> => ({
   type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
-  payload: managerApi.v10ManagerProgramsRequestsByIdCancelPost(id, auth)
+  payload: managerApi.cancelRequest(id, auth)
 });
 
 export type TDashboardChartAction = ActionType<IDashboardAssetChart>;
@@ -96,9 +96,9 @@ export const dashboardChartAction = (
 
 export const fetchAssetsAction = (
   auth: string
-): ActionType<Promise<ManagerAssets>> => ({
+): ActionType<CancelablePromise<ManagerAssets>> => ({
   type: DASHBOARD_ASSETS,
-  payload: managerApi.v10ManagerAssetsGet(auth)
+  payload: managerApi.getManagerAssets(auth)
 });
 
 export type TSetPeriodAction = ActionType<ChartDefaultPeriod>;

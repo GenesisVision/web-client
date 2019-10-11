@@ -1,6 +1,6 @@
 import "shared/modules/programs-table/components/programs-table/programs.scss";
 
-import { ProgramsList } from "gv-api-web";
+import { ProgramsListOld } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Table } from "shared/components/table/components";
@@ -9,7 +9,7 @@ import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/progr
 
 import { SearchTableProps } from "./global-search-result";
 
-const ProgramsTable: React.FC<SearchTableProps<ProgramsList>> = ({
+const ProgramsTable: React.FC<SearchTableProps<ProgramsListOld>> = ({
   data,
   title
 }) => {
@@ -20,9 +20,7 @@ const ProgramsTable: React.FC<SearchTableProps<ProgramsList>> = ({
       items={data.programs}
       renderHeader={column => (
         <span
-          className={`programs-table__cell programs-table__cell--${
-            column.name
-          }`}
+          className={`programs-table__cell programs-table__cell--${column.name}`}
         >
           {t(`programs-page.programs-header.${column.name}`)}
         </span>

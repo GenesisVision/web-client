@@ -1,19 +1,19 @@
 import { SignalSubscription } from "gv-api-web";
-import ProgramFollowContainer from "modules/program-follow/program-follow-container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect, useSelector } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import GVButton from "shared/components/gv-button";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
+import ProgramFollowContainer from "shared/modules/program-follow/program-follow-container";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 

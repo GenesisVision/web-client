@@ -8,7 +8,6 @@ import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
-import { NextPageContext } from "next";
 import React, { useCallback, useEffect, useState } from "react";
 import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
@@ -37,7 +36,6 @@ import {
 import { IProgramSignalFormValues } from "./signaling-edit";
 
 const _ProgramsEditPage: React.FC<Props> = ({
-  ctx,
   service: {
     programEditSignal,
     changeBrokerMethod,
@@ -50,19 +48,16 @@ const _ProgramsEditPage: React.FC<Props> = ({
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
   >(undefined);
-  useEffect(
-    () => {
-      description && getProgramBrokers(description.id).then(setBrokersInfo);
-    },
-    [description]
-  );
+  useEffect(() => {
+    description && getProgramBrokers(description.id).then(setBrokersInfo);
+  }, [description]);
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
       programEditSignal({
         id: description!.id,
         successFee: successFee!,
         volumeFee: volumeFee!
-      }).then(() => dispatchDescription(ctx)),
+      }).then(() => dispatchDescription()),
     [description]
   );
   const changeBroker = useCallback(
@@ -75,29 +70,27 @@ const _ProgramsEditPage: React.FC<Props> = ({
         brokerAccountTypeId,
         leverage,
         setSubmitting
-      ).then(() => dispatchDescription(ctx));
+      ).then(() => dispatchDescription());
     },
     [description]
   );
-  const cancelChangeBroker = useCallback(
-    () => {
-      cancelChangeBrokerMethod(description!.id).then(() =>
-        dispatchDescription()
-      );
-    },
-    [description]
-  );
+  const cancelChangeBroker = useCallback(() => {
+    cancelChangeBrokerMethod(description!.id).then(() => dispatchDescription());
+  }, [description]);
+  const dispatchDescriptionHandle = useCallback(() => {
+    dispatchDescription();
+  }, []);
   return (
     <AssetSettingsPage
       redirectToAsset={redirectToProgram}
       asset={ASSET.PROGRAM}
       description={description as AssetDescriptionType}
-      dispatchDescription={dispatchProgramDescription}
+      dispatchDescription={dispatchDescriptionHandle}
       settingsBlocks={(editProgram: any, applyCloseAsset: any) => (
         <ProgramSettings
           condition={!!description && !!brokersInfo && !!programsInfo}
           programsInfo={programsInfo}
-          closePeriod={dispatchProgramDescription}
+          closePeriod={dispatchDescriptionHandle}
           closeProgram={applyCloseAsset}
           details={description!}
           editProgram={editProgram}
@@ -138,9 +131,7 @@ export type TUpdateProgramFunc = (
   resetForm?: () => void
 ) => void;
 
-interface OwnProps {
-  ctx?: NextPageContext;
-}
+interface OwnProps {}
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   cancelChangeBrokerMethod: typeof cancelChangeBrokerMethod;

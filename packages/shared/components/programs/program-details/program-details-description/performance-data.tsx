@@ -1,4 +1,4 @@
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -12,8 +12,8 @@ import StatisticItemTextLoader from "shared/components/statistic-item/statistic-
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
 import {
-  WithBlurLoaderProps,
-  withBlurLoader
+  withBlurLoader,
+  WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 import filesService from "shared/services/file-service";
 import { getRandomInteger } from "shared/utils/helpers";
@@ -105,7 +105,7 @@ const _PerformanceData: React.FC<Props> = ({
 
 interface Props {
   data: LevelsParamsInfo;
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
 }
 
 export const PerformanceDataLoader: React.FC = () => (

@@ -60,7 +60,7 @@ export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
   fetchEventsAction(id, eventLocation, filters);
 
 export const getProgramBrokers = (id: string) =>
-  brokersApi.v10BrokersByProgramIdGet(id);
+  brokersApi.getBrokersForProgram(id);
 
 export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
   dispatch: Dispatch
@@ -97,8 +97,8 @@ export const getProgramStatistic = (
     maxPointCount: 100
   };
   return Promise.all([
-    programsApi.v10ProgramsByIdChartsProfitGet(programId, chartFilter),
-    programsApi.v10ProgramsByIdChartsBalanceGet(programId, chartFilter)
+    programsApi.getProgramProfitChart(programId, chartFilter),
+    programsApi.getProgramBalanceChart(programId, chartFilter)
   ]).then(([profitChart, balanceChart]) => {
     const statistic = {
       trades: profitChart.trades,
@@ -123,7 +123,7 @@ export const closePeriod = (
 ) => (dispatch: Dispatch): void => {
   const authorization = authService.getAuthArg();
   managerApi
-    .v10ManagerProgramsByIdPeriodClosePost(programId, authorization)
+    .closeCurrentPeriod(programId, authorization)
     .then(() => {
       onSuccess();
       dispatch(
@@ -177,8 +177,8 @@ export const getSubscriptions = (programId: string) => (
 
 export const fetchInvestmentsLevels = (
   currency: string
-): Promise<LevelInfo[]> =>
-  platformApi.v10PlatformLevelsGet({ currency }).then(({ levels }) => levels);
+): CancelablePromise<LevelInfo[]> =>
+  platformApi.getProgramsLevels({ currency }).then(({ levels }) => levels);
 
 export const getProgramHistoryCounts = (id: string) => (
   dispatch: Dispatch,
@@ -249,11 +249,11 @@ export const fetchPortfolioEventsWithoutTable = (
   ) => CancelablePromise<InvestmentEventViewModels>;
   switch (ROLE_ENV) {
     case ROLE.INVESTOR:
-      request = investorApi.v10InvestorInvestmentsEventsGet;
+      request = investorApi.getEvents;
       break;
     case ROLE.MANAGER:
     default:
-      request = managerApi.v10ManagerInvestmentsEventsGet;
+      request = managerApi.getEvents;
       break;
   }
   return request(authorization, { ...filters, eventLocation });
@@ -271,11 +271,11 @@ export const fetchPortfolioEvents = (
   ) => CancelablePromise<InvestmentEventViewModels>;
   switch (ROLE_ENV) {
     case ROLE.INVESTOR:
-      request = investorApi.v10InvestorInvestmentsEventsGet;
+      request = investorApi.getEvents;
       break;
     case ROLE.MANAGER:
     default:
-      request = managerApi.v10ManagerInvestmentsEventsGet;
+      request = managerApi.getEvents;
       break;
   }
   return request(authorization, { ...filters, eventLocation }).then(

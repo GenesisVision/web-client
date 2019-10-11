@@ -1,4 +1,4 @@
-import { ProgramDetails } from "gv-api-web";
+import { ProgramDetailsOld } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import NumberFormat from "react-number-format";
@@ -34,7 +34,7 @@ import {
 } from "shared/utils/formatter";
 
 interface Props {
-  program: ProgramDetails;
+  program: ProgramDetailsOld;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
@@ -71,10 +71,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
               color={program.color}
               size="medium"
               tooltip={
-                <LevelTooltip
-                  level={program.level}
-                  canLevelUp={program.rating.canLevelUp}
-                />
+                <LevelTooltip level={program.level} canLevelUp={false} />
               }
             />
           </Link>

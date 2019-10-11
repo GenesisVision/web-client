@@ -1,8 +1,7 @@
 import "./dashboard-assets.scss";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { compose } from "redux";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import GVTabs from "shared/components/gv-tabs";
@@ -10,14 +9,13 @@ import GVTab from "shared/components/gv-tabs/gv-tab";
 import Surface from "shared/components/surface/surface";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { GetItemsFuncActionType } from "shared/components/table/components/table.types";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 import useTab from "shared/hooks/tab.hook";
+import useRole from "shared/hooks/use-role.hook";
 
 const _DashboardAssets: React.FC<Props> = ({
   counts,
   getAssetsCounts,
   clearAssets,
-  role,
   title,
   getDashboardPrograms,
   getDashboardFunds,
@@ -29,13 +27,11 @@ const _DashboardAssets: React.FC<Props> = ({
 }) => {
   const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
   const [t] = useTranslation();
-  useEffect(
-    () => {
-      getAssetsCounts();
-      return clearAssets;
-    },
-    [clearAssets, getAssetsCounts]
-  );
+  const role = useRole();
+  useEffect(() => {
+    getAssetsCounts();
+    return clearAssets;
+  }, [clearAssets, getAssetsCounts]);
   const handleTabChange = useCallback(
     (e: any, propTab: string) => {
       if (propTab === tab) return;
@@ -86,9 +82,7 @@ const _DashboardAssets: React.FC<Props> = ({
   );
 };
 
-interface Props extends WithRoleProps, OwnProps {}
-
-interface OwnProps {
+interface Props {
   clearAssets: () => void;
   counts: any;
   getAssetsCounts: () => void;
@@ -107,8 +101,5 @@ enum TABS {
   FUNDS = "funds"
 }
 
-const DashboardAssets = compose<React.ComponentType<OwnProps>>(
-  withRole,
-  React.memo
-)(_DashboardAssets);
+const DashboardAssets = React.memo(_DashboardAssets);
 export default DashboardAssets;

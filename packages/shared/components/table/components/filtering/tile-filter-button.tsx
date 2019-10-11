@@ -1,3 +1,5 @@
+import "./tile-filter-button.scss";
+
 import classNames from "classnames";
 import * as React from "react";
 import GVButton from "shared/components/gv-button";
@@ -11,13 +13,13 @@ const _TileFilterButton: React.FC<ITagFilterButton> = ({
     <GVButton
       variant="text"
       color="secondary"
-      className={classNames("tile-filter__button-add", {
-        "tile-filter__button-add--active": isActive
+      className={classNames("tile-filter-button__add", {
+        "tile-filter-button__add--active": isActive
       })}
       onClick={onClick}
     >
       <>
-        <span className="tile-filter__button-plus">+</span>
+        <span className="tile-filter-button__plus">+</span>
         {title}
       </>
     </GVButton>

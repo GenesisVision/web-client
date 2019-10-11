@@ -1,4 +1,4 @@
-import { PlatformCurrency, ProgramsList, ProgramTag } from "gv-api-web";
+import { PlatformCurrency, ProgramsListOld, ProgramTag } from "gv-api-web";
 import qs from "qs";
 import * as React from "react";
 import { connect } from "react-redux";
@@ -54,11 +54,11 @@ import {
 } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
 import {
-  PROGRAM_CURRENCY_FILTER_NAME,
   CURRENCY_FILTER_VALUE,
   LEVEL_FILTER_NAME,
   LEVEL_MAX_FILTER_VALUE,
-  LEVEL_MIN_FILTER_VALUE
+  LEVEL_MIN_FILTER_VALUE,
+  PROGRAM_CURRENCY_FILTER_NAME
 } from "./programs.constants";
 
 const ITEMS_ON_PAGE = 12;
@@ -87,7 +87,7 @@ export const getFiltersFromContext = ({
   return {
     ...skipAndTake,
     ...composeFilters(PROGRAMS_TABLE_FILTERS, { ...DEFAULT_FILTERS, ...other }),
-    currency,
+    currencySecondary: currency,
     sorting
   } as FetchProgramsFiltersType;
 };
@@ -155,12 +155,6 @@ const _ProgramsTableSSR: React.FC<Props> = ({
             values={composeCurrencyFilter(programCurrencies)}
             onChange={updateFilter}
           />
-          <DateRangeFilter
-            name={DATE_RANGE_FILTER_NAME}
-            value={filtering[DATE_RANGE_FILTER_NAME]}
-            onChange={updateFilter}
-            startLabel={t("filters.date-range.program-start")}
-          />
         </>
       )}
       paging={{
@@ -214,7 +208,7 @@ interface StateProps {
   isAuthenticated: boolean;
   currencies: PlatformCurrency[];
   programTags: ProgramTag[];
-  data?: ProgramsList;
+  data?: ProgramsListOld;
 }
 
 interface DispatchProps {

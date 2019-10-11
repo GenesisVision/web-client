@@ -13,11 +13,12 @@ import { SortingColumn } from "shared/components/table/components/filtering/filt
 import { fundAssetFilter } from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter.helpers";
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
-export const CURRENCY_FILTER_NAME = "currency";
+export const CURRENCY_MAP_NAME = "currency";
+export const FUND_CURRENCY_FILTER_NAME = "fundCurrency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 
-export const CURRENCY_FILTER_VALUE = undefined;
+export const CURRENCY_MAP_VALUE = undefined;
 
 const fundsDateRangeFilter = {
   ...composeDefaultDateRangeFilter({
@@ -33,14 +34,14 @@ const fundsDateRangeFilter = {
   validate: validateDateRange
 };
 
-export const fundCurrencyFilter = {
-  name: CURRENCY_FILTER_NAME,
+export const fundCurrencyMap = {
+  name: CURRENCY_MAP_NAME,
   type: FILTER_TYPE.GENERAL,
-  defaultValue: CURRENCY_FILTER_VALUE
+  defaultValue: CURRENCY_MAP_VALUE
 };
 
 export const FUNDS_TABLE_FILTERS = [
-  fundCurrencyFilter,
+  fundCurrencyMap,
   fundAssetFilter,
   fundsDateRangeFilter
 ];

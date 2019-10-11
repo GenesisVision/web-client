@@ -15,7 +15,8 @@ import {
 } from "shared/components/table/components/table.types";
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-module";
-import { CURRENCY_FILTER_NAME } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
+import { CURRENCY_MAP_NAME } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
+import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
 import {
@@ -65,10 +66,10 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
       renderMappings={(updateFilter, filtering) => (
         <>
           <SelectFilter
-            name={CURRENCY_FILTER_NAME}
+            name={CURRENCY_MAP_NAME}
             label={t("filters.currency.show-in")}
-            value={filtering && filtering[CURRENCY_FILTER_NAME]}
-            values={currencies!.map(x => ({ value: x.name, label: x.name }))}
+            value={filtering && filtering[CURRENCY_MAP_NAME]}
+            values={composeCurrencyMap(currencies)}
             onChange={updateFilter}
           />
           <DateRangeFilter

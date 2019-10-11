@@ -18,22 +18,19 @@ const _TradesUpdating: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <SettingsBlock
-      label={t("manager.program-settings.trades-update.title")}
-      content={
-        <form id="edit-form" onSubmit={handleSubmit}>
-          <TradesDelay name={FIELDS.tradesDelay} />
-          <GVButton
-            color="primary"
-            type={"submit"}
-            className="invest-form__submit-button"
-            disabled={!dirty || !isValid || isSubmitting}
-          >
-            {t("manager.program-settings.buttons.save")}
-          </GVButton>
-        </form>
-      }
-    />
+    <SettingsBlock label={t("manager.program-settings.trades-update.title")}>
+      <form id="edit-form" onSubmit={handleSubmit}>
+        <TradesDelay name={FIELDS.tradesDelay} />
+        <GVButton
+          color="primary"
+          type={"submit"}
+          className="invest-form__submit-button"
+          disabled={!dirty || !isValid || isSubmitting}
+        >
+          {t("manager.program-settings.buttons.save")}
+        </GVButton>
+      </form>
+    </SettingsBlock>
   );
 };
 

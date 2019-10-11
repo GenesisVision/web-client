@@ -1,6 +1,7 @@
 import useApiRequest from "shared/hooks/api-request.hook";
+import { fetchRate } from "shared/services/rate-service";
 
-import { getRate, getSignalInfo } from "./services/program-follow-service";
+import { getSignalInfo } from "./services/program-follow-service";
 
 export const useGetSignalInfo = () => {
   const { data, isPending, sendRequest } = useApiRequest({
@@ -15,7 +16,7 @@ export const useGetSignalInfo = () => {
 
 export const useGetRate = () => {
   const { data, isPending, sendRequest } = useApiRequest({
-    request: getRate
+    request: ({ from, to }) => fetchRate(from, to)
   });
   return {
     rate: data,

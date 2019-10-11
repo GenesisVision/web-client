@@ -87,7 +87,7 @@ export const closeCopytradingTrade: CloseCopytradingTrade = (
 ) => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
   return signalApi
-    .v10SignalTradesByIdClosePost(tradeId, authorization, { programId })
+    .closeTrade(tradeId, authorization, { programId })
     .then(() => {
       onSuccess();
       dispatch(

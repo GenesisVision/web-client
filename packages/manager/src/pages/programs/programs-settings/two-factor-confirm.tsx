@@ -23,26 +23,23 @@ const _TwoFactorConfirm: React.FC<Props> = ({
   return (
     <SettingsBlock
       label={t("manager.program-settings.two-factor-confirm.title")}
-      content={
-        <>
-          <p className="program-settings__text">
-            {t("manager.program-settings.two-factor-confirm.text")}
-          </p>
-          <GVButton color="primary" onClick={setOpen}>
-            {t("manager.program-settings.buttons.two-factor-confirm")}
-          </GVButton>
-          <ConfirmContainer
-            open={isOpen}
-            onClose={setClose}
-            onApply={() => {
-              dispatchProgramDescription();
-              setClose();
-            }}
-            programId={id}
-          />
-        </>
-      }
-    />
+    >
+      <p className="program-settings__text">
+        {t("manager.program-settings.two-factor-confirm.text")}
+      </p>
+      <GVButton color="primary" onClick={setOpen}>
+        {t("manager.program-settings.buttons.two-factor-confirm")}
+      </GVButton>
+      <ConfirmContainer
+        open={isOpen}
+        onClose={setClose}
+        onApply={() => {
+          dispatchProgramDescription();
+          setClose();
+        }}
+        programId={id}
+      />
+    </SettingsBlock>
   );
 };
 

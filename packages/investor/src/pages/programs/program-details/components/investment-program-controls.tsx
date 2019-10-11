@@ -1,13 +1,13 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect, useSelector } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
@@ -39,13 +39,10 @@ const _InvestmentProgramControls: React.FC<Props> = ({
     setCloseUnAuthInvestmentPopup
   ] = useIsOpen();
 
-  const openInvestmentPopup = useCallback(
-    () => {
-      if (isAuthenticated) setOpenInvestmentPopup();
-      else setOpenUnAuthInvestmentPopup();
-    },
-    [isAuthenticated]
-  );
+  const openInvestmentPopup = useCallback(() => {
+    if (isAuthenticated) setOpenInvestmentPopup();
+    else setOpenUnAuthInvestmentPopup();
+  }, [isAuthenticated]);
 
   const notificationId = programDescription.personalProgramDetails
     ? programDescription.personalProgramDetails.notificationAvailableToInvestId
@@ -116,7 +113,7 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
 }
 
 interface Props extends OwnProps, DispatchProps {}

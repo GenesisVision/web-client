@@ -29,7 +29,7 @@ const GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
   );
 
   useEffect(() => {
-    authApi.v10Auth2faCreatePost(authService.getAuthArg()).then(setTFAData);
+    authApi.createTwoStepAuth(authService.getAuthArg()).then(setTFAData);
   }, []);
 
   const handleSubmit = useCallback(
