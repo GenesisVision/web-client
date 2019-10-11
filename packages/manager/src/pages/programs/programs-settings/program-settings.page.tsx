@@ -8,7 +8,6 @@ import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
-import { NextPageContext } from "next";
 import React, { useCallback, useEffect, useState } from "react";
 import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
@@ -76,9 +75,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
     [description]
   );
   const cancelChangeBroker = useCallback(() => {
-    cancelChangeBrokerMethod(description!.id).then(() =>
-      dispatchDescription()
-    );
+    cancelChangeBrokerMethod(description!.id).then(() => dispatchDescription());
   }, [description]);
   const dispatchDescriptionHandle = useCallback(() => {
     dispatchDescription();
@@ -134,8 +131,7 @@ export type TUpdateProgramFunc = (
   resetForm?: () => void
 ) => void;
 
-interface OwnProps {
-}
+interface OwnProps {}
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   cancelChangeBrokerMethod: typeof cancelChangeBrokerMethod;
