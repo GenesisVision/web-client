@@ -83,7 +83,8 @@ class _DashboardPortfolioChartSection extends React.PureComponent<
 
   componentDidMount() {
     const { service } = this.props;
-    service.getAssets();
+    service.getInRequests();
+    service.composeAssetChart();
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
