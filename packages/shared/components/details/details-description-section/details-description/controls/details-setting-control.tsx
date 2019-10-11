@@ -2,7 +2,7 @@ import "./details-description-control.scss";
 
 import React from "react";
 import { SettingsIcon } from "shared/components/icon/settings-icon";
-import Link from "shared/components/link/link";
+import Link, { ToType } from "shared/components/link/link";
 
 import DetailsDescriptionControl from "./details-description-control";
 
@@ -20,7 +20,7 @@ const _DetailsSettingControl: React.FC<Props> = ({ url, title, text }) => {
 };
 
 export interface Props {
-  url: string;
+  url: ToType;
   title: string;
   text: string;
 }

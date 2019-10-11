@@ -11,7 +11,6 @@ import {
   compose,
   Dispatch
 } from "redux";
-import BackButtonBody from "shared/components/back-button/back-button-body";
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
 
@@ -71,10 +70,6 @@ const _AssetsEditPage: React.FC<Props> = ({
   });
   return (
     <Page title={title}>
-      <BackButtonBody
-        onClick={applyCloseAsset}
-        backPath={description && `/ ${description.title}`}
-      />
       <div className="asset-settings">
         <h1 className="asset-settings__title">{title}</h1>
         {settingsBlocks(editAssetCallback, applyCloseAsset)}

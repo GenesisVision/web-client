@@ -18,6 +18,7 @@ import SocialLinksBlock from "shared/components/social-links-block/social-links-
 import TagItem from "shared/components/tags/tag-item/tag-item";
 import useAnchor from "shared/hooks/anchor.hook";
 import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
+import { PROGRAM_SETTINGS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl,
@@ -107,7 +108,11 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
         {isOwnProgram && personalDetails && personalDetails.canCloseAsset && (
           <DetailsSettingControl
             title={programDescription.title}
-            url={composeProgramSettingsUrl(programDescription.url)}
+            url={{
+              as: composeProgramSettingsUrl(programDescription.url),
+              pathname: PROGRAM_SETTINGS_FOLDER_ROUTE,
+              state: `/ ${programDescription.title}`
+            }}
             text={t("program-details-page.description.program-settings")}
           />
         )}
