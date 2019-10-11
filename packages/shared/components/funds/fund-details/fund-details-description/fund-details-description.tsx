@@ -8,6 +8,7 @@ import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
 import { FUND_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
+import { FUND_SETTINGS_FOLDER_ROUTE } from "shared/routes/funds.routes";
 import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import {
   composeFundNotificationsUrl,
@@ -74,7 +75,11 @@ const _FundDetailsDescription: React.FC<Props> = ({
         description.personalFundDetails.canCloseAsset && (
           <DetailsSettingControl
             title={description.title}
-            url={composeFundSettingsUrl(description.url)}
+            url={{
+              as: composeFundSettingsUrl(description.url),
+              pathname: FUND_SETTINGS_FOLDER_ROUTE,
+              state: `/ ${description.title}`
+            }}
             text={t("fund-details-page.description.fund-settings")}
           />
         )}
