@@ -7,6 +7,8 @@ import {
 } from "shared/components/programs/program-details/services/program-details.service";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import { NextPageWithRedux } from "shared/utils/types";
+import { ProgramDetailsFullOld } from "gv-api-web";
+import { statisticCurrencyAction } from "shared/components/programs/program-details/actions/program-details.actions";
 
 const ProgramDetails: NextPageWithRedux<{}> = () => {
   return <ProgramDetailsPage />;
@@ -17,7 +19,14 @@ ProgramDetails.getInitialProps = async ctx => {
   await Promise.all([
     ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
-  ]);
+  ]).then(([_, descriptionResult]) => {
+    const description = ((descriptionResult as unknown) as {
+      value: ProgramDetailsFullOld;
+    }).value;
+    ctx.reduxStore.dispatch(dispatch =>
+      dispatch(statisticCurrencyAction(description.currency))
+    );
+  });
   return {};
 };
 
