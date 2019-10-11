@@ -16,7 +16,7 @@ export const useGetSignalInfo = () => {
 
 export const useGetRate = () => {
   const { data, isPending, sendRequest } = useApiRequest({
-    request: fetchRate
+    request: ({ from, to }) => fetchRate(from, to)
   });
   return {
     rate: data,
