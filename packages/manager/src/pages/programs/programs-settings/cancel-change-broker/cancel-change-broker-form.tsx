@@ -1,5 +1,4 @@
-import { BrokersProgramInfo, MigrationRequest } from "gv-api-web";
-import { Broker, BrokerAccountType } from "gv-api-web/src";
+import { Broker, BrokerAccountType, MigrationRequest } from "gv-api-web";
 import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React from "react";
