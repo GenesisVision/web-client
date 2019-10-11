@@ -10,6 +10,7 @@ import { CurrencyEnum } from "shared/utils/types";
 
 import { dispatchProgramDescription } from "../../services/program-details.service";
 import SubscriptionDetails from "./subscription-details";
+import ProgramFollowContainer from "shared/modules/program-follow/program-follow-container";
 
 const _SubscriptionDetailsContainer: React.FC<Props> = ({
   service: { dispatchProgramDescription },
@@ -32,14 +33,14 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
         openPopup={setOpenPopup}
         rate={rate}
       />
-      {/*<ProgramFollowContainer
+      <ProgramFollowContainer
         id={id}
         open={isOpenPopup}
         currency={currency}
         signalSubscription={personalDetails.signalSubscription}
         onClose={setClosePopup}
         onApply={dispatchProgramDescription}
-      />*/}
+      />
     </>
   );
 };

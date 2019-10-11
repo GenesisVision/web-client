@@ -1,5 +1,5 @@
 import { SignalSubscription } from "gv-api-web";
-import ProgramFollowContainer from "modules/program-follow/program-follow-container";
+import ProgramFollowContainer from "shared/modules/program-follow/program-follow-container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { ResolveThunks, connect, useSelector } from "react-redux";
