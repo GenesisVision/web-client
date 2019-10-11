@@ -1,4 +1,4 @@
-import { FundsList, PlatformAsset } from "gv-api-web";
+import { FundsList, PlatformAsset, PlatformCurrency } from "gv-api-web";
 import qs from "qs";
 import * as React from "react";
 import { connect } from "react-redux";
@@ -26,20 +26,27 @@ import {
   toggleFavoriteFundDispatchable
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { fundAssetsSelector } from "shared/reducers/platform-reducer";
+import {
+  fundAssetsSelector,
+  platformCurrenciesSelector
+} from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { FUNDS_ROUTE } from "shared/routes/funds.routes";
 import { NextPageWithReduxContext } from "shared/utils/types";
 
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import FundsTable from "./funds-table";
 import {
+  CURRENCY_MAP_NAME,
+  CURRENCY_MAP_VALUE,
   DEFAULT_ITEMS_ON_PAGE,
   FUNDS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
 } from "./funds-table.constants";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 
 const DEFAULT_FILTERS = {
+  [CURRENCY_MAP_NAME]: CURRENCY_MAP_VALUE,
   [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
   [FUND_ASSET_FILTER_NAME]: FUND_ASSET_DEFAULT_VALUE
 };
@@ -66,6 +73,7 @@ export const getFiltersFromContext = ({
 };
 
 const _FundsTableSSR: React.FC<Props> = ({
+  currencies,
   title,
   showSwitchView,
   data,
@@ -88,6 +96,24 @@ const _FundsTableSSR: React.FC<Props> = ({
       updateSorting={value => update({ name: "sorting", value })}
       filtering={filtering}
       updateFilter={update}
+      renderMappings={(updateFilter, filtering) => (
+        <>
+          <SelectFilter
+            name={CURRENCY_MAP_NAME}
+            label={t("filters.currency.show-in")}
+            value={filtering && filtering[CURRENCY_MAP_NAME]}
+            values={composeCurrencyMap(currencies)}
+            onChange={updateFilter}
+          />
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            label={t("filters.date-range.for")}
+            startLabel={t("filters.date-range.fund-start")}
+          />
+        </>
+      )}
       renderFilters={(updateFilter: any, filtering: FilteringType) => (
         <>
           <FundAssetFilter
@@ -95,12 +121,6 @@ const _FundsTableSSR: React.FC<Props> = ({
             value={filtering[FUND_ASSET_FILTER_NAME] as string[]}
             values={fundAssets}
             onChange={updateFilter}
-          />
-          <DateRangeFilter
-            name={DATE_RANGE_FILTER_NAME}
-            value={filtering[DATE_RANGE_FILTER_NAME]}
-            onChange={updateFilter}
-            startLabel={t("filters.date-range.program-start")}
           />
         </>
       )}
@@ -118,6 +138,7 @@ const _FundsTableSSR: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: RootState): StateProps => ({
+  currencies: platformCurrenciesSelector(state),
   data: fundsDataSelector(state),
   isAuthenticated: isAuthenticatedSelector(state),
   fundAssets: fundAssetsSelector(state)
@@ -147,6 +168,7 @@ interface OwnProps {
 }
 
 interface StateProps {
+  currencies: PlatformCurrency[];
   isAuthenticated: boolean;
   data?: FundsList;
   fundAssets: PlatformAsset[];
