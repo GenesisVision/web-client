@@ -1,4 +1,4 @@
-import moment from "moment";
+import { format, subMonths, subWeeks } from "date-fns";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
@@ -8,11 +8,6 @@ import {
   DATA_RANGE_FILTER_TYPES,
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
-
-const subtract: { [keys: string]: string } = {
-  [DATA_RANGE_FILTER_TYPES.LAST_MONTH]: "month",
-  [DATA_RANGE_FILTER_TYPES.LAST_WEEK]: "week"
-};
 
 class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   state = {
@@ -26,18 +21,18 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   getDateStart = (type: DATA_RANGE_FILTER_TYPES) => {
     switch (type) {
       case DATA_RANGE_FILTER_TYPES.ALL:
-        return moment(0).format("YYYY-MM-DD");
-      default:
-        return moment()
-          .subtract(1 as any, subtract[type])
-          .format("YYYY-MM-DD");
+        return format(0, "yyyy-MM-dd");
+      case DATA_RANGE_FILTER_TYPES.LAST_MONTH:
+        return format(subMonths(new Date(), 1), "yyyy-MM-dd");
+      case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
+        return format(subWeeks(new Date(), 1), "yyyy-MM-dd");
     }
   };
   handleChangeType = (type: DATA_RANGE_FILTER_TYPES) => () => {
     this.setState({
       type,
       dateStart: this.getDateStart(type),
-      dateEnd: moment().format("YYYY-MM-DD")
+      dateEnd: format(new Date(), "yyyy-MM-dd")
     });
   };
   handleChangeDate = (type: keyof IDataRangeFilterValue, date: string) => {

@@ -1,6 +1,14 @@
+import {
+  addDays,
+  addMinutes,
+  isAfter,
+  isValid,
+  startOfDay,
+  startOfMinute,
+  subMonths,
+  subWeeks
+} from "date-fns";
 import { ProgramFacetTimeframeEnum } from "gv-api-web";
-import moment from "moment";
-import { DurationInputArg2 } from "moment";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import { IComposeDefaultFilter } from "../../table.types";
@@ -35,27 +43,31 @@ export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
   )
     return false;
   if (value.type === DATA_RANGE_FILTER_TYPES.CUSTOM) {
-    const start = moment(value.dateStart);
-    const end = moment(value.dateEnd);
-    if (!start.isValid() || !end.isValid() || start.isAfter(end)) return false;
+    if (value.dateStart === undefined || value.dateEnd === undefined)
+      return false;
+    const start = new Date(value.dateStart);
+    const end = new Date(value.dateEnd);
+    if (!isValid(start) || !isValid(end) || isAfter(start, end)) return false;
   }
   return true;
 };
 
 const dateFrom = (
-  subtract?: DurationInputArg2,
+  subtract?: "month" | "week",
   date: Date | string | number = new Date()
-): string =>
-  moment(date)
-    .subtract(1, subtract)
-    .startOf("minute")
-    .toISOString();
+): string => {
+  switch (subtract) {
+    case "month":
+      return startOfMinute(subMonths(new Date(date), 1)).toISOString();
+    case "week":
+      return startOfMinute(subWeeks(new Date(date), 1)).toISOString();
+    default:
+      return startOfMinute(new Date(date)).toISOString();
+  }
+};
 
 const dateTo = (): string =>
-  moment()
-    .add(1, "minute")
-    .startOf("minute")
-    .toISOString();
+  startOfMinute(addMinutes(new Date(), 1)).toISOString();
 
 export const composeRequestValueFunc = (
   fromFilterName: string = SERVER_DATE_RANGE_MIN_FILTER_NAME,
@@ -80,13 +92,12 @@ export const composeRequestValueFunc = (
     case DATA_RANGE_FILTER_TYPES.CUSTOM:
     default:
       return {
-        [fromFilterName]: moment(value.dateStart)
-          .startOf("day")
-          .toISOString(),
-        [toFilterName]: moment(value.dateEnd)
-          .add(1, "day")
-          .startOf("day")
-          .toISOString()
+        [fromFilterName]: startOfDay(
+          value.dateStart ? new Date(value.dateStart) : new Date()
+        ).toISOString(),
+        [toFilterName]: startOfDay(
+          addDays(value.dateEnd ? new Date(value.dateEnd) : new Date(), 1)
+        ).toISOString()
       };
   }
 };
