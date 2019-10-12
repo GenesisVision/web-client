@@ -72,6 +72,7 @@ const _DepositForm: React.FC<
           ? (info as ProgramInvestInfo).availableToInvestBase
           : Number.MAX_SAFE_INTEGER;
       setAvailableToInvest(convertToCurrency(maxAvailable, rate));
+      setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, maxAvailable);
     },
     [info, rate]
   );
@@ -84,12 +85,6 @@ const _DepositForm: React.FC<
       setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, available);
     },
     [walletCurrency, wallets]
-  );
-  useEffect(
-    () => {
-      setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, availableToInvest);
-    },
-    [availableToInvest]
   );
   useEffect(
     () => {
