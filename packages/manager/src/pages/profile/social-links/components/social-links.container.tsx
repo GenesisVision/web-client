@@ -21,11 +21,11 @@ import SocialLinkForm from "./social-link/social-link-form";
 import SocialLinksLoader from "./social-links-loader";
 
 const _Links: React.FC<ILinksProps> = ({ socialLinks, onSubmit }) => (
-  <>
+  <div>
     {socialLinks.map(x => (
       <SocialLinkForm key={x.type} socialLink={x} onSubmit={onSubmit} />
     ))}
-  </>
+  </div>
 );
 const Links = React.memo(withLoader(_Links));
 
