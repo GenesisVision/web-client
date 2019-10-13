@@ -23,6 +23,7 @@ const _CreateProgramContainer: React.FC = () => {
   }, []);
 
   const navigateToSettings = useCallback(() => {
+    window.scrollTo(0, 0);
     setTab(null, TAB.SETTINGS);
   }, []);
 
