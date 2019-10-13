@@ -56,8 +56,8 @@
     max-width: 100%;
     width: 100%;
 
-    .gv-text-field,
-    .gv-text-field__wrapper {
+    & div.gv-text-field,
+    & div.gv-text-field__wrapper {
       width: 100%;
     }
   }

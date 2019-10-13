@@ -273,17 +273,11 @@ $asset-height-mobile: $asset-height/$divider-text;
   &__row {
     display: flex;
     flex-wrap: wrap;
-    width: auto;
-    max-width: 230px;
     position: relative;
     justify-content: space-between;
 
     .gv-text-field__wrapper {
       margin: 0;
-    }
-
-    @include media-breakpoint-landscape-phone() {
-      max-width: 484px;
     }
   }
 

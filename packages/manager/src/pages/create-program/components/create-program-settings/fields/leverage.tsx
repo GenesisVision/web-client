@@ -5,7 +5,7 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
 
-const _Leverage: React.FC<Props> = ({ name, disabled, accountLeverages }) => {
+const _Leverage: React.FC<Props> = ({ name, accountLeverages }) => {
   const [t] = useTranslation();
   return (
     <CreateAssetField>
@@ -16,7 +16,6 @@ const _Leverage: React.FC<Props> = ({ name, disabled, accountLeverages }) => {
           "manager.create-program-page.settings.fields.brokers-leverage"
         )}
         InputComponent={Select}
-        disabled={!disabled}
         disableIfSingle
         className="create-program-settings__leverage"
       >
@@ -32,7 +31,6 @@ const _Leverage: React.FC<Props> = ({ name, disabled, accountLeverages }) => {
 
 interface Props {
   name: string;
-  disabled: boolean;
   accountLeverages: number[];
 }
 

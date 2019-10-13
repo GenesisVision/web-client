@@ -15,6 +15,10 @@
   .gv-text-field__wrapper {
     margin-left: 0;
   }
+  &__content-block {
+    width: 100%;
+  }
+
   &__line-block {
     display: flex;
     flex-direction: column;
@@ -77,10 +81,6 @@
       .gv-text-field__wrapper {
         width: 100%;
       }
-    }
-
-    @include media-breakpoint-landscape-phone() {
-      max-width: 765px;
     }
   }
 }

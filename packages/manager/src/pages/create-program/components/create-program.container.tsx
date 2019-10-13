@@ -21,6 +21,7 @@ const _CreateProgramContainer: React.FC<Props> = ({ brokers }) => {
   }, []);
 
   const navigateToSettings = useCallback(() => {
+    window.scrollTo(0, 0);
     setTab(null, TAB.SETTINGS);
   }, []);
 
