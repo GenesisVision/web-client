@@ -1829,6 +1829,9 @@
         }
       }
     },
+    "create-asset-page": {
+      "go-back": "Go back"
+    },
     "create-program-page": {
       "title": "Create Program",
       "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
