@@ -94,7 +94,6 @@ const _CreateProgramSettings: React.FC<Props> = ({
         />
         <Leverage
           name={CREATE_PROGRAM_FIELDS.leverage}
-          disabled={!accountType}
           accountLeverages={accountType.leverages}
         />
         <PeriodLength
