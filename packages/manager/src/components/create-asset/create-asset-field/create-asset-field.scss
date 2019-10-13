@@ -53,11 +53,11 @@
   }
 
   &--wider {
-    max-width: 100%;
+    max-width: 500px;
     width: 100%;
 
-    .gv-text-field,
-    .gv-text-field__wrapper {
+    & div.gv-text-field,
+    & div.gv-text-field__wrapper {
       width: 100%;
     }
   }
