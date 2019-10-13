@@ -8,11 +8,17 @@ import useIsOpen from "shared/hooks/is-open.hook";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 
 import DetailsDescriptionControl from "./details-description-control";
+import { useDispatch, useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { push } from "connected-react-router";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 const _DetailsFavorite: React.FC<Props> = ({
   id,
   isFavorite: isFavoriteProp
 }) => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [t] = useTranslation();
   const [
     isFavorite,
@@ -31,7 +37,10 @@ const _DetailsFavorite: React.FC<Props> = ({
     []
   );
   const handleFavoriteClickOnText = useCallback(
-    () => handleFavoriteClickOnButton(id, isFavorite),
+    () => {
+      if (isAuthenticated) handleFavoriteClickOnButton(id, isFavorite);
+      else dispatch(push(LOGIN_ROUTE));
+    },
     [id, isFavorite]
   );
   return (
