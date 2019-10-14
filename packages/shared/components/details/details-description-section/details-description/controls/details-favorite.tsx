@@ -1,17 +1,17 @@
 import "./details-description-control.scss";
 
+import { push } from "connected-react-router";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import useApiRequest from "shared/hooks/api-request.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
+import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 import DetailsDescriptionControl from "./details-description-control";
-import { useDispatch, useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { push } from "connected-react-router";
-import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 const _DetailsFavorite: React.FC<Props> = ({
   id,
@@ -31,15 +31,16 @@ const _DetailsFavorite: React.FC<Props> = ({
   });
   const handleFavoriteClickOnButton = useCallback(
     (id: string, isFavorite: boolean) => {
-      setIsFavoriteValue(!isFavorite);
-      sendRequest({ id, isFavorite });
+      if (isAuthenticated) {
+        setIsFavoriteValue(!isFavorite);
+        sendRequest({ id, isFavorite });
+      } else dispatch(push(LOGIN_ROUTE));
     },
-    []
+    [isAuthenticated]
   );
   const handleFavoriteClickOnText = useCallback(
     () => {
-      if (isAuthenticated) handleFavoriteClickOnButton(id, isFavorite);
-      else dispatch(push(LOGIN_ROUTE));
+      handleFavoriteClickOnButton(id, isFavorite);
     },
     [id, isFavorite]
   );
