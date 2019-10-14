@@ -1,11 +1,13 @@
+import "./request-line.scss";
+
 import { AssetDetailsAssetTypeEnum, ProgramRequest } from "gv-api-web";
 import moment from "moment";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
-import PortfolioEventLogo
-  from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { CancelRequestPropsType } from "shared/components/dashboard/dashboard.constants";
 import GVButton from "shared/components/gv-button";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
@@ -13,9 +15,7 @@ import useIsOpen from "shared/hooks/is-open.hook";
 import useRole from "shared/hooks/use-role.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { CancelRequestPropsType } from "../../dashboard.constants";
-
-const _DashboardRequest: React.FC<Props> = ({
+const _RequestLine: React.FC<Props> = ({
   successFee,
   exitFee,
   request,
@@ -49,13 +49,13 @@ const _DashboardRequest: React.FC<Props> = ({
     assetType: "Programs" as AssetDetailsAssetTypeEnum
   };
   return (
-    <div className="dashboard-request-popover__request">
-      <div className="dashboard-request-popover__logo">
+    <div className="request-line">
+      <div className="request-line__logo">
         <PortfolioEventLogo assetDetails={assetDetails} icon={""} />
       </div>
       <StatisticItem
         className={
-          "dashboard-request-popover__statistic-item dashboard-request-popover__statistic-item--title"
+          "request-line__statistic-item request-line__statistic-item--title"
         }
         label={request.title}
         invert
@@ -64,7 +64,7 @@ const _DashboardRequest: React.FC<Props> = ({
         {request.type}
       </StatisticItem>
       <StatisticItem
-        className={"dashboard-request-popover__statistic-item"}
+        className={"request-line__statistic-item"}
         label={
           request.withdrawAll ? (
             t("withdraw-program.withdrawing-all")
@@ -83,7 +83,7 @@ const _DashboardRequest: React.FC<Props> = ({
         {moment(request.date).format("ll")}
       </StatisticItem>
       <StatisticItem
-        className={"dashboard-request-popover__statistic-item"}
+        className={"request-line__statistic-item"}
         condition={
           isInvestor && successFee !== null && successFee !== undefined
         }
@@ -100,7 +100,7 @@ const _DashboardRequest: React.FC<Props> = ({
         {t("program-details-page.description.successFee")}
       </StatisticItem>
       <StatisticItem
-        className={"dashboard-request-popover__statistic-item"}
+        className={"request-line__statistic-item"}
         condition={
           isInvestor &&
           request.type === "Invest" &&
@@ -120,7 +120,7 @@ const _DashboardRequest: React.FC<Props> = ({
         {t("fund-details-page.description.entryFee")}
       </StatisticItem>
       <StatisticItem
-        className={"dashboard-request-popover__statistic-item"}
+        className={"request-line__statistic-item"}
         condition={isInvestor && exitFee !== null && exitFee !== undefined}
         label={
           <NumberFormat
@@ -134,7 +134,7 @@ const _DashboardRequest: React.FC<Props> = ({
       >
         {t("fund-details-page.description.exitFee")}
       </StatisticItem>
-      <div className="dashboard-request-popover__btns">
+      <div className="request-line__btns">
         {request.canCancelRequest && (
           <GVButton color="primary" variant="text" onClick={setOpenPopup}>
             {t("buttons.cancel")}
@@ -156,9 +156,7 @@ const _DashboardRequest: React.FC<Props> = ({
   );
 };
 
-export interface Props extends OwnProps {}
-
-interface OwnProps {
+interface Props {
   successFee?: number;
   exitFee?: number;
   request: ProgramRequest;
@@ -167,5 +165,5 @@ interface OwnProps {
   asset?: ASSET;
 }
 
-const DashboardRequest = React.memo(_DashboardRequest);
-export default DashboardRequest;
+const RequestLine = React.memo(_RequestLine);
+export default RequestLine;

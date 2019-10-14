@@ -4,27 +4,27 @@ import { ProgramRequests } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
+import RequestLine from "shared/components/request-line/request-line";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useAnchor from "shared/hooks/anchor.hook";
+import useRole from "shared/hooks/use-role.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { AuthRootState } from "shared/utils/types";
 
 import { CancelRequestType } from "../../dashboard.constants";
-import DashboardRequest from "./dashboard-request";
-import useRole from "shared/hooks/use-role.hook";
 
 const _DashboardInRequestsContainer: React.FC<Props> = ({
   inRequests,
@@ -61,7 +61,7 @@ const _DashboardInRequestsContainer: React.FC<Props> = ({
       >
         <div className="dashboard-request-popover">
           {inRequests.requests.map(x => (
-            <DashboardRequest
+            <RequestLine
               key={x.id}
               request={x}
               cancelRequest={service.cancelRequest}
