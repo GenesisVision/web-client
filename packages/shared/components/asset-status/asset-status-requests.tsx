@@ -44,7 +44,7 @@ const _AssetStatusRequests: React.FC<Props> = ({
     );
 
   return (
-    <>
+    <div className="request-popover">
       {requests.map(request => (
         <DashboardRequest
           successFee={request.successFee}
@@ -58,7 +58,7 @@ const _AssetStatusRequests: React.FC<Props> = ({
           onApplyCancelRequest={handleCancel}
         />
       ))}
-    </>
+    </div>
   );
 };
 
