@@ -1,14 +1,18 @@
+import "./asset-status.scss";
+
 import { ProgramRequest } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import DashboardRequest
-  from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
+import RequestLine from "shared/components/request-line/request-line";
 import { ASSET } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
 
 import { CancelRequestPropsType } from "../dashboard/dashboard.constants";
-import { cancelRequestDispatch, getAssetRequests } from "./services/asset-status.service";
+import {
+  cancelRequestDispatch,
+  getAssetRequests
+} from "./services/asset-status.service";
 
 const _AssetStatusRequests: React.FC<Props> = ({
   successFee,
@@ -25,12 +29,9 @@ const _AssetStatusRequests: React.FC<Props> = ({
   const [requests, setRequests] = useState<Array<ProgramRequest> | undefined>(
     undefined
   );
-  useEffect(
-    () => {
-      getAssetRequests(id, role, asset).then(setRequests);
-    },
-    [id, role, asset]
-  );
+  useEffect(() => {
+    getAssetRequests(id, role, asset).then(setRequests);
+  }, [id, role, asset]);
 
   const handleCancel = useCallback(() => {
     handleCloseDropdown();
@@ -46,7 +47,7 @@ const _AssetStatusRequests: React.FC<Props> = ({
   return (
     <div className="request-popover">
       {requests.map(request => (
-        <DashboardRequest
+        <RequestLine
           successFee={request.successFee}
           exitFee={request.exitFee}
           key={request.id}
