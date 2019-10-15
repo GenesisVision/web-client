@@ -10,16 +10,17 @@
     object-fit: cover;
     box-shadow: $box-shadow-1;
     border-radius: 100%;
-    margin-right: $padding-xsmall;
     & img {
       width: 100%;
       height: auto;
     }
     &--medium {
+      margin-right: $padding-xsmall;
       width: $wallet-item-size;
       height: $wallet-item-size;
     }
     &--small {
+      margin-right: $padding-xsmall/$divider-title;
       width: $wallet-item-size/$divider-title;
       height: $wallet-item-size/$divider-title;
     }
