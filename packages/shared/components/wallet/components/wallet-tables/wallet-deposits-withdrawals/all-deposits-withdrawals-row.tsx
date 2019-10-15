@@ -2,7 +2,6 @@ import { MultiWalletExternalTransaction } from "gv-api-web";
 import moment from "moment";
 import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
@@ -11,6 +10,7 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatValue } from "shared/utils/formatter";
+import { WalletItem } from "../../wallet-item/wallet-item";
 
 const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
   transaction,
@@ -34,13 +34,11 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
       />
       <TableRow stripy onClick={setOpenPopup}>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--wallet">
-          <WalletImage
-            url={transaction.logo}
-            alt={transaction.currency}
-            className="wallet-deposits-withdrawals__icon-container"
-            imageClassName="wallet-deposits-withdrawals__icon"
+          <WalletItem
+            logo={transaction.logo}
+            name={transaction.currency}
+            small
           />
-          {transaction.currency}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
           {moment(transaction.date).format()}
