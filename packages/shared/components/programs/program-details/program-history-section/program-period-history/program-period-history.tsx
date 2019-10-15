@@ -14,7 +14,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import withLoader from "shared/decorators/with-loader";
 import useAnchor, { TAnchor } from "shared/hooks/anchor.hook";
 import filesService from "shared/services/file-service";
-import { durationPeriod, formatDate } from "shared/utils/dates";
+import { formatDate, humanizeDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -180,7 +180,7 @@ const ProgramPeriodHistoryRow: React.FC<ProgramPeriodHistoryRowProps> = ({
           {period.number}
         </TableCell>
         <TableCell>{formatDate(period.dateFrom)}</TableCell>
-        <TableCell>{durationPeriod(0, period.periodLength)}</TableCell>
+        <TableCell>{humanizeDate(0, period.periodLength)}</TableCell>
         <TableCell>
           <NumberFormat
             value={formatCurrencyValue(period.balance, currency)}
