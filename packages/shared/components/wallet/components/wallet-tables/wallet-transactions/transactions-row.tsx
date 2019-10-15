@@ -2,7 +2,6 @@ import { MultiWalletTransaction } from "gv-api-web";
 import moment from "moment";
 import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Profitability from "shared/components/profitability/profitability";
 import Status from "shared/components/status/status";
 import TableCell from "shared/components/table/components/table-cell";
@@ -11,27 +10,24 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatValue } from "shared/utils/formatter";
+import { WalletItem } from "../../wallet-item/wallet-item";
 
 const ConvertTransaction: React.FC<Props> = React.memo(({ transaction }) => (
   <>
     <div className="wallet-transactions__col">
-      <WalletImage
-        url={transaction.logoFrom}
-        imageClassName="wallet-transactions__icon"
-        alt={transaction.currencyFrom}
-        className="wallet-transactions__icon-container"
+      <WalletItem
+        logo={transaction.logoFrom}
+        name={transaction.currencyFrom}
+        small
       />
-      {transaction.currencyFrom}
     </div>
     <div className="wallet-transactions__back-arrow">&rarr;</div>
     <div className="wallet-transactions__col">
-      <WalletImage
-        url={transaction.logoTo}
-        imageClassName="wallet-transactions__icon"
-        alt={transaction.currencyTo}
-        className="wallet-transactions__icon-container"
+      <WalletItem
+        logo={transaction.logoTo}
+        name={transaction.currencyTo}
+        small
       />
-      {transaction.currencyTo}
     </div>
   </>
 ));
@@ -89,14 +85,11 @@ const _TransactionsRow: React.FC<Props> = ({
               {isConvertAction ? (
                 <ConvertTransaction transaction={transaction} />
               ) : (
-                <>
-                  <WalletImage
-                    url={transaction.logoFrom}
-                    imageClassName="wallet-transactions__icon"
-                    alt={transaction.currencyFrom}
-                  />
-                  {transaction.currencyFrom}
-                </>
+                <WalletItem
+                  logo={transaction.logoFrom}
+                  name={transaction.currencyFrom}
+                  small
+                />
               )}
             </div>
           </TableCell>
