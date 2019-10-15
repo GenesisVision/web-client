@@ -1,16 +1,12 @@
 import { PlatformAsset } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
+import { useTranslation } from "react-i18next";
 
 import TileFilterPopover from "../tile-filter-popover";
+import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 
-const _FundAssetPopover: React.FC<Props & WithTranslation> = ({
-  t,
-  values,
-  changeFilter
-}) => {
+const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
+  const [t] = useTranslation();
   const filterableValues = values.map(x => ({
     ...x,
     searchValue: x.name + x.asset
@@ -31,10 +27,7 @@ const _FundAssetPopover: React.FC<Props & WithTranslation> = ({
                 key={idx}
                 onClick={() => handleClick(asset.asset)}
               >
-                <FundAssetImage url={asset.icon} alt={asset.asset} />
-                <span className="fund-asset-filter__asset-item-name">
-                  {asset.name}
-                </span>
+                <WalletItem logo={asset.icon} name={asset.name} small />
               </li>
             ))}
           </ul>
@@ -44,10 +37,7 @@ const _FundAssetPopover: React.FC<Props & WithTranslation> = ({
   );
 };
 
-const FundAssetPopover = compose<React.ComponentType<Props>>(
-  React.memo,
-  translate()
-)(_FundAssetPopover);
+const FundAssetPopover = React.memo(_FundAssetPopover);
 export default FundAssetPopover;
 
 interface Props {
