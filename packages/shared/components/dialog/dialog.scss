@@ -114,8 +114,10 @@
       padding-bottom: $padding-upper-medium;
     }
 
-    .statistics-item:last-child {
-      padding-bottom: 0;
+    & > .dialog__field {
+      & > div.statistics-item:last-child {
+        padding-bottom: 0;
+      }
     }
 
     .gv-text-field__wrapper:last-child {
@@ -195,7 +197,7 @@
 
   &__field {
     &:not(:first-child) {
-      margin-top: $padding-small;
+      margin-top: $padding-xsmall;
     }
     font-weight: 300;
 

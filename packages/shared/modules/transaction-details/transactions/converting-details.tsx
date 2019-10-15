@@ -14,7 +14,7 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
   <TransactionDetails
     header={t("transactions-details.converting.title")}
     body={
-      <>
+      <div className="transaction-details__top">
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.from-wallet`)}>
             <div className="external-transaction">
@@ -43,7 +43,7 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
             />
           </StatisticItem>
         </DialogField>
-      </>
+      </div>
     }
     bottom={
       <>
