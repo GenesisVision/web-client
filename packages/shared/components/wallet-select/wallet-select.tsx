@@ -5,7 +5,7 @@ import React from "react";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import Select, { ISelectChangeEvent } from "shared/components/select/select";
-import filesService from "shared/services/file-service";
+import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 
 const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
   <GVFormikField
@@ -17,12 +17,7 @@ const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
   >
     {items.map(({ id, logo, currency, title }) => (
       <option value={id} key={id}>
-        <img
-          src={filesService.getFileUrl(logo)}
-          className="wallet-select__icon"
-          alt={currency}
-        />
-        {`${title} | ${currency}`}
+        <WalletItem logo={logo} name={`${title} | ${currency}`} small />
       </option>
     ))}
   </GVFormikField>
