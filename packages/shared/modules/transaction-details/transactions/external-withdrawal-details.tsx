@@ -10,10 +10,10 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import Copy from "shared/decorators/with-copy";
 import ArrowIcon from "shared/media/arrow-up-thin.svg";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details-dialog";
-import filesService from "shared/services/file-service";
 import { formatValue } from "shared/utils/formatter";
 
 import TransactionDetails from "./transaction-details";
+import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 
 const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
   data,
@@ -27,20 +27,7 @@ const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
       <>
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.from-wallet`)}>
-            <div className="external-transaction">
-              <div className="external-transaction__icon">
-                <div className="profile-avatar">
-                  <img
-                    className="external-transaction__wallet"
-                    src={filesService.getFileUrl(data.currencyLogo)}
-                    alt="wallet"
-                  />
-                </div>
-              </div>
-              <div className="external-transaction__address">
-                {data.currencyName}
-              </div>
-            </div>
+            <WalletItem logo={data.currencyLogo} name={data.currencyName} />
           </StatisticItem>
         </DialogField>
         <DialogField>
