@@ -1,28 +1,16 @@
-import {
-  addDays,
-  addHours,
-  addMonths,
-  differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
-  differenceInMonths,
-  format,
-  formatDistanceStrict,
-  subDays,
-  subHours,
-  subMinutes,
-  subMonths,
-  subQuarters,
-  subWeeks,
-  subYears
-} from "date-fns";
+import dayjs from "dayjs";
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
+import RelativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(LocalizedFormat);
+dayjs.extend(RelativeTime);
 
 export const localizedDate = (date: Date | number | string): string => {
-  return format(new Date(date), "PP"); //Sep 16, 2019
+  return dayjs(date).format("ll");
 };
 
 export const formatDate = (date: Date | number | string): string => {
-  return format(new Date(date), "yyyy-MM-dd HH:mm:ss");
+  return dayjs(date).format("YYYY-MM-DD HH:mm:ss");
 };
 
 export const distanceDate = (
@@ -30,95 +18,70 @@ export const distanceDate = (
   dateEnd: Date | number | string = new Date(),
   addSuffix: boolean = false
 ): string => {
-  return formatDistanceStrict(new Date(dateStart), new Date(dateEnd), {
-    addSuffix
-  });
+  return dayjs(dateStart).to(dayjs(dateEnd), !addSuffix);
 };
 
 export const subtractDate = (
   date: number | string | Date,
   amount: number,
-  type: "day" | "week" | "month" | "quarter" | "year" | string
-): Date | undefined => {
-  try {
-    if (type === "day") return subDays(new Date(date), amount);
-    if (type === "week") return subWeeks(new Date(date), amount);
-    if (type === "month") return subMonths(new Date(date), amount);
-    if (type === "quarter") return subQuarters(new Date(date), amount);
-    if (type === "year") return subYears(new Date(date), amount);
-  } catch (e) {
-    throw new Error(
-      "wrong type, it should be day | week | month | quarter | year"
-    );
+  type: "day" | "week" | "month" | "quarter" | "year"
+): Date => {
+  if (type === "week") {
+    return dayjs(date)
+      .subtract(7 * amount, "day")
+      .toDate();
   }
+  if (type === "quarter") {
+    return dayjs(date)
+      .subtract(3 * amount, "month")
+      .toDate();
+  }
+  return dayjs(date)
+    .subtract(amount, type)
+    .toDate();
 };
 
-const getMonths = (to: Date, amount: number): string => {
-  const from = subMonths(to, amount);
-  if (amount > 0) {
-    return formatDistanceStrict(to, from, {
-      unit: "month",
-      roundingMethod: "floor"
-    });
-  }
-  return "";
+export type TimeUnitName = "month" | "day" | "hour" | "minute";
+
+export const TimeUnitName = {
+  MONTHS: "month" as TimeUnitName,
+  DAYS: "day" as TimeUnitName,
+  HOURS: "hour" as TimeUnitName,
+  MINUTES: "minute" as TimeUnitName
 };
 
-const getDays = (to: Date, amount: number): string => {
-  const from = subDays(to, amount);
-  if (amount > 0) {
-    return formatDistanceStrict(to, from, {
-      unit: "day",
-      roundingMethod: "floor"
-    });
-  }
-  return "";
+export const timeUnits = {
+  [TimeUnitName.MONTHS]: 0,
+  [TimeUnitName.DAYS]: 0,
+  [TimeUnitName.HOURS]: 0,
+  [TimeUnitName.MINUTES]: 0
 };
 
-const getHours = (to: Date, amount: number): string => {
-  const from = subHours(to, amount);
-  if (amount > 0) {
-    return formatDistanceStrict(to, from, {
-      unit: "hour",
-      roundingMethod: "floor"
-    });
-  }
-  return "";
+const getString = (value: number, period: string) => {
+  if (value === 0) return "";
+  const str = `${value} ${period}`;
+  return value === 1 ? str : str + "s";
 };
 
-const getMinutes = (to: Date, amount: number): string => {
-  const from = subMinutes(to, amount);
-  if (amount > 0) {
-    return formatDistanceStrict(to, from, {
-      unit: "minute",
-      roundingMethod: "floor"
-    });
-  }
-  return "";
-};
-
-export const durationPeriod = (
+export const humanizeDate = (
   start: string | number | Date,
   end: string | number | Date
 ): string => {
-  const from = new Date(start);
-  const to = new Date(end);
+  let from = dayjs(start);
+  const to = dayjs(end);
 
-  const months = differenceInMonths(to, from);
+  const thisTimeUnits = { ...timeUnits };
 
-  const withoutMonths = addMonths(from, months);
-  const days = differenceInDays(to, withoutMonths);
+  for (const period in thisTimeUnits) {
+    thisTimeUnits[period] = dayjs(to).diff(from, period as TimeUnitName);
+    from = dayjs(from).add(thisTimeUnits[period], period as TimeUnitName);
+  }
 
-  const withoutDays = addDays(withoutMonths, days);
-  const hours = differenceInHours(to, withoutDays);
-
-  const withoutHours = addHours(withoutDays, hours);
-  const minutes = differenceInMinutes(to, withoutHours);
-
-  const m = getMonths(to, months);
-  const d = getDays(to, days);
-  const h = months > 0 ? "" : getHours(to, hours);
-  const min = days > 0 || months > 0 ? "" : getMinutes(to, minutes);
-
-  return `${m} ${d} ${h} ${min}`.trim();
+  return Object.entries(thisTimeUnits)
+    .filter(period => period[1] > 0)
+    .slice(0, 2)
+    .reduce((str, value) => {
+      return `${str} ${getString(value[1], value[0])}`;
+    }, "")
+    .trim();
 };

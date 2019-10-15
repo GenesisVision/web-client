@@ -48,30 +48,6 @@ export const ROLE_ENV = process.env.REACT_APP_PLATFORM as ROLE;
 
 export const DEFAULT_DECIMAL_SCALE = 8;
 
-export const YEARS = "years";
-export const MONTHS = "months";
-export const DAYS = "days";
-export const HOURS = "hours";
-export const MINUTES = "minutes";
-export const SECONDS = "seconds";
-
-export type TUnitName =
-  | "years"
-  | "months"
-  | "days"
-  | "hours"
-  | "minutes"
-  | "seconds";
-
-export const timeUnits = {
-  [YEARS]: 0,
-  [MONTHS]: 0,
-  [DAYS]: 0,
-  [HOURS]: 0,
-  [MINUTES]: 0,
-  [SECONDS]: 0
-};
-
 export interface IDashboardAssetChart {
   type: ASSETS_TYPES;
   id: string;
