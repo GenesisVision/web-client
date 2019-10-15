@@ -4,10 +4,10 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details-dialog";
-import filesService from "shared/services/file-service";
 import { formatValue } from "shared/utils/formatter";
 
 import TransactionDetails from "./transaction-details";
+import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 
 const InvestingTransaction: React.FC<TransactionDetailsProps> = ({
   data,
@@ -17,35 +17,25 @@ const InvestingTransaction: React.FC<TransactionDetailsProps> = ({
     header={t(`transactions-details.platform-fee`)}
     body={
       <StatisticItem label={t(`transactions-details.external.from`)}>
-        <div className="external-transaction">
-          <div className="external-transaction__icon">
-            <div className="profile-avatar">
-              <img
-                className="external-transaction__wallet"
-                src={filesService.getFileUrl(data.currencyLogo)}
-                alt="wallet"
-              />
-            </div>
-          </div>
-          <div className="external-transaction__address">
-            {data.currencyName}
-          </div>
-        </div>
+        <WalletItem logo={data.currencyLogo} name={data.currencyName} />
       </StatisticItem>
     }
     bottom={
       <>
         <DialogField>
           <StatisticItem label={t(`transactions-details.status.title`)}>
-          <div className="external-transaction__status">
-            {data.status} <Status status={data.status} />
-          </div>
-        </StatisticItem>
+            <div className="external-transaction__status">
+              {data.status} <Status status={data.status} />
+            </div>
+          </StatisticItem>
         </DialogField>
         <DialogField>
-          <StatisticItem label={t(`transactions-details.investment.amount`)} big>
-          {formatValue(data.amount, DEFAULT_DECIMAL_SCALE)} {data.currency}
-        </StatisticItem>
+          <StatisticItem
+            label={t(`transactions-details.investment.amount`)}
+            big
+          >
+            {formatValue(data.amount, DEFAULT_DECIMAL_SCALE)} {data.currency}
+          </StatisticItem>
         </DialogField>
       </>
     }
