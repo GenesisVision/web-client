@@ -114,6 +114,12 @@
       padding-bottom: $padding-upper-medium;
     }
 
+    & > .dialog__field {
+      & > div.statistics-item:last-child {
+        padding-bottom: 0;
+      }
+    }
+
     .gv-text-field__wrapper:last-child {
       margin-bottom: 0;
     }
