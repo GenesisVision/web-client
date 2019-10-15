@@ -2,34 +2,27 @@ import "./wallet-item.scss";
 
 import classNames from "classnames";
 import React from "react";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 
-const _WalletItem: React.FC<Props> = ({
-  logo,
-  name,
-  size = WALLET_ITEM_SIZE.MEDIUM
-}) => {
+const _WalletItem: React.FC<Props> = ({ logo, name, small, className }) => {
   return (
     <div className="wallet-item">
       <div
         className={classNames("wallet-item__icon", {
-          "wallet-item__icon--medium": size === WALLET_ITEM_SIZE.MEDIUM,
-          "wallet-item__icon--small": size === WALLET_ITEM_SIZE.SMALL
+          "wallet-item__icon--medium": !small,
+          "wallet-item__icon--small": small
         })}
       >
-        <img src={logo} alt="wallet" />
+        <WalletImage url={logo} alt={name} />
       </div>
-      <div className="wallet-item__name">{name}</div>
+      <div className={classNames("wallet-item__name", className)}>{name}</div>
     </div>
   );
 };
 
-export enum WALLET_ITEM_SIZE {
-  MEDIUM = "MEDIUM",
-  SMALL = "SMALL"
-}
-
 interface Props {
-  size?: WALLET_ITEM_SIZE;
+  className?: string;
+  small?: boolean;
   logo: string;
   name: string;
 }
