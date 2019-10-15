@@ -6,7 +6,6 @@ import Status from "shared/components/status/status";
 import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details-dialog";
-import filesService from "shared/services/file-service";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import TransactionDetails from "./transaction-details";
@@ -18,10 +17,7 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
       <div className="transaction-details__top">
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.from-wallet`)}>
-            <WalletItem
-              logo={filesService.getFileUrl(data.currencyLogo)}
-              name={data.currencyName}
-            />
+            <WalletItem logo={data.currencyLogo} name={data.currencyName} />
           </StatisticItem>
         </DialogField>
         <DialogField>
@@ -41,9 +37,7 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.to-wallet`)}>
             <WalletItem
-              logo={filesService.getFileUrl(
-                data.convertingDetails.currencyToLogo
-              )}
+              logo={data.convertingDetails.currencyToLogo}
               name={data.convertingDetails.currencyToName}
             />
           </StatisticItem>
