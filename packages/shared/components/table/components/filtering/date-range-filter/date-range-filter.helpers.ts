@@ -1,14 +1,6 @@
-import {
-  addDays,
-  addMinutes,
-  isAfter,
-  isValid,
-  startOfDay,
-  startOfMinute,
-  subMonths,
-  subWeeks
-} from "date-fns";
+import dayjs from "dayjs";
 import { ProgramFacetTimeframeEnum } from "gv-api-web";
+import { subtractDate } from "shared/utils/dates";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import { IComposeDefaultFilter } from "../../table.types";
@@ -47,7 +39,12 @@ export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
       return false;
     const start = new Date(value.dateStart);
     const end = new Date(value.dateEnd);
-    if (!isValid(start) || !isValid(end) || isAfter(start, end)) return false;
+    if (
+      !dayjs(start).isValid() ||
+      !dayjs(end).isValid() ||
+      dayjs(end).isAfter(start)
+    )
+      return false;
   }
   return true;
 };
@@ -58,16 +55,22 @@ const dateFrom = (
 ): string => {
   switch (subtract) {
     case "month":
-      return startOfMinute(subMonths(new Date(date), 1)).toISOString();
     case "week":
-      return startOfMinute(subWeeks(new Date(date), 1)).toISOString();
+      return dayjs(subtractDate(date, 1, subtract))
+        .startOf("minute")
+        .toISOString();
     default:
-      return startOfMinute(new Date(date)).toISOString();
+      return dayjs(date)
+        .startOf("minute")
+        .toISOString();
   }
 };
 
 const dateTo = (): string =>
-  startOfMinute(addMinutes(new Date(), 1)).toISOString();
+  dayjs(new Date())
+    .add(1, "minute")
+    .startOf("minute")
+    .toISOString();
 
 export const composeRequestValueFunc = (
   fromFilterName: string = SERVER_DATE_RANGE_MIN_FILTER_NAME,
@@ -92,12 +95,12 @@ export const composeRequestValueFunc = (
     case DATA_RANGE_FILTER_TYPES.CUSTOM:
     default:
       return {
-        [fromFilterName]: startOfDay(
-          value.dateStart ? new Date(value.dateStart) : new Date()
-        ).toISOString(),
-        [toFilterName]: startOfDay(
-          addDays(value.dateEnd ? new Date(value.dateEnd) : new Date(), 1)
-        ).toISOString()
+        [fromFilterName]: dayjs(value.dateStart ? value.dateStart : new Date())
+          .startOf("day")
+          .toISOString(),
+        [toFilterName]: dayjs(value.dateEnd ? value.dateEnd : new Date())
+          .add(1, "day")
+          .toISOString()
       };
   }
 };
