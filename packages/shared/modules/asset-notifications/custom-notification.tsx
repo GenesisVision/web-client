@@ -24,49 +24,30 @@ import {
 
 const CustomNotification: React.FC<Props> = ({ service, settings, t }) => {
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
-  const handleSwitch = useCallback(
-    () => {
-      setIsPending();
-      const status = !Boolean(settings.isEnabled);
-      service
-        .toggleNotifications({
-          id: settings.id,
-          assetId: settings.assetId,
-          enabled: status
-        })
-        .then(() =>
-          service.success(
-            t(
-              `notifications-page.custom.${
-                status ? "enabled" : "disabled"
-              }-alert`
-            )
+  const handleSwitch = useCallback(() => {
+    setIsPending();
+    const status = !Boolean(settings.isEnabled);
+    service
+      .toggleNotifications({
+        id: settings.id,
+        assetId: settings.assetId,
+        enabled: status
+      })
+      .then(() =>
+        service.success(
+          t(
+            `notifications-page.custom.${status ? "enabled" : "disabled"}-alert`
           )
         )
-        .finally(setIsNotPending);
-    },
-    [
-      service,
-      setIsNotPending,
-      setIsPending,
-      settings.assetId,
-      settings.id,
-      settings.isEnabled,
-      t
-    ]
-  );
-  const handleDelete = useCallback(
-    () => {
-      setIsPending();
-      service
-        .removeNotification(
-          settings,
-          t(`notifications-page.custom.delete-alert`)
-        )
-        .finally(setIsNotPending);
-    },
-    [service, setIsNotPending, setIsPending, settings, t]
-  );
+      )
+      .finally(setIsNotPending);
+  }, [settings]);
+  const handleDelete = useCallback(() => {
+    setIsPending();
+    service
+      .removeNotification(settings, t(`notifications-page.custom.delete-alert`))
+      .finally(setIsNotPending);
+  }, [settings]);
   return (
     <div className="custom-notification">
       <label className="notification-setting">

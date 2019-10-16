@@ -47,10 +47,8 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
         label: renderValueText && renderValueText(x)
       }));
 
-  const isAsc = useCallback(
-    (): boolean => getSortingDirection(sorting) === SORTING_DIRECTION.ASC,
-    [sorting]
-  );
+  const isAsc = (): boolean =>
+    getSortingDirection(sorting) === SORTING_DIRECTION.ASC;
 
   const columnValues = composeSortingColumnValues();
 

@@ -43,7 +43,7 @@ const _DepositPopup: React.FC<Props> = ({
       currency: CurrencyEnum,
       setSubmitting: SetSubmittingType
     ) => sendRequest({ id, amount, currency }, setSubmitting),
-    [id, sendRequest]
+    [id]
   );
 
   return (

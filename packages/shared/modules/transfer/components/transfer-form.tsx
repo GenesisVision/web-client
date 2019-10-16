@@ -74,7 +74,7 @@ const _TransferForm: React.FC<Props> = ({
         (validateFraction(value, currency) && floatValue <= available)
       );
     },
-    [sourceItems, values]
+    [values]
   );
 
   const destinationItemWithoutCurrent = service.getDestinationItems(

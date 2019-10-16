@@ -31,7 +31,7 @@ const useCreateAssetValidate = ({
         );
       if (e) e.preventDefault();
     },
-    [dispatch, handleSubmit, isValid, t]
+    [handleSubmit, isValid]
   );
 };
 export default useCreateAssetValidate;

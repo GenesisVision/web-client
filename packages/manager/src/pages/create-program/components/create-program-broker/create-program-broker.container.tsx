@@ -21,15 +21,12 @@ const _CreateProgramBrokerContainer: React.FC<Props> = ({
   navigateToSettings
 }) => {
   const [brokers, setBrokers] = useState<Broker[] | undefined>(undefined);
-  useEffect(
-    () => {
-      fetchBrokers().then(brokers => {
-        setBrokers(brokers);
-        setSelectedBroker(brokers[0]);
-      });
-    },
-    [setSelectedBroker]
-  );
+  useEffect(() => {
+    fetchBrokers().then(brokers => {
+      setBrokers(brokers);
+      setSelectedBroker(brokers[0]);
+    });
+  }, []);
   const isForexAllowed = useSelector(forexAllowedSelector);
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const selectBrokerHandle = useCallback(
@@ -37,7 +34,7 @@ const _CreateProgramBrokerContainer: React.FC<Props> = ({
       const selectedBroker = brokers!.find(({ name }) => name === brokerName)!;
       setSelectedBroker(selectedBroker);
     },
-    [brokers, setSelectedBroker]
+    [brokers]
   );
   return (
     <CreateProgramBroker

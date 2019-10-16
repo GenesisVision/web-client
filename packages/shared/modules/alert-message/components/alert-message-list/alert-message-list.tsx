@@ -28,14 +28,11 @@ const _AlertMessageList: React.FC<Props> = props => {
   const { t } = useTranslation();
   const { messages, removeMessage, clearAllMessages } = props;
 
-  useEffect(
-    () => {
-      return history.listen(() => {
-        clearAllMessages();
-      });
-    },
-    [clearAllMessages]
-  );
+  useEffect(() => {
+    return history.listen(() => {
+      clearAllMessages();
+    });
+  }, []);
 
   const children = messages.map(message => (
     <AlertBox key={message.id}>

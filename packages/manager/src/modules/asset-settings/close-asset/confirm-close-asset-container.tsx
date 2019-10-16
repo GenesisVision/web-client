@@ -43,7 +43,7 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
         }
       });
     },
-    [asset, closeFund, closeProgram, id, onApply, onClose]
+    [asset, id]
   );
   return (
     <Dialog open={open} onClose={onClose} className="dialog--wider">

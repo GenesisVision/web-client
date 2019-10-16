@@ -35,12 +35,9 @@ const _FundSettingsPage: React.FC<Props> = ({
   const programsInfo = useSelector(programsInfoSelector);
   const description = useSelector(fundDescriptionSelector);
   const platformAssets = useSelector(fundAssetsSelector);
-  const reallocate = useCallback(
-    () => {
-      dispatchDescription();
-    },
-    [dispatchDescription]
-  );
+  const reallocate = useCallback(() => {
+    dispatchDescription();
+  }, []);
   return (
     <AssetSettingsPage
       redirectToAsset={redirectToFund}

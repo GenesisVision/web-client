@@ -51,7 +51,7 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
         .catch(() => {
           setSubmitting(false);
         }),
-    [asset.assetId, service, setClosePopup, t]
+    [asset]
   );
   return (
     <div className="notification-settings custom-notifications">

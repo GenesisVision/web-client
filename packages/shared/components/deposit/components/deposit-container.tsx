@@ -35,19 +35,16 @@ const _DepositContainer: React.FC<Props> = ({
         fetchInfo(id, currency || stateCurrency),
         dispatch(fetchBaseWallets())
       ]).then(([investInfo, wallets]) => ({ investInfo, wallets })),
-    [fetchInfo, id, currency, stateCurrency, dispatch]
+    [id, currency, stateCurrency]
   );
   const { data, sendRequest: getInvestInfo, errorMessage } = useApiRequest<
     TInvestInfoWithWallets
   >({
     request: getDepositInfo
   });
-  useEffect(
-    () => {
-      id && open && getInvestInfo();
-    },
-    [getInvestInfo, id, open]
-  );
+  useEffect(() => {
+    id && open && getInvestInfo();
+  }, [open]);
 
   return (
     <Dialog open={open} onClose={onClose}>

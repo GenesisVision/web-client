@@ -4,8 +4,6 @@ import * as React from "react";
 import { RefObject } from "react";
 import { formatDate } from "shared/utils/dates";
 
-export const DATE_FORMAT = "ll";
-
 class GVDatePicker extends React.PureComponent<Props, State> {
   state: State = {
     anchorEl: undefined
@@ -77,7 +75,7 @@ class GVDatePicker extends React.PureComponent<Props, State> {
       className,
       onChange
     } = this.props;
-
+    console.info(value);
     return (
       <div className="gv-datepicker">
         <input

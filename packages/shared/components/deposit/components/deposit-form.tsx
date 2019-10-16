@@ -59,52 +59,40 @@ const _DepositForm: React.FC<
   const [rate, setRate] = useState<number>(1);
   const [availableInWallet, setAvailableInWallet] = useState<number>(0);
   const [availableToInvest, setAvailableToInvest] = useState<number>(0);
-  useEffect(
-    () => {
-      fetchRate(walletCurrency, currency).then(setRate);
-    },
-    [currency, walletCurrency]
-  );
-  useEffect(
-    () => {
-      const maxAvailable =
-        (info as ProgramInvestInfo).availableToInvestBase !== undefined
-          ? (info as ProgramInvestInfo).availableToInvestBase
-          : Number.MAX_SAFE_INTEGER;
-      setAvailableToInvest(convertToCurrency(maxAvailable, rate));
-      setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, maxAvailable);
-    },
-    [info, rate, setFieldValue]
-  );
-  useEffect(
-    () => {
-      const available = wallets.find(
-        ({ currency }) => currency === walletCurrency
-      )!.available;
-      setAvailableInWallet(available);
-      setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, available);
-    },
-    [setFieldValue, walletCurrency, wallets]
-  );
-  useEffect(
-    () => {
-      setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
-    },
-    [rate, setFieldValue]
-  );
+  useEffect(() => {
+    fetchRate(walletCurrency, currency).then(setRate);
+  }, [currency, walletCurrency]);
 
-  const setMaxAmount = useCallback(
-    (): void => {
-      const max = formatCurrencyValue(
-        role === ROLE.INVESTOR
-          ? Math.min(availableInWallet, availableToInvest)
-          : availableInWallet,
-        walletCurrency
-      );
-      setFieldValue(DEPOSIT_FORM_FIELDS.amount, max);
-    },
-    [availableInWallet, availableToInvest, role, setFieldValue, walletCurrency]
-  );
+  useEffect(() => {
+    const maxAvailable =
+      (info as ProgramInvestInfo).availableToInvestBase !== undefined
+        ? (info as ProgramInvestInfo).availableToInvestBase
+        : Number.MAX_SAFE_INTEGER;
+    setAvailableToInvest(convertToCurrency(maxAvailable, rate));
+    setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, maxAvailable);
+  }, [info, rate]);
+
+  useEffect(() => {
+    const available = wallets.find(
+      ({ currency }) => currency === walletCurrency
+    )!.available;
+    setAvailableInWallet(available);
+    setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, available);
+  }, [walletCurrency, wallets]);
+
+  useEffect(() => {
+    setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
+  }, [rate]);
+
+  const setMaxAmount = useCallback((): void => {
+    const max = formatCurrencyValue(
+      role === ROLE.INVESTOR
+        ? Math.min(availableInWallet, availableToInvest)
+        : availableInWallet,
+      walletCurrency
+    );
+    setFieldValue(DEPOSIT_FORM_FIELDS.amount, max);
+  }, [availableInWallet, availableToInvest, walletCurrency]);
 
   const onWalletChange = ({ currency, id }: WalletBaseData) => {
     setFieldValue(DEPOSIT_FORM_FIELDS.walletCurrency, currency);

@@ -26,12 +26,9 @@ const _AssetsEditPage: React.FC<Props> = ({
   description
 }) => {
   const [t] = useTranslation();
-  useEffect(
-    () => {
-      dispatchDescription();
-    },
-    [dispatchDescription]
-  );
+  useEffect(() => {
+    dispatchDescription();
+  }, []);
   const editAssetCallback: TUpdateAssetFunc = useCallback(
     (values, setSubmitting, resetForm) => {
       const investmentLimit =
@@ -62,11 +59,9 @@ const _AssetsEditPage: React.FC<Props> = ({
         .then(dispatchDescription)
         .finally(resetForm);
     },
-    [asset, description, dispatchDescription, editAsset]
+    [description]
   );
-  const applyCloseAsset = useCallback(() => redirectToAsset(), [
-    redirectToAsset
-  ]);
+  const applyCloseAsset = useCallback(() => redirectToAsset(), []);
   const title = t("manager.asset-settings.title", {
     asset: String(asset).toLowerCase()
   });

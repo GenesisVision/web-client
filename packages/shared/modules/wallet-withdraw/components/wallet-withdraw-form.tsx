@@ -56,7 +56,7 @@ const _WalletWithdrawForm: React.FC<
       setFieldValue(FIELDS.id, wallet.id);
       setFieldValue(FIELDS.amount, "");
     },
-    [setFieldValue, setSelected, wallets]
+    [setFieldValue, selected, setSelected, wallets]
   );
   const { withdrawalCommission, available } = selected;
   const willGet = Math.max(parseFloat(amount) - withdrawalCommission, 0);

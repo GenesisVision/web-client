@@ -55,7 +55,7 @@ const useCreateAssetSubmit = ({
           setSubmitting(false);
         });
     },
-    [asset, condition, currency, dispatch]
+    []
   );
 };
 export default useCreateAssetSubmit;

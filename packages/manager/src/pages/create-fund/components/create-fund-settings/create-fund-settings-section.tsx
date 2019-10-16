@@ -15,12 +15,9 @@ const _CreateFundSettingsSection: React.FC = () => {
   const { data: minimumDepositAmount, sendRequest } = useApiRequest({
     request: fetchMinimumDepositAmount
   });
-  useEffect(
-    () => {
-      sendRequest();
-    },
-    [sendRequest]
-  );
+  useEffect(() => {
+    sendRequest();
+  }, []);
   const platformSettings = useSelector(platformDataSelector);
   const handleCreate = useCreateAssetSubmit({ asset: ASSET.FUND });
 

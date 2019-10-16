@@ -36,13 +36,7 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
         setIsReinvestingValue(!isReinvesting);
         dispatchProgramDescription();
       }),
-    [
-      sendRequest,
-      programId,
-      isReinvesting,
-      setIsReinvestingValue,
-      dispatchProgramDescription
-    ]
+    [programId, isReinvesting]
   );
   return (
     <span

@@ -48,12 +48,9 @@ const _ProgramsEditPage: React.FC<Props> = ({
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
   >(undefined);
-  useEffect(
-    () => {
-      description && getProgramBrokers(description.id).then(setBrokersInfo);
-    },
-    [description]
-  );
+  useEffect(() => {
+    description && getProgramBrokers(description.id).then(setBrokersInfo);
+  }, [description]);
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
       programEditSignal({
@@ -61,7 +58,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
         successFee: successFee!,
         volumeFee: volumeFee!
       }).then(dispatchDescription),
-    [description, dispatchDescription, programEditSignal]
+    [description]
   );
   const changeBroker = useCallback(
     (
@@ -75,14 +72,11 @@ const _ProgramsEditPage: React.FC<Props> = ({
         setSubmitting
       ).then(dispatchDescription);
     },
-    [changeBrokerMethod, description, dispatchDescription]
+    [description]
   );
-  const cancelChangeBroker = useCallback(
-    () => {
-      cancelChangeBrokerMethod(description!.id).then(dispatchDescription);
-    },
-    [cancelChangeBrokerMethod, description, dispatchDescription]
-  );
+  const cancelChangeBroker = useCallback(() => {
+    cancelChangeBrokerMethod(description!.id).then(dispatchDescription);
+  }, [description]);
   return (
     <AssetSettingsPage
       redirectToAsset={redirectToProgram}

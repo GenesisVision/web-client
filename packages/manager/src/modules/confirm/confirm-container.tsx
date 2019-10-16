@@ -22,20 +22,14 @@ const _ConfirmContainer: React.FC<Props> = ({
     request: service.get2faInfo
   });
 
-  useEffect(
-    () => {
-      get2faInfo({ programId });
-    },
-    [get2faInfo, programId]
-  );
+  useEffect(() => {
+    get2faInfo({ programId });
+  }, []);
 
-  const handleClose = useCallback(
-    () => {
-      cleanErrorMessage();
-      onClose();
-    },
-    [cleanErrorMessage, onClose]
-  );
+  const handleClose = useCallback(() => {
+    cleanErrorMessage();
+    onClose();
+  }, [onClose]);
 
   const handleConfirm = useCallback(
     (values: IConfirmFormValues, setSubmitting: SetSubmittingType) => {
@@ -43,7 +37,7 @@ const _ConfirmContainer: React.FC<Props> = ({
         .then(handleClose)
         .then(onApply);
     },
-    [confirm, handleClose, onApply, programId]
+    [programId]
   );
   if (!data) return null;
   return (
