@@ -1,9 +1,8 @@
-import { subMonths, subWeeks } from "date-fns";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
 import GVTextField from "shared/components/gv-text-field";
-import { localizedDate } from "shared/utils/dates";
+import { localizedDate, subtractDate } from "shared/utils/dates";
 
 import {
   DATA_RANGE_FILTER_TYPES,
@@ -30,14 +29,18 @@ const _DateRangeFilterValues: React.FC<
     case DATA_RANGE_FILTER_TYPES.LAST_MONTH:
       return (
         <>
-          <FirstInput value={localizedDate(subMonths(new Date(), 1))} />
+          <FirstInput
+            value={localizedDate(subtractDate(new Date(), 1, "month"))}
+          />
           <SecondInput />
         </>
       );
     case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
       return (
         <>
-          <FirstInput value={localizedDate(subWeeks(new Date(), 1))} />
+          <FirstInput
+            value={localizedDate(subtractDate(new Date(), 1, "week"))}
+          />
           <SecondInput />
         </>
       );
