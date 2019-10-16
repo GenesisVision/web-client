@@ -1,8 +1,8 @@
 import "./gv-datepicker.scss";
 
-import { format } from "date-fns";
 import * as React from "react";
 import { RefObject } from "react";
+import { formatDate } from "shared/utils/dates";
 
 export const DATE_FORMAT = "ll";
 
@@ -19,7 +19,7 @@ class GVDatePicker extends React.PureComponent<Props, State> {
       this.props.onChange({
         persist: () => {},
         target: {
-          value: newDate && format(newDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
+          value: newDate && formatDate(newDate),
           name: this.props.name
         }
       });
