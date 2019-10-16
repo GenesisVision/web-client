@@ -45,7 +45,7 @@ export default ImageBase;
 
 export interface IImageProps {
   url: string;
-  alt: string;
+  alt?: string;
   className?: string;
 }
 
@@ -53,7 +53,7 @@ export interface IImageBaseProps {
   color?: string;
   DefaultImageComponent?: React.ComponentType<any>;
   url?: string;
-  alt: string;
+  alt?: string;
   defaultImage?: string;
   imageClassName?: string;
   defaultImageClassName?: string;

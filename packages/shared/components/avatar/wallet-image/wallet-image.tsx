@@ -3,7 +3,7 @@ import WalletCurrency from "shared/media/wallet-currency.svg";
 
 import ImageBase, { IImageProps } from "../image-base";
 
-const _WalletImage: React.FC<Props & IImageProps> = ({
+const _WalletImage: React.FC<Props> = ({
   url,
   alt,
   className,
@@ -24,6 +24,6 @@ const _WalletImage: React.FC<Props & IImageProps> = ({
 const WalletImage = React.memo(_WalletImage);
 export default WalletImage;
 
-interface Props {
+interface Props extends IImageProps {
   imageClassName?: string;
 }
