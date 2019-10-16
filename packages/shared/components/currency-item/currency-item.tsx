@@ -15,7 +15,11 @@ const _CurrencyItem: React.FC<Props> = ({ logo, name, small, className }) => {
       >
         <WalletImage url={logo} alt={name} />
       </div>
-      <div className={classNames("currency-item__name", className)}>{name}</div>
+      {name && (
+        <div className={classNames("currency-item__name", className)}>
+          {name}
+        </div>
+      )}
     </div>
   );
 };
@@ -24,7 +28,7 @@ interface Props {
   className?: string;
   small?: boolean;
   logo: string;
-  name: string;
+  name?: string;
 }
 
 export const CurrencyItem = React.memo(_CurrencyItem);
