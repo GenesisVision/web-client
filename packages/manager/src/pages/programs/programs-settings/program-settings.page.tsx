@@ -1,13 +1,21 @@
 import "shared/components/details/details.scss";
 
-import { BrokersProgramInfo, ProgramDetailsFullTradesDelayEnum } from "gv-api-web";
+import {
+  BrokersProgramInfo,
+  ProgramDetailsFullTradesDelayEnum
+} from "gv-api-web";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  bindActionCreators,
+  compose,
+  Dispatch
+} from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
 import {
@@ -20,7 +28,11 @@ import { SetSubmittingType } from "shared/utils/types";
 
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ProgramSettings from "./program-settings";
-import { cancelChangeBrokerMethod, changeBrokerMethod, redirectToProgram } from "./services/program-settings.service";
+import {
+  cancelChangeBrokerMethod,
+  changeBrokerMethod,
+  redirectToProgram
+} from "./services/program-settings.service";
 import { IProgramSignalFormValues } from "./signaling-edit";
 
 const _ProgramsEditPage: React.FC<Props> = ({

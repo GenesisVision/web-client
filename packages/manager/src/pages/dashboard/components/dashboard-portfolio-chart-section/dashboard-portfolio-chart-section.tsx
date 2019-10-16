@@ -3,13 +3,13 @@ import "./dashboard-portfolio-chart-section.scss";
 import { ManagerAssets, ProgramRequests } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import { ManagerRootState } from "reducers";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import {

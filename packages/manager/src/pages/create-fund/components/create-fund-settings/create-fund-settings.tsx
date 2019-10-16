@@ -1,6 +1,6 @@
 import "shared/components/deposit-details/deposit-details.scss";
-
 import "./create-fund-settings.scss";
+
 import useCreateAssetValidate from "components/create-asset/create-asset-validate.hook";
 import DescriptionBlock from "components/create-asset/fields/description-block";
 import FeesSettings from "components/create-asset/fields/fees-settings";

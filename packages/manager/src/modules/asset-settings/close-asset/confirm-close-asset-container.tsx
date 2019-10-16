@@ -1,13 +1,17 @@
 import React, { useCallback } from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
 import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
-import { TCloseAsset, closeFund, closeProgram } from "../services/asset-settings.service";
+import {
+  closeFund,
+  closeProgram,
+  TCloseAsset
+} from "../services/asset-settings.service";
 import CloseAssetForm, { ICloseAssetFormValues } from "./close-asset-form";
 
 const _ConfirmCloseAssetContainer: React.FC<Props> = ({

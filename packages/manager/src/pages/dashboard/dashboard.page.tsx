@@ -6,10 +6,8 @@ import Page from "shared/components/page/page";
 import useRole from "shared/hooks/use-role.hook";
 
 import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
-import DashboardPortfolioChartSection
-  from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
-import DashboardPortfolioEventsSection
-  from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
+import DashboardPortfolioChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
+import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 
 const _DashboardPage: React.FC = () => {
   const [t] = useTranslation();

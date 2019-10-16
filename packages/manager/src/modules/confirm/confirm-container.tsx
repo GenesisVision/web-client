@@ -26,10 +26,13 @@ const _ConfirmContainer: React.FC<Props> = ({
     get2faInfo({ programId });
   }, []);
 
-  const handleClose = useCallback(() => {
-    cleanErrorMessage();
-    onClose();
-  }, [onClose]);
+  const handleClose = useCallback(
+    () => {
+      cleanErrorMessage();
+      onClose();
+    },
+    [onClose]
+  );
 
   const handleConfirm = useCallback(
     (values: IConfirmFormValues, setSubmitting: SetSubmittingType) => {

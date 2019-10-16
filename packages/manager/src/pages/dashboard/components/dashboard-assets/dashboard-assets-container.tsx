@@ -16,13 +16,13 @@ import dashboardFundsTableSelector from "shared/components/dashboard/dashboard-a
 import dashboardProgramsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.selector";
 import GVButton from "shared/components/gv-button";
 import { ChartIcon } from "shared/components/icon/chart-icon";
+import useRole from "shared/hooks/use-role.hook";
 
 import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import { getAssetsCounts } from "../../services/dashboard.service";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
-import useRole from "shared/hooks/use-role.hook";
 
 const _DashboardAssetsContainer: React.FC<Props> = ({
   title,
