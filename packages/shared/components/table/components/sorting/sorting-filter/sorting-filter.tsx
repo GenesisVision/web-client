@@ -4,9 +4,9 @@ import React, { useCallback } from "react";
 import GVButton from "shared/components/gv-button";
 
 import {
+  SORTING_DIRECTION,
   getSortingColumnName,
-  getSortingDirection,
-  SORTING_DIRECTION
+  getSortingDirection
 } from "../../../helpers/sorting.helpers";
 import {
   SelectFilterValue,
@@ -27,7 +27,7 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
       updateSorting(
         value + (isAsc() ? SORTING_DIRECTION.ASC : SORTING_DIRECTION.DESC)
       ),
-    [isAsc, updateSorting]
+    [updateSorting]
   );
 
   const handleOnDirectionChange = (isAsc: boolean) => (): void =>
@@ -48,7 +48,8 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
       }));
 
   const isAsc = useCallback(
-    (): boolean => getSortingDirection(sorting) === SORTING_DIRECTION.ASC
+    (): boolean => getSortingDirection(sorting) === SORTING_DIRECTION.ASC,
+    [sorting]
   );
 
   const columnValues = composeSortingColumnValues();

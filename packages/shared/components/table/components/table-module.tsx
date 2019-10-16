@@ -35,51 +35,33 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
   const [data, setData] = useState<IDataModel>(defaultData);
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
 
-  useEffect(
-    () => {
-      if (dataProp && pagingProp) {
-        const totalPages = calculateTotalPages(
-          data.total,
-          pagingProp.itemsOnPage
-        );
-        setData(dataProp);
-        setPaging({ ...pagingProp, totalPages });
-      } else updateItems();
-    },
-    [data.total, dataProp, pagingProp, updateItems]
-  );
+  useEffect(() => {
+    if (dataProp && pagingProp) {
+      const totalPages = calculateTotalPages(
+        data.total,
+        pagingProp.itemsOnPage
+      );
+      setData(dataProp);
+      setPaging({ ...pagingProp, totalPages });
+    } else updateItems();
+  }, []);
 
-  useEffect(
-    () => {
-      updateItems();
-    },
-    [paging, sorting, filtering, timestamp, updateItems]
-  );
+  useEffect(() => {
+    updateItems();
+  }, [paging, sorting, filtering, timestamp]);
 
-  const updateItems = useCallback(
-    () => {
-      if (loader) setIsPending();
-      const filters = composeRequestFilters({
-        paging,
-        sorting,
-        filtering,
-        defaultFilters
-      });
-      getItems(filters)
-        .then(setData)
-        .finally(setIsNotPending);
-    },
-    [
-      loader,
-      setIsPending,
+  const updateItems = useCallback(() => {
+    if (loader) setIsPending();
+    const filters = composeRequestFilters({
       paging,
       sorting,
       filtering,
-      defaultFilters,
-      getItems,
-      setIsNotPending
-    ]
-  );
+      defaultFilters
+    });
+    getItems(filters)
+      .then(setData)
+      .finally(setIsNotPending);
+  }, [loader, paging, sorting, filtering, timestamp]);
 
   const handleUpdateSorting = useCallback(
     (sorting: string) => {

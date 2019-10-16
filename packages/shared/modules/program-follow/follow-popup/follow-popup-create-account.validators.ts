@@ -3,7 +3,7 @@ import {
   convertFromCurrency,
   convertToCurrency
 } from "shared/utils/currency-converter";
-import { lazy, number, ,objectSchema } from "yup";
+import { Schema, lazy, number, object } from "yup";
 
 import {
   CREATE_ACCOUNT_FORM_FIELDS,
