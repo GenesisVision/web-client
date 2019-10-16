@@ -1,4 +1,4 @@
-import { format, subMonths, subWeeks } from "date-fns";
+import dayjs from "dayjs";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
@@ -21,18 +21,22 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   getDateStart = (type: DATA_RANGE_FILTER_TYPES) => {
     switch (type) {
       case DATA_RANGE_FILTER_TYPES.ALL:
-        return format(0, "yyyy-MM-dd");
+        return dayjs(0).format("yyyy-MM-dd");
       case DATA_RANGE_FILTER_TYPES.LAST_MONTH:
-        return format(subMonths(new Date(), 1), "yyyy-MM-dd");
+        return dayjs(new Date())
+          .subtract(1, "month")
+          .format("yyyy-MM-dd");
       case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
-        return format(subWeeks(new Date(), 1), "yyyy-MM-dd");
+        return dayjs(new Date())
+          .subtract(1, "week")
+          .format("yyyy-MM-dd");
     }
   };
   handleChangeType = (type: DATA_RANGE_FILTER_TYPES) => () => {
     this.setState({
       type,
       dateStart: this.getDateStart(type),
-      dateEnd: format(new Date(), "yyyy-MM-dd")
+      dateEnd: dayjs(new Date()).format("yyyy-MM-dd")
     });
   };
   handleChangeDate = (type: keyof IDataRangeFilterValue, date: string) => {
