@@ -4,7 +4,6 @@ import classNames from "classnames";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { CurrencyItem } from "shared/components/currency-item/currency-item";
-import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import { CurrencyEnum, PlatformAssetFull } from "shared/utils/types";
 
 const _FundAsset: React.FC<Props> = ({
@@ -22,7 +21,7 @@ const _FundAsset: React.FC<Props> = ({
 }) => {
   const currencyName =
     type === FUND_ASSET_TYPE.LARGE
-      ? name || CURRENCY_VALUES[currency]
+      ? name
       : type !== FUND_ASSET_TYPE.SHORT
       ? currency
       : "";
