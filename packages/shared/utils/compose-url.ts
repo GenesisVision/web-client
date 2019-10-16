@@ -4,17 +4,20 @@ import {
 } from "shared/components/notifications/notifications.routes";
 import { ASSET } from "shared/constants/constants";
 import {
-  FUNDS_FACET_ROUTE,
-  FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE,
-  FUND_SETTINGS
+  FUND_SETTINGS,
+  FUNDS_FACET_ROUTE,
+  FUNDS_SLUG_URL_PARAM_NAME
 } from "shared/routes/funds.routes";
-import { MANAGER_DETAILS_ROUTE, MANAGER_SLUG_URL_PARAM_NAME } from "shared/routes/manager.routes";
 import {
-  PROGRAMS_FACET_ROUTE,
+  MANAGER_DETAILS_ROUTE,
+  MANAGER_SLUG_URL_PARAM_NAME
+} from "shared/routes/manager.routes";
+import {
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SETTINGS,
-  PROGRAM_SLUG_URL_PARAM_NAME
+  PROGRAM_SLUG_URL_PARAM_NAME,
+  PROGRAMS_FACET_ROUTE
 } from "shared/routes/programs.routes";
 
 import replaceParams from "./replace-params";
