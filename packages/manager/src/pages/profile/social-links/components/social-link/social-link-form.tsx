@@ -30,7 +30,7 @@ const _SocialLinkForm: React.FC<Props> = ({
       <div className="social-logo">
         <SocialLinkImage url={socialLink.logo} alt={socialLink.name} />
       </div>
-      <form onSubmit={handleSubmit}>
+      <form className="social-link__form" onSubmit={handleSubmit}>
         <GVFormikField
           component={GVTextField}
           wrapperClassName="social-input__wrapper"
@@ -98,7 +98,6 @@ const SocialLinkForm = compose<React.ComponentType<OwnProps>>(
     enableReinitialize: true
   })
 )(_SocialLinkForm);
-
 export default SocialLinkForm;
 
 enum FORM_FIELD {

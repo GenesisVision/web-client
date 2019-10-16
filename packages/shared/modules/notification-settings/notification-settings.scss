@@ -25,7 +25,7 @@
   align-items: center;
   min-width: 344px;
   color: $main-color;
-  font-size: 14px;
+  font-size: $font-size-paragraph;
   line-height: 2;
   letter-spacing: 0.2px;
   padding: 11px 16px;
@@ -50,8 +50,8 @@
   }
 
   &__title {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: $padding-xsmall;
+    margin-right: $padding-xsmall;
   }
 
   &__count {
@@ -64,5 +64,6 @@
     display: flex;
     flex-direction: column;
     max-width: 100%;
+    margin-bottom: $padding-xsmall;
   }
 }

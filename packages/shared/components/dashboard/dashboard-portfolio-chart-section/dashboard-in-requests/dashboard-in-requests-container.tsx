@@ -16,6 +16,7 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
+import RequestLine from "shared/components/request-line/request-line";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useAnchor from "shared/hooks/anchor.hook";
@@ -24,7 +25,6 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { AuthRootState } from "shared/utils/types";
 
 import { CancelRequestType } from "../../dashboard.constants";
-import DashboardRequest from "./dashboard-request";
 
 const _DashboardInRequestsContainer: React.FC<Props> = ({
   inRequests,
@@ -61,7 +61,7 @@ const _DashboardInRequestsContainer: React.FC<Props> = ({
       >
         <div className="dashboard-request-popover">
           {inRequests.requests.map(x => (
-            <DashboardRequest
+            <RequestLine
               key={x.id}
               request={x}
               cancelRequest={service.cancelRequest}

@@ -44,7 +44,7 @@ interface Props {
   brokers: Broker[];
   navigateToSettings: () => void;
   setSelectedBroker: (broker: Broker) => void;
-  selectedBroker?: Broker;
+  selectedBroker: Broker;
 }
 
 const CreateProgramBrokerContainer = React.memo(_CreateProgramBrokerContainer);

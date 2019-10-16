@@ -21,12 +21,9 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
   const reallocateCount = useSelector(fundReallocateHistoryTableSelector)
     .itemsData.data.total;
 
-  useEffect(
-    () => {
-      dispatch(getDashboardHistoryDetailsCounts(id));
-    },
-    [id]
-  );
+  useEffect(() => {
+    id && dispatch(getDashboardHistoryDetailsCounts(id));
+  }, [id]);
 
   return (
     <DetailsBlock table>

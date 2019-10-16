@@ -10,19 +10,18 @@ import useTab from "shared/hooks/tab.hook";
 import CreateProgramBrokerContainer from "./create-program-broker/create-program-broker.container";
 import { CreateProgramSettingsSection } from "./create-program-settings/create-program-settings-section";
 
-const _CreateProgramContainer: React.FC<Props> = ({brokers}) => {
+const _CreateProgramContainer: React.FC<Props> = ({ brokers }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TAB>(TAB.BROKER);
 
-  const [selectedBroker, setSelectedBroker] = useState<Broker | undefined>(
-    undefined
-  );
+  const [selectedBroker, setSelectedBroker] = useState<Broker>(brokers[0]);
 
   const confirmNavigateToBroker = useCallback(() => {
     setTab(null, TAB.BROKER);
   }, []);
 
   const navigateToSettings = useCallback(() => {
+    window.scrollTo(0, 0);
     setTab(null, TAB.SETTINGS);
   }, []);
 
@@ -58,7 +57,7 @@ const _CreateProgramContainer: React.FC<Props> = ({brokers}) => {
           />
         )}
         {tab === TAB.SETTINGS && (
-          <CreateProgramSettingsSection broker={selectedBroker!} />
+          <CreateProgramSettingsSection broker={selectedBroker} />
         )}
       </div>
     </div>

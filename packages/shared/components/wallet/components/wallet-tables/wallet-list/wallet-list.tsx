@@ -4,7 +4,7 @@ import { WalletData } from "gv-api-web";
 import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import Link from "shared/components/link/link";
 import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
@@ -68,12 +68,7 @@ const _WalletList: React.FC<Props> = ({ t, createButtonToolbar, wallets }) => {
                   state: "/ Wallet"
                 }}
               >
-                <WalletImage
-                  url={wallet.logo}
-                  imageClassName="wallet-list__icon"
-                  alt={wallet.currency}
-                />
-                {wallet.currency}
+                <CurrencyItem logo={wallet.logo} name={wallet.currency} small />
               </Link>
             </TableCell>
             <TableCell className="wallet-list__cell">

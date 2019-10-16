@@ -38,7 +38,7 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
           name={DATE_RANGE_FILTER_NAME}
           value={filtering[DATE_RANGE_FILTER_NAME]}
           onChange={updateFilter}
-          startLabel={t("filters.date-range.program-start")}
+          startLabel={t("filters.date-range.fund-start")}
         />
       )}
       renderHeader={(column: SortingColumn) => {

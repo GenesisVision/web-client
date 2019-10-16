@@ -17,6 +17,7 @@ const _CreateAssetBack: React.FC<Props> = ({ onApply, asset }) => {
     <>
       <BackButtonBody onClick={setIsNavigationDialogVisible} />
       <ConfirmPopup
+        header={t("manager.create-asset-page.go-back")}
         open={isNavigationDialogVisible}
         onClose={setIsNavigationDialogNotVisible}
         onApply={() => {

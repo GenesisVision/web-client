@@ -7,7 +7,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import Table from "shared/components/table/components/table";
@@ -24,8 +24,8 @@ import { MiddlewareDispatch } from "shared/utils/types";
 
 import { fetchAccounts } from "../../../services/wallet.services";
 import {
-  COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE,
-  composeWalletCopytradingCurrencyUrl
+  composeWalletCopytradingCurrencyUrl,
+  COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE
 } from "../../../wallet.routes";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
@@ -41,12 +41,9 @@ const _WalletCopytrading: React.FC<Props> = ({
   const [currentAccount, setCurrentAccount] = useState<
     CopyTradingAccountInfo | undefined
   >(undefined);
-  useEffect(
-    () => {
-      service.fetchAccounts();
-    },
-    [service]
-  );
+  useEffect(() => {
+    service.fetchAccounts();
+  }, [service]);
   const handleOpenPopup = useCallback(
     (openMethod: () => void) => (
       currentAccount?: CopyTradingAccountInfo
@@ -84,12 +81,11 @@ const _WalletCopytrading: React.FC<Props> = ({
                   )}`
                 }}
               >
-                <WalletImage
-                  url={account.logo}
-                  alt={account.currency}
-                  imageClassName="wallet-list__icon"
+                <CurrencyItem
+                  logo={account.logo}
+                  name={account.currency}
+                  small
                 />
-                {account.currency}
               </Link>
             </TableCell>
             <TableCell className="wallet-list__cell wallet-list__cell--balance">

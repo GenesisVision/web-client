@@ -1,5 +1,3 @@
-import "./asset-status.scss";
-
 import * as React from "react";
 import { useCallback } from "react";
 import Popover, {
@@ -46,17 +44,15 @@ const _AssetStatus: React.FC<Props> = ({
         noPadding
         onClose={clearAnchor}
       >
-        <div className="dashboard-request-popover">
-          <AssetStatusRequests
-            successFee={successFee}
-            entryFee={entryFee}
-            exitFee={exitFee}
-            id={id}
-            asset={asset}
-            handleCloseDropdown={clearAnchor}
-            onCancel={onCancel}
-          />
-        </div>
+        <AssetStatusRequests
+          successFee={successFee}
+          entryFee={entryFee}
+          exitFee={exitFee}
+          id={id}
+          asset={asset}
+          handleCloseDropdown={clearAnchor}
+          onCancel={onCancel}
+        />
       </Popover>
     </>
   );

@@ -1,7 +1,7 @@
 import { MultiWalletTransaction } from "gv-api-web";
 import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import Profitability from "shared/components/profitability/profitability";
 import Status from "shared/components/status/status";
 import TableCell from "shared/components/table/components/table-cell";
@@ -15,23 +15,19 @@ import { formatValue } from "shared/utils/formatter";
 const ConvertTransaction: React.FC<Props> = React.memo(({ transaction }) => (
   <>
     <div className="wallet-transactions__col">
-      <WalletImage
-        url={transaction.logoFrom}
-        imageClassName="wallet-transactions__icon"
-        alt={transaction.currencyFrom}
-        className="wallet-transactions__icon-container"
+      <CurrencyItem
+        logo={transaction.logoFrom}
+        name={transaction.currencyFrom}
+        small
       />
-      {transaction.currencyFrom}
     </div>
     <div className="wallet-transactions__back-arrow">&rarr;</div>
     <div className="wallet-transactions__col">
-      <WalletImage
-        url={transaction.logoTo}
-        imageClassName="wallet-transactions__icon"
-        alt={transaction.currencyTo}
-        className="wallet-transactions__icon-container"
+      <CurrencyItem
+        logo={transaction.logoTo}
+        name={transaction.currencyTo}
+        small
       />
-      {transaction.currencyTo}
     </div>
   </>
 ));
@@ -86,14 +82,11 @@ const _TransactionsRow: React.FC<Props> = ({
               {isConvertAction ? (
                 <ConvertTransaction transaction={transaction} />
               ) : (
-                <>
-                  <WalletImage
-                    url={transaction.logoFrom}
-                    imageClassName="wallet-transactions__icon"
-                    alt={transaction.currencyFrom}
-                  />
-                  {transaction.currencyFrom}
-                </>
+                <CurrencyItem
+                  logo={transaction.logoFrom}
+                  name={transaction.currencyFrom}
+                  small
+                />
               )}
             </div>
           </TableCell>

@@ -3,7 +3,7 @@ import "./fund-asset.scss";
 import classNames from "classnames";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import { CurrencyEnum, PlatformAssetFull } from "shared/utils/types";
 
 const _FundAsset: React.FC<Props> = ({
@@ -19,6 +19,18 @@ const _FundAsset: React.FC<Props> = ({
   className,
   ...other
 }) => {
+  const currencyName =
+    type === FUND_ASSET_TYPE.LARGE
+      ? name
+      : type !== FUND_ASSET_TYPE.SHORT
+      ? currency
+      : "";
+  const currencyClassName =
+    type === FUND_ASSET_TYPE.LARGE
+      ? "fund-asset__currency-full"
+      : type !== FUND_ASSET_TYPE.SHORT
+      ? "fund-asset__currency-short"
+      : "";
   switch (type) {
     case FUND_ASSET_TYPE.TEXT:
       return (
@@ -40,17 +52,12 @@ const _FundAsset: React.FC<Props> = ({
             }
           )}
         >
-          <FundAssetImage url={icon} alt={currency} />
-          {currency && (
-            <div className="fund-asset__currencies">
-              {type === FUND_ASSET_TYPE.LARGE && (
-                <div className="fund-asset__currency-full">{name}</div>
-              )}
-              {type !== FUND_ASSET_TYPE.SHORT && (
-                <div className="fund-asset__currency-short">{currency}</div>
-              )}
-            </div>
-          )}
+          <CurrencyItem
+            logo={icon}
+            small
+            name={!!currency && currencyName}
+            className={classNames("fund-asset__currency", currencyClassName)}
+          />
           <div className="fund-asset__percent">
             <NumberFormat value={percent} suffix="%" displayType="text" />
           </div>

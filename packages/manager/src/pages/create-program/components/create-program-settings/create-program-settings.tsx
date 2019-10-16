@@ -73,35 +73,36 @@ const _CreateProgramSettings: React.FC<Props> = ({
           logoName={CREATE_PROGRAM_FIELDS.logo}
           description={description}
         />
-        <BrokerAccount
-          setAccountType={(value: string) =>
-            setFieldValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
-          }
-          setLeverage={(value: number) =>
-            setFieldValue(CREATE_PROGRAM_FIELDS.leverage, value)
-          }
-          setCurrency={(value: string) =>
-            setFieldValue(CREATE_PROGRAM_FIELDS.currency, value)
-          }
-          name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-          accountTypes={broker.accountTypes}
-        />
-        <Currency
-          name={CREATE_PROGRAM_FIELDS.currency}
-          disabled={accountType === undefined}
-          accountCurrencies={accountType.currencies as CurrencyEnum[]}
-        />
-        <Leverage
-          name={CREATE_PROGRAM_FIELDS.leverage}
-          disabled={!accountType}
-          accountLeverages={accountType.leverages}
-        />
-        <PeriodLength
-          programsInfo={programsInfo}
-          name={CREATE_PROGRAM_FIELDS.periodLength}
-        />
-        <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
-        <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
+        <div className="create-program-settings__program-fields">
+          <BrokerAccount
+            setAccountType={(value: string) =>
+              setFieldValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
+            }
+            setLeverage={(value: number) =>
+              setFieldValue(CREATE_PROGRAM_FIELDS.leverage, value)
+            }
+            setCurrency={(value: string) =>
+              setFieldValue(CREATE_PROGRAM_FIELDS.currency, value)
+            }
+            name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
+            accountTypes={broker.accountTypes}
+          />
+          <Currency
+            name={CREATE_PROGRAM_FIELDS.currency}
+            disabled={accountType === undefined}
+            accountCurrencies={accountType.currencies as CurrencyEnum[]}
+          />
+          <Leverage
+            name={CREATE_PROGRAM_FIELDS.leverage}
+            accountLeverages={accountType.leverages}
+          />
+          <PeriodLength
+            programsInfo={programsInfo}
+            name={CREATE_PROGRAM_FIELDS.periodLength}
+          />
+          <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
+          <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
+        </div>
         <InvestmentLimitField
           checkboxName={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
           inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
