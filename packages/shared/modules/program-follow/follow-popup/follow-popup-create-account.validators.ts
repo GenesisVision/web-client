@@ -1,8 +1,5 @@
 import { WalletData } from "gv-api-web";
-import {
-  convertFromCurrency,
-  convertToCurrency
-} from "shared/utils/currency-converter";
+import { convertFromCurrency, convertToCurrency } from "shared/utils/currency-converter";
 import { Schema, lazy, number, object } from "yup";
 
 import {

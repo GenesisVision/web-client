@@ -1,10 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import {
-  CaptchaCheckResult,
-  GeeTestResult,
-  PowResult,
-  RegisterInvestorViewModel
-} from "gv-api-web";
+import { CaptchaCheckResult, RegisterInvestorViewModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";

@@ -1,6 +1,5 @@
 import { ProgramFacetTimeframeEnum } from "gv-api-web";
-import moment from "moment";
-import { DurationInputArg2 } from "moment";
+import moment, { DurationInputArg2 } from "moment";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import { IComposeDefaultFilter } from "../../table.types";

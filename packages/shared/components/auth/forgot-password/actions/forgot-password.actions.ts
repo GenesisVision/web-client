@@ -1,5 +1,4 @@
 import { ForgotPasswordViewModel, ResetPasswordViewModel } from "gv-api-web";
-import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import AuthApi from "shared/services/api-client/auth-api";
 import { ApiAction } from "shared/utils/types";
 

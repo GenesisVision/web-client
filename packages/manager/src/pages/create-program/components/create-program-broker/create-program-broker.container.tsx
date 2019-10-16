@@ -11,8 +11,7 @@ import {
 
 import {
   CreateProgramBrokerLoaderData,
-  fetchBrokers,
-  getBrokerLoaderData
+  fetchBrokers
 } from "../../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker";
 

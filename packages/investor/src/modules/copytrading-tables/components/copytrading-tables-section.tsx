@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import { InvestorRootState } from "reducers";
 import {
   Action,
   ActionCreatorsMapObject,
-  bindActionCreators,
-  Dispatch
+  Dispatch,
+  bindActionCreators
 } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
@@ -15,8 +15,8 @@ import useTab from "shared/hooks/tab.hook";
 
 import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
 import {
-  getCopytradingTradesCount,
-  ICopytradingTradesCounts
+  ICopytradingTradesCounts,
+  getCopytradingTradesCount
 } from "../services/copytrading-tables.service";
 import {
   dashboardOpenTradesTableSelector,
@@ -35,13 +35,10 @@ const _CopytradingTablesSection: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_TRADES);
-  useEffect(
-    () => {
-      service.getCopytradingTradesCount(currency);
-      return service.clearCopytradingTable;
-    },
-    [currency, service]
-  );
+  useEffect(() => {
+    service.getCopytradingTradesCount(currency);
+    return service.clearCopytradingTable;
+  }, [currency, service]);
   const { openTradesCount, logCount, historyCount } = counts;
   return (
     <Surface>

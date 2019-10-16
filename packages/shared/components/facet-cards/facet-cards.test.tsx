@@ -5,10 +5,7 @@ import * as React from "react";
 import FacetCard from "./facet-card";
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
-import {
-  ASSETS_FACETS,
-  _FacetCardsContainer as FacetCardsContainer
-} from "./faset-cards-container";
+import { ASSETS_FACETS, _FacetCardsContainer as FacetCardsContainer } from "./faset-cards-container";
 
 type Facet = FundFacet & ProgramFacet;
 

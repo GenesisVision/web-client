@@ -5,20 +5,12 @@ import { programEditSignal } from "modules/program-signal/program-edit-signal/se
 import React, { useCallback } from "react";
 import { withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect, useSelector } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { fundDescriptionSelector } from "shared/components/funds/fund-details/reducers/description.reducer";
 import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
 import { ASSET } from "shared/constants/constants";
-import {
-  fundAssetsSelector,
-  programsInfoSelector
-} from "shared/reducers/platform-reducer";
+import { fundAssetsSelector, programsInfoSelector } from "shared/reducers/platform-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
 import FundSettings from "./fund-settings";

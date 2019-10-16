@@ -2,12 +2,7 @@ import ConfirmContainer from "modules/confirm/confirm-container";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
 import GVButton from "shared/components/gv-button";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import SettingsBlock from "shared/components/settings-block/settings-block";

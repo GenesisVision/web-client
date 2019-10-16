@@ -4,11 +4,7 @@ import * as React from "react";
 import withLoader from "shared/decorators/with-loader";
 
 import BaseProfitability from "./base-profitability";
-import {
-  composeProfitabilityPrefix,
-  PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT
-} from "./profitability.helper";
+import { PROFITABILITY_PREFIX, PROFITABILITY_VARIANT, composeProfitabilityPrefix } from "./profitability.helper";
 
 const renderPrefix = (value: number, prefix: PROFITABILITY_PREFIX) => {
   if (value > 0) return composeProfitabilityPrefix(prefix).positive;

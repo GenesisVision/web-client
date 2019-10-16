@@ -1,11 +1,11 @@
 import moment from "moment";
 import {
   DEFAULT_DECIMAL_SCALE,
-  TUnitName,
-  timeUnits
+  timeUnits,
+  TUnitName
 } from "shared/constants/constants";
 
-import { CURRENCY_FRACTIONS, checkCurrencyValue } from "./currency-converter";
+import { checkCurrencyValue, CURRENCY_FRACTIONS } from "./currency-converter";
 
 const reverseString = (value: string | number): string =>
   String(value)

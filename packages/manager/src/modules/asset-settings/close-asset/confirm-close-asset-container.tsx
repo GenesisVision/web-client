@@ -7,11 +7,7 @@ import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
-import {
-  TCloseAsset,
-  closeFund,
-  closeProgram
-} from "../services/asset-settings.service";
+import { TCloseAsset, closeFund, closeProgram } from "../services/asset-settings.service";
 import CloseAssetForm, { ICloseAssetFormValues } from "./close-asset-form";
 
 const _ConfirmCloseAssetContainer: React.FC<Props> = ({

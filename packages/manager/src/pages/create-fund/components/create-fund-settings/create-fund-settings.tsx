@@ -1,8 +1,6 @@
 import "shared/components/deposit-details/deposit-details.scss";
 
 import "./create-fund-settings.scss";
-
-import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
 import useCreateAssetValidate from "components/create-asset/create-asset-validate.hook";
 import DescriptionBlock from "components/create-asset/fields/description-block";
 import FeesSettings from "components/create-asset/fields/fees-settings";
@@ -17,8 +15,8 @@ import { IImageValue } from "shared/components/form/input-image/input-image";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import { ASSET } from "shared/constants/constants";
 import {
-  WithBlurLoaderProps,
-  withBlurLoader
+  withBlurLoader,
+  WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 import { SetSubmittingType } from "shared/utils/types";
 

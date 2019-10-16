@@ -1,8 +1,4 @@
-import {
-  CopyTradingAccountsList,
-  WalletData,
-  WalletMultiSummary
-} from "gv-api-web";
+import { CopyTradingAccountsList, WalletMultiSummary } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState

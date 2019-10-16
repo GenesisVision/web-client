@@ -3,6 +3,7 @@ import "shared/components/details/details-description-section/details-statistic-
 import { OrderModel } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { generateProgramTradesColumns } from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -10,15 +11,11 @@ import TableContainer from "shared/components/table/components/table-container";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import filesService from "shared/services/file-service";
 
-import {
-  tradesSelector,
-  tradesTableSelector
-} from "../../reducers/program-history.reducer";
+import { tradesSelector, tradesTableSelector } from "../../reducers/program-history.reducer";
 import { getTrades } from "../../services/program-details.service";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
-import ProgramTradesRow from "./program-trades-row";
-import { useSelector } from "react-redux";
 import { TradesDelayHint } from "../trades-delay-hint";
+import ProgramTradesRow from "./program-trades-row";
 
 const _ProgramTrades: React.FC<Props> = ({
   showSwaps,

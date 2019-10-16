@@ -1,8 +1,7 @@
 import { ReactWrapper, mount } from "enzyme";
 import * as React from "react";
 import { Provider } from "react-redux";
-import { MockStoreEnhanced } from "redux-mock-store";
-import configureStore from "redux-mock-store";
+import configureStore, { MockStoreEnhanced } from "redux-mock-store";
 
 import GVButton from "../gv-button";
 import BackButton from "./back-button";

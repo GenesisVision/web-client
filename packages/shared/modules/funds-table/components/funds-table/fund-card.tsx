@@ -1,6 +1,6 @@
 import { FundDetails } from "gv-api-web";
-import { useCallback } from "react";
 import * as React from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";

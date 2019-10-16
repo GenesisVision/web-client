@@ -1,19 +1,10 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
 import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
 import { logout } from "shared/components/auth/signin/signin.service";
 import Header from "shared/components/header/header";
-import {
-  fetchProfileHeaderInfo,
-  fetchTwoFactor,
-  notificationsToggle
-} from "shared/components/header/header.service";
+import { fetchProfileHeaderInfo, fetchTwoFactor, notificationsToggle } from "shared/components/header/header.service";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { headerSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";

@@ -3,16 +3,8 @@ import "./sorting-filter.scss";
 import React, { useCallback } from "react";
 import GVButton from "shared/components/gv-button";
 
-import {
-  SORTING_DIRECTION,
-  getSortingColumnName,
-  getSortingDirection
-} from "../../../helpers/sorting.helpers";
-import {
-  SelectFilterValue,
-  SortingColumn,
-  TFilter
-} from "../../filtering/filter.type";
+import { SORTING_DIRECTION, getSortingColumnName, getSortingDirection } from "../../../helpers/sorting.helpers";
+import { SelectFilterValue, SortingColumn, TFilter } from "../../filtering/filter.type";
 import SelectFilter from "../../filtering/select-filter/select-filter";
 
 const _SortingFilter: React.FC<ISortingFilterProps> = ({

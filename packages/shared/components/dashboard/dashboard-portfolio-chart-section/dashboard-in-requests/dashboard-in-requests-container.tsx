@@ -5,17 +5,9 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "shared/components/popover/popover";
+import Popover, { HORIZONTAL_POPOVER_POS, VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import RequestLine from "shared/components/request-line/request-line";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";

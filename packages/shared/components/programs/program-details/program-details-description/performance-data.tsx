@@ -12,8 +12,8 @@ import StatisticItemTextLoader from "shared/components/statistic-item/statistic-
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
 import {
-  WithBlurLoaderProps,
-  withBlurLoader
+  withBlurLoader,
+  WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 import filesService from "shared/services/file-service";
 import { getRandomInteger } from "shared/utils/helpers";

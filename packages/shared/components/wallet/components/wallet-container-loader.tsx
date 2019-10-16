@@ -1,7 +1,6 @@
 import "./wallet-balance/wallet-balance.scss";
 
 import * as React from "react";
-import Page from "shared/components/page/page";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";

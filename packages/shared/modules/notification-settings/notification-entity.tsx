@@ -2,7 +2,6 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import GVProgramAvatar from "shared/components/gv-program-avatar";
-import filesService from "shared/services/file-service";
 
 const _NotificationEntity: React.FC<Props> = ({
   t,

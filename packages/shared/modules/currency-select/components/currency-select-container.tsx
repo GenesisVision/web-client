@@ -3,12 +3,7 @@ import "./currency-select.scss";
 import classNames from "classnames";
 import React, { useCallback } from "react";
 import { ResolveThunks, connect } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  Dispatch,
-  bindActionCreators,
-  compose
-} from "redux";
+import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { currenciesSelector } from "shared/reducers/platform-reducer";

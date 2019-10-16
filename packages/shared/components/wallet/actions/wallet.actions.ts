@@ -2,8 +2,7 @@ import {
   CopyTradingAccountsList,
   MultiWalletTransactionsViewModel,
   WalletMultiAvailable,
-  WalletMultiSummary,
-  WalletTransactionsViewModel
+  WalletMultiSummary
 } from "gv-api-web";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import signalApi from "shared/services/api-client/signal-api";

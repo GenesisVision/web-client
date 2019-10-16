@@ -1,9 +1,4 @@
-import {
-  CancelablePromise,
-  CaptchaDetails,
-  GeeTestDetails,
-  PowDetails
-} from "gv-api-web";
+import { CancelablePromise, CaptchaDetails, PowDetails } from "gv-api-web";
 import platformApi from "shared/services/api-client/platform-api";
 
 //@ts-ignore

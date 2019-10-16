@@ -1,8 +1,7 @@
-import Enzyme, { ReactWrapper, ShallowWrapper, mount, shallow } from "enzyme";
+import { ReactWrapper, mount } from "enzyme";
 import React from "react";
 import { Provider } from "react-redux";
-import { MockStoreEnhanced } from "redux-mock-store";
-import configureStore from "redux-mock-store";
+import configureStore, { MockStoreEnhanced } from "redux-mock-store";
 import GVButton from "shared/components/gv-button";
 
 import { AlertMessagesState } from "../../reducers/alert-message-reducers";

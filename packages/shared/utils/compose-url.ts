@@ -9,10 +9,7 @@ import {
   FUND_DETAILS_ROUTE,
   FUND_SETTINGS
 } from "shared/routes/funds.routes";
-import {
-  MANAGER_DETAILS_ROUTE,
-  MANAGER_SLUG_URL_PARAM_NAME
-} from "shared/routes/manager.routes";
+import { MANAGER_DETAILS_ROUTE, MANAGER_SLUG_URL_PARAM_NAME } from "shared/routes/manager.routes";
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAM_DETAILS_ROUTE,

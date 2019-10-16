@@ -1,17 +1,11 @@
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { FundWithdrawDialog } from "shared/components/fund-withdraw/fund-withdraw-dialog";
-import {
-  FundWithdraw,
-  FundWithdrawalInfoResponse
-} from "shared/components/fund-withdraw/fund-withdraw.types";
+import { FundWithdraw, FundWithdrawalInfoResponse } from "shared/components/fund-withdraw/fund-withdraw.types";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import { RootState } from "shared/reducers/root-reducer";
 
-import {
-  getFundWithdrawInfo,
-  withdrawFund
-} from "./services/fund-withdrawal.services";
+import { getFundWithdrawInfo, withdrawFund } from "./services/fund-withdrawal.services";
 
 interface IDispatchProps {
   fetchInfo(): Promise<FundWithdrawalInfoResponse>;

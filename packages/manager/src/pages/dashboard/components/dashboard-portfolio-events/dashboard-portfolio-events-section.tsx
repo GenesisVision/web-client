@@ -1,12 +1,12 @@
 import { InvestmentEventViewModels } from "gv-api-web";
 import React from "react";
-import { connect, ResolveThunks } from "react-redux";
+import { ResolveThunks, connect } from "react-redux";
 import { ManagerRootState } from "reducers";
 import {
   ActionCreatorsMapObject,
+  Dispatch,
   bindActionCreators,
-  compose,
-  Dispatch
+  compose
 } from "redux";
 import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
 import { DASHBOARD_EVENTS_ROUTE } from "shared/routes/dashboard.routes";

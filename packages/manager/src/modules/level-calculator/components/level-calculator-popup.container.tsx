@@ -1,9 +1,8 @@
 import {
-  LevelsParamsInfo,
+  CancelablePromise,
   ProgramLevelInfo,
   ProgramsLevelsInfo
 } from "gv-api-web";
-import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 

@@ -2,18 +2,13 @@ import "shared/components/deposit-details/deposit-details.scss";
 
 import "./create-program-settings.scss";
 
-import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
 import useCreateAssetValidate from "components/create-asset/create-asset-validate.hook";
 import DescriptionBlock from "components/create-asset/fields/description-block";
 import FeesSettings from "components/create-asset/fields/fees-settings";
 import InvestmentLimitField from "components/create-asset/fields/investment-limit-field";
 import StopOutField from "components/create-asset/fields/stop-out-field";
 import { InjectedFormikProps, withFormik } from "formik";
-import {
-  Broker,
-  NewProgramRequestTradesDelayEnum,
-  ProgramsInfo
-} from "gv-api-web";
+import { Broker, NewProgramRequestTradesDelayEnum, ProgramsInfo } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
