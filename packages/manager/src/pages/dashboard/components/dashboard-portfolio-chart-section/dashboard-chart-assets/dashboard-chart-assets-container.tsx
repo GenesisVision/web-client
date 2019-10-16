@@ -35,7 +35,7 @@ const _DashboardChartAssetsContainer: React.FC<Props> = ({
       service.getAssetChart(id, title, type);
       clearAnchor();
     },
-    [clearAnchor, service]
+    []
   );
   return (
     <div className="dashboard-chart-assets">
