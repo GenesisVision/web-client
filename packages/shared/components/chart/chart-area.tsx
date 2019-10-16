@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Area } from "recharts";
 
-const ChartArea: React.FC<Props> = ({data,stroke,fill}) => (
+const ChartArea: React.FC<Props> = ({ data, stroke, fill }) => (
   <>
     {/*
         //@ts-ignore*/}
@@ -21,9 +21,9 @@ const ChartArea: React.FC<Props> = ({data,stroke,fill}) => (
 );
 
 interface Props {
-  data: any
-  stroke: string
-  fill: string
+  data: any;
+  stroke: string;
+  fill: string;
 }
 
-export default ChartArea
+export default ChartArea;

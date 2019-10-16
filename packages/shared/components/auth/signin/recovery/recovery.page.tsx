@@ -22,6 +22,5 @@ interface LocationProps {
   location: LocationState;
 }
 
-
 const RecoveryPage = React.memo(_RecoveryPage);
 export default RecoveryPage;

@@ -1,4 +1,4 @@
-import { ShallowWrapper, shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import * as React from "react";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import Tooltip from "shared/components/tooltip/tooltip";

@@ -1,9 +1,6 @@
 import { WalletData } from "gv-api-web";
-import {
-  convertFromCurrency,
-  convertToCurrency
-} from "shared/utils/currency-converter";
-import { Schema, lazy, number, object } from "yup";
+import { convertFromCurrency, convertToCurrency } from "shared/utils/currency-converter";
+import { lazy, number, object, Schema } from "yup";
 
 import {
   CREATE_ACCOUNT_FORM_FIELDS,

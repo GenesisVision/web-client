@@ -4,7 +4,10 @@ import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { withBlurLoader, WithBlurLoaderProps } from "shared/decorators/with-blur-loader";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "shared/decorators/with-blur-loader";
 import ChartCurrencySelector, {
   TAddChartCurrency,
   TChangeChartCurrency,
@@ -14,7 +17,11 @@ import ChartCurrencySelector, {
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
-import { ProfitChartDataType, ProfitChartType, useChartData } from "../../details.chart.helpers";
+import {
+  ProfitChartDataType,
+  ProfitChartType,
+  useChartData
+} from "../../details.chart.helpers";
 
 const _ProfitChartElements: React.FC<Props> = ({
   renderProfitChart,

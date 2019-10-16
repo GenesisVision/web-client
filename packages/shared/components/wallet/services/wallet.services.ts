@@ -6,8 +6,8 @@ import {
 } from "gv-api-web";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
-  TableItems,
-  mapToTableItems
+  mapToTableItems,
+  TableItems
 } from "shared/components/table/helpers/mapper";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import signalApi from "shared/services/api-client/signal-api";

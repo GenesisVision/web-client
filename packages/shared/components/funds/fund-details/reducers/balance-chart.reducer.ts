@@ -3,7 +3,7 @@ import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { TSelectorData, apiSelector } from "shared/utils/selectors";
+import { apiSelector, TSelectorData } from "shared/utils/selectors";
 
 import { FETCH_FUND_BALANCE_CHART } from "../actions/fund-details.actions";
 

@@ -5,12 +5,12 @@ import { compose } from "redux";
 import Page from "shared/components/page/page";
 import { ROLE } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import useRole from "shared/hooks/use-role.hook";
 
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
-import useRole from "shared/hooks/use-role.hook";
 
 const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
   wallet,
