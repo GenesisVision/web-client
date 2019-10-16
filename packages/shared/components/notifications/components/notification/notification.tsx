@@ -4,7 +4,6 @@ import { NotificationViewModel } from "gv-api-web";
 import * as React from "react";
 import { Link, LinkProps } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import Link, { LinkProps } from "shared/components/link/link";
 import NewsIcon from "shared/media/news.svg";
 import RedUserIcon from "shared/media/red-user.svg";
 import {

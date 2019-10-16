@@ -21,7 +21,7 @@ export const getPeriodStartDate = (periodType: ChartPeriodType) => {
   if (periodType === ChartPeriodType.all) {
     return undefined;
   }
-  return subtractDate(new Date(), 1, periodType);
+  return subtractDate(new Date(), 1, periodType as any);
 };
 
 export const getDefaultPeriod = (): ChartDefaultPeriod => {
