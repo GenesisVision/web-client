@@ -9,6 +9,11 @@ import {
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 
+const subtract: { [keys: string]: "month" | "week" } = {
+  [DATA_RANGE_FILTER_TYPES.LAST_MONTH]: "month",
+  [DATA_RANGE_FILTER_TYPES.LAST_WEEK]: "week"
+};
+
 class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   state = {
     type: this.props.value
@@ -21,22 +26,18 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   getDateStart = (type: DATA_RANGE_FILTER_TYPES) => {
     switch (type) {
       case DATA_RANGE_FILTER_TYPES.ALL:
-        return dayjs(0).format("yyyy-MM-dd");
-      case DATA_RANGE_FILTER_TYPES.LAST_MONTH:
-        return dayjs(new Date())
-          .subtract(1, "month")
-          .format("yyyy-MM-dd");
-      case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
-        return dayjs(new Date())
-          .subtract(1, "week")
-          .format("yyyy-MM-dd");
+        return dayjs(0).format("YYYY-MM-DD");
+      default:
+        return dayjs()
+          .subtract(1, subtract[type])
+          .format("YYYY-MM-DD");
     }
   };
   handleChangeType = (type: DATA_RANGE_FILTER_TYPES) => () => {
     this.setState({
       type,
       dateStart: this.getDateStart(type),
-      dateEnd: dayjs(new Date()).format("yyyy-MM-dd")
+      dateEnd: dayjs().format("YYYY-MM-DD")
     });
   };
   handleChangeDate = (type: keyof IDataRangeFilterValue, date: string) => {

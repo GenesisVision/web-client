@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
 import { ProgramFacetTimeframeEnum } from "gv-api-web";
-import { subtractDate } from "shared/utils/dates";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import { IComposeDefaultFilter } from "../../table.types";
@@ -35,39 +34,24 @@ export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
   )
     return false;
   if (value.type === DATA_RANGE_FILTER_TYPES.CUSTOM) {
-    if (value.dateStart === undefined || value.dateEnd === undefined)
-      return false;
-    const start = new Date(value.dateStart);
-    const end = new Date(value.dateEnd);
-    if (
-      !dayjs(start).isValid() ||
-      !dayjs(end).isValid() ||
-      dayjs(end).isAfter(start)
-    )
-      return false;
+    const start = dayjs(value.dateStart);
+    const end = dayjs(value.dateEnd);
+    if (!start.isValid() || !end.isValid() || start.isAfter(end)) return false;
   }
   return true;
 };
 
 const dateFrom = (
   subtract?: "month" | "week",
-  date: Date | string | number = new Date()
-): string => {
-  switch (subtract) {
-    case "month":
-    case "week":
-      return dayjs(subtractDate(date, 1, subtract))
-        .startOf("minute")
-        .toISOString();
-    default:
-      return dayjs(date)
-        .startOf("minute")
-        .toISOString();
-  }
-};
+  date: Date | number = new Date()
+): string =>
+  dayjs(date)
+    .subtract(1, subtract || "second")
+    .startOf("minute")
+    .toISOString();
 
 const dateTo = (): string =>
-  dayjs(new Date())
+  dayjs()
     .add(1, "minute")
     .startOf("minute")
     .toISOString();

@@ -75,7 +75,6 @@ class GVDatePicker extends React.PureComponent<Props, State> {
       className,
       onChange
     } = this.props;
-    console.info(value);
     return (
       <div className="gv-datepicker">
         <input
