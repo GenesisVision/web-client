@@ -18,8 +18,8 @@ import programDetailsReducer, {
 import {
   CopyTradingAccountsReducer,
   CopyTradingAccountsState,
-  WalletState,
-  walletReducer
+  walletReducer,
+  WalletState
 } from "shared/components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer, {
   AlertMessagesState
