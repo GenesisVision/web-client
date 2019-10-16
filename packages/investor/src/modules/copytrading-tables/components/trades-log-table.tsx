@@ -22,7 +22,9 @@ class _TradesLogTable extends React.PureComponent<Props> {
         columns={COPYTRADING_TRADES_LOG_COLUMNS}
         renderHeader={column => (
           <span
-            className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
+            className={`details-trades__head-cell program-details-trades__cell--${
+              column.name
+            }`}
           >
             {t(`investor.copytrading-tables.trades-log-header.${column.name}`)}
           </span>

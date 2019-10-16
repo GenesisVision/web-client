@@ -1,5 +1,4 @@
 import "shared/components/dashboard/dashboard.scss";
-
 import "./dashboard.scss";
 
 import * as React from "react";
