@@ -1,6 +1,6 @@
 import "./download-button.scss";
 
-import { format } from "date-fns";
+import dayjs from "dayjs";
 import { saveAs } from "file-saver";
 import * as React from "react";
 import { useCallback } from "react";
@@ -17,7 +17,7 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
   title
 }) => {
   const loadFile = useCallback(() => {
-    const dateNow = format(new Date(), "YYYY-MM-DD_HH-mm-ss");
+    const dateNow = dayjs(new Date()).format("YYYY-MM-DD_HH-mm-ss");
     filesService
       .getStatisticExportFile(programId, dateRange)
       .then((blob: Blob) => saveAs(blob, `${title}_statistic_${dateNow}.xlsx`));
