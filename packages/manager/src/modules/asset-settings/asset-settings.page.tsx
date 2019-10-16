@@ -4,12 +4,12 @@ import "shared/modules/asset-settings/asset-settings.scss";
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import BackButtonBody from "shared/components/back-button/back-button-body";
 import Page from "shared/components/page/page";
@@ -26,9 +26,12 @@ const _AssetsEditPage: React.FC<Props> = ({
   description
 }) => {
   const [t] = useTranslation();
-  useEffect(() => {
-    dispatchDescription();
-  }, []);
+  useEffect(
+    () => {
+      dispatchDescription();
+    },
+    [dispatchDescription]
+  );
   const editAssetCallback: TUpdateAssetFunc = useCallback(
     (values, setSubmitting, resetForm) => {
       const investmentLimit =
@@ -59,9 +62,11 @@ const _AssetsEditPage: React.FC<Props> = ({
         .then(dispatchDescription)
         .finally(resetForm);
     },
-    [description]
+    [asset, description, dispatchDescription, editAsset]
   );
-  const applyCloseAsset = useCallback(() => redirectToAsset(), []);
+  const applyCloseAsset = useCallback(() => redirectToAsset(), [
+    redirectToAsset
+  ]);
   const title = t("manager.asset-settings.title", {
     asset: String(asset).toLowerCase()
   });

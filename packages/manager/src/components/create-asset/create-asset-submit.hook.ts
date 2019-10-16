@@ -9,10 +9,9 @@ import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
-import { ICreateProgramSettingsFormValues } from "../../pages/create-program/components/create-program-settings/create-program-settings";
 import {
-  ICreateAssetSettingsFormValues,
-  createAsset
+  createAsset,
+  ICreateAssetSettingsFormValues
 } from "./create-asset-service";
 
 type TUseCreateAssetSubmitProps = {
@@ -56,7 +55,7 @@ const useCreateAssetSubmit = ({
           setSubmitting(false);
         });
     },
-    []
+    [asset, condition, currency, dispatch]
   );
 };
 export default useCreateAssetSubmit;

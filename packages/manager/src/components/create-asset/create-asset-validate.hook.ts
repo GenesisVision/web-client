@@ -3,7 +3,6 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { fetchRate } from "shared/services/rate-service";
 
 type TUseCreateAssetValidateProps = {
   handleSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
@@ -32,7 +31,7 @@ const useCreateAssetValidate = ({
         );
       if (e) e.preventDefault();
     },
-    [handleSubmit, isValid]
+    [dispatch, handleSubmit, isValid, t]
   );
 };
 export default useCreateAssetValidate;

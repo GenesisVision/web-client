@@ -29,14 +29,20 @@ const _AssetStatusRequests: React.FC<Props> = ({
   const [requests, setRequests] = useState<Array<ProgramRequest> | undefined>(
     undefined
   );
-  useEffect(() => {
-    getAssetRequests(id, role, asset).then(setRequests);
-  }, [id, role, asset]);
+  useEffect(
+    () => {
+      getAssetRequests(id, role, asset).then(setRequests);
+    },
+    [id, role, asset]
+  );
 
-  const handleCancel = useCallback(() => {
-    handleCloseDropdown();
-    if (onCancel) onCancel();
-  }, []);
+  const handleCancel = useCallback(
+    () => {
+      handleCloseDropdown();
+      if (onCancel) onCancel();
+    },
+    [handleCloseDropdown, onCancel]
+  );
 
   if (!requests) return null;
   if (requests.length === 0)

@@ -16,14 +16,14 @@ import InputAmountField from "shared/components/input-amount-field/input-amount-
 import { ISelectChangeEvent } from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import WalletSelect, {
-  ItemType,
-  ItemsType
+  ItemsType,
+  ItemType
 } from "shared/components/wallet-select/wallet-select";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import TransferRate from "shared/modules/transfer/components/transfer-rate";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
-import { Schema, lazy, number, object } from "yup";
+import { lazy, number, object, Schema } from "yup";
 
 import * as service from "../services/transfer.services";
 import { TRANSFER_CONTAINER } from "../transfer.types";
@@ -74,7 +74,7 @@ const _TransferForm: React.FC<Props> = ({
         (validateFraction(value, currency) && floatValue <= available)
       );
     },
-    [values]
+    [sourceItems, values]
   );
 
   const destinationItemWithoutCurrent = service.getDestinationItems(

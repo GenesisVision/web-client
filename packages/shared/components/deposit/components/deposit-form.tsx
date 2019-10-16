@@ -13,6 +13,7 @@ import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
+import useRole from "shared/hooks/use-role.hook";
 import { fetchRate } from "shared/services/rate-service";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
@@ -26,7 +27,6 @@ import { TInvestInfo } from "./deposit.types";
 import { ConvertCurrency } from "./form-fields/convert-currency";
 import { InvestorFees } from "./form-fields/investor-fees";
 import { WalletField } from "./form-fields/wallet-field";
-import useRole from "shared/hooks/use-role.hook";
 
 const INIT_WALLET_CURRENCY = "GVT";
 
@@ -74,7 +74,7 @@ const _DepositForm: React.FC<
       setAvailableToInvest(convertToCurrency(maxAvailable, rate));
       setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, maxAvailable);
     },
-    [info, rate]
+    [info, rate, setFieldValue]
   );
   useEffect(
     () => {
@@ -84,13 +84,13 @@ const _DepositForm: React.FC<
       setAvailableInWallet(available);
       setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, available);
     },
-    [walletCurrency, wallets]
+    [setFieldValue, walletCurrency, wallets]
   );
   useEffect(
     () => {
       setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
     },
-    [rate]
+    [rate, setFieldValue]
   );
 
   const setMaxAmount = useCallback(
@@ -103,7 +103,7 @@ const _DepositForm: React.FC<
       );
       setFieldValue(DEPOSIT_FORM_FIELDS.amount, max);
     },
-    [availableInWallet, availableToInvest, walletCurrency]
+    [availableInWallet, availableToInvest, role, setFieldValue, walletCurrency]
   );
 
   const onWalletChange = ({ currency, id }: WalletBaseData) => {

@@ -3,17 +3,13 @@ import {
   FundBalanceChart,
   FundDetailsFull,
   FundProfitChart,
-  FundsListOld,
   ReallocationsViewModel
 } from "gv-api-web";
 import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import {
-  StatisticCurrencyDataType,
-  TStatisticCurrencyAction
-} from "shared/components/details/reducers/statistic-currency.reducer";
+import { TStatisticCurrencyAction } from "shared/components/details/reducers/statistic-currency.reducer";
 import { TStatisticPeriodAction } from "shared/components/details/reducers/statistic-period.reducer";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import fundsApi from "shared/services/api-client/funds-api";

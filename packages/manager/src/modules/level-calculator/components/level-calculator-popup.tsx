@@ -1,8 +1,4 @@
-import {
-  LevelsParamsInfo,
-  ProgramLevelInfo,
-  ProgramsLevelsInfo
-} from "gv-api-web";
+import { ProgramLevelInfo, ProgramsLevelsInfo } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";

@@ -14,8 +14,8 @@ import dashboardAssetReducer, {
   ManagerAssetsState
 } from "./dashboard-assets.reducer";
 import dashboardEventsReducer, {
-  ManagerPortfolioEventsState,
-  dashboardEventsAllReducer
+  dashboardEventsAllReducer,
+  ManagerPortfolioEventsState
 } from "./dashboard-events.reducer";
 import dashboardFundsReducer from "./dashboard-funds.reducer";
 import dashboardInRequestsReducer, {

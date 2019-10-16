@@ -1,6 +1,6 @@
 import {
-  IAlertAction,
-  alertMessageActions
+  alertMessageActions,
+  IAlertAction
 } from "../actions/alert-message-actions";
 import alertMessagesReducer, {
   AlertMessagesState

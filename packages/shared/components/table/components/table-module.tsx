@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  IPaging,
-  calculateTotalPages
+  calculateTotalPages,
+  IPaging
 } from "shared/components/table//helpers/paging.helpers";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
@@ -35,22 +35,25 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
   const [data, setData] = useState<IDataModel>(defaultData);
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
 
-  useEffect(() => {
-    if (dataProp && pagingProp) {
-      const totalPages = calculateTotalPages(
-        data.total,
-        pagingProp.itemsOnPage
-      );
-      setData(dataProp);
-      setPaging({ ...pagingProp, totalPages });
-    } else updateItems();
-  }, []);
+  useEffect(
+    () => {
+      if (dataProp && pagingProp) {
+        const totalPages = calculateTotalPages(
+          data.total,
+          pagingProp.itemsOnPage
+        );
+        setData(dataProp);
+        setPaging({ ...pagingProp, totalPages });
+      } else updateItems();
+    },
+    [data.total, dataProp, pagingProp, updateItems]
+  );
 
   useEffect(
     () => {
       updateItems();
     },
-    [paging, sorting, filtering, timestamp]
+    [paging, sorting, filtering, timestamp, updateItems]
   );
 
   const updateItems = useCallback(
@@ -66,7 +69,16 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
         .then(setData)
         .finally(setIsNotPending);
     },
-    [loader, paging, sorting, filtering, timestamp]
+    [
+      loader,
+      setIsPending,
+      paging,
+      sorting,
+      filtering,
+      defaultFilters,
+      getItems,
+      setIsNotPending
+    ]
   );
 
   const handleUpdateSorting = useCallback(

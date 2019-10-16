@@ -25,8 +25,8 @@ import * as fundsTableActions from "../actions/funds-table.actions";
 import {
   DEFAULT_ITEMS_ON_PAGE,
   FUNDS_TABLE_FILTERS,
-  SORTING_FILTER_VALUE,
-  sortableColumns
+  sortableColumns,
+  SORTING_FILTER_VALUE
 } from "../components/funds-table/funds-table.constants";
 
 export type GetFundsType = () => (dispatch: MiddlewareDispatch) => void;

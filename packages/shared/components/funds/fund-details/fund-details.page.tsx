@@ -11,10 +11,10 @@ import {
 } from "redux";
 
 import FundDetailsContainer from "./fund-details.container";
+import { fundDetailsLoaderData } from "./fund-details.loader-data";
 import { IDescriptionSection } from "./fund-details.types";
 import { fundDescriptionSelector } from "./reducers/description.reducer";
 import { dispatchFundDescription } from "./services/fund-details.service";
-import { fundDetailsLoaderData } from "./fund-details.loader-data";
 
 const _FundDetailsPage: React.FC<Props> = ({
   service: { dispatchFundDescription },

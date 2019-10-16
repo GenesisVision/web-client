@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
@@ -36,7 +36,13 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
         setIsReinvestingValue(!isReinvesting);
         dispatchProgramDescription();
       }),
-    [programId, isReinvesting]
+    [
+      sendRequest,
+      programId,
+      isReinvesting,
+      setIsReinvestingValue,
+      dispatchProgramDescription
+    ]
   );
   return (
     <span

@@ -1,11 +1,11 @@
 import "./alert-message-list.scss";
 
-import { useEffect } from "react";
 import * as React from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import posed, { PoseGroup } from "react-pose";
 import { connect } from "react-redux";
-import { Dispatch, compose } from "redux";
+import { compose, Dispatch } from "redux";
 import GVButton from "shared/components/gv-button";
 import AlertMessage from "shared/modules/alert-message/components/alert-message-list/alert-message";
 import { RootState } from "shared/reducers/root-reducer";
@@ -28,11 +28,14 @@ const _AlertMessageList: React.FC<Props> = props => {
   const { t } = useTranslation();
   const { messages, removeMessage, clearAllMessages } = props;
 
-  useEffect(() => {
-    return history.listen(() => {
-      clearAllMessages();
-    });
-  }, []);
+  useEffect(
+    () => {
+      return history.listen(() => {
+        clearAllMessages();
+      });
+    },
+    [clearAllMessages]
+  );
 
   const children = messages.map(message => (
     <AlertBox key={message.id}>

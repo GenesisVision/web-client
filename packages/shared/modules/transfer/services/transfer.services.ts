@@ -1,7 +1,7 @@
 import { InternalTransferRequest } from "gv-api-web";
 import {
-  ItemType,
-  ItemsType
+  ItemsType,
+  ItemType
 } from "shared/components/wallet-select/wallet-select";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";

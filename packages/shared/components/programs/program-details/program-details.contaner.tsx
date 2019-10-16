@@ -12,8 +12,8 @@ import ProgramDetailsDescriptionSection from "shared/components/programs/program
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ASSET } from "shared/constants/constants";
 import {
-  WithBlurLoaderProps,
-  withBlurLoader
+  withBlurLoader,
+  WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
 
@@ -32,7 +32,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     () => {
       dispatch(statisticCurrencyAction(description.currency));
     },
-    [description]
+    [description, dispatch]
   );
   return (
     <Page title={description.title}>

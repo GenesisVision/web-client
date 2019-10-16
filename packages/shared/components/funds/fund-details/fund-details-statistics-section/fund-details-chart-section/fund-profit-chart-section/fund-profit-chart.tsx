@@ -1,12 +1,12 @@
 import * as React from "react";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
+import ProfitChart, {
+  EquityChartType
+} from "shared/components/chart/profit-chart";
 import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 
 import FundProfitTooltip from "./fund-profit-tooltip";
-import ProfitChart, {
-  EquityChartType
-} from "shared/components/chart/profit-chart";
 
 const _FundProfitChart: React.FC<Props> = ({
   profitChart,

@@ -28,18 +28,29 @@ const _RequestLine: React.FC<Props> = ({
   const isInvestor = role === ROLE.INVESTOR;
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const [disabled, setDisabled, setNotDisabled] = useIsOpen();
-  const handleApplyCancelRequest = useCallback(() => {
-    setDisabled();
-    const onFinally = () => onApplyCancelRequest();
-    const removeDisableBtn = () => setNotDisabled();
-    cancelRequest({
-      id: request.id,
-      onFinally,
-      removeDisableBtn,
+  const handleApplyCancelRequest = useCallback(
+    () => {
+      setDisabled();
+      const onFinally = () => onApplyCancelRequest();
+      const removeDisableBtn = () => setNotDisabled();
+      cancelRequest({
+        id: request.id,
+        onFinally,
+        removeDisableBtn,
+        role,
+        asset
+      });
+    },
+    [
+      setDisabled,
+      cancelRequest,
+      request.id,
       role,
-      asset
-    });
-  }, [request.id, role, asset]);
+      asset,
+      onApplyCancelRequest,
+      setNotDisabled
+    ]
+  );
   const assetDetails = {
     logo: request.logo,
     title: request.title,

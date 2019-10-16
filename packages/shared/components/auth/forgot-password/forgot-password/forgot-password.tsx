@@ -1,5 +1,4 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { ForgotPasswordViewModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";

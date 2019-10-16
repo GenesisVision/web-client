@@ -1,12 +1,12 @@
 import { ProgramNotificationSettingList } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import Dialog from "shared/components/dialog/dialog";
@@ -51,7 +51,7 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
         .catch(() => {
           setSubmitting(false);
         }),
-    [asset]
+    [asset.assetId, service, setClosePopup, t]
   );
   return (
     <div className="notification-settings custom-notifications">

@@ -6,9 +6,9 @@ import { ASSET } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
 import {
-  PROGRAMS_ROUTE,
   PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
+  PROGRAM_SLUG_URL_PARAM_NAME,
+  PROGRAMS_ROUTE
 } from "shared/routes/programs.routes";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";

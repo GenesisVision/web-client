@@ -1,3 +1,4 @@
+import { ChartSimple, FundAssetsState } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -9,15 +10,15 @@ import {
   TooltipProps,
   YAxis
 } from "recharts";
+import GVColors from "shared/components/gv-styles/gv-colors";
+import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
+
 import chartXAxis from "./chart-components/chart-xaxis";
 import {
   ChartGradient,
   getStrokeColor,
   gradientOffset
 } from "./chart-gradient/chart-gradient";
-import GVColors from "shared/components/gv-styles/gv-colors";
-import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
-import { ChartSimple, FundAssetsState } from "gv-api-web";
 
 const _ProfitChart: React.FC<Props> = ({
   tooltip,

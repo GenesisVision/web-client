@@ -6,8 +6,8 @@ import useApiRequest from "shared/hooks/api-request.hook";
 import { platformDataSelector } from "shared/reducers/platform-reducer";
 
 import {
-  PlatformDataLoaderData,
-  fetchMinimumDepositAmount
+  fetchMinimumDepositAmount,
+  PlatformDataLoaderData
 } from "../../services/create-fund.service";
 import CreateFundSettings from "./create-fund-settings";
 
@@ -15,9 +15,12 @@ const _CreateFundSettingsSection: React.FC = () => {
   const { data: minimumDepositAmount, sendRequest } = useApiRequest({
     request: fetchMinimumDepositAmount
   });
-  useEffect(() => {
-    sendRequest();
-  }, []);
+  useEffect(
+    () => {
+      sendRequest();
+    },
+    [sendRequest]
+  );
   const platformSettings = useSelector(platformDataSelector);
   const handleCreate = useCreateAssetSubmit({ asset: ASSET.FUND });
 

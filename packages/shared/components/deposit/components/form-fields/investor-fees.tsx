@@ -4,7 +4,10 @@ import NumberFormat from "react-number-format";
 import { DialogList } from "shared/components/dialog/dialog-list";
 import { DialogListItem } from "shared/components/dialog/dialog-list-item";
 import withLoader from "shared/decorators/with-loader";
-import { calculatePercentage, convertFromCurrency } from "shared/utils/currency-converter";
+import {
+  calculatePercentage,
+  convertFromCurrency
+} from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 

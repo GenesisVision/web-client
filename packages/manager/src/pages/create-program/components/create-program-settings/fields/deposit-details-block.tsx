@@ -1,6 +1,5 @@
 import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
 import useCreateAssetSection from "components/create-asset/create-asset-section.hook";
-import CreateAssetSection from "components/create-asset/create-asset-section/create-asset-section";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { onSelectChange } from "shared/components/select/select.test-helpers";
@@ -30,7 +29,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
     () => {
       setFieldValue(rateName, rate);
     },
-    [rate]
+    [rate, rateName, setFieldValue]
   );
   useEffect(
     () => {
@@ -39,7 +38,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
       setFieldValue(availableName, wallet.available);
       setFieldValue(walletFieldName, wallet.id);
     },
-    [wallet]
+    [availableName, inputName, setFieldValue, wallet, walletFieldName]
   );
   if (!wallet) return null;
   return (

@@ -1,12 +1,12 @@
 import "shared/components/details/details.scss";
 
 import React, { useEffect } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import {
   dispatchPlatformLevelsParameters,
@@ -23,14 +23,17 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   descriptionSection
 }) => {
   const description = useSelector(programDescriptionSelector);
-  useEffect(() => {
-    dispatchProgramDescription();
-  }, []);
+  useEffect(
+    () => {
+      dispatchProgramDescription();
+    },
+    [dispatchProgramDescription]
+  );
   useEffect(
     () => {
       description && dispatchPlatformLevelsParameters(description.currency);
     },
-    [description]
+    [description, dispatchPlatformLevelsParameters]
   );
   return (
     <ProgramDetailsContainer

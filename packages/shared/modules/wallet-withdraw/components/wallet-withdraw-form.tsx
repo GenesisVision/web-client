@@ -28,7 +28,7 @@ import {
   btcWalletValidator,
   ethGvtWalletValidator
 } from "shared/utils/validators/validators";
-import { Schema, StringSchema, lazy, object, string } from "yup";
+import { lazy, object, Schema, string, StringSchema } from "yup";
 
 const _WalletWithdrawForm: React.FC<
   InjectedFormikProps<Props, IWalletWithdrawFormValues>
@@ -56,7 +56,7 @@ const _WalletWithdrawForm: React.FC<
       setFieldValue(FIELDS.id, wallet.id);
       setFieldValue(FIELDS.amount, "");
     },
-    [setFieldValue, selected, setSelected, wallets]
+    [setFieldValue, setSelected, wallets]
   );
   const { withdrawalCommission, available } = selected;
   const willGet = Math.max(parseFloat(amount) - withdrawalCommission, 0);
