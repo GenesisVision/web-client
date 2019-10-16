@@ -2,6 +2,7 @@ import { MultiWalletExternalTransaction } from "gv-api-web";
 import moment from "moment";
 import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
@@ -10,7 +11,6 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatValue } from "shared/utils/formatter";
-import { WalletItem } from "../../wallet-item/wallet-item";
 
 const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
   transaction,
@@ -34,7 +34,7 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
       />
       <TableRow stripy onClick={setOpenPopup}>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--wallet">
-          <WalletItem
+          <CurrencyItem
             logo={transaction.logo}
             name={transaction.currency}
             small

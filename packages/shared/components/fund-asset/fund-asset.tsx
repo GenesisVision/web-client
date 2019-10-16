@@ -3,7 +3,7 @@ import "./fund-asset.scss";
 import classNames from "classnames";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import { CurrencyEnum, PlatformAssetFull } from "shared/utils/types";
 
@@ -53,7 +53,7 @@ const _FundAsset: React.FC<Props> = ({
             }
           )}
         >
-          <WalletItem
+          <CurrencyItem
             logo={icon}
             small
             name={!!currency && currencyName}

@@ -1,9 +1,9 @@
 import { PlatformAsset } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 
 import TileFilterPopover from "../tile-filter-popover";
-import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 
 const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
   const [t] = useTranslation();
@@ -27,7 +27,7 @@ const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
                 key={idx}
                 onClick={() => handleClick(asset.asset)}
               >
-                <WalletItem logo={asset.icon} name={asset.name} small />
+                <CurrencyItem logo={asset.icon} name={asset.name} small />
               </li>
             ))}
           </ul>

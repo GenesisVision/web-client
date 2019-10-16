@@ -3,12 +3,12 @@ import "./fund-asset-filter.scss";
 import { PlatformAsset } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 
 import { UpdateFilterFunc } from "../../table.types";
 import TileFilter from "../tile-filter";
 import TileFilterItem from "../tile-filter-item";
 import FundAssetPopover from "./fund-asset-popover";
-import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 
 const _FundAssetFilter: React.FC<Props> = ({
   name,
@@ -21,7 +21,12 @@ const _FundAssetFilter: React.FC<Props> = ({
     .filter(x => value.includes(x.asset))
     .map(asset => (
       <TileFilterItem key={asset.id} id={asset.asset}>
-        <WalletItem className="fund-asset-filter__asset-name" logo={asset.icon} name={asset.asset} small />
+        <CurrencyItem
+          className="fund-asset-filter__asset-name"
+          logo={asset.icon}
+          name={asset.asset}
+          small
+        />
       </TileFilterItem>
     ));
   const notSelectedAssets = values.filter(x => !value.includes(x.asset));

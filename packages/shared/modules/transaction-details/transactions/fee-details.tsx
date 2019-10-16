@@ -1,4 +1,5 @@
 import * as React from "react";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import { DialogField } from "shared/components/dialog/dialog-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
@@ -7,7 +8,6 @@ import { TransactionDetailsProps } from "shared/modules/transaction-details/tran
 import { formatValue } from "shared/utils/formatter";
 
 import TransactionDetails from "./transaction-details";
-import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 
 const InvestingTransaction: React.FC<TransactionDetailsProps> = ({
   data,
@@ -17,7 +17,7 @@ const InvestingTransaction: React.FC<TransactionDetailsProps> = ({
     header={t(`transactions-details.platform-fee`)}
     body={
       <StatisticItem label={t(`transactions-details.external.from`)}>
-        <WalletItem logo={data.currencyLogo} name={data.currencyName} />
+        <CurrencyItem logo={data.currencyLogo} name={data.currencyName} />
       </StatisticItem>
     }
     bottom={

@@ -1,9 +1,9 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import { DialogField } from "shared/components/dialog/dialog-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
-import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details-dialog";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
@@ -17,7 +17,7 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
       <div className="transaction-details__top">
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.from-wallet`)}>
-            <WalletItem logo={data.currencyLogo} name={data.currencyName} />
+            <CurrencyItem logo={data.currencyLogo} name={data.currencyName} />
           </StatisticItem>
         </DialogField>
         <DialogField>
@@ -36,7 +36,7 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
       <>
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.to-wallet`)}>
-            <WalletItem
+            <CurrencyItem
               logo={data.convertingDetails.currencyToLogo}
               name={data.convertingDetails.currencyToName}
             />

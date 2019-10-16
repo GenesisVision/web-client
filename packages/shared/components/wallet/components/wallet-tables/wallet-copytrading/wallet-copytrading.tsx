@@ -8,6 +8,7 @@ import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import Profitability from "shared/components/profitability/profitability";
 import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
@@ -25,7 +26,6 @@ import { fetchAccounts } from "../../../services/wallet.services";
 import { composeWalletCopytradingCurrencyUrl } from "../../../wallet.routes";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
-import { WalletItem } from "../../wallet-item/wallet-item";
 
 const _WalletCopytrading: React.FC<Props> = ({
   service,
@@ -77,7 +77,11 @@ const _WalletCopytrading: React.FC<Props> = ({
                   )}`
                 }}
               >
-                <WalletItem logo={account.logo} name={account.currency} small />
+                <CurrencyItem
+                  logo={account.logo}
+                  name={account.currency}
+                  small
+                />
               </Link>
             </TableCell>
             <TableCell className="wallet-list__cell wallet-list__cell--balance">

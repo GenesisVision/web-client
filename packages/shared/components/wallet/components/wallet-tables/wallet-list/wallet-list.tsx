@@ -5,6 +5,7 @@ import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
@@ -18,7 +19,6 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
-import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 
 const _WalletList: React.FC<Props> = ({ t, createButtonToolbar, wallets }) => {
   const [isOpenAddFunds, setIsOpenAddFunds, setIsCloseAddFunds] = useIsOpen();
@@ -66,7 +66,7 @@ const _WalletList: React.FC<Props> = ({ t, createButtonToolbar, wallets }) => {
                   state: "Wallet"
                 }}
               >
-                <WalletItem logo={wallet.logo} name={wallet.currency} small />
+                <CurrencyItem logo={wallet.logo} name={wallet.currency} small />
               </Link>
             </TableCell>
             <TableCell className="wallet-list__cell">

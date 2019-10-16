@@ -2,6 +2,7 @@ import { MultiWalletTransaction } from "gv-api-web";
 import moment from "moment";
 import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import Profitability from "shared/components/profitability/profitability";
 import Status from "shared/components/status/status";
 import TableCell from "shared/components/table/components/table-cell";
@@ -10,12 +11,11 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatValue } from "shared/utils/formatter";
-import { WalletItem } from "../../wallet-item/wallet-item";
 
 const ConvertTransaction: React.FC<Props> = React.memo(({ transaction }) => (
   <>
     <div className="wallet-transactions__col">
-      <WalletItem
+      <CurrencyItem
         logo={transaction.logoFrom}
         name={transaction.currencyFrom}
         small
@@ -23,7 +23,7 @@ const ConvertTransaction: React.FC<Props> = React.memo(({ transaction }) => (
     </div>
     <div className="wallet-transactions__back-arrow">&rarr;</div>
     <div className="wallet-transactions__col">
-      <WalletItem
+      <CurrencyItem
         logo={transaction.logoTo}
         name={transaction.currencyTo}
         small
@@ -85,7 +85,7 @@ const _TransactionsRow: React.FC<Props> = ({
               {isConvertAction ? (
                 <ConvertTransaction transaction={transaction} />
               ) : (
-                <WalletItem
+                <CurrencyItem
                   logo={transaction.logoFrom}
                   name={transaction.currencyFrom}
                   small

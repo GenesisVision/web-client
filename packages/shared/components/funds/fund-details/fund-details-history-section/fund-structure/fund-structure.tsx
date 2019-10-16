@@ -4,6 +4,7 @@ import { FundAssetInfo } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import { FUND_STRUCTURE_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
@@ -16,7 +17,6 @@ import { formatValue } from "shared/utils/formatter";
 import { fundStructureTableSelector } from "../../reducers/fund-structure.reducer";
 import { getFundStructure } from "../../services/fund-details.service";
 import FundStructureHeaderCell from "./fund-structure-header-cell";
-import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 
 const FundStructure: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
@@ -51,7 +51,7 @@ const FundStructure: React.FC<Props> = ({ id }) => {
             {item.asset}
           </TableCell>
           <TableCell className="details-structure__cell">
-            <WalletItem logo={item.icon} name={item.symbol} small />
+            <CurrencyItem logo={item.icon} name={item.symbol} small />
           </TableCell>
           <TableCell className="details-structure__cell fund-details-structure__cell">
             <NumberFormat

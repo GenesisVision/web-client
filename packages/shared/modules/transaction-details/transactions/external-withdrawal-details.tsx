@@ -1,6 +1,7 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import ActionButton from "shared/components/action-button/action-button";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import { DialogField } from "shared/components/dialog/dialog-field";
 import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
@@ -13,7 +14,6 @@ import { TransactionDetailsProps } from "shared/modules/transaction-details/tran
 import { formatValue } from "shared/utils/formatter";
 
 import TransactionDetails from "./transaction-details";
-import { WalletItem } from "shared/components/wallet/components/wallet-item/wallet-item";
 
 const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
   data,
@@ -27,7 +27,7 @@ const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
       <>
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.from-wallet`)}>
-            <WalletItem logo={data.currencyLogo} name={data.currencyName} />
+            <CurrencyItem logo={data.currencyLogo} name={data.currencyName} />
           </StatisticItem>
         </DialogField>
         <DialogField>
