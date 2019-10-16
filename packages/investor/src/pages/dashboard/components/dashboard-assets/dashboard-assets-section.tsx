@@ -41,10 +41,13 @@ const DashboardAssetsSection: React.FC<Props> = ({
 }) => {
   const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
   const [t] = useTranslation();
-  useEffect(() => {
-    service.getAssetsCounts();
-    return service.clearDashboardAssetsTable;
-  }, [service]);
+  useEffect(
+    () => {
+      service.getAssetsCounts();
+      return service.clearDashboardAssetsTable;
+    },
+    [service]
+  );
   const { programsCount, fundsCount, tradesCount } = counts;
   const handleTabChange = useCallback(
     (e: any, eventTab: string) => {

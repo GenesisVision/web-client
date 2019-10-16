@@ -27,13 +27,13 @@ import {
   UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { STATUS } from "shared/constants/constants";
+import useRole from "shared/hooks/use-role.hook";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { DASHBOARD_COPYTRADING_COLUMNS } from "./dashboard-copytrading.constants";
 import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
-import useRole from "shared/hooks/use-role.hook";
 
 const _DashboardCopytrading: React.FC<Props> = ({ title }) => {
   const [t] = useTranslation();
