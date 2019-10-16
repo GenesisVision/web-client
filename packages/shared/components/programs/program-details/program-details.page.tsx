@@ -1,8 +1,13 @@
 import "shared/components/details/details.scss";
 
 import React, { useEffect } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  bindActionCreators,
+  compose,
+  Dispatch
+} from "redux";
 import {
   dispatchPlatformLevelsParameters,
   dispatchProgramDescription

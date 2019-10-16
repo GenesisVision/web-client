@@ -85,7 +85,9 @@ const _WalletTransactions: React.FC<Props> = ({
         columns={columns}
         renderHeader={column => (
           <span
-            className={`wallet-transactions__cell wallet-transactions__cell--${column.name}`}
+            className={`wallet-transactions__cell wallet-transactions__cell--${
+              column.name
+            }`}
           >
             {t(`wallet-page.transactions.${column.name}`)}
           </span>

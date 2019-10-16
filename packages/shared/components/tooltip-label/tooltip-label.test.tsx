@@ -1,4 +1,4 @@
-import { ShallowWrapper, shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import * as React from "react";
 import Tooltip from "shared/components/tooltip/tooltip";
 

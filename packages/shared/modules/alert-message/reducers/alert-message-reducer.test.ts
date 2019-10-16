@@ -1,5 +1,10 @@
-import { IAlertAction, alertMessageActions } from "../actions/alert-message-actions";
-import alertMessagesReducer, { AlertMessagesState } from "./alert-message-reducers";
+import {
+  alertMessageActions,
+  IAlertAction
+} from "../actions/alert-message-actions";
+import alertMessagesReducer, {
+  AlertMessagesState
+} from "./alert-message-reducers";
 
 jest.mock("uuid", () => {
   return {

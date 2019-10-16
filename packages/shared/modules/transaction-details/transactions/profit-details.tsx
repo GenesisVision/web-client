@@ -25,55 +25,57 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
       <>
         <DialogField>
           <StatisticItem label={t(`transactions-details.success-fee`)}>
-          <NumberFormat
-            value={data.programDetails.successFeePercent}
-            suffix="%"
-            displayType="text"
-          />
-          <NumberFormat
-            value={formatValue(
-              data.programDetails.successFee,
-              DEFAULT_DECIMAL_SCALE
-            )}
-            prefix={" ("}
-            suffix={` ${data.programDetails.successFeeCurrency})`}
-            displayType="text"
-          />
-        </StatisticItem>
+            <NumberFormat
+              value={data.programDetails.successFeePercent}
+              suffix="%"
+              displayType="text"
+            />
+            <NumberFormat
+              value={formatValue(
+                data.programDetails.successFee,
+                DEFAULT_DECIMAL_SCALE
+              )}
+              prefix={" ("}
+              suffix={` ${data.programDetails.successFeeCurrency})`}
+              displayType="text"
+            />
+          </StatisticItem>
         </DialogField>
         <DialogField>
           <StatisticItem label={t(`transactions-details.gv-fee`)}>
-          <NumberFormat
-            value={data.gvCommissionPercent}
-            suffix="%"
-            displayType="text"
-          />
-          <NumberFormat
-            value={formatValue(data.gvCommission, DEFAULT_DECIMAL_SCALE)}
-            prefix={" ("}
-            suffix={
-              data.gvCommissionCurrency ? ` ${data.gvCommissionCurrency})` : ")"
-            }
-            displayType="text"
-          />
-        </StatisticItem>
+            <NumberFormat
+              value={data.gvCommissionPercent}
+              suffix="%"
+              displayType="text"
+            />
+            <NumberFormat
+              value={formatValue(data.gvCommission, DEFAULT_DECIMAL_SCALE)}
+              prefix={" ("}
+              suffix={
+                data.gvCommissionCurrency
+                  ? ` ${data.gvCommissionCurrency})`
+                  : ")"
+              }
+              displayType="text"
+            />
+          </StatisticItem>
         </DialogField>
         <DialogField>
           <StatisticItem label={t("transactions-details.status.title")}>
-          <div className="external-transaction__status">
-            {data.status} <Status status={data.status} />
-          </div>
-        </StatisticItem>
+            <div className="external-transaction__status">
+              {data.status} <Status status={data.status} />
+            </div>
+          </StatisticItem>
         </DialogField>
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.amount`)} big>
-          <NumberFormat
-            value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
-            suffix={` ${data.currency}`}
-            allowNegative={true}
-            displayType="text"
-          />
-        </StatisticItem>
+            <NumberFormat
+              value={formatValue(data.amount, DEFAULT_DECIMAL_SCALE)}
+              suffix={` ${data.currency}`}
+              allowNegative={true}
+              displayType="text"
+            />
+          </StatisticItem>
         </DialogField>
       </>
     }

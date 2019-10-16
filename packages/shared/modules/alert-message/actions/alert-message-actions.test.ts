@@ -1,4 +1,4 @@
-import { IAlertAction, alertMessageActions } from "./alert-message-actions";
+import { alertMessageActions, IAlertAction } from "./alert-message-actions";
 import { ALERT_MESSAGE } from "./alert-message-actions.constants";
 
 describe("alertMessageActions", () => {

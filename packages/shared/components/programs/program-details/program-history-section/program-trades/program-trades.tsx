@@ -11,7 +11,10 @@ import TableContainer from "shared/components/table/components/table-container";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import filesService from "shared/services/file-service";
 
-import { tradesSelector, tradesTableSelector } from "../../reducers/program-history.reducer";
+import {
+  tradesSelector,
+  tradesTableSelector
+} from "../../reducers/program-history.reducer";
 import { getTrades } from "../../services/program-details.service";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 import { TradesDelayHint } from "../trades-delay-hint";

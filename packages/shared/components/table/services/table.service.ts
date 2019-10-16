@@ -1,11 +1,18 @@
 import { Dispatch } from "redux";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
-import { IPaging, calculateSkipAndTake, calculateTotalPages } from "shared/components/table/helpers/paging.helpers";
+import {
+  calculateSkipAndTake,
+  calculateTotalPages,
+  IPaging
+} from "shared/components/table/helpers/paging.helpers";
 import { RootState } from "shared/reducers/root-reducer";
 import { TGetState } from "shared/utils/types";
 
 import { updateFiltersAction as updateFiltersActionCreator } from "../actions/table.actions";
-import { ComposeFiltersAllType, FilteringType } from "../components/filtering/filter.type";
+import {
+  ComposeFiltersAllType,
+  FilteringType
+} from "../components/filtering/filter.type";
 import { IComposeDefaultFilter } from "../components/table.types";
 import { ITableState } from "../reducers/table.reducer";
 

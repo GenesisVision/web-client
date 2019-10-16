@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
 import {
-  WithBlurLoaderProps,
-  withBlurLoader
+  withBlurLoader,
+  WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 import useApiRequest from "shared/hooks/api-request.hook";
 import {

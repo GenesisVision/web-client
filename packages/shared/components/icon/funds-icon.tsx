@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IIconProps, Icon } from "shared/components/icon/icon";
+import { Icon, IIconProps } from "shared/components/icon/icon";
 
 import { ReactComponent as Fund } from "./funds.svg";
 

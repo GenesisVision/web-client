@@ -9,12 +9,12 @@ import authService from "shared/services/auth-service";
 import { ResponseError } from "shared/utils/types";
 
 import {
-  ICancelRequest,
-  IFetchInRequests,
   cancelInvestorProgramRequestAction,
   cancelManagerProgramRequestAction,
   fetchInRequestsInvestorAction,
-  fetchInRequestsManagerAction
+  fetchInRequestsManagerAction,
+  ICancelRequest,
+  IFetchInRequests
 } from "../actions/asset-status-actions";
 
 export const getAssetRequests = (

@@ -5,7 +5,12 @@ import { DialogBottom } from "shared/components/dialog/dialog-bottom";
 import { DialogButtons } from "shared/components/dialog/dialog-buttons";
 import { DialogField } from "shared/components/dialog/dialog-field";
 
-import { DialogLoaderButton, DialogLoaderHeader, DialogLoaderInput, DialogLoaderStat } from "./dialog-loader-elements";
+import {
+  DialogLoaderButton,
+  DialogLoaderHeader,
+  DialogLoaderInput,
+  DialogLoaderStat
+} from "./dialog-loader-elements";
 
 export const DialogLoader: React.FC = () => (
   <React.Fragment>

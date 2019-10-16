@@ -69,7 +69,9 @@ const _ProgramOpenPositions: React.FC<Props> = ({ currency, programId }) => {
       columns={PROGRAM_OPEN_POSITIONS_COLUMNS}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
+          className={`details-trades__head-cell program-details-trades__cell--${
+            column.name
+          }`}
         >
           {t(`program-details-page.history.open-positions.${column.name}`)}
         </span>

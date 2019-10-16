@@ -20,7 +20,11 @@ import { SelectFilterType } from "shared/components/table/components/filtering/s
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-import { Column, GetItemsFuncActionType, UpdateFilterFunc } from "shared/components/table/components/table.types";
+import {
+  Column,
+  GetItemsFuncActionType,
+  UpdateFilterFunc
+} from "shared/components/table/components/table.types";
 import { FUND, FUND_CURRENCY } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";

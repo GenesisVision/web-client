@@ -2,8 +2,13 @@ import "shared/components/details/details.scss";
 
 import * as React from "react";
 import { useEffect } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators, compose } from "redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
+import {
+  ActionCreatorsMapObject,
+  bindActionCreators,
+  compose,
+  Dispatch
+} from "redux";
 
 import FundDetailsContainer from "./fund-details.container";
 import { fundDetailsLoaderData } from "./fund-details.loader-data";

@@ -8,9 +8,9 @@ import { ITableState } from "shared/components/table/reducers/table.reducer";
 
 import dashboardCopytradingReducer from "./dashboard-copytrading.reducer";
 import {
-  DashboardEventsState,
   dashboardEventsAllReducer,
-  dashboardEventsReducer
+  dashboardEventsReducer,
+  DashboardEventsState
 } from "./dashboard-events.reducer";
 import dashboardFundsReducer from "./dashboard-funds.reducer";
 import dashboardInRequestsReducer, {

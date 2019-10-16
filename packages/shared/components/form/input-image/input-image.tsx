@@ -1,5 +1,4 @@
 import "cropperjs/dist/cropper.css";
-
 import "./input-image.scss";
 import "./edge-canvas-polyfill";
 

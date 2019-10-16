@@ -6,7 +6,9 @@ import FormError from "shared/components/form/form-error/form-error";
 import useApiRequest from "shared/hooks/api-request.hook";
 
 import { ProgramWithdrawInfoLoaderData } from "./program-withdraw-dialog.loader";
-import ProgramWithdrawPopup, { IProgramWithdrawPopupProps } from "./program-withdraw-popup";
+import ProgramWithdrawPopup, {
+  IProgramWithdrawPopupProps
+} from "./program-withdraw-popup";
 
 const _ProgramWithdrawDialog: React.FC<Props> = ({
   open,
