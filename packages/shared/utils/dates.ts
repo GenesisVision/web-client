@@ -1,9 +1,11 @@
 import dayjs from "dayjs";
+import Calendar from "dayjs/plugin/calendar";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import RelativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(LocalizedFormat);
 dayjs.extend(RelativeTime);
+dayjs.extend(Calendar);
 
 export const localizedDate = (date: Date | number | string): string => {
   return dayjs(date).format("ll");
