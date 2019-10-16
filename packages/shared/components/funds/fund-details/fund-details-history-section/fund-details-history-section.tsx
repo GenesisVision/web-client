@@ -23,7 +23,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
 
   useEffect(
     () => {
-      dispatch(getDashboardHistoryDetailsCounts(id));
+      id && dispatch(getDashboardHistoryDetailsCounts(id));
     },
     [dispatch, id]
   );
