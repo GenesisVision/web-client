@@ -6,16 +6,16 @@ import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 
 const _CurrencyItem: React.FC<Props> = ({ logo, name, small, className }) => {
   return (
-    <div className="wallet-item">
+    <div className="currency-item">
       <div
-        className={classNames("wallet-item__icon", {
-          "wallet-item__icon--medium": !small,
-          "wallet-item__icon--small": small
+        className={classNames("currency-item__icon", {
+          "currency-item__icon--medium": !small,
+          "currency-item__icon--small": small
         })}
       >
         <WalletImage url={logo} alt={name} />
       </div>
-      <div className={classNames("wallet-item__name", className)}>{name}</div>
+      <div className={classNames("currency-item__name", className)}>{name}</div>
     </div>
   );
 };
