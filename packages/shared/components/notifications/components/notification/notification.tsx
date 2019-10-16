@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import { format } from "date-fns";
+import dayjs from "dayjs";
 import { NotificationViewModel } from "gv-api-web";
 import * as React from "react";
 import { Link, LinkProps } from "react-router-dom";
@@ -89,7 +89,7 @@ const _Notification: React.FC<INotificationProps> = props => {
 
       <div className="notification__content">
         <div className="notification__description">{text}</div>
-        <div className="notification__date">{format(date, "p")}</div>
+        <div className="notification__date">{dayjs(date).format("HH:mm")}</div>
       </div>
     </div>
   );
