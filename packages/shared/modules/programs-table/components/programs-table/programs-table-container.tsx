@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { PlatformCurrency, ProgramTag, ProgramsListOld } from "gv-api-web";
+import { PlatformCurrency, ProgramsListOld, ProgramTag } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";

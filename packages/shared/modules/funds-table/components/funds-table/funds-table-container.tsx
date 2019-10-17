@@ -5,7 +5,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import FundAssetFilter from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter";

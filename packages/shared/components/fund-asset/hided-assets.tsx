@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { FUND_ASSET_TYPE } from "./fund-asset";
 
 const _HidedAssets: React.FC<Props> = ({ type, count, handleOpen }) => {

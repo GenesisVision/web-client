@@ -4,6 +4,10 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
 
+import {
+  fundChartDataLoaderData,
+  fundStatisticDataLoaderData
+} from "../fund-details.loader-data";
 import { fundBalanceChartSelector } from "../reducers/balance-chart.reducer";
 import { fundProfitChartSelector } from "../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
@@ -16,10 +20,6 @@ import FundProfitChart from "./fund-details-chart-section/fund-profit-chart-sect
 import FundDetailsStatisticsElements, {
   IFundStatisticData
 } from "./fund-details-statistics/fund-details-statistics-elements";
-import {
-  fundChartDataLoaderData,
-  fundStatisticDataLoaderData
-} from "../fund-details.loader-data";
 
 const _FundDetailsStatisticSection: React.FC = () => (
   <DetailsStatisticSection

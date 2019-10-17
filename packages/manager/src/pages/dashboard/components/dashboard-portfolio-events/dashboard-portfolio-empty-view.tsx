@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { EVENT_LOGO_TYPE } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
+import useRole from "shared/hooks/use-role.hook";
 import EventCancelledIconRed from "shared/media/event-cancelled-red.svg";
 import EventCancelledIcon from "shared/media/event-cancelled.svg";
 import EventEndedRedIcon from "shared/media/event-ended-red.svg";
 import EventLossIconRed from "shared/media/event-loss-red.svg";
 import EventProfitIconGreen from "shared/media/event-profit-green.svg";
 import EventStartedIcon from "shared/media/event-started.svg";
-import useRole from "shared/hooks/use-role.hook";
 
 export const EvenLogoIcon: React.FC<{ type: EVENT_LOGO_TYPE }> = ({ type }) => {
   switch (type) {

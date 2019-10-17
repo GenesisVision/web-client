@@ -4,12 +4,12 @@ import { NotificationSettingViewModel } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import GVButton from "shared/components/gv-button";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
@@ -24,41 +24,30 @@ import {
 
 const CustomNotification: React.FC<Props> = ({ service, settings, t }) => {
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
-  const handleSwitch = useCallback(
-    () => {
-      setIsPending();
-      const status = !Boolean(settings.isEnabled);
-      service
-        .toggleNotifications({
-          id: settings.id,
-          assetId: settings.assetId,
-          enabled: status
-        })
-        .then(() =>
-          service.success(
-            t(
-              `notifications-page.custom.${
-                status ? "enabled" : "disabled"
-              }-alert`
-            )
+  const handleSwitch = useCallback(() => {
+    setIsPending();
+    const status = !Boolean(settings.isEnabled);
+    service
+      .toggleNotifications({
+        id: settings.id,
+        assetId: settings.assetId,
+        enabled: status
+      })
+      .then(() =>
+        service.success(
+          t(
+            `notifications-page.custom.${status ? "enabled" : "disabled"}-alert`
           )
         )
-        .finally(setIsNotPending);
-    },
-    [settings]
-  );
-  const handleDelete = useCallback(
-    () => {
-      setIsPending();
-      service
-        .removeNotification(
-          settings,
-          t(`notifications-page.custom.delete-alert`)
-        )
-        .finally(setIsNotPending);
-    },
-    [settings]
-  );
+      )
+      .finally(setIsNotPending);
+  }, [settings]);
+  const handleDelete = useCallback(() => {
+    setIsPending();
+    service
+      .removeNotification(settings, t(`notifications-page.custom.delete-alert`))
+      .finally(setIsNotPending);
+  }, [settings]);
   return (
     <div className="custom-notification">
       <label className="notification-setting">

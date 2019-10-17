@@ -7,8 +7,8 @@ import {
 import { NextPageContext } from "next";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import {
-  TableItems,
-  mapToTableItems
+  mapToTableItems,
+  TableItems
 } from "shared/components/table/helpers/mapper";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import signalApi from "shared/services/api-client/signal-api";
@@ -18,10 +18,9 @@ import { CurrencyEnum, RootThunk } from "shared/utils/types";
 
 import * as actions from "../actions/wallet.actions";
 
-export const fetchWalletsWithCtx = (ctx?: NextPageContext): RootThunk<void> => async (
-  dispatch,
-  getState
-) => {
+export const fetchWalletsWithCtx = (
+  ctx?: NextPageContext
+): RootThunk<void> => async (dispatch, getState) => {
   const authorization = authService.getAuthArg(ctx);
   const { info } = getState().wallet;
   if (info.isPending) return;
@@ -30,17 +29,18 @@ export const fetchWalletsWithCtx = (ctx?: NextPageContext): RootThunk<void> => a
   await dispatch(actions.fetchWalletsAction(currency, authorization));
 };
 
-export const fetchWallets = (currency: CurrencyEnum, ctx?: NextPageContext): RootThunk<void> => async (
-  dispatch
-) => {
+export const fetchWallets = (
+  currency: CurrencyEnum,
+  ctx?: NextPageContext
+): RootThunk<void> => async dispatch => {
   const authorization = authService.getAuthArg(ctx);
   await dispatch(actions.updateWalletTimestampAction());
   await dispatch(actions.fetchWalletsAction(currency, authorization));
 };
 
-export const fetchAccounts = (ctx?: NextPageContext): RootThunk<void> => async (
-  dispatch
-) => {
+export const fetchAccounts = (
+  ctx?: NextPageContext
+): RootThunk<void> => async dispatch => {
   const authorization = authService.getAuthArg(ctx);
   await dispatch(actions.updateAccountTimestampAction());
   await dispatch(actions.fetchAccountsAction(authorization));

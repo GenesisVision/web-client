@@ -1,6 +1,5 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
-import { ReallocationsViewModel } from "gv-api-web";
 import moment from "moment";
 import React from "react";
 import { useTranslation } from "react-i18next";

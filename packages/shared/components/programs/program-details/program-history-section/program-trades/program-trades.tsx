@@ -3,6 +3,7 @@ import "shared/components/details/details-description-section/details-statistic-
 import { OrderModel } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { generateProgramTradesColumns } from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -16,9 +17,8 @@ import {
 } from "../../reducers/program-history.reducer";
 import { getTrades } from "../../services/program-details.service";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
-import ProgramTradesRow from "./program-trades-row";
-import { useSelector } from "react-redux";
 import { TradesDelayHint } from "../trades-delay-hint";
+import ProgramTradesRow from "./program-trades-row";
 
 const _ProgramTrades: React.FC<Props> = ({
   showSwaps,
@@ -61,9 +61,7 @@ const _ProgramTrades: React.FC<Props> = ({
       columns={columns}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${
-            column.name
-          }`}
+          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
         >
           {t(`program-details-page.history.trades.${column.name}`)}
         </span>

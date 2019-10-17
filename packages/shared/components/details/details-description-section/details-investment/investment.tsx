@@ -8,7 +8,10 @@ import AssetStatus from "shared/components/asset-status/asset-status";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX, PROFITABILITY_VARIANT } from "shared/components/profitability/profitability.helper";
+import {
+  PROFITABILITY_PREFIX,
+  PROFITABILITY_VARIANT
+} from "shared/components/profitability/profitability.helper";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";

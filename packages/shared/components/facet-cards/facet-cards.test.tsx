@@ -6,8 +6,8 @@ import FacetCard from "./facet-card";
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
 import {
-  ASSETS_FACETS,
-  _FacetCardsContainer as FacetCardsContainer
+  _FacetCardsContainer as FacetCardsContainer,
+  ASSETS_FACETS
 } from "./faset-cards-container";
 
 type Facet = FundFacet & ProgramFacet;

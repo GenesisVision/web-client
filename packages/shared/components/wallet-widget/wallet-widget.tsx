@@ -13,8 +13,8 @@ import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import {
-  WithBlurLoaderProps,
-  withBlurLoader
+  withBlurLoader,
+  WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 import useAnchor from "shared/hooks/anchor.hook";
 import useIsOpen from "shared/hooks/is-open.hook";

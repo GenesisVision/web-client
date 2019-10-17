@@ -6,7 +6,9 @@ import FormError from "shared/components/form/form-error/form-error";
 import useApiRequest from "shared/hooks/api-request.hook";
 
 import { ProgramWithdrawInfoLoaderData } from "./program-withdraw-dialog.loader";
-import ProgramWithdrawPopup, { IProgramWithdrawPopupProps } from "./program-withdraw-popup";
+import ProgramWithdrawPopup, {
+  IProgramWithdrawPopupProps
+} from "./program-withdraw-popup";
 
 const _ProgramWithdrawDialog: React.FC<Props> = ({
   open,
@@ -19,12 +21,9 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
   const { errorMessage, data, sendRequest } = useApiRequest<
     ProgramWithdrawInfo
   >({ request: fetchInfo });
-  useEffect(
-    () => {
-      open && sendRequest();
-    },
-    [open]
-  );
+  useEffect(() => {
+    open && sendRequest();
+  }, [open]);
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup

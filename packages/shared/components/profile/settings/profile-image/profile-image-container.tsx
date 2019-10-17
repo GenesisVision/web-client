@@ -1,7 +1,7 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
-import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import { connect, ResolveThunks } from "react-redux";
+import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { headerSelector } from "shared/reducers/header-reducer";
 import { RootState } from "shared/reducers/root-reducer";

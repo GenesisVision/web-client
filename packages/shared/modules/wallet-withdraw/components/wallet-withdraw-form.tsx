@@ -28,7 +28,7 @@ import {
   btcWalletValidator,
   ethGvtWalletValidator
 } from "shared/utils/validators/validators";
-import { Schema, StringSchema, lazy, object, string } from "yup";
+import { lazy, object, Schema, string, StringSchema } from "yup";
 
 const _WalletWithdrawForm: React.FC<
   InjectedFormikProps<Props, IWalletWithdrawFormValues>

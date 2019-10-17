@@ -2,12 +2,12 @@ import { FundDetailsFull } from "gv-api-web";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE

@@ -1,10 +1,7 @@
 import { FundAssetsListInfo } from "gv-api-web";
 import { NextPageContext } from "next";
 import { Dispatch } from "redux";
-import {
-  TGetChartArgs,
-  TGetChartFunc
-} from "shared/components/details/details-statistic-section/details.chart.helpers";
+import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import {
   ComposeFiltersAllType,
   FilteringType

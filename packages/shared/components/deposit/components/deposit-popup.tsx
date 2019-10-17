@@ -5,9 +5,16 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
-import { WithBlurLoaderProps, withBlurLoader } from "shared/decorators/with-blur-loader";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "shared/decorators/with-blur-loader";
 import useApiRequest from "shared/hooks/api-request.hook";
-import { CurrencyEnum, ReduxDispatch, SetSubmittingType } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  ReduxDispatch,
+  SetSubmittingType
+} from "shared/utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";

@@ -1,8 +1,8 @@
 import { mount } from "enzyme";
 import React from "react";
 
-import GVTab from "./gv-tab";
 import GVTabs from ".";
+import GVTab from "./gv-tab";
 
 describe("GVTabs tests", () => {
   test("should render tabs", () => {

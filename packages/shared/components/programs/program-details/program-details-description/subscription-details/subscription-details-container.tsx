@@ -5,12 +5,12 @@ import React, { useEffect, useState } from "react";
 import { connect, ResolveThunks } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
 import useIsOpen from "shared/hooks/is-open.hook";
+import ProgramFollowContainer from "shared/modules/program-follow/program-follow-container";
 import { fetchRate } from "shared/services/rate-service";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { dispatchProgramDescription } from "../../services/program-details.service";
 import SubscriptionDetails from "./subscription-details";
-import ProgramFollowContainer from "shared/modules/program-follow/program-follow-container";
 
 const _SubscriptionDetailsContainer: React.FC<Props> = ({
   service: { dispatchProgramDescription },

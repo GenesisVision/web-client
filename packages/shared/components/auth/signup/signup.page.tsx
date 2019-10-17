@@ -3,7 +3,7 @@ import "./signup.scss";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import * as React from "react";
 import { withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, compose } from "redux";
 import AuthTabs from "shared/components/auth/components/auth-tabs/auth-tabs";
 import { SIGNUP_ROUTE } from "shared/routes/app.routes";

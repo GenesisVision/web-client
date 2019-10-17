@@ -3,10 +3,10 @@ import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import {
-  IProgramsGetFilters,
   fetchLevelUpSummary,
   fetchProgramsRating,
-  fetchSelfProgramsRating
+  fetchSelfProgramsRating,
+  IProgramsGetFilters
 } from "../actions/programs-rating.actions";
 
 export type TGetProgramsRatingFilters = IProgramsGetFilters & {

@@ -8,8 +8,8 @@ import { InvestmentDetails } from "shared/components/details/details-description
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
 import {
-  WithBlurLoaderProps,
-  withBlurLoader
+  withBlurLoader,
+  WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 import { fundEventsSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum } from "shared/utils/types";

@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
 import Link from "shared/components/link/link";
+import useRole from "shared/hooks/use-role.hook";
 import { HOME_ROUTE } from "shared/routes/app.routes";
 
 import { ILoginFooterProps } from "../login-footer/login-footer";
-import useRole from "shared/hooks/use-role.hook";
 
 const _AuthLayout: NextPage<Props> = ({
   quoteNo,

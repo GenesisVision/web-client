@@ -1,5 +1,9 @@
 import { FormikProps, withFormik } from "formik";
-import { NotificationSettingViewModelConditionTypeEnum, NotificationViewModelTypeEnum, ProgramInfo } from "gv-api-web";
+import {
+  NotificationSettingViewModelConditionTypeEnum,
+  NotificationViewModelTypeEnum,
+  ProgramInfo
+} from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";

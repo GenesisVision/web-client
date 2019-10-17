@@ -1,12 +1,12 @@
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import GVButton from "shared/components/gv-button";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";

@@ -7,18 +7,18 @@ import {
 } from "shared/components/table/components/filtering/filter.type";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
-  IPaging,
   calculateSkipAndTake,
-  calculateTotalPages
+  calculateTotalPages,
+  IPaging
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
 import { IDataModel } from "shared/constants/constants";
 import { RootState } from "shared/reducers/root-reducer";
 import {
+  PROGRAM_SLUG_URL_PARAM_NAME,
   PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
-  PROGRAMS_TAB_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
+  PROGRAMS_TAB_ROUTE
 } from "shared/routes/programs.routes";
 import programApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";

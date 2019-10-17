@@ -1,5 +1,4 @@
 import "rc-slider/assets/index.css";
-
 import "./filter.scss";
 
 import * as React from "react";

@@ -31,7 +31,7 @@ const GenerateRecoveryForm: React.FC<
           component={GVTextField}
           autoComplete="new-password"
         />
-        <FormError error={errorMessage}/>
+        <FormError error={errorMessage} />
         <DialogButtons>
           <GVButton
             className="google-auth__button"

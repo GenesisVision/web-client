@@ -10,6 +10,7 @@ import {
 } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { ROLE } from "shared/constants/constants";
+import useRole from "shared/hooks/use-role.hook";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { AuthRootState, SetSubmittingType } from "shared/utils/types";
 
@@ -21,7 +22,6 @@ import {
   loginUserManagerAction
 } from "./signin.actions";
 import { clearLoginData, login } from "./signin.service";
-import useRole from "shared/hooks/use-role.hook";
 
 const _SignInContainer: React.FC<Props> = ({
   className,

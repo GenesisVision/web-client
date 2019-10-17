@@ -28,13 +28,13 @@ import {
   UpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { STATUS } from "shared/constants/constants";
+import useRole from "shared/hooks/use-role.hook";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { DASHBOARD_COPYTRADING_COLUMNS } from "./dashboard-copytrading.constants";
 import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
-import useRole from "shared/hooks/use-role.hook";
 
 const _DashboardCopytrading: React.FC<Props> = ({ title }) => {
   const [t] = useTranslation();
@@ -67,9 +67,7 @@ const _DashboardCopytrading: React.FC<Props> = ({ title }) => {
       )}
       renderHeader={(column: Column) => (
         <span
-          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
-            column.name
-          }`}
+          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${column.name}`}
         >
           {t(`investor.dashboard-page.copytrading-header.${column.name}`)}
         </span>

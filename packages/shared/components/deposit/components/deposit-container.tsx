@@ -10,7 +10,11 @@ import { CurrencyEnum, ReduxDispatch } from "shared/utils/types";
 
 import DepositPopup from "./deposit-popup";
 import { DepositInfoLoaderData } from "./deposit.loader";
-import { TAssetInvestCreator, TGetAssetInfoCreator, TInvestInfoWithWallets } from "./deposit.types";
+import {
+  TAssetInvestCreator,
+  TGetAssetInfoCreator,
+  TInvestInfoWithWallets
+} from "./deposit.types";
 
 const _DepositContainer: React.FC<Props> = ({
   assetInvest,
@@ -38,12 +42,9 @@ const _DepositContainer: React.FC<Props> = ({
   >({
     request: getDepositInfo
   });
-  useEffect(
-    () => {
-      id && open && getInvestInfo();
-    },
-    [open]
-  );
+  useEffect(() => {
+    id && open && getInvestInfo();
+  }, [open]);
 
   return (
     <Dialog open={open} onClose={onClose}>

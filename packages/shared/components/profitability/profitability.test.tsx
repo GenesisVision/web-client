@@ -4,11 +4,11 @@ import * as React from "react";
 import BaseProfitability from "./base-profitability";
 import { _Profitability as Profitability } from "./profitability";
 import {
-  PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT,
   arrows,
   composeProfitabilityPrefix,
   noPrefix,
+  PROFITABILITY_PREFIX,
+  PROFITABILITY_VARIANT,
   signs
 } from "./profitability.helper";
 

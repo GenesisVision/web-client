@@ -1,5 +1,4 @@
 import i18next from "i18next";
-import { TranslationProps } from "react-i18next";
 import { object, ref, string } from "yup";
 
 interface IChangePasswordTradingAccountValidationSchema {
