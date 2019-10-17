@@ -6,7 +6,7 @@ import Link from "shared/components/link/link";
 
 import { normalizeUrlString } from "../link/link.helper";
 
-interface INavigationButtonProps {
+interface INavigationButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: JSX.Element;
   title?: string;
   onClick(): void;
@@ -26,7 +26,7 @@ const _NavigationButton: React.FC<INavigationButtonProps> = ({
 );
 export const NavigationButton = React.memo(_NavigationButton);
 
-interface INavigationItemProps {
+interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   pathname: string;
   state?: string;
   icon: JSX.Element;

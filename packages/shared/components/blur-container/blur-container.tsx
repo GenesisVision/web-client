@@ -14,7 +14,7 @@ const _BlurContainer: React.FC<Props> = ({ children, blur, className }) => (
   </div>
 );
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   blur: boolean;
 }

@@ -28,7 +28,7 @@ const _InfinityScroll: React.FC<Props> = ({ hasMore, loadMore, children }) => {
   );
 };
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   loadMore: () => void;
   hasMore?: boolean;
 }

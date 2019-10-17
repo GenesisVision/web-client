@@ -1,7 +1,6 @@
 import "./style.scss";
 
-import classnames from "classnames";
-import moment from "moment";
+import classNames from "classnames";
 import React from "react";
 
 interface GVProgramPeriodProps {
@@ -28,11 +27,11 @@ export const calcPercent = (
     duration = end - start;
     progress = value - start;
   } else {
-    const dateNow = moment(value);
-    const dateStart = moment(start);
-    const dateEnd = moment(end);
-    duration = dateEnd.diff(moment(dateStart), "seconds");
-    progress = dateNow.diff(dateStart, "seconds");
+    const dateNow = new Date(value).getTime();
+    const dateStart = new Date(start).getTime();
+    const dateEnd = new Date(end).getTime();
+    duration = dateEnd - dateStart;
+    progress = dateNow - dateStart;
   }
 
   if (duration === 0 || progress < 0) return 0;
@@ -57,7 +56,7 @@ const GVProgramPeriod: React.SFC<GVProgramPeriodProps> = ({
         width="100%"
         height="100%"
         viewBox="0 0 42 42"
-        className={classnames(
+        className={classNames(
           "gv-program-period",
           "gv-program-period--pie",
           className
@@ -87,14 +86,14 @@ const GVProgramPeriod: React.SFC<GVProgramPeriodProps> = ({
   else
     return (
       <div
-        className={classnames(
+        className={classNames(
           "gv-program-period",
           "gv-program-period--line",
           className
         )}
       >
         <div
-          className={classnames("gv-program-period__value", valueClassName)}
+          className={classNames("gv-program-period__value", valueClassName)}
           style={{ width: `${valuePercent}%` }}
         />
       </div>

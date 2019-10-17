@@ -96,10 +96,10 @@ class _DashboardPortfolioChartSection extends React.PureComponent<
       this.setTypeAssets(tab);
     }
     if ((!assetChart || prevState.tab !== tab) && type) {
-      service.composeAssetChart(type);
+      service.composeAssetChart(type!);
     }
     if ((!inRequests || prevState.tab !== tab) && type) {
-      service.getInRequests(type);
+      service.getInRequests(type!);
     }
   }
 

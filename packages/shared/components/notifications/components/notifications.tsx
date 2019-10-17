@@ -1,11 +1,11 @@
 import "./notifications.scss";
 
+import dayjs from "dayjs";
 import {
   CancelablePromise,
   NotificationList,
   NotificationViewModel
 } from "gv-api-web";
-import moment from "moment";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
@@ -20,8 +20,7 @@ import useApiRequest from "shared/hooks/api-request.hook";
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 
 const parseDate = (unix: number, sameDay: string, lastDay: string): string =>
-  moment
-    .unix(unix)
+  dayjs(unix)
     .calendar(undefined, {
       sameDay: `[${sameDay}], DD MMMM`,
       lastDay: `[${lastDay}], DD MMMM`,
@@ -36,9 +35,10 @@ const getGroups = (
   notifications: NotificationViewModel[]
 ): NotificationGroups =>
   notifications.reduce<NotificationGroups>((acc, notification) => {
-    const key = moment(notification.date)
+    const key = dayjs(notification.date)
       .startOf("day")
-      .unix();
+      .toDate()
+      .getTime();
     if (!Array.isArray(acc[key])) {
       acc[key] = [];
     }

@@ -23,6 +23,7 @@ import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
+import { localizedDate } from "shared/utils/dates";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
@@ -167,7 +168,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.age")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    {moment(program.creationDate).format("ll")}
+                    {localizedDate(program.creationDate)}
                   </div>
                 </div>
                 <div>

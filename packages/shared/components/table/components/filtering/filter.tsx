@@ -54,7 +54,7 @@ const _Filter: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
   value: any;
   renderValueText(value: any): string;

@@ -2,18 +2,11 @@ import "./program-period-line.scss";
 
 import classNames from "classnames";
 import { ProgramDetailsFullStatusEnum } from "gv-api-web";
-import moment from "moment";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import { STATUS } from "shared/constants/constants";
-
-const calcDuration = (start: number | Date, end: number | Date): string => {
-  const dateStart = moment(start);
-  const dateEnd = moment(end);
-  if (dateEnd < dateStart) return "";
-  return moment.duration(dateEnd.diff(dateStart)).humanize();
-};
+import { distanceDate } from "shared/utils/dates";
 
 const _ProgramPeriodLine: React.FC<Props> = ({
   start,
@@ -22,8 +15,8 @@ const _ProgramPeriodLine: React.FC<Props> = ({
   status
 }) => {
   const [t] = useTranslation();
-  const duration = calcDuration(start, end);
-  const timeLeft = calcDuration(new Date(), end);
+  const duration = distanceDate(start, end);
+  const timeLeft = distanceDate(end);
   return (
     <div className={classNames("program-period-line", className)}>
       <GVProgramPeriod

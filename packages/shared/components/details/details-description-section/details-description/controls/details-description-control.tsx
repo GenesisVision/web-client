@@ -4,7 +4,8 @@ import classnames from "classnames";
 import React from "react";
 import { ToType } from "shared/components/link/link";
 
-interface IDetailsDescriptionControlProps {
+interface IDetailsDescriptionControlProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
   className?: string;
   onClick?(): void;

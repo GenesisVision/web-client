@@ -1,5 +1,4 @@
 import { ProgramDetailsOld } from "gv-api-web";
-import moment from "moment";
 import * as React from "react";
 import { useCallback } from "react";
 import NumberFormat from "react-number-format";
@@ -28,6 +27,7 @@ import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
+import { distanceDate } from "shared/utils/dates";
 import {
   formatValue,
   formatValueDifferentDecimalScale
@@ -188,7 +188,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
             />
           </StatisticItem>
           <StatisticItem label={t("programs-page.programs-header.age")}>
-            {moment(program.creationDate).fromNow(true)}
+            {distanceDate(program.creationDate)}
           </StatisticItem>
         </div>
         <div className="table-cards__table-column">

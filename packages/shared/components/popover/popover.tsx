@@ -1,13 +1,7 @@
 import "./popover.scss";
 
 import classNames from "classnames";
-import React, {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import EventListener from "react-event-listener";
 import Modal from "shared/components/modal/modal";
 
@@ -178,8 +172,7 @@ const getAnchorEl = (el?: anchorElType) =>
 const Popover = React.memo<React.FC<Props>>(_Popover);
 export default Popover;
 
-interface Props {
-  children: ReactNode;
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   fixedVertical?: boolean;
   orientation?: ORIENTATION_POPOVER;
   onClose?(event: React.MouseEvent<HTMLElement>): void;
