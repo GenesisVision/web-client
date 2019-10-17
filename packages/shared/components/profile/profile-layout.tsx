@@ -7,7 +7,6 @@ import Link from "shared/components/link/link";
 import Page from "shared/components/page/page";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { kycConfirmedSelector } from "shared/reducers/header-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 
 import {
   KYC_ROUTE,
@@ -36,12 +35,6 @@ if (ROLE_ENV === ROLE.MANAGER) {
 const _ProfileLayout: React.FC<Props> = ({ route, children }) => {
   const [t] = useTranslation();
   const verified = useSelector(kycConfirmedSelector);
-  const backPath = useSelector(
-    (state: RootState) => state.router.location.state
-  );
-  const prevPath = useSelector(
-    (state: RootState) => state.router.location.prevPath
-  );
   return (
     <Page title={t("profile-page.title")}>
       <div className="app__main-wrapper">
@@ -55,8 +48,7 @@ const _ProfileLayout: React.FC<Props> = ({ route, children }) => {
                 label={
                   <Link
                     to={{
-                      pathname: x.pathname,
-                      state: backPath
+                      pathname: x.pathname
                     }}
                   >
                     {t(`profile-page.tabs.${x.value}`)}
