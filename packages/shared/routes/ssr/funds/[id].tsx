@@ -6,7 +6,9 @@ import {
   dispatchFundId
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import withDefaultLayout from "shared/decorators/with-default-layout";
-import { NextPageWithRedux } from "shared/utils/types";
+import { CurrencyEnum, NextPageWithRedux } from "shared/utils/types";
+import { getCookie } from "shared/utils/cookie";
+import { ACCOUNT_CURRENCY_KEY } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
 
 export const fundDetailsCreator = (Component: React.ComponentType) => {
   const Page: NextPageWithRedux<{}> = () => {
@@ -18,9 +20,13 @@ export const fundDetailsCreator = (Component: React.ComponentType) => {
     const {
       accountSettings: { currency }
     } = ctx.reduxStore.getState();
+    const cookiesCurrency = getCookie(
+      ACCOUNT_CURRENCY_KEY,
+      ctx
+    ) as CurrencyEnum;
     await Promise.all([
       ctx.reduxStore.dispatch(dispatch =>
-        dispatch(statisticCurrencyAction(currency))
+        dispatch(statisticCurrencyAction(cookiesCurrency || currency))
       ),
       ctx.reduxStore.dispatch(dispatchFundId(id as string)),
       ctx.reduxStore.dispatch(dispatchFundDescription(ctx))
