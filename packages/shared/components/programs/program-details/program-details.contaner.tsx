@@ -28,12 +28,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   data: description
 }) => {
   const dispatch = useDispatch();
-  useEffect(
-    () => {
-      dispatch(statisticCurrencyAction(description.currency));
-    },
-    [description]
-  );
+  useEffect(() => {
+    dispatch(statisticCurrencyAction(description.currency));
+  }, [description]);
   return (
     <Page title={description.title}>
       <ProgramDetailsDescriptionSection

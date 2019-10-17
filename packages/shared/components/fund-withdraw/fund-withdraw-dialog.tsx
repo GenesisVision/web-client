@@ -21,12 +21,9 @@ const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
   const { data, sendRequest, errorMessage } = useApiRequest({
     request: fetchInfo
   });
-  useEffect(
-    () => {
-      open && sendRequest();
-    },
-    [open]
-  );
+  useEffect(() => {
+    open && sendRequest();
+  }, [open]);
 
   return (
     <Dialog open={open} onClose={onClose}>

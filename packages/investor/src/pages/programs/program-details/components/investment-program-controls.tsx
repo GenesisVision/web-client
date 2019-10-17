@@ -39,13 +39,10 @@ const _InvestmentProgramControls: React.FC<Props> = ({
     setCloseUnAuthInvestmentPopup
   ] = useIsOpen();
 
-  const openInvestmentPopup = useCallback(
-    () => {
-      if (isAuthenticated) setOpenInvestmentPopup();
-      else setOpenUnAuthInvestmentPopup();
-    },
-    [isAuthenticated]
-  );
+  const openInvestmentPopup = useCallback(() => {
+    if (isAuthenticated) setOpenInvestmentPopup();
+    else setOpenUnAuthInvestmentPopup();
+  }, [isAuthenticated]);
 
   const notificationId = programDescription.personalProgramDetails
     ? programDescription.personalProgramDetails.notificationAvailableToInvestId

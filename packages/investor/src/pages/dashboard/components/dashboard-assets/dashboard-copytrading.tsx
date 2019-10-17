@@ -66,9 +66,7 @@ const _DashboardCopytrading: React.FC<Props> = ({ title }) => {
       )}
       renderHeader={(column: Column) => (
         <span
-          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
-            column.name
-          }`}
+          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${column.name}`}
         >
           {t(`investor.dashboard-page.copytrading-header.${column.name}`)}
         </span>

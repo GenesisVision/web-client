@@ -40,12 +40,9 @@ export interface WalletRouteProps extends RouteComponentProps<RouteProps> {}
 const _WalletRoutes: React.FC<DispatchProps> = () => {
   const currency = useSelector(currencySelector);
   const dispatch = useDispatch();
-  useEffect(
-    () => {
-      dispatch(fetchWallets(currency));
-    },
-    [currency]
-  );
+  useEffect(() => {
+    dispatch(fetchWallets(currency));
+  }, [currency]);
   return (
     <Switch>
       <Route

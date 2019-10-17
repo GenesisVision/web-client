@@ -42,12 +42,9 @@ const _DepositContainer: React.FC<Props> = ({
   >({
     request: getDepositInfo
   });
-  useEffect(
-    () => {
-      id && open && getInvestInfo();
-    },
-    [open]
-  );
+  useEffect(() => {
+    id && open && getInvestInfo();
+  }, [open]);
 
   return (
     <Dialog open={open} onClose={onClose}>

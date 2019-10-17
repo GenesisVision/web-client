@@ -21,12 +21,9 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
   const { errorMessage, data, sendRequest } = useApiRequest<
     ProgramWithdrawInfo
   >({ request: fetchInfo });
-  useEffect(
-    () => {
-      open && sendRequest();
-    },
-    [open]
-  );
+  useEffect(() => {
+    open && sendRequest();
+  }, [open]);
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup

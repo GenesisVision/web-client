@@ -70,18 +70,14 @@ const _ProfitChartElements: React.FC<Props> = ({
   );
 };
 
-export type TRenderProfitValue = (
-  props: {
-    chart: ProfitChartType;
-  }
-) => JSX.Element;
+export type TRenderProfitValue = (props: {
+  chart: ProfitChartType;
+}) => JSX.Element;
 
-export type TRenderProfitChart = (
-  props: {
-    profitChart: ProfitChartDataType;
-    chartCurrencies?: TChartCurrency[];
-  }
-) => JSX.Element;
+export type TRenderProfitChart = (props: {
+  profitChart: ProfitChartDataType;
+  chartCurrencies?: TChartCurrency[];
+}) => JSX.Element;
 
 interface OwnProps {
   renderProfitChart: TRenderProfitChart;

@@ -152,16 +152,14 @@ export const closeFund: TCloseAsset = ({
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 
-export type TCloseAsset = (
-  opts: {
-    onSuccess: () => void;
-    onError: () => void;
-    id: string;
-    opts?: {
-      twoFactorCode?: string;
-    };
-  }
-) => (dispatch: Dispatch) => void;
+export type TCloseAsset = (opts: {
+  onSuccess: () => void;
+  onError: () => void;
+  id: string;
+  opts?: {
+    twoFactorCode?: string;
+  };
+}) => (dispatch: Dispatch) => void;
 
 export enum ASSET_EDIT_FIELDS {
   stopOutLevel = "stopOutLevel",

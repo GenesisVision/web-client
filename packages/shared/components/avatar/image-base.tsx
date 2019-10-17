@@ -15,13 +15,10 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
 }) => {
   const fullUrl = useUrl(url);
   const [isError, setIsError, setIsNotError] = useIsOpen();
-  useEffect(
-    () => {
-      if (url) setIsNotError();
-      else setIsError();
-    },
-    [url]
-  );
+  useEffect(() => {
+    if (url) setIsNotError();
+    else setIsError();
+  }, [url]);
   const handleError = useCallback((e: any) => {
     e.target.onerror = null;
     setIsError();

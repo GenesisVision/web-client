@@ -25,42 +25,39 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   }>({});
   const [isSubmit, setIsSubmit, setIsNotSubmit] = useIsOpen();
 
-  useEffect(
-    () => {
-      const captchaCheckResult = {
-        id,
-        pow: {
-          prefix
+  useEffect(() => {
+    const captchaCheckResult = {
+      id,
+      pow: {
+        prefix
+      },
+      geeTest: {}
+    };
+    const sendRequest = () =>
+      request(
+        {
+          ...values,
+          captchaCheckResult
         },
-        geeTest: {}
-      };
-      const sendRequest = () =>
-        request(
-          {
-            ...values,
-            captchaCheckResult
-          },
-          setSubmitting.func!
-        );
-      if (isSubmit) {
-        switch (captchaType) {
-          case "Pow":
-            if (prefix) {
-              sendRequest();
-              setPow(undefined);
-              setPrefix(undefined);
-              setIsNotSubmit();
-            }
-            break;
-          default:
+        setSubmitting.func!
+      );
+    if (isSubmit) {
+      switch (captchaType) {
+        case "Pow":
+          if (prefix) {
             sendRequest();
+            setPow(undefined);
+            setPrefix(undefined);
             setIsNotSubmit();
-            break;
-        }
+          }
+          break;
+        default:
+          sendRequest();
+          setIsNotSubmit();
+          break;
       }
-    },
-    [id, prefix, values, isSubmit, captchaType, setSubmitting]
-  );
+    }
+  }, [id, prefix, values, isSubmit, captchaType, setSubmitting]);
   const handleSubmit = useCallback(
     (values: TValues, setSubmittingProp?: SetSubmittingType) => {
       authService

@@ -16,17 +16,12 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
   programId,
   title
 }) => {
-  const loadFile = useCallback(
-    () => {
-      const dateNow = moment(new Date()).format("YYYY-MM-DD_HH-mm-ss");
-      filesService
-        .getStatisticExportFile(programId, dateRange)
-        .then((blob: Blob) =>
-          saveAs(blob, `${title}_statistic_${dateNow}.xlsx`)
-        );
-    },
-    [programId, dateRange, title]
-  );
+  const loadFile = useCallback(() => {
+    const dateNow = moment(new Date()).format("YYYY-MM-DD_HH-mm-ss");
+    filesService
+      .getStatisticExportFile(programId, dateRange)
+      .then((blob: Blob) => saveAs(blob, `${title}_statistic_${dateNow}.xlsx`));
+  }, [programId, dateRange, title]);
   return (
     <div className="dashboard__button">
       <GVButton

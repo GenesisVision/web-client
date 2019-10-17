@@ -26,12 +26,9 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   useEffect(() => {
     dispatchProgramDescription();
   }, []);
-  useEffect(
-    () => {
-      description && dispatchPlatformLevelsParameters(description.currency);
-    },
-    [description]
-  );
+  useEffect(() => {
+    description && dispatchPlatformLevelsParameters(description.currency);
+  }, [description]);
   return (
     <ProgramDetailsContainer
       loaderData={programDetailsLoaderData}

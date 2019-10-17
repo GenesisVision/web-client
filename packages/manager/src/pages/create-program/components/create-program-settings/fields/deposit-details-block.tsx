@@ -25,21 +25,15 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   const { rate, handleWalletChange, wallet, wallets } = useCreateAssetSection({
     assetCurrency
   });
-  useEffect(
-    () => {
-      setFieldValue(rateName, rate);
-    },
-    [rate]
-  );
-  useEffect(
-    () => {
-      if (!wallet) return;
-      setFieldValue(inputName, "");
-      setFieldValue(availableName, wallet.available);
-      setFieldValue(walletFieldName, wallet.id);
-    },
-    [wallet]
-  );
+  useEffect(() => {
+    setFieldValue(rateName, rate);
+  }, [rate]);
+  useEffect(() => {
+    if (!wallet) return;
+    setFieldValue(inputName, "");
+    setFieldValue(availableName, wallet.available);
+    setFieldValue(walletFieldName, wallet.id);
+  }, [wallet]);
   if (!wallet) return null;
   return (
     <SettingsBlock

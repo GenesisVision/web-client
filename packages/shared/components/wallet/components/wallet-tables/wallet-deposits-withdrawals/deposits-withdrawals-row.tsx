@@ -13,13 +13,10 @@ import { formatValue } from "shared/utils/formatter";
 
 const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const handleAction = useCallback(
-    () => {
-      if (update) update();
-      setClosePopup();
-    },
-    [update]
-  );
+  const handleAction = useCallback(() => {
+    if (update) update();
+    setClosePopup();
+  }, [update]);
   return (
     <>
       <TransactionDetailsPopup

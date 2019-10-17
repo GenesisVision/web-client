@@ -12,9 +12,7 @@ export const _FundStructureHeaderCell: React.FC<
 > = ({ t, column }) => (
   <span
     className={classNames(
-      `details-structure__head-cell fund-details-structure__cell--${
-        column.name
-      }`,
+      `details-structure__head-cell fund-details-structure__cell--${column.name}`,
       {
         tooltip__label: column.tooltip
       }

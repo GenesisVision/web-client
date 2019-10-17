@@ -74,13 +74,11 @@ const _BalanceChartElements: React.FC<Props> = ({
   );
 };
 
-export type TRenderBalanceChart = (
-  props: {
-    color: string;
-    balanceChart: BalanceChartElementType;
-    currency: CurrencyEnum;
-  }
-) => JSX.Element;
+export type TRenderBalanceChart = (props: {
+  color: string;
+  balanceChart: BalanceChartElementType;
+  currency: CurrencyEnum;
+}) => JSX.Element;
 
 interface OwnProps {
   renderBalanceChart: TRenderBalanceChart;
