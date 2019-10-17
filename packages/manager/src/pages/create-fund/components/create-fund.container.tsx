@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import CreateFundSettingsSection from "./create-fund-settings/create-fund-settings-section";
 
 const _CreateFundContainer: React.FC<Props> = ({ minimumDepositAmount }) => {
-  const dispatch = useDispatch();
   const [t] = useTranslation();
   return (
     <>
