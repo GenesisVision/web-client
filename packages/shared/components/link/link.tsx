@@ -1,7 +1,6 @@
 import NextLink from "next/link";
 import Router from "next/router";
 import React, { useCallback } from "react";
-import { UrlObject } from "url";
 
 import {
   normalizeTo,

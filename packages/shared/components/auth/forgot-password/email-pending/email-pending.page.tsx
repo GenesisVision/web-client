@@ -56,9 +56,9 @@ interface DispatchProps {
 
 interface Props extends StateProps, DispatchProps, WithTranslation {}
 
-const EmailPendingPage = compose<React.ComponentType<OwnProps>>(
+const EmailPendingPage = compose<React.ComponentType>(
   translate(),
-  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
+  connect<StateProps, DispatchProps, AuthRootState>(
     mapStateToProps,
     mapDispatchToProps
   ),
