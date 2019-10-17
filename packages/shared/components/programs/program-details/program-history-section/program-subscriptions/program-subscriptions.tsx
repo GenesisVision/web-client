@@ -39,9 +39,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({ id, currency }) => {
       )}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${
-            column.name
-          }`}
+          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
         >
           {t(`program-details-page.history.subscriptions.${column.name}`)}
         </span>

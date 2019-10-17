@@ -12,12 +12,9 @@ const _WalletWidgetContainer: React.FC<Props> = ({ className }) => {
   const currency = useSelector(currencySelector);
   const info = useSelector(grandTotalSelector);
   const dispatch = useDispatch();
-  useEffect(
-    () => {
-      dispatch(fetchWallets(currency));
-    },
-    [currency]
-  );
+  useEffect(() => {
+    dispatch(fetchWallets(currency));
+  }, [currency]);
 
   return (
     <WalletWidget

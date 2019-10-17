@@ -27,28 +27,19 @@ const useCreateAssetSection = ({
   );
   const [rate, setRate] = useState<number>(1);
 
-  useEffect(
-    () => {
-      dispatch(fetchWallets(assetCurrency));
-    },
-    [assetCurrency]
-  );
+  useEffect(() => {
+    dispatch(fetchWallets(assetCurrency));
+  }, [assetCurrency]);
 
-  useEffect(
-    () => {
-      setWallet(
-        wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
-      );
-    },
-    [wallets]
-  );
+  useEffect(() => {
+    setWallet(
+      wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
+    );
+  }, [wallets]);
 
-  useEffect(
-    () => {
-      wallet && fetchRate(wallet.currency, assetCurrency).then(setRate);
-    },
-    [wallet, assetCurrency]
-  );
+  useEffect(() => {
+    wallet && fetchRate(wallet.currency, assetCurrency).then(setRate);
+  }, [wallet, assetCurrency]);
 
   const handleWalletChange = useCallback(
     (walletId: string) => setWallet(wallets.find(({ id }) => id === walletId)!),

@@ -110,7 +110,7 @@ export enum PORTFOLIO_EVENTS_TYPES {
 }
 
 export const EVENT_PROFITABILITY_VALUES: {
-  [t in InvestmentEventViewModelChangeStateEnum]: string
+  [t in InvestmentEventViewModelChangeStateEnum]: string;
 } = {
   Decreased: "-1",
   NotChanged: "0",

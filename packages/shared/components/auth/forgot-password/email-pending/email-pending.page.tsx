@@ -48,11 +48,9 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    sendForgotPasswordEmail: (
-      values: {
-        captchaCheckResult: CaptchaCheckResult;
-      }
-    ) => void;
+    sendForgotPasswordEmail: (values: {
+      captchaCheckResult: CaptchaCheckResult;
+    }) => void;
   };
 }
 

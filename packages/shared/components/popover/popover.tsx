@@ -20,27 +20,21 @@ const _Popover: React.FC<Props> = props => {
   const [windowHeight, setWindowHeight] = useState<number>(0);
   const [scrollTop, setScrollTop] = useState<number>(0);
   const popover = useRef<HTMLDivElement>(null);
-  useEffect(
-    () => {
-      if (popover.current) {
-        const width = ownWidth ? "auto" : getAnchorBounds().width;
-        popover.current.style.left = getLeft();
-        popover.current.style.top = `${getTop() + scrollTop}px`;
-        popover.current.style.minWidth = `${width}px`;
-        popover.current.style.transform = getTransformPosition();
-        popover.current.style.opacity = "1";
-      }
-    },
-    [anchorEl, scrollTop, popover.current]
-  );
+  useEffect(() => {
+    if (popover.current) {
+      const width = ownWidth ? "auto" : getAnchorBounds().width;
+      popover.current.style.left = getLeft();
+      popover.current.style.top = `${getTop() + scrollTop}px`;
+      popover.current.style.minWidth = `${width}px`;
+      popover.current.style.transform = getTransformPosition();
+      popover.current.style.opacity = "1";
+    }
+  }, [anchorEl, scrollTop, popover.current]);
 
-  useEffect(
-    () => {
-      setWindowHeight(window.innerHeight);
-      setScrollTop(window.scrollY);
-    },
-    [anchorEl]
-  );
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+    setScrollTop(window.scrollY);
+  }, [anchorEl]);
 
   const getAnchorBounds = (): ClientRect =>
     getAnchorEl(anchorEl).getBoundingClientRect();
@@ -178,7 +172,7 @@ const getAnchorEl = (el?: anchorElType) =>
 const Popover = React.memo(_Popover);
 export default Popover;
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   fixedVertical?: boolean;
   orientation?: ORIENTATION_POPOVER;
   onClose?(event: React.MouseEvent<HTMLElement>): void;

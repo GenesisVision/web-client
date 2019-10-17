@@ -21,9 +21,7 @@ const InvestingTransaction: React.FC<TransactionDetailsProps> = ({
     body={
       <StatisticItem
         label={t(
-          `transactions-details.investment.to-${
-            data.programDetails.programType
-          }`
+          `transactions-details.investment.to-${data.programDetails.programType}`
         )}
       >
         <TransactionAsset

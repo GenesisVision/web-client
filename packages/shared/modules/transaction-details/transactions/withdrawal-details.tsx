@@ -21,9 +21,7 @@ const WithdrawalTransaction: React.FC<TransactionDetailsProps> = ({
     body={
       <StatisticItem
         label={t(
-          `transactions-details.withdrawal.from-${
-            data.programDetails.programType
-          }`
+          `transactions-details.withdrawal.from-${data.programDetails.programType}`
         )}
       >
         <TransactionAsset

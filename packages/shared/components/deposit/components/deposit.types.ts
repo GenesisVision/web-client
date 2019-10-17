@@ -31,10 +31,8 @@ export type TAssetInvestFn = (
 
 export type TAssetInvestCreator = (
   assetInvestFn: TAssetInvestFn
-) => (
-  args: {
-    id: string;
-    amount: number;
-    currency: CurrencyEnum;
-  }
-) => RootThunk<Promise<void>>;
+) => (args: {
+  id: string;
+  amount: number;
+  currency: CurrencyEnum;
+}) => RootThunk<Promise<void>>;

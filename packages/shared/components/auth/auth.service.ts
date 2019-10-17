@@ -41,15 +41,13 @@ export const checkPow: CheckPowFuncType = async props => {
 };
 
 type GetCaptchaFuncType = (login: string) => CancelablePromise<CaptchaDetails>;
-type CalculatePrefixFuncType = (
-  props: {
-    difficulty: number;
-    nonce: string;
-    login: string;
-    setCount: (val: number) => void;
-    total: number;
-  }
-) => Promise<number>;
+type CalculatePrefixFuncType = (props: {
+  difficulty: number;
+  nonce: string;
+  login: string;
+  setCount: (val: number) => void;
+  total: number;
+}) => Promise<number>;
 type CheckPowFuncType = (
   props: PowDetails & {
     setTotal: SetFuncType;

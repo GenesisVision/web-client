@@ -45,17 +45,14 @@ const _FacetContainer: React.FC<Props> = ({
   ] = useIsOpen();
   const [notFound, setNotFound, setFound, setFoundValue] = useIsOpen();
   const [facet, setFacet] = useState<FacetType | undefined>(undefined);
-  useEffect(
-    () => {
-      if (facets !== null) {
-        const { facet, isPending, notFound } = service.getCurrentFacet();
-        setFacet(facet);
-        setPendingValue(!!isPending);
-        setFoundValue(!!notFound);
-      }
-    },
-    [facets, service, setFoundValue, setPendingValue]
-  );
+  useEffect(() => {
+    if (facets !== null) {
+      const { facet, isPending, notFound } = service.getCurrentFacet();
+      setFacet(facet);
+      setPendingValue(!!isPending);
+      setFoundValue(!!notFound);
+    }
+  }, [facets, service, setFoundValue, setPendingValue]);
   const getFacetItems = useCallback(
     filtering => getItems({ ...filtering, facetId: facet!.id }),
     [facet, getItems]

@@ -76,9 +76,7 @@ const _DashboardFunds: React.FC<Props> = ({
       )}
       renderHeader={(column: Column) => (
         <span
-          className={`funds-table__cell dashboard-funds__cell dashboard-funds__cell--${
-            column.name
-          }`}
+          className={`funds-table__cell dashboard-funds__cell dashboard-funds__cell--${column.name}`}
         >
           {t(`${role}.dashboard-page.funds-header.${column.name}`)}
         </span>

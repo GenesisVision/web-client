@@ -38,12 +38,9 @@ const _DetailsFavorite: React.FC<Props> = ({
     },
     [isAuthenticated]
   );
-  const handleFavoriteClickOnText = useCallback(
-    () => {
-      handleFavoriteClickOnButton(id, isFavorite);
-    },
-    [id, isFavorite]
-  );
+  const handleFavoriteClickOnText = useCallback(() => {
+    handleFavoriteClickOnButton(id, isFavorite);
+  }, [id, isFavorite]);
   return (
     <DetailsDescriptionControl
       tag="button"
