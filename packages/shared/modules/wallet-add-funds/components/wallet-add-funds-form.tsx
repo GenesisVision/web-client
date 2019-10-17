@@ -33,17 +33,14 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
     },
     [wallets, setSelected]
   );
-  const onCopy = useCallback(
-    () => {
-      try {
-        copy(depositAddress);
-        notifySuccess(t("wallet-deposit.copy-to-clipboard-success"));
-      } catch (error) {
-        notifyError(t("wallet-deposit.copy-to-clipboard-error"));
-      }
-    },
-    [depositAddress]
-  );
+  const onCopy = useCallback(() => {
+    try {
+      copy(depositAddress);
+      notifySuccess(t("wallet-deposit.copy-to-clipboard-success"));
+    } catch (error) {
+      notifyError(t("wallet-deposit.copy-to-clipboard-error"));
+    }
+  }, [depositAddress]);
   return (
     <div className="wallet-add-funds-popup">
       <DialogTop title={t("wallet-deposit.title")}>

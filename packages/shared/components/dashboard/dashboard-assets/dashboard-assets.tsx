@@ -28,13 +28,10 @@ const _DashboardAssets: React.FC<Props> = ({
   const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
   const [t] = useTranslation();
   const role = useRole();
-  useEffect(
-    () => {
-      getAssetsCounts();
-      return clearAssets;
-    },
-    [clearAssets, getAssetsCounts]
-  );
+  useEffect(() => {
+    getAssetsCounts();
+    return clearAssets;
+  }, [clearAssets, getAssetsCounts]);
   const handleTabChange = useCallback(
     (e: any, propTab: string) => {
       if (propTab === tab) return;

@@ -19,14 +19,11 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   useEffect(() => {
     if (url) setIsNotError();
     else setIsError();
-  }, [setIsError, setIsNotError, url]);
-  const handleError = useCallback(
-    (e: any) => {
-      e.target.onerror = null;
-      setIsError();
-    },
-    [setIsError]
-  );
+  }, [url]);
+  const handleError = useCallback((e: any) => {
+    e.target.onerror = null;
+    setIsError();
+  }, []);
   const currentSrc = isError ? defaultImage : fullUrl;
   const className = isError ? defaultImageClassName : "";
   return (isError || !hasUrl) && DefaultImageComponent ? (

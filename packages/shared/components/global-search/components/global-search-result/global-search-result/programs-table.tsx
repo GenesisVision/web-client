@@ -20,9 +20,7 @@ const ProgramsTable: React.FC<SearchTableProps<ProgramsListOld>> = ({
       items={data.programs}
       renderHeader={column => (
         <span
-          className={`programs-table__cell programs-table__cell--${
-            column.name
-          }`}
+          className={`programs-table__cell programs-table__cell--${column.name}`}
         >
           {t(`programs-page.programs-header.${column.name}`)}
         </span>

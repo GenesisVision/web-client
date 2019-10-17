@@ -46,14 +46,11 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
     () => role === ROLE.MANAGER && asset === ASSET.PROGRAM,
     [asset, role]
   );
-  const columns = useMemo(
-    () => {
-      return hideFeeColumn
-        ? PORTFOLIO_EVENTS_MANAGER_COLUMNS
-        : PORTFOLIO_EVENTS_COLUMNS;
-    },
-    [hideFeeColumn]
-  );
+  const columns = useMemo(() => {
+    return hideFeeColumn
+      ? PORTFOLIO_EVENTS_MANAGER_COLUMNS
+      : PORTFOLIO_EVENTS_COLUMNS;
+  }, [hideFeeColumn]);
   return (
     <div className={className}>
       <TableContainer
@@ -95,14 +92,10 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
         columns={columns}
         renderHeader={column => (
           <span
-            className={`portfolio-events-all-table__cell portfolio-events-all-table__head-cell--${
-              column.name
-            }`}
+            className={`portfolio-events-all-table__cell portfolio-events-all-table__head-cell--${column.name}`}
           >
             {t(
-              `${role}.dashboard-page.portfolio-events.table-header.${
-                column.name
-              }`
+              `${role}.dashboard-page.portfolio-events.table-header.${column.name}`
             )}
           </span>
         )}

@@ -62,13 +62,10 @@ const _TransactionsRow: React.FC<Props> = ({
   walletCurrency
 }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const handleAction = useCallback(
-    () => {
-      if (update) update();
-      setClosePopup();
-    },
-    [update]
-  );
+  const handleAction = useCallback(() => {
+    if (update) update();
+    setClosePopup();
+  }, [update]);
   const isConvertAction = transaction.type === "Converting";
   return (
     <>

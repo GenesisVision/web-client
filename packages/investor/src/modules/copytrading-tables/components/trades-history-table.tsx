@@ -39,9 +39,7 @@ class _TradesHistoryTable extends React.PureComponent<Props> {
         }}
         renderHeader={column => (
           <span
-            className={`details-trades__head-cell program-details-trades__cell--${
-              column.name
-            }`}
+            className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
           >
             {t(
               `investor.copytrading-tables.trades-history-header.${column.name}`

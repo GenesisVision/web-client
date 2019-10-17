@@ -86,9 +86,7 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
         columns={columns}
         renderHeader={column => (
           <span
-            className={`wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--${
-              column.name
-            }`}
+            className={`wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--${column.name}`}
           >
             {t(`wallet-page.deposits-withdrawals.${column.name}`)}
           </span>

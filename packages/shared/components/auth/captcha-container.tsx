@@ -25,51 +25,39 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   }>({});
   const [isSubmit, setIsSubmit, setIsNotSubmit] = useIsOpen();
 
-  useEffect(
-    () => {
-      const captchaCheckResult = {
-        id,
-        pow: {
-          prefix
-        },
-        geeTest: {}
-      };
-      const sendRequest = () =>
-        request(
-          {
-            ...values,
-            captchaCheckResult
-          },
-          setSubmitting.func!
-        );
-      if (isSubmit) {
-        switch (captchaType) {
-          case "Pow":
-            if (prefix) {
-              sendRequest();
-              setPow(undefined);
-              setPrefix(undefined);
-              setIsNotSubmit();
-            }
-            break;
-          default:
-            sendRequest();
-            setIsNotSubmit();
-            break;
-        }
-      }
-    },
-    [
+  useEffect(() => {
+    const captchaCheckResult = {
       id,
-      prefix,
-      values,
-      isSubmit,
-      captchaType,
-      setSubmitting,
-      request,
-      setIsNotSubmit
-    ]
-  );
+      pow: {
+        prefix
+      },
+      geeTest: {}
+    };
+    const sendRequest = () =>
+      request(
+        {
+          ...values,
+          captchaCheckResult
+        },
+        setSubmitting.func!
+      );
+    if (isSubmit) {
+      switch (captchaType) {
+        case "Pow":
+          if (prefix) {
+            sendRequest();
+            setPow(undefined);
+            setPrefix(undefined);
+            setIsNotSubmit();
+          }
+          break;
+        default:
+          sendRequest();
+          setIsNotSubmit();
+          break;
+      }
+    }
+  }, [id, prefix, values, isSubmit, captchaType, setSubmitting]);
   const handleSubmit = useCallback(
     (values: TValues, setSubmittingProp?: SetSubmittingType) => {
       authService
@@ -85,7 +73,7 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
           setIsSubmit();
         });
     },
-    [setIsSubmit]
+    []
   );
   return (
     <>

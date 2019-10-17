@@ -39,5 +39,5 @@ export type DateRangeFilterType = IDataRangeFilterValue;
 export type ComposedRequestDataRangeNames = SERVER_DATE_NAME;
 export type ComposedRequestDataRangeValues = string | Date;
 export type ComposedRequestDataRangeValue = {
-  [key in SERVER_DATE_NAME]?: ComposedRequestDataRangeValues
+  [key in SERVER_DATE_NAME]?: ComposedRequestDataRangeValues;
 };

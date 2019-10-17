@@ -81,9 +81,7 @@ const _DashboardPrograms: React.FC<Props> = ({
       )}
       renderHeader={(column: Column) => (
         <span
-          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
-            column.name
-          }`}
+          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${column.name}`}
         >
           {t(`${role}.dashboard-page.programs-header.${column.name}`)}
         </span>

@@ -25,9 +25,7 @@ const getTradesExportFileUrl = (
 ): string => {
   const dateFilter = getDateFilters(dateRange);
   const queryString = "?" + qs.stringify(dateFilter);
-  return `${
-    process.env.REACT_APP_API_URL
-  }/v1.0/programs/${id}/trades/export${queryString}`;
+  return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/trades/export${queryString}`;
 };
 
 const getPeriodExportFileUrl = (
@@ -36,9 +34,7 @@ const getPeriodExportFileUrl = (
 ): string => {
   const dateFilter = getDateFilters(dateRange);
   const queryString = "?" + qs.stringify(dateFilter);
-  return `${
-    process.env.REACT_APP_API_URL
-  }/v1.0/programs/${id}/periods/export${queryString}`;
+  return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/periods/export${queryString}`;
 };
 
 const getStatisticExportFile = (

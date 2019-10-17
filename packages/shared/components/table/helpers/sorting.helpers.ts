@@ -10,9 +10,7 @@ export enum SORTING_DIRECTION {
 export const getSortingColumnName = (value?: string): string => {
   //@ts-ignore TODO
   if (value === undefined) return undefined;
-  const sortableRegExp = `(.*)${SORTING_DIRECTION.ASC}|${
-    SORTING_DIRECTION.DESC
-  }$`;
+  const sortableRegExp = `(.*)${SORTING_DIRECTION.ASC}|${SORTING_DIRECTION.DESC}$`;
   return value.replace(new RegExp(sortableRegExp), "$1");
 };
 

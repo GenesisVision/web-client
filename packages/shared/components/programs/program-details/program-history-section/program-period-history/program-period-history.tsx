@@ -49,9 +49,7 @@ const _ProgramPeriodHistory: React.FC<Props> = ({ currency, id }) => {
       columns={PROGRAM_PERIOD_HISTORY}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${
-            column.name
-          }`}
+          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
         >
           {t(`program-details-page.history.period-history.${column.name}`)}
         </span>

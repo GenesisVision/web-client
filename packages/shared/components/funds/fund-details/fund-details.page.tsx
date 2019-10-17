@@ -23,7 +23,7 @@ const _FundDetailsPage: React.FC<Props> = ({
   const description = useSelector(fundDescriptionSelector);
   useEffect(() => {
     dispatchFundDescription();
-  }, []);
+  }, [dispatchFundDescription]);
   return (
     <FundDetailsContainer
       loaderData={fundDetailsLoaderData}

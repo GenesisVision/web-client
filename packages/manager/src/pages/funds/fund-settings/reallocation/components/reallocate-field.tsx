@@ -31,50 +31,38 @@ const _ReallocateField: React.FC<Props> = ({
   );
   const [remainder, setRemainder] = useState<number>(getRemainder(stateAssets));
 
-  const submitChanges = useCallback(
-    () => {
-      onChange({
-        target: {
-          value: stateAssets.filter(asset => asset.percent > 0),
-          name
-        }
-      });
-    },
-    [onChange, stateAssets, name]
-  );
-
-  useEffect(
-    () => {
-      if (!newAsset) return;
-      const assets = stateAssets.map(x =>
-        x.asset === newAsset.asset ? newAsset : x
-      );
-      setStateAssets(assets);
-      setRemainder(getRemainder(assets));
-    },
-    [newAsset, stateAssets]
-  );
-  useEffect(
-    () => {
-      if (!!!anchor && !!newAsset) {
-        onBlur &&
-          onBlur({
-            target: {
-              name
-            }
-          });
-        submitChanges();
+  const submitChanges = useCallback(() => {
+    onChange({
+      target: {
+        value: stateAssets.filter(asset => asset.percent > 0),
+        name
       }
-    },
-    [anchor, name, newAsset, onBlur, submitChanges]
-  );
-  useEffect(
-    () => {
-      !!!anchor &&
-        setStateAssets(stateAssets.sort((a, b) => b.percent - a.percent));
-    },
-    [anchor, stateAssets]
-  );
+    });
+  }, [stateAssets, name]);
+
+  useEffect(() => {
+    if (!newAsset) return;
+    const assets = stateAssets.map(x =>
+      x.asset === newAsset.asset ? newAsset : x
+    );
+    setStateAssets(assets);
+    setRemainder(getRemainder(assets));
+  }, [newAsset, stateAssets]);
+  useEffect(() => {
+    if (!!!anchor && !!newAsset) {
+      onBlur &&
+        onBlur({
+          target: {
+            name
+          }
+        });
+      submitChanges();
+    }
+  }, [anchor, name, newAsset, onBlur, submitChanges]);
+  useEffect(() => {
+    !!!anchor &&
+      setStateAssets(stateAssets.sort((a, b) => b.percent - a.percent));
+  }, [anchor, stateAssets]);
 
   const handlePercentChange: TRegulatorInputHandle = useCallback(
     (asset): React.ChangeEventHandler<HTMLInputElement> => ({ target }) => {
