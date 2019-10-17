@@ -53,12 +53,9 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     },
     [currency, setFieldValue, values]
   );
-  useEffect(
-    () => {
-      fetchRate();
-    },
-    [fetchRate]
-  );
+  useEffect(() => {
+    fetchRate();
+  }, [fetchRate]);
   const onChangeCurrencyFrom = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element) => {
       const wallet = wallets.find(({ id }) => target.props.value === id)!;

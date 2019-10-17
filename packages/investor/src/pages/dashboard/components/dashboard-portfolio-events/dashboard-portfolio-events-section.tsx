@@ -9,12 +9,9 @@ import { getTopPortfolioEvents } from "../../services/dashboard-events.services"
 const _DashboardPortfolioEventsSection: React.FC<Props> = ({ title }) => {
   const dispatch = useDispatch();
   const data = useSelector(dashboardEventsSelector);
-  useEffect(
-    () => {
-      dispatch(getTopPortfolioEvents);
-    },
-    [dispatch]
-  );
+  useEffect(() => {
+    dispatch(getTopPortfolioEvents);
+  }, [dispatch]);
   return (
     <DashboardPortfolioEvents
       fullEventsUrl={DASHBOARD_EVENTS_ROUTE}

@@ -24,8 +24,8 @@ import { MiddlewareDispatch } from "shared/utils/types";
 
 import { fetchAccounts } from "../../../services/wallet.services";
 import {
-  COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE,
-  composeWalletCopytradingCurrencyUrl
+  composeWalletCopytradingCurrencyUrl,
+  COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE
 } from "../../../wallet.routes";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
@@ -41,12 +41,9 @@ const _WalletCopytrading: React.FC<Props> = ({
   const [currentAccount, setCurrentAccount] = useState<
     CopyTradingAccountInfo | undefined
   >(undefined);
-  useEffect(
-    () => {
-      service.fetchAccounts();
-    },
-    [service]
-  );
+  useEffect(() => {
+    service.fetchAccounts();
+  }, [service]);
   const handleOpenPopup = useCallback(
     (openMethod: () => void) => (
       currentAccount?: CopyTradingAccountInfo

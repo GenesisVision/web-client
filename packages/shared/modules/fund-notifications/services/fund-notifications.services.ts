@@ -1,3 +1,4 @@
+import { NextPageContext } from "next";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import {
   TAddNotification,
@@ -7,6 +8,7 @@ import {
   addNotificationSettingAction,
   removeNotificationSettingAction
 } from "shared/modules/notification-settings/actions/notification-settings.actions";
+import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import {
@@ -15,9 +17,6 @@ import {
   fetchFundNotificationsAction,
   toggleFundNotificationsAction
 } from "../actions/fund-notifications.actions";
-import authService from "shared/services/auth-service";
-
-import { NextPageContext } from "next";
 
 export const fetchFundNotifications = (
   id: string,

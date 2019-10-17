@@ -1,4 +1,5 @@
 import "./about-level-icon.scss";
+
 import classNames from "classnames";
 import { LevelInfo } from "gv-api-web";
 import * as React from "react";

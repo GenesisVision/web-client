@@ -16,13 +16,13 @@ import {
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-module";
 import { CURRENCY_MAP_NAME } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
+import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
 import {
   FUNDS_FACET_PAGING,
   FUNDS_FACET_TABLE_FILTERS
 } from "./funds-facet.constants";
-import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 
 const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
   t,

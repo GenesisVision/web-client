@@ -8,12 +8,9 @@ import NotificationsContainer from "shared/components/notifications/components/n
 import AlertMessageList from "shared/modules/alert-message/components/alert-message-list/alert-message-list";
 
 const _AppLayout: ComponentType<Props> = ({ initOnResizeEvent, children }) => {
-  useEffect(
-    () => {
-      initOnResizeEvent();
-    },
-    [initOnResizeEvent]
-  );
+  useEffect(() => {
+    initOnResizeEvent();
+  }, [initOnResizeEvent]);
   return (
     <div className="app__wrapper root">
       <div className="app">

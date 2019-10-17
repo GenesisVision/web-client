@@ -55,13 +55,10 @@ const _Table: React.FC<ITableProps> = ({
     renderBodyRow !== undefined &&
     renderBodyCard !== undefined &&
     !!showSwitchView;
-  useEffect(
-    () => {
-      if (isViewSwitchEnabled)
-        setView(getCookie(PROGRAMS_VIEW) || LIST_VIEW.TABLE);
-    },
-    [isViewSwitchEnabled]
-  );
+  useEffect(() => {
+    if (isViewSwitchEnabled)
+      setView(getCookie(PROGRAMS_VIEW) || LIST_VIEW.TABLE);
+  }, [isViewSwitchEnabled]);
   const changeView = useCallback((view: LIST_VIEW) => {
     setCookie(PROGRAMS_VIEW, view);
     setView(view);

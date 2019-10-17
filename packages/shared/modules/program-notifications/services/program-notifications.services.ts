@@ -1,3 +1,4 @@
+import { NextPageContext } from "next";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import {
   TAddNotification,
@@ -8,8 +9,8 @@ import {
   addNotificationSettingAction,
   removeNotificationSettingAction
 } from "shared/modules/notification-settings/actions/notification-settings.actions";
+import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "shared/utils/types";
-import { NextPageContext } from "next";
 
 import {
   addErrorMessageAction,
@@ -17,7 +18,6 @@ import {
   fetchProgramNotificationsAction,
   toggleProgramNotificationsAction
 } from "../actions/program-notifications.actions";
-import authService from "shared/services/auth-service";
 
 export const fetchProgramNotifications = (
   id: string,

@@ -41,16 +41,13 @@ const _ProgramWithdrawAmountForm: React.FC<
     [programCurrency]
   );
 
-  const setMaxAmount = useCallback(
-    () => {
-      setFieldValue(
-        FIELDS.amount,
-        formatCurrencyValue(availableToWithdraw, programCurrency)
-      );
-      setEmptyInit(false);
-    },
-    [availableToWithdraw, programCurrency, setFieldValue]
-  );
+  const setMaxAmount = useCallback(() => {
+    setFieldValue(
+      FIELDS.amount,
+      formatCurrencyValue(availableToWithdraw, programCurrency)
+    );
+    setEmptyInit(false);
+  }, [availableToWithdraw, programCurrency, setFieldValue]);
 
   return (
     <form id="withdraw-form" onSubmit={handleSubmit}>

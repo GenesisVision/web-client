@@ -14,16 +14,24 @@ import {
   FUND_ASSET_DEFAULT_VALUE,
   FUND_ASSET_FILTER_NAME
 } from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
-import { calculateSkipAndTake, calculateTotalPages } from "shared/components/table/helpers/paging.helpers";
+import {
+  calculateSkipAndTake,
+  calculateTotalPages
+} from "shared/components/table/helpers/paging.helpers";
 import useRouteFilters from "shared/hooks/route-filters.hook";
 import { useTranslation } from "shared/i18n";
 import {
   ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
 } from "shared/modules/favorite-asset/services/favorite-fund.service";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { fundAssetsSelector, platformCurrenciesSelector } from "shared/reducers/platform-reducer";
+import {
+  fundAssetsSelector,
+  platformCurrenciesSelector
+} from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, NextPageWithReduxContext } from "shared/utils/types";
 
@@ -36,8 +44,6 @@ import {
   FUNDS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
 } from "./funds-table.constants";
-import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
 
 const DEFAULT_FILTERS = {
   [CURRENCY_MAP_NAME]: CURRENCY_MAP_VALUE,

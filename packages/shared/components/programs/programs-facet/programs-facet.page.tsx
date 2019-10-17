@@ -2,7 +2,9 @@ import "./programs-facet.scss";
 
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import FacetContainer, { FACET_ASSET } from "shared/components/facet-container/facet-container";
+import FacetContainer, {
+  FACET_ASSET
+} from "shared/components/facet-container/facet-container";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";

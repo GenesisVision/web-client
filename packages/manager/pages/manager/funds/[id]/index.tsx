@@ -1,13 +1,13 @@
 import FundDetailsPage from "pages/funds/fund-details/fund-details.page";
 import React from "react";
 import { compose } from "redux";
+import { statisticCurrencyAction } from "shared/components/funds/fund-details/actions/fund-details.actions";
 import {
   dispatchFundDescription,
   dispatchFundId
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import { NextPageWithRedux } from "shared/utils/types";
-import { statisticCurrencyAction } from "shared/components/funds/fund-details/actions/fund-details.actions";
 
 const FundDetails: NextPageWithRedux<{}> = () => {
   return <FundDetailsPage />;

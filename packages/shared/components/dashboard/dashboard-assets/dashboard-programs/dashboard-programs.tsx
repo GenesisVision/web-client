@@ -32,9 +32,9 @@ import {
 } from "shared/components/table/components/table.types";
 import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 
 import {
   ACTION_STATUS_FILTER_NAME,

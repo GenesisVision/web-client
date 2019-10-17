@@ -1,5 +1,6 @@
 import "./alert-message-list.scss";
 
+import Router from "next/router";
 import * as React from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,7 +11,6 @@ import GVButton from "shared/components/gv-button";
 import AlertMessage from "shared/modules/alert-message/components/alert-message-list/alert-message";
 import { RootState } from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
-import Router from "next/router";
 
 import { alertMessageActions } from "../../actions/alert-message-actions";
 import { AlertMessagesState } from "../../reducers/alert-message-reducers";

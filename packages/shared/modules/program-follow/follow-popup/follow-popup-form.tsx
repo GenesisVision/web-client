@@ -44,12 +44,9 @@ const _FollowForm: React.FC<Props> = ({
   const [requestParams, setRequestParams] = useState<AttachToSignalProvider>(
     initRequestParams
   );
-  useEffect(
-    () => {
-      signalSubscription.hasSignalAccount && setTab(null, TABS.PARAMS);
-    },
-    [setTab, signalSubscription.hasSignalAccount]
-  );
+  useEffect(() => {
+    signalSubscription.hasSignalAccount && setTab(null, TABS.PARAMS);
+  }, [setTab, signalSubscription.hasSignalAccount]);
   const createdCopytradingAccount = useCallback(
     ({
       initialDepositCurrency,

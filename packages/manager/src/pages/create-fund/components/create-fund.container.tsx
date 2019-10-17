@@ -7,7 +7,7 @@ import { ASSET } from "shared/constants/constants";
 
 import CreateFundSettingsSection from "./create-fund-settings/create-fund-settings-section";
 
-const _CreateFundContainer: React.FC<Props> = ({minimumDepositAmount}) => {
+const _CreateFundContainer: React.FC<Props> = ({ minimumDepositAmount }) => {
   const dispatch = useDispatch();
   const [t] = useTranslation();
 
@@ -18,7 +18,9 @@ const _CreateFundContainer: React.FC<Props> = ({minimumDepositAmount}) => {
         <h1>{t("manager.create-fund-page.title")}</h1>
       </div>
       <div className="create-asset__content">
-        <CreateFundSettingsSection minimumDepositAmount={minimumDepositAmount} />
+        <CreateFundSettingsSection
+          minimumDepositAmount={minimumDepositAmount}
+        />
       </div>
     </>
   );

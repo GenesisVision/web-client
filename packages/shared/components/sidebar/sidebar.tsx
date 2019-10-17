@@ -13,22 +13,16 @@ const Sidebar: NextComponentType<{}, {}, Props> = ({
   position = SIDEBAR_POSITION.LEFT,
   children
 }) => {
-  const handleRouteChange = useCallback(
-    () => {
-      if (onClose && open) {
-        onClose();
-      }
-    },
-    [onClose, open]
-  );
+  const handleRouteChange = useCallback(() => {
+    if (onClose && open) {
+      onClose();
+    }
+  }, [onClose, open]);
 
-  useEffect(
-    () => {
-      Router.events.on("routeChangeStart", handleRouteChange);
-      return () => Router.events.off("routeChangeStart", handleRouteChange);
-    },
-    [open, onClose]
-  );
+  useEffect(() => {
+    Router.events.on("routeChangeStart", handleRouteChange);
+    return () => Router.events.off("routeChangeStart", handleRouteChange);
+  }, [open, onClose]);
 
   return (
     <Modal open={open} onClose={onClose}>
