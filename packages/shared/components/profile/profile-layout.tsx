@@ -1,5 +1,6 @@
-import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import Link from "shared/components/link/link";
@@ -32,13 +33,15 @@ if (ROLE_ENV === ROLE.MANAGER) {
   tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: SOCIAL_LINKS });
 }
 
-const _ProfileLayout: React.FC<Props> = ({
-  verified,
-  t,
-  route,
-  backPath,
-  children
-}) => {
+const _ProfileLayout: React.FC<Props> = ({ route, children }) => {
+  const [t] = useTranslation();
+  const verified = useSelector(kycConfirmedSelector);
+  const backPath = useSelector(
+    (state: RootState) => state.router.location.state
+  );
+  const prevPath = useSelector(
+    (state: RootState) => state.router.location.prevPath
+  );
   return (
     <Page title={t("profile-page.title")}>
       <div className="app__main-wrapper">
@@ -69,12 +72,9 @@ const _ProfileLayout: React.FC<Props> = ({
   );
 };
 
-const ProfileLayout = translate()(React.memo(_ProfileLayout));
-
-export default ProfileLayout;
-
-interface OwnProps {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   route: string;
 }
 
-interface Props extends OwnProps, WithTranslation {}
+const ProfileLayout = React.memo(_ProfileLayout);
+export default ProfileLayout;
