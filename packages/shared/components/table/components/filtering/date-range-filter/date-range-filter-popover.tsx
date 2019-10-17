@@ -1,4 +1,4 @@
-import moment from "moment";
+import dayjs from "dayjs";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
@@ -9,7 +9,7 @@ import {
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 
-const subtract: { [keys: string]: string } = {
+const subtract: { [keys: string]: "month" | "week" } = {
   [DATA_RANGE_FILTER_TYPES.LAST_MONTH]: "month",
   [DATA_RANGE_FILTER_TYPES.LAST_WEEK]: "week"
 };
@@ -26,10 +26,10 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   getDateStart = (type: DATA_RANGE_FILTER_TYPES) => {
     switch (type) {
       case DATA_RANGE_FILTER_TYPES.ALL:
-        return moment(0).format("YYYY-MM-DD");
+        return dayjs(0).format("YYYY-MM-DD");
       default:
-        return moment()
-          .subtract(1 as any, subtract[type])
+        return dayjs()
+          .subtract(1, subtract[type])
           .format("YYYY-MM-DD");
     }
   };
@@ -37,7 +37,7 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
     this.setState({
       type,
       dateStart: this.getDateStart(type),
-      dateEnd: moment().format("YYYY-MM-DD")
+      dateEnd: dayjs().format("YYYY-MM-DD")
     });
   };
   handleChangeDate = (type: keyof IDataRangeFilterValue, date: string) => {

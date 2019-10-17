@@ -1,7 +1,6 @@
 import "./managers-table.scss";
 
 import { ManagerProfile } from "gv-api-web";
-import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -10,12 +9,13 @@ import GVButton from "shared/components/gv-button";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
+import { localizedDate } from "shared/utils/dates";
 
 interface IManagersTableRowProps {
   manager: ManagerProfile;
   title: any;
 }
-const ManagersTableRow: React.FC<IManagersTableRowProps & WithTranslation> = ({
+const _ManagersTableRow: React.FC<IManagersTableRowProps & WithTranslation> = ({
   t,
   manager,
   title
@@ -36,9 +36,10 @@ const ManagersTableRow: React.FC<IManagersTableRowProps & WithTranslation> = ({
         </Link>
       </TableCell>
       <TableCell className="">{manager.assets.join(", ")}</TableCell>
-      <TableCell className="">{moment(manager.regDate).format("ll")}</TableCell>
+      <TableCell className="">{localizedDate(manager.regDate)}</TableCell>
     </TableRow>
   );
 };
 
-export default translate()(React.memo(ManagersTableRow));
+const ManagersTableRow = translate()(React.memo(_ManagersTableRow));
+export default ManagersTableRow;

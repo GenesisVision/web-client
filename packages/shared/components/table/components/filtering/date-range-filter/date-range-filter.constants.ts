@@ -1,5 +1,3 @@
-import { MomentInput } from "moment";
-
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 
 export const SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME = "statisticDateFrom";
@@ -24,8 +22,8 @@ export enum DATA_RANGE_FILTER_TYPES {
 
 export interface IDataRangeFilterValue {
   type: DATA_RANGE_FILTER_TYPES;
-  dateStart: MomentInput;
-  dateEnd: MomentInput;
+  dateStart?: Date | string | number;
+  dateEnd?: Date | string | number;
 }
 
 export const DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {

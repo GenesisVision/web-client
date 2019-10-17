@@ -1,4 +1,4 @@
-import moment from "moment";
+import dayjs from "dayjs";
 
 export const dateTickFormatter = (start: Date, end: Date) => (
   date: Date
@@ -7,11 +7,11 @@ export const dateTickFormatter = (start: Date, end: Date) => (
   const duration = end.getTime() - start.getTime();
   const msInDay = 1000 * 60 * 60 * 24;
   if (duration <= msInDay) dateFormat = "LT";
-  else if (duration <= msInDay * 90) dateFormat = "MMM Do";
+  else if (duration <= msInDay * 90) dateFormat = "D MMM";
   else if (duration <= msInDay * 365) dateFormat = "MMM";
   else dateFormat = "ll";
 
-  return moment(date).format(dateFormat);
+  return dayjs(date).format(dateFormat);
 };
 
 const getTicksCountByPeriod = (duration: number): number => {
@@ -23,13 +23,12 @@ const getTicksCountByPeriod = (duration: number): number => {
 };
 
 export const composeTicks = (start: Date, end: Date): number[] => {
-  const periodStart = moment(start)
-    .add(1, "days")
+  const periodStart = dayjs(start)
+    .add(1, "day")
     .startOf("day")
     .toDate()
     .getTime();
-
-  const periodEnd = moment(end)
+  const periodEnd = dayjs(end)
     .startOf("day")
     .toDate()
     .getTime();

@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { ProgramDetailsOld } from "gv-api-web";
-import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -18,6 +17,7 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { distanceDate } from "shared/utils/dates";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 interface IProgramTableRowShortProps {
@@ -133,7 +133,7 @@ const ProgramTableRowShort: React.FC<
         )}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
-        {moment(program.creationDate).fromNow(true)}
+        {distanceDate(program.creationDate)}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat

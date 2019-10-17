@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { ProgramPeriodViewModel } from "gv-api-web";
-import moment from "moment";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -15,7 +14,8 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import withLoader from "shared/decorators/with-loader";
 import useAnchor, { TAnchor } from "shared/hooks/anchor.hook";
 import filesService from "shared/services/file-service";
-import { formatCurrencyValue, humanizeDate } from "shared/utils/formatter";
+import { formatDate, humanizeDate } from "shared/utils/dates";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { PROGRAM_PERIOD_HISTORY } from "../../program-details.constants";
@@ -179,10 +179,8 @@ const ProgramPeriodHistoryRow: React.FC<ProgramPeriodHistoryRowProps> = ({
         <TableCell className="details-trades__cell--period">
           {period.number}
         </TableCell>
-        <TableCell>
-          {moment(new Date(period.dateFrom)).format("YYYY-MM-DD HH:mm")}
-        </TableCell>
-        <TableCell>{humanizeDate(period.periodLength)}</TableCell>
+        <TableCell>{formatDate(period.dateFrom)}</TableCell>
+        <TableCell>{humanizeDate(0, period.periodLength)}</TableCell>
         <TableCell>
           <NumberFormat
             value={formatCurrencyValue(period.balance, currency)}

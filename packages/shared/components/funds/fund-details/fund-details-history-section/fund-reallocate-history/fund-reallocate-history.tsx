@@ -1,6 +1,5 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
-import moment from "moment";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
@@ -16,6 +15,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { UpdateFilterFunc } from "shared/components/table/components/table.types";
+import { formatDate } from "shared/utils/dates";
 
 import { fundReallocateHistoryTableSelector } from "../../reducers/fund-reallocate-history.reducer";
 import { getFundReallocateHistory } from "../../services/fund-details.service";
@@ -47,7 +47,7 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
       renderBodyRow={(item: any) => (
         <TableRow stripy>
           <TableCell className="details-structure__cell details-structure__cell--reallocate-date">
-            {moment(item.date).format()}
+            {formatDate(item.date)}
           </TableCell>
           <TableCell className="details-structure__cell details-structure__cell--reallocate-funds">
             <div className="details-structure__funds-asset">

@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { SignalSubscriber } from "gv-api-web";
-import moment from "moment";
 import React from "react";
 import NumberFormat from "react-number-format";
 import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
@@ -8,6 +7,7 @@ import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { TableCell, TableRow } from "shared/components/table/components";
 import { DEFAULT_DECIMAL_SCALE, STATUS } from "shared/constants/constants";
+import { formatDate } from "shared/utils/dates";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -48,10 +48,10 @@ const _ProgramSubscriptionsRow: React.FC<Props> = ({
       </SubscriptionsFeesTooltip>
     </TableCell>
     <TableCell>{subscription.volume}</TableCell>
-    <TableCell>{moment(subscription.subscriptionDate).format()}</TableCell>
+    <TableCell>{formatDate(subscription.subscriptionDate)}</TableCell>
     <TableCell>
       {subscription.unsubscriptionDate &&
-        moment(subscription.unsubscriptionDate).format()}
+        formatDate(subscription.unsubscriptionDate)}
     </TableCell>
     <TableCell>
       <AssetStatusLabel status={subscription.status as STATUS} />
