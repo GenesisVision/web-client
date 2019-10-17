@@ -90,7 +90,9 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       getCopytradingTradesCount,
-      clearCopytradingTable
+      clearCopytradingTable: () => {
+        dispatch(clearCopytradingTable());
+      }
     },
     dispatch
   )
@@ -115,7 +117,7 @@ interface StateProps {
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   getCopytradingTradesCount: typeof getCopytradingTradesCount;
-  clearCopytradingTable: typeof clearCopytradingTable;
+  clearCopytradingTable: () => void;
 }
 
 interface DispatchProps {

@@ -172,7 +172,7 @@ const getAnchorEl = (el?: anchorElType) =>
 const Popover = React.memo(_Popover);
 export default Popover;
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   fixedVertical?: boolean;
   orientation?: ORIENTATION_POPOVER;
   onClose?(event: React.MouseEvent<HTMLElement>): void;

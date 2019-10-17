@@ -19,6 +19,7 @@ class _InputImage extends React.PureComponent<Props & WithTranslation> {
     if (files.length === 0) return;
 
     if (this.cropper.current) {
+      // @ts-ignore
       this.cropper.current.reset();
     }
 
@@ -60,12 +61,14 @@ class _InputImage extends React.PureComponent<Props & WithTranslation> {
 
     if (!image || !this.cropper.current) return;
 
+    // @ts-ignore
     const croppedCanvas = this.cropper.current.getCroppedCanvas({
       imageSmoothingEnabled: true,
       imageSmoothingQuality: "high"
     });
 
     croppedCanvas.toBlob(
+      // @ts-ignore
       blob => {
         let croppedImg;
         if (!blob) {
@@ -138,6 +141,7 @@ class _InputImage extends React.PureComponent<Props & WithTranslation> {
           <div className="input-image__dropzone-content">
             <div className="input-image__image-container">
               {image && !hasSizeError && (
+                // @ts-ignore
                 <Cropper
                   ref={this.cropper as React.RefObject<Cropper> & string}
                   src={image.src}

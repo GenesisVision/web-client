@@ -119,7 +119,9 @@ const mapStateToProps = (state: InvestorRootState) => {
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      clearDashboardAssetsTable: clearDashboardAssetsTableAction,
+      clearDashboardAssetsTable: () => {
+        dispatch(clearDashboardAssetsTableAction());
+      },
       getAssetsCounts
     },
     dispatch
@@ -141,7 +143,7 @@ interface StateProps {
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {
-  clearDashboardAssetsTable: typeof clearDashboardAssetsTableAction;
+  clearDashboardAssetsTable: () => void;
   getAssetsCounts: typeof getAssetsCounts;
 }
 

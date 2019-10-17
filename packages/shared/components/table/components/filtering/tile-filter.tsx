@@ -74,7 +74,7 @@ const _TileFilter: React.FC<Props> = ({
 const TileFilter = React.memo(_TileFilter);
 export default TileFilter;
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   value: string[];
   updateFilter: UpdateFilterFunc;
   name: string;

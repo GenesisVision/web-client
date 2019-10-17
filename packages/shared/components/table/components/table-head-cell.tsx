@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { SORTING_DIRECTION } from "../helpers/sorting.helpers";
 
-interface ITableHeadCellProps {
+interface ITableHeadCellProps extends React.HTMLAttributes<HTMLDivElement> {
   sortable: boolean;
   sortingDirection: SORTING_DIRECTION;
   className?: string;

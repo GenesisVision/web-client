@@ -26,7 +26,9 @@ export const _WalletButton: React.FC<Props> = ({
   </Tooltip>
 );
 
-interface Props extends ParentWalletButtonProps {
+interface Props
+  extends ParentWalletButtonProps,
+    React.HTMLAttributes<HTMLDivElement> {
   title: string;
   className: string;
   chipType?: CHIP_TYPE;

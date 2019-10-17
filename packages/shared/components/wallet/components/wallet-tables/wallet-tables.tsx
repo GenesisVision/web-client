@@ -35,6 +35,7 @@ const _WalletTables: React.FC<Props> = ({ t, currency, location }) => {
               label={
                 <Link
                   to={{
+                    // @ts-ignore
                     prevPath: WALLET_TOTAL_PAGE_ROUTE,
                     pathname: location.pathname,
                     state: t("wallet-page.title")
@@ -53,6 +54,7 @@ const _WalletTables: React.FC<Props> = ({ t, currency, location }) => {
               label={
                 <Link
                   to={{
+                    // @ts-ignore
                     prevPath: WALLET_TOTAL_PAGE_ROUTE,
                     hash: TABS.EXTERNAL_TAB,
                     state: t("wallet-page.title")

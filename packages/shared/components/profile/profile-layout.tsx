@@ -57,6 +57,7 @@ const _ProfileLayout: React.FC<Props> = ({
                     to={{
                       pathname: x.pathname,
                       state: backPath,
+                      // @ts-ignore
                       prevPath
                     }}
                   >

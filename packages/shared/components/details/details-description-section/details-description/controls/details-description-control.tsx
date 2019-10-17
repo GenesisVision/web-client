@@ -4,7 +4,8 @@ import classnames from "classnames";
 import H from "history";
 import React from "react";
 
-interface IDetailsDescriptionControlProps {
+interface IDetailsDescriptionControlProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
   className?: string;
   onClick?(): void;

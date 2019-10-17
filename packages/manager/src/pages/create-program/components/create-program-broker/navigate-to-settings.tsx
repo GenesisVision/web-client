@@ -17,6 +17,7 @@ const _NavigateToSettings: React.FC<OwnProps & WithTranslation> = ({
         to={{
           pathname: KYC_ROUTE,
           state: `/ ${t("manager.create-program-page.title")}`,
+          // @ts-ignore
           prevPath: CREATE_PROGRAM_PAGE_ROUTE
         }}
       >
