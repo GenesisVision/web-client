@@ -1,5 +1,4 @@
 import DashboardPage from "pages/dashboard/dashboard.page";
-import { getPortfolioChart } from "pages/dashboard/services/dashboard-chart.service";
 import { getTopPortfolioEvents } from "pages/dashboard/services/dashboard-events.services";
 import { getInRequests } from "pages/dashboard/services/dashboard-in-requests.service";
 import React from "react";
