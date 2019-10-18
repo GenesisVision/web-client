@@ -14,7 +14,6 @@ import {
 } from "shared/components/programs/program-details/services/program-details.service";
 
 import ProgramDetailsContainer from "./program-details.contaner";
-import { programDetailsLoaderData } from "./program-details.loader-data";
 import { IDescriptionSection } from "./program-details.types";
 import { programDescriptionSelector } from "./reducers/description.reducer";
 
@@ -23,18 +22,14 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   descriptionSection
 }) => {
   const description = useSelector(programDescriptionSelector);
-
   useEffect(() => {
     dispatchProgramDescription();
   }, []);
-
   useEffect(() => {
     description && dispatchPlatformLevelsParameters(description.currency);
   }, [description]);
-
   return (
     <ProgramDetailsContainer
-      loaderData={programDetailsLoaderData}
       descriptionSection={descriptionSection}
       data={description!}
     />

@@ -12,7 +12,7 @@ import * as actions from "../actions/dashboard.actions";
 
 export const getDashboardFunds = (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<FundsList>> => {
+): ActionType<Promise<FundsList>> => {
   const authorization = authService.getAuthArg();
   return actions.fetchDashboardFundsAction(authorization, filters);
 };
@@ -26,7 +26,7 @@ export const getDashboardPrograms = (
 
 export const getDashboardCopytrading = (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<SignalsList>> => {
+): ActionType<Promise<SignalsList>> => {
   const authorization = authService.getAuthArg();
   return actions.fetchDashboardCopytradingAction(authorization, filters);
 };

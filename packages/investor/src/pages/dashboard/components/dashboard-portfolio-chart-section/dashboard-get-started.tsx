@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import useRole from "shared/hooks/use-role.hook";
 

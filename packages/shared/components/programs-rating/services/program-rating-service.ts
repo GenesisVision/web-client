@@ -1,12 +1,12 @@
-import { CancelablePromise, LevelUpSummary } from "gv-api-web";
+import { LevelUpSummary } from "gv-api-web";
 import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import {
-  IProgramsGetFilters,
   fetchLevelUpSummary,
   fetchProgramsRating,
-  fetchSelfProgramsRating
+  fetchSelfProgramsRating,
+  IProgramsGetFilters
 } from "../actions/programs-rating.actions";
 
 export type TGetProgramsRatingFilters = IProgramsGetFilters & {
@@ -17,7 +17,7 @@ export type TGetProgramsRatingFilters = IProgramsGetFilters & {
 
 export const getProgramsRating = (filters: TGetProgramsRatingFilters) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<number> => {
+): Promise<number> => {
   const { tab, managerId, itemsOnPage, currentPage } = filters;
   const requestFilters = {
     managerId,
@@ -34,7 +34,7 @@ export const getProgramsRating = (filters: TGetProgramsRatingFilters) => (
 
 export const getLevelUpSummary = () => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<LevelUpSummary> => {
+): Promise<LevelUpSummary> => {
   const authorization = authService.getAuthArg();
   return dispatch(fetchLevelUpSummary({ authorization })).then(
     res => res.value

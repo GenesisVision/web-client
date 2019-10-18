@@ -1,4 +1,6 @@
 import { replace } from "connected-react-router";
+import { CancelablePromise } from "gv-api-web";
+import Router from "next/router";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -15,13 +17,10 @@ const _EmailConfirmContainer: React.FC<Props> = ({
   const { errorMessage, sendRequest, isPending } = useApiRequest({
     request: props => dispatch(confirmEmail(props))
   });
-  useEffect(
-    () => {
-      if (userId && code) sendRequest({ userId, code });
-      else dispatch(replace(NOT_FOUND_PAGE_ROUTE));
-    },
-    [userId, code]
-  );
+  useEffect(() => {
+    if (userId && code) sendRequest({ userId, code });
+    else Router.replace(NOT_FOUND_PAGE_ROUTE);
+  }, [userId, code]);
   return (
     <EmailConfirmFailure condition={!isPending} errorMessage={errorMessage} />
   );

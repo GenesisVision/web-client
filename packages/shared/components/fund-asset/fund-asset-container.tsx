@@ -32,7 +32,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
     (event: React.MouseEvent<HTMLElement>) => {
       hasPopoverList ? setAnchor(event) : setSize(assets.length);
     },
-    [assets]
+    [assets.length, hasPopoverList, setAnchor]
   );
   useEffect(() => {
     if (hasPopoverList) setSize(sizeProp);

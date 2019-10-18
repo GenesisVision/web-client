@@ -3,12 +3,12 @@ import "./dashboard-funds.scss";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
@@ -27,6 +27,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { FUND, FUND_CURRENCY } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
+import { FUND_DETAILS_FOLDER_ROUTE } from "shared/routes/funds.routes";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -76,9 +77,7 @@ const _DashboardFunds: React.FC<Props> = ({
       )}
       renderHeader={(column: Column) => (
         <span
-          className={`funds-table__cell dashboard-funds__cell dashboard-funds__cell--${
-            column.name
-          }`}
+          className={`funds-table__cell dashboard-funds__cell dashboard-funds__cell--${column.name}`}
         >
           {t(`${role}.dashboard-page.funds-header.${column.name}`)}
         </span>
@@ -89,7 +88,8 @@ const _DashboardFunds: React.FC<Props> = ({
             <div className="funds-table__cell--avatar-title">
               <Link
                 to={{
-                  pathname: composeFundsDetailsUrl(fund.url),
+                  pathname: FUND_DETAILS_FOLDER_ROUTE,
+                  as: composeFundsDetailsUrl(fund.url),
                   state: `/ ${title}`
                 }}
               >
@@ -102,7 +102,8 @@ const _DashboardFunds: React.FC<Props> = ({
               <div className="funds-table__cell--title">
                 <Link
                   to={{
-                    pathname: composeFundsDetailsUrl(fund.url),
+                    pathname: FUND_DETAILS_FOLDER_ROUTE,
+                    as: composeFundsDetailsUrl(fund.url),
                     state: `/ ${title}`
                   }}
                 >

@@ -58,23 +58,18 @@ const _DetailsInvestment: React.FC<Props> = ({
   const eventTypeFilterValues = useSelector(eventTypesSelector);
   const dispatch = useDispatch();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
-
   useEffect(() => {
     isAuthenticated && id && dispatch(getEvents(id, EVENT_LOCATION.Asset)());
   }, [isAuthenticated, id]);
-
   useEffect(() => {
     isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);
   }, [isAuthenticated, events]);
-
   const haveInvestment =
     haveActiveInvestment(personalDetails) || haveSubscription(personalDetails);
   const showInvestment = haveEvents || haveInvestment;
-
   useEffect(() => {
     if (haveEvents && !haveInvestment) setTab(null, TABS.EVENTS);
   }, [haveInvestment, haveEvents]);
-
   if (!showInvestment) return null;
   return (
     <DetailsBlock table wide className="details-investment">

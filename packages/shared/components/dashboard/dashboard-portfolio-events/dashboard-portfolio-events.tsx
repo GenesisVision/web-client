@@ -6,8 +6,8 @@ import {
 } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Surface from "shared/components/surface/surface";
 import withLoader from "shared/decorators/with-loader";
 import useRole from "shared/hooks/use-role.hook";

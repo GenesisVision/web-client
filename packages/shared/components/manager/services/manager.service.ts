@@ -1,4 +1,4 @@
-import { CancelablePromise, ManagerProfile } from "gv-api-web";
+import { ManagerProfile } from "gv-api-web";
 import { Dispatch } from "redux";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { IDataModel } from "shared/constants/constants";
@@ -16,7 +16,7 @@ import { TGetState } from "shared/utils/types";
 export const fetchManagerProfile = () => (
   dispatch: Dispatch,
   getState: TGetState
-): CancelablePromise<ManagerProfile> => {
+): Promise<ManagerProfile> => {
   const { router } = getState();
   const managerSlugUrl = getParams(
     router.location.pathname,

@@ -27,9 +27,7 @@ class OpenTradesTable extends React.PureComponent<
         columns={COPYTRADING_OPEN_TRADES_COLUMNS}
         renderHeader={column => (
           <span
-            className={`details-trades__head-cell program-details-trades__cell--${
-              column.name
-            }`}
+            className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
           >
             {t(`investor.copytrading-tables.open-trades-header.${column.name}`)}
           </span>

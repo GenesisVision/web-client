@@ -1,14 +1,19 @@
 import classNames from "classnames";
 import { FundFacet, ProgramFacet } from "gv-api-web";
 import * as React from "react";
-import { Link } from "react-router-dom";
 import ImageBase from "shared/components/avatar/image-base";
+import Link from "shared/components/link/link";
 import Surface from "shared/components/surface/surface";
 import useIsOpen from "shared/hooks/is-open.hook";
 
 import facetImg from "./facet.png";
 
-const _FacetCard: React.FC<Props> = ({ facet, composeFacetUrl, title }) => {
+const _FacetCard: React.FC<Props> = ({
+  facet,
+  composeFacetUrl,
+  title,
+  fileRoute
+}) => {
   const [isHovered, setHovered, setNotHovered] = useIsOpen();
   return (
     <Surface
@@ -20,8 +25,9 @@ const _FacetCard: React.FC<Props> = ({ facet, composeFacetUrl, title }) => {
     >
       <Link
         to={{
-          pathname: composeFacetUrl(facet.url),
-          state: `/ ${title}`
+          pathname: fileRoute,
+          state: `/ ${title}`,
+          as: composeFacetUrl(facet.url)
         }}
       >
         <div className="facet__facet-container">
@@ -47,6 +53,7 @@ interface Props {
   title: string;
   facet: FundFacet | ProgramFacet;
   composeFacetUrl: composeFacetUrlFunc;
+  fileRoute: string;
 }
 
 export type composeFacetUrlFunc = (url: string) => string;

@@ -72,7 +72,7 @@
 
   @include media-breakpoint-landscape-tablet() {
     &__menu {
-      display: none;
+      display: none !important;
     }
 
     &__item {

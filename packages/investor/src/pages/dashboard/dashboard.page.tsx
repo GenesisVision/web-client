@@ -1,7 +1,8 @@
 import "shared/components/dashboard/dashboard.scss";
 import "./dashboard.scss";
 
-import * as React from "react";
+import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
@@ -10,7 +11,6 @@ import useRole from "shared/hooks/use-role.hook";
 import DashboardAssetsSection from "./components/dashboard-assets/dashboard-assets-section";
 import DashboardPortfolioChartSectionContainer from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section-container";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
-import DashboardTrades from "./components/dashboard-trades/dashboard-trades";
 
 const DashboardPage: React.FC = () => {
   const role = useRole();
@@ -33,7 +33,7 @@ const DashboardPage: React.FC = () => {
           <DashboardAssetsSection title={title} />
         </div>
         <div className="dashboard__table-section">
-          <DashboardTrades title={title} />
+          <CopytradingTablesSection title={title} />
         </div>
       </div>
     </Page>

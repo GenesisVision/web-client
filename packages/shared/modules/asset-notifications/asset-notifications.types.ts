@@ -17,13 +17,11 @@ export type TRemoveNotification = (
   message: string
 ) => (dispatch: MiddlewareDispatch) => CancelablePromise<void>;
 
-export type TToggleNotification = (
-  opts: {
-    id: string;
-    enabled: boolean;
-    assetId: string;
-  }
-) => (dispatch: MiddlewareDispatch) => CancelablePromise<void>;
+export type TToggleNotification = (opts: {
+  id: string;
+  enabled: boolean;
+  assetId: string;
+}) => (dispatch: MiddlewareDispatch) => CancelablePromise<void>;
 
 export type NotificationsList = {
   general: INotification[];

@@ -7,10 +7,10 @@ import { TRADES_HISTORY_PROVIDERS_COLUMNS } from "modules/copytrading-tables/com
 import * as React from "react";
 import { useState } from "react";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import Count from "shared/components/avatar/count/count";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";

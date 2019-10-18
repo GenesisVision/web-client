@@ -4,7 +4,6 @@ import classNames from "classnames";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import GVButton from "shared/components/gv-button";
@@ -12,6 +11,7 @@ import { DetailsIcon } from "shared/components/icon/details-icon";
 import { LogoutIcon } from "shared/components/icon/logout-icon";
 import { SecurityIcon } from "shared/components/icon/security-icon";
 import { SettingsIcon } from "shared/components/icon/settings-icon";
+import Link from "shared/components/link/link";
 import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";

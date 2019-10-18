@@ -1,6 +1,5 @@
 import "shared/components/details/details.scss";
 import "shared/modules/asset-settings/asset-settings.scss";
-
 import "./profile.scss";
 
 import copy from "copy-to-clipboard";

@@ -2,31 +2,22 @@ import "./create-program-broker.scss";
 
 import { Broker } from "gv-api-web";
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import {
   forexAllowedSelector,
   kycConfirmedSelector
 } from "shared/reducers/header-reducer";
 
-import {
-  CreateProgramBrokerLoaderData,
-  fetchBrokers
-} from "../../services/create-program.service";
+import { CreateProgramBrokerLoaderData } from "../../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker";
 
 const _CreateProgramBrokerContainer: React.FC<Props> = ({
+  brokers,
   setSelectedBroker,
   selectedBroker,
   navigateToSettings
 }) => {
-  const [brokers, setBrokers] = useState<Broker[] | undefined>(undefined);
-  useEffect(() => {
-    fetchBrokers().then(brokers => {
-      setBrokers(brokers);
-      setSelectedBroker(brokers[0]);
-    });
-  }, []);
   const isForexAllowed = useSelector(forexAllowedSelector);
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const selectBrokerHandle = useCallback(
@@ -50,9 +41,10 @@ const _CreateProgramBrokerContainer: React.FC<Props> = ({
 };
 
 interface Props {
+  brokers: Broker[];
   navigateToSettings: () => void;
   setSelectedBroker: (broker: Broker) => void;
-  selectedBroker?: Broker;
+  selectedBroker: Broker;
 }
 
 const CreateProgramBrokerContainer = React.memo(_CreateProgramBrokerContainer);

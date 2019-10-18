@@ -12,7 +12,7 @@ interface GVButtonProps {
   className?: string;
   disabled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  children: string | JSX.Element;
+  children?: string | JSX.Element;
   name?: string;
   noPadding?: boolean;
 }

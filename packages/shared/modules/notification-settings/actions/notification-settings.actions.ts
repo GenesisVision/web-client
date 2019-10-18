@@ -1,4 +1,4 @@
-import { CancelablePromise, NotificationSettingList } from "gv-api-web";
+import { NotificationSettingList } from "gv-api-web";
 import notificationsApi from "shared/services/api-client/notifications-api";
 import authService from "shared/services/auth-service";
 import { ActionType } from "shared/utils/types";
@@ -8,11 +8,11 @@ export const ADD_NOTIFICATION_SETTINGS = "ADD_NOTIFICATION_SETTINGS";
 export const REMOVE_NOTIFICATION_SETTING = "REMOVE_NOTIFICATION_SETTING";
 export const ADD_NOTIFICATION_SETTING = "ADD_NOTIFICATION_SETTING";
 
-export const fetchNotificationSettingsAction = (): ActionType<
-  CancelablePromise<NotificationSettingList>
-> => ({
+export const fetchNotificationSettingsAction = (
+  auth: string
+): ActionType<Promise<NotificationSettingList>> => ({
   type: NOTIFICATION_SETTINGS,
-  payload: notificationsApi.getNotificationsSettings(authService.getAuthArg())
+  payload: notificationsApi.getNotificationsSettings(auth)
 });
 
 export interface IRemoveNotificationSettingProps {
@@ -31,7 +31,7 @@ export interface IAddNotificationSettingProps {
 
 export const addNotificationSettingAction = (
   opts: IAddNotificationSettingProps
-): ActionType<CancelablePromise<string>> => ({
+): ActionType<Promise<string>> => ({
   type: ADD_NOTIFICATION_SETTING,
   payload: notificationsApi.addNotificationsSettings(
     authService.getAuthArg(),
@@ -41,7 +41,7 @@ export const addNotificationSettingAction = (
 
 export const removeNotificationSettingAction = (
   id: string
-): ActionType<CancelablePromise<void>> => ({
+): ActionType<Promise<void>> => ({
   type: REMOVE_NOTIFICATION_SETTING,
   payload: notificationsApi.removeNotificationsSettings(
     id,

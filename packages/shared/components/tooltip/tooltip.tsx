@@ -23,7 +23,7 @@ const _Tooltip: React.FC<Props> = ({
       !disable && setAnchor(event),
     [disable]
   );
-  const child = React.Children.only(children);
+  const child = React.Children.only(children)! as JSX.Element;
   return (
     <>
       <child.type

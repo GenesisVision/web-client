@@ -1,9 +1,9 @@
-import { push } from "connected-react-router";
 import {
   CaptchaCheckResult,
   ForgotPasswordViewModel,
   ResetPasswordViewModel
 } from "gv-api-web";
+import Router from "next/router";
 import { Dispatch } from "redux";
 import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
@@ -14,6 +14,7 @@ import {
   EMAIL_PENDING_ROUTE,
   PASSWORD_RESTORE_ROUTE
 } from "shared/components/auth/forgot-password/forgot-password.routes";
+import { Push } from "shared/components/link/link";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { HOME_ROUTE, LOGIN_ROUTE } from "shared/routes/app.routes";
 import authService from "shared/services/auth-service";
@@ -34,7 +35,7 @@ export const forgotPassword = (data: ForgotPasswordViewModel) => (
 ) =>
   dispatch(forgotPasswordAction(data)).then(() => {
     dispatch(emailPendingActions.saveEmail(data));
-    dispatch(push(EMAIL_PENDING_ROUTE));
+    Push(EMAIL_PENDING_ROUTE);
   });
 
 export const restorePassword = (
@@ -43,8 +44,8 @@ export const restorePassword = (
   dispatch(restorePasswordAction(model))
     .then(response => {
       authService.storeToken(response.value);
-      dispatch(authActions.updateTokenAction());
-      dispatch(push(HOME_ROUTE));
+      dispatch(authActions.updateTokenAction(true));
+      Push(HOME_ROUTE);
       dispatch(
         alertMessageActions.success(
           "auth.password-restore.success-alert-message",
@@ -54,7 +55,7 @@ export const restorePassword = (
     })
     .catch(({ code }: ResponseError) => {
       if (code === "RequiresTwoFactor") {
-        dispatch(push(LOGIN_ROUTE));
+        Push(LOGIN_ROUTE);
         dispatch(
           alertMessageActions.success(
             "auth.password-restore.success-alert-message",
@@ -85,5 +86,5 @@ export const sendForgotPasswordEmail = (
 
 export const navigateToPasswordRestore = () => (dispatch: Dispatch) => {
   dispatch(clearDataActionFactory(EMAIL_PENDING).clearData());
-  dispatch(push(PASSWORD_RESTORE_ROUTE));
+  Push(PASSWORD_RESTORE_ROUTE);
 };

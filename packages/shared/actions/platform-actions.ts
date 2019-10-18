@@ -4,10 +4,10 @@ import { ApiAction } from "shared/utils/types";
 
 export const PLATFORM_SETTINGS = "PLATFORM_SETTINGS";
 
-const fetchPlatformSettingsAction: ApiAction<PlatformInfo> = {
+const fetchPlatformSettingsAction = (): ApiAction<PlatformInfo> => ({
   type: PLATFORM_SETTINGS,
   payload: platformApi.getPlatformStatus()
-};
+});
 
 const platformActions = {
   fetchPlatformSettings: fetchPlatformSettingsAction

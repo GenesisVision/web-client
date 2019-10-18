@@ -440,6 +440,10 @@
     "title": "Page Not Found",
     "body": "Page Not Found"
   },
+  "server-connection-error-page": {
+    "title": "Server Error",
+    "body": "Server error occurred. Please try again later or contact the support department."
+  },
   "programs-page": {
     "title": "Programs",
     "tabs": {

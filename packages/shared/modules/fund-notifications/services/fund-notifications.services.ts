@@ -1,3 +1,4 @@
+import { NextPageContext } from "next";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import {
   TAddNotification,
@@ -7,6 +8,7 @@ import {
   addNotificationSettingAction,
   removeNotificationSettingAction
 } from "shared/modules/notification-settings/actions/notification-settings.actions";
+import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import {
@@ -16,12 +18,15 @@ import {
   toggleFundNotificationsAction
 } from "../actions/fund-notifications.actions";
 
-export const fetchFundNotifications = (id: string) => (
-  dispatch: MiddlewareDispatch
-) =>
-  dispatch(fetchFundNotificationsAction(id)).then(data =>
+export const fetchFundNotifications = (
+  id: string,
+  ctx?: NextPageContext
+) => async (dispatch: MiddlewareDispatch) => {
+  const authorization = authService.getAuthArg(ctx);
+  await dispatch(fetchFundNotificationsAction(id, authorization)).then(data =>
     dispatch(addFundNotificationsAction(data.value))
   );
+};
 
 export const addFundNotification: TAddNotification = (
   opts,

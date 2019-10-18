@@ -10,12 +10,12 @@ import { useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import Count from "shared/components/avatar/count/count";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -168,7 +168,7 @@ const _TradeRow: React.FC<Props> = ({
         onClose={setClosePopup}
         open={isOpenPopup}
         onApply={() => {
-          setClosePopup;
+          setClosePopup();
           closeCopytradingTrade(trade.id, () => {
             update(undefined);
           });

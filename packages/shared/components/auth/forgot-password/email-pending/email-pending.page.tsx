@@ -48,23 +48,17 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    sendForgotPasswordEmail: (
-      values: {
-        captchaCheckResult: CaptchaCheckResult;
-      }
-    ) => void;
+    sendForgotPasswordEmail: (values: {
+      captchaCheckResult: CaptchaCheckResult;
+    }) => void;
   };
 }
 
-interface OwnProps {
-  renderForm: (handle: () => void) => JSX.Element;
-}
+interface Props extends StateProps, DispatchProps, WithTranslation {}
 
-interface Props extends OwnProps, StateProps, DispatchProps, WithTranslation {}
-
-const EmailPendingPage = compose<React.ComponentType<OwnProps>>(
+const EmailPendingPage = compose<React.ComponentType>(
   translate(),
-  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
+  connect<StateProps, DispatchProps, AuthRootState>(
     mapStateToProps,
     mapDispatchToProps
   ),

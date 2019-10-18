@@ -45,7 +45,7 @@ const _Modal: React.FC<Props> = ({
           "modal--position-fixed": fixed
         })}
       >
-        <EventListener target={document} onKeyUp={handleKeyPress}>
+        <EventListener target={"document"} onKeyUp={handleKeyPress}>
           <div
             className={classNames("modal__backdrop", {
               "modal__backdrop--transparent": transparentBackdrop
@@ -59,7 +59,7 @@ const _Modal: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: (event: React.MouseEvent<HTMLElement>) => void;
   open: boolean;
   noAbsolute?: boolean;

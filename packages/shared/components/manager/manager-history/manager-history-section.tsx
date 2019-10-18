@@ -20,17 +20,12 @@ const _ManagerHistorySection: React.FC<Props> = ({ managerId, title }) => {
   );
   const [fundsCount, setFundsCount] = useState(0);
   const [programsCount, setProgramsCount] = useState(0);
-  useEffect(
-    () => {
-      fetchManagerAssetsCount(managerId).then(
-        ({ fundsCount, programsCount }) => {
-          setProgramsCount(programsCount);
-          setFundsCount(fundsCount);
-        }
-      );
-    },
-    [managerId]
-  );
+  useEffect(() => {
+    fetchManagerAssetsCount(managerId).then(({ fundsCount, programsCount }) => {
+      setProgramsCount(programsCount);
+      setFundsCount(fundsCount);
+    });
+  }, [managerId]);
   return (
     <Surface className="manager-history">
       <div className="manager-history__heading">

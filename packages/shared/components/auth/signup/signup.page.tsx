@@ -3,18 +3,20 @@ import "./signup.scss";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import * as React from "react";
 import { withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, compose } from "redux";
 import AuthTabs from "shared/components/auth/components/auth-tabs/auth-tabs";
 import { SIGNUP_ROUTE } from "shared/routes/app.routes";
-import { getRef } from "shared/utils/ref";
 import { AuthRootState, MiddlewareDispatch } from "shared/utils/types";
 
 import CaptchaContainer from "../captcha-container";
 import { signUp } from "./services/signup.service";
 
-const _SignUpPage: React.FC<Props> = ({ errorMessage, service }) => {
-  const refCode = getRef();
+const _SignUpPage: React.FC<Props> = ({
+  referralCode,
+  errorMessage,
+  service
+}) => {
   return (
     <div className="signup">
       <AuthTabs authPartUrl={SIGNUP_ROUTE} />
@@ -22,7 +24,7 @@ const _SignUpPage: React.FC<Props> = ({ errorMessage, service }) => {
         request={service.signUp}
         renderForm={handle => (
           <SignUpForm
-            refCode={refCode}
+            refCode={referralCode}
             onSubmit={handle}
             error={errorMessage}
           />
@@ -58,7 +60,9 @@ interface ServiceThunks extends ActionCreatorsMapObject {
   signUp: typeof signUp;
 }
 
-interface OwnProps {}
+interface OwnProps {
+  referralCode?: string;
+}
 
 interface Props extends OwnProps, StateProps, DispatchProps {}
 

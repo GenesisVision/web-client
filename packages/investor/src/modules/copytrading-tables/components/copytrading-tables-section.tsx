@@ -35,13 +35,10 @@ const _CopytradingTablesSection: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_TRADES);
-  useEffect(
-    () => {
-      service.getCopytradingTradesCount(currency);
-      return service.clearCopytradingTable;
-    },
-    [currency, service]
-  );
+  useEffect(() => {
+    service.getCopytradingTradesCount(currency);
+    return service.clearCopytradingTable;
+  }, [currency, service]);
   const { openTradesCount, logCount, historyCount } = counts;
   return (
     <Surface>
@@ -93,7 +90,9 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
       getCopytradingTradesCount,
-      clearCopytradingTable
+      clearCopytradingTable: () => {
+        dispatch(clearCopytradingTable());
+      }
     },
     dispatch
   )
@@ -118,7 +117,7 @@ interface StateProps {
 
 interface ServiceThunks extends ActionCreatorsMapObject {
   getCopytradingTradesCount: typeof getCopytradingTradesCount;
-  clearCopytradingTable: typeof clearCopytradingTable;
+  clearCopytradingTable: () => void;
 }
 
 interface DispatchProps {

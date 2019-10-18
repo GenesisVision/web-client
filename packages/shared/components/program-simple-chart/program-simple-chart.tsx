@@ -14,7 +14,7 @@ const AREA_MARGIN = { left: 0, right: 0 };
 
 const _ProgramSimpleChart: React.FC<Props> = ({ data, programId }) => {
   const programChartData = data.map(x => ({
-    date: x.date.getTime(),
+    date: new Date(x.date).getTime(),
     equity: formartChartMinValue(x.value)
   }));
 

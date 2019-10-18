@@ -7,7 +7,9 @@ import ProgramNotificationPage from "./program-settings.page";
 
 export const NOTIFICATIONS_ROUTE = "/notifications";
 export const PROGRAM_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/program/:id`;
+export const PROGRAM_NOTIFICATIONS_FOLDER_ROUTE = `${NOTIFICATIONS_ROUTE}/program/[id]`;
 export const FUND_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/fund/:id`;
+export const FUND_NOTIFICATIONS_FOLDER_ROUTE = `${NOTIFICATIONS_ROUTE}/fund/[id]`;
 
 const NotificationRoutes: React.FC = () => (
   <Switch>

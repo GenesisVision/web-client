@@ -7,11 +7,11 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import TableCell from "shared/components/table/components/table-cell";
@@ -117,7 +117,7 @@ const _TradeSubRow: React.FC<Props> = ({
           onCancel={setClosePopup}
           open={isOpenPopup}
           onApply={() => {
-            setClosePopup;
+            setClosePopup();
             closeCopytradingTrade(
               tradeId,
               () => update(undefined),

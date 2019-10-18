@@ -6,9 +6,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import { CurrencyItem } from "shared/components/currency-item/currency-item";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
@@ -23,7 +23,10 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import { fetchAccounts } from "../../../services/wallet.services";
-import { composeWalletCopytradingCurrencyUrl } from "../../../wallet.routes";
+import {
+  composeWalletCopytradingCurrencyUrl,
+  COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE
+} from "../../../wallet.routes";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
 
@@ -40,7 +43,7 @@ const _WalletCopytrading: React.FC<Props> = ({
   >(undefined);
   useEffect(() => {
     service.fetchAccounts();
-  }, []);
+  }, [service]);
   const handleOpenPopup = useCallback(
     (openMethod: () => void) => (
       currentAccount?: CopyTradingAccountInfo
@@ -69,7 +72,8 @@ const _WalletCopytrading: React.FC<Props> = ({
               <Link
                 className="wallet-list__link"
                 to={{
-                  pathname: composeWalletCopytradingCurrencyUrl(
+                  pathname: COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE,
+                  as: composeWalletCopytradingCurrencyUrl(
                     account.currency.toLowerCase()
                   ),
                   state: `/ ${t(

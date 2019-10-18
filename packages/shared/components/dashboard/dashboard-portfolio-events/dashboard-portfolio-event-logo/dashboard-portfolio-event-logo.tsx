@@ -3,11 +3,13 @@ import "./dashboard-portfolio-event-logo.scss";
 import classNames from "classnames";
 import { AssetDetails } from "gv-api-web";
 import React from "react";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "shared/components/avatar/image-base";
+import Link from "shared/components/link/link";
 import SocialLink from "shared/media/social-link.svg";
 import {
+  composeAssetDetailsFolderUrl,
+  composeAssetDetailsUrl,
   composeFundsDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";

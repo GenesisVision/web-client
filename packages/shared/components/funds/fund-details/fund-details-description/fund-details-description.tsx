@@ -1,12 +1,15 @@
 import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import DetailsSettingControl from "shared/components/details/details-description-section/details-description/controls/details-setting-control";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
+import { FUND_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
+import { FUND_SETTINGS_FOLDER_ROUTE } from "shared/routes/funds.routes";
+import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import {
   composeFundNotificationsUrl,
   composeFundSettingsUrl,
@@ -27,8 +30,9 @@ const _FundDetailsDescription: React.FC<Props> = ({
       <h1 className="title-small-padding">{description.title}</h1>
       <Link
         to={{
-          pathname: composeManagerDetailsUrl(description.manager.url),
-          state: `/ ${description.title}`
+          as: composeManagerDetailsUrl(description.manager.url),
+          state: `/ ${description.title}`,
+          pathname: MANAGER_DETAILS_FOLDER_ROUTE
         }}
       >
         <GVButton
@@ -59,6 +63,7 @@ const _FundDetailsDescription: React.FC<Props> = ({
       <DetailsNotification
         title={description.title}
         url={composeFundNotificationsUrl(description.url)}
+        pathname={FUND_NOTIFICATIONS_FOLDER_ROUTE}
         hasNotifications={
           description.personalFundDetails
             ? description.personalFundDetails.hasNotifications
@@ -70,7 +75,11 @@ const _FundDetailsDescription: React.FC<Props> = ({
         description.personalFundDetails.canCloseAsset && (
           <DetailsSettingControl
             title={description.title}
-            url={composeFundSettingsUrl(description.url)}
+            url={{
+              as: composeFundSettingsUrl(description.url),
+              pathname: FUND_SETTINGS_FOLDER_ROUTE,
+              state: `/ ${description.title}`
+            }}
             text={t("fund-details-page.description.fund-settings")}
           />
         )}

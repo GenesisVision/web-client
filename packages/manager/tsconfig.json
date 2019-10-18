@@ -11,20 +11,24 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "checkJs": false,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "isolatedModules": true
   },
   "include": [
     "../../packages",
     "src"
   ],
-  "files": [
-    "../gv-api-web/src/types.d.ts"
-  ],
   "exclude": [
     "node_modules",
-    "config-overrides.js",
+    "./config-overrides.js",
+    "./next.config.js",
     "build"
   ]
 }

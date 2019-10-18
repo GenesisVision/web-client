@@ -1,4 +1,4 @@
-import { ReactWrapper, mount } from "enzyme";
+import { mount, ReactWrapper } from "enzyme";
 import * as React from "react";
 import { Provider } from "react-redux";
 import { MemoryRouter, Route, Switch } from "react-router";

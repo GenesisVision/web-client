@@ -1,6 +1,10 @@
 import "./subscription-details.scss";
 
-import { AttachToSignalProviderModeEnum, PersonalProgramDetailsFull, SignalSubscriptionModeEnum } from "gv-api-web";
+import {
+  AttachToSignalProviderModeEnum,
+  PersonalProgramDetailsFull,
+  SignalSubscriptionModeEnum
+} from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";

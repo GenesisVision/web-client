@@ -1,8 +1,12 @@
-import * as React from "react";
-import { NavLink } from "react-router-dom";
+import classNames from "classnames";
+import { useRouter } from "next/router";
+import React from "react";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 
-interface INavigationButtonProps {
+import { normalizeUrlString } from "../link/link.helper";
+
+interface INavigationButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: JSX.Element;
   title?: string;
   onClick(): void;
@@ -10,7 +14,6 @@ interface INavigationButtonProps {
 
 const _NavigationButton: React.FC<INavigationButtonProps> = ({
   icon,
-  title,
   children,
   onClick
 }) => (
@@ -23,32 +26,35 @@ const _NavigationButton: React.FC<INavigationButtonProps> = ({
 );
 export const NavigationButton = React.memo(_NavigationButton);
 
-interface INavigationItemProps {
-  href: string | { pathname: string; state: string };
+interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
+  pathname: string;
+  state?: string;
   icon: JSX.Element;
-  title?: string;
   exact?: boolean;
   onClick?(): void;
 }
 
 const _NavigationItem: React.FC<INavigationItemProps> = ({
-  href,
+  pathname,
   icon,
-  title,
   children,
-  ...other
-}) => (
-  <NavLink
-    className="navigation__item"
-    activeClassName="navigation__item--active"
-    to={href}
-    title={title}
-    {...other}
-  >
-    {<icon.type {...icon.props} className="navigation__icon" />}
-    <span className="navigation__link">{children}</span>
-  </NavLink>
-);
+  state
+}) => {
+  const { route } = useRouter();
+  return (
+    <Link
+      to={{ pathname: pathname, state }}
+      className={classNames("navigation__item", {
+        "navigation__item--active": route.startsWith(
+          normalizeUrlString(pathname)
+        )
+      })}
+    >
+      {<icon.type {...icon.props} className="navigation__icon" />}
+      <span className="navigation__link">{children}</span>
+    </Link>
+  );
+};
 
 const NavigationItem = React.memo(_NavigationItem);
 export default NavigationItem;

@@ -3,11 +3,12 @@ import "./managers-table.scss";
 import { ManagerProfile } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { localizedDate } from "shared/utils/dates";
 
@@ -26,7 +27,8 @@ const _ManagersTableRow: React.FC<IManagersTableRowProps & WithTranslation> = ({
         <ProfileAvatar url={manager.avatar} alt={manager.username} />
         <Link
           to={{
-            pathname: composeManagerDetailsUrl(manager.url),
+            pathname: MANAGER_DETAILS_FOLDER_ROUTE,
+            as: composeManagerDetailsUrl(manager.url),
             state: `/ ${title}`
           }}
         >

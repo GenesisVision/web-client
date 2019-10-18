@@ -3,12 +3,13 @@ import "shared/components/details/details-description-section/details-descriptio
 import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/controls/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/controls/details-notification";
 import DetailsSettingControl from "shared/components/details/details-description-section/details-description/controls/details-setting-control";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
+import { PROGRAM_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -16,6 +17,8 @@ import Popover, {
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import TagItem from "shared/components/tags/tag-item/tag-item";
 import useAnchor from "shared/hooks/anchor.hook";
+import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
+import { PROGRAM_SETTINGS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl,
@@ -64,8 +67,9 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
         <h1 className="title-small-padding">{programDescription.title}</h1>
         <Link
           to={{
-            pathname: composeManagerDetailsUrl(programDescription.manager.url),
-            state: `/ ${programDescription.title}`
+            as: composeManagerDetailsUrl(programDescription.manager.url),
+            state: `/ ${programDescription.title}`,
+            pathname: MANAGER_DETAILS_FOLDER_ROUTE
           }}
         >
           <GVButton
@@ -98,12 +102,17 @@ const _ProgramDetailsDescriptionMain: React.FC<Props> = ({
         <DetailsNotification
           title={programDescription.title}
           url={composeProgramNotificationsUrl(programDescription.url)}
+          pathname={PROGRAM_NOTIFICATIONS_FOLDER_ROUTE}
           hasNotifications={personalDetails && personalDetails.hasNotifications}
         />
         {isOwnProgram && personalDetails && personalDetails.canCloseAsset && (
           <DetailsSettingControl
             title={programDescription.title}
-            url={composeProgramSettingsUrl(programDescription.url)}
+            url={{
+              as: composeProgramSettingsUrl(programDescription.url),
+              pathname: PROGRAM_SETTINGS_FOLDER_ROUTE,
+              state: `/ ${programDescription.title}`
+            }}
             text={t("program-details-page.description.program-settings")}
           />
         )}

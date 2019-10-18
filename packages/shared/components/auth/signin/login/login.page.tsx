@@ -1,14 +1,13 @@
 import "./login.scss";
 
-import { LocationState } from "history";
-import * as React from "react";
+import React from "react";
 
 import SignInContainer from "../signin.container";
 import LoginForm from "./login-form";
 
-const _LoginPage: React.FC<LocationProps> = ({ location }) => (
+const _LoginPage: React.FC<Props> = ({ redirectFrom }) => (
   <SignInContainer
-    location={location}
+    redirectFrom={redirectFrom}
     className="login"
     renderForm={(handle, email, errorMessage) => (
       <LoginForm onSubmit={handle} error={errorMessage} />
@@ -16,8 +15,8 @@ const _LoginPage: React.FC<LocationProps> = ({ location }) => (
   />
 );
 
-interface LocationProps {
-  location: LocationState;
+interface Props {
+  redirectFrom: string;
 }
 
 const LoginPage = React.memo(_LoginPage);

@@ -58,7 +58,7 @@ const _WalletTransactions: React.FC<Props> = ({
   return (
     <div className="wallet-transactions">
       <TableModule
-        timestamp={timestamp.getMilliseconds()}
+        timestamp={new Date(timestamp).getMilliseconds()}
         defaultFilters={DEFAULT_FILTERS}
         paging={DEFAULT_PAGING}
         filtering={{ ...TRANSACTIONS_FILTERS, type: transactionType[0] }}
@@ -85,9 +85,7 @@ const _WalletTransactions: React.FC<Props> = ({
         columns={columns}
         renderHeader={column => (
           <span
-            className={`wallet-transactions__cell wallet-transactions__cell--${
-              column.name
-            }`}
+            className={`wallet-transactions__cell wallet-transactions__cell--${column.name}`}
           >
             {t(`wallet-page.transactions.${column.name}`)}
           </span>

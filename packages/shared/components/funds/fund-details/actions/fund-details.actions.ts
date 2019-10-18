@@ -16,6 +16,7 @@ import fundsApi from "shared/services/api-client/funds-api";
 import { ApiAction, CurrencyEnum } from "shared/utils/types";
 
 import { FundAssetsViewModel } from "../reducers/fund-history.reducer";
+import { FundIdState } from "../reducers/id.reducer";
 import { FundProfitChartDataType } from "../reducers/profit-chart.reducer";
 
 export const SET_FUND_STATISTIC_PERIOD = "SET_FUND_STATISTIC_PERIOD";
@@ -23,6 +24,7 @@ export const SET_FUND_STATISTIC_CURRENCY = "SET_FUND_STATISTIC_CURRENCY";
 export const FETCH_FUND_PROFIT_CHART = "FETCH_FUND_PROFIT_CHART";
 export const FETCH_FUND_BALANCE_CHART = "FETCH_FUND_BALANCE_CHART";
 export const FETCH_FUND_DESCRIPTION = "FETCH_FUND_DESCRIPTION";
+export const SET_FUND_ID = "SET_FUND_ID";
 
 export const FUND_REALLOCATE_HISTORY = "FUND_REALLOCATE_HISTORY";
 export const FUND_STRUCTURE = "FUND_STRUCTURE";
@@ -101,4 +103,12 @@ export const fundStructureAction = (
   payload: fundsApi
     .getFundAssets(fundId)
     .then(data => ({ ...data, total: data.assets.length }))
+});
+
+export interface SetFundIdAction extends ActionType<FundIdState> {
+  type: typeof SET_FUND_ID;
+}
+export const setFundIdAction = (id: string): SetFundIdAction => ({
+  type: SET_FUND_ID,
+  payload: id
 });

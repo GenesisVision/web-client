@@ -2,12 +2,13 @@ import { WalletData, WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation } from "react-i18next";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { createSelector } from "reselect";
 import NotFoundPage from "shared/components/not-found/not-found";
 import { RootState } from "shared/reducers/root-reducer";
+import { CurrencyEnum } from "shared/utils/types";
 
 import { walletSelector as walletDataSelector } from "../reducers/wallet.reducers";
-import { WalletRouteProps } from "../wallet.routes";
 import WalletCurrency from "./wallet-currency";
 import WalletLoader from "./wallet-loader";
 
@@ -27,7 +28,7 @@ const walletSelector = createSelector<
   WalletData | undefined
 >(
   (state: RootState) => walletDataSelector(state),
-  (state: RootState, props: OwnProps) => props.match.params.currency,
+  (state: RootState, props: OwnProps) => props.currency,
   (data: WalletMultiSummary | undefined, currency: string) => {
     if (!data) return undefined;
     return data.wallets.find(
@@ -36,24 +37,24 @@ const walletSelector = createSelector<
   }
 );
 
-const mapStateToProps = (state: RootState, props: OwnProps): StateProps => {
-  const isPending = state.wallet.info.isPending;
-  return {
-    info: walletSelector(state, props),
-    isPending
-  };
-};
+const mapStateToProps = (state: RootState, props: OwnProps): StateProps => ({
+  info: walletSelector(state, props),
+  isPending: state.wallet.info.isPending
+});
 
 interface Props extends WithTranslation, OwnProps, StateProps {}
 
-interface OwnProps extends WalletRouteProps {}
+interface OwnProps {
+  currency: CurrencyEnum;
+}
 
 interface StateProps {
   info?: WalletData;
   isPending: boolean;
 }
 
-const WalletCurrencyContainer = React.memo(
-  connect(mapStateToProps)(_WalletCurrencyContainer)
-);
+const WalletCurrencyContainer = compose<React.ComponentType<OwnProps>>(
+  connect(mapStateToProps),
+  React.memo
+)(_WalletCurrencyContainer);
 export default WalletCurrencyContainer;

@@ -20,9 +20,11 @@ const _SignalProviderControls: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   programDescription: ProgramDetailsFullOld;
 }
 
-const SignalProviderControls = React.memo(_SignalProviderControls);
+const SignalProviderControls = React.memo<React.FC<Props>>(
+  _SignalProviderControls
+);
 export default SignalProviderControls;

@@ -1,18 +1,18 @@
 import "./two-factor-code.scss";
 
 import { FormikProps, InjectedFormikProps, withFormik } from "formik";
-import * as React from "react";
+import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
+import Link from "shared/components/link/link";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
-import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.routes";
+import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.constants";
 
 class _TwoFactorCodeForm extends React.PureComponent<
   InjectedFormikProps<Props, ITwoFactorCodeFormValues>,

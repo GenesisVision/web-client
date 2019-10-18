@@ -43,7 +43,7 @@ const _PerformanceData: React.FC<Props> = ({
       {programDescription.periodStarts && (
         <StatisticItem label={t("program-details-page.description.period")}>
           <ProgramPeriodPie
-            condition={status !== STATUS.CLOSED}
+            condition={programDescription.status !== STATUS.CLOSED}
             loader={t("program-period.program-closed")}
             start={programDescription.periodStarts}
             end={programDescription.periodEnds}

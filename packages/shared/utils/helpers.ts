@@ -77,6 +77,10 @@ const getNumberWithoutSuffix = (str: string): Nullable<number> => {
 const convertToArray = (value: any): any[] =>
   Array.isArray(value) ? value : [value];
 
+const isServer = () => {
+  return global.hasOwnProperty("window");
+};
+
 const getRandomInteger = (min: number, max: number): number =>
   Math.floor(min + Math.random() * (max + 1 - min));
 
@@ -92,5 +96,6 @@ export {
   convertToArray,
   merge,
   mergeObjects,
-  mergeArrays
+  mergeArrays,
+  isServer
 };

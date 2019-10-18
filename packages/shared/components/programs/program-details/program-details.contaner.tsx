@@ -4,17 +4,12 @@ import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { compose } from "redux";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ASSET } from "shared/constants/constants";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "shared/decorators/with-blur-loader";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
 
 import { statisticCurrencyAction } from "./actions/program-details.actions";
@@ -88,10 +83,5 @@ interface Props {
   data: ProgramDetailsFullOld;
 }
 
-const ProgramDetailsContainer = compose<
-  React.ComponentType<Props & WithBlurLoaderProps<ProgramDetailsFullOld>>
->(
-  withBlurLoader,
-  React.memo
-)(_ProgramDetailsContainer);
+const ProgramDetailsContainer = React.memo(_ProgramDetailsContainer);
 export default ProgramDetailsContainer;

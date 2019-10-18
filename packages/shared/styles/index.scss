@@ -29,10 +29,14 @@ a {
   }
 }
 
-.root,
+#__next,
 .app__scroll,
 .app__body {
   height: 100vh;
+  color: white;
+}
+
+.app {
   color: white;
 }
 

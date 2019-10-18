@@ -3,7 +3,6 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import FacetContainer, {
   FACET_ASSET
 } from "shared/components/facet-container/facet-container";
-import { getCurrentFacet } from "shared/components/funds/funds-facet/services/funds-facet.service";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
@@ -12,7 +11,7 @@ import { fetchFunds } from "shared/modules/funds-table/services/funds-table.serv
 
 import FundsFacetTable from "./components/funds-facet-table";
 
-const _FundsFacetPage: React.FC<Props> = ({ t }) => {
+const _FundsFacetPage: React.FC<Props> = ({ id, t }) => {
   const getFunds = useCallback(
     (filters: ComposeFiltersAllType): Promise<IDataModel> =>
       fetchFunds(filters).then(data => ({
@@ -25,9 +24,9 @@ const _FundsFacetPage: React.FC<Props> = ({ t }) => {
     <Page title={t("funds-page.title")}>
       <Surface className="funds-table-container">
         <FacetContainer
+          id={id}
           asset={FACET_ASSET.FUNDS}
           TableContainer={FundsFacetTable}
-          getCurrentFacet={getCurrentFacet}
           getItems={getFunds}
         />
       </Surface>
@@ -35,7 +34,9 @@ const _FundsFacetPage: React.FC<Props> = ({ t }) => {
   );
 };
 
-interface Props extends WithTranslation {}
+interface Props extends WithTranslation {
+  id: string;
+}
 
 const FundsFacetPage = translate()(React.memo(_FundsFacetPage));
 export default FundsFacetPage;

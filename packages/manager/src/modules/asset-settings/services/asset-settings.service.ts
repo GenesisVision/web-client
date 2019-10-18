@@ -1,5 +1,6 @@
 import { push } from "connected-react-router";
 import { CancelablePromise, ProgramUpdate } from "gv-api-web";
+import Router from "next/router";
 import { Dispatch } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { ASSET } from "shared/constants/constants";
@@ -60,11 +61,9 @@ export const redirectToProgram = () => (
   dispatch: Dispatch,
   getState: () => RootState
 ) => {
-  const { router } = getState();
-  const programSlugUrl = getParams(
-    router.location.pathname,
-    PROGRAM_DETAILS_ROUTE
-  )[PROGRAM_SLUG_URL_PARAM_NAME];
+  const programSlugUrl = getParams(Router.pathname, PROGRAM_DETAILS_ROUTE)[
+    PROGRAM_SLUG_URL_PARAM_NAME
+  ];
   dispatch(push(`${PROGRAMS_ROUTE}/${programSlugUrl}`));
 };
 
@@ -77,7 +76,10 @@ export const editAsset = (
   let data = editAssetData;
   let promise = Promise.resolve("") as CancelablePromise<any>;
   if (data.logo.image)
-    promise = filesService.uploadFile(data.logo.image.cropped, authorization);
+    promise = filesService.uploadFile(
+      data.logo.image.cropped,
+      authorization
+    ) as CancelablePromise<any>;
 
   return promise
     .then(response => {
@@ -152,16 +154,14 @@ export const closeFund: TCloseAsset = ({
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 
-export type TCloseAsset = (
-  opts: {
-    onSuccess: () => void;
-    onError: () => void;
-    id: string;
-    opts?: {
-      twoFactorCode?: string;
-    };
-  }
-) => (dispatch: Dispatch) => void;
+export type TCloseAsset = (opts: {
+  onSuccess: () => void;
+  onError: () => void;
+  id: string;
+  opts?: {
+    twoFactorCode?: string;
+  };
+}) => (dispatch: Dispatch) => void;
 
 export enum ASSET_EDIT_FIELDS {
   stopOutLevel = "stopOutLevel",

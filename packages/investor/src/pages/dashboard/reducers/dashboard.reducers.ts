@@ -8,9 +8,9 @@ import { ITableState } from "shared/components/table/reducers/table.reducer";
 
 import dashboardCopytradingReducer from "./dashboard-copytrading.reducer";
 import {
-  DashboardEventsState,
   dashboardEventsAllReducer,
-  dashboardEventsReducer
+  dashboardEventsReducer,
+  DashboardEventsState
 } from "./dashboard-events.reducer";
 import dashboardFundsReducer from "./dashboard-funds.reducer";
 import dashboardInRequestsReducer, {
@@ -26,7 +26,7 @@ export type DashboardState = Readonly<{
   programs: ITableState<ProgramsListOld>;
   funds: ITableState<FundsListOld>;
   copytrading: any;
-  portfolioChartData: DashboardPortfolioChartState;
+  portfolioChart: DashboardPortfolioChartState;
   inRequestsData: DashboardInRequestsState;
   eventsData: DashboardEventsState;
 }>;
@@ -36,7 +36,7 @@ const dashboardReducer = combineReducers<DashboardState>({
   programs: dashboardProgramsReducer,
   funds: dashboardFundsReducer,
   copytrading: dashboardCopytradingReducer,
-  portfolioChartData: dashboardPortfolioChartReducer,
+  portfolioChart: dashboardPortfolioChartReducer,
   inRequestsData: dashboardInRequestsReducer,
   eventsData: dashboardEventsReducer
 });

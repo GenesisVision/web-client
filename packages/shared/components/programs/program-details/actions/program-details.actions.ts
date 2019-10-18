@@ -21,6 +21,7 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
+import { ProgramIdState } from "../reducers/id.reducer";
 import { ProgramProfitChartDataType } from "../reducers/profit-chart.reducer";
 import {
   EVENT_LOCATION,
@@ -33,6 +34,7 @@ export const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
 export const FETCH_PROGRAM_BALANCE_CHART = "FETCH_PROGRAM_BALANCE_CHART";
 export const FETCH_PROGRAM_DESCRIPTION = "FETCH_PROGRAM_DESCRIPTION";
 export const FETCH_LEVEL_PARAMETERS = "FETCH_LEVEL_PARAMETERS";
+export const SET_PROGRAM_ID = "SET_PROGRAM_ID";
 
 export const PROGRAM_OPEN_POSITIONS = "PROGRAM_OPEN_POSITIONS";
 export const PROGRAM_TRADES = "PROGRAM_TRADES";
@@ -157,4 +159,12 @@ export const fetchSubscriptionsAction = (
 ): ActionType<CancelablePromise<SignalProviderSubscribers>> => ({
   type: PROGRAM_SUBSCRIPTIONS,
   payload: programsApi.getProgramSubscribers(id, authorization, filters)
+});
+
+export interface SetProgramIdAction extends ActionType<ProgramIdState> {
+  type: typeof SET_PROGRAM_ID;
+}
+export const setProgramIdAction = (id: string): SetProgramIdAction => ({
+  type: SET_PROGRAM_ID,
+  payload: id
 });

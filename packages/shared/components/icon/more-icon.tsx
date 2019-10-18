@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IIconProps, Icon } from "shared/components/icon/icon";
+import { Icon, IIconProps } from "shared/components/icon/icon";
 
 export const MoreIcon: React.FC<IIconProps> = props => (
   <Icon type={"more"} {...props}>

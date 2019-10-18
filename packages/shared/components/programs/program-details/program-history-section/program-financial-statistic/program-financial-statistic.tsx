@@ -53,9 +53,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
       columns={columns}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${
-            column.name
-          }`}
+          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
         >
           {t(`program-details-page.history.financial-statistic.${column.name}`)}
         </span>

@@ -10,7 +10,9 @@ const _Page: React.FC<Props> = ({ title, children }) => {
   return (
     <DocumentTitle title={t(`${role}.app.title`) + title}>
       <>
-        <BackButton />
+        <div>
+          <BackButton />
+        </div>
         {children}
       </>
     </DocumentTitle>

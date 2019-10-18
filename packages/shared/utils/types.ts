@@ -7,7 +7,9 @@ import {
 } from "gv-api-web";
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
-import { Action, Dispatch } from "redux";
+import { NextPage, NextPageContext } from "next";
+import { AppContextType } from "next/dist/next-server/lib/utils";
+import { Action, Dispatch, Store } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { RootState } from "shared/reducers/root-reducer";
@@ -35,13 +37,13 @@ export interface NotificationsActionType<T = ProgramNotificationSettingList>
 
 export interface ActionType<T = any, U = any> extends Action {
   type: string;
-  payload: T;
+  payload?: T;
   meta?: U;
 }
 
 export type ApiAction<T = any, U = any> = ActionType<CancelablePromise<T>, U>;
 
-export type RootThunkAction<R = any> = ThunkAction<R, RootState, any, any>;
+export type RootThunkAction<R = any> = ThunkAction<R, AuthRootState, any, any>;
 
 export interface DispatchType<R> {
   (asyncAction: ActionType): R;
@@ -55,14 +57,14 @@ interface ApiActionResponse<T> {
 }
 
 export interface MiddlewareDispatch {
-  <A extends ApiAction = ApiAction>(apiAction: A): CancelablePromise<
+  <A extends ApiAction = ApiAction>(apiAction: A): Promise<
     ApiActionResponse<A>
   >;
   <A extends ActionType = ActionType>(action: A): A;
   <R, S>(asyncAction: RootThunk<R, S>): R;
 }
 
-export type RootThunk<R, S = RootState> = (
+export type RootThunk<R, S = AuthRootState> = (
   dispatch: MiddlewareDispatch,
   getState: () => S
 ) => R;
@@ -89,6 +91,24 @@ export type TGetAuthState = () => AuthRootState;
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
+export type InitializeStoreType = (initialState?: {}) => Store<
+  any,
+  ActionType<any, any>
+> & {
+  dispatch: any;
+};
+
+export interface NextPageWithReduxContext extends NextPageContext {
+  reduxStore: Store<AuthRootState, RootThunkAction>; //TODO error
+}
+
+export interface AppWithReduxContext extends AppContextType {
+  ctx: NextPageWithReduxContext;
+}
+
+export interface NextPageWithRedux<P = void, IP = P> extends NextPage<P, IP> {
+  getInitialProps?(ctx: NextPageWithReduxContext): Promise<IP>;
+}
 export type DispatchDescriptionType = () => (
   dispatch: MiddlewareDispatch,
   getState: () => RootState

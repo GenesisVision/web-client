@@ -98,15 +98,12 @@ export const useChartData = <T>(
     chart,
     selectedCurrencies
   });
-  useEffect(
-    () => {
-      setChartData({
-        chart,
-        selectedCurrencies: [...selectedCurrencies]
-      });
-    },
-    [chart, selectedCurrencies]
-  );
+  useEffect(() => {
+    setChartData({
+      chart,
+      selectedCurrencies: [...selectedCurrencies]
+    });
+  }, [chart, selectedCurrencies]);
   return chartData;
 };
 
@@ -160,23 +157,17 @@ type TUseFundChartStateDataMethods = {
   setSelectedCurrencies: (currencies: TChartCurrency[]) => void;
 };
 type TUseFundChartStateData = () => TUseFundChartStateDataMethods;
-export type TUseFundChartStateDataCreator = (
-  props: {
-    view: DETAILS_CHART_TABS;
-    statisticCurrencyAction: (
-      currency: CurrencyEnum
-    ) => TStatisticCurrencyAction;
-    profitChartSelector: (
-      state: RootState
-    ) => TSelectorData<ProfitChartDataType>;
-    balanceChartSelector: (state: RootState) => TSelectorData<BalanceChartType>;
-    statisticCurrencySelector: (state: RootState) => CurrencyEnum;
-    idSelector: (state: RootState) => string;
-    statisticPeriodSelector: (state: RootState) => ChartDefaultPeriod;
-    getBalanceChart: TGetChartFunc;
-    getProfitChart: TGetChartFunc;
-  }
-) => TUseFundChartStateDataMethods;
+export type TUseFundChartStateDataCreator = (props: {
+  view: DETAILS_CHART_TABS;
+  statisticCurrencyAction: (currency: CurrencyEnum) => TStatisticCurrencyAction;
+  profitChartSelector: (state: RootState) => TSelectorData<ProfitChartDataType>;
+  balanceChartSelector: (state: RootState) => TSelectorData<BalanceChartType>;
+  statisticCurrencySelector: (state: RootState) => CurrencyEnum;
+  idSelector: (state: RootState) => string;
+  statisticPeriodSelector: (state: RootState) => ChartDefaultPeriod;
+  getBalanceChart: TGetChartFunc;
+  getProfitChart: TGetChartFunc;
+}) => TUseFundChartStateDataMethods;
 export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
   view,
   statisticCurrencyAction,
@@ -198,35 +189,29 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
   const [selectedCurrencies, setSelectedCurrencies] = useState<
     TChartCurrency[]
   >(platformCurrencies.filter(({ name }) => name === statisticCurrency));
-  useEffect(
-    () => {
-      setSelectedCurrencies([
-        ...platformCurrencies.filter(({ name }) => name === statisticCurrency),
-        ...selectedCurrencies.slice(1, selectedCurrencies.length)
-      ]);
-    },
-    [statisticCurrency]
-  );
-  useEffect(
-    () => {
-      if (!selectedCurrencies.length || !id || !period) return;
-      const currencies = selectedCurrencies.map(({ name }) => name);
-      const opts = {
-        id,
-        period,
-        currencies
-      };
-      switch (view) {
-        case DETAILS_CHART_TABS.PROFIT:
-          dispatch(getProfitChart(opts));
-          break;
-        case DETAILS_CHART_TABS.BALANCE:
-          dispatch(getProfitChart(opts));
-          dispatch(getBalanceChart(opts));
-      }
-    },
-    [period, id, selectedCurrencies]
-  );
+  useEffect(() => {
+    setSelectedCurrencies([
+      ...platformCurrencies.filter(({ name }) => name === statisticCurrency),
+      ...selectedCurrencies.slice(1, selectedCurrencies.length)
+    ]);
+  }, [statisticCurrency]);
+  useEffect(() => {
+    if (!selectedCurrencies.length || !id || !period) return;
+    const currencies = selectedCurrencies.map(({ name }) => name);
+    const opts = {
+      id,
+      period,
+      currencies
+    };
+    switch (view) {
+      case DETAILS_CHART_TABS.PROFIT:
+        dispatch(getProfitChart(opts));
+        break;
+      case DETAILS_CHART_TABS.BALANCE:
+        dispatch(getProfitChart(opts));
+        dispatch(getBalanceChart(opts));
+    }
+  }, [period, id, selectedCurrencies]);
   return {
     statisticCurrencyAction,
     platformCurrencies,
@@ -251,17 +236,14 @@ export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = u
   const [selectCurrencies, setSelectCurrencies] = useState<TChartCurrency[]>(
     []
   );
-  useEffect(
-    () => {
-      setSelectCurrencies(
-        platformCurrencies.filter(
-          ({ name }) =>
-            !!!selectedCurrencies.find(currency => currency.name === name)
-        )
-      );
-    },
-    [platformCurrencies, selectedCurrencies]
-  );
+  useEffect(() => {
+    setSelectCurrencies(
+      platformCurrencies.filter(
+        ({ name }) =>
+          !!!selectedCurrencies.find(currency => currency.name === name)
+      )
+    );
+  }, [platformCurrencies, selectedCurrencies]);
 
   const addCurrency = useCallback(
     currency => {

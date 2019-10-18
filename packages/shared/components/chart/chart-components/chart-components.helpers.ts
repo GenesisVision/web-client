@@ -4,7 +4,7 @@ export const dateTickFormatter = (start: Date, end: Date) => (
   date: Date
 ): string => {
   let dateFormat;
-  const duration = end.getTime() - start.getTime();
+  const duration = new Date(end).getTime() - new Date(start).getTime();
   const msInDay = 1000 * 60 * 60 * 24;
   if (duration <= msInDay) dateFormat = "LT";
   else if (duration <= msInDay * 90) dateFormat = "D MMM";
@@ -36,7 +36,7 @@ export const composeTicks = (start: Date, end: Date): number[] => {
   const isOneDay = !Boolean(periodEnd - periodStart);
 
   const duration = isOneDay
-    ? end.getTime() - start.getTime()
+    ? new Date(end).getTime() - new Date(start).getTime()
     : periodEnd - periodStart;
 
   const ticks = getTicksCountByPeriod(duration);

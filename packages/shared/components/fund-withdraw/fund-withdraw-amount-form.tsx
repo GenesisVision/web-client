@@ -43,7 +43,7 @@ const _FundWithdrawAmountForm: React.FC<
 
   const setMaxAmount = useCallback(
     () => setFieldValue(FUND_WITHDRAW_FIELDS.percent, "100"),
-    []
+    [setFieldValue]
   );
 
   const amountToWithdrawCcy = calculatePercentage(

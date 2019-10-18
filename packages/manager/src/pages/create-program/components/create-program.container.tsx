@@ -10,13 +10,11 @@ import useTab from "shared/hooks/tab.hook";
 import CreateProgramBrokerContainer from "./create-program-broker/create-program-broker.container";
 import { CreateProgramSettingsSection } from "./create-program-settings/create-program-settings-section";
 
-const _CreateProgramContainer: React.FC = () => {
+const _CreateProgramContainer: React.FC<Props> = ({ brokers }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TAB>(TAB.BROKER);
 
-  const [selectedBroker, setSelectedBroker] = useState<Broker | undefined>(
-    undefined
-  );
+  const [selectedBroker, setSelectedBroker] = useState<Broker>(brokers[0]);
 
   const confirmNavigateToBroker = useCallback(() => {
     setTab(null, TAB.BROKER);
@@ -52,13 +50,14 @@ const _CreateProgramContainer: React.FC = () => {
       <div className="create-asset__content">
         {tab === TAB.BROKER && (
           <CreateProgramBrokerContainer
+            brokers={brokers}
             setSelectedBroker={setSelectedBroker}
             navigateToSettings={navigateToSettings}
             selectedBroker={selectedBroker}
           />
         )}
         {tab === TAB.SETTINGS && (
-          <CreateProgramSettingsSection broker={selectedBroker!} />
+          <CreateProgramSettingsSection broker={selectedBroker} />
         )}
       </div>
     </div>
@@ -68,6 +67,10 @@ const _CreateProgramContainer: React.FC = () => {
 enum TAB {
   BROKER = "BROKER",
   SETTINGS = "SETTINGS"
+}
+
+interface Props {
+  brokers: Broker[];
 }
 
 const CreateProgramContainer = React.memo(_CreateProgramContainer);

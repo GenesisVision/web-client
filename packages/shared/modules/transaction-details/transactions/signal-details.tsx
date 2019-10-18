@@ -1,18 +1,18 @@
 import { SignalFee } from "gv-api-web";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { DialogField } from "shared/components/dialog/dialog-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import { DEFAULT_DECIMAL_SCALE, ROLE } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import useRole from "shared/hooks/use-role.hook";
 import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details-dialog";
 import TransactionAsset from "shared/modules/transaction-details/transactions/transaction-asset";
 import { formatValue } from "shared/utils/formatter";
 
 import TransactionDetails from "./transaction-details";
-import { useTranslation } from "react-i18next";
-import useRole from "shared/hooks/use-role.hook";
 
 const SignalFees: React.ComponentType<
   SignalFeesProps & WithLoaderProps

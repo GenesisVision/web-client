@@ -1,5 +1,7 @@
 import { ProfileHeaderViewModel } from "gv-api-web";
-import * as React from "react";
+import { WithRouterProps } from "next/dist/client/with-router";
+import { withRouter } from "next/router";
+import React from "react";
 import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
@@ -37,11 +39,11 @@ class _HeaderContainer extends React.PureComponent<Props> {
   };
 
   render() {
-    const { service, info, isAuthenticated, backPath } = this.props;
+    const { service, info, isAuthenticated, router } = this.props;
     return (
       <Header
         profileHeader={info}
-        backPath={backPath}
+        backPath={router.pathname}
         isAuthenticated={isAuthenticated}
         logout={service.logout}
         openNotifications={service.notificationsToggle}
@@ -64,15 +66,13 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 const mapStateToProps = (state: RootState): StateProps => ({
   info: headerSelector(state),
-  isAuthenticated: isAuthenticatedSelector(state),
-  backPath: state.router.location ? state.router.location.pathname : ""
+  isAuthenticated: isAuthenticatedSelector(state)
 });
 
-interface Props extends StateProps, DispatchProps, OwnProps {}
+interface Props extends StateProps, DispatchProps, WithRouterProps, OwnProps {}
 
 interface StateProps {
   isAuthenticated: boolean;
-  backPath: string;
   info?: ProfileHeaderViewModel;
 }
 
@@ -89,6 +89,7 @@ interface DispatchProps {
 interface OwnProps {}
 
 const HeaderContainer = compose<React.ComponentType<OwnProps>>(
+  withRouter,
   connect<StateProps, DispatchProps, OwnProps, RootState>(
     mapStateToProps,
     mapDispatchToProps

@@ -30,24 +30,24 @@ const _ProgramWithdrawAmountForm: React.FC<
 }) => {
   const [emptyInit, setEmptyInit] = useState<boolean>(true);
   const role = useRole();
-  const isAllow = useCallback((values: NumberFormatValues) => {
-    const { formattedValue, value } = values;
-    return (
-      (formattedValue === "" || validateFraction(value, programCurrency)) &&
-      values.value !== "."
-    );
-  }, []);
-
-  const setMaxAmount = useCallback(
-    () => {
-      setFieldValue(
-        FIELDS.amount,
-        formatCurrencyValue(availableToWithdraw, programCurrency)
+  const isAllow = useCallback(
+    (values: NumberFormatValues) => {
+      const { formattedValue, value } = values;
+      return (
+        (formattedValue === "" || validateFraction(value, programCurrency)) &&
+        values.value !== "."
       );
-      setEmptyInit(false);
     },
-    [availableToWithdraw, programCurrency]
+    [programCurrency]
   );
+
+  const setMaxAmount = useCallback(() => {
+    setFieldValue(
+      FIELDS.amount,
+      formatCurrencyValue(availableToWithdraw, programCurrency)
+    );
+    setEmptyInit(false);
+  }, [availableToWithdraw, programCurrency, setFieldValue]);
 
   return (
     <form id="withdraw-form" onSubmit={handleSubmit}>

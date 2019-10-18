@@ -11,7 +11,7 @@ import DashboardPortfolioChart from "./dashboard-portfolio-chart";
 
 const composeBalanceChartData = (balanceChart: any) =>
   balanceChart.map((x: any) => ({
-    date: x.date.getTime(),
+    date: new Date(x.date).getTime(),
     balance: formartChartMinValue(x.value)
   }));
 
@@ -21,7 +21,7 @@ const composeAssetsChartData = (
   assetsChart.map((x: any) => {
     let assetsCount = 0;
     const newAsset: { [keys: string]: any } = {
-      date: x.date.getTime(),
+      date: new Date(x.date).getTime(),
       value: formartChartMinValue(x.value)
     };
     x.topAssets.forEach((asset: any) => {
@@ -47,7 +47,6 @@ const composeAssetsChartData = (
 
 const _DashboardPortfolioChartSection: React.FC<Props> = ({
   data,
-  currency,
   period,
   handleChangePeriod
 }) => (

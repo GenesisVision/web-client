@@ -1,10 +1,8 @@
 //@ts-ignore TODO fix types
 import * as jwt_decode from "jwt-decode";
-
-import { getTokenName } from "../utils/get-token-name";
-import { Nullable } from "../utils/types";
-
-const AUTH_TOKEN = getTokenName();
+import { NextPageContext } from "next";
+import { getCookie, removeCookie, setCookie } from "shared/utils/cookie";
+import { getTokenName } from "shared/utils/get-token-name";
 
 const canParseToken = (token: string): boolean => {
   try {
@@ -21,18 +19,16 @@ const decodeToken = (token: string): any => {
 };
 
 const storeToken = (token: string): void => {
-  localStorage.setItem(AUTH_TOKEN, token);
+  const tokenName = getTokenName();
+  setCookie(tokenName, token);
 };
 
-const getToken = (): Nullable<string> => {
-  return localStorage.getItem(AUTH_TOKEN);
-};
+const getTokenData = () => decodeToken(getAuthArg());
 
-const getTokenData = () => decodeToken(getToken() || "");
-
-const getAuthArg = (): string => {
-  const token = getToken();
-  if (token === null) {
+const getAuthArg = (ctx?: NextPageContext): string => {
+  const tokenName = getTokenName();
+  const token = getCookie(tokenName, ctx);
+  if (!token) {
     return "";
   }
 
@@ -40,31 +36,25 @@ const getAuthArg = (): string => {
 };
 
 const isAuthenticated = (): boolean => {
-  const token = getToken();
+  const token = getAuthArg();
 
-  if (!canParseToken(token || "")) return false;
+  if (!canParseToken(token)) return false;
   const dateNowSec = Math.floor(Date.now() / 1000);
   const decodedToken = jwt_decode(token);
   return decodedToken.exp > dateNowSec;
 };
 
-const getUserName = (): string => {
-  const token = localStorage.getItem(AUTH_TOKEN);
-  return isAuthenticated() ? decodeToken(token || "").unique_name : "";
-};
-
 const removeToken = (): void => {
-  localStorage.removeItem(AUTH_TOKEN);
+  const tokenName = getTokenName();
+  removeCookie(tokenName);
 };
 
 const authService = {
   isAuthenticated,
   getAuthArg,
-  getToken,
   getTokenData,
   storeToken,
-  removeToken,
-  getUserName
+  removeToken
 };
 
 export default authService;

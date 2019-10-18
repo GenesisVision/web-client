@@ -3,13 +3,13 @@ import "./dashboard-portfolio-chart-section.scss";
 import { ManagerAssets, ProgramRequests } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import { ManagerRootState } from "reducers";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import {
@@ -83,7 +83,8 @@ class _DashboardPortfolioChartSection extends React.PureComponent<
 
   componentDidMount() {
     const { service } = this.props;
-    service.getAssets();
+    service.getInRequests();
+    service.composeAssetChart();
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
@@ -95,10 +96,10 @@ class _DashboardPortfolioChartSection extends React.PureComponent<
       this.setTypeAssets(tab);
     }
     if ((!assetChart || prevState.tab !== tab) && type) {
-      service.composeAssetChart(type);
+      service.composeAssetChart(type!);
     }
     if ((!inRequests || prevState.tab !== tab) && type) {
-      service.getInRequests(type);
+      service.getInRequests(type!);
     }
   }
 

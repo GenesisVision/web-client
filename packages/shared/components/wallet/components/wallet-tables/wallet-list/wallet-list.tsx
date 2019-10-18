@@ -4,13 +4,16 @@ import { WalletData } from "gv-api-web";
 import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import { CurrencyItem } from "shared/components/currency-item/currency-item";
+import Link from "shared/components/link/link";
 import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
+import {
+  composeWalletCurrencyUrl,
+  WALLET_CURRENCY_FOLDER_ROUTE
+} from "shared/components/wallet/wallet.routes";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
@@ -60,10 +63,9 @@ const _WalletList: React.FC<Props> = ({ t, createButtonToolbar, wallets }) => {
               <Link
                 className="wallet-list__link"
                 to={{
-                  pathname: composeWalletCurrencyUrl(
-                    wallet.currency.toLowerCase()
-                  ),
-                  state: "Wallet"
+                  pathname: WALLET_CURRENCY_FOLDER_ROUTE,
+                  as: composeWalletCurrencyUrl(wallet.currency.toLowerCase()),
+                  state: "/ Wallet"
                 }}
               >
                 <CurrencyItem logo={wallet.logo} name={wallet.currency} small />

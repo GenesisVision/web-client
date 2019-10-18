@@ -1,3 +1,5 @@
+import { FundAssetsListInfo } from "gv-api-web";
+import { NextPageContext } from "next";
 import { Dispatch } from "redux";
 import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import {
@@ -12,31 +14,48 @@ import {
 } from "shared/routes/funds.routes";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import { DispatchDescriptionType } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  DispatchDescriptionType,
+  MiddlewareDispatch,
+  TGetState
+} from "shared/utils/types";
 
+import fundsApi from "../../../../services/api-client/funds-api";
 import {
   fetchFundBalanceChartAction,
   fetchFundDescriptionAction,
   fetchFundProfitChartAction,
   fundReallocateHistoryAction,
-  fundStructureAction
+  fundStructureAction,
+  setFundIdAction
 } from "../actions/fund-details.actions";
 import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-history.reducer";
 
-export const dispatchFundDescription: DispatchDescriptionType = () => (
-  dispatch,
-  getState
+export const dispatchFundDescription = (ctx?: NextPageContext) => async (
+  dispatch: MiddlewareDispatch,
+  getState: TGetState
 ) => {
-  const authorization = authService.getAuthArg();
-  const { router } = getState();
-
-  const slugUrl = getParams(router.location.pathname, FUND_DETAILS_ROUTE)[
-    FUNDS_SLUG_URL_PARAM_NAME
-  ];
-
-  return dispatch(fetchFundDescriptionAction(slugUrl, authorization));
+  const {
+    fundDetails: { id: stateId }
+  } = getState();
+  return await dispatch(
+    fetchFundDescriptionAction(
+      ctx ? (ctx.query.id as string) : stateId,
+      authService.getAuthArg(ctx)
+    )
+  );
 };
 
+export const dispatchFundId = (id: string) => async (
+  dispatch: MiddlewareDispatch
+) => await dispatch(setFundIdAction(id));
+
+export const fetchFundStructure = (
+  fundId: string
+): Promise<FundAssetsListInfo> => {
+  return fundsApi.getFundAssets(fundId);
+};
 export const getDashboardHistoryDetailsCounts = (fundId: string) => (
   dispatch: Dispatch,
   getState: () => RootState

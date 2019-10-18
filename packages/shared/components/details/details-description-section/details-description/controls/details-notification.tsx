@@ -2,22 +2,24 @@ import "./details-description-control.scss";
 
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { RingIcon } from "shared/components/icon/ring-icon";
+import Link from "shared/components/link/link";
 
 import DetailsDescriptionControl from "./details-description-control";
 
 const _DetailsNotification: React.FC<Props> = ({
   url,
   hasNotifications,
-  title
+  title,
+  pathname
 }) => {
   const [t] = useTranslation();
   return (
     <DetailsDescriptionControl
       tag={Link}
       to={{
-        pathname: url,
+        pathname,
+        as: url,
         state: `/ ${title}`
       }}
       text={t("fund-details-page.description.notifications")}
@@ -32,6 +34,7 @@ const _DetailsNotification: React.FC<Props> = ({
 
 interface Props {
   url: string;
+  pathname: string;
   hasNotifications: boolean;
   title: string;
 }

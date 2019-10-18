@@ -28,14 +28,11 @@ const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
   const [statisticData, setStatisticData] = useState<
     IStatisticData | undefined
   >(undefined);
-  useEffect(
-    () => {
-      statistic &&
-        statistic[0] &&
-        setStatisticData({ statisticCurrency, statistic: statistic[0] });
-    },
-    [statistic, statisticCurrency]
-  );
+  useEffect(() => {
+    statistic &&
+      statistic[0] &&
+      setStatisticData({ statisticCurrency, statistic: statistic[0] });
+  }, [statistic, statisticCurrency]);
   return (
     <DetailsBlock horizontalPaddings className="details-statistics">
       <h3>{t("details-page.statistics.heading")}</h3>

@@ -38,12 +38,9 @@ const _FundWithdrawPopup: React.FC<Props> = ({
     request: ({ from, to }) => fetchRate(from, to)
   });
 
-  useEffect(
-    () => {
-      sendRequest({ from: FUND_CURRENCY, to: currency });
-    },
-    [currency]
-  );
+  useEffect(() => {
+    sendRequest({ from: FUND_CURRENCY, to: currency });
+  }, [currency]);
 
   const handleEnterAmountSubmit = useCallback(
     ({ percent }: FundWithDrawFormValues) => {

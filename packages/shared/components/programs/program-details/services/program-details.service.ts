@@ -6,6 +6,7 @@ import {
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
+import { NextPageContext } from "next";
 import { Dispatch } from "redux";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
@@ -19,21 +20,17 @@ import { composeRequestFiltersByTableState } from "shared/components/table/servi
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
-import {
-  PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
-} from "shared/routes/programs.routes";
 import brokersApi from "shared/services/api-client/brokers-api";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import getParams from "shared/utils/get-params";
 import {
   ActionType,
   CurrencyEnum,
-  DispatchDescriptionType
+  MiddlewareDispatch,
+  TGetState
 } from "shared/utils/types";
 
 import {
@@ -46,7 +43,8 @@ import {
   fetchProgramDescriptionAction,
   fetchProgramProfitChartAction,
   fetchSubscriptionsAction,
-  fetchTradesAction
+  fetchTradesAction,
+  setProgramIdAction
 } from "../actions/program-details.actions";
 import {
   financialStatisticTableSelector,
@@ -68,19 +66,24 @@ export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
   dispatch: Dispatch
 ) => dispatch(fetchLevelParametersAction(currency));
 
-export const dispatchProgramDescription: DispatchDescriptionType = () => (
-  dispatch,
-  getState
+export const dispatchProgramDescription = (ctx?: NextPageContext) => async (
+  dispatch: MiddlewareDispatch,
+  getState: TGetState
 ) => {
-  const authorization = authService.getAuthArg();
-  const { router } = getState();
-
-  const slugUrl = getParams(router.location.pathname, PROGRAM_DETAILS_ROUTE)[
-    PROGRAM_SLUG_URL_PARAM_NAME
-  ];
-
-  return dispatch(fetchProgramDescriptionAction(slugUrl, authorization));
+  const {
+    programDetails: { id: stateId }
+  } = getState();
+  return await dispatch(
+    fetchProgramDescriptionAction(
+      ctx ? (ctx.query.id as string) : stateId,
+      authService.getAuthArg(ctx)
+    )
+  );
 };
+
+export const dispatchProgramId = (id: string) => async (
+  dispatch: MiddlewareDispatch
+) => await dispatch(setProgramIdAction(id));
 
 export const getProgramStatistic = (
   programId: string,
@@ -284,13 +287,13 @@ export const getProfitChart: TGetChartFunc = ({
   id,
   period,
   currencies
-}) => dispatch =>
-  dispatch(fetchProgramProfitChartAction(id, period, currencies));
+}) => async dispatch =>
+  await dispatch(fetchProgramProfitChartAction(id, period, currencies));
 
 export const getBalanceChart: TGetChartFunc = ({
   id,
   period,
   currencies
-}) => dispatch => {
-  dispatch(fetchProgramBalanceChartAction(id, period, currencies[0]));
+}) => async dispatch => {
+  await dispatch(fetchProgramBalanceChartAction(id, period, currencies[0]));
 };

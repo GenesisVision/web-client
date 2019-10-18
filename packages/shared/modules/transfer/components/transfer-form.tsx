@@ -139,9 +139,7 @@ const _TransferForm: React.FC<Props> = ({
             label={t(`transfer.available${destinationType}To`)}
             big
           >
-            {`${formattedAvailableDestinationItem} ${
-              selectedDestinationItem.currency
-            }`}
+            {`${formattedAvailableDestinationItem} ${selectedDestinationItem.currency}`}
           </StatisticItem>
         </DialogField>
         <DialogField>

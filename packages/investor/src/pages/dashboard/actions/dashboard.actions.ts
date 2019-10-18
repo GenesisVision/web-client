@@ -8,6 +8,8 @@ import {
   SignalsList
 } from "gv-api-web";
 import { Action } from "redux";
+import chartPeriodActionCreator from "shared/actions/chart-period.action-creator";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { EVENTS_ACTION_TYPE } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import {
   EVENT_LOCATION,
@@ -56,7 +58,7 @@ export const fetchDashboardFundsAction = (
 export const fetchDashboardCopytradingAction = (
   auth: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<SignalsList>> => ({
+): ActionType<Promise<SignalsList>> => ({
   type: DASHBOARD_COPYTRADING,
   payload: investorApi.getSignalPrograms(auth, filters)
 });
@@ -64,7 +66,7 @@ export const fetchDashboardCopytradingAction = (
 export const fetchPortfolioChartAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<DashboardChartValue>> => ({
+): ActionType<Promise<DashboardChartValue>> => ({
   type: DASHBOARD_PORTFOLIO_CHART,
   payload: investorApi.getPortfolioChart(auth, filters)
 });
@@ -81,7 +83,7 @@ export const fetchInRequestsAction = (
   auth: string,
   skip: number,
   take: number
-): ActionType<CancelablePromise<ProgramRequests>> => ({
+): ActionType<Promise<ProgramRequests>> => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: investorApi.getRequests(skip, take, auth)
 });
@@ -93,6 +95,9 @@ export const cancelProgramRequestAction = (
   type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
   payload: investorApi.cancelRequest(id, auth)
 });
+
+export const changeChartPeriodAction = (period: ChartDefaultPeriod): Action =>
+  chartPeriodActionCreator(DASHBOARD_PORTFOLIO_CHART, period);
 
 export const clearDashboardAssetsTableAction = (): Action => ({
   type: CLEAR_DASHBOARD_ASSETS_TABLE

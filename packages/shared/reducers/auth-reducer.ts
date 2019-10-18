@@ -1,8 +1,8 @@
 import {
+  LOGOUT,
   UPDATE_TOKEN,
   UpdateTokenActionType
 } from "shared/actions/auth-actions";
-import authService from "shared/services/auth-service";
 import { fieldSelector } from "shared/utils/selectors";
 
 import defaultReducer from "./reducer-creators/default-reducer";
@@ -11,22 +11,22 @@ export type AuthState = Readonly<{
   isAuthenticated: boolean;
 }>;
 
-const getInitialState = (): AuthState => ({
-  isAuthenticated: authService.isAuthenticated()
-});
+const initialState: AuthState = {
+  isAuthenticated: false
+};
 
 export const isAuthenticatedSelector = fieldSelector(
   state => state.authData.isAuthenticated
 );
 
 const authReducer = (
-  state = getInitialState(),
+  state = initialState,
   action: UpdateTokenActionType
 ): AuthState =>
   defaultReducer<UpdateTokenActionType, AuthState>(
     action,
     state,
-    getInitialState(),
+    initialState,
     UPDATE_TOKEN
   );
 

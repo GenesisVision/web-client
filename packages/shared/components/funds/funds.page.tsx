@@ -1,24 +1,27 @@
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "shared/components/facet-cards/faset-cards-container";
-import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
-import FundsTableContainer from "shared/modules/funds-table/components/funds-table/funds-table-container";
+import { useTranslation } from "shared/i18n";
+import FundsTableSSR from "shared/modules/funds-table/components/funds-table/funds-table-ssr";
 import {
   FUNDS_EXPLORE_TAB_NAME,
+  FUNDS_FACET_FOLDER_ROUTE,
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
 } from "shared/routes/funds.routes";
 import { composeFundFacetUrl } from "shared/utils/compose-url";
 
-const _FundsPage: React.FC<WithTranslation> = ({ t }) => {
+import NavigationTabs from "../navigation-tabs/navigation-tabs";
+
+const FundsPage: React.FC = () => {
+  const { t } = useTranslation();
   const title = t("funds-page.title");
   return (
     <Page title={title}>
-      <NavigationTabsContainer
+      <NavigationTabs
         exploreTabName={FUNDS_EXPLORE_TAB_NAME}
         tabRoute={FUNDS_TAB_ROUTE}
         favoritesTabName={FUNDS_FAVORITES_TAB_NAME}
@@ -27,13 +30,13 @@ const _FundsPage: React.FC<WithTranslation> = ({ t }) => {
         title={title}
         assetsFacets={ASSETS_FACETS.FUNDS}
         composeFacetUrl={composeFundFacetUrl}
+        fileRoute={FUNDS_FACET_FOLDER_ROUTE}
       />
       <Surface className="funds-table-container">
-        <FundsTableContainer title={t("funds-page.all-funds")} />
+        <FundsTableSSR title={t("funds-page.all-funds")} showSwitchView />
       </Surface>
     </Page>
   );
 };
 
-const FundsPage = translate()(React.memo(_FundsPage));
 export default FundsPage;

@@ -26,5 +26,7 @@ const _ProgramControls: React.FC<IProgramControlsProps> = ({
   );
 };
 
-const ProgramControls = React.memo(_ProgramControls);
+const ProgramControls = React.memo<React.FC<IProgramControlsProps>>(
+  _ProgramControls
+);
 export default ProgramControls;

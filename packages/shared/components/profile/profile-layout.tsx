@@ -1,14 +1,12 @@
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
+import Link from "shared/components/link/link";
 import Page from "shared/components/page/page";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { kycConfirmedSelector } from "shared/reducers/header-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 
 import {
   KYC_ROUTE,
@@ -34,14 +32,9 @@ if (ROLE_ENV === ROLE.MANAGER) {
   tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: SOCIAL_LINKS });
 }
 
-const _ProfileLayout: React.FC<Props> = ({
-  verified,
-  t,
-  route,
-  backPath,
-  prevPath,
-  children
-}) => {
+const _ProfileLayout: React.FC<Props> = ({ route, children }) => {
+  const [t] = useTranslation();
+  const verified = useSelector(kycConfirmedSelector);
   return (
     <Page title={t("profile-page.title")}>
       <div className="app__main-wrapper">
@@ -55,9 +48,7 @@ const _ProfileLayout: React.FC<Props> = ({
                 label={
                   <Link
                     to={{
-                      pathname: x.pathname,
-                      state: backPath,
-                      prevPath
+                      pathname: x.pathname
                     }}
                   >
                     {t(`profile-page.tabs.${x.value}`)}
@@ -73,27 +64,9 @@ const _ProfileLayout: React.FC<Props> = ({
   );
 };
 
-const mapSateTotProps = (state: RootState): StateProps => ({
-  verified: kycConfirmedSelector(state),
-  backPath: state.router.location.state,
-  prevPath: state.router.location.prevPath
-});
-
-const ProfileLayout = compose<React.ComponentType<OwnProps>>(
-  connect(mapSateTotProps),
-  translate()
-)(_ProfileLayout);
-
-export default ProfileLayout;
-
-interface OwnProps {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   route: string;
 }
 
-interface StateProps {
-  backPath: string;
-  prevPath?: string;
-  verified?: boolean;
-}
-
-interface Props extends OwnProps, StateProps, WithTranslation {}
+const ProfileLayout = React.memo(_ProfileLayout);
+export default ProfileLayout;

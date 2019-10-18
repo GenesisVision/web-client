@@ -41,16 +41,13 @@ const _ProgramFollowContainer: React.FC<Props> = ({
     getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
   }, []);
 
-  useEffect(
-    () => {
-      setType(
-        signalSubscription.hasActiveSubscription
-          ? FOLLOW_TYPE.EDIT
-          : FOLLOW_TYPE.CREATE
-      );
-    },
-    [signalSubscription]
-  );
+  useEffect(() => {
+    setType(
+      signalSubscription.hasActiveSubscription
+        ? FOLLOW_TYPE.EDIT
+        : FOLLOW_TYPE.CREATE
+    );
+  }, [signalSubscription]);
   const handleSubmit = useCallback(
     (
       id: string,

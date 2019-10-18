@@ -31,7 +31,8 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
 const TileFilterItem = React.memo(_TileFilterItem);
 export default TileFilterItem;
 
-export interface ITileFilterItemProps {
+export interface ITileFilterItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   removable?: boolean;
   id: string;
   removeTile?(id: string): void;

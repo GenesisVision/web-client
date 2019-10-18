@@ -1,53 +1,71 @@
+import { useRouter } from "next/router";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
+import { WithTranslation, withTranslation } from "react-i18next";
+import { compose } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
+import Link from "shared/components/link/link";
 import replaceParams from "shared/utils/replace-params";
+
+import isAuthenticated from "../../decorators/is-authenticated";
 
 const _NavigationTabs: React.FC<Props> = ({
   t,
   exploreTabName,
   tabRoute,
-  favoritesTabName,
-  tab = exploreTabName
-}) => (
-  <div className="facets-tabs">
-    <GVTabs value={tab}>
-      <GVTab
-        value={exploreTabName}
-        label={
-          <Link
-            to={replaceParams(tabRoute, {
-              ":tab": exploreTabName
-            })}
-          >
-            {t("funds-page.tabs.explore")}
-          </Link>
-        }
-      />
-      <GVTab
-        value={favoritesTabName}
-        label={
-          <Link
-            to={replaceParams(tabRoute, {
-              ":tab": favoritesTabName
-            })}
-          >
-            {t("funds-page.tabs.favorites")}
-          </Link>
-        }
-      />
-    </GVTabs>
-  </div>
-);
+  favoritesTabName
+}) => {
+  const { pathname } = useRouter();
+  const tab = pathname.includes(favoritesTabName)
+    ? favoritesTabName
+    : exploreTabName;
+  return (
+    <div className="facets-tabs">
+      <GVTabs value={tab}>
+        <GVTab
+          value={exploreTabName}
+          label={
+            <Link
+              to={{
+                pathname: replaceParams(tabRoute, {
+                  ":tab": exploreTabName
+                }).slice(0, -1)
+              }}
+            >
+              {t("funds-page.tabs.explore")}
+            </Link>
+          }
+        />
+        <GVTab
+          value={favoritesTabName}
+          label={
+            <Link
+              to={{
+                pathname: replaceParams(tabRoute, {
+                  ":tab": favoritesTabName
+                })
+              }}
+            >
+              {t("funds-page.tabs.favorites")}
+            </Link>
+          }
+        />
+      </GVTabs>
+    </div>
+  );
+};
 
-interface Props extends WithTranslation {
+interface OwnProps {
   exploreTabName: string;
   tabRoute: string;
   favoritesTabName: string;
-  tab: string;
 }
 
-const NavigationTabs = translate()(React.memo(_NavigationTabs));
+interface Props extends OwnProps, WithTranslation {}
+
+const NavigationTabs = compose<React.FC<OwnProps>>(
+  withTranslation(),
+  React.memo,
+  isAuthenticated
+)(_NavigationTabs);
 export default NavigationTabs;

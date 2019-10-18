@@ -1,13 +1,17 @@
-import { CancelablePromise, CaptchaDetails, PowDetails } from "gv-api-web";
+import {
+  CancelablePromise,
+  CaptchaDetails,
+  GeeTestDetails,
+  PowDetails
+} from "gv-api-web";
 import platformApi from "shared/services/api-client/platform-api";
 
 //@ts-ignore
-import SHAWorker from "./sha.worker.js";
+import SHAWorker from "./sha.worker";
 import { client } from "./signin/signin.service";
 
-const worker = new SHAWorker();
-
 export const calculatePrefix: CalculatePrefixFuncType = props => {
+  const worker = new SHAWorker(); // TODO check
   worker.postMessage([props.difficulty, props.nonce, props.login]);
   const { setCount } = props;
   return new Promise(resolve => {
@@ -41,15 +45,13 @@ export const checkPow: CheckPowFuncType = async props => {
 };
 
 type GetCaptchaFuncType = (login: string) => CancelablePromise<CaptchaDetails>;
-type CalculatePrefixFuncType = (
-  props: {
-    difficulty: number;
-    nonce: string;
-    login: string;
-    setCount: (val: number) => void;
-    total: number;
-  }
-) => Promise<number>;
+type CalculatePrefixFuncType = (props: {
+  difficulty: number;
+  nonce: string;
+  login: string;
+  setCount: (val: number) => void;
+  total: number;
+}) => Promise<number>;
 type CheckPowFuncType = (
   props: PowDetails & {
     setTotal: SetFuncType;

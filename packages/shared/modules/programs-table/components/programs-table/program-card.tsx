@@ -1,13 +1,12 @@
 import { ProgramDetailsOld } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import GVButton from "shared/components/gv-button";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Link from "shared/components/link/link";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -23,6 +22,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import useAnchor from "shared/hooks/anchor.hook";
+import { useTranslation } from "shared/i18n";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
@@ -33,7 +33,7 @@ import {
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
 
-interface Props extends WithTranslation {
+interface Props {
   program: ProgramDetailsOld;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
@@ -42,12 +42,7 @@ interface Props extends WithTranslation {
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
-const _ProgramCard: React.FC<Props> = ({
-  t,
-  program,
-  toggleFavorite,
-  title
-}) => {
+const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleToggleFavorite = useCallback(
     () =>
@@ -57,17 +52,17 @@ const _ProgramCard: React.FC<Props> = ({
       ),
     [program.id, program.personalDetails, toggleFavorite]
   );
+  const { t } = useTranslation();
+  const linkProps = {
+    pathname: composeProgramDetailsUrl(program.url),
+    state: `/ ${title}`
+  };
   const requestCurrency = program.statistic.balance.currency;
   return (
     <div className="table-cards__card">
       <div className="table-cards__row">
         <div className="table-cards__avatar">
-          <Link
-            to={{
-              pathname: composeProgramDetailsUrl(program.url),
-              state: `/ ${title}`
-            }}
-          >
+          <Link to={linkProps}>
             <AssetAvatar
               url={program.logo}
               levelProgress={program.levelProgress}
@@ -83,19 +78,14 @@ const _ProgramCard: React.FC<Props> = ({
         </div>
         <div className="table-cards__main-info">
           <div className="table-cards__title-wrapper">
-            <Link
-              className="table-cards__title"
-              to={{
-                pathname: composeProgramDetailsUrl(program.url),
-                state: `/ ${title}`
-              }}
-            >
+            <Link className="table-cards__title" to={linkProps}>
               {program.title}
             </Link>
             <Link
               className="table-cards__name"
               to={{
-                pathname: composeManagerDetailsUrl(program.manager.url),
+                pathname: "/managers/[id]",
+                as: composeManagerDetailsUrl(program.manager.url),
                 state: `/ ${title}`
               }}
             >
@@ -112,12 +102,7 @@ const _ProgramCard: React.FC<Props> = ({
               onClose={clearAnchor}
             >
               <div className="popover-list">
-                <Link
-                  to={{
-                    pathname: composeProgramDetailsUrl(program.url),
-                    state: `/ ${title}`
-                  }}
-                >
+                <Link to={linkProps}>
                   <GVButton
                     variant="text"
                     color="secondary"
@@ -233,5 +218,5 @@ const _ProgramCard: React.FC<Props> = ({
   );
 };
 
-const ProgramCard = translate()(React.memo(_ProgramCard));
+const ProgramCard = React.memo(_ProgramCard);
 export default ProgramCard;

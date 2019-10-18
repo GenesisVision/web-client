@@ -1,12 +1,12 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import * as React from "react";
+import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
+import Link from "shared/components/link/link";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
@@ -29,7 +29,6 @@ const _ForgotPasswordForm: React.FC<
       <Link to={LOGIN_ROUTE} className="forgot-password__btn-back">
         <GVButton variant="text" color="secondary">
           <>
-            {" "}
             &larr; {t("auth.password-restore.forgot-password.back-button-text")}
           </>
         </GVButton>

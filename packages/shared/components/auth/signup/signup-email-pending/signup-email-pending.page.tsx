@@ -1,11 +1,12 @@
-import "shared/components/auth/signup/signup-email-pending.scss";
+import "./signup-email-pending.scss";
 
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { sendConfirmationLink } from "shared/components/auth/signup/services/signup-email-pending.service";
 import SignupEmailPendingContainer from "shared/components/auth/signup/signup-email-pending/signup-email-pending-container";
 
-const _EmailPending: React.FC<WithTranslation> = ({ t }) => {
+const _EmailPending: React.FC = () => {
+  const [t] = useTranslation();
   return (
     <div className="signup-email">
       <h1>{t("auth.signup.email-confirm-title")}</h1>
@@ -19,5 +20,5 @@ const _EmailPending: React.FC<WithTranslation> = ({ t }) => {
   );
 };
 
-const EmailPending = translate()(React.memo(_EmailPending));
+const EmailPending = React.memo(_EmailPending);
 export default EmailPending;

@@ -15,9 +15,12 @@ const _AssetAvatar: React.FC<Props> = props => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent) => !click && setAnchor(event),
-    [click]
+    [click, setAnchor]
   );
-  const handleMouseLeave = useCallback(() => !click && clearAnchor(), [click]);
+  const handleMouseLeave = useCallback(() => !click && clearAnchor(), [
+    clearAnchor,
+    click
+  ]);
   return (
     <>
       <GVProgramAvatar

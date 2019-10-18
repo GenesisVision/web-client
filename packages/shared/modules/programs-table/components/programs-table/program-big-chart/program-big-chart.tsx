@@ -23,7 +23,7 @@ import ProgramBigChartTooltip from "./program-big-chart-tooltip";
 
 const _ProgramBigChart: React.FC<Props> = ({ programId, data }) => {
   const programChartData = data.map(x => ({
-    date: x.date.getTime(),
+    date: new Date(x.date).getTime(),
     equity: formartChartMinValue(x.value)
   }));
   const programChartDataValues = programChartData.map(x => x.equity);

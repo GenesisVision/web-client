@@ -5,11 +5,11 @@ import { ProgramDetailsOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import GVButton from "shared/components/gv-button";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodEnd from "shared/components/program-period/program-period-end/program-period-end";
@@ -32,6 +32,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -80,9 +81,7 @@ const _DashboardPrograms: React.FC<Props> = ({
       )}
       renderHeader={(column: Column) => (
         <span
-          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
-            column.name
-          }`}
+          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${column.name}`}
         >
           {t(`${role}.dashboard-page.programs-header.${column.name}`)}
         </span>
@@ -97,7 +96,8 @@ const _DashboardPrograms: React.FC<Props> = ({
             <div className="dashboard-programs__cell--avatar-title">
               <Link
                 to={{
-                  pathname: composeProgramDetailsUrl(program.url),
+                  pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
+                  as: composeProgramDetailsUrl(program.url),
                   state: `/ ${title}`
                 }}
               >
@@ -114,7 +114,8 @@ const _DashboardPrograms: React.FC<Props> = ({
               </Link>
               <Link
                 to={{
-                  pathname: composeProgramDetailsUrl(program.url),
+                  pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
+                  as: composeProgramDetailsUrl(program.url),
                   state: `/ ${title}`
                 }}
               >

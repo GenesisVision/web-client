@@ -1,4 +1,3 @@
-import { CancelablePromise } from "gv-api-web";
 import {
   DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
@@ -102,6 +101,4 @@ export type CancelRequestPropsType = {
 
 export type CancelRequestType = (
   props: CancelRequestPropsType
-) => (dispatch: MiddlewareDispatch) => CancelablePromise<void>;
-
-export type GetInRequestsType = () => (dispatch: MiddlewareDispatch) => void;
+) => (dispatch: MiddlewareDispatch) => Promise<void>;

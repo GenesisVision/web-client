@@ -3,7 +3,6 @@ import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-asse
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import {
@@ -11,6 +10,7 @@ import {
   ACTION_STATUS_FILTER_VALUES
 } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
@@ -28,6 +28,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { STATUS } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -66,9 +67,7 @@ const _DashboardCopytrading: React.FC<Props> = ({ title }) => {
       )}
       renderHeader={(column: Column) => (
         <span
-          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
-            column.name
-          }`}
+          className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${column.name}`}
         >
           {t(`investor.dashboard-page.copytrading-header.${column.name}`)}
         </span>
@@ -79,7 +78,8 @@ const _DashboardCopytrading: React.FC<Props> = ({ title }) => {
             <div className="dashboard-programs__cell--avatar-title">
               <Link
                 to={{
-                  pathname: composeProgramDetailsUrl(signal.url),
+                  pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
+                  as: composeProgramDetailsUrl(signal.url),
                   state: `/ ${title}`
                 }}
               >
@@ -93,7 +93,8 @@ const _DashboardCopytrading: React.FC<Props> = ({ title }) => {
               </Link>
               <Link
                 to={{
-                  pathname: composeProgramDetailsUrl(signal.url),
+                  pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
+                  as: composeProgramDetailsUrl(signal.url),
                   state: `/ ${title}`
                 }}
               >

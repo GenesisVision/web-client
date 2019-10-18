@@ -19,13 +19,11 @@ export const addFundNotificationsAction = (
 });
 
 export const fetchFundNotificationsAction = (
-  id: string
+  id: string,
+  auth: string
 ): ApiAction<FundNotificationSettingList> => ({
   type: FETCH_FUND_NOTIFICATIONS,
-  payload: notificationsApi.getNotificationsFundSettings(
-    id,
-    authService.getAuthArg()
-  )
+  payload: notificationsApi.getNotificationsFundSettings(id, auth)
 });
 
 export const addErrorMessageAction = (

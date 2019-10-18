@@ -2,8 +2,10 @@ import {
   FUND_NOTIFICATIONS_ROUTE,
   PROGRAM_NOTIFICATIONS_ROUTE
 } from "shared/components/notifications/notifications.routes";
+import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { ASSET } from "shared/constants/constants";
 import {
+  FUND_DETAILS_FOLDER_ROUTE,
   FUND_DETAILS_ROUTE,
   FUND_SETTINGS,
   FUNDS_FACET_ROUTE,
@@ -14,6 +16,7 @@ import {
   MANAGER_SLUG_URL_PARAM_NAME
 } from "shared/routes/manager.routes";
 import {
+  PROGRAM_DETAILS_FOLDER_ROUTE,
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SETTINGS,
   PROGRAM_SLUG_URL_PARAM_NAME,
@@ -28,6 +31,19 @@ export const composeUrl = (route: string, slugParamName: string) => (
   replaceParams(route, {
     [slugParamName]: slugUrl
   });
+
+export const composeAssetDetailsFolderUrl = (assetType: ASSETS_TYPES): string =>
+  assetType === ASSETS_TYPES.Program
+    ? PROGRAM_DETAILS_FOLDER_ROUTE
+    : FUND_DETAILS_FOLDER_ROUTE;
+
+export const composeAssetDetailsUrl = (
+  assetType: string,
+  slugUrl: string
+): string =>
+  assetType === ASSETS_TYPES.Program
+    ? composeProgramDetailsUrl(slugUrl)
+    : composeFundsDetailsUrl(slugUrl);
 
 export const composeProgramDetailsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {

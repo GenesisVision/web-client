@@ -32,21 +32,18 @@ const _CreateFundSettingsAddAsset: React.FC<Props> = ({
     (e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value),
     []
   );
-  useEffect(
-    () => {
-      setFilteredAssets(
-        !!searchValue
-          ? assets.filter(
-              item =>
-                ~(item.name + item.asset)
-                  .toUpperCase()
-                  .indexOf(searchValue.toUpperCase())
-            )
-          : assets
-      );
-    },
-    [assets, searchValue]
-  );
+  useEffect(() => {
+    setFilteredAssets(
+      !!searchValue
+        ? assets.filter(
+            item =>
+              ~(item.name + item.asset)
+                .toUpperCase()
+                .indexOf(searchValue.toUpperCase())
+          )
+        : assets
+    );
+  }, [assets, searchValue]);
   return (
     <Popover
       horizontal={HORIZONTAL_POPOVER_POS.LEFT}

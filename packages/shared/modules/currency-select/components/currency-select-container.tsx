@@ -1,7 +1,7 @@
 import "./currency-select.scss";
 
 import classNames from "classnames";
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,

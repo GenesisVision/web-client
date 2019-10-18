@@ -7,7 +7,9 @@ import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useTab from "shared/hooks/tab.hook";
 import { CurrencyEnum } from "shared/utils/types";
 
-import ProgramWithdrawAmountForm, { IProgramWithdrawAmountFormValues } from "./program-withdraw-amount-form";
+import ProgramWithdrawAmountForm, {
+  IProgramWithdrawAmountFormValues
+} from "./program-withdraw-amount-form";
 import { ProgramWithdrawConfirm } from "./program-withdraw-confirm-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
 

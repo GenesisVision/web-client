@@ -17,6 +17,9 @@ export const CURRENCY_SLUG = ":currency";
 export const WALLET_CURRENCY_PAGE_ROUTE = `${WALLET_TOTAL_PAGE_ROUTE}/${CURRENCY_SLUG}`;
 export const WALLET_COPYTRADING_CURRENCY_PAGE_ROUTE = `${WALLET_COPYTRADING_PAGE_ROUTE}/${CURRENCY_SLUG}`;
 
+export const WALLET_CURRENCY_FOLDER_ROUTE = `${WALLET_TOTAL_PAGE_ROUTE}/[id]`;
+export const COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE = `${WALLET_COPYTRADING_PAGE_ROUTE}/[id]`;
+
 export const composeWalletCurrencyUrl = composeUrl(
   WALLET_CURRENCY_PAGE_ROUTE,
   CURRENCY_SLUG
@@ -40,12 +43,9 @@ export interface WalletRouteProps extends RouteComponentProps<RouteProps> {}
 const _WalletRoutes: React.FC<DispatchProps> = () => {
   const currency = useSelector(currencySelector);
   const dispatch = useDispatch();
-  useEffect(
-    () => {
-      dispatch(fetchWallets(currency));
-    },
-    [currency]
-  );
+  useEffect(() => {
+    dispatch(fetchWallets(currency));
+  }, [currency]);
   return (
     <Switch>
       <Route

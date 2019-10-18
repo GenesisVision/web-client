@@ -21,7 +21,7 @@ const FundBalanceChart: React.FC<Props> = ({
 }) => {
   const chart = balanceChart.map(x => ({
     ...x,
-    date: x.date.getTime()
+    date: new Date(x.date).getTime()
   }));
   return (
     <ResponsiveContainer>

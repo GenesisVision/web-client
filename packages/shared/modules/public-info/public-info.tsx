@@ -1,3 +1,4 @@
+import Router from "next/router";
 import React, { useCallback } from "react";
 import useErrorMessage from "shared/hooks/error-message.hook";
 import profileApi from "shared/services/api-client/profile-api";
@@ -22,7 +23,7 @@ const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
         .then(cleanErrorMessage)
         .catch(setErrorMessage)
         .finally(() => setSubmitting(false)),
-    []
+    [cleanErrorMessage, onSuccessEdit, setErrorMessage]
   );
   return (
     <PublicInfoForm

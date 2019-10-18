@@ -1,4 +1,4 @@
-import { CancelablePromise, CreateWithdrawalRequestModel } from "gv-api-web";
+import { CreateWithdrawalRequestModel } from "gv-api-web";
 import { fetchWalletTransactions } from "shared/components/wallet/services/wallet.services";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
@@ -10,7 +10,7 @@ export const fetchPaymentInfo = () => {
 
 export const newWithdrawRequest = (data: CreateWithdrawalRequestModel) => (
   dispatch: MiddlewareDispatch
-): CancelablePromise<any> => {
+): Promise<any> => {
   return walletApi
     .createWithdrawalRequest(authService.getAuthArg(), { model: data })
     .then(response => {

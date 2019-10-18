@@ -4,8 +4,8 @@ import { compose } from "redux";
 import SignalProviderControls from "shared/components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 import {
-  WithBlurLoaderProps,
-  withBlurLoader
+  withBlurLoader,
+  WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 
 import InvestmentProgramControls from "./investment-program-controls";

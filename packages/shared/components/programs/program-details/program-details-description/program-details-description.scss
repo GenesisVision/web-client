@@ -348,12 +348,12 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       font-weight: normal;
     }
   }
-}
 
-.program-details-description__short-statistic-hint-tooltip-content {
-  z-index: 2;
-  max-width: 248px;
-  font-size: 12px;
-  line-height: 1.6;
-  color: $text-light-color;
+  &__short-statistic-hint-tooltip-content {
+    z-index: 2;
+    max-width: 248px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: $text-light-color;
+  }
 }
