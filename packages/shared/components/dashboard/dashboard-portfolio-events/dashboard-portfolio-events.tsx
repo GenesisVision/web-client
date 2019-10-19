@@ -50,7 +50,7 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
   const [t] = useTranslation();
   const role = useRole();
   return (
-    <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
+    <>
       <h3>{t(`${role}.dashboard-page.portfolio-events.title`)}</h3>
       <div className="dashboard-portfolio-events__scroll-container">
         <div className="dashboard-portfolio-events__list">
@@ -78,7 +78,7 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
           </>
         </GVButton>
       </Link>
-    </Surface>
+    </>
   );
 };
 
