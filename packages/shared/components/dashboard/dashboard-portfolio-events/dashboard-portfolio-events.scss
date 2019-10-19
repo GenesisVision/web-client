@@ -3,17 +3,6 @@
 @import "~shared/styles/_sizes.scss";
 
 .dashboard-portfolio-events {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-
-  & div {
-    box-sizing: border-box;
-  }
-  @include media-breakpoint-tablet() {
-    min-height: 683px;
-  }
-
   &__list {
     position: absolute;
     top: 0;
