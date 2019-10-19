@@ -41,7 +41,7 @@ const _DashboardAssets: React.FC<Props> = ({
   );
   const { fundsCount, programsCount } = counts;
   return (
-    <Surface className="dashboard-assets">
+    <>
       <div className="dashboard-assets__head">
         <h3>{t(`${role}.dashboard-page.assets.title`)}</h3>
         <div className="dashboard-assets__tabs">
@@ -78,7 +78,7 @@ const _DashboardAssets: React.FC<Props> = ({
           />
         )}
       </div>
-    </Surface>
+    </>
   );
 };
 
