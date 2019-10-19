@@ -24,7 +24,12 @@ const _DashboardPortfolioChartContainer: React.FC<Props> = ({
   const handleChangePeriod = useCallback(
     (period: ChartDefaultPeriod) => {
       service.setPeriod(period);
-      service.getAssetChart(assetChart.id, assetChart.title, assetChart.type);
+      service.getAssetChart(
+        assetChart.id,
+        assetChart.title,
+        assetChart.type,
+        period
+      );
     },
     [service, assetChart]
   );
