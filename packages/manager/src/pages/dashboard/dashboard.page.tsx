@@ -1,7 +1,8 @@
 import "shared/components/dashboard/dashboard.scss";
 
-import * as React from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import DetailsBlock from "shared/components/details/details-block";
 import Page from "shared/components/page/page";
 import useRole from "shared/hooks/use-role.hook";
 
@@ -15,19 +16,17 @@ const _DashboardPage: React.FC = () => {
   const title = t(`${role}.dashboard-page.title`);
   return (
     <Page title={title}>
-      <div className="dashboard">
-        <div className="dashboard__row">
-          <div className="dashboard__chart">
-            <DashboardPortfolioChartSection />
-          </div>
-          <div className="dashboard__portfolio-events-aside">
-            <DashboardPortfolioEventsSection title={title} />
-          </div>
-        </div>
-        <div className="dashboard__assets">
-          <DashboardAssetsContainer title={title} />
-        </div>
+      <div className="dashboard__row">
+        <DetailsBlock className="dashboard__chart-block">
+          <DashboardPortfolioChartSection />
+        </DetailsBlock>
+        <DetailsBlock horizontalPaddings className="dashboard__events-block">
+          <DashboardPortfolioEventsSection title={title} />
+        </DetailsBlock>
       </div>
+      <DetailsBlock>
+        <DashboardAssetsContainer title={title} />
+      </DetailsBlock>
     </Page>
   );
 };
