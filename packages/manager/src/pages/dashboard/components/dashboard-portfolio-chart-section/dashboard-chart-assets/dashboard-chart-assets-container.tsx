@@ -4,7 +4,7 @@ import { ManagerSimpleFund, ManagerSimpleProgram } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
   bindActionCreators,
@@ -19,6 +19,7 @@ import Popover, {
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 import useAnchor, { anchorNullValue } from "shared/hooks/anchor.hook";
+import { AuthRootState } from "shared/utils/types";
 
 import { getAssetChart } from "../../../services/dashboard.service";
 import DashboardChartAsset from "./dashboard-chart-asset";
@@ -29,10 +30,11 @@ const _DashboardChartAssetsContainer: React.FC<Props> = ({
   type,
   service
 }) => {
+  const period = useSelector((state: AuthRootState) => state.dashboard.period);
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleSelectAsset = useCallback(
     (id: string, title: string, type: ASSETS_TYPES) => {
-      service.getAssetChart(id, title, type);
+      service.getAssetChart(id, title, type, period);
       clearAnchor();
     },
     []
