@@ -24,7 +24,9 @@
   }
 
   &__actions {
-    float: right;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   &__chart {
