@@ -36,6 +36,6 @@ export const DEFAULT_PERIOD = getDefaultPeriod();
 
 export type ChartDefaultPeriod = {
   type: ChartPeriodType;
-  start?: Date;
+  start?: Date; // TODO set start/end as required
   end?: Date;
 };

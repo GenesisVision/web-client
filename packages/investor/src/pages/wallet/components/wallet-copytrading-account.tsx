@@ -4,6 +4,7 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
+import DetailsBlock from "shared/components/details/details-block";
 import Page from "shared/components/page/page";
 import WalletBalanceButtons from "shared/components/wallet/components/wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "shared/components/wallet/components/wallet-balance/wallet-balance-elements";
@@ -52,10 +53,12 @@ const _WalletCopytradingAccount: React.FC<Props> = ({ t, account }) => {
           currency={account.currency}
         />
       </div>
-      <CopytradingTablesSection
-        title={t("wallet-copytrading-page.title")}
-        currency={account.currency}
-      />
+      <DetailsBlock>
+        <CopytradingTablesSection
+          title={t("wallet-copytrading-page.title")}
+          currency={account.currency}
+        />
+      </DetailsBlock>
       <TransferPopup
         title={t("wallet-withdraw.title")}
         sourceType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
