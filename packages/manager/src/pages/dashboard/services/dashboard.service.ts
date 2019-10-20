@@ -1,4 +1,6 @@
-import { CancelablePromise, InvestmentEventViewModels } from "gv-api-web";
+import { CancelablePromise, InvestmentEventViewModels,
+  ManagerSimpleFund,
+  ManagerSimpleProgram } from "gv-api-web";
 import { NextPageContext } from "next";
 import { ManagerRootState } from "reducers";
 import { Dispatch } from "redux";
@@ -27,7 +29,7 @@ export const getEvents = (eventLocation: EVENT_LOCATION) => (
 ): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
   fetchEventsAction(filters, eventLocation);
 
-export const getPortfolioEvents = () => (dispatch: Dispatch) =>
+export const getPortfolioEvents = (dispatch: Dispatch) =>
   dispatch(
     actions.fetchPortfolioEventsAction(authService.getAuthArg(), {
       eventLocation: EVENT_LOCATION.Dashboard,
@@ -38,9 +40,9 @@ export const getPortfolioEvents = () => (dispatch: Dispatch) =>
 export const getAssetChart = (
   assetId: string,
   assetTitle: string,
-  assetType: ASSETS_TYPES
-) => (dispatch: Dispatch, getState: TGetAuthState) => {
-  const { period } = getState().dashboard;
+  assetType: ASSETS_TYPES,
+  period: ChartDefaultPeriod
+) => (dispatch: Dispatch) => {
   const chartFilter = {
     dateFrom: period.start,
     dateTo: period.end,
@@ -97,21 +99,6 @@ export const composeAssetChart = (assetType?: ASSETS_TYPES) => async (
 export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
   dispatch(actions.setPeriodAction(period));
 
-export const getAssetsCount = (): Promise<{
-  programsCount: number;
-  fundsCount: number;
-}> => {
-  const authorization = authService.getAuthArg();
-  const filtering = { take: 0 };
-  return Promise.all([
-    managerApi.getManagerPrograms(authorization, filtering),
-    managerApi.getManagerFunds(authorization, filtering)
-  ]).then(([programsData, fundsData]) => ({
-    programsCount: programsData.total,
-    fundsCount: fundsData.total
-  }));
-};
-
 export const getAssetsCounts = () => (
   dispatch: Dispatch,
   getState: () => ManagerRootState
@@ -123,3 +110,5 @@ export const getAssetsCounts = () => (
   );
   dispatch(getDashboardFunds({ ...fundsCountFilters, ...commonFiltering }));
 };
+
+export type TChartAsset = ManagerSimpleProgram | ManagerSimpleFund;

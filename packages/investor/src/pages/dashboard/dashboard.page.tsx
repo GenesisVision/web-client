@@ -1,11 +1,10 @@
 import "shared/components/dashboard/dashboard.scss";
-import "./dashboard.scss";
 
 import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import DetailsBlock from "shared/components/details/details-block";
 import Page from "shared/components/page/page";
-import Surface from "shared/components/surface/surface";
 import useRole from "shared/hooks/use-role.hook";
 
 import DashboardAssetsSection from "./components/dashboard-assets/dashboard-assets-section";
@@ -18,23 +17,23 @@ const DashboardPage: React.FC = () => {
   const title = t(`${role}.dashboard-page.title`);
   return (
     <Page title={title}>
-      <div className="dashboard">
-        <div className="dashboard__row">
-          <div className="dashboard__chart">
-            <Surface className="dashboard-portfolio-chart-section">
-              <DashboardPortfolioChartSectionContainer />
-            </Surface>
-          </div>
-          <div className="dashboard__portfolio-events-aside">
-            <DashboardPortfolioEventsSection title={title} />
-          </div>
-        </div>
-        <div className="dashboard__table-section">
+      <div className="dashboard__row">
+        <DetailsBlock className="dashboard__chart-block">
+          <DashboardPortfolioChartSectionContainer />
+        </DetailsBlock>
+        <DetailsBlock horizontalPaddings className="dashboard__events-block">
+          <DashboardPortfolioEventsSection title={title} />
+        </DetailsBlock>
+      </div>
+      <div>
+        <DetailsBlock>
           <DashboardAssetsSection title={title} />
-        </div>
-        <div className="dashboard__table-section">
+        </DetailsBlock>
+      </div>
+      <div>
+        <DetailsBlock>
           <CopytradingTablesSection title={title} />
-        </div>
+        </DetailsBlock>
       </div>
     </Page>
   );

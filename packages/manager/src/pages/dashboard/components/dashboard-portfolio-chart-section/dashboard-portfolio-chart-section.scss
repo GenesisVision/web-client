@@ -3,23 +3,6 @@
 @import "~shared/styles/_sizes.scss";
 
 .dashboard-portfolio-chart-section {
-  flex: 1;
-  width: 100px;
-
-  & div {
-    box-sizing: border-box;
-  }
-  @include media-breakpoint-landscape-phone() {
-    min-height: 683px;
-  }
-  & .chart-period {
-    padding: 0 $padding-xsmall;
-
-    @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-small;
-    }
-  }
-
   &__tabs {
     @include horizontal-paddings($padding-small);
     @include adaptive-margin(bottom, $padding-xsmall);
@@ -41,27 +24,13 @@
   }
 
   &__actions {
-    float: right;
-  }
-
-  .dashboard-portfolio-chart-stat {
-    padding: 0 $padding-xsmall;
-
-    @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-small;
-    }
-
-    &__statistic-item {
-      margin-top: 15px;
-    }
-    &__adornment {
-      margin-left: 10px;
-    }
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   &__chart {
     height: 380px;
-    width: 100%;
     margin-top: 20px;
     padding: 0 $padding-xsmall;
 
@@ -139,35 +108,6 @@
           letter-spacing: 0.3px;
           color: $text-dark-color;
         }
-      }
-    }
-  }
-  .get-started {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    &__text {
-      text-align: center;
-      font-weight: 400;
-      opacity: 0.4;
-      font-size: $font-size-small-mobile;
-      padding: $padding-xsmall-mobile;
-      @include media-breakpoint-landscape-phone() {
-        font-size: $font-size-small;
-        padding: $padding-xsmall;
-      }
-    }
-    &__deposit {
-      padding: $padding-small-mobile;
-      @include media-breakpoint-landscape-phone() {
-        padding: $padding-small;
-      }
-    }
-    &__programs {
-      font-weight: 600;
-      @include media-breakpoint-landscape-phone() {
       }
     }
   }

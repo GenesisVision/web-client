@@ -10,7 +10,6 @@ import {
 } from "redux";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import Surface from "shared/components/surface/surface";
 import useTab from "shared/hooks/tab.hook";
 
 import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
@@ -41,7 +40,7 @@ const _CopytradingTablesSection: React.FC<Props> = ({
   }, [currency, service]);
   const { openTradesCount, logCount, historyCount } = counts;
   return (
-    <Surface>
+    <>
       <div className="dashboard-assets__head">
         <h3>{t("investor.copytrading-tables.title")}</h3>
         <div className="dashboard-assets__tabs">
@@ -71,7 +70,7 @@ const _CopytradingTablesSection: React.FC<Props> = ({
         <TradesHistoryTable title={title} currency={currency} />
       )}
       {tab === TABS.LOG && <TradesLogTable currency={currency} />}
-    </Surface>
+    </>
   );
 };
 

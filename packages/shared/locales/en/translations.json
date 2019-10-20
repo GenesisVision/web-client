@@ -1,5 +1,6 @@
 {
   "dashboard-page": {
+    "fail-chart": "Error loading chart",
     "portfolio-events": {
       "types": {
         "ProgramBrokerChanged": "Program broker changed",

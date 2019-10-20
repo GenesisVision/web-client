@@ -7,10 +7,10 @@ import {
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
+import { apiErrorSelector,apiSelector } from "shared/utils/selectors";
 import chartPeriodReducer from "shared/reducers/reducer-creators/chart-period.reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import { apiSelector } from "shared/utils/selectors";
-import { AuthRootState } from "shared/utils/types";
+mport { AuthRootState } from "shared/utils/types";
 
 import { DASHBOARD_PORTFOLIO_CHART } from "../actions/dashboard.actions";
 
@@ -27,6 +27,11 @@ export const dashboardPortfolioChartSelector = apiSelector<
   DashboardChartValue,
   AuthRootState
 >(state => state.dashboard.portfolioChart.chartData);
+
+export const dashboardPortfolioChartErrorSelector = apiErrorSelector<
+  DashboardChartValue,
+  AuthRootState
+  >(state => state.dashboard.portfolioChartData.chartData);
 
 const dashboardPortfolioChartReducer = combineReducers({
   period: chartPeriodReducer(DASHBOARD_PORTFOLIO_CHART, getDefaultPeriod()),

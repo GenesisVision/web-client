@@ -1,38 +1,34 @@
 import "./dashboard-chart-assets.scss";
 
 import { ManagerSimpleFund, ManagerSimpleProgram } from "gv-api-web";
-import { useCallback } from "react";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useAnchor, { anchorNullValue } from "shared/hooks/anchor.hook";
+import { AuthRootState } from "shared/utils/types";
 
 import { getAssetChart } from "../../../services/dashboard.service";
 import DashboardChartAsset from "./dashboard-chart-asset";
 
 const _DashboardChartAssetsContainer: React.FC<Props> = ({
-  t,
-  assets,
-  type,
-  service
+  data: assets,
+  type
 }) => {
+  const [t] = useTranslation();
+  const dispatch = useDispatch();
+  const period = useSelector((state: AuthRootState) => state.dashboard.period);
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleSelectAsset = useCallback(
     (id: string, title: string, type: ASSETS_TYPES) => {
-      service.getAssetChart(id, title, type);
+      dispatch(getAssetChart(id, title, type, period));
       clearAnchor();
     },
     []
@@ -69,36 +65,12 @@ const _DashboardChartAssetsContainer: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { getAssetChart },
-    dispatch
-  )
-});
-
-interface Props extends OwnProps, DispatchProps, WithTranslation {}
-
-interface OwnProps {
-  assets: Array<ManagerSimpleProgram | ManagerSimpleFund>;
+interface Props {
+  data: Array<ManagerSimpleProgram | ManagerSimpleFund>;
   type: ASSETS_TYPES;
 }
 
-interface ServiceThunks extends ActionCreatorsMapObject {
-  getAssetChart: typeof getAssetChart;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-const DashboardChartAssetsContainer = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
->(
-  withLoader,
-  translate(),
-  connect(
-    null,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_DashboardChartAssetsContainer);
+const DashboardChartAssetsContainer = withBlurLoader(
+  React.memo(_DashboardChartAssetsContainer)
+);
 export default DashboardChartAssetsContainer;

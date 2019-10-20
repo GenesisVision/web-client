@@ -25,7 +25,6 @@ import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dash
 import dashboardProgramsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.selector";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
 
@@ -56,7 +55,7 @@ const DashboardAssetsSection: React.FC<Props> = ({
     [setTab, tab]
   );
   return (
-    <Surface className="dashboard-assets">
+    <>
       <div className="dashboard-assets__head">
         <h3>{t("investor.dashboard-page.assets.title")}</h3>
         <div className="dashboard-assets__tabs">
@@ -105,7 +104,7 @@ const DashboardAssetsSection: React.FC<Props> = ({
         )}
         {tab === TABS.COPYTRADING && <DashboardCopytrading title={title} />}
       </div>
-    </Surface>
+    </>
   );
 };
 

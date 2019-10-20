@@ -33,7 +33,7 @@ export const cancelRequest: CancelRequestType = ({
     .then(() => {
       dispatch(getInRequests());
       dispatch(fetchProfileHeaderInfoAction());
-      dispatch(getPortfolioEvents());
+      dispatch(getPortfolioEvents);
       dispatch(
         alertMessageActions.success(
           `${ROLE_ENV}.dashboard-page.requests.success-cancel-request`,

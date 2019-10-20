@@ -4,6 +4,12 @@ import { RootState } from "shared/reducers/root-reducer";
 
 export type TSelectorData<T> = T | undefined;
 
+export const apiErrorSelector = <T, U = RootState>(
+  selector: (state: U) => IApiState<T>
+) => {
+  return (state: U): string => selector(state).errorMessage;
+};
+
 export const apiSelector = <T, U = RootState>(
   selector: (state: U) => IApiState<T>
 ) => {
