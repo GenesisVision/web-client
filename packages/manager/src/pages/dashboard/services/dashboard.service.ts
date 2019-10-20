@@ -31,7 +31,7 @@ export const getEvents = (eventLocation: EVENT_LOCATION) => (
 ): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
   fetchEventsAction(filters, eventLocation);
 
-export const getPortfolioEvents = () => (dispatch: Dispatch) =>
+export const getPortfolioEvents = (dispatch: Dispatch) =>
   dispatch(
     actions.fetchPortfolioEventsAction(authService.getAuthArg(), {
       eventLocation: EVENT_LOCATION.Dashboard,
