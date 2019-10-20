@@ -4,13 +4,8 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  DashboardChartAssetsLoader,
-  DashboardChartDescriptionLoader,
-  DashboardChartLoader,
-  DashboardChartRequestLoader
-} from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
+import { inRequestsLoaderData } from "shared/components/dashboard/dashboard.loaders-data";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
@@ -18,6 +13,7 @@ import useTab from "shared/hooks/tab.hook";
 import { isNewUserSelector } from "shared/reducers/header-reducer";
 import { AuthRootState } from "shared/utils/types";
 
+import { DashboardChartValueLoaderData } from "../../dashboard.loaders-data";
 import {
   dashboardAssetsFundsSelector,
   dashboardAssetsProgramsSelector
@@ -55,6 +51,7 @@ const _DashboardPortfolioChartSection: React.FC = () => {
   useEffect(() => {
     dispatch(getAssets);
   }, []);
+
   useEffect(() => {
     switch (true) {
       case !!programs.length:
@@ -74,7 +71,7 @@ const _DashboardPortfolioChartSection: React.FC = () => {
   useEffect(() => {
     chartAsset &&
       dispatch(getAssetChart(chartAsset.id, chartAsset.title, tab, period));
-  }, [chartAsset, period, tab]);
+  }, [chartAsset, period]);
 
   useEffect(() => {
     dispatch(getInRequests(tab));
@@ -97,64 +94,35 @@ const _DashboardPortfolioChartSection: React.FC = () => {
           />
         </GVTabs>
       </div>
-      {tab === ASSETS_TYPES.Program && (
-        <>
-          <div className="dashboard-portfolio-chart-section__actions">
-            <DashboardChartAssetsContainer
-              condition={!!programs.length}
-              loader={<DashboardChartAssetsLoader />}
-              assets={programs}
-              type={ASSETS_TYPES.Program}
-            />
-            <DashboardInRequestsContainer
-              condition={!!inRequests}
-              loader={<DashboardChartRequestLoader />}
-              inRequests={inRequests!}
-              cancelRequest={cancelRequest}
-            />
-          </div>
-          <DashboardPortfolioChartContainer
-            condition={!!assetChart && !!period}
-            loader={
-              <>
-                <DashboardChartDescriptionLoader />
-                <DashboardChartLoader />
-              </>
-            }
-            period={period}
-            assetChart={assetChart!}
+      <div className="dashboard-portfolio-chart-section__actions">
+        <h3 className="dashboard-portfolio-chart-section__heading">
+          {assetChart && assetChart.title}
+        </h3>
+        {tab === ASSETS_TYPES.Program && (
+          <DashboardChartAssetsContainer
+            loaderData={[]}
+            data={programs}
+            type={ASSETS_TYPES.Program}
           />
-        </>
-      )}
-      {tab === ASSETS_TYPES.Fund && (
-        <>
-          <div className="dashboard-portfolio-chart-section__actions">
-            <DashboardChartAssetsContainer
-              condition={!!funds.length}
-              loader={<DashboardChartAssetsLoader />}
-              assets={funds}
-              type={ASSETS_TYPES.Fund}
-            />
-            <DashboardInRequestsContainer
-              condition={!!inRequests}
-              loader={<DashboardChartRequestLoader />}
-              inRequests={inRequests!}
-              cancelRequest={cancelRequest}
-            />
-          </div>
-          <DashboardPortfolioChartContainer
-            condition={!!assetChart && !!period}
-            loader={
-              <>
-                <DashboardChartDescriptionLoader />
-                <DashboardChartLoader />
-              </>
-            }
-            period={period}
-            assetChart={assetChart!}
+        )}
+        {tab === ASSETS_TYPES.Fund && (
+          <DashboardChartAssetsContainer
+            loaderData={[]}
+            data={funds}
+            type={ASSETS_TYPES.Fund}
           />
-        </>
-      )}
+        )}
+      </div>
+      <DashboardInRequestsContainer
+        loaderData={inRequestsLoaderData}
+        data={inRequests!}
+        cancelRequest={cancelRequest}
+      />
+      <DashboardPortfolioChartContainer
+        loaderData={DashboardChartValueLoaderData}
+        period={period}
+        data={assetChart!}
+      />
     </>
   );
 };
