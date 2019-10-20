@@ -84,21 +84,6 @@ export const getAssets = (ctx?: NextPageContext) => async (
   dispatch: Dispatch
 ) => await dispatch(actions.fetchAssetsAction(authService.getAuthArg(ctx)));
 
-export const composeAssetChart = (assetType?: ASSETS_TYPES) => async (
-  dispatch: MiddlewareDispatch,
-  getState: TGetAuthState
-) => {
-  const { programs, funds } = getState().dashboard.assets.data;
-  let asset;
-  if (assetType === ASSETS_TYPES.Program) {
-    asset = programs[0];
-  } else if (assetType === ASSETS_TYPES.Fund) {
-    asset = funds[0];
-  } else return;
-
-  await dispatch(getAssetChart(asset.id, asset.title, assetType));
-};
-
 export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
   dispatch(actions.setPeriodAction(period));
 
