@@ -1,6 +1,9 @@
-import { CancelablePromise, InvestmentEventViewModels,
+import {
+  CancelablePromise,
+  InvestmentEventViewModels,
   ManagerSimpleFund,
-  ManagerSimpleProgram } from "gv-api-web";
+  ManagerSimpleProgram
+} from "gv-api-web";
 import { NextPageContext } from "next";
 import { ManagerRootState } from "reducers";
 import { Dispatch } from "redux";
