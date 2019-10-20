@@ -152,6 +152,8 @@
 }
 
 .dashboard-portfolio-chart-stat {
+  display: flex;
+  flex-direction: column;
   padding: 0 $padding-xsmall;
 
   @include media-breakpoint-landscape-phone() {
@@ -160,6 +162,11 @@
   & > div {
     display: inline-flex;
     margin-right: 40px;
+  }
+  &__block {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
   &__statistic-item {
     margin-top: 15px;
