@@ -18,7 +18,10 @@ import Popover, {
 } from "shared/components/popover/popover";
 import RequestLine from "shared/components/request-line/request-line";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "shared/decorators/with-blur-loader";
 import useAnchor from "shared/hooks/anchor.hook";
 import useRole from "shared/hooks/use-role.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -27,7 +30,7 @@ import { AuthRootState } from "shared/utils/types";
 import { CancelRequestType } from "../../dashboard.constants";
 
 const _DashboardInRequestsContainer: React.FC<Props> = ({
-  inRequests,
+  data: inRequests,
   service
 }) => {
   const [t] = useTranslation();
@@ -88,7 +91,7 @@ interface Props extends OwnProps, DispatchProps {}
 
 interface OwnProps {
   cancelRequest: CancelRequestType;
-  inRequests: ProgramRequests;
+  data: ProgramRequests;
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {
@@ -99,9 +102,9 @@ interface DispatchProps {
 }
 
 const DashboardInRequestsContainer = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
+  React.ComponentType<OwnProps & WithBlurLoaderProps<ProgramRequests>>
 >(
-  withLoader,
+  withBlurLoader,
   connect<null, DispatchProps, OwnProps, AuthRootState>(
     null,
     mapDispatchToProps
