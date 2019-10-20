@@ -24,9 +24,9 @@ import {
   getInRequests
 } from "../../services/dashboard-in-requests.service";
 import {
+  TChartAsset,
   getAssetChart,
-  getAssets,
-  TChartAsset
+  getAssets
 } from "../../services/dashboard.service";
 import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-chart-assets-container";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
