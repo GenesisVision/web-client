@@ -4,10 +4,7 @@ import { useTranslation } from "react-i18next";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-import {
-  referralFriendsTableSelector,
-  referralHistoryTableSelector
-} from "shared/reducers/profile-reducer";
+import { referralHistoryTableSelector } from "shared/reducers/profile-reducer";
 import { formatDate } from "shared/utils/dates";
 
 import { getHistoryTable } from "./services/referral-program-services";
