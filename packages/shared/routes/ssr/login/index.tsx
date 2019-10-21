@@ -4,11 +4,11 @@ import LoginFooter from "shared/components/auth/components/login-footer/login-fo
 import LoginPage from "shared/components/auth/signin/login/login.page";
 import useHistoryContext from "shared/decorators/history-provider/use-history-context";
 import withAuthLayout from "shared/decorators/with-auth-layout";
-import { HOME_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
+import { ROLE_HOME_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 
 const Page: NextPage = () => {
   const { from } = useHistoryContext();
-  return <LoginPage redirectFrom={from || HOME_ROUTE} />;
+  return <LoginPage redirectFrom={from || ROLE_HOME_ROUTE} />;
 };
 
 export const Login = withAuthLayout({
