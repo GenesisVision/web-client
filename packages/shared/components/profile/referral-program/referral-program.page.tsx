@@ -8,6 +8,7 @@ import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import ProfileLayout from "shared/components/profile/profile-layout";
 import { REFERRAL_PROGRAM } from "shared/components/profile/profile.constants";
+import SettingsBlock from "shared/components/settings-block/settings-block";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import Copy from "shared/decorators/with-copy";
 import { CurrencyEnum } from "shared/utils/types";
@@ -43,32 +44,34 @@ const _ReferralProgramPage: React.FC = () => {
 const InviteBlock: React.FC<{ link: string }> = React.memo(({ link }) => {
   const [t] = useTranslation();
   return (
-    <DetailsBlock horizontalPaddings>
-      <h4>{t("profile-page.referral-program.title")}</h4>
-      <div className="referral-program__link-block">
-        {t("profile-page.referral-program.referral-link")}
-        <div className="referral-program__link">{link}</div>
-        <Copy>
-          {({ copy }) => (
-            <GVButton
-              color="secondary"
-              onClick={() => copy(link)}
-              variant="text"
-            >
-              <>
-                <CopyIcon primary />
-                &nbsp;
-                {t("buttons.copy")}
-              </>
-            </GVButton>
-          )}
-        </Copy>
+    <SettingsBlock>
+      <div>
+        <h4>{t("profile-page.referral-program.title")}</h4>
+        <div className="referral-program__link-block">
+          {t("profile-page.referral-program.referral-link")}
+          <div className="referral-program__link">{link}</div>
+          <Copy>
+            {({ copy }) => (
+              <GVButton
+                color="secondary"
+                onClick={() => copy(link)}
+                variant="text"
+              >
+                <>
+                  <CopyIcon primary />
+                  &nbsp;
+                  {t("buttons.copy")}
+                </>
+              </GVButton>
+            )}
+          </Copy>
+        </div>
+        <div className="referral-program__share-block">
+          {t("profile-page.referral-program.share-your-passion")}
+          <SocialLinksBlock socialLinks={SocialLinksMocks} />
+        </div>
       </div>
-      <div className="referral-program__share-block">
-        {t("profile-page.referral-program.share-your-passion")}
-        <SocialLinksBlock socialLinks={SocialLinksMocks} />
-      </div>
-    </DetailsBlock>
+    </SettingsBlock>
   );
 });
 
@@ -79,7 +82,7 @@ const ReferralRewardsBlock: React.FC<{
 }> = React.memo(({ referralFriends, totalRewards, currency }) => {
   const [t] = useTranslation();
   return (
-    <DetailsBlock horizontalPaddings>
+    <SettingsBlock>
       <table className="referral-program__rewards-table">
         <thead>
           <tr>
@@ -96,7 +99,7 @@ const ReferralRewardsBlock: React.FC<{
           </tr>
         </tbody>
       </table>
-    </DetailsBlock>
+    </SettingsBlock>
   );
 });
 
