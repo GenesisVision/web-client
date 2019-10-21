@@ -13,6 +13,9 @@ import SocialLinksBlock from "shared/components/social-links-block/social-links-
 import Copy from "shared/decorators/with-copy";
 import { CurrencyEnum } from "shared/utils/types";
 
+import { ReferralFriendsTable } from "./referral-friends-table";
+import { ReferralHistoryTable } from "./referral-history-table";
+
 const SocialLinksMock = {
   url: "",
   logo: "",
@@ -25,6 +28,7 @@ const SocialLinksMocks = Array(5)
   .map(() => SocialLinksMock);
 
 const _ReferralProgramPage: React.FC = () => {
+  const [t] = useTranslation();
   return (
     <ProfileLayout route={REFERRAL_PROGRAM}>
       <div className="asset-settings referral-program referral-program__blocks profile__container--padding-top">
@@ -35,6 +39,16 @@ const _ReferralProgramPage: React.FC = () => {
           referralFriends2lvl={17}
           totalRewards={15}
         />
+      </div>
+      <div>
+        <DetailsBlock>
+          <h3>{t("profile-page.referral-program.referral-friends.title")}</h3>
+          <ReferralFriendsTable />
+        </DetailsBlock>
+        <DetailsBlock>
+          <h3>{t("profile-page.referral-program.referral-history.title")}</h3>
+          <ReferralHistoryTable />
+        </DetailsBlock>
       </div>
     </ProfileLayout>
   );
