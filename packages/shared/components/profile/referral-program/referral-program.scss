@@ -3,12 +3,16 @@
 @import "~shared/styles/_sizes.scss";
 
 .referral-program {
+  &__title,&__link-block  {
+    @include adaptive-padding(bottom,$padding-xsmall);
+  }
   &__link-block {
     display: flex;
     align-items: center;
   }
   &__link {
     @include horizontal-paddings($padding-xxsmall);
+    color: $primary-color;
   }
   &__rewards-table {
     & td,

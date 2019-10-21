@@ -27,15 +27,13 @@ const SocialLinksMocks = Array(5)
 const _ReferralProgramPage: React.FC = () => {
   return (
     <ProfileLayout route={REFERRAL_PROGRAM}>
-      <div className="referral-program profile__container--padding-top">
-        <div className="referral-program__blocks">
-          <InviteBlock link={"http://dddd.r"} />
-          <ReferralRewardsBlock
-            currency={"GVT"}
-            referralFriends={3}
-            totalRewards={15}
-          />
-        </div>
+      <div className="asset-settings referral-program referral-program__blocks profile__container--padding-top">
+        <InviteBlock link={"http://dddd.r"} />
+        <ReferralRewardsBlock
+          currency={"GVT"}
+          referralFriends={3}
+          totalRewards={15}
+        />
       </div>
     </ProfileLayout>
   );
@@ -46,7 +44,9 @@ const InviteBlock: React.FC<{ link: string }> = React.memo(({ link }) => {
   return (
     <SettingsBlock>
       <div>
-        <h4>{t("profile-page.referral-program.title")}</h4>
+        <div className="referral-program__title">
+          <h4>{t("profile-page.referral-program.title")}</h4>
+        </div>
         <div className="referral-program__link-block">
           {t("profile-page.referral-program.referral-link")}
           <div className="referral-program__link">{link}</div>
