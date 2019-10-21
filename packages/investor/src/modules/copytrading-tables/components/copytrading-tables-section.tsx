@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
 import { InvestorRootState } from "reducers";
 import {
   Action,
@@ -28,17 +28,24 @@ import TradesLogTable from "./trades-log-table";
 
 const _CopytradingTablesSection: React.FC<Props> = ({
   title,
-  counts,
   service,
   currency
 }) => {
+  const dispatch = useDispatch();
+  const openTradesCount = useSelector(dashboardOpenTradesTableSelector)
+    .itemsData.data.total;
+  const logCount = useSelector(dashboardTradesLogTableSelector).itemsData.data
+    .total;
+  const historyCount = useSelector(dashboardTradesHistoryTableSelector)
+    .itemsData.data.total;
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_TRADES);
   useEffect(() => {
     service.getCopytradingTradesCount(currency);
-    return service.clearCopytradingTable;
+    return () => {
+      dispatch(clearCopytradingTable());
+    };
   }, [currency, service]);
-  const { openTradesCount, logCount, historyCount } = counts;
   return (
     <>
       <div className="dashboard-assets__head">
@@ -74,31 +81,17 @@ const _CopytradingTablesSection: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: InvestorRootState) => {
-  const counts = {
-    openTradesCount: dashboardOpenTradesTableSelector(state).itemsData.data
-      .total,
-    logCount: dashboardTradesLogTableSelector(state).itemsData.data.total,
-    historyCount: dashboardTradesHistoryTableSelector(state).itemsData.data
-      .total
-  };
-  return { counts };
-};
-
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      getCopytradingTradesCount,
-      clearCopytradingTable: () => {
-        dispatch(clearCopytradingTable());
-      }
+      getCopytradingTradesCount
     },
     dispatch
   )
 });
 
 const CopytradingTablesSection = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(_CopytradingTablesSection);
 
@@ -110,20 +103,15 @@ enum TABS {
   HISTORY = "HISTORY"
 }
 
-interface StateProps {
-  counts: ICopytradingTradesCounts;
-}
-
 interface ServiceThunks extends ActionCreatorsMapObject {
   getCopytradingTradesCount: typeof getCopytradingTradesCount;
-  clearCopytradingTable: () => void;
 }
 
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends StateProps, DispatchProps {
+interface Props extends DispatchProps {
   title: string;
   currency?: string;
 }
