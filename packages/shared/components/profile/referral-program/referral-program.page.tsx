@@ -1,15 +1,27 @@
 import "./referral-program.scss";
 
+import { SocialLinkViewModelTypeEnum } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import DetailsBlock from "shared/components/details/details-block";
+import GVButton from "shared/components/gv-button";
+import CopyIcon from "shared/components/icon/copy-icon";
 import ProfileLayout from "shared/components/profile/profile-layout";
 import { REFERRAL_PROGRAM } from "shared/components/profile/profile.constants";
-import DetailsBlock from "shared/components/details/details-block";
-import CopyIcon from "shared/components/icon/copy-icon";
-import GVButton from "shared/components/gv-button";
-import Copy from "shared/decorators/with-copy";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
+import Copy from "shared/decorators/with-copy";
 import { CurrencyEnum } from "shared/utils/types";
+
+const SocialLinksMock = {
+  url: "",
+  logo: "",
+  name: "",
+  value: "",
+  type: "Undefined" as SocialLinkViewModelTypeEnum
+};
+const SocialLinksMocks = Array(5)
+  .fill("")
+  .map(() => SocialLinksMock);
 
 const _ReferralProgramPage: React.FC = () => {
   return (
@@ -54,7 +66,7 @@ const InviteBlock: React.FC<{ link: string }> = React.memo(({ link }) => {
       </div>
       <div className="referral-program__share-block">
         {t("profile-page.referral-program.share-your-passion")}
-        <SocialLinksBlock socialLinks={[]} />
+        <SocialLinksBlock socialLinks={SocialLinksMocks} />
       </div>
     </DetailsBlock>
   );
