@@ -1,13 +1,13 @@
 import "./sidebar.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import { NextComponentType } from "next";
 import Router from "next/router";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import Modal, { BodyFix } from "shared/components/modal/modal";
 
-const Sidebar: NextComponentType<{}, {}, Props> = ({
+const _Sidebar: NextComponentType<{}, {}, Props> = ({
   open,
   onClose,
   position = SIDEBAR_POSITION.LEFT,
@@ -18,7 +18,6 @@ const Sidebar: NextComponentType<{}, {}, Props> = ({
       onClose();
     }
   }, [onClose, open]);
-
   useEffect(() => {
     Router.events.on("routeChangeStart", handleRouteChange);
     return () => Router.events.off("routeChangeStart", handleRouteChange);
@@ -27,13 +26,14 @@ const Sidebar: NextComponentType<{}, {}, Props> = ({
   return (
     <Modal open={open} onClose={onClose}>
       <BodyFix />
-      <div className={classnames("sidebar", `sidebar--${position}`)}>
+      <div className={classNames("sidebar", `sidebar--${position}`)}>
         {children}
       </div>
     </Modal>
   );
 };
 
+const Sidebar = React.memo(_Sidebar);
 export default Sidebar;
 
 export enum SIDEBAR_POSITION {
@@ -41,8 +41,8 @@ export enum SIDEBAR_POSITION {
   RIGHT = "right"
 }
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
-  onClose?(event?: React.MouseEvent<HTMLElement>): void;
+  onClose?: (event?: React.MouseEvent<HTMLElement>) => void;
   position?: SIDEBAR_POSITION;
 }
