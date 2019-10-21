@@ -31,7 +31,8 @@ const _ReferralProgramPage: React.FC = () => {
         <InviteBlock link={"http://dddd.r"} />
         <ReferralRewardsBlock
           currency={"GVT"}
-          referralFriends={3}
+          referralFriends1lvl={3}
+          referralFriends2lvl={17}
           totalRewards={15}
         />
       </div>
@@ -77,31 +78,40 @@ const InviteBlock: React.FC<{ link: string }> = React.memo(({ link }) => {
 
 const ReferralRewardsBlock: React.FC<{
   currency: CurrencyEnum;
-  referralFriends: number;
+  referralFriends1lvl: number;
+  referralFriends2lvl: number;
   totalRewards: number;
-}> = React.memo(({ referralFriends, totalRewards, currency }) => {
-  const [t] = useTranslation();
-  return (
-    <SettingsBlock>
-      <table className="referral-program__rewards-table">
-        <thead>
-          <tr>
-            <th>{t("profile-page.referral-program.referral-friends")}</th>
-            <th>{t("profile-page.referral-program.total-rewards")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{referralFriends}</td>
-            <td>
-              {totalRewards} {currency}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </SettingsBlock>
-  );
-});
+}> = React.memo(
+  ({ referralFriends1lvl, referralFriends2lvl, totalRewards, currency }) => {
+    const [t] = useTranslation();
+    return (
+      <SettingsBlock>
+        <table className="referral-program__rewards-table">
+          <thead>
+            <tr>
+              <th>
+                {t("profile-page.referral-program.referral-friends-1lvl")}
+              </th>
+              <th>
+                {t("profile-page.referral-program.referral-friends-2lvl")}
+              </th>
+              <th>{t("profile-page.referral-program.total-rewards")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{referralFriends1lvl}</td>
+              <td>{referralFriends2lvl}</td>
+              <td>
+                {totalRewards} {currency}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </SettingsBlock>
+    );
+  }
+);
 
 const ReferralProgramPage = React.memo(_ReferralProgramPage);
 export default ReferralProgramPage;
