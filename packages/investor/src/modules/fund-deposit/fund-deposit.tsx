@@ -5,7 +5,7 @@ import {
   getFundInfoCreator
 } from "shared/components/deposit/services/fund-deposit.service";
 import { IDialogProps } from "shared/components/dialog/dialog";
-import { ASSET } from "shared/constants/constants";
+import { ASSET, FUND_CURRENCY } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
 import investorApi from "shared/services/api-client/investor-api";
 
@@ -16,14 +16,10 @@ const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   onClose
 }) => (
   <DepositContainer
-    currency={"GVT"}
+    currency={FUND_CURRENCY}
     asset={ASSET.FUND}
-    assetInvest={fundInvestCreator(
-      investorApi.v10InvestorFundsByIdInvestByAmountPost
-    )}
-    fetchInfo={getFundInfoCreator(
-      investorApi.v10InvestorFundsByIdInvestInfoByCurrencyGet
-    )}
+    assetInvest={fundInvestCreator(investorApi.investIntoFund)}
+    fetchInfo={getFundInfoCreator(investorApi.getFundInvestInfo)}
     id={id}
     hasEntryFee
     onApply={onApply}

@@ -1,5 +1,6 @@
 {
   "dashboard-page": {
+    "fail-chart": "Error loading chart",
     "portfolio-events": {
       "types": {
         "ProgramBrokerChanged": "Program broker changed",
@@ -679,6 +680,7 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "currency": "Program currency",
       "broker": "Broker",
       "leverage": "Leverage",
       "period": "Period",
@@ -807,6 +809,8 @@
         "date": "Date"
       },
       "open-positions": {
+        "delay": "delay",
+        "delay-tooltip": "This manager makes trades and open positions public with a {{delay}} delay.",
         "date": "Date Open",
         "symbol": "Symbol",
         "direction": "Dir",
@@ -1638,6 +1642,11 @@
       }
     },
     "program-settings": {
+      "trades-update": {
+        "title": "Trades and open positions delay",
+        "text": "Managers have the ability to delay the public display of their trades and open positions to protect their strategy.",
+        "select": "Trades delay"
+      },
       "two-factor-confirm": {
         "title": "Two-factor authorization (2fa)",
         "text": "You must confirm your 2fa code to access the Huobi native platform."
@@ -1829,6 +1838,9 @@
         }
       }
     },
+    "create-asset-page": {
+      "go-back": "Go back"
+    },
     "create-program-page": {
       "title": "Create Program",
       "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
@@ -1887,6 +1899,7 @@
           "available-in-wallet": "Available in wallet"
         },
         "hints": {
+          "trades-delay": "Description about Trades delay is here",
           "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
           "entry-fee": "Description about entry fee is here",
           "entry-fee-description": "A fee charged upon each investment in the program.",
@@ -1943,7 +1956,7 @@
       "title": "Create Fund",
       "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
       "notifications": {
-        "create-success": "Program was successfully created.",
+        "create-success": "Fund was successfully created.",
         "validate-error": "Please fix all the errors on the screen before proceeding"
       },
       "tabs": {

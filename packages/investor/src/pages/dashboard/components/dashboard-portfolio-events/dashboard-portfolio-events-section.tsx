@@ -21,9 +21,7 @@ const _DashboardPortfolioEventsSection: React.FC<Props> = ({ title }) => {
   );
 };
 
-interface Props extends OwnProps {}
-
-interface OwnProps {
+interface Props {
   title: string;
 }
 

@@ -2,12 +2,12 @@ import "./back-button.scss";
 
 import { goBack, push } from "connected-react-router";
 import * as React from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { RootState } from "shared/reducers/root-reducer";
 

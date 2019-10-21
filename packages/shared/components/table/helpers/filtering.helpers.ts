@@ -29,6 +29,7 @@ export const composeFilters = (
   filtering: FilteringType
 ): ComposeFiltersTypeFlat => {
   if (!allFilters) return {};
+  // @ts-ignore
   return allFilters.reduce((accum: ComposeFiltersType, cur) => {
     const { name = "", type, composeRequestValue } = cur;
     const processedFilterValue = processFilterValue({

@@ -22,7 +22,7 @@ export const cancelInvestorProgramRequestAction: ICancelRequest = (
   auth
 ) => ({
   type: CANCEL_INVESTOR_PROGRAM_REQUESTS,
-  payload: investorApi.v10InvestorProgramsRequestsByIdCancelPost(id, auth)
+  payload: investorApi.cancelRequest(id, auth)
 });
 
 export const cancelManagerProgramRequestAction: ICancelRequest = (
@@ -30,14 +30,14 @@ export const cancelManagerProgramRequestAction: ICancelRequest = (
   auth
 ) => ({
   type: CANCEL_MANAGER_PROGRAM_REQUESTS,
-  payload: managerApi.v10ManagerProgramsRequestsByIdCancelPost(id, auth)
+  payload: managerApi.cancelRequest(id, auth)
 });
 
 export const fetchInRequestsInvestorAction: IFetchInRequests<
   ProgramRequests
 > = (auth, skip, take) => ({
   type: DASHBOARD_IN_REQUESTS,
-  payload: investorApi.v10InvestorRequestsBySkipByTakeGet(skip, take, auth)
+  payload: investorApi.getRequests(skip, take, auth)
 });
 
 export const fetchInRequestsManagerAction: IFetchInRequests<ProgramRequests> = (
@@ -46,5 +46,5 @@ export const fetchInRequestsManagerAction: IFetchInRequests<ProgramRequests> = (
   take
 ) => ({
   type: DASHBOARD_IN_REQUESTS,
-  payload: managerApi.v10ManagerRequestsBySkipByTakeGet(skip, take, auth)
+  payload: managerApi.getRequests(skip, take, auth)
 });

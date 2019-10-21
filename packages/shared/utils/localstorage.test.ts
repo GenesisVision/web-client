@@ -1,6 +1,7 @@
 import { loadData, saveData } from "./localstorage";
 
 require("jasmine-check").install();
+
 declare const check: any;
 declare const gen: any;
 

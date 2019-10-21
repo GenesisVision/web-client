@@ -2,7 +2,7 @@ import * as React from "react";
 import { NavLink } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
 
-interface INavigationButtonProps {
+interface INavigationButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: JSX.Element;
   title?: string;
   onClick(): void;
@@ -23,7 +23,7 @@ const _NavigationButton: React.FC<INavigationButtonProps> = ({
 );
 export const NavigationButton = React.memo(_NavigationButton);
 
-interface INavigationItemProps {
+interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   href: string | { pathname: string; state: string };
   icon: JSX.Element;
   title?: string;

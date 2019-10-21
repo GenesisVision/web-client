@@ -5,8 +5,7 @@ import AuthLayout from "shared/components/auth/components/auth-layout/auth-layou
 import SignUpFooter from "shared/components/auth/components/signup-footer/signup-footer";
 import EmailPending from "shared/components/auth/signup/signup-email-pending/signup-email-pending.page";
 import SignUpPage from "shared/components/auth/signup/signup.page";
-import { LOGIN_ROUTE } from "shared/routes/app.routes";
-import { SIGNUP_ROUTE } from "shared/routes/app.routes";
+import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 
 export const SIGNUP_ROUTE_PENDING = `${SIGNUP_ROUTE}/pending`;
 

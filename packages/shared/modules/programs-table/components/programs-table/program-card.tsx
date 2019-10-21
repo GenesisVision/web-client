@@ -1,5 +1,4 @@
-import { ProgramDetails } from "gv-api-web";
-import moment from "moment";
+import { ProgramDetailsOld } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -23,20 +22,19 @@ import ProgramSimpleChart from "shared/components/program-simple-chart/program-s
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
-import Tooltip from "shared/components/tooltip/tooltip";
 import useAnchor from "shared/hooks/anchor.hook";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
+import { distanceDate } from "shared/utils/dates";
 import {
-  formatCurrencyValue,
   formatValue,
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
 
 interface Props extends WithTranslation {
-  program: ProgramDetails;
+  program: ProgramDetailsOld;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
@@ -59,6 +57,7 @@ const _ProgramCard: React.FC<Props> = ({
       ),
     [program.id, program.personalDetails, toggleFavorite]
   );
+  const requestCurrency = program.statistic.balance.currency;
   return (
     <div className="table-cards__card">
       <div className="table-cards__row">
@@ -77,10 +76,7 @@ const _ProgramCard: React.FC<Props> = ({
               color={program.color}
               size="medium"
               tooltip={
-                <LevelTooltip
-                  level={program.level}
-                  canLevelUp={program.rating.canLevelUp}
-                />
+                <LevelTooltip level={program.level} canLevelUp={false} />
               }
             />
           </Link>
@@ -181,28 +177,15 @@ const _ProgramCard: React.FC<Props> = ({
       <div className="table-cards__table">
         <div className="table-cards__table-column">
           <StatisticItem label={t("programs-page.programs-header.equity")}>
-            <Tooltip
-              vertical={VERTICAL_POPOVER_POS.TOP}
-              render={() => (
-                <div>
-                  {formatCurrencyValue(
-                    program.statistic.balanceGVT.amount,
-                    "GVT"
-                  )}{" "}
-                  {"GVT"}
-                </div>
+            <NumberFormat
+              value={formatValueDifferentDecimalScale(
+                program.statistic.balance.amount,
+                DECIMAL_SCALE_SMALL_VALUE,
+                DECIMAL_SCALE_BIG_VALUE
               )}
-            >
-              <NumberFormat
-                value={formatValueDifferentDecimalScale(
-                  program.statistic.balanceBase.amount,
-                  DECIMAL_SCALE_SMALL_VALUE,
-                  DECIMAL_SCALE_BIG_VALUE
-                )}
-                suffix={` ${program.currency}`}
-                displayType="text"
-              />
-            </Tooltip>
+              suffix={` ${requestCurrency}`}
+              displayType="text"
+            />
           </StatisticItem>
           <StatisticItem label={t("programs-page.programs-header.period")}>
             <ProgramPeriodPie
@@ -220,7 +203,7 @@ const _ProgramCard: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem label={t("programs-page.programs-header.age")}>
-            {moment(program.creationDate).fromNow(true)}
+            {distanceDate(program.creationDate)}
           </StatisticItem>
         </div>
         <div className="table-cards__table-column">
@@ -229,12 +212,12 @@ const _ProgramCard: React.FC<Props> = ({
           >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
-                program.availableInvestmentBase,
+                program.availableInvestmentInCurrency,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}
               displayType="text"
-              suffix={` ${program.currency}`}
+              suffix={` ${requestCurrency}`}
             />
           </StatisticItem>
           <StatisticItem label={t("programs-page.programs-header.drawdown")}>

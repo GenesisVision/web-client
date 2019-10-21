@@ -1,6 +1,5 @@
 import classNames from "classnames";
-import { ProgramDetails } from "gv-api-web";
-import moment from "moment";
+import { ProgramDetailsOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -15,11 +14,11 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
-import Tooltip from "shared/components/tooltip/tooltip";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
+import { localizedDate } from "shared/utils/dates";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
@@ -32,11 +31,12 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
   onCollapseClick
 }) => {
   const { t } = useTranslation();
+  const requestCurrency = program.statistic.balance.currency;
   return (
     <TableRow>
       <td
         className={classNames("program-detailed", {
-          "program-detailed--pretender": program.rating.canLevelUp
+          "program-detailed--pretender": false
         })}
         colSpan={11}
       >
@@ -58,10 +58,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     size="medium"
                     color={program.color}
                     tooltip={
-                      <LevelTooltip
-                        level={program.level}
-                        canLevelUp={program.rating.canLevelUp}
-                      />
+                      <LevelTooltip level={program.level} canLevelUp={false} />
                     }
                   />
                 </Link>
@@ -115,26 +112,14 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.equity")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    <Tooltip
-                      render={() => (
-                        <div>
-                          {formatCurrencyValue(
-                            program.statistic.balanceGVT.amount,
-                            "GVT"
-                          )}{" "}
-                          {"GVT"}
-                        </div>
+                    <NumberFormat
+                      value={formatCurrencyValue(
+                        program.statistic.balance.amount,
+                        requestCurrency
                       )}
-                    >
-                      <NumberFormat
-                        value={formatCurrencyValue(
-                          program.statistic.balanceBase.amount,
-                          program.currency
-                        )}
-                        suffix={` ${program.currency}`}
-                        displayType="text"
-                      />
-                    </Tooltip>
+                      suffix={` ${requestCurrency}`}
+                      displayType="text"
+                    />
                   </div>
                 </div>
                 <div>
@@ -159,9 +144,9 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     {`${formatCurrencyValue(
-                      program.availableInvestmentBase,
-                      program.currency
-                    )} ${program.currency}`}
+                      program.availableInvestmentInCurrency,
+                      requestCurrency
+                    )} ${requestCurrency}`}
                   </div>
                 </div>
                 <div>
@@ -180,7 +165,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.age")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    {moment(program.creationDate).format("ll")}
+                    {localizedDate(program.creationDate)}
                   </div>
                 </div>
                 <div>
@@ -252,7 +237,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
 
 interface Props {
   title: string;
-  program: ProgramDetails;
+  program: ProgramDetailsOld;
   isAuthenticated?: boolean;
   toggleFavorite: TableToggleFavoriteHandlerType;
   onCollapseClick(): void;

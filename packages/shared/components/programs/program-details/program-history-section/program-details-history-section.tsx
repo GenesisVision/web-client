@@ -54,12 +54,9 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
     .itemsData.data.total;
   const tradesCount = useSelector(tradesTableSelector).itemsData.data.total;
 
-  useEffect(
-    () => {
-      dispatch(getProgramHistoryCounts(programId));
-    },
-    [dispatch, programId]
-  );
+  useEffect(() => {
+    programId && dispatch(getProgramHistoryCounts(programId));
+  }, [dispatch, programId]);
 
   const isManager = role === ROLE.MANAGER;
   return (

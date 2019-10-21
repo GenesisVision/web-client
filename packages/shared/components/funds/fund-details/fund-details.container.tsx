@@ -7,8 +7,10 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
-import withBlurLoader from "shared/decorators/with-blur-loader";
-import { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "shared/decorators/with-blur-loader";
 import { fundEventsSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -21,7 +23,7 @@ import { dispatchFundDescription } from "./services/fund-details.service";
 
 const _FundDetailsContainer: React.FC<Props> = ({
   descriptionSection,
-  description
+  data: description
 }) => (
   <Page title={description.title}>
     <FundDetailsDescriptionSection
@@ -30,7 +32,13 @@ const _FundDetailsContainer: React.FC<Props> = ({
     />
     <div className="details__divider" />
     <DetailsInvestment
-      fees={{ exitFee: description.exitFee, entryFee: description.entryFee }}
+      fees={{
+        exitFee: description.exitFee,
+        entryFee: description.entryFee,
+        exitFeePersonal: description.personalFundDetails
+          ? description.personalFundDetails.exitFeePersonal
+          : 0
+      }}
       dispatchDescription={dispatchFundDescription}
       eventTypesSelector={fundEventsSelector}
       asset={ASSET.FUND}
@@ -47,11 +55,11 @@ const _FundDetailsContainer: React.FC<Props> = ({
 
 interface Props {
   descriptionSection: IDescriptionSection;
-  description: FundDetailsFull;
+  data: FundDetailsFull;
 }
 
 const FundDetailsContainer = compose<
-  React.ComponentType<Props & WithLoaderProps>
+  React.ComponentType<Props & WithBlurLoaderProps<FundDetailsFull>>
 >(
   withBlurLoader,
   React.memo

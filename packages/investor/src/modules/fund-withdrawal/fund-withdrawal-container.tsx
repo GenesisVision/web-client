@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { InvestorRootState } from "reducers";
 import { bindActionCreators } from "redux";
-import FundWithdrawDialog from "shared/components/fund-withdraw/fund-withdraw-dialog";
+import { FundWithdrawDialog } from "shared/components/fund-withdraw/fund-withdraw-dialog";
 import {
   FundWithdraw,
   FundWithdrawalInfoResponse

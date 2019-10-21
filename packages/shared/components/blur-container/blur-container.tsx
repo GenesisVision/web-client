@@ -1,13 +1,12 @@
 import "./blur-container.scss";
 
+import classNames from "classnames";
 import React from "react";
 
-const _BlurContainer: React.FC<Props> = ({ children, blur, show }) => (
+const _BlurContainer: React.FC<Props> = ({ children, blur, className }) => (
   <div
-    className="blur-container"
+    className={classNames("blur-container", className)}
     style={{
-      position: show ? "relative" : "absolute",
-      opacity: show ? 1 : 0,
       filter: `blur(${blur ? 5 : 0}px)`
     }}
   >
@@ -15,11 +14,9 @@ const _BlurContainer: React.FC<Props> = ({ children, blur, show }) => (
   </div>
 );
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
   blur: boolean;
-  show: boolean;
-  loader?: boolean;
 }
 
-const BlurContainer = React.memo(_BlurContainer);
-export default BlurContainer;
+export const BlurContainer = React.memo(_BlurContainer);

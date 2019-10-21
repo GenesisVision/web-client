@@ -1,20 +1,20 @@
 import "shared/components/details/details.scss";
 
 import React, { useEffect } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
-import DetailsContainerTextLoader from "shared/components/details/details.contaner.txt-loader";
 import {
   dispatchPlatformLevelsParameters,
   dispatchProgramDescription
 } from "shared/components/programs/program-details/services/program-details.service";
 
 import ProgramDetailsContainer from "./program-details.contaner";
+import { programDetailsLoaderData } from "./program-details.loader-data";
 import { IDescriptionSection } from "./program-details.types";
 import { programDescriptionSelector } from "./reducers/description.reducer";
 
@@ -26,18 +26,14 @@ const _ProgramDetailsPage: React.FC<Props> = ({
   useEffect(() => {
     dispatchProgramDescription();
   }, []);
-  useEffect(
-    () => {
-      description && dispatchPlatformLevelsParameters(description.currency);
-    },
-    [description]
-  );
+  useEffect(() => {
+    description && dispatchPlatformLevelsParameters(description.currency);
+  }, [description]);
   return (
     <ProgramDetailsContainer
-      condition={!!description}
-      loader={<DetailsContainerTextLoader performance />}
+      loaderData={programDetailsLoaderData}
       descriptionSection={descriptionSection}
-      description={description!}
+      data={description!}
     />
   );
 };

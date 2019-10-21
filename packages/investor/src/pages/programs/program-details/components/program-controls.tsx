@@ -1,34 +1,27 @@
 import React from "react";
-import DetailsBlock, {
-  DETAILS_BLOCK_TYPE
-} from "shared/components/details/details-block";
+import SignalProviderControls from "shared/components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 
 import InvestmentProgramControls from "./investment-program-controls";
-import SignalProviderControls from "./signal-provider-controls";
+import SignalProviderButtons from "./signal-provider-buttons";
 
 const _ProgramControls: React.FC<IProgramControlsProps> = ({
-  programDescription,
-  isAuthenticated
+  programDescription
 }) => {
-  const isAvailableFollowingTrades = programDescription.isSignalProgram;
   return (
     <div className="asset-details-description__controls">
-      <InvestmentProgramControls
-        programDescription={programDescription}
-        isAuthenticated={isAuthenticated}
-      />
-      {isAvailableFollowingTrades ? (
-        <DetailsBlock
-          type={DETAILS_BLOCK_TYPE.BORDERED}
-          className="asset-details-description__col"
-        >
-          <SignalProviderControls
-            programDescription={programDescription}
-            isAuthenticated={isAuthenticated}
+      <InvestmentProgramControls programDescription={programDescription} />
+      {programDescription.isSignalProgram && (
+        <SignalProviderControls programDescription={programDescription}>
+          <SignalProviderButtons
+            condition={!!programDescription.personalProgramDetails}
+            personalDetails={programDescription.personalProgramDetails}
+            id={programDescription.id}
+            title={programDescription.title}
+            currency={programDescription.currency}
           />
-        </DetailsBlock>
-      ) : null}
+        </SignalProviderControls>
+      )}
     </div>
   );
 };

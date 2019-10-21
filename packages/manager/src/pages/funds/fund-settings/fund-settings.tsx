@@ -48,7 +48,7 @@ const _FundSettings: React.FC<Props> = ({
       <CloseAssetBlock
         label={t("manager.asset-settings.close-fund.title")}
         asset={ASSET.FUND}
-        canCloseAsset={details.personalFundDetails.canCloseProgram}
+        canCloseAsset={details.personalFundDetails.canCloseAsset}
         id={details.id}
         closeAsset={closeAsset}
       />

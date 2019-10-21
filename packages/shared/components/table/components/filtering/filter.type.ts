@@ -95,7 +95,7 @@ export type ComposeFiltersType = {
     | ComposedRequestTagValue
     | ComposedRequestDataRangeValue
     | ComposedRequestLevelFilterValue
-    | string
+    | string;
 };
 
 export type ComposeFiltersTypeFlat = {
@@ -111,7 +111,7 @@ export type ComposeFiltersTypeFlat = {
     | ComposedRequestEventTypeValue
     | ComposedRequestTagValue
     | ComposedRequestDataRangeValues
-    | ComposedRequestLevelFilterValues
+    | ComposedRequestLevelFilterValues;
 };
 
 export type ComposedFiltersType = {
@@ -122,7 +122,7 @@ export type ComposedFiltersType = {
     | ComposedRequestDataRangeNames
     | ComposedRequestEventTypeName
     | ComposedRequestLevelFilterNames
-    | ComposedRequestTagName]?: number | string
+    | ComposedRequestTagName]?: number | string;
 };
 
 export type TDefaultFilters = IComposeDefaultFilter[];

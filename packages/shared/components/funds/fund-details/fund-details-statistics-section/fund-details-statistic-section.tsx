@@ -2,9 +2,12 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import DetailsStatisticsTextLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic.txt-loader";
 import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
 
+import {
+  fundChartDataLoaderData,
+  fundStatisticDataLoaderData
+} from "../fund-details.loader-data";
 import { fundBalanceChartSelector } from "../reducers/balance-chart.reducer";
 import { fundProfitChartSelector } from "../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
@@ -20,6 +23,7 @@ import FundDetailsStatisticsElements, {
 
 const _FundDetailsStatisticSection: React.FC = () => (
   <DetailsStatisticSection
+    loaderData={fundChartDataLoaderData}
     balanceChartSelector={fundBalanceChartSelector}
     profitChartSelector={fundProfitChartSelector}
     statisticCurrencySelector={statisticCurrencySelector}
@@ -48,10 +52,9 @@ const _FundDetailsStatisticSection: React.FC = () => (
     )}
     renderDetailsStatisticsElements={({ period, statisticData }) => (
       <FundDetailsStatisticsElements
-        condition={!!statisticData}
-        loader={<DetailsStatisticsTextLoader />}
+        loaderData={fundStatisticDataLoaderData}
         period={period}
-        statisticData={statisticData! as IFundStatisticData}
+        data={statisticData! as IFundStatisticData}
       />
     )}
   />

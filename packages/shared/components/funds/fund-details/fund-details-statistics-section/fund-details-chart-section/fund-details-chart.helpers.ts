@@ -1,3 +1,4 @@
+import { DETAILS_CHART_TABS } from "shared/components/details/details-statistic-section/details-chart-section/details-chart";
 import {
   useChartPeriodCreator,
   useChartStateDataCreator,
@@ -18,8 +19,9 @@ import {
   getProfitChart
 } from "../../services/fund-details.service";
 
-export const useFundChartStateData = () =>
+export const useFundChartStateData = (view: DETAILS_CHART_TABS) =>
   useChartStateDataCreator({
+    view,
     statisticCurrencyAction,
     idSelector: fundIdSelector,
     statisticPeriodSelector,
@@ -30,8 +32,8 @@ export const useFundChartStateData = () =>
     getProfitChart
   });
 
-export const useFundChartStateValues = () =>
-  useFundChartStateValuesCreator(useFundChartStateData);
+export const useFundChartStateValues = (view: DETAILS_CHART_TABS) =>
+  useFundChartStateValuesCreator(useFundChartStateData(view));
 
 export const useChartPeriod = () =>
   useChartPeriodCreator(statisticPeriodSelector, statisticPeriodAction);

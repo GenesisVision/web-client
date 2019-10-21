@@ -1,14 +1,15 @@
 import "shared/components/details/details-description-section/details-description/details-description.scss";
 
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { ComponentType } from "react";
 import { useSelector } from "react-redux";
 import { ProgramControlsLoader } from "shared/components/details/details.contaner.loader";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
+import { levelsParamsLoaderData } from "../program-details.loader-data";
 import { levelParametersSelector } from "../reducers/level-parameters.reducer";
-import PerformanceData, { PerformanceDataTextLoader } from "./performance-data";
+import PerformanceData from "./performance-data";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
@@ -28,17 +29,15 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
         ChangePasswordTradingAccount={ChangePasswordTradingAccount}
       />
       <PerformanceData
-        condition={!!levelsParameters}
-        loader={<PerformanceDataTextLoader />}
-        levelsParameters={levelsParameters!}
+        loaderData={levelsParamsLoaderData}
+        data={levelsParameters!}
         programDescription={programDescription}
       />
       <ProgramControls
-        condition={!!levelsParameters}
-        loader={<ProgramControlsLoader />}
-        levelsParameters={levelsParameters!}
+        loaderData={levelsParamsLoaderData}
+        data={levelsParameters!}
         programDescription={programDescription}
-        canCloseProgram={personalDetails && personalDetails.canCloseProgram}
+        canCloseAsset={personalDetails && personalDetails.canCloseAsset}
         canMakeSignalProvider={
           personalDetails && personalDetails.canMakeSignalProvider
         }
@@ -52,7 +51,7 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
 };
 
 interface Props {
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
   ProgramControls: ComponentType<any>;
   ChangePasswordTradingAccount?: ComponentType<any>;
 }

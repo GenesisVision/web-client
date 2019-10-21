@@ -8,16 +8,11 @@ import authService from "shared/services/auth-service";
 export const fetchHistoryCounts = (id: string) => {
   const isAuthenticated = authService.isAuthenticated();
   const filtering = { take: 0 };
-  const tradesCountPromise = programsApi.v10ProgramsByIdTradesGet(
-    id,
-    filtering
-  );
+  const tradesCountPromise = programsApi.getProgramTrades(id, filtering);
   const eventsCountPromise = isAuthenticated
     ? fetchPortfolioEvents(EVENT_LOCATION.Asset)({ ...filtering, assetId: id })
     : Promise.resolve({ total: 0 });
-  const openPositionsCountPromise = programsApi.v10ProgramsByIdTradesOpenGet(
-    id
-  );
+  const openPositionsCountPromise = programsApi.getProgramOpenTrades(id);
   return Promise.all([
     tradesCountPromise,
     eventsCountPromise,

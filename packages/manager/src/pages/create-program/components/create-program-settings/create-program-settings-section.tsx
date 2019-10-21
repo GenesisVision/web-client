@@ -1,135 +1,50 @@
-import {
-  Broker,
-  BrokerAccountType,
-  ProgramsInfo,
-  WalletData
-} from "gv-api-web";
+import useCreateAssetSubmit from "components/create-asset/create-asset-submit.hook";
+import { Broker } from "gv-api-web";
 import * as React from "react";
-import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { ASSET } from "shared/constants/constants";
+import useIsOpen from "shared/hooks/is-open.hook";
+import { programsInfoSelector } from "shared/reducers/platform-reducer";
 
-import CreateProgramSettings, {
-  ICreateProgramSettingsFormValues
-} from "./create-program-settings";
+import { TFAConfirmBlock } from "../tfa-confirm-block";
+import CreateProgramSettings from "./create-program-settings";
 
-class CreateProgramSettingsSection extends React.PureComponent<
-  OwnProps,
-  StateProps
-> {
-  constructor(props: OwnProps) {
-    super(props);
-    const brokerAccountType = this.props.broker.accountTypes[0];
-    const currency = this.getCurrency(brokerAccountType);
-    const leverage = this.getLeverage(brokerAccountType);
-    const wallet = this.props.wallets.find(x => x.currency === "GVT")!;
+const _CreateProgramSettingsSection: React.FC<Props> = ({ broker }) => {
+  const [programId, setProgramId] = useState<string | undefined>(undefined);
+  const [twoFactorRequired, setTwoFactorRequired] = useIsOpen();
 
-    this.state = {
-      accountType: brokerAccountType,
-      programCurrency: currency,
-      leverage,
-      wallet,
-      rate: 1
-    };
+  const programsInfo = useSelector(programsInfoSelector);
 
-    this.updateRate(wallet.currency, currency);
-  }
-
-  componentDidUpdate(prevProps: OwnProps) {
-    const wallet = this.props.wallets.find(x => x.id === this.state.wallet.id)!;
-    this.setState({ wallet });
-    if (this.state.programCurrency) {
-      this.updateRate(wallet.currency, this.state.programCurrency);
+  const handleCreate = useCreateAssetSubmit({
+    asset: ASSET.PROGRAM,
+    condition: ({ twoFactorRequired, programId }) => {
+      if (twoFactorRequired) {
+        setProgramId(programId);
+        setTwoFactorRequired();
+        return false;
+      }
+      return true;
     }
-  }
+  });
 
-  handleAccountTypeChange = (brokerAccountTypeId: string) => {
-    const accountType = this.props.broker.accountTypes.find(
-      x => x.id === brokerAccountTypeId
-    );
-    this.setState({ accountType: accountType! });
-    this.handleCurrencyChange(this.getCurrency(accountType!));
-    this.handleLeverageChange(this.getLeverage(accountType!));
-  };
-
-  handleCurrencyChange = (programCurrency: CurrencyEnum): void => {
-    if (this.state.programCurrency === programCurrency) return;
-    this.setState({ programCurrency });
-    this.updateRate(this.state.wallet.currency, programCurrency);
-  };
-
-  handleLeverageChange = (leverage: number): void => {
-    if (this.state.leverage === leverage) return;
-    this.setState({ leverage });
-  };
-
-  handleWalletChange = (walletId: string): void => {
-    if (this.state.wallet && this.state.wallet.id === walletId) return;
-    this.props.fetchWallets(this.props.currency);
-    const wallet = this.props.wallets.find(x => x.id === walletId)!;
-    this.setState({ wallet });
-  };
-
-  getCurrency = (accountType: BrokerAccountType): CurrencyEnum =>
-    accountType.currencies[0] as CurrencyEnum; // TODO say to backend change type to CurrencyEnum[]
-
-  getLeverage = (accountType: BrokerAccountType): number =>
-    accountType.leverages[0];
-
-  updateRate = (from: CurrencyEnum, to: CurrencyEnum): void => {
-    this.props.fetchRate(from, to).then(rate => {
-      this.setState({ rate });
-    });
-  };
-
-  render() {
-    const { accountType, programCurrency, leverage, rate, wallet } = this.state;
-
-    return (
+  return (
+    <>
       <CreateProgramSettings
-        notifyError={this.props.notifyError}
-        navigateBack={this.props.navigateBack}
-        onSubmit={this.props.onSubmit}
-        minimumDepositsAmount={this.props.minimumDepositsAmount}
-        broker={this.props.broker}
-        author={this.props.author}
-        programsInfo={this.props.programsInfo}
-        wallets={this.props.wallets}
-        wallet={wallet}
-        leverage={leverage}
-        programCurrency={programCurrency}
-        rate={rate}
-        accountType={accountType}
-        changeLeverage={this.handleLeverageChange}
-        changeWallet={this.handleWalletChange}
-        changeCurrency={this.handleCurrencyChange}
-        changeAccountType={this.handleAccountTypeChange}
+        programsInfo={programsInfo}
+        onSubmit={handleCreate}
+        minimumDepositsAmount={broker.accountTypes[0].minimumDepositsAmount}
+        broker={broker}
       />
-    );
-  }
-}
+      {twoFactorRequired && <TFAConfirmBlock id={programId!} />}
+    </>
+  );
+};
 
-export default CreateProgramSettingsSection;
+export const CreateProgramSettingsSection = React.memo(
+  _CreateProgramSettingsSection
+);
 
-interface OwnProps {
-  currency: CurrencyEnum;
+interface Props {
   broker: Broker;
-  wallets: WalletData[];
-  programsInfo: ProgramsInfo;
-  fetchWallets: (currency: CurrencyEnum) => void;
-  fetchRate(from: string, to: string): Promise<number>;
-  onSubmit(
-    data: ICreateProgramSettingsFormValues,
-    setSubmitting: SetSubmittingType
-  ): void;
-  minimumDepositsAmount: { [key: string]: number };
-  navigateBack(): void;
-  author: string;
-  notifyError(message: string): void;
-}
-
-interface StateProps {
-  accountType: BrokerAccountType;
-  programCurrency: CurrencyEnum;
-  leverage: number;
-  rate: number;
-  wallet: WalletData;
 }

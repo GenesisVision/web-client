@@ -27,7 +27,9 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
 
   useEffect(() => {
     const request = fetchInvestmentsLevels("GVT").then(setLevels);
-    return () => request.cancel();
+    return () => {
+      request.cancel();
+    };
   }, []);
 
   const getPrograms = useCallback(

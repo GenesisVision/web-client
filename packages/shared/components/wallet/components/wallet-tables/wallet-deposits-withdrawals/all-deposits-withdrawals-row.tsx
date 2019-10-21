@@ -1,8 +1,7 @@
 import { MultiWalletExternalTransaction } from "gv-api-web";
-import moment from "moment";
 import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
@@ -10,6 +9,7 @@ import { UpdateItemsFuncType } from "shared/components/table/components/table.ty
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
+import { formatDate } from "shared/utils/dates";
 import { formatValue } from "shared/utils/formatter";
 
 const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
@@ -17,13 +17,10 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
   update
 }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const handleAction = useCallback(
-    () => {
-      if (update) update();
-      setClosePopup();
-    },
-    [update]
-  );
+  const handleAction = useCallback(() => {
+    if (update) update();
+    setClosePopup();
+  }, [update]);
   return (
     <>
       <TransactionDetailsPopup
@@ -34,16 +31,14 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
       />
       <TableRow stripy onClick={setOpenPopup}>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--wallet">
-          <WalletImage
-            url={transaction.logo}
-            alt={transaction.currency}
-            className="wallet-deposits-withdrawals__icon-container"
-            imageClassName="wallet-deposits-withdrawals__icon"
+          <CurrencyItem
+            logo={transaction.logo}
+            name={transaction.currency}
+            small
           />
-          {transaction.currency}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
-          {moment(transaction.date).format()}
+          {formatDate(transaction.date)}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
           {(transaction.statusUrl && (

@@ -1,4 +1,4 @@
-import { ProgramsList } from "gv-api-web";
+import { ProgramsListOld } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
@@ -9,10 +9,10 @@ import { PROGRAMS } from "../actions/programs-table.actions";
 import programsFavoritesReducer from "./programs-favorites.reducer";
 
 export type ProgramsListState = Readonly<{
-  items: IApiState<ProgramsList>;
+  items: IApiState<ProgramsListOld>;
 }>;
 
-export const programsDataSelector = apiSelector<ProgramsList>(
+export const programsDataSelector = apiSelector<ProgramsListOld>(
   state => state.programsData.items
 );
 

@@ -1,0 +1,64 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.create-asset-field {
+  position: relative;
+  max-width: 230px;
+  padding-right: $padding-xsmall;
+
+  &:not(:last-child) {
+    margin-bottom: 40px;
+  }
+
+  .gv-text-field,
+  .gv-text-field__wrapper {
+    width: 230px;
+  }
+
+  & .gv-text-field__wrapper {
+    margin-top: 0;
+  }
+
+  &.deposit-details {
+    max-width: 280px;
+
+    .gv-text-field,
+    .gv-text-field__wrapper {
+      width: 280px;
+    }
+  }
+
+  .invest-popup__currency {
+    margin-bottom: 0;
+  }
+
+  &-caption {
+    padding-top: $padding-xsmall;
+    font-size: $font-size-small;
+    color: $label-color;
+    letter-spacing: 0.4px;
+    width: 100%;
+
+    &.hint {
+      cursor: pointer;
+    }
+  }
+
+  &-caption-tooltip-content {
+    width: 248px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: $text-light-color;
+  }
+
+  &--wider {
+    max-width: 100%;
+    width: 100%;
+
+    & div.gv-text-field,
+    & div.gv-text-field__wrapper {
+      width: 100%;
+    }
+  }
+}

@@ -2,7 +2,7 @@ import { push } from "connected-react-router";
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Dispatch, compose } from "redux";
+import { compose, Dispatch } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
 import replaceParams from "shared/utils/replace-params";
 

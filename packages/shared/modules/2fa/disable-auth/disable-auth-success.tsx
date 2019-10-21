@@ -1,15 +1,14 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 
 const DisableSuccess: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <div className="dialog__top">
-      <div className="dialog__header">
-        <h2>{t("2fa-page.disable.title")}</h2>
-      </div>
-      <p>{t("2fa-page.disable.success")}</p>
-    </div>
+    <DialogTop
+      title={t("2fa-page.disable.title")}
+      subtitle={t("2fa-page.disable.success")}
+    />
   );
 };
 

@@ -1,8 +1,5 @@
 import { Dispatch } from "redux";
-import {
-  TGetChartArgs,
-  TGetChartFunc
-} from "shared/components/details/details-statistic-section/details.chart.helpers";
+import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import {
   ComposeFiltersAllType,
   FilteringType
@@ -10,8 +7,8 @@ import {
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { RootState } from "shared/reducers/root-reducer";
 import {
-  FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE
+  FUND_DETAILS_ROUTE,
+  FUNDS_SLUG_URL_PARAM_NAME
 } from "shared/routes/funds.routes";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";

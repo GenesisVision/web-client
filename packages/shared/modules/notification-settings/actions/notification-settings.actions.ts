@@ -12,9 +12,7 @@ export const fetchNotificationSettingsAction = (): ActionType<
   CancelablePromise<NotificationSettingList>
 > => ({
   type: NOTIFICATION_SETTINGS,
-  payload: notificationsApi.v10NotificationsSettingsGet(
-    authService.getAuthArg()
-  )
+  payload: notificationsApi.getNotificationsSettings(authService.getAuthArg())
 });
 
 export interface IRemoveNotificationSettingProps {
@@ -35,7 +33,7 @@ export const addNotificationSettingAction = (
   opts: IAddNotificationSettingProps
 ): ActionType<CancelablePromise<string>> => ({
   type: ADD_NOTIFICATION_SETTING,
-  payload: notificationsApi.v10NotificationsSettingsAddPost(
+  payload: notificationsApi.addNotificationsSettings(
     authService.getAuthArg(),
     opts
   )
@@ -45,7 +43,7 @@ export const removeNotificationSettingAction = (
   id: string
 ): ActionType<CancelablePromise<void>> => ({
   type: REMOVE_NOTIFICATION_SETTING,
-  payload: notificationsApi.v10NotificationsSettingsRemoveByIdPost(
+  payload: notificationsApi.removeNotificationsSettings(
     id,
     authService.getAuthArg()
   )

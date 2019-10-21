@@ -31,51 +31,36 @@ const _TransactionDetailsDialog: React.FC<Props> = ({
   const dispatch = useDispatch();
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
   const [data, setData] = useState<TransactionDetails | undefined>(undefined);
-  useEffect(
-    () => {
-      setIsPending();
-      walletApi
-        .v10WalletTransactionByIdGet(transactionId, authService.getAuthArg())
-        .then(setData)
-        .catch(({ errorMessage }: ResponseError) =>
-          dispatch(alertMessageActions.error(errorMessage))
-        )
-        .finally(setIsNotPending);
-    },
-    [transactionId]
-  );
+  useEffect(() => {
+    setIsPending();
+    walletApi
+      .getTransactionDetails(transactionId, authService.getAuthArg())
+      .then(setData)
+      .catch(({ errorMessage }: ResponseError) =>
+        dispatch(alertMessageActions.error(errorMessage))
+      )
+      .finally(setIsNotPending);
+  }, [transactionId]);
 
-  const cancel = useCallback(
-    () => {
-      walletApi
-        .v10WalletWithdrawRequestCancelByTxIdPost(
-          transactionId,
-          authService.getAuthArg()
-        )
-        .then(onAction)
-        .catch(({ errorMessage }: ResponseError) =>
-          dispatch(alertMessageActions.error(errorMessage))
-        );
-    },
-    [transactionId]
-  );
+  const cancel = useCallback(() => {
+    walletApi
+      .cancelWithdrawalRequest(transactionId, authService.getAuthArg())
+      .then(onAction)
+      .catch(({ errorMessage }: ResponseError) =>
+        dispatch(alertMessageActions.error(errorMessage))
+      );
+  }, [transactionId]);
 
-  const resendEmail = useCallback(
-    () => {
-      walletApi
-        .v10WalletWithdrawRequestResendByTxIdPost(
-          transactionId,
-          authService.getAuthArg()
-        )
-        .then(close)
-        .catch(({ errorMessage }: ResponseError) =>
-          dispatch(alertMessageActions.error(errorMessage))
-        );
-    },
-    [transactionId]
-  );
+  const resendEmail = useCallback(() => {
+    walletApi
+      .resendWithdrawalRequestEmail(transactionId, authService.getAuthArg())
+      .then(close)
+      .catch(({ errorMessage }: ResponseError) =>
+        dispatch(alertMessageActions.error(errorMessage))
+      );
+  }, [transactionId]);
 
-  if (isPending || !!!data) return <DialogLoader />;
+  if (isPending || !data) return <DialogLoader />;
   const Component = Types[data.type] || (() => <p>type isn't define</p>);
 
   return (
@@ -108,7 +93,7 @@ const Types: TransactionTypes = {
 type TransactionTypes = {
   [name in TransactionDetailsTypeEnum]:
     | React.FC<TransactionDetailsProps>
-    | React.ExoticComponent<TransactionDetailsProps>
+    | React.ExoticComponent<TransactionDetailsProps>;
 };
 
 export interface TransactionDetailsProps extends i18next.WithT {

@@ -4,9 +4,9 @@ import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
 import {
-  PROGRAMS_ROUTE,
   PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
+  PROGRAM_SLUG_URL_PARAM_NAME,
+  PROGRAMS_ROUTE
 } from "shared/routes/programs.routes";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
@@ -21,7 +21,7 @@ export const cancelChangeBrokerMethod = (
   programId: string
 ): ManagerThunk<CancelablePromise<void>> => dispatch =>
   managerApi
-    .v10ManagerProgramsBrokerChangeCancelPost(authService.getAuthArg(), {
+    .cancelChangeBroker(authService.getAuthArg(), {
       programId
     })
     .then(() => {
@@ -43,7 +43,7 @@ export const changeBrokerMethod = (
   setSubmitting: SetSubmittingType
 ): ManagerThunk<CancelablePromise<void>> => dispatch =>
   managerApi
-    .v10ManagerProgramsBrokerChangePost(authService.getAuthArg(), {
+    .changeBroker(authService.getAuthArg(), {
       request: { programId, newBrokerAccountTypeId, newLeverage }
     })
     .then(() => {

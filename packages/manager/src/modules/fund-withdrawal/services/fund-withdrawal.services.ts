@@ -13,15 +13,8 @@ export const getFundWithdrawInfo = (
   currency: string
 ) => (): Promise<FundWithdrawalInfoResponse> => {
   return Promise.all([
-    managerApi.v10ManagerFundsByIdWithdrawInfoByCurrencyGet(
-      id,
-      currency,
-      authService.getAuthArg()
-    ),
-    walletApi.v10WalletMultiByCurrencyAvailableGet(
-      currency,
-      authService.getAuthArg()
-    )
+    managerApi.getFundWithdrawInfo(id, currency, authService.getAuthArg()),
+    walletApi.getWalletMultiAvailable(currency, authService.getAuthArg())
   ]).then(([withdrawalInfo, walletMulti]) => {
     return { withdrawalInfo, wallets: walletMulti.wallets };
   });
@@ -31,12 +24,9 @@ export const withdrawFund = (id: string, onClose: () => void) => (
   value: FundWithdraw
 ): any => (dispatch: Dispatch) => {
   return managerApi
-    .v10ManagerFundsByIdWithdrawByPercentPost(
-      id,
-      value.percent,
-      authService.getAuthArg(),
-      { currency: value.currency }
-    )
+    .withdrawFromFund(id, value.percent, authService.getAuthArg(), {
+      currency: value.currency
+    })
     .then(response => {
       onClose();
       dispatch(

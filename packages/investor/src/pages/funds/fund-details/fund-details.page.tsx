@@ -4,12 +4,12 @@ import FundWithdrawalContainer from "modules/fund-withdrawal/fund-withdrawal-con
 import * as React from "react";
 import FundDetailsPageCommon from "shared/components/funds/fund-details/fund-details.page";
 
-import FundControls from "./components/fund-controls";
+import InvestmentFundControls from "./components/investment-fund-controls";
 
 const _FundDetailsPage: React.FC = () => {
   const descriptionSection = {
     FundWithdrawalContainer: FundWithdrawalContainer,
-    FundControls: FundControls
+    FundControls: InvestmentFundControls
   };
 
   return <FundDetailsPageCommon descriptionSection={descriptionSection} />;

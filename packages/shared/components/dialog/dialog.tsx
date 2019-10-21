@@ -1,8 +1,7 @@
 import "./dialog.scss";
 
 import classNames from "classnames";
-import * as React from "react";
-import { ReactNode } from "react";
+import React, { ReactNode, useCallback, useState } from "react";
 import GVButton from "shared/components/gv-button";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import Modal, { BodyFix } from "shared/components/modal/modal";
@@ -14,18 +13,28 @@ export const _Dialog: React.FC<IDialogProps> = ({
   className,
   children
 }) => {
-  const handleBackdropClick = React.useCallback(
+  const [target, setTarget] = useState<EventTarget | null>(null);
+
+  const handleBackdropClick = useCallback(
     event => {
-      if (event.target === event.currentTarget && onClose) {
+      if (target === event.currentTarget && onClose) {
         onClose(event);
       }
     },
-    [onClose]
+    [onClose, target]
   );
+
+  const handleMouseDown = useCallback(event => {
+    setTarget(event.target);
+  }, []);
 
   return (
     <Modal open={open} fixed onClose={onClose}>
-      <div className="dialog-wrapper" onClick={handleBackdropClick}>
+      <div
+        className="dialog-wrapper"
+        onClick={handleBackdropClick}
+        onMouseDown={handleMouseDown}
+      >
         <BodyFix />
         <div
           className={classNames("dialog", className, { "dialog--top": top })}

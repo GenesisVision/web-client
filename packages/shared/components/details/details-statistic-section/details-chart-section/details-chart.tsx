@@ -15,6 +15,7 @@ import ProfitChartSection, {
 } from "./profit-chart-section/profit-chart-section";
 
 const _DetailsChart: React.FC<IDetailsChartProps> = ({
+  loaderData,
   useChartStateValues,
   useChartPeriod,
   balanceChartSelector,
@@ -24,22 +25,23 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
   renderProfitValue
 }) => {
   const [t] = useTranslation();
-  const { tab, setTab } = useTab<TABS>(TABS.PROFIT);
+  const { tab, setTab } = useTab<DETAILS_CHART_TABS>(DETAILS_CHART_TABS.PROFIT);
   return (
     <DetailsBlock horizontalPaddings className="details-chart">
       <h3>{t("details-page.chart.heading")}</h3>
       <GVTabs value={tab} onChange={setTab}>
         <GVTab
-          value={TABS.PROFIT}
+          value={DETAILS_CHART_TABS.PROFIT}
           label={t("details-page.chart.tabs.profit")}
         />
         <GVTab
-          value={TABS.BALANCE}
+          value={DETAILS_CHART_TABS.BALANCE}
           label={t("details-page.chart.tabs.balance")}
         />
       </GVTabs>
-      {tab === TABS.PROFIT && (
+      {tab === DETAILS_CHART_TABS.PROFIT && (
         <ProfitChartSection
+          loaderData={loaderData}
           renderProfitChart={renderProfitChart}
           profitChartSelector={profitChartSelector}
           renderProfitValue={renderProfitValue}
@@ -47,7 +49,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
           useChartPeriod={useChartPeriod}
         />
       )}
-      {tab === TABS.BALANCE && (
+      {tab === DETAILS_CHART_TABS.BALANCE && (
         <BalanceChartSection
           useChartStateValues={useChartStateValues}
           useChartPeriod={useChartPeriod}
@@ -59,7 +61,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
   );
 };
 
-enum TABS {
+export enum DETAILS_CHART_TABS {
   PROFIT = "profit",
   BALANCE = "balance"
 }

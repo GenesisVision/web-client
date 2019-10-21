@@ -1,27 +1,30 @@
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import Leverage from "shared/components/leverage/leverage";
 import PieContainerSmall from "shared/components/pie-container/pie-container-small";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
+import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import StatisticItemLoader from "shared/components/statistic-item/statistic-item.loader";
 import StatisticItemTextLoader from "shared/components/statistic-item/statistic-item.txt-loader";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { STATUS } from "shared/constants/constants";
-import withBlurLoader from "shared/decorators/with-blur-loader";
-import { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "shared/decorators/with-blur-loader";
 import filesService from "shared/services/file-service";
 import { getRandomInteger } from "shared/utils/helpers";
 
 const _PerformanceData: React.FC<Props> = ({
   programDescription,
-  levelsParameters
+  data: levelsParameters
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="asset-details-description__performance-data">
+    <StatisticItemList className="asset-details-description__performance-data">
       <StatisticItem label={t("program-details-page.description.broker")}>
         <img
           className={"asset-details-description__broker"}
@@ -33,6 +36,9 @@ const _PerformanceData: React.FC<Props> = ({
           min={programDescription.leverageMin}
           max={programDescription.leverageMax}
         />
+      </StatisticItem>
+      <StatisticItem label={t("program-details-page.description.currency")}>
+        {programDescription.currency}
       </StatisticItem>
       {programDescription.periodStarts && (
         <StatisticItem label={t("program-details-page.description.period")}>
@@ -93,13 +99,13 @@ const _PerformanceData: React.FC<Props> = ({
           value={programDescription.volumeScale}
         />
       </StatisticItem>
-    </div>
+    </StatisticItemList>
   );
 };
 
 interface Props {
-  levelsParameters: LevelsParamsInfo;
-  programDescription: ProgramDetailsFull;
+  data: LevelsParamsInfo;
+  programDescription: ProgramDetailsFullOld;
 }
 
 export const PerformanceDataLoader: React.FC = () => (
@@ -178,7 +184,9 @@ export const PerformanceDataTextLoader: React.FC = React.memo(() => {
   );
 });
 
-const PerformanceData = compose<React.ComponentType<Props & WithLoaderProps>>(
+const PerformanceData = compose<
+  React.ComponentType<Props & WithBlurLoaderProps<LevelsParamsInfo>>
+>(
   withBlurLoader,
   React.memo
 )(_PerformanceData);

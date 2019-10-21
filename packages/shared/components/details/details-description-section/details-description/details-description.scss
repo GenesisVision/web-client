@@ -20,6 +20,11 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     padding: 0;
   }
 
+  &__control-elements-block {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__your-investment {
     max-width: 750px;
   }
@@ -362,44 +367,17 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     flex-wrap: wrap;
     margin: 0 (-$padding-xxsmall/2);
 
-    @include media-breakpoint-landscape-phone() {
+    @include media-breakpoint-desktop() {
       flex-wrap: nowrap;
     }
     @include media-breakpoint-tablet() {
-      flex-wrap: nowrap;
       margin-left: $padding-controls-left;
       margin-right: 0;
-      max-width: 850px;
     }
   }
 
   &__level-calculator {
     align-self: flex-end;
-    @include adaptive-margin(right, $padding-xsmall/2);
-  }
-
-  &__col {
-    flex-grow: 1;
-    display: inline-flex;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-
-    @include media-breakpoint-landscape-phone() {
-      width: auto;
-      max-width: 800px;
-
-      &--small-size {
-        flex-grow: 0;
-        min-width: 220px;
-      }
-    }
-
-    @include media-breakpoint-tablet() {
-      &--small-size {
-        min-width: 260px;
-        max-width: 260px;
-      }
-    }
   }
 
   &__statistic-container {
@@ -428,22 +406,13 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__performance-data {
+    padding-left: 0;
+
     @include adaptive-padding(top, $padding-xxsmall);
     @include adaptive-padding(bottom, $padding-upper-medium);
-    padding-left: 0;
-    display: flex;
-    box-sizing: border-box;
-    flex-wrap: wrap;
-    margin: 0;
     @include media-breakpoint-tablet() {
       padding-left: $padding-small;
       margin-left: $padding-controls-left;
-    }
-    & .statistics-item {
-      margin-right: $padding-medium-mobile;
-      @include media-breakpoint-landscape-phone() {
-        margin-right: $padding-medium;
-      }
     }
   }
 
@@ -576,13 +545,15 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     justify-content: flex-start;
 
     &-item {
-      @include adaptive-margin(right, $padding-xxsmall);
       flex-grow: 1;
-      flex-basis: 50%;
       box-sizing: border-box;
 
       @include media-breakpoint-landscape-phone() {
         font-size: $font-size-paragraph;
+      }
+
+      & .statistics-item__label {
+        white-space: nowrap;
       }
     }
 

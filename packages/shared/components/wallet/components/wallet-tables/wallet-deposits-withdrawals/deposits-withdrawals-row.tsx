@@ -1,5 +1,4 @@
 import { MultiWalletExternalTransaction } from "gv-api-web";
-import moment from "moment";
 import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import Profitability from "shared/components/profitability/profitability";
@@ -9,17 +8,15 @@ import { UpdateItemsFuncType } from "shared/components/table/components/table.ty
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
+import { formatDate } from "shared/utils/dates";
 import { formatValue } from "shared/utils/formatter";
 
 const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const handleAction = useCallback(
-    () => {
-      if (update) update();
-      setClosePopup();
-    },
-    [update]
-  );
+  const handleAction = useCallback(() => {
+    if (update) update();
+    setClosePopup();
+  }, [update]);
   return (
     <>
       <TransactionDetailsPopup
@@ -30,7 +27,7 @@ const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
       />
       <TableRow stripy onClick={setOpenPopup}>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
-          {moment(transaction.date).format()}
+          {formatDate(transaction.date)}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
           {(transaction.statusUrl && (

@@ -13,11 +13,11 @@ export const getFundInfoCreator: TGetAssetInfoCreator = getFundInfoFn => (
   currency
 ) => getFundInfoFn(id, currency, authService.getAuthArg());
 
-export const fundInvestCreator: TAssetInvestCreator = fundInvestFn => (
+export const fundInvestCreator: TAssetInvestCreator = fundInvestFn => ({
   id,
   amount,
   currency
-) => dispatch => {
+}) => dispatch => {
   return fundInvestFn(id, amount, authService.getAuthArg(), { currency }).then(
     () => {
       dispatch(

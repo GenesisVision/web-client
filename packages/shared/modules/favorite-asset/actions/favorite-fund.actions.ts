@@ -8,7 +8,7 @@ export const addFavoriteFundAction = ({
   authorization
 }: FavoriteActionProps): FavoriteActionType<any> => ({
   type: SET_FAVORITE_FUND,
-  payload: fundsApi.v10FundsByIdFavoriteAddPost(id, authorization),
+  payload: fundsApi.addToFavorites(id, authorization),
   meta: {
     id,
     isFavorite: true
@@ -20,7 +20,7 @@ export const removeFavoriteFundAction = ({
   authorization
 }: FavoriteActionProps): FavoriteActionType<any> => ({
   type: SET_FAVORITE_FUND,
-  payload: fundsApi.v10FundsByIdFavoriteRemovePost(id, authorization),
+  payload: fundsApi.removeFromFavorites(id, authorization),
   meta: {
     id,
     isFavorite: false

@@ -27,11 +27,11 @@ const _ProgramBalanceChart: React.FC<Props> = ({
       investorsFunds: x.investorsFunds,
       date: x.date.getTime()
     };
-    if (x.profit > 0) {
+    /*if (x.profit > 0) {
       dot.profit = x.profit;
     } else {
       dot.profitNegative = x.profit;
-    }
+    }*/
     return dot;
   });
   return (
@@ -90,8 +90,8 @@ const _ProgramBalanceChart: React.FC<Props> = ({
         <Area
           dataKey="profit"
           type="monotone"
-          fill="#84d6d0"
-          stroke="#84d6d0"
+          fill={`${color}2a`}
+          stroke={`${color}2a`}
           strokeWidth={2}
           dot={false}
           unit={currency}
@@ -102,7 +102,7 @@ const _ProgramBalanceChart: React.FC<Props> = ({
           dataKey="profitNegative"
           type="monotone"
           fill="url(#diagonalHatch)"
-          stroke="#84d6d0"
+          stroke={color}
           strokeWidth={2}
           dot={false}
           unit={currency}

@@ -7,6 +7,7 @@ import {
   TUseChartPeriod,
   TUseChartStateValues
 } from "../../details.chart.helpers";
+import { DETAILS_CHART_TABS } from "../details-chart";
 import BalanceChartElements, {
   TRenderBalanceChart
 } from "./balance-chart-elements";
@@ -24,11 +25,11 @@ const _BalanceChartSection: React.FC<IBalanceChartSectionProps> = ({
     changeCurrency,
     selectedCurrencies,
     selectCurrencies
-  } = useChartStateValues();
+  } = useChartStateValues(DETAILS_CHART_TABS.BALANCE);
   const balanceChart = useSelector(balanceChartSelector);
   return (
     <BalanceChartElements
-      condition={!!balanceChart}
+      condition={!!balanceChart && !!selectedCurrencies.length}
       loader={<ChartValuePeriodLoader />}
       renderBalanceChart={renderBalanceChart}
       period={period}

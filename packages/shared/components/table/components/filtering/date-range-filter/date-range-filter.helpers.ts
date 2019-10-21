@@ -1,6 +1,5 @@
+import dayjs from "dayjs";
 import { ProgramFacetTimeframeEnum } from "gv-api-web";
-import moment from "moment";
-import { DurationInputArg2 } from "moment";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import { IComposeDefaultFilter } from "../../table.types";
@@ -35,24 +34,24 @@ export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
   )
     return false;
   if (value.type === DATA_RANGE_FILTER_TYPES.CUSTOM) {
-    const start = moment(value.dateStart);
-    const end = moment(value.dateEnd);
+    const start = dayjs(value.dateStart);
+    const end = dayjs(value.dateEnd);
     if (!start.isValid() || !end.isValid() || start.isAfter(end)) return false;
   }
   return true;
 };
 
 const dateFrom = (
-  subtract?: DurationInputArg2,
-  date: moment.MomentInput = new Date()
+  subtract?: "month" | "week",
+  date: Date | number = new Date()
 ): string =>
-  moment(date)
-    .subtract(1, subtract)
+  dayjs(date)
+    .subtract(1, subtract || "second")
     .startOf("minute")
     .toISOString();
 
 const dateTo = (): string =>
-  moment()
+  dayjs()
     .add(1, "minute")
     .startOf("minute")
     .toISOString();
@@ -80,10 +79,10 @@ export const composeRequestValueFunc = (
     case DATA_RANGE_FILTER_TYPES.CUSTOM:
     default:
       return {
-        [fromFilterName]: moment(value.dateStart)
+        [fromFilterName]: dayjs(value.dateStart)
           .startOf("day")
           .toISOString(),
-        [toFilterName]: moment(value.dateEnd)
+        [toFilterName]: dayjs(value.dateEnd)
           .add(1, "day")
           .startOf("day")
           .toISOString()

@@ -1,7 +1,6 @@
 import "./manager-description.scss";
 
 import { ManagerProfile } from "gv-api-web";
-import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
@@ -9,6 +8,7 @@ import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import SocialLinksBlock from "shared/components/social-links-block/social-links-block";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { localizedDate } from "shared/utils/dates";
 
 const _ManagerDescription: React.FC<
   { managerProfile: ManagerProfile } & WithTranslation
@@ -24,9 +24,9 @@ const _ManagerDescription: React.FC<
     <div className="manager-description__main">
       <h1 className="title-small-padding">{managerProfile.username}</h1>
       <div className="manager-description__date">
-        {`${t("manager-page.member-since")} ${moment(
+        {`${t("manager-page.member-since")} ${localizedDate(
           managerProfile.regDate
-        ).format("ll")}`}
+        )}`}
       </div>
       <SocialLinksBlock socialLinks={managerProfile.socialLinks} />
       <div className="manager-description__info">

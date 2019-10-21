@@ -1,11 +1,13 @@
 import * as React from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "shared/decorators/with-blur-loader";
 import ChartCurrencySelector, {
   TAddChartCurrency,
   TChangeChartCurrency,
@@ -26,24 +28,20 @@ const _ProfitChartElements: React.FC<Props> = ({
   renderProfitValue,
   period,
   setPeriod,
-  profitChart,
+  data,
   selectedCurrencies,
   addCurrency,
   removeCurrency,
   changeCurrency,
   selectCurrencies
 }) => {
-  const [t] = useTranslation();
-  const chartData = useChartData<ProfitChartDataType>(
-    profitChart,
-    selectedCurrencies
-  );
+  const chartData = useChartData<ProfitChartDataType>(data, selectedCurrencies);
   const platformCurrencies = useSelector(platformCurrenciesSelector);
   const chart = chartData.chart[0];
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem label={t("details-page.chart.value")} big accent>
+        <StatisticItem big accent>
           {renderProfitValue({ chart })}
         </StatisticItem>
       </div>
@@ -72,25 +70,21 @@ const _ProfitChartElements: React.FC<Props> = ({
   );
 };
 
-export type TRenderProfitValue = (
-  props: {
-    chart: ProfitChartType;
-  }
-) => JSX.Element;
+export type TRenderProfitValue = (props: {
+  chart: ProfitChartType;
+}) => JSX.Element;
 
-export type TRenderProfitChart = (
-  props: {
-    profitChart: ProfitChartDataType;
-    chartCurrencies?: TChartCurrency[];
-  }
-) => JSX.Element;
+export type TRenderProfitChart = (props: {
+  profitChart: ProfitChartDataType;
+  chartCurrencies?: TChartCurrency[];
+}) => JSX.Element;
 
 interface OwnProps {
   renderProfitChart: TRenderProfitChart;
   renderProfitValue: TRenderProfitValue;
   period: ChartDefaultPeriod;
   setPeriod: HandlePeriodChangeType;
-  profitChart: ProfitChartDataType;
+  data: ProfitChartDataType;
   selectedCurrencies: TChartCurrency[];
   addCurrency: TAddChartCurrency;
   removeCurrency: TRemoveChartCurrency;
@@ -101,9 +95,9 @@ interface OwnProps {
 interface Props extends OwnProps {}
 
 const ProfitChartElements = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
+  React.ComponentType<OwnProps & WithBlurLoaderProps<ProfitChartDataType>>
 >(
-  withLoader,
+  withBlurLoader,
   React.memo
 )(_ProfitChartElements);
 export default ProfitChartElements;

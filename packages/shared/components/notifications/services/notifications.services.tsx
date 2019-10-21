@@ -16,7 +16,7 @@ export const serviceGetNotifications = (): RootThunkAction<
 > => (dispatch, getState): CancelablePromise<NotificationList> => {
   const { notifications } = getState();
   return notificationsApi
-    .v10NotificationsGet(authService.getAuthArg(), notifications.options)
+    .getNotifications(authService.getAuthArg(), notifications.options)
     .then(response => {
       const options = calculateOptions(notifications.options, response.total);
       dispatch(addTotalNotificationsAction(response.total));

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
+import { DialogField } from "shared/components/dialog/dialog-field";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVNumberField from "shared/components/gv-number-field/gv-number-field";
@@ -18,32 +19,34 @@ const _InputAmountField: React.FC<Props> = ({
   autoFocus = true,
   disabled
 }) => (
-  <GVFormikField
-    emptyInit={emptyInit}
-    onChange={onChange}
-    name={name}
-    label={label}
-    placeholder={placeholder}
-    component={GVNumberField}
-    adornment={
-      setMax && (
-        <GVButton
-          onClick={setMax}
-          variant="text"
-          color="secondary"
-          className="gv-btn--no-padding"
-        >
-          {t("Max")}
-        </GVButton>
-      )
-    }
-    autoComplete="off"
-    autoFocus={autoFocus}
-    suffix={` ${currency}`}
-    allowNegative={false}
-    isAllowed={isAllow}
-    disabled={disabled}
-  />
+  <DialogField>
+    <GVFormikField
+      emptyInit={emptyInit}
+      onChange={onChange}
+      name={name}
+      label={label}
+      placeholder={placeholder}
+      component={GVNumberField}
+      adornment={
+        setMax && (
+          <GVButton
+            onClick={setMax}
+            variant="text"
+            color="secondary"
+            className="gv-btn--no-padding"
+          >
+            {t("Max")}
+          </GVButton>
+        )
+      }
+      autoComplete="off"
+      autoFocus={autoFocus}
+      suffix={` ${currency}`}
+      allowNegative={false}
+      isAllowed={isAllow}
+      disabled={disabled}
+    />
+  </DialogField>
 );
 
 interface Props extends WithTranslation {

@@ -2,8 +2,8 @@ import { mount, shallow } from "enzyme";
 import React from "react";
 import NumberFormat from "react-number-format";
 
-import GVTextArea from "./gv-text-area";
 import GVTextField from ".";
+import GVTextArea from "./gv-text-area";
 
 describe("GVTextField tests", () => {
   test("should render text field", () => {

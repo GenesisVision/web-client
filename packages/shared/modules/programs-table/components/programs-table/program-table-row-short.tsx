@@ -1,6 +1,5 @@
 import classNames from "classnames";
-import { ProgramDetails } from "gv-api-web";
-import moment from "moment";
+import { ProgramDetailsOld } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -16,15 +15,15 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
-import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { distanceDate } from "shared/utils/dates";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 interface IProgramTableRowShortProps {
   title: string;
   showRating?: boolean;
-  program: ProgramDetails;
+  program: ProgramDetailsOld;
   isAuthenticated?: boolean;
   toggleFavorite?: TableToggleFavoriteHandlerType;
   onExpandClick(): void;
@@ -43,7 +42,7 @@ const ProgramTableRowShort: React.FC<
 }) => {
   const {
     status,
-    availableInvestmentBase,
+    availableInvestmentInCurrency,
     statistic,
     logo,
     level,
@@ -56,19 +55,19 @@ const ProgramTableRowShort: React.FC<
     chart,
     personalDetails,
     id,
-    tags,
-    rating
+    tags
   } = program;
   const stopPropagationEvent = (event: React.MouseEvent) =>
     event.stopPropagation();
+  const requestCurrency = program.statistic.balance.currency;
   return (
     <TableRow
       className={classNames({
-        "table__row--pretender": rating.canLevelUp
+        "table__row--pretender": false
       })}
       onClick={onExpandClick}
     >
-      {showRating && <TableCell>{rating.rating}</TableCell>}
+      {showRating && <TableCell>{}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link
@@ -84,9 +83,7 @@ const ProgramTableRowShort: React.FC<
               levelProgress={levelProgress}
               alt={program.title}
               color={color}
-              tooltip={
-                <LevelTooltip level={level} canLevelUp={rating.canLevelUp} />
-              }
+              tooltip={<LevelTooltip level={level} canLevelUp={false} />}
             />
           </Link>
           <div className="programs-table__cell--title">
@@ -109,19 +106,11 @@ const ProgramTableRowShort: React.FC<
         </div>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--equity">
-        <Tooltip
-          render={() => (
-            <div>
-              {formatCurrencyValue(statistic.balanceGVT.amount, "GVT")} {"GVT"}
-            </div>
-          )}
-        >
-          <NumberFormat
-            value={formatCurrencyValue(statistic.balanceBase.amount, currency)}
-            suffix={` ${currency}`}
-            displayType="text"
-          />
-        </Tooltip>
+        <NumberFormat
+          value={formatCurrencyValue(statistic.balance.amount, requestCurrency)}
+          suffix={` ${requestCurrency}`}
+          displayType="text"
+        />
       </TableCell>
       {/*<TableCell className="programs-table__cell programs-table__cell--currency">
         {currency}
@@ -130,7 +119,8 @@ const ProgramTableRowShort: React.FC<
         {statistic.investorsCount}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--available-to-invest">
-        {formatCurrencyValue(availableInvestmentBase, currency)} {currency}
+        {formatCurrencyValue(availableInvestmentInCurrency, requestCurrency)}{" "}
+        {requestCurrency}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
         {periodStarts && (
@@ -143,7 +133,7 @@ const ProgramTableRowShort: React.FC<
         )}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
-        {moment(program.creationDate).fromNow(true)}
+        {distanceDate(program.creationDate)}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat

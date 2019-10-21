@@ -1,12 +1,12 @@
 import ConfirmContainer from "modules/confirm/confirm-container";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import GVButton from "shared/components/gv-button";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
@@ -23,26 +23,23 @@ const _TwoFactorConfirm: React.FC<Props> = ({
   return (
     <SettingsBlock
       label={t("manager.program-settings.two-factor-confirm.title")}
-      content={
-        <>
-          <p className="program-settings__text">
-            {t("manager.program-settings.two-factor-confirm.text")}
-          </p>
-          <GVButton color="primary" onClick={setOpen}>
-            {t("manager.program-settings.buttons.two-factor-confirm")}
-          </GVButton>
-          <ConfirmContainer
-            open={isOpen}
-            onClose={setClose}
-            onApply={() => {
-              dispatchProgramDescription();
-              setClose();
-            }}
-            programId={id}
-          />
-        </>
-      }
-    />
+    >
+      <p className="program-settings__text">
+        {t("manager.program-settings.two-factor-confirm.text")}
+      </p>
+      <GVButton color="primary" onClick={setOpen}>
+        {t("manager.program-settings.buttons.two-factor-confirm")}
+      </GVButton>
+      <ConfirmContainer
+        open={isOpen}
+        onClose={setClose}
+        onApply={() => {
+          dispatchProgramDescription();
+          setClose();
+        }}
+        programId={id}
+      />
+    </SettingsBlock>
   );
 };
 

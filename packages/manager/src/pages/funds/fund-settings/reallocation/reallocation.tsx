@@ -31,19 +31,16 @@ const _Reallocation: React.FC<Props> = ({
     [id]
   );
   return (
-    <SettingsBlock
-      label={t("manager.fund-settings.reallocation.title")}
-      content={
-        <ReallocateForm
-          condition={!!fundAssets.length}
-          availableReallocationPercents={availableReallocationPercents}
-          fundAssets={fundAssets}
-          platformAssets={platformAssets}
-          onSubmit={handleApply}
-          errorMessage={errorMessage}
-        />
-      }
-    />
+    <SettingsBlock label={t("manager.fund-settings.reallocation.title")}>
+      <ReallocateForm
+        condition={!!fundAssets.length}
+        availableReallocationPercents={availableReallocationPercents}
+        fundAssets={fundAssets}
+        platformAssets={platformAssets}
+        onSubmit={handleApply}
+        errorMessage={errorMessage}
+      />
+    </SettingsBlock>
   );
 };
 

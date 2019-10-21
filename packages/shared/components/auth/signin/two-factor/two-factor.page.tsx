@@ -20,6 +20,5 @@ interface LocationProps {
   location: LocationState;
 }
 
-
 const TwoFactorPage = React.memo(_TwoFactorPage);
 export default TwoFactorPage;

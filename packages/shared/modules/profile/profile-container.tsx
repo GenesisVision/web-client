@@ -15,7 +15,7 @@ const _ProfileContainer: React.FC = () => {
   const [t] = useTranslation();
   const [data, setData] = useState<ProfileFullViewModel | undefined>(undefined);
   const fetch = () =>
-    profileApi.v10ProfileGet(authService.getAuthArg()).then(setData);
+    profileApi.getProfileFull(authService.getAuthArg()).then(setData);
   useEffect(() => {
     fetch();
   }, []);

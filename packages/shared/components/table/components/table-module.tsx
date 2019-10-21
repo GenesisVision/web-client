@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  IPaging,
-  calculateTotalPages
+  calculateTotalPages,
+  IPaging
 } from "shared/components/table//helpers/paging.helpers";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
@@ -46,28 +46,22 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
     } else updateItems();
   }, []);
 
-  useEffect(
-    () => {
-      updateItems();
-    },
-    [paging, sorting, filtering, timestamp]
-  );
+  useEffect(() => {
+    updateItems();
+  }, [paging, sorting, filtering, timestamp]);
 
-  const updateItems = useCallback(
-    () => {
-      if (loader) setIsPending();
-      const filters = composeRequestFilters({
-        paging,
-        sorting,
-        filtering,
-        defaultFilters
-      });
-      getItems(filters)
-        .then(setData)
-        .finally(setIsNotPending);
-    },
-    [loader, paging, sorting, filtering, timestamp]
-  );
+  const updateItems = useCallback(() => {
+    if (loader) setIsPending();
+    const filters = composeRequestFilters({
+      paging,
+      sorting,
+      filtering,
+      defaultFilters
+    });
+    getItems(filters)
+      .then(setData)
+      .finally(setIsNotPending);
+  }, [loader, paging, sorting, filtering, timestamp]);
 
   const handleUpdateSorting = useCallback(
     (sorting: string) => {
