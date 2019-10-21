@@ -9,10 +9,10 @@ import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
+import Link from "shared/components/link/link";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
-import Link from "shared/components/link/link";
 
 import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.constants";
 
