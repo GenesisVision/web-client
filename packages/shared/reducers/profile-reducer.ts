@@ -1,21 +1,21 @@
+import {
+  ItemsViewModelReferralFriend,
+  RewardsHistoryViewModel
+} from "gv-api-web";
 import { combineReducers } from "redux";
+import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import tableReducerFactory, {
   ITableState
 } from "shared/components/table/reducers/table.reducer";
-import {
-  PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS,
-  PROGRAM_SUBSCRIBERS_FILTERS
-} from "shared/components/programs/program-details/program-details.constants";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { PROGRAM_SUBSCRIPTIONS } from "shared/components/programs/program-details/actions/program-details.actions";
-import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
+
 import { RootState } from "./root-reducer";
 
-const REFERRAL_FRIENDS = "referralFriends";
-const REFERRAL_HISTORY = "referralHistory";
+export const REFERRAL_FRIENDS = "referralFriends";
+export const REFERRAL_HISTORY = "referralHistory";
 
-export type TReferralFriends = { total: number; items: any };
-export type TReferralHistory = { total: number; items: any };
+export type TReferralFriends = ItemsViewModelReferralFriend;
+export type TReferralHistory = RewardsHistoryViewModel;
 
 export type ProfileState = Readonly<{
   [REFERRAL_FRIENDS]: ITableState<TReferralFriends>;
@@ -29,31 +29,25 @@ export const referralFriendsTableSelector = tableSelectorCreator<
   RootState,
   TReferralFriends,
   TReferralFriends
->(referralFriendsSelector, REFERRAL_FRIENDS);
+>(referralFriendsSelector, "items");
 
 const referralHistorySelector = (state: RootState) =>
   state.profile.referralHistory;
 
 export const referralHistoryTableSelector = tableSelectorCreator<
   RootState,
-  TReferralFriends,
-  TReferralFriends
->(referralHistorySelector, REFERRAL_HISTORY);
+  TReferralHistory,
+  TReferralHistory
+>(referralHistorySelector, "items");
 
 const referralFriendsReducer = tableReducerFactory<TReferralFriends>({
-  // Temp data from program subscriptions
-  type: PROGRAM_SUBSCRIPTIONS,
-  paging: DEFAULT_PAGING,
-  filtering: PROGRAM_SUBSCRIBERS_FILTERS,
-  defaultFilters: PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS
+  type: REFERRAL_FRIENDS,
+  paging: DEFAULT_PAGING
 });
 
 const referralHistory = tableReducerFactory<TReferralHistory>({
-  // Temp data from program subscriptions
-  type: PROGRAM_SUBSCRIPTIONS,
-  paging: DEFAULT_PAGING,
-  filtering: PROGRAM_SUBSCRIBERS_FILTERS,
-  defaultFilters: PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS
+  type: REFERRAL_HISTORY,
+  paging: DEFAULT_PAGING
 });
 
 const profileReducer = combineReducers<ProfileState>({
