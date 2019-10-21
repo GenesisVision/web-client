@@ -52,9 +52,9 @@ import authReducer from "./auth-reducer";
 import emailPendingReducer from "./email-pending-reducer";
 import headerReducer, { HeaderState } from "./header-reducer";
 import platformReducer from "./platform-reducer";
+import profileReducer, { ProfileState } from "./profile-reducer";
 import { RouterState } from "./router-reducer";
 import uiReducer from "./ui-reducer";
-import profileReducer, { ProfileState } from "./profile-reducer";
 
 export const sharedRootReducers = {
   profile: profileReducer,
