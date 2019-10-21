@@ -41,6 +41,7 @@ const _SignInContainer: React.FC<Props> = ({
     if (type && (email === "" || password === ""))
       Router.replace(NOT_FOUND_PAGE_ROUTE);
   }, []);
+  console.log(redirectFrom);
   return (
     <div className={className}>
       {!type && <AuthTabs authPartUrl={LOGIN_ROUTE} />}
