@@ -22,6 +22,7 @@ import {
 } from "shared/components/table/helpers/paging.helpers";
 import useRouteFilters from "shared/hooks/route-filters.hook";
 import { useTranslation } from "shared/i18n";
+import { ACCOUNT_CURRENCY_KEY } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import {
   ToggleFavoriteDispatchableType,
   toggleFavoriteFundDispatchable
@@ -33,6 +34,7 @@ import {
   platformCurrenciesSelector
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
+import { getCookie } from "shared/utils/cookie";
 import { CurrencyEnum, NextPageWithReduxContext } from "shared/utils/types";
 
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
@@ -51,15 +53,14 @@ const DEFAULT_FILTERS = {
   [FUND_ASSET_FILTER_NAME]: FUND_ASSET_DEFAULT_VALUE
 };
 
-export const getFiltersFromContext = ({
-  asPath = "",
-  pathname,
-  reduxStore
-}: NextPageWithReduxContext) => {
+export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
+  const { asPath = "", pathname, reduxStore } = ctx;
   const { page, sorting = SORTING_FILTER_VALUE, ...other } = qs.parse(
     asPath.slice(pathname.length + 1)
   );
-  const { currency } = reduxStore.getState().accountSettings;
+  const currency =
+    (getCookie(ACCOUNT_CURRENCY_KEY, ctx) as CurrencyEnum) ||
+    reduxStore.getState().accountSettings.currency;
   const skipAndTake = calculateSkipAndTake({
     itemsOnPage: DEFAULT_ITEMS_ON_PAGE,
     currentPage: page
@@ -67,7 +68,7 @@ export const getFiltersFromContext = ({
   return {
     ...composeFilters(FUNDS_TABLE_FILTERS, { ...DEFAULT_FILTERS, ...other }),
     ...skipAndTake,
-    currencySecondary: currency,
+    currency,
     sorting
   };
 };
