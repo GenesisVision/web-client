@@ -10,7 +10,7 @@ import {
 } from "pages/dashboard/services/dashboard.service";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
 import { InvestorRootState } from "reducers";
 import {
   Action,
@@ -33,18 +33,22 @@ import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 import DashboardCopytrading from "./dashboard-copytrading";
 import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
 
-const DashboardAssetsSection: React.FC<Props> = ({
-  title,
-  counts,
-  service
-}) => {
+const _DashboardAssetsSection: React.FC<Props> = ({ title, service }) => {
+  const dispatch = useDispatch();
+  const programsCount = useSelector(dashboardProgramsTableSelector).itemsData
+    .data.total;
+  const fundsCount = useSelector(dashboardFundsTableSelector).itemsData.data
+    .total;
+  const tradesCount = useSelector(dashboardCopytradingTableSelector).itemsData
+    .data.total;
   const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
   const [t] = useTranslation();
   useEffect(() => {
     service.getAssetsCounts();
-    return service.clearDashboardAssetsTable;
+    return () => {
+      dispatch(clearDashboardAssetsTableAction());
+    };
   }, [service]);
-  const { programsCount, fundsCount, tradesCount } = counts;
   const handleTabChange = useCallback(
     (e: any, eventTab: string) => {
       if (eventTab === tab) return;
@@ -118,9 +122,6 @@ const mapStateToProps = (state: InvestorRootState) => {
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      clearDashboardAssetsTable: () => {
-        dispatch(clearDashboardAssetsTableAction());
-      },
       getAssetsCounts
     },
     dispatch
@@ -137,12 +138,7 @@ interface OwnProps {
   title: string;
 }
 
-interface StateProps {
-  counts: IDashboardAssetsCounts;
-}
-
 interface ServiceThunks extends ActionCreatorsMapObject {
-  clearDashboardAssetsTable: () => void;
   getAssetsCounts: typeof getAssetsCounts;
 }
 
@@ -150,12 +146,13 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, StateProps, DispatchProps {}
+interface Props extends OwnProps, DispatchProps {}
 
-export default compose<React.ComponentType<OwnProps>>(
+const DashboardAssetsSection = compose<React.ComponentType<OwnProps>>(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   ),
   React.memo
-)(DashboardAssetsSection);
+)(_DashboardAssetsSection);
+export default DashboardAssetsSection;
