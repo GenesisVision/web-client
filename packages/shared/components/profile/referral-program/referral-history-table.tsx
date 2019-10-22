@@ -1,7 +1,7 @@
 import { RewardDetails } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import DownloadButton from "shared/components/download-button/download-button-toolbar";
+import DownloadButton from "shared/components/download-button/download-button";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
