@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import NotFoundPage from "shared/components/not-found/not-found";
-import WalletLoader from "shared/components/wallet/components/wallet-loader";
+import { getAccountLoaderData } from "shared/components/wallet/components/wallet-container-loader";
 import useApiRequest from "shared/hooks/api-request.hook";
 
 import { fetchWalletCopytradingAccount } from "../services/wallet-copytrading.service";
@@ -17,9 +17,8 @@ const _WalletCopytradingAccountContainer: React.FC<Props> = ({ match }) => {
   if (!!errorMessage) return <NotFoundPage />;
   return (
     <WalletCopytradingAccount
-      account={account!}
-      condition={!!account}
-      loader={<WalletLoader />}
+      loaderData={getAccountLoaderData()}
+      data={account!}
     />
   );
 };
