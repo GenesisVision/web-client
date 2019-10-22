@@ -9,13 +9,14 @@ import {
   statisticListLoaderData
 } from "shared/components/programs/program-details/program-details.loader-data";
 import { getRandomInteger } from "shared/utils/helpers";
+import { tableLoaderCreator } from "shared/utils/helpers";
 
 const tagLoaderDataCreator = (): ProgramTag => ({
   name: faker.lorem.word(),
   color: faker.internet.color()
 });
 const tagsLoaderDataCreator = (): ProgramTag[] =>
-  new Array(getRandomInteger(1, 5)).fill("").map(() => tagLoaderDataCreator());
+  tableLoaderCreator(tagLoaderDataCreator);
 
 export const programDetailsLoaderDataCreator = (): ProgramDetailsOld => ({
   currency: "GVT",
@@ -45,9 +46,9 @@ export const programDetailsLoaderDataCreator = (): ProgramDetailsOld => ({
   chart: []
 });
 
-export const programListLoaderData: ProgramDetailsOld[] = new Array(10)
-  .fill("")
-  .map(programDetailsLoaderDataCreator);
+export const programListLoaderData: ProgramDetailsOld[] = tableLoaderCreator(
+  programDetailsLoaderDataCreator
+);
 
 export const programTableLoaderData: ProgramsListOld = {
   programs: programListLoaderData,
