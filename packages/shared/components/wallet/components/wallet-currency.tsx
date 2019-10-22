@@ -1,10 +1,9 @@
 import { WalletData } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Page from "shared/components/page/page";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
@@ -14,7 +13,8 @@ import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletTables from "./wallet-tables/wallet-tables";
 
-const _WalletCurrency: React.FC<Props> = ({ t, info }) => {
+const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
+  const [t] = useTranslation();
   const [
     isOpenAddFundsPopup,
     setOpenAddFundsPopup,
@@ -79,15 +79,9 @@ const _WalletCurrency: React.FC<Props> = ({ t, info }) => {
   );
 };
 
-interface Props extends WithTranslation, OwnProps {}
-
-interface OwnProps {
-  info: WalletData;
+interface Props {
+  data: WalletData;
 }
 
-const WalletCurrency = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
-  translate(),
-  withLoader,
-  React.memo
-)(_WalletCurrency);
+const WalletCurrency = withBlurLoader(React.memo(_WalletCurrency));
 export default WalletCurrency;
