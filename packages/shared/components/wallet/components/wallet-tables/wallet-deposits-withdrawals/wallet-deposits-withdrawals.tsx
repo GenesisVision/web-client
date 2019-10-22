@@ -28,6 +28,7 @@ import { RootState } from "shared/reducers/root-reducer";
 
 import { WalletLastUpdateState } from "../../../reducers/wallet-last-update";
 import { fetchMultiTransactionsExternal } from "../../../services/wallet.services";
+import { walletDepositsWithdrawalsLoaderData } from "./wallet-deposits-withdrawals.loader-data";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -58,7 +59,7 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   return (
     <div className="wallet-deposits-withdrawals">
       <TableModule
-        loaderData={[]}
+        loaderData={walletDepositsWithdrawalsLoaderData}
         timestamp={timestamp.getMilliseconds()}
         defaultFilters={DEFAULT_FILTERS}
         paging={DEFAULT_PAGING}
