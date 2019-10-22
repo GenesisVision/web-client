@@ -31,7 +31,7 @@ export const referralFriendsTableSelector = tableSelectorCreator<
   TReferralFriends
 >(referralFriendsSelector, "items");
 
-const referralHistorySelector = (state: RootState) =>
+export const referralHistorySelector = (state: RootState) =>
   state.profile.referralHistory;
 
 export const referralHistoryTableSelector = tableSelectorCreator<
