@@ -1,33 +1,33 @@
 import { WalletData, WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import NotFoundPage from "shared/components/not-found/not-found";
 import { RootState } from "shared/reducers/root-reducer";
 
 import { walletSelector as walletDataSelector } from "../reducers/wallet.reducers";
 import { WalletRouteProps } from "../wallet.routes";
+import { walletDataCreator } from "./wallet-container-loader";
 import WalletCurrency from "./wallet-currency";
-import WalletLoader from "./wallet-loader";
 
-const _WalletCurrencyContainer: React.FC<Props> = ({ info, isPending }) => (
-  <WalletCurrency
-    condition={!isPending && !!info}
-    loader={!info && !isPending ? <NotFoundPage /> : <WalletLoader />}
-    info={info!}
-  />
-);
+const _WalletCurrencyContainer: React.FC<Props> = props => {
+  const info = useSelector((state: RootState) => walletSelector(state, props));
+  const isPending = useSelector(
+    (state: RootState) => state.wallet.info.isPending
+  );
+  if (!info && !isPending) return <NotFoundPage />;
+  return <WalletCurrency loaderData={walletDataCreator()} data={info!} />;
+};
 
 const walletSelector = createSelector<
   RootState,
-  OwnProps,
+  Props,
   WalletMultiSummary | undefined,
   string,
   WalletData | undefined
 >(
   (state: RootState) => walletDataSelector(state),
-  (state: RootState, props: OwnProps) => props.match.params.currency,
+  (state: RootState, props: Props) => props.match.params.currency,
   (data: WalletMultiSummary | undefined, currency: string) => {
     if (!data) return undefined;
     return data.wallets.find(
@@ -36,24 +36,7 @@ const walletSelector = createSelector<
   }
 );
 
-const mapStateToProps = (state: RootState, props: OwnProps): StateProps => {
-  const isPending = state.wallet.info.isPending;
-  return {
-    info: walletSelector(state, props),
-    isPending
-  };
-};
+interface Props extends WalletRouteProps {}
 
-interface Props extends WithTranslation, OwnProps, StateProps {}
-
-interface OwnProps extends WalletRouteProps {}
-
-interface StateProps {
-  info?: WalletData;
-  isPending: boolean;
-}
-
-const WalletCurrencyContainer = React.memo(
-  connect(mapStateToProps)(_WalletCurrencyContainer)
-);
+const WalletCurrencyContainer = React.memo(_WalletCurrencyContainer);
 export default WalletCurrencyContainer;
