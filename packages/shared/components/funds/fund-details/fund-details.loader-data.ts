@@ -1,9 +1,13 @@
 import faker from "faker";
 import {
+  FundAssetPartWithIcon,
+  FundAssetPercent,
   FundDetailsFull,
+  FundDetailsListStatistic,
   FundProfitChart,
   FundStatistic,
-  PersonalFundDetailsFull
+  PersonalFundDetailsFull,
+  ProgramDetailsListStatistic
 } from "gv-api-web";
 import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import {
@@ -14,6 +18,18 @@ import {
 import { getRandomInteger } from "shared/utils/helpers";
 
 import { IFundStatisticData } from "./fund-details-statistics-section/fund-details-statistics/fund-details-statistics-elements";
+
+const assetLoaderDataCreator = (): FundAssetPartWithIcon => ({
+  color: faker.internet.color(),
+  asset: "GVT",
+  name: faker.lorem.word(),
+  percent: getRandomInteger(0, 100),
+  icon: ""
+});
+export const assetsLoaderDataCreator = (): FundAssetPartWithIcon[] =>
+  new Array(getRandomInteger(1, 5))
+    .fill("")
+    .map(() => assetLoaderDataCreator());
 
 export const fundChartLoaderData: FundProfitChart = {
   creationDate: new Date("2019-08-08T14:59:16.3828400+00:00"),
@@ -87,11 +103,18 @@ const statisticLoaderData: FundStatistic = {
   rebalancingCount: getRandomInteger(0, 100)
 };
 
+export const statisticListLoaderData: FundDetailsListStatistic = {
+  balance: amountWithCurrencyLoaderData,
+  profitPercent: getRandomInteger(0, 100),
+  drawdownPercent: getRandomInteger(0, 100),
+  investorsCount: getRandomInteger(0, 100)
+};
+
 export const fundDetailsLoaderData: FundDetailsFull = {
   entryFee: getRandomInteger(0, 100),
   exitFee: getRandomInteger(0, 100),
   managementFee: getRandomInteger(0, 100),
-  currentAssets: [],
+  currentAssets: assetsLoaderDataCreator(),
   statistic: statisticLoaderData,
   personalFundDetails: personalFundDetailsFull,
   id: "",
