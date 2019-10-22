@@ -53,6 +53,7 @@ const _WalletCopytrading: React.FC<Props> = ({
   return (
     <div className="wallet-list">
       <Table
+        loaderData={[]}
         isPending={copyTradingAccountsPending && !copyTradingAccounts.length}
         items={copyTradingAccounts}
         columns={WALLET_COPYTRADING_COLUMNS}
