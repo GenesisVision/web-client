@@ -17,6 +17,7 @@ import {
   TableToggleFavoriteType
 } from "shared/components/table/components/table.types";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
+import { fundListLoaderData } from "shared/modules/funds-table/components/funds-table/fund-table.loader-data";
 import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
 import { CURRENCY_MAP_NAME } from "shared/modules/programs-table/components/programs-table/programs.constants";
@@ -69,6 +70,7 @@ const _ProgramsFacetTable: React.FC<
 
   return (
     <ProgramTableModule
+      loaderData={fundListLoaderData}
       renderMappings={(updateFilter, filtering) => (
         <>
           <SelectFilter
