@@ -3,7 +3,7 @@ import { createSelector } from "reselect";
 import { ITableState } from "../reducers/table.reducer";
 import { DefaultTableState, mapToTableItems } from "./mapper";
 
-const defaultData = {
+const defaultDataConst = {
   items: [],
   total: 0
 };
@@ -14,7 +14,11 @@ export const tableSelectorCreator = <
   ItemsType
 >(
   selector: (state: State) => ITableState<TableState>,
-  itemName: string
+  itemName: string,
+  defaultData: {
+    items: any;
+    total: number;
+  } = defaultDataConst
 ) =>
   createSelector(
     selector,
