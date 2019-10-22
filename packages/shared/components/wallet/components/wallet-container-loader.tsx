@@ -1,10 +1,10 @@
 import "./wallet-balance/wallet-balance.scss";
 
 import * as faker from "faker";
-import { WalletMultiSummary } from "gv-api-web";
+import { CopyTradingAccountInfo, WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
-import { getRandomInteger } from "shared/utils/helpers";
+import { getRandomInteger, tableLoaderCreator } from "shared/utils/helpers";
 
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletSettingsLoader from "./wallet-settings/wallet-settings-loader";
@@ -68,5 +68,26 @@ export const walletMultiSummaryLoaderData: WalletMultiSummary = {
     .map(walletDataCreator),
   payFeesWithGvt: false
 };
+
+export const getAccountLoaderData = (): CopyTradingAccountInfo => ({
+  id: "",
+  currency: "",
+  logo: "",
+  title: faker.lorem.word(),
+  balance: getRandomInteger(0, 100),
+  equity: getRandomInteger(0, 100),
+  freeMargin: getRandomInteger(0, 100),
+  marginLevel: getRandomInteger(0, 100),
+  available: getRandomInteger(0, 100),
+  personalInfo: {
+    isOwnSignal: false,
+    isFavorite: false
+  }
+});
+
+export const AccountsLoaderData: CopyTradingAccountInfo[] = tableLoaderCreator(
+  getAccountLoaderData,
+  4
+);
 
 export default WalletContainerLoader;
