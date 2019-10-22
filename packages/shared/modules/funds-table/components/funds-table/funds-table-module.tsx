@@ -5,6 +5,7 @@ import TableModule, {
 import { TableToggleFavoriteType } from "shared/components/table/components/table.types";
 
 import FundsTableRow from "./fund-table-row";
+import { fundListLoaderData } from "./fund-table.loader-data";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
@@ -27,6 +28,7 @@ const FundsTableModule: React.FC<Props> = React.memo(
     toggleFavorite
   }) => (
     <TableModule
+      loaderData={fundListLoaderData}
       disableTitle={disableTitle}
       getItems={getItems}
       defaultFilters={defaultFilters}
