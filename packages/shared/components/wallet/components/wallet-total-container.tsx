@@ -6,6 +6,7 @@ import {
   copyTradingAccountsSelector,
   walletSelector
 } from "../reducers/wallet.reducers";
+import { walletMultiSummaryLoaderData } from "./wallet-container-loader";
 import WalletTotal from "./wallet-total";
 
 const _WalletTotalContainer: React.FC = () => {
@@ -16,8 +17,8 @@ const _WalletTotalContainer: React.FC = () => {
   );
   return (
     <WalletTotal
-      condition={!!wallet}
-      wallet={wallet!}
+      loaderData={walletMultiSummaryLoaderData}
+      data={wallet!}
       copyTradingAccounts={copyTradingAccounts}
       copyTradingAccountsPending={copyTradingAccountsPending}
     />
