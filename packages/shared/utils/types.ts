@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AmountWithCurrencyCurrencyEnum,
   CancelablePromise,
@@ -107,3 +108,5 @@ export type FeesType = {
   exitFee?: number;
   exitFeePersonal?: number;
 };
+
+export type TagType = React.ComponentType<{ className?: string; style?: any }> | string;

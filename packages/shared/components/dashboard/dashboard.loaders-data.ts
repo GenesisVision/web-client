@@ -1,5 +1,6 @@
 import faker from "faker";
 import { InvestmentEventViewModel, ProgramRequests } from "gv-api-web";
+import { tableLoaderCreator } from "shared/utils/helpers";
 
 export const inRequestsLoaderData: ProgramRequests = {
   requests: [],
@@ -30,6 +31,4 @@ const investmentEventViewModelCreator = (): InvestmentEventViewModel => ({
 
 export const DashboardPortfolioEventsLoaderData: Array<
   InvestmentEventViewModel
-> = Array(5)
-  .fill("")
-  .map(investmentEventViewModelCreator);
+> = tableLoaderCreator(investmentEventViewModelCreator);

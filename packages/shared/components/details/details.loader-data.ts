@@ -14,6 +14,6 @@ export const managerLoaderData = {
 };
 
 export const amountWithCurrencyLoaderData: AmountWithCurrency = {
-  amount: getRandomInteger(0, 100),
+  amount: getRandomInteger(0, 10000000),
   currency: "GVT"
 };

@@ -8,6 +8,7 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import { FAVORITE_COLUMN_NAME } from "./programs-table";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
+import { programListLoaderData } from "./program-table.loader-data";
 
 const ProgramTableModule: React.FC<Props> = React.memo(
   ({
@@ -26,6 +27,7 @@ const ProgramTableModule: React.FC<Props> = React.memo(
     columns
   }) => (
     <TableModule
+      loaderData={programListLoaderData}
       renderMappings={renderMappings}
       disableTitle={disableTitle}
       getItems={getItems}

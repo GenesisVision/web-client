@@ -11,6 +11,7 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
+import { programListLoaderData } from "./program-table.loader-data";
 
 export const FAVORITE_COLUMN_NAME = "favorite";
 
@@ -24,7 +25,7 @@ interface IProgramsTableProps extends ITableProps {
   redirectToLogin?: () => void;
 }
 
-const ProgramsTable: React.FC<IProgramsTableProps> = ({
+const _ProgramsTable: React.FC<IProgramsTableProps> = ({
   renderMappings,
   disableTitle,
   columns,
@@ -45,6 +46,7 @@ const ProgramsTable: React.FC<IProgramsTableProps> = ({
 }) => {
   return (
     <Table
+      loaderData={programListLoaderData}
       renderMappings={renderMappings}
       disableTitle={disableTitle}
       title={title}
@@ -96,4 +98,5 @@ const ProgramsTable: React.FC<IProgramsTableProps> = ({
   );
 };
 
+const ProgramsTable = React.memo(_ProgramsTable);
 export default ProgramsTable;

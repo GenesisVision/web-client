@@ -9,6 +9,7 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 import FundCard from "./fund-card";
 import FundsTableRow from "./fund-table-row";
 import FundTableSortingValue from "./fund-table-sorting";
+import { fundListLoaderData } from "./fund-table.loader-data";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
@@ -33,6 +34,7 @@ const _FundsTable: React.FC<Props> = ({
   title
 }) => (
   <Table
+    loaderData={fundListLoaderData}
     filtering={filtering}
     updateFilter={updateFilter}
     title={title}

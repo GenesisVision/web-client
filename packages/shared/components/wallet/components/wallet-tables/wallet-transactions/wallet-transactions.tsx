@@ -28,6 +28,7 @@ import { RootState } from "shared/reducers/root-reducer";
 
 import { WalletLastUpdateState } from "../../../reducers/wallet-last-update";
 import { fetchMultiTransactions } from "../../../services/wallet.services";
+import { walletTransactionsLoaderData } from "./wallet-transactions.loader-data";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -58,6 +59,7 @@ const _WalletTransactions: React.FC<Props> = ({
   return (
     <div className="wallet-transactions">
       <TableModule
+        loaderData={walletTransactionsLoaderData}
         timestamp={timestamp.getMilliseconds()}
         defaultFilters={DEFAULT_FILTERS}
         paging={DEFAULT_PAGING}
