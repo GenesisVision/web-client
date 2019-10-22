@@ -1,10 +1,5 @@
 import faker from "faker";
-import {
-  FundAssetPercent,
-  FundDetailsOld,
-  FundsListOld,
-  ProgramTag
-} from "gv-api-web";
+import { FundAssetPercent, FundDetailsOld, FundsListOld } from "gv-api-web";
 import {
   managerLoaderData,
   mockDate
@@ -14,6 +9,7 @@ import {
   statisticListLoaderData
 } from "shared/components/funds/fund-details/fund-details.loader-data";
 import { getRandomInteger } from "shared/utils/helpers";
+import { tableLoaderCreator } from "shared/utils/helpers";
 
 const assetLoaderDataCreator = (): FundAssetPercent => ({
   asset: "GVT",
@@ -46,9 +42,9 @@ export const fundDetailsLoaderDataCreator = (): FundDetailsOld => ({
   chart: []
 });
 
-export const fundListLoaderData: FundDetailsOld[] = new Array(10)
-  .fill("")
-  .map(fundDetailsLoaderDataCreator);
+export const fundListLoaderData: FundDetailsOld[] = tableLoaderCreator(
+  fundDetailsLoaderDataCreator
+);
 
 export const fundTableLoaderData: FundsListOld = {
   funds: fundListLoaderData,
