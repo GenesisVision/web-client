@@ -2,11 +2,13 @@ import faker from "faker";
 import {
   BrokerDetails,
   LevelsParamsInfo,
+  OrderModel,
   PersonalProgramDetailsFull,
   ProgramDetailsFullOld,
   ProgramDetailsListStatistic,
   ProgramProfitChart,
-  ProgramStatistic
+  ProgramStatistic,
+  TradesViewModel
 } from "gv-api-web";
 import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import {
@@ -15,7 +17,7 @@ import {
   mockDate
 } from "shared/components/details/details.loader-data";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
-import { getRandomInteger } from "shared/utils/helpers";
+import { getRandomInteger, tableLoaderCreator } from "shared/utils/helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { periodsLoaderData } from "./periods.loader-data";
@@ -237,4 +239,35 @@ export const levelsParamsLoaderData: LevelsParamsInfo = {
   investmentScaleMin: getRandomInteger(0, 100),
   investmentScaleMax: getRandomInteger(0, 100),
   investmentScaleHighRisk: getRandomInteger(0, 100)
+};
+
+export const tradeLoaderDataCreator = (): OrderModel => ({
+  id: "",
+  login: "",
+  ticket: "",
+  symbol: "",
+  volume: getRandomInteger(0, 100),
+  profit: getRandomInteger(0, 100),
+  direction: {},
+  date: new Date(),
+  price: getRandomInteger(0, 100),
+  priceCurrent: getRandomInteger(0, 100),
+  entry: {},
+  baseVolume: getRandomInteger(0, 100),
+  originalCommission: getRandomInteger(0, 100),
+  originalCommissionCurrency: "",
+  commission: getRandomInteger(0, 100),
+  swap: getRandomInteger(0, 100),
+  showOriginalCommission: false,
+  signalData: {
+    masters: []
+  }
+});
+
+export const tradesLoaderData: TradesViewModel = {
+  showSwaps: false,
+  showTickets: false,
+  trades: tableLoaderCreator(tradeLoaderDataCreator),
+  tradesDelay: {},
+  total: 10
 };
