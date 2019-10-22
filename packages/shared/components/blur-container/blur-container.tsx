@@ -13,7 +13,7 @@ const _BlurContainer: React.FC<Props> = ({
   <Tag
     className={classNames("blur-container", className)}
     style={{
-      filter: `blur(${blur ? 5 : 0}px)`
+      filter: `blur(${blur ? 7 : 0}px)`
     }}
   >
     {children}
