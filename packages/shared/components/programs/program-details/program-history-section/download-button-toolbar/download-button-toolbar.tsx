@@ -1,7 +1,7 @@
 import "./download-button.scss";
 
 import * as React from "react";
-import DownloadButton from "shared/components/download-button/download-button-toolbar";
+import DownloadButton from "shared/components/download-button/download-button";
 import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
 const _DownloadButtonToolbar: React.FC<Props> = ({
