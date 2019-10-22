@@ -1,5 +1,7 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
+import { TagType } from "shared/utils/types";
 
 import { LIST_VIEW } from "../table.constants";
 import {
@@ -7,8 +9,6 @@ import {
   UpdateItemsFuncType,
   UpdateRowFuncType
 } from "./table.types";
-import { withBlurLoader } from "shared/decorators/with-blur-loader";
-import { TagType } from "shared/utils/types";
 
 const _TableBody: React.FC<ITableBodyExternalProps & ITableBodyInnerProps> = ({
   updateItems,
