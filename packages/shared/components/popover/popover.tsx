@@ -7,6 +7,7 @@ import Modal from "shared/components/modal/modal";
 
 const _Popover: React.FC<Props> = props => {
   const {
+    fixedVertical,
     orientation = ORIENTATION_POPOVER.LEFT,
     horizontal = HORIZONTAL_POPOVER_POS.LEFT,
     vertical = VERTICAL_POPOVER_POS.BOTTOM,
@@ -19,27 +20,21 @@ const _Popover: React.FC<Props> = props => {
   const [windowHeight, setWindowHeight] = useState<number>(0);
   const [scrollTop, setScrollTop] = useState<number>(0);
   const popover = useRef<HTMLDivElement>(null);
-  useEffect(
-    () => {
-      if (popover.current) {
-        const width = ownWidth ? "auto" : getAnchorBounds().width;
-        popover.current.style.left = getLeft();
-        popover.current.style.top = `${parseInt(getTop()) + scrollTop}px`;
-        popover.current.style.minWidth = `${width}px`;
-        popover.current.style.transform = getTransformPosition();
-        popover.current.style.opacity = "1";
-      }
-    },
-    [anchorEl, scrollTop, popover.current]
-  );
+  useEffect(() => {
+    if (popover.current) {
+      const width = ownWidth ? "auto" : getAnchorBounds().width;
+      popover.current.style.left = getLeft();
+      popover.current.style.top = `${getTop() + scrollTop}px`;
+      popover.current.style.minWidth = `${width}px`;
+      popover.current.style.transform = getTransformPosition();
+      popover.current.style.opacity = "1";
+    }
+  }, [anchorEl, scrollTop, popover.current]);
 
-  useEffect(
-    () => {
-      setWindowHeight(window.innerHeight);
-      setScrollTop(window.scrollY);
-    },
-    [anchorEl]
-  );
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+    setScrollTop(window.scrollY);
+  }, [anchorEl]);
 
   const getAnchorBounds = (): ClientRect =>
     getAnchorEl(anchorEl).getBoundingClientRect();
@@ -84,11 +79,11 @@ const _Popover: React.FC<Props> = props => {
     const { top, height } = getAnchorBounds();
     switch (getVerticalPosition()) {
       case VERTICAL_POPOVER_POS.CENTER:
-        return `${top + height / 2}px`;
+        return top + height / 2;
       case VERTICAL_POPOVER_POS.TOP:
-        return `${top - MARGIN_OFFSET}px`;
+        return top - MARGIN_OFFSET;
       default:
-        return `${top + height + MARGIN_OFFSET}px`;
+        return top + height + MARGIN_OFFSET;
     }
   };
 
@@ -108,14 +103,14 @@ const _Popover: React.FC<Props> = props => {
   };
 
   const getVerticalPosition = (): VERTICAL_POPOVER_POS => {
+    if (fixedVertical) return vertical;
     const anchorBounds = getAnchorBounds();
     const popoverBounds = getPopoverBounds();
-    if (
-      windowHeight - anchorBounds.bottom - MARGIN_OFFSET <
-      popoverBounds.height
-    ) {
-      return VERTICAL_POPOVER_POS.TOP;
-    }
+    const topAboveWindowBound = popoverBounds.top - MARGIN_OFFSET < 0;
+    const bottomBelowWindowBound =
+      windowHeight - anchorBounds.bottom - MARGIN_OFFSET < popoverBounds.height;
+    if (bottomBelowWindowBound) return VERTICAL_POPOVER_POS.TOP;
+    // if (topAboveWindowBound) return VERTICAL_POPOVER_POS.BOTTOM; // TODO fix it
     return vertical;
   };
 
@@ -177,7 +172,8 @@ const getAnchorEl = (el?: anchorElType) =>
 const Popover = React.memo(_Popover);
 export default Popover;
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  fixedVertical?: boolean;
   orientation?: ORIENTATION_POPOVER;
   onClose?(event: React.MouseEvent<HTMLElement>): void;
   horizontal?: HORIZONTAL_POPOVER_POS;

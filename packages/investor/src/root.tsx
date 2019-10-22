@@ -27,4 +27,4 @@ const Root: React.FC = () => (
   </Suspense>
 );
 
-export default (process.env.NODE_ENV === "development" ? hot(Root) : Root);
+export default process.env.NODE_ENV === "development" ? hot(Root) : Root;

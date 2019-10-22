@@ -2,8 +2,6 @@ import "./tag-program-container.scss";
 
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_VARIANT } from "shared/components/profitability/profitability.helper";
 import Tooltip from "shared/components/tooltip/tooltip";
 
 import TagItem from "../tag-item/tag-item";

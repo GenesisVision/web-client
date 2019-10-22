@@ -1,56 +1,28 @@
 import { replace } from "connected-react-router";
 import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
-import { ActionType } from "shared/utils/types";
 
-import * as walletWithdrawConfirmService from "./services/wallet-withdraw-confirm.services";
+import { confirmWithdraw } from "./services/wallet-withdraw-confirm.services";
 
 interface IEmailConfirmContainerProps {
   queryParams: any;
 }
 
-interface IEmailConfirmContainerDispatchProps {
-  service: {
-    confirmWithdraw(
-      requestId?: string,
-      code?: string
-    ): (dispatch: Dispatch<ActionType>) => Promise<any>;
-    showNotFoundPage(): void;
-  };
-}
-
-class EmailConfirmContainer extends React.PureComponent<
-  IEmailConfirmContainerProps & IEmailConfirmContainerDispatchProps
-> {
-  componentDidMount() {
-    const { queryParams, service } = this.props;
+const _EmailConfirmContainer: React.FC<IEmailConfirmContainerProps> = ({
+  queryParams
+}) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
     if (queryParams.requestId && queryParams.code) {
-      service.confirmWithdraw(queryParams.requestId, queryParams.code);
+      dispatch(confirmWithdraw(queryParams.requestId, queryParams.code));
     } else {
-      service.showNotFoundPage();
+      replace(NOT_FOUND_PAGE_ROUTE);
     }
-  }
+  }, []);
+  return null;
+};
 
-  render() {
-    return null;
-  }
-}
-
-const mapDispatchToProps = (
-  dispatch: Dispatch
-): IEmailConfirmContainerDispatchProps => ({
-  service: bindActionCreators(
-    {
-      ...walletWithdrawConfirmService,
-      showNotFoundPage: () => replace(NOT_FOUND_PAGE_ROUTE)
-    },
-    dispatch
-  )
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(EmailConfirmContainer);
+const EmailConfirmContainer = React.memo(_EmailConfirmContainer);
+export default EmailConfirmContainer;

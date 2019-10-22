@@ -1,8 +1,8 @@
 import {
   CopyTradingAccountsList,
+  MultiWalletTransactionsViewModel,
   WalletMultiAvailable,
-  WalletMultiSummary,
-  WalletTransactionsViewModel
+  WalletMultiSummary
 } from "gv-api-web";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import signalApi from "shared/services/api-client/signal-api";
@@ -33,7 +33,7 @@ interface FetchWalletByCurrencyAction extends ApiAction<WalletMultiAvailable> {
 }
 
 interface FetchTransactionsAction
-  extends ApiAction<WalletTransactionsViewModel> {
+  extends ApiAction<MultiWalletTransactionsViewModel> {
   type: typeof WALLET_TRANSACTIONS;
 }
 
@@ -51,24 +51,21 @@ export const fetchWalletsAction = (
   authorization: string
 ): FetchWalletAction => ({
   type: WALLET_BALANCE,
-  payload: walletApi.v10WalletMultiByCurrencyGet(currency, authorization)
+  payload: walletApi.getWalletMultiSummary(currency, authorization)
 });
 
 export const fetchAccountsAction = (
   authorization: string
 ): FetchAccountsAction => ({
   type: COPYTRADING_ACCOUNTS,
-  payload: signalApi.v10SignalAccountsGet(authorization)
+  payload: signalApi.getCopytradingAccounts(authorization)
 });
 
 export const fetchWalletsByCurrencyAvailableAction = (
   currency: string
 ): FetchWalletByCurrencyAction => ({
   type: WALLET_BALANCE_BY_CURRENCY_AVAILABLE,
-  payload: walletApi.v10WalletMultiByCurrencyAvailableGet(
-    currency,
-    authService.getAuthArg()
-  )
+  payload: walletApi.getWalletMultiAvailable(currency, authService.getAuthArg())
 });
 
 export const fetchWalletTransactionsAction = (
@@ -76,7 +73,7 @@ export const fetchWalletTransactionsAction = (
   filters?: FilteringType
 ): FetchTransactionsAction => ({
   type: WALLET_TRANSACTIONS,
-  payload: walletApi.v10WalletTransactionsGet(authorization, filters)
+  payload: walletApi.getMultiWalletTransactions(authorization, filters)
 });
 
 export const updateWalletTimestampAction = (): UpdateTimestampAction => ({

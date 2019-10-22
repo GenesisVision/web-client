@@ -19,7 +19,7 @@ export const programMakeSignal = ({
     volumeFee
   };
   return managerApi
-    .v10ManagerSignalCreatePost(authorization, requestData)
+    .updateProgramSignalSettings(authorization, requestData)
     .then(() => {
       dispatch(
         alertMessageActions.success(

@@ -1,13 +1,11 @@
 import "./profile.scss";
 
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import VerificationStatus, {
   IStatusProps
 } from "shared/components/verification-status/verification-status";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
 
 const _ProfileBlock: React.FC<Props> = ({
   number,
@@ -43,20 +41,14 @@ const _ProfileBlock: React.FC<Props> = ({
   </>
 );
 
-interface Props extends WithTranslation, IProfileOwnProps, WithRoleProps {}
-
-export interface IProfileOwnProps extends IStatusProps {
+export interface Props extends IStatusProps {
   number: string;
   title: string;
   content?: JSX.Element;
 }
 
-const ProfileBlock = compose<
-  React.ComponentType<IProfileOwnProps & WithLoaderProps>
->(
+const ProfileBlock = compose<React.ComponentType<Props & WithLoaderProps>>(
   withLoader,
-  withRole,
-  translate(),
   React.memo
 )(_ProfileBlock);
 export default ProfileBlock;

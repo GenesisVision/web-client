@@ -52,7 +52,7 @@ const _WalletWidget: React.FC<Props> = ({ data, className }) => {
         </div>
       </div>
       <WalletAddFundsPopup
-        currentWallet={wallets.find(wallet => wallet.currency === currency)!}
+        currentWallet={wallets.find(wallet => wallet.currency === "GVT")!}
         onClose={setClosePopup}
         open={isOpenPopup}
       />

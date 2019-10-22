@@ -1,6 +1,6 @@
 import "shared/components/details/details-description-section/details-description/details-description.scss";
 
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { ComponentType } from "react";
 import { useSelector } from "react-redux";
@@ -34,11 +34,10 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
         programDescription={programDescription}
       />
       <ProgramControls
-        condition={!!levelsParameters}
-        loader={<ProgramControlsLoader />}
-        levelsParameters={levelsParameters!}
+        loaderData={levelsParamsLoaderData}
+        data={levelsParameters!}
         programDescription={programDescription}
-        canCloseProgram={personalDetails && personalDetails.canCloseProgram}
+        canCloseAsset={personalDetails && personalDetails.canCloseAsset}
         canMakeSignalProvider={
           personalDetails && personalDetails.canMakeSignalProvider
         }
@@ -52,7 +51,7 @@ const _ProgramDetailsDescriptionSection: React.FC<Props> = ({
 };
 
 interface Props {
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
   ProgramControls: ComponentType<any>;
   ChangePasswordTradingAccount?: ComponentType<any>;
 }

@@ -1,7 +1,7 @@
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { connect, ResolveThunks } from "react-redux";
 import { Link } from "react-router-dom";
 import { ManagerRootState } from "reducers";
@@ -16,7 +16,7 @@ import dashboardFundsTableSelector from "shared/components/dashboard/dashboard-a
 import dashboardProgramsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.selector";
 import GVButton from "shared/components/gv-button";
 import { ChartIcon } from "shared/components/icon/chart-icon";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import useRole from "shared/hooks/use-role.hook";
 
 import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
@@ -25,35 +25,37 @@ import { getAssetsCounts } from "../../services/dashboard.service";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 
 const _DashboardAssetsContainer: React.FC<Props> = ({
-  t,
   title,
   counts,
   service
-}) => (
-  <DashboardAssets
-    programColumns={DASHBOARD_PROGRAMS_COLUMNS}
-    clearAssets={service.clearDashboardAssetsTable}
-    getDashboardPrograms={getDashboardPrograms}
-    getDashboardFunds={getDashboardFunds}
-    counts={counts}
-    getAssetsCounts={service.getAssetsCounts}
-    createProgramButtonToolbar={
-      <CreateButtonToolbar
-        text={t("buttons.create-program")}
-        route={CREATE_PROGRAM_PAGE_ROUTE}
-      />
-    }
-    createFundButtonToolbar={
-      <CreateButtonToolbar
-        text={t("buttons.create-fund")}
-        route={CREATE_FUND_PAGE_ROUTE}
-      />
-    }
-    createFund={<EmptyFunds />}
-    createProgram={<EmptyPrograms />}
-    title={title}
-  />
-);
+}) => {
+  const [t] = useTranslation();
+  return (
+    <DashboardAssets
+      programColumns={DASHBOARD_PROGRAMS_COLUMNS}
+      clearAssets={service.clearDashboardAssetsTable}
+      getDashboardPrograms={getDashboardPrograms}
+      getDashboardFunds={getDashboardFunds}
+      counts={counts}
+      getAssetsCounts={service.getAssetsCounts}
+      createProgramButtonToolbar={
+        <CreateButtonToolbar
+          text={t("buttons.create-program")}
+          route={CREATE_PROGRAM_PAGE_ROUTE}
+        />
+      }
+      createFundButtonToolbar={
+        <CreateButtonToolbar
+          text={t("buttons.create-fund")}
+          route={CREATE_FUND_PAGE_ROUTE}
+        />
+      }
+      createFund={<EmptyFunds />}
+      createProgram={<EmptyPrograms />}
+      title={title}
+    />
+  );
+};
 
 const CreateButtonToolbar: React.FC<{ text: string; route: string }> = ({
   text,
@@ -66,53 +68,47 @@ const CreateButtonToolbar: React.FC<{ text: string; route: string }> = ({
   </Link>
 );
 
-const _EmptyFunds: React.FC<WithTranslation & WithRoleProps> = ({
-  role,
-  t
-}) => (
-  <div className="create-asset">
-    <div className="create-asset__create-icon">
-      <ChartIcon />
+const _EmptyFunds: React.FC = () => {
+  const [t] = useTranslation();
+  const role = useRole();
+  return (
+    <div className="create-asset">
+      <div className="create-asset__create-icon">
+        <ChartIcon />
+      </div>
+      <div className="create-asset__text">
+        {t(`${role}.dashboard-page.create-fund-text`)}
+      </div>
+      <div className="create-asset__button">
+        <Link to={CREATE_FUND_PAGE_ROUTE} className="dashboard__body-button">
+          <GVButton color="primary">{t("buttons.create-fund")}</GVButton>
+        </Link>
+      </div>
     </div>
-    <div className="create-asset__text">
-      {t(`${role}.dashboard-page.create-fund-text`)}
-    </div>
-    <div className="create-asset__button">
-      <Link to={CREATE_FUND_PAGE_ROUTE} className="dashboard__body-button">
-        <GVButton color="primary">{t("buttons.create-fund")}</GVButton>
-      </Link>
-    </div>
-  </div>
-);
-const EmptyFunds = compose<React.ComponentType>(
-  withRole,
-  translate(),
-  React.memo
-)(_EmptyFunds);
+  );
+};
+const EmptyFunds = React.memo(_EmptyFunds);
 
-const _EmptyPrograms: React.FC<WithTranslation & WithRoleProps> = ({
-  role,
-  t
-}) => (
-  <div className="create-asset">
-    <div className="create-asset__create-icon">
-      <ChartIcon />
+const _EmptyPrograms: React.FC = () => {
+  const [t] = useTranslation();
+  const role = useRole();
+  return (
+    <div className="create-asset">
+      <div className="create-asset__create-icon">
+        <ChartIcon />
+      </div>
+      <div className="create-asset__text">
+        {t(`${role}.dashboard-page.create-program-text`)}
+      </div>
+      <div className="create-asset__button">
+        <Link to={CREATE_PROGRAM_PAGE_ROUTE} className="dashboard__body-button">
+          <GVButton color="primary">{t("buttons.create-program")}</GVButton>
+        </Link>
+      </div>
     </div>
-    <div className="create-asset__text">
-      {t(`${role}.dashboard-page.create-program-text`)}
-    </div>
-    <div className="create-asset__button">
-      <Link to={CREATE_PROGRAM_PAGE_ROUTE} className="dashboard__body-button">
-        <GVButton color="primary">{t("buttons.create-program")}</GVButton>
-      </Link>
-    </div>
-  </div>
-);
-const EmptyPrograms = compose<React.ComponentType>(
-  withRole,
-  translate(),
-  React.memo
-)(_EmptyPrograms);
+  );
+};
+const EmptyPrograms = React.memo(_EmptyPrograms);
 
 const mapStateToProps = (state: ManagerRootState) => {
   const counts = {
@@ -134,7 +130,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   )
 });
 
-interface Props extends StateProps, DispatchProps, OwnProps, WithTranslation {}
+interface Props extends StateProps, DispatchProps, OwnProps {}
 
 interface OwnProps {
   title: string;
@@ -158,7 +154,6 @@ interface DispatchProps {
 }
 
 const DashboardAssetsContainer = compose<React.ComponentType<OwnProps>>(
-  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps

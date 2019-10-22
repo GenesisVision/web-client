@@ -1,20 +1,20 @@
-import "./create-fund.page.scss";
+import "components/create-asset/create-asset.scss";
 
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 
 import CreateFundContainer from "./components/create-fund.container";
 
-const _CreateFundPage: React.FC<WithTranslation> = ({ t }) => (
-  <Page title={t("manager.create-fund-page.title")}>
-    <div className="create-fund-page">
-      <h1>{t("manager.create-fund-page.title")}</h1>
+const _CreateFundPage: React.FC = () => {
+  const [t] = useTranslation();
+  return (
+    <Page title={t("manager.create-fund-page.title")}>
       <CreateFundContainer />
-    </div>
-  </Page>
-);
+    </Page>
+  );
+};
 
-const CreateFundPage = translate()(_CreateFundPage);
+const CreateFundPage = React.memo(_CreateFundPage);
 
 export default CreateFundPage;

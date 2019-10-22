@@ -15,13 +15,10 @@ const _EmailConfirmContainer: React.FC<Props> = ({
   const { errorMessage, sendRequest, isPending } = useApiRequest({
     request: props => dispatch(confirmEmail(props))
   });
-  useEffect(
-    () => {
-      if (userId && code) sendRequest({ userId, code });
-      else dispatch(replace(NOT_FOUND_PAGE_ROUTE));
-    },
-    [userId, code]
-  );
+  useEffect(() => {
+    if (userId && code) sendRequest({ userId, code });
+    else dispatch(replace(NOT_FOUND_PAGE_ROUTE));
+  }, [userId, code]);
   return (
     <EmailConfirmFailure condition={!isPending} errorMessage={errorMessage} />
   );

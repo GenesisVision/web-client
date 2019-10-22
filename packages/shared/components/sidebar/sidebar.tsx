@@ -1,37 +1,36 @@
 import "./sidebar.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import * as React from "react";
+import { useEffect } from "react";
 import Modal, { BodyFix } from "shared/components/modal/modal";
 import history from "shared/utils/history";
 
-class Sidebar extends React.PureComponent<Props> {
-  componentDidMount() {
+const _Sidebar: React.FC<Props> = ({
+  open,
+  onClose,
+  position = SIDEBAR_POSITION.LEFT,
+  children
+}) => {
+  useEffect(() => {
     history.listen(() => {
-      if (this.props.onClose && this.props.open) {
-        this.props.onClose();
+      if (onClose && open) {
+        onClose();
       }
     });
-  }
+  }, []);
 
-  render() {
-    const {
-      open,
-      onClose,
-      position = SIDEBAR_POSITION.LEFT,
-      children
-    } = this.props;
-    return (
-      <Modal open={open} onClose={onClose}>
-        <BodyFix />
-        <div className={classnames("sidebar", `sidebar--${position}`)}>
-          {children}
-        </div>
-      </Modal>
-    );
-  }
-}
+  return (
+    <Modal open={open} onClose={onClose}>
+      <BodyFix />
+      <div className={classNames("sidebar", `sidebar--${position}`)}>
+        {children}
+      </div>
+    </Modal>
+  );
+};
 
+const Sidebar = React.memo(_Sidebar);
 export default Sidebar;
 
 export enum SIDEBAR_POSITION {
@@ -39,8 +38,8 @@ export enum SIDEBAR_POSITION {
   RIGHT = "right"
 }
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
-  onClose?(event?: React.MouseEvent<HTMLElement>): void;
+  onClose?: (event?: React.MouseEvent<HTMLElement>) => void;
   position?: SIDEBAR_POSITION;
 }

@@ -1,11 +1,6 @@
-import moment from "moment";
-import {
-  DEFAULT_DECIMAL_SCALE,
-  TUnitName,
-  timeUnits
-} from "shared/constants/constants";
+import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 
-import { CURRENCY_FRACTIONS, checkCurrencyValue } from "./currency-converter";
+import { checkCurrencyValue, CURRENCY_FRACTIONS } from "./currency-converter";
 
 const reverseString = (value: string | number): string =>
   String(value)
@@ -93,30 +88,7 @@ const formatValueWithMin = (
     ? `<0.${"0".repeat(decimalScale - 1)}1`
     : formatValue(value, decimalScale);
 
-const humanizeDate = (date: number | string): string => {
-  const duration = moment.duration(date);
-  const thisTimeUnits = { ...timeUnits };
-  for (const unitName in thisTimeUnits) {
-    const dur = duration[unitName as TUnitName]();
-    thisTimeUnits[unitName as TUnitName] = dur;
-    duration.subtract(moment.duration(dur, unitName as TUnitName));
-  }
-  const timeUnitsWithValues = Object.entries(thisTimeUnits);
-  const timeUnitsWithValuesSliced = timeUnitsWithValues.slice(
-    timeUnitsWithValues.findIndex(([name, value]) => value > 0)
-  );
-  return timeUnitsWithValuesSliced
-    .slice(
-      0,
-      timeUnitsWithValuesSliced.findIndex(([name, value]) => value === 0)
-    )
-    .map(([name, value]) => [name, Math.floor(value)])
-    .filter((unit, i) => i < 2)
-    .reduce((prev, [name, value]) => `${prev} ${value} ${name} `, "");
-};
-
 export {
-  humanizeDate,
   formatValueWithMin,
   reverseString,
   addOne,

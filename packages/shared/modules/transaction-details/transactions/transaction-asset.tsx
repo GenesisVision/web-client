@@ -1,7 +1,6 @@
 import { ProgramTransactionDetails } from "gv-api-web";
 import * as React from "react";
 import GVProgramAvatar from "shared/components/gv-program-avatar";
-import withUrl from "shared/decorators/with-url";
 
 const TransactionAsset = ({ data, url }: Props) => (
   <div
@@ -21,7 +20,7 @@ const TransactionAsset = ({ data, url }: Props) => (
   </div>
 );
 
-export default withUrl<Props>("url")(React.memo(TransactionAsset));
+export default React.memo(TransactionAsset);
 
 interface Props {
   data: ProgramTransactionDetails;

@@ -5,7 +5,7 @@ import { TagType } from "shared/utils/types";
 export interface WithBlurLoaderProps<T> {
   tag?: TagType;
   className?: string;
-  loaderData: T;
+  loaderData?: T;
 }
 
 export const withBlurLoader = <T, U extends { data?: T }>(
@@ -16,8 +16,11 @@ export const withBlurLoader = <T, U extends { data?: T }>(
   loaderData,
   className,
   ...other
-}) => (
-  <BlurContainer blur={!data} className={className} tag={tag}>
-    <Component {...other as U} data={data ? data : loaderData} />
-  </BlurContainer>
-);
+}) => {
+  const hasData = data !== undefined && data !== null;
+  return (
+    <BlurContainer blur={!hasData} className={className} tag={tag}>
+      <Component {...(other as U)} data={hasData ? data : loaderData} />
+    </BlurContainer>
+  );
+};

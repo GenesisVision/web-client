@@ -14,30 +14,16 @@
     margin-top: 60px;
   }
 
+  &__program-fields {
+    max-width: 700px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   &__row {
     display: flex;
     flex-wrap: wrap;
-    width: auto;
-    max-width: 230px;
-    position: relative;
     justify-content: space-between;
-
-    & .gv-text-field__error {
-      width: 100%;
-    }
-
-    .gv-text-field__wrapper,
-    .gv-checkbox-wrapper {
-      margin: 0;
-    }
-
-    .select--disabled .select__value {
-      color: $text-light-color;
-    }
-
-    @include media-breakpoint-landscape-phone() {
-      max-width: 484px;
-    }
   }
 
   &__field {
@@ -64,8 +50,7 @@
     }
 
     &-caption {
-      padding-top: $padding-xsmall;
-      font-size: 12px;
+      font-size: $font-size-small;
       color: $label-color;
       letter-spacing: 0.4px;
       width: 100%;
@@ -118,10 +103,6 @@
     }
   }
 
-  &__form {
-    color: $text-light-color;
-  }
-
   &__subheading {
     text-transform: uppercase;
     font-weight: 600;
@@ -142,6 +123,27 @@
 
     &:last-child {
       padding-bottom: 0;
+    }
+
+    & .deposit-amount-field {
+      margin: $padding-xsmall 0;
+    }
+
+    & .gv-text-field__error {
+      width: 100%;
+    }
+
+    .gv-text-field__wrapper,
+    .gv-checkbox-wrapper {
+      margin: 0;
+    }
+
+    .select--disabled .select__value {
+      color: $text-light-color;
+    }
+
+    @include media-breakpoint-landscape-phone() {
+      max-width: 484px;
     }
 
     @include media-breakpoint-tablet() {
@@ -276,9 +278,6 @@
   }
 
   &__navigation {
-    margin-top: $padding-upper-medium;
-    margin-bottom: 40px;
-
     &-back {
       margin-top: 14px;
 
@@ -288,7 +287,6 @@
 
       @include media-breakpoint-tablet() {
         margin-left: 24px;
-        margin-top: 70px;
       }
     }
   }

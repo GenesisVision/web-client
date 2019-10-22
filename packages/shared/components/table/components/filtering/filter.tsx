@@ -1,11 +1,11 @@
 import "rc-slider/assets/index.css";
-
 import "./filter.scss";
 
 import * as React from "react";
 import { useCallback } from "react";
 import Popover, {
-  HORIZONTAL_POPOVER_POS
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import useAnchor from "shared/hooks/anchor.hook";
 
@@ -41,6 +41,8 @@ const _Filter: React.FC<Props> = ({
         <FilterArrowIcon isOpen={anchor !== undefined} />
       </div>
       <Popover
+        vertical={VERTICAL_POPOVER_POS.BOTTOM}
+        fixedVertical
         anchorEl={anchor}
         onClose={clearAnchor}
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
@@ -52,7 +54,7 @@ const _Filter: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
   value: any;
   renderValueText(value: any): string;

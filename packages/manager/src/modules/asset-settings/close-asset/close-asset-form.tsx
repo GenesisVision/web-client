@@ -3,6 +3,9 @@ import i18next from "i18next";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogTop } from "shared/components/dialog/dialog-top";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -14,19 +17,15 @@ const _CloseAssetForm: React.FC<
   InjectedFormikProps<FormProps, ICloseAssetFormValues>
 > = ({ asset, t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => (
   <form id="closeAssetForm" onSubmit={handleSubmit} noValidate>
-    <div className="dialog__top">
-      <h2>
-        {t(
-          `manager.asset-settings.period-and-closing.close-confirm-title-${asset.toLowerCase()}`
-        )}
-      </h2>
-      <div className="dialog__text">
-        <p>
-          {t(
-            `manager.asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
-          )}
-        </p>
-      </div>
+    <DialogTop
+      title={t(
+        `manager.asset-settings.period-and-closing.close-confirm-title-${asset.toLowerCase()}`
+      )}
+      subtitle={t(
+        `manager.asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
+      )}
+    />
+    <DialogBottom>
       {twoFactorEnabled && (
         <GVFormikField
           type="tel"
@@ -36,7 +35,7 @@ const _CloseAssetForm: React.FC<
           component={GVTextField}
         />
       )}
-      <div className="dialog__buttons">
+      <DialogButtons>
         <GVButton type="submit" disabled={isSubmitting}>
           {t("buttons.confirm")}
         </GVButton>
@@ -48,8 +47,8 @@ const _CloseAssetForm: React.FC<
         >
           {t("buttons.cancel")}
         </GVButton>
-      </div>
-    </div>
+      </DialogButtons>
+    </DialogBottom>
   </form>
 );
 

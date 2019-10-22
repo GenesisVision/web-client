@@ -67,7 +67,7 @@ const _FundDetailsDescription: React.FC<Props> = ({
       />
       {description.personalFundDetails &&
         description.personalFundDetails.isOwnProgram &&
-        description.personalFundDetails.canCloseProgram && (
+        description.personalFundDetails.canCloseAsset && (
           <DetailsSettingControl
             title={description.title}
             url={composeFundSettingsUrl(description.url)}

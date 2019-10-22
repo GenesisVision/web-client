@@ -1,29 +1,24 @@
+import faker from "faker";
 import {
   FundDetailsFull,
   FundProfitChart,
   FundStatistic,
   PersonalFundDetailsFull
 } from "gv-api-web";
+import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import {
   amountWithCurrencyLoaderData,
   managerLoaderData,
   mockDate
 } from "shared/components/details/details.loader-data";
 import { getRandomInteger } from "shared/utils/helpers";
-import faker from "faker";
-import { equityChartLoaderData } from "./equity-chart.loader-data";
-import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
+
 import { IFundStatisticData } from "./fund-details-statistics-section/fund-details-statistics/fund-details-statistics-elements";
 
 export const fundChartLoaderData: FundProfitChart = {
-  totalUsdProfit: 0.0,
-  timeframeUsdProfit: 0.0,
-  rebalances: 0,
-  totalGvtProfit: 0.0,
-  timeframeGvtProfit: 0.0,
   creationDate: new Date("2019-08-08T14:59:16.3828400+00:00"),
   profitPercent: 17.94,
-  equityChart: equityChartLoaderData,
+  equityChart: [],
   balance: 115.621828125,
   investors: 0,
   profitChangePercent: 18.84,
@@ -39,14 +34,9 @@ export const fundChartDataLoaderData: ProfitChartDataType = [
 ];
 
 export const fundStatisticLoaderData: FundProfitChart = {
-  totalUsdProfit: getRandomInteger(0, 100),
-  timeframeUsdProfit: getRandomInteger(0, 100),
-  rebalances: getRandomInteger(0, 100),
-  totalGvtProfit: getRandomInteger(0, 100),
-  timeframeGvtProfit: getRandomInteger(0, 100),
   creationDate: mockDate,
   profitPercent: getRandomInteger(0, 100),
-  equityChart: equityChartLoaderData,
+  equityChart: [],
   balance: getRandomInteger(0, 100),
   investors: getRandomInteger(0, 100),
   profitChangePercent: getRandomInteger(0, 100),
@@ -71,7 +61,6 @@ export const personalFundDetailsFull: PersonalFundDetailsFull = {
   isFavorite: false,
   isInvested: false,
   isOwnProgram: false,
-  canCloseProgram: false,
   canCloseAsset: false,
   isFinishing: false,
   canInvest: false,
@@ -88,8 +77,6 @@ export const personalFundDetailsFull: PersonalFundDetailsFull = {
 };
 
 const statisticLoaderData: FundStatistic = {
-  balanceGVT: amountWithCurrencyLoaderData,
-  balanceSecondary: amountWithCurrencyLoaderData,
   balance: amountWithCurrencyLoaderData,
   profitPercent: getRandomInteger(0, 100),
   drawdownPercent: getRandomInteger(0, 100),
@@ -110,7 +97,7 @@ export const fundDetailsLoaderData: FundDetailsFull = {
   id: "",
   logo: "",
   url: "",
-  color: faker.internet.color(),
+  color: "#fff",
   description: faker.lorem.sentences(3),
   title: faker.lorem.word(),
   ipfsHash: "",

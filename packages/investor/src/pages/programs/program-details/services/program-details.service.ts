@@ -11,19 +11,12 @@ export const getInvestmentInfoAction = ({
   currency: CurrencyEnum;
 }) =>
   investorApi
-    .v10InvestorProgramsByIdInvestInfoByCurrencyGet(
-      assetId,
-      currency,
-      authService.getAuthArg()
-    )
-    .then(({ minInvestmentAmount }) =>
-      notificationsApi.v10NotificationsSettingsAddPost(
-        authService.getAuthArg(),
-        {
-          assetId,
-          conditionType: "AvailableToInvest",
-          type: "ProgramCondition",
-          conditionAmount: minInvestmentAmount
-        }
-      )
+    .getProgramInvestInfo(assetId, currency, authService.getAuthArg())
+    .then(({ programCurrencyMinInvestment }) =>
+      notificationsApi.addNotificationsSettings(authService.getAuthArg(), {
+        assetId,
+        conditionType: "AvailableToInvest",
+        type: "ProgramCondition",
+        conditionAmount: programCurrencyMinInvestment
+      })
     );

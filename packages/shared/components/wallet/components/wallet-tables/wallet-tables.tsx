@@ -21,12 +21,9 @@ import { WALLET_TRANSACTIONS_COLUMNS } from "./wallet-transactions/wallet-transa
 
 const _WalletTables: React.FC<Props> = ({ t, currency, location }) => {
   const { tab, setTab } = useTab<TABS>(TABS.TRANSACTIONS_TAB);
-  useEffect(
-    () => {
-      setTab(null, location.hash);
-    },
-    [location]
-  );
+  useEffect(() => {
+    setTab(null, location.hash);
+  }, [location]);
   return (
     <Surface className="wallet-container">
       <div className="wallet-container__header">
@@ -38,6 +35,7 @@ const _WalletTables: React.FC<Props> = ({ t, currency, location }) => {
               label={
                 <Link
                   to={{
+                    // @ts-ignore
                     prevPath: WALLET_TOTAL_PAGE_ROUTE,
                     pathname: location.pathname,
                     state: t("wallet-page.title")
@@ -56,6 +54,7 @@ const _WalletTables: React.FC<Props> = ({ t, currency, location }) => {
               label={
                 <Link
                   to={{
+                    // @ts-ignore
                     prevPath: WALLET_TOTAL_PAGE_ROUTE,
                     hash: TABS.EXTERNAL_TAB,
                     state: t("wallet-page.title")

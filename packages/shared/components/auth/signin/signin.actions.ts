@@ -30,7 +30,7 @@ export const loginUserManagerAction = (
   loginData: LoginViewModel
 ): ApiAction<string> => ({
   type: LOGIN,
-  payload: authApi.v10AuthSigninManagerPost({
+  payload: authApi.authorize({
     model: loginData
   })
 });
@@ -39,7 +39,7 @@ export const loginUserInvestorAction = (
   loginData: LoginViewModel
 ): ApiAction<string> => ({
   type: LOGIN,
-  payload: authApi.v10AuthSigninInvestorPost({
+  payload: authApi.authorize({
     model: loginData
   })
 });

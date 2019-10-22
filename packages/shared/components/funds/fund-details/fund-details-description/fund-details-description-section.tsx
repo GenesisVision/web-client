@@ -35,7 +35,7 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
         )}
         AssetDetailsExtraBlock={() => (
           <div className="details-description__info-block">
-            <h4 className="details-description__subheading tooltip__label">
+            <h4 className="details-description__subheading">
               <TooltipLabel
                 tooltipContent={t("fund-details-page.tooltip.assets")}
                 labelText={t("fund-details-page.description.assets")}
@@ -51,10 +51,12 @@ const _FundFundDetailsDescription: React.FC<Props> = ({
           </div>
         )}
       />
-      <FundControls
-        fundDescription={fundDescription}
-        isAuthenticated={isAuthenticated}
-      />
+      <div className="asset-details-description__controls">
+        <FundControls
+          fundDescription={fundDescription}
+          isAuthenticated={isAuthenticated}
+        />
+      </div>
     </div>
   );
 };

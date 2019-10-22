@@ -101,17 +101,12 @@ $remove-button-color: #293842;
     width: 100%;
   }
 
+  &__currency {
+    @include adaptive-padding(right, $padding-xxsmall);
+  }
+
   &__currency-full {
     white-space: nowrap;
-  }
-
-  &__currency-full,
-  &__currency-short {
-    padding-left: $padding-xsmall-mobile/2;
-  }
-
-  &__percent {
-    padding-left: $padding-xxsmall-mobile;
   }
 
   &__currency-short {
@@ -132,14 +127,6 @@ $remove-button-color: #293842;
     margin-bottom: $padding-xsmall/2;
     border-radius: $border-radius-middle;
 
-    &__currency-full,
-    &__currency-short {
-      padding-left: $padding-xsmall/2;
-    }
-
-    &__percent {
-      padding-left: $padding-xxsmall;
-    }
     &__remove-button {
       top: -$remove-button-size/2;
       right: -$remove-button-size/2;

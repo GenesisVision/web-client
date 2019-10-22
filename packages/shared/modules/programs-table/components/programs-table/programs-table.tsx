@@ -1,16 +1,10 @@
 import "./programs.scss";
 
-import { ProgramDetails } from "gv-api-web";
+import { ProgramDetailsOld } from "gv-api-web";
 import * as React from "react";
 import { Table } from "shared/components/table/components";
-import { FilteringType, SortingColumn } from "shared/components/table/components/filtering/filter.type";
-import {
-  RenderFiltersFuncType,
-  TableToggleFavoriteHandlerType,
-  UpdatePagingFuncType,
-  UpdateSortingFuncType
-} from "shared/components/table/components/table.types";
-import { IPaging } from "shared/components/table/helpers/paging.helpers";
+import { ITableProps } from "shared/components/table/components/table";
+import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 
 import ProgramCard from "./program-card";
 import ProgramTableHeaderCell from "./program-table-header-cell";
@@ -21,27 +15,18 @@ import { programListLoaderData } from "./program-table.loader-data";
 
 export const FAVORITE_COLUMN_NAME = "favorite";
 
-interface IProgramsTableProps {
-  disableTitle?: boolean;
-  columns?: SortingColumn[];
+interface IProgramsTableProps extends ITableProps {
   showRating?: boolean;
-  showSwitchView?: boolean;
   currencies?: string[];
-  data?: ProgramDetails[];
-  sorting?: string;
-  updateSorting?: UpdateSortingFuncType;
-  filtering?: FilteringType;
-  updateFilter?(filter: any): void;
-  renderFilters?: RenderFiltersFuncType;
-  paging: IPaging;
-  updatePaging: UpdatePagingFuncType;
+  data?: ProgramDetailsOld[];
   toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated?: boolean;
   title: string;
-  redirectToLogin?(): void;
+  redirectToLogin?: () => void;
 }
 
 const _ProgramsTable: React.FC<IProgramsTableProps> = ({
+  renderMappings,
   disableTitle,
   columns,
   showRating,
@@ -62,6 +47,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
   return (
     <Table
       loaderData={programListLoaderData}
+      renderMappings={renderMappings}
       disableTitle={disableTitle}
       title={title}
       showSwitchView={showSwitchView}
@@ -92,7 +78,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
           column={column}
         />
       )}
-      renderBodyRow={(program: ProgramDetails) => (
+      renderBodyRow={(program: ProgramDetailsOld) => (
         <ProgramTableRow
           showRating={Boolean(showRating)}
           title={title}
@@ -101,7 +87,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
           isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
-      renderBodyCard={(program: ProgramDetails) => (
+      renderBodyCard={(program: ProgramDetailsOld) => (
         <ProgramCard
           title={title}
           program={program}

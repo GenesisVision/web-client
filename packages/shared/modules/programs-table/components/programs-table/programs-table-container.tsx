@@ -1,12 +1,12 @@
 import { push } from "connected-react-router";
-import { ProgramTag, ProgramsList } from "gv-api-web";
+import { PlatformCurrency, ProgramsListOld, ProgramTag } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -14,7 +14,6 @@ import {
   TFilter
 } from "shared/components/table/components/filtering/filter.type";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
-import { LevelFilterType } from "shared/components/table/components/filtering/level-filter/level-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
@@ -25,6 +24,7 @@ import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset
 import { programsDataSelector } from "shared/modules/programs-table/reducers/programs-table.reducers";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import {
+  platformCurrenciesSelector,
   programCurrenciesSelector,
   programTagsSelector
 } from "shared/reducers/platform-reducer";
@@ -32,9 +32,16 @@ import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 import * as programsService from "../../services/programs-table.service";
-import { composeCurrencyFilter } from "./program-table.helpers";
+import {
+  composeCurrencyFilter,
+  composeCurrencyMap
+} from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
-import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
+import {
+  CURRENCY_MAP_NAME,
+  LEVEL_FILTER_NAME,
+  PROGRAM_CURRENCY_FILTER_NAME
+} from "./programs.constants";
 
 interface OwnProps {
   showSwitchView: boolean;
@@ -48,10 +55,11 @@ interface MergeProps {
 }
 
 interface StateProps {
+  currencies: PlatformCurrency[];
   isAuthenticated: boolean;
-  currencies: string[];
+  programCurrencies: string[];
   programTags: ProgramTag[];
-  data?: ProgramsList;
+  data?: ProgramsListOld;
 }
 
 interface DispatchProps {
@@ -96,10 +104,11 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
 
   render() {
     const {
+      currencies,
       programTags,
       t,
       showSwitchView,
-      currencies,
+      programCurrencies,
       data,
       filters,
       service,
@@ -117,6 +126,24 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
           ...filters.filtering
         }}
         updateFilter={service.programsChangeFilter}
+        renderMappings={(updateFilter, filtering) => (
+          <>
+            <SelectFilter
+              name={CURRENCY_MAP_NAME}
+              label={t("filters.currency.show-in")}
+              value={filtering && filtering[CURRENCY_MAP_NAME]}
+              values={composeCurrencyMap(currencies)}
+              onChange={updateFilter}
+            />
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
+              onChange={updateFilter}
+              label={t("filters.date-range.for")}
+              startLabel={t("filters.date-range.fund-start")}
+            />
+          </>
+        )}
         renderFilters={(updateFilter, filtering: FilteringType) => (
           <>
             <TagFilter
@@ -133,17 +160,13 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
               onChange={updateFilter}
             />
             <SelectFilter
-              name={CURRENCY_FILTER_NAME}
+              name={PROGRAM_CURRENCY_FILTER_NAME}
               label="Currency"
-              value={filtering[CURRENCY_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
-              values={composeCurrencyFilter(currencies)}
+              value={
+                filtering[PROGRAM_CURRENCY_FILTER_NAME] as SelectFilterType
+              } //TODO fix filtering types
+              values={composeCurrencyFilter(programCurrencies)}
               onChange={updateFilter}
-            />
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.program-start")}
             />
           </>
         )}
@@ -157,16 +180,17 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
         toggleFavorite={service.toggleFavoriteProgram}
         redirectToLogin={service.redirectToLogin}
         isAuthenticated={isAuthenticated}
-        currencies={currencies}
+        currencies={programCurrencies}
       />
     );
   }
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
+  currencies: platformCurrenciesSelector(state),
   isAuthenticated: isAuthenticatedSelector(state),
   data: programsDataSelector(state),
-  currencies: programCurrenciesSelector(state),
+  programCurrencies: programCurrenciesSelector(state),
   programTags: programTagsSelector(state)
 });
 

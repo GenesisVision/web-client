@@ -9,11 +9,11 @@ export const FAILURE_SUFFIX = "FAILURE";
 
 export interface IApiState<T>
   extends Readonly<{
-      isPending: boolean;
-      errorMessage: string;
-      code: null;
-      data?: T;
-    }> {}
+    isPending: boolean;
+    errorMessage: string;
+    code: null;
+    data?: T;
+  }> {}
 
 const initialState: IApiState<any> = {
   isPending: false,

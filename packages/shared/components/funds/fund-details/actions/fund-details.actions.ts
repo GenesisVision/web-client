@@ -9,10 +9,7 @@ import {
   ChartDefaultPeriod,
   getDefaultPeriod
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import {
-  StatisticCurrencyDataType,
-  TStatisticCurrencyAction
-} from "shared/components/details/reducers/statistic-currency.reducer";
+import { TStatisticCurrencyAction } from "shared/components/details/reducers/statistic-currency.reducer";
 import { TStatisticPeriodAction } from "shared/components/details/reducers/statistic-period.reducer";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import fundsApi from "shared/services/api-client/funds-api";
@@ -35,7 +32,7 @@ const sendFundChartRequest = (
   id: string,
   currency: CurrencyEnum
 ): CancelablePromise<FundProfitChart> =>
-  fundsApi.v10FundsByIdChartsProfitGet(id, {
+  fundsApi.getFundProfitChart(id, {
     dateFrom: start,
     dateTo: end,
     maxPointCount: 100,
@@ -59,7 +56,7 @@ export const fetchFundBalanceChartAction = (
   currency: CurrencyEnum
 ): ApiAction<FundBalanceChart> => ({
   type: FETCH_FUND_BALANCE_CHART,
-  payload: fundsApi.v10FundsByIdChartsBalanceGet(id, {
+  payload: fundsApi.getFundBalanceChart(id, {
     currency,
     dateFrom: period.start,
     dateTo: period.end,
@@ -72,7 +69,7 @@ export const fetchFundDescriptionAction = (
   authorization: string
 ): ApiAction<FundDetailsFull> => ({
   type: FETCH_FUND_DESCRIPTION,
-  payload: fundsApi.v10FundsByIdGet(id, { authorization })
+  payload: fundsApi.getFundDetails(id, { authorization })
 });
 
 export const statisticCurrencyAction = (
@@ -94,7 +91,7 @@ export const fundReallocateHistoryAction = (
   filters?: FilteringType
 ): ApiAction<ReallocationsViewModel> => ({
   type: FUND_REALLOCATE_HISTORY,
-  payload: fundsApi.v10FundsByIdReallocationsGet(fundId, filters)
+  payload: fundsApi.getReallocationsHistory(fundId, filters)
 });
 
 export const fundStructureAction = (
@@ -102,6 +99,6 @@ export const fundStructureAction = (
 ): ApiAction<FundAssetsViewModel> => ({
   type: FUND_STRUCTURE,
   payload: fundsApi
-    .v10FundsByIdAssetsGet(fundId)
+    .getFundAssets(fundId)
     .then(data => ({ ...data, total: data.assets.length }))
 });

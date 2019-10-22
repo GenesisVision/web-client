@@ -3,38 +3,38 @@ import {
   BrokerDetails,
   LevelsParamsInfo,
   PersonalProgramDetailsFull,
-  ProgramDetailsFull,
+  ProgramDetailsFullOld,
   ProgramProfitChart,
   ProgramStatistic
 } from "gv-api-web";
-import { getRandomInteger } from "shared/utils/helpers";
-import { equityChartLoaderData } from "./equity-chart.loader-data";
-import { periodsLoaderData } from "./periods.loader-data";
 import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
+import {
+  amountWithCurrencyLoaderData,
+  managerLoaderData,
+  mockDate
+} from "shared/components/details/details.loader-data";
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
-import { amountWithCurrencyLoaderData, managerLoaderData, mockDate } from "../../details/details.loader-data";
+import { getRandomInteger } from "shared/utils/helpers";
+import { CurrencyEnum } from "shared/utils/types";
+
+import { periodsLoaderData } from "./periods.loader-data";
 
 export const selectedCurrenciesLoaderData: TChartCurrency[] = [
   { name: "GVT", color: "#f0f0f0" }
 ];
 
 export const profitChartLoaderData: ProgramProfitChart = {
-  equityChart: equityChartLoaderData,
+  equityChart: [],
   totalProfit: 0,
   timeframeProfit: 0,
   programCurrency: "ETH",
   trades: 0,
   successTradesPercent: 0,
   profitFactor: 0,
-  pnLChart: [],
   periods: periodsLoaderData,
   lastPeriodStarts: ("2019-09-24T06:02:14.7974010+00:00" as unknown) as Date,
   lastPeriodEnds: ("2019-09-24T07:02:14.7974010+00:00" as unknown) as Date,
   tradingVolume: 0,
-  totalProgramCurrencyProfit: 0,
-  timeframeProgramCurrencyProfit: 0,
-  totalGvtProfit: 0,
-  timeframeGvtProfit: 0,
   balance: 25.80216005,
   investors: 3,
   profitChangePercent: -22.4,
@@ -50,7 +50,7 @@ export const profitChartDataLoaderData: ProfitChartDataType = [
 ];
 
 export const statisticDataLoaderData = {
-  statisticCurrency: "GVT",
+  statisticCurrency: "",
   statistic: {
     equityChart: [],
     totalProgramCurrencyProfit: faker.random.number(),
@@ -59,7 +59,6 @@ export const statisticDataLoaderData = {
     trades: faker.random.number(),
     successTradesPercent: faker.random.number(),
     profitFactor: faker.random.number(),
-    pnLChart: [],
     periods: [],
     lastPeriodStarts: mockDate,
     lastPeriodEnds: mockDate,
@@ -152,7 +151,6 @@ export const personalProgramDetailsLoaderData: PersonalProgramDetailsFull = {
   isFavorite: false,
   isInvested: false,
   isOwnProgram: false,
-  canCloseProgram: false,
   canCloseAsset: false,
   isFinishing: false,
   canInvest: false,
@@ -168,20 +166,17 @@ export const personalProgramDetailsLoaderData: PersonalProgramDetailsFull = {
   status: "Pending"
 };
 
-export const programDetailsLoaderData: ProgramDetailsFull = {
-  currency: "GVT",
+export const programDetailsLoaderData: ProgramDetailsFullOld = {
+  currency: "" as CurrencyEnum,
   level: getRandomInteger(0, 100),
   levelProgress: getRandomInteger(0, 100),
   periodDuration: getRandomInteger(0, 100),
   periodStarts: mockDate,
   periodEnds: mockDate,
-  entryFee: getRandomInteger(0, 100),
   entryFeeSelected: getRandomInteger(0, 100),
   entryFeeCurrent: getRandomInteger(0, 100),
-  successFee: getRandomInteger(0, 100),
   successFeeSelected: getRandomInteger(0, 100),
   successFeeCurrent: getRandomInteger(0, 100),
-  stopOutLevel: getRandomInteger(0, 100),
   stopOutLevelSelected: getRandomInteger(0, 100),
   stopOutLevelCurrent: getRandomInteger(0, 100),
   isReinvesting: false,
@@ -195,24 +190,17 @@ export const programDetailsLoaderData: ProgramDetailsFull = {
   investmentScale: getRandomInteger(0, 100),
   volumeScale: getRandomInteger(0, 100),
   tradesDelay: "None",
-  availableInvestment: getRandomInteger(0, 100),
   availableInvestmentBase: getRandomInteger(0, 100),
   availableInvestmentLimit: getRandomInteger(0, 100),
   totalAvailableInvestment: getRandomInteger(0, 100),
   brokerDetails: brokerDetailsLoaderData,
   statistic: statisticLoaderData,
-  rating: {
-    rating: getRandomInteger(0, 100),
-    profit: getRandomInteger(0, 100),
-    canLevelUp: false,
-    topPercent: getRandomInteger(0, 100)
-  },
   personalProgramDetails: personalProgramDetailsLoaderData,
   tags: [],
   id: "",
   logo: "",
   url: "",
-  color: faker.internet.color(),
+  color: "#fff",
   description: faker.lorem.sentences(3),
   title: faker.lorem.word(),
   ipfsHash: "",

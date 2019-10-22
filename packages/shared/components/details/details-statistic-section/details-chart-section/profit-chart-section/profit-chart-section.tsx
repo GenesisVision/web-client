@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
+import { selectedCurrenciesLoaderData } from "shared/components/programs/program-details/program-details.loader-data";
 
 import {
   ProfitChartDataType,
@@ -7,11 +8,11 @@ import {
   TUseChartPeriod,
   TUseChartStateValues
 } from "../../details.chart.helpers";
+import { DETAILS_CHART_TABS } from "../details-chart";
 import ProfitChartElements, {
   TRenderProfitChart,
   TRenderProfitValue
 } from "./profit-chart-elements";
-import { selectedCurrenciesLoaderData } from "shared/components/programs/program-details/program-details.loader-data";
 
 const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
   loaderData,
@@ -28,7 +29,7 @@ const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
     changeCurrency,
     selectedCurrencies,
     selectCurrencies
-  } = useChartStateValues();
+  } = useChartStateValues(DETAILS_CHART_TABS.PROFIT);
   const profitChart = useSelector(profitChartSelector);
   return (
     <ProfitChartElements

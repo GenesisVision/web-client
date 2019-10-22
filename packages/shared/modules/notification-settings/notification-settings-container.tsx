@@ -2,12 +2,12 @@ import "./notification-settings.scss";
 
 import { NotificationSettingList } from "gv-api-web";
 import * as React from "react";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { AuthRootState } from "shared/utils/types";
 

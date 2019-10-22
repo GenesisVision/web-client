@@ -1,21 +1,13 @@
-import moment, { MomentInput } from "moment";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
 import GVTextField from "shared/components/gv-text-field";
+import { localizedDate, subtractDate } from "shared/utils/dates";
 
 import {
   DATA_RANGE_FILTER_TYPES,
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
-
-interface IDateRangeFilterValuesProps {
-  onChange(type: keyof IDataRangeFilterValue, date: string): void;
-  type: DATA_RANGE_FILTER_TYPES;
-  dateStart: MomentInput;
-  dateEnd: MomentInput;
-  startLabel: string;
-}
 
 const _DateRangeFilterValues: React.FC<
   IDateRangeFilterValuesProps & WithTranslation
@@ -38,9 +30,7 @@ const _DateRangeFilterValues: React.FC<
       return (
         <>
           <FirstInput
-            value={moment()
-              .subtract(1, "month")
-              .format("ll")}
+            value={localizedDate(subtractDate(new Date(), 1, "month"))}
           />
           <SecondInput />
         </>
@@ -49,9 +39,7 @@ const _DateRangeFilterValues: React.FC<
       return (
         <>
           <FirstInput
-            value={moment()
-              .subtract(1, "week")
-              .format("ll")}
+            value={localizedDate(subtractDate(new Date(), 1, "week"))}
           />
           <SecondInput />
         </>
@@ -124,3 +112,11 @@ const SecondInput = translate()(React.memo(_SecondInput));
 
 const DateRangeFilterValues = translate()(React.memo(_DateRangeFilterValues));
 export default DateRangeFilterValues;
+
+interface IDateRangeFilterValuesProps {
+  onChange(type: keyof IDataRangeFilterValue, date: string): void;
+  type: DATA_RANGE_FILTER_TYPES;
+  dateStart?: Date | string | number;
+  dateEnd?: Date | string | number;
+  startLabel: string;
+}

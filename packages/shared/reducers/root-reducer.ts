@@ -18,8 +18,8 @@ import programDetailsReducer, {
 import {
   CopyTradingAccountsReducer,
   CopyTradingAccountsState,
-  WalletState,
-  walletReducer
+  walletReducer,
+  WalletState
 } from "shared/components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer, {
   AlertMessagesState
@@ -52,10 +52,12 @@ import authReducer from "./auth-reducer";
 import emailPendingReducer from "./email-pending-reducer";
 import headerReducer, { HeaderState } from "./header-reducer";
 import platformReducer from "./platform-reducer";
+import profileReducer, { ProfileState } from "./profile-reducer";
 import { RouterState } from "./router-reducer";
 import uiReducer from "./ui-reducer";
 
 export const sharedRootReducers = {
+  profile: profileReducer,
   fundDetails: fundDetailsReducer,
   programDetails: programDetailsReducer,
   router: connectRouter(history),
@@ -82,6 +84,7 @@ export const sharedRootReducers = {
 };
 
 export type RootState = Readonly<{
+  profile: ProfileState;
   fundDetails: FundDetailsState;
   programDetails: ProgramDetailsState;
   notifications: NotificationsState;

@@ -20,8 +20,7 @@ const _TwoFactor: React.FC<Props> = ({
   t,
   twoFactorAuth,
   type,
-  handleClose,
-  isPending
+  handleClose
 }) => (
   <div className="two-factor">
     <GVTextField
@@ -32,7 +31,6 @@ const _TwoFactor: React.FC<Props> = ({
       }
       onChange={handleChange}
       InputComponent={Select}
-      disabled={isPending}
     >
       <option value={TYPE_2FA.DISABLE}>{t("2fa-page.none")}</option>
       <option value={TYPE_2FA.GOOGLE}>{t("2fa-page.google")}</option>
@@ -61,7 +59,6 @@ interface OwnProps {
   handleSubmit: () => void;
   handleChange: (event: React.ChangeEvent<any>) => void;
   handleClose: () => void;
-  isPending: boolean;
   type?: TYPE_2FA;
 }
 

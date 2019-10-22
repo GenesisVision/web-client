@@ -40,7 +40,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
       )}
       getItems={getFinancialStatistics(id)}
       dataSelector={financialStatisticTableSelector}
-      isFetchOnMount={false}
+      isFetchOnMount={true}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}
@@ -53,9 +53,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
       columns={columns}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${
-            column.name
-          }`}
+          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
         >
           {t(`program-details-page.history.financial-statistic.${column.name}`)}
         </span>

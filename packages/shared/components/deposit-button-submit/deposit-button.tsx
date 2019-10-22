@@ -1,8 +1,5 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import GVButton from "shared/components/gv-button";
-import { availableSelector } from "shared/reducers/header-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 
 interface IDepositButtonStateProps {
   available: number;
@@ -31,12 +28,6 @@ const DepositButton: React.FC<
   </GVButton>
 );
 
-const mapStateToProps = (state: RootState): IDepositButtonStateProps => ({
-  available: availableSelector(state)
-});
-
-const DepositButtonContainer = connect(mapStateToProps)(
-  React.memo(DepositButton)
-);
+const DepositButtonContainer = React.memo(DepositButton);
 
 export default DepositButtonContainer;

@@ -22,7 +22,7 @@ export const fetchProgramNotificationsAction = (
   id: string
 ): ApiAction<ProgramNotificationSettingList> => ({
   type: FETCH_PROGRAM_NOTIFICATIONS,
-  payload: notificationsApi.v10NotificationsSettingsProgramsByIdGet(
+  payload: notificationsApi.getNotificationsProgramSettings(
     id,
     authService.getAuthArg()
   )
@@ -40,7 +40,7 @@ export const toggleProgramNotificationsAction = (
   enabled: boolean
 ): ApiAction<string> => ({
   type: TOGGLE_PROGRAM_NOTIFICATION,
-  payload: notificationsApi.v10NotificationsSettingsByIdByEnablePost(
+  payload: notificationsApi.toggleNotificationSettings(
     id,
     enabled,
     authService.getAuthArg()

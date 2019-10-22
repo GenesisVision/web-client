@@ -1,7 +1,8 @@
 import "./two-factor-code.scss";
 
-import { FormikProps, InjectedFormikProps, withFormik } from "formik";
+import { InjectedFormikProps, withFormik } from "formik";
 import * as React from "react";
+import { useCallback, useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
@@ -9,82 +10,78 @@ import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
+import useIsOpen from "shared/hooks/is-open.hook";
 import { SetSubmittingType } from "shared/utils/types";
 import { object, string } from "yup";
 
 import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.routes";
 
-class _TwoFactorCodeForm extends React.PureComponent<
-  InjectedFormikProps<Props, ITwoFactorCodeFormValues>,
-  State
-> {
-  state: State = {
-    isChecking: false
-  };
+const _TwoFactorCodeForm: React.FC<
+  InjectedFormikProps<Props, ITwoFactorCodeFormValues>
+> = ({
+  t,
+  handleSubmit,
+  error,
+  isSubmitting,
+  values,
+  setSubmitting,
+  onSubmit
+}) => {
+  const [isChecking, setIsChecking] = useIsOpen();
 
-  checkTwoFactor = () => {
-    if (this.props.isSubmitting) return;
-    this.setState({ isChecking: true });
-    this.props.setSubmitting(true);
-    this.props.onSubmit(this.props.values, this.props.setSubmitting);
-  };
-
-  componentDidUpdate(
-    prevProps: Readonly<Props & FormikProps<ITwoFactorCodeFormValues>>
-  ): void {
-    if (
-      this.state.isChecking ||
-      this.props.values[FIELDS.code] === prevProps.values[FIELDS.code]
-    )
-      return;
-    if (this.props.values[FIELDS.code].length === 6) {
-      this.checkTwoFactor();
+  useEffect(() => {
+    if (!isChecking && values[FIELDS.code].length === 6) {
+      checkTwoFactor();
     }
-  }
+  }, [values[FIELDS.code], isChecking]);
 
-  render() {
-    const { t, handleSubmit, error, isSubmitting } = this.props;
-    return (
-      <form
-        id="twoFactorForm"
-        className="login-two-factor"
-        onSubmit={handleSubmit}
-        noValidate
-      >
-        <h3>{t("auth.login.two-factor.title")}</h3>
-        <div className="login-two-factor__text">
-          {t("auth.login.two-factor.text")}
-        </div>
-        <GVFormikField
-          disabled={isSubmitting}
-          type="tel"
-          name={FIELDS.code}
-          label={t("auth.login.two-factor.input-label")}
-          autoComplete="off"
-          autoFocus
-          component={GVTextField}
-          format="######"
-        />
+  const checkTwoFactor = useCallback(() => {
+    if (isSubmitting) return;
+    setIsChecking();
+    setSubmitting(true);
+    onSubmit(values, setSubmitting);
+  }, [isSubmitting, values]);
 
-        <div className="login-two-factor__recovery-info">
-          {t("auth.login.two-factor.recovery-info")}
-        </div>
-        <GVButton className="login-two-factor__recovery-link" variant="text">
-          <Link to={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}>
-            {t("auth.login.two-factor.link-to-recovery")}
-          </Link>
+  return (
+    <form
+      id="twoFactorForm"
+      className="login-two-factor"
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <h3>{t("auth.login.two-factor.title")}</h3>
+      <div className="login-two-factor__text">
+        {t("auth.login.two-factor.text")}
+      </div>
+      <GVFormikField
+        disabled={isSubmitting}
+        type="tel"
+        name={FIELDS.code}
+        label={t("auth.login.two-factor.input-label")}
+        autoComplete="off"
+        autoFocus
+        component={GVTextField}
+        format="######"
+      />
+
+      <div className="login-two-factor__recovery-info">
+        {t("auth.login.two-factor.recovery-info")}
+      </div>
+      <GVButton className="login-two-factor__recovery-link" variant="text">
+        <Link to={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}>
+          {t("auth.login.two-factor.link-to-recovery")}
+        </Link>
+      </GVButton>
+
+      <FormError error={error} />
+      <div className="login-two-factor__submit">
+        <GVButton type="submit" id="signUpFormSubmit" disabled={isSubmitting}>
+          {t("auth.login.two-factor.verify")}
         </GVButton>
-
-        <FormError error={error} />
-        <div className="login-two-factor__submit">
-          <GVButton type="submit" id="signUpFormSubmit" disabled={isSubmitting}>
-            {t("auth.login.two-factor.verify")}
-          </GVButton>
-        </div>
-      </form>
-    );
-  }
-}
+      </div>
+    </form>
+  );
+};
 
 enum FIELDS {
   code = "code",
@@ -100,18 +97,13 @@ interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
   email: string;
-  onSubmit(
+  onSubmit: (
     code: ITwoFactorCodeFormValues,
     setSubmitting: SetSubmittingType
-  ): void;
+  ) => void;
   error: string;
   isChecking?: boolean;
 }
-
-interface State {
-  isChecking: boolean;
-}
-
 const TwoFactorCodeForm = compose<React.FC<OwnProps>>(
   translate(),
   withFormik<Props, ITwoFactorCodeFormValues>({

@@ -1,3 +1,5 @@
+import "./tile-filter-item.scss";
+
 import * as React from "react";
 import GVButton from "shared/components/gv-button";
 import { CloseIcon } from "shared/components/icon/close-icon";
@@ -10,13 +12,13 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
   children
 }) => {
   return (
-    <div className="tile-filter__item">
+    <div className="tile-filter-item">
       {children}
       {!mandatory && removable && (
         <GVButton
           variant="text"
           color="secondary"
-          className="tile-filter__button-remove"
+          className="tile-filter-item__button-remove"
           onClick={() => removeTile!(id)}
         >
           <CloseIcon />
@@ -29,7 +31,8 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
 const TileFilterItem = React.memo(_TileFilterItem);
 export default TileFilterItem;
 
-export interface ITileFilterItemProps {
+export interface ITileFilterItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   removable?: boolean;
   id: string;
   removeTile?(id: string): void;

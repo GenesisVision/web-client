@@ -5,12 +5,12 @@ import PrivateRoute from "shared/components/private-route/private-route";
 import ProgramsRatingContainer from "shared/components/programs-rating/programs-rating-container";
 import ProgramsFacetPage from "shared/components/programs/programs-facet/programs-facet.page";
 import {
+  PROGRAM_DETAILS_ROUTE_REGEX,
+  PROGRAM_SETTINGS_ROUTE,
   PROGRAMS_FACET_ROUTE_REGEX,
   PROGRAMS_FAVORITES_TAB_ROUTE,
   PROGRAMS_RATING_ROUTE,
-  PROGRAMS_ROUTE,
-  PROGRAM_DETAILS_ROUTE_REGEX,
-  PROGRAM_SETTINGS_ROUTE
+  PROGRAMS_ROUTE
 } from "shared/routes/programs.routes";
 
 import ProgramDetailsPage from "./program-details/program-details.page";

@@ -1,0 +1,37 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.referral-program {
+  &__tables {
+    @include adaptive-padding(top, $padding-small);
+    display: flex;
+    justify-content: stretch;
+    & > div {
+      flex: 1;
+    }
+  }
+  &__table-header {
+    @include details-block-horizontal-paddings();
+  }
+  &__title,
+  &__link-block {
+    @include adaptive-padding(bottom, $padding-xsmall);
+  }
+  &__link-block {
+    display: flex;
+    align-items: center;
+  }
+  &__link {
+    @include horizontal-paddings($padding-xxsmall);
+    color: $primary-color;
+  }
+  &__rewards-table {
+    & td,
+    & th {
+      @include horizontal-paddings($padding-xxsmall);
+      @include vertical-paddings($padding-xxsmall);
+      text-align: center;
+    }
+  }
+}

@@ -4,9 +4,9 @@ import React, { useCallback } from "react";
 import GVButton from "shared/components/gv-button";
 
 import {
-  SORTING_DIRECTION,
   getSortingColumnName,
-  getSortingDirection
+  getSortingDirection,
+  SORTING_DIRECTION
 } from "../../../helpers/sorting.helpers";
 import {
   SelectFilterValue,

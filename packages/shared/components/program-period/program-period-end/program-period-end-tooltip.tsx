@@ -1,6 +1,6 @@
-import moment from "moment";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { formatDate } from "shared/utils/dates";
 
 const _PropgramPeriodEndTooltip: React.FC<Props> = ({ t, periodEnds }) => (
   <div className="program-period-tooltip">
@@ -9,7 +9,7 @@ const _PropgramPeriodEndTooltip: React.FC<Props> = ({ t, periodEnds }) => (
     </div>
     <div className="program-period-tooltip__content">
       {periodEnds
-        ? moment(periodEnds).format()
+        ? formatDate(periodEnds)
         : t("program-period.waiting-period-start")}
     </div>
   </div>

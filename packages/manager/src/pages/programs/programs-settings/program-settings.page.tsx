@@ -1,17 +1,20 @@
 import "shared/components/details/details.scss";
 
-import { BrokersProgramInfo } from "gv-api-web";
+import {
+  BrokersProgramInfo,
+  ProgramDetailsFullTradesDelayEnum
+} from "gv-api-web";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
@@ -45,12 +48,9 @@ const _ProgramsEditPage: React.FC<Props> = ({
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
   >(undefined);
-  useEffect(
-    () => {
-      description && getProgramBrokers(description.id).then(setBrokersInfo);
-    },
-    [description]
-  );
+  useEffect(() => {
+    description && getProgramBrokers(description.id).then(setBrokersInfo);
+  }, [description]);
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
       programEditSignal({
@@ -74,12 +74,9 @@ const _ProgramsEditPage: React.FC<Props> = ({
     },
     [description]
   );
-  const cancelChangeBroker = useCallback(
-    () => {
-      cancelChangeBrokerMethod(description!.id).then(dispatchDescription);
-    },
-    [description]
-  );
+  const cancelChangeBroker = useCallback(() => {
+    cancelChangeBrokerMethod(description!.id).then(dispatchDescription);
+  }, [description]);
   return (
     <AssetSettingsPage
       redirectToAsset={redirectToProgram}
@@ -119,6 +116,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 export type TUpdateProgramFunc = (
   values: {
+    tradesDelay?: ProgramDetailsFullTradesDelayEnum;
     description?: string;
     logo?: IImageValue;
     investmentLimit?: number;
@@ -126,7 +124,8 @@ export type TUpdateProgramFunc = (
     entryFee?: number;
     successFee?: number;
   },
-  setSubmitting: SetSubmittingType
+  setSubmitting: SetSubmittingType,
+  resetForm?: () => void
 ) => void;
 
 interface OwnProps {}

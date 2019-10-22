@@ -1,4 +1,4 @@
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFullOld } from "gv-api-web";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
@@ -10,16 +10,16 @@ import {
   compose,
   Dispatch
 } from "redux";
-import GVButton from "shared/components/gv-button";
+import DetailsBlock, {
+  DETAILS_BLOCK_TYPE
+} from "shared/components/details/details-block";
+import { InvestButtons } from "shared/components/details/details-description-section/details-investment/invest-buttons";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { kycConfirmedSelector } from "shared/reducers/header-reducer";
-import DetailsBlock, {
-  DETAILS_BLOCK_TYPE
-} from "shared/components/details/details-block";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
   service: { dispatchProgramDescription },
@@ -53,7 +53,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
-      className="asset-details-description__col"
+      className="details-description__control-elements-block"
     >
       <InvestmentProgramInfo
         isOwnProgram={isOwnProgram}
@@ -62,29 +62,17 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         isKycConfirmed={isKycConfirmed}
         LevelCalculator={LevelCalculator}
       />
-      <div className="program-details-description__statistic-container program-details-description__statistic-container--btn">
-        {isOwnProgram ? (
-          <GVButton
-            className="program-details-description__invest-btn"
-            onClick={setIsOpenInvestPopup}
-            disabled={isDisabledInvestButton}
-          >
-            {t("program-details-page.description.invest")}
-          </GVButton>
-        ) : (
-          <GVButton
-            className="program-details-description__invest-btn"
-            onClick={setIsOpenUnAuthInvestPopup}
-          >
-            {t("program-details-page.description.invest")}
-          </GVButton>
-        )}
-      </div>
+      <InvestButtons
+        isOwnProgram={isOwnProgram}
+        isDisabledInvestButton={isDisabledInvestButton}
+        setIsOpenInvestPopup={setIsOpenInvestPopup}
+        setIsOpenUnAuthInvestPopup={setIsOpenUnAuthInvestPopup}
+      />
       <InvestmentUnauthPopup
         message={message}
         title={programDescription.title}
         currency={programDescription.currency}
-        availableToInvestBase={programDescription.availableInvestment}
+        availableToInvestBase={programDescription.availableInvestmentBase}
         asset={ASSET.PROGRAM}
         open={isOpenUnAuthInvestPopup}
         onClose={setIsCloseUnAuthInvestPopup}
@@ -119,9 +107,9 @@ interface DispatchProps {
 
 interface OwnProps {
   isAuthenticated: boolean;
-  canCloseProgram: boolean;
+  canCloseAsset: boolean;
   isOwnProgram: boolean;
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
   levelsParameters: LevelsParamsInfo;
 }
 

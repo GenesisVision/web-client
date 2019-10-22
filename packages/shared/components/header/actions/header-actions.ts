@@ -8,5 +8,5 @@ export const fetchProfileHeaderInfoAction = (): ApiAction<
   ProfileHeaderViewModel
 > => ({
   type: PROFILE_HEADER,
-  payload: profileApi.v10ProfileHeaderGet(authService.getAuthArg())
+  payload: profileApi.getProfileHeader(authService.getAuthArg())
 });

@@ -3,13 +3,13 @@ import "shared/modules/asset-settings/asset-settings.scss";
 
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import BackButtonBody from "shared/components/back-button/back-button-body";
 import Page from "shared/components/page/page";
@@ -23,35 +23,41 @@ const _AssetsEditPage: React.FC<Props> = ({
   asset,
   settingsBlocks,
   service: { dispatchDescription, editAsset, redirectToAsset },
-  t,
   description
 }) => {
+  const [t] = useTranslation();
   useEffect(() => {
     dispatchDescription();
   }, []);
   const editAssetCallback: TUpdateAssetFunc = useCallback(
-    values => {
+    (values, setSubmitting, resetForm) => {
+      const investmentLimit =
+        "hasInvestmentLimit" in values
+          ? values.hasInvestmentLimit
+            ? values.investmentLimit || null
+            : null
+          : description!.availableInvestmentLimit;
       const currentValues = {
+        tradesDelay: description!.tradesDelay,
         exitFee: description!.exitFee,
         entryFee: description!.entryFee,
-        successFee: description!.successFee,
+        successFee: description!.successFeeCurrent,
         title: description!.title,
-        stopOutLevel: description!.stopOutLevel,
+        stopOutLevel: description!.stopOutLevelCurrent, // TODO current != selected ? current (selected) : current
         description: description!.description,
-        logo: { src: description!.logo },
-        investmentLimit: description!.availableInvestmentLimit
+        logo: { src: description!.logo }
       };
       editAsset(
         description!.id,
         {
           ...currentValues,
           ...values,
-          investmentLimit: values.hasInvestmentLimit
-            ? values.investmentLimit
-            : null
+          investmentLimit
         },
         asset
-      ).then(dispatchDescription);
+      )
+        .then(dispatchDescription)
+        .finally(resetForm);
     },
     [description]
   );
@@ -107,10 +113,9 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, DispatchProps, WithTranslation {}
+interface Props extends OwnProps, DispatchProps {}
 
 const AssetSettingsPage = compose<React.ComponentType<OwnProps>>(
-  translate(),
   connect(
     null,
     mapDispatchToProps

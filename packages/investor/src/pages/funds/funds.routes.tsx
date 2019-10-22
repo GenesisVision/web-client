@@ -5,10 +5,10 @@ import FundsPage from "shared/components/funds/funds.page";
 import NotFoundPage from "shared/components/not-found/not-found";
 import PrivateRoute from "shared/components/private-route/private-route";
 import {
+  FUND_DETAILS_ROUTE_REGEX,
   FUNDS_FACET_ROUTE_REGEX,
   FUNDS_FAVORITES_TAB_ROUTE,
-  FUNDS_ROUTE,
-  FUND_DETAILS_ROUTE_REGEX
+  FUNDS_ROUTE
 } from "shared/routes/funds.routes";
 
 import FundDetailsPage from "./fund-details/fund-details.page";

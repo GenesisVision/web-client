@@ -40,10 +40,7 @@ const _BalanceChartElements: React.FC<Props> = ({
     FundBalanceChartType | ProgramBalanceChartType
   >(balanceChart, selectedCurrencies);
   const { name, color } = chartData.selectedCurrencies[0];
-  const balance =
-    "balance" in chartData.chart
-      ? chartData.chart.balance
-      : chartData.chart.gvtBalance;
+  const balance = chartData.chart.balance;
   return (
     <>
       <div className="details-chart__value">
@@ -77,13 +74,11 @@ const _BalanceChartElements: React.FC<Props> = ({
   );
 };
 
-export type TRenderBalanceChart = (
-  props: {
-    color: string;
-    balanceChart: BalanceChartElementType;
-    currency: CurrencyEnum;
-  }
-) => JSX.Element;
+export type TRenderBalanceChart = (props: {
+  color: string;
+  balanceChart: BalanceChartElementType;
+  currency: CurrencyEnum;
+}) => JSX.Element;
 
 interface OwnProps {
   renderBalanceChart: TRenderBalanceChart;

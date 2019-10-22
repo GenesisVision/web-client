@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { FundsList } from "gv-api-web";
+import { FundsListOld } from "gv-api-web";
 import * as qs from "qs";
 import {
   ComposeFiltersAllType,
@@ -40,7 +40,7 @@ export const getFunds: GetFundsType = () => dispatch => {
 
 export type FetchFundsType = (
   filters: ComposeFiltersAllType
-) => Promise<FundsList>;
+) => Promise<FundsListOld>;
 export const fetchFunds: FetchFundsType = filters => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();
@@ -59,7 +59,7 @@ const composeRequestFilters = () => (
   const { router } = getState();
   const { currency } = getState().accountSettings;
 
-  let filters: ComposeFiltersAllType = { currencySecondary: currency };
+  let filters: ComposeFiltersAllType = { currency: currency };
 
   const { tab } = getParams(router.location.pathname, FUNDS_TAB_ROUTE);
   if (tab === FUNDS_FAVORITES_TAB_NAME) {

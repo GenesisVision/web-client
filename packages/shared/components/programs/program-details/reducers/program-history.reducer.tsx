@@ -51,7 +51,7 @@ export const programEventsReducer = tableReducerFactory<
   defaultFilters: ASSET_PORTFOLIO_EVENTS_FILTERS
 });
 
-const openPositionsSelector = (state: RootState) =>
+export const openPositionsSelector = (state: RootState) =>
   state.programDetails.programHistory.openPositions;
 
 export const openPositionsTableSelector = tableSelectorCreator<
@@ -65,7 +65,7 @@ export const openPositionsReducer = tableReducerFactory<TradesViewModel>({
   paging: { ...DEFAULT_PAGING, itemsOnPage: Number.MAX_VALUE }
 });
 
-const tradesSelector = (state: RootState) =>
+export const tradesSelector = (state: RootState) =>
   state.programDetails.programHistory.trades;
 
 export const tradesTableSelector = tableSelectorCreator<

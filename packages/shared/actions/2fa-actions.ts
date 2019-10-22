@@ -8,7 +8,7 @@ export const TWO_FACTOR_SET_REQUIREMENT = "TWO_FACTOR_SET_REQUIREMENT";
 
 export const fetchTwoFactorAction = (): ApiAction<TwoFactorStatus> => ({
   type: TWO_FACTOR_AUTH,
-  payload: authApi.v10Auth2faGet(authService.getAuthArg())
+  payload: authApi.getTwoStepAuthStatus(authService.getAuthArg())
 });
 
 export const setTwoFactorRequirementAction = (

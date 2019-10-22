@@ -1,12 +1,12 @@
 import "./subscription-details.scss";
 
 import { PersonalProgramDetailsFull } from "gv-api-web";
-import ProgramFollowContainer from "investor-web-portal/src/modules/program-follow/program-follow-container"; // TODO fix it
 import React, { useEffect, useState } from "react";
-import { ResolveThunks, connect } from "react-redux";
-import { ActionCreatorsMapObject, Dispatch, bindActionCreators } from "redux";
+import { connect, ResolveThunks } from "react-redux";
+import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
 import useIsOpen from "shared/hooks/is-open.hook";
-import { rateApi } from "shared/services/api-client/rate-api";
+import ProgramFollowContainer from "shared/modules/program-follow/program-follow-container";
+import { fetchRate } from "shared/services/rate-service";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { dispatchProgramDescription } from "../../services/program-details.service";
@@ -21,8 +21,7 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const [rate, setRate] = useState<number>(1);
   useEffect(() => {
-    rateApi
-      .v10RateByFromByToGet("USD", currency)
+    fetchRate("USD", currency)
       .then(setRate)
       .catch(() => setRate(1));
   }, []);

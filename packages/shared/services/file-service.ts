@@ -25,9 +25,7 @@ const getTradesExportFileUrl = (
 ): string => {
   const dateFilter = getDateFilters(dateRange);
   const queryString = "?" + qs.stringify(dateFilter);
-  return `${
-    process.env.REACT_APP_API_URL
-  }/v1.0/programs/${id}/trades/export${queryString}`;
+  return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/trades/export${queryString}`;
 };
 
 const getPeriodExportFileUrl = (
@@ -36,9 +34,7 @@ const getPeriodExportFileUrl = (
 ): string => {
   const dateFilter = getDateFilters(dateRange);
   const queryString = "?" + qs.stringify(dateFilter);
-  return `${
-    process.env.REACT_APP_API_URL
-  }/v1.0/programs/${id}/periods/export${queryString}`;
+  return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/periods/export${queryString}`;
 };
 
 const getStatisticExportFile = (
@@ -48,7 +44,7 @@ const getStatisticExportFile = (
   const authorization = authService.getAuthArg();
   const opts = getDateFilters(dateRange);
   return programsApi
-    .v10ProgramsByIdPeriodsExportStatisticGet(id, authorization, opts)
+    .exportProgramPeriodsFinStatistic(id, authorization, opts)
     .then(blob => blob);
 };
 
@@ -58,17 +54,11 @@ const getFileUrl = (id?: string): string =>
 const uploadFile = (
   file: File,
   authorization: string
-): CancelablePromise<string> => {
-  return fileApi
-    .v10FileUploadPost(file, { authorization })
-    .then(response => response.id);
-};
+): CancelablePromise<string> =>
+  fileApi.uploadFile(file, { authorization }).then(response => response.id);
 
-const uploadDocument = (file: File, authorization: string): Promise<string> => {
-  return fileApi
-    .v10FileDocumentUploadPost(authorization, file)
-    .then(response => response.id);
-};
+const uploadDocument = (file: File, authorization: string): Promise<string> =>
+  fileApi.uploadFile(file, { authorization }).then(response => response.id);
 
 const filesService = {
   getTradesExportFileUrl,

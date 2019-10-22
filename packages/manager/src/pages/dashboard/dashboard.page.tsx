@@ -1,42 +1,35 @@
 import "shared/components/dashboard/dashboard.scss";
 
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import DetailsBlock from "shared/components/details/details-block";
 import Page from "shared/components/page/page";
-import withRole, { WithRoleProps } from "shared/decorators/with-role";
+import useRole from "shared/hooks/use-role.hook";
 
 import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
 import DashboardPortfolioChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 
-const _DashboardPage: React.FC<WithTranslation & WithRoleProps> = ({
-  role,
-  t
-}) => {
+const _DashboardPage: React.FC = () => {
+  const [t] = useTranslation();
+  const role = useRole();
   const title = t(`${role}.dashboard-page.title`);
   return (
     <Page title={title}>
-      <div className="dashboard">
-        <div className="dashboard__row">
-          <div className="dashboard__chart">
-            <DashboardPortfolioChartSection />
-          </div>
-          <div className="dashboard__portfolio-events-aside">
-            <DashboardPortfolioEventsSection title={title} />
-          </div>
-        </div>
-        <div className="dashboard__assets">
-          <DashboardAssetsContainer title={title} />
-        </div>
+      <div className="dashboard__row">
+        <DetailsBlock className="dashboard__chart-block">
+          <DashboardPortfolioChartSection />
+        </DetailsBlock>
+        <DetailsBlock horizontalPaddings className="dashboard__events-block">
+          <DashboardPortfolioEventsSection title={title} />
+        </DetailsBlock>
       </div>
+      <DetailsBlock>
+        <DashboardAssetsContainer title={title} />
+      </DetailsBlock>
     </Page>
   );
 };
 
-const DashboardPage = compose<React.ComponentType>(
-  withRole,
-  translate(),
-  React.memo
-)(_DashboardPage);
+const DashboardPage = React.memo(_DashboardPage);
 export default DashboardPage;

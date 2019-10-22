@@ -2,19 +2,19 @@ import { FundDetailsFull } from "gv-api-web";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "shared/components/details/details-block";
+import { InvestButtons } from "shared/components/details/details-description-section/details-investment/invest-buttons";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
 import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
-import GVButton from "shared/components/gv-button";
 import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -48,18 +48,13 @@ const _InvestmentFundControls: React.FC<Props> = ({
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
-      className="asset-details-description__col"
+      className="details-description__control-elements-block"
     >
       <InvestmentFundInfo fundDescription={fundDescription} />
-      <div className="details-description__invest-button-container">
-        <GVButton
-          className="details-description__invest-btn"
-          onClick={openPopup}
-          disabled={isDisabledInvestButton}
-        >
-          {t("fund-details-page.description.invest")}
-        </GVButton>
-      </div>
+      <InvestButtons
+        isDisabledInvestButton={isDisabledInvestButton}
+        setIsOpenInvestPopup={openPopup}
+      />
       <FundDepositContainer
         condition={isAuthenticated}
         open={isOpenInvestPopup}

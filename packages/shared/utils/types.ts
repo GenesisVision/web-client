@@ -9,9 +9,11 @@ import {
 import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { Action, Dispatch } from "redux";
-import { ThunkAction } from "redux-thunk";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { RootState } from "shared/reducers/root-reducer";
+
+export type ReduxDispatch = ThunkDispatch<RootState, any, Action>;
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
@@ -102,7 +104,9 @@ export type FeesType = {
   successFee?: number;
   successFeeSelected?: number;
   successFeeCurrent?: number;
+  successFeePersonal?: number;
   exitFee?: number;
+  exitFeePersonal?: number;
 };
 
 export type TagType = React.ComponentType<{ className?: string; style?: any }> | string;

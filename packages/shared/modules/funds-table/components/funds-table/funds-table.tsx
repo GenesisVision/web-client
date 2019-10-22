@@ -18,7 +18,7 @@ interface Props extends ITableProps {
   isAuthenticated: boolean;
 }
 
-const FundsTable: React.FC<Props> = ({
+const _FundsTable: React.FC<Props> = ({
   data,
   sorting,
   updateSorting,
@@ -68,4 +68,5 @@ const FundsTable: React.FC<Props> = ({
   />
 );
 
-export default React.memo(FundsTable);
+const FundsTable = React.memo(_FundsTable);
+export default FundsTable;

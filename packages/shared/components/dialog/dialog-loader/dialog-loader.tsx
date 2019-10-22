@@ -1,6 +1,9 @@
 import "../dialog.scss";
 
 import * as React from "react";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogField } from "shared/components/dialog/dialog-field";
 
 import {
   DialogLoaderButton,
@@ -13,20 +16,20 @@ export const DialogLoader: React.FC = () => (
   <React.Fragment>
     <div className="dialog__top">
       <DialogLoaderHeader />
-      <div className="dialog-field">
+      <DialogField>
         <DialogLoaderStat />
-      </div>
+      </DialogField>
     </div>
-    <div className="dialog__bottom">
+    <DialogBottom>
       <div className="dialog__wrapper">
         <DialogLoaderInput />
       </div>
       <div className="dialog__wrapper">
         <DialogLoaderInput />
       </div>
-      <div className="dialog__buttons">
+      <DialogButtons>
         <DialogLoaderButton />
-      </div>
-    </div>
+      </DialogButtons>
+    </DialogBottom>
   </React.Fragment>
 );

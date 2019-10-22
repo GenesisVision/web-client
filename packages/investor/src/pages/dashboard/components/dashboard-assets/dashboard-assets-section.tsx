@@ -10,7 +10,7 @@ import {
 } from "pages/dashboard/services/dashboard.service";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
+import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
 import { InvestorRootState } from "reducers";
 import {
   Action,
@@ -25,7 +25,6 @@ import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dash
 import dashboardProgramsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.selector";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import Surface from "shared/components/surface/surface";
 import { ROLE } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
 
@@ -34,21 +33,22 @@ import { DASHBOARD_PROGRAMS_COLUMNS } from "./dashboard-assets.constants";
 import DashboardCopytrading from "./dashboard-copytrading";
 import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
 
-const DashboardAssetsSection: React.FC<Props> = ({
-  title,
-  counts,
-  service
-}) => {
+const _DashboardAssetsSection: React.FC<Props> = ({ title, service }) => {
+  const dispatch = useDispatch();
+  const programsCount = useSelector(dashboardProgramsTableSelector).itemsData
+    .data.total;
+  const fundsCount = useSelector(dashboardFundsTableSelector).itemsData.data
+    .total;
+  const tradesCount = useSelector(dashboardCopytradingTableSelector).itemsData
+    .data.total;
   const { tab, setTab } = useTab<TABS>(TABS.PROGRAMS);
   const [t] = useTranslation();
-  useEffect(
-    () => {
-      service.getAssetsCounts();
-      return service.clearDashboardAssetsTable;
-    },
-    [service]
-  );
-  const { programsCount, fundsCount, tradesCount } = counts;
+  useEffect(() => {
+    service.getAssetsCounts();
+    return () => {
+      dispatch(clearDashboardAssetsTableAction());
+    };
+  }, [service]);
   const handleTabChange = useCallback(
     (e: any, eventTab: string) => {
       if (eventTab === tab) return;
@@ -57,7 +57,7 @@ const DashboardAssetsSection: React.FC<Props> = ({
     [setTab, tab]
   );
   return (
-    <Surface className="dashboard-assets">
+    <>
       <div className="dashboard-assets__head">
         <h3>{t("investor.dashboard-page.assets.title")}</h3>
         <div className="dashboard-assets__tabs">
@@ -106,7 +106,7 @@ const DashboardAssetsSection: React.FC<Props> = ({
         )}
         {tab === TABS.COPYTRADING && <DashboardCopytrading title={title} />}
       </div>
-    </Surface>
+    </>
   );
 };
 
@@ -122,7 +122,6 @@ const mapStateToProps = (state: InvestorRootState) => {
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      clearDashboardAssetsTable: clearDashboardAssetsTableAction,
       getAssetsCounts
     },
     dispatch
@@ -139,12 +138,7 @@ interface OwnProps {
   title: string;
 }
 
-interface StateProps {
-  counts: IDashboardAssetsCounts;
-}
-
 interface ServiceThunks extends ActionCreatorsMapObject {
-  clearDashboardAssetsTable: typeof clearDashboardAssetsTableAction;
   getAssetsCounts: typeof getAssetsCounts;
 }
 
@@ -152,12 +146,13 @@ interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;
 }
 
-interface Props extends OwnProps, StateProps, DispatchProps {}
+interface Props extends OwnProps, DispatchProps {}
 
-export default compose<React.ComponentType<OwnProps>>(
+const DashboardAssetsSection = compose<React.ComponentType<OwnProps>>(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   ),
   React.memo
-)(DashboardAssetsSection);
+)(_DashboardAssetsSection);
+export default DashboardAssetsSection;

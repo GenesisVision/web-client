@@ -2,10 +2,10 @@ import "./wallet-select.scss";
 
 import { CopyTradingAccountInfo, WalletBaseData, WalletData } from "gv-api-web";
 import React from "react";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import Select, { ISelectChangeEvent } from "shared/components/select/select";
-import filesService from "shared/services/file-service";
 
 const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
   <GVFormikField
@@ -17,12 +17,7 @@ const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
   >
     {items.map(({ id, logo, currency, title }) => (
       <option value={id} key={id}>
-        <img
-          src={filesService.getFileUrl(logo)}
-          className="wallet-select__icon"
-          alt={currency}
-        />
-        {`${title} | ${currency}`}
+        <CurrencyItem logo={logo} name={`${title} | ${currency}`} small />
       </option>
     ))}
   </GVFormikField>

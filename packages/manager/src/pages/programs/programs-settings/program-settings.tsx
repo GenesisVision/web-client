@@ -2,7 +2,7 @@ import "./program-settings.scss";
 
 import {
   BrokersProgramInfo,
-  ProgramDetailsFull,
+  ProgramDetailsFullOld,
   ProgramsInfo
 } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
@@ -10,7 +10,7 @@ import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-bloc
 import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
 import InvestmentFees from "modules/asset-settings/investment-fees";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
@@ -24,12 +24,12 @@ import InvestmentLimit from "./investment-limit";
 import { TUpdateProgramFunc } from "./program-settings.page";
 import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
+import TradesUpdating from "./trades-updating";
 import TwoFactorConfirm from "./two-factor-confirm";
 
 const _ProgramSettings: React.FC<Props> = ({
   programsInfo,
   cancelChangeBroker,
-  t,
   brokersInfo,
   details,
   changeBroker,
@@ -38,6 +38,7 @@ const _ProgramSettings: React.FC<Props> = ({
   closeProgram,
   changeSignaling
 }) => {
+  const [t] = useTranslation();
   const signalSuccessFee = details.isSignalProgram
     ? details.signalSuccessFee
     : undefined;
@@ -58,7 +59,7 @@ const _ProgramSettings: React.FC<Props> = ({
       <ChangePassword
         condition={
           details.personalProgramDetails.canChangePassword &&
-          details.personalProgramDetails.canCloseProgram
+          details.personalProgramDetails.canCloseAsset
         }
         title={details.title}
         id={details.id}
@@ -96,11 +97,16 @@ const _ProgramSettings: React.FC<Props> = ({
         asset={ASSET.PROGRAM}
         programsInfo={programsInfo}
         entryFee={details.entryFeeSelected}
-        successFee={details.successFee}
+        successFee={details.successFeeCurrent}
+        onSubmit={editProgram}
+      />
+      <TradesUpdating
+        condition={!details.isSignalProgram}
+        tradesDelay={details.tradesDelay}
         onSubmit={editProgram}
       />
       <StopOutLevel
-        stopOutLevel={details.stopOutLevel}
+        stopOutLevel={details.stopOutLevelCurrent}
         onSubmit={editProgram}
       />
       <InvestmentLimit
@@ -128,7 +134,7 @@ const _ProgramSettings: React.FC<Props> = ({
       <CloseAssetBlock
         label={t("manager.asset-settings.close-program.title")}
         asset={ASSET.PROGRAM}
-        canCloseAsset={details.personalProgramDetails.canCloseProgram}
+        canCloseAsset={details.personalProgramDetails.canCloseAsset}
         id={details.id}
         closeAsset={closeProgram}
       />
@@ -136,11 +142,9 @@ const _ProgramSettings: React.FC<Props> = ({
   );
 };
 
-interface Props extends OwnProps, WithTranslation {}
-
-interface OwnProps {
+interface Props {
   programsInfo: ProgramsInfo;
-  details: ProgramDetailsFull;
+  details: ProgramDetailsFullOld;
   brokersInfo: BrokersProgramInfo;
   changeSignaling: (
     values: IProgramSignalFormValues,
@@ -156,11 +160,8 @@ interface OwnProps {
   cancelChangeBroker: () => void;
 }
 
-const ProgramSettings = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
->(
+const ProgramSettings = compose<React.ComponentType<Props & WithLoaderProps>>(
   withLoader,
-  translate(),
   React.memo
 )(_ProgramSettings);
 export default ProgramSettings;

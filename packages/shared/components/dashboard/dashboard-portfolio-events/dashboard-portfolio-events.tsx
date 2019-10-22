@@ -8,16 +8,15 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
-import Surface from "shared/components/surface/surface";
-import withLoader from "shared/decorators/with-loader";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useRole from "shared/hooks/use-role.hook";
 
-import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
+import { DashboardPortfolioEventsLoaderData } from "../dashboard.loaders-data";
 import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
 const _Events: React.FC<IEventsProps> = ({
   from,
-  events,
+  data: events,
   total,
   EmptyView
 }) => {
@@ -32,11 +31,11 @@ const _Events: React.FC<IEventsProps> = ({
     </>
   );
 };
-const Events = React.memo(withLoader(_Events));
+const Events = React.memo(withBlurLoader(_Events));
 
 interface IEventsProps {
   EmptyView?: React.ComponentType;
-  events: Array<InvestmentEventViewModel>;
+  data: Array<InvestmentEventViewModel>;
   total: number;
   from: string;
 }
@@ -50,15 +49,17 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
   const [t] = useTranslation();
   const role = useRole();
   return (
-    <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
+    <>
       <h3>{t(`${role}.dashboard-page.portfolio-events.title`)}</h3>
       <div className="dashboard-portfolio-events__scroll-container">
         <div className="dashboard-portfolio-events__list">
           <Events
-            condition={!!data}
-            loader={<DashboardPortfolioEventsListLoader />}
-            events={data! && data!.events}
-            total={data! && data!.total}
+            loaderData={DashboardPortfolioEventsLoaderData}
+            data={data! && data!.events}
+            total={
+              (data! && data!.total) ||
+              DashboardPortfolioEventsLoaderData.length
+            }
             EmptyView={emptyView}
             from={title}
           />
@@ -78,13 +79,11 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
           </>
         </GVButton>
       </Link>
-    </Surface>
+    </>
   );
 };
 
-interface Props extends OwnProps {}
-
-interface OwnProps {
+interface Props {
   fullEventsUrl: string;
   title: string;
   data?: InvestmentEventViewModels;

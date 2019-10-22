@@ -5,6 +5,37 @@
 .details-trades {
   overflow: hidden;
 
+  &__toolbar {
+    display: flex;
+    align-items: center;
+  }
+
+  &__delay-question {
+    cursor: help;
+    box-sizing: border-box;
+    font-weight: 700;
+    line-height: 15px;
+    text-align: center;
+    font-size: 8px;
+    border: 1px solid rgba($icon-color, 0.2);
+    color: rgba($icon-color, 0.2);
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    margin-left: 12px;
+  }
+
+  &__delay-tooltip {
+    font-size: 13px;
+    min-width: 200px;
+    max-width: 500px;
+  }
+
+  &__delay-hint {
+    color: $label-color;
+    margin-right: $padding-xxsmall;
+  }
+
   &__history-popup {
     @include vertical-paddings($padding-medium);
     @include horizontal-paddings($padding-medium);

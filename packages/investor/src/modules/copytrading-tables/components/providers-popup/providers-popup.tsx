@@ -31,9 +31,7 @@ const _ProvidersPopup: React.FC<Props> = ({
       columns={columns}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${
-            column.name
-          }`}
+          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
         >
           {t(`investor.copytrading-tables.open-trades-header.${column.name}`)}
         </span>

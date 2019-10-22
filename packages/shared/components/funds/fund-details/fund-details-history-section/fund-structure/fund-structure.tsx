@@ -4,7 +4,7 @@ import { FundAssetInfo } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
+import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import { FUND_STRUCTURE_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
@@ -20,7 +20,7 @@ import FundStructureHeaderCell from "./fund-structure-header-cell";
 
 const FundStructure: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
-
+  if (!id) return null;
   return (
     <TableContainer
       getItems={getFundStructure(id)}
@@ -51,12 +51,7 @@ const FundStructure: React.FC<Props> = ({ id }) => {
             {item.asset}
           </TableCell>
           <TableCell className="details-structure__cell">
-            <div className="details-structure__symbol">
-              <FundAssetImage url={item.icon} alt={item.symbol} />
-              <div className="details-structure__symbol-name">
-                {item.symbol}
-              </div>
-            </div>
+            <CurrencyItem logo={item.icon} name={item.symbol} small />
           </TableCell>
           <TableCell className="details-structure__cell fund-details-structure__cell">
             <NumberFormat

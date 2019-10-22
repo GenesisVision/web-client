@@ -11,8 +11,9 @@ import {
 } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { ITableState } from "shared/components/table/reducers/table.reducer";
-import tableReducerFactory from "shared/components/table/reducers/table.reducer";
+import tableReducerFactory, {
+  ITableState
+} from "shared/components/table/reducers/table.reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
 import { RootState } from "shared/reducers/root-reducer";
 

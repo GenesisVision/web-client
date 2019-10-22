@@ -1,5 +1,6 @@
-import statisticCurrencyReducerCreator from "shared/components/details/reducers/statistic-currency.reducer";
-import { StatisticCurrencyState } from "shared/components/details/reducers/statistic-currency.reducer";
+import statisticCurrencyReducerCreator, {
+  StatisticCurrencyState
+} from "shared/components/details/reducers/statistic-currency.reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { fieldSelector } from "shared/utils/selectors";
 

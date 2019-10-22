@@ -9,7 +9,7 @@ export const confirmWithdraw = (requestId?: string, code?: string) => (
   dispatch: Dispatch<ActionType>
 ): Promise<any> =>
   walletApi
-    .v10WalletWithdrawRequestConfirmPost({
+    .confirmWithdrawalRequestByCode({
       requestId,
       code
     })

@@ -6,9 +6,9 @@ import { ASSET } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
 import {
-  PROGRAMS_ROUTE,
   PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
+  PROGRAM_SLUG_URL_PARAM_NAME,
+  PROGRAMS_ROUTE
 } from "shared/routes/programs.routes";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
@@ -20,7 +20,7 @@ export const cancelChangeBrokerMethod = (
   programId: string
 ): ManagerThunk<CancelablePromise<void>> => dispatch =>
   managerApi
-    .v10ManagerProgramsBrokerChangeCancelPost(authService.getAuthArg(), {
+    .cancelChangeBroker(authService.getAuthArg(), {
       programId
     })
     .then(() => {
@@ -41,7 +41,7 @@ export const changeBrokerMethod = (
   newLeverage: number
 ): ManagerThunk<CancelablePromise<void>> => dispatch =>
   managerApi
-    .v10ManagerProgramsBrokerChangePost(authService.getAuthArg(), {
+    .changeBroker(authService.getAuthArg(), {
       request: { programId, newBrokerAccountTypeId, newLeverage }
     })
     .then(() => {
@@ -74,10 +74,6 @@ export const editAsset = (
   type: ASSET
 ): ManagerThunk<CancelablePromise<void>> => dispatch => {
   const authorization = authService.getAuthArg();
-  const editMethod =
-    type === ASSET.PROGRAM
-      ? managerApi.v10ManagerProgramsByIdUpdatePost
-      : managerApi.v10ManagerFundsByIdUpdatePost;
   let data = editAssetData;
   let promise = Promise.resolve("") as CancelablePromise<any>;
   if (data.logo.image)
@@ -89,7 +85,9 @@ export const editAsset = (
         ...data,
         logo: response || data.logo.src
       };
-      return editMethod(id, authorization, { model: data as ProgramUpdate }); //TODO ask backend to change ProgramUpdate logo type
+      return managerApi.updateInvestmentProgram(id, authorization, {
+        model: data as ProgramUpdate
+      }); //TODO ask backend to change ProgramUpdate logo type
     })
     .then(() => {
       dispatch(
@@ -102,7 +100,10 @@ export const editAsset = (
           true
         )
       );
-    });
+    })
+    .catch(({ errorMessage }) =>
+      dispatch(alertMessageActions.error(errorMessage))
+    ) as CancelablePromise<void>;
 };
 
 export const closeProgram: TCloseAsset = ({
@@ -113,7 +114,7 @@ export const closeProgram: TCloseAsset = ({
 }) => dispatch => {
   const authorization = authService.getAuthArg();
   managerApi
-    .v10ManagerProgramsByIdClosePost(id, authorization, opts)
+    .closeInvestmentProgram(id, authorization, opts)
     .then(() => {
       onSuccess();
       dispatch(
@@ -136,7 +137,7 @@ export const closeFund: TCloseAsset = ({
   opts
 }) => dispatch =>
   managerApi
-    .v10ManagerFundsByIdClosePost(id, authService.getAuthArg(), opts)
+    .closeFund(id, authService.getAuthArg(), opts)
     .then(() => {
       onSuccess();
       dispatch(
@@ -151,16 +152,14 @@ export const closeFund: TCloseAsset = ({
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 
-export type TCloseAsset = (
-  opts: {
-    onSuccess: () => void;
-    onError: () => void;
-    id: string;
-    opts?: {
-      twoFactorCode?: string;
-    };
-  }
-) => (dispatch: Dispatch) => void;
+export type TCloseAsset = (opts: {
+  onSuccess: () => void;
+  onError: () => void;
+  id: string;
+  opts?: {
+    twoFactorCode?: string;
+  };
+}) => (dispatch: Dispatch) => void;
 
 export enum ASSET_EDIT_FIELDS {
   stopOutLevel = "stopOutLevel",

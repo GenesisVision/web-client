@@ -1,12 +1,13 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
 interface ISignalProgramInfoProps {
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
 }
 
 const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
@@ -14,7 +15,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="asset-details-description__col">
+    <StatisticItemList>
       <StatisticItem
         label={
           <TooltipLabel
@@ -24,7 +25,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
             labelText={t("program-details-page.description.successFee")}
           />
         }
-        className="program-details-description__short-statistic-item"
+        className="asset-details-description__short-statistic-item"
         accent
       >
         <NumberFormat
@@ -40,7 +41,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
             labelText={t("program-details-page.description.volume-fee")}
           />
         }
-        className="program-details-description__short-statistic-item"
+        className="asset-details-description__short-statistic-item"
         accent
       >
         <NumberFormat
@@ -49,7 +50,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
           suffix=" %"
         />
       </StatisticItem>
-    </div>
+    </StatisticItemList>
   );
 };
 
