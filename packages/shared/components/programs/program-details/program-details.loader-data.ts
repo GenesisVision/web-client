@@ -4,6 +4,7 @@ import {
   LevelsParamsInfo,
   PersonalProgramDetailsFull,
   ProgramDetailsFullOld,
+  ProgramDetailsListStatistic,
   ProgramProfitChart,
   ProgramStatistic
 } from "gv-api-web";
@@ -108,6 +109,19 @@ export const statisticLoaderData: ProgramStatistic = {
   tradesSuccessCount: getRandomInteger(0, 100),
   profitFactorPercent: getRandomInteger(0, 100),
   sharpeRatioPercent: getRandomInteger(0, 100)
+};
+
+export const statisticListLoaderData: ProgramDetailsListStatistic = {
+  balance: {
+    amount: getRandomInteger(0, 100),
+    currency: "GVT"
+  },
+  currentValue: getRandomInteger(0, 100),
+  profitPercent: getRandomInteger(0, 100),
+  profitValue: getRandomInteger(0, 100),
+  drawdownPercent: getRandomInteger(0, 100),
+  investorsCount: getRandomInteger(0, 100),
+  tradesCount: getRandomInteger(0, 100)
 };
 
 export const personalProgramDetailsLoaderData: PersonalProgramDetailsFull = {
