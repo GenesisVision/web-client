@@ -84,7 +84,7 @@ const getRandomText = (params: Object) => randomString.generate(params);
 
 export const tableLoaderCreator = (
   itemCreator: () => any,
-  count?: number = 10
+  count: number | undefined = 10
 ) =>
   Array(count)
     .fill("")
