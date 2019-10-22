@@ -1,14 +1,14 @@
-import { ProgramDetails, ProgramsList, ProgramTag } from "gv-api-web";
+import faker from "faker";
+import { ProgramDetailsOld, ProgramsListOld, ProgramTag } from "gv-api-web";
 import {
   managerLoaderData,
   mockDate
 } from "shared/components/details/details.loader-data";
-import { getRandomInteger } from "shared/utils/helpers";
 import {
   personalProgramDetailsLoaderData,
-  statisticLoaderData
+  statisticListLoaderData
 } from "shared/components/programs/program-details/program-details.loader-data";
-import faker from "faker";
+import { getRandomInteger } from "shared/utils/helpers";
 
 const tagLoaderDataCreator = (): ProgramTag => ({
   name: faker.lorem.word(),
@@ -17,7 +17,7 @@ const tagLoaderDataCreator = (): ProgramTag => ({
 const tagsLoaderDataCreator = (): ProgramTag[] =>
   new Array(getRandomInteger(1, 5)).fill("").map(() => tagLoaderDataCreator());
 
-export const programDetailsLoaderDataCreator = (): ProgramDetails => ({
+export const programDetailsLoaderDataCreator = (): ProgramDetailsOld => ({
   currency: "GVT",
   level: getRandomInteger(0, 100),
   levelProgress: getRandomInteger(0, 100),
@@ -25,19 +25,12 @@ export const programDetailsLoaderDataCreator = (): ProgramDetails => ({
   stopOutLevel: getRandomInteger(0, 100),
   periodStarts: new Date("2019-09-23T20:58:38.8147750+00:00"),
   periodEnds: new Date("2019-09-25T02:58:38.8147750+00:00"),
-  availableInvestment: getRandomInteger(0, 100),
-  availableInvestmentBase: getRandomInteger(0, 100),
+  availableInvestmentInCurrency: getRandomInteger(0, 100),
   availableInvestmentLimit: getRandomInteger(0, 100),
   dashboardAssetsDetails: {
     share: getRandomInteger(0, 100)
   },
-  statistic: statisticLoaderData,
-  rating: {
-    rating: getRandomInteger(0, 100),
-    profit: getRandomInteger(0, 100),
-    canLevelUp: false,
-    topPercent: getRandomInteger(0, 100)
-  },
+  statistic: statisticListLoaderData,
   personalDetails: personalProgramDetailsLoaderData,
   tags: tagsLoaderDataCreator(),
   id: "",
@@ -52,11 +45,11 @@ export const programDetailsLoaderDataCreator = (): ProgramDetails => ({
   chart: []
 });
 
-export const programListLoaderData: ProgramDetails[] = new Array(10)
+export const programListLoaderData: ProgramDetailsOld[] = new Array(10)
   .fill("")
-  .map(() => programDetailsLoaderDataCreator());
+  .map(programDetailsLoaderDataCreator);
 
-export const programTableLoaderData: ProgramsList = {
+export const programTableLoaderData: ProgramsListOld = {
   programs: programListLoaderData,
   total: programListLoaderData.length
 };
