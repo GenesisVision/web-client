@@ -57,7 +57,7 @@ export const copyTradingAccountsDataSelector = apiSelector<
 export const copyTradingAccountsSelector = apiFieldSelector(
   copyTradingAccountsDataSelector,
   fieldSelector(state => state.accounts),
-  []
+  undefined
 );
 
 export const CopyTradingAccountsReducer = combineReducers<
