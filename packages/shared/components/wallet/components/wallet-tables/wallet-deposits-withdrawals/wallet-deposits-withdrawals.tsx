@@ -58,6 +58,7 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   return (
     <div className="wallet-deposits-withdrawals">
       <TableModule
+        loaderData={[]}
         timestamp={timestamp.getMilliseconds()}
         defaultFilters={DEFAULT_FILTERS}
         paging={DEFAULT_PAGING}
