@@ -82,6 +82,11 @@ const getRandomInteger = (min: number, max: number): number =>
 
 const getRandomText = (params: Object) => randomString.generate(params);
 
+export const tableLoaderCreator = (itemCreator: () => any) =>
+  Array(10)
+    .fill("")
+    .map(itemCreator);
+
 export {
   getRandomText,
   getRandomInteger,
