@@ -27,6 +27,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { FUND, FUND_CURRENCY } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
+import { fundListLoaderData } from "shared/modules/funds-table/components/funds-table/fund-table.loader-data";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -48,6 +49,7 @@ const _DashboardFunds: React.FC<Props> = ({
   const role = useRole();
   return (
     <TableContainer
+      loaderData={fundListLoaderData}
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createFund}
       getItems={getDashboardFunds}
