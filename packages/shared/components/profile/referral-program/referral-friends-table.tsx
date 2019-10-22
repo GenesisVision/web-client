@@ -13,6 +13,7 @@ const _ReferralFriendsTable: React.FC = () => {
   const [t] = useTranslation();
   return (
     <TableContainer
+      title={t("profile-page.referral-program.referral-friends.title")}
       getItems={getFriendsTable}
       dataSelector={referralFriendsTableSelector}
       isFetchOnMount={true}
@@ -24,8 +25,8 @@ const _ReferralFriendsTable: React.FC = () => {
       }
       renderBodyRow={(friend: ReferralFriend) => (
         <TableRow stripy>
-          <TableCell>{formatDate(friend.emailMask)}</TableCell>
-          <TableCell>{friend.registerDate}</TableCell>
+          <TableCell>{friend.emailMask}</TableCell>
+          <TableCell>{formatDate(friend.registerDate)}</TableCell>
         </TableRow>
       )}
     />
