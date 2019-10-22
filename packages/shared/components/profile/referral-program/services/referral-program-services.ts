@@ -1,3 +1,4 @@
+import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 
 import { referralFriendsTableAction } from "../actions/referral-friends-table.actions";
@@ -12,3 +13,6 @@ export const getHistoryTable = (filters: any) => {
   const authorization = authService.getAuthArg();
   return referralHistoryTableAction(authorization, filters);
 };
+
+export const getProfile = () =>
+  profileApi.getProfileFull(authService.getAuthArg());
