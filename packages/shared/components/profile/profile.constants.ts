@@ -12,3 +12,5 @@ export const SOCIAL_LINKS = "social-links";
 export const SOCIAL_LINKS_ROUTE = `${PROFILE_ROUTE}/${SOCIAL_LINKS}`;
 export const SECURITY = "security";
 export const SECURITY_ROUTE = `${PROFILE_ROUTE}/${SECURITY}`;
+export const REFERRAL_PROGRAM = "referral-program";
+export const REFERRAL_PROGRAM_ROUTE = `${PROFILE_ROUTE}/${REFERRAL_PROGRAM}`;

@@ -910,11 +910,34 @@
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {
+      "referral-program": "Referral program",
       "security": "Security",
       "profile": "Personal details",
       "settings": "Settings",
       "verify": "Verify",
       "social-links": "Social links"
+    },
+    "referral-program": {
+      "title": "Invite your friends to Genesis vision",
+      "referral-link": "Referral link:",
+      "share-your-passion": "Share your passion",
+      "referral-friends-1lvl": "Referral friends level 1",
+      "referral-friends-2lvl": "Referral friends level 2",
+      "total-rewards": "Total rewards",
+      "referral-friends": {
+        "title":  "Referral friends",
+        "header": {
+          "email": "Email",
+          "date": "Date"
+        }
+      },
+      "referral-history": {
+        "title": "History",
+        "header": {
+          "value": "Value",
+          "date": "Date"
+        }
+      }
     },
     "verification": {
       "phone": {
