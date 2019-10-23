@@ -43,15 +43,17 @@ const _ReferralProgramPage: React.FC = () => {
             loaderData={faker.internet.url()}
           />
         </SettingsBlock>
-        <ReferralRewardsBlock
-          data={rewards!}
-          loaderData={{
-            firstLevel: getRandomInteger(1, 50),
-            secondLevel: getRandomInteger(1, 50),
-            amountTotal: getRandomInteger(1, 50)
-          }}
-          currency={"GVT"}
-        />
+        <SettingsBlock>
+          <ReferralRewardsBlock
+            data={rewards!}
+            loaderData={{
+              firstLevel: getRandomInteger(1, 50),
+              secondLevel: getRandomInteger(1, 50),
+              amountTotal: getRandomInteger(1, 50)
+            }}
+            currency={"GVT"}
+          />
+        </SettingsBlock>
       </div>
       <div className="referral-program__tables">
         <DetailsBlock table>
