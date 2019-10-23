@@ -11,7 +11,7 @@ const _SettingsPage: React.FC<WithTranslation> = ({ t }) => (
   <ProfileLayout route={SETTINGS}>
     <div className="asset-settings profile__container--padding-top">
       <SettingsBlock label={t("profile-page.settings.platform-currency")}>
-        <CurrencySelectContainer className="header__currency" />
+        <CurrencySelectContainer />
       </SettingsBlock>
     </div>
   </ProfileLayout>
