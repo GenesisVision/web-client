@@ -32,6 +32,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
+import { programListLoaderData } from "shared/modules/programs-table/components/programs-table/program-table.loader-data";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
@@ -53,6 +54,7 @@ const _DashboardPrograms: React.FC<Props> = ({
   const role = useRole();
   return (
     <TableContainer
+      loaderData={programListLoaderData}
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createProgram}
       getItems={getDashboardPrograms}
@@ -140,7 +142,7 @@ const _DashboardPrograms: React.FC<Props> = ({
             <NumberFormat
               value={formatCurrencyValue(
                 program.personalDetails.value,
-                program.currency
+                `${program.currency}`
               )}
               displayType="text"
             />

@@ -47,6 +47,7 @@ const _WalletList: React.FC<Props> = ({ t, createButtonToolbar, wallets }) => {
   return (
     <div className="wallet-list">
       <Table
+        loaderData={[]}
         paging={DEFAULT_PAGING}
         items={wallets}
         columns={WALLET_LIST_COLUMNS}

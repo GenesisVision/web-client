@@ -4,7 +4,10 @@ import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
 import { ROLE } from "shared/constants/constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "shared/decorators/with-blur-loader";
 import useRole from "shared/hooks/use-role.hook";
 
 import { WalletRouteProps } from "../wallet.routes";
@@ -13,7 +16,7 @@ import WalletSettingsContainer from "./wallet-settings/wallet-settings-container
 import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
 
 const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
-  wallet,
+  data: wallet,
   copyTradingAccounts,
   copyTradingAccountsPending
 }) => {
@@ -45,13 +48,15 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
 };
 
 interface Props {
-  wallet: WalletMultiSummary;
+  data: WalletMultiSummary;
   copyTradingAccounts: CopyTradingAccountInfo[];
   copyTradingAccountsPending: boolean;
 }
 
-const WalletTotal = compose<React.ComponentType<Props & WithLoaderProps>>(
-  withLoader,
+const WalletTotal = compose<
+  React.ComponentType<Props & WithBlurLoaderProps<WalletMultiSummary>>
+>(
+  withBlurLoader,
   React.memo
 )(_WalletTotal);
 export default WalletTotal;

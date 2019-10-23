@@ -3,9 +3,7 @@ import "./table-cards.scss";
 
 import classNames from "classnames";
 import React, { useCallback, useEffect, useState } from "react";
-import TableBody, {
-  ITableBodyExternalProps
-} from "shared/components/table/components/table-body";
+import { ITableBodyContainerExternalProps } from "shared/components/table/components/table-body";
 import TableFooter, {
   ITableFooterProps
 } from "shared/components/table/components/table-footer";
@@ -23,8 +21,10 @@ import { getCookie, setCookie } from "shared/utils/cookie";
 
 import { FilteringType } from "./filtering/filter.type";
 import { RenderBodyItemFuncType } from "./table.types";
+import TableBodyContainer from "./table-body";
 
 const _Table: React.FC<ITableProps> = ({
+  loaderData,
   exportButtonToolbarRender,
   updateItems,
   className,
@@ -90,7 +90,8 @@ const _Table: React.FC<ITableProps> = ({
       <div className={"table__scroll"}>
         {view === LIST_VIEW.CARDS && (
           <div className={classNames("table", className)}>
-            <TableBody
+            <TableBodyContainer
+              loaderData={loaderData}
               isPending={isPending}
               items={items}
               className="table-cards"
@@ -108,7 +109,8 @@ const _Table: React.FC<ITableProps> = ({
               updateSorting={updateSorting}
               renderHeader={renderHeader}
             />
-            <TableBody
+            <TableBodyContainer
+              loaderData={loaderData}
               isPending={isPending}
               items={items}
               className="table__body"
@@ -134,7 +136,7 @@ const _Table: React.FC<ITableProps> = ({
 export interface ITableProps
   extends ITableFooterProps,
     ITableToolbarExternalProps,
-    ITableBodyExternalProps,
+    ITableBodyContainerExternalProps,
     ITableHeaderProps {
   renderBodyCard?: RenderBodyItemFuncType;
   renderBodyRow?: RenderBodyItemFuncType;

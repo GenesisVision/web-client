@@ -6,6 +6,7 @@ import { createSelector } from "reselect";
 import WalletLoader from "shared/components/wallet/components/wallet-loader";
 import { copyTradingAccountsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { RootState } from "shared/reducers/root-reducer";
+import { getAccountLoaderData } from "shared/components/wallet/components/wallet-container-loader";
 
 import WalletCopytradingAccount from "./wallet-copytrading-account";
 
@@ -13,9 +14,8 @@ const _WalletCopytradingAccountContainer: React.FC<Props> = ({
   copyTradingAccount
 }) => (
   <WalletCopytradingAccount
-    account={copyTradingAccount!}
-    condition={!!copyTradingAccount}
-    loader={<WalletLoader />}
+    loaderData={getAccountLoaderData()}
+    data={copyTradingAccount!}
   />
 );
 

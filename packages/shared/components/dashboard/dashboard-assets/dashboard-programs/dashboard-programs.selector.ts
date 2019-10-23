@@ -1,6 +1,8 @@
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
+import { AuthRootState } from "shared/utils/types";
 
-const dashboardProgramsSelector = (state: any) => state.dashboard.programs; // TODO realize common auth state
+const dashboardProgramsSelector = (state: AuthRootState) =>
+  state.dashboard.programs;
 const dashboardProgramsTableSelector = tableSelectorCreator(
   dashboardProgramsSelector,
   "programs"

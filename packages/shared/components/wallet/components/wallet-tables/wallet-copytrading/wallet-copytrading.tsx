@@ -23,10 +23,9 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import { fetchAccounts } from "../../../services/wallet.services";
-import {
-  composeWalletCopytradingCurrencyUrl,
-  COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE
-} from "../../../wallet.routes";
+import { composeWalletCopytradingCurrencyUrl,
+  COPYTRADING_ACCOUNT_CURRENCY_FOLDER_ROUTE } from "../../../wallet.routes";
+import { AccountsLoaderData } from "../../wallet-container-loader";
 import WalletCopytradingButtons from "./wallet-copytrading-buttons";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
 
@@ -56,7 +55,8 @@ const _WalletCopytrading: React.FC<Props> = ({
   return (
     <div className="wallet-list">
       <Table
-        isPending={copyTradingAccountsPending && !copyTradingAccounts.length}
+        loaderData={AccountsLoaderData}
+        isPending={copyTradingAccountsPending && !copyTradingAccounts}
         items={copyTradingAccounts}
         columns={WALLET_COPYTRADING_COLUMNS}
         renderHeader={column => (

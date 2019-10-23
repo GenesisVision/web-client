@@ -8,9 +8,6 @@
   &__toolbar {
     display: flex;
     align-items: center;
-    & > div {
-      margin-left: $padding-xxsmall;
-    }
   }
 
   &__delay-question {
@@ -36,6 +33,7 @@
 
   &__delay-hint {
     color: $label-color;
+    margin-right: $padding-xxsmall;
   }
 
   &__history-popup {

@@ -23,6 +23,7 @@ import { ASSET, ROLE } from "shared/constants/constants";
 import useRole from "shared/hooks/use-role.hook";
 import { assetTypeValuesSelector } from "shared/reducers/platform-reducer";
 
+import { DashboardPortfolioEventsLoaderData } from "../dashboard/dashboard.loaders-data";
 import PortfolioEventsTableRow from "./portfolio-events-table-row";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
@@ -54,6 +55,7 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
   return (
     <div className={className}>
       <TableContainer
+        loaderData={DashboardPortfolioEventsLoaderData}
         title={title}
         getItems={getItems}
         dataSelector={selector}
