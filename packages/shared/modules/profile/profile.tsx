@@ -23,7 +23,7 @@ const _Profile: React.FC<Props> = ({ info, notifySuccess, onSuccessEdit }) => {
     notifySuccess(t("profile-page.success-copy"));
   };
   return (
-    <div className="asset-settings profile__container--padding-top">
+    <>
       {role === ROLE.MANAGER && (
         <>
           <SettingsBlock label={t("profile-page.public-info")}>
@@ -53,7 +53,7 @@ const _Profile: React.FC<Props> = ({ info, notifySuccess, onSuccessEdit }) => {
         label={t("profile-page.personal-info")}
         verificationStatus={info.verificationStatus}
       />
-    </div>
+    </>
   );
 };
 

@@ -33,16 +33,15 @@ const _ReferralProgramPage: React.FC = () => {
     sendRequest();
   }, []);
   const rewards = useSelector(rewardsSelector);
-  console.log(rewards);
   return (
     <ProfileLayout route={REFERRAL_PROGRAM}>
-      <div className="asset-settings referral-program referral-program__blocks profile__container--padding-top">
-        <SettingsBlock>
-          <InviteBlock
-            data={data ? data.refUrl : undefined}
-            loaderData={faker.internet.url()}
-          />
-        </SettingsBlock>
+      <SettingsBlock>
+        <InviteBlock
+          data={data ? data.refUrl : undefined}
+          loaderData={faker.internet.url()}
+        />
+      </SettingsBlock>
+      <SettingsBlock>
         <ReferralRewardsBlock
           data={rewards!}
           loaderData={{
@@ -52,7 +51,7 @@ const _ReferralProgramPage: React.FC = () => {
           }}
           currency={"GVT"}
         />
-      </div>
+      </SettingsBlock>
       <div className="referral-program__tables">
         <DetailsBlock table>
           <ReferralFriendsTable />

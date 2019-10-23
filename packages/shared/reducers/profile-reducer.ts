@@ -29,7 +29,10 @@ export const referralFriendsTableSelector = tableSelectorCreator<
   RootState,
   TReferralFriends,
   TReferralFriends
->(referralFriendsSelector, "items");
+>(referralFriendsSelector, "items", {
+  items: undefined,
+  total: 0
+});
 
 export const referralHistorySelector = (state: RootState) =>
   state.profile.referralHistory;
@@ -38,7 +41,10 @@ export const referralHistoryTableSelector = tableSelectorCreator<
   RootState,
   TReferralHistory,
   TReferralHistory
->(referralHistorySelector, "items");
+>(referralHistorySelector, "items", {
+  items: undefined,
+  total: 0
+});
 
 const referralFriendsReducer = tableReducerFactory<TReferralFriends>({
   type: REFERRAL_FRIENDS,

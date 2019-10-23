@@ -1,3 +1,5 @@
+import "./profile-layout.scss";
+
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -62,7 +64,7 @@ const _ProfileLayout: React.FC<Props> = ({ route, children }) => {
             ))}
         </GVTabs>
       </div>
-      {children}
+      <div className="profile-layout">{children}</div>
     </Page>
   );
 };

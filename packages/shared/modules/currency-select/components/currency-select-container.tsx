@@ -1,34 +1,25 @@
 import "./currency-select.scss";
 
 import classNames from "classnames";
-import React, { useCallback, useContext } from "react";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
+import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ISelectChangeEvent } from "shared/components/select/select";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { currenciesSelector } from "shared/reducers/platform-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { updateCurrency } from "../services/currency-select.service";
 import CurrencySelect from "./currency-select";
 import { CurrencySelectLoader } from "./currency-select.loader";
 
-const _CurrencySelectContainer: React.FC<Props> = ({
-  service,
-  currencyValues,
-  className,
-  currency
-}) => {
+const _CurrencySelectContainer: React.FC<Props> = ({ className }) => {
+  const dispatch = useDispatch();
+  const currencyValues = useSelector(currenciesSelector);
+  const currency = useSelector(currencySelector);
   const handleChange = useCallback(
     (event: ISelectChangeEvent) =>
-      service.updateCurrency(event.target.value as CurrencyEnum),
-    [service]
+      dispatch(updateCurrency(event.target.value as CurrencyEnum)),
+    []
   );
   return (
     <CurrencySelect
@@ -42,41 +33,9 @@ const _CurrencySelectContainer: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  currencyValues: currenciesSelector(state) as CurrencyEnum[],
-  currency: currencySelector(state)
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { updateCurrency },
-    dispatch
-  )
-});
-
-interface Props extends StateProps, DispatchProps, OwnProps {}
-
-interface StateProps {
-  currencyValues: CurrencyEnum[];
-  currency: CurrencyEnum;
-}
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  updateCurrency: typeof updateCurrency;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface OwnProps {
+interface Props {
   className?: string;
 }
 
-const CurrencySelectContainer = compose<React.ComponentType<OwnProps>>(
-  connect<StateProps, DispatchProps, OwnProps, RootState>(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_CurrencySelectContainer);
+const CurrencySelectContainer = React.memo(_CurrencySelectContainer);
 export default CurrencySelectContainer;
