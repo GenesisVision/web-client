@@ -33,7 +33,6 @@ const _ReferralProgramPage: React.FC = () => {
     sendRequest();
   }, []);
   const rewards = useSelector(rewardsSelector);
-  console.log(rewards);
   return (
     <ProfileLayout route={REFERRAL_PROGRAM}>
       <div className="asset-settings referral-program referral-program__blocks profile__container--padding-top">
