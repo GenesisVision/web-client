@@ -58,16 +58,14 @@ const _SocialLinksContainer: React.FC = () => {
   const handleSubmitSocialLink = useCallback(_handleSubmitSocialLink, []);
 
   return (
-    <div className="asset-settings profile__container--padding-top social-links">
-      <SettingsBlock>
-        <Links
-          condition={socialLinks !== undefined}
-          loader={<SocialLinksLoader />}
-          socialLinks={socialLinks!}
-          onSubmit={handleSubmitSocialLink}
-        />
-      </SettingsBlock>
-    </div>
+    <SettingsBlock>
+      <Links
+        condition={socialLinks !== undefined}
+        loader={<SocialLinksLoader />}
+        socialLinks={socialLinks!}
+        onSubmit={handleSubmitSocialLink}
+      />
+    </SettingsBlock>
   );
 };
 

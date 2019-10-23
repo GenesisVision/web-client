@@ -14,17 +14,15 @@ const _SecurityPage: React.FC = () => {
   const [t] = useTranslation();
   return (
     <ProfileLayout route={SECURITY}>
-      <div className="asset-settings profile__container--padding-top">
-        <SettingsBlock label={t("2fa-page.title")}>
-          <TwoFactorAuthContainer />
-        </SettingsBlock>
-        <SettingsBlock>
-          <div>
-            <PasswordChange />
-            <LogoutButtonContainer />
-          </div>
-        </SettingsBlock>
-      </div>
+      <SettingsBlock label={t("2fa-page.title")}>
+        <TwoFactorAuthContainer />
+      </SettingsBlock>
+      <SettingsBlock>
+        <div>
+          <PasswordChange />
+          <LogoutButtonContainer />
+        </div>
+      </SettingsBlock>
     </ProfileLayout>
   );
 };
