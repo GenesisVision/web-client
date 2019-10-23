@@ -10,14 +10,12 @@ import SvgLoader from "shared/components/svg-loader/svg-loader";
 import { getRandomInteger } from "../../../utils/helpers";
 import WalletBalanceButtonsLoader from "./wallet-balance/wallet-balance-buttons-loader";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
-import WalletTablesLoader from "./wallet-tables/wallet-tables-loader";
 
 const WalletLoader = () => (
   <Page title={""}>
     <div className="wallet-balance">
       <WalletTitleLoader />
       <WalletBalanceLoader />
-      <WalletTablesLoader />
     </div>
   </Page>
 );
