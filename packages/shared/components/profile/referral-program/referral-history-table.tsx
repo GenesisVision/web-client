@@ -18,9 +18,7 @@ const _ReferralHistoryTable: React.FC = () => {
   return (
     <TableContainer
       loaderData={ReferralFriendsLoaderData}
-      exportButtonToolbarRender={(filtering: any) => (
-        <DownloadReferralHistoryButton />
-      )}
+      exportButtonToolbarRender={() => <DownloadReferralHistoryButton />}
       title={t("profile-page.referral-program.referral-history.title")}
       getItems={getHistoryTable}
       dataSelector={referralHistoryTableSelector}
