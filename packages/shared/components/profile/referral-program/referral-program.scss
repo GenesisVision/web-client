@@ -7,6 +7,10 @@
     @include adaptive-padding(top, $padding-small);
     display: flex;
     justify-content: stretch;
+    flex-direction: column;
+    @include media-breakpoint-landscape-phone() {
+      flex-direction: row;
+    }
     & > div {
       flex: 1;
     }
