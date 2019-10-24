@@ -9,10 +9,9 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import useAnchor from "shared/hooks/anchor.hook";
-import { PlatformAssetFull } from "shared/utils/types";
+import { CurrencyEnum, PlatformAssetFull } from "shared/utils/types";
 
-import { FUND_ASSET_TYPE } from "./fund-asset";
-import FundAssetTooltipContainer from "./fund-asset-tooltip/fund-asset-tooltip-container";
+import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
 import HidedAssets from "./hided-assets";
 
 const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
@@ -46,15 +45,16 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
       {assets
         .filter((asset, idx) => idx < (size || assets.length))
         .map((asset, idx) => (
-          <FundAssetTooltipContainer
-            key={idx}
-            asset={asset as PlatformAssetFull}
-            idx={idx}
-            assets={assets}
+          <FundAsset
+            {...(asset as PlatformAssetFull)}
+            currency={asset.asset as CurrencyEnum} //TODO remove when api update
             type={type}
+            last={idx === assets.length - 1}
             removable={removable}
             removeHandle={removeHandle}
-            hoveringAsset={hoveringAsset}
+            className={
+              hoveringAsset === asset.asset ? "fund-asset--hover" : undefined
+            }
           />
         ))}
       {size && size < (length || assets.length) && (
@@ -75,15 +75,18 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
               {assets
                 .filter((asset, idx) => idx >= size)
                 .map((asset, idx) => (
-                  <FundAssetTooltipContainer
-                    key={idx}
-                    asset={asset as PlatformAssetFull}
-                    idx={idx}
-                    assets={assets}
+                  <FundAsset
+                    {...(asset as PlatformAssetFull)}
+                    currency={asset.asset as CurrencyEnum} //TODO remove when api update
                     type={type}
+                    last={idx === assets.length - 1}
                     removable={removable}
                     removeHandle={removeHandle}
-                    hoveringAsset={hoveringAsset}
+                    className={
+                      hoveringAsset === asset.asset
+                        ? "fund-asset--hover"
+                        : undefined
+                    }
                   />
                 ))}
             </div>
