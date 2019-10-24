@@ -1,6 +1,7 @@
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 
 import { checkCurrencyValue, CURRENCY_FRACTIONS } from "./currency-converter";
+import { CurrencyEnum } from "./types";
 
 const reverseString = (value: string | number): string =>
   String(value)
@@ -64,7 +65,10 @@ const validateFraction = (value: string, currency: string): boolean => {
   return fraction ? fraction.length <= CURRENCY_FRACTIONS(currency) : true;
 };
 
-const formatCurrencyValue = (value: number, currency: string): string =>
+const formatCurrencyValue = (
+  value: number,
+  currency: string | CurrencyEnum
+): string =>
   formatValue(
     checkCurrencyValue(value, currency),
     CURRENCY_FRACTIONS(currency)
