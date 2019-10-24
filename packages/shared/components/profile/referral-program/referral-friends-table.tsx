@@ -29,7 +29,7 @@ const _ReferralFriendsTable: React.FC = () => {
       renderBodyRow={(friend: ReferralFriend) => (
         <TableRow stripy>
           <TableCell>{friend.emailMask}</TableCell>
-          <TableCell>{formatDate(friend.registerDate)}</TableCell>
+          <TableCell>{formatDate(friend.date)}</TableCell>
         </TableRow>
       )}
     />
@@ -46,7 +46,7 @@ const COLUMNS = [
 ];
 
 const getReferralFriendLoaderData = (): ReferralFriend => ({
-  registerDate: (new Date().toString() as unknown) as Date,
+  date: (new Date().toString() as unknown) as Date,
   emailMask: faker.internet.email()
 });
 
