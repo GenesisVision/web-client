@@ -47,14 +47,14 @@ const _Active: React.FC<Props> = ({ data: { name, rate, about, tags } }) => {
         <TagItemList tags={tagMocks} />
       </div>
       <div className="active__block">
-        <div className="active__title">{t("active.chart.title")}</div>
+        <div className="active__title">{t("active.chart")}</div>
         <div className="active__chart-container">
           <TradingViewWidget symbol={name} autosize theme={Themes.DARK} />
         </div>
       </div>
       <div className="active__block">
         <div className="active__title">
-          {t("active.about.title")} {name}
+          {t("active.about")} {name}
         </div>
         <div>{about}</div>
       </div>

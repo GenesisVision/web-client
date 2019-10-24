@@ -1,11 +1,7 @@
 {
   "active": {
-    "chart": {
-      "title:": "Chart"
-    },
-    "about": {
-      "title:": "About"
-    }
+    "chart": "Chart",
+    "about": "About"
   },
   "dashboard-page": {
     "fail-chart": "Error loading chart",
