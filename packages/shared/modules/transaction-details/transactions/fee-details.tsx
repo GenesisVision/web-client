@@ -17,7 +17,11 @@ const InvestingTransaction: React.FC<TransactionDetailsProps> = ({
     header={t(`transactions-details.platform-fee`)}
     body={
       <StatisticItem label={t(`transactions-details.external.from`)}>
-        <CurrencyItem logo={data.currencyLogo} name={data.currencyName} />
+        <CurrencyItem
+          logo={data.currencyLogo}
+          name={data.currencyName}
+          clickable={false}
+        />
       </StatisticItem>
     }
     bottom={

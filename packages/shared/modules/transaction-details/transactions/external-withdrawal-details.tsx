@@ -27,7 +27,11 @@ const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
       <>
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.from-wallet`)}>
-            <CurrencyItem logo={data.currencyLogo} name={data.currencyName} />
+            <CurrencyItem
+              logo={data.currencyLogo}
+              name={data.currencyName}
+              clickable={false}
+            />
           </StatisticItem>
         </DialogField>
         <DialogField>
