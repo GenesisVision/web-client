@@ -17,13 +17,14 @@
     "i18next": "^17.0.4",
     "i18next-browser-languagedetector": "^3.0.0",
     "i18next-xhr-backend": "^3.0.0",
+    "js-cookie": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "lodash-es": "^4.17.11",
     "node-sass": "^4.9.3",
     "prop-types": "^15.6.2",
     "qrcode.react": "^0.9.3",
-    "qs": "^6.5.1",
+    "qs": "^6.9.0",
     "raf": "^3.4.1",
     "randomstring": "^1.1.5",
     "rc-slider": "^8.6.3",
@@ -130,12 +131,18 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "git add"
     }
   },
   "lint-staged": {
-    "**/*.{ts,tsx,js,json,scss}": ["prettier --write", "git add"],
-    "**/*.{ts,tsx,js}": ["eslint --fix", "git add"]
+    "**/*.{ts,tsx,js,json,scss}": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.{ts,tsx,js}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "scripts": {
     "upgrade-api": "cd packages/gv-api-web && git checkout development && git pull",
