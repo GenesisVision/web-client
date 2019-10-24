@@ -5,6 +5,7 @@ import { composeRequestValueFunc } from "shared/components/table/components/filt
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 
 import fileApi from "./api-client/file-api";
+import partnershipApi from "./api-client/partnership-api";
 import programsApi from "./api-client/programs-api";
 import authService from "./auth-service";
 
@@ -48,6 +49,11 @@ const getStatisticExportFile = (
     .then(blob => blob);
 };
 
+const getReferralHistoryFile = (): CancelablePromise<Blob> => {
+  const authorization = authService.getAuthArg();
+  return partnershipApi.exportHistory(authorization).then(blob => blob);
+};
+
 const getFileUrl = (id?: string): string =>
   id ? `${process.env.REACT_APP_API_URL}/v1.0/file/${id}` : "";
 
@@ -61,6 +67,7 @@ const uploadDocument = (file: File, authorization: string): Promise<string> =>
   fileApi.uploadFile(file, { authorization }).then(response => response.id);
 
 const filesService = {
+  getReferralHistoryFile,
   getTradesExportFileUrl,
   getStatisticExportFile,
   getPeriodExportFileUrl,
