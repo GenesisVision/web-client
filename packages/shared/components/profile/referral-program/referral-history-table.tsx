@@ -1,11 +1,13 @@
+import { saveAs } from "file-saver";
 import { RewardDetails } from "gv-api-web";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React, { useCallback } from "react";
+import { useTranslation, withTranslation as translate } from "react-i18next";
 import DownloadButton from "shared/components/download-button/download-button";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { referralHistoryTableSelector } from "shared/reducers/profile-reducer";
+import filesService from "shared/services/file-service";
 import { formatDate } from "shared/utils/dates";
 import { getRandomInteger, tableLoaderCreator } from "shared/utils/helpers";
 
@@ -17,7 +19,7 @@ const _ReferralHistoryTable: React.FC = () => {
     <TableContainer
       loaderData={ReferralFriendsLoaderData}
       exportButtonToolbarRender={(filtering: any) => (
-        <DownloadButton getExportFileUrl={() => ""} />
+        <DownloadReferralHistoryButton />
       )}
       title={t("profile-page.referral-program.referral-history.title")}
       getItems={getHistoryTable}
@@ -40,6 +42,18 @@ const _ReferralHistoryTable: React.FC = () => {
     />
   );
 };
+
+const _DownloadReferralHistoryButton: React.FC = () => {
+  const loadFile = useCallback(() => {
+    filesService
+      .getReferralHistoryFile()
+      .then((blob: Blob) => saveAs(blob, `referral_history_statistic_.xlsx`));
+  }, []);
+  return <DownloadButton authHandle={loadFile} />;
+};
+const DownloadReferralHistoryButton = React.memo(
+  _DownloadReferralHistoryButton
+);
 
 const COLUMNS = [
   {
