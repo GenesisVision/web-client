@@ -57,6 +57,7 @@ const _FundAsset: React.FC<Props> = ({
             logo={icon}
             small
             name={!!currency && currencyName}
+            symbol={currency}
             className={classNames("fund-asset__currency", currencyClassName)}
           />
           <div className="fund-asset__percent">
