@@ -7,6 +7,9 @@ import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import useIsOpen from "shared/hooks/is-open.hook";
 
 const _CurrencyItem: React.FC<Props> = ({
+  symbol,
+  big,
+  rate,
   logo,
   name,
   small,
@@ -21,6 +24,7 @@ const _CurrencyItem: React.FC<Props> = ({
     },
     []
   );
+  const rateString = `1 ${name} = ${rate} $`;
   return (
     <>
       <a href="http://example.com" onClick={openPopup}>
@@ -34,17 +38,24 @@ const _CurrencyItem: React.FC<Props> = ({
             <WalletImage url={logo} alt={name} />
           </div>
           {name && (
-            <div className={classNames("currency-item__name", className)}>
-              {name}
+            <div>
+              <div
+                className={classNames("currency-item__name", className, {
+                  "currency-item__name--big": big
+                })}
+              >
+                {name}
+              </div>
+              {rate && <div className="currency-item__rate">{rateString}</div>}
             </div>
           )}
         </div>
       </a>
-      {clickable && (
+      {clickable && name && (
         <ActivePopup
           open={isOpenPopup}
           onClose={setClosePopup}
-          active={name!}
+          active={symbol || name}
         />
       )}
     </>
@@ -52,6 +63,9 @@ const _CurrencyItem: React.FC<Props> = ({
 };
 
 interface Props {
+  symbol?: string;
+  big?: boolean;
+  rate?: number;
   clickable?: boolean;
   className?: string;
   small?: boolean;
