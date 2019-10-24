@@ -1,4 +1,12 @@
 {
+  "active": {
+    "chart": {
+      "title:": "Chart"
+    },
+    "about": {
+      "title:": "About"
+    }
+  },
   "dashboard-page": {
     "fail-chart": "Error loading chart",
     "portfolio-events": {

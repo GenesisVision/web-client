@@ -25,11 +25,19 @@
       height: $wallet-item-size/$divider-title;
     }
   }
+  &__rate {
+    font-size: $font-size-small;
+    color: $text-light-color;
+  }
   &__name {
     font-size: $font-size-paragraph;
     white-space: nowrap;
     letter-spacing: 0.6px;
     font-weight: 300;
     color: $text-light-color;
+    &--big {
+      font-weight: 600;
+      font-size: $font-size-h2;
+    }
   }
 }
