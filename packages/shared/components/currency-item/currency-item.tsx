@@ -5,6 +5,7 @@ import React, { useCallback } from "react";
 import ActivePopup from "shared/components/active/active.popup";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import useIsOpen from "shared/hooks/is-open.hook";
+import { CurrencyEnum } from "shared/utils/types";
 
 const _CurrencyItem: React.FC<Props> = ({
   symbol,
@@ -25,52 +26,56 @@ const _CurrencyItem: React.FC<Props> = ({
     []
   );
   const rateString = `1 ${name} = ${rate} $`;
-  return (
-    <>
-      <a href="http://example.com" onClick={openPopup}>
-        <div className="currency-item">
+  const renderItemContent = () => (
+    <div className="currency-item">
+      <div
+        className={classNames("currency-item__icon", {
+          "currency-item__icon--medium": !small,
+          "currency-item__icon--small": small
+        })}
+      >
+        <WalletImage url={logo} alt={name} />
+      </div>
+      {name && (
+        <div>
           <div
-            className={classNames("currency-item__icon", {
-              "currency-item__icon--medium": !small,
-              "currency-item__icon--small": small
+            className={classNames("currency-item__name", className, {
+              "currency-item__name--big": big
             })}
           >
-            <WalletImage url={logo} alt={name} />
+            {name}
           </div>
-          {name && (
-            <div>
-              <div
-                className={classNames("currency-item__name", className, {
-                  "currency-item__name--big": big
-                })}
-              >
-                {name}
-              </div>
-              {rate && <div className="currency-item__rate">{rateString}</div>}
-            </div>
-          )}
+          {rate && <div className="currency-item__rate">{rateString}</div>}
         </div>
-      </a>
-      {clickable && name && (
+      )}
+    </div>
+  );
+  return (
+    (clickable && name && (
+      <>
+        <a href="http://example.com" onClick={openPopup}>
+          {renderItemContent()}
+        </a>
         <ActivePopup
           open={isOpenPopup}
           onClose={setClosePopup}
           active={symbol || name}
         />
-      )}
-    </>
+      </>
+    )) ||
+    renderItemContent()
   );
 };
 
 interface Props {
-  symbol?: string;
+  symbol?: string | CurrencyEnum;
   big?: boolean;
   rate?: number;
   clickable?: boolean;
   className?: string;
   small?: boolean;
   logo: string;
-  name?: string;
+  name?: string | CurrencyEnum;
 }
 
 export const CurrencyItem = React.memo(_CurrencyItem);
