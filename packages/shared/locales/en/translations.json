@@ -1,4 +1,8 @@
 {
+  "active": {
+    "chart": "Chart",
+    "about": "About"
+  },
   "dashboard-page": {
     "fail-chart": "Error loading chart",
     "portfolio-events": {
@@ -929,7 +933,7 @@
       "referral-friends-2lvl": "Referral friends level 2",
       "total-rewards": "Total rewards",
       "referral-friends": {
-        "title":  "Referral friends",
+        "title": "Referral friends",
         "header": {
           "email": "Email",
           "date": "Date"

@@ -2,6 +2,7 @@ import { ChartSimple } from "gv-api-web";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { CurrencyEnum } from "shared/utils/types";
 
+export const REF_PARAM_NAME = "ref";
 export const FUND_CURRENCY = "GVT";
 
 export const MANAGER = "manager";

@@ -17,7 +17,11 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
       <div className="transaction-details__top">
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.from-wallet`)}>
-            <CurrencyItem logo={data.currencyLogo} name={data.currencyName} />
+            <CurrencyItem
+              logo={data.currencyLogo}
+              name={data.currencyName}
+              clickable={false}
+            />
           </StatisticItem>
         </DialogField>
         <DialogField>
@@ -37,6 +41,7 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
         <DialogField>
           <StatisticItem label={t(`transactions-details.external.to-wallet`)}>
             <CurrencyItem
+              clickable={false}
               logo={data.convertingDetails.currencyToLogo}
               name={data.convertingDetails.currencyToName}
             />

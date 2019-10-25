@@ -69,7 +69,12 @@ const _WalletList: React.FC<Props> = ({ t, createButtonToolbar, wallets }) => {
                   state: "/ Wallet"
                 }}
               >
-                <CurrencyItem logo={wallet.logo} name={wallet.currency} small />
+                <CurrencyItem
+                  logo={wallet.logo}
+                  name={wallet.currency}
+                  small
+                  clickable={false}
+                />
               </Link>
             </TableCell>
             <TableCell className="wallet-list__cell">

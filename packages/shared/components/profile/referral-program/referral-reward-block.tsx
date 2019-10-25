@@ -1,3 +1,4 @@
+import { PartnershipDetails } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
@@ -6,7 +7,7 @@ import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _ReferralRewardsBlock: React.FC<Props> = ({
-  data: { firstLevel, secondLevel, amountTotal },
+  data: { totalReferralsL1, totalReferralsL2, totalAmount },
   currency
 }) => {
   const [t] = useTranslation();
@@ -16,32 +17,26 @@ const _ReferralRewardsBlock: React.FC<Props> = ({
         big
         label={t("profile-page.referral-program.referral-friends-1lvl")}
       >
-        {firstLevel}
+        {totalReferralsL1}
       </StatisticItem>
       <StatisticItem
         big
         label={t("profile-page.referral-program.referral-friends-2lvl")}
       >
-        {secondLevel}
+        {totalReferralsL2}
       </StatisticItem>
       <StatisticItem
         big
         label={t("profile-page.referral-program.total-rewards")}
       >
-        {amountTotal} {currency}
+        {totalAmount} {currency}
       </StatisticItem>
     </StatisticItemList>
   );
 };
 
-export interface IRewards {
-  firstLevel: number;
-  secondLevel: number;
-  amountTotal: number;
-}
-
 interface Props {
-  data: IRewards;
+  data: PartnershipDetails;
   currency: CurrencyEnum;
 }
 
