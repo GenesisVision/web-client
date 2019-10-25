@@ -30,7 +30,7 @@ const _Header: React.FC<Props> = ({
   return (
     <div className="header">
       <div className="header__left">
-        <div className="navigation__menu profile-avatar" onClick={setOpen}>
+        <div className="navigation__menu" onClick={setOpen}>
           <Icon type="menu" />
         </div>
         <Navigation className="header__navigation" />
