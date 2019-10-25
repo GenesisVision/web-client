@@ -15,7 +15,7 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
   const [t] = useTranslation();
   const shareMessage = `Hey! ${
     firstName ? firstName : ""
-  } ${lastName} has invited you to join Genesis Vision! ${refUrl}`;
+  } ${lastName} has invited you to join Genesis Vision!`;
   return (
     <div>
       <div className="referral-program__title">
@@ -47,12 +47,14 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
             key={refUrl}
             className="addthis_inline_share_toolbox"
             data-title={shareMessage}
-            data-url="THE URL"
+            data-url={refUrl}
           />
           <div className="referral-program__share-buttons--email at-icon-wrapper">
             <a
               target="_blank"
-              href={`mailto:?body=${rawUrlEncode(shareMessage)} `}
+              href={`mailto:?body=${rawUrlEncode(
+                `${shareMessage} ${refUrl}`
+              )} `}
             >
               <img src={Email} />
             </a>
