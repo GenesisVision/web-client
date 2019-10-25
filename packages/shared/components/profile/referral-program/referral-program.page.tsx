@@ -13,7 +13,7 @@ import useApiRequest from "shared/hooks/api-request.hook";
 import { referralDetailsSelector } from "shared/reducers/profile-reducer";
 import { getRandomInteger } from "shared/utils/helpers";
 
-import { InviteBlock } from "./invite-block";
+import { InviteBlock, inviteBlockLoaderData } from "./invite-block";
 import { ReferralFriendsTable } from "./referral-friends-table";
 import { ReferralHistoryTable } from "./referral-history-table";
 import { ReferralRewardsBlock } from "./referral-reward-block";
@@ -35,10 +35,7 @@ const _ReferralProgramPage: React.FC = () => {
   return (
     <ProfileLayout route={REFERRAL_PROGRAM}>
       <SettingsBlock>
-        <InviteBlock
-          data={data ? data.refUrl : undefined}
-          loaderData={faker.internet.url()}
-        />
+        <InviteBlock data={data!} loaderData={inviteBlockLoaderData} />
       </SettingsBlock>
       <SettingsBlock>
         <ReferralRewardsBlock
