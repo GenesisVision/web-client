@@ -12,6 +12,10 @@
       width: 32px;
       background-color: rgb(132, 132, 132);
       border-radius: 26px;
+      transition: 150ms ease-in-out;
+      &:hover {
+        transform: translate(0, -5px);
+      }
     }
   }
   &__tables {
