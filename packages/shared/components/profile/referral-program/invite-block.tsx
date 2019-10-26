@@ -2,6 +2,7 @@ import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import Script from "react-load-script";
 import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
@@ -61,11 +62,17 @@ const _ShareBlock: React.FC<{
   }${lastName} has invited you to join Genesis Vision!`;
   useEffect(() => {
     // @ts-ignore
-    window.addthis.layers.refresh && window.addthis.layers.refresh();
-    // @ts-ignore
-  }, [window.addthis.layers]);
+    window.addthis &&
+      window.addthis.layers.refresh &&
+      window.addthis.layers.refresh();
+  }, [window]);
   return (
     <div className="referral-program__share-buttons">
+      <Script
+        url={
+          "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5db2b33a238474cd"
+        }
+      />
       <div
         className="addthis_inline_share_toolbox"
         data-title={shareMessage}
