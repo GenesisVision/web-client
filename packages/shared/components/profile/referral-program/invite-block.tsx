@@ -2,12 +2,10 @@ import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import Script from "react-load-script";
 import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import Copy from "shared/decorators/with-copy";
-import withLoader from "shared/decorators/with-loader";
 import Email from "shared/media/email.svg";
 import { rawUrlEncode } from "shared/utils/helpers";
 
@@ -41,12 +39,13 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
       </div>
       <div className="referral-program__share-block">
         {t("profile-page.referral-program.share-your-passion")}
-        <ShareBlock
-          condition={!!refUrl}
-          firstName={firstName}
-          lastName={lastName}
-          refUrl={refUrl}
-        />
+        {refUrl && (
+          <ShareBlock
+            firstName={firstName}
+            lastName={lastName}
+            refUrl={refUrl}
+          />
+        )}
       </div>
     </div>
   );
@@ -61,6 +60,13 @@ const _ShareBlock: React.FC<{
     firstName ? `${firstName} ` : ""
   }${lastName} has invited you to join Genesis Vision!`;
   useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src =
+      "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5db2b33a238474cd";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  }, []);
+  useEffect(() => {
     // @ts-ignore
     window.addthis &&
       window.addthis.layers.refresh &&
@@ -68,11 +74,6 @@ const _ShareBlock: React.FC<{
   }, [window]);
   return (
     <div className="referral-program__share-buttons">
-      <Script
-        url={
-          "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5db2b33a238474cd"
-        }
-      />
       <div
         className="addthis_inline_share_toolbox"
         data-title={shareMessage}
@@ -89,7 +90,7 @@ const _ShareBlock: React.FC<{
     </div>
   );
 };
-const ShareBlock = withLoader(React.memo(_ShareBlock));
+const ShareBlock = React.memo(_ShareBlock);
 
 export const inviteBlockLoaderData = {
   firstName: "",
