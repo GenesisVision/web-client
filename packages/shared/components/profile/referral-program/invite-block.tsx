@@ -1,4 +1,3 @@
-import * as faker from "faker";
 import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
