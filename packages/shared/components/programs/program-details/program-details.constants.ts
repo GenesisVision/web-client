@@ -7,8 +7,8 @@ import {
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
-const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
-const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
+export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
+export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 export const PROGRAM_TRADES_SORTING = "ByDateDesc";
 
 export const generateProgramTradesColumns = (

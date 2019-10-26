@@ -10,10 +10,11 @@ import ProfileLayout from "shared/components/profile/profile-layout";
 import { REFERRAL_PROGRAM } from "shared/components/profile/profile.constants";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import useApiRequest from "shared/hooks/api-request.hook";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { referralDetailsSelector } from "shared/reducers/profile-reducer";
 import { getRandomInteger } from "shared/utils/helpers";
 
-import { InviteBlock } from "./invite-block";
+import { InviteBlock, inviteBlockLoaderData } from "./invite-block";
 import { ReferralFriendsTable } from "./referral-friends-table";
 import { ReferralHistoryTable } from "./referral-history-table";
 import { ReferralRewardsBlock } from "./referral-reward-block";
@@ -23,22 +24,20 @@ import {
 } from "./services/referral-program-services";
 
 const _ReferralProgramPage: React.FC = () => {
+  const currency = useSelector(currencySelector);
   const dispatch = useDispatch();
   const { sendRequest, data } = useApiRequest<ProfileFullViewModel>({
     request: getProfile
   });
   useEffect(() => {
-    dispatch(getReferralDetails());
+    dispatch(getReferralDetails(currency));
     sendRequest();
   }, []);
   const rewards = useSelector(referralDetailsSelector);
   return (
     <ProfileLayout route={REFERRAL_PROGRAM}>
       <SettingsBlock>
-        <InviteBlock
-          data={data ? data.refUrl : undefined}
-          loaderData={faker.internet.url()}
-        />
+        <InviteBlock data={data!} loaderData={inviteBlockLoaderData} />
       </SettingsBlock>
       <SettingsBlock>
         <ReferralRewardsBlock
@@ -48,7 +47,7 @@ const _ReferralProgramPage: React.FC = () => {
             totalReferralsL2: getRandomInteger(1, 50),
             totalAmount: getRandomInteger(1, 50)
           }}
-          currency={"GVT"}
+          currency={currency}
         />
       </SettingsBlock>
       <div className="referral-program__tables">
