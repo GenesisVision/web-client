@@ -1,6 +1,7 @@
 import * as faker from "faker";
 import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import CopyIcon from "shared/components/icon/copy-icon";
@@ -14,8 +15,12 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
 }) => {
   const [t] = useTranslation();
   const shareMessage = `Hey! ${
-    firstName ? firstName : ""
-  } ${lastName} has invited you to join Genesis Vision!`;
+    firstName ? `${firstName} ` : ""
+  }${lastName} has invited you to join Genesis Vision!`;
+  useEffect(() => {
+    // @ts-ignore
+    window.addthis.layers.refresh();
+  }, []);
   return (
     <div>
       <div className="referral-program__title">
