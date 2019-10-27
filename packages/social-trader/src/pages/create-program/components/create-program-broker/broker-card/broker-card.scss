@@ -1,0 +1,111 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint.scss";
+
+$size: 150px;
+$radius: 12px;
+$arrow-font-size: $font-size-h4;
+
+.broker-card {
+  @include adaptive-margin(right, $padding-upper-medium/2);
+  @include adaptive-margin(bottom, $padding-upper-medium/2);
+  box-sizing: border-box;
+  width: $size/$divider-text;
+  height: $size/$divider-text;
+  border-radius: $radius/$divider-text;
+  background-color: transparent;
+  border: 1px solid $panel-background-color;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: $padding-medium;
+  padding-bottom: $padding-medium;
+
+  &__next-arrow {
+    @include adaptive-margin(right, $padding-upper-medium/2);
+    display: flex;
+    justify-content: center;
+    margin-top: ($size/$divider-text/2)- ($arrow-font-size/2);
+    font-size: $arrow-font-size;
+    @include media-breakpoint-landscape-phone() {
+      margin-top: ($size/2)- ($arrow-font-size/2);
+    }
+  }
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &--active {
+    background-color: $panel-background-color;
+  }
+
+  &--inactive {
+    overflow: hidden;
+    cursor: not-allowed;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.008);
+    }
+
+    .broker-card__logo {
+      opacity: 0.2;
+    }
+  }
+
+  &__adornment-text {
+    font-size: 11px;
+    color: $text-color;
+    letter-spacing: 0.14px;
+    font-weight: 600;
+    opacity: 0.3;
+    position: absolute;
+    top: $padding-upper-medium/2;
+    display: flex;
+    justify-content: space-between;
+    padding-left: $padding-small/2;
+    padding-right: $padding-small/2;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  &__logo {
+    width: 70%;
+    height: auto;
+  }
+
+  &__selected-mark {
+    display: inline-flex;
+    justify-content: center;
+    line-height: 34px;
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border-radius: 17px;
+    background-color: $primary-color;
+    color: $text-light-color;
+    content: "&#10004;";
+    top: -8px;
+    right: -8px;
+  }
+
+  &__tags {
+    position: absolute;
+    padding-left: $padding-small/2;
+    padding-right: $padding-small/2;
+    width: 100%;
+    bottom: $padding-xsmall;
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    width: $size;
+    height: $size;
+    border-radius: $radius;
+  }
+}

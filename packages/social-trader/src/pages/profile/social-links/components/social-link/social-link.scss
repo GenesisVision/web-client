@@ -1,0 +1,40 @@
+.social-link {
+  display: flex;
+  align-items: center;
+
+  &__form {
+    width: 100%;
+  }
+
+  .social-input {
+    &__wrapper {
+      min-width: 250px;
+      width: 100%;
+    }
+    &__adornment,
+    &__label {
+      color: #8d9397;
+    }
+    &__input:disabled {
+      color: inherit;
+    }
+  }
+
+  .social-name {
+    cursor: pointer;
+    color: #8d9397;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    padding: 10px;
+  }
+
+  .social-logo {
+    align-self: start;
+    margin-right: 20px;
+    margin-top: 35px;
+  }
+
+  .social-button {
+    margin-right: 20px;
+  }
+}
