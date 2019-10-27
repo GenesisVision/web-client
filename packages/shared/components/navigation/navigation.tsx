@@ -2,46 +2,29 @@ import "./navigation.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { withRouter } from "react-router";
 import { compose } from "redux";
-import GVLogo from "shared/components/gv-logo/gv-logo";
-import { DashboardIcon } from "shared/components/icon/dashboard-icon";
-import { FundsIcon } from "shared/components/icon/funds-icon";
-import { ProgramsIcon } from "shared/components/icon/programs-icon";
-import NavigationItem from "shared/components/navigation/navigation-item";
-import { HOME_ROUTE } from "shared/routes/app.routes";
-import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
-import { FUNDS_ROUTE } from "shared/routes/funds.routes";
-import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
+import { TMenuItem } from "shared/routes/menu";
+
+import { MenuNavigationItem } from "./menu-navigation-item";
 
 interface INavigationProps {
   className?: string;
+  menuItems: TMenuItem[];
 }
 
-const _Navigation: React.FC<INavigationProps & WithTranslation> = ({
-  t,
-  className
-}) => (
-  <>
+const _Navigation: React.FC<INavigationProps> = ({ menuItems, className }) => {
+  return (
     <div className={classNames("navigation", className)}>
-      <NavigationItem icon={<GVLogo />} href={HOME_ROUTE} />
-      <NavigationItem icon={<DashboardIcon primary />} href={DASHBOARD_ROUTE}>
-        {t("navigation.dashboard")}
-      </NavigationItem>
-      <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
-        {t("navigation.programs")}
-      </NavigationItem>
-      <NavigationItem icon={<FundsIcon primary />} href={FUNDS_ROUTE}>
-        {t("navigation.funds")}
-      </NavigationItem>
+      {menuItems.map(item => (
+        <MenuNavigationItem item={item} popover />
+      ))}
     </div>
-  </>
-);
+  );
+};
 
 const Navigation = compose<React.ComponentType<INavigationProps>>(
   withRouter,
-  translate(),
   React.memo
 )(_Navigation);
 export default Navigation;
