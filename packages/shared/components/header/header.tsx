@@ -2,8 +2,11 @@ import "./header.scss";
 
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "shared/components/auth/signin/signin.service";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import GVButton from "shared/components/gv-button";
 import { Icon } from "shared/components/icon/icon";
@@ -16,24 +19,27 @@ import { ProfileWidgetLoader } from "shared/components/profile-widget/profile-wi
 import WalletWidgetContainer from "shared/components/wallet-widget/wallet-widget-container";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
+import { TMenuItem } from "shared/routes/menu";
 import { getRandomInteger } from "shared/utils/helpers";
 
 const _Header: React.FC<Props> = ({
-  t,
-  logout,
-  openNotifications,
+  topMenuItems,
+  mobileMenuItems,
   isAuthenticated,
   profileHeader,
   backPath
 }) => {
+  const dispatch = useDispatch();
+  const handlerLogout = useCallback(() => dispatch(logout), []);
   const [isOpen, setOpen, setClose] = useIsOpen();
+  const [t] = useTranslation();
   return (
     <div className="header">
       <div className="header__left">
         <div className="navigation__menu" onClick={setOpen}>
           <Icon type="menu" />
         </div>
-        <Navigation className="header__navigation" />
+        <Navigation menuItems={topMenuItems} className="header__navigation" />
       </div>
       <div className="header__center">
         <div className="header__search">
@@ -54,14 +60,13 @@ const _Header: React.FC<Props> = ({
             <NotificationsWidget
               loaderData={getRandomInteger(0, 1000)}
               data={profileHeader && profileHeader.notificationsCount}
-              openNotifications={openNotifications}
             />
             <ProfileWidget
               condition={!!profileHeader}
               loader={<ProfileWidgetLoader className="header__profile" />}
               profileHeader={profileHeader!}
               className="header__profile"
-              logout={logout}
+              logout={handlerLogout}
             />
           </>
         ) : (
@@ -85,8 +90,9 @@ const _Header: React.FC<Props> = ({
         )}
       </div>
       <NavigationMobile
+        mobileMenuItems={mobileMenuItems}
         backPath={backPath}
-        logout={logout}
+        logout={handlerLogout}
         isOpenNavigation={isOpen}
         profileHeader={profileHeader}
         isAuthenticated={isAuthenticated}
@@ -96,13 +102,13 @@ const _Header: React.FC<Props> = ({
   );
 };
 
-export interface Props extends WithTranslation {
+export interface Props {
+  mobileMenuItems: TMenuItem[];
+  topMenuItems: TMenuItem[];
   profileHeader?: ProfileHeaderViewModel;
   isAuthenticated: boolean;
   backPath: string;
-  logout: () => void;
-  openNotifications: () => void;
 }
 
-const Header = translate()(React.memo(_Header));
+const Header = React.memo(_Header);
 export default Header;
