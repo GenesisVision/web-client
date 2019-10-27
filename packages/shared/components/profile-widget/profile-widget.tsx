@@ -88,14 +88,11 @@ const _ProfileWidget: React.FC<Props> = ({
   );
 };
 
-interface OwnProps {
+interface Props {
   profileHeader: ProfileHeaderViewModel;
-  logout(): void;
+  logout: () => void;
   className?: string;
 }
 
-interface Props extends OwnProps {}
-
 const ProfileWidget = withLoader(React.memo(_ProfileWidget));
-
 export default ProfileWidget;
