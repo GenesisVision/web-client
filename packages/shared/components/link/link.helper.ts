@@ -22,7 +22,7 @@ export const normalizeTo = (to: ToType | string): ToType => {
 
 export const normalizeUrlString = (url: string): string => {
   const role = process.env.REACT_ROOT_ROUTE // TODO remove after union
-    ? `/process.env.REACT_ROOT_ROUTE`
+    ? `/${process.env.REACT_ROOT_ROUTE}`
     : "";
   return `${role}${url}`;
 };
