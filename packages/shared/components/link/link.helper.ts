@@ -21,6 +21,8 @@ export const normalizeTo = (to: ToType | string): ToType => {
 };
 
 export const normalizeUrlString = (url: string): string => {
-  const role = process.env.REACT_APP_BASENAME;
-  return `/${role}${url}`;
+  const role = process.env.REACT_ROOT_ROUTE // TODO remove after union
+    ? `/process.env.REACT_ROOT_ROUTE`
+    : "";
+  return `${role}${url}`;
 };

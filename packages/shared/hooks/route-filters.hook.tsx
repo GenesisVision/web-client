@@ -16,7 +16,7 @@ const useRouteFilters = (defaultFilter: any): UseRouteFilters => {
       ...queryParams,
       [filter.name]: filter.value
     });
-    const basename = process.env.REACT_APP_BASENAME;
+    const basename = process.env.REACT_ROOT_ROUTE;
     const route = query ? `${pathname}?${query}` : pathname;
     Push(route.replace("/" + basename, ""));
   };
