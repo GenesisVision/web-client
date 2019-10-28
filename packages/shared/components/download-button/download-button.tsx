@@ -3,8 +3,7 @@ import "./download-button.scss";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import GVButton from "shared/components/gv-button";
-import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { ReactComponent as ExportIcon } from "shared/media/export.svg";
+import ExportIcon from "shared/media/export.svg";
 
 const _DownloadButton: React.FC<Props> = ({
   title,
@@ -25,7 +24,7 @@ const _DownloadButton: React.FC<Props> = ({
       >
         <>
           {title || t("program-details-page.history.trades.download")}
-          <ExportIcon className="download-icon" />
+          <img src={ExportIcon} className="download-icon" />
         </>
       </GVButton>
     </a>

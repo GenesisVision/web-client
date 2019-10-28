@@ -3,6 +3,21 @@
 @import "~shared/styles/_sizes.scss";
 
 .referral-program {
+  &__share-buttons {
+    @include adaptive-padding(top, $padding-xxsmall);
+    display: flex;
+    &--email {
+      line-height: 32px;
+      height: 32px;
+      width: 32px;
+      background-color: rgb(132, 132, 132);
+      border-radius: 26px;
+      transition: 150ms ease-in-out;
+      &:hover {
+        transform: translate(0, -5px);
+      }
+    }
+  }
   &__tables {
     @include adaptive-padding(top, $padding-small);
     display: flex;
@@ -21,6 +36,10 @@
   &__title,
   &__link-block {
     @include adaptive-padding(bottom, $padding-xsmall);
+  }
+  &__link-block,
+  &__share-block {
+    @include font-size($font-size-paragraph);
   }
   &__link-block {
     display: flex;

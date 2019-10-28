@@ -10,7 +10,19 @@ import tableReducerFactory, {
   ITableState
 } from "shared/components/table/reducers/table.reducer";
 
-import { apiFieldSelector, apiSelector } from "../utils/selectors";
+import {
+  SERVER_DATE_RANGE_MAX_FILTER_NAME,
+  SERVER_DATE_RANGE_MIN_FILTER_NAME
+} from "../components/programs/program-details/program-details.constants";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
+} from "../components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  composeDefaultDateRangeFilter,
+  composeRequestValueFunc
+} from "../components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { apiSelector } from "../utils/selectors";
 import apiReducerFactory, { IApiState } from "./reducer-creators/api-reducer";
 import { RootState } from "./root-reducer";
 
@@ -65,9 +77,26 @@ const referralFriendsReducer = tableReducerFactory<TReferralFriends>({
   paging: DEFAULT_PAGING
 });
 
+export const REFERRAL_HISTORY_DEFAULT_FILTERS = [
+  {
+    ...composeDefaultDateRangeFilter({
+      composeApiRequestValue: composeRequestValueFunc(
+        SERVER_DATE_RANGE_MIN_FILTER_NAME,
+        SERVER_DATE_RANGE_MAX_FILTER_NAME
+      )
+    })
+  }
+];
+
+const REFERRAL_HISTORY_FILTERING = {
+  [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE
+};
+
 const referralHistory = tableReducerFactory<TReferralHistory>({
   type: REFERRAL_HISTORY,
-  paging: DEFAULT_PAGING
+  paging: DEFAULT_PAGING,
+  filtering: REFERRAL_HISTORY_FILTERING,
+  defaultFilters: REFERRAL_HISTORY_DEFAULT_FILTERS
 });
 
 const profileReducer = combineReducers<ProfileState>({

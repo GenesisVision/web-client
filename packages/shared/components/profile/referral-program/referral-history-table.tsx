@@ -1,11 +1,18 @@
+import dayjs from "dayjs";
 import { saveAs } from "file-saver";
 import { RewardDetails } from "gv-api-web";
 import React, { useCallback } from "react";
-import { useTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import DownloadButton from "shared/components/download-button/download-button";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DateRangeFilterType
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { referralHistoryTableSelector } from "shared/reducers/profile-reducer";
 import filesService from "shared/services/file-service";
 import { formatDate } from "shared/utils/dates";
@@ -18,12 +25,23 @@ const _ReferralHistoryTable: React.FC = () => {
   return (
     <TableContainer
       loaderData={ReferralFriendsLoaderData}
-      exportButtonToolbarRender={() => <DownloadReferralHistoryButton />}
+      exportButtonToolbarRender={(filtering: any) => (
+        <DownloadReferralHistoryButton dateRange={filtering!.dateRange} />
+      )}
       title={t("profile-page.referral-program.referral-history.title")}
       getItems={getHistoryTable}
       dataSelector={referralHistoryTableSelector}
       isFetchOnMount={true}
       columns={COLUMNS}
+      renderFilters={(updateFilter, filtering) => (
+        <DateRangeFilter
+          name={DATE_RANGE_FILTER_NAME}
+          value={filtering[DATE_RANGE_FILTER_NAME]}
+          onChange={updateFilter}
+          startLabel={t("filters.date-range.program-start")}
+        />
+      )}
+      paging={DEFAULT_PAGING}
       renderHeader={column =>
         t(
           `profile-page.referral-program.referral-history.header.${column.name}`
@@ -41,12 +59,17 @@ const _ReferralHistoryTable: React.FC = () => {
   );
 };
 
-const _DownloadReferralHistoryButton: React.FC = () => {
+const _DownloadReferralHistoryButton: React.FC<{
+  dateRange: DateRangeFilterType;
+}> = ({ dateRange }) => {
   const loadFile = useCallback(() => {
+    const dateNow = dayjs(new Date()).format("YYYY-MM-DD_HH-mm-ss");
     filesService
-      .getReferralHistoryFile()
-      .then((blob: Blob) => saveAs(blob, `referral_history_statistic_.xlsx`));
-  }, []);
+      .getReferralHistoryFile(dateRange)
+      .then((blob: Blob) =>
+        saveAs(blob, `referral_history_statistic_${dateNow}.xlsx`)
+      );
+  }, [dateRange]);
   return <DownloadButton authHandle={loadFile} />;
 };
 const DownloadReferralHistoryButton = React.memo(
@@ -68,7 +91,7 @@ const getReferralFriendLoaderData = (): RewardDetails => ({
   amount: getRandomInteger(1, 100)
 });
 
-const ReferralFriendsLoaderData = tableLoaderCreator(
+export const ReferralFriendsLoaderData = tableLoaderCreator(
   getReferralFriendLoaderData
 );
 

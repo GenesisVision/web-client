@@ -9,22 +9,32 @@ import partnershipApi from "./api-client/partnership-api";
 import programsApi from "./api-client/programs-api";
 import authService from "./auth-service";
 
-const SERVER_DATE_RANGE_MIN_FILTER_NAME = "DateFrom";
-const SERVER_DATE_RANGE_MAX_FILTER_NAME = "DateTo";
+const SERVER_QUERY_DATE_RANGE_MIN_FILTER_NAME = "DateFrom";
+const SERVER_QUERY_DATE_RANGE_MAX_FILTER_NAME = "DateTo";
+const SERVER_REQUEST_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
+const SERVER_REQUEST_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 
-const getDateFilters = (dateRange: DateRangeFilterType): FilteringType => {
-  const dateFilter = composeRequestValueFunc(
-    SERVER_DATE_RANGE_MIN_FILTER_NAME,
-    SERVER_DATE_RANGE_MAX_FILTER_NAME
+const getDateFiltersForQuery = (
+  dateRange: DateRangeFilterType
+): FilteringType =>
+  composeRequestValueFunc(
+    SERVER_QUERY_DATE_RANGE_MIN_FILTER_NAME,
+    SERVER_QUERY_DATE_RANGE_MAX_FILTER_NAME
   )(dateRange);
-  return dateFilter;
-};
+
+const getDateFiltersForRequest = (
+  dateRange: DateRangeFilterType
+): FilteringType =>
+  composeRequestValueFunc(
+    SERVER_REQUEST_DATE_RANGE_MIN_FILTER_NAME,
+    SERVER_REQUEST_DATE_RANGE_MAX_FILTER_NAME
+  )(dateRange);
 
 const getTradesExportFileUrl = (
   id: string,
   dateRange: DateRangeFilterType
 ): string => {
-  const dateFilter = getDateFilters(dateRange);
+  const dateFilter = getDateFiltersForQuery(dateRange);
   const queryString = "?" + qs.stringify(dateFilter);
   return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/trades/export${queryString}`;
 };
@@ -33,7 +43,7 @@ const getPeriodExportFileUrl = (
   id: string,
   dateRange: DateRangeFilterType
 ): string => {
-  const dateFilter = getDateFilters(dateRange);
+  const dateFilter = getDateFiltersForQuery(dateRange);
   const queryString = "?" + qs.stringify(dateFilter);
   return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/periods/export${queryString}`;
 };
@@ -43,15 +53,18 @@ const getStatisticExportFile = (
   dateRange: DateRangeFilterType
 ): CancelablePromise<Blob> => {
   const authorization = authService.getAuthArg();
-  const opts = getDateFilters(dateRange);
+  const opts = getDateFiltersForRequest(dateRange);
   return programsApi
     .exportProgramPeriodsFinStatistic(id, authorization, opts)
     .then(blob => blob);
 };
 
-const getReferralHistoryFile = (): CancelablePromise<Blob> => {
+const getReferralHistoryFile = (
+  dateRange: DateRangeFilterType
+): CancelablePromise<Blob> => {
   const authorization = authService.getAuthArg();
-  return partnershipApi.exportHistory(authorization).then(blob => blob);
+  const opts = getDateFiltersForRequest(dateRange);
+  return partnershipApi.exportHistory(authorization, opts).then(blob => blob);
 };
 
 const getFileUrl = (id?: string): string =>
