@@ -53,7 +53,7 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   )) || (
     <div className="navigation__item" onClick={onClick}>
       {<icon.type {...icon.props} className="navigation__icon" />}
-      <span className="navigation__link">{children}</span>
+      <div className="navigation__link">{children}</div>
     </div>
   );
 
