@@ -6,6 +6,7 @@ import { initOnResizeEvent } from "shared/actions/ui-actions";
 import HeaderContainer from "shared/components/header/header.container";
 import NotificationsContainer from "shared/components/notifications/components/notifications-container";
 import AlertMessageList from "shared/modules/alert-message/components/alert-message-list/alert-message-list";
+import { mobileMenuItems, topMenuItems } from "shared/routes/menu";
 
 const _AppLayout: ComponentType<Props> = ({ children }) => {
   const dispatch = useDispatch();
@@ -16,7 +17,10 @@ const _AppLayout: ComponentType<Props> = ({ children }) => {
     <div className="app__wrapper root">
       <div className="app">
         <div className="app__header">
-          <HeaderContainer />
+          <HeaderContainer
+            topMenuItems={topMenuItems}
+            mobileMenuItems={mobileMenuItems}
+          />
         </div>
         <div className="app__main">{children}</div>
         <NotificationsContainer />

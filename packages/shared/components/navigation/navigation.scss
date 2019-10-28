@@ -6,6 +6,32 @@
 .navigation {
   display: flex;
   flex-direction: row;
+  align-items: center;
+
+  &__popover {
+    padding: $padding-small;
+    & .navigation__item {
+      display: flex;
+      align-items: center;
+      padding-bottom: $padding-xsmall;
+      margin: 0;
+      & .icon {
+        width: $font-size-small;
+        height: $font-size-small;
+      }
+      & .navigation__link {
+        font-size: $font-size-small;
+      }
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  &__second-level {
+    padding-left: $padding-medium;
+  }
+
   &__mobile {
     box-sizing: border-box;
     overflow: auto;
@@ -22,13 +48,13 @@
     justify-content: flex-start;
     width: 100%;
     opacity: 0.4;
-    padding: 15px 32px;
+    padding: $padding-small/2 $padding-small;
   }
 
   &__menu {
     padding: 0;
-    height: 44px;
-    width: 44px;
+    height: $wallet-item-size;
+    width: $wallet-item-size;
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -43,9 +69,10 @@
 
   &__item {
     @include transition(opacity);
+    cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 15px 32px;
+    padding: $padding-small/2 $padding-small;
     text-decoration: none;
     position: relative;
     opacity: 0.4;
@@ -64,10 +91,15 @@
   }
 
   &__link {
+    display: flex;
+    align-items: center;
     color: $main-color;
-    font-size: 15px;
+    font-size: $font-size-paragraph;
     font-weight: 400;
     letter-spacing: 0.2px;
+    & .filter__arrow {
+      margin-left: $padding-xxsmall;
+    }
   }
 
   @include media-breakpoint-landscape-tablet() {
@@ -77,17 +109,17 @@
 
     &__item {
       padding: 0;
-      margin-right: 20px;
+      margin-right: $padding-xsmall;
     }
 
     &__icon {
-      margin-right: 10px;
+      margin-right: $padding-xxsmall;
     }
   }
 
   @include media-breakpoint-desktop() {
     &__item {
-      margin-right: 60px;
+      margin-right: $padding-big;
     }
   }
 
@@ -99,7 +131,7 @@
       margin-right: 70px;
     }
     &__icon {
-      margin-right: 20px;
+      margin-right: $padding-xsmall;
     }
   }
 }
@@ -112,7 +144,7 @@
   }
 
   .navigation__item {
-    padding: 15px 32px;
+    padding: $padding-small/2 $padding-small;
     margin-right: 0;
   }
 
@@ -124,7 +156,7 @@
     flex-shrink: 0;
     display: flex;
     flex-direction: row;
-    padding: 20px;
+    padding: $padding-xsmall;
     align-items: center;
     background-color: $panel-background-color;
   }
@@ -138,6 +170,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     letter-spacing: 0.4px;
-    font-size: 14px;
+    font-size: $font-size-paragraph;
   }
 }

@@ -29,19 +29,22 @@ export const NavigationButton = React.memo(_NavigationButton);
 interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   pathname: string;
   state?: string;
+  href?: string | { pathname: string; state: string };
   icon: JSX.Element;
   exact?: boolean;
-  onClick?(): void;
+  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 const _NavigationItem: React.FC<INavigationItemProps> = ({
   pathname,
+  onClick,
+  href,
   icon,
   children,
   state
 }) => {
   const { route } = useRouter();
-  return (
+  return (!!href && (
     <Link
       to={{ pathname: pathname, state }}
       className={classNames("navigation__item", {
@@ -53,8 +56,12 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
       {<icon.type {...icon.props} className="navigation__icon" />}
       <span className="navigation__link">{children}</span>
     </Link>
+  )) || (
+    <div className="navigation__item" onClick={onClick}>
+      {<icon.type {...icon.props} className="navigation__icon" />}
+      <div className="navigation__link">{children}</div>
+    </div>
   );
 };
-
 const NavigationItem = React.memo(_NavigationItem);
 export default NavigationItem;

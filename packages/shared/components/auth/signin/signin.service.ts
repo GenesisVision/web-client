@@ -76,7 +76,7 @@ export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => 
   dispatch(clearTwoFactorAction.clearData());
 };
 
-export const logout: logoutFuncType = () => dispatch => {
+export const logout: logoutFuncType = dispatch => {
   authService.removeToken();
   dispatch(authActions.logoutAction());
   dispatch(authActions.updateTokenAction(false));
@@ -108,7 +108,7 @@ export type LoginFuncType = (
 
 export type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
-type logoutFuncType = () => (dispatch: Dispatch) => void;
+type logoutFuncType = (dispatch: Dispatch) => void;
 
 export interface LoginService {
   login: LoginFuncType;
