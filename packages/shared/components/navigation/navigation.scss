@@ -91,10 +91,15 @@
   }
 
   &__link {
+    display: flex;
+    align-items: center;
     color: $main-color;
     font-size: $font-size-paragraph;
     font-weight: 400;
     letter-spacing: 0.2px;
+    & .filter__arrow {
+      margin-left: $padding-xxsmall;
+    }
   }
 
   @include media-breakpoint-landscape-tablet() {
