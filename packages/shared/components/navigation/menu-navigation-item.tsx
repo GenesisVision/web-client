@@ -4,6 +4,7 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
+import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
 import useAnchor from "shared/hooks/anchor.hook";
 import { TMenuItem } from "shared/routes/menu";
 
@@ -25,29 +26,32 @@ const _MenuNavigationItem: React.FC<Props> = ({
       {label && t(label)}
     </NavigationItem>
   );
+  const havePopover = !!children && popover;
+  const haveSecondLevel = !!children && !popover;
   return (
     <>
       <NavigationItem icon={<Icon primary />} href={route} onClick={setAnchor}>
         {label && t(label)}
+        {havePopover && <FilterArrowIcon isOpen={!!anchor} />}
       </NavigationItem>
-      {children &&
-        ((popover && (
-          <Popover
-            className="navigation__popover"
-            vertical={VERTICAL_POPOVER_POS.BOTTOM}
-            fixedVertical
-            anchorEl={anchor}
-            onClose={clearAnchor}
-            horizontal={HORIZONTAL_POPOVER_POS.CENTER}
-            noPadding
-          >
-            {children.map(renderNavigationItem)}
-          </Popover>
-        )) || (
-          <div className="navigation__second-level">
-            {children.map(renderNavigationItem)}
-          </div>
-        ))}
+      {havePopover && (
+        <Popover
+          className="navigation__popover"
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
+          fixedVertical
+          anchorEl={anchor}
+          onClose={clearAnchor}
+          horizontal={HORIZONTAL_POPOVER_POS.CENTER}
+          noPadding
+        >
+          {children!.map(renderNavigationItem)}
+        </Popover>
+      )}
+      {haveSecondLevel && (
+        <div className="navigation__second-level">
+          {children!.map(renderNavigationItem)}
+        </div>
+      )}
     </>
   );
 };
