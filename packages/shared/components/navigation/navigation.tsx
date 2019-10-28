@@ -17,7 +17,11 @@ const _Navigation: React.FC<INavigationProps> = ({ menuItems, className }) => {
   return (
     <div className={classNames("navigation", className)}>
       {menuItems.map(item => (
-        <MenuNavigationItem item={item} popover />
+        <MenuNavigationItem
+          item={item}
+          popover
+          key={item.label || item.route}
+        />
       ))}
     </div>
   );

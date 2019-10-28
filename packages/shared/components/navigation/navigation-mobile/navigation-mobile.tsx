@@ -22,12 +22,6 @@ const _NavigationMobile: React.FC<Props> = ({
   backPath
 }) => {
   const [t] = useTranslation();
-  const renderMenuItems = ({ Icon, route, label, children }: TMenuItem) => (
-    <NavigationItem icon={<Icon primary />} href={route}>
-      {label && t(label)}
-      {children && children.map(renderMenuItems)}
-    </NavigationItem>
-  );
   return (
     <Sidebar open={isOpenNavigation} onClose={onClose}>
       <div className="navigation__mobile mobile">
@@ -43,7 +37,7 @@ const _NavigationMobile: React.FC<Props> = ({
         )}
         <div className="mobile__top" onClick={onClose}>
           {mobileMenuItems.map(item => (
-            <MenuNavigationItem item={item} />
+            <MenuNavigationItem item={item} key={item.label} />
           ))}
           {isAuthenticated ? (
             <NavigationButton icon={<LogoutIcon primary />} onClick={logout}>

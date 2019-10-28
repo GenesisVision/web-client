@@ -16,7 +16,12 @@ const _MenuNavigationItem: React.FC<Props> = ({
   const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const renderNavigationItem = ({ Icon, route, label }: TMenuItem) => (
-    <NavigationItem icon={<Icon primary />} href={route} onClick={clearAnchor}>
+    <NavigationItem
+      icon={<Icon primary />}
+      href={route}
+      onClick={clearAnchor}
+      key={label}
+    >
       {label && t(label)}
     </NavigationItem>
   );
