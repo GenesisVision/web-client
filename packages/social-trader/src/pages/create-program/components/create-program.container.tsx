@@ -33,17 +33,17 @@ const _CreateProgramContainer: React.FC<Props> = ({ brokers }) => {
         onApply={confirmNavigateToBroker}
       />
       <div className="create-asset__header">
-        <h1>{t("manager.create-program-page.title")}</h1>
+        <h1>{t("create-program-page.title")}</h1>
       </div>
       <div className="create-asset__tabs">
         <GVTabs value={tab}>
           <GVTab
             value={TAB.BROKER}
-            label={t("manager.create-program-page.tabs.select-broker")}
+            label={t("create-program-page.tabs.select-broker")}
           />
           <GVTab
             value={TAB.SETTINGS}
-            label={t("manager.create-program-page.tabs.settings")}
+            label={t("create-program-page.tabs.settings")}
           />
         </GVTabs>
       </div>

@@ -52,7 +52,7 @@ const _DashboardCopytrading: React.FC<Props> = ({ title }) => {
         <>
           <SelectFilter
             name={ACTION_STATUS_FILTER_NAME}
-            label={t(`${role}.dashboard-page.actions-status-filter.label`)}
+            label={t(`${role ? `${role}.` : ""}dashboard-page.actions-status-filter.label`)}
             value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType}
             values={ACTION_STATUS_FILTER_VALUES}
             onChange={updateFilter}

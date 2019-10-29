@@ -22,14 +22,14 @@ const SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
   return (
     <>
       <div className="create-asset-settings__row-title">
-        {t("manager.create-program-page.settings.signal-provider-fees")}
+        {t("create-program-page.settings.signal-provider-fees")}
       </div>
       <div className="create-asset-settings__row">
         <CreateAssetField>
           <GVFormikField
             name={volumeFeeFieldName}
             label={t(
-              "manager.create-program-page.settings.fields.signal-volume-fee"
+              "create-program-page.settings.fields.signal-volume-fee"
             )}
             adornment="%"
             component={GVNumberField}
@@ -40,12 +40,12 @@ const SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
           />
           <Hint
             content={t(
-              "manager.create-program-page.settings.hints.signal-volume-fee"
+              "create-program-page.settings.hints.signal-volume-fee"
             )}
             className="create-asset-settings__field-caption"
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={t(
-              "manager.create-program-page.settings.hints.signal-volume-fee-description"
+              "create-program-page.settings.hints.signal-volume-fee-description"
             )}
           />
         </CreateAssetField>
@@ -53,7 +53,7 @@ const SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
           <GVFormikField
             name={successFeeFieldName}
             label={t(
-              "manager.create-program-page.settings.fields.signal-success-fee"
+              "create-program-page.settings.fields.signal-success-fee"
             )}
             adornment="%"
             component={GVNumberField}
@@ -63,12 +63,12 @@ const SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
           />
           <Hint
             content={t(
-              "manager.create-program-page.settings.hints.signal-success-fee"
+              "create-program-page.settings.hints.signal-success-fee"
             )}
             className="create-asset-settings__field-caption"
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={t(
-              "manager.create-program-page.settings.hints.signal-success-fee-description"
+              "create-program-page.settings.hints.signal-success-fee-description"
             )}
           />
         </CreateAssetField>

@@ -39,11 +39,11 @@ const _ReallocateForm: React.FC<Props> = ({
       onSubmit={handleSubmit}
     >
       <p className="asset-settings__text">
-        {t("manager.fund-settings.reallocation.text-1")}
+        {t("fund-settings.reallocation.text-1")}
         {availableReallocationPercents}%
       </p>
       <p className="asset-settings__text">
-        {t("manager.fund-settings.reallocation.text-2")}
+        {t("fund-settings.reallocation.text-2")}
       </p>
       <StatisticItem label={"Current"} condition={dirty}>
         <CreateFundSettingsAssetsComponent
@@ -69,13 +69,13 @@ const _ReallocateForm: React.FC<Props> = ({
         </div>
       )}
       <p className="asset-settings__text">
-        {t("manager.fund-settings.reallocation.text-3")}
+        {t("fund-settings.reallocation.text-3")}
       </p>
       <GVButton
         disabled={!isValid || !dirty || isSubmitting}
         onClick={setIsOpenConfirm}
       >
-        {t("manager.fund-settings.buttons.reallocation")}
+        {t("fund-settings.buttons.reallocation")}
       </GVButton>
       <ConfirmReallocate
         assets={assets}

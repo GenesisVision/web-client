@@ -50,7 +50,7 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
   const role = useRole();
   return (
     <>
-      <h3>{t(`${role}.dashboard-page.portfolio-events.title`)}</h3>
+      <h3>{t(`${role ? `${role}.` : ""}dashboard-page.portfolio-events.title`)}</h3>
       <div className="dashboard-portfolio-events__scroll-container">
         <div className="dashboard-portfolio-events__list">
           <Events
@@ -74,7 +74,7 @@ const _DashboardPortfolioEvents: React.FC<Props> = ({
       >
         <GVButton variant="text" color="secondary">
           <>
-            {t(`${role}.dashboard-page.portfolio-events.see-all-button`)}{" "}
+            {t(`${role ? `${role}.` : ""}dashboard-page.portfolio-events.see-all-button`)}{" "}
             &#8250;
           </>
         </GVButton>

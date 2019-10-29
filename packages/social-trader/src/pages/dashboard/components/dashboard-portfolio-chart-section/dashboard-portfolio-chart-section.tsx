@@ -84,12 +84,12 @@ const _DashboardPortfolioChartSection: React.FC = () => {
         <GVTabs value={tab} onChange={setTab}>
           <GVTab
             value={ASSETS_TYPES.Program}
-            label={t(`manager.dashboard-page.assets.programs`)}
+            label={t(`dashboard-page.assets.programs`)}
             visible={!!programs.length}
           />
           <GVTab
             value={ASSETS_TYPES.Fund}
-            label={t(`manager.dashboard-page.assets.funds`)}
+            label={t(`dashboard-page.assets.funds`)}
             visible={!!funds.length}
           />
         </GVTabs>

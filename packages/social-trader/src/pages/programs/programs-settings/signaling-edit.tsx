@@ -23,7 +23,7 @@ const _SignalingEdit: React.FC<Props> = ({
   const changeIsSignal = useCallback(() => setIsSignal(!isSignal), [isSignal]);
   return (
     <SettingsBlock
-      label={t("manager.program-settings.signaling-program.title")}
+      label={t("program-settings.signaling-program.title")}
     >
       <form id="signaling-edit-form" onSubmit={handleSubmit}>
         <div className="program-settings__signaling-edit-form-title-block">

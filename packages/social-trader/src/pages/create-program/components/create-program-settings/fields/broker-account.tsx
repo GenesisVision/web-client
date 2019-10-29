@@ -33,7 +33,7 @@ const _BrokerAccount: React.FC<Props> = ({
       <GVFormikField
         name={name}
         component={GVTextField}
-        label={t("manager.create-program-page.settings.fields.account-type")}
+        label={t("create-program-page.settings.fields.account-type")}
         InputComponent={Select}
         disableIfSingle
         onChange={onSelectChange(handleAccountTypeChange)}

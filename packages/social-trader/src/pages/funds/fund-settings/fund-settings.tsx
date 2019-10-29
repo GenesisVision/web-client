@@ -46,7 +46,7 @@ const _FundSettings: React.FC<Props> = ({
         onSubmit={editAsset}
       />
       <CloseAssetBlock
-        label={t("manager.asset-settings.close-fund.title")}
+        label={t("asset-settings.close-fund.title")}
         asset={ASSET.FUND}
         canCloseAsset={details.personalFundDetails.canCloseAsset}
         id={details.id}

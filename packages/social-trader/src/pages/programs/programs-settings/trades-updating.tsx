@@ -18,7 +18,7 @@ const _TradesUpdating: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <SettingsBlock label={t("manager.program-settings.trades-update.title")}>
+    <SettingsBlock label={t("program-settings.trades-update.title")}>
       <form id="edit-form" onSubmit={handleSubmit}>
         <TradesDelay name={FIELDS.tradesDelay} />
         <GVButton
@@ -27,7 +27,7 @@ const _TradesUpdating: React.FC<Props> = ({
           className="invest-form__submit-button"
           disabled={!dirty || !isValid || isSubmitting}
         >
-          {t("manager.program-settings.buttons.save")}
+          {t("program-settings.buttons.save")}
         </GVButton>
       </form>
     </SettingsBlock>

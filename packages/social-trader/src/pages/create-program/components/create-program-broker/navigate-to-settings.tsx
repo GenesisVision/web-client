@@ -15,7 +15,7 @@ const _NavigateToSettings: React.FC<OwnProps & WithTranslation> = ({
       <Link
         to={{
           pathname: KYC_ROUTE,
-          state: `/ ${t("manager.create-program-page.title")}`
+          state: `/ ${t("create-program-page.title")}`
         }}
       >
         <GVButton color="primary" variant="outlined">

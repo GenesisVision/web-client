@@ -56,7 +56,7 @@ const _CreateProgramBroker: React.FC<Props> = ({
           </h3>
           <div className="create-program-broker__row">
             <div className="create-program-broker__info-title">
-              {t("manager.create-program-page.broker-info.about")}
+              {t("create-program-page.broker-info.about")}
             </div>
             <div className="create-program-broker__info-text">
               {selectedBroker.description}
@@ -64,7 +64,7 @@ const _CreateProgramBroker: React.FC<Props> = ({
           </div>
           <div className="create-program-broker__row">
             <div className="create-program-broker__info-title">
-              {t("manager.create-program-page.broker-info.account-type")}
+              {t("create-program-page.broker-info.account-type")}
             </div>
             <div className="create-program-broker__info-text">
               {getAccountTypes(selectedBroker.accountTypes)}
@@ -72,7 +72,7 @@ const _CreateProgramBroker: React.FC<Props> = ({
           </div>
           <div className="create-program-broker__row">
             <div className="create-program-broker__info-title">
-              {t("manager.create-program-page.broker-info.trading-platform")}
+              {t("create-program-page.broker-info.trading-platform")}
             </div>
             <div className="create-program-broker__info-text">
               {selectedBroker.accountTypes[0].type}
@@ -80,7 +80,7 @@ const _CreateProgramBroker: React.FC<Props> = ({
           </div>
           <div className="create-program-broker__row">
             <div className="create-program-broker__info-title">
-              {t("manager.create-program-page.broker-info.terms")}
+              {t("create-program-page.broker-info.terms")}
             </div>
             <div className="create-program-broker__info-text">
               <a
@@ -88,13 +88,13 @@ const _CreateProgramBroker: React.FC<Props> = ({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {t("manager.create-program-page.broker-info.read-terms")}
+                {t("create-program-page.broker-info.read-terms")}
               </a>
             </div>
           </div>
           <div className="create-program-broker__row create-program-broker__row--small">
             <div className="create-program-broker__info-title">
-              {t("manager.create-program-page.broker-info.leverage")}
+              {t("create-program-page.broker-info.leverage")}
             </div>
             <div className="create-program-broker__info-text">
               {getLeverageDescription(
@@ -105,7 +105,7 @@ const _CreateProgramBroker: React.FC<Props> = ({
           </div>
           <div className="create-program-broker__row">
             <div className="create-program-broker__info-title">
-              {t("manager.create-program-page.broker-info.assets")}
+              {t("create-program-page.broker-info.assets")}
             </div>
             <div className="create-program-broker__info-text">
               {selectedBroker.assets}

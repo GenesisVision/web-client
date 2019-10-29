@@ -12,7 +12,7 @@ const _AssetsField: React.FC<{ name: string }> = ({ name }) => {
   return (
     <CreateAssetField wide>
       <div className="create-asset-settings__text">
-        {t("manager.create-fund-page.settings.fields.mandatory-assets")}
+        {t("create-fund-page.settings.fields.mandatory-assets")}
       </div>
       <GVFormikField name={name} component={ReallocateField} assets={assets} />
     </CreateAssetField>

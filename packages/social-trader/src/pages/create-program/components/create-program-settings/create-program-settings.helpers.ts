@@ -111,28 +111,28 @@ const createProgramSettingsValidationSchema = ({
     return object<ICreateProgramSettingsFormValues>().shape({
       [CREATE_PROGRAM_FIELDS.stopOutLevel]: number()
         .required(
-          t("manager.create-program-page.settings.validation.stop-out-required")
+          t("create-program-page.settings.validation.stop-out-required")
         )
         .min(
           10,
-          t("manager.create-program-page.settings.validation.stop-out-is-zero")
+          t("create-program-page.settings.validation.stop-out-is-zero")
         )
         .max(
           100,
-          t("manager.create-program-page.settings.validation.stop-out-is-large")
+          t("create-program-page.settings.validation.stop-out-is-large")
         ),
 
       [CREATE_PROGRAM_FIELDS.logo]: inputImageShape(t),
       [CREATE_PROGRAM_FIELDS.title]: assetTitleShape(t),
       [CREATE_PROGRAM_FIELDS.description]: assetDescriptionShape(t),
       [CREATE_PROGRAM_FIELDS.currency]: string().required(
-        t("manager.create-program-page.settings.validation.currency-required")
+        t("create-program-page.settings.validation.currency-required")
       ),
       [CREATE_PROGRAM_FIELDS.periodLength]: number().required(
-        t("manager.create-program-page.settings.validation.period-required")
+        t("create-program-page.settings.validation.period-required")
       ),
       [CREATE_PROGRAM_FIELDS.leverage]: number().required(
-        t("manager.create-program-page.settings.validation.leverage-required")
+        t("create-program-page.settings.validation.leverage-required")
       ),
       [CREATE_PROGRAM_FIELDS.entryFee]: entryFeeShape(
         t,
@@ -151,7 +151,7 @@ const createProgramSettingsValidationSchema = ({
             .min(
               0,
               t(
-                "manager.create-program-page.settings.validation.investment-limit-min"
+                "create-program-page.settings.validation.investment-limit-min"
               )
             )
             .lessThan(
@@ -160,7 +160,7 @@ const createProgramSettingsValidationSchema = ({
             )
             .required(
               t(
-                "manager.create-program-page.settings.validation.investment-limit-required"
+                "create-program-page.settings.validation.investment-limit-required"
               )
             )
         }
@@ -182,7 +182,7 @@ const createProgramSettingsValidationSchema = ({
       ),
       [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: string().required(
         t(
-          "manager.create-program-page.settings.validation.account-type-required"
+          "create-program-page.settings.validation.account-type-required"
         )
       ),
       [CREATE_PROGRAM_FIELDS.depositAmount]: values[
@@ -191,13 +191,13 @@ const createProgramSettingsValidationSchema = ({
         ? number()
             .required(
               t(
-                "manager.create-program-page.settings.validation.amount-required"
+                "create-program-page.settings.validation.amount-required"
               )
             )
             .min(
               minDeposit,
               t(
-                "manager.create-program-page.settings.validation.amount-is-zero",
+                "create-program-page.settings.validation.amount-is-zero",
                 {
                   min: minDeposit
                 }
@@ -206,11 +206,11 @@ const createProgramSettingsValidationSchema = ({
             .max(
               values[CREATE_PROGRAM_FIELDS.available],
               t(
-                "manager.create-program-page.settings.validation.amount-is-large"
+                "create-program-page.settings.validation.amount-is-large"
               )
             )
         : number().required(
-            t("manager.create-program-page.settings.validation.amount-required")
+            t("create-program-page.settings.validation.amount-required")
           )
     });
   });
