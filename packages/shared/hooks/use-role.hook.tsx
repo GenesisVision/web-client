@@ -1,7 +1,7 @@
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 
 const useRole = () => {
-  return (ROLE_ENV || ROLE.INVESTOR).toLowerCase() as ROLE;
+  return ROLE_ENV.toLowerCase() as ROLE;
 };
 
 export default useRole;
