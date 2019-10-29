@@ -14,7 +14,7 @@ import {
 import {
   MANAGER_DETAILS_ROUTE,
   MANAGER_SLUG_URL_PARAM_NAME
-} from "shared/routes/routes";
+} from "shared/routes/manager.routes";
 import {
   PROGRAM_DETAILS_FOLDER_ROUTE,
   PROGRAM_DETAILS_ROUTE,
