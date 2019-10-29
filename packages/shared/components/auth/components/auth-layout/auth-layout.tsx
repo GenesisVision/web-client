@@ -35,11 +35,11 @@ const _AuthLayout: React.FC<Props> = ({
           <GvBrand />
         </NavLink>
         <blockquote className="auth__quote">
-          {t(`${role}.auth-quotes.${quoteNo}.quote`)}
+          {t(`${role ? `${role}.` : ""}auth-quotes.${quoteNo}.quote`)}
           <footer className="auth__quote-footer">
             —{" "}
             <cite className="auth__quote-author">
-              {t(`${role}.auth-quotes.${quoteNo}.author`)}
+              {t(`${role ? `${role}.` : ""}auth-quotes.${quoteNo}.author`)}
             </cite>
           </footer>
         </blockquote>

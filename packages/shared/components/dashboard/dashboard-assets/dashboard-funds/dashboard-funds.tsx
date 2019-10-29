@@ -63,7 +63,11 @@ const _DashboardFunds: React.FC<Props> = ({
         <>
           <SelectFilter
             name={ACTION_STATUS_FILTER_NAME}
-            label={t(`${role}.dashboard-page.actions-status-filter.label`)}
+            label={t(
+              `${
+                role ? `${role}.` : ""
+              }dashboard-page.actions-status-filter.label`
+            )}
             value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
             values={ACTION_STATUS_FILTER_VALUES}
             onChange={updateFilter}
@@ -80,7 +84,11 @@ const _DashboardFunds: React.FC<Props> = ({
         <span
           className={`funds-table__cell dashboard-funds__cell dashboard-funds__cell--${column.name}`}
         >
-          {t(`${role}.dashboard-page.funds-header.${column.name}`)}
+          {t(
+            `${role ? `${role}.` : ""}dashboard-page.funds-header.${
+              column.name
+            }`
+          )}
         </span>
       )}
       renderBodyRow={(fund: any) => (
