@@ -2,7 +2,7 @@ import { FilterModel, PlatformInfo, ProgramsInfo } from "gv-api-web";
 import { createSelector } from "reselect";
 import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
-import { ASSET, ROLE_ENV } from "shared/constants/constants";
+import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
 import { HEADER_CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import apiReducerFactory, {
   IApiState
@@ -87,10 +87,13 @@ export const allEventsSelector = createSelector<
   state => platformDataSelector(state),
   data =>
     (data &&
-      data.enums.event[ROLE_ENV].allAssets.map(({ key, title }) => ({
-        value: key,
-        labelKey: title
-      }))) ||
+      data.enums.event[ROLE_ENV || ROLE.MANAGER].allAssets.map(
+        ({ key, title }) => ({
+          // TODO remove after union
+          value: key,
+          labelKey: title
+        })
+      )) ||
     []
 );
 
@@ -104,7 +107,10 @@ export const assetEventsSelectorCreator = (asset: ASSET) =>
     data => {
       if (!data) return [];
       // @ts-ignore
-      return data.enums.event[ROLE_ENV][`${asset.toLowerCase()}Details`].map(
+      return data.enums.event[ROLE_ENV || ROLE.MANAGER][
+        `${asset.toLowerCase()}Details`
+      ].map(
+        // TODO remove after union
         ({ key, title }: FilterModel) => ({
           value: key,
           labelKey: title

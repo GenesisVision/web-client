@@ -182,7 +182,7 @@ export const getProgramHistoryCounts = (id: string) => (
   getState: () => RootState
 ) => {
   const isAuthenticated = authService.isAuthenticated();
-  const isManager = ROLE_ENV === ROLE.MANAGER;
+  const isManager = ROLE_ENV || ROLE.MANAGER === ROLE.MANAGER; // TODO remove after union
 
   const commonFiltering = { take: 0 };
 
@@ -244,7 +244,9 @@ export const fetchPortfolioEventsWithoutTable = (
     authorization: string,
     opts?: Object
   ) => CancelablePromise<InvestmentEventViewModels>;
-  switch (ROLE_ENV) {
+  switch (
+    ROLE_ENV || ROLE.MANAGER // TODO remove after union
+  ) {
     case ROLE.INVESTOR:
       request = investorApi.getEvents;
       break;
@@ -266,7 +268,9 @@ export const fetchPortfolioEvents = (
     authorization: string,
     opts?: Object
   ) => CancelablePromise<InvestmentEventViewModels>;
-  switch (ROLE_ENV) {
+  switch (
+    ROLE_ENV || ROLE.MANAGER // TODO remove after union
+  ) {
     case ROLE.INVESTOR:
       request = investorApi.getEvents;
       break;

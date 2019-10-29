@@ -89,7 +89,8 @@ export const cancelRequestDispatch: CancelRequestType = ({
       dispatch(fetchProfileHeaderInfoAction());
       dispatch(
         alertMessageActions.success(
-          `${ROLE_ENV}.dashboard-page.requests.success-cancel-request`,
+          `${ROLE_ENV ||
+            ROLE.MANAGER}.dashboard-page.requests.success-cancel-request`, // TODO remove after union
           true
         )
       );
