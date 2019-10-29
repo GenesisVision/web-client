@@ -19,10 +19,10 @@ const _CloseAssetForm: React.FC<
   <form id="closeAssetForm" onSubmit={handleSubmit} noValidate>
     <DialogTop
       title={t(
-        `manager.asset-settings.period-and-closing.close-confirm-title-${asset.toLowerCase()}`
+        `asset-settings.period-and-closing.close-confirm-title-${asset.toLowerCase()}`
       )}
       subtitle={t(
-        `manager.asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
+        `asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
       )}
     />
     <DialogBottom>

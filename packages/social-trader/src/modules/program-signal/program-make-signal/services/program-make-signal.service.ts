@@ -23,7 +23,7 @@ export const programMakeSignal = ({
     .then(() => {
       dispatch(
         alertMessageActions.success(
-          "manager.program-make-signal.success-alert-message",
+          "program-make-signal.success-alert-message",
           true
         )
       );

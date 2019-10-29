@@ -22,7 +22,7 @@ export const updateAssets = ({
     .then(() => {
       dispatch(
         alertMessageActions.success(
-          "manager.reallocate.success-alert-message",
+          "reallocate.success-alert-message",
           true
         )
       );

@@ -13,7 +13,7 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
     <CreateAssetField>
       <GVFormikField
         name={name}
-        label={t("manager.create-program-page.settings.fields.stop-out-level")}
+        label={t("create-program-page.settings.fields.stop-out-level")}
         adornment="%"
         component={GVTextField}
         type="number"
@@ -21,11 +21,11 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
         decimalScale={4}
       />
       <Hint
-        content={t("manager.create-program-page.settings.hints.stop-out-level")}
+        content={t("create-program-page.settings.hints.stop-out-level")}
         className="create-program-settings__field-caption"
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         tooltipContent={t(
-          "manager.create-program-page.settings.hints.stop-out-level-description"
+          "create-program-page.settings.hints.stop-out-level-description"
         )}
       />
     </CreateAssetField>

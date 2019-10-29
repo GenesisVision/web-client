@@ -21,7 +21,7 @@ const _DescriptionBlock: React.FC<Props> = ({
       <LogoField
         name={logoName}
         title={t(
-          `manager.create-${asset.toLowerCase()}-page.settings.fields.upload-logo`
+          `create-${asset.toLowerCase()}-page.settings.fields.upload-logo`
         )}
       />
     </>

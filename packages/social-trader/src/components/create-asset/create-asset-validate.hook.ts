@@ -26,7 +26,7 @@ const useCreateAssetValidate = ({
       else
         dispatch(
           alertMessageActions.error(
-            t("manager.create-program-page.notifications.validate-error")
+            t("create-program-page.notifications.validate-error")
           )
         );
       if (e) e.preventDefault();

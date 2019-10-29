@@ -13,7 +13,7 @@ const _Currency: React.FC<Props> = ({ name, disabled, accountCurrencies }) => {
       <GVFormikField
         name={name}
         component={GVTextField}
-        label={t("manager.create-program-page.settings.fields.currency")}
+        label={t("create-program-page.settings.fields.currency")}
         InputComponent={Select}
         disabled={disabled}
         disableIfSingle

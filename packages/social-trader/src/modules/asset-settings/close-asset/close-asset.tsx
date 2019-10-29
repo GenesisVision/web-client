@@ -14,7 +14,7 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, t, onApply, canClose }) => {
       <div className="asset-settings__block-wrapper">
         <p className="asset-settings__text">
           {t(
-            `manager.asset-settings.period-and-closing.text-${asset.toLowerCase()}`
+            `asset-settings.period-and-closing.text-${asset.toLowerCase()}`
           )}
         </p>
         <GVButton
@@ -22,7 +22,7 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, t, onApply, canClose }) => {
           disabled={!canClose}
           onClick={setCloseAssetOpen}
         >
-          {t(`manager.asset-settings.buttons.close-${asset.toLowerCase()}`)}
+          {t(`asset-settings.buttons.close-${asset.toLowerCase()}`)}
         </GVButton>
       </div>
       <ConfirmCloseAssetContainer

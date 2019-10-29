@@ -41,7 +41,7 @@ const useCreateAssetSubmit = ({
             dispatch(push(DASHBOARD_ROUTE));
             dispatch(
               alertMessageActions.success(
-                `manager.create-${asset.toLowerCase()}-page.notifications.create-success`,
+                `create-${asset.toLowerCase()}-page.notifications.create-success`,
                 true
               )
             );

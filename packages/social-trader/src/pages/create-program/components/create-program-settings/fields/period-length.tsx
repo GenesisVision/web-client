@@ -13,13 +13,13 @@ const _PeriodLength: React.FC<Props> = ({ name, programsInfo }) => {
       <GVFormikField
         name={name}
         component={GVTextField}
-        label={t("manager.create-program-page.settings.fields.period")}
+        label={t("create-program-page.settings.fields.period")}
         InputComponent={Select}
       >
         {programsInfo.periods.map(period => (
           <option value={period} key={period}>
             {`${period} ${t(
-              "manager.create-program-page.settings.fields.period-option-notation.day",
+              "create-program-page.settings.fields.period-option-notation.day",
               { count: period }
             )}`}
           </option>

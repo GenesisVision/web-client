@@ -19,7 +19,7 @@ const _InvestmentLimit: React.FC<Props> = ({
 }) => {
   return (
     <SettingsBlock
-      label={t("manager.create-program-page.settings.fields.investment-limit")}
+      label={t("create-program-page.settings.fields.investment-limit")}
     >
       <form id="edit-form" onSubmit={handleSubmit}>
         <InvestmentLimitField
@@ -29,7 +29,7 @@ const _InvestmentLimit: React.FC<Props> = ({
           currency={currency}
         />
         <p className="program-settings__text">
-          {t("manager.program-settings.investment-limit.text")}
+          {t("program-settings.investment-limit.text")}
         </p>
         <GVButton
           color="primary"
