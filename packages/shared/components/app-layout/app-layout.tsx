@@ -6,20 +6,37 @@ import { initOnResizeEvent } from "shared/actions/ui-actions";
 import HeaderContainer from "shared/components/header/header.container";
 import NotificationsContainer from "shared/components/notifications/components/notifications-container";
 import AlertMessageList from "shared/modules/alert-message/components/alert-message-list/alert-message-list";
-import { mobileMenuItems, topMenuItems } from "shared/routes/menu";
+import {
+  mobileMenuItems,
+  mobileMenuItemsUnion,
+  topMenuItems,
+  topMenuItemsUnion
+} from "shared/routes/menu";
+import useRole from "shared/hooks/use-role.hook";
 
 const _AppLayout: ComponentType<Props> = ({ children }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(initOnResizeEvent());
   }, []);
+  // TODO remove after union
+  let topMenu, mobileMenu;
+  const role = useRole();
+  if (!role) {
+    topMenu = topMenuItemsUnion;
+    mobileMenu = mobileMenuItemsUnion;
+  } else {
+    topMenu = topMenuItems;
+    mobileMenu = mobileMenuItems;
+  }
+
   return (
     <div className="app__wrapper root">
       <div className="app">
         <div className="app__header">
           <HeaderContainer
-            topMenuItems={topMenuItems}
-            mobileMenuItems={mobileMenuItems}
+            topMenuItems={topMenu}
+            mobileMenuItems={mobileMenu}
           />
         </div>
         <div className="app__main">{children}</div>
