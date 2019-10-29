@@ -16,13 +16,21 @@ const _PortfolioEventsAllComponent: React.FC = () => {
   const [t] = useTranslation();
   const role = useRole();
   return (
-    <Page title={t(`${role ? `${role}.` : ""}dashboard-page.portfolio-events.title`)}>
+    <Page
+      title={t(
+        `${role ? `${role}.` : ""}dashboard-page.portfolio-events.title`
+      )}
+    >
       <Surface className="dashboard-portfolio-events-all">
         <PortfolioEventsTable
           selector={dashboardEventsAllTableSelector}
           getItems={getEvents(EVENT_LOCATION.EventsAll)}
           eventLocation={EVENT_LOCATION.EventsAll}
-          title={t(`${role ? `${role}.` : ""}dashboard-page.portfolio-events.table-title`)}
+          title={t(
+            `${
+              role ? `${role}.` : ""
+            }dashboard-page.portfolio-events.table-title`
+          )}
           className="portfolio-events-all-table"
           dateRangeStartLabel={t("filters.date-range.account-creation")}
           eventTypeFilterValues={events}

@@ -12,10 +12,16 @@ const _DashboardGetStarted: React.FC = () => {
   return (
     <Surface className="dashboard-portfolio-chart-section">
       <div className="get-started">
-        <h1>{t(`${role ? `${role}.` : ""}dashboard-page.get-started.title`)}</h1>
+        <h1>
+          {t(`${role ? `${role}.` : ""}dashboard-page.get-started.title`)}
+        </h1>
         <div className="get-started__text">
-          <div>{t(`${role ? `${role}.` : ""}dashboard-page.get-started.text-1`)}</div>
-          <div>{t(`${role ? `${role}.` : ""}dashboard-page.get-started.text-2`)}</div>
+          <div>
+            {t(`${role ? `${role}.` : ""}dashboard-page.get-started.text-1`)}
+          </div>
+          <div>
+            {t(`${role ? `${role}.` : ""}dashboard-page.get-started.text-2`)}
+          </div>
         </div>
         <div className="get-started__deposit">
           <Link to={WALLET_TOTAL_PAGE_ROUTE}>

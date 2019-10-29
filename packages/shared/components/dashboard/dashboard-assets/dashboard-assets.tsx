@@ -48,7 +48,9 @@ const _DashboardAssets: React.FC<Props> = ({
           <GVTabs value={tab} onChange={handleTabChange}>
             <GVTab
               value={TABS.PROGRAMS}
-              label={t(`${role ? `${role}.` : ""}dashboard-page.assets.programs`)}
+              label={t(
+                `${role ? `${role}.` : ""}dashboard-page.assets.programs`
+              )}
               count={programsCount}
             />
             <GVTab
