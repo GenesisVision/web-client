@@ -3,8 +3,8 @@ import PortfolioEventsAllComponent from "pages/dashboard/components/dashboard-po
 import React from "react";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 
-const PortfolioEvents: NextPage = () => {
+const Page: NextPage = () => {
   return <PortfolioEventsAllComponent />;
 };
 
-export default withDefaultLayout(PortfolioEvents);
+export default withDefaultLayout(Page);
