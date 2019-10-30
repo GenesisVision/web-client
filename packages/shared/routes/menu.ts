@@ -21,7 +21,13 @@ import {
   OVERVIEW_ROUTE,
   TRADING_ROUTE
 } from "./dashboard.routes";
-import { FOLLOW_ROUTE, FUNDS_ROUTE, PROGRAMS_ROUTE } from "./invest.routes";
+import { FUNDS_ROUTE } from "./funds.routes";
+import {
+  GV_FOLLOW_ROUTE,
+  GV_FUNDS_ROUTE,
+  GV_PROGRAMS_ROUTE
+} from "./invest.routes";
+import { PROGRAMS_ROUTE } from "./programs.routes";
 import {
   COMING_SOON_ROUTE,
   META_TRADER_4_ROUTE,
@@ -99,13 +105,17 @@ const mainMenuItemsUnion = [
     children: [
       {
         Icon: SettingsIcon,
-        route: FOLLOW_ROUTE,
+        route: GV_FOLLOW_ROUTE,
         label: "navigation.gv-follow"
       },
-      { Icon: SettingsIcon, route: FUNDS_ROUTE, label: "navigation.gv-funds" },
       {
         Icon: SettingsIcon,
-        route: PROGRAMS_ROUTE,
+        route: GV_FUNDS_ROUTE,
+        label: "navigation.gv-funds"
+      },
+      {
+        Icon: SettingsIcon,
+        route: GV_PROGRAMS_ROUTE,
         label: "navigation.gv-programs"
       }
     ]
