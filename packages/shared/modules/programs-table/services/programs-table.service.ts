@@ -1,5 +1,4 @@
 import { push } from "connected-react-router";
-import { ProgramsList } from "gv-api-web";
 import * as qs from "qs";
 import {
   ComposeFiltersAllType,
@@ -23,10 +22,12 @@ import {
 import programApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
+import { NextPageWithReduxContext } from "shared/utils/types";
 
 import * as programTableActions from "../actions/programs-table.actions";
 import { FetchProgramsFiltersType } from "../actions/programs-table.actions";
 import {
+  DEFAULT_PROGRAM_TABLE_FILTERS,
   PROGRAMS_COLUMNS,
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
@@ -194,4 +195,28 @@ export const programsChangeFilter = (filter: TFilter<any>) => (
   }
   const newUrl = router.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
+};
+
+export const getFiltersFromContext = ({
+  asPath = "",
+  pathname,
+  reduxStore
+}: NextPageWithReduxContext): FetchProgramsFiltersType => {
+  const { page, sorting = SORTING_FILTER_VALUE, ...other } = qs.parse(
+    asPath.slice(pathname.length + 1)
+  );
+  const { currency } = reduxStore.getState().accountSettings;
+  const skipAndTake = calculateSkipAndTake({
+    itemsOnPage: DEFAULT_ITEMS_ON_PAGE,
+    currentPage: page
+  });
+  return {
+    ...skipAndTake,
+    ...composeFilters(PROGRAMS_TABLE_FILTERS, {
+      ...DEFAULT_PROGRAM_TABLE_FILTERS,
+      ...other
+    }),
+    currencySecondary: currency,
+    sorting
+  } as FetchProgramsFiltersType;
 };

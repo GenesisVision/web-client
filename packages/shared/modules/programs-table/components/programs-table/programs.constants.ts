@@ -10,6 +10,10 @@ import {
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import {
+  TAG_FILTER_DEFAULT_VALUE,
+  TAG_FILTER_NAME
+} from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { programsTagFilter } from "shared/components/table/components/filtering/tag-filter/tag-filter.helpers";
 import { IComposeDefaultFilter } from "shared/components/table/components/table.types";
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
@@ -115,3 +119,11 @@ export const PROGRAMS_COLUMNS: SortingColumn[] = [
     name: "chart"
   }
 ];
+
+export const DEFAULT_PROGRAM_TABLE_FILTERS = {
+  [CURRENCY_MAP_NAME]: CURRENCY_MAP_VALUE,
+  [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
+  [TAG_FILTER_NAME]: TAG_FILTER_DEFAULT_VALUE,
+  [LEVEL_FILTER_NAME]: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
+  [PROGRAM_CURRENCY_FILTER_NAME]: CURRENCY_FILTER_VALUE
+};
