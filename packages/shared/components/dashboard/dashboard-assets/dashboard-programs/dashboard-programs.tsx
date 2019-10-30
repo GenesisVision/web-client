@@ -71,7 +71,7 @@ const _DashboardPrograms: React.FC<Props> = ({
             label={t(
               `${
                 role ? `${role}.` : ""
-              }.dashboard-page.actions-status-filter.label`
+              }dashboard-page.actions-status-filter.label`
             )}
             value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
             values={ACTION_STATUS_FILTER_VALUES}
@@ -89,7 +89,11 @@ const _DashboardPrograms: React.FC<Props> = ({
         <span
           className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${column.name}`}
         >
-          {t(`${role ? `${role}.` : ""}dashboard-page.programs-header.${column.name}`)}
+          {t(
+            `${role ? `${role}.` : ""}dashboard-page.programs-header.${
+              column.name
+            }`
+          )}
         </span>
       )}
       renderBodyRow={(program: ProgramDetailsOld, updateRow: any) => (
