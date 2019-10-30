@@ -2,7 +2,7 @@ import React from "react";
 import ProgramsPage from "shared/components/programs/programs.page";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import * as programTableActions from "shared/modules/programs-table/actions/programs-table.actions";
-import { getFiltersFromContext } from "shared/modules/programs-table/components/programs-table/programs-table-ssr";
+import { getFiltersFromContext } from "shared/modules/programs-table/services/programs-table.service";
 import authService from "shared/services/auth-service";
 import { NextPageWithRedux } from "shared/utils/types";
 
