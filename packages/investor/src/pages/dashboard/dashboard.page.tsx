@@ -14,7 +14,7 @@ import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-ev
 const DashboardPage: React.FC = () => {
   const role = useRole();
   const [t] = useTranslation();
-  const title = t(`${role}.dashboard-page.title`);
+  const title = t(`${role ? `${role}.` : ""}dashboard-page.title`);
   return (
     <Page title={title}>
       <div className="dashboard__row">

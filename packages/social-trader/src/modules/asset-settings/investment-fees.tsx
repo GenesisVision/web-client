@@ -28,7 +28,7 @@ const _InvestmentFees: React.FC<Props> = ({
   return (
     <SettingsBlock
       label={t(
-        `manager.create-${asset.toLowerCase()}-page.settings.investment-${asset.toLowerCase()}-fees`
+        `create-${asset.toLowerCase()}-page.settings.investment-${asset.toLowerCase()}-fees`
       )}
     >
       <form id="edit-form" onSubmit={handleSubmit}>
@@ -36,17 +36,17 @@ const _InvestmentFees: React.FC<Props> = ({
           <FeesSettings
             entryFeeName={FIELDS.entryFee}
             entryFeeDescription={t(
-              "manager.create-program-page.settings.hints.entry-fee-description"
+              "create-program-page.settings.hints.entry-fee-description"
             )}
             secondFeeName={FIELDS.successFee}
             secondFeeLabel={t(
-              "manager.create-program-page.settings.fields.success-fee"
+              "create-program-page.settings.fields.success-fee"
             )}
             secondFeeUnderText={t(
-              "manager.create-program-page.settings.hints.success-fee"
+              "create-program-page.settings.hints.success-fee"
             )}
             secondFeeDescription={t(
-              "manager.create-program-page.settings.hints.success-fee-description"
+              "create-program-page.settings.hints.success-fee-description"
             )}
           />
         )}
@@ -54,18 +54,18 @@ const _InvestmentFees: React.FC<Props> = ({
           <FeesSettings
             entryFeeName={FIELDS.entryFee}
             entryFeeDescription={t(
-              "manager.create-fund-page.settings.hints.entry-fee-description",
+              "create-fund-page.settings.hints.entry-fee-description",
               { maxFee: managerMaxEntryFee }
             )}
             secondFeeName={FIELDS.exitFee}
             secondFeeLabel={t(
-              "manager.create-fund-page.settings.fields.exit-fee"
+              "create-fund-page.settings.fields.exit-fee"
             )}
             secondFeeUnderText={t(
-              "manager.create-fund-page.settings.hints.exit-fee"
+              "create-fund-page.settings.hints.exit-fee"
             )}
             secondFeeDescription={t(
-              "manager.create-fund-page.settings.hints.exit-fee-description",
+              "create-fund-page.settings.hints.exit-fee-description",
               {
                 maxFee: managerMaxExitFee
               }
@@ -78,7 +78,7 @@ const _InvestmentFees: React.FC<Props> = ({
           className="invest-form__submit-button"
           disabled={!dirty || !isValid || isSubmitting}
         >
-          {t("manager.program-settings.buttons.save")}
+          {t("program-settings.buttons.save")}
         </GVButton>
       </form>
     </SettingsBlock>

@@ -92,7 +92,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
     <div>
       <div className="level-calculator-popup__header">
         <h2 className="level-calculator-popup__heading">
-          {t("manager.level-calculator.title")}
+          {t("level-calculator.title")}
         </h2>
         <div>
           <GVButton
@@ -116,7 +116,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
 
       <div className="level-calculator-popup__program-name">
         <div className="level-calculator-popup__program-label">
-          {t("manager.level-calculator.program")}
+          {t("level-calculator.program")}
         </div>
         <div className="level-calculator-popup__program-title">{title}</div>
       </div>
@@ -125,8 +125,8 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           name="genesisRatio"
           className="level-calculator-popup__calculator-slider"
           valueClassName="level-calculator-popup__calculator-slider-value"
-          title={t("manager.level-calculator.genesis-ratio")}
-          tooltipContent={t("manager.level-calculator.genesis-ratio-tooltip")}
+          title={t("level-calculator.genesis-ratio")}
+          tooltipContent={t("level-calculator.genesis-ratio-tooltip")}
           value={genesisRatio}
           editableValue
           min={levelsParameters.genesisRatioMin}
@@ -138,8 +138,8 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           name="programAge"
           className="level-calculator-popup__calculator-slider"
           valueClassName="level-calculator-popup__calculator-slider-value"
-          title={t("manager.level-calculator.age")}
-          tooltipContent={t("manager.level-calculator.age-tooltip")}
+          title={t("level-calculator.age")}
+          tooltipContent={t("level-calculator.age-tooltip")}
           value={programAge}
           editableValue
           min={0}
@@ -158,9 +158,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           name="weightedVolumeScale"
           className="level-calculator-popup__calculator-slider"
           valueClassName="level-calculator-popup__calculator-slider-value"
-          title={t("manager.level-calculator.weighted-volume-scale")}
+          title={t("level-calculator.weighted-volume-scale")}
           tooltipContent={t(
-            "manager.level-calculator.weighted-volume-scale-tooltip"
+            "level-calculator.weighted-volume-scale-tooltip"
           )}
           value={weightedVolumeScale}
           editableValue
@@ -172,8 +172,8 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         <CalculatorLogarithmicSlider
           name="managerBalance"
           className="level-calculator-popup__calculator-slider"
-          title={t("manager.level-calculator.manager-balance")}
-          tooltipContent={t("manager.level-calculator.manager-balance-tooltip")}
+          title={t("level-calculator.manager-balance")}
+          tooltipContent={t("level-calculator.manager-balance-tooltip")}
           value={+formatValue(managerBalance, 2)}
           valueAdornment={` ${currency}`}
           max={levelsParameters.maxAvailableToInvest}
@@ -184,9 +184,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
       <div className="level-calculator-popup__controls">
         <CalculatorOutput
           className="level-calculator-popup__statistic-item"
-          label={t("manager.level-calculator.current-av-to-invest")}
+          label={t("level-calculator.current-av-to-invest")}
           tooltipContent={t(
-            "manager.level-calculator.current-av-to-invest-tooltip"
+            "level-calculator.current-av-to-invest-tooltip"
           )}
           value={
             <NumberFormat
@@ -203,9 +203,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
 
         <CalculatorOutput
           className="level-calculator-popup__statistic-item"
-          label={t("manager.level-calculator.current-investment-scale")}
+          label={t("level-calculator.current-investment-scale")}
           tooltipContent={t(
-            "manager.level-calculator.current-investment-scale-tooltip"
+            "level-calculator.current-investment-scale-tooltip"
           )}
           value={
             <NumberFormat
@@ -216,9 +216,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         />
         <CalculatorOutput
           className="level-calculator-popup__statistic-item"
-          label={t("manager.level-calculator.new-av-to-invest")}
+          label={t("level-calculator.new-av-to-invest")}
           tooltipContent={t(
-            "manager.level-calculator.new-av-to-invest-tooltip"
+            "level-calculator.new-av-to-invest-tooltip"
           )}
           value={
             <NumberFormat
@@ -231,9 +231,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         />
         <CalculatorOutput
           className="level-calculator-popup__statistic-item"
-          label={t("manager.level-calculator.new-investment-scale")}
+          label={t("level-calculator.new-investment-scale")}
           tooltipContent={t(
-            "manager.level-calculator.new-investment-scale-tooltip"
+            "level-calculator.new-investment-scale-tooltip"
           )}
           value={
             <NumberFormat
@@ -254,7 +254,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
       {!isKycConfirmed && (
         <>
           <div className="level-calculator-popup__kyc-disclaimer">
-            {t("manager.level-calculator.kyc-disclaimer")}
+            {t("level-calculator.kyc-disclaimer")}
           </div>
           <Link
             className="level-calculator-popup__btn-verify"

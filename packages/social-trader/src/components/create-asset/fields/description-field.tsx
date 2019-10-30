@@ -14,13 +14,13 @@ const _DescriptionField: React.FC<Props> = ({ name, description }) => {
       <GVFormikField
         type="textarea"
         name={name}
-        label={t("manager.create-program-page.settings.fields.description")}
+        label={t("create-program-page.settings.fields.description")}
         component={GVTextField}
       />
       <div className="create-program-settings__field-caption create-program-settings__description">
         <span className="create-program-settings__description-requirements">
           {t(
-            "manager.create-program-page.settings.fields.description-requirements"
+            "create-program-page.settings.fields.description-requirements"
           )}
         </span>
         {descriptionTrimmedLength > 0 && (

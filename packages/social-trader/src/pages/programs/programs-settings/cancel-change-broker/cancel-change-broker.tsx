@@ -11,7 +11,7 @@ import CancelChangeBrokerForm, {
 const _ChangeChangeBroker: React.FC<
   CancelChangeBrokerFormOwnProps & WithTranslation
 > = props => (
-  <SettingsBlock label={props.t("manager.program-settings.broker.title")}>
+  <SettingsBlock label={props.t("program-settings.broker.title")}>
     <CancelChangeBrokerForm {...props} />
   </SettingsBlock>
 );

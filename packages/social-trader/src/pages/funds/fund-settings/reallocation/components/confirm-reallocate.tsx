@@ -27,11 +27,11 @@ const _ConfirmReallocate: React.FC<Props> = ({
       onClose={onClose}
       onCancel={onClose}
       onApply={handleApplyClick}
-      header={t("manager.fund-settings.reallocation.confirm-title")}
+      header={t("fund-settings.reallocation.confirm-title")}
       body={
         <>
           <FundAssetContainer assets={assets} type={FUND_ASSET_TYPE.MIDDLE} />
-          {t("manager.fund-settings.reallocation.confirm-text")}
+          {t("fund-settings.reallocation.confirm-text")}
         </>
       }
       applyButtonText={t("buttons.confirm")}

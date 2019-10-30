@@ -27,14 +27,14 @@ const _AssetEdit: React.FC<Props> = ({
   <SettingsBlock>
     <form id="edit-form" onSubmit={handleSubmit}>
       <div className="asset-settings__block-wrapper">
-        <h3>{t("manager.asset-settings.avatar.title")}</h3>
+        <h3>{t("asset-settings.avatar.title")}</h3>
         <LogoField name={FIELDS.logo} />
       </div>
-      <h3>{t("manager.asset-settings.name.title")}</h3>
+      <h3>{t("asset-settings.name.title")}</h3>
       <div className="asset-settings__block-wrapper create-program-settings__row">
         <TitleField name={FIELDS.title} />
       </div>
-      <h3>{t("manager.asset-settings.strategy.title")}</h3>
+      <h3>{t("asset-settings.strategy.title")}</h3>
       <div className="asset-settings__block-wrapper asset-settings__block-wrapper--wide create-program-settings__row">
         <DescriptionField
           name={FIELDS.description}
@@ -47,7 +47,7 @@ const _AssetEdit: React.FC<Props> = ({
         className="invest-form__submit-button"
         disabled={!dirty || !isValid || isSubmitting}
       >
-        {t("manager.asset-settings.buttons.save")}
+        {t("asset-settings.buttons.save")}
       </GVButton>
     </form>
   </SettingsBlock>

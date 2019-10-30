@@ -62,7 +62,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
   return (
     <form onSubmit={validateAndSubmit}>
       <SettingsBlock
-        label={t("manager.create-program-page.settings.main-settings")}
+        label={t("create-program-page.settings.main-settings")}
         blockNumber={"01"}
       >
         <DescriptionBlock
@@ -114,26 +114,26 @@ const _CreateProgramSettings: React.FC<Props> = ({
         />
       </SettingsBlock>
       <SettingsBlock
-        label={t("manager.create-program-page.settings.fees-settings")}
+        label={t("create-program-page.settings.fees-settings")}
         blockNumber={"02"}
       >
         <FeesSettings
           title={t(
-            "manager.create-program-page.settings.investment-program-fees"
+            "create-program-page.settings.investment-program-fees"
           )}
           entryFeeName={CREATE_PROGRAM_FIELDS.entryFee}
           entryFeeDescription={t(
-            "manager.create-program-page.settings.hints.entry-fee-description"
+            "create-program-page.settings.hints.entry-fee-description"
           )}
           secondFeeName={CREATE_PROGRAM_FIELDS.successFee}
           secondFeeLabel={t(
-            "manager.create-program-page.settings.fields.success-fee"
+            "create-program-page.settings.fields.success-fee"
           )}
           secondFeeUnderText={t(
-            "manager.create-program-page.settings.hints.success-fee"
+            "create-program-page.settings.hints.success-fee"
           )}
           secondFeeDescription={t(
-            "manager.create-program-page.settings.hints.success-fee-description"
+            "create-program-page.settings.hints.success-fee-description"
           )}
         />
         {isSignalProgram && (

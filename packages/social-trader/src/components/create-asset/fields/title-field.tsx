@@ -12,12 +12,12 @@ const _TitleField: React.FC<Props> = ({ name }) => {
       <GVFormikField
         type="text"
         name={name}
-        label={t("manager.create-program-page.settings.fields.name")}
+        label={t("create-program-page.settings.fields.name")}
         autoComplete="off"
         component={GVTextField}
       />
       <div className="create-program-settings__field-caption">
-        {t("manager.create-program-page.settings.fields.name-requirements")}
+        {t("create-program-page.settings.fields.name-requirements")}
       </div>
     </CreateAssetField>
   );

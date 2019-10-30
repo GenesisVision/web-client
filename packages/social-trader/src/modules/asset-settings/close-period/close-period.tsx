@@ -17,7 +17,7 @@ const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
     <>
       <div className="asset-settings__block-wrapper">
         <p className="asset-settings__text">
-          {t("manager.program-settings.period-and-closing.text-period")}
+          {t("program-settings.period-and-closing.text-period")}
         </p>
         <GVButton color="primary" onClick={setClosePeriodOpen}>
           {t("program-details-page.close-period.title")}

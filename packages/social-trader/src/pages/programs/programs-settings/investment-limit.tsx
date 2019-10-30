@@ -19,7 +19,7 @@ const _InvestmentLimit: React.FC<Props> = ({
 }) => {
   return (
     <SettingsBlock
-      label={t("manager.create-program-page.settings.fields.investment-limit")}
+      label={t("create-program-page.settings.fields.investment-limit")}
     >
       <form id="edit-form" onSubmit={handleSubmit}>
         <InvestmentLimitField
@@ -29,7 +29,7 @@ const _InvestmentLimit: React.FC<Props> = ({
           currency={currency}
         />
         <p className="program-settings__text">
-          {t("manager.program-settings.investment-limit.text")}
+          {t("program-settings.investment-limit.text")}
         </p>
         <GVButton
           color="primary"
@@ -37,7 +37,7 @@ const _InvestmentLimit: React.FC<Props> = ({
           className="invest-form__submit-button"
           disabled={!dirty || !isValid || isSubmitting}
         >
-          {t("manager.program-settings.buttons.save")}
+          {t("program-settings.buttons.save")}
         </GVButton>
       </form>
     </SettingsBlock>
@@ -86,7 +86,7 @@ const InvestmentLimit = compose<React.ComponentType<OwnProps>>(
             .min(
               0,
               t(
-                "manager.create-program-page.settings.validation.investment-limit-min"
+                "create-program-page.settings.validation.investment-limit-min"
               )
             )
             .lessThan(
@@ -95,7 +95,7 @@ const InvestmentLimit = compose<React.ComponentType<OwnProps>>(
             )
             .required(
               t(
-                "manager.create-program-page.settings.validation.investment-limit-required"
+                "create-program-page.settings.validation.investment-limit-required"
               )
             )
         })

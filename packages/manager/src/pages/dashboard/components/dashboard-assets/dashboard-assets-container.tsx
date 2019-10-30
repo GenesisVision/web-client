@@ -77,7 +77,7 @@ const _EmptyFunds: React.FC = () => {
         <ChartIcon />
       </div>
       <div className="create-asset__text">
-        {t(`${role}.dashboard-page.create-fund-text`)}
+        {t(`${role ? `${role}.` : ""}dashboard-page.create-fund-text`)}
       </div>
       <div className="create-asset__button">
         <Link to={CREATE_FUND_PAGE_ROUTE} className="dashboard__body-button">
@@ -98,7 +98,7 @@ const _EmptyPrograms: React.FC = () => {
         <ChartIcon />
       </div>
       <div className="create-asset__text">
-        {t(`${role}.dashboard-page.create-program-text`)}
+        {t(`${role ? `${role}.` : ""}dashboard-page.create-program-text`)}
       </div>
       <div className="create-asset__button">
         <Link to={CREATE_PROGRAM_PAGE_ROUTE} className="dashboard__body-button">

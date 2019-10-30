@@ -39,7 +39,9 @@ const _DashboardInRequestsContainer: React.FC<Props> = ({
   return (
     <div className="dashboard-request">
       <StatisticItem
-        label={t(`${role}.dashboard-page.chart-section.in-requests`)}
+        label={t(
+          `${role ? `${role}.` : ""}dashboard-page.chart-section.in-requests`
+        )}
         big
       >
         <NumberFormat

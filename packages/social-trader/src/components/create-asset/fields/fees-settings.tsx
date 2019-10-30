@@ -27,7 +27,7 @@ const _FeesSettings: React.FC<Props> = ({
         <CreateAssetField>
           <GVFormikField
             name={entryFeeName}
-            label={t("manager.create-program-page.settings.fields.entry-fee")}
+            label={t("create-program-page.settings.fields.entry-fee")}
             adornment="%"
             component={GVNumberField}
             autoComplete="off"
@@ -35,7 +35,7 @@ const _FeesSettings: React.FC<Props> = ({
             isAllowed={allowValuesNumberFormat()}
           />
           <Hint
-            content={t("manager.create-program-page.settings.hints.entry-fee")}
+            content={t("create-program-page.settings.hints.entry-fee")}
             className="create-asset-settings__field-caption"
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={entryFeeDescription}

@@ -11,7 +11,7 @@ const _CreateFundPage: React.FC<{ minimumDepositAmount: number }> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <Page title={t("manager.create-fund-page.title")}>
+    <Page title={t("create-fund-page.title")}>
       <CreateFundContainer minimumDepositAmount={minimumDepositAmount} />
     </Page>
   );

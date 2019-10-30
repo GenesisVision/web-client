@@ -36,7 +36,7 @@ const _DashboardChartAssetsContainer: React.FC<Props> = ({
   return (
     <div className="dashboard-chart-assets">
       <div className="dashboard-chart-assets__title">
-        {t("manager.dashboard-page.chart-section.my-assets")}{" "}
+        {t("dashboard-page.chart-section.my-assets")}{" "}
         <ActionsCircleIcon
           className="dashboard-chart-assets__icon"
           primary={anchor !== anchorNullValue}

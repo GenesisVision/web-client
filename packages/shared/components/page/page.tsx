@@ -8,7 +8,7 @@ const _Page: React.FC<Props> = ({ title, children }) => {
   const [t] = useTranslation();
   const role = useRole();
   return (
-    <DocumentTitle title={t(`${role}.app.title`) + title}>
+    <DocumentTitle title={t(`${role ? `${role}.` : ""}app.title`) + title}>
       <>
         <div>
           <BackButton />

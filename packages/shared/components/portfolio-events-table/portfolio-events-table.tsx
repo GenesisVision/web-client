@@ -97,7 +97,9 @@ const _PortfolioEventsTable: React.FC<IPortfolioEventsTableOwnProps> = ({
             className={`portfolio-events-all-table__cell portfolio-events-all-table__head-cell--${column.name}`}
           >
             {t(
-              `${role}.dashboard-page.portfolio-events.table-header.${column.name}`
+              `${
+                role ? `${role}.` : ""
+              }dashboard-page.portfolio-events.table-header.${column.name}`
             )}
           </span>
         )}

@@ -38,7 +38,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
           />
           <StatisticItem
             label={t(
-              "manager.create-program-page.settings.fields.account-type"
+              "create-program-page.settings.fields.account-type"
             )}
           >
             {
@@ -50,7 +50,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
           </StatisticItem>
           <StatisticItem
             label={t(
-              "manager.create-program-page.settings.fields.brokers-leverage"
+              "create-program-page.settings.fields.brokers-leverage"
             )}
           >
             {leverage}
@@ -67,14 +67,14 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
           />
           <StatisticItem
             label={t(
-              "manager.create-program-page.settings.fields.account-type"
+              "create-program-page.settings.fields.account-type"
             )}
           >
             {brokerTo.accountTypes[0].name}
           </StatisticItem>
           <StatisticItem
             label={t(
-              "manager.create-program-page.settings.fields.brokers-leverage"
+              "create-program-page.settings.fields.brokers-leverage"
             )}
           >
             {newLeverage}
@@ -87,7 +87,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         isSignalProgram={isSignalProgram}
       />
       <p className="program-settings__text program-settings__text--padding-top">
-        {t("manager.program-settings.broker.text-cancel", {
+        {t("program-settings.broker.text-cancel", {
           brokerFrom: brokerFrom.name,
           brokerTo: brokerTo.name
         })}
@@ -97,7 +97,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         className="invest-form__submit-button"
         onClick={setCancelChangeBrokerOpen}
       >
-        {t("manager.program-settings.buttons.cancel-broker")}
+        {t("program-settings.buttons.cancel-broker")}
       </GVButton>
       <ConfirmCancelChangeBroker
         open={isCancelChangeBrokerOpen}

@@ -10,7 +10,7 @@ import CreateProgramContainer from "./components/create-program.container";
 const _CreateProgramPage: React.FC<Props> = ({ brokers }) => {
   const [t] = useTranslation();
   return (
-    <Page title={t("manager.create-program-page.title")}>
+    <Page title={t("create-program-page.title")}>
       <CreateProgramContainer brokers={brokers} />
     </Page>
   );

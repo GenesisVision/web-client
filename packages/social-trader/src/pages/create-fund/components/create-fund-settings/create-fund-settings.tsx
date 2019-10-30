@@ -41,7 +41,7 @@ const _CreateFundSettings: React.FC<Props> = ({
   return (
     <form onSubmit={validateAndSubmit}>
       <SettingsBlock
-        label={t("manager.create-fund-page.settings.main-settings")}
+        label={t("create-fund-page.settings.main-settings")}
         blockNumber={"01"}
       >
         <DescriptionBlock
@@ -53,30 +53,30 @@ const _CreateFundSettings: React.FC<Props> = ({
         />
       </SettingsBlock>
       <SettingsBlock
-        label={t("manager.create-fund-page.settings.asset-selection")}
+        label={t("create-fund-page.settings.asset-selection")}
         blockNumber={"02"}
       >
         <AssetsField name={CREATE_FUND_FIELDS.assets} />
       </SettingsBlock>
       <SettingsBlock
-        label={t("manager.create-fund-page.settings.fees-settings")}
+        label={t("create-fund-page.settings.fees-settings")}
         blockNumber={"03"}
       >
         <FeesSettings
           entryFeeName={CREATE_FUND_FIELDS.entryFee}
           entryFeeDescription={t(
-            "manager.create-fund-page.settings.hints.entry-fee-description",
+            "create-fund-page.settings.hints.entry-fee-description",
             { maxFee: managerMaxEntryFee }
           )}
           secondFeeName={CREATE_FUND_FIELDS.exitFee}
           secondFeeLabel={t(
-            "manager.create-fund-page.settings.fields.exit-fee"
+            "create-fund-page.settings.fields.exit-fee"
           )}
           secondFeeUnderText={t(
-            "manager.create-fund-page.settings.hints.exit-fee"
+            "create-fund-page.settings.hints.exit-fee"
           )}
           secondFeeDescription={t(
-            "manager.create-fund-page.settings.hints.exit-fee-description",
+            "create-fund-page.settings.hints.exit-fee-description",
             {
               maxFee: managerMaxExitFee
             }
