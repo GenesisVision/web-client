@@ -29,7 +29,6 @@ const Root: React.FC = () => {
             <Route path={HOME_ROUTE} component={AppRoutes} />
           </Switch>
         </ConnectedRouter>
-        <AlertMessageList />
       </Provider>
     </Suspense>
   );
