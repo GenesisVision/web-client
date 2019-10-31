@@ -18,7 +18,8 @@ export const programInvestCreator: TAssetInvestCreator = programInvestFn => ({
   amount,
   currency
 }) => dispatch => {
-  return programInvestFn(id, amount, authService.getAuthArg(), {
+  return programInvestFn(id, authService.getAuthArg(), {
+    amount,
     currency
   }).then(() => {
     dispatch(

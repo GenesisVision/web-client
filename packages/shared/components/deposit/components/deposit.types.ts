@@ -24,13 +24,12 @@ export type TInvest = (
   amount: number,
   currency: CurrencyEnum,
   setSubmitting: SetSubmittingType
-) => void;
+) => null;
 
 export type TAssetInvestFn = (
   id: string,
-  amount: number,
   authorization: string,
-  opts: { currency: CurrencyEnum }
+  opts: { currency: CurrencyEnum; amount: number }
 ) => Promise<null>;
 
 export type TAssetInvestCreator = (
