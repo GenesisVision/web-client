@@ -37,7 +37,7 @@ const FollowsPage: NextComponentType = () => {
       <Surface className="programs-table-container" key={"table"}>
         <FollowsTableSsr
           showSwitchView
-          title={t("follows-page.follows-table")}
+          title={t("follows-page.table")}
         />
       </Surface>
     </Page>
