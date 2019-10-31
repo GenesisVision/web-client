@@ -2,7 +2,7 @@
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 
 export const composeCurrencyMap = (
-  currencies: PlatformCurrency[] | undefined = []
+  currencies: [] | undefined = []
 ): SelectFilterValue<string | undefined>[] => {
   return [
     { value: undefined, label: "Base" },
