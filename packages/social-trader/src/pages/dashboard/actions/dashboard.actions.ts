@@ -54,7 +54,7 @@ export const fetchInRequestsAction = (
   auth: string,
   skip: number,
   take: number,
-  assetType?: string
+  assetType?: "All" | "Program" | "Fund" | "Signal"
 ): ActionType<CancelablePromise<any>> => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: managerApi.getRequests(skip, take, auth, {
