@@ -1,3 +1,4 @@
+import { Currency } from "gv-api-web";
 import { Dispatch } from "redux";
 import {
   FundWithdraw,
@@ -10,7 +11,7 @@ import authService from "shared/services/auth-service";
 
 export const getFundWithdrawInfo = (
   id: string,
-  currency: string
+  currency: Currency
 ) => (): Promise<FundWithdrawalInfoResponse> => {
   return Promise.all([
     managerApi.getFundWithdrawInfo(id, currency, authService.getAuthArg()),
