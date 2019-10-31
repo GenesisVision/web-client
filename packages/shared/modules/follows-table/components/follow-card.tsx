@@ -158,34 +158,17 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
       </div>
       <div className="table-cards__table">
         <div className="table-cards__table-column">
-          <StatisticItem label={t("programs-page.programs-header.equity")}>
-            <NumberFormat
-              value={formatValueDifferentDecimalScale(
-                follow.statistic.balance.amount,
-                DECIMAL_SCALE_SMALL_VALUE,
-                DECIMAL_SCALE_BIG_VALUE
-              )}
-              suffix={` ${requestCurrency}`}
-              displayType="text"
-            />
-          </StatisticItem>
-          <StatisticItem label={t("programs-page.programs-header.period")}>
-            <ProgramPeriodPie
-              start={follow.periodStarts}
-              end={follow.periodEnds}
-            />
+          <StatisticItem label={t("follows-page.follows-header.subscribers")}>
+           {t("follows-page.follows-header.subscribers")}
           </StatisticItem>
         </div>
         <div className="table-cards__table-column">
-          <StatisticItem label={t("programs-page.programs-header.investors")}>
+          <StatisticItem label={t("follows-page.follows-header.trades")}>
             <NumberFormat
-              value={follow.statistic.investorsCount}
+              value={follow.statistic.tradesCount}
               displayType="text"
               decimalScale={0}
             />
-          </StatisticItem>
-          <StatisticItem label={t("programs-page.programs-header.age")}>
-            {distanceDate(follow.creationDate)}
           </StatisticItem>
         </div>
         <div className="table-cards__table-column">
@@ -200,13 +183,6 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
               )}
               displayType="text"
               suffix={` ${requestCurrency}`}
-            />
-          </StatisticItem>
-          <StatisticItem label={t("programs-page.programs-header.drawdown")}>
-            <NumberFormat
-              value={formatValue(follow.statistic.drawdownPercent, 2)}
-              displayType="text"
-              suffix="%"
             />
           </StatisticItem>
         </div>
