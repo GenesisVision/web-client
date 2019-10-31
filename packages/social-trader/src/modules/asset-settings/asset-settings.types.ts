@@ -1,8 +1,8 @@
-import { FundDetailsFull, ProgramDetailsFullOld } from "gv-api-web";
+import { FundDetailsFullOld, ProgramDetailsFullOld } from "gv-api-web";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { SetSubmittingType } from "shared/utils/types";
 
-export type AssetDescriptionType = ProgramDetailsFullOld & FundDetailsFull;
+export type AssetDescriptionType = ProgramDetailsFullOld & FundDetailsFullOld;
 
 export type TUpdateAssetFunc = (
   values: {
