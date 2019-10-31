@@ -1,11 +1,11 @@
 import {
   CancelablePromise,
   InvestmentEventViewModels,
-  LevelsParamsInfo,
   ProgramBalanceChart,
-  ProgramDetailsFullOld,
+  ProgramDetailsFull,
   ProgramPeriodsViewModel,
-  ProgramProfitChart,
+  ProgramProfitCharts,
+  ProgramsLevelsInfo,
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
@@ -46,7 +46,7 @@ const sendProgramChartRequest = (
   { start, end }: ChartDefaultPeriod,
   id: string,
   currency: CurrencyEnum
-): CancelablePromise<ProgramProfitChart> =>
+): CancelablePromise<ProgramProfitCharts> =>
   programsApi.getProgramProfitChart(id, {
     dateFrom: start,
     dateTo: end,
@@ -108,16 +108,16 @@ export const fetchProgramBalanceChartAction = (
 export const fetchProgramDescriptionAction = (
   id: string,
   authorization: string
-): ApiAction<ProgramDetailsFullOld> => ({
+): ApiAction<ProgramDetailsFull> => ({
   type: FETCH_PROGRAM_DESCRIPTION,
   payload: programsApi.getProgramDetails(id, { authorization })
 });
 
 export const fetchLevelParametersAction = (
   currency: CurrencyEnum
-): ApiAction<LevelsParamsInfo> => ({
+): ApiAction<ProgramsLevelsInfo> => ({
   type: FETCH_LEVEL_PARAMETERS,
-  payload: platformApi.getLevelsParams({ currency })
+  payload: platformApi.getProgramLevels({ currency })
 });
 
 export const fetchOpenPositionsAction = (
