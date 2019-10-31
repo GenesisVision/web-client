@@ -158,12 +158,12 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
       </div>
       <div className="table-cards__table">
         <div className="table-cards__table-column">
-          <StatisticItem label={t("follows-page.follows-header.subscribers")}>
-           {t("follows-page.follows-header.subscribers")}
+          <StatisticItem label={t("follows-page.header.subscribers")}>
+           {t("follows-page.header.subscribers")}
           </StatisticItem>
         </div>
         <div className="table-cards__table-column">
-          <StatisticItem label={t("follows-page.follows-header.trades")}>
+          <StatisticItem label={t("follows-page.header.trades")}>
             <NumberFormat
               value={follow.statistic.tradesCount}
               displayType="text"
