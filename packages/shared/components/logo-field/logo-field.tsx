@@ -17,7 +17,7 @@ const _LogoField: React.FC<Props> = ({
       <div className="logo-field logo-field--wider">
         <div className="logo-field__title">{title}</div>
         <div className="logo-field__notice">
-          {t("manager.create-program-page.settings.fields.upload-logo-rules")}
+          {t("create-program-page.settings.fields.upload-logo-rules")}
         </div>
       </div>
       <div className="logo-field logo-field--wider">

@@ -30,7 +30,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
           label={
             <span>
               {t(
-                "manager.create-program-page.settings.fields.investment-limit"
+                "create-program-page.settings.fields.investment-limit"
               )}
             </span>
           }
@@ -44,7 +44,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
             isAllow={isAmountAllow(currency)}
             name={inputName}
             label={t(
-              "manager.create-program-page.settings.fields.enter-correct-amount"
+              "create-program-page.settings.fields.enter-correct-amount"
             )}
             currency={currency}
           />

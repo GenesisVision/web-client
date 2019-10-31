@@ -9,7 +9,7 @@ import ClosePeriod from "./close-period/close-period";
 const _PeriodAndClosing: React.FC<Props> = ({
   asset,
   t,
-  label = t("manager.asset-settings.period-and-closing.title"),
+  label = t("asset-settings.period-and-closing.title"),
   id,
   canClosePeriod,
   canCloseAsset,

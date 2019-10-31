@@ -174,7 +174,7 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
       [DEPOSIT_FORM_FIELDS.walletCurrency]: INIT_WALLET_CURRENCY
     }),
     validationSchema: (params: Props) =>
-      ROLE_ENV === ROLE.MANAGER
+      ROLE_ENV || ROLE.MANAGER === ROLE.MANAGER // TODO remove after union
         ? managerSchema(params)
         : investorSchema(params),
     handleSubmit: (values, { props, setSubmitting }) => {

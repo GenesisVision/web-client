@@ -34,25 +34,25 @@ const _DashboardPortfolioEmptyView: React.FC = () => {
   return (
     <div className="dashboard__empty-events">
       <div className="dashboard__empty-events-text">
-        {t(`${role}.dashboard-page.portfolio-events.empty-events.text`)}
+        {t(`${role ? `${role}.` : ""}dashboard-page.portfolio-events.empty-events.text`)}
       </div>
       <div className="dashboard__empty-events-item dashboard__empty-events-item--secondary">
         <EvenLogoIcon type={EVENT_LOGO_TYPE.ENDED_RED} />
         <div className="dashboard__empty-events-item-label">
-          {t(`${role}.dashboard-page.portfolio-events.empty-events.finished`)}
+          {t(`${role ? `${role}.` : ""}dashboard-page.portfolio-events.empty-events.finished`)}
         </div>
       </div>
       <div className="dashboard__empty-events-item">
         <EvenLogoIcon type={EVENT_LOGO_TYPE.STARTED} />
         <div className="dashboard__empty-events-item-label">
-          {t(`${role}.dashboard-page.portfolio-events.empty-events.started`)}
+          {t(`${role ? `${role}.` : ""}dashboard-page.portfolio-events.empty-events.started`)}
         </div>
       </div>
       <div className="dashboard__empty-events-item">
         <EvenLogoIcon type={EVENT_LOGO_TYPE.LOSS} />
         <div className="dashboard__empty-events-item-label">
           {t(
-            `${role}.dashboard-page.portfolio-events.empty-events.investor-left`
+            `${role ? `${role}.` : ""}dashboard-page.portfolio-events.empty-events.investor-left`
           )}
         </div>
       </div>
@@ -60,7 +60,7 @@ const _DashboardPortfolioEmptyView: React.FC = () => {
         <EvenLogoIcon type={EVENT_LOGO_TYPE.PROFIT} />
         <div className="dashboard__empty-events-item-label">
           {t(
-            `${role}.dashboard-page.portfolio-events.empty-events.new-investor`
+            `${role ? `${role}.` : ""}dashboard-page.portfolio-events.empty-events.new-investor`
           )}
         </div>
       </div>
@@ -68,7 +68,7 @@ const _DashboardPortfolioEmptyView: React.FC = () => {
         <EvenLogoIcon type={EVENT_LOGO_TYPE.CANCELLED_RED} />
         <div className="dashboard__empty-events-item-label">
           {t(
-            `${role}.dashboard-page.portfolio-events.empty-events.interrupted`
+            `${role ? `${role}.` : ""}dashboard-page.portfolio-events.empty-events.interrupted`
           )}
         </div>
       </div>

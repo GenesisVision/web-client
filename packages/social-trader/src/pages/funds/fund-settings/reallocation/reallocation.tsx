@@ -31,7 +31,7 @@ const _Reallocation: React.FC<Props> = ({
     [id]
   );
   return (
-    <SettingsBlock label={t("manager.fund-settings.reallocation.title")}>
+    <SettingsBlock label={t("fund-settings.reallocation.title")}>
       <ReallocateForm
         condition={!!fundAssets.length}
         availableReallocationPercents={availableReallocationPercents}

@@ -13,6 +13,11 @@ import { SortingColumn } from "shared/components/table/components/filtering/filt
 import { fundAssetFilter } from "shared/components/table/components/filtering/fund-asset-filter/fund-asset-filter.helpers";
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
+import {
+  FUND_ASSET_DEFAULT_VALUE,
+  FUND_ASSET_FILTER_NAME
+} from "../../../../components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
+
 export const CURRENCY_MAP_NAME = "currency";
 export const FUND_CURRENCY_FILTER_NAME = "fundCurrency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";
@@ -82,3 +87,9 @@ export const sortableColumns: string[] = FUNDS_TABLE_COLUMNS.filter(
 ).map(x => x.sortingName as string);
 
 export const DEFAULT_ITEMS_ON_PAGE = 12;
+
+export const DEFAULT_FUND_TABLE_FILTERS = {
+  [CURRENCY_MAP_NAME]: CURRENCY_MAP_VALUE,
+  [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
+  [FUND_ASSET_FILTER_NAME]: FUND_ASSET_DEFAULT_VALUE
+};

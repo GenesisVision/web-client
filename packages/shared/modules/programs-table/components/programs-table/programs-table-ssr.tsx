@@ -1,38 +1,22 @@
-import { PlatformCurrency, ProgramsListOld, ProgramTag } from "gv-api-web";
-import qs from "qs";
 import * as React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Push } from "shared/components/link/link";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import {
-  DATE_RANGE_FILTER_NAME,
-  DEFAULT_DATE_RANGE_FILTER_VALUE
-} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
 import { LevelFilterType } from "shared/components/table/components/filtering/level-filter/level-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
-import {
-  TAG_FILTER_DEFAULT_VALUE,
-  TAG_FILTER_NAME
-} from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
-import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
-import {
-  calculateSkipAndTake,
-  calculateTotalPages
-} from "shared/components/table/helpers/paging.helpers";
+import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
+import { calculateTotalPages } from "shared/components/table/helpers/paging.helpers";
 import useRouteFilters from "shared/hooks/route-filters.hook";
 import { useTranslation } from "shared/i18n";
-import { ToggleFavoriteDispatchableType } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
-import { DEFAULT_ITEMS_ON_PAGE } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 import {
   CURRENCY_MAP_NAME,
-  CURRENCY_MAP_VALUE,
-  PROGRAMS_TABLE_FILTERS,
+  DEFAULT_PROGRAM_TABLE_FILTERS,
   SORTING_FILTER_NAME,
   SORTING_FILTER_VALUE
 } from "shared/modules/programs-table/components/programs-table/programs.constants";
@@ -42,11 +26,8 @@ import {
   programCurrenciesSelector,
   programTagsSelector
 } from "shared/reducers/platform-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
-import { NextPageWithReduxContext } from "shared/utils/types";
 
-import { FetchProgramsFiltersType } from "../../actions/programs-table.actions";
 import { programsDataSelector } from "../../reducers/programs-table.reducers";
 import {
   composeCurrencyFilter,
@@ -54,57 +35,24 @@ import {
 } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
 import {
-  CURRENCY_FILTER_VALUE,
   LEVEL_FILTER_NAME,
-  LEVEL_MAX_FILTER_VALUE,
-  LEVEL_MIN_FILTER_VALUE,
   PROGRAM_CURRENCY_FILTER_NAME
 } from "./programs.constants";
 
 const ITEMS_ON_PAGE = 12;
 
-const DEFAULT_FILTERS = {
-  [CURRENCY_MAP_NAME]: CURRENCY_MAP_VALUE,
-  [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
-  [TAG_FILTER_NAME]: TAG_FILTER_DEFAULT_VALUE,
-  [LEVEL_FILTER_NAME]: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
-  [PROGRAM_CURRENCY_FILTER_NAME]: CURRENCY_FILTER_VALUE
-};
-
-export const getFiltersFromContext = ({
-  asPath = "",
-  pathname,
-  reduxStore
-}: NextPageWithReduxContext): FetchProgramsFiltersType => {
-  const { page, sorting = SORTING_FILTER_VALUE, ...other } = qs.parse(
-    asPath.slice(pathname.length + 1)
-  );
-  const { currency } = reduxStore.getState().accountSettings;
-  const skipAndTake = calculateSkipAndTake({
-    itemsOnPage: DEFAULT_ITEMS_ON_PAGE,
-    currentPage: page
-  });
-  return {
-    ...skipAndTake,
-    ...composeFilters(PROGRAMS_TABLE_FILTERS, { ...DEFAULT_FILTERS, ...other }),
-    currencySecondary: currency,
-    sorting
-  } as FetchProgramsFiltersType;
-};
-
-const _ProgramsTableSSR: React.FC<Props> = ({
-  programCurrencies,
-  title,
-  data,
-  showSwitchView,
-  isAuthenticated,
-  programTags,
-  currencies,
-  service
-}) => {
+const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
+  const dispatch = useDispatch();
+  const programCurrencies = useSelector(programCurrenciesSelector);
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const currencies = useSelector(platformCurrenciesSelector);
+  const programTags = useSelector(programTagsSelector);
+  const data = useSelector(programsDataSelector);
   const { t } = useTranslation();
 
-  const [filtering, sorting, page, update] = useRouteFilters(DEFAULT_FILTERS);
+  const [filtering, sorting, page, update] = useRouteFilters(
+    DEFAULT_PROGRAM_TABLE_FILTERS
+  );
 
   if (!data) return null;
   const totalPages = calculateTotalPages(data.total, ITEMS_ON_PAGE);
@@ -164,7 +112,9 @@ const _ProgramsTableSSR: React.FC<Props> = ({
         totalItems: data.total
       }}
       updatePaging={page => update({ name: "page", value: page + 1 })}
-      toggleFavorite={service.toggleFavoriteProgram}
+      toggleFavorite={(id: string, isFavorite: boolean) =>
+        dispatch(toggleFavoriteProgramDispatchable(id, isFavorite))
+      }
       redirectToLogin={() => Push(LOGIN_ROUTE)}
       isAuthenticated={isAuthenticated}
       currencies={programCurrencies}
@@ -172,49 +122,10 @@ const _ProgramsTableSSR: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  programCurrencies: programCurrenciesSelector(state),
-  isAuthenticated: isAuthenticatedSelector(state),
-  currencies: platformCurrenciesSelector(state),
-  programTags: programTagsSelector(state),
-  data: programsDataSelector(state)
-});
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators(
-    {
-      toggleFavoriteProgram: toggleFavoriteProgramDispatchable
-    },
-    dispatch
-  )
-});
-
-const ProgramsTableSSR = compose<React.FC<OwnProps>>(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(_ProgramsTableSSR);
-
-export default ProgramsTableSSR;
-
-interface OwnProps {
+interface Props {
   showSwitchView: boolean;
   title: string;
 }
 
-interface StateProps {
-  programCurrencies: string[];
-  isAuthenticated: boolean;
-  currencies: PlatformCurrency[];
-  programTags: ProgramTag[];
-  data?: ProgramsListOld;
-}
-
-interface DispatchProps {
-  service: {
-    toggleFavoriteProgram: ToggleFavoriteDispatchableType;
-  };
-}
-
-interface Props extends OwnProps, StateProps, DispatchProps {}
+const ProgramsTableSSR = React.memo(_ProgramsTableSSR);
+export default ProgramsTableSSR;

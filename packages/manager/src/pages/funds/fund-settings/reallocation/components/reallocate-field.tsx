@@ -47,7 +47,7 @@ const _ReallocateField: React.FC<Props> = ({
     );
     setStateAssets(assets);
     setRemainder(getRemainder(assets));
-  }, [newAsset, stateAssets]);
+  }, [newAsset]);
   useEffect(() => {
     if (!!!anchor && !!newAsset) {
       onBlur &&

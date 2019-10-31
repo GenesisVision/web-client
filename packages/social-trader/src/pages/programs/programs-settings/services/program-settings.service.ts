@@ -19,7 +19,7 @@ export const cancelChangeBrokerMethod = (
     .then(() => {
       dispatch(
         alertMessageActions.success(
-          "manager.program-settings.notifications.broker-success",
+          "program-settings.notifications.broker-success",
           true
         )
       );
@@ -41,7 +41,7 @@ export const changeBrokerMethod = (
     .then(() => {
       dispatch(
         alertMessageActions.success(
-          "manager.program-settings.notifications.broker-success",
+          "program-settings.notifications.broker-success",
           true
         )
       );

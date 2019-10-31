@@ -65,7 +65,7 @@ const _AssetsEditPage: React.FC<Props> = ({
     description,
     redirectToAsset
   ]);
-  const title = t("manager.asset-settings.title", {
+  const title = t("asset-settings.title", {
     asset: String(asset).toLowerCase()
   });
   return (

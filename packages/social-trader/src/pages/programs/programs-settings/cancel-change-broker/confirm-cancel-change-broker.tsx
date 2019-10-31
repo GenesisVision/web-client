@@ -24,8 +24,8 @@ const _ConfirmCancelChangeBroker: React.FC<Props> = ({
       onClose={onClose}
       onCancel={onClose}
       onApply={handleApplyClick}
-      header={t("manager.program-settings.broker.text-cancel-confirm-title")}
-      body={t("manager.program-settings.broker.text-cancel-confirm", {
+      header={t("program-settings.broker.text-cancel-confirm-title")}
+      body={t("program-settings.broker.text-cancel-confirm", {
         brokerFrom,
         brokerTo
       })}

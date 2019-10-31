@@ -15,7 +15,7 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
       <GVFormikField
         name={name}
         component={GVTextField}
-        label={t("manager.program-settings.trades-update.select")}
+        label={t("program-settings.trades-update.select")}
         InputComponent={Select}
       >
         {DELAYS.map(({ label, value }) => (
@@ -25,10 +25,10 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
         ))}
       </GVFormikField>
       <Hint
-        content={t("manager.create-program-page.settings.hints.trades-delay")}
+        content={t("create-program-page.settings.hints.trades-delay")}
         className="create-program-settings__field-caption"
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
-        tooltipContent={t("manager.program-settings.trades-update.text")}
+        tooltipContent={t("program-settings.trades-update.text")}
       />
     </CreateAssetField>
   );

@@ -8,7 +8,7 @@ const _CreateFundContainer: React.FC<Props> = ({ minimumDepositAmount }) => {
   return (
     <>
       <div className="create-asset__header">
-        <h1>{t("manager.create-fund-page.title")}</h1>
+        <h1>{t("create-fund-page.title")}</h1>
       </div>
       <div className="create-asset__content">
         <CreateFundSettingsSection

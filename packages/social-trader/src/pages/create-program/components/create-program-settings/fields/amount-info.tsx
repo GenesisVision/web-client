@@ -13,7 +13,7 @@ const _AmountInfo: React.FC<Props> = ({
   return (
     <div className="deposit-details__available-list">
       <div className="deposit-details__available-amount">
-        {t("manager.create-program-page.settings.fields.min-deposit")}
+        {t("create-program-page.settings.fields.min-deposit")}
         <span className={"deposit-details__available-amount-value"}>
           <NumberFormat
             value={minimumDepositsAmount}
@@ -24,7 +24,7 @@ const _AmountInfo: React.FC<Props> = ({
         </span>
       </div>
       <div className="deposit-details__available-amount">
-        {t("manager.create-fund-page.settings.fields.available-in-wallet")}
+        {t("create-fund-page.settings.fields.available-in-wallet")}
         <span className={"deposit-details__available-amount-value"}>
           <NumberFormat
             value={walletAvailable}

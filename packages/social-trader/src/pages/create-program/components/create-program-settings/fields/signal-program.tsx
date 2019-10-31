@@ -15,7 +15,7 @@ const _SignalProgram: React.FC<Props> = ({ name }) => {
         name={name}
         label={
           <span>
-            {t("manager.create-program-page.settings.fields.provide-signals")}
+            {t("create-program-page.settings.fields.provide-signals")}
           </span>
         }
         component={GVCheckbox}

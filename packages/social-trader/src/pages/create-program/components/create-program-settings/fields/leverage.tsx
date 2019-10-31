@@ -13,7 +13,7 @@ const _Leverage: React.FC<Props> = ({ name, accountLeverages }) => {
         name={name}
         component={GVTextField}
         label={t(
-          "manager.create-program-page.settings.fields.brokers-leverage"
+          "create-program-page.settings.fields.brokers-leverage"
         )}
         InputComponent={Select}
         disableIfSingle

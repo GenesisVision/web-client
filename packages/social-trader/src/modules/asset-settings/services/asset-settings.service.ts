@@ -27,7 +27,7 @@ export const cancelChangeBrokerMethod = (
     .then(() => {
       dispatch(
         alertMessageActions.success(
-          "manager.program-settings.notifications.broker-success",
+          "program-settings.notifications.broker-success",
           true
         )
       );
@@ -48,7 +48,7 @@ export const changeBrokerMethod = (
     .then(() => {
       dispatch(
         alertMessageActions.success(
-          "manager.program-settings.notifications.broker-success",
+          "program-settings.notifications.broker-success",
           true
         )
       );
@@ -95,9 +95,9 @@ export const editAsset = (
       dispatch(
         alertMessageActions.success(
           (type === ASSET.PROGRAM &&
-            "manager.edit-program.notifications.edit-success") ||
+            "edit-program.notifications.edit-success") ||
             (type === ASSET.FUND &&
-              "manager.edit-fund.notifications.edit-success") ||
+              "edit-fund.notifications.edit-success") ||
             "",
           true
         )

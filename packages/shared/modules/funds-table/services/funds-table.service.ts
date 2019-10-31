@@ -11,6 +11,7 @@ import {
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
+import { ACCOUNT_CURRENCY_KEY } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import {
   FUNDS_FACET_ROUTE,
@@ -18,11 +19,17 @@ import {
   FUNDS_TAB_ROUTE
 } from "shared/routes/funds.routes";
 import authService from "shared/services/auth-service";
+import { getCookie } from "shared/utils/cookie";
 import getParams from "shared/utils/get-params";
-import { MiddlewareDispatch } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  MiddlewareDispatch,
+  NextPageWithReduxContext
+} from "shared/utils/types";
 
 import * as fundsTableActions from "../actions/funds-table.actions";
 import {
+  DEFAULT_FUND_TABLE_FILTERS,
   DEFAULT_ITEMS_ON_PAGE,
   FUNDS_TABLE_FILTERS,
   sortableColumns,
@@ -191,4 +198,28 @@ export const fundsChangeFilter: FundsChangeFilterType = filter => (
   }
   const newUrl = router.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
+};
+
+export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
+  const { asPath = "", pathname, reduxStore } = ctx;
+  const { page, sorting = SORTING_FILTER_VALUE, currency, ...other } = qs.parse(
+    asPath.slice(pathname.length + 1)
+  );
+  const accountCurrency =
+    (getCookie(ACCOUNT_CURRENCY_KEY, ctx) as CurrencyEnum) ||
+    reduxStore.getState().accountSettings.currency;
+  const skipAndTake = calculateSkipAndTake({
+    itemsOnPage: DEFAULT_ITEMS_ON_PAGE,
+    currentPage: page
+  });
+  console.log(currency);
+  return {
+    ...composeFilters(FUNDS_TABLE_FILTERS, {
+      ...DEFAULT_FUND_TABLE_FILTERS,
+      ...other
+    }),
+    ...skipAndTake,
+    currency: currency || accountCurrency,
+    sorting
+  };
 };

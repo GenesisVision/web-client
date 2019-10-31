@@ -33,7 +33,8 @@ const tabs = [
   { pathname: REFERRAL_PROGRAM_ROUTE, value: REFERRAL_PROGRAM }
 ];
 
-if (ROLE_ENV === ROLE.MANAGER) {
+if (ROLE_ENV || ROLE.MANAGER === ROLE.MANAGER) {
+  // TODO remove after union
   tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: SOCIAL_LINKS });
 }
 

@@ -43,17 +43,19 @@ const _DashboardAssets: React.FC<Props> = ({
   return (
     <>
       <div className="dashboard-assets__head">
-        <h3>{t(`${role}.dashboard-page.assets.title`)}</h3>
+        <h3>{t(`${role ? `${role}.` : ""}dashboard-page.assets.title`)}</h3>
         <div className="dashboard-assets__tabs">
           <GVTabs value={tab} onChange={handleTabChange}>
             <GVTab
               value={TABS.PROGRAMS}
-              label={t(`${role}.dashboard-page.assets.programs`)}
+              label={t(
+                `${role ? `${role}.` : ""}dashboard-page.assets.programs`
+              )}
               count={programsCount}
             />
             <GVTab
               value={TABS.FUNDS}
-              label={t(`${role}.dashboard-page.assets.funds`)}
+              label={t(`${role ? `${role}.` : ""}dashboard-page.assets.funds`)}
               count={fundsCount}
             />
           </GVTabs>

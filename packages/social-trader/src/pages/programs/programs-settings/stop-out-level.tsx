@@ -17,7 +17,7 @@ const _StopOutLevel: React.FC<Props> = ({
   isSubmitting
 }) => (
   <SettingsBlock
-    label={t("manager.create-program-page.settings.fields.stop-out-level")}
+    label={t("create-program-page.settings.fields.stop-out-level")}
   >
     <form id="edit-form" onSubmit={handleSubmit}>
       <div className="program-settings__block-wrapper create-program-settings__row">
@@ -29,7 +29,7 @@ const _StopOutLevel: React.FC<Props> = ({
         className="invest-form__submit-button"
         disabled={!dirty || !isValid || isSubmitting}
       >
-        {t("manager.program-settings.buttons.save")}
+        {t("program-settings.buttons.save")}
       </GVButton>
     </form>
   </SettingsBlock>
@@ -70,13 +70,13 @@ const StopOutLevel = compose<React.ComponentType<OwnProps>>(
           .min(
             10,
             t(
-              "manager.create-program-page.settings.validation.stop-out-less-ten"
+              "create-program-page.settings.validation.stop-out-less-ten"
             )
           )
           .max(
             stopOutLevel || 100,
             t(
-              "manager.create-program-page.settings.validation.stop-out-more-current"
+              "create-program-page.settings.validation.stop-out-more-current"
             )
           )
       }),

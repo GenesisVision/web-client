@@ -37,7 +37,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   if (!wallet) return null;
   return (
     <SettingsBlock
-      label={t("manager.create-program-page.settings.deposit-details")}
+      label={t("create-program-page.settings.deposit-details")}
       blockNumber={`0${blockNumber}`}
       withBorder={false}
     >

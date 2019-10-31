@@ -1,7 +1,7 @@
 import { ProgramRequest, ProgramRequests } from "gv-api-web";
 import { CancelRequestType } from "shared/components/dashboard/dashboard.constants";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
-import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
+import { ASSET, ROLE } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
@@ -19,7 +19,7 @@ import {
 
 export const getAssetRequests = (
   id: string,
-  role: ROLE,
+  role: ROLE = ROLE.MANAGER,
   asset: ASSET
 ): Promise<Array<ProgramRequest>> => {
   const authorization = authService.getAuthArg();
@@ -62,7 +62,7 @@ export const cancelRequest = (
 
 export const cancelRequestDispatch: CancelRequestType = ({
   id,
-  role = ROLE.INVESTOR,
+  role = ROLE.MANAGER,
   asset = ASSET.PROGRAM,
   onFinally
 }) => dispatch => {
@@ -89,7 +89,7 @@ export const cancelRequestDispatch: CancelRequestType = ({
       dispatch(fetchProfileHeaderInfoAction());
       dispatch(
         alertMessageActions.success(
-          `${ROLE_ENV}.dashboard-page.requests.success-cancel-request`,
+          `${role}.dashboard-page.requests.success-cancel-request`,
           true
         )
       );

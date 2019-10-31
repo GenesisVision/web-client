@@ -15,7 +15,7 @@ const _BrokerCardAdornment: React.FC<OwnProps & WithTranslation> = ({
   return (
     <>
       <div className="broker-card__adornment-text">
-        <span>{t(`manager.create-program-page.broker-card.${cardState}`)}</span>
+        <span>{t(`create-program-page.broker-card.${cardState}`)}</span>
         {cardState === BROKER_CARD_EXTRA_STATE.KYC_REQUIRED && (
           <HelpButton onClick={() => setIsOpen(true)} />
         )}
@@ -24,7 +24,7 @@ const _BrokerCardAdornment: React.FC<OwnProps & WithTranslation> = ({
         open={isOpenPopup}
         onApply={() => setIsOpen(false)}
         onClose={() => setIsOpen(false)}
-        body={t("manager.create-program-page.kyc-requirement")}
+        body={t("create-program-page.kyc-requirement")}
         applyButtonText={t("buttons.close")}
       />
     </>

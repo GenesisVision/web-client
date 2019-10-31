@@ -100,7 +100,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         <GVFormikField
           name={FIELDS.brokerAccountTypeId}
           component={GVTextField}
-          label={t("manager.create-program-page.settings.fields.account-type")}
+          label={t("create-program-page.settings.fields.account-type")}
           InputComponent={Select}
           disableIfSingle
           onChange={changeAccount}
@@ -118,7 +118,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           name={FIELDS.leverage}
           component={GVTextField}
           label={t(
-            "manager.create-program-page.settings.fields.brokers-leverage"
+            "create-program-page.settings.fields.brokers-leverage"
           )}
           InputComponent={Select}
           disableIfSingle
@@ -137,7 +137,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         isSignalProgram={isSignalProgram}
       />
       <p className="program-settings__text program-settings__text--padding-top">
-        {t("manager.program-settings.broker.text-change")}
+        {t("program-settings.broker.text-change")}
       </p>
       <GVButton
         onClick={setChangeBrokerOpen}
@@ -149,7 +149,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           isSubmitting
         }
       >
-        {t("manager.program-settings.buttons.change-broker")}
+        {t("program-settings.buttons.change-broker")}
       </GVButton>
       <ConfirmChangeBroker
         open={isChangeBrokerOpen}
@@ -233,7 +233,7 @@ export const HuobiWarning: React.FC<IHuobiWarningProps> = ({
   const [t] = useTranslation();
   return from === "Genesis Markets" && to === "Huobi" && isSignalProgram ? (
     <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
-      {t("manager.program-settings.broker.text-warning")}
+      {t("program-settings.broker.text-warning")}
     </p>
   ) : null;
 };
