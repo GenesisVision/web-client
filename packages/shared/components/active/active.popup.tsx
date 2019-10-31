@@ -1,15 +1,23 @@
 import "./active.scss";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
+import useApiRequest from "shared/hooks/api-request.hook";
 
-import ActiveContainer from "./active.container";
+import Active from "./active";
+import { fetchActive, getActiveLoaderData } from "./service/active.service";
 
 const _ActivePopup: React.FC<Props> = ({ open, onClose, active }) => {
+  const { data, sendRequest } = useApiRequest({
+    request: fetchActive
+  });
+  useEffect(() => {
+    sendRequest({ active });
+  }, []);
   return (
     <Dialog open={open} onClose={onClose} top>
       <div className="active__popup">
-        <ActiveContainer active={active} />
+        <Active loaderData={getActiveLoaderData} data={data} />
       </div>
     </Dialog>
   );
