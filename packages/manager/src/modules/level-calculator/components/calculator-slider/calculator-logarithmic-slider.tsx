@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import { formatValue } from "shared/utils/formatter";
 
@@ -17,16 +17,16 @@ const CalculatorLogarithmicSlider: React.FC<Props> = ({
   tooltipContent,
   onChange
 }) => {
-  const handleChange = React.useCallback(
+  const handleChange = useCallback(
     (name: string, newValue: number) => {
       const val = Math.pow(newValue, 4);
       const t = max * val;
       onChange(name, +formatValue(t, 4));
     },
-    [max]
+    [max, onChange]
   );
 
-  const handleChangeValue = React.useCallback(
+  const handleChangeValue = useCallback(
     (name: string, newValue: number) => {
       let newValueGuard = newValue;
       if (Number.isNaN(newValueGuard)) newValueGuard = 0;
@@ -34,10 +34,10 @@ const CalculatorLogarithmicSlider: React.FC<Props> = ({
       if (newValueGuard > max) newValueGuard = max;
       onChange(name, +formatValue(newValueGuard, 2));
     },
-    [max]
+    [max, onChange]
   );
 
-  const logarithmicValue = React.useCallback(
+  const logarithmicValue = useCallback(
     value => {
       const val = value / max;
       let t = Math.pow(val, 1 / 4);
