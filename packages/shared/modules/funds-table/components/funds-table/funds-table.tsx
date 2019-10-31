@@ -1,6 +1,6 @@
 import "./funds-table.scss";
 
-import { FundDetailsOld } from "gv-api-web";
+import { FundDetailsList } from "gv-api-web";
 import * as React from "react";
 import { Table } from "shared/components/table/components";
 import { ITableProps } from "shared/components/table/components/table";
@@ -14,7 +14,7 @@ import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
 interface Props extends ITableProps {
-  data?: FundDetailsOld[];
+  data?: FundDetailsList[];
   toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated: boolean;
 }

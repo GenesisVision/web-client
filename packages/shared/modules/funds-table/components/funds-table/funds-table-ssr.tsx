@@ -46,7 +46,7 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   return (
     <FundsTable
       title={title}
-      data={data.funds}
+      data={data.items}
       showSwitchView={showSwitchView}
       sorting={sorting || SORTING_FILTER_VALUE}
       updateSorting={value => update({ name: "sorting", value })}

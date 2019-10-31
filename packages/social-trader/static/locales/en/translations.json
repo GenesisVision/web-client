@@ -1,45 +1,13 @@
 {
+  "mt4-page": {
+    "title": "MetaTrader 4"
+  },
+  "mt5-page": {
+    "title": "MetaTrader 5"
+  },
   "active": {
     "chart": "Chart",
     "about": "About"
-  },
-  "dashboard-page": {
-    "fail-chart": "Error loading chart",
-    "portfolio-events": {
-      "types": {
-        "ProgramBrokerChanged": "Program broker changed",
-        "WithdrawByStopOut": "Withdraw by stop out",
-        "All": "All",
-        "Invest": "Invest",
-        "Withdraw": "Withdraw",
-        "Profit": "Profit",
-        "Loss": "Loss",
-        "Reinvest": "Reinvest",
-        "Canceled": "Canceled",
-        "Ended": "Ended",
-        "ManagerInvest": "Manager invest",
-        "EntranceFee": "Entrance fee",
-        "AssetStarted": "Asset started",
-        "InvestorInvest": "Investor investment",
-        "AssetFinished": "Asset finished",
-        "ProgramPeriodStarts": "Program period starts",
-        "ProgramPeriodEnds": "Program period ends",
-        "ProgramSignalSubscribe": "Program signal subscribe",
-        "ProgramStopOut": "Program stop out",
-        "ProgramManagerTradingFeeAccrual": "Program manager trading fee accrual",
-        "all": "All",
-        "invest": "Invest",
-        "withdraw": "Withdraw",
-        "profit": "Profit",
-        "loss": "Loss",
-        "reinvest": "Reinvest",
-        "canceled": "Canceled",
-        "ended": "Ended",
-        "ManagerWithdraw": "Manager withdraw",
-        "ExitFee": "ExitFee",
-        "InvestorWithdraw": "Investor withdraw"
-      }
-    }
   },
   "table": {
     "loading": "Loading...",
@@ -165,11 +133,11 @@
     "events": "Events",
     "investments":"Investments",
     "trading": "Trading",
-    "financial-statistic":"Financial-statistic",
+    "financial-statistic":"Financial statistic",
     "invest": "Invest",
-    "gv-follow":"GV-Follow",
-    "gv-funds": "GV-Funds",
-    "gv-programs":"GV-Programs",
+    "gv-follow":"GV Follow",
+    "gv-funds": "GV Funds",
+    "gv-programs":"GV Programs",
     "trade": "Trade",
     "mt4":"MetaTrader 4 Terminal",
     "mt5": "MetaTrader 5 Terminal",
@@ -2284,6 +2252,7 @@
     }
   },
   "dashboard-page": {
+    "fail-chart": "Error loading chart",
     "title": "Dashboard",
     "assets": {
       "title": "Assets",
@@ -2364,6 +2333,15 @@
         "amount": "Amount"
       },
       "types": {
+        "ProgramBrokerChanged": "Program broker changed",
+        "WithdrawByStopOut": "Withdraw by stop out",
+        "Invest": "Invest",
+        "Withdraw": "Withdraw",
+        "Profit": "Profit",
+        "Loss": "Loss",
+        "Reinvest": "Reinvest",
+        "Canceled": "Canceled",
+        "Ended": "Ended",
         "ProgramSignalSubscribe": "Program signal subscribe",
         "ProgramStopOut": "Program stop out",
         "ProgramManagerTradingFeeAccrual": "Program manager trading fee accrual",

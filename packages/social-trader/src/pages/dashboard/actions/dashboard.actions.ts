@@ -1,9 +1,8 @@
 import {
   CancelablePromise,
-  FundsListOld,
+  ItemsViewModelFundDetailsList,
   InvestmentEventViewModels,
-  ManagerAssets,
-  ProgramsListOld
+  ItemsViewModelProgramDetailsList
 } from "gv-api-web";
 import { Action } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -14,7 +13,7 @@ import {
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { IDashboardAssetChart } from "shared/constants/constants";
-import managerApi from "shared/services/api-client/manager-api";
+//import managerApi from "shared/services/api-client/manager-api";
 import { ActionType } from "shared/utils/types";
 
 export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";
@@ -42,6 +41,8 @@ export const fetchEventsAction = (
   payload: fetchPortfolioEventsWithoutTable(eventLocation, filters)
 });
 
+const managerApi: any = {};
+
 export const fetchPortfolioEventsAction = (
   auth: string,
   filters: ComposeFiltersAllType
@@ -65,7 +66,7 @@ export const fetchInRequestsAction = (
 export const fetchDashboardProgramsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramsListOld>> => ({
+): ActionType<CancelablePromise<ItemsViewModelProgramDetailsList>> => ({
   type: DASHBOARD_PROGRAMS,
   payload: managerApi.getManagerPrograms(auth, filters)
 });
@@ -73,7 +74,7 @@ export const fetchDashboardProgramsAction = (
 export const fetchDashboardFundsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<FundsListOld>> => ({
+): ActionType<CancelablePromise<ItemsViewModelFundDetailsList>> => ({
   type: DASHBOARD_FUNDS,
   payload: managerApi.getManagerFunds(auth, filters)
 });
@@ -96,7 +97,7 @@ export const dashboardChartAction = (
 
 export const fetchAssetsAction = (
   auth: string
-): ActionType<CancelablePromise<ManagerAssets>> => ({
+): ActionType<CancelablePromise<any>> => ({
   type: DASHBOARD_ASSETS,
   payload: managerApi.getManagerAssets(auth)
 });

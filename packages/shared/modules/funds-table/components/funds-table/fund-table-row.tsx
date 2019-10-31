@@ -1,4 +1,4 @@
-import { FundDetails } from "gv-api-web";
+import { FundDetailsList } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -54,10 +54,10 @@ const _FundsTableRow: React.FC<Props> = ({
     <TableCell className="funds-table__cell funds-table__cell--amount">
       <NumberFormat
         value={formatCurrencyValue(
-          fund.statistic.balance.amount,
-          fund.statistic.balance.currency
+          0, //fund.statistic.balance.amount,
+          "GVT" // fund.statistic.balance.currency
         )}
-        suffix={` ${fund.statistic.balance.currency}`}
+        suffix={` GVT`} //${fund.statistic.balance.currency}
         displayType="text"
       />
     </TableCell>
@@ -70,25 +70,25 @@ const _FundsTableRow: React.FC<Props> = ({
       />
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--investors">
-      {fund.statistic.investorsCount}
+      {5/*{fund.statistic.investorsCount}*/}
     </TableCell>
     <TableCell className="programs-table__cell programs-table__cell--age">
       {distanceDate(fund.creationDate)}
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--drawdown">
       <NumberFormat
-        value={formatValue(fund.statistic.drawdownPercent, 2)}
+        value={formatValue(fund.chart.drawdown/*formatValue(fund.statistic.drawdownPercent*/, 2)}
         suffix="%"
         displayType="text"
       />
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--profit">
       <Profitability
-        value={formatValue(fund.statistic.profitPercent, 2)}
+        value={formatValue(fund.chart.profit/*fund.statistic.profitPercent*/, 2)}
         prefix={PROFITABILITY_PREFIX.SIGN}
       >
         <NumberFormat
-          value={formatValue(fund.statistic.profitPercent, 2)}
+          value={formatValue(fund.chart.profit/*fund.statistic.profitPercent*/, 2)}
           suffix="%"
           allowNegative={false}
           displayType="text"
@@ -97,7 +97,7 @@ const _FundsTableRow: React.FC<Props> = ({
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--chart">
       {fund.chart && (
-        <ProgramSimpleChart data={fund.chart} programId={fund.id} />
+        <ProgramSimpleChart data={fund.chart.chart} programId={fund.id} />
       )}
     </TableCell>
     {isAuthenticated && fund.personalDetails && (
@@ -113,7 +113,7 @@ const _FundsTableRow: React.FC<Props> = ({
 );
 
 interface Props {
-  fund: FundDetails;
+  fund: FundDetailsList;
   isAuthenticated?: boolean;
   toggleFavorite?: TableToggleFavoriteHandlerType;
   title?: JSX.Element | string;

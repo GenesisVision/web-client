@@ -1,8 +1,4 @@
-import {
-  ManagerAssets,
-  ManagerSimpleFund,
-  ManagerSimpleProgram
-} from "gv-api-web";
+
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -15,26 +11,26 @@ import { AuthRootState } from "shared/utils/types";
 
 import { DASHBOARD_ASSETS } from "../actions/dashboard.actions";
 
-export type ManagerAssetsState = IApiState<ManagerAssets>;
+export type ManagerAssetsState = IApiState<any>;
 
 export const dashboardAssetsSelector = apiSelector<
-  ManagerAssets,
+  any,
   AuthRootState
 >(state => state.dashboard.assets);
 
 export const dashboardAssetsProgramsSelector = apiFieldSelector<
-  ManagerAssets,
-  ManagerSimpleProgram[],
+  any,
+  any[],
   AuthRootState
 >(dashboardAssetsSelector, fieldSelector(state => state.programs), []);
 
 export const dashboardAssetsFundsSelector = apiFieldSelector<
-  ManagerAssets,
-  ManagerSimpleFund[],
+  any,
+  any[],
   AuthRootState
 >(dashboardAssetsSelector, fieldSelector(state => state.funds), []);
 
-const dashboardAssetReducer = apiReducerFactory<ManagerAssets>({
+const dashboardAssetReducer = apiReducerFactory<any>({
   apiType: DASHBOARD_ASSETS
 });
 
