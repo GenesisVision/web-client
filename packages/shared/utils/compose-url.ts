@@ -12,6 +12,10 @@ import {
   FUNDS_SLUG_URL_PARAM_NAME
 } from "shared/routes/funds.routes";
 import {
+  FOLLOW_DETAILS_SLUG_ROUTE,
+  SLUG_URL_PARAM_NAME
+} from "shared/routes/invest.routes";
+import {
   MANAGER_DETAILS_ROUTE,
   MANAGER_SLUG_URL_PARAM_NAME
 } from "shared/routes/manager.routes";
@@ -44,6 +48,11 @@ export const composeAssetDetailsUrl = (
   assetType === ASSETS_TYPES.Program
     ? composeProgramDetailsUrl(slugUrl)
     : composeFundsDetailsUrl(slugUrl);
+
+export const composeFollowDetailsUrl = (slugUrl: string): string =>
+  replaceParams(FOLLOW_DETAILS_SLUG_ROUTE, {
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
 
 export const composeProgramDetailsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {
