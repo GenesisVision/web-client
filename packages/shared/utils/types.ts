@@ -1,7 +1,6 @@
-import React from "react";
 import {
-  AmountWithCurrencyCurrencyEnum,
   CancelablePromise,
+  Currency,
   FundAssetPart,
   PlatformAsset,
   ProgramNotificationSettingList
@@ -10,6 +9,7 @@ import { InvestorRootState } from "investor-web-portal/src/reducers";
 import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { NextPage, NextPageContext } from "next";
 import { AppContextType } from "next/dist/next-server/lib/utils";
+import React from "react";
 import { Action, Dispatch, Store } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -83,7 +83,7 @@ export type ResponseError = {
 export type SetSubmittingType = (isSubmitting: boolean) => void;
 export type HandlePeriodChangeType = (period: ChartDefaultPeriod) => void;
 
-export type CurrencyEnum = AmountWithCurrencyCurrencyEnum;
+export type CurrencyEnum = Currency;
 
 export type AuthRootState = ManagerRootState | InvestorRootState;
 
@@ -129,4 +129,6 @@ export type FeesType = {
   exitFeePersonal?: number;
 };
 
-export type TagType = React.ComponentType<{ className?: string; style?: any }> | string;
+export type TagType =
+  | React.ComponentType<{ className?: string; style?: any }>
+  | string;
