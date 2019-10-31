@@ -5,45 +5,32 @@ import { Push } from "shared/components/link/link";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
-import { LevelFilterType } from "shared/components/table/components/filtering/level-filter/level-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { calculateTotalPages } from "shared/components/table/helpers/paging.helpers";
 import useRouteFilters from "shared/hooks/route-filters.hook";
-import {
-  composeCurrencyFilter,
-  composeCurrencyMap
-} from "shared/modules/programs-table/components/programs-table/program-table.helpers";
+import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 import {
   CURRENCY_MAP_NAME,
   SORTING_FILTER_NAME,
   SORTING_FILTER_VALUE
 } from "shared/modules/programs-table/components/programs-table/programs.constants";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import {
-  platformCurrenciesSelector,
-  programCurrenciesSelector,
-  programTagsSelector
-} from "shared/reducers/platform-reducer";
+import { platformCurrenciesSelector, programTagsSelector } from "shared/reducers/platform-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 import { toggleFavoriteFollowDispatchable } from "../../favorite-asset/services/favorite-follow.service";
 import { followsDataSelector } from "../reducers/follows-table.reducers";
 import FollowsTable from "./follows-table";
-import {
-  DEFAULT_FOLLOW_TABLE_FILTERS,
-  LEVEL_FILTER_NAME,
-  PROGRAM_CURRENCY_FILTER_NAME
-} from "./follows.constants";
+import { DEFAULT_FOLLOW_TABLE_FILTERS, FOLLOW_TYPE_FILTER_NAME, FOLLOW_TYPES } from "./follows.constants";
+import { composeTypeFilter } from "./follow-table.helpers";
 
 const ITEMS_ON_PAGE = 12;
 
 const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   const dispatch = useDispatch();
-  const programCurrencies = useSelector(programCurrenciesSelector);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const currencies = useSelector(platformCurrenciesSelector);
   const programTags = useSelector(programTagsSelector);
@@ -89,6 +76,13 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
             name={TAG_FILTER_NAME}
             value={filtering[TAG_FILTER_NAME] as string[]}
             values={programTags}
+            onChange={updateFilter}
+          />
+          <SelectFilter
+            name={FOLLOW_TYPE_FILTER_NAME}
+            label={t("follows-page.filters."+FOLLOW_TYPE_FILTER_NAME)}
+            value={filtering[FOLLOW_TYPE_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
+            values={composeTypeFilter(FOLLOW_TYPES)}
             onChange={updateFilter}
           />
         </>
