@@ -6,7 +6,7 @@
   "dependencies": {
     "next": "../../next.tgz",
     "shared": "^1.0.0",
-    "gv-api-web": "^1.0.0"
+    "gv-api-web": "^1.1.0"
   },
   "scripts": {
     "start": "yarn copy && node index.js",
