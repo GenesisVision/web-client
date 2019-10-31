@@ -1,3 +1,4 @@
+import { Currency } from "gv-api-web";
 import managerApi from "shared/services/api-client/manager-api";
 import platformApi from "shared/services/api-client/platform-api";
 import authService from "shared/services/auth-service";
@@ -7,6 +8,6 @@ export const getProgramLevelsInfo = (id: string) => {
   return managerApi.getLevelsCalculator(id, authorization);
 };
 
-export const getPlatformLevels = (currency: string) => {
+export const getPlatformLevels = (currency?: Currency) => {
   return platformApi.getProgramsLevels({ currency });
 };
