@@ -60,7 +60,7 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
     <ProgramsTable
       showSwitchView={showSwitchView}
       title={title}
-      data={data.programs}
+      data={data.items}
       sorting={sorting || SORTING_FILTER_VALUE}
       updateSorting={value => update({ name: SORTING_FILTER_NAME, value })}
       filtering={filtering}

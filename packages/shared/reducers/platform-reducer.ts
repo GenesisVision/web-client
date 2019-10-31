@@ -1,4 +1,8 @@
-import { FilterModel, PlatformInfo, ProgramsInfo } from "gv-api-web";
+import {
+  FilterModel,
+  PlatformInfo,
+  ItemsViewModelProgramDetailsList
+} from "gv-api-web";
 import { createSelector } from "reselect";
 import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
@@ -23,19 +27,29 @@ export const platformDataSelector = apiSelector<PlatformInfo>(
 
 export const currenciesSelector = apiFieldSelector(
   platformDataSelector,
-  fieldSelector(state => state.currencies),
+  fieldSelector(
+    state => state.assetInfo.programInfo.availableProgramCurrencies
+  ), //TODO
   []
 );
 
 export const programCurrenciesSelector = apiFieldSelector(
   platformDataSelector,
-  fieldSelector(state => state.programCurrencies),
+  fieldSelector(
+    state => state.assetInfo.programInfo.availableProgramCurrencies
+  ), //TODO
   []
 );
 
 export const platformCurrenciesSelector = apiFieldSelector(
   platformDataSelector,
-  fieldSelector(state => state.platformCurrencies),
+  fieldSelector(state => [
+    { name: "BTC", color: "#F7931A", rateToGvt: 1 },
+    { name: "ETH", color: "#627EEA", rateToGvt: 1 },
+    { name: "USDT", color: "#26A17B", rateToGvt: 1 },
+    { name: "USD", color: "#207137", rateToGvt: 1 },
+    { name: "GVT", color: "#16B9AD", rateToGvt: 1 }
+  ]), // state.platformCurrencies
   [
     { name: "BTC", color: "#F7931A", rateToGvt: 1 },
     { name: "ETH", color: "#627EEA", rateToGvt: 1 },
@@ -47,7 +61,7 @@ export const platformCurrenciesSelector = apiFieldSelector(
 
 export const programTagsSelector = apiFieldSelector(
   platformDataSelector,
-  fieldSelector(state => state.enums.program.programTags),
+  fieldSelector(state => state.assetInfo.programInfo.tags),
   []
 );
 
@@ -60,7 +74,7 @@ export const fundAssetsSelector = apiFieldSelector(
 export const programsInfoSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.programsInfo),
-  {} as ProgramsInfo
+  {} as ItemsViewModelProgramDetailsList
 );
 
 export const assetTypeValuesSelector = createSelector<

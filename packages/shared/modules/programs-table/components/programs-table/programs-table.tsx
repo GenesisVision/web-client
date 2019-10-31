@@ -1,6 +1,6 @@
 import "./programs.scss";
 
-import { ProgramDetailsOld } from "gv-api-web";
+import { ProgramDetailsList } from "gv-api-web";
 import * as React from "react";
 import { Table } from "shared/components/table/components";
 import { ITableProps } from "shared/components/table/components/table";
@@ -10,15 +10,15 @@ import ProgramCard from "./program-card";
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import ProgramTableSortingValue from "./program-table-sorting";
-import { PROGRAMS_COLUMNS } from "./programs.constants";
 import { programListLoaderData } from "./program-table.loader-data";
+import { PROGRAMS_COLUMNS } from "./programs.constants";
 
 export const FAVORITE_COLUMN_NAME = "favorite";
 
 interface IProgramsTableProps extends ITableProps {
   showRating?: boolean;
   currencies?: string[];
-  data?: ProgramDetailsOld[];
+  data?: ProgramDetailsList[];
   toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated?: boolean;
   title: string;
@@ -78,7 +78,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
           column={column}
         />
       )}
-      renderBodyRow={(program: ProgramDetailsOld) => (
+      renderBodyRow={(program: ProgramDetailsList) => (
         <ProgramTableRow
           showRating={Boolean(showRating)}
           title={title}
@@ -87,7 +87,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
           isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
-      renderBodyCard={(program: ProgramDetailsOld) => (
+      renderBodyCard={(program: ProgramDetailsList) => (
         <ProgramCard
           title={title}
           program={program}

@@ -3,7 +3,6 @@ import "./facet-cards.scss";
 import { FundFacet, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { RefObject } from "react";
-import withLoader from "shared/decorators/with-loader";
 
 import FacetCard, { composeFacetUrlFunc } from "./facet-card";
 

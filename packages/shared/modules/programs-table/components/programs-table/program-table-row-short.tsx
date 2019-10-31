@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ProgramDetailsOld } from "gv-api-web";
+import { ProgramDetailsList } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -24,7 +24,7 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 interface IProgramTableRowShortProps {
   title: string;
   showRating?: boolean;
-  program: ProgramDetailsOld;
+  program: ProgramDetailsList;
   isAuthenticated?: boolean;
   toggleFavorite?: TableToggleFavoriteHandlerType;
   onExpandClick(): void;
@@ -40,17 +40,19 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 }) => {
   const { t } = useTranslation();
   const {
-    status,
-    availableInvestmentInCurrency,
-    statistic,
+    // status,
+    // availableInvestmentInCurrency,
+    // statistic,
     logo,
     level,
     levelProgress,
     color,
-    periodStarts,
-    periodEnds,
+    currency: requestCurrency,
+    // periodStarts,
+    // periodEnds,
     chart,
     personalDetails,
+    availableToInvest,
     id,
     tags
   } = program;
@@ -59,7 +61,7 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
     as: composeProgramDetailsUrl(program.url)
   };
-  const requestCurrency = program.statistic.balance.currency;
+  //const requestCurrency = program.statistic.balance.currency;
   return (
     <TableRow
       className={classNames({
@@ -97,7 +99,10 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--equity">
         <NumberFormat
-          value={formatCurrencyValue(statistic.balance.amount, requestCurrency)}
+          value={formatCurrencyValue(
+            6,
+            requestCurrency
+          )} /*statistic.balance.amount*/
           suffix={` ${requestCurrency}`}
           displayType="text"
         />
@@ -106,39 +111,39 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         {currency}
       </TableCell>*/}
       <TableCell className="programs-table__cell programs-table__cell--investors">
-        {statistic.investorsCount}
+        {/*{statistic.investorsCount}*/ 1}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--available-to-invest">
-        {formatCurrencyValue(availableInvestmentInCurrency, requestCurrency)}{" "}
+        {formatCurrencyValue(availableToInvest, requestCurrency)}{" "}
         {requestCurrency}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
-        {periodStarts && (
-          <ProgramPeriodPie
-            condition={status !== STATUS.CLOSED}
-            loader={t("program-period.program-closed")}
-            start={periodStarts}
-            end={periodEnds}
-          />
-        )}
+        {/*{periodStarts && (*/}
+        {/*  <ProgramPeriodPie*/}
+        {/*    condition={status !== STATUS.CLOSED}*/}
+        {/*    loader={t("program-period.program-closed")}*/}
+        {/*    start={periodStarts}*/}
+        {/*    end={periodEnds}*/}
+        {/*  />*/}
+        {/*)}*/}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
         {distanceDate(program.creationDate)}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat
-          value={formatValue(statistic.drawdownPercent, 2)}
+          value={formatValue(chart.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--profit">
         <Profitability
-          value={formatValue(statistic.profitPercent, 2)}
+          value={formatValue(chart.profit, 2)} /*statistic.profitPercent*/
           prefix={PROFITABILITY_PREFIX.SIGN}
         >
           <NumberFormat
-            value={formatValue(statistic.profitPercent, 2)}
+            value={formatValue(chart.profit, 2)} /*statistic.profitPercent*/
             suffix="%"
             allowNegative={false}
             displayType="text"
@@ -146,7 +151,7 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--chart">
-        {chart && <ProgramSimpleChart data={chart} programId={id} />}
+        {chart && <ProgramSimpleChart data={chart.chart} programId={id} />}
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">

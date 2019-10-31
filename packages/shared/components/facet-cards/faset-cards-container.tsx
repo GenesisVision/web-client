@@ -8,8 +8,8 @@ import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
 
 export enum ASSETS_FACETS {
-  FUNDS = "fundsFacets",
-  PROGRAMS = "programsFacets"
+  FUNDS = "fundInfo",
+  PROGRAMS = "programInfo"
 }
 
 export const _FacetCardsContainer: React.FC<Props> = ({
@@ -23,7 +23,7 @@ export const _FacetCardsContainer: React.FC<Props> = ({
   return (
     <FacetCards
       title={title}
-      facets={info[assetsFacets]}
+      facets={info.assetInfo[assetsFacets].facets}
       composeFacetUrl={composeFacetUrl}
       fileRoute={fileRoute}
     />
