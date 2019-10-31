@@ -12,7 +12,7 @@ const _FollowTableHeaderCell: React.FC<{ column: SortingColumn }> = ({
     <span
       className={`programs-table__cell  programs-table__cell--${column.name}`}
     >
-      {t(`follows-page.follows-header.${column.name}`)}
+      {t(`follows-page.header.${column.name}`)}
     </span>
   );
 };

@@ -7,10 +7,10 @@ const _FollowTableSortingValue: React.FC<{ column: SortingColumn }> = ({
   column
 }) => {
   const { t } = useTranslation();
-  return t(`follows-page.follows-header.${column.name}`);
+  return t(`follows-page.header.${column.name}`);
 };
 
-const ProgramTableSortingValue = withLoader(
+const FollowTableSortingValue = withLoader(
   React.memo(_FollowTableSortingValue)
 );
-export default ProgramTableSortingValue;
+export default FollowTableSortingValue;

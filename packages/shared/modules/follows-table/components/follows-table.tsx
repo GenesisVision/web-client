@@ -9,7 +9,7 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 import FollowCard from "./follow-card";
 import FollowTableHeaderCell from "./follow-table-header-cell";
 import FollowTableRow from "./follow-table-row";
-import ProgramTableSortingValue from "./follow-table-sorting";
+import FollowTableSortingValue from "./follow-table-sorting";
 import { followListLoaderData } from "./follow-table.loader-data";
 import { FOLLOW_COLUMNS } from "./follows.constants";
 
@@ -68,7 +68,7 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
         />
       )}
       renderSorting={column => (
-        <ProgramTableSortingValue
+        <FollowTableSortingValue
           condition={
             !isAuthenticated ||
             (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
