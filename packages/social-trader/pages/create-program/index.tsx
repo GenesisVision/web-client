@@ -1,4 +1,4 @@
-import { Broker } from "gv-api-web";
+import { BrokerOld } from "gv-api-web";
 import CreateProgramPage from "pages/create-program/create-program.page";
 import { fetchBrokers } from "pages/create-program/services/create-program.service";
 import React from "react";
@@ -31,5 +31,5 @@ export default compose(
 )(CreateProgram);
 
 interface Props {
-  brokers: Broker[];
+  brokers: BrokerOld[];
 }
