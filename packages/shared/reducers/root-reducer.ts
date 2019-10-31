@@ -47,6 +47,9 @@ import { EmailPendingState } from "shared/reducers/email-pending-reducer";
 import { PlatformState } from "shared/reducers/platform-reducer";
 import { IUiState } from "shared/reducers/ui-reducer";
 
+import followsReducer, {
+  FollowsListState
+} from "../modules/follows-table/reducers/follows-table.reducers";
 import authReducer from "./auth-reducer";
 import emailPendingReducer from "./email-pending-reducer";
 import headerReducer, { HeaderState } from "./header-reducer";
@@ -63,6 +66,7 @@ export const sharedRootReducers = {
   programDetails: programDetailsReducer,
   // router: connectRouter(history),
   platformData: platformReducer,
+  followsData: followsReducer,
   programsData: programsReducer,
   programsRating: programsRatingReducer,
   fundsData: fundsReducer,
@@ -92,6 +96,7 @@ export type RootState = Readonly<{
   profileHeader: HeaderState;
   notificationSettings: NotificationSettingsState;
   platformData: PlatformState;
+  followsData: FollowsListState;
   programsData: ProgramsListState;
   programsRating: ProgramsRatingState;
   fundsData: FundsTableState;
