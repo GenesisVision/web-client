@@ -2,7 +2,7 @@ import "./active.scss";
 
 import * as faker from "faker";
 import { SocialLinkViewModelTypeEnum } from "gv-api-web";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import TradingViewWidget, { Themes } from "react-tradingview-widget";
 import { CurrencyItem } from "shared/components/currency-item/currency-item";
@@ -31,7 +31,12 @@ const tagMocks = Array(5)
   .map(getTagMock);
 
 const _Active: React.FC<Props> = ({ data: { name, rate, about, tags } }) => {
+  const [isServer, setIsServer] = useState(typeof window === "undefined");
   const [t] = useTranslation();
+  useEffect(() => {
+    if (typeof window === "undefined") setIsServer(true);
+    else setIsServer(false);
+  }, [window]);
   return (
     <div>
       <div className="active__block">
@@ -49,11 +54,13 @@ const _Active: React.FC<Props> = ({ data: { name, rate, about, tags } }) => {
       <div className="active__block">
         <div className="active__title">{t("active.chart")}</div>
         <div className="active__chart-container">
-          <TradingViewWidget
-            symbol={`${name}USD`}
-            autosize
-            theme={Themes.DARK}
-          />
+          {!isServer && (
+            <TradingViewWidget
+              symbol={`${name}USD`}
+              autosize
+              theme={Themes.DARK}
+            />
+          )}
         </div>
       </div>
       <div className="active__block">
