@@ -1,4 +1,4 @@
-import FundSettingsPage from "pages/invest/funds/fund-settings/fund-settings.page";
+import FundSettingsPage from "pages/funds/fund-settings/fund-settings.page";
 import React from "react";
 import { compose } from "redux";
 import {

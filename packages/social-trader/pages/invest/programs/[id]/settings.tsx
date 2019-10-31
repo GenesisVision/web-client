@@ -1,4 +1,4 @@
-import ProgramSettingsPage from "pages/invest/programs/programs-settings/program-settings.page";
+import ProgramSettingsPage from "pages/programs/programs-settings/program-settings.page";
 import React from "react";
 import { compose } from "redux";
 import {
