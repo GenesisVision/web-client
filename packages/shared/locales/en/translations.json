@@ -453,6 +453,23 @@
       "strategy": "Strategy"
     }
   },
+  "follows-page": {
+    "title": "Follows",
+    "tabs": {
+      "explore": "Explore",
+      "favorites": "Favourites"
+    },
+    "follows-table": "All follows",
+    "follows-header": {
+      "subscribers": "Subscribers",
+      "trades": "Trades",
+      "name": "Name",
+      "age": "Age",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart"
+    }
+  },
   "funds-page": {
     "title": "Funds",
     "all-funds": "All funds",
