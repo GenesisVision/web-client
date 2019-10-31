@@ -459,8 +459,11 @@
       "explore": "Explore",
       "favorites": "Favourites"
     },
-    "follows-table": "All follows",
-    "follows-header": {
+    "table": "All follows",
+    "filters": {
+      "type": "Type"
+    },
+    "header": {
       "subscribers": "Subscribers",
       "trades": "Trades",
       "name": "Name",
