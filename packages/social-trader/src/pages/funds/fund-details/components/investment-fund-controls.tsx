@@ -1,4 +1,4 @@
-import { FundDetailsFull } from "gv-api-web";
+import { FundDetailsFullOld } from "gv-api-web";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -95,7 +95,7 @@ interface DispatchProps {
 
 interface OwnProps {
   isAuthenticated: boolean;
-  fundDescription: FundDetailsFull;
+  fundDescription: FundDetailsFullOld;
 }
 
 interface Props extends OwnProps, DispatchProps {}
