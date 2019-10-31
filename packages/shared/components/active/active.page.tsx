@@ -9,7 +9,9 @@ import { getActiveLoaderData } from "./service/active.service";
 const _ActivePage: React.FC<Props> = ({ data }) => {
   return (
     <Page title={data.name}>
-      <Active loaderData={getActiveLoaderData} data={data} />
+      <div className="active-page">
+        <Active loaderData={getActiveLoaderData} data={data} />
+      </div>
     </Page>
   );
 };
