@@ -58,9 +58,9 @@ import uiReducer from "./ui-reducer";
 // import history from "shared/utils/history";
 
 export const sharedRootReducers = {
-  profile: profileReducer,
-  fundDetails: fundDetailsReducer,
-  programDetails: programDetailsReducer,
+  // profile: profileReducer,
+  // fundDetails: fundDetailsReducer,
+  // programDetails: programDetailsReducer,
   // router: connectRouter(history),
   platformData: platformReducer,
   programsData: programsReducer,
@@ -72,37 +72,37 @@ export const sharedRootReducers = {
   passwordRestoreData: passwordRestoreReducer,
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
-  emailPending: emailPendingReducer,
+  // emailPending: emailPendingReducer,
   notifications: notificationsReducer,
-  notificationSettings: notificationSettingsReducer,
-  programNotifications: programNotificationsReducer,
-  fundNotifications: fundNotificationsReducer,
-  manager: managerReducer,
+  // notificationSettings: notificationSettingsReducer,
+  // programNotifications: programNotificationsReducer,
+  // fundNotifications: fundNotificationsReducer,
+  // manager: managerReducer,
   wallet: walletReducer,
-  copyTradingAccounts: CopyTradingAccountsReducer,
+  // copyTradingAccounts: CopyTradingAccountsReducer,
   accountSettings: accountSettingsReducer,
   ui: uiReducer
 };
 
 export type RootState = Readonly<{
-  profile: ProfileState;
-  fundDetails: FundDetailsState;
-  programDetails: ProgramDetailsState;
-  notifications: NotificationsState;
+  // profile: ProfileState;
+  // fundDetails: FundDetailsState;
+  // programDetails: ProgramDetailsState;
+  // notifications: NotificationsState;
   profileHeader: HeaderState;
-  notificationSettings: NotificationSettingsState;
+  // notificationSettings: NotificationSettingsState;
   platformData: PlatformState;
   programsData: ProgramsListState;
   programsRating: ProgramsRatingState;
   fundsData: FundsTableState;
-  emailPending: EmailPendingState;
-  programNotifications: ProgramNotificationsState;
-  fundNotifications: FundNotificationsState;
+  // emailPending: EmailPendingState;
+  // programNotifications: ProgramNotificationsState;
+  // fundNotifications: FundNotificationsState;
   authData: AuthState;
-  // router: RouterState;
+  // // router: RouterState;
   alertMessages: AlertMessagesState;
   accountSettings: AccountSettingsState;
   wallet: WalletState;
-  copyTradingAccounts: CopyTradingAccountsState;
+  // copyTradingAccounts: CopyTradingAccountsState;
   ui: IUiState;
 }>;
