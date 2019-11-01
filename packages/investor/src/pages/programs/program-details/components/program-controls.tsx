@@ -9,7 +9,7 @@ const _ProgramControls: React.FC<IProgramControlsProps> = ({
   programDescription
 }) => {
   return (
-    <div className="asset-details-description__controls">
+    <>
       <InvestmentProgramControls programDescription={programDescription} />
       {programDescription.isSignalProgram && (
         <SignalProviderControls programDescription={programDescription}>
@@ -22,7 +22,7 @@ const _ProgramControls: React.FC<IProgramControlsProps> = ({
           />
         </SignalProviderControls>
       )}
-    </div>
+    </>
   );
 };
 

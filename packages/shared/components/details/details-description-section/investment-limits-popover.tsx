@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
+import { fetchInvestmentsLevels } from "shared/components/programs/program-details/services/program-details.service";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { fetchInvestmentsLevels } from "../services/program-details.service";
 import AboutLevelsComponent from "./about-levels/about-levels";
 
 const _InvestmentLimitsPopover: React.FC<Props> = ({

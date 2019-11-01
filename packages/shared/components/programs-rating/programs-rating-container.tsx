@@ -11,7 +11,7 @@ import { ComposeFiltersAllType } from "shared/components/table/components/filter
 import { IDataModel } from "shared/constants/constants";
 import { fetchPrograms } from "shared/modules/programs-table/services/programs-table.service";
 
-import LevelIcon from "../programs/program-details/program-details-description/about-levels/level-icon";
+import LevelIcon from "../details/details-description-section/about-levels/level-icon";
 import { fetchInvestmentsLevels } from "../programs/program-details/services/program-details.service";
 import ProgramsFacetTable from "../programs/programs-facet/components/programs-facet-table";
 import { getCurrentFacet } from "../programs/programs-facet/services/programs-facet.service";
