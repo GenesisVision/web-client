@@ -53,11 +53,8 @@ const _FundsTableRow: React.FC<Props> = ({
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--amount">
       <NumberFormat
-        value={formatCurrencyValue(
-          0, //fund.statistic.balance.amount,
-          "GVT" // fund.statistic.balance.currency
-        )}
-        suffix={` GVT`} //${fund.statistic.balance.currency}
+        value={formatCurrencyValue(fund.balance.amount, fund.balance.currency)}
+        suffix={` ${fund.balance.currency}`}
         displayType="text"
       />
     </TableCell>
@@ -70,25 +67,25 @@ const _FundsTableRow: React.FC<Props> = ({
       />
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--investors">
-      {5/*{fund.statistic.investorsCount}*/}
+      {fund.investorsCount}
     </TableCell>
     <TableCell className="programs-table__cell programs-table__cell--age">
       {distanceDate(fund.creationDate)}
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--drawdown">
       <NumberFormat
-        value={formatValue(fund.chart.drawdown/*formatValue(fund.statistic.drawdownPercent*/, 2)}
+        value={formatValue(fund.chart.drawdown, 2)}
         suffix="%"
         displayType="text"
       />
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--profit">
       <Profitability
-        value={formatValue(fund.chart.profit/*fund.statistic.profitPercent*/, 2)}
+        value={formatValue(fund.chart.profit, 2)}
         prefix={PROFITABILITY_PREFIX.SIGN}
       >
         <NumberFormat
-          value={formatValue(fund.chart.profit/*fund.statistic.profitPercent*/, 2)}
+          value={formatValue(fund.chart.profit, 2)}
           suffix="%"
           allowNegative={false}
           displayType="text"

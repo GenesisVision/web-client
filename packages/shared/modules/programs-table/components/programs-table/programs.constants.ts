@@ -20,7 +20,6 @@ import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
 export const LEVEL_FILTER_NAME = "level";
 export const PROGRAM_CURRENCY_FILTER_NAME = "programCurrency";
-export const CURRENCY_MAP_NAME = "currency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_NAME = "sorting";
 export const SHOW_IN_CURRENCY_FILTER = "showIn";

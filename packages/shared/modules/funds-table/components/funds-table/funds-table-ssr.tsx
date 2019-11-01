@@ -20,9 +20,9 @@ import {
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import FundsTable from "./funds-table";
 import {
-  CURRENCY_MAP_NAME,
   DEFAULT_FUND_TABLE_FILTERS,
   DEFAULT_ITEMS_ON_PAGE,
+  SHOW_IN_CURRENCY_FILTER,
   SORTING_FILTER_VALUE
 } from "./funds-table.constants";
 
@@ -37,8 +37,8 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   const [filtering, sorting, page, update] = useRouteFilters(
     DEFAULT_FUND_TABLE_FILTERS
   );
-  if (!filtering[CURRENCY_MAP_NAME]) {
-    filtering[CURRENCY_MAP_NAME] = currency;
+  if (!filtering[SHOW_IN_CURRENCY_FILTER]) {
+    filtering[SHOW_IN_CURRENCY_FILTER] = currency;
   }
   if (!data) return null;
   const totalPages = calculateTotalPages(data.total, DEFAULT_ITEMS_ON_PAGE);
@@ -55,9 +55,9 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       renderMappings={(updateFilter, filtering) => (
         <>
           <SelectFilter
-            name={CURRENCY_MAP_NAME}
+            name={SHOW_IN_CURRENCY_FILTER}
             label={t("filters.currency.show-in")}
-            value={filtering && filtering[CURRENCY_MAP_NAME]}
+            value={filtering && filtering[SHOW_IN_CURRENCY_FILTER]}
             values={currencies.map(x => ({ value: x.name, label: x.name }))}
             onChange={updateFilter}
           />
