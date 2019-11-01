@@ -1,20 +1,11 @@
-import { push } from "connected-react-router";
 import { CancelablePromise, ProgramUpdate } from "gv-api-web";
-import Router from "next/router";
 import { Dispatch } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { ASSET } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { RootState } from "shared/reducers/root-reducer";
-import {
-  PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME,
-  PROGRAMS_ROUTE
-} from "shared/routes/programs.routes";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
-import getParams from "shared/utils/get-params";
 import { ManagerThunk, ResponseError } from "shared/utils/types";
 
 export const cancelChangeBrokerMethod = (
@@ -57,16 +48,6 @@ export const changeBrokerMethod = (
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 
-export const redirectToProgram = () => (
-  dispatch: Dispatch,
-  getState: () => RootState
-) => {
-  const programSlugUrl = getParams(Router.pathname, PROGRAM_DETAILS_ROUTE)[
-    PROGRAM_SLUG_URL_PARAM_NAME
-  ];
-  dispatch(push(`${PROGRAMS_ROUTE}/${programSlugUrl}`));
-};
-
 export const editAsset = (
   id: string,
   editAssetData: IAssetEditFormValues,
@@ -96,8 +77,7 @@ export const editAsset = (
         alertMessageActions.success(
           (type === ASSET.PROGRAM &&
             "edit-program.notifications.edit-success") ||
-            (type === ASSET.FUND &&
-              "edit-fund.notifications.edit-success") ||
+            (type === ASSET.FUND && "edit-fund.notifications.edit-success") ||
             "",
           true
         )

@@ -8,6 +8,7 @@ import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
 
 export enum ASSETS_FACETS {
+  FOLLOWS = "followsFacets",
   FUNDS = "fundsFacets",
   PROGRAMS = "programsFacets"
 }
