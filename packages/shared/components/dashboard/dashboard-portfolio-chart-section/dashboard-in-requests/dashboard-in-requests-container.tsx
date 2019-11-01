@@ -1,6 +1,6 @@
 import "./dashboard-in-requests.scss";
 
-import { ProgramRequests } from "gv-api-web";
+import { ProgramRequestsOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -93,7 +93,7 @@ interface Props extends OwnProps, DispatchProps {}
 
 interface OwnProps {
   cancelRequest: CancelRequestType;
-  data: ProgramRequests;
+  data: ProgramRequestsOld;
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {
@@ -104,7 +104,7 @@ interface DispatchProps {
 }
 
 const DashboardInRequestsContainer = compose<
-  React.ComponentType<OwnProps & WithBlurLoaderProps<ProgramRequests>>
+  React.ComponentType<OwnProps & WithBlurLoaderProps<ProgramRequestsOld>>
 >(
   withBlurLoader,
   connect<null, DispatchProps, OwnProps, AuthRootState>(

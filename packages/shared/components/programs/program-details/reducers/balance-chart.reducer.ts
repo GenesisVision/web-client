@@ -1,4 +1,4 @@
-import { ProgramBalanceChart } from "gv-api-web";
+import { ProgramBalanceChartOld } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -7,7 +7,7 @@ import { apiSelector } from "shared/utils/selectors";
 
 import { FETCH_PROGRAM_BALANCE_CHART } from "../actions/program-details.actions";
 
-export type ProgramBalanceChartDataType = ProgramBalanceChart;
+export type ProgramBalanceChartDataType = ProgramBalanceChartOld;
 
 export type ProgramBalanceChartState = IApiState<ProgramBalanceChartDataType>;
 

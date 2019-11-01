@@ -1,6 +1,6 @@
 import "./deposit.scss";
 
-import { ProgramInvestInfo } from "gv-api-web";
+import { ProgramInvestInfoOld } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { compose } from "redux";
@@ -51,7 +51,7 @@ const _DepositPopup: React.FC<Props> = ({
       <DepositTop
         title={data.investInfo.title}
         availableToInvestBase={
-          (data.investInfo as ProgramInvestInfo).availableToInvestBase
+          (data.investInfo as ProgramInvestInfoOld).availableToInvestBase
         }
         asset={asset}
         currency={currency}

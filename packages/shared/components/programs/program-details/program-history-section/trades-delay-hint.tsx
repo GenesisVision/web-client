@@ -1,4 +1,4 @@
-import { TradesViewModelTradesDelayEnum } from "gv-api-web";
+import { TradesDelay } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
@@ -6,9 +6,7 @@ import Tooltip from "shared/components/tooltip/tooltip";
 
 import { DELAYS_LABELS } from "./program-open-positions/program-open-positions";
 
-const _TradesDelayHint: React.FC<{ delay: TradesViewModelTradesDelayEnum }> = ({
-  delay
-}) => {
+const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
   const [t] = useTranslation();
   return delay !== "None" ? (
     <>

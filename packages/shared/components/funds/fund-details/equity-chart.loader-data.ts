@@ -1,6 +1,6 @@
-import { FundEquityChartElement } from "gv-api-web";
+import { FundEquityChartElementOld } from "gv-api-web";
 
-export const equityChartLoaderData: FundEquityChartElement[] = [
+export const equityChartLoaderData: FundEquityChartElementOld[] = [
   {
     assetsState: {
       assets: [

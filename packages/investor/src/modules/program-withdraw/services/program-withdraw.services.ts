@@ -1,4 +1,4 @@
-import { ProgramWithdrawInfo } from "gv-api-web";
+import { Currency, ProgramWithdrawInfoOld } from "gv-api-web";
 import { ProgramWithdrawType } from "shared/components/program-withdraw/program-withdraw-popup";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
@@ -7,8 +7,8 @@ import { InvestorThunk } from "shared/utils/types";
 
 export const getProgramWithdrawInfo = (
   id: string,
-  currency: string
-) => (): Promise<ProgramWithdrawInfo> => {
+  currency: Currency
+) => (): Promise<ProgramWithdrawInfoOld> => {
   return investorApi.getProgramWithdrawInfo(
     id,
     currency,

@@ -1,10 +1,6 @@
 import "./subscription-details.scss";
 
-import {
-  AttachToSignalProviderModeEnum,
-  PersonalProgramDetailsFull,
-  SignalSubscriptionModeEnum
-} from "gv-api-web";
+import { PersonalProgramDetailsFullOld, SubscriptionMode } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -130,14 +126,14 @@ const _SubscriptionTypeValue: React.FC<ISubscriptionTypeValueProps> = ({
 const SubscriptionTypeValue = translate()(React.memo(_SubscriptionTypeValue));
 
 interface ISubscriptionTypeValueProps extends WithTranslation {
-  mode: SignalSubscriptionModeEnum;
+  mode: SubscriptionMode;
   percent: number;
   fixedVolume: number;
   rate: number;
   currency: CurrencyEnum;
 }
 
-const modes: { [key: string]: AttachToSignalProviderModeEnum } = {
+const modes: { [key: string]: SubscriptionMode } = {
   byBalance: "ByBalance",
   percentage: "Percent",
   fixed: "Fixed"
@@ -145,7 +141,7 @@ const modes: { [key: string]: AttachToSignalProviderModeEnum } = {
 
 interface OwnProps {
   currency: CurrencyEnum;
-  personalDetails: PersonalProgramDetailsFull;
+  personalDetails: PersonalProgramDetailsFullOld;
   openPopup(): void;
   rate: number;
 }

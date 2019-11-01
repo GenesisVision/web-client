@@ -1,6 +1,6 @@
 import "./create-program-broker.scss";
 
-import { Broker } from "gv-api-web";
+import { BrokerOld } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -20,7 +20,7 @@ const _CreateProgramBrokerContainer: React.FC<Props> = ({
   selectedBroker,
   navigateToSettings
 }) => {
-  const [brokers, setBrokers] = useState<Broker[] | undefined>(undefined);
+  const [brokers, setBrokers] = useState<BrokerOld[] | undefined>(undefined);
   useEffect(() => {
     fetchBrokers().then(brokers => {
       setBrokers(brokers);
@@ -51,8 +51,8 @@ const _CreateProgramBrokerContainer: React.FC<Props> = ({
 
 interface Props {
   navigateToSettings: () => void;
-  setSelectedBroker: (broker: Broker) => void;
-  selectedBroker?: Broker;
+  setSelectedBroker: (broker: BrokerOld) => void;
+  selectedBroker?: BrokerOld;
 }
 
 const CreateProgramBrokerContainer = React.memo(_CreateProgramBrokerContainer);

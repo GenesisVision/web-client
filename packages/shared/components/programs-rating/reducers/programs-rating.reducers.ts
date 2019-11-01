@@ -1,4 +1,4 @@
-import { LevelUpSummary, ProgramsListOld } from "gv-api-web";
+import { ProgramsListOld } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
@@ -58,3 +58,7 @@ const programsRatingReducer = combineReducers<ProgramsRatingState>({
 });
 
 export default programsRatingReducer;
+
+type LevelUpSummary = {
+  levelData: [];
+};

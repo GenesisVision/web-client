@@ -48,7 +48,7 @@ const _ProfitChartElements: React.FC<Props> = ({
       <ChartPeriod onChange={setPeriod} period={period} />
       <ChartCurrencySelector
         fullSelectCurrencies={platformCurrencies.map(
-          ({ name }) => name as CurrencyEnum
+          ({ name }: { name: any }) => name as CurrencyEnum
         )}
         maxCharts={
           selectCurrencies.length + chartData.selectedCurrencies.length

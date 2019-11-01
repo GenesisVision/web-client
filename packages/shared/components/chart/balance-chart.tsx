@@ -1,4 +1,4 @@
-import { BalanceChartElement } from "gv-api-web";
+import { BalanceChartElementOld, Currency } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -12,7 +12,6 @@ import {
 } from "recharts";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
 import GVColors from "shared/components/gv-styles/gv-colors";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
 const _BalanceChart: React.FC<Props> = ({
   tooltip,
@@ -76,8 +75,8 @@ interface Props {
     | React.StatelessComponent<any>
     | ContentRenderer<TooltipProps>;
   color: string;
-  balanceChart: BalanceChartElement[];
-  currency: CURRENCIES;
+  balanceChart: BalanceChartElementOld[];
+  currency: Currency;
 }
 
 const BalanceChart = React.memo(_BalanceChart);

@@ -1,5 +1,5 @@
 import { CreateAssetBack } from "components/create-asset/create-asset-back";
-import { Broker } from "gv-api-web";
+import { BrokerOld } from "gv-api-web";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import GVTabs from "shared/components/gv-tabs";
@@ -14,7 +14,7 @@ const _CreateProgramContainer: React.FC = () => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TAB>(TAB.BROKER);
 
-  const [selectedBroker, setSelectedBroker] = useState<Broker | undefined>(
+  const [selectedBroker, setSelectedBroker] = useState<BrokerOld | undefined>(
     undefined
   );
 

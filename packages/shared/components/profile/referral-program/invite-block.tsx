@@ -69,7 +69,9 @@ const _ShareBlock: React.FC<{
   useEffect(() => {
     // @ts-ignore
     window.addthis &&
+      // @ts-ignore
       window.addthis.layers.refresh &&
+      // @ts-ignore
       window.addthis.layers.refresh();
   }, [window]);
   return (

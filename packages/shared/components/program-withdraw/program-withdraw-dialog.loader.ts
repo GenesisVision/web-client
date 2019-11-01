@@ -1,8 +1,9 @@
 import faker from "faker";
-import { ProgramWithdrawInfo } from "gv-api-web";
+import { ManagerProgramWithdrawInfoOld } from "gv-api-web";
 import { getRandomInteger } from "shared/utils/helpers";
 
-export const ProgramWithdrawInfoLoaderData: ProgramWithdrawInfo = {
+//@ts-ignore
+export const ProgramWithdrawInfoLoaderData: ManagerProgramWithdrawInfoOld = {
   periodEnds: new Date(),
   title: faker.lorem.word(),
   availableToWithdraw: getRandomInteger(0, 100),

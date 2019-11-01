@@ -1,4 +1,4 @@
-import { FundDetails, ProgramDetailsOld } from "gv-api-web";
+import { FundDetailsOld, ProgramDetailsOld } from "gv-api-web";
 import { Action } from "redux";
 import { IDataModel } from "shared/constants/constants";
 import { MiddlewareDispatch, TGetState } from "shared/utils/types";
@@ -34,7 +34,7 @@ export type GetItemsFuncType = (
 export type GetItemsFuncActionType = (filters: ComposeFiltersAllType) => Action;
 
 export type TableToggleFavoriteType = (
-  asset: ProgramDetailsOld | FundDetails,
+  asset: ProgramDetailsOld | FundDetailsOld,
   updateRow: UpdateRowFuncType
 ) => TableToggleFavoriteHandlerType;
 

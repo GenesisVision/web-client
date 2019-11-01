@@ -1,4 +1,4 @@
-import { ManagersList } from "gv-api-web";
+import { ManagersListOld } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import ManagersTableRow from "shared/components/managers-table/components/managers-table-row";
@@ -8,7 +8,7 @@ import { Table } from "shared/components/table/components";
 import { SearchTableProps } from "./global-search-result";
 
 const ManagersTable: React.FC<
-  SearchTableProps<ManagersList> & WithTranslation
+  SearchTableProps<ManagersListOld> & WithTranslation
 > = ({ t, data, title }) => {
   return (
     <Table

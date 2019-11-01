@@ -1,4 +1,4 @@
-import { ProgramProfitChart } from "gv-api-web";
+import { ProgramProfitChartOld } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -7,7 +7,7 @@ import { apiSelector } from "shared/utils/selectors";
 
 import { FETCH_PROGRAM_PROFIT_CHART } from "../actions/program-details.actions";
 
-export type ProgramProfitChartDataType = Array<ProgramProfitChart>;
+export type ProgramProfitChartDataType = Array<ProgramProfitChartOld>;
 
 export type ProgramProfitChartState = IApiState<ProgramProfitChartDataType>;
 

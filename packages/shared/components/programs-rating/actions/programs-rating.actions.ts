@@ -1,4 +1,4 @@
-import { CancelablePromise, LevelUpSummary, ProgramsListOld } from "gv-api-web";
+import { CancelablePromise, ProgramsListOld } from "gv-api-web";
 import programApi from "shared/services/api-client/programs-api";
 import { ActionType } from "shared/utils/types";
 
@@ -10,6 +10,7 @@ export const fetchProgramsRating = (
   filters: IProgramsGetFilters
 ): ActionType<CancelablePromise<ProgramsListOld>> => ({
   type: PROGRAMS_RATING,
+  // @ts-ignore
   payload: programApi.getPrograms(filters)
 });
 
@@ -17,6 +18,7 @@ export const fetchSelfProgramsRating = (
   filters: IProgramsGetFilters
 ): ActionType<CancelablePromise<ProgramsListOld>> => ({
   type: SELF_PROGRAMS_RATING,
+  // @ts-ignore
   payload: programApi.getPrograms(filters)
 });
 
@@ -62,3 +64,7 @@ export interface IProgramsGetFilters {
   skip?: number;
   take?: number;
 }
+
+type LevelUpSummary = {
+  levelData: [];
+};

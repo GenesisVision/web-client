@@ -1,4 +1,4 @@
-import { PlatformCurrency, ProgramFacetTimeframeEnum } from "gv-api-web";
+import { PlatformCurrencyOld, Timeframe } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -95,10 +95,10 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
 export interface IFundsFacetTableProps {
   title: string;
   sorting: string;
-  timeframe: ProgramFacetTimeframeEnum;
+  timeframe: Timeframe;
   getItems: GetItemsFuncType;
   isAuthenticated?: boolean;
-  currencies?: PlatformCurrency[];
+  currencies?: PlatformCurrencyOld[];
   currency?: CurrencyEnum;
 }
 

@@ -1,4 +1,4 @@
-import { ProgramBalanceChartElement } from "gv-api-web";
+import { ProgramBalanceChartElementOld } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -117,7 +117,7 @@ const _ProgramBalanceChart: React.FC<Props> = ({
 
 interface Props {
   color: string;
-  balanceChart: ProgramBalanceChartElement[];
+  balanceChart: ProgramBalanceChartElementOld[];
   currency: CurrencyEnum;
 }
 

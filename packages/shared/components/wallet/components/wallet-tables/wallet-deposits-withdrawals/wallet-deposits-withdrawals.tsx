@@ -1,6 +1,6 @@
 import "./wallet-deposits-withdrawals.scss";
 
-import { PlatformInfo } from "gv-api-web";
+import { Currency, PlatformInfoOld } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -22,7 +22,6 @@ import {
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { reduceFilters } from "shared/components/wallet/components/wallet-tables/wallet-transactions/wallet-transaction-type-filter.helpers";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
@@ -109,11 +108,11 @@ interface Props extends OwnProps, StateProps, WithTranslation {}
 interface OwnProps {
   renderBodyRow: RenderBodyItemFuncType;
   columns: SortingColumn[];
-  currency?: CURRENCIES;
+  currency?: Currency;
 }
 
 interface StateProps extends WalletLastUpdateState {
-  platformData?: PlatformInfo;
+  platformData?: PlatformInfoOld;
 }
 
 const WalletDepositsWithdrawals = compose<React.ComponentType<OwnProps>>(

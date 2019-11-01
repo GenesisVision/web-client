@@ -8,9 +8,9 @@ import InvestmentLimitField from "components/create-asset/fields/investment-limi
 import StopOutField from "components/create-asset/fields/stop-out-field";
 import { InjectedFormikProps, withFormik } from "formik";
 import {
-  Broker,
-  NewProgramRequestTradesDelayEnum,
-  ProgramsInfo
+  BrokerOld,
+  ProgramsInfoOld,
+  TradesDelay as TradesDelayType
 } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -162,8 +162,8 @@ const _CreateProgramSettings: React.FC<Props> = ({
 };
 
 interface OwnProps {
-  programsInfo: ProgramsInfo;
-  broker: Broker;
+  programsInfo: ProgramsInfoOld;
+  broker: BrokerOld;
   onSubmit: (
     data: ICreateProgramSettingsFormValues,
     setSubmitting: SetSubmittingType
@@ -178,7 +178,7 @@ export interface ICreateProgramSettingsProps
 export interface ICreateProgramSettingsFormValues {
   [CREATE_PROGRAM_FIELDS.available]: number;
   [CREATE_PROGRAM_FIELDS.rate]: number;
-  [CREATE_PROGRAM_FIELDS.tradesDelay]: NewProgramRequestTradesDelayEnum;
+  [CREATE_PROGRAM_FIELDS.tradesDelay]: TradesDelayType;
   [CREATE_PROGRAM_FIELDS.currency]: string;
   [CREATE_PROGRAM_FIELDS.periodLength]?: number;
   [CREATE_PROGRAM_FIELDS.successFee]?: number;

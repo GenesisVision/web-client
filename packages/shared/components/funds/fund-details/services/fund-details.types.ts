@@ -1,4 +1,4 @@
-import { FundBalanceChart, FundProfitChart } from "gv-api-web";
+import { FundBalanceChartOld, FundProfitChartOld } from "gv-api-web";
 
 export type FundDetailsStatistic = {
   investors: number;
@@ -14,6 +14,6 @@ export type FundDetailsStatistic = {
 
 export type FundStatisticResult = {
   statistic: FundDetailsStatistic;
-  profitChart: FundProfitChart;
-  balanceChart: FundBalanceChart;
+  profitChart: FundProfitChartOld;
+  balanceChart: FundBalanceChartOld;
 };

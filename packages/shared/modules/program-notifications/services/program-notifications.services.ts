@@ -33,7 +33,7 @@ export const addProgramNotification: TAddNotification = (
       dispatch(fetchProgramNotifications(opts.assetId!));
       dispatch(alertMessageActions.success(message));
     })
-    .catch(data => {
+    .catch((data: { errorMessage: string }) => {
       dispatch(addErrorMessageAction(data.errorMessage));
     });
 

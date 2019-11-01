@@ -1,6 +1,6 @@
 import "./subscription-details.scss";
 
-import { PersonalProgramDetailsFull } from "gv-api-web";
+import { PersonalProgramDetailsFullOld } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import { connect, ResolveThunks } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
@@ -64,7 +64,7 @@ interface DispatchProps {
 interface Props extends DispatchProps {
   id: string;
   currency: CurrencyEnum;
-  personalDetails: PersonalProgramDetailsFull;
+  personalDetails: PersonalProgramDetailsFullOld;
 }
 
 const SubscriptionDetailsContainer = connect(

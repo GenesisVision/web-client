@@ -7,7 +7,7 @@ export const PASSWORD_RESTORE = "PASSWORD_RESTORE";
 
 export const forgotPasswordAction = (
   model: ForgotPasswordViewModel
-): ApiAction<string> => {
+): ApiAction<null> => {
   return {
     type: FORGOT_PASSWORD,
     payload: AuthApi.forgotPassword({ model })

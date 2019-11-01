@@ -1,4 +1,4 @@
-import { FundsListOld, PlatformAsset, PlatformCurrency } from "gv-api-web";
+import { FundsListOld, PlatformAsset, PlatformCurrencyOld } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
@@ -176,7 +176,7 @@ interface StateProps {
   isAuthenticated: boolean;
   data?: FundsListOld;
   fundAssets: PlatformAsset[];
-  currencies: PlatformCurrency[];
+  currencies: PlatformCurrencyOld[];
   currency: CurrencyEnum;
 }
 

@@ -1,8 +1,8 @@
 import {
   CancelablePromise,
-  ManagerProgramCreateResult,
   NewFundRequest,
-  NewProgramRequest
+  ProgramRequestOld,
+  TradingAccountCreateResult
 } from "gv-api-web";
 import { ASSET } from "shared/constants/constants";
 import managerApi from "shared/services/api-client/manager-api";
@@ -16,12 +16,12 @@ export type ICreateAssetSettingsFormValues =
   | ICreateProgramSettingsFormValues
   | ICreateFundSettingsFormValues;
 
-export type NewAssetRequest = NewFundRequest | NewProgramRequest;
+export type NewAssetRequest = NewFundRequest | ProgramRequestOld;
 
 export const createAsset = (
   createAssetData: ICreateAssetSettingsFormValues,
   asset: ASSET
-): CancelablePromise<ManagerProgramCreateResult> => {
+): CancelablePromise<TradingAccountCreateResult> => {
   const authorization = authService.getAuthArg();
   let promise = Promise.resolve("") as CancelablePromise<any>;
   if (createAssetData.logo.image) {
@@ -43,14 +43,16 @@ const getCreateMethod = (
   asset: ASSET
 ): ((
   request: NewAssetRequest
-) => CancelablePromise<ManagerProgramCreateResult>) => {
+) => CancelablePromise<TradingAccountCreateResult>) => {
   switch (asset) {
     case ASSET.PROGRAM:
       return (request: NewAssetRequest) =>
+        // @ts-ignore
         managerApi.createProgram(authService.getAuthArg(), {
-          request: request as NewProgramRequest
+          request: request as ProgramRequestOld
         });
     case ASSET.FUND:
+      // @ts-ignore
       return (request: NewAssetRequest) =>
         managerApi.createFund(authService.getAuthArg(), {
           request: request as NewFundRequest

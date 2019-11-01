@@ -1,6 +1,6 @@
 import "./managers-table.scss";
 
-import { ManagerProfile } from "gv-api-web";
+import { PublicProfile } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { localizedDate } from "shared/utils/dates";
 
 interface IManagersTableRowProps {
-  manager: ManagerProfile;
+  manager: PublicProfile;
   title: any;
 }
 const _ManagersTableRow: React.FC<IManagersTableRowProps & WithTranslation> = ({

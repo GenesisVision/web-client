@@ -1,7 +1,7 @@
 import "./program-period-line.scss";
 
 import classNames from "classnames";
-import { ProgramDetailsFullStatusEnum } from "gv-api-web";
+import { InvestmentProgramStatus } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import GVProgramPeriod from "shared/components/gv-program-period";
@@ -41,7 +41,7 @@ interface Props {
   start: number | Date;
   end: number | Date;
   className?: string;
-  status: ProgramDetailsFullStatusEnum;
+  status: InvestmentProgramStatus;
 }
 
 const ProgramPeriodLine = React.memo(_ProgramPeriodLine);

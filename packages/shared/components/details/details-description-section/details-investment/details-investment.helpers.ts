@@ -1,14 +1,14 @@
 import {
-  PersonalFundDetailsFull,
-  PersonalProgramDetailsFull
+  PersonalFundDetailsFullOld,
+  PersonalProgramDetailsFullOld
 } from "gv-api-web";
 
 export interface InvestmentDetails
-  extends PersonalFundDetailsFull,
-    PersonalProgramDetailsFull {}
+  extends PersonalFundDetailsFullOld,
+    PersonalProgramDetailsFullOld {}
 
 export const composeInvestmentDetails = (
-  personalDetails: PersonalFundDetailsFull | PersonalProgramDetailsFull
+  personalDetails: PersonalFundDetailsFullOld | PersonalProgramDetailsFullOld
 ) => ({
   canWithdraw: personalDetails.canWithdraw,
   canInvest: personalDetails.canInvest,

@@ -1,6 +1,6 @@
 import "shared/components/details/details.scss";
 
-import { FundDetailsFull } from "gv-api-web";
+import { FundDetailsFullOld } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -108,11 +108,11 @@ const _FundDetailsContainer: React.FC<Props> = ({
 
 interface Props {
   descriptionSection: IDescriptionSection;
-  data: FundDetailsFull;
+  data: FundDetailsFullOld;
 }
 
 const FundDetailsContainer = compose<
-  React.ComponentType<Props & WithBlurLoaderProps<FundDetailsFull>>
+  React.ComponentType<Props & WithBlurLoaderProps<FundDetailsFullOld>>
 >(
   withBlurLoader,
   React.memo

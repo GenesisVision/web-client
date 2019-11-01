@@ -1,6 +1,6 @@
 import "./request-line.scss";
 
-import { AssetDetailsAssetTypeEnum, ProgramRequest } from "gv-api-web";
+import { AssetType, ProgramRequestOld } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -46,7 +46,11 @@ const _RequestLine: React.FC<Props> = ({
     color: request.color,
     url: "",
     id: request.programId,
-    assetType: "Programs" as AssetDetailsAssetTypeEnum
+    assetType: "Programs" as AssetType,
+    programDetails: {
+      level: 0,
+      levelProgress: 0
+    }
   };
   return (
     <div className="request-line">
@@ -159,7 +163,7 @@ const _RequestLine: React.FC<Props> = ({
 interface Props {
   successFee?: number;
   exitFee?: number;
-  request: ProgramRequest;
+  request: ProgramRequestOld;
   cancelRequest: (x: CancelRequestPropsType) => void;
   onApplyCancelRequest(): void;
   asset?: ASSET;

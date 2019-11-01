@@ -1,4 +1,4 @@
-import { FundDetailsFull } from "gv-api-web";
+import { FundDetailsFullOld } from "gv-api-web";
 import React from "react";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { CurrencyEnum } from "shared/utils/types";
@@ -17,5 +17,5 @@ export interface IFundWithdrawalContainerProps extends IDialogProps {
 
 export interface IFundControlsProps {
   isAuthenticated: boolean;
-  fundDescription: FundDetailsFull;
+  fundDescription: FundDetailsFullOld;
 }

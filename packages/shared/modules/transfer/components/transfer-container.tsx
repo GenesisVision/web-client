@@ -1,4 +1,4 @@
-import { InternalTransferRequestSourceTypeEnum } from "gv-api-web";
+import { TransferRequestType } from "gv-api-web";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
@@ -36,9 +36,10 @@ const _TransferContainer: React.FC<Props> = ({
   });
   useEffect(() => {
     if (
-      destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
-      sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+      destinationType === (TRANSFER_DIRECTION.COPYTRADING_ACCOUNT as any) ||
+      sourceType === (TRANSFER_DIRECTION.COPYTRADING_ACCOUNT as any)
     )
+      // TODO
       dispatch(fetchAccounts());
   }, []);
   const handleSubmit = useCallback(
@@ -48,9 +49,10 @@ const _TransferContainer: React.FC<Props> = ({
         dispatch(fetchWallets(currency));
         dispatch(updateWalletTimestampAction());
         if (
-          destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
-          sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
+          destinationType === (TRANSFER_DIRECTION.COPYTRADING_ACCOUNT as any) ||
+          sourceType === (TRANSFER_DIRECTION.COPYTRADING_ACCOUNT as any)
         )
+          // TODO
           dispatch(fetchAccounts());
       }),
     [destinationType, sourceType]
@@ -81,8 +83,8 @@ const _TransferContainer: React.FC<Props> = ({
 interface Props {
   currentItem: ItemType;
   onClose(): void;
-  sourceType: InternalTransferRequestSourceTypeEnum;
-  destinationType: InternalTransferRequestSourceTypeEnum;
+  sourceType: TransferRequestType;
+  destinationType: TransferRequestType;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }

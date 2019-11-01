@@ -1,4 +1,4 @@
-import { ProgramPwdUpdate } from "gv-api-web";
+import { TradingAccountPwdUpdate } from "gv-api-web";
 import { Dispatch } from "redux";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -10,7 +10,7 @@ export const changePasswordTradingAccount = ({
   model
 }: {
   id: string;
-  model?: ProgramPwdUpdate;
+  model?: TradingAccountPwdUpdate;
 }): any => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
   return managerApi

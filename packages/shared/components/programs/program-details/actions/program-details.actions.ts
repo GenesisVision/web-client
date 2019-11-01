@@ -2,10 +2,10 @@ import {
   CancelablePromise,
   InvestmentEventViewModels,
   LevelsParamsInfo,
-  ProgramBalanceChart,
+  ProgramBalanceChartOld,
   ProgramDetailsFullOld,
   ProgramPeriodsViewModel,
-  ProgramProfitChart,
+  ProgramProfitChartOld,
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
@@ -44,7 +44,7 @@ const sendProgramChartRequest = (
   { start, end }: ChartDefaultPeriod,
   id: string,
   currency: CurrencyEnum
-): CancelablePromise<ProgramProfitChart> =>
+): CancelablePromise<ProgramProfitChartOld> =>
   programsApi.getProgramProfitChart(id, {
     dateFrom: start,
     dateTo: end,
@@ -93,7 +93,7 @@ export const fetchProgramBalanceChartAction = (
   id: string,
   period = getDefaultPeriod(),
   currency: CurrencyEnum
-): ApiAction<ProgramBalanceChart> => ({
+): ApiAction<ProgramBalanceChartOld> => ({
   type: FETCH_PROGRAM_BALANCE_CHART,
   payload: programsApi.getProgramBalanceChart(id, {
     currency,

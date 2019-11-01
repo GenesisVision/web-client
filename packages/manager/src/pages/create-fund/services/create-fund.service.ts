@@ -1,4 +1,4 @@
-import { PlatformInfo } from "gv-api-web";
+import { PlatformInfoOld } from "gv-api-web";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import { getRandomInteger } from "shared/utils/helpers";
@@ -6,7 +6,7 @@ import { getRandomInteger } from "shared/utils/helpers";
 export const fetchMinimumDepositAmount = () =>
   managerApi.getFundInvestment(authService.getAuthArg());
 
-export const PlatformDataLoaderData: PlatformInfo = {
+export const PlatformDataLoaderData: PlatformInfoOld = {
   programsInfo: {
     managerProgramInvestment: getRandomInteger(1, 10),
     managerProgramInvestmentUSD: getRandomInteger(1, 10),
@@ -23,4 +23,4 @@ export const PlatformDataLoaderData: PlatformInfo = {
     managerMinSignalSuccessFee: getRandomInteger(1, 10),
     periods: [getRandomInteger(1, 10)]
   }
-} as PlatformInfo;
+} as PlatformInfoOld;

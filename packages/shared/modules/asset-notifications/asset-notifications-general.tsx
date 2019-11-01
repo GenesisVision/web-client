@@ -1,7 +1,4 @@
-import {
-  NotificationSettingViewModel,
-  NotificationSettingViewModelTypeEnum
-} from "gv-api-web";
+import { NotificationSettingViewModel, NotificationType } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -26,9 +23,7 @@ const _AssetNotificationsGeneral: React.FC<Props> = ({
   const [t] = useTranslation();
   const dispatch = useDispatch();
   const getNotification = useCallback(
-    (
-      type: NotificationSettingViewModelTypeEnum
-    ): NotificationSettingViewModel =>
+    (type: NotificationType): NotificationSettingViewModel =>
       settings.find(setting => setting.type === type)!,
     [settings]
   );
@@ -84,7 +79,7 @@ interface Props {
 }
 
 export interface INotification {
-  name: NotificationSettingViewModelTypeEnum;
+  name: NotificationType;
   label: string;
 }
 

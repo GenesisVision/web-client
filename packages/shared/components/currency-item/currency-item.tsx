@@ -59,7 +59,7 @@ const _CurrencyItem: React.FC<Props> = ({
         <ActivePopup
           open={isOpenPopup}
           onClose={setClosePopup}
-          active={symbol || name}
+          active={symbol! || name!}
         />
       </>
     )) ||

@@ -1,4 +1,4 @@
-import { InternalTransferRequestSourceTypeEnum } from "gv-api-web";
+import { TransferRequestType } from "gv-api-web";
 import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
 import { ItemType } from "shared/components/wallet-select/wallet-select";
@@ -31,8 +31,8 @@ interface Props {
   currentItem: ItemType;
   onClose(): void;
   open: boolean;
-  sourceType?: InternalTransferRequestSourceTypeEnum;
-  destinationType?: InternalTransferRequestSourceTypeEnum;
+  sourceType?: TransferRequestType;
+  destinationType?: TransferRequestType;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }

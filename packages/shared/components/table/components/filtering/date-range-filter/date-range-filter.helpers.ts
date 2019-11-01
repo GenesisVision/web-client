@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { ProgramFacetTimeframeEnum } from "gv-api-web";
+import { Timeframe } from "gv-api-web";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import { IComposeDefaultFilter } from "../../table.types";
@@ -14,7 +14,7 @@ import {
 } from "./date-range-filter.constants";
 
 export const mapServerTimeFrameToFilterType = (
-  timeFrame: ProgramFacetTimeframeEnum
+  timeFrame: Timeframe
 ): DATA_RANGE_FILTER_TYPES => {
   switch (timeFrame) {
     case "Week":

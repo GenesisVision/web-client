@@ -1,8 +1,8 @@
 import faker from "faker";
-import { InvestmentEventViewModel, ProgramRequests } from "gv-api-web";
+import { InvestmentEventViewModel, ProgramRequestsOld } from "gv-api-web";
 import { tableLoaderCreator } from "shared/utils/helpers";
 
-export const inRequestsLoaderData: ProgramRequests = {
+export const inRequestsLoaderData: ProgramRequestsOld = {
   requests: [],
   total: 0,
   totalValue: 0
@@ -18,7 +18,11 @@ const investmentEventViewModelCreator = (): InvestmentEventViewModel => ({
     color: faker.internet.color(),
     title: faker.lorem.word(),
     url: "",
-    assetType: "None"
+    assetType: "None",
+    programDetails: {
+      level: 1,
+      levelProgress: 100
+    }
   },
   amount: 0,
   currency: "GVT",

@@ -35,13 +35,13 @@ export const addNotificationSettingAction = (
   type: ADD_NOTIFICATION_SETTING,
   payload: notificationsApi.addNotificationsSettings(
     authService.getAuthArg(),
-    opts
+    opts as any
   )
 });
 
 export const removeNotificationSettingAction = (
   id: string
-): ActionType<CancelablePromise<void>> => ({
+): ActionType<CancelablePromise<null>> => ({
   type: REMOVE_NOTIFICATION_SETTING,
   payload: notificationsApi.removeNotificationsSettings(
     id,

@@ -1,4 +1,4 @@
-import { ProgramRequests } from "gv-api-web";
+import { ProgramRequestsOld } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -7,14 +7,14 @@ import { AuthRootState } from "shared/utils/types";
 
 import { DASHBOARD_IN_REQUESTS } from "../actions/dashboard.actions";
 
-export type DashboardInRequestsState = IApiState<ProgramRequests>;
+export type DashboardInRequestsState = IApiState<ProgramRequestsOld>;
 
 export const dashboardInRequestsSelector = apiSelector<
-  ProgramRequests,
+  ProgramRequestsOld,
   AuthRootState
 >(state => state.dashboard.inRequestsData);
 
-const dashboardInRequestsReducer = apiReducerFactory<ProgramRequests>({
+const dashboardInRequestsReducer = apiReducerFactory<ProgramRequestsOld>({
   apiType: DASHBOARD_IN_REQUESTS
 });
 

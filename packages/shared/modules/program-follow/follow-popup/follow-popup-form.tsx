@@ -2,10 +2,9 @@ import "./follow-popup.scss";
 
 import {
   AttachToSignalProvider,
-  AttachToSignalProviderFixedCurrencyEnum,
-  AttachToSignalProviderInitialDepositCurrencyEnum,
-  AttachToSignalProviderModeEnum,
+  Currency,
   SignalSubscription,
+  SubscriptionMode,
   WalletData
 } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
@@ -22,12 +21,12 @@ import FollowParams, { FollowParamsFormValues } from "./follow-popup-params";
 import FollowTop from "./follow-popup-top";
 
 const initRequestParams = {
-  mode: "ByBalance" as AttachToSignalProviderModeEnum,
+  mode: "ByBalance" as SubscriptionMode,
   percent: 10,
   openTolerancePercent: 0.5,
   fixedVolume: 100,
-  fixedCurrency: "USD" as AttachToSignalProviderFixedCurrencyEnum,
-  initialDepositCurrency: "GVT" as AttachToSignalProviderInitialDepositCurrencyEnum,
+  fixedCurrency: "USD" as Currency,
+  initialDepositCurrency: "GVT" as Currency,
   initialDepositAmount: 0
 };
 
@@ -42,6 +41,7 @@ const _FollowForm: React.FC<Props> = ({
 }) => {
   const { tab, setTab } = useTab<TABS>(TABS.CREATE_ACCOUNT);
   const [requestParams, setRequestParams] = useState<AttachToSignalProvider>(
+    // @ts-ignore
     initRequestParams
   );
   useEffect(() => {

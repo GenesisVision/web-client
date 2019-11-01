@@ -1,4 +1,4 @@
-import { Broker, MigrationRequest } from "gv-api-web";
+import { BrokerOld, MigrationRequestOld } from "gv-api-web";
 import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React from "react";
@@ -114,10 +114,10 @@ interface Props extends CancelChangeBrokerFormOwnProps, WithTranslation {}
 export interface CancelChangeBrokerFormOwnProps {
   isSignalProgram: boolean;
   onSubmit: () => void;
-  brokerFrom: Broker;
+  brokerFrom: BrokerOld;
   currentAccountTypeId: string;
   leverage: number;
-  migration: MigrationRequest;
+  migration: MigrationRequestOld;
 }
 
 const CancelChangeBrokerForm = compose<

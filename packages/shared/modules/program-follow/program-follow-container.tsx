@@ -64,7 +64,7 @@ const _ProgramFollowContainer: React.FC<Props> = ({
         .then(() => dispatch(alertMessageActions.success(t(successMessage))))
         .then(onApply)
         .then(onClose)
-        .catch(({ errorMessage }) =>
+        .catch(({ errorMessage }: { errorMessage: string }) =>
           dispatch(alertMessageActions.error(errorMessage))
         )
         .finally(() => setSubmitting(false));

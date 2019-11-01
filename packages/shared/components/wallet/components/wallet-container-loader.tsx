@@ -63,6 +63,7 @@ export const walletMultiSummaryLoaderData: WalletMultiSummary = {
     pendingCcy: getRandomInteger(1, 1000),
     totalCcy: getRandomInteger(1, 1000)
   },
+  // @ts-ignore
   wallets: Array(4)
     .fill("")
     .map(walletDataCreator),
@@ -71,6 +72,7 @@ export const walletMultiSummaryLoaderData: WalletMultiSummary = {
 
 export const getAccountLoaderData = (): CopyTradingAccountInfo => ({
   id: "",
+  // @ts-ignore
   currency: "",
   logo: "",
   title: faker.lorem.word(),

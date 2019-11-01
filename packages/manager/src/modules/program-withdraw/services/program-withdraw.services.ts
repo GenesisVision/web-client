@@ -1,4 +1,4 @@
-import { ManagerProgramWithdrawInfo } from "gv-api-web";
+import { Currency, ManagerProgramWithdrawInfoOld } from "gv-api-web";
 import { ProgramWithdrawType } from "shared/components/program-withdraw/program-withdraw-popup";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
@@ -7,8 +7,8 @@ import { ManagerThunk } from "shared/utils/types";
 
 export const getProgramWithdrawInfo = (
   id: string,
-  currency: string
-) => (): Promise<ManagerProgramWithdrawInfo> =>
+  currency: Currency
+) => (): Promise<ManagerProgramWithdrawInfoOld> =>
   managerApi.getProgramWithdrawInfo(id, currency, authService.getAuthArg());
 
 export const withdrawProgramById = (id: string, onClose: () => void) => (

@@ -1,7 +1,7 @@
 import "./transfer-form.scss";
 
 import { FormikProps, withFormik } from "formik";
-import { InternalTransferRequestSourceTypeEnum } from "gv-api-web";
+import { TransferRequestType } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
@@ -268,8 +268,8 @@ enum FIELDS {
 interface OwnProps {
   onSubmit(values: TransferFormValues, setSubmitting: SetSubmittingType): void;
   currentItem: ItemType;
-  sourceType: InternalTransferRequestSourceTypeEnum;
-  destinationType: InternalTransferRequestSourceTypeEnum;
+  sourceType: TransferRequestType;
+  destinationType: TransferRequestType;
   sourceItems: ItemsType;
   destinationItems: ItemsType;
   errorMessage?: string;
@@ -279,9 +279,9 @@ interface OwnProps {
 
 export interface TransferFormValues {
   sourceId: string;
-  sourceType: InternalTransferRequestSourceTypeEnum;
+  sourceType: TransferRequestType;
   destinationId: string;
-  destinationType: InternalTransferRequestSourceTypeEnum;
+  destinationType: TransferRequestType;
   amount?: number;
   transferAll: boolean;
 }

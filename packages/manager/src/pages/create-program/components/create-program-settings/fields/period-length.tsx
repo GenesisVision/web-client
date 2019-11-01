@@ -1,5 +1,5 @@
 import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
-import { ProgramsInfo } from "gv-api-web";
+import { ProgramsInfoOld } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -30,7 +30,7 @@ const _PeriodLength: React.FC<Props> = ({ name, programsInfo }) => {
 };
 
 interface Props {
-  programsInfo: ProgramsInfo;
+  programsInfo: ProgramsInfoOld;
   name: string;
 }
 

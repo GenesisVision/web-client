@@ -1,4 +1,4 @@
-import { FundDetailsFull, PlatformAsset, ProgramsInfo } from "gv-api-web";
+import { FundDetailsFullOld, PlatformAsset, ProgramsInfoOld } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import InvestmentFees from "modules/asset-settings/investment-fees";
@@ -59,10 +59,10 @@ const _FundSettings: React.FC<Props> = ({
 interface Props extends OwnProps {}
 
 interface OwnProps {
-  programsInfo: ProgramsInfo;
+  programsInfo: ProgramsInfoOld;
   reallocate: () => void;
   platformAssets: PlatformAsset[];
-  details: FundDetailsFull;
+  details: FundDetailsFullOld;
   closeAsset: () => void;
   editAsset: TUpdateFundFunc;
 }

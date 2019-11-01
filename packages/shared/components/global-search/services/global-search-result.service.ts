@@ -1,11 +1,11 @@
-import { SearchViewModel } from "gv-api-web";
+import { SearchViewModelOld } from "gv-api-web";
 import searchApi from "shared/services/api-client/search-api";
 import authService from "shared/services/auth-service";
 import { Nullable } from "shared/utils/types";
 
 export const search = (
   queryValue: string = ""
-): Promise<Nullable<SearchViewModel>> => {
+): Promise<Nullable<SearchViewModelOld>> => {
   const trimmedQuery = queryValue.trim();
   if (trimmedQuery.length === 0) return Promise.resolve(null);
 

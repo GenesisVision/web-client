@@ -1,6 +1,6 @@
 import "./manager.page.scss";
 
-import { ManagerProfile } from "gv-api-web";
+import { PublicProfile } from "gv-api-web";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useApiRequest from "shared/hooks/api-request.hook";
@@ -11,7 +11,7 @@ import { fetchManagerProfile } from "./services/manager.service";
 
 const _ManagerContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const { data, sendRequest, isPending } = useApiRequest<ManagerProfile>({
+  const { data, sendRequest, isPending } = useApiRequest<PublicProfile>({
     request: () => dispatch(fetchManagerProfile())
   });
   useEffect(() => {

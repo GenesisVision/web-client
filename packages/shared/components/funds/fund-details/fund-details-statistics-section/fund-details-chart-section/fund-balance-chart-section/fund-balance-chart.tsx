@@ -1,4 +1,4 @@
-import { BalanceChartElement } from "gv-api-web";
+import { BalanceChartElementOld, Currency } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -10,7 +10,6 @@ import {
 } from "recharts";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
 import GVColors from "shared/components/gv-styles/gv-colors";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
 import FundBalanceTooltip from "./fund-balance-tooltip";
 
@@ -71,8 +70,8 @@ const FundBalanceChart: React.FC<Props> = ({
 
 interface Props {
   color: string;
-  balanceChart: BalanceChartElement[];
-  currency: CURRENCIES;
+  balanceChart: BalanceChartElementOld[];
+  currency: Currency;
 }
 
 export default React.memo(FundBalanceChart);

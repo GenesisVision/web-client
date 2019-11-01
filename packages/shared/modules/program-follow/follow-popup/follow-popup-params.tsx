@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { AttachToSignalProviderModeEnum, SignalSubscription } from "gv-api-web";
+import { SignalSubscription, SubscriptionMode } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -152,7 +152,7 @@ enum FIELDS {
 type mode = {
   label: string;
   tooltip: string;
-  value: AttachToSignalProviderModeEnum;
+  value: SubscriptionMode;
 };
 
 const modes: { [key: string]: mode } = {
@@ -174,7 +174,7 @@ const modes: { [key: string]: mode } = {
 };
 
 export interface FollowParamsFormValues {
-  [FIELDS.mode]: AttachToSignalProviderModeEnum;
+  [FIELDS.mode]: SubscriptionMode;
   [FIELDS.openTolerancePercent]: number;
   [FIELDS.percent]: number;
   [FIELDS.fixedVolume]: number;
@@ -204,7 +204,7 @@ const FollowParams = compose<React.ComponentType<OwnProps>>(
       return {
         [FIELDS.mode]: params
           ? params.mode
-          : (modes.byBalance.value as AttachToSignalProviderModeEnum),
+          : (modes.byBalance.value as SubscriptionMode),
         [FIELDS.openTolerancePercent]: params
           ? params.openTolerancePercent
           : 0.5,

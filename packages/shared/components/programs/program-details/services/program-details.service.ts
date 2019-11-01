@@ -1,5 +1,6 @@
 import {
   CancelablePromise,
+  Currency,
   InvestmentEventViewModels,
   LevelInfo,
   ProgramPeriodsViewModel,
@@ -84,7 +85,7 @@ export const dispatchProgramDescription: DispatchDescriptionType = () => (
 
 export const getProgramStatistic = (
   programId: string,
-  currency = "",
+  currency: Currency,
   period = getDefaultPeriod()
 ): Promise<ProgramStatisticResult> => {
   const chartFilter = {
@@ -130,7 +131,7 @@ export const closePeriod = (
         )
       );
     })
-    .catch(error => {
+    .catch((error: { errorMessage: string }) => {
       onError();
       dispatch(alertMessageActions.error(error.errorMessage));
     });
@@ -173,7 +174,7 @@ export const getSubscriptions = (programId: string) => (
 };
 
 export const fetchInvestmentsLevels = (
-  currency: string
+  currency: Currency
 ): CancelablePromise<LevelInfo[]> =>
   platformApi.getProgramsLevels({ currency }).then(({ levels }) => levels);
 

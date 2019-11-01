@@ -1,4 +1,4 @@
-import { FilterModel, PlatformInfo, ProgramsInfo } from "gv-api-web";
+import { FilterModelOld, PlatformInfoOld, ProgramsInfoOld } from "gv-api-web";
 import { createSelector } from "reselect";
 import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
@@ -16,9 +16,9 @@ import { AuthRootState } from "shared/utils/types";
 
 import { RootState } from "./root-reducer";
 
-export type PlatformState = IApiState<PlatformInfo>;
+export type PlatformState = IApiState<PlatformInfoOld>;
 
-export const platformDataSelector = apiSelector<PlatformInfo>(
+export const platformDataSelector = apiSelector<PlatformInfoOld>(
   state => state.platformData
 );
 
@@ -61,12 +61,12 @@ export const fundAssetsSelector = apiFieldSelector(
 export const programsInfoSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.programsInfo),
-  {} as ProgramsInfo
+  {} as ProgramsInfoOld
 );
 
 export const assetTypeValuesSelector = createSelector<
   AuthRootState,
-  PlatformInfo | undefined,
+  PlatformInfoOld | undefined,
   SelectFilterValue<string>[]
 >(
   state => platformDataSelector(state),
@@ -81,7 +81,7 @@ export const assetTypeValuesSelector = createSelector<
 
 export const allEventsSelector = createSelector<
   AuthRootState,
-  PlatformInfo | undefined,
+  PlatformInfoOld | undefined,
   SelectFilterValue<string>[]
 >(
   state => platformDataSelector(state),
@@ -100,7 +100,7 @@ export const allEventsSelector = createSelector<
 export const assetEventsSelectorCreator = (asset: ASSET) =>
   createSelector<
     RootState,
-    PlatformInfo | undefined,
+    PlatformInfoOld | undefined,
     SelectFilterValue<string>[]
   >(
     state => platformDataSelector(state),
@@ -111,7 +111,7 @@ export const assetEventsSelectorCreator = (asset: ASSET) =>
         `${asset.toLowerCase()}Details`
       ].map(
         // TODO remove after union
-        ({ key, title }: FilterModel) => ({
+        ({ key, title }: FilterModelOld) => ({
           value: key,
           labelKey: title
         })
@@ -123,7 +123,7 @@ export const fundEventsSelector = assetEventsSelectorCreator(ASSET.FUND);
 
 export const programEventsSelector = assetEventsSelectorCreator(ASSET.PROGRAM);
 
-const platformReducer = apiReducerFactory<PlatformInfo>({
+const platformReducer = apiReducerFactory<PlatformInfoOld>({
   apiType: PLATFORM_SETTINGS
 });
 

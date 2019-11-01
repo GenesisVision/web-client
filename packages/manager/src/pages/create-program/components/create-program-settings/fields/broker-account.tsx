@@ -1,5 +1,5 @@
 import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
-import { BrokerAccountType } from "gv-api-web";
+import { BrokerAccountTypeOld } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -53,7 +53,7 @@ interface Props {
   setCurrency: (value: string) => void;
   setAccountType: (value: string) => void;
   name: string;
-  accountTypes: BrokerAccountType[];
+  accountTypes: BrokerAccountTypeOld[];
 }
 
 const BrokerAccount = React.memo(_BrokerAccount);

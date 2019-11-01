@@ -1,4 +1,4 @@
-import { CancelablePromise, ProgramWithdrawInfo } from "gv-api-web";
+import { CancelablePromise, ProgramWithdrawInfoOld } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
@@ -19,7 +19,7 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
   withdraw
 }) => {
   const { errorMessage, data, sendRequest } = useApiRequest<
-    ProgramWithdrawInfo
+    ProgramWithdrawInfoOld
   >({ request: fetchInfo });
   useEffect(() => {
     open && sendRequest();
@@ -39,7 +39,7 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
 };
 
 interface Props extends IDialogProps, IProgramWithdrawPopupProps {
-  fetchInfo: () => CancelablePromise<ProgramWithdrawInfo>;
+  fetchInfo: () => CancelablePromise<ProgramWithdrawInfoOld>;
 }
 
 const ProgramWithdrawDialog = React.memo(_ProgramWithdrawDialog);

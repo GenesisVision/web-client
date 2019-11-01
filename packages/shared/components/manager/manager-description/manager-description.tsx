@@ -1,6 +1,6 @@
 import "./manager-description.scss";
 
-import { ManagerProfile } from "gv-api-web";
+import { PublicProfile } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
@@ -11,7 +11,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { localizedDate } from "shared/utils/dates";
 
 const _ManagerDescription: React.FC<
-  { managerProfile: ManagerProfile } & WithTranslation
+  { managerProfile: PublicProfile } & WithTranslation
 > = ({ t, managerProfile }) => (
   <div className="manager-description">
     <div className="manager-description__left">

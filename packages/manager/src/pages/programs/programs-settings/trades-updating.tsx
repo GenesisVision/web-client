@@ -1,5 +1,5 @@
 import { FormikProps, withFormik } from "formik";
-import { ProgramDetailsFullTradesDelayEnum } from "gv-api-web";
+import { TradesDelay as TradesDelayType } from "gv-api-web";
 import TradesDelay from "pages/create-program/components/create-program-settings/fields/trades-delay";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -39,13 +39,13 @@ enum FIELDS {
 }
 
 export interface TradesUpdatingFormValues {
-  [FIELDS.tradesDelay]: ProgramDetailsFullTradesDelayEnum;
+  [FIELDS.tradesDelay]: TradesDelayType;
 }
 
 interface Props extends OwnProps, FormikProps<TradesUpdatingFormValues> {}
 
 interface OwnProps {
-  tradesDelay: ProgramDetailsFullTradesDelayEnum;
+  tradesDelay: TradesDelayType;
   onSubmit: (
     values: TradesUpdatingFormValues,
     setSubmitting: SetSubmittingType

@@ -57,7 +57,7 @@ export const fetchPrograms = (
 ): CancelablePromise<IDataModel> =>
   programApi
     .getPrograms({
-      ...filters,
+      ...(filters as any),
       authorization: authService.getAuthArg()
     })
     .then(data => ({

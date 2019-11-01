@@ -1,6 +1,6 @@
 import {
-  FundDetailsFull,
-  PersonalFundDetailsFull,
+  FundDetailsFullOld,
+  PersonalFundDetailsFullOld,
   PersonalProgramDetailsFullOld,
   ProgramDetailsFullOld
 } from "gv-api-web";
@@ -46,8 +46,8 @@ interface Props {
   settingsUrl: string;
   AssetDetailsAvatar: React.ComponentType<any>;
   AssetDetailsExtraBlock: React.ComponentType<any>;
-  description: FundDetailsFull | ProgramDetailsFullOld;
-  personalDetails: PersonalProgramDetailsFullOld | PersonalFundDetailsFull;
+  description: FundDetailsFullOld | ProgramDetailsFullOld;
+  personalDetails: PersonalProgramDetailsFullOld | PersonalFundDetailsFullOld;
 }
 
 const DetailsDescription = React.memo(_DetailsDescription);

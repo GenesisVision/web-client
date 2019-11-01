@@ -1,8 +1,8 @@
-import { PlatformCurrency } from "gv-api-web";
+import { PlatformCurrencyOld } from "gv-api-web";
 import { SelectFilterValue } from "shared/components/table/components/filtering/filter.type";
 
 export const composeCurrencyMap = (
-  currencies: PlatformCurrency[] | undefined = []
+  currencies: PlatformCurrencyOld[] | undefined = []
 ): SelectFilterValue<string | undefined>[] => [
   { value: undefined, label: "Base" },
   ...currencies.map(({ name }) => ({ value: name, label: name }))

@@ -3,7 +3,7 @@ import {
   DashboardChartValue,
   FundsListOld,
   InvestmentEventViewModels,
-  ProgramRequests,
+  ProgramRequestsOld,
   ProgramsListOld,
   SignalsList
 } from "gv-api-web";
@@ -81,7 +81,7 @@ export const fetchInRequestsAction = (
   auth: string,
   skip: number,
   take: number
-): ActionType<CancelablePromise<ProgramRequests>> => ({
+): ActionType<CancelablePromise<ProgramRequestsOld>> => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: investorApi.getRequests(skip, take, auth)
 });

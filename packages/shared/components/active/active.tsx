@@ -1,9 +1,10 @@
 import "./active.scss";
 
 import * as faker from "faker";
-import { SocialLinkViewModelTypeEnum } from "gv-api-web";
+import { SocialLinkType } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+// @ts-ignore
 import TradingViewWidget, { Themes } from "react-tradingview-widget";
 import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
@@ -16,7 +17,7 @@ const SocialLinksMock = {
   logo: "",
   name: "",
   value: "",
-  type: "Undefined" as SocialLinkViewModelTypeEnum
+  type: "Undefined" as SocialLinkType
 };
 const SocialLinksMocks = Array(5)
   .fill("")

@@ -7,5 +7,6 @@ export enum SIGNUP_FORM_FIELDS {
   email = "email",
   confirmPassword = "confirmPassword",
   refCode = "refCode",
-  isAuto = "isAuto"
+  isAuto = "isAuto",
+  userName = "userName"
 }

@@ -1,6 +1,7 @@
 import {
   CancelablePromise,
   CopyTradingAccountInfo,
+  Currency,
   MultiWalletExternalTransaction,
   WalletBaseData
 } from "gv-api-web";
@@ -9,7 +10,6 @@ import {
   mapToTableItems,
   TableItems
 } from "shared/components/table/helpers/mapper";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
@@ -55,7 +55,7 @@ export const onPayFeesWithGvt = () =>
   walletApi.switchPayFeeInGvtOn(authService.getAuthArg());
 
 export const fetchMultiTransactions = (
-  currency?: CURRENCIES,
+  currency?: Currency,
   filters?: FilteringType
 ) => {
   const authorization = authService.getAuthArg();
@@ -74,7 +74,7 @@ export const fetchCopytradingAccounts = () =>
     .then(mapToTableItems<CopyTradingAccountInfo>("accounts"));
 
 export const fetchMultiTransactionsExternal = (
-  currency?: string,
+  currency?: Currency,
   filters?: FilteringType
 ): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
   const authorization = authService.getAuthArg();

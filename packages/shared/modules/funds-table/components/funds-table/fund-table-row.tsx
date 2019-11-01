@@ -1,4 +1,4 @@
-import { FundDetails } from "gv-api-web";
+import { FundDetailsOld } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -110,7 +110,7 @@ const _FundsTableRow: React.FC<Props> = ({
 );
 
 interface Props {
-  fund: FundDetails;
+  fund: FundDetailsOld;
   isAuthenticated?: boolean;
   toggleFavorite?: TableToggleFavoriteHandlerType;
   title?: JSX.Element | string;

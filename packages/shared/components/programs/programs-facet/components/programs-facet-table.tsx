@@ -1,4 +1,4 @@
-import { PlatformCurrency, ProgramFacetTimeframeEnum } from "gv-api-web";
+import { PlatformCurrencyOld, Timeframe } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -105,10 +105,10 @@ const _ProgramsFacetTable: React.FC<
 
 export interface IProgramsFacetTableProps {
   currency?: CurrencyEnum;
-  currencies?: PlatformCurrency[];
+  currencies?: PlatformCurrencyOld[];
   title: string;
   sorting: string;
-  timeframe: ProgramFacetTimeframeEnum;
+  timeframe: Timeframe;
   getItems: GetItemsFuncType;
   isAuthenticated?: boolean;
   showRating?: boolean;

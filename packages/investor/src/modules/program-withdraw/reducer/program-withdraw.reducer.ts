@@ -1,4 +1,4 @@
-import { ProgramWithdrawInfo } from "gv-api-web";
+import { ProgramWithdrawInfoOld } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
@@ -9,7 +9,7 @@ import {
   WITHDRAW_SUBMIT_BY_ID
 } from "../program-withdraw.constants";
 
-const programWithdrawReducer = apiReducerFactory<ProgramWithdrawInfo>({
+const programWithdrawReducer = apiReducerFactory<ProgramWithdrawInfoOld>({
   apiType: FETCH_WITHDRAW_PROGRAM_INFO
 });
 
@@ -18,7 +18,7 @@ const withdrawSubmitReducer = apiReducerFactory<any>({
 });
 
 export type IProgramWithdrawState = Readonly<{
-  info: IApiState<ProgramWithdrawInfo>;
+  info: IApiState<ProgramWithdrawInfoOld>;
   submit: IApiState<any>;
 }>;
 

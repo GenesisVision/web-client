@@ -23,7 +23,7 @@ export const confirmWithdraw = (requestId?: string, code?: string) => (
       );
       return response;
     })
-    .catch(error => {
+    .catch((error: { errorMessage: string }) => {
       dispatch(push(PROGRAMS_ROUTE));
       dispatch(alertMessageActions.error(error.errorMessage));
     });

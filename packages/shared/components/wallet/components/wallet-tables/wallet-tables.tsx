@@ -1,5 +1,6 @@
 import "./wallet-tables.scss";
 
+import { Currency } from "gv-api-web";
 import React, { useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Link, withRouter } from "react-router-dom";
@@ -10,7 +11,6 @@ import Surface from "shared/components/surface/surface";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import useTab from "shared/hooks/tab.hook";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
 import DepositsWithdrawalsRow from "./wallet-deposits-withdrawals/deposits-withdrawals-row";
 import WalletDepositsWithdrawals from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals";
@@ -117,7 +117,7 @@ interface Props extends WithTranslation, OwnProps {
 }
 
 interface OwnProps {
-  currency: CURRENCIES;
+  currency: Currency;
 }
 
 const WalletContainer = compose<React.ComponentType<OwnProps>>(

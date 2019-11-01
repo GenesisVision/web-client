@@ -8,6 +8,7 @@ export const fetchProgramsAction = (
   filters: FetchProgramsFiltersType // TODO change api to create interface to this
 ): ActionType<CancelablePromise<ProgramsListOld>> => ({
   type: PROGRAMS,
+  // @ts-ignore
   payload: programApi.getPrograms(filters)
 });
 

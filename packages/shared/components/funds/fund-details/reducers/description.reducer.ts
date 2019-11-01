@@ -1,4 +1,4 @@
-import { FundDetailsFull } from "gv-api-web";
+import { FundDetailsFullOld } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -11,7 +11,7 @@ import {
 
 import { FETCH_FUND_DESCRIPTION } from "../actions/fund-details.actions";
 
-export type FundDescriptionDataType = FundDetailsFull;
+export type FundDescriptionDataType = FundDetailsFullOld;
 
 export type FundDescriptionState = IApiState<FundDescriptionDataType>;
 

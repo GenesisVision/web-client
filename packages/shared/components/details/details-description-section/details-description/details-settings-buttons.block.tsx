@@ -1,7 +1,7 @@
 import "./details-description.scss";
 
 import {
-  PersonalFundDetailsFull,
+  PersonalFundDetailsFullOld,
   PersonalProgramDetailsFullOld
 } from "gv-api-web";
 import * as React from "react";
@@ -12,7 +12,7 @@ import DetailsNotification from "./controls/details-notification";
 import DetailsSettingControl from "./controls/details-setting-control";
 
 const _DetailsSettingsButtons: React.FC<{
-  personalDetails: PersonalProgramDetailsFullOld | PersonalFundDetailsFull;
+  personalDetails: PersonalProgramDetailsFullOld | PersonalFundDetailsFullOld;
   id: string;
   title: string;
   notificationsUrl: string;

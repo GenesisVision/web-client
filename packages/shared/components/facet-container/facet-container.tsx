@@ -1,7 +1,7 @@
 import {
   FundFacet,
-  PlatformCurrency,
-  PlatformInfo,
+  PlatformCurrencyOld,
+  PlatformInfoOld,
   ProgramFacet
 } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
@@ -76,7 +76,7 @@ const _FacetContainer: React.FC<Props> = ({
 const facetSelector = createSelector<
   RootState,
   OwnProps,
-  PlatformInfo | undefined,
+  PlatformInfoOld | undefined,
   FACET_ASSET,
   FacetType[] | undefined
 >(
@@ -117,7 +117,7 @@ interface OwnProps {
 }
 interface StateProps {
   facets?: FacetType[];
-  currencies: PlatformCurrency[];
+  currencies: PlatformCurrencyOld[];
   currency: CurrencyEnum;
 }
 interface DispatchProps {

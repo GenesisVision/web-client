@@ -1,6 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import { ProgramDetailsFullStatusEnum, ProgramProfitChart } from "gv-api-web";
+import { InvestmentProgramStatus, ProgramProfitChartOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -234,11 +234,11 @@ const _ProgramDetailsStatisticsElements: React.FC<
 
 export interface IProgramStatisticData {
   statisticCurrency: CurrencyEnum;
-  statistic: ProgramProfitChart;
+  statistic: ProgramProfitChartOld;
 }
 
 export interface IProgramDetailsStatisticsElementsProps {
-  status: ProgramDetailsFullStatusEnum;
+  status: InvestmentProgramStatus;
   period: ChartDefaultPeriod;
   data: IProgramStatisticData;
 }

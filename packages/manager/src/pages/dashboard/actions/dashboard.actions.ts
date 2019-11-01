@@ -1,4 +1,5 @@
 import {
+  AssetFilterType,
   CancelablePromise,
   FundsListOld,
   InvestmentEventViewModels,
@@ -54,7 +55,7 @@ export const fetchInRequestsAction = (
   auth: string,
   skip: number,
   take: number,
-  assetType?: string
+  assetType?: AssetFilterType
 ): ActionType<CancelablePromise<any>> => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: managerApi.getRequests(skip, take, auth, {

@@ -1,4 +1,4 @@
-import { BrokerAccountType } from "gv-api-web";
+import { BrokerAccountTypeOld } from "gv-api-web";
 import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -19,13 +19,13 @@ import {
   ICreateProgramSettingsProps
 } from "./create-program-settings";
 
-export const getCurrency = (accountType: BrokerAccountType): CurrencyEnum =>
+export const getCurrency = (accountType: BrokerAccountTypeOld): CurrencyEnum =>
   accountType.currencies[0] as CurrencyEnum; // TODO say to backend change type to CurrencyEnum[]
 
-export const getLeverage = (accountType: BrokerAccountType): number =>
+export const getLeverage = (accountType: BrokerAccountTypeOld): number =>
   accountType.leverages[0];
 
-export const getBrokerId = (accountTypes: BrokerAccountType[]): string =>
+export const getBrokerId = (accountTypes: BrokerAccountTypeOld[]): string =>
   accountTypes[0].id;
 
 export const getLeverageDescription = (
@@ -43,7 +43,7 @@ export const getLeverageDescription = (
   return result;
 };
 
-export const getAccountTypes = (accountTypes: BrokerAccountType[]) => {
+export const getAccountTypes = (accountTypes: BrokerAccountTypeOld[]) => {
   if (!accountTypes[0].currencies) return null;
   return accountTypes[0].currencies.join(", ");
 };

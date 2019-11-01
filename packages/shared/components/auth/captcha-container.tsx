@@ -1,8 +1,4 @@
-import {
-  CaptchaDetailsCaptchaTypeEnum,
-  GeeTestDetails,
-  PowDetails
-} from "gv-api-web";
+import { CaptchaType, GeeTestDetails, PowDetails } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { SetSubmittingType } from "shared/utils/types";
@@ -13,9 +9,7 @@ import Pow from "./captcha/pow";
 const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   const [pow, setPow] = useState<PowDetails | undefined>(undefined);
   const [geeTest, setGeeTest] = useState<GeeTestDetails | undefined>(undefined);
-  const [captchaType, setCaptchaType] = useState<CaptchaDetailsCaptchaTypeEnum>(
-    "None"
-  );
+  const [captchaType, setCaptchaType] = useState<CaptchaType>("None");
   const [prefix, setPrefix] = useState<number | undefined>(undefined);
   const [id, setId] = useState<string>("");
   const [email, setEmail] = useState<string>("");

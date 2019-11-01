@@ -1,4 +1,4 @@
-import { CancelablePromise, LevelUpSummary } from "gv-api-web";
+import { CancelablePromise } from "gv-api-web";
 import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "shared/utils/types";
 
@@ -39,4 +39,8 @@ export const getLevelUpSummary = () => (
   return dispatch(fetchLevelUpSummary({ authorization })).then(
     res => res.value
   );
+};
+
+type LevelUpSummary = {
+  levelData: [];
 };

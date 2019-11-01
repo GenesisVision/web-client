@@ -1,4 +1,4 @@
-import { ProgramWithdrawInfo } from "gv-api-web";
+import { ManagerProgramWithdrawInfoOld } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -42,6 +42,6 @@ const ProgramWithdrawContainer = compose<
 export default ProgramWithdrawContainer;
 
 interface DispatchProps {
-  fetchInfo(): Promise<ProgramWithdrawInfo>;
+  fetchInfo(): Promise<ManagerProgramWithdrawInfoOld>;
   withdraw(value: ProgramWithdrawType): Promise<void>;
 }

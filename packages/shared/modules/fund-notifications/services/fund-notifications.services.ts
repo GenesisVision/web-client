@@ -32,7 +32,7 @@ export const addFundNotification: TAddNotification = (
       dispatch(fetchFundNotifications(opts.assetId!));
       dispatch(alertMessageActions.success(message));
     })
-    .catch(data => {
+    .catch((data: { errorMessage: string }) => {
       dispatch(addErrorMessageAction(data.errorMessage));
     });
 

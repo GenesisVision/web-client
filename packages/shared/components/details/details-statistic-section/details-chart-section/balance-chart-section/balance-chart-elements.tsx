@@ -1,6 +1,6 @@
 import {
-  FundBalanceChart as FundBalanceChartType,
-  ProgramBalanceChart as ProgramBalanceChartType
+  FundBalanceChartOld as FundBalanceChartType,
+  ProgramBalanceChartOld as ProgramBalanceChartType
 } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";

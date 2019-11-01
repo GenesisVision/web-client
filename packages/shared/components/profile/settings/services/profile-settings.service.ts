@@ -53,7 +53,7 @@ export const logoutFromDevices = (dispatch: Dispatch) =>
       );
       return response;
     })
-    .catch(error => {
+    .catch((error: { errorMessage: string }) => {
       dispatch(alertMessageActions.error(error.errorMessage));
       throw error;
     });

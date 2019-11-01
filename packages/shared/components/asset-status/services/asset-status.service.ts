@@ -1,4 +1,4 @@
-import { ProgramRequest, ProgramRequests } from "gv-api-web";
+import { ProgramRequestOld, ProgramRequestsOld } from "gv-api-web";
 import { CancelRequestType } from "shared/components/dashboard/dashboard.constants";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
@@ -21,7 +21,7 @@ export const getAssetRequests = (
   id: string,
   role: ROLE,
   asset: ASSET
-): Promise<Array<ProgramRequest>> => {
+): Promise<Array<ProgramRequestOld>> => {
   const authorization = authService.getAuthArg();
   let method;
   switch (role + asset) {
@@ -38,7 +38,7 @@ export const getAssetRequests = (
       method = investorApi.getProgramRequests;
   }
   return method(id, 0, 10, authorization).then(
-    (response: ProgramRequests) => response.requests
+    (response: ProgramRequestsOld) => response.requests
   );
 };
 
@@ -46,7 +46,7 @@ export const cancelRequest = (
   id: string,
   role: ROLE,
   asset: ASSET
-): Promise<void> => {
+): Promise<null> => {
   const authorization = authService.getAuthArg();
   let method;
 

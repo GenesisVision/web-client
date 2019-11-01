@@ -24,9 +24,6 @@
     "../../packages",
     "src"
   ],
-  "files": [
-    "../gv-api-web/src/types.d.ts"
-  ],
   "exclude": [
     "node_modules",
     "config-overrides.js",

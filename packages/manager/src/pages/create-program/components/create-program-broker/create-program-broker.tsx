@@ -1,6 +1,6 @@
 import "./create-program-broker.scss";
 
-import { Broker } from "gv-api-web";
+import { BrokerOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import Surface from "shared/components/surface/surface";
@@ -118,8 +118,8 @@ const _CreateProgramBroker: React.FC<Props> = ({
 };
 
 interface Props {
-  data: Broker[];
-  selectedBroker?: Broker;
+  data: BrokerOld[];
+  selectedBroker?: BrokerOld;
   selectBrokerHandle: (broker: string) => () => void;
   isForexAllowed?: boolean;
   isKycConfirmed?: boolean;

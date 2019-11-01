@@ -7,6 +7,7 @@ const walletDepositsWithdrawalsLoaderDataCreator = (): MultiWalletExternalTransa
   isEnableActions: false,
   statusUrl: "",
   id: "",
+  // @ts-ignore
   type: "Investment",
   date: new Date(),
   status: "Done",

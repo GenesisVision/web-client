@@ -1,5 +1,6 @@
 import {
   CopyTradingAccountsList,
+  Currency,
   MultiWalletTransactionsViewModel,
   WalletMultiAvailable,
   WalletMultiSummary
@@ -47,7 +48,7 @@ interface UpdateAccountTimestampAction extends ActionType<Date> {
 }
 
 export const fetchWalletsAction = (
-  currency: string,
+  currency: Currency,
   authorization: string
 ): FetchWalletAction => ({
   type: WALLET_BALANCE,
@@ -62,7 +63,7 @@ export const fetchAccountsAction = (
 });
 
 export const fetchWalletsByCurrencyAvailableAction = (
-  currency: string
+  currency: Currency
 ): FetchWalletByCurrencyAction => ({
   type: WALLET_BALANCE_BY_CURRENCY_AVAILABLE,
   payload: walletApi.getWalletMultiAvailable(currency, authService.getAuthArg())

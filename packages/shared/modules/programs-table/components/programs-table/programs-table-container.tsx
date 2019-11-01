@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { PlatformCurrency, ProgramsListOld, ProgramTag } from "gv-api-web";
+import { PlatformCurrencyOld, ProgramsListOld, ProgramTag } from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -55,7 +55,7 @@ interface MergeProps {
 }
 
 interface StateProps {
-  currencies: PlatformCurrency[];
+  currencies: PlatformCurrencyOld[];
   isAuthenticated: boolean;
   programCurrencies: string[];
   programTags: ProgramTag[];

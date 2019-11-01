@@ -5,7 +5,7 @@ import authService from "shared/services/auth-service";
 export const getSignalInfo = (id: string): CancelablePromise<number> =>
   signalApi
     .getSlaveAttachInfo(id, authService.getAuthArg())
-    .then(({ minDeposit }) => minDeposit);
+    .then(({ minDeposit }: any) => minDeposit); //TODO
 
 export const attachToSignal: TAttachToSignal = (id, requestParams) =>
   signalApi.attachSlaveToMaster(id, authService.getAuthArg(), {

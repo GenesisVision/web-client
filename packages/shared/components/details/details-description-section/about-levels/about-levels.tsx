@@ -1,6 +1,6 @@
 import "./about-level.scss";
 
-import { LevelInfo } from "gv-api-web";
+import { Currency, LevelInfo } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -8,9 +8,7 @@ import { compose } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
 
 import LevelIcon from "./level-icon";
 
@@ -42,7 +40,7 @@ const Limits = React.memo(_Limits);
 
 interface ILimitsProps {
   investmentsLimits: LevelInfo[];
-  currency: CURRENCIES;
+  currency: Currency;
 }
 
 const _AboutLevelsComponent: React.FC<Props> = ({
@@ -145,7 +143,7 @@ interface Props {
   open: boolean;
   onClose(): void;
   investmentsLimits: LevelInfo[];
-  currency: CurrencyEnum;
+  currency: Currency;
 }
 
 const AboutLevelsComponent = compose<

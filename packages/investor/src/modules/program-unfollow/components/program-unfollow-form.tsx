@@ -1,5 +1,5 @@
 import { FormikProps, withFormik } from "formik";
-import { DetachFromSignalProviderModeEnum } from "gv-api-web";
+import { SignalDetachMode } from "gv-api-web";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -57,7 +57,7 @@ const ProgramUnfollowForm = compose<React.ComponentType<OwnProps>>(
   withFormik<OwnProps, IProgramUnfollowFormValues>({
     displayName: "confirm-form",
     mapPropsToValues: () => ({
-      [FIELDS.mode]: modes.none.value as DetachFromSignalProviderModeEnum
+      [FIELDS.mode]: modes.none.value as SignalDetachMode
     }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values);
@@ -75,7 +75,7 @@ enum FIELDS {
 type mode = {
   label: string;
   tooltip: string;
-  value: DetachFromSignalProviderModeEnum;
+  value: SignalDetachMode;
 };
 
 const modes: { [key: string]: mode } = {
@@ -101,7 +101,7 @@ interface OwnProps {
 }
 
 export interface IProgramUnfollowFormValues {
-  [FIELDS.mode]: DetachFromSignalProviderModeEnum;
+  [FIELDS.mode]: SignalDetachMode;
 }
 
 interface Props

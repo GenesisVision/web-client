@@ -1,8 +1,8 @@
 import {
   CancelablePromise,
-  FundBalanceChart,
-  FundDetailsFull,
-  FundProfitChart,
+  FundBalanceChartOld,
+  FundDetailsFullOld,
+  FundProfitChartOld,
   ReallocationsViewModel
 } from "gv-api-web";
 import {
@@ -31,7 +31,7 @@ const sendFundChartRequest = (
   { start, end }: ChartDefaultPeriod,
   id: string,
   currency: CurrencyEnum
-): CancelablePromise<FundProfitChart> =>
+): CancelablePromise<FundProfitChartOld> =>
   fundsApi.getFundProfitChart(id, {
     dateFrom: start,
     dateTo: end,
@@ -54,7 +54,7 @@ export const fetchFundBalanceChartAction = (
   id: string,
   period = getDefaultPeriod(),
   currency: CurrencyEnum
-): ApiAction<FundBalanceChart> => ({
+): ApiAction<FundBalanceChartOld> => ({
   type: FETCH_FUND_BALANCE_CHART,
   payload: fundsApi.getFundBalanceChart(id, {
     currency,
@@ -67,7 +67,7 @@ export const fetchFundBalanceChartAction = (
 export const fetchFundDescriptionAction = (
   id: string,
   authorization: string
-): ApiAction<FundDetailsFull> => ({
+): ApiAction<FundDetailsFullOld> => ({
   type: FETCH_FUND_DESCRIPTION,
   payload: fundsApi.getFundDetails(id, { authorization })
 });

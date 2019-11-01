@@ -54,7 +54,7 @@ export interface IChangePasswordTradingAccountProps {
 export interface ILevelCalculatorProps {
   id: string;
   title: string;
-  currency: string;
+  currency: CurrencyEnum;
   levelsParameters: LevelsParamsInfo;
   isKycConfirmed: boolean;
 }

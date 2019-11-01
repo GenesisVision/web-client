@@ -1,11 +1,11 @@
-import { FundWithdrawInfo, WalletBaseData } from "gv-api-web";
+import { Currency, FundWithdrawInfoOld, WalletBaseData } from "gv-api-web";
 
 export type FundWithdrawalInfoResponse = {
-  withdrawalInfo: FundWithdrawInfo;
+  withdrawalInfo: FundWithdrawInfoOld;
   wallets: WalletBaseData[];
 };
 
 export type FundWithdraw = {
   percent: number;
-  currency: string;
+  currency: Currency;
 };

@@ -1,9 +1,6 @@
 import "shared/components/details/details.scss";
 
-import {
-  BrokersProgramInfo,
-  ProgramDetailsFullTradesDelayEnum
-} from "gv-api-web";
+import { BrokersProgramInfoOld, TradesDelay } from "gv-api-web";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
@@ -46,7 +43,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
   const programsInfo = useSelector(programsInfoSelector);
   const description = useSelector(programDescriptionSelector);
   const [brokersInfo, setBrokersInfo] = useState<
-    BrokersProgramInfo | undefined
+    BrokersProgramInfoOld | undefined
   >(undefined);
   useEffect(() => {
     description && getProgramBrokers(description.id).then(setBrokersInfo);
@@ -116,7 +113,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 
 export type TUpdateProgramFunc = (
   values: {
-    tradesDelay?: ProgramDetailsFullTradesDelayEnum;
+    tradesDelay?: TradesDelay;
     description?: string;
     logo?: IImageValue;
     investmentLimit?: number;

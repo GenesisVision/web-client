@@ -1,4 +1,4 @@
-import { FundBalanceChart } from "gv-api-web";
+import { FundBalanceChartOld } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -7,7 +7,7 @@ import { apiSelector, TSelectorData } from "shared/utils/selectors";
 
 import { FETCH_FUND_BALANCE_CHART } from "../actions/fund-details.actions";
 
-export type FundBalanceChartDataType = FundBalanceChart;
+export type FundBalanceChartDataType = FundBalanceChartOld;
 
 export type FundBalanceChartState = IApiState<FundBalanceChartDataType>;
 

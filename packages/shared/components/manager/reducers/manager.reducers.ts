@@ -1,13 +1,13 @@
-import { ManagerProfile } from "gv-api-web";
+import { PublicProfile } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
 
 const MANAGER_PROFILE = "MANAGER_PROFILE";
 
-export type ManagerState = IApiState<ManagerProfile>;
+export type ManagerState = IApiState<PublicProfile>;
 
-const managerReducer = apiReducerFactory<ManagerProfile>({
+const managerReducer = apiReducerFactory<PublicProfile>({
   apiType: MANAGER_PROFILE
 });
 

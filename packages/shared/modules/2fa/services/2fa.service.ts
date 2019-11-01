@@ -3,7 +3,7 @@ import {
   PasswordModel,
   RecoveryCodesViewModel,
   TwoFactorAuthenticatorConfirm,
-  TwoFactorCodeModel
+  TwoFactorCodeWithPassword
 } from "gv-api-web";
 import authActions from "shared/actions/auth-actions";
 import authApi from "shared/services/api-client/auth-api";
@@ -30,5 +30,5 @@ export const confirm2fa = (
 export const sendPassword = (model: PasswordModel) =>
   authApi.createTwoStepAuthRecoveryCodes(authService.getAuthArg(), { model });
 
-export const disableTFA = (model: TwoFactorCodeModel) =>
+export const disableTFA = (model: TwoFactorCodeWithPassword) =>
   authApi.disableTwoStepAuth(authService.getAuthArg(), { model });

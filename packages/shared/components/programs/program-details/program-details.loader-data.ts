@@ -1,13 +1,16 @@
 import faker from "faker";
 import {
-  BrokerDetails,
+  BrokerDetailsOld,
   LevelsParamsInfo,
   OrderModel,
-  PersonalProgramDetailsFull,
+  PersonalProgramDetailsFullOld,
   ProgramDetailsFullOld,
   ProgramDetailsListStatistic,
-  ProgramProfitChart,
+  ProgramProfitChartOld,
   ProgramStatistic,
+  TradeDirectionType,
+  TradeEntryType,
+  TradesDelay,
   TradesViewModel
 } from "gv-api-web";
 import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
@@ -26,7 +29,7 @@ export const selectedCurrenciesLoaderData: TChartCurrency[] = [
   { name: "GVT", color: "#f0f0f0" }
 ];
 
-export const profitChartLoaderData: ProgramProfitChart = {
+export const profitChartLoaderData: ProgramProfitChartOld = {
   equityChart: [],
   totalProfit: 0,
   timeframeProfit: 0,
@@ -79,7 +82,7 @@ export const statisticDataLoaderData = {
   }
 };
 
-export const brokerDetailsLoaderData: BrokerDetails = {
+export const brokerDetailsLoaderData: BrokerDetailsOld = {
   logo: "",
   name: faker.name.firstName(),
   isForex: false,
@@ -126,7 +129,7 @@ export const statisticListLoaderData: ProgramDetailsListStatistic = {
   tradesCount: getRandomInteger(0, 100)
 };
 
-export const personalProgramDetailsLoaderData: PersonalProgramDetailsFull = {
+export const personalProgramDetailsLoaderData: PersonalProgramDetailsFullOld = {
   isReinvest: false,
   gvtValue: getRandomInteger(0, 100),
   showTwoFactorButton: false,
@@ -248,11 +251,11 @@ export const tradeLoaderDataCreator = (): OrderModel => ({
   symbol: "",
   volume: getRandomInteger(0, 100),
   profit: getRandomInteger(0, 100),
-  direction: {},
+  direction: {} as TradeDirectionType,
   date: new Date(),
   price: getRandomInteger(0, 100),
   priceCurrent: getRandomInteger(0, 100),
-  entry: {},
+  entry: {} as TradeEntryType,
   baseVolume: getRandomInteger(0, 100),
   originalCommission: getRandomInteger(0, 100),
   originalCommissionCurrency: "",
@@ -268,6 +271,6 @@ export const tradesLoaderData: TradesViewModel = {
   showSwaps: false,
   showTickets: false,
   trades: tableLoaderCreator(tradeLoaderDataCreator),
-  tradesDelay: {},
+  tradesDelay: {} as TradesDelay,
   total: 10
 };

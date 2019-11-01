@@ -1,4 +1,4 @@
-import { FundFacet, PlatformInfo, ProgramFacet } from "gv-api-web";
+import { FundFacet, PlatformInfoOld, ProgramFacet } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { createSelector } from "reselect";
@@ -26,13 +26,13 @@ export const _FacetCardsContainer: React.FC<Props> = ({
 const facetsSelector = createSelector<
   RootState,
   OwnProps,
-  PlatformInfo | undefined,
+  PlatformInfoOld | undefined,
   ASSETS_FACETS,
   Array<ProgramFacet & FundFacet>
 >(
   (state: RootState) => platformDataSelector(state),
   (state: RootState, props: OwnProps) => props.assetsFacets,
-  (data: PlatformInfo | undefined, assetsFacets: ASSETS_FACETS) =>
+  (data: PlatformInfoOld | undefined, assetsFacets: ASSETS_FACETS) =>
     (data ? data[assetsFacets] : []) as Array<ProgramFacet & FundFacet>
 );
 

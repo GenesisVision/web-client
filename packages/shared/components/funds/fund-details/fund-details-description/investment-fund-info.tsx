@@ -1,4 +1,4 @@
-import { FundDetailsFull } from "gv-api-web";
+import { FundDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -8,7 +8,7 @@ import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { formatValue } from "shared/utils/formatter";
 
 interface IInvestmentFundInfoProps {
-  fundDescription: FundDetailsFull;
+  fundDescription: FundDetailsFullOld;
 }
 
 const _InvestmentFundInfo: React.FC<IInvestmentFundInfoProps> = ({

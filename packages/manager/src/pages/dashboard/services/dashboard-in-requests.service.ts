@@ -41,7 +41,7 @@ export const cancelRequest: CancelRequestType = ({
       );
       onFinally();
     })
-    .catch(error => {
+    .catch((error: { errorMessage: string }) => {
       dispatch(alertMessageActions.error(error.errorMessage));
       removeDisableBtn();
     });

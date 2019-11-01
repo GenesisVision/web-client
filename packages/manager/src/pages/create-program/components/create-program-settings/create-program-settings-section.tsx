@@ -1,5 +1,5 @@
 import useCreateAssetSubmit from "components/create-asset/create-asset-submit.hook";
-import { Broker } from "gv-api-web";
+import { BrokerOld } from "gv-api-web";
 import * as React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -18,6 +18,7 @@ const _CreateProgramSettingsSection: React.FC<Props> = ({ broker }) => {
 
   const handleCreate = useCreateAssetSubmit({
     asset: ASSET.PROGRAM,
+    // @ts-ignore TODO
     condition: ({ twoFactorRequired, programId }) => {
       if (twoFactorRequired) {
         setProgramId(programId);
@@ -46,5 +47,5 @@ export const CreateProgramSettingsSection = React.memo(
 );
 
 interface Props {
-  broker: Broker;
+  broker: BrokerOld;
 }

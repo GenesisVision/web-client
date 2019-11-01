@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { ProgramInvestInfo, WalletBaseData } from "gv-api-web";
+import { ProgramInvestInfoOld, WalletBaseData } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -64,8 +64,8 @@ const _DepositForm: React.FC<
   }, [currency, walletCurrency]);
   useEffect(() => {
     const maxAvailable =
-      (info as ProgramInvestInfo).availableToInvestBase !== undefined
-        ? (info as ProgramInvestInfo).availableToInvestBase
+      (info as ProgramInvestInfoOld).availableToInvestBase !== undefined
+        ? (info as ProgramInvestInfoOld).availableToInvestBase
         : Number.MAX_SAFE_INTEGER;
     setAvailableToInvest(convertToCurrency(maxAvailable, rate));
     setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, maxAvailable);

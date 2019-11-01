@@ -28,7 +28,7 @@ const _CurrencySelectContainer: React.FC<Props> = ({ className }) => {
       className={classNames("currency-select", className)}
       value={currency}
       onChange={handleChange}
-      currencyValues={currencyValues}
+      currencyValues={currencyValues as CurrencyEnum[]}
     />
   );
 };

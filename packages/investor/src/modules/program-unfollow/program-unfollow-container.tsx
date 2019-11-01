@@ -17,7 +17,7 @@ const _ProgramUnfollowContainer: React.FC<Props> = ({
   const handleClose = useCallback(() => onClose(), [onClose]);
   const handleSubmit = useCallback(
     (value: IProgramUnfollowFormValues) => {
-      const model = { mode: value.mode };
+      const model = { mode: value.mode, tradingAccountId: "" };
       dispatch(detachToSignal(id, onApply, model));
       handleClose();
     },

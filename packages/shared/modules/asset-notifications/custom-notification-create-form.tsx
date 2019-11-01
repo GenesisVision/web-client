@@ -1,8 +1,8 @@
 import { FormikProps, withFormik } from "formik";
 import {
-  NotificationSettingViewModelConditionTypeEnum,
-  NotificationViewModelTypeEnum,
-  ProgramInfo
+  NotificationSettingConditionType,
+  NotificationType,
+  ProgramNotificationSettingList
 } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -121,7 +121,7 @@ interface Props
     FormikProps<ICustomNotificationCreateFormValues> {}
 
 interface OwnProps {
-  asset: ProgramInfo;
+  asset: ProgramNotificationSettingList;
   onSubmit: (
     values: ICustomNotificationCreateFormValues,
     setSubmitting: (isSubmitting: boolean) => void
@@ -142,7 +142,7 @@ enum CONDITION_TYPE_VALUES {
 }
 
 export interface ICustomNotificationCreateFormValues {
-  [FIELDS.type]: NotificationViewModelTypeEnum;
-  [FIELDS.conditionType]: NotificationSettingViewModelConditionTypeEnum;
+  [FIELDS.type]: NotificationType;
+  [FIELDS.conditionType]: NotificationSettingConditionType;
   [FIELDS.conditionAmount]?: number;
 }

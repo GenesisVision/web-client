@@ -1,3 +1,4 @@
+import { Currency } from "gv-api-web";
 import { Dispatch } from "redux";
 import {
   FundWithdraw,
@@ -13,7 +14,7 @@ import { getFundWithdrawInfoAction } from "../actions/fund-withdrawal.actions";
 
 export const fetchFundWithdrawInfo = (
   id: string,
-  currency: string
+  currency: Currency
 ): InvestorThunk<Promise<FundWithdrawalInfoResponse>> => dispatch => {
   return Promise.all([
     dispatch(getFundWithdrawInfoAction(id, currency)),

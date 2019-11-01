@@ -1,4 +1,4 @@
-import { FundDetails } from "gv-api-web";
+import { FundDetailsOld } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -195,7 +195,7 @@ const FundCard = React.memo(_FundCard);
 export default FundCard;
 
 interface Props {
-  fund: FundDetails;
+  fund: FundDetailsOld;
   toggleFavorite(programId: string, isFavorite: boolean): void;
   title?: JSX.Element | string;
 }

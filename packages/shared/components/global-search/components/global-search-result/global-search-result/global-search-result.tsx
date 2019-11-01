@@ -1,4 +1,4 @@
-import { SearchViewModel } from "gv-api-web";
+import { SearchViewModelOld } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVTabs from "shared/components/gv-tabs";
@@ -43,7 +43,7 @@ const _GlobalSearchResult: React.FC<Props> = ({ t, data, title }) => {
 };
 
 interface ITabProps {
-  data: SearchViewModel;
+  data: SearchViewModelOld;
   title: string;
   tab: SEARCH_TABS;
 }
@@ -85,7 +85,7 @@ export interface SearchTableProps<T> {
 }
 
 interface Props extends WithTranslation {
-  data: SearchViewModel;
+  data: SearchViewModelOld;
   title: string;
 }
 

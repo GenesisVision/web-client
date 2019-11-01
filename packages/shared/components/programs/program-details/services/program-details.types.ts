@@ -1,7 +1,7 @@
 import {
   ChartSimple,
-  ProgramBalanceChart,
-  ProgramProfitChart
+  ProgramBalanceChartOld,
+  ProgramProfitChartOld
 } from "gv-api-web";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -29,6 +29,6 @@ export type ProgramDetailsProfitChart = {
 
 export type ProgramStatisticResult = {
   statistic: ProgramDetailsStatistic;
-  profitChart: ProgramProfitChart;
-  balanceChart: ProgramBalanceChart;
+  profitChart: ProgramProfitChartOld;
+  balanceChart: ProgramBalanceChartOld;
 };

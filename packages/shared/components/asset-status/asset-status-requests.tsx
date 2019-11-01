@@ -1,6 +1,6 @@
 import "./asset-status.scss";
 
-import { ProgramRequest } from "gv-api-web";
+import { ProgramRequestOld } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -26,9 +26,9 @@ const _AssetStatusRequests: React.FC<Props> = ({
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const role = useRole();
-  const [requests, setRequests] = useState<Array<ProgramRequest> | undefined>(
-    undefined
-  );
+  const [requests, setRequests] = useState<
+    Array<ProgramRequestOld> | undefined
+  >(undefined);
   useEffect(() => {
     getAssetRequests(id, role, asset).then(setRequests);
   }, [id, role, asset]);

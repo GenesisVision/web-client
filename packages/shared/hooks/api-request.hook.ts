@@ -48,7 +48,7 @@ const useApiRequest = <T>({
     return (Promise.resolve(request(props)) as TRequest<T>)
       .then(setData)
       .then(cleanErrorMessage)
-      .catch(({ errorMessage }) => {
+      .catch(({ errorMessage }: { errorMessage: any }) => {
         setErrorMessage(errorMessage);
         dispatch(alertMessageActions.error(errorMessage));
         catchCallback && catchCallback(errorMessage);

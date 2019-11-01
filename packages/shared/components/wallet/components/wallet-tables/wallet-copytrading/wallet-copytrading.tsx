@@ -127,7 +127,7 @@ const _WalletCopytrading: React.FC<Props> = ({
         <>
           <TransferPopup
             title={t("wallet-withdraw.title")}
-            sourceType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
+            sourceType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT as any}
             currentItem={currentAccount}
             open={isOpenWithdraw}
             onClose={setIsCloseWithdraw}
@@ -135,7 +135,7 @@ const _WalletCopytrading: React.FC<Props> = ({
           <TransferPopup
             title={t("wallet-deposit.title")}
             currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
-            destinationType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT}
+            destinationType={TRANSFER_DIRECTION.COPYTRADING_ACCOUNT as any}
             currentItem={currentAccount}
             open={isOpenAddFunds}
             onClose={setIsCloseAddFunds}

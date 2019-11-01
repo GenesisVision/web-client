@@ -1,10 +1,10 @@
 import faker from "faker";
-import { Broker, CancelablePromise } from "gv-api-web";
+import { BrokerOld, CancelablePromise } from "gv-api-web";
 import brokersApi from "shared/services/api-client/brokers-api";
 
 const GM_BROKER_NAME = "Genesis Markets";
 
-export const fetchBrokers = (): CancelablePromise<Broker[]> =>
+export const fetchBrokers = (): CancelablePromise<BrokerOld[]> =>
   brokersApi
     .getBrokers()
     .then(data =>
@@ -13,7 +13,7 @@ export const fetchBrokers = (): CancelablePromise<Broker[]> =>
       )
     );
 
-export const getBrokerLoaderData: () => Broker = () => ({
+export const getBrokerLoaderData: () => BrokerOld = () => ({
   name: faker.lorem.word(),
   description: faker.lorem.words(11),
   logo: "",
@@ -44,6 +44,6 @@ export const getBrokerLoaderData: () => Broker = () => ({
     }
   ]
 });
-export const CreateProgramBrokerLoaderData: Broker[] = new Array(7)
+export const CreateProgramBrokerLoaderData: BrokerOld[] = new Array(7)
   .fill("")
   .map(getBrokerLoaderData);

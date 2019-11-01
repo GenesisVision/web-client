@@ -1,9 +1,9 @@
 import "./program-settings.scss";
 
 import {
-  BrokersProgramInfo,
+  BrokersProgramInfoOld,
   ProgramDetailsFullOld,
-  ProgramsInfo
+  ProgramsInfoOld
 } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
@@ -143,9 +143,9 @@ const _ProgramSettings: React.FC<Props> = ({
 };
 
 interface Props {
-  programsInfo: ProgramsInfo;
+  programsInfo: ProgramsInfoOld;
   details: ProgramDetailsFullOld;
-  brokersInfo: BrokersProgramInfo;
+  brokersInfo: BrokersProgramInfoOld;
   changeSignaling: (
     values: IProgramSignalFormValues,
     setSubmitting: SetSubmittingType

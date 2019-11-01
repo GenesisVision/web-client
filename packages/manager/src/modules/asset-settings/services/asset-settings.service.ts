@@ -101,7 +101,7 @@ export const editAsset = (
         )
       );
     })
-    .catch(({ errorMessage }) =>
+    .catch(({ errorMessage }: { errorMessage: string }) =>
       dispatch(alertMessageActions.error(errorMessage))
     ) as CancelablePromise<void>;
 };
@@ -124,7 +124,7 @@ export const closeProgram: TCloseAsset = ({
         )
       );
     })
-    .catch(error => {
+    .catch((error: { errorMessage: string }) => {
       onError();
       dispatch(alertMessageActions.error(error.errorMessage));
     });
@@ -147,7 +147,7 @@ export const closeFund: TCloseAsset = ({
         )
       );
     })
-    .catch(error => {
+    .catch((error: { errorMessage: string }) => {
       onError();
       dispatch(alertMessageActions.error(error.errorMessage));
     });

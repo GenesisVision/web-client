@@ -1,6 +1,6 @@
 import "./manager.page.scss";
 
-import { ManagerProfile } from "gv-api-web";
+import { PublicProfile } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -29,7 +29,7 @@ const _ManagerPage: React.FC<Props> = ({ managerProfile }) => {
 };
 
 interface Props {
-  managerProfile: ManagerProfile;
+  managerProfile: PublicProfile;
 }
 
 const ManagerPage = compose<React.ComponentType<Props & WithLoaderProps>>(

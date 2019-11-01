@@ -1,4 +1,4 @@
-import { ProgramRequests } from "gv-api-web";
+import { ProgramRequestsOld } from "gv-api-web";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import { ApiAction } from "shared/utils/types";
@@ -34,17 +34,15 @@ export const cancelManagerProgramRequestAction: ICancelRequest = (
 });
 
 export const fetchInRequestsInvestorAction: IFetchInRequests<
-  ProgramRequests
+  ProgramRequestsOld
 > = (auth, skip, take) => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: investorApi.getRequests(skip, take, auth)
 });
 
-export const fetchInRequestsManagerAction: IFetchInRequests<ProgramRequests> = (
-  auth,
-  skip,
-  take
-) => ({
+export const fetchInRequestsManagerAction: IFetchInRequests<
+  ProgramRequestsOld
+> = (auth, skip, take) => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: managerApi.getRequests(skip, take, auth)
 });

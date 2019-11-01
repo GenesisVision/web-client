@@ -1,6 +1,6 @@
 import "./transaction-details.scss";
 
-import { TransactionDetails, TransactionDetailsTypeEnum } from "gv-api-web";
+import { TransactionDetails, TransactionDetailsType } from "gv-api-web";
 import i18next from "i18next";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
@@ -91,7 +91,7 @@ const Types: TransactionTypes = {
 } as TransactionTypes;
 
 type TransactionTypes = {
-  [name in TransactionDetailsTypeEnum]:
+  [name in TransactionDetailsType]:
     | React.FC<TransactionDetailsProps>
     | React.ExoticComponent<TransactionDetailsProps>;
 };

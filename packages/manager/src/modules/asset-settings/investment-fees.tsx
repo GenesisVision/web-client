@@ -1,6 +1,6 @@
 import FeesSettings from "components/create-asset/fields/fees-settings";
 import { FormikProps, withFormik } from "formik";
-import { ProgramsInfo } from "gv-api-web";
+import { ProgramsInfoOld } from "gv-api-web";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -104,7 +104,7 @@ interface Props
 
 interface OwnProps {
   asset: ASSET;
-  programsInfo: ProgramsInfo;
+  programsInfo: ProgramsInfoOld;
   exitFee?: number;
   entryFee: number;
   successFee?: number;

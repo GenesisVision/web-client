@@ -1,7 +1,7 @@
 import {
   ItemsViewModelReferralFriend,
-  PartnershipDetails,
-  RewardsHistoryViewModel
+  ItemsViewModelRewardDetails,
+  PartnershipDetails
 } from "gv-api-web";
 import { combineReducers } from "redux";
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
@@ -31,7 +31,7 @@ export const REFERRAL_FRIENDS = "referralFriends";
 export const REFERRAL_HISTORY = "referralHistory";
 
 export type TReferralFriends = ItemsViewModelReferralFriend;
-export type TReferralHistory = RewardsHistoryViewModel;
+export type TReferralHistory = ItemsViewModelRewardDetails;
 
 export type ProfileState = Readonly<{
   [REFERRAL_DETAILS]: IApiState<PartnershipDetails>;
