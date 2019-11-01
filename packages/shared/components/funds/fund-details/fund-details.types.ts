@@ -4,8 +4,8 @@ import { IDialogProps } from "shared/components/dialog/dialog";
 import { CurrencyEnum } from "shared/utils/types";
 
 export interface IDescriptionSection {
-  FundWithdrawalContainer: React.ComponentType<IFundWithdrawalContainerProps>;
-  FundControls: React.ComponentType<IFundControlsProps>;
+  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
+  Controls: React.ComponentType<IFundControlsProps>;
 }
 
 export interface IFundWithdrawalContainerProps extends IDialogProps {

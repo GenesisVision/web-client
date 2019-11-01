@@ -19,7 +19,7 @@ const _InvestmentContainer: React.FC<Props> = ({
   notice,
   personalDetails,
   WithdrawContainer,
-  ProgramReinvestingWidget
+  ReinvestingWidget
 }) => {
   return (
     <div className="details-investment__investment-container">
@@ -33,7 +33,7 @@ const _InvestmentContainer: React.FC<Props> = ({
           notice={notice}
           personalDetails={personalDetails}
           WithdrawContainer={WithdrawContainer}
-          ProgramReinvestingWidget={ProgramReinvestingWidget}
+          ReinvestingWidget={ReinvestingWidget}
         />
       )}
       {haveSubscription(personalDetails) && (
@@ -56,9 +56,7 @@ interface Props {
   assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
   WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
-  ProgramReinvestingWidget?: React.ComponentType<
-    IProgramReinvestingContainerOwnProps
-  >;
+  ReinvestingWidget?: React.ComponentType<IProgramReinvestingContainerOwnProps>;
 }
 
 export const haveActiveInvestment = (details: InvestmentDetails): boolean =>
