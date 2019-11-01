@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "shared": "^1.0.0",
-    "gv-api-web": "^1.1.0"
+    "gv-api-web": "^2.0.0"
   },
   "majestic": {
     "jestScriptPath": "../../node_modules/react-app-rewired/bin/jest.js",
